@@ -1,18 +1,13 @@
 {
-  "body": {
-    "action": "check_ip",
-    "meta": {},
-    "input": {
-      "address": "8.8.8.8",
-      "days": "30",
-      "verbose": true
+    "body": {
+        "action": "check_ip",
+        "input": {
+            "address": "8.8.8.8",
+            "days": "30",
+            "verbose": true
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

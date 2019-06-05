@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Look up a CIDR address in the database"
+
+
 class Input:
     CIDR = "cidr"
     DAYS = "days"

@@ -243,6 +243,7 @@ There's a rate limit on the free API service. The following error messags `429 C
 * 1.0.0 - Initial plugin
 * 2.0.0 - Add `found` output to Check IP action | Support new credential type
 * 3.0.0 - Support new credential_secret_key type
+* 3.0.1 - Improve error handling in the Check IP, Check CIDR, and Report IP actions | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Run plugin as least privileged user | Add connection test
 
 ## Workflows
 

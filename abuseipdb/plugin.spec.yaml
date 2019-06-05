@@ -3,9 +3,9 @@ name: abuseipdb
 title: AbuseIPDB
 description: AbuseIPDB is a free service which allows you to look up IP reports, or
   report an abusive IP
-version: 3.0.0
+version: 3.0.1
 vendor: rapid7
-status: ["unsupported"]
+status: ["supported"]
 tags:
 - ip
 - intelligence

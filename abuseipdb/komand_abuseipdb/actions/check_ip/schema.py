@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Look up an IP address in the database"
+
+
 class Input:
     ADDRESS = "address"
     DAYS = "days"
