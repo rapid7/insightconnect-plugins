@@ -508,6 +508,7 @@ Examples:
 * 1.1.0 - New action Retrieve File Instance
 * 2.0.0 - Fix for Approve File Locally action | Fix for Unapprove File Locally action | Update to rename Unapprove Local Approval action to Unapprove File Locally
 * 2.1.0 - Add Action: Create File Rule | Add Action: Get File Rule
+* 2.1.1 - Fix issue where the Resolve Approval Request action used the wrong endpoint
 
 ## References
 

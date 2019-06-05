@@ -6,7 +6,7 @@ from komand_carbon_black_protection import connection, actions, triggers
 
 Name = 'Carbon Black Protection'
 Vendor = 'rapid7'
-Version = '2.1.0'
+Version = '2.1.1'
 Description = 'Cb Protection allows users to lock down and harden systems to prevent malware, ransomware, and more'
 
 

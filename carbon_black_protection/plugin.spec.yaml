@@ -3,7 +3,7 @@ name: carbon_black_protection
 title: Carbon Black Protection
 description: Cb Protection allows users to lock down and harden systems to prevent
   malware, ransomware, and more
-version: 2.1.0
+version: 2.1.1
 vendor: rapid7
 status: ["supported"]
 tags:
