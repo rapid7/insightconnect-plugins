@@ -1,0 +1,28 @@
+plugin_spec_version: v2
+name: p0f
+title: p0f
+vendor: rapid7
+status: ["unsupported"]
+description: A tool to perform passive OS fingerprinting
+version: 1.0.1
+tags:
+- p0f
+- pcap
+- passive
+- fingerprinting
+actions:
+  run:
+    title: Run
+    description: Run p0f on a PCAP
+    input:
+      file:
+        title: PCAP File
+        description: Base64 encoded PCAP
+        type: bytes
+        required: true
+    output:
+      traffic:
+        title: Traffic
+        description: Traffic details
+        type: '[]string'
+        required: false

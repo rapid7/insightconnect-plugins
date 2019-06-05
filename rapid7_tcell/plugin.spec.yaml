@@ -1,0 +1,892 @@
+plugin_spec_version: v2
+name: rapid7_tcell
+title: Rapid7 tCell
+description: Rapid7 tCell is a Next-Gen Cloud WAF that enables web applications to
+  defend themselves by combining in-app instrumentation (RASP) and analytics in the
+  cloud
+version: 1.0.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- rapid7
+- web
+- waf
+- rasp
+types:
+  app:
+    id:
+      title: ID
+      description: The app ID
+      type: string
+    name:
+      title: Name
+      description: The name of the app
+      type: string
+  agent:
+    id:
+      title: ID
+      description: The agent ID
+      type: string
+    type:
+      title: Type
+      description: The agent type
+      type: string
+    version:
+      title: Version
+      description: The version of the agent
+      type: string
+    from:
+      title: From
+      description: The Unix timestamp (in milliseconds) when the agent was first seen
+      type: integer
+    to:
+      title: To
+      description: The Unix timestamp (in milliseconds) when the agent was last seen
+      type: integer
+    last_process_id:
+      title: Last Process ID
+      description: The most recent process ID associated with the agent
+      type: string
+    active:
+      title: Active
+      description: Whether or not the agent is currently active
+      type: boolean
+  route:
+    id:
+      title: ID
+      description: The ID of the route
+      type: string
+    method:
+      title: Method
+      description: The HTTP method (GET, POST, ...) for the route
+      type: string
+    pattern:
+      title: Pattern
+      description: The path pattern for the route
+      type: string
+    controller:
+      title: Controller
+      description: The name of the controller associated with the route (when applicable)
+      type: string
+  inline_script:
+    id:
+      title: ID
+      description: The ID of the script
+      type: string
+    approved:
+      title: Approved
+      description: Is the script approved
+      type: boolean
+    template:
+      title: Template
+      description: Template
+      type: string
+    created_at:
+      title: Created At
+      description: Timestamp representing the date of creation
+      type: integer
+    last_reported_at:
+      title: Last Reported At
+      description: Timestamp representing the date when script was last reported
+      type: integer
+  package:
+    id:
+      title: ID
+      description: The ID of the package
+      type: integer
+    vendor:
+      title: Vendor
+      description: The vendor providing the package
+      type: string
+    name:
+      title: Name
+      description: The name of the package
+      type: string
+    version:
+      title: Version
+      description: The version of the package
+      type: string
+    build:
+      title: Build
+      description: The build ID of the package
+      type: string
+    created_at:
+      title: Created At
+      description: Unix timestamp (in milliseconds) when the package was first seen
+      type: integer
+  location:
+    latitude:
+      title: Latitude
+      description: Latitude
+      type: float
+    longitude:
+      title: Longitude
+      description: Longitude
+      type: float
+    city:
+      title: City
+      description: City
+      type: string
+    country:
+      title: Country
+      description: Country
+      type: string
+    iso:
+      title: ISO
+      description: ISO code
+      type: string
+  event:
+    id:
+      title: ID
+      description: ID
+      type: string
+    method:
+      title: Method
+      description: Method
+      type: string
+    city:
+      title: City
+      description: City
+      type: string
+    country:
+      title: Country
+      description: Country
+      type: string
+    full_uri:
+      title: Full URI
+      description: Full URI
+      type: string
+    ip:
+      title: IP
+      description: IP address
+      type: string
+    time:
+      title: Time
+      description: Time (timestamp)
+      type: integer
+    route:
+      title: Route
+      description: Route
+      type: string
+    route_id:
+      title: Route ID
+      description: Route ID
+      type: string
+    app_id:
+      title: App ID
+      description: App ID
+      type: string
+    session_id:
+      title: Session ID
+      description: Session ID
+      type: string
+    path:
+      title: Path
+      description: Path
+      type: string
+    from:
+      title: From
+      description: From
+      type: integer
+    to:
+      title: To
+      description: To
+      type: integer
+    tags:
+      title: Tags
+      description: Tags
+      type: '[]string'
+    stripped_uri:
+      title: Stripped URI
+      description: Stripped URI
+      type: string
+    document_uri:
+      title: Document URI
+      description: Document URI
+      type: string
+    browser:
+      title: Browser
+      description: Browser
+      type: string
+    static_hash:
+      title: Static Hash
+      description: Static hash
+      type: string
+    script_id:
+      title: Script ID
+      description: Script ID
+      type: string
+    detection_point:
+      title: Detection Point
+      description: Detection Point
+      type: string
+    script_pod:
+      title: Script Pos
+      description: Script pos
+      type: string
+    location:
+      title: Location
+      description: Location
+      type: location
+connection:
+  api_key:
+    title: API Key
+    description: API key generated for the tCell account
+    type: credential_secret_key
+    required: true
+triggers:
+  get_events:
+    title: Get Events
+    description: Fetch events of the provided type
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      source:
+        title: Source
+        description: The type of events to fetch
+        type: string
+        required: true
+        enum:
+        - appfirewall
+        - inline
+        - login
+        - csp
+      frequency:
+        title: Frequency
+        description: How often the trigger should check for new detections in seconds
+        type: integer
+        required: true
+        default: 5
+      filter:
+        title: Filter
+        description: 'Filters out events based on a predicate. The syntax is filter=field:operator:value,
+          where: field is a field present in the data operator is one of include (equals),
+          exclude (not equals), gt (greater than), and lt (less than) value is the
+          value to apply the operator to'
+        type: string
+        required: false
+    output:
+      event:
+        title: Event
+        description: Matching event
+        type: event
+        required: false
+actions:
+  list_apps:
+    title: List Apps
+    description: Fetch app name and app ID for all apps in a customer environment
+    output:
+      apps:
+        title: Apps
+        description: A list of apps
+        type: '[]app'
+        required: false
+      total:
+        title: Total
+        description: The number of items returned
+        type: integer
+        required: false
+  get_app:
+    title: Get App
+    description: Fetch the display name and app ID for the app with the given ID
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+    output:
+      app:
+        title: App
+        description: A JSON object with the app ID and the user-friendly app display
+          name
+        type: app
+        required: false
+  get_app_tags:
+    title: Get App Tags
+    description: Fetch the set of tags for a tCell app
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+    output:
+      tags:
+        title: Tags
+        description: An array of tags for the chosen app
+        type: '[]string'
+        required: false
+  create_app:
+    title: Create App
+    description: Create an application
+    input:
+      app_display_name:
+        title: App Display Name
+        description: The display name of your new application (an app ID will be derived
+          from this name)
+        type: string
+        required: true
+    output:
+      app_id:
+        title: App ID
+        description: The application ID for the newly created tCell app
+        type: string
+        required: false
+  change_tags:
+    title: Change Tags
+    description: Assign a completely new set of tags to an app, removing any previously
+      existing tags
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      tags:
+        title: Tags
+        description: List of strings, choosing the new tags for the application
+        type: '[]string'
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successfully updated tags
+        type: boolean
+        required: false
+  add_tags:
+    title: Add Tags
+    description: Add all the tags posted in the body to the set of tags the app already
+      has
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      tags:
+        title: Tags
+        description: List of strings, choosing the new tags for the application
+        type: '[]string'
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successfully updated tags
+        type: boolean
+        required: false
+  remove_tags:
+    title: Remove Tags
+    description: Remove tags from the application
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      tags:
+        title: Tags
+        description: List of strings, choosing the tags to be removed from the application
+        type: '[]string'
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successfully removed tags
+        type: boolean
+        required: false
+  list_agents:
+    title: List Agents
+    description: Fetch details for all seen agents (optionally matching the provided
+      criteria)
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      from:
+        title: From
+        description: The beginning (earliest endpoint) of a time window for known
+          agents. Agents which connected to the tCell service outside this window
+          will not be returned. Value in milliseconds from Unix epoch e.g. 15465292953.
+          Data older than 30 days is not available
+        type: integer
+        required: false
+      to:
+        title: To
+        description: The end (most recent endpoint) of a time window for known agents.
+          Agents which connected to the tCell service outside this window will not
+          be returned. Value in milliseconds from Unix epoch e.g. 15465292953
+        type: integer
+        required: false
+      per_page:
+        title: Per Page
+        description: Specify number of returned results per page, defaults to 10
+        type: integer
+        required: false
+        default: 10
+      page:
+        title: Page
+        description: Select which page is returned, default/first page is 1
+        type: integer
+        required: false
+        default: 1
+    output:
+      agents:
+        title: Agents
+        description: A list of agents
+        type: '[]agent'
+        required: false
+      total:
+        title: Total
+        description: The number of items returned
+        type: integer
+        required: false
+  get_agent_details:
+    title: Get Agent Details
+    description: Fetch details for the agent with the given ID
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      agent_id:
+        title: Agent ID
+        description: Agent ID
+        type: string
+        required: true
+    output:
+      agent:
+        title: Agent
+        description: Details for the provided agent, including the agent type (ApacheAgent,
+          JVMAgent, etc), version string, earliest and most recent time seen, and
+          whether the agent is currently known to be actively sending data to the
+          tCell service
+        type: agent
+        required: false
+  list_routes:
+    title: List Routes
+    description: Fetch details for all seen routes (matching the provided criteria)
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      from:
+        title: From
+        description: The beginning (earliest endpoint) of a time window for known
+          routes. Routes reported by agents outside this window will not be returned.
+          Value in milliseconds from Unix epoch e.g. 15465292953. Data older than
+          30 days is not available
+        type: integer
+        required: false
+      to:
+        title: To
+        description: The end (most recent endpoint) of a time window for known routes.
+          Routes reported by agents outside this window will not be returned. Value
+          in milliseconds from Unix epoch e.g. 15465292953
+        type: integer
+        required: false
+      per_page:
+        title: Per Page
+        description: The number of results to be returned per page, defaults to 10
+        type: integer
+        required: false
+        default: 10
+      page:
+        title: Page
+        description: Select which page is returned, default/first page is 1
+        type: integer
+        required: false
+        default: 1
+    output:
+      routes:
+        title: Routes
+        description: A list of routes
+        type: '[]route'
+        required: false
+      total:
+        title: Total
+        description: The number of items returned
+        type: integer
+        required: false
+  get_route_details:
+    title: Get Route Details
+    description: Fetch details for the route with the given ID
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      route_id:
+        title: Route ID
+        description: Route ID
+        type: string
+        required: true
+    output:
+      route:
+        title: Route
+        description: Details for the provided route, including the route id, http
+          method, route pattern used by the framework, and a code signature for the
+          controller
+        type: route
+        required: false
+  list_inline_scripts:
+    title: List Inline Scripts
+    description: Fetch details for all seen inline scripts (matching the provided
+      criteria)
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      from:
+        title: From
+        description: The beginning (earliest endpoint) of a time window for inline
+          scripts. Inline scripts reported by agents outside this window will not
+          be returned. Value in milliseconds from Unix epoch e.g. 15465292953. Data
+          older than 30 days is not available
+        type: integer
+        required: false
+      to:
+        title: To
+        description: The end (most recent endpoint) of a time window for inline scripts.
+          Inline scripts reported by agents outside this window will not be returned.
+          Value in milliseconds from Unix epoch e.g. 15465292953
+        type: integer
+        required: false
+      per_page:
+        title: Per Page
+        description: Specify number of returned results per page, defaults to 10
+        type: integer
+        required: false
+        default: 10
+      page:
+        title: Page
+        description: Select which page is returned, default/first page is 1
+        type: integer
+        required: false
+        default: 1
+    output:
+      inline_scripts:
+        title: Inline Scripts
+        description: A list of inline scripts
+        type: '[]inline_script'
+        required: false
+      total:
+        title: Total
+        description: The number of items returned
+        type: integer
+        required: false
+  get_inline_script_details:
+    title: Get Inline Script Details
+    description: Fetch details for the inline script with the given ID
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      inline_script_id:
+        title: Inline Script ID
+        description: Inline Script ID
+        type: string
+        required: true
+    output:
+      inline_script:
+        title: Inline Script
+        description: 'Details for the given inline script, including approved: whether
+          the script is marked as intended; template: the script text with literals
+          replaced by ?; created_at: when the script was added to the tCell database;
+          last_reported_at: when the jsagent last reported this script'
+        type: inline_script
+        required: false
+  list_packages:
+    title: List Packages
+    description: Fetch details for all seen packages (matching the provided criteria)
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      from:
+        title: From
+        description: Unix timestamp (in milliseconds; exclusive) from which to fetch
+          events
+        type: integer
+        required: false
+      to:
+        title: To
+        description: Unix timestamp (in milliseconds; inclusive) until which to fetch
+          events
+        type: integer
+        required: false
+      per_page:
+        title: Per Page
+        description: The number of results to be returned per page
+        type: integer
+        required: false
+        default: 10
+      page:
+        title: Page
+        description: Select which page is returned, default/first page is 1
+        type: integer
+        required: false
+        default: 1
+    output:
+      packages:
+        title: Packages
+        description: A list of packages
+        type: '[]package'
+        required: false
+      total:
+        title: Total
+        description: The number of items returned
+        type: integer
+        required: false
+  get_package_details:
+    title: Get Package Details
+    description: Fetch details for the package with the given ID
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      package_id:
+        title: Package ID
+        description: Package ID
+        type: integer
+        required: true
+    output:
+      package:
+        title: Package
+        description: Details for the provided package
+        type: package
+        required: false
+  get_active_config:
+    title: Get Active Configuration
+    description: Fetch the currently active app configuration
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+    output:
+      config:
+        title: Configuration
+        description: The latest configuration data
+        type: object
+        required: false
+  get_config:
+    title: Get Configuration
+    description: Fetch the configuration with the given ID
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      config_id:
+        title: Configuration ID
+        description: Configuration ID
+        type: integer
+        required: true
+    output:
+      config:
+        title: Configuration
+        description: The configuration data for the given configuration ID
+        type: object
+        required: false
+  list_configs:
+    title: List Configurations
+    description: Fetch details for all configurations (matching the provided criteria)
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      from:
+        title: From
+        description: Unix timestamp (in milliseconds; exclusive) from which to fetch
+          events
+        type: integer
+        required: false
+      to:
+        title: To
+        description: Unix timestamp (in milliseconds; inclusive) until which to fetch
+          events
+        type: integer
+        required: false
+      per_page:
+        title: Per Page
+        description: The number of results to be returned per page
+        type: integer
+        required: false
+        default: 10
+      page:
+        title: Page
+        description: Select which page is returned (defaults to 1)
+        type: integer
+        required: false
+        default: 1
+    output:
+      configs:
+        title: Configurations
+        description: A list of configurations matching the provided criteria
+        type: '[]object'
+        required: false
+      total:
+        title: Total
+        description: The number of items returned
+        type: integer
+        required: false
+  revert_config_changes:
+    title: Revert Configuration Changes
+    description: Revert configuration from previous iteration
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      id:
+        title: ID
+        description: The ID of the configuration to use
+        type: integer
+        required: true
+    output:
+      success:
+        title: Success
+        description: Revert configuration successful
+        type: boolean
+        required: false
+  post_config_changes:
+    title: Post Configuration Changes
+    description: Rewrite the app configuration, either in part or in full
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      config:
+        title: Configuration
+        description: Whole new configuration or a part of it that should be updated
+        type: object
+        required: true
+    output:
+      id:
+        title: ID
+        description: ID of a new, updated configuration
+        type: integer
+        required: false
+      message:
+        title: Message
+        description: '''Nothing to update'' in case the configuration was not changed'
+        type: string
+        required: false
+  add_ips_to_blacklist:
+    title: Add IP Addresses to Blacklist
+    description: Add IP addresses to the existing blacklist within the blocked IP
+      address configuration
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      ips:
+        title: IPs
+        description: List of IP addresses
+        type: '[]string'
+        required: true
+    output:
+      id:
+        title: ID
+        description: ID of a new, updated configuration
+        type: integer
+        required: false
+      message:
+        title: Message
+        description: '''Nothing to update'' in case the configuration was not changed'
+        type: string
+        required: false
+  remove_ips_from_blacklist:
+    title: Remove IP Addresses from Blacklist
+    description: Remove IP addresses from the existing blacklist within the blocked
+      IP address configuration
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      ips:
+        title: IPs
+        description: List of IP addresses
+        type: '[]string'
+        required: true
+    output:
+      id:
+        title: ID
+        description: ID of a new, updated configuration
+        type: integer
+        required: false
+      message:
+        title: Message
+        description: '''Nothing to update'' in case the configuration was not changed'
+        type: string
+        required: false
+  create_ip_group:
+    title: Create IP Address Group
+    description: Upload an IP address group definition to tCell
+    input:
+      group:
+        title: Group
+        description: IP group definition, containing a name and a list of items, in
+          JSON format
+        type: object
+        required: true
+    output:
+      id:
+        title: ID
+        description: ID of a new IP group
+        type: integer
+        required: false
+  update_ip_group:
+    title: Update IP Address Group
+    description: Upload new items for an IP address group
+    input:
+      group_name:
+        title: Group Name
+        description: Name of an existing IP group
+        type: string
+        required: true
+      items:
+        title: Items
+        description: IP group items, in JSON format
+        type: '[]object'
+        required: true
+    output:
+      id:
+        title: ID
+        description: ID of a new, updated IP group
+        type: integer
+        required: false
+      message:
+        title: Message
+        description: '''Nothing to update'' in case the items were not changed'
+        type: string
+        required: false

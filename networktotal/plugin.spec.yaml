@@ -1,0 +1,49 @@
+plugin_spec_version: v2
+name: networktotal
+title: Network Total
+description: Upload a PCAP for analysis
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- pcap
+- network total
+- suricata
+- Emerging Threats PRO
+enable_cache: false
+actions:
+  upload:
+    title: Upload
+    description: Upload PCAP file
+    input:
+      pcap:
+        type: bytes
+        description: Base64-encoded PCAP file
+        title: PCAP File
+        required: false
+    output:
+      md5:
+        title: MD5
+        description: MD5 hash of PCAP file
+        type: string
+        required: false
+      signatures:
+        title: Signatures
+        description: Signatures found
+        type: '[]string'
+        required: false
+  search:
+    title: Search
+    description: Search based on MD5 hash
+    input:
+      md5:
+        type: string
+        description: MD5 hash
+        title: MD5 Hash
+        required: false
+    output:
+      signatures:
+        title: Signatures
+        description: Signatures found
+        type: '[]string'
+        required: false

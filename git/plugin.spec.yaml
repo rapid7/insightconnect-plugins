@@ -1,0 +1,110 @@
+plugin_spec_version: v2
+name: git
+title: Git
+description: Git is a free and open source distributed version control system
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- git
+- version control
+- repository
+connection:
+  url:
+    title: Repository URL
+    description: Git repository URL (e.g ssh://myrepo.com/path/to/repo.git/; only
+      SSH and HTTP/HTTPS protocols are supported)
+    type: string
+    required: true
+  credentials:
+    title: Username and Password (or token)
+    description: Git username (if empty, 'x-auth-token' is used and 'password' field
+      is considered an access token)
+    type: credential_username_password
+    required: false
+actions:
+  add_file:
+    title: Add File
+    description: Add a file to the repository
+    input:
+      file_path:
+        type: string
+        title: File Path
+        description: Path of the new file (inside the repository)
+        required: true
+      file_contents:
+        type: bytes
+        title: File Contents
+        description: Contents of the new file
+        required: false
+    output:
+      success:
+        title: Success
+        description: Is successful?
+        type: boolean
+        required: true
+      commit_id:
+        title: Commit ID
+        description: Commit's hash
+        type: string
+        required: false
+      commit_url:
+        title: Commit URL
+        description: Commit's URL
+        type: string
+        required: false
+  remove_file:
+    title: Remove File
+    description: Remove a file from the repository
+    input:
+      file_path:
+        title: File Path
+        type: string
+        description: Path to the file
+        required: true
+    output:
+      success:
+        title: Success
+        description: Is successful?
+        type: boolean
+        required: true
+      commit_id:
+        title: Commit ID
+        description: Commit's hash
+        type: string
+        required: false
+      commit_url:
+        title: Commit URL
+        description: Commit's URL
+        type: string
+        required: false
+  append_line_to_file:
+    title: Append Line to File
+    description: Append a line to a file and commit it
+    input:
+      file_path:
+        title: File Path
+        type: string
+        description: Path to the file
+        required: true
+      line:
+        title: Line
+        description: A line of text to append
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: Is successful?
+        type: boolean
+        required: true
+      commit_id:
+        title: Commit ID
+        description: Commit's hash
+        type: string
+        required: false
+      commit_url:
+        title: Commit URL
+        description: Commit's URL
+        type: string
+        required: false

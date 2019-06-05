@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "search",
+    "meta": {},
+    "input": {
+      "count": 100,
+      "query": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "license": "Enterprise",
+      "port": 8089,
+      "ssl_verify": false,
+      "use_ssl": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

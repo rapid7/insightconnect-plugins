@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "view_saved_search_properties",
+    "meta": {},
+    "input": {
+      "saved_search_name": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "license": "Enterprise",
+      "port": 8089,
+      "ssl_verify": false,
+      "use_ssl": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

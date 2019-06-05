@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "search_entity_lists",
+    "input": {
+      "freetext": "Malware"
+    },
+    "connection": {
+      "api_key": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

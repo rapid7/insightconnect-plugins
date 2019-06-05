@@ -1,0 +1,28 @@
+plugin_spec_version: v2
+name: shattered
+title: SHAttered
+description: Check for an SHA-1 hash collision
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- sha1
+- hash
+- collisions
+enable_cache: false
+actions:
+  check:
+    title: Check Collision
+    description: Check a file for an SHA-1 collision
+    input:
+      file:
+        title: File
+        description: File to check for a collision
+        type: bytes
+        required: true
+    output:
+      has_collision:
+        title: Has Collision
+        type: boolean
+        description: Has collision
+        required: false

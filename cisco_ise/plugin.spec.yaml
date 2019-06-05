@@ -1,0 +1,187 @@
+plugin_spec_version: v2
+name: cisco_ise
+title: Cisco ISE
+description: Cisco Identity Services Engine allows users to gain awareness of everything
+  hitting their networks
+version: 2.2.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- cisco
+- network access
+types:
+  link:
+    href:
+      description: Hyper text reference
+      title: HREF
+      type: string
+    rel:
+      description: Rel
+      title: Rel
+      type: string
+    type:
+      description: Type
+      title: Type
+      type: string
+  ErsAncEndpoint:
+    id:
+      description: ERS endpoint ID
+      title: ID
+      type: string
+    macAddress:
+      description: ERS endpoint MAC address
+      title: MAC Address
+      type: string
+    policyName:
+      description: Name of the policy applied to the ERS endpoint
+      title: Policy Name
+      type: string
+    link:
+      description: Link
+      title: Link
+      type: link
+  ERSEndPoint:
+    groupId:
+      description: Group ID
+      title: Group ID
+      type: string
+    id:
+      description: ID
+      title: ID
+      type: string
+    identityStore:
+      description: Identity store
+      title: Identity Store
+      type: string
+    identityStoreId:
+      description: Identity store ID
+      title: Identity Store ID
+      type: string
+    link:
+      description: Link
+      title: Link
+      type: link
+    mac:
+      description: MAC
+      title: MAC
+      type: string
+    name:
+      description: Name
+      title: Name
+      type: string
+    portalUser:
+      description: Portal User
+      title: Portal User
+      type: string
+    profileId:
+      description: Profile ID
+      title: Profile ID
+      type: string
+    staticGroupAssignment:
+      description: Static group assignment
+      title: Static Group Assignment
+      type: boolean
+    staticProfileAssignment:
+      description: Static profile assignment
+      title: Static Profile Assignment
+      type: boolean
+  ANCEndpoint:
+    id:
+      title: ID
+      description: ANC endpoint ID
+      type: string
+    macAddress:
+      title: MAC Address
+      description: MAC Address of ANC endpoint
+      type: string
+    policyName:
+      title: Policy Name
+      description: Policy Name
+      type: string
+    link:
+      title: Link
+      description: ANC endpoint link
+      type: link
+connection:
+  credentials:
+    type: credential_username_password
+    title: Credentials
+    description: Username and password
+    required: true
+  address:
+    type: string
+    title: Address
+    description: IP address for Cisco ISE
+    required: true
+  ssl_verify:
+    type: boolean
+    title: SSL Verify
+    description: Enable SSL verification
+    default: true
+    required: true
+actions:
+  query_endpoint:
+    title: Query Endpoint
+    description: Query an endpoint for more information
+    input:
+      hostname:
+        title: Name
+        description: The hostname or MAC of the endpoint
+        type: string
+        required: true
+    output:
+      ers_endpoint:
+        title: ERS Endpoint
+        description: Returns a JSON containing information on the host
+        type: ERSEndPoint
+        required: false
+  quarantine:
+    title: Quarantine
+    description: Quarantine a host
+    input:
+      mac_address:
+        title: MAC Address
+        description: The host MAC address
+        type: string
+        required: true
+      policy:
+        title: Policy
+        description: The quarantine policy to apply
+        type: string
+        required: true
+    output:
+      ers_anc_endpoint:
+        title: ERS ANC Endpoint
+        description: Returns info on the endpoint and what policy was applied
+        type: ErsAncEndpoint
+        required: false
+  remove_from_quarantine:
+    title: Remove from Quarantine
+    description: Remove a host from quarantine
+    input:
+      mac_address:
+        title: MAC Address
+        description: The host MAC address
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: Returns true in the endpoint was removed from quarantine
+        type: boolean
+        required: false
+  get_anc_endpoint:
+    title: Get ANC Endpoint
+    description: Returns ANC information based on the MAC address supplied
+    input:
+      mac:
+        title: MAC Address
+        description: MAC address of the endpoint
+        type: string
+        required: true
+    output:
+      results:
+        title: Results
+        description: Endpoint information
+        type: ANCEndpoint
+        required: false

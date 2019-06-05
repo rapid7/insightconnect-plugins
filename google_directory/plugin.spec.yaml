@@ -1,0 +1,134 @@
+plugin_spec_version: v2
+name: google_directory
+title: Google Directory
+description: Uses the Google Directory Admin API to manage mobile and Chrome OS devices,
+  groups, group aliases, members, organization units, users, and user aliases
+version: 2.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- google
+- admin
+- directory
+types:
+  user:
+    email:
+      title: Email
+      description: Email address
+      type: string
+      required: true
+    full_name:
+      title: Full Name
+      description: Full name of the user
+      type: string
+      required: false
+connection:
+  admin_user:
+    title: Admin User
+    description: Admin user to impersonate, e.g. admin@domain.com
+    type: string
+    required: true
+  project_id:
+    title: Project ID
+    type: string
+    description: Project ID from service credentials
+    required: true
+  private_key_id:
+    title: Private Key ID
+    type: string
+    description: Private Key ID from service credentials
+    required: true
+  private_key:
+    title: Private Key
+    type: credential_asymmetric_key
+    description: Private Key from service credentials
+    required: true
+  client_email:
+    title: Client Email
+    type: string
+    description: Client email from service credentials
+    required: true
+  client_id:
+    title: Client ID
+    type: string
+    description: Client ID
+    required: true
+  client_x509_cert_url:
+    title: Client X509 Cert URL
+    type: string
+    description: x509 cert URL from service credentials
+    required: true
+  auth_uri:
+    title: Auth URI
+    type: string
+    description: OAUTH2 Auth URI
+    default: https://accounts.google.com/o/oauth2/auth
+    required: true
+  token_uri:
+    title: Token URI
+    type: string
+    description: OAUTH2 Token URI
+    default: https://oauth2.googleapis.com/token
+    required: true
+  auth_provider_x509_cert_url:
+    title: Auth Provider X509 Cert URL
+    type: string
+    description: OAUTH2 Auth Provider x509 Cert URL
+    default: https://www.googleapis.com/oauth2/v1/certs
+    required: true
+  oauth_scope:
+    title: OAuth Scope
+    type: string
+    description: Google Admin Directory OAuth scope to use for the connection, note
+      that read only will result in some actions not working.
+    default: https://www.googleapis.com/auth/admin.directory.user
+    required: true
+    enum:
+    - https://www.googleapis.com/auth/admin.directory.user
+    - https://www.googleapis.com/auth/admin.directory.user.readonly
+actions:
+  get_all_domain_users:
+    title: Get All Domain Users
+    description: Get all domain users
+    input:
+      domain:
+        title: Domain
+        required: true
+        description: Domain to retrieve users from
+        type: string
+    output:
+      users:
+        title: Users
+        description: Users in the domain
+        required: true
+        type: '[]user'
+  suspend_user:
+    title: Suspend User
+    description: Suspends a user account
+    input:
+      email:
+        title: User Email
+        required: true
+        description: Email of user to suspend
+        type: string
+    output:
+      success:
+        title: Success
+        description: Whether or not the suspend was successful
+        required: true
+        type: boolean
+  unsuspend_user:
+    title: Unsuspend User
+    description: Unsuspends a user account
+    input:
+      email:
+        title: User Email
+        required: true
+        description: Email of user to unsuspend
+        type: string
+    output:
+      success:
+        title: Success
+        description: Whether or not the unsuspend was successful
+        required: true
+        type: boolean

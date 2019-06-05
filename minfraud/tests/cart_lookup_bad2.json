@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "action": "cart_lookup",
+    "meta": {},
+    "input": {
+      "address": "8.8.8.8",
+      "item_category": "pets",
+      "item_id": "ad23232",
+      "price": "20.43",
+      "quantity": 2
+    },
+    "connection": {
+      "license": {
+        "secretKey": ""
+      },
+      "user": 118625
+    }
+  }
+}

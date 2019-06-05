@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_scans",
+    "meta": {},
+    "input": {
+      "id": 41,
+      "active": false
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

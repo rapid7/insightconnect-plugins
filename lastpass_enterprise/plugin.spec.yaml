@@ -1,0 +1,110 @@
+plugin_spec_version: v2
+name: lastpass_enterprise
+title: LastPass Enterprise
+vendor: rapid7
+status: ["unsupported"]
+description: A tool for conveniently and securely managing passwords
+version: 1.0.1
+tags:
+- lastpass
+- password
+- vault
+connection:
+  account:
+    title: Account
+    type: integer
+    description: Account number
+    required: true
+  provhash:
+    title: Provisioning Hash
+    type: credential_secret_key
+    description: Provisioning hash
+    required: true
+actions:
+  provision_user:
+    title: Provision User
+    description: Provision new user or change exisiting user
+    input:
+      user_name:
+        title: User Name
+        description: User name to add
+        type: string
+        required: true
+      full_name:
+        title: Full Name
+        description: Full name of user to add
+        type: string
+        required: false
+      password:
+        title: Password
+        description: Password for the user
+        type: string
+        required: false
+      password_reset_required:
+        title: Password Reset Required
+        description: Password reset required
+        type: boolean
+        required: false
+      groups:
+        title: Groups
+        description: Array of groups
+        type: '[]string'
+        required: false
+    output:
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+  deprovision_user:
+    title: Deprovision User
+    description: Remove, delete, or deactivate a user
+    input:
+      user_name:
+        title: User Name
+        description: User name to delete
+        type: string
+        required: true
+      delete_action:
+        title: Delete Action
+        description: Delete action
+        type: string
+        required: true
+        enum:
+        - deactivate
+        - remove
+        - delete
+    output:
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+  change_group:
+    title: Change Group
+    description: Add or remove a users group
+    input:
+      user_name:
+        title: User Name
+        description: User name for account to edit
+        type: string
+        required: true
+      groups:
+        title: Groups
+        description: Array of groups
+        type: '[]string'
+        required: true
+      action:
+        title: Action
+        description: Add or delete group
+        type: string
+        required: true
+        enum:
+        - add
+        - delete
+    output:
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false

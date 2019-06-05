@@ -1,0 +1,87 @@
+plugin_spec_version: v2
+name: chaosreader
+title: Chaosreader
+vendor: rapid7
+status: ["unsupported"]
+description: A tool to trace sessions and fetch application data from snoop or tcpdump
+  logs
+version: 1.0.1
+tags:
+- chaosreader
+- pcap
+- snoop
+- forensics
+- session
+types:
+  count:
+    source:
+      type: string
+      description: Protocol source
+      required: false
+    count:
+      type: integer
+      description: Count of protocol source
+      required: false
+actions:
+  run:
+    title: Run
+    description: Run Chaosreader on a PCAP or snoop file
+    input:
+      dump:
+        title: PCAP or Snoop File
+        description: Base64 encoded PCAP or snoop file
+        type: bytes
+        required: true
+      exclude:
+        title: Exclude
+        description: Exclude traffic/files
+        type: string
+        enum:
+        - None
+        - Info
+        - Raw
+        - TCP
+        - UDP
+        - ICMP
+        required: false
+    output:
+      files:
+        title: Files
+        description: Extracted files
+        type: '[]bytes'
+        required: false
+      file_count:
+        title: File Count
+        description: Number of files extracted
+        type: integer
+        required: false
+      sessions:
+        title: Sessions
+        description: List of sessions found in traffic
+        type: '[]string'
+        required: false
+      ip_count:
+        title: IP Count
+        description: List of IPs and their count
+        type: '[]count'
+        required: false
+      proto_count:
+        title: IP Protocol Count
+        description: List of IP protocols and their count
+        type: '[]count'
+        required: false
+      tcp_count:
+        title: TCP Port Count
+        description: List of TCP ports and their count
+        type: '[]count'
+        required: false
+      udp_count:
+        title: UDP Port Count
+        description: List of UDP ports and their count
+        type: '[]count'
+        required: false
+      ethernet_count:
+        title: Ethernet Type Count
+        description: List of ethernet types and their count
+        type: '[]count'
+        required: false

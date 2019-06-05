@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "list_sensors",
+    "meta": {},
+    "input": {
+      "groupid": "",
+      "hostname": "",
+      "id": "",
+      "ip": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

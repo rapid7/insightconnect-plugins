@@ -1,0 +1,475 @@
+plugin_spec_version: v2
+name: qualys_ssl
+title: Qualys SSL Labs
+description: Qualys SSL Labs is a collection of documents, tools and thoughts related
+  to SSL
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- ssl
+- certificate
+- qualys
+types:
+  key:
+    size:
+      type: integer
+    alg:
+      type: string
+    debian_flaw:
+      type: boolean
+    strength:
+      type: integer
+  cert:
+    subject:
+      type: string
+    common_names:
+      type: '[]string'
+    alt_names:
+      type: '[]string'
+    not_before:
+      type: integer
+    not_after:
+      type: integer
+    issuer_subject:
+      type: string
+    issuer_label:
+      type: string
+    sig_alg:
+      type: string
+    revocation_info:
+      type: integer
+    crl_uris:
+      type: '[]string'
+    ocsp_uris:
+      type: '[]string'
+    revocation_status:
+      type: integer
+    crl_revocation_status:
+      type: integer
+    ocsp_revocation_status:
+      type: integer
+    sgc:
+      type: integer
+    validation_type:
+      type: string
+    issues:
+      type: integer
+    sct:
+      type: boolean
+    sha1Hash:
+      type: string
+    pinSha256:
+      type: string
+  cert_two:
+    subject:
+      type: string
+    label:
+      type: string
+    notBefore:
+      type: integer
+    notAfter:
+      type: integer
+    issuerSubject:
+      type: string
+    issuerLabel:
+      type: string
+    sigAlg:
+      type: string
+    issues:
+      type: integer
+    keyAlg:
+      type: string
+    keySize:
+      type: integer
+    keyStrength:
+      type: integer
+    revocationStatus:
+      type: integer
+    crlRevocationStatus:
+      type: integer
+    ocspRevocationStatus:
+      type: integer
+    sha1Hash:
+      type: string
+    pinSha256:
+      type: string
+    raw:
+      type: string
+  protocol:
+    id:
+      type: integer
+    name:
+      type: string
+    version:
+      type: string
+  sims_results:
+    results:
+      type: '[]object'
+  hsts:
+    long_max_age:
+      type: integer
+    status:
+      type: string
+    directives:
+      type: object
+  hpkp:
+    status:
+      type: string
+    pins:
+      type: '[]string'
+    matchedPins:
+      type: '[]string'
+    directives:
+      type: '[]string'
+  detail:
+    host_start_time:
+      type: integer
+    key:
+      type: key
+    cert:
+      type: cert
+    chain:
+      type: cert_two
+    protocols:
+      type: '[]protocol'
+    suites:
+      type: object
+    server_signature:
+      type: string
+    prefix_delegation:
+      type: boolean
+    non_prefix_delegation:
+      type: boolean
+    reneg_support:
+      type: integer
+    sts_status:
+      type: string
+    sts_response_header:
+      type: string
+    sts_subdomains:
+      type: boolean
+    sts_preload:
+      type: boolean
+    session_resumption:
+      type: integer
+    compression_methods:
+      type: integer
+    supports_npn:
+      type: boolean
+    session_tickets:
+      type: integer
+    sni_required:
+      type: boolean
+    http_status_code:
+      type: integer
+    rc4_with_modern:
+      type: boolean
+    protocol_intolerance:
+      type: integer
+    misc_intolerance:
+      type: integer
+    sims:
+      type: sims_results
+    open_ssl_ccs:
+      type: integer
+    openssl_lucky_minus20:
+      type: integer
+    poodle_tls:
+      type: integer
+    fallback_scsv:
+      type: boolean
+    freak:
+      type: boolean
+    has_sct:
+      type: integer
+    logjam:
+      type: boolean
+    hsts_policy:
+      type: hsts
+    hpkp_policy:
+      type: hpkp
+    hpkp_ro_policy:
+      type: hpkp
+  chain:
+    certs:
+      title: Certificates
+      type: '[]cert_two'
+    issues:
+      title: Issues
+      type: integer
+  details:
+    cert:
+      title: Certificate
+      type: cert
+    chain:
+      title: Chain
+      type: chain
+    hostStartTime:
+      title: Host Start Time
+      type: integer
+    key:
+      title: Key
+      type: key
+    nonPrefixDelegation:
+      title: Non Prefix Delegation
+      type: boolean
+    prefixDelegation:
+      title: Prefix Delegation
+      type: boolean
+    protocols:
+      title: protocols
+      type: '[]protocol'
+    suites:
+      title: Suites
+      type: object
+  endpoints_output:
+    delegation:
+      title: Delegation
+      type: integer
+    details:
+      title: Details
+      type: details
+    eta:
+      title: ETA
+      type: integer
+    ipAddress:
+      title: IP Address
+      type: string
+    progress:
+      title: Progress
+      type: integer
+    statusDetails:
+      title: Status Details
+      type: string
+    statusDetailsMessage:
+      title: Status Details Message
+      type: string
+    statusMessage:
+      title: Status Message
+      type: string
+actions:
+  info:
+    title: Info
+    description: Check SSL Labs server availability
+    input: null
+    output:
+      engineVersion:
+        title: Engine Version
+        description: Engine version
+        type: string
+        required: true
+      criteriaVersion:
+        title: Criteria Version
+        description: Criteria version
+        type: string
+        required: true
+      maxAssessments:
+        title: Max Assessments
+        description: Max assessments
+        type: integer
+        required: true
+      clientMaxAssessments:
+        title: Client Max Assessments
+        description: Client max assessments
+        type: integer
+        required: true
+      currentAssessments:
+        title: Current Assessments
+        description: Current assessments
+        type: integer
+        required: true
+      newAssessmentCoolOff:
+        title: New Assessment CoolOff
+        description: New assessment cooloff
+        type: integer
+        required: true
+      messages:
+        title: Messages
+        description: Messages
+        type: '[]string'
+        required: true
+  analyze:
+    title: Analyze
+    description: Initialize an SSL assessment
+    input:
+      host:
+        title: Host
+        type: string
+        description: Server hostname
+        required: true
+      publish:
+        title: Publish
+        type: boolean
+        description: Publish on public results boards
+        required: true
+      max_age:
+        title: Max Age
+        type: integer
+        description: Max report age in hours
+        required: false
+      all:
+        title: All
+        type: string
+        description: Full information returned vs returned only if assessment is done
+        enum:
+        - Done
+        - 'On'
+        required: true
+      from_cache:
+        title: From Cache
+        type: string
+        description: Always deliver cached assessment reports if available
+        enum:
+        - 'Off'
+        - 'On'
+        required: true
+      start_new:
+        title: Start New
+        type: string
+        description: Cached results ignored; New assessment started
+        enum:
+        - 'Off'
+        - 'On'
+        required: true
+    output:
+      host:
+        title: Host
+        description: Host
+        type: string
+        required: true
+      port:
+        title: Port
+        description: Port
+        type: integer
+        required: true
+      protocol:
+        title: Protocol
+        description: Protocol
+        type: string
+        required: true
+      isPublic:
+        title: Is Public
+        description: Is public
+        type: boolean
+        required: true
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: true
+      startTime:
+        title: Start Time
+        description: Start time
+        type: integer
+        required: true
+      testTime:
+        title: Test Time
+        description: Test time
+        type: integer
+        required: true
+      engineVersion:
+        title: Engine Version
+        description: Engine version
+        type: string
+        required: true
+      criteriaVersion:
+        title: Criteria Version
+        description: Criteria version
+        type: string
+        required: true
+      endpoints:
+        title: Endpoints
+        description: Endpoints
+        type: '[]endpoints_output'
+        required: true
+  endpoint:
+    title: Endpoint
+    description: Retrieve detailed endpoint info
+    input:
+      host:
+        title: Hostname
+        type: string
+        description: Server hostname
+        required: true
+      ip:
+        title: IP
+        type: string
+        description: Server IP Address
+        required: true
+    output:
+      ipAddress:
+        title: IP Address
+        description: IP address
+        type: string
+        required: true
+      statusMessage:
+        title: Status Message
+        description: Status message
+        type: string
+        required: true
+      grade:
+        title: Grade
+        description: Grade
+        type: string
+        required: true
+      gradeTrustIgnored:
+        title: Grade Trust Ignored
+        description: Grade trust ignored
+        type: string
+        required: true
+      hasWarnings:
+        title: Has Warnings
+        description: Has warnings
+        type: boolean
+        required: true
+      isExceptional:
+        title: Is Exceptional
+        description: Is exceptional
+        type: boolean
+        required: true
+      progress:
+        title: Progress
+        description: Progress
+        type: integer
+        required: true
+      duration:
+        title: Duration
+        description: Duration
+        type: integer
+        required: true
+      eta:
+        title: ETA
+        description: ETA
+        type: integer
+        required: true
+      delegation:
+        title: Delegation
+        description: Delegation
+        type: integer
+        required: true
+      details:
+        title: Details
+        description: Details
+        type: detail
+        required: true
+  status:
+    title: Status
+    description: Retrieve status codes
+    input: null
+    output:
+      statusDetails:
+        title: Status Codes
+        description: Status Codes
+        type: object
+        required: true
+  certificate:
+    title: Certificate
+    description: Retrieve root certificates
+    input: null
+    output:
+      certificates:
+        title: Certificates
+        description: Certificates
+        type: string
+        required: true

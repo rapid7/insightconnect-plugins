@@ -1,0 +1,14 @@
+# List third-party dependencies here, separated by newlines. 
+# All dependencies must be version-pinned, eg. requests==1.2.0
+# See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
+cycler==0.10.0
+kiwisolver==1.0.1
+matplotlib==3.0.1
+numpy==1.15.3
+pandas==0.23.4
+pyparsing==2.3.0
+python-dateutil==2.7.5
+pytz==2018.7
+scipy==1.1.0
+seaborn==0.9.0
+six==1.11.0

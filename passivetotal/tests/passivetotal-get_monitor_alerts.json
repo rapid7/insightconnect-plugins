@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "get_monitor_alerts",
+    "input": {
+      "project": "My Public Project",
+      "artifact": "",
+      "start": "",
+      "end": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "username": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "delete_target",
+    "input": {
+      "target_id": "b23fafc5-ca0c-4cde-91a2-e667ccb58cea"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "timeout": 10,
+      "server": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

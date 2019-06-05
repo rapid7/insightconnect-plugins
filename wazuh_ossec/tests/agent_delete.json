@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "agent_delete",
+    "meta": {},
+    "input": {
+      "agent_id": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

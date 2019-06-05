@@ -1,0 +1,26 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "input": {
+      "analyzer_id": "Hello",
+      "attributes": {
+        "dataType": "ip",
+        "tlp": 2
+      },
+      "observable": "1.2.3.4"
+    },
+    "action": "run_analyzer",
+    "connection": {
+      "proxy": {},
+      "port": "9999",
+      "protocol": "HTTP",
+      "verify": true,
+      "host": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  }
+}

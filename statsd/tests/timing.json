@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "timing",
+    "input": {
+      "rate": 1,
+      "stat": "timingtest",
+      "delta": 5
+    },
+    "connection": {
+      "udp": {
+        "maxudpsize": 512
+      },
+      "protocol": "TCP",
+      "prefix": "",
+      "tcp": {
+        "timeout": 1
+      },
+      "host": "",
+      "port": 2003
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

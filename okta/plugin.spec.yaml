@@ -1,0 +1,479 @@
+plugin_spec_version: v2
+name: okta
+title: Okta
+vendor: rapid7
+description: Secure identity management and single sign-on to any application
+version: 3.1.2
+status: ["supported"]
+tags:
+- okta
+- sso
+- provisioning
+- deprovisioning
+- saml
+- enterprise
+enable_cache: true
+types:
+  profile:
+    email:
+      type: string
+    firstName:
+      type: string
+    lastName:
+      type: string
+    login:
+      type: string
+    mobilePhone:
+      type: string
+  changePassword:
+    href:
+      type: string
+  _links:
+    changePassword:
+      type: changePassword
+    changeRecoveryQuestion:
+      type: changePassword
+    deactivate:
+      type: changePassword
+    expirePassword:
+      type: changePassword
+    forgotPassword:
+      type: changePassword
+    resetFactors:
+      type: changePassword
+    resetPassword:
+      type: changePassword
+  provider:
+    type:
+      description: Provider type e.g. OKTA
+      type: string
+    name:
+      description: Provider name e.g. OKTA
+      type: string
+  recovery_question:
+    question:
+      description: Recovery question e.g. Who's a major player in the cowboy scene?
+      type: string
+    answer:
+      description: Recovery answer e.g. Annie Oakley
+      type: string
+  credentials:
+    password:
+      type: object
+    provider:
+      type: provider
+    recovery_question:
+      type: recovery_question
+  group:
+    name:
+      description: Group name
+      title: Name
+      type: string
+      required: false
+    created:
+      description: Created
+      title: Created
+      type: string
+      required: false
+    objectClass:
+      description: Object class
+      title: Object Class
+      type: '[]string'
+      required: false
+    lastUpdated:
+      description: Last updated
+      title: Last Updated
+      type: string
+      required: false
+    lastMembershipUpdated:
+      description: Last membership updated
+      title: Last Membership Updated
+      type: string
+      required: false
+    type:
+      description: Type
+      title: Type
+      type: string
+      required: false
+    id:
+      description: Group ID
+      title: ID
+      type: string
+      required: false
+  password:
+    value:
+      description: Password value e.g. tlpWENT2m
+      type: string
+  credentials_input:
+    password:
+      type: password
+    provider:
+      type: provider
+    recovery_question:
+      type: recovery_question
+connection:
+  okta_url:
+    title: Okta Domain
+    description: Okta Domain e.g. dev-114295-admin.oktapreview.com
+    type: string
+    required: true
+  okta_key:
+    title: Okta Key
+    description: Okta key
+    type: credential_secret_key
+    required: true
+actions:
+  deactivate_user:
+    title: Deactivate User
+    description: Deactivate a user
+    input:
+      email:
+        title: Okta User Email
+        description: The email of the employee to deactivate
+        type: string
+        required: true
+    output:
+      email:
+        title: Okta User Email
+        description: The email of the Okta user
+        type: string
+        required: false
+      user_id:
+        title: Okta User ID
+        description: The user ID of the Okta user
+        type: string
+        required: false
+      success:
+        title: Success
+        description: Whether deactivation was successful
+        type: boolean
+        required: true
+  suspend_user:
+    title: Suspend User
+    description: Suspend a user
+    input:
+      email:
+        title: Okta User Email
+        description: The email of the employee to suspend
+        type: string
+        required: true
+    output:
+      email:
+        title: Okta User Email
+        description: The email of the Okta user
+        type: string
+        required: false
+      user_id:
+        title: Okta User ID
+        description: The user ID of the Okta user
+        type: string
+        required: false
+      success:
+        title: Success
+        description: Whether suspension was successful
+        type: boolean
+        required: true
+  unsuspend_user:
+    title: Unsuspend User
+    description: Unsuspend a user
+    input:
+      email:
+        title: Okta User Email
+        description: The email of the Okta user
+        type: string
+        required: true
+    output:
+      email:
+        title: Okta User Email
+        description: The email of the Okta user
+        type: string
+        required: false
+      user_id:
+        title: Okta User ID
+        description: The user ID of the Okta user
+        type: string
+        required: false
+      success:
+        title: Success
+        description: Whether unsuspension was successful
+        type: boolean
+        required: true
+  get_user:
+    title: Get User
+    description: Obtain information about a user
+    input:
+      email:
+        title: Okta User Email
+        description: The email of the user to obtain information about
+        type: string
+        required: true
+    output:
+      status:
+        description: Status
+        title: Status
+        type: string
+        required: false
+      profile:
+        description: Profile
+        title: Profile
+        type: profile
+        required: false
+      passwordChanged:
+        description: When the password was changed, e.g. 2013-07-02T21:36:25.344Z
+        title: Password Changed
+        type: string
+        required: false
+      created:
+        description: When the user was created, e.g. 2013-07-02T21:36:25.344Z
+        title: Created
+        type: string
+        required: false
+      activated:
+        description: When the user was activated, e.g. 2013-07-02T21:36:25.344Z
+        title: Activated
+        type: string
+        required: false
+      lastUpdated:
+        description: When the user was last updated, e.g. 2013-07-02T21:36:25.344Z
+        title: Last Updated
+        type: string
+        required: false
+      _links:
+        description: Links
+        title: Links
+        type: _links
+        required: false
+      lastLogin:
+        description: When the last login for the user was, e.g. 2013-07-02T21:36:25.344Z
+        title: Last Login
+        type: string
+        required: false
+      credentials:
+        description: Credentials
+        title: Credentials
+        type: credentials
+        required: false
+      id:
+        description: User ID
+        title: ID
+        type: string
+        required: false
+      statusChanged:
+        description: When the status of the user changed, e.g. 2013-07-02T21:36:25.344Z
+        title: Status Changed
+        type: string
+        required: false
+      found:
+        description: Whether user was found
+        title: Found User
+        type: boolean
+        required: true
+  add_user_to_group:
+    title: Add User to Group
+    description: Add a user to an existing group
+    input:
+      email:
+        title: Okta User Email
+        description: The email of the Okta user
+        type: string
+        required: true
+      group_id:
+        title: Group ID
+        description: The ID of the group to which the user should be added
+        type: string
+        required: true
+    output:
+      user_id:
+        title: Okta User ID
+        description: The user ID of the Okta user
+        type: string
+        required: false
+      success:
+        title: Success
+        description: Whether the add was successful
+        type: boolean
+        required: true
+  remove_user_from_group:
+    title: Remove User from Group
+    description: Remove a user from an existing group
+    input:
+      email:
+        title: Okta User Email
+        description: The email of the Okta user
+        type: string
+        required: true
+      group_id:
+        title: Group ID
+        description: The ID of the group to which the user should be added
+        type: string
+        required: true
+    output:
+      user_id:
+        title: Okta User ID
+        description: The user ID of the Okta user
+        type: string
+        required: false
+      success:
+        title: Success
+        description: Whether the add was successful
+        type: boolean
+        required: true
+  list_groups:
+    title: List Groups
+    description: List available groups
+    input:
+      query:
+        title: Query
+        description: Query to list groups, otherwise all groups will be returned
+        type: string
+        required: false
+    output:
+      success:
+        title: Success
+        description: Whether groups were found
+        type: boolean
+        required: true
+      groups:
+        title: Groups
+        description: List of groups
+        type: '[]group'
+        required: false
+  assign_user_to_app_sso:
+    title: Assign User to Application for Provisioning
+    description: Assign user to application for SSO and provisioning
+    input:
+      applicationId:
+        title: Application ID
+        description: Application ID
+        type: string
+        required: true
+      appuser:
+        title: Application User Model
+        description: Application user model as JSON object, see https://developer.okta.com/docs/api/resources/apps#application-user-model
+        type: object
+        required: false
+    output:
+      result:
+        title: Result
+        description: Result
+        type: object
+        required: true
+  create_user:
+    title: Create User
+    description: Create a new user
+    input:
+      activate:
+        title: Activate
+        description: Executes activation lifecycle operation when creating the user
+        type: boolean
+        default: true
+        required: true
+      provider:
+        title: Provider
+        description: Indicates whether to create a user with a specified authentication
+          provider
+        type: boolean
+        default: false
+        required: true
+      profile:
+        title: Profile
+        description: Profile properties for user
+        type: object
+        required: true
+      credentials:
+        title: Credentials
+        description: Credentials for user
+        type: credentials_input
+        required: false
+      groupIds:
+        title: Group IDs
+        description: IDs of groups that user will be immediately added to at time
+          of creation
+        type: '[]string'
+        required: false
+      nextLogin:
+        title: Change Password Next Login
+        description: Change password next time the user logs in
+        type: boolean
+        required: true
+    output:
+      status:
+        description: Status
+        title: Status
+        type: string
+        required: false
+      profile:
+        description: Profile
+        title: Profile
+        type: profile
+        required: false
+      passwordChanged:
+        description: When the password was changed, e.g. 2013-07-02T21:36:25.344Z
+        title: Password Changed
+        type: string
+        required: false
+      created:
+        description: When the user was created, e.g. 2013-07-02T21:36:25.344Z
+        title: Created
+        type: string
+        required: false
+      activated:
+        description: When the user was activated, e.g. 2013-07-02T21:36:25.344Z
+        title: Activated
+        type: string
+        required: false
+      lastUpdated:
+        description: When the user was last updated, e.g. 2013-07-02T21:36:25.344Z
+        title: Last Updated
+        type: string
+        required: false
+      _links:
+        description: Links
+        title: Links
+        type: _links
+        required: false
+      lastLogin:
+        description: When the last login for the user was, e.g. 2013-07-02T21:36:25.344Z
+        title: Last Login
+        type: string
+        required: false
+      credentials:
+        description: Credentials
+        title: Credentials
+        type: credentials
+        required: false
+      id:
+        description: User ID
+        title: ID
+        type: string
+        required: false
+      statusChanged:
+        description: When the status of the user changed, e.g. 2013-07-02T21:36:25.344Z
+        title: Status Changed
+        type: string
+        required: false
+  reset_factors:
+    title: Reset Factors
+    description: Reset all multifactors for user by email
+    input:
+      email:
+        title: Okta User Email
+        description: The email of the employee to reset factors
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: Whether the reset was successful
+        type: boolean
+        required: true
+      email:
+        title: Okta User Email
+        description: The email of the Okta user
+        type: string
+        required: false
+      user_id:
+        title: Okta User ID
+        description: The user ID of the Okta user
+        type: string
+        required: false

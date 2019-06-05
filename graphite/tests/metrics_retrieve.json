@@ -1,0 +1,19 @@
+{
+  "type": "action_start",
+  "body": {
+    "input": {
+      "target": "test.bash.*",
+      "templates": {},
+      "from": "-2min",
+      "until": "-1min"
+    },
+    "connection": {
+      "graphite_port": 443,
+      "graphite_url": "",
+      "ssl_verify": false
+    },
+    "action": "metrics_retrieve",
+    "meta": {}
+  },
+  "version": "v1"
+}

@@ -1,0 +1,12 @@
+{
+  "version": "v1",
+  "body": {
+    "action": "ping",
+    "meta": {},
+    "connection": {
+      "server": "http://localhost:8086"
+    },
+    "input": {}
+  },
+  "type": "action_start"
+}

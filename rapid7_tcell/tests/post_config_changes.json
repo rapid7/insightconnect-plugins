@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "post_config_changes",
+    "meta": {},
+    "input": {
+      "app_id": "LowprofileappcreatedforKomandplugintests-1oRtT",
+      "config": {
+        "login": {
+          "loginFailedEnabled": true,
+          "loginSuccessEnabled": true,
+          "sessionHijackingEnabled": true,
+          "version": 1,
+          "configId": 1
+        }
+      }
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

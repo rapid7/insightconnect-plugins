@@ -1,0 +1,109 @@
+plugin_spec_version: v2
+name: cef
+title: CEF
+vendor: rapid7
+status: ["unsupported"]
+description: Work with Common Event Format (CEF) data
+version: 1.0.0
+tags:
+- cef
+- arcsight
+- events
+- syslog
+- logs
+language: python
+types:
+  cef:
+    version:
+      description: Identifies the version of the CEF format
+      type: string
+      default: '0.1'
+      required: false
+    device_vendor:
+      description: With product and version, uniquely identifies the type of sending
+        device
+      type: string
+      required: false
+    device_product:
+      description: With vendor and version, uniquely identifies the type of sending
+        device
+      type: string
+      required: false
+    device_version:
+      description: With vendor and product, uniquely identifies the type of sending
+        device
+      type: string
+      required: false
+    signature_id:
+      description: Unique identifier per event-type
+      type: string
+      required: false
+    name:
+      description: Represents a human-readable and understandable description of the
+        event
+      type: string
+      required: false
+    severity:
+      description: Reflects the importance of the event
+      type: string
+      enum:
+      - Low
+      - Medium
+      - High
+      - Very-High
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      required: false
+    extension:
+      description: JSON object of key value pairs with keys and values as defined
+        by the ArcSight Extension Dictionary
+      type: object
+      required: false
+actions:
+  create_string:
+    description: Creates a CEF formatted string
+    input:
+      cef:
+        description: CEF Data
+        type: cef
+        required: true
+    output:
+      cef_string:
+        description: CEF formatted string
+        type: string
+        required: false
+  parse_single:
+    title: Parse String
+    description: Parse a single CEF formatted string
+    input:
+      cef_string:
+        description: CEF formatted string
+        type: string
+        required: true
+    output:
+      cef:
+        description: CEF object
+        type: cef
+        required: false
+  parse_multiple:
+    title: Parse File
+    description: Parse multiple CEF formatted strings from a file
+    input:
+      file:
+        description: Parse multiple CEF formatted strings from a file
+        type: bytes
+        required: true
+    output:
+      cefs:
+        description: A list of CEF objects parsed from the file
+        type: '[]cef'
+        required: false

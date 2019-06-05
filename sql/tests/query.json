@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "query",
+    "input": {
+      "query": "select * from plugins",
+      "parameters": {}
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "host": "",
+      "db": "",
+      "port": "1433",
+      "type": "mssql"
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

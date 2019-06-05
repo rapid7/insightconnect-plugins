@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "convert_epic_to_issue",
+    "meta": {},
+    "input": {
+      "epic_id": 0,
+      "repo_id": 0
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

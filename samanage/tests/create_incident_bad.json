@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "create_incident",
+    "meta": {},
+    "input": {
+      "assignee": "",
+      "category_name": "Hardware",
+      "description": "More text",
+      "due_at": "2022-11-11",
+      "problem": 3,
+      "incidents": [4],
+      "solutions": [1],
+      "name": "An incident",
+      "priority": "Medium",
+      "requester": ""
+    },
+    "connection": {
+      "eu_customer": false,
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

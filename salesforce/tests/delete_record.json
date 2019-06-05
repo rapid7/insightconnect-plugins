@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "delete_record",
+    "meta": {},
+    "input": {
+      "object_name": "Account",
+      "record_id": "0011t00000FPTAuAAP"
+    },
+    "connection": {
+      "client_id": "",
+      "client_secret": {
+        "secretKey": ""
+      },
+      "salesforce_account_username_and_password": {
+        "password": "",
+        "username": ""
+      },
+      "security_token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

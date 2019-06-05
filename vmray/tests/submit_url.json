@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "submit_url",
+    "meta": {},
+    "input": {
+      "optional_params": {},
+      "url": "www.reddit.com"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://cloud.vmray.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,42 @@
+plugin_spec_version: v2
+name: bluecoat_labs
+title: Bluecoat Labs
+vendor: rapid7
+status: ["unsupported"]
+description: Provides hardware, software, and services designed for cybersecurity
+  and network management
+version: 2.0.0
+tags:
+- bluecoat
+- categorize
+- URL
+types:
+  url_properties:
+    url:
+      title: URL
+      type: string
+      required: false
+    date_since_last_checked:
+      title: Days Since Last Checked
+      type: string
+      required: false
+    category:
+      title: Category
+      type: string
+      required: false
+actions:
+  site_reviewer:
+    title: Site Reviewer
+    description: Categorizes the given URL
+    input:
+      target_url:
+        title: Target URL
+        description: URL to be reviewed e.g komand.com
+        type: string
+        required: true
+    output:
+      site_review_results:
+        title: URL Category
+        type: '[]url_properties'
+        description: URL properties
+        required: false

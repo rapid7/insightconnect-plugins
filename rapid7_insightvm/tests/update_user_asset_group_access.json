@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "update_user_asset_group_access",
+    "meta": {},
+    "input": {
+      "user_id": 86,
+      "asset_group_ids": [
+        136,
+        137
+      ]
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

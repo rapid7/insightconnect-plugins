@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "basename",
+    "input": {
+      "path": "blah/"
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,734 @@
+plugin_spec_version: v2
+name: grr
+title: Google Rapid Response
+description: An incident response framework used for live forensics
+version: 2.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- incident response
+- google
+- grr
+- hunt
+- label
+- list
+enable_cache: true
+connection:
+  api_endpoint:
+    title: API Endpoint
+    type: string
+    description: The GRR API Endpoint to connect to
+    required: true
+  credentials:
+    title: Username and Password
+    type: credential_username_password
+    description: Username and password
+    required: true
+  ssl_verify:
+    title: SSL Verify
+    type: boolean
+    description: Verify server's SSL/TLS certificate
+    default: true
+    required: true
+actions:
+  listing:
+    title: Listing
+    description: List client information based on search
+    input:
+      query:
+        title: Query
+        description: Query to search for (e.g. 'host:suspicious.corp.com')
+        type: string
+        required: true
+      hunts:
+        title: Hunts
+        description: List hunts
+        type: boolean
+        required: false
+      hunt_approvals:
+        title: Hunt Approvals
+        description: List hunt approvals
+        type: boolean
+        required: false
+      grr_binaries:
+        title: GRR Binaries
+        description: List GRR binaries
+        type: boolean
+        required: false
+      clients:
+        title: Clients
+        description: Search clients
+        type: boolean
+        required: false
+    output:
+      result:
+        title: Result
+        type: object
+        description: Listing results
+        required: false
+  labeling:
+    title: Labeling
+    description: Label clients based on search
+    input:
+      query:
+        title: Query
+        description: Search for clients
+        type: string
+        required: true
+      label:
+        title: Label
+        description: Label's clients
+        type: '[]string'
+        required: true
+    output:
+      results:
+        title: Results
+        type: string
+        description: Labeling complete
+        required: false
+  hunting:
+    title: Hunting
+    description: Start a hunt on clients
+    input:
+      flow_name:
+        title: Flow Name
+        description: The name of the Flow you want to use
+        type: string
+        required: true
+        enum:
+        - Interrogate
+        - KeepAlive
+        - OnlineNotification
+        - CacheGrep
+        - ChromeHistory
+        - FirefoxHistory
+        - CheckRunner
+        - ArtifactCollectorFlow
+        - DumpACPITable
+        - DumpFlashImage
+        - FileFinder
+        - GetMBR
+        - ListVolumeShadowCopies
+        - Netstat
+        - ListProcesses
+        - CollectRunKeyBinaries
+        - RegistryFinder
+      flow_args:
+        title: Regex Checks
+        description: Enable high signal regex checks
+        type: boolean
+        required: false
+        default: false
+      lightweight:
+        title: Lightweight
+        description: Performs a light weight version of the interrogate
+        type: boolean
+        required: false
+      duration:
+        title: Duration
+        description: Until when should the client stay in the fast poll mode
+        type: boolean
+        required: false
+        default: 3600
+      email:
+        title: Email
+        description: Email address to send to. If not set, mail will be sent to the
+          logged in user
+        type: string
+        required: false
+      check_chrome:
+        title: Check Chrome
+        description: Checks Chrome
+        type: integer
+        required: false
+      check_firefox:
+        title: Check Firefox
+        description: Checks Chrome
+        type: integer
+        required: false
+      check_ie:
+        title: Check IE
+        description: Checks Internet Explorer
+        type: boolean
+        required: false
+      data_regex:
+        title: Data Regex
+        description: A regular expression to search for
+        type: string
+        required: false
+      grep_users:
+        title: Grep Users
+        description: A list of users to check. Default all users on the system
+        type: string
+        required: false
+      pathtype:
+        title: Path Type
+        description: Type of path access to use
+        type: string
+        required: false
+        enum:
+        - UNSET
+        - OS
+        - TSK
+        - Registry
+        - Memory
+        - TMPFILE
+      get_archive:
+        title: Get Archive
+        description: Gets Archived History as well (3 months old)
+        type: boolean
+        required: false
+      history_path:
+        title: History Path
+        description: Path to a profile directory that contains a History file
+        type: string
+        required: false
+      ch_username:
+        title: Chrome History Username
+        description: The user to get Chrome history for. If history_path is not set
+          this will be used to guess the path to the history files
+        type: string
+        required: false
+      ff_username:
+        title: Firefox History Username
+        description: The user to get FireFox history for. If history_path is not set
+          this will be used to guess the path to the history files
+        type: string
+        required: false
+      max_findings:
+        title: Maximize Findings
+        description: Summarize checks with more than N individual findings
+        type: integer
+        required: false
+      only_cpe:
+        title: Only CPE
+        description: Limit checks to hosts with cpe strings
+        type: string
+        required: false
+      only_label:
+        title: Only CPE
+        description: Limit checks to hosts with label strings
+        type: string
+        required: false
+      only_os:
+        title: Only OS
+        description: Limit checks to hosts of OS type(s) [Linux|OSX|Windows]
+        type: string
+        required: false
+      restrict_checks:
+        title: Restrict Checks
+        description: Only run checks with the specified check_ids
+        type: string
+        required: false
+      apply_parsers:
+        title: Apply Parsers
+        description: If 1, apply any relevant parser to the collected data. If 0,
+          return the raw collected data e.g Files or Registry Keys
+        type: boolean
+        required: false
+      artifact_list:
+        title: Artifact List
+        description: A list of Artifact class names
+        type: string
+        required: false
+      dependencies:
+        title: Dependencies
+        description: Specifies how dependencies should be handled
+        type: string
+        default: Use the knowledgebase as a cache. If knowledgebase isn't present,
+          a new one will be populated
+        required: false
+        enum:
+        - USE_CACHED (default)
+        - IGNORE_DEPS
+        - FETCH_NOW
+      ignore_interpolation_errors:
+        title: Ignore Interpolation Errors
+        description: If true, don't die if %%users.homedir%% and similar fail to expand.
+          It's common on windows for some user attributes to be missing if users have
+          never logged in. Enable this when you have multiple artifacts or paths and
+          want to report partial results
+        type: boolean
+        required: false
+      knowledge_base:
+        title: Knowledge Base
+        description: An optional knowledge base to use, if not specified we retrieve
+          one from the client object
+        type: string
+        required: false
+      max_file_size:
+        title: Max File Size
+        description: The maximum size of files we will download in bytes, 500MB by
+          default
+        type: string
+        required: false
+      on_no_results_error:
+        title: Oh No Results Error
+        description: The maximum size of files we will download in bytes, 500MB by
+          default
+        type: boolean
+        required: false
+      split_output_by_artifact:
+        title: Split Output by Artifact
+        description: If True, use output as a directory and write a separate collection
+          for each artifact collected
+        type: boolean
+        required: false
+      use_tsk:
+        title: Use TSK
+        description: Whether raw filesystem access should be used
+        type: boolean
+        required: false
+      component_version:
+        title: Component Version
+        description: Version of Chipsec component to be used
+        type: string
+        required: false
+      logging:
+        title: Logging
+        description: If the logging is set to true, the client sends log, including
+          Chipsec's log
+        type: boolean
+        required: false
+      table_signature_list:
+        title: Table Signature Lists
+        description: Signature of ACPI tables to be dumped
+        type: string
+        required: false
+      chunk_size:
+        title: Chunk Size
+        description: A heartbeat will be emitted every chunk_size.This could be reduced
+          in case the process times out
+        type: integer
+        required: false
+      log_level:
+        title: Log Level
+        description: Set the log level. If set, the log returned will include additional
+          information reported by Chipsec
+        type: integer
+        required: false
+      notify_syslog:
+        title: Notify Syslog
+        description: 'If true, a message will be written by the client to the syslog
+          before running the action. This can be used for debugging in case the client
+          crashes '
+        type: boolean
+        required: false
+      action:
+        title: Action
+        description: Use an action
+        type: string
+        required: false
+        enum:
+        - STAT
+        - HASH
+        - DOWNLOAD
+      conditions:
+        title: Conditions
+        description: These conditions will be applied to all files that match the
+          path arguments
+        type: string
+        required: false
+        enum:
+        - MODIFICATION_TIME
+        - ACCESS_TIME
+        - INODE_CHANGE_TIME
+        - SIZE
+        - CONTENTS_REGEX_MATCH
+        - CONTENTS_LITERAL_MATCH
+        - EXT_FLAGS
+      paths:
+        title: Paths
+        description: A path to glob that can contain %% expansions
+        type: string
+        required: false
+      min_last_modified_time:
+        title: Min Last Modified Time
+        description: File must be modified after this time
+        type: integer
+        required: false
+      max_last_modified_time:
+        title: Max Last Modified Time
+        description: File must be modified before this time
+        type: integer
+        required: false
+      min_last_access_time:
+        title: Min Last Access Time
+        description: File must be accessed after this time
+        type: integer
+        required: false
+      max_last_access_time:
+        title: Min Last Access Time
+        description: File must be accessed before this time
+        type: integer
+        required: false
+      min_last_inode_change_time:
+        title: Min Last Inode Change Time
+        description: File's inode must be changed after this time
+        type: integer
+        required: false
+      max_last_inode_change_time:
+        title: Max Last Inode Change Time
+        description: File's must be changed before this time
+        type: integer
+        required: false
+      min_file_size:
+        title: Min File Size
+        description: Minimum file size in bytes
+        type: integer
+        required: false
+      filefinder_regex:
+        title: FileFinder Regex
+        description: The regular expression which will be used to search
+        type: string
+        required: false
+      mode:
+        title: Mode
+        description: When should searching stop? Stop after one hit or search for
+          all
+        type: string
+        required: false
+        enum:
+        - FIRST_HIT
+        - ALL_HITS
+      bytes_before:
+        title: Bytes Before
+        description: Include this many bytes before the hit
+        type: integer
+        required: false
+      bytes_after:
+        title: Bytes After
+        description: Include this many bytes after the hit
+        type: integer
+        required: false
+      start_offest:
+        title: Start Offset
+        description: Start searching at this file offset
+        type: integer
+        required: false
+      length:
+        title: Length
+        description: How far (in bytes) into the file to search or the length of the
+          MBR to read
+        type: integer
+        required: false
+      literal:
+        title: Literal
+        description: Search for this literal string
+        type: string
+        required: false
+      start_offset:
+        title: Start offset
+        description: Start searching at this file offset
+        type: integer
+        required: false
+      xor_in_key:
+        title: XOR in Key
+        description: When searching memory we need to ensure we dont hit on our own
+          process. This allows us to obfuscate the search string in memory to avoid
+          us finding ourselves
+        type: integer
+        required: false
+      xor_out_key:
+        title: XOR in Key
+        description: When searching memory we need to ensure we dont hit on our own
+          process. This allows us to obfuscate the search string in memory to avoid
+          us finding ourselves
+        type: integer
+        required: false
+      max_size:
+        title: Max Size
+        description: The maximum size of files
+        type: integer
+        required: false
+      oversized_file_policy:
+        title: Max Size
+        description: What should GRR do with files that are larger than max_size
+        type: string
+        required: false
+        enum:
+        - SKIP
+        - HASH_TRUNCATED
+        - DOWNLOAD_TRUNCATED
+      use_external_stores:
+        title: Use External Stores
+        description: If true, look in any defined external file stores for files before
+          downloading them, and offer any new files to external stores. This should
+          be true unless the external checks are misbehaving
+        type: boolean
+        required: false
+      resolve_links:
+        title: Resolve links
+        description: If true, the action will yield stat information for link targets,
+          if false, the stat for the link itself will be returned
+        type: boolean
+        required: false
+      follow_links:
+        title: Follow links
+        description: Should symbolic links be followed in recursive directory listings
+        type: boolean
+        required: false
+      process_non_regular_files:
+        title: Process Non Regular Files
+        description: 'Look both into regular files and non-regular files (devices,
+          named pipes, sockets). NOTE: This is very dangerous and should be used with
+          care'
+        type: boolean
+        required: false
+      xdev:
+        title: Xdev
+        description: Behavior when ecountering device boundaries while doing recursive
+          searches
+        type: string
+        required: false
+        enum:
+        - NEVER
+        - ALWAYS
+        - LOCAL
+      upload_token:
+        title: Upload Token
+        description: 'An upload token to use with the direct upload functionality.
+          This token contains the hmac authenticated policy that determines for how
+          long the client is allowed to upload files to the server. This is comparable
+          to the policy document used by GCS: https://cloud.google.com/storage/docs/xml-api/post-object#policydocument'
+        type: boolean
+        required: false
+      listening_only:
+        title: Listening Only
+        description: If set, only listening connections are returned
+        type: boolean
+        required: false
+      connection_states:
+        title: Connection States
+        description: Network connection states to match. If a process has any network
+          connections in any status listed here, it will be considered a match
+        type: '[]string'
+        required: false
+        enum:
+        - UNKNOWN
+        - CLOSED
+        - LISTEN
+        - SYN_SENT
+        - SYN_RECV
+        - ESTABLISHED
+        - FIN_WAIT1
+        - FIN_WAIT2
+        - CLOSE_WAIT
+        - CLOSING
+        - LAST_ACK
+        - TIME_WAIT
+        - DELETE_TCB
+        - NONE
+        - CLOSE
+      fetch_binaries:
+        title: Fetch Binaries
+        description: Fetches Binaries
+        type: boolean
+        required: false
+      filename_regex:
+        title: Filename Regex
+        description: Regex used to filter the list of processes
+        type: string
+        required: false
+      hunt_name:
+        title: Hunt Name
+        description: The name of the class implementing the hunt to run
+        type: string
+        required: false
+      description:
+        title: Description
+        description: The description of this hunt
+        type: string
+        required: false
+      priority:
+        title: Priority
+        description: The priority used for this flow
+        type: string
+        required: false
+        enum:
+        - LOW_PRIORITY
+        - MEDIUM_PRIORITY
+        - HIGH_PRIORITY
+      notification_event:
+        title: Notification Event
+        description: An event name for an event listener. An event will be published
+          to this listener once the flow finishes
+        type: string
+        required: false
+      queue:
+        title: Queue
+        description: The queue to use for the hunt
+        type: string
+        required: false
+      cpu_limit:
+        title: CPU Limit
+        description: A limit on the client cpu seconds used by this flow
+        type: integer
+        required: false
+      network_bytes_limit:
+        title: Network Bytes Limit
+        description: A limit on the total traffic used by this flow
+        type: integer
+        required: false
+      client_limit:
+        title: Client Limit
+        description: 'Maximum number of clients participating in the hunt. Best practice
+          is for all hunts to use a limit to start with and remove it only when client
+          impact has been assessed by looking at hunt stats. Note that this limit
+          can be overshot by a small number of clients if there are multiple workers
+          running '
+        type: integer
+        required: false
+      expiry_time:
+        title: Expiry Time
+        description: Expiry time for the hunt
+        type: integer
+        required: false
+      client_rate:
+        title: Client Rate
+        description: The maximum number of clients to engage per minute. A rate of
+          0 means to schedule clients as fast as possible
+        type: integer
+        required: false
+      crash_alert_email:
+        title: Crash Alert Email
+        description: An email address to send mails to when a client crashes during
+          execution of this hunt
+        type: string
+        required: false
+      match_mode:
+        title: Match Mode
+        description: Match mode to trigger this hunt
+        type: string
+        required: false
+        enum:
+        - MATCH_ALL
+        - MATCH_ANY
+      label:
+        title: Label
+        description: Label that triggers this hunt
+        type: '[]string'
+        required: false
+      operating_system:
+        title: Operating System
+        description: Type of operating system to trigger this hunt
+        type: string
+        required: false
+        enum:
+        - Os_windows
+        - Os_linux
+        - Os_darwin
+      regex:
+        title: Regex
+        description: Use a regular expression to trigger this hunt
+        type: boolean
+        required: false
+      attribute_regex:
+        title: Attribute Regex
+        description: The regular expression
+        type: string
+        required: false
+      field:
+        title: Field
+        description: Field Specification
+        type: string
+        required: false
+        default: UNSET
+        enum:
+        - UNSET
+        - USERNAMES
+        - UNAME
+        - FQDN
+        - HOST_TIPS
+        - CLIENT_NAME
+        - CLIENT_DESCRIPTION
+        - SYSTEM
+        - MAC_ADDRESSES
+        - KERNEL_VERSION
+        - OS_VERSION
+        - OS_RELEASE
+        - CLIENT_LABELS
+        - INSTALL_TIME
+        - CLIENT_VERSION
+        - LAST_BOOT_TIME
+        - CLIENT_CLOCK
+      integer:
+        title: Integer
+        description: Integer to trigger this hunt
+        type: boolean
+        required: false
+      operator:
+        title: Operator
+        description: Operator
+        type: string
+        required: false
+        enum:
+        - EQUAL
+        - LESS_THAN
+        - GREATER_THAN
+      value:
+        title: Value
+        description: Value
+        type: integer
+        required: false
+      output_plugin_name:
+        title: Output Plugin Name
+        description: The name of the output plugin
+        type: string
+        required: false
+        enum:
+        - EmailOutput
+        - BigQueryOutput
+      email_address:
+        title: Email Address
+        description: The email address that messages will be sent to
+        type: string
+        required: false
+      emails_limit:
+        title: Emails Limit
+        description: The emails limit
+        type: integer
+        required: false
+      export_files_contents:
+        title: Export Files Contents
+        description: 'If this is true, open files and export their full or partial
+          contents. Note: this may require additional datastore roundtrips and slow
+          down the export process, also exporting file contents may significantly
+          increase size of the exported data'
+        type: boolean
+        required: false
+      follow_urns:
+        title: Follow URNs
+        description: 'If this is true, follow urns and try to export not only the
+          urns themselves, but also the data they are pointing to. Note: this may
+          require additional datastore roundtrips and slow down the export process'
+        type: boolean
+        required: false
+      export_files_hashes:
+        title: Export Files Hashes
+        description: If this is true, export hashes when dealing with file-related
+          values. The files won't be hashed during the export, hashes will only be
+          exported if they were collected before the export. This option affects exporting
+          VFSFile and StatEntry RDFValues. This is true by default even though it
+          requires extra datastore roundtrips because it's very useful and users expect
+          the hashes to be there
+        type: boolean
+        required: false
+      convert_values:
+        title: Convert Values
+        description: If true, convert values for export-friendly format
+        type: boolean
+        required: false
+      annotations:
+        title: Annotations
+        description: Annotations to add to exported data. This field can be used to
+          differentiate sets of exported data inside a particular exported type. e.g.
+          data collected by users vs. data collected by cronjob
+        type: '[]string'
+        required: false
+    output:
+      results:
+        title: Results
+        type: string
+        description: Issues found with TruffleHog
+        required: false

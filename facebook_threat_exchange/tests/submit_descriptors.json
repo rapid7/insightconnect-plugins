@@ -1,0 +1,33 @@
+{
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "input": {
+      "expired_on": "",
+      "remove_tags": "",
+      "status": "MALICIOUS",
+      "tags": [],
+      "confidence": 0,
+      "privacy_type": "VISIBLE",
+      "last_active": "",
+      "type": "DOMAIN",
+      "share_level": "WHITE",
+      "privacy_members": [],
+      "first_active": "",
+      "review_status": "",
+      "indicator": "evil-domain.biz",
+      "precision": "",
+      "description": "This domain was hosting malware",
+      "severity": "",
+      "add_tags": ""
+    },
+    "connection": {
+      "app_id": "Facebook App ID",
+      "secret_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "submit_descriptors"
+  },
+  "type": "action_start"
+}

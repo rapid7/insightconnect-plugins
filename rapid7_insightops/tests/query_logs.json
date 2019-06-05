@@ -1,0 +1,13 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "region": "eu",
+      "api_key": ""
+    },
+    "input": {},
+    "action": "query_logs"
+  },
+  "version": "v1"
+}

@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_anc_endpoint",
+    "meta": {},
+    "input": {
+      "mac": "00:50:56:8A:62:35"
+    },
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "ssl_verify": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

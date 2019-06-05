@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "host_information",
+    "meta": {},
+    "input": {
+      "ip": ""
+    },
+    "connection": {
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

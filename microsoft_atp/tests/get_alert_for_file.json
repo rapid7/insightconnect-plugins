@@ -1,0 +1,23 @@
+{
+  "body": {
+    "trigger": "get_alert_for_file",
+    "meta": {},
+    "input": {
+      "filename": "reg.exe"
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "auth_url": "",
+      "client_id": "",
+      "client_secret": "",
+      "host": "https://wdatp-alertexporter-us.securitycenter.windows.com",
+      "seconds_ago": 10512000,
+      "resource_url": "https://graph.windows.net"
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

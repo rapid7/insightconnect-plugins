@@ -1,0 +1,23 @@
+{
+  "body": {
+    "connection": {
+      "basic_auth": {
+        "password": "",
+        "username": ""
+      },
+      "token_auth": {
+        "secretKey": ""
+      },
+      "port": 3000,
+      "url": ""
+    },
+    "action": "delete_organization_user",
+    "meta": {},
+    "input": {
+      "user_id": 2,
+      "organization_id": 1
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

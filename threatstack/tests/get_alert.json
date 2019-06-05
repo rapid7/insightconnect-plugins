@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "get_alert",
+    "meta": {},
+    "input": {
+      "alert_id": "",
+      "fields": []
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "api_version": 1,
+      "org_id": "",
+      "timeout": 120
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

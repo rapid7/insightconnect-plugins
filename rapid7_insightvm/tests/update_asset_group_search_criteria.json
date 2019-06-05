@@ -1,0 +1,28 @@
+{
+  "body": {
+    "action": "update_asset_group_search_criteria",
+    "meta": {},
+    "input": {
+      "id": 56,
+      "searchCriteria": {
+        "match": "all",
+        "filters": [
+          {
+            "field": "host-name",
+            "operator": "contains",
+            "value": "meta"
+          }
+        ]
+      }
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

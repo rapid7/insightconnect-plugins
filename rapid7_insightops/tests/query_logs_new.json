@@ -1,0 +1,15 @@
+{
+  "body": {
+    "action": "query_logs",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "region": "us"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

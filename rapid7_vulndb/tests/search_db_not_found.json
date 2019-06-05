@@ -1,0 +1,13 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {},
+    "input": {
+      "database": "Metasploit Modules",
+      "search": "adsfasdfadsfasdfadsfa"
+    },
+    "action": "search_db"
+  },
+  "version": "v1"
+}

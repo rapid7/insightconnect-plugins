@@ -1,0 +1,35 @@
+{
+  "body": {
+    "action": "create_ticket",
+    "input": {
+      "attachment": {"content": "heyMAX", "filename": "hello.txt"},
+      "subject": "hello Subject",
+      "description": "Hello description",
+      "assignee_id": "20241548208",
+      "collaborator_ids": ["20241548208", "20180428207"],
+      "due_at": "2017-03-20T23:03:32.114196",
+      "external_id": "prooblem_stuff",
+      "priority": "High",
+      "problem_id": "14",
+      "recipient":"20243926068",
+      "requester_id": "20243926068",
+      "status": "Pending",
+      "tags": ["Peace", "Love", "Happiness"],
+      "type": "Incident"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "subdomain": "komand"
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}
+  

@@ -1,0 +1,27 @@
+{
+  "body": {
+    "action": "index_document",
+    "meta": {},
+    "input": {
+      "_id": "",
+      "_index": "",
+      "_type": "",
+      "_version": 0,
+      "document": {},
+      "parent": "",
+      "routing": "",
+      "timeout": "1m",
+      "version_type": "internal"
+    },
+    "connection": {
+      "credentials": {
+        "password": "t",
+        "username": "tt"
+      },
+      "url": "",
+      "use_authentication": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,18 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "vsites",
+    "input": {
+      "id": ""
+    },
+    "connection": {
+      "address": "http://1.2.3.4",
+      "credentials": {
+        "password": "admin",
+        "username": "password"
+      }
+    }
+  }
+}

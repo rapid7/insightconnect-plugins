@@ -1,0 +1,93 @@
+plugin_spec_version: v2
+name: trufflehog
+title: TruffleHog
+description: Searches through git repositories for high entropy strings and secrets,
+  digging deep into commit history
+version: 1.1.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- entropy
+- secret
+- entropy-checks
+- regex
+- trufflehog
+enable_cache: true
+language: python
+types:
+  issue:
+    date:
+      type: string
+    path:
+      description: File path
+      type: string
+    branch:
+      description: Commit branch
+      type: string
+    commit:
+      description: Commit subject
+      type: string
+    diff:
+      type: string
+    stringsFound:
+      title: Strings Found
+      description: List of found strings
+      type: '[]string'
+    printfDiff:
+      title: Diff
+      type: string
+    commitHash:
+      title: Commit Hash
+      type: string
+    reason:
+      type: string
+    url:
+      title: Commit URL
+      description: Commit URL
+      type: string
+actions:
+  search:
+    title: Search
+    description: Looks for exposed secrets in the git commit history and branches
+    input:
+      git_url:
+        title: GitHub Repository URL
+        description: The git repository that is going to be searched e.g. https://github.com/jonschipp/islet
+        type: string
+        required: true
+      do_regex:
+        title: Regex Checks
+        description: Enable high signal regex checks
+        type: boolean
+        required: false
+        default: false
+      do_entropy:
+        title: Entropy Checks
+        description: Evaluates the shannon entropy for both the base64 char set and
+          hexidecimal char set for every blob of text greater than 20 characters comprised
+          of those character sets in each diff
+        type: boolean
+        required: false
+        default: true
+      custom_regexes:
+        title: Custom Regex Rules
+        description: Ignores default regexes. Provide your own
+        type: object
+        required: false
+      since_commit:
+        title: Since Commit Hash
+        description: Scan from a given commit hash
+        type: string
+        required: false
+      max_depth:
+        title: Max Depth
+        description: Max commit depth to go back when searching for secrets
+        type: integer
+        default: 1000000
+        required: false
+    output:
+      issues:
+        type: '[]issue'
+        title: Issues
+        description: Issues found with TruffleHog
+        required: false

@@ -1,0 +1,32 @@
+{
+  "body": {
+    "action": "add_feed",
+    "meta": {},
+    "input": {
+      "cert": {
+        "content": "",
+        "filename": ""
+      },
+      "enabled": false,
+      "feed_url": "",
+      "force": false,
+      "key": {
+        "content": "",
+        "filename": ""
+      },
+      "password": "",
+      "use_proxy": false,
+      "username": "",
+      "validate_server_cert": false
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

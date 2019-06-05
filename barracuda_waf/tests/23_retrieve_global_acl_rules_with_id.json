@@ -1,0 +1,19 @@
+{
+  "version": "v1",
+  "body": {
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {},
+    "action": "retrieve_global_acl_rules",
+    "input": {
+      "global_acl_id": "test-v14-global-acl-rule",
+      "policy_id": "test-v14-policy"
+    }
+  },
+  "type": "action_start"
+}

@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "tag_asset_group",
+    "meta": {},
+    "input": {
+      "tag_id": 69,
+      "asset_group_id": 20
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,974 @@
+plugin_spec_version: v2
+name: wazuh_ossec
+title: Wazuh OSSEC
+description: Provides security visibility, compliance and infrastructure monitoring
+  capabilities
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- ossec
+- wazuh
+- hids
+types:
+  agents:
+    id:
+      title: Agent ID
+      type: string
+      description: Agent ID
+      required: false
+    ip:
+      title: Agent IP
+      type: string
+      description: Agent IP
+      required: false
+    name:
+      title: Agent Name
+      type: string
+      description: Agent Name
+      required: false
+    status:
+      title: Agent Status
+      type: string
+      description: Agent Status
+      required: false
+  summary_log:
+    all:
+      title: All
+      description: Number of all logs
+      type: integer
+      required: false
+    error:
+      title: Error
+      description: Number of error logs
+      type: integer
+      required: false
+    info:
+      title: Info
+      description: Number of info logs
+      type: integer
+      required: false
+  alerts:
+    level:
+      title: Level
+      type: integer
+      description: Level
+      required: false
+    sigid:
+      title: Signature ID
+      type: integer
+      description: Signature ID
+    times:
+      title: Times
+      type: integer
+      description: Time
+      required: false
+  stats:
+    alerts:
+      title: Alerts
+      type: '[]alerts'
+      description: Alerts
+      required: false
+    events:
+      title: Events
+      type: integer
+      description: Events
+      required: false
+    firewall:
+      title: Firewall
+      type: integer
+      description: Firewall
+      required: false
+    hour:
+      title: Hour
+      type: integer
+      description: Hour
+      required: false
+    syscheck:
+      title: SysCheck
+      type: integer
+      description: Syscheck
+      required: false
+    totalAlerts:
+      title: Total Alerts
+      type: integer
+      description: Total Alerts
+      required: false
+  rootcheck_events:
+    cis:
+      title: Cis
+      type: string
+      description: Cis
+      required: false
+    event:
+      title: Event
+      type: string
+      description: Event
+      required: false
+    oldDay:
+      title: Old Day
+      type: string
+      description: Old Day
+      required: false
+    readDay:
+      title: Read Day
+      type: string
+      description: Read Day
+      required: false
+    status:
+      title: Status
+      type: string
+      description: Status
+      required: false
+  syscheck_events:
+    event:
+      title: Event
+      type: string
+      description: Event
+      required: false
+    file:
+      title: File
+      type: string
+      description: File
+      required: false
+    gid:
+      title: GID
+      type: integer
+      description: GID
+      required: false
+    group:
+      title: Group
+      type: string
+      description: Group
+      required: false
+    inode:
+      title: INode
+      type: integer
+      description: INode
+      required: false
+    md5:
+      title: MD5
+      type: string
+      description: MD5
+      required: false
+    modificationDate:
+      title: Modification Date
+      type: string
+      description: Modification Date
+      required: false
+    octalMode:
+      title: Octal Mode
+      type: string
+      description: Octal Mode
+      required: false
+    permissions:
+      title: Permissions
+      type: string
+      description: Permissions
+      required: false
+    scanDate:
+      title: Scan Date
+      type: string
+      description: Date of scan
+      required: false
+    sha1:
+      title: SHA1
+      type: string
+      description: SHA1
+      required: false
+    size:
+      title: Size
+      type: integer
+      description: Size
+      required: false
+    uid:
+      title: UID
+      type: integer
+      description: UID
+      required: false
+    user:
+      title: User
+      type: string
+      description: User
+      required: false
+connection:
+  url:
+    title: URL
+    description: Wazuh API URL e.g. https://127.0.0.1:55000
+    type: string
+    required: true
+  credentials:
+    title: Wazuh API Username and Password
+    description: Wazuh API username and password
+    type: credential_username_password
+    required: true
+actions:
+  agent_add:
+    title: Agent Add
+    description: Add a new agent
+    input:
+      name:
+        title: Name
+        type: string
+        description: Agent name
+        required: true
+      ip:
+        title: IP Address
+        type: string
+        description: If you do not include this param, the API will get the IP automatically.
+          If you are behind a proxy, you must set the option config.BehindProxyServer
+          to yes at config.js
+        required: false
+      force:
+        type: string
+        title: Force
+        description: Remove old agent with same IP if disconnected since force seconds
+        required: false
+    output:
+      id:
+        title: Agend ID
+        description: Agent ID
+        type: string
+        required: true
+      error:
+        title: Error Code
+        description: Error code
+        type: integer
+        required: true
+  agent_delete:
+    title: Agent Delete
+    description: Removes an agent. You must restart OSSEC after removing an agent
+    input:
+      agent_id:
+        type: string
+        title: Agent ID
+        description: Agent ID e.g. 003
+        required: true
+    output:
+      message:
+        title: Status Message
+        description: Status message
+        type: string
+        required: true
+      error:
+        title: Error Code
+        description: Error code
+        type: integer
+        required: true
+  agent_summary:
+    title: Agent Summary
+    description: Returns a summary of the available agents
+    input: null
+    output:
+      Active:
+        title: Active Agents
+        description: Active agents
+        type: integer
+        required: true
+      Never_connected:
+        title: Never Connected Agents
+        description: Never connected agents
+        type: integer
+        required: true
+      Total:
+        title: Total Agents
+        description: Total agents
+        type: integer
+        required: true
+      Disconnected:
+        title: Disconnected Agents
+        description: Disconnected agents
+        type: integer
+        required: true
+      error:
+        title: Error Code
+        type: integer
+        required: true
+        description: Error Code
+  agents_get_all:
+    title: Agents List
+    description: Returns a list with the available agents
+    input:
+      offset:
+        title: Offset
+        type: integer
+        description: First element to return in the collection
+        required: false
+      limit:
+        title: Limit
+        type: integer
+        description: Maximum number of elements to return
+        required: false
+      sort:
+        title: Sort
+        type: string
+        description: Sorts the collection by a field or fields (separated by comma).
+          Use +/- at the begining to ascending or descending order. Allowed sort fields
+          are status, ip, id, and name
+        required: false
+      search:
+        title: Search
+        type: string
+        description: Looks for elements with the specified string
+        required: false
+      status:
+        title: Status
+        type: string
+        description: Filters by agent status
+        enum:
+        - All
+        - Active
+        - Never Connected
+        - Disconnected
+        required: false
+    output:
+      totalItems:
+        title: Total Items
+        type: integer
+        description: Total items
+        required: true
+      agents:
+        title: Agents
+        description: List of Agents
+        type: '[]agents'
+        required: true
+      error:
+        title: Error
+        description: Error code
+        type: integer
+        required: true
+  agent_info:
+    title: Agent Info
+    description: Returns the information of an agent
+    input:
+      agent_id:
+        type: string
+        title: Agent ID
+        description: Agent ID e.g. 003
+        required: true
+    output:
+      status:
+        title: Agent Status
+        type: string
+        description: Agent status
+        required: true
+      name:
+        title: Agent Name
+        type: string
+        description: Agent name
+        required: true
+      ip:
+        title: Agent IP
+        type: string
+        description: Agent IP
+        required: true
+      dateAdd:
+        title: Date Added
+        type: string
+        description: Date added
+        required: true
+      version:
+        title: Agent Version
+        type: string
+        description: Agent version
+        required: true
+      os_family:
+        title: OS Family
+        type: string
+        description: OS Family
+        required: true
+      lastKeepAlive:
+        title: Last Keep Alive Time
+        type: string
+        description: Last keep alive time
+        required: true
+      os:
+        title: Agent OS
+        type: string
+        description: Agent OS
+        required: true
+      id:
+        title: Agent ID
+        type: string
+        description: Agent ID
+        required: true
+      error:
+        title: Error Code
+        type: integer
+        description: Error code
+        required: true
+  agent_get_key:
+    title: Agent Key
+    description: Returns the key of an agent
+    input:
+      agent_id:
+        type: string
+        title: Agent ID
+        description: Agent ID e.g. 003
+        required: true
+    output:
+      key:
+        title: Agent Key
+        type: string
+        description: Agent key
+        required: true
+      error:
+        title: Error Code
+        type: integer
+        description: Error code
+        required: true
+  agent_restart:
+    title: Agent Restart
+    description: Restarts all agents, or a specified agent
+    input:
+      agent_id:
+        type: string
+        title: Agent ID
+        description: Agent ID e.g. 003. If no agent is specified, all agents will
+          be restarted
+        required: true
+    output:
+      message:
+        title: Message
+        description: Status message
+        type: string
+        required: true
+      error:
+        title: Error Code
+        type: integer
+        description: Error code
+        required: true
+  manager_info:
+    title: Manager Information
+    description: Returns basic information about the Manager
+    input: null
+    output:
+      openssl_support:
+        title: OpenSSL Support
+        type: string
+        description: OpenSSL support
+        required: true
+      ruleset_version:
+        title: Ruleset Version
+        type: string
+        description: Ruleset version
+        required: true
+      tz_name:
+        title: TZ Name
+        type: string
+        description: TZ name
+        required: true
+      tz_offset:
+        title: TZ Offset
+        type: string
+        description: TZ Offset
+        required: true
+      installation_date:
+        title: Installation Date
+        type: string
+        description: Installation date
+        required: true
+      version:
+        title: Version
+        type: string
+        description: Version
+        required: true
+      max_agents:
+        title: Max Agents
+        type: string
+        description: Max agents
+        required: true
+      path:
+        title: Path
+        type: string
+        description: Path
+        required: false
+      description:
+        title: Description
+        required: true
+        type: string
+        description: Description
+      type:
+        title: Type
+        type: string
+        description: Type
+        required: true
+      error:
+        title: Error Code
+        type: integer
+        description: Error Code
+        required: true
+  manager_status:
+    title: Manager Status
+    description: Returns the Manager processes that are running
+    input: null
+    output:
+      wazuh-modulesd:
+        title: Wazuh Modulesd
+        type: string
+        description: Wazuh modulesd
+        required: true
+      ossec-authd:
+        title: OSSEC Authd
+        type: string
+        description: Ossec authd
+        required: true
+      ossec-monitord:
+        title: OSSEC Monitord
+        type: string
+        description: OSSEC monitord
+        required: true
+      ossec-logcollector:
+        title: OSSEC Logcollector
+        type: string
+        description: OSSEC Logcollector
+        required: true
+      ossec-execd:
+        title: OSSEC Execd
+        type: string
+        description: OSSEC execd
+        required: true
+      ossec-remoted:
+        title: OSSEC Remoted
+        type: string
+        description: OSSEC remoted
+        required: true
+      ossec-syscheckd:
+        title: OSSEC Syscheckd
+        type: string
+        description: OSSEC syscheckd
+        required: true
+      ossec-analysisd:
+        title: OSSEC Analysisd
+        type: string
+        description: OSSEC analysisd
+        required: true
+      ossec-maild:
+        title: OSSEC Maild
+        type: string
+        description: OSSEC maild
+        required: true
+      error:
+        title: Error Code
+        type: integer
+        description: Error code
+        required: true
+  manager_logs:
+    title: Manager Logs
+    description: Returns the 3 last months of ossec.log
+    input:
+      offset:
+        title: Offset
+        type: integer
+        description: First element to return in the collection
+        required: false
+      limit:
+        title: Limit
+        type: integer
+        description: Maximum number of elements to return
+        required: false
+      sort:
+        title: Sort
+        type: string
+        description: Sorts the collection by a field or fields (separated by comma).
+          Use +/- at the begining to ascending or descending order
+        required: false
+      search:
+        title: Search
+        type: string
+        description: Looks for elements with the specified string
+        required: false
+      category:
+        title: Category
+        type: string
+        description: Filters by category of log
+        required: false
+      type_log:
+        title: Type of Log
+        type: string
+        description: Filters by type of log
+        enum:
+        - All
+        - Error
+        - Info
+        required: false
+    output:
+      totalItems:
+        title: Total Items
+        description: Total items
+        type: integer
+        required: true
+      logs:
+        title: Logs
+        description: Logs
+        type: '[]string'
+        required: true
+      error:
+        title: Error Code
+        type: integer
+        description: Error code
+        required: true
+  manager_logs_summary:
+    title: Manager Logs Summary
+    description: Returns a summary about the 3 last months of ossec.log
+    input: null
+    output:
+      wazuh-modulesd:
+        title: Wazuh Modulesd
+        type: summary_log
+        description: Wazuh Modulesd
+        required: false
+      ossec-testrule:
+        title: OSSEC Test Rule
+        type: summary_log
+        description: Test rule
+        required: false
+      wazuh-modulesd:oscap:
+        title: Wazuh Modulesd Oscap
+        type: summary_log
+        required: false
+        description: Wazuh modulesd oscap
+      ossec-rootcheck:
+        title: OSSEC Rootcheck
+        required: false
+        type: summary_log
+        description: Rootcheck
+      ossec-monitord:
+        title: OSSEC Monitord
+        type: summary_log
+        description: Monitord
+        required: false
+      ossec-logcollector:
+        title: Ossec Log Collector
+        type: summary_log
+        description: Log collector
+        required: false
+      ossec-execd:
+        title: OSSEC Execd
+        type: summary_log
+        description: Execd
+        required: false
+      ossec-remoted:
+        title: OSSEC Remoted
+        type: summary_log
+        description: Remoted
+        required: false
+      ossec-syscheckd:
+        title: OSSEC Syscheckd
+        type: summary_log
+        description: Syscheckd
+        required: false
+      ossec-analysisd:
+        title: OSSEC Analysisd
+        type: summary_log
+        description: Analysisd
+        required: false
+      wazuh-modulesd:database:
+        title: 'Wazuh Modules : Database'
+        type: summary_log
+        description: 'Wazuh Modules : Database'
+        required: false
+      error:
+        title: Error Code
+        type: integer
+        description: Error Code
+        required: true
+  manager_stats:
+    title: Manager Stats
+    description: Returns OSSEC statistical information of current date
+    input:
+      date:
+        type: string
+        title: Date
+        description: 'Selects the date for getting the statistical information. Format:
+          YYYYMMDD'
+        required: false
+    output:
+      stats:
+        title: Stats
+        type: '[]stats'
+        description: Stats
+        required: true
+      error:
+        title: Error Code
+        type: integer
+        description: Error code
+        required: true
+  manager_stats_hourly:
+    title: Manager Stats Hourly
+    description: Returns OSSEC statistical information per hour. Each item in averages
+      field represents the average of alerts per hour
+    input: null
+    output:
+      interactions:
+        title: Interactions
+        type: integer
+        description: Interactions
+        required: true
+      averages:
+        title: Averages
+        type: '[]integer'
+        description: Averages
+        required: true
+      error:
+        title: Error Code
+        type: integer
+        description: Error code
+        required: true
+  rootcheck_delete:
+    title: Rootcheck Delete
+    description: Clears the rootcheck database for all agents, or a specified agent
+    input:
+      agent_id:
+        type: string
+        title: Agent ID
+        description: Agent ID e.g. 003. If no agent is specified, the database will
+          be cleared for all agents
+        required: false
+    output:
+      message:
+        title: Message
+        description: Status message
+        type: string
+        required: true
+      error:
+        title: Error code
+        description: Error code
+        type: integer
+        required: true
+  rootcheck_info:
+    title: Rootcheck Info
+    description: Return the timestamp of the last rootcheck scan
+    input:
+      agent_id:
+        type: string
+        title: Agent ID
+        description: Agent ID e.g. 003
+        required: true
+    output:
+      rootcheckEndTime:
+        title: Rootcheck End Time
+        type: string
+        description: Rootcheck end time
+        required: true
+      rootcheckTime:
+        title: Rootcheck Time
+        type: string
+        description: Rootcheck time
+        required: true
+      error:
+        title: Error code
+        description: Error code
+        type: integer
+        required: true
+  rootcheck_database:
+    title: Rootcheck Database
+    description: Returns the rootcheck database of an agent
+    input:
+      agent_id:
+        type: string
+        title: Agent ID
+        description: Agent ID e.g. 003
+        required: true
+      offset:
+        title: Offset
+        type: integer
+        description: First element to return in the collection
+        required: false
+      limit:
+        title: Limit
+        type: integer
+        description: Maximum number of elements to return
+        required: false
+      sort:
+        title: Sort
+        type: string
+        description: 'Sorts the collection by a field or fields (separated by comma).
+          Use +/- at the begining to ascending or descending order. Allowed sort fields:
+          status, oldDay, event, and readDay'
+        required: false
+      search:
+        title: Search
+        type: string
+        description: Looks for elements with the specified string
+        required: false
+      cis:
+        type: string
+        title: CIS
+        description: Filters by CIS
+        required: false
+      pci:
+        type: string
+        title: PCI
+        description: Filters by PCI requirement
+        required: false
+    output:
+      totalItems:
+        title: Total Items
+        type: integer
+        description: Total items
+        required: true
+      rootcheck_events:
+        title: Rootcheck Events
+        description: Rootcheck events
+        type: '[]rootcheck_events'
+        required: true
+      error:
+        title: Error Code
+        type: integer
+        description: Error code
+        required: true
+  agent_scan:
+    title: Agent Scan
+    description: Runs syscheck and rootcheck on all agents, or a specified agent
+    input:
+      agent_id:
+        type: string
+        title: Agent ID
+        description: Agent ID e.g. 003. If no agent is specified, scans will take
+          place on all agents
+        required: false
+    output:
+      message:
+        title: Message
+        description: Status message
+        type: string
+        required: true
+      error:
+        title: Error code
+        description: Error code
+        type: integer
+        required: true
+  syscheck_delete:
+    title: Syscheck Delete
+    description: Clears the syscheck database for all agents, or a specified agent
+    input:
+      agent_id:
+        type: string
+        title: Agent ID
+        description: Agent ID e.g. 003. If no agent is specified, the database will
+          be cleared for all agents
+        required: false
+    output:
+      message:
+        title: Message
+        description: Status message
+        type: string
+        required: true
+      error:
+        title: Error Code
+        description: Error code
+        type: integer
+        required: true
+  syscheck_info:
+    title: Syscheck Info
+    description: Return the timestamp of the last syscheck scan
+    input:
+      agent_id:
+        type: string
+        title: Agent ID
+        description: Agent ID e.g. 003
+        required: true
+    output:
+      syscheckEndTime:
+        title: Syscheck End Time
+        type: string
+        description: Syscheck end time
+        required: true
+      syscheckTime:
+        title: Syscheck Time
+        type: string
+        description: Syscheck time
+        required: true
+      error:
+        title: Error Code
+        description: Error code
+        type: integer
+        required: true
+  syscheck_database:
+    title: Syscheck Database
+    description: Returns the syscheck files of an agent
+    input:
+      agent_id:
+        type: string
+        title: Agent ID
+        description: Agent ID e.g. 003
+        required: true
+      offset:
+        title: Offset
+        type: integer
+        description: First element to return in the collection
+        required: false
+      limit:
+        title: Limit
+        type: integer
+        description: Maximum number of elements to return
+        required: false
+      sort:
+        title: Sort
+        type: string
+        description: 'Sorts the collection by a field or fields (separated by comma).
+          Use +/- at the begining to ascending or descending order. Allowed sort fields:
+          group, user, file, modificationDate, scanDate, and size'
+        required: false
+      search:
+        title: Search
+        type: string
+        description: Looks for elements with the specified string
+        required: false
+      event:
+        title: Event
+        type: string
+        description: Filters files by event
+        enum:
+        - All
+        - Added
+        - Readded
+        - Modified
+        - Deleted
+        required: false
+      file:
+        title: File
+        type: string
+        description: Filters file by filename
+        required: false
+      filetype:
+        title: File Type
+        type: string
+        description: Selects type of file
+        enum:
+        - All
+        - File
+        - Registry
+        required: false
+      md5:
+        type: string
+        title: MD5
+        description: Returns the files with the specified MD5 hash
+        required: false
+      sha1:
+        type: string
+        title: SHA1
+        description: Returns the files with the specified SHA1 hash
+        required: false
+      hash:
+        type: string
+        title: Hash
+        description: Returns the files with the specified hash (MD5 or SHA1)
+        required: false
+    output:
+      totalItems:
+        title: Total Items
+        description: Total items
+        type: integer
+        required: true
+      syscheck_events:
+        title: Syscheck Events
+        description: Syscheck events
+        type: '[]rootcheck_events'
+        required: true
+      error:
+        title: Error Code
+        description: Error code
+        type: integer
+        required: true

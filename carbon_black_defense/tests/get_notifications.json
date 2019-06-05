@@ -1,0 +1,22 @@
+{
+  "type": "trigger_start",
+  "version": "v1",
+  "body": {
+    "trigger": "get_notifications",
+    "input": {
+      "frequency": 10
+    },
+    "connection": {
+      "url": "https://api5.conferdeploy.net/",
+      "connector": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "meta": {},
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    }
+  }
+}

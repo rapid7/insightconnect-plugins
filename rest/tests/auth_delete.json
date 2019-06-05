@@ -1,0 +1,22 @@
+{
+  "version": "v1",
+  "body": {
+    "action": "delete",
+    "input": {
+      "route": "/delete",
+      "body": {},
+      "headers": { "Referer": "https://google.com" }
+    },
+    "meta": {},
+    "connection": {
+      "default_headers": { "User-Agent": "Mozilla/5.0" },
+      "base_url": "https://httpbin.org/",
+      "ssl_verify": false,
+      "basic_auth_credentials": {
+        "username": "foo",
+        "password": "bar"
+      }
+    }
+  },
+  "type": "action_start"
+}

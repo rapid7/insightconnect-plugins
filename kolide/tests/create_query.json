@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "create_query",
+    "meta": {},
+    "input": {
+      "description": "Create Test Query",
+      "name": "Komand Test Query",
+      "query": "Select * from users"
+    },
+    "connection": {
+      "api_token": {
+        "secretKey": ""
+      },
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

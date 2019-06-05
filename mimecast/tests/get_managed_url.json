@@ -1,0 +1,30 @@
+{
+  "body": {
+    "action": "get_managed_url",
+    "meta": {},
+    "input": {
+      "action": "none",
+      "disable_log_click": "none",
+      "disable_rewrite": "none",
+      "disable_user_awareness": "none",
+      "domain": "",
+      "id": "",
+      "match_type": "none",
+      "scheme": "https"
+    },
+    "connection": {
+      "app_id": "",
+      "app_key": {
+        "secretKey": ""
+      },
+      "auth_type": "Basic-Cloud",
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://sandbox-api.mimecast.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

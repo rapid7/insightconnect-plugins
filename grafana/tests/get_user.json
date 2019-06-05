@@ -1,0 +1,22 @@
+{
+  "version": "v1",
+  "body": {
+    "connection": {
+      "basic_auth": {
+        "password": "",
+        "username": ""
+      },
+      "token_auth": {
+        "secretKey": ""
+      },
+      "port": 3000,
+      "url": ""
+    },
+    "meta": {},
+    "action": "get_user",
+    "input": {
+      "user_id": 1
+    }
+  },
+  "type": "action_start"
+}

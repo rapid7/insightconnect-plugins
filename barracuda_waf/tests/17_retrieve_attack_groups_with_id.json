@@ -1,0 +1,19 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {},
+    "action": "retrieve_attack_groups",
+    "input": {
+      "policy_id": "default",
+      "attack_group_id": "protocol-violations"
+    }
+  }
+}

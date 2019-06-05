@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "commit",
+    "meta": {},
+    "input": {
+      "action": "commit-all",
+      "cmd": "<commit-all><shared-policy><validate-only></validate-only></shared-policy></commit-all>"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "server": "",
+      "verify_cert": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

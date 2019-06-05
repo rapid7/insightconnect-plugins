@@ -1,0 +1,27 @@
+plugin_spec_version: v2
+name: proofpoint_url_defense
+title: Proofpoint URL Defense
+vendor: rapid7
+description: Proofpoint URL Defense is a service designed to handle emails that contain
+  malicious URLs
+version: 1.0.0
+tags:
+- proofpoint
+- decode
+- URL
+actions:
+  url_decode:
+    title: URL Decode
+    description: Decodes an encoded URL
+    input:
+      encoded_url:
+        title: Encoded URL
+        description: Proofpoint encoded URL or URL parameters e.g http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwfU
+        type: string
+        required: true
+    output:
+      decoded_url:
+        title: Decoded Proofpoint URL
+        description: Decoded Proofpoint URL
+        type: string
+        required: false

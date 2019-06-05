@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "get_event",
+    "meta": {},
+    "input": {
+      "event_id": 17
+    },
+    "connection": {
+      "api_token": {
+        "secretKey": ""
+      },
+      "customer_id": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

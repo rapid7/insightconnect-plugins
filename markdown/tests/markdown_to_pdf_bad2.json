@@ -1,0 +1,14 @@
+{
+    "version": "v1",
+    "type": "action_start",
+    "body": {
+      "input": {
+        "markdown": "",
+        "markdown_string": ""
+      },
+      "connection": null,
+      "action": "markdown_to_pdf",
+      "meta": {}
+    }
+  }
+  

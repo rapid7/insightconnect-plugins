@@ -1,0 +1,94 @@
+plugin_spec_version: v2
+name: checkdmarc
+title: Checkdmarc
+description: A Python module and command line parser for SPF and DMARC records
+version: 2.1.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- checkdmarc
+- SPF
+- DMARC DNS
+- DNS
+types:
+  report:
+    domain:
+      title: "Domain"
+      type: string
+      description: "Domain"
+      required: false
+    base_domain:
+      title: "Base Domain"
+      type: string
+      description: "Base domain"
+      required: false
+    dmarc:
+      title: "DMARC"
+      type: object
+      description: "DMARC"
+      required: false
+    ns:
+      title: "NS"
+      type: object
+      description: "NS"
+      required: false
+    mx:
+      title: "MX"
+      type: object
+      description: "MX"
+      required: false
+    spf:
+      title: "SPF"
+      type: object
+      description: "SPF"
+      required: false
+
+actions:
+  check_domains:
+    title: Check Domains
+    description: Check domains
+    input:
+      domain:
+        title: Domain
+        type: "string"
+        description: Domain to check. e.g. fbi.gov, google.com
+        required: true
+      timeout:
+        title: Timeout
+        type: number
+        description: Timeout in seconds for request. Default is 6 seconds
+        default: 6.0
+        required: true
+    output:
+      report:
+          title: "Report"
+          type: "report"
+          description: "Report"
+          required: false
+  check_domains_alternate_nameservers:
+    title: Check Domains Alternate Nameservers
+    description: Check DMARC records against alternate name servers
+    input:
+      domain:
+        title: Domain
+        type: "string"
+        description: Domain to check. e.g. fbi.gov, google.com
+        required: true
+      nameservers:
+        title: Nameservers
+        description: Nameserver to check against. e.g ["1.1.1.1","1.0.0.1"]
+        type: "[]string"
+        required: true
+        default: ["1.1.1.1","1.0.0.1"]
+      timeout:
+        title: Timeout
+        type: number
+        description: Timeout in seconds for request. Default is 6 seconds
+        default: 6.0
+        required: true
+    output:
+      report:
+        title: "Report"
+        type: "report"
+        description: "Report"
+        required: false

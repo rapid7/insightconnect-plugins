@@ -1,0 +1,902 @@
+plugin_spec_version: v2
+name: red_canary
+title: Red Canary
+description: Managed endpoint detection and response
+version: 2.1.2
+vendor: rapid7
+status: ["supported"]
+tags:
+- red canary
+- detection
+- response
+enable_cache: true
+types:
+  resource_link:
+    href:
+      title: Href
+      description: Link to a resource
+      type: string
+  portal_user_attributes:
+    email:
+      title: Email
+      description: Email of the user
+      type: string
+    name:
+      title: Name
+      description: Name of the user
+      type: string
+  portal_user:
+    type:
+      title: Type
+      description: Type of object
+      type: string
+    attributes:
+      title: Attributes
+      description: Attributes of the resource
+      type: portal_user_attributes
+  detection_engine_observations:
+    category:
+      description: Category
+      title: Category
+      type: string
+    description:
+      description: Description
+      title: Description
+      type: string
+  detection_classification:
+    superclassification:
+      title: Superclassification
+      description: The classification of this detection
+      type: string
+    subclassification:
+      title: Subclassification
+      description: The subclassifications of this detection
+      type: '[]string'
+  detection_attributes_last_remediated_status:
+    reason:
+      title: Reason
+      description: The reason this detection was not remediated
+      type: string
+      enum:
+      - remediation_unwarranted
+      - sanctioned_activity
+      - false_positive
+    remediation_state:
+      title: Remediation State
+      description: The state the detection is currently in
+      type: string
+      enum:
+      - remediated
+      - not_remediated_false_positive
+      - not_remediated_sanctioned_activity
+      - not_remediated_unwarranted
+    marked_by:
+      title: Marked By
+      description: The user that marked this detection as remediated
+      type: portal_user
+    marked_at:
+      title: Marked At
+      description: The time this detection was marked as not remediated
+      type: date
+  detection_attributes:
+    headline:
+      title: Headline
+      description: Human readable text about the detection
+      type: string
+    confirmed_at:
+      title: Confirmed At
+      description: The date the detection was confirmed
+      type: date
+    summary:
+      description: Summary
+      title: A summary of information about the detection
+      type: string
+    severity:
+      title: Severity
+      description: The severity of the detection. High, medium, or low
+      type: string
+    last_activity_seen_at:
+      title: Last Activity Seen At
+      description: The last time this detection was seen on your system
+      type: date
+    classification:
+      title: Classification
+      description: The classification of this detection
+      type: detection_classification
+    time_of_occurence:
+      title: Time of Occurence
+      description: The time the detection was confirmed as a threat by Red Canary
+      type: date
+    last_acknowledged_at:
+      title: Last Acknowledged At
+      description: The time the detection was acknowledged
+      type: date
+    last_acknowledged_by:
+      title: Last Acknowledged By
+      description: The user who acknowledged the detection
+      type: portal_user
+    last_remediated_status:
+      title: Last Remediated Status
+      description: Last remediated status
+      type: detection_attributes_last_remediated_status
+  resource_relationship_links:
+    related:
+      title: Related
+      description: Link to resource
+      type: string
+  resource_relationship_data:
+    type:
+      title: Type
+      description: Type of object
+      type: string
+    id:
+      title: ID
+      description: ID
+      type: integer
+  resource_relationship:
+    links:
+      title: Links
+      description: Links
+      type: resource_relationship_links
+    data:
+      title: Data
+      description: Data
+      type: resource_relationship_data
+  detector_resource_relationship_data:
+    type:
+      title: Type
+      description: Type of object
+      type: string
+    id:
+      title: ID
+      description: ID
+      type: string
+  detector_resource_relationship:
+    links:
+      title: Links
+      description: Links
+      type: resource_relationship_links
+    data:
+      title: Data
+      description: Data
+      type: detector_resource_relationship_data
+  detection_relationships:
+    affected_endpoint:
+      title: Affected Endpoint
+      description: Affected endpoint
+      type: resource_relationship
+    related_endpoint_user:
+      title: Related Endpoint User
+      description: Related endpoint user
+      type: resource_relationship
+  detection_links:
+    self:
+      title: Self
+      description: Self
+      type: resource_link
+    activity_timeline:
+      title: Activity Timeline
+      description: Activity timeline
+      type: resource_link
+    detectors:
+      title: Detectors
+      description: Detectors
+      type: resource_link
+    response_plans:
+      title: Response Plans
+      description: Response plans
+      type: resource_link
+  detection:
+    type:
+      title: Type
+      description: Type of object
+      type: string
+    id:
+      description: ID
+      title: Unique identifier of the detection
+      type: integer
+    attributes:
+      title: Attributes
+      description: Attributes of the resource
+      type: detection_attributes
+    relationships:
+      title: Relationships
+      description: Resources related to this object
+      type: detection_relationships
+    links:
+      title: Links
+      description: ''
+      type: detection_links
+  indicator_attributes:
+    md5:
+      title: MD5
+      description: MD5
+      type: string
+    path:
+      title: Path
+      description: Path
+      type: string
+    name:
+      title: Name
+      description: Name
+      type: string
+    name_defanged:
+      title: Name Defanged
+      description: Defanged name
+      type: string
+    ip_address:
+      title: IP Address
+      description: IP address
+      type: string
+    ip_address_defanged:
+      title: IP Address Defanged
+      description: Defanged IP address
+      type: string
+    ip_address_matches_rfc_1918:
+      title: IP Address Matches RFC 1918
+      description: Does IP address match RFC 1918
+      type: boolean
+    ip_address_matches_rfc_4193:
+      title: IP Address Matches RFC 4193
+      description: Does IP address match RFC 4193
+      type: boolean
+    ip_address_is_link_local:
+      title: IP Address Is Link Local
+      description: Is IP address a local link
+      type: boolean
+  indicator:
+    type:
+      description: Type
+      title: Type
+      type: string
+    attributes:
+      title: Attributes
+      description: Attributes
+      type: indicator_attributes
+    relationships:
+      title: Relationships
+      description: Relationships
+      type: object
+    links:
+      title: Links
+      description: Links
+      type: object
+  activity_monitor_links:
+    self:
+      title: Self
+      description: Self
+      type: resource_link
+    matches:
+      title: Matches
+      description: Matches
+      type: resource_link
+  activity_monitor_attributes:
+    name:
+      title: Name
+      decription: Descriptive name of the activity monitor
+      type: string
+    active:
+      title: Active
+      description: If the activity monitor is active and identifying matches
+      type: boolean
+    type:
+      title: Type
+      description: Type of the activity monitor, such as file_modification
+      type: string
+    file_modification_types_monitored:
+      title: File Modification Types Monitored
+      description: Types of file modifications this monitor will trigger upon
+      type: '[]string'
+    file_paths_monitored:
+      title: File Paths Monitored
+      description: List of case insensitive file path globstrings this monitor will
+        trigger upon
+      type: '[]string'
+    usernames_matched:
+      title: Usernames Matched
+      description: List of case insensitive globstrings that select which usernames
+        this monitor will match against
+      type: '[]string'
+    usernames_excluded:
+      title: Usernames Excluded
+      description: List of case insensitive globstrings that select which usernames
+        this monitor will filter out
+      type: '[]string'
+  activity_monitor:
+    type:
+      title: Type
+      description: Type
+      type: string
+    id:
+      title: ID
+      description: Unique identifier of the activity_monitor
+      type: integer
+    attributes:
+      title: Attributes
+      description: Attributes of the resource
+      type: activity_monitor_attributes
+    links:
+      title: Links
+      description: Resources associated with this object
+      type: activity_monitor_links
+  activity_monitor_match_attributes:
+    activity_monitor_id:
+      title: Activity Monitor ID
+      description: The ID of the Activity Monitor that created this hit
+      type: integer
+    hit_at:
+      title: Hit At
+      description: Time of the activity that triggered the activity monitored; this
+        time is as reported by the endpoint, and thus treated with suspicion
+      type: date
+    process_native_id:
+      title: Process Native ID
+      description: Unique identifier of the Process that exhibited the behavior that
+        triggered the monitor
+      type: string
+    file_path:
+      title: File Path
+      description: Full path of the file that matched the activity monitor
+      type: string
+    modification_type:
+      title: Modification Type
+      description: The types of file modification this monitor triggered upon
+      type: string
+  activity_monitor_match_relationships:
+    affected_endpoint:
+      title: Affected Endpoint
+      description: Affected endpoint
+      type: resource_relationship
+    related_endpoint_user:
+      title: Related Endpoint User
+      description: Related endpoint user
+      type: resource_relationship
+  activity_monitor_match_links:
+    self:
+      title: Self
+      description: Self
+      type: resource_link
+  activity_monitor_match:
+    type:
+      title: Type
+      description: Type of object
+      type: string
+    id:
+      title: ID
+      description: Unique identifier of activity_monitor_match
+      type: integer
+    attributes:
+      title: Attributes
+      description: Attributes of the resource
+      type: activity_monitor_match_attributes
+    relationships:
+      title: Relationships
+      description: Resources related to this object
+      type: activity_monitor_match_relationships
+    links:
+      title: Links
+      description: Resources associated with this object
+      type: activity_monitor_match_links
+  search_result_attributes:
+    result_association_type:
+      title: Result Association Type
+      description: Type of the association to the IP or MAC address
+      type: string
+  search_result:
+    type:
+      title: Type
+      description: Type of object
+      type: string
+    attributes:
+      title: Attributes
+      description: Attributes of the resource
+      type: search_result_attributes
+  file_attributes:
+    md5:
+      title: MD5
+      description: The MD5 hash associated with the activity, if applicable and known
+      type: string
+    sha256:
+      title: SHA256
+      description: The SHA256 hash associated with the activity, if applicable and
+        known
+      type: string
+    path:
+      title: Path
+      description: The file path associated with the activity, if applicable and known
+      type: string
+    file_type:
+      title: File Type
+      description: The type of file
+      type: string
+  file:
+    type:
+      title: Type
+      description: Type of object
+      type: string
+    attributes:
+      title: Attributes
+      description: Attributes of the resource
+      type: file_attributes
+  process_command_line_attributes:
+    command_line:
+      title: Command Line
+      description: The command line associated with the activity, if applicable and
+        known
+      type: string
+    command_line_decoded:
+      title: Command Line Decoded
+      description: The command line associated with the activity, if applicable and
+        known, after passing through several decoding attempts
+      type: string
+    identified_encodings:
+      title: Identifier Encodings
+      description: Possible encodings that may have been used throughout the command
+        line
+      type: '[]string'
+  process_command_line:
+    type:
+      title: Type
+      description: Type of object
+      type: string
+    attributes:
+      title: Attributes
+      description: Attributes of the resource
+      type: process_command_line_attributes
+  operating_system_process_attributes:
+    started_at:
+      title: Started At
+      description: The time the process started
+      type: date
+    operating_system_pid:
+      title: Operating System PID
+      description: The PID of the process as reported by the operating system
+      type: integer
+    image:
+      title: Image
+      description: The process image associated with the activity, if applicable and
+        known
+      type: file
+    command_line:
+      title: Command Line
+      description: The command line associated with the process
+      type: process_command_line
+  operating_system_process:
+    type:
+      title: Type
+      description: Type of object
+      type: string
+    attributes:
+      title: Attributes
+      description: Attributes of the resource
+      type: operating_system_process_attributes
+  detector_attributes:
+    name:
+      title: Name
+      description: Name of the Red Canary detector
+      type: string
+    description:
+      title: Description
+      description: Description of the activity the detector identifies in Markdown
+        format
+      type: string
+    contributing_intelligence:
+      title: Contributing Intelligence
+      description: The type of adversary intelligence supporting this detector
+      type: string
+    attack_technique_identifiers:
+      title: Attack Technique Identifiers
+      description: The specific ATT&CK Techniques the detector maps to
+      type: '[]string'
+  detector_relationships:
+    attack_techniques:
+      title: Attack Techniques
+      description: Attack techniques
+      type: '[]detector_resource_relationship'
+  detector:
+    type:
+      title: Type
+      description: Type of object
+      type: string
+    id:
+      title: ID
+      description: Unique identifier of the detector
+      type: integer
+    attributes:
+      title: Attributes
+      description: Attributes of the resource
+      type: detector_attributes
+    relationships:
+      title: Relationships
+      description: Resources related to this object
+      type: detector_relationships
+  event_attributes:
+    process:
+      title: Process
+      description: The process associated with the event
+      type: operating_system_process
+    detectors:
+      title: Detectors
+      description: Detectors and MITRE ATT&CK tactics associated with the event
+      type: '[]detector'
+  event_relationships:
+    endpoint:
+      title: Endpoint
+      description: Endpoint
+      type: resource_relationship
+    endpoint_user:
+      title: Endpoint User
+      description: Endpoint user
+      type: resource_relationship
+  event_links:
+    self:
+      title: Self
+      description: Self
+      type: resource_link
+  event:
+    type:
+      title: Type
+      description: Type of object
+      type: string
+    id:
+      title: ID
+      description: Unique identifier of the event
+      type: integer
+    attributes:
+      title: Attributes
+      description: Attributes of the resource
+      type: event_attributes
+    relationships:
+      title: Relationships
+      description: Resources related to this object
+      type: event_relationships
+    links:
+      title: Links
+      description: Resources associated with this object
+      type: event_links
+connection:
+  api_token:
+    type: credential_secret_key
+    title: API Token
+    description: Red Canary API authentication token
+    required: true
+  customer_id:
+    type: string
+    title: Customer ID
+    description: Customer ID or name e.g. example from https://example.my.redcanary.co
+    required: true
+actions:
+  acknowledge_detection:
+    title: Acknowledge Detection
+    description: Mark a detection as acknowledged
+    input:
+      detection_id:
+        title: Detection ID
+        description: ID of detection e.g. 12
+        type: integer
+        required: true
+    output:
+      detection:
+        description: Red Canary detection
+        title: Detection
+        type: detection
+        required: false
+  update_remediation_state:
+    title: Update Remediation State
+    description: Update detection remediation state
+    input:
+      detection_id:
+        title: Detection ID
+        description: ID of detection e.g. 12
+        type: integer
+        required: true
+      remediation_state:
+        title: Remediation State
+        description: Way in which the detection was remediated
+        type: string
+        required: true
+        enum:
+        - remediated
+        - not_remediated_false_positive
+        - not_remediated_sanctioned_activity
+        - not_remediated_unwarranted
+        default: remediated
+      comment:
+        title: Comment
+        description: Comment describing the reason why the detection was remediated
+          in this manner
+        type: string
+        required: false
+    output:
+      detection:
+        description: Red Canary detection
+        title: Detection
+        type: detection
+        required: false
+  retrieve_indicators:
+    title: Retrieve Indicators
+    description: Fetch a list of all indicators of compromise associated with all
+      confirmed detections
+    input:
+      detection_id:
+        title: Detection ID
+        description: ID of detection e.g. 12
+        type: integer
+        required: true
+      max_results:
+        title: Max Results
+        description: Maximum number of indicators to return
+        type: integer
+        required: false
+        default: 100
+    output:
+      indicators:
+        description: Red Canary indicators
+        title: Indicators
+        type: '[]indicator'
+        required: false
+  create_activity_monitor:
+    title: Create Activity Monitor
+    description: Create a new activity monitor
+    input:
+      name:
+        title: Name
+        description: Descriptive name of the activity monitor
+        type: string
+        required: true
+      type:
+        title: Type
+        description: Type of the activity monitor, such as file_modification
+        type: string
+        required: true
+        default: file_modification
+      active:
+        title: Active
+        description: If the activity monitor is active and identifying matches
+        type: boolean
+        required: true
+        default: true
+      file_modification_types_monitored:
+        title: File Modification Types Monitored
+        description: Types of file modifications this monitor will trigger upon
+        type: '[]string'
+        required: true
+      file_paths_monitored:
+        title: File Paths Monitored
+        description: List of case insensitive file path globstrings this monitor will
+          trigger upon
+        type: '[]string'
+        required: true
+      usernames_matched:
+        title: Usernames Matched
+        description: List of case insensitive globstrings that select which usernames
+          this monitor will match against
+        type: '[]string'
+        required: false
+      usernames_excluded:
+        title: Usernames Excluded
+        description: List of case insensitive globstrings that select which usernames
+          this monitor will filter out
+        type: '[]string'
+        required: false
+    output:
+      activity_monitor:
+        title: Activity Monitor
+        description: Newly created actvity monitor
+        type: activity_monitor
+        required: true
+  list_activity_monitors:
+    title: List Activity Monitors
+    description: Fetch a list of activity monitors
+    input:
+      max_results:
+        title: Max Results
+        description: Maximum number of activity monitors to return
+        type: integer
+        required: false
+        default: 100
+    output:
+      activity_monitors:
+        title: Activity Monitors
+        description: List of activity monitors
+        type: '[]activity_monitor'
+        required: true
+  deactivate_activity_monitor:
+    title: Deactivate Activity Monitor
+    description: Deactivate an activity monitor
+    input:
+      activity_monitor_id:
+        title: Activity Monitor ID
+        description: Activity Monitor identifier
+        type: integer
+        required: true
+    output:
+      activity_monitor:
+        title: Activity Monitor
+        description: Deactivated activity monitor
+        type: activity_monitor
+        required: false
+  get_activity_monitor:
+    title: Get Activity Monitor
+    description: Fetch a specific activity monitor by unique identifier
+    input:
+      activity_monitor_id:
+        title: Activity Monitor ID
+        description: Activity Monitor identifier
+        type: integer
+        required: true
+    output:
+      activity_monitor:
+        title: Activity Monitor
+        description: An activity monitor with the given identifier
+        type: activity_monitor
+        required: false
+  list_all_activity_monitor_matches:
+    title: List All Activity Monitor Matches
+    description: Fetch a list of all activity monitor matches, sorted by the creation
+      time of the match
+    input:
+      max_results:
+        title: Max Results
+        description: Maximum number of matches to return
+        type: integer
+        required: false
+        default: 100
+    output:
+      activity_monitor_matches:
+        title: Activity Monitor Matches
+        description: All activity monitor matches
+        type: '[]activity_monitor_match'
+        required: false
+  search_for_endpoint_hostname_usages:
+    title: Search for Endpoint Hostname Usages
+    description: Find usages of an endpoint hostname
+    input:
+      endpoint_hostname:
+        title: Endpoint Hostname
+        description: Endpoint Hostname to find usages for (e.g. foo-endpoint.bardomain.com)
+        type: string
+        required: true
+      max_results:
+        title: Max Results
+        description: Maximum number of results to return
+        type: integer
+        required: false
+        default: 100
+    output:
+      results:
+        title: Results
+        description: Search results
+        required: true
+        type: '[]search_result'
+  search_for_mac_address_usages:
+    title: Search for MAC Address Usages
+    description: Find usages of a MAC address
+    input:
+      mac_address:
+        title: MAC Address
+        description: MAC Address to find usages for (e.g. 00-14-22-01-23-45)
+        type: string
+        required: true
+      max_results:
+        title: Max Results
+        description: Maximum number of results to return
+        type: integer
+        required: false
+        default: 100
+    output:
+      results:
+        title: Results
+        description: Search results
+        required: true
+        type: '[]search_result'
+  search_for_ip_address_usages:
+    title: Search for IP Address Usages
+    description: Find usages of an IP address
+    input:
+      ip_address:
+        title: IP Address
+        description: IPv4 or IPv6 address to find usages for
+        type: string
+        required: true
+      max_results:
+        title: Max Results
+        description: Maximum number of results to return
+        type: integer
+        required: false
+        default: 100
+    output:
+      results:
+        title: Results
+        description: Search results
+        required: true
+        type: '[]search_result'
+  get_event:
+    title: Get Event
+    description: Retrieve an event by unique identifier
+    input:
+      event_id:
+        title: Event ID
+        description: Event ID
+        type: integer
+        required: true
+    output:
+      event:
+        title: Event
+        description: An event with the given identifier
+        type: event
+        required: true
+triggers:
+  new_detections:
+    title: New Detections
+    description: Check for new detections
+    input:
+      frequency:
+        title: Frequency
+        description: How often the trigger should check for new detections in seconds
+        type: integer
+        required: true
+        default: 5
+      date_offset:
+        title: Date Offset
+        description: Date to start pulling detections from
+        type: date
+        required: false
+      force_offset:
+        title: Force Offset
+        description: Force offset date even if a cache exists
+        type: boolean
+        required: false
+    output:
+      detection:
+        description: Red Canary detection
+        title: Detection
+        type: detection
+        required: false
+  new_activity_monitor_matches:
+    title: New Activity Monitor Matches
+    description: Check for new matches for a specific activity monitor
+    input:
+      activity_monitor_id:
+        title: Activity Monitor ID
+        description: Activity Monitor identifier e.g. 12345
+        type: integer
+        required: true
+      frequency:
+        title: Frequency
+        description: How often the trigger should check for new matches in seconds
+        type: integer
+        required: true
+        default: 5
+    output:
+      activity_monitor_match:
+        title: Activity Monitor Match
+        description: New match for a specific activity monitor
+        type: activity_monitor_match
+        required: false
+  new_events:
+    title: New Events
+    description: Check for new events
+    input:
+      frequency:
+        title: Frequency
+        description: How often the trigger should check for new events in seconds
+        type: integer
+        required: true
+        default: 5
+      date_offset:
+        title: Date Offset
+        description: Set past date to pull events from that time forward
+        type: date
+        required: false
+      force_offset:
+        title: Force Offset
+        description: Forces offset no matter whats in the cache
+        type: boolean
+        required: false
+    output:
+      event:
+        title: Event
+        description: New event
+        type: event
+        required: false

@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "action": "get_user_by_email",
+    "input": {
+      "email": ""
+    },
+    "meta": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  }
+}

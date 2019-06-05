@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "add_scan_engine_pool_engine",
+    "meta": {},
+    "input": {
+      "pool_id": 6,
+      "engine_id": 5
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

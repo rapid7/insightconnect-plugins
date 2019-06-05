@@ -1,0 +1,28 @@
+plugin_spec_version: v2
+name: pdf_generator
+title: PDF Generator
+description: The Portable Document Format (PDF) is a file format developed by Adobe
+  in the 1990s to present documents, including text formatting and images, in a manner
+  independent of application software, hardware, and operating systems
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- pdf
+- document
+actions:
+  generate_pdf:
+    title: Generate PDF
+    description: Generate a PDF from a text input
+    input:
+      text:
+        type: string
+        title: Text
+        description: Text input
+        required: true
+    output:
+      pdf:
+        type: bytes
+        title: PDF
+        description: Generated PDF
+        required: true

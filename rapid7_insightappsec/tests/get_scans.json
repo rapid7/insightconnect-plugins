@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_scans",
+    "meta": {},
+    "input": {
+      "index": 0,
+      "size": 50,
+      "sort": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://us.api.insight.rapid7.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

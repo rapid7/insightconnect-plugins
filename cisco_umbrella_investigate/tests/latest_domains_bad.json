@@ -1,0 +1,16 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "latest_domains",
+    "input": {
+      "IP": "46.161.999.43.11"
+    }
+  },
+  "version": "v1"
+}

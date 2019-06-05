@@ -1,0 +1,1398 @@
+plugin_spec_version: v2
+name: github
+title: GitHub
+vendor: rapid7
+status: ["unsupported"]
+description: GitHub is a web-based Git or version control repository and Internet
+  hosting service
+version: 2.0.1
+tags:
+- github
+- issue
+- authentication
+types:
+  organization:
+    avatar_url:
+      type: string
+      required: false
+    events_url:
+      type: string
+      required: false
+    followers_url:
+      type: string
+      required: false
+    following_url:
+      type: string
+      required: false
+    gists_url:
+      type: string
+      required: false
+    gravatar_id:
+      type: string
+      required: false
+    html_url:
+      type: string
+      required: false
+    id:
+      type: integer
+      required: false
+    login:
+      type: string
+      required: false
+    organizations_url:
+      type: string
+      required: false
+    received_events_url:
+      type: string
+      required: false
+    repos_url:
+      type: string
+      required: false
+    site_admin:
+      type: boolean
+      required: false
+    starred_url:
+      type: string
+      required: false
+    subscriptions_url:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+  permissions:
+    admin:
+      type: boolean
+      required: false
+    pull:
+      type: boolean
+      required: false
+    push:
+      type: boolean
+      required: false
+  parent:
+    allow_merge_commit:
+      type: boolean
+      required: false
+    allow_rebase_merge:
+      type: boolean
+      required: false
+    allow_squash_merge:
+      type: boolean
+      required: false
+    archive_url:
+      type: string
+      required: false
+    assignees_url:
+      type: string
+      required: false
+    blobs_url:
+      type: string
+      required: false
+    branches_url:
+      type: string
+      required: false
+    clone_url:
+      type: string
+      required: false
+    collaborators_url:
+      type: string
+      required: false
+    comments_url:
+      type: string
+      required: false
+    commits_url:
+      type: string
+      required: false
+    compare_url:
+      type: string
+      required: false
+    contents_url:
+      type: string
+      required: false
+    contributors_url:
+      type: string
+      required: false
+    created_at:
+      type: string
+      required: false
+    default_branch:
+      type: string
+      required: false
+    deployments_url:
+      type: string
+      required: false
+    description:
+      type: string
+      required: false
+    downloads_url:
+      type: string
+      required: false
+    events_url:
+      type: string
+      required: false
+    fork:
+      type: boolean
+      required: false
+    forks_count:
+      type: integer
+      required: false
+    forks_url:
+      type: string
+      required: false
+    full_name:
+      type: string
+      required: false
+    git_commits_url:
+      type: string
+      required: false
+    git_refs_url:
+      type: string
+      required: false
+    git_tags_url:
+      type: string
+      required: false
+    git_url:
+      type: string
+      required: false
+    has_downloads:
+      type: boolean
+      required: false
+    has_issues:
+      type: boolean
+      required: false
+    has_pages:
+      type: boolean
+      required: false
+    has_wiki:
+      type: boolean
+      required: false
+    homepage:
+      type: string
+      required: false
+    hooks_url:
+      type: string
+      required: false
+    html_url:
+      type: string
+      required: false
+    id:
+      type: integer
+      required: false
+    issue_comment_url:
+      type: string
+      required: false
+    issue_events_url:
+      type: string
+      required: false
+    issues_url:
+      type: string
+      required: false
+    keys_url:
+      type: string
+      required: false
+    labels_url:
+      type: string
+      required: false
+    languages_url:
+      type: string
+      required: false
+    merges_url:
+      type: string
+      required: false
+    milestones_url:
+      type: string
+      required: false
+    mirror_url:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    network_count:
+      type: integer
+      required: false
+    notifications_url:
+      type: string
+      required: false
+    open_issues_count:
+      type: integer
+      required: false
+    owner:
+      type: organization
+      required: false
+    permissions:
+      type: permissions
+      required: false
+    private:
+      type: boolean
+      required: false
+    pulls_url:
+      type: string
+      required: false
+    pushed_at:
+      type: string
+      required: false
+    releases_url:
+      type: string
+      required: false
+    size:
+      type: integer
+      required: false
+    ssh_url:
+      type: string
+      required: false
+    stargazers_count:
+      type: integer
+      required: false
+    stargazers_url:
+      type: string
+      required: false
+    statuses_url:
+      type: string
+      required: false
+    subscribers_count:
+      type: integer
+      required: false
+    subscribers_url:
+      type: string
+      required: false
+    subscription_url:
+      type: string
+      required: false
+    svn_url:
+      type: string
+      required: false
+    tags_url:
+      type: string
+      required: false
+    teams_url:
+      type: string
+      required: false
+    topics:
+      type: '[]string'
+      required: false
+    trees_url:
+      type: string
+      required: false
+    updated_at:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+    watchers_count:
+      type: integer
+      required: false
+  repo:
+    allow_merge_commit:
+      type: boolean
+      required: false
+    allow_rebase_merge:
+      type: boolean
+      required: false
+    allow_squash_merge:
+      type: boolean
+      required: false
+    archive_url:
+      type: string
+      required: false
+    assignees_url:
+      type: string
+      required: false
+    blobs_url:
+      type: string
+      required: false
+    branches_url:
+      type: string
+      required: false
+    clone_url:
+      type: string
+      required: false
+    collaborators_url:
+      type: string
+      required: false
+    comments_url:
+      type: string
+      required: false
+    commits_url:
+      type: string
+      required: false
+    compare_url:
+      type: string
+      required: false
+    contents_url:
+      type: string
+      required: false
+    contributors_url:
+      type: string
+      required: false
+    created_at:
+      type: string
+      required: false
+    default_branch:
+      type: string
+      required: false
+    deployments_url:
+      type: string
+      required: false
+    description:
+      type: string
+      required: false
+    downloads_url:
+      type: string
+      required: false
+    events_url:
+      type: string
+      required: false
+    fork:
+      type: boolean
+      required: false
+    forks_count:
+      type: integer
+      required: false
+    forks_url:
+      type: string
+      required: false
+    full_name:
+      type: string
+      required: false
+    git_commits_url:
+      type: string
+      required: false
+    git_refs_url:
+      type: string
+      required: false
+    git_tags_url:
+      type: string
+      required: false
+    git_url:
+      type: string
+      required: false
+    has_downloads:
+      type: boolean
+      required: false
+    has_issues:
+      type: boolean
+      required: false
+    has_pages:
+      type: boolean
+      required: false
+    has_wiki:
+      type: boolean
+      required: false
+    homepage:
+      type: string
+      required: false
+    hooks_url:
+      type: string
+      required: false
+    html_url:
+      type: string
+      required: false
+    id:
+      type: integer
+      required: false
+    issue_comment_url:
+      type: string
+      required: false
+    issue_events_url:
+      type: string
+      required: false
+    issues_url:
+      type: string
+      required: false
+    keys_url:
+      type: string
+      required: false
+    labels_url:
+      type: string
+      required: false
+    languages_url:
+      type: string
+      required: false
+    merges_url:
+      type: string
+      required: false
+    milestones_url:
+      type: string
+      required: false
+    mirror_url:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    network_count:
+      type: integer
+      required: false
+    notifications_url:
+      type: string
+      required: false
+    open_issues_count:
+      type: integer
+      required: false
+    organization:
+      type: organization
+      required: false
+    owner:
+      type: organization
+      required: false
+    parent:
+      type: parent
+      required: false
+    permissions:
+      type: permissions
+      required: false
+    private:
+      type: boolean
+      required: false
+    pulls_url:
+      type: string
+      required: false
+    pushed_at:
+      type: string
+      required: false
+    releases_url:
+      type: string
+      required: false
+    size:
+      type: integer
+      required: false
+    source:
+      type: parent
+      required: false
+    ssh_url:
+      type: string
+      required: false
+    stargazers_count:
+      type: integer
+      required: false
+    stargazers_url:
+      type: string
+      required: false
+    statuses_url:
+      type: string
+      required: false
+    subscribers_count:
+      type: integer
+      required: false
+    subscribers_url:
+      type: string
+      required: false
+    subscription_url:
+      type: string
+      required: false
+    svn_url:
+      type: string
+      required: false
+    tags_url:
+      type: string
+      required: false
+    teams_url:
+      type: string
+      required: false
+    topics:
+      type: '[]string'
+      required: false
+    trees_url:
+      type: string
+      required: false
+    updated_at:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+    watchers_count:
+      type: integer
+      required: false
+  assignee:
+    avatar_url:
+      type: string
+      required: false
+    events_url:
+      type: string
+      required: false
+    followers_url:
+      type: string
+      required: false
+    following_url:
+      type: string
+      required: false
+    gists_url:
+      type: string
+      required: false
+    gravatar_id:
+      type: string
+      required: false
+    html_url:
+      type: string
+      required: false
+    id:
+      type: integer
+      required: false
+    login:
+      type: string
+      required: false
+    organizations_url:
+      type: string
+      required: false
+    received_events_url:
+      type: string
+      required: false
+    repos_url:
+      type: string
+      required: false
+    site_admin:
+      type: boolean
+      required: false
+    starred_url:
+      type: string
+      required: false
+    subscriptions_url:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+  label:
+    color:
+      type: string
+      required: false
+    default:
+      type: boolean
+      required: false
+    id:
+      type: integer
+      required: false
+    name:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+  milestone:
+    closed_at:
+      type: string
+      required: false
+    closed_issues:
+      type: integer
+      required: false
+    created_at:
+      type: string
+      required: false
+    creator:
+      type: assignee
+      required: false
+    description:
+      type: string
+      required: false
+    due_on:
+      type: string
+      required: false
+    html_url:
+      type: string
+      required: false
+    id:
+      type: integer
+      required: false
+    labels_url:
+      type: string
+      required: false
+    number:
+      type: integer
+      required: false
+    open_issues:
+      type: integer
+      required: false
+    state:
+      type: string
+      required: false
+    title:
+      type: string
+      required: false
+    updated_at:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+  pull_request:
+    diff_url:
+      type: string
+      required: false
+    html_url:
+      type: string
+      required: false
+    patch_url:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+  issue:
+    assignee:
+      type: assignee
+      required: false
+    assignees:
+      type: '[]assignee'
+      required: false
+    body:
+      type: string
+      required: false
+    comments:
+      type: integer
+      required: false
+    comments_url:
+      type: string
+      required: false
+    created_at:
+      type: string
+      required: false
+    events_url:
+      type: string
+      required: false
+    html_url:
+      type: string
+      required: false
+    id:
+      type: integer
+      required: false
+    labels:
+      type: '[]label'
+      required: false
+    labels_url:
+      type: string
+      required: false
+    locked:
+      type: boolean
+      required: false
+    milestone:
+      type: milestone
+      required: false
+    number:
+      type: integer
+      required: false
+    pull_request:
+      type: pull_request
+      required: false
+    repository_url:
+      type: string
+      required: false
+    state:
+      type: string
+      required: false
+    title:
+      type: string
+      required: false
+    updated_at:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+    user:
+      type: assignee
+      required: false
+  collaborator_repository:
+    id:
+      type: integer
+      required: false
+    node_id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    full_name:
+      type: string
+      required: false
+    owner:
+      type: organization
+      required: false
+    private:
+      type: boolean
+      required: false
+    html_url:
+      type: string
+      required: false
+    description:
+      type: string
+      required: false
+    fork:
+      type: boolean
+      required: false
+    url:
+      type: string
+      required: false
+    archive_url:
+      type: string
+      required: false
+    assignees_url:
+      type: string
+      required: false
+    blobs_url:
+      type: string
+      required: false
+    branches_url:
+      type: string
+      required: false
+    collaborators_url:
+      type: string
+      required: false
+    comments_url:
+      type: string
+      required: false
+    commits_url:
+      type: string
+      required: false
+    compare_url:
+      type: string
+      required: false
+    contents_url:
+      type: string
+      required: false
+    contributors_url:
+      type: string
+      required: false
+    deployments_url:
+      type: string
+      required: false
+    downloads_url:
+      type: string
+      required: false
+    events_url:
+      type: string
+      required: false
+    forks_url:
+      type: string
+      required: false
+    git_commits_url:
+      type: string
+      required: false
+    git_refs_url:
+      type: string
+      required: false
+    git_tags_url:
+      type: string
+      required: false
+    git_url:
+      type: string
+      required: false
+    issue_comment_url:
+      type: string
+      required: false
+    issue_events_url:
+      type: string
+      required: false
+    issues_url:
+      type: string
+      required: false
+    keys_url:
+      type: string
+      required: false
+    labels_url:
+      type: string
+      required: false
+    languages_url:
+      type: string
+      required: false
+    merges_url:
+      type: string
+      required: false
+    milestones_url:
+      type: string
+      required: false
+    notifications_url:
+      type: string
+      required: false
+    pulls_url:
+      type: string
+      required: false
+    releases_url:
+      type: string
+      required: false
+    ssh_url:
+      type: string
+      required: false
+    stargazers_url:
+      type: string
+      required: false
+    statuses_url:
+      type: string
+      required: false
+    subscribers_url:
+      type: string
+      required: false
+    subscription_url:
+      type: string
+      required: false
+    tags_url:
+      type: string
+      required: false
+    teams_url:
+      type: string
+      required: false
+    trees_url:
+      type: string
+      required: false
+  collaborator_invite:
+    login:
+      type: string
+      required: false
+    id:
+      type: integer
+      required: false
+    node_id:
+      type: string
+      required: false
+    avatar_url:
+      type: string
+      required: false
+    gravatar_id:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+    html_url:
+      type: string
+      required: false
+    followers_url:
+      type: string
+      required: false
+    following_url:
+      type: string
+      required: false
+    gists_url:
+      type: string
+      required: false
+    starred_url:
+      type: string
+      required: false
+    subscriptions_url:
+      type: string
+      required: false
+    organizations_url:
+      type: string
+      required: false
+    repos_url:
+      type: string
+      required: false
+    events_url:
+      type: string
+      required: false
+    received_events_url:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+    site_admin:
+      type: boolean
+      required: false
+  add_collaborator:
+    id:
+      type: integer
+      required: false
+    repository:
+      type: collaborator_repository
+      required: false
+    invitee:
+      type: collaborator_invite
+      required: false
+    inviter:
+      type: collaborator_invite
+      required: false
+    permission:
+      type: string
+      required: false
+    created_at:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+    html_url:
+      type: string
+      required: false
+  membership_user:
+    avatar_url:
+      description: Avatar URL
+      title: Avatar URL
+      type: string
+      required: false
+    events_url:
+      description: Events URL
+      title: Events URL
+      type: string
+      required: false
+    followers_url:
+      description: Followers URL
+      title: Followers URL
+      type: string
+      required: false
+    following_url:
+      description: Following URL
+      title: Following URL
+      type: string
+      required: false
+    gists_url:
+      description: Gists URL
+      title: Gists URL
+      type: string
+      required: false
+    gravatar_id:
+      description: Gravatar ID
+      title: Gravatar ID
+      type: string
+      required: false
+    html_url:
+      description: HTML URL
+      title: HTML URL
+      type: string
+      required: false
+    id:
+      description: ID
+      title: ID
+      type: integer
+      required: false
+    login:
+      description: Login
+      title: Login
+      type: string
+      required: false
+    node_id:
+      description: Node ID
+      title: Node ID
+      type: string
+      required: false
+    organizations_url:
+      description: Organizations URL
+      title: Organizations URL
+      type: string
+      required: false
+    received_events_url:
+      description: Received Events URL
+      title: Received Events URL
+      type: string
+      required: false
+    repos_url:
+      description: Repos URL
+      title: Repos URL
+      type: string
+      required: false
+    site_admin:
+      description: Site admin
+      title: Site Admin
+      type: boolean
+      required: false
+    starred_url:
+      description: Starred URL
+      title: Starred URL
+      type: string
+      required: false
+    subscriptions_url:
+      description: Subscriptions URL
+      title: Subscriptions URL
+      type: string
+      required: false
+    type:
+      description: Type
+      title: Type
+      type: string
+      required: false
+    url:
+      description: URL
+      title: URL
+      type: string
+      required: false
+  membership_organization:
+    avatar_url:
+      description: Membership organization
+      title: Membership Organization
+      type: string
+      required: false
+    description:
+      description: Description
+      title: Description
+      type: string
+      required: false
+    events_url:
+      description: Events URL
+      title: Events URL
+      type: string
+      required: false
+    hooks_url:
+      description: Hooks URL
+      title: Hooks URL
+      type: string
+      required: false
+    id:
+      description: ID
+      title: ID
+      type: integer
+      required: false
+    issues_url:
+      description: Issues URL
+      title: Issues URL
+      type: string
+      required: false
+    login:
+      description: Login
+      title: Login
+      type: string
+      required: false
+    members_url:
+      description: Members URL
+      title: Members URL
+      type: string
+      required: false
+    node_id:
+      description: Node ID
+      title: Node ID
+      type: string
+      required: false
+    public_members_url:
+      description: Public Members URL
+      title: Public Members URL
+      type: string
+      required: false
+    repos_url:
+      description: Repos URL
+      title: Repos URL
+      type: string
+      required: false
+    url:
+      description: URL
+      title: URL
+      type: string
+      required: false
+connection:
+  credentials:
+    title: Account Credentials
+    description: GitHub credentials
+    type: credential_username_password
+    required: true
+actions:
+  remove:
+    title: Remove User
+    description: Remove user
+    input:
+      username:
+        type: string
+        description: Username to remove
+        required: true
+      organization:
+        type: string
+        description: Remove from organization
+        required: false
+      repository:
+        type: string
+        description: Remove from repository
+        required: false
+    output:
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+  create:
+    title: Create Issue
+    description: Create an issue ticket
+    input:
+      title:
+        type: string
+        description: Title of issue
+        required: true
+      body:
+        type: string
+        description: Body text of issue
+        required: true
+      labels:
+        type: string
+        description: GitHub search tags delimited by commas
+        required: false
+      repository:
+        type: string
+        description: Repository to post issue
+        required: true
+      organization:
+        type: string
+        description: Organizational owner of repository
+        required: false
+      assignee:
+        type: string
+        description: User to assign this issue to
+        required: false
+      milestone:
+        type: number
+        description: ID of the milestone to associate this issue with
+        required: false
+    output:
+      url:
+        title: URL
+        description: URL
+        type: string
+        required: false
+  user:
+    title: Get User
+    description: Get user information
+    input:
+      username:
+        type: string
+        description: GitHub username
+        required: true
+    output:
+      name:
+        title: Name
+        description: Name
+        type: string
+        required: false
+      email:
+        title: Email
+        description: Email
+        type: string
+        required: false
+      url:
+        title: URL
+        description: URL
+        type: string
+        required: false
+      avatar:
+        title: Avatar
+        description: Avatar
+        type: string
+        required: false
+      bio:
+        title: Bio
+        description: Bio
+        type: string
+        required: false
+  get_repo:
+    title: Get Repo
+    description: Retrieve details, including ID, about a specific repo
+    input:
+      title:
+        type: string
+        title: Title
+        description: Name of the repository
+        required: true
+      owner:
+        type: string
+        title: Owner
+        description: Owner of the repository
+        required: true
+    output:
+      data:
+        type: repo
+        title: Data
+        description: Repository details and data
+        required: true
+  search:
+    title: Search
+    description: Search GitHub for data
+    input:
+      search_type:
+        type: string
+        title: Search Type
+        description: The type of search to perform
+        enum:
+        - Repositories
+        - Commits
+        - Code
+        - Issues
+        required: false
+      query:
+        type: string
+        description: Query to match against
+        title: Query
+        required: false
+    output:
+      results:
+        title: Results
+        description: Results
+        type: object
+        required: false
+  get_my_issues:
+    title: Get My Issues
+    description: Retrieve all issues assigned to the currently authenticated user
+    output:
+      issues:
+        type: '[]issue'
+        title: Issues
+        description: An array of the issues assigned to the current user
+        required: false
+  get_issues_by_repo:
+    title: Get Issues by Repo
+    description: Retrieve all issues currently open on the specified repo
+    input:
+      title:
+        type: string
+        title: Title
+        description: Name of the repository
+        required: true
+      owner:
+        type: string
+        title: Owner
+        description: Owner of the repository
+        required: true
+    output:
+      issues:
+        type: '[]issue'
+        title: Issues
+        description: An array of the issues open on the specified repo
+        required: false
+  add_collaborator:
+    title: Add Collaborator
+    description: Adds a user as a collaborator to a GitHub repository
+    input:
+      username:
+        type: string
+        title: Username
+        description: Username to add as a collaborator
+        required: true
+      organization:
+        type: string
+        title: Organization
+        description: Organization the repository is under
+        required: false
+      repository:
+        type: string
+        title: Repository
+        description: Repository to add user as a collaborator
+        required: false
+      permission:
+        type: string
+        title: Permission
+        description: The permission to grant the collaborator. Only valid on organization-owned
+          repositories
+        enum:
+        - pull
+        - push
+        - admin
+        default: push
+        required: false
+    output:
+      results:
+        title: Results
+        description: Response from adding a new collaborator
+        type: add_collaborator
+        required: false
+  add_membership:
+    title: Add Membership
+    description: Add or update user's membership in an organization
+    input:
+      organization:
+        title: Organization
+        description: The organization that user will be added or updated to
+        type: string
+        required: false
+      username:
+        title: Username
+        description: The user that will be added or updated
+        type: string
+        required: false
+      role:
+        title: Role
+        description: The role to give the user in the organization
+        type: string
+        enum:
+        - admin
+        - member
+        default: member
+        required: false
+    output:
+      url:
+        description: URL
+        title: URL
+        type: string
+        required: false
+      state:
+        description: State of users membership
+        title: State
+        type: string
+        required: false
+      role:
+        description: Role of users membership
+        title: Role
+        type: string
+        required: false
+      user:
+        description: User
+        title: User
+        type: membership_user
+        required: false
+      organization:
+        description: Organization
+        title: Organization
+        type: membership_organization
+        required: false
+      organization_url:
+        description: Organization URL
+        title: Organization URL
+        type: string
+        required: false
+  block_user:
+    title: Block User
+    description: Block a user
+    input:
+      username:
+        type: string
+        description: Username to block
+        required: true
+    output:
+      success:
+        title: Status
+        description: Whether the user was unblocked
+        type: boolean
+        required: true
+  unblock_user:
+    title: Unblock User
+    description: Unblock a user
+    input:
+      username:
+        type: string
+        description: Username to unblock
+        required: true
+    output:
+      success:
+        title: Success
+        description: Whether the user was unblocked
+        type: boolean
+        required: true
+triggers:
+  issue:
+    title: Issue
+    description: Monitor new issues
+    input:
+      organization:
+        type: string
+        description: Return issues of a specific organization
+        required: false
+      repository:
+        type: string
+        description: Return issues of a specific repository
+        required: true
+      assignee:
+        type: string
+        description: Username of assignee
+        required: false
+      frequency:
+        type: integer
+        description: Poll frequency in seconds
+        default: 300
+        required: false
+    output:
+      issue:
+        title: Issue
+        description: Issue
+        type: object
+        required: false

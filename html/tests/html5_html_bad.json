@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "html5",
+    "input": {
+      "doc": "kjbjkbkhjbkjbkj"
+    },
+    "connection": {},
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

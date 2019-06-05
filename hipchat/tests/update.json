@@ -1,0 +1,28 @@
+{
+  "body": {
+    "action": "update",
+    "input": {
+      "id_or_email": "",
+      "name": "",
+      "roles": [],
+      "title": "Update User API",
+      "presence": {},
+      "mention_name": "",
+      "is_group_admin": false,
+      "timezone": "UTC",
+      "password": "",
+      "email": ""
+    },
+    "connection": {
+      "host": "https://hipchat.com/",
+      "version": "v2",
+      "credentials": {
+        "username": "",
+        "password": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

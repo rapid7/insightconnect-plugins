@@ -1,0 +1,59 @@
+plugin_spec_version: v2
+name: dumbno
+title: Dumbno
+vendor: rapid7
+status: ["unsupported"]
+description: Flow shunting for Arista switches using EOS
+version: 1.0.0
+tags:
+- dumbno
+- blocking
+- arista
+- firewall
+enable_cache: false
+connection:
+  host:
+    type: string
+    description: Dumbno Host
+    required: true
+  port:
+    type: integer
+    description: Dumbno Port
+    default: 9000
+    required: true
+actions:
+  add_acl:
+    title: Add ACL
+    description: Add ACL to Arista Switch
+    input:
+      srcip:
+        title: Source IP
+        description: Source IP
+        type: string
+        required: false
+      dstip:
+        title: Destination IP
+        description: Destination IP
+        type: string
+        required: false
+      proto:
+        title: Protocol
+        description: Protocol
+        type: string
+        required: false
+      sport:
+        title: Source Port
+        description: Source Port
+        type: string
+        required: false
+      dport:
+        title: Destination Port
+        description: Destination Port
+        type: string
+        required: false
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true

@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "update_site_excluded_asset_groups",
+    "meta": {},
+    "input": {
+      "excluded_asset_groups": [],
+      "id": 0,
+      "overwrite": true
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

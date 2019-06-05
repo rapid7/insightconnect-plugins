@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "remove_file",
+    "meta": {},
+    "input": {
+      "file_path": "assets/icon.png"
+    },
+    "connection": {
+      "url": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

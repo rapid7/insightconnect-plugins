@@ -1,0 +1,486 @@
+plugin_spec_version: v2
+name: gitlab
+title: GitLab
+vendor: rapid7
+status: ["unsupported"]
+description: GitLab is a next generation developer collaboration software with version
+  control capabilities
+version: 1.0.0
+tags:
+- gitlab
+- version control
+- repository
+- manage
+- project
+- snippet
+types:
+  ssh_output:
+    id:
+      title: ID
+      description: SSH enumerated ID
+      type: integer
+      required: false
+    title:
+      title: Title
+      description: SSH Key title
+      type: string
+      required: false
+    key:
+      title: SSH Key
+      description: RSA SSH key
+      type: string
+      required: false
+    created_at:
+      title: Created At
+      description: Date SSH was created
+      type: date
+      required: false
+  user_output:
+    name:
+      title: Name
+      description: User full name
+      type: string
+      required: false
+    avatar_url:
+      title: Avatar URL
+      description: User avatar URL
+      type: string
+      required: false
+    state:
+      title: State
+      description: 'User state ''Active'' or ''Inactive'' '
+      type: string
+      required: false
+    web_url:
+      title: Web URL
+      description: User profile URL
+      type: string
+      required: false
+    id:
+      title: ID
+      description: Unique user ID
+      type: integer
+      required: false
+    username:
+      title: Username
+      description: User's username
+      type: string
+      required: false
+  milestone_output:
+    id:
+      title: ID
+      description: Unique milestone ID
+      type: integer
+      required: false
+    iid:
+      title: IID
+      description: Unique ID only in scope of a single project
+      type: integer
+      required: false
+    project_id:
+      title: Project ID
+      description: Project ID
+      type: integer
+      required: false
+    title:
+      title: Title
+      description: Project title
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Project Description
+      type: string
+      required: false
+    state:
+      title: State
+      description: Project State e.g. 'Opened', 'Closed'
+      type: string
+      required: false
+    created_at:
+      title: Created At
+      description: Date project was created
+      type: date
+      required: false
+    updated_at:
+      title: Updated At
+      description: Date project was updated
+      type: date
+      required: false
+    due_date:
+      title: Due Date
+      description: Date project is to be closed
+      type: date
+      required: false
+  issue_input:
+    project_id:
+      title: Project ID
+      type: integer
+      description: ID of project
+      required: true
+    title:
+      title: Issue title
+      type: string
+      description: The title of an issue
+      required: true
+    description:
+      title: Description title
+      type: string
+      description: The description of an issue
+      required: false
+    confidential:
+      title: Confidential
+      type: boolean
+      description: Set an issue to be confidential
+      required: false
+    assignee_ids:
+      title: Assignees
+      type: '[]integer'
+      description: The ID of a user to assign issue
+      required: false
+    milestone_id:
+      title: Milestone
+      type: integer
+      description: The ID of a milestone to assign issue
+      required: false
+    labels:
+      title: Labels
+      type: string
+      description: Comma-separated label names for an issue
+      required: false
+    created_at:
+      title: Created At
+      type: date
+      description: Date, ISO 8601 formatted (requires admin or project owner rights)
+      required: false
+    due_date:
+      title: Due Date
+      type: date
+      description: Date time string in the format YEAR-MONTH-DAY
+      required: false
+    merge_request:
+      title: Merge Request To Resolve Discussions Of
+      type: integer
+      description: The IID of a merge request in which to resolve all issues
+      required: false
+    discussion_resolve:
+      title: Discussion To Resolve
+      type: string
+      description: The ID of a discussion to resolve
+      required: false
+connection:
+  credentials:
+    title: GitLab Username and Password (or token)
+    description: Enter GitLab username and password (or token)
+    type: credential_username_password
+    required: true
+  url:
+    title: Host URL
+    type: string
+    description: Host URL e.g. https://gitlab.example.com:8000/api/v4/
+    required: true
+actions:
+  delete_ssh:
+    title: Delete User SSH Key
+    description: Delete user SSH key
+    input:
+      id:
+        title: User ID
+        type: integer
+        description: User ID
+        required: true
+      key_id:
+        title: Key ID
+        type: integer
+        description: Key ID
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: false
+  list_ssh:
+    title: List User SSH Keys
+    description: List user SSH keys
+    input:
+      id:
+        title: User II
+        type: integer
+        description: User ID
+        required: true
+    output:
+      ssh_keys:
+        title: SSH Keys
+        description: SSH keys
+        type: '[]ssh_output'
+        required: false
+  block_user:
+    title: Block User
+    description: Block GitLab user
+    input:
+      id:
+        title: User Id
+        type: integer
+        description: User ID to block
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: false
+  unblock_user:
+    title: Unblock User
+    description: Unlock GitLab user
+    input:
+      id:
+        title: User ID
+        type: integer
+        description: User ID to unblock
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: false
+  delete_user:
+    title: Delete User
+    description: Delete GitLab user
+    input:
+      id:
+        title: User Id
+        type: integer
+        description: User ID to unblock
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: false
+  get_user:
+    title: Get User
+    description: Get GitLab user
+    input:
+      id:
+        title: User ID
+        type: integer
+        description: User ID
+        required: true
+    output:
+      name:
+        title: Name
+        description: Name
+        type: string
+        required: false
+      avatar_url:
+        title: Avatar URL
+        description: Avatar URL
+        type: string
+        required: false
+      state:
+        title: State
+        description: State
+        type: string
+        required: false
+      web_url:
+        title: Web URL
+        description: Web URL
+        type: string
+        required: false
+      id:
+        title: ID
+        description: ID
+        type: integer
+        required: false
+      username:
+        title: Username
+        description: Username
+        type: string
+        required: false
+      created_at:
+        title: Created At
+        description: Create at
+        type: date
+        required: false
+      bio:
+        title: Bio
+        description: Bio
+        type: string
+        required: false
+      location:
+        title: Location
+        description: Location
+        type: string
+        required: false
+      skype:
+        title: Skype
+        description: Skype
+        type: string
+        required: false
+      linkedin:
+        title: LinkedIn
+        description: LinkedIn
+        type: string
+        required: false
+      twitter:
+        title: Twitter
+        description: Twitter
+        type: string
+        required: false
+      website_url:
+        title: Website URL
+        description: Website URL
+        type: string
+        required: false
+      organization:
+        title: Organization
+        description: Organization
+        type: string
+        required: false
+  create_issue:
+    title: Create Issue
+    description: Create issue
+    input:
+      id:
+        title: User ID
+        type: integer
+        description: User ID to unblock
+        required: true
+      parameters:
+        title: Issue Parameters
+        type: issue_input
+        description: Issue parameters
+        required: false
+    output:
+      project_id:
+        title: Project ID
+        description: Project ID
+        type: integer
+        required: false
+      id:
+        title: ID
+        description: ID
+        type: integer
+        required: false
+      created_at:
+        title: Created At
+        description: Created at
+        type: date
+        required: false
+      iid:
+        title: IID
+        description: IID
+        type: integer
+        required: false
+      title:
+        title: Title
+        description: Title
+        type: string
+        required: false
+      state:
+        title: State
+        description: State
+        type: string
+        required: false
+      assignees:
+        title: Assignees
+        description: Assignees
+        type: '[]user_output'
+        required: false
+      assignee:
+        title: Assignee
+        description: Assignee
+        type: user_output
+        required: false
+      labels:
+        title: Labels
+        description: Labels
+        type: '[]string'
+        required: false
+      description:
+        title: Description
+        description: Description
+        type: string
+        required: false
+      updated_at:
+        title: Updated At
+        description: Updated at
+        type: date
+        required: false
+      milestone:
+        title: Milestone
+        description: Milestone
+        type: milestone_output
+        required: false
+      subscribed:
+        title: Subscribed
+        description: Subscribed
+        type: boolean
+        required: false
+      user_notes_count:
+        title: User Notes Count
+        description: User notes count
+        type: integer
+        required: false
+      due_date:
+        title: Due Date
+        description: Due date
+        type: date
+        required: false
+      web_url:
+        title: Web URL
+        description: Web URL
+        type: string
+        required: false
+      confidential:
+        title: Confidential
+        description: Confidential
+        type: boolean
+        required: false
+      author:
+        title: Author
+        description: Author
+        type: user_output
+        required: false
+triggers:
+  issue:
+    title: Issue
+    description: Monitor new issues
+    input:
+      state:
+        type: string
+        description: Return all issues or just those that are opened or closed
+        required: false
+        enum:
+        - Opened
+        - Closed
+      labels:
+        type: string
+        description: Comma-separated list of label names, issues must have all labels
+          to be returned
+        required: true
+      milestone:
+        type: string
+        description: The milestone title
+        required: false
+      iids:
+        type: integer
+        description: Return only the issues having the given iid
+        required: false
+      search:
+        type: string
+        description: Search issues against their title and description
+        required: false
+      interval:
+        type: integer
+        description: How often recieve new issues
+        required: false
+    output:
+      issue:
+        title: Issue
+        description: Issue
+        type: object
+        required: false

@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "delete_droplet",
+        "connection": {
+            "token":{
+                "secretKey": ""
+            }
+        },
+        "input": {
+            "droplet_id": "39963469"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

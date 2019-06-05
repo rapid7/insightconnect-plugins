@@ -1,0 +1,28 @@
+{
+  "type": "trigger_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "trigger": "monitor",
+    "connection": {
+      "passive": true,
+      "credentials": {
+        "password": "anonymous",
+        "username": "anonymous"
+      },
+      "host": "ftp.gnu.org",
+      "secure": false
+    },
+    "input": {
+      "path": "this_path_doesnt_exist",
+      "monitor_time": true,
+      "monitor_size": true,
+      "interval": 10,
+      "monitor_mode": true
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    }
+  }
+}

@@ -1,0 +1,76 @@
+plugin_spec_version: v2
+name: ping
+title: Ping
+description: Ping networking tool
+version: 1.0.1
+vendor: rapid7
+tags:
+- ping
+- network diagnostics
+actions:
+  ping:
+    title: Ping
+    description: Ping a host to check for connectivity
+    input:
+      host:
+        title: Host
+        description: The domain name or IP of the host to check
+        type: string
+        required: true
+      count:
+        title: Count
+        description: The number of requests that will be sent, the default is 4
+        type: integer
+        required: true
+        default: 4
+      resolve_hostname:
+        title: Resolve Hostname
+        description: Whether to resolve a domain name to an IP address first
+        type: boolean
+        required: true
+    output:
+      reply:
+        title: Reply
+        description: Whether the host is responding to our echo
+        type: boolean
+        required: true
+      response:
+        title: Response
+        description: The response to the request
+        type: string
+        required: true
+      packets_transmitted:
+        title: Packets Transmitted
+        description: The number of packets that were sent to the host
+        type: integer
+        required: false
+      packets_received:
+        title: Packets Received
+        description: The number of packets that the host sent back
+        type: integer
+        required: false
+      packets_percent_lost:
+        title: Percent Packet Lost
+        description: The percentage of packets that were lost
+        type: float
+        required: false
+      average_latency:
+        title: Average Latency
+        description: Average latency
+        type: string
+        required: false
+      minimum_latency:
+        title: Minimum Latency
+        description: Minimum latency
+        type: string
+        required: false
+      maximum_latency:
+        title: Maximum Latency
+        description: Maximum latency
+        type: string
+        required: false
+      standard_deviation:
+        title: Standard Deviation
+        description: Standard deviation
+        type: string
+        required: false

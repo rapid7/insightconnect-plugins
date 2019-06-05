@@ -1,0 +1,14 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_key": ""
+    },
+    "input": {
+      "IP_address": "8.8.8.8"
+    },
+    "action": "lookup_IP_address"
+  }
+}

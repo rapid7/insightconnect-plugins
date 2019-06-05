@@ -1,0 +1,1020 @@
+plugin_spec_version: v2
+name: carbon_black_response
+title: Cb Response
+vendor: rapid7
+status: ["supported"]
+description: Cb Response is the most complete endpoint detection and response solution
+  available to security teams
+version: 3.1.7
+tags:
+- carbon black
+- response
+- endpoint
+- cb
+- detection
+enable_cache: true
+types:
+  alert:
+    alert_severity:
+      type: number
+      required: false
+      title: Severity
+    sensor_criticality:
+      type: number
+      required: false
+      title: Sensor Criticality
+    hostname:
+      type: string
+      required: false
+      title: Hostname
+    report_score:
+      type: integer
+      required: false
+      title: Report Score
+    feed_name:
+      type: string
+      required: false
+      title: Feed Name
+    created_time:
+      type: date
+      required: false
+      title: Created Time
+    os_type:
+      type: string
+      required: false
+      title: OS Type
+    feed_rating:
+      type: number
+      format: double
+      required: false
+      title: Feed Rating
+    ioc_confidence:
+      type: number
+      required: false
+      title: IOC Confidence
+    unique_id:
+      type: string
+      required: false
+      title: Unique ID
+    md5:
+      type: string
+      required: false
+      title: MD5
+    sensor_id:
+      type: integer
+      required: false
+      title: Sensor ID
+    feed_id:
+      type: integer
+      required: false
+      title: Feed ID
+    ioc_attr:
+      type: string
+      required: false
+      title: IOC Attributes
+    status:
+      type: string
+      required: false
+      title: Status
+    alert_type:
+      type: string
+      required: false
+      title: Type
+  process:
+    mod_load:
+      type: integer
+      required: false
+      title: Mod Load
+    sensor_id:
+      type: integer
+      required: false
+      title: Sensor ID
+    uid:
+      type: string
+      required: false
+      title: UID
+    filtering_known_dls:
+      type: boolean
+      required: false
+      title: Filtering Known Downloads
+    process_md5:
+      type: string
+      required: false
+      title: MD5
+    parent_unique_id:
+      type: string
+      required: false
+      title: Parent Unique ID
+    cmdline:
+      type: string
+      required: false
+      title: CMD Line
+    path:
+      type: string
+      required: false
+      title: Path
+    filemod_count:
+      type: integer
+      required: false
+      title: Filemod Count
+    id:
+      type: string
+      required: false
+      title: ID
+    parent_name:
+      type: string
+      required: false
+      title: Parent Name
+    crossproc_count:
+      type: integer
+      required: false
+      title: Crossproc Count
+    parent_pid:
+      type: integer
+      required: false
+      title: Parent PID
+    hostname:
+      type: string
+      required: false
+      title: Hostname
+    last_update:
+      type: string
+      required: false
+      title: Last Update
+    start:
+      type: string
+      required: false
+      title: Start
+    comms_ip:
+      type: integer
+      required: false
+      title: Comms IP
+    regmod_count:
+      type: integer
+      required: false
+      title: Regmod Count
+    interface_ip:
+      type: integer
+      required: false
+      title: Interface IP
+    process_pid:
+      type: integer
+      required: false
+      title: PID
+    username:
+      type: string
+      required: false
+      title: Username
+    terminated:
+      type: boolean
+      required: false
+      title: Terminated
+    process_name:
+      type: string
+      required: false
+      title: Name
+    emet_count:
+      type: integer
+      required: false
+      title: EMET Count
+    group:
+      type: string
+      required: false
+      title: Group
+    netconn_count:
+      type: integer
+      required: false
+      title: Netconn Count
+    segment_id:
+      type: integer
+      required: false
+      title: Segment ID
+    host_type:
+      type: string
+      required: false
+      title: Host Type
+    processblock_count:
+      type: integer
+      required: false
+      title: Process Block Count
+    filemod_complete:
+      type: '[]string'
+      required: false
+      title: Filemod Complete
+    os_type:
+      type: string
+      required: false
+      title: OS Type
+    binaries:
+      type: object
+      required: false
+      title: Binaries
+    childproc_count:
+      type: integer
+      required: false
+      title: Childproc Count
+    unique_id:
+      type: string
+      required: false
+      title: Unique ID
+  binary:
+    digsig_prog_name:
+      type: string
+      description: If signed and present, the program name
+      required: false
+      title: Digital Signature Program Name
+    digsig_issuer:
+      type: string
+      description: If signed and present, the issuer name
+      required: false
+      title: Digital Signature Issuer
+    product_name:
+      type: string
+      description: If present, product name from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)
+      required: false
+      title: Product Name
+    is_executable_image:
+      type: boolean
+      description: True if an EXE
+      required: false
+      title: Is Executable Image
+    digsig_result:
+      type: string
+      description: Digital signature status; One of Signed, Unsigned, Expired, Bad
+        Signature, Invalid Signature, Invalid Chain, Untrusted Root, Explicit Distrust
+      required: false
+      title: Digital Signature Result
+    digsig_subject:
+      type: string
+      description: If signed and present, the subject
+      required: false
+      title: Digital Signature Subject
+    observed_filename:
+      type: '[]string'
+      description: The set of unique filenames this binary has been seen as
+      required: false
+      title: Observed Filename
+    os_type:
+      type: string
+      enum:
+      - Windows
+      - OSX
+      - Linux
+      description: Operating system type of this binary; one of windows, linux, osx
+      required: false
+      title: OS Types
+    orig_mod_len:
+      type: integer
+      description: Filesize in bytes
+      required: false
+      title: Original Mod Length
+    special_build:
+      type: string
+      description: If present, special build from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)
+      required: false
+      title: Special Build
+    company_name:
+      type: string
+      description: If present, company name from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)
+      required: false
+      title: Company Name
+    alliance_score_virustotal:
+      type: string
+      description: If enabled and the hit count is greater than one, the number of
+        [VirusTotal](http://virustotal.com) hits for this MD5
+      required: false
+      title: Alliance Score Virustotal
+    server_added_timestamp:
+      type: string
+      format: date
+      description: The first time this binary was received on the server in the server
+        GMT time
+      required: false
+      title: Server Added Timestamp
+    private_build:
+      type: string
+      description: If present, private build from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)
+      required: false
+      title: Private Build
+    internal_name:
+      type: string
+      description: If present, internal name from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)
+      required: false
+      title: Internal Name
+    copied_mod_len:
+      type: integer
+      description: Bytes copied from remote host. If file is greater than 25MB this
+        will be less than orig_mod_len
+      required: false
+      title: Copied Mod Length
+    file_version:
+      type: string
+      description: If present, file version from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)
+      required: false
+      title: File Version
+    product_version:
+      type: string
+      description: If present, product version from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)
+      required: false
+      title: Product Version
+    signed:
+      type: string
+      description: Digital signature status. One of Signed, Unsigned, Expired, Bad
+        Signature, Invalid Signature, Invalid Chain, Untrusted Root, Explicit Distrust
+      required: false
+      title: Signed
+    digsig_sign_time:
+      type: string
+      description: If signed, the timestamp of the signature in GMT
+      required: false
+      title: Digital Signature Times
+    file_desc:
+      type: string
+      description: If present, file description from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)
+      required: false
+      title: File Description
+    legal_trademark:
+      type: string
+      description: If present, legal trademark from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)
+      required: false
+      title: Legal Trademark
+    digsig_result_code:
+      type: string
+      description: HRESULT_FROM_WIN32 for the result of the digital signature operation
+        via [WinVerifyTrust](http://msdn.microsoft.com/en-us/library/windows/desktop/aa388208)
+      required: false
+      title: Digital Signature Result Code
+    original_filename:
+      type: string
+      description: If present, original filename from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)
+      required: false
+      title: Original Filename
+    legal_copyright:
+      type: string
+      description: If present, legal copyright from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)
+      required: false
+      title: Legal Copyright
+    host_count:
+      type: integer
+      description: Count of unique endpoints which have ever reported this binary
+      required: false
+      title: Host Count
+    is_64bit:
+      type: boolean
+      description: True if x64
+      required: false
+      title: Is 64-bit
+    md5:
+      type: string
+      description: The MD5 hash of this binary
+      required: false
+      title: MD5
+    digsig_publisher:
+      type: string
+      description: If signed and present, the publisher name
+      required: false
+      title: Digital Signature Publisher
+    endpoint:
+      type: '[]string'
+      required: false
+      title: Endpoint
+    group:
+      type: '[]string'
+      required: false
+      title: Group
+    timestamp:
+      type: date
+      required: false
+      title: Timestamp
+    cb_version:
+      type: integer
+      required: false
+      title: Carbon Black Version
+    last_seen:
+      type: date
+      required: false
+      title: Last Seen
+  watchlist:
+    last_hit_count:
+      type: integer
+      required: false
+      title: Last Hit Count
+    name:
+      type: string
+      required: false
+      title: Name
+    list_query:
+      type: string
+      description: URL-encoded search query associated with this watchlist
+      required: false
+      title: List Query
+    enabled:
+      type: boolean
+      required: false
+      title: Enabled
+    list_timestamp:
+      type: date
+      required: false
+      title: List Timestamp
+    index_type:
+      type: string
+      description: Index to search for this watchlist
+      enum:
+      - events
+      - modules
+      required: false
+      title: Index Type
+    readonly:
+      type: boolean
+      required: false
+      title: Readonly
+    alliance_id:
+      type: integer
+      required: false
+      title: Alliance ID
+    total_hits:
+      type: string
+      required: false
+      title: Total Hits
+    date_added:
+      type: date
+      required: false
+      title: Date Added
+    group_id:
+      type: integer
+      required: false
+      title: Group ID
+    total_tags:
+      type: string
+      required: false
+      title: Total Tags
+    last_hit:
+      type: date
+      required: false
+      title: Last Hit
+    from_alliance:
+      type: boolean
+      required: false
+      title: From Alliance
+  feed:
+    provider_url:
+      type: string
+      required: false
+      title: Provider URL
+    ssl_client_crt:
+      type: string
+      required: false
+      title: SSL Client Certificate
+    local_rating:
+      type: integer
+      required: false
+      title: Local Rating
+    requires_who:
+      type: string
+      required: false
+      title: Requires Who
+    icon_small:
+      type: bytes
+      required: false
+      title: Icon Small
+    id:
+      type: integer
+      required: false
+      title: ID
+    category:
+      type: string
+      required: false
+      title: Category
+    display_name:
+      type: string
+      required: false
+      title: Display Name
+    use_proxy:
+      type: boolean
+      required: false
+      title: Use Proxy
+    feed_url:
+      type: string
+      required: false
+      title: Feed URL
+    username:
+      type: string
+      required: false
+      title: Username
+    validate_server_cert:
+      type: boolean
+      required: false
+      title: Validate Server Cert
+    ssl_client_key:
+      type: string
+      required: false
+      title: SSL Client Key
+    manually_added:
+      type: boolean
+      required: false
+      title: Manually Added
+    password:
+      type: string
+      required: false
+      title: Password
+    icon:
+      type: bytes
+      required: false
+      title: Icon
+    provider_rating:
+      type: number
+      required: false
+      title: Provider Rating
+    name:
+      type: string
+      required: false
+      title: Name
+    tech_data:
+      type: string
+      required: false
+      title: Tech Data
+    requires:
+      type: string
+      required: false
+      title: Requires
+    enabled:
+      type: boolean
+      required: false
+      title: Enabled
+    summary:
+      type: string
+      required: false
+      title: Summary
+    requires_what:
+      type: string
+      required: false
+      title: Requires What
+    order:
+      type: integer
+      required: false
+      title: Order
+  sensor:
+    systemvolume_total_size:
+      description: Total size of system volume
+      title: Systemvolume Total Size
+      type: string
+    os_environment_display_string:
+      description: OS environment display string
+      title: OS Environment Display String
+      type: string
+    sensor_uptime:
+      description: How long the sensor has been up
+      title: Sensor Uptime
+      type: string
+    is_isolating:
+      description: Is sensor isolated
+      title: Is Isolating
+      type: boolean
+    id:
+      description: Sensor ID
+      title: ID
+      type: integer
+    build_id:
+      description: Sensor build ID
+      title: Build ID
+      type: integer
+    uptime:
+      description: Uptime
+      title: Uptime
+      type: string
+    computer_dns_name:
+      description: DNS name of the computer
+      title: Computer DNS Name
+      type: string
+    physical_memory_size:
+      description: Physical memory size
+      title: Physical Memory Size
+      type: string
+    next_checkin_time:
+      description: Next check-in time
+      title: Next Check-In Time
+      type: string
+    sensor_health_message:
+      description: Sensor health message
+      title: Sensor Health Message
+      type: string
+    boot_id:
+      description: Boot ID
+      title: Boot ID
+      type: string
+    computer_sid:
+      description: Computer SID
+      title: Computer SID
+      type: string
+    event_log_flush_time:
+      description: Event log flush time
+      title: Event Log Flush Time
+      type: string
+    computer_name:
+      description: Computer name
+      title: Computer Name
+      type: string
+    license_expiration:
+      description: License expiration
+      title: License Expiration
+      type: string
+    network_adapters:
+      description: Network adapters
+      title: Network Adapters
+      type: string
+    sensor_health_status:
+      description: Sensor health status
+      title: Sensor Health Status
+      type: integer
+    registration_time:
+      description: Registration time
+      title: Registration Time
+      type: string
+    systemvolume_free_size:
+      description: Systemvolume free size
+      title: Systemvolume Free Size
+      type: string
+    notes:
+      description: Notes
+      title: Notes
+      type: string
+    network_isolation_enabled:
+      description: Network isolation enabled
+      title: Network Isolation Enabled
+      type: boolean
+    os_environment_id:
+      description: OS environment ID
+      title: OS Environment ID
+      type: integer
+    cookie:
+      description: Cookie
+      title: Cookie
+      type: integer
+    build_version_string:
+      description: Build version string
+      title: Build Version String
+      type: string
+    last_checkin_time:
+      description: Last checkin time
+      title: Last Checkin Time
+      type: string
+    group_id:
+      description: Group ID
+      title: Group ID
+      type: integer
+    display:
+      description: Display
+      title: Display
+      type: boolean
+    uninstall:
+      description: Uninstall
+      title: Uninstall
+      type: boolean
+    found:
+      description: If sensor was found
+      title: Found
+      type: boolean
+connection:
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: API token found in your Carbon Black profile
+    required: true
+  url:
+    title: URL
+    type: string
+    description: Carbon Black Server API URL
+    default: https://127.0.0.1/api/bit9platform/v1
+    required: true
+  ssl_verify:
+    title: SSL Verify
+    type: boolean
+    description: SSL certificate verification
+    default: true
+    required: true
+actions:
+  list_alerts:
+    title: List Alerts
+    description: List Carbon Black alerts with given parameters
+    input:
+      query:
+        type: string
+        description: Accepts the same data as the search box on the Process Search
+          page
+        required: false
+        title: Query String
+      rows:
+        type: integer
+        description: How many rows of data to return. Default is 10
+        default: 10
+        required: false
+        title: Rows
+      start:
+        type: integer
+        description: What row of data to start at. Default is 0
+        default: 0
+        required: false
+    output:
+      alerts:
+        description: The lists of alerts
+        type: '[]alert'
+        required: false
+  list_processes:
+    title: List Processes
+    description: List Carbon Black processes with given parameters
+    input:
+      query:
+        type: string
+        description: Accepts the same data as the search box on the Process Search
+          page
+        required: false
+        title: Query String
+      rows:
+        type: integer
+        description: How many rows of data to return. Default is 10
+        default: 10
+        required: false
+        title: Rows
+      start:
+        type: integer
+        description: What row of data to start at. Default is 0
+        default: 0
+        required: false
+    output:
+      processes:
+        description: The list of processes
+        type: '[]process'
+        required: false
+  list_binaries:
+    title: List Binaries
+    description: List Carbon Black binaries with given parameters
+    input:
+      query:
+        type: string
+        description: Accepts the same data as the search box on the Process Search
+          page
+        required: false
+        title: Query String
+      rows:
+        type: integer
+        description: How many rows of data to return. Default is 10
+        default: 10
+        required: false
+        title: Rows
+      start:
+        type: integer
+        description: What row of data to start at. Default is 0
+        default: 0
+        required: false
+    output:
+      binaries:
+        description: The list of binaries
+        type: '[]binary'
+        required: false
+  list_watchlists:
+    title: List Watchlists
+    description: List all watchlists
+    output:
+      watchlists:
+        description: The list of watchlists
+        type: '[]watchlist'
+        required: false
+  list_feeds:
+    title: List Feeds
+    description: List all feeds
+    output:
+      feeds:
+        description: The list of feeds
+        type: '[]feed'
+        required: false
+  list_sensors:
+    title: List Sensors
+    description: List all sensors
+    input:
+      id:
+        type: string
+        description: The sensor ID
+        required: false
+        title: ID
+      hostname:
+        type: string
+        description: The sensor hostname
+        required: false
+        title: Hostname
+      ip:
+        type: string
+        description: The sensor IP address
+        required: false
+        title: IP Address
+      groupid:
+        type: string
+        description: The sensor group ID
+        required: false
+        title: Group ID
+    output:
+      sensors:
+        description: The list of sensors
+        type: '[]sensor'
+        required: false
+  get_binary:
+    title: Get Binary
+    description: Retrieve a binary by its MD5 Hash
+    input:
+      hash:
+        description: An MD5 hash
+        type: string
+        required: true
+        title: Hash
+    output:
+      binary:
+        description: A resulting binary, Base64-encoded
+        type: bytes
+        required: false
+  blacklist_hash:
+    title: Blacklist Hash
+    description: Ban a hash given its MD5
+    input:
+      md5_hash:
+        description: An MD5 hash
+        type: string
+        required: true
+        title: MD5 Hash
+    output:
+      success:
+        type: boolean
+        description: Status of request - true if successful, false otherwise
+        required: false
+  add_watchlist:
+    title: Add Watchlist
+    description: Adds a watchlist
+    input:
+      name:
+        type: string
+        description: Watchlist name
+        required: true
+      index_type:
+        type: string
+        description: Either modules or events for binary and process watchlists, respectively
+        required: true
+        default: modules
+        enum:
+        - modules
+        - events
+      query:
+        type: string
+        description: Raw Carbon Black query that this watchlist matches
+        required: true
+    output:
+      id:
+        description: The ID of the created watchlist
+        type: string
+        required: false
+        title: ID
+  add_feed:
+    title: Add Feed
+    description: Adds a feed
+    input:
+      feed_url:
+        description: The URL of the feed to add
+        type: string
+        required: false
+      force:
+        type: boolean
+        default: false
+        description: Add feed even if the feed URL is already in use
+        required: false
+      enabled:
+        type: boolean
+        description: Enable feed
+        required: false
+      username:
+        description: Username
+        type: string
+        required: false
+      password:
+        description: Password
+        type: password
+        required: false
+      cert:
+        description: Certificate file
+        type: file
+        required: false
+      key:
+        description: Key
+        type: file
+        required: false
+      use_proxy:
+        description: Whether or not to use proxy
+        type: boolean
+        required: false
+      validate_server_cert:
+        description: Whether or not to validate server certificate
+        type: boolean
+        required: false
+    output:
+      id:
+        description: The ID of the added feed
+        type: integer
+        required: false
+        title: ID
+  delete_feed:
+    title: Delete Feed
+    description: Deletes a feed
+    input:
+      id:
+        description: The ID of the feed
+        type: string
+        required: true
+        title: ID
+      force:
+        type: boolean
+        description: Force deletion of all matches if multiple matches found
+        required: true
+        title: Force
+    output:
+      success:
+        type: boolean
+        description: Whether or not the deletion was successful
+        required: false
+  delete_watchlist:
+    title: Delete Watchlist
+    description: Deletes a watchlist
+    input:
+      id:
+        description: The ID of the watchlist
+        type: string
+        required: true
+        title: ID
+      force:
+        type: boolean
+        description: Force deletion of all matches if multiple matches found
+        required: true
+        title: Force
+    output:
+      success:
+        type: boolean
+        description: Whether or not the deletion was successful
+        required: false
+  update_alert:
+    title: Update Alert
+    description: Updates or Resolves an Alert in Carbon Black
+    input:
+      id:
+        description: 'Unique ID of the alert. Example: 1cb11d0d-f86b-415d-aeb3-05f085973fbb'
+        type: string
+        required: true
+        title: Unique ID
+      status:
+        description: The status to update
+        type: string
+        enum:
+        - Resolved
+        - Unresolved
+        - In Progress
+        - False Positive
+        required: true
+        default: Resolved
+        title: Status
+    output:
+      success:
+        type: boolean
+        description: Whether or not the update was successful
+        required: false
+  isolate_sensor:
+    title: Isolate Sensor
+    description: Isolates a sensor from the network
+    input:
+      hostname:
+        description: Hostname of the sensor to isolate
+        type: string
+        required: false
+        title: Hostname
+    output:
+      success:
+        type: boolean
+        description: Whether or not the isolation was successful
+        required: false
+  unisolate_sensor:
+    title: Unisolate Sensor
+    description: Brings a sensor back into the network
+    input:
+      hostname:
+        description: Hostname of the sensor to unisolate
+        type: string
+        required: false
+        title: Hostname
+    output:
+      success:
+        type: boolean
+        description: Whether or not the unisolation was successful
+        required: false
+triggers:
+  new_alert:
+    title: New Alert
+    description: Fires when a new alert is found
+    output:
+      alert:
+        type: alert
+        description: Carbon Black alert
+        required: false
+        title: Alert

@@ -1,0 +1,28 @@
+{
+  "body": {
+    "action": "threats_retrieve",
+    "input": {
+      "adversary_id": null,
+      "document_id": null,
+      "email_id": 5,
+      "id": null,
+      "incident_id":null,
+      "indicator":null,
+      "security_label":null,
+      "signature_id":null,
+      "tag": "",
+      "threat_id":null,
+      "victim_id":null,
+      "owner": "Komand"
+    },
+    "connection": {
+      "api_access_id": "",
+      "api_default_org": "",
+      "api_secret_key": "",
+      "api_base_url": "https://sandbox.threatconnect.com/api"
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

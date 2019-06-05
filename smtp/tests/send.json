@@ -1,0 +1,29 @@
+{
+  "body": {
+    "connection": {
+      "port": 587,
+      "ignore_ssl_errors": false,
+      "host": "smtp.gmail.com",
+      "use_ssl": true,
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "action": "send",
+    "input": {
+      "email_from": "",
+      "email_to": "",
+      "subject": "test",
+      "message": "SOME TESTING MESSAGE",
+      "html": false,
+      "attachment": {
+        "filename": "",
+        "content": ""
+      }
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

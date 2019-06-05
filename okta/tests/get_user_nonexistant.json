@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "get_user",
+    "input": {
+      "email": "unknown@blah.com"
+    },
+    "connection": {
+      "okta_url": "",
+      "okta_key": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

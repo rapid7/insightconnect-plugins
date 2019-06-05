@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "manager_info",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,28 @@
+{
+  "body": {
+    "trigger": "receive_event",
+    "meta": {},
+    "input": {
+      "number_of_messages": 3,
+      "topic": "test"
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "host": "",
+      "broker_ca": {
+        "privateKey": ""
+      },
+      "client_crt": {
+        "privateKey": ""
+      },
+      "client_key": {
+        "privateKey": ""
+      }
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

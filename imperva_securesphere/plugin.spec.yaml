@@ -1,0 +1,92 @@
+plugin_spec_version: v2
+name: imperva_securesphere
+title: Imperva SecureSphere
+vendor: rapid7
+status: ["unsupported"]
+description: Imperva SecureSphere WAF protects your applications and data from cyber-attacks.
+  The industry leading SecureSphere WAF blocks technical, business logic botnets and
+  DDoS attacks
+version: 1.0.0
+tags:
+- Web Application Firewall
+- WAF
+- Imperva
+- SecureSphere
+connection:
+  credentials:
+    type: credential_username_password
+    title: Username and Password
+    description: Username and password
+    required: true
+  url:
+    title: URL
+    type: string
+    description: URL to SecureSphere Server
+    required: true
+actions:
+  upload_ssl_certificate:
+    title: Upload SSL Certificate
+    description: Upload a SSL Certificate to SecureSphere Server
+    input:
+      sitename:
+        type: string
+        title: Site Name
+        description: The name of the parent site of the web service to access
+        required: true
+      servergroupname:
+        type: string
+        title: Server Group Name
+        description: The name of the parent server group of the web service to access
+        required: true
+      webservicename:
+        type: string
+        title: Web Service Name
+        description: The name of the web service to access
+        required: true
+      sslkeyname:
+        type: string
+        title: SSL Key Name
+        description: The name of the SSL Key to create
+        required: true
+      format:
+        title: Format
+        description: Certificate format type
+        type: string
+        required: true
+        enum:
+        - pem
+        - pkcs12
+      private:
+        type: bytes
+        description: Base64 encoded PEM certificate, enclosed between '-----BEGIN
+          PRIVATE-----' and '----- END PRIVATE-----'
+        required: false
+        title: Private
+      certificate:
+        type: bytes
+        description: Base64 encoded PEM certificate, enclosed between '-----BEGIN
+          CERTIFICATE-----' and '-----END CERTIFICATE-----'
+        required: false
+        title: Certificate
+      hsm:
+        type: boolean
+        title: HSM
+        description: Is certificate used by HSM
+        default: false
+        required: false
+      pkcs12file:
+        type: bytes
+        title: PKCS12 File
+        description: PKCS12 file content
+        required: false
+      pkcs12password:
+        type: password
+        title: PKCS12 Password
+        description: PKCS12 file password
+        required: false
+    output:
+      status_code:
+        title: Status Code
+        type: integer
+        description: HTTP status code
+        required: false

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "input": {
+      "url": "http://24.151.224.211/ui/1.0.1.1038/dynamic/login.html",
+      "poll": 5,
+      "is_verify": true
+    },
+    "connection": null,
+    "trigger": "poll_file",
+    "meta": {},
+    "dispatcher": {
+      "url": "http://localhost:8000"
+    }
+  },
+  "version": "v1",
+  "type": "trigger_start"
+}

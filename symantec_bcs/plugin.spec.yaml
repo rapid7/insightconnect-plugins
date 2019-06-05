@@ -1,0 +1,77 @@
+plugin_spec_version: v2
+name: symantec_bcs
+title: Symantec Business Critical Services
+description: Upload a suspected infected file or hash to Symantec Security Response
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- symantec
+- bcs
+- security response
+actions:
+  submit:
+    title: Submit
+    description: Submit a malicious file or hash
+    input:
+      fname:
+        title: First Name
+        description: First name
+        type: string
+        required: true
+      lname:
+        title: Last Name
+        description: Last name
+        type: string
+        required: true
+      cname:
+        title: Company Name
+        description: Company name
+        type: string
+        required: true
+      email:
+        title: Email
+        description: Email address
+        type: string
+        required: true
+      pin:
+        title: Support ID
+        description: Support ID number
+        type: string
+        required: true
+      critical:
+        title: High Severity
+        description: High severity
+        default: false
+        type: boolean
+        required: true
+      stype:
+        title: Submission Type
+        description: Submission type
+        type: string
+        enum:
+        - upfile
+        - url
+        - hash
+        required: true
+      comments:
+        title: Comments
+        description: Additional information
+        type: string
+        required: true
+      data:
+        title: Data
+        description: URL to file, hash (MD5 or SHA256), or base64 file
+        type: bytes
+        required: true
+      filename:
+        title: Filename
+        description: Optional filename if submission type is upfile
+        type: string
+        required: false
+    output:
+      response:
+        title: Response
+        description: HTML response
+        type: string
+        required: true

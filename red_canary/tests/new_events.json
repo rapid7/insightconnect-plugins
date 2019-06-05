@@ -1,0 +1,23 @@
+{
+  "body": {
+    "trigger": "new_events",
+    "meta": {},
+    "input": {
+      "frequency": 5,
+      "date_offset": "2018-01-02 20:34:33.955000+00:00",
+      "force_offset": false
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "api_token": {
+        "secretKey": ""
+      },
+      "customer_id": ""
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

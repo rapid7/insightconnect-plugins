@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "list_shares",
+    "meta": {},
+    "input": {
+      "timeout": 30
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "domain": "",
+      "host": "",
+      "netbios_name": "",
+      "port": 445,
+      "timeout": 60,
+      "use_ntlmv2": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

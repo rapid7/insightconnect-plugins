@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "check_cidr",
+    "meta": {},
+    "input": {
+      "cidr": "207.126.144.0/20",
+      "days": "30"
+    },
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

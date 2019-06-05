@@ -1,0 +1,42 @@
+plugin_spec_version: v2
+name: tshark
+title: Tshark
+description: A tool for dumping and analyzing network traffic
+version: 1.0.1
+vendor: rapid7
+tags:
+- tshark
+- pcap
+- traffic
+actions:
+  run:
+    title: Run
+    description: Run Tshark on a pcap
+    input:
+      file:
+        title: Base64 Encoded Pcap
+        description: Base64 encoded pcap
+        type: bytes
+        required: true
+      options:
+        title: Options
+        description: Tshark flags and options E.g. -n -c 10 -s 96. -r is implied
+        type: string
+        required: false
+      filter:
+        title: Display Filter
+        description: Display filter E.g. tcp.port eq 80
+        default: ip or ipv6
+        type: string
+        required: false
+    output:
+      dump_file:
+        title: Traffic File
+        description: Traffic dump file
+        type: bytes
+        required: false
+      dump_contents:
+        title: Traffic Dump
+        description: Traffic dump as array
+        type: '[]string'
+        required: false

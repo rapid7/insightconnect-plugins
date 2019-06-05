@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "build_job",
+    "meta": {},
+    "input": {
+      "name": "",
+      "parameters": {"KOMAND_FORCE_UPDATE": false, "KOMAND_SKIP_VALIDATION": false, "KOMAND_CLEAN": true, "KOMAND_PLUGIN": "google_drive"}
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

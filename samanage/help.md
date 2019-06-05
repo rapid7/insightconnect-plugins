@@ -1,0 +1,1402 @@
+
+# Samanage
+
+## About
+
+[Samanage](https://www.samanage.com) is an enterprise service-desk and IT asset-management provider.
+This plugin utilizes the [Samanage API](https://www.samanage.com/api).
+
+## Actions
+
+### Assign Incident
+
+This action is used to assign a person to an incident.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|incident_id|integer|None|True|ID of an incident to assign a person to|None|
+|assignee|string|None|True|Email of the new assignee|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Updated incident|
+
+Example output:
+
+```
+{
+  "incident": {
+    "id": 31851783,
+    "number": 4,
+    "name": "Import contracts and software licenses",
+    "description": "<p><a href=\"https://wwwwSerivice.samanage.com/contracts?import=True\">https://wwwwSerivice.samanage.com/contracts?import=True</a></p>",
+    "description_no_html": "https://wwwwSerivice.samanage.com/contracts?import=True",
+    "state": "Assigned",
+    "priority": "Medium",
+    "assignee": {
+      "group_id": 4485265,
+      "is_user": true,
+      "id": 4238379,
+      "name": "WW WW",
+      "disabled": false,
+      "email": "wwww@service.hmail.eu",
+      "created_at": "2018-11-20T05:29:00.000-05:00",
+      "last_login": "2018-11-20T05:33:33.000-05:00",
+      "phone": "+37254312367",
+      "role": {
+        "id": 461178,
+        "name": "Administrator",
+        "description": "This is the all powerful administrator user!",
+        "portal": false,
+        "show_my_tasks": false
+      },
+      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+      "group_ids": [
+        4485265,
+        4485266
+      ],
+      "custom_fields_values": [],
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      },
+      "mfa_enabled": false
+    },
+    "requester": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "created_at": "2018-11-20T05:29:03.000-05:00",
+    "updated_at": "2018-11-21T12:17:59.000-05:00",
+    "due_at": "2018-11-21T05:29:02.000-05:00",
+    "sla_violations": [],
+    "number_of_comments": 0,
+    "user_saw_all_comments": true,
+    "is_service_request": false,
+    "created_by": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "href": "https://api.samanage.com/incidents/31851783-import-contracts-and-software-licenses.json",
+    "cc": [],
+    "custom_fields_values": [],
+    "incidents": [],
+    "changes": [],
+    "tasks": [],
+    "time_tracks": [],
+    "solutions": [],
+    "assets": [],
+    "mobiles": [],
+    "other_assets": [],
+    "configuration_items": [],
+    "purchase_orders": []
+  }
+}
+```
+
+### Create Incident
+
+This action is used to create a new incident.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|description|string|None|False|Description|None|
+|due_at|date|None|False|Due at|None|
+|name|string|None|True|Name|None|
+|priority|string|None|True|Priority|['None', 'Low', 'Medium', 'High', 'Critical']|
+|assignee|string|None|False|Email of the assignee|None|
+|incidents|[]integer|None|False|List of numbers of incidents associated with the new incident|None|
+|solutions|[]integer|None|False|List of numbers of solutions associated with the new incident|None|
+|requester|string|None|True|Email of the requester|None|
+|problem|integer|None|False|Number of a problem associated with the new incident|None|
+|category_name|string|None|False|Name of the category for the new incident|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Newly created incident|
+
+Example output:
+
+```
+{
+  "incident": {
+    "id": 31931440,
+    "number": 14,
+    "name": "An incident",
+    "description": "More text",
+    "description_no_html": "More text",
+    "state": "New",
+    "priority": "Medium",
+    "category": {
+      "id": 875706,
+      "name": "Hardware",
+      "default_tags": "hardware",
+      "children": [
+        {
+          "id": 875708,
+          "name": "Desktop",
+          "default_tags": "desktop",
+          "parent_id": 875706
+        },
+        {
+          "id": 875707,
+          "name": "Laptop",
+          "default_tags": "laptop",
+          "parent_id": 875706
+        },
+        {
+          "id": 875709,
+          "name": "Peripherals",
+          "default_tags": "peripherals",
+          "parent_id": 875706
+        }
+      ]
+    },
+    "assignee": {
+      "group_id": 4485265,
+      "is_user": true,
+      "id": 4238379,
+      "name": "WW WW",
+      "disabled": false,
+      "email": "wwww@service.hmail.eu",
+      "created_at": "2018-11-20T05:29:00.000-05:00",
+      "last_login": "2018-11-21T17:20:46.000-05:00",
+      "phone": "+37254312367",
+      "role": {
+        "id": 461178,
+        "name": "Administrator",
+        "description": "This is the all powerful administrator user!",
+        "portal": false,
+        "show_my_tasks": false
+      },
+      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+      "group_ids": [
+        4485265,
+        4485266
+      ],
+      "custom_fields_values": [],
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      },
+      "mfa_enabled": false
+    },
+    "requester": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "created_at": "2018-11-21T17:28:30.393-05:00",
+    "updated_at": "2018-11-21T17:28:30.393-05:00",
+    "due_at": "2022-11-11T00:00:00.000-05:00",
+    "sla_violations": [],
+    "number_of_comments": 0,
+    "user_saw_all_comments": true,
+    "is_service_request": false,
+    "created_by": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "href": "https://api.samanage.com/incidents/31931440-an-incident.json",
+    "cc": [],
+    "custom_fields_values": [],
+    "comments": [],
+    "attachments": [],
+    "statistics": [
+      {
+        "statistic_type": "State Changed",
+        "time": "00:01",
+        "time_elapsed": "00:01",
+        "business_time_elapsed": "00:01",
+        "value": "2018-11-21 22:28:30 UTC"
+      }
+    ],
+    "tags": [
+      {
+        "id": 18482,
+        "name": "hardware",
+        "taggings_count": 337059
+      }
+    ],
+    "incidents": [
+      {
+        "id": 31851783,
+        "href": "https://api.samanage.com/incidents/31851783.json"
+      }
+    ],
+    "changes": [],
+    "solutions": [
+      {
+        "id": 795104,
+        "href": "https://api.samanage.com/solutions/795104.json"
+      }
+    ],
+    "associated_sla_names": [],
+    "total_time_spent": 0,
+    "tasks": [],
+    "time_tracks": [],
+    "assets": [],
+    "mobiles": [],
+    "other_assets": [],
+    "configuration_items": [],
+    "purchase_orders": [],
+    "audits": [],
+    "request_variables": []
+  }
+}
+```
+
+### Tag Incident
+
+This action is used to add tags to an incident.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|incident_id|integer|None|True|Incident ID|None|
+|tags|[]string|None|True|Tags to add to the incident|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Incident with new tags|
+
+Example output:
+
+```
+{
+  "incident": {
+    "id": 31851783,
+    "number": 4,
+    "name": "Import contracts and software licenses",
+    "description": "<p><a href=\"https://wwwwSerivice.samanage.com/contracts?import=True\">https://wwwwSerivice.samanage.com/contracts?import=True</a></p>",
+    "description_no_html": "https://wwwwSerivice.samanage.com/contracts?import=True",
+    "state": "Assigned",
+    "priority": "Medium",
+    "assignee": {
+      "group_id": 4485265,
+      "is_user": true,
+      "id": 4238379,
+      "name": "WW WW",
+      "disabled": false,
+      "email": "wwww@service.hmail.eu",
+      "created_at": "2018-11-20T05:29:00.000-05:00",
+      "last_login": "2018-11-20T05:33:33.000-05:00",
+      "phone": "+37254312367",
+      "role": {
+        "id": 461178,
+        "name": "Administrator",
+        "description": "This is the all powerful administrator user!",
+        "portal": false,
+        "show_my_tasks": false
+      },
+      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+      "group_ids": [
+        4485265,
+        4485266
+      ],
+      "custom_fields_values": [],
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      },
+      "mfa_enabled": false
+    },
+    "requester": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "created_at": "2018-11-20T05:29:03.000-05:00",
+    "updated_at": "2018-11-21T12:17:59.000-05:00",
+    "due_at": "2018-11-21T05:29:02.000-05:00",
+    "sla_violations": [],
+    "number_of_comments": 0,
+    "user_saw_all_comments": true,
+    "is_service_request": false,
+    "created_by": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "href": "https://api.samanage.com/incidents/31851783-import-contracts-and-software-licenses.json",
+    "cc": [],
+    "custom_fields_values": [],
+    "incidents": [],
+    "changes": [],
+    "tasks": [],
+    "time_tracks": [],
+    "solutions": [],
+    "assets": [],
+    "mobiles": [],
+    "other_assets": [],
+    "configuration_items": [],
+    "purchase_orders": []
+  }
+}
+```
+
+### List Incidents
+
+This action is used to list all incidents.
+
+#### Input
+
+This action does not contain any inputs.
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incidents|[]incident|True|List of all incidents|
+
+Example output:
+
+```
+{
+  "incidents": [
+    {
+      "id": 31851784,
+      "number": 5,
+      "name": "Set up your new service desk",
+      "description": "Service desk",
+      "description_no_html": "Service desk",
+      "state": "Assigned",
+      "priority": "Medium",
+      "assignee": {
+        "group_id": 4485265,
+        "is_user": true,
+        "id": 4238379,
+        "name": "WW WW",
+        "disabled": false,
+        "email": "wwww@service.hmail.eu",
+        "created_at": "2018-11-20T05:29:00.000-05:00",
+        "last_login": "2018-11-20T05:33:33.000-05:00",
+        "phone": "+37254312367",
+        "role": {
+          "id": 461178,
+          "name": "Administrator",
+          "description": "This is the all powerful administrator user!",
+          "portal": false,
+          "show_my_tasks": false
+        },
+        "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+        "group_ids": [
+          4485265,
+          4485266
+        ],
+        "custom_fields_values": [],
+        "avatar": {
+          "type": "initials",
+          "color": "#dfcd00",
+          "initials": "WW"
+        },
+        "mfa_enabled": false
+      },
+      "requester": {
+        "id": 4204395,
+        "account_id": 63582,
+        "user_id": 4238379,
+        "email": "wwww@service.hmail.eu",
+        "name": "WW WW",
+        "disabled": false,
+        "has_gravatar": false,
+        "avatar": {
+          "type": "initials",
+          "color": "#dfcd00",
+          "initials": "WW"
+        }
+      },
+      "created_at": "2018-11-20T05:29:03.000-05:00",
+      "updated_at": "2018-11-21T10:26:43.000-05:00",
+      "due_at": "2018-11-22T05:29:02.000-05:00",
+      "sla_violations": [],
+      "number_of_comments": 0,
+      "user_saw_all_comments": true,
+      "is_service_request": false,
+      "created_by": {
+        "id": 4204395,
+        "account_id": 63582,
+        "user_id": 4238379,
+        "email": "wwww@service.hmail.eu",
+        "name": "WW WW",
+        "disabled": false,
+        "has_gravatar": false,
+        "avatar": {
+          "type": "initials",
+          "color": "#dfcd00",
+          "initials": "WW"
+        }
+      },
+      "href": "https://api.samanage.com/incidents/31851784-set-up-your-new-service-desk.json",
+      "cc": [],
+      "custom_fields_values": [],
+      "incidents": [],
+      "changes": [],
+      "tasks": [],
+      "time_tracks": [],
+      "solutions": [],
+      "assets": [],
+      "mobiles": [],
+      "other_assets": [],
+      "configuration_items": [],
+      "purchase_orders": []
+    },
+    {
+      "id": 31851783,
+      "number": 4,
+      "name": "Import contracts and software licenses",
+      "description": "<p><a href=\"https://wwwwSerivice.samanage.com/contracts?import=True\">https://wwwwSerivice.samanage.com/contracts?import=True</a></p>",
+      "description_no_html": "https://wwwwSerivice.samanage.com/contracts?import=True",
+      "state": "Assigned",
+      "priority": "Medium",
+      "assignee": {
+        "group_id": 4485265,
+        "is_user": true,
+        "id": 4238379,
+        "name": "WW WW",
+        "disabled": false,
+        "email": "wwww@service.hmail.eu",
+        "created_at": "2018-11-20T05:29:00.000-05:00",
+        "last_login": "2018-11-20T05:33:33.000-05:00",
+        "phone": "+37254312367",
+        "role": {
+          "id": 461178,
+          "name": "Administrator",
+          "description": "This is the all powerful administrator user!",
+          "portal": false,
+          "show_my_tasks": false
+        },
+        "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+        "group_ids": [
+          4485265,
+          4485266
+        ],
+        "custom_fields_values": [],
+        "avatar": {
+          "type": "initials",
+          "color": "#dfcd00",
+          "initials": "WW"
+        },
+        "mfa_enabled": false
+      },
+      "requester": {
+        "id": 4204395,
+        "account_id": 63582,
+        "user_id": 4238379,
+        "email": "wwww@service.hmail.eu",
+        "name": "WW WW",
+        "disabled": false,
+        "has_gravatar": false,
+        "avatar": {
+          "type": "initials",
+          "color": "#dfcd00",
+          "initials": "WW"
+        }
+      },
+      "created_at": "2018-11-20T05:29:03.000-05:00",
+      "updated_at": "2018-11-21T12:17:59.000-05:00",
+      "due_at": "2018-11-21T05:29:02.000-05:00",
+      "sla_violations": [],
+      "number_of_comments": 0,
+      "user_saw_all_comments": true,
+      "is_service_request": false,
+      "created_by": {
+        "id": 4204395,
+        "account_id": 63582,
+        "user_id": 4238379,
+        "email": "wwww@service.hmail.eu",
+        "name": "WW WW",
+        "disabled": false,
+        "has_gravatar": false,
+        "avatar": {
+          "type": "initials",
+          "color": "#dfcd00",
+          "initials": "WW"
+        }
+      },
+      "href": "https://api.samanage.com/incidents/31851783-import-contracts-and-software-licenses.json",
+      "cc": [],
+      "custom_fields_values": [],
+      "incidents": [],
+      "changes": [],
+      "tasks": [],
+      "time_tracks": [],
+      "solutions": [],
+      "assets": [],
+      "mobiles": [],
+      "other_assets": [],
+      "configuration_items": [],
+      "purchase_orders": []
+    }
+  ]
+}
+```
+
+### List Users
+
+This action is used to list all users.
+
+#### Input
+
+This action does not contain any inputs.
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|users|[]samanage_user|True|A list of all users|
+
+Example output:
+
+```
+{
+  "users": [
+    {
+      "id": 4245115,
+      "name": "Anon",
+      "disabled": false,
+      "email": "123@service.hmail.eu",
+      "created_at": "2018-11-22T08:13:00.000-05:00",
+      "role": {
+        "id": 461180,
+        "name": "Requester",
+        "description": "Requester role to view and submit service request.",
+        "portal": true,
+        "show_my_tasks": false
+      },
+      "salt": "04f20390ecf0c97571167c6c3350782663b6a7e0",
+      "group_ids": [
+        4492327
+      ],
+      "custom_fields_values": [],
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "AN"
+      },
+      "mfa_enabled": false
+    },
+    {
+      "id": 4244043,
+      "name": "Tom",
+      "disabled": false,
+      "title": "Panic",
+      "email": "20180913dp@gmail.com",
+      "created_at": "2018-11-21T12:28:31.000-05:00",
+      "phone": "12345678",
+      "mobile_phone": "87654321",
+      "department": {
+        "id": 133361,
+        "name": "Information Technology",
+        "default_assignee_id": 4485265
+      },
+      "role": {
+        "id": 461179,
+        "name": "Service Agent User",
+        "description": "Almost like an administrator but no access to setup.",
+        "portal": false,
+        "show_my_tasks": false
+      },
+      "salt": "b3e360e65de5b592ce1ff92e1d90acedbaddbcf7",
+      "group_ids": [
+        4491226
+      ],
+      "custom_fields_values": [],
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "TO"
+      },
+      "mfa_enabled": false,
+      "reports_to": {
+        "id": 4485266,
+        "name": "Helpdesk",
+        "disabled": false,
+        "is_user": false,
+        "reports_to": {
+          "id": -1,
+          "href": "https://api.samanage.com/groups/-1.json"
+        },
+        "avatar": {
+          "type": "group",
+          "color": "#0bc46f"
+        }
+      },
+      "site": {
+        "id": 96691,
+        "name": "Headquarters",
+        "location": "Main Office"
+      }
+    },
+    {
+      "id": 4238379,
+      "name": "WW WW",
+      "disabled": false,
+      "email": "wwww@service.hmail.eu",
+      "created_at": "2018-11-20T05:29:00.000-05:00",
+      "last_login": "2018-11-21T17:20:46.000-05:00",
+      "phone": "+37254312367",
+      "role": {
+        "id": 461178,
+        "name": "Administrator",
+        "description": "This is the all powerful administrator user!",
+        "portal": false,
+        "show_my_tasks": false
+      },
+      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+      "group_ids": [
+        4485265,
+        4485266
+      ],
+      "custom_fields_values": [],
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      },
+      "mfa_enabled": false
+    }
+  ]
+}
+```
+
+### Get Incident
+
+This action is used to get incident details.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|incident_id|integer|None|True|Incident ID|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Details of an incident with the given ID|
+
+Example output:
+
+```
+{
+  "incident": {
+    "id": 31851783,
+    "number": 4,
+    "name": "Import contracts and software licenses",
+    "description": "<p><a href=\"https://wwwwSerivice.samanage.com/contracts?import=True\">https://wwwwSerivice.samanage.com/contracts?import=True</a></p>",
+    "description_no_html": "https://wwwwSerivice.samanage.com/contracts?import=True",
+    "state": "Assigned",
+    "priority": "Medium",
+    "assignee": {
+      "group_id": 4485265,
+      "is_user": true,
+      "id": 4238379,
+      "name": "WW WW",
+      "disabled": false,
+      "email": "wwww@service.hmail.eu",
+      "created_at": "2018-11-20T05:29:00.000-05:00",
+      "last_login": "2018-11-20T05:33:33.000-05:00",
+      "phone": "+37254312367",
+      "role": {
+        "id": 461178,
+        "name": "Administrator",
+        "description": "This is the all powerful administrator user!",
+        "portal": false,
+        "show_my_tasks": false
+      },
+      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+      "group_ids": [
+        4485265,
+        4485266
+      ],
+      "custom_fields_values": [],
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      },
+      "mfa_enabled": false
+    },
+    "requester": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "created_at": "2018-11-20T05:29:03.000-05:00",
+    "updated_at": "2018-11-21T12:17:59.000-05:00",
+    "due_at": "2018-11-21T05:29:02.000-05:00",
+    "sla_violations": [],
+    "number_of_comments": 0,
+    "user_saw_all_comments": true,
+    "is_service_request": false,
+    "created_by": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "href": "https://api.samanage.com/incidents/31851783-import-contracts-and-software-licenses.json",
+    "cc": [],
+    "custom_fields_values": [],
+    "incidents": [],
+    "changes": [],
+    "tasks": [],
+    "time_tracks": [],
+    "solutions": [],
+    "assets": [],
+    "mobiles": [],
+    "other_assets": [],
+    "configuration_items": [],
+    "purchase_orders": []
+  }
+}
+```
+
+### Delete User
+
+This action is used to delete a user.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|user_id|integer|None|True|The ID of a user to delete|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was the operation successful?|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+### Create User
+
+This action is used to create a new user.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|phone|string|None|False|Phone number|None|
+|mobile_phone|string|None|False|Mobile phone number|None|
+|role|string|None|False|Role|['Administrator', 'Facilities Service Desk User', 'Human Resources Service Desk User', 'Read Only', 'Requester', 'Service Agent User', 'Service Task User', "User's Own Site"]|
+|name|string|None|False|User name|None|
+|department|string|None|False|Department|['Facilities', 'Finance', 'Human Resources', 'Information Technology', 'Marketing']|
+|email|string|None|True|Email address|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|user|samanage_user|True|Newly created user|
+
+Example output:
+
+```
+{
+  "user": {
+    "id": 4245316,
+    "name": "John Snow",
+    "disabled": false,
+    "email": "abc@example.com",
+    "created_at": "2018-11-22T15:18:53.337-05:00",
+    "phone": "123456",
+    "mobile_phone": "0012345",
+    "department": {
+      "id": 133365,
+      "name": "Marketing"
+    },
+    "role": {
+      "id": 461182,
+      "name": "Read Only",
+      "portal": false,
+      "show_my_tasks": false
+    },
+    "salt": "fc136bca03c6361bf1e564e18d70cc421b1fc582",
+    "group_ids": [
+      4492546
+    ],
+    "custom_fields_values": [],
+    "avatar": {
+      "type": "initials",
+      "color": "#fa7911",
+      "initials": "JS"
+    },
+    "mfa_enabled": false
+  }
+}
+```
+
+### Get Comments
+
+This action is used to get all comments of an incident.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|incident_id|integer|None|True|ID of an incident to get the comments from|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|comments|[]samanage_comment|True|All comments of an incident|
+
+Example output:
+
+```
+{
+  "comments": [
+    {
+      "id": 39639360,
+      "body": "<p>Comment comment comment</p>",
+      "user": {
+        "id": 4238379,
+        "name": "WW WW",
+        "disabled": false,
+        "email": "wwww@service.hmail.eu",
+        "created_at": "2018-11-20T05:29:00.000-05:00",
+        "last_login": "2018-11-21T17:20:46.000-05:00",
+        "phone": "+37254312367",
+        "role": {
+          "id": 461178,
+          "name": "Administrator",
+          "description": "This is the all powerful administrator user!",
+          "portal": false,
+          "show_my_tasks": false
+        },
+        "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+        "group_ids": [
+          4485265,
+          4485266
+        ],
+        "custom_fields_values": [],
+        "avatar": {
+          "type": "initials",
+          "color": "#dfcd00",
+          "initials": "WW"
+        },
+        "mfa_enabled": false
+      },
+      "created_at": "2018-11-21T15:20:42.000-05:00",
+      "updated_at": "2018-11-21T15:20:42.000-05:00",
+      "attachments": [],
+      "inline_attachments": [],
+      "shared_attachments": [],
+      "is_private": false,
+      "seen_by": [
+        4238379
+      ],
+      "isTask": false,
+      "task_info": {},
+      "commenter_id": 31851783,
+      "commenter_type": "Incident"
+    },
+    {
+      "id": 39646936,
+      "body": "A comment",
+      "user": {
+        "id": 4238379,
+        "name": "WW WW",
+        "disabled": false,
+        "email": "wwww@service.hmail.eu",
+        "created_at": "2018-11-20T05:29:00.000-05:00",
+        "last_login": "2018-11-21T17:20:46.000-05:00",
+        "phone": "+37254312367",
+        "role": {
+          "id": 461178,
+          "name": "Administrator",
+          "description": "This is the all powerful administrator user!",
+          "portal": false,
+          "show_my_tasks": false
+        },
+        "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+        "group_ids": [
+          4485265,
+          4485266
+        ],
+        "custom_fields_values": [],
+        "avatar": {
+          "type": "initials",
+          "color": "#dfcd00",
+          "initials": "WW"
+        },
+        "mfa_enabled": false
+      },
+      "created_at": "2018-11-21T18:24:19.000-05:00",
+      "updated_at": "2018-11-21T18:24:19.000-05:00",
+      "attachments": [],
+      "inline_attachments": [],
+      "shared_attachments": [],
+      "is_private": true,
+      "seen_by": [
+        4238379
+      ],
+      "isTask": false,
+      "task_info": {},
+      "commenter_id": 31851783,
+      "commenter_type": "Incident"
+    }
+  ]
+}
+```
+
+### Attach Incident
+
+This action is used to attach a file to an incident.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|attachment_name|string|None|True|Name of the attachment|None|
+|incident_id|integer|None|True|ID of an incident to attach the file to|None|
+|attachment_bytes|bytes|None|True|Contents of the attachment|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|attachment|samanage_attachment|True|Newly created attachment|
+
+Example output:
+
+```
+{
+  "attachment": {
+    "id": 27211951,
+    "content_type": "text/plain",
+    "size": 12,
+    "filename": "Hello.txt",
+    "url": "https://s3.amazonaws.com/Production_CustomerData/attachments/3e696549fd7763d9ca28/Hello.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIABLAHBLAHBLAH%2F20181122%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20181122T192713Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&X-Amz-Signature=443e9699312d3ce11e8910b0dd2def736b76846e72b9cd8f241481ddfad6536e",
+    "shared_attachment": false,
+    "attachable_id": 31851783,
+    "attachable_type": "Incident",
+    "attachment_type": "attachment",
+    "thumb_url": "/attachments/3e696549fd7763d9ca28/hello-txt.plain?thumb=true",
+    "secure_url": "/attachments/3e696549fd7763d9ca28/hello-txt.plain",
+    "uuid": "3e696549fd7763d9ca28"
+  }
+}
+```
+
+### Comment Incident
+
+This action is used to add a comment to an incident.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|body|string|None|True|The contents of the comment|None|
+|incident_id|integer|None|True|ID of an incident to add the comment to|None|
+|is_private|boolean|True|True|Is the comment private or public?|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|comment|samanage_comment|True|Newly created comment|
+
+Example output:
+
+```
+{
+  "comment": {
+    "id": 39646858,
+    "body": "A comment",
+    "user": {
+      "id": 4238379,
+      "name": "WW WW",
+      "disabled": false,
+      "email": "wwww@service.hmail.eu",
+      "created_at": "2018-11-20T05:29:00.000-05:00",
+      "last_login": "2018-11-21T17:20:46.000-05:00",
+      "phone": "+37254312367",
+      "role": {
+        "id": 461178,
+        "name": "Administrator",
+        "description": "This is the all powerful administrator user!",
+        "portal": false,
+        "show_my_tasks": false
+      },
+      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+      "group_ids": [
+        4485265,
+        4485266
+      ],
+      "custom_fields_values": [],
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      },
+      "mfa_enabled": false
+    },
+    "created_at": "2018-11-21T18:20:36.501-05:00",
+    "updated_at": "2018-11-21T18:20:36.501-05:00",
+    "attachments": [],
+    "inline_attachments": [],
+    "shared_attachments": [],
+    "is_private": true,
+    "seen_by": [
+      4238379
+    ],
+    "isTask": false,
+    "task_info": {},
+    "commenter_id": 31851783,
+    "commenter_type": "Incident"
+  }
+}
+```
+
+### Change Incident State
+
+This action is used to update the state of an incident.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|incident_id|integer|None|True|ID of an incident to update|None|
+|state|string|None|True|New state of an incident|['New', 'Assigned', 'Awaiting Input', 'On Hold', 'Resolved']|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Updated incident|
+
+Example output:
+
+```
+{
+  "incident": {
+    "id": 31851783,
+    "number": 4,
+    "name": "Import contracts and software licenses",
+    "description": "<p><a href=\"https://wwwwSerivice.samanage.com/contracts?import=True\">https://wwwwSerivice.samanage.com/contracts?import=True</a></p>",
+    "description_no_html": "https://wwwwSerivice.samanage.com/contracts?import=True",
+    "state": "Assigned",
+    "priority": "Medium",
+    "assignee": {
+      "group_id": 4485265,
+      "is_user": true,
+      "id": 4238379,
+      "name": "WW WW",
+      "disabled": false,
+      "email": "wwww@service.hmail.eu",
+      "created_at": "2018-11-20T05:29:00.000-05:00",
+      "last_login": "2018-11-20T05:33:33.000-05:00",
+      "phone": "+37254312367",
+      "role": {
+        "id": 461178,
+        "name": "Administrator",
+        "description": "This is the all powerful administrator user!",
+        "portal": false,
+        "show_my_tasks": false
+      },
+      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+      "group_ids": [
+        4485265,
+        4485266
+      ],
+      "custom_fields_values": [],
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      },
+      "mfa_enabled": false
+    },
+    "requester": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "created_at": "2018-11-20T05:29:03.000-05:00",
+    "updated_at": "2018-11-21T12:17:59.000-05:00",
+    "due_at": "2018-11-21T05:29:02.000-05:00",
+    "sla_violations": [],
+    "number_of_comments": 0,
+    "user_saw_all_comments": true,
+    "is_service_request": false,
+    "created_by": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "href": "https://api.samanage.com/incidents/31851783-import-contracts-and-software-licenses.json",
+    "cc": [],
+    "custom_fields_values": [],
+    "incidents": [],
+    "changes": [],
+    "tasks": [],
+    "time_tracks": [],
+    "solutions": [],
+    "assets": [],
+    "mobiles": [],
+    "other_assets": [],
+    "configuration_items": [],
+    "purchase_orders": []
+  }
+}
+```
+
+## Triggers
+
+### New Incidents
+
+This trigger is used to check for new incidents.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|frequency|integer|10|True|How often the trigger should check for new detections in seconds|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|False|Incident|
+
+Example output:
+
+```
+{
+  "incident": {
+    "id": 31851783,
+    "number": 4,
+    "name": "Import contracts and software licenses",
+    "description": "<p><a href=\"https://wwwwSerivice.samanage.com/contracts?import=True\">https://wwwwSerivice.samanage.com/contracts?import=True</a></p>",
+    "description_no_html": "https://wwwwSerivice.samanage.com/contracts?import=True",
+    "state": "Assigned",
+    "priority": "Medium",
+    "assignee": {
+      "group_id": 4485265,
+      "is_user": true,
+      "id": 4238379,
+      "name": "WW WW",
+      "disabled": false,
+      "email": "wwww@service.hmail.eu",
+      "created_at": "2018-11-20T05:29:00.000-05:00",
+      "last_login": "2018-11-20T05:33:33.000-05:00",
+      "phone": "+37254312367",
+      "role": {
+        "id": 461178,
+        "name": "Administrator",
+        "description": "This is the all powerful administrator user!",
+        "portal": false,
+        "show_my_tasks": false
+      },
+      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
+      "group_ids": [
+        4485265,
+        4485266
+      ],
+      "custom_fields_values": [],
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      },
+      "mfa_enabled": false
+    },
+    "requester": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "created_at": "2018-11-20T05:29:03.000-05:00",
+    "updated_at": "2018-11-21T12:17:59.000-05:00",
+    "due_at": "2018-11-21T05:29:02.000-05:00",
+    "sla_violations": [],
+    "number_of_comments": 0,
+    "user_saw_all_comments": true,
+    "is_service_request": false,
+    "created_by": {
+      "id": 4204395,
+      "account_id": 63582,
+      "user_id": 4238379,
+      "email": "wwww@service.hmail.eu",
+      "name": "WW WW",
+      "disabled": false,
+      "has_gravatar": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#dfcd00",
+        "initials": "WW"
+      }
+    },
+    "href": "https://api.samanage.com/incidents/31851783-import-contracts-and-software-licenses.json",
+    "cc": [],
+    "custom_fields_values": [],
+    "incidents": [],
+    "changes": [],
+    "tasks": [],
+    "time_tracks": [],
+    "solutions": [],
+    "assets": [],
+    "mobiles": [],
+    "other_assets": [],
+    "configuration_items": [],
+    "purchase_orders": []
+  }
+}
+```
+
+## Connection
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|token|credential_secret_key|None|True|API Token generated by Samanage admin|None|
+|eu_customer|boolean|False|True|Is the customer based in Europe?|None|
+
+## Troubleshooting
+
+This plugin does not contain any troubleshooting information.
+
+## Versions
+
+* 1.0.0 - Initial plugin
+
+## Workflows
+
+Examples:
+
+* Incident management
+* User provisioning
+
+## References
+
+* [Samanage](https://samanage.com)
+* [Samanage API Documentation](http://samanage.com/api)
+* [Samanage API endpoint](http://api.samanage.com)
+* [Samanage API endpoint for European customers](http://apieu.samanage.com)

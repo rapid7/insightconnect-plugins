@@ -1,0 +1,591 @@
+plugin_spec_version: v2
+name: graphite
+title: Graphite
+vendor: rapid7
+status: ["unsupported"]
+description: Graphite is an enterprise-ready monitoring tool that allows you store
+  and graph metrics
+version: 1.0.0
+tags:
+- graphite
+- graphite-api
+- metrics
+- graphs
+types:
+  metric:
+    name:
+      type: string
+      required: false
+    path:
+      type: string
+      required: false
+    is_expandable:
+      type: boolean
+      required: false
+    is_leaf:
+      type: boolean
+      required: false
+    allow_children:
+      type: boolean
+      required: false
+  metric_raw:
+    target:
+      type: string
+      required: false
+    datapoints:
+      type: '[]array'
+      required: false
+  graph_parameters:
+    areaAlpha:
+      title: Area Alpha
+      description: Alpha (transparency) value (0.0-1.0) of filled areas when using
+        an areaMode
+      type: float
+      default: 1
+      required: false
+    areaMode:
+      title: Area Mode
+      description: Type of filling of the area below the graphed lines
+      type: string
+      enum:
+      - none
+      - first
+      - all
+      - stacked
+      default: none
+      required: false
+    bgcolor:
+      title: Background Color
+      description: Background color of the graph (HTML color name or code)
+      type: string
+      default: white
+      required: false
+    cacheTimeout:
+      title: Cache Timeout
+      description: Cache timeout value in seconds
+      type: integer
+      default: 60
+      required: false
+    colorList:
+      title: Color List
+      description: List of colors to use for graph lines (HTML color name or code)
+      type: '[]string'
+      required: false
+    drawNullAsZero:
+      title: Draw None as Zero
+      description: Convert None (null) values to zero
+      type: boolean
+      default: false
+      required: false
+    fgcolor:
+      title: Foreground Color
+      description: Foreground color of the graph - title, legend text, and axis labels
+        (HTML color name or code)
+      type: string
+      default: black
+      required: false
+    fontBold:
+      title: Bold Font
+      description: Make fonts bold
+      type: boolean
+      default: false
+      required: false
+    fontItalic:
+      title: Italic Font
+      description: Make fonts italic
+      type: boolean
+      default: false
+      required: false
+    fontName:
+      title: Font Name
+      description: Font used to render text on the graph
+      type: string
+      default: Sans
+      required: false
+    fontSize:
+      title: Font Size
+      description: Change the font size
+      type: float
+      default: 10
+      required: false
+    graphOnly:
+      title: Graph Only
+      description: Display only the graph area with no grid lines, axes, or legend
+      type: boolean
+      default: false
+      required: false
+    graphType:
+      title: Graph Type
+      description: Type of graph to be rendered
+      type: string
+      enum:
+      - line
+      - pie
+      default: line
+      required: false
+    hideLegend:
+      title: Hide Legend
+      description: Do not draw legend (if unset, the legend is displayed if there
+        are less than 10 items)
+      type: string
+      enum:
+      - unset
+      - 'true'
+      - 'false'
+      default: unset
+      required: false
+    hideNullFromLegend:
+      title: Hide None from Legend
+      description: Series with all null values will not be reported in the legend
+      type: boolean
+      default: false
+      required: false
+    hideAxes:
+      title: Hide Axes
+      description: X & Y axes will not be rendered
+      type: boolean
+      default: false
+      required: false
+    hideXAxis:
+      title: Hide X-axis
+      description: X-axis will not be rendered
+      type: boolean
+      default: false
+      required: false
+    hideYAxis:
+      title: Hide Y-axis
+      description: Y-axis will not be rendered
+      type: boolean
+      default: false
+      required: false
+    hideGrid:
+      title: Hide Grid
+      description: Grid lines will not be rendered
+      type: boolean
+      default: false
+      required: false
+    height:
+      title: Graph Height
+      description: Height of the generated graph image (in pixels)
+      type: integer
+      default: 300
+      required: false
+    leftColor:
+      title: Left Y-axis Color
+      description: In dual Y-axis mode, the color of all metrics associated with the
+        left Y-axis (HTML color name or code)
+      type: string
+      required: false
+    leftDashed:
+      title: Left Y-axis Dashed
+      description: In dual Y-axis mode, draw all metrics associated with the left
+        Y-axis using dashed lines
+      type: boolean
+      default: false
+      required: false
+    leftWidth:
+      title: Left Y-Axis Width
+      description: In dual Y-axis mode, the line width of all metrics associated with
+        the left Y-axis (in pixels)
+      type: float
+      required: false
+    lineMode:
+      title: Line Drawing Mode
+      description: Line drawing behavior
+      type: string
+      enum:
+      - slope
+      - staircase
+      - connected
+      default: slope
+      required: false
+    lineWidth:
+      title: Line Width
+      description: Line width of all metrics (in pixels)
+      type: float
+      default: 1.2
+      required: false
+    logBase:
+      title: Logarithmic Scale Base
+      description: Draw the graph with a logarithmic scale of the specified base (10
+        for common logarithm)
+      type: integer
+      required: false
+    majorGridLineColor:
+      title: Major Grid Lines Color
+      description: Color of the major grid lines (HTML color name or code)
+      type: string
+      default: rose
+      required: false
+    margin:
+      title: Margin
+      description: Margin around the graph image on all sides (in pixels)
+      type: integer
+      default: 10
+      required: false
+    minorGridLineColor:
+      title: Minor Grid Lines Color
+      description: Color of the minor grid lines (HTML color name or code)
+      type: string
+      default: grey
+      required: false
+    minorY:
+      title: Ratio of Grid Lines
+      description: Number of minor grid lines per major line on the Y-axis
+      type: float
+      default: 1
+      required: false
+    minXStep:
+      title: Minimum Step between Data Points
+      description: Minimum pixel-step to use between datapoints drawn (any value below
+        this will trigger a point consolidation of the series at render time)
+      type: integer
+      default: 1
+      required: false
+    noCache:
+      title: Disable Caching
+      description: Disable caching in rendered graphs
+      type: boolean
+      default: false
+      required: false
+    noNullPoints:
+      title: No None Points
+      description: Removes all null datapoints from the metrics used
+      type: boolean
+      default: false
+      required: false
+    pieLabels:
+      title: Pie Chart Label Orientation
+      description: Orientation for slice labels inside of a pie chart
+      type: string
+      enum:
+      - horizontal
+      - rotated
+      default: horizontal
+      required: false
+    pieMode:
+      title: Pie Chart Aggregation Mode
+      description: Type of aggregation to use to calculate slices of a pie chart
+      type: string
+      enum:
+      - average
+      - maximum
+      - minimum
+      default: average
+      required: false
+    rightColor:
+      title: Right Y-axis Color
+      description: In dual Y-axis mode, the color of all metrics associated with the
+        right Y-axis (HTML color name or code)
+      type: string
+      required: false
+    rightDashed:
+      title: Right Y-axis Dashed
+      description: In dual Y-axis mode, draw all metrics associated with the right
+        Y-axis using dashed lines
+      type: boolean
+      default: false
+      required: false
+    rightWidth:
+      title: Right Y-axis Width
+      description: In dual Y-axis mode, the line width of all metrics associated with
+        the right Y-axis (in pixels)
+      type: float
+      required: false
+    template:
+      title: Graph Template
+      description: Template from `graphTemplates.conf` to use for default colors and
+        graph styles
+      type: string
+      required: false
+    title:
+      title: Graph Title
+      description: Title at the top of the graph (center aligned)
+      type: string
+      required: false
+    tz:
+      title: TimeZone
+      description: Time zone to convert all times into
+      type: string
+      required: false
+    uniqueLegend:
+      title: Only Unique Legend Items
+      description: Display only unique legend items, removing any duplicates
+      type: boolean
+      default: false
+      required: false
+    valueLabels:
+      title: Pie Chart Value Labels
+      description: Slice label value rendering within a pie chart
+      type: string
+      enum:
+      - percent
+      - numbers
+      - none
+      default: percent
+      required: false
+    valueLabelsColor:
+      title: Pie Chart Value Labels Color
+      description: Color used to draw slice labels within a pie chart (HTML color
+        name or code)
+      type: string
+      required: false
+    valueLabelsMin:
+      title: Minimum Value Labels Value
+      description: Slice values below this minimum will not have their labels rendered
+      type: integer
+      required: false
+    vtitle:
+      title: Y-Axis Title
+      description: Vertical title for Y-axis
+      type: string
+      required: false
+    vtitleRight:
+      title: Y-Axis Title
+      description: In dual Y-axis mode, the vertical title for the right Y-axis
+      type: string
+      required: false
+    width:
+      title: Graph Width
+      description: Width of the generated graph image (in pixels)
+      type: integer
+      default: 330
+      required: false
+    xFormat:
+      title: Time Format for X-axis
+      description: Time format used when displaying the X-axis (in strftime format)
+      type: string
+      required: false
+    yAxisSide:
+      title: Y-axis Side
+      description: Side of Graph on which to render the Y-axis
+      type: string
+      enum:
+      - left
+      - right
+      default: left
+      required: false
+    yDivisors:
+      title: Y-axis Intermediate Values
+      description: Preferred number of intermediate values to display on the Y-axis
+      type: '[]integer'
+      required: false
+    yMin:
+      title: Minimum Value of Y-axis
+      description: Lower bound of the Y-axis of the graph
+      type: float
+      required: false
+    yMax:
+      title: Maximum Value of Y-axis
+      description: Upper bound of the Y-axis of the graph
+      type: float
+      required: false
+    yMaxLeft:
+      title: Maximum Value of Left Y-axis
+      description: In dual Y-axis mode, sets the upper bound of the left Y-axis
+      type: float
+      required: false
+    yMaxRight:
+      title: Maximum Value of Right Y-axis
+      description: In dual Y-axis mode, sets the upper bound of the right Y-axis
+      type: float
+      required: false
+    yMinLeft:
+      title: Minimum Value of Left Y-axis
+      description: In dual Y-axis mode, sets the lower bound of the left Y-axis
+      type: float
+      required: false
+    yMinRight:
+      title: Minimum Value of Right Y-axis
+      description: In dual Y-axis mode, sets the lower bound of the right Y-axis
+      type: float
+      required: false
+    yStep:
+      title: Value Step for Y-axis
+      description: Value step between the Y-axis labels and grid lines
+      type: float
+      required: false
+    yStepLeft:
+      title: Value Step for Left Y-axis
+      description: In dual Y-axis mode, value step between the left Y-axis labels
+        and grid lines
+      type: float
+      required: false
+    yStepRight:
+      title: Value Step for Right Y-axis
+      description: In dual Y-axis mode, value step between the right Y-axis labels
+        and grid lines
+      type: float
+      required: false
+    yUnitSystem:
+      title: Unit System for Y-axis values
+      description: Unit system for compacting Y-axis values
+      type: string
+      enum:
+      - si
+      - binary
+      - sec
+      - msec
+      - none
+      default: si
+      required: false
+connection:
+  graphite_url:
+    description: Graphite API Server URL
+    type: string
+    required: true
+    title: URL
+  graphite_port:
+    description: Graphite API Port Number
+    type: integer
+    default: 8888
+    required: false
+    title: Port
+  ssl_verify:
+    title: SSL Verify
+    description: SSL verification
+    type: boolean
+    default: true
+    required: true
+actions:
+  metrics_index:
+    title: Index Metrics
+    description: Walks the metrics tree and returns every metric found
+    input: null
+    output:
+      metrics:
+        description: List of indexed metrics' names
+        type: '[]string'
+        required: false
+        title: Metrics
+  metrics_find:
+    title: Find Metrics
+    description: Find metrics under a given path
+    input:
+      query:
+        title: Query
+        description: Search Query
+        type: string
+        required: true
+      wildcards:
+        title: Wildcards
+        description: Use wildcard result
+        type: boolean
+        default: false
+        required: false
+      from:
+        title: From
+        description: Beginning of required range
+        type: date
+        required: false
+      until:
+        title: Until
+        description: End of required range
+        type: date
+        required: false
+    output:
+      metrics:
+        description: List of metrics
+        type: '[]metric'
+        required: false
+        title: Metrics
+  metrics_expand:
+    title: Expand Metrics
+    description: Expands metrics with matching paths
+    input:
+      query:
+        title: Query
+        description: Search query
+        type: string
+        required: true
+      leaves_only:
+        title: Leaves Only
+        description: Display only leaves
+        type: boolean
+        default: false
+        required: false
+    output:
+      metrics:
+        description: List of matching metrics' names
+        type: '[]string'
+        required: false
+        title: Metrics
+  metrics_retrieve:
+    title: Retrieve Metrics
+    description: Retrieve raw metrics data
+    input:
+      target:
+        title: Target
+        description: A path identifying one or several metrics, optionally with functions
+          acting on those metrics
+        type: string
+        required: true
+      from:
+        title: From
+        description: Beginning of required range (can be relative or absolute)
+        type: string
+        required: false
+      until:
+        title: Until
+        description: End of required range (can be relative or absolute)
+        type: string
+        required: false
+      templates:
+        title: Template Variables
+        description: Values for template variables used in target
+        type: object
+        required: false
+    output:
+      metrics:
+        description: Target metrics in JSON format
+        type: '[]metric_raw'
+        required: false
+        title: Metrics
+  metrics_render:
+    title: Render Metrics
+    description: Render metrics data as a graph
+    input:
+      target:
+        title: Target
+        description: A path identifying one or several metrics, optionally with functions
+          acting on those metrics
+        type: string
+        required: true
+      from:
+        title: From
+        description: Beginning of required range (can be relative or absolute)
+        type: string
+        required: false
+      until:
+        title: Until
+        description: End of required range (can be relative or absolute)
+        type: string
+        required: false
+      templates:
+        title: Template Variables
+        description: Values for template variables used in target
+        type: object
+        required: false
+      format:
+        title: File Format
+        description: Rendered graph file format
+        type: string
+        enum:
+        - png
+        - raw
+        - csv
+        - svg
+        - pdf
+        default: png
+        required: false
+      graph_params:
+        title: Graph Parameters
+        description: Parameters to control the rendered graph output
+        type: graph_parameters
+        required: false
+    output:
+      graph:
+        description: Rendered Graph in base64 format
+        type: bytes
+        required: false
+        title: Rendered Graph

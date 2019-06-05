@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "change_group",
+    "input": {
+      "action": "add",
+      "user_name": "tim@lastpass.com",
+      "groups": [ "CC", "users" ]
+    },
+    "connection": {
+      "account": 0,
+      "provhash": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "replace",
+    "meta": {},
+    "input": {
+      "expression": "-s [:space:] ' '",
+      "text": "Way    too   many              spaces"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

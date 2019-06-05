@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "upload_file",
+        "input": {
+            "file": "This Is Bad",
+            "folder_id": "Not A folder",
+            "name": "bad"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

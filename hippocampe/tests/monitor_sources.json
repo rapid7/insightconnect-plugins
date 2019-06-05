@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "monitor_sources",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

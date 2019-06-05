@@ -1,0 +1,22 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "basic_auth": {
+        "password": "",
+        "username": ""
+      },
+      "token_auth": {
+        "secretKey": ""
+      },
+      "port": 3000,
+      "url": ""
+    },
+    "action": "get_organization_users",
+    "input": {
+      "organization_id": 1
+    }
+  },
+  "version": "v1"
+}

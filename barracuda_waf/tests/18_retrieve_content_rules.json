@@ -1,0 +1,19 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {},
+    "input": {
+      "id": "",
+      "virtual_service_id": "test-v14-virtual-service"
+    },
+    "action": "retrieve_content_rules"
+  }
+}

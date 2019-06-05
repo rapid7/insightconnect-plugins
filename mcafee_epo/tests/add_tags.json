@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "add_tags",
+    "input": {
+      "tag": "tag name",
+      "devices": ["target device-1", "target device-2", "etc.."]
+    },
+    "connection": {
+      "url": "epo.company.com",
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "port": 8443
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

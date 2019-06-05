@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "list_watchlists",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

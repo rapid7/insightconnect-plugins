@@ -1,0 +1,93 @@
+plugin_spec_version: v2
+name: compression
+title: Compression
+description: Compress/decompress a file using different algorithms
+version: 2.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- compress
+- decompress
+- base64
+- file
+- gzip
+- bzip
+- lz
+- xz
+- bytes
+- zip
+enable_cache: false
+actions:
+  create_archive:
+    title: Create Archive
+    description: Compress a files into archive
+    input:
+      files:
+        type: '[]file'
+        description: Files to be compressed
+        required: true
+      algorithm:
+        type: string
+        description: Compression algorithm
+        enum:
+        - tarball
+        - zip
+        required: true
+      filename:
+        type: string
+        description: Name of file archive
+        required: true
+    output:
+      archive:
+        type: file
+        description: Archive
+        required: false
+  decompress_bytes:
+    title: Decompress Bytes
+    description: Decompress bytes
+    input:
+      bytes:
+        type: bytes
+        description: Compressed Base64-encoded bytes
+        required: true
+    output:
+      decompressed:
+        type: bytes
+        description: Decompressed
+        required: false
+  compress_bytes:
+    title: Compress Bytes
+    description: Compress bytes
+    input:
+      bytes:
+        type: bytes
+        description: Base64-encoded file/bytes
+        required: true
+      algorithm:
+        type: string
+        description: Compression algorithm
+        enum:
+        - gzip
+        - bzip
+        - lz
+        - xz
+        - zip
+        required: true
+    output:
+      compressed:
+        type: bytes
+        description: Compressed
+        required: false
+  extract_archive:
+    title: Extract Archive
+    description: Exctract file archive
+    input:
+      archive:
+        type: file
+        description: Base64-encoded archive file
+        required: true
+    output:
+      files:
+        type: '[]file'
+        description: Files
+        required: false

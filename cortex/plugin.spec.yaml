@@ -1,0 +1,372 @@
+plugin_spec_version: v2
+name: cortex
+title: Cortex
+vendor: rapid7
+status: ["unsupported"]
+description: Cortex, an open source and free software, for analyzing observables
+version: 1.0.0
+tags:
+- cortex
+- hive
+- intel
+types:
+  analyzers:
+    id:
+      description: The analyzer's identifier
+      title: ID
+      type: string
+      required: false
+    version:
+      description: The analyzer's version
+      type: string
+      required: false
+    dataTypeList:
+      description: An array of the observable datatypes that the analyzer can act
+        upon
+      title: Data Type List
+      type: '[]string'
+      required: false
+    name:
+      description: The analyzer's name
+      type: string
+      required: false
+    description:
+      description: The analyzer's description
+      type: string
+      required: false
+    license:
+      description: The analyzer's license
+      type: string
+      required: false
+    author:
+      description: The analyzer's author
+      type: string
+      required: false
+    url:
+      description: The analyzer's url
+      type: string
+      required: false
+  attributes:
+    dataType:
+      title: Data Type
+      description: Data type e.g. domain, ip, file
+      type: string
+      required: false
+    tlp:
+      description: Traffic Light Protocol level e.g. 1
+      title: TLP
+      type: integer
+      required: false
+  artifact:
+    attributes:
+      type: attributes
+      description: Attributes
+      required: false
+    data:
+      type: string
+      required: false
+  artifacts:
+    type:
+      type: string
+      required: false
+    value:
+      type: string
+      required: false
+  job:
+    status:
+      description: 'The job''s status: Success, InProgress or Failure'
+      type: string
+      required: true
+    date:
+      description: A timestamp which represents the job's start date
+      type: integer
+      required: true
+    id:
+      description: The job's ID
+      title: ID
+      type: string
+      required: true
+    artifact:
+      description: The observable details
+      type: artifact
+      required: true
+    analyzerId:
+      description: The analyzer's ID
+      type: string
+      required: true
+  input_file_attributes:
+    tlp:
+      description: Traffic Light Protocol level e.g. 1
+      title: TLP
+      type: integer
+      required: true
+    filename:
+      description: File name
+      title: File Name
+      type: string
+      required: false
+  file_attributes:
+    dataType:
+      title: Data Type
+      description: Data type e.g. domain, ip, file
+      type: string
+      required: false
+    tlp:
+      description: Traffic Light Protocol level e.g. 1
+      title: TLP
+      type: integer
+      required: false
+    content-type:
+      description: The files mime type
+      title: Content Type
+      type: string
+      required: false
+    filename:
+      description: File name
+      title: File Name
+      type: string
+      required: false
+  file_artifact:
+    attributes:
+      type: file_attributes
+      required: false
+connection:
+  host:
+    type: string
+    title: Host
+    description: Cortex host e.g. cortex.company.com or 10.3.4.50
+    required: true
+  port:
+    type: string
+    title: Port
+    description: Cortex API port e.g. 9999
+    default: '9999'
+    required: true
+  protocol:
+    type: string
+    title: Protocol
+    description: HTTP protocol
+    enum:
+    - http
+    - https
+    required: true
+  proxy:
+    type: object
+    title: Proxy
+    description: An optional dictionary containing proxy data, with http or https
+      as the key, and the proxy url as the value
+    required: false
+  verify:
+    type: boolean
+    title: SSL Verify
+    description: Verify the certificate
+    default: true
+    required: true
+actions:
+  get_analyzer:
+    title: Get Analyzers
+    description: List enabled analyzers within Cortex
+    input:
+      analyzer_id:
+        title: Analyzer ID
+        description: Analyzer ID e.g. VirusTotal_Scan_3_0. If empty, all enabled analyzers
+          will be returned
+        type: string
+        required: false
+    output:
+      list:
+        type: '[]analyzers'
+        description: List
+        required: true
+  get_analyzer_by_type:
+    title: Get Analyzer by Type
+    description: List analyzers that can act upon a given datatype
+    input:
+      type:
+        title: Type
+        description: Data type, e.g. IP address, hash, domain
+        type: string
+        required: true
+    output:
+      list:
+        type: '[]analyzers'
+        description: List
+        required: true
+  get_jobs:
+    title: Get Jobs
+    description: List of analysis jobs
+    input:
+      dataTypeFilter:
+        type: string
+        title: Type Filter
+        description: Data type filter e.g. ip, domain, hash, etc
+        required: false
+      dataFilter:
+        type: string
+        title: Data Filter
+        description: A string representing a part of an observable value. Could be
+          an IP or part of an IP, a domain, url and so on
+        required: false
+      analyzerFilter:
+        type: string
+        title: Analyzer Filter
+        description: Analyzer's ID
+        required: false
+      start:
+        type: integer
+        title: Start
+        description: A number representing the index of the page start
+        default: 0
+        required: false
+      limit:
+        type: integer
+        title: Limit
+        description: A number representing a page size
+        default: 10
+        required: false
+    output:
+      list:
+        title: Jobs
+        description: List of jobs
+        type: '[]job'
+        required: true
+  get_job_details:
+    title: Get Job Details
+    description: List the details of a given job, identified by its ID
+    input:
+      job_id:
+        title: Job ID
+        description: Job ID e.g. c9uZDbHBf32DdIVJ
+        type: string
+        required: true
+    output:
+      status:
+        description: 'The job''s status: Success, InProgress or Failure'
+        type: string
+        required: true
+      date:
+        description: A timestamp which represents the job's start date
+        type: integer
+        required: true
+      id:
+        description: The job's ID
+        title: ID
+        type: string
+        required: true
+      artifact:
+        description: The observable details
+        type: artifact
+        required: true
+      analyzerId:
+        description: The analyzer's ID
+        type: string
+        required: true
+  delete_job:
+    title: Delete Job
+    description: Delete an existing job, identified by its ID
+    input:
+      job_id:
+        title: Job ID
+        description: Job ID e.g. c9uZDbHBf32DdIVJ
+        type: string
+        required: true
+    output:
+      status:
+        type: boolean
+        description: Deletion success
+        required: true
+  get_job_report:
+    title: Get Job Report
+    description: List report of a given job, identified by its ID
+    input:
+      job_id:
+        title: Job ID
+        description: Job ID e.g. c9uZDbHBf32DdIVJ
+        type: string
+        required: true
+    output:
+      report:
+        type: object
+        description: Report
+        required: true
+  run_analyzer:
+    title: Run Analyzer
+    description: Run analyzers on an observable
+    input:
+      analyzer_id:
+        title: Analyzer ID
+        description: Analyzer ID e.g. Hipposcore_1_0
+        type: string
+        required: true
+      observable:
+        title: Observable
+        description: The observable's value e.g. badguy.com
+        type: string
+        required: true
+      attributes:
+        type: attributes
+        description: Attributes
+        required: true
+    output:
+      status:
+        description: 'The job''s status: Success, InProgress or Failure'
+        type: string
+        required: true
+      date:
+        description: A timestamp which represents the job's start date
+        type: integer
+        required: true
+      id:
+        description: The job's ID
+        title: ID
+        type: string
+        required: true
+      analyzerId:
+        description: The analyzer's ID
+        type: string
+        required: true
+      artifact:
+        description: The observable details
+        type: artifact
+        required: true
+  run_file_analyzer:
+    title: Run a File Analyzer
+    description: Run analyzers on a file
+    input:
+      analyzer_id:
+        title: Analyzer ID
+        description: Analyzer ID e.g. File_Info_2_0
+        type: string
+        required: true
+      file:
+        title: File
+        description: A file to analyze
+        type: bytes
+        required: true
+      attributes:
+        title: Attributes
+        description: Attributes
+        type: input_file_attributes
+        required: true
+    output:
+      status:
+        description: 'The job''s status: Success, InProgress or Failure'
+        type: string
+        required: true
+      date:
+        description: A timestamp which represents the job's start date
+        type: integer
+        required: true
+      id:
+        description: The job's ID
+        title: ID
+        type: string
+        required: true
+      analyzerId:
+        description: The analyzer's ID
+        type: string
+        required: true
+      artifact:
+        description: The observable details
+        type: file_artifact
+        required: true

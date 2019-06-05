@@ -1,0 +1,815 @@
+plugin_spec_version: v2
+name: sophos_xg_firewall
+title: Sophos XG Firewall
+description: Next Generation Endpoint Protection and Enterprise Firewall
+version: 2.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- Sophos
+- Endpoint
+- Firewall
+types:
+  securitypolicy:
+    Name:
+      title: Name
+      description: Policy Name
+      type: string
+      required: true
+    Description:
+      title: Description
+      description: Policy Description
+      type: string
+    Status:
+      title: Status
+      description: Policy Status
+      type: string
+      default: Disable
+      enum:
+      - Disable
+      - Enable
+    IPFamily:
+      title: IP Family
+      description: IP Family type
+      type: string
+      default: IPv4
+      enum:
+      - IPv4
+      - IPv6
+    Position:
+      title: Position
+      description: Security Policy position
+      type: string
+      default: top
+      enum:
+      - top
+      - bottom
+      - after
+      - before
+      required: true
+    PositionPolicyName:
+      title: Position Policy Name
+      description: Name of policy that this policy is to be placed before or after
+      type: string
+    IntrusionPrevention:
+      title: Intrusion Prevention
+      description: Intrusion Prevention
+      type: string
+      default: None
+    TrafficShapingPolicy:
+      title: Traffic Shaping Policy
+      description: Traffic Shaping Policy
+      type: string
+      default: None
+    SourceSecurityHeartbeat:
+      title: SourceSecurityHeartbeat
+      description: SourceSecurityHeartbeat
+      type: string
+      enum:
+      - Disable
+      - Enable
+      default: Disable
+    DestSecurityHeartbeat:
+      title: DestSecurityHeartbeat
+      description: DestSecurityHeartbeat
+      type: string
+      enum:
+      - Disable
+      - Enable
+      default: Disable
+  accesspath:
+    path:
+      title: Path
+      description: Path
+      type: '[]string'
+    backend:
+      title: Backend
+      description: Backend
+      type: '[]string'
+    auth_profile:
+      title: Authentication Profile
+      description: Authentication Profile
+      type: string
+    allowed_networks:
+      title: Allowed Networks
+      description: Allowed Networks
+      type: '[]string'
+    denied_networks:
+      title: Denied Networks
+      description: Denied Networks
+      type: '[]string'
+    stickysession_status:
+      title: Stickysession Status
+      description: Stickysession Status
+      type: integer
+    hot_standby:
+      title: Hot Standby
+      description: Hot Standby
+      type: integer
+    websocket_passthrough:
+      title: Websocket Passthrough
+      description: Websocket passthrough
+      type: integer
+  portrange:
+    start:
+      title: Start
+      type: integer
+    end:
+      title: End
+      type: integer
+  exception:
+    path:
+      title: Path
+      description: Path
+      type: '[]string'
+    op:
+      title: Operation
+      description: Operation
+      type: string
+      default: or
+      enum:
+      - and
+      - or
+    source:
+      title: Source
+      description: Source
+      type: '[]string'
+    skip_threats_filter_categories:
+      title: Skip Filter Categories
+      descrption: Skip threat filter categories
+      type: '[]string'
+    skipav:
+      title: Skip AV
+      description: Skip AV
+      type: boolean
+      default: false
+    skipbadclients:
+      title: Skip Bad Clients
+      description: Skip bad clients
+      type: boolean
+      default: false
+    skipcookie:
+      title: Skip Cookie
+      description: Skip Cookie
+      type: boolean
+      default: false
+    skipform:
+      title: Skip Form
+      description: Skip form
+      type: boolean
+      default: false
+    skipurl:
+      title: Skip URL
+      description: Skip URL
+      type: boolean
+      default: false
+  protocolsecurity:
+    CompressionSupport:
+      title: Compression Support
+      description: Compression support
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    RewriteHTML:
+      title: Rewrite HTML
+      description: Rewrite HTML
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    RewriteCookies:
+      title: Rewrite Cookies
+      description: Rewrite cookies
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    PassHostHeader:
+      title: Pass Host Header
+      description: Pass host header
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+  userpolicy:
+    SecurityPolicy:
+      title: Security Policy
+      type: securitypolicy
+      description: General security policy settings
+    SourceZones:
+      title: Source Zones
+      type: '[]string'
+      description: Zones for Source Zone
+    SourceNetworks:
+      title: Source Networks
+      description: Network sources
+      type: '[]string'
+    Services:
+      title: Services
+      description: Name of services
+      type: '[]string'
+    Schedule:
+      title: Schedule
+      description: Schedule time that is available eg. All The Time, Work Hours[5
+        Day Week]
+      type: string
+      default: All The Time
+    ScanFTP:
+      title: Scan FTP
+      description: Scan FTP
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ScanHTTP:
+      title: Scan HTTP
+      description: Scan HTTP
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ScanHTTPS:
+      title: Scan HTTPS
+      description: Scan HTTPS
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    DestinationZones:
+      title: Destination Zones
+      description: Destination Zones
+      type: '[]string'
+    DestinationNetworks:
+      title: Destination Networks
+      description: Destination Networks
+      type: '[]string'
+    Identity:
+      title: Identity
+      description: Users or groups
+      type: '[]string'
+    DataAccounting:
+      title: Data Accounting
+      description: Data Accounting
+      type: string
+      default: Exclude
+      enum:
+      - Exclude
+      - Include
+    RewriteSourceAddress:
+      title: Rewrite Source Address
+      description: Rewrite source address
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    OutboundAddress:
+      title: Outbound Address
+      description: Outbound address, NAT Policy to be applied
+      type: string
+    PrimaryGateway:
+      title: Primary Gateway
+      description: Primary gateway
+      type: string
+    BackupGateway:
+      title: Backup Gateway
+      description: Backup gateway
+      type: string
+    DSCPMarking:
+      title: DSCP Marking
+      description: DSCP Marking
+      type: string
+    ApplicationControl:
+      title: Application Control
+      description: Application Control
+      type: string
+    ApplicationBaseQoSPolicy:
+      title: Application QoS Policy
+      description: Application Base QoS Policy
+      type: string
+      default: 'NULL'
+    WebFilter:
+      title: Web Filter
+      description: Web Filter
+      type: string
+    WebCategoryBaseQoSPolicy:
+      title: Web QoS Policy
+      description: Web Category Base QoS Policy
+      type: string
+    LogTraffic:
+      title: Log Traffic
+      description: Log Traffic
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+  networkpolicy:
+    SecurityPolicy:
+      title: Security Policy
+      type: securitypolicy
+      description: General security policy settings
+    SourceZones:
+      title: Source Zones
+      type: '[]string'
+      description: Zones for Source Zone
+    SourceNetworks:
+      title: Source Networks
+      description: Network sources
+      type: '[]string'
+    Services:
+      title: Services
+      description: Name of services
+      type: '[]string'
+    Schedule:
+      title: Schedule
+      description: Schedule
+      type: string
+    DestinationZones:
+      title: Destination Zones
+      description: Destination Zones
+      type: '[]string'
+    DestinationNetworks:
+      title: Destination Networks
+      description: Destination Networks
+      type: '[]string'
+    Action:
+      title: Action
+      description: Action
+      type: string
+      default: Drop
+      enum:
+      - Accept
+      - Reject
+      - Drop
+    MatchIdentity:
+      title: Match Identity
+      description: Match Identity
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    Identity:
+      title: Identity
+      description: Users or groups
+      type: '[]string'
+    DataAccounting:
+      title: Data Accounting
+      description: Data Accounting
+      type: string
+      default: Exclude
+      enum:
+      - Exclude
+      - Include
+    RewriteSourceAddress:
+      title: Rewrite Source Address
+      description: Rewrite source address
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    OutboundAddress:
+      title: Outbound Address
+      description: Outbound address
+      type: string
+    PrimaryGateway:
+      title: Primary Gateway
+      description: Primary gateway
+      type: string
+    BackupGateway:
+      title: Backup Gateway
+      description: Backup gateway
+      type: string
+    DSCPMarking:
+      title: DSCP Marking
+      description: DSCP Marking
+      type: string
+    LogTraffic:
+      title: Log Traffic
+      description: Log Traffic
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+  nonhttpbasedpolicy:
+    SecurityPolicy:
+      title: Security Policy
+      type: securitypolicy
+      description: General security policy settings
+    SourceZones:
+      title: Source Zones
+      type: '[]string'
+      description: Zones for Source Zone
+    SourceNetworks:
+      title: Source Networks
+      description: Network sources
+      type: '[]string'
+    ExceptionNetworks:
+      title: Exception Networks
+      description: Network sources
+      type: '[]string'
+    HostedAddress:
+      title: Hosted Address
+      description: Hosted Address
+      type: string
+      require: true
+    ScanSMTP:
+      title: Scan SMTP
+      description: Scan SMTP
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ScanIMAP:
+      title: Scan IMAP
+      description: Scan IMAP
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ScanPOP3:
+      title: Scan POP3
+      description: Scan POP3
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ScanSMTPS:
+      title: Scan SMTPS
+      description: Scan SMTPS
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ScanPOP3S:
+      title: Scan POP3S
+      description: Scan POP3S
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ProtectedZone:
+      title: Protected Zone
+      description: Protected Zone
+      type: string
+      default: Any
+      enum:
+      - Any
+      - LAN
+      - DMZ
+      - VPN
+      - WAN
+    ProtectedServer:
+      title: Protected Server
+      description: Protected server
+      type: string
+    ForwardPorts:
+      title: Forward Ports
+      description: Forward Ports
+      type: string
+    Protocol:
+      title: Protocol
+      description: Protocol
+      type: string
+      default: TCP
+      enum:
+      - TCP
+      - UDP
+    ExternalPort:
+      title: External Port
+      description: External port
+      type: integer
+    ExternalPortRange:
+      title: External Port Range
+      description: External port range
+      type: portrange
+    ExternalPortList:
+      title: External Port List
+      description: External port list
+      type: '[]integer'
+    MappedPort:
+      title: Mapped Port
+      description: Mapped port
+      type: integer
+    MappedPortRange:
+      title: Mapped Port Range
+      description: Mapped port range
+      type: portrange
+    MappedPortList:
+      title: Mapped Port List
+      description: Mapped port list
+      type: '[]integer'
+    RewriteSourceAddress:
+      title: Rewrite Source Address
+      description: Rewrite source address
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    OutboundAddress:
+      title: Outbound Address
+      description: Outbound address
+      type: string
+    MatchIdentity:
+      title: Match Identity
+      description: Match Identity
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    Identity:
+      title: Identity
+      description: Users or groups
+      type: '[]string'
+    DataAccounting:
+      title: Data Accounting
+      description: Data Accounting
+      type: string
+      default: Exclude
+      enum:
+      - Include
+      - Exclude
+    ReflexiveRule:
+      title: Reflexive Rule
+      description: Reflexive Rule
+      type: string
+      default: 'No'
+      enum:
+      - 'Yes'
+      - 'No'
+    LogTraffic:
+      title: Log Traffic
+      description: Log Traffic
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+  httpbasedpolicy:
+    SecurityPolicy:
+      title: Security Policy
+      type: securitypolicy
+      description: General security policy settings
+    HostedAddress:
+      title: Hosted Address
+      description: Hosted Address
+      type: string
+      require: true
+    HTTPS:
+      title: HTTPS
+      description: HTTPS
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+      required: true
+    RedirectHTTP:
+      title: Redirect HTTP
+      description: Redirect HTTP
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ListenPort:
+      title: Listen Port
+      description: Listen port
+      type: integer
+    Domains:
+      title: Domains
+      description: Domains
+      type: '[]string'
+    Authentication:
+      title: Authentication
+      description: Authentication
+      type: string
+      default: Authentication
+      enum:
+      - Authentication
+      - AllowFrom
+      - BlockFrom
+      - AccessPaths
+    AllowFrom:
+      title: Allow From
+      description: Allow from
+      type: '[]string'
+    BlockFrom:
+      title: Block From
+      description: Block from
+      type: '[]string'
+    AccessPaths:
+      title: Access Paths
+      description: Access Paths, example for access paths are included in the help
+        section
+      type: '[]accesspath'
+    Exceptions:
+      title: Exceptions
+      description: Exceptions, example for exceptions are included in the help section
+      type: '[]exception'
+    ProtocolSecurity:
+      title: Protocol Security
+      description: Protocol Security
+      type: protocolsecurity
+  publicnonhttpbasedpolicy:
+    SecurityPolicy:
+      title: Security Policy
+      type: securitypolicy
+      description: General security policy settings
+    SourceZones:
+      title: Source Zones
+      type: '[]string'
+      description: Zones for Source Zone
+    HostedAddress:
+      title: Hosted Address
+      description: Hosted Address
+      type: string
+    ScanSMTP:
+      title: Scan SMTP
+      description: Scan SMTP
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ScanIMAP:
+      title: Scan IMAP
+      description: Scan IMAP
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ScanPOP3:
+      title: Scan POP3
+      description: Scan POP3
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ScanSMTPS:
+      title: Scan SMTPS
+      description: Scan SMTPS
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    ScanPOP3S:
+      title: Scan POP3S
+      description: Scan POP3S
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    RewriteSourceAddress:
+      title: Rewrite Source Address
+      description: Rewrite source address
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    OutboundAddress:
+      title: Outbound Address
+      description: Outbound address
+      type: string
+    MatchIdentity:
+      title: Match Identity
+      description: Match Identity
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+    Identity:
+      title: Identity
+      description: Users or groups
+      type: '[]string'
+    DataAccounting:
+      title: Data Accounting
+      description: Data Accounting
+      type: string
+      default: Exclude
+      enum:
+      - Include
+      - Exclude
+    LogTraffic:
+      title: Log Traffic
+      description: Log Traffic
+      type: string
+      default: Disable
+      enum:
+      - Enable
+      - Disable
+  response:
+    status_code:
+      title: Status Code
+      description: The status code from the response
+      type: string
+    status_response:
+      title: Status Response
+      description: Description of the response
+      type: string
+    invalid_params:
+      title: Invalid Params
+      description: Invalid params that have been set, otherwise 'None'
+      type: string
+connection:
+  host:
+    title: Host
+    type: string
+    description: Sophos XG address e.g sophosxg.company.com
+    required: true
+  port:
+    title: Port
+    type: integer
+    description: Webadmin port for Sophos XG e.g. 4444
+    default: 4444
+    required: true
+  credentials:
+    title: Username and Password
+    type: credential_username_password
+    description: Username and password
+    required: true
+actions:
+  create_userpolicy:
+    title: Create User Policy
+    description: Creates a user firewall policy
+    input:
+      policy:
+        title: User Policy Settings
+        description: User policy settings
+        type: userpolicy
+        required: false
+    output:
+      response:
+        title: Response
+        description: Returns the response from creating a policy
+        type: response
+        required: false
+  create_networkpolicy:
+    title: Create Network Policy
+    description: Creates a network firewall policy
+    input:
+      policy:
+        title: Network Policy Settings
+        description: Network policy settings
+        type: networkpolicy
+        required: false
+    output:
+      response:
+        title: Response
+        description: Returns the response from creating a policy
+        type: response
+        required: false
+  create_nonhttpbasedpolicy:
+    title: Create NonHTTPBased Policy
+    description: Creates a NonHTTPBased policy
+    input:
+      policy:
+        title: NonHTTPBased Policy Settings
+        description: NonHTTPBased policy settings
+        type: nonhttpbasedpolicy
+        required: false
+    output:
+      response:
+        title: Response
+        description: Returns the response from creating a policy
+        type: response
+        required: false
+  create_publicnonhttpbasedpolicy:
+    title: Create PublicNonHTTPBased Policy
+    description: Creates a PublicHTTPBased policy
+    input:
+      policy:
+        title: PublicHTTPBased Policy Settings
+        description: PublicHTTPBased policy settings
+        type: publicnonhttpbasedpolicy
+        required: false
+    output:
+      response:
+        title: Response
+        description: Returns the response from creating a policy
+        type: response
+        required: false

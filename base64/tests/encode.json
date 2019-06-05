@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "encode",
+    "input": {
+      "content": "lets encode this message\nsilly boy"
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

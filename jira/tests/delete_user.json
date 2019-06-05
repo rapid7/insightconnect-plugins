@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "delete_user",
+    "meta": {},
+    "input": {
+      "username": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "project": "test",
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

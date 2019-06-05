@@ -1,0 +1,96 @@
+plugin_spec_version: v2
+name: mcafee_esm
+title: McAfee ESM
+description: McAfee Enterprise Security Manager is a security information and event
+  management (SIEM) solution that delivers actionable intelligence and integrations
+  to prioritize, investigate, and respond to threats
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- McAfee
+- ESM
+- SIEM
+enable_cache: true
+types:
+  field:
+    name:
+      title: Name
+      description: Name of field
+      type: string
+      required: false
+    types:
+      title: Types
+      description: Types of field
+      type: '[]string'
+      required: false
+  fields:
+    field:
+      title: Field
+      description: Field name and types
+      type: '[]field'
+      required: false
+connection:
+  credentials:
+    title: Credentials
+    description: Username and password for McAfee ESM
+    type: credential_username_password
+    required: true
+  hostname:
+    title: Hostname
+    description: Hostname to  McAfee ESM Server
+    type: string
+    required: true
+  port:
+    title: Port
+    description: McAfee ESM host port
+    type: string
+    default: '443'
+    required: true
+triggers:
+  get_new_events:
+    title: Get New Events
+    description: Retrieves new events from McAfee ESM
+    input:
+      timerange:
+        title: Time Range
+        description: How frequent the trigger should check for new events
+        type: string
+        default: LAST_MINUTE
+        enum:
+        - LAST_MINUTE
+        - LAST_10_MINUTES
+        - LAST_30_MINUTES
+        - LAST_HOUR
+        - CURRENT_DAY
+        - PREVIOUS_DAY
+        - LAST_24_HOURS
+        - LAST_2_DAYS
+        - LAST_3_DAYS
+        - CURRENT_WEEK
+        - PREVIOUS_WEEK
+        - CURRENT_MONTH
+        - PREVIOUS_MONTH
+        - CURRENT_QUARTER
+        - PREVIOUS_QUARTER
+        - CURRENT_YEAR
+        - PREVIOUS_YEAR
+        required: true
+      fields:
+        title: Fields
+        description: Event fields to be returned. Additional information on fields
+          can be found in the trigger help
+        type: '[]fields'
+        required: true
+      filters:
+        title: Filters
+        description: McAfee ESM event filters. A base for all filter types in the
+          querying interface
+        type: '[]object'
+        required: true
+    output:
+      event_information:
+        title: Event Information
+        description: Event correlation list
+        type: object
+        required: false

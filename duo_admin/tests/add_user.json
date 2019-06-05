@@ -1,0 +1,27 @@
+{
+  "body": {
+    "action": "add_user",
+    "meta": {},
+    "input": {
+      "alias": [],
+      "email": "",
+      "firstname": "",
+      "lastname": "",
+      "notes": "",
+      "realname": "",
+      "status": "active",
+      "username": "testuser01"
+    },
+    "connection": {
+        "hostname": "",
+        "integration_key": {
+          "secretKey": ""
+        },
+        "secret_key": {
+          "secretKey": ""
+        }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "close_case",
+    "meta": {},
+    "input": {
+      "id": "",
+      "impact_status": "low",
+      "resolution_status": "low",
+      "summary": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": "9000",
+      "protocol": "http",
+      "proxy": {},
+      "verify": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
+

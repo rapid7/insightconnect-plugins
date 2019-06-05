@@ -1,0 +1,23 @@
+{
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "action": "create_global_acl_rule",
+    "meta": {},
+    "input": {
+      "global_acl": {
+        "name": "test-v14-global-acl-rule",
+        "extended_match": "*",
+        "extended_match_sequence": 0
+      },
+      "policy_id": "test-v14-policy"
+    }
+  },
+  "version": "v1"
+}

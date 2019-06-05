@@ -1,0 +1,97 @@
+plugin_spec_version: v2
+name: shodan
+title: Shodan
+description: A Search Engine for Internet-Connected Devices
+version: 1.0.0
+vendor: rapid7
+tags:
+- intel
+- scan
+- public
+connection:
+  token:
+    type: credential_secret_key
+    title: Token
+    description: API Token
+    required: true
+actions:
+  host_information:
+    title: Host Information Lookup
+    description: Return Services Found for the Given IP
+    input:
+      ip:
+        title: Host IP Lookup
+        description: Lookup Host IP for Discovered Services
+        type: string
+        required: true
+    output:
+      ip_str:
+        title: IP
+        type: string
+        description: IP address as string
+        required: false
+      asn:
+        title: ASN
+        type: string
+        description: ASN
+        required: false
+      hostnames:
+        title: Hostnames
+        type: '[]string'
+        description: Array of hostnames
+        required: false
+      org:
+        title: Organization
+        type: string
+        description: Organization
+        required: false
+      country_name:
+        title: Country Name
+        type: string
+        description: Name of host country
+        required: false
+      country_code:
+        title: Country Code
+        type: string
+        description: Code of host country
+        required: false
+      os:
+        title: Operating System
+        type: string
+        description: Host OS
+        required: false
+      ports:
+        title: Ports Discovered
+        type: '[]integer'
+        description: Ports discovered
+        required: false
+      data:
+        title: Banners for Discovered Services
+        type: '[]string'
+        description: Banners for discovered services
+        required: false
+  shodan_query:
+    title: Shodan Query
+    description: Search Shodan Using the Query Syntax
+    input:
+      query:
+        title: Query
+        description: Shodan Search Query
+        type: string
+        required: true
+    output:
+      ip_str:
+        title: IPs
+        type: '[]string'
+        description: IP address as string
+        required: false
+      org:
+        title: Organizations
+        type: '[]string'
+        description: Array of organization names
+        required: false
+      total:
+        title: Total Results
+        type: integer
+        description: Number of results returned
+        required: false

@@ -1,0 +1,430 @@
+plugin_spec_version: v2
+name: hippocampe
+title: Hippocampe
+description: Hippocampe is a threat feed aggregator, which creates a threat feed memory
+  and allows queries through a REST API or from a Web UI
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- threat
+- analysis
+- aggregation
+types:
+  observable:
+    value:
+      title: Value
+      description: Value of the observable
+      type: string
+      required: true
+    type:
+      title: Type
+      description: Type of the observable (e.g. domain, ip)
+      type: string
+      required: true
+  report:
+    filename:
+      title: Filename
+      description: Name of the configuration file
+      type: string
+    activated:
+      title: Activated
+      description: Is the source activated (only activated sources are queried)
+      type: boolean
+    error:
+      title: Error
+      description: List of exception names (in case of failure)
+      type: '[]string'
+    link:
+      title: Link
+      description: URL of the source
+      type: string
+    nbFailed:
+      title: Failed
+      description: Number of feed lines that failed indexation
+      type: integer
+    nbIndex:
+      title: Indexed
+      description: Number of elements successfully indexed
+      type: integer
+    nbNew:
+      title: New
+      description: Number of elements not known before
+      type: integer
+    nbUpdate:
+      title: Update
+      description: Number of elements successfully updated
+      type: integer
+  job:
+    id:
+      title: ID
+      description: ID
+      type: string
+    duration:
+      title: Duration
+      description: Duration of the indexation (in minutes)
+      type: number
+    status:
+      title: Status
+      description: Status of the job (ongoing, done, failed)
+      type: string
+    startTime:
+      title: Start Time
+      description: Start time
+      type: date
+    endTime:
+      title: End Time
+      description: End time
+      type: date
+    reports:
+      title: Reports
+      description: Reports per configuration file
+      type: '[]report'
+  last_query:
+    source:
+      title: Source
+      description: Source (e.g. URL)
+      type: string
+    lastQuery:
+      title: Last Query
+      description: Last query time
+      type: date
+  last_status:
+    source:
+      title: Source
+      description: Source (e.g. URL)
+      type: string
+    lastStatus:
+      title: Last Status
+      description: Last indexation status
+      type: string
+  monitor_result:
+    source:
+      title: Source
+      description: Source (e.g. URL)
+      type: string
+    lastQuery:
+      title: Last Query
+      description: Last query time
+      type: date
+    freshness:
+      title: Freshness
+      description: Freshness status
+      type: string
+    schedReport:
+      title: Scheduled Report
+      description: Scheduled report status
+      type: string
+  intelligence_report:
+    firstAppearance:
+      title: First Appearance
+      description: First appearance
+      type: date
+    lastAppearance:
+      title: Last Appearance
+      description: Last appearance
+      type: date
+    ip:
+      title: IP
+      description: IP
+      type: string
+    source:
+      title: Source
+      description: Source
+      type: string
+    idSource:
+      title: ID Source
+      description: Source ID
+      type: string
+    hipposcore:
+      title: Hipposcore
+      description: Hipposcore
+      type: number
+  intelligence:
+    observable:
+      title: Observable
+      description: Observable
+      type: string
+    records:
+      title: Records
+      description: Record found in Hippocampe feed (empty if the observable is unknown)
+      type: '[]intelligence_report'
+  new_element:
+    id:
+      title: ID
+      description: ID
+      type: string
+    toSearch:
+      title: To Search
+      description: Search resource
+      type: string
+    type:
+      title: Type
+      description: Type
+      type: string
+  launched_indexation:
+    source:
+      title: Source
+      description: Source
+      type: string
+    schedReport:
+      title: Scheduled Report
+      description: Status (OK or NOK)
+      type: string
+  size:
+    name:
+      title: Name
+      description: Name of corresponding type or source
+      type: string
+    size:
+      title: Size
+      description: Size
+      type: integer
+  source:
+    source:
+      title: Source
+      description: Source
+      type: string
+    coreIntelligence:
+      title: Core Intelligence
+      description: Core intelligence type (e.g. ip, url)
+      type: string
+    description:
+      title: Description
+      description: Description
+      type: string
+    type:
+      title: Type
+      description: Type
+      type: string
+    link:
+      title: Link
+      description: Link
+      type: string
+    score:
+      title: Score
+      description: Score
+      type: number
+    firstQuery:
+      title: First Query
+      description: First query time
+      type: date
+    lastQuery:
+      title: Last Query
+      description: Last query time
+      type: date
+  freshness_status:
+    feed:
+      title: Feed
+      description: Feed
+      type: string
+    freshness:
+      title: Freshness
+      description: Freshness status
+      type: string
+  score:
+    observable:
+      title: Observable
+      description: Observable
+      type: string
+    hipposcore:
+      title: Hipposcore
+      description: Score value
+      type: number
+connection:
+  url:
+    title: URL
+    description: Address of a working Hippocampe instance, including the port number
+      (e.g. https://10.0.0.2:5000)
+    type: string
+    required: true
+actions:
+  distinct:
+    title: Distinct
+    description: Return all distinct values that match the given intelligence types
+    input:
+      intelligence_types:
+        title: Intelligence Types
+        description: Intelligence types, e.g. 'ip' or 'url'
+        type: '[]string'
+        required: true
+    output:
+      values:
+        title: Values
+        description: Matching distinct values, one key per intelligence type
+        type: object
+        required: true
+  freshness:
+    title: Freshness
+    description: Check if the feeds are up to date. A threshold can be defined in
+      Hippocampe/core/conf/hippo/hippo.conf (by default 1 day)
+    input: null
+    output:
+      freshness_statuses:
+        title: Freshness Statuses
+        description: List of all feeds with their freshness statuses
+        type: '[]freshness_status'
+        required: true
+  hipposched:
+    title: Hipposched
+    description: Schedule the launch of shadowbook (for automatic indexation)
+    input:
+      time:
+        title: Time
+        description: Job frequency in crontab syntax, e.g. `* */12 * * *`
+        type: string
+        required: true
+    output:
+      schedule:
+        title: Schedule
+        description: Newly set job frequency
+        type: string
+        required: true
+  hipposcore:
+    title: Hipposcore
+    description: Return a score for each of the given observables. The score is ranged
+      between 0 and -100 (0 = observable unknown, -100 = super evil observable)
+    input:
+      observables:
+        title: Observables
+        description: Observables to score
+        type: '[]observable'
+        required: true
+    output:
+      scores:
+        title: Scores
+        description: List of given observables with their corresponding score
+        type: '[]score'
+        required: true
+  jobs:
+    title: Jobs
+    description: Return every report generated at the end of the indexing process
+    input: null
+    output:
+      jobs:
+        title: Jobs
+        description: List of all jobs, with their reports
+        type: '[]job'
+        required: true
+  last_query:
+    title: Last Query
+    description: Return the last query date for every source
+    input: null
+    output:
+      last_queries:
+        title: Last Queries
+        description: List of last query times for every source
+        type: '[]last_query'
+        required: true
+  last_status:
+    title: Last Status
+    description: Check if the indexation went well
+    input: null
+    output:
+      last_statuses:
+        title: Last Statuses
+        description: List of last statuses for every source (OK or NOK)
+        type: '[]last_status'
+        required: true
+  monitor_sources:
+    title: Monitor Sources
+    description: Return merged results from freshness, last_query, sched_report, size_by_source
+    input: null
+    output:
+      monitor_results:
+        title: Monitor Results
+        description: Merged results from 4 other services for each source
+        type: '[]monitor_result'
+        required: true
+  more:
+    title: More
+    description: Return intelligence about given observables
+    input:
+      observables:
+        title: Observables
+        description: Observables to get intelligence about
+        type: '[]observable'
+        required: true
+    output:
+      results:
+        title: Results
+        description: List of results, one per observable
+        type: '[]intelligence'
+        required: true
+  new:
+    title: New
+    description: Return all elements with Hippocampe/new
+    input: null
+    output:
+      new_elements:
+        title: New elements
+        description: All elements listed as Hippocampe/new
+        type: '[]new_element'
+        required: true
+  sched_report:
+    title: Scheduled Report
+    description: Check if an indexation has been launched within threshold (by default
+      12 days, can be changed in Hippocampe/core/conf/hippo/hippo.conf)
+    input: null
+    output:
+      launched_indexations:
+        title: Launched Indexations
+        description: List of launch statuses, one per source
+        type: '[]launched_indexation'
+        required: true
+  shadowbook:
+    title: Shadowbook
+    description: Return the current job ID and status. If the service is indexing
+      at the moment, this action will raise an error
+    input: null
+    output:
+      job_id:
+        title: Job ID
+        description: ID of the job
+        type: string
+        required: true
+      job_status:
+        title: Job Status
+        description: Status of the job
+        type: string
+        required: true
+  size_by_source:
+    title: Size by Source
+    description: Return the size (number of elements) for every source
+    input: null
+    output:
+      sizes:
+        title: Sizes
+        description: List of sources with corresponding sizes
+        type: '[]size'
+        required: true
+  size_by_type:
+    title: Size by Type
+    description: Return the size (number of elements) for every type
+    input: null
+    output:
+      sizes:
+        title: Sizes
+        description: List of types with corresponding sizes
+        type: '[]size'
+        required: true
+  sources:
+    title: Sources
+    description: Return all the known sources with their metadata
+    input: null
+    output:
+      sources:
+        title: Sources
+        description: List of sources
+        type: '[]source'
+        required: true
+  type:
+    title: Type
+    description: Return all the known types
+    input: null
+    output:
+      types:
+        title: Types
+        description: List of types
+        type: '[]string'
+        required: true

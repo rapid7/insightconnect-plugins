@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "files",
+    "input": {
+      "job": "257919"
+    },
+    "connection": {
+      "server": "http://try.bro.org"
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

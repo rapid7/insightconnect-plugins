@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "modify_host",
+    "meta": {},
+    "input": {
+      "_ref": "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLnRlc3Q1:test5.info.com/default",
+      "updated_host": {
+        "ipv4addrs": [{"ipv4addr": "10.10.10.75"}]
+      }
+    },
+    "connection": {
+      "api_version": "2.7",
+      "infoblox_host": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

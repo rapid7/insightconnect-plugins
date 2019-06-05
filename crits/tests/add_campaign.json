@@ -1,0 +1,23 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "action": "add_campaign",
+    "connection": {
+      "url": "",
+      "ssl_verify": false,
+      "username": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "input": {
+      "name": "NetTraveler",
+        "params": {
+            "bucket_list": "Fake Malware DB",
+            "description": "Consectetur soluta deserunt at exercitationem beatae"
+        }
+    },
+    "meta": {}
+  }
+}

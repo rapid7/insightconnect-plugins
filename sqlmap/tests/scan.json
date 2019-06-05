@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "scan",
+        "connection": {
+            "api_host": "127.0.0.1",
+            "api_port": "8775"
+        },
+        "input": {
+            "cookie": "PHPSESSID=pt8p9s4pn3nm7tmegg0asij1i5",
+            "url": "http://10.10.2.105/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#",
+            "batch": true,
+            "headers": {"Content-Type": "application/json"},
+            "level": 3
+
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "suspend_user",
+    "meta": {},
+    "input": {
+      "email": ""
+    },
+    "connection": {
+      "okta_url": "",
+      "okta_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

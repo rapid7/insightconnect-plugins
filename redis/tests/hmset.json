@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "hmset",
+    "meta": {},
+    "input": {
+      "expire": 0,
+      "key": "lol",
+      "values": {"herp":"lawl","lawl":"derp", "lol":"nope"}
+    },
+    "connection": {
+      "db": 0,
+      "host": "",
+      "port": 7001
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

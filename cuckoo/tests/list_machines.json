@@ -1,0 +1,12 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "input": {},
+    "connection": {
+      "url": ""
+    },
+    "meta": {},
+    "action": "list_machines"
+  }
+}

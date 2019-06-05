@@ -1,0 +1,20 @@
+{
+  "body": {
+    "meta": {},
+    "action": "registrant_monitor",
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "username": ""
+    },
+    "input": {
+      "query": "google.com",
+      "exclude": "",
+      "days_back": 1,
+      "limit": 0
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

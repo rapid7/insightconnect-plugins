@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "retrieve_indicators",
+    "meta": {},
+    "input": {
+      "detection_id": 2,
+      "max_results": 100
+    },
+    "connection": {
+      "api_token": {
+        "secretKey": ""
+      },
+      "customer_id": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

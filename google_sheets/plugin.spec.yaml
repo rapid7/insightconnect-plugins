@@ -1,0 +1,162 @@
+plugin_spec_version: v2
+name: google_sheets
+title: Google Sheets
+description: Create, edit and collaborate with others on spreadsheets
+version: 1.1.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- google
+- sheets
+- spreadsheet
+types:
+  update:
+    spreadsheetId:
+      title: Spreadsheet ID
+      description: The ID of the updated spreadsheet
+      type: string
+    updatedRange:
+      title: Updated Range
+      description: The worksheet and range updated e.g. Sheet1!A1
+      type: string
+    updatedRows:
+      title: Updated Rows
+      description: The number of rows updated
+      type: integer
+    updatedColumns:
+      title: Updated Columns
+      description: The number of columns updated
+      type: integer
+    updatedCells:
+      title: Updated Cells
+      description: The number of cells updated
+      type: integer
+connection:
+  admin_user:
+    title: Admin User
+    description: Admin user to impersonate, e.g. admin@domain.com
+    type: string
+    required: false
+  project_id:
+    title: Project ID
+    description: Project ID from service credentials
+    type: string
+    required: true
+  private_key_id:
+    title: Private Key ID
+    description: Private Key ID from service credentials
+    type: string
+    required: true
+  private_key:
+    title: Private Key
+    description: Private Key from service credentials
+    type: credential_asymmetric_key
+    required: true
+  client_email:
+    title: Client Email
+    description: Client email from service credentials
+    type: string
+    required: true
+  client_id:
+    title: Client ID
+    description: Client ID
+    type: string
+    required: true
+  client_x509_cert_url:
+    title: Client X.509 Certificate URL
+    description: X.509 certificate URL from service credentials
+    type: string
+    required: true
+  auth_uri:
+    title: Auth URI
+    description: OAuth2 auth URI
+    type: string
+    required: true
+    default: https://accounts.google.com/o/oauth2/auth
+  token_uri:
+    title: Token URI
+    description: OAuth2 token URI
+    type: string
+    required: true
+    default: https://accounts.google.com/o/oauth2/token
+  auth_provider_x509_cert_url:
+    title: Auth Provider Certificate URL
+    description: OAuth2 auth provider X.509 certificate URL
+    type: string
+    required: true
+    default: https://www.googleapis.com/oauth2/v1/certs
+actions:
+  update_cell:
+    title: Update Cell
+    description: Updates a specified cell in Google Sheets with new data
+    input:
+      sheet_id:
+        title: Sheet ID
+        description: The ID of the spreadsheet to update
+        type: string
+        required: true
+      cell:
+        title: Cell
+        description: The cell to update e.g. A1, B6, C55, etc
+        type: string
+        required: true
+      update:
+        title: Update
+        description: The data to update the cell with
+        type: string
+        required: true
+      worksheet:
+        title: Worksheet
+        description: The worksheet to update e.g. Sheet1
+        type: string
+        required: true
+    output:
+      value:
+        title: Value
+        description: The value of the updated cell
+        type: string
+        required: false
+      update_information:
+        title: Update Information
+        description: Information on the update performed
+        type: update
+        required: false
+  spread_list_to_sheet:
+    title: Spread List to Sheet
+    description: Given a starting cell, this action will take a list of data and push
+      it to either rows or columns in a Google Sheet
+    input:
+      sheet_id:
+        title: Sheet ID
+        description: The ID of the spreadsheet to update
+        type: string
+        required: true
+      cell:
+        title: Cell
+        description: The target cell to being placing data e.g. A1, B6, C55, etc
+        type: string
+        required: true
+      direction:
+        title: Direction
+        description: The direction to fill in data e.g. row or column
+        type: string
+        required: true
+        enum:
+        - row
+        - column
+      update_list:
+        title: Update List
+        description: The data to update the cell with
+        type: '[]string'
+        required: true
+      worksheet:
+        title: Worksheet
+        description: The worksheet to update e.g. Sheet1
+        type: string
+        required: true
+    output:
+      update_information:
+        title: Update Information
+        description: Information on the update performed
+        type: update
+        required: false

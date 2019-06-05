@@ -1,0 +1,18 @@
+{
+  "body": {
+    "input": {
+      "event_id": "773"
+    },
+    "action": "find_event",
+    "connection": {
+      "automation_code": {
+        "secretKey": ""
+      },
+      "url": "",
+      "ssl": false
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

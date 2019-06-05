@@ -1,0 +1,16 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "domain_whois",
+    "input": {
+      "domain": "opendns.com"
+    }
+  },
+  "version": "v1"
+}

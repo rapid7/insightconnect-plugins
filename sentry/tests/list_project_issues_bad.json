@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "list_project_issues",
+    "meta": {},
+    "input": {
+      "organization_slug": "non-existing-organization",
+      "project_slug": "non-existing-project",
+      "query": "",
+      "shortIdLookup": false,
+      "statsPeriod": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://sentry.io/api/0/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

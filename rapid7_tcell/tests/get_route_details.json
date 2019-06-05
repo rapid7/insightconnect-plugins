@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "get_route_details",
+    "meta": {},
+    "input": {
+      "app_id": "MooseLifeTest-gIglw",
+      "route_id": "1257378454"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

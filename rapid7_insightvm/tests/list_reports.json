@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "list_reports",
+    "meta": {},
+    "input": {
+      "name": "Lambda Demo Report",
+      "sort": "Ascending"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

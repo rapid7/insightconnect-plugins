@@ -1,0 +1,127 @@
+plugin_spec_version: v2
+name: hybrid_analysis
+title: Hybrid Analysis
+vendor: rapid7
+status: ["unsupported"]
+description: Hybrid Analysis Free Sandbox
+version: 2.0.0
+tags:
+- malware
+- sandbox
+- malware analysis
+types:
+  report:
+    environment_id:
+      type: string
+      description: Environment ID
+      required: false
+    sha1:
+      type: string
+      description: SHA1
+      required: false
+    md5:
+      type: string
+      description: MD5
+      required: false
+    sha256:
+      type: string
+      description: SHA256
+      required: false
+    submitname:
+      type: string
+      description: Submission Name
+      required: false
+    environmentDescription:
+      type: string
+      description: Environment Description
+      required: false
+    size:
+      type: integer
+      description: Size
+      required: false
+    type:
+      type: string
+      description: ASCII Text
+      required: false
+    targeturl:
+      type: string
+      description: Target URL
+      required: false
+    multiscan_detectrate_pcnt:
+      type: number
+      required: false
+    virustotal_familyname:
+      description: VT Family Name
+      type: string
+      required: false
+    virustotal_detectrate_pcnt:
+      description: VT Detect Rate Percent
+      type: number
+      required: false
+    isurlanalysis:
+      type: boolean
+      required: false
+    analysis_start_time:
+      type: string
+      required: false
+    threatscore:
+      type: integer
+      required: false
+    isinteresting:
+      description: Is Interesting
+      type: boolean
+      required: false
+    threatlevel:
+      description: Threat Level
+      type: integer
+      required: false
+    compromised_hosts:
+      description: Compromised Hosts
+      type: '[]string'
+      required: false
+    domains:
+      description: Domains
+      type: '[]string'
+      required: false
+    hosts:
+      description: Hosts
+      type: '[]string'
+      required: false
+connection:
+  url:
+    title: URL
+    description: URL
+    type: string
+    default: https://www.hybrid-analysis.com/api
+    required: true
+  api_key:
+    type: credential_secret_key
+    title: API Key
+    description: API Key
+    required: true
+  api_token:
+    type: credential_secret_key
+    title: API Token
+    description: API token
+    required: true
+actions:
+  lookup_hash:
+    description: Lookup By Hash
+    input:
+      hash:
+        type: string
+        description: MD5/SHA1/SHA256 Hash
+        required: true
+    output:
+      found:
+        description: True if found
+        type: boolean
+        required: false
+      threatscore:
+        description: Threat Score (max found)
+        type: integer
+        required: false
+      reports:
+        type: '[]report'
+        description: Reports
+        required: false

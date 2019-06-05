@@ -1,0 +1,22 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "action": "reverse_ip_whois",
+    "input": {
+      "ip": "",
+      "country": "",
+      "server": "",
+      "page": "",
+      "query": "Domain Tools",
+      "include_total_count": false
+    },
+    "meta": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "username": ""
+    }
+  }
+}

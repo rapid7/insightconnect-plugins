@@ -1,0 +1,42 @@
+plugin_spec_version: v2
+name: twilio
+title: Twilio
+description: Twilio integration
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- twilio
+- SMS
+connection:
+  twilio_phone_number:
+    type: string
+    description: Twilio phone number
+    required: true
+  credentials:
+    title: Account SID and Auth Token
+    description: Username should be your account ID, and your password should be your
+      auth token
+    required: true
+    type: credential_username_password
+actions:
+  send_sms:
+    title: Send SMS
+    description: Send an SMS message to a phone number
+    input:
+      message:
+        title: Message
+        type: string
+        description: Message to send
+        required: true
+      to_number:
+        title: Number
+        type: string
+        description: Phone number to send SMS message
+        required: true
+    output:
+      message_sid:
+        title: Message SID
+        type: string
+        description: Message SID
+        required: false

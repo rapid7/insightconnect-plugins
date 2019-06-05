@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "tag_asset",
+    "meta": {},
+    "input": {
+      "tag_id": 4,
+      "asset_id": 21150
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

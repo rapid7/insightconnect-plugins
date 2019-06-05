@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "create_target",
+    "input": {
+      "port_list_id": "",
+      "host_list": ["127.0.0.1","256.999.888.777"],
+      "name": "TESTing create_target BAD host list"
+    },
+    "connection": {
+      "ssl_verify": false,
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "timeout": 10,
+      "server": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

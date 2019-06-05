@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "ticket_attachments",
+    "meta": {},
+    "input": {
+      "ticket_id": 2
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

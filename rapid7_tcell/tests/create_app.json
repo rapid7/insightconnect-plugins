@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "create_app",
+    "meta": {},
+    "input": {
+      "app_display_name": "Low profile app created for Komand plugin tests"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

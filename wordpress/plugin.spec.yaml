@@ -1,0 +1,56 @@
+plugin_spec_version: v2
+name: wordpress
+title: WordPress
+description: Open Source CMS
+vendor: rapid7
+status: ["unsupported"]
+version: 1.0.0
+tags:
+- wordpress
+- web
+- site
+connection:
+  host:
+    title: Host
+    type: string
+    description: Host URL
+    required: true
+  credentials:
+    type: credential_username_password
+    description: Password should be basic Auth or Application password
+    required: true
+    title: Credentials
+actions:
+  suspend_user:
+    description: Suspend user from WordPress instance
+    input:
+      username:
+        title: Username
+        type: string
+        description: Username
+        required: true
+    output:
+      success:
+        description: User Suspended
+        type: boolean
+        title: User Suspended
+        required: false
+  delete_user:
+    description: Delete user from WordPress instance
+    input:
+      username:
+        title: Username
+        type: string
+        description: Username
+        required: true
+      reassignee:
+        title: Reassignee
+        type: string
+        description: Username to reassign posts to
+        required: true
+    output:
+      success:
+        description: User Deleted
+        type: boolean
+        title: User Deleted
+        required: false

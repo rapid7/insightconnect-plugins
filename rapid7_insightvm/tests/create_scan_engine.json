@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "create_scan_engine",
+    "meta": {},
+    "input": {
+      "name": "Komand Scan Engine",
+      "address": "",
+      "port": 40814,
+      "sites": []
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

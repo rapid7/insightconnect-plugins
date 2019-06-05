@@ -1,0 +1,169 @@
+plugin_spec_version: v2
+name: checkpoint_sand_blast
+title: Checkpoint Sand Blast
+description: Multilayered security technology provides protection against advanced
+  cyber attacks
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- threat intelligence
+- breach prevention
+types:
+  status:
+    code:
+      type: integer
+    label:
+      type: string
+    message:
+      type: string
+  report:
+    verdict:
+      type: string
+  images:
+    report:
+      type: report
+    status:
+      type: string
+    id:
+      type: string
+    revision:
+      type: integer
+  threat_emulation:
+    trust:
+      type: integer
+    images:
+      type: '[]images'
+    combined_verdict:
+      type: string
+      required: false
+    score:
+      type: integer
+    status:
+      type: status
+  upload_response:
+    status:
+      type: status
+    md5:
+      type: string
+    file_type:
+      type: string
+    file_name:
+      type: string
+    features:
+      type: '[]string'
+    te:
+      type: threat_emulation
+  query_response:
+    status:
+      type: status
+    md5:
+      type: string
+    file_type:
+      type: string
+    file_name:
+      type: string
+    features:
+      type: '[]string'
+    te:
+      type: threat_emulation
+      required: false
+    av:
+      type: object
+      required: false
+    extraction:
+      type: object
+      required: false
+connection:
+  service_address:
+    title: Service Address
+    description: The Service Address
+    type: string
+    default: te.checkpoint.com
+    required: true
+  api_key:
+    title: API Key
+    description: API Key
+    type: credential_secret_key
+    required: true
+  using_cloud_server:
+    title: Using Cloud Server
+    description: Set to true if using the cloud version
+    type: boolean
+    default: true
+    required: true
+actions:
+  query_report:
+    title: Query Report
+    description: Query the status of a file
+    input:
+      file_digest:
+        title: File Digest
+        description: Hash of the file
+        type: string
+        required: true
+      file_digest_type:
+        title: File Digest Type
+        description: The type of hash used for the digest
+        type: string
+        required: true
+        enum:
+        - md5
+        - sha1
+        - sha2
+      file_type:
+        title: File Type
+        description: The file extension
+        type: string
+        required: false
+      file_name:
+        title: File Name
+        description: File name
+        type: string
+        required: false
+      features:
+        title: Features
+        description: Features
+        type: string
+        required: false
+      quota:
+        title: Quota
+        description: Quota
+        type: boolean
+        required: false
+    output:
+      query_response:
+        title: Query Response
+        description: Status of requested features
+        type: object
+        required: false
+      found:
+        title: Found
+        description: Returns true if file found
+        type: boolean
+        required: false
+  upload:
+    title: Upload
+    description: Upload a file for analysis
+    input:
+      file_name:
+        title: File Name
+        description: The name of the file
+        type: string
+        required: true
+      file_type:
+        title: File Type
+        description: File extension e.g. docx, pdf, ect
+        type: string
+        required: false
+      file_bytes:
+        title: File Bytes
+        description: The file bytes
+        type: bytes
+        required: true
+    output:
+      results:
+        title: Results
+        description: Results from the upload
+        type: upload_response
+        required: false

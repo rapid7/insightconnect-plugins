@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "delete_feed",
+    "meta": {},
+    "input": {
+      "force": false,
+      "id": "2342341234"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

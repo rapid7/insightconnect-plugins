@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_authentication_sources",
+    "meta": {},
+    "input": {
+      "name": ".*ldap.*"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

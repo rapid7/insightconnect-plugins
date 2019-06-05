@@ -1,0 +1,71 @@
+plugin_spec_version: v2
+name: phishtank
+title: PhishTank
+description: PhishTank API
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- komand
+- phishtank
+- phishing
+connection:
+  credentials:
+    title: API Key
+    description: The API key to use
+    type: credential_secret_key
+    required: true
+actions:
+  check:
+    title: Check URL
+    description: Submit URL to PhishTank
+    input:
+      url:
+        title: URL
+        description: URL to Submit
+        type: string
+        required: true
+    output:
+      url:
+        title: URL
+        description: Submitted URL
+        type: string
+        required: false
+      in_database:
+        title: In Database
+        description: If the URL is in the PhishTank database
+        type: boolean
+        required: false
+      phish_id:
+        title: Phish ID
+        description: The ID number by which PhishTank refers to a phish submission
+        type: string
+        required: false
+      phish_detail_url:
+        title: Phish Detail URL
+        description: PhishTank detail URL for the phish, where you can view data about
+          the phish, including a screenshot and the community votes
+        type: string
+        required: false
+      verified:
+        title: Verified
+        description: Whether or not this phish has been verified by the PhishTank
+          community
+        type: boolean
+        required: false
+      verified_at:
+        title: Verified At
+        description: The date and time at which the phish was verified as valid by
+          the PhishTank community
+        type: date
+        required: false
+      valid:
+        title: Valid
+        description: Whether the phish is valid or not
+        type: boolean
+        required: false
+      submitted_at:
+        title: Submitted At
+        description: The date and time at which this phish was reported to PhishTank
+        type: date
+        required: false

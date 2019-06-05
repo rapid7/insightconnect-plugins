@@ -1,0 +1,192 @@
+plugin_spec_version: v2
+name: datetime
+title: Datetime
+description: Actions for getting and manipulating timestamps
+version: 2.0.4
+vendor: rapid7
+status: ["supported"]
+tags:
+- datetime
+- utilities
+actions:
+  get_datetime:
+    title: Get Datetime
+    description: Gets the current Datetime in a specified format
+    input:
+      format_string:
+        type: string
+        description: 'Format string for the output. Example: %H:%M:%S or %d/%m/%Y'
+        required: true
+        default: '%d %b %Y %H:%M:%S'
+      use_rfc3339_format:
+        title: Use RFC3339 Format
+        type: boolean
+        description: Use RFC3339 format (eg. 2017-10-24T18:27:36.23Z). This is the
+          most compatible date format for timestamp manipulation. Enabling this will
+          override the format string input
+        required: true
+    output:
+      datetime:
+        type: string
+        title: Datetime
+        description: Datetime
+        required: true
+      epoch_timestamp:
+        type: integer
+        title: Epoch Timestamp
+        description: Epoch timestamp
+        required: true
+  subtract_from_datetime:
+    title: Subtract from Datetime
+    description: Subtract Datetime units from a Datetime
+    input:
+      base_time:
+        type: date
+        description: Datetime from which to subtract from
+        required: true
+      years:
+        type: integer
+        description: How many years to subtract from the specified Datetime
+        required: true
+        default: 0
+      months:
+        type: integer
+        description: How many months to subtract from the specified Datetime
+        required: true
+        default: 0
+      days:
+        type: integer
+        description: How many days to subtract from the specified Datetime
+        required: true
+        default: 0
+      hours:
+        type: integer
+        description: How many hours to subtract from the specified Datetime
+        required: true
+        default: 0
+      minutes:
+        type: integer
+        description: How many minutes to subtract from the specified Datetime
+        required: true
+        default: 0
+      seconds:
+        type: integer
+        description: How many seconds to subtract from the specified Datetime
+        required: true
+        default: 0
+    output:
+      date:
+        type: date
+        title: Date
+        description: The Datetime after subtraction
+        required: true
+  add_to_datetime:
+    title: Add to Datetime
+    description: Add Datetime units to a Datetime
+    input:
+      base_time:
+        type: date
+        description: Datetime with which to add to
+        required: true
+      years:
+        type: integer
+        description: How many years to add to the specified Datetime
+        required: true
+        default: 0
+      months:
+        type: integer
+        description: How many months to add to the specified Datetime
+        required: true
+        default: 0
+      days:
+        type: integer
+        description: How many days to add to the specified Datetime
+        required: true
+        default: 0
+      hours:
+        type: integer
+        description: How many hours to add to the specified Datetime
+        required: true
+        default: 0
+      minutes:
+        type: integer
+        description: How many minutes to add to the specified Datetime
+        required: true
+        default: 0
+      seconds:
+        type: integer
+        description: How many seconds to add to the specified Datetime
+        required: true
+        default: 0
+    output:
+      date:
+        type: date
+        title: Date
+        description: The Datetime after addition
+        required: true
+  date_from_epoch:
+    title: Date from Epoch
+    description: Convert an epoch as an integer or float to a Datetime
+    input:
+      epoch:
+        type: number
+        description: Epoch as integer or float
+        required: true
+    output:
+      date:
+        type: date
+        title: Date
+        description: Datetime after epoch conversion
+        required: true
+  epoch_from_date:
+    title: Epoch from Date
+    description: Convert a Datetime to an Epoch
+    input:
+      datetime:
+        title: Datetime
+        type: date
+        description: Date in RFC3339 format
+        required: true
+    output:
+      epoch:
+        title: Epoch
+        type: integer
+        description: Epoch after conversion
+        required: true
+  time_elapsed:
+    title: Time Elapsed
+    description: Determine the elapsed time between two dates
+    input:
+      first_time:
+        title: First Date
+        type: date
+        description: First date
+        required: true
+      second_time:
+        title: Second Date
+        type: date
+        description: Second date
+        required: true
+      result_unit:
+        title: Result Unit
+        type: string
+        description: Time unit of measurement for result
+        required: true
+        enum:
+        - Years
+        - Months
+        - Days
+        - Hours
+        - Minutes
+        - Seconds
+    output:
+      difference:
+        title: Difference
+        type: integer
+        description: Quantity of time difference
+        required: true
+      time_unit:
+        title: Unit of Time
+        type: string
+        description: Time unit of measurement
+        required: true

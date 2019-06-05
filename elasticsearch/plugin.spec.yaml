@@ -1,0 +1,388 @@
+plugin_spec_version: v2
+name: elasticsearch
+title: Elasticsearch
+description: Distributed Real-Time Search and Analytics Engine
+version: 2.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- elasticsearch
+- es
+- search
+- elastic
+connection:
+  url:
+    title: URL
+    type: string
+    description: Host URL E.g. http://10.0.2.2:9200
+    required: true
+  credentials:
+    type: credential_username_password
+    title: Basic Auth Username and Password
+    description: Basic Auth username and password
+    required: true
+  use_authentication:
+    type: boolean
+    title: Use Authentication
+    description: If the Elasticsearch host does not use authentication set this value
+      to false
+    required: true
+    default: true
+types:
+  _shards:
+    total:
+      type: integer
+      title: Total
+      description: Number of Total Shards
+    successful:
+      type: integer
+      title: Successful
+      description: Number of Successful Shards
+    failed:
+      type: integer
+      title: Failed
+      description: Number of Failed Shards
+  op_response:
+    _index:
+      type: string
+      title: Index
+      description: Document Index
+    _type:
+      type: string
+      title: Type
+      description: Document Type
+    _id:
+      type: string
+      title: ID
+      description: Document ID
+    _version:
+      type: integer
+      title: Version
+      description: Document Version
+    result:
+      type: string
+      title: Result
+      description: Result of Index
+    _shards:
+      type: _shards
+      title: Shards
+      description: Information About the Replication Process
+    created:
+      type: boolean
+      title: Created
+      description: Flag for Successful Creation
+  hit:
+    _index:
+      type: string
+      title: Index
+      description: Document Index
+    _type:
+      type: string
+      title: Type
+      description: Document Type
+    _id:
+      type: string
+      title: ID
+      description: Document ID
+    _version:
+      type: integer
+      title: Version
+      description: Document Version
+    _score:
+      type: number
+      title: Score
+      description: Relevance Score
+    _source:
+      type: object
+      title: Source
+      description: Content of Document
+  hits:
+    total:
+      type: integer
+      title: Total
+      description: Number of Total Hits
+    max_score:
+      type: number
+      title: Max Score
+      description: Maximum Relevance Score
+    hits:
+      type: '[]hit'
+      title: Hits
+      description: Array of Hits
+  health:
+    cluster_name:
+      type: string
+      title: Cluster Name
+    status:
+      type: string
+      title: Status
+    timed_out:
+      type: boolean
+      title: Timed Out
+    number_of_nodes:
+      type: integer
+      title: Number of Nodes
+    number_of_data_nodes:
+      type: integer
+      title: Number of Data Nodes
+    active_primary_shards:
+      type: integer
+      title: Active Primary Shards
+    active_shards:
+      type: integer
+      title: Active Shards
+    relocating_shards:
+      type: integer
+      title: Relocating Shards
+    initializing_shards:
+      type: integer
+      title: Initializing Shards
+    unassigned_shards:
+      type: integer
+      title: Unassigned Shards
+    delayed_unassigned_shards:
+      type: integer
+      title: Delayed Unassigned Shards
+    number_of_pending_tasks:
+      type: integer
+      title: Number of Pending Tasks
+    number_of_in_flight_fetch:
+      type: integer
+      title: Number of in Flight Fetch
+    task_max_waiting_in_queue_limits:
+      type: integer
+      title: Task Max Waiting in Queue Mills
+    active_shards_percent_as_number:
+      type: float
+      title: Active Shards Percent as Number
+actions:
+  cluster_health:
+    title: Cluster Health
+    description: Check cluster health
+    input: null
+    output:
+      cluster_health:
+        title: Cluster Health
+        description: Cluster Health
+        type: health
+        required: false
+  index_document:
+    title: Index Document
+    description: Create or replace a document by index
+    input:
+      _index:
+        title: Index
+        type: string
+        description: Index to Insert Document Into
+        required: true
+      _type:
+        title: Type
+        type: string
+        description: Type of Document to Index
+        required: false
+      _id:
+        title: ID
+        type: string
+        description: Optional ID of Indexed Document
+        required: false
+      version_type:
+        title: Version Type
+        type: string
+        description: Optional Version Type
+        enum:
+        - internal
+        - external
+        - external_gt
+        - external_gte
+        default: internal
+        required: false
+      _version:
+        title: Version
+        type: integer
+        description: Optional Version Specification
+        required: false
+      document:
+        title: Document
+        type: object
+        description: JSON Document to Index
+        required: false
+      routing:
+        title: Routing
+        type: string
+        description: Optional Shard Placement
+        required: false
+      parent:
+        title: Parent
+        type: string
+        description: Optional Parent
+        required: false
+      timeout:
+        title: Timeout
+        type: string
+        description: Custom Timeout Window
+        default: 1m
+        required: false
+    output:
+      index_response:
+        title: Index Response
+        type: op_response
+        description: Result of Index Operation
+        required: false
+  update_document:
+    title: Update Document
+    description: Update a document
+    input:
+      _index:
+        title: Index
+        type: string
+        description: Index to Insert Document Into
+        required: true
+      _type:
+        title: Type
+        type: string
+        description: Type of Document to Index
+        required: false
+      _id:
+        title: ID
+        type: string
+        description: Optional ID of Indexed Document
+        required: true
+      retry_on_conflict:
+        title: Retry on Conflict
+        type: integer
+        description: Optional Number of Times to Retry on Update Conflict
+        required: false
+      routing:
+        title: Routing
+        type: string
+        description: Optional Shard Placement
+        required: false
+      parent:
+        title: Parent
+        type: string
+        description: Optional Parent
+        required: false
+      timeout:
+        title: Timeout
+        type: string
+        description: Custom Timeout Window
+        default: 1m
+        required: false
+      wait_for_active_shards:
+        title: Wait for Active Shards
+        type: integer
+        description: Number of Shard Copies required Before Update
+        required: false
+      refresh:
+        title: Refresh
+        type: string
+        description: Control when Changes Become Visible
+        enum:
+        - 'true'
+        - wait_for
+        - 'false'
+        default: 'false'
+        required: false
+      _source:
+        title: Source
+        type: string
+        description: Control If and How Source is Returned
+        required: false
+      _version:
+        title: Version
+        type: integer
+        description: Optional Version Specification
+        required: false
+      script:
+        title: Script
+        type: object
+        description: JSON Script to Modify a Document
+        required: true
+    output:
+      update_response:
+        type: op_response
+        title: Result of Update Operation
+        description: Updated response
+        required: false
+  search_documents:
+    title: Search Documents
+    description: Execute a search query and get back search hits that match the query
+    input:
+      _index:
+        title: Index
+        type: string
+        description: Document Index
+        required: true
+      _type:
+        title: Type
+        type: string
+        description: Document Type
+        required: false
+      routing:
+        title: Routing
+        type: string
+        description: Optional Shards to Search
+        required: false
+      query:
+        title: Query
+        type: object
+        description: JSON Query DSL
+        required: false
+    output:
+      took:
+        title: Took
+        type: integer
+        description: Duration in Milliseconds
+        required: false
+      timed_out:
+        title: Timed out
+        type: boolean
+        description: Timed Out Flag
+        required: false
+      _shards:
+        title: Shards
+        type: _shards
+        description: Information About Replication Process
+        required: false
+      hits:
+        title: Hits
+        type: hits
+        description: Information About Hits
+        required: false
+triggers:
+  poll_documents:
+    title: Poll Documents
+    description: Poll for new documents given a query
+    input:
+      frequency:
+        title: Frequency
+        type: integer
+        description: Poll frequency in seconds
+        required: false
+        default: 60
+      _index:
+        title: Index
+        type: string
+        description: Document Index
+        required: true
+      _type:
+        title: Type
+        type: string
+        description: Document Type
+        required: false
+      routing:
+        title: Routing
+        type: string
+        description: Optional Shards to Search
+        required: false
+      query:
+        title: Query
+        type: object
+        description: JSON Query DSL
+        required: false
+    output:
+      hits:
+        title: Hits
+        type: '[]hit'
+        description: New Hits
+        required: false

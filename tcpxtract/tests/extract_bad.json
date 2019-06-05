@@ -1,0 +1,12 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "input": {
+      "file": "23637!!!3938@##$$%"
+    },
+    "connection": "",
+    "action": "extract"
+  },
+  "version": "v1"
+}

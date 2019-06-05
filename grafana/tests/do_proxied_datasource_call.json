@@ -1,0 +1,27 @@
+{
+  "version": "v1",
+  "body": {
+    "input": {
+      "path": "/query",
+      "parameters": {
+        "db": "komand",
+        "q": "SHOW DATABASES"
+      },
+      "datasource_id": 1
+    },
+    "meta": {},
+    "connection": {
+      "basic_auth": {
+        "password": "",
+        "username": ""
+      },
+      "token_auth": {
+        "secretKey": ""
+      },
+      "port": 3000,
+      "url": ""
+    },
+    "action": "do_proxied_datasource_call"
+  },
+  "type": "action_start"
+}

@@ -1,0 +1,25 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "license": {
+        "secretKey": ""
+      },
+      "user": 118625
+    },
+    "action": "card_lookup",
+    "input": {
+      "card_last_4_digits": "7643",
+      "card_bank_name": "Bank of America",
+      "card_token": "OQRST14PLQ98323",
+      "cvv_result": "N",
+      "card_issuer_id_number": "323132",
+      "bank_phone_number": "800-342-1232",
+      "avs_result": "Y",
+      "bank_phone_country_code": "1",
+      "address": "8.8.8.8.8"
+    }
+  },
+  "version": "v1"
+}

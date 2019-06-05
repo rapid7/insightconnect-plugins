@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "split_to_object",
+    "meta": {},
+    "input": {
+      "block_delimiter": "",
+      "string": "Dog=Percy",
+      "string_delimiter": "="
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

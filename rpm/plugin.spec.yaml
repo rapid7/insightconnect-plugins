@@ -1,0 +1,218 @@
+plugin_spec_version: v2
+name: rpm
+title: RPM
+description: RPM Package Manager
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- rpm
+- package
+enable_cache: true
+types:
+  file:
+    path:
+      type: string
+      title: Path
+      required: true
+    size:
+      type: integer
+      title: Size
+      required: true
+    mtime:
+      type: date
+      title: Last Modified
+      required: true
+    hash:
+      type: string
+      title: MD5 Sum
+      required: true
+    mode:
+      type: string
+      title: Mode
+      required: true
+    owner:
+      type: string
+      title: Owner
+      required: true
+    group:
+      type: string
+      title: Group
+      required: true
+    isconfig:
+      type: integer
+      title: Config File Flag
+      required: true
+    isdoc:
+      type: integer
+      title: Document File Flag
+      required: true
+    rdev:
+      type: integer
+      title: Rdev
+      required: true
+    symlink:
+      type: string
+      title: Symlink
+      required: true
+  signature:
+    scheme:
+      type: string
+      title: Scheme
+      required: true
+    time:
+      type: date
+      title: Datetime of Last Hash
+      required: true
+    key:
+      type: string
+      title: Hash
+      required: true
+actions:
+  info:
+    title: Info
+    description: Get information about a package
+    input:
+      name:
+        title: Name
+        type: string
+        description: Canonical package name
+        required: true
+      epoch:
+        title: Epoch
+        description: Epoch
+        type: string
+        required: false
+      version:
+        title: Version
+        type: string
+        description: Package version
+        required: false
+      release:
+        title: Release
+        type: string
+        description: Release version
+        required: false
+      arch:
+        title: Architecture
+        type: string
+        description: System architecture
+        enum:
+        - x86_64
+        - i686
+        - i386
+        - noarch
+        required: true
+      repo:
+        title: Repository
+        type: string
+        description: Repository URL
+        required: false
+      key:
+        title: Key
+        type: string
+        description: GPG key URL
+        required: false
+      distro:
+        title: Distribution
+        type: string
+        description: Distribution
+        enum:
+        - CentOS 6
+        - CentOS 7
+        - Fedora 23
+        - Fedora 24
+        - Fedora 25
+        - Fedora 26
+        required: true
+    output:
+      name:
+        title: Name
+        type: string
+        description: Package name
+        required: false
+      found:
+        title: Found
+        type: boolean
+        description: Package found
+        required: false
+      version:
+        title: Version
+        type: string
+        description: Package version
+        required: false
+      release:
+        title: Release
+        type: string
+        description: Distro release
+        required: false
+      architecture:
+        title: Architecture
+        type: string
+        description: System architecture
+        required: false
+      license:
+        title: License
+        type: string
+        description: License
+        required: false
+      signature:
+        title: Signature
+        type: signature
+        description: Signature
+        required: false
+      source_rpm:
+        title: Source RPM
+        type: string
+        description: Source RPM
+        required: false
+      build_date:
+        title: Build Date
+        type: date
+        description: Build date
+        required: false
+      build_host:
+        title: Build Host
+        type: string
+        description: Build host
+        required: false
+      relocations:
+        title: Relocations
+        type: string
+        description: Relocations
+        required: false
+      size:
+        title: Size
+        type: integer
+        description: Package size
+        required: false
+      vendor:
+        title: Vendor
+        type: string
+        description: Package vendor
+        required: false
+      packager:
+        title: Packager
+        type: string
+        description: Packager
+        required: false
+      summary:
+        title: Summary
+        type: string
+        description: Package summary
+        required: false
+      description:
+        title: Description
+        type: string
+        description: Package description
+        required: false
+      url:
+        title: URL
+        type: string
+        description: Package download URL
+        required: false
+      files:
+        title: Files
+        type: '[]file'
+        description: Package files
+        required: false

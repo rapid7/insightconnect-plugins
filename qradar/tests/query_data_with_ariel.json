@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "query_data_with_ariel",
+    "meta": {},
+    "input": {
+      "query": "SELECT * FROM events"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,33 @@
+plugin_spec_version: v2
+name: foremost
+title: Foremost
+description: A data carving tool to recover files
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- foremost
+- extraction
+- forensics
+- carving
+actions:
+  extract:
+    title: Extract
+    description: Extract files from image
+    input:
+      file:
+        title: Base64 Encoded Image
+        description: Base64 encoded disk image file
+        type: bytes
+        required: true
+    output:
+      files:
+        title: Files
+        description: Extracted files
+        type: '[]bytes'
+        required: false
+      file_count:
+        title: File Count
+        description: Number of files extracted
+        type: integer
+        required: false

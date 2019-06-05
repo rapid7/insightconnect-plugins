@@ -1,0 +1,18 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": null,
+    "action": "subtract_from_datetime",
+    "input": {
+      "seconds": 1,
+      "days": 2,
+      "hours": 1,
+      "base_time": "2016-09-15T14:22:11.42Z",
+      "months": 1,
+      "minutes": 1,
+      "years": 1
+    }
+  },
+  "version": "v1"
+}

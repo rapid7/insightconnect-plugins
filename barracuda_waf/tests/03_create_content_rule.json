@@ -1,0 +1,25 @@
+{
+  "type": "action_start",
+  "body": {
+    "input": {
+      "name": "test-v14-content-rule",
+      "virtual_service_id": "test-v14-virtual-service",
+      "extended_match": "*",
+      "url_match": "/",
+      "host_match": "test-v14-test.example.com",
+      "web_firewall_policy": "owa",
+      "status": "on",
+      "extended_match_sequence": 1
+    },
+    "action": "create_content_rule",
+    "meta": {},
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "version": "v1"
+}

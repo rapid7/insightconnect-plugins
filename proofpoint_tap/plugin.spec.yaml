@@ -1,0 +1,127 @@
+plugin_spec_version: v2
+name: proofpoint_tap
+title: Proofpoint TAP
+description: A plugin for Proofpoint Targeted Attack Protection (TAP)
+version: 1.0.2
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- Proofpoint
+- TAP
+- parser
+types:
+  threat:
+    attachment_sha256:
+      title: Attachment SHA256 Hash
+      description: Attachment SHA256 hash
+      type: string
+      required: false
+    url:
+      title: URL
+      description: URL
+      type: string
+      required: false
+    category:
+      title: Category
+      description: Category
+      type: string
+      required: false
+    condemnation_time:
+      title: Condemnation Time
+      description: Condemnation Time
+      type: string
+      required: false
+  message:
+    time_delivered:
+      title: Time Delivered
+      description: Time Delivered
+      type: string
+      required: false
+    recipients:
+      title: Recipients
+      description: Recipients
+      type: string
+      required: false
+    subject:
+      title: Subject
+      description: Subject
+      type: string
+      required: false
+    sender:
+      title: Sender
+      description: Sender
+      type: string
+      required: false
+    header_from:
+      title: Header From
+      description: Header from
+      type: string
+      required: false
+    header_replyto:
+      title: Header Reply To
+      description: Header reply to
+      type: string
+      required: false
+    message_id:
+      title: Message ID
+      description: Message ID
+      type: string
+      required: false
+    sender_ip:
+      title: Sender IP
+      description: Sender IP
+      type: string
+      required: false
+    message_size:
+      title: Message Size
+      description: Message size
+      type: string
+      required: false
+  browser:
+    time:
+      title: Time
+      description: Time
+      type: string
+      required: false
+    source_ip:
+      title: Source IP
+      description: Source IP
+      type: string
+      required: false
+    user_agent:
+      title: User Agent
+      description: User agent string
+      type: string
+      required: false
+  tap_results:
+    threat:
+      title: Threat
+      description: Threat information
+      type: threat
+      required: false
+    message:
+      title: Message
+      description: TAP alert meta data
+      type: message
+      required: false
+    browser:
+      title: Browser
+      description: Browser information
+      type: browser
+      required: false
+actions:
+  parse_tap_alert:
+    title: Parse Alert
+    description: Parses a TAP alert
+    input:
+      tap_alert:
+        title: Proofpoint TAP Alert
+        description: A Proofpoint TAP alert
+        type: string
+        required: true
+    output:
+      results:
+        title: Results
+        type: tap_results
+        description: Proofpoint TAP results
+        required: false

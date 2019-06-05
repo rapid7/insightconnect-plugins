@@ -1,0 +1,22 @@
+{
+  "version": "v1",
+  "body": {
+    "action": "post",
+    "connection": {
+      "base_url": "https://httpbin.org",
+      "default_headers": { "User-Agent": "Mozilla/5.0" },
+      "ssl_verify": false,
+      "basic_auth_credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "input": {
+      "body": { "Best": "Komand" },
+      "route": "/post",
+      "headers": { "Referer": "https://google.com" }
+    },
+    "meta": {}
+  },
+  "type": "action_start"
+}

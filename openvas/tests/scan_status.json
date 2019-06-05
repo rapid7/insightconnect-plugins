@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "scan_status",
+    "input": {
+      "scan_id": "91f8b756-acb5-4664-98b2-b86dc3f66d5c"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "timeout": 10,
+      "server": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

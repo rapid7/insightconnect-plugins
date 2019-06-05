@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "delete_snapshot",
+        "connection": {
+            "token":{
+                "secretKey": ""
+            }
+        },
+        "input": {
+            "image_id": "22206671"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

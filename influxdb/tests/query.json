@@ -1,0 +1,19 @@
+{
+  "body": {
+    "connection": {
+      "server": ""
+    },
+    "action": "query",
+    "input": {
+      "database_name": "mydb",
+      "username": "",
+      "query": "SELECT * FROM \"mymeas\"",
+      "chunked": "",
+      "epoch": "",
+      "password": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

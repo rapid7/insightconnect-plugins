@@ -1,0 +1,46 @@
+plugin_spec_version: v2
+name: awk
+title: Awk
+description: Manipulate text with the GNU awk programming language
+version: 1.2.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- awk
+- regex
+- utilities
+actions:
+  process_string:
+    title: Process String
+    description: Process string with Awk
+    input:
+      expression:
+        type: string
+        description: Awk expression e.g. [pattern] { action }
+        required: true
+      text:
+        type: string
+        description: String to process
+        required: true
+    output:
+      out:
+        type: string
+        description: Processed string
+        required: false
+  process_file:
+    title: Process File
+    description: Process file with Awk
+    input:
+      expression:
+        type: string
+        description: Awk expression e.g. [pattern] { action }
+        required: true
+      data:
+        type: bytes
+        description: File to process
+        required: true
+    output:
+      out:
+        type: string
+        description: Processed string
+        required: false

@@ -1,0 +1,24 @@
+import komand
+from .schema import EditInput, EditOutput
+# Custom imports below
+
+
+class Edit(komand.Action):
+
+    def __init__(self):
+        super(self.__class__, self).__init__(
+                name='edit',
+                description='Edit an existing object',
+                input=EditInput(),
+                output=EditOutput())
+
+    def run(self, params={}):
+        xpath = params.get("xpath")
+        element = params.get("element")
+        try:
+            output = self.connection.request.edit_(action=self, xpath=xpath, element=element)
+            return {"response": output['response']}
+        except KeyError:
+            self.logger.error('The output did not contain a proper response.')
+            self.logger.error(output)
+            raise

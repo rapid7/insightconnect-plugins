@@ -1,0 +1,237 @@
+plugin_spec_version: v2
+name: rest
+title: REST
+description: REST plugin to make it easy to integrate with RESTful services
+version: 3.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- rest
+- http
+- rpc
+- microservices
+- api
+enable_cache: true
+connection:
+  base_url:
+    title: Base URL
+    description: Base URL e.g. https://httpbin.org
+    type: string
+    required: true
+  default_headers:
+    title: Default Headers
+    description: 'Default headers to include in all requests associated with this
+      connection e.g. { User-Agent: Komand }'
+    type: object
+    required: false
+  ssl_verify:
+    title: SSL Verify
+    type: boolean
+    description: Verify SSL certificate
+    required: true
+    default: true
+  basic_auth_credentials:
+    title: Basic Auth Credentials
+    type: credential_username_password
+    required: false
+actions:
+  get:
+    title: GET
+    description: Make a GET request
+    input:
+      route:
+        title: Route
+        description: The route to append to the base URL e.g. /org/users
+        type: string
+        required: true
+      headers:
+        title: Headers
+        description: Headers to use for the request. These will override any default
+          headers
+        type: object
+        required: false
+    output:
+      body_object:
+        title: Body Object
+        description: Response payload from the server as an object
+        type: object
+        required: false
+      body_string:
+        title: Body String
+        description: Response payload from the server as a string
+        type: string
+        required: false
+      status:
+        title: Status
+        description: Status code of the response from the server
+        type: int
+        required: false
+      headers:
+        title: Headers
+        description: Response headers from the server
+        type: object
+        required: false
+  post:
+    title: POST
+    description: Make a POST request
+    input:
+      route:
+        title: Route
+        description: The route to append to the base URL e.g. /org/users
+        type: string
+        required: true
+      headers:
+        title: Headers
+        description: Headers to use for the request. These will override any default
+          headers
+        type: object
+        required: false
+      body:
+        title: Body
+        description: Payload to submit to the server when making the REST call
+        type: object
+        required: false
+    output:
+      body_object:
+        title: Body Object
+        description: Response payload from the server as an object
+        type: object
+        required: false
+      body_string:
+        title: Body String
+        description: Response payload from the server as a string
+        type: string
+        required: false
+      status:
+        title: Status
+        description: Status code of the response from the server
+        type: int
+        required: false
+      headers:
+        title: Headers
+        description: Response headers from the server
+        type: object
+        required: false
+  put:
+    title: PUT
+    description: Make a PUT request
+    input:
+      route:
+        title: Route
+        description: The route to append to the base URL e.g. /org/users
+        type: string
+        required: true
+      headers:
+        title: Headers
+        description: Headers to use for the request. These will override any default
+          headers
+        type: object
+        required: false
+      body:
+        title: Body
+        description: Payload to submit to the server when making the REST call
+        type: object
+        required: false
+    output:
+      body_object:
+        title: Body Object
+        description: Response payload from the server as an object
+        type: object
+        required: false
+      body_string:
+        title: Body String
+        description: Response payload from the server as a string
+        type: string
+        required: false
+      status:
+        title: Status
+        description: Status code of the response from the server
+        type: int
+        required: false
+      headers:
+        title: Headers
+        description: Response headers from the server
+        type: object
+        required: false
+  patch:
+    title: PATCH
+    description: Make a PATCH request
+    input:
+      route:
+        title: Route
+        description: The route to append to the base URL e.g. /org/users
+        type: string
+        required: true
+      headers:
+        title: Headers
+        description: Headers to use for the request. These will override any default
+          headers
+        type: object
+        required: false
+      body:
+        title: Body
+        description: Payload to submit to the server when making the REST call
+        type: object
+        required: false
+    output:
+      body_object:
+        title: Body Object
+        description: Response payload from the server as an object
+        type: object
+        required: false
+      body_string:
+        title: Body String
+        description: Response payload from the server as a string
+        type: string
+        required: false
+      status:
+        title: Status
+        description: Status code of the response from the server
+        type: int
+        required: false
+      headers:
+        title: Headers
+        description: Response headers from the server
+        type: object
+        required: false
+  delete:
+    title: DELETE
+    description: Make a DELETE request
+    input:
+      route:
+        title: Route
+        description: The route to append to the base URL e.g. /org/users
+        type: string
+        required: true
+      headers:
+        title: Headers
+        description: Headers to use for the request. These will override any default
+          headers
+        type: object
+        required: false
+      body:
+        title: Body
+        description: Payload to submit to the server when making the REST call
+        type: object
+        required: false
+    output:
+      body_object:
+        title: Body Object
+        description: Response payload from the server as an object
+        type: object
+        required: false
+      body_string:
+        title: Body String
+        description: Response payload from the server as a string
+        type: string
+        required: false
+      status:
+        title: Status
+        description: Status code of the response from the server
+        type: int
+        required: false
+      headers:
+        title: Headers
+        description: Response headers from the server
+        type: object
+        required: false

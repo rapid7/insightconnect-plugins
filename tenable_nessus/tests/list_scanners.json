@@ -1,0 +1,19 @@
+{
+  "body": {
+    "connection": {
+      "access_key": {
+        "secretKey": ""
+      },
+      "hostname": "",
+      "secret_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": true
+    },
+    "meta": {},
+    "action": "list_scanners",
+    "input": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

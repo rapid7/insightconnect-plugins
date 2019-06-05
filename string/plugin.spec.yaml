@@ -1,0 +1,93 @@
+plugin_spec_version: v2
+name: string
+title: String Operations
+description: Provides common programmatic string operations
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- utilities
+- string
+- split
+actions:
+  split_to_list:
+    title: Split String to List
+    description: Converts a string to a list of strings
+    input:
+      string:
+        title: String Input
+        description: 'String to convert e.g. Sentence one
+
+          Sentence two'
+        type: string
+        required: true
+      delimiter:
+        title: Delimiter
+        description: The character used to split the string into slices for the list.
+          The default is a newline, if not provided by the user
+        type: string
+        required: false
+    output:
+      list:
+        type: '[]string'
+        title: List
+        description: List of string components
+        required: false
+  split_to_object:
+    title: Split String to Object
+    description: Converts a string to an object containing key:value strings
+    input:
+      string:
+        title: String Input
+        description: String to convert e.g. USER=bob
+        type: string
+        required: true
+      string_delimiter:
+        title: String Delimiter
+        description: The character used to split the string into slices for the list.
+          The default is a space, if not provided by the user
+        type: string
+        required: false
+      block_delimiter:
+        title: Block Delimiter
+        description: The character delimiter for the initial string split, applied
+          before the string delimiter input. This parameter is optional but allows
+          for more complex handling
+        type: string
+        required: false
+    output:
+      object:
+        type: object
+        title: Object
+        description: Object from string split
+        required: false
+  upper:
+    title: Upper
+    description: Converts lowercase letters to uppercase
+    input:
+      string:
+        title: String Input
+        description: String to convert e.g. USER=bob
+        type: string
+        required: true
+    output:
+      upper:
+        type: string
+        title: Uppercase
+        description: Uppercase string
+        required: false
+  lower:
+    title: Lower
+    description: Converts uppercase letters to lowercase
+    input:
+      string:
+        title: String Input
+        description: String to convert e.g. USER=bob
+        type: string
+        required: true
+    output:
+      lower:
+        type: string
+        title: Lowercase
+        description: Lowercase string
+        required: false

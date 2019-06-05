@@ -1,0 +1,19 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "license": {
+        "secretKey": ""
+      },
+      "user": 118625
+    },
+    "action": "device_lookup",
+    "meta": {},
+    "input": {
+      "address": "8.8.8.8",
+      "accept_language": "",
+      "user_agent": ""
+    }
+  }
+}

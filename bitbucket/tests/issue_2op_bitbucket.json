@@ -1,0 +1,30 @@
+{
+  "body": {
+    "input": {
+      "repository": "test_repo",
+      "assignee": "",  
+      "milestone": "", 
+      "component": "", 
+      "version": "",     
+      "kind": "None",           
+      "priority": "None",   
+      "state": "None",         
+      "reporter": "",
+      "poll": 10
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "trigger": "issue",
+    "meta": {},
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    }
+  },
+  "version": "v1",
+  "type": "trigger_start"
+}

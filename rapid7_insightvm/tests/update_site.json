@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "update_site",
+    "meta": {},
+    "input": {
+      "description": "",
+      "engine_id": 0,
+      "id": 0,
+      "importance": "normal",
+      "name": "",
+      "scan_template_id": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

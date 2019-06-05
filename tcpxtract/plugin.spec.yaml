@@ -1,0 +1,34 @@
+plugin_spec_version: v2
+name: tcpxtract
+title: Tcpxtract
+description: A tool for extracting files from network traffic
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- tcpxtract
+- pcap
+- extraction
+- forensics
+- carving
+actions:
+  extract:
+    title: Extract
+    description: Extract files from pcap
+    input:
+      file:
+        title: Base64 Encoded Pcap
+        description: Base64 encoded pcap
+        type: bytes
+        required: true
+    output:
+      files:
+        title: Files
+        description: Extracted files
+        type: '[]bytes'
+        required: false
+      file_count:
+        title: File Count
+        description: Number of files extracted
+        type: integer
+        required: false

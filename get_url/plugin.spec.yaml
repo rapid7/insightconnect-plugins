@@ -1,0 +1,85 @@
+plugin_spec_version: v2
+name: get_url
+title: Get URL
+description: Download a file by URL using HTTP, HTTPS, or FTP
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- url
+- file
+- download
+- http
+- ftp
+enable_cache: true
+triggers:
+  poll_file:
+    title: Poll URL
+    description: Download modified file by URL
+    input:
+      url:
+        title: URL
+        type: string
+        description: URL to Download
+        required: true
+      poll:
+        title: Poll
+        description: Poll in seconds
+        type: integer
+        default: 60
+        required: false
+      is_verify:
+        title: Is Verify
+        type: boolean
+        description: Validate certificate
+        required: true
+        default: true
+    output:
+      bytes:
+        title: Base64 Encoded File
+        type: bytes
+        required: false
+        description: Bytes
+      status_code:
+        title: Status Codes
+        type: integer
+        required: false
+        description: Status code
+actions:
+  get_file:
+    title: Get URL
+    description: Download a file by URL
+    input:
+      url:
+        title: URL
+        type: string
+        description: URL to Download
+        required: true
+      timeout:
+        title: Timeout
+        description: Timeout in seconds
+        type: integer
+        default: 60
+        required: false
+      checksum:
+        title: Checksum
+        type: string
+        description: Checksum verification (MD5, SHA1, SHA256)
+        required: false
+      is_verify:
+        title: Is Verify
+        type: boolean
+        description: Validate certificate
+        required: true
+        default: true
+    output:
+      bytes:
+        title: Base64 Encoded File
+        type: bytes
+        required: false
+        description: Bytes
+      status_code:
+        title: Status Codes
+        type: integer
+        required: false
+        description: Status code

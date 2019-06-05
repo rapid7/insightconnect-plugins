@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "get_analysis_info",
+    "meta": {},
+    "input": {
+      "webid": "792649"
+    },
+    "connection": {
+      "url": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

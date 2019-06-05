@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_file_id_from_alert_id",
+    "input": {
+      "alert_id": "636772341913498370_1532439962"
+    },
+    "connection": {
+      "auth_url": "",
+      "client_id": "",
+      "client_secret": "",
+      "host": "https://api.securitycenter.windows.com",
+      "resource_url": "https://api.securitycenter.windows.com",
+      "seconds_ago": 10512000
+    }
+  },
+  "version": "v1",
+  "type": "action_start"
+}

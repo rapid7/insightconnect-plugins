@@ -1,0 +1,160 @@
+plugin_spec_version: v2
+name: bhr
+title: BHR
+vendor: rapid7
+status: ["unsupported"]
+description: Block addresses using the Black Hole Router
+version: 1.0.0
+tags:
+- block
+- ips
+- blackhole
+enable_cache: false
+connection:
+  ssl_verify:
+    title: SSL Verify
+    type: boolean
+    description: SSL Verify
+    required: true
+  url:
+    title: URL
+    type: string
+    description: URL to BHR Host E.g. http://bhr.company.com:8000
+    required: true
+  token:
+    title: API Key
+    type: credential_secret_key
+    description: API key
+    required: true
+actions:
+  block:
+    title: Block Address
+    description: Send a block request
+    input:
+      cidr:
+        title: CIDR
+        description: IP Address or CIDR network to block
+        type: string
+        required: true
+      source:
+        title: Source
+        description: Source for this block i.e., where the intel came from
+        type: string
+        required: true
+      why:
+        title: Why
+        description: The reason for the block
+        type: string
+        required: true
+      duration:
+        title: Duration
+        description: Duration of block in seconds. Accepted suffixes are y, mo, d,
+          h, m, s, e.g. 1d
+        type: string
+        default: '300'
+        required: false
+      autoscale:
+        title: Autoscale
+        description: Autoscale the duration based on server side block history
+        type: boolean
+        required: false
+      skip_whitelist:
+        title: Skip Whitelist
+        description: Bypass the server side whitelist
+        type: boolean
+        required: false
+    output:
+      result:
+        title: Block Information
+        description: Block Information
+        type: object
+        required: false
+  mblock:
+    title: Batch Address Block
+    description: Send a batch block request
+    input:
+      batch:
+        title: Batch
+        description: 'A list of block objects E.g. [ { "cidr": "1.1.1.1", ..}, { "cidr":
+          "1.2.3.4",..} ]'
+        type: '[]object'
+        required: true
+    output:
+      result:
+        title: Block Information
+        description: Block Information
+        type: '[]object'
+        required: false
+  unblock:
+    title: Unblock Address
+    description: Send a unblock request
+    input:
+      cidr:
+        title: CIDR
+        description: IP Address or CIDR network to block
+        type: string
+        required: true
+      why:
+        title: Why
+        description: The reason for the unblock
+        type: string
+        required: true
+    output:
+      result:
+        title: Unblock Information
+        description: Unblock Information
+        type: string
+        required: false
+  query:
+    title: Query Block History
+    description: Query block history information for address
+    input:
+      cidr:
+        title: CIDR
+        description: IP Address or CIDR network to block
+        type: string
+        required: true
+    output:
+      result:
+        title: Block List
+        description: Block List
+        type: '[]object'
+        required: false
+      is_blocked:
+        title: Blocked
+        description: Blocked
+        type: boolean
+        required: false
+  stats:
+    title: Block Stats
+    description: Return current block stats
+    output:
+      current:
+        title: Current Blocks
+        description: Current blocks
+        type: integer
+        required: false
+      expected:
+        title: Expected Blocks
+        description: Expected blocks
+        type: integer
+        required: false
+      block_pending:
+        title: Blocks Pending
+        description: Blocks pending
+        type: integer
+        required: false
+      unblock_pending:
+        title: Unblocks Pending
+        description: Unblocks pending
+        type: integer
+        required: false
+  get_list:
+    title: List Blocks
+    description: Get list of current blocks
+    output:
+      list:
+        title: Block List
+        description: Block list
+        type: string
+        required: false

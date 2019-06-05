@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "remove_user_site_access",
+    "meta": {},
+    "input": {
+      "user_id": 86,
+      "site_id": 311
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,136 @@
+plugin_spec_version: v2
+name: ftp
+title: FTP
+vendor: rapid7
+status: ["unsupported"]
+description: Upload and download files using the File Transfer Protocol
+version: 2.0.0
+tags:
+- ftp
+- authentication
+enable_cache: true
+connection:
+  credentials:
+    title: FTP Username and Password
+    description: FTP username and password
+    type: credential_username_password
+    required: false
+  host:
+    description: Address of FTP server
+    type: string
+    required: true
+    title: Host
+  secure:
+    description: Whether TLS encryption should be used
+    type: boolean
+    default: false
+    required: false
+    title: SSL/TLS
+  passive:
+    description: Passive connection for FTP server
+    type: boolean
+    default: false
+    required: false
+    title: Passive
+actions:
+  upload:
+    title: Upload File
+    description: Upload file to server
+    input:
+      file_content:
+        type: bytes
+        description: Contents of file to upload
+        required: true
+      remote_path:
+        type: string
+        description: Path of file (with filename) on remote server E.g. /home/user/upload.txt
+        required: true
+    output:
+      uploaded:
+        title: Upload Success
+        description: Upload success
+        type: boolean
+        required: false
+  download:
+    title: Download File
+    description: Download file from server
+    input:
+      path:
+        type: string
+        description: Path of file to download
+        required: true
+    output:
+      download:
+        title: File Download
+        description: File download
+        type: bytes
+        required: false
+      downloaded:
+        title: Download Success
+        description: Downloaded success
+        type: boolean
+        required: false
+  delete:
+    title: Delete File
+    description: Delete file from server
+    input:
+      path:
+        type: string
+        description: Path of file to delete
+        required: true
+    output:
+      deleted:
+        title: Deleted Success
+        description: Deleted success
+        type: boolean
+        required: false
+triggers:
+  monitor:
+    title: Monitor
+    description: Poll for files or directory changes
+    input:
+      path:
+        type: string
+        description: Path to file or directory
+        required: true
+      monitor_time:
+        type: boolean
+        description: Monitor file timestamp
+        default: true
+        required: false
+      monitor_size:
+        type: boolean
+        description: Monitor file size
+        default: false
+        required: false
+      monitor_mode:
+        type: boolean
+        description: Monitor file mode
+        default: false
+        required: false
+      interval:
+        type: integer
+        description: Poll interval in seconds
+        default: 300
+        required: false
+    output:
+      changed:
+        title: Changed File
+        description: Changed file
+        type: bytes
+        required: false
+      time:
+        title: Time
+        description: Time
+        type: string
+        required: false
+      size:
+        title: Size
+        description: Size
+        type: integer
+        required: false
+      mode:
+        title: Mode
+        description: Mode
+        type: integer
+        required: false

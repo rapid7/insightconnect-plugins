@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "put",
+    "meta": {},
+    "connection": {
+      "default_headers": { "User-Agent": "Mozilla/5.0" },
+      "base_url": "https://httpbin.org/",
+      "ssl_verify": false,
+      "basic_auth_credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "input": {
+      "body": {"hello": "world"},
+      "headers": { "Referer": "https://google.com" },
+      "route": "/put"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

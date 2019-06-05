@@ -1,0 +1,45 @@
+plugin_spec_version: v2
+name: elastalert
+title: ElastAlert
+description: Easy & flexible alerting with Elasticsearch
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- elasticsearch
+- elk
+- alert
+connection:
+  credentials:
+    title: Basic Auth Username and Password
+    description: Basic Auth username and password
+    type: credential_username_password
+    required: true
+triggers:
+  receive:
+    title: Get Alerts
+    description: Listen for and trigger on new alerts from an ElastAlert webhook
+    input:
+      tcp_port:
+        type: integer
+        title: TCP Port
+        description: TCP port to listen for messages
+        required: true
+      endpoint:
+        type: string
+        title: Endpoint
+        description: IP address of the Komand host to listen on. 0.0.0.0 to listen
+          on the all address
+        default: 0.0.0.0
+        required: true
+      interval:
+        type: integer
+        description: Interval to wait before reading another message
+        default: 5
+        required: false
+    output:
+      alert:
+        title: Alert
+        description: Alert
+        type: object
+        required: true

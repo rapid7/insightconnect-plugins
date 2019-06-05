@@ -1,0 +1,14 @@
+{
+  "body": {
+    "input": {
+      "task_id": 1
+    },
+    "connection": {
+      "url": ""
+    },
+    "meta": {},
+    "action": "get_report"
+  },
+  "type": "action_start",
+  "version": "v1"
+}

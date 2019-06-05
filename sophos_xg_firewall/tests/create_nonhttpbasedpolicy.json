@@ -1,0 +1,63 @@
+{
+  "body": {
+    "action": "create_nonhttpbasedpolicy",
+    "meta": {},
+    "input": {
+      "policy": {
+        "DataAccounting": "Exclude",
+        "ExceptionNetworks": [],
+        "ExternalPort": 0,
+        "ExternalPortList": [],
+        "ExternalPortRange": {
+          "end": 0,
+          "start": 0
+        },
+        "ForwardPorts": "",
+        "HostedAddress": "Test Server",
+        "Identity": [],
+        "LogTraffic": "Disable",
+        "MappedPort": 80,
+        "MappedPortList": [10,20],
+        "MappedPortRange": {
+          "end": 0,
+          "start": 0
+        },
+        "MatchIdentity": "Disable",
+        "OutboundAddress": "",
+        "ProtectedServer": "Test Server",
+        "ProtectedZone": "LAN",
+        "Protocol": "TCP",
+        "ReflexiveRule": "No",
+        "RewriteSourceAddress": "Disable",
+        "ScanIMAP": "Disable",
+        "ScanPOP3": "Disable",
+        "ScanPOP3S": "Disable",
+        "ScanSMTP": "Disable",
+        "ScanSMTPS": "Disable",
+        "SecurityPolicy": {
+          "Description": "Komand NonHTTPBased Policy",
+          "IPFamily": "IPv4",
+          "IntrusionPrevention": "None",
+          "Name": "Komand NonHTTPBased",
+          "Position": "top",
+          "SourceSecurityHeartbeat": "Disable",
+          "DestSecurityHeartbeat": "Disable",
+          "Status": "Disable",
+          "TrafficShapingPolicy": "None"
+        },
+        "SourceNetworks": [],
+        "SourceZones": []
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": 4444
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

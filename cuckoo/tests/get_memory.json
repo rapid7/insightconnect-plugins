@@ -1,0 +1,15 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "input": {
+      "pid": "5712",
+      "task_id": 18
+    },
+    "meta": {},
+    "connection": {
+      "url": ""
+    },
+    "action": "get_memory"
+  }
+}

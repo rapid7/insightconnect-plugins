@@ -1,0 +1,472 @@
+plugin_spec_version: v2
+name: jira
+title: Jira
+vendor: rapid7
+status: ["supported"]
+description: Jira is an issue tracking product, developed by Atlassian. It provides
+  bug tracking, issue tracking, and project management functions
+version: 3.1.0
+tags:
+- ticket
+- Jira
+types:
+  user:
+    name:
+      type: string
+      description: User name
+      required: false
+    email_address:
+      type: string
+      description: User's email address
+      required: false
+    display_name:
+      type: string
+      description: User's display name
+      required: false
+    active:
+      type: boolean
+      description: Whether the user is active
+      required: false
+  comment:
+    id:
+      type: string
+      description: Comment ID
+      required: false
+    body:
+      type: string
+      description: Body of comment
+      required: false
+    author:
+      description: Author
+      type: user
+      required: false
+  issue:
+    id:
+      type: string
+      description: Issue ID
+      required: false
+    project:
+      type: string
+      description: Project
+      required: false
+    key:
+      type: string
+      description: Issue Key
+      required: false
+    status:
+      type: string
+      description: Status
+      required: false
+    url:
+      type: string
+      description: Issue URL
+      required: false
+    summary:
+      type: string
+      description: Summary
+      required: false
+    description:
+      type: string
+      description: Description
+      required: false
+    resolution:
+      type: string
+      description: Resolution
+      required: false
+    labels:
+      type: '[]string'
+      description: Labels
+      required: false
+    reporter:
+      type: string
+      description: Reporting User
+      required: false
+    assignee:
+      type: string
+      description: Assigned User
+      required: false
+    created_at:
+      type: string
+      description: Created At
+      required: false
+    updated_at:
+      type: string
+      description: Updated At
+      required: false
+    resolved_at:
+      type: string
+      description: Resolved At
+      required: false
+    attachments:
+      type: '[]file'
+      description: Attachments
+      required: false
+    fields:
+      type: object
+      description: Full list of fields
+      required: false
+connection:
+  url:
+    title: URL
+    type: string
+    description: JIRA URL, e.g. https://company.atlassian.net
+    default: https://company.atlassian.net
+    required: false
+  project:
+    title: Project
+    type: string
+    description: Project ID
+    required: false
+  credentials:
+    title: Credentials
+    type: credential_username_password
+    description: Username and Password
+    required: true
+actions:
+  transition_issue:
+    title: Transition Issue
+    description: Transition an issue
+    input:
+      id:
+        title: ID
+        type: string
+        description: Issue ID
+        required: true
+      transition:
+        title: Transition
+        type: string
+        description: ID or name of transition to perform, e.g. In Progress
+        required: true
+      comment:
+        title: Comment
+        type: string
+        description: Comment to add
+        required: false
+    output:
+      success:
+        title: Success
+        type: boolean
+        description: True if successful
+        required: false
+  find_issues:
+    title: Find Issues
+    description: Search for issues
+    input:
+      jql:
+        title: JQL
+        type: string
+        description: JQL search string to use
+        required: true
+      max:
+        title: Max
+        type: integer
+        description: Max results to return
+        default: 10
+        required: true
+    output:
+      issues:
+        title: Issues
+        type: '[]issue'
+        required: false
+        description: The list of found issues
+  assign_issue:
+    title: Assign Issue
+    description: Assign an issue to a user
+    input:
+      id:
+        title: ID
+        type: string
+        description: Issue ID
+        required: true
+      assignee:
+        title: Assignee
+        type: string
+        description: Username of assignee
+        required: true
+    output:
+      success:
+        title: Success
+        type: boolean
+        description: True if successful
+        required: false
+  label_issue:
+    title: Label Issue
+    description: Label issue
+    input:
+      id:
+        title: ID
+        type: string
+        description: Issue ID
+        required: true
+      label:
+        title: Label
+        type: string
+        description: Label to add. To add multiple labels, separate by commas
+        required: true
+    output:
+      success:
+        title: Success
+        type: boolean
+        description: True if successful
+        required: false
+  get_comments:
+    title: Get Comments
+    description: Retrieve all comments on an issue
+    input:
+      id:
+        title: ID
+        type: string
+        description: Issue ID
+        required: true
+    output:
+      count:
+        title: Count
+        type: integer
+        description: Count of comments found
+        required: false
+      comments:
+        title: Comments
+        type: '[]comment'
+        description: Comments
+        required: false
+  comment_issue:
+    title: Comment Issue
+    description: Comment on an issue
+    input:
+      id:
+        title: ID
+        type: string
+        description: Issue ID
+        required: true
+      comment:
+        title: Comment
+        type: string
+        description: Comment to add
+        required: true
+    output:
+      comment_id:
+        title: Comment ID
+        type: string
+        description: Comment ID
+        required: false
+  get_issue:
+    title: Get Issue
+    description: Retrieve an issue
+    input:
+      id:
+        title: ID
+        type: string
+        description: Issue ID
+        required: true
+    output:
+      found:
+        title: Found
+        type: boolean
+        description: True if found
+        required: false
+      issue:
+        title: Issue
+        type: issue
+        description: Issue
+        required: false
+  find_users:
+    title: Find Users
+    description: Search for a set of users
+    input:
+      query:
+        title: Query
+        type: string
+        description: Query String, e.g. Joe
+        required: true
+      max:
+        title: Max
+        type: integer
+        description: Max results to return
+        default: 10
+        required: true
+    output:
+      users:
+        title: Users
+        type: '[]user'
+        required: false
+        description: The list of found users
+  delete_user:
+    title: Delete User
+    description: Delete a user account
+    input:
+      username:
+        title: Username
+        type: string
+        description: Username
+        required: true
+    output:
+      success:
+        title: Success
+        type: boolean
+        description: True if successful
+        required: false
+  create_user:
+    title: Create User
+    description: Create a user account
+    input:
+      username:
+        title: Username
+        type: string
+        description: Username
+        required: true
+      email:
+        title: Email
+        type: string
+        description: Email
+        required: true
+      password:
+        title: Password
+        type: string
+        description: Password
+        required: false
+      notify:
+        title: Notify
+        type: boolean
+        description: Notify if true
+        default: false
+        required: true
+        enum:
+        - true
+        - false
+    output:
+      success:
+        title: Success
+        type: boolean
+        description: True if successful
+        required: false
+  attach_issue:
+    title: Add Attachment to Issue
+    description: Add an attachment to an issue in Jira
+    input:
+      id:
+        title: ID
+        type: string
+        description: Issue ID
+        required: true
+      attachment_bytes:
+        title: Attachment Bytes
+        type: bytes
+        description: Attachment bytes
+        required: true
+      attachment_filename:
+        title: Attachment Filename
+        type: string
+        description: Attachment filename. Must end with a filetype extension if possible
+        required: true
+    output:
+      id:
+        title: ID
+        type: string
+        description: ID of attachment
+        required: false
+  create_issue:
+    title: Create Issue
+    description: Create an issue in Jira
+    input:
+      summary:
+        title: Summary
+        type: string
+        description: Issue summary
+        required: false
+      type:
+        title: Type
+        type: string
+        description: Issue type. Typical issues type include Task, Story, Epic, Bug.
+          You can also specify a custom issue type. This input is case-sensitive
+        default: Task
+        required: false
+      description:
+        title: Description
+        type: string
+        description: Issue description
+        required: true
+        default: ''
+      project:
+        title: Project
+        description: Project name. If not provided, uses default from connection
+        type: string
+        required: false
+      fields:
+        title: Fields
+        type: object
+        description: Custom fields to assign. Fields used must be present on the same
+          screen as the Create screen in Jira
+        required: false
+      attachment_bytes:
+        title: Attachment bytes
+        type: bytes
+        description: Attachment bytes
+        required: false
+      attachment_filename:
+        title: Attachment filename
+        type: string
+        description: Attachment filename
+        required: false
+    output:
+      issue:
+        title: Issue
+        type: issue
+        description: Created issue
+        required: false
+  edit_issue:
+    title: Edit Issue
+    description: Edit an issue within Jira
+    input:
+      id:
+        title: ID
+        description: Issue ID
+        type: string
+        required: true
+      notify:
+        title: Notify
+        description: Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification
+        type: boolean
+        required: true
+        default: true
+      summary:
+        title: Summary
+        description: Summary field on the issue
+        type: string
+        required: false
+      description:
+        title: Description
+        description: Description field on the issue
+        type: string
+        required: false
+      fields:
+        title: Fields
+        description: An object of fields and values to change
+        type: object
+        required: false
+      update:
+        title: Update
+        description:  An object that contains update operations to apply
+        type: object
+        required: false
+    output:
+      success:
+        title: Success
+        description: If changes were successful
+        type: boolean
+        required: false
+triggers:
+  new_issue:
+    title: New Issue
+    description: Trigger which indicates that a new issue has been created
+    input:
+      jql:
+        title: JQL
+        type: string
+        description: JQL search string to use
+        required: false
+    output:
+      issue:
+        title: Issue
+        type: issue
+        description: New issue
+        required: false

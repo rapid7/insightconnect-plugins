@@ -1,0 +1,29 @@
+{
+  "body": {
+    "input": {
+      "repository": "bad repo",
+      "assignee": "brandonium21",  
+      "milestone": "mile", 
+      "component": "compo", 
+      "version": "v1",     
+      "kind": "bug",           
+      "priority": "critical",   
+      "state": "new",         
+      "reporter": "brandonium21" 
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "trigger": "issue",
+    "meta": {},
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    }
+  },
+  "version": "v1",
+  "type": "trigger_start"
+}

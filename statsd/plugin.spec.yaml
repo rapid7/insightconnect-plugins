@@ -1,0 +1,217 @@
+plugin_spec_version: v2
+name: statsd
+title: Statsd
+description: StatsD is a front-end proxy for the Graphite/Carbon metrics server
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- stats
+- statsd
+- graphite
+types:
+  timeout:
+    timeout:
+      title: Timeout
+      type: integer
+      description: TCP timeout
+      required: false
+  maxudpsize:
+    maxudpsize:
+      title: Max UDP Size
+      type: integer
+      description: Max UDP Size
+      default: 512
+      required: false
+connection:
+  host:
+    title: Host
+    description: Statsd Host
+    type: string
+    required: true
+  port:
+    title: Port
+    description: Statsd Port
+    type: integer
+    required: true
+  protocol:
+    title: Protocol
+    description: Transport Protocol
+    type: string
+    required: true
+    enum:
+    - UDP
+    - TCP
+  prefix:
+    title: Prefix
+    description: Statsd Prefix
+    type: string
+    required: false
+  tcp:
+    title: TCP
+    type: timeout
+    description: TCP
+    required: false
+  udp:
+    title: UDP
+    required: false
+    description: UDP
+    type: maxudpsize
+actions:
+  incr:
+    title: Increment Counter
+    description: This action is used to increment a counter
+    input:
+      stat:
+        title: Counter name
+        description: The name of the counter to increment
+        type: string
+        required: true
+      count:
+        title: Increment amount
+        description: The amount to increment by e.g. 1. Default is 1
+        type: integer
+        required: false
+      rate:
+        title: Sample rate
+        description: A sample rate e.g. 1. Default is 1
+        type: float
+        required: false
+    output:
+      stat:
+        title: Stat
+        type: string
+        description: The name of the incremented counter
+        required: false
+      increment:
+        title: Increment
+        type: integer
+        description: The number incremented by
+        required: false
+  decr:
+    title: Decrement Counter
+    description: This action is used to decrement a counter
+    input:
+      stat:
+        title: Counter name
+        description: The name of the counter to decrement
+        type: string
+        required: true
+      count:
+        title: Decrement amount
+        description: The amount to decrement by e.g. 1. Default is 1
+        type: integer
+        required: false
+      rate:
+        title: Sample rate
+        description: A sample rate e.g. 1. Default is 1
+        type: float
+        required: false
+    output:
+      stat:
+        title: Stat
+        type: string
+        description: The name of the decremented counter
+        required: false
+      decrement:
+        title: Decrement
+        type: integer
+        description: The number decremented by
+        required: false
+  gauge:
+    title: Set Gauge
+    description: This action is used to set a gauge value
+    input:
+      stat:
+        title: Gauge name
+        description: The name of the gauge to set
+        type: string
+        required: true
+      value:
+        title: Value
+        description: The current value of the gauge
+        type: integer
+        required: true
+      rate:
+        title: Sample rate
+        description: A sample rate e.g. 1. Default is 1
+        type: float
+        required: false
+      delta:
+        title: Delta value
+        description: Whether or not to consider this a delta value or an absolute
+          value
+        default: false
+        type: boolean
+        required: false
+    output:
+      stat:
+        title: Stat
+        type: string
+        description: The name of the set gauge
+        required: false
+      value:
+        title: Value
+        description: The current value of the gauge
+        type: integer
+        required: false
+  set:
+    title: Increment Set
+    description: This action is used to increment a set value
+    input:
+      stat:
+        title: Set name
+        description: The name of the set to update
+        type: string
+        required: true
+      value:
+        title: Value
+        description: The unique value to count
+        type: integer
+        required: true
+      rate:
+        title: Sample rate
+        description: A sample rate e.g. 1. Default is 1
+        type: float
+        required: false
+    output:
+      stat:
+        title: Stat
+        description: The name of the updated set
+        type: string
+        required: false
+      value:
+        title: Value
+        description: The unique value to count
+        type: integer
+        required: false
+  timing:
+    title: Record Timer
+    description: This action is used to record timer information
+    input:
+      stat:
+        title: Timer name
+        description: The name of the timer to use
+        type: string
+        required: true
+      delta:
+        title: Delta value
+        description: The number of milliseconds whatever action took
+        type: integer
+        required: true
+      rate:
+        title: Sample rate
+        description: A sample rate e.g. 1. Default is 1
+        type: float
+        required: false
+    output:
+      stat:
+        title: Stat
+        description: The name of the used timer
+        type: string
+        required: false
+      delta:
+        title: Delta
+        description: The number of milliseconds whatever action took
+        type: integer
+        required: false

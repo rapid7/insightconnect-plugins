@@ -1,0 +1,11 @@
+*.pyc
+*.pyo
+*.swp
+*~
+.gitconfig
+MANIFEST
+build
+dist
+.idea
+env/
+py3env/

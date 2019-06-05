@@ -1,0 +1,676 @@
+plugin_spec_version: v2
+name: crits
+title: CRITs
+vendor: rapid7
+status: ["unsupported"]
+description: CRITs is an open source malware and threat repository for conducting
+  malware analyses
+version: 1.0.0
+tags:
+- threat
+- intelligence
+- crits
+- domains
+- malware
+types:
+  post_response:
+    id:
+      title: ID
+      type: string
+      required: false
+    message:
+      title: Message
+      type: string
+      required: false
+    type:
+      title: Type
+      type: string
+      description: The TLO type of the TLO that created or updated
+      required: false
+    return_code:
+      title: Return Code
+      type: integer
+      description: The return_code is usually 0 for success, 1 for failure
+      required: false
+    url:
+      title: URL
+      type: string
+      required: false
+  add_indicator_response:
+    id:
+      title: ID
+      type: string
+      required: false
+    type:
+      title: Type
+      type: string
+      required: false
+    return_code:
+      title: Return Code
+      type: integer
+      description: The return_code is usually 0 for success, 1 for failure
+      required: false
+    url:
+      title: URL
+      type: string
+      required: false
+  collection_response:
+    objects:
+      description: List of collection objects
+      title: Objects
+      type: '[]object'
+      required: false
+connection:
+  url:
+    title: URL
+    type: string
+    description: Host URL, E.g. https://localhost:8443
+    required: true
+  username:
+    title: Username
+    type: string
+    description: Enter the API username
+    required: true
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: Enter the API key
+    required: true
+  ssl_verify:
+    type: boolean
+    title: SSL Verify
+    description: Verify server's certificate
+    default: false
+    required: true
+actions:
+  get_collection:
+    title: Get Collection
+    description: Fetches a collection
+    input:
+      collection:
+        type: string
+        description: Type of collection
+        enum:
+        - Actors
+        - Actor Identifiers
+        - Campaigns
+        - Certificates
+        - Domains
+        - Emails
+        - Events
+        - Indicators
+        - IPs
+        - PCAPs
+        - Raw Datas
+        - Samples
+        - Screenshots
+        - Targets
+        required: true
+      params:
+        type: object
+        description: Additional parameters
+        required: false
+      total:
+        type: integer
+        description: Total number of items to return
+        default: 10
+        required: false
+    output:
+      response:
+        description: Response
+        type: collection_response
+        required: false
+  get_item:
+    title: Get Item
+    description: Fetches a single item
+    input:
+      type:
+        type: string
+        description: Item Type
+        enum:
+        - Actor
+        - Actor Identifier
+        - Campaign
+        - Certificate
+        - Domain
+        - Email
+        - Event
+        - Indicator
+        - IP
+        - PCAP
+        - Raw Data
+        - Sample
+        - Screenshot
+        - Target
+        required: true
+      item_id:
+        title: Item ID
+        type: string
+        description: Unique ID of item
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Additional parameters
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: object
+        required: false
+  add_actor:
+    title: Add Actor
+    description: Creates a new actor
+    input:
+      name:
+        title: Name
+        type: string
+        description: The name your organization refers to this Actor by
+        required: true
+      source:
+        title: Source
+        type: string
+        description: Name of the source which provided this information
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Object containing related data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false
+  add_actor_identifier:
+    title: Add Actor Identifier
+    description: Creates a new actor identifier
+    input:
+      id_type:
+        title: ID Type
+        type: string
+        description: Identity Type
+        required: true
+      id:
+        title: ID
+        type: string
+        description: The name your organization refers to this Actor by
+        required: true
+      source:
+        title: Source
+        type: string
+        description: Name of the source which provided this information
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Object containing related data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false
+  add_certificate:
+    title: Add Certificate
+    description: Creates a new certificate
+    input:
+      file:
+        title: File
+        type: file
+        description: The actual file data
+        required: true
+      source:
+        title: Source
+        type: string
+        description: Name of the source which provided this information
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Object containing related data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false
+  add_event:
+    title: Add Event
+    description: Creates a new event
+    input:
+      type:
+        type: string
+        title: Event type
+        description: The STIX Event Type you wish to assign to this Event
+        required: true
+        enum:
+        - Application Compromise
+        - Denial of Service
+        - Distributed Denial of Service
+        - Exploitation
+        - Intel Sharing
+        - Malicious Code
+        - Phishing
+        - Privileged Account Compromise
+        - Scanning
+        - Sensor Alert
+        - Sniffing
+        - Social Engineering
+        - Spam
+        - Strategic Web Compromise
+        - Unauthorized Information Access
+        - Unknown
+        - Website Defacement
+      title:
+        title: Title
+        type: string
+        description: The title you wish to give this event
+        required: true
+      description:
+        title: Description
+        type: string
+        description: Description of what happened during this Event
+        required: true
+      source:
+        title: Source
+        type: string
+        description: Name of the source which provided this information
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Object containing related data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false
+  add_target:
+    title: Add Target
+    description: Creates a new target
+    input:
+      email:
+        title: Email Address
+        type: string
+        description: The email address of the Target
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Object containing related data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false
+  add_sample:
+    title: Add Sample
+    description: Creates a new sample
+    input:
+      type:
+        title: Type
+        type: string
+        description: Upload type
+        required: true
+        enum:
+        - metadata
+        - file
+      source:
+        title: Source
+        type: string
+        description: Name of the source which provided this information
+        required: true
+      file:
+        title: File
+        type: file
+        description: The actual file data
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Object containing related data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false
+  add_raw_data:
+    title: Add Raw Data
+    description: Creates new raw data
+    input:
+      type:
+        title: Type
+        type: string
+        description: Upload type
+        required: true
+        enum:
+        - metadata
+        - file
+      title:
+        title: Title
+        type: string
+        description: Title for the raw data
+        required: true
+      data_type:
+        title: Date Type
+        type: string
+        description: The type of raw data. Must match choices in the database
+        required: true
+        enum:
+        - Text
+        - JSON
+      data:
+        title: Data
+        type: string
+        description: The raw data if the upload type is 'metadata'
+        required: false
+      source:
+        title: Source
+        type: string
+        description: Name of the source which provided this information
+        required: true
+      file:
+        title: File
+        type: file
+        description: The actual file data
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Object containing related data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false
+  add_pcap:
+    title: Add PCAP
+    description: Creates a new PCAP
+    input:
+      source:
+        title: Source
+        type: string
+        description: Name of the source which provided this information
+        required: false
+      file:
+        title: File
+        type: file
+        description: The actual file data
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Additional data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false
+  add_ip:
+    title: Add IP
+    description: Creates a new IP
+    input:
+      source:
+        title: Source
+        type: string
+        description: Name of the source which provided this information
+        required: false
+      ip:
+        type: string
+        title: IP
+        description: IP Address
+        required: true
+      type:
+        title: Type
+        type: string
+        description: Type of IP Address
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Additional data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false
+  add_indicator:
+    title: Add Indicator
+    description: Creates a new indicator
+    input:
+      type:
+        title: Type
+        type: string
+        description: The CybOX Type associated with that Indicator
+        required: true
+        enum:
+        - API Key
+        - AS Name
+        - AS Number
+        - Adjust Token
+        - Bank account
+        - Bitcoin account
+        - CRX
+        - Certificate Fingerprint
+        - Certificate Name
+        - Checksum CRC16
+        - Command Line
+        - Company name
+        - Cookie Name
+        - Country
+        - Debug Path
+        - Debug String
+        - Destination Port
+        - Device IO
+        - Document from URL
+        - Domain
+        - Email Address
+        - Email Address From
+        - Email Address Sender
+        - Email Boundary
+        - Email HELO
+        - Email Header Field
+        - Email Message ID
+        - Email Originating IP
+        - Email Reply-To
+        - Email Subject
+        - Email X-Mailer
+        - Email X-Originating IP
+        - File Created
+        - File Deleted
+        - File Moved
+        - File Name
+        - File Opened
+        - File Path
+        - File Read
+        - File Written
+        - GET Parameter
+        - HEX String
+        - HTML ID
+        - HTTP Request
+        - HTTP Response Code
+        - IMPHASH
+        - IPv4 Address
+        - IPv4 Subnet
+        - IPv6 Address
+        - IPv6 Subnet
+        - Latitude
+        - Launch Agent
+        - Location
+        - Longitude
+        - MAC Address
+        - MD5
+        - Malware Name
+        - Memory Alloc
+        - Memory Protect
+        - Memory Read
+        - Memory Written
+        - Mutant Created
+        - Mutex
+        - Name Server
+        - Other File Operation
+        - POST Data
+        - Password
+        - Password Salt
+        - Payload Data
+        - Payload Type
+        - Pipe
+        - Process Name
+        - Protocol
+        - Referer
+        - Referer of Referer
+        - Registrar
+        - Registry Key
+        - Registry Key Created
+        - Registry Key Deleted
+        - Registry Key Enumerated
+        - Registry Key Monitored
+        - Registry Key Opened
+        - Registry Key Value Created
+        - Registry Key Value Deleted
+        - Registry Key Value Modified
+        - Registry Key Value Queried
+        - SHA1
+        - SHA256
+        - SMS Origin
+        - SSDEEP
+        - Service Name
+        - Source Port
+        - TS End
+        - TS Start
+        - Telephone
+        - Time Created
+        - Time Updated
+        - Tracking ID
+        - URI
+        - User Agent
+        - User ID
+        - Victim IP
+        - Volume Queried
+        - WHOIS Address 1
+        - WHOIS Address 2
+        - WHOIS Name
+        - WHOIS Registrant Email Address
+        - WHOIS Telephone
+        - Web Payload
+        - Webstorage Key
+        - XPI
+      value:
+        title: Value
+        type: string
+        description: The value of the Indicator
+        required: true
+      source:
+        title: Source
+        type: string
+        description: Name of the source which provided this information
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Additional data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: add_indicator_response
+        required: false
+  add_email:
+    title: Add Email
+    description: Creates a new email
+    input:
+      type:
+        title: Type
+        type: string
+        description: Upload type
+        required: true
+        enum:
+        - msg
+        - eml
+        - raw
+        - yaml
+        - fields
+      file:
+        title: File
+        type: file
+        description: 'The actual file '
+        required: true
+      source:
+        title: Source
+        type: string
+        description: Name of the source which provided this information
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Object containing related data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false
+  add_domain:
+    title: Add Domain
+    description: Creates a new domain
+    input:
+      domain:
+        title: Domain
+        type: string
+        description: The domain name
+        required: true
+      source:
+        title: Source
+        type: string
+        description: Name of the source which provided this information
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Object containing related data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false
+  add_campaign:
+    title: Add Campaign
+    description: Creates a new campaign
+    input:
+      name:
+        title: Name
+        type: string
+        description: Name of the campaign
+        required: true
+      params:
+        title: Parameters
+        type: object
+        description: Object containing related data or metadata
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: post_response
+        required: false

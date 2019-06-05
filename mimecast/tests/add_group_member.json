@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "add_group_member",
+    "meta": {},
+    "input": {
+      "domain": "",
+      "email_address": "",
+      "id": "eNoVzrkOgkAUQNF_eTWFIIjQEdk0OEaUgCUyD8HMojNiROO_i_3Nyf2AxmZQ2FPwgUgRxWbnzZOxKwsyiCjP-BnTe7jYxA5Pq1xsmRhJ4Sbv9SU4zfgrq8vjdSdbO3eDPRjAaH0Dv62ZRgOaQT8kR9VIihO_OpDQDFzPsafwiUr3UoBvGtBKRlH9F-ylZXnfH3hjMBs"
+    },
+    "connection": {
+      "app_id": "",
+      "app_key": {
+        "secretKey": ""
+      },
+      "auth_type": "Basic-Cloud",
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://sandbox-api.mimecast.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

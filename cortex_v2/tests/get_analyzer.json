@@ -1,0 +1,21 @@
+{
+  "type": "action_start",
+  "body": {
+    "action": "get_analyzer",
+    "input": {
+      "analyzer_id": ""
+    },
+    "connection": {
+      "host": "",
+      "api_key": {
+        "secretKey": ""
+      },
+      "verify": true,
+      "proxy": {},
+      "protocol": "HTTP",
+      "port": "9001"
+    },
+    "meta": {}
+  },
+  "version": "v1"
+}

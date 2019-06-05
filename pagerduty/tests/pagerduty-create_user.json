@@ -1,0 +1,19 @@
+{
+  "body": {
+    "meta": {},
+    "input": {
+      "from_email": "",
+      "role": "admin",
+      "email": "",
+      "name": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "create_user"
+  },
+  "type": "action_start",
+  "version": "v1"
+}

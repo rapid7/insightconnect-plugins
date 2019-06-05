@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "publish",
+    "meta": {},
+    "input": {
+      "event": "776"
+    },
+    "connection": {
+      "automation_code": {
+        "secretKey": ""
+      },
+      "url": "",
+      "ssl": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

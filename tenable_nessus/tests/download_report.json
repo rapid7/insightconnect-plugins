@@ -1,0 +1,22 @@
+{
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "access_key": {
+        "secretKey": ""
+      },
+      "hostname": "",
+      "secret_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": true
+    },
+    "action": "download_report",
+    "input": {
+      "scan_name": "me",
+      "report_format": "html"
+    },
+    "meta": {}
+  },
+  "version": "v1"
+}

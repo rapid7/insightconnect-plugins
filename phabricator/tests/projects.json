@@ -1,0 +1,18 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "action": "projects",
+    "input": {
+      "id": "1",
+      "projects": ["test 1"]
+    },
+    "connection": {
+      "token": {
+        "secretKey": ""
+      },
+      "url": ""
+    }
+  }
+}

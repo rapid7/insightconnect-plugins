@@ -1,0 +1,18 @@
+{
+  "body": {
+    "meta": {},
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": "root@localhost"
+      },
+      "server": ""
+    },
+    "input": {
+      "ticket_id": 67
+    },
+    "action": "retrieve"
+  },
+  "type": "action_start",
+  "version": "v1"
+}

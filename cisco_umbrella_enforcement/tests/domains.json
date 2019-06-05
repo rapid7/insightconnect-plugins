@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "domains",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "list_push",
+    "input": {
+      "value": "foo1",
+      "key": "keylist",
+      "expire": 0
+    },
+    "meta": {},
+    "connection": {
+      "port": 6379,
+      "db": 0,
+      "host": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

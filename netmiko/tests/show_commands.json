@@ -1,0 +1,22 @@
+{
+  "body": {
+    "connection": {
+      "device_type": "cisco_asa",
+      "key": {"filename": "", "content": ""},
+      "username": "admin",
+      "host": "ciscoasa.com",
+      "password": "",
+      "verbose": false,
+      "secret": "",
+      "port": 22
+    },
+    "action": "show_commands",
+    "input": {
+      "command": "show interface vlan 1",
+      "host": "ciscoasa.com"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

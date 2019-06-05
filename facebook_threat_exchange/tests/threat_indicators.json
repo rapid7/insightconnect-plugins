@@ -1,0 +1,25 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "app_id": "Facebook App ID",
+      "secret_key": {
+        "secretKey": ""
+      }
+    },
+    "input": {
+      "type": "CMD_LINE",
+      "text": "CMD",
+      "threat_type": "",
+      "sort_by": "RELEVANCE",
+      "limit": "",
+      "until": "",
+      "strict_text": false,
+      "sort_order": "ASCENDING",
+      "since": ""
+    },
+    "action": "threat_indicators"
+  }
+}

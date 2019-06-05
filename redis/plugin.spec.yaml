@@ -1,0 +1,283 @@
+plugin_spec_version: v2
+name: redis
+title: Redis
+description: An open source (BSD licensed), in-memory data structure store, used as
+  a database, cache and message broker
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- database
+- redis
+connection:
+  host:
+    type: string
+    description: Host, e.g. 10.4.4.4
+    required: true
+  port:
+    type: integer
+    description: Port
+    default: 6379
+    required: true
+  db:
+    type: integer
+    description: Db to use usually (0-15)
+    default: 0
+    required: true
+actions:
+  delete:
+    title: Delete
+    description: Delete a key
+    input:
+      key:
+        title: Key
+        type: string
+        description: Key to delete
+        required: true
+    output:
+      count:
+        title: Count
+        type: integer
+        description: Number of keys deleted
+        required: false
+  set:
+    title: Set
+    description: Set a key
+    input:
+      key:
+        title: Key
+        type: string
+        description: Key to set
+        required: true
+      value:
+        title: Value
+        type: string
+        description: Value to set
+        required: true
+      expire:
+        title: Expire
+        type: integer
+        description: Expiration in seconds
+        required: false
+    output:
+      reply:
+        title: Reply
+        type: string
+        description: Reply (usually OK)
+        required: false
+  get:
+    title: Get
+    description: Get a key
+    input:
+      key:
+        title: Key
+        type: string
+        description: Key to get
+        required: true
+    output:
+      found:
+        title: Found
+        type: boolean
+        description: True if found
+        required: false
+      value:
+        title: Value
+        type: string
+        description: Value
+        required: false
+  keys:
+    title: Keys
+    description: Return keys matching pattern
+    input:
+      pattern:
+        title: Pattern
+        type: string
+        description: Pattern, e.g. *o*
+        required: true
+    output:
+      count:
+        title: Count
+        type: integer
+        description: Count of keys found
+        required: false
+      keys:
+        title: Keys
+        type: '[]string'
+        description: Keys returned
+        required: false
+  hash_set:
+    title: Hash Set
+    description: Set key's hash
+    input:
+      key:
+        title: Key
+        type: string
+        description: Key
+        required: true
+      values:
+        title: Values
+        type: object
+        description: Object hash field:value to set
+        required: true
+      expire:
+        title: Expire
+        type: integer
+        description: Expiration in seconds
+        required: false
+    output:
+      reply:
+        title: Reply
+        type: string
+        description: Reply (usually OK)
+        required: false
+  hash_get:
+    title: Hash Get
+    description: Get key's hash
+    input:
+      key:
+        title: Key
+        type: string
+        description: Key to get
+        required: true
+    output:
+      found:
+        title: Found
+        type: boolean
+        description: True if found
+        required: false
+      values:
+        title: Values
+        type: object
+        description: Values
+        required: false
+  list_push:
+    title: List Push
+    description: List key's push
+    input:
+      key:
+        title: Key
+        type: string
+        description: Key
+        required: true
+      value:
+        title: Value
+        type: string
+        description: Value to append
+        required: true
+      expire:
+        title: Expire
+        type: integer
+        description: Expiration in seconds
+        required: false
+    output:
+      reply:
+        title: Reply
+        type: string
+        description: Reply (usually OK)
+        required: false
+  list_get:
+    title: List Get
+    description: Get all elements in a list
+    input:
+      key:
+        title: Key
+        type: string
+        description: Key to get
+        required: true
+      count:
+        title: Count
+        type: integer
+        description: Max results to return
+        default: 1000
+        required: false
+    output:
+      found:
+        title: Found
+        type: boolean
+        description: True if found
+        required: false
+      values:
+        title: Values
+        type: '[]string'
+        description: Values
+        required: false
+  hmset:
+    title: Hash Multi Set
+    description: Sets the specified fields to their respective values in the hash
+      stored at key
+    input:
+      key:
+        title: Key
+        type: string
+        description: Key
+        required: true
+      values:
+        title: Values
+        type: object
+        description: Object hash field:value to set
+        required: true
+      expire:
+        title: Expire
+        type: integer
+        description: Expiration in seconds
+        required: false
+    output:
+      reply:
+        title: Reply
+        type: boolean
+        description: Reply (usually OK)
+        required: false
+  hmget:
+    title: Hash Multi Get
+    description: Returns the values associated with the specified fields in the hash
+      stored at key
+    input:
+      key:
+        title: Key
+        type: string
+        description: Key to get
+        required: true
+      fields:
+        title: Fields
+        type: '[]string'
+        description: Fields to retrieve values from
+        required: false
+      get_all:
+        title: Get All
+        type: boolean
+        description: Get all values
+        required: true
+        default: false
+    output:
+      values:
+        title: Values
+        type: object
+        description: Values returned from HMGET
+        required: false
+  hincrby:
+    title: Hash Increment By
+    description: Increments the number stored at field in the hash stored at key by
+      increment
+    input:
+      key:
+        title: Key
+        description: Key to lookup
+        type: string
+        required: true
+      field:
+        title: Field
+        description: Field to increment
+        type: string
+        required: true
+      value:
+        title: Value
+        description: How much to increment by
+        type: integer
+        required: true
+        default: 0
+    output:
+      result:
+        title: Result
+        description: Result returned after operation is ran
+        type: integer
+        required: false

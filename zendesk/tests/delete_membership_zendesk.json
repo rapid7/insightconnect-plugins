@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "delete_membership",
+    "input": {
+      "membership_id": "1657574807"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "subdomain": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}
+  

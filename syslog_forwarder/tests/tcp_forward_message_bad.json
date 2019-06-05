@@ -1,0 +1,21 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "action": "forward_message",
+    "connection": {
+      "host": "127.0.0.1",
+      "port": 514,
+      "transport": "TCP"
+    },
+    "meta": {},
+    "input": {
+      "msg": "This should fail because we don't have a listening socket",
+      "facility": "KERN",
+      "level": "INFO",
+      "proc": "",
+      "host": "",
+      "msgid": ""
+    }
+  }
+}

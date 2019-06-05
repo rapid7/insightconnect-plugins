@@ -1,0 +1,322 @@
+plugin_spec_version: v2
+name: matplotlib
+title: Matplotlib
+description: Provides graphing capability of base64 encoded CSV data using Matplotlib,
+  NumPy, Pandas, and Seaborn
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- plotting
+- graphing
+- data
+- csv
+actions:
+  create_line_plot:
+    title: Create Line Plot
+    description: Create a line plot with an X/Y axis
+    input:
+      csv_data:
+        title: CSV Data
+        description: Base64 encoded CSV data from which to create the plot
+        type: bytes
+        required: true
+      x_value:
+        title: X Value
+        description: Column containing values for the X-axis of the plot
+        type: string
+        required: true
+      y_value:
+        title: Y Value
+        description: Column containing values for the Y-axis of the plot
+        type: string
+        required: true
+      hue:
+        title: Hue
+        description: Column by which to provide data segmentation (labels)
+        type: string
+        required: false
+      color_palette:
+        title: Color Palette
+        description: Color palette of the plot
+        type: string
+        required: true
+        default: dark
+        enum:
+        - deep
+        - muted
+        - bright
+        - pastel
+        - dark
+        - colorblind
+      margin_style:
+        title: Margin Style
+        description: Style of the margin of the plot
+        type: string
+        required: true
+        default: dark
+        enum:
+        - darkgrid
+        - whitegrid
+        - dark
+        - white
+        - ticks
+    output:
+      csv:
+        title: CSV
+        description: Base64 encoded CSV data used to generate the plot
+        type: bytes
+        required: true
+      plot:
+        title: Plot
+        description: Base64 encoded PNG plot data (can be attached to an email)
+        type: bytes
+        required: true
+  create_scatter_plot:
+    title: Create Scatter Plot
+    description: Create a scatter plot with an X/Y axis
+    input:
+      csv_data:
+        title: CSV Data
+        description: Base64 encoded CSV data from which to create the plot
+        type: bytes
+        required: true
+      x_value:
+        title: X Value
+        description: Column containing values for the X-axis of the plot
+        type: string
+        required: true
+      y_value:
+        title: Y Value
+        description: Column containing values for the Y-axis of the plot
+        type: string
+        required: true
+      hue:
+        title: Hue
+        description: Column by which to provide data segmentation (labels)
+        type: string
+        required: false
+      color_palette:
+        title: Color Palette
+        description: Color palette of the plot
+        type: string
+        required: true
+        default: dark
+        enum:
+        - deep
+        - muted
+        - bright
+        - pastel
+        - dark
+        - colorblind
+      margin_style:
+        title: Margin Style
+        description: Style of the margin of the plot
+        type: string
+        required: true
+        default: dark
+        enum:
+        - darkgrid
+        - whitegrid
+        - dark
+        - white
+        - ticks
+    output:
+      csv:
+        title: CSV
+        description: Base64 encoded CSV data used to generate the plot
+        type: bytes
+        required: true
+      plot:
+        title: Plot
+        description: Base64 encoded PNG plot data (can be attached to an email)
+        type: bytes
+        required: true
+  create_distribution_plot:
+    title: Create Distribution Plot
+    description: Create a distribution plot that illustrates the distribution between
+      two data series
+    input:
+      csv_data:
+        title: CSV Data
+        description: Base64 encoded CSV data from which to create the plot
+        type: bytes
+        required: true
+      column:
+        title: Column
+        description: Column containing values for distribution plotting
+        type: string
+        required: true
+      kde:
+        title: KDE
+        description: Display a kernel density estimation line on the plot
+        type: boolean
+        required: true
+        default: false
+      color_palette:
+        title: Color Palette
+        description: Color palette of the plot
+        type: string
+        required: true
+        default: dark
+        enum:
+        - deep
+        - muted
+        - bright
+        - pastel
+        - dark
+        - colorblind
+      margin_style:
+        title: Margin Style
+        description: Style of the margin of the plot
+        type: string
+        required: true
+        default: dark
+        enum:
+        - darkgrid
+        - whitegrid
+        - dark
+        - white
+        - ticks
+    output:
+      csv:
+        title: CSV
+        description: Base64 encoded CSV data used to generate the plot
+        type: bytes
+        required: true
+      plot:
+        title: Plot
+        description: Base64 encoded PNG plot data (can be attached to an email)
+        type: bytes
+        required: true
+  create_joint_plot:
+    title: Create Joint Plot
+    description: Create a joint plot that illustrates the distribution between two
+      data series
+    input:
+      csv_data:
+        title: CSV Data
+        description: Base64 encoded CSV data from which to create the plot
+        type: bytes
+        required: true
+      x_value:
+        title: X Value
+        description: Column containing values for the X-axis of the plot
+        type: string
+        required: true
+      y_value:
+        title: Y Value
+        description: Column containing values for the Y-axis of the plot
+        type: string
+        required: true
+      kind:
+        title: Kind
+        description: Kind of data representation to use in the created plot
+        type: string
+        required: true
+        default: scatter
+        enum:
+        - scatter
+        - reg
+        - resid
+        - kde
+        - hex
+      color_palette:
+        title: Color Palette
+        description: Color palette of the plot
+        type: string
+        required: true
+        default: dark
+        enum:
+        - deep
+        - muted
+        - bright
+        - pastel
+        - dark
+        - colorblind
+      margin_style:
+        title: Margin Style
+        description: Style of the margin of the plot
+        type: string
+        required: true
+        default: dark
+        enum:
+        - darkgrid
+        - whitegrid
+        - dark
+        - white
+        - ticks
+    output:
+      csv:
+        title: CSV
+        description: Base64 encoded CSV data used to generate the plot
+        type: bytes
+        required: true
+      plot:
+        title: Plot
+        description: Base64 encoded PNG plot data (can be attached to an email)
+        type: bytes
+        required: true
+  create_pair_plot:
+    title: Create Pair Plot
+    description: Create a pair plot that illustrates the distribution between all
+      numerical columns in a data set
+    input:
+      csv_data:
+        title: CSV Data
+        description: Base64 encoded CSV data from which to create the plot
+        type: bytes
+        required: true
+      kind:
+        title: Kind
+        description: Kind of data representation to use in the created plot
+        type: string
+        required: true
+        default: scatter
+        enum:
+        - scatter
+        - reg
+        - resid
+        - kde
+        - hex
+      hue:
+        title: Hue
+        description: Column by which to provide data segmentation (labels)
+        type: string
+        required: false
+      color_palette:
+        title: Color Palette
+        description: Color palette of the plot
+        type: string
+        required: true
+        default: dark
+        enum:
+        - deep
+        - muted
+        - bright
+        - pastel
+        - dark
+        - colorblind
+      margin_style:
+        title: Margin Style
+        description: Style of the margin of the plot
+        type: string
+        required: true
+        default: dark
+        enum:
+        - darkgrid
+        - whitegrid
+        - dark
+        - white
+        - ticks
+    output:
+      csv:
+        title: CSV
+        description: Base64 encoded CSV data used to generate the plot
+        type: bytes
+        required: true
+      plot:
+        title: Plot
+        description: Base64 encoded PNG plot data (can be attached to an email)
+        type: bytes
+        required: true

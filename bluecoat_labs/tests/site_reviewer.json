@@ -1,0 +1,12 @@
+{
+  "type": "action_start",
+  "body": {
+    "connection": null,
+    "input": {
+      "target_url": "komand.com"
+    },
+    "meta": {},
+    "action": "site_reviewer"
+  },
+  "version": "v1"
+}

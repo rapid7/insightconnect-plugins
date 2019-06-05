@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "lookup_ip",
+    "meta": {},
+    "input": {
+      "ip_address": "107.180.51.15"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "",
+      "username": "",
+      "ssl_verify": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

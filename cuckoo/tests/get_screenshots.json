@@ -1,0 +1,14 @@
+{
+  "body": {
+    "meta": {},
+    "action": "get_screenshots",
+    "input": {
+      "task_id": 1
+    },
+    "connection": {
+      "url": ""
+    }
+  },
+  "version": "v1",
+  "type": "action_start"
+}

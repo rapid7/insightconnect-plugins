@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "submit_event",
+    "meta": {},
+    "input": {
+      "dsn": "https://public:secret@sentry.io/1244809",
+      "event_json": {
+        "culprit": "",
+        "event_id": "",
+        "exception": [],
+        "tags": {},
+        "timestamp": ""
+      },
+      "sentry_version": 7
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://sentry.io/api/0/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

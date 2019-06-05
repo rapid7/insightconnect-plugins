@@ -1,0 +1,18 @@
+{
+  "body": {
+    "meta": {},
+    "input": {
+      "id": "test-v14-virtual-service"
+    },
+    "action": "retrieve_virtual_service",
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

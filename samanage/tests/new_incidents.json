@@ -1,0 +1,21 @@
+{
+  "body": {
+    "trigger": "new_incidents",
+    "meta": {},
+    "input": {
+      "frequency": 10
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "eu_customer": false,
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

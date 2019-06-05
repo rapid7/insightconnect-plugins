@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "decode",
+    "meta": {},
+    "input": {
+      "base64": "aGV5LHRoaXMsaXMsY29vbCxyaWdodAp0ZWxsLG1lLHdoYXQseW91LHRoaW5rCg==",
+      "errors": "replace"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

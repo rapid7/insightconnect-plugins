@@ -1,0 +1,21 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "action": "forward_message",
+    "connection": {
+      "host": "",
+      "port": 514,
+      "transport": "TCP"
+    },
+    "meta": {},
+    "input": {
+      "msg": "Incoming TCP Message",
+      "facility": "KERN",
+      "level": "EMERG",
+      "proc": "",
+      "host": "",
+      "msgid": ""
+    }
+  }
+}

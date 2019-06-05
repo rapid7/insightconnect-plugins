@@ -1,0 +1,14 @@
+{
+  "type": "action_start",
+  "body": {
+    "input": {
+      "ip": "186.202.127.132"
+    },
+    "meta": {},
+    "action": "ip_address",
+    "connection": {
+      "server": "https://zeustracker.abuse.ch"
+    }
+  },
+  "version": "v1"
+}

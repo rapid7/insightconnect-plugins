@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_roles",
+    "meta": {},
+    "input": {
+      "name": ".*custom.*"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

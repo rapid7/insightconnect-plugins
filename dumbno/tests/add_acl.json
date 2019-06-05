@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "add_acl",
+    "input": {
+      "dport": "10.1.1.100",
+      "srcip": "10.1.1.200",
+      "dstip": "",
+      "sport": "",
+      "proto": ""
+    },
+    "connection": {
+      "host": "localhost",
+      "port": 9000
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

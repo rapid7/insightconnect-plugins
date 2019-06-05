@@ -1,0 +1,18 @@
+{
+  "body": {
+    "connection": {
+      "ssl_verify": false,
+      "url": "http://192.168.0.15:8000",
+      "token": {
+        "secretKey": ""
+      }
+    },
+    "action": "query",
+    "meta": {},
+    "input": {
+      "cidr": "192.168.254.254"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

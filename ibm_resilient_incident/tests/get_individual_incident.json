@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "get_individual_incident",
+        "connection": {
+            "email": "",
+            "hostname": "",
+            "password": ""
+        },
+        "input": {
+            "incident_id": 2096,
+            "organization_id": 201
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

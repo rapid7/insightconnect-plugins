@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "agent_add",
+    "meta": {},
+    "input": {
+      "force": "",
+      "ip": "",
+      "name": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

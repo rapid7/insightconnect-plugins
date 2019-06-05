@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "update_site_included_asset_groups",
+    "meta": {},
+    "input": {
+      "id": 0,
+      "included_asset_groups": [],
+      "overwrite": true
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,25 @@
+plugin_spec_version: v2
+name: dirname
+title: Dirname
+description: Dirname a path
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- dirname
+- utilities
+actions:
+  dirname:
+    title: Dirname
+    description: Get the directory name of a path
+    input:
+      path:
+        type: string
+        description: URL or file path
+        required: true
+    output:
+      dirname:
+        title: Dirname
+        description: Dirname
+        type: string
+        required: false

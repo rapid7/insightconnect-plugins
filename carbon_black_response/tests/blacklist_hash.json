@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "blacklist_hash",
+    "meta": {},
+    "input": {
+      "md5_hash": "asdfasdfasdfasdf"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

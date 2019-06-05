@@ -1,0 +1,18 @@
+{
+  "body": {
+    "trigger": "save_feed_file",
+    "meta": {},
+    "input": {
+      "interval": 10
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "url": "https://openphish.com/feed.txt"
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "export_events",
+    "input": {
+      "tags": [],
+      "from": "",
+      "event_id": "1",
+      "encode_attachments": true,
+      "to": "",
+      "last": ""
+    },
+    "meta": {},
+    "connection": {
+      "automation_code": {
+        "secretKey": ""
+      },
+      "url": "",
+      "ssl": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

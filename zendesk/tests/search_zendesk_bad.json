@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "search",
+    "input": {
+      "item": "This_9()_3xi@t",
+      "type": "Ticket"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "subdomain": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}
+  

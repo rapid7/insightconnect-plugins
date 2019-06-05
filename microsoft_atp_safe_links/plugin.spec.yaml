@@ -1,0 +1,29 @@
+plugin_spec_version: v2
+name: microsoft_atp_safe_links
+title: Microsoft Office 365 ATP Safe Links
+description: Helps protect your organization by providing time-of-click verification
+  of web addresses (URLs) in email messages and Office documents
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- ATP
+- Microsoft
+- safe
+- links
+actions:
+  decode:
+    title: Decode Safe Links
+    description: Decodes a Microsoft Safe Link
+    input:
+      url:
+        title: URL
+        type: string
+        description: Safe Link to be decoded
+        required: true
+    output:
+      result:
+        title: Result
+        description: Result of the decoded Safe Link
+        type: string
+        required: true

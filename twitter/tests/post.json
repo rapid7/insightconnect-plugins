@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "post",
+        "connection": {
+            "access_token_credentials": {
+                "username": "",
+                "password": ""
+            },
+            "consumer_credentials": {
+                "username": "",
+                "password": ""
+            }
+        },
+        "input": {
+            "msg": "Test Message"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

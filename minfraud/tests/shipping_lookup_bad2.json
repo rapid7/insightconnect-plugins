@@ -1,0 +1,29 @@
+{
+  "body": {
+    "meta": {},
+    "connection": {
+      "license": {
+        "secretKey": ""
+      },
+      "user": 118625
+    },
+    "action": "shipping_lookup",
+    "input": {
+      "shipping_city": "New Haven",
+      "shipping_first_name": "Jane",
+      "shipping_region": "CT",
+      "shipping_phone_country_code": "1",
+      "shipping_last_name": "Doe",
+      "shipping_address_2": "#1",
+      "shipping_address": "82 Wall St.",
+      "shipping_phone_number": "203-000-0000",
+      "shipping_country": "US",
+      "shipping_company": "Smaller, Inc.",
+      "shipping_delivery_speed": "same_day",
+      "address": "8.8.8.8",
+      "shipping_postal": "06515"
+    }
+  },
+  "version": "v1",
+  "type": "action_start"
+}

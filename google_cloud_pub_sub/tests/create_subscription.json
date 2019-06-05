@@ -1,0 +1,27 @@
+{
+  "body": {
+    "action": "create_subscription",
+    "meta": {},
+    "input": {
+      "project_id": "subpub-1528163449245",
+      "subscription_name": "my_new_test",
+      "topic": "komand_topic_test"
+    },
+    "connection": {
+      "admin_user": "",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "client_email": "",
+      "client_id": "",
+      "client_x509_cert_url": "",
+      "private_key": {
+        "privateKey": ""
+      },
+      "private_key_id": "",
+      "project_id": "",
+      "token_uri": "https://accounts.google.com/o/oauth2/token"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

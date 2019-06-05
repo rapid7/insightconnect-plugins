@@ -1,0 +1,14 @@
+{
+  "body": {
+    "connection": {
+      "url": ""
+    },
+    "action": "submit_url",
+    "input": {
+      "url": "https://github.com/ytisf/theZoo/blob/master/malwares/Binaries/Nivdort/Nivdort.zip?raw=true"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "to_json",
+    "input": {
+      "csv": "QklHRklYLUNMVC1XMTIsYmlnZml4LWNsdC13MTIuZXhhbXBsZS5jb20sMTAuMS4yLjEsTWljcm9zb2Z0IFdpbmRvd3MsTWljcm9zb2Z0IFdpbmRvd3MgU2VydmVyIDIwMTIgU3RhbmRhcmQgRWRpdGlvbiwKQklHRklYLVNSVixiaWdmaXgtc3J2LmV4YW1wbGUuY29tLDEwLjEuMi4yLE1pY3Jvc29mdCBXaW5kb3dzLE1pY3Jvc29mdCBXaW5kb3dzIFNlcnZlciAyMDEyIFN0YW5kYXJkIEVkaXRpb24sCkJJR0ZJWC1DTFQtVzcsYmlnZml4LWNsdC13Ny5leGFtcGxlLmNvbSwxMC4xLjIuMyxNaWNyb3NvZnQgV2luZG93cyxNaWNyb3NvZnQgV2luZG93cyA3IEVudGVycHJpc2UgRWRpdGlvbixTUDE=",
+      "validation": false
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

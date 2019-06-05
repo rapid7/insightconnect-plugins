@@ -1,0 +1,151 @@
+plugin_spec_version: v2
+name: google_safe_browsing
+title: Google Safe Browsing
+description: Check URLs against the Google Safe Browsing service
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- google
+- safe browsing
+- url
+- blacklist
+- phishing
+enable_cache: false
+types:
+  threat:
+    url:
+      type: string
+  match:
+    platform_type:
+      type: string
+    threat_entry_type:
+      type: string
+    cache_duration:
+      type: string
+    threat_type:
+      type: string
+    threat:
+      type: threat
+connection:
+  credentials:
+    title: API Token
+    description: API token
+    type: credential_secret_key
+    required: true
+actions:
+  lookup:
+    title: Lookup URL
+    description: Lookup URL in Safe Browsing Service
+    input:
+      urls:
+        title: URLs
+        type: '[]string'
+        description: URLs to check (up to 500) e.g. [\"harmfulapps.com\" ]
+        required: true
+      threat_type_unspecified:
+        title: 'Threat Type: Unspecified'
+        type: boolean
+        description: Check if URL is of 'unspecified' threat
+        required: false
+      threat_type_malware:
+        title: 'Threat Type: Malware'
+        type: boolean
+        description: Check if URL is of 'malware' threat
+        required: false
+      threat_type_social:
+        title: 'Threat Type: Social'
+        type: boolean
+        description: Check if URL is of 'social engineering/phishing' threat
+        required: false
+      threat_type_unwanted:
+        type: boolean
+        title: 'Threat type: Unwanted software'
+        description: Check if URL is of 'unwanted software' threat
+        required: false
+      threat_type_potential:
+        type: boolean
+        title: 'Threat type: PHAs'
+        description: Check if URL is of 'potentially harmful application' threat
+        required: false
+      platform_type_unspecified:
+        type: boolean
+        title: 'Platform type: Unspecified'
+        description: Check URL against unspecified platform
+        required: false
+      platform_type_windows:
+        type: boolean
+        title: 'Platform type: Windows'
+        description: Check URL against Windows platform
+        required: false
+      platform_type_linux:
+        type: boolean
+        title: 'Platform type: Linux'
+        description: Check URL against Linux platform
+        required: false
+      platform_type_android:
+        type: boolean
+        title: 'Platform type: Android'
+        description: Check URL against Android platform
+        required: false
+      platform_type_mac:
+        type: boolean
+        title: 'Platform type: Mac OS'
+        description: Check URL against Mac OS platform
+        required: false
+      platform_type_ios:
+        type: boolean
+        title: 'Platform type: iOS'
+        description: Check URL against iOS platform
+        required: false
+      platform_type_any:
+        type: boolean
+        title: 'Platform type: Any'
+        description: Check URL against any platform
+        required: false
+      platform_type_all:
+        type: boolean
+        title: 'Platform type: All'
+        description: Check URL against all platforms
+        required: false
+      platform_type_chrome:
+        type: boolean
+        title: 'Platform type: Chrome'
+        description: Check URL against Chrome platform
+        required: false
+      threat_entry_type_unspecified:
+        type: boolean
+        title: 'Threat entry type: Unspecified'
+        description: Check URL against unspecified threat entry type
+        required: false
+      threat_entry_type_url:
+        type: boolean
+        title: 'Threat entry type: URL'
+        description: Check URL against URL threat entry type
+        required: false
+      threat_entry_type_executable:
+        type: boolean
+        title: 'Threat entry type: Executable'
+        description: Check URL against executable threat entry type
+        required: false
+      threat_entry_type_ip:
+        type: boolean
+        title: 'Threat entry type: IP Range'
+        description: Check URL against IP range threat entry type
+        required: false
+      client_id:
+        type: string
+        title: Client ID
+        description: Unique identifier, e.g. 'komand-<your_company>'
+        required: false
+    output:
+      matches:
+        title: Matches
+        type: '[]match'
+        description: Matches from Google Safe Browsing
+        required: false
+      results:
+        title: Results
+        type: integer
+        description: Number of results returned
+        required: false

@@ -1,0 +1,18 @@
+{
+  "version": "v1",
+  "body": {
+    "action": "delete_trusted_host_group",
+    "meta": {},
+    "input": {
+      "name": "test-v14-group"
+    },
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start"
+}

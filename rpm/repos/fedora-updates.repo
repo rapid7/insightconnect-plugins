@@ -1,0 +1,29 @@
+[fedora-updates]
+name=Fedora 24 - $arch - Updates
+failovermethod=priority
+#baseurl=http://download.fedoraproject.org/pub/fedora/linux/updates/24/$arch/
+baseurl=http://dl.fedoraproject.org/pub/fedora/linux/updates/24/$arch/
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f24&arch=$arch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+[updates-debuginfo]
+name=Fedora 24 - $arch - Updates - Debug
+failovermethod=priority
+#baseurl=http://download.fedoraproject.org/pub/fedora/linux/updates/24/$arch/debug/
+baseurl=http://dl.fedoraproject.org/pub/fedora/linux/updates/24/$arch/debug/
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=updates-released-debug-f24&arch=$arch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+[fedora-updates-source]
+name=Fedora 24 - Updates Source
+failovermethod=priority
+#baseurl=http://download.fedoraproject.org/pub/fedora/linux/updates/24/SRPMS/
+baseurl=http://dl.fedoraproject.org/pub/fedora/linux/updates/24/SRPMS/
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=updates-released-source-f24&arch=$arch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7

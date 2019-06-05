@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_report_xml",
+    "input": {
+      "scan_id": "ed582e15-76be-4fe0-8402-3958ae656840"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "timeout": 10,
+      "server": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,15 @@
+{
+  "body": {
+    "action": "list_users",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "eu_customer": false,
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,22 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "input": {
+      "command": ["?","help"],
+      "host": "ciscoasa.com"
+    },
+    "connection": {
+      "device_type": "cisco_asa",
+      "key": {"filename": "", "content": ""},
+      "username": "",
+      "host": "ciscoasa.com",
+      "password": "",
+      "verbose": false,
+      "secret": "",
+      "port": 22
+    },
+    "action": "configuration_commands"
+  }
+}

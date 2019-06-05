@@ -1,0 +1,213 @@
+plugin_spec_version: v2
+name: smb
+title: SMB
+description: Server Message Block (SMB) is used for interacting with files on an SMB
+  server
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- smb
+- file transfer
+- samba
+- cifs
+types:
+  share:
+    name:
+      title: Share Name
+      type: string
+    comments:
+      title: Share Comments
+      type: string
+  file:
+    name:
+      title: File Name
+      type: string
+    short_name:
+      title: Short Name
+      type: string
+    is_directory:
+      title: Is Directory?
+      type: boolean
+    create_time:
+      title: Create Time
+      type: date
+      description: Datetime the file was created
+    last_access_time:
+      title: Last Access Time
+      type: date
+      description: Datetime the file was last accessed
+    last_write_time:
+      title: Last Write Time
+      type: date
+      description: Datetime the file was last updated
+    file_size:
+      title: File Size
+      type: integer
+      description: File size in number of bytes
+connection:
+  host:
+    title: Host
+    description: Address or hostname of the SMB server
+    type: string
+    required: true
+  port:
+    title: Port
+    description: Port of the SMB server
+    type: integer
+    default: 445
+    required: false
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: true
+  domain:
+    title: Domain
+    description: The network domain
+    type: string
+    required: false
+  netbios_name:
+    title: Server NetBIOS Name
+    description: The NetBIOS machine name of the remote server
+    type: string
+    required: true
+  use_ntlmv2:
+    title: Use NTLMv2
+    description: Defines use of NTLMv2 for authentication; will use NTLMv1 if set
+      to false
+    type: boolean
+    required: true
+    default: true
+  timeout:
+    title: Timeout
+    description: Connection timeout
+    type: integer
+    required: true
+    default: 60
+actions:
+  echo:
+    title: Echo
+    description: Send a message to a remote server and receive the same message as
+      a reply if successful
+    input:
+      message:
+        title: Message
+        description: Message to send to the remote server
+        type: string
+        required: true
+    output:
+      response:
+        description: Response
+        title: Server response
+        type: string
+        required: true
+  list_shares:
+    title: List Shares
+    description: List shares on the remote server
+    input:
+      timeout:
+        title: Timeout
+        description: Request timeout of operation in seconds
+        type: integer
+        required: false
+        default: 30
+    output:
+      shares:
+        title: Shares
+        description: List of shares
+        type: '[]share'
+        required: true
+  list_share_files:
+    title: List Share Files
+    description: List files on the remote server share
+    input:
+      share_name:
+        title: Share Name
+        description: Name of the SMB share
+        type: string
+        required: true
+      path:
+        title: Path
+        description: Path relative to share to return files
+        type: string
+        required: true
+        default: /
+      pattern:
+        title: Pattern
+        description: Pattern used to filter results
+        type: string
+        required: false
+        default: '*'
+      timeout:
+        title: Timeout
+        description: Request timeout of operation in seconds
+        type: integer
+        required: false
+        default: 30
+      timezone:
+        title: Timezone
+        description: Timezone to be applied to datetime fields (eg. UTC, US/Eastern,
+          US/Pacific, Europe/London). Reference https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+          for valid timezone names
+        type: string
+        required: true
+        default: UTC
+    output:
+      files:
+        title: Files
+        description: List of Files
+        type: '[]file'
+        required: true
+  delete_file:
+    title: Delete File
+    description: Delete a file from the share
+    input:
+      share_name:
+        title: Share Name
+        description: Name of the SMB share
+        type: string
+        required: true
+      file_path:
+        title: File Path
+        description: Path of the file to delete
+        type: string
+        required: true
+      timeout:
+        title: Timeout
+        description: Request timeout of operation in seconds
+        type: integer
+        required: false
+        default: 30
+    output:
+      deleted:
+        title: Deleted
+        description: Deletion success
+        type: boolean
+        required: true
+  delete_files:
+    title: Delete Files
+    description: Delete file(s) from the share; allows wildcards
+    input:
+      share_name:
+        title: Share Name
+        description: Name of the SMB share
+        type: string
+        required: true
+      file_path:
+        title: File Path
+        description: Path of file(s) to delete, accepts wildcard patterns (e.g. /test*.csv)
+        type: string
+        required: true
+      timeout:
+        title: Timeout
+        description: Request timeout of operation in seconds
+        type: integer
+        required: false
+        default: 30
+    output:
+      deleted:
+        title: Deleted
+        description: Deletion success
+        type: boolean
+        required: true

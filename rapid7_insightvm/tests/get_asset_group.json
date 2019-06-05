@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_asset_group",
+    "meta": {},
+    "input": {
+      "id": 56
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

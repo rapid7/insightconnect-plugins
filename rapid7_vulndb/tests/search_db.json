@@ -1,0 +1,13 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {},
+    "input": {
+      "database": "Vulnerability Database",
+      "search": "redhat_linux-cve-2018-12405"
+    },
+    "action": "search_db"
+  },
+  "version": "v1"
+}

@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "parse_tap_alert",
+    "meta": {},
+    "input": {
+      "tap_alert": ""
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

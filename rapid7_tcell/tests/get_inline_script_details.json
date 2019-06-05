@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "get_inline_script_details",
+    "meta": {},
+    "input": {
+      "app_id": "MooseLifeTest-gIglw",
+      "inline_script_id": "sha256-N9Y4hC_soz7hFmkzqaDrk-r5kW2BaEJFcoZoxBUvSzE="
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,234 @@
+plugin_spec_version: v2
+name: salesforce
+title: Salesforce
+description: Salesforce is a CRM solution that brings together all customer information
+  in a single, integrated platform that enables building a customer-centered business
+  from marketing right through to sales, customer service and business analysis
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- marketing
+- sales
+- analysis
+- crm
+types:
+  search_result:
+    type:
+      title: Type
+      description: Type
+      type: string
+    url:
+      title: URL
+      description: URL
+      type: string
+    name:
+      title: Name
+      description: Name
+      type: string
+    id:
+      title: ID
+      description: ID
+      type: string
+connection:
+  client_id:
+    title: Client ID
+    description: '''Consumer Key'' of the connected app'
+    type: string
+    required: true
+  client_secret:
+    title: Client Secret
+    description: '''Consumer Secret'' of the connected app'
+    type: credential_secret_key
+    required: true
+  salesforce_account_username_and_password:
+    title: Salesforce Account Username and Password
+    description: Name and password of the Salesforce user
+    type: credential_username_password
+    required: true
+  security_token:
+    title: Security Token
+    description: Security token of the Salesforce user
+    type: credential_secret_key
+    required: true
+actions:
+  simple_search:
+    title: Simple Search
+    description: Execute a simple search for a text
+    input:
+      text:
+        title: Text
+        description: Text to search for
+        type: string
+        required: true
+    output:
+      search_results:
+        title: Search Results
+        description: List of search results
+        type: '[]search_result'
+        required: false
+  advanced_search:
+    title: Advanced Search
+    description: Execute a SOQL (Salesforce Object Query Language) query
+    input:
+      query:
+        title: Query
+        description: SOQL query
+        type: string
+        required: true
+    output:
+      search_results:
+        title: Search Results
+        description: List of search results
+        type: '[]search_result'
+        required: false
+  create_record:
+    title: Create Record
+    description: Create a new SObject record
+    input:
+      object_name:
+        title: Object Name
+        description: The name of the object (e.g. 'Account')
+        type: string
+        default: Account
+        required: true
+      object_data:
+        title: Object Data
+        description: SObject information for the newly created record
+        type: object
+        required: true
+    output:
+      id:
+        title: ID
+        description: ID of the newly created record
+        type: string
+        required: false
+  update_record:
+    title: Update Record
+    description: Update a record
+    input:
+      record_id:
+        title: Record ID
+        description: The ID of an existing record
+        type: string
+        required: true
+      object_name:
+        title: Object Name
+        description: The name of the object (e.g. 'Account')
+        type: string
+        default: Account
+        required: true
+      object_data:
+        title: Object Data
+        description: Updated SObject information
+        type: object
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: false
+  get_record:
+    title: Get Record
+    description: Retrieve a record
+    input:
+      record_id:
+        title: Record ID
+        description: The ID of an existing record
+        type: string
+        required: true
+      external_id_field_name:
+        title: External ID Field Name
+        description: The name of the external ID field that should be matched with
+          record_id. If empty, the 'Id' field of the record is used
+        type: string
+        required: false
+        default: ''
+      object_name:
+        title: Object Name
+        description: The name of the object (e.g. 'Account')
+        type: string
+        default: Account
+        required: true
+    output:
+      record:
+        title: Record
+        description: Matched record
+        type: object
+        required: false
+  delete_record:
+    title: Delete Record
+    description: Delete a record
+    input:
+      record_id:
+        title: Record ID
+        description: The ID of an existing record
+        type: string
+        required: true
+      object_name:
+        title: Object Name
+        description: The name of the object (e.g. 'Account')
+        type: string
+        default: Account
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: false
+  get_fields:
+    title: Get Fields
+    description: Retrieve field values from a record
+    input:
+      record_id:
+        title: Record ID
+        description: The ID of an existing record
+        type: string
+        required: true
+      object_name:
+        title: Object Name
+        description: The name of the object (e.g. 'Account')
+        type: string
+        default: Account
+        required: true
+      fields:
+        title: Fields
+        description: The fields which values should be retrieved
+        type: '[]string'
+        required: true
+    output:
+      fields:
+        title: Fields
+        description: An object with field names as keys, each with the corresponding
+          value
+        type: object
+        required: false
+  get_blob_data:
+    title: Get Blob Data
+    description: Retrieve blob data for a given record
+    input:
+      record_id:
+        title: Record ID
+        description: The ID of an existing record
+        type: string
+        required: true
+      object_name:
+        title: Object Name
+        description: The name of the object (e.g. 'Account')
+        type: string
+        default: Attachment
+        required: true
+      field_name:
+        title: Field Name
+        description: Blob field name
+        type: string
+        required: true
+        default: body
+    output:
+      data:
+        title: Data
+        description: The value of the selected blob field
+        type: bytes
+        required: false

@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "suspend_user",
+    "input": {
+      "user_id": "no_exist_id"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "subdomain": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}
+  

@@ -1,0 +1,88 @@
+plugin_spec_version: v2
+name: duo_auth
+title: Duo Auth API
+vendor: rapid7
+status: ["supported"]
+description: Integration for Duo Auth API
+version: 1.0.0
+tags:
+- duo
+- auth
+connection:
+  integration_key:
+    type: credential_secret_key
+    description: API integration key
+    required: true
+  secret_key:
+    type: credential_secret_key
+    description: API secret key
+    required: true
+  hostname:
+    title: API Hostname
+    description: Enter the Duo API hostname and secret key
+    type: string
+    required: true
+actions:
+  auth:
+    title: Auth
+    description: Perform second-factor authentication
+    input:
+      user_id:
+        type: string
+        description: User ID
+        required: false
+      username:
+        type: string
+        description: Username is required if user_id is not provided
+        required: false
+      factor:
+        type: string
+        description: Factor to use for authentication
+        default: auto
+        enum:
+        - auto
+        - push
+        - passcode
+        - sms
+        - phone
+        required: false
+      ipaddr:
+        type: string
+        description: The IP address of the user to be authenticated, in dotted quad
+          format. This will cause an 'allow' response to be sent if appropriate for
+          requests from a trusted network
+        required: false
+      async:
+        type: bool
+        description: Set to true for an async response
+        required: false
+      device:
+        type: string
+        description: Device ID to use for auth
+        default: auto
+        required: false
+      options:
+        type: object
+        description: Additional options required by the API
+        required: false
+    output:
+      result:
+        type: string
+        description: Either allow or deny
+        required: false
+      status:
+        type: string
+        description: Status
+        required: false
+      status_msg:
+        type: string
+        description: Status message
+        required: false
+      trusted_device_token:
+        description: Trusted device token
+        type: string
+        required: false
+      txid:
+        description: TX ID
+        type: string
+        required: false

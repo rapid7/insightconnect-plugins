@@ -1,0 +1,297 @@
+plugin_spec_version: v2
+name: infoblox
+title: Infoblox
+description: Infoblox helps with managing and identifying devices connected to networks
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- infoblox
+- network
+connection:
+  url:
+    title: URL
+    description: The URL of a running Infoblox instance (e.g. https://192.168.1.2
+      or https://example.infoblox.com)
+    type: string
+    required: true
+  credentials:
+    title: Username and Password
+    description: Infoblox username and password
+    type: credential_username_password
+    required: true
+  api_version:
+    title: API Version
+    description: Version of the API
+    type: string
+    required: true
+    default: '2.7'
+    enum:
+    - '1.0'
+    - '1.1'
+    - '1.2'
+    - '1.3'
+    - '1.4'
+    - '1.5'
+    - '1.6'
+    - '1.7'
+    - '1.8'
+    - '1.9'
+    - '2.0'
+    - '2.1'
+    - '2.2'
+    - '2.3'
+    - '2.4'
+    - '2.5'
+    - '2.6'
+    - '2.7'
+types:
+  FixedAddressCreate:
+    ipv4addr:
+      type: string
+      required: true
+      title: IPv4 Address
+      description: Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)
+    mac:
+      type: string
+      required: true
+      title: MAC
+      description: MAC address
+  IPv4AddrCreate:
+    ipv4addr:
+      type: string
+      required: true
+      title: IPv4 Address
+      description: Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)
+    mac:
+      type: string
+      required: false
+      title: MAC
+      description: MAC address
+  IPv4Addr:
+    ipv4addr:
+      type: string
+      required: true
+      title: IPv4 Address
+      description: Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)
+    mac:
+      type: string
+      required: false
+      title: MAC
+      description: MAC address
+    configure_for_dhcp:
+      type: boolean
+      title: Configure for DHCP
+      required: false
+      description: Configure for DHCP flag
+    host:
+      type: string
+      required: false
+      title: Host
+      description: The name of the host
+    _ref:
+      type: string
+      required: true
+      title: Ref
+      description: Object Reference of the IP address
+  Host:
+    _ref:
+      type: string
+      required: true
+      title: Ref
+      description: Object Reference of the host
+    name:
+      type: string
+      required: true
+      title: Name
+      description: Name of the new host
+    ipv4addrs:
+      type: '[]IPv4Addr'
+      required: true
+      title: IPv4 Addresses
+      description: IP addresses associated with the new host
+    view:
+      type: string
+      required: false
+      title: View
+      description: The network view this host is associated with
+    extattrs:
+      required: false
+      type: object
+      title: Extattrs
+      description: Extensible attributes
+    aliases:
+      required: false
+      type: '[]string'
+      title: Aliases
+      description: Aliases associated with the host
+  HostCreate:
+    ipv4addrs:
+      type: '[]IPv4AddrCreate'
+      required: true
+      title: IPv4 Addresses
+      description: List of IP addresses associated with the new host
+    name:
+      type: string
+      required: true
+      title: Name
+      description: Name of new new host
+    view:
+      type: string
+      required: false
+      title: View
+      description: The network view this host is associated with
+  HostUpdate:
+    aliases:
+      required: false
+      type: '[]string'
+      title: Aliases
+      description: Aliases associated with the host
+    extattrs:
+      required: false
+      type: object
+      title: Extattrs
+      description: Extensible attributes
+    ipv4addrs:
+      type: '[]IPv4AddrCreate'
+      required: false
+      title: IPv4 Addresses
+      description: New list of IP addresses associated with the new host (overrides
+        the original list)
+    ipv4addrs+:
+      type: '[]IPv4AddrCreate'
+      required: false
+      title: Added IPv4 Addresses
+      description: IP addresses added to the list associated with the new host
+    ipv4addrs-:
+      type: '[]IPv4AddrCreate'
+      required: false
+      title: Removed IPv4 Addresses
+      description: IP addresses removed from the list associated with the new host
+actions:
+  add_host:
+    title: Add Host
+    description: Add a new host (host has to match one of the existing authoritative
+      networks, e.g. network fqdn = info.com, host name = example.info.com)
+    input:
+      host:
+        type: HostCreate
+        description: New host data
+        required: true
+    output:
+      _ref:
+        title: Ref
+        description: Object Reference of a newly added host
+        type: string
+        required: true
+  get_host:
+    title: Get Host
+    description: Obtain host details
+    input:
+      _ref:
+        type: string
+        title: Ref
+        description: Object Reference of the host
+        required: true
+    output:
+      host:
+        type: Host
+        required: true
+        title: Host
+        description: Host details
+  modify_host:
+    title: Modify Host
+    description: Update host data
+    input:
+      _ref:
+        type: string
+        title: Ref
+        description: Object Reference of the host to update
+        required: true
+      updated_host:
+        type: HostUpdate
+        required: false
+        title: Updated host data
+        description: Values of fields that should be changed
+    output:
+      _ref:
+        type: string
+        required: true
+        title: Ref
+        description: Object Reference of the modified host
+  delete_host:
+    title: Delete Host
+    description: Delete a host
+    input:
+      _ref:
+        type: string
+        title: Ref
+        description: Object Reference of the host to remove
+        required: true
+    output:
+      _ref:
+        type: string
+        title: Ref
+        description: Object Reference of the removed host
+        required: true
+  search_by_name:
+    title: Search by Name
+    description: Search hosts by name
+    input:
+      name_pattern:
+        type: string
+        required: true
+        title: Name Pattern
+        description: Regular expression to match against host name
+    output:
+      result:
+        type: '[]Host'
+        required: true
+        title: Result
+        description: Matched hosts
+  search_by_ip:
+    title: Search by IP
+    description: Search for any object with an IP address
+    input:
+      ip:
+        type: string
+        required: true
+        title: IP
+        description: IP address
+    output:
+      result:
+        type: '[]string'
+        required: true
+        title: Result
+        description: Object References of all objects with given IP address
+  search_by_mac:
+    title: Search by MAC
+    description: Search fixed addresses by MAC address
+    input:
+      mac:
+        type: string
+        required: true
+        title: MAC
+        description: MAC address
+    output:
+      result:
+        type: '[]IPv4Addr'
+        required: true
+        title: Result
+        description: Matched fixed addresses
+  add_fixed_address:
+    title: Add Fixed Address
+    description: Add fixed address (a specific IP address that a DHCP server always
+      assigns when a lease request comes from a particular MAC address of the client)
+    input:
+      address:
+        required: true
+        type: FixedAddressCreate
+        title: Address
+        description: New fixed address data
+    output:
+      _ref:
+        required: true
+        type: string
+        title: Ref
+        description: Object Reference of a newly added fixed address

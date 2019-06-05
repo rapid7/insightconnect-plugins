@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "attach_incident",
+    "meta": {},
+    "input": {
+      "attachment_bytes": "SGVsbG8gV29ybGQK",
+      "attachment_name": "Greetings.txt",
+      "incident_id": 31851783
+    },
+    "connection": {
+      "eu_customer": false,
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

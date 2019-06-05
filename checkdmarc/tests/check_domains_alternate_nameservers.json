@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "check_domains_alternate_nameservers",
+    "meta": {},
+    "input": {
+      "domain": "whitehouse.gov",
+      "timeout": 10.0,
+      "nameservers": ["1.0.0.1"]
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

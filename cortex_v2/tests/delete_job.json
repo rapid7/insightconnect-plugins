@@ -1,0 +1,21 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "action": "delete_job",
+    "connection": {
+      "host": "",
+      "api_key": {
+        "secretKey": ""
+      },
+      "verify": true,
+      "proxy": {},
+      "protocol": "HTTP",
+      "port": "9001"
+    },
+    "meta": {},
+    "input": {
+      "job_id": "AWeaFlnYkDwhOfz60XIl"
+    }
+  }
+}

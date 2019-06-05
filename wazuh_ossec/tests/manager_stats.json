@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "manager_stats",
+    "meta": {},
+    "input": {
+      "date": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

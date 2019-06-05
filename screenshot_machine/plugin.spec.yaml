@@ -1,0 +1,105 @@
+plugin_spec_version: v2
+name: screenshot_machine
+title: Screenshot Machine
+description: Screenshot Machine
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- screenshot
+- url
+connection:
+  key:
+    title: API Key
+    description: API Key
+    type: credential_secret_key
+    required: true
+  secret:
+    title: Secret
+    description: Secret
+    type: credential_secret_key
+    required: false
+actions:
+  capture:
+    title: Capture URL Screenshot
+    description: Capture URL screenshot
+    input:
+      url:
+        title: URL
+        description: URL to screenshot
+        type: string
+        required: true
+      size:
+        title: Size
+        description: 'Size string. Sizes are listed here: https://screenshotmachine.com/apiguide.php'
+        type: string
+        enum:
+        - tiny
+        - small
+        - seminormal
+        - normal
+        - medium
+        - large
+        - extra_large
+        - full
+        - mobile_normal
+        - mobile_full
+        default: tiny
+        required: false
+      format:
+        title: Format
+        description: Format
+        type: string
+        enum:
+        - JPG
+        - PNG
+        - GIF
+        default: JPG
+        required: false
+      cache_age_days:
+        title: Cache Age Days
+        description: Use Cached Image From X days ago. Enter in the age in days that
+          will be accepted. 0 means do not use cache
+        type: integer
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        default: 0
+        required: false
+      timeout:
+        title: Timeout
+        description: Timeout in ms to wait for capture
+        type: integer
+        enum:
+        - 0
+        - 200
+        - 400
+        - 600
+        - 800
+        - 1000
+        default: 200
+        required: false
+    output:
+      url:
+        title: URL
+        description: URL Captured
+        type: string
+        required: false
+      screenshot:
+        title: Screenshot
+        description: Screenshot Captured
+        type: file
+        required: false

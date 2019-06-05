@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "forward",
+    "input": {
+      "query": "CNAME",
+      "domain": "www.komand.com"
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

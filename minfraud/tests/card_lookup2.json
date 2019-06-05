@@ -1,0 +1,25 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "license": {
+        "secretKey": ""
+      },
+      "user": 118625
+    },
+    "action": "card_lookup",
+    "input": {
+      "card_last_4_digits": "",
+      "card_bank_name": "",
+      "card_token": "",
+      "cvv_result": "",
+      "card_issuer_id_number": "",
+      "bank_phone_number": "",
+      "avs_result": "",
+      "bank_phone_country_code": "",
+      "address": "8.8.8.8"
+    }
+  },
+  "version": "v1"
+}

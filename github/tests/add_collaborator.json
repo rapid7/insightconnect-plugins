@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "add_collaborator",
+    "meta": {},
+    "input": {
+      "organization": "",
+      "permission": "push",
+      "repository": "",
+      "username": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

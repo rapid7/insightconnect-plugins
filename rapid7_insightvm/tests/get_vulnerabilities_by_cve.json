@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_vulnerabilities_by_cve",
+    "meta": {},
+    "input": {
+      "cve_id": "CVE-2008-4250"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

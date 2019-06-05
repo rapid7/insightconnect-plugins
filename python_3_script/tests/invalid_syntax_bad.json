@@ -1,0 +1,13 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "connection": null,
+    "input": {
+      "input": {},
+      "function": "def run(params={}):\n test = 'test'\nreturn {'result1': output}"
+    },
+    "action": "run",
+    "meta": {}
+  }
+}

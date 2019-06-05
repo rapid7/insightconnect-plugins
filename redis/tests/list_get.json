@@ -1,0 +1,17 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "input": {
+      "key": "k2eylist",
+      "count": 1000
+    },
+    "connection": {
+      "host": "",
+      "db": 0,
+      "port": 6379
+    },
+    "action": "list_get",
+    "meta": {}
+  }
+}

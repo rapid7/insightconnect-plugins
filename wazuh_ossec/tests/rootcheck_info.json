@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "rootcheck_info",
+    "meta": {},
+    "input": {
+      "agent_id": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

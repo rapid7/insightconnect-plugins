@@ -1,0 +1,84 @@
+{
+    "body": {
+        "action": "add_custom_task_to_incident",
+        "connection": {
+            "email": "",
+            "hostname": "",
+            "password": ""
+        },
+        "input": {
+            "body": {
+                "inc_name": "Komand Test Incident 1",
+  "name": "Some Custom Task",
+  "custom": true,
+  "inc_id": 3944,
+  "inc_owner_id": {
+    "name": "mike@komand.com"
+  },
+  "due_date": 0,
+  "required": true,
+  "owner_id": {
+    "name": "mike@komand.com"
+  },
+  "id": 3944,
+
+  "inc_training": true,
+  "frozen": true,
+  "owner_fname": "string",
+  "owner_lname": "string",
+  "cat_name": "string",
+  "description": "string",
+  "init_date": 0,
+  "src_name": "string",
+  "instr_text": "string",
+  "auto_task_id": {
+    "name": "string"
+  },
+  "at_id": {
+    "name": "John Doe"
+  },
+  "active": true,
+  "members": [
+    null
+  ],
+  "perms": {
+    "read": true,
+    "write": true,
+    "comment": true,
+    "assign": true,
+    "close": true,
+    "change_members": true,
+    "attach_file": true,
+    "read_attachments": true,
+    "delete_attachments": true
+  },
+  "creator": {
+    "id": 18,
+    "fname": "John",
+    "lname": "Rinehart",
+    "email": "mike@komand.com",
+    "phone": "1112223333",
+    "cell": "1112223333",
+    "title": "Test Title",
+    "notes": "No notes!",
+    "last_login": 0,
+    "locked": false,
+    "is_external": false
+  },
+  "notes": [],
+  "closed_date": 0,
+  "actions": [],
+  "phase_id": {
+    "name": "Engage"
+  },
+  "notes_count": 0,
+  "attachments_count": 0
+            },
+            "incident_id": 3944,
+            "organization_id": 201
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,234 @@
+plugin_spec_version: v2
+name: ossec
+title: OSSEC
+description: OSSEC is a free, open-source host-based intrusion detection system
+version: 1.0.0
+vendor: rapid7
+tags:
+- ossec
+- hids
+types:
+  syscheck_alert:
+    alert_id:
+      title: Alert ID
+      description: Alert ID of the OSSEC alert
+      type: float
+      required: true
+    category:
+      title: Alert Category
+      description: Alert category
+      type: string
+      required: true
+    timestamp:
+      title: Time Stamp
+      description: Time stamp
+      type: string
+      required: true
+    agent:
+      title: Agent
+      description: Agent alert was created on
+      type: string
+      required: true
+    rule_id:
+      title: Rule ID
+      description: Rule ID
+      type: integer
+      required: true
+    level:
+      title: Level
+      description: Alert level
+      type: integer
+      required: true
+    rule_name:
+      title: Alert Name
+      description: Alert name
+      type: string
+      required: true
+    file:
+      title: File
+      description: File changed
+      type: string
+      required: false
+    perms_old:
+      title: New Permissions
+      description: Permissions after modification
+      type: string
+      required: false
+    perms_new:
+      title: Old Permissions
+      description: Permissions before modification
+      type: string
+      required: false
+    sha_old:
+      title: Old SHA1
+      description: SHA1 before modification
+      type: string
+      required: false
+    sha_new:
+      title: New SHA1
+      description: SHA1 after modification
+      type: string
+      required: false
+    md5_old:
+      title: Old MD5
+      description: MD5 before modification
+      type: string
+      required: false
+    md5_new:
+      title: New MD5
+      description: MD5 after modification
+      type: string
+      required: false
+    size_old:
+      title: Old Size
+      description: Size before modification
+      type: integer
+      required: false
+    size_new:
+      title: New Size
+      description: Size after modification
+      type: integer
+      required: false
+  rootcheck_alert:
+    alert_id:
+      title: Alert ID
+      description: Alert ID of the OSSEC alert
+      type: float
+      required: true
+    category:
+      title: Alert Category
+      description: Alert category
+      type: string
+      required: true
+    timestamp:
+      title: Time Stamp
+      description: Time stamp
+      type: string
+      required: true
+    agent:
+      title: Agent
+      description: Agent alert was created on
+      type: string
+      required: true
+    rule_id:
+      title: Rule ID
+      description: Rule ID
+      type: integer
+      required: true
+    level:
+      title: Level
+      description: Alert level
+      type: integer
+      required: true
+    rule_name:
+      title: Alert Name
+      description: Alert name
+      type: string
+      required: true
+    file:
+      title: File
+      description: File related to alert
+      type: string
+      required: false
+    logs:
+      title: Alert Logs
+      description: Alert logs
+      type: '[]string'
+      required: true
+  alert_alert:
+    alert_id:
+      title: Alert ID
+      description: Alert ID of the OSSEC alert
+      type: float
+      required: true
+    category:
+      title: Alert Category
+      description: Alert category
+      type: string
+      required: true
+    timestamp:
+      title: Time Stamp
+      description: Time stamp
+      type: string
+      required: true
+    agent:
+      title: Agent
+      description: Agent alert was created on
+      type: string
+      required: false
+    rule_id:
+      title: Rule ID
+      description: Rule ID
+      type: integer
+      required: true
+    level:
+      title: Level
+      description: Alert level
+      type: integer
+      required: true
+    rule_name:
+      title: Alert Name
+      description: Alert name
+      type: string
+      required: true
+    source_ip:
+      title: Source IP
+      description: Source IP address
+      type: string
+      required: false
+    user:
+      title: User
+      description: User
+      type: string
+      required: false
+    logs:
+      title: Alert Logs
+      description: Alert logs
+      type: '[]string'
+      required: true
+actions:
+  syscheck_parse:
+    title: Syscheck Parse
+    description: Parse OSSEC Syscheck alerts
+    input:
+      alert:
+        title: Alert
+        description: OSSEC Syscheck alert
+        type: string
+        required: true
+    output:
+      alert:
+        title: Alert
+        type: syscheck_alert
+        description: Alert
+        required: true
+  rootcheck_parse:
+    title: Rootcheck Parse
+    description: Parse OSSEC Rootcheck alerts
+    input:
+      alert:
+        title: Alert
+        description: OSSEC Rootcheck alert
+        type: string
+        required: true
+    output:
+      alert:
+        title: Alert
+        type: rootcheck_alert
+        description: Alert
+        required: true
+  alert_parse:
+    title: Alert Parse
+    description: Parse OSSEC Alert alerts
+    input:
+      alert:
+        title: Alert
+        description: OSSEC Alert alert
+        type: string
+        required: true
+    output:
+      alert:
+        title: Alert
+        type: alert_alert
+        description: Alert
+        required: true

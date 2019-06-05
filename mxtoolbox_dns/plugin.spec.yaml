@@ -1,0 +1,1305 @@
+plugin_spec_version: v2
+name: mxtoolbox_dns
+title: MxToolBox DNS
+vendor: rapid7
+status: ["unsupported"]
+description: Interface with MxToolBox DNS lookup API
+version: 1.0.0
+tags:
+- mxtoolbox
+- dns
+- lookup
+types:
+  MX_RelatedLookups:
+    Command:
+      type: string
+      required: false
+    CommandArgument:
+      type: string
+      required: false
+    Name:
+      type: string
+      required: false
+    URL:
+      type: string
+      required: false
+  MX_Failed:
+    ID:
+      type: integer
+      required: false
+    Info:
+      type: string
+      required: false
+    IsExcludedByUser:
+      type: boolean
+      required: false
+    Name:
+      type: string
+      required: false
+    PublicDescription:
+      type: string
+      required: false
+    Url:
+      type: string
+      required: false
+  MX_Transcript:
+    Answers:
+      type: string
+      required: false
+    Authoritative:
+      type: string
+      required: false
+    Depth:
+      type: string
+      required: false
+    ElapsedTime:
+      type: string
+      required: false
+    Question:
+      type: string
+      required: false
+    Result:
+      type: string
+      required: false
+    ServerIP:
+      type: string
+      required: false
+    ServerName:
+      type: string
+      required: false
+    TimeStamp:
+      type: string
+      required: false
+  MX_Output:
+    CommandArgument:
+      type: string
+      required: false
+    Errors:
+      type: '[]object'
+      required: false
+    Information:
+      type: '[]object'
+      required: false
+    RelatedLookups:
+      type: '[]MX_RelatedLookups'
+      required: false
+    TimeRecorded:
+      type: string
+      required: false
+    Failed:
+      type: '[]MX_Failed'
+      required: false
+    Passed:
+      type: '[]object'
+      required: false
+    DnsServiceProvider:
+      type: string
+      required: false
+    UID:
+      type: string
+      required: false
+    Warnings:
+      type: '[]object'
+      required: false
+    MultiInformation:
+      type: '[]object'
+      required: false
+    Transcript:
+      type: '[]MX_Transcript'
+      required: false
+    IsTransitioned:
+      type: boolean
+      required: false
+    HasSubscriptions:
+      type: boolean
+      required: false
+    ReportingNameServer:
+      type: string
+      required: false
+    Timeouts:
+      type: '[]object'
+      required: false
+    TimeToComplete:
+      type: string
+      required: false
+    IsBruteForce:
+      type: boolean
+      required: false
+    RelatedIP:
+      type: string
+      required: false
+    Command:
+      type: string
+      required: false
+    IsEndpoint:
+      type: boolean
+      required: false
+    EmailServiceProvider:
+      type: string
+      required: false
+    MxRep:
+      type: integer
+      required: false
+  A_Information:
+    Domain Name:
+      type: string
+      required: false
+    IP Address:
+      type: string
+      required: false
+    TTL:
+      type: string
+      required: false
+    Type:
+      type: string
+      required: false
+  A_RelatedLookups:
+    Command:
+      type: string
+      required: false
+    CommandArgument:
+      type: string
+      required: false
+    Name:
+      type: string
+      required: false
+    URL:
+      type: string
+      required: false
+  A_Passed:
+    ID:
+      type: integer
+      required: false
+    Info:
+      type: string
+      required: false
+    IsExcludedByUser:
+      type: boolean
+      required: false
+    Name:
+      type: string
+      required: false
+    PublicDescription:
+      type: string
+      required: false
+    Url:
+      type: string
+      required: false
+  A_Transcript:
+    Answers:
+      type: string
+      required: false
+    Authoritative:
+      type: string
+      required: false
+    Depth:
+      type: string
+      required: false
+    ElapsedTime:
+      type: string
+      required: false
+    Question:
+      type: string
+      required: false
+    Result:
+      type: string
+      required: false
+    ServerIP:
+      type: string
+      required: false
+    ServerName:
+      type: string
+      required: false
+    TimeStamp:
+      type: string
+      required: false
+  A_Output:
+    CommandArgument:
+      type: string
+      required: false
+    Errors:
+      type: '[]object'
+      required: false
+    Information:
+      type: '[]A_Information'
+      required: false
+    RelatedLookups:
+      type: '[]A_RelatedLookups'
+      required: false
+    TimeRecorded:
+      type: string
+      required: false
+    Failed:
+      type: '[]object'
+      required: false
+    Passed:
+      type: '[]A_Passed'
+      required: false
+    DnsServiceProvider:
+      type: string
+      required: false
+    UID:
+      type: string
+      required: false
+    Warnings:
+      type: '[]object'
+      required: false
+    MultiInformation:
+      type: '[]object'
+      required: false
+    Transcript:
+      type: '[]A_Transcript'
+      required: false
+    IsTransitioned:
+      type: boolean
+      required: false
+    HasSubscriptions:
+      type: boolean
+      required: false
+    ReportingNameServer:
+      type: string
+      required: false
+    Timeouts:
+      type: '[]object'
+      required: false
+    TimeToComplete:
+      type: string
+      required: false
+    IsBruteForce:
+      type: boolean
+      required: false
+    RelatedIP:
+      type: string
+      required: false
+    Command:
+      type: string
+      required: false
+    IsEndpoint:
+      type: boolean
+      required: false
+    EmailServiceProvider:
+      type: string
+      required: false
+    MxRep:
+      type: integer
+      required: false
+  DNS_Information:
+    Auth:
+      type: string
+      required: false
+    Domain Name:
+      type: string
+      required: false
+    IP Address:
+      type: string
+      required: false
+    Local:
+      type: string
+      required: false
+    Parent:
+      type: string
+      required: false
+    Status:
+      type: string
+      required: false
+    TTL:
+      type: string
+      required: false
+    Time(ms):
+      type: string
+      required: false
+    Type:
+      type: string
+      required: false
+  DNS_RelatedLookups:
+    Command:
+      type: string
+      required: false
+    CommandArgument:
+      type: string
+      required: false
+    Name:
+      type: string
+      required: false
+    URL:
+      type: string
+      required: false
+  DNS_Failed:
+    AdditionalInfo:
+      type: '[]string'
+      required: false
+    ID:
+      type: integer
+      required: false
+    Info:
+      type: string
+      required: false
+    IsExcludedByUser:
+      type: boolean
+      required: false
+    Name:
+      type: string
+      required: false
+    PublicDescription:
+      type: string
+      required: false
+    Url:
+      type: string
+      required: false
+  DNS_Passed:
+    ID:
+      type: integer
+      required: false
+    Info:
+      type: string
+      required: false
+    IsExcludedByUser:
+      type: boolean
+      required: false
+    Name:
+      type: string
+      required: false
+    PublicDescription:
+      type: string
+      required: false
+    Url:
+      type: string
+      required: false
+  DNS_Transcript:
+    Answers:
+      type: string
+      required: false
+    Authoritative:
+      type: string
+      required: false
+    Depth:
+      type: string
+      required: false
+    ElapsedTime:
+      type: string
+      required: false
+    Question:
+      type: string
+      required: false
+    Result:
+      type: string
+      required: false
+    ServerIP:
+      type: string
+      required: false
+    ServerName:
+      type: string
+      required: false
+    TimeStamp:
+      type: string
+      required: false
+  DNS_Output:
+    CommandArgument:
+      type: string
+      required: false
+    Errors:
+      type: '[]object'
+      required: false
+    Information:
+      type: '[]DNS_Information'
+      required: false
+    RelatedLookups:
+      type: '[]DNS_RelatedLookups'
+      required: false
+    TimeRecorded:
+      type: string
+      required: false
+    Failed:
+      type: '[]DNS_Failed'
+      required: false
+    Passed:
+      type: '[]DNS_Passed'
+      required: false
+    DnsServiceProvider:
+      type: string
+      required: false
+    UID:
+      type: string
+      required: false
+    Warnings:
+      type: '[]object'
+      required: false
+    MultiInformation:
+      type: '[]object'
+      required: false
+    Transcript:
+      type: '[]DNS_Transcript'
+      required: false
+    IsTransitioned:
+      type: boolean
+      required: false
+    HasSubscriptions:
+      type: boolean
+      required: false
+    ReportingNameServer:
+      type: string
+      required: false
+    Timeouts:
+      type: '[]object'
+      required: false
+    TimeToComplete:
+      type: string
+      required: false
+    IsBruteForce:
+      type: boolean
+      required: false
+    RelatedIP:
+      type: string
+      required: false
+    Command:
+      type: string
+      required: false
+    IsEndpoint:
+      type: boolean
+      required: false
+    EmailServiceProvider:
+      type: string
+      required: false
+    MxRep:
+      type: integer
+      required: false
+  SPF_Information:
+    Description:
+      type: string
+      required: false
+    Prefix:
+      type: string
+      required: false
+    PrefixDesc:
+      type: string
+      required: false
+    Type:
+      type: string
+      required: false
+    Value:
+      type: string
+      required: false
+  SPF_RelatedLookups:
+    Command:
+      type: string
+      required: false
+    CommandArgument:
+      type: string
+      required: false
+    Name:
+      type: string
+      required: false
+    URL:
+      type: string
+      required: false
+  SPF_Passed:
+    ID:
+      type: integer
+      required: false
+    Info:
+      type: string
+      required: false
+    IsExcludedByUser:
+      type: boolean
+      required: false
+    Name:
+      type: string
+      required: false
+    PublicDescription:
+      type: string
+      required: false
+    Url:
+      type: string
+      required: false
+  SPF_Transcript:
+    Answers:
+      type: string
+      required: false
+    Authoritative:
+      type: string
+      required: false
+    Depth:
+      type: string
+      required: false
+    ElapsedTime:
+      type: string
+      required: false
+    Question:
+      type: string
+      required: false
+    Result:
+      type: string
+      required: false
+    ServerIP:
+      type: string
+      required: false
+    ServerName:
+      type: string
+      required: false
+    TimeStamp:
+      type: string
+      required: false
+  SPF_Output:
+    CommandArgument:
+      type: string
+      required: false
+    Errors:
+      type: '[]object'
+      required: false
+    Information:
+      type: '[]SPF_Information'
+      required: false
+    RelatedLookups:
+      type: '[]SPF_RelatedLookups'
+      required: false
+    TimeRecorded:
+      type: string
+      required: false
+    Failed:
+      type: '[]object'
+      required: false
+    Passed:
+      type: '[]SPF_Passed'
+      required: false
+    DnsServiceProvider:
+      type: string
+      required: false
+    UID:
+      type: string
+      required: false
+    Warnings:
+      type: '[]object'
+      required: false
+    MultiInformation:
+      type: '[]object'
+      required: false
+    Transcript:
+      type: '[]SPF_Transcript'
+      required: false
+    IsTransitioned:
+      type: boolean
+      required: false
+    HasSubscriptions:
+      type: boolean
+      required: false
+    ReportingNameServer:
+      type: string
+      required: false
+    Timeouts:
+      type: '[]object'
+      required: false
+    TimeToComplete:
+      type: string
+      required: false
+    IsBruteForce:
+      type: boolean
+      required: false
+    RelatedIP:
+      type: string
+      required: false
+    Command:
+      type: string
+      required: false
+    IsEndpoint:
+      type: boolean
+      required: false
+    EmailServiceProvider:
+      type: string
+      required: false
+    MxRep:
+      type: integer
+      required: false
+  TXT_Information:
+    Domain Name:
+      type: string
+      required: false
+    Record:
+      type: string
+      required: false
+    TTL:
+      type: string
+      required: false
+    Type:
+      type: string
+      required: false
+  TXT_RelatedLookups:
+    Command:
+      type: string
+      required: false
+    CommandArgument:
+      type: string
+      required: false
+    Name:
+      type: string
+      required: false
+    URL:
+      type: string
+      required: false
+  TXT_Passed:
+    ID:
+      type: integer
+      required: false
+    Info:
+      type: string
+      required: false
+    IsExcludedByUser:
+      type: boolean
+      required: false
+    Name:
+      type: string
+      required: false
+    PublicDescription:
+      type: string
+      required: false
+    Url:
+      type: string
+      required: false
+  TXT_Transcript:
+    Answers:
+      type: string
+      required: false
+    Authoritative:
+      type: string
+      required: false
+    Depth:
+      type: string
+      required: false
+    ElapsedTime:
+      type: string
+      required: false
+    Question:
+      type: string
+      required: false
+    Result:
+      type: string
+      required: false
+    ServerIP:
+      type: string
+      required: false
+    ServerName:
+      type: string
+      required: false
+    TimeStamp:
+      type: string
+      required: false
+  TXT_Output:
+    CommandArgument:
+      type: string
+      required: false
+    Errors:
+      type: '[]object'
+      required: false
+    Information:
+      type: '[]TXT_Information'
+      required: false
+    RelatedLookups:
+      type: '[]TXT_RelatedLookups'
+      required: false
+    TimeRecorded:
+      type: string
+      required: false
+    Failed:
+      type: '[]object'
+      required: false
+    Passed:
+      type: '[]TXT_Passed'
+      required: false
+    DnsServiceProvider:
+      type: string
+      required: false
+    UID:
+      type: string
+      required: false
+    Warnings:
+      type: '[]object'
+      required: false
+    MultiInformation:
+      type: '[]object'
+      required: false
+    Transcript:
+      type: '[]TXT_Transcript'
+      required: false
+    IsTransitioned:
+      type: boolean
+      required: false
+    HasSubscriptions:
+      type: boolean
+      required: false
+    ReportingNameServer:
+      type: string
+      required: false
+    Timeouts:
+      type: '[]object'
+      required: false
+    TimeToComplete:
+      type: string
+      required: false
+    IsBruteForce:
+      type: boolean
+      required: false
+    RelatedIP:
+      type: string
+      required: false
+    Command:
+      type: string
+      required: false
+    IsEndpoint:
+      type: boolean
+      required: false
+    EmailServiceProvider:
+      type: string
+      required: false
+    MxRep:
+      type: integer
+      required: false
+  SOA_Information:
+    Domain Name:
+      type: string
+      required: false
+    PrimaryNS:
+      type: string
+      required: false
+    ResponsibleEmail:
+      type: string
+      required: false
+    TTL:
+      type: string
+      required: false
+    Type:
+      type: string
+      required: false
+  SOA_RelatedLookups:
+    Command:
+      type: string
+      required: false
+    CommandArgument:
+      type: string
+      required: false
+    Name:
+      type: string
+      required: false
+    URL:
+      type: string
+      required: false
+  SOA_Passed:
+    ID:
+      type: integer
+      required: false
+    Info:
+      type: string
+      required: false
+    IsExcludedByUser:
+      type: boolean
+      required: false
+    Name:
+      type: string
+      required: false
+    PublicDescription:
+      type: string
+      required: false
+    Url:
+      type: string
+      required: false
+  SOA_Transcript:
+    Answers:
+      type: string
+      required: false
+    Authoritative:
+      type: string
+      required: false
+    Depth:
+      type: string
+      required: false
+    ElapsedTime:
+      type: string
+      required: false
+    Question:
+      type: string
+      required: false
+    Result:
+      type: string
+      required: false
+    ServerIP:
+      type: string
+      required: false
+    ServerName:
+      type: string
+      required: false
+    TimeStamp:
+      type: string
+      required: false
+  SOA_Output:
+    CommandArgument:
+      type: string
+      required: false
+    Errors:
+      type: '[]object'
+      required: false
+    Information:
+      type: '[]SOA_Information'
+      required: false
+    RelatedLookups:
+      type: '[]SOA_RelatedLookups'
+      required: false
+    TimeRecorded:
+      type: string
+      required: false
+    Failed:
+      type: '[]object'
+      required: false
+    Passed:
+      type: '[]SOA_Passed'
+      required: false
+    DnsServiceProvider:
+      type: string
+      required: false
+    UID:
+      type: string
+      required: false
+    Warnings:
+      type: '[]object'
+      required: false
+    MultiInformation:
+      type: '[]object'
+      required: false
+    Transcript:
+      type: '[]SOA_Transcript'
+      required: false
+    IsTransitioned:
+      type: boolean
+      required: false
+    HasSubscriptions:
+      type: boolean
+      required: false
+    ReportingNameServer:
+      type: string
+      required: false
+    Timeouts:
+      type: '[]object'
+      required: false
+    TimeToComplete:
+      type: string
+      required: false
+    IsBruteForce:
+      type: boolean
+      required: false
+    RelatedIP:
+      type: string
+      required: false
+    Command:
+      type: string
+      required: false
+    IsEndpoint:
+      type: boolean
+      required: false
+    EmailServiceProvider:
+      type: string
+      required: false
+    MxRep:
+      type: integer
+      required: false
+  PTR_Information:
+    Domain Name:
+      type: string
+      required: false
+    IP Address:
+      type: string
+      required: false
+    TTL:
+      type: string
+      required: false
+    Type:
+      type: string
+      required: false
+  PTR_RelatedLookups:
+    Command:
+      type: string
+      required: false
+    CommandArgument:
+      type: string
+      required: false
+    Name:
+      type: string
+      required: false
+    URL:
+      type: string
+      required: false
+  PTR_Passed:
+    ID:
+      type: integer
+      required: false
+    Info:
+      type: string
+      required: false
+    IsExcludedByUser:
+      type: boolean
+      required: false
+    Name:
+      type: string
+      required: false
+    PublicDescription:
+      type: string
+      required: false
+    Url:
+      type: string
+      required: false
+  PTR_Transcript:
+    Answers:
+      type: string
+      required: false
+    Authoritative:
+      type: string
+      required: false
+    Depth:
+      type: string
+      required: false
+    ElapsedTime:
+      type: string
+      required: false
+    Question:
+      type: string
+      required: false
+    Result:
+      type: string
+      required: false
+    ServerIP:
+      type: string
+      required: false
+    ServerName:
+      type: string
+      required: false
+    TimeStamp:
+      type: string
+      required: false
+  PTR_Output:
+    CommandArgument:
+      type: string
+      required: false
+    Errors:
+      type: '[]object'
+      required: false
+    Information:
+      type: '[]PTR_Information'
+      required: false
+    RelatedLookups:
+      type: '[]PTR_RelatedLookups'
+      required: false
+    TimeRecorded:
+      type: string
+      required: false
+    Failed:
+      type: '[]object'
+      required: false
+    Passed:
+      type: '[]PTR_Passed'
+      required: false
+    DnsServiceProvider:
+      type: string
+      required: false
+    UID:
+      type: string
+      required: false
+    Warnings:
+      type: '[]object'
+      required: false
+    MultiInformation:
+      type: '[]object'
+      required: false
+    Transcript:
+      type: '[]PTR_Transcript'
+      required: false
+    IsTransitioned:
+      type: boolean
+      required: false
+    HasSubscriptions:
+      type: boolean
+      required: false
+    ReportingNameServer:
+      type: string
+      required: false
+    Timeouts:
+      type: '[]object'
+      required: false
+    TimeToComplete:
+      type: string
+      required: false
+    IsBruteForce:
+      type: boolean
+      required: false
+    RelatedIP:
+      type: string
+      required: false
+    Command:
+      type: string
+      required: false
+    IsEndpoint:
+      type: boolean
+      required: false
+    EmailServiceProvider:
+      type: string
+      required: false
+    MxRep:
+      type: integer
+      required: false
+  BLACKLIST_RelatedLookups:
+    Command:
+      type: string
+      required: false
+    CommandArgument:
+      type: string
+      required: false
+    Name:
+      type: string
+      required: false
+    URL:
+      type: string
+      required: false
+  BLACKLIST_Passed:
+    BlacklistResponseTime:
+      type: string
+      required: false
+    ID:
+      type: integer
+      required: false
+    IsExcludedByUser:
+      type: boolean
+      required: false
+    Name:
+      type: string
+      required: false
+    PublicDescription:
+      type: string
+      required: false
+    Url:
+      type: string
+      required: false
+  BLACKLIST_Transcript:
+    Transcript:
+      type: string
+      required: false
+  BLACKLIST_Output:
+    CommandArgument:
+      type: string
+      required: false
+    Errors:
+      type: '[]object'
+      required: false
+    Information:
+      type: '[]object'
+      required: false
+    RelatedLookups:
+      type: '[]BLACKLIST_RelatedLookups'
+      required: false
+    TimeRecorded:
+      type: string
+      required: false
+    Failed:
+      type: '[]object'
+      required: false
+    Passed:
+      type: '[]BLACKLIST_Passed'
+      required: false
+    DnsServiceProvider:
+      type: string
+      required: false
+    UID:
+      type: string
+      required: false
+    Warnings:
+      type: '[]object'
+      required: false
+    MultiInformation:
+      type: '[]object'
+      required: false
+    Transcript:
+      type: '[]BLACKLIST_Transcript'
+      required: false
+    IsTransitioned:
+      type: boolean
+      required: false
+    HasSubscriptions:
+      type: boolean
+      required: false
+    ReportingNameServer:
+      type: string
+      required: false
+    Timeouts:
+      type: '[]object'
+      required: false
+    TimeToComplete:
+      type: string
+      required: false
+    IsBruteForce:
+      type: boolean
+      required: false
+    RelatedIP:
+      type: string
+      required: false
+    Command:
+      type: string
+      required: false
+    IsEndpoint:
+      type: boolean
+      required: false
+    EmailServiceProvider:
+      type: string
+      required: false
+    MxRep:
+      type: integer
+      required: false
+  USAGE_Output:
+    DnsRequests:
+      type: integer
+      required: false
+    NetworkMax:
+      type: integer
+      required: false
+    DnsMax:
+      type: integer
+      required: false
+    NetworkRequests:
+      type: integer
+      required: false
+connection:
+  url:
+    title: URL
+    type: string
+    description: MxToolBox DNS Lookup
+    required: true
+    default: https://api.mxtoolbox.com/api/v1/
+  api_key:
+    title: API key
+    type: credential_secret_key
+    description: API access key
+    required: false
+actions:
+  mx:
+    title: MX
+    description: DNS MX records for domain
+    input:
+      hostname:
+        title: Hostname
+        type: string
+        description: The hostname to look up
+        required: true
+    output:
+      response:
+        title: Response
+        type: MX_Output
+        description: Response
+        required: true
+  a:
+    title: A
+    description: DNS A record IP address for host name
+    input:
+      hostname:
+        title: Hostname
+        type: string
+        description: The hostname to look up
+        required: true
+    output:
+      response:
+        title: Response
+        description: Response
+        type: A_Output
+        required: true
+  dns:
+    title: DNS
+    description: Run a DNS query
+    input:
+      hostname:
+        title: Hostname
+        type: string
+        description: The hostname to look up
+        required: true
+    output:
+      response:
+        title: Response
+        description: Response
+        type: DNS_Output
+        required: true
+  spf:
+    title: SPF
+    description: Check SPF records on a domain
+    input:
+      hostname:
+        title: Hostname
+        type: string
+        description: The hostname to look up
+        required: true
+    output:
+      response:
+        title: Response
+        description: Response
+        type: SPF_Output
+        required: true
+  txt:
+    title: TXT
+    description: Check TXT records on a domain
+    input:
+      hostname:
+        title: Hostname
+        type: string
+        description: The hostname to look up
+        required: true
+    output:
+      response:
+        title: Response
+        description: Response
+        type: TXT_Output
+        required: true
+  soa:
+    title: SOA
+    description: Get Start of Authority record for a domain
+    input:
+      hostname:
+        title: Hostname
+        type: string
+        description: The hostname to look up
+        required: true
+    output:
+      response:
+        title: Response
+        description: Response
+        type: SOA_Output
+        required: true
+  ptr:
+    title: PTR
+    description: DNS PTR record for host name
+    input:
+      ip_address:
+        title: IP Address
+        type: string
+        description: The IP address to look up
+        required: true
+    output:
+      response:
+        title: Response
+        description: Response
+        type: PTR_Output
+        required: true
+  blacklist:
+    title: Blacklist
+    description: Check IP or host for reputation
+    input:
+      hostname:
+        title: Hostname
+        type: string
+        description: The hostname to look up
+        required: true
+    output:
+      response:
+        title: Response
+        description: Response
+        type: BLACKLIST_Output
+        required: true
+  usage:
+    title: Usage
+    description: Check your usage of the MxToolBox API
+    input: null
+    output:
+      response:
+        title: Response
+        description: Response
+        type: USAGE_Output
+        required: true

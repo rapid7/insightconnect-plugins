@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_incidents",
+    "meta": {},
+    "input": {
+      "organization_id": 201
+    },
+    "connection": {
+      "creds": {
+        "password": "",
+        "username": ""
+      },
+      "hostname": "https://www.blah.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

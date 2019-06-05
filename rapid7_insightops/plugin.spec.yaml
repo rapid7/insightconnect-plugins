@@ -1,0 +1,220 @@
+plugin_spec_version: v2
+name: rapid7_insightops
+title: Rapid7 InsightOps
+vendor: rapid7
+description: Log Management and Monitoring Solution
+version: 1.0.1
+status: ["supported"]
+tags:
+- InsightOps
+- log management
+- log
+- monitoring
+types:
+  logsets_info_id:
+    id:
+      title: ID
+      type: string
+      required: false
+  post_logsets_info:
+    logsets_info_ids:
+      title: Logsets Info IDs
+      type: '[]logsets_info_id'
+      required: false
+  links:
+    href:
+      description: Hypertext Reference
+      title: href
+      type: string
+      required: false
+    rel:
+      description: The relationship between the current document and the linked document
+      title: rel
+      type: string
+      required: false
+  logsets_info:
+    id:
+      description: ID associated with the Logsets
+      title: Logsets ID
+      type: string
+      required: false
+    links:
+      description: Link to the logs logsets ID within InsightOps
+      title: Link
+      type: '[]links'
+      required: false
+    name:
+      description: Name of the log
+      title: Name
+      type: string
+      required: false
+  user_data:
+    le_agent_filename:
+      description: Logentry Agent Filename
+      title: LE Agent Filename
+      type: string
+      required: false
+    le_agent_follow:
+      description: Logentry Agent Follow
+      title: LE Agent Follow
+      type: string
+      required: false
+  logs:
+    id:
+      description: Logsets ID
+      title: ID
+      type: string
+      required: false
+    logsets_info:
+      description: Information about logsets
+      title: Logsets Information
+      type: '[]logsets_info'
+      required: false
+    name:
+      description: Name of logsets
+      title: Name
+      type: string
+      required: false
+    source_type:
+      description: Source type
+      title: Source Type
+      type: string
+      required: false
+    structures:
+      description: An array of log structures
+      title: Structures
+      type: '[]string'
+      required: false
+    token_seed:
+      description: Seed of token
+      title: Token Seed
+      type: string
+      required: false
+    tokens:
+      description: An array of Tokens
+      title: Tokens
+      type: '[]string'
+      required: false
+    user_data:
+      description: Logentry Data
+      title: User Data
+      type: user_data
+      required: false
+  logset_container:
+    id:
+      title: ID
+      type: string
+      required: false
+    name:
+      title: Name
+      type: string
+      required: false
+    tokens:
+      title: Token
+      type: '[]string'
+      required: false
+    structures:
+      title: Structures
+      type: '[]string'
+      required: false
+    user_data:
+      title: User Data
+      type: user_data
+      required: false
+    logsets_info:
+      title: Logsets Info
+      type: post_logsets_info
+      required: false
+connection:
+  api_key:
+    type: credential_secret_key
+    description: API Key to access InsightOps service. e.g. 39dd20eb-1337-45a0-a4044-133f237b50fa
+    required: true
+    title: API Key
+  region:
+    title: Region
+    type: string
+    description: Region of InsightOps service to access. e.g. eu
+    default: us
+    required: true
+    enum:
+    - eu
+    - us
+actions:
+  query_logs:
+    title: Query Logs
+    description: Retrieves logs from InsightOps service
+    output:
+      logs:
+        title: Logs Data
+        description: Logs
+        type: '[]logs'
+        required: true
+  create_logset_container:
+    title: Create Logset Container
+    description: Creates a container within the specified logset for InsightOps service
+    input:
+      title:
+        title: Name
+        type: string
+        description: Name of the container
+        required: false
+      structures:
+        title: Structure
+        type: '[]string'
+        description: The structure of the log. e.g. Syslog, JSON, Apache and Nginx
+        required: false
+      le_agent_filename:
+        title: LE Agent Filename
+        type: string
+        description: Log entry agent filename
+        required: false
+      le_agent_follow:
+        title: LE Agent Follow
+        type: string
+        description: Log entry agent follow
+        required: false
+      source_type:
+        title: Source Type
+        type: string
+        description: A unique Identifier for the log
+        default: token
+        required: false
+      token_seed:
+        title: Token Seed
+        type: string
+        description: Token Seed is used to generate a token that can be shared. If
+          a random UUID needs to be created leave this blank
+        required: false
+      id:
+        title: ID
+        type: string
+        description: ID points to the Logset ID to which the container will be created
+          e.g. c17cef2e-01c1-404e-b42b-ea5088c2f713
+        required: false
+    output:
+      log:
+        title: Log
+        type: logset_container
+        description: Returned data from created container
+        required: false
+  submit_log_data:
+    title: Submit Log Data
+    description: Submits JSON to a specified log within an InsightOps Logset
+    input:
+      logset_container_id:
+        title: Log Token TCP
+        description: An UUID that specifics a container within an InsightOps Logset
+        type: string
+        required: false
+      data:
+        title: Data
+        description: JSON that will be passed to an InsightOps logset
+        type: object
+        required: false
+    output:
+      success:
+        type: boolean
+        description: Reports if data was submitted successfully
+        title: Success
+        required: false

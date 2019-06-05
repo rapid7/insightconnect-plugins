@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "create_event",
+    "input": {
+      "source": "a reliable source",
+      "type": "Malware",
+      "description": "sos malware",
+      "title": "bad stuff exposed"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "host": "",
+      "proxy": "",
+      "client_id": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

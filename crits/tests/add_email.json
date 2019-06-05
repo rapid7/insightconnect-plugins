@@ -1,0 +1,27 @@
+{
+  "version": "v1",
+  "body": {
+    "connection": {
+      "url": "",
+      "ssl_verify": false,
+      "username": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "add_email",
+    "meta": {},
+    "input": {
+      "type": "msg",
+        "params": {
+            "campaign": "NetTraveler"
+        },
+      "source": "Faker Vault",
+      "file": {
+        "content": "",
+        "filename": ""
+      }
+    }
+  },
+  "type": "action_start"
+}

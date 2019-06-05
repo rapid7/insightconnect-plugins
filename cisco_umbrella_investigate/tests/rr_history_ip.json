@@ -1,0 +1,17 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "rr_history_ip",
+    "input": {
+      "IP": "50.23.225.49",
+      "type": "A"
+    }
+  },
+  "version": "v1"
+}

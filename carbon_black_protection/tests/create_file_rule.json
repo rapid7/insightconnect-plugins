@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "create_file_rule",
+        "input": {
+            "description": "Komand File Rule test description",
+            "file_catalog_id": 5025,
+            "file_state": "Banned",
+            "force_installer": false,
+            "force_not_installer": false,
+            "hash": "",
+            "name": "KomandFileRule",
+            "platform_flags": 124,
+            "policy_ids": "0",
+            "report_only": false,
+            "reputation_approvals_enabled": false
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

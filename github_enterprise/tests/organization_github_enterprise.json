@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "organization",
+    "input": {
+      "name": "testorgfromkomand-6",
+      "profile_name": "Test Org 6",
+      "admin": ""
+    },
+    "connection": {
+      "host": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,1239 @@
+plugin_spec_version: v2
+name: misp
+title: MISP
+description: MISP is an open source threat sharing platform
+version: 3.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- misp
+- IOC
+- threat
+types:
+  org:
+    uuid:
+      title: UUID
+      description: UUID
+      type: string
+    id:
+      title: ID
+      description: ID
+      type: string
+    name:
+      title: Name
+      description: Name
+      type: string
+  base_output:
+    category:
+      title: Category
+      description: Attribute category
+      type: string
+    comment:
+      title: Comment
+      description: Attribute comment
+      type: string
+    uuid:
+      title: UUID
+      description: Unique ID
+      type: string
+    old_id:
+      title: Old ID
+      description: Old ID
+      type: string
+    event_id:
+      title: Event ID
+      description: Event ID
+      type: string
+    event_org_id:
+      title: Event Organization ID
+      description: Organization ID
+      type: string
+    to_ids:
+      title: To IDs
+      description: To IDs
+      type: boolean
+    value:
+      title: Value
+      description: Value
+      type: string
+    email:
+      title: Email
+      description: Email address
+      type: string
+    deleted:
+      title: Deleted
+      description: Deleted?
+      type: boolean
+    timestamp:
+      title: Timestamp
+      description: Time created
+      type: string
+    type:
+      title: Type
+      description: Type of email
+      type: string
+    id:
+      title: ID
+      description: Email ID
+      type: string
+  comment_input:
+    event:
+      title: Event ID
+      description: Event ID to append to
+      type: string
+    comment_in:
+      title: Comment
+      description: Comment for context
+      type: string
+    comment:
+      title: Comment
+      description: Attribute comment
+      type: string
+    distribution:
+      title: Distribution
+      description: Distribution type
+      type: string
+      enum:
+      - This Community
+      - This Organization
+      - Connected Communities
+      - All Communities
+  link_input:
+    event:
+      title: Event ID
+      description: Event ID to append to
+      type: string
+    link:
+      title: Link
+      description: Link
+      type: string
+    comment:
+      title: Comment
+      description: Attribute comment
+      type: string
+    distribution:
+      title: Distribution
+      description: Distribution type
+      type: string
+      enum:
+      - This Community
+      - This Organization
+      - Connected Communities
+      - All Communities
+  other_input:
+    event:
+      title: Event ID
+      description: Event ID to append to
+      type: string
+    other:
+      title: Other
+      description: Other
+      type: string
+    comment:
+      title: Comment
+      description: Attribute comment
+      type: string
+    distribution:
+      title: Distribution
+      description: Distribution type
+      type: string
+      enum:
+      - This Community
+      - This Organization
+      - Connected Communities
+      - All Communities
+  text_input:
+    event:
+      title: Event ID
+      description: Event ID to append to
+      type: string
+    text:
+      title: Text
+      description: Text
+      type: string
+    comment:
+      title: Comment
+      description: Attribute comment
+      type: string
+    distribution:
+      title: Distribution
+      description: Distribution type
+      type: string
+      enum:
+      - This Community
+      - This Organization
+      - Connected Communities
+      - All Communities
+  base_input:
+    event:
+      title: Event ID
+      description: Event ID to append to
+      type: string
+    value:
+      title: Value
+      description: Input value
+      type: string
+    comment:
+      title: Comment
+      description: Attribute comment
+      type: string
+    distribution:
+      title: Distribution
+      description: Distribution type
+      type: string
+      enum:
+      - This Community
+      - This Organization
+      - Connected Communities
+      - All Communities
+  SharingGroup:
+    id:
+      title: ID
+      description: ID
+      type: string
+    name:
+      title: Name
+      description: Name
+      type: string
+  Tag:
+    name:
+      title: Name
+      description: Name
+      type: string
+    id:
+      title: ID
+      description: ID
+      type: string
+    exportable:
+      title: Exportable
+      description: Exportable
+      type: boolean
+    colour:
+      title: Colour
+      description: Colour
+      type: string
+    hide_tag:
+      title: Hide Tag
+      description: Hide Tag
+      type: boolean
+  Event:
+    info:
+      title: Info
+      description: Info
+      type: string
+    orgc_id:
+      title: Org ID
+      description: Org ID
+      type: string
+    SharingGroup:
+      title: Sharing Group
+      description: Sharing group
+      type: SharingGroup
+    locked:
+      title: Locked
+      type: boolean
+    uuid:
+      title: UUID
+      type: string
+    sharing_group_id:
+      title: Sharing Group ID
+      type: string
+    timestamp:
+      title: Timestamp
+      type: string
+    disable_correlation:
+      title: Disable Correlation
+      type: boolean
+    attribute_count:
+      title: Attribute Count
+      type: string
+    org_id:
+      title: Org ID
+      type: string
+    analysis:
+      title: Analysis
+      type: string
+    Tag:
+      title: Tag
+      type: '[]Tag'
+    Orgc:
+      title: Orgc
+      type: SharingGroup
+    published:
+      title: Published
+      type: boolean
+    date:
+      title: Date
+      type: string
+    Org:
+      title: Org
+      type: SharingGroup
+    distribution:
+      title: Distribution
+      type: string
+    proposal_email_lock:
+      title: Proposal Email Lock
+      type: boolean
+    id:
+      title: ID
+      type: string
+    threat_level_id:
+      title: Threat Level ID
+      type: string
+    publish_timestamp:
+      title: Publish Timestamp
+      type: string
+  attribute:
+    id:
+      title: ID
+      type: string
+    event_id:
+      title: Event ID
+      type: string
+    category:
+      title: Category
+      type: string
+    type:
+      title: Type
+      type: string
+    value1:
+      title: Value1
+      type: string
+    value2:
+      title: Value2
+      type: string
+    to_ids:
+      title: To IDs
+      type: boolean
+    uuid:
+      title: UUID
+      type: string
+    timestamp:
+      title: TimeStamp
+      type: string
+    distribution:
+      title: Distribution
+      type: string
+    sharing_group_id:
+      title: Sharing Group ID
+      type: string
+    comment:
+      title: Comment
+      type: string
+    deleted:
+      title: Deleted
+      type: boolean
+    disable_correlation:
+      title: Disable Correlation
+      type: boolean
+    value:
+      title: Value
+      type: string
+  published:
+    name:
+      title: Name
+      type: string
+    message:
+      title: Message
+      type: string
+    url:
+      title: URL
+      type: string
+    id:
+      title: ID
+      type: string
+connection:
+  url:
+    title: URL
+    description: URL of the MISP server e.g. https://misp-2-4.example.com
+    type: string
+    required: true
+  automation_code:
+    title: Automation Code
+    description: API/Automation code of MISP server
+    type: credential_secret_key
+    required: true
+  ssl:
+    title: SSL
+    description: If true will use SSL for communication to MISP
+    type: boolean
+    required: true
+triggers:
+  search_for_tag:
+    title: Search For Tag
+    description: This trigger will search MISP for any events with a specified tag
+    input:
+      interval:
+        title: Interval
+        description: How frequently (in seconds) to trigger a search
+        type: integer
+        default: 60
+        required: true
+      tag:
+        title: Tag
+        description: The tag to search for
+        type: string
+        required: true
+      remove:
+        title: Remove
+        description: If true the tag will be removed
+        type: boolean
+        required: true
+    output:
+      events:
+        title: Events
+        description: A list of event_ids with the tag
+        type: '[]string'
+        required: true
+actions:
+  create_an_event:
+    title: Create Event
+    description: Create a MISP event
+    input:
+      distribution:
+        title: Distribution
+        description: Distribution type
+        type: string
+        enum:
+        - This Community
+        - This Organization
+        - Connected Communities
+        - All Communities
+        default: This Organization
+        required: false
+      threat_level_id:
+        title: Threat Level
+        description: Importance of the threat
+        type: string
+        enum:
+        - '4'
+        - '3'
+        - '2'
+        - '1'
+        required: true
+      analysis:
+        title: Analysis
+        description: The analysis level of the event
+        type: string
+        enum:
+        - '2'
+        - '1'
+        - '0'
+        required: false
+      info:
+        title: Info
+        description: Extra event information
+        type: string
+        required: true
+      published:
+        title: Published
+        description: Published event?
+        type: boolean
+        required: true
+      orgc_id:
+        title: Organization C ID
+        description: Organization C ID
+        type: string
+        required: false
+      org_id:
+        title: Organization ID
+        description: Organization ID
+        type: string
+        required: false
+      sharing_group_id:
+        title: Sharing Group ID
+        description: Sharing group ID
+        type: string
+        required: false
+    output:
+      orgc_id:
+        title: Organization C ID
+        description: Organization C ID
+        type: string
+        required: false
+      id:
+        title: ID
+        description: Event ID
+        type: string
+        required: false
+      threat_level_id:
+        title: Threat Level ID
+        description: Threat level ID
+        type: string
+        required: false
+      event_creator_email:
+        title: Email
+        description: Event creator's email
+        type: string
+        required: false
+      uuid:
+        title: UUID
+        description: Unique event ID
+        type: string
+        required: false
+      RelatedEvent:
+        title: Related Event
+        description: Related event
+        type: '[]object'
+        required: false
+      sharing_group_id:
+        title: Group ID
+        description: Sharing group ID
+        type: string
+        required: false
+      timestamp:
+        title: Timestamp
+        description: Timestamp
+        type: string
+        required: false
+      date:
+        title: Date
+        description: Date
+        type: date
+        required: false
+      disable_correlation:
+        title: Disable Correlation
+        description: Disable correlation
+        type: boolean
+        required: false
+      info:
+        title: Info
+        description: Info
+        type: string
+        required: false
+      locked:
+        title: Locked
+        description: Locked
+        type: boolean
+        required: false
+      publish_timestamp:
+        title: Publish Timestamp
+        description: Publish timestamp
+        type: string
+        required: false
+      Attribute:
+        title: Attribute
+        description: Attribute
+        type: '[]base_output'
+        required: false
+      attribute_count:
+        title: Attribute Count
+        description: Attribute count
+        type: string
+        required: false
+      org_id:
+        title: Organization ID
+        description: Organization ID
+        type: string
+        required: false
+      analysis:
+        title: Analysis
+        description: Analysis
+        type: string
+        required: false
+      published:
+        title: Published
+        description: Published
+        type: boolean
+        required: false
+      distribution:
+        title: Distribution
+        description: Distribution
+        type: string
+        required: false
+      proposal_email_lock:
+        title: Proposal Email Lock
+        description: Lock proposal email
+        type: boolean
+        required: false
+  add_attachment:
+    title: Add Attachment
+    description: Add attachment to event
+    input:
+      event:
+        title: Event ID
+        description: Event ID to append to
+        type: string
+        required: true
+      attachment:
+        title: Attachment
+        description: Attachment for event
+        type: bytes
+        required: true
+      filename:
+        title: Filename
+        description: Filename of attachment
+        type: string
+        required: false
+    output:
+      status:
+        title: Status
+        description: Status of add attachment
+        type: boolean
+        required: false
+  add_urls:
+    title: Add URLs
+    description: Add URLs to event
+    input:
+      event:
+        title: Event ID
+        description: Event ID to append to
+        type: string
+        required: false
+      urls:
+        title: URLs
+        description: URLs to add
+        type: '[]string'
+        required: false
+      comment:
+        title: Comment
+        description: Attribute comment
+        type: string
+        required: false
+      distribution:
+        title: Distribution
+        description: Distribution type
+        type: string
+        enum:
+        - This Community
+        - This Organization
+        - Connected Communities
+        - All Communities
+        required: false
+      proposal:
+        title: Proposal
+        description: 'Mark request as a proposal (Default: false)'
+        type: boolean
+        default: false
+        required: true
+    output:
+      status:
+        title: Status
+        description: URL add status
+        type: boolean
+        required: false
+  add_email_recipient:
+    title: Add Email Recipient
+    description: Add email recipient to event
+    input:
+      recipient:
+        title: Recipient
+        description: Recipient email address
+        type: string
+        required: true
+      event:
+        title: Event ID
+        description: Event ID to append to
+        type: string
+        required: true
+      comment:
+        title: Comment
+        description: Attribute comment
+        type: string
+        required: true
+      distribution:
+        title: Distribution
+        description: Distribution type
+        type: string
+        enum:
+        - This Community
+        - This Organization
+        - Connected Communities
+        - All Communities
+        required: true
+      proposal:
+        title: Proposal
+        description: 'Mark request as a proposal (Default: false)'
+        type: boolean
+        default: false
+        required: true
+    output:
+      status:
+        title: Status
+        description: Email recipient add status
+        type: boolean
+        required: true
+  add_email_sender:
+    title: Add Email Sender
+    description: Add email sender to event
+    input:
+      sender:
+        title: Sender
+        description: Sender email address
+        type: string
+        required: true
+      event:
+        title: Event ID
+        description: Event ID to append to
+        type: string
+        required: true
+      comment:
+        title: Comment
+        description: Attribute comment
+        type: string
+        required: true
+      distribution:
+        title: Distribution
+        description: Distribution type
+        type: string
+        enum:
+        - This Community
+        - This Organization
+        - Connected Communities
+        - All Communities
+        required: true
+      proposal:
+        title: Proposal
+        description: 'Mark request as a proposal (Default: false)'
+        type: boolean
+        default: false
+        required: true
+    output:
+      status:
+        title: Status
+        description: Email sender add status
+        type: boolean
+        required: true
+  add_email_subject:
+    title: Add Email Subject
+    description: Add email subject to event
+    input:
+      subject:
+        title: Subject
+        description: Email subject
+        type: string
+        required: true
+      event:
+        title: Event ID
+        description: Event ID to append to
+        type: string
+        required: true
+      comment:
+        title: Comment
+        description: Attribute comment
+        type: string
+        required: true
+      distribution:
+        title: Distribution
+        description: Distribution type
+        type: string
+        enum:
+        - This Community
+        - This Organization
+        - Connected Communities
+        - All Communities
+        required: true
+      proposal:
+        title: Proposal
+        description: 'Mark request as a proposal (Default: false)'
+        type: boolean
+        default: false
+        required: true
+    output:
+      status:
+        title: Status
+        description: Email subject add status
+        type: boolean
+        required: true
+  add_context:
+    title: Add Context
+    description: Add context
+    input:
+      comment:
+        title: Comment
+        description: Comment
+        type: comment_input
+        required: true
+      link:
+        title: Link
+        description: Link
+        type: link_input
+        required: true
+      other:
+        title: Other
+        description: Other
+        type: other_input
+        required: true
+      text:
+        title: Text
+        description: Text
+        type: text_input
+        required: true
+      proposal:
+        title: Proposal
+        description: 'Mark request as a proposal (Default: false)'
+        type: boolean
+        default: false
+        required: true
+    output:
+      status:
+        title: Status
+        description: Context add status
+        type: boolean
+        required: false
+  add_sightings:
+    title: Add Sightings
+    description: Add sightings to organization
+    input:
+      sightings:
+        title: Sightings
+        description: Event sightings
+        type: '[]string'
+        required: true
+    output:
+      status:
+        title: Status
+        description: Sightings add status
+        type: boolean
+        required: false
+  add_tag:
+    title: Add Tag
+    description: Add tag
+    input:
+      event:
+        title: Event ID
+        description: Event ID to append to
+        type: string
+        required: true
+      tag:
+        title: Tag
+        description: Event tag to add
+        type: string
+        required: true
+    output:
+      status:
+        title: Status
+        description: Tag add status
+        type: boolean
+        required: false
+  export_events:
+    title: Export Events
+    description: Export all events in XML format
+    input:
+      event_id:
+        title: Event ID
+        description: Specify single event to export
+        type: string
+        required: false
+      encode_attachments:
+        title: Encode Attachments
+        description: Encode attachments in export
+        type: boolean
+        default: true
+        required: true
+      tags:
+        title: Tags
+        description: Array of tags to include in results
+        type: '[]string'
+        required: false
+      from:
+        title: From Date
+        description: From date E.g. 2015-02-15
+        type: string
+        required: false
+      to:
+        title: To Date
+        description: To date E.g. 2015-02-17
+        type: string
+        required: false
+      last:
+        title: Last Events
+        description: Events within x amount of time E.g. 5d
+        type: string
+        required: false
+    output:
+      events:
+        title: Event Output
+        description: Event output
+        type: bytes
+        required: false
+  export_attributes:
+    title: Export Attributes
+    description: Export all attributes in CSV format
+    input:
+      event_id:
+        title: Event ID
+        description: Array of events to download
+        type: '[]string'
+        required: false
+      include:
+        title: Include
+        description: Include attributes not marked as to_ids
+        type: boolean
+        default: true
+        required: true
+      tags:
+        title: Tags
+        description: Array of tags to include in results
+        type: '[]string'
+        required: false
+      category:
+        title: Category
+        description: Attribute category
+        type: string
+        required: false
+      type:
+        title: Type
+        description: Attribute type
+        type: string
+        required: false
+      include_context:
+        title: Include Context
+        description: Include event data with each attribute
+        type: boolean
+        default: true
+        required: true
+      from:
+        title: From Date
+        description: From date E.g. 2015-02-15
+        type: string
+        required: false
+      to:
+        title: To Date
+        description: To date E.g. 2015-02-17
+        type: string
+        required: false
+      last:
+        title: Last Events
+        description: Events within x amount of time E.g. 5d
+        type: string
+        required: false
+    output:
+      attributes:
+        title: Attributes Output
+        description: Attributes output
+        type: bytes
+        required: false
+  export_rules:
+    title: Rules Export
+    description: Export Snort or Suricata rules
+    input:
+      format:
+        title: Export Format
+        description: Export format as either Suricata or Snort
+        type: string
+        required: true
+        enum:
+        - suricata
+        - snort
+      event_id:
+        title: Event ID
+        description: Narrow results to a single event
+        type: string
+        required: false
+      frame:
+        title: Commented Explination
+        description: Commented out expliantion framing the data
+        type: boolean
+        default: true
+        required: true
+      tags:
+        title: Tags
+        description: Array of tags to include in results
+        type: '[]string'
+        required: false
+      from:
+        title: From Date
+        description: From date E.g. 2015-02-15
+        type: string
+        required: false
+      to:
+        title: To Date
+        description: To date E.g. 2015-02-17
+        type: string
+        required: false
+      last:
+        title: Last Events
+        description: Events within x amount of time E.g. 5d
+        type: string
+        required: false
+    output:
+      rules:
+        title: Rules Output
+        description: Rules output
+        type: bytes
+        required: false
+  export_hashes:
+    title: Export Hashes
+    description: Export hashes from HIDS database
+    input:
+      format:
+        title: Export Format
+        description: Export format as either md5 or sha1
+        type: string
+        required: true
+        enum:
+        - md5
+        - sha1
+      tags:
+        title: Tags
+        description: Array of tags to include in results
+        type: '[]string'
+        required: false
+      from:
+        title: From Date
+        description: From date E.g. 2015-02-15
+        type: string
+        required: false
+      to:
+        title: To Date
+        description: To date E.g. 2015-02-17
+        type: string
+        required: false
+      last:
+        title: Last Events
+        description: Events within x amount of time E.g. 5d
+        type: string
+        required: false
+    output:
+      hashes:
+        title: Hashes
+        description: Hashes
+        type: bytes
+        required: false
+  export_stix:
+    title: Export STIX
+    description: Export events in STIX format
+    input:
+      event_id:
+        title: Event ID
+        description: Specify single event to export
+        type: string
+        required: false
+      encode_attachments:
+        title: Encode Attachments
+        description: Encode attachments in export
+        type: boolean
+        default: true
+        required: true
+      tags:
+        title: Tags
+        description: Array of tags to include in results
+        type: '[]string'
+        required: false
+      from:
+        title: From Date
+        description: From date E.g. 2015-02-15
+        type: string
+        required: false
+      to:
+        title: To Date
+        description: To date E.g. 2015-02-17
+        type: string
+        required: false
+      last:
+        title: Last Events
+        description: Events within x amount of time E.g. 5d
+        type: string
+        required: false
+    output:
+      stix:
+        title: STIX Output
+        description: STIX output
+        type: bytes
+        required: false
+  export_rpz:
+    title: Export RPZ
+    description: Export RPZ zone files
+    input:
+      event_id:
+        title: Event ID
+        description: Specify single event to export
+        type: string
+        required: false
+      tags:
+        title: Tags
+        description: Array of tags to include in results
+        type: '[]string'
+        required: false
+      from:
+        title: From Date
+        description: From date E.g. 2015-02-15
+        type: string
+        required: false
+      to:
+        title: To Date
+        description: To date E.g. 2015-02-17
+        type: string
+        required: false
+    output:
+      rpz:
+        title: RPZ Output
+        description: RPZ output
+        type: bytes
+        required: false
+  download_attachment:
+    title: Download Attachment
+    description: Download attachment
+    input:
+      attribute_id:
+        title: Attribute ID
+        description: Attribute ID of attachment or malware sample
+        type: string
+        required: true
+    output:
+      attachment:
+        title: Attachment
+        description: Attachment
+        type: bytes
+        required: false
+  find_event:
+    title: Find Event
+    description: Receive events based on criteria
+    input:
+      event_id:
+        title: Event ID
+        description: Event ID e.g. 123
+        type: string
+        required: true
+    output:
+      event:
+        title: Event
+        description: Event
+        type: Event"
+        required: false
+      message:
+        title: Message
+        description: Message
+        type: string
+        required: false
+      errors:
+        title: Errors
+        description: Errors
+        type: '[]string'
+        required: false
+  remove_tag:
+    title: Remove Tag
+    description: Remove tag
+    input:
+      event:
+        title: Event ID
+        description: Event ID to append to
+        type: string
+        required: true
+      tag:
+        title: Tag
+        description: Event tag for search
+        type: string
+        required: true
+    output:
+      status:
+        title: Status
+        description: Tag add status
+        type: boolean
+        required: false
+  add_attribute:
+    title: Add Attribute
+    description: Add an attribute to an event
+    input:
+      event:
+        title: Event ID
+        description: ID of event to append to
+        type: string
+        required: true
+      type_value:
+        title: Type Value
+        description: The Type of attribute e.g. URL, SHA256
+        type: string
+        required: true
+      category:
+        title: Category
+        description: The attribute category e.g. external analysis, network activity
+        type: string
+        required: true
+      value:
+        title: Value
+        description: The Value of the attribute e.g. for a URL https://malware.com
+        type: string
+        required: true
+      comment:
+        title: Comment
+        description: Optional comment to add to attribute
+        type: string
+        required: false
+    output:
+      attribute:
+        title: Attribute
+        description: A summary of the added attribute
+        type: attribute
+        required: false
+  search_events:
+    title: Search Events
+    description: Search for events
+    input:
+      event:
+        title: Event
+        description: Search by event ID
+        type: string
+        required: false
+      tag:
+        title: Tag
+        description: Search by tag
+        type: string
+        required: false
+      date_from:
+        title: Date
+        description: Search after this date e.g. 2018-03-22
+        type: string
+        required: false
+      date_until:
+        title: Date Until
+        description: Search before this date e.g. 2018-03-22
+        type: string
+        required: false
+      threat_level:
+        title: Threat Level
+        description: Search by threat level
+        type: string
+        required: false
+        enum:
+        - Don't search on
+        - Undefined
+        - Low
+        - Medium
+        - High
+      published:
+        title: Published
+        description: Search by if published
+        type: string
+        required: false
+        enum:
+        - Don't search on
+        - 'True'
+        - 'False'
+      organization:
+        title: Organization
+        description: Search by organization
+        type: string
+        required: false
+      analysis:
+        title: Analysis
+        description: Search by analysis level
+        type: string
+        required: false
+        enum:
+        - Don't search on
+        - Initial
+        - Ongoing
+        - Completed
+    output:
+      event_list:
+        title: Event List
+        description: A list of event IDs that match the search
+        type: '[]string'
+        required: false
+  publish:
+    title: Publish
+    description: Publish an event
+    input:
+      event:
+        title: Event
+        description: Search by event ID
+        type: string
+        required: false
+    output:
+      published:
+        title: Published
+        description: Info on published event
+        type: published
+        required: false

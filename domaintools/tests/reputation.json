@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "reputation",
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "username": ""
+    },
+    "meta": {},
+    "input": {
+      "domain": "google.com",
+      "include_reasons": false
+    }
+  },
+  "version": "v1",
+  "type": "action_start"
+}

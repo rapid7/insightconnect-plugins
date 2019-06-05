@@ -1,0 +1,17 @@
+{
+  "body": {
+    "meta": {},
+    "input": {
+    },
+    "action": "retrieve_virtual_service",
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

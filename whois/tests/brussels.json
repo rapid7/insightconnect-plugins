@@ -1,0 +1,12 @@
+{
+  "body": {
+    "meta": {},
+    "input": {
+      "domain": "comedien.brussels"
+    },
+    "action": "domain",
+    "connection": null
+  },
+  "version": "v1",
+  "type": "action_start"
+}

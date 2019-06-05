@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "update_user_role",
+    "meta": {},
+    "input": {
+      "user_id": 33,
+      "role_id": "global-admin",
+      "access_all_asset_groups": false,
+      "access_all_sites": true
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

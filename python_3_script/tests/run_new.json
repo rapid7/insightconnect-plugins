@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "run",
+    "meta": {},
+    "input": {
+      "function": "def run(params={}):\n return { 'result1': 'foo', 'result2': 'bar' }",
+      "input": {}
+    },
+    "connection": {
+      "modules": ["maya", "pyyaml", "records"],
+      "timeout": 60
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

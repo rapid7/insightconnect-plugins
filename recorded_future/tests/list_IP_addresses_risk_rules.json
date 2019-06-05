@@ -1,0 +1,12 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "input": {},
+    "connection": {
+      "api_key": ""
+    },
+    "action": "list_IP_addresses_risk_rules",
+    "meta": {}
+  }
+}

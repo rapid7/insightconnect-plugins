@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "connection": {
+      "host": "",
+      "api_key": {
+        "secretKey": ""
+      },
+      "verify": true,
+      "proxy": {},
+      "protocol": "HTTP",
+      "port": "9001"
+    },
+    "input": {
+      "job_id": "AWeaFlnYkDwhOfz60XIl"
+    },
+    "action": "get_job_report"
+  },
+  "type": "action_start"
+}

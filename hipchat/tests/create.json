@@ -1,0 +1,27 @@
+{
+  "body": {
+    "action": "create",
+    "input": {
+      "name": "",
+      "roles": [],
+      "title": "",
+      "mention_name": "tien11",
+      "is_group_admin": false,
+      "timezone": "UTC",
+      "password": "",
+      "email": ""
+    },
+    "connection": {
+      "host": "https://hipchat.com/",
+      "version": "v2",
+      "user": "",
+      "credentials": {
+        "username": "",
+        "password": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "process_string",
+    "input": {
+      "text": "hello,world,Im,awake",
+      "expression": "-F , '{print $2}'"
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

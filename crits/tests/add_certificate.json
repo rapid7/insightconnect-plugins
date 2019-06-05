@@ -1,0 +1,27 @@
+{
+  "body": {
+    "input": {
+      "file": {
+        "content": "",
+        "filename": ""
+      },
+        "params": {
+            "bucket_list": "Fake Malware DB",
+            "description": "Consectetur soluta deserunt at exercitationem beatae"
+        },
+      "source": "Faker Vault"
+    },
+    "action": "add_certificate",
+    "connection": {
+      "url": "",
+      "ssl_verify": false,
+      "username": "nonroot",
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

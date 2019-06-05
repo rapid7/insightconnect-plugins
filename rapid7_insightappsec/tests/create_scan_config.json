@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "create_scan_config",
+    "meta": {},
+    "input": {
+      "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda",
+      "attack_template_id": "11111111-0000-0000-0000-000000000000",
+      "config_description": "test create",
+      "config_name": "Test_create_action"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://us.api.insight.rapid7.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

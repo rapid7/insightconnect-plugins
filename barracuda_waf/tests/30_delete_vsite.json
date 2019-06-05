@@ -1,0 +1,18 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "input": {
+      "id": "test-v14-virtual-service"
+    },
+    "action": "delete_vsite"
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "retrieve_snapshot",
+        "connection": {
+            "token":{
+                "secretKey": ""
+            }
+        },
+        "input": {
+            "snapshot_id": "22870652"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

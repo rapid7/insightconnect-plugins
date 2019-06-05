@@ -1,0 +1,75 @@
+plugin_spec_version: v2
+name: openphish
+title: "OpenPhish"
+description: "OpenPhish uses proprietary Artificial Intelligence algorithms to automatically identify zero-day phishing sites and provide comprehensive, actionable, real-time threat intelligence"
+version: 1.0.0
+vendor: rapid7
+tags: [ "data enrichment", "threat intelligence"]
+status: [ "unsupported" ]
+enable_cache: true
+
+types:
+  URLReputation:
+    found:
+      title: "URL Found?"
+      description: "Was URL found in feed?"
+      type: boolean
+      required: false
+    matches:
+      title: "Matches Per URL"
+      description: "Object of URL matches found along with count"
+      type: "object"
+      required: false
+    total_matches:
+      title: "Total Matches"
+      description: "Total URL matches found"
+      type: integer
+      required: false
+
+connection:
+  url:
+    title: "Feed URL"
+    type: string
+    default: "https://openphish.com/feed.txt"
+    description: "URL for OpenPhish feed file"
+    required: true
+
+triggers:
+  save_feed_file:
+    title: "Fetch Feed"
+    description: "Fetch and store the the feed file locally"
+    input:
+      interval:
+        title: "Interval"
+        description: "How often (in seconds) to trigger feed download"
+        type: integer
+        default: 3600
+        required: true
+    output:
+      statusCode:
+        type: integer
+        title: "HTTP status code"
+        description: "HTTP status code"
+        required: true
+      encodedFeedFile:
+        type: bytes
+        title: "Encoded feed file"
+        description: "Base64 encoded feed file"
+        required: true
+
+actions:
+  check_url_reputation:
+    title: "Check URL Reputation"
+    description: "Check URL reputation"
+    input:
+      url:
+        title: "URL"
+        type: string
+        description: "URL to check"
+        required: true
+    output:
+      URLReputation:
+        title: "URL Reputation"
+        description: "Object with total matches, match for every URL cached, and if the current supplied URL is found in feed file"
+        type: URLReputation
+        required: true

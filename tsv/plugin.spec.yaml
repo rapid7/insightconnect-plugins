@@ -1,0 +1,49 @@
+plugin_spec_version: v2
+name: tsv
+title: TSV
+description: Tab Separated Values
+version: 1.0.0
+vendor: rapid7
+tags:
+- tsv
+- utilities
+actions:
+  filter_string:
+    title: Filter String
+    description: Keep fields from TSV string
+    input:
+      fields:
+        title: Fields
+        type: string
+        description: Fields to filter E.g. f1, f2, f3-f6
+        required: false
+      tsv:
+        title: TSV String
+        type: string
+        description: TSV string
+        required: false
+    output:
+      filtered:
+        title: Filtered TSV String
+        type: bytes
+        description: Filtered TSV string
+        required: false
+  filter_bytes:
+    description: Keep fields from base64 TSV file
+    input:
+      fields:
+        title: Bytes
+        type: bytes
+        description: Fields to filter E.g. f1, f2, f3-f6
+        required: false
+      tsv:
+        title: TSV File
+        type: string
+        description: Base64 encoded TSV file
+        required: false
+    output:
+      filtered:
+        title: Filtered
+        type: bytes
+        description: Filtered TSV file
+        required: false

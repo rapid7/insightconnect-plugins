@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "filter_bytes",
+    "input": {
+      "tsv": "",
+      "fields": ""
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

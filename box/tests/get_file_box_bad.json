@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_file",
+        "input": {
+            "file_name": "TheFileDoesNotExist.NA"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

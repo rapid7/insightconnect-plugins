@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "search_documents",
+    "meta": {},
+    "input": {
+      "_index": "",
+      "_type": "",
+      "query": {},
+      "routing": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "t",
+        "username": "tt"
+      },
+      "url": "",
+      "use_authentication": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

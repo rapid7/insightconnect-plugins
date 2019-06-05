@@ -1,0 +1,24 @@
+{
+  "body": {
+    "action": "search_indicators",
+    "input": {
+      "indicator": {
+        "value": "a string value"
+      }
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "host": "",
+      "proxy": "",
+      "client_id": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

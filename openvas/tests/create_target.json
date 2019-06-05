@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "create_target",
+    "input": {
+      "port_list_id": "",
+      "host_list": ["192.168.0.101", "192.168.0.102,192.168.6.1-8", "192.168.1.101,192.168.1.103,192.168.1.105","192.168.1.0/24","192.168.3.105-112"],
+      "name": "TESTing create_target"
+    },
+    "connection": {
+      "ssl_verify": false,
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "timeout": 10,
+      "server": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

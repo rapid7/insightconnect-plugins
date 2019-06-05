@@ -1,0 +1,23 @@
+{
+  "body": {
+    "input": {
+      "why": "SSH Bruteforce",
+      "source": "malhosts",
+      "duration": "300",
+      "skip_whitelist": false,
+      "cidr": "1.2.3.4",
+      "autoscale": false
+    },
+    "meta": {},
+    "action": "block",
+    "connection": {
+      "ssl_verify": false,
+      "url": "http://192.168.0.15:8000",
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

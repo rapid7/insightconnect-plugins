@@ -1,0 +1,24 @@
+[rpmfusion-nonfree-updates]
+name=RPM Fusion for EL 6 - Nonfree - Updates
+#baseurl=http://download1.rpmfusion.org/nonfree/el/updates/6/$arch/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-el-updates-released-6&arch=$arch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-el-6
+
+[rpmfusion-nonfree-updates-debuginfo]
+name=RPM Fusion for EL 6 - Nonfree - Updates Debug
+#baseurl=http://download1.rpmfusion.org/nonfree/el/updates/6/$arch/debug/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-el-updates-released-debug-6&arch=$arch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-el-6
+
+[rpmfusion-nonfree-updates-source]
+name=RPM Fusion for EL 6 - Nonfree - Updates Source
+#baseurl=http://download1.rpmfusion.org/nonfree/el/updates/6/SRPMS/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-el-updates-released-source-6&arch=$arch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-el-6
+

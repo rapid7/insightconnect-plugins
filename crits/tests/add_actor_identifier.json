@@ -1,0 +1,22 @@
+{
+  "body": {
+    "meta": {},
+    "connection": {
+      "url": "",
+      "ssl_verify": false,
+      "username": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "input": {
+      "id_type": "Malware",
+      "params": {},
+      "id": "Foo Bar",
+      "source": "Faker Vault"
+    },
+    "action": "add_actor_identifier"
+  },
+  "type": "action_start",
+  "version": "v1"
+}

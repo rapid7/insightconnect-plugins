@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "report_ip",
+    "meta": {},
+    "input": {
+      "address": "1.",
+      "categories": "10,12",
+      "comment": "Testing"
+    },
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

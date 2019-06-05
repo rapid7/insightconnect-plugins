@@ -1,0 +1,180 @@
+plugin_spec_version: v2
+name: abuseipdb
+title: AbuseIPDB
+description: AbuseIPDB is a free service which allows you to look up IP reports, or
+  report an abusive IP
+version: 3.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- ip
+- intelligence
+- abuse
+enable_cache: false
+types:
+  ip:
+    category:
+      type: '[]integer'
+    created:
+      type: string
+    ip:
+      title: IP
+      type: string
+    isWhitelisted:
+      title: Is Whitelisted
+      type: boolean
+    country:
+      type: string
+    isoCode:
+      title: ISO Code
+      type: string
+    comment:
+      type: string
+    userId:
+      title: User ID
+      description: Reporter's user id number (0 if reported anonymously)
+      type: integer
+  reportedIPs:
+    CountryCode:
+      title: Country Code
+      type: string
+    IP:
+      title: IP
+      type: string
+    IsWhitelisted:
+      title: Is Whitelisted
+      type: integer
+    MostRecentReport:
+      title: Most Recent Report
+      type: string
+    NumReports:
+      title: Number of Reports
+      type: integer
+    Public:
+      type: integer
+    abuseConfidenceScore:
+      title: Abuse Confidence Score
+      type: integer
+connection:
+  credentials:
+    title: API Key
+    description: API key
+    type: credential_secret_key
+    required: true
+actions:
+  check_ip:
+    title: Check IP
+    description: Look up an IP address in the database
+    input:
+      address:
+        title: IP Address
+        description: IPv4 or IPv6 address e.g. 8.8.8.8, ::1
+        type: string
+        required: true
+      days:
+        title: Days
+        description: Check for IP reports in the last x days
+        type: string
+        default: '30'
+        required: true
+      verbose:
+        title: Verbose
+        description: When set, reports will include the comment (if any) and the reporter's
+          user id number (0 if reported anonymously)
+        type: boolean
+        default: true
+        required: true
+    output:
+      list:
+        title: Reports
+        description: List of IP reports
+        type: '[]ip'
+        required: false
+      found:
+        title: Found
+        description: Whether an IP address was found in the database
+        type: boolean
+        required: true
+  check_cidr:
+    title: Check CIDR
+    description: Look up a CIDR address in the database
+    input:
+      cidr:
+        title: CIDR
+        description: IPv4 address block in CIDR notation e.g. 207.126.144.0/20
+        type: string
+        required: true
+      days:
+        title: Days
+        description: Check for CIDR reports in the last x days
+        type: string
+        default: '30'
+        required: true
+    output:
+      networkAddress:
+        title: Network Address
+        description: Network address
+        type: string
+        required: false
+      maxAddress:
+        title: Maximum Address
+        description: Maximum address
+        type: string
+        required: false
+      addressSpaceDesc:
+        title: Address Space Description
+        description: Address space description
+        type: string
+        required: false
+      minAddress:
+        title: Minimum Address
+        description: Minimum address
+        type: string
+        required: false
+      netmask:
+        title: Netmask
+        description: Netmask
+        type: string
+        required: false
+      numPossibleHosts:
+        title: Number of Hosts
+        description: Number of possible hosts
+        type: integer
+        required: false
+      reportedIPs:
+        title: Reported IPs
+        description: List of reported IPs
+        type: '[]reportedIPs'
+        required: false
+  report_ip:
+    title: Report IP
+    description: Report an abusive IP address
+    input:
+      address:
+        title: IP Address
+        description: IPv4 or IPv6 address to report e.g. 8.8.8.8, ::1
+        type: string
+        required: true
+      categories:
+        title: Categories
+        description: Comma delineated list of category IDs e.g. 10,12,15. Entire list
+          is available at https://www.abuseipdb.com/categories
+        type: string
+        required: true
+      comment:
+        title: Comment
+        description: Describe the type of malicious activity e.g. Brute forcing Wordpress
+          login
+        type: string
+        required: false
+    output:
+      ip:
+        title: Comment
+        description: IP address submitted
+        type: string
+        required: false
+      success:
+        title: Success
+        description: Submission success
+        type: boolean
+        required: false

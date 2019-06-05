@@ -1,0 +1,20 @@
+{
+  "version": "v1",
+  "body": {
+    "input": {
+      "platform": "Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007",
+      "hash": "2f92703138e8be9666b4f3efa2058e60"
+    },
+    "action": "get_pcap",
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "host": "wildfire.paloaltonetworks.com",
+      "proxy": {},
+      "verify": true
+    },
+    "meta": {}
+  },
+  "type": "action_start"
+}

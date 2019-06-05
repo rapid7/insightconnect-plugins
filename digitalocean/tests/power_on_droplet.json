@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "power_on_droplet",
+        "connection": {
+            "token":{
+                "secretKey": ""
+            }
+        },
+        "input": {
+            "droplet_id": "37374013"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

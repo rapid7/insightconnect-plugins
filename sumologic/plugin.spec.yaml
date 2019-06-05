@@ -1,0 +1,105 @@
+plugin_spec_version: v2
+name: sumologic
+title: Sumo Logic
+description: Sumo Logic
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- sumo logic
+- search
+types:
+  field:
+    fieldType:
+      title: Field Type
+      type: string
+      description: Field Type
+      required: false
+    title:
+      title: Name
+      type: string
+      description: Field Name
+      required: false
+    keyField:
+      title: Key Field
+      type: boolean
+      description: True if key field
+      required: false
+connection:
+  access_id:
+    title: Access ID
+    description: Access ID
+    type: credential_secret_key
+    required: true
+  access_key:
+    title: Access Key
+    description: Access key
+    type: credential_secret_key
+    required: true
+actions:
+  search:
+    title: Search
+    description: Run a search
+    input:
+      query:
+        title: Query
+        type: string
+        description: Query
+        required: true
+      from_time:
+        title: From Time
+        type: string
+        description: 'From time. Must be either ISO 8601 datetimes, or epoch milliseconds.
+          If not: searches 24 hours back by default'
+        required: false
+      to_time:
+        title: To Time
+        type: string
+        description: To time. Must be either ISO 8601 datetimes, or epoch milliseconds.
+          If not provided, default is now
+        required: false
+      timezone:
+        title: Time Zone
+        type: string
+        default: UTC
+        description: Timezone (Default is UTC)
+        required: false
+      page_limit:
+        title: Page Limit
+        type: integer
+        default: 100
+        description: Number of messages to return per page
+        required: false
+      page_offset:
+        title: Page Offset
+        type: integer
+        default: 0
+        description: Page offset for search
+        required: false
+      timeout:
+        title: Timeout
+        type: integer
+        default: 60
+        description: Timeout in seconds
+        required: false
+    output:
+      messages:
+        title: Messages
+        type: '[]object'
+        description: Messages returned
+        required: false
+      fields:
+        title: Fields
+        type: '[]field'
+        description: Fields returned
+        required: false
+      total_count:
+        title: Total Count
+        type: integer
+        description: Total count of messages matched
+        required: false
+      page_count:
+        title: Page Count
+        type: integer
+        description: Number of pages
+        required: false

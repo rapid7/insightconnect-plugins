@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "filter_bytes",
+    "input": {
+      "fields": "f1-f3",
+      "csv": "YSxiLGMsZCxlCmYsZyxoLGksagprLGwsbSxuLG8="
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "permit_or_block_sender",
+    "meta": {},
+    "input": {
+      "action": "block",
+      "sender": "test@example.com",
+      "to": ""
+    },
+    "connection": {
+      "app_id": "",
+      "app_key": {
+        "secretKey": ""
+      },
+      "auth_type": "Basic-Cloud",
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://sandbox-api.mimecast.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "graphite_port": 443,
+      "graphite_url": "",
+      "ssl_verify": false
+    },
+    "input": {},
+    "meta": {},
+    "action": "metrics_index"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "input": {
+      "hostname": "example.com"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://api.mxtoolbox.com/api/v1/"
+    },
+    "action": "soa",
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

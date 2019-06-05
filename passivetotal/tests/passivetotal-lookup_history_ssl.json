@@ -1,0 +1,17 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "action": "history_ssl",
+    "meta": {},
+    "input": {
+      "query": "52.8.228.23"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "username": ""
+    }
+  }
+}

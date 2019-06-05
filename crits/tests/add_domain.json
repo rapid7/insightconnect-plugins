@@ -1,0 +1,25 @@
+{
+  "body": {
+    "input": {
+      "source": "Faker Vault",
+      "domain": "harmon-dunlap.net",
+        "params": {
+            "campaign": "NetTraveler",
+            "bucket_list": "Fake Malware DB",
+            "add_indicator": true
+        }
+    },
+    "meta": {},
+    "connection": {
+      "url": "",
+      "ssl_verify": false,
+      "username": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "add_domain"
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "ticket_history_entry",
+    "meta": {},
+    "input": {
+      "history_id": 1,
+      "ticket_id": 3
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

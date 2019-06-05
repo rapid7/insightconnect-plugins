@@ -1,0 +1,29 @@
+{
+  "body": {
+    "action": "create_schedule",
+    "input": {
+      "duration":3,
+      "first_time": {
+        "hour": 23,
+        "month": 1,
+        "day": 28,
+        "minute": 20,
+        "year": 2017 
+      },
+      "name": "testing schedule3",
+      "period":2
+    },
+    "connection": {
+      "ssl_verify": false,
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "timeout": 10,
+      "server": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

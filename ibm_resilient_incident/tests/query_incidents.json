@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "query_incidents",
+        "connection": {
+            "email": "",
+            "hostname": "",
+            "password": ""
+        },
+        "input": {
+            "organization_id": 201,
+            "query": {}
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

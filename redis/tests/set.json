@@ -1,0 +1,18 @@
+{
+  "body": {
+    "input": {
+      "expire": 0,
+      "value": "bar",
+      "key": "foo"
+    },
+    "action": "set",
+    "meta": {},
+    "connection": {
+      "port": 6379,
+      "db": 0,
+      "host": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

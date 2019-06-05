@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "vm_in_subscription",
+    "input": {
+      "subscriptionId": ""
+    },
+    "connection": {
+      "client_secret": {
+        "privateKey": ""
+      },
+      "host": "https://management.azure.com",
+      "client_id": "",
+      "api_version": "2016-04-30-preview",
+      "tenant_id": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "delete_user",
+    "meta": {},
+    "input": {
+      "reassignee": "",
+      "username": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,27 @@
+{
+  "body": {
+    "trigger": "alert",
+    "meta": {},
+    "input": {
+      "interval": 15,
+      "names": []
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "license": "Enterprise",
+      "port": 8089,
+      "ssl_verify": false,
+      "use_ssl": false
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

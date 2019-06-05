@@ -1,0 +1,32 @@
+plugin_spec_version: v2
+name: tr
+title: Translate
+description: Translate or replace characters from text using the tr command line utility
+version: 2.0.1
+vendor: rapid7
+tags:
+- tr
+- translate
+- text
+- utilities
+actions:
+  replace:
+    title: Replace
+    description: Run a translate expression on a string input
+    input:
+      text:
+        type: string
+        title: Text
+        description: Text to process
+        required: true
+      expression:
+        type: string
+        title: Expression
+        description: Correct tr expression (e.g. -s [:space:] ' ')
+        required: true
+    output:
+      result:
+        type: string
+        title: Result
+        description: Processed text
+        required: true

@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "action": "forward_message",
+    "connection": {
+      "port": 514,
+      "transport": "UDP",
+      "host": "thisnamewillnotresolve.asdf"
+    },
+    "input": {
+      "msg": "Incoming UDP Message",
+      "facility": "LOCAL0",
+      "level": "DEBUG",
+      "proc": "test_workflow",
+      "host": "komand.local",
+      "msgid": "ACTION"
+    }
+  },
+  "type": "action_start"
+}

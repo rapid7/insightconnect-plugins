@@ -1,0 +1,28 @@
+{
+  "body": {
+    "input": {
+      "billing_country": "",
+      "billing_first_name": "",
+      "billing_address_2": "",
+      "billing_address": "",
+      "billing_last_name": "",
+      "billing_phone_country_code": "",
+      "address": "8.8.8.8",
+      "billing_city": "",
+      "billing_company": "",
+      "billing_phone_number": "",
+      "billing_postal": "",
+      "billing_region": ""
+    },
+    "meta": {},
+    "connection": {
+      "license": {
+        "secretKey": ""
+      },
+      "user": 118625
+    },
+    "action": "billing_lookup"
+  },
+  "type": "action_start",
+  "version": "v1"
+}

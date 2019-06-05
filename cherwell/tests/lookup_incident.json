@@ -1,0 +1,24 @@
+{
+  "body": {
+    "action": "lookup_incident",
+    "meta": {},
+    "input": {
+      "business_object_id": "",
+      "public_id": ""
+    },
+    "connection": {
+      "authentication_mode": "Internal",
+      "client_id": {
+        "secretKey": ""
+      },
+      "ssl_verify": true,
+      "url": "",
+      "username_and_password": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

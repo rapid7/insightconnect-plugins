@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "delete_scan_engine_pool",
+    "meta": {},
+    "input": {
+      "id": 13
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

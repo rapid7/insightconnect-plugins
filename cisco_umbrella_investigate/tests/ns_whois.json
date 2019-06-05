@@ -1,0 +1,16 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "ns_whois",
+    "input": {
+      "nameserver": "ns2.google.com"
+    }
+  },
+  "version": "v1"
+}

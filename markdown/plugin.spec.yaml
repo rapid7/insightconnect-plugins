@@ -1,0 +1,88 @@
+plugin_spec_version: v2
+name: markdown
+title: Markdown
+description: Convert markdown to and from various popular formats
+version: 2.2.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- markdown
+- html
+- pdf
+- utilities
+actions:
+  html_to_markdown:
+    title: HTML to Markdown
+    description: Convert HTML to Markdown
+    input:
+      html:
+        title: HTML
+        description: HTML data as bytes
+        type: bytes
+        required: false
+      html_string:
+        title: HTML String
+        description: HTML data as string
+        type: string
+        required: false
+    output:
+      markdown:
+        title: Markdown
+        description: Markdown data as bytes
+        type: bytes
+        required: false
+      markdown_string:
+        title: Markdown
+        description: Markdown data as string
+        type: bytes
+        required: false
+  markdown_to_html:
+    title: Markdown to HTML
+    description: Convert Markdown to HTML
+    input:
+      markdown:
+        title: Markdown
+        description: Markdown data as bytes
+        type: string
+        required: false
+      markdown_string:
+        title: Markdown
+        description: Markdown data as string
+        type: bytes
+        required: false
+    output:
+      html:
+        title: HTML
+        description: HTML data as bytes
+        type: bytes
+        required: false
+      html_string:
+        title: HTML
+        description: HTML data
+        type: string
+        required: false
+  markdown_to_pdf:
+    title: Markdown to PDF
+    description: Convert Markdown to PDF
+    input:
+      markdown:
+        title: Markdown
+        description: Markdown data as bytes
+        type: bytes
+        required: false
+      markdown_string:
+        title: Markdown
+        description: Markdown data as string
+        type: string
+        required: false
+    output:
+      pdf:
+        title: PDF
+        description: PDF data as bytes
+        type: bytes
+        required: false
+      pdf_string:
+        title: PDF
+        description: PDF data as string
+        type: string
+        required: false

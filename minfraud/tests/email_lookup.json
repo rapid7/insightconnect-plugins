@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "email_lookup",
+    "meta": {},
+    "connection": {
+      "license": {
+        "secretKey": ""
+      },
+      "user": 118625
+    },
+    "input": {
+      "address": "8.8.8.8",
+      "domain": "maxmind.com",
+      "email": "977577b140bfb7c516e4746204fbdb01"
+    }
+  },
+  "version": "v1",
+  "type": "action_start"
+}

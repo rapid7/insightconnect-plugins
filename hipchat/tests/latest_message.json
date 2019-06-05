@@ -1,0 +1,28 @@
+{
+  "body": {
+    "input": {
+      "max-results": 1,
+      "timezone": "UTC",
+      "include_deleted": true,
+      "room_id_or_name": "blaroom",
+      "not-before": "",
+      "interval": 10
+    },
+    "connection": {
+      "host": "https://hipchat.com/",
+      "version": "v2",
+      "credentials": {
+        "username": "",
+        "password": ""
+      }
+    },
+    "trigger": "latest_message",
+    "meta": {},
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    }
+  },
+  "version": "v1",
+  "type": "trigger_start"
+}

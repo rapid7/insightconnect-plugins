@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "info",
+    "meta": {},
+    "input": {
+      "release": "",
+      "version": "",
+      "arch": "x86_64",
+      "epoch": "",
+      "repo": "",
+      "name": "flute",
+      "key": "",
+      "distro": "Fedora 24"
+    },
+    "connection": {
+      "server": "",
+      "user": "",
+      "password": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

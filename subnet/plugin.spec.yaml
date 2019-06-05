@@ -1,0 +1,73 @@
+plugin_spec_version: v2
+name: subnet
+title: Subnet
+description: Return Useful Subnet Information
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- subnet
+- ip
+- netmask
+- network
+- utilities
+actions:
+  calculate:
+    title: Calculate
+    description: Returns Subnet Information for IP and Netmask
+    input:
+      cidr:
+        title: Network
+        description: Network in CIDR Notation, E.g. 192.168.1.1/24
+        type: string
+        required: true
+    output:
+      ip:
+        title: IP Address
+        description: IP address
+        type: string
+        required: false
+      netmask:
+        title: Subnet Mask
+        description: Subnet mask
+        type: string
+        required: false
+      wildcard:
+        title: Wildcard Mask
+        description: Wildcard mask
+        type: string
+        required: false
+      cidr:
+        title: CIDR Notation
+        description: CIDR notation
+        type: string
+        required: false
+      binary_netmask:
+        description: Binary netmask
+        type: string
+        required: false
+      ip_class:
+        description: IP Class
+        type: string
+        required: false
+      subnets:
+        description: Number of subnetworks
+        type: integer
+        required: false
+      hosts:
+        description: Hosts per subnetwork
+        type: integer
+        required: false
+      subnet_id:
+        title: Subnet ID
+        description: Subnet ID
+        type: string
+        required: false
+      host_range:
+        description: Host address range
+        type: string
+        required: false
+      broadcast:
+        description: Broadcast address
+        type: string
+        required: false

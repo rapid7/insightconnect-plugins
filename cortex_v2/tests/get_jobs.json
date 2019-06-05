@@ -1,0 +1,25 @@
+{
+  "body": {
+    "input": {
+      "dataFilter": "",
+      "dataTypeFilter": "",
+      "start": 0,
+      "limit": 0,
+      "analyzerFilter": ""
+    },
+    "action": "get_jobs",
+    "connection": {
+      "host": "",
+      "api_key": {
+        "secretKey": ""
+      },
+      "verify": true,
+      "proxy": {},
+      "protocol": "HTTP",
+      "port": "9001"
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

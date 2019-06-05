@@ -1,0 +1,24 @@
+{
+  "body": {
+    "trigger": "get_alert_matching_key",
+    "meta": {},
+    "input": {
+      "key": "DeviceID",
+      "value": "c6944fa14970633adeecbabc104167ef12557a6f"
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "auth_url": "",
+      "client_id": "",
+      "client_secret": "",
+      "host": "https://wdatp-alertexporter-us.securitycenter.windows.com",
+      "seconds_ago": 10512000,
+      "resource_url": "https://graph.windows.net"
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

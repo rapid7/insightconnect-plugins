@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_indicator_details",
+    "meta": {},
+    "input": {
+      "indicator": "foxmanwer.pw",
+      "indicator_type": "URL",
+      "section": "full"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://otx.alienvault.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

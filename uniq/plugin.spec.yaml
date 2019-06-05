@@ -1,0 +1,64 @@
+plugin_spec_version: v2
+name: uniq
+title: Uniq
+description: Filter out repeated lines or items
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- uniq
+- unique
+- utilities
+- duplicate
+- dedup
+actions:
+  uniq_string_array:
+    title: Deduplicate String Array
+    description: Remove duplicate items from an array of strings
+    input:
+      data:
+        title: Data
+        description: Array of strings
+        type: '[]string'
+        required: true
+    output:
+      result:
+        title: Result
+        description: Result without duplicates
+        type: '[]string'
+        required: false
+      duplicate_count:
+        title: Duplicate count
+        description: Count of duplicates removed
+        type: integer
+        required: false
+      element_count:
+        title: Element count
+        description: Count of each element
+        type: object
+        required: false
+  uniq_integer_array:
+    title: Deduplicate Integer Array
+    description: Remove duplicate items from an array of integers
+    input:
+      data:
+        title: Data
+        description: Array of integers
+        type: '[]integer'
+        required: true
+    output:
+      result:
+        title: Result
+        description: Result without duplicates
+        type: '[]integer'
+        required: false
+      duplicate_count:
+        title: Duplicate count
+        description: Count of duplicates removed
+        type: integer
+        required: false
+      element_count:
+        title: Element count
+        description: Count of each element
+        type: object
+        required: false

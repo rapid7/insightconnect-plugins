@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "labeling",
+        "connection": {
+            "api_endpoint": "",
+            "credentials": {
+              "username": "",
+              "password": ""
+            },
+            "ssl_verify": true
+        },
+        "input": {
+            "label": ["woah", "lookinto"],
+            "query": "host:anonymous"
+
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

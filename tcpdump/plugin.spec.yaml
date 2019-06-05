@@ -1,0 +1,48 @@
+plugin_spec_version: v2
+name: tcpdump
+title: Tcpdump
+description: Read contents of a PCAP
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- tcpdump
+- nsm
+- pcap
+enable_cache: false
+actions:
+  read:
+    title: Read PCAP
+    description: Read contents from a PCAP file
+    input:
+      pcap:
+        title: PCAP File
+        description: Base64 encoded PCAP file
+        type: bytes
+        required: true
+      options:
+        title: Options
+        description: Tcpdump Flags and Options E.g. -n -c 10 -s 96. -r is implied
+        type: string
+        required: false
+      filter:
+        title: BPF
+        description: Berkely Packet Filter E.g. tcp and port 22
+        type: string
+        required: false
+    output:
+      dump_contents:
+        title: Dump Contents
+        description: Traffic Dump as Array
+        type: '[]string'
+        required: false
+      dump_file:
+        title: Dump File
+        description: Traffic Dump as File
+        type: bytes
+        required: false
+      stderr:
+        title: Standard Error
+        description: Tcpdump Standard Error
+        type: string
+        required: false

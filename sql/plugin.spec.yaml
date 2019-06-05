@@ -1,0 +1,63 @@
+plugin_spec_version: v2
+name: sql
+title: SQL
+description: SQL database module
+version: 2.0.4
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- sql
+- postgres
+- mssql
+connection:
+  type:
+    description: Database type (i.e. mysql, postgres... etc.)
+    type: string
+    required: true
+  host:
+    description: Database hostname
+    type: string
+    required: true
+  port:
+    description: Database port
+    type: string
+    required: false
+  db:
+    description: Database name
+    title: DB
+    type: string
+    required: true
+  credentials:
+    title: DB Credentials
+    description: Database username and password
+    type: credential_username_password
+    required: true
+actions:
+  query:
+    title: Query
+    description: SQL query
+    input:
+      query:
+        type: string
+        description: Query to run
+        required: true
+      parameters:
+        type: object
+        description: Parameters for query
+        required: false
+    output:
+      status:
+        title: Status
+        description: Status message
+        type: string
+        required: true
+      header:
+        title: Header
+        description: Array of header fields for the columns
+        type: '[]string'
+        required: false
+      results:
+        title: Results
+        description: Result rows, each as an object with header keys
+        type: '[]object'
+        required: false

@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "delete_asset_group",
+    "meta": {},
+    "input": {
+      "id": 55
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "submit_scan_action",
+    "meta": {},
+    "input": {
+      "action": "PAUSE",
+      "scan_id": "008eaffe-90ce-4de9-8601-40414391c21c"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://us.api.insight.rapid7.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

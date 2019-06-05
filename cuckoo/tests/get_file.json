@@ -1,0 +1,14 @@
+{
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "url": ""
+    },
+    "action": "get_file",
+    "meta": {},
+    "input": {
+      "sha256": "1bb0ab4b7d9bc9667299ab0b98efa981"
+    }
+  },
+  "version": "v1"
+}

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "show_user",
+    "meta": {},
+    "input": {
+      "id": 2162712
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+
+  "type": "action_start",
+  "version": "v1"
+}

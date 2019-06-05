@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "ticket_create",
+    "meta": {},
+    "input": {
+      "keywords": {
+        "Subject": "Hello test ticket",
+        "Text": "Testy test test, test. Test test testy test!"
+      },
+      "queue": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

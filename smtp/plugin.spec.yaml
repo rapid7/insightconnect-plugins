@@ -1,0 +1,81 @@
+plugin_spec_version: v2
+name: smtp
+title: SMTP
+description: Simple Mail Transfer Protocol (SMTP) is an Internet standard for electronic
+  mail (email) transmission
+version: 2.0.2
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- smtp
+- email
+connection:
+  host:
+    description: Host of SMTP server to connect to
+    type: string
+    required: true
+  port:
+    type: integer
+    description: Port of SMTP server
+    default: 25
+    required: true
+  credentials:
+    title: Username and Password
+    type: credential_username_password
+    description: Username and password
+    required: false
+  use_ssl:
+    type: boolean
+    description: Use SSL
+    default: true
+    required: true
+actions:
+  send:
+    title: Send Email
+    description: Send an email
+    input:
+      email_from:
+        type: string
+        description: Email to use as FROM
+        required: true
+        order: 1
+      email_to:
+        type: string
+        description: Email to send TO
+        required: true
+        order: 2
+      subject:
+        type: string
+        description: Subject of the email
+        required: true
+        order: 3
+      message:
+        type: string
+        description: Message to send on the email
+        required: true
+        order: 4
+      html:
+        type: boolean
+        description: Message contains HTML
+        required: true
+        order: 5
+      bcc:
+        type: '[]string'
+        description: BCC email
+        order: 6
+        required: false
+      cc:
+        type: '[]string'
+        description: CC emails
+        order: 7
+        required: false
+      attachment:
+        type: file
+        description: Attachment
+        order: 8
+        required: false
+    output:
+      result:
+        type: string
+        description: Result
+        required: false

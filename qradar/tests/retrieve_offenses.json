@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "retrieve_offenses",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

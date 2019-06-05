@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "get_agent_details",
+    "meta": {},
+    "input": {
+      "agent_id": "",
+      "app_id": "MooseLifeTest-gIglw"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

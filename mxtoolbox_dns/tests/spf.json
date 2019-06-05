@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "spf",
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://api.mxtoolbox.com/api/v1/"
+    },
+    "input": {
+      "hostname": "example.com"
+    }
+  }
+}

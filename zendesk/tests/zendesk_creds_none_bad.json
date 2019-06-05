@@ -1,0 +1,24 @@
+{
+  "body": {
+    "action": "create_ticket",
+    "input": {
+      "subject": "hello Subject",
+      "attachment": {"content": "Hello", "filename": "hello.txt"},
+      "description": "Hello description"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "subdomain": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}
+  

@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "rerun_report",
+    "meta": {},
+    "input": {
+      "task_id": 0
+    },
+    "connection": {
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

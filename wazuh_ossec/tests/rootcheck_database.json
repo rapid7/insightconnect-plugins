@@ -1,0 +1,24 @@
+{
+  "body": {
+    "action": "rootcheck_database",
+    "meta": {},
+    "input": {
+      "agent_id": "",
+      "cis": "",
+      "limit": 0,
+      "offset": 0,
+      "pci": "",
+      "search": "",
+      "sort": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,12 @@
+{
+  "body": {
+    "input": {
+      "alert": "** Alert 1471014810.6994: - syslog,sshd,invalid_login,\n2016 Aug 12 15:13:30 (bastion) any->/var/log/secure\nRule: 5718 (level 5) -> 'Attempt to login using a denied user.'\nSrc IP: 116.31.116.16\nUser: root\nAug 12 15:13:29 bastion sshd[17047]: User root from 116.31.116.16 not allowed because none of user's groups are listed in AllowGroups\n"
+    },
+    "connection": null,
+    "meta": {},
+    "action": "alert_parse"
+  },
+  "version": "v1",
+  "type": "action_start"
+}

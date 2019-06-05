@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_role",
+    "meta": {},
+    "input": {
+      "id": "global-admin"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

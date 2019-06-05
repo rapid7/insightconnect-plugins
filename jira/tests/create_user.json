@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "create_user",
+    "meta": {},
+    "input": {
+      "email": "",
+      "notify": false,
+      "password": "",
+      "username": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "project": "test",
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

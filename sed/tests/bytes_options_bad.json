@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "process_bytes",
+    "input": {
+      "expression": ["s/one/ONE/"],
+      "options": "--qqqqqq",
+      "bytes": "b25lIHR3byB0aHJlZSBvbmU="
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

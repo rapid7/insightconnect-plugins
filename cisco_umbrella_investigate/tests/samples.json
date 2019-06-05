@@ -1,0 +1,16 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "samples",
+    "input": {
+      "URL": "sso.anbtr.com"
+    }
+  },
+  "version": "v1"
+}

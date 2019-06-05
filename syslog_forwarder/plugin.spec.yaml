@@ -1,0 +1,96 @@
+plugin_spec_version: v2
+name: syslog_forwarder
+title: Syslog Forwarder
+description: Forward messages to a syslog server
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- syslog
+- logs
+enable_cache: false
+connection:
+  host:
+    title: Host
+    type: string
+    description: Syslog Host
+    required: true
+  port:
+    title: Port
+    type: integer
+    description: Syslog Port
+    default: 514
+    required: true
+  transport:
+    title: Transport
+    type: string
+    description: Protocol Transport
+    enum:
+    - TCP
+    - UDP
+    required: true
+actions:
+  forward_message:
+    title: Forward Message
+    description: Forward syslog message
+    input:
+      msg:
+        title: Message
+        description: Syslog message
+        type: string
+        required: true
+      facility:
+        title: Facility
+        description: Syslog Facility
+        type: string
+        enum:
+        - KERN
+        - USER
+        - MAIL
+        - DAEMON
+        - AUTH
+        - SYSLOG
+        - LPR
+        - NEWS
+        - UUCP
+        - CRON
+        - AUTHPRIV
+        - FTP
+        - LOCAL0
+        - LOCAL1
+        - LOCAL2
+        - LOCAL3
+        - LOCAL4
+        - LOCAL5
+        - LOCAL6
+        - LOCAL7
+        required: true
+      level:
+        title: Level
+        description: Syslog Level
+        type: string
+        enum:
+        - EMERG
+        - ALERT
+        - CRIT
+        - ERR
+        - WARNING
+        - NOTICE
+        - INFO
+        - DEBUG
+        required: true
+      host:
+        title: Host
+        description: Name or address where message originated from
+        type: string
+        required: false
+      msgid:
+        title: Message ID
+        description: Message ID
+        type: string
+        required: false
+      proc:
+        title: Process Name
+        description: Process name
+        type: string
+        required: false

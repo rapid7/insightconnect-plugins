@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "check_for_squatters",
+        "connection": {
+        },
+        "input": {
+            "domain": "rapid7.com",
+            "flag": "--registered --geoip --ssdeep"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}
+
+

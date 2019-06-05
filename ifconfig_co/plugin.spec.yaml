@@ -1,0 +1,66 @@
+plugin_spec_version: v2
+name: ifconfig_co
+title: ifconfig.co
+vendor: rapid7
+status: ["unsupported"]
+description: An IP Address Lookup API
+version: 1.0.1
+tags:
+- ip
+- nat
+- public
+
+actions:
+  address_lookup:
+    title: Lookup IP Address
+    description: Lookup Public IP Address
+    output:
+      address:
+        title: Public IP Address
+        description: Public IP address
+        type: string
+        required: false
+      city:
+        title: City
+        description: City
+        type: string
+        required: false
+      country:
+        title: Country
+        description: Country
+        type: string
+        required: false
+      hostname:
+        title: Hostname
+        description: Hostname
+        type: string
+        required: false
+      address_decimal:
+        title: Decimal Address
+        description: Public IP address in decimal
+        type: integer
+        required: false
+  port_lookup:
+    title: Check Ports
+    description: Check TCP Port on Public IP Address
+    input:
+      port:
+        type: integer
+        description: TCP Port to Check
+        required: true
+    output:
+      address:
+        title: Public IP Address
+        description: This host's public IP address
+        type: string
+        required: false
+      port:
+        title: Port
+        type: integer
+        description: Port
+        required: false
+      status:
+        title: Port Open Status
+        description: Port open status
+        type: boolean
+        required: false

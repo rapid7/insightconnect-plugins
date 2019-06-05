@@ -1,0 +1,53 @@
+{
+  "type": "action_start",
+  "body": {
+    "action": "create",
+    "meta": {},
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": "root@localhost"
+      },
+      "server": ""
+    },
+    "input": {
+      "CustomerUser": "test_customer",
+      "Lock": "",
+      "Owner": "Test Customer",
+      "Priority": "3 normal",
+      "Queue": "Junk",
+      "Responsible": "",
+      "PendingTime": "2018-09-29T18:01:21+00:00",
+      "SLA": "Test SLA",
+      "Service": "Test SLA Service",
+      "State": "new",
+      "Title": "Test",
+      "Type": "Unclassified",
+      "TypeID": "",
+      "article": {
+        "AutoResponseType": "",
+        "Body": "blah",
+        "Charset": "UTF8",
+        "CommunicationChannel": "phone",
+        "CommunicationChannelID": 2,
+        "ContentType": "text/plain; charset=ISO-8859-15",
+        "ExcludeMuteNotificationToUserID": [],
+        "ExcludeNotificationToUserID": [],
+        "ForceNotificationToUserID": [],
+        "From": "root@localhost",
+        "HistoryComment": "",
+        "HistoryType": "",
+        "IsVisibleForCustomer": 0,
+        "MimeType": "text/plain",
+        "NoAgentNotify": 0,
+        "SenderType": "agent",
+        "SenderTypeID": 1,
+        "Subject": "UnitTest",
+        "TimeUnit": 1
+      },
+      "attachments": [{"filename": "dump.txt", "content": "VGhpcyBpcyBhIHRlc3QK"}],
+      "dynamic_fields": [{"name": "NEWTEXTFIELD", "value": "TestValue1"}, {"name": "NEWTEXTFIELD", "value": "TestValue2"}]
+    }
+  },
+  "version": "v1"
+}

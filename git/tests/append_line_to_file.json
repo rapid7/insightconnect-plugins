@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "append_line_to_file",
+    "meta": {},
+    "input": {
+      "file_path": "files/lines.txt",
+      "line": "hello world"
+    },
+    "connection": {
+      "url": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

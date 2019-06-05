@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "retrieve_file_catalog_entry",
+        "input": {
+            "file_catalog_id": 5025
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

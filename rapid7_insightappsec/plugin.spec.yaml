@@ -1,0 +1,484 @@
+plugin_spec_version: v2
+name: rapid7_insightappsec
+title: Rapid7 InsightAppSec
+description: Application security testing for the modern web
+version: 1.0.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- insightappsec
+- Rapid7
+types:
+  link:
+    href:
+      title: Href
+      description: Href
+      type: string
+      required: false
+    rel:
+      title: Rel
+      description: rel
+      type: string
+      required: false
+  submitter:
+    submitter_type:
+      title: Type
+      description: The type of the submitter e.g. USER
+      type: string
+      required: false
+    id:
+      title: ID
+      description: The submitters UUID
+      type: string
+      required: false
+  event_log:
+    time:
+      title: Time
+      description: The time at which the log event occurred
+      type: date
+      required: false
+    event:
+      title: Event
+      description: The log event
+      type: string
+      required: false
+  scan_config:
+    id:
+      title: UUID
+      description: The UUID of the scan configuration
+      type: string
+      required: false
+    config_name:
+      title: Name
+      description: The name of the scan configuration
+      type: string
+      required: false
+    config_description:
+      title: Description
+      description: The description of the scan configuration
+      type: string
+      required: false
+    app_id:
+      title: App ID
+      description: App UUID
+      type: string
+      required: false
+    attack_template_id:
+      title: Attack Template ID
+      description: Attack template UUID
+      type: string
+      required: false
+    errors:
+      title: Errors
+      description: A list of errors that detail any current validation failures
+      type: '[]string'
+      required: false
+    links:
+      title: Links
+      description: A list of links
+      type: '[]link'
+      required: false
+  scan:
+    id:
+      title: ID
+      description: Scan UUID
+      type: string
+      required: false
+    app_id:
+      title: App ID
+      description: App UUID
+      type: string
+      required: false
+    scan_config_id:
+      title: Scan Config ID
+      description: Scan configs UUID
+      type: string
+      required: false
+    submitter:
+      title: Submitter
+      description: The submitter of the scan
+      type: submitter
+      required: false
+    submit_time:
+      title: Submit Time
+      description: The time the scan was submitted
+      type: date
+      required: false
+    completion_time:
+      title: Completion Time
+      description: The time the scan was completed
+      type: date
+      required: false
+    status:
+      title: Status
+      description: The status of the scan
+      type: string
+      required: false
+    failure_reason:
+      title: Failure Reason
+      description: The reason the scan may have failed
+      type: string
+      required: false
+    links:
+      title: Links
+      description: A list of links
+      type: '[]link'
+      required: false
+  scan_details:
+    logged_in:
+      title: Logged-In
+      description: A flag which indicates if the scan is using authentication during
+        the scan
+      type: boolean
+      required: false
+    links_in_queue:
+      title: Links in Queue
+      description: The number of links in the crawling queue
+      type: integer
+      required: false
+    links_crawled:
+      title: Links Crawled
+      description: The number of links already crawled
+      type: integer
+      required: false
+    attacks_in_queue:
+      title: Attacks in Queue
+      description: The number of links in the attacking queue
+      type: integer
+      required: false
+    attacked:
+      title: Attacked
+      description: The number of attacks already performed
+      type: integer
+      required: false
+    vulnerable:
+      title: Vulnerable
+      description: The number of potential findings
+      type: integer
+      required: false
+    requests:
+      title: Requests
+      description: The number of HTTP requests which have been executed
+      type: integer
+      required: false
+    failed_requests:
+      title: Failed Requests
+      description: The number of failed HTTP requests
+      type: integer
+      required: false
+    network_speed:
+      title: Network Speed
+      description: A throughput indicator
+      type: number
+      required: false
+    drip_delay:
+      title: Drip Delay
+      description: The current delay between HTTP requests
+      type: number
+      required: false
+connection:
+  api_key:
+    title: API Key
+    description: The API key for InsightAppSec
+    type: credential_secret_key
+    required: true
+  url:
+    title: URL
+    description: The URL endpoint for InsightAppSec. e.g. https://<REGION_CODE>.api.insight.rapid7.com
+    type: string
+    required: true
+    default: https://us.api.insight.rapid7.com
+actions:
+  create_scan_config:
+    title: Create Scan Config
+    description: Create a new scan configuration
+    input:
+      config_name:
+        title: Name
+        description: The name of the scan configuration
+        type: string
+        required: true
+      config_description:
+        title: Description
+        description: The description of the scan configuration
+        type: string
+        required: false
+      app_id:
+        title: App ID
+        description: App UUID
+        type: string
+        required: true
+      attack_template_id:
+        title: Attack Template ID
+        description: Attack template UUID
+        type: string
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status code of the request
+        type: integer
+        required: false
+  get_scan_config:
+    title: Get Scan Config
+    description: Get a scan configuration
+    input:
+      scan_config_id:
+        title: Scan Config ID
+        description: Scan configuration UUID
+        type: string
+        required: true
+    output:
+      id:
+        title: UUID
+        description: The UUID of the scan configuration
+        type: string
+        required: false
+      config_name:
+        title: Name
+        description: The name of the scan configuration
+        type: string
+        required: false
+      config_description:
+        title: Description
+        description: The description of the scan configuration
+        type: string
+        required: false
+      app_id:
+        title: App ID
+        description: App UUID
+        type: string
+        required: false
+      attack_template_id:
+        title: Attack Template ID
+        description: Attack template UUID
+        type: string
+        required: false
+      errors:
+        title: Errors
+        description: A list of errors that detail any current validation failures
+        type: '[]string'
+        required: false
+      links:
+        title: Links
+        description: A list of links
+        type: '[]link'
+        required: false
+  update_scan_config:
+    title: Update Scan Config
+    description: Update an existing scan configuration
+    input:
+      scan_config_id:
+        title: Scan Config ID
+        description: Scan configuration UUID
+        type: string
+        required: true
+      config_name:
+        title: Name
+        description: The name of the scan configuration
+        type: string
+        required: true
+      config_description:
+        title: Description
+        description: The description of the scan configuration
+        type: string
+        required: false
+      app_id:
+        title: App ID
+        description: App UUID
+        type: string
+        required: true
+      attack_template_id:
+        title: Attack Template ID
+        description: Attack template UUID
+        type: string
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status code of the request
+        type: integer
+        required: false
+  delete_scan_config:
+    title: Delete Scan Config
+    description: Delete an existing scan configuration
+    input:
+      scan_config_id:
+        title: Scan Config ID
+        description: Scan configuration UUID
+        type: string
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status code of the request
+        type: integer
+        required: false
+  get_scan_configs:
+    title: Get Scan Configs
+    description: Get a page of scan configurations, based on supplied pagination parameters
+    input:
+      index:
+        title: Index
+        description: The page index to start form. If blank, index will be 0
+        type: integer
+        required: false
+      size:
+        title: Size
+        description: The number of entries on each page. If blank, size will be 50
+        type: integer
+        required: false
+      sort:
+        title: Sort
+        description: How to sort the scan configs. If blank, sort will be alphabetical
+          by scan config name
+        type: string
+        required: false
+    output:
+      scan_configs:
+        title: Scan Configs
+        description: A list of scan configurations
+        type: '[]scan_config'
+        required: false
+  submit_scan:
+    title: Sumbit Scan
+    description: Submit a new scan
+    input:
+      scan_config_id:
+        title: Scan Config ID
+        description: UUID of the scan config to use
+        type: string
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status code of the request
+        type: integer
+        required: false
+  get_scan:
+    title: Get Scan
+    description: Get a scan
+    input:
+      scan_id:
+        title: Scan ID
+        description: The scans UUID
+        type: string
+        required: true
+    output:
+      scan:
+        title: Scan
+        description: Information on the scan
+        type: scan
+        required: false
+  get_scans:
+    title: Get Scans
+    description: Get a page of scans, based on supplied pagination parameters
+    input:
+      index:
+        title: Index
+        description: The page index to start form. If blank, index will be 0
+        type: integer
+        required: false
+      size:
+        title: Size
+        description: The number of entries on each page. If blank, size will be 50
+        type: integer
+        required: false
+      sort:
+        title: Sort
+        description: How to sort the scans. If blank, sort will be alphabetical by
+          scan name
+        type: string
+        required: false
+    output:
+      scans:
+        title: Scans
+        description: A list of scans
+        type: '[]scan'
+        required: false
+  delete_scan:
+    title: Delete Scan
+    description: Delete a scan
+    input:
+      scan_id:
+        title: Scan ID
+        description: The scans UUID
+        type: string
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status code of the request
+        type: integer
+        required: false
+  submit_scan_action:
+    title: Submit Scan Action
+    description: Submit a new scan action
+    input:
+      scan_id:
+        title: Scan ID
+        description: Scan UUID
+        type: string
+        required: true
+      action:
+        title: Action
+        description: Action to take
+        type: string
+        required: true
+        default: Pause
+        enum:
+        - Pause
+        - Resume
+        - Stop
+        - Cancel
+    output:
+      status:
+        title: Status
+        description: Status code of the request
+        type: integer
+        required: false
+  get_scan_engine_events:
+    title: Get Scan Engine Events
+    description: Get the engine events from a scan
+    input:
+      scan_id:
+        title: Scan ID
+        description: Scan UUID
+        type: string
+        required: true
+    output:
+      events:
+        title: Events
+        description: An array of event logs and their dates
+        type: '[]event_log'
+        required: false
+  get_scan_execution_details:
+    title: Get Scan Execution Details
+    description: Get real-time details of the execution of a scan
+    input:
+      scan_id:
+        title: Scan ID
+        description: Scan UUID
+        type: string
+        required: true
+    output:
+      details:
+        title: Details
+        description: Detailed information about the scan
+        type: scan_details
+        required: false
+  get_scan_platform_events:
+    title: Get Scan Platform Events
+    description: Get the platform events from a scan
+    input:
+      scan_id:
+        title: Scan ID
+        description: Scan UUID
+        type: string
+        required: true
+    output:
+      events:
+        title: Events
+        description: An array of event logs and their dates
+        type: '[]event_log'
+        required: false

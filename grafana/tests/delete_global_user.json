@@ -1,0 +1,22 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "action": "delete_global_user",
+    "meta": {},
+    "input": {
+      "user_id": 2
+    },
+    "connection": {
+      "basic_auth": {
+        "password": "",
+        "username": ""
+      },
+      "token_auth": {
+        "secretKey": ""
+      },
+      "port": 3000,
+      "url": ""
+    }
+  }
+}

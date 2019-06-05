@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "manager_logs",
+    "meta": {},
+    "input": {
+      "category": "",
+      "limit": 0,
+      "offset": 0,
+      "search": "",
+      "sort": "",
+      "type_log": "All"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "show",
+    "meta": {},
+    "input": {
+      "xpath": "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "server": "",
+      "verify_cert": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

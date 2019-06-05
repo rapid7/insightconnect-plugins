@@ -1,0 +1,295 @@
+plugin_spec_version: v2
+name: anomali_threatstream
+title: Anomali ThreatStream
+description: ThreatStream operationalizes threat intelligence, automating collection
+  and integration that enables security teams to analyze and respond to threats
+version: 2.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- anomali
+- threatstream
+types:
+  meta:
+    limit:
+      title: Limit
+      description: Limit
+      type: integer
+    offset:
+      title: Offset
+      description: Offset
+      type: integer
+    total_count:
+      title: Total Count
+      description: Total Count
+      type: integer
+  result:
+    asn:
+      title: ASN
+      description: Autonomous system number
+      type: string
+    classification:
+      title: Classification
+      description: Classification
+      type: string
+    confidence:
+      title: Confidence
+      description: Confidence level
+      type: string
+    country:
+      title: Country
+      description: Country
+      type: string
+    date_first:
+      title: Date First
+      description: Date first
+      type: string
+    date_last:
+      title: Date Last
+      description: Date last
+      type: string
+    details2:
+      title: Details
+      description: Details
+      type: string
+    domain:
+      title: Domain
+      description: Domain
+      type: string
+    email:
+      title: Email
+      description: Email
+      type: string
+    id:
+      title: ID
+      description: ID
+      type: integer
+    itype:
+      title: Itype
+      description: Itype
+      type: string
+    lat:
+      title: Latitude
+      description: Latitude
+      type: number
+    lon:
+      title: Longitude
+      description: Longitude
+      type: number
+    md5:
+      title: MD5
+      description: MD5 Hash
+      type: string
+    org:
+      title: Organization
+      description: Organization
+      type: string
+    resource_uri:
+      title: Resource URI
+      description: Resource URI
+      type: string
+    severity:
+      title: Severity
+      description: Severity
+      type: string
+    source:
+      title: Source
+      description: Source
+      type: string
+    source_feed_id:
+      title: Source Feed ID
+      description: Source Feed ID
+      type: integer
+    srcip:
+      title: Source IP
+      description: Source IP
+      type: string
+    state:
+      title: State
+      description: State
+      type: string
+    update_id:
+      title: Update ID
+      description: Update ID
+      type: string
+    url:
+      title: URL
+      description: URL
+      type: string
+  indicator_settings:
+    confidence:
+      title: Confidence
+      description: Confidence value assigned to the indicator. Confidence score can
+        range from 0-100, in increasing order of confidence
+      type: integer
+    source_confidence_weight:
+      title: Source Confidence Weight
+      description: Specifies the ratio between the amount of the source confidence
+        of each indicator and the ThreatStream confidence
+      type: integer
+    severity:
+      title: Severity
+      description: Severity you want to assign to the indicator when it is imported
+      type: string
+      default: ''
+      enum:
+      - low
+      - medium
+      - high
+      - very-high
+      - ''
+    classification:
+      title: Classification
+      description: Classification of the indicator
+      type: string
+      default: private
+      enum:
+      - public
+      - private
+      required: true
+    expiration_ts:
+      title: Expiration Time Stamp
+      description: Time stamp of when intelligence will expire on ThreatStream
+      type: date
+    notes:
+      title: Notes
+      description: Additional details for the indicator. This information is displayed
+        in the Tags column of the ThreatStream UI e.g ['note1', 'note2', 'note3']
+      type: '[]string'
+    ip_mapping:
+      title: IP Mapping
+      description: Indicator type to assign if a specific type is not associated with
+        an indicator
+      type: string
+      required: false
+    domain_mapping:
+      title: Domain Mapping
+      description: Indicator type to assign if a specific type is not associated with
+        an indicator
+      type: string
+      required: false
+    url_mapping:
+      title: URL Mapping
+      description: Indicator type to assign if a specific type is not associated with
+        an indicator
+      type: string
+      required: false
+    email_mapping:
+      title: Email Mapping
+      description: Indicator type to assign if a specific type is not associated with
+        an indicator
+      type: string
+      required: false
+    md5_mapping:
+      title: MD5 Mapping
+      description: Indicator type to assign if a specific type is not associated with
+        an indicator
+      type: string
+      required: false
+    trustedcircles:
+      title: Trusted Circles
+      description: ID of the trusted circle to which this threat data should be imported.
+        If you want to import the threat data to multiple trusted circles, enter the
+        list of comma-separated IDs e.g [1,2,3]
+      type: '[]integer'
+  import_indicator_response:
+    job_id:
+      title: Job ID
+      description: Job ID
+      type: string
+    success:
+      title: Success
+      description: If import was successful
+      type: boolean
+    import_session_id:
+      title: Import Session ID
+      description: ID for import session
+      type: string
+connection:
+  username:
+    title: Username
+    description: Anomali ThreatStream username
+    type: string
+    required: true
+  url:
+    title: URL
+    description: URL for the ThreatStream instance e.g. https://ts.example.com
+    type: string
+    required: true
+  api_key:
+    title: API Key
+    description: Anomali ThreatStream API key
+    type: credential_secret_key
+    required: true
+  ssl_verify:
+    type: boolean
+    title: SSL Verify
+    description: Verify the server's SSL/TLS certificate
+    default: true
+    required: true
+actions:
+  lookup_ip:
+    title: Lookup IP Address
+    description: Lookup an IP address in Anomali
+    input:
+      ip_address:
+        title: IP Address
+        description: IP address
+        type: string
+        required: false
+    output:
+      results:
+        title: Results
+        description: Results returned
+        type: '[]result'
+        required: false
+  lookup_url:
+    title: Lookup URL
+    description: Lookup a URL in Anomali
+    input:
+      url:
+        title: URL
+        description: URL
+        type: string
+        required: false
+    output:
+      results:
+        title: Results
+        description: Results returned
+        type: '[]result'
+        required: false
+  lookup_hash:
+    title: Lookup Hash
+    description: Lookup a file hash in Anomali
+    input:
+      hash:
+        title: Hash
+        description: Hash
+        type: string
+        required: false
+    output:
+      results:
+        title: Results
+        description: Results returned
+        type: '[]result'
+        required: false
+  add_approval_indicator:
+    title: Add Approval Indicator
+    description: Import indicator(s) into Anomali with approval
+    input:
+      file:
+        title: File
+        description: File of data to be imported into Anomali
+        type: file
+        required: true
+      indicator_settings:
+        title: Indicator Settings
+        description: Settings needed for importing an indicator that needs approval
+        type: indicator_settings
+        required: false
+    output:
+      results:
+        title: Results
+        description: Results from adding indicators(s)
+        type: import_indicator_response
+        required: false

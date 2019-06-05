@@ -1,0 +1,36 @@
+{
+    "body": {
+        "action": "lookup",
+        "connection": {
+            "credentials": {
+              "domain": "",
+              "token": ""
+            }
+        },
+        "input": {
+            "client_id": "komand-test",
+            "platform_type_all": true,
+            "platform_type_android": false,
+            "platform_type_any": false,
+            "platform_type_chrome": false,
+            "platform_type_ios": false,
+            "platform_type_linux": false,
+            "platform_type_mac": false,
+            "platform_type_unspecified": false,
+            "platform_type_windows": false,
+            "threat_entry_type_executable": true,
+            "threat_entry_type_ip": true,
+            "threat_entry_type_unspecified": true,
+            "threat_entry_type_url": true,
+            "threat_type_malware": true,
+            "threat_type_potential": true,
+            "threat_type_social": true,
+            "threat_type_unspecified": true,
+            "threat_type_unwanted": true,
+            "urls": ["freefilesdownloader.com", "jardindebambou.fr"]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

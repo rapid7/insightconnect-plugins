@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "get_comments",
+    "meta": {},
+    "input": {
+      "incident_id": 31851783
+    },
+    "connection": {
+      "eu_customer": false,
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

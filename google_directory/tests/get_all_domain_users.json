@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "get_all_domain_users",
+    "meta": {},
+    "input": {
+      "domain": ""
+    },
+    "connection": {
+      "admin_user": "",
+      "auth_provider_x509_cert_url": "",
+      "auth_uri": "",
+      "client_email": "",
+      "client_id": "",
+      "client_x509_cert_url": "",
+      "private_key": {
+        "privateKey": ""
+      },
+      "private_key_id": "",
+      "project_id": "",
+      "token_uri": "",
+      "oauth_scope": "https://www.googleapis.com/auth/admin.directory.user.readonly"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

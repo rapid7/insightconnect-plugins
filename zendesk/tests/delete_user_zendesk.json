@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "delete_user",
+    "input": {
+      "user_id": "20181554587"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "subdomain": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}
+  

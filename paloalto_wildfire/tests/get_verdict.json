@@ -1,0 +1,19 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "host": "wildfire.paloaltonetworks.com",
+      "proxy": {},
+      "verify": true
+    },
+    "input": {
+      "hash": "2f92703138e8be9666b4f3efa2058e60"
+    },
+    "action": "get_verdict"
+  }
+}

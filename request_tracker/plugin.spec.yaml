@@ -1,0 +1,355 @@
+plugin_spec_version: v2
+name: request_tracker
+title: Request Tracker
+description: The open-source enterprise grade issue and ticket tracking system
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- issue
+- track
+- incidents
+- ticket
+types:
+  Ticket:
+    Queue:
+      type: string
+    Owner:
+      type: string
+    Creator:
+      type: string
+    Subject:
+      type: string
+    Priority:
+      type: string
+    InitialPriority:
+      type: string
+    FinalPriority:
+      type: string
+    Requestors:
+      type: '[]string'
+    Cc:
+      type: string
+    AdminCc:
+      type: string
+    Created:
+      type: date
+    Starts:
+      type: date
+    Started:
+      type: date
+    Due:
+      type: string
+    Resolved:
+      type: string
+    Told:
+      type: string
+    TimeEstimated:
+      type: string
+    TimeWorked:
+      type: string
+    TimeLeft:
+      type: string
+  Attachment:
+    id:
+      type: string
+    Name:
+      type: string
+    Size:
+      type: string
+    ContentType:
+      type: string
+  HistoryEntry:
+    id:
+      type: string
+    Ticket:
+      type: string
+    TimeTaken:
+      type: string
+    Type:
+      type: string
+    Field:
+      type: string
+    OldValue:
+      type: string
+    NewValue:
+      type: string
+    Data:
+      type: string
+    Description:
+      type: string
+    Content:
+      type: string
+    Creator:
+      type: string
+    Created:
+      type: string
+    Attachments:
+      type: '[]object'
+connection:
+  url:
+    title: URL
+    description: Host URL E.g. http://192.168.33.10:8080
+    type: string
+    required: true
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: true
+actions:
+  ticket_properties:
+    title: Ticket Properties
+    description: Gets the data for a single ticket, not including the history and
+      comments
+    input:
+      ticket_id:
+        type: integer
+        title: Ticket ID
+        description: Ticket ID e.g. 3
+        required: true
+    output:
+      Ticket:
+        title: Ticket
+        type: Ticket
+        description: Ticket
+        required: false
+  ticket_links:
+    title: Ticket Links
+    description: Gets the ticket links for a single ticket
+    input:
+      ticket_id:
+        type: integer
+        title: Ticket ID
+        description: Ticket ID e.g. 3
+        required: true
+    output:
+      HasMember:
+        title: Has Member
+        type: string
+        description: Has member
+        required: false
+      ReferredToBy:
+        title: Referred To By
+        description: Referred to by
+        type: string
+        required: false
+      DependedonBy:
+        title: Depended On By
+        description: Depended on by
+        type: '[]string'
+        required: false
+      MemberOf:
+        title: Member Of
+        description: Member of
+        type: string
+        required: false
+      RefersTo:
+        title: Refers To
+        description: Refers to
+        type: string
+        required: false
+      DependsOn:
+        title: Depends On
+        description: Depends On
+        type: '[]string'
+        required: false
+  ticket_attachments:
+    title: Ticket Attachments
+    description: Gets a list of all attachments related to the ticket
+    input:
+      ticket_id:
+        type: integer
+        title: Ticket ID
+        description: Ticket ID e.g. 3
+        required: true
+    output:
+      Attachments:
+        title: Attatchments
+        type: '[]Attachment'
+        description: Attatchments
+        required: false
+  ticket_attachment:
+    title: Ticket Attachment
+    description: Gets the metadata and content of a specific attachment
+    input:
+      ticket_id:
+        type: integer
+        title: Ticket ID
+        description: Ticket ID e.g. 3
+        required: true
+      attachment_id:
+        type: integer
+        title: Attachment ID
+        description: Attachment ID e.g. 2
+        required: true
+    output:
+      id:
+        title: ID
+        description: Id
+        type: integer
+        required: false
+      Subject:
+        title: Subject
+        description: Subject
+        type: string
+        required: false
+      Creator:
+        title: Creator
+        description: Creator
+        type: string
+        required: false
+      Created:
+        title: Created
+        description: Created
+        type: string
+        required: false
+      Transaction:
+        title: Transaction
+        description: Transaction
+        type: integer
+        required: false
+      Parent:
+        title: Parent
+        description: Parent
+        type: integer
+        required: false
+      MessageId:
+        title: Message ID
+        description: Message ID
+        type: string
+        required: false
+      Filename:
+        title: Filename
+        description: Filename
+        type: string
+        required: false
+      ContentType:
+        title: Content Type
+        description: Content type
+        type: string
+        required: false
+      ContentEncoding:
+        title: Content Encoding
+        description: Content encoding
+        type: string
+        required: false
+      Headers:
+        title: Headers
+        description: Headers
+        type: object
+        required: false
+      Content:
+        title: Content
+        description: Content
+        type: string
+        required: false
+  ticket_attachment_content:
+    title: Ticket Attachment Content
+    description: Gets the metadata and content of a specific attachment
+    input:
+      ticket_id:
+        type: integer
+        title: Ticket ID
+        description: Ticket ID e.g. 3
+        required: true
+      attachment_id:
+        type: integer
+        title: Attachment ID
+        description: Attachment ID e.g. 2
+        required: true
+    output:
+      Content:
+        title: Content
+        type: string
+        description: Content
+        required: false
+  ticket_history:
+    title: Ticket History
+    description: Gets a list of all the history items for a given ticket
+    input:
+      ticket_id:
+        type: integer
+        title: Ticket ID
+        description: Ticket ID e.g. 3
+        required: true
+    output:
+      History:
+        title: History
+        type: '[]HistoryEntry'
+        description: History
+        required: false
+  ticket_history_entry:
+    title: Ticket History Entry
+    description: Gets the history information for a single history item. Note that
+      the history item must actually correspond to the ticket
+    input:
+      ticket_id:
+        type: integer
+        title: Ticket ID
+        description: Ticket ID e.g. 3
+        required: true
+      history_id:
+        title: History ID
+        description: History ID
+        type: integer
+        required: true
+    output:
+      History:
+        title: History
+        type: '[]HistoryEntry'
+        description: History
+        required: false
+  ticket_search:
+    title: Ticket Search
+    description: Gets tickets matching defined parameters
+    input:
+      raw_query:
+        title: Raw Query
+        type: string
+        description: Raw query E.g. id=1
+        required: false
+      queue:
+        title: Queue
+        type: string
+        description: Queue
+        required: false
+      order:
+        title: Order
+        type: string
+        description: By this parameter you can change the sort field and order of
+          the search result. To sort a list ascending just put a '+'  before the fieldname,
+          otherwise a '-'
+        required: false
+      keywords:
+        title: Keywords
+        type: object
+        description: Key-Value pair map of other arguments possible to set if not
+          passing raw_query. See the plugin docs for more on this
+        required: false
+    output:
+      Tickets:
+        title: Tickets
+        type: '[]Ticket'
+        required: false
+        description: Tickets
+  ticket_create:
+    title: Ticket Create
+    description: Creates a new ticket
+    input:
+      queue:
+        title: Queue
+        description: Queue
+        type: string
+        required: false
+      keywords:
+        title: Keywords
+        required: false
+        type: object
+        description: Key-Value pairs map of ticket properties
+    output:
+      TicketId:
+        title: Ticket Id
+        description: Ticket Id
+        type: integer
+        required: false

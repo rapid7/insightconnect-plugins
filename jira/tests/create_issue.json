@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "create_issue",
+    "meta": {},
+    "input": {
+      "attachment_bytes": "",
+      "attachment_filename": "",
+      "description": "Test test",
+      "fields": {},
+      "project": "",
+      "summary": "Test issue",
+      "type": "Story"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "project": "TEST",
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

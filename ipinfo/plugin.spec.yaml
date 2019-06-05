@@ -1,0 +1,69 @@
+plugin_spec_version: v2
+name: ipinfo
+title: IPinfo
+vendor: rapid7
+status: ["unsupported"]
+description: Query IP Address Information
+version: 1.0.1
+tags:
+- ipinfo
+- ip
+- geoip
+
+connection:
+  credentials:
+    title: "API Token"
+    type: credential_token
+    description: "API Token (Empty for unauthenticated access)"
+    required: false
+actions:
+  ip_lookup:
+    title: "Address Lookup"
+    description: "Lookup IP address information"
+    input:
+      ip:
+        title: "IP Address"
+        description: "IP address to query"
+        type: string
+        required: true
+    output:
+      ip:
+        title: "IP"
+        description: "IP address"
+        type: string
+        required: false
+      hostname:
+        title: "Hostname"
+        description: "Hostname"
+        type: string
+        required: false
+      city:
+        title: "City"
+        description: "City"
+        type: string
+        required: false
+      region:
+        title: "Region"
+        description: "Region"
+        type: string
+        required: false
+      country:
+        title: "Country"
+        description: "Country"
+        type: string
+        required: false
+      loc:
+        title: "Location"
+        description: "Location"
+        type: string
+        required: false
+      org:
+        title: "Organization"
+        description: "Organization"
+        type: string
+        required: false
+      postal:
+        title: "Postal Code"
+        description: "Postal code"
+        type: string
+        required: false

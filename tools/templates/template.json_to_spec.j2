@@ -1,0 +1,20 @@
+types:
+  {% for item in sections["types"].items() -%}
+  {{ item[0] }}:
+    {%- for param in item[1].items() %}
+    {{ param[0] }}:
+      title: "{{ param[1].title }}"
+      type: {{ param[1].type }}
+      description: "{{ param[1].description }}"
+      required: false
+  {%- endfor %}
+  {% endfor %}
+
+output:
+  {% for param in sections["output"].items() -%}
+  {{ param[0] }}:
+      title: "{{ param[1].title }}"
+      type: {{ param[1].type }}
+      description: "{{ param[1].description }}"
+      required: false
+  {% endfor %}

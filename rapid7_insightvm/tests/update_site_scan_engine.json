@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "update_site_scan_engine",
+    "meta": {},
+    "input": {
+      "site_id": 272,
+      "engine_id": 3
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

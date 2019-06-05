@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "add_watchlist",
+    "meta": {},
+    "input": {
+      "index_type": "modules",
+      "name": "test",
+      "query": "test"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

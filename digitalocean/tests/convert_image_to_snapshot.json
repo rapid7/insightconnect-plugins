@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "convert_image_to_snapshot",
+        "connection": {
+            "token":{
+                "secretKey": ""
+            }
+        },
+        "input": {
+            "image_id": "99999"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

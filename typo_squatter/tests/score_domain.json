@@ -1,0 +1,15 @@
+{
+    "body": {
+        "action": "score_domain",
+        "connection": {
+        },
+        "input": {
+            "domain": "google.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}
+
+

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "change_tags",
+    "meta": {},
+    "input": {
+      "app_id": "LowprofileappcreatedforKomandplugintests-1oRtT",
+      "tags": ["completely", "new", "tags"]
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

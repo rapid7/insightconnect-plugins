@@ -1,0 +1,233 @@
+plugin_spec_version: v2
+name: paloalto_wildfire
+title: Palo Alto Wildfire
+vendor: rapid7
+status: ["supported"]
+description: WildFire cloud-based threat analysis service is the industry\'s most
+  advanced analysis and prevention engine for highly evasive zero-day exploits and
+  malware
+version: 1.0.2
+tags:
+- palo
+- wildfire
+- intel
+- wf
+types:
+  filedata:
+    url:
+      title: URL
+      type: string
+      required: false
+    filetype:
+      title: File Type
+      type: string
+      required: false
+    filename:
+      type: string
+      required: false
+    sha256:
+      title: SHA256
+      description: SHA256 hash of file
+      type: string
+      required: true
+    md5:
+      title: MD5
+      description: MD5 hash of file
+      type: string
+      required: true
+    size:
+      description: File size
+      type: string
+      required: true
+  urldata:
+    url:
+      title: URL
+      type: string
+      required: true
+    sha256:
+      title: SHA256
+      description: SHA256 hash of file
+      type: string
+      required: true
+    md5:
+      title: MD5
+      description: MD5 hash of file
+      type: string
+      required: true
+connection:
+  host:
+    type: string
+    title: Host
+    description: Palo Alto Wildfire host in cloud or on-premise, e.g. wildfire.paloaltonetworks.com
+      or 10.3.4.50
+    default: wildfire.paloaltonetworks.com
+    required: true
+  api_key:
+    type: credential_secret_key
+    title: Wildfire API Key
+    description: Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account
+      or on your appliance
+    required: true
+  proxy:
+    type: object
+    title: Proxy
+    description: An optional dictionary containing proxy data, with https as the key,
+      and the proxy path as the value
+    required: false
+  verify:
+    type: boolean
+    title: SSL Verify
+    description: Verify the certificate
+    default: true
+    required: true
+actions:
+  submit_file:
+    title: Submit File
+    description: Submit a file for analysis
+    input:
+      file:
+        description: File to submit. Supported types are Email-link, Flash, APK, PDF,
+          JAR, PE, MS-Office
+        title: File
+        type: bytes
+        required: true
+      filename:
+        title: Filename
+        type: string
+        description: Optional file name
+        required: false
+    output:
+      submission:
+        title: Submission
+        description: Submission
+        type: filedata
+        required: true
+  submit_file_from_url:
+    title: Submit File from URL
+    description: Submit a file for analysis via a URL
+    input:
+      url:
+        description: URL to submit. The URL must contain the file name, for example
+          http://paloaltonetworks.com/folder1/my-file.pdf
+        title: URL
+        type: string
+        required: true
+    output:
+      submission:
+        title: Submission
+        description: Submission
+        type: filedata
+        required: true
+  submit_url:
+    title: Submit URL
+    description: Submit a URL for analysis
+    input:
+      url:
+        description: URL to submit
+        title: URL
+        type: string
+        required: true
+    output:
+      submission:
+        title: Submission
+        description: Submission
+        type: urldata
+        required: true
+  get_report:
+    title: Get Report
+    description: Query for an XML or PDF report for a particular sample
+    input:
+      hash:
+        description: The MD5 or SHA‐256 hash value of the sample
+        title: Hash
+        type: string
+        required: true
+      format:
+        description: 'Report format: PDF or XML'
+        title: Format
+        enum:
+        - pdf
+        - xml
+        type: string
+        required: true
+    output:
+      report:
+        title: Report
+        description: Report
+        type: bytes
+        required: true
+  get_sample:
+    title: Get Sample
+    description: Query for a sample file
+    input:
+      hash:
+        description: The MD5 or SHA‐256 hash value of the sample
+        title: Hash
+        type: string
+        required: true
+    output:
+      file:
+        title: File
+        description: File
+        type: bytes
+        required: true
+  get_pcap:
+    title: Get PCAP
+    description: Query for a PCAP
+    input:
+      hash:
+        description: The MD5 or SHA‐256 hash value of the sample
+        title: Hash
+        required: true
+        type: string
+      platform:
+        title: Platform
+        description: Target analysis environment
+        enum:
+        - Windows XP, Adobe Reader 9.3.3, Office 2003
+        - Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007
+        - Windows XP, Adobe Reader 11, Flash 11, Office 2010
+        - Windows 7 32‐bit, Adobe Reader 11, Flash 11, Office 2010
+        - Windows 7 64bit, Adobe Reader 11, Flash 11, Office 2010
+        - Android 2.3, API 10, avd2.3.1
+        - Mac OS X Mountain Lion
+        type: string
+        required: true
+    output:
+      file:
+        title: File
+        description: File
+        type: bytes
+        required: true
+  get_verdict:
+    title: Get Verdict
+    description: Query for a files classification
+    input:
+      hash:
+        description: The MD5 or SHA‐256 hash value of the sample
+        title: Hash
+        type: string
+        required: true
+    output:
+      verdict:
+        title: Verdict
+        description: 'One of the following verdicts: ''Benign'', ''Malware'', ''Greyware'',
+          ''Pending'', ''Error'', or ''Not found`'
+        enum:
+        - Benign
+        - Malware
+        - Greyware
+        - Pending
+        - Error
+        - Not found
+        type: string
+        required: true
+  get_malware_test_file:
+    title: Get Malware Test File
+    description: Gets a unique, benign malware test file that will trigger
+    output:
+      file:
+        title: File
+        type: bytes
+        description: Benign malware test file
+        required: true

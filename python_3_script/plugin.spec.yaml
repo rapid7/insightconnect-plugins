@@ -1,0 +1,50 @@
+plugin_spec_version: v2
+name: python_3_script
+title: Python 3 Script
+vendor: rapid7
+description: "Run custom Python 3 script"
+version: 2.0.0
+enable_cache: true
+tags:
+ - python
+ - python3
+ - scripting
+ - utilities
+
+connection:
+  modules:
+    title: "Third-Party Modules"
+    description: "List of third-party modules to install for use in the supplied Python script"
+    required: false
+    type: "[]string"
+  timeout:
+    title: "Timeout"
+    description: "Timeout (in seconds) for installing third-party modules"
+    required: true
+    type: integer
+    default: 60
+
+actions:
+  run:
+    title: Run Function
+    description: Run Python function
+    input:
+      function:
+        description: Function definition. Must be named `run`. Accepts the `input`
+          object as params. Returns the dict as output
+        type: python
+        default: def run(params={}):\n    return {}
+        required: false
+      input:
+        description: Input object to be passed as `params={}` to the `run` function
+        type: object
+        required: false
+    output:
+      result1:
+        description: Sample output result1 (delete or edit)
+        type: string
+        required: false
+      result2:
+        description: Sample output result2 (delete or edit)
+        type: string
+        required: false

@@ -1,0 +1,116 @@
+plugin_spec_version: v2
+name: powershell
+title: PowerShell
+description: Run a PowerShell script on a remote host
+version: 2.0.1
+vendor: rapid7
+tags:
+- powershell
+- microsoft
+enable_cache: false
+language: python
+types:
+  kerberos:
+    kdc:
+      title: KDC
+      description: IP address of the Active Directory server. If Auth Type is set
+        to None then leave this blank
+      type: string
+      required: false
+    domain_name:
+      title: Domain Name
+      description: The fully qualified domain name of the remote host e.g. example.com.
+        If Auth Type is set to None then leave this blank
+      type: string
+      required: false
+connection:
+  credentials:
+    type: credential_username_password
+    title: Credentials
+    description: Username and password
+    required: false
+  port:
+    title: Port
+    description: Port number, defaults are 5986 for SSL and 5985 for unencrypted
+    type: integer
+    default: 5986
+    required: false
+  auth:
+    title: Auth Type
+    description: Authentication type
+    type: string
+    enum:
+    - NTLM
+    - Kerberos
+    - None
+    required: true
+  kerberos:
+    title: Kerberos
+    description: Connection information required for Kerberos
+    type: kerberos
+    required: false
+actions:
+  execute_script:
+    title: Execute Script
+    description: Execute PowerShell script encoded as a base64 file on a remote host
+    input:
+      script:
+        title: Script
+        description: PowerShell script as base64
+        type: bytes
+        required: true
+      address:
+        title: Address
+        description: IP address of the remote host e.g. 192.168.1.1. If address is
+          left blank PowerShell will run locally
+        type: string
+        required: false
+      host_name:
+        title: Host Name
+        description: Case-sensitive name of the remote host, eg. MyComputer for Kerberos
+          connection only
+        type: string
+        required: false
+    output:
+      stdout:
+        title: PowerShell Standard Output
+        description: PowerShell standard output
+        type: string
+        required: false
+      stderr:
+        title: PowerShell Standard Error
+        description: PowerShell standard error
+        type: string
+        required: false
+  powershell_string:
+    title: PowerShell String
+    description: Execute PowerShell script in the form of a string
+    input:
+      script:
+        title: Script
+        description: PowerShell script as a string
+        type: string
+        required: true
+      address:
+        title: Address
+        description: IP address of the remote host e.g. 192.168.1.1. If address is
+          left blank PowerShell will run locally
+        type: string
+        required: false
+      host_name:
+        title: Host Name
+        description: Case-sensitive name of the remote host, eg. MyComputer for Kerberos
+          connection only
+        type: string
+        required: false
+    output:
+      stdout:
+        title: PowerShell Standard Output
+        description: PowerShell standard output
+        type: string
+        required: false
+      stderr:
+        title: PowerShell Standard Error
+        description: PowerShell standard error
+        type: string
+        required: false

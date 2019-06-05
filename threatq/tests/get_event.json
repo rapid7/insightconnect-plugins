@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "get_event",
+    "input": {
+      "with": ["indicators", "adversaries"],
+      "id": 6
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "host": "",
+      "proxy": "",
+      "client_id": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

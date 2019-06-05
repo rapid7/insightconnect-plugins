@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "delete_task",
+    "input": {
+      "id": 1138748,
+      "owner": "Komand"
+    },
+    "connection": {
+      "api_access_id": "",
+      "api_default_org": "",
+      "api_secret_key": "",
+      "api_base_url": "https://sandbox.threatconnect.com/api"
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

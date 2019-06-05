@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "ticket_links",
+    "meta": {},
+    "input": {
+      "ticket_id": 3
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

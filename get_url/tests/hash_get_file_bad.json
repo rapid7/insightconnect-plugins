@@ -1,0 +1,15 @@
+{
+  "body": {
+    "action": "get_file",
+    "input": {
+      "url": "http://www.irongeek.com/robots.txt",
+      "checksum": "asdfasdfasdfasdfdfs",
+      "is_verify": false,
+      "timeout": 60
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

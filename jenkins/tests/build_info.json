@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "build_info",
+    "meta": {},
+    "input": {
+      "build number": 529,
+      "name": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

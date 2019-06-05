@@ -1,0 +1,21 @@
+{
+    "body": {
+      "action": "get_user_by_id",
+      "input": {
+        "user_id": "DUCUULP5HBMZ43IG9MBH"
+      },
+      "connection": {
+        "hostname": "",
+        "integration_key": {
+          "secretKey": ""
+        },
+        "secret_key": {
+          "secretKey": ""
+        }
+    },
+      "meta": {}
+    },
+    "version": "v1",
+    "type": "action_start"
+  }
+  

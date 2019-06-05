@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "find_event",
+    "meta": {},
+    "input": {
+      "applicationName": "wininit.exe",
+      "eventType": "CREATE_PROCESS",
+      "hostName": "",
+      "hostNameExact": "",
+      "ipAddress": "12.42.111.98",
+      "ownerName": "",
+      "ownerNameExact": "",
+      "searchWindow": "",
+      "sha256hash": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "connector": "",
+      "url": "https://api5.conferdeploy.net"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

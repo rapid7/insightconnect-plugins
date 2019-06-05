@@ -1,0 +1,44 @@
+{
+  "body": {
+    "action": "create_publicnonhttpbasedpolicy",
+    "meta": {},
+    "input": {
+      "policy": {
+        "DataAccounting": "Exclude",
+        "HostedAddress": "10.10.1.20",
+        "Identity": [],
+        "LogTraffic": "Disable",
+        "MatchIdentity": "Disable",
+        "OutboundAddress": "10.10.2.20",
+        "RewriteSourceAddress": "Disable",
+        "ScanIMAP": "Disable",
+        "ScanPOP3": "Disable",
+        "ScanPOP3S": "Disable",
+        "ScanSMTP": "Disable",
+        "ScanSMTPS": "Disable",
+        "SecurityPolicy": {
+          "Description": "Komand Public Nonhttppolicy",
+          "IPFamily": "IPv4",
+          "IntrusionPrevention": "None",
+          "Name": "Komand NonHTTP",
+          "Position": "top",
+          "SourceSecurityHeartbeat": "Disable",
+          "DestSecurityHeartbeat": "Disable",
+          "Status": "Disable",
+          "TrafficShapingPolicy": "None"
+        },
+        "SourceZones": []
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": 4444
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

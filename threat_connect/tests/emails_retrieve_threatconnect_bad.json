@@ -1,0 +1,27 @@
+{
+  "body": {
+    "action": "emails_retrieve",
+    "input": {
+      "adversary_id": 0,
+      "email_id":0,
+      "id":0,
+      "document_id":0,
+      "incident_id":0,
+      "indicator": "",
+      "security_label": "",
+      "signature_id":0,
+      "threat_id":0,
+      "tag": "",
+      "owner": "Komand"
+    },
+    "connection": {
+      "api_access_id": "",
+      "api_default_org": "",
+      "api_secret_key": "",
+      "api_base_url": "https://sandbox.threatconnect.com/api"
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

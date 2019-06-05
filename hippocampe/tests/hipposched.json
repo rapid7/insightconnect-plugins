@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "hipposched",
+    "meta": {},
+    "input": {
+      "time": "* */12 * * *"
+    },
+    "connection": {
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

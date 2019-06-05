@@ -1,0 +1,802 @@
+plugin_spec_version: v2
+name: recorded_future
+title: Recorded Future
+vendor: rapid7
+status: ["supported"]
+description: Recorded Future arms threat analysts, security operators, and incident
+  responders to rapidly connect the dots and reveal unknown threats
+version: 1.0.2
+tags:
+- recorded future
+- threat intelligence
+- machine learning
+- threat analysis
+- vulnerability prioritization
+enable_cache: false
+language: python
+types:
+  counts:
+    count:
+      type: integer
+      required: false
+    date:
+      type: string
+      required: false
+  entity:
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+    description:
+      type: string
+      required: false
+  metrics:
+    type:
+      type: string
+      required: false
+    value:
+      type: integer
+      required: false
+  entities:
+    count:
+      type: integer
+      required: false
+    entity:
+      type: entity
+      required: false
+  relatedEntities:
+    entities:
+      type: '[]entities'
+      required: false
+    type:
+      type: string
+      required: false
+  evidenceDetails:
+    criticality:
+      type: integer
+      required: false
+    criticalityLabel:
+      title: Criticality Label
+      type: string
+      required: false
+    evidenceString:
+      title: Evidence String
+      type: string
+      required: false
+    rule:
+      type: string
+      required: false
+    timestamp:
+      type: string
+      required: false
+  risk:
+    criticality:
+      type: integer
+      required: false
+    criticalityLabel:
+      title: Criticality Label
+      type: string
+      required: false
+    evidenceDetails:
+      title: Evidence Details
+      type: '[]evidenceDetails'
+      required: false
+    riskSummary:
+      title: Risk Summary
+      type: string
+      required: false
+    rules:
+      type: integer
+      required: false
+    score:
+      type: integer
+      required: false
+  sightings:
+    fragment:
+      type: string
+      required: false
+    published:
+      type: string
+      required: false
+    source:
+      type: string
+      required: false
+    title:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+  timestamps:
+    firstSeen:
+      title: First Seen
+      type: string
+      required: false
+    lastSeen:
+      title: Last Seen
+      type: string
+      required: false
+  risk_rule:
+    name:
+      type: string
+      required: false
+    description:
+      type: string
+      required: false
+    criticality:
+      type: integer
+      required: false
+    criticalityLabel:
+      type: string
+      required: false
+      title: Criticality Label
+  cvss:
+    confidentiality:
+      type: string
+      required: false
+    lastModified:
+      title: Last Modified
+      type: string
+      required: false
+    accessComplexity:
+      title: Access Complexity
+      type: string
+      required: false
+    authentication:
+      type: string
+      required: false
+    score:
+      type: integer
+      required: false
+    published:
+      type: string
+      required: false
+    integrity:
+      type: string
+      required: false
+    availability:
+      type: string
+      required: false
+    accessVector:
+      title: Access Vector
+      type: string
+      required: false
+  vulnerability_search_data:
+    counts:
+      type: '[]counts'
+      required: false
+    cvss:
+      type: cvss
+      required: false
+    cpe:
+      type: '[]string'
+      required: false
+    nvdDescription:
+      title: NVD Description
+      type: string
+      required: false
+    entity:
+      type: entity
+      required: false
+    hashAlgorithm:
+      title: Hash Algorithm
+      type: string
+      required: false
+    intelCard:
+      title: Intel Card
+      type: string
+      required: false
+    metrics:
+      type: '[]metrics'
+      required: false
+    relatedEntities:
+      title: Related Entities
+      type: '[]relatedEntities'
+      required: false
+    risk:
+      type: risk
+      required: false
+    sightings:
+      type: '[]sightings'
+      required: false
+    threatLists:
+      title: Threat Lists
+      type: '[]object'
+      required: false
+    timestamps:
+      type: timestamps
+      required: false
+  search_data:
+    counts:
+      type: '[]counts'
+      required: false
+    entity:
+      type: entity
+      required: false
+    hashAlgorithm:
+      title: Hash Algorithm
+      type: string
+      required: false
+    intelCard:
+      title: Intel Card
+      type: string
+      required: false
+    metrics:
+      type: '[]metrics'
+      required: false
+    relatedEntities:
+      title: Related Entities
+      type: '[]relatedEntities'
+      required: false
+    risk:
+      type: risk
+      required: false
+    sightings:
+      type: '[]sightings'
+      required: false
+    threatLists:
+      title: Threat Lists
+      type: '[]object'
+      required: false
+    timestamps:
+      type: timestamps
+      required: false
+connection:
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: API Key
+    required: true
+actions:
+  download_domain_risk_list:
+    title: Download Domain Risk List
+    description: This action returns a risk list of domains matching a filtration
+      rule
+    input:
+      list:
+        description: The risk list to retrieve
+        type: string
+        enum:
+        - active_phishing_url
+        - blacklisted_dns_name
+        - cc_dns_name
+        - cc_nameserver
+        - cc_url
+        - compromised_url
+        - historical_malware_analysis_dns_name
+        - historically_linked_to_cyber_attack
+        - large
+        - ransomware_distribution_url
+        - ransomware_payment_dns_name
+        - recent_fast_flux_dns_name
+        - recent_malware_analysis_dns_name
+        - recently_linked_to_cyber_attack
+        - recently_resolved_to_host_of_many_ddns_names
+        - recently_resolved_to_malicious_ip
+        - recently_resolved_to_suspicious_ip
+        - recently_resolved_to_unusual_ip
+        - recently_resolved_to_very_malicious_ip
+        - sinkhole_dns_name
+        - typosquat_similarity__dns_sandwich
+        - typosquat_similarity__typo_or_homograph
+        required: false
+    output:
+      risk_list:
+        type: object
+        description: Risk List
+        required: false
+  list_domain_risk_rules:
+    title: List Domain Risk Rules
+    description: This action is used to list available filtration rules for domain
+      risk lists
+    output:
+      risk_rules:
+        type: '[]risk_rule'
+        description: Risk Rules
+        required: false
+  search_domains:
+    title: Search Domains
+    description: This action is used to search for results related to a specific parent
+      domain
+    input:
+      limit:
+        type: number
+        description: Number of results to retrieve, up to 100
+        required: true
+      from:
+        title: Offset
+        type: number
+        description: Number of initial records to skip
+        default: 0
+        required: true
+      orderby:
+        title: Order By
+        description: Which property to sort the results by
+        type: string
+        enum:
+        - Created
+        - Firstseen
+        - Lastseen
+        - Modified
+        - Riskscore
+        - Rules
+        - Sevendayshits
+        - Sixtydayshits
+        - Totalhits
+        required: true
+      direction:
+        title: Result Direction
+        description: Sort results ascending/descending
+        type: string
+        enum:
+        - asc
+        - desc
+        default: asc
+        required: true
+      parent:
+        title: Parent
+        description: Parent domain, if any
+        type: string
+        required: true
+    output:
+      data:
+        type: search_data
+        description: Data
+        required: false
+  lookup_domain:
+    title: Lookup Domain
+    description: This action is used to return information about a specific domain
+      entry
+    input:
+      domain:
+        type: string
+        description: Domain
+        required: true
+    output:
+      entity:
+        type: entity
+        description: Entity
+        required: false
+      timestamps:
+        type: timestamps
+        description: Timestamps
+        required: false
+  search_entity_lists:
+    title: Search Entity Lists
+    description: This action is used to perform a freetext search across all Recorded
+      Future entity types (IP address, domain, hash, malware, and vulnerability)
+    input:
+      freetext:
+        type: string
+        description: Freetext search
+        required: true
+    output:
+      entities:
+        type: '[]entity'
+        description: Entities
+        required: false
+  lookup_entity_list:
+    title: Lookup Entity List
+    description: This action is used to fetch a specified entity list by ID
+    input:
+      entity_list_id:
+        type: string
+        required: true
+        description: Entity list ID, obtained from the 'Search Entity lists' action
+    output:
+      entities:
+        type: '[]entity'
+        description: Entities
+        required: false
+  download_hash_risk_list:
+    title: Download Hash Risk List
+    description: This action is used to return a list of hashes matching a specified
+      risk rule
+    input:
+      list:
+        description: The risk list to retrieve
+        type: string
+        enum:
+        - large
+        - linked_to_attack_vector
+        - linked_to_cyber_attack
+        - linked_to_malware
+        - linked_to_vulnerability
+        - positive_malware_verdict
+        - threat_researcher
+        required: false
+    output:
+      risk_list:
+        type: object
+        description: Risk List
+        required: false
+  list_hash_risk_rules:
+    title: List Hash Risk Rules
+    description: This action is used to list available filtration rules for hash risk
+      lists
+    output:
+      risk_rules:
+        type: '[]risk_rule'
+        description: Risk Rules
+        required: false
+  search_hashes:
+    title: Search Hashes
+    description: This action is used to search for data related to hashes of a specified
+      type
+    input:
+      limit:
+        type: number
+        description: Number of results to retrieve, up to 100
+        required: true
+      from:
+        title: Offset
+        type: number
+        description: Number of initial records to skip
+        default: 0
+        required: true
+      orderby:
+        title: Order By
+        description: Which property to sort the results by
+        type: string
+        enum:
+        - Created
+        - Lastseen
+        - Firstseen
+        - Lastseen
+        - Modified
+        - Riskscore
+        - Rules
+        - Sevendayshits
+        - Sixtydayshits
+        - Totalhits
+        required: true
+      direction:
+        title: Result Direction
+        description: Sort results ascending/descending
+        type: string
+        enum:
+        - asc
+        - desc
+        default: asc
+        required: true
+      algorithm:
+        title: Algorithm
+        description: Hashing algorithm to search by
+        type: string
+        enum:
+        - MD5
+        - SHA-1
+        - SHA-256
+        required: true
+    output:
+      data:
+        type: search_data
+        description: Data
+        required: false
+  lookup_hash:
+    title: Lookup Hash
+    description: This action is used to retrieve information about a specified hash
+    input:
+      hash:
+        type: string
+        description: Hash
+        required: true
+    output:
+      entity:
+        type: entity
+        description: Entity
+        required: false
+      timestamps:
+        type: timestamps
+        description: Timestamps
+        required: false
+  download_IP_addresses_risk_list:
+    title: Download IP Addresses Risk List
+    description: This action is used to fetch a risk list of the IP addresses that
+      match a specified filtration rule
+    input:
+      list:
+        description: The risk list to retrieve
+        type: string
+        enum:
+        - current_cc_server
+        - cyber_exploit_signal_medium
+        - historical_bad_ssl_association
+        - historical_botnet_traffic
+        - historical_cc_server
+        - historical_honeypot_sighting
+        - historical_multicategory_blacklist
+        - historical_open_proxies
+        - historical_positive_malware_verdict
+        - historical_spam_source
+        - historical_sshdictionary_attacker
+        - historical_threat_researcher
+        - historically_linked_to_apt
+        - historically_linked_to_cyber_attack
+        - historically_linked_to_intrusion_method
+        - honeypot_host
+        - inside_possible_bogus_bgp_route
+        - large
+        - malicious_packet_source
+        - malware_delivery
+        - nameserver_for_cc_server
+        - phishing_host
+        - recent_botnet_traffic
+        - recent_cc_server
+        - recent_honeypot_sighting
+        - recent_host_of_many_ddns_names
+        - recent_multicategory_blacklist
+        - recent_open_proxies
+        - recent_positive_malware_verdict
+        - recent_spam_source
+        - recent_sshdictionary_attacker
+        - recent_threat_researcher
+        - recently_linked_to_apt
+        - recently_linked_to_cyber_attack
+        - recently_linked_to_intrusion_method
+        - resolution_of_fast_flux_dns_name
+        - tor_node
+        - unusual_ip
+        - vulnerable_host
+        required: false
+    output:
+      risk_list:
+        type: object
+        description: Risk List
+        required: false
+  list_IP_addresses_risk_rules:
+    title: List IP Addresses Risk Rules
+    description: This action is used to list available filtration rules for IP address
+      risk lists
+    output:
+      risk_rules:
+        type: '[]risk_rule'
+        description: Risk Rules
+        required: false
+  search_IP_addresses:
+    title: Search IP Addresses
+    description: This action is used to query for data related to a specified IP range
+    input:
+      limit:
+        type: number
+        description: Number of results to retrieve, up to 100
+        required: true
+      from:
+        title: Offset
+        type: number
+        description: Number of initial records to skip
+        default: 0
+        required: true
+      orderby:
+        title: Order By
+        description: Which property to sort the results by
+        type: string
+        enum:
+        - Created
+        - Lastseen
+        - Firstseen
+        - Modified
+        - Riskscore
+        - Rules
+        - Sevendayshits
+        - Sixtydayshits
+        - Totalhits
+        required: true
+      direction:
+        title: Result Direction
+        description: Sort results ascending/descending
+        type: string
+        enum:
+        - asc
+        - desc
+        default: asc
+        required: true
+      ip_range:
+        title: IP Range
+        description: IP address range to search
+        type: string
+        required: true
+    output:
+      data:
+        type: search_data
+        description: Data
+        required: false
+  lookup_IP_address:
+    title: Lookup IP Address
+    description: This action is used to query for data related to a specific IP address
+    input:
+      IP_address:
+        title: IP Address
+        description: IP address
+        type: string
+        required: true
+    output:
+      entity:
+        type: entity
+        description: Timestamps
+        required: false
+      timestamps:
+        type: timestamps
+        description: Timestamps
+        required: false
+  search_malware:
+    title: Search Malware
+    description: This action is used to search for data related to malware
+    input:
+      freetext:
+        title: Text
+        type: string
+        description: Freetext search
+        required: false
+      limit:
+        type: number
+        description: Number of results to retrieve, up to 100
+        required: true
+      from:
+        title: Offset
+        type: number
+        description: Number of initial records to skip
+        default: 0
+        required: true
+      orderby:
+        title: Order By
+        description: Which property to sort the results by
+        type: string
+        enum:
+        - Created
+        - Lastseen
+        - Firstseen
+        - Modified
+        - Riskscore
+        - Rules
+        - Sevendayshits
+        - Sixtydayshits
+        - Totalhits
+        required: true
+      direction:
+        title: Result Direction
+        description: Sort results ascending/descending
+        type: string
+        enum:
+        - asc
+        - desc
+        default: asc
+        required: true
+    output:
+      data:
+        type: search_data
+        description: Data
+        required: false
+  lookup_malware:
+    title: Lookup Malware
+    description: This action is used to return information about a specific malware
+      entry by ID
+    input:
+      malware_ID:
+        title: Malware ID
+        description: Malware ID
+        type: string
+        required: true
+    output:
+      entity:
+        type: entity
+        description: Entity
+        required: false
+      timestamps:
+        type: timestamps
+        description: Timestamps
+        required: false
+  download_vulnerability_risk_list:
+    title: Download Vulnerability Risk List
+    description: This action is used to fetch a risk list of vulnerabilities matching
+      a specified filtration rule
+    input:
+      list:
+        description: The risk list to retrieve
+        type: string
+        enum:
+        - cyber_exploit_signal_critical
+        - cyber_exploit_signal_important
+        - cyber_exploit_signal_medium
+        - historical_scanner_uptake
+        - historically_linked_to_exploit_kit
+        - historically_linked_to_malware
+        - historically_linked_to_ransomware
+        - historically_linked_to_remote_access_trojan
+        - large
+        - linked_to_recent_cyber_exploit
+        - nist_severity_critical
+        - nist_severity_high
+        - nist_severity_low
+        - nist_severity_medium
+        - recent_scanner_uptake
+        - recently_linked_to_exploit_kit
+        - recently_linked_to_malware
+        - recently_linked_to_ransomware
+        - recently_linked_to_remote_access_trojan
+        - web_reporting_prior_to_nvd_disclosure
+        required: false
+    output:
+      risk_list:
+        type: object
+        description: Risk List
+        required: false
+  list_vulnerability_risk_rules:
+    title: List Vulnerability Risk Rules
+    description: This action is used to retrieve available filtration rules for vulnerability
+      risk lists
+    output:
+      risk_rules:
+        type: '[]risk_rule'
+        description: Risk Rules
+        required: false
+  search_vulnerabilities:
+    title: Search Vulnerabilities
+    description: This action is used to search for data related to vulnerabilities
+    input:
+      limit:
+        type: number
+        description: Number of results to retrieve, up to 100
+        required: true
+      from:
+        title: Offset
+        type: number
+        description: Number of initial records to skip
+        default: 0
+        required: true
+      orderby:
+        title: Order By
+        description: Which property to sort the results by
+        type: string
+        enum:
+        - Created
+        - Lastseen
+        - Firstseen
+        - Modified
+        - Riskscore
+        - Rules
+        - Sevendayshits
+        - Sixtydayshits
+        - Totalhits
+        required: true
+      direction:
+        title: Result Direction
+        description: Sort results ascending/descending
+        type: string
+        enum:
+        - asc
+        - desc
+        default: asc
+        required: true
+      freetext:
+        title: Text
+        description: Text query
+        type: string
+        required: true
+    output:
+      data:
+        type: vulnerability_search_data
+        description: Data
+        required: false
+  lookup_vulnerability:
+    title: Lookup Vulnerability
+    description: This action is used to fetch information about a specific vulnerability
+      by CVE or RF ID
+    input:
+      id:
+        description: CVE or RF ID
+        type: string
+        required: true
+    output:
+      data:
+        type: vulnerability_search_data
+        description: Data
+        required: false

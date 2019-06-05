@@ -1,0 +1,111 @@
+plugin_spec_version: v2
+name: jenkins
+title: Jenkins
+description: Reliably build, test, and deploy their software
+version: 1.1.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- jenkins
+- software development
+- ci
+- build
+types:
+  build_info:
+    building:
+      title: Building
+      description: If true the build is in progress
+      type: boolean
+    full_display_name:
+      title: Full Display Name
+      description: The full name of the build
+      type: string
+    keep_log:
+      title: Keep Log
+      description: flag for whether to keep the log
+      type: boolean
+    number:
+      title: Number
+      description: The build Number
+      type: integer
+    queue_id:
+      title: Queue ID
+      description: The queue ID
+      type: integer
+    result:
+      title: Result
+      description: The result of the build
+      type: string
+    timestamp:
+      title: Timestamp
+      description: A timestamp for the build start
+      type: integer
+    url:
+      title: URL
+      description: URL for more information on the build
+      type: string
+    built_on:
+      title: ' Built On'
+      description: The server the build occurred on
+      type: string
+    items:
+      title: Items
+      description: More information on the build
+      type: '[]object'
+connection:
+  host:
+    title: Host
+    description: Jenkins' server URL
+    type: string
+    required: true
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: true
+actions:
+  build_job:
+    title: Build Job
+    description: Start a build job
+    input:
+      name:
+        title: Name
+        description: Job name
+        type: string
+        required: true
+      parameters:
+        title: Parameters
+        description: Dictionary of job parameters
+        type: object
+        required: false
+    output:
+      job_number:
+        title: Job Number
+        description: Item queue ID
+        type: integer
+        required: false
+      build_number:
+        title: Build Number
+        description: Build number
+        type: integer
+        required: false
+  build_info:
+    title: Build Info
+    description: Returns detailed information on a build
+    input:
+      name:
+        title: Name
+        description: Job name
+        type: string
+        required: true
+      build number:
+        title: Build Number
+        description: The build number you want detailed information on
+        type: integer
+        required: true
+    output:
+      build_info:
+        title: Build Info
+        description: Information on the build
+        type: build_info
+        required: false

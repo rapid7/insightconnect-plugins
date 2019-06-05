@@ -1,0 +1,13 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "connection": null,
+    "input": {
+      "input": { "num1": 1, "num2": 2 },
+      "function": "def run(params={}):\n return { 'first': params['num1'], 'second': params['num2'], 'sum': params['num1'] + params['num2'] }"
+    },
+    "action": "run",
+    "meta": {}
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "scan",
+    "meta": {},
+    "input": {
+      "site_id": "44"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,465 @@
+plugin_spec_version: v2
+name: joe_sandbox
+title: Joe Sandbox
+description: Joe Sandbox Cloud executes files and URLs fully automated in a controlled
+  environment and monitors the behavior of applications and the operating system for
+  suspicious activities
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- security
+- malware
+- analysis
+- automation
+types:
+  system:
+    name:
+      title: Name
+      description: Name
+      type: string
+    description:
+      title: Description
+      description: Description
+      type: string
+    arch:
+      title: Arch
+      description: Architecture (one of WINDOWS, MAC, LINUX, IOS, ANDROID)
+      type: string
+    count:
+      title: Count
+      description: How many systems of given type exist
+      type: integer
+  country:
+    name:
+      title: Name
+      description: Name of the country
+      type: string
+  keyboard_layout:
+    name:
+      title: Name
+      description: Name of the keyboard layout language
+      type: string
+  single_quota:
+    current:
+      title: Current
+      description: Current quota
+      type: integer
+    limit:
+      title: Limit
+      description: Limit of quota
+      type: integer
+    remaining:
+      title: Remaining
+      description: Remaining quota
+      type: integer
+  full_quota:
+    daily:
+      title: Daily
+      description: Daily quota
+      type: single_quota
+    monthly:
+      title: Monthly
+      description: Monthly quota
+      type: single_quota
+  webid:
+    webid:
+      title: WebID
+      description: Web ID
+      type: string
+  run:
+    detection:
+      title: Detection
+      description: 'Detection, one of: unknown, clean, suspicious, malicious'
+      type: string
+    error:
+      title: Error
+      description: Error description, will not be present if no error was detected
+      type: string
+    system:
+      title: System
+      description: System
+      type: string
+    yara:
+      title: Yara
+      description: Yara
+      type: boolean
+  analysis:
+    webid:
+      title: WebID
+      description: Web ID
+      type: string
+    analysisid:
+      title: AnalysisID
+      description: Analysis ID. Will not be returned if the analysis is not finished
+      type: string
+    status:
+      title: Status
+      description: 'Status of the analysis, one of: submitted, running, finished'
+      type: string
+    comments:
+      title: Comments
+      description: Comments
+      type: string
+    filename:
+      title: Filename
+      description: File name
+      type: string
+    scriptname:
+      title: Scriptname
+      description: Script name
+      type: string
+    time:
+      title: Time
+      description: Time
+      type: date
+    duration:
+      title: Duration
+      description: Duration of the analysis in seconds (only for finished analyses)
+      type: integer
+    md5:
+      title: MD5
+      description: MD5
+      type: string
+    sha1:
+      title: SHA1
+      description: SHA1
+      type: string
+    sha256:
+      title: SHA256
+      description: SHA256
+      type: string
+    tags:
+      title: Tags
+      description: Tags
+      type: '[]string'
+    runs:
+      title: Runs
+      description: Runs
+      type: '[]run'
+connection:
+  api_key:
+    title: API Key
+    description: API key generated for Joe Sandbox user
+    type: credential_secret_key
+    required: true
+  url:
+    title: URL
+    description: API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud.
+      On-premise installations use the following URL format http://example.com/joesandbox/index.php/api
+    type: string
+    default: https://jbxcloud.joesecurity.org/api
+    required: false
+actions:
+  check_server_status:
+    title: Check Server Status
+    description: Check if Joe Sandbox is online or in maintenance mode
+    input: null
+    output:
+      online:
+        title: Online
+        description: Is the server online
+        type: boolean
+        required: true
+  get_server_info:
+    title: Get Server Info
+    description: Query information about the server
+    input: null
+    output:
+      queuesize:
+        title: Queue Size
+        description: Queue size
+        type: integer
+        required: true
+  list_systems:
+    title: List Systems
+    description: Retrieve a list of systems on the server
+    input: null
+    output:
+      systems:
+        title: Systems
+        description: List of systems on the server
+        type: '[]system'
+        required: true
+  list_countries:
+    title: List Countries
+    description: Retrieve a list of localized internet anonymization countries
+    input: null
+    output:
+      countries:
+        title: Countries
+        description: List of localized internet anonymization countries
+        type: '[]country'
+        required: true
+  list_keyboard_layouts:
+    title: List Keyboard Layouts
+    description: Retrieve a list of available keyboard layouts for Windows analyzers
+    input: null
+    output:
+      keyboard_layouts:
+        title: Keyboard Layouts
+        description: List of available keyboard layouts
+        type: '[]keyboard_layout'
+        required: true
+  get_account_info:
+    title: Get Account Info
+    description: Query information about Joe Sandbox user account
+    input: null
+    output:
+      type:
+        title: Type
+        description: Type of the account
+        type: string
+        required: true
+      quota:
+        title: Quota
+        description: Account quota
+        type: full_quota
+        required: true
+  submit_sample:
+    title: Submit Sample
+    description: Submit a sample for analysis and return the associated web IDs for
+      the sample
+    input:
+      sample:
+        title: Sample
+        description: The sample to submit
+        type: bytes
+        required: true
+      cookbook:
+        title: Cookbook
+        description: Cookbook to be uploaded together with the sample
+        type: bytes
+        required: false
+      parameters:
+        title: Parameters
+        description: Custom sandbox parameters, described in more detail in the API
+          documentation. All boolean parameters should be set to 1 or 0. In case the
+          `cookbook` option is used, most other options are silently ignored since
+          they can be specified inside the cookbook
+        type: object
+        required: false
+      additional_parameters:
+        title: Additional Parameters
+        description: Additional parameters for Joe Sandbox Cloud, described in more
+          detail in the API documentation. All boolean parameters should be set to
+          1 or 0. Parameter `accept-tac` will always be set to 1
+        type: object
+        required: false
+    output:
+      webids:
+        title: Web IDs
+        description: Web IDs associated with the sample
+        type: '[]string'
+        required: true
+  submit_sample_url:
+    title: Submit Sample URL
+    description: Submit a sample at a given URL for analysis and return the associated
+      web IDs for the sample
+    input:
+      sample_url:
+        title: Sample URL
+        description: The URL of a sample to submit
+        type: string
+        required: true
+      parameters:
+        title: Parameters
+        description: Custom sandbox parameters, described in more detail in the API
+          documentation. All boolean parameters should be set to 1 or 0
+        type: object
+        required: false
+      additional_parameters:
+        title: Additional Parameters
+        description: Additional parameters for Joe Sandbox Cloud, described in more
+          detail in the API documentation. All boolean parameters should be set to
+          1 or 0. Parameter `accept-tac` will always be set to 1
+        type: object
+        required: false
+    output:
+      webids:
+        title: Web IDs
+        description: Web IDs associated with the sample
+        type: '[]string'
+        required: true
+  submit_url:
+    title: Submit URL
+    description: Submit a website for analysis and return the associated web IDs for
+      the sample
+    input:
+      url:
+        title: URL
+        description: The URL of a website to submit
+        type: string
+        required: true
+      parameters:
+        title: Parameters
+        description: Custom sandbox parameters, described in more detail in the API
+          documentation. All boolean parameters should be set to 1 or 0
+        type: object
+        required: false
+      additional_parameters:
+        title: Additional Parameters
+        description: Additional parameters for Joe Sandbox Cloud, described in more
+          detail in the API documentation. All boolean parameters should be set to
+          1 or 0. Parameter `accept-tac` will always be set to 1
+        type: object
+        required: false
+    output:
+      webids:
+        title: Web IDs
+        description: Web IDs associated with the sample
+        type: '[]string'
+        required: true
+  submit_cookbook:
+    title: Submit Cookbook
+    description: Submit a cookbook for analysis and return the associated web IDs
+      for the cookbook
+    input:
+      cookbook:
+        title: Cookbook
+        description: Cookbook to be uploaded together with the sample
+        type: bytes
+        required: true
+      parameters:
+        title: Parameters
+        description: Custom sandbox parameters, described in more detail in the API
+          documentation. All boolean parameters should be set to 1 or 0
+        type: object
+        required: false
+      additional_parameters:
+        title: Additional Parameters
+        description: Additional parameters for Joe Sandbox Cloud, described in more
+          detail in the API documentation. All boolean parameters should be set to
+          1 or 0. Parameter `accept-tac` will always be set to 1
+        type: object
+        required: false
+    output:
+      webids:
+        title: Web IDs
+        description: Web IDs associated with the cookbook
+        type: '[]string'
+        required: true
+  list_analyses:
+    title: List Analyses
+    description: Fetch a list of all analyses
+    input: null
+    output:
+      analyses:
+        title: Analyses
+        description: A list of all analyses IDs
+        type: '[]webid'
+        required: true
+  get_analysis_info:
+    title: Get Analysis Info
+    description: Show the status and most important attributes of an analysis
+    input:
+      webid:
+        title: WebID
+        description: The web ID of the analysis
+        type: string
+        required: true
+    output:
+      analysis:
+        title: Analysis
+        description: Analysis details
+        type: analysis
+        required: true
+  delete_analysis:
+    title: Delete Analysis
+    description: Delete an analysis
+    input:
+      webid:
+        title: WebID
+        description: The web ID of the analysis
+        type: string
+        required: true
+    output:
+      deleted:
+        title: Deleted
+        description: Was the analysis deleted
+        type: boolean
+        required: true
+  search_analysis:
+    title: Search Analysis
+    description: Lists the web IDs of the analyses that match the given query. Searches
+      in MD5, SHA1, SHA256, filename, cookbook name, comment, URL and report ID
+    input:
+      query:
+        title: Query
+        description: String to search for
+        type: string
+        required: true
+    output:
+      analyses:
+        title: Analyses
+        description: A list of matching analyses IDs
+        type: '[]webid'
+        required: true
+  download_analysis:
+    title: Download Analysis
+    description: Download a resource for an analysis. This can be a full report, binaries,
+      screenshots, etc
+    input:
+      webid:
+        title: WebID
+        description: The web ID of the analysis
+        type: string
+        required: true
+      type:
+        title: Type
+        description: The report type, e.g. 'html', 'bins'
+        type: string
+        enum:
+        - bins
+        - binstrings
+        - classhtml
+        - classxml
+        - clusterxml
+        - cookbook
+        - executive
+        - graphreports
+        - html
+        - ida
+        - irjson
+        - irjsonfixed
+        - irxml
+        - ishots
+        - json
+        - jsonfixed
+        - lighthtml
+        - lightjson
+        - lightjsonfixed
+        - lightxml
+        - maec
+        - memdumps
+        - memstrings
+        - misp
+        - openioc
+        - pcap
+        - pcapslim
+        - pdf
+        - sample
+        - shoots
+        - unpack
+        - unpackpe
+        - xml
+        - yara
+        default: html
+        required: false
+      run:
+        title: Run
+        description: The number of the run. If not specified, Joe Sandbox will choose
+          one automatically
+        type: integer
+        required: false
+    output:
+      resource_name:
+        title: Resource Name
+        description: Name of the resource associated with the analysis
+        type: string
+        required: true
+      resource_content:
+        title: Resource Content
+        description: Content of the resource associated with the analysis in base64
+        type: bytes
+        required: true

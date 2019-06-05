@@ -1,0 +1,16 @@
+{
+  "body": {
+    "connection": {
+      "ssl_verify": false,
+      "url": "http://192.168.0.15:8000",
+      "token": {
+        "secretKey": ""
+      }
+    },
+    "action": "get_list",
+    "meta": {},
+    "input": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

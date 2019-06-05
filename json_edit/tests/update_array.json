@@ -1,0 +1,15 @@
+{
+  "body": {
+    "action": "update",
+    "meta": {},
+    "input": {
+      "array": [{"hostname":"BIGFIX-SRV","ip":"1.1.1.1","os":"Win2012 6.2.9200"}, {"hostname":"BIGFIX-DC","ip":"1.1.1.2","os":"Win10 6.2.9200"}],
+      "key": "ip",
+      "object": {},
+      "value": "Sanitized!"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,20 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "input": {},
+    "action": "get_cases",
+    "meta": {},
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": "9000",
+      "protocol": "http",
+      "proxy": {},
+      "verify": true
+    }
+  }
+}

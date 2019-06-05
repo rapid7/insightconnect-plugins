@@ -1,0 +1,111 @@
+plugin_spec_version: v2
+name: dig
+title: Dig
+description: DNS Lookups
+version: 1.0.1
+vendor: rapid7
+tags:
+- dig
+- dns
+actions:
+  forward:
+    title: Forward Lookup
+    description: Forward DNS Query
+    input:
+      domain:
+        type: string
+        description: Domain name to resolve
+        required: true
+      resolver:
+        type: string
+        description: Resolver. Leave blank to use default resolver for the system
+        required: false
+      query:
+        type: string
+        description: Query type e.g. ANY, A, MX, NS, etc
+        enum:
+        - A
+        - AAAA
+        - ANY
+        - CNAME
+        - MX
+        - NS
+        - PTR
+        - SOA
+        required: true
+    output:
+      fulloutput:
+        description: Full Dig output
+        title: Full Output
+        type: string
+        required: false
+      status:
+        title: Query Status
+        description: Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED
+          ...]
+        type: string
+        required: false
+      nameserver:
+        title: Nameserver
+        description: Nameserver that fulfilled request
+        type: string
+        required: false
+      answer:
+        description: Answer received
+        title: Answer
+        type: string
+        required: false
+      question:
+        description: Question asked
+        title: Question
+        type: string
+        required: false
+      all_answers:
+        title: All Answers
+        type: '[]string'
+        description: A list of all answers found
+        required: false
+      last_answer:
+        title: Last Answer
+        type: string
+        description: The last answer found in the answers section
+        required: false
+  reverse:
+    title: Reverse Lookup
+    description: Reverse DNS Query
+    input:
+      resolver:
+        type: string
+        description: Resolver. Leave blank to use default resolver for the system
+        required: false
+      address:
+        type: string
+        description: Internet address to resolve
+        required: true
+    output:
+      fulloutput:
+        description: Full Dig output
+        title: Full Output
+        type: string
+        required: false
+      status:
+        title: Query Status
+        description: Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED
+          ...]
+        type: string
+        required: false
+      nameserver:
+        title: Nameserver
+        description: Nameserver that fulfilled request
+        type: string
+        required: false
+      answer:
+        title: Answer
+        description: Answer received
+        type: string
+        required: false
+      question:
+        title: Question
+        description: Question asked
+        type: string
+        required: false

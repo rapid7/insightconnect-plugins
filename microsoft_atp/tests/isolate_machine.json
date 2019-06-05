@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "isolate_machine",
+    "input": {
+      "machine_id": "c6944fa14970633adeecbabc104167ef12557a6f",
+      "isolation_type": "Full",
+      "comment": "Isolated by Komand"
+    },
+    "connection": {
+      "auth_url": "",
+      "client_id": "",
+      "client_secret": "",
+      "host": "https://api.securitycenter.windows.com",
+      "resource_url": "https://api.securitycenter.windows.com",
+      "seconds_ago": 10512000
+    }
+  },
+  "version": "v1",
+  "type": "action_start"
+}

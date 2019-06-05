@@ -1,0 +1,185 @@
+plugin_spec_version: v2
+name: blockade
+title: Blockade
+vendor: rapid7
+status: ["unsupported"]
+description: Blockade brings antivirus-like capabilities to users who run the Chrome
+  browser
+version: 1.0.0
+tags:
+- blockade
+- intel
+- chrome
+enable_cache: false
+types:
+  metadata:
+    frameId:
+      type: integer
+      required: false
+    method:
+      type: string
+      required: false
+    parentFrameId:
+      type: integer
+      required: false
+    requestId:
+      type: string
+      required: false
+    tabId:
+      type: integer
+      required: false
+    timeStamp:
+      type: float
+      required: false
+    type:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+  send_events:
+    analysisTime:
+      type: date
+      required: false
+    userAgent:
+      type: string
+      required: false
+    indicatorMatch:
+      type: string
+      required: false
+    metadata:
+      type: metadata
+      required: false
+    hashMatch:
+      type: string
+      required: false
+  events:
+    event_response:
+      type: '[]send_events'
+      required: false
+connection:
+  url:
+    title: Cloud Node URL
+    type: string
+    description: E.g. http://192.168.99.100:5000
+    required: true
+  email:
+    title: Email
+    type: string
+    required: false
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    required: false
+actions:
+  add_indicators:
+    title: Add Indicators
+    description: Add indicators to the Cloud Node
+    input:
+      indicators:
+        description: Indicators as array e.g. [ "c9867172dca8b07d06566c78c7265ff2",
+          "8f55ea93778722e32403b0c961295aed" ]
+        type: '[]string'
+        required: false
+    output:
+      message:
+        description: Message
+        type: string
+        required: false
+      success:
+        description: Success
+        type: boolean
+        required: false
+      writeCount:
+        description: Write count
+        type: integer
+        required: false
+  get_indicators:
+    title: Get Indicators
+    description: Get list of indicators from the Cloud Node
+    input:
+      db_route:
+        title: DB Route
+        description: Database name, leave empty if only a single database is used
+        type: string
+        required: false
+    output:
+      indicators:
+        description: List of indicators
+        type: '[]string'
+        required: true
+      indicatorCount:
+        title: Indicator Count
+        description: Indicator count
+        type: integer
+        required: true
+      success:
+        type: boolean
+        description: Success
+        required: true
+  get_events:
+    title: Get Events
+    description: Get list of events from the Cloud Node
+    input: null
+    output:
+      events:
+        description: List of events
+        type: '[]string'
+        required: false
+      eventsCount:
+        title: Events Count
+        description: Events count
+        type: integer
+        required: false
+      success:
+        description: Success
+        type: boolean
+        required: true
+  add_user:
+    title: Add User
+    description: Add Cloud Node user
+    input:
+      user_email:
+        title: Email
+        description: Email of new user
+        type: string
+        required: true
+      user_name:
+        title: Username
+        description: Name of new user
+        type: string
+        required: true
+      user_role:
+        title: Role
+        description: Role of new user
+        enum:
+        - analyst
+        - admin
+        type: string
+        required: true
+    output:
+      api_key:
+        title: API Key
+        description: API key
+        type: string
+        required: false
+      email:
+        description: Email
+        type: string
+        required: false
+      name:
+        description: Name
+        type: string
+        required: false
+      role:
+        description: Role
+        type: string
+        required: false
+      success:
+        description: Success
+        type: boolean
+        required: true
+      message:
+        description: Message
+        type: string
+        required: true

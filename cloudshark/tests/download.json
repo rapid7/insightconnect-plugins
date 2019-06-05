@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "download",
+    "input": {
+      "cid": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": "blah"
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,17 @@
+{
+  "type": "action_start",
+  "body": {
+    "action": "search",
+    "connection": null,
+    "input": {
+      "query": "site:komand.com \"blog\"",
+      "only_standard": false,
+      "stop": 10,
+      "pause": 1.0,
+      "num": 10,
+      "lang": "en"
+    },
+    "meta": {}
+  },
+  "version": "v1"
+}

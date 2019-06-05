@@ -1,0 +1,16 @@
+{
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "port": 6379,
+      "db": 0,
+      "host": ""
+    },
+    "input": {
+      "key": "foo"
+    },
+    "action": "get",
+    "meta": {}
+  },
+  "version": "v1"
+}

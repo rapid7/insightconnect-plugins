@@ -1,0 +1,190 @@
+plugin_spec_version: v2
+name: phabricator
+title: Phabricator
+vendor: rapid7
+status: ["unsupported"]
+description: Phabricator is a suite of open source tools for peer code review, task
+  management, and project communication
+version: 1.0.0
+tags:
+- phabricator
+- code review
+- ug tracker
+language: python
+connection:
+  url:
+    title: URL
+    type: string
+    description: API URL e.g. https://test-v2lvaidr55f4.phacility.com/api/
+    required: true
+  token:
+    title: API Token
+    type: credential_secret_key
+    description: API Token
+    required: true
+actions:
+  createtask:
+    title: Create Task
+    description: This action create new task
+    input:
+      title:
+        title: Title
+        type: string
+        description: Name of task
+        required: true
+      description:
+        title: Description
+        type: string
+        description: Description of new task
+        required: false
+    output:
+      id:
+        title: Task ID
+        description: Task ID of newly created task
+        type: string
+        required: true
+  assign:
+    title: Assign
+    description: Assign specific user to task
+    input:
+      id:
+        title: ID
+        type: string
+        description: Task ID
+        required: true
+      user:
+        title: User
+        type: string
+        description: User assign to task
+        required: true
+    output:
+      message:
+        title: Message
+        description: 'When user is assigned message is: User assigned'
+        type: string
+        required: false
+  claim:
+    title: Claim
+    description: Claim a task
+    input:
+      id:
+        title: ID
+        type: string
+        description: Task ID
+        required: true
+    output:
+      message:
+        title: Message
+        description: 'When user is assigned message is: User assigned'
+        type: string
+        required: false
+  close:
+    title: Close
+    description: Close a task
+    input:
+      id:
+        title: ID
+        type: string
+        description: Task ID
+        required: true
+    output:
+      message:
+        title: Message
+        description: 'When user is assigned message is: Task closed'
+        type: string
+        required: false
+  priority:
+    title: Priority
+    description: Change the priority of a task
+    input:
+      id:
+        title: ID
+        type: string
+        description: Task ID
+        required: true
+      priority:
+        title: Priority
+        type: string
+        description: Task priority from [unbreak, triage, high, normal, low, wish]
+        required: true
+    output:
+      message:
+        title: Message
+        description: 'When user is assigned message is: Priority changed'
+        type: string
+        required: false
+  projects:
+    title: Projects
+    description: Add related projects to a task
+    input:
+      id:
+        title: ID
+        type: string
+        description: Task ID
+        required: true
+      projects:
+        title: Projects
+        type: '[]string'
+        description: Related projects names
+        required: true
+    output:
+      message:
+        title: Message
+        description: 'When user is assigned message is: Projects added'
+        type: string
+        required: false
+  status:
+    title: Change Status
+    description: Change the status of a task
+    input:
+      id:
+        title: ID
+        type: string
+        description: Task ID
+        required: true
+      status:
+        title: Status
+        type: string
+        description: Status name [Open|Resolved|Wontfix|Invalid|Spite]
+        required: true
+    output:
+      message:
+        title: Message
+        description: 'When user is assigned message is: Status changed'
+        type: string
+        required: false
+  subscribe:
+    title: Add Subscriber
+    description: Add users or projects as subscribers
+    input:
+      id:
+        title: ID
+        type: string
+        description: Task ID
+        required: true
+      subscribes:
+        title: Subscribe
+        type: '[]string'
+        description: Subscribe users or projects [PHID-USER-xxx, PHID-PROJ-xxx]
+        required: true
+    output:
+      message:
+        title: Message
+        description: 'When user is assigned message is: Subscribes added'
+        type: string
+        required: false
+  unsubscribe:
+    title: Remove Subscriber
+    description: Remove yourself as a subscriber
+    input:
+      id:
+        title: ID
+        type: string
+        description: Task ID
+        required: true
+    output:
+      message:
+        title: Message
+        description: 'When user is assigned message is: Removed'
+        type: string
+        required: false

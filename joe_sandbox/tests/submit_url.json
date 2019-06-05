@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "submit_url",
+    "meta": {},
+    "input": {
+      "url": "https://github.com/"
+    },
+    "connection": {
+      "url": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

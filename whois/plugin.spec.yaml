@@ -1,0 +1,196 @@
+plugin_spec_version: v2
+name: whois
+title: Whois
+description: Whois Lookups
+version: 1.0.3
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- whois
+- ip lookup
+actions:
+  domain:
+    title: Domain Lookup
+    description: Whois Domain Lookup
+    input:
+      domain:
+        title: Domain
+        type: string
+        description: Domain name to lookup
+        required: true
+    output:
+      name:
+        title: Domain Name
+        description: Domain name
+        type: string
+        required: false
+      registrar:
+        title: Domain Registrar
+        description: Domain registrar
+        type: string
+        required: false
+      registrant_name:
+        title: Registrant Name
+        description: Registrant name
+        type: string
+        required: false
+      registrant_cc:
+        title: Registrant Country
+        description: Registrant country
+        type: string
+        required: false
+      creation_date:
+        title: Creation Date
+        description: Creation date
+        type: date
+        required: false
+      expiration_date:
+        title: Expiration Date
+        description: Expiration date
+        type: date
+        required: false
+      updated_date:
+        title: Last updated date
+        description: Updated Date
+        type: date
+        required: false
+      name_servers:
+        title: Nameservers
+        description: Nameservers
+        type: '[]string'
+        required: false
+      registry_domain_id:
+        title: Registry Domain ID
+        description: Registry domain ID
+        type: string
+        required: false
+      registrar_whois_server:
+        title: Registrar Whois Server
+        description: Registrar Whois server
+        type: string
+        required: false
+      registrar_url:
+        title: Registrar URL
+        description: Registrar URL
+        type: string
+        required: false
+      registrar_iana_id:
+        title: Registrar IANA ID
+        description: Registrar IANA ID
+        type: string
+        required: false
+      registrar_abuse_contact_email:
+        title: Registrar Abuse Contact Email
+        description: Registrar abuse contact email
+        type: string
+        required: false
+      registrar_abuse_contact_phone:
+        title: Registrar Abuse Contact Phone
+        description: Registrar abuse Contact phone
+        type: string
+        required: false
+      domain_status:
+        title: Domain Status
+        type: '[]string'
+        description: Domain status
+        required: false
+      dnssec:
+        title: DNSSEC
+        description: DNSSEC
+        type: string
+        required: false
+  address:
+    title: Address Lookup
+    description: Whois IP Lookup
+    input:
+      address:
+        title: Address
+        type: string
+        description: IP to Lookup
+        required: true
+    output:
+      netname:
+        title: Network Name
+        description: Network name
+        type: string
+        required: false
+      nettype:
+        title: Network Type
+        description: Network type
+        type: string
+        required: false
+      netrange:
+        title: Network Range
+        description: Network Range
+        type: string
+        required: false
+      cidr:
+        title: CIDR
+        description: CIDR
+        type: string
+        required: false
+      organization:
+        title: Organization
+        description: Organization
+        type: string
+        required: false
+      orgname:
+        title: Organization Name
+        description: Organization name
+        type: string
+        required: false
+      regdate:
+        title: Registration Date
+        description: Registration date
+        type: string
+        required: false
+      update:
+        title: Whois Updated Date
+        description: Whois updated date
+        type: string
+        required: false
+      address:
+        title: Address
+        description: Address
+        type: string
+        required: false
+      city:
+        title: City
+        description: City
+        type: string
+        required: false
+      postal:
+        title: Postal
+        description: Postal
+        type: string
+        required: false
+      state:
+        title: State
+        description: State
+        type: string
+        required: false
+      country:
+        title: Country
+        description: Country
+        type: string
+        required: false
+      org_abuse_email:
+        title: Organization Abuse E-mail
+        description: Organization abuse e-mail
+        type: string
+        required: false
+      org_abuse_phone:
+        title: Organization Abuse Phone
+        description: Organization abuse phone
+        type: string
+        required: false
+      org_tech_email:
+        title: Organization Tech E-mail
+        description: Organization tech e-mail
+        type: string
+        required: false
+      org_tech_phone:
+        title: Organization Tech Phone
+        description: Organization tech phone
+        type: string
+        required: false

@@ -1,0 +1,16 @@
+{
+  "body": {
+    "meta": {},
+    "input": {
+      "logset_container_id": "59755ede-5d8a-4ddf-9617-e21cf920a35b",
+      "data": {"testing":"12345","komand":"yes", "Action": true, "Action_Test": "Action"}
+    },
+    "action": "submit_log_data",
+    "connection": {
+      "api_key": "",
+      "region": "us"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

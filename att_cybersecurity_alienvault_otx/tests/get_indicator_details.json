@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_indicator_details",
+    "meta": {},
+    "input": {
+      "indicator": "201.18.18.173",
+      "indicator_type": "IPv4",
+      "section": "full"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://otx.alienvault.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

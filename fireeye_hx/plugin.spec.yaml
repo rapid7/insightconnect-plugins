@@ -1,0 +1,347 @@
+plugin_spec_version: v2
+name: fireeye_hx
+title: "FireEye HX"
+description: "FireEye HX is an integrated endpoint solution that detects, prevents and responds effectively to known malware and threats traditional anti-virus endpoint security products miss"
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags: ["fireeye","hx"]
+
+types:
+  agent:
+    _id:
+      title: ID
+      description: Agent ID
+      type: string
+      required: false
+    containment_state:
+      title: Containment State
+      description: Containment state of the agent
+      type: string
+      required: false
+    url:
+      title: URL
+      description: Relative URL for the agent
+      type: string
+      required: false
+  condition:
+    _id:
+      title: ID
+      description: Condition ID
+      type: string
+      required: false
+    url:
+      title: URL
+      description: Relative URL for the condition
+      type: string
+      required: false
+
+  event_values:
+    ipv4NetworkEvent/localIP:
+      title: IPv4 Network Event Local IP Address
+      description: Local IP address
+      type: string
+      required: false
+    ipv4NetworkEvent/localPort:
+      title: IPv4 Network Event Local Port
+      description: Local port
+      type: number
+      required: false
+    ipv4NetworkEvent/pid:
+      title: IPv4 Network Event PID
+      description: PID
+      type: number
+      required: false
+    ipv4NetworkEvent/protocol:
+      title: IPv4 Network Event Protocol
+      description: Protocol, e.g. 'ICMP'
+      type: string
+      required: false
+    ipv4NetworkEvent/remoteIP:
+      title: IPv4 Network Event Remote IP Address
+      description: Remote IP address
+      type: string
+      required: false
+    ipv4NetworkEvent/remotePort:
+      title: IPv4 Network Event Remote Port
+      description: Remote port
+      type: number
+      required: false
+    ipv4NetworkEvent/timestamp:
+      title: IPv4 Network Event Timestamp
+      description: Event timestamp
+      type: date
+      required: false
+    fileWriteEvent/closed:
+      title: File Write Event Closed
+      description: Closed
+      type: number
+      required: false
+    fileWriteEvent/dataAtLowestOffset:
+      title: File Write Event Data at Lowest Offset
+      description: Data at lowest offset, base64-encoded
+      type: string
+      required: false
+    fileWriteEvent/devicePath:
+      title: File Write Event Device Path
+      description: Device path
+      type: string
+      required: false
+    fileWriteEvent/drive:
+      title: File Write Event Drive
+      description: Drive
+      type: string
+      required: false
+    fileWriteEvent/fileExtension:
+      title: File Write Event File Extension
+      description: File extension
+      type: string
+      required: false
+    fileWriteEvent/fileName:
+      title: File Write Event File Name
+      description: File name
+      type: string
+      required: false
+    fileWriteEvent/filePath:
+      title: File Write Event File Path
+      description: File path
+      type: string
+      required: false
+    fileWriteEvent/fullPath:
+      title: File Write Event Full Path
+      description: Full path
+      type: string
+      required: false
+    fileWriteEvent/lowestFileOffsetSeen:
+      title: File Write Event Lowest File Offset Seen
+      description: Lowest file offset seen
+      type: number
+      required: false
+    fileWriteEvent/md5:
+      title: File Write Event MD5
+      description: MD5 hash
+      type: string
+      required: false
+    fileWriteEvent/numBytesSeenWritten:
+      title: File Write Event Number of Bytes Seen Written
+      description: Number of bytes seen written
+      type: number
+      required: false
+    fileWriteEvent/pid:
+      title: File Write Event PID
+      description: PID
+      type: number
+      required: false
+    fileWriteEvent/process:
+      title: File Write Event Process
+      description: Process
+      type: string
+      required: false
+    fileWriteEvent/processPath:
+      title: File Write Event Process Path
+      description: Process path
+      type: string
+      required: false
+    fileWriteEvent/size:
+      title: File Write Event Size
+      description: number
+      type: number
+      required: false
+    fileWriteEvent/textAtLowestOffset:
+      title: File Write Event Text at Lowest Offset
+      description: Text at lowest offset
+      type: string
+      required: false
+    fileWriteEvent/timestamp:
+      title: File Write Event Timestamp
+      description: Timestamp of the file write event
+      type: date
+      required: false
+    fileWriteEvent/username:
+      title: File Write Event Username
+      description: Username
+      type: string
+      required: false
+    fileWriteEvent/writes:
+      title: File Write Event Writes
+      description: Amount of file writes
+      type: number
+      required: false
+    dnsLookupEvent/hostname:
+      title: DNS Lookup Event Hostname
+      description: Hostname
+      type: string
+      required: false
+    dnsLookupEvent/pid:
+      title: DNS Lookup Event PID
+      description: PID
+      type: number
+      required: false
+    dnsLookupEvent/process:
+      title: DNS Lookup Event Process
+      description: Process
+      type: string
+      required: false
+    dnsLookupEvent/processPath:
+      title: DNS Lookup Event Process Path
+      description: Process path
+      type: string
+      required: false
+    dnsLookupEvent/timestamp:
+      title: DNS Lookup Event Timestamp
+      description: Timestamp of the DNS lookup event
+      type: date
+      required: false
+    dnsLookupEvent/username:
+      title: DNS Lookup Event Username
+      description: Username
+      type: string
+      required: false
+
+  indicator:
+    _id:
+      title: ID
+      description: Indicator ID
+      type: string
+      required: false
+    display_name:
+      title: Display Name
+      description: Indicator display name
+      type: string
+      required: false
+    uri_name:
+      title: URI Name
+      description: URI name
+      type: string
+      required: false
+    url:
+      title: URL
+      description: Relative URL for the indicator
+      type: string
+      required: false
+
+  alert:
+    _id:
+      title: Alert ID
+      description: Alert ID
+      type: number
+      required: false
+    agent:
+      title: Agent
+      description: Agent associated with the alert
+      type: agent
+      required: false
+    condition:
+      title: Condition
+      description: Condition associated with the alert
+      type: condition
+      required: false
+    event_at:
+      title: Event At
+      description: Timestamp for the alert
+      type: date
+      required: false
+    event_id:
+      title: Event ID
+      description: ID of the event
+      type: number
+      required: false
+    event_type:
+      title: Event Type
+      description: Type of alert event that occurred
+      type: string
+      required: false
+    event_values:
+      title: Event Values
+      description: Information about the alert. These properties may/may not be available depending on the 'Event Type' property
+      type: event_values
+      required: false
+    indicator:
+      title: Indicator
+      description: Alert indicator
+      type: indicator
+      required: false
+    is_false_positive:
+      title: Is False Positive
+      description: Whether or not the alert is a false positive
+      type: boolean
+      required: false
+    matched_at:
+      title: Matched At
+      description: When the alert rule matched
+      type: date
+      required: false
+    matched_source_alerts:
+      title: Matched Source Alerts
+      description: Matched source alerts
+      type: "[]object"
+      required: false
+    reported_at:
+      title: Reported At
+      description: Timestamp for the alert report
+      type: date
+      required: false
+    resolution:
+      title: Resolution
+      description: Resolution
+      type: string
+      required: false
+    source:
+      title: Source
+      description: Alert source
+      type: string
+      required: false
+    subtype:
+      title: Subtype
+      description: Alert subtype
+      type: object
+      required: false
+
+connection:
+  username_password:
+    type: credential_username_password
+    title: Username and Password
+    description: Username and password to authenticate with FireEye HX
+    required: true
+  url:
+    type: string
+    title: URL
+    description: URL to the appliance, e.g. https://test.fireeye.com
+    required: true
+
+actions:
+  get_host_id_from_hostname:
+    title: Get Host ID from Hostname
+    description: Get a host ID from a given hostname
+    input:
+      hostname:
+        title: Hostname
+        description: Hostname
+        required: true
+        type: string
+    output:
+      host_id:
+        title: Host ID
+        description: ID for the host
+        type: string
+        required: false
+      success:
+        title: Success
+        description: Whether or not a match was found
+        type: boolean
+        required: true
+  get_alerts_by_host_id:
+    title: Get Alerts by Host ID
+    description: Get alerts for a host given the host ID
+    input:
+      host_id:
+        title: Host ID
+        description: Host ID
+        required: true
+        type: string
+    output:
+      alerts:
+        title: Alerts
+        description: Alerts
+        type: "[]alert"
+        required: false

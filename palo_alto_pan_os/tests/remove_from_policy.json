@@ -1,0 +1,30 @@
+{
+  "body": {
+    "action": "remove_from_policy",
+    "meta": {},
+    "input": {
+      "action": "",
+      "application": "",
+      "destination": "",
+      "dst_zone": "",
+      "hip_profiles": "",
+      "rule_name": "",
+      "service": "",
+      "source": "",
+      "source_user": "",
+      "src_zone": "",
+      "update_active_or_candidate_configuration": "active",
+      "url_category": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "server": "",
+      "verify_cert": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

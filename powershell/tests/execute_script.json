@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "execute_script",
+    "meta": {},
+    "input": {
+      "address": "",
+      "host_name": "",
+      "script": "JHRlc3QgPSAiYm9iIgokdGVzdDIgPSAnIHNhaWQgaGVsbG8nCmVjaG8gJ01yICR0ZXN0ICAkdGVzdDInCmVjaG8gIk1yICR0ZXN0ICR0ZXN0MiIKZWNobyAiJHRlc3QgYG4gJHRlc3QyIgokbXlhcnJheSA9IEAoMSw1LDYsOCkKZWNobyAkbXlhcnJheVsxXQplY2hvICd0ZXN0aW5nIGNoYXJzIGluIGxpdCBzdHJpbmcgXCAvIFxyIC9yIC8vIFxcICEgQCAjICQgJScKZWNobyAidGVzdGluZyBjaGFycyBpbiBpbnRlcnByZXRlZCBzdHJpbmcgLy8gXFwgL3IvbiAhIEAgIyAkIgpwd2QKY2QgLi5cCnB3ZApjZCAuLi8KcHdk"
+    },
+    "connection": {
+      "auth": "None",
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "kerberos": {
+        "domain_name": "",
+        "kdc": ""
+      },
+      "port": 5986
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
+

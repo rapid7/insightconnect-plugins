@@ -1,0 +1,27 @@
+{
+  "body": {
+    "input": {
+      "pattern": "google",
+      "limit": 100,
+      "language": "Python",
+      "frequency": 10
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "key": {
+        "secretKey": ""
+      }
+    },
+    "trigger": "scraping",
+    "meta": {},
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

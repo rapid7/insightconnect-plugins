@@ -1,0 +1,31 @@
+{
+  "body": {
+    "trigger": "subscription",
+    "meta": {},
+    "input": {
+      "project_id": "subpub-1528163449245",
+      "subscription": "testing",
+      "number_of_messages": 3
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "admin_user": "",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "client_email": "",
+      "client_id": "",
+      "client_x509_cert_url": "",
+      "private_key": {
+        "privateKey": ""
+      },
+      "private_key_id": "",
+      "project_id": "subpub-1528163449245",
+      "token_uri": "https://accounts.google.com/o/oauth2/token"
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

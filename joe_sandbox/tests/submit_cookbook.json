@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "submit_cookbook",
+    "meta": {},
+    "input": {
+      "cookbook": "SGVsbG8gV29ybGQhCg=="
+    },
+    "connection": {
+      "url": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

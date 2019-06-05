@@ -1,0 +1,13 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "connection": null,
+    "input": {
+      "input": {},
+      "function": "def run(params={}):\n    import datetime\n    return { 'result1': str(datetime.datetime.now())}"
+    },
+    "action": "run",
+    "meta": {}
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "gauge",
+    "input": {
+      "rate": 1,
+      "stat": "gaugetest",
+      "value": 3,
+      "delta": false
+    },
+    "connection": {
+      "udp": {
+        "maxudpsize": 512
+      },
+      "protocol": "UDP",
+      "prefix": "",
+      "tcp": {
+        "timeout": 0
+      },
+      "host": "",
+      "port": 2003
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

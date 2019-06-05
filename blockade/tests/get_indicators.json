@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_indicators",
+    "meta": {},
+    "input": {
+      "db_route": ""
+    },
+    "connection": {
+      "url": "http://192.168.99.100:5000",
+      "email": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "version": "v1",
+  "type": "action_start"
+}

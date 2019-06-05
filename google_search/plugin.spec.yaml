@@ -1,0 +1,80 @@
+plugin_spec_version: v2
+name: google_search
+title: Google Search
+description: Search the worlds information, including webpages, images, videos and
+  more using Google
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- google
+- web
+- search
+actions:
+  search:
+    title: Search
+    description: Return URLs from a Google Search
+    input:
+      query:
+        title: Query
+        type: string
+        description: Query string. Must NOT be URL-encoded
+        required: true
+      lang:
+        title: Language
+        type: string
+        description: Language, default is en
+        default: en
+        required: true
+      stop:
+        title: Stop
+        type: integer
+        description: Number of results to retrieve to limit amount, default is 16
+          and the search will allows return at least 16 results if available. This
+          option seems to have odd behavior
+        default: 16
+        required: true
+      num:
+        title: Number
+        type: integer
+        description: Number of results per page, default is 10
+        default: 10
+        required: true
+      only_standard:
+        title: All
+        type: boolean
+        description: Only returns the standard results from each page. If false, it
+          returns every possible link from each page, except for those that point
+          back to Google itself
+        default: false
+        required: true
+      pause:
+        title: Pause
+        type: float
+        description: Lapse to wait between HTTP requests. A lapse too long will make
+          the search slow, but a lapse too short may cause Google to block your IP.
+          Your mileage may vary
+        default: 1
+        required: true
+    output:
+      urls:
+        title: URLs
+        description: List of URLs
+        type: '[]string'
+        required: true
+  get_page:
+    title: Get Page
+    description: Request the given URL and return the response page, using the cookie
+      jar
+    input:
+      url:
+        title: URL
+        type: string
+        description: URL to retrieve e.g. https://www.google.com
+        required: true
+    output:
+      web_page:
+        title: Web Page
+        type: string
+        description: Web page
+        required: true

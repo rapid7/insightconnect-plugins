@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "submit",
+    "meta": {},
+    "input": {
+      "cname": "",
+      "comments": "Test file",
+      "critical": false,
+      "data": "",
+      "email": "",
+      "filename": "test.txt",
+      "fname": "",
+      "lname": "",
+      "pin": "",
+      "stype": "upfile"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

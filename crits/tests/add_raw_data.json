@@ -1,0 +1,28 @@
+{
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "url": "",
+      "ssl_verify": false,
+      "username": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "add_raw_data",
+    "meta": {},
+    "input": {
+      "data_type": "Text",
+      "params": {},
+      "source": "Faker Vault",
+      "type": "metadata",
+      "data": "Similique autem quidem inventore eos aperiam assumenda praesentium. Esse quo consequuntur ullam neque impedit repudiandae repellendus. Excepturi facere quod quo possimus.",
+      "title": "Foo Bar",
+      "file": {
+        "content": "RWxpZ2VuZGkgbW9sZXN0aWFzIHNpdCB2aXRhZSBkZWxlbml0aSBhbGlxdWlkIG9mZmljaWEgaXBzYW0uIFF1aXNxdWFtIGVvcyBjdW0gcXVhbSBleHBlZGl0YSBzb2x1dGEuIE1hZ25pIG1pbnVzIHZlbGl0IGJsYW5kaXRpaXMgYW5pbWkgdm9sdXB0YXRlbS4=",
+        "filename": "raw_data.b64.txt"
+      }
+    }
+  },
+  "version": "v1"
+}

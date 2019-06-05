@@ -1,0 +1,27 @@
+plugin_spec_version: v2
+name: pdf_reader
+title: PDF Reader
+description: Tools for extracting text from a PDF
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- PDF
+- Reader
+- Extract
+actions:
+  extract_text:
+    title: Extract Text
+    description: Extract text from PDF file
+    input:
+      contents:
+        title: PDF File
+        description: PDF file to extract text from
+        type: bytes
+        required: true
+    output:
+      output:
+        title: PDF Text
+        description: Text extracted from PDF file
+        type: string
+        required: false

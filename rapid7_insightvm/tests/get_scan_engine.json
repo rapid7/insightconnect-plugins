@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_scan_engine",
+    "meta": {},
+    "input": {
+      "id": 4
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,22 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "input": {
+      "details": { "stuff": "things "},
+      "contexts": [],
+      "client_url": "",
+      "client": "komand",
+      "description": "hi there acknowledge",
+      "service_key": "",
+      "incident_key": ""
+    },
+    "action": "send_resolve_event",
+    "meta": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  }
+}

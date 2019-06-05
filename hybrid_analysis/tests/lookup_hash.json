@@ -1,0 +1,20 @@
+{
+  "type": "action_start",
+  "body": {
+    "action": "lookup_hash",
+    "connection": {
+       "api_key": {
+        "secretKey": ""
+       },
+      "api_token": {
+        "secretKey": ""
+      },
+      "url": "https://www.hybrid-analysis.com/api"
+    },
+    "input": {
+      "hash": "040c0111aef474d8b7bfa9a7caa0e06b4f1049c7ae8c66611a53fc2599f0b90f"
+    },
+    "meta": {}
+  },
+  "version": "v1"
+}

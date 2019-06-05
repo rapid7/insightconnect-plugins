@@ -1,0 +1,246 @@
+plugin_spec_version: v2
+name: active_directory_ldap
+title: Active Directory LDAP
+description: Active Directory LDAP
+version: 3.2.1
+vendor: rapid7
+status: ["supported"]
+tags:
+- ldap
+- active directory
+types:
+  result:
+    attributes:
+      type: object
+    dn:
+      type: string
+connection:
+  host:
+    title: Host
+    description: Server Host, e.g. ldap://192.5.5.5. Must use either ldap:// or ldaps://
+      for SSL prefix
+    type: string
+    required: true
+  port:
+    title: Port
+    description: Port, e.g. 389
+    type: integer
+    default: 389
+    required: true
+  use_ssl:
+    title: Use SSL
+    type: boolean
+    description: Use SSL?
+    required: true
+  username_password:
+    title: Username and Password
+    type: credential_username_password
+    description: Username and password
+    required: true
+actions:
+  query:
+    title: Query
+    description: Run an LDAP query
+    input:
+      search_filter:
+        title: Search Filter
+        type: string
+        description: 'The filter of the search request. It must conform to the LDAP
+          filter syntax specified in RFC4515. Example: (accountName=joesmith)'
+        required: true
+      search_base:
+        title: Search Base
+        type: string
+        description: The base of the search request
+        required: true
+    output:
+      results:
+        description: Results returned
+        type: '[]result'
+        required: false
+  delete:
+    title: Delete
+    description: Deletes the LDAP object specified
+    input:
+      distinguished_name:
+        title: Distinguished Name
+        type: string
+        description: The distinguished name of the object to delete. Example CN=user,OU=domain_users,DC=mydomain,DC=com
+        required: true
+    output:
+      success:
+        description: Operation status
+        type: boolean
+        required: false
+  add_user:
+    title: Add
+    description: Adds the specified Active Directory user
+    input:
+      domain_name:
+        title: Domain Name
+        type: string
+        description: The domain name this user will belong to, e.g. mydomain.com
+        required: true
+      logon_name:
+        title: Logon Name
+        type: string
+        description: The logon name for the account
+        required: true
+      first_name:
+        title: First Name
+        type: string
+        description: User's first name
+        required: true
+      last_name:
+        title: Last Name
+        type: string
+        description: User's last name
+        required: true
+      user_ou:
+        title: User OU
+        type: string
+        description: The OU that the user account will be created in
+        required: true
+        default: Users
+      password:
+        title: Password
+        type: password
+        description: The account's starting password
+        required: true
+      account_disabled:
+        title: Account Disabled
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+        description: Set this to true to disable the user account at creation
+        required: true
+        default: 'true'
+      user_principal_name:
+        title: User Principal Name
+        description: The users principal name, e.g. jdoe@example.com
+        type: string
+        required: true
+      additional_parameters:
+        title: Additional Parameters
+        description: 'Add additional user parameters in JSON format e.g. {''telephoneNumber'':
+          ''(617)555-1234''}'
+        type: object
+        required: false
+    output:
+      success:
+        description: Operation status
+        type: boolean
+        required: false
+  enable_user:
+    title: Enable
+    description: Enable an account
+    input:
+      distinguished_name:
+        title: Distinguished Name
+        type: string
+        description: The distinguished name of the user to enable e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
+        required: true
+    output:
+      success:
+        description: Operation status
+        type: boolean
+        required: false
+  disable_user:
+    title: Disable
+    description: Disable an account
+    input:
+      distinguished_name:
+        title: Distinguished Name
+        type: string
+        description: The distinguished name of the user to disable e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
+        required: true
+    output:
+      success:
+        description: Operation status
+        type: boolean
+        required: false
+  modify_groups:
+    title: Modify Groups
+    description: Add or remove a user from an Active Directory group
+    input:
+      distinguished_name:
+        title: Distinguished Name
+        type: string
+        description: The distinguished name of the user whose membership will be modified
+          e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
+        required: true
+      group_dn:
+        title: Group DN
+        type: string
+        description: The Distinguished Name of the group to add or remove
+        required: true
+      add_remove:
+        title: Add or Remove
+        description: Add or remove the group
+        type: string
+        enum:
+        - add
+        - remove
+        required: true
+    output:
+      success:
+        description: Operation status
+        type: boolean
+        required: false
+  move_object:
+    title: Move Object
+    description: Move an Active Directory object from one organizational unit to another
+    input:
+      distinguished_name:
+        title: Distinguished Name
+        type: string
+        description: The distinguished name of the user whose membership will be modified
+          e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
+        required: true
+      new_ou:
+        title: New OU
+        type: string
+        description: The distinguished name of the OU to move the object to e.g. OU=disabled_users,DC=mydomain,DC=com
+        required: true
+    output:
+      success:
+        description: Operation status
+        type: boolean
+        required: false
+  reset_password:
+    title: Reset Password
+    description: Reset a users password
+    input:
+      distinguished_name:
+        title: Distinguished Name
+        type: string
+        description: The distinguished name of the user whose membership will be modified
+          e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
+        required: true
+      new_password:
+        title: New Password
+        description: The new password
+        type: password
+        required: true
+    output:
+      success:
+        description: Operation status
+        type: boolean
+        required: false
+  force_password_reset:
+    title: Force Password Reset
+    description: Force a user to reset their password on next login
+    input:
+      distinguished_name:
+        title: Distinguished Name
+        type: string
+        description: The distinguished name of the user who will be forced to reset
+          their password  e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
+        required: true
+    output:
+      success:
+        title: Success
+        description: Operation status
+        type: boolean
+        required: false

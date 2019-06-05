@@ -1,0 +1,307 @@
+plugin_spec_version: v2
+name: cloudshark
+title: Cloud Shark
+vendor: rapid7
+status: ["unsupported"]
+description: The easiest way to analyze and share network capture files
+version: 1.0.0
+tags:
+- cloudshark
+- pcap
+- wireshark
+connection:
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: API Key
+    required: true
+actions:
+  delete:
+    description: Delete capture file
+    input:
+      cid:
+        type: string
+        description: Cloud Shark ID
+        required: true
+    output:
+      status:
+        type: integer
+        title: HTTP Status
+        description: HTTP status
+        required: false
+      message:
+        type: string
+        title: Message
+        description: Message
+        required: false
+      id:
+        type: string
+        title: Cloud Shark ID
+        description: Cloudshark ID
+        required: false
+  download:
+    description: Download capture file
+    input:
+      cid:
+        type: string
+        description: Cloud Shark ID
+        required: true
+    output:
+      status:
+        type: integer
+        title: HTTP Status
+        description: HTTP status
+        required: false
+      capture_file:
+        type: bytes
+        title: Capture File
+        description: Capture file
+        required: false
+  info:
+    description: Determine capture files metadata
+    input:
+      cid:
+        type: string
+        description: Cloud Shark ID
+        required: true
+    output:
+      data_size:
+        type: integer
+        title: Data Size
+        description: Data size
+        required: false
+      group:
+        type: string
+        title: Group
+        description: Group
+        required: false
+      duration:
+        type: string
+        title: Duration
+        description: Duration
+        required: false
+      group_write:
+        type: boolean
+        title: Group Write
+        description: Group write
+        required: false
+      size:
+        type: integer
+        title: Size
+        description: Size
+        required: false
+      last_accessed:
+        type: date
+        title: Last Accessed
+        description: Last accessed
+        required: false
+      viewcount:
+        type: integer
+        title: View Count
+        description: View count
+        required: false
+      created_at:
+        type: date
+        title: Created At
+        description: Created at
+        required: false
+      end_time:
+        type: date
+        title: End Time
+        description: End time
+        required: false
+      truncated:
+        type: string
+        title: Truncated
+        description: Truncated
+        required: false
+      comments:
+        type: string
+        title: Comments
+        description: Comments
+        required: false
+      avg_packet_size:
+        type: string
+        title: Average Packet Size
+        description: Average packet size
+        required: false
+      public:
+        type: boolean
+        title: Public
+        description: Public
+        required: false
+      data_byte_rate:
+        type: string
+        title: Data Byte Rate
+        description: Data byte rate
+        required: false
+      id:
+        type: string
+        title: Cloud Shark ID
+        description: Cloudshark ID
+        required: false
+      tag_list:
+        type: string
+        title: Tag List
+        description: Tag list
+        required: false
+      filename:
+        type: string
+        title: Filename
+        description: Filename
+        required: false
+      cap_file_id:
+        type: integer
+        title: Capture File ID
+        description: Capture file ID
+        required: false
+      file:
+        type: string
+        title: File
+        description: File
+        required: false
+      user:
+        type: string
+        title: User
+        description: User
+        required: false
+      num_packets:
+        type: integer
+        title: Number of Packets
+        description: Number of packets
+        required: false
+      data_bit_rate:
+        type: string
+        title: Data Bit Rate
+        description: Data bit rate
+        required: false
+      encapsulation:
+        type: string
+        title: Encapsulation
+        description: Encapsulation
+        required: false
+      file_type:
+        type: string
+        title: File Type
+        description: File type
+        required: false
+      avg_packet_rate:
+        type: string
+        title: Average Packet Rate
+        description: Average packet rate
+        required: false
+      file_source:
+        type: string
+        title: File Source
+        description: File source
+        required: false
+      start_time:
+        type: string
+        title: Start Time
+        description: Start time
+        required: false
+  merge:
+    description: Merge capture files
+    input:
+      cids:
+        type: string
+        description: Comma-separated list of Cloud Shark IDs
+        required: true
+      tags:
+        type: string
+        description: Comma-separated list of tags
+        required: false
+      filename:
+        type: string
+        description: Resulting filename
+        required: false
+      duplicates:
+        type: string
+        description: Duplicate packets
+        enum:
+        - remove
+        - keep
+        required: false
+    output:
+      id:
+        type: string
+        title: Cloud Shark ID
+        description: Cloudshark ID
+        required: false
+      filename:
+        type: string
+        title: Filename
+        description: Filename
+        required: false
+  upload:
+    description: Upload capture file
+    input:
+      file:
+        type: bytes
+        description: Base64 encoded capture file
+        required: true
+      tags:
+        type: string
+        description: Comma-separated list of tags
+        required: false
+      filename:
+        type: string
+        description: Resulting filename
+        required: false
+      comments:
+        type: string
+        description: File comments
+        required: false
+    output:
+      status:
+        type: integer
+        description: HTTP Status
+        required: false
+      filename:
+        type: string
+        description: Filename
+        required: false
+      id:
+        type: string
+        description: Cloud Shark ID
+        required: false
+      exceptions:
+        type: '[]string'
+        description: Exceptions
+        required: false
+  upload_url:
+    description: Upload capture file by URL
+    input:
+      url:
+        type: string
+        description: Url
+        required: true
+      tags:
+        type: string
+        description: Comma-separated list of tags
+        required: false
+      filename:
+        type: string
+        description: Resulting filename
+        required: false
+      comments:
+        type: string
+        description: File comments
+        required: false
+    output:
+      status:
+        type: integer
+        description: HTTP Status
+        required: false
+      filename:
+        type: string
+        description: Filename
+        required: false
+      id:
+        type: string
+        description: Cloud Shark ID
+        required: false
+      exceptions:
+        type: '[]string'
+        description: Exceptions
+        required: false

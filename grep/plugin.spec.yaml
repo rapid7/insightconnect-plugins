@@ -1,0 +1,77 @@
+plugin_spec_version: v2
+name: grep
+title: Grep
+description: Match pattern
+version: 1.0.2
+vendor: rapid7
+tags:
+- grep
+- regex
+- utilities
+actions:
+  match_string:
+    title: Match String
+    description: Find pattern in string
+    input:
+      pattern:
+        type: string
+        description: Pattern to match
+        required: true
+      text:
+        type: string
+        description: String to match
+        required: true
+      behavior:
+        type: string
+        description: Return entire matched lines or only matched pattern
+        required: false
+        default: Default
+        enum:
+        - Default
+        - Only matching
+    output:
+      found:
+        type: boolean
+        description: Found match boolean
+        required: false
+      hits:
+        type: integer
+        description: Number of matches
+        required: false
+      matches:
+        type: '[]string'
+        description: Matched lines
+        required: false
+  match_base64:
+    title: Match Base64
+    description: Find pattern in base64 file
+    input:
+      pattern:
+        type: string
+        description: Pattern to match
+        required: true
+      data:
+        type: bytes
+        description: Base64 encoded text
+        required: true
+      behavior:
+        type: string
+        description: Return entire matched lines or only matched pattern
+        required: false
+        default: Default
+        enum:
+        - Default
+        - Only matching
+    output:
+      found:
+        type: boolean
+        description: Found match boolean
+        required: false
+      hits:
+        type: integer
+        description: Number of matches
+        required: false
+      matches:
+        type: '[]string'
+        description: Matched lines
+        required: false

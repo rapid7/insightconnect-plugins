@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "filter_string",
+    "input": {
+      "fields": "f1-f30",
+      "csv": "a,b,c,d,e\nf,g,h,i,j\nk,l,m,n,o"
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,813 @@
+plugin_spec_version: v2
+name: sqlmap
+title: SQLmap
+description: An open-source penetration testing tool that performs the process of
+  SQL injection
+version: 1.1.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- vulnerability
+- exploit
+- sqlmap
+- injection
+- database
+enable_cache: true
+connection:
+  api_host:
+    title: Host
+    type: string
+    description: 'Host of the REST-JSON API server (Default: localhost)'
+    required: false
+  api_port:
+    title: Port
+    type: string
+    description: Port of the the REST-JSON API server, the default is 8775
+    required: false
+actions:
+  scan:
+    title: Scan
+    description: Performs a SQLmap scan on target
+    input:
+      crawlDepth:
+        title: Crawl Depth
+        description: Crawl the website starting from the target URL
+        type: integer
+        required: false
+        default: 1
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+      getUsers:
+        title: Get Users
+        description: Enumerate DBMS users
+        type: boolean
+        required: false
+      getPasswordHashes:
+        title: Get Password Hashes
+        description: Enumerate DBMS users password hashes
+        type: boolean
+        required: false
+      excludeSysDbs:
+        title: Exclude DBMS System Databases
+        description: Exclude DBMS system databases when enumerating tables
+        type: boolean
+        required: false
+      uChar:
+        title: Union Character
+        description: Character to use for bruteforcing number of columns
+        type: string
+        required: false
+      regData:
+        title: Windows Registry Data
+        description: Windows registry key value data
+        type: string
+        required: false
+      prefix:
+        title: Prefix String
+        description: Injection payload prefix string
+        type: string
+        required: false
+      code:
+        title: HTTP Code
+        description: HTTP code to match when query is evaluated to True
+        type: string
+        required: false
+      googlePage:
+        title: Google Page Number
+        description: Use Google dork results from specified page number
+        type: integer
+        required: false
+      query:
+        title: SQL Query
+        description: SQL statement to be executed
+        type: string
+        required: false
+      randomAgent:
+        title: Random Agent
+        description: Use randomly selected HTTP User-Agent header value
+        type: boolean
+        required: false
+      delay:
+        title: Delay
+        description: Delay in seconds between each HTTP request
+        type: integer
+        required: false
+      isDba:
+        title: Is User a DBA
+        description: Detect if the DBMS current user is DBA
+        type: boolean
+        required: false
+      requestFile:
+        title: Request from a File
+        description: Load HTTP request from a file
+        type: bytes
+        required: false
+      predictOutput:
+        title: Predict Output
+        description: Predict common queries output
+        type: boolean
+        required: false
+      forms:
+        title: Forms
+        description: Parse and test forms on target URL
+        type: boolean
+        required: false
+      skip:
+        title: Skip
+        description: Skip testing for given parameter(s)
+        type: string
+        required: false
+      dropSetCookie:
+        title: Drop Set Cookie
+        description: Ignore Set-Cookie header from response
+        type: boolean
+        required: false
+      smart:
+        title: Smart
+        description: Conduct thorough tests only if positive heuristic(s)
+        type: boolean
+        required: false
+      risk:
+        title: Risk
+        description: Risk of tests to perform
+        type: integer
+        required: false
+        default: 1
+        enum:
+        - 1
+        - 2
+        - 3
+      sqlFile:
+        title: SQL File
+        description: Execute SQL statements from given file(s)
+        type: bytes
+        required: false
+      rParam:
+        title: Random Parameters
+        description: Randomly change value for given parameter(s)
+        type: string
+        required: false
+      getCurrentUser:
+        title: Get Current User
+        description: Retrieve DBMS current user
+        type: boolean
+        required: false
+      notString:
+        title: Not String
+        description: String to match when query is evaluated to False
+        type: string
+        required: false
+      getRoles:
+        title: Get Roles
+        description: Enumerate DBMS users roles
+        type: string
+        required: false
+      getPrivileges:
+        title: Get Privileges
+        description: Enumerate DBMS users privileges
+        type: boolean
+        required: false
+      testParameter:
+        title: Testable parameter(s)
+        description: Testable parameter(s)
+        type: string
+        required: false
+      tbl:
+        title: Table to Enumerate
+        description: DBMS database table(s) to enumerate
+        type: string
+        required: false
+      charset:
+        title: Blind Charset
+        description: Blind SQL injection charset (e.g. '0123456789abcdef')
+        type: string
+        required: false
+      level:
+        title: Level
+        description: Level of tests to perform
+        type: integer
+        required: false
+        default: 1
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      secondOrder:
+        title: Second Order
+        description: Resulting page URL searched for second-order response
+        type: string
+        required: false
+      pCred:
+        title: Proxy Credential
+        description: Proxy authentication credentials (name:password)
+        type: string
+        required: false
+      timeout:
+        title: Timeout
+        description: Seconds to wait before timeout connection (default 30)
+        type: integer
+        required: false
+        default: 30
+      firstChar:
+        title: First Character
+        description: First query output word character to retrieve
+        type: string
+        required: false
+      updateAll:
+        title: Update SQLmap
+        description: Update SQLmap
+        type: boolean
+        required: false
+      binaryFields:
+        title: Binary Fields
+        description: Result fields having binary values (e.g. 'digest')
+        type: string
+        required: false
+      aType:
+        title: HTTP Authentication Type
+        description: HTTP authentication type (Basic, Digest, NTLM or PKI)
+        type: string
+        required: false
+      direct:
+        title: Direct Database connection
+        description: Connection string for direct database connection
+        type: string
+        required: false
+      saFreq:
+        title: Safe Frequency
+        description: Test requests between two visits to a given safe URL
+        type: integer
+        required: false
+        default: 0
+      titles:
+        title: Titles
+        description: Compare pages based only on their titles
+        type: boolean
+        required: false
+      getSchema:
+        title: Get Schema
+        description: Enumerate DBMS schema
+        type: boolean
+        required: false
+      identifyWaf:
+        title: Direct Database connection
+        description: Connection string for direct database connection
+        type: boolean
+        required: false
+      checkWaf:
+        title: Check for WAF
+        description: Make a thorough testing for a WAF/IPS/IDS protection
+        type: boolean
+        required: false
+      regKey:
+        title: Windows Registry Key
+        description: Windows registry key
+        type: string
+        required: false
+      limitStart:
+        title: Limit Start
+        description: First dump table entry to retrieve
+        type: string
+        required: false
+      loadCookies:
+        title: Load Cookies from file
+        description: File containing cookies in Netscape/wget format
+        type: bytes
+        required: false
+      dnsName:
+        title: Domain Name
+        description: Domain name used for DNS exfiltration attack
+        type: string
+        required: false
+      csvDel:
+        title: Delimiting CSV
+        description: 'Delimiting character used in CSV output (default: , )'
+        type: string
+        required: false
+      osBof:
+        title: Buffer Overflow Exploitation
+        description: Stored procedure buffer overflow exploitationn
+        type: boolean
+        required: false
+      invalidLogical:
+        title: Logical Operations
+        description: Use logical operations for invalidating values
+        type: boolean
+        required: false
+      getCurrentDb:
+        title: Get Current Database
+        description: Retrieve DBMS current database
+        type: boolean
+        required: false
+      hexConvert:
+        title: DBMS hex function(s)
+        description: Use DBMS hex function(s) for data retrieval
+        type: boolean
+        required: false
+      answers:
+        title: Answers
+        description: Set question answers (e.g. 'quit=N,follow=N')
+        type: string
+        required: false
+      host:
+        title: HTTP Host header
+        description: HTTP Host header value
+        type: string
+        required: false
+      dependencies:
+        title: SQLmap Dependencies
+        description: Check for missing (non-core) SQLmap dependencies
+        type: boolean
+        required: false
+      cookie:
+        title: HTTP Cookie
+        description: HTTP Cookie header value
+        type: string
+        required: false
+      proxy:
+        title: Proxy
+        description: Use a proxy to connect to the target URL
+        type: string
+        required: false
+      regType:
+        title: Windows Registry Type
+        description: Windows registry key value type
+        type: string
+        required: false
+      optimize:
+        title: Optimize
+        description: Turn on all optimization switches
+        type: boolean
+        required: false
+      limitStop:
+        title: Limit Stop
+        description: Last dump table entry to retrieve
+        type: string
+        required: false
+      mnemonics:
+        title: Mnemonics
+        description: Use short mnemonics (e.g. 'flu,bat,ban,tec=EU')
+        type: string
+        required: false
+      uFrom:
+        title: HTTP Cookie
+        description: Table to use in FROM part of UNION query SQL injection
+        type: string
+        required: false
+      noCast:
+        title: No Payload Casting
+        description: Turn off payload casting mechanism
+        type: boolean
+        required: false
+      testFilter:
+        title: Test Filters
+        description: Select tests by payloads and/or titles (e.g. ROW)
+        type: string
+        required: false
+      eta:
+        title: Estimated Time of Arrival
+        description: Display for each output the estimated time of arrival
+        type: boolean
+        required: false
+      threads:
+        title: Threads
+        description: Max number of concurrent HTTP(s) requests
+        type: integer
+        required: false
+      logFile:
+        title: Log File
+        description: Parse target(s) from Burp or WebScarab proxy log file
+        type: bytes
+        required: false
+      os:
+        title: DBMS Operating System
+        description: Force back-end DBMS operating system to this value
+        type: string
+        required: false
+      col:
+        title: COL
+        description: DBMS database table column(s) to enumerate
+        type: string
+        required: false
+      rFile:
+        title: Read File
+        description: Read a file from the back-end DBMS file system
+        type: string
+        required: false
+      verbose:
+        title: Verbosity Level
+        description: Verbosity level
+        type: integer
+        required: false
+        default: 1
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      aCert:
+        title: Authentication File
+        description: HTTP authentication PEM cert/private key file
+        type: bytes
+        required: false
+      privEsc:
+        title: Privilege Escalation
+        description: Database process user privilege escalation
+        type: boolean
+        required: false
+      forceDns:
+        title: Force DNS
+        description: Force DNS
+        type: boolean
+        required: false
+      getAll:
+        title: Get All
+        description: Retrieve everything
+        type: boolean
+        required: false
+      url:
+        title: Target URL
+        description: Target URL (e.g. 'http://www.site.com/vuln.php?id=1')
+        type: string
+        required: false
+      invalidBignum:
+        title: Big Numbers for Invalidating
+        description: Use big numbers for invalidating values
+        type: boolean
+        required: false
+      regexp:
+        title: Regular Expression
+        description: Regexp to match when query is evaluated to True
+        type: string
+        required: false
+      getDbs:
+        title: Get DBMS Databases
+        description: Enumerate DBMS databases
+        type: boolean
+        required: false
+      freshQueries:
+        title: Fresh Queries
+        description: Ignore query results stored in session file
+        type: boolean
+        required: false
+      uCols:
+        title: Union Columns
+        description: Range of columns to test for UNION query SQL injection
+        type: string
+        required: false
+      pDel:
+        title: Parameter Delimiter
+        description: Character used for splitting parameter values
+        type: string
+        required: false
+      wFile:
+        title: Write File
+        description: Write a local file on the back-end DBMS file system
+        type: string
+        required: false
+      udfInject:
+        title: User-Defined Functions to Inject
+        description: Inject custom user-defined functions
+        type: boolean
+        required: false
+      forceSsl:
+        title: Force SSL
+        description: Force usage of SSL/HTTPS
+        type: boolean
+        required: false
+      configFile:
+        title: Configuration File
+        description: Load options from a configuration INI file
+        type: bytes
+        required: false
+      scope:
+        title: Scope
+        description: Regexp to filter targets from provided proxy log
+        type: string
+        required: false
+      dumpAll:
+        title: Dump All
+        description: Dump all DBMS databases tables entries
+        type: boolean
+        required: false
+      regVal:
+        title: Windows Registry Key Value
+        description: Windows registry key value
+        type: string
+        required: false
+      dummy:
+        title: Dummy
+        description: Dummy parameter value
+        type: boolean
+        required: false
+      commonTables:
+        title: Common Tables
+        description: Check existence of common tables
+        type: boolean
+        required: false
+      search:
+        title: Search Columns
+        description: Search column(s), table(s) and/or database name(s)
+        type: boolean
+        required: false
+        default: false
+      skipUrlEncode:
+        title: Skip URL Encoding
+        description: Skip URL encoding of payload data
+        type: boolean
+        required: false
+        default: false
+      referer:
+        title: HTTP Referer
+        description: HTTP Referer header value
+        type: string
+        required: false
+      purgeOutput:
+        title: Purge Output
+        description: Safely remove all content from output directory
+        type: boolean
+        required: false
+        default: false
+      retries:
+        title: Retries
+        description: Retries when the connection timeouts
+        type: integer
+        required: false
+        default: 3
+      extensiveFp:
+        title: Extensive Fingerprint
+        description: Perform an extensive DBMS version fingerprint
+        type: boolean
+        required: false
+        default: false
+      dumpTable:
+        title: Dump Table
+        description: Dump DBMS database table entries
+        type: boolean
+        required: false
+        default: false
+      database:
+        title: Database
+        description: DBMS database to enumerate
+        type: boolean
+        required: false
+      batch:
+        title: Batch
+        description: Never ask for user input, use the default behaviour
+        type: boolean
+        required: false
+        default: true
+      headers:
+        title: Extra Headers
+        description: 'Extra headers as a JSON object { "Accept-Language": "fr", "ETag":
+          123 }'
+        type: object
+        required: false
+      flushSession:
+        title: Flush Session
+        description: Flush session files for current target
+        type: boolean
+        required: false
+        default: false
+      osCmd:
+        title: Operating System Command
+        description: Execute an operating system command
+        type: string
+        required: false
+      suffix:
+        title: Suffix
+        description: Injection payload suffix string
+        type: string
+        required: false
+      dbmsCred:
+        title: Purge Output
+        description: DBMS authentication credentials (user:password)
+        type: string
+        required: false
+      regDel:
+        title: Windows Registry Delete
+        description: Delete a Windows registry key value
+        type: boolean
+        required: false
+        default: false
+      shLib:
+        title: Shared Library
+        description: Local path of the shared library
+        type: string
+        required: false
+      nullConnection:
+        title: Null Connection
+        description: Retrieve page length without actual HTTP response body
+        type: boolean
+        required: false
+        default: false
+      timeSec:
+        title: Seconds Time Delay
+        description: Seconds to delay the DBMS response (default 5)
+        type: integer
+        required: false
+        default: 5
+      noEscape:
+        title: No Escape
+        description: Turn off string escaping mechanism
+        type: boolean
+        required: false
+        default: false
+      getHostname:
+        title: Get Hostname
+        description: Retrieve DBMS server hostname
+        type: boolean
+        required: false
+        default: false
+      sessionFile:
+        title: Session File
+        description: Load session from a stored (.sqlite) file
+        type: bytes
+        required: false
+      getTables:
+        title: Get Tables
+        description: Enumerate DBMS database tables
+        type: boolean
+        required: false
+        default: false
+      agent:
+        title: User-Agent
+        description: HTTP User-Agent header value
+        type: string
+        required: false
+      lastChar:
+        title: Last Character
+        description: Last query output word character to retrieve
+        type: string
+        required: false
+      string:
+        title: String Match
+        description: String to match when query is evaluated to True
+        type: string
+        required: false
+      dbms:
+        title: DBMS
+        description: Force back-end DBMS to this value
+        type: string
+        required: false
+      tamper:
+        title: Tamper
+        description: Use given script(s) for tampering injection data
+        type: string
+        required: false
+      hpp:
+        title: HTTP Parameter Pollution
+        description: Use HTTP parameter pollution method
+        type: boolean
+        required: false
+        default: false
+      evalCode:
+        title: Evaluate Code
+        description: Evaluate provided Python code before the request (e.g.'import
+          hashlib;id2=hashlib.md5(id).hexdigest()')
+        type: string
+        required: false
+      cleanup:
+        title: Clean Up
+        description: Clean up the DBMS from SQLmap specific UDF and tables
+        type: boolean
+        required: false
+        default: false
+      getBanner:
+        title: Get Banner
+        description: Retrieve DBMS banner
+        type: boolean
+        required: false
+        default: false
+      regRead:
+        title: Read Windows Registry
+        description: Read a Windows registry key value
+        type: boolean
+        required: false
+        default: false
+      bulkFile:
+        title: Bulkfile
+        description: Scan multiple targets given in a textual file
+        type: bytes
+        required: false
+      safUrl:
+        title: Safe URL
+        description: URL address to visit frequently during testing
+        type: string
+        required: false
+      db:
+        title: Database
+        description: DBMS database to enumerate
+        type: string
+        required: false
+      dumpFormat:
+        title: Dump Format
+        description: Format of dumped data
+        type: string
+        required: false
+        default: CSV
+        enum:
+        - CSV
+        - HTML
+        - SQLITE
+      alert:
+        title: Alert
+        description: Run host OS command(s) when SQL injection is found
+        type: string
+        required: false
+      user:
+        title: User
+        description: DBMS user to enumerate
+        type: string
+        required: false
+      parseErrors:
+        title: Parse Errors
+        description: Parse and display DBMS error messages from responses
+        type: boolean
+        required: false
+        default: false
+      aCred:
+        title: Authentication Credential
+        description: HTTP authentication credentials (name:password)
+        type: string
+        required: false
+      getCount:
+        title: Get Count
+        description: Retrieve number of entries for table(s)
+        type: boolean
+        required: false
+        default: false
+      dFile:
+        title: File Destination
+        description: Back-end DBMS absolute filepath to write to
+        type: string
+        required: false
+      data:
+        title: Data
+        description: Data string to be sent through POST
+        type: string
+        required: false
+      regAdd:
+        title: Add Windows Registry
+        description: Write a Windows registry key value data
+        type: boolean
+        required: false
+      ignoreProxy:
+        title: Ignore Proxy
+        description: Ignore system default proxy settings
+        type: boolean
+        required: false
+      getColumns:
+        title: Get Columns
+        description: Enumerate DBMS database table columns
+        type: boolean
+        required: false
+      mobile:
+        title: Mobile
+        description: Imitate smartphone through HTTP User-Agent header
+        type: boolean
+        required: false
+      googleDork:
+        title: Google Dork
+        description: Process Google dork results as target URLs
+        type: string
+        required: false
+      tech:
+        title: Techniques
+        description: SQL injection techniques to use (default 'BEUSTQ')
+        type: string
+        required: false
+      textOnly:
+        title: Text Only
+        description: Compare pages based only on the textual content
+        type: boolean
+        required: false
+      commonColumns:
+        title: Common Columns
+        description: Check existence of common columns
+        type: string
+        required: false
+      keepAlive:
+        title: Keep Alive
+        description: Use persistent HTTP(s) connections
+        type: boolean
+        required: false
+    output:
+      result:
+        title: Result
+        type: object
+        description: Scan Complete
+        required: false

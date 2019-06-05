@@ -1,0 +1,19 @@
+{
+  "body": {
+    "input": {
+      "url": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "host": "wildfire.paloaltonetworks.com",
+      "proxy": {},
+      "verify": true
+    },
+    "meta": {},
+    "action": "submit_file_from_url"
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "deactivate_activity_monitor",
+    "meta": {},
+    "input": {
+      "activity_monitor_id": 276
+    },
+    "connection": {
+      "api_token": {
+        "secretKey": ""
+      },
+      "customer_id": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

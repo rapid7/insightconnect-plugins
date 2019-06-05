@@ -1,0 +1,148 @@
+plugin_spec_version: v2
+name: cherwell
+title: Cherwell
+description: Work with Cherwell Web Services records
+version: 2.1.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- cherwell
+- itsm
+- it
+connection:
+  url:
+    title: URL
+    description: Hostname of the Cherwell instance
+    type: string
+    required: true
+    default: guideit.cherwellondemand.com
+  client_id:
+    title: Client ID
+    description: Cherwell Client ID / API Key
+    type: credential_secret_key
+    required: true
+  username_and_password:
+    title: Username and Password
+    description: Cherwell username and password
+    type: credential_username_password
+    required: true
+  authentication_mode:
+    title: Authentication Mode
+    description: Authentication mode. Either Internal, Windows, LDAP, SAML, Auto
+    type: string
+    enum:
+    - Internal
+    - Windows
+    - LDAP
+    - SAML
+    - Auto
+    required: true
+    default: Internal
+  ssl_verify:
+    title: SSL Verify
+    description: Whether to access the server over HTTPS
+    type: boolean
+    required: true
+actions:
+  create_incident:
+    title: Create Incident
+    description: Create a Cherwell incident
+    input:
+      fields_to_change:
+        title: Fields to Change
+        type: object
+        description: A JSON blob of keys and values that are to be replaced in the
+          template e.g. {"Status", "New"} will update the Status field from the template
+        required: true
+      business_object_id:
+        title: Business Object ID
+        type: string
+        description: BusObjID of the template to create the incident from e.g 7cc53665c0c24cab86870a21cf6434cc
+        required: true
+    output:
+      success:
+        title: Success
+        description: Boolean indicating whether the business object was successfully
+          created
+        type: boolean
+        required: true
+      raw_response:
+        title: Raw Response
+        description: The raw JSON returned by the endpoint
+        type: object
+        required: true
+  lookup_incident:
+    title: Lookup Incident
+    description: Lookup that returns an incident that includes a list of fields and
+      their record IDs, names, and set values
+    input:
+      business_object_id:
+        title: Business Object ID
+        type: string
+        description: BusObjID of the incident
+        required: true
+      public_id:
+        title: Public ID
+        type: string
+        description: Public ID of the incident
+        required: true
+    output:
+      success:
+        title: Success
+        description: Boolean indicating whether the business object was successfully
+          created
+        type: boolean
+        required: true
+      raw_response:
+        title: Raw Response
+        description: The raw JSON returned by the endpoint
+        type: object
+        required: true
+  perform_ad_hoc_search:
+    title: Perform Ad Hoc Search
+    description: Runs an ad-hoc Business Object search. To execute a search with Prompts,
+      the PromptId and Value are required in the data request object
+    input:
+      data_request:
+        title: Data Request
+        description: Request object to specify search parameters
+        type: object
+        required: true
+    output:
+      search_results:
+        title: Search Results
+        description: The raw JSON search results returned by the endpoint
+        type: object
+        required: true
+  update_incident:
+    title: Update Incident
+    description: Updates an incident within Cherwell
+    input:
+      business_object_id:
+        title: Business Object ID
+        description: Business Object ID of the incident
+        type: string
+        required: true
+      public_id:
+        title: Public ID
+        description: Public ID of the incident
+        type: string
+        required: true
+      fields_to_update:
+        title: Fields to Update
+        description: A JSON blob of keys and values that are to be updated in the
+          incident e.g. {"Status", "New"} will update the Status field of the incident
+        type: object
+        required: true
+    output:
+      success:
+        title: Success
+        description: Boolean indicating whether the business object was successfully
+          created
+        type: boolean
+        required: true
+      raw_response:
+        title: Raw Response
+        description: The raw JSON returned by the endpoint
+        type: object
+        required: true

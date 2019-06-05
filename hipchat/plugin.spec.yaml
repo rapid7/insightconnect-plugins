@@ -1,0 +1,248 @@
+plugin_spec_version: v2
+name: hipchat
+title: HipChat
+description: HipChat is group chat built for teams & business
+version: 1.0.0
+vendor: rapid7
+status: ["deprecated"]
+tags:
+- hipchat
+- chat
+enable_cache: true
+connection:
+  host:
+    type: string
+    description: HipChat API Server
+    required: true
+    default: https://hipchat.com/
+  version:
+    type: string
+    description: API Version
+    required: true
+    default: v2
+  credentials:
+    type: credential_username_password
+    title: Username and Password (or token)
+    description: Username and password (or token)
+    required: false
+triggers:
+  latest_message:
+    title: Latest Message
+    description: Trigger on chat latest message
+    input:
+      room_id_or_name:
+        description: Room id or name
+        type: string
+        required: true
+      max-results:
+        type: integer
+        description: 'The maximum number of messages to return. Valid length range:
+          0 - 1000'
+        default: 75
+        required: false
+      include_deleted:
+        type: boolean
+        description: Include records about deleted messages into results (body of
+          a message isn't returned). Set to 'true'
+        default: true
+        required: false
+      timezone:
+        type: string
+        description: Your timezone. Must be a supported timezone name
+        default: UTC
+        required: false
+      not-before:
+        type: string
+        description: The id of the message that is oldest in the set of messages to
+          be returned. The server will not return any messages that chronologically
+          precede this message
+        required: false
+      interval:
+        type: number
+        description: Interval to wait before checking for another message
+        default: 30
+        required: false
+    output:
+      items:
+        description: An array of items
+        type: '[]object'
+        required: false
+      startIndex:
+        description: The start index for this set of results
+        type: integer
+        required: false
+      maxResults:
+        description: The maximum number of results returned
+        type: integer
+        required: false
+      links:
+        description: Links
+        type: object
+        required: false
+actions:
+  create:
+    title: Create User
+    description: Creates a new user
+    input:
+      name:
+        type: string
+        title: User's full name
+        description: 'User''s full name. Valid length range: 1 - 50'
+        required: true
+      roles:
+        type: '[]string'
+        title: List roles
+        description: The list of roles for the user
+        required: false
+      title:
+        type: string
+        title: Title of User
+        description: Title of user
+        required: false
+      mention_name:
+        type: string
+        title: Mention Name
+        description: User's @mention name
+        required: false
+      is_group_admin:
+        type: boolean
+        title: Group Admin
+        description: The user is group admin
+        default: false
+        required: false
+      timezone:
+        type: string
+        title: Timezone
+        description: User's timezone
+        default: UTC
+        required: false
+      password:
+        type: string
+        title: User's password
+        description: If not provided, a randomly generated password will be returned
+        required: false
+      email:
+        type: string
+        title: User's email
+        description: The email address
+        required: true
+    output:
+      id:
+        type: integer
+        title: User ID
+        description: The new created user id
+        required: false
+      links:
+        type: object
+        title: Links
+        description: Links
+        required: false
+      entity:
+        type: object
+        title: Entity
+        description: Entity
+        required: false
+  update:
+    title: Update User
+    description: Update a user
+    input:
+      id_or_email:
+        type: string
+        title: User Id or Email Address
+        description: The id, email address, or mention name (beginning with an '@')
+          of the user to update
+        required: true
+      name:
+        type: string
+        title: User's FullName
+        description: 'User''s full name. Valid length range: 1 - 50'
+        required: true
+      roles:
+        type: '[]string'
+        title: List roles
+        description: The list of roles for the user
+        required: false
+      title:
+        type: string
+        title: Title of User
+        description: Title of User
+        required: false
+      presence:
+        type: object
+        title: Presence
+        description: Presence information for the user include fields (status, show)
+          with data type is string
+        required: false
+      mention_name:
+        type: string
+        title: Mention
+        description: User's @mention name
+        required: true
+      is_group_admin:
+        type: boolean
+        title: Group Admin
+        description: The user is group admin
+        required: false
+      timezone:
+        type: string
+        title: Timezone
+        description: User's timezone
+        default: UTC
+        required: false
+      password:
+        type: string
+        title: User's Password
+        description: If not provided, the existing password is kept
+        required: false
+      email:
+        type: string
+        title: Email
+        description: Email of user
+        required: true
+    output:
+      status_code:
+        type: integer
+        title: Status
+        description: Http status code
+        required: false
+  delete:
+    title: Delete User
+    description: Delete a user
+    input:
+      id_or_email:
+        type: string
+        title: User Id or Email Address
+        description: The id, email address, or mention name (beginning with an '@')
+          of the user to update
+        required: true
+    output:
+      status_code:
+        type: integer
+        title: Status
+        description: HTTP status code
+        required: false
+  post:
+    title: Post Message
+    description: Send a message to a room
+    input:
+      room_id_or_name:
+        type: string
+        title: Room Id or Name
+        description: The id or url encoded name of the room
+        required: true
+      message:
+        type: string
+        title: Message
+        description: 'The message post to room. Valid length range: 1 - 1000'
+        required: true
+    output:
+      id:
+        type: string
+        title: Message Id
+        description: The unique identifier of the sent message
+        required: false
+      timestamp:
+        type: string
+        title: Timestamp
+        description: The utc timestamp representing when the message was processed
+        required: false

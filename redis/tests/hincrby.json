@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "hincrby",
+    "meta": {},
+    "input": {
+      "field": "lawl",
+      "key": "derp",
+      "value": 4
+    },
+    "connection": {
+      "db": 0,
+      "host": "",
+      "port": 7001
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

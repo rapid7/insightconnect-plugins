@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "download_report",
+    "meta": {},
+    "input": {
+      "id": 265,
+      "instance": "latest"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

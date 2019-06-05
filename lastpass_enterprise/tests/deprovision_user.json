@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "deprovision_user",
+    "input": {
+      "user_name": "sarah@lastpass.com",
+      "delete_action": "deactivate"
+    },
+    "connection": {
+      "account": 0,
+      "provhash": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

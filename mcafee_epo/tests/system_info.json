@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "system_info",
+    "input": {
+      "query": "System Name"
+    },
+    "connection": {
+      "url": "epo.company.com",
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "port": 8443
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

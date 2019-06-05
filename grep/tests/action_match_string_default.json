@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action":"match_string",
+        "input": {
+            "pattern": "hello",
+            "text": "hello world \n whatup \n  hello2 world",
+            "behavior": "Default"
+        },
+        "connection": null,
+        "meta": {}
+    },
+    "version": "v1",
+    "type": "action_start"
+}

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "revert_config_changes",
+    "meta": {},
+    "input": {
+      "app_id": "LowprofileappcreatedforKomandplugintests-1oRtT",
+      "id": 1
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

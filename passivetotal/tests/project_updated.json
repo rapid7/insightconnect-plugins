@@ -1,0 +1,22 @@
+{
+  "body": {
+    "trigger": "project_updated",
+    "meta": {},
+    "input": {
+      "project_name": "My Public Project",
+      "update_interval": 900
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "username": ""
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

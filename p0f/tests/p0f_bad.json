@@ -1,0 +1,12 @@
+{
+  "body": {
+    "input": {
+      "file": "!@#$%^^29827h"
+    },
+    "meta": {},
+    "action": "run",
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

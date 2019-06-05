@@ -1,0 +1,298 @@
+plugin_spec_version: v2
+name: pagerduty
+title: PagerDuty
+description: PagerDuty
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- pagerduty
+- on call
+- incident
+connection:
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: API Key
+    required: true
+types:
+  user:
+    id:
+      description: ID
+      type: string
+    self:
+      description: URL to view object
+      type: string
+    name:
+      description: Name
+      type: string
+      required: true
+    email:
+      description: Email
+      type: string
+      required: true
+    summary:
+      description: Summary
+      type: string
+    color:
+      description: Color
+      type: string
+    description:
+      description: Description
+      type: string
+    job_title:
+      description: Job Title
+      type: string
+    avatar_url:
+      description: Avatar URL
+      type: string
+    time_zone:
+      description: Time Zone, e.g. America/Lima
+      type: string
+    role:
+      description: Role
+      type: string
+      enum:
+      - admin
+      - limited_user
+      - owner
+      - read_only_user
+      - user
+actions:
+  get_user_by_email:
+    title: Get User by Email
+    description: Get a User by Email
+    input:
+      email:
+        title: Email
+        description: Email
+        type: string
+        required: true
+    output:
+      found:
+        title: Found
+        type: boolean
+        description: True if found
+        required: false
+      user:
+        title: User
+        description: User
+        type: user
+        required: false
+  get_user_by_id:
+    title: Get User by ID
+    description: Get a User by ID
+    input:
+      id:
+        title: User ID
+        description: User ID
+        type: string
+        required: true
+    output:
+      found:
+        title: Found
+        type: boolean
+        description: True if found
+        required: false
+      user:
+        title: User
+        description: User
+        type: user
+        required: false
+  create_user:
+    title: Create User
+    description: Create a User
+    input:
+      name:
+        title: Name
+        description: Name
+        type: string
+        required: true
+      email:
+        title: Email
+        description: Email
+        type: string
+        required: true
+      role:
+        title: Role
+        description: Role
+        type: string
+        enum:
+        - admin
+        - limited_user
+        - owner
+        - read_only_user
+        - user
+        required: false
+      from_email:
+        title: Email
+        description: Email of creating user
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        type: boolean
+        description: True if created
+        required: false
+      user:
+        title: User
+        description: User
+        type: user
+        required: false
+  delete_user_by_id:
+    title: Delete User by ID
+    description: Delete a User by ID
+    input:
+      id:
+        title: User ID
+        description: User ID
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        type: boolean
+        description: True if deleted
+        required: false
+      user:
+        title: User
+        description: User
+        type: user
+        required: false
+  send_trigger_event:
+    title: Send Trigger Event
+    description: Trigger an incident
+    input:
+      service_key:
+        title: Service Key
+        type: string
+        description: Service Key (aka Integration Key)
+        required: false
+      description:
+        title: Description
+        type: string
+        required: true
+        description: Text that will appear in the incident's log associated with this
+          event
+      details:
+        title: Details
+        description: An arbitrary JSON object containing any data you'd like included
+          in the incident log
+        type: object
+        required: false
+      client:
+        title: Client
+        type: string
+        description: The name of the monitoring client that is triggering this event
+        required: false
+      client_url:
+        title: Client URL
+        type: string
+        description: The URL of the monitoring client that is triggering this event
+        required: false
+      contexts:
+        title: Contexts
+        description: Additional context objects
+        type: '[]object'
+        required: false
+    output:
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+      message:
+        title: Message
+        description: Message
+        type: string
+        required: false
+      incident_key:
+        title: Incident Key
+        description: Incident Key
+        type: string
+        required: false
+  send_acknowledge_event:
+    title: Send Acknowledge Event
+    description: Acknowledge an incident
+    input:
+      service_key:
+        title: Service Key
+        type: string
+        description: Service Key (aka Integration Key)
+        required: false
+      incident_key:
+        title: Incident Key
+        type: string
+        description: Incident Key
+        required: true
+      description:
+        title: Description
+        type: string
+        description: Text that will appear in the incident's log associated with this
+          event
+        required: false
+      details:
+        title: Details
+        description: An arbitrary JSON object containing any data you'd like included
+          in the incident log
+        type: object
+        required: false
+    output:
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+      message:
+        title: Message
+        description: Message
+        type: string
+        required: false
+      incident_key:
+        title: Incident Key
+        description: Incident Key
+        type: string
+        required: false
+  send_resolve_event:
+    title: Send Resolve Event
+    description: Resolve an incident
+    input:
+      service_key:
+        title: Service Key
+        type: string
+        description: Service Key (aka Integration Key)
+        required: false
+      incident_key:
+        title: Incident Key
+        type: string
+        description: Incident Key
+        required: true
+      description:
+        title: Description
+        type: string
+        description: Text that will appear in the incident's log associated with this
+          event
+        required: false
+      details:
+        title: Details
+        description: An arbitrary JSON object containing any data you'd like included
+          in the incident log
+        type: object
+        required: false
+    output:
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+      message:
+        title: Message
+        description: Message
+        type: string
+        required: false
+      incident_key:
+        title: Incident Key
+        description: Incident Key
+        type: string
+        required: false

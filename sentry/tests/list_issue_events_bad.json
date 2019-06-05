@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "list_issue_events",
+    "meta": {},
+    "input": {
+      "issue_id": "12345"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://sentry.io/api/0/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

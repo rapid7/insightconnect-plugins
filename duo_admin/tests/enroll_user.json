@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "enroll_user",
+    "meta": {},
+    "input": {
+      "email": "",
+      "time_to_expiration": 0,
+      "username": ""
+    },
+    "connection": {
+      "hostname": "",
+      "integration_key": {
+        "secretKey": ""
+      },
+      "secret_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

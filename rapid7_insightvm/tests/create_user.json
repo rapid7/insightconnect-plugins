@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "create_user",
+    "meta": {},
+    "input": {
+      "authentication_id": 5,
+      "authentication_type": "ldap",
+      "email": "",
+      "enabled": true,
+      "login": "komand-test",
+      "name": "Komand Test User",
+      "access_all_asset_groups": false,
+      "access_all_sites": true,
+      "role_id": "user"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

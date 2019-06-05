@@ -1,0 +1,1956 @@
+plugin_spec_version: v2
+name: carbon_black_protection
+title: Carbon Black Protection
+description: Cb Protection allows users to lock down and harden systems to prevent
+  malware, ransomware, and more
+version: 2.1.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- carbon black
+- cb
+- protection
+enable_cache: true
+connection:
+  url:
+    title: URL
+    type: string
+    description: Root Host URL
+    required: true
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: API key
+    required: true
+  ssl_verify:
+    title: SSL Verify
+    type: boolean
+    default: true
+    description: True for Certificate Validation
+    required: true
+types:
+  file_catalog_entry_object:
+    executed:
+      title: "Executed"
+      type: boolean
+      description: "Executed"
+      required: false
+    computerId:
+      title: "Computer ID"
+      type: integer
+      description: "Computer ID"
+      required: false
+    pathName:
+      title: "Pathname"
+      type: string
+      description: "Pathname"
+      required: false
+    localState:
+      title: "Local State"
+      type: integer
+      description: "Local state"
+      required: false
+    detailedLocalState:
+      title: "Detailed Local State"
+      type: integer
+      description: "Detailed Local State"
+      required: false
+    dateCreated:
+      title: "Date Created"
+      type: string
+      description: "Date Created"
+      required: false
+    topLevel:
+      title: "Top Level"
+      type: boolean
+      description: "Top Level"
+      required: false
+    certificateId:
+      title: "Certificate ID"
+      type: integer
+      description: "Certificate ID"
+      required: false
+    fileInstanceGroupId:
+      title: "File Instance Group ID"
+      type: integer
+      description: "File instance group ID"
+      required: false
+    fileCatalogId:
+      title: "File Catalog ID"
+      type: integer
+      description: "File Catalog ID"
+      required: false
+    initialized:
+      title: "Initialized"
+      type: boolean
+      description: "Initialized"
+      required: false
+    fileName:
+      title: "Filename"
+      type: string
+      description: "Filename"
+      required: false
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    policyId:
+      title: "Policy ID"
+      type: integer
+      description: "Policy ID"
+      required: false
+  approvalRequest:
+    id:
+      type: integer
+      title: ID
+      description: Unique approvalRequestId
+    fileCatalogId:
+      type: integer
+      title: File Catalog ID
+      description: Id of fileCatalog Entry Associated with File
+    installerFileCatalogId:
+      type: integer
+      title: Installer File Catalog ID
+      description: Id of fileCatalog Entry Associated with Installer
+    processFileCatalogId:
+      type: integer
+      title: Process File Catalog ID
+      description: Id of fileCatalog Entry Associated with Process
+    computerId:
+      type: integer
+      title: Computer ID
+      description: Id of computer where Request Originated
+    computerName:
+      type: string
+      title: Computer Name
+      description: Name of computer where Request Originated
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when Created (UTC)
+    dateModified:
+      type: date
+      title: Date Modified
+      description: Datetime when Last Modified (UTC)
+    modifiedBy:
+      type: string
+      title: Modified By
+      description: User That Last Modified Request
+    enforcementLevel:
+      type: integer
+      title: Enforcement Level
+      description: Enforcement Level of Agent
+    resolution:
+      type: integer
+      title: Resolution
+      description: Resolution of Request
+    requestType:
+      type: integer
+      title: Request Type
+      description: Type of Request
+    requestorComments:
+      type: string
+      title: Requestor Comments
+      description: Comments by User that Created Request
+    requestorEmail:
+      type: string
+      title: Requestor Email
+      description: Email of User that Created Request
+    priority:
+      type: integer
+      title: Priority
+      description: Priority of Request
+    resolutionComments:
+      type: string
+      title: Resolution Comments
+      description: Comments by Request Resolver
+    status:
+      type: integer
+      title: Status
+      description: Request Status
+    policyId:
+      type: integer
+      title: Policy ID
+      description: Id of policy for Computer When Request Arrived
+    multipleBlocks:
+      type: boolean
+      title: Multiple Blocks
+      description: True if File Referenced Had Multiple Blocks
+    fileName:
+      type: string
+      title: File Name
+      description: Name of file on Agent
+    pathName:
+      type: string
+      title: Path Name
+      description: Path of file on Agent
+    process:
+      type: string
+      title: Process
+      description: Process that Attempted to Execute file on Agent
+    customRuleId:
+      type: integer
+      title: Custom Rule ID
+      description: Id of customRule that Caused File Block
+  certificate:
+    id:
+      type: integer
+      title: ID
+      description: Unique Certificate Id
+    parentCertificateId:
+      type: integer
+      title: Parent Certificate ID
+      description: Id of a Parent certificate in a Certificate Chain
+    publisherId:
+      type: integer
+      title: Publisher ID
+      description: Id of publisher
+    thumbprint:
+      type: string
+      title: Thumbprint
+      description: Thumbprint Hash
+    thumbprintAlgorithm:
+      type: string
+      title: Thumbprint Algorithm
+      description: Algorithm Used to Calculate Thumbprint
+    subjectName:
+      type: string
+      title: Subject Name
+      description: Certificate Subject Name
+    signatureAlgorithm:
+      type: string
+      title: Signature Algorithm
+      description: Certificate Signature Algorithm
+    serialNumber:
+      type: string
+      title: Serial Number
+      description: Certificate Serial Number
+    validFrom:
+      type: date
+      title: Valid From
+      description: Certificate Valid from Datetime
+    validTo:
+      type: date
+      title: Valid To
+      description: Certificate Valid to Datetime
+    publicKeyAlgorithm:
+      type: string
+      title: Public Key Algorithm
+      description: Certificate Public Key Algorithm
+    publicKeySize:
+      type: integer
+      title: Public Key Size
+      description: Certificate Public Key Size in Bits
+    firstSeenComputerId:
+      type: integer
+      title: First Seen Computer ID
+      description: Id of computer where Certificate First Seen
+    description:
+      type: string
+      title: Description
+      description: Description of Certificate Given by User
+    sourceType:
+      type: integer
+      title: Source Type
+      description: Mechanism that Changed Publisher State
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime certificate Was Created
+    dateModified:
+      type: date
+      title: Date Modified
+      description: Datetime State or Description Was Modified
+    modifiedByUser:
+      type: string
+      title: Modified By User
+      description: User that Last Modified State or Description
+    intermediary:
+      type: boolean
+      title: Intermediary
+      description: True if certificate is Intermediary Certificate in Chain
+    valid:
+      type: boolean
+      title: Valid
+      description: True if certificate Valid
+    embedded:
+      type: boolean
+      title: Embedded
+      description: True if certificate Was Seen as Embedded Signer of File
+    detached:
+      type: boolean
+      title: Detached
+      description: True if certificate Was Seen as Detached Signer of File
+    signer:
+      type: boolean
+      title: Signer
+      description: True if certificate Was Seen Signing a File
+    cosigner:
+      type: boolean
+      title: Cosigner
+      description: True if certificate Was Seen Counter-Signing a File
+    certificateState:
+      type: integer
+      title: Certificate State
+      description: Assigned State
+    certificateEffectiveState:
+      type: integer
+      title: Certificate Effective State
+      description: Effective State Taking into Account Other certificate in Chain
+    clVersion:
+      type: integer
+      title: CL Version
+      description: CL Version Associated with certificate
+  computer:
+    id:
+      type: integer
+      title: ID
+      description: Unique computer Id
+    name:
+      type: string
+      title: Name
+      description: Computer Name
+    computerTag:
+      type: string
+      title: Computer Tag
+      description: Custom computer Tag
+    description:
+      type: string
+      title: Description
+      description: Description of computer
+    policyId:
+      type: integer
+      title: Policy ID
+      description: Id of policy the computer Belongs to
+    policyName:
+      type: string
+      title: Policy Name
+      description: Name of policy the computer Belongs to
+    automaticPolicy:
+      type: boolean
+      title: Automatic Policy
+      description: True if policy Is Assigned Automatically Through AD
+    localApproval:
+      type: boolean
+      title: Local Approval
+      description: True if computer Is in Local Approval Mode
+    users:
+      type: string
+      title: Users
+      description: List of Last Logged in Users
+    ipAddress:
+      type: string
+      title: IP Address
+      description: Last Known IP
+    connected:
+      type: boolean
+      title: Connected
+      description: True if computer Is Connected
+    enforcementLevel:
+      type: integer
+      title: Enforcement Level
+      description: Current Enforcement Level
+    disconnectedEnforcementLevel:
+      type: integer
+      title: Disconnected Enforcement Leve
+      description: Current Enforcement Level for Disconnected computers
+    CLIPassword:
+      type: string
+      title: CLI Password
+      description: CLI Password for This computer
+    lastRegisterDate:
+      type: date
+      title: Last Register Date
+      description: Last Datetime Registered to Server
+    lastPollDate:
+      type: date
+      title: Last Poll Date
+      description: Last Datetime Contacted Server
+    osShortName:
+      type: string
+      title: OS Short Name
+      description: Short OS Name
+    osName:
+      type: string
+      title: OS Name
+      description: OS Name
+    platformId:
+      type: integer
+      title: Platform ID
+      description: Platform Id
+    virtualized:
+      type: string
+      title: Virtualized
+      description: True if computer Is Virtualized
+    virtualPlatform:
+      type: string
+      title: Virtual Platform
+      description: Platform for Virtualization
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Date computer Was First Registered
+    agentVersion:
+      type: string
+      title: Agent Version
+      description: Version of Cb Protection Platform Agent
+    daysOffline:
+      type: integer
+      title: Days Offline
+      description: Number of Days computer Was Offline
+    uninstalled:
+      type: boolean
+      title: Uninstalled
+      description: True if computer Was Uninstalled
+    deleted:
+      type: boolean
+      title: Deleted
+      description: True if computer Is Disabled
+    processorCount:
+      type: integer
+      title: Processor Count
+      description: Number of Processor Cores
+    processorSpeed:
+      type: number
+      title: Processor Speed
+    processorModel:
+      type: string
+      title: Processor Model
+    machineModel:
+      type: string
+      title: Machine Model
+    memorySize:
+      type: integer
+      title: Memory Size
+    upgradeStatus:
+      type: string
+      title: Upgrade Status
+    upgradeError:
+      type: string
+      title: Upgrade Error
+      description: Last Upgrade Error
+    upgradeErrorTime:
+      type: date
+      title: Upgrade Error Time
+      description: Last Time Upgrade Error Changed
+    upgradeErrorCount:
+      type: integer
+      title: Upgrade Error Count
+      description: Number of Times Last Upgrade Error Occurred
+    syncFlags:
+      type: integer
+      title: Sync Flags
+      description: Status of Synchronization on Agent
+    refreshFlags:
+      type: integer
+      title: Refresh Flags
+      description: Refresh Flags for Agent
+    policyStatusDetails:
+      type: string
+      title: Policy Status Details
+      description: Detailed Status of Policy on Agent
+    prioritized:
+      type: boolean
+      title: Prioritized
+      description: True if computer is Prioritized
+    macAddress:
+      type: string
+      title: MAC Address
+      description: MAC Address of Adapter Used to Connect to the CB Server
+    debugLevel:
+      type: integer
+      title: Debug Level
+      description: Current Debug Level of Agent
+    kernelDebugLevel:
+      type: integer
+      title: Kernel Debug Level
+      description: Current Kernel Debug Level of Agent
+    debugFlags:
+      type: integer
+      title: Debug Flags
+      description: Debug Flags
+    debugDuration:
+      type: integer
+      title: Debug Duration
+      description: Debug Duration in Minutes
+    ccLevel:
+      type: integer
+      title: CC Level
+      description: Cache Consistency Check Level Set for Agent
+    ccFlags:
+      type: integer
+      title: CC Flags
+      description: Cache Consistency Check Flags Set for Agent
+    supportedKernel:
+      type: boolean
+      title: Supported Kernel
+      description: True if Current computer Kernel Version Supported
+    forceUpgrade:
+      type: boolean
+      title: Force Upgrade
+      description: True if Upgrade is Forced
+    hasHealthCheckErrors:
+      type: boolean
+      title: Has Health Check Errors
+      description: True if computer Has Health Check Errors
+    clVersion:
+      type: integer
+      title: CL Version
+      description: Current CL Version
+    agentMemoryDumps:
+      type: boolean
+      title: Agent Memory Dumps
+      description: True if Agent Has Memory Dumps
+    systemMemoryDumps:
+      type: boolean
+      title: System Memory Dumps
+      description: True if Agent has System Memory Dumps
+    initializing:
+      type: boolean
+      title: Initializing
+      description: True if Agent is Initializing
+    tamperProtectionActive:
+      type: boolean
+      title: Tamper Protection Active
+      description: True if Agent Tamper Protection Active
+    agentCacheSize:
+      type: integer
+      title: Agent Cache Size
+      description: Number of Files Agent Is Tracking
+    agentQueueSize:
+      type: integer
+      title: Agent Queue Size
+      description: Number of Unsent File Operations in Agent Queue
+    syncPercent:
+      type: integer
+      title: Sync Percent
+      description: Synchronization Percentage for File Operations
+    tdCount:
+      type: integer
+      title: TD Count
+      description: Count of Trusted Directories Hosted by Agent
+    template:
+      type: boolean
+      title: Template
+      description: True if computer Is Template
+    templateComputerId:
+      type: integer
+      title: Template Computer ID
+      description: Id of Parent Template computer
+    templateDate:
+      type: date
+      title: Template Date
+      description: Datetime when computer Was Templated
+    templateCloneCleanupMode:
+      type: integer
+      title: Template Clone Cleanup Mode
+    templateCLoneCleanupTime:
+      type: integer
+      title: Template Clone Cleanup Time
+      description: Time Unit Specified in templateCloneCleanupTimeScale
+    templateCloneCleanupTimeScale:
+      type: integer
+      title: Template Clone Cleanup Time Scale
+      description: 1=hours,2=days,3=weeks
+    templateTrackModsOnly:
+      type: boolean
+      title: Template Track Mods Only
+      description: If True Clones of Template Will Track Only New and Modified Files
+    cbSensorId:
+      type: integer
+      title: CB Sensor ID
+      description: ID of Carbon Black Sensor
+    cbSensorVersion:
+      type: string
+      title: CB Sensor Version
+      description: Carbon Black Sensor Version
+    cbSensorFlags:
+      type: integer
+      title: CB Sensor Flags
+      description: Carbon Black Sensor Flags
+    SCEPStatus:
+      type: integer
+      title: SCEP Status
+      description: Status of SCEP Protection
+  connector:
+    id:
+      type: integer
+      title: ID
+      description: Unique connector Id
+    name:
+      type: string
+      title: Name
+      description: Name of the connector
+    analysisName:
+      type: string
+      title: Analysis Name
+      description: Name for Analysis Component of the connector
+    connectorVersion:
+      type: string
+      title: Connector Version
+    canAnalyze:
+      type: boolean
+      title: Can Analyze
+      description: True if connector Can Analyze Files
+    enabled:
+      type: boolean
+      title: Enabled
+      description: True if connector Is Enabled
+    analysisEnabled:
+      type: boolean
+      title: Analysis Enabled
+      description: True if Analysis Component of connector is Enabled
+    isInternal:
+      type: boolean
+      title: Is Internal
+      description: True if This is Internal connector
+    analysisTargets:
+      type: '[]string'
+      title: Analysis Targets
+      description: Array of Possible Analysis Targets
+  event:
+    id:
+      type: integer
+      title: ID
+      description: Unique event Id
+    timestamp:
+      type: date
+      title: Timestamp
+      description: Datetime When event Created
+    receivedTimestamp:
+      type: date
+      title: Received Timestamp
+      description: Datetime When event Received by Server
+    description:
+      type: string
+      title: Description
+    type:
+      type: integer
+      title: Type
+      description: Event Type
+    subtype:
+      type: integer
+      title: Subtype
+      description: Event Subtype
+    subtypeName:
+      type: string
+      title: Subtype Name
+      description: Event subtype as string
+    ipAddress:
+      type: string
+      title: IP Address
+      description: IP Address Associated with event
+    computerId:
+      type: integer
+      title: Computer ID
+      description: Id of computer Associated with event
+    computerName:
+      type: string
+      title: Computer Name
+      description: Name of computer Associated with event
+    policyId:
+      type: integer
+      title: Policy ID
+      description: Id of policy where Agent Was at Time of event
+    policyName:
+      type: string
+      title: Policy Name
+      description: Name of policy where Agent Was at Time of event
+    fileCatalogId:
+      type: integer
+      title: File Catalog ID
+      description: Id of fileCatalog Entry Associated with File
+    installerFileCatalogId:
+      type: integer
+      title: Installer File Catalog ID
+      description: Id of fileCatalog Entry Associated with Installer
+    processFileCatalogId:
+      type: integer
+      title: Process File Catalog Id
+      description: Id of fileCatalog Entry Associated with Process
+    fileName:
+      type: string
+      title: File Name
+    pathName:
+      type: string
+      title: Path Name
+    commandLine:
+      type: string
+      title: Command Line
+      description: Full Command Line
+    processPathName:
+      type: string
+      title: Process Path Name
+    processFileName:
+      type: string
+      title: Process File Name
+    installerFileName:
+      type: string
+      title: Installer File Name
+    processKey:
+      type: string
+      title: Process Key
+      description: Key to Uniquely Identify Process
+    severity:
+      type: integer
+      title: Severity
+      description: Event Severity
+    userName:
+      type: string
+      title: User Name
+    ruleName:
+      type: string
+      title: Rule Name
+    banName:
+      type: string
+      title: Ban Name
+    updaterName:
+      type: string
+      title: Updater Name
+    indicatorName:
+      type: string
+      title: Indicator Name
+    param1:
+      type: string
+      title: Param 1
+      description: Internal String Parameter
+    param2:
+      type: string
+      title: Param 2
+      description: Internal String Parameter
+    param3:
+      type: string
+      title: Param 3
+      description: Internal String Parameter
+    stringId:
+      type: integer
+      title: StringID
+      description: Internal String Id Used for Description
+  fileAnalysis:
+    id:
+      type: integer
+      title: ID
+      description: Unique fileAnalysis Id
+    computerId:
+      type: integer
+      title: Computer ID
+      description: Id of computer Entry Associated with Analysis
+    fileCatalogId:
+      type: integer
+      title: File Catalog ID
+      description: Id of fileCatalog Entry Associated with Analysis
+    connectorId:
+      type: integer
+      title: Connector Id
+      description: Id of connector Associated with Analysis
+    createdBy:
+      type: string
+      title: Created By
+      description: User that Requested Analysis
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when fileAnalysis Was Created (UTC)
+    dateModified:
+      type: date
+      title: Date Modified
+      description: Datetime when fileAnalysis Was Last Modified (UTC)
+    fileName:
+      type: string
+      title: File Name
+      description: Name of the File where File Exists on Endpoint
+    pathName:
+      type: string
+      title: Path Name
+      description: Name of the Path where File Exists on Endpoint
+    priority:
+      type: integer
+      title: Priority
+      description: fileAnalysis Priority in range [-2,2], where 2 Is Highest Priority
+    analysisStatus:
+      type: integer
+      title: Analysis Status
+    analysisResult:
+      type: integer
+      title: Analysis Result
+    analysisTarget:
+      type: string
+      title: Analysis Target
+      description: Connector-dependent
+  fileCatalog:
+    id:
+      type: integer
+      title: ID
+      description: Unique fileCatalog Id
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when Unique Hash First Seen (Database Local Time)
+    pathName:
+      type: string
+      title: Path Name
+    fileName:
+      type: string
+      title: File Name
+    fileExtension:
+      type: string
+      title: File Extension
+    computerId:
+      type: integer
+      title: Computer ID
+      description: ID of computer where File First Seen
+    md5:
+      type: string
+      title: MD5
+    sha1:
+      type: string
+      title: SHA-1
+    sha256:
+      type: string
+      title: SHA-256
+    sha256HashType:
+      type: integer
+      title: SHA-256 Hash Type
+      description: 5=regular,6=fuzzy
+    fileType:
+      type: string
+      title: File Type
+    fileSize:
+      type: integer
+      title: File Size
+      description: Size in Bytes
+    productName:
+      type: string
+      title: Product Name
+      description: Name of Product Associated with File in VERSIONINFO
+    publisher:
+      type: string
+      title: Publisher
+      description: Subject Name of Certificate that Signed this File
+    company:
+      type: string
+      title: Company
+      description: Name of Company Associiated with File in VERSIONINFO
+    publisherOrCompany:
+      type: string
+      title: Publisher Or Company
+      description: Publisher Name if Exists or Company Name from VERSIONINFO
+    productVersion:
+      type: string
+      title: Product Version
+      description: Version of File in VERSIONINFO
+    installedProgramName:
+      type: string
+      title: Installed Product Name
+      description: Name of Product Associated with File in MSI Package
+    reputationAvailable:
+      type: boolean
+      title: Reputation Available
+      description: True if Reputation Information Has Arrived
+    trust:
+      type: integer
+      title: Trust
+      description: Trust of file (0-10), -1=unknown
+    trustMessages:
+      type: string
+      title: Trust Messages
+      description: More Details about Trust of File
+    threat:
+      type: integer
+      title: Threat
+    category:
+      type: string
+      title: Category
+    fileState:
+      type: integer
+      title: File State
+    publisherState:
+      type: integer
+      title: Publisher State
+    certificateState:
+      type: integer
+      title: Certificate State
+    effectiveState:
+      type: string
+      title: Effective State
+    approvedByReputation:
+      type: boolean
+      title: Approved By Reputation
+      description: True if File Approved by Reputation
+    reputationEnabled:
+      type: boolean
+      title: Reputation Enabled
+      description: True if Reputation Approvals Are Enabled for File
+    prevalence:
+      type: integer
+      title: Prevalence
+      description: Number of Endpoints that Have This File
+    fileFlags:
+      type: integer
+      title: File Flags
+    publisherId:
+      type: integer
+      title: Publisher ID
+    certificateId:
+      type: integer
+      title: Certificate ID
+  fileInstance:
+    id:
+      type: integer
+      title: ID
+    fileCatalogId:
+      type: integer
+      title: File Catalog ID
+    fileInstanceGroupId:
+      type: integer
+      title: File Instance Group ID
+    computerId:
+      type: integer
+      title: Computer ID
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when File Was Created (UTC)
+    fileName:
+      type: string
+      title: File Name
+    pathName:
+      type: string
+      title: Path Name
+    executed:
+      type: boolean
+      title: Executed
+      description: True if File Was Ever Executed on Agent
+    localState:
+      type: integer
+      title: Local State
+    detailedLocalState:
+      type: integer
+      title: Detailed Local State
+    detachedPublisherId:
+      type: integer
+      title: Detached Publisher ID
+      description: Id of Detached Publisher That Signed This File through the Catalog
+    detachedCertificateId:
+      type: integer
+      title: Detached CertificateId
+      description: Id of Detached Certificate That Signed This File through the Catalog
+  fileInstanceDeleted:
+    id:
+      type: integer
+      title: ID
+    fileInstanceGroupId:
+      type: integer
+      title: File Instance Group ID
+    fileCatalogId:
+      type: integer
+      title: File Catalog ID
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when File Was Created on Agent (UTC)
+    dateDeleted:
+      type: date
+      title: Date Deleted
+      description: Datetime when File Was Deleted (UTC)
+    fileName:
+      type: string
+      title: File Name
+    pathName:
+      type: string
+      title: Path Name
+    detachedPublisherId:
+      type: integer
+      title: Detached Publisher ID
+    detachedCertificateId:
+      type: integer
+      title: Detached Certificate ID
+  fileInstanceGroup:
+    id:
+      type: integer
+      title: ID
+    fileCatalogId:
+      type: integer
+      title: File Catalog ID
+    computerId:
+      type: integer
+      title: Computer ID
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when File Was Created on Agent (UTC)
+    fileName:
+      type: string
+      title: File Name
+    pathName:
+      type: string
+      title: Path Name
+    userName:
+      type: string
+      title: User Name
+      description: User Associated with Group Creation on Agent
+    groupType:
+      type: integer
+      title: Group Type
+      description: 0=initialization,1=topLevel,2=process,3=MSI
+    installedProgramName:
+      type: string
+      title: Installed Program Name
+      description: User Associated with Group Creation on Agent
+  fileRule:
+    id:
+      type: integer
+      title: ID
+    fileCatalogId:
+      type: integer
+      title: File Catlog ID
+    name:
+      type: string
+      title: Name
+    description:
+      type: string
+      title: Description
+    fileState:
+      type: integer
+      title: File State
+      description: 1=unapproved,2=approved,3=banned
+    sourceType:
+      type: integer
+      title: Source Type
+      description: Mechanism that Created Rule
+    sourceId:
+      type: integer
+      title: Source ID
+      description: Can Be Event Rule ID or Trusted Directory ID
+    reportOnly:
+      type: boolean
+      title: Report Only
+      description: True if this Has a Report-Only Ban
+    reputationApprovalsEnabled:
+      type: boolean
+      title: Reputation Approvals Enabled
+      description: True if Reputation Approvals Are Enabled
+    forceInstaller:
+      type: boolean
+      title: Force Installer
+      description: True if File is Forced to Act as Installer, Even if Product Detected
+        as Not Installer
+    forceNotInstaller:
+      type: boolean
+      title: Force Not Installer
+      description: True if File is Forced to Act as Not Installer, Even if Product
+        Detected as Installer
+    policyIds:
+      type: string
+      title: Policy IDs
+      description: List of IDs of Policies where Rule Applies, 0 if Global
+    hash:
+      type: string
+      title: Hash
+      description: Hash Only Available If Rule Created Through MD5 or SHA-1
+    platformFlags:
+      type: integer
+      title: Platform Flags
+      description: 1=Windows,2=Mac,3=Linux
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when Rule Created (UTC)
+    createdBy:
+      type: string
+      title: Created By
+      description: User that Created Rule
+    dateModified:
+      type: date
+      title: Date Modified
+      description: Datetime when Rule Last Modified (UTC)
+    modifiedBy:
+      type: string
+      title: Modified By
+      description: User that Last Modified Rule
+    clVersion:
+      type: integer
+      title: CL Version
+  fileUpload:
+    id:
+      type: integer
+      title: ID
+    computerId:
+      type: integer
+      title: ID
+    fileCatalogId:
+      type: integer
+      title: File Catalog ID
+    createdBy:
+      type: string
+      title: Created By
+      description: User that Requested Upload
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when Upload Requested (UTC)
+    dateModified:
+      type: date
+      title: Date Modified
+      description: Datetime when Upload Last Modified by System (UTC)
+    fileName:
+      type: string
+      title: File Name
+    pathName:
+      type: string
+      title: Path Name
+    priority:
+      type: integer
+      title: Priority
+      description: Upload Priority in Range [-2,2], where 2 Is Highest Priority
+    uploadPath:
+      type: string
+      title: Upload Path
+      description: Local Upload Path for File on Server. File IS Compressed in ZIP
+    uploadedFileSize:
+      type: integer
+      title: Uploaded File Size
+      description: Will Be 0 unless uploadStatus=3
+    uploadStatus:
+      type: integer
+      title: Upload Status
+  internalEvent:
+    id:
+      type: integer
+      title: ID
+      description: Unique event Id
+    timestamp:
+      type: date
+      title: Timestamp
+      description: Datetime When event Created
+    receivedTimestamp:
+      type: date
+      title: Received Timestamp
+      description: Datetime When event Received by Server
+    description:
+      type: string
+      title: Description
+    type:
+      type: integer
+      title: Type
+      description: Event Type
+    subtype:
+      type: integer
+      title: Subtype
+      description: Event Subtype
+    subtypeName:
+      type: string
+      title: Subtype Name
+      description: Event subtype as string
+    ipAddress:
+      type: string
+      title: IP Address
+      description: IP Address Associated with event
+    computerId:
+      type: integer
+      title: Computer ID
+      description: Id of computer Associated with event
+    computerName:
+      type: string
+      title: Computer Name
+      description: Name of computer Associated with event
+    policyId:
+      type: integer
+      title: Policy ID
+      description: Id of policy where Agent Was at Time of event
+    policyName:
+      type: string
+      title: Policy Name
+      description: Name of policy where Agent Was at Time of event
+    fileCatalogId:
+      type: integer
+      title: File Catalog ID
+      description: Id of fileCatalog Entry Associated with File
+    installerFileCatalogId:
+      type: integer
+      title: Installer File Catalog ID
+      description: Id of fileCatalog Entry Associated with Installer
+    processFileCatalogId:
+      type: integer
+      title: Process File Catalog Id
+      description: Id of fileCatalog Entry Associated with Process
+    fileName:
+      type: string
+      title: File Name
+    pathName:
+      type: string
+      title: Path Name
+    commandLine:
+      type: string
+      title: Command Line
+      description: Full Command Line
+    processPathName:
+      type: string
+      title: Process Path Name
+    processFileName:
+      type: string
+      title: Process File Name
+    installerFileName:
+      type: string
+      title: Installer File Name
+    processKey:
+      type: string
+      title: Process Key
+      description: Key to Uniquely Identify Process
+    severity:
+      type: integer
+      title: Severity
+      description: Event Severity
+    userName:
+      type: string
+      title: User Name
+    ruleName:
+      type: string
+      title: Rule Name
+    banName:
+      type: string
+      title: Ban Name
+    updaterName:
+      type: string
+      title: Updater Name
+    indicatorName:
+      type: string
+      title: Indicator Name
+    param1:
+      type: string
+      title: Param 1
+      description: Internal String Parameter
+    param2:
+      type: string
+      title: Param 2
+      description: Internal String Parameter
+    param3:
+      type: string
+      title: Param 3
+      description: Internal String Parameter
+    stringId:
+      type: integer
+      title: StringID
+      description: Internal String Id Used for Description
+  meteredExecution:
+    id:
+      type: integer
+      title: ID
+    meterId:
+      type: integer
+      title: Meter ID
+      description: Id of Meter Associated with this Execution
+    name:
+      type: string
+      title: Name
+      description: Name of Meter Associated with Execution
+    description:
+      type: string
+      title: Description
+      description: Description of Meter Associated with Execution
+    type:
+      type: integer
+      title: Type
+    data:
+      type: string
+      title: Data
+      description: Data from Definition of Meter
+    eventId:
+      type: integer
+      title: Event ID
+    computerId:
+      type: integer
+      title: Computer ID
+    fileCatalogId:
+      type: integer
+      title: File Catalog ID
+    timestamp:
+      type: date
+      title: Timestamp
+      description: Datetime Associated with this Execution
+    userName:
+      type: string
+      title: User Name
+      description: User Name Associated with this Execution
+  notifier:
+    id:
+      type: integer
+      title: ID
+    name:
+      type: string
+      title: Name
+    title:
+      type: string
+      title: Title
+      description: Notifier Dialog Title
+    messageText:
+      type: string
+      title: Message Text
+      description: Full Message Text Appearing in Notifier Dialog
+    eventLogText:
+      type: string
+      title: Event Log Text
+    url:
+      type: string
+      title: URL
+    fgImageLocation:
+      type: string
+      title: FG Image Location
+      description: Foreground Image of Notifier Dialog
+    bgImageLocation:
+      type: string
+      title: BG Image Location
+      description: Background Image of Notifier Dialog
+    timeout:
+      type: integer
+      title: Timeout
+      description: Timeout of Notifier in Seconds
+    showLogo:
+      type: boolean
+      title: Show Logo
+      description: True to Show Logo on Dialog
+    logoUrl:
+      type: string
+      title: Logo URL
+      description: URL to the Logo Image
+    flags:
+      type: integer
+      title: Flags
+      description: 1=showApprovalRequestFields,2=showJustificationFields
+    systemNotifier:
+      type: boolean
+      title: System Notifier
+      description: True if System Notifier
+    defaultRuleType:
+      type: integer
+      title: Default Rule Type
+      description: Default customRule Type for this Notifier
+    defaultRuleGroupId:
+      type: integer
+      title: Default Rule Group ID
+    createdBy:
+      type: string
+      title: Created By
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when Created (UTC)
+    modifiedBy:
+      type: string
+      title: Modified By
+    dateModified:
+      type: date
+      title: Date Modified
+      description: Datetime when Last Modified (UTC)
+    usageCount:
+      type: integer
+      title: Usage Count
+      description: Number of customRule Objects that Reference this Notifier
+    clVersion:
+      type: integer
+      title: CL Version
+  pendingAnalysis:
+    id:
+      type: integer
+      title: ID
+    priority:
+      type: integer
+      title: Priority
+    uplaoded:
+      type: boolean
+      title: Uploaded
+      description: True if File is Available
+    fileCatalogId:
+      type: integer
+      title: File Catalog ID
+    connectorId:
+      type: integer
+      title: Connector ID
+    createdBy:
+      type: string
+      title: Created By
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when fileAnalysis Created (UTC)
+    dateModified:
+      type: date
+      title: Date Modified
+      description: Datetime when fileAnalysis Last Modified (UTC)
+    fileName:
+      type: string
+      title: File Name
+    pathName:
+      type: string
+      title: Path Name
+    md5:
+      type: string
+      title: MD5
+    sha1:
+      type: string
+      title: SHA-1
+    sha256:
+      type: string
+      title: SHA-256
+    uploadPath:
+      type: string
+      title: Upload Path
+      description: Local Upload Path for File on Server. File is Compressed in ZIP
+    uploadedFileSize:
+      type: integer
+      title: Uploaded File Size
+      description: Will be 0 of analysisStatus is 0
+    analysisStatus:
+      type: integer
+      title: Analysis Status
+    analysisResult:
+      type: integer
+      title: Analysis Result
+      description: 0=NA,1=clean,2=potentialThreat,3=malicious
+    analysisTarget:
+      type: string
+      title: Analysis Target
+    analysisError:
+      type: string
+      title: Analysis Error
+  policy:
+    id:
+      type: integer
+      title: ID
+    name:
+      type: string
+      title: Name
+    description:
+      type: string
+      title: Description
+    packageName:
+      type: string
+      title: Package Name
+    enforcementLevel:
+      type: integer
+      title: Enforcement Level
+    disconnectedEnforcementLevel:
+      type: integer
+      title: Disconnected Enforcement Level
+    helpDeskUrl:
+      type: string
+      title: Helpdesk URL
+      description: Helpdesk URL for Notifiers in this Policy
+    imageUrl:
+      type: string
+      title: Image URL
+      description: Image Logo URL for Notifiers in this Policy
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when Policy was Created (UTC)
+    dateModified:
+      type: date
+      title: Date Modified
+      description: Datetime when Policy was Last Modified (UTC)
+    readOnly:
+      type: boolean
+      title: Read Only
+      description: True if Read-Only
+    hidden:
+      type: boolean
+      title: Hidden
+      description: True if Policy Hidden in UI
+    automatic:
+      type: boolean
+      title: Automatic
+      description: True if AD Mapping Enabled
+    loadAgentInSafeMode:
+      type: boolean
+      title: Load Agent In Safe Mode
+      description: True if Agents Will Be Loaded when Machine Booted in Safe Mode
+    reputationEnabled:
+      type: boolean
+      title: Reputation Enabled
+      description: True if Reputation Approvals Enabled
+    fileTrackingEnabled:
+      type: boolean
+      title: File Tracking Enabled
+      description: True if File Tracking Enabled
+    customLogo:
+      type: boolean
+      title: Custom Logo
+      description: True if Notifiers Use Custom Logo
+    automaticApprovalsOnTransition:
+      type: boolean
+      title: Automatic Approvals On Transition
+      description: True if Agents Automatically Locally Approve Files when Transitioning
+        into High Enforcement
+    allowAgentUpgrades:
+      type: boolean
+      title: Allow Agent Upgrades
+      description: True if Agents Can Be Upgraded
+    clVersionMax:
+      type: integer
+      title: CL Version Max
+      description: Max Target CL Version for Agents
+  publisher:
+    id:
+      type: integer
+      title: ID
+    name:
+      type: string
+      title: Name
+    description:
+      type: string
+      title: Description
+    modifiedBy:
+      type: string
+      title: Modified By
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when Publisher First Seen (UTC)
+    dateModified:
+      type: date
+      title: Date Modified
+      description: Datetime when Publisher Last Modified (UTC)
+    publisherReputation:
+      type: integer
+      title: Publisher Reputation
+      description: 0=notTrusted,1=low,2=medium,3=high
+    publisherState:
+      type: integer
+      title: Publisher State
+      description: 1=unapproved,2=approved,3=banned
+    policyIds:
+      type: string
+      title: Policy IDs
+      description: List of IDs of Policies where Rule Applies, Empty if Global
+    reputationApprovalsEnabled:
+      type: boolean
+      title: Reputation Approvals Enabled
+      description: True if Publisher Can Be Approved by Reputation
+    sourceType:
+      type: integer
+      title: Source Type
+      description: 1=manual,3=reputation,5=external(API)
+    firstSeenComputerId:
+      type: integer
+      title: First Seen Computer ID
+      description: Id of computer where Publisher Was First Seen
+    platformFlags:
+      type: integer
+      title: Platform Flags
+      description: Flags where Publisher Will Be Approved/Banned, 1=windows,2=mac,4=linux
+    signedFilesCount:
+      type: integer
+      title: Signed Files Count
+    signedCertificateCount:
+      type: integer
+      title: Signed Certificate Count
+    hidden:
+      type: boolean
+      title: Hidden
+      description: True if Not Seen on Enpoints or Modified Yet
+    clVersion:
+      type: integer
+      title: CL Version
+  serverConfig:
+    id:
+      type: integer
+      title: ID
+    name:
+      type: string
+      title: Name
+    value:
+      type: string
+      title: Value
+    dateModified:
+      type: date
+      title: Date Modified
+      description: Datetime when Property was Last Modified (UTC)
+    modifiedBy:
+      type: string
+      title: Modified By
+  serverPerformance:
+    id:
+      type: integer
+      title: ID
+      description: Id of Entry. Id Is Ordinal and Cannot be Persisted
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime of Entry (UTC)
+    connectedAgents:
+      type: integer
+      title: Connected Agents
+      description: Average Number of Connected Agents
+    agentFileBacklog:
+      type: integer
+      title: Agent File Backlog
+      description: Size of All Agent File Change Queues
+    agentProcessingRate:
+      type: integer
+      title: Agent Processing Rate
+      description: Daily Processing Rate from Agent Queue
+    serverFileBacklog:
+      type: integer
+      title: Server File Backlog
+      description: Size of Server File Backlog
+    serverProcessingRate:
+      type: integer
+      title: Server Processing Rate
+      description: Daily Processing Rate of Agent File Changes
+    serverFiles:
+      type: integer
+      title: Server Files
+      description: Toatl Number of Inventory Files Server Is Tracking
+    diskDataWrite:
+      type: integer
+      title: Disk Data Write
+      description: Disk Data File Write Rate in B/second
+    diskDataRead:
+      type: integer
+      title: Disk Data Read
+      description: Disk Data File Read Rate in B/second
+    diskIndexWrite:
+      type: integer
+      title: Disk Index Write
+      description: Disk Index File Write Rate in B/second
+    diskIndexRead:
+      type: integer
+      title: Disk Index Read
+      description: Disk Index File Read Rate in B/second
+    diskLogWrite:
+      type: integer
+      title: Disk Log Write
+      description: Disk Log File Write Rate in B/second
+    diskDataIOPS:
+      type: number
+      title: Disk Data File IOPS
+    diskIndexIOPS:
+      type: number
+      title: Disk Index File IOPS
+    diskLogIOPS:
+      type: number
+      title: Disk Log IOPS
+    avgDiskLogWriteStallMs:
+      type: number
+      title: Average Disk Log Write Stall Milliseconds
+    avgDiskDataWriteStallMs:
+      type: number
+      title: Average Disk Data Write Stall Milliseconds
+    avgDiskIndexWriteStallMs:
+      type: number
+      title: Average Disk Index write Stall Milliseconds
+    avgDiskDataReadStallMs:
+      type: number
+      title: Average Disk Data Read Stall Milliseconds
+    sqlMemoryPressure:
+      type: number
+      title: SQL Memory Pressure
+      description: Memory Pressure of SQL Server in % of Maximum Recommended Value
+    sqlLatencyMs:
+      type: number
+      title: SQL Latency Milliseconds
+      description: Average Network Latency between CB Protection Server and SQL Server
+    sqlInsertLatencyMs:
+      type: number
+      title: SQL Insert Latency Milliseconds
+      description: Average Network Latency between CB Protection Server and SQL Server
+        when Inserting Data
+  updater:
+    id:
+      type: integer
+      title: ID
+    name:
+      type: string
+      title: Name
+    version:
+      type: string
+      title: Version
+    enabled:
+      type: boolean
+      title: Enabled
+    dateCreated:
+      type: date
+      title: Date Created
+      description: Datetime when Created (UTC)
+    createdBy:
+      type: string
+      title: Created By
+    dateModified:
+      type: date
+      title: Date Modified
+      description: Datetime when Last Modified (UTC)
+    modifiedBy:
+      type: string
+      title: Modified By
+    clVersion:
+      type: integer
+      title: CL Version
+    platformFlags:
+      type: integer
+      title: Platform Flags
+      description: 1=windows,2=mac,4=linux
+triggers:
+  new_approval_request:
+    title: New Approval Request
+    description: Triggers when a new approval request is created
+    input:
+      poll_rate:
+        type: integer
+        title: Poll Rate
+        description: How often to poll for new approval requests, in seconds
+        default: 10
+        required: true
+    output:
+      approval_request:
+        type: approvalRequest
+        description: The new approval request
+        required: false
+actions:
+  approve_file_locally:
+    title: Approve File Locally
+    description: Approve file locally
+    input:
+      file_id:
+        type: integer
+        title: File ID
+        description: File ID of file to approve locally
+        required: true
+    output:
+      file_instance:
+        type: fileInstance
+        description: Updated file instance
+        required: false
+  unapprove_file_locally:
+    title: Unapprove File Locally
+    description: Remove local approval for a file
+    input:
+      file_id:
+        type: integer
+        title: File ID
+        description: File ID of file to remove local approval for
+        required: true
+    output:
+      file_instance:
+        type: fileInstance
+        description: Updated file instance
+        required: false
+  unban_file:
+    title: Unban File
+    description: Unban file globally or by policy
+    input:
+      new_state:
+        title: New State
+        description: New state of the file. Either approved or unapproved
+        type: string
+        enum:
+        - Approved
+        - Unapproved
+        default: Approved
+        required: true
+      hash:
+        type: string
+        title: Hash
+        description: Hash for file to unban
+        required: true
+      policy_ids:
+        type: '[]integer'
+        title: Policy IDs
+        description: List of policy IDs. Only fill in this field if unban is by policy
+        required: false
+      method:
+        type: string
+        description: Unban globally or by policy
+        required: true
+        default: Globally
+        enum:
+        - Globally
+        - Policy
+    output:
+      file_rule:
+        type: fileRule
+        description: Updated file rule
+        required: false
+  ban_file:
+    title: Ban File
+    description: Ban file globally or by policy
+    input:
+      hash:
+        type: string
+        title: Hash
+        description: Hash for file to ban
+        required: true
+      policy_ids:
+        type: '[]integer'
+        title: Policy IDs
+        description: List of policy IDs. Only fill in this field if ban is by policy
+        required: false
+      method:
+        type: string
+        description: Ban globally or by policy
+        required: true
+        default: Globally
+        enum:
+        - Globally
+        - Policy
+    output:
+      file_rule:
+        type: fileRule
+        description: Updated file rule
+        required: false
+  resolve_approval_request:
+    title: Resolve Approval Request
+    description: Resolve approval request with desired status
+    input:
+      approval_request_id:
+        type: string
+        title: Approval Request ID
+        description: Resolve an approval request with the desired status
+        required: true
+      resolution:
+        type: string
+        title: Resolution
+        description: Method for resolving the approval request
+        required: true
+        enum:
+        - Not Resolved
+        - Rejected
+        - Resolved - Approved
+        - Resolved - Rule Change
+        - Resolved - Installer
+        - Resolved - Updater
+        - Resolved - Publisher
+        - Resolved - Other
+        default: Not Resolved
+    output:
+      approval_request:
+        type: approvalRequest
+        description: The updated approval request
+        required: false
+  retrieve_file_catalog_entry:
+    title: Retrieve File Catalog Entry
+    description: Retrieves a file catalog entry for a file given the file catalog
+      ID
+    input:
+      file_catalog_id:
+        type: integer
+        title: File Catalog ID
+        description: File catalog ID for a file
+        required: true
+    output:
+      file_catalog_entry:
+        type: fileCatalog
+        description: File catalog entry for the file
+        required: false
+  retrieve_file_instance:
+    title: Retrieve File Instance
+    description: Retrieves a local file instance
+      ID
+    input:
+      file_catalog_id:
+        type: integer
+        title: File Catalog ID
+        description: File catalog ID for a file
+        required: true
+      computer_id:
+        type: integer
+        title: Computer ID
+        description: Computer ID of the computer that has this file
+        required: true
+    output:
+      file_catalog_entry:
+        title: File Catalog Entry
+        type: "[]file_catalog_entry_object"
+        description: File Catalog Entry that describes a local instance of a file
+        required: false
+  create_file_rule:
+    title: Create File Rule
+    description: Creates a file rule, allowing for the creation and editing of file Approvals and Bans
+    input:
+      file_catalog_id:
+        type: integer
+        title: File Catalog ID
+        description: ID of fileCatalog entry associated with this fileRule. Can be 0 if creating/modifying rule based on hash or file name
+        required: false
+      name:
+        type: string
+        title: Name
+        description: Name of this rule
+        required: true
+      description:
+        type: string
+        title: Description
+        description: Description of this rule
+        required: true
+      file_state:
+        type: string
+        title: File State
+        description: File state for this rule. Can be one of 1=Unapproved, 2=Approved, 3=Banned
+        default: 1
+        required: false
+        enum:
+          - Unapproved
+          - Approved
+          - Banned
+      report_only:
+        type: boolean
+        title: Report Only
+        description: Set to true to create a report-only ban. Note - fileState has to be set to 1 (unapproved) before this flag can be set
+        default: false
+        required: false
+      reputation_approvals_enabled:
+        type: boolean
+        title: Reputation Approvals Enabled
+        description: True if reputation approvals are enabled for this file
+        default: false
+        required: false
+      force_installer:
+        type: boolean
+        title: Force Installer
+        description: True if this file is forced to act as installer, even if product detected it as ‘not installer’
+        default: false
+        required: false
+      force_not_installer:
+        type: boolean
+        title: Force Not Installer
+        description: True if this file is forced to act as ‘not installer’, even if product detected it as installer
+        default: false
+        required: false
+      hash:
+        type: string
+        title: "Hash"
+        description: Hash associated with this rule. This parameter is not required if fileCatalogId is supplied
+        required: false
+      policy_ids:
+        type: string
+        title: Policy IDs
+        description: Comma separated list of IDs of policies where this rule applies. 0 if this is a global rule
+        default: "0"
+        required: false
+      platform_flags:
+        type: integer
+        title: Policy IDs
+        description: Comma separated list of platform flags where this file rule will be valid. combination of 1 = Windows, 2 = Mac, 4 = Linux
+        default: 124
+        required: false
+    output:
+      file_rule:
+        title: File Rule
+        type: fileRule
+        description: Updated file rule
+        required: false
+  get_file_rule:
+    title: Get File Rule
+    description: Get File rule
+    input:
+      file_rule_id:
+        type: integer
+        title: File Rule ID
+        description: File rule ID
+        required: true
+    output:
+      file_rule:
+        title: File Rule
+        type: fileRule
+        description: Updated file rule
+        required: false

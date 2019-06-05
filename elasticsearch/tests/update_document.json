@@ -1,0 +1,30 @@
+{
+  "body": {
+    "action": "update_document",
+    "meta": {},
+    "input": {
+      "_id": "",
+      "_index": "",
+      "_source": "",
+      "_type": "",
+      "_version": 0,
+      "parent": "",
+      "refresh": "false",
+      "retry_on_conflict": 0,
+      "routing": "",
+      "script": {},
+      "timeout": "1m",
+      "wait_for_active_shards": 0
+    },
+    "connection": {
+      "credentials": {
+        "password": "t",
+        "username": "tt"
+      },
+      "url": "",
+      "use_authentication": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

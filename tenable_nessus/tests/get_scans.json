@@ -1,0 +1,21 @@
+{
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "access_key": {
+        "secretKey": ""
+      },
+      "hostname": "",
+      "secret_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": true
+    },
+    "input": {
+      "scanner_name": "Local Scanner"
+    },
+    "action": "get_scans",
+    "meta": {}
+  },
+  "version": "v1"
+}

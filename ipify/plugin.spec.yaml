@@ -1,0 +1,21 @@
+plugin_spec_version: v2
+name: ipify
+title: IPify
+vendor: rapid7
+status: ["unsupported"]
+description: A Simple IP Address Lookup
+version: 1.0.0
+tags:
+- ip
+- nat
+- public
+actions:
+  lookup:
+    title: Address Lookup
+    description: Lookup Public IP Address of Komand Host
+    output:
+      address:
+        title: Public IP Address
+        description: Public IP address of komand host
+        type: string
+        required: false

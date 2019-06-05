@@ -1,0 +1,566 @@
+plugin_spec_version: v2
+name: samanage
+title: Samanage
+description: Samanage is an enterprise service-desk and IT asset-management provider
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- incidents
+- management
+types:
+  samanage_comment:
+    body:
+      title: Body
+      description: The contents of the comment
+      type: string
+    is_private:
+      title: Is Private
+      description: Is the comment private or public?
+      type: boolean
+  samanage_tag:
+    tagging_count:
+      title: Tagging Count
+      description: Tagging count
+      type: integer
+    name:
+      title: Name
+      description: Name
+      type: string
+    id:
+      title: ID
+      description: ID
+      type: integer
+  samanage_problem:
+    number:
+      title: Number
+      description: Number
+      type: string
+    name:
+      title: Name
+      description: Name
+      type: string
+    id:
+      title: ID
+      description: ID
+      type: integer
+  samanage_number:
+    number:
+      title: Number
+      description: Number
+      type: string
+  samanage_name:
+    name:
+      title: Name
+      description: Name
+      type: string
+  samanage_email:
+    email:
+      title: Email
+      description: Email
+      type: string
+  samanage_id:
+    id:
+      title: ID
+      description: ID
+      type: string
+  samanage_field:
+    name:
+      title: Name
+      description: Name
+      type: string
+    value:
+      title: Value
+      description: Value
+      type: string
+  samanage_incidents:
+    incident:
+      title: Incident
+      description: Incident
+      type: '[]samanage_number'
+  samanage_solutions:
+    solution:
+      title: Solution
+      description: Solution
+      type: '[]samanage_number'
+  samanage_custom_fields_values:
+    custom_fields_value:
+      title: Custom Fields Value
+      description: Custom fields value
+      type: '[]samanage_field'
+  incident:
+    id:
+      title: ID
+      description: ID
+      type: integer
+    name:
+      title: Name
+      description: Name
+      type: string
+    state:
+      title: State
+      description: State
+      type: string
+    priority:
+      title: Priority
+      description: Priority
+      type: string
+    description:
+      title: Description
+      description: Description
+      type: string
+    category:
+      title: Category
+      description: Category
+      type: samanage_name
+    subcategory:
+      title: Subcategory
+      description: Subcategory
+      type: samanage_name
+    requester:
+      title: Requester
+      description: Requester
+      type: samanage_email
+    due_at:
+      title: Due At
+      description: Due at
+      type: string
+    assignee:
+      title: Assignee
+      description: Assignee
+      type: samanage_email
+    problem:
+      title: Problem
+      description: Problem
+      type: samanage_problem
+    changes:
+      title: Changes
+      description: Changes
+      type: '[]samanage_number'
+    assets:
+      title: Assets
+      description: Assets
+      type: '[]samanage_id'
+    mobiles:
+      title: Mobiles
+      description: Mobiles
+      type: '[]samanage_id'
+    configuration_items:
+      title: Configuration Items
+      description: Configuration items
+      type: '[]samanage_id'
+    incidents:
+      title: Incidents
+      description: Incidents
+      type: '[]samanage_number'
+    solutions:
+      title: Solutions
+      description: Solutions
+      type: '[]samanage_number'
+    custom_fields_values:
+      title: Custom Fields Values
+      description: Custom fields values
+      type: '[]samanage_field'
+    tags:
+      title: Tags
+      description: Tags
+      type: '[]samanage_tag'
+  samanage_user:
+    id:
+      title: ID
+      description: ID
+      type: integer
+    name:
+      title: Name
+      description: Name of the user
+      type: string
+    email:
+      title: Email
+      description: Email address of the user
+      type: string
+    created_at:
+      title: Created At
+      description: Date of creation
+      type: date
+    disabled:
+      title: Disabled
+      description: Disabled
+      type: boolean
+    phone:
+      title: Phone
+      description: Phone number
+      type: string
+    mobile_phone:
+      title: Mobile Phone
+      description: Mobile phone number
+      type: string
+    role:
+      title: Role
+      description: Role
+      type: samanage_name
+    site:
+      title: Site
+      description: Site name
+      type: samanage_name
+    department:
+      title: Department
+      description: Department name
+      type: samanage_name
+    reports_to:
+      title: Reports To
+      description: Who the user reports to
+      type: samanage_name
+    custom_fields_values:
+      title: Custom Fields Values
+      description: Custom fields values
+      type: '[]samanage_field'
+  samanage_attachment:
+    id:
+      title: ID
+      description: ID of the attachment
+      type: integer
+    filename:
+      title: Filename
+      description: Name of the attachment
+      type: string
+    attachable_id:
+      title: Attachable ID
+      description: ID of the item this attachment belongs to
+      type: integer
+    attachable_type:
+      title: Attachable Type
+      description: Type of the item this attachment belongs to
+      type: string
+connection:
+  token:
+    title: Token
+    description: API Token generated by Samanage admin
+    type: credential_secret_key
+    required: true
+  eu_customer:
+    title: EU Customer
+    description: Is the customer based in Europe?
+    required: true
+    type: boolean
+    default: false
+triggers:
+  new_incidents:
+    title: New Incidents
+    description: Check for new incidents
+    input:
+      frequency:
+        title: Frequency
+        description: How often the trigger should check for new detections in seconds
+        type: integer
+        required: true
+        default: 10
+    output:
+      incident:
+        description: Incident
+        title: Incident
+        type: incident
+        required: false
+actions:
+  list_incidents:
+    title: List Incidents
+    description: List all incidents
+    output:
+      incidents:
+        title: Incidents
+        description: List of all incidents
+        type: '[]incident'
+        required: true
+  get_incident:
+    title: Get Incident
+    description: Get incident details
+    input:
+      incident_id:
+        title: Incident ID
+        description: Incident ID
+        type: integer
+        required: true
+    output:
+      incident:
+        title: Incident
+        description: Details of an incident with the given ID
+        type: incident
+        required: true
+  tag_incident:
+    title: Tag Incident
+    description: Add tags to an incident
+    input:
+      incident_id:
+        title: Incident ID
+        description: Incident ID
+        type: integer
+        required: true
+      tags:
+        title: Tags
+        description: Tags to add to the incident
+        required: true
+        type: '[]string'
+    output:
+      incident:
+        title: Incident
+        description: Incident with new tags
+        type: incident
+        required: true
+  create_incident:
+    title: Create Incident
+    description: Create a new incident
+    input:
+      name:
+        title: Name
+        description: Name
+        type: string
+        required: true
+      requester:
+        title: Requester
+        description: Email of the requester
+        type: string
+        required: true
+      priority:
+        title: Priority
+        description: Priority
+        type: string
+        required: true
+        enum:
+        - None
+        - Low
+        - Medium
+        - High
+        - Critical
+      description:
+        title: Description
+        description: Description
+        type: string
+        required: false
+      due_at:
+        title: Due At
+        description: Due at
+        type: date
+        required: false
+      assignee:
+        title: Assignee
+        description: Email of the assignee
+        type: string
+        required: false
+      incidents:
+        title: Incidents
+        description: List of numbers of incidents associated with the new incident
+        type: '[]integer'
+        required: false
+      problem:
+        title: Problem
+        description: Number of a problem associated with the new incident
+        type: integer
+        required: false
+      solutions:
+        title: Solutions
+        description: List of numbers of solutions associated with the new incident
+        type: '[]integer'
+        required: false
+      category_name:
+        title: Category Name
+        description: Name of the category for the new incident
+        type: string
+        required: false
+    output:
+      incident:
+        title: Incident
+        description: Newly created incident
+        type: incident
+        required: true
+  comment_incident:
+    title: Comment Incident
+    description: Add a comment to an incident
+    input:
+      incident_id:
+        title: Incident ID
+        description: ID of an incident to add the comment to
+        type: integer
+        required: true
+      body:
+        title: Body
+        description: The contents of the comment
+        type: string
+        required: true
+      is_private:
+        title: Is Private
+        description: Is the comment private or public?
+        type: boolean
+        required: true
+        default: true
+    output:
+      comment:
+        title: Comment
+        description: Newly created comment
+        type: samanage_comment
+        required: true
+  get_comments:
+    title: Get Comments
+    description: Get all comments of an incident
+    input:
+      incident_id:
+        title: Incident ID
+        description: ID of an incident to get the comments from
+        type: integer
+        required: true
+    output:
+      comments:
+        title: Comments
+        description: All comments of an incident
+        type: '[]samanage_comment'
+        required: true
+  assign_incident:
+    title: Assign Incident
+    description: Assign a person to an incident
+    input:
+      incident_id:
+        title: Incident ID
+        description: ID of an incident to assign a person to
+        type: integer
+        required: true
+      assignee:
+        title: Assignee
+        description: Email of the new assignee
+        type: string
+        required: true
+    output:
+      incident:
+        title: Incident
+        description: Updated incident
+        type: incident
+        required: true
+  change_incident_state:
+    title: Change Incident State
+    description: Update the state of an incident
+    input:
+      incident_id:
+        title: Incident ID
+        description: ID of an incident to update
+        type: integer
+        required: true
+      state:
+        title: State
+        description: New state of an incident
+        type: string
+        required: true
+        enum:
+        - New
+        - Assigned
+        - Awaiting Input
+        - On Hold
+        - Resolved
+    output:
+      incident:
+        title: Incident
+        description: Updated incident
+        type: incident
+        required: true
+  attach_incident:
+    title: Attach Incident
+    description: Attach a file to an incident
+    input:
+      incident_id:
+        title: Incident ID
+        description: ID of an incident to attach the file to
+        type: integer
+        required: true
+      attachment_bytes:
+        title: Attachment Bytes
+        type: bytes
+        description: Contents of the attachment
+        required: true
+      attachment_name:
+        title: Attachment Name
+        type: string
+        description: Name of the attachment
+        required: true
+    output:
+      attachment:
+        title: Attachment
+        description: Newly created attachment
+        type: samanage_attachment
+        required: true
+  list_users:
+    title: List Users
+    description: List all users
+    output:
+      users:
+        title: Users
+        description: A list of all users
+        type: '[]samanage_user'
+        required: true
+  create_user:
+    title: Create User
+    description: Create a new user
+    input:
+      email:
+        title: Email
+        description: Email address
+        type: string
+        required: true
+      name:
+        title: Name
+        description: User name
+        type: string
+        required: false
+      phone:
+        title: Phone
+        description: Phone number
+        type: string
+        required: false
+      mobile_phone:
+        title: Mobile Phone
+        description: Mobile phone number
+        type: string
+        required: false
+      role:
+        title: Role
+        description: Role
+        type: string
+        required: false
+        enum:
+        - ''
+        - Administrator
+        - Facilities Service Desk User
+        - Human Resources Service Desk User
+        - Read Only
+        - Requester
+        - Service Agent User
+        - Service Task User
+        - User's Own Site
+      department:
+        title: Department
+        description: Department
+        type: string
+        required: false
+        enum:
+        - ''
+        - Facilities
+        - Finance
+        - Human Resources
+        - Information Technology
+        - Marketing
+    output:
+      user:
+        title: User
+        description: Newly created user
+        type: samanage_user
+        required: true
+  delete_user:
+    title: Delete User
+    description: Delete a user
+    input:
+      user_id:
+        title: User ID
+        description: The ID of a user to delete
+        type: integer
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was the operation successful?
+        type: boolean
+        required: true

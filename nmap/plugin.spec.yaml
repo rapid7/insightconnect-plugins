@@ -1,0 +1,259 @@
+plugin_spec_version: v2
+name: nmap
+title: Nmap
+description: Nmap
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- nmap
+- scanner
+- auditing
+- network
+types:
+  addresses:
+    ipv4:
+      description: IPv4 Address
+      title: IPv4
+      type: string
+      required: false
+    ipv6:
+      description: IPv6 Address
+      title: IPv6
+      type: string
+      required: false
+  hostname:
+    name:
+      description: Hostname
+      title: Hostname
+      type: string
+      required: false
+    type:
+      description: Type, eg. PTR
+      title: Type
+      type: string
+      required: false
+  status:
+    reason:
+      description: Reason, eg. syn-ack
+      title: Reason
+      type: string
+      required: false
+    state:
+      description: State eg. up
+      title: State
+      type: string
+      required: false
+  tcp:
+    conf:
+      description: Conf
+      title: Configuration
+      type: string
+      required: false
+    cpe:
+      description: Common Platform Enumeration address
+      title: CPE
+      type: string
+      required: false
+    extrainfo:
+      description: Extra info
+      title: Extra Info
+      type: string
+      required: false
+    name:
+      description: Port name
+      title: Name
+      type: string
+      required: false
+    port:
+      description: Port number
+      title: Port
+      type: integer
+      required: false
+    product:
+      description: Product
+      title: Product
+      type: string
+      required: false
+    reason:
+      description: Reason, eg. syn-ack
+      title: Reason
+      type: string
+      required: false
+    state:
+      description: State of port, eg. open
+      title: State
+      type: string
+      required: false
+    version:
+      description: Version
+      title: Version
+      type: string
+      required: false
+  udp:
+    conf:
+      description: Conf
+      title: Configuration
+      type: string
+      required: false
+    cpe:
+      description: Common Platform Enumeration address
+      title: CPE
+      type: string
+      required: false
+    extrainfo:
+      description: Extra info
+      title: Extra Info
+      type: string
+      required: false
+    name:
+      description: Port name
+      title: Name
+      type: string
+      required: false
+    port:
+      description: Port number
+      title: Port
+      type: integer
+      required: false
+    product:
+      description: Product
+      title: Product
+      type: string
+      required: false
+    reason:
+      description: Reason, eg. syn-ack
+      title: Reason
+      type: string
+      required: false
+    state:
+      description: State of port, eg. open
+      title: State
+      type: string
+      required: false
+    version:
+      description: Version
+      title: Version
+      type: string
+      required: false
+  osclass:
+    accuracy:
+      description: Accuracy of the match
+      title: Accuracy
+      type: string
+      required: false
+    cpe:
+      description: Common Platform Enumeration addresses
+      title: CPEs
+      type: '[]string'
+      required: false
+    osfamily:
+      description: OS family
+      title: OS Family, eg. embedded
+      type: string
+      required: false
+    osgen:
+      description: OS Generation, eg. 10.7.x (for MacOS)
+      title: OS Generation
+      type: string
+      required: false
+    type:
+      description: Type of OS
+      title: Type
+      type: string
+      required: false
+    vendor:
+      description: Vendor
+      title: Vendor
+      type: string
+      required: false
+  osmatch:
+    accuracy:
+      description: Accuracy of the match
+      title: Accuracy
+      type: string
+      required: false
+    line:
+      description: Line
+      title: Line
+      type: string
+      required: false
+    name:
+      description: Name
+      title: Name
+      type: string
+      required: false
+    osclass:
+      description: OS class
+      title: OS Class
+      type: '[]osclass'
+      required: false
+  host:
+    addresses:
+      description: Addresses
+      title: Addresses
+      type: addresses
+      required: false
+    hostnames:
+      description: Hostnames
+      title: Hostnames
+      type: '[]hostname'
+      required: false
+    osmatch:
+      description: OS matches
+      title: OS Matches
+      type: '[]osmatch'
+      required: false
+    status:
+      description: Status of the host
+      title: Status
+      type: status
+      required: false
+    tcp:
+      description: TCP ports
+      title: TCP
+      type: '[]tcp'
+      required: false
+    udp:
+      description: UDP ports
+      title: UDP
+      type: '[]udp'
+      required: false
+    vendor:
+      description: Vendor
+      title: Vendor
+      type: object
+      required: false
+actions:
+  scan:
+    title: Scan
+    description: Run Nmap scan
+    input:
+      hosts:
+        title: Hosts
+        type: string
+        description: Host(s) to scan in Nmap-allowed formats
+        required: true
+      ports:
+        title: Ports
+        type: string
+        description: Port(s) to scan in Nmap-allowed formats
+        required: false
+      arguments:
+        title: Arguments
+        type: string
+        description: Arguments to supply to the Nmap command
+        required: false
+      sudo:
+        title: Sudo
+        type: boolean
+        description: Whether or not to use superuser privileges for scan, e.g. -sS
+          requires superuser privileges but -sT does not
+        required: true
+        default: false
+    output:
+      result:
+        title: Output Results
+        type: '[]host'
+        required: false
+        description: Scan results

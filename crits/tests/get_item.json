@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "get_item",
+    "meta": {},
+    "input": {
+      "item_id": "12412124124",
+      "params": {},
+      "type": "Actor"
+    },
+    "connection": {
+      "url": "",
+      "username": "",
+      "ssl_verify": false,
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

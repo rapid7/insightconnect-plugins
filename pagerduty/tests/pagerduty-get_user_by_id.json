@@ -1,0 +1,16 @@
+{
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "input": {
+      "id": "P1HDNQX"
+    },
+    "meta": {},
+    "action": "get_user_by_id"
+  },
+  "version": "v1"
+}

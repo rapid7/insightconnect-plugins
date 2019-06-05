@@ -1,0 +1,15 @@
+{
+  "body": {
+    "action": "get_server_info",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "url": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

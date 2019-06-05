@@ -1,0 +1,27 @@
+plugin_spec_version: v2
+name: sleep
+title: Sleep
+vendor: rapid7
+status: ["unsupported"]
+description: Suspend execution for an interval of time
+version: 1.0.0
+tags:
+- sleep
+- delay
+enable_cache: false
+actions:
+  sleep:
+    title: Sleep
+    description: Suspend execution for an interval of time
+    input:
+      interval:
+        title: Interval
+        description: Interval of time in seconds
+        type: integer
+        required: false
+    output:
+      slept:
+        title: Slept
+        description: Time spent asleep
+        type: integer
+        required: false

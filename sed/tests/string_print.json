@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "process_string",
+    "input": {
+      "expression": ["p"],
+      "options": "",
+      "string": "one\ntwo\nthree"
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

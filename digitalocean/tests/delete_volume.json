@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "delete_volume",
+        "connection": {
+            "token":{
+                "secretKey": ""
+            }
+        },
+        "input": {
+            "image_id": "69628664-db8b-11e6-b356-000f53315820"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

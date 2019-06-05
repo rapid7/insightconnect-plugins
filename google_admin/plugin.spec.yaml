@@ -1,0 +1,164 @@
+plugin_spec_version: v2
+name: google_admin
+title: Google Apps Admin
+description: Google Admin Actions
+version: 1.0.2
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- google
+- admin
+- user provisioning
+types:
+  email:
+    address:
+      description: Email address
+      type: string
+    primary:
+      type: boolean
+      description: True if primary email
+  name:
+    givenName:
+      description: Given name
+      type: string
+    familyName:
+      description: Family name
+      type: string
+    fullName:
+      description: Full name
+      type: string
+  user:
+    id:
+      type: string
+      description: User ID
+    customerId:
+      type: string
+    name:
+      type: name
+      description: Name
+    isAdmin:
+      type: boolean
+      description: True if admin
+    isDelegatedAdmin:
+      type: boolean
+      description: True if delegated admin
+    suspended:
+      type: boolean
+      description: True if suspended
+    suspensionReason:
+      type: string
+      description: Suspension Reason
+    emails:
+      type: '[]email'
+      description: Emails
+    alias:
+      type: '[]string'
+      description: Aliases
+    changePasswordAtNextLogin:
+      description: True if must change password at login
+      type: boolean
+    ipWhitelisted:
+      description: True if ip whitelisted
+      type: boolean
+    agreedToTerms:
+      description: True if agreed to TOS
+      type: boolean
+    lastLoginTime:
+      description: Last login time
+      type: date
+    creationTime:
+      description: Creation time
+      type: date
+connection:
+  admin_user:
+    title: Admin User
+    description: Admin user to impersonate, e.g. admin@domain.com
+    type: string
+    required: true
+  project_id:
+    title: Project ID
+    type: string
+    description: Project ID from service credentials. This is included with the JSON
+      file. e.g. testing-api-189016
+    required: true
+  private_key_id:
+    title: Private Key ID
+    type: string
+    description: Private Key ID from service credentials. This information is included
+      with in the JSON file created when a new key is created. e.g. c2520f8c7df508adeca758313dd36b16507e3216
+    required: true
+  private_key:
+    title: Private Key
+    type: credential_asymmetric_key
+    description: Private Key from service credentials. This information is included
+      with in the JSON file created when a new key is created
+    required: true
+  client_email:
+    title: Client Email
+    type: string
+    description: Client email from service credentials
+    required: true
+  client_id:
+    title: Client ID
+    type: string
+    description: Client ID
+    required: true
+  client_x509_cert_url:
+    title: Client X509 Cert URL
+    type: string
+    description: x509 cert URL from service credentials
+    required: true
+  auth_uri:
+    title: Auth URI
+    type: string
+    description: OAUTH2 Auth URI
+    default: https://accounts.google.com/o/oauth2/auth
+    required: true
+  token_uri:
+    title: Token URI
+    type: string
+    description: OAUTH2 Token URI
+    default: https://accounts.google.com/o/oauth2/token
+    required: true
+  auth_provider_x509_cert_url:
+    title: Auth Provider X509 Cert URL
+    type: string
+    description: OAUTH2 Auth Provider x509 Cert URL
+    default: https://www.googleapis.com/oauth2/v1/certs
+    required: true
+actions:
+  get_user:
+    title: Get User
+    description: Get a User
+    input:
+      user:
+        title: User
+        description: The user's primary email address, unique ID, or alias email
+        type: string
+        required: true
+    output:
+      found:
+        title: Found
+        description: True if found
+        type: boolean
+        required: false
+      user:
+        title: User
+        type: user
+        description: User Response Returned
+        required: false
+  suspend_user:
+    title: Suspend User
+    description: Suspend a User
+    input:
+      user:
+        title: User
+        description: The user's primary email address, unique ID, or alias email
+        type: string
+        required: true
+    output:
+      user:
+        title: User
+        type: user
+        description: User Response Returned
+        required: false

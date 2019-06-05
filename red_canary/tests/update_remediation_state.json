@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "update_remediation_state",
+    "meta": {},
+    "input": {
+      "comment": "A comment",
+      "detection_id": 1,
+      "remediation_state": "remediated"
+    },
+    "connection": {
+      "api_token": {
+        "secretKey": ""
+      },
+      "customer_id": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

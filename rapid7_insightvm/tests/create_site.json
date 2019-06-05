@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "create_site",
+    "meta": {},
+    "input": {
+      "description": "",
+      "engine_id": 0,
+      "excluded_addresses": [],
+      "excluded_asset_groups": [],
+      "importance": "normal",
+      "included_addresses": [],
+      "included_asset_groups": [],
+      "name": "",
+      "scan_template_id": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,239 @@
+plugin_spec_version: v2
+name: splunk
+title: Splunk
+description: Splunk provides the leading platform for Operational Intelligence. Customers
+  use Splunk to search, monitor, analyze and visualize machine data
+version: 2.0.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- splunk
+- siem
+- logs
+connection:
+  host:
+    description: Hostname or IP address of Splunk server to connect to e.g. splunk.example.com
+    type: string
+    required: true
+  port:
+    description: Port the Splunk API is listening on
+    type: integer
+    default: 8089
+    required: true
+  credentials:
+    title: Username and Password
+    description: Username and password
+    type: credential_username_password
+    required: false
+  use_ssl:
+    title: Use SSL
+    type: boolean
+    description: Whether or not to use SSL
+    required: true
+  license:
+    description: License type for Splunk host
+    type: string
+    enum:
+    - Enterprise
+    - Free
+    required: true
+  ssl_verify:
+    title: SSL Verify
+    description: Verify server's SSL/TLS certificate
+    type: boolean
+    required: true
+triggers:
+  alert:
+    title: Alert
+    description: Hook a configured alert to send data to Komand
+    input:
+      names:
+        type: '[]string'
+        description: Names of saved searches to hook e.g. [ "Sudo Alert", "Firewall
+          Blocks" ]
+        required: true
+      interval:
+        type: integer
+        description: Poll interval in seconds
+        default: 15
+        required: false
+    output:
+      result:
+        description: Splunk alert result object
+        type: object
+        required: false
+      results_link:
+        description: Splunk results link
+        type: string
+        required: false
+      search_name:
+        description: Splunk search name
+        type: string
+        required: false
+actions:
+  insert:
+    title: Insert
+    description: Insert events into an index
+    input:
+      index:
+        type: string
+        description: Name of index
+        required: true
+      event:
+        type: string
+        description: The event to submit
+        required: true
+      host:
+        type: string
+        description: The source host, e.g. localhost or 192.168.2.2
+        required: false
+      source:
+        type: string
+        description: Source of the event (e.g., /var/log/syslog)
+        required: false
+      sourcetype:
+        type: string
+        description: The optional source type value of the event (e.g. access_combined,
+          syslog)
+        required: false
+  search:
+    title: Search
+    description: Run a query
+    input:
+      query:
+        type: string
+        description: Run a search query (e.g. search *)
+        required: true
+      count:
+        title: Count
+        type: integer
+        description: The maximum number of results to return. Set to 0 for unlimited
+          results
+        required: true
+        default: 100
+    output:
+      result:
+        type: object
+        description: Raw search results
+        required: false
+      count:
+        type: integer
+        description: Count of results returned
+        required: false
+  list_saved_searches:
+    title: List Saved Searches
+    description: Lists all saved searches
+    input: null
+    output:
+      saved_searches:
+        type: '[]object'
+        description: Array of saved search objects
+        required: false
+  get_saved_search_job_history:
+    title: Get Saved Search Job History
+    description: Returns the job history of a specified saved search
+    input:
+      saved_search_name:
+        type: string
+        description: Name of a saved search
+        required: true
+    output:
+      job_history:
+        type: '[]object'
+        description: Job history belonging to a saved search
+        required: false
+  run_saved_search:
+    title: Run Saved Search
+    description: Runs a saved search
+    input:
+      saved_search_name:
+        type: string
+        description: Name of saved search to run
+        required: true
+    output:
+      job_id:
+        type: string
+        description: Job ID for the search job created
+        required: false
+  display_search_results:
+    title: Display Search Results
+    description: Displays the search results from a job
+    input:
+      job_id:
+        type: string
+        description: Job ID to look up results for
+        required: true
+      timeout:
+        type: number
+        description: Duration of time, in seconds, to wait for retrieving results
+        required: true
+    output:
+      search_results:
+        type: '[]object'
+        description: Search results from a job
+        required: false
+  create_saved_search:
+    title: Create Saved Search
+    description: Creates a saved search
+    input:
+      saved_search_name:
+        type: string
+        description: Name to give to the saved search
+        required: true
+      query:
+        type: string
+        description: Search query
+        required: true
+      properties:
+        type: object
+        description: JSON object containing additional properties to save with the
+          saved search
+        required: false
+    output:
+      saved_search:
+        type: object
+        description: Newly created saved search object
+        required: false
+  delete_saved_search:
+    title: Delete Saved Search
+    description: Deletes a saved search
+    input:
+      saved_search_name:
+        type: string
+        description: Name of the saved search to delete
+        required: true
+    output:
+      success:
+        type: boolean
+        description: Whether or not the deletion was successful
+        required: false
+  view_saved_search_properties:
+    title: View Saved Search Properties
+    description: Returns the properties for a saved search
+    input:
+      saved_search_name:
+        type: string
+        description: Name of saved search to display properties for
+        required: true
+    output:
+      properties:
+        type: object
+        description: JSON object containing saved search properties
+        required: false
+  modify_saved_search_properties:
+    title: Modify Saved Search Properties
+    description: Modifies the properties of a saved search
+    input:
+      saved_search_name:
+        type: string
+        description: Name of saved search to display properties for
+        required: true
+      properties:
+        type: object
+        description: JSON object of properties and values to modify
+        required: true
+    output:
+      success:
+        type: boolean
+        description: Whether or not the update was successful
+        required: false

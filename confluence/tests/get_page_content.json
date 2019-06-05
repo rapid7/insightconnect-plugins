@@ -1,0 +1,19 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": "TestUser"
+      },
+      "url": ""
+    },
+    "action": "get_page_content",
+    "input": {
+      "page": "HelloWorld",
+      "space": "demo"
+    }
+  }
+}

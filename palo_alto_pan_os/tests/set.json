@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "set",
+    "meta": {},
+    "input": {
+      "element": "",
+      "xpath": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "server": "",
+      "verify_cert": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
+

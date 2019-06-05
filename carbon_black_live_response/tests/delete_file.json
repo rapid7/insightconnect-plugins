@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "delete_file",
+    "meta": {},
+    "input": {
+      "hostname": "WIN-ABCD",
+      "object_path": "C:\\Users\\All Users\\Desktop\\test.txt"
+    },
+    "connection": {
+      "url": "",
+      "api_key": {
+        "secretKey": ""
+      },
+      "verify_ssl": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

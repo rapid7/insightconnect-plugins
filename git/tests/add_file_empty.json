@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "add_file",
+    "meta": {},
+    "input": {
+      "file_contents": "",
+      "file_path": "files/empty.txt"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

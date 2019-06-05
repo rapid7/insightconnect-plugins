@@ -1,0 +1,18 @@
+{
+  "type": "action_start",
+  "body": {
+    "action": "get_analyzer",
+    "input": {
+      "analyzer_id": "VirusTotal_Scan_3_0"
+    },
+    "connection": {
+      "host": "",
+      "verify": true,
+      "proxy": {},
+      "protocol": "http",
+      "port": "9999"
+    },
+    "meta": {}
+  },
+  "version": "v1"
+}

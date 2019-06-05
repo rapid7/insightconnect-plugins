@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "delete_ticket",
+    "input": {
+      "ticket_id": "17"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "subdomain": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}
+  

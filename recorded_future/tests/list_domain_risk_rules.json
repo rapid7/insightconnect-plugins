@@ -1,0 +1,12 @@
+{
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_key": ""
+    },
+    "action": "list_domain_risk_rules",
+    "input": {}
+  },
+  "type": "action_start"
+}

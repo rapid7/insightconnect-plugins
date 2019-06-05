@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "upload_file",
+        "input": {
+            "file": "You killed kenny",
+            "folder_id": "0",
+            "name": "kennyTest.txt"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

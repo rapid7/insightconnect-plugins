@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "run",
+    "input": {
+      "host": "",
+      "command": "ls -l"
+    },
+    "connection": {
+      "host": "",
+      "key": {
+        "privateKey": ""
+      },
+      "password": {
+        "secretKey": ""
+      },
+      "port": 22,
+      "use_key": false,
+      "username": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

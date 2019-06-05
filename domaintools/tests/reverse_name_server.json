@@ -1,0 +1,18 @@
+{
+  "body": {
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "username": ""
+    },
+    "meta": {},
+    "action": "reverse_name_server",
+    "input": {
+      "domain": "google.com",
+      "limit": 0
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "search_vulnerabilities",
+    "meta": {},
+    "input": {
+      "direction": "asc",
+      "freetext": "",
+      "from": 0,
+      "limit": 0,
+      "orderby": "Created"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

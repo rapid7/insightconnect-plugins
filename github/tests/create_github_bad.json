@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "user",
+    "input": {
+      "title": "The peace game.",
+      "body":"we all should strive for love and peace",
+      "labels": "peace, love, happiness"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

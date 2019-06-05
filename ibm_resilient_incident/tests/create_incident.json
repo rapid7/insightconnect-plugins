@@ -1,0 +1,44 @@
+{
+    "body": {
+        "action": "create_incident",
+        "connection": {
+            "email": "mike@komand.com",
+            "hostname": "",
+            "password": ""
+        },
+        "input": {
+            "incident": {
+  "name": "New Komand Incident",
+  "discovered_date": 0,
+  "description": {
+    "format": "text",
+    "content": "This is a new incident created by komand"
+  },
+  "perms": {
+    "read": true,
+    "write": true,
+    "comment": true,
+    "assign": true,
+    "close": true,
+    "change_members": true,
+    "attach_file": true,
+    "read_attachments": true,
+    "delete_attachments": true,
+    "create_milestones": true,
+    "list_milestones": true,
+    "create_artifacts": true,
+    "list_artifacts": true,
+    "delete": true
+  },
+  "tasks": [],
+  "artifacts": [],
+  "comments": [],
+  "actions": []
+},
+            "organization_id": 201
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,19 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "input": {
+      "id": "test-v14-data-theft",
+      "policy_id": "test-v14-policy"
+    },
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "action": "delete_data_theft"
+  },
+  "version": "v1"
+}

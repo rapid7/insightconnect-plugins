@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "action": "whois_history",
+    "input": {
+      "domain": "woot.com"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "username": ""
+    }
+  },
+  "type": "action_start"
+}

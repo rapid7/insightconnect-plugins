@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "search_domains",
+    "meta": {},
+    "input": {
+      "orderby": "Created",
+      "from": 0,
+      "direction": "asc",
+      "limit": 10,
+      "parent": "recordedfuture.com"
+    },
+    "connection": {
+      "api_key": ""
+    }
+  },
+  "version": "v1",
+  "type": "action_start"
+}

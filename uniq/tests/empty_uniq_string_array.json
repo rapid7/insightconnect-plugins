@@ -1,0 +1,12 @@
+{
+  "type": "action_start",
+  "body": {
+    "input": {
+      "data": []
+    },
+    "action": "uniq_string_array",
+    "meta": {},
+    "connection": null
+  },
+  "version": "v1"
+}

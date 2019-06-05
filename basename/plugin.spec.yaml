@@ -1,0 +1,25 @@
+plugin_spec_version: v2
+name: basename
+title: Basename
+description: Basename a path
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- basename
+- utilities
+actions:
+  basename:
+    title: Basename
+    description: Get the basename of a path
+    input:
+      path:
+        type: string
+        description: URL or file path
+        required: true
+    output:
+      basename:
+        title: Basename
+        description: Basename result
+        type: string
+        required: false

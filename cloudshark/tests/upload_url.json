@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "upload_url",
+    "input": {
+      "url": "",
+      "filename": "",
+      "comments": "",
+      "tags": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

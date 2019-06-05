@@ -1,0 +1,629 @@
+plugin_spec_version: v2
+name: digitalocean
+title: Digital Ocean
+vendor: rapid7
+status: ["unsupported"]
+description: DigitalOcean is a simple and robust cloud computing platform, designed
+  for developers
+version: 1.0.0
+tags:
+- digital ocean
+- vps
+- cloud
+- vm
+enable_cache: false
+types:
+  snapshot:
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    created_at:
+      type: string
+      required: false
+    regions:
+      type: '[]string'
+      required: false
+    resource_id:
+      type: string
+      required: false
+    resource_type:
+      type: string
+      required: false
+    min_disk_size:
+      type: number
+      required: false
+    size_gigabytes:
+      type: number
+      required: false
+  ssh_key:
+    id:
+      type: integer
+      required: false
+    fingerprint:
+      type: string
+      required: false
+    public_key:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+  region:
+    slug:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    sizes:
+      type: '[]string'
+      required: false
+    available:
+      type: boolean
+      required: false
+    features:
+      type: '[]string'
+      required: false
+  image:
+    id:
+      type: integer
+      required: false
+    name:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+    distribution:
+      type: string
+      required: false
+    slug:
+      type: string
+      required: false
+    public:
+      type: boolean
+      required: false
+    regions:
+      type: '[]string'
+      required: false
+    min_disk_size:
+      type: string
+      required: false
+    size_gigabytes:
+      type: string
+      required: false
+    created_at:
+      type: string
+      required: false
+  floating_ip:
+    ip:
+      type: string
+      required: false
+    region:
+      type: region
+      required: false
+    droplet:
+      type: object
+      required: false
+  size:
+    slug:
+      type: string
+      required: false
+    available:
+      type: boolean
+      required: false
+    transfer:
+      type: string
+      required: false
+    price_monthly:
+      type: string
+      required: false
+    price_hourly:
+      type: string
+      required: false
+    memory:
+      type: string
+      required: false
+    vcpus:
+      type: integer
+      required: false
+    disk:
+      type: string
+      required: false
+    regions:
+      type: '[]string'
+      required: false
+  domain_record:
+    data:
+      type: string
+      required: false
+    id:
+      type: integer
+      required: false
+    type:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    priority:
+      type: integer
+      required: false
+    port:
+      type: integer
+      required: false
+    weight:
+      type: integer
+      required: false
+  domain:
+    name:
+      type: string
+      required: false
+    ttl:
+      type: integer
+      required: false
+    zone_file:
+      type: string
+      required: false
+  account:
+    droplet_limit:
+      type: integer
+      required: false
+    floating_ip_limit:
+      type: integer
+      required: false
+    email:
+      type: string
+      required: false
+    uuid:
+      type: string
+      required: false
+    email_verified:
+      type: boolean
+      required: false
+    status:
+      type: string
+      required: false
+    status_message:
+      type: string
+      required: false
+connection:
+  token:
+    title: Token
+    type: credential_secret_key
+    description: API token
+    required: true
+actions:
+  add_domain_record:
+    title: Add Domain Record
+    description: Adds a domain record to the specified domain name
+    input:
+      domain_name:
+        type: string
+        description: Domain name of record
+        required: true
+        title: Host
+      record_type:
+        type: string
+        description: Record type
+        required: true
+        enum:
+        - A
+        - AAAA
+        - CNAME
+        - MX
+        - TXT
+        - NS
+        - SRV
+        title: Record type
+      name:
+        type: string
+        description: The host name, alias, or service being defined by the record
+        required: false
+        title: Record name
+      data:
+        type: string
+        description: Variable data depending on record type
+        required: false
+        title: Data
+      priority:
+        type: integer
+        description: The priority of the host (for SRV and MX records)
+        required: false
+        title: Priority
+      port:
+        type: integer
+        description: The port that the service is accessible on (for SRV records only)
+        required: false
+        title: Port
+      weight:
+        type: integer
+        description: The weight of records with the same priority (for SRV records
+          only)
+        required: false
+        title: Weight
+    output:
+      domain_record:
+        title: Domain Record
+        description: Newly created domain record
+        type: domain_record
+        required: false
+  delete_domain_record:
+    title: Delete Domain Record
+    description: Deletes a domain record from the domain name
+    input:
+      domain_name:
+        type: string
+        description: IP address or hostname to knock
+        required: true
+        title: Host
+      record_id:
+        type: string
+        description: ID of the domain record
+        required: true
+        title: Record ID
+    output:
+      success:
+        title: Successful
+        description: Deletion status. True if successful, false otherwise
+        type: boolean
+        required: false
+  update_domain_record:
+    title: Update Domain Record
+    description: Updates a domain record on the domain name
+    input:
+      domain_name:
+        type: string
+        description: IP address or hostname to knock
+        required: true
+        title: Host
+      record_id:
+        type: string
+        description: ID of the domain record
+        required: true
+        title: Record ID
+      property:
+        type: string
+        description: The property on the domain record to update, eg. 'name', 'priority',
+          'weight', etc
+        required: true
+        title: Domain record property
+      value:
+        type: string
+        description: The updated value for the domain record property
+        required: true
+        title: Updated value
+    output:
+      success:
+        title: Successful
+        description: Update status. True if successful, false otherwise
+        type: boolean
+        required: false
+  list_domains:
+    title: List Domains
+    description: Lists all domain names
+    output:
+      domains:
+        title: Domains
+        description: All domains belonging to the account
+        type: '[]domain'
+        required: false
+  delete_droplet:
+    title: Delete Droplet
+    description: Deletes a droplet from the account
+    input:
+      droplet_id:
+        type: string
+        description: ID of the droplet
+        required: true
+        title: Droplet ID
+    output:
+      success:
+        title: Successful
+        description: Deletion status. True if successful, false otherwise
+        type: boolean
+        required: false
+  list_droplets:
+    title: List Droplets
+    description: Lists all droplets on the account
+    output:
+      droplets:
+        title: Droplets
+        description: All droplets on the account
+        type: '[]object'
+        required: false
+  password_reset_droplet:
+    title: Password Reset Droplet
+    description: Performs a password reset on the droplet
+    input:
+      droplet_id:
+        type: string
+        description: ID of the droplet
+        required: true
+        title: Droplet ID
+    output:
+      success:
+        title: Successful
+        description: Reset status. True if successful, false otherwise
+        type: boolean
+        required: false
+  power_off_droplet:
+    title: Power Off Droplet
+    description: Powers off the droplet
+    input:
+      droplet_id:
+        type: string
+        description: ID of the droplet
+        required: true
+        title: Droplet ID
+    output:
+      success:
+        title: Successful
+        description: Power off status. True if successful, false otherwise
+        type: boolean
+        required: false
+  power_on_droplet:
+    title: Power On Droplet
+    description: Powers on the droplet
+    input:
+      droplet_id:
+        type: string
+        description: ID of the droplet
+        required: true
+        title: Droplet ID
+    output:
+      success:
+        title: Successful
+        description: Power on status. True if successful, false otherwise
+        type: boolean
+        required: false
+  reboot_droplet:
+    title: Reboot Droplet
+    description: Reboots the droplet
+    input:
+      droplet_id:
+        type: string
+        description: ID of the droplet
+        required: true
+        title: Droplet ID
+    output:
+      success:
+        title: Successful
+        description: Reboot status. True if successful, false otherwise
+        type: boolean
+        required: false
+  rebuild_droplet:
+    title: Rebuild Droplet
+    description: Rebuilds the droplet from a specified image
+    input:
+      droplet_id:
+        type: string
+        description: ID of the droplet
+        required: true
+        title: Droplet ID
+      image_id:
+        type: string
+        description: ID of the image to rebuild from
+        required: true
+        title: Image ID
+    output:
+      success:
+        title: Successful
+        description: Rebuild status. True if successful, false otherwise
+        type: boolean
+        required: false
+  shutdown_droplet:
+    title: Shutdown Droplet
+    description: Shuts down the droplet from a specified image
+    input:
+      droplet_id:
+        type: string
+        description: ID of the droplet
+        required: true
+        title: Droplet ID
+    output:
+      success:
+        title: Successful
+        description: Shutdown status. True if successful, false otherwise
+        type: boolean
+        required: false
+  delete_floating_ip:
+    title: Delete Floating IP
+    description: Deletes a floating IP from the account
+    input:
+      floating_ip_address:
+        type: string
+        description: Floating IP address to delete
+        required: true
+        title: Floating IP Address
+    output:
+      success:
+        title: Successful
+        description: Deletion status. True if successful, false otherwise
+        type: boolean
+        required: false
+  list_floating_ips:
+    title: List Floating IPs
+    description: List all floating IPs from the account
+    output:
+      floating_ips:
+        title: Floating IPs
+        description: Floating IPs belonging to the account
+        type: '[]floating_ip'
+        required: false
+  retrieve_existing_floating_ip:
+    title: Retrieve Floating IP
+    description: Retrieves an existing floating IP from the account
+    input:
+      floating_ip_address:
+        type: string
+        description: Floating IP Address
+        required: true
+        title: Floating IP Address
+    output:
+      floating_ip:
+        title: Floating IP
+        description: Floating IP belonging to the account
+        type: floating_ip
+        required: false
+  delete_ssh_key:
+    title: Delete SSH Key
+    description: Deletes an SSH key from the account
+    input:
+      ssh_key_id:
+        type: string
+        description: SSH Key ID
+        required: true
+        title: SSH Key ID
+    output:
+      success:
+        title: Successful
+        description: Deletion status. True if successful, false otherwise
+        type: boolean
+        required: false
+  list_ssh_keys:
+    title: List SSH Keys
+    description: Lists all SSH keys from the account
+    output:
+      ssh_keys:
+        title: SSH Keys
+        description: SSH keys belonging to the account
+        type: '[]ssh_key'
+        required: false
+  update_ssh_key:
+    title: Update SSH Key
+    description: Updates an SSH key from the account
+    input:
+      ssh_key_id:
+        type: string
+        description: SSH Key ID
+        required: true
+        title: SSH Key ID
+      name:
+        type: string
+        description: New name for the SSH key
+        required: true
+        title: SSH Key Name
+    output:
+      ssh_key:
+        title: Updated SSH Key
+        description: Updated SSH Key
+        type: ssh_key
+        required: false
+  convert_image_to_snapshot:
+    title: Convert an Image to a Snapshot
+    description: Converts an image to a snapshot
+    input:
+      image_id:
+        title: Image ID
+        description: ID of image to convert to snapshot
+        type: string
+        required: true
+    output:
+      success:
+        title: Successful
+        description: Conversion status. True if successful, false otherwise
+        type: boolean
+        required: false
+  delete_snapshot:
+    title: Delete Snapshot
+    description: Deletes a snapshot
+    input:
+      image_id:
+        title: Snapshot ID
+        description: ID of snapshot to delete
+        type: string
+        required: true
+    output:
+      success:
+        title: Successful
+        description: Deletion status. True if successful, false otherwise
+        type: boolean
+        required: false
+  list_snapshots:
+    title: List Snapshots
+    description: Lists all snapshots belonging to the account
+    output:
+      snapshots:
+        title: Snapshots
+        description: List of snapshots
+        type: '[]snapshot'
+        required: false
+  retrieve_snapshot:
+    title: Retrieve Snapshot
+    description: Retrieves an existing snapshot from an account
+    input:
+      snapshot_id:
+        title: Snapshot ID
+        description: ID of snapshot to retrieve
+        type: string
+        required: true
+    output:
+      snapshot:
+        title: Snapshot
+        description: Snapshot from the account
+        type: snapshot
+        required: false
+  create_snapshot_from_volume:
+    title: Create Snapshot from Volume
+    description: Creates a snapshot from a volume
+    input:
+      volume_id:
+        title: Volume ID
+        description: ID of volume to create snapshot from
+        type: string
+        required: true
+      snapshot_name:
+        title: Snapshot Name
+        description: Name for new snapshot
+        type: string
+        required: true
+    output:
+      snapshot:
+        title: Snapshot
+        description: Newly created snapshot
+        type: snapshot
+        required: false
+  delete_volume:
+    title: Delete Volume
+    description: Deletes a volume (volume must be detached)
+    input:
+      image_id:
+        title: Volume ID
+        description: ID of volume to delete
+        type: string
+        required: true
+    output:
+      success:
+        title: Successful
+        description: Deletion status. True if successful, false otherwise
+        type: boolean
+        required: false
+  get_user_information:
+    title: Get User Information
+    description: Gets information about the account, such as email, droplet limit,
+      etc
+    output:
+      account:
+        title: Account Information
+        description: Information about account
+        type: account
+        required: false
+  list_domain_records:
+    title: List Domain Records
+    description: List all domain records belonging to the domain name
+    input:
+      domain_name:
+        title: Domain Name
+        description: Domain name to retrieve records for
+        type: string
+        required: true
+    output:
+      domain_records:
+        title: Domain Records
+        description: Domain records belonging to a domain name
+        type: '[]domain_record'
+        required: false

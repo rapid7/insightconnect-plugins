@@ -1,0 +1,14 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_key": ""
+    },
+    "input": {
+      "domain": "google.com"
+    },
+    "action": "lookup_domain"
+  }
+}

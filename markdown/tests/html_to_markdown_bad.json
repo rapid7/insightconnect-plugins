@@ -1,0 +1,14 @@
+{
+    "version": "v1",
+    "type": "action_start",
+    "body": {
+      "input": {
+        "html": "IjxoMSBpZD0na29tYW5kJz5Lb21hbmQ8L2gxPiI=",
+        "html_string": "<h1 id='komand'>Komand</h1>"
+      },
+      "connection": null,
+      "action": "html_to_markdown",
+      "meta": {}
+    }
+  }
+  

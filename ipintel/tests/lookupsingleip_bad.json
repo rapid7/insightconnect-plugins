@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "lookup",
+    "input": {
+      "geolookup": false,
+      "stealth": false,
+      "addresses": ["@@ -0,0 +1,14 @@"]
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

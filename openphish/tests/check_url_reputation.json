@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "check_url_reputation",
+    "meta": {},
+    "input": {
+      "url": "http://fresiafm.cl/document/"
+    },
+    "connection": {
+      "url": "https://openphish.com/feed.txt"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

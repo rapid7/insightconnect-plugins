@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "add_host",
+    "meta": {},
+    "input": {
+      "host": {
+        "ipv4addrs": [{"ipv4addr": "10.10.10.57"}],
+        "name": "abba.info.com"
+      }
+    },
+    "connection": {
+      "api_version": "2.7",
+      "infoblox_host": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

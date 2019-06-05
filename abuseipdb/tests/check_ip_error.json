@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "check_ip",
+    "meta": {},
+    "input": {
+      "address": "1.2",
+      "days": "30",
+      "verbose": true
+    },
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

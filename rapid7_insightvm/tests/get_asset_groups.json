@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_asset_groups",
+    "meta": {},
+    "input": {
+      "name": "Komand Test.*"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

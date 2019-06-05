@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "server": "https://zeustracker.abuse.ch"
+    },
+    "action": "host",
+    "input": {
+      "host": "metalexvietnamreed.tk"
+    }
+  }
+}

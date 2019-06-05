@@ -1,0 +1,563 @@
+plugin_spec_version: v2
+name: zeus_tracker
+title: ZeuS Tracker
+description: ZeuS Command&Control Server Tracking
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- feeds
+- c2
+- zeus
+types:
+  default:
+    date:
+      title: Date
+      description: Date
+      type: date
+      required: false
+    download_url:
+      title: Download URL
+      description: Download URL
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    md5:
+      title: MD5 Hash
+      description: MD5 hash
+      type: string
+      requireD: false
+    version:
+      title: Version
+      description: Version
+      type: string
+      required: false
+    link:
+      title: Link
+      description: ZeuS tracker information link
+      type: string
+      required: false
+    guid:
+      title: GUID
+      description: ZeuS tracker GUID
+      type: string
+      required: false
+  detailed:
+    date:
+      title: Date
+      description: Date
+      type: date
+      required: false
+    host:
+      title: Host
+      description: Host
+      type: string
+      required: false
+    ip:
+      title: IP
+      description: IP address
+      type: string
+      required: false
+    sbl:
+      title: SBL
+      description: SBL
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    level:
+      title: Level
+      description: Level
+      type: integer
+      required: false
+    malware:
+      title: Malware
+      description: Malware name
+      type: string
+      required: false
+    as:
+      title: AS
+      description: AS
+      type: string
+      required: false
+    country:
+      title: Country code
+      description: Country code
+      type: string
+      required: false
+    link:
+      title: Link
+      description: ZeuS tracker information link
+      type: string
+      required: false
+    guid:
+      title: GUID
+      description: ZeuS tracker GUID
+      type: string
+      required: false
+  hosts:
+    date:
+      title: Date
+      description: Date
+      type: date
+      required: false
+    host:
+      title: Host
+      description: Host
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    num_files:
+      title: Number Of Files
+      description: Number of files online
+      type: integer
+      required: false
+    registrar:
+      title: Registrar
+      description: Registrar
+      type: string
+      required: false
+    nameservers:
+      title: Nameserver(s)
+      description: Nameserver(s)
+      type: string
+      required: false
+  binary_url:
+    date:
+      title: Date
+      description: Date
+      type: string
+      required: false
+    url:
+      title: Binary URL
+      description: Binary URL
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    filesize:
+      title: Filesize
+      description: Filesize
+      type: string
+      required: false
+    md5:
+      title: MD5 Hash
+      description: MD5 hash
+      type: string
+      required: false
+    anubis:
+      title: Anubis
+      description: Anubis
+      type: string
+      required: false
+    virustotal:
+      title: Virsustotal
+      description: Virustotal
+      type: string
+      required: false
+    http_status:
+      title: HTTP Status
+      description: HTTP status
+      type: string
+      required: false
+    file:
+      title: File Download
+      description: File download
+      type: bytes
+      required: false
+  config_url:
+    date:
+      title: Date
+      description: Date
+      type: date
+      required: false
+    url:
+      title: Config URL
+      description: Config URL
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    version:
+      title: Version
+      description: Version
+      type: string
+      required: false
+    builder:
+      title: Builder
+      description: Builder
+      type: string
+      required: false
+    filesize:
+      title: Filesize
+      description: Filesize
+      type: string
+      required: false
+    md5:
+      title: MD5 Hash
+      description: MD5 hash
+      type: string
+      required: false
+    http_status:
+      title: HTTP Status
+      description: HTTP status
+      type: string
+      required: false
+    file:
+      title: File Download
+      description: File download
+      type: bytes
+      required: false
+  drop_url:
+    date:
+      title: Date
+      description: Date
+      type: date
+      required: false
+    url:
+      title: Drop URL
+      description: Drop URL
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    http_status:
+      title: HTTP Status
+      description: HTTP status
+      type: string
+      required: false
+  fake_url:
+    md5:
+      title: ZeuS Config MD5
+      description: ZeuS config MD5
+      type: string
+      required: false
+    url:
+      title: null
+      description: Fake URL
+      type: string
+      required: false
+    protocol:
+      title: Protocol
+      description: Protocol
+      type: string
+      required: false
+  domain_history:
+    changedate:
+      title: Changedate
+      description: Changedate
+      type: string
+      required: false
+    host:
+      title: Host
+      description: Hostname
+      type: string
+      required: false
+    ip:
+      title: IP
+      description: IP address
+      type: string
+      required: false
+    as_num:
+      title: AS Num
+      description: Autonomous system number
+      type: string
+      required: false
+    as_name:
+      title: AS Name
+      description: Autonomous system name
+      type: string
+      required: false
+    country:
+      title: Country
+      description: Country
+      type: string
+      required: false
+connection:
+  server:
+    title: Server
+    type: string
+    description: ZeuS Tracker API Server
+    required: true
+    default: https://zeustracker.abuse.ch
+actions:
+  binaries:
+    title: Binaries Feed
+    description: Get information on ZeuS binary URLs
+    input:
+      limit:
+        title: Limit
+        type: integer
+        description: Limit number of results
+        required: true
+    output:
+      results:
+        title: Results List
+        type: '[]default'
+        description: Results list
+        required: false
+  configs:
+    title: Configs Feed
+    description: Get information on ZeuS config URLs
+    input:
+      limit:
+        title: Limit
+        type: integer
+        description: Limit number of results
+        required: true
+    output:
+      results:
+        title: Results List
+        type: '[]default'
+        description: Results list
+        required: false
+  dropzones:
+    title: Dropzones Feed
+    description: Get information on ZeuS dropzone URLs
+    input:
+      limit:
+        title: Limit
+        type: integer
+        description: Limit number of results
+        required: true
+    output:
+      results:
+        title: Results List
+        type: '[]default'
+        description: Results list
+        required: false
+  countries:
+    title: Country Feed
+    description: Lookup ZeuS hosts in specific country
+    input:
+      country:
+        title: Country Code
+        description: Two character country code (see ISO column of https://countrycode.org)
+        type: string
+        required: true
+      limit:
+        title: Limit
+        type: integer
+        description: Limit number of results
+        required: false
+    output:
+      results:
+        title: Results List
+        type: '[]detailed'
+        description: Results list
+        required: false
+  asn:
+    title: ASN Feed
+    description: Lookup ZeuS hosts in specific autonomous system
+    input:
+      as:
+        title: AS Number
+        description: Autonomous System Number
+        type: string
+        required: true
+      limit:
+        title: Limit
+        type: integer
+        description: Limit number of results
+        required: true
+    output:
+      results:
+        title: Results List
+        description: Results list
+        type: '[]detailed'
+        required: false
+  ip_address:
+    title: IP Address
+    description: Lookup ZeuS hosts by IP address
+    input:
+      ip:
+        title: IP Address
+        description: IP address to search for
+        type: string
+        required: true
+    output:
+      found:
+        title: Results Found
+        type: boolean
+        description: Results found
+        required: true
+      ip:
+        title: IP Address
+        type: string
+        description: IP Address
+        required: false
+      host:
+        title: Hostname
+        type: string
+        description: Host name
+        required: false
+      num_hosts:
+        title: Host Count
+        type: integer
+        description: Number of ZeuS hosts
+        required: false
+      active_files:
+        title: ActiveFile Count
+        type: integer
+        description: Number of active files
+        required: false
+      sbl:
+        title: SBL Number
+        type: string
+        description: Spamhaus Block List number
+        required: false
+      as_num:
+        title: AS Number
+        type: string
+        description: Autonomous system number
+        required: false
+      as_name:
+        title: AS Name
+        type: string
+        description: Autonomous system name
+        required: false
+      country:
+        title: Country
+        description: Country
+        type: string
+        required: false
+      zeus_hosts:
+        title: Host List
+        type: '[]hosts'
+        description: List of hosts on this IP address
+        required: false
+  host:
+    title: Host Feed
+    description: Lookup ZeuS hosts by hostname
+    input:
+      host:
+        title: Hostname
+        description: Host to search for
+        type: string
+        required: false
+    output:
+      found:
+        title: Results Found
+        description: Results found
+        type: boolean
+        required: false
+      malware:
+        title: Malware Name
+        type: string
+        description: Malware name
+        required: false
+      ip:
+        title: IP Address
+        type: string
+        description: IP Address
+        required: false
+      status:
+        title: Status
+        type: string
+        description: Status
+        required: false
+      uptime:
+        title: Uptime
+        type: string
+        description: Uptime
+        required: false
+      host:
+        title: Hostname
+        type: string
+        description: Hostname
+        required: false
+      sbl:
+        title: SBL Number
+        type: string
+        description: Spamhaus Block List number
+        required: false
+      as_num:
+        title: AS Number
+        type: string
+        description: Autonomous system number
+        required: false
+      as_name:
+        title: AS Name
+        type: string
+        description: Autonomous system name
+        required: false
+      country:
+        title: Country
+        description: Country
+        type: string
+        required: false
+      level:
+        title: Level
+        type: integer
+        description: Level
+        required: false
+      registrar:
+        title: Registrar
+        type: string
+        description: Registrar
+        required: false
+      nameservers:
+        title: Nameserver(s)
+        type: '[]string'
+        description: Nameserver(s)
+        required: false
+      date_added:
+        title: Date Added
+        type: date
+        description: Date added
+        required: false
+      last_checked:
+        title: Last Checked
+        type: date
+        description: Last checked
+        required: false
+      last_updated:
+        title: Last Updated
+        type: date
+        description: Last updated
+        required: false
+      config_urls:
+        title: Config URLs
+        type: '[]config_url'
+        description: ZeuS config URLs on this C&C
+        required: false
+      binary_urls:
+        title: Binary URLs
+        type: '[]binary_url'
+        description: ZeuS binary URLs on this C&C
+        required: false
+      drop_urls:
+        title: Dropzones
+        type: '[]drop_url'
+        description: ZeuS drop URLs on this C&C
+        required: false
+      fake_urls:
+        title: Fake URLs
+        type: '[]fake_url'
+        description: ZeuS fake URLs on this C&C
+        required: false
+      domain_history:
+        title: Domain History
+        type: '[]domain_history'
+        description: Domain history
+        required: false

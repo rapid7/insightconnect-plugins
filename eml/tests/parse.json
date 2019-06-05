@@ -1,0 +1,12 @@
+{
+    "version": "v1",
+    "body": {
+      "action": "parse",
+      "meta": {},
+      "input": {
+        "eml_file": ""
+      },
+      "connection": null
+    },
+    "type": "action_start"
+}

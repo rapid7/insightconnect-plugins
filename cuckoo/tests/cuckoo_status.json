@@ -1,0 +1,12 @@
+{
+  "body": {
+    "input": {},
+    "connection": {
+      "url": ""
+    },
+    "meta": {},
+    "action": "cuckoo_status"
+  },
+  "version": "v1",
+  "type": "action_start"
+}

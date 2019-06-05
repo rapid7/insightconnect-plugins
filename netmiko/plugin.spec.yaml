@@ -1,0 +1,148 @@
+plugin_spec_version: v2
+name: netmiko
+title: Netmiko
+description: Network device configuration over SSH
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- netmiko
+- SSH
+- network automation
+enable_cache: true
+language: python
+connection:
+  device_type:
+    title: Device Type
+    type: string
+    description: Device type
+    required: true
+    enum:
+    - a10
+    - accedian
+    - alcatel_aos
+    - alcatel_sros
+    - arista_eos
+    - aruba_os
+    - avaya_ers
+    - avaya_vsp
+    - brocade_fastiron
+    - brocade_netiron
+    - brocade_nos
+    - brocade_vdx
+    - brocade_vyos
+    - checkpoint_gaia
+    - calix_b6
+    - ciena_saos
+    - cisco_asa
+    - cisco_ios
+    - cisco_nxos
+    - cisco_s300
+    - cisco_tp
+    - cisco_wlc
+    - cisco_xe
+    - cisco_xr
+    - coriant
+    - dell_force10
+    - dell_powerconnect
+    - eltex
+    - enterasys
+    - extreme
+    - extreme_wing
+    - f5_ltm
+    - fortinet
+    - generic_termserver
+    - hp_comware
+    - hp_procurve
+    - huawei
+    - juniper
+    - juniper_junos
+    - linux
+    - mellanox
+    - mrv_optiswitch
+    - netapp_cdot
+    - ovs_linux
+    - paloalto_panos
+    - pluribus
+    - quanta_mesh
+    - ruckus_fastiron
+    - ubiquiti_edge
+    - ubiquiti_edgeswitch
+    - vyatta_vyos
+    - vyos
+  credentials:
+    title: Credentials
+    type: credential_username_password
+    description: User to run commands as
+    required: true
+  secret:
+    title: Secret
+    type: credential_secret_key
+    description: Secret password
+    required: false
+  key:
+    title: Key
+    type: credential_asymmetric_key
+    description: A base64 encoded SSH private key to use to authenticate to network
+      device
+    required: false
+  host:
+    title: Host
+    type: string
+    description: Remote Host
+    required: true
+  port:
+    title: Port
+    type: integer
+    description: Remote port
+    default: 22
+    required: true
+  verbose:
+    title: Verbose
+    type: boolean
+    description: Additional messages to standard output
+    default: false
+    required: true
+actions:
+  show_commands:
+    title: Execute Show Commands
+    description: Check the devices configurations Privilege EXEC mode
+    input:
+      host:
+        title: Host
+        type: string
+        description: Optional Host to run remote commands. If not provided, the connection
+          host will be used
+        required: false
+      command:
+        title: Command
+        type: string
+        description: Show command to execute on network device
+        required: true
+    output:
+      results:
+        title: Output results
+        description: Results
+        type: string
+        required: true
+  configuration_commands:
+    title: Execute Configuration Commands
+    description: Change the device's configuration Global configuration mode
+    input:
+      host:
+        title: Host
+        type: string
+        description: Optional Hosts to run remote commands. If not provided, the connection
+          host will be used
+        required: false
+      command:
+        title: Command
+        type: '[]string'
+        description: Commands to change the configuration on network device
+        required: true
+    output:
+      results:
+        title: Output device CLI
+        description: Results
+        type: string
+        required: true

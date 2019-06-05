@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "mitigate_threat",
+    "meta": {},
+    "input": {
+      "action": "rollback-remediation",
+      "threat_id": "560707325754496894"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

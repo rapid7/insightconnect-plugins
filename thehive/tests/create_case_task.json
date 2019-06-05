@@ -1,0 +1,30 @@
+{
+  "body": {
+    "meta": {},
+    "action": "create_case_task",
+    "input": {
+      "id": "AV_ajI_oYMfcbXhqb9tS",
+      "task": {
+        "description": "Blah",
+        "title": "Blah Blah",
+        "flag": false,
+        "startDate": "",
+        "owner": "user",
+        "status": "Waiting"
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": "9000",
+      "protocol": "http",
+      "proxy": {},
+      "verify": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

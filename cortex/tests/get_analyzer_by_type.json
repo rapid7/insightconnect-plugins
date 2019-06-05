@@ -1,0 +1,18 @@
+{
+  "version": "v1",
+  "body": {
+    "action": "get_analyzer_by_type",
+    "input": {
+      "type": "domain"
+    },
+    "connection": {
+      "host": "",
+      "verify": true,
+      "proxy": {},
+      "port": "9999",
+      "protocol": "http"
+    },
+    "meta": {}
+  },
+  "type": "action_start"
+}

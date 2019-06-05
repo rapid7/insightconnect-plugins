@@ -1,0 +1,23 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "input": {
+      "name": "test-v14-trusted-host",
+      "group_name": "test-v14-group",
+      "comments": "No comments",
+      "mask": "255.255.255.0",
+      "address": "192.168.19.2",
+      "address_version": "ipv4"
+    },
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {},
+    "action": "create_trusted_host"
+  }
+}

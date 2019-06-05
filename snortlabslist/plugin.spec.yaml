@@ -1,0 +1,42 @@
+plugin_spec_version: v2
+name: snortlabslist
+title: Snort Labs IP Reputation
+description: IPv4 address to validate
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- ip
+- intel
+- reputation
+actions:
+  lookup:
+    title: IP Lookup
+    description: IP Check
+    input:
+      address:
+        title: Address
+        type: string
+        description: IPv4 Address
+        required: true
+    output:
+      found:
+        title: Found
+        description: Found status
+        type: boolean
+        required: false
+      url:
+        title: URL
+        description: URL of reputation list
+        type: string
+        required: false
+      address:
+        title: Address
+        description: IP address that was found
+        type: string
+        required: false
+      status:
+        title: Status
+        description: Error message
+        type: string
+        required: false

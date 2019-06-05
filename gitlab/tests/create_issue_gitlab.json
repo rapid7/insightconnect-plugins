@@ -1,0 +1,29 @@
+{
+  "body": {
+    "action": "create_issue",
+    "input": {
+		"project_id": 1,
+		"id": 1,
+		"title": "test_issue",
+		"description": "test_issue_description 1",
+		"confidential": false,
+		"assignee_id": 2,
+		"milestone_id": null,
+		"labels": "t1_label, t2_label",
+		"created_at": "2017-05-09T20:55:46.522191",
+		"due_date": "2017-07-09T20:55:46.522191",
+		"merge_request": null,
+		"discussion_resolve": null
+    },
+    "connection": {
+      "url": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

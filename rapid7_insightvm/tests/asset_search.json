@@ -1,0 +1,32 @@
+{
+  "body": {
+    "action": "asset_search",
+    "meta": {},
+    "input": {
+      "searchCriteria": {
+        "match": "all",
+        "filters": [
+          {
+            "field": "ip-address",
+            "operator": "is",
+            "value": "10.4.17.33"
+          },
+          {
+            "field": "host-name",
+            "operator": "is",
+            "value": "example.com"
+          }
+        ]
+      }
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

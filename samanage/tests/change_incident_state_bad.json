@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "change_incident_state",
+    "meta": {},
+    "input": {
+      "incident_id": 31851783,
+      "state": "On Hold"
+    },
+    "connection": {
+      "eu_customer": false,
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

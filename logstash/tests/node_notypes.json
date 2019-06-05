@@ -1,0 +1,13 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "connection": {
+      "url": ""
+    },
+    "meta": {},
+    "input": {
+    },
+    "action": "node"
+  }
+}

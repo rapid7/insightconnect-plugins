@@ -1,0 +1,29 @@
+[fedora25]
+name=Fedora $releasever - $arch
+failovermethod=priority
+#baseurl=http://download.fedoraproject.org/pub/fedora/linux/releases/$releasever/Everything/$arch/os/
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-25&arch=$arch
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///rpm-gpg/RPM-GPG-KEY-Fedora-25
+
+[fedora-debuginfo25]
+name=Fedora $releasever - $arch - Debug
+failovermethod=priority
+#baseurl=http://download.fedoraproject.org/pub/fedora/linux/releases/$releasever/Everything/$arch/debug/
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-debug-25&arch=$arch
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///rpm-gpg/RPM-GPG-KEY-Fedora-25
+
+[fedora-source25]
+name=Fedora $releasever - Source
+failovermethod=priority
+#baseurl=http://download.fedoraproject.org/pub/fedora/linux/releases/$releasever/Everything/source/SRPMS/
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-source-25&arch=$arch
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///rpm-gpg/RPM-GPG-KEY-Fedora-25

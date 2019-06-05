@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_users",
+    "meta": {},
+    "input": {
+      "name": "",
+      "login": ".*admin.*"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

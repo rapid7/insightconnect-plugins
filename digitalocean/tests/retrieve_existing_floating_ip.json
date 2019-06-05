@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "retrieve_existing_floating_ip",
+        "connection": {
+            "token":{
+                "secretKey": ""
+            }
+        },
+        "input": {
+            "floating_ip_address": "138.197.225.105"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

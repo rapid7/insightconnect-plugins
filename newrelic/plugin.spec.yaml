@@ -1,0 +1,81 @@
+plugin_spec_version: v2
+name: newrelic
+title: New Relic
+description: Monitor the performance of applications and infrastructure
+version: 2.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- newrelic
+- performance monitoring
+connection:
+  api_key:
+    title: API Key
+    description: API key
+    type: credential_secret_key
+    required: true
+types:
+  user:
+    id:
+      title: ID
+      description: User ID number
+      type: integer
+    first_name:
+      title: First Name
+      description: User's first name
+      type: string
+    last_name:
+      title: Last Name
+      description: User's last name
+      type: string
+    email:
+      title: Email
+      description: User's Email
+      type: string
+    role:
+      title: Role
+      description: User's role
+      type: string
+actions:
+  list_users:
+    title: List User
+    description: Show a paginated list of all users. Users can be filtered by their
+      IDs or email
+    input:
+      email:
+        title: Email
+        description: Filter by user email
+        type: string
+        required: false
+      ids:
+        title: IDs
+        description: Filter by user IDs. IDs should be a comma separated list e.g.
+          123,345,678
+        type: string
+        required: false
+    output:
+      user_list:
+        title: User List
+        description: List of users that meet the filter criteria
+        type: '[]user'
+        required: false
+  show_user:
+    title: Show User
+    description: Returns a single user, identified by ID
+    input:
+      id:
+        title: ID
+        description: User ID
+        type: integer
+        required: true
+    output:
+      user_found:
+        title: User Found
+        description: Returns true if user with specified ID found
+        type: boolean
+        required: false
+      user_information:
+        title: User_Information
+        description: Information on the user
+        type: user
+        required: false

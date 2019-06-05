@@ -1,0 +1,24 @@
+{
+  "body": {
+    "action": "edit_issue",
+    "meta": {},
+    "input": {
+      "description": "Updated from Komand",
+      "fields": {},
+      "id": "TEST-298",
+      "notify": true,
+      "summary": "",
+      "update": {}
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "project": "Test",
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "delete_scan",
+    "input": {
+      "scan_id": "LOLNOTEXIST"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "timeout": 10,
+      "server": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

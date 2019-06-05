@@ -1,0 +1,558 @@
+plugin_spec_version: v2
+name: duo_admin
+title: Duo Admin API
+vendor: rapid7
+status: ["supported"]
+description: Integration for Duo Admin API
+version: 3.3.1
+tags:
+- duo
+- admin
+
+types:
+  phone:
+    phone_id:
+      title: Phone ID
+      type: string
+      required: false
+    number:
+      type: string
+      required: false
+    extension:
+      type: string
+      required: false
+    postdelay:
+      type: string
+      required: false
+    predelay:
+      type: string
+      required: false
+    capabilities:
+      type: '[]string'
+      required: false
+    platform:
+      type: string
+      required: false
+    activated:
+      type: boolean
+      required: false
+    sms_passcodes_sent:
+      title: SMS Passcodes Sent
+      type: boolean
+      required: false
+  phone_user:
+    activated:
+      description: Activated
+      title: Activated
+      type: boolean
+    capabilities:
+      description: Capabilities
+      title: Capabilities
+      type: '[]string'
+    extension:
+      description: Extension
+      title: Extension
+      type: string
+    name:
+      description: Name
+      title: Name
+      type: string
+    number:
+      description: Number
+      title: Number
+      type: string
+    phone_id:
+      description: Phone ID
+      title: Phone ID
+      type: string
+    platform:
+      description: Platform
+      title: Platform
+      type: string
+    postdelay:
+      description: Post delay
+      title: Post delay
+      type: string
+    predelay:
+      description: Predelay
+      title: Predelay
+      type: string
+    sms_passcodes_sent:
+      description: SMS passcodes sent
+      title: SMS Passcodes Sent
+      type: boolean
+    type:
+      description: Type
+      title: Type
+      type: string
+  group:
+    name:
+      title: Name
+      type: string
+      required: false
+    desc:
+      title: Desc
+      type: string
+      required: false
+  token:
+    serial:
+      title: Serial
+      description: Serial
+      type: string
+      required: false
+    token_id:
+      title: Token ID
+      description: Token ID
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+  user:
+    user_id:
+      title: User ID
+      type: string
+      required: true
+    username:
+      type: string
+      required: false
+    realname:
+      type: string
+      required: false
+    email:
+      type: string
+      required: false
+    status:
+      type: string
+      required: false
+    groups:
+      type: '[]group'
+      required: false
+    last_login:
+      type: integer
+      required: false
+    notes:
+      type: string
+      required: false
+    phones:
+      type: '[]phone'
+      required: false
+    tokens:
+      type: '[]token'
+      required: false
+
+  location:
+    city:
+      type: string
+      required: false
+    country:
+      type: string
+      required: false
+    state:
+      type: string
+      required: false
+
+  application:
+    key:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+
+  authlog_user:
+    key:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+
+  auth_device:
+    ip:
+      title: IP Address
+      required: false
+      type: string
+    location:
+      type: location
+      required: false
+    name:
+      type: string
+      required: false
+
+  access_device:
+    browser:
+      type: string
+      required: false
+    browser_version:
+      type: string
+      required: false
+    flash_version:
+      type: string
+      required: false
+    hostname:
+      type: string
+      required: false
+    ip:
+      title: IP Address
+      type: string
+      required: false
+    java_version:
+      type: string
+      required: false
+    location:
+      type: location
+      required: false
+    os:
+      title: Operating System
+      type: string
+      required: false
+    os_version:
+      title: Operating System Version
+      type: string
+      required: false
+
+  authlog:
+    access_device:
+      type: access_device
+      required: true
+    application:
+      type: application
+      required: true
+    auth_device:
+      type: auth_device
+      required: true
+    event_type:
+      type: string
+      required: false
+    eventtype:
+      type: string
+      required: false
+    factor:
+      type: string
+      required: false
+    host:
+      type: string
+      required: false
+    reason:
+      type: string
+      required: false
+    result:
+      type: string
+      required: false
+    timestamp:
+      type: number
+      required: false
+    txid:
+      type: string
+      required: false
+    user:
+      type: authlog_user
+      required: true
+
+  response:
+    alias1:
+      description: Alias 1
+      title: Alias 1
+      type: string
+    alias2:
+      description: Alias 2
+      title: Alias 2
+      type: string
+    alias3:
+      description: Alias 3
+      title: Alias 3
+      type: string
+    alias4:
+      description: Alias 4
+      title: Alias 4
+      type: string
+    email:
+      description: Email
+      title: Email
+      type: string
+    firstname:
+      description: First name
+      title: First Name
+      type: string
+    groups:
+      description: Groups
+      title: Groups
+      type: '[]group'
+    last_login:
+      description: Last login
+      title: Last Login
+      type: integer
+    lastname:
+      description: Last name
+      title: Last Name
+      type: string
+    notes:
+      description: Notes
+      title: Notes
+      type: string
+    phones:
+      description: Phones
+      title: Phones
+      type: '[]phone_user'
+    realname:
+      description: Real name
+      title: Real Name
+      type: string
+    status:
+      description: Status
+      title: Status
+      type: string
+    tokens:
+      description: Tokens
+      title: Tokens
+      type: '[]token'
+    user_id:
+      description: User ID
+      title: User ID
+      type: string
+    username:
+      description: Username
+      title: Username
+      type: string
+
+connection:
+  integration_key:
+    title: Integration Key
+    type: credential_secret_key
+    description: API integration key
+    required: true
+  secret_key:
+    title: Secret Key
+    type: credential_secret_key
+    description: API secret key
+    required: true
+  hostname:
+    title: API Hostname
+    description: Duo API hostname
+    type: string
+    required: true
+
+actions:
+
+  get_user_by_id:
+    title: Get User by ID
+    description: Get a user by ID
+    input:
+      user_id:
+        title: User ID
+        type: string
+        description: User ID, e.g. DUCUULF6HBMZ43IG9MBH
+        required: true
+    output:
+      user:
+        title: User
+        type: user
+        required: false
+        description: User
+
+  get_user_by_username:
+    title: Get User by Username
+    description: Get a user by username
+    input:
+      username:
+        title: Username
+        type: string
+        description: Username, e.g. jdoe
+        required: true
+    output:
+      user:
+        title: User
+        type: user
+        required: false
+        description: User
+
+  delete_user:
+    title: Delete User by ID
+    description: Delete a user by ID
+    input:
+      user_id:
+        title: User ID
+        type: string
+        description: User ID to remove, e.g. DUCUULF6HBMZ43IG9MBH
+        required: true
+    output:
+      response:
+        title: Response
+        type: string
+        required: false
+        description: Response
+
+  modify_user:
+    title: Modify User by ID
+    description: Modify a user by ID
+    input:
+      user_id:
+        title: User ID
+        type: string
+        description: User ID, e.g. DUCUULF6HBMZ43IG9MBH
+        required: true
+      status:
+        title: Status
+        type: string
+        description: New status
+        enum:
+        - active
+        - disabled
+        - bypass
+        required: true
+    output:
+      user:
+        title: User
+        type: user
+        required: false
+        description: User
+
+  get_logs:
+    title: Get Authentication Logs
+    description: Get auth logs, limited to past 180 days
+    input:
+      mintime:
+        title: Mintime
+        type: integer
+        description: Minimum time in UNIX timestamp milliseconds. Must be 13 or more digits in length
+        required: false
+    output:
+      authlogs:
+        title: Logs
+        type: "[]authlog"
+        required: true
+        description: Logs
+
+  get_users:
+    title: Get Users
+    description: Get Users
+    output:
+      users:
+        title: Users
+        type: '[]user'
+        required: false
+        description: Users
+
+  get_user_status:
+    title: Get User Status
+    description: Get account status of a user
+    input:
+      user:
+        title: User
+        type: string
+        description: The user account to check status, e.g. jdoe
+        required: true
+    output:
+      status:
+        title: Status
+        type: string
+        required: true
+        description: Status
+      user_id:
+        title: User ID
+        type: string
+        required: true
+        description: User ID
+
+  add_user:
+    title: Add User
+    description: Add a user in Duo Admin
+    input:
+      username:
+        title: Username
+        description: The name of the user to create
+        type: string
+        required: true
+      alias:
+        title: Alias
+        description: User alias. May have up to 4 unique amongst users
+        type: '[]string'
+        required: false
+      realname:
+        title: Real Name
+        description: User's real name
+        type: string
+        required: false
+      email:
+        title: Email
+        description: Email of the user
+        type: string
+        required: false
+      status:
+        title: Status
+        description: User status, e.g. active, bypass, disabled
+        type: string
+        enum:
+        - active
+        - bypass
+        - disabled
+        default: disabled
+        required: false
+      notes:
+        title: Notes
+        description: An optional description or notes field. Can be viewed in the
+          Admin Panel
+        type: string
+        required: false
+      firstname:
+        title: First Name
+        description: The users given name. Required for Duo's ID Proofing feature
+        type: string
+        required: false
+      lastname:
+        title: Last Name
+        description: The users surname. Required for Duo's ID Proofing feature
+        type: string
+        required: false
+    output:
+      response:
+        description: Response
+        title: Response
+        type: response
+        required: false
+
+  enroll_user:
+    title: Enroll User
+    description: Enrolls a user and sends an enrollment email to the specified email address
+    input:
+      username:
+        type: string
+        title: Username
+        required: true
+        description: Username for user to enroll
+      email:
+        type: string
+        title: Email Address
+        description: Email address to send enrollment email to
+        required: true
+      time_to_expiration:
+        type: number
+        title: Time to Expiration
+        description: Amount of time in seconds until enrollment email expires. Use '0' for no expiration
+        default: 0
+        required: true
+    output:
+      success:
+        type: boolean
+        title: Success
+        description: Whether or not the enrollment was successful
+        required: true
+
+  get_phones_by_user_id:
+    title: Get Phones by User ID
+    description: Gets a list of phones associated with the user ID
+    input:
+      user_id:
+        title: User ID
+        description: User ID, e.g. DUCUULF6HBMZ43IG9MBH
+        type: string
+        required: true
+    output:
+      phone_list:
+        title: Phone List
+        description: List of phones associated with the user's ID
+        type: '[]phone_user'
+        required: false

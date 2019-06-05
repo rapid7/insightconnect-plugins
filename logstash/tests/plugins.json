@@ -1,0 +1,12 @@
+{
+  "version": "v1",
+  "body": {
+    "input": {},
+    "meta": {},
+    "action": "plugins",
+    "connection": {
+      "url": ""
+    }
+  },
+  "type": "action_start"
+}

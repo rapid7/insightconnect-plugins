@@ -1,0 +1,564 @@
+plugin_spec_version: v2
+name: threat_connect
+title: ThreatConnect
+description: ThreatConnect is a Threat Intelligence Platform (TIP) that empowers large
+  organizations to aggregate, analyze and act on their threat intelligence
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- threat
+- malicious
+- analyze
+- manage
+- identify
+- connect
+types:
+  filter:
+    adversary_id:
+      title: Adversary ID
+      type: integer
+      description: Filter Groups on associated Adversary ID
+      required: false
+    email_id:
+      title: Email ID
+      type: integer
+      description: Filter Groups on associated Email ID
+      required: false
+    id:
+      title: ID
+      type: integer
+      description: Filter Groups on associated ID
+      required: false
+    document_id:
+      title: Document ID
+      type: integer
+      description: Filter Groups on associated Document ID
+      required: false
+    incident_id:
+      title: Incident ID
+      type: integer
+      description: Filter Groups on associated Incident ID
+      required: false
+    indicator:
+      title: Indicator
+      type: string
+      description: Filter Groups on associated Indicator
+      required: false
+    security_label:
+      title: Security Label
+      type: string
+      description: Filter Groups on associated Security Label
+      required: false
+    signature_id:
+      title: Signature ID
+      type: integer
+      description: Filter Groups on applied Security Label
+      required: false
+    threat_id:
+      title: Threat ID
+      type: integer
+      description: Filter Groups on associated Threat ID
+      required: false
+    tag:
+      title: Tag
+      type: string
+      description: Filter Groups on applied Tag
+      required: false
+    victim_id:
+      title: Victim ID
+      type: integer
+      description: Filter Groups on associated Victim ID
+      required: false
+  email_output:
+    id:
+      title: ID
+      type: integer
+    name:
+      title: Name
+      type: string
+    date_added:
+      title: Date Added
+      type: date
+    weblink:
+      title: Weblink
+      type: string
+    header:
+      title: Header
+      type: string
+    subject:
+      title: Subject
+      type: string
+    from_address:
+      title: From Address
+      type: string
+    to:
+      title: To
+      type: string
+    body:
+      title: Body
+      type: string
+    score:
+      title: Score
+      type: string
+  incidents_output:
+    id:
+      title: ID
+      type: integer
+    name:
+      title: Name
+      type: string
+    date_added:
+      title: Date Added
+      type: date
+    event_date:
+      title: Event Date
+      type: date
+    weblink:
+      title: Weblink
+      type: string
+  bulk_indicator_output:
+    id:
+      title: ID
+      type: integer
+      required: false
+    owner_name:
+      title: Owner Name
+      type: string
+      required: false
+    date_added:
+      title: Date Added
+      type: date
+      required: false
+    last_modified:
+      title: Last Modified
+      type: date
+      required: false
+    rating:
+      title: Rating
+      type: string
+      required: false
+    threat_assess_rating:
+      title: Threat Assess Rating
+      type: string
+      required: false
+    confidence:
+      title: Confidence
+      type: string
+      required: false
+    threat_assess_confidence:
+      title: Threat Assess Confidence
+      type: string
+      required: false
+    type:
+      title: Type
+      type: string
+      required: false
+    weblink:
+      title: Weblink
+      type: string
+      required: false
+  signatures_output:
+    id:
+      title: ID
+      type: integer
+      required: false
+    name:
+      title: Name
+      type: string
+      required: false
+    date_added:
+      title: Date Added
+      type: date
+      required: false
+    weblink:
+      title: Weblink
+      type: string
+      required: false
+  victim_output:
+    id:
+      title: ID
+      type: integer
+      required: false
+    name:
+      title: Name
+      type: string
+      required: false
+    weblink:
+      title: Weblink
+      type: string
+      required: false
+    nationality:
+      title: Nationality
+      type: string
+      required: false
+    org:
+      title: Org
+      type: string
+      required: false
+    suborg:
+      title: Suborg
+      type: string
+      required: false
+    work_location:
+      title: Work Location
+      type: string
+      required: false
+connection:
+  api_access_id:
+    type: string
+    description: Enter API Access ID
+    required: true
+  api_default_org:
+    type: string
+    description: Enter API Default Org
+    required: true
+  api_secret_key:
+    type: credential_secret_key
+    description: Enter API Secret Key
+    required: true
+  api_base_url:
+    type: string
+    description: Enter API Base URL
+    required: true
+actions:
+  emails_retrieve:
+    title: Email Retrieve
+    description: Retrieve ThreatConnect emails
+    input:
+      adversary_id:
+        title: Adversary ID
+        type: integer
+        description: Filter Groups on associated Adversary ID
+        required: false
+      email_id:
+        title: Email ID
+        type: integer
+        description: Filter Groups on associated Email ID
+        required: false
+      id:
+        title: ID
+        type: integer
+        description: Filter Groups on associated ID
+        required: false
+      document_id:
+        title: Document ID
+        type: integer
+        description: Filter Groups on associated Document ID
+        required: false
+      incident_id:
+        title: Incident ID
+        type: integer
+        description: Filter Groups on associated Incident ID
+        required: false
+      indicator:
+        title: Indicator
+        type: string
+        description: Filter Groups on associated Indicator
+        required: false
+      security_label:
+        title: Security Label
+        type: string
+        description: Filter Groups on associated Security Label
+        required: false
+      signature_id:
+        title: Signature ID
+        type: integer
+        description: Filter Groups on applied Security Label
+        required: false
+      threat_id:
+        title: Threat ID
+        type: integer
+        description: Filter Groups on associated Threat ID
+        required: false
+      tag:
+        title: Tag
+        type: string
+        description: Filter Groups on applied Tag
+        required: false
+      owner:
+        title: Owner
+        type: string
+        description: Owner/Organization
+        required: true
+    output:
+      emails:
+        title: Emails
+        type: '[]email_output'
+        required: false
+        description: Emails
+  incidents_retrieve:
+    title: Incidents Retrieve
+    description: Retrieve ThreatConnect Incidents
+    input:
+      filter:
+        title: Filter
+        type: filter
+        description: ThreatConnect filters
+        required: false
+      owner:
+        title: Owner
+        type: string
+        description: Owner/Organization
+        required: true
+    output:
+      incidents:
+        title: Incidents
+        type: '[]incidents_output'
+        required: false
+        description: Incidents
+  bulk_indicator_download:
+    title: Bulk Indicator Download
+    description: Retrieve ThreatConnect Bulk Indicator Download
+    input:
+      owner:
+        title: Owner
+        type: string
+        description: Owner/Organization
+        required: true
+      attribute:
+        title: Attribute
+        type: string
+        description: Attribute type
+        required: false
+      confidence:
+        title: Confidence
+        type: integer
+        description: Confidence value
+        required: false
+      date_added:
+        title: Date Added
+        type: date
+        description: Date indicator added
+        required: false
+      last_modified:
+        title: Last Modified
+        type: date
+        description: Last modified date
+        required: false
+      rating:
+        title: Rating
+        type: string
+        description: Indicator rating
+        required: false
+      tag:
+        title: Tag
+        type: string
+        description: Single tag filter
+        required: false
+      threat_assess_confidence:
+        title: Threat Assess Confidence
+        type: integer
+        description: Threat Assess Confidence filter
+        required: false
+      threat_assess_rating:
+        title: Threat Assess Rating
+        type: string
+        description: Threat Assess Rating filter
+        required: false
+      type:
+        title: Type
+        type: string
+        description: Indicator type
+        required: false
+    output:
+      bulk_indicators:
+        title: Bulk Indicators
+        type: '[]bulk_indicator_output'
+        required: false
+        description: Bulk indicators
+  signatures_retrieve:
+    title: Signatures Retrieve
+    description: Retrieve ThreatConnect Signatures
+    input:
+      filter:
+        title: Filter
+        type: filter
+        description: ThreatConnect filters
+        required: false
+      owner:
+        title: Owner
+        type: string
+        description: Owner/Organization
+        required: true
+    output:
+      signatures:
+        title: Signatures
+        type: '[]signatures_output'
+        required: false
+        description: Signatures
+  threats_retrieve:
+    title: Threats Retrieve
+    description: Retrieve ThreatConnect Threats
+    input:
+      filter:
+        title: Filter
+        type: filter
+        description: ThreatConnect filters
+        required: false
+      owner:
+        title: Owner
+        type: string
+        description: Owner/Organization
+        required: true
+    output:
+      threats:
+        title: Threats
+        type: '[]signatures_output'
+        required: false
+        description: Threats
+  victims_retrieve:
+    title: Victims Retrieve
+    description: Retrieve ThreatConnect Victims
+    input:
+      filter:
+        title: Filter
+        type: filter
+        description: ThreatConnect filters
+        required: false
+      owner:
+        title: Owner
+        type: string
+        description: Owner/Organization
+        required: true
+    output:
+      victims:
+        title: Victims
+        type: '[]victim_output'
+        required: false
+        description: Victims
+  create_adversary:
+    title: Create Adversary
+    description: Create ThreatConnect Adversary
+    input:
+      tags:
+        title: Tags
+        type: string
+        description: Adversary Tags
+        required: false
+      security_label:
+        title: Security Label
+        type: string
+        description: Adversary Security Label
+        required: false
+      name:
+        title: Name
+        type: string
+        description: Adversary Name
+        required: true
+      owner:
+        title: Owner
+        type: string
+        description: Owner/Organization
+        required: true
+      attributes:
+        title: Attributes
+        type: '[]object'
+        description: Adversary Attributes
+        required: false
+    output:
+      id:
+        title: Adversary ID
+        type: integer
+        required: false
+        description: Adversary ID
+  delete_adversary:
+    title: Delete Adversary
+    description: Delete an Adversary in the ThreatConnect platform
+    input:
+      owner:
+        title: Owner
+        type: string
+        description: Owner/Organization
+        required: true
+      id:
+        title: ID
+        type: integer
+        description: Adversary To Delete
+        required: true
+    output:
+      status:
+        title: Status
+        type: boolean
+        required: false
+        description: Status
+  create_task:
+    title: Create Task
+    description: Create a Task Resource in the ThreatConnect platform
+    input:
+      name:
+        title: Name
+        type: string
+        description: Task Name
+        required: true
+      attributes:
+        title: Attributes
+        type: '[]object'
+        description: Task Attributes
+        required: false
+      tags:
+        title: Tags
+        type: string
+        description: Task tags comma delimited
+        required: false
+      due_date:
+        title: Due Date
+        type: date
+        description: Task due date
+        required: false
+      escalation_date:
+        title: Escalation Date
+        type: date
+        description: Task escalation date
+        required: false
+      reminder_date:
+        title: Reminder Date
+        type: date
+        description: Task reminder date
+        required: false
+      escalated:
+        title: Escalated
+        type: boolean
+        description: Use task escalation
+        required: false
+      overdue:
+        title: Overdue
+        type: boolean
+        description: Is task overdue
+        required: false
+      reminded:
+        title: Reminded
+        type: boolean
+        description: Use task Reminder
+        required: false
+      status:
+        title: Status
+        type: string
+        description: Task status
+        enum:
+        - In Progress
+        - Completed
+        - Waiting on Someone
+        - Deferred
+        required: false
+      assignee:
+        title: Assignee
+        type: string
+        description: Task Assignee
+        required: false
+      escalatee:
+        title: Escalatee
+        type: string
+        description: Task escalatee
+        required: false
+      security_label:
+        title: Security Label
+        type: string
+        description: Task security label
+        required: false
+    output:
+      id:
+        title: Task ID
+        type: integer
+        required: false
+        description: Task ID

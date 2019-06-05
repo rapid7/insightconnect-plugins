@@ -1,0 +1,18 @@
+{
+    "body": {
+      "action": "get_threat_summary",
+      "meta": {},
+      "input": {
+        "issue_id": "612555152"
+      },
+      "connection": {
+        "credentials": {
+            "username": "",
+            "password": ""
+        },
+        "url": ""
+      }
+    },
+    "type": "action_start",
+    "version": "v1"
+  }

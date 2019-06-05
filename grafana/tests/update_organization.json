@@ -1,0 +1,23 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "connection": {
+      "basic_auth": {
+        "password": "",
+        "username": ""
+      },
+      "token_auth": {
+        "secretKey": ""
+      },
+      "port": 3000,
+      "url": ""
+    },
+    "action": "update_organization",
+    "input": {
+      "name": "komand",
+      "organization_id": -1
+    }
+  }
+}

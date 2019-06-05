@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "create_port_list",
+    "input": {
+      "port_list_TCP": [],
+      "name": "Testing Port Lists",
+      "port_list_UDP": []
+    },
+    "connection": {
+      "ssl_verify": false,
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "timeout": 10,
+      "server": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

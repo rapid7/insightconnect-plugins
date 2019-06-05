@@ -1,0 +1,1237 @@
+plugin_spec_version: v2
+name: att_cybersecurity_alienvault_otx
+title: AT&T Cybersecurity AlienVault Open Threat Exchange
+description: Open Threat Exchange is the neighborhood watch of the global intelligence
+  community
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- Threat
+- Exchange
+- ATT
+types:
+  groups:
+    name:
+      title: Name
+      type: string
+      description: Group name
+      required: false
+    id:
+      title: ID
+      type: integer
+      description: Group ID
+      required: false
+  counts:
+    Malware Domain:
+      title: Malware Domain
+      type: integer
+      description: Malware domain
+      required: false
+  vt:
+    Signature:
+      title: Signature
+      type: string
+      description: Signature
+      required: false
+  data:
+    url:
+      title: URL
+      type: string
+      description: URL
+      required: false
+    domain:
+      title: Domain
+      type: string
+      description: Domain
+      required: false
+    vt:
+      title: Virus Total
+      type: vt
+      description: Virus Total
+      required: false
+    file:
+      title: File
+      type: string
+      description: File
+      required: false
+    md5:
+      title: Md5
+      type: string
+      description: Md5
+      required: false
+  activities:
+    status:
+      title: Status
+      type: integer
+      description: Status
+      required: false
+    domain:
+      title: Domain
+      type: string
+      description: Domain
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    first_date:
+      title: First Date
+      type: string
+      description: First date
+      required: false
+    url:
+      title: URL
+      type: string
+      description: URL
+      required: false
+    data:
+      title: Data
+      type: data
+      description: Data
+      required: false
+    visible:
+      title: Visible
+      type: string
+      description: Visible
+      required: false
+    source:
+      title: Source
+      type: string
+      description: Source
+      required: false
+    last_date:
+      title: Last Date
+      type: string
+      description: Last date
+      required: false
+    vt:
+      title: Vt
+      type: string
+      description: Vt
+      required: false
+    file:
+      title: File
+      type: string
+      description: File
+      required: false
+    data_key:
+      title: Data Key
+      type: string
+      description: Data key
+      required: false
+    md5:
+      title: MD5 hash
+      type: string
+      description: MD5 hash
+      required: false
+  date_added:
+    usec:
+      title: Usec
+      type: integer
+      description: Usec
+      required: false
+    sec:
+      title: Sec
+      type: integer
+      description: Sec
+      required: false
+  _id:
+    $id:
+      title: $ID
+      type: string
+      description: $ID
+      required: false
+  reputation_details:
+    as:
+      title: As
+      type: string
+      description: As
+      required: false
+    threat_score:
+      title: Threat Score
+      type: integer
+      description: Threat score
+      required: false
+    first_seen:
+      title: First Seen
+      type: string
+      description: First seen
+      required: false
+    counts:
+      title: Counts
+      type: counts
+      description: Counts
+      required: false
+    city:
+      title: City
+      type: string
+      description: City
+      required: false
+    allow_ping:
+      title: Allow Ping
+      type: string
+      description: Allow ping
+      required: false
+    reputation_rel_checked:
+      title: Reputation Rel Checked
+      type: integer
+      description: Reputation rel checked
+      required: false
+    lon:
+      title: Lon
+      type: integer
+      description: Lon
+      required: false
+    state:
+      title: State
+      type: integer
+      description: State
+      required: false
+    status:
+      title: Status
+      type: integer
+      description: Status
+      required: false
+    activities:
+      title: Activities
+      type: '[]activities'
+      description: Activities
+      required: false
+    server_type:
+      title: Server Type
+      type: string
+      description: Server type
+      required: false
+    matched_bl:
+      title: Matched Blacklist
+      type: '[]string'
+      description: Matched blacklist
+      required: false
+    address:
+      title: Address
+      type: string
+      description: Address
+      required: false
+    lat:
+      title: Lat
+      type: integer
+      description: Lat
+      required: false
+    date_added:
+      title: Date Added
+      type: date_added
+      description: Date added
+      required: false
+    organization:
+      title: Organization
+      type: string
+      description: Organization
+      required: false
+    country:
+      title: Country
+      type: string
+      description: Country
+      required: false
+    up:
+      title: Up
+      type: integer
+      description: Up
+      required: false
+    reputation_val:
+      title: Reputation Value
+      type: string
+      description: Reputation value
+      required: false
+    reputation_rel:
+      title: Reputation Rel
+      type: string
+      description: Reputation rel
+      required: false
+    matched_wl:
+      title: Matched Whitelist
+      type: '[]string'
+      description: Matched whitelist
+      required: false
+    domains:
+      title: Domains
+      type: '[]string'
+      description: Domains
+      required: false
+    reputation_val_checked:
+      title: Reputation Value Checked
+      type: integer
+      description: Reputation value checked
+      required: false
+    _id:
+      title: ' Id'
+      type: _id
+      description: ' id'
+      required: false
+    last_seen:
+      title: Last Seen
+      type: string
+      description: Last seen
+      required: false
+  reputation:
+    reputation:
+      title: Reputation
+      description: Reputation
+      type: reputation_details
+      required: false
+  passive_dns_nest:
+    last:
+      title: Last
+      description: Last
+      type: string
+      required: false
+    indicator_link:
+      title: Indicator Link
+      description: Indicator link
+      type: string
+      required: false
+    hostname:
+      title: Hostname
+      description: Hostname
+      type: string
+      required: false
+    address:
+      title: Address
+      description: Address
+      type: string
+      required: false
+    flag_url:
+      title: Flag URL
+      description: Flag URL
+      type: string
+      required: false
+    flag_title:
+      title: Flag Title
+      description: Flag title
+      type: string
+      required: false
+    asset_type:
+      title: Asset Type
+      description: Asset type
+      type: string
+      required: false
+    first:
+      title: First
+      description: First
+      type: string
+      required: false
+  safebrowsing:
+    matches:
+      title: Matches
+      description: Matches
+      type: '[]string'
+      required: false
+  urlworker:
+    ip:
+      title: IP
+      description: IP
+      type: string
+      required: false
+    httpcode:
+      title: HTTP Code
+      description: HTTP code
+      type: integer
+      required: false
+  result_url_list_nest:
+    urlworker:
+      title: URL Worker
+      description: URL worker
+      type: urlworker
+      required: false
+    safebrowsing:
+      title: Safe Browsing
+      description: Safe browsing
+      type: safebrowsing
+      required: false
+  url_list_nest:
+    domain:
+      title: Domain
+      description: Domain
+      type: string
+      required: false
+    url:
+      title: URL
+      description: URL
+      type: string
+      required: false
+    hostname:
+      title: Hostname
+      description: Hostname
+      type: string
+      required: false
+    httpcode:
+      title: HTTP Code
+      description: HTTP code
+      type: integer
+      required: false
+    gsb:
+      title: GSB
+      description: GSB
+      type: '[]string'
+      required: false
+    result:
+      title: Result
+      description: Result
+      type: result_url_list_nest
+      required: false
+    date:
+      title: Date
+      description: Date
+      type: string
+      required: false
+    encoded:
+      title: Encoded
+      description: URL encoded string
+      type: string
+      required: false
+  base_indicator:
+    access_reason:
+      title: Access Reason
+      type: string
+      description: Access reason
+      required: false
+    access_type:
+      title: Access Type
+      type: string
+      description: Access type
+      required: false
+    content:
+      title: Content
+      type: string
+      description: Content
+      required: false
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    id:
+      title: ID
+      type: integer
+      description: ID
+      required: false
+    indicator:
+      title: Indicator
+      type: string
+      description: Indicator
+      required: false
+    title:
+      title: Title
+      type: string
+      description: Title
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+  author:
+    avatar_url:
+      title: Avatar URL
+      type: string
+      description: Avatar URL
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    is_following:
+      title: Is Following
+      type: integer
+      description: Is following
+      required: false
+    is_subscribed:
+      title: Is Subscribed
+      type: integer
+      description: Is subscribed
+      required: false
+    username:
+      title: Username
+      type: string
+      description: Username
+      required: false
+  indicator_type_counts:
+    IPv4:
+      title: IPv4
+      type: integer
+      description: IPv4
+      required: false
+    URL:
+      title: URL
+      type: integer
+      description: URL count
+      required: false
+    domain:
+      title: Domain
+      type: integer
+      description: Domain count
+      required: false
+    hostname:
+      title: Hostname
+      type: integer
+      description: Hostname count
+      required: false
+    email:
+      title: Email
+      type: integer
+      description: Email
+      required: false
+  observation:
+    adversary:
+      title: Adversary
+      type: string
+      description: Adversary
+      required: false
+    author_id:
+      title: Author ID
+      type: integer
+      description: Author ID
+      required: false
+    author_name:
+      title: Author Name
+      type: string
+      description: Author name
+      required: false
+    avatar_url:
+      title: Avatar URL
+      type: string
+      description: Avatar URL
+      required: false
+    cloned_from:
+      title: Cloned From
+      type: string
+      description: Cloned from
+      required: false
+    comment_count:
+      title: Comment Count
+      type: integer
+      description: Comment count
+      required: false
+    created:
+      title: Created
+      type: string
+      description: Created
+      required: false
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    downvotes_count:
+      title: Downvotes Count
+      type: float
+      description: Downvotes count
+      required: false
+    export_count:
+      title: Export Count
+      type: integer
+      description: Export count
+      required: false
+    extract_source:
+      title: Extract Source
+      type: '[]string'
+      description: Extract source
+      required: false
+    follower_count:
+      title: Follower Count
+      type: integer
+      description: Follower count
+      required: false
+    groups:
+      title: Groups
+      type: '[]groups'
+      description: Groups
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    indicator_type_counts:
+      title: Indicator Type Counts
+      type: indicator_type_counts
+      description: Indicator type counts
+      required: false
+    industries:
+      title: Industries
+      type: '[]string'
+      description: Industries
+      required: false
+    is_following:
+      title: Is Following
+      type: integer
+      description: Is following
+      required: false
+    is_subscribed:
+      title: Is Subscribed
+      type: integer
+      description: Is subscribed
+      required: false
+    is_subscribing:
+      title: Is Subscribing
+      type: boolean
+      description: Is subscribing
+      required: false
+    locked:
+      title: Locked
+      type: integer
+      description: Locked
+      required: false
+    modified:
+      title: Modified
+      type: string
+      description: Modified
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    public:
+      title: Public
+      type: integer
+      description: Public
+      required: false
+    pulse_source:
+      title: Pulse Source
+      type: string
+      description: Pulse source
+      required: false
+    references:
+      title: References
+      type: '[]string'
+      description: References
+      required: false
+    revision:
+      title: Revision
+      type: integer
+      description: Revision
+      required: false
+    subscriber_count:
+      title: Subscriber Count
+      type: integer
+      description: Subscriber count
+      required: false
+    tags:
+      title: Tags
+      type: '[]string'
+      description: Tags
+      required: false
+    targeted_countries:
+      title: Targeted Countries
+      type: '[]string'
+      description: Targeted countries
+      required: false
+    tlp:
+      title: TLP
+      type: string
+      description: Traffic Light Protocol
+      required: false
+    upvotes_count:
+      title: Upvotes Count
+      type: float
+      description: Upvotes count
+      required: false
+    user_subscriber_count:
+      title: User Subscriber Count
+      type: integer
+      description: User subscriber count
+      required: false
+    validator_count:
+      title: Validator Count
+      type: integer
+      description: Validator count
+      required: false
+    vote:
+      title: Vote
+      type: integer
+      description: Vote
+      required: false
+    votes_count:
+      title: Votes Count
+      type: number
+      description: Votes count
+      required: false
+  pulses:
+    TLP:
+      title: TLP
+      type: string
+      description: Traffic Light Protocol
+      required: false
+    adversary:
+      title: Adversary
+      type: string
+      description: Adversary
+      required: false
+    author:
+      title: Author
+      type: author
+      description: Author
+      required: false
+    cloned_from:
+      title: Cloned From
+      type: string
+      description: Cloned from
+      required: false
+    comment_count:
+      title: Comment Count
+      type: integer
+      description: Comment count
+      required: false
+    created:
+      title: Created
+      type: string
+      description: Created
+      required: false
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    downvotes_count:
+      title: Downvotes Count
+      type: float
+      description: Downvotes count
+      required: false
+    export_count:
+      title: Export Count
+      type: integer
+      description: Export count
+      required: false
+    follower_count:
+      title: Follower Count
+      type: integer
+      description: Follower count
+      required: false
+    groups:
+      title: Groups
+      type: '[]groups'
+      description: Groups
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    in_group:
+      title: In Group
+      type: boolean
+      description: In group
+      required: false
+    indicator_count:
+      title: Indicator Count
+      type: integer
+      description: Indicator count
+      required: false
+    indicator_type_counts:
+      title: Indicator Type Counts
+      type: indicator_type_counts
+      description: Indicator type counts
+      required: false
+    industries:
+      title: Industries
+      type: '[]object'
+      description: Industries
+      required: false
+    is_author:
+      title: Is Author
+      type: boolean
+      description: Is author
+      required: false
+    is_following:
+      title: Is Following
+      type: integer
+      description: Is following
+      required: false
+    is_modified:
+      title: Is Modified
+      type: boolean
+      description: Is modified
+      required: false
+    is_subscribing:
+      title: Is Subscribing
+      type: integer
+      description: Is subscribing
+      required: false
+    locked:
+      title: Locked
+      type: integer
+      description: Locked
+      required: false
+    modified:
+      title: Modified
+      type: string
+      description: Modified
+      required: false
+    modified_text:
+      title: Modified Text
+      type: string
+      description: Modified text
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    observation:
+      title: Observation
+      type: observation
+      description: Observation
+      required: false
+    public:
+      title: Public
+      type: integer
+      description: Public
+      required: false
+    pulse_source:
+      title: Pulse Source
+      type: string
+      description: Pulse source
+      required: false
+    references:
+      title: References
+      type: '[]string'
+      description: References
+      required: false
+    subscriber_count:
+      title: Subscriber Count
+      type: integer
+      description: Subscriber count
+      required: false
+    tags:
+      title: Tags
+      type: '[]string'
+      description: Tags
+      required: false
+    targeted_countries:
+      title: Targeted Countries
+      type: '[]object'
+      description: Targeted countries
+      required: false
+    threat_hunter_scannable:
+      title: Threat Hunter Scannable
+      type: boolean
+      description: Threat hunter scannable
+      required: false
+    upvotes_count:
+      title: Upvotes Count
+      type: float
+      description: Upvotes count
+      required: false
+    validator_count:
+      title: Validator Count
+      type: integer
+      description: Validator count
+      required: false
+    vote:
+      title: Vote
+      type: integer
+      description: Vote
+      required: false
+    votes_count:
+      title: Votes Count
+      type: number
+      description: Votes count
+      required: false
+  pulse_info:
+    count:
+      title: Count
+      type: integer
+      description: Count
+      required: false
+    pulses:
+      title: Pulses
+      type: '[]pulses'
+      description: Pulses
+      required: false
+    references:
+      title: References
+      type: '[]string'
+      description: References
+      required: false
+  general:
+    area_code:
+      title: Area Code
+      type: integer
+      description: Area code
+      required: false
+    asn:
+      title: ASN
+      type: string
+      description: Autonomous System Number
+      required: false
+    base_indicator:
+      title: Base Indicator
+      type: base_indicator
+      description: Base indicator
+      required: false
+    charset:
+      title: Charset
+      type: integer
+      description: Charset
+      required: false
+    city:
+      title: City
+      type: string
+      description: City
+      required: false
+    city_data:
+      title: City Data
+      type: boolean
+      description: City data
+      required: false
+    continent_code:
+      title: Continent Code
+      type: string
+      description: Continent code
+      required: false
+    country_code:
+      title: Country Code
+      type: string
+      description: Country code
+      required: false
+    country_code3:
+      title: Country Code3
+      type: string
+      description: Country code3
+      required: false
+    country_name:
+      title: Country Name
+      type: string
+      description: Country name
+      required: false
+    dma_code:
+      title: DMA Code
+      type: integer
+      description: DMA code
+      required: false
+    flag_title:
+      title: Flag Title
+      type: string
+      description: Flag title
+      required: false
+    flag_url:
+      title: Flag URL
+      type: string
+      description: Flag URL
+      required: false
+    indicator:
+      title: Indicator
+      type: string
+      description: Indicator
+      required: false
+    latitude:
+      title: Latitude
+      type: float
+      description: Latitude
+      required: false
+    longitude:
+      title: Longitude
+      type: float
+      description: Longitude
+      required: false
+    postal_code:
+      title: Postal Code
+      type: string
+      description: Postal code
+      required: false
+    pulse_info:
+      title: Pulse Info
+      type: pulse_info
+      description: Pulse info
+      required: false
+    region:
+      title: Region
+      type: string
+      description: Region
+      required: false
+    reputation:
+      title: Reputation
+      type: integer
+      description: Reputation
+      required: false
+    sections:
+      title: Sections
+      type: '[]string'
+      description: Sections
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+    type_title:
+      title: Type Title
+      type: string
+      description: Type title
+      required: false
+    whois:
+      title: Whois
+      type: string
+      description: Whois
+      required: false
+  geo:
+    area_code:
+      title: Area Code
+      type: integer
+      description: Area code
+      required: false
+    asn:
+      title: ASN
+      type: string
+      description: Autonomous System Number
+      required: false
+    charset:
+      title: Charset
+      type: integer
+      description: Charset
+      required: false
+    city:
+      title: City
+      type: string
+      description: City
+      required: false
+    city_data:
+      title: City Data
+      type: boolean
+      description: City data
+      required: false
+    continent_code:
+      title: Continent Code
+      type: string
+      description: Continent code
+      required: false
+    country_code:
+      title: Country Code
+      type: string
+      description: Country code
+      required: false
+    country_code3:
+      title: Country Code3
+      type: string
+      description: Country code3
+      required: false
+    country_name:
+      title: Country Name
+      type: string
+      description: Country name
+      required: false
+    dma_code:
+      title: DMA Code
+      type: integer
+      description: DMA code
+      required: false
+    flag_title:
+      title: Flag Title
+      type: string
+      description: Flag title
+      required: false
+    flag_url:
+      title: Flag URL
+      type: string
+      description: Flag URL
+      required: false
+    latitude:
+      title: Latitude
+      type: float
+      description: Latitude
+      required: false
+    longitude:
+      title: Longitude
+      type: float
+      description: Longitude
+      required: false
+    postal_code:
+      title: Postal Code
+      type: string
+      description: Postal code
+      required: false
+    region:
+      title: Region
+      type: string
+      description: Region
+      required: false
+  data_malware:
+    datetime_int:
+      title: Datetime
+      type: integer
+      description: Datetime
+      required: false
+    hash:
+      title: Hash
+      type: string
+      description: Hash
+      required: false
+  malware:
+    count:
+      title: Count
+      type: integer
+      description: Count
+      required: false
+    data:
+      title: Data
+      type: '[]data_malware'
+      description: Data
+      required: false
+    next:
+      title: Next
+      type: string
+      description: Next
+      required: false
+    previous:
+      title: Previous
+      type: string
+      description: Previous
+      required: false
+    size:
+      title: Size
+      type: integer
+      description: Size
+      required: false
+  result:
+    safebrowsing:
+      title: Safebrowsing
+      type: safebrowsing
+      description: Safebrowsing
+      required: false
+    urlworker:
+      title: URL worker
+      type: urlworker
+      description: URL worker
+      required: false
+  url_list:
+    actual_size:
+      title: Actual Size
+      type: integer
+      description: Actual size
+      required: false
+    full_size:
+      title: Full Size
+      type: integer
+      description: Full size
+      required: false
+    has_next:
+      title: Has Next
+      type: boolean
+      description: Has next
+      required: false
+    limit:
+      title: Limit
+      type: integer
+      description: Limit
+      required: false
+    page_num:
+      title: Page Number
+      type: integer
+      description: Page number
+      required: false
+    paged:
+      title: Paged
+      type: boolean
+      description: Paged
+      required: false
+    url_list:
+      title: URL List
+      type: '[]url_list_nest'
+      description: URL list
+      required: false
+  passive_dns:
+    count:
+      title: Count
+      type: integer
+      description: Count
+      required: false
+    passive_dns:
+      title: Passive DNS
+      type: '[]passive_dns_nest'
+      description: Passive DNS
+      required: false
+  indicator_detail_full:
+    general:
+      title: General
+      type: general
+      description: General
+      required: false
+    reputation:
+      title: Reputation
+      type: reputation
+      description: Reputation
+      required: false
+    geo:
+      title: Geo
+      type: geo
+      description: Geo
+      required: false
+    malware:
+      title: Malware
+      type: malware
+      description: Malware
+      required: false
+    url_list:
+      title: Url List
+      type: url_list
+      description: Url list
+      required: false
+    passive_dns:
+      title: Passive DNS
+      type: passive_dns
+      description: Passive DNS
+      required: false
+connection:
+  api_key:
+    title: API Key
+    description: AlienVault Open Threat Exchange API key
+    type: credential_secret_key
+    required: true
+  url:
+    title: URL
+    description: AlienVault Open Threat Exchange URL
+    type: string
+    default: https://otx.alienvault.com
+    required: true
+actions:
+  get_indicator_details:
+    title: Get Indicator Details
+    description: Returns details about an indicator
+    input:
+      indicator_type:
+        title: Indicator Type
+        description: Indicator type to search
+        type: string
+        required: true
+        enum:
+        - IPv4
+        - IPv6
+        - URL
+        - HOSTNAME
+      indicator:
+        title: Indicator
+        description: Indicator to search in OTX
+        type: string
+        required: true
+      section:
+        title: Section
+        description: Section of information returned from the searched
+        type: string
+        required: true
+        enum:
+        - general
+        - geo
+        - malware
+        - passive_dns
+        - reputation
+        - url_list
+        - full
+    output:
+      results:
+        title: Results
+        type: indicator_detail_full
+        description: Indicator results
+        required: false

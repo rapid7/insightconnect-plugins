@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "execute",
+    "input": {
+      "operation": "show tables",
+      "parameters": ""
+    },
+    "connection": {
+      "username": "",
+      "poll_interval": 1,
+      "host": "",
+      "source": "pyhive",
+      "catalog": "jmx",
+      "port": 8080,
+      "schema": "jmx"
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

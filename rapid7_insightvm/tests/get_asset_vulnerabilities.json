@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_asset_vulnerabilities",
+    "meta": {},
+    "input": {
+      "asset_id": "23650"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

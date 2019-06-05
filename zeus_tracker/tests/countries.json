@@ -1,0 +1,15 @@
+{
+  "body": {
+    "input": {
+      "country": "US",
+      "limit": 10
+    },
+    "meta": {},
+    "action": "countries",
+    "connection": {
+      "server": "https://zeustracker.abuse.ch"
+    }
+  },
+  "version": "v1",
+  "type": "action_start"
+}

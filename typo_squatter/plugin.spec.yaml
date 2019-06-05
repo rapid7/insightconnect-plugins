@@ -1,0 +1,81 @@
+plugin_spec_version: v2
+name: typo_squatter
+title: Typo Squatter
+description: Look for typosquatters on a domain
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- dns
+- typo
+- squat
+triggers:
+  search_certstream:
+    title: Search Certstream
+    description: Searches certstream for new certs matching query
+    input:
+      query:
+        title: Query
+        description: Query to match
+        type: string
+        required: false
+      domain:
+        title: Domain
+        description: Domain to check
+        type: string
+        default: google.com
+        required: false
+      levenshtein:
+        title: Levenshtein
+        description: Levenshtein distance from domain score to match
+        type: number
+        required: false
+    output:
+      score:
+        title: Score
+        description: Phishing score
+        type: number
+        required: false
+      domain:
+        title: Domain
+        description: Matched domain
+        type: string
+        required: false
+actions:
+  check_for_squatters:
+    title: Check for Squatters
+    description: Look for potential typo squatters
+    input:
+      domain:
+        description: Domain to check
+        type: string
+        default: google.com
+        required: true
+      flag:
+        title: Flag
+        description: Flag to pass for dnstwist (Advanced)
+        type: string
+        required: false
+    output:
+      potential_squatters:
+        title: Potential Squatters
+        description: JSON representation of potential squatters
+        type: '[]object'
+        required: false
+  score_domain:
+    title: Score Domain
+    description: 'Get phishing score for domain. score > 90: Very Suspicous, > 65
+      likely phising'
+    input:
+      domain:
+        title: Domain
+        description: Domain to check
+        type: string
+        default: google.com
+        required: true
+    output:
+      score:
+        title: Score
+        description: Phishing score
+        type: number
+        required: false

@@ -1,0 +1,27 @@
+{
+  "body": {
+    "action": "list_share_files",
+    "meta": {},
+    "input": {
+      "path": "/",
+      "pattern": "*",
+      "share_name": "",
+      "timeout": 30,
+      "timezone": "UTC"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "domain": "",
+      "host": "",
+      "netbios_name": "",
+      "port": 445,
+      "timeout": 60,
+      "use_ntlmv2": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,33 @@
+{
+  "body": {
+    "input": {
+      "limit": 0,
+      "owner": [],
+      "max_confidence": 100,
+      "review_status": "",
+      "strict_text": false,
+      "sort_by": "",
+      "share_level": "",
+      "text": "proxy",
+      "status": "",
+      "type": "",
+      "until": "",
+      "include_expired": false,
+      "tags": [],
+      "since": "",
+      "min_confidence": 0,
+      "sort_order": "",
+      "fields": []
+    },
+    "action": "threat_descriptors",
+    "connection": {
+      "app_id": "Facebook App ID",
+      "secret_key": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

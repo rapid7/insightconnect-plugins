@@ -1,0 +1,1202 @@
+plugin_spec_version: v2
+name: vmray
+title: VMRay Sandbox
+description: VMRay allows you to analyze and detect malware before it lands
+version: 4.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- sandbox
+- malware
+- malware analysis
+types:
+  analysis_serialized_result:
+    code:
+      description: Code
+      title: Code
+      type: integer
+    extra_args:
+      description: Extra args
+      title: Extra Arguments
+      type: object
+    fmt_args:
+      description: Formatted arguments
+      title: Formatted Arguments
+      type: '[]object'
+  analysis_result:
+    analysis_analyzer_id:
+      description: Analysis analyzer ID
+      title: Analysis Analyzer ID
+      type: integer
+    analysis_user_email:
+      description: Analysis user email e.g demo@vmray.com
+      title: Analysis User Email
+      type: string
+    analysis_priority:
+      description: Analysis priority e.g 5
+      title: Analysis Priority
+      type: integer
+    analysis_analyzer_name:
+      description: Analysis analyzer name e.g vmray
+      title: Analysis Analyzer Name
+      type: string
+    analysis_sample_sha1:
+      description: Analysis sample SHA1 e.g 124f46228d1e220d88ae5e9a24d6e713039a64f9
+      title: Analysis Sample SHA1
+      type: string
+    analysis_job_started:
+      description: Analysis job started date e.g 2017-11-29T12:06:39
+      title: Analysis Job Started
+      type: string
+    analysis_report_version:
+      description: Analysis report version
+      title: Analysis Report Version
+      type: integer
+    analysis_tags:
+      description: Analysis tags
+      title: Analysis tags
+      type: '[]string'
+    analysis_severity:
+      description: Analysis severity e.g suspicious
+      title: Analysis Severity
+      type: string
+    analysis_sample_sha256:
+      description: Analysis sample SHA-256
+      title: Analysis Sample SHA-256
+      type: string
+    analysis_id:
+      description: Analysis ID
+      title: Analysis ID
+      type: integer
+    analysis_vmhost_name:
+      description: Analysis vmhost name
+      title: Analysis VMhost Name
+      type: string
+    analysis_vmhost_id:
+      description: Analysis vmhost ID
+      title: Analysis VMhost ID
+      type: integer
+    analysis_document_password:
+      description: Analysis document password
+      title: Analysis Document Password
+      type: string
+    analysis_sample_md5:
+      description: Analysis sample MD5
+      title: Analysis Sample MD5
+      type: string
+    analysis_serialized_results:
+      description: Analysis serialized results
+      title: Analysis Serialized Results
+      type: analysis_serialized_result
+    analysis_vm_id:
+      description: Analysis VM ID
+      title: Analysis VM ID
+      type: integer
+    analysis_ioc_aggregation_state:
+      description: Analysis IOC aggregation state
+      title: Analysis IOC Aggregation State
+      type: string
+    analysis_submission_id:
+      description: Analysis submission ID
+      title: Analysis submission ID
+      type: integer
+    analysis_sample_ssdeep:
+      description: Analysis sample ssdeep
+      title: Analysis Sample ssdeep
+      type: string
+    analysis_static_config_id:
+      description: Analysis static config ID
+      title: Analysis Static Config ID
+      type: integer
+    analysis_analyzer_version:
+      description: Analysis analyzer version
+      title: Analysis Analyzer Version
+      type: string
+    analysis_prescript_id:
+      description: Analysis prescript ID
+      title: Analysis Prescript ID
+      type: integer
+    analysis_size:
+      description: Analysis size
+      title: Analysis Size
+      type: integer
+    analysis_result_code:
+      description: Analysis result code
+      title: Analysis Result Code
+      type: integer
+    analysis_prescript_force_admin:
+      description: Analysis prescript force admin
+      title: Analysis Prescript Force Admin
+      type: boolean
+    analysis_configuration_id:
+      description: Analysis configuration ID
+      title: Analysis Configuration ID
+      type: integer
+    analysis_yara_latest_ruleset_date:
+      description: Analysis Yara latest ruleset data
+      title: Analysis Yara Latest Ruleset Data
+      type: string
+    analysis_vm_name:
+      description: Analysis vm name
+      title: Analysis VM Name
+      type: string
+    analysis_snapshot_name:
+      description: Analysis snapshot name
+      title: Analysis Snapshot Name
+      type: string
+    analysis_vti_custom_rules_hash:
+      description: Analysis VTI custom rules hash
+      title: Analysis VTI Custom Rules Hash
+      type: string
+    analysis_user_id:
+      description: Analysis user ID
+      title: Analysis User ID
+      type: integer
+    analysis_vti_built_in_rules_version:
+      description: Analysis VTI built in rules version
+      title: Analysis VTI Built In Rules Version
+      type: number
+    analysis_system_time:
+      description: Analysis system time
+      title: Analysis System Time
+      type: string
+    analysis_jobrule_id:
+      description: Analysis job rule ID
+      title: Analysis Job Rule ID
+      type: integer
+    analysis_job_id:
+      description: Analysis job ID
+      title: Analysis Job ID
+      type: integer
+    analysis_job_type:
+      description: Analysis job type
+      title: Analysis Job Type
+      type: string
+    analysis_vti_aggregation_state:
+      description: Analysis VTI aggregation state
+      title: Analysis VTI Aggregation State
+      type: string
+    analysis_snapshot_id:
+      description: Analysis snapshot ID
+      title: Analysis Snapshot ID
+      type: integer
+    analysis_result_str:
+      description: Analysis result string
+      title: Analysis Result String
+      type: string
+    analysis_vti_score:
+      description: Analysis VTI score
+      title: Analysis VIT Score
+      type: integer
+    analysis_configuration_name:
+      description: Analysis configuration name
+      title: Analysis Configuration Name
+      type: string
+    analysis_sample_id:
+      description: Analysis sample ID
+      title: Analysis Sample ID
+      type: integer
+    analysis_webif_url:
+      description: Analysis webif URL
+      title: Analysis Webif URL
+      type: string
+    analysis_yara_match_count:
+      description: Analysis Yara match count
+      title: Analysis Yara Match Count
+      type: integer
+    analysis_created:
+      description: Analysis Created
+      title: Analysis Created
+      type: string
+  job_info:
+    status:
+      type: string
+    slot:
+      type: integer
+  analysis:
+    analysis_analyzer_id:
+      type: integer
+    analysis_analyzer_name:
+      type: string
+    analysis_analyzer_version:
+      type: string
+    analysis_configuration_id:
+      type: integer
+    analysis_configuration_name:
+      type: string
+    analysis_created:
+      type: string
+    analysis_id:
+      type: integer
+    analysis_job_id:
+      type: integer
+    analysis_job_started:
+      type: string
+    analysis_jobrule_sampletype:
+      type: string
+    analysis_priority:
+      type: integer
+    analysis_result_code:
+      type: integer
+    analysis_result_str:
+      type: string
+    analysis_sample_id:
+      type: integer
+    analysis_severity:
+      type: integer
+    analysis_size:
+      type: integer
+    analysis_snapshot_id:
+      type: integer
+    analysis_snapshot_name:
+      type: string
+    analysis_user_email:
+      type: string
+    analysis_user_id:
+      type: integer
+    analysis_vm_id:
+      type: integer
+    analysis_vm_name:
+      type: string
+    analysis_vmhost_id:
+      type: integer
+    analysis_vmhost_name:
+      type: string
+  details:
+    sample_id:
+      type: int
+    sample_webif_url:
+      type: string
+    sample_filename:
+      type: string
+    sample_md5hash:
+      type: string
+  analysis_by_hash:
+    analysis_results:
+      type: '[]analysis'
+    job_info:
+      type: job_info
+  data:
+    sample_id:
+      type: int
+    sample_webif_url:
+      type: string
+    sample_filename:
+      type: string
+    sample_md5hash:
+      type: string
+    sample_sha256hash:
+      type: string
+  results:
+    data:
+      type: '[]data'
+    results:
+      type: string
+  sample:
+    sample_vti_score:
+      description: Automated threat score of the sample
+      title: Sample VTI Score
+      type: integer
+    sample_id:
+      description: Sample ID
+      title: Sample ID
+      type: integer
+    sample_sha1hash:
+      description: SHA1 hash
+      title: Sample SHA1 Hash
+      type: string
+    sample_classifications:
+      description: Classifications
+      title: Sample Classifications
+      type: '[]string'
+    sample_last_md_score:
+      description: MD score
+      title: Sample Last MD Score
+      type: integer
+    sample_last_vt_score:
+      description: VT score
+      title: Sample Last VT Score
+      type: integer
+    sample_severity:
+      description: Severity
+      title: Sample Severity
+      type: string
+    sample_url:
+      description: URL
+      title: Sample URL
+      type: string
+    sample_imphash:
+      description: Import hash
+      title: Sample Import Hash
+      type: string
+    sample_highest_vti_score:
+      description: Highest VTI score for sample
+      title: Sample Highest VTI Score
+      type: integer
+    sample_highest_vti_severity:
+      description: Highest VTI severity
+      title: Sample Highest VTI Severity
+      type: string
+    sample_type:
+      description: Type
+      title: Sample Type
+      type: string
+    sample_created:
+      description: Date sample was created
+      title: Sample Created
+      type: string
+    sample_last_reputation_severity:
+      description: Last reputation severity
+      title: Sample Last Reputation Severity
+      type: string
+    sample_filesize:
+      description: Filesize
+      title: Sample Filesize
+      type: integer
+    sample_ssdeephash:
+      description: Ssdeep hash
+      title: Sample ssdeep Hash
+      type: string
+    sample_md5hash:
+      description: MD5 Hash
+      title: Sample MD5 Hash
+      type: string
+    sample_sha256hash:
+      description: SHA256 Hash
+      title: Sample SHA256 Hash
+      type: string
+    sample_webif_url:
+      description: Webif URL
+      title: Sample Webif URL
+      type: string
+    sample_priority:
+      description: Priority
+      title: Sample Priority
+      type: integer
+    sample_is_multipart:
+      description: Is multipart
+      title: Sample Is Multipart
+      type: boolean
+    sample_score:
+      description: Score
+      title: Sample Score
+      type: integer
+    sample_filename:
+      description: Filename
+      title: Sample Filename
+      type: string
+  jobs:
+    job_analyzer_id:
+      description: Job analyzer ID
+      title: Job Analyzer ID
+      type: integer
+    job_analyzer_name:
+      description: Job analyzer name
+      title: Job Analyzer Name
+      type: string
+    job_configuration_id:
+      description: Job configuration ID
+      title: Job Configuration ID
+      type: integer
+    job_configuration_name:
+      description: Job configuration name
+      title: Job Configuration Name
+      type: string
+    job_created:
+      description: Job created
+      title: Job Created
+      type: string
+    job_id:
+      description: Job ID
+      title: Job ID
+      type: integer
+    job_jobrule_id:
+      description: Job rule ID
+      title: Job Rule ID
+      type: integer
+    job_jobrule_sampletype:
+      description: Job rule sample type
+      title: Job Rule Sample Type
+      type: string
+    job_prescript_force_admin:
+      description: Job prescript force admin
+      title: Job Prescript Force Admin
+      type: boolean
+    job_priority:
+      description: Job priority
+      title: Job Priority
+      type: integer
+    job_reputation_job_id:
+      description: Job reputation job ID
+      title: Job Reputation Job ID
+      type: integer
+    job_sample_id:
+      description: Job sample ID
+      title: Job Sample ID
+      type: integer
+    job_sample_md5:
+      description: Job sample MD5
+      title: Job Sample MD5
+      type: string
+    job_sample_sha1:
+      description: Job sample SHA1
+      title: Job Sample SHA1
+      type: string
+    job_sample_sha256:
+      description: Job sample SHA256
+      title: Job Sample SHA256
+      type: string
+    job_sample_ssdeep:
+      description: Job sample ssdeep
+      title: Job Sample ssdeep
+      type: string
+    job_snapshot_id:
+      description: Job Snapshot ID
+      title: Job Snapshot ID
+      type: integer
+    job_snapshot_name:
+      description: Job snapshot name
+      title: Job Snapshot Name
+      type: string
+    job_status:
+      description: Job status
+      title: Job Status
+      type: string
+    job_statuschanged:
+      description: Job status changed
+      title: Job Status Changed
+      type: string
+    job_submission_id:
+      description: Job submission ID
+      title: Job Submission ID
+      type: integer
+    job_tracking_state:
+      description: Job tracking state
+      title: Job Tracking State
+      type: string
+    job_type:
+      description: Job type
+      title: Job Type
+      type: string
+    job_user_email:
+      description: Job user email
+      title: Job User Email
+      type: string
+    job_user_id:
+      description: Job user ID
+      title: Job User ID
+      type: integer
+    job_vm_id:
+      description: Job VM ID
+      title: Job VM ID
+      type: integer
+    job_vm_name:
+      description: Job VM name
+      title: Job VM Name
+      type: string
+    job_vnc_token:
+      description: Job VNC token
+      title: Job VNC Token
+      type: string
+  whois_jobs:
+    whois_job_created:
+      description: Date the WHOIS job was created
+      title: WHOIS Job Created
+      type: string
+    whois_job_id:
+      description: WHOIS job ID
+      title: WHOIS Job ID
+      type: integer
+    whois_job_priority:
+      description: WHOIS job priority
+      title: WHOIS Job Priority
+      type: integer
+    whois_job_reputation_job_id:
+      description: WHOIS job reputation job ID
+      title: WHOIS Job Reputation Job ID
+      type: integer
+    whois_job_sample_id:
+      description: WHOIS job sample ID
+      title: WHOIS Job Sample ID
+      type: integer
+    whois_job_sample_md5:
+      description: WHOIS job sample MD5
+      title: WHOIS Job Sample MD5
+      type: string
+    whois_job_sample_sha1:
+      description: WHOIS job sample SHA1
+      title: WHOIS Job Sample SHA1
+      type: string
+    whois_job_sample_sha256:
+      description: WHOIS job sample SHA256
+      title: WHOIS Job Sample SHA256
+      type: string
+    whois_job_sample_ssdeep:
+      description: WHOIS job sample ssdeep
+      title: WHOIS Job Sample ssdeep
+      type: string
+    whois_job_status:
+      description: WHOIS job status
+      title: WHOIS Job Status
+      type: string
+    whois_job_statuschanged:
+      description: WHOIS job status change
+      title: WHOIS Job Status Change
+      type: string
+    whois_job_submission_id:
+      description: WHOIS job submission ID
+      title: WHOIS Job Submission ID
+      type: integer
+    whois_job_user_email:
+      description: WHOIS job user email
+      title: WHOIS Job User Email
+      type: string
+    whois_job_user_id:
+      description: WHOIS job user ID
+      title: WHOIS Job User ID
+      type: integer
+  reputation_jobs:
+    reputation_job_created:
+      description: Reputation job created
+      title: Reputation Job Created
+      type: string
+    reputation_job_id:
+      description: Reputation job ID
+      title: Reputation Job ID
+      type: integer
+    reputation_job_priority:
+      description: Reputation job priority
+      title: Reputation Job Priority
+      type: integer
+    reputation_job_sample_id:
+      description: Reputation job sample ID
+      title: Reputation Job Sample ID
+      type: integer
+    reputation_job_sample_md5:
+      description: Reputation job sample MD5
+      title: Reputaion Job Sample MD5
+      type: string
+    reputation_job_sample_sha1:
+      description: Reputation job sample SHA1
+      title: Reputation Job Sample SHA1
+      type: string
+    reputation_job_sample_sha256:
+      description: Reputation job sample SHA256
+      title: Reputation Job Sample SHA256
+      type: string
+    reputation_job_sample_ssdeep:
+      description: Reputation job sample ssdeep
+      title: Reputation Job Sample ssdeep
+      type: string
+    reputation_job_status:
+      description: Reputation job status
+      title: Reputation Job Status
+      type: string
+    reputation_job_statuschanged:
+      description: Reputation job status changed
+      title: Reputation Job Status Changed
+      type: string
+    reputation_job_submission_id:
+      description: Reputation job submission ID
+      title: Reputation Job Submission ID
+      type: integer
+    reputation_job_user_email:
+      description: Reputation job user email
+      title: Reputation Job User Email
+      type: string
+    reputation_job_user_id:
+      description: Reputation job user ID
+      title: Reputation Job User ID
+      type: integer
+  samples_url:
+    sample_created:
+      description: Sample created
+      title: Sample Created
+      type: string
+    sample_filename:
+      description: Sample filename
+      title: Sample Filename
+      type: string
+    sample_filesize:
+      description: Sample filesize
+      title: Sample Filesize
+      type: integer
+    sample_id:
+      description: Sample ID
+      title: Sample ID
+      type: integer
+    sample_is_multipart:
+      description: Sample is multipart
+      title: Sample Is Multipart
+      type: boolean
+    sample_md5hash:
+      description: Sample MD5 hash
+      title: Sample MD5 Hash
+      type: string
+    sample_priority:
+      description: Sample priority
+      title: Sample Priority
+      type: integer
+    sample_sha1hash:
+      description: Sample SHA1 hash
+      title: Sample SHA1 Hash
+      type: string
+    sample_sha256hash:
+      description: Sample SHA256 hash
+      title: Sample SHA256
+      type: string
+    sample_ssdeephash:
+      description: Sample ssdeep hash
+      title: Sample ssdeep Hash
+      type: string
+    sample_type:
+      description: Sample type
+      title: Sample Type
+      type: string
+    sample_url:
+      description: Sample URL
+      title: Sample URL
+      type: string
+    sample_webif_url:
+      description: Sample webif URL
+      title: Sample Webif URL
+      type: string
+    submission_filename:
+      description: Submission filename
+      title: Submission Filename
+      type: string
+  submissions_url:
+    submission_analyzer_mode_analyzer_mode:
+      description: Submission analyzer mode
+      title: Submission Analyzer Mode
+      type: string
+    submission_analyzer_mode_enable_reputation:
+      description: Is reputation mode enabled
+      title: 'Submission Analyzer Mode: Enable Reputation'
+      type: boolean
+    submission_analyzer_mode_enable_triage:
+      description: Is triage mode enabled
+      title: 'Submission Analyzer Mode: Enable Triage'
+      type: boolean
+    submission_analyzer_mode_enable_whois:
+      description: Is WHOIS mode enabled
+      title: 'Submission Analyzer Mode: Enable WHOIS'
+      type: boolean
+    submission_analyzer_mode_id:
+      description: Submission analyzer mode ID
+      title: 'Submission Analyzer Mode: ID'
+      type: integer
+    submission_created:
+      description: Submission created
+      title: Submission Created
+      type: string
+    submission_filename:
+      description: Submission filename
+      title: Submission Filename
+      type: string
+    submission_finished:
+      description: Submission finished
+      title: Submission Finished
+      type: boolean
+    submission_id:
+      description: Submission ID
+      title: Submission ID
+      type: integer
+    submission_ip_id:
+      description: Submission IP ID
+      title: 'Submission IP: ID'
+      type: integer
+    submission_ip_ip:
+      description: Submission IP IP
+      title: 'Submission IP: IP'
+      type: string
+    submission_known_configuration:
+      description: Submission known configuration
+      title: Submission Known Configuration
+      type: boolean
+    submission_prescript_force_admin:
+      description: Submission prescript force admin
+      title: Submission Prescript Force Admin
+      type: boolean
+    submission_priority:
+      description: Submission priority
+      title: Submission Priority
+      type: integer
+    submission_reputation_mode:
+      description: Submission reputation mode
+      title: Submission Reputation Mode
+      type: string
+    submission_sample_id:
+      description: Submission sample ID
+      title: Submission Sample ID
+      type: integer
+    submission_sample_md5:
+      description: Submission sample MD5
+      title: Submission Sample MD5
+      type: string
+    submission_sample_sha1:
+      description: Submission sample SHA1
+      title: Submission Sample SHA1
+      type: string
+    submission_sample_sha256:
+      description: Submission sample SHA256
+      title: Submission Sample SHA256
+      type: string
+    submission_sample_ssdeep:
+      description: Submission sample ssdeep
+      title: Submission Sample ssdeep
+      type: string
+    submission_shareable:
+      description: Submission shareable
+      title: Submission Shareable
+      type: boolean
+    submission_tags:
+      description: Submission tags
+      title: Submission Tags
+      type: '[]object'
+    submission_type:
+      description: Submission type
+      title: Submission Type
+      type: string
+    submission_user_account_id:
+      description: Submission user account ID
+      title: Submission User Account ID
+      type: integer
+    submission_user_account_name:
+      description: Submission user account name
+      title: Submission User Account Name
+      type: string
+    submission_user_account_subscription_mode:
+      description: Submission user account subscription mode
+      title: Submission User account Subscription Mode
+      type: string
+    submission_user_email:
+      description: Submission user email
+      title: Submission User Email
+      type: string
+    submission_user_id:
+      description: Submission user ID
+      title: Submission User ID
+      type: integer
+    submission_webif_url:
+      description: Submission webif URL
+      title: Submission Webif URL
+      type: string
+    submission_whois_mode:
+      description: Submission WHOIS mode
+      title: Submission WHOIS Mode
+      type: string
+  submit_url:
+    md_jobs:
+      description: MD jobs
+      title: MD Jobs
+      type: '[]object'
+    errors:
+      description: Errors
+      title: Errors
+      type: '[]object'
+    jobs:
+      description: Jobs
+      title: Jobs
+      type: '[]jobs'
+    vt_jobs:
+      description: VT jobs
+      title: VT Jobs
+      type: '[]object'
+    whois_jobs:
+      description: WHOIS jobs
+      title: WHOIS Jobs
+      type: '[]whois_jobs'
+    reputation_jobs:
+      description: Reputation jobs
+      title: Reputation Jobs
+      type: '[]reputation_jobs'
+    samples:
+      description: Samples
+      title: Samples
+      type: '[]samples_url'
+    static_jobs:
+      description: Static jobs
+      title: Static Jobs
+      type: '[]object'
+    submissions:
+      description: Submissions
+      title: Submissions
+      type: '[]submissions_url'
+  submissions_file:
+    submission_analyzer_mode_analyzer_mode:
+      description: Submission analyzer mode analyzer mode
+      title: Submission Analyzer Mode Analyzer Mode
+      type: string
+    submission_analyzer_mode_enable_reputation:
+      description: Submission analyzer mode enable reputation
+      title: Submission Analyzer Mode Enable Reputation
+      type: boolean
+    submission_analyzer_mode_enable_triage:
+      description: Submission analyzer mode enable triage
+      title: Submission Analyzer Mode Enable Triage
+      type: boolean
+    submission_analyzer_mode_enable_whois:
+      description: Submission analyzer mode enable whois
+      title: Submission Analyzer Mode Enable WHOIS
+      type: boolean
+    submission_analyzer_mode_id:
+      description: Submission analyzer mode ID
+      title: Submission Analyzer Mode ID
+      type: integer
+    submission_created:
+      description: Submission created
+      title: Submission Created
+      type: string
+    submission_filename:
+      description: Submission filename
+      title: Submission Filename
+      type: string
+    submission_finished:
+      description: Submission finished
+      title: Submission Finished
+      type: boolean
+    submission_id:
+      description: Submission ID
+      title: Submission ID
+      type: integer
+    submission_ip_id:
+      description: Submission IP ID
+      title: 'Submission IP: ID'
+      type: integer
+    submission_ip_ip:
+      description: 'Submission IP: IP'
+      title: 'Submission IP: IP'
+      type: string
+    submission_known_configuration:
+      description: Submission known configuration
+      title: Submission Known Configuration
+      type: boolean
+    submission_original_filename:
+      description: Submission original filename
+      title: Submission Original Filename
+      type: string
+    submission_prescript_force_admin:
+      description: Submission prescript force admin
+      title: Submission Prescript Force Admin
+      type: boolean
+    submission_priority:
+      description: Submission priority
+      title: Submission Priority
+      type: integer
+    submission_reputation_mode:
+      description: Submission reputation mode
+      title: Submission Reputation Mode
+      type: string
+    submission_sample_id:
+      description: Submission sample ID
+      title: 'Submission Sample: ID'
+      type: integer
+    submission_sample_md5:
+      description: Submission sample MD5
+      title: 'Submission Sample: MD5'
+      type: string
+    submission_sample_sha1:
+      description: Submission sample SHA1
+      title: 'Submission Sample: SHA1'
+      type: string
+    submission_sample_sha256:
+      description: Submission sample SHA256
+      title: 'Submission Sample: SHA256'
+      type: string
+    submission_sample_ssdeep:
+      description: Submission sample ssdeep
+      title: 'Submission Sample: ssdeep'
+      type: string
+    submission_shareable:
+      description: Submission shareable
+      title: Submission Shareable
+      type: boolean
+    submission_tags:
+      description: Submission tags
+      title: Submission Tags
+      type: '[]object'
+    submission_type:
+      description: Submission type
+      title: Submission Type
+      type: string
+    submission_user_account_id:
+      description: Submission user account ID
+      title: Submission User Account ID
+      type: integer
+    submission_user_account_name:
+      description: Submission user account name
+      title: Submission User Account Name
+      type: string
+    submission_user_account_subscription_mode:
+      description: Submission user account subscription mode
+      title: Submission User Account Subscription Mode
+      type: string
+    submission_user_email:
+      description: Submission user email
+      title: Submission User Email
+      type: string
+    submission_user_id:
+      description: Submission user ID
+      title: Submission User ID
+      type: integer
+    submission_webif_url:
+      description: Submission webif URL
+      title: Submission Webif URL
+      type: string
+    submission_whois_mode:
+      description: Submission WHOIS mode
+      title: Submission WHOIS Mode
+      type: string
+  samples_files:
+    sample_created:
+      description: Sample created
+      title: Sample Created
+      type: string
+    sample_filename:
+      description: Sample filename
+      title: Sample Filename
+      type: string
+    sample_filesize:
+      description: Sample filesize
+      title: Sample Filesize
+      type: integer
+    sample_id:
+      description: Sample ID
+      title: Sample ID
+      type: integer
+    sample_is_multipart:
+      description: Sample is multipart
+      title: Sample Is Multipart
+      type: boolean
+    sample_md5hash:
+      description: Sample MD5 hash
+      title: Sample MD5 Hash
+      type: string
+    sample_priority:
+      description: Sample priority
+      title: Sample Priority
+      type: integer
+    sample_sha1hash:
+      description: Sample SHA1 hash
+      title: Sample SHA1 Hash
+      type: string
+    sample_sha256hash:
+      description: Sample SHA256 hash
+      title: Sample SHA256 Hash
+      type: string
+    sample_ssdeephash:
+      description: Sample ssdeep hash
+      title: Sample ssdeep hash
+      type: string
+    sample_type:
+      description: Sample type
+      title: Sample Type
+      type: string
+    sample_webif_url:
+      description: Sample webif URL
+      title: Sample Webif URL
+      type: string
+    submission_filename:
+      description: Submission filename
+      title: Submission Filename
+      type: string
+  submit_file:
+    md_jobs:
+      description: MD jobs
+      title: MD Jobs
+      type: '[]object'
+    errors:
+      description: Errors
+      title: Errors
+      type: '[]object'
+    jobs:
+      description: Jobs
+      title: Jobs
+      type: '[]object'
+    vt_jobs:
+      description: VT jobs
+      title: VT Jobs
+      type: '[]object'
+    whois_jobs:
+      description: WHOIS jobs
+      title: WHOIS Jobs
+      type: '[]object'
+    reputation_jobs:
+      description: Reputation jobs
+      title: Reputation Jobs
+      type: '[]reputation_jobs'
+    samples:
+      description: Samples
+      title: Samples
+      type: '[]samples_files'
+    static_jobs:
+      description: Static jobs
+      title: Static Jobs
+      type: '[]object'
+    submissions:
+      description: Submissions
+      title: Submissions
+      type: '[]submissions_file'
+connection:
+  api_key:
+    type: credential_secret_key
+    description: API key for VMRay
+    required: true
+    title: API Key
+  url:
+    title: VMRay URL
+    description: VMRay host e.g https://cloud.vmray.com
+    type: string
+    default: https://cloud.vmray.com
+    required: true
+actions:
+  submit_file:
+    title: Submit File
+    description: Submit file for analysis
+    input:
+      file:
+        type: file
+        required: true
+        description: File and filename for analysis
+        title: File
+      analyzer_mode:
+        type: string
+        required: false
+        description: Specify what analyzer mode to use
+        enum:
+          - default
+          - reputation
+          - reputation_static
+          - reputation_static_dynamic
+          - static_dynamic
+          - static
+        default: "default"
+      optional_params:
+        title: Optional Parameters
+        description: 'Parameters that allow finer tuning of the Submit File action,
+          e.g {"analysis_id": 12345}'
+        type: object
+        required: false
+    output:
+      results:
+        title: Results
+        description: Results returned from submitting a URL
+        type: submit_file
+        required: false
+  submit_url:
+    title: Submit URL
+    description: Submits a URL for analysis
+    input:
+      url:
+        title: URL
+        description: URL to be submitted for analysis
+        type: string
+        required: true
+      analyzer_mode:
+        type: string
+        required: false
+        description: Specify what analyzer mode to use
+        enum:
+        - default
+        - reputation
+        - reputation_static
+        - reputation_static_dynamic
+        - static_dynamic
+        - static
+        default: "default"
+      optional_params:
+        title: Optional Parameters
+        description: 'Parameters that allow finer tuning of the Submit URL action,
+          e.g {"analysis_id": 12345}'
+        type: object
+        required: false
+    output:
+      results:
+        title: Results
+        description: Results returned from submitting a URL
+        type: submit_url
+        required: false
+  get_analysis:
+    title: Get Analysis
+    description: Get all dynamic and static analyses in the system or details about
+      specific ones
+    input:
+      id_type:
+        title: ID Type
+        description: Get analysis based on ID of a specified type
+        type: string
+        enum:
+        - analysis_id
+        - analyzer
+        - configuration
+        - static_config
+        - created
+        - job
+        - jobrule
+        - job_started
+        - prescript
+        - result_code
+        - sample
+        - size
+        - snapshot
+        - submission
+        - user
+        - vm
+        - vmhost
+        - vti_score
+        - all
+        required: true
+      id:
+        title: ID
+        description: ID based on ID type selected, leave blank if 'all' is selected
+        type: string
+        required: false
+      optional_params:
+        title: Optional Parameters
+        description: 'Parameters that allow finer tuning of the Get Analysis action,
+          e.g {"analysis_id": 12345}'
+        type: object
+        required: false
+    output:
+      results:
+        title: Results
+        description: Results returned from analysis
+        type: '[]analysis_result'
+        required: false
+  get_samples:
+    title: Get Samples
+    description: Get all samples in the system or details about specific ones. You
+      can also search by hashes
+    input:
+      sample_type:
+        title: Sample Type
+        description: Specified type of sample
+        type: string
+        enum:
+        - all
+        - sample_id
+        - created
+        - filesize
+        - md5
+        - sha1
+        - sha256
+        - type
+        required: true
+      sample:
+        title: Sample
+        description: Sample ID, hash or type, leave blank if 'all' is selected
+        type: string
+        required: false
+      optional_params:
+        title: Optional Parameters
+        description: 'Parameters that allow finer tuning of the Get Samples action,
+          e.g {"analysis_id": 12345}'
+        type: object
+        required: false
+    output:
+      results:
+        title: Results
+        description: Results from samples
+        type: '[]sample'
+        required: false

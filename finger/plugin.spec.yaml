@@ -1,0 +1,104 @@
+plugin_spec_version: v2
+name: finger
+title: Finger
+description: Query the Finger Service
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- finger
+- users
+actions:
+  finger:
+    title: Finger
+    description: Ask finger about a username
+    input:
+      user:
+        type: string
+        description: User
+        required: true
+      host:
+        type: string
+        description: Finger server host
+        required: true
+    output:
+      found:
+        title: Found Status
+        description: Found
+        type: boolean
+        required: false
+      login:
+        title: Login Name
+        description: Login
+        type: string
+        required: false
+      loginstatus:
+        title: Login Status
+        description: Login Status
+        type: string
+        required: false
+      loginfrom:
+        title: Login from
+        description: Login from
+        type: string
+        required: false
+      fullname:
+        title: Real Name
+        description: Full name
+        type: string
+        required: false
+      home:
+        title: Home Directory
+        description: Home
+        type: string
+        required: false
+      homephone:
+        title: Home Phone
+        description: Homephone
+        type: string
+        required: false
+      shell:
+        title: Shell
+        description: Shell
+        type: string
+        required: false
+      mail:
+        title: Mail Forward Address
+        description: Mail
+        type: string
+        required: false
+      mailstatus:
+        title: Mail Status
+        description: Mail status
+        type: string
+        required: false
+      pubkey:
+        title: Public Key File
+        description: Public key
+        type: string
+        required: false
+      plan:
+        title: Plan
+        description: Plan
+        type: string
+        required: false
+      project:
+        title: Project
+        description: Project
+        type: string
+        required: false
+      room:
+        title: Room
+        description: Room
+        type: string
+        required: false
+      workphone:
+        title: Work Phone
+        description: Workphone
+        type: string
+        required: false
+      status:
+        title: Plugin Status
+        description: Status
+        type: string
+        required: false

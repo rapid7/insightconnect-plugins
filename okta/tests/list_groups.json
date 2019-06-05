@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "list_groups",
+    "input": {
+      "query": "Cool"
+    },
+    "connection": {
+      "okta_url": "",
+      "okta_key": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

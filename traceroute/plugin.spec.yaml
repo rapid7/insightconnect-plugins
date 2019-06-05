@@ -1,0 +1,82 @@
+plugin_spec_version: v2
+name: traceroute
+title: Traceroute
+description: Traceroute networking tool
+version: 1.0.1
+vendor: rapid7
+tags:
+- Tracerout
+- network diagnostics
+actions:
+  traceroute:
+    title: Traceroute
+    description: Returns the route used to communicate with the host
+    input:
+      host:
+        title: Host
+        description: The domain name or IP of the the host to find a route to
+        type: string
+        required: true
+      count:
+        title: Count
+        description: The number of probes to be sent to each hop. The default is 3
+        type: integer
+        required: true
+        default: 3
+      max_ttl:
+        title: Max TTL
+        description: Set the maximum TTL used in outgoing packets. The default is
+          30
+        type: integer
+        required: true
+        default: 30
+      time_out:
+        title: Time Out
+        description: Set the timeout, in seconds, to wait for a response for each
+          probe. The default is 3
+        type: integer
+        required: true
+        default: 3
+      port:
+        title: Port
+        description: Set the port that traceroute will try to reach e.g. set it to
+          port 443 for a host running an HTTPS server. The default is 80
+        type: integer
+        required: true
+        default: 80
+      set_ack:
+        title: Set Ack
+        description: If true set the TCP ACK flag in outgoing packets. By doing so,
+          it is possible to trace through stateless firewalls which permit outgoing
+          TCP connections
+        type: boolean
+        required: true
+        default: false
+      resolve_hostname:
+        title: Resolve Hostname
+        description: If true traceroute will attempt to return a DNS name rather than
+          an IP address. If false, traceroute will always return the IP address
+        type: boolean
+        required: true
+        default: true
+    output:
+      reply:
+        title: Reply
+        description: Whether a route was found to the host
+        type: boolean
+        required: true
+      response:
+        title: Response
+        description: The full raw response from traceroute
+        type: string
+        required: true
+      path:
+        title: Path
+        description: The path used to get to the host including response times
+        type: '[]string'
+        required: true
+      ip:
+        title: IP
+        description: IP addresses
+        type: '[]string'
+        required: true

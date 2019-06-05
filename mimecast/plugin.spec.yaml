@@ -1,0 +1,661 @@
+plugin_spec_version: v2
+name: mimecast
+title: Mimecast
+description: Services for email security, archiving and continuity. Protect, manage
+  and archive without compromise
+version: 2.4.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- mimecast
+- email
+
+types:
+  managed_url:
+    comment:
+      title: Comment
+      description: The comment that was posted in the request
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: The managed domain
+      type: string
+      required: false
+    disableUserAwareness:
+      title: User Awareness
+      description: If User Awareness challenges for this URL are disabled
+      type: boolean
+      required: false
+    disableLogClick:
+      title: Click Logging
+      description: If logging of user clicks on the URL is disabled
+      type: boolean
+      required: false
+    action:
+      title: Action
+      description: Either block or permit
+      type: string
+      required: false
+    matchType:
+      title: Match Type
+      description: Either 'explicit' or 'domain'
+      type: string
+      required: false
+    scheme:
+      title: Scheme
+      description: The protocol to apply for the managed URL. Either HTTP or HTTPS
+      type: string
+      required: false
+    disableRewrite:
+      title: URL Rewriting
+      description: If rewriting of this URL in emails is disabled
+      type: boolean
+      required: false
+    id:
+      title: ID
+      description: The Mimecast secure ID of the managed URL
+      type: string
+      required: false
+    port:
+      title: Port
+      description: Port
+      type: integer
+      required: false
+  managed_sender:
+    type:
+      title: Type
+      description: Either 'permit' (to bypass spam checks) or 'block' (to reject the
+        email)
+      type: string
+      required: false
+    to:
+      title: To
+      description: The email address of the internal recipient
+      type: string
+      required: false
+    sender:
+      title: Sender
+      description: The email address of the external sender
+      type: string
+      required: false
+    id:
+      title: ID
+      description: The Mimecast secure ID of the managed sender object
+      type: string
+      required: false
+  policy:
+    fromEternal:
+      title: From Eternal
+      description: If the policy is always applied or if there is a specific start
+        date
+      type: boolean
+      required: false
+    toDate:
+      title: To Date
+      description: The date that the policy will apply until
+      type: string
+      required: false
+    fromValue:
+      title: From Value
+      description: A value defining which senders the policy applies to
+      type: string
+      required: false
+    from:
+      title: From
+      description: An object containing type and value fields defining which sender
+        addresses the policy applies to
+      type: object
+      required: false
+    description:
+      title: Description
+      description: The description for the policy which is kept with the email in
+        the archive for future reference
+      type: string
+      required: false
+    bidirectional:
+      title: Bidirectional
+      description: If the policy is also applied in the reverse of the email flow,
+        i.e. where the specified recipient in the policy becomes the sender, and the
+        specified sender in the policy becomes the recipient
+      type: boolean
+      required: false
+    fromType:
+      title: From Type
+      description: Which sender addresses the policy applies to. CCan be one of everyone,
+        internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value,
+        individual_email_address, free_mail_domains, header_display_name
+      type: string
+      required: false
+    to:
+      title: To
+      description: An object containing type and value fields defining which recipient
+        addresses the policy applies to
+      type: object
+      required: false
+    fromDate:
+      title: From Date
+      description: The date that the policy will apply from
+      type: string
+      required: false
+    override:
+      title: Override
+      description: If true, this option overrides the order in which the policy is
+        applied, and forces it to be applied first if there are multiple applicable
+        policies, unless more specific policies of the same type have been configured
+        with an override as well
+      type: boolean
+      required: false
+    toEternal:
+      title: To Eternal
+      description: If the policy should always be applied or if there is an end date
+      type: boolean
+      required: false
+    conditions:
+      title: Conditions
+      description: An object with fields describing additional conditions that should
+        affect when the policy is applied
+      type: object
+      required: false
+    toType:
+      title: To Type
+      description: Which recipient addresses the policy applies to. Can be one of
+        everyone, internal_addresses, external_addresses, email_domain, profile_group,
+        address_attribute_value, individual_email_address, free_mail_domains, header_display_name
+      type: string
+      required: false
+    fromPart:
+      title: From Part
+      description: Which from address is used in the policy. Can be any of envelope_from,
+        header_from, both
+      type: string
+      required: false
+  sender_policy:
+    id:
+      title: ID
+      description: The Mimecast ID of the policy. Used when updating the policy
+      type: string
+      required: false
+    option:
+      title: Option
+      description: The option set for the policy. Will be one of no_action, block_sender
+      type: string
+      required: false
+    policy:
+      title: Policy
+      description: The policy that was created
+      type: policy
+      required: false
+  group:
+    description:
+      title: Description
+      description: The name of the group
+      type: string
+      required: false
+    source:
+      title:
+      description:
+      type: string
+      required: false
+    folder_count:
+      title:
+      description:
+      type: integer
+      required: false
+    parent_id:
+      title:
+      description:
+      type: string
+      required: false
+    id:
+      title:
+      description:
+      type: string
+      required: false
+    user_count:
+      title:
+      description:
+      type: integer
+      required: false
+  click_logs:
+    category:
+      title: Category
+      description: The category of the URL clicked
+      type: string
+      required: false
+    userEmailAddress:
+      title: User Email Address
+      description: The email address of the user who clicked the link
+      type: string
+      required: false
+    url:
+      title: URL
+      description: The URL clicked
+      type: string
+      required: false
+    userAwarenessAction:
+      title: User Awareness Action
+      description: The action taken by the user if user awareness was applied
+      type: string
+      required: false
+    route:
+      title: Route
+      description: The route of the email that contained the link
+      type: string
+      required: false
+    adminOverride:
+      title: Admin Override
+      description: The action defined by the administrator for the URL
+      type: string
+      required: false
+    date:
+      title: Date
+      description: The date that the URL was clicked
+      type: string
+      required: false
+    scanResult:
+      title: Scan Result
+      description: The result of the URL scan
+      type: string
+      required: false
+    action:
+      title: Action
+      description: The action that was taken for the click
+      type: string
+      required: false
+    ttpDefinition:
+      title: TTP Definition
+      description: The description of the definition that triggered the URL to be rewritten by Mimecast
+      type: string
+      required: false
+    userOverride:
+      title: User Override
+      description: The action requested by the user
+      type: string
+      required: false
+
+connection:
+  url:
+    title: URL
+    description: The URL for the Mimecast server
+    type: string
+    required: true
+  app_id:
+    title: App ID
+    description: Application ID
+    type: string
+    required: true
+  auth_type:
+    title: Authentication Type
+    description: 'The type of authentication: cloud or domain'
+    type: string
+    required: true
+    default: Basic-Cloud
+    enum:
+    - Basic-Cloud
+    - Basic-Ad
+  credentials:
+    type: credential_username_password
+    title: Basic Auth Username and Password
+    description: Basic auth username and password
+    required: true
+  app_key:
+    title: Application Key
+    description: The application key
+    type: credential_secret_key
+    required: true
+
+actions:
+  create_managed_url:
+    title: Create Managed URL
+    description: Create a managed URL
+    input:
+      url:
+        title: URL
+        description: The URL to block or permit. Do not include a fragment
+        type: string
+        required: true
+      comment:
+        title: Comment
+        description: A comment about the why the URL is managed; for tracking purposes
+        type: string
+        required: false
+      disable_rewrite:
+        title: Disable Rewrite
+        description: Disable rewriting of this URL in emails. Applies only if action
+          = 'permit'
+        type: boolean
+        required: true
+      disable_user_awareness:
+        title: Disable User Awareness
+        description: Disable User Awareness challenges for this URL. Applies only
+          if action = 'permit'
+        type: boolean
+        required: true
+      disable_log_click:
+        title: Disable Log Click
+        description: Disable logging of user clicks on the URL
+        type: boolean
+        required: true
+      action:
+        title: Action
+        description: Set to 'block' to blacklist the URL, 'permit' to whitelist it
+        type: string
+        required: true
+        default: block
+        enum:
+        - block
+        - permit
+      match_type:
+        title: Match Type
+        description: Set to 'explicit' to block or permit only instances of the full
+          URL. Set to 'domain' to block or permit any URL with the same domain
+        type: string
+        required: true
+        default: explicit
+        enum:
+        - explicit
+        - domain
+    output:
+      response:
+        title: Managed URL
+        description: Managed URL that was created
+        type: '[]managed_url'
+        required: false
+  get_managed_url:
+    title: Get Managed URL
+    description: Get information on a managed URL
+    input:
+      domain:
+        title: Domain
+        description: The managed domain
+        type: string
+        required: false
+      disable_user_awareness:
+        title: 'Filter: User Awareness'
+        description: Filter on whether or not User Awareness challenges for this URL
+        type: string
+        required: false
+        default: none
+        enum:
+        - none
+        - 'false'
+        - 'true'
+      disable_log_click:
+        title: 'Filter: Log Click'
+        description: Filter on whether or not clicks are logged for this URL
+        type: string
+        required: false
+        default: none
+        enum:
+        - none
+        - 'false'
+        - 'true'
+      action:
+        title: 'Filter: Action'
+        description: Filter on whether or not the action is 'block' or 'permit'
+        type: string
+        required: false
+        default: none
+        enum:
+        - none
+        - block
+        - permit
+      match_type:
+        title: 'Filter: Match Type'
+        description: Filter on whether or not the match type is 'explicit' or 'domain'
+        type: string
+        required: false
+        default: none
+        enum:
+        - none
+        - explicit
+        - domain
+      scheme:
+        title: 'Filter: Scheme'
+        description: Filter on whether or not the protocol is HTTP or HTTPS
+        type: string
+        required: false
+      disable_rewrite:
+        title: 'Filter: URL Rewrite'
+        description: Filter on whether or not rewriting of this URL in emails is enabled
+        type: string
+        required: false
+        default: none
+        enum:
+        - none
+        - 'false'
+        - 'true'
+      id:
+        title: 'Filter: ID'
+        description: Filter on the Mimecast secure ID of the managed URL
+        type: string
+        required: false
+    output:
+      response:
+        title: Managed URL
+        description: 'Managed URLs matching '
+        type: '[]managed_url'
+        required: false
+  permit_or_block_sender:
+    title: Permit or Block Sender
+    description: Permits or blocks a sender
+    input:
+      action:
+        title: Action
+        description: Either 'permit' (to bypass spam checks) or 'block' (to reject
+          the email)
+        type: string
+        required: true
+        default: block
+        enum:
+        - block
+        - permit
+      to:
+        title: To
+        description: The email address of the internal recipient
+        type: string
+        required: true
+      sender:
+        title: Sender
+        description: The email address of the external sender
+        type: string
+        required: true
+    output:
+      response:
+        title: Managed Sender
+        description: The Managed Sender that was created
+        type: '[]managed_sender'
+        required: false
+  create_blocked_sender_policy:
+    title: Create Blocked Sender Policy
+    description: Creates a blocked sender policy
+    input:
+      option:
+        title: Option
+        description: 'The block, option must be: no_action or block_sender'
+        type: string
+        required: true
+        default: block_sender
+        enum:
+        - block_sender
+        - no_action
+      description:
+        title: Description
+        description: A description for the policy which is kept with the email in
+          the archive for future reference
+        type: string
+        required: true
+      from_part:
+        title: From Part
+        description: 'Must be: envelope_from, header_from or both'
+        type: string
+        required: true
+        default: envelope_from
+        enum:
+        - envelope_from
+        - header_from
+        - both
+      from_type:
+        title: From Type
+        description: 'Can be one of: everyone, internal_addresses, external_addresses,
+          email_domain, profile_group or individual_email_address'
+        type: string
+        required: true
+        default: everyone
+        enum:
+        - everyone
+        - internal_addresses
+        - external_addresses
+        - email_domain
+        - profile_group
+        - individual_email_address
+      from_value:
+        title: From Value
+        description: 'Required if `From Type` is one of email_domain, profile_group,
+          individual_email_address. Expected values: If `From Type` is email_domain,
+          a domain name without the @ symbol. If `From Type` is profile_group, the
+          ID of the profile group. If `From Type` is individual_email_address, an
+          email address'
+        type: string
+        required: false
+      to_type:
+        title: To Type
+        description: 'Can be one of: everyone, internal_addresses, external_addresses,
+          email_domain, profile_group or individual_email_address'
+        type: string
+        required: true
+        default: everyone
+        enum:
+        - everyone
+        - internal_addresses
+        - external_addresses
+        - email_domain
+        - profile_group
+        - individual_email_address
+      to_value:
+        title: To Value
+        description: 'Required if `To Type` is one of email_domain, profile_group,
+          individual_email_address. Expected values: If `To Type` is email_domain,
+          a domain name without the @ symbol. If `To Type` is profile_group, the ID
+          of the profile group. If `To Type` is individual_email_address, an email
+          address'
+        type: string
+        required: false
+      source_ips:
+        title: Source IPs
+        description: A comma separated list of IP addresses using CIDR notation (X.X.X.X/XX).
+          When set the policy only applies for connections from matching addresses
+        type: string
+        required: false
+    output:
+      sender_policy:
+        title: Policy
+        description: The policy that was created
+        type: '[]sender_policy'
+        required: false
+  add_group_member:
+    title: Add Group Member
+    description: Add an email address or domain to a group
+    input:
+      id:
+        title: ID
+        description: The Mimecast ID of the group to add to
+        type: string
+        required: true
+      email_address:
+        title: Email Address
+        description: The email address of a user to add to a group. Use either emailAddress or domain
+        type: string
+        required: false
+      domain:
+        title: Domain
+        description: A domain to add to a group. Use either emailAddress or domain
+        type: string
+        required: false
+    output:
+      folder_id:
+        title: Folder ID
+        description: The Mimecast ID of the group that the user / domain was added to
+        type: string
+        required: false
+      email_address:
+        title: Email Address
+        description: The email address of the user that was added to the group
+        type: string
+        required: false
+      id:
+        title: ID
+        description: The Mimecast ID of the user / domain that was added to the group
+        type: string
+        required: false
+      internal:
+        title: Internal
+        description: If the user / doamin is internal or not
+        type: boolean
+        required: false
+  find_groups:
+    title: Find Groups
+    description: Find groups that match a given query
+    input:
+      query:
+        title: Query
+        description: A string to query for
+        type: string
+        required: false
+      source:
+        title: Source
+        description: A group source to filter on, either "cloud" or "ldap"
+        type: string
+        required: true
+        default: cloud
+        enum:
+        - cloud
+        - ldap
+    output:
+      groups:
+        title: Groups
+        description: A list of groups that mach the query
+        type: "[]group"
+        required: false
+  get_ttp_url_logs:
+    title: Get TTP URL Logs
+    description: Get TTP URL logs
+    input:
+      from:
+        title: From
+        description: Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day
+        type: string
+        required: false
+      to:
+        title: To
+        description: End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request
+        type: string
+        required: false
+      route:
+        title: Route
+        description: Filters logs by route, must be one of inbound, outbound, internal, or all
+        type: string
+        required: true
+        default: all
+        enum:
+        - all
+        - inbound
+        - outbound
+        - internal
+      scan_result:
+        title: Scan Result
+        description: Filters logs by scan result, must be one of clean, malicious, or all
+        type: string
+        required: true
+        default: all
+        enum:
+        - clean
+        - malicious
+        - all
+    output:
+      click_logs:
+        title: Click Logs
+        description: Click Logs
+        type: "[]click_logs"
+        required: false

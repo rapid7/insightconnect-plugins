@@ -1,0 +1,60 @@
+plugin_spec_version: v2
+name: ssh
+title: SSH
+description: The SSH protocol is a method for secure remote login from one computer
+  to another
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- ssh
+- remote
+- tunnel
+connection:
+  username:
+    type: credential_secret_key
+    description: User to run command as
+    required: true
+  password:
+    type: credential_secret_key
+    description: Password authentication or password to decrypt provided private key.
+      Either this or SSH private key is required
+    required: false
+  key:
+    type: credential_asymmetric_key
+    description: A base64 encoded SSH private key to use to authenticate to remote
+      server. A newline is required after the beginning and before the end marker
+    required: false
+  host:
+    type: string
+    description: Remote host to connect to. Can be over-ridden in actions
+    required: true
+  port:
+    type: integer
+    description: Remote port to use
+    default: 22
+    required: true
+  use_key:
+    title: Use Keys
+    description: True to connect via key, false to connect via password
+    type: boolean
+    required: true
+actions:
+  run:
+    title: Run Remote Command
+    description: Run remote command
+    input:
+      host:
+        type: string
+        description: Host to run remote commands. If not provided, the connection
+          host will be used
+        required: false
+      command:
+        description: Command to execute on remote host
+        type: string
+        required: true
+    output:
+      results:
+        description: Output results
+        type: string
+        required: true

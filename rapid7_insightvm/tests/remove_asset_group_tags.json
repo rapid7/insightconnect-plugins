@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "remove_asset_group_tags",
+    "meta": {},
+    "input": {
+      "id": 20
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

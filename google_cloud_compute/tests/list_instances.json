@@ -1,0 +1,34 @@
+{
+  "body": {
+    "action": "list_instances",
+    "input": {
+      "filter": "",
+      "orderBy": "",
+      "zone": "",
+      "maxResults": 0,
+      "pageToken": ""
+    },
+    "connection": {
+      "private_key": {
+        "domain": "",
+        "token": ""
+      },
+      "private_key_id": {
+        "domain": "",
+        "token": ""
+      },
+      "token_uri": "https://accounts.google.com/o/oauth2/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "host": "https://www.googleapis.com/compute/",
+      "version": "v1",
+      "client_email": "",
+      "client_id": "",
+      "project_id": "",
+      "client_x509_cert_url": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

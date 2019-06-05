@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "split_to_list",
+    "meta": {},
+    "input": {
+      "delimiter": " ",
+      "string": "This is a sentence"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

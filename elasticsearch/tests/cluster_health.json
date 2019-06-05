@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "cluster_health",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "credentials": {
+        "password": "t",
+        "username": "tt"
+      },
+      "url": "",
+      "use_authentication": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_details_for_specific_event",
+    "meta": {},
+    "input": {
+      "event_id": "8a57e38b24ca11e9ae3ab1dc32845eba"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "connector": "",
+      "url": "https://api5.conferdeploy.net"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

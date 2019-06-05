@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action":"match_base64",
+        "input": {
+            "pattern": "hello",
+            "data": "aGVsbG8gdGhlcmUgaGVsbG8gaGUgc2VzaCBhb3VlIHN0aGFzb2VzdCAnLixwdGVvb28n",
+            "behavior": "Only matching"
+        },
+        "connection": null,
+        "meta": {}
+    },
+    "version": "v1",
+    "type": "action_start"
+}

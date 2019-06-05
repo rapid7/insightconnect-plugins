@@ -1,0 +1,191 @@
+plugin_spec_version: v2
+name: google_drive
+title: Google Drive
+description: Store, access, and share your files in one secure place
+version: 2.1.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- google
+- google drive
+- cloud storage
+types:
+  file_info:
+    file_name:
+      title: File Name
+      type: string
+    file_id:
+      title: File ID
+      type: string
+connection:
+  admin_user:
+    title: Admin User
+    description: Admin user to impersonate, e.g. admin@domain.com
+    type: string
+    required: true
+  project_id:
+    title: Project ID
+    description: Project ID from service credentials
+    type: string
+    required: true
+  private_key_id:
+    title: Private Key ID
+    description: Private Key ID from service credentials
+    type: string
+    required: true
+  private_key:
+    title: Private Key
+    description: Private Key from service credentials
+    type: credential_asymmetric_key
+    required: true
+  client_email:
+    title: Client Email
+    description: Client email from service credentials
+    type: string
+    required: true
+  client_id:
+    title: Client ID
+    description: Client ID
+    type: string
+    required: true
+  client_x509_cert_url:
+    title: Client X509 Cert URL
+    description: X509 cert URL from service credentials
+    type: string
+    required: true
+  auth_uri:
+    title: Auth URI
+    description: OAUTH2 Auth URI
+    type: string
+    required: true
+    default: https://accounts.google.com/o/oauth2/auth
+  token_uri:
+    title: Token URI
+    description: OAUTH2 Token URI
+    type: string
+    required: true
+    default: https://accounts.google.com/o/oauth2/token
+  auth_provider_x509_cert_url:
+    title: Auth Provider Cert URL
+    description: OAUTH2 Auth Provider x509 Cert URL
+    type: string
+    required: true
+    default: https://www.googleapis.com/oauth2/v1/certs
+actions:
+  get_file_contents:
+    title: Get File Contents
+    description: Get the contents of a file on Google Drive
+    input:
+      file_id:
+        title: File ID
+        description: The file ID for the file that will be returned
+        type: string
+        required: true
+      mime_type:
+        title: MIME Type
+        description: The MIME Type to export the file as e.g. */* , text/plain
+        type: string
+        required: true
+    output:
+      file:
+        title: File
+        description: The file in bytes
+        type: bytes
+        required: false
+  upload_file:
+    title: Upload File
+    description: Upload a file to Google Drive
+    input:
+      file:
+        title: File
+        description: The file to upload
+        type: file
+        required: true
+      google_file_type:
+        title: Google File Type
+        description: The file type that Google will convert the file to
+        type: string
+        required: true
+        enum:
+        - Docs
+        - Sheets
+        - Slides
+      folder_id:
+        title: Folder ID
+        description: Folder to put the file in
+        type: string
+        required: false
+    output:
+      file_id:
+        title: File ID
+        description: Return the ID of the file created on Google Drive
+        type: string
+        required: false
+      file_link:
+        title: File Link
+        description: A direct link to the created file
+        type: string
+        required: false
+  overwrite_file:
+    title: Overwrite File
+    description: Overwrites a file with new data
+    input:
+      content:
+        title: Content
+        description: The new data that will overwrite the old file
+        type: bytes
+        required: true
+      file_id:
+        title: File ID
+        description: The file ID for the file that will be overwritten
+        type: string
+        required: true
+      new_file_name:
+        title: New File Name
+        description: Select a new file name. e.g. testfile.csv
+        type: string
+        required: false
+      new_mime_type:
+        title: New MIME Type
+        description: Select a new MIME type for the file
+        type: string
+        required: true
+        enum:
+        - Docs
+        - Sheets
+        - Slides
+    output:
+      file_id:
+        title: File ID
+        description: Return the ID of the file created on Google Drive
+        type: string
+        required: false
+  find_file_by_name:
+    title: Find File by Name
+    description: Find a file ID
+    input:
+      filename_operator:
+        title: Filename Operator
+        description: How the filename search will be performed. =,!=, or contains
+        type: string
+        required: true
+        enum:
+        - '='
+        - '!='
+        - contains
+      filename:
+        title: Filename
+        description: The name of the file to search for
+        type: string
+        required: true
+      parent_id:
+        title: Parent ID
+        description: The ID of the parent folder
+        type: string
+        required: false
+    output:
+      files_found:
+        title: Files Found
+        description: Returns a list of file names and their IDs
+        type: '[]file_info'
+        required: false

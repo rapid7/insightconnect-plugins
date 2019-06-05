@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "post_metrics",
+    "meta": {},
+    "input": {
+      "series": [{"metric": "test.metric", "type": "count", "points": [[1554156247, 1]], "interval": 20}]
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "app_key": "",
+      "url": "https://api.datadoghq.com/api/v1/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

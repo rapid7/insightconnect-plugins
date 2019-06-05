@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "hipposcore",
+    "meta": {},
+    "input": {
+      "observables": [{
+        "value": "perugemstones.com",
+        "type": "domain"
+      },{
+        "value": "223.184.173.74",
+        "type": "ip"
+      }]
+    },
+    "connection": {
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

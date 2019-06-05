@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "upper",
+    "meta": {},
+    "input": {
+      "string": "ldap"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

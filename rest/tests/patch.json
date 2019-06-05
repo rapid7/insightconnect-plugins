@@ -1,0 +1,22 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "input": {
+      "route": "/patch",
+      "headers": { "Referer": "https://google.com" },
+      "body": {}
+    },
+    "connection": {
+      "default_headers": { "User-Agent": "Mozilla/5.0" },
+      "base_url": "https://httpbin.org/",
+      "ssl_verify": false,
+      "basic_auth_credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "action": "patch",
+    "meta": {}
+  }
+}

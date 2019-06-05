@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_finished_scans",
+    "input": {},
+    "connection": {
+      "ssl_verify": false,
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "timeout": 10,
+      "server": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

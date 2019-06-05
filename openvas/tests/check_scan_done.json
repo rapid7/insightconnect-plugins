@@ -1,0 +1,24 @@
+{
+  "body": {
+    "input": {
+      "scan_id": "9a849831-23a0-48ba-8e8f-a3deeaa45f7e",
+      "poll": 0.1666
+    },
+    "connection": {
+      "ssl_verify": false,
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "timeout": 10,
+      "server": "192.168.2.183:9390"
+    },
+    "trigger": "check_scan_done",
+    "meta": {},
+    "dispatcher": {
+      "url": ""
+    }
+  },
+  "version": "v1",
+  "type": "trigger_start"
+}

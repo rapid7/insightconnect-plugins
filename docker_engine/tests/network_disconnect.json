@@ -1,0 +1,25 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "action": "network_disconnect",
+    "input": {
+      "container_id": "4546448f27b38e30a8205e06cceafe784ca7cd6f61ab4a575f96f7c2574b830d",
+      "network_id": "823dd87a6baeb522a2edcd4fbb6b96c84cc64ab8ebef2c50ca7b96a271ae92cd"
+    },
+    "connection": {
+      "api_version": "auto",
+      "ca_cert": {
+        "secretKey": ""
+      },
+      "client_cert": {
+        "secretKey": ""
+      },
+      "client_key": {
+        "secretKey": ""
+      },
+      "url": "https://localhost:2376"
+    },
+    "meta": {}
+  }
+}

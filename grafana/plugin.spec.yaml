@@ -1,0 +1,297 @@
+plugin_spec_version: v2
+name: grafana
+title: Grafana
+vendor: rapid7
+status: ["unsupported"]
+description: Manage Grafana organizations and users
+version: 1.0.0
+tags:
+- grafana
+- agile
+types:
+  organization_user:
+    orgId:
+      type: integer
+      required: false
+    userId:
+      type: integer
+      required: false
+    email:
+      type: string
+      required: false
+    login:
+      type: string
+      required: false
+    role:
+      type: string
+      enum:
+      - Admin
+      - Editor
+      - Viewer
+      required: false
+  search_user:
+    id:
+      type: integer
+      required: false
+    name:
+      type: string
+      required: false
+    login:
+      type: string
+      required: false
+    email:
+      type: string
+      required: false
+    isAdmin:
+      type: boolean
+      required: false
+  single_user:
+    orgId:
+      type: integer
+      required: false
+    name:
+      type: string
+      required: false
+    login:
+      type: string
+      required: false
+    email:
+      type: string
+      required: false
+    isGrafanaAdmin:
+      type: boolean
+      required: false
+    theme:
+      type: string
+      required: false
+connection:
+  url:
+    title: Grafana URL
+    description: Grafana URL/Address
+    type: string
+    required: true
+  port:
+    title: Grafana Port
+    description: Grafana Port
+    type: integer
+    default: 3000
+    required: false
+  basic_auth:
+    title: Basic Authentication
+    description: Basic authentication via admin login credentials
+    type: credential_username_password
+    required: false
+  token_auth:
+    title: Token Authentication
+    description: Token authentication via admin API token
+    type: credential_secret_key
+    required: false
+actions:
+  update_organization:
+    title: Update Organization
+    description: Update the name of the organization
+    input:
+      organization_id:
+        title: Organization ID
+        description: Unique ID of the organization eg. 123 (-1 implies current)
+        type: integer
+        default: -1
+        required: false
+      name:
+        title: New Organization Name
+        description: New name for organization
+        type: string
+        required: true
+    output:
+      success:
+        description: True, if organization name was updated
+        type: boolean
+        required: false
+        title: Success
+      message:
+        description: Grafana API response, if any
+        type: string
+        required: false
+        title: Message
+  get_organization_users:
+    title: Get Organization Users
+    description: Get all users within the organization
+    input:
+      organization_id:
+        title: Organization ID
+        description: Unique ID of the organization eg. 123 (-1 implies current)
+        type: integer
+        default: -1
+        required: false
+    output:
+      users:
+        description: List of all organization users
+        type: '[]organization_user'
+        required: false
+        title: Users List
+  add_organization_user:
+    title: Add Organization User
+    description: Add a global user to the organization
+    input:
+      organization_id:
+        title: Organization ID
+        description: Unique ID of the organization eg. 123 (-1 implies current)
+        type: integer
+        default: -1
+        required: false
+      login_or_email:
+        title: Username or Email ID
+        description: Username or Email ID of the global user
+        type: string
+        required: true
+      role:
+        title: User Role
+        description: Role for the global user in the organization
+        type: string
+        enum:
+        - Admin
+        - Editor
+        - Viewer
+        required: true
+    output:
+      success:
+        description: True, if the user was added
+        type: boolean
+        required: false
+        title: Success
+      message:
+        description: Grafana API response, if any
+        type: string
+        required: false
+        title: Message
+  update_organization_user:
+    title: Update Organization User
+    description: Updates the role of the user in actual organization
+    input:
+      organization_id:
+        title: Organization ID
+        description: Unique ID of the organization eg. 123 (-1 implies current)
+        type: integer
+        default: -1
+        required: false
+      user_id:
+        title: User ID
+        description: Unique ID of the user eg. 123
+        type: integer
+        required: true
+      role:
+        title: User Role
+        description: New role for the user
+        type: string
+        enum:
+        - Admin
+        - Editor
+        - Viewer
+        required: true
+    output:
+      success:
+        description: True, if the user was updated
+        type: boolean
+        required: false
+        title: Success
+      message:
+        description: Grafana API response, if any
+        type: string
+        required: false
+        title: Message
+  delete_organization_user:
+    title: Delete Organization User
+    description: Delete user in actual organization
+    input:
+      organization_id:
+        title: Organization ID
+        description: Unique ID of the organization eg. 123 (-1 implies current)
+        type: integer
+        default: -1
+        required: false
+      user_id:
+        title: User ID
+        description: Unique ID of the user eg. 123
+        type: integer
+        required: true
+    output:
+      success:
+        description: True, if the user was deleted
+        type: boolean
+        required: false
+        title: Success
+      message:
+        description: Grafana API response, if any
+        type: string
+        required: false
+        title: Message
+  search_users:
+    title: Search Users
+    description: Search users
+    input: null
+    output:
+      users:
+        description: List of all users
+        type: '[]search_user'
+        required: false
+        title: Users List
+  get_user:
+    title: Get User
+    description: Get single user by ID
+    input:
+      user_id:
+        title: User ID
+        description: Unique ID of the user eg. 123
+        type: integer
+        required: true
+    output:
+      user:
+        description: Details of the requested user
+        type: single_user
+        required: false
+        title: User
+  delete_global_user:
+    title: Delete Global User
+    description: Delete global user
+    input:
+      user_id:
+        title: User ID
+        description: Unique ID of the user eg. 123
+        type: integer
+        required: true
+    output:
+      success:
+        description: True, if the user was deleted
+        type: boolean
+        required: false
+        title: Success
+      message:
+        description: Grafana API response, if any
+        type: string
+        required: false
+        title: Message
+  do_proxied_datasource_call:
+    title: Proxy Call to Data Source
+    description: Proxies all calls to the actual datasource
+    input:
+      datasource_id:
+        title: Datasource ID
+        description: Unique ID of the Datasource eg. 123
+        type: integer
+        required: true
+      path:
+        title: Call Path
+        description: Path to be called at datasource eg. `/logstash/_search`
+        type: string
+        required: false
+      parameters:
+        title: Query Parameters
+        description: Query Parameters, if any, to be used for the request
+        type: object
+        required: false
+    output:
+      response:
+        description: Data returned from the datasource
+        type: object
+        required: false
+        title: Response Data

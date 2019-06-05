@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://api.mxtoolbox.com/api/v1/"
+    },
+    "action": "txt",
+    "input": {
+      "hostname": "example.com"
+    }
+  },
+  "type": "action_start"
+}

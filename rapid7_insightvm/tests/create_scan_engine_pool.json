@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "create_scan_engine_pool",
+    "meta": {},
+    "input": {
+      "name": "Komand Scan Engine Pool",
+      "engines": [4]
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

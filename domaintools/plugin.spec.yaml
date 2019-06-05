@@ -1,0 +1,1056 @@
+plugin_spec_version: v2
+name: domaintools
+title: DomainTools
+vendor: rapid7
+status: ["unsupported"]
+description: Domain name search tool that allows a wildcard search, monitoring of
+  WHOIS record changes and history caching, as well as Reverse IP queries
+version: 1.0.0
+tags:
+- domain
+- whois
+- ip
+- domain
+- intel
+enable_cache: true
+language: python
+types:
+  registrar:
+    abuse_contact_email:
+      type: string
+      required: false
+    abuse_contact_phone:
+      type: string
+      required: false
+    iana_id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+    whois_server:
+      type: string
+      required: false
+  ip_address:
+    events:
+      type: int
+      required: false
+    product_url:
+      type: string
+      required: false
+    timespan_in_years:
+      type: int
+      required: false
+  brand_monitor_alerts:
+    domain:
+      type: string
+      required: false
+    status:
+      type: string
+      required: false
+  brand_monitor_response:
+    alerts:
+      type: '[]brand_monitor_alerts'
+      required: false
+    date:
+      type: string
+      required: false
+    exclude:
+      type: '[]object'
+      required: false
+    limit:
+      type: int
+      required: false
+    new:
+      type: bool
+      required: false
+    on-hold:
+      type: bool
+      required: false
+    query:
+      type: string
+      required: false
+    total:
+      type: int
+      required: false
+    utf8:
+      type: bool
+      required: false
+  ip_monitor_response:
+    alerts:
+      type: '[]object'
+      required: false
+    date:
+      type: string
+      required: false
+    ip_address:
+      type: string
+      required: false
+    limit:
+      type: int
+      required: false
+    page:
+      type: int
+      required: false
+    page_count:
+      type: int
+      required: false
+    total:
+      type: string
+      required: false
+  name_server_monitor_alerts:
+    action:
+      type: string
+      required: false
+    domain:
+      type: string
+      required: false
+    new_name_server:
+      type: string
+      required: false
+    old_name_server:
+      type: string
+      required: false
+  name_server_monitor_response:
+    alerts:
+      type: '[]name_server_monitor_alerts'
+      required: false
+    date:
+      type: string
+      required: false
+    limit:
+      type: int
+      required: false
+    name_server:
+      type: string
+      required: false
+    page:
+      type: int
+      required: false
+    page_count:
+      type: int
+      required: false
+    total:
+      type: string
+      required: false
+  query_info:
+    active_only:
+      type: bool
+      required: false
+    anchor_left:
+      type: bool
+      required: false
+    anchor_right:
+      type: bool
+      required: false
+    deleted_only:
+      type: bool
+      required: false
+    exclude_query:
+      type: string
+      required: false
+    has_hyphen:
+      type: bool
+      required: false
+    has_number:
+      type: bool
+      required: false
+    limit:
+      type: int
+      required: false
+    max_length:
+      type: int
+      required: false
+    min_length:
+      type: int
+      required: false
+    page:
+      type: int
+      required: false
+    total_results:
+      type: int
+      required: false
+  domain_search_response:
+    query_info:
+      type: query_info
+      required: false
+    results:
+      type: '[]object'
+      required: false
+  ip_addresses:
+    domain_count:
+      type: int
+      required: false
+    domain_names:
+      type: '[]string'
+      required: false
+    ip_address:
+      title: IP Address
+      type: string
+      required: false
+  whois:
+    earliest_event:
+      type: string
+      required: false
+    product_url:
+      type: string
+      required: false
+    records:
+      type: int
+      required: false
+  domain_profile_history:
+    ip_address:
+      title: IP Address
+      type: ip_address
+      required: false
+    name_server:
+      type: ip_address
+      required: false
+    registrar:
+      type: registrar
+      required: false
+    whois:
+      type: whois
+      required: false
+  name_servers:
+    product_url:
+      type: string
+      required: false
+    server:
+      type: string
+      required: false
+  registrant:
+    domains:
+      type: int
+      required: false
+    name:
+      type: string
+      required: false
+    product_url:
+      type: string
+      required: false
+  registration:
+    created:
+      type: string
+      required: false
+    expires:
+      type: string
+      required: false
+    registrar:
+      type: string
+      required: false
+    statuses:
+      type: '[]string'
+      required: false
+    updated:
+      type: string
+      required: false
+  seo:
+    product_url:
+      type: string
+      required: false
+    score:
+      type: int
+      required: false
+  server:
+    ip_address:
+      title: IP Address
+      type: string
+      required: false
+    other_domains:
+      type: int
+      required: false
+    product_url:
+      type: string
+      required: false
+  meta:
+    description:
+      type: string
+      required: false
+  website_data:
+    meta:
+      type: meta
+      required: false
+    product_url:
+      type: string
+      required: false
+    response_code:
+      type: int
+      required: false
+    server:
+      type: string
+      required: false
+    title:
+      type: string
+      required: false
+  domain_profile_response:
+    history:
+      type: domain_profile_history
+      required: false
+    name_servers:
+      type: '[]name_servers'
+      required: false
+    registrant:
+      type: registrant
+      required: false
+    registration:
+      type: registration
+      required: false
+    seo:
+      type: seo
+      required: false
+    server:
+      type: server
+      required: false
+    website_data:
+      type: website_data
+      required: false
+  ip_history:
+    action:
+      type: string
+      required: false
+    action_in_words:
+      type: string
+      required: false
+    actiondate:
+      type: string
+      required: false
+    domain:
+      type: string
+      required: false
+    post_ip:
+      title: Post IP
+      type: string
+      required: false
+    pre_ip:
+      title: Pre IP
+      type: string
+      required: false
+  registrar_history:
+    date_created:
+      type: string
+      required: false
+    date_expires:
+      type: string
+      required: false
+    date_lastchecked:
+      type: string
+      required: false
+    date_updated:
+      type: string
+      required: false
+    domain:
+      type: string
+      required: false
+    registrar:
+      type: string
+      required: false
+    registrartag:
+      type: string
+      required: false
+  hosting_history_response:
+    domain_name:
+      type: string
+      required: false
+    ip_history:
+      title: IP History
+      type: '[]ip_history'
+      required: false
+    nameserver_history:
+      type: '[]object'
+      required: false
+    registrar_history:
+      type: '[]registrar_history'
+      required: false
+  reputation_response:
+    domain:
+      type: string
+      required: false
+    risk_score:
+      type: int
+      required: false
+  admin:
+    city:
+      type: string
+      required: false
+    country:
+      type: string
+      required: false
+    email:
+      type: string
+      required: false
+    fax:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    org:
+      type: string
+      required: false
+    phone:
+      type: string
+      required: false
+    postal:
+      type: string
+      required: false
+    state:
+      type: string
+      required: false
+    street:
+      type: '[]string'
+      required: false
+  contacts:
+    admin:
+      type: admin
+      required: false
+    billing:
+      type: admin
+      required: false
+    registrant:
+      type: admin
+      required: false
+    tech:
+      type: admin
+      required: false
+  other_properties:
+    dnssec:
+      type: string
+      required: false
+    registry_id:
+      type: string
+      required: false
+  parsed_whois:
+    contacts:
+      type: contacts
+      required: false
+    created_date:
+      type: string
+      required: false
+    domain:
+      type: string
+      required: false
+    expired_date:
+      type: string
+      required: false
+    name_servers:
+      type: '[]string'
+      required: false
+    other_properties:
+      type: other_properties
+      required: false
+    registrar:
+      type: registrar
+      required: false
+    statuses:
+      type: '[]string'
+      required: false
+    updated_date:
+      type: string
+      required: false
+  parsed_whois_response:
+    name_servers:
+      type: '[]string'
+      required: false
+    parsed_whois:
+      type: parsed_whois
+      required: false
+    record_source:
+      type: string
+      required: false
+    registrant:
+      type: string
+      required: false
+    registration:
+      type: registration
+      required: false
+    whois:
+      type: whois
+      required: false
+  registrant_monitor_alerts:
+    created:
+      type: string
+      required: false
+    current_owner:
+      type: string
+      required: false
+    domain:
+      type: string
+      required: false
+    last_owner:
+      type: string
+      required: false
+    match_type:
+      type: string
+      required: false
+    modified:
+      type: string
+      required: false
+  registrant_monitor_response:
+    alerts:
+      type: '[]registrant_monitor_alerts'
+      required: false
+    date:
+      type: string
+      required: false
+    limit:
+      type: int
+      required: false
+    query:
+      type: string
+      required: false
+    total:
+      type: int
+      required: false
+  reverse_ip_response:
+    ip_addresses:
+      title: IP Addresses
+      type: '[]ip_addresses'
+      required: false
+  reverse_ip_whois_response:
+    country:
+      type: string
+      required: false
+    ip_from:
+      title: IP From
+      type: string
+      required: false
+    ip_from_alloc:
+      title: IP From Alloc
+      type: string
+      required: false
+    ip_to:
+      title: IP To
+      type: string
+      required: false
+    ip_to_alloc:
+      title: IP To Alloc
+      type: string
+      required: false
+    organization:
+      type: string
+      required: false
+    range:
+      type: string
+      required: false
+    record_date:
+      type: string
+      required: false
+    record_ip:
+      title: Record IP
+      type: string
+      required: false
+    server:
+      type: string
+      required: false
+    whois_record:
+      type: string
+      required: false
+  domain_count:
+    current:
+      type: int
+      required: false
+    historic:
+      type: int
+      required: false
+  reverse_whois_response:
+    domain_count:
+      type: domain_count
+      required: false
+    report_cost:
+      type: domain_count
+      required: false
+    report_price:
+      type: domain_count
+      required: false
+  whois_whois:
+    date:
+      type: string
+      required: false
+    record:
+      type: string
+      required: false
+  whois_response:
+    name_servers:
+      type: '[]string'
+      required: false
+    record_source:
+      type: string
+      required: false
+    registrant:
+      type: string
+      required: false
+    registration:
+      type: registration
+      required: false
+    whois:
+      type: whois_whois
+      required: false
+  whois_history_whois:
+    name_servers:
+      type: '[]string'
+      required: false
+    record:
+      type: string
+      required: false
+    registrant:
+      type: string
+      required: false
+    registration:
+      type: registration
+      required: false
+  history:
+    date:
+      type: string
+      required: false
+    is_private:
+      type: int
+      required: false
+    whois:
+      type: whois_history_whois
+      required: false
+  whois_history_response:
+    history:
+      type: '[]history'
+      required: false
+    record_count:
+      type: int
+      required: false
+  name_server:
+    hostname:
+      type: string
+      required: false
+    primary:
+      type: int
+      required: false
+    secondary:
+      type: int
+      required: false
+    total:
+      type: int
+      required: false
+  reverse_name_server_response:
+    name_server:
+      type: name_server
+      required: false
+    primary_domains:
+      type: '[]string'
+      required: false
+    secondary_domains:
+      type: '[]object'
+      required: false
+connection:
+  username:
+    type: string
+    description: Enter the API username
+    required: true
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: Enter the API key
+    required: true
+actions:
+  brand_monitor:
+    title: Brand Monitor
+    description: Searches across all new domain registrations worldwide
+    input:
+      query:
+        type: string
+        description: One or more terms separated by the pipe character
+        required: true
+      exclude:
+        type: string
+        description: Domain names with these words will be excluded from the result
+          set. Separate multiple terms with the pipe character
+        required: false
+      domain_status:
+        type: string
+        description: Sets the scope of domain names to search
+        enum:
+        - new
+        - on-hold
+        required: false
+      days_back:
+        type: integer
+        description: Use this parameter when you need to search domains registered
+          up to six days prior to the current date
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        required: false
+    output:
+      response:
+        type: brand_monitor_response
+        description: Response
+        required: false
+  ip_monitor:
+    title: IP Monitor
+    description: Searches the daily activity of all our monitored TLDs on any given
+      IP address
+    input:
+      query:
+        type: string
+        description: The IP Address you wish to query (i.e. 65.55.53.233)
+        required: true
+      days_back:
+        type: integer
+        description: Use this parameter when you need to search domain changes up
+          to six days prior to the current date
+        default: 0
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        required: false
+      page:
+        type: integer
+        description: If the result set is larger than 1000 records for a given day,
+          request additional pages with this parameter
+        default: 1
+        required: false
+    output:
+      response:
+        type: ip_monitor_response
+        description: Response
+        required: false
+  name_server_monitor:
+    title: Name Server Monitor
+    description: 'Searches the daily activity of all our monitored TLDs on any given
+      name server. '
+    input:
+      query:
+        type: string
+        description: The hostname of the Name Server you wish to query ( i.e. dynect.net
+          )
+        required: true
+      days_back:
+        type: string
+        description: Use this parameter search domain changes up to six days prior
+          to the current date
+        default: 0
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        required: false
+      page:
+        type: integer
+        description: If the result set is larger than 1000 records for a given day,
+          request additional pages with this parameter
+        default: 1
+        required: false
+    output:
+      response:
+        description: Response
+        type: name_server_monitor_response
+        required: false
+  domain_search:
+    title: Domain Search
+    description: Searches for domain names that match your specific search string
+    input:
+      query:
+        type: string
+        description: Query string — each term in the query string must be at least
+          three characters long
+        required: true
+      exclude_query:
+        type: string
+        description: Terms to exclude from matching — each term in the query string
+          must be at least three characters long
+        required: false
+      max_length:
+        type: integer
+        description: Limit the maximum domain character count
+        default: 25
+        required: false
+      min_length:
+        type: integer
+        description: Limit the minimum domain character count
+        default: 1
+        required: false
+      has_hyphen:
+        type: boolean
+        description: Return results with hyphens in the domain name
+        default: true
+        required: false
+      has_number:
+        type: boolean
+        description: Return results with numbers in the domain name
+        default: true
+        required: false
+      active_only:
+        type: boolean
+        description: Return only domains currently registered
+        default: false
+        required: false
+      deleted_only:
+        type: boolean
+        description: Return only domains previously registered but not currently registered
+        default: false
+        required: false
+      anchor_left:
+        type: boolean
+        description: Return only domains that start with the query term
+        default: false
+        required: false
+      anchor_right:
+        type: boolean
+        description: Return only domains that end with the query term
+        default: false
+        required: false
+      page:
+        type: integer
+        description: If the result set is larger than 1000 records for a given day,
+          request additional pages with this parameter
+        default: 1
+        required: false
+    output:
+      response:
+        description: Response
+        type: domain_search_response
+        required: false
+  domain_profile:
+    title: Domain Profile
+    description: Provides basic domain name registration details and a preview of
+      additional data
+    input:
+      domain:
+        type: string
+        description: Domain name you wish to query
+        required: true
+    output:
+      response:
+        description: Response
+        type: domain_profile_response
+        required: false
+  hosting_history:
+    title: Hosting History
+    description: Provides a list of changes that have occurred in a Domain Name\'s
+      registrar, IP address, and name servers
+    input:
+      domain:
+        type: string
+        description: Domain name you wish to query
+        required: true
+    output:
+      response:
+        description: Response
+        type: hosting_history_response
+        required: false
+  reputation:
+    title: Reputation
+    description: Retrieves reputation score of specified domain name
+    input:
+      domain:
+        type: string
+        description: Input domain for which the risk score is desired
+        required: true
+      include_reasons:
+        type: boolean
+        description: Return a list of reasons for the risk score determination
+        default: false
+        required: false
+    output:
+      response:
+        description: Response
+        type: reputation_response
+        required: false
+  parsed_whois:
+    title: Parsed WHOIS
+    description: Provides parsed information extracted from the raw WHOIS record
+    input:
+      domain:
+        type: string
+        description: Domain name you wish to query
+        required: true
+    output:
+      response:
+        description: Response
+        type: parsed_whois_response
+        required: false
+  registrant_monitor:
+    title: Registrant Monitor
+    description: Searches the ownership (WHOIS) records of domain names for specific
+      search terms
+    input:
+      query:
+        type: string
+        description: One or more terms separated by the pipe character
+        required: true
+      exclude:
+        type: string
+        description: WHOIS records with these words will be excluded from the result
+          set. Separate multiple terms with the pipe character
+        required: false
+      days_back:
+        type: integer
+        description: Use this parameter in exceptional circumstances where you need
+          to search domains registered up to six days prior to the current date
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        required: false
+      limit:
+        type: integer
+        description: Limit the number of matched domain names that are returned in
+          your result set
+        required: false
+    output:
+      response:
+        description: Response
+        type: registrant_monitor_response
+        required: false
+  reverse_ip:
+    title: Reverse IP
+    description: Provides a list of domain names that share the same Internet host
+      (i.e. the same IP address)
+    input:
+      domain:
+        type: string
+        description: Domain name you wish to query
+        required: true
+      limit:
+        type: integer
+        description: Limits the size of the domain list than can appear in a response
+        required: false
+    output:
+      response:
+        description: Response
+        type: reverse_ip_response
+        required: false
+  reverse_ip_whois:
+    title: Reverse IP WHOIS
+    description: Provides a list of IP network ranges with WHOIS records that match
+      a specific query
+    input:
+      ip:
+        title: IP
+        type: string
+        description: Required for single IP result
+        required: false
+      query:
+        type: string
+        description: A space separated list of free text query terms
+        required: false
+      country:
+        type: string
+        description: Limits results to IP addresses allocated to an entity with a
+          particular country
+        required: false
+      server:
+        type: string
+        description: Limits results to ranges from a particular WHOIS server
+        required: false
+      include_total_count:
+        type: boolean
+        description: Returns the total number of results for a query
+        default: false
+        required: false
+      page:
+        type: string
+        description: Providing the page number allows access to additional pages of
+          data
+        required: false
+    output:
+      response:
+        description: Response
+        type: reverse_ip_whois_response
+        required: false
+  reverse_whois:
+    title: Reverse WHOIS
+    description: Provides a list of domain names that share the same Registrant Information
+    input:
+      terms:
+        type: string
+        description: List of one or more terms to search for in the WHOIS record,
+          separated with the pipe character
+        required: true
+      exclude:
+        type: string
+        description: Domain names with WHOIS records that match these terms will be
+          excluded from the result set. Separate multiple terms with the pipe character
+        required: false
+      scope:
+        type: string
+        description: Sets the scope of the report to include only current WHOIS records,
+          or to include both current and historic records
+        enum:
+        - current
+        - historic
+        required: false
+      mode:
+        type: string
+        description: Quote only lists the size and retail price of the query whiles
+          purchase includes the complete list of domain names
+        required: false
+    output:
+      response:
+        description: Response
+        type: reverse_whois_response
+        required: false
+  whois:
+    title: WHOIS
+    description: Provides the ownership record for a domain name or IP address with
+      basic registration details
+    input:
+      query:
+        type: string
+        description: Domain name or an IP address to perform a whois lookup
+        required: true
+    output:
+      response:
+        description: Response
+        type: whois_response
+        required: false
+  whois_history:
+    title: WHOIS History
+    description: Provides a list of historic WHOIS records for a domain name
+    input:
+      domain:
+        type: string
+        description: Domain name you wish to query
+        required: true
+    output:
+      response:
+        description: Response
+        type: whois_history_response
+        required: false
+  reverse_name_server:
+    title: Reverse Name Server
+    description: Provides a list of domain names that share the same primary or secondary
+      name server
+    input:
+      domain:
+        type: string
+        description: Domain name you wish to query
+        required: true
+      limit:
+        type: integer
+        description: Limits the size of the domain list than can appear in a response
+        required: false
+    output:
+      response:
+        description: Response
+        type: reverse_name_server_response
+        required: false

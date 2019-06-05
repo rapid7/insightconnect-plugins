@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_scan_engines",
+    "meta": {},
+    "input": {
+      "name": "",
+      "address": ""
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

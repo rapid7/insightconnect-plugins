@@ -1,0 +1,615 @@
+plugin_spec_version: v2
+name: cuckoo
+title: Cuckoo Sandbox
+description: Analyze files and URLs with Cuckoo Sandbox
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- sandbox
+- malware
+- malware analysis
+types:
+  vpn:
+    name:
+      type: string
+    status:
+      type: string
+  guest:
+    id:
+      title: ID
+      type: integer
+    label:
+      type: string
+    manager:
+      type: string
+    name:
+      type: string
+    shutdown_on:
+      title: Shutdown On
+      type: date
+    started_on:
+      title: Started On
+      type: date
+    task_id:
+      title: Task ID
+      type: integer
+  file:
+    filename:
+      type: string
+    contents:
+      type: bytes
+  data:
+    sha1:
+      title: SHA1
+      type: string
+    sha256:
+      title: SHA256
+      type: string
+    sha512:
+      title: SHA512
+      type: string
+    md5:
+      title: MD5
+      type: string
+    ssdeep:
+      title: SSDeep Fuzzy Hash
+      type: string
+    id:
+      title: ID
+      type: integer
+    file_type:
+      title: File Type
+      type: string
+    file_size:
+      title: File Size
+      type: integer
+    crc32:
+      title: CRC-32
+      type: string
+  sample:
+    sha1:
+      title: SHA1
+      type: string
+    sha256:
+      title: SHA256
+      type: string
+    sha512:
+      title: SHA512
+      type: string
+    md5:
+      title: MD5
+      type: string
+    ssdeep:
+      title: SSDeep Fuzzy Hash
+      type: string
+    id:
+      title: ID
+      type: integer
+    file_type:
+      title: File Type
+      type: string
+    file_size:
+      title: File Size
+      type: integer
+    crc32:
+      title: CRC-32
+      type: string
+    error:
+      type: boolean
+  option:
+    option:
+      type: string
+    value:
+      type: string
+  task:
+    guest:
+      type: guest
+    category:
+      type: string
+    machine:
+      type: string
+    errors:
+      type: '[]string'
+    target:
+      type: string
+    package:
+      type: string
+    sample_id:
+      type: integer
+    custom:
+      type: string
+    owner:
+      type: string
+    priority:
+      type: integer
+    platform:
+      type: string
+    options:
+      type: '[]option'
+    status:
+      type: string
+    enforce_timeout:
+      title: Enforce Timeout?
+      type: boolean
+    timeout:
+      description: Timeout in seconds
+      type: integer
+    tags:
+      type: '[]string'
+    id:
+      title: ID
+      type: integer
+    added_on:
+      title: Added On
+      type: date
+    completed_on:
+      title: Completed On
+      type: date
+    clock:
+      type: date
+    route:
+      type: string
+    processing:
+      type: string
+    started_on:
+      title: Started On
+      type: date
+    submit_id:
+      type: integer
+    sample:
+      type: sample
+  machine:
+    id:
+      title: ID
+      type: integer
+    interface:
+      type: string
+    ip:
+      title: IP
+      type: string
+    label:
+      type: string
+    locked:
+      title: Locked?
+      type: boolean
+    locked_changed_on:
+      title: Date on which locked status was changed
+      type: date
+    name:
+      type: string
+    platform:
+      type: string
+    resultserver_ip:
+      title: Resultserver IP
+      type: string
+    resultserver_port:
+      title: Resultserver Port
+      type: integer
+    snapshot:
+      type: string
+    status:
+      type: string
+    status_changed_on:
+      description: Date on which status was changed
+      type: date
+    tags:
+      type: '[]string'
+  tasks:
+    completed:
+      type: integer
+    pending:
+      type: integer
+    reported:
+      type: integer
+    running:
+      type: integer
+    total:
+      type: integer
+  machines:
+    available:
+      type: integer
+    total:
+      type: integer
+  temporary:
+    total:
+      description: Total diskspace
+      type: integer
+    free:
+      description: Free diskspace
+      type: integer
+    used:
+      description: Used diskspace
+      type: integer
+  binaries:
+    total:
+      description: Total diskspace
+      type: integer
+    free:
+      description: Free diskspace
+      type: integer
+    used:
+      description: Used diskspace
+      type: integer
+  analyses:
+    total:
+      description: Total diskspace
+      type: integer
+    free:
+      description: Free diskspace
+      type: integer
+    used:
+      description: Used diskspace
+      type: integer
+  diskspace:
+    analyses:
+      type: analyses
+    binaries:
+      type: binaries
+    temporary:
+      type: temporary
+connection:
+  url:
+    description: Cuckoo Sandbox API URL
+    title: URL
+    type: string
+    required: true
+    default: http://localhost:8090/api
+actions:
+  submit_url:
+    title: Submit URL
+    description: Adds a file (from URL) to the list of pending tasks
+    input:
+      url:
+        title: URL
+        description: URL to analyze (multipart encoded content)
+        type: string
+        required: true
+    output:
+      task_id:
+        title: Task ID
+        type: integer
+        description: Task ID
+        required: true
+  submit_files:
+    title: Submit Files
+    description: Adds one or more files and/or files embedded in archives to the list
+      of pending tasks
+    input:
+      files:
+        type: '[]file'
+        description: 'List of files of the format: {''filename'': ''blah.exe'', ''contents'':
+          ''<b64-encoded-bytes>''}'
+        required: true
+    output:
+      task_id:
+        title: Task ID
+        type: integer
+        description: Task ID
+        required: true
+      submit_id:
+        title: Submit ID
+        type: integer
+        description: Submission ID
+        required: false
+      errors:
+        type: '[]string'
+        description: Errors if any
+        required: false
+  list_tasks:
+    title: List Tasks
+    description: Returns list of tasks
+    input:
+      limit:
+        description: Maximum number of returned tasks
+        type: integer
+        required: false
+      offset:
+        description: Data offset
+        type: integer
+        required: false
+    output:
+      tasks:
+        type: '[]task'
+        description: Cuckoo tasks
+        required: true
+  view_task:
+    title: View Task
+    description: Returns details on the task associated with the specified ID
+    input:
+      task_id:
+        title: Task ID
+        type: integer
+        required: true
+        description: Task ID
+    output:
+      task:
+        type: task
+        description: Cuckoo task
+        required: true
+  reschedule_task:
+    title: Reschedule Task
+    description: Reschedule a task with the specified ID and priority (default priority
+      is 1)
+    input:
+      task_id:
+        title: Task ID
+        type: integer
+        required: true
+        description: Task ID
+      priority:
+        type: integer
+        description: Priority
+        required: false
+    output:
+      task_id:
+        title: Task ID
+        type: integer
+        description: Task ID
+        required: true
+  delete_task:
+    title: Delete Task
+    description: Removes the given task from the database and deletes the results
+    input:
+      task_id:
+        title: Task ID
+        type: integer
+        required: true
+        description: Task ID
+    output:
+      error:
+        title: Error
+        description: Error true or false
+        type: boolean
+        required: true
+      error_value:
+        title: Error message
+        description: Error message
+        type: string
+        required: true
+      message:
+        title: Message
+        description: Message associated with status code
+        type: string
+        required: true
+  get_report:
+    title: Get Report
+    description: Returns the report associated with the specified task ID
+    input:
+      task_id:
+        title: Task ID
+        type: integer
+        required: true
+        description: Task ID
+      format:
+        title: Report Format
+        description: 'One of [json/html/all/dropped/package_files]. Details on formats
+          here: http://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report'
+        type: string
+        required: false
+    output:
+      report:
+        type: bytes
+        description: Base64 encoded report
+        required: true
+  get_screenshots:
+    title: Get Screenshots
+    description: Returns one (jpeg) or all (zip) screenshots associated with the specified
+      task ID
+    input:
+      task_id:
+        title: Task ID
+        type: integer
+        required: true
+        description: Task ID
+      screenshot_id:
+        title: Screenshot ID
+        type: string
+        description: Screenshot ID
+        required: false
+    output:
+      screenshots:
+        type: bytes
+        description: Base64 encoded screenshot
+        required: true
+  rerun_report:
+    title: Re-run Reporting
+    description: Re-run reporting for task associated with the specified task ID
+    input:
+      task_id:
+        title: Task ID
+        type: integer
+        required: true
+        description: Task ID
+    output:
+      success:
+        type: boolean
+        description: Action success or failure
+        required: true
+  reboot_task:
+    title: Reboot Task
+    description: Add a reboot task to database from an existing analysis ID
+    input:
+      task_id:
+        title: Task ID
+        type: integer
+        required: true
+        description: Task ID
+    output:
+      task_id:
+        title: Task ID
+        type: integer
+        description: Task ID
+        required: true
+      reboot_id:
+        title: Reboot ID
+        type: integer
+        description: Reboot ID
+        required: true
+  list_memory:
+    title: List Memory
+    description: Returns a list of memory dump files or one memory dump file associated
+      with the specified task ID
+    input:
+      task_id:
+        title: Task ID
+        type: integer
+        required: true
+        description: Task ID
+    output:
+      dump_files:
+        title: Dump Files
+        type: '[]string'
+        description: Dumped Files
+        required: true
+  get_memory:
+    title: Get Memory
+    description: Returns one memory dump file associated with the specified task ID
+    input:
+      task_id:
+        title: Task ID
+        type: integer
+        required: true
+        description: Task ID
+      pid:
+        title: Process ID
+        type: string
+        required: true
+        description: Process ID
+    output:
+      contents:
+        title: Dump Contents
+        type: bytes
+        description: Base64 encoded contents
+        required: true
+  view_file:
+    title: View File
+    description: Returns details on the file matching either the specified MD5 hash,
+      SHA256 hash or ID
+    input:
+      md5:
+        title: MD5
+        type: string
+        description: MD5 Hash
+        required: false
+      sha256:
+        title: SHA256
+        type: string
+        description: SHA256 Hash
+        required: false
+      id:
+        title: ID
+        type: integer
+        description: ID
+        required: false
+    output:
+      data:
+        title: Data
+        type: data
+        description: Data
+        required: true
+      error:
+        title: Error
+        type: boolean
+        description: Error information
+        required: true
+  get_file:
+    title: Get File
+    description: Returns the binary content of the file matching the specified SHA256
+      hash
+    input:
+      sha256:
+        title: SHA256
+        type: string
+        required: true
+        description: SHA256 Hash
+    output:
+      contents:
+        description: Binary contents
+        type: bytes
+        required: true
+  get_pcap:
+    title: Get PCAP
+    description: Returns the content of the PCAP associated with the given task
+    input:
+      task_id:
+        title: Task ID
+        type: integer
+        required: true
+        description: Task ID
+    output:
+      contents:
+        description: PCAP contents
+        type: bytes
+        required: true
+  list_machines:
+    title: List Machines
+    description: Returns a list with details on the analysis machines available to
+      Cuckoo
+    output:
+      machines:
+        description: List of machines available to Cuckoo
+        type: '[]machine'
+        required: true
+  view_machine:
+    title: View Machine
+    description: Returns details on the analysis machine associated with the given
+      name
+    input:
+      machine_name:
+        type: string
+        required: true
+        description: Machine name
+    output:
+      machine:
+        description: Machine details
+        type: machine
+        required: true
+  cuckoo_status:
+    title: Cuckoo Status
+    description: Returns status of the cuckoo server
+    output:
+      cpuload:
+        title: CPU Load
+        description: CPU load for the past 1, 5 and 15 minutes respectively
+        type: '[]float'
+        required: true
+      diskspace:
+        title: Diskspace
+        description: Free, total and used diskspace of $CUCKOO/storage/analyses/,
+          $CUCKOO/storage/binaries/, and specified tmppath
+        type: diskspace
+        required: true
+      hostname:
+        type: string
+        description: Cuckoo hostname
+        required: true
+      machines:
+        description: Details about available and total analysis machines
+        type: machines
+        required: true
+      tasks:
+        description: Details about analysis tasks
+        type: tasks
+        required: true
+      version:
+        type: string
+        description: Cuckoo version
+        required: true
+  vpn_status:
+    title: VPN Status
+    description: Returns VPN status
+    output:
+      vpns:
+        title: VPN Statuses
+        type: '[]vpn'
+        description: VPN status array
+        required: true
+  exit:
+    title: Exit
+    description: Shuts down the server if in debug mode and using the werkzeug server
+    output:
+      message:
+        type: string
+        description: Exit message
+        required: true

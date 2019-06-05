@@ -1,0 +1,21 @@
+{
+  "body": {
+    "input": {
+      "user_name": "tim@lastpass.com",
+      "full_name": "Tim Schmidt",
+      "password_reset_required": false,
+      "password": "test",
+      "groups": [ "users", "CC" ]
+    },
+    "meta": {},
+    "connection": {
+      "account": 0,
+      "provhash": {
+        "secretKey": ""
+      }
+    },
+    "action": "provision_user"
+  },
+  "version": "v1",
+  "type": "action_start"
+}

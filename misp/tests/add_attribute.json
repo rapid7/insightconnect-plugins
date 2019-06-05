@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "add_attribute",
+    "meta": {},
+    "input": {
+      "category": "Network activity",
+      "comment": "this is a test",
+      "event": "777",
+      "type_value": "url",
+      "value": "https://malware.com"
+    },
+    "connection": {
+      "automation_code": {
+        "secretKey": ""
+      },
+      "url": "",
+      "ssl": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

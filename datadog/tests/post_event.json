@@ -1,0 +1,24 @@
+{
+  "body": {
+    "action": "post_event",
+    "meta": {},
+    "input": {
+      "alert_type": "error",
+      "date_happened": 0,
+      "event_title": "Komand_test",
+      "host": "",
+      "priority": "normal",
+      "tags": "environment:test",
+      "text": "Testing komand"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "app_key": "j",
+      "url": "https://api.datadoghq.com/api/v1/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "get_blob_data",
+    "meta": {},
+    "input": {
+      "field_name": "body",
+      "object_name": "Attachment",
+      "record_id": "00P1t000000l7HzEAI"
+    },
+    "connection": {
+      "client_id": "",
+      "client_secret": {
+        "secretKey": ""
+      },
+      "salesforce_account_username_and_password": {
+        "password": "",
+        "username": ""
+      },
+      "security_token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

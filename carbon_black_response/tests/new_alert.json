@@ -1,0 +1,20 @@
+{
+  "body": {
+    "trigger": "new_alert",
+    "meta": {},
+    "input": {},
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

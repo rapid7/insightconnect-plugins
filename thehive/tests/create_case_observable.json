@@ -1,0 +1,30 @@
+{
+  "body": {
+    "action": "create_case_observable",
+    "meta": {},
+    "input": {
+      "id": "",
+      "observable": {
+        "data": "",
+        "dataType": "",
+        "ioc": false,
+        "message": "",
+        "tags": [],
+        "tlp": 2
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": "9000",
+      "protocol": "http",
+      "proxy": {},
+      "verify": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

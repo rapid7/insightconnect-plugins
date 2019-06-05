@@ -1,0 +1,30 @@
+{
+  "body": {
+    "action": "create_blocked_sender_policy",
+    "meta": {},
+    "input": {
+      "description": "komand test",
+      "from_part": "envelope_from",
+      "from_type": "email_domain",
+      "from_value": "test.com",
+      "option": "block_sender",
+      "source_ips": "32.88.2.24/24",
+      "to_type": "everyone",
+      "to_value": ""
+    },
+    "connection": {
+      "app_id": "",
+      "app_key": {
+        "secretKey": ""
+      },
+      "auth_type": "Basic-Cloud",
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://sandbox-api.mimecast.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "create_tag",
+    "meta": {},
+    "input": {
+      "name": "Komand Test Tag",
+      "type": "custom",
+      "color": "blue"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

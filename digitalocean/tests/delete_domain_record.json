@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "delete_domain_record",
+        "connection": {
+            "token":{
+                "secretKey": ""
+            }
+        },
+        "input": {
+            "domain_name": "",
+            "record_id": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

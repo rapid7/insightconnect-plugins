@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "query_report",
+    "meta": {},
+    "input": {
+      "features": "",
+      "file_digest": "c2efcd148a4739a2f5676a513aa905f6",
+      "file_digest_type": "md5",
+      "file_name": "",
+      "file_type": "",
+      "quota": false
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "service_address": "te.checkpoint.com",
+      "using_cloud_server": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

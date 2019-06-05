@@ -1,0 +1,24 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "add_organization_user",
+    "connection": {
+      "basic_auth": {
+        "password": "",
+        "username": ""
+      },
+      "token_auth": {
+        "secretKey": ""
+      },
+      "port": 3000,
+      "url": ""
+    },
+    "input": {
+      "role": "Admin",
+      "login_or_email": "admin2",
+      "organization_id": -1
+    }
+  },
+  "version": "v1"
+}

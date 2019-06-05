@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "tag_incident",
+    "meta": {},
+    "input": {
+      "incident_id": 31851783,
+      "tags": ["tag1", "tag2"]
+    },
+    "connection": {
+      "eu_customer": false,
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

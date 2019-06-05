@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "update_site_included_targets",
+    "meta": {},
+    "input": {
+      "id": 0,
+      "included_targets": [],
+      "overwrite": true
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

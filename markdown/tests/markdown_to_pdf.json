@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "input": {
+      "markdown": "S29tYW5kCj09PT09PQo=",
+      "markdown_string": ""
+    },
+    "connection": null,
+    "action": "markdown_to_pdf",
+    "meta": {}
+  }
+}

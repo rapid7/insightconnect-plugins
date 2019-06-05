@@ -1,0 +1,19 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "input": {
+      "space": "Komand",
+      "page": "Test"
+    },
+    "action": "get_page",
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://komandops.atlassian.net/wiki"
+    }
+  }
+}

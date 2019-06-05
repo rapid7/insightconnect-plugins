@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "body": {
+    "connection": {
+      "url": ""
+    },
+    "action": "list_memory",
+    "input": {
+      "task_id": 26
+    },
+    "meta": {}
+  },
+  "type": "action_start"
+}

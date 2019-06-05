@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "set",
+    "input": {
+      "rate": 1,
+      "stat": "settest",
+      "value": 2
+    },
+    "connection": {
+      "udp": {
+        "maxudpsize": 512
+      },
+      "protocol": "UDP",
+      "prefix": "",
+      "tcp": {
+        "timeout": 0
+      },
+      "host": "",
+      "port": 2003
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

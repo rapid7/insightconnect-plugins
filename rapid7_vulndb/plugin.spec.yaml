@@ -1,0 +1,109 @@
+plugin_spec_version: v2
+name: rapid7_vulndb
+title: Rapid7 Vulnerability & Exploit Database
+description: A curated repository of vetted computer software exploits and exploitable
+  vulnerabilities
+version: 1.1.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- vulnerability
+- exploit
+- rapid7
+- database
+- vulndb
+enable_cache: true
+language: python
+types:
+  vuln_found:
+    name:
+      title: Name
+      description: Name of vulnerability
+      type: string
+      required: false
+    link:
+      title: Link
+      description: Link to vulnerability
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: Severity of vulnerability
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type of vulnerability
+      type: string
+      required: false
+    summary:
+      title: Summary
+      description: Brief summary of vulnerability
+      type: string
+      required: false
+    published:
+      title: Published
+      description: Published date of vulnerability
+      type: string
+      required: false
+    module:
+      title: Metasploit Module
+      description: Path to Metasploit module
+      type: string
+      required: false
+    module_options:
+      title: Metasploit Module Options
+      description: The options offered for the Metasploit module
+      type: string
+      required: false
+    module_name:
+      title: Metasploit Module Name
+      description: The name of the Metasploit module
+      type: string
+      required: false
+    reliability:
+      title: Reliability of Metasploit Module
+      description: The reliability of running a Metasploit module
+      type: string
+      required: false
+    source_code:
+      title: Source Code
+      description: Source code of Metasploit module
+      type: string
+      required: false
+    history:
+      title: Metasploit History
+      description: The history of the Metasploit module
+      type: string
+      required: false
+actions:
+  search_db:
+    title: Search Database
+    description: Search the database to find vulnerabilities and exploits
+    input:
+      database:
+        title: Database
+        description: Name of the database
+        type: string
+        default: All
+        enum:
+        - Vulnerability Database
+        - Metasploit Modules
+        - All
+        required: true
+      search:
+        title: Search
+        description: Search parameter for database
+        type: string
+        required: true
+    output:
+      search_results:
+        title: Vulnerability
+        type: '[]vuln_found'
+        description: Vulnerability and exploits found
+        required: false
+      results_found:
+        title: Results Found
+        description: Will return false if no results are found
+        type: boolean
+        required: true

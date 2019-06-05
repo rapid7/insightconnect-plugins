@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "agent_scan",
+    "meta": {},
+    "input": {
+      "agent_id": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

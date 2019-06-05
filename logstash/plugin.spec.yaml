@@ -1,0 +1,119 @@
+plugin_spec_version: v2
+name: logstash
+title: Logstash
+vendor: rapid7
+status: ["unsupported"]
+description: Data collection engine with real-time pipelining capabilities
+version: 1.0.0
+tags:
+- logstash
+- elk
+- log
+- elastic
+types:
+  response:
+    host:
+      type: string
+      required: false
+    version:
+      type: string
+      required: false
+    http_address:
+      type: string
+      required: false
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    result:
+      type: object
+      required: false
+connection:
+  url:
+    title: URL
+    description: Host URL, E.g. http://192.168.99.100:9600
+    type: string
+    required: true
+actions:
+  general_info:
+    title: General Info
+    description: Retrieves general information about the Logstash instance, including
+      the host and version
+    output:
+      response:
+        title: Response
+        description: Response
+        type: response
+        required: false
+  node:
+    title: Node Info
+    description: Retrieves information about the node
+    input:
+      types:
+        title: Types
+        type: string
+        description: 'Comma-separated list of types of node info to return: pipeline,
+          os, jvm'
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: response
+        required: false
+  node_stats:
+    title: Node Stats
+    description: Retrieves runtime stats about Logstash
+    input:
+      types:
+        title: Types
+        type: string
+        description: 'Comma-separated list of types of node info to return: pipeline,
+          os, jvm, reloads, process'
+        required: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: response
+        required: false
+  plugins:
+    title: Plugins
+    description: Retrieves information about all Logstash plugins that are currently
+      installed
+    output:
+      response:
+        title: Response
+        description: Response
+        type: response
+        required: false
+  hot_threads:
+    title: Hot Threads
+    description: Retrieves the current hot threads for Logstash
+    input:
+      threads:
+        title: Threads
+        type: integer
+        description: The number of hot threads to return. The default is 3
+        required: false
+        default: 3
+      human:
+        title: Human
+        type: boolean
+        description: If true, returns plain text instead of JSON format
+        required: false
+        default: false
+      ignore_idle_threads:
+        title: Ignore Idle Threads
+        type: boolean
+        description: If true, does not return idle threads
+        required: false
+        default: true
+    output:
+      response:
+        title: Response
+        description: Response
+        type: response
+        required: false

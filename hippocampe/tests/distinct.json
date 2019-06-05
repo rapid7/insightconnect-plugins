@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "distinct",
+    "meta": {},
+    "input": {
+      "intelligence_types": ["ip"]
+    },
+    "connection": {
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

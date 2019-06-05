@@ -1,0 +1,887 @@
+plugin_spec_version: v2
+name: otrs
+title: OTRS
+description: Open Source Ticket Request System
+version: 4.0.0
+vendor: rapid7
+tags:
+- ticket
+- OTRS
+connection:
+  server:
+    type: string
+    description: OTRS Server
+    required: true
+  credentials:
+    title: Credentials
+    description: OTRS username and password
+    type: credential_username_password
+    required: true
+types:
+  new_article:
+    CommunicationChannelID:
+      title: Communication Channel ID
+      type: integer
+      description: Communication channel ID
+      required: false
+    CommunicationChannel:
+      title: Communication Channel
+      type: string
+      description: Communication channel
+      required: false
+    IsVisibleForCustomer:
+      title: Is Visible For Customer
+      type: integer
+      description: Is visible for customer
+      required: false
+    SenderType:
+      title: Sender Type
+      type: string
+      description: Sender type
+      required: false
+    SenderTypeID:
+      title: Sender Type ID
+      type: integer
+      description: Sender type ID
+      required: false
+    AutoResponseType:
+      title: Auto Response Type
+      type: string
+      description: Auto response type
+      required: false
+    From:
+      title: From
+      type: string
+      description: From
+      required: false
+    Subject:
+      title: Subject
+      type: string
+      description: Ticket subject
+      required: false
+    Body:
+      title: Body
+      type: string
+      description: Ticket body
+      required: false
+    ContentType:
+      title: Content Type
+      type: string
+      description: Content type
+      required: false
+    MimeType:
+      title: MIME Type
+      type: string
+      description: MIME type e.g. plain/text
+      required: false
+    Charset:
+      title: Charset
+      type: string
+      description: Character set e.g. UTF-8
+      required: true
+      default: UTF-8
+    HistoryType:
+      title: History Type
+      type: string
+      description: History type
+      required: false
+    HistoryComment:
+      title: History Comment
+      type: string
+      description: History comment
+      required: false
+    TimeUnit:
+      title: Time Unit
+      type: number
+      description: Time Unit
+      required: false
+    NoAgentNotify:
+      title: No Agent Notify
+      type: integer
+      description: No agent notify
+      required: false
+    ForceNotificationToUserID:
+      title: Force Notification
+      type: '[]integer'
+      description: Force notification to user ID
+      required: false
+    ExcludeNotificationToUserID:
+      title: Exclude Notification
+      type: '[]integer'
+      description: Exclude notification to user ID
+      required: false
+    ExcludeMuteNotificationToUserID:
+      title: Exclude Mute Notification
+      type: '[]integer'
+      description: 'Exclude mute notification to user ID '
+      required: false
+  Attachment:
+    Content:
+      description: Content
+      title: Content
+      type: string
+    ContentAlternative:
+      description: Content alternative
+      title: Content Alternative
+      type: string
+    ContentID:
+      description: Content ID
+      title: Content ID
+      type: string
+    ContentType:
+      description: Content type
+      title: Content Type
+      type: string
+    Disposition:
+      description: Dispostion
+      title: Dispostion
+      type: string
+    FileID:
+      description: File ID
+      title: File ID
+      type: string
+    Filename:
+      description: Filename
+      title: Filename
+      type: string
+    FilesizeRaw:
+      description: File size raw
+      title: File Size Raw
+      type: integer
+  Article:
+    ArticleID:
+      description: Article ID
+      title: Article ID
+      type: string
+    ArticleNumber:
+      description: Article number
+      title: Article Number
+      type: integer
+    Attachment:
+      description: Attachment
+      title: Attachment
+      type: '[]Attachment'
+    Bcc:
+      description: BCC
+      title: BCC
+      type: string
+    Body:
+      description: Body
+      title: Body
+      type: string
+    Cc:
+      description: CC
+      title: CC
+      type: string
+    ChangeBy:
+      description: Change by
+      title: Change By
+      type: string
+    ChangeTime:
+      description: Change time
+      title: Change Time
+      type: string
+    Charset:
+      description: Charset
+      title: Chartset
+      type: string
+    CommunicationChannelID:
+      description: Communication channel ID
+      title: Communication Channel ID
+      type: string
+    ContentCharset:
+      description: Content charset
+      title: Content Charset
+      type: string
+    ContentType:
+      description: Content type
+      title: Content Type
+      type: string
+    CreateBy:
+      description: Create by
+      title: Create By
+      type: string
+    CreateTime:
+      description: Create time
+      title: Create Time
+      type: string
+    From:
+      description: From
+      title: From
+      type: string
+    InReplyTo:
+      description: In reply to
+      title: In Reply To
+      type: string
+    IncomingTime:
+      description: Incoming time
+      title: Incoming Time
+      type: string
+    IsVisibleForCustomer:
+      description: Is visible For customer
+      title: Is Visible For Customer
+      type: integer
+    MessageID:
+      description: Message ID
+      title: Message ID
+      type: string
+    MimeType:
+      description: MIME type
+      title: MIME Type
+      type: string
+    References:
+      description: References
+      title: References
+      type: string
+    ReplyTo:
+      description: Reply to
+      title: Reply To
+      type: string
+    SenderType:
+      description: Sender type
+      title: Sender type
+      type: string
+    SenderTypeID:
+      description: Sender type ID
+      title: Sender Type ID
+      type: string
+    Subject:
+      description: Subject
+      title: Subject
+      type: string
+    TicketID:
+      description: Ticket ID
+      title: Ticket ID
+      type: integer
+    TimeUnit:
+      description: Time unit
+      title: Time Unit
+      type: number
+    To:
+      description: To
+      title: To
+      type: string
+  DynamicField:
+    Name:
+      description: Name
+      title: Name
+      type: string
+    Value:
+      description: Value
+      title: Value
+      type: '[]string'
+  Ticket:
+    Age:
+      description: Age
+      title: Age
+      type: integer
+    ArchiveFlag:
+      description: Archive flag
+      title: Archive Flag
+      type: string
+    Article:
+      description: Article
+      title: Article
+      type: '[]Article'
+    ChangeBy:
+      description: Change by
+      title: Change By
+      type: string
+    Changed:
+      description: Changed
+      title: Changed
+      type: string
+    CreateBy:
+      description: Create by
+      title: Create By
+      type: string
+    Created:
+      description: Created
+      title: Created
+      type: string
+    CustomerID:
+      description: Customer ID
+      title: Customer ID
+      type: string
+    CustomerUserID:
+      description: Customer user ID
+      title: Customer User ID
+      type: string
+    DynamicField:
+      description: Dynamic field
+      title: Dynamic Field
+      type: '[]DynamicField'
+    EscalationResponseTime:
+      description: Escalation response time
+      title: Escalation Response Time
+      type: integer
+    EscalationSolutionTime:
+      description: Escalation solution time
+      title: Escalation Solution Time
+      type: integer
+    EscalationTime:
+      description: Escalation time
+      title: Escalation Time
+      type: integer
+    EscalationUpdateTime:
+      description: Escalation update time
+      title: Escalation Update Time
+      type: integer
+    GroupID:
+      description: Group ID
+      title: Group ID
+      type: string
+    Lock:
+      description: Lock
+      title: Lock
+      type: string
+    LockID:
+      description: Lock ID
+      title: Lock ID
+      type: string
+    Owner:
+      description: Owner
+      title: Owner
+      type: string
+    OwnerID:
+      description: Owner ID
+      title: Owner ID
+      type: string
+    Priority:
+      description: Priority
+      title: Priority
+      type: string
+    PriorityID:
+      description: Priority ID
+      title: Priority ID
+      type: string
+    Queue:
+      description: Queue
+      title: Queue
+      type: string
+    QueueID:
+      description: Queue ID
+      title: Queue ID
+      type: string
+    RealTillTimeNotUsed:
+      description: Real till time not used
+      title: Real Till Time Not Used
+      type: string
+    Responsible:
+      description: Responsible
+      title: Responsible
+      type: string
+    ResponsibleID:
+      description: Responsible ID
+      title: Responsible ID
+      type: string
+    SLAID:
+      description: SLAID
+      title: SLAID
+      type: string
+    ServiceID:
+      description: Service ID
+      title: Service ID
+      type: string
+    State:
+      description: State
+      title: State
+      type: string
+    StateID:
+      description: State ID
+      title: State ID
+      type: string
+    StateType:
+      description: State type
+      title: State Type
+      type: string
+    TicketID:
+      description: Ticket ID
+      title: Ticket ID
+      type: integer
+    TicketNumber:
+      description: Ticket number
+      title: Ticket Number
+      type: string
+    TimeUnit:
+      description: Time unit
+      title: Time Unit
+      type: number
+    Title:
+      description: Title
+      title: Title
+      type: string
+    Type:
+      description: Type
+      title: Type
+      type: string
+    TypeID:
+      description: Type ID
+      title: Type ID
+      type: string
+    UnlockTimeout:
+      description: Unlock timeout
+      title: Unlock Timeout
+      type: string
+    UntilTime:
+      description: Until time
+      title: Until Time
+      type: integer
+  article:
+    Subject:
+      title: Subject
+      type: string
+      description: Ticket subject
+      required: false
+    Body:
+      title: Body
+      type: string
+      description: Ticket body
+      required: false
+    Charset:
+      title: Charset
+      type: string
+      description: Character set e.g. UTF-8
+      required: false
+    MimeType:
+      title: MIME Type
+      type: string
+      description: MIME type e.g. plain/text
+      required: false
+    ArticleID:
+      title: Article ID
+      type: string
+      description: Article ID
+      required: false
+    ArticleNumber:
+      title: Article Number
+      type: string
+      description: Article number
+      required: false
+    Bcc:
+      title: BCC
+      type: string
+      description: Blind carbon copy
+      required: false
+    Cc:
+      title: CC
+      type: string
+      description: Carbon copy
+      required: false
+    ChangeBy:
+      title: Change By
+      type: string
+      description: Changed by
+      required: false
+    ChangeTime:
+      title: Change Time
+      type: string
+      description: Change time
+      required: false
+    CommunicationChannelID:
+      title: Communication Channel ID
+      type: string
+      description: Communication channel ID
+      required: false
+    CommunicationChannel:
+      title: Communication Channel
+      type: string
+      description: Communication channel
+      required: false
+    ContentCharset:
+      title: Content Charset
+      type: string
+      description: Content charset
+      required: false
+    ContentType:
+      title: Content Type
+      type: string
+      description: Content type
+      required: false
+    CreatedBy:
+      title: Created By
+      type: string
+      description: Created by
+      required: false
+    CreateTime:
+      title: Created At
+      type: string
+      description: Create time
+      required: false
+    From:
+      title: From
+      type: string
+      description: From
+      required: false
+    InReplyTo:
+      title: In Reply To
+      type: string
+      description: In reply to
+      required: false
+    IncomingTime:
+      title: Incoming Time
+      type: string
+      description: Incoming time
+      required: false
+    IsVisibleForCustomer:
+      title: Is Visible For Customer
+      type: integer
+      description: Is visible for customer
+      required: false
+    MessageID:
+      title: Message ID
+      type: string
+      description: Message ID
+      required: false
+    References:
+      title: References
+      type: string
+      description: References
+      required: false
+    ReplyTo:
+      title: Reply To
+      type: string
+      description: Reply to
+      required: false
+    SenderType:
+      title: Sender Type
+      type: string
+      description: Sender type
+      required: false
+    SenderTypeID:
+      title: Sender Type ID
+      type: string
+      description: Sender type ID
+      required: false
+    TicketID:
+      title: Ticket ID
+      type: integer
+      description: Ticket ID
+      required: false
+    TimeUnit:
+      title: Time Unit
+      type: number
+      description: Time Unit
+      required: false
+    To:
+      title: To
+      type: string
+      description: To
+      required: false
+    HistoryType:
+      title: History Type
+      type: string
+      description: History type
+      required: false
+    HistoryComment:
+      title: History Comment
+      type: string
+      description: History comment
+      required: false
+    NoAgentNotify:
+      title: No Agent Notify
+      type: integer
+      description: No agent notify
+      required: false
+    ForceNotificationToUserID:
+      title: Force Notification
+      type: '[]integer'
+      description: Force notification to user ID
+      required: false
+    ExcludeNotificationToUserID:
+      title: Exclude Notification
+      type: '[]integer'
+      description: Exclude notification to user ID
+      required: false
+    ExcludeMuteNotificationToUserID:
+      title: Exclude Mute Notification
+      type: '[]integer'
+      description: 'Exclude mute notification to user ID '
+      required: false
+  dynamic_field:
+    name:
+      title: Name
+      description: Dynamic field name
+      type: string
+      required: true
+    value:
+      title: Value
+      description: Dynamic field value
+      type: string
+      required: true
+    operator:
+      title: Operator
+      description: Dynamic field operator
+      type: string
+      required: false
+    pattern:
+      title: Pattern
+      description: Search pattern
+      type: '[]string'
+      required: false
+  search_dynamic_field:
+    name:
+      title: Name
+      description: Dynamic field name
+      type: string
+      required: true
+    value:
+      title: Value
+      description: Dynamic field value
+      type: string
+      required: false
+    operator:
+      title: Operator
+      description: Dynamic field operator
+      type: string
+      required: false
+    pattern:
+      title: Pattern
+      description: Search pattern
+      type: '[]string'
+      required: false
+  attachment:
+    filename:
+      title: Filename
+      description: Attachment filename
+      type: string
+      required: false
+    content:
+      title: Content
+      description: Attachment Content
+      type: bytes
+      required: false
+  external_param:
+    name:
+      title: Name
+      description: Name of parameter to seach on
+      type: string
+      required: false
+    value:
+      title: Value
+      description: Value to search for
+      type: string
+      required: false
+actions:
+  create:
+    title: Create Ticket
+    description: Create OTRS ticket
+    input:
+      Title:
+        title: Title
+        description: Ticket title
+        type: string
+        required: false
+      Queue:
+        title: Queue
+        description: Queue the ticket is to be inserted in
+        type: string
+        required: false
+      Lock:
+        title: Lock
+        description: Lock name
+        type: string
+        required: false
+      Type:
+        title: Type
+        description: Ticket type e.g. Incident
+        type: string
+        required: false
+      Service:
+        title: Service
+        description: Service name
+        type: string
+        required: false
+      SLA:
+        title: SLA
+        description: SLA name
+        type: string
+        required: false
+      State:
+        title: State
+        description: Ticket state
+        type: string
+        required: false
+        default: new
+      Priority:
+        title: Priority
+        description: Ticket priority. 1=very low, 2=low, 3=normal, 4=high, 5=very
+          high, etc
+        type: string
+        required: false
+      PendingTime:
+        title: Pending Time
+        description: Pending time field
+        type: date
+        required: false
+      Owner:
+        title: Owner
+        description: Ticket owner
+        type: string
+        required: false
+      Responsible:
+        title: Responsible
+        description: User responsible for the ticket
+        type: string
+        required: false
+      CustomerUser:
+        title: Customer User
+        description: Customer user associated with the ticket e.g test_customer
+        type: string
+        required: false
+      article:
+        title: Article
+        description: Ticket article
+        type: new_article
+        required: false
+      dynamic_fields:
+        title: Dynamic Fields
+        description: Fields as array of objects e.g. [{"name":"TestName1","pattern":"TestValue1"},{"name":"TestName2","pattern":"TestValue2"}]
+        type: '[]dynamic_field'
+        required: false
+      attachments:
+        title: Attachments
+        description: Attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]
+        type: '[]attachment'
+        required: false
+    output:
+      ticket_id:
+        title: Ticket ID
+        description: Ticket ID
+        type: integer
+        required: false
+      ticket_number:
+        title: Ticket Number
+        description: Ticket number
+        type: integer
+        required: false
+  update:
+    title: Update Ticket
+    description: Update OTRS ticket
+    input:
+      TicketID:
+        title: Ticket ID
+        description: Ticket ID
+        type: integer
+        required: false
+      Priority:
+        title: Priority
+        description: Updated ticket priority e.g. 1 very low, 2 low, 3 normal, 4 high,
+          5 very high and so on
+        type: string
+        required: false
+      PendingTime:
+        title: Pending Time
+        description: Pending time
+        type: date
+        required: false
+      Lock:
+        title: Lock
+        description: Lock
+        type: string
+        required: false
+      Service:
+        title: Service
+        description: Service
+        type: string
+        required: false
+      SLA:
+        title: SLA
+        description: SLA
+        type: string
+        required: false
+      Queue:
+        title: Queue
+        description: Updated queue
+        type: string
+        required: false
+      Responsible:
+        title: Responsible
+        description: Responsible
+        type: string
+        required: false
+      Title:
+        title: Title
+        description: Updated title
+        type: string
+        required: false
+      CustomerUser:
+        title: Customer User
+        description: Updated customer user
+        type: string
+        required: false
+      Type:
+        title: Type
+        description: Updated type e.g. Incident
+        type: string
+        required: false
+      Article:
+        title: Article
+        description: New article (gets appended)
+        type: new_article
+        required: false
+      DynamicFields:
+        title: Dynamic Fields
+        description: Updated dynamic fields e.g. [{"name":"TestName1","value":"TestValue1"},{"name":"TestName2","value":"TestValue2"}]
+        type: '[]dynamic_field'
+        required: false
+      Attachments:
+        title: Attachements
+        description: New attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]
+        type: '[]attachment'
+        required: false
+    output:
+      ticket_id:
+        title: Ticket ID
+        description: Ticket ID
+        type: integer
+        required: false
+      ticket_number:
+        title: Ticket Number
+        description: Ticket number
+        type: integer
+        required: false
+  search:
+    title: Ticket Search
+    description: Search for OTRS tickets
+    input:
+      cust_id:
+        title: Customer ID
+        description: Customer ID
+        type: string
+        required: false
+      external_params:
+        title: External Parameters
+        description: A key value object thats not a Dynamic Field e.g [{"Title":"Test Ticket"}]
+        type: '[]external_param'
+        required: false
+      queue:
+        description: Queue to search in
+        type: string
+        required: false
+      dynamic_fields:
+        title: Dynamic Fields
+        description: Fields as array of objects e.g. [{"name":"TestName1","value":"TestValue1", "operation":"Equals"},{"name":"TestName2","value":"TestValue2"}]. The value field is what will be searched for
+        type: '[]search_dynamic_field'
+        required: false
+    output:
+      ticket_ids:
+        title: Ticket IDs
+        description: IDs of tickets matching search criteria
+        type: '[]string'
+        required: false
+  retrieve:
+    title: Retrieve Ticket
+    description: Retrieve OTRS ticket
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: Ticket ID
+        type: integer
+        required: false
+    output:
+      Ticket:
+        title: Ticket
+        description: Ticket returned
+        type: Ticket
+        required: false

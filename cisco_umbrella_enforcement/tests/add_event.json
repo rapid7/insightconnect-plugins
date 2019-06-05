@@ -1,0 +1,43 @@
+{
+  "body": {
+    "action": "add_event",
+    "meta": {},
+    "input": {
+      "events": [{
+            "dstURL": "http://internetbadguys.bad-v5.com/a-bad-url-v1",
+            "alertTime": "2013-02-09T11:14:26.0Z",
+            "ID": "ba6a59f4-e692-4724-ba36-c28132c761de",
+            "deviceVersion": "13.7a",
+            "dstDomain": "internetbadguys.bad-v5.com",
+            "eventTime": "2013-02-09T09:30:26.0Z",
+            "protocolVersion": "1.0a",
+            "providerName": "Security Platform",
+            "disableDstSafeguards": true,
+            "eventHash": "e88b372b1f98882dca933fa8a2589670",
+            "fileName": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",
+            "fileHash": "da89127fbe1d78313dbfff610b59ff24874bb983",
+            "externalURL": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",
+            "src": "192.168.0.1",
+            "eventSeverity": "severe",
+            "eventType": "severe",
+            "eventDescription": "Some another threat"
+        }, {
+            "dstURL": "http://internetbadguys.bad-v6.com/a-bad-url-v2",
+            "alertTime": "2013-02-10T11:14:26.0Z",
+            "ID": "ba6a59f4-e692-4724-ba36-c28132c761de",
+            "deviceVersion": "13.7a",
+            "dstDomain": "internetbadguys.bad-v6.com",
+            "eventTime": "2013-02-10T09:30:26.0Z",
+            "protocolVersion": "1.0a",
+            "providerName": "Security Platform"
+        }]
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

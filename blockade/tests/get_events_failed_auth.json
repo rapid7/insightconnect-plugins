@@ -1,0 +1,16 @@
+{
+  "type": "action_start",
+  "body": {
+    "input": {},
+    "action": "get_events",
+    "meta": {},
+    "connection": {
+      "url": "http://192.168.99.100:5000",
+      "email": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "version": "v1"
+}

@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "body": {
+    "action": "view_machine",
+    "input": {
+      "machine_name": "cuckoo1"
+    },
+    "connection": {
+      "url": ""
+    },
+    "meta": {}
+  },
+  "type": "action_start"
+}

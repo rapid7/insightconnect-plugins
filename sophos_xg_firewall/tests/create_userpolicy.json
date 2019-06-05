@@ -1,0 +1,53 @@
+{
+  "body": {
+    "action": "create_userpolicy",
+    "meta": {},
+    "input": {
+      "policy": {
+        "ApplicationBaseQoSPolicy": "None",
+        "ApplicationControl": "None",
+        "BackupGateway": "None",
+        "DSCPMarking": "",
+        "DataAccounting": "Exclude",
+        "DestinationNetworks": ["Any"],
+        "DestinationZones": ["WAN"],
+        "Identity": [],
+        "LogTraffic": "Disable",
+        "OutboundAddress": "",
+        "PrimaryGateway": "",
+        "RewriteSourceAddress": "Disable",
+        "ScanFTP": "Disable",
+        "ScanHTTP": "Disable",
+        "ScanHTTPS": "Disable",
+        "Schedule": "All the Time",
+        "SecurityPolicy": {
+          "Description": "Komand User Policy",
+          "IPFamily": "IPv4",
+          "IntrusionPrevention": "None",
+          "SourceSecurityHeartbeat": "Disable",
+          "DestSecurityHeartbeat": "Disable",
+          "Name": "KomandBuiltUserPolicy",
+          "Position": "top",
+          "Status": "Disable",
+          "PositionPolicyName":"",
+          "TrafficShapingPolicy": "None"
+        },
+        "Services": ["Any"],
+        "SourceNetworks": ["Any"],
+        "SourceZones": ["LAN"],
+        "WebCategoryBaseQoSPolicy": "None",
+        "WebFilter": "None"
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": 4444
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

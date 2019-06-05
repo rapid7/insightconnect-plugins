@@ -1,0 +1,337 @@
+plugin_spec_version: v2
+name: freeipa
+title: FreeIPA
+description: FreeIPA is an integrated Identity and Authentication solution for Linux/UNIX
+  networked environments
+version: 2.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- freeipa
+- access control
+types:
+  show_user_out:
+    sshpubkeyfp:
+      description: SSH pub key FP
+      title: SSH Pub Key FP
+      type: '[]string'
+    has_keytab:
+      description: Has keytab
+      title: Has Keytab
+      type: boolean
+    ipasshpubkey:
+      description: IPA SSH pub key
+      title: IPA SSH Pub Key
+      type: '[]string'
+    cn:
+      description: CN
+      title: CN
+      type: '[]string'
+    krbcanonicalname:
+      description: krb canonical name
+      title: Krb Canonical Name
+      type: '[]string'
+    memberof_group:
+      description: Member of group
+      title: Member of Group
+      type: '[]string'
+    has_password:
+      description: Has password
+      title: Has Password
+      type: boolean
+    homedirectory:
+      description: Home directory
+      title: Home Directory
+      type: '[]string'
+    nsaccountlock:
+      description: NS account lock
+      title: NS Account Lock
+      type: boolean
+    uid:
+      description: UID
+      title: UID
+      type: '[]string'
+    loginshell:
+      description: Login shell
+      title: Login Shell
+      type: '[]string'
+    uidnumber:
+      description: UID number
+      title: UID Number
+      type: '[]string'
+    preserved:
+      description: Preserved
+      title: Preserved
+      type: boolean
+    mail:
+      description: Mail
+      title: Mail
+      type: '[]string'
+    dn:
+      description: DN
+      title: DN
+      type: string
+    displayname:
+      description: Display name
+      title: Display Name
+      type: '[]string'
+    mepmanagedentry:
+      description: Mepmanagedentry
+      title: Mepmanagedentry
+      type: '[]string'
+    ipauniqueid:
+      description: IPA unique ID
+      title: IPA Unique ID
+      type: '[]string'
+    krbprincipalname:
+      description: Krb principal name
+      title: Krb Principal Name
+      type: '[]string'
+    givenname:
+      description: Given name
+      title: Given Name
+      type: '[]string'
+    objectclass:
+      description: Object class
+      title: Object Class
+      type: '[]string'
+    ipantsecurityidentifier:
+      description: Ipant security identifier
+      title: Ipant Security Identifier
+      type: '[]string'
+    gidnumber:
+      description: GID number
+      title: GID Number
+      type: '[]string'
+    gecos:
+      description: Gecos
+      title: Gecos
+      type: '[]string'
+    sn:
+      description: SN
+      title: SN
+      type: '[]string'
+    initials:
+      description: Initials
+      title: Initials
+      type: '[]string'
+  user_status_output:
+    dn:
+      description: DN
+      title: DN
+      type: string
+    krblastfailedauth:
+      description: Krb last failed auth
+      title: Krb Last Failed Auth
+      type: '[]string'
+    krblastsuccessfulauth:
+      description: Krb last successful auth
+      title: Krb Last Successful Auth
+      type: '[]string'
+    krbloginfailedcount:
+      description: Krb login failed count
+      title: Krb Login Failed Count
+      type: '[]string'
+    now:
+      description: Now
+      title: Now
+      type: string
+    server:
+      description: Server
+      title: Server
+      type: string
+  find_user_output:
+    sshpubkeyfp:
+      description: SSH pub key FP
+      title: SSH Pub Key FP
+      type: '[]string'
+    memberof_group:
+      description: Member of group
+      title: Member of Group
+      type: '[]string'
+    ipasshpubkey:
+      description: IPA SSH pub key
+      title: IPA SSH Pub Key
+      type: '[]string'
+    cn:
+      description: CN
+      title: CN
+      type: '[]string'
+    krbcanonicalname:
+      description: Krb canonical name
+      title: Krb Canonical Name
+      type: '[]string'
+    homedirectory:
+      description: Home directory
+      title: Home Directory
+      type: '[]string'
+    nsaccountlock:
+      description: NS account lock
+      title: NS Account Lock
+      type: boolean
+    uid:
+      description: UID
+      title: UID
+      type: '[]string'
+    loginshell:
+      description: Login shell
+      title: Login Shell
+      type: '[]string'
+    uidnumber:
+      description: UID number
+      title: UID Number
+      type: '[]string'
+    preserved:
+      description: Preserved
+      title: Preserved
+      type: boolean
+    mail:
+      description: Mail
+      title: Mail
+      type: '[]string'
+    dn:
+      description: DN
+      title: DN
+      type: string
+    displayname:
+      description: Display name
+      title: Display Name
+      type: '[]string'
+    mepmanagedentry:
+      description: Mepmanagedentry
+      title: Mepmanagedentry
+      type: '[]string'
+    ipauniqueid:
+      description: IPA unique ID
+      title: IPA Unique ID
+      type: '[]string'
+    krbprincipalname:
+      description: Krb principal name
+      title: Krb Principal Name
+      type: '[]string'
+    givenname:
+      description: Given name
+      title: Given Name
+      type: '[]string'
+    objectclass:
+      description: Object class
+      title: Object Class
+      type: '[]string'
+    ipantsecurityidentifier:
+      description: IPA NT security identifier
+      title: IPA NT Security Identifier
+      type: '[]string'
+    gidnumber:
+      description: GID number
+      title: GID Number
+      type: '[]string'
+    gecos:
+      description: Gecos
+      title: Gecos
+      type: '[]string'
+    sn:
+      description: SN
+      title: SN
+      type: '[]string'
+    initials:
+      description: Initials
+      title: Initials
+      type: '[]string'
+connection:
+  credentials:
+    title: Username and Password
+    description: Username and Password to logon to FreeIPA server
+    type: credential_username_password
+    required: true
+  server:
+    title: Server
+    description: The name of the FreeIPA server e.g. ipa.demo1.freeipa.org
+    type: string
+    required: true
+actions:
+  find_user:
+    title: Find User
+    description: Search for a user
+    input:
+      search_parameters:
+        title: Search Parameters
+        description: A string to look for in relevant user fields. If blank will return
+          all users with a return limit of 40000
+        type: string
+        required: false
+    output:
+      users:
+        title: Users
+        description: A list of users that match the search criteria
+        type: '[]string'
+        required: false
+      full_message:
+        title: Full Message
+        description: All stored information match the search criteria
+        type: '[]find_user_output'
+        required: false
+  show_user:
+    title: Show User
+    description: Show a user's information
+    input:
+      username:
+        title: Username
+        description: The login name of the user to search for
+        type: string
+        required: true
+    output:
+      found:
+        title: Found
+        description: Boolean showing the status of the request
+        type: boolean
+        required: false
+      full_message:
+        title: Full Message
+        description: All data returned by the request
+        type: show_user_out
+        required: false
+  user_status:
+    title: User Status
+    description: Get status of a user
+    input:
+      username:
+        title: Username
+        description: The UID of the user to return status of
+        type: string
+        required: true
+    output:
+      found:
+        title: Found
+        description: Boolean showing the status of the request
+        type: boolean
+        required: false
+      full_message:
+        title: Full Message
+        description: All data returned by the request
+        type: user_status_output
+        required: false
+  delete_user:
+    title: Delete User
+    description: Delete a user
+    input:
+      username:
+        title: Username
+        description: The UID of the user to delete
+        type: string
+        required: true
+      preserve:
+        title: Preserve
+        description: If true the user will be preserved rather than deleted
+        type: boolean
+        required: true
+    output:
+      status:
+        title: Status
+        description: 'Status of the delete User request. Will be false if '
+        type: boolean
+        required: false
+      summary:
+        title: Summary
+        description: A summary of the deleted user
+        type: string
+        required: false

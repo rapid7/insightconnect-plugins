@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "remove_asset_tag",
+    "meta": {},
+    "input": {
+      "tag_id": 73,
+      "asset_id": 23529
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "list_binaries",
+    "meta": {},
+    "input": {
+      "query": "",
+      "rows": 10,
+      "start": 0
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "lookup_addresses",
+    "input": {
+      "addresses": []
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "username": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

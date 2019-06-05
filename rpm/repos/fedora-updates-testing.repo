@@ -1,0 +1,29 @@
+[updates-testing]
+name=Fedora 24 - $arch - Test Updates
+failovermethod=priority
+#baseurl=http://download.fedoraproject.org/pub/fedora/linux/updates/testing/24/$arch/
+baseurl=http://dl.fedoraproject.org/pub/fedora/linux/updates/testing/24/$arch/
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=updates-testing-f24&arch=$arch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+[updates-testing-debuginfo]
+name=Fedora 24 - $arch - Test Updates Debug
+failovermethod=priority
+#baseurl=http://download.fedoraproject.org/pub/fedora/linux/updates/testing/24/$arch/debug/
+baseurl=http://dl.fedoraproject.org/pub/fedora/linux/updates/testing/24/$arch/debug/
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=updates-testing-debug-f24&arch=$arch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+[updates-testing-source]
+name=Fedora 24 - Test Updates Source
+failovermethod=priority
+#baseurl=http://download.fedoraproject.org/pub/fedora/linux/updates/testing/24/SRPMS/
+baseurl=http://dl.fedoraproject.org/pub/fedora/linux/updates/testing/24/SRPMS/
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=updates-testing-source-f24&arch=$arch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7

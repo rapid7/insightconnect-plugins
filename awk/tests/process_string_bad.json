@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "process_string",
+    "input": {
+      "text": "asdfas dfadf asdf adsf ",
+      "expression": "'{ asdfa: asdf }'"
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

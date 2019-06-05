@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_policies",
+    "meta": {},
+    "input": {
+      "fields": []
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "api_version": 1,
+      "org_id": "",
+      "timeout": 120
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

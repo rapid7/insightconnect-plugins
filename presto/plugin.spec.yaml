@@ -1,0 +1,103 @@
+plugin_spec_version: v2
+name: presto
+title: Presto
+vendor: rapid7
+status: ["unsupported"]
+description: Presto is an open source distributed SQL query engine for running interactive
+  analytic queries against data sources of all sizes ranging from gigabytes to petabytes
+version: 1.0.0
+tags:
+- presto
+- pyhive
+types:
+  row:
+    row:
+      type: '[]string'
+      description: Row field list
+      required: true
+connection:
+  host:
+    title: Host
+    description: Host to connect to. Do not include http/https prefix
+    type: string
+    required: true
+  port:
+    title: Port
+    description: Port
+    type: integer
+    required: false
+    default: 8080
+  username:
+    title: Username
+    description: Username
+    type: string
+    required: false
+  catalog:
+    title: Catalog
+    description: Catalog name
+    type: string
+    required: false
+    default: hive
+  schema:
+    title: Schema
+    description: Database name
+    type: string
+    required: false
+    default: default
+  poll_interval:
+    title: Poll Interval
+    description: How often to ask the Presto REST interface for a progress update,
+      defaults to a second
+    type: integer
+    required: false
+    default: 1
+  source:
+    title: Source
+    description: Arbitrary identifier (shows up in the Presto monitoring page)
+    type: string
+    required: false
+    default: pyhive
+actions:
+  execute:
+    title: Execute
+    description: Prepare and execute a database operation (query or command)
+    input:
+      operation:
+        title: Operation
+        description: Query or command to execute
+        type: string
+        required: true
+      parameters:
+        title: Parameters
+        description: Reserved for future use. Parameters which safely will be passed
+          to operation string
+        type: string
+        required: false
+    output:
+      rows:
+        title: Rows
+        description: Rows as sequence of sequences
+        type: '[]row'
+        required: false
+  execute_one:
+    title: Execute One
+    description: Prepare and execute a database operation (query or command) and return
+      only first row
+    input:
+      operation:
+        title: Operation
+        description: Query or command to execute
+        type: string
+        required: true
+      parameters:
+        title: Parameters
+        description: Reserved for future use. Parameters which safely will be passed
+          to operation string
+        type: string
+        required: false
+    output:
+      row:
+        title: Row
+        description: Row as sequence
+        type: row
+        required: false

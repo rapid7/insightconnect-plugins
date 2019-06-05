@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "comment_issue",
+    "meta": {},
+    "input": {
+      "comment": "",
+      "id": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "project": "test",
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

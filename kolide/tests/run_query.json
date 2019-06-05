@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "run_query",
+    "meta": {},
+    "input": {
+      "hosts": [],
+      "labels": [6],
+      "query": "SELECT * FROM users"
+    },
+    "connection": {
+      "api_token": {
+        "secretKey": ""
+      },
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

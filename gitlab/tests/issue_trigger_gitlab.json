@@ -1,0 +1,21 @@
+{
+  "body": {
+    "input": {
+      "state": "Opened",
+      "labels": "test",
+      "search": "t1",
+      "iid": null
+    },
+    "connection": {
+      "url": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "trigger": "issue",
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "trigger_start"
+}

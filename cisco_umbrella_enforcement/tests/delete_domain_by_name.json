@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "delete_domain_by_name",
+    "meta": {},
+    "input": {
+      "domain": "internetbadguys.bad-v3.com"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

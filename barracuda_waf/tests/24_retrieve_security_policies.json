@@ -1,0 +1,18 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "retrieve_security_policies",
+    "input": {
+      "id": ""
+    },
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "version": "v1"
+}

@@ -1,0 +1,25 @@
+{
+  "body": {
+    "input": {
+        "params": {
+            "campaign": "NetTraveler",
+           "bucket_list": "Fake Malware DB"
+        },
+      "source": "Faker Vault",
+      "type": "API Key",
+      "value": "http://www.berry.com/main.htm"
+    },
+    "meta": {},
+    "action": "add_indicator",
+    "connection": {
+      "url": "",
+      "ssl_verify": false,
+      "username": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

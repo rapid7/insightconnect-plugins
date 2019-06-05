@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "add_permission_set_to_user",
+    "input": {
+      "user": "target user",
+      "permission_set": "Permission you want added .e.g Group Admin "
+    },
+    "connection": {
+      "url": "epo.company.com",
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "port": 8443
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

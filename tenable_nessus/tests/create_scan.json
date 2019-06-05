@@ -1,0 +1,25 @@
+{
+  "type": "action_start",
+  "body": {
+    "action": "create_scan",
+    "input": {
+      "scanner_name": "Local Scanner",
+      "scan_name": "a scan named bob",
+      "targets": ["https://www.komand.com", "https://market.komand.com"],
+      "description": "a scan created via komand",
+      "template_name": "Web Application Tests"
+    },
+    "meta": {},
+    "connection": {
+      "access_key": {
+        "secretKey": ""
+      },
+      "hostname": "",
+      "secret_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": true
+    }
+  },
+  "version": "v1"
+}

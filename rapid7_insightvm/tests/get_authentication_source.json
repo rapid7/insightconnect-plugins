@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_authentication_source",
+    "meta": {},
+    "input": {
+      "id": 1
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

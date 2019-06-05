@@ -1,0 +1,17 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_token": {
+        "secretKey": ""
+      },
+      "customer_id": ""
+    },
+    "action": "acknowledge_detection",
+    "input": {
+      "detection_id": 1
+    }
+  }
+}

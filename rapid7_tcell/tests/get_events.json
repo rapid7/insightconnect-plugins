@@ -1,0 +1,23 @@
+{
+  "body": {
+    "trigger": "get_events",
+    "meta": {},
+    "input": {
+      "app_id": "MooseLifeTest-gIglw",
+      "filter": "",
+      "frequency": 5,
+      "source": "appfirewall"
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

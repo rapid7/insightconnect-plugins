@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "info",
+    "meta": {},
+    "input": {
+      "release": "",
+      "version": "",
+      "arch": "i386",
+      "epoch": "",
+      "repo": "",
+      "name": "publican",
+      "key": "",
+      "distro": "CentOS 6"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

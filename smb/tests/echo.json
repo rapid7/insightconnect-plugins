@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "echo",
+    "meta": {},
+    "input": {
+      "message": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "domain": "",
+      "host": "",
+      "netbios_name": "",
+      "port": 445,
+      "timeout": 60,
+      "use_ntlmv2": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

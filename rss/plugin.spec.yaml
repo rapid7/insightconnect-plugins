@@ -1,0 +1,36 @@
+plugin_spec_version: v2
+name: rss
+title: RSS
+description: Poll an RSS or Atom feed for events
+version: 1.0.2
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- rss
+- atom
+- feed
+enable_cache: true
+language: python
+connection:
+  url:
+    title: URL
+    type: string
+    description: Feed URL
+    required: true
+triggers:
+  poll:
+    title: Poll Feed
+    description: Poll feed for latest event
+    input:
+      frequency:
+        title: Frequency
+        type: integer
+        description: How frequently to poll for new events
+        default: 15
+        required: true
+    output:
+      results:
+        type: object
+        title: Results
+        description: RSS data
+        required: true

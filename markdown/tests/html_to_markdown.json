@@ -1,0 +1,13 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "input": {
+      "html": "PGgxIGlkPSJrb21hbmQiPktvbWFuZDwvaDE+Cg==",
+      "html_string": ""
+    },
+    "connection": null,
+    "action": "html_to_markdown"
+  },
+  "version": "v1"
+}

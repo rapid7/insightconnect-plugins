@@ -1,0 +1,584 @@
+plugin_spec_version: v2
+name: sentinelone
+title: SentinelOne
+description: SentinelOne is a next-gen cybersecurity company focused on protecting
+  the enterprise through the endpoint
+version: 1.1.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- sentinelone
+- endpoint
+- detection
+types:
+  blacklist_data:
+    affected:
+      title: Affected
+      type: integer
+      description: Affected
+      required: false
+  pagination:
+    totalItems:
+      title: Total Items
+      type: integer
+      description: Total items
+      required: false
+    nextCursor:
+      title: Next Cursor
+      type: string
+      description: Next cursor
+      required: false
+  data:
+    username:
+      title: Username
+      type: string
+      description: Username
+      required: false
+    classification:
+      title: Classification
+      type: string
+      description: Classification
+      required: false
+    siteName:
+      title: Site Name
+      type: string
+      description: Site name
+      required: false
+    fileObjectId:
+      title: File Object ID
+      type: string
+      description: File object ID
+      required: false
+    mitigationActions:
+      title: Mitigation Actions
+      type: '[]string'
+      description: Mitigation actions
+      required: false
+    fileCreatedDate:
+      title: File Created Date
+      type: string
+      description: File created date
+      required: false
+    fileIsExecutable:
+      title: File is Executable
+      type: boolean
+      description: File is executable
+      required: false
+    agentIp:
+      title: Agent IP
+      type: string
+      description: Agent IP
+      required: false
+    agentNetworkStatus:
+      title: Agent Network Status
+      type: string
+      description: Agent network status
+      required: false
+    isInteractiveSession:
+      title: Is Interactive Session
+      type: boolean
+      description: Is interactive session
+      required: false
+    agentVersion:
+      title: Agent Version
+      type: string
+      description: Agent version
+      required: false
+    mitigationReport:
+      title: Mitigation Report
+      type: object
+      description: Mitigation report
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    fileData:
+      title: File Data
+      type: object
+      description: File data
+      required: false
+    agentId:
+      title: Agent ID
+      type: string
+      description: Agent ID
+      required: false
+    fileExtensionType:
+      title: File Extension Type
+      type: string
+      description: File extension type
+      required: false
+    fileDisplayName:
+      title: File Display Name
+      type: string
+      description: File display name
+      required: false
+    createdAt:
+      title: Created At
+      type: string
+      description: Created At
+      required: false
+    whiteningOptions:
+      title: Whitening Options
+      type: '[]string'
+      description: Whitening options
+      required: false
+    maliciousProcessArguments:
+      title: Malicious Process Arguments
+      type: string
+      description: Malicious process arguments
+      required: false
+    certId:
+      title: Cert ID
+      type: string
+      description: Cert ID
+      required: false
+    engines:
+      title: Engines
+      type: '[]string'
+      description: Engines
+      required: false
+    collectionId:
+      title: Collection ID
+      type: string
+      description: Collection ID
+      required: false
+    inQuarantine:
+      title: In Quarantine
+      type: boolean
+      description: In quarantine
+      required: false
+    browserType:
+      title: Browser Type
+      type: string
+      description: Browser type
+      required: false
+    fileIsSystem:
+      title: File is System
+      type: boolean
+      description: File is system
+      required: false
+    markedAsBenign:
+      title: Marked as Benign
+      type: boolean
+      description: Marked as Benign
+      required: false
+    cloudVerdict:
+      title: Cloud Verdict
+      type: string
+      description: Cloud verdict
+      required: false
+    indicators:
+      title: Indicators
+      type: '[]integer'
+      description: Indicators
+      required: false
+    classificationSource:
+      title: Classification Source
+      type: string
+      description: Classification source
+      required: false
+    agentComputerName:
+      title: Agent Computer Name
+      type: string
+      description: Agent computer name
+      required: false
+    mitigationStatus:
+      title: Mitigation Status
+      type: string
+      description: Mitigation status
+      required: false
+    resolved:
+      title: Resolved
+      type: boolean
+      description: Resolved
+      required: false
+    fileSha256:
+      title: File SHA 256
+      type: string
+      description: File SHA 256
+      required: false
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    filePath:
+      title: File Path
+      type: string
+      description: File path
+      required: false
+    fromScan:
+      title: From Scan
+      type: boolean
+      description: From scan
+      required: false
+    classifierName:
+      title: Classifiername
+      type: string
+      description: Classifiername
+      required: false
+    agentMachineType:
+      title: Agent Machine Type
+      type: string
+      description: Agent machine type
+      required: false
+    isCertValid:
+      title: Is Cert Valid
+      type: boolean
+      description: Is cert valid
+      required: false
+    fileIsDotNet:
+      title: File is Dotnet
+      type: boolean
+      description: File is dotnet
+      required: false
+    fileContentHash:
+      title: File Content Hash
+      type: string
+      description: File content hash
+      required: false
+    siteId:
+      title: Site ID
+      type: string
+      description: Site ID
+      required: false
+    rank:
+      title: Rank
+      type: integer
+      description: Rank
+      required: false
+    createdDate:
+      title: Created Date
+      type: string
+      description: Created date
+      required: false
+    updatedAt:
+      title: Updated At
+      type: string
+      description: Updated at
+      required: false
+    agentOsType:
+      title: Agent OS Type
+      type: string
+      description: Agent OS type
+      required: false
+    agentIsDecommissioned:
+      title: Agent is Decommissioned
+      type: boolean
+      description: Agent is Decommissioned
+      required: false
+    isPartialStory:
+      title: Is Partial Story
+      type: boolean
+      description: Is partial story
+      required: false
+    annotation:
+      title: Annotation
+      type: string
+      description: Annotation
+      required: false
+    fileVerificationType:
+      title: File Verification Type
+      type: string
+      description: File verification type
+      required: false
+    publisher:
+      title: Publisher
+      type: string
+      description: Publisher
+      required: false
+    threatName:
+      title: Threat Name
+      type: string
+      description: Threat name
+      required: false
+    maliciousGroupId:
+      title: Malicious Group ID
+      type: string
+      description: Malicious group ID
+      required: false
+    annotationUrl:
+      title: Annotation URL
+      type: string
+      description: Annotation URL
+      required: false
+    agentIsActive:
+      title: Agent is Active
+      type: boolean
+      description: Agent is Active
+      required: false
+    fromCloud:
+      title: From Cloud
+      type: boolean
+      description: From cloud
+      required: false
+    mitigationMode:
+      title: Mitigation Mode
+      type: string
+      description: Mitigation mode
+      required: false
+    agentDomain:
+      title: Agent Domain
+      type: string
+      description: Agent domain
+      required: false
+    agentInfected:
+      title: Agent Infected
+      type: boolean
+      description: Agent infected
+      required: false
+    threatAgentVersion:
+      title: Threat Agent Version
+      type: string
+      description: Threat agent version
+      required: false
+    fileMaliciousContent:
+      title: File Malicious Content
+      type: boolean
+      description: File malicious content
+      required: false
+connection:
+  credentials:
+    type: credential_username_password
+    title: Credentials
+    description: Username and password
+    required: true
+  url:
+    title: URL
+    description: 'URL and endpoint of SentinelOne instance. For example: https://usea1-partners.sentinelone.net/'
+    default: https://usea1-partners.sentinelone.net/
+    type: string
+    required: true
+actions:
+  get_threat_summary:
+    title: Get Threat Summary
+    description: Gets summary of all threats
+    output:
+      pagination:
+        title: Pagination
+        type: pagination
+        description: Pagination
+        required: false
+      errors:
+        title: Errors
+        type: '[]object'
+        description: Errors
+        required: false
+      data:
+        title: Data
+        type: '[]data'
+        description: Data
+        required: false
+  blacklist_by_content_hash:
+    title: Blacklist by Content Hash
+    description: Add hashed content to global blacklist. The input makes use of contentHash
+      from the threat summary
+    input:
+      hash:
+        title: Hash
+        description: Content hash to add to blacklist
+        type: string
+        required: true
+    output:
+      result:
+        title: Result
+        type: blacklist_data
+        description: Result of hashing operation
+        required: true
+  blacklist_by_ioc_hash:
+    title: Blacklist by IoC Hash
+    description: Add hashed indicator of compromise to global blacklist
+    input:
+      hash:
+        title: IoC Hash
+        description: Indicator of compromise hash to add to blacklist
+        type: string
+        required: true
+      agent_id:
+        title: Agent ID
+        description: Agent ID
+        type: string
+        required: true
+    output:
+      result:
+        title: Result
+        type: blacklist_data
+        description: Result of hashing operation
+        required: true
+  create_ioc_threat:
+    title: Create IOC Threat
+    description: Create a threat from an IOC event
+    input:
+      hash:
+        title: Hash
+        description: SHA1 hash
+        type: string
+        required: true
+      agent_id:
+        title: Agent ID
+        description: Agent ID for the slim threat
+        type: string
+        required: true
+      annotation:
+        title: Annotation
+        description: Vigilance annotation
+        type: string
+        required: true
+      annotation_url:
+        title: Annotation URL
+        description: Vigilance annotation URL
+        type: string
+        required: true
+      group_id:
+        title: Group ID
+        description: Group ID
+        type: string
+        required: false
+      path:
+        title: Path
+        description: Path
+        type: string
+        required: false
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  mitigate_threat:
+    title: Mitigate Threat
+    description: Apply a mitigation action to a threat
+    input:
+      threat_id:
+        title: Threat ID
+        description: ID of a threat
+        type: string
+        required: true
+      action:
+        title: Action
+        description: Mitigation action
+        type: string
+        required: true
+        enum:
+        - rollback-remediation
+        - quarantine
+        - kill
+        - remediate
+        - un-quarantine
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  mark_as_benign:
+    title: Mark as Benign
+    description: Mark a threat as resolved
+    input:
+      threat_id:
+        title: Threat ID
+        description: ID of a threat
+        type: string
+        required: true
+      target_scope:
+        title: Target Scope
+        description: Scope to be used for exclusions
+        type: string
+        required: true
+        enum:
+        - group
+        - site
+        - tenant
+      whitening_option:
+        title: Whitening Option
+        description: Selected whitening option
+        type: string
+        required: false
+        enum:
+        - ''
+        - browser-type
+        - certificate
+        - file-type
+        - file_hash
+        - path
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  mark_as_threat:
+    title: Mark as Threat
+    description: Mark a suspicious threat as a threat
+    input:
+      threat_id:
+        title: Threat ID
+        description: ID of a threat
+        type: string
+        required: true
+      target_scope:
+        title: Target Scope
+        description: Scope to be used for exclusions
+        type: string
+        required: true
+        enum:
+        - group
+        - site
+        - tenant
+      whitening_option:
+        title: Whitening Option
+        description: Selected whitening option
+        type: string
+        required: false
+        enum:
+        - ''
+        - browser-type
+        - certificate
+        - file-type
+        - file_hash
+        - path
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+triggers:
+  get_threats:
+    title: Get Threats
+    description: Get threats
+    input:
+      resolved:
+        title: Resolved
+        description: Include resolved threats
+        type: boolean
+        required: false
+      classifications:
+        title: Classifications
+        description: List of classifications to search
+        type: '[]string'
+        required: false
+      agent_is_active:
+        title: Agent is Active
+        description: Include agents currently connected to the management console
+        type: boolean
+        required: false
+      engines:
+        title: Engines
+        description: Included engines
+        type: '[]string'
+        required: false
+      frequency:
+        title: Frequency
+        description: Poll frequency in seconds
+        type: integer
+        required: false
+        default: 5
+    output:
+      threat:
+        title: Threat
+        description: Threat
+        type: data
+        required: false

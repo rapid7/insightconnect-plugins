@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "send_sms",
+    "input": {
+      "message": "",
+      "to_number": ""
+    },
+    "connection": {
+      "twilio_phone_number": "",
+      "credentials": {
+        "username": "",
+        "password": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

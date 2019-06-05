@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "list_saved_searches",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "license": "Enterprise",
+      "port": 8089,
+      "ssl_verify": false,
+      "use_ssl": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

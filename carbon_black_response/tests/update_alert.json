@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "update_alert",
+    "meta": {},
+    "input": {
+      "id": "123413412341234",
+      "status": "Resolved"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

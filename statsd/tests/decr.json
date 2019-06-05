@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "decr",
+    "input": {
+      "count": 1,
+      "rate": 1,
+      "stat": "decrtest1"
+    },
+    "connection": {
+      "udp": {
+        "maxudpsize": 512
+      },
+      "protocol": "UDP",
+      "prefix": "",
+      "tcp": {
+        "timeout": 0
+      },
+      "host": "",
+      "port": 2003
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

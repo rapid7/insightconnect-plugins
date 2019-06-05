@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "list_activity_monitors",
+    "meta": {},
+    "input": {
+      "max_results": 100
+    },
+    "connection": {
+      "api_token": {
+        "secretKey": ""
+      },
+      "customer_id": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

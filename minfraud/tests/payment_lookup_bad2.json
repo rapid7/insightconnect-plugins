@@ -1,0 +1,20 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "input": {
+      "payment_decline_code": "card_declined",
+      "address": "8.8.8.8",
+      "payment_was_authorized": true,
+      "payment_processor": "stripe"
+    },
+    "meta": {},
+    "action": "payment_lookup",
+    "connection": {
+      "license": {
+        "secretKey": ""
+      },
+      "user": 118625
+    }
+  }
+}

@@ -1,0 +1,299 @@
+plugin_spec_version: v2
+name: sentry
+title: Sentry
+description: Sentry is an open-source error tracking tool
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- sentry
+- tracking
+types:
+  Issue:
+    lastSeen:
+      type: date
+    firstSeen:
+      type: date
+    hasSeen:
+      type: boolean
+    id:
+      type: string
+    shortId:
+      type: string
+    count:
+      type: string
+    userCount:
+      type: integer
+    stats:
+      type: object
+    culprit:
+      type: string
+    title:
+      type: string
+    numComments:
+      type: integer
+    type:
+      type: string
+    annotations:
+      type: '[]string'
+    status:
+      type: string
+    isPublic:
+      type: boolean
+    isSubscribed:
+      type: boolean
+    isBookmarked:
+      type: boolean
+    metadata:
+      type: object
+    level:
+      type: string
+    project:
+      type: object
+    permalink:
+      type: string
+    statusDetails:
+      type: object
+    assignedTo:
+      type: string
+    logger:
+      type: string
+    subscriptionDetails:
+      type: object
+    shareId:
+      type: string
+  Exception:
+    type:
+      type: string
+    value:
+      type: string
+    module:
+      type: string
+  EventJSON:
+    event_id:
+      type: string
+    culprit:
+      type: string
+    timestamp:
+      type: date
+    tags:
+      type: object
+    exception:
+      type: '[]Exception'
+  User:
+    username:
+      type: string
+    ip_address:
+      type: string
+    email:
+      type: string
+    name:
+      type: string
+    id:
+      type: string
+  Tag:
+    value:
+      type: string
+    key:
+      type: string
+  Entry:
+    type:
+      type: string
+    data:
+      type: object
+  Event:
+    eventID:
+      type: string
+    sdk:
+      type: object
+    errors:
+      type: '[]object'
+    dist:
+      type: string
+    platform:
+      type: string
+    contexts:
+      type: object
+    fingerprint:
+      type: '[]string'
+    dateCreated:
+      type: date
+    dateReceived:
+      type: date
+    size:
+      type: integer
+    metadata:
+      type: object
+    tags:
+      type: '[]Tag'
+    groupId:
+      type: string
+    type:
+      type: string
+    id:
+      type: string
+    message:
+      type: string
+    packages:
+      type: object
+    user:
+      type: User
+    context:
+      type: object
+    entries:
+      type: '[]Entry'
+connection:
+  api_key:
+    title: API Key
+    description: Sentry Auth Token
+    type: credential_secret_key
+    required: true
+  url:
+    title: API URL
+    description: Sentry API URL
+    type: string
+    default: https://sentry.io/api/0/
+    required: true
+actions:
+  submit_event:
+    title: Submit Event
+    description: Create new Sentry event
+    input:
+      event_json:
+        type: EventJSON
+        title: Event JSON
+        description: Data describing the event
+        required: true
+      dsn:
+        type: string
+        title: DSN
+        description: DSN configuration of a Sentry project (e.g. 'https://public:secret@sentry.example.com/1')
+        required: true
+      sentry_version:
+        type: integer
+        title: Sentry Version
+        description: The protocol version. The current version of the protocol is
+          '7'
+        default: 7
+        required: false
+    output:
+      id:
+        description: ID of a newly created event
+        title: ID
+        type: string
+        required: true
+  update_issue:
+    title: Update Issue
+    description: Update an individual issues's attributes (only the attributes submitted
+      are modified)
+    input:
+      issue_id:
+        type: string
+        title: Issue ID
+        description: The ID of the group to retrieve
+        required: true
+      status:
+        type: string
+        title: Status
+        description: The new status for the issue. Valid values are 'resolved', 'resolvedInNextRelease',
+          'unresolved', and 'ignored'
+        enum:
+        - resolved
+        - resolvedInNextRelease
+        - unresolved
+        - ignored
+        required: false
+      assignedTo:
+        type: string
+        title: Assigned To
+        description: The actor ID (or username) of the user or team that should be
+          assigned to this issue
+        required: false
+      hasSeen:
+        type: boolean
+        title: Has Seen
+        description: In case this API call is invoked with a user context this allows
+          changing of the flag that indicates if the user has seen the event
+        required: false
+      isBookmarked:
+        type: boolean
+        title: Is Bookmarked
+        description: In case this API call is invoked with a user context this allows
+          changing of the bookmark flag
+        required: false
+      isSubscribed:
+        type: boolean
+        title: Is Subscribed
+        description: In case this API call is invoked with a user context this allows
+          subscribing to/unsubscribing from this issue
+        required: false
+      isPublic:
+        type: boolean
+        title: Is Public
+        description: Sets the issue to public or private
+        required: false
+    output:
+      issue:
+        title: Issue
+        description: Updated issue
+        type: Issue
+        required: true
+  list_project_issues:
+    title: List Project Issues
+    description: Return a list of issues (groups) bound to a project
+    input:
+      organization_slug:
+        type: string
+        title: Organization Slug
+        description: The slug of the organization the issues belong to
+        required: true
+      project_slug:
+        type: string
+        title: Project Slug
+        description: The slug of the project the issues belong to
+        required: true
+      statsPeriod:
+        type: string
+        title: Stats Period
+        description: An optional stat period (can be one of '24h', '14d', and '')
+        required: false
+        default: ''
+        enum:
+        - 24h
+        - 14d
+        - ''
+      shortIdLookup:
+        type: boolean
+        title: Short ID Lookup
+        description: If this is set to true then short IDs are looked up by this function
+          as well. This can cause the return value of the function to return an event
+          issue of a different project which is why this is an opt-in. Set to 1 to
+          enable
+        required: false
+      query:
+        type: string
+        title: Query
+        description: An optional Sentry structured search query. If not provided an
+          implied 'is:unresolved; is assumed
+        required: false
+    output:
+      issues:
+        type: '[]Issue'
+        title: Issues
+        description: A list of issues (groups) bound to a project
+        required: true
+  list_issue_events:
+    title: List Issue Events
+    description: List an issue's events
+    input:
+      issue_id:
+        type: string
+        title: Issue ID
+        description: The ID of the issue to retrieve
+        required: true
+    output:
+      events:
+        title: Events
+        description: Issue's events
+        type: '[]Event'
+        required: true

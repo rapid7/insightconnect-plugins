@@ -1,0 +1,24 @@
+{
+  "body": {
+    "action": "publish_event",
+    "meta": {},
+    "input": {
+      "event_message": "This is a testing message",
+      "topic": "test"
+    },
+    "connection": {
+      "broker_ca": {
+        "privateKey": ""
+      },
+      "client_crt": {
+        "privateKey": ""
+      },
+      "client_key": {
+        "privateKey": ""
+      },
+      "host": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

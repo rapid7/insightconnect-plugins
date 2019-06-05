@@ -1,0 +1,23 @@
+{
+  "body": {
+    "input": {},
+    "connection": {
+      "uri": "/api/",
+      "server": "192.168.0.23",
+      "ssl": true,
+      "port": 55553,
+      "credentials": {
+        "username": "",
+        "password": ""
+      }
+    },
+    "trigger": "new_modules",
+    "meta": {},
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    }
+  },
+  "version": "v1",
+  "type": "trigger_start"
+}

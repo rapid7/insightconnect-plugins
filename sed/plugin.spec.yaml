@@ -1,0 +1,61 @@
+plugin_spec_version: v2
+name: sed
+title: Sed
+description: Run the GNU stream editor on strings and files
+version: 2.0.0
+vendor: rapid7
+tags:
+- sed
+- edit
+- utilities
+actions:
+  process_string:
+    title: Process String
+    description: Process string
+    input:
+      string:
+        title: String
+        type: string
+        description: String to Process
+        required: true
+      expression:
+        title: Expression
+        type: '[]string'
+        description: Sed Expression
+        required: true
+      options:
+        title: Options
+        type: string
+        description: Sed Options
+        required: false
+    output:
+      output:
+        title: Processed String
+        type: string
+        description: Processed String
+        required: false
+  process_bytes:
+    title: Process Bytes
+    description: Process bytes of base64 encoded string
+    input:
+      bytes:
+        title: Bytes
+        type: bytes
+        description: File/bytes to Process
+        required: true
+      expression:
+        title: Expression
+        type: '[]string'
+        description: Sed Expression
+        required: true
+      options:
+        title: Options
+        type: string
+        description: Sed Options
+        required: false
+    output:
+      output:
+        title: Output
+        type: string
+        description: Processed String
+        required: false

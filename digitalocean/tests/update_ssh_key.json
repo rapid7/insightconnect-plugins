@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "update_ssh_key",
+        "connection": {
+            "token":{
+                "secretKey": ""
+            }
+        },
+        "input": {
+            "name": "",
+            "ssh_key_id": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

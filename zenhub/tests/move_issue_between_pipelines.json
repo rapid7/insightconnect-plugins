@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "move_issue_between_pipelines",
+    "meta": {},
+    "input": {
+      "issue_number": 0,
+      "pipeline_id": "",
+      "position": 0,
+      "repo_id": 0
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

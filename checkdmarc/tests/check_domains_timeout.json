@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "check_domains",
+    "meta": {},
+    "input": {
+      "domain": "www.fbi.gov",
+      "timeout": 0.00000001
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

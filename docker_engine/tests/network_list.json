@@ -1,0 +1,22 @@
+{
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_version": "auto",
+      "ca_cert": {
+        "secretKey": ""
+      },
+      "client_cert": {
+        "secretKey": ""
+      },
+      "client_key": {
+        "secretKey": ""
+      },
+      "url": "https://localhost:2376"
+    },
+    "input": {},
+    "action": "network_list"
+  },
+  "type": "action_start"
+}

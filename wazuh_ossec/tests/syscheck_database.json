@@ -1,0 +1,28 @@
+{
+  "body": {
+    "action": "syscheck_database",
+    "meta": {},
+    "input": {
+      "agent_id": "",
+      "event": "All",
+      "file": "",
+      "filetype": "All",
+      "hash": "",
+      "limit": 0,
+      "md5": "",
+      "offset": 0,
+      "search": "",
+      "sha1": "",
+      "sort": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,22 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": "9000",
+      "protocol": "http",
+      "proxy": {},
+      "verify": true
+    },
+    "meta": {},
+    "input": {
+      "id": ""
+    },
+    "action": "get_user"
+  }
+}

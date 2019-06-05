@@ -1,0 +1,17 @@
+{
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "search",
+    "input": {
+      "expression": "paypal.*",
+      "start": "wrong"
+    }
+  },
+  "version": "v1"
+}

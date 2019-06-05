@@ -1,0 +1,258 @@
+plugin_spec_version: v2
+name: bitbucket
+title: Bitbucket
+vendor: rapid7
+status: ["unsupported"]
+description: Utilize Bitbucket API
+version: 1.0.0
+tags:
+- bitbucket
+- issue
+- authentication
+- git
+connection:
+  credentials:
+    description: Bitbucket username and password
+    type: credential_username_password
+    required: true
+    title: Credentials
+actions:
+  create_issue:
+    title: Create Issue
+    description: Create issue on Bitbucket
+    input:
+      repository:
+        title: Repository
+        type: string
+        description: Repository name
+        required: true
+      title:
+        title: Title
+        type: string
+        description: Issue title
+        required: true
+      priority:
+        title: Priority
+        type: string
+        description: Priority e.g. major, critical, etc
+        enum:
+        - None
+        - Trivial
+        - Minor
+        - Major
+        - Critical
+        - Blocker
+        required: false
+      kind:
+        title: Kind
+        type: string
+        description: Kind e.g. bug, proposal, etc
+        enum:
+        - None
+        - Bug
+        - Enhancement
+        - Proposal
+        - Task
+        required: false
+      state:
+        title: State
+        type: string
+        description: State e.g. open, resolved, etc
+        enum:
+        - None
+        - New
+        - Open
+        - Resolved
+        - On hold
+        - Invalid
+        - Duplicate
+        - Wontfix
+        - Closed
+        required: false
+      content:
+        title: Content
+        type: string
+        description: Issue description
+        required: false
+      component:
+        title: Component
+        type: string
+        description: Component name
+        required: false
+      assignee:
+        title: Assignee
+        type: string
+        description: Assignee username
+        required: false
+      version:
+        title: Version
+        type: string
+        description: Version name
+        required: false
+      milestone:
+        title: Milestone
+        type: string
+        description: Milestone name
+        required: false
+    output:
+      issue:
+        title: Issue
+        type: object
+        description: Issue
+        required: false
+  delete_repo:
+    title: Delete Repository
+    description: Delete a Repository
+    input:
+      title:
+        title: Title
+        type: string
+        description: Title of repository
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+  create_repo:
+    title: Create Repository
+    description: Create a Repository
+    input:
+      title:
+        title: Title
+        type: string
+        description: Title of repository
+        required: true
+      description:
+        title: Description
+        type: string
+        description: Description of repository
+        required: false
+      has_issues:
+        title: Has Issues
+        type: boolean
+        description: Add issue tracker
+        default: true
+        required: false
+      is_private:
+        title: Is Private
+        type: boolean
+        description: Repository is private
+        default: false
+        required: false
+      type:
+        title: Type
+        type: string
+        description: Repo type e.g. Git, Mercurial, etc
+        enum:
+        - Hg
+        - Git
+        default: Git
+        required: false
+      has_wiki:
+        title: Has Wiki
+        type: boolean
+        description: Has wiki
+        default: false
+        required: false
+    output:
+      repository:
+        title: Repository
+        description: Repository
+        type: object
+        required: false
+  user:
+    title: User
+    description: Get user information
+    input:
+      username:
+        title: Username
+        type: string
+        description: Bitbucket username
+        required: true
+    output:
+      user:
+        title: User
+        description: User
+        type: object
+        required: false
+triggers:
+  issue:
+    title: Issue
+    description: Monitor new issues
+    input:
+      repository:
+        title: Repository
+        type: string
+        description: Return issues of a specific repository
+        required: true
+      priority:
+        title: Priority
+        type: string
+        description: Priority e.g. major, critical, etc
+        enum:
+        - None
+        - Trivial
+        - Minor
+        - Major
+        - Critical
+        - Blocker
+        required: false
+      kind:
+        title: Kind
+        type: string
+        description: Kind e.g. bug, proposal, etc
+        enum:
+        - None
+        - Bug
+        - Enhancement
+        - Proposal
+        - Task
+        required: false
+      state:
+        title: State
+        type: string
+        description: State e.g. open, resolved, etc
+        enum:
+        - None
+        - New
+        - Open
+        - Resolved
+        - On hold
+        - Invalid
+        - Duplicate
+        - Wontfix
+        - Closed
+        required: false
+      component:
+        title: Component
+        type: string
+        description: Component name
+        required: false
+      assignee:
+        title: Assignee
+        type: string
+        description: Assignee username
+        required: false
+      version:
+        title: Version
+        type: string
+        description: Version name
+        required: false
+      milestone:
+        title: Milestone
+        type: string
+        description: Milestone name
+        required: false
+      poll:
+        type: integer
+        title: Poll Interval
+        description: Poll interval in seconds
+        required: false
+    output:
+      issues:
+        title: Issues
+        description: Issues
+        type: '[]object'
+        required: false

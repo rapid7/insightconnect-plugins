@@ -1,0 +1,48 @@
+{
+  "body": {
+    "action": "create_networkpolicy",
+    "meta": {},
+    "input": {
+      "policy": {
+        "Action": "Drop",
+        "BackupGateway": "",
+        "DSCPMarking": "",
+        "DataAccounting": "Exclude",
+        "DestinationNetworks": ["Any"],
+        "DestinationZones": ["Any"],
+        "Identity": [],
+        "LogTraffic": "Disable",
+        "MatchIdentity": "Disable",
+        "OutboundAddress": "",
+        "PrimaryGateway": "None",
+        "RewriteSourceAddress": "Disable",
+        "Schedule": "All the Time",
+        "SecurityPolicy": {
+          "Description": "Komand Networkpolicy Config",
+          "IPFamily": "IPv4",
+          "IntrusionPrevention": "None",
+          "Name": "Komand Network policy",
+          "Position": "top",
+          "SecurityHeartbeat": "None",
+          "SourceSecurityHeartbeat": "Disable",
+          "DestSecurityHeartbeat": "Disable",
+          "Status": "Enable",
+          "TrafficShapingPolicy": "None"
+        },
+        "Services": ["FTP", "DNS", "FINGER"],
+        "SourceNetworks": ["Any"],
+        "SourceZones": ["Any"]
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": 4444
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

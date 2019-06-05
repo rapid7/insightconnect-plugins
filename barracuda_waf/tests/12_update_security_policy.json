@@ -1,0 +1,81 @@
+{
+  "body": {
+    "input": {
+      "policy_id": "test-v14-policy",
+      "url_protection": {
+        "csrf_prevention": "none",
+        "enable": "yes",
+        "allowed_methods": [],
+        "blocked_attack_types": [],
+        "custom_blocked_attack_types": [],
+        "max_content_length": 0,
+        "maximum_upload_files": 0,
+        "allowed_content_types": [],
+        "max_parameters": 0,
+        "exception_patterns": [],
+        "maximum_parameter_name_length": 2
+      },
+      "url_normalization": {
+        "parameter_separators": "ampersand",
+        "default_charset": "GBK",
+        "detect_response_charset": "yes",
+        "apply_double_decoding": "yes"
+      },
+      "cloaking": {
+        "filter_response_header": "yes",
+        "return_codes_to_exempt": "",
+        "suppress_return_code": "yes"
+      },
+      "cookie_security": {
+        "http_only": "yes",
+        "custom_headers": [],
+        "allow_unrecognized_cookies": "custom",
+        "cookie_replay_protection_type": "none",
+        "cookie_max_age": 0,
+        "tamper_proof_mode": "signed",
+        "days_allowed": 0,
+        "secure_cookie": "yes",
+        "cookies_exempted": []
+      },
+      "request_limits": {
+        "max_header_value_length": 512,
+        "enable": "yes",
+        "max_number_of_headers": 2,
+        "max_query_length": 2,
+        "max_cookie_name_length": 2,
+        "max_cookie_value_length": 2,
+        "max_url_length": 2,
+        "max_request_line_length": 2,
+        "max_request_length": 2,
+        "max_header_name_length": 2,
+        "max_number_of_cookies": 2
+      },
+      "parameter_protection": {
+        "maximum_parameter_value_length": 2,
+        "maximum_instances": 0,
+        "blocked_attack_types": [],
+        "maximum_upload_file_size": 0,
+        "base64_decode_parameter_value": "no",
+        "denied_metacharacters": "",
+        "allowed_file_upload_type": "extensions",
+        "custom_blocked_attack_types": [],
+        "enable": "yes",
+        "exception_patterns": [],
+        "file_upload_extensions": [],
+        "file_upload_mime_types": [],
+        "ignore_parameters": []
+      }
+    },
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "action": "update_security_policy",
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

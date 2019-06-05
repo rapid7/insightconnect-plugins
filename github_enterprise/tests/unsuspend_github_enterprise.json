@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "unsuspend",
+    "input": {
+      "username": "testuserkeithen"
+    },
+    "connection": {
+      "host": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

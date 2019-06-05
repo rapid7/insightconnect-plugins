@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "download",
+    "input": {
+      "path": "this_file_doesnt_exist"
+    },
+    "meta": {},
+    "connection": {
+      "host": "ftp.gnu.org",
+      "secure": false,
+      "credentials": {
+        "password": "anonymous",
+        "username": "anonymous"
+      },
+      "passive": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

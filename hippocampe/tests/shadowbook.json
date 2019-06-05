@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "shadowbook",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

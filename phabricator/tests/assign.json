@@ -1,0 +1,18 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "action": "assign",
+    "input": {
+      "id": "1",
+      "user": "divo"
+    },
+    "connection": {
+      "token": {
+        "secretKey": ""
+      },
+      "url": ""
+    }
+  }
+}

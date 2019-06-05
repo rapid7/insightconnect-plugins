@@ -1,0 +1,104 @@
+plugin_spec_version: v2
+name: ipintel
+title: IPIntel
+vendor: rapid7
+status: ["unsupported"]
+description: An IP address lookup tool for the DFIR field
+version: 1.0.0
+tags:
+- ipintel
+- intel
+- threat
+types:
+  intel:
+    ip:
+      type: string
+      required: false
+    info:
+      type: '[]string'
+      required: false
+    threats:
+      type: '[]string'
+      required: false
+    warnings:
+      type: '[]string'
+      required: false
+    cached:
+      type: string
+      required: false
+    country:
+      type: string
+      required: false
+    hostname:
+      type: string
+      required: false
+    geoonly:
+      type: string
+      required: false
+    lookup_time:
+      type: string
+      required: false
+    longitude:
+      type: string
+      required: false
+    stealth:
+      type: string
+      required: false
+    references:
+      type: '[]string'
+      required: false
+    location:
+      type: string
+      required: false
+    country_iso:
+      type: string
+      required: false
+    latitude:
+      type: string
+      required: false
+    org:
+      type: string
+      required: false
+    first_seen:
+      type: string
+      required: false
+    city:
+      type: string
+      required: false
+    last_seen:
+      type: string
+      required: false
+    permalink:
+      type: string
+      required: false
+actions:
+  lookup:
+    title: Lookup Intelligence
+    description: Lookup intelligence information
+    input:
+      addresses:
+        title: IP Addresses
+        description: IP Addresses
+        type: '[]string'
+        required: true
+      stealth:
+        title: Stealth Mode
+        description: When enabled, all external third-party API lookups are disabled.
+          Threat lookups are local only, and geolocation data may be less accurate
+        default: false
+        type: boolean
+        required: false
+      geolookup:
+        title: Geo-IP Lookup Only
+        description: Enabling this will disable all threat intelligence lookups, and
+          only return geolocation data for the IP addresses entered. This is much
+          quicker, but provides no threat data
+        default: false
+        type: boolean
+        required: false
+    output:
+      result:
+        title: Intel
+        description: Intel object containing query results
+        type: '[]intel'
+        required: false

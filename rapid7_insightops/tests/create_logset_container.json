@@ -1,0 +1,21 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "action": "create_logset_container",
+    "meta": {},
+    "input": {
+      "source_type": "token",
+      "token_seed": "",
+      "structures": [],
+      "id": "c17cef2e-01c1-414e-b42b-ea5088c2f713",
+      "le_agent_follow": "",
+      "le_agent_filename": "",
+      "name": "Komand create logset container action Test"
+    },
+    "connection": {
+      "region": "eu",
+      "api_key": ""
+    }
+  }
+}

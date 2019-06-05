@@ -1,0 +1,17 @@
+{
+    "body": {
+        "trigger": "search_certstream",
+        "connection": {
+        },
+        "input": {
+            "query": "secur"
+        },
+        "meta": {},
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+          }
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

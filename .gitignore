@@ -1,0 +1,51 @@
+# AWS
+.boto
+
+# vim
+*.sw*
+
+# vscode
+.vscode
+
+# sed -i.bu
+*.bu
+
+# Python bytecode
+**/*.pyc
+
+# OSX thumbnails/files
+**/.DS_Store
+
+# PyCharm cruft
+.idea/
+**/.idea
+
+# virtual environments
+**/venv
+
+# We don't want a spec file in the root of the repo, people end up editing it
+/*.yaml
+/*.yml
+
+# We don't want run files
+**/*-run
+**/run
+**/run.sh
+
+# packages
+**/*.tar.gz
+**/*.tgz
+komand-*.tar.gz
+demo-*.tar.gz
+
+# Wheels
+**/*.whl
+
+.drone.sec.unencrypted
+
+# IntelliJ
+.idea/
+*.iml
+
+# merge trash
+*.orig

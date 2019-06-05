@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "get_user_status",
+    "input": {
+      "user": ""
+    },
+    "connection": {
+        "hostname": "",
+        "integration_key": {
+          "secretKey": ""
+        },
+        "secret_key": {
+          "secretKey": ""
+        }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

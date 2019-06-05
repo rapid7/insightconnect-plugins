@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "search",
+    "input": {
+      "query": "komand",
+      "limit": 100
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "host": "",
+      "proxy": "",
+      "client_id": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

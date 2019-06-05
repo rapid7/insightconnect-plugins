@@ -1,0 +1,18 @@
+{
+  "body": {
+    "trigger": "poll",
+    "meta": {},
+    "input": {
+      "frequency": 15
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "url": "https://www.schneier.com/blog/atom.xml"
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

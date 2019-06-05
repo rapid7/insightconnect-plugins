@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "list_packages",
+    "meta": {},
+    "input": {
+      "app_id": "MooseLifeTest-gIglw"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

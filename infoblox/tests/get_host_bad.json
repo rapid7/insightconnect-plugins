@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_host",
+    "meta": {},
+    "input": {
+      "_ref": "ZG5zLmhvc3QkLm5vbl9ETlNfaG9zdF9yb290LjAuMTUzMjY4OTgzMDkxMC5jb20uZXhhbXBsZS5hZG1pbg:admin.example.com"
+    },
+    "connection": {
+      "api_version": "2.7",
+      "infoblox_host": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

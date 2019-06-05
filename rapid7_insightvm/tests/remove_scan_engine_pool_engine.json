@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "remove_scan_engine_pool_engine",
+    "meta": {},
+    "input": {
+      "pool_id": 6,
+      "engine_id": 5
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

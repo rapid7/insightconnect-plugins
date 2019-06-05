@@ -1,0 +1,18 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "get_job_details",
+    "connection": {
+      "verify": true,
+      "host": "",
+      "proxy": {},
+      "port": "9999",
+      "protocol": "http"
+    },
+    "input": {
+      "job_id": "lsqxdgngBF3rdAFe"
+    }
+  }
+}

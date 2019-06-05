@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "create_issue",
+    "input": {
+      "title": "Test Issue",
+      "content": "Test Content body",
+      "repository": "test_repo",
+      "assignee": "lmilby",
+      "milestone": "",
+      "component": "",
+      "version": "",
+      "kind": "Bug",           
+      "priority": "Critical",   
+      "state": "New"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

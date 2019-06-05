@@ -1,0 +1,12 @@
+{
+  "body": {
+    "meta": {},
+    "input": {
+      "domain": "nic.zuerich"
+    },
+    "action": "domain",
+    "connection": null
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,15 @@
+{
+   "version": "v1",
+   "type": "action_start",
+   "body": {
+     "meta": {},
+     "action": "run_jq",
+     "connection": {},
+     "dispatcher": {},
+     "input": {
+       "filter": ".Greeting.Short",
+       "flags": [],
+       "json_in": {"Greeting":{"Long":"Hello!","Short":"Hi!"}}
+     }
+   }
+ }

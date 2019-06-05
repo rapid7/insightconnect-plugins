@@ -1,0 +1,40 @@
+{
+	"body": {
+		"action": "json_to_csv",
+		"input": {
+			"json": [{
+					"Asset OS Family": "Microsoft Windows",
+					"Asset OS Name": "Microsoft Windows Server 2012 Standard Edition",
+					"Asset IP Address": "10.1.2.1",
+					"Asset Names": "BIGFIX-CLT-W12,bigfix-clt-w12.example.com",
+					"Asset OS Version": ""
+				},
+				{
+					"Asset OS Family": "Microsoft Windows",
+					"Asset OS Name": "Microsoft Windows Server 2012 Standard Edition",
+					"Asset IP Address": "10.1.2.2",
+					"Asset Names": "BIGFIX-SRV,bigfix-srv.example.com",
+					"Asset OS Version": ""
+				},
+				{
+					"Asset OS Family": "Microsoft Windows",
+					"Asset OS Name": "Microsoft Windows Server 2012 Standard Edition",
+					"Asset IP Address": "10.1.2.3",
+					"Asset Names": "BIGFIX-SRV,bigfix-srv.example.com",
+					"Asset OS Version": ""
+				},
+				{
+					"Asset OS Family": "Microsoft Windows",
+					"Asset OS Name": "Microsoft Windows 7 Enterprise Edition",
+					"Asset IP Address": "10.1.2.4",
+					"Asset Names": "BIGFIX-CLT-W7,bigfix-clt-w7.example.com",
+					"Asset OS Version": "SP1"
+				}
+			]
+		},
+		"connection": null,
+		"meta": {}
+	},
+	"version": "v1",
+	"type": "action_start"
+}

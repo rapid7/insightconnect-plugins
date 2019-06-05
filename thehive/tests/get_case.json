@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "get_case",
+    "meta": {},
+    "input": {
+      "id": "123"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": "9000",
+      "protocol": "http",
+      "proxy": {},
+      "verify": true
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

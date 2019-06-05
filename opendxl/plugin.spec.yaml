@@ -1,0 +1,77 @@
+plugin_spec_version: v2
+name: opendxl
+title: OpenDXL
+description: OpenDXL is an initiative to create adaptive systems of interconnected
+  services that communicate and share information for real-time, accurate security
+  decisions and actions
+version: 1.1.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- opendxl
+- message broker
+connection:
+  broker_ca:
+    type: credential_asymmetric_key
+    title: Broker CA
+    description: Broker certificate authority bundle
+    required: true
+  client_crt:
+    type: credential_asymmetric_key
+    title: Client CRT
+    description: Client certificate file
+    required: true
+  client_key:
+    type: credential_asymmetric_key
+    title: Client Key
+    description: Client key file
+    required: true
+  host:
+    type: string
+    title: Host
+    description: The broker host e.g. example.com:8883
+    required: true
+triggers:
+  receive_event:
+    title: Receive Event
+    description: Trigger on receiving a new event from a specified topic
+    input:
+      topic:
+        title: Topic
+        description: The topic to receive messages from
+        type: string
+        required: true
+      number_of_messages:
+        title: Number of Messages
+        description: The number of messages to return at one time as a list. Must
+          be one or more
+        type: integer
+        required: true
+        default: 1
+    output:
+      messages:
+        title: Messages
+        description: Messages found in the subscription
+        type: '[]string'
+        required: false
+actions:
+  publish_event:
+    title: Publish Event
+    description: Publish a new event to a specified topic
+    input:
+      topic:
+        title: Topic
+        description: The topic to publish messages to
+        type: string
+        required: true
+      event_message:
+        title: Event Message
+        description: The event message
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: Boolean showing whether the event was sent
+        type: boolean
+        required: false

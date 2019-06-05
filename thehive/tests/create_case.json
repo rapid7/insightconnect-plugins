@@ -1,0 +1,37 @@
+{
+  "body": {
+    "meta": {},
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": "9000",
+      "protocol": "http",
+      "proxy": {},
+      "verify": true
+    },
+    "action": "create_case",
+    "input": {
+      "tlp": 2,
+      "tags": ["test"],
+      "description": "This is a test case",
+      "task": {
+        "owner": "user",
+        "description": "blah",
+        "title": "Stuff",
+        "status": "InProgress",
+        "flag": false,
+        "startDate": ""
+      },
+      "title": "My Test Case",
+      "flag": false,
+      "customFields": {
+	  "testCustomField":{"string":"derp"}
+      }
+    }
+  },
+  "version": "v1",
+  "type": "action_start"
+}

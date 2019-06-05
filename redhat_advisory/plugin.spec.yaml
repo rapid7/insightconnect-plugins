@@ -1,0 +1,117 @@
+plugin_spec_version: v2
+name: redhat_advisory
+title: Redhat Security Advisories
+vendor: rapid7
+status: ["unsupported"]
+description: Trigger on new Redhat Security Advisories
+version: 1.0.1
+tags:
+- redhat
+- vulnerability management
+- security advisories
+- feeds
+- cve
+types:
+  reference:
+    description:
+      description: Reference Description
+      type: string
+      required: false
+    url:
+      description: URL
+      type: string
+      required: false
+    type:
+      description: Ref Type (e.g. Self)
+      type: string
+      required: false
+  publisher:
+    issuing_authority:
+      description: Issuer
+      type: string
+      required: false
+    type:
+      description: Type of Publisher
+      type: string
+      required: false
+    contact_details:
+      description: Who to contact
+      type: string
+      required: false
+triggers:
+  new_advisory:
+    description: Trigger on new advisory
+    input:
+      after:
+        type: string
+        description: Look for new advisories after provided date. Default is when
+          trigger starts
+        required: false
+      include_cvrf:
+        type: boolean
+        default: false
+        description: Include the full source CVRF
+        required: false
+    output:
+      rhsa:
+        type: string
+        description: Red Hat Security Advisory ID
+        required: false
+      title:
+        type: string
+        description: Title of Advisory
+        required: false
+      url:
+        description: URL to advisory
+        type: string
+        required: false
+      notes:
+        type: string
+        description: Notes
+        required: false
+      type:
+        type: string
+        description: Type, e.g. 'Security Advisory'
+        required: false
+      publisher:
+        description: Publisher
+        type: publisher
+        required: false
+      references:
+        description: URL references
+        type: '[]reference'
+        required: false
+      severity:
+        type: string
+        description: Severity
+        required: false
+      released_on:
+        type: date
+        description: Release Date
+        required: false
+      cves:
+        title: CVEs
+        type: '[]string'
+        description: CVE IDs
+        required: false
+      bugzillas:
+        title: Bugzilla IDs
+        type: '[]string'
+        description: Bugzilla IDs
+        required: false
+      released_packages:
+        type: '[]string'
+        description: Released Packages
+        required: false
+      oval:
+        description: OVAL
+        type: object
+        required: false
+      resource_url:
+        description: Resource JSON URL
+        type: string
+        required: false
+      source:
+        description: Original Source CVRF doc
+        type: object
+        required: false

@@ -1,0 +1,25 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "url": "",
+      "ssl_verify": false,
+      "username": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "action": "add_event",
+    "input": {
+      "source": "Faker Vault",
+      "type": "Application Compromise",
+        "params": {
+            "campaign": "NetTraveler"
+        },
+      "title": "voluptates",
+      "description": "Consectetur soluta deserunt at exercitationem beatae."
+    },
+    "meta": {}
+  }
+}

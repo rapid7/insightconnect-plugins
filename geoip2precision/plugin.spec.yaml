@@ -1,0 +1,93 @@
+plugin_spec_version: v2
+name: geoip2precision
+title: GeoIP2 Precision
+vendor: rapid7
+status: ["unsupported"]
+description: MaxMind service that offers industry-leading IP intelligence data
+version: 1.0.0
+tags:
+- geoip
+- geoip2
+- precision
+- ip
+connection:
+  user:
+    type: integer
+    description: User ID number
+    required: true
+  license_key:
+    title: License Key
+    type: credential_secret_key
+    description: License key
+    required: true
+actions:
+  lookup:
+    title: Lookup
+    description: Lookup IP address information
+    input:
+      address:
+        title: IP Address
+        description: IP address to query
+        type: string
+        required: true
+    output:
+      address:
+        title: Lookup Address
+        description: IP address queried
+        type: string
+        required: false
+      asn:
+        title: ASN
+        description: Autonomous system number
+        type: integer
+        required: false
+      domain:
+        title: Domain
+        description: Domain associated with IP
+        type: string
+        required: false
+      org:
+        title: Organization
+        description: Organization associated with ASN
+        type: string
+        required: false
+      time_zone:
+        title: Time Zone
+        description: Time zone for location
+        type: string
+        required: false
+      city:
+        title: City
+        description: City associated with IP
+        type: string
+        required: false
+      state:
+        title: State
+        description: State associated with IP
+        type: string
+        required: false
+      postal:
+        title: Postal Code
+        description: Postal Code for location
+        type: integer
+        required: false
+      country:
+        title: Country
+        description: Country of location
+        type: string
+        required: false
+      registered_country:
+        title: Registered Country
+        description: Country of IP registration
+        type: string
+        required: false
+      longitude:
+        title: Longitude
+        description: Longitude for location
+        type: string
+        required: false
+      latitude:
+        title: Latitude
+        description: Latitude for location
+        type: string
+        required: false

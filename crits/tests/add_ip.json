@@ -1,0 +1,22 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "input": {
+      "ip": "250.14.50.172",
+      "source": "Faker Vault",
+      "type": "IPv4 Address",
+      "params": {}
+    },
+    "action": "add_ip",
+    "meta": {},
+    "connection": {
+      "url": "",
+      "ssl_verify": false,
+      "username": "",
+      "api_key": {
+        "secretKey": ""
+      }
+    }
+  }
+}

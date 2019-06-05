@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "create",
+    "meta": {},
+    "input": {
+      "assignee": "",
+      "body": "This is a sample ticket",
+      "labels": "",
+      "milestone": 0,
+      "organization": "",
+      "repository": "islet",
+      "title": "Test ticket"
+    },
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

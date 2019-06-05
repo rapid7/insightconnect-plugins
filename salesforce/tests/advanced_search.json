@@ -1,0 +1,24 @@
+{
+  "body": {
+    "action": "advanced_search",
+    "meta": {},
+    "input": {
+      "query": "SELECT name from Account"
+    },
+    "connection": {
+      "client_id": "",
+      "client_secret": {
+        "secretKey": ""
+      },
+      "salesforce_account_username_and_password": {
+        "password": "",
+        "username": ""
+      },
+      "security_token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

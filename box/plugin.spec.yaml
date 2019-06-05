@@ -1,0 +1,389 @@
+plugin_spec_version: v2
+name: box
+title: Box
+vendor: rapid7
+status: ["unsupported"]
+description: Box gives you access to secure content management and content experience
+  features of the Box Enterprise API
+version: 2.0.3
+tags:
+- box
+- cloud
+- storage
+- document
+connection:
+  client_id:
+    description: Box client ID
+    type: string
+    required: true
+    title: Client ID
+  client_secret:
+    description: Box client secret
+    type: credential_secret_key
+    required: true
+    title: Client Secret
+  enterprise_id:
+    description: Box enterprise ID
+    type: string
+    required: true
+    title: Enterprise ID
+  private_key:
+    description: User generated private key
+    type: credential_secret_key
+    required: true
+    title: Private Key
+  rsa_password:
+    description: Private key password
+    type: credential_secret_key
+    required: false
+    title: RSA Password
+  jwt_key_id:
+    description: Box generated JWT key ID
+    type: string
+    required: true
+    title: JWT Key ID
+actions:
+  create_user:
+    title: Create User
+    description: Create user account
+    input:
+      login:
+        type: string
+        title: Login
+        description: Login email
+        required: true
+      name:
+        type: string
+        title: Name
+        description: Username
+        required: true
+      role:
+        type: string
+        title: Role
+        description: Enterprise role e.g. coadmin, user
+        enum:
+        - Coadmin
+        - User
+        default: User
+        required: false
+      sync:
+        type: boolean
+        title: Sync
+        description: Whether or not this user can use Box Sync
+        required: false
+      job_title:
+        type: string
+        title: Job Title
+        description: User's job title
+        required: false
+      phone:
+        type: string
+        title: Phone
+        description: User's phone number
+        required: false
+      address:
+        type: string
+        title: Street Address
+        description: User's street address
+        required: false
+      space_amount:
+        type: float
+        title: Space Amount
+        description: User's total available space amount in bytes
+        required: false
+      timezone:
+        type: string
+        title: Timezone
+        description: User's timezone
+        required: false
+      two_factor:
+        type: boolean
+        title: Two-Factor Auth
+        description: Exempt two-factor authentication
+        required: false
+      exempt_device:
+        type: boolean
+        title: Exempt Device Limits
+        description: Exempt this user from Enterprise device limits
+        required: false
+    output:
+      login:
+        title: User Email
+        description: User email
+        type: string
+        required: false
+      id:
+        title: User ID
+        description: User ID
+        type: string
+        required: false
+      name:
+        title: Username
+        description: Username
+        type: string
+        required: false
+      timezone:
+        title: Timezone
+        description: Timezone
+        type: string
+        required: false
+      space_amount:
+        title: Max Space Amount
+        description: Max space amount
+        type: float
+        required: false
+      sync:
+        title: Sync
+        description: Sync
+        type: boolean
+        required: false
+      exempt_device:
+        title: Device Limits Exemption
+        description: Device limits exemption
+        type: boolean
+        required: false
+      two_factor:
+        title: Login Verification Exemption
+        description: Login verification exemption
+        type: boolean
+        required: false
+      job_title:
+        title: Job Title
+        description: Job title
+        type: string
+        required: false
+      phone:
+        title: User Phone Number
+        description: User phone number
+        type: string
+        required: false
+      address:
+        title: User Address
+        description: User address
+        type: string
+        required: false
+      avatar_url:
+        title: User Avatar
+        description: User avatar
+        type: string
+        required: false
+  get_folder:
+    title: Get Folder
+    description: Retrieve specific folder ID
+    input:
+      folder_name:
+        type: string
+        title: Folder Name
+        description: Folder Name
+        required: true
+    output:
+      id:
+        title: Folder ID
+        description: Folder ID
+        type: string
+        required: false
+  get_file:
+    title: Get File
+    description: Retrieve specific file ID
+    input:
+      file_name:
+        type: string
+        title: File Name
+        description: File Name
+        required: true
+    output:
+      id:
+        title: File ID
+        description: File ID
+        type: string
+        required: false
+  delete_user:
+    title: Delete User Account
+    description: Delete specific user
+    input:
+      id:
+        type: string
+        title: ID
+        description: User ID
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: false
+  delete_file:
+    title: Delete File
+    description: Delete specific file
+    input:
+      id:
+        type: string
+        title: ID
+        description: File ID
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: false
+  delete_folder:
+    title: Delete Folder
+    description: Delete specific folder
+    input:
+      id:
+        type: string
+        title: ID
+        description: Folder ID
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: false
+  lock_file:
+    title: Lock File
+    description: Lock file
+    input:
+      file_id:
+        type: string
+        title: File ID
+        description: Specific file to lock
+        required: true
+      download_prevented:
+        type: boolean
+        title: Prevent Download
+        description: File cannot be downloaded while locked
+        required: false
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: false
+  unlock_file:
+    title: Unlock File
+    description: Unlock file
+    input:
+      file_id:
+        type: string
+        title: File ID
+        description: Specific file to unlock
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: false
+  download_file:
+    title: Download File
+    description: Download file by ID
+    input:
+      file_id:
+        type: string
+        title: File ID
+        description: Specific file ID to download
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: false
+      file:
+        title: File
+        description: File
+        type: bytes
+        required: false
+      url:
+        title: Download URL
+        description: Download URL
+        type: string
+        required: false
+  upload_file:
+    title: Upload File
+    description: Upload file to folder
+    input:
+      name:
+        type: string
+        title: Name
+        description: File name, max. 225 char, no special characters accepted
+        required: true
+      folder_id:
+        type: string
+        title: Folder ID
+        description: Parent folder ID
+        required: true
+      file:
+        type: string
+        title: File
+        description: File to upload
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: false
+  user_info:
+    title: Get User Info
+    description: Retrieve user information
+    input:
+      user_id:
+        type: string
+        title: User ID
+        description: User's ID
+        required: true
+    output:
+      login:
+        title: User Email
+        description: User email
+        type: string
+        required: false
+      id:
+        title: User ID
+        description: User ID
+        type: string
+        required: false
+      name:
+        title: Username
+        description: Username
+        type: string
+        required: false
+      timezone:
+        title: Timezone
+        description: Timezone
+        type: string
+        required: false
+      space_amount:
+        title: Max Space Amount
+        description: Max space amount
+        type: float
+        required: false
+      space_used:
+        title: Space Used
+        description: Space used
+        type: float
+        required: false
+      job_title:
+        title: Job Title
+        description: Job title
+        type: string
+        required: false
+      phone:
+        title: User Phone Number
+        description: User phone number
+        type: string
+        required: false
+      address:
+        title: User Address
+        description: User address
+        type: string
+        required: false
+      avatar_url:
+        title: User Avatar
+        description: User avatar
+        type: string
+        required: false

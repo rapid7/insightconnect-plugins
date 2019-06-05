@@ -1,0 +1,147 @@
+plugin_spec_version: v2
+name: confluence
+title: Confluence
+vendor: rapid7
+status: ["unsupported"]
+description: Confluence Wiki
+version: 1.0.0
+tags:
+- confluence
+- wiki
+types:
+  page:
+    title:
+      type: string
+      description: Page Title
+      required: false
+    space:
+      type: string
+      description: Space
+      required: false
+    modifier:
+      type: string
+      description: Modifier User
+      required: false
+    created:
+      type: date
+      description: Created Date
+      required: false
+    content:
+      type: string
+      description: Page Content
+      required: false
+    url:
+      type: string
+      description: URL
+      required: false
+    permissions:
+      type: string
+      description: Permissions
+      required: false
+    creator:
+      type: string
+      description: Creator User
+      required: false
+    parentId:
+      type: string
+      description: Parent Page ID
+      required: false
+    version:
+      type: string
+      description: Page Version
+      required: false
+    homePage:
+      type: boolean
+      description: Home Page
+      required: false
+    id:
+      type: string
+      description: Page ID
+      required: false
+    current:
+      type: boolean
+      description: True if current verison
+      required: false
+    contentStatus:
+      type: string
+      description: Content Status
+      required: false
+    modified:
+      type: date
+      description: Modified Date
+      required: false
+connection:
+  url:
+    title: URL
+    type: string
+    description: Connection URL
+    required: true
+  credentials:
+    title: Username and Password
+    type: credential_username_password
+    description: Username and password
+    required: true
+actions:
+  get_page_content:
+    title: Get Page Content
+    description: Get Page Content
+    input:
+      page:
+        type: string
+        description: Page Name
+        required: true
+      space:
+        type: string
+        description: Space
+        required: true
+    output:
+      content:
+        description: Content
+        type: string
+        required: false
+      found:
+        type: boolean
+        description: True if found
+        required: false
+  store_page_content:
+    title: Store Page Content
+    description: Store Page Content
+    input:
+      page:
+        type: string
+        description: Page Name
+        required: true
+      space:
+        type: string
+        description: Space
+        required: true
+      content:
+        type: string
+        description: Content To Store
+        required: true
+    output:
+      page:
+        description: Page Stored
+        type: page
+        required: false
+  get_page:
+    title: Get Page
+    description: Get Page
+    input:
+      page:
+        type: string
+        description: Page Name
+        required: true
+      space:
+        type: string
+        description: Space
+        required: true
+    output:
+      found:
+        type: boolean
+        description: True if found
+        required: false
+      page:
+        description: Page
+        type: page
+        required: false

@@ -1,0 +1,16 @@
+{
+  "body": {
+    "meta": {},
+    "input": {
+      "after": "2016-10-01",
+      "include_cvrf": true
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000"
+    },
+    "connection": null,
+    "trigger": "new_advisory"
+  },
+  "version": "v1",
+  "type": "trigger_start"
+}

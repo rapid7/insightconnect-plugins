@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "query",
+    "meta": {},
+    "input": {
+      "query": "filetype:exe"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "api_secret": {
+        "secretKey": ""
+      },
+      "server": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

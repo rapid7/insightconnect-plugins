@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "forward",
+    "input": {
+      "query": "A",
+      "domain": "google.com"
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

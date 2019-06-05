@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "update_ticket",
+    "input": {
+      "subject": "As a Komand user I would like an update ticket action for zendesk",
+      "description": "Hmmm, I wonder what editted this ticket?",
+      "attachment": {"content": "the zen of desks", "filename": "hello.txt"},
+      "ticket_id": "408",
+      "type": "Incident"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "subdomain": ""
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}
+  

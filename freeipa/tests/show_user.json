@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "show_user",
+    "meta": {},
+    "input": {
+      "username": "helpdesk"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "server": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

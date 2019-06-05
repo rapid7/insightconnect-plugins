@@ -1,0 +1,199 @@
+plugin_spec_version: v2
+name: cisco_umbrella_enforcement
+title: Cisco Umbrella Enforcement
+vendor: rapid7
+status: ["supported"]
+description: Cisco Umbrella Enforcement give technology partners the ability to send
+  security events from their platform/service/appliance within a customer environment
+  to the Cisco security cloud for enforcement
+version: 1.0.0
+tags:
+- cisco
+- umbrella
+- enforcement
+language: python
+types:
+  event:
+    ID:
+      type: string
+      description: The ID of the device sending the event
+      required: true
+    deviceVersion:
+      type: string
+      description: Version of device sending the event
+      required: true
+    eventTime:
+      type: string
+      description: Time event was detected, must match the following style 2013-02-08T09:30:26Z
+      required: true
+    alertTime:
+      type: string
+      description: Time event was sent to Umbrella must match the following style
+        2013-02-08T09:30:26Z
+      required: true
+    dstDomain:
+      type: string
+      description: The destination domain, specified following RFC3986 encoding guidelines
+        and without the protocol included. An example would be www.internetbadguys.com
+      required: true
+    dstURL:
+      type: string
+      description: The destination URL encoded using standard percent-encoding following
+        RFC3986](http://www.ietf.org/rfc/rfc3986.txt) encoding guidelines. An example
+        would be http://internetbadguys.com/security?foo=there%20are%20spaces%20here
+      required: true
+    protocolVersion:
+      type: string
+      description: The version of the protocol for the API. Value should always be
+        1.0a
+      required: true
+    providerName:
+      type: string
+      description: The provider name for the API. Value should always be Security
+        Platform
+      required: true
+    disableDstSafeguards:
+      type: boolean
+      description: A value of 'true' will bypass validations normally performed against
+        submitted events before adding them to any of the domain lists in Umbrella
+      required: false
+    eventHash:
+      type: string
+      description: A unique hash of the event
+      required: false
+    fileName:
+      type: string
+      description: Path to file exhibiting malicious behavior
+      required: false
+    fileHash:
+      type: string
+      description: SHA-1 of file reported by appliance
+      required: false
+    externalURL:
+      type: string
+      description: External page containing additional information about event
+      required: false
+    src:
+      type: string
+      description: IP/Host of the infected computer/device that was patient 0 for
+        the event
+      required: false
+    dstIP:
+      type: string
+      description: The destination IP of the domain, specified in IPv4 dotted-decimal
+        notation. An example would be 8.8.8.8
+      required: false
+    eventSeverity:
+      type: string
+      description: 'The parter threat level or rating, eg: severe, bad, high, etc'
+      required: false
+    eventType:
+      type: string
+      description: Common name or classification of threat
+      required: false
+    eventDescription:
+      type: string
+      description: Variant or other descriptor of event type
+      required: false
+  meta:
+    page:
+      type: integer
+      description: The page of results is available
+      required: true
+    limit:
+      type: integer
+      description: The number of results
+      required: true
+    prev:
+      type: string
+      description: If prev is false, this is the first available page of results.
+        Otherwise, it will provide a query formatted to show the next set of results
+      required: true
+    next:
+      type: string
+      description: If next is false, this is the last available page of results. Otherwise,
+        it will provide a query formatted to show the next set of results
+      required: true
+  data:
+    ID:
+      type: integer
+      description: Unique ID number
+      required: true
+    name:
+      type: string
+      description: Domain name
+      required: true
+    lastSeenAt:
+      type: string
+      title: Last seen malware
+      description: Unix timestamp last seen
+      required: true
+connection:
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: Enter API key e.g. 1111-2222-3333-4444
+    required: true
+actions:
+  add_event:
+    title: Add Event
+    description: Posts a malware event for processing and optionally adds it to the
+      customer's domain list
+    input:
+      events:
+        type: '[]event'
+        description: Generic event format field. More info at https://docs.umbrella.com/developer/enforcement-api/generic-event-format2/
+        required: true
+    output:
+      ID:
+        title: ID List
+        description: List of added IDs
+        type: '[]string'
+        required: true
+  domains:
+    title: List Domains
+    description: Gather the lists of domains already added to the shared customer's
+      domain list
+    output:
+      meta:
+        title: Meta
+        description: The meta array shows which page of results is available, the
+          number of results and next and previous available pages to query
+        type: meta
+        required: true
+      data:
+        title: Domain List Query Results
+        description: The data array contains the domains in the domain list, along
+          with a unique ID number for each domain
+        type: '[]data'
+        required: true
+  delete_domain_by_id:
+    title: Delete Domain by ID
+    description: Delete domain from user domain list by ID
+    input:
+      ID:
+        type: integer
+        title: ID
+        description: Unique ID number of domain
+        required: true
+    output:
+      status:
+        title: Status
+        description: Action status [success | error]
+        type: string
+        required: true
+  delete_domain_by_name:
+    title: Delete Domain by Name
+    description: Delete domain from user domain list
+    input:
+      domain:
+        type: string
+        title: Domain
+        description: Domain name
+        required: true
+    output:
+      status:
+        title: Status
+        description: Action status [success | error]
+        type: string
+        required: true

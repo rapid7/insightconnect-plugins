@@ -1,0 +1,14 @@
+{
+  "type": "action_start",
+  "body": {
+    "input": {
+      "entity_list_id": "Q7omD8"
+    },
+    "connection": {
+      "api_key": ""
+    },
+    "action": "lookup_entity_list",
+    "meta": {}
+  },
+  "version": "v1"
+}

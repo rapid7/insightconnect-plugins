@@ -1,0 +1,26 @@
+[epel6]
+name=Extra Packages for Enterprise Linux 6 - $arch
+#baseurl=http://download.fedoraproject.org/pub/epel/6/$arch
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&arch=$arch
+failovermethod=priority
+enabled=0
+gpgcheck=1
+gpgkey=file:///rpm-gpg/RPM-GPG-KEY-EPEL-6
+
+[epel-debuginfo6]
+name=Extra Packages for Enterprise Linux 6 - $arch - Debug
+#baseurl=http://download.fedoraproject.org/pub/epel/6/$arch/debug
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&arch=$arch
+failovermethod=priority
+enabled=0
+gpgkey=file:///rpm-gpg/RPM-GPG-KEY-EPEL-6
+gpgcheck=1
+
+[epel-source6]
+name=Extra Packages for Enterprise Linux 6 - $arch - Source
+#baseurl=http://download.fedoraproject.org/pub/epel/7/SRPMS
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&arch=$arch
+failovermethod=priority
+enabled=0
+gpgkey=file:///rpm-gpg/RPM-GPG-KEY-EPEL-6
+gpgcheck=1

@@ -1,0 +1,899 @@
+plugin_spec_version: v2
+name: pastebin
+title: Pastebin
+description: Pastebin.com is the number one paste tool since 2002. Pastebin is a website
+  where you can store text online for a set period of time
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- scrape
+- paste
+- post
+connection:
+  key:
+    type: credential_secret_key
+    title: Pastebin API Key
+    description: API key
+    required: true
+  credentials:
+    title: Credentials
+    description: Pastebin username and password
+    type: credential_username_password
+    required: true
+actions:
+  scrape:
+    title: Scrape
+    description: Scrape the most recent pastes
+    input:
+      pattern:
+        title: Pattern
+        type: string
+        required: true
+        description: Plain text or regex to be used to find matches
+      language:
+        title: Language
+        type: string
+        default: All
+        required: true
+        description: Files in which language format should be scraped
+        enum:
+        - All
+        - 4CS
+        - 6502 ACME Cross Assembler
+        - 6502 Kick Assembler
+        - 6502 TASM/64TASS
+        - ABAP
+        - ActionScript
+        - ActionScript 3
+        - Ada
+        - AIMMS
+        - ALGOL 68
+        - Apache Log
+        - AppleScript
+        - APT Sources
+        - ARM
+        - ASM (NASM)
+        - ASP
+        - Asymptote
+        - autoconf
+        - Autohotkey
+        - Autolt
+        - Avisynth
+        - Awk
+        - BASCOM AVR
+        - Bash
+        - Basic4GL
+        - Batch
+        - BibTeX
+        - Blitz Basic
+        - Blitz3D
+        - BLitzMax
+        - BNF
+        - BOO
+        - Brainfuck
+        - C
+        - C (WinAPI)
+        - C for Macs
+        - C Intermediate Language
+        - C#
+        - C++
+        - C++ (WinAPI)
+        - C++ (with Qt extensions)
+        - 'C: Loadrunner'
+        - CAD DCL
+        - CAD Lisp
+        - CFDG
+        - ChaiScript
+        - Chapel
+        - Clojre
+        - Clone C
+        - Clone C++
+        - CMake
+        - COBOL
+        - CoffeeScript
+        - ColdFusion
+        - CSS
+        - Cuesheet
+        - D
+        - Dart
+        - DCL
+        - DCPU-16
+        - DCS
+        - Delphi
+        - Delphi Prism (Oxygene)
+        - Diff
+        - DIV
+        - DOT
+        - E
+        - Easytrieve
+        - ECMAScript
+        - Eiffel
+        - Email
+        - EPC
+        - Erlang
+        - Euphoria
+        - F#
+        - Falcon
+        - Filemaker
+        - FO Language
+        - Formula One
+        - Fortran
+        - FreeBasic
+        - FreeSWITCH
+        - GAMBAS
+        - Game Maker
+        - GDB
+        - Genero
+        - Genie
+        - GetText
+        - Go
+        - Groovy
+        - GwBasic
+        - Haskell
+        - Haxe
+        - HicEst
+        - HQ9 Plus
+        - HTML
+        - HTML 5
+        - Icon
+        - IDL
+        - INI file
+        - Inno Script
+        - INTERCAL
+        - IO
+        - ISPF Panel Definition
+        - J
+        - Java
+        - Java 5
+        - JavaScript
+        - JCL
+        - jQuery
+        - JSON
+        - Julia
+        - KiXtart
+        - Latex
+        - LDIF
+        - Liberty BASIC
+        - Linden Scripting
+        - Lisp
+        - LLVM
+        - Loco Basic
+        - Logtalk
+        - LOL Code
+        - Lotus Formulas
+        - Lotus Script
+        - LScrpt
+        - Lua
+        - M68000 Assembler
+        - MagikSF
+        - Make
+        - MapBasic
+        - Markdown
+        - MatLab
+        - mIRC
+        - MIX Assembler
+        - Modula 2
+        - Modula 3
+        - Motorola 68000 HiSoft Dev
+        - MPASM
+        - MXML
+        - MySQL
+        - Nagios
+        - NetRexx
+        - newLISP
+        - Nginx
+        - Nimrod
+        - None
+        - NullSoft Installer
+        - Oberon 2
+        - Objeck Programming Language
+        - Objective C
+        - OCalm Brief
+        - OCaml
+        - Octave
+        - Open Object Rexx
+        - OpenBSF PACKET FILTER
+        - OpenGL Shading
+        - Openoffice BASIC
+        - Oracle 11
+        - Oracle 8
+        - Oz
+        - ParaSail
+        - PARI/GP
+        - Pascal
+        - Pawn
+        - PCRE
+        - Per
+        - Perl
+        - Perl 6
+        - PHP
+        - PHP Brief
+        - Pic 16
+        - Pike
+        - Pixel Bender
+        - PL/I
+        - PL/SQL
+        - PostgreSQL
+        - PostScript
+        - POV-Ray
+        - Power Shell
+        - PowerBuilder
+        - ProFTPd
+        - Progress
+        - Prolog
+        - Properties
+        - ProvideX
+        - Puppet
+        - PureBasic
+        - PyCon
+        - Python
+        - Python for S60
+        - q/kdb+
+        - QBasic
+        - QML
+        - R
+        - Racket
+        - Rails
+        - RBScript
+        - REBOL
+        - REG
+        - Rexx
+        - Robots
+        - RPM Spec
+        - Ruby
+        - Ruby Gnuplot
+        - Rust
+        - SAS
+        - Scala
+        - Scheme
+        - Scilab
+        - SCL
+        - SdlBasic
+        - Smalltalk
+        - Smarty
+        - SPARK
+        - SPARQL
+        - SQF
+        - SQL
+        - StandardML
+        - StoneScript
+        - SuperCollider
+        - Swift
+        - SystemVerilog
+        - T-SQL
+        - TCL
+        - Tera Term
+        - text
+        - thinBasic
+        - TypoScript
+        - Unicon
+        - UnrealScript
+        - UPC
+        - Urbi
+        - Vala
+        - VB.NET
+        - VBScript
+        - Vedit
+        - VeriLog
+        - VHDL
+        - VIM
+        - Visual Pro Log
+        - VisualBasic
+        - VisualFoxPro
+        - WhiteSpace
+        - WHOIS
+        - Winbatch
+        - XBasic
+        - XML
+        - Xorg Config
+        - XPP
+        - YAML
+        - Z80 Assembler
+        - ZXBasic
+      limit:
+        title: Limit
+        type: integer
+        default: 100
+        description: Number of pastes pulled per minute (100 is standard)
+        required: true
+    output:
+      paste_list:
+        title: Paste List
+        type: '[]object'
+        description: List of paste objects
+        required: false
+  post:
+    title: Paste
+    description: Post to pastebin
+    input:
+      text:
+        title: Text
+        type: string
+        description: Body of the paste
+        required: true
+      paste_name:
+        title: Paste Name
+        type: string
+        description: Title of paste
+        required: false
+      paste_format:
+        title: Paste Format
+        type: string
+        description: Which language format is the paste in
+        required: false
+        default: text
+        enum:
+        - 4CS
+        - 6502 ACME Cross Assembler
+        - 6502 Kick Assembler
+        - 6502 TASM/64TASS
+        - ABAP
+        - ActionScript
+        - ActionScript 3
+        - Ada
+        - AIMMS
+        - ALGOL 68
+        - Apache Log
+        - AppleScript
+        - APT Sources
+        - ARM
+        - ASM (NASM)
+        - ASP
+        - Asymptote
+        - autoconf
+        - Autohotkey
+        - Autolt
+        - Avisynth
+        - Awk
+        - BASCOM AVR
+        - Bash
+        - Basic4GL
+        - Batch
+        - BibTeX
+        - Blitz Basic
+        - Blitz3D
+        - BLitzMax
+        - BNF
+        - BOO
+        - Brainfuck
+        - C
+        - C (WinAPI)
+        - C for Macs
+        - C Intermediate Language
+        - C#
+        - C++
+        - C++ (WinAPI)
+        - C++ (with Qt extensions)
+        - 'C: Loadrunner'
+        - CAD DCL
+        - CAD Lisp
+        - CFDG
+        - ChaiScript
+        - Chapel
+        - Clojre
+        - Clone C
+        - Clone C++
+        - CMake
+        - COBOL
+        - CoffeeScript
+        - ColdFusion
+        - CSS
+        - Cuesheet
+        - D
+        - Dart
+        - DCL
+        - DCPU-16
+        - DCS
+        - Delphi
+        - Delphi Prism (Oxygene)
+        - Diff
+        - DIV
+        - DOT
+        - E
+        - Easytrieve
+        - ECMAScript
+        - Eiffel
+        - Email
+        - EPC
+        - Erlang
+        - Euphoria
+        - F#
+        - Falcon
+        - Filemaker
+        - FO Language
+        - Formula One
+        - Fortran
+        - FreeBasic
+        - FreeSWITCH
+        - GAMBAS
+        - Game Maker
+        - GDB
+        - Genero
+        - Genie
+        - GetText
+        - Go
+        - Groovy
+        - GwBasic
+        - Haskell
+        - Haxe
+        - HicEst
+        - HQ9 Plus
+        - HTML
+        - HTML 5
+        - Icon
+        - IDL
+        - INI file
+        - Inno Script
+        - INTERCAL
+        - IO
+        - ISPF Panel Definition
+        - J
+        - Java
+        - Java 5
+        - JavaScript
+        - JCL
+        - jQuery
+        - JSON
+        - Julia
+        - KiXtart
+        - Latex
+        - LDIF
+        - Liberty BASIC
+        - Linden Scripting
+        - Lisp
+        - LLVM
+        - Loco Basic
+        - Logtalk
+        - LOL Code
+        - Lotus Formulas
+        - Lotus Script
+        - LScrpt
+        - Lua
+        - M68000 Assembler
+        - MagikSF
+        - Make
+        - MapBasic
+        - Markdown
+        - MatLab
+        - mIRC
+        - MIX Assembler
+        - Modula 2
+        - Modula 3
+        - Motorola 68000 HiSoft Dev
+        - MPASM
+        - MXML
+        - MySQL
+        - Nagios
+        - NetRexx
+        - newLISP
+        - Nginx
+        - Nimrod
+        - None
+        - NullSoft Installer
+        - Oberon 2
+        - Objeck Programming Language
+        - Objective C
+        - OCalm Brief
+        - OCaml
+        - Octave
+        - Open Object Rexx
+        - OpenBSF PACKET FILTER
+        - OpenGL Shading
+        - Openoffice BASIC
+        - Oracle 11
+        - Oracle 8
+        - Oz
+        - ParaSail
+        - PARI/GP
+        - Pascal
+        - Pawn
+        - PCRE
+        - Per
+        - Perl
+        - Perl 6
+        - PHP
+        - PHP Brief
+        - Pic 16
+        - Pike
+        - Pixel Bender
+        - PL/I
+        - PL/SQL
+        - PostgreSQL
+        - PostScript
+        - POV-Ray
+        - Power Shell
+        - PowerBuilder
+        - ProFTPd
+        - Progress
+        - Prolog
+        - Properties
+        - ProvideX
+        - Puppet
+        - PureBasic
+        - PyCon
+        - Python
+        - Python for S60
+        - q/kdb+
+        - QBasic
+        - QML
+        - R
+        - Racket
+        - Rails
+        - RBScript
+        - REBOL
+        - REG
+        - Rexx
+        - Robots
+        - RPM Spec
+        - Ruby
+        - Ruby Gnuplot
+        - Rust
+        - SAS
+        - Scala
+        - Scheme
+        - Scilab
+        - SCL
+        - SdlBasic
+        - Smalltalk
+        - Smarty
+        - SPARK
+        - SPARQL
+        - SQF
+        - SQL
+        - StandardML
+        - StoneScript
+        - SuperCollider
+        - Swift
+        - SystemVerilog
+        - T-SQL
+        - TCL
+        - Tera Term
+        - text
+        - thinBasic
+        - TypoScript
+        - Unicon
+        - UnrealScript
+        - UPC
+        - Urbi
+        - Vala
+        - VB.NET
+        - VBScript
+        - Vedit
+        - VeriLog
+        - VHDL
+        - VIM
+        - Visual Pro Log
+        - VisualBasic
+        - VisualFoxPro
+        - WhiteSpace
+        - WHOIS
+        - Winbatch
+        - XBasic
+        - XML
+        - Xorg Config
+        - XPP
+        - YAML
+        - Z80 Assembler
+        - ZXBasic
+      paste_private:
+        title: Paste Privacy
+        type: string
+        description: Privacy setting of paste
+        required: false
+        enum:
+        - private
+        - unlisted
+        - public
+      paste_expire_date:
+        title: Paste Expiration Date
+        type: string
+        description: When should the paste expire
+        required: false
+        enum:
+        - Never
+        - 10 Minutes
+        - 1 Hour
+        - 1 Day
+        - 1 Week
+        - 2 Weeks
+        - 1 Month
+    output:
+      url:
+        title: URL
+        type: string
+        required: false
+        description: URL
+      timestamp:
+        title: Timestamp
+        type: date
+        required: false
+        description: Timestamp
+triggers:
+  scraping:
+    title: Scrape
+    description: Scrape most recent pastes every interval for a given pattern
+    input:
+      frequency:
+        title: Frequency
+        type: integer
+        required: false
+        description: Poll frequency in seconds
+        default: 300
+      pattern:
+        title: Pattern
+        type: string
+        required: true
+        description: Plain text or regex to be used to find matches
+      language:
+        title: Language
+        type: string
+        default: All
+        required: true
+        description: Files in which language format should be scraped
+        enum:
+        - All
+        - 4CS
+        - 6502 ACME Cross Assembler
+        - 6502 Kick Assembler
+        - 6502 TASM/64TASS
+        - ABAP
+        - ActionScript
+        - ActionScript 3
+        - Ada
+        - AIMMS
+        - ALGOL 68
+        - Apache Log
+        - AppleScript
+        - APT Sources
+        - ARM
+        - ASM (NASM)
+        - ASP
+        - Asymptote
+        - autoconf
+        - Autohotkey
+        - Autolt
+        - Avisynth
+        - Awk
+        - BASCOM AVR
+        - Bash
+        - Basic4GL
+        - Batch
+        - BibTeX
+        - Blitz Basic
+        - Blitz3D
+        - BLitzMax
+        - BNF
+        - BOO
+        - Brainfuck
+        - C
+        - C (WinAPI)
+        - C for Macs
+        - C Intermediate Language
+        - C#
+        - C++
+        - C++ (WinAPI)
+        - C++ (with Qt extensions)
+        - 'C: Loadrunner'
+        - CAD DCL
+        - CAD Lisp
+        - CFDG
+        - ChaiScript
+        - Chapel
+        - Clojre
+        - Clone C
+        - Clone C++
+        - CMake
+        - COBOL
+        - CoffeeScript
+        - ColdFusion
+        - CSS
+        - Cuesheet
+        - D
+        - Dart
+        - DCL
+        - DCPU-16
+        - DCS
+        - Delphi
+        - Delphi Prism (Oxygene)
+        - Diff
+        - DIV
+        - DOT
+        - E
+        - Easytrieve
+        - ECMAScript
+        - Eiffel
+        - Email
+        - EPC
+        - Erlang
+        - Euphoria
+        - F#
+        - Falcon
+        - Filemaker
+        - FO Language
+        - Formula One
+        - Fortran
+        - FreeBasic
+        - FreeSWITCH
+        - GAMBAS
+        - Game Maker
+        - GDB
+        - Genero
+        - Genie
+        - GetText
+        - Go
+        - Groovy
+        - GwBasic
+        - Haskell
+        - Haxe
+        - HicEst
+        - HQ9 Plus
+        - HTML
+        - HTML 5
+        - Icon
+        - IDL
+        - INI file
+        - Inno Script
+        - INTERCAL
+        - IO
+        - ISPF Panel Definition
+        - J
+        - Java
+        - Java 5
+        - JavaScript
+        - JCL
+        - jQuery
+        - JSON
+        - Julia
+        - KiXtart
+        - Latex
+        - LDIF
+        - Liberty BASIC
+        - Linden Scripting
+        - Lisp
+        - LLVM
+        - Loco Basic
+        - Logtalk
+        - LOL Code
+        - Lotus Formulas
+        - Lotus Script
+        - LScrpt
+        - Lua
+        - M68000 Assembler
+        - MagikSF
+        - Make
+        - MapBasic
+        - Markdown
+        - MatLab
+        - mIRC
+        - MIX Assembler
+        - Modula 2
+        - Modula 3
+        - Motorola 68000 HiSoft Dev
+        - MPASM
+        - MXML
+        - MySQL
+        - Nagios
+        - NetRexx
+        - newLISP
+        - Nginx
+        - Nimrod
+        - None
+        - NullSoft Installer
+        - Oberon 2
+        - Objeck Programming Language
+        - Objective C
+        - OCalm Brief
+        - OCaml
+        - Octave
+        - Open Object Rexx
+        - OpenBSF PACKET FILTER
+        - OpenGL Shading
+        - Openoffice BASIC
+        - Oracle 11
+        - Oracle 8
+        - Oz
+        - ParaSail
+        - PARI/GP
+        - Pascal
+        - Pawn
+        - PCRE
+        - Per
+        - Perl
+        - Perl 6
+        - PHP
+        - PHP Brief
+        - Pic 16
+        - Pike
+        - Pixel Bender
+        - PL/I
+        - PL/SQL
+        - PostgreSQL
+        - PostScript
+        - POV-Ray
+        - Power Shell
+        - PowerBuilder
+        - ProFTPd
+        - Progress
+        - Prolog
+        - Properties
+        - ProvideX
+        - Puppet
+        - PureBasic
+        - PyCon
+        - Python
+        - Python for S60
+        - q/kdb+
+        - QBasic
+        - QML
+        - R
+        - Racket
+        - Rails
+        - RBScript
+        - REBOL
+        - REG
+        - Rexx
+        - Robots
+        - RPM Spec
+        - Ruby
+        - Ruby Gnuplot
+        - Rust
+        - SAS
+        - Scala
+        - Scheme
+        - Scilab
+        - SCL
+        - SdlBasic
+        - Smalltalk
+        - Smarty
+        - SPARK
+        - SPARQL
+        - SQF
+        - SQL
+        - StandardML
+        - StoneScript
+        - SuperCollider
+        - Swift
+        - SystemVerilog
+        - T-SQL
+        - TCL
+        - Tera Term
+        - text
+        - thinBasic
+        - TypoScript
+        - Unicon
+        - UnrealScript
+        - UPC
+        - Urbi
+        - Vala
+        - VB.NET
+        - VBScript
+        - Vedit
+        - VeriLog
+        - VHDL
+        - VIM
+        - Visual Pro Log
+        - VisualBasic
+        - VisualFoxPro
+        - WhiteSpace
+        - WHOIS
+        - Winbatch
+        - XBasic
+        - XML
+        - Xorg Config
+        - XPP
+        - YAML
+        - Z80 Assembler
+        - ZXBasic
+      limit:
+        title: Limit
+        type: integer
+        default: 100
+        required: false
+        description: Limit
+    output:
+      paste:
+        required: false
+        type: object
+        title: List of paste objects
+        description: Paste

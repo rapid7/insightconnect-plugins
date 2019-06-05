@@ -1,0 +1,26 @@
+[epel-testing7]
+name=Extra Packages for Enterprise Linux 7 - Testing - $arch
+#baseurl=http://download.fedoraproject.org/pub/epel/testing/7/$arch
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=testing-epel7&arch=$arch
+failovermethod=priority
+enabled=0
+gpgcheck=1
+gpgkey=file:///rpm-gpg/RPM-GPG-KEY-EPEL-7
+
+[epel-testing-debuginfo7]
+name=Extra Packages for Enterprise Linux 7 - Testing - $arch - Debug
+#baseurl=http://download.fedoraproject.org/pub/epel/testing/7/$arch/debug
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=testing-debug-epel7&arch=$arch
+failovermethod=priority
+enabled=0
+gpgkey=file:///rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=1
+
+[epel-testing-source7]
+name=Extra Packages for Enterprise Linux 7 - Testing - $arch - Source
+#baseurl=http://download.fedoraproject.org/pub/epel/testing/7/SRPMS
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=testing-source-epel7&arch=$arch
+failovermethod=priority
+enabled=0
+gpgkey=file:///rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=1

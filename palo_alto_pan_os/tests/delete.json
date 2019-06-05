@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "delete",
+    "meta": {},
+    "input": {
+      "xpath": "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/virus/entry[@name='new bad profile']"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "server": "",
+      "verify_cert": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

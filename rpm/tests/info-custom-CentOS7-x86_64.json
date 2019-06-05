@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "info",
+    "meta": {},
+    "input": {
+      "release": "",
+      "version": "",
+      "arch": "x86_64",
+      "epoch": "",
+      "repo": "http://code.seas.harvard.edu/openstack/devstack/blobs/raw/WORKING_EC2_ESSEX_NOQUANTUM/seas-configs/etc/yum.repos.d/CentOS-Base.repo",
+      "name": "flute",
+      "key": "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7",
+      "distro": "CentOS 7"
+    },
+    "connection": {
+      "server": "",
+      "user": "",
+      "password": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

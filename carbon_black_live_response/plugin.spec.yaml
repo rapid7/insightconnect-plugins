@@ -1,0 +1,134 @@
+plugin_spec_version: v2
+name: carbon_black_live_response
+title: Carbon Black Live Response
+description: The Cb Response Live Response feature allows security operators to collect
+  information and take action on remote endpoints in real time. These actions include
+  the ability to upload, download, and remove files, retrieve and remove registry
+  entries, dump contents of physical memory, execute and terminate processes
+version: 1.0.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- carbon black
+- live response
+types:
+  session:
+    status:
+      description: Status of the session, either 'pending' or 'active'
+      type: string
+    sensor_id:
+      description: ID of the sensor on the endpoint
+      title: Sensor ID
+      type: integer
+    supported_commands:
+      description: Commands supported by the endpoint
+      type: '[]string'
+    hostname:
+      description: Hostname of the endpoint
+      type: string
+    drives:
+      description: Drives connected to the endpoint
+      type: '[]string'
+    storage_ttl:
+      description: Storage TTL
+      title: Storage TTL
+      type: integer
+    storage_size:
+      description: Storage size
+      type: integer
+    os_version:
+      description: Operating system version
+      title: OS Version
+      type: string
+    create_time:
+      description: Session created time
+      type: float
+    sensor_wait_timeout:
+      description: How long before the session with the endpoint times out. Commands
+        to the endpoint must be made within this timeframe
+      type: integer
+    address:
+      description: IP Address
+      type: string
+    check_in_timeout:
+      description: 'The timeout (in seconds) - how long should the CB server wait
+        for the sensor to enter live mode '
+      type: integer
+    session_timeout:
+      description: The timeout (in seconds) that a sensor should wait between commands.
+        If no command is issued over this timeout the sensor will quit. By default
+        this is 8 minutes
+      type: integer
+    id:
+      description: The current session ID
+      title: ID
+      type: integer
+    current_working_directory:
+      description: The path to the current working directory of the sensor
+      type: string
+  deletion:
+    id:
+      title: ID
+      description: ID of the command
+      type: integer
+    session_id:
+      title: Session ID
+      description: Session ID the command was executed in
+      type: integer
+    sensor_id:
+      title: Sensor ID
+      description: The sensor ID for the session
+      type: integer
+    command_timeout:
+      description: The timeout (in seconds) that the sensor is willing to wait until
+        the command completes
+      type: string
+    status:
+      description: 'One of the following: in progress, complete, cancel, error'
+      type: string
+    name:
+      description: The name of the command (ie. reg set, reg query, get file, etc.)
+      type: string
+    object:
+      description: The object the command operates on. This is specific to the command
+        but has meaning in a generic way for logging, and display purposes
+      type: object
+connection:
+  api_key:
+    type: credential_secret_key
+    title: API Key
+    description: API token found in your Carbon Black profile
+    required: true
+  url:
+    title: API URL
+    type: string
+    description: Carbon Black Server API URL
+    default: https://127.0.0.1/api/bit9platform/v1
+    required: true
+  verify_ssl:
+    title: Verify SSL
+    type: boolean
+    description: SSL Certificate Verification
+    default: true
+    required: true
+actions:
+  delete_file:
+    title: Delete File
+    description: Delete a file from the endpoint
+    input:
+      hostname:
+        type: string
+        title: Hostname
+        description: Hostname of endpoint to start live session with
+        required: true
+      object_path:
+        title: Object Path
+        type: string
+        description: The source path of the object to delete
+        required: true
+    output:
+      success:
+        title: Success
+        required: false
+        type: boolean
+        description: Whether or not the deletion was successful

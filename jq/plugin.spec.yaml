@@ -1,0 +1,45 @@
+plugin_spec_version: v2
+name: jq
+title: jq
+description: Send JSON data through jq
+version: 2.0.4
+vendor: rapid7
+tags:
+- jq
+- JSON
+- sed for JSON
+- utilities
+actions:
+  run_jq:
+    title: Run
+    description: Pass the given JSON to the jq command, using the given flags and
+      filter
+    input:
+      json_in:
+        title: JSON Input
+        description: Data in JSON format to be passed to jq
+        type: object
+        required: true
+      flags:
+        title: Flags
+        description: Flags with which to invoke the jq command (e.g. -c)
+        type: '[]string'
+        required: false
+      filter:
+        title: Filter
+        description: Filter expression to be used by the jq command not in surrounding
+          quotes
+        type: string
+        required: true
+      timeout:
+        title: Timeout
+        description: Timeout in seconds during which the jq command runs
+        type: integer
+        default: 15
+        required: false
+    output:
+      json_out:
+        title: JSON Out
+        description: The output JSON
+        type: string
+        required: true

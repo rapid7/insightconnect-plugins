@@ -1,0 +1,124 @@
+plugin_spec_version: v2
+name: google_docs
+title: Google Docs
+description: Manage and edit Google documents
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- docuement
+- google
+- drive
+- utilities
+types:
+  create_result:
+    writeControl:
+      title: "Write Control"
+      type: object
+      description: "Write control"
+      required: false
+    documentId:
+      title: "Document ID"
+      type: string
+      description: "Document ID"
+      required: false
+    replies:
+      title: "Replies"
+      type: "[]object"
+      description: "Replies"
+      required: false
+  document:
+    body:
+      title: "Body"
+      type: object
+      description: "Body"
+      required: false
+    documentStyle:
+      title: "Document Style"
+      type: object
+      description: "Document Style"
+      required: false
+    title:
+      title: "Title"
+      type: string
+      description: "Title"
+      required: false
+    revisionId:
+      title: "Revision ID"
+      type: string
+      description: "Revision ID"
+      required: false
+    documentId:
+      title: "Document ID"
+      type: string
+      description: "Document ID"
+      required: false
+    suggestionsViewMode:
+      title: "Suggestions View Mode"
+      type: string
+      description: "Suggestions view mode"
+      required: false
+    namedStyles:
+      title: "Named Styles"
+      type: object
+      description: "Named styles"
+      required: false
+
+
+connection: 
+  credentials_file_contents:
+    title: Credential File Contents
+    description: Copy and paste the contents of the credentials file provided by Google
+    type: credential_secret_key
+    required: true
+actions:
+  create_blank_document:
+    title: Create Blank Document
+    description: Create a blank Google document
+    input:
+      title:
+        title: Title
+        type: string
+        description: Document Title
+        required: true
+    output:
+      document:
+        title: Document
+        description: Created Document
+        type: document
+        required: true
+  create_document:
+    title: Create Document
+    description: Create a Google document
+    input:
+      title:
+        title: Title
+        type: string
+        description: Document Title
+        required: true
+      content:
+        title: Content
+        type: string
+        description: Document content
+        required: true
+    output:
+      result:
+        title: Result
+        description: Document creation result
+        type: create_result
+        required: true
+  get_document:
+    title: Get Document
+    description: Get a Google document
+    input:
+      document_id:
+        title: Document ID
+        description: Document ID
+        type: string
+        required: true
+    output:
+      document:
+        title: Document
+        description: Document Object
+        type: document
+        required: true

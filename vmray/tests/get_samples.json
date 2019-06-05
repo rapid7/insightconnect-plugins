@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_samples",
+    "meta": {},
+    "input": {
+      "optional_params": {},
+      "sample": "",
+      "sample_type": "all"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://cloud.vmray.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

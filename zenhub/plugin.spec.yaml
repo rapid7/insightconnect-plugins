@@ -1,0 +1,415 @@
+plugin_spec_version: v2
+name: zenhub
+title: ZenHub
+description: Manage ZenHub Epics, Pipelines, and Estimates
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- zenhub
+- agile
+connection:
+  api_key:
+    title: API Key
+    description: ZenHub API Token
+    type: credential_secret_key
+    required: true
+types:
+  plus_one:
+    user_id:
+      title: User Id
+      type: integer
+      description: User ID
+      required: false
+    created_at:
+      title: Created At
+      type: date
+      description: Created at
+      required: false
+  issue_reference:
+    repo_id:
+      title: Repo ID
+      description: Repo ID e.g. 24237263
+      type: integer
+      required: false
+    issue_number:
+      title: Issue Number
+      description: Issue number e.g. 43
+      type: integer
+      required: false
+    issue_url:
+      title: Issue URL
+      description: Issue URL e.g. https://github.com/jonschipp/ISLET/issues/79
+      type: string
+      required: false
+  issue_data:
+    issue_number:
+      title: Issue number
+      type: integer
+      description: Issue number
+      required: false
+    repo_id:
+      title: Repo id
+      type: integer
+      description: Repo id
+      required: false
+    is_epic:
+      title: Is epic
+      type: boolean
+      description: Is epic
+      required: false
+    position:
+      title: Position
+      type: integer
+      description: Position
+      required: false
+    pipeline_name:
+      title: Pipelne Name
+      type: string
+      description: Pipeline name
+      required: false
+    estimate_value:
+      title: Estimated Value
+      type: integer
+      description: Estimated value
+      required: false
+    plus_ones:
+      title: Plus One
+      type: '[]plus_one'
+      description: Plus one
+      required: false
+  issue_event:
+    user_id:
+      title: User ID
+      type: integer
+      description: User id
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+    created_at:
+      title: Created At
+      type: date
+      description: Date of creation
+      required: false
+    from_pipeline_name:
+      title: From Pipeline Name
+      type: string
+      description: From pipeline name
+      required: false
+    to_pipeline_name:
+      title: To Pipeline Name
+      type: string
+      description: To pipeline name
+      required: false
+    from_estimate_value:
+      title: From Estimate Value
+      type: integer
+      description: From estimate value
+      required: false
+    to_estimate_value:
+      title: To Estimate Value
+      type: integer
+      required: false
+  pipeline_data:
+    pipeline_id:
+      title: Pipeline ID
+      type: string
+      description: Pipeline id
+      required: false
+    pipeline_name:
+      title: Pipeline Name
+      type: string
+      description: Pipeline name
+      required: false
+    issues:
+      title: Issues
+      type: '[]issue_data'
+      description: Issues
+      required: false
+  repository_data:
+    pipelines:
+      title: Pipelines
+      type: '[]pipeline_data'
+      description: Pipelines
+      required: false
+  epic_data:
+    total_epic_estimates_value:
+      title: Total Epic Estimates Value
+      type: integer
+      description: Total epic estimates value
+      required: false
+    issues:
+      title: Issues
+      type: '[]issue_data'
+      description: Issues
+      required: false
+    estimate_value:
+      title: Estimate Value
+      type: integer
+      description: Estimate value
+      required: false
+    pipeline_name:
+      title: Pipeline Name
+      type: string
+      description: Pipeline name
+      required: false
+actions:
+  get_issue_data:
+    title: Get Issue Data
+    description: Get the ZenHub Data for a GitHub Issue
+    input:
+      repo_id:
+        title: Repository ID
+        description: GitHub Repository ID e.g. 24237263
+        type: integer
+        required: true
+      issue_number:
+        title: Issue Number
+        description: GitHub Issue Number
+        type: integer
+        required: true
+    output:
+      data:
+        title: Issue Data
+        description: ZenHub Issue Data
+        type: issue_data
+        required: false
+  get_issue_events:
+    title: Get Issue Events
+    description: Get the ZenHub Events for a GitHub Issue
+    input:
+      repo_id:
+        title: Repository ID
+        description: GitHub Repository ID e.g. 24237263
+        type: integer
+        required: true
+      issue_number:
+        title: Issue Number
+        description: GitHub Issue Number
+        type: integer
+        required: true
+    output:
+      events:
+        title: Issue Events
+        description: List of ZenHub Issue Events
+        type: '[]issue_event'
+        required: false
+  get_repository_board_data:
+    title: Get Repository Board Data
+    description: Get the ZenHub Board Data for a GitHub Repository
+    input:
+      repo_id:
+        title: Repository ID
+        description: GitHub Repository ID e.g. 24237263
+        type: integer
+        required: true
+    output:
+      data:
+        title: Board Data
+        description: ZenHub Repository Board Data
+        type: repository_data
+        required: false
+  get_repository_epics:
+    title: Get Repository Epics
+    description: Get the ZenHub Epics for a GitHub Repository
+    input:
+      repo_id:
+        title: Repository ID
+        description: GitHub Repository ID e.g. 24237263
+        type: integer
+        required: true
+    output:
+      epics:
+        title: Repository Epics
+        description: List of ZenHub Repository Epics
+        type: '[]issue_reference'
+        required: false
+  get_epic_data:
+    title: Get Epic Data
+    description: Get the ZenHub Data for a ZenHub Epic
+    input:
+      repo_id:
+        title: Repository ID
+        description: GitHub Repository ID e.g. 24237263
+        type: integer
+        required: true
+      epic_id:
+        title: Epic ID
+        description: GitHub Issue Number of the ZenHub Epic
+        type: integer
+        required: true
+    output:
+      data:
+        title: Epic Data
+        description: ZenHub Epic Data
+        type: epic_data
+        required: false
+  move_issue_between_pipelines:
+    title: Move Issue Between Pipelines
+    description: Move a Github Issue between ZenHub Pipelines
+    input:
+      repo_id:
+        title: Repository ID
+        description: GitHub Repository ID e.g. 24237263
+        type: integer
+        required: true
+      issue_number:
+        title: Issue Number
+        description: GitHub Issue Number
+        type: integer
+        required: true
+      pipeline_id:
+        title: Pipeline ID
+        description: ZenHub Pipeline ID
+        type: string
+        required: true
+      position:
+        title: Position
+        description: 'New Position in the ZenHub Pipeline (-1: bottom, 0: top, n:
+          nth index)'
+        type: integer
+        required: true
+    output:
+      status_code:
+        title: Status
+        description: HTTP status code
+        type: integer
+        required: false
+  set_estimate_for_issue:
+    title: Set Estimate Value for Issue
+    description: Set the ZenHub Estimate Value for a GitHub Issue
+    input:
+      repo_id:
+        title: Repository ID
+        description: GitHub Repository ID e.g. 24237263
+        type: integer
+        required: true
+      issue_number:
+        title: Issue Number
+        description: GitHub Issue Number
+        type: integer
+        required: true
+      estimate_value:
+        title: Estimate Value
+        description: ZenHub Estimate Value
+        type: integer
+        required: true
+    output:
+      status_code:
+        title: Status
+        description: HTTP status code
+        type: integer
+        required: false
+      estimate_value:
+        title: Estimate Value
+        description: Set ZenHub Estimate Value
+        type: integer
+        required: false
+  convert_issue_to_epic:
+    title: Convert Issue to Epic
+    description: Convert a GitHub Issue to a ZenHub Epic
+    input:
+      repo_id:
+        title: Repository ID
+        description: GitHub Repository ID e.g. 24237263
+        type: integer
+        required: true
+      issue_number:
+        title: Issue Number
+        description: GitHub Issue Number
+        type: integer
+        required: true
+      issues:
+        title: Issues
+        description: GitHub Issues to add to ZenHub Epic
+        type: '[]issue_reference'
+        required: true
+    output:
+      status_code:
+        title: Status
+        description: HTTP status code
+        type: integer
+        required: false
+  convert_epic_to_issue:
+    title: Convert Epic to Issue
+    description: Convert a ZenHub Epic back to a GitHub Issue
+    input:
+      repo_id:
+        title: Repository ID
+        description: GitHub Repository ID e.g. 24237263
+        type: integer
+        required: true
+      epic_id:
+        title: Epic ID
+        description: GitHub Issue Number of the ZenHub Epic
+        type: integer
+        required: true
+    output:
+      status_code:
+        title: Status
+        description: HTTP status code
+        type: integer
+        required: false
+  add_issue_to_epic:
+    title: Add Issue to Epic
+    description: Add a GitHub Issue to a ZenHub Epic
+    input:
+      repo_id:
+        title: Repository ID
+        description: GitHub Repository ID e.g. 24237263
+        type: integer
+        required: true
+      epic_id:
+        title: Epic ID
+        description: GitHub Issue Number of the ZenHub Epic
+        type: integer
+        required: true
+      issue:
+        title: Issue
+        description: A GitHub Issue to add to the ZenHub Epic
+        type: issue_reference
+        required: true
+    output:
+      status_code:
+        title: Status
+        description: HTTP status code
+        type: integer
+        required: false
+      issue:
+        title: Issue
+        description: The GitHub Issue added to the ZenHub Epic
+        type: issue_reference
+        required: false
+  remove_issue_from_epic:
+    title: Remove Issue from Epic
+    description: Remove a GitHub Issue from a ZenHub Epic
+    input:
+      repo_id:
+        title: Repository ID
+        description: GitHub Repository ID e.g. 24237263
+        type: integer
+        required: true
+      epic_id:
+        title: Epic ID
+        description: GitHub Issue Number of the ZenHub Epic
+        type: integer
+        required: true
+      issue:
+        title: Issue
+        description: A GitHub Issue to remove from the ZenHub Epic
+        type: issue_reference
+        required: true
+    output:
+      status_code:
+        title: Status
+        description: HTTP status code
+        type: integer
+        required: false
+      issue:
+        title: Issue
+        description: The GitHub Issue removed from the ZenHub Epic
+        type: issue_reference
+        required: false

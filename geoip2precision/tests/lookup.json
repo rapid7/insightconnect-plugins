@@ -1,0 +1,17 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "meta": {},
+    "action": "lookup",
+    "input": {
+      "address": "8.8.8.8"
+    },
+    "connection": {
+      "user": 1,
+      "license_key": {
+        "secretKey": ""
+      }
+    }
+  }
+}

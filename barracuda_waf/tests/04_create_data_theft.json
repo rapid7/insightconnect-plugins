@@ -1,0 +1,25 @@
+{
+  "type": "action_start",
+  "version": "v1",
+  "body": {
+    "action": "create_data_theft",
+    "connection": {
+      "address": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {},
+    "input": {
+      "name": "test-v14-data-theft",
+      "policy_id": "test-v14-policy",
+      "initial_characters_to_keep": 0,
+      "identity_theft_type": "custom",
+      "enabled": "yes",
+      "action": "cloak",
+      "custom_identity_theft_type": "test",
+      "trailing_characters_to_keep": 0
+    }
+  }
+}

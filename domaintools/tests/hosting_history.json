@@ -1,0 +1,17 @@
+{
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "username": ""
+    },
+    "meta": {},
+    "action": "hosting_history",
+    "input": {
+      "domain": "google.com"
+    }
+  },
+  "version": "v1"
+}

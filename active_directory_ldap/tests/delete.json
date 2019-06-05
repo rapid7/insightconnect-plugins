@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "delete",
+    "meta": {},
+    "input": {
+      "distinguished_name": ""
+    },
+    "connection": {
+      "username_password": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": 389,
+      "use_ssl": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

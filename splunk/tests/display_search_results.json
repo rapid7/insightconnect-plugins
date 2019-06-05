@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "display_search_results",
+    "meta": {},
+    "input": {
+      "job_id": "",
+      "timeout": 0
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "license": "Enterprise",
+      "port": 8089,
+      "ssl_verify": false,
+      "use_ssl": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

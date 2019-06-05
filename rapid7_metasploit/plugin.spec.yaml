@@ -1,0 +1,255 @@
+plugin_spec_version: v2
+name: rapid7_metasploit
+title: Rapid7 Metasploit
+description: Metasploit is the most widely used penetration testing framework
+version: 2.0.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- metasploit
+- rapid7
+- penetration testing
+enable_cache: true
+language: python
+types:
+  search_results:
+    exploits:
+      title: Exploits
+      type: '[]string'
+      description: A list of exploits found searching Metasploit
+      required: false
+    auxiliaries:
+      title: Auxiliaries
+      type: '[]string'
+      description: A list of auxiliaries found searching Metasploit
+      required: false
+    post_exploits:
+      title: Post Exploits
+      type: '[]string'
+      description: A list of post exploits found searching Metasploit
+      required: false
+  session_info:
+    session_id:
+      title: Session ID
+      type: integer
+      description: Session ID
+      required: false
+    info:
+      title: Information
+      type: string
+      description: Information about session
+      required: false
+    username:
+      title: Username
+      type: string
+      description: Username of the session
+      required: false
+    session_port:
+      title: Session Port
+      type: integer
+      description: Session port
+      required: false
+    via_payload:
+      title: Via Payload
+      type: string
+      description: Payload used to create session
+      required: false
+    uuid:
+      title: UUID
+      type: string
+      description: UUID of session
+      required: false
+    tunnel_local:
+      title: Tunnel Local
+      type: string
+      description: Tunnel local
+      required: false
+    via_exploit:
+      title: Via Exploit
+      type: string
+      description: Exploit used to gain access
+      required: false
+    exploit_uuid:
+      title: Exploit UUID
+      type: string
+      description: Exploit UUID
+      required: false
+    tunnel_peer:
+      title: Tunnel Peer
+      type: string
+      description: Tunnel peer
+      required: false
+    workspace:
+      title: Workspace
+      type: string
+      description: Metasploit workspace
+      required: false
+    routes:
+      title: Routes
+      type: string
+      description: Routes
+      required: false
+    target_host:
+      title: Target Host
+      type: string
+      description: Target host
+      required: false
+    type:
+      title: Session Type
+      type: string
+      description: Session Type e.g. meterpreter or shell
+      required: false
+    session_host:
+      title: Session Host
+      type: string
+      description: Session host
+      required: false
+    desc:
+      title: Description
+      type: string
+      description: Description
+      required: false
+  module:
+    name:
+      title: Name
+      description: Name of module
+      type: string
+    full_name:
+      title: Full Name
+      description: Metasploit module path
+      type: string
+    disclosure_date:
+      title: Disclosure Date
+      description: Disclosure Date
+      type: string
+    rank:
+      title: Rank
+      description: Rank
+      type: integer
+    type:
+      title: Type
+      description: Type
+      type: string
+    description:
+      title: Description
+      description: Description
+      type: string
+    author:
+      title: Author
+      description: Author
+      type: '[]string'
+    references:
+      title: References
+      description: References
+      type: '[]string'
+    is_server:
+      title: Is Server
+      description: Is server
+      type: boolean
+    is_client:
+      title: Is Client
+      description: Is client
+      type: boolean
+    arch:
+      title: Architecture
+      description: Architecture
+      type: string
+    rport:
+      title: Remote Port
+      description: Remote Port
+      type: string
+    path:
+      title: Path
+      description: Location of the Metasploit module
+      type: string
+    mod_time:
+      title: Mod Time
+      description: Mod time
+      type: string
+    ref_name:
+      title: Ref Name
+      description: Ref name
+      type: string
+    is_install_path:
+      title: Is Install Path
+      description: Is install path
+      type: boolean
+connection:
+  credentials:
+    type: credential_username_password
+    title: Username and Password
+    description: Username and password
+    required: true
+  uri:
+    type: string
+    title: URI
+    description: The msfrpcd URI
+    default: /api/
+    required: false
+  port:
+    type: integer
+    description: Port
+    default: 55553
+    required: false
+  server:
+    type: string
+    description: Remote server IP
+    required: false
+  ssl:
+    type: boolean
+    title: SSL
+    description: Use SSL
+    default: true
+    required: false
+actions:
+  search_for_exploit:
+    title: Search for Exploit
+    description: Searches for an exploit within a Metasploit RPC session
+    input:
+      search_term:
+        title: Search Term
+        description: Search term, e.g. 'vsftp'
+        type: string
+        required: true
+    output:
+      search_results:
+        title: Search Results
+        description: Search results from Metasploit
+        type: search_results
+        required: false
+  execute_exploit:
+    title: Execute Exploit
+    description: Run selected Metasploit exploit
+    input:
+      options:
+        title: Options
+        description: Metasploit module options e.g {"RHOST":"10.0.2.5", "RPORT":"1099",
+          "LHOST":"10.0.2.15", "payload":"java/meterpreter/reverse_tcp"}
+        type: object
+        required: false
+      module:
+        title: Metasploit Module
+        description: A Metasploit module e.g exploit/multi/misc/java_rmi_server
+        type: string
+        required: true
+    output:
+      console_output:
+        title: Console Information
+        description: Information from the console when a module is executed
+        type: '[]string'
+        required: false
+      session_information:
+        title: Session Information
+        description: Session information provided when a module is executed
+        type: session_info
+        required: false
+triggers:
+  new_modules:
+    title: New Modules
+    description: Checks for new Metasploit modules
+    output:
+      module:
+        title: Module
+        description: New Module
+        type: module
+        required: false

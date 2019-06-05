@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "scrape",
+    "meta": {},
+    "input": {
+      "language": "All",
+      "limit": 1,
+      "pattern": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "key": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "agents_get_all",
+    "meta": {},
+    "input": {
+      "limit": 0,
+      "offset": 0,
+      "search": "",
+      "sort": "",
+      "status": "All"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

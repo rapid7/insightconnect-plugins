@@ -1,0 +1,59 @@
+plugin_spec_version: v2
+name: json_edit
+title: JSON Edit
+description: Provides the ability to edit JSON data
+version: 1.0.1
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- json
+- utilities
+actions:
+  update:
+    title: Update
+    description: Update value by key
+    input:
+      object:
+        description: JSON object
+        type: object
+        required: false
+      array:
+        description: Array of JSON objects
+        type: '[]object'
+        required: false
+      key:
+        type: string
+        description: JSON key to update
+        required: true
+      value:
+        type: string
+        description: New value
+        required: true
+    output:
+      json:
+        title: JSON
+        type: '[]object'
+        description: Array of objects
+        required: true
+  delete:
+    title: Delete
+    description: Delete a key by name
+    input:
+      object:
+        description: JSON object
+        type: object
+        required: false
+      array:
+        description: Array of JSON objects
+        type: '[]object'
+        required: false
+      key:
+        type: string
+        description: Key to remove
+        required: true
+    output:
+      json:
+        title: JSON
+        type: '[]object'
+        description: Array of objects
+        required: true

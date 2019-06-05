@@ -1,0 +1,21 @@
+{
+  "type": "action_start",
+  "body": {
+    "action": "launch_scan",
+    "input": {
+      "scan_name": "hoots"
+    },
+    "meta": {},
+    "connection": {
+      "access_key": {
+        "secretKey": ""
+      },
+      "hostname": "",
+      "secret_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": true
+    }
+  },
+  "version": "v1"
+}

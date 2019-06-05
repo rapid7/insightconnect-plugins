@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "demote",
+    "input": {
+      "user": "testuser"
+    },
+    "connection": {
+      "host": "",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

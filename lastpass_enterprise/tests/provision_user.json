@@ -1,0 +1,21 @@
+{
+  "body": {
+    "input": {
+      "user_name": "",
+      "full_name": "",
+      "password_reset_required": false,
+      "password": "",
+      "groups": [ "users" ]
+    },
+    "meta": {},
+    "connection": {
+      "account": 0,
+      "provhash": {
+        "secretKey": ""
+      }
+    },
+    "action": "provision_user"
+  },
+  "version": "v1",
+  "type": "action_start"
+}

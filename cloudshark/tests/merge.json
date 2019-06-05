@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "merge",
+    "input": {
+      "duplicates": "remove",
+      "cids": "",
+      "filename": "",
+      "tags": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

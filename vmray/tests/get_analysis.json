@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_analysis",
+    "meta": {},
+    "input": {
+      "id": "1490045",
+      "id_type": "submission",
+      "optional_params": {}
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://cloud.vmray.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

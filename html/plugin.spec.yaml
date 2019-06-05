@@ -1,0 +1,116 @@
+plugin_spec_version: v2
+name: html
+title: HTML
+vendor: rapid7
+status: ["unsupported"]
+description: Validate or convert an html document
+version: 1.0.1
+tags:
+- markdown
+- html
+- pdf
+- epub
+- docx
+- convert
+- utilities
+actions:
+  validate:
+    title: Validate
+    description: Validate an HTML file
+    input:
+      html_contents:
+        title: Contents
+        description: HTML Contents
+        type: string
+        required: true
+    output:
+      validated:
+        title: Is Validated
+        description: HTML Syntax Validation Status
+        type: boolean
+        required: false
+  markdown:
+    title: Markdown
+    description: Convert HTML to Markdown
+    input:
+      doc:
+        title: Document
+        description: Document to transform
+        type: string
+        required: true
+    output:
+      markdown_contents:
+        title: Contents
+        description: Markdown Contents
+        type: string
+        required: false
+      markdown_file:
+        title: File
+        description: Markdown File
+        type: bytes
+        required: false
+  html5:
+    title: HTML5
+    description: Convert HTML to HTML5
+    input:
+      doc:
+        title: Document
+        description: Document to transform
+        type: string
+        required: true
+    output:
+      html5_contents:
+        title: Contents
+        description: HTML5 Contents
+        type: string
+        required: false
+      html5_file:
+        title: File
+        description: HTML5 File
+        type: bytes
+        required: false
+  pdf:
+    title: PDF
+    description: Convert HTML to PDF
+    input:
+      doc:
+        title: Document
+        description: Document to transform
+        type: string
+        required: true
+    output:
+      pdf:
+        title: PDF
+        description: PDF File
+        type: bytes"
+        required: false
+  epub:
+    title: EPUB
+    description: Convert HTML to EPUB
+    input:
+      doc:
+        title: Document
+        description: Document to transform
+        type: string
+        required: true
+    output:
+      epub:
+        title: Epub
+        description: Epub file
+        type: bytes"
+        required: false
+  docx:
+    title: Windows Document
+    description: Convert HTML to DOCX
+    input:
+      doc:
+        title: Document
+        description: Document to transform
+        type: string
+        required: true
+    output:
+      docx:
+        title: Docx
+        description: Docx File
+        type: bytes"
+        required: false

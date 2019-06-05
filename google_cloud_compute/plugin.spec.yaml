@@ -1,0 +1,2062 @@
+plugin_spec_version: v2
+name: google_cloud_compute
+title: Google Cloud Compute
+vendor: rapid7
+status: ["unsupported"]
+description: Google Compute Engine delivers virtual machines running in Google innovative
+  data centers and worldwide fiber network
+version: 2.0.1
+tags:
+- Google Cloud Compute
+- Virtual Machines
+author: komand
+types:
+  items:
+    creationTimestamp:
+      type: string
+      required: false
+    description:
+      type: string
+      required: false
+    id:
+      type: string
+      required: false
+    kind:
+      type: string
+      required: false
+    licenses:
+      type: '[]string'
+      required: false
+    name:
+      type: string
+      required: false
+    selfLink:
+      type: string
+      required: false
+    sizeGb:
+      type: string
+      required: false
+    sourceImage:
+      type: string
+      required: false
+    sourceImageId:
+      type: string
+      required: false
+    status:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+    zone:
+      type: string
+      required: false
+  data:
+    key:
+      type: string
+      required: false
+    value:
+      type: string
+      required: false
+  warnings:
+    code:
+      type: string
+      required: false
+    data:
+      type: '[]data'
+      required: false
+    message:
+      type: string
+      required: false
+  errors:
+    code:
+      type: string
+      required: false
+    location:
+      type: string
+      required: false
+    message:
+      type: string
+      required: false
+  error:
+    errors:
+      type: '[]errors'
+      required: false
+  snapshotEncryptionKey:
+    rawKey:
+      type: string
+      required: false
+    sha256:
+      type: string
+      required: false
+  allowed:
+    IPProtocol:
+      type: string
+      required: false
+    ports:
+      type: '[]string'
+      required: false
+  items_firewalls:
+    allowed:
+      type: '[]allowed'
+      required: false
+    creationTimestamp:
+      type: string
+      required: false
+    description:
+      type: string
+      required: false
+    id:
+      type: string
+      required: false
+    kind:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    network:
+      type: string
+      required: false
+    selfLink:
+      type: string
+      required: false
+    sourceRanges:
+      type: '[]string'
+      required: false
+  disks:
+    autoDelete:
+      type: bool
+      required: false
+    boot:
+      type: bool
+      required: false
+    deviceName:
+      type: string
+      required: false
+    index:
+      type: int
+      required: false
+    interface:
+      type: string
+      required: false
+    kind:
+      type: string
+      required: false
+    licenses:
+      type: '[]string'
+      required: false
+    mode:
+      type: string
+      required: false
+    source:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+  items_meta:
+    key:
+      type: string
+      required: false
+    value:
+      type: string
+      required: false
+  metadata:
+    fingerprint:
+      type: string
+      required: false
+    items:
+      type: '[]items_meta'
+      required: false
+    kind:
+      type: string
+      required: false
+  accessConfigs:
+    kind:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    natIP:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+  networkInterfaces:
+    accessConfigs:
+      type: '[]accessConfigs'
+      required: false
+    kind:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    network:
+      type: string
+      required: false
+    networkIP:
+      type: string
+      required: false
+    subnetwork:
+      type: string
+      required: false
+  scheduling:
+    automaticRestart:
+      type: bool
+      required: false
+    onHostMaintenance:
+      type: string
+      required: false
+    preemptible:
+      type: bool
+      required: false
+  serviceAccounts:
+    email:
+      type: string
+      required: false
+    scopes:
+      type: '[]string'
+      required: false
+  tags:
+    fingerprint:
+      type: string
+      required: false
+    items:
+      type: '[]string'
+      required: false
+  items_instance:
+    canIpForward:
+      type: bool
+      required: false
+    cpuPlatform:
+      type: string
+      required: false
+    creationTimestamp:
+      type: string
+      required: false
+    description:
+      type: string
+      required: false
+    disks:
+      type: '[]disks'
+      required: false
+    id:
+      type: string
+      required: false
+    kind:
+      type: string
+      required: false
+    machineType:
+      type: string
+      required: false
+    metadata:
+      type: metadata
+      required: false
+    name:
+      type: string
+      required: false
+    networkInterfaces:
+      type: '[]networkInterfaces'
+      required: false
+    scheduling:
+      type: scheduling
+      required: false
+    selfLink:
+      type: string
+      required: false
+    serviceAccounts:
+      type: '[]serviceAccounts'
+      required: false
+    status:
+      type: string
+      required: false
+    tags:
+      type: tags
+      required: false
+    zone:
+      type: string
+      required: false
+  item_snapshot:
+    creationTimestamp:
+      type: string
+      required: false
+    description:
+      type: string
+      required: false
+    diskSizeGb:
+      type: string
+      required: false
+    id:
+      type: string
+      required: false
+    kind:
+      type: string
+      required: false
+    licenses:
+      type: '[]string'
+      required: false
+    name:
+      type: string
+      required: false
+    selfLink:
+      type: string
+      required: false
+    sourceDisk:
+      type: string
+      required: false
+    sourceDiskId:
+      type: string
+      required: false
+    status:
+      type: string
+      required: false
+    storageBytes:
+      type: string
+      required: false
+    storageBytesStatus:
+      type: string
+      required: false
+connection:
+  host:
+    type: string
+    description: Google Cloud Compute Server
+    required: true
+    default: https://www.googleapis.com/compute/
+  version:
+    type: string
+    description: API Version
+    required: true
+    default: v1
+  project_id:
+    title: Project ID
+    type: string
+    description: Project ID from service credentials
+    required: true
+  private_key:
+    title: Private Key
+    type: credential_asymmetric_key
+    description: Private key from service credentials
+    required: true
+  client_email:
+    type: string
+    description: Client email from service credentials
+    required: true
+  client_id:
+    title: Client ID
+    type: string
+    description: Client ID
+    required: true
+  client_x509_cert_url:
+    title: Client X509 Cert URL
+    type: string
+    description: x509 cert URL from service credentials
+    required: true
+  auth_uri:
+    title: Auth URI
+    type: string
+    description: OAUTH2 Auth URI
+    default: https://accounts.google.com/o/oauth2/auth
+    required: true
+  token_uri:
+    title: Token URI
+    type: string
+    description: OAUTH2 Token URI
+    default: https://accounts.google.com/o/oauth2/token
+    required: true
+  auth_provider_x509_cert_url:
+    title: Auth Provider X509 Cert URL
+    type: string
+    description: OAUTH2 Auth Provider x509 Cert URL
+    default: https://www.googleapis.com/oauth2/v1/certs
+    required: true
+actions:
+  disk_list:
+    title: List Disks
+    description: Retrieves a list of persistent disks contained within the specified
+      zone
+    input:
+      zone:
+        type: string
+        title: Zone
+        description: The name of the zone for this request
+        required: true
+      filter:
+        type: string
+        title: Filter
+        description: Sets a filter expression for filtering listed resources
+        required: false
+      maxResults:
+        type: integer
+        title: Max Results
+        description: The maximum number of results per page that should be returned.
+          Acceptable values are 0 to 500. Default 500
+        required: false
+      orderBy:
+        type: string
+        title: OrderBy
+        description: Sorts list results by a certain order
+        required: false
+      pageToken:
+        type: string
+        title: Page Token
+        description: Set pageToken to the nextPageToken returned by a previous list
+          request to get the next page of results
+        required: false
+    output:
+      items:
+        description: A list of disk resources
+        title: Items
+        type: '[]items'
+        required: false
+      kind:
+        description: Type of resource
+        title: Kind
+        type: string
+        required: false
+      id:
+        description: Unique identifier for the resource
+        title: ID
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for this resource
+        title: Self Link
+        type: string
+        required: false
+      nextPageToken:
+        description: This token allows you to get the next page of results for list
+          requests
+        title: Next Page Token
+        type: string
+        required: false
+  disk_attach:
+    title: Attach Disk
+    description: Attaches an existing disk resource to an instance
+    input:
+      zone:
+        type: string
+        title: Zone
+        description: The name of the zone for this request
+        required: true
+      instance:
+        type: string
+        title: Name Instance
+        description: Name of the instance resource to stop
+        required: true
+      source:
+        type: string
+        title: Source
+        description: Valid partial or full url to an existing persistent disk resource
+          (e.g. projects/my-project-171212/zones/us-central1-c/disks/new-disk)
+        required: true
+    output:
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#attachedDisk for operation
+          resources
+        title: Kind
+        type: string
+        required: false
+      name:
+        description: Name of the resource
+        title: Name
+        type: string
+        required: false
+      description:
+        description: A textual description of the operation, which is set when the
+          operation is created
+        title: Description
+        type: string
+        required: false
+      insertTime:
+        description: The time that this operation was requested
+        title: Insert Time
+        type: string
+        required: false
+      progress:
+        description: An optional progress indicator that ranges from 0 to 100
+        title: Progress
+        type: integer
+        required: false
+      targetLink:
+        description: The url of the resource that the operation modifies
+        title: Target Link
+        type: string
+        required: false
+      targetId:
+        description: The unique targetID, which identifies a specific incarnation
+          of the target resource
+        title: TargetID
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      user:
+        description: User who requested the operation
+        title: User
+        type: string
+        required: false
+      zone:
+        description: The url of the zone where the operation resides. Only available
+          when performing per-zone operations
+        title: Zone
+        type: string
+        required: false
+      status:
+        description: 'The status of the operation, which can be one of the following:
+          pending, running, or done'
+        title: Status
+        type: string
+        required: false
+      statusMessage:
+        description: An optional textual description of the current status of the
+          operation
+        title: Status Message
+        type: string
+        required: false
+      clientOperationId:
+        description: Reserved for future use
+        title: Client OperationId
+        type: string
+        required: false
+      httpErrorMessage:
+        description: If the operation fails, this field contains the http error message
+          that was returned
+        title: Http Error Message
+        type: string
+        required: false
+      httpErrorStatusCode:
+        description: If the operation fails, this field contains the http error status
+          code that was returned
+        title: Http Error Status Code
+        type: integer
+        required: false
+      operationType:
+        description: The type of operation, such as insert, update, or delete, and
+          so on
+        title: Operation Type
+        type: string
+        required: false
+      warnings:
+        description: Warning messages
+        title: Warnings
+        type: '[]warnings'
+        required: false
+      startTime:
+        description: The time that this operation was started by the server
+        title: Start Time
+        type: string
+        required: false
+      region:
+        description: The url of the region where the operation resides
+        title: Region
+        type: string
+        required: false
+      error:
+        description: If errors are generated during processing of the operation, this
+          field will be populated
+        title: Error
+        type: error
+        required: false
+      endTime:
+        description: The time that this operation was completed
+        title: End Time
+        type: string
+        required: false
+  disk_detach:
+    title: Detach Disk
+    description: Detaches a disk from an instance
+    input:
+      zone:
+        type: string
+        title: Zone
+        description: The name of the zone for this request
+        required: true
+      instance:
+        type: string
+        title: Name Instance
+        description: Name of the instance resource to stop
+        required: true
+      deviceName:
+        type: string
+        title: Disk Name
+        description: Disk device name to detach
+        required: true
+    output:
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#operation for operation
+          resources
+        title: Kind
+        type: string
+        required: false
+      name:
+        description: Name of the resource
+        title: Name
+        type: string
+        required: false
+      description:
+        description: A textual description of the operation, which is set when the
+          operation is created
+        title: Description
+        type: string
+        required: false
+      insertTime:
+        description: The time that this operation was requested
+        title: Insert Time
+        type: string
+        required: false
+      progress:
+        description: An optional progress indicator that ranges from 0 to 100
+        title: Progress
+        type: integer
+        required: false
+      targetLink:
+        description: The url of the resource that the operation modifies
+        title: Target Link
+        type: string
+        required: false
+      targetId:
+        description: The unique targetID, which identifies a specific incarnation
+          of the target resource
+        title: TargetID
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      user:
+        description: User who requested the operation
+        title: User
+        type: string
+        required: false
+      zone:
+        description: The url of the zone where the operation resides. Only available
+          when performing per-zone operations
+        title: Zone
+        type: string
+        required: false
+      status:
+        description: 'The status of the operation, which can be one of the following:
+          pending, running, or done'
+        title: Status
+        type: string
+        required: false
+      statusMessage:
+        description: An optional textual description of the current status of the
+          operation
+        title: Status Message
+        type: string
+        required: false
+      clientOperationId:
+        description: Reserved for future use
+        title: Client OperationId
+        type: string
+        required: false
+      httpErrorMessage:
+        description: If the operation fails, this field contains the http error message
+          that was returned
+        title: Http Error Message
+        type: string
+        required: false
+      httpErrorStatusCode:
+        description: If the operation fails, this field contains the http error status
+          code that was returned
+        title: Http Error Status Code
+        type: integer
+        required: false
+      operationType:
+        description: The type of operation, such as insert, update, or delete, and
+          so on
+        title: Operation Type
+        type: string
+        required: false
+      warnings:
+        description: Warning messages
+        title: Warnings
+        type: '[]warnings'
+        required: false
+      startTime:
+        description: The time that this operation was started by the server
+        title: Start Time
+        type: string
+        required: false
+      region:
+        description: The url of the region where the operation resides
+        title: Region
+        type: string
+        required: false
+      error:
+        description: If errors are generated during processing of the operation, this
+          field will be populated
+        title: Error
+        type: error
+        required: false
+      endTime:
+        description: The time that this operation was completed
+        title: End Time
+        type: string
+        required: false
+  disk_snapshot:
+    title: Snapshot Disk
+    description: Creates a snapshot of a specified persistent disk
+    input:
+      zone:
+        type: string
+        title: Zone
+        description: The name of the zone for this request
+        required: true
+      disk:
+        type: string
+        title: Disk
+        description: Name of the persistent disk to snapshot
+        required: true
+      kind:
+        type: string
+        title: Kind
+        description: Type of the resource. Always compute#snapshot for Snapshot resources
+        default: compute#snapshot
+        required: false
+      name:
+        type: string
+        title: Name
+        description: Name of the resource, provided by the client when the resource
+          is created
+        required: true
+      id:
+        type: string
+        title: ID
+        description: The unique identifier for the resource
+        required: false
+      creationTimestamp:
+        type: string
+        title: Creation timestamp
+        description: Creation timestamp
+        required: false
+      description:
+        type: string
+        title: Description
+        description: An optional description of this resource. Provide this property
+          when you create the resource
+        required: false
+      status:
+        type: string
+        title: Status
+        description: The status of the snapshot
+        required: false
+      diskSizeGb:
+        type: integer
+        title: Disk SizeGb
+        description: Size of the snapshot
+        required: false
+      licenses:
+        type: '[]string'
+        title: Licenses
+        description: A list of public visible licenses that apply to this snapshot
+        required: false
+      selfLink:
+        type: string
+        title: Self Link
+        description: Server-defined url for the resource
+        required: true
+      snapshotEncryptionKey:
+        description: Encrypts the snapshot
+        title: Snapshot Encryption Key
+        type: snapshotEncryptionKey
+        required: false
+      sourceDiskEncryptionKey:
+        description: The customer-supplied encryption key of the source disk
+        title: Source Disk Encryption Key
+        type: snapshotEncryptionKey
+        required: false
+    output:
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#operation for operation
+          resources
+        title: Kind
+        type: string
+        required: false
+      name:
+        description: Name of the resource
+        title: Name
+        type: string
+        required: false
+      description:
+        description: A textual description of the operation, which is set when the
+          operation is created
+        title: Description
+        type: string
+        required: false
+      insertTime:
+        description: The time that this operation was requested
+        title: Insert Time
+        type: string
+        required: false
+      progress:
+        description: An optional progress indicator that ranges from 0 to 100
+        title: Progress
+        type: integer
+        required: false
+      targetLink:
+        description: The url of the resource that the operation modifies
+        title: Target Link
+        type: string
+        required: false
+      targetId:
+        description: The unique targetID, which identifies a specific incarnation
+          of the target resource
+        title: TargetID
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      user:
+        description: User who requested the operation
+        title: User
+        type: string
+        required: false
+      zone:
+        description: The url of the zone where the operation resides. Only available
+          when performing per-zone operations
+        title: Zone
+        type: string
+        required: false
+      status:
+        description: 'The status of the operation, which can be one of the following:
+          pending, running, or done'
+        title: Status
+        type: string
+        required: false
+      statusMessage:
+        description: An optional textual description of the current status of the
+          operation
+        title: Status Message
+        type: string
+        required: false
+      clientOperationId:
+        description: Reserved for future use
+        title: Client OperationId
+        type: string
+        required: false
+      httpErrorMessage:
+        description: If the operation fails, this field contains the http error message
+          that was returned
+        title: Http Error Message
+        type: string
+        required: false
+      httpErrorStatusCode:
+        description: If the operation fails, this field contains the http error status
+          code that was returned
+        title: Http Error Status Code
+        type: integer
+        required: false
+      operationType:
+        description: The type of operation, such as insert, update, or delete, and
+          so on
+        title: Operation Type
+        type: string
+        required: false
+      warnings:
+        description: Warning messages
+        title: Warnings
+        type: '[]warnings'
+        required: false
+      startTime:
+        description: The time that this operation was started by the server
+        title: Start Time
+        type: string
+        required: false
+      region:
+        description: The url of the region where the operation resides
+        title: Region
+        type: string
+        required: false
+      error:
+        description: If errors are generated during processing of the operation, this
+          field will be populated
+        title: Error
+        type: error
+        required: false
+      endTime:
+        description: The time that this operation was completed
+        title: End Time
+        type: string
+        required: false
+  list_snapshots:
+    title: List Snapshots
+    description: Retrieves the list of Snapshot resources contained within the specified
+      project
+    input:
+      filter:
+        type: string
+        title: Filter
+        description: Sets a filter expression for filtering listed resources
+        required: false
+      maxResults:
+        type: integer
+        title: Max Results
+        description: The maximum number of results per page that should be returned.
+          Acceptable values are 0 to 500. Default 500
+        required: false
+      orderBy:
+        type: string
+        title: OrderBy
+        description: Sorts list results by a certain order
+        required: false
+      pageToken:
+        type: string
+        title: Page Token
+        description: Set pageToken to the nextPageToken returned by a previous list
+          request to get the next page of results
+        required: false
+    output:
+      kind:
+        description: Type of resource. Always compute#snapshotList of a list of Snapshot
+          resources
+        title: Kind
+        type: string
+        required: false
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      items:
+        description: A list of snapshot resources
+        title: Items
+        type: '[]item_snapshot'
+        required: false
+      selfLink:
+        description: Server-defined url for this resource
+        title: Self Link
+        type: string
+        required: false
+  delete_snapshots:
+    title: Delete Snapshots
+    description: Deletes the specified snapshot resource
+    input:
+      snapshot:
+        type: string
+        title: Name Snapshot
+        description: Name of the snapshot resource to delete
+        required: true
+    output:
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#operation for operation
+          resources
+        title: Kind
+        type: string
+        required: false
+      name:
+        description: Name of the resource
+        title: Name
+        type: string
+        required: false
+      description:
+        description: A textual description of the operation, which is set when the
+          operation is created
+        title: Description
+        type: string
+        required: false
+      insertTime:
+        description: The time that this operation was requested
+        title: Insert Time
+        type: string
+        required: false
+      progress:
+        description: An optional progress indicator that ranges from 0 to 100
+        title: Progress
+        type: integer
+        required: false
+      targetLink:
+        description: The url of the resource that the operation modifies
+        title: Target Link
+        type: string
+        required: false
+      targetId:
+        description: The unique targetID, which identifies a specific incarnation
+          of the target resource
+        title: TargetID
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      user:
+        description: User who requested the operation
+        title: User
+        type: string
+        required: false
+      zone:
+        description: The url of the zone where the operation resides. Only available
+          when performing per-zone operations
+        title: Zone
+        type: string
+        required: false
+      status:
+        description: 'The status of the operation, which can be one of the following:
+          pending, running, or done'
+        title: Status
+        type: string
+        required: false
+      statusMessage:
+        description: An optional textual description of the current status of the
+          operation
+        title: Status Message
+        type: string
+        required: false
+      clientOperationId:
+        description: Reserved for future use
+        title: Client OperationId
+        type: string
+        required: false
+      httpErrorMessage:
+        description: If the operation fails, this field contains the http error message
+          that was returned
+        title: Http Error Message
+        type: string
+        required: false
+      httpErrorStatusCode:
+        description: If the operation fails, this field contains the http error status
+          code that was returned
+        title: Http Error Status Code
+        type: integer
+        required: false
+      operationType:
+        description: The type of operation, such as insert, update, or delete, and
+          so on
+        title: Operation Type
+        type: string
+        required: false
+      warnings:
+        description: Warning messages
+        title: Warnings
+        type: '[]warnings'
+        required: false
+      startTime:
+        description: The time that this operation was started by the server
+        title: Start Time
+        type: string
+        required: false
+      region:
+        description: The url of the region where the operation resides
+        title: Region
+        type: string
+        required: false
+      error:
+        description: If errors are generated during processing of the operation, this
+          field will be populated
+        title: Error
+        type: error
+        required: false
+      endTime:
+        description: The time that this operation was completed
+        title: End Time
+        type: string
+        required: false
+  get_firewall:
+    title: Get Firewall
+    description: Get firewall
+    input:
+      firewall:
+        type: string
+        title: Firewall Name
+        description: Name of the firewall rule to return
+        required: true
+    output:
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#firewall for firewall rules
+        title: Kind
+        type: string
+        required: false
+      name:
+        description: Name of the resource, provided by the client when the resource
+          is created
+        title: Name
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      description:
+        type: string
+        description: A textual description of the operation, which is set when the
+          operation is created
+        title: Description
+        required: false
+      network:
+        description: 'URL of the network resource for this firewall rule. If not specified
+          when creating a firewall rule, the default network is used: global/networks/default'
+        title: Network
+        type: string
+        required: false
+      sourceTags:
+        description: If source tags are specified, the firewall will apply only to
+          traffic with source ip that belongs to a tag listed in source tags
+        title: Source Tags
+        type: '[]string'
+        required: false
+      sourceRanges:
+        description: If source ranges are specified, the firewall will apply only
+          to traffic that has source ip address in these ranges
+        title: Source Ranges
+        type: '[]string'
+        required: false
+      targetTags:
+        description: A list of instance tags indicating sets of instances located
+          in the network that may make network connections as specified in allowed[]
+        title: Target Tags
+        type: '[]string'
+        required: false
+      allowed:
+        description: The list of allow rules specified by this firewall. Each rule
+          specifies a protocol and port-range tuple that describes a permitted connection
+        title: Allowed
+        type: '[]allowed'
+        required: false
+      creationTimestamp:
+        description: Creation timestamp
+        title: Creation Timestamp
+        type: string
+        required: false
+  insert_firewall:
+    title: Insert Firewall
+    description: Creates a firewall rule in the specified project using the data included
+      in the request
+    input:
+      name:
+        description: Name of the resource, provided by the client when the resource
+          is created
+        title: Name
+        type: string
+        required: true
+      allowed:
+        description: The list of allow rules specified by this firewall. Each rule
+          specifies a protocol and port-range tuple that describes a permitted connection
+        title: Allowed
+        type: '[]allowed'
+        required: true
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#firewall for firewall rules
+        title: Kind
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      description:
+        description: A textual description of the operation, which is set when the
+          operation is created
+        type: string
+        required: false
+      network:
+        description: 'URL of the network resource for this firewall rule. If not specified
+          when creating a firewall rule, the default network is used: global/networks/default'
+        title: Network
+        type: string
+        required: false
+      sourceTags:
+        description: If source tags are specified, the firewall will apply only to
+          traffic with source ip that belongs to a tag listed in source tags
+        title: Source Tags
+        type: '[]string'
+        required: false
+      sourceRanges:
+        description: If source ranges are specified, the firewall will apply only
+          to traffic that has source ip address in these ranges
+        title: Source Ranges
+        type: '[]string'
+        required: false
+      targetTags:
+        description: A list of instance tags indicating sets of instances located
+          in the network that may make network connections as specified in allowed[]
+        title: Target Tags
+        type: '[]string'
+        required: false
+      creationTimestamp:
+        description: Creation timestamp
+        title: Creation Timestamp
+        type: string
+        required: false
+    output:
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#operation for operation
+          resources
+        title: Kind
+        type: string
+        required: false
+      name:
+        description: Name of the resource
+        title: Name
+        type: string
+        required: false
+      description:
+        description: A textual description of the operation, which is set when the
+          operation is created
+        title: Description
+        type: string
+        required: false
+      insertTime:
+        description: The time that this operation was requested
+        title: Insert Time
+        type: string
+        required: false
+      progress:
+        description: An optional progress indicator that ranges from 0 to 100
+        title: Progress
+        type: integer
+        required: false
+      targetLink:
+        description: The url of the resource that the operation modifies
+        title: Target Link
+        type: string
+        required: false
+      targetId:
+        description: The unique targetID, which identifies a specific incarnation
+          of the target resource
+        title: TargetID
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      user:
+        description: User who requested the operation
+        title: User
+        type: string
+        required: false
+      zone:
+        description: The url of the zone where the operation resides. Only available
+          when performing per-zone operations
+        title: Zone
+        type: string
+        required: false
+      status:
+        description: 'The status of the operation, which can be one of the following:
+          pending, running, or done'
+        title: Status
+        type: string
+        required: false
+      statusMessage:
+        description: An optional textual description of the current status of the
+          operation
+        title: Status Message
+        type: string
+        required: false
+      clientOperationId:
+        description: Reserved for future use
+        title: Client OperationId
+        type: string
+        required: false
+      httpErrorMessage:
+        description: If the operation fails, this field contains the http error message
+          that was returned
+        title: Http Error Message
+        type: string
+        required: false
+      httpErrorStatusCode:
+        description: If the operation fails, this field contains the http error status
+          code that was returned
+        title: Http Error Status Code
+        type: integer
+        required: false
+      operationType:
+        description: The type of operation, such as insert, update, or delete, and
+          so on
+        title: Operation Type
+        type: string
+        required: false
+      warnings:
+        description: Warning messages
+        title: Warnings
+        type: '[]warnings'
+        required: false
+      startTime:
+        description: The time that this operation was started by the server
+        title: Start Time
+        type: string
+        required: false
+      region:
+        description: The url of the region where the operation resides
+        title: Region
+        type: string
+        required: false
+      error:
+        description: If errors are generated during processing of the operation, this
+          field will be populated
+        title: Error
+        type: error
+        required: false
+      endTime:
+        description: The time that this operation was completed
+        title: End Time
+        type: string
+        required: false
+  list_firewalls:
+    title: List Firewalls
+    description: Retrieves the list of firewall rules available to the specified project
+    input:
+      filter:
+        type: string
+        title: Filter
+        description: Sets a filter expression for filtering listed resources
+        required: false
+      maxResults:
+        type: integer
+        title: Max Results
+        description: The maximum number of results per page that should be returned.
+          Acceptable values are 0 to 500. Default 500
+        required: false
+      orderBy:
+        type: string
+        title: OrderBy
+        description: Sorts list results by a certain order
+        required: false
+      pageToken:
+        type: string
+        title: Page Token
+        description: Set pageToken to the nextPageToken returned by a previous list
+          request to get the next page of results
+        required: false
+    output:
+      kind:
+        type: string
+        title: Kind
+        description: Type of resource. Always compute#firewallList for lists of firewalls
+        required: false
+      id:
+        type: string
+        title: ID
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        required: false
+      items:
+        type: '[]items_firewalls'
+        title: Items
+        description: A list of firewall resources
+        required: false
+      selfLink:
+        type: string
+        title: Self Link
+        description: Server-defined url for this resource
+        required: false
+      nextPageToken:
+        type: string
+        title: Next Page Token
+        description: This token allows you to get the next page of results for list
+          requests
+        required: false
+  update_firewall:
+    title: Update Firewall
+    description: Updates the specified firewall rule with the data included in the
+      request
+    input:
+      firewall:
+        type: string
+        title: Firewall Name
+        description: Name of the firewall rule to update
+        required: true
+      name:
+        description: Name of the resource, provided by the client when the resource
+          is created
+        title: Name
+        type: string
+        required: true
+      allowed:
+        description: The list of allow rules specified by this firewall. Each rule
+          specifies a protocol and port-range tuple that describes a permitted connection
+        title: Allowed
+        type: '[]allowed'
+        required: true
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#firewall for firewall rules
+        title: Kind
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      description:
+        description: A textual description of the operation, which is set when the
+          operation is created
+        type: string
+        required: false
+      network:
+        description: 'URL of the network resource for this firewall rule. If not specified
+          when creating a firewall rule, the default network is used: global/networks/default'
+        title: Network
+        type: string
+        required: false
+      sourceTags:
+        description: If source tags are specified, the firewall will apply only to
+          traffic with source ip that belongs to a tag listed in source tags
+        title: Source Tags
+        type: '[]string'
+        required: false
+      sourceRanges:
+        description: If source ranges are specified, the firewall will apply only
+          to traffic that has source ip address in these ranges
+        title: Source Ranges
+        type: '[]string'
+        required: false
+      targetTags:
+        description: A list of instance tags indicating sets of instances located
+          in the network that may make network connections as specified in allowed[]
+        title: Target Tags
+        type: '[]string'
+        required: false
+      creationTimestamp:
+        description: Creation timestamp
+        title: Creation Timestamp
+        type: string
+        required: false
+    output:
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#operation for operation
+          resources
+        title: Kind
+        type: string
+        required: false
+      name:
+        description: Name of the resource
+        title: Name
+        type: string
+        required: false
+      description:
+        description: A textual description of the operation, which is set when the
+          operation is created
+        title: Description
+        type: string
+        required: false
+      insertTime:
+        description: The time that this operation was requested
+        title: Insert Time
+        type: string
+        required: false
+      progress:
+        description: An optional progress indicator that ranges from 0 to 100
+        title: Progress
+        type: integer
+        required: false
+      targetLink:
+        description: The url of the resource that the operation modifies
+        title: Target Link
+        type: string
+        required: false
+      targetId:
+        description: The unique targetID, which identifies a specific incarnation
+          of the target resource
+        title: TargetID
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      user:
+        description: User who requested the operation
+        title: User
+        type: string
+        required: false
+      zone:
+        description: The url of the zone where the operation resides. Only available
+          when performing per-zone operations
+        title: Zone
+        type: string
+        required: false
+      status:
+        description: 'The status of the operation, which can be one of the following:
+          pending, running, or done'
+        title: Status
+        type: string
+        required: false
+      statusMessage:
+        description: An optional textual description of the current status of the
+          operation
+        title: Status Message
+        type: string
+        required: false
+      clientOperationId:
+        description: Reserved for future use
+        title: Client OperationId
+        type: string
+        required: false
+      httpErrorMessage:
+        description: If the operation fails, this field contains the http error message
+          that was returned
+        title: Http Error Message
+        type: string
+        required: false
+      httpErrorStatusCode:
+        description: If the operation fails, this field contains the http error status
+          code that was returned
+        title: Http Error Status Code
+        type: integer
+        required: false
+      operationType:
+        description: The type of operation, such as insert, update, or delete, and
+          so on
+        title: Operation Type
+        type: string
+        required: false
+      warnings:
+        description: Warning messages
+        title: Warnings
+        type: '[]warnings'
+        required: false
+      startTime:
+        description: The time that this operation was started by the server
+        title: Start Time
+        type: string
+        required: false
+      region:
+        description: The url of the region where the operation resides
+        title: Region
+        type: string
+        required: false
+      error:
+        description: If errors are generated during processing of the operation, this
+          field will be populated
+        title: Error
+        type: error
+        required: false
+      endTime:
+        description: The time that this operation was completed
+        title: End Time
+        type: string
+        required: false
+  delete_firewall:
+    title: Delete Firewall
+    description: Deletes the specified firewall
+    input:
+      firewall:
+        type: string
+        title: Firewall Name
+        description: Name of the firewall rule to delete
+        required: true
+    output:
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#operation for operation
+          resources
+        title: Kind
+        type: string
+        required: false
+      name:
+        description: Name of the resource
+        title: Name
+        type: string
+        required: false
+      description:
+        description: A textual description of the operation, which is set when the
+          operation is created
+        title: Description
+        type: string
+        required: false
+      insertTime:
+        description: The time that this operation was requested
+        title: Insert Time
+        type: string
+        required: false
+      progress:
+        description: An optional progress indicator that ranges from 0 to 100
+        title: Progress
+        type: integer
+        required: false
+      targetLink:
+        description: The url of the resource that the operation modifies
+        title: Target Link
+        type: string
+        required: false
+      targetId:
+        description: The unique targetID, which identifies a specific incarnation
+          of the target resource
+        title: TargetID
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      user:
+        description: User who requested the operation
+        title: User
+        type: string
+        required: false
+      zone:
+        description: The url of the zone where the operation resides. Only available
+          when performing per-zone operations
+        title: Zone
+        type: string
+        required: false
+      status:
+        description: 'The status of the operation, which can be one of the following:
+          pending, running, or done'
+        title: Status
+        type: string
+        required: false
+      statusMessage:
+        description: An optional textual description of the current status of the
+          operation
+        title: Status Message
+        type: string
+        required: false
+      clientOperationId:
+        description: Reserved for future use
+        title: Client OperationId
+        type: string
+        required: false
+      httpErrorMessage:
+        description: If the operation fails, this field contains the http error message
+          that was returned
+        title: Http Error Message
+        type: string
+        required: false
+      httpErrorStatusCode:
+        description: If the operation fails, this field contains the http error status
+          code that was returned
+        title: Http Error Status Code
+        type: integer
+        required: false
+      operationType:
+        description: The type of operation, such as insert, update, or delete, and
+          so on
+        title: Operation Type
+        type: string
+        required: false
+      warnings:
+        description: Warning messages
+        title: Warnings
+        type: '[]warnings'
+        required: false
+      startTime:
+        description: The time that this operation was started by the server
+        title: Start Time
+        type: string
+        required: false
+      region:
+        description: The url of the region where the operation resides
+        title: Region
+        type: string
+        required: false
+      error:
+        description: If errors are generated during processing of the operation, this
+          field will be populated
+        title: Error
+        type: error
+        required: false
+      endTime:
+        description: The time that this operation was completed
+        title: End Time
+        type: string
+        required: false
+  list_instances:
+    title: List Instances
+    description: Retrieves the list of instances contained within the specified zone
+    input:
+      zone:
+        type: string
+        title: Zone
+        description: The name of the zone for this request
+        required: true
+      filter:
+        type: string
+        title: Filter
+        description: Sets a filter expression for filtering listed resources
+        required: false
+      maxResults:
+        type: integer
+        title: Max Results
+        description: The maximum number of results per page that should be returned.
+          Acceptable values are 0 to 500. Default 500
+        required: false
+      orderBy:
+        type: string
+        title: OrderBy
+        description: Sorts list results by a certain order
+        required: false
+      pageToken:
+        type: string
+        title: Page Token
+        description: Set pageToken to the nextPageToken returned by a previous list
+          request to get the next page of results
+        required: false
+    output:
+      kind:
+        description: Type of resource. Always compute#instanceList for lists of Instance
+          resources
+        title: Kind
+        type: string
+        required: false
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      items:
+        description: A list of instances
+        title: Items
+        type: '[]items_instance'
+        required: false
+      selfLink:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: Self Link
+        type: string
+        required: false
+  stop_instance:
+    title: Stop Instance
+    description: Stops a running instance, shutting it down cleanly, and allows you
+      to restart the instance at a later time
+    input:
+      zone:
+        type: string
+        title: Zone
+        description: The name of the zone for this request
+        required: true
+      instance:
+        type: string
+        title: Name Instance
+        description: Name of the instance resource to stop
+        required: true
+    output:
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#operation for operation
+          resources
+        title: Kind
+        type: string
+        required: false
+      name:
+        description: Name of the resource
+        title: Name
+        type: string
+        required: false
+      description:
+        description: A textual description of the operation, which is set when the
+          operation is created
+        title: Description
+        type: string
+        required: false
+      insertTime:
+        description: The time that this operation was requested
+        title: Insert Time
+        type: string
+        required: false
+      progress:
+        description: An optional progress indicator that ranges from 0 to 100
+        title: Progress
+        type: integer
+        required: false
+      targetLink:
+        description: The url of the resource that the operation modifies
+        title: Target Link
+        type: string
+        required: false
+      targetId:
+        description: The unique targetID, which identifies a specific incarnation
+          of the target resource
+        title: TargetID
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      user:
+        description: User who requested the operation
+        title: User
+        type: string
+        required: false
+      zone:
+        description: The url of the zone where the operation resides. Only available
+          when performing per-zone operations
+        title: Zone
+        type: string
+        required: false
+      status:
+        description: 'The status of the operation, which can be one of the following:
+          pending, running, or done'
+        title: Status
+        type: string
+        required: false
+      statusMessage:
+        description: An optional textual description of the current status of the
+          operation
+        title: Status Message
+        type: string
+        required: false
+      clientOperationId:
+        description: Reserved for future use
+        title: Client OperationId
+        type: string
+        required: false
+      httpErrorMessage:
+        description: If the operation fails, this field contains the http error message
+          that was returned
+        title: Http Error Message
+        type: string
+        required: false
+      httpErrorStatusCode:
+        description: If the operation fails, this field contains the http error status
+          code that was returned
+        title: Http Error Status Code
+        type: integer
+        required: false
+      operationType:
+        description: The type of operation, such as insert, update, or delete, and
+          so on
+        title: Operation Type
+        type: string
+        required: false
+      warnings:
+        description: Warning messages
+        title: Warnings
+        type: '[]warnings'
+        required: false
+      startTime:
+        description: The time that this operation was started by the server
+        title: Start Time
+        type: string
+        required: false
+      region:
+        description: The url of the region where the operation resides
+        title: Region
+        type: string
+        required: false
+      error:
+        description: If errors are generated during processing of the operation, this
+          field will be populated
+        title: Error
+        type: error
+        required: false
+      endTime:
+        description: The time that this operation was completed
+        title: End Time
+        type: string
+        required: false
+  start_instance:
+    title: Start Instance
+    description: Starts an instance
+    input:
+      zone:
+        type: string
+        title: Zone
+        description: The name of the zone for this request
+        required: true
+      instance:
+        type: string
+        title: Name Instance
+        description: Name of the instance resource to stop
+        required: true
+    output:
+      id:
+        description: The unique identifier for the resource. This identifier is defined
+          by the server
+        title: ID
+        type: string
+        required: false
+      kind:
+        description: Type of the resource. Always compute#operation for operation
+          resources
+        title: Kind
+        type: string
+        required: false
+      name:
+        description: Name of the resource
+        title: Name
+        type: string
+        required: false
+      description:
+        description: A textual description of the operation, which is set when the
+          operation is created
+        title: Description
+        type: string
+        required: false
+      insertTime:
+        description: The time that this operation was requested
+        title: Insert Time
+        type: string
+        required: false
+      progress:
+        description: An optional progress indicator that ranges from 0 to 100
+        title: Progress
+        type: integer
+        required: false
+      targetLink:
+        description: The url of the resource that the operation modifies
+        title: Target Link
+        type: string
+        required: false
+      targetId:
+        description: The unique targetID, which identifies a specific incarnation
+          of the target resource
+        title: TargetID
+        type: string
+        required: false
+      selfLink:
+        description: Server-defined url for the resource
+        title: Self Link
+        type: string
+        required: false
+      user:
+        description: User who requested the operation
+        title: User
+        type: string
+        required: false
+      zone:
+        description: The url of the zone where the operation resides. Only available
+          when performing per-zone operations
+        title: Zone
+        type: string
+        required: false
+      status:
+        description: 'The status of the operation, which can be one of the following:
+          pending, running, or done'
+        title: Status
+        type: string
+        required: false
+      statusMessage:
+        description: An optional textual description of the current status of the
+          operation
+        title: Status Message
+        type: string
+        required: false
+      clientOperationId:
+        description: Reserved for future use
+        title: Client OperationId
+        type: string
+        required: false
+      httpErrorMessage:
+        description: If the operation fails, this field contains the http error message
+          that was returned
+        title: Http Error Message
+        type: string
+        required: false
+      httpErrorStatusCode:
+        description: If the operation fails, this field contains the http error status
+          code that was returned
+        title: Http Error Status Code
+        type: integer
+        required: false
+      operationType:
+        description: The type of operation, such as insert, update, or delete, and
+          so on
+        title: Operation Type
+        type: string
+        required: false
+      warnings:
+        description: Warning messages
+        title: Warnings
+        type: '[]warnings'
+        required: false
+      startTime:
+        description: The time that this operation was started by the server
+        title: Start Time
+        type: string
+        required: false
+      region:
+        description: The url of the region where the operation resides
+        title: Region
+        type: string
+        required: false
+      error:
+        description: If errors are generated during processing of the operation, this
+          field will be populated
+        title: Error
+        type: error
+        required: false
+      endTime:
+        description: The time that this operation was completed
+        title: End Time
+        type: string
+        required: false

@@ -1,0 +1,137 @@
+plugin_spec_version: v2
+name: influxdb
+title: InfluxDB
+vendor: rapid7
+status: ["unsupported"]
+description: Scalable datastore for metrics, events, and real-time analytics
+version: 1.0.0
+tags:
+- database
+- influxdb
+types:
+  point:
+    name:
+      type: string
+      required: false
+    columns:
+      type: '[]string'
+      required: false
+    values:
+      type: '[][]string'
+      required: false
+  result:
+    statement_id:
+      type: integer
+      required: false
+      title: Statement ID
+    error:
+      type: string
+      required: false
+    series:
+      type: '[]point'
+      required: false
+connection:
+  server:
+    type: string
+    description: InfluxDB API Server
+    default: http://localhost:8086
+    required: true
+actions:
+  ping:
+    title: Ping Database
+    description: Check the status of your InfluxDB instance and your version of InfluxDB
+    output:
+      status:
+        type: string
+        description: Status
+        required: false
+      version:
+        type: string
+        description: Version
+        required: false
+  query:
+    title: Query Database
+    description: Query data and manage databases, retention policies, and users
+    input:
+      database_name:
+        description: Database name
+        type: string
+        required: true
+        title: Database
+      chunked:
+        description: If set to true, InfluxDB chunks responses by series or by every
+          10,000 points, whichever occurs first. If set to a specific value, InfluxDB
+          chunks responses by series or by that number of points
+        type: string
+        required: false
+      epoch:
+        description: Returns epoch timestamps with the specified precision. Default
+          is nanoseconds
+        type: string
+        required: false
+      username:
+        description: Sets the username for authentication
+        type: string
+        required: false
+      password:
+        description: Sets the password for authentication
+        type: password
+        required: false
+      query:
+        description: Database query. Must follow InfluxQL syntax. See https://docs.influxdata.com/influxdb/v1.2/query_language/
+        type: string
+        required: false
+    output:
+      results:
+        type: '[]result'
+        description: Results
+        required: false
+  write:
+    title: Write to Database
+    description: Write data to a pre-existing database
+    input:
+      database_name:
+        description: Database name
+        type: string
+        required: true
+        title: Database
+      consistency:
+        description: Sets the write consistency for the point. One of [any,one,quorum,all]
+        type: string
+        enum:
+        - any
+        - one
+        - quorum
+        - all
+        required: false
+      precision:
+        description: Sets the precision for the supplied Unix time values
+        type: string
+        required: false
+      retention_policy:
+        description: Sets the target retention policy for the write
+        type: string
+        required: false
+      username:
+        description: Sets the username for authentication
+        type: string
+        required: false
+      password:
+        description: Set the password for authentication
+        type: password
+        required: false
+      data:
+        description: Data to be written into the database. Must be in Line Protocol
+          format. See https://docs.influxdata.com/influxdb/v1.2/write_protocols/line_protocol_tutorial/
+        type: string
+        required: false
+    output:
+      status_code:
+        type: integer
+        description: Status code
+        required: false
+        title: Status Code
+      message:
+        type: string
+        description: Message
+        required: false

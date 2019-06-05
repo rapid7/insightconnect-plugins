@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "unblock",
+    "connection": {
+      "ssl_verify": false,
+      "url": "http://192.168.0.15:8000",
+      "token": {
+        "secretKey": ""
+      }
+    },
+    "input": {
+      "why": "Repurposed host",
+      "cidr": "1.2.3.6/32"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

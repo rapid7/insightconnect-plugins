@@ -1,0 +1,12 @@
+{
+  "version": "v1", 
+  "type": "action_start", 
+  "body": {
+    "connection": null, 
+    "action": "parse_single", 
+    "input": {
+      "cef_string": "CF:0|Komand|Komand|1|2|Some Event|Low|version=1"
+    }, 
+    "meta": {}
+  }
+}
