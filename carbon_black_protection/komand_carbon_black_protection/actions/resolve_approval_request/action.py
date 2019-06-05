@@ -41,12 +41,13 @@ class ResolveApprovalRequest(komand.Action):
             }
         }
 
-        url = self.connection.host + '/api/bit9platform/v1/fileInstance/%s' % approval_request_id
+        url = self.connection.host + '/api/bit9platform/v1/approvalRequest/%s' % approval_request_id
         r = self.connection.session.put(url, json.dumps(data), verify=self.connection.verify)
 
         try:
             r.raise_for_status()
-        except:
+        except Exception as e:
+            self.logger.error(e)
             raise Exception('Run: HTTPError: %s' % r.text)
 
         result = komand.helper.clean(r.json())
@@ -60,7 +61,8 @@ class ResolveApprovalRequest(komand.Action):
 
         try:
             request.raise_for_status()
-        except:
+        except Exception as e:
+            self.logger.error(e)
             raise Exception('Run: HTTPError: %s' % request.text)
 
         return {}
