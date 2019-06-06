@@ -10,7 +10,7 @@ If you have questions, reach out to us at `IntegrationAlliance@rapid7.com`.
 
 1. [Getting Started](#getting-started)
 2. [Example](#example)
-3. [Plugin Status](#plugin-status)
+3. [Plugin Support](#plugin-support)
 4. [Host to Contribute](#contributing)
 
 ### Getting Started
