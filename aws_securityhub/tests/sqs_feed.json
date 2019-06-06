@@ -1,0 +1,25 @@
+{
+    "body": {
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "AttributeNames": [
+                "All"
+            ],
+            "MaxNumberOfMessages": 1,
+            "MessageAttributeNames": [
+                "All"
+            ],
+            "ReceiveRequestAttemptId": "",
+            "VisibilityTimeout": 0,
+            "WaitTimeSeconds": 0,
+            "queue_url": ""
+        },
+        "meta": {},
+        "trigger": "sqs_feed"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}
