@@ -3,8 +3,9 @@ name: thehive
 title: TheHive
 description: Scalable, Open Source Security Incident Response Solutions designed for
   SOCs & CERTs to collaborate, elaborate, analyze and get their job done
-version: 2.0.3
+version: 2.0.4
 vendor: rapid7
+status: ["unsupported"]
 tags:
 - thehive
 - hive

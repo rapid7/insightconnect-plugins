@@ -1,26 +1,14 @@
 {
-  "body": {
-    "action": "close_case",
-    "meta": {},
-    "input": {
-      "id": "",
-      "impact_status": "low",
-      "resolution_status": "low",
-      "summary": ""
+    "body": {
+        "action": "close_case",
+        "input": {
+            "id": "2",
+            "impact_status": "low",
+            "resolution_status": "low",
+            "summary": "Closed by Komand Test"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "host": "",
-      "port": "9000",
-      "protocol": "http",
-      "proxy": {},
-      "verify": true
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }
-

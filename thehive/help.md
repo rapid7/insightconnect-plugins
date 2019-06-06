@@ -399,6 +399,7 @@ Examples:
 * 2.0.1 - Update descriptions
 * 2.0.2 - Fix issue where SSL Verify was not used in the connection
 * 2.0.3 - Fix issue where SSL Verify was not used in actions that utilize requests | Updated test method and moved it to connection
+* 2.0.4 - Update to use the `komand/python-2-27-slim-plugin` Docker image to reduce plugin size and to support SSL Verify
 
 ## References
 

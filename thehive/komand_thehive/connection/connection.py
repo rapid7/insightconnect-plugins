@@ -29,6 +29,7 @@ class Connection(komand.Connection):
             self.logger.info('Proxy specified: %s', self.proxy)
 
         self.logger.info("Connect: Connecting...")
+        self.logger.info("SSL Verify: %s" % str(self.verify))
         self.client = TheHiveApi(url=url,
                                  principal=self.username,
                                  password=self.password,
