@@ -11,7 +11,7 @@ If you have questions, reach out to us at `IntegrationAlliance@rapid7.com`.
 1. [Getting Started](#getting-started)
 2. [Example](#example)
 3. [Plugin Support](#plugin-support)
-4. [Host to Contribute](#contributing)
+4. [Contributing](#contributing)
 
 ### Getting Started
 
@@ -352,11 +352,4 @@ The following table shows which plugins are officially supported by Rapid7 devel
 
 ### Contributing
 
-If you would like to contribute, follow the documentation and open a pull request :) Your contribution will improve integrations for all users.
-
-1. Fork this repository or create an aptly named branch e.g. `rapid7_insightvm/action/scan_hosts`
-2. Write and test your code with the [documentation](https://komand.github.io/python/index.html) in mind
-3. Open a pull request
-4. Complete the pull request's template
-5. A team member will review or provide feedback
-6. Once merged, the plugin will be released to all customers (usually same-day)
+See our [contributing guide](./CONTRIBUTING.md).
