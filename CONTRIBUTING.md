@@ -1,15 +1,15 @@
 # Contributing
 
 Thanks for your interest in making InsightConnect a better security orchestration tool.
-Before you get started, review our
-[Code of Conduct].  There are multiple ways to help beyond just writing code:
- - [Submit bugs and feature requests] with detailed information about your issue or idea.
- - [Help fellow users with open issues] or [help fellow committers test recent pull requests].
- - [Report a security vulnerability in InsightConnect itself or its plugins] to Rapid7.
- - Submit an updated or brand new plugin!  We are always eager for new
-   integrations or features. Don't know where to start? Check out the [developer documentation].
+Before you get started, review our [Code of Conduct].
 
-# Contributing to InsightConnect
+There are multiple ways to help beyond just writing code:
+
+- [Submit bugs and feature requests] with detailed information about your issue or idea.
+- [Help fellow users with open issues] or [help fellow committers test recent pull requests].
+- [Report a security vulnerability in InsightConnect itself or its plugins] to Rapid7.
+- Submit an updated or brand new plugin!  We are always eager for new
+  integrations or features. Don't know where to start? Check out the [developer documentation].
 
 Here's a short list of do's and don'ts to make sure *your* valuable contributions actually make
 it into the master branch.  If you do not care to follow these rules, your contribution
@@ -17,48 +17,47 @@ it into the master branch.  If you do not care to follow these rules, your contr
 
 ## Code Contributions
 
-* **Do** read the [developer documentation]
-* **Do** stick to the [Python PEP8]and [plugin style] guides.
-* **Do** follow the [50/72 rule] for Git commit messages.
-* **Do** license your code as MIT.
-* **Do** create a [topic branch] to work on instead of working directly on `master`.
+- **Do** read the [developer documentation]
+- **Do** stick to the [Python PEP8]and [plugin style] guides.
+- **Do** follow the [50/72 rule] for Git commit messages.
+- **Do** license your code as MIT.
+- **Do** create a [topic branch] to work on instead of working directly on `master`.
   This helps protect the process, ensures users are aware of commits on the branch being considered for merge,
   allows for a location for more commits to be offered without mingling with other contributor changes,
   and allows contributors to make progress while a PR is still being reviewed.
 
-
 ### Pull Requests
 
-* **Do** write "WIP" on your PR and/or open a [draft PR] if submitting **working** yet unfinished code.
-* **Do** target your pull request to the **master branch**.
-* **Do** specify a descriptive title to make searching for your pull request easier.
-* **Do** include [console output], especially the JSON output for new features and bug fixes.
-* **Do** list [verification steps] so your code is testable.
-* **Do** [reference associated issues] in your pull request description.
-* **Don't** leave your pull request description blank.
-* **Don't** abandon your pull request. Being responsive helps us land your code faster.
-
-Pull request [PR#9966] is a good example to follow.
+- **Do** write "WIP" on your PR and/or open a [draft PR] if submitting **working** yet unfinished code.
+- **Do** target your pull request to the **master branch**.
+- **Do** specify a descriptive title to make searching for your pull request easier.
+- **Do** include [console output], especially the JSON output for new features and bug fixes.
+- **Do** list [verification steps] so your code is testable.
+- **Do** [reference associated issues] in your pull request description.
+- **Don't** leave your pull request description blank.
+- **Don't** abandon your pull request. Being responsive helps us land your code faster.
 
 #### New Code
 
-* **Do** install validator dependencies necessary to run `make validate` to find and fix any errors or warnings that come up.
-* **Don't** include more than one plugin per pull request.
-* **Do** include documentation showing sample run-throughs.
+- **Do** install validator dependencies necessary to run `make validate` to find and fix any errors or warnings that come up.
+- **Don't** include more than one plugin per pull request.
+- **Do** include documentation showing sample run-throughs.
 
 #### Bug Fixes
 
-* **Do** include reproduction steps in the form of [verification steps].
-* **Do** link to any corresponding [Issues] in the format of `See #1234` in your commit description.
+- **Do** include reproduction steps in the form of [verification steps].
+- **Do** link to any corresponding [Issues] in the format of `See #1234` in your commit description.
 
 ## Bug Reports
 
-Please report vulnerabilities in Rapid7 software directly to security@rapid7.com. For more on our disclosure policy and Rapid7's approach to coordinated disclosure, [head over here](https://www.rapid7.com/security). 
+Please report vulnerabilities in Rapid7 software directly to security@rapid7.com.
+For more on our disclosure policy and Rapid7's approach to coordinated disclosure, [head over here](https://www.rapid7.com/security).
 
 When reporting issues:
-* **Do** write a detailed description of your bug and use a descriptive title.
-* **Do** include reproduction steps, stack traces, and anything that might help us fix your bug.
-* **Don't** file duplicate reports; search for your bug before filing a new report.
+
+- **Do** write a detailed description of your bug and use a descriptive title.
+- **Do** include reproduction steps, stack traces, and anything that might help us fix your bug.
+- **Don't** file duplicate reports; search for your bug before filing a new report.
 
 If you need some more guidance, talk to the main body of open source contributors over at
 `IntegrationsAlliance@rapid7.com`
@@ -79,5 +78,5 @@ curve, so keep it up!
 [console output]:https://help.github.com/articles/github-flavored-markdown#fenced-code-blocks
 [verification steps]:https://help.github.com/articles/writing-on-github#task-lists
 [reference associated issues]:https://github.com/blog/1506-closing-issues-via-pull-requests
-[PR#9966]:https://github.com/rapid7/metasploit-framework/pull/9966
+[PR#9966]:https://github.com/rapid7/metasploit-framework/pull/9966 # Need a good example here
 [Issues]:https://github.com/rapid7/insightconnect-plugins/issues
