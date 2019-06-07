@@ -55,7 +55,7 @@ When reporting issues:
 - **Do** include reproduction steps, stack traces, and anything that might help us fix your bug.
 - **Don't** file duplicate reports; search for your bug before filing a new report.
 
-If you need some more guidance, talk to the main body of open source contributors over at
+If you need additional guidance, reach out to the open source contribution owners at
 `IntegrationAlliance@rapid7.com`
 
 Finally, **thank you** for taking the few moments to read this far! You're already way ahead of the
