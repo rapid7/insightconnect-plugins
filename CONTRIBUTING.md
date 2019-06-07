@@ -11,7 +11,7 @@ There are multiple ways to contribute beyond writing code. These include:
   integrations or features. Don't know where to start? Check out the [developer documentation].
 
 Here is a short list of do's and don'ts to make sure *your* valuable contributions actually make
-it into production.  If you do not care to follow these rules, your contribution
+it into production.  If you do not care to follow these rules, your contribution will be rejected
 **will** be closed. Sorry!
 
 ## Code Contributions
