@@ -34,7 +34,7 @@ it into the master branch.  If you do not care to follow these rules, your contr
 - **Don't** leave your pull request description blank.
 - **Don't** abandon your pull request. Being responsive helps us land your code faster.
 
-#### New Code
+#### New Features
 
 - **Do** install validator dependencies necessary to run `make validate` to find and fix any errors or warnings that come up.
 - **Don't** include more than one plugin per pull request.
