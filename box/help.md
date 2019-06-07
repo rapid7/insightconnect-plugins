@@ -50,17 +50,17 @@ This action is used to create a user account in Box enterprise.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|address|string|None|False|User's street address|None|
+|exempt_device|boolean|None|False|Exempt this user from Enterprise device limits|None|
+|job_title|string|None|False|User's job title|None|
 |login|string|None|True|Login email|None|
 |name|string|None|True|Username|None|
-|role|string|User|False|Enterprise role e.g. coadmin, user|['Coadmin', 'User']|
-|sync|boolean|None|False|Whether or not this user can use Box Sync|None|
-|job_title|string|None|False|User's job title|None|
 |phone|string|None|False|User's phone number|None|
-|address|string|None|False|User's street address|None|
-|space_amount|integer|None|False|User's total available space amount in bytes|None|
+|role|string|User|False|Enterprise role e.g. coadmin, user|['Coadmin', 'User']|
+|space_amount|float|None|False|User's total available space amount in bytes. -1 will set the user to unlimited|None|
+|sync|boolean|None|False|Whether or not this user can use Box Sync|None|
 |timezone|string|None|False|User's timezone|None|
 |two_factor|boolean|None|False|Exempt two-factor authentication|None|
-|exempt_device|boolean|None|False|Exempt this user from Enterprise device limits|None|
 
 #### Output
 
@@ -257,6 +257,7 @@ Examples:
 * 2.0.1 - Improper escaping of `\n` could cause connection error bug fix
 * 2.0.2 - Fix issue with credentials in InsightConnect
 * 2.0.3 - Fix issue where size was sometimes reported as a float
+* 2.0.4 - Update to `Create User` action `Space Amount` input showing input for unlimited size
 
 ## References
 

@@ -5,7 +5,7 @@ vendor: rapid7
 status: ["unsupported"]
 description: Box gives you access to secure content management and content experience
   features of the Box Enterprise API
-version: 2.0.3
+version: 2.0.4
 tags:
 - box
 - cloud
@@ -89,7 +89,7 @@ actions:
       space_amount:
         type: float
         title: Space Amount
-        description: User's total available space amount in bytes
+        description: User's total available space amount in bytes. -1 will set the user to unlimited
         required: false
       timezone:
         type: string
