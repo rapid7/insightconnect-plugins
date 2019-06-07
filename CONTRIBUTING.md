@@ -2,7 +2,7 @@
 
 Thank you for your interest in improving InsightConnect! Please review our [Code of Conduct] before making contributions.
 
-There are multiple ways to help beyond just writing code:
+There are multiple ways to contribute beyond writing code. These include:
 
 - [Submit bugs and feature requests] with detailed information about your issue or idea.
 - [Help fellow users with open issues] or [help fellow committers test recent pull requests].
