@@ -67,7 +67,7 @@ curve, so keep it up!
 [Submit bugs and feature requests]:https://github.com/rapid7/insightconnect-plugins/issues
 [Report a security vulnerability in InsightConnect itself or its plugins]:https://www.rapid7.com/disclosure.jsp
 [Help fellow users with open issues]:https://github.com/rapid7/insightconnect-plugins/issues
-[help fellow committers test recently submitted pull requests]:https://github.com/rapid7/insightconnect-plugins/pulls
+[help fellow committers test recent pull requests]:https://github.com/rapid7/insightconnect-plugins/pulls
 [Python PEP8]:https://www.python.org/dev/peps/pep-0008/
 [plugin style]:https://komand.github.io/python/style.html
 [50/72 rule]:http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
