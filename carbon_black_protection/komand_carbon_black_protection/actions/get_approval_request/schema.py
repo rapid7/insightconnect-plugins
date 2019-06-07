@@ -4,65 +4,32 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Resolve approval request with desired status"
+    DESCRIPTION = "Get Approval Request"
 
 
 class Input:
     APPROVAL_REQUEST_ID = "approval_request_id"
-    RESOLUTION = "resolution"
-    STATUS = "status"
     
 
 class Output:
     APPROVAL_REQUEST = "approval_request"
     
 
-class ResolveApprovalRequestInput(komand.Input):
+class GetApprovalRequestInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
     "approval_request_id": {
-      "type": "string",
+      "type": "integer",
       "title": "Approval Request ID",
-      "description": "Resolve an approval request with the desired status",
+      "description": "Approval Request ID",
       "order": 1
-    },
-    "resolution": {
-      "type": "string",
-      "title": "Resolution",
-      "description": "Method for resolving the approval request",
-      "default": "Not Resolved",
-      "enum": [
-        "Not Resolved",
-        "Rejected",
-        "Resolved - Approved",
-        "Resolved - Rule Change",
-        "Resolved - Installer",
-        "Resolved - Updater",
-        "Resolved - Publisher",
-        "Resolved - Other"
-      ],
-      "order": 2
-    },
-    "status": {
-      "type": "string",
-      "title": "Status",
-      "description": "Request status. Cannot change from Closed to Open or Submitted, or move Open back to Submitted",
-      "default": "Submitted",
-      "enum": [
-        "Submitted",
-        "Open",
-        "Closed"
-      ],
-      "order": 3
     }
   },
   "required": [
-    "approval_request_id",
-    "resolution",
-    "status"
+    "approval_request_id"
   ]
 }
     """)
@@ -71,7 +38,7 @@ class ResolveApprovalRequestInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class ResolveApprovalRequestOutput(komand.Output):
+class GetApprovalRequestOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -80,7 +47,7 @@ class ResolveApprovalRequestOutput(komand.Output):
     "approval_request": {
       "$ref": "#/definitions/approvalRequest",
       "title": "Approval Request",
-      "description": "The updated approval request",
+      "description": "Approval Request",
       "order": 1
     }
   },

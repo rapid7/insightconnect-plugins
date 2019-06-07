@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_approval_request",
+        "input": {
+            "approval_request_id": 7
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

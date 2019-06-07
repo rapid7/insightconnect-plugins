@@ -3,7 +3,7 @@ name: carbon_black_protection
 title: Carbon Black Protection
 description: Cb Protection allows users to lock down and harden systems to prevent
   malware, ransomware, and more
-version: 2.1.0
+version: 2.2.0
 vendor: rapid7
 status: ["supported"]
 tags:
@@ -1822,6 +1822,16 @@ actions:
         - Resolved - Publisher
         - Resolved - Other
         default: Not Resolved
+      status:
+        type: string
+        title: Status
+        description: Request status. Cannot change from Closed to Open or Submitted, or move Open back to Submitted
+        required: true
+        enum:
+          - Submitted
+          - Open
+          - Closed
+        default: Submitted
     output:
       approval_request:
         type: approvalRequest
@@ -1953,4 +1963,19 @@ actions:
         title: File Rule
         type: fileRule
         description: Updated file rule
+        required: false
+  get_approval_request:
+    title: Get Approval Request
+    description: Get Approval Request
+    input:
+      approval_request_id:
+        type: integer
+        title: Approval Request ID
+        description: Approval Request ID
+        required: true
+    output:
+      approval_request:
+        title: Approval Request
+        type: approvalRequest
+        description: Approval Request
         required: false
