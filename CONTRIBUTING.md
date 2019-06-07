@@ -18,13 +18,10 @@ it into the master branch.  If you do not care to follow these rules, your contr
 ## Code Contributions
 
 - **Do** read the [developer documentation]
-- **Do** stick to the [Python PEP8]and [plugin style] guides.
+- **Do** stick to the [Python PEP8] and [plugin style] guides.
 - **Do** follow the [50/72 rule] for Git commit messages.
 - **Do** license your code as MIT.
-- **Do** create a [topic branch] to work on instead of working directly on `master`.
-  This helps protect the process, ensures users are aware of commits on the branch being considered for merge,
-  allows for a location for more commits to be offered without mingling with other contributor changes,
-  and allows contributors to make progress while a PR is still being reviewed.
+- **Do** create a [topic branch] to work on instead of working directly on `master`. This helps protect the process, ensures users are aware of commits on the branch being considered for merge, allows for a location for more commits to be offered without mingling with other contributor changes, and allows contributors to make progress while a PR is still being reviewed.
 
 ### Pull Requests
 
@@ -60,13 +57,15 @@ When reporting issues:
 - **Don't** file duplicate reports; search for your bug before filing a new report.
 
 If you need some more guidance, talk to the main body of open source contributors over at
-`IntegrationsAlliance@rapid7.com`
+`IntegrationAlliance@rapid7.com`
 
 Finally, **thank you** for taking the few moments to read this far! You're already way ahead of the
 curve, so keep it up!
 
-[developer documentation]:https://komand.github.io/python/start.html
 [Code of Conduct]:https://github.com/rapid7/metasploit-framework/wiki/CODE_OF_CONDUCT.md
+[developer documentation]:https://komand.github.io/python/start.html
+[Submit bugs and feature requests]:https://github.com/rapid7/insightconnect-plugins/issues
+[Report a security vulnerability in InsightConnect itself or its plugins]:https://www.rapid7.com/disclosure.jsp
 [Help fellow users with open issues]:https://github.com/rapid7/insightconnect-plugins/issues
 [help fellow committers test recently submitted pull requests]:https://github.com/rapid7/insightconnect-plugins/pulls
 [Python PEP8]:https://www.python.org/dev/peps/pep-0008/
@@ -78,5 +77,4 @@ curve, so keep it up!
 [console output]:https://help.github.com/articles/github-flavored-markdown#fenced-code-blocks
 [verification steps]:https://help.github.com/articles/writing-on-github#task-lists
 [reference associated issues]:https://github.com/blog/1506-closing-issues-via-pull-requests
-[PR#9966]:https://github.com/rapid7/metasploit-framework/pull/9966 # Need a good example here
 [Issues]:https://github.com/rapid7/insightconnect-plugins/issues
