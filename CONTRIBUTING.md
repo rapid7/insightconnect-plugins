@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for your interest in improving InsightConnect! Please review our [Code of Conduct] before making contributions.
+Thank you for your interest in joining the InsightConnect developer community!! Please review our [Code of Conduct] before making contributions.
 
 There are multiple ways to contribute beyond writing code. These include:
 
