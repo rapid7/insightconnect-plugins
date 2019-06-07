@@ -61,7 +61,7 @@ If you need additional guidance, reach out to the open source contribution owner
 Finally, **thank you** for taking the few moments to read this far! You're already way ahead of the
 curve, so keep it up!
 
-[Code of Conduct]:https://github.com/rapid7/metasploit-framework/wiki/CODE_OF_CONDUCT.md
+[Code of Conduct]:./CODE_OF_CONDUCT.md
 [developer documentation]:https://komand.github.io/python/start.html
 [Submit bugs and feature requests]:https://github.com/rapid7/insightconnect-plugins/issues
 [Report a security vulnerability in InsightConnect itself or its plugins]:https://www.rapid7.com/disclosure.jsp
