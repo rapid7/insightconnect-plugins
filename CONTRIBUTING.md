@@ -6,7 +6,7 @@ There are multiple ways to contribute beyond writing code. These include:
 
 - [Submit bugs and feature requests] with detailed information about your issue or idea.
 - [Help fellow users with open issues] or [help fellow committers test recent pull requests].
-- [Report a security vulnerability in InsightConnect itself or its plugins] to Rapid7.
+- [Report a security vulnerability in InsightConnect's plugins] to Rapid7.
 - Submit an updated or brand new plugin!  We are always eager for new
   integrations or features. Don't know where to start? Check out the [developer documentation].
 
@@ -20,13 +20,13 @@ it into production.  If you do not care to follow these rules, your contribution
 - **Do** stick to the [Python PEP8] and [plugin style] guides.
 - **Do** follow the [50/72 rule] for Git commit messages.
 - **Do** license your code as MIT.
-- **Do** create a [topic branch] to work on instead of working directly on `master`. This helps protect the process, ensures users are aware of commits on the branch being considered for merge, allows for a location for more commits to be offered without mingling with other contributor changes, and allows contributors to make progress while a PR is still being reviewed.
+- **Do** create a [topic branch] to work on. This helps ensure users are aware of commits on the branch being considered for merge, allows for a location for more commits to be offered without mingling with other contributor changes, and allows contributors to make progress while a PR is still being reviewed.
 
 ### Pull Requests
 
 - **Do** write "WIP" on your PR and/or open a [draft PR] if submitting **working** yet unfinished code.
 - **Do** target your pull request to the **master branch**.
-- **Do** specify a descriptive title to make searching for your pull request easier.
+- **Do** specify a descriptive title to make searching for your pull request easier e.g. "Okta: add Suspend User action".
 - **Do** include [console output], especially the JSON output for new features and bug fixes.
 - **Do** list [verification steps] so your tests are reproducible.
 - **Do** [reference associated issues] in your pull request description.
