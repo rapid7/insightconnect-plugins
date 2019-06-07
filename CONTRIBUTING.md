@@ -28,7 +28,7 @@ it into production.  If you do not care to follow these rules, your contribution
 - **Do** target your pull request to the **master branch**.
 - **Do** specify a descriptive title to make searching for your pull request easier.
 - **Do** include [console output], especially the JSON output for new features and bug fixes.
-- **Do** list [verification steps] so your code is testable.
+- **Do** list [verification steps] so your tests are reproducible.
 - **Do** [reference associated issues] in your pull request description.
 - **Don't** leave your pull request description blank.
 - **Don't** abandon your pull request. Being responsive helps us land your code faster.
