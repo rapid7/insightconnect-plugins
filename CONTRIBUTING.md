@@ -24,7 +24,7 @@ it into production.  If you do not care to follow these rules, your contribution
 
 ### Pull Requests
 
-- **Do** write "WIP" on your PR and/or open a [draft PR] if submitting **working** yet unfinished code.
+- **Do** write "WIP" on your PR and/or open a [draft PR] if submitting unfinished code.
 - **Do** target your pull request to the **master branch**.
 - **Do** specify a descriptive title to make searching for your pull request easier e.g. "Okta: add Suspend User action".
 - **Do** include [console output], especially the JSON output for new features and bug fixes.
@@ -36,8 +36,8 @@ it into production.  If you do not care to follow these rules, your contribution
 #### New Features
 
 - **Do** install validator dependencies necessary to run `make validate` to find and fix any errors or warnings that come up.
-- **Don't** include more than one plugin per pull request.
 - **Do** include documentation showing sample run-throughs.
+- **Don't** include more than one plugin per pull request.
 
 #### Bug Fixes
 
