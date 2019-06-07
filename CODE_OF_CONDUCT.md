@@ -35,7 +35,7 @@ This Code of Conduct applies both within project spaces and in public spaces
 when an individual is representing the project or its community.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project maintainers at msfdev@metasploit.com. If
+reported by contacting the project maintainers at IntegrationAlliance@rapid7.com. If
 the incident involves a committer, you may report directly to
 jonathan_schipp@rapid7.com.
 
