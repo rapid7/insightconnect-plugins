@@ -1,7 +1,6 @@
 # Contributing
 
 Thank you for your interest in improving InsightConnect! Please review our [Code of Conduct] before making contributions.
-Before you get started, review our [Code of Conduct].
 
 There are multiple ways to help beyond just writing code:
 
