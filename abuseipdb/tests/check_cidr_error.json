@@ -1,17 +1,12 @@
 {
-  "body": {
-    "action": "check_cidr",
-    "meta": {},
-    "input": {
-      "cidr": "1/20",
-      "days": "30"
+    "body": {
+        "action": "check_cidr",
+        "input": {
+            "cidr": "1/20",
+            "days": "30"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

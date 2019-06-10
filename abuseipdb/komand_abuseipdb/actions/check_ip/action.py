@@ -1,6 +1,8 @@
 import komand
 from .schema import CheckIpInput, CheckIpOutput
 # Custom imports below
+from komand.exceptions import PluginException
+import json
 import requests
 import logging
 logging.getLogger('requests').setLevel(logging.WARNING)
@@ -33,6 +35,9 @@ class CheckIp(komand.Action):
             r = requests.get(url)
             # Not using r.raise_for_status() since we get useful JSON information on an API 4**
             out = r.json()
+        except json.decoder.JSONDecodeError:
+            raise PluginException(cause='Received an unexpected response from AbuseIPDB.', 
+                                  assistance="(non-JSON or no response was received). Response was: %s" % r.text)
         except Exception as e:
             self.logger.error(e)
             raise
@@ -50,8 +55,7 @@ class CheckIp(komand.Action):
                         # If the id key is present, an error has occurred
                         if error['id']:
                             msg = '{}: {}: {}'.format(error.get('id'), error.get('title'), error.get('detail'))
-                            self.logger.error(msg)
-                            return error
+                            raise PluginException(cause='Received an error response from AbuseIPDB.', assistance=msg)
                 # UnboundLocalError is raised if variable error is not set
                 # Error will not be set if out[0] doesn't exist per the catching of the IndexError exception above
                 except UnboundLocalError:
@@ -67,34 +71,3 @@ class CheckIp(komand.Action):
             found = False
 
         return { 'list': out, 'found': found }
-
-    def test(self):
-        try:
-            # https://www.abuseipdb.com/check/[IP]/json?key=[API_KEY]&days=[DAYS][&verbose]
-            url = '{base}/{endpoint}/{ip}/json?key={key}&days={days}'.format(
-                base=self.connection.base, 
-                endpoint='check',
-                ip='8.8.8.8',
-                key=self.connection.api_key,
-                days='30'
-            )
-            r = requests.get(url)
-            # Not using r.raise_for_status() since we get useful JSON information on an API 4**
-            out = r.json()
-        except Exception as e:
-            self.logger.error(e)
-            raise
-
-        try:
-            if isinstance(out, list):
-                error = out[0]
-                if isinstance(error, dict):
-                    if error['id']:
-                        msg = '{}: {}: {}'.format(error.get('id'), error.get('title'), error.get('detail'))
-                        self.logger.error(msg)
-                        return error
-        except KeyError:
-            # All good, no error because 'id' key is not present
-            self.logger.info('No errors')
-
-        return { 'list': out, 'found': True }

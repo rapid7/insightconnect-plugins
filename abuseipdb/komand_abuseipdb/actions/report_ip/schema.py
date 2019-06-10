@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Report an abusive IP address"
+
+
 class Input:
     ADDRESS = "address"
     CATEGORIES = "categories"
