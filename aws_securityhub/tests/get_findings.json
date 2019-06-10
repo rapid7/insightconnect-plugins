@@ -1,7 +1,9 @@
 {
     "body": {
-        "action": "get_cases",
-        "input": {},
+        "action": "get_findings",
+        "input": {
+            "filters": {}
+        },
         "meta": {}
     },
     "type": "action_start",

@@ -1,22 +1,11 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "host": "",
-      "port": "9000",
-      "protocol": "http",
-      "proxy": {},
-      "verify": true
+    "body": {
+        "action": "get_user",
+        "input": {
+            "id": "admin"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-      "id": "user"
-    },
-    "action": "get_user"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

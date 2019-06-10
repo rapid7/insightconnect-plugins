@@ -2,8 +2,9 @@
     "body": {
         "action": "resolve_approval_request",
         "input": {
-            "approval_request_id": "1",
-            "resolution": "Not Resolved"
+            "approval_request_id": "7",
+            "resolution": "Rejected",
+            "status": "Closed"
         },
         "meta": {}
     },

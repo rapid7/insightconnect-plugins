@@ -238,6 +238,53 @@ Example output:
 }
 ```
 
+### Get Approval Request
+
+This action is used to get an Approval Request.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|approval_request_id|integer|None|True|Approval Request ID|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|approval_request|object|False|Approval Request|
+
+Example output:
+
+```
+{
+  "requestorEmail": "john@smith.com",
+  "createdByUserId": 6,
+  "priority": 1,
+  "fileName": "mspaint.exe",
+  "installerFileCatalogId": 0,
+  "policyId": 7,
+  "createdBy": "WIN-M8DFE5GM8KZ\\Administrator",
+  "modifiedByUserId": 6,
+  "customRuleId": 19,
+  "status": 1,
+  "multipleBlocks": true,
+  "enforcementLevel": 40,
+  "computerId": 1,
+  "computerName": "WORKGROUP\\WIN-M8DFE5GM8KO",
+  "requestType": 1,
+  "pathName": "c:\\windows\\system32",
+  "fileCatalogId": 5025,
+  "resolution": 0,
+  "dateModified": "2017-10-04T22:22:00.387Z",
+  "processFileCatalogId": 0,
+  "dateCreated": "2017-10-04T22:22:00.387Z",
+  "process": "c:\\windows\\explorer.exe",
+  "id": 7,
+  "requestorComments": "I would like to paint"
+}
+```
+
 ### Get File Rule
 
 This action is used to get a File Rule.
@@ -508,7 +555,7 @@ Examples:
 * 1.1.0 - New action Retrieve File Instance
 * 2.0.0 - Fix for Approve File Locally action | Fix for Unapprove File Locally action | Update to rename Unapprove Local Approval action to Unapprove File Locally
 * 2.1.0 - Add Action: Create File Rule | Add Action: Get File Rule
-* 2.1.1 - Fix issue where the Resolve Approval Request action used the wrong endpoint
+* 2.2.0 - Update to add Status to Resolve Approval Request | New action Get Approval Reqeust
 
 ## References
 

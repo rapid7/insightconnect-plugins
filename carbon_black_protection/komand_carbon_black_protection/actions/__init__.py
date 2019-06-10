@@ -2,6 +2,7 @@
 from .approve_file_locally.action import ApproveFileLocally
 from .ban_file.action import BanFile
 from .create_file_rule.action import CreateFileRule
+from .get_approval_request.action import GetApprovalRequest
 from .get_file_rule.action import GetFileRule
 from .resolve_approval_request.action import ResolveApprovalRequest
 from .retrieve_file_catalog_entry.action import RetrieveFileCatalogEntry

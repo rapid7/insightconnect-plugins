@@ -1,8 +1,8 @@
 {
     "body": {
-        "action": "get_user",
+        "action": "get_approval_request",
         "input": {
-            "id": ""
+            "approval_request_id": 7
         },
         "meta": {}
     },

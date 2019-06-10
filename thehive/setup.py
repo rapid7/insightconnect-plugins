@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='thehive-rapid7-plugin',
-      version='2.0.3',
+      version='2.0.4',
       description='Scalable, Open Source Security Incident Response Solutions designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done',
       author='rapid7',
       author_email='',

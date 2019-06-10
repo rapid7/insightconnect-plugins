@@ -1,6 +1,7 @@
 import komand
-from .schema import ResolveApprovalRequestInput, ResolveApprovalRequestOutput
+from .schema import ResolveApprovalRequestInput, ResolveApprovalRequestOutput, Input
 # Custom imports below
+import requests
 import json
 
 
@@ -25,30 +26,44 @@ class ResolveApprovalRequest(komand.Action):
             "Resolved - Other": 7
         }
 
-        approval_request_id = params.get("approval_request_id")
-        desired_resolution = params.get("resolution")
-
-        desired_resolution_code = resolutions.get(desired_resolution, 999)
-
-        if desired_resolution_code is 999:
-            raise Exception("Invalid resolution selected")
-
-        self.logger.info("Updating approval request...")
-
-        data = {
-            "value": {
-                "resolution": desired_resolution_code
-            }
+        statuses = {
+            "Submitted": 1,
+            "Open": 2,
+            "Closed": 3
         }
 
-        url = self.connection.host + '/api/bit9platform/v1/approvalRequest/%s' % approval_request_id
-        r = self.connection.session.put(url, json.dumps(data), verify=self.connection.verify)
+        approval_request_id = params.get(Input.APPROVAL_REQUEST_ID)
+        desired_resolution = params.get(Input.RESOLUTION)
+        status_ = params.get(Input.STATUS)
+
+        desired_resolution_code = resolutions.get(desired_resolution, 0) # Not resolved
+        desired_status_code = statuses.get(status_, 1) # Submitted
+
+        self.logger.info("Updating approval request...")
+        self.logger.info(f"Resolution Code: {desired_resolution_code}")
+        self.logger.info(f"Status Code: {desired_status_code}")
+
+        data = {
+            "resolution": desired_resolution_code,
+            "status": desired_status_code
+        }
+
+        self.logger.info("Payload: ")
+        self.logger.info(data)
+
+        api_endpoint = f'/api/bit9platform/v1/approvalRequest/{approval_request_id}'
+        url = self.connection.host + api_endpoint
+
+        self.logger.info(f"Sending to: {url}")
+
+        r = self.connection.session.put(url, data=json.dumps(data), verify=self.connection.verify)
 
         try:
             r.raise_for_status()
-        except Exception as e:
-            self.logger.error(e)
-            raise Exception('Run: HTTPError: %s' % r.text)
+        except requests.HTTPError as e:
+            self.logger.error(f"Resolve Approval Request Failed with status code: {r.status_code}")
+            self.logger.error(f"Request returned was: {r.text}")
+            raise Exception(f'HTTPError: {r}')
 
         result = komand.helper.clean(r.json())
 

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='carbon_black_protection-rapid7-plugin',
-      version='2.1.1',
+      version='2.2.0',
       description='Cb Protection allows users to lock down and harden systems to prevent malware, ransomware, and more',
       author='rapid7',
       author_email='',

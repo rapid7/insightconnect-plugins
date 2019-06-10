@@ -6,7 +6,7 @@ from komand_box import connection, actions, triggers
 
 Name = 'Box'
 Vendor = 'rapid7'
-Version = '2.0.3'
+Version = '2.0.4'
 Description = 'Box gives you access to secure content management and content experience features of the Box Enterprise API'
 
 

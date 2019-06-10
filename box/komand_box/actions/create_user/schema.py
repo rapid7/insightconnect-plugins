@@ -92,7 +92,7 @@ class CreateUserInput(komand.Input):
     "space_amount": {
       "type": "number",
       "title": "Space Amount",
-      "description": "User's total available space amount in bytes",
+      "description": "User's total available space amount in bytes. -1 will set the user to unlimited",
       "order": 8
     },
     "sync": {

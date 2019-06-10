@@ -1,25 +1,14 @@
 {
-  "version": "v1",
-  "body": {
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "host": "",
-      "port": "9000",
-      "protocol": "http",
-      "proxy": {},
-      "verify": true
+    "body": {
+        "action": "close_case",
+        "input": {
+            "id": "asdf",
+            "impact_results": "",
+            "resolution_results": "",
+            "summary": ""
+        },
+        "meta": {}
     },
-    "action": "close_case",
-    "input": {
-      "id": "asdf",
-      "summary": "",
-      "impact_results": "",
-      "resolution_results": ""
-    },
-    "meta": {}
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }
