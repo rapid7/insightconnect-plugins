@@ -24,7 +24,8 @@ Project maintainers have the right and responsibility to remove, edit, or
 reject comments, commits, code, wiki edits, issues, and other contributions
 that are not aligned to this Code of Conduct, or to ban temporarily or
 permanently any contributor for other behaviors that they deem inappropriate,
-threatening, offensive, or harmful.
+threatening, offensive, or harmful. In addition, we reserve the right to modify
+or supplement this Code of Conduct document.
 
 By adopting this Code of Conduct, project maintainers commit themselves to
 fairly and consistently applying these principles to every aspect of managing
@@ -46,8 +47,7 @@ reporter of an incident.
 
 This Code of Conduct is adapted from the [Contributor Covenant][homepage],
 version 1.3.0, available at
-[http://contributor-covenant.org/version/1/3/0/][version]. We reserve the right to modify 
-or supplement the Code of Conduct document.
+[http://contributor-covenant.org/version/1/3/0/][version].
 
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/3/0/
