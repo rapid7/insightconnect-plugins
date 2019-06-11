@@ -1,0 +1,170 @@
+plugin_spec_version: v2
+name: haveibeenpwned
+title: HaveIBeenPwned
+vendor: rapid7
+status: ["supported"]
+description: Have I been pwned? allows you to search across multiple data breaches
+  to see if your email addresses has been compromised
+version: 3.0.1
+tags:
+- breach
+- compromise
+- pwn
+enable_cache: true
+types:
+  domain:
+    Title:
+      title: Title
+      description: A descriptive title for the breach suitable for displaying to end
+        users
+      type: string
+    Name:
+      title: Name
+      description: A Pascal-cased name representing the breach which is unique across
+        all other breaches
+      type: string
+    Domain:
+      title: Domain
+      description: The domain of the primary website the breach occurred on
+      type: string
+    BreachDate:
+      title: Breach Date
+      description: The date (with no time) the breach originally occurred on in ISO
+        8601 format
+      type: string
+    AddedDate:
+      title: Added Date
+      description: The date and time (precision to the minute) the breach was added
+        to the system in ISO 8601 format
+      type: string
+    ModifiedDate:
+      title: Modified Date
+      description: The date and time (precision to the minute) the breach was modified
+        in ISO 8601 format
+      type: string
+    PwnCount:
+      title: Pwn Count
+      description: The total number of accounts loaded into the system
+      type: integer
+    Description:
+      title: Description
+      description: Contains an overview of the breach represented in HTML markup.
+        The description may include markup such as emphasis and strong tags as well
+        as hyperlinks
+      type: string
+    DataClasses:
+      title: Data Classes
+      description: This attribute describes the nature of the data compromised in
+        the breach and contains an alphabetically ordered string array of impacted
+        data classes
+      type: '[]string'
+    IsVerified:
+      title: Is Verified
+      description: Indicates that the breach is considered verified
+      type: boolean
+    IsFabricated:
+      title: Is Fabricated
+      description: Indicates that the breach is considered fabricated. A fabricated
+        breach is unlikely to have been hacked from the indicated website and usually
+        contains a large amount of manufactured data. However, it still contains legitimate
+        email addresses and asserts that the account owners were compromised in the
+        alleged breach
+      type: boolean
+    IsSensitive:
+      title: Is Sensitive
+      description: Indicates if the breach is considered sensitive. The public API
+        will not return any accounts for a breach flagged as sensitive
+      type: boolean
+    IsActive:
+      title: Is Active
+      description: Indicates if the breach investigation is ongoing.
+      type: boolean
+    IsRetired:
+      title: Is Retired
+      description: Indicates if the breach has been retired
+      type: boolean
+    IsSpamList:
+      title: Is Spam List
+      description: Indicates if the breach is considered a spam list. This flag has
+        no impact on any other attributes but it means that the data has not come
+        as a result of a security compromise
+      type: boolean
+    LogoType:
+      title: Logo Type
+      descritpion: Indicates what type of file the breach logo is
+      type: string
+actions:
+  lookup_user:
+    title: Lookup User
+    description: Check username or email for compromise
+    input:
+      user:
+        title: Account
+        type: string
+        description: Username or email to check
+        required: true
+      breach:
+        title: Breach Site
+        type: string
+        description: Breach Site to check e.g. adobe.com. If blank will check all
+          known breaches
+        required: false
+      include_unverified:
+        title: Include Unverified
+        description: If true will include breaches that are unverified
+        type: boolean
+        required: true
+    output:
+      found:
+        title: Found
+        description: Found
+        type: boolean
+        required: true
+      breaches:
+        title: Breaches
+        description: List of details for each breach found
+          or email
+        type: '[]domain'
+        required: false
+  lookup_domain:
+    title: Lookup Domain
+    description: List domain breaches
+    input:
+      domain:
+        title: Domain
+        type: string
+        description: 'Domain to check E.g. adobe.com, google.com ect. If left blank
+          will return the full breach database. Warning: this is very large'
+        required: false
+    output:
+      found:
+        title: Found
+        description: Indicates whether or not a breach for the specified domain was
+          found
+        type: boolean
+        required: true
+      breaches:
+        title: Breaches
+        description: List of details for each breach found
+        type: '[]domain'
+        required: false
+  lookup_password:
+    title: Lookup Password
+    description: Lookup a password in list of known breached passwords
+    input:
+      password:
+        title: Password
+        type: string
+        description: Password to check E.g. 'P@ssw0rd'
+        required: true
+      original_password_is_a_hash:
+        title: Original Password is a Hash
+        type: boolean
+        description: Whether the password itself is a SHA1 hash
+        required: true
+    output:
+      found:
+        title: Is Compromised
+        description: If true the password was found in the database
+        type: boolean
+        required: true

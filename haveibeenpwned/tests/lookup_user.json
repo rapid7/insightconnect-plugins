@@ -1,0 +1,15 @@
+{
+  "body": {
+    "action": "lookup_user",
+    "meta": {},
+    "input": {
+      "breach": "",
+      "include_unverified": false,
+      "user": "test@example.com"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}
+
