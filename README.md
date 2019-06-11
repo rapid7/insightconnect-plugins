@@ -228,6 +228,7 @@ The following table shows which plugins are officially supported by Rapid7 devel
 | graphite                          | community  |
 | grr                               | community  |
 | hashit                            | community  |
+| haveibeenpwned                    | community  |
 | hipchat                           | deprecated   |
 | hippocampe                        | community  |
 | html                              | community  |
