@@ -341,6 +341,7 @@ The following table shows which plugins are officially supported by Rapid7 devel
 | type_converter                    | rapid7    |
 | typo_squatter                     | community  |
 | uniq                              | community  |
+| unshorten                         | community  |
 | uuid                              | community  |
 | virustotal_yara                   | community  |
 | vmray                             | community  |
