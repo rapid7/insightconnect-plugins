@@ -241,6 +241,7 @@ The following table shows which plugins are officially supported by Rapid7 devel
 | ipify                             | community  |
 | ipinfo                            | community  |
 | ipintel                           | community  |
+| ipstack                           | community  |
 | jenkins                           | community  |
 | jira                              | rapid7    |
 | joe_sandbox                       | community  |

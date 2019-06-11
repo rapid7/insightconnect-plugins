@@ -1,0 +1,82 @@
+plugin_spec_version: v2
+name: ipstack
+title: IPStack
+description: Lookup geographical information for a host
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- geoip
+- ipstack
+connection:
+  cred_token:
+    type: credential_token
+    title: API Token
+    description: API Token
+    required: true
+actions:
+  lookup:
+    title: GeoIP Lookup
+    description: Lookup IPStack Information for a Host
+    input:
+      host:
+        title: Host
+        description: Host to Lookup
+        type: string
+        required: true
+    output:
+      address:
+        title: IP Address
+        type: string
+        required: false
+        description: IP address
+      city:
+        title: City
+        type: string
+        required: false
+        description: City
+      country_name:
+        title: Country Name
+        type: string
+        required: false
+        description: Country name
+      country_code:
+        title: Country Code
+        type: string
+        required: false
+        description: Country code
+      latitude:
+        title: Latitude
+        type: string
+        required: false
+        description: Latitude
+      longitude:
+        title: Latitude
+        type: string
+        required: false
+        description: Longitude
+      metro_code:
+        title: Metro Code
+        type: integer
+        required: false
+        description: Metro code
+      region_code:
+        title: Region Code
+        type: string
+        required: false
+        description: Region code
+      region_name:
+        title: Region Name
+        type: string
+        required: false
+        description: Region name
+      time_zone:
+        title: Public IP Address in Decimal
+        type: string
+        required: false
+        description: Time zone
+      zip_code:
+        title: Zip Code
+        type: string
+        required: false
+        description: Zip code
