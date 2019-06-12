@@ -1,0 +1,31 @@
+plugin_spec_version: v2
+name: sketchify
+title: Sketchify
+description: Turn any link into a suspicious looking one
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- sketchy
+- url
+- link
+- phishing
+- offense
+- pentest
+enable_cache: false
+actions:
+  sketchify:
+    title: Sketchify Link
+    description: Turn a URL into a suspicious looking one
+    input:
+      url:
+        title: URL
+        description: URL to Sketchify
+        type: string
+        required: true
+    output:
+      url:
+        title: URL
+        description: Sketchy URL
+        type: string
+        required: true

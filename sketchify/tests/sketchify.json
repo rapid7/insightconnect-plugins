@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "sketchify",
+    "meta": {},
+    "input": {
+      "url": "www.google.com"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}
