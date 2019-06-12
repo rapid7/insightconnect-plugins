@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "search",
+    "meta": {},
+    "input": {
+      "query": "",
+      "query_type": "Full Text"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

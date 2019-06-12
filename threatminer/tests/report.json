@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "report",
+    "meta": {},
+    "input": {
+      "filename": "",
+      "query_type": "Domains",
+      "year": ""
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}
