@@ -1,0 +1,49 @@
+plugin_spec_version: v2
+name: unshorten
+title: Unshorten.me
+description: Unshorten.me provides an easy method to unshorten a wide range of shortened
+  URLs
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- url
+- link
+- short
+enable_cache: false
+actions:
+  unshorten:
+    title: Unshorten
+    description: Unshorten a shortened URL
+    input:
+      url:
+        title: URL
+        description: Short URL
+        type: string
+        required: true
+    output:
+      requested_url:
+        title: Requested URL
+        description: Short URL
+        type: string
+        required: true
+      resolved_url:
+        title: Resolved URL
+        description: Long URL
+        type: string
+        required: true
+      success:
+        title: Success
+        type: boolean
+        description: Success
+        required: true
+      usage_count:
+        title: Usage Count
+        type: integer
+        description: Usage count
+        required: true
+      error:
+        title: Error
+        type: string
+        description: Error message
+        required: false
