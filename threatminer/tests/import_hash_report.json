@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "import_hash_report",
+    "meta": {},
+    "input": {
+      "query": ""
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

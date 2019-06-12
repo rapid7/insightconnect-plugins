@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "domain_ext",
+    "meta": {},
+    "input": {
+      "domain": "",
+      "query_type": "Related Samples"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

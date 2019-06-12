@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "domain",
+    "meta": {},
+    "input": {
+      "domain": "",
+      "query_type": "WHOIS"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

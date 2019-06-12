@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "ip_ext",
+    "meta": {},
+    "input": {
+      "address": "",
+      "query_type": "Related Samples"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

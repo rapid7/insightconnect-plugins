@@ -1,0 +1,366 @@
+plugin_spec_version: v2
+name: threatminer
+title: Threat Miner
+description: An Open Source search engine for fast threat intelligence research
+version: 1.0.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- whois
+- security
+- threat
+- dns
+- traffic
+- domain
+types:
+  response:
+    status_code:
+      title: Status Code
+      type: integer
+      description: Status Code
+      required: false
+    status_message:
+      title: Status Message
+      type: string
+      description: Status message
+      required: false
+    results:
+      title: Results
+      type: '[]object'
+      description: Results
+      required: false
+actions:
+  av_report:
+    title: AV Report
+    description: AV Report
+    input:
+      query:
+        title: Query
+        type: string
+        description: Virus name to query e.g. Trojan.Enfal
+        required: true
+    output:
+      response:
+        title: Response
+        type: response
+        required: false
+        description: Response
+  domain:
+    title: Domain Lookup
+    description: Fetches information related to a domain by URIs, certificates, or
+      related samples
+    input:
+      domain:
+        title: Domain
+        type: string
+        description: Domain to search
+        required: true
+      query_type:
+        title: Query Type
+        type: string
+        enum:
+        - WHOIS
+        - PASSIVE DNS
+        - Example Query URI
+        - Report Tagging
+        required: true
+        description: Query Type
+    output:
+      response:
+        title: Responose
+        type: response
+        description: Response
+        required: false
+  domain_ext:
+    title: Domain Lookup Extended
+    description: Fetches information related to a domain by URIs, certificates, or
+      related samples
+    input:
+      domain:
+        title: Domain
+        type: string
+        description: Domain to search
+        required: true
+      query_type:
+        title: Query Type
+        description: Query type
+        required: true
+        type: string
+        enum:
+        - Related Samples
+        - Subdomains
+    output:
+      response:
+        title: Response
+        type: response
+        required: false
+        description: Response
+  ip:
+    title: IP Lookup
+    description: Fetches information related to an IP by Whois, URIs, passive DNS,
+      or report tagging
+    input:
+      address:
+        title: Address
+        type: string
+        description: IP address to search
+        required: true
+      query_type:
+        title: Query Type
+        required: true
+        type: string
+        enum:
+        - URIs
+        - WHOIS
+        - PASSIVE DNS
+        - URIs
+        - Report Tagging
+        description: Query Type
+    output:
+      response:
+        title: Response
+        type: response
+        description: Response
+        required: false
+  ip_ext:
+    title: IP Lookup Extended
+    description: Fetches information related to an IP by certificates, or related
+      samples
+    input:
+      address:
+        title: Address
+        type: string
+        description: IP address to search
+        required: true
+      query_type:
+        title: Query Type
+        required: true
+        type: string
+        enum:
+        - Related Samples
+        - SSL Certificates
+        description: Query type
+    output:
+      response:
+        title: Response
+        description: Response
+        type: response
+        required: false
+  samples:
+    title: Get Samples
+    description: Fetches samples of data intelligence data by metadata, HTTP traffic,
+      hosts, mutants, registry keys, AV detections, or report tagging
+    input:
+      query:
+        title: Query
+        type: string
+        description: MD5, SHA1, or SHA256 hash to search
+        required: true
+      query_type:
+        title: Query Type
+        description: Query Type
+        type: string
+        required: true
+        enum:
+        - Metadata
+        - HTTP Traffic
+        - Hosts
+        - Mutants
+        - Registry keys
+        - AV detections
+        - Report Tagging
+    output:
+      response:
+        title: Response
+        type: response
+        description: Response
+        required: false
+  import_hash_report:
+    title: Hash Report
+    description: Fetches information related to a hash
+    input:
+      query:
+        title: Query
+        type: string
+        description: SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039
+        required: true
+    output:
+      response:
+        title: Response
+        type: response
+        description: Response
+        required: false
+  import_hash_samples:
+    title: Hash Samples
+    description: Fetches information related to a hash
+    input:
+      query:
+        title: Query
+        type: string
+        description: SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039
+        required: true
+    output:
+      response:
+        title: Query
+        type: response
+        required: false
+        description: Query
+  ssdeep_report:
+    title: SSDeep Report
+    description: Fetches information related to a fuzzy hash
+    input:
+      query:
+        title: Query
+        type: string
+        description: SSDeep fuzzy hash to search e.g. 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l
+        required: true
+    output:
+      response:
+        title: Response
+        type: response
+        required: false
+        description: Response
+  ssdeep_sample:
+    title: SSDeep Sample
+    description: Fetches information related to a fuzzy hash
+    input:
+      query:
+        title: Query
+        type: string
+        description: SSDeep fuzzy hash to search e.g. 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l
+        required: true
+    output:
+      response:
+        title: Response
+        type: response
+        required: false
+        description: Response
+  ssl_hosts:
+    title: SSL Hosts
+    description: Fetches host information related to a certificate
+    input:
+      query:
+        title: Query
+        type: string
+        description: Certificate SHA1 hash to search e.g. 42a8d5b3a867a59a79f44ffadd61460780fe58f2
+        required: true
+    output:
+      response:
+        title: Response
+        type: response
+        required: false
+        description: Response
+  ssl_report:
+    title: SSL Report
+    description: Fetches information related to a certificate
+    input:
+      query:
+        title: Query
+        type: string
+        description: Certificate SHA1 hash to search e.g. 42a8d5b3a867a59a79f44ffadd61460780fe58f2
+        required: true
+    output:
+      response:
+        title: Response
+        type: response
+        required: false
+        description: Response
+  email_domain:
+    title: Email (Reverse WHOIS) - Domain
+    description: Fetches information related to an email address
+    input:
+      email:
+        title: Email
+        type: string
+        description: Email address to search e.g. janagreen2000@gmail.com
+        required: true
+    output:
+      response:
+        title: Response
+        type: response
+        required: false
+        description: Response
+  email_report:
+    title: Email (Reverse WHOIS) - Report Tagging
+    description: Fetches information related to an email address
+    input:
+      email:
+        title: Email
+        type: string
+        description: Email address to search e.g. janagreen2000@gmail.com
+        required: true
+    output:
+      response:
+        title: Response
+        type: response
+        required: false
+        description: Response
+  av_sample:
+    title: AV Detection Samples
+    description: Fetches information related to a virus
+    input:
+      query:
+        title: Query
+        type: string
+        description: Virus name to query e.g. Trojan.Enfal
+        required: true
+    output:
+      response:
+        title: Response
+        type: response
+        required: false
+        description: Response
+  report:
+    title: Search IOC Reports
+    description: Fetches information related to an indicator by domains, hosts, emails,
+      or samples
+    input:
+      filename:
+        title: Filename
+        type: string
+        description: Indicator to search e.g. C5_APT_C2InTheFifthDomain.pdf
+        required: true
+      year:
+        title: Year
+        type: string
+        description: Year to search e.g. 2013
+        required: true
+      query_type:
+        title: Query Type
+        description: Query Type
+        type: string
+        required: true
+        enum:
+        - Domains
+        - Hosts
+        - Emails
+        - Samples
+    output:
+      response:
+        title: Response
+        type: response
+        required: false
+        description: Response
+  search:
+    title: Search APTNotes
+    description: Fetches information related to a text search
+    input:
+      query:
+        title: Query
+        type: string
+        description: Text to search e.g. sofacy
+        required: true
+      query_type:
+        title: Query Type
+        type: string
+        required: true
+        enum:
+        - Full Text
+        - By Year
+        description: Query Type
+    output:
+      response:
+        title: Response
+        type: response
+        required: false
+        description: Response
