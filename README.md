@@ -333,6 +333,7 @@ The following table shows which plugins are officially supported by Rapid7 devel
 | tenable_nessus                    | community  |
 | threat_connect                    | community  |
 | threatq                           | community  |
+| threatminer                       | community  |
 | threatstack                       | community  |
 | timers                            | community  |
 | trufflehog                        | community  |
