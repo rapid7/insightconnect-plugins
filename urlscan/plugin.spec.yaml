@@ -1,0 +1,207 @@
+plugin_spec_version: v2
+name: urlscan
+title: urlscan.io
+vendor: rapid7
+status: ["unsupported"]
+description: Scan your website
+version: 2.1.2
+tags:
+- url
+- analysis
+- intel
+types:
+  page:
+    asn:
+      description: Autonomous System Number
+      type: string
+      required: false
+    asnname:
+      description: Autonomous System Name
+      type: string
+      required: false
+    city:
+      type: string
+      required: false
+    country:
+      type: string
+      required: false
+    domain:
+      type: string
+      required: false
+    ip:
+      description: IP address
+      type: string
+      required: false
+    ptr:
+      type: string
+      required: false
+    server:
+      description: Server Software
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+  stats:
+    consoleMsgs:
+      description: Console Messages
+      type: integer
+      required: false
+    dataLength:
+      description: Data Length
+      type: integer
+      required: false
+    encodedDataLength:
+      description: Encoded Data Length
+      type: integer
+      required: false
+    requests:
+      type: integer
+      required: false
+    uniqIPs:
+      description: Unique IPs
+      type: integer
+      required: false
+  task:
+    method:
+      type: string
+      required: false
+    options:
+      type: object
+      required: false
+    source:
+      type: string
+      required: false
+    time:
+      type: date
+      required: false
+    url:
+      type: string
+      required: false
+    visibility:
+      type: string
+      required: false
+  results:
+    _id:
+      type: string
+      required: false
+    page:
+      type: page
+      required: false
+    result:
+      type: string
+      required: false
+    stats:
+      type: stats
+      required: false
+    task:
+      type: task
+      required: false
+    uniq_countries:
+      description: Unique Countries
+      type: integer
+      required: false
+  scan_results:
+    requests:
+      type: '[]object'
+      required: false
+    cookies:
+      type: '[]object'
+      required: false
+    console:
+      type: '[]object'
+      required: false
+    links:
+      type: '[]object'
+      required: false
+    timing:
+      type: object
+      required: false
+    globals:
+      type: '[]object'
+      required: false
+    screenshotURL:
+      type: string
+      required: false
+connection:
+  api_key:
+    title: API Key for Saved Scans
+    description: urlscan API key. Not required for the search action
+    type: credential_secret_key
+    required: false
+actions:
+  search:
+    title: Search
+    description: Search urlscan.io
+    input:
+      q:
+        title: Query
+        description: The query term (ElasticSearch simple query string) e.g domain:urlscan.io,
+          default is *
+        type: string
+        required: true
+      size:
+        title: Size
+        description: Number of results returned
+        type: integer
+        default: 100
+        required: true
+      offset:
+        title: Offset
+        description: Offset of first result (for paginating)
+        type: integer
+        default: 0
+        required: true
+      sort:
+        title: Sort
+        description: Sorting, specificied via $sort_field:$sort_order
+        type: string
+        default: _score
+        required: true
+    output:
+      total:
+        title: Total
+        type: integer
+        description: Total number of results returned
+        required: false
+      results:
+        title: Results
+        description: UrlScan.io Results
+        type: '[]results'
+        required: false
+  submit_url_for_scan:
+    title: Submit URL for Scan
+    description: Submit a URL to generate a scan report that can be retrieved later
+    input:
+      url:
+        title: URL
+        type: string
+        description: The URL to scan
+        required: true
+      public:
+        type: boolean
+        title: Public
+        description: Set to false for a private scan
+        required: true
+        default: false
+    output:
+      scan_id:
+        title: Scan ID
+        type: string
+        description: UUID of the scan to query later
+        required: true
+  get_scan_results:
+    title: Get Scan Results
+    description: Get the results of a scan
+    input:
+      scan_id:
+        title: Scan ID
+        type: string
+        description: UUID of the scan to retrieve
+        required: true
+    output:
+      scan_results:
+        title: Scan Results
+        description: Results of the scan report
+        type: scan_results
+        required: true

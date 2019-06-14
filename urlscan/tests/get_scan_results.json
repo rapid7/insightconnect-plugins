@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "get_scan_results",
+        "connection": {
+            "api_key": {
+                "secretKey": ""
+            }
+        },
+        "input": {
+            "scan_id": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}
