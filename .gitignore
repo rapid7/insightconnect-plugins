@@ -29,7 +29,6 @@
 
 # We don't want run files
 **/*-run
-**/run
 **/run.sh
 
 # packages
