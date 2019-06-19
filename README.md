@@ -349,6 +349,7 @@ The following table shows which plugins are officially supported by Rapid7 devel
 | vmray                             | community  |
 | vxstream_sandbox                  | community  |
 | wazuh_ossec                       | community  |
+| wigle                             | community  |
 | whois                             | community  |
 | wordpress                         | community  |
 | zendesk                           | community  |
