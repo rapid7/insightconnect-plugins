@@ -1,0 +1,1251 @@
+plugin_spec_version: v2
+name: wigle
+title: WiGLE
+description: WiGLE (Wireless Geographic Logging Engine) consolidates location and
+  information of wireless networks world-wide to a central database, and has user-friendly
+  desktop and web applications that can map, query and update the database via the
+  web
+version: 1.0.0
+vendor: rapid7
+status: ["unsupported"]
+tags:
+- network
+- location
+- wireless
+types:
+  token:
+    authName:
+      type: string
+      required: true
+      title: Auth Name
+    token:
+      type: string
+      required: true
+    status:
+      type: string
+      required: true
+    type:
+      type: string
+      required: true
+    personId:
+      type: integer
+      required: true
+      title: Person ID
+  standing:
+    rank:
+      type: integer
+      required: false
+    monthRank:
+      type: integer
+      required: false
+      title: Month Rank
+    userName:
+      type: string
+      required: false
+      title: Username
+    discoveredWiFiGPS:
+      type: integer
+      required: false
+      title: Discovered Wifi GPS
+    discoveredWiFiGPSPercent:
+      type: float
+      required: false
+      title: Discovered Wifi GPS Percent
+    discoveredWiFI:
+      type: integer
+      required: false
+      title: Discovered Wifi
+    discoveredCellGPS:
+      type: integer
+      required: false
+      title: Discovered Cell GPS
+    discoveredCell:
+      type: integer
+      required: false
+      title: Discovered Cell
+    eventMonthCount:
+      type: integer
+      required: false
+      title: Event Month Count
+    eventPrevMonthCount:
+      type: integer
+      required: false
+      title: Event Previous Month Count
+    prevRank:
+      type: integer
+      required: false
+      title: Previous Rank
+    prevMonthRank:
+      type: integer
+      required: false
+      title: Previous Month Rank
+    totalWiFiLocations:
+      type: integer
+      required: false
+      title: Total WiFi Locations
+    first:
+      type: string
+      required: false
+    last:
+      type: string
+      required: false
+    self:
+      type: boolean
+      required: false
+  location:
+    alt:
+      type: integer
+      required: false
+    accuracy:
+      type: float
+      required: false
+    lastupdt:
+      type: date
+      required: false
+      title: Last Updated
+    latitude:
+      type: float
+      required: false
+    longitude:
+      type: float
+      required: false
+    month:
+      type: string
+      required: false
+    ssid:
+      type: string
+      required: false
+      title: SSID
+    time:
+      type: date
+      required: false
+    signal:
+      type: float
+      required: false
+    name:
+      type: string
+      required: false
+    netId:
+      type: string
+      required: false
+      title: Network ID
+    noise:
+      type: float
+      required: false
+    snr:
+      type: float
+      required: false
+      title: SNR
+    wep:
+      type: string
+      required: false
+      title: WEP
+    encryptionValue:
+      type: string
+      required: false
+      title: Encryption Value
+  geocode:
+    address:
+      type: object
+      required: false
+    lat:
+      type: float
+      required: false
+      title: Latitude
+    lon:
+      type: float
+      required: false
+      title: Longitude
+    importance:
+      type: float
+      required: false
+    place_id:
+      type: integer
+      required: false
+      title: Place ID
+    license:
+      type: string
+      required: false
+    osm_type:
+      type: string
+      required: false
+      title: OSM Type
+    display_name:
+      type: string
+      required: false
+      title: Display Name
+    boundingbox:
+      type: '[]float'
+      required: false
+      title: Bounding Box
+  file_upload_transid:
+    file:
+      type: string
+      required: true
+    size:
+      type: integer
+      required: true
+    transId:
+      type: string
+      required: true
+      title: Transaction ID
+  file_upload_results:
+    timeTaken:
+      type: string
+      required: true
+      title: Time Taken
+    filesize:
+      type: integer
+      required: true
+      title: File Size
+    filename:
+      type: string
+      required: true
+      title: File Name
+    transids:
+      type: '[]file_upload_transid'
+      required: true
+      title: Transaction ID
+  transaction:
+    transid:
+      type: string
+      required: true
+      title: Transaction ID
+    username:
+      type: string
+      required: true
+      title: Username
+    fileName:
+      type: string
+      required: true
+      title: File Name
+    status:
+      type: string
+      required: true
+    firstTime:
+      type: date
+      required: true
+      title: First Time
+    lastupdt:
+      type: date
+      required: true
+      title: Last Updated
+    fileSize:
+      type: integer
+      required: true
+      title: File Size
+    fileLines:
+      type: integer
+      required: true
+      title: File Lines
+    discoveredGps:
+      type: integer
+      required: true
+      title: Discovered GPS
+    discovered:
+      type: integer
+      required: true
+    total:
+      type: integer
+      required: true
+    totalGps:
+      type: integer
+      required: true
+      title: Total GPS
+    totalLocations:
+      type: integer
+      required: true
+      title: Total Locations
+    percentDone:
+      type: float
+      required: true
+      title: Percent Done
+    timeParsing:
+      type: integer
+      required: true
+      title: Time Parsing
+    genDiscovered:
+      type: integer
+      required: true
+      title: Gen Discovered
+    genDiscoveredGps:
+      type: integer
+      required: true
+      title: Gen Discovered GPS
+    genTotal:
+      type: integer
+      required: true
+      title: Gen Total
+    genTotalGps:
+      type: integer
+      required: true
+      title: Gen Total GPS
+    genTotalLocations:
+      type: integer
+      required: true
+      title: Gen Total Locations
+    wait:
+      type: integer
+      required: false
+  network_record:
+    trilat:
+      type: float
+      required: true
+      title: Tri Latitude
+    trilong:
+      type: float
+      required: true
+      title: Tri Longitude
+    ssid:
+      type: string
+      required: false
+      title: SSID
+    qos:
+      type: integer
+      required: true
+      title: QoS
+    transid:
+      type: string
+      required: true
+      title: Transaction ID
+    firsttime:
+      type: date
+      required: true
+      title: First Time
+    lasttime:
+      type: date
+      required: true
+      title: Last Time
+    lastupdt:
+      type: date
+      required: true
+      title: Last Updated
+    housenumber:
+      type: string
+      required: false
+      title: House Number
+    road:
+      type: string
+      required: false
+    city:
+      type: string
+      required: false
+    region:
+      type: string
+      required: false
+    country:
+      type: string
+      required: false
+    netid:
+      type: string
+      required: false
+      title: Network ID
+    name:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+    comment:
+      type: string
+      required: false
+    wep:
+      type: string
+      required: false
+      title: WEP
+    channel:
+      type: integer
+      required: false
+    bcninterval:
+      type: integer
+      required: false
+      title: BCN Interval
+    freenet:
+      type: string
+      required: false
+      title: Free Networks
+    dhcp:
+      type: string
+      required: false
+      title: DHCP
+    paynet:
+      type: string
+      required: false
+      title: Paid Networks
+    userfound:
+      type: boolean
+      required: false
+      title: User Found
+    encryption:
+      type: string
+      required: false
+    locationData:
+      type: '[]location'
+      required: false
+      title: Location Data
+  cell_record:
+    trilat:
+      type: float
+      required: true
+      title: Tri Latitude
+    trilong:
+      type: float
+      required: true
+      title: Tri Longitude
+    ssid:
+      type: string
+      required: false
+      title: SSID
+    qos:
+      type: integer
+      required: true
+      title: QoS
+    transid:
+      type: string
+      required: true
+      title: Transaction ID
+    firsttime:
+      type: date
+      required: true
+      title: First Time
+    lasttime:
+      type: date
+      required: true
+      title: Last Time
+    lastupdt:
+      type: date
+      required: true
+      title: Last Updated
+    housenumber:
+      type: string
+      required: false
+      title: House Number
+    road:
+      type: string
+      required: false
+    city:
+      type: string
+      required: false
+    region:
+      type: string
+      required: false
+    country:
+      type: string
+      required: false
+    id:
+      type: string
+      required: true
+      title: ID
+    attributes:
+      type: string
+      required: false
+    gentype:
+      type: string
+      required: true
+      title: Gen Type
+  cell_metadata:
+    type:
+      type: string
+      title: Type
+      required: true
+    countryName:
+      type: string
+      title: Country Name
+      required: true
+    countryCode:
+      type: string
+      required: true
+      title: Country Code
+    mcc:
+      type: string
+      required: true
+      title: MCC
+    mnc:
+      type: string
+      required: true
+      title: MNC
+    operator:
+      type: string
+      required: true
+      title: Operator
+    status:
+      type: string
+      required: true
+      title: Status
+    bands:
+      type: string
+      required: true
+      title: Bands
+    brand:
+      type: string
+      required: false
+      title: Brand
+    notes:
+      type: string
+      required: false
+      title: Notes
+  cell_mnc:
+    mnc:
+      type: string
+      required: true
+      title: MNC
+      description: Network Code (MNC)
+    metadata:
+      type: cell_metadata
+      required: true
+      title: Cell Metadata
+      description: Actual cell network information
+  cell_mcc:
+    mcc:
+      type: string
+      required: true
+      title: MCC
+      description: Country code (MCC)
+    cell_mncs:
+      required: true
+      type: '[]cell_mnc'
+      title: MNCs
+      description: Network Codes (MNC)
+connection:
+  name:
+    title: Name
+    description: API name provided by WiGLE
+    type: string
+    required: true
+  token:
+    title: Token
+    description: API token provided by WiGLE
+    type: credential_secret_key
+    required: true
+actions:
+  get_metadata:
+    title: Get Metadata
+    description: Get metadata for cell networks
+    input:
+      mcc:
+        title: MCC
+        type: string
+        description: Country code (MCC) to filter
+        required: false
+      mnc:
+        title: MNC
+        type: string
+        description: Network code (MNC) to filter
+        required: false
+    output:
+      cell_network_metadata:
+        title: Cell Network Metadata
+        description: Metadata for cell networks, arranged by MCC, then by MNC
+        type: '[]cell_mcc'
+        required: true
+  search_cells:
+    title: Search Cell
+    description: Query the WiGLE cell database for paginated results based on multiple
+      criteria
+    input:
+      onlymine:
+        title: Only Mine
+        description: Search only for points first discovered by the current user.
+          Use any string to set, leave unset for general search. Can't be used with
+          COMMAPI auth, since these are points you have locally
+        type: string
+        required: false
+        default: ''
+      notmine:
+        title: Not Mine
+        description: Only search for networks first seen by other users
+        type: string
+        required: false
+      latrange1:
+        type: float
+        title: Latitude Range Min
+        description: Lesser of two latitudes by which to bound the search (specify
+          both)
+        required: false
+      latrange2:
+        type: float
+        title: Latitude Range Max
+        required: false
+        description: Greater of two latitudes by which to bound the search (specify
+          both)
+      longrange1:
+        type: float
+        title: Longitude Range Min
+        required: false
+        description: Lesser of two longitudes by which to bound the search (specify
+          both)
+      longrange2:
+        type: float
+        title: Longitude Range Max
+        required: false
+        description: Greater of two longitudes by which to bound the search (specify
+          both)
+      lastupdt:
+        type: string
+        required: false
+        title: Last Updated
+        description: Filter points by how recently they've been updated, condensed
+          date/time numeric string format yyyyMMdd[hhmm[ss]]
+      startTransID:
+        type: string
+        required: false
+        title: Start Transaction ID
+        description: Earliest transaction ID by which to bound (year-level precision
+          only)
+      endTransID:
+        type: string
+        required: false
+        title: End Transaction ID
+        description: Latest transaction ID by which to bound (year-level precision
+          only)
+      cell_op:
+        type: string
+        required: false
+        title: Cell Operator
+        description: Cell Operator (GSM/LTE/WCDMA) or System (CDMA) ID parameter by
+          which to filter
+      cell_net:
+        type: string
+        required: false
+        title: Cell Network
+        description: Cell LAC (GSM/LTE/WCDMA) or Network (CDMA) ID parameter by which
+          to filter
+      cell_id:
+        type: string
+        required: false
+        title: Cell ID
+        description: Cell ID(GSM/LTE/WCDMA) or Basestation (CDMA) parameter by which
+          to filter
+      ssid:
+        type: string
+        required: false
+        title: SSID
+        description: Include only cell towers exactly matching the string network
+          name
+      ssidlike:
+        type: string
+        required: false
+        title: SSID Like
+        description: Include only cell towers matching the string network name, allowing
+          wildcards '%' (any string) and '_' (any character)
+      minQoS:
+        type: integer
+        required: false
+        title: Min QoS
+        description: Minimum Quality of Signal (0-7)
+      showGsm:
+        type: string
+        required: false
+        title: Show GSM
+        description: Include GSM cell networks
+      showCdma:
+        type: string
+        required: false
+        title: Show CDMA
+        description: Include CDMA cell networks
+      variance:
+        type: float
+        required: false
+        title: Variance
+        description: How tightly to bound queries against the provided latitude/longitude
+          box. Value must be between 0.001 and 0.2. Intended for use with non-exact
+          decimals and geocoded bounds
+      resultsPerPage:
+        type: integer
+        required: false
+        title: Results Per Page
+        description: How many results to return per request. Defaults to 25 for COMMAPI,
+          100 for site. Bounded at 1000 for COMMAPI, 100 for site
+      searchAfter:
+        type: integer
+        required: false
+        title: Search After
+        description: Previous page's search_after to get the next page. Use this instead
+          of 'first'
+    output:
+      results:
+        type: '[]cell_record'
+        title: Results
+        description: Matched cells
+        required: true
+      totalResults:
+        type: integer
+        title: Total Results
+        description: Total results
+        required: true
+      search_after:
+        type: integer
+        title: Search After
+        description: Search after
+        required: false
+      first:
+        type: integer
+        title: First
+        description: First
+        required: true
+      last:
+        type: integer
+        title: Last
+        description: Last
+        required: true
+      resultCount:
+        type: integer
+        title: Result Count
+        description: Result count
+        required: true
+  get_kml:
+    title: Get KML
+    description: Get a KML summary approximation for a successfully processed file
+      uploaded by the current user
+    input:
+      transid:
+        type: string
+        required: true
+        title: Transaction ID
+        description: The unique transaction ID for the file
+    output:
+      kml:
+        type: string
+        required: false
+        title: KML
+        description: String representing a KML summary approximation
+  get_files_status:
+    title: Get Files Status
+    description: Get the status of files uploaded by the current user
+    input:
+      pagestart:
+        type: integer
+        required: false
+        title: Page Start
+        description: Most recent record to fetch descending chronologically. Defaults
+          to 0
+        default: 0
+      pageend:
+        type: integer
+        required: false
+        title: Page End
+        description: Number of results to fetch from offset. Defaults to 100
+        default: 100
+    output:
+      results:
+        type: '[]transaction'
+        required: true
+        title: Results
+        description: Information about uploaded files
+      processingQueueDepth:
+        type: integer
+        required: true
+        title: Processing Queue Depth
+        description: Processing queue depth
+  upload_file:
+    title: Upload File
+    description: Transmit a file for processing and incorporation into the database
+    input:
+      file:
+        type: file
+        title: File
+        description: File to transmit
+        required: false
+      donate:
+        type: boolean
+        title: Donate
+        description: Allow commercial use of the file contents - 'on' to allow
+        required: false
+        default: true
+    output:
+      observer:
+        type: string
+        title: Observer
+        description: Observer
+        required: false
+      warning:
+        type: string
+        title: Warning
+        description: Warning
+        required: false
+      results:
+        type: file_upload_results
+        required: true
+        description: Results
+        title: Results
+  add_comment:
+    title: Add Comment
+    description: Add a comment to the network
+    input:
+      netid:
+        title: Network ID
+        description: The BSSID of the network for the comment, e.g. '0A:2C:EF:3D:25:1B'
+        type: string
+        required: false
+      comment:
+        title: Comment
+        description: The comment to attach
+        type: string
+        required: false
+    output:
+      netid:
+        title: Network ID
+        description: Network ID
+        type: string
+        required: false
+      comment:
+        title: Comment
+        description: Comment
+        type: string
+        required: false
+  search_networks:
+    title: Search Networks
+    description: Query the WiGLE network database for paginated results based on multiple
+      criteria
+    input:
+      onlymine:
+        title: Only Mine
+        description: Search only for points first discovered by the current user.
+          Use any string to set, leave unset for general search. Can't be used with
+          COMMAPI auth, since these are points you have locally
+        type: string
+        required: false
+        default: ''
+      notmine:
+        title: Not Mine
+        description: Only search for networks first seen by other users
+        type: string
+        required: false
+      latrange1:
+        type: float
+        title: Latitude Range Min
+        description: Lesser of two latitudes by which to bound the search (specify
+          both)
+        required: false
+      latrange2:
+        type: float
+        title: Latitude Range Max
+        required: false
+        description: Greater of two latitudes by which to bound the search (specify
+          both)
+      longrange1:
+        type: float
+        title: Longitude Range Min
+        required: false
+        description: Lesser of two longitudes by which to bound the search (specify
+          both)
+      longrange2:
+        type: float
+        title: Longitude Range Max
+        required: false
+        description: Greater of two longitudes by which to bound the search (specify
+          both)
+      lastupdt:
+        type: string
+        required: false
+        title: Last Updated
+        description: Filter points by how recently they've been updated, condensed
+          date/time numeric string format yyyyMMdd[hhmm[ss]]
+      startTransID:
+        type: string
+        required: false
+        title: Start Transaction ID
+        description: Earliest transaction ID by which to bound (year-level precision
+          only)
+      endTransID:
+        type: string
+        required: false
+        title: End Transaction ID
+        description: Latest transaction ID by which to bound (year-level precision
+          only)
+      encryption:
+        type: string
+        required: false
+        title: Encryption
+        description: 'Encryption detected: ''None'', ''WEP'', ''WPA'', ''WPA2'', ''WPA3'',
+          ''Unknown''. Case insensitive'
+        enum:
+        - ''
+        - None
+        - WEP
+        - WPA
+        - WPA2
+        - WPA3
+        - Unknown
+      freenet:
+        type: boolean
+        required: false
+        default: false
+        title: Free Networks
+        description: Include only networks that have been marked as free access
+      paynet:
+        type: boolean
+        default: false
+        required: false
+        title: Paid Networks
+        description: Include only networks that have been marked as for-pay access
+      netid:
+        type: string
+        required: false
+        title: Network ID
+        description: Include only networks matching the string network BSSID, e.g.
+          '0A:2C:EF:3D:25:1B' or '0A:2C:EF'. The first three octets are required
+      ssid:
+        type: string
+        required: false
+        title: SSID
+        description: Include only networks exactly matching the string network name
+      ssidlike:
+        type: string
+        required: false
+        title: SSID Like
+        description: Include only networks matching the string network name, allowing
+          wildcards '%' (any string) and '_' (any character)
+      minQoS:
+        type: integer
+        required: false
+        title: Min QoS
+        description: Minimum Quality of Signal (0-7)
+      variance:
+        type: float
+        required: false
+        title: Variance
+        description: How tightly to bound queries against the provided latitude/longitude
+          box. Value must be between 0.001 and 0.2. Intended for use with non-exact
+          decimals and geocoded bounds
+      resultsPerPage:
+        type: integer
+        required: false
+        title: Results Per Page
+        description: How many results to return per request. Defaults to 25 for COMMAPI,
+          100 for site. Bounded at 1000 for COMMAPI, 100 for site
+      searchAfter:
+        type: integer
+        required: false
+        title: Search After
+        description: Previous page's search_after to get the next page. Use this instead
+          of 'first'
+    output:
+      results:
+        type: '[]network_record'
+        title: Results
+        description: Matched networks
+        required: true
+      totalResults:
+        type: integer
+        title: Total Results
+        description: Total results
+        required: true
+      search_after:
+        type: integer
+        title: Search After
+        description: Search after
+        required: false
+      first:
+        type: integer
+        title: First
+        description: First
+        required: true
+      last:
+        type: integer
+        title: Last
+        description: Last
+        required: true
+      resultCount:
+        type: integer
+        title: Result Count
+        description: Result count
+        required: true
+  get_network_geocode:
+    title: Get Network Geocode
+    description: Get coordinates for an address for use in searching
+    input:
+      addresscode:
+        title: Address Code
+        description: An address string, Street, City, State/Region, Country
+        required: false
+        type: string
+    output:
+      results:
+        title: Results
+        description: Matched geocode
+        required: true
+        type: '[]geocode'
+  get_network_details:
+    title: Get Network Details
+    description: Get details and observation records for a single network
+    input:
+      netid:
+        type: string
+        required: false
+        title: Network ID
+        description: The WiFi Network BSSID to search
+      operator:
+        type: integer
+        required: false
+        title: Operator
+        description: GSM Operator ID
+      lac:
+        type: integer
+        required: false
+        title: LAC
+        description: GSM Location Area Code
+      cid:
+        type: integer
+        required: false
+        title: Cell ID
+        description: GSM Cell ID
+      system:
+        type: integer
+        required: false
+        title: System
+        description: CDMA System ID
+      network:
+        type: integer
+        required: false
+        title: Network
+        description: CDMA Network ID
+      basestation:
+        type: integer
+        required: false
+        title: Base Station
+        description: CDMA Base Station ID
+    output:
+      cdma:
+        type: boolean
+        required: false
+        description: CDMA
+        title: CDMA
+      gsm:
+        type: boolean
+        required: false
+        description: GSM
+        title: GSM
+      wifi:
+        type: boolean
+        required: false
+        description: WiFi
+        title: WiFi
+      addresses:
+        type: '[]geocode'
+        required: false
+        title: Addresses
+        description: Addresses
+      results:
+        type: '[]network_record'
+        required: false
+        title: Results
+        description: Results
+  get_country_statistics:
+    title: Get Country Statistics
+    description: Get statistics organized by country
+    output:
+      countries:
+        type: '[]object'
+        required: true
+        title: Countries
+        description: All countries and basic stats
+  get_general_statistics:
+    title: Get General Statistics
+    description: Get a named map of general statistics
+    output:
+      statistics:
+        type: object
+        required: true
+        description: Statistics
+  get_group_statistics:
+    title: Get Group Statistics
+    description: Get statistics organized by group
+    output:
+      groups:
+        type: '[]object'
+        required: true
+        title: Groups
+        description: All groups and basic stats
+  get_region_statistics:
+    title: Get Region Statistics
+    description: Get statistics for a specified country, organized by region
+    input:
+      country:
+        type: string
+        required: false
+        default: us
+        title: Country
+        description: The two-letter code of the country for which you'd like a regional
+          breakdown. Defaults to 'US'
+    output:
+      country:
+        type: string
+        required: true
+        title: Country
+        description: Country
+      regions:
+        type: '[]object'
+        required: true
+        title: Regions
+        description: Regions
+      encryption:
+        type: '[]object'
+        required: true
+        title: Encryption
+        description: Encryption
+      postalCode:
+        type: '[]object'
+        required: true
+        title: Postal Code
+        description: Postal code
+  get_site_statistics:
+    title: Get Site Statistics
+    description: Get a map of short-named statistics used in providing site-wide information
+    output:
+      statistics:
+        type: object
+        required: true
+        title: Statistics
+        description: Statistics
+  get_user_standings:
+    title: Get User Standings
+    description: Get user standings
+    input:
+      sort:
+        type: string
+        required: false
+        title: Sort
+        description: The criteria by which to sort the results. Values are ['discovered',
+          'total', 'monthcount', 'prevmonthcount', 'gendisc', 'gentotal', 'firsttransid',
+          'lasttransid']
+        enum:
+        - ''
+        - discovered
+        - total
+        - monthcount
+        - prevmonthcount
+        - gendisc
+        - gentotal
+        - firsttransid
+        - lasttransid
+      pagestart:
+        type: integer
+        required: false
+        title: Page Start
+        description: The first record to request according to the 'sort' parameter
+      pageend:
+        type: integer
+        required: false
+        title: Page End
+        description: The last record to request according to the 'sort' parameter
+    output:
+      sortBy:
+        type: string
+        required: true
+        title: Sort By
+        description: Sort by
+      eventView:
+        type: boolean
+        required: true
+        title: Event View
+        description: Event view
+      myUsername:
+        type: string
+        required: true
+        title: My Username
+        description: My username
+      pageStart:
+        type: integer
+        required: true
+        title: Page Start
+        description: Page start
+      pageEnd:
+        type: integer
+        required: true
+        title: Page End
+        description: Page end
+      totalUsers:
+        type: integer
+        required: true
+        title: Total Users
+        description: Total users
+      results:
+        type: '[]standing'
+        required: true
+        title: Results
+        description: Results
+  get_user_statistics:
+    title: Get User Statistics
+    description: Get statistics and badge image for the authenticated user
+    output:
+      imageBadgeUrl:
+        type: string
+        required: true
+        title: Image Badge URL
+        description: Image badge URL
+      rank:
+        type: integer
+        required: true
+        description: Rank
+      monthRank:
+        type: integer
+        required: true
+        title: Month Rank
+        description: Month rank
+      user:
+        type: string
+        required: true
+        description: User
+      message:
+        type: string
+        required: false
+        description: Message
+      statistics:
+        type: standing
+        required: true
+        description: Statistics
+  get_user_tokens:
+    title: Get User Tokens
+    description: Get all authorization tokens for the logged-in user
+    input:
+      type:
+        type: string
+        required: false
+        title: Type
+        description: Token types - 'API', 'COMMAPI', or 'ANDROID'
+        enum:
+        - ''
+        - API
+        - COMMAPI
+        - ANDROID
+    output:
+      tokens:
+        type: '[]token'
+        required: true
+        title: Tokens
+        description: List of matching tokens or an empty list
+  get_user_profile:
+    title: Get User Profile
+    description: Get the user object for the current logged-in user
+    output:
+      userid:
+        type: string
+        required: true
+        title: User ID
+        description: User ID
+      email:
+        type: string
+        required: true
+        title: Email
+        description: Email
+      donate:
+        type: string
+        required: true
+        title: Donate
+        description: Donate
+      joindate:
+        type: date
+        required: true
+        title: Join Date
+        description: Join date
+      lastlogin:
+        type: date
+        required: true
+        title: Last Login
+        description: Last login
+      session:
+        type: string
+        required: false
+        title: Session
+        description: Session

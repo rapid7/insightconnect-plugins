@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_user_standings",
+    "meta": {},
+    "input": {
+      "pageend": 3,
+      "pagestart": 1,
+      "sort": "total"
+    },
+    "connection": {
+      "name": "",
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

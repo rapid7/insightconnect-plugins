@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "upload_file",
+    "meta": {},
+    "input": {
+      "donate": false,
+      "file": {
+        "filename": "a_test_file",
+        "content": "aGVsbG8K"
+      }
+    },
+    "connection": {
+      "name": "",
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

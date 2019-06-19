@@ -1,0 +1,36 @@
+{
+  "body": {
+    "action": "search_cells",
+    "meta": {},
+    "input": {
+      "cell_id": "",
+      "cell_net": "",
+      "cell_op": "",
+      "endTransID": "",
+      "startTransID": "",
+      "lastupdt": "20180310",
+      "latrange1": 41,
+      "latrange2": 46,
+      "longrange1": 10,
+      "longrange2": 15,
+      "minQoS": 2,
+      "notmine": "true",
+      "onlymine": "",
+      "resultsPerPage": 2,
+      "searchAfter": 1,
+      "showCdma": "true",
+      "showGsm": "true",
+      "ssid": "",
+      "ssidlike": "%WIND%",
+      "variance": 0.2
+    },
+    "connection": {
+      "name": "",
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

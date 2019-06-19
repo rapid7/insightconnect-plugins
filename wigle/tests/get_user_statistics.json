@@ -1,0 +1,15 @@
+{
+  "body": {
+    "action": "get_user_statistics",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "name": "",
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

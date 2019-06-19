@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_files_status",
+    "meta": {},
+    "input": {
+      "pageend": 100,
+      "pagestart": 0
+    },
+    "connection": {
+      "name": "",
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

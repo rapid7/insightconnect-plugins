@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_metadata",
+    "meta": {},
+    "input": {
+      "mcc": "288",
+      "mnc": ""
+    },
+    "connection": {
+      "name": "",
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
