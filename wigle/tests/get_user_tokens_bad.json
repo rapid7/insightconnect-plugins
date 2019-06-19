@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "get_user_tokens",
+    "meta": {},
+    "input": {
+      "type": "API"
+    },
+    "connection": {
+      "name": "",
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
