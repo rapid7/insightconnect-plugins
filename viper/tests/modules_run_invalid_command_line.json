@@ -1,0 +1,20 @@
+{
+  "body": {
+    "input": {
+      "sha256": "",
+      "project": "Komand",
+      "cmdline": "pe compiletime"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "http://192.168.99.100:4000"
+    },
+    "meta": {},
+    "action": "modules_run"
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -346,6 +346,7 @@ The following table shows which plugins are officially supported by Rapid7 devel
 | urlscan                           | community  |
 | uuid                              | community  |
 | virustotal_yara                   | community  |
+| viper                             | community  |
 | vmray                             | community  |
 | vxstream_sandbox                  | community  |
 | wazuh_ossec                       | community  |

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "list_notes",
+    "meta": {},
+    "input": {
+      "project_name": "test"
+    },
+    "connection": {
+      "token": {
+        "secretKey": ""
+      },
+      "url": "http://172.17.0.1:8080/api/v3/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

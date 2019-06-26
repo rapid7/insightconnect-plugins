@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "body": {
+    "connection": {
+      "url": "http://192.168.99.100:4000",
+      "username": "",
+      "password": ""
+    },
+    "meta": {},
+    "action": "file_delete",
+    "input": {
+      "hash": "asdfadfs"
+    }
+  },
+  "type": "action_start"
+}
