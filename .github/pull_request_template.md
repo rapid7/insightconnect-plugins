@@ -8,6 +8,17 @@ Describe the proposed changes:
 
 Developers, verify you have completed the following items by checking them off:
 
+### Style
+
+Review the [style guide](https://komand.github.io/python/style.html)
+
+- [ ] For dependencies, pin [OS package](https://komand.github.io/python/style.html#dockerfile) and [Python package](https://komand.github.io/python/style.html#requirements-txt) versions
+- [ ] For security, set least privileged account with ``USER nobody`` in the ``Dockerfile`` when possible
+- [ ] For error handling, use of [PluginException](https://komand.github.io/python/error_handling.html#plugin-exceptions) and [ConnectionTestException](https://komand.github.io/python/error_handling.html#connection-exceptions)
+- [ ] For logging, use [self.logger](https://komand.github.io/python/sdk.html#logging)
+- [ ] For help.md, use [changelog style](https://komand.github.io/python/style.html#changelog)
+- [ ] For help.md, validate markdown with ``make validate`` which calls ``mdl``
+
 ### Functional Checklist
 - [ ] Work fully completed
 - [ ] Functional
