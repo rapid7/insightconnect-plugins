@@ -14,6 +14,7 @@ Review the [style guide](https://komand.github.io/python/style.html)
 
 - [ ] For dependencies, pin [OS package](https://komand.github.io/python/style.html#dockerfile) and [Python package](https://komand.github.io/python/style.html#requirements-txt) versions
 - [ ] For security, set least privileged account with ``USER nobody`` in the ``Dockerfile`` when possible
+- [ ] For size, use the [slim SDK images](https://komand.github.io/python/sdk.html#sdk-versions) when possible: ``komand/python-3-37-slim-plugin`` and ``komand/python-3-37-plugin``
 - [ ] For error handling, use of [PluginException](https://komand.github.io/python/error_handling.html#plugin-exceptions) and [ConnectionTestException](https://komand.github.io/python/error_handling.html#connection-exceptions)
 - [ ] For logging, use [self.logger](https://komand.github.io/python/sdk.html#logging)
 - [ ] For docs, use [changelog style](https://komand.github.io/python/style.html#changelog)
