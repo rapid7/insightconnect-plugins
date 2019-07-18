@@ -4,7 +4,7 @@ title: ZeuS Tracker
 description: ZeuS Command&Control Server Tracking
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+status: ["obsolete"]
 tags:
 - feeds
 - c2
