@@ -27,7 +27,7 @@ Dependencies:
 * [Make](https://www.gnu.org/software/make/)
 * [Docker Engine](https://www.docker.com)
 * [InsightConnect plugin tooling](https://komand.github.io/python/start.html)
-* [InsightConnect validators](https://pypi.org/project/insightconnect-integrations-validators/), [jq](https://stedolan.github.io/jq/), [flake8](https://pypi.org/project/flake8/), [mdl](https://github.com/markdownlint/markdownlint) for the helper scripts in `tools/`.
+* [InsightConnect validators](https://pypi.org/project/insightconnect-integrations-validators/), [pyyaml](https://pyyaml.org/), [jq](https://stedolan.github.io/jq/), [flake8](https://pypi.org/project/flake8/), [mdl](https://github.com/markdownlint/markdownlint) for the helper scripts in `tools/`.
 
 ### Example
 
