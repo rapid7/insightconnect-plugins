@@ -25,8 +25,8 @@ help:
 
 validate:
 	$(info [$(YELLOW)*$(NORMAL)] Running validators)
+	@python3 -m pip install --upgrade insightconnect-integrations-validators > /dev/null && icon-validate .
 	@test -x ../tools/check_spec.py && ../tools/check_spec.py ./plugin.spec.yaml || true
-	@test -d ../0_ci && make -C ../ install-ci &> /dev/null && komand-plugin-ci validate . || true
 	@test -x ../tools/mdl.sh && ../tools/mdl.sh || true
 	@test -x ../tools/flake8.sh && ../tools/flake8.sh || true
 	@test -x ../tools/bandit.sh && ../tools/bandit.sh || true
