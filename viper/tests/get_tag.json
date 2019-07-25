@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "get_tag",
+    "meta": {},
+    "input": {
+      "project_name": "test",
+      "id": 1
+    },
+    "connection": {
+      "token": {
+        "secretKey": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "create_project",
+    "meta": {},
+    "input": {
+      "name": "test"
+    },
+    "connection": {
+      "token": {
+        "secretKey": ""
+      },
+      "url": "http://172.17.0.1:8080/api/v3/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

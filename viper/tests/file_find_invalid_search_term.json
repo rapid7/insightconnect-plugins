@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "file_find",
+    "meta": {},
+    "input": {
+      "sha256": "",
+      "all": false,
+      "name": "",
+      "md5": "",
+      "tag": "",
+      "project": "",
+      "ssdeep": "",
+      "latest": false
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "http://192.168.99.100:4000"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,18 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "input": {
+      "hash": "asdf"
+    },
+    "action": "file_get",
+    "connection": {
+      "url": "http://192.168.99.100:4000",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  }
+}

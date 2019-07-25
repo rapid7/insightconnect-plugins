@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "tags_add",
+    "connection": {
+      "url": "http://192.168.99.100:4000",
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "input": {
+      "all": false,
+      "sha256": "",
+      "latest": false,
+      "name": "",
+      "tags": ["komand"],
+      "md5": "asdf",
+      "tag": "",
+      "ssdeep": ""
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
