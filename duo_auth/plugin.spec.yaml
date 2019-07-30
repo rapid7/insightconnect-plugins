@@ -4,7 +4,7 @@ title: Duo Auth API
 vendor: rapid7
 status: ["supported"]
 description: Integration for Duo Auth API
-version: 1.0.0
+version: 1.0.1
 tags:
 - duo
 - auth
