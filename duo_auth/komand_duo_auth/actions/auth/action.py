@@ -19,6 +19,8 @@ class Auth(komand.Action):
         username = opts.get('username')
         passcode = opts.get('passcode')
         pushinfo = opts.get('pushinfo')
+        push_type = opts.get('type')
+
         if pushinfo:
             pushinfo = urllib.parse.urlencode(pushinfo)
 
@@ -40,6 +42,7 @@ class Auth(komand.Action):
              device=params.get('device'),
              passcode=passcode,
              pushinfo=pushinfo,
+             type=push_type,
              )
         return response
 
