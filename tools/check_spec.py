@@ -28,6 +28,7 @@ def must_exec(cmd):
         print('[' + YELLOW + 'SUCCESS' + CEND + ']' + " Passes js-yaml spec check" + "\n")
     except OSError:
         print('[' + RED + 'FAIL' + CEND + ']' + " js-yaml is not installed, try: node install npm")
+        sys.exit(1)
     except subprocess.CalledProcessError as ex:
         exit_code = ex.returncode
         print('[' + RED + 'FAIL' + CEND + ']' + " Failed js-yaml spec check")
