@@ -35,9 +35,9 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
+    "hostname",
     "integration_key",
-    "secret_key",
-    "hostname"
+    "secret_key"
   ],
   "definitions": {
     "credential_secret_key": {
