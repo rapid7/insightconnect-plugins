@@ -14,7 +14,7 @@ This action is used to perform second-factor authentication.
 
 #### Options
 
-The "Options" field is used to specify additional parameters that may be necessary depending on the authentication factor selected. "Options" accepts the following parameters in json format `username`, `passcode`, `pushinfo`, `type`.
+The "Options" field is used to specify additional parameters that may be necessary depending on the authentication factor selected. "Options" accepts the following parameters in JSON format `username`, `passcode`, `pushinfo`, `type`.
 
 Example input:
 
