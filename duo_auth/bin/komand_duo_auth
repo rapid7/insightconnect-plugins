@@ -6,7 +6,7 @@ from komand_duo_auth import connection, actions, triggers
 
 Name = 'Duo Auth API'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'Integration for Duo Auth API'
 
 
