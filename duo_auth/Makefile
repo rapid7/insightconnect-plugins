@@ -45,8 +45,8 @@ regenerate:
 
 export: image
 	$(info [$(YELLOW)*$(NORMAL)] Exporting docker image)
-	@printf "\n ---> Exporting Docker image to ./$(NAME).img\n"
-	@docker save $(VENDOR)/$(NAME):$(VERSION) | gzip > $(NAME)_$(VERSION).img
+	@printf "\n ---> Exporting Docker image to ./$(VENDOR)_$(NAME)_$(VERSION).tar\n"
+	@docker save $(VENDOR)/$(NAME):$(VERSION) | gzip > $(VENDOR)_$(NAME)_$(VERSION).tar
 
 # Make will not run a target if a file of the same name exists unless setting phony targets
 # https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
