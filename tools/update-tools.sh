@@ -14,18 +14,19 @@ if [[ "${platform}" == "Darwin" ]]; then
 elif [[ "${platform}" == "Linux" ]] && [[ -f /etc/debian_version ]]; then
 	echo "[*] Executing update/installation for Debian Linux!"
 	curl -s https://packagecloud.io/install/repositories/rapid7/insightconnect_plugin_tooling/script.deb.sh | sudo bash
-	sudo apt-get install -y icon-plugin
+	sudo apt-get update
+	sudo apt-get -qq install -y icon-plugin
 
 	echo "[*] Installing/updating jq..."
-	sudo apt-get install -y jq
+	sudo apt-get -qq install -y jq
 
 elif [[ "${platform}" == "Linux" ]] && [[ -f /etc/redhat-release ]]; then
 	echo "[*] Executing update/installation for Red Hat Linux!"
 	curl -s https://packagecloud.io/install/repositories/rapid7/insightconnect_plugin_tooling/script.rpm.sh | sudo bash
-	sudo yum install -y icon-plugin
+	sudo yum install -q -y icon-plugin
 
 	echo "[*] Installing/updating jq..."
-	sudo yum install -y jq
+	sudo yum install -q -y jq
 else
 	echo "[!] Unsupported OS found! Unable to install icon-plugin and jq!"
 fi
@@ -35,6 +36,9 @@ sudo -H python3 -m pip install --user --upgrade insightconnect-integrations-vali
 
 echo "[*] Installing PyYAML..."
 sudo -H python3 -m pip install --user --upgrade pyyaml > /dev/null; true
+
+echo "[*] Installing bandit..."
+sudo -H python3 -m pip install --user --upgrade bandit > /dev/null; true
 
 echo "[*] Installing flake8..."
 sudo -H python3 -m pip install --user --upgrade flake8 > /dev/null; true
