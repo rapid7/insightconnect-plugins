@@ -1,0 +1,46 @@
+plugin_spec_version: v2
+name: chardet
+title: Chardet
+description: Python compatible character encoding detector
+version: 1.0.0
+vendor: rapid7
+status: ["supported"]
+tags:
+- base64
+- encoder
+- utilities
+
+types:
+  recommendation:
+    confidence:
+      title: "Confidence"
+      type: number
+      description: "Confidence"
+      required: false
+    language:
+      title: "Language"
+      type: string
+      description: "Language"
+      required: false
+    encoding:
+      title: "Encoding"
+      type: string
+      description: "Encoding"
+      required: false
+
+actions:
+  detect_encoding:
+    title: Detect Encoding
+    description: Detect encoding
+    input:
+      bytes_to_analyze:
+        title: Bytes to Analyze
+        type: bytes
+        description: Bytes to analyze
+        required: true
+    output:
+      recommendation:
+          title: "Recommendation"
+          type: recommendation
+          description: "Recommendation"
+          required: false
