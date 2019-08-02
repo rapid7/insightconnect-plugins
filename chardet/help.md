@@ -2,7 +2,7 @@
 
 ## About
 
-[Chardet](https://chardet.readthedocs.io/en/latest/index.html) is a python compatible character encoding detector.
+[Chardet](https://chardet.readthedocs.io/en/latest/index.html) is a Python-compatible character encoding detector.
 
 ## Actions
 
