@@ -261,6 +261,8 @@ Example output:
 
 ### Create Issue Comment
 
+This action is used to add a comment to an existing issue ticket.
+
 #### Input
 
 |Name|Type|Default|Required|Description|Enum|
@@ -294,13 +296,14 @@ None
 
 ### Add Issue Label
 
-This action is used to add a label to an issue.
+This action is used to add a single label to an issue.
 
 #### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |issue_number|number|None|True|Issue number|None|
+|label|string|None|True|Issue label|None|
 |repository|string|None|True|Repository to post issue|None|
 |organization|string|None|False|Organizational owner of repository|None|
 
