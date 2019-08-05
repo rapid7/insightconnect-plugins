@@ -7,7 +7,6 @@ menu:
 	$(Q)echo " $(RED)regenerate$(NORMAL) - Regenerate the plugin schema from plugin.spec.yaml"
 	$(Q)echo "$(BOLD)Plugin helper targets:$(NORMAL) (depends on installed tools: ../tools/)"
 	$(Q)echo " $(RED)menu$(NORMAL)       - This menu"
-	$(Q)echo " $(RED)icon$(NORMAL)       - Encodes an available icon.png into plugin.spec.yaml's icon field"
 	$(Q)echo " $(RED)help$(NORMAL)       - Generates a help documentation template from plugin.spec.yaml"
 	$(Q)echo " $(RED)runner$(NORMAL)     - Creates run.sh, the best way to run and test plugins"
 	$(Q)echo " $(RED)validate$(NORMAL)   - Runs the plugin's files through installed validators"
@@ -30,3 +29,6 @@ validate:
 	@test -x ../tools/mdl.sh && ../tools/mdl.sh || true
 	@test -x ../tools/flake8.sh && ../tools/flake8.sh || true
 	@test -x ../tools/bandit.sh && ../tools/bandit.sh || true
+
+update-tools:
+	../tools/update-tools.sh

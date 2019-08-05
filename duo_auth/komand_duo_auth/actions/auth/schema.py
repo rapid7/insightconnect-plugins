@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Perform second-factor authentication"
+
+
 class Input:
     ASYNC = "async"
     DEVICE = "device"

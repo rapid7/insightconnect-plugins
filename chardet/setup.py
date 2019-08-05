@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name='duo_auth-rapid7-plugin',
-      version='1.0.1',
-      description='Integration for Duo Auth API',
+setup(name='chardet-rapid7-plugin',
+      version='1.0.0',
+      description='Python compatible character encoding detector',
       author='rapid7',
       author_email='',
       url='',
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_duo_auth']
+      scripts=['bin/icon_chardet']
       )

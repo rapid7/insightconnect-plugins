@@ -14,26 +14,42 @@ This action is used to perform second-factor authentication.
 
 #### Options
 
-The "Options" field is used to specify additional parameters that may be necessary depending on the authentication factor selected.
-All entries use the format |Parameter|Required|Description|
+The "Options" field is used to specify additional parameters that may be necessary depending on the authentication factor selected. "Options" accepts the following parameters in JSON format `username`, `passcode`, `pushinfo`, `type`.
+
+Example input:
+
+```
+{
+    "type": "Transfer",
+    "pushinfo": {
+        "hello": "world",
+        "host": "suspicious-host"
+    }
+}
+```
+
 
 ##### Push
-
-|device|true|ID of the device. This device must have the "push" capability. You may also specify "auto" to use the first of the user's devices with the "push" capability.|
-|type|false|This string is displayed in the Duo Mobile app before the word "request". The default is "Login", so the phrase "Login request" appears in the push notification text and on the request details screen. You may want to specify "Transaction", "Transfer", etc.|
-|display_username|false|String to display in Duo Mobile in place of the user's Duo username.|
-|pushinfo|false|A set of URL-encoded key/value pairs with additional contextual information associated with this authentication attempt. The Duo Mobile app will display this information to the user. For example "from=login%20portal&domain=example.com" The URL-encoded string's total length must be less than 20,000 bytes.|
+|Parameter|Required?|Description|
+|---------|---------|-----------|
+|device|Required|ID of the device. This device must have the "push" capability. You may also specify "auto" to use the first of the user's devices with the "push" capability.|
+|type|Optional|This string is displayed in the Duo Mobile app before the word "request". The default is "Login", so the phrase "Login request" appears in the push notification text and on the request details screen. You may want to specify "Transaction", "Transfer", etc.|
+|display_username|Optional|String to display in Duo Mobile in place of the user's Duo username.|
+|pushinfo|Optional|A set of URL-encoded key/value pairs with additional contextual information associated with this authentication attempt. The Duo Mobile app will display this information to the user. For example: from=login%20portal&domain=example.com. The URL-encoded string's total length must be less than 20,000 bytes.|
 
 ##### Passcode
-
+|Parameter|Required?|Description|
+|---------|---------|-----------|
 |passcode|true|Passcode entered by the user.|
 
 ##### Phone
-
+|Parameter|Required?|Description|
+|---------|---------|-----------|
 |device|true|ID of the device to call. This device must have the "phone" capability. You may also specify "auto" to use the first of the user's devices with the "phone" capability.|
 
 ##### SMS
-
+|Parameter|Required?|Description|
+|---------|---------|-----------|
 |device|true|ID of the device to send passcodes to. This device must have the "sms" capability. You may also specify "auto" to use the first of the user's devices with the "sms" capability.|
 
 #### Input
@@ -103,6 +119,7 @@ Examples:
 * 0.1.0 - Initial plugin
 * 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Add example output
+* 1.0.1 - Support `type` parameter as `push_type` in the `options` input of the Auth action
 
 ## References
 
