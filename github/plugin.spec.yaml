@@ -1152,7 +1152,7 @@ actions:
         required: true
       issue_number:
         type: number
-        description: issue number
+        description: Issue number
         required: true
       repository:
         type: string
@@ -1174,7 +1174,7 @@ actions:
     input:
       issue_number:
         type: number
-        description: issue number
+        description: Issue number
         required: true
       repository:
         type: string
@@ -1199,11 +1199,11 @@ actions:
         required: false
       issue_number:
         type: number
-        description: issue number
+        description: Issue number
         required: true
       label:
         type: string
-        description: issue label
+        description: Issue label
         required: true
     output:
   user:
