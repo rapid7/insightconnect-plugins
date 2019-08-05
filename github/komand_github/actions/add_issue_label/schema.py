@@ -27,25 +27,25 @@ class AddIssueLabelInput(komand.Input):
       "type": "number",
       "title": "Issue Number",
       "description": "issue number",
-      "order": 3
+      "order": 2
     },
     "label": {
       "type": "string",
       "title": "Label",
       "description": "issue label",
-      "order": 4
+      "order": 1
     },
     "organization": {
       "type": "string",
       "title": "Organization",
       "description": "Organizational owner of repository",
-      "order": 2
+      "order": 4
     },
     "repository": {
       "type": "string",
       "title": "Repository",
       "description": "Repository to post issue",
-      "order": 1
+      "order": 3
     }
   },
   "required": [

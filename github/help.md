@@ -290,9 +290,7 @@ This action is used to close an issue.
 
 #### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|url|string|False|None|
+None
 
 ### Add Issue Label
 
@@ -308,9 +306,7 @@ This action is used to add a label to an issue.
 
 #### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|url|string|False|None|
+None
 
 ### Get User
 

@@ -9,8 +9,8 @@ class CreateIssueComment(komand.Action):
         super(self.__class__, self).__init__(
             name='create_issue_comment',
             description=Component.DESCRIPTION,
-            input=CreateCommentInput(),
-            output=CreateCommentOutput())
+            input=CreateIssueCommentInput(),
+            output=CreateIssueCommentOutput())
 
     def run(self, params={}):
         if params.get('organization') and params.get('repository'):
