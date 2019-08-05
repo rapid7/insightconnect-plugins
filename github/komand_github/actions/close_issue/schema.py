@@ -14,8 +14,7 @@ class Input:
     
 
 class Output:
-    URL = "url"
-    
+    pass
 
 class CloseIssueInput(komand.Input):
     schema = json.loads("""
@@ -27,19 +26,19 @@ class CloseIssueInput(komand.Input):
       "type": "number",
       "title": "Issue Number",
       "description": "issue number",
-      "order": 3
+      "order": 1
     },
     "organization": {
       "type": "string",
       "title": "Organization",
       "description": "Organizational owner of repository",
-      "order": 2
+      "order": 3
     },
     "repository": {
       "type": "string",
       "title": "Repository",
       "description": "Repository to post issue",
-      "order": 1
+      "order": 2
     }
   },
   "required": [
@@ -55,18 +54,7 @@ class CloseIssueInput(komand.Input):
 
 class CloseIssueOutput(komand.Output):
     schema = json.loads("""
-   {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "url": {
-      "type": "string",
-      "title": "URL",
-      "description": "URL",
-      "order": 1
-    }
-  }
-}
+   {}
     """)
 
     def __init__(self):

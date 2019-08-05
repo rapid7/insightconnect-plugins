@@ -13,5 +13,13 @@ class CloseIssue(komand.Action):
                 output=CloseIssueOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
+        if params.get('organization') and params.get('repository'):
+            g = self.connection.github_user
+            issue = g.get_organization(params.get('organization')).get_repo(params.get('repository')).get_issue(int(params.get('issue_number')))
+        else:
+            g = self.connection.user
+            issue = g.get_repo(params.get('repository')).get_issue(int(params.get('issue_number')))
+
+        issue_params = {"state": "closed"}
+        issue = issue.edit(**issue_params)
         return {}
