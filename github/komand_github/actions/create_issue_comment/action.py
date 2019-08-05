@@ -13,13 +13,17 @@ class CreateIssueComment(komand.Action):
             output=CreateIssueCommentOutput())
 
     def run(self, params={}):
-        if params.get('organization') and params.get('repository'):
+        org = params.get(Input.ORGANIZATION)
+        repo = params.get(Input.REPOSITORY)
+        issue_number = params.get(Input.ISSUE_NUMBER)
+        body = params.get(Input.BODY)
+        if org and repo:
             g = self.connection.github_user
-            issue = g.get_organization(params.get('organization')).get_repo(params.get('repository')).get_issue(int(params.get('issue_number')))
+            issue = g.get_organization(org).get_repo(repo).get_issue(issue_number)
         else:
             g = self.connection.user
-            issue = g.get_repo(params.get('repository')).get_issue(int(params.get('issue_number')))
+            issue = g.get_repo(repo).get_issue(issue_number)
 
-        issue_params = {"body": params.get("body")}
+        issue_params = {"body": body}
         issue = issue.create_comment(**issue_params)
         return {'url': issue.html_url}

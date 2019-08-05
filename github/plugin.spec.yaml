@@ -1144,7 +1144,7 @@ actions:
         required: false
   create_issue_comment:
     title: Create Issue Comment
-    description: Create an issue commentt
+    description: Create an issue comment
     input:
       body:
         type: string
