@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create a issue comment"
+    DESCRIPTION = "Create an issue commentt"
 
 
 class Input:
@@ -33,7 +33,7 @@ class CreateIssueCommentInput(komand.Input):
     "issue_number": {
       "type": "number",
       "title": "Issue Number",
-      "description": "issue number",
+      "description": "Issue number",
       "order": 2
     },
     "organization": {

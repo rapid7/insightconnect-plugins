@@ -5,7 +5,7 @@ vendor: rapid7
 status: ["unsupported"]
 description: GitHub is a web-based Git or version control repository and Internet
   hosting service
-version: 2.0.1
+version: 2.1.0
 tags:
 - github
 - issue
@@ -1144,7 +1144,7 @@ actions:
         required: false
   create_issue_comment:
     title: Create Issue Comment
-    description: Create a issue comment
+    description: Create an issue commentt
     input:
       body:
         type: string
@@ -1170,7 +1170,7 @@ actions:
         required: false
   close_issue:
     title: Close Issue
-    description: Close Issue
+    description: Close issue
     input:
       issue_number:
         type: number
@@ -1187,7 +1187,7 @@ actions:
     output:
   add_issue_label:
     title: Add Issue Label
-    description: Adds Label to an Issue
+    description: Adds a label to an issue
     input:
       repository:
         type: string

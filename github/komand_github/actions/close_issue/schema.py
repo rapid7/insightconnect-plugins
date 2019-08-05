@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Close Issue"
+    DESCRIPTION = "Close issue"
 
 
 class Input:
@@ -25,7 +25,7 @@ class CloseIssueInput(komand.Input):
     "issue_number": {
       "type": "number",
       "title": "Issue Number",
-      "description": "issue number",
+      "description": "Issue number",
       "order": 1
     },
     "organization": {

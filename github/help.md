@@ -1027,7 +1027,7 @@ Examples:
 * 1.2.1 - Update connection documentation and add example outputs to remaining actions and triggers
 * 2.0.0 - Rename "User" action to "Get User"
 * 2.0.1 - Fix missing Search action | Pin pygithub and python-dateutil libraries | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Enable verification of SSL/TLS certificates for github.com
-* 2.0.2 - New actions: Create Issue Comment, Close Issue, Add Issue Label
+* 2.1.0 - New actions: Create Issue Comment, Close Issue, Add Issue Label
 
 ## References
 

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Adds Label to an Issue"
+    DESCRIPTION = "Adds a label to an issue"
 
 
 class Input:
@@ -26,26 +26,26 @@ class AddIssueLabelInput(komand.Input):
     "issue_number": {
       "type": "number",
       "title": "Issue Number",
-      "description": "issue number",
-      "order": 2
+      "description": "Issue number",
+      "order": 3
     },
     "label": {
       "type": "string",
       "title": "Label",
-      "description": "issue label",
-      "order": 1
+      "description": "Issue label",
+      "order": 4
     },
     "organization": {
       "type": "string",
       "title": "Organization",
       "description": "Organizational owner of repository",
-      "order": 4
+      "order": 2
     },
     "repository": {
       "type": "string",
       "title": "Repository",
       "description": "Repository to post issue",
-      "order": 3
+      "order": 1
     }
   },
   "required": [
