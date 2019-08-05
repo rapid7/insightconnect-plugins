@@ -16,7 +16,7 @@ class AddIssueLabel(komand.Action):
         org = params.get(Input.ORGANIZATION)
         repo = params.get(Input.REPOSITORY)
         issue_number = params.get(Input.ISSUE_NUMBER)
-        label = params.get(Input.label)
+        label = params.get(Input.LABEL)
         if org and repo:
             g = self.connection.github_user
             issue = g.get_organization(org).get_repo(repo).get_issue(issue_number)
@@ -24,5 +24,8 @@ class AddIssueLabel(komand.Action):
             g = self.connection.user
             issue = g.get_repo(repo).get_issue(issue_number)
 
-        issue = issue.add_to_labels(label)
-        return {}
+        try:
+            issue = issue.add_to_labels(label)
+            return {'success': True}
+        except:
+            return {'success': False}

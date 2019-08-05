@@ -1185,6 +1185,11 @@ actions:
         description: Organizational owner of repository
         required: false
     output:
+      success:
+        title: success
+        description: Returns true if the issue was closed 
+        type: boolean
+        required: false
   add_issue_label:
     title: Add Issue Label
     description: Adds a label to an issue
@@ -1206,6 +1211,11 @@ actions:
         description: Issue label
         required: true
     output:
+      success:
+        title: success
+        description: Returns true if the label was added
+        type: boolean
+        required: false
   user:
     title: Get User
     description: Get user information

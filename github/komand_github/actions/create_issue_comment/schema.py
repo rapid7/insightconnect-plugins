@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create an issue commentt"
+    DESCRIPTION = "Create an issue comment"
 
 
 class Input:

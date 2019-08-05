@@ -15,7 +15,8 @@ class Input:
     
 
 class Output:
-    pass
+    SUCCESS = "success"
+    
 
 class AddIssueLabelInput(komand.Input):
     schema = json.loads("""
@@ -62,7 +63,18 @@ class AddIssueLabelInput(komand.Input):
 
 class AddIssueLabelOutput(komand.Output):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "title": "success",
+      "description": "Status",
+      "order": 1
+    }
+  }
+}
     """)
 
     def __init__(self):

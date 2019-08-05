@@ -278,6 +278,14 @@ This action is used to add a comment to an existing issue ticket.
 |----|----|--------|-----------|
 |url|string|False|None|
 
+Example output:
+
+```
+{
+  "url": "https://github.com/jonschipp/ISLET/issues/94"
+}
+```
+
 ### Close Issue
 
 This action is used to close an issue.
@@ -292,7 +300,17 @@ This action is used to close an issue.
 
 #### Output
 
-None
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Returns true if the issue was closed|
+
+Example output:
+
+```
+{
+  "success": "True"
+}
+```
 
 ### Add Issue Label
 
@@ -309,7 +327,17 @@ This action is used to add a single label to an issue.
 
 #### Output
 
-None
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Returns true if the label was added|
+
+Example output:
+
+```
+{
+  "success": "True"
+}
+```
 
 ### Get User
 

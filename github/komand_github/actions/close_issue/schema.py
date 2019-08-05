@@ -14,7 +14,8 @@ class Input:
     
 
 class Output:
-    pass
+    SUCCESS = "success"
+    
 
 class CloseIssueInput(komand.Input):
     schema = json.loads("""
@@ -54,7 +55,18 @@ class CloseIssueInput(komand.Input):
 
 class CloseIssueOutput(komand.Output):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "title": "success",
+      "description": "Status",
+      "order": 1
+    }
+  }
+}
     """)
 
     def __init__(self):

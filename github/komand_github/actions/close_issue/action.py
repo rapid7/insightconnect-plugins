@@ -24,5 +24,8 @@ class CloseIssue(komand.Action):
             issue = g.get_repo(repo).get_issue(issue_number)
 
         issue_params = {"state": "closed"}
-        issue = issue.edit(**issue_params)
-        return {}
+        try:
+            issue = issue.edit(issue_params)
+            return {'success': True}
+        except:
+            return {'success': False}
