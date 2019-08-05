@@ -1186,7 +1186,7 @@ actions:
         required: false
     output:
       success:
-        title: success
+        title: Success
         description: Returns true if the issue was closed 
         type: boolean
         required: false
@@ -1212,7 +1212,7 @@ actions:
         required: true
     output:
       success:
-        title: success
+        title: Success
         description: Returns true if the label was added
         type: boolean
         required: false
