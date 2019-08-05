@@ -5,7 +5,7 @@ vendor: rapid7
 status: ["unsupported"]
 description: GitHub is a web-based Git or version control repository and Internet
   hosting service
-version: 2.0.1
+version: 2.1.0
 tags:
 - github
 - issue
@@ -1141,6 +1141,80 @@ actions:
         title: URL
         description: URL
         type: string
+        required: false
+  create_issue_comment:
+    title: Create Issue Comment
+    description: Create an issue comment
+    input:
+      body:
+        type: string
+        description: Body text of issue
+        required: true
+      issue_number:
+        type: number
+        description: Issue number
+        required: true
+      repository:
+        type: string
+        description: Repository to post issue
+        required: true
+      organization:
+        type: string
+        description: Organizational owner of repository
+        required: false
+    output:
+      url:
+        title: URL
+        description: URL
+        type: string
+        required: false
+  close_issue:
+    title: Close Issue
+    description: Close issue
+    input:
+      issue_number:
+        type: number
+        description: Issue number
+        required: true
+      repository:
+        type: string
+        description: Repository to post issue
+        required: true
+      organization:
+        type: string
+        description: Organizational owner of repository
+        required: false
+    output:
+      success:
+        title: success
+        description: Returns true if the issue was closed 
+        type: boolean
+        required: false
+  add_issue_label:
+    title: Add Issue Label
+    description: Adds a label to an issue
+    input:
+      repository:
+        type: string
+        description: Repository to post issue
+        required: true
+      organization:
+        type: string
+        description: Organizational owner of repository
+        required: false
+      issue_number:
+        type: number
+        description: Issue number
+        required: true
+      label:
+        type: string
+        description: Issue label
+        required: true
+    output:
+      success:
+        title: success
+        description: Returns true if the label was added
+        type: boolean
         required: false
   user:
     title: Get User

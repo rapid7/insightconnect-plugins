@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='github-rapid7-plugin',
-      version='2.0.1',
+      version='2.1.0',
       description='GitHub is a web-based Git or version control repository and Internet hosting service',
       author='rapid7',
       author_email='',

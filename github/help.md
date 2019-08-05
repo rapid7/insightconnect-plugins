@@ -259,6 +259,86 @@ Example output:
 
 ```
 
+### Create Issue Comment
+
+This action is used to add a comment to an existing issue ticket.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|body|string|None|True|Body text of issue|None|
+|issue_number|number|None|True|Issue number|None|
+|repository|string|None|True|Repository to post issue|None|
+|organization|string|None|False|Organizational owner of repository|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|url|string|False|None|
+
+Example output:
+
+```
+{
+  "url": "https://github.com/jonschipp/ISLET/issues/94"
+}
+```
+
+### Close Issue
+
+This action is used to close an issue.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|issue_number|number|None|True|Issue number|None|
+|repository|string|None|True|Repository to post issue|None|
+|organization|string|None|False|Organizational owner of repository|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Returns true if the issue was closed|
+
+Example output:
+
+```
+{
+  "success": "True"
+}
+```
+
+### Add Issue Label
+
+This action is used to add a single label to an issue.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|issue_number|number|None|True|Issue number|None|
+|label|string|None|True|Issue label|None|
+|repository|string|None|True|Repository to post issue|None|
+|organization|string|None|False|Organizational owner of repository|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Returns true if the label was added|
+
+Example output:
+
+```
+{
+  "success": "True"
+}
+```
+
 ### Get User
 
 This action is used to retrieve information about a GitHub user.
@@ -975,6 +1055,7 @@ Examples:
 * 1.2.1 - Update connection documentation and add example outputs to remaining actions and triggers
 * 2.0.0 - Rename "User" action to "Get User"
 * 2.0.1 - Fix missing Search action | Pin pygithub and python-dateutil libraries | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Enable verification of SSL/TLS certificates for github.com
+* 2.1.0 - New actions: Create Issue Comment, Close Issue, Add Issue Label
 
 ## References
 

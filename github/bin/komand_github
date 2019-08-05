@@ -6,7 +6,7 @@ from komand_github import connection, actions, triggers
 
 Name = 'GitHub'
 Vendor = 'rapid7'
-Version = '2.0.1'
+Version = '2.1.0'
 Description = 'GitHub is a web-based Git or version control repository and Internet hosting service'
 
 
@@ -23,11 +23,17 @@ class ICONGithub(komand.Plugin):
 
         self.add_action(actions.AddCollaborator())
 
+        self.add_action(actions.AddIssueLabel())
+
         self.add_action(actions.AddMembership())
 
         self.add_action(actions.BlockUser())
 
+        self.add_action(actions.CloseIssue())
+
         self.add_action(actions.Create())
+
+        self.add_action(actions.CreateIssueComment())
 
         self.add_action(actions.GetIssuesByRepo())
 
