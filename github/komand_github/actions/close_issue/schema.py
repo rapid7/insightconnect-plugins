@@ -61,8 +61,8 @@ class CloseIssueOutput(komand.Output):
   "properties": {
     "success": {
       "type": "boolean",
-      "title": "success",
-      "description": "Status",
+      "title": "Success",
+      "description": "Returns true if the issue was closed",
       "order": 1
     }
   }

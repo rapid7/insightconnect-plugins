@@ -69,8 +69,8 @@ class AddIssueLabelOutput(komand.Output):
   "properties": {
     "success": {
       "type": "boolean",
-      "title": "success",
-      "description": "Status",
+      "title": "Success",
+      "description": "Returns true if the label was added",
       "order": 1
     }
   }
