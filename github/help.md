@@ -259,6 +259,59 @@ Example output:
 
 ```
 
+### Create Issue Comment
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|body|string|None|True|Body text of issue|None|
+|issue_number|number|None|True|Issue number|None|
+|repository|string|None|True|Repository to post issue|None|
+|organization|string|None|False|Organizational owner of repository|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|url|string|False|None|
+
+### Close Issue
+
+This action is used to close an issue.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|issue_number|number|None|True|Issue number|None|
+|repository|string|None|True|Repository to post issue|None|
+|organization|string|None|False|Organizational owner of repository|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|url|string|False|None|
+
+### Add Issue Label
+
+This action is used to add a label to an issue.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|issue_number|number|None|True|Issue number|None|
+|repository|string|None|True|Repository to post issue|None|
+|organization|string|None|False|Organizational owner of repository|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|url|string|False|None|
+
 ### Get User
 
 This action is used to retrieve information about a GitHub user.
@@ -975,6 +1028,7 @@ Examples:
 * 1.2.1 - Update connection documentation and add example outputs to remaining actions and triggers
 * 2.0.0 - Rename "User" action to "Get User"
 * 2.0.1 - Fix missing Search action | Pin pygithub and python-dateutil libraries | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Enable verification of SSL/TLS certificates for github.com
+* 2.0.2 - New actions: Create Issue Comment, Close Issue, Add Issue Label
 
 ## References
 

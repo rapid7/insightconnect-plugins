@@ -23,11 +23,17 @@ class ICONGithub(komand.Plugin):
 
         self.add_action(actions.AddCollaborator())
 
+        self.add_action(actions.AddIssueLabel())
+
         self.add_action(actions.AddMembership())
 
         self.add_action(actions.BlockUser())
 
+        self.add_action(actions.CloseIssue())
+
         self.add_action(actions.Create())
+
+        self.add_action(actions.CreateIssueComment())
 
         self.add_action(actions.GetIssuesByRepo())
 
