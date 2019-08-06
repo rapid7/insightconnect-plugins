@@ -4,12 +4,13 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Check username or email for compromise"
+    DESCRIPTION = "Check an email for compromise"
 
 
 class Input:
     BREACH = "breach"
     INCLUDE_UNVERIFIED = "include_unverified"
+    TRUNCATE_RESPONSE = "truncate_response"
     USER = "user"
     
 
@@ -34,17 +35,26 @@ class LookupUserInput(komand.Input):
       "type": "boolean",
       "title": "Include Unverified",
       "description": "If true will include breaches that are unverified",
+      "default": false,
       "order": 3
+    },
+    "truncate_response": {
+      "type": "boolean",
+      "title": "Truncate Response",
+      "description": "If true only name of breach will be shown",
+      "default": true,
+      "order": 4
     },
     "user": {
       "type": "string",
       "title": "Account",
-      "description": "Username or email to check",
+      "description": "Email to check",
       "order": 1
     }
   },
   "required": [
     "include_unverified",
+    "truncate_response",
     "user"
   ]
 }

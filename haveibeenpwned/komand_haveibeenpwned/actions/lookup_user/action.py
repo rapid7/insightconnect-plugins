@@ -1,12 +1,12 @@
 import komand
-from .schema import LookupUserInput, LookupUserOutput
+from .schema import LookupUserInput, LookupUserOutput, Input, Output
 # Custom imports below
 from komand_haveibeenpwned.util.util import HaveIBeenPwned
 
 
 class LookupUser(komand.Action):
 
-    _BASE_URL = 'https://haveibeenpwned.com/api/breachedaccount/'
+    _BASE_URL = 'https://haveibeenpwned.com/api/v3/breachedaccount/'
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -19,19 +19,20 @@ class LookupUser(komand.Action):
         hibp = HaveIBeenPwned(self.logger)
         user = params.get('user')
         breach = params.get('breach')
-        include_unverified = params.get('include_unverified')
+        include_unverified = params.get(Input.INCLUDE_UNVERIFIED)
+        truncate_response = params.get(Input.TRUNCATE_RESPONSE)
 
         querystring = dict()
         if breach:
             querystring["domain"] = breach
-        if include_unverified:
-            querystring["includeUnverified"] = include_unverified
-        if querystring.keys():
+        querystring["includeUnverified"] = include_unverified
+        querystring["truncateResponse"] = truncate_response
+        if not querystring.keys():
             querystring = None
 
         url = self._BASE_URL + user
 
-        results = hibp.get_request(url=url, params=querystring)
+        results = hibp.get_request(url=url, params=querystring, key=self.connection.api_key)
         if results:
             return {'found': True, 'breaches': results}
         return {'found': False}

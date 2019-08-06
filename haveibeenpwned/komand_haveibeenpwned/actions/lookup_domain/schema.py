@@ -9,6 +9,8 @@ class Component:
 
 class Input:
     DOMAIN = "domain"
+    INCLUDE_UNVERIFIED = "include_unverified"
+    TRUNCATE_RESPONSE = "truncate_response"
     
 
 class Output:
@@ -27,8 +29,26 @@ class LookupDomainInput(komand.Input):
       "title": "Domain",
       "description": "Domain to check E.g. adobe.com, google.com ect. If left blank will return the full breach database. Warning: this is very large",
       "order": 1
+    },
+    "include_unverified": {
+      "type": "boolean",
+      "title": "Include Unverified",
+      "description": "If true will include breaches that are unverified",
+      "default": false,
+      "order": 2
+    },
+    "truncate_response": {
+      "type": "boolean",
+      "title": "Truncate Response",
+      "description": "If true only name of breach will be shown",
+      "default": true,
+      "order": 3
     }
-  }
+  },
+  "required": [
+    "include_unverified",
+    "truncate_response"
+  ]
 }
     """)
 

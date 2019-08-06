@@ -70,7 +70,14 @@ This plugin does not contain any triggers.
 
 ## Connection
 
-This plugin does not contain a connection.
+The `connection` component accepts `modules` and `timeout` inputs. The `modules` input should be a JSON list of third-party 
+modules to install. Modules can be found on [PyPi.org](https://pypi.org/). The `timeout` input sets a timeout duration 
+for the installation of these modules.
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|modules|[]string|None|False|List of third-party modules to install for use in the supplied Python script|None|
+|timeout|integer|60|True|Timeout (in seconds) for installing third-party modules|None|
 
 ## Troubleshooting
 

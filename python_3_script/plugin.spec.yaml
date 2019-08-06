@@ -2,6 +2,7 @@ plugin_spec_version: v2
 name: python_3_script
 title: Python 3 Script
 vendor: rapid7
+status: ["supported"]
 description: "Run custom Python 3 script"
 version: 2.0.0
 enable_cache: true

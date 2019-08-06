@@ -5,7 +5,7 @@
 
 [Have I been pwned?](https://haveibeenpwned.com/) is a free [Creative Commons](https://creativecommons.org/licenses/by/4.0/) service that allows you to search across multiple data breaches to see if your username, email address, or password has been compromised.
 
-This plugin utilizes the public [have I been pwned? API](https://haveibeenpwned.com/API/v2). 
+This plugin utilizes the public [have I been pwned? API](https://haveibeenpwned.com/API/v3). 
 
 ## Actions
 
@@ -17,7 +17,9 @@ This action is used to list domain breaches.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|domain|string|None|False|Domain to check E.g. Adobe.com, google.com ect. If left blank will return the full breach database. Warning this is very large|None|
+|domain|string|None|False|Domain to check E.g. adobe.com, google.com etc. If left blank will return the full breach database. Warning: this is very large|None|
+|include_unverified|boolean|None|False|If true will include breaches that are unverified (default - false)|None|
+|truncate_response|boolean|None|False|If true only name of breach will be shown (default - true)|None|
 
 #### Output
 
@@ -90,15 +92,16 @@ Example output:
 
 ### Lookup User
 
-This action is used to check a username or email for compromise.
+This action is used to check an email for compromise.
 
 #### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|include_unverified|boolean|None|True|If true will include breaches that are unverified|None|
 |breach|string|None|False|Breach Site to check e.g. adobe.com. If blank will check all known breaches|None|
-|user|string|None|True|Username or email to check|None|
+|include_unverified|boolean|None|False|If true will include breaches that are unverified (default - false)|None|
+|truncate_response|boolean|None|False|If true only name of breach will be shown (default - true)|None|
+|user|string|None|True|Email to check|None|
 
 #### Output
 
@@ -191,11 +194,12 @@ Examples:
 * 2.0.0 - Code overhaul | Port to Python 3
 * 3.0.0 - Bug fix where output schema did not match returned API data for Lookup Domain and Lookup User actions | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
 * 3.0.1 - Set user-agent string to Rapid7 InsightConnect | Implement use of Retry-After header for rate limit | Update documentation
+* 4.0.0 - Support the v3 API which requires authentication
 
 ## References
 
 * [have i been pwned?](https://haveibeenpwned.com/)
-* [have i been pwned? API](https://haveibeenpwned.com/API/v2)
+* [have i been pwned? API](https://haveibeenpwned.com/API/v3)
 
 ## Custom Output Types
 

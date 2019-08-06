@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='haveibeenpwned-rapid7-plugin',
-      version='3.0.1',
+      version='4.0.0',
       description='Have I been pwned? allows you to search across multiple data breaches to see if your email addresses has been compromised',
       author='rapid7',
       author_email='',

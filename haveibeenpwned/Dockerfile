@@ -1,6 +1,6 @@
 FROM komand/python-3-37-slim-plugin:3
 # Refer to the following documentation for available SDK parent images: https://komand.github.io/python/sdk.html#version
-LABEL organization=komand
+LABEL organization=rapid7
 LABEL sdk=python
 LABEL type=plugin
 
@@ -18,5 +18,5 @@ WORKDIR /python/src
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
 
-USER nobody
+USER root
 ENTRYPOINT ["/usr/local/bin/komand_haveibeenpwned"]
