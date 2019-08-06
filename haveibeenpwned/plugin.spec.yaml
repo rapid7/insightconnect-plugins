@@ -2,15 +2,23 @@ plugin_spec_version: v2
 name: haveibeenpwned
 title: HaveIBeenPwned
 vendor: rapid7
-status: ["unsupported"]
+status: ["supported"]
 description: Have I been pwned? allows you to search across multiple data breaches
   to see if your email addresses has been compromised
-version: 3.0.1
+version: 4.0.0
 tags:
 - breach
 - compromise
 - pwn
 enable_cache: true
+
+connection:
+  credentials:
+    title: API Key
+    description: API key
+    type: credential_secret_key
+    required: true
+
 types:
   domain:
     Title:
@@ -93,15 +101,16 @@ types:
       title: Logo Type
       descritpion: Indicates what type of file the breach logo is
       type: string
+
 actions:
   lookup_user:
     title: Lookup User
-    description: Check username or email for compromise
+    description: Check an email for compromise
     input:
       user:
         title: Account
         type: string
-        description: Username or email to check
+        description: Email to check
         required: true
       breach:
         title: Breach Site
@@ -114,6 +123,13 @@ actions:
         description: If true will include breaches that are unverified
         type: boolean
         required: true
+        default: false
+      truncate_response:
+        title: Truncate Response
+        description: If true only name of breach will be shown
+        type: boolean
+        required: true
+        default: true
     output:
       found:
         title: Found
@@ -136,6 +152,18 @@ actions:
         description: 'Domain to check E.g. adobe.com, google.com ect. If left blank
           will return the full breach database. Warning: this is very large'
         required: false
+      include_unverified:
+        title: Include Unverified
+        description: If true will include breaches that are unverified
+        type: boolean
+        required: true
+        default: false
+      truncate_response:
+        title: Truncate Response
+        description: If true only name of breach will be shown
+        type: boolean
+        required: true
+        default: true
     output:
       found:
         title: Found

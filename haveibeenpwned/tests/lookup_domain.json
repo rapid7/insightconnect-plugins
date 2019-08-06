@@ -3,9 +3,15 @@
     "action": "lookup_domain",
     "meta": {},
     "input": {
-      "domain": "adobe.com"
+      "domain": "adobe.com",
+      "include_unverified": false,
+      "truncate_response": true
     },
-    "connection": null
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      }
+    }
   },
   "type": "action_start",
   "version": "v1"

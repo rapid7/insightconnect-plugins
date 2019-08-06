@@ -18,5 +18,5 @@ WORKDIR /python/src
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
 
-USER nobody
+USER root
 ENTRYPOINT ["/usr/local/bin/komand_haveibeenpwned"]

@@ -204,7 +204,6 @@ The following table shows which plugins are officially supported by Rapid7 devel
 | elastalert                        | community  |
 | elasticsearch                     | community  |
 | eml                               | community  |
-| extractit                         | community  |
 | facebook_threat_exchange          | community  |
 | finger                            | community  |
 | fireeye_hx                        | community  |
@@ -231,8 +230,8 @@ The following table shows which plugins are officially supported by Rapid7 devel
 | graphite                          | community  |
 | grr                               | community  |
 | hashit                            | community  |
-| haveibeenpwned                    | community  |
-| hipchat                           | deprecated   |
+| haveibeenpwned                    | rapid7     |
+| hipchat                           | deprecated |
 | hippocampe                        | community  |
 | html                              | community  |
 | hybrid_analysis                   | community  |
@@ -288,6 +287,7 @@ The following table shows which plugins are officially supported by Rapid7 devel
 | phishtank                         | community  |
 | presto                            | community  |
 | proofpoint_tap                    | community  |
+| python_3_script                   | rapid7     |
 | qradar                            | community  |
 | qualys_pc_scan                    | community  |
 | qualys_reports                    | community  |

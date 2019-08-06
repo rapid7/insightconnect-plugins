@@ -16,13 +16,14 @@ class HaveIBeenPwned(object):
         self._retries = 0
 
 
-    def get_request(self, url: str, params=None, max_attempts=2) -> list:
+    def get_request(self, url: str, key: str, params=None, max_attempts=2) -> list:
         """
         :param url: specifies which haveibeenpwned api call is used
         :param params: used to filter searches
         :param max_attempts: how many times the plugin will retry if it receives a 429 error
         :return: A boolean value 'found' for results and the results if found is True
         """
+        self._HEADERS["hibp-api-key"] = key
         try:
             response = requests.get(url=url, headers=self._HEADERS, params=params)
         except requests.RequestException as e:

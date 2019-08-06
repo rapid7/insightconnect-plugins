@@ -5,11 +5,15 @@
     "input": {
       "breach": "",
       "include_unverified": false,
-      "user": "test@example.com"
+      "truncate_response": true,
+      "user": "somebody@gmail.com"
     },
-    "connection": null
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      }
+    }
   },
   "type": "action_start",
   "version": "v1"
 }
-
