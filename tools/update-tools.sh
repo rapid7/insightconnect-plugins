@@ -44,9 +44,9 @@ echo "[*] Installing flake8..."
 sudo -H python3 -m pip install --user --upgrade flake8 > /dev/null; true
 
 echo "[*] Installing mdl..."
-sudo sudo gem install mdl > /dev/null; true
+sudo gem install mdl > /dev/null; true
 
 echo "[*] Installing js-yaml..."
-sudo sudo npm install -g js-yaml > /dev/null; true
+sudo npm install -g js-yaml > /dev/null; true
 
 echo "[*] Complete! Tooling installed & updated!"
