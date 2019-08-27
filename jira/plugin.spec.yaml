@@ -5,7 +5,7 @@ vendor: rapid7
 status: ["supported"]
 description: Jira is an issue tracking product, developed by Atlassian. It provides
   bug tracking, issue tracking, and project management functions
-version: 3.1.0
+version: 3.1.1
 tags:
 - ticket
 - Jira
@@ -109,7 +109,7 @@ connection:
   url:
     title: URL
     type: string
-    description: JIRA URL, e.g. https://company.atlassian.net
+    description: Jira URL, e.g. https://company.atlassian.net
     default: https://company.atlassian.net
     required: false
   project:
@@ -118,9 +118,9 @@ connection:
     description: Project ID
     required: false
   credentials:
-    title: Credentials
+    title: Username and API Key
     type: credential_username_password
-    description: Username and Password
+    description: Username and API key
     required: true
 actions:
   transition_issue:

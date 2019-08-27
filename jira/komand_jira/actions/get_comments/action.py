@@ -28,8 +28,3 @@ class GetComments(komand.Action):
         count = len(results)
 
         return {'count': count, 'comments': results}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'count': 0, 'comments': []}

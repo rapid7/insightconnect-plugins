@@ -24,8 +24,3 @@ class GetIssue(komand.Action):
 
         clean_output = komand.helper.clean(output)
         return {'found': True, 'issue': clean_output}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'found': True, 'issue': {}}

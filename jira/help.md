@@ -601,7 +601,7 @@ This action is used to edit an issue within Jira.
 
 Example input:
 
-Making an update to custom fields in `fields` parameter 
+Making an update to custom fields in `fields` parameter:
 
 ```
 {
@@ -893,11 +893,18 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|https\://company.atlassian.net|False|JIRA URL, e.g. https\://company.atlassian.net|None|
+|credentials|credential_username_password|None|True|Username and API key|None|
 |project|string|None|False|Project ID|None|
-|credentials|credential_username_password|None|True|Username and Password|None|
+|url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|
 
 ## Troubleshooting
+
+### Authentication
+
+If you receive an error while trying to connect to the Jira instance verify that you are using both username _and_ **API
+key** to authenticate. Use of a username and password is not allowed by the Jira API.
+
+### Create Issue
 
 When running the Create Issue action, if you receive the following error output in the Log
 it may indicate the user provided an issue Type that is not present in the Jira system, or the user doesn't have permission to use it.
@@ -926,6 +933,7 @@ response text = {"errorMessages":[],"errors":{"issuetype":"issue type is require
 * 3.0.4 - Improve error handling by checking for known issue type before creating ticket in Create Issue action
 * 3.0.5 - Fix issue where description in Get Issue action would return None if description was left empty
 * 3.1.0 - Added new Edit Issue action
+* 3.1.1 - Update connection input labels to reflect Jira API changes
 
 ## Workflows
 

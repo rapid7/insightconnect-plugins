@@ -4,7 +4,7 @@
     "meta": {},
     "input": {
       "max": 10,
-      "query": ""
+      "query": "mike"
     },
     "connection": {
       "credentials": {
@@ -12,7 +12,7 @@
         "username": ""
       },
       "project": "test",
-      "url": ""
+      "url": "https://komand-demo4.atlassian.net"
     }
   },
   "type": "action_start",

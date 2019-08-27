@@ -18,8 +18,3 @@ class DeleteUser(komand.Action):
             username=params['username']
         )
         return {'success': success}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'success': True}

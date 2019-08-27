@@ -49,8 +49,3 @@ class NewIssue(komand.Trigger):
         while True:
             self.poll()
             time.sleep(60)
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'issue': {}}

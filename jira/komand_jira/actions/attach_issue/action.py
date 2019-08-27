@@ -41,8 +41,3 @@ class AttachIssue(komand.Action):
         self.logger.debug('Attach issue has returned: %s', output)
 
         return {'id': output.id}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'id': 'test-1'}

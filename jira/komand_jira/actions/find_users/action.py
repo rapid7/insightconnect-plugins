@@ -23,8 +23,3 @@ class FindUsers(komand.Action):
         results = komand.helper.clean(results)
 
         return {'users': results}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'users': []}

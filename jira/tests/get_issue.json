@@ -3,15 +3,15 @@
     "action": "get_issue",
     "meta": {},
     "input": {
-      "id": ""
+      "id": "IDR-1"
     },
     "connection": {
       "credentials": {
         "password": "",
         "username": ""
       },
-      "project": "test",
-      "url": ""
+      "project": "",
+      "url": "https://komand-demo.atlassian.net"
     }
   },
   "type": "action_start",

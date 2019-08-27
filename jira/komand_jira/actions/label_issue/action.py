@@ -31,8 +31,3 @@ class LabelIssue(komand.Action):
         issue.update(fields={'labels': issue.fields.labels})
 
         return {'success': True}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'success': True}
