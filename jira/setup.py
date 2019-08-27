@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='jira-rapid7-plugin',
-      version='3.1.0',
+      version='3.1.1',
       description='Jira is an issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions',
       author='rapid7',
       author_email='',

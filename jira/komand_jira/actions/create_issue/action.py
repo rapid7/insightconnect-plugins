@@ -82,8 +82,3 @@ class CreateIssue(komand.Action):
             self.connection.client.add_attachment(issue=issue, attachment=attachment, filename=filename)
 
         return {"issue": output}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'issue': {}}

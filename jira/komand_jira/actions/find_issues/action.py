@@ -22,8 +22,3 @@ class FindIssues(komand.Action):
         results = komand.helper.clean(results)
 
         return {'issues': results}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'issues': []}

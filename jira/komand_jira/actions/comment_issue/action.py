@@ -23,8 +23,3 @@ class CommentIssue(komand.Action):
         comment = self.connection.client.add_comment(issue=issue, body=params['comment'])
         self.logger.info("Returned comment: %s", dir(comment))
         return {'comment_id': comment.id}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'comment_id': 'abc123'}

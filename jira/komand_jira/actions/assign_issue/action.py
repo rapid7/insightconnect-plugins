@@ -22,8 +22,3 @@ class AssignIssue(komand.Action):
 
         result = self.connection.client.assign_issue(issue=issue, assignee=params['assignee'])
         return {'success': result}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'success': True}

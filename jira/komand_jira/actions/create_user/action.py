@@ -30,8 +30,3 @@ class CreateUser(komand.Action):
             notify=notify,
         )
         return {'success': success}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'success': True}

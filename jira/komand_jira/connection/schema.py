@@ -17,8 +17,8 @@ class ConnectionSchema(komand.Input):
   "properties": {
     "credentials": {
       "$ref": "#/definitions/credential_username_password",
-      "title": "Credentials",
-      "description": "Username and Password",
+      "title": "Username and API Key",
+      "description": "Username and API key",
       "order": 3
     },
     "project": {
@@ -30,7 +30,7 @@ class ConnectionSchema(komand.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "JIRA URL, e.g. https://company.atlassian.net",
+      "description": "Jira URL, e.g. https://company.atlassian.net",
       "default": "https://company.atlassian.net",
       "order": 1
     }

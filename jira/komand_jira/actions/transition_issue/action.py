@@ -29,8 +29,3 @@ class TransitionIssue(komand.Action):
         self.logger.info('Result: %s', result)
 
         return {'success': True}
-
-    def test(self):
-        t = self.connection.test()
-        if t:
-            return {'success': True}
