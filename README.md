@@ -4,7 +4,6 @@ We made a large number of our plugins open-source in order to benefit our custom
 The integrations here include some new, some old, and many that need a little TLC. We'll continue to add more over time based on user requests and our own updates.
 The full list of integrations is available on our [Marketplace](https://market.komand.com/).
 
-Have developer questions? Join the [developer mailing list](https://groups.google.com/a/rapid7.com/d/forum/rapid7-insightconnect-development).
 For general questions and requests, reach out to us at `IntegrationAlliance@rapid7.com`.
 
 ### Table of Contents

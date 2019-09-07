@@ -54,8 +54,6 @@ When reporting issues:
 - **Do** include reproduction steps, stack traces, and anything that might help us fix your bug.
 - **Don't** file duplicate reports; search for your bug before filing a new report.
 
-Have developer questions? Join the [developer mailing list].
-
 If you have general requests or need additional guidance, reach out to the open source contribution owners at
 `IntegrationAlliance@rapid7.com`.
 
@@ -78,4 +76,3 @@ curve, so keep it up!
 [verification steps]:https://help.github.com/articles/writing-on-github#task-lists
 [reference associated issues]:https://github.com/blog/1506-closing-issues-via-pull-requests
 [Issues]:https://github.com/rapid7/insightconnect-plugins/issues
-[developer mailing list]:https://groups.google.com/a/rapid7.com/d/forum/rapid7-insightconnect-development
