@@ -36,6 +36,8 @@
 **/*.tgz
 komand-*.tar.gz
 demo-*.tar.gz
+**/*.tar
+**/*.plg
 
 # Wheels
 **/*.whl
@@ -48,3 +50,6 @@ demo-*.tar.gz
 
 # merge trash
 *.orig
+
+# Ignore test output generated from icon-plugin tool
+**/.output
