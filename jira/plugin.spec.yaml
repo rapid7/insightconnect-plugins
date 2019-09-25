@@ -1,11 +1,11 @@
 plugin_spec_version: v2
 name: jira
 title: Jira
-vendor: rapid7
+vendor: jadoncm
 status: ["supported"]
 description: Jira is an issue tracking product, developed by Atlassian. It provides
   bug tracking, issue tracking, and project management functions
-version: 3.1.0
+version: 3.1.2
 tags:
 - ticket
 - Jira
@@ -39,6 +39,11 @@ types:
     author:
       description: Author
       type: user
+      required: false
+  single_attachment:
+    self:
+      type: string
+      description: URL to attachment
       required: false
   issue:
     id:
@@ -97,7 +102,7 @@ types:
       type: string
       description: Resolved At
       required: false
-    attachments:
+    attachment:
       type: '[]file'
       description: Attachments
       required: false
