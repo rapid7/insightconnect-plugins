@@ -36,6 +36,12 @@ def normalize_issue(issue, include_raw_fields=False, logger=logging.getLogger())
     if include_raw_fields:
         fields = issue.raw["fields"]
 
+    attachment = []
+    for a in issue:
+        file = a.get()
+        single_attachment = {'filename': a.filename,'content': file}
+        attachment.append(single_attachment)
+
     logger.debug("Source issue: %s", issue.raw)
 
     output = {
@@ -53,6 +59,7 @@ def normalize_issue(issue, include_raw_fields=False, logger=logging.getLogger())
         "resolved_at": resolution_date,
         "labels": issue.fields.labels or [],
         "fields": fields,
+        "attachment": attachment
     }
 
     logger.debug("Result issue: %s", output)
