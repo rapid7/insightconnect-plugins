@@ -14,6 +14,6 @@ jobs:
         python3 -m pip install --upgrade pip setuptools
         curl -s https://${{ secrets.ci_packagecloud_token }}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
         python3 -m pip install --user icon-integrations-ci
-        git diff --name-only --pretty=format: remotes/origin/master..remotes/origin/refs/heads/foss_ci
+        git diff --name-only --pretty=format:origin/master..refs/heads/foss_ci
         /home/runner/.local/bin/icon-ci pr
         
