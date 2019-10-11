@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Validate Plugin(s)
       run: |
-        python3 -m pip install --upgrade pip
+        python3 -m pip install --upgrade pip setuptools
         curl -s https://${{ secrets.ci_packagecloud_token }}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
         python3 -m pip install icon-integrations-ci
         
