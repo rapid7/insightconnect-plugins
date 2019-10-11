@@ -14,5 +14,6 @@ jobs:
         python3 -m pip install --upgrade pip setuptools
         curl -s https://${{ secrets.ci_packagecloud_token }}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
         python3 -m pip install --user icon-integrations-ci
+        echo $(env)
         /home/runner/.local/bin/icon-ci pr
         
