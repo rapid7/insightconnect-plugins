@@ -15,6 +15,6 @@ jobs:
         curl -s https://${{ secrets.ci_packagecloud_token }}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
         python3 -m pip install --user icon-integrations-ci --no-warn-script-location
         echo "Changed plugins are..."
-        echo $(git diff --name-only --pretty=format:origin/master..origin/foss_ci)
+        echo $(git diff --name-only --pretty=format: origin/master..origin/foss_ci)
         
         
