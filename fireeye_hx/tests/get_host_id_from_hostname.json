@@ -6,10 +6,10 @@
       "hostname": "IEWIN7"
     },
     "connection": {
-      "url": "",
+      "url": "https://hexbps766-hx-webui-1.hex01.helix.apps.fireeye.com",
       "username_password": {
         "password": "",
-        "username": ""
+        "username": "mrinehart"
       }
     }
   },

@@ -68,7 +68,7 @@ Example output:
 
 ### Submit URL for Scan
 
-This action is used to submit a URL to generate a scan report that can be retrieved later.
+This action is used to submit a url to generate a scan report that can be retrieved later.
 
 #### Input
 

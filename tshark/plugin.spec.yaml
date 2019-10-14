@@ -4,6 +4,8 @@ title: Tshark
 description: A tool for dumping and analyzing network traffic
 version: 1.0.1
 vendor: rapid7
+support: community
+status: []
 tags:
 - tshark
 - pcap

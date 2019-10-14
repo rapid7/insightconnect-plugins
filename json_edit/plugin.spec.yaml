@@ -4,7 +4,8 @@ title: JSON Edit
 description: Provides the ability to edit JSON data
 version: 1.0.1
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - json
 - utilities

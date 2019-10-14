@@ -1,0 +1,14 @@
+{
+    "version": "v1",
+    "type": "trigger_start",
+    "body": {
+      "meta": {},
+      "trigger": "daily",
+      "connection": {},
+      "dispatcher": {},
+      "input": {
+        "message": "hello",
+        "times_in_utc": "20:27:00"
+      }
+    }
+  }

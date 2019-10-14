@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='red_canary-rapid7-plugin',
-      version='2.1.2',
+      version='2.1.4',
       description='Managed endpoint detection and response',
       author='rapid7',
       author_email='',

@@ -42,6 +42,7 @@ class Retrieve(komand.Action):
                     article["TicketID"] = int(article["TicketID"])
                 if "NoAgentNotify" in article:
                     article["NoAgentNotify"] = int(article["NoAgentNotify"])
+
                 cleaned_articles.append(article)
                 if "Attachment" in article:
                     cleaned_attachment = []
@@ -50,7 +51,12 @@ class Retrieve(komand.Action):
                         cleaned_attachment.append(attachment)
                     article["Attachment"] = cleaned_attachment
             clean_data["Ticket"]["Article"] = cleaned_articles
-            self.logger.info(clean_data)
+
+            for property in ["EscalationTime", "EscalationResponseTime", "EscalationSolutionTime", "EscalationUpdateTime"]:
+                val = clean_data["Ticket"].get(property)
+                if len(val) and isinstance(val, str) and str.isnumeric(val):
+                    clean_data["Ticket"][property] = int(clean_data["Ticket"][property])
+
             if clean_data["Ticket"].get("DynamicField"):
                 clean_df = []
                 dynamicfields = clean_data["Ticket"].pop("DynamicField")
@@ -66,10 +72,11 @@ class Retrieve(komand.Action):
             self.logger.error("Ticket {} missing Article data! Unable to format data".format(str(params.get("ticket_id"))), e)
             raise
 
+
+
         try:
             clean_data["Ticket"]["TicketID"] = int(clean_data["Ticket"]["TicketID"])
         except Exception as e:
             self.logger.error("Ticket {} missing Ticket ID!".format(str(params.get("ticket_id"))), e)
             raise
-
         return clean_data

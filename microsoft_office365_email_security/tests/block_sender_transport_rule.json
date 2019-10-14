@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "block_sender_transport_rule",
+        "input": {
+            "domain_or_email_to_block": "foobartest.com",
+            "transport_rule_name": "InsightConnect Block List"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

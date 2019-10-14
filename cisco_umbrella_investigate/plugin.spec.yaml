@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: cisco_umbrella_investigate
 title: Cisco Umbrella Investigate
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 description: Cisco Umbrella Investigate provides the most complete view of the relationships
   and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint
   attackers infrastructures and predict future threats

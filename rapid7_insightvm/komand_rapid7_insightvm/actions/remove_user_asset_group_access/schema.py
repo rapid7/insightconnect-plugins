@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove asset group access from an user account"
+
+
 class Input:
     ASSET_GROUP_ID = "asset_group_id"
     USER_ID = "user_id"

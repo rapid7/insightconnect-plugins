@@ -3,15 +3,15 @@
     "action": "powershell_string",
     "meta": {},
     "input": {
-      "address": "",
+      "address": "192.168.1.10",
       "host_name": "",
       "script": "$test = \"bob\";$test2 = ' said hello';echo 'Mr $test  $test2';echo \"Mr $test $test2\";echo \"$test `n $test2\";$myarray = @(1,5,6,8);echo $myarray[1]"
     },
     "connection": {
-      "auth": "None",
+      "auth": "CredSSP",
       "credentials": {
         "password": "",
-        "username": ""
+        "username": "mhofert"
       },
       "kerberos": {
         "domain_name": "",

@@ -8,7 +8,7 @@
         },
         "input": {
             "data": "qwerty",
-            "domain_name": "",
+            "domain_name": "mikerinehart.com",
             "name": "cats",
             "port": 1234,
             "priority": 1,

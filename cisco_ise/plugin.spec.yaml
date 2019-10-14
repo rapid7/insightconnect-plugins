@@ -5,7 +5,8 @@ description: Cisco Identity Services Engine allows users to gain awareness of ev
   hitting their networks
 version: 2.2.0
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - cisco
 - network access

@@ -4,7 +4,8 @@ title: Uniq
 description: Filter out repeated lines or items
 version: 1.0.1
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - uniq
 - unique

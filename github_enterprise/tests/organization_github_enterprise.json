@@ -4,13 +4,13 @@
     "input": {
       "name": "testorgfromkomand-6",
       "profile_name": "Test Org 6",
-      "admin": ""
+      "admin": "brandonium21"
     },
     "connection": {
-      "host": "",
+      "host": "egithub-ghe.eastus.cloudapp.azure.com",
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "Dragon49",
+        "username": "brandonium21"
       }
     },
     "meta": {}

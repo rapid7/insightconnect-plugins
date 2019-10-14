@@ -1,0 +1,69 @@
+plugin_spec_version: v2
+name: kintone
+title: Kintone
+description: Custom workflows and data management for businesses and non-profits in one place
+version: 1.0.1
+vendor: rapid7
+support: community
+status: []
+tags:
+- kintone
+- data
+- workflow
+- reporting
+
+connection: 
+  api_key:
+    title: API Key
+    description: API key
+    type: credential_secret_key
+    required: true
+  verify_ssl:
+    title: Verify SSL
+    description: Verify SSL
+    type: boolean
+    default: true
+    required: true
+
+actions:
+  get_record_by_id:
+    title: Get Record by ID
+    description: Get Record by ID
+    input:
+      app_id:
+        title: Application ID
+        description: Application ID
+        type: string
+        required: true
+      record_id:
+        title: Record ID
+        description: Record ID
+        type: string
+        required: true
+    output:
+      record:
+        title: Record
+        description: Record
+        type: object
+        required: true
+
+  write_record:
+    title: Write Record
+    description: Write a record
+    input:
+      app_id:
+        title: Application ID
+        description: Application ID
+        type: string
+        required: true
+      record_body:
+        title: Record Body
+        description: Record body as JSON
+        type: object
+        required: true
+    output:
+      add_record_response:
+        title: Add Record Response
+        description: Add record response
+        type: object
+        required: true

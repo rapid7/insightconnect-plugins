@@ -1,0 +1,19 @@
+{
+    "body": {
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "flatten_attachments": false,
+            "folder_name": "",
+            "interval": 15,
+            "mailbox_id": "jschipp@komanddev.onmicrosoft.com",
+            "subject_query": ""
+        },
+        "meta": {},
+        "trigger": "email_received"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

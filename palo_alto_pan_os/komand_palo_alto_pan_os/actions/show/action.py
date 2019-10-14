@@ -1,5 +1,6 @@
 import komand
 from .schema import ShowInput, ShowOutput
+from komand.exceptions import PluginException
 # Custom imports below
 
 
@@ -14,10 +15,11 @@ class Show(komand.Action):
 
     def run(self, params={}):
         xpath = params.get("xpath", "")
+
+        output = self.connection.request.show_(xpath=xpath)
         try:
-            output = self.connection.request.show_(xpath=xpath)
             return {"response": output['response']}
         except KeyError:
-            self.logger.error('The output did not contain a proper response.')
-            self.logger.error(output)
-            raise
+            raise PluginException(cause='The output did not contain expected keys.',
+                                  assistance='Contact support for help.',
+                                  data=output)

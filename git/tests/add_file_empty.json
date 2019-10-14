@@ -8,10 +8,10 @@
     },
     "connection": {
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "password",
+        "username": "komand-test"
       },
-      "url": ""
+      "url": "https://gitlab.com/komand-test/test-repository.git"
     }
   },
   "type": "action_start",

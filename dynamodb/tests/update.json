@@ -1,0 +1,27 @@
+{
+	"body": {
+		"connection": {
+                   "access_key": {
+                     "secretKey": ""
+                   },
+		   "region": "us-east-1",
+                   "secret_key": {
+                     "secretKey": ""
+                   }
+		},
+		"meta": {},
+		"action": "update",
+		"input": {
+			"key": {
+                "uname":"Jen"
+            },
+            "data": {
+                "ordinal": 4000
+            },
+			"index": "",
+			"table": "komand_test_2"
+		}
+	},
+	"version": "v1",
+	"type": "action_start"
+}

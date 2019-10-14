@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": null,
+    "action": "disable",
+    "connection": {
+      "token": "xoxp-118175789221-117409445537-119574253442-64a923a3e4f0000abef4b40447b2936b"
+    },
+    "dispatcher": {},
+    "input": {
+      "email": "urafatty0@yahoo.com"
+    }
+  }
+}

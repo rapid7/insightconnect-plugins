@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "send_email",
+        "input": {
+            "attachment": {
+                "content": "VGhpcyBpcyBzb21lIHRleHQ=",
+                "filename": "text.txt"
+            },
+            "bcc": [],
+            "body": "<H1>HI</H1>",
+            "cc": [],
+            "email_from": "jschipp@komanddev.onmicrosoft.com",
+            "email_to": "joey_mcadams@rapid7.com",
+            "is_html": true,
+            "subject": "Sent from KOMAND"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

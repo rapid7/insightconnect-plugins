@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: mxtoolbox_dns
 title: MxToolBox DNS
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Interface with MxToolBox DNS lookup API
 version: 1.0.0
 tags:

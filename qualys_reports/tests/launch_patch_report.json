@@ -1,0 +1,24 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "launch_patch_report",
+    "trigger": "",
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "hostname": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "asset_group_ids": "",
+      "ips": "",
+      "output_format": "",
+      "template_id": 0,
+      "title": ""
+    }
+  }
+}

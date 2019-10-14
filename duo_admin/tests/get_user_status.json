@@ -2,10 +2,10 @@
   "body": {
     "action": "get_user_status",
     "input": {
-      "user": ""
+      "user": "jschipp"
     },
     "connection": {
-        "hostname": "",
+        "hostname": "api-3a04c4c6.duosecurity.com",
         "integration_key": {
           "secretKey": ""
         },

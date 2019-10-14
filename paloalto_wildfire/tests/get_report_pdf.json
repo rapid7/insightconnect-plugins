@@ -1,20 +1,12 @@
 {
-  "body": {
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "host": "wildfire.paloaltonetworks.com",
-      "proxy": {},
-      "verify": true
+    "body": {
+        "action": "get_report",
+        "input": {
+            "format": "pdf",
+            "hash": "2f92703138e8be9666b4f3efa2058e60"
+        },
+        "meta": {}
     },
-    "action": "get_report",
-    "input": {
-      "hash": "2f92703138e8be9666b4f3efa2058e60",
-      "format": "pdf"
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

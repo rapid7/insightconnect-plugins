@@ -1,14 +1,11 @@
 {
-  "body": {
-    "input": {
-      "list": "current_cc_server"
+    "body": {
+        "action": "download_IP_addresses_risk_list",
+        "input": {
+            "list": "current_cc_server"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": ""
-    },
-    "meta": {},
-    "action": "download_IP_addresses_risk_list"
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

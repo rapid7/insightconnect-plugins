@@ -6,7 +6,8 @@ description: Windows Defender Advanced Threat Protection (ATP) is a unified plat
   response
 version: 1.5.0
 vendor: rapid7
-status: ["unsupported"]
+support: rapid7
+status: []
 tags:
 - windows
 - atp

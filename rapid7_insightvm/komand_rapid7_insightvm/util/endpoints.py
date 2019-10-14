@@ -25,7 +25,7 @@ class Asset:
     @staticmethod
     def asset_tags(console_url, asset_id, tag_id=None):
         """
-        Gets assets by site
+        Gets asset tags
         :param console_url: URL to the InsightVM console
         :param asset_id: ID of the asset with which to interact
         :param tag_id: ID of the tag with which to interact
@@ -35,6 +35,16 @@ class Asset:
             return f"{console_url}/api/3/assets/{asset_id}/tags/{tag_id}"
         else:
             return f"{console_url}/api/3/assets/{asset_id}/tags"
+
+    @staticmethod
+    def asset_software(console_url, asset_id):
+        """
+        Gets assets by site
+        :param console_url: URL to the InsightVM console
+        :param asset_id: ID of the asset with which to interact
+        :return: pre-populated /api/3/assets/{id}/software
+        """
+        return f"{console_url}/api/3/assets/{asset_id}/software"
 
 
 class AssetGroup:
@@ -367,6 +377,22 @@ class Administration:
 
 
 class Report:
+
+    @staticmethod
+    def create(console_url):
+        return f"{console_url}/api/3/reports"
+
+    @staticmethod
+    def generate(console_url, report_id):
+        return f"{console_url}/api/3/reports/{report_id}/generate"
+
+    @staticmethod
+    def status(console_url, report_id, instance_id):
+        return f"{console_url}/api/3/reports/{report_id}/history/{instance_id}"
+
+    @staticmethod
+    def delete(console_url, report_id):
+        return f"{console_url}/api/3/reports/{report_id}"
 
     @staticmethod
     def download(console_url, report_id, instance_id):

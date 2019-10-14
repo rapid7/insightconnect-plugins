@@ -1,0 +1,13 @@
+{
+   "version": "v1",
+   "type": "action_start",
+   "body": {
+     "meta": {},
+     "action": "string_to_float",
+     "connection": {},
+     "dispatcher": {},
+     "input": {
+       "input": "Not a float"
+     }
+   }
+ }

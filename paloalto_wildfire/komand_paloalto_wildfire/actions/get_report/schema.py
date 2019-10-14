@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query for an XML or PDF report for a particular sample"
+
+
 class Input:
     FORMAT = "format"
     HASH = "hash"
@@ -36,8 +40,8 @@ class GetReportInput(komand.Input):
     }
   },
   "required": [
-    "hash",
-    "format"
+    "format",
+    "hash"
   ]
 }
     """)

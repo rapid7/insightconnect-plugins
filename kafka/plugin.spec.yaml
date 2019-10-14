@@ -1,0 +1,349 @@
+plugin_spec_version: v2
+name: kafka
+title: Kafka
+description: Apache Kafka distributed stream processing system
+version: 1.0.2
+vendor: rapid7
+support: community
+status: []
+tags:
+- kafka
+- messaging
+- data
+types:
+  consumer_fetch:
+    min:
+      title: Min Messages
+      description: The minimum number of message bytes to fetch in a request - the
+        broker will wait until at least this many are available
+      type: integer
+      default: 0
+    default:
+      title: Default Message Bytes
+      description: Default number of message bytes to fetch from the broker in each
+        request
+      type: integer
+      default: 32768
+    max:
+      title: Max Message Bytes
+      description: Maximum number of message bytes to fetch from the broker in a single
+        request. Messages larger than this will not be consumable. Ensure this is
+        at least as large as your largest message. Defaults to 0 (no limit)
+      type: integer
+      default: 0
+  consumer_retry:
+    backoff:
+      title: Backoff
+      description: How long to wait after a failing to read from a partition before
+        trying again (in seconds)
+      type: integer
+      default: 2
+  consumer:
+    retry:
+      title: Consumer Retry
+      type: consumer_retry
+    fetch:
+      title: Fetch
+      description: Configuration for controlling how many bytes are retrieved by any
+        given request
+      type: consumer_fetch
+    max_wait_time:
+      title: Max Wait Time
+      description: The maximum amount of time the broker will wait for the minimum
+        consumer fetch bytes to become available (in milliseconds)
+      type: integer
+      default: 250
+    max_processing_time:
+      title: Max Processing Time
+      description: Maximum amount of time the consumer expects a message takes to
+        process for the user (in milliseconds)
+      type: integer
+      default: 100
+  producer_retry:
+    max:
+      title: Max
+      description: The total number of times to retry sending a message
+      type: integer
+      default: 3
+    backoff:
+      title: Backoff
+      description: How long to wait for the cluster to settle between retries (in
+        milliseconds)
+      type: integer
+      default: 100
+  flush:
+    bytes:
+      title: Bytes
+      description: Best-effort number of bytes needed to trigger a flush
+      type: integer
+    messages:
+      title: Messages
+      description: Best-effort number of messages needed to trigger a flus
+      type: integer
+    frequency:
+      title: Frequency
+      description: Best-effort frequency of flushes
+      type: integer
+    max_messages:
+      title: Max Messages
+      description: Maximum number of messages the producer will send in a single broker
+        request. Defaults to 0 for unlimited
+      type: integer
+      default: 0
+  producer:
+    max_message_bytes:
+      title: Max Message Bytes
+      description: The maximum permitted size of a message
+      type: integer
+    required_acks:
+      title: Required Acks
+      description: The level of acknowledgement reliability needed from the broker
+      type: string
+      enum:
+      - No Response
+      - Wait for Local
+      - Wait for All
+      default: Wait for Local
+    timeout:
+      title: Timeout
+      description: The maximum duration the broker will wait the receipt of the number
+        of RequiredAcks (in seconds)
+      type: integer
+      default: 10
+    compression:
+      title: Compression
+      description: The type of compression to use on messages
+      type: string
+      enum:
+      - None
+      - GZIP
+      - Snappy
+      - LZ4
+      default: None
+    partitioner:
+      description: How to determine to which partition messages will be sent
+      type: string
+      enum:
+      - Hash Partitioner
+      - Round Robin Partitioner
+      - Random Partitioner
+      default: Hash Partitioner
+    flush:
+      title: Flush
+      description: Configuration options control how often messages are batched up
+        and sent to the broker
+      type: flush
+    retry:
+      type: producer_retry
+  metadata_retry:
+    max:
+      title: Max
+      description: The total number of times to retry a metadata request when the
+        cluster is int he middle of a leader election
+      type: integer
+      default: 3
+    backoff:
+      title: Backoff
+      description: How long to wait for leader election to occur before retrying (in
+        milliseconds)
+      type: integer
+      default: 250
+  metadata:
+    retry:
+      title: Metadata Retry
+      type: metadata_retry
+    refresh_frequency:
+      title: Refresh Frequency
+      type: integer
+      description: How frequently to refresh the cluster metadata in the background
+  net:
+    max_open_requests:
+      description: Number of outstanding requests a connection is allowed to have
+        before sending on it blocks
+      default: 5
+      type: integer
+    dial_timeout:
+      title: Dial Timeout
+      description: How long to wait for the initial connection in seconds
+      type: integer
+      default: 30
+    read_timeout:
+      title: Read Timeout
+      description: How long to wait for a response in seconds
+      type: integer
+      default: 30
+    write_timeout:
+      title: Write Timeout
+      description: How long to wait for a transmit in seconds
+      type: integer
+      default: 30
+    keep_alive:
+      title: Keep Alive
+      description: The keep-alive period for an active network connection (in seconds)
+      type: integer
+      default: 0
+  config:
+    net:
+      title: Net
+      description: Network-level properties used by the Broker and shared by the Client/Producer/Consumer
+      type: net
+    metadata:
+      title: Metadata
+      description: Management properties used by the Client and shared by the Producer/Consumer
+      type: metadata
+    producer:
+      title: Producer
+      description: Configuration related to producing messages, used by the Producer
+      type: producer
+    consumer:
+      title: Consumer
+      description: Configuration related to consuming messages, used by the Consumer
+      type: consumer
+connection:
+  broker_address:
+    description: Address of the broker of which to connect (e.g. localhost:9092)
+    title: Broker Address
+    type: string
+    required: true
+  config:
+    title: Config
+    description: Config
+    type: config
+    required: false
+triggers:
+  consume:
+    description: Consumer manages PartitionConsumers which process Kafka messages
+      from brokers
+    input:
+      topic:
+        description: Kafka Topic
+        type: string
+        required: true
+      partition:
+        description: Kafka Partition
+        type: integer
+        required: false
+      offset:
+        description: Kafka Offset
+        type: integer
+        required: true
+        default: 0
+    output:
+      message:
+        type: string
+        title: Message
+        description: Consume message
+        required: true
+actions:
+  get_brokers:
+    description: Retrieves the current set of active brokers as retrieved from cluster
+      metadata
+    output:
+      brokers:
+        title: Brokers
+        description: A list of broker addresses
+        type: '[]string'
+        required: true
+  get_topics:
+    description: Retrieves the set of available topics as retrieved from cluster metadata
+    output:
+      topics:
+        title: Topics
+        description: A list of topics
+        type: '[]string'
+        required: true
+  get_partitions:
+    description: Retrieves the sorted list of all partition IDs for the given topic
+    input:
+      topic:
+        title: Topic
+        description: Topic on which to retrieve partitions
+        type: string
+        required: true
+    output:
+      partitions:
+        title: Partitions
+        description: A list of partition IDs
+        type: '[]integer'
+        required: true
+  get_writeable_partitions:
+    description: Retrieves the sorted list of all writable partition IDs for the given
+      topic, where 'writable' means 'having a valid leader accepting writes'
+    input:
+      topic:
+        title: Topic
+        description: Topic on which to retrieve partitions
+        type: string
+        required: true
+    output:
+      partitions:
+        title: Partitions
+        description: A list of partition IDs
+        type: '[]integer'
+        required: true
+  get_leader:
+    description: Retrieves the broker address that is the leader of the current topic/partition
+    input:
+      topic:
+        title: Topic
+        description: Topic on which to retrieve leader
+        type: string
+        required: true
+      partition:
+        title: Partition
+        description: Partition on which to retrieve leader
+        type: integer
+        required: true
+    output:
+      leader:
+        title: Leader
+        description: Broker address of the leader
+        type: string
+        required: true
+  produce:
+    description: Produce messages for a topic and wait for an acknolwedgement
+    input:
+      topic:
+        title: Topic
+        description: Kafka Topic
+        type: string
+        required: true
+      key:
+        title: Key
+        description: Kafka Key (Required if using Hash Partitioner)
+        type: string
+        required: false
+      message:
+        title: Message
+        description: Kafka Message
+        type: string
+        required: true
+    output:
+      partition:
+        title: Partition
+        description: Kafka Partition
+        type: integer
+        required: true
+      offset:
+        title: Offset
+        description: Kafka Offset
+        type: integer
+        required: false
+  produce_async:
+    description: Produce messages for a topic asynchronously
+    input:
+      topic:
+        title: Topic
+        description: Kafka Topic
+        type: string
+        required: true
+      key:
+        title: Key
+        description: Kafka Key (Required if using Hash Partitioner)
+        type: string
+        required: false
+      message:
+        title: Message
+        description: Kafka Message
+        type: string
+        required: true

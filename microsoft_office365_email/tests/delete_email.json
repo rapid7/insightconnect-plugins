@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "delete_email",
+        "input": {
+            "email_id": "",
+            "message_id": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

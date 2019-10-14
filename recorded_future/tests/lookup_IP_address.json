@@ -1,14 +1,13 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "connection": {
-      "api_key": ""
+    "body": {
+        "action": "lookup_IP_address",
+        "input": {
+            "IP_address": "8.8.8.8",
+            "comment": "",
+            "fields": []
+        },
+        "meta": {}
     },
-    "input": {
-      "IP_address": "8.8.8.8"
-    },
-    "action": "lookup_IP_address"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

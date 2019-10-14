@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "domain_lookup",
+    "input": {
+      "domain": "komand.com"
+    },
+   "connection": {
+      "url": "https://cymon.io:443",
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

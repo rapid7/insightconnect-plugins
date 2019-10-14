@@ -15,7 +15,7 @@
       "tcp": {
         "timeout": 5
       },
-      "host": "",
+      "host": "asdfasdfasdf.asdfasdfad.com",
       "port": 2003
     },
     "meta": {}

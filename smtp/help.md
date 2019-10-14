@@ -81,6 +81,7 @@ Examples:
 * 2.0.0 - Update to new credential types | Rename "SMTP" plugin title to "SMTP Mailer" | Rename "Send an email" action to "Send Email"
 * 2.0.1 - Fix issue where credentials were required
 * 2.0.2 - Fix issue where Send action doesn't handle empty attachments correctly
+* 2.0.3 - Fix issue with reliability in regards to previous Send action empty attachment fix
 
 ## References
 

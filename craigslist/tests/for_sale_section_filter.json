@@ -1,0 +1,20 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "input": {
+      "section_filter": { "condition": "like new", "max_price": 1000 },
+      "posted_today": false,
+      "site": "bn",
+      "category": "music instr",
+      "zip_code": 61736,
+      "has_image": true,
+      "search_distance": 20,
+      "search_titles": true,
+      "query": ""
+    },
+    "meta": {},
+    "connection": null,
+    "action": "for_sale"
+  }
+}

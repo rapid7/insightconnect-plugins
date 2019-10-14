@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets active configuration"
+
+
 class Input:
     XPATH = "xpath"
     

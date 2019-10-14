@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action is used to return a list of hashes matching a specified risk rule"
+
+
 class Input:
     LIST = "list"
     

@@ -3,7 +3,7 @@
     "action": "get_agent_details",
     "meta": {},
     "input": {
-      "agent_id": "",
+      "agent_id": "ip-10-234-4-117",
       "app_id": "MooseLifeTest-gIglw"
     },
     "connection": {

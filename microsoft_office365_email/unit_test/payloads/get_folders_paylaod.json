@@ -1,0 +1,86 @@
+{
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('jschipp%40komanddev.onmicrosoft.com')/mailFolders",
+    "@odata.nextLink": "https://graph.microsoft.com/v1.0/5c824599-dc8c-4d31-96fb-3b886d4f8f10/users/jschipp@komanddev.onmicrosoft.com/mailFolders?$skip=10",
+    "value": [
+        {
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAD7IBHHAAA=",
+            "displayName": "Alert Enrichment",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCAAAAA==",
+            "childFolderCount": 0,
+            "unreadItemCount": 0,
+            "totalItemCount": 46
+        },
+        {
+            "id": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBUAAAAA==",
+            "displayName": "Archive",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCAAAAA==",
+            "childFolderCount": 0,
+            "unreadItemCount": 0,
+            "totalItemCount": 0
+        },
+        {
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAA=",
+            "displayName": "CLEAResult",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCAAAAA==",
+            "childFolderCount": 0,
+            "unreadItemCount": 105,
+            "totalItemCount": 123
+        },
+        {
+            "id": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBRwAAAA==",
+            "displayName": "Conversation History",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCAAAAA==",
+            "childFolderCount": 1,
+            "unreadItemCount": 0,
+            "totalItemCount": 0
+        },
+        {
+            "id": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCgAAAA==",
+            "displayName": "Deleted Items",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCAAAAA==",
+            "childFolderCount": 7,
+            "unreadItemCount": 168,
+            "totalItemCount": 830
+        },
+        {
+            "id": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBDwAAAA==",
+            "displayName": "Drafts",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCAAAAA==",
+            "childFolderCount": 0,
+            "unreadItemCount": 0,
+            "totalItemCount": 6
+        },
+        {
+            "id": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBDAAAAA==",
+            "displayName": "Inbox",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCAAAAA==",
+            "childFolderCount": 2,
+            "unreadItemCount": 76,
+            "totalItemCount": 225
+        },
+        {
+            "id": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBHQAAAA==",
+            "displayName": "Junk Email",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCAAAAA==",
+            "childFolderCount": 0,
+            "unreadItemCount": 36,
+            "totalItemCount": 36
+        },
+        {
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAAUtfMmAAA=",
+            "displayName": "Mike-Test",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCAAAAA==",
+            "childFolderCount": 0,
+            "unreadItemCount": 2,
+            "totalItemCount": 9
+        },
+        {
+            "id": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCwAAAA==",
+            "displayName": "Outbox",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCAAAAA==",
+            "childFolderCount": 0,
+            "unreadItemCount": 0,
+            "totalItemCount": 0
+        }
+    ]
+}

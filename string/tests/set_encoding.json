@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "set_encoding",
+    "meta": {},
+    "input": {
+      "encoding": "ASCII",
+      "error_handling": "replace",
+      "string": "😈"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

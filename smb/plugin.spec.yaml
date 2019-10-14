@@ -5,7 +5,8 @@ description: Server Message Block (SMB) is used for interacting with files on an
   server
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - smb
 - file transfer

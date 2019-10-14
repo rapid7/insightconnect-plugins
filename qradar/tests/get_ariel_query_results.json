@@ -7,17 +7,17 @@
     },
     "connection": {
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "notpassword",
+        "username": "admin"
       },
       "token_credentials": {
-        "domain": "",
+        "domain": "https://qradar-7-2-8.vuln.lax.rapid7.com",
         "token": ""
       }
       "api_key": {
         "secretKey": ""
       },
-      "url": ""
+      "url": "https://qradar-7-2-7.vuln.lax.rapid7.com"
     }
   },
   "type": "action_start",

@@ -10,7 +10,7 @@
         "password": "",
         "username": ""
       },
-      "url": ""
+      "url": "https://insightvm:3780"
     }
   },
   "type": "action_start",

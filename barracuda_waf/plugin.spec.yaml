@@ -7,7 +7,8 @@ description: Barracuda Web Application Firewall is the ideal solution for organi
   code or even know how an application works to secure their applications
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - barracuda
 - waf

@@ -1,0 +1,58 @@
+plugin_spec_version: v2
+name: microsoft_sql
+title: "Microsoft SQL"
+description: "Microsoft SQL database module"
+version: 1.0.0
+vendor: rapid7
+tags: [ "mssql", "sql" ]
+support: rapid7
+status: []
+
+connection:
+  host:
+    title: Host
+    description: Database hostname
+    type: string
+    required: true
+  port:
+    title: Port
+    description: Database port. Port 1433 will be used if this is left blank
+    type: number
+    required: false
+  db:
+    title: Database Name
+    description: Database name
+    type: string
+    required: true
+  credentials:
+    title: Database Credentials
+    description: Database username and password
+    type: credential_username_password
+    required: true
+
+actions:
+  query:
+    title: Query
+    description: Run an SQL query against the database
+    input:
+      query:
+        title: Query
+        type: string
+        description: Query to run
+        required: true
+      parameters:
+        title: Parameters
+        type: "[]object"
+        description: 'Parameters for query. Parameters should be input as an ordered list of dictionaries e.g. [{"key1": "John Doe"},{"Key2": 23}] The values will be input into the query in order. Parameter values are represented by `?` in the query'
+        required: false
+    output:
+      header:
+        title: Header
+        description: Array of header fields for the columns
+        type: '[]string'
+        required: false
+      results:
+        title: Results
+        description: Result rows, each as an object with header keys
+        type: '[]object'
+        required: false

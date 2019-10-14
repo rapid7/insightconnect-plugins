@@ -1,0 +1,32 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "create_and_send",
+    "trigger": "",
+    "connection": {
+      "connection_cache_key": "",
+      "app_id": "c74afb10-a66e-44e1-bf87-5bc3db4e5b4d",
+      "app_secret": {
+        "secretKey": "fMeBxEYyoLSk+YRcD0FjcyxGkCjqZL1UPm7ZojJQ5Og="
+      },
+      "tenant_id": "5c824599-dc8c-4d31-96fb-3b886d4f8f10"
+    },
+    "dispatcher": {},
+    "input": {
+      "attachment_bytes": "",
+      "attachment_name": "",
+      "attachment_type": "",
+      "bcc_recipients": null,
+      "body": "Hello World!",
+      "body_is_html": false,
+      "cc_recipients": null,
+      "other_attachment_type": "",
+      "save_to_sent_items": false,
+      "subject": "HELLO WORLD",
+      "to_recipients": ["jschipp@komanddev.onmicrosoft.com"],
+      "user_id_principal": "jschipp@komanddev.onmicrosoft.com"
+    }
+  }
+}

@@ -7,8 +7,8 @@
     },
     "connection": {
       "creds": {
-        "password": "",
-        "username": ""
+        "password": "dsfasdasdf",
+        "username": "mrinehart@komand.com"
       },
       "hostname": "https://www.blah.com"
     }

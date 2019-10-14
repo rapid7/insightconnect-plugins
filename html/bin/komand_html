@@ -6,7 +6,7 @@ from komand_html import connection, actions, triggers
 
 Name = 'HTML'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.1.0'
 Description = 'Validate or convert an html document'
 
 
@@ -28,6 +28,8 @@ class ICONHtml(komand.Plugin):
         self.add_action(actions.Markdown())
 
         self.add_action(actions.Pdf())
+
+        self.add_action(actions.Text())
 
         self.add_action(actions.Validate())
 

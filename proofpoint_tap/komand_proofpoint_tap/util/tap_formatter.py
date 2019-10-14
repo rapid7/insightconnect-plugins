@@ -1,4 +1,5 @@
 from email.utils import parseaddr
+import re
 
 
 class TAP:
@@ -13,7 +14,7 @@ class TAP:
                 "attachment_sha256": "",
                 "category": "",
                 "condemnation_time": "",
-                "url":""
+                "url": ""
             },
             "message": {
                 "time_delivered": "",
@@ -36,17 +37,18 @@ class TAP:
 
         def normalize_key(key):
             """Normalize key data in collection"""
-            return key.lower().replace(" ", "_").replace("-", "_")
+            return key.lower().replace(" ", "_").replace("-", "_").replace("=", "")
 
         def normalize_value(value):
             """Normalize value data in collection"""
             if isinstance(value, str):
                 if value == "—":
                     return "-"
-                return value.replace("<", "").replace(">", "").rstrip()
+                return value.replace("<", "").replace(">", "").rstrip().replace("=", "")
 
         def walk_clean(collection):
             """Loops collection and walks clean to see if the key exists"""
+            regex = '''(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])'''
             for item in collection:
                 key = normalize_key(item)
 
@@ -56,7 +58,7 @@ class TAP:
                         for kk, vv in v.items():
                             if key == kk:
                                 # On match, set value
-                                value = collection[collection.index(item)+1]
+                                value = collection[collection.index(item) + 1]
                                 # Handle replyto and from that contains a string of "<name> <email>"
                                 if key in ["header_replyto", "header_from"]:
                                     if "@" in value:
@@ -64,7 +66,8 @@ class TAP:
                                             value = parseaddr(value)[1]
                                             clean_data["message"]["header_replyto"] = value
                                         if key == "header_from":
-                                            value = parseaddr(value)[0]
+                                            value = value.replace('=', '')
+                                            value = re.findall(regex, value)[0]
                                             clean_data["message"]["header_from"] = value
                                     elif len(clean_data[k][kk]) == 0:
                                         value = normalize_value(value)

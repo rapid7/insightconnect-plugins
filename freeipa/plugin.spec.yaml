@@ -5,7 +5,8 @@ description: FreeIPA is an integrated Identity and Authentication solution for L
   networked environments
 version: 2.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - freeipa
 - access control

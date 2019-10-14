@@ -1,0 +1,387 @@
+plugin_spec_version: v2
+name: microsoft_office365_email
+title: Microsoft Office 365 Email
+description: Microsoft Office 365 message actions and triggers
+version: 4.0.1
+vendor: rapid7
+support: rapid7
+status: []
+tags:
+- Microsoft
+- Email
+- Message
+- Office 365
+
+types:
+  header:
+    name:
+      type: string
+      required: false
+    value:
+      type: string
+      required: false
+
+  attachment_file:
+    file_name:
+      type: string
+      required: false
+    content:
+      type: string
+      required: false
+    content_type:
+      type: string
+      required: false
+
+  attachment_email_nested_two:
+    id:
+      type: string
+      title: ID
+      required: false
+    sender:
+      type: string
+      required: false
+    subject:
+      type: string
+      required: false
+    body:
+      type: string
+      required: false
+    categories:
+      type: '[]string'
+      required: false
+    headers:
+      type: '[]header'
+      required: false
+    attached_files:
+      type: '[]attachment_file'
+      required: false
+    attached_emails:
+      type: '[]object'
+      required: false
+    account:
+      type: string
+      required: false
+    recipients:
+      type: "[]string"
+      required: false
+    has_attachments:
+      type: boolean
+      required: false
+
+  attachment_email_nested:
+    id:
+      type: string
+      title: ID
+      required: false
+    sender:
+      type: string
+      required: false
+    subject:
+      type: string
+      required: false
+    body:
+      type: string
+      required: false
+    categories:
+      type: '[]string'
+      required: false
+    headers:
+      type: '[]header'
+      required: false
+    attached_files:
+      type: '[]attachment_file'
+      required: false
+    attached_emails:
+      type: '[]attachment_email_nested_two'
+      required: false
+    account:
+      type: string
+      required: false
+    recipients:
+      type: "[]string"
+      required: false
+    has_attachments:
+      type: boolean
+      required: false
+
+  attachment_email:
+    id:
+      type: string
+      title: ID
+      required: false
+    sender:
+      type: string
+      required: false
+    subject:
+      type: string
+      required: false
+    body:
+      type: string
+      required: false
+    categories:
+      type: '[]string'
+      required: false
+    headers:
+      type: '[]header'
+      required: false
+    attached_files:
+      type: '[]attachment_file'
+      required: false
+    attached_emails:
+      type: '[]attachment_email_nested'
+      required: false
+    account:
+      type: string
+      required: false
+    recipients:
+      type: "[]string"
+      required: false
+    has_attachments:
+      type: boolean
+      required: false
+
+  icon_email:
+    id:
+      type: string
+      title: ID
+      required: false
+    account:
+      type: string
+      title: Account
+      required: false
+      description: Account for which the email was found on
+    is_read:
+      type: boolean
+      title: Is Read
+      required: false
+      description: Whether or not the email has been read
+    sender:
+      type: string
+      required: false
+    subject:
+      type: string
+      required: false
+    body:
+      type: string
+      required: false
+    attached_files:
+      type: '[]attachment_file'
+      required: false
+    attached_emails:
+      type: '[]attachment_email'
+      required: false
+    flattened_attached_emails:
+      type: '[]attachment_email'
+      required: false
+    flattened_attached_files:
+      type: '[]attachment_file'
+      required: false
+    categories:
+      type: '[]string'
+      required: false
+    headers:
+      type: '[]header'
+      required: false
+    recipients:
+      type: "[]string"
+      required: false
+    has_attachments:
+      type: boolean
+      required: false
+
+connection:
+  tenant_id:
+    title: Tenant ID
+    description: The ID of the directory that identifies the tenant
+    type: string
+    required: true
+  app_id:
+    title: App ID
+    description: The ID of the registered app that obtained the refresh token
+    type: string
+    required: true
+  app_secret:
+    title: App Secret
+    description: The secret of the registered app that obtained the refresh token
+    type: credential_secret_key
+    required: true
+
+triggers:
+  email_received:
+    title: Email Received
+    description: Poll mailbox for new email
+    input:
+      mailbox_id:
+        title: Mailbox ID
+        type: string
+        description: The mailbox to monitor for incoming email e.g. bob@hotmail.com
+        required: true
+      folder_name:
+        title: Folder Name
+        type: string
+        description: Common values are Calendar, Trash, Drafts, Inbox, Outbox, Sent,
+          Junk, Tasks, Contacts. You can also use a completely custom value, for example
+          python_mailing_list. Mailbox names are case-sensitive
+        required: false
+      interval:
+        type: integer
+        description: "How often to poll for new email in seconds"
+        default: 15
+        required: false
+      subject_query:
+        title: Subject Query
+        type: string
+        description: Query to search for in subject (regex capable). Only these email will activate this trigger
+        default: ''
+        required: false
+      flatten_attachments:
+        title: Flatten Attachments
+        type: boolean
+        description: Will return all attachments as flat lists instead of nested emails
+        required: true
+        default: false
+    output:
+      icon_email:
+        title: Email
+        type: icon_email
+        required: false
+        description: Email
+actions:
+  get_email_from_user:
+    title: Get Email from User
+    description: Get a list of emails from a user's mailbox matching search terms
+    input:
+      mailbox_id:
+        title: Mailbox ID
+        type: string
+        description: Target user to retrieve email from e.g. bill.gates@hotmail.com
+        required: true
+      max_number_to_return:
+        title: Max Number to Return
+        type: integer
+        default: 250
+        description: Maximum number of emails to return. Max limit is 250 (default)
+        required: false
+      from_contains:
+        title: From
+        type: string
+        description: From address contains this (can be full e-mail address or just a domain) e.g. test@aol.com or aol.com
+        required: false
+      subject_contains:
+        title: Subject
+        type: string
+        description: Subject contains this word or phrase
+        required: false
+      body_contains:
+        title: Body
+        type: string
+        description: Body contains this word or phrase
+        required: false
+    output:
+      email_list:
+        title: Email List
+        type: '[]icon_email'
+        description: List of emails
+        required: false
+  delete_email:
+    title: Delete Email
+    description: Delete an email by ID
+    input:
+      email_id:
+        title: Email ID
+        type: string
+        description: ID of email to delete
+        required: true
+      mailbox_id:
+        title: Mailbox ID
+        type: string
+        description: User mailbox ID to delete from e.g. bobby.tables@hotmail.com
+        required: true
+    output:
+      success:
+        title: Success
+        type: boolean
+        description: Was delete successful
+        required: true
+  move_email:
+    title: Move Email
+    description: Move an email to a destination folder
+    input:
+      mailbox_id:
+        title: Mailbox ID
+        description: Mailbox ID e.g. test@rapid7.com
+        type: string
+        required: true
+      email_id:
+        title: Email ID
+        description: The email ID to retrieve, e.g. ASDFXJALNASDFASDFweraswrreASDAFDASDF=
+        type: string
+        required: true
+      folder_name:
+        title: Folder Name
+        description: The destination folder name, e.g. Inbox
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        type: boolean
+        description: Was move successful
+        required: false
+  send_email:
+    title: Send Email
+    description: Send an email
+    input:
+      email_from:
+        type: string
+        title: Email Sender
+        description: Email address this email will be sent from
+        required: true
+        order: 1
+      email_to:
+        type: string
+        title: Email To
+        description: Email address of recipients
+        required: true
+        order: 2
+      subject:
+        title: Subject
+        type: string
+        description: Subject of the email
+        required: true
+        order: 3
+      body:
+        title: Body
+        type: string
+        description: Body of the email
+        required: true
+        order: 4
+      is_html:
+        title: Is HTML
+        type: boolean
+        description: Is the body of this email HTML
+        required: true
+        order: 5
+      bcc:
+        title: BCC
+        type: '[]string'
+        description: Blind carbon copy recipients
+        order: 6
+        required: false
+      cc:
+        title: CC
+        type: '[]string'
+        description: Carbon copy recipients
+        order: 7
+        required: false
+      attachment:
+        type: file
+        description: Attachment
+        order: 8
+        required: false
+    output:
+      success:
+        title: Success
+        type: boolean
+        description: Success
+        required: true

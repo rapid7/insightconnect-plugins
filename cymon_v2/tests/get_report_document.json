@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_report_document",
+    "input": {
+      "feed_id": "AVsGZTOOVjrVcoBZyoiQ",
+      "report_id": "953ed52afc089cdceb7036d463889829eff582fd17e63736a58871246ebfead9"
+    },
+    "connection": {
+      "api_credentials": {
+        "username": "komand_test",
+        "password": "komand"
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

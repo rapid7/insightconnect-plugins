@@ -1,0 +1,14 @@
+{
+    "version": "v1",
+    "type": "trigger_start",
+    "body": {
+      "meta": {},
+      "trigger": "periodic",
+      "connection": {},
+      "dispatcher": {},
+      "input": {
+        "message": "",
+        "period": 0.2
+      }
+    }
+  }

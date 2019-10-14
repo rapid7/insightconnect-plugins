@@ -5,7 +5,8 @@ description: Uses the Google Directory Admin API to manage mobile and Chrome OS 
   groups, group aliases, members, organization units, users, and user aliases
 version: 2.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - google
 - admin

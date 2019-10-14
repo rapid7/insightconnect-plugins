@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a site by ID"
+
+
 class Input:
     ID = "id"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets assets for a site"
+
+
 class Input:
     SITE_ID = "site_id"
     

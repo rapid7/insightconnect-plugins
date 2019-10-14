@@ -1,0 +1,15 @@
+{
+    "body": {
+        "action": "insert",
+        "input": {
+            "event": "blah",
+            "host": "blah.com",
+            "index": "blah",
+            "source": "some_blah",
+            "sourcetype": "manual"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

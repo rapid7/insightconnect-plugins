@@ -1,0 +1,25 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "launch_compliance_report",
+    "trigger": "",
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "hostname": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "asset_group_ids": "",
+      "ips": "",
+      "output_format": "",
+      "report_refs": "",
+      "template_id": 0,
+      "title": ""
+    }
+  }
+}

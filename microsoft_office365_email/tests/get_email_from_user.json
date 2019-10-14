@@ -1,0 +1,15 @@
+{
+    "body": {
+        "action": "get_email_from_user",
+        "input": {
+            "body_contains": "",
+            "from_contains": "",
+            "mailbox_id": "",
+            "max_number_to_return": 250,
+            "subject_contains": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

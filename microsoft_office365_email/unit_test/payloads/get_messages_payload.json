@@ -1,0 +1,590 @@
+{
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('jschipp%40komanddev.onmicrosoft.com')/messages",
+    "@odata.nextLink": "https://graph.microsoft.com/v1.0/5c824599-dc8c-4d31-96fb-3b886d4f8f10/users/jschipp@komanddev.onmicrosoft.com/messages?$orderby=receivedDateTime+DESC&$skip=12",
+    "value": [
+        {
+            "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnj2\"",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ-dDTAAE0dcO0AAA=",
+            "createdDateTime": "2019-08-05T14:59:32Z",
+            "lastModifiedDateTime": "2019-08-05T14:59:33Z",
+            "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnj2",
+            "categories": [],
+            "receivedDateTime": "2019-08-05T14:59:32Z",
+            "sentDateTime": "2019-08-05T14:59:28Z",
+            "hasAttachments": true,
+            "internetMessageId": "<BN6PR06MB31052EF5448FDA4EFC226164E1DA0@BN6PR06MB3105.namprd06.prod.outlook.com>",
+            "subject": "[Phish Alert CLEAResult] VN 4564 For hayley.burns@clearesult.com Reference 8/5/2019 10:17:16 AM",
+            "bodyPreview": "New Voice Record        Play Record 🔊\r\nFrom:   Local Wireless User\r\nNumber: (00) 65*-8**-4**\r\nDuration:       00:25(secs)\r\nSize:   12.0(byte)",
+            "importance": "normal",
+            "parentFolderId": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAA=",
+            "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQANvoCRX4CsJDplHDo6JeaNU=",
+            "isDeliveryReceiptRequested": null,
+            "isReadReceiptRequested": false,
+            "isRead": false,
+            "isDraft": false,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ%2FdDTAAE0dcO0AAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "inferenceClassification": "focused",
+            "body": {
+                "contentType": "html",
+                "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n<p>\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:middle; margin:0px\">\r\n<strong>New Voice Record</strong></td>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n<a href=\"https://onedrive.live.com/survey?resid=2939A315D73A48DF!112&amp;authkey=!ACivfD0c1SiUGvg\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"border-top:rgb(0,120,212) 1px solid; border-right:rgb(0,120,212) 1px solid; border-bottom:rgb(0,120,212) 1px solid; color:rgb(0,120,212); padding-bottom:10px; padding-top:10px; padding-left:10px; border-left:rgb(0,120,212) 1px solid; padding-right:10px; border-radius:3px; text-decoration-line:none\">Play\r\n Record 🔊</a></td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"3\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; padding-bottom:15px; text-align:right; margin:0px\">\r\n</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nFrom:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\nLocal Wireless User</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nNumber:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n(00) 65*-8**-4**</td>\r\n</tr>\r\n<tr>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nDuration:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n00:25<sub style=\"font-size:8px\">(secs)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nSize:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:bottom; text-align:right; margin:0px\">\r\n12.0<sub style=\"font-size:8px\">(byte)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-size:15px; font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; white-space:normal; word-spacing:0px; text-transform:none; font-weight:400; color:rgb(33,33,33); font-style:normal; orphans:2; widows:2; margin:0px; letter-spacing:normal; background-color:rgb(255,255,255); text-indent:0px; font-variant-ligatures:normal; font-variant-caps:normal; text-decoration-style:initial; text-decoration-color:initial\">\r\n</td>\r\n</tr>\r\n</tbody>\r\n<p></p>\r\n</table>\r\n</p>\r\n</body>\r\n</html>\r\n"
+            },
+            "sender": {
+                "emailAddress": {
+                    "name": "Hayley Burns",
+                    "address": "hayley.burns@clearesult.com"
+                }
+            },
+            "from": {
+                "emailAddress": {
+                    "name": "Hayley Burns",
+                    "address": "hayley.burns@clearesult.com"
+                }
+            },
+            "toRecipients": [
+                {
+                    "emailAddress": {
+                        "name": "#MB Abuse",
+                        "address": "abuse@clearesult.com"
+                    }
+                },
+                {
+                    "emailAddress": {
+                        "name": "Jon Schipp",
+                        "address": "jschipp@komanddev.onmicrosoft.com"
+                    }
+                }
+            ],
+            "ccRecipients": [],
+            "bccRecipients": [],
+            "replyTo": [],
+            "flag": {
+                "flagStatus": "notFlagged"
+            }
+        },
+        {
+            "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnjj\"",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAAAAAEMAAC8UQDN7ObVSLWQuxHJ-dDTAAE0dZaGAAA=",
+            "createdDateTime": "2019-08-05T14:57:40Z",
+            "lastModifiedDateTime": "2019-08-05T14:57:42Z",
+            "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnjj",
+            "categories": [],
+            "receivedDateTime": "2019-08-05T14:57:40Z",
+            "sentDateTime": "2019-08-05T14:57:37Z",
+            "hasAttachments": false,
+            "internetMessageId": "<d46b37225d7d4cadab1ea18db3b701a3-JVKUGUBNKBZG6ZBNIJHDE7CPGM3DKTLFONZWCZ3FINSW45DFOJ6E2ZLTONQWOZKDMVXHIZLSIRUWOZLTOR6FG3LUOA======@microsoft.com>",
+            "subject": "Weekly digest: Office 365 changes",
+            "bodyPreview": "Here is a summary of your messages from last week\r\n\r\nOrganization: KOMAND\r\nIs this digest useful to you?   Give us feedback\r\nPlease sign into your admin account to use any of the links below\r\nAug 01          New Feature: Outlook on the web - Filters in ",
+            "importance": "normal",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBDAAAAA==",
+            "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQAM3WIy-eU6JPiaTA8hMiNGI=",
+            "isDeliveryReceiptRequested": null,
+            "isReadReceiptRequested": false,
+            "isRead": false,
+            "isDraft": false,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAAAAAEMAAC8UQDN7ObVSLWQuxHJ%2FdDTAAE0dZaGAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "inferenceClassification": "focused",
+            "body": {
+                "contentType": "html",
+                "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=utf-8\">\r\n<meta name=\"ROBOTS\" content=\"NOINDEX, NOFOLLOW\">\r\n<style>\r\n<!--\r\na\r\n\t{text-decoration:none}\r\na:hover\r\n\t{text-decoration:underline}\r\n.afooter\r\n\t{color:#fff!important}\r\n-->\r\n</style>\r\n</head>\r\n<body>\r\n<table id=\"top\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\r\n<tbody>\r\n<tr bgcolor=\"#F9F9F9\" height=\"60\">\r\n<td width=\"5%\"></td>\r\n<td width=\"45%\" align=\"left\" cellpadding=\"20\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_office365_large_corrected.png\">\r\n</td>\r\n<td width=\"45%\" align=\"right\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_MSFT_rgb_corrected.png\">\r\n</td>\r\n<td width=\"5%\"></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\r\n<tbody>\r\n<tr>\r\n<td><br>\r\n<h1 style=\"text-align:center; color:#d83b01; font-size:120%; font-family:Segoe UI Light\">\r\nHere is a summary of your messages from last week</h1>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Segoe UI Light; font-size:100%\"><br>\r\n<span style=\"font-family:Segoe UI semibold; font-size:100%\">Organization:</span> KOMAND\r\n</td>\r\n</tr>\r\n<tr>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\r\n<tbody>\r\n<tr height=\"30\">\r\n</tr>\r\n<tr height=\"40\">\r\n<td width=\"5%\" bgcolor=\"#CCE3F5\"></td>\r\n<td align=\"left\" bgcolor=\"#CCE3F5\" style=\"font-family:Segoe UI Light\">Is this digest useful to you? &nbsp;\r\n<a href=\"https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR-rMMzjkh-5MjuvzignA2eJUQURBR1k1MkRBUEY5MFRBSDNBWldWQlM4NC4u\" style=\"font-family:Segoe UI Light; color:#0078d7\">\r\nGive us feedback</a> </td>\r\n</tr>\r\n<tr height=\"10\">\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\r\n<tbody>\r\n<tr height=\"10\">\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\r\n<tbody>\r\n<tr height=\"50\">\r\n<td align=\"left\" cellpadding=\"20\" style=\"font-size:110%; font-family:Segoe UI\">Please sign into your\r\n<u>admin</u> account to use any of the links below </td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Aug 01</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_Exchange.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">New Feature: Outlook on the web - Filters in room booking</span><br>\r\n<span>Ability to filter rooms by features is a new capability in Outlook on the web. We'll begin rolling this feature out soon.This message is associated with Microsoft 365 Roadmap ID 53084.This change does not apply to Office 365 subscriptions in GCC.</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC187066\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC187066&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC187066\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC187066\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Aug 01</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_SharePoint.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">Updated - New feature: SharePoint Online news and page authors will now receive emails with comments, replies and likes</span><br>\r\n<span>Updated August 1, 2019: We have adjusted the role out schedule for this feature to ensure an optimal experience. We apologize for any inconvenience. We're adding new SharePoint Online emails to keep you informed about likes and comments on pages/news\r\n posts. We'll begin rolling this feature out soon. This message is associated with Microsoft 365 Roadmap ID: 49603.</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC178278\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC178278&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC178278\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC178278\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Jul 31</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_Exchange.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">New Feature: Outlook on the web - new cmdlet to create room features</span><br>\r\n<span>Outlook on the web has a new cmdlet named Set-Place which will allow you to assign different properties to rooms. We'll begin rolling this feature out soon.This message is associated with Microsoft 365 Roadmap ID 52546This roll out is excluded from Office\r\n 365 subscriptions in GCC.</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC186941\" style=\"float:right\"> More ...</a></span><br>\r\n<span style=\"color:#969696\">MC186941&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC186941\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC186941\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Jul 31</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_Exchange.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">New Feature: Outlook on the web - recurring series room availability</span><br>\r\n<span>Outlook on the web - recurring series room availability is a new Office 365 feature. We'll begin rolling this feature out soon.This message is associated with Office 365 Roadmap ID 54013.This update does not apply to Office 365 subscriptions in GCC.</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC186955\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC186955&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC186955\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC186955\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Jul 31</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_Admin.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">New Feature: Service health dashboard - Report an Incident</span><br>\r\n<span><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_actionrequired.png\"><b>&nbsp; Major Update:\r\n</b>General Availability rollout started</span><br>\r\n<span>Report an Incident is a new Office 365 feature. We'll begin rolling this feature out soon.This message is associated with Microsoft 365 Roadmap ID 24153This feature is not available to Office 365 subscriptions in GCC.</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC186831\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC186831&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC186831\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC186831\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Jul 30</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_SharePoint.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">Updated - New Feature: SharePoint News and Page Recommendations</span><br>\r\n<span>Updated July 30, 2019 - We have adjusted the roll out schedule of this feature to ensure an optimal experience. We apologize for any inconvenience. SharePoint News and Page Recommendations is a new Office 365 feature. We'll begin rolling this feature\r\n out soon.This message is associated with Microsoft 365 Roadmap ID 52604This change does not apply to Office 365 subscriptions in GCC.</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC183456\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC183456&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC183456\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC183456\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Jul 30</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_SharePoint.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">New Feature: SharePoint Site footer for Communication sites</span><br>\r\n<span>Site footer is a new SharePoint feature. We'll begin rolling this feature out soon.This message is associated with Microsoft 365 Roadmap ID 33138</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC186030\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC186030&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC186030\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC186030\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Jul 30</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_SharePoint.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">New Feature: New and updated web parts available for modern page authoring</span><br>\r\n<span>New and updated web parts available for modern page authoring are a set of Office 365 features. We'll begin rolling this feature out soon.This message is associated with Microsoft 365 Roadmap ID 53229, 53228, 53221, 53222</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC186832\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC186832&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC186832\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC186832\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Jul 30</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_Admin.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">Updated Feature: Accuracy improvements for Microsoft 365 Usage Analytics</span><br>\r\n<span>We are making changes to improve the accuracy of reporting within Microsoft 365 Usage Analytics. We'll begin rolling this feature out soon.</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC186829\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC186829&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC186829\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC186829\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Jul 30</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_Skype_for_Business.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">Skype for Business Online is retiring</span><br>\r\n<span><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_actionrequired.png\"><b>&nbsp; Major Update:\r\n</b>General Availability rollout started</span><br>\r\n<span>As Teams has become the core communications client for Office 365, we are announcing that Skype for Business Online will retire on July 31, 2021.Note: Neither Skype consumer nor Skype for Business Server will be affected by the retirement of the Skype\r\n for Business Online service.Current Skype for Business Online customers will experience no change in the service up to the retirement date.To align with this schedule, support for the integration of third-party party Audio Conferencing Providers...</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC186815\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC186815&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC186815\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC186815\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Jul 30</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_Exchange.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">Updated Feature: Outlook on the web - New 3rd party storage providers</span><br>\r\n<span><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_actionrequired.png\"><b>&nbsp; Major Update:\r\n</b>General Availability rollout started</span><br>\r\n<span><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_actionrequired.png\">&nbsp; Act By: Aug 30</span><br>\r\n<span>We’re updating how 3rd party storage providers work in Outlook on the web. To offer an enhanced experience and easier management we are retiring the ThirdPartyFileProvidedrsEnabled and OneDriveAttachmentsEnabled parameters and replacing them with the\r\n new AdditionalStorageProvidersAvailable parameter.This message is associated with Office 365 Roadmap ID 52597.This feature is not available for Office 365 subscriptions in GCC.</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC186732\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC186732&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC186732\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC186732\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Jul 29</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_Office365.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">New Feature: Save for later on Files</span><br>\r\n<span>Save for later on Files is a new Office 365 feature. We'll begin rolling this feature out soon.This enhancement is related to Microsoft 365 Roadmap ID 49095.</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC186561\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC186561&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC186561\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC186561\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-size:100%; font-family:Segoe UI light\">\r\n<tbody>\r\n<tr>\r\n<td width=\"5%\" valign=\"top\">Jul 29</td>\r\n<td width=\"3%\" valign=\"top\" style=\"padding:5px\"><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_OneDrive.gif\"></td>\r\n<td><span style=\"color:#0078d7; font-family:Segoe UI semibold; font-size:100%\">Updated - New Feature: Full-fidelity shared libraries in OneDrive</span><br>\r\n<span>Updated July 29, 2019: We have had to delay our roll out of this feature to ensure an optimal experience. We will now be rolling this out at the end of August. We apologize for any inconvenience. Full-fidelity shared libraries in OneDrive for Business\r\n is a new Office 365 feature. We'll begin rolling this feature out soon.This message is associated with Microsoft 365 Roadmap ID: 49093.</span><span style=\"float:right; color:#0078d7\"><a href=\"https://admin.microsoft.com/AdminPortal/home?switchtomodern=true#/MessageCenter?id=MC177594\" style=\"float:right\">\r\n More ...</a></span><br>\r\n<span style=\"color:#969696\">MC177594&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=5MC177594\">Like</a>&nbsp;|&nbsp;<a href=\"https://admin.microsoft.com/adminportal/home#/MessageCenter?rating=1MC177594\">Dislike<br>\r\n</a><br>\r\n</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"110%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-family:Segoe UI semibold; font-size:90%; color:#d83b01\">\r\n<tbody>\r\n<tr height=\"5\">\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://admin.microsoft.com/adminportal/home?switchtomodern=true#/MessageCenter\" style=\"color:#d83b01\">See all my messages on Office 365 message center &nbsp;\r\n<img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/button_go.png\" style=\"vertical-align:middle\"></a>\r\n</td>\r\n</tr>\r\n<tr height=\"25\">\r\n</tr>\r\n<tr>\r\n<td style=\"color:#737373\">Need help translating these messages? <a href=\"https://support.office.com/en-us/article/Turn-on-language-translation-for-Message-center-posts-9f7c2ff2-af65-4557-8840-0b84ce96d9bc?ui=en-US&amp;rs=en-US&amp;ad=US\" style=\"color:#0078d7\">\r\nClick Here</a> </td>\r\n</tr>\r\n<tr height=\"25\">\r\n</tr>\r\n<tr>\r\n<td valign=\"middle\" style=\"font-family:Segoe UI Light; font-size:100%; color:#212121\">\r\nThanks, <br>\r\nThe Microsoft Office 365 team </td>\r\n</tr>\r\n<tr height=\"25\">\r\n</tr>\r\n<tr>\r\n<td><img src=\"http://image.email2.office.com/lib/fe81137272620d7a7d/m/1/logo_MSFT_rgb_wht.png\">\r\n</td>\r\n</tr>\r\n<tr height=\"20\">\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\r\n<tbody>\r\n<tr style=\"font-family:Segoe UI light; font-size:90%; color:#737373\">\r\n<td>This admin digest email may not include all Message Center announcements from the past week. It is personalized for your organization and reflects your individual preferences.\r\n<br>\r\n<br>\r\nTo customize what's included in this email, who gets it, or to unsubscribe, <a href=\"https://admin.microsoft.com/adminportal/home?ref=MessageCenter?showPref=1\" title=\"set email preferences\" style=\"color:#0078d7\">\r\nset your Message center preferences.</a> If you are receiving this email because your Admin added you as a recipient, please contact your Admin to unsubscribe.\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" style=\"font-family:Segoe UI light; font-size:90%\">\r\n<tbody>\r\n<tr height=\"25\">\r\n</tr>\r\n<tr>\r\n<td><i>Microsoft respects your privacy. To learn more, please read our <a href=\"http://www.microsoft.com/privacystatement/en-us/core/default.aspx\" title=\"Privacy\" style=\"color:#0072C6; text-decoration:underline\">\r\nPrivacy Statement.</a></i></td>\r\n</tr>\r\n<tr height=\"20\">\r\n</tr>\r\n<tr>\r\n<td><i>Microsoft Corporation<br>\r\nOne Microsoft Way<br>\r\nRedmond, WA, USA 98052</i></td>\r\n</tr>\r\n<tr>\r\n<td></td>\r\n</tr>\r\n<tr>\r\n<td></td>\r\n</tr>\r\n<tr height=\"20\">\r\n</tr>\r\n<tr style=\"font-size:80%\">\r\n<td><a href=\"https://admin.microsoft.com/adminportal/home?ref=MessageCenter?showPref=true\" title=\"edit email settings\" style=\"color:#737373; text-decoration:underline\">Unsubscribe</a>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<img src=\"https://mucp.api.account.microsoft.com/m/v2/v?d=AIAADLQX7Z5N4BRQWZNZ77F5OIC2POV7UEXOYB46WTRBD7GKBHH5YA54EGCP2IRH2VCSNVO7LIGCOOBVOWCLSLYTGV5AUQTS4OBUKTWJVDUBSNPUTQID7AMXGKNHKG6BZFA2PYLMLIDPCAHGCATCQS6MIO7GPEY&amp;i=AIAADDXWTDXFGQC32LPMTOMJBOMDHKIG2PF52C63UWH26HA6FOCI23LCO3YPUDP2NKPQULYFXCINL5REWU32DLTQQV67TQLCF5G4ZD73D2LPKI5X5OV2N6Z4BIRHWRMC4NVDAYNNATEZUO3TPSK4PSW65P6Q5343BZQO343E3XULXXZCIILVF5FXA7QBCHG64XEVSVZMAXVL57YQK7V6ZHGILX5NA3WETTSM6MGQDMZS6TLCQQJJFRCLQ5SFEUFTBXXZ7YUVVWLNPNFNQ6V6QHI72TGTJXI\" width=\"1\" height=\"1\">\r\n</body>\r\n</html>\r\n"
+            },
+            "sender": {
+                "emailAddress": {
+                    "name": "Office 365 Message Center",
+                    "address": "o365mc@microsoft.com"
+                }
+            },
+            "from": {
+                "emailAddress": {
+                    "name": "Office 365 Message Center",
+                    "address": "o365mc@microsoft.com"
+                }
+            },
+            "toRecipients": [
+                {
+                    "emailAddress": {
+                        "name": "Jon Schipp",
+                        "address": "jschipp@komanddev.onmicrosoft.com"
+                    }
+                }
+            ],
+            "ccRecipients": [],
+            "bccRecipients": [],
+            "replyTo": [],
+            "flag": {
+                "flagStatus": "notFlagged"
+            }
+        },
+        {
+            "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnjc\"",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ-dDTAAE0dcOzAAA=",
+            "createdDateTime": "2019-08-05T14:52:06Z",
+            "lastModifiedDateTime": "2019-08-05T14:52:08Z",
+            "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnjc",
+            "categories": [],
+            "receivedDateTime": "2019-08-05T14:52:06Z",
+            "sentDateTime": "2019-08-05T14:51:58Z",
+            "hasAttachments": true,
+            "internetMessageId": "<SN4PR0601MB37286F3CE6E4520E6174E161F4DA0@SN4PR0601MB3728.namprd06.prod.outlook.com>",
+            "subject": "[Phish Alert CLEAResult] VN 4564 For jarvis.hankins@clearesult.com Reference 8/5/2019 10:16:50 AM",
+            "bodyPreview": "New Voice Record        Play Record 🔊\r\nFrom:   Local Wireless User\r\nNumber: (00) 65*-8**-4**\r\nDuration:       00:25(secs)\r\nSize:   12.0(byte)",
+            "importance": "normal",
+            "parentFolderId": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAA=",
+            "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQADWlTbXQanRHuUH-GANQsJA=",
+            "isDeliveryReceiptRequested": null,
+            "isReadReceiptRequested": false,
+            "isRead": false,
+            "isDraft": false,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ%2FdDTAAE0dcOzAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "inferenceClassification": "focused",
+            "body": {
+                "contentType": "html",
+                "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n<p>\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:middle; margin:0px\">\r\n<strong>New Voice Record</strong></td>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n<a href=\"https://onedrive.live.com/survey?resid=2939A315D73A48DF!112&amp;authkey=!ACivfD0c1SiUGvg\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"border-top:rgb(0,120,212) 1px solid; border-right:rgb(0,120,212) 1px solid; border-bottom:rgb(0,120,212) 1px solid; color:rgb(0,120,212); padding-bottom:10px; padding-top:10px; padding-left:10px; border-left:rgb(0,120,212) 1px solid; padding-right:10px; border-radius:3px; text-decoration-line:none\">Play\r\n Record 🔊</a></td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"3\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; padding-bottom:15px; text-align:right; margin:0px\">\r\n</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nFrom:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\nLocal Wireless User</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nNumber:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n(00) 65*-8**-4**</td>\r\n</tr>\r\n<tr>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nDuration:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n00:25<sub style=\"font-size:8px\">(secs)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nSize:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:bottom; text-align:right; margin:0px\">\r\n12.0<sub style=\"font-size:8px\">(byte)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-size:15px; font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; white-space:normal; word-spacing:0px; text-transform:none; font-weight:400; color:rgb(33,33,33); font-style:normal; orphans:2; widows:2; margin:0px; letter-spacing:normal; background-color:rgb(255,255,255); text-indent:0px; font-variant-ligatures:normal; font-variant-caps:normal; text-decoration-style:initial; text-decoration-color:initial\">\r\n</td>\r\n</tr>\r\n</tbody>\r\n<p></p>\r\n</table>\r\n</p>\r\n</body>\r\n</html>\r\n"
+            },
+            "sender": {
+                "emailAddress": {
+                    "name": "Jarvis Hankins",
+                    "address": "jarvis.hankins@clearesult.com"
+                }
+            },
+            "from": {
+                "emailAddress": {
+                    "name": "Jarvis Hankins",
+                    "address": "jarvis.hankins@clearesult.com"
+                }
+            },
+            "toRecipients": [
+                {
+                    "emailAddress": {
+                        "name": "#MB Abuse",
+                        "address": "abuse@clearesult.com"
+                    }
+                },
+                {
+                    "emailAddress": {
+                        "name": "Jon Schipp",
+                        "address": "jschipp@komanddev.onmicrosoft.com"
+                    }
+                }
+            ],
+            "ccRecipients": [],
+            "bccRecipients": [],
+            "replyTo": [],
+            "flag": {
+                "flagStatus": "notFlagged"
+            }
+        },
+        {
+            "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnir\"",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ-dDTAAE0dcOyAAA=",
+            "createdDateTime": "2019-08-05T13:55:38Z",
+            "lastModifiedDateTime": "2019-08-05T13:55:40Z",
+            "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnir",
+            "categories": [],
+            "receivedDateTime": "2019-08-05T13:55:38Z",
+            "sentDateTime": "2019-08-05T13:55:33Z",
+            "hasAttachments": true,
+            "internetMessageId": "<BN6PR06MB24338A0BA23BA4200B61E44397DA0@BN6PR06MB2433.namprd06.prod.outlook.com>",
+            "subject": "[Phish Alert CLEAResult] VN 4564 For jennifer.buckhalter@clearesult.com Reference 8/5/2019 10:18:31 AM",
+            "bodyPreview": "New Voice Record        Play Record 🔊\r\nFrom:   Local Wireless User\r\nNumber: (00) 65*-8**-4**\r\nDuration:       00:25(secs)\r\nSize:   12.0(byte)",
+            "importance": "normal",
+            "parentFolderId": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAA=",
+            "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQAA3OWHMJSHhLiGQ7kc0W_pk=",
+            "isDeliveryReceiptRequested": null,
+            "isReadReceiptRequested": false,
+            "isRead": false,
+            "isDraft": false,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ%2FdDTAAE0dcOyAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "inferenceClassification": "focused",
+            "body": {
+                "contentType": "html",
+                "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n<p>\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:middle; margin:0px\">\r\n<strong>New Voice Record</strong></td>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n<a href=\"https://onedrive.live.com/survey?resid=2939A315D73A48DF!112&amp;authkey=!ACivfD0c1SiUGvg\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"border-top:rgb(0,120,212) 1px solid; border-right:rgb(0,120,212) 1px solid; border-bottom:rgb(0,120,212) 1px solid; color:rgb(0,120,212); padding-bottom:10px; padding-top:10px; padding-left:10px; border-left:rgb(0,120,212) 1px solid; padding-right:10px; border-radius:3px; text-decoration-line:none\">Play\r\n Record 🔊</a></td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"3\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; padding-bottom:15px; text-align:right; margin:0px\">\r\n</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nFrom:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\nLocal Wireless User</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nNumber:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n(00) 65*-8**-4**</td>\r\n</tr>\r\n<tr>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nDuration:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n00:25<sub style=\"font-size:8px\">(secs)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nSize:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:bottom; text-align:right; margin:0px\">\r\n12.0<sub style=\"font-size:8px\">(byte)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-size:15px; font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; white-space:normal; word-spacing:0px; text-transform:none; font-weight:400; color:rgb(33,33,33); font-style:normal; orphans:2; widows:2; margin:0px; letter-spacing:normal; background-color:rgb(255,255,255); text-indent:0px; font-variant-ligatures:normal; font-variant-caps:normal; text-decoration-style:initial; text-decoration-color:initial\">\r\n</td>\r\n</tr>\r\n</tbody>\r\n<p></p>\r\n</table>\r\n</p>\r\n</body>\r\n</html>\r\n"
+            },
+            "sender": {
+                "emailAddress": {
+                    "name": "Jennifer Buckhalter",
+                    "address": "jennifer.buckhalter@clearesult.com"
+                }
+            },
+            "from": {
+                "emailAddress": {
+                    "name": "Jennifer Buckhalter",
+                    "address": "jennifer.buckhalter@clearesult.com"
+                }
+            },
+            "toRecipients": [
+                {
+                    "emailAddress": {
+                        "name": "#MB Abuse",
+                        "address": "abuse@clearesult.com"
+                    }
+                },
+                {
+                    "emailAddress": {
+                        "name": "Jon Schipp",
+                        "address": "jschipp@komanddev.onmicrosoft.com"
+                    }
+                }
+            ],
+            "ccRecipients": [],
+            "bccRecipients": [],
+            "replyTo": [],
+            "flag": {
+                "flagStatus": "notFlagged"
+            }
+        },
+        {
+            "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnij\"",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ-dDTAAE0dcOxAAA=",
+            "createdDateTime": "2019-08-05T13:34:44Z",
+            "lastModifiedDateTime": "2019-08-05T13:34:45Z",
+            "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnij",
+            "categories": [],
+            "receivedDateTime": "2019-08-05T13:34:44Z",
+            "sentDateTime": "2019-08-05T13:34:40Z",
+            "hasAttachments": true,
+            "internetMessageId": "<DM6PR06MB413800ECFBD0BC2D8F74C83F98DA0@DM6PR06MB4138.namprd06.prod.outlook.com>",
+            "subject": "[Phish Alert CLEAResult] VN 4564 For chelsea.warywoski@clearesult.com Reference 8/5/2019 10:18:02 AM",
+            "bodyPreview": "New Voice Record        Play Record 🔊\r\nFrom:   Local Wireless User\r\nNumber: (00) 65*-8**-4**\r\nDuration:       00:25(secs)\r\nSize:   12.0(byte)",
+            "importance": "normal",
+            "parentFolderId": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAA=",
+            "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQAHMm0fAzZDdJrlwGFYb57qk=",
+            "isDeliveryReceiptRequested": null,
+            "isReadReceiptRequested": false,
+            "isRead": false,
+            "isDraft": false,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ%2FdDTAAE0dcOxAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "inferenceClassification": "focused",
+            "body": {
+                "contentType": "html",
+                "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n<p>\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:middle; margin:0px\">\r\n<strong>New Voice Record</strong></td>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n<a href=\"https://onedrive.live.com/survey?resid=2939A315D73A48DF!112&amp;authkey=!ACivfD0c1SiUGvg\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"border-top:rgb(0,120,212) 1px solid; border-right:rgb(0,120,212) 1px solid; border-bottom:rgb(0,120,212) 1px solid; color:rgb(0,120,212); padding-bottom:10px; padding-top:10px; padding-left:10px; border-left:rgb(0,120,212) 1px solid; padding-right:10px; border-radius:3px; text-decoration-line:none\">Play\r\n Record 🔊</a></td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"3\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; padding-bottom:15px; text-align:right; margin:0px\">\r\n</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nFrom:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\nLocal Wireless User</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nNumber:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n(00) 65*-8**-4**</td>\r\n</tr>\r\n<tr>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nDuration:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n00:25<sub style=\"font-size:8px\">(secs)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nSize:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:bottom; text-align:right; margin:0px\">\r\n12.0<sub style=\"font-size:8px\">(byte)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-size:15px; font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; white-space:normal; word-spacing:0px; text-transform:none; font-weight:400; color:rgb(33,33,33); font-style:normal; orphans:2; widows:2; margin:0px; letter-spacing:normal; background-color:rgb(255,255,255); text-indent:0px; font-variant-ligatures:normal; font-variant-caps:normal; text-decoration-style:initial; text-decoration-color:initial\">\r\n</td>\r\n</tr>\r\n</tbody>\r\n<p></p>\r\n</table>\r\n</p>\r\n</body>\r\n</html>\r\n"
+            },
+            "sender": {
+                "emailAddress": {
+                    "name": "Chelsea Warywoski",
+                    "address": "chelsea.warywoski@clearesult.com"
+                }
+            },
+            "from": {
+                "emailAddress": {
+                    "name": "Chelsea Warywoski",
+                    "address": "chelsea.warywoski@clearesult.com"
+                }
+            },
+            "toRecipients": [
+                {
+                    "emailAddress": {
+                        "name": "#MB Abuse",
+                        "address": "abuse@clearesult.com"
+                    }
+                },
+                {
+                    "emailAddress": {
+                        "name": "Jon Schipp",
+                        "address": "jschipp@komanddev.onmicrosoft.com"
+                    }
+                }
+            ],
+            "ccRecipients": [],
+            "bccRecipients": [],
+            "replyTo": [],
+            "flag": {
+                "flagStatus": "notFlagged"
+            }
+        },
+        {
+            "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnic\"",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ-dDTAAE0dcOwAAA=",
+            "createdDateTime": "2019-08-05T13:30:07Z",
+            "lastModifiedDateTime": "2019-08-05T13:30:53Z",
+            "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnic",
+            "categories": [],
+            "receivedDateTime": "2019-08-05T13:30:07Z",
+            "sentDateTime": "2019-08-05T13:30:01Z",
+            "hasAttachments": true,
+            "internetMessageId": "<BN6PR06MB31233641B70F31D8FF72241EEADA0@BN6PR06MB3123.namprd06.prod.outlook.com>",
+            "subject": "[Phish Alert CLEAResult] VN 4564 For gus.goldberg@clearesult.com Reference 8/5/2019 10:17:34 AM",
+            "bodyPreview": "New Voice Record        Play Record 🔊\r\nFrom:   Local Wireless User\r\nNumber: (00) 65*-8**-4**\r\nDuration:       00:25(secs)\r\nSize:   12.0(byte)",
+            "importance": "normal",
+            "parentFolderId": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAA=",
+            "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQAObpQiFx5a5NmUHHg6W7nwY=",
+            "isDeliveryReceiptRequested": null,
+            "isReadReceiptRequested": false,
+            "isRead": false,
+            "isDraft": false,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ%2FdDTAAE0dcOwAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "inferenceClassification": "focused",
+            "body": {
+                "contentType": "html",
+                "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n<p>\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:middle; margin:0px\">\r\n<strong>New Voice Record</strong></td>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n<a href=\"https://onedrive.live.com/survey?resid=2939A315D73A48DF!112&amp;authkey=!ACivfD0c1SiUGvg\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"border-top:rgb(0,120,212) 1px solid; border-right:rgb(0,120,212) 1px solid; border-bottom:rgb(0,120,212) 1px solid; color:rgb(0,120,212); padding-bottom:10px; padding-top:10px; padding-left:10px; border-left:rgb(0,120,212) 1px solid; padding-right:10px; border-radius:3px; text-decoration-line:none\">Play\r\n Record 🔊</a></td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"3\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; padding-bottom:15px; text-align:right; margin:0px\">\r\n</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nFrom:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\nLocal Wireless User</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nNumber:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n(00) 65*-8**-4**</td>\r\n</tr>\r\n<tr>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nDuration:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n00:25<sub style=\"font-size:8px\">(secs)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nSize:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:bottom; text-align:right; margin:0px\">\r\n12.0<sub style=\"font-size:8px\">(byte)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-size:15px; font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; white-space:normal; word-spacing:0px; text-transform:none; font-weight:400; color:rgb(33,33,33); font-style:normal; orphans:2; widows:2; margin:0px; letter-spacing:normal; background-color:rgb(255,255,255); text-indent:0px; font-variant-ligatures:normal; font-variant-caps:normal; text-decoration-style:initial; text-decoration-color:initial\">\r\n</td>\r\n</tr>\r\n</tbody>\r\n<p></p>\r\n</table>\r\n</p>\r\n</body>\r\n</html>\r\n"
+            },
+            "sender": {
+                "emailAddress": {
+                    "name": "Gus Goldberg",
+                    "address": "gus.goldberg@clearesult.com"
+                }
+            },
+            "from": {
+                "emailAddress": {
+                    "name": "Gus Goldberg",
+                    "address": "gus.goldberg@clearesult.com"
+                }
+            },
+            "toRecipients": [
+                {
+                    "emailAddress": {
+                        "name": "#MB Abuse",
+                        "address": "abuse@clearesult.com"
+                    }
+                },
+                {
+                    "emailAddress": {
+                        "name": "Jon Schipp",
+                        "address": "jschipp@komanddev.onmicrosoft.com"
+                    }
+                }
+            ],
+            "ccRecipients": [],
+            "bccRecipients": [],
+            "replyTo": [],
+            "flag": {
+                "flagStatus": "notFlagged"
+            }
+        },
+        {
+            "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0TniT\"",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ-dDTAAE0dcOvAAA=",
+            "createdDateTime": "2019-08-05T13:28:41Z",
+            "lastModifiedDateTime": "2019-08-05T13:28:42Z",
+            "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0TniT",
+            "categories": [],
+            "receivedDateTime": "2019-08-05T13:28:41Z",
+            "sentDateTime": "2019-08-05T13:28:36Z",
+            "hasAttachments": true,
+            "internetMessageId": "<SN6PR06MB5005C853C989A6EF4731B0E8E7DA0@SN6PR06MB5005.namprd06.prod.outlook.com>",
+            "subject": "[Phish Alert CLEAResult] VN 4564 For toni.russell@clearesult.com Reference 8/5/2019 10:16:54 AM",
+            "bodyPreview": "New Voice Record        Play Record 🔊\r\nFrom:   Local Wireless User\r\nNumber: (00) 65*-8**-4**\r\nDuration:       00:25(secs)\r\nSize:   12.0(byte)",
+            "importance": "normal",
+            "parentFolderId": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAA=",
+            "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQAEN6AAWdpENDj2zIkarjEcg=",
+            "isDeliveryReceiptRequested": null,
+            "isReadReceiptRequested": false,
+            "isRead": false,
+            "isDraft": false,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ%2FdDTAAE0dcOvAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "inferenceClassification": "focused",
+            "body": {
+                "contentType": "html",
+                "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n<p>\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:middle; margin:0px\">\r\n<strong>New Voice Record</strong></td>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n<a href=\"https://onedrive.live.com/survey?resid=2939A315D73A48DF!112&amp;authkey=!ACivfD0c1SiUGvg\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"border-top:rgb(0,120,212) 1px solid; border-right:rgb(0,120,212) 1px solid; border-bottom:rgb(0,120,212) 1px solid; color:rgb(0,120,212); padding-bottom:10px; padding-top:10px; padding-left:10px; border-left:rgb(0,120,212) 1px solid; padding-right:10px; border-radius:3px; text-decoration-line:none\">Play\r\n Record 🔊</a></td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"3\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; padding-bottom:15px; text-align:right; margin:0px\">\r\n</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nFrom:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\nLocal Wireless User</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nNumber:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n(00) 65*-8**-4**</td>\r\n</tr>\r\n<tr>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nDuration:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n00:25<sub style=\"font-size:8px\">(secs)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nSize:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:bottom; text-align:right; margin:0px\">\r\n12.0<sub style=\"font-size:8px\">(byte)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-size:15px; font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; white-space:normal; word-spacing:0px; text-transform:none; font-weight:400; color:rgb(33,33,33); font-style:normal; orphans:2; widows:2; margin:0px; letter-spacing:normal; background-color:rgb(255,255,255); text-indent:0px; font-variant-ligatures:normal; font-variant-caps:normal; text-decoration-style:initial; text-decoration-color:initial\">\r\n</td>\r\n</tr>\r\n</tbody>\r\n<p></p>\r\n</table>\r\n</p>\r\n</body>\r\n</html>\r\n"
+            },
+            "sender": {
+                "emailAddress": {
+                    "name": "Toni Russell",
+                    "address": "toni.russell@clearesult.com"
+                }
+            },
+            "from": {
+                "emailAddress": {
+                    "name": "Toni Russell",
+                    "address": "toni.russell@clearesult.com"
+                }
+            },
+            "toRecipients": [
+                {
+                    "emailAddress": {
+                        "name": "#MB Abuse",
+                        "address": "abuse@clearesult.com"
+                    }
+                },
+                {
+                    "emailAddress": {
+                        "name": "Jon Schipp",
+                        "address": "jschipp@komanddev.onmicrosoft.com"
+                    }
+                }
+            ],
+            "ccRecipients": [],
+            "bccRecipients": [],
+            "replyTo": [],
+            "flag": {
+                "flagStatus": "notFlagged"
+            }
+        },
+        {
+            "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0TniF\"",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ-dDTAAE0dcOuAAA=",
+            "createdDateTime": "2019-08-05T13:20:45Z",
+            "lastModifiedDateTime": "2019-08-05T13:20:47Z",
+            "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0TniF",
+            "categories": [],
+            "receivedDateTime": "2019-08-05T13:20:45Z",
+            "sentDateTime": "2019-08-05T13:20:39Z",
+            "hasAttachments": true,
+            "internetMessageId": "<SN6PR06MB4480A5CBB5D1650B97443D85EFDA0@SN6PR06MB4480.namprd06.prod.outlook.com>",
+            "subject": "[Phish Alert CLEAResult] VN 4564 For janna.harper@clearesult.com Reference 8/5/2019 10:16:58 AM",
+            "bodyPreview": "New Voice Record        Play Record 🔊\r\nFrom:   Local Wireless User\r\nNumber: (00) 65*-8**-4**\r\nDuration:       00:25(secs)\r\nSize:   12.0(byte)",
+            "importance": "normal",
+            "parentFolderId": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAA=",
+            "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQAFPrzxXv_rBHs5xzJ2h30tE=",
+            "isDeliveryReceiptRequested": null,
+            "isReadReceiptRequested": false,
+            "isRead": false,
+            "isDraft": false,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ%2FdDTAAE0dcOuAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "inferenceClassification": "focused",
+            "body": {
+                "contentType": "html",
+                "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n<p>\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:middle; margin:0px\">\r\n<strong>New Voice Record</strong></td>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n<a href=\"https://onedrive.live.com/survey?resid=2939A315D73A48DF!112&amp;authkey=!ACivfD0c1SiUGvg\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"border-top:rgb(0,120,212) 1px solid; border-right:rgb(0,120,212) 1px solid; border-bottom:rgb(0,120,212) 1px solid; color:rgb(0,120,212); padding-bottom:10px; padding-top:10px; padding-left:10px; border-left:rgb(0,120,212) 1px solid; padding-right:10px; border-radius:3px; text-decoration-line:none\">Play\r\n Record 🔊</a></td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"3\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; padding-bottom:15px; text-align:right; margin:0px\">\r\n</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nFrom:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\nLocal Wireless User</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nNumber:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n(00) 65*-8**-4**</td>\r\n</tr>\r\n<tr>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nDuration:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n00:25<sub style=\"font-size:8px\">(secs)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nSize:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:bottom; text-align:right; margin:0px\">\r\n12.0<sub style=\"font-size:8px\">(byte)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-size:15px; font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; white-space:normal; word-spacing:0px; text-transform:none; font-weight:400; color:rgb(33,33,33); font-style:normal; orphans:2; widows:2; margin:0px; letter-spacing:normal; background-color:rgb(255,255,255); text-indent:0px; font-variant-ligatures:normal; font-variant-caps:normal; text-decoration-style:initial; text-decoration-color:initial\">\r\n</td>\r\n</tr>\r\n</tbody>\r\n<p></p>\r\n</table>\r\n</p>\r\n</body>\r\n</html>\r\n"
+            },
+            "sender": {
+                "emailAddress": {
+                    "name": "Janna Harper",
+                    "address": "janna.harper@clearesult.com"
+                }
+            },
+            "from": {
+                "emailAddress": {
+                    "name": "Janna Harper",
+                    "address": "janna.harper@clearesult.com"
+                }
+            },
+            "toRecipients": [
+                {
+                    "emailAddress": {
+                        "name": "#MB Abuse",
+                        "address": "abuse@clearesult.com"
+                    }
+                },
+                {
+                    "emailAddress": {
+                        "name": "Jon Schipp",
+                        "address": "jschipp@komanddev.onmicrosoft.com"
+                    }
+                }
+            ],
+            "ccRecipients": [],
+            "bccRecipients": [],
+            "replyTo": [],
+            "flag": {
+                "flagStatus": "notFlagged"
+            }
+        },
+        {
+            "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnh9\"",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ-dDTAAE0dcOtAAA=",
+            "createdDateTime": "2019-08-05T13:20:23Z",
+            "lastModifiedDateTime": "2019-08-05T13:20:24Z",
+            "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnh9",
+            "categories": [],
+            "receivedDateTime": "2019-08-05T13:20:23Z",
+            "sentDateTime": "2019-08-05T13:20:16Z",
+            "hasAttachments": true,
+            "internetMessageId": "<SN6PR06MB4141778FEE310B71F4BF0DAA9ADA0@SN6PR06MB4141.namprd06.prod.outlook.com>",
+            "subject": "[Phish Alert CLEAResult] VN 4564 For chase.harding@clearesult.com Reference 8/5/2019 10:14:37 AM",
+            "bodyPreview": "New Voice Record        Play Record 🔊\r\nFrom:   Local Wireless User\r\nNumber: (00) 65*-8**-4**\r\nDuration:       00:25(secs)\r\nSize:   12.0(byte)",
+            "importance": "normal",
+            "parentFolderId": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAA=",
+            "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQAAq9BuNRY3lElsuLhspRBaQ=",
+            "isDeliveryReceiptRequested": null,
+            "isReadReceiptRequested": false,
+            "isRead": false,
+            "isDraft": false,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ%2FdDTAAE0dcOtAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "inferenceClassification": "focused",
+            "body": {
+                "contentType": "html",
+                "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n<p>\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:middle; margin:0px\">\r\n<strong>New Voice Record</strong></td>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n<a href=\"https://onedrive.live.com/survey?resid=2939A315D73A48DF!112&amp;authkey=!ACivfD0c1SiUGvg\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"border-top:rgb(0,120,212) 1px solid; border-right:rgb(0,120,212) 1px solid; border-bottom:rgb(0,120,212) 1px solid; color:rgb(0,120,212); padding-bottom:10px; padding-top:10px; padding-left:10px; border-left:rgb(0,120,212) 1px solid; padding-right:10px; border-radius:3px; text-decoration-line:none\">Play\r\n Record 🔊</a></td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"3\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; padding-bottom:15px; text-align:right; margin:0px\">\r\n</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nFrom:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\nLocal Wireless User</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nNumber:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n(00) 65*-8**-4**</td>\r\n</tr>\r\n<tr>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nDuration:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n00:25<sub style=\"font-size:8px\">(secs)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nSize:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:bottom; text-align:right; margin:0px\">\r\n12.0<sub style=\"font-size:8px\">(byte)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-size:15px; font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; white-space:normal; word-spacing:0px; text-transform:none; font-weight:400; color:rgb(33,33,33); font-style:normal; orphans:2; widows:2; margin:0px; letter-spacing:normal; background-color:rgb(255,255,255); text-indent:0px; font-variant-ligatures:normal; font-variant-caps:normal; text-decoration-style:initial; text-decoration-color:initial\">\r\n</td>\r\n</tr>\r\n</tbody>\r\n<p></p>\r\n</table>\r\n</p>\r\n</body>\r\n</html>\r\n"
+            },
+            "sender": {
+                "emailAddress": {
+                    "name": "Chase Harding",
+                    "address": "chase.harding@clearesult.com"
+                }
+            },
+            "from": {
+                "emailAddress": {
+                    "name": "Chase Harding",
+                    "address": "chase.harding@clearesult.com"
+                }
+            },
+            "toRecipients": [
+                {
+                    "emailAddress": {
+                        "name": "#MB Abuse",
+                        "address": "abuse@clearesult.com"
+                    }
+                },
+                {
+                    "emailAddress": {
+                        "name": "Jon Schipp",
+                        "address": "jschipp@komanddev.onmicrosoft.com"
+                    }
+                }
+            ],
+            "ccRecipients": [],
+            "bccRecipients": [],
+            "replyTo": [],
+            "flag": {
+                "flagStatus": "notFlagged"
+            }
+        },
+        {
+            "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnh2\"",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ-dDTAAE0dcOsAAA=",
+            "createdDateTime": "2019-08-05T13:09:44Z",
+            "lastModifiedDateTime": "2019-08-05T13:09:45Z",
+            "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE0Tnh2",
+            "categories": [],
+            "receivedDateTime": "2019-08-05T13:09:44Z",
+            "sentDateTime": "2019-08-05T13:09:37Z",
+            "hasAttachments": true,
+            "internetMessageId": "<BYAPR06MB5845F28E02E8C9199BD956AC9ADA0@BYAPR06MB5845.namprd06.prod.outlook.com>",
+            "subject": "[Phish Alert CLEAResult] VN 4564 For sam.day@clearesult.com Reference 8/5/2019 10:15:21 AM",
+            "bodyPreview": "New Voice Record        Play Record 🔊\r\nFrom:   Local Wireless User\r\nNumber: (00) 65*-8**-4**\r\nDuration:       00:25(secs)\r\nSize:   12.0(byte)",
+            "importance": "normal",
+            "parentFolderId": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAuAAAAAAAxDvrPc8q6SqGLTJ9iB-SGAQC8UQDN7ObVSLWQuxHJ-dDTAAEZtK4pAAA=",
+            "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQAFTHLh4ad0lJt_mjiEOLdqQ=",
+            "isDeliveryReceiptRequested": null,
+            "isReadReceiptRequested": false,
+            "isRead": false,
+            "isDraft": false,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAEZtK4pAAC8UQDN7ObVSLWQuxHJ%2FdDTAAE0dcOsAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "inferenceClassification": "focused",
+            "body": {
+                "contentType": "html",
+                "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\n<p>\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:middle; margin:0px\">\r\n<strong>New Voice Record</strong></td>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n<a href=\"https://onedrive.live.com/survey?resid=2939A315D73A48DF!112&amp;authkey=!ACivfD0c1SiUGvg\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"border-top:rgb(0,120,212) 1px solid; border-right:rgb(0,120,212) 1px solid; border-bottom:rgb(0,120,212) 1px solid; color:rgb(0,120,212); padding-bottom:10px; padding-top:10px; padding-left:10px; border-left:rgb(0,120,212) 1px solid; padding-right:10px; border-radius:3px; text-decoration-line:none\">Play\r\n Record 🔊</a></td>\r\n</tr>\r\n<tr>\r\n<td colspan=\"3\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; padding-bottom:15px; text-align:right; margin:0px\">\r\n</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nFrom:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\nLocal Wireless User</td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nNumber:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n(00) 65*-8**-4**</td>\r\n</tr>\r\n<tr>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nDuration:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; text-align:right; margin:0px\">\r\n00:25<sub style=\"font-size:8px\">(secs)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; margin:0px\">\r\nSize:</td>\r\n<td colspan=\"2\" style=\"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; vertical-align:bottom; text-align:right; margin:0px\">\r\n12.0<sub style=\"font-size:8px\">(byte)</sub></td>\r\n</tr>\r\n<tr>\r\n<td style=\"font-size:15px; font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif; white-space:normal; word-spacing:0px; text-transform:none; font-weight:400; color:rgb(33,33,33); font-style:normal; orphans:2; widows:2; margin:0px; letter-spacing:normal; background-color:rgb(255,255,255); text-indent:0px; font-variant-ligatures:normal; font-variant-caps:normal; text-decoration-style:initial; text-decoration-color:initial\">\r\n</td>\r\n</tr>\r\n</tbody>\r\n<p></p>\r\n</table>\r\n</p>\r\n</body>\r\n</html>\r\n"
+            },
+            "sender": {
+                "emailAddress": {
+                    "name": "Sam Day",
+                    "address": "sam.day@clearesult.com"
+                }
+            },
+            "from": {
+                "emailAddress": {
+                    "name": "Sam Day",
+                    "address": "sam.day@clearesult.com"
+                }
+            },
+            "toRecipients": [
+                {
+                    "emailAddress": {
+                        "name": "#MB Abuse",
+                        "address": "abuse@clearesult.com"
+                    }
+                },
+                {
+                    "emailAddress": {
+                        "name": "Jon Schipp",
+                        "address": "jschipp@komanddev.onmicrosoft.com"
+                    }
+                }
+            ],
+            "ccRecipients": [],
+            "bccRecipients": [],
+            "replyTo": [],
+            "flag": {
+                "flagStatus": "notFlagged"
+            }
+        }
+    ]
+}

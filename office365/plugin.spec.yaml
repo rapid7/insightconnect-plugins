@@ -1,0 +1,786 @@
+plugin_spec_version: v2
+name: office365
+title: Office 365
+description: Access Outlook mailboxes in Office 365
+version: 2.0.4
+vendor: rapid7
+support: community
+status: ["obsolete"]
+tags:
+- mail
+- email
+- Outlook
+- Office 365
+- Microsoft
+types:
+  attachment:
+    Id:
+      type: string
+    ContentBytes:
+      type: string
+    ContentLocation:
+      type: string
+    ContentType:
+      type: string
+    LastModifiedDateTime:
+      type: date
+    IsInline:
+      type: boolean
+    Name:
+      type: string
+    Size:
+      type: integer
+    '@odata.type':
+      type: string
+  email_address:
+    Name:
+      type: string
+    Address:
+      type: string
+  recipient:
+    EmailAddress:
+      type: email_address
+  message_body:
+    ContentType:
+      type: string
+    Content:
+      type: string
+  message:
+    Id:
+      type: string
+    Attachments:
+      type: '[]attachment'
+    BccRecipients:
+      type: '[]recipient'
+    Body:
+      type: message_body
+    BodyPreview:
+      type: string
+    CcRecipients:
+      type: '[]recipient'
+    ConversationId:
+      type: string
+    CreatedDateTime:
+      type: date
+    From:
+      type: recipient
+    HasAttachments:
+      type: boolean
+    Importance:
+      type: string
+    IsRead:
+      type: boolean
+    LastModifiedDateTime:
+      type: date
+    ParentFolderId:
+      type: string
+    ReceivedDateTime:
+      type: date
+    ReplyTo:
+      type: '[]recipient'
+    Sender:
+      type: recipient
+    SentDateTime:
+      type: date
+    Subject:
+      type: string
+    ToRecipients:
+      type: '[]recipient'
+  folder:
+    Id:
+      type: string
+    ChildFolderCount:
+      type: integer
+    DisplayName:
+      type: string
+    Messages:
+      type: '[]message'
+    ParentFolderId:
+      type: string
+    TotalItemCount:
+      type: integer
+    UnreadItemCount:
+      type: integer
+  physical_address:
+    Street:
+      type: string
+    City:
+      type: string
+    State:
+      type: string
+    CountryOrRegion:
+      type: string
+    PostalCode:
+      type: string
+  contact:
+    Id:
+      type: string
+    AssistantName:
+      type: string
+    BusinessAddress:
+      type: physical_address
+    BusinessHomePage:
+      type: string
+    BusinessPhones:
+      type: '[]string'
+    CompanyName:
+      type: string
+    Department:
+      type: string
+    CreatedDateTime:
+      type: date
+    LastModifiedDateTime:
+      type: date
+    DisplayName:
+      type: string
+    EmailAddresses:
+      type: '[]email_address'
+    FileAs:
+      type: string
+    Generation:
+      type: string
+    GivenName:
+      type: string
+    HomeAddress:
+      type: physical_address
+    HomePhones:
+      type: '[]string'
+    ImAddresses:
+      type: '[]string'
+    Initials:
+      type: string
+    JobTitle:
+      type: string
+    Manager:
+      type: string
+    MiddleName:
+      type: string
+    MobilePhone1:
+      type: string
+    NickName:
+      type: string
+    OfficeLocation:
+      type: string
+    OtherAddress:
+      type: physical_address
+    Profession:
+      type: string
+    Surname:
+      type: string
+    Title:
+      type: string
+    YomiCompanyName:
+      type: string
+    YomiGivenName:
+      type: string
+    YomiSurname:
+      type: string
+connection:
+  tenant_id:
+    title: Tenant ID
+    description: The ID of the directory that identifies the tenant
+    type: string
+    required: true
+  app_id:
+    title: App ID
+    description: The ID of the registered app that obtained the refresh token
+    type: string
+    required: true
+  app_secret:
+    title: App Secret
+    description: The secret of the registered app that obtained the refresh token
+    type: credential_secret_key
+    required: true
+actions:
+  get_messages:
+    title: Get Messages
+    description: Get a list of messages in the given folder
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      well_known_folder_id:
+        title: Well-known Folder ID
+        description: Well-known folder ID (e.g. Inbox) whose messages to list
+        type: string
+        enum:
+        - Inbox
+        - Drafts
+        - SentItems
+        - DeletedItems
+        - <other folder>
+        required: true
+      other_folder_id:
+        title: Other Folder ID
+        description: Folder ID whose messages to list (if not well-known)
+        type: string
+        required: false
+      selected_fields:
+        title: Selected Fields
+        description: Comma-separated list of email fields to retrieve (if omitted,
+          all fields)
+        type: string
+        required: false
+      pagination_token:
+        title: Pagination Token
+        description: Token to request the next 50 messages
+        type: string
+        required: false
+    output:
+      messages:
+        title: Messages
+        description: List of messages in the given folder
+        type: '[]message'
+        required: false
+      pagination_token:
+        title: Pagination Token
+        description: Token to request the next 50 messages
+        type: string
+        required: false
+  create_and_send:
+    title: Create And Send
+    description: Create and send a new email message
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      subject:
+        title: Subject
+        description: Subject of the email
+        type: string
+        required: true
+      body:
+        title: Body
+        description: Body of the email
+        type: string
+        required: false
+      body_is_html:
+        title: Body Is HTML
+        description: True if the body of the message is in HTML format
+        type: boolean
+        required: false
+      to_recipients:
+        title: To Recipients
+        description: Main recipients of the email
+        type: '[]string'
+        required: true
+      cc_recipients:
+        title: CC recipients
+        description: Carbon-copied recipients of the email
+        type: '[]string'
+        required: false
+      bcc_recipients:
+        title: BCC recipients
+        description: Blind carbon-copied recipients of the email
+        type: '[]string'
+        required: false
+      attachment_name:
+        title: Attachment Name
+        description: Name of the email attachment (if any)
+        type: string
+        required: false
+      attachment_type:
+        title: Attachment Type
+        description: MIME type of the email attachment (if any)
+        type: string
+        enum:
+        - text/plain (.txt)
+        - text/html (.html)
+        - application/rtf (.rtf)
+        - application/pdf (.pdf)
+        - application/msword (.doc)
+        - application/vnd.ms-powerpoint (.ppt)
+        - image/bmp (.bmp)
+        - image/gif (.gif)
+        - image/jpeg (.jpg)
+        - image/png (.png)
+        - image/tiff (.tiff)
+        - OTHER
+        required: false
+      other_attachment_type:
+        title: Other Attachment Type
+        description: User-specified content type not in the enumerated list
+        type: string
+        required: false
+      attachment_bytes:
+        title: Attachment Bytes
+        description: Bytes of the email attachment (in base-64 format)
+        type: string
+        required: false
+      save_to_sent_items:
+        title: Save to SentItems
+        description: Save this message to the SentItems folder
+        type: boolean
+        required: false
+        default: true
+  reply_to_message:
+    title: Reply To Message
+    description: Reply to an email message
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user that will be used
+        type: string
+        required: true
+      message_id:
+        title: Message ID
+        description: ID of the message being replied to
+        type: string
+        required: true
+      comment:
+        title: Comment
+        description: Comment in the reply
+        type: string
+        required: true
+  most_recently_sent:
+    title: Most Recently Sent
+    description: Get the most recent message in the SentItems folder
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user that will be used
+        type: string
+        required: true
+    output:
+      most_recent_message:
+        title: Most Recent Message
+        description: The most recent message in the SentItems folder
+        type: message
+        required: false
+  forward_message:
+    title: Forward Message
+    description: Forward an email message
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user that will be used
+        type: string
+        required: true
+      message_id:
+        title: Message ID
+        description: ID of the message being forwarded
+        type: string
+        required: true
+      comment:
+        title: Comment
+        description: Comment in the forwarded message
+        type: string
+        required: false
+      to_recipients:
+        title: To recipients
+        description: Emails of the recipients of the forwarded message
+        type: '[]string'
+        required: true
+  delete_message:
+    title: Delete Message
+    description: Delete an email message
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      message_id:
+        title: Message ID
+        description: ID of the message to delete
+        type: string
+        required: true
+  move_message:
+    title: Move Message
+    description: Move an email message to a different folder
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      message_id:
+        title: Message ID
+        description: ID of the message to move
+        type: string
+        required: true
+      well_known_folder_id:
+        title: Well-known Folder ID
+        description: Well-known folder ID (e.g. Inbox) to which to move the message
+        type: string
+        enum:
+        - Inbox
+        - Drafts
+        - SentItems
+        - DeletedItems
+        - <other folder>
+        required: true
+      other_folder_id:
+        title: Other Folder ID
+        description: Folder ID to which to move the message (if not well-known)
+        type: string
+        required: false
+  copy_message:
+    title: Copy Message
+    description: Copy an email message to a folder
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      message_id:
+        title: Message ID
+        description: ID of the message to copy
+        type: string
+        required: true
+      well_known_folder_id:
+        title: Well-known Folder ID
+        description: Well-known folder ID (e.g. Inbox) to which to copy the message
+        type: string
+        enum:
+        - Inbox
+        - Drafts
+        - SentItems
+        - DeletedItems
+        - <other folder>
+        required: true
+      other_folder_id:
+        title: Other Folder ID
+        description: Folder ID to which to copy the message (if not well-known)
+        type: string
+        required: false
+    output:
+      new_message_id:
+        title: New Message ID
+        description: ID of the newly copied message
+        type: string
+        required: false
+  get_attachments:
+    title: Get Attachments
+    description: Get a list of attachments to the given message
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      message_id:
+        title: Message ID
+        description: ID of the message with attachment
+        type: string
+        required: true
+      pagination_token:
+        title: Pagination Token
+        description: Token to request the next 50 attachments
+        type: string
+        required: false
+    output:
+      attachments:
+        title: Attachments
+        description: List of attachments to the given message
+        type: '[]attachment'
+        required: false
+      pagination_token:
+        title: Pagination Token
+        description: Token to request the next 50 attachments
+        type: string
+        required: false
+  create_attachment:
+    title: Create Attachment
+    description: Create an attachment to the given message
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      message_id:
+        title: Message ID
+        description: ID of the message in which to create the attachment
+        type: string
+        required: true
+      attachment_name:
+        title: Attachment Name
+        description: Name of the new attachment
+        type: string
+        required: true
+      attachment_type:
+        title: Attachment Type
+        description: MIME type of the email attachment (if any)
+        type: string
+        enum:
+        - text/plain (.txt)
+        - text/html (.html)
+        - application/rtf (.rtf)
+        - application/pdf (.pdf)
+        - application/msword (.doc)
+        - application/vnd.ms-powerpoint (.ppt)
+        - image/bmp (.bmp)
+        - image/gif (.gif)
+        - image/jpeg (.jpg)
+        - image/png (.png)
+        - image/tiff (.tiff)
+        - OTHER
+        required: false
+      other_attachment_type:
+        title: Other Attachment Type
+        description: User-specified content type not in the enumerated list
+        type: string
+        required: false
+      attachment_content:
+        title: Attachment Content
+        description: Content of the new attachment (base64 encoded)
+        type: string
+        required: true
+    output:
+      attachment_id:
+        title: Attachment ID
+        description: ID of the new attachment
+        type: string
+        required: false
+  delete_attachment:
+    title: Delete Attachment
+    description: Delete an attachment to a message
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      message_id:
+        title: Message ID
+        description: ID of the message whose attachment will be deleted
+        type: string
+        required: true
+      attachment_id:
+        title: Attachment ID
+        description: ID of the attachment to delete
+        type: string
+        required: true
+  get_folders:
+    title: Get Folders
+    description: Get a list of folders under a given email folder
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      well_known_parent_id:
+        title: Well-known Parent ID
+        description: Well-known ID of the parent folder (e.g. Inbox) whose subfolders
+          to list
+        type: string
+        enum:
+        - Inbox
+        - Drafts
+        - SentItems
+        - DeletedItems
+        - <other folder>
+        required: true
+      other_parent_id:
+        title: Other Parent ID
+        description: ID of the parent folder whose subfolders to list (if not well-known)
+        type: string
+        required: false
+      pagination_token:
+        title: Pagination Token
+        description: Token to request the next 50 folders
+        type: string
+        required: false
+    output:
+      folders:
+        title: Folders
+        description: List of folders
+        type: '[]folder'
+        required: false
+      pagination_token:
+        title: Pagination Token
+        description: Token to request the next 50 folders
+        type: string
+        required: false
+  create_folder:
+    title: Create Folder
+    description: Create a new mailbox folder
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      well_known_parent_id:
+        title: Well-known Parent ID
+        description: Well-known ID of the parent folder (e.g. Inbox) of the new folder
+        type: string
+        enum:
+        - Inbox
+        - Drafts
+        - SentItems
+        - DeletedItems
+        - <other folder>
+        required: true
+      other_parent_id:
+        title: Other Parent ID
+        description: ID of the parent folder of the new folder (if not well-known)
+        type: string
+        required: false
+      folder_name:
+        title: Folder Name
+        description: Display name of the new folder
+        type: string
+        required: true
+    output:
+      folder_id:
+        title: Folder ID
+        description: ID of the new folder
+        type: string
+        required: false
+  delete_folder:
+    title: Delete Folder
+    description: Delete a mailbox folder
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      folder_id:
+        title: Folder ID
+        description: ID of the folder to delete
+        type: string
+        required: true
+  move_folder:
+    title: Move Folder
+    description: Move a mailbox folder to under a new parent
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      well_known_parent_id:
+        title: Well-known Parent ID
+        description: Well-known ID of the new parent folder (e.g. Inbox)
+        type: string
+        enum:
+        - Inbox
+        - Drafts
+        - SentItems
+        - DeletedItems
+        - <other folder>
+        required: true
+      other_parent_id:
+        title: Other Parent ID
+        description: ID of the new parent folder (if not well-known)
+        type: string
+        required: false
+      folder_id:
+        title: Folder ID
+        description: ID of the folder to move
+        type: string
+        required: true
+  copy_folder:
+    title: Copy Folder
+    description: Copy a mailbox folder underneath the given parent
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      well_known_parent_id:
+        title: Well-known Parent ID
+        description: Well-known ID of the new parent folder (e.g. Inbox)
+        type: string
+        enum:
+        - Inbox
+        - Drafts
+        - SentItems
+        - DeletedItems
+        - <other folder>
+        required: true
+      other_parent_id:
+        title: Other Parent ID
+        description: ID of the new parent folder (if not well-known)
+        type: string
+        required: false
+      folder_id:
+        title: Folder ID
+        description: ID of the folder to copy
+        type: string
+        required: true
+    output:
+      new_folder_id:
+        title: New Folder ID
+        description: ID of the newly copied folder
+        type: string
+        required: false
+  get_contacts:
+    title: Get Contacts
+    description: Get a list of contacts for user or principal
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      pagination_token:
+        title: Pagination Token
+        description: Token to request the next 50 contacts
+        type: string
+        required: false
+    output:
+      contacts:
+        title: Contacts
+        description: List of all contacts under the email account
+        type: '[]contact'
+        required: false
+      pagination_token:
+        title: Pagination Token
+        description: Token to request the next 50 contacts
+        type: string
+        required: false
+triggers:
+  new_message:
+    title: New Message
+    description: Fires when a new message is received in a given folder
+    input:
+      user_id_principal:
+        title: User ID or Principal
+        description: Identifies the user
+        type: string
+        required: true
+      well_known_folder_id:
+        title: Well-known Folder ID
+        description: Well-known folder ID (e.g. Inbox) to monitor for new messages
+        type: string
+        enum:
+        - Inbox
+        - Drafts
+        - SentItems
+        - DeletedItems
+        - <other folder>
+        required: true
+      other_folder_id:
+        title: Other Folder ID
+        description: Folder ID to monitor for new messages (if not well-known)
+        type: string
+        required: false
+      interval:
+        title: Interval
+        description: Interval of time between mailbox polling in seconds (defaults
+          to 300)
+        type: integer
+        required: true
+        default: 300
+    output:
+      new_message_received:
+        title: New Message Received
+        description: True if a new message was received in this interval
+        type: boolean
+        required: false
+      most_recent_message:
+        title: Most Recent Message
+        description: Most recent message (empty if mailbox is empty)
+        type: message
+        required: false

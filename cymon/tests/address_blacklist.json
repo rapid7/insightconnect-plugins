@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "address_blacklist",
+    "input": {
+      "limit": 10,
+      "days": 1,
+      "tag": "blacklist"
+    },
+    "connection": {
+      "url": "https://cymon.io:443",
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

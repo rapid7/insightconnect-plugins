@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "run_synchronously",
+    "meta": {},
+    "input": {
+      "completion_checks": 10,
+      "input": {},
+      "timeout": 150,
+      "workflow_name": "",
+      "workflow_uid": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

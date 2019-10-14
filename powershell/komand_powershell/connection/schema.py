@@ -23,6 +23,7 @@ class ConnectionSchema(komand.Input):
       "enum": [
         "NTLM",
         "Kerberos",
+        "CredSSP",
         "None"
       ],
       "order": 3

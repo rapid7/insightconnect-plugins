@@ -4,7 +4,8 @@ title: Git
 description: Git is a free and open source distributed version control system
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - git
 - version control

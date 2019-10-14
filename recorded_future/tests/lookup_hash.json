@@ -1,14 +1,13 @@
 {
-  "body": {
-    "connection": {
-      "api_key": ""
+    "body": {
+        "action": "lookup_hash",
+        "input": {
+            "comment": "testing",
+            "fields": [],
+            "hash": "478c076749bef74eaf9bed4af917aee228620b23"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-      "hash": "478c076749bef74eaf9bed4af917aee228620b23"
-    },
-    "action": "lookup_hash"
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

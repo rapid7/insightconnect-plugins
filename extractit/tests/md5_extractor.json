@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "md5_extractor",
+    "connection": {},
+    "dispatcher": {},
+    "input": {
+      "file": null,
+      "str": "8d7b6c47ec462aaf99fc16e3b2c9ec7b0dd9b50e967d5bd71aabdf66b461ebd5 and d44c0513559ba8ace6a50534ab6b7335"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "mass_destroy",
+        "input": {
+            "compliance_search_name": "asdas",
+            "query_timeout": 10
+        },
+        "connection":{
+            "credentials":{
+              "password":"",
+              "username":""
+            },
+            "verify_ssl": true
+          },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

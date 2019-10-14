@@ -1,0 +1,140 @@
+Received: from MN2PR01MB5328.prod.exchangelabs.com (2603:10b6:104:1::18) by
+ MWHPR0101MB3166.prod.exchangelabs.com with HTTPS via
+ CO2PR05CA0092.NAMPRD05.PROD.OUTLOOK.COM; Wed, 4 Sep 2019 15:06:51 +0000
+Authentication-Results: gannett.com; dkim=none (message not signed)
+ header.d=none;gannett.com; dmarc=none action=none header.from=gannett.com;
+Received: from MN2PR01MB5919.prod.exchangelabs.com (52.135.36.208) by
+ MN2PR01MB5328.prod.exchangelabs.com (20.179.87.216) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2220.21; Wed, 4 Sep 2019 15:06:51 +0000
+Received: from MN2PR01MB5919.prod.exchangelabs.com
+ ([fe80::cc4b:1ba7:b58c:8f2c]) by MN2PR01MB5919.prod.exchangelabs.com
+ ([fe80::cc4b:1ba7:b58c:8f2c%7]) with mapi id 15.20.2220.022; Wed, 4 Sep 2019
+ 15:06:51 +0000
+From: "Bob, Smith" <bob@hotmail.com>
+To: "Tech Team (A Team)" <bob@test.com>
+Subject: SOAR Mimecast URL Test 1
+Thread-Topic: SOAR Mimecast URL Test 1
+Thread-Index: AQHVYzJhqzKFo7frD02uxSxpMcatKQ==
+Date: Wed, 4 Sep 2019 15:06:50 +0000
+Message-ID: <C7977EF1-3B13-4307-930D-CFC423663ED0@faketest.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator: <C7977EF1-3B13-4307-930D-CFC423663ED0@fake.com>
+user-agent: Microsoft-MacOutlook/10.1b.0.190715
+X-MS-Exchange-Organization-MessageDirectionality: Originating
+X-MS-Exchange-Organization-AuthSource: MN2PR01MB5919.prod.exchangelabs.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-Originating-IP: [204.155.166.10]
+X-MS-Exchange-Organization-Network-Message-Id: 
+ 55b8d414-aa4d-4d6a-fdd5-08d7314983ed
+X-MS-PublicTrafficType: Email
+Return-Path: bob@hotmail.com
+X-MS-Exchange-Organization-ExpirationStartTime: 04 Sep 2019 15:06:51.2472
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Office365-Filtering-Correlation-Id: 55b8d414-aa4d-4d6a-fdd5-08d7314983ed
+X-MS-Office365-Filtering-HT: Tenant
+X-Microsoft-Antispam: 
+ BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);SRVR:MN2PR01MB5328;
+X-MS-TrafficTypeDiagnostic: MN2PR01MB5328:
+X-MS-Exchange-PUrlCount: 3
+X-MS-Oob-TLC-OOBClassifiers: OLM:1728;
+X-Forefront-Antispam-Report: 
+ SFV:SKI;SFS:;DIR:INB;SFP:;SCL:-1;SRVR:MN2PR01MB5328;H:MN2PR01MB5919.prod.exchangelabs.com;FPR:;SPF:None;LANG:en;
+X-MS-Exchange-Transport-Forked: True
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2019 15:06:51.1290
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: bc924c8d-3e16-4e88-bf26-d7fcfb14f2d5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 55b8d414-aa4d-4d6a-fdd5-08d7314983ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: GTadtuvbk5aor4kFzSh7eWdHEt67Y+piNXG9qec+mHXwNLsi/iYepQqPLIbkmhspBPxQUu6gjFCiq8UpzkXCMA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR01MB5328
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:00.8122204
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.2220.007
+X-Microsoft-Antispam-Mailbox-Delivery: 
+ ucf:1;jmr:0;ex:0;auth:0;dest:C;OFR:CustomRules;ENG:(750127)(520011016)(706158);
+X-Microsoft-Antispam-Message-Info: 
+ D2RtrlYRkoimp1eJ0B1fwIBktedZ/oWlPbm6OlKRLulizuGWGbN8MPELPkxVNji+iE1Uez8jnLVvhCXOoetmzNw6X1E0zQnQAs9qTotdtw6HGUsMJSLzixxPl2fCtPutFu3FA2NUGwY6ehxG4jSVtVB4xCuI/03ufaLG3jrf2Oy6OB+yib1vJ1MO6BUthihOiMbG6FNSMgBrtMgR+/akWxgi6vEWjr5qaQLCCkN3l2QSbyFX89293eqXCSKdfNOwA/b4VYsSA/BW0KVO8t09CPxnDmJYLxnFV76ol4us/rJw2Gq+pWgsa6JqJPaJxfgFia9VVCeEkdlRT5vgUdPrKUiGzdYjuArohoEUOjheQNb6BlN4eI+IXGLWT79+jxiJyhdFpc8iD6RcYP0o3Hsf2/MG4Jcs1MIOB6R3+h5sz0q2oqhqE6QlZhSeBnmc1Tg2J/4nopTqY68XJ1IOTsFVhv19Woqrz7VMQOB32o4i/EY=
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="B_3650437928_1226111673"
+
+--B_3650437928_1226111673
+Content-type: text/plain;
+	charset="UTF-8"
+Content-transfer-encoding: quoted-printable
+
+http://aadroid.net
+
+
+--B_3650437928_1226111673
+Content-type: text/html;
+	charset="UTF-8"
+Content-transfer-encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+=09{font-family:"Cambria Math";
+=09panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+=09{font-family:Calibri;
+=09panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+=09{margin:0in;
+=09margin-bottom:.0001pt;
+=09font-size:12.0pt;
+=09font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+=09{mso-style-priority:99;
+=09color:#0563C1;
+=09text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+=09{mso-style-priority:99;
+=09color:#954F72;
+=09text-decoration:underline;}
+span.EmailStyle17
+=09{mso-style-type:personal-compose;
+=09font-family:"Calibri",sans-serif;
+=09color:windowtext;}
+.MsoChpDefault
+=09{mso-style-type:export-only;
+=09font-family:"Calibri",sans-serif;}
+@page WordSection1
+=09{size:8.5in 11.0in;
+=09margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+=09{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><a href=3D"http://aadroid.net" title=3D"http://prote=
+ct-us.mimecast.com/s/414KCXDXZofXVRNRZT6ai-n?domain=3Daadroid.net">http://a=
+adroid.net</a><o:p></o:p></p>
+</div>
+</body>
+</html>
+
+
+--B_3650437928_1226111673--
+

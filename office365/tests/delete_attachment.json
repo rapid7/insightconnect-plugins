@@ -1,0 +1,23 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "delete_attachment",
+    "trigger": "",
+    "connection": {
+      "connection_cache_key": "",
+      "app_id": "c74afb10-a66e-44e1-bf87-5bc3db4e5b4d",
+      "app_secret": {
+        "secretKey": "fMeBxEYyoLSk+YRcD0FjcyxGkCjqZL1UPm7ZojJQ5Og="
+      },
+      "tenant_id": "5c824599-dc8c-4d31-96fb-3b886d4f8f10"
+    },
+    "dispatcher": {},
+    "input": {
+      "attachment_id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAAUtfMmAAC8UQDN7ObVSLWQuxHJ-dDTAAAUtgyJAAABEgAQAMRZrVj9g6FEsjox_bYKKs8=",
+      "message_id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAAUtfMmAAC8UQDN7ObVSLWQuxHJ-dDTAAAUtgyJAAA=",
+      "user_id_principal": "jschipp@komanddev.onmicrosoft.com"
+    }
+  }
+}

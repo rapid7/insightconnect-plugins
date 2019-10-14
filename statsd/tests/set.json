@@ -15,7 +15,7 @@
       "tcp": {
         "timeout": 0
       },
-      "host": "",
+      "host": "379f171c.carbon.hostedgraphite.com",
       "port": 2003
     },
     "meta": {}

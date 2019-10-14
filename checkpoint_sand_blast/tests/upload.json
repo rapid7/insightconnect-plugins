@@ -9,7 +9,7 @@
     },
     "connection": {
       "api_key": {
-        "secretKey": ""
+        "secretKey": "TE_API_KEY_70wQA3noboJseMeugbCm7Z6jyXkLlCjMYcHazDOi"
       },
       "service_address": "te.checkpoint.com",
       "using_cloud_server": true

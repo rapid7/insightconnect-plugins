@@ -7,10 +7,10 @@
       "iid": null
     },
     "connection": {
-      "url": "",
+      "url": "https://ec2-34-207-119-172.compute-1.amazonaws.com",
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "root",
+        "username": "GnyW6pAyobBCxvKzz6yA"
       }
     },
     "trigger": "issue",

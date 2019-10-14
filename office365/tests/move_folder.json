@@ -1,0 +1,25 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "move_folder",
+    "trigger": "",
+    "connection": {
+      "connection_cache_key": "",
+      "app_id": "",
+      "app_secret": {
+        "secretKey": ""
+      },
+      "tenant_id": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "folder_id": "",
+      "other_parent_id": "",
+      "user_id_principal": "",
+      "well_known_parent_id": ""
+    }
+  }
+}
+

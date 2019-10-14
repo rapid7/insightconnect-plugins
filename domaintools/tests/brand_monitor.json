@@ -4,9 +4,9 @@
   "body": {
     "connection": {
       "api_key": {
-        "secretKey": ""
+        "secretKey": "9088f-3b9cf-145eb-6eccd-fb8e4"
       },
-      "username": ""
+      "username": "komand"
     },
     "action": "brand_monitor",
     "meta": {},

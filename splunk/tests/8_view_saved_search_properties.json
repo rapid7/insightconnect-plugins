@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "view_saved_search_properties",
+        "input": {
+            "saved_search_name": "Mike Test 1"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

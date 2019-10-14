@@ -79,8 +79,9 @@ This action is used to transition an issue.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |comment|string|None|False|Comment to add|None|
-|transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|
+|fields|object|None|False|Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}|None|
 |id|string|None|True|Issue ID|None|
+|transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|
 
 #### Output
 
@@ -934,7 +935,9 @@ response text = {"errorMessages":[],"errors":{"issuetype":"issue type is require
 * 3.0.5 - Fix issue where description in Get Issue action would return None if description was left empty
 * 3.1.0 - Added new Edit Issue action
 * 3.1.1 - Update connection input labels to reflect Jira API changes
-
+* 3.1.2 - Update Create Issue action to remove newlines from summaries
+* 3.2.0 - Update Transition Issue action to allow for assignment of fields during issue transition
+* 3.2.1 - Update Get Issue, Find Issues and New Issue action to support a Get Attachments option
 ## Workflows
 
 Examples:

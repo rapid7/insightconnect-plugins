@@ -1,4 +1,5 @@
 import logging
+import base64
 
 
 def normalize_comment(source, logger=logging.getLogger()):
@@ -8,7 +9,7 @@ def normalize_comment(source, logger=logging.getLogger()):
     return comment
 
 
-def normalize_issue(issue, include_raw_fields=False, logger=logging.getLogger()):
+def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logger=logging.getLogger()):
 
     url = issue.permalink().split(" - ", 1)[0]
 
@@ -36,9 +37,16 @@ def normalize_issue(issue, include_raw_fields=False, logger=logging.getLogger())
     if include_raw_fields:
         fields = issue.raw["fields"]
 
+    attachment = []
+    if get_attachments:
+        for a in issue.fields.attachment:
+            single_attachment = {'filename': a.filename,'content': base64.standard_b64encode(a.get()).decode()}
+            attachment.append(single_attachment)
+
     logger.debug("Source issue: %s", issue.raw)
 
     output = {
+        "attachments": attachment,
         "id": issue.id,
         "key": issue.key,
         "url": url,

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Enable an user account"
+
+
 class Input:
     ID = "id"
     

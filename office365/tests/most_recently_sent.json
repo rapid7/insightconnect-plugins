@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "most_recently_sent",
+    "trigger": "",
+    "connection": {
+      "connection_cache_key": "",
+      "app_id": "",
+      "app_secret": {
+        "secretKey": ""
+      },
+      "tenant_id": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "user_id_principal": ""
+    }
+  }
+}

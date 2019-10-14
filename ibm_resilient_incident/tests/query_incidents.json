@@ -2,9 +2,9 @@
     "body": {
         "action": "query_incidents",
         "connection": {
-            "email": "",
-            "hostname": "",
-            "password": ""
+            "email": "mike@komand.com",
+            "hostname": "https://10.218.1.196",
+            "password": "mXhNQrCzhMUixNu4REUCEyUC"
         },
         "input": {
             "organization_id": 201,

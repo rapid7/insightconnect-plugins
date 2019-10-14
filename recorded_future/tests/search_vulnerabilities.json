@@ -1,18 +1,15 @@
 {
-  "body": {
-    "connection": {
-      "api_key": ""
+    "body": {
+        "action": "search_vulnerabilities",
+        "input": {
+            "direction": "asc",
+            "freetext": "CVE",
+            "from": 1,
+            "limit": 10,
+            "orderby": "Created"
+        },
+        "meta": {}
     },
-    "input": {
-      "freetext": "CVE",
-      "orderby": "Created",
-      "limit": 10,
-      "from": 1,
-      "direction": "asc"
-    },
-    "action": "search_vulnerabilities",
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

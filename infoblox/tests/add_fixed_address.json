@@ -10,10 +10,10 @@
     },
     "connection": {
       "api_version": "2.7",
-      "infoblox_host": "",
+      "infoblox_host": "https://192.168.1.2",
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "infoblox",
+        "username": "user"
       }
     }
   },

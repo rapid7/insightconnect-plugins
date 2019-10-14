@@ -1,0 +1,59 @@
+{
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('jschipp%40komanddev.onmicrosoft.com')/messages",
+    "@odata.nextLink": "https://graph.microsoft.com/v1.0/5c824599-dc8c-4d31-96fb-3b886d4f8f10/users/jschipp@komanddev.onmicrosoft.com/messages?$orderby=receivedDateTime+DESC&$skip=12",
+    "value": [
+         {
+            "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE33QsT\"",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAAAAAEKAAC8UQDN7ObVSLWQuxHJ-dDTAAE4BZLGAAA=",
+            "createdDateTime": "2019-08-09T15:56:16Z",
+            "lastModifiedDateTime": "2019-08-09T16:11:24Z",
+            "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAE33QsT",
+            "categories": [],
+            "receivedDateTime": "2019-08-09T15:56:16Z",
+            "sentDateTime": "2019-08-09T15:56:09Z",
+            "hasAttachments": false,
+            "internetMessageId": "<de188893-7cd5-f453-6260-3d3f6df20c1a@rapid7.com>",
+            "subject": "Test",
+            "bodyPreview": "Test\r\n\r\n\r\n-- \r\nNOTICE OF CONFIDENTIALITY: At Rapid7, the privacy of our customers, \r\npartners, and employees is paramount. If you received this email in error, \r\nplease notify the sender and delete it from your inbox right away. Learn \r\nhow Rapid7 handles",
+            "importance": "normal",
+            "parentFolderId": "AQMkADI3Mzc1ZTg3LTIzYWEALTQzZjYtYWQ0OS0wYjIwM2MwN2U4YWMALgAAAzEO_s9zyrpKoYtMn2IH9IYBALxRAM3s5tVItZC7Ecn90NMAAAIBCgAAAA==",
+            "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQAE2wpkVEQzdCidSeiHuocKk=",
+            "isDeliveryReceiptRequested": null,
+            "isReadReceiptRequested": false,
+            "isRead": false,
+            "isDraft": false,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAAAAAEKAAC8UQDN7ObVSLWQuxHJ%2FdDTAAE4BZLGAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "inferenceClassification": "focused",
+            "body": {
+                "contentType": "text",
+                "content": "This is some test text for the body."
+            },
+            "sender": {
+                "emailAddress": {
+                    "name": "Joey McAdams",
+                    "address": "joey_mcadams@rapid7.com"
+                }
+            },
+            "from": {
+                "emailAddress": {
+                    "name": "Joey McAdams",
+                    "address": "joey_mcadams@rapid7.com"
+                }
+            },
+            "toRecipients": [
+                {
+                    "emailAddress": {
+                        "name": "Jon Schipp",
+                        "address": "jschipp@komanddev.onmicrosoft.com"
+                    }
+                }
+            ],
+            "ccRecipients": [],
+            "bccRecipients": [],
+            "replyTo": [],
+            "flag": {
+                "flagStatus": "notFlagged"
+            }
+        }
+    ]
+}

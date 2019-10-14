@@ -2,9 +2,10 @@ plugin_spec_version: v2
 name: whois
 title: Whois
 description: Whois Lookups
-version: 1.0.3
+version: 1.0.4
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - whois
 - ip lookup
@@ -49,9 +50,9 @@ actions:
         description: Expiration date
         type: date
         required: false
-      updated_date:
+      last_updated:
         title: Last updated date
-        description: Updated Date
+        description: Last updated date
         type: date
         required: false
       name_servers:

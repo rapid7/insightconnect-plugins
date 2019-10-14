@@ -1,22 +1,19 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "input": {
-      "details": { "stuff": "things "},
-      "contexts": [],
-      "client_url": "",
-      "client": "komand",
-      "description": "hi there acknowledge",
-      "service_key": "",
-      "incident_key": ""
+    "body": {
+        "action": "send_resolve_event",
+        "input": {
+            "client": "McAdams",
+            "client_url": "www.google.com",
+            "contexts": [],
+            "description": "hi there acknowledge",
+            "details": {
+                "stuff": "things "
+            },
+            "incident_key": "",
+            "service_key": ""
+        },
+        "meta": {}
     },
-    "action": "send_resolve_event",
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

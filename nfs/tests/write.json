@@ -1,0 +1,22 @@
+{
+    "version": "v1",
+    "type": "action_start",
+    "body": {
+      "meta": {},
+      "action": "write",
+      "connection": {
+        "client_external_ip": "",
+        "client_machine_name": "",
+        "exports_file_hostname": "",
+        "mount_pathname": "",
+        "timeout": 0
+      },
+      "dispatcher": {},
+      "input": {
+        "create_if_missing": false,
+        "file_pathname": "",
+        "lines_to_write": null,
+        "remove_if_present": false
+      }
+    }
+  }

@@ -10,13 +10,13 @@
     },
     "connection": {
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "notpassword",
+        "username": "admin"
       },
       "api_key": {
         "secretKey": ""
       },
-      "url": ""
+      "url": "https://qradar-7-2-7.vuln.lax.rapid7.com"
     }
   },
   "type": "action_start",

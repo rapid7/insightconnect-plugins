@@ -2,9 +2,9 @@
     "body": {
         "action": "get_incident_tasks",
         "connection": {
-            "email": "",
-            "hostname": "",
-            "password": ""
+            "email": "mike@komand.com",
+            "hostname": "https://10.218.1.196",
+            "password": "mXhNQrCzhMUixNu4REUCEyUC"
         },
         "input": {
             "incident_id": 3944,

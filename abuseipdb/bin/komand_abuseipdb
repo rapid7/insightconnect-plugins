@@ -6,7 +6,7 @@ from komand_abuseipdb import connection, actions, triggers
 
 Name = 'AbuseIPDB'
 Vendor = 'rapid7'
-Version = '3.0.1'
+Version = '5.0.0'
 Description = 'AbuseIPDB is a free service which allows you to look up IP reports, or report an abusive IP'
 
 
@@ -22,6 +22,8 @@ class ICONAbuseipdb(komand.Plugin):
         self.add_action(actions.CheckCidr())
 
         self.add_action(actions.CheckIp())
+
+        self.add_action(actions.GetBlacklist())
 
         self.add_action(actions.ReportIp())
 

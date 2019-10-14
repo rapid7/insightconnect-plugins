@@ -1,0 +1,55 @@
+{
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#message",
+    "@odata.type": "#microsoft.graph.message",
+    "@odata.etag": "W/\"CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAFBep85\"",
+    "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAAAAAEIAAC8UQDN7ObVSLWQuxHJ-dDTAAFBpcnFAAA=",
+    "createdDateTime": "2019-08-22T20:56:32Z",
+    "lastModifiedDateTime": "2019-08-22T20:57:03Z",
+    "changeKey": "CQAAABYAAAC8UQDN7ObVSLWQuxHJ/dDTAAFBep85",
+    "categories": [],
+    "receivedDateTime": "2019-08-22T20:56:32Z",
+    "sentDateTime": "2019-08-22T20:56:24Z",
+    "hasAttachments": false,
+    "internetMessageId": "<30340d34-2b55-7342-7562-9a830c12d181@rapid7.com>",
+    "subject": "JOEY TEST",
+    "bodyPreview": "Test\r\n\r\n\r\n-- \r\nNOTICE OF CONFIDENTIALITY: At Rapid7, the privacy of our customers, \r\npartners, and employees is paramount. If you received this email in error, \r\nplease notify the sender and delete it from your inbox right away. Learn \r\nhow Rapid7 handles",
+    "importance": "normal",
+    "parentFolderId": "fake_dest_54321",
+    "conversationId": "AAQkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwAQABI-fVvHOGNMqsSAW7H9qN8=",
+    "isDeliveryReceiptRequested": null,
+    "isReadReceiptRequested": false,
+    "isRead": false,
+    "isDraft": false,
+    "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB%2FSGBwC8UQDN7ObVSLWQuxHJ%2FdDTAAAAAAEIAAC8UQDN7ObVSLWQuxHJ%2FdDTAAFBpcnFAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+    "inferenceClassification": "focused",
+    "body": {
+        "contentType": "text",
+        "content": "Test\r\n\r\n\r\n-- \r\nNOTICE OF CONFIDENTIALITY: At Rapid7, the privacy of our customers, \r\npartners, and employees is paramount. If you received this email in error, \r\nplease notify the sender and delete it from your inbox right away. Learn \r\nhow Rapid7 handles privacy at rapid7.com/privacy-policy \r\n<https://www.rapid7.com/privacy-policy/>. To opt-out of Rapid7 marketing \r\nemails, please click here \r\n<https://information.rapid7.com/manage-subscription.html> or email \r\nprivacy@rapid7.com <mailto:mailto:privacy@rapid7.com>.\r\n"
+    },
+    "sender": {
+        "emailAddress": {
+            "name": "Joey McAdams",
+            "address": "joey_mcadams@rapid7.com"
+        }
+    },
+    "from": {
+        "emailAddress": {
+            "name": "Joey McAdams",
+            "address": "joey_mcadams@rapid7.com"
+        }
+    },
+    "toRecipients": [
+        {
+            "emailAddress": {
+                "name": "Jon Schipp",
+                "address": "jschipp@komanddev.onmicrosoft.com"
+            }
+        }
+    ],
+    "ccRecipients": [],
+    "bccRecipients": [],
+    "replyTo": [],
+    "flag": {
+        "flagStatus": "notFlagged"
+    }
+}

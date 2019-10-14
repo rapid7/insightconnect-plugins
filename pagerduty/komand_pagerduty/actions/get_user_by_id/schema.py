@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a User by ID"
+
+
 class Input:
     ID = "id"
     
@@ -134,8 +138,8 @@ class GetUserByIdOutput(komand.Output):
         }
       },
       "required": [
-        "name",
-        "email"
+        "email",
+        "name"
       ]
     }
   }

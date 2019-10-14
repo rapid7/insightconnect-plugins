@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Convert HTML to EPUB"
+
+
 class Input:
     DOC = "doc"
     

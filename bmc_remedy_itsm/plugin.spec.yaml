@@ -1,0 +1,963 @@
+plugin_spec_version: v2
+name: bmc_remedy_itsm
+title: "BMC Remedy ITSM"
+description: "Transform your service desk with the right ITSM solution"
+version: 1.5.0
+vendor: rapid7
+tags: [ "ITSM", "BMC", "Remedy", "Service Management" ]
+support: community
+status: []
+
+types:
+  self:
+    href:
+      title: "HREF"
+      type: string
+      description: "HREF"
+      required: false
+  _links:
+    self:
+      title: "Self"
+      type: "[]self"
+      description: "Self"
+      required: false
+  Closed_Type:
+    timestamp:
+      title: "Timestamp"
+      type: string
+      description: "Timestamp"
+      required: false
+    user:
+      title: "User"
+      type: string
+      description: "User"
+      required: false
+  Status_History_Type:
+    New:
+      title: "New"
+      type: Closed_Type
+      description: "New"
+      required: false
+    Closed:
+      title: "Closed"
+      type: Closed_Type
+      description: "Closed"
+      required: false
+  values:
+    Site ID:
+      title: "Site ID"
+      type: string
+      description: "Site ID"
+      required: false
+    Submitter:
+      title: "Submitter"
+      type: string
+      description: "Submitter"
+      required: false
+    Onwer Group Uses SLA:
+      title: "Owner Group Uses SLA"
+      type: string
+      description: "Owner group uses SLA"
+      required: false
+    Last Modified Date:
+      title: "Last Modified Date"
+      type: string
+      description: "Last modified date"
+      required: false
+    Total Transfers:
+      title: "Total Transfers"
+      type: integer
+      description: "Total transfers"
+      required: false
+    Abydos AuditFlag:
+      title: "Abydos Audit Flag"
+      type: string
+      description: "Abydos audit flag"
+      required: false
+    Direct Contact Internet E-mail:
+      title: "Direct Contact Internet E-Mail"
+      type: string
+      description: "Direct contact internet e-mail"
+      required: false
+    Company:
+      title: "Company"
+      type: string
+      description: "Company"
+      required: false
+    VIP:
+      title: "VIP"
+      type: string
+      description: "VIP"
+      required: false
+    Contact Company:
+      title: "Contact Company"
+      type: string
+      description: "Contact company"
+      required: false
+    Escalated?:
+      title: "Was Escalated"
+      type: string
+      description: "Was escalated"
+      required: false
+    Responded Date:
+      title: "Responded Date"
+      type: string
+      description: "Responded date"
+      required: false
+    Submit Date:
+      title: "Submit Date"
+      type: string
+      description: "Submit date"
+      required: false
+    Internet E-mail:
+      title: "Internet E-Mail"
+      type: string
+      description: "Internet e-mail"
+      required: false
+    Incident Number:
+      title: "Incident Number"
+      type: string
+      description: "Incident number"
+      required: false
+    Region:
+      title: "Region"
+      type: string
+      description: "Region"
+      required: false
+    Phone Number:
+      title: "Phone Number"
+      type: string
+      description: "Phone number"
+      required: false
+    Direct Contact Site Group:
+      title: "Direct Contact Site Group"
+      type: string
+      description: "Direct contact site group"
+      required: false
+    Direct Contact Country:
+      title: "Direct Contact Country"
+      type: string
+      description: "Direct contact country"
+      required: false
+    Direct Contact First Name:
+      title: "Direct Contact First Name"
+      type: string
+      description: "Direct contact first name"
+      required: false
+    Organization:
+      title: "Organization"
+      type: string
+      description: "Organization"
+      required: false
+    Assigned Support Company:
+      title: "Assigned Support Company"
+      type: string
+      description: "Assigned support company"
+      required: false
+    Service Type:
+      title: "Service Type"
+      type: string
+      description: "Service type"
+      required: false
+    Direct Contact State/Province:
+      title: "Direct Contact State or Province"
+      type: string
+      description: "Direct contact state or province"
+      required: false
+    Direct Contact Time Zone:
+      title: "Direct Contact Time Zone"
+      type: string
+      description: "Direct contact time zone"
+      required: false
+    Owner Group ID:
+      title: "Owner Group ID"
+      type: string
+      description: "Owner group ID"
+      required: false
+    Impact:
+      title: "Impact"
+      type: string
+      description: "Impact"
+      required: false
+    Assign To Vendor:
+      title: "Assign To Vendor"
+      type: string
+      description: "Assign to vendor"
+      required: false
+    Time Zone:
+      title: "Time Zone"
+      type: string
+      description: "Time zone"
+      required: false
+    Priority:
+      title: "Priority"
+      type: string
+      description: "Priority"
+      required: false
+    StageCondition:
+      title: "Stage Condition"
+      type: string
+      description: "Stage condition"
+      required: false
+    Resolution Method:
+      title: "Resolution Method"
+      type: string
+      description: "Resolution method"
+      required: false
+    Site Group:
+      title: "Site Group"
+      type: string
+      description: "Site group"
+      required: false
+    Status History:
+      title: "Status History"
+      type: Status_History_Type
+      description: "Status history"
+      required: false
+    Direct Contact Last Name:
+      title: "Direct Contact Last Name"
+      type: string
+      description: "Direct contact last name"
+      required: false
+    SLM Priority:
+      title: "SLM Priority"
+      type: string
+      description: "SLM priority"
+      required: false
+    State Province:
+      title: "State Province"
+      type: string
+      description: "State province"
+      required: false
+    Total Time Spent:
+      title: "Total Time Spent"
+      type: integer
+      description: "Total time spent"
+      required: false
+    TicketType:
+      title: "Ticket Type"
+      type: string
+      description: "Ticket type"
+      required: false
+    Owner Login ID:
+      title: "Owner Login ID"
+      type: string
+      description: "Owner login ID"
+      required: false
+    Owner Group:
+      title: "Owner Group"
+      type: string
+      description: "Owner group"
+      required: false
+    Status:
+      title: "Status"
+      type: string
+      description: "Status"
+      required: false
+    Total OLA AcknowledgeEsc Level:
+      title: "Total OLA Acknowledge ESC Level"
+      type: integer
+      description: "Total OLA acknowledge ESC level"
+      required: false
+    EH:
+      title: "EH"
+      type: integer
+      description: "EH"
+      required: false
+    Extension:
+      title: "Extension"
+      type: string
+      description: "Extension"
+      required: false
+    Owner Support Organization:
+      title: "Owner Support Organization"
+      type: string
+      description: "Owner support organization"
+      required: false
+    Status-PPL:
+      title: "Status-PPL"
+      type: string
+      description: "Status-PPL"
+      required: false
+    Assignee Login ID:
+      title: "Assignee Login ID"
+      type: string
+      description: "Assignee login ID"
+      required: false
+    LookupKeyword:
+      title: "Lookup Keyword"
+      type: string
+      description: "Lookup keyword"
+      required: false
+    z1D_PreviousAssignedCompany:
+      title: "z1D Previous Assigned Company"
+      type: string
+      description: "z1D previous assigned company"
+      required: false
+    Direct Contact Site ID:
+      title: "Direct Contact Site ID"
+      type: string
+      description: "Direct contact site ID"
+      required: false
+    Urgency:
+      title: "Urgency"
+      type: string
+      description: "Urgency"
+      required: false
+    Last Modified By:
+      title: "Last Modified By"
+      type: string
+      description: "Last modified by"
+      required: false
+    Last Name:
+      title: "Last Name"
+      type: string
+      description: "Last name"
+      required: false
+    Total Fields Count:
+      title: "Total Fields Count"
+      type: integer
+      description: "Total fields count"
+      required: false
+    Closed Date:
+      title: "Closed Date"
+      type: string
+      description: "Closed date"
+      required: false
+    Create Impacted Area from Customer's Location:
+      title: "Create Impacted Area From Customer's Location"
+      type: string
+      description: "Create impacted area from customer's location"
+      required: false
+    Categorization Tier 3:
+      title: "Categorization Tier 3"
+      type: string
+      description: "Categorization tier 3"
+      required: false
+    Owner:
+      title: "Owner"
+      type: string
+      description: "Owner"
+      required: false
+    Area Code:
+      title: "Area Code"
+      type: string
+      description: "Area code"
+      required: false
+    Direct Contact Area Code:
+      title: "Direct Contact Area Code"
+      type: string
+      description: "Direct contact area code"
+      required: false
+    Contact Client Type:
+      title: "Contact Client Type"
+      type: string
+      description: "Contact client type"
+      required: false
+    Estimated Resolution Date:
+      title: "Estimated Resolution Date"
+      type: string
+      description: "Estimated resolution date"
+      required: false
+    Resolution Category:
+      title: "Resolution Category"
+      type: string
+      description: "Resolution category"
+      required: false
+    Flag_Create_Request:
+      title: "Flag Create Request"
+      type: string
+      description: "Flag create request"
+      required: false
+    Last Date Duration Calculated:
+      title: "Last Date Duration Calculated"
+      type: string
+      description: "Last date duration calculated"
+      required: false
+    Show For Process:
+      title: "Show For Process"
+      type: string
+      description: "Show for process"
+      required: false
+    Assigned Group Uses OLA:
+      title: "Assigned Group Uses OLA"
+      type: string
+      description: "Assigned group uses OLA"
+      required: false
+    Owner Support Company:
+      title: "Owner Support Company"
+      type: string
+      description: "Owner support company"
+      required: false
+    Abydos Use Wizard?:
+      title: "Did Use Abydos Use Wizard"
+      type: string
+      description: "Did use Abydos use wizard"
+      required: false
+    Direct Contact City:
+      title: "Direct Contact City"
+      type: string
+      description: "Direct contact city"
+      required: false
+    Contact Sensitivity:
+      title: "Contact Sensitivity"
+      type: string
+      description: "Contact sensitivity"
+      required: false
+    Person ID:
+      title: "Person ID"
+      type: string
+      description: "Person ID"
+      required: false
+    Priority Weight:
+      title: "Priority Weight"
+      type: integer
+      description: "Priority weight"
+      required: false
+    Effort Time Spent Minutes:
+      title: "Effort Time Spent Minutes"
+      type: integer
+      description: "Effort time spent minutes"
+      required: false
+    Country Code:
+      title: "Country Code"
+      type: string
+      description: "Country code"
+      required: false
+    Resolution Category Tier 2:
+      title: "Resolution Category Tier 2"
+      type: string
+      description: "Resolution category tier 2"
+      required: false
+    Resolution Category Tier 3:
+      title: "Resolution Category Tier 3"
+      type: string
+      description: "Resolution category tier 3"
+      required: false
+    Direct Contact Zip/Postal Code:
+      title: "Direct Contact ZIP/Postal Code"
+      type: string
+      description: "Direct contact ZIP/postal code"
+      required: false
+    Local Phone:
+      title: "Local Phone"
+      type: string
+      description: "Local phone"
+      required: false
+    Individual Transfers:
+      title: "Individual Transfers"
+      type: integer
+      description: "Individual transfers"
+      required: false
+    Direct Contact Region:
+      title: "Direct Contact Region"
+      type: string
+      description: "Direct contact region"
+      required: false
+    Direct Contact Phone Number:
+      title: "Direct Contact Phone Number"
+      type: string
+      description: "Direct contact phone number"
+      required: false
+    Abydos Tasks Generated:
+      title: "Abydos Tasks Generated"
+      type: string
+      description: "Abydos tasks generated"
+      required: false
+    Resolution:
+      title: "Resolution"
+      type: string
+      description: "Resolution"
+      required: false
+    Total Escalation Level:
+      title: "Total Escalation Level"
+      type: integer
+      description: "Total escalation level"
+      required: false
+    Direct Contact Company:
+      title: "Direct Contact Company"
+      type: string
+      description: "Direct contact company"
+      required: false
+    First Name:
+      title: "First Name"
+      type: string
+      description: "First name"
+      required: false
+    Vendor Assignee Groups:
+      title: "Vendor Assignee Groups"
+      type: string
+      description: "Vendor assignee groups"
+      required: false
+    Assignee:
+      title: "Assignee"
+      type: string
+      description: "Assignee"
+      required: false
+    Reported Date:
+      title: "Reported Date"
+      type: string
+      description: "Reported date"
+      required: false
+    Entry ID:
+      title: "Entry ID"
+      type: string
+      description: "Entry ID"
+      required: false
+    Total OLA Resolution Esc Level:
+      title: "Total OLA Resolution ESC Level"
+      type: integer
+      description: "Total OLA resolution ESC level"
+      required: false
+    Assigned Support Organization:
+      title: "Assigned Support Organization"
+      type: string
+      description: "Assigned support organization"
+      required: false
+    Categorization Tier 2:
+      title: "Categorization Tier 2"
+      type: string
+      description: "Categorization tier 2"
+      required: false
+    Assigned Group ID:
+      title: "Assigned Group ID"
+      type: string
+      description: "Assigned group ID"
+      required: false
+    Categorization Tier 1:
+      title: "Categorization Tier 1"
+      type: string
+      description: "Categorization tier 1"
+      required: false
+    City:
+      title: "City"
+      type: string
+      description: "City"
+      required: false
+    Created from Template:
+      title: "Created From Template"
+      type: string
+      description: "Created from template"
+      required: false
+    Product Categorization Tier 1:
+      title: "Product Categorization Tier 1"
+      type: string
+      description: "Product categorization tier 1"
+      required: false
+    OLA Hold:
+      title: "Ola Hold"
+      type: string
+      description: "OLA hold"
+      required: false
+    Direct Contact Person ID:
+      title: "Direct Contact Person ID"
+      type: string
+      description: "Direct contact person ID"
+      required: false
+    Closure Product Category Tier1:
+      title: "Closure Product Category Tier1"
+      type: string
+      description: "Closure product category tier1"
+      required: false
+    Closure Product Category Tier2:
+      title: "Closure Product Category Tier2"
+      type: string
+      description: "Closure product category tier2"
+      required: false
+    Closure Product Category Tier3:
+      title: "Closure Product Category Tier3"
+      type: string
+      description: "Closure product category tier3"
+      required: false
+    Product Categorization Tier 3:
+      title: "Product Categorization Tier 3"
+      type: string
+      description: "Product categorization tier 3"
+      required: false
+    Product Categorization Tier 2:
+      title: "Product Categorization Tier 2"
+      type: string
+      description: "Product categorization tier 2"
+      required: false
+    Group Transfers:
+      title: "Group Transfers"
+      type: integer
+      description: "Group transfers"
+      required: false
+    Short Description:
+      title: "Short Description"
+      type: string
+      description: "Short description"
+      required: false
+    DR:
+      title: "DR"
+      type: integer
+      description: "DR"
+      required: false
+    SLA Hold:
+      title: "SLA Hold"
+      type: string
+      description: "SLA hold"
+      required: false
+    Closure_Source:
+      title: "Closure Source"
+      type: string
+      description: "Closure source"
+      required: false
+    Description:
+      title: "Description"
+      type: string
+      description: "Description"
+      required: false
+    Enable Assignment Engine:
+      title: "Enable Assignment Engine"
+      type: string
+      description: "Enable assignment engine"
+      required: false
+    InstanceId:
+      title: "Instance ID"
+      type: string
+      description: "Instance ID"
+      required: false
+    ESChat_Set Auto Assign:
+      title: "ES Chat Set Auto Assign"
+      type: integer
+      description: "ES Chat set auto assign"
+      required: false
+    Last Acknowledged Date:
+      title: "Last Acknowledged Date"
+      type: string
+      description: "Last acknowledged date"
+      required: false
+    DataTags:
+      title: "Data Tags"
+      type: string
+      description: "Data tags"
+      required: false
+    Assignee Groups:
+      title: "Assignee Groups"
+      type: string
+      description: "Assignee groups"
+      required: false
+    CurrentStageNumber:
+      title: "Current Stage Number"
+      type: integer
+      description: "Current stage number"
+      required: false
+    Direct Contact Site:
+      title: "Direct Contact Site"
+      type: string
+      description: "Direct contact site"
+      required: false
+    Direct Contact Extension:
+      title: "Direct Contact Extension"
+      type: string
+      description: "Direct contact extension"
+      required: false
+    Assigned Group:
+      title: "Assigned Group"
+      type: string
+      description: "Assigned group"
+      required: false
+    InfrastructureEventType:
+      title: "Infrastructure Event Type"
+      type: string
+      description: "Infrastructure Event Type"
+      required: false
+    Country:
+      title: "Country"
+      type: string
+      description: "Country"
+      required: false
+    Direct Contact Street:
+      title: "Direct Contact Street"
+      type: string
+      description: "Direct contact street"
+      required: false
+    Direct Contact Local Number:
+      title: "Direct Contact Local Number"
+      type: string
+      description: "Direct contact local number"
+      required: false
+    SLA Res Business Hour Seconds:
+      title: "SLA Res Business Hour Seconds"
+      type: integer
+      description: "SLA res business hour seconds"
+      required: false
+    Last Resolved Date:
+      title: "Last Resolved Date"
+      type: string
+      description: "Last resolved date"
+      required: false
+    Direct Contact Organization:
+      title: "Direct Contact Organization"
+      type: string
+      description: "Direct contact organization"
+      required: false
+    Site:
+      title: "Site"
+      type: string
+      description: "Site"
+      required: false
+    Required Resolution DateTime:
+      title: "Required Resolution Datetime"
+      type: string
+      description: "Required resolution datetime"
+      required: false
+    Street:
+      title: "Street"
+      type: string
+      description: "Street"
+      required: false
+    Reported Source:
+      title: "Reported Source"
+      type: string
+      description: "Reported source"
+      required: false
+    Direct Contact Country Code:
+      title: "Direct Contact Country Code"
+      type: string
+      description: "Direct contact country code"
+      required: false
+  incident:
+    values:
+      title: "Values"
+      type: values
+      description: "Values"
+      required: false
+    _links:
+      title: " Links"
+      type: _links
+      description: " links"
+      required: false
+
+connection:
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: true
+  url:
+    title: "URL"
+    description: "The URL for the BCM Remedy ITSM server. e.g. http://remd-itsm1902.xxx.xxx.rapid7.com"
+    type: string
+    required: true
+  port:
+    title: "Port"
+    description: "The port the REST API is listening on. This may be different than the port for the web interface"
+    type: string
+    required: true
+  ssl_verify:
+    title: "SSL Verify"
+    description: "Boolean property used to decide whether to verify a TSL or SSL certificate"
+    type: boolean
+    required: true
+
+triggers:
+  new_incident_found:
+    title: New Incident Found
+    description: Returns any new incidents found
+    input:
+      description_query:
+        title: Description Query
+        description: Regex-capable description query
+        type: string
+        required: false
+      interval:
+        type: integer
+        description: "How often to poll for new incidents in seconds"
+        default: 15
+        required: false
+    output:
+      incident:
+        title: Incident
+        type: incident
+        description: Incident
+        required: false
+
+actions:
+  get_incident_information:
+    title: Get Incident Information
+    description: Get incident information
+    input:
+      incident_id:
+        type: string
+        title: Incident ID
+        description: Incident ID
+        required: true
+    output:
+      incident:
+        title: "Incident"
+        type: incident
+        description: "Incident"
+        required: false
+  create_incident:
+    title: Create Incident
+    description: Create Incident
+    input:
+      first_name:
+        title: First Name
+        description: First name of customer
+        type: string
+        required: false
+      last_name:
+        title: Last Name
+        description: Last name of customer
+        type: string
+        required: false
+      incident_description:
+        title: Description
+        description: A description of the incident
+        type: string
+        required: true
+      impact:
+        title: Impact
+        description: Impact level of the incident
+        type: string
+        required: true
+      urgency:
+        title: Urgency
+        description: Incident urgency
+        type: string
+        required: true
+      status:
+        title: Status
+        description: Incident status
+        type: string
+        required: true
+      reported_source:
+        title: Reported Source
+        description: How the incident was reported
+        type: string
+        required: true
+      service_type:
+        title: Service Type
+        description: The type of service requested in the incident
+        type: string
+        required: true
+      login_id:
+        title: Login ID
+        description: Incident creator login ID
+        type: string
+        required: true
+      other_inputs:
+        title: Other Inputs
+        description: Arbitrary JSON-formatted values for optional inputs, e.g. {"Manufacturer":"Dell", "Vendor Assignee Groups":"example"}
+        type: object
+        required: false
+    output:
+      success:
+        title: Success
+        description: Will return true if successful
+        type: boolean
+        required: false
+  close_incident:
+    title: Close Incident
+    description: Close an Incident
+    input:
+      incident_id:
+        type: string
+        title: Incident ID
+        description: Incident ID
+        required: true
+      resolution_type:
+        type: string
+        title: Resolution Type
+        description: Resolution type of either `Closed`, `Resolved`, or `Cancelled`
+        required: true
+        enum:
+          - Closed
+          - Resolved
+          - Cancelled
+        default: Resolved
+      resolution_description:
+        type: string
+        title: Resolution Description
+        description: A description of the resolution
+        required: true
+    output:
+      success:
+        title: Success
+        description: Will return true if successful
+        type: boolean
+        required: false
+  update_incident:
+    title: Update Incident
+    description: Update an Incident
+    input:
+      incident_id:
+        type: string
+        title: Incident ID
+        description: Incident ID
+        required: true
+      status:
+        title: Status
+        description: Incident status
+        type: string
+        required: false
+      incident_description:
+        title: Description
+        description: A description of the incident
+        type: string
+        required: false
+      impact:
+        title: Impact
+        description: Impact level of the incident
+        type: string
+        required: false
+      urgency:
+        title: Urgency
+        description: Incident urgency
+        type: string
+        required: false
+      assigned_group:
+        title: Assigned Group
+        description: Assigned group
+        type: string
+        required: false
+      other_inputs:
+        title: Other Inputs
+        description: Arbitrary JSON-formatted values for optional inputs, e.g. {"Manufacturer":"Dell", "Vendor Assignee Groups":"example"}
+        type: object
+        required: false
+    output:
+      incident:
+        title: "Incident"
+        type: incident
+        description: "Incident"
+        required: false
+  search_incident:
+    title: Search Incident
+    description: Search for incidents by their properties
+    input:
+      search_parameters:
+        title: Search Parameters
+        description: Search query. Reference the plugin help documentation for properly constructing a query
+        type: string
+        required: true
+    output:
+      entries:
+        title: Entries
+        description: List of incidents matching the search query
+        type: "[]incident"
+        required: false
+  update_incident_status:
+    title: Update Incident Status
+    description: Update the status of an incident
+    input:
+      incident_id:
+        type: string
+        title: Incident ID
+        description: Incident ID
+        required: true
+      status:
+        title: Status
+        description: Incident status e.g. Assigned, In Progress, Pending, Resolved, Closed, Cancelled
+        type: string
+        required: true
+    output:
+      incident:
+        title: "Incident"
+        type: incident
+        description: "Incident"
+        required: false

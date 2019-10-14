@@ -1,0 +1,199 @@
+plugin_spec_version: v2
+name: microsoft_office365_email_security
+title: Microsoft Office365 Email Security
+description: A collection of utilities related to Office 365 email security tasks
+version: 2.2.0
+vendor: rapid7
+support: rapid7
+status: []
+tags:
+- Office365
+- Microsoft
+- Administration
+- Spam
+- Phishing
+- Remediation
+- Email
+
+types:
+  message_trace:
+    Organization:
+      type: string
+      title: "Organization"
+      description: "Organization that message trace was run on"
+      required: true
+    MessageId:
+      title: "Message ID"
+      type: string
+      description: "ID of found email"
+      required: true
+    Received:
+      title: "Received Date"
+      type: string
+      description: "Date email was received"
+      required: true
+    RecipientAddress:
+      title: "Recipient Address"
+      description: "Recipient address"
+      required: true
+      type: string
+    Subject:
+      title: "Subject"
+      description: "Subject"
+      required: true
+      type: string
+    SenderAddress:
+      title: "Sender Address"
+      description: "Sender address"
+      required: true
+      type: string
+
+connection: 
+  credentials:
+    type: credential_username_password
+    title: Credentials
+    description: Username and password
+    required: true
+  office_365_url:
+    title: Office 365 URL
+    description: This parameter sets the location of the Office 365 or on-premise exchange server from which to execute the compliance actions E.G. https://management.exchangelabs.com/Management
+    type: string
+    default: https://ps.compliance.protection.outlook.com/powershell-liveid/
+    required: true
+
+actions:
+  block_sender_transport_rule:
+    title: Block Sender Transport Rule
+    description: Add a domain or email address to a blocking transport rule in Exchange Admin Center
+    input:
+      domain_or_email_to_block:
+        title: Domain or Email to Block
+        type: string
+        description: Domain or email address to block
+        required: true
+      transport_rule_name: 
+        title: Transport Rule Name
+        description: Transport rule name
+        type: string
+        default: "InsightConnect Block List"
+        required: true
+    output:
+      result:
+        title: Result
+        description: Result
+        type: string
+        required: true
+  mass_search_and_purge:
+    title: Email Compliance Search and Purge
+    description: Search and purge a provided email
+    input:
+      compliance_search_name:
+        title: Compliance Search Name
+        type: string
+        description: Name of compliance search
+        required: true
+      content_match_query: 
+        title: Content Match Query
+        description: This parameter uses a text search string or a query that's formatted by using the Keyword Query Language (KQL). For more information about KQL, see Keyword Query Language syntax reference (https://go.microsoft.com/fwlink/p/?linkid=269603)
+        type: string
+        required: true
+      query_timeout:
+        title: Query Timeout
+        type: integer
+        description: Query timeout in minutes
+        default: 60
+        required: false
+      delete_items:
+        title: Delete Items
+        description: The script only executes the delete action if this parameter is true
+        type: boolean
+        default: false
+        required: false
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+  email_compliance_search:
+    title: Email Compliance Search
+    description: Create a compliance search for provided email
+    input:
+      compliance_search_name:
+        title: Compliance search name
+        type: string
+        description: Name of compliance search
+        required: true
+      content_match_query: 
+        title: Content Match Query
+        description: This parameter uses a text search string or a query that's formatted by using the Keyword Query Language (KQL). For more information about KQL, see Keyword Query Language syntax reference (https://go.microsoft.com/fwlink/p/?linkid=269603)
+        type: string
+        required: true
+      query_timeout:
+        title: Query Timeout
+        type: integer
+        description: Query timeout in minutes
+        default: 60
+        required: false
+    output:
+      affected_users:
+        title: Users
+        description: Number of affected users
+        type: integer
+        required: true
+      users:
+        title: User Email Addresses
+        description: Email address of all affected users
+        type: "[]string"
+        required: true
+      emails_found:
+        title: Emails found
+        description: Emails found that matched
+        type: integer
+        required: true
+  mass_purge:
+    title: Email Compliance Purge
+    description: Purge a provided email
+    input:
+      compliance_search_name:
+        title: Compliance search name
+        type: string
+        description: Name of compliance search
+        required: true
+      query_timeout:
+        title: Query Timeout
+        type: integer
+        description: Query timeout in minutes
+        default: 60
+        required: false
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+  message_trace:
+    title: Message Trace
+    description: Run a message trace
+    input:
+      Sender_address:
+        title: Sender Address
+        type: string
+        description: Sender address
+        required: true
+      start_date:
+        title: Start Date
+        type: string
+        description: Start date in format MM/DD/YYYY e.g. 09/27/2019
+        required: true
+      end_date:
+        title: End Date
+        type: string
+        description: End date in format MM/DD/YYYY e.g. 09/27/2019
+        required: true
+    output:
+      message_traces:
+        title: Message Traces
+        description: Message Trace results
+        type: "[]message_trace"
+        required: true

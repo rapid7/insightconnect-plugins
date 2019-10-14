@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "search",
+    "input": {
+      "search_by": "ip_address",
+      "value": "209.90.88.140",
+      "start_date": "",
+      "end_date": ""
+    },
+    "connection": {
+      "api_credentials": {
+        "username": "komand_test",
+        "password": "komand"
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

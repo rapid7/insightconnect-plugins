@@ -3,7 +3,7 @@
     "action": "create_incident",
     "meta": {},
     "input": {
-      "assignee": "",
+      "assignee": "wwww@service.hmail.eu",
       "category_name": "Hardware",
       "description": "More text",
       "due_at": "2022-11-11",
@@ -12,7 +12,7 @@
       "solutions": [1],
       "name": "An incident",
       "priority": "Medium",
-      "requester": ""
+      "requester": "wwww@service.hmail.eu"
     },
     "connection": {
       "eu_customer": false,

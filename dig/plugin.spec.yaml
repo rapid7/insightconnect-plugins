@@ -4,6 +4,8 @@ title: Dig
 description: DNS Lookups
 version: 1.0.1
 vendor: rapid7
+support: community
+status: []
 tags:
 - dig
 - dns

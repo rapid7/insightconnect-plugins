@@ -1,0 +1,15 @@
+{
+    "version": "v1",
+    "type": "trigger_start",
+    "body": {
+      "meta": {},
+      "trigger": "Monthly",
+      "connection": {},
+      "dispatcher": {},
+      "input": {
+        "day_of_month": 9,
+        "message": "hello",
+        "times_in_utc": "20:26:00"
+      }
+    }
+  }

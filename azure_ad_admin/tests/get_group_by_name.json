@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_group_by_name",
+        "input": {
+            "name": "Azure AD Test Group"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

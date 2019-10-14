@@ -1,0 +1,23 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "reply_to_message",
+    "trigger": "",
+    "connection": {
+      "connection_cache_key": "",
+      "app_id": "",
+      "app_secret": {
+        "secretKey": ""
+      },
+      "tenant_id": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "comment": "",
+      "message_id": "",
+      "user_id_principal": ""
+    }
+  }
+}

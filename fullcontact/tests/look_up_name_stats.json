@@ -1,0 +1,20 @@
+{
+    "version": "v1",
+    "type": "action_start",
+    "body": {
+      "meta": {},
+      "action": "look_up_name_stats",
+      "connection": {
+        "server": "",
+        "token": {
+          "secretKey": ""
+        }
+      },
+      "dispatcher": {},
+      "input": {
+        "family_name": "",
+        "given_name": "",
+        "unspecific_name": ""
+      }
+    }
+  }

@@ -1,17 +1,11 @@
 {
-  "body": {
-    "action": "deactivate_activity_monitor",
-    "meta": {},
-    "input": {
-      "activity_monitor_id": 276
+    "body": {
+        "action": "deactivate_activity_monitor",
+        "input": {
+            "activity_monitor_id": 276
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_token": {
-        "secretKey": ""
-      },
-      "customer_id": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

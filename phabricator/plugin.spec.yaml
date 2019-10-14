@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: phabricator
 title: Phabricator
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Phabricator is a suite of open source tools for peer code review, task
   management, and project communication
 version: 1.0.0

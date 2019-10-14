@@ -11,7 +11,7 @@
     "action": "hash_set",
     "connection": {
       "port": 6379,
-      "host": "",
+      "host": "172.17.0.1",
       "db": 0
     }
   }

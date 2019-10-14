@@ -24,7 +24,7 @@ This action is used to retrieve data about a domain name.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|updated_date|date|False|None|
+|last_updated|date|False|None|
 |dnssec|string|False|None|
 |creation_date|date|False|None|
 |registrar_whois_server|string|False|None|
@@ -155,6 +155,7 @@ Examples:
 * 1.0.1 - Add support for LACNIC, APNIC, RIPE registries
 * 1.0.2 - Fix typo in plugin spec
 * 1.0.3 - Handle instances where domain name is prefixed with a protocol
+* 1.0.4 - Fix variable name in domain lookup
 
 ## References
 

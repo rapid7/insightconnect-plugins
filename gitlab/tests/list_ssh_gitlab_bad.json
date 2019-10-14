@@ -5,10 +5,10 @@
 		  "id": 89
     },
     "connection": {
-      "url": "",
+      "url": "https://ec2-34-201-150-44.compute-1.amazonaws.com",
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "root",
+        "username": "GnyW6pAyobBCxvKzz6yA"
       }
     },
     "meta": {}

@@ -1,0 +1,13 @@
+{
+   "version": "v1",
+   "type": "action_start",
+   "body": {
+     "meta": {},
+     "action": "to_ascii",
+     "connection": {},
+     "dispatcher": {},
+     "input": {
+       "domain": "https://www.еріс.com/"
+     }
+   }
+ }

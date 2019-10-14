@@ -4,7 +4,8 @@ title: Markdown
 description: Convert markdown to and from various popular formats
 version: 2.2.1
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - markdown
 - html

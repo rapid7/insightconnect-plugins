@@ -32,7 +32,7 @@ class ConnectionSchema(komand.Input):
     "proxy": {
       "type": "object",
       "title": "Proxy",
-      "description": "An optional dictionary containing proxy data, with https as the key, and the proxy path as the value",
+      "description": "An optional dictionary containing proxy data, with HTTPS as the key, and the proxy path as the value",
       "order": 3
     },
     "verify": {
@@ -44,9 +44,9 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "verify",
+    "api_key",
     "host",
-    "api_key"
+    "verify"
   ],
   "definitions": {
     "credential_secret_key": {

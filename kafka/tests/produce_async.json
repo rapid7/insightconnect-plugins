@@ -1,0 +1,63 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "produce_async",
+    "trigger": "",
+    "connection": {
+      "broker_address": "",
+      "config": {
+        "producer": {
+          "timeout": 0,
+          "compression": "",
+          "partitioner": "",
+          "flush": {
+            "max_messages": 0,
+            "bytes": 0,
+            "messages": 0,
+            "frequency": 0
+          },
+          "retry": {
+            "backoff": 0,
+            "max": 0
+          },
+          "max_message_bytes": 0,
+          "required_acks": ""
+        },
+        "consumer": {
+          "max_processing_time": 0,
+          "retry": {
+            "backoff": 0
+          },
+          "fetch": {
+            "min": 0,
+            "default": 0,
+            "max": 0
+          },
+          "max_wait_time": 0
+        },
+        "net": {
+          "max_open_requests": 0,
+          "dial_timeout": 0,
+          "read_timeout": 0,
+          "write_timeout": 0,
+          "keep_alive": 0
+        },
+        "metadata": {
+          "retry": {
+            "max": 0,
+            "backoff": 0
+          },
+          "refresh_frequency": 0
+        }
+      }
+    },
+    "dispatcher": {},
+    "input": {
+      "key": "",
+      "message": "",
+      "topic": ""
+    }
+  }
+}

@@ -4,7 +4,7 @@
       "key": "hashfoo"
     },
     "connection": {
-      "host": "",
+      "host": "172.17.0.1",
       "db": 0,
       "port": 6379
     },

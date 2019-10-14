@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "lookup",
+    "input": {
+      "host": "github.com"
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

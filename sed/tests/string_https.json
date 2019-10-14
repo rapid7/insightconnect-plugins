@@ -1,0 +1,14 @@
+{
+  "body": {
+    "action": "process_string",
+    "meta": {},
+    "input": {
+      "expression": ["s/http/hxxp/"],
+      "options": "",
+      "string": "https://redhat.com"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

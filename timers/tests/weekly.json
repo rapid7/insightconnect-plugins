@@ -1,0 +1,15 @@
+{
+    "version": "v1",
+    "type": "trigger_start",
+    "body": {
+      "meta": {},
+      "trigger": "weekly",
+      "connection": {},
+      "dispatcher": {},
+      "input": {
+        "day": "thursday",
+        "message": "hello there",
+        "times_in_utc": "20:31:00"
+      }
+    }
+  }

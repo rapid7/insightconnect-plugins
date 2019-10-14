@@ -7,10 +7,10 @@
       "line": "hello world"
     },
     "connection": {
-      "url": "",
+      "url": "https://gitlab.com/komand-test/test-repository.git",
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "incorrect-password",
+        "username": "komand-test"
       }
     }
   },

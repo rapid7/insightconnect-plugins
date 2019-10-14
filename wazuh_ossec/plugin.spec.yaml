@@ -5,7 +5,8 @@ description: Provides security visibility, compliance and infrastructure monitor
   capabilities
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - ossec
 - wazuh

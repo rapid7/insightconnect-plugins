@@ -12,8 +12,8 @@
     },
     "action": "send",
     "input": {
-      "email_from": "",
-      "email_to": "",
+      "email_from": "komandtest@gmail.com",
+      "email_to": "komandtest@gmail.com",
       "subject": "test",
       "message": "SOME TESTING MESSAGE",
       "html": false,

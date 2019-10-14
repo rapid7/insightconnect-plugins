@@ -1,0 +1,17 @@
+{
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('jschipp%40komanddev.onmicrosoft.com')/messages('AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAAAAAEMAAC8UQDN7ObVSLWQuxHJ-dDTAAE4BRprAAA%3D')/attachments",
+    "value": [
+        {
+            "@odata.type": "#microsoft.graph.fileAttachment",
+            "id": "AAMkADI3Mzc1ZTg3LTIzYWEtNDNmNi1hZDQ5LTBiMjAzYzA3ZThhYwBGAAAAAAAxDvrPc8q6SqGLTJ9iB-SGBwC8UQDN7ObVSLWQuxHJ-dDTAAAAAAEMAAC8UQDN7ObVSLWQuxHJ-dDTAAE4BRprAAABEgAQANofOSIBNpZPr7bpMjdNpuA=",
+            "lastModifiedDateTime": "2019-08-06T19:32:54Z",
+            "name": "Photo on 4-29-19 at 11.21 AM.jpg",
+            "contentType": "image/jpeg",
+            "size": 135186,
+            "isInline": false,
+            "contentId": "DC237ADBBDB455499C6AA66009B9DE5D@namprd12.prod.outlook.com",
+            "contentLocation": null,
+            "contentBytes": "/9j/4AAQSkZJRgABAQAASAB...Not real bytes"
+        }
+    ]
+}

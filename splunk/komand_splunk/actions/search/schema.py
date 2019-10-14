@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run a query"
+
+
 class Input:
     COUNT = "count"
     QUERY = "query"
@@ -34,8 +38,8 @@ class SearchInput(komand.Input):
     }
   },
   "required": [
-    "query",
-    "count"
+    "count",
+    "query"
   ]
 }
     """)

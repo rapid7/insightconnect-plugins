@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: presto
 title: Presto
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Presto is an open source distributed SQL query engine for running interactive
   analytic queries against data sources of all sizes ranging from gigabytes to petabytes
 version: 1.0.0

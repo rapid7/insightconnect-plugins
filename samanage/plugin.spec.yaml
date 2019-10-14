@@ -4,7 +4,8 @@ title: Samanage
 description: Samanage is an enterprise service-desk and IT asset-management provider
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - incidents
 - management

@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "message_trace",
+        "input": {
+            "Sender_address": "jschipp@komanddev.onmicrosoft.com",
+            "start_date": "9/20/2019",
+            "end_date": "9/25/2019"
+        },
+        "connection":{
+            "credentials":{
+              "password":"1komand#O365",
+              "username":"jschipp@komanddev.onmicrosoft.com"
+            },
+            "office_365_url": "https://outlook.office365.com/powershell-liveid/"
+          },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

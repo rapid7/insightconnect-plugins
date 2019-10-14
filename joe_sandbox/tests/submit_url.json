@@ -6,9 +6,9 @@
       "url": "https://github.com/"
     },
     "connection": {
-      "url": "",
+      "url": "https://jbxcloud.joesecurity.org/api",
       "api_key": {
-        "secretKey": ""
+        "secretKey": "348afca1e642d82bebae8b9a36526e9c6a5f37b7baf0e395f7850f2080016d0f"
       }
     }
   },

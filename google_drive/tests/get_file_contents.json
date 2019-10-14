@@ -7,17 +7,17 @@
       "mime_type": "text/csv"
     },
     "connection": {
-      "admin_user": "",
+      "admin_user": "mhofert@hofertconsulting.com",
       "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
       "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "client_email": "",
-      "client_id": "",
+      "client_email": "komand@round-mark-202917.iam.gserviceaccount.com",
+      "client_id": "118315265676090677347",
       "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/komand%40round-mark-202917.iam.gserviceaccount.com",
       "private_key": {
-        "privateKey": ""
+        "privateKey": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDl92uCdYjlhV/f\nORt51c0+5fblBEe6xsUj59Sy5NedCR5g41cy+lYQSYEnSaWLialuaF5HHiouhlrx\nUJ/5VFOGaKpVuFFUc+ejf80YHrNpfxoHU8dJ40NkYIBiXSwUmuF29bnCUutI7RCs\nz963/2p4cQUArGtbJyAcNpRje6mrOH3F3mcjoGFHRiAK2ag+B3C4vtE6UfoCNtg7\nVSmvMdL/jftHlq/RS8VLZnDgF30VKYepJq7/fZbiLqQQ8D9ER9QYxTr3z+wS9hAd\nU/KtZzjPtnvXVlbuOx+a87qSXHA/IBgZM27MgPCLkVYpjekxmvzw7rrnyXtzmyq6\n1/WdFbEHAgMBAAECggEAHiWu5uXgofI3rMxQQUsZgo7kLIbAnogzTO8175PXfkM1\nQ89Z3Zl60dzI/S0G8kGEQDCXd2xJbFr5rhv7NNTstDihZ+ZnZxJgwgrdiLVxoLlk\nYKSHgjS0X4LVIdAEGNlrCEzTYtm69Y76eiUwFd/6hbqPRNTVqBf7eidfkaEjD4pz\nI7V+Kw6YRV18YAqj48bY4kE5r3Ybzluboj9Fi76auxi8tm6KAX2vHLdfxAAfmPSL\nT/8wfmgsJSLS+SxuLhvaW8c0a9qOU+YOGauNfjLLQYAoWmWdD9Iv+HT0cSMtXD2Z\nMEBC4o3+CBtf2/52cgSeg9rDtXAQNA6mV1hSLUwmrQKBgQD/Q0u/BUV2Bxokltna\nkVN0ybgAyFGAuKNhHR5mHf0szxC5HitY1OCdMk+yCXeYgb39ZPeDz8ufHM1yTIyu\nW1KqazcFX6k5FKvL+FF0uBj0iW9bv3DIGyLVTYylgRXYrGktXcnBUJVdVvlj8WDY\ncvrSRO2UHIGfTjUE1vQSu6AdZQKBgQDmoWxyI9hHk9lGF/D3c8yAjn8PtqUnOk7E\n0Vc721X6TM/rs3nHOuHR1sa5+GcVCcTkm/sRsTPSN7214vpybTXO4gakd4JkyvBL\nZLX/oHcmPtD4W4lh6GCZPrM7NGrqILpNDSl9uaIbs7mLDTbXMUg8LahHycDBsqAy\nBIcgvErz+wKBgDdn0vweV8pblkgU2ip/2r6BvkelM1OeQBAnMt71aWudckLMEpqQ\nckSMlBHPzj6zApsKnFLm+oqJxOonRW3e8p188g9fiSqTmwqF1qBgCUKixiIC9qbo\nhPIJiBqwXx6NpbKsJcupAxKkezM/REcXBew3+91nJpd+cTGguo+KXCGlAoGAXHw1\nSdxX+fQvOC2XoxPb2V3LVFjRB9cZCVJNoiJF6zbsVj/FwQA62HRBgwg7BjPBsk9e\nsmyWNGHIAO2Bs2taHZmEQmXuc07yZ7l+RoFp5ntgP4gtooaWXj3HkCFoEnWHYCi8\nD7/mYyeCa2GkMU2BAyjoB8m/M63XEdfA/H6lrAsCgYEAhr5wQufIh9iBYJsfs4b4\naibrI8rSjsajZptY40aAXDqx6H5CtvP/L2FedMst9fSyBslmtn7hiVLn4jHnJc4J\nd09ixeguFTkiHbJgkyczuXmxP8jq/diQ0OVtLwRLk2CzA5Z/lUQ+3TENvdsTb1M4\nTbfo7Df/w1hV4frqDoYbSb0=\n-----END PRIVATE KEY-----\n"
       },
-      "private_key_id": "",
-      "project_id": "",
+      "private_key_id": "ce0a855c6ba8e28dfb8cb951bd7c0f7848736a1b",
+      "project_id": "round-mark-202917",
       "token_uri": "https://accounts.google.com/o/oauth2/token"
     }
   },

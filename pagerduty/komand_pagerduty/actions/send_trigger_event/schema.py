@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Trigger an incident"
+
+
 class Input:
     CLIENT = "client"
     CLIENT_URL = "client_url"
@@ -65,7 +69,8 @@ class SendTriggerEventInput(komand.Input):
     }
   },
   "required": [
-    "description"
+    "description",
+    "service_key"
   ]
 }
     """)

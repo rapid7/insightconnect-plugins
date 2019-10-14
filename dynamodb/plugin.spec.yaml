@@ -1,0 +1,106 @@
+plugin_spec_version: v2
+name: dynamodb
+title: Dynamo DB
+vendor: rapid7
+support: community
+status: []
+description: Dynamo DB is a Key/Value store powered by Amazon available for members
+  of AWS
+version: 1.0.1
+tags:
+- dynamodb
+- aws
+- amazon
+- database
+enable_cache: true
+connection:
+  access_key:
+    title: Access Key
+    description: Access key ID
+    type: credential_secret_key
+    required: true
+  secret_key:
+    title: Secret Key
+    description: Secret access key
+    type: credential_secret_key
+    required: true
+  region:
+    description: Region
+    type: string
+    required: false
+actions:
+  scan:
+    description: Scan Dynamo and return any objects found
+    input:
+      table:
+        description: The table name to search
+        type: string
+        required: true
+      index:
+        description: The index to use. If empty, defaults to a full Scan of the table
+        type: string
+        required: false
+      params:
+        description: The params to query with, as key/value pairs
+        type: object
+        required: false
+    output:
+      count:
+        title: Count
+        description: Count
+        type: int
+        required: false
+      records:
+        title: Records
+        description: Records
+        type: array
+        required: false
+  insert:
+    description: Store an object into Dynamo
+    input:
+      table:
+        description: The table name to store into
+        type: string
+        required: true
+      data:
+        description: The object data to store
+        type: object
+        required: true
+      condition_expression:
+        description: An optional expression that can be used to reject inserts based
+          on evaluating existing data
+        type: string
+        required: false
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: false
+  update:
+    description: Update an object in Dyanmo
+    input:
+      table:
+        description: The table name to store into
+        type: string
+        required: true
+      key:
+        description: The primary key and optionally the sort key of the object to
+          update. Provided as a pair of key/values
+        type: object
+        required: true
+      condition_expression:
+        description: An optional expression that can be used to reject updates based
+          on evaluating existing data
+        type: string
+        required: false
+      data:
+        description: The object data to update, as key/value pairs
+        type: object
+        required: true
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: false

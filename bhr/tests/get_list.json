@@ -4,7 +4,7 @@
       "ssl_verify": false,
       "url": "http://192.168.0.15:8000",
       "token": {
-        "secretKey": ""
+        "secretKey": "9e65a8bb9f4c4a578b8019afa76b191d254bdb50"
       }
     },
     "action": "get_list",

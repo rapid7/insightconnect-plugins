@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "lookup",
+    "input": {
+      "host": "2607:f8b0:4009:808::200e"
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

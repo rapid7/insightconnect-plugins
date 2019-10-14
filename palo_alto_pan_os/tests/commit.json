@@ -8,10 +8,10 @@
     },
     "connection": {
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "admin",
+        "username": "admin"
       },
-      "server": "",
+      "server": "https://10.4.27.237",
       "verify_cert": false
     }
   },

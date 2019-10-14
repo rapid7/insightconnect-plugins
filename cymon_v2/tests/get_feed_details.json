@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "get_feed_details",
+    "input": {
+      "feed_id": "AVsGgNL4VjrVcoBZyoib"
+    },
+    "connection": {
+      "api_credentials": {
+        "username": "komand_test",
+        "password": "komand"
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

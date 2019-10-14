@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "top_remediations",
+    "meta": {},
+    "input": {
+      "limit": 25,
+      "scope": "none",
+      "scope_ids": [],
+      "asset_limit": 0,
+      "vulnerability_limit": 0
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -3,11 +3,11 @@
     "action": "create_incident",
     "meta": {},
     "input": {
-      "business_object_id": "j",
+      "business_object_id": "6dd53665c0c24cab86870a21cf6434ae",
       "fields_to_change": {
 	    "Description": "From Python using REST API",
 	    "ShortDescription": "New Incident",
-	    "CustomerRecID": "",
+	    "CustomerRecID": "9426923402157dc155b81343dc940accfa7c354aba",
 	    "Priority": "2",
 	    "Source": "Phone",
 	    "IncidentType": "Incident",
@@ -22,10 +22,10 @@
         "secretKey": ""
       },
       "ssl_verify": true,
-      "url": "",
+      "url": "carterstest.cherwellondemand.com",
       "username_and_password": {
         "password": "",
-        "username": ""
+        "username": "Rapid7"
       }
     }
   },

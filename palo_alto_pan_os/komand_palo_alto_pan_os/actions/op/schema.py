@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Runs operational command"
+
+
 class Input:
     CMD = "cmd"
     

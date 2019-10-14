@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: cisco_firepower
 title: Cisco Firepower
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 description: Firepower is a Next-Generation Firewall (NGFW) with NGIPS, incorporating
   access and application control, threat prevention and firewall capabilities
 version: 1.0.1

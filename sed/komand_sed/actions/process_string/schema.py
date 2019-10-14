@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Process string"
+
+
 class Input:
     EXPRESSION = "expression"
     OPTIONS = "options"
@@ -42,8 +46,8 @@ class ProcessStringInput(komand.Input):
     }
   },
   "required": [
-    "string",
-    "expression"
+    "expression",
+    "string"
   ]
 }
     """)

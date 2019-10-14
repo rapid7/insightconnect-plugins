@@ -13,7 +13,7 @@
       },
       "host": "https://management.azure.com",
       "client_id": "",
-      "api_version": "2016-04-30-preview",
+      "api_version": "",
       "tenant_id": ""
     },
     "meta": {}

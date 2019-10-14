@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Whois Domain Lookup"
+
+
 class Input:
     DOMAIN = "domain"
     
@@ -12,6 +16,7 @@ class Output:
     DNSSEC = "dnssec"
     DOMAIN_STATUS = "domain_status"
     EXPIRATION_DATE = "expiration_date"
+    LAST_UPDATED = "last_updated"
     NAME = "name"
     NAME_SERVERS = "name_servers"
     REGISTRANT_CC = "registrant_cc"
@@ -23,7 +28,6 @@ class Output:
     REGISTRAR_URL = "registrar_url"
     REGISTRAR_WHOIS_SERVER = "registrar_whois_server"
     REGISTRY_DOMAIN_ID = "registry_domain_id"
-    UPDATED_DATE = "updated_date"
     
 
 class DomainInput(komand.Input):
@@ -85,6 +89,14 @@ class DomainOutput(komand.Output):
       "description": "Expiration date",
       "format": "date-time",
       "order": 6
+    },
+    "last_updated": {
+      "type": "string",
+      "title": "Last updated date",
+      "displayType": "date",
+      "description": "Last updated date",
+      "format": "date-time",
+      "order": 7
     },
     "name": {
       "type": "string",
@@ -154,14 +166,6 @@ class DomainOutput(komand.Output):
       "title": "Registry Domain ID",
       "description": "Registry domain ID",
       "order": 9
-    },
-    "updated_date": {
-      "type": "string",
-      "title": "Last updated date",
-      "displayType": "date",
-      "description": "Updated Date",
-      "format": "date-time",
-      "order": 7
     }
   }
 }

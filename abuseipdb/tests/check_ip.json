@@ -2,9 +2,9 @@
     "body": {
         "action": "check_ip",
         "input": {
-            "address": "8.8.8.8",
+            "address": "172.16.10.222",
             "days": "30",
-            "verbose": true
+            "verbose": false
         },
         "meta": {}
     },

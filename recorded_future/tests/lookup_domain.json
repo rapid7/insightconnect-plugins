@@ -1,14 +1,13 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "connection": {
-      "api_key": ""
+    "body": {
+        "action": "lookup_domain",
+        "input": {
+            "comment": "testing",
+            "domain": "google.com",
+            "fields": []
+        },
+        "meta": {}
     },
-    "input": {
-      "domain": "google.com"
-    },
-    "action": "lookup_domain"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,22 +1,19 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "input": {
-      "details": { "stuff": "things "},
-      "contexts": [],
-      "client_url": "",
-      "client": "komand",
-      "description": "hi there acknowledge",
-      "service_key": "",
-      "incident_key": ""
+    "body": {
+        "action": "send_acknowledge_event",
+        "input": {
+            "client": "komand",
+            "client_url": "",
+            "contexts": [],
+            "description": "hi there acknowledge",
+            "details": {
+                "stuff": "things "
+            },
+            "incident_key": "",
+            "service_key": ""
+        },
+        "meta": {}
     },
-    "action": "send_acknowledge_event",
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

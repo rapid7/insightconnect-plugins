@@ -9,14 +9,14 @@
     "action": "update_organization_user",
     "connection": {
       "basic_auth": {
-        "password": "",
-        "username": ""
+        "password": "admin",
+        "username": "admin"
       },
       "token_auth": {
         "secretKey": ""
       },
       "port": 3000,
-      "url": ""
+      "url": "http://192.168.99.100"
     }
   },
   "type": "action_start",

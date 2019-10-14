@@ -4,10 +4,10 @@
     "action": "lookup_hash",
     "connection": {
        "api_key": {
-        "secretKey": ""
+        "secretKey": "91xobbp7jrocwwssgk4cgww4s"
        },
       "api_token": {
-        "secretKey": ""
+        "secretKey": "5246849880017e2fa4a0304b33cc1245277deba95d352f7a"
       },
       "url": "https://www.hybrid-analysis.com/api"
     },

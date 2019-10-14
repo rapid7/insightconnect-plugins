@@ -1,0 +1,24 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "get_folders",
+    "trigger": "",
+    "connection": {
+      "connection_cache_key": "",
+      "app_id": "",
+      "app_secret": {
+        "secretKey": ""
+      },
+      "tenant_id": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "other_parent_id": "",
+      "pagination_token": "",
+      "user_id_principal": "",
+      "well_known_parent_id": ""
+    }
+  }
+}

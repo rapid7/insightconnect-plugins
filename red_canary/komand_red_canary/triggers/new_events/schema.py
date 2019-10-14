@@ -36,7 +36,7 @@ class NewEventsInput(komand.Input):
     "force_offset": {
       "type": "boolean",
       "title": "Force Offset",
-      "description": "Forces offset no matter whats in the cache",
+      "description": "Forces offset no matter what's in the cache",
       "order": 3
     },
     "frequency": {

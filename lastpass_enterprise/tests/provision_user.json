@@ -1,10 +1,10 @@
 {
   "body": {
     "input": {
-      "user_name": "",
-      "full_name": "",
+      "user_name": "jonschipp@gmail.com",
+      "full_name": "Jon Schipp",
       "password_reset_required": false,
-      "password": "",
+      "password": "6APgXOa7itby7y9S87qD",
       "groups": [ "users" ]
     },
     "meta": {},

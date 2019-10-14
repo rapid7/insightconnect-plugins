@@ -570,6 +570,8 @@ The connection configuration accepts the following parameters:
 * 1.5.0 - New action Set Address Object
 * 1.5.1 - Fix issue where the Add to Policy action would sometimes fail with candidate configurations
 * 1.5.2 - Fix typo in plugin spec
+* 1.5.3 - Fix issue where undefined objects in security configurations caused actions to crash | Add debug logging to assist with future troubleshooting | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
+* 1.5.4 - Fix issue where new plugin version was causing SSL to fail
 
 ## Workflows
 

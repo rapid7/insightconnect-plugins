@@ -9,8 +9,8 @@
       "host": "https://hipchat.com/",
       "version": "v2",
       "credentials": {
-        "username": "",
-        "password": ""
+        "username": "user@test.com",
+        "password": "wOOLYOaDNIYt9gi5GvDAhKQOp1gNysceum1ULEel"
       }
     },
     "meta": {}

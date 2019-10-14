@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "mass_search_and_destroy",
+        "input": {
+            "compliance_search_name": "aNewSearchName",
+            "content_match_query": "subject:a very specific subject",
+            "query_timeout": 10
+        },
+        "connection":{
+            "credentials":{
+              "password":"",
+              "username":""
+            },
+            "verify_ssl": true
+          },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

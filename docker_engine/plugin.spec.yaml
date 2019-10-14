@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: docker_engine
 title: Docker Engine
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Control Docker Images, Containers, and Networks
 version: 1.0.0
 tags:

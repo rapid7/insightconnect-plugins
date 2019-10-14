@@ -1,21 +1,12 @@
 {
-  "body": {
-    "action": "query",
-    "meta": {},
-    "input": {
-      "search_base": "DC=mattsdomain,DC=local",
-      "search_filter": "(distinguishedName=CN=hollis, brown,OU=domain_users,DC=mattsdomain,DC=local)"
+    "body": {
+        "action": "query",
+        "input": {
+            "search_base": "DC=intad,DC=dslab,DC=internal",
+            "search_filter": "(distinguishedName=CN=Bob \"Sponge,Pants\" (somestuff),OU=Test Users,OU=User,DC=intad,DC=dslab,DC=internal)"
+        },
+        "meta": {}
     },
-    "connection": {
-      "username_password": {
-        "password": "",
-        "username": "MATTSDOMAIN\\mhofert"
-      },
-      "host": "192.168.1.10",
-      "port": 636,
-      "use_ssl": true
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

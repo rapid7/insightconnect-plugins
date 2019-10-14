@@ -16,7 +16,7 @@
     "trigger": "check_scan_done",
     "meta": {},
     "dispatcher": {
-      "url": ""
+      "url": "http://localhost:8000"
     }
   },
   "version": "v1",

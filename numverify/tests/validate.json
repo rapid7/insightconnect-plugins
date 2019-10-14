@@ -1,0 +1,19 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "validate",
+    "connection": {
+      "server": "bla.com",
+      "token": {
+        "secretKey": ""
+      }
+    },
+    "dispatcher": {},
+    "input": {
+      "country_code": "",
+      "phone_number": ""
+    }
+  }
+}

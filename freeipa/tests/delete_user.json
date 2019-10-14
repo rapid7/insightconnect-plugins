@@ -8,10 +8,10 @@
     },
     "connection": {
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "Secret123",
+        "username": "admin"
       },
-      "server": ""
+      "server": "ipa.demo1.freeipa.org"
     }
   },
   "type": "action_start",

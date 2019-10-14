@@ -6,10 +6,10 @@
       "assignee": ""
     },
     "connection": {
-      "host": "",
+      "host": "40.121.59.66",
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "Dragon49",
+        "username": "brandonium21"
       }
     },
     "trigger": "issue",

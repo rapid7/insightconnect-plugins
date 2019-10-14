@@ -4,7 +4,8 @@ title: SHAttered
 description: Check for an SHA-1 hash collision
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - sha1
 - hash

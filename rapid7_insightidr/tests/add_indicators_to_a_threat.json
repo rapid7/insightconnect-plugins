@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "add_indicators_to_a_threat",
+    "meta": {},
+    "input": {
+      "domain_names": ["rapid7.com","google.com"],
+      "ips": ["10.0.0.1","10.0.0.2"],
+      "key": "c9404e11-b81a-429d-9400-05c531f229c3",
+      "hashes": ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"],
+      "urls": ["https://example.com","https://test.com"]
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://us.api.insight.rapid7.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

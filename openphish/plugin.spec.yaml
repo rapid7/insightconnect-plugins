@@ -5,7 +5,7 @@ description: "OpenPhish uses proprietary Artificial Intelligence algorithms to a
 version: 1.0.0
 vendor: rapid7
 tags: [ "data enrichment", "threat intelligence"]
-status: [ "unsupported" ]
+status: [ "supported" ]
 enable_cache: true
 
 types:

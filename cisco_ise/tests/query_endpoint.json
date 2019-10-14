@@ -10,7 +10,7 @@
         "password": "",
         "username": ""
       },
-      "address": "",
+      "address": "10.4.22.225",
       "ssl_verify": false
     }
   },

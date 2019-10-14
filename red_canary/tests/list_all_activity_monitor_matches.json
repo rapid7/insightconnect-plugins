@@ -1,17 +1,11 @@
 {
-  "body": {
-    "action": "list_all_activity_monitor_matches",
-    "meta": {},
-    "input": {
-      "max_results": 100
+    "body": {
+        "action": "list_all_activity_monitor_matches",
+        "input": {
+            "max_results": 100
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_token": {
-        "secretKey": ""
-      },
-      "customer_id": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

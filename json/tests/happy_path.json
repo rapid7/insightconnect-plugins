@@ -1,0 +1,36 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": null,
+    "action": "transform",
+    "connection": {},
+    "dispatcher": {},
+    "input": {
+      "source_data": {
+        "author": "Neil Stephenson",
+        "title": "Snow Crash",
+        "age": 20,
+        "description": "villain activates bicameral mind",
+        "characters": [
+          "Hiro Protagonist",
+          "Skateboarder"
+        ]
+      },
+      "extraction_template": {
+        "title": "$0",
+        "author": "$1",
+        "characters": [
+          "$2"
+        ],
+        "age": "$3"
+      },
+      "target_template": {
+        "bug name": "$0",
+        "owner": "$2",
+        "reported by": "$1",
+        "age in eons": "$3"
+      }
+    }
+  }
+}

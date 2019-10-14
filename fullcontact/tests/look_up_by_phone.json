@@ -1,0 +1,18 @@
+{
+    "version": "v1",
+    "type": "action_start",
+    "body": {
+      "meta": {},
+      "action": "look_up_by_phone",
+      "connection": {
+        "server": "",
+        "token": {
+          "secretKey": ""
+        }
+      },
+      "dispatcher": {},
+      "input": {
+        "phone": ""
+      }
+    }
+  }

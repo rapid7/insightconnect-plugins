@@ -1,14 +1,11 @@
 {
-  "type": "action_start",
-  "body": {
-    "input": {
-      "entity_list_id": "Q7omD8"
+    "body": {
+        "action": "lookup_entity_list",
+        "input": {
+            "entity_list_id": "Q7omD8"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": ""
-    },
-    "action": "lookup_entity_list",
-    "meta": {}
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

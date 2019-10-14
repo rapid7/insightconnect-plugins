@@ -6,17 +6,17 @@
       "command": "ls -l; ps aux"
     },
     "connection": {
-      "host": "",
+      "host": "192.168.33.10",
       "key": {
         "privateKey": ""
       },
       "password": {
-        "secretKey": ""
+        "secretKey": "vagrant"
       },
       "port": 22,
       "use_key": false,
       "username": {
-        "secretKey": ""
+        "secretKey": "vagrant"
       }
     },
     "meta": {}

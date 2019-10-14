@@ -4,7 +4,7 @@
     "connection": {
       "port": 6379,
       "db": 0,
-      "host": ""
+      "host": "172.17.0.1"
     },
     "input": {
       "key": "foo"

@@ -1,10 +1,9 @@
-
 # AbuseIPDB
 
 ## About
 
 [AbuseIPDB](https://www.abuseipdb.com) is a free service which allows you to look up IP reports, or report an abusive IP.
-This plugin utilizes the [AbuseIPDB](https://www.abuseipdb.com/api.html).
+This plugin utilizes [AbuseIPDB API v2](https://docs.abuseipdb.com).
 
 ## Actions
 
@@ -16,47 +15,36 @@ This action is used to report an abusive IP address.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|categories|string|None|True|Comma delineated list of category IDs e.g. 10,12,15. Entire list is available at https://www.abuseipdb.com/categories|None|
 |comment|string|None|False|Describe the type of malicious activity e.g. Brute forcing Wordpress login|None|
-|categories|string|None|True|Comma delineated list of category IDs e.g. 10,12,15. Entire list is available at https\://www.abuseipdb.com/categories|None|
-|address|string|None|True|IPv4 or IPv6 address to report e.g. 8.8.8.8, \:\:1|None|
+|ip|string|None|True|IPv4 or IPv6 address to report e.g. 8.8.8.8, ::1|None|
 
 #### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ip|string|False|IP address submitted|
-|success|boolean|False|Submission success|
+|abuseConfidenceScore|integer|False|Confidence that reported IP is abusive|
+|ipAddress|string|False|IP address submitted|
+|success|boolean|True|Submission success|
 
 Example output:
 
 ```
-
 {
-  "ip": "68.66.205.227",
-  "success": True
+  "ipAddress": "127.0.0.1",
+  "abuseConfidenceScore": 52,
+  "success": true
 }
-
 ```
 
-If an error occurs with the API, the action will return a structured output indicating the error.
+If AbuseIPDB returns an empty JSON body, success will be set to false.
 
-Example output:
+Failure Example:
 
 ```
-
-[
-  {
-    "id": "Unprocessable Entity",
-    "links": {
-      "about": "https:\\/\\/www.abuseipdb.com\\/api"
-    },
-    "status": "422",
-    "code": "1002",
-    "title": "The request was well-formed but was unable to be followed due to semantic errors.",
-    "detail": "We expected an IPv4 or IPv6 address (e.g. 8.8.8.8)."
-  }
-]
-
+{
+  "success": false
+}
 ```
 
 ### Check IP
@@ -67,86 +55,72 @@ This action is used to look up an IP address in the database.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|address|string|None|True|IPv4 or IPv6 address e.g. 8.8.8.8, \:\:1|None|
-|verbose|boolean|True|True|When set, reports will include the comment (if any) and the reporter's user id number (0 if reported anonymously)|None|
+|address|string|None|True|IPv4 or IPv6 address e.g. 8.8.8.8, ::1|None|
 |days|string|30|True|Check for IP reports in the last x days|None|
+|verbose|boolean|True|True|When set, reports will include the comment (if any) and the reporter's user ID number (0 if reported anonymously)|None|
 
 #### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|found|boolean|True|Whether an IP address was found in the database|
-|list|ip|False|List of IP reports|
+|abuseConfidenceScore|integer|False|Confidence of Abuse|
+|countryCode|string|False|Code of country IP is registered in|
+|countryName|string|False|Name of Country IP is registered in|
+|domain|string|False|Domain Name of IP|
+|found|boolean|False|Whether an IP address was found in the database|
+|ipAddress|string|False|Queried IP Address|
+|ipVersion|integer|False|Version of IP Address|
+|isPublic|boolean|False|Whether or not the IP Address is public|
+|isWhitelisted|boolean|False|Whether or not IP Address is whitelisted|
+|isp|string|False|Internet Service Provider for IP|
+|lastReportedAt|string|False|Date of last report|
+|numDistinctUsers|integer|False|Number of distinct users who reported IP|
+|reports|[]report|False|List of reports|
+|totalReports|integer|False|Total number of reports of abuse|
+|usageType|string|False|How IP is used|
 
 Example output:
 
 ```
-
 {
+  "ipAddress": "118.25.6.39",
+  "isPublic": true,
+  "ipVersion": 4,
+  "isWhitelisted": false,
+  "abuseConfidenceScore": 100,
+  "countryCode": "CN",
+  "countryName": "China",
+  "usageType": "Data Center/Web Hosting/Transit",
+  "isp": "Tencent Cloud Computing (Beijing) Co. Ltd",
+  "domain": "tencent.com",
+  "totalReports": 1,
+  "numDistinctUsers": 1,
+  "lastReportedAt": "2018-12-20T20:55:14+00:00",
+  "reports": [
+    {
+      "reportedAt": "2018-12-20T20:55:14+00:00",
+      "comment": "Dec 20 20:55:14 srv206 sshd[13937]: Invalid user oracle from 118.25.6.39",
+      "categories": [
+        18,
+        22
+      ],
+      "reporterId": 1,
+      "reporterCountryCode": "US",
+      "reporterCountryName": "United States"
+    }
+  ],
   "found": true
-  [
-    {
-      "ip": "8.8.8.8",
-      "category": [
-        9,
-        13,
-        14
-      ],
-      "created": "Wed, 16 May 2018 20:24:36 +0000",
-      "country": "United States",
-      "isoCode": "US",
-      "isWhitelisted": true
-    },
-    {
-      "ip": "8.8.8.8",
-      "category": [
-        4,
-        14
-      ],
-      "created": "Fri, 11 May 2018 22:30:54 +0000",
-      "country": "United States",
-      "isoCode": "US",
-      "isWhitelisted": true
-    },
-    ...
-  ]
 }
-
 ```
 
-If AbuseIPDB has no information about the IP address, the action will return an empty list and the value of `found` will be `false`.
-This makes it easy to perform another action in a workflow based on whether desired information is present using an Automated Decision step.
+If AbuseIPDB could not find the input address, found will be set to false.
 
-Example output:
+Failure Example:
 
 ```
-
 {
-  "list": [],
   "found": false
 }
-
-```
-
-If an error occurs with the API, the action will return a structured output indicating the error.
-
-Example output:
-
-```
-
-[
-  {
-    "id": "Unprocessable Entity",
-    "links": {
-      "about": "https:\\/\\/www.abuseipdb.com\\/api"
-    },
-    "status": "422",
-    "code": "1002",
-    "title": "The request was well-formed but was unable to be followed due to semantic errors.",
-    "detail": "We expected an IPv4 or IPv6 address (e.g. 8.8.8.8)."
-  }
-]
-
 ```
 
 ### Check CIDR
@@ -164,62 +138,94 @@ This action is used to look up a CIDR address in the database.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|addressSpaceDesc|string|False|Address space description|
+|found|boolean|True|Whether the CIDR was found in the database|
+|maxAddress|string|False|Maximum address|
+|minAddress|string|False|Minimum address|
 |netmask|string|False|Netmask|
 |networkAddress|string|False|Network address|
-|maxAddress|string|False|Maximum address|
-|reportedIPs|[]reportedIPs|False|List of reported IPs|
 |numPossibleHosts|integer|False|Number of possible hosts|
-|addressSpaceDesc|string|False|Address space description|
-|minAddress|string|False|Minimum address|
+|reportedAddress|[]reportedIPs|False|List of reported IPs|
 
 Example output:
 
 ```
-
 {
-  "networkAddress": "207.126.144.0",
-  "netmask": "255.255.240.0",
-  "minAddress": "207.126.144.1",
-  "maxAddress": "207.126.159.254",
-  "numPossibleHosts": 4094,
+  "networkAddress": "1.2.3.0",
+  "netmask": "255.255.255.0",
+  "minAddress": "1.2.3.1",
+  "maxAddress": "1.2.3.254",
+  "numPossibleHosts": 254,
   "addressSpaceDesc": "Internet",
-  "reportedIPs": [
+  "reportedAddress": [
     {
-      "IP": "207.126.159.254",
-      "NumReports": 1,
-      "MostRecentReport": "2018-05-04 06:04:22",
-      "Public": 1,
-      "CountryCode": "US",
-      "IsWhitelisted": 0,
-      "abuseConfidenceScore": 0
+      "ipAddress": "1.2.3.4",
+      "numReports": 3,
+      "mostRecentReport": "2019-08-28T21:08:34+01:00",
+      "abuseConfidenceScore": 11,
+      "countryCode": "AU"
     }
-  ]
+  ],
+  "found": true
 }
-
 ```
 
-If an error occurs with the API, the action will return a structured output indicating the error.
+If AbuseIPDB could not find the input CIDR, found will be set to false.
+
+Failure Example:
+
+```
+{
+  "found: false
+}
+```
+
+### Get Blacklist
+
+This action is used to list of blacklisted IP addresses.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|confidenceMinimum|string|None|True|Minimum confidence to filter by|None|
+|limit|string|None|False|Max length of blacklist|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|blacklist|[]blacklisted|False|List of abusive IPs|
+|success|boolean|True|Was the blacklist successfully retrieved|
 
 Example output:
 
 ```
-
-[
-  {
-    "id": "Unprocessable Entity",
-    "links": {
-      "about": "https:\\/\\/www.abuseipdb.com\\/api"
+  "blacklist": [
+    {
+      "ipAddress": "5.188.10.179",
+      "abuseConfidenceScore": 100
     },
-    "status": "422",
-    "code": "1025",
-    "title": "The request was well-formed but was unable to be followed due to semantic errors.",
-    "detail": "Invalid CIDR format.",
-    "source": {
-      "parameter": "network"
+    {
+      "ipAddress": "185.222.209.14",
+      "abuseConfidenceScore": 100
+    },
+    {
+      "ipAddress": "191.96.249.183",
+      "abuseConfidenceScore": 100
     }
-  }
-]
+  ],
+  "success": true
+```
 
+If AbuseIPD fails to return the Blacklist, success will be set to false.
+
+Failure Example:
+
+```
+{
+  "success": false
+}
 ```
 
 ## Triggers
@@ -244,6 +250,39 @@ There's a rate limit on the free API service. The following error messags `429 C
 * 2.0.0 - Add `found` output to Check IP action | Support new credential type
 * 3.0.0 - Support new credential_secret_key type
 * 3.0.1 - Improve error handling in the Check IP, Check CIDR, and Report IP actions | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Run plugin as least privileged user | Add connection test
+* 4.0.0 - Update to APIv2 and new action Get Blacklist
+* 4.0.1 - Transform null value of various output properties of Check IP action to false or empty string.
+* 5.0.0 - Mark certain outputs as optional as they are not always returned by the AbuseIPDB service | Clean output of null values
+
+## Custom Output Types
+
+### blacklisted
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|abuseConfidenceScore|string|True|Confidence that IP is abusive|
+|ipAddress|string|True|IP Address of abusive IP|
+
+### report
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|categories|[]integer|True|List of categories|
+|comment|string|True|Comment by reporter|
+|reportedAt|string|True|Date and time of report|
+|reporterCountryCode|string|True|Country code of the reporter|
+|reporterCountryName|string|True|Name of country reporter is from|
+|reporterId|integer|True|ID number of reporter|
+
+### reportedIPs
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|abuseConfidenceScore|integer|False|Confidence that this IP is abusive|
+|countryCode|string|False|Country code of IP|
+|ipAddress|string|False|IP Address of reported resource|
+|mostRecentReport|string|False|Most recent report for this IP|
+|numReports|integer|False|Number of reports of this IP|
 
 ## Workflows
 
@@ -254,4 +293,4 @@ Examples:
 ## References
 
 * [AbuseIPDB](https://www.abuseipdb.com)
-* [AbuseIPDB API](https://www.abuseipdb.com/api.html)
+* [AbuseIPDB API](https://docs.abuseipdb.com)

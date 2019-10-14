@@ -8,10 +8,10 @@
     },
     "connection": {
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "xD7A",
+        "username": "ers-admin"
       },
-      "address": "",
+      "address": "10.4.22.225",
       "ssl_verify": false 
     }
   },

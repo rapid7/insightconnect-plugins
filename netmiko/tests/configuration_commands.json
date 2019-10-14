@@ -10,11 +10,11 @@
     "connection": {
       "device_type": "cisco_asa",
       "key": {"filename": "", "content": ""},
-      "username": "",
+      "username": "admin",
       "host": "ciscoasa.com",
-      "password": "",
+      "password": "password",
       "verbose": false,
-      "secret": "",
+      "secret": "password",
       "port": 22
     },
     "action": "configuration_commands"

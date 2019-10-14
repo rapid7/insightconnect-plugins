@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "fetch",
+    "trigger": "",
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "hostname": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "file_name": "",
+      "id": 0
+    }
+  }
+}

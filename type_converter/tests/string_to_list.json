@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "string_to_list",
+    "trigger": "",
+    "connection": {
+      "connection_cache_key": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "input": "This is sentence 1.\nThis is sentence 2.",
+      "delimiter": ""
+    }
+  }
+}

@@ -6,7 +6,7 @@
       "intelligence_types": ["ip"]
     },
     "connection": {
-      "url": ""
+      "url": "http://192.168.43.133:5000"
     }
   },
   "type": "action_start",

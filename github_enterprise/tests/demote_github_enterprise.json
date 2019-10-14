@@ -2,13 +2,13 @@
   "body": {
     "action": "demote",
     "input": {
-      "user": "testuser"
+      "user": "testuserkeithen"
     },
     "connection": {
-      "host": "",
+      "host": "egithub-ghe.eastus.cloudapp.azure.com",
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "Dragon49",
+        "username": "brandonium21"
       }
     },
     "meta": {}

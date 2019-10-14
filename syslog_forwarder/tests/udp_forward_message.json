@@ -6,7 +6,7 @@
     "connection": {
       "port": 514,
       "transport": "UDP",
-      "host": ""
+      "host": "192.168.2.183"
     },
     "input": {
       "msg": "Incoming UDP Message",

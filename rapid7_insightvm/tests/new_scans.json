@@ -1,0 +1,29 @@
+{
+  "body": {
+    "trigger": "new_scans",
+    "meta": {
+      "workflow_uid": 1234
+    },
+    "input": {
+      "frequency": 1,
+      "most_recent_scan": true,
+      "site_name_filter": "test$",
+      "status_filter": [
+        "Successful"
+      ]
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

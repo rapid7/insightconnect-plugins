@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Parses a TAP alert"
+
+
 class Input:
     TAP_ALERT = "tap_alert"
     

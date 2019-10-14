@@ -4,7 +4,8 @@ title: Snort Labs IP Reputation
 description: IPv4 address to validate
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - ip
 - intel

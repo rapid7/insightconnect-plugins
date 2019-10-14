@@ -3,9 +3,9 @@
     "action": "update_incident",
     "meta": {},
     "input": {
-      "business_object_id": "",
+      "business_object_id": "6dd53665c0c24cab86870a21cf6434ae",
       "fields_to_update": {"Description": "Updated by Komand"},
-      "public_id": ""
+      "public_id": "762421"
     },
     "connection": {
       "authentication_mode": "Internal",
@@ -13,10 +13,10 @@
         "secretKey": ""
       },
       "ssl_verify": true,
-      "url": "",
+      "url": "carterstest.cherwellondemand.com",
       "username_and_password": {
         "password": "",
-        "username": ""
+        "username": "Rapid7"
       }
     }
   },

@@ -6,7 +6,7 @@
       "machine_name": "cuckoo1"
     },
     "connection": {
-      "url": ""
+      "url": "http://cuckoo-2-0-5.vuln.lax.rapid7.com:8090"
     },
     "meta": {}
   },

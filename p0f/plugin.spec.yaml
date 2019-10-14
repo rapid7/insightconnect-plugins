@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: p0f
 title: p0f
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: A tool to perform passive OS fingerprinting
 version: 1.0.1
 tags:

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Enable an account"
+
+
 class Input:
     DISTINGUISHED_NAME = "distinguished_name"
     

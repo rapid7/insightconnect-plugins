@@ -1,0 +1,60 @@
+{
+  "version": "v1",
+  "type": "trigger_start",
+  "body": {
+    "meta": {},
+    "action": "new_message",
+    "trigger": "",
+    "connection": {
+      "connection_cache_key": "",
+      "app_id": "",
+      "app_secret": {
+        "secretKey": ""
+      },
+      "tenant_id": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "AtLeastOneMessage": false,
+      "MostRecentMessage": {
+        "IsRead": false,
+        "ReceivedDateTime": "0001-01-01T00:00:00Z",
+        "ReplyTo": null,
+        "BodyPreview": "",
+        "ConversationId": "",
+        "CreatedDateTime": "0001-01-01T00:00:00Z",
+        "HasAttachments": false,
+        "Attachments": null,
+        "CcRecipients": null,
+        "LastModifiedDateTime": "0001-01-01T00:00:00Z",
+        "ParentFolderId": "",
+        "SentDateTime": "0001-01-01T00:00:00Z",
+        "Subject": "",
+        "Id": "",
+        "BccRecipients": null,
+        "Body": {
+          "ContentType": "",
+          "Content": ""
+        },
+        "From": {
+          "EmailAddress": {
+            "Name": "",
+            "Address": ""
+          }
+        },
+        "Importance": "",
+        "Sender": {
+          "EmailAddress": {
+            "Name": "",
+            "Address": ""
+          }
+        },
+        "ToRecipients": null
+      },
+      "interval": 0,
+      "other_folder_id": "",
+      "user_id_principal": "",
+      "well_known_folder_id": ""
+    }
+  }
+}

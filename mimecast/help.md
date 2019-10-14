@@ -218,6 +218,30 @@ Example output:
 }
 ```
 
+### Decode URL
+
+This action is used to decode a Mimecast encoded URL.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|encoded_url|string|None|True|The Mimecast encoded URL (e.g. https://protect-xx.mimecast.com/...)|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|decoded_url|string|True|Original decoded URL|
+
+Example output:
+
+```
+{
+  "decoded_url": "https://example.com"
+}
+```
+
 ### Find Groups
 
 This action is used to find groups that match a given query.
@@ -331,6 +355,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 * 2.2.0 - New action Create Blocked Sender Policy
 * 2.3.0 - New actions Add Group Member and Find Group
 * 2.4.0 - New action Get TTP URL Logs
+* 2.5.0 - New action Decode URL
 
 ## Workflows
 

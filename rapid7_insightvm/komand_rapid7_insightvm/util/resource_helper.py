@@ -1,9 +1,11 @@
 from . import endpoints
 from .exceptions import ResourceNotFound
+import json
 import re
 import requests
 import urllib3
 import defusedxml.ElementTree as etree
+from komand.exceptions import PluginException
 from typing import NamedTuple
 
 
@@ -56,13 +58,15 @@ class ResourceHelper(object):
         # Suppress insecure request messages
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-    def resource_request(self, endpoint: str, method: str = 'get', params: dict = None, payload: dict = None) -> dict:
+    def resource_request(self, endpoint: str, method: str = 'get', params: dict = None, payload: dict = None,
+                         json_response: bool = True) -> dict:
         """
         Sends a request to APIv3 with the provided endpoint and optional method/payload
         :param endpoint: Endpoint for the APIv3 call defined in endpoints.py
         :param method: HTTP method for the API request
         :param params: URL parameters to append to the request
         :param payload: JSON body for the API request if required
+        :param json_response: Boolean to return raw response
         :return: Dict containing the JSON response body
         """
         try:
@@ -83,7 +87,16 @@ class ResourceHelper(object):
 
         else:
             if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
-                resource = response.json()
+                if json_response:
+                    try:
+                        resource = response.json()
+                    except json.decoder.JSONDecodeError as e:
+                        raise PluginException(cause=f"Error: Received an unexpected response from InsightVM "
+                                                    f"(non-JSON or no response was received). "
+                                                    f"Response was: {response.content}",
+                                              assistance=f"Exception returned was {e}")
+                else:
+                    resource = {"raw": response.content}
             else:
                 try:
                     error = response.json()["message"]

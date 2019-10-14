@@ -4,7 +4,7 @@
   "body": {
     "action": "forward_message",
     "connection": {
-      "host": "",
+      "host": "192.168.2.183",
       "port": 514,
       "transport": "TCP"
     },

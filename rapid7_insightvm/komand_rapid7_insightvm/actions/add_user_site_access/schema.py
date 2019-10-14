@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Grant an user account access to a site by ID"
+
+
 class Input:
     SITE_ID = "site_id"
     USER_ID = "user_id"

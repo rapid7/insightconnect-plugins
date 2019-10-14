@@ -1,0 +1,24 @@
+{
+	"body": {
+		"connection": {
+                   "access_key": {
+                     "secretKey": ""
+                   },
+		   "region": "us-east-1",
+                   "secret_key": {
+                     "secretKey": ""
+                   }
+		},
+		"meta": {},
+		"action": "scan",
+		"input": {
+			"params": {
+                "enabled":true
+            },
+			"index": "",
+			"table": "komand_test_2"
+		}
+	},
+	"version": "v1",
+	"type": "action_start"
+}
