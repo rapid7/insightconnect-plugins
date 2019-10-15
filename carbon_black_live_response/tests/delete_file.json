@@ -3,13 +3,13 @@
     "action": "delete_file",
     "meta": {},
     "input": {
-      "hostname": "WIN-ABCD",
+      "hostname": "WIN-6EPACUNB1I1",
       "object_path": "C:\\Users\\All Users\\Desktop\\test.txt"
     },
     "connection": {
-      "url": "",
+      "url": "https://cb-response-dev.vuln.lax.rapid7.com",
       "api_key": {
-        "secretKey": ""
+        "secretKey": "6de82826ec6f6fc760a15a933db4fff3958d7422"
       },
       "verify_ssl": true
     }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Start a scan on a site"
+
+
 class Input:
     SITE_ID = "site_id"
     

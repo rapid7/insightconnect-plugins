@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Execute PowerShell script encoded as a base64 file on a remote host"
+
+
 class Input:
     ADDRESS = "address"
     HOST_NAME = "host_name"

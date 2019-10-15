@@ -1,17 +1,11 @@
 {
-  "body": {
-    "action": "deactivate_user",
-    "meta": {},
-    "input": {
-      "email": ""
+    "body": {
+        "action": "deactivate_user",
+        "input": {
+            "email": "jon@komand.com"
+        },
+        "meta": {}
     },
-    "connection": {
-      "okta_url": "",
-      "okta_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

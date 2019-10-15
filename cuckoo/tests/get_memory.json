@@ -8,7 +8,7 @@
     },
     "meta": {},
     "connection": {
-      "url": ""
+      "url": "http://cuckoo-2-0-5.vuln.lax.rapid7.com:8090"
     },
     "action": "get_memory"
   }

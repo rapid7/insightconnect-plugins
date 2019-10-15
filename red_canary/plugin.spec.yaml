@@ -2,9 +2,10 @@ plugin_spec_version: v2
 name: red_canary
 title: Red Canary
 description: Managed endpoint detection and response
-version: 2.1.2
+version: 2.1.4
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - red canary
 - detection
@@ -103,8 +104,8 @@ types:
       title: Classification
       description: The classification of this detection
       type: detection_classification
-    time_of_occurence:
-      title: Time of Occurence
+    time_of_occurrence:
+      title: Time of Occurrence
       description: The time the detection was confirmed as a threat by Red Canary
       type: date
     last_acknowledged_at:
@@ -682,7 +683,7 @@ actions:
     output:
       activity_monitor:
         title: Activity Monitor
-        description: Newly created actvity monitor
+        description: Newly created activity monitor
         type: activity_monitor
         required: true
   list_activity_monitors:
@@ -891,7 +892,7 @@ triggers:
         required: false
       force_offset:
         title: Force Offset
-        description: Forces offset no matter whats in the cache
+        description: Forces offset no matter what's in the cache
         type: boolean
         required: false
     output:

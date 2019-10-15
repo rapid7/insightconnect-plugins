@@ -19,7 +19,7 @@
     },
     "connection": {
       "api_key": {
-        "secretKey": ""
+        "secretKey": "cf273687ca1741669dedb15451b74121964d2c87747f4f1492515da6510b5b1d"
       },
       "url": "https://sentry.io/api/0/"
     }

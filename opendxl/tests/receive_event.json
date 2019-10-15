@@ -11,7 +11,7 @@
       "webhook_url": ""
     },
     "connection": {
-      "host": "",
+      "host": "10.4.18.173:8883",
       "broker_ca": {
         "privateKey": ""
       },

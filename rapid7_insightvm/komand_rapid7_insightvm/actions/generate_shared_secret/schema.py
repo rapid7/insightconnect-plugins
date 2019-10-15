@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Generate a shared secret to pair a scan engine to a security console"
+
+
 class Input:
     TIME_TO_LIVE = "time_to_live"
     

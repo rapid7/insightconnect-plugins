@@ -1,0 +1,24 @@
+{
+  "body": {
+    "input": {
+      "frequency": 300,
+      "limit": 1,
+      "days": 1,
+      "tag": "blacklist"
+    },
+    "connection": {
+      "url": "https://cymon.io:443",
+      "api_key": {
+        "secretKey": ""
+      }
+    },
+    "trigger": "poll_address_blacklist",
+    "meta": {},
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    }
+  },
+  "version": "v1",
+  "type": "trigger_start"
+}

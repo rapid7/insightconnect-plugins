@@ -1,0 +1,23 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "list",
+    "trigger": "",
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "hostname": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "expires_before": "0001-01-01T00:00:00Z",
+      "id": 0,
+      "state": "",
+      "user_login": ""
+    }
+  }
+}

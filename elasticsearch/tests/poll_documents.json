@@ -18,7 +18,7 @@
         "password": "t",
         "username": "tt"
       },
-      "url": "",
+      "url": "http://elast-alert.vuln.lax.rapid7.com:9200/",
       "use_authentication": false
     }
   },

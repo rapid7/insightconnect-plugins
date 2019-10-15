@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "search",
+    "input": {
+      "search_by": "md5_hash",
+      "value": "86845ea1079ea26ecac6115ba6f4a66e",
+      "start_date": "",
+      "end_date": ""
+    },
+    "connection": {
+      "api_credentials": {
+        "username": "komand_test",
+        "password": "komand"
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

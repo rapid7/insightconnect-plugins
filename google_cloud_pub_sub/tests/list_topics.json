@@ -9,13 +9,13 @@
       "admin_user": "",
       "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
       "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "client_email": "",
-      "client_id": "",
+      "client_email": "rapid7@subpub-1528163449245.iam.gserviceaccount.com",
+      "client_id": "105805902332129418404",
       "client_x509_cert_url": "",
       "private_key": {
         "privateKey": ""
       },
-      "private_key_id": "",
+      "private_key_id": "b9076e983fe7914ae496efaba31bbe8055d23d25",
       "project_id": "subpub-1528163449245",
       "token_uri": "https://accounts.google.com/o/oauth2/token"
     }

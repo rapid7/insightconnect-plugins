@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "decode_url",
+    "meta": {},
+    "input": {
+      "encoded_url": "https://protect-us.mimecast.com"
+    },
+    "connection": {
+      "app_id": "",
+      "app_key": {
+        "secretKey": ""
+      },
+      "auth_type": "Basic-Cloud",
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://sandbox-api.mimecast.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

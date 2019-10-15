@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Convert HTML to PDF"
+
+
 class Input:
     DOC = "doc"
     

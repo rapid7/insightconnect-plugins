@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "search_for_sample_report_by_domain",
+        "input": {
+            "domain": "rapid7.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

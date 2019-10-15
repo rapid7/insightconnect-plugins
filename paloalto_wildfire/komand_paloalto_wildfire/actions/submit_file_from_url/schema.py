@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Submit a file for analysis via a URL"
+
+
 class Input:
     URL = "url"
     
@@ -83,17 +87,18 @@ class SubmitFileFromUrlOutput(komand.Output):
           "description": "File size",
           "order": 6
         },
+        "supported_file_type": {
+          "type": "boolean",
+          "title": "Supported File",
+          "description": "Boolean indicating whether the filetype of the sample is supported",
+          "order": 7
+        },
         "url": {
           "type": "string",
           "title": "URL",
           "order": 1
         }
-      },
-      "required": [
-        "sha256",
-        "md5",
-        "size"
-      ]
+      }
     }
   }
 }

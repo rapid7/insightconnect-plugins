@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a user to an existing group"
+
+
 class Input:
     EMAIL = "email"
     GROUP_ID = "group_id"
@@ -33,8 +37,8 @@ class AddUserToGroupInput(komand.Input):
     }
   },
   "required": [
-    "group_id",
-    "email"
+    "email",
+    "group_id"
   ]
 }
     """)

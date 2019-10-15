@@ -1,0 +1,39 @@
+{
+  "body": {
+    "action": "submit_reports_in_bulk",
+    "input": {
+      "reports": [{
+        "description": "Very technical text for bulk",
+        "title": "New test bulk report",
+        "tags": ["malware"],
+        "feed_id": "AWcd2qUMuPEX_z4v01Q2",
+        "timestamp": 1500396994,
+        "ioc": {
+          "domain": "google.com",
+          "url": "https://google.com",
+          "ip": "8.8.8.8"
+        }
+      }, {
+        "description": "Very technical text for bulk 2",
+        "title": "New test bulk report 2",
+        "tags": ["malware"],
+        "feed_id": "AWcd2qUMuPEX_z4v01Q2",
+        "timestamp": 1500396994,
+        "ioc": {
+          "domain": "not-google.com",
+          "url": "https://really-google.com",
+          "ip": "1.1.1.1"
+        }
+      }]
+    },
+    "connection": {
+      "api_credentials": {
+        "username": "komand_test",
+        "password": "komand"
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

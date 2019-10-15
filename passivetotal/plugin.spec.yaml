@@ -4,7 +4,8 @@ title: PassiveTotal
 description: PassiveTotal
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - passivetotal
 - threat intelligence

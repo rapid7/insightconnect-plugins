@@ -9,9 +9,9 @@
     },
     "connection": {
       "token": {
-        "secretKey": ""
+        "secretKey": "api-qy5kemesl53qbzrw773f4h5uyewd"
       },
-      "url": ""
+      "url": "https://test-urfawqzz4xjy.phacility.com/api"
     }
   }
 }

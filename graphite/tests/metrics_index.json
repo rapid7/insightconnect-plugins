@@ -4,7 +4,7 @@
   "body": {
     "connection": {
       "graphite_port": 443,
-      "graphite_url": "",
+      "graphite_url": "https://grafana-graphite-statsd.vuln.lax.rapid7.com",
       "ssl_verify": false
     },
     "input": {},

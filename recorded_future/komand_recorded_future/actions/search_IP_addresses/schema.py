@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action is used to query for data related to a specified IP range"
+
+
 class Input:
     DIRECTION = "direction"
     FROM = "from"
@@ -71,9 +75,9 @@ class SearchIPAddressesInput(komand.Input):
   },
   "required": [
     "direction",
+    "from",
     "ip_range",
     "limit",
-    "from",
     "orderby"
   ]
 }

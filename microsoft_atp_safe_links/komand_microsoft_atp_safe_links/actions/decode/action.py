@@ -19,6 +19,7 @@ class Decode(komand.Action):
             results = decode_url(url)
             return {Output.RESULT: results}
         except Exception as e:
+            return {Output.RESULT: url}
             self.logger.debug(e)
             raise Exception(f"Error: Unable to decode the Microsoft Safe Link. "
                             f"Check that the input was a valid Safe Link URL. "

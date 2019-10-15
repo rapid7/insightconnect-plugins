@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "set_status_of_investigation_action",
+    "meta": {},
+    "input": {
+      "id": "22b92896-392e-43f6-b595-a6ae58b130ef",
+      "status": "CLOSED"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://us.api.insight.rapid7.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

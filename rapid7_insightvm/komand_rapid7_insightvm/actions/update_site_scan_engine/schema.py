@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update the scan engine/scan engine pool associated with a site"
+
+
 class Input:
     ENGINE_ID = "engine_id"
     SITE_ID = "site_id"

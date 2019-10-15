@@ -129,7 +129,7 @@ class CreateInput(komand.Input):
     "dynamic_fields": {
       "type": "array",
       "title": "Dynamic Fields",
-      "description": "Fields as array of objects e.g. [{\\"name\\":\\"TestName1\\",\\"value\\":\\"TestValue1\\"},{\\"name\\":\\"TestName2\\",\\"value\\":\\"TestValue2\\"}]",
+      "description": "Fields as array of objects e.g. [{\\"name\\":\\"TestName1\\",\\"pattern\\":\\"TestValue1\\"},{\\"name\\":\\"TestName2\\",\\"pattern\\":\\"TestValue2\\"}]",
       "items": {
         "$ref": "#/definitions/dynamic_field"
       },

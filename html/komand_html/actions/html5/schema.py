@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Convert HTML to HTML5"
+
+
 class Input:
     DOC = "doc"
     

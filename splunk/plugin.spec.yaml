@@ -3,9 +3,10 @@ name: splunk
 title: Splunk
 description: Splunk provides the leading platform for Operational Intelligence. Customers
   use Splunk to search, monitor, analyze and visualize machine data
-version: 2.0.0
+version: 3.0.0
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - splunk
 - siem
@@ -16,7 +17,7 @@ connection:
     type: string
     required: true
   port:
-    description: Port the Splunk API is listening on
+    description: Port the Splunk API is listening on. Default is 8089
     type: integer
     default: 8089
     required: true
@@ -42,34 +43,7 @@ connection:
     description: Verify server's SSL/TLS certificate
     type: boolean
     required: true
-triggers:
-  alert:
-    title: Alert
-    description: Hook a configured alert to send data to Komand
-    input:
-      names:
-        type: '[]string'
-        description: Names of saved searches to hook e.g. [ "Sudo Alert", "Firewall
-          Blocks" ]
-        required: true
-      interval:
-        type: integer
-        description: Poll interval in seconds
-        default: 15
-        required: false
-    output:
-      result:
-        description: Splunk alert result object
-        type: object
-        required: false
-      results_link:
-        description: Splunk results link
-        type: string
-        required: false
-      search_name:
-        description: Splunk search name
-        type: string
-        required: false
+
 actions:
   insert:
     title: Insert
@@ -186,8 +160,7 @@ actions:
         required: true
       properties:
         type: object
-        description: JSON object containing additional properties to save with the
-          saved search
+        description: JSON object containing additional properties to save with the saved search
         required: false
     output:
       saved_search:

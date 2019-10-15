@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "remove_member_from_board",
+    "input": {
+      "board_id": "",
+      "id_member": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "version": 1,
+      "api_token": {
+        "domain": "",
+        "token": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

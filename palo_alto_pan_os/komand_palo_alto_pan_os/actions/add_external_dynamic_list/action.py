@@ -1,5 +1,6 @@
 import komand
 from .schema import AddExternalDynamicListInput, AddExternalDynamicListOutput
+from komand.exceptions import PluginException
 # Custom imports below
 from komand_palo_alto_pan_os.util import util
 
@@ -47,7 +48,6 @@ class AddExternalDynamicList(komand.Action):
             message = output['response']['msg']
             return {"status": status, 'code': code, 'message': message}
         except KeyError:
-            self.logger.error('The output did not contain expected keys. Output was: ')
-            self.logger.error(output)
-            raise Exception(
-                'The output did not contain the expected response. See log for more details.')
+            raise PluginException(cause='The output did not contain expected keys.',
+                                  assistance='Contact support for help.',
+                                  data=output)

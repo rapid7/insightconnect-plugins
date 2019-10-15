@@ -1,0 +1,69 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": null,
+    "action": "transform",
+    "connection": {},
+    "dispatcher": {},
+    "input": {
+      "source_data": {
+        "OK": "GO",
+        "Now": [
+          1,
+          2,
+          3,
+          {
+            "is": [
+              1,
+              2,
+              3,
+              {
+                "the": [
+                  1,
+                  2,
+                  3,
+                  {
+                    "time": "to come to the aid of the party"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "extraction_template": {
+        "Now": [
+          "$1",
+          2,
+          3,
+          {
+            "is": [
+              1,
+              "$2",
+              3,
+              {
+                "the": [
+                  1,
+                  2,
+                  "$3",
+                  {
+                    "time": "$4"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "target_template": {
+        "numbers": [
+          "$1",
+          "$2",
+          "$3"
+        ],
+        "advice": "$4"
+      }
+    }
+  }
+}

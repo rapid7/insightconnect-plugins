@@ -11,10 +11,10 @@
     },
     "connection": {
       "key": {
-        "secretKey": ""
+        "secretKey": "asdfasdf"
       },
       "secret": {
-        "secretKey": ""
+        "secretKey": "asdfasdf"
       }
     }
   },

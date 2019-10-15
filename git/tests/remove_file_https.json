@@ -6,10 +6,10 @@
       "file_path": "assets/icon.png"
     },
     "connection": {
-      "url": "",
+      "url": "https://gitlab.com/komand-test/test-repository.git",
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "password",
+        "username": "komand-test"
       }
     }
   },

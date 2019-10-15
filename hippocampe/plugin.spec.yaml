@@ -5,7 +5,8 @@ description: Hippocampe is a threat feed aggregator, which creates a threat feed
   and allows queries through a REST API or from a Web UI
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - threat
 - analysis

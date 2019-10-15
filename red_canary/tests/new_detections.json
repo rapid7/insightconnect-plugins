@@ -1,23 +1,17 @@
 {
-  "type": "trigger_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "trigger": "new_detections",
-    "input": {
-      "frequency": 10,
-      "date_offset": "2017-01-24T23:15:42.112Z",
-      "force_offset": true
+    "body": {
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "date_offset": "2017-01-24T23:15:42.112Z",
+            "force_offset": true,
+            "frequency": 1
+        },
+        "meta": {},
+        "trigger": "new_detections"
     },
-    "dispatcher": {
-      "webhook_url": "",
-      "url": "http://localhost:8000"
-    },
-    "connection": {
-      "api_token": {
-        "secretKey": ""
-      },
-      "customer_id": ""
-    }
-  }
+    "type": "trigger_start",
+    "version": "v1"
 }

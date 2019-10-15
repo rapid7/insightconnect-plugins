@@ -2,8 +2,8 @@
   "body": {
     "action": "search",
     "input": {
-      "item": "",
-      "type": ""
+      "item": "komand",
+      "type": "User"
     },
     "connection": {
       "api_key": {
@@ -11,9 +11,9 @@
       },
       "credentials": {
         "password": "",
-        "username": ""
+        "username": "charlotte@komand.com"
       },
-      "subdomain": ""
+      "subdomain": "komand"
     },
     "meta": {}
   },

@@ -1,0 +1,246 @@
+plugin_spec_version: v2
+name: rapid7_insightidr
+title: "Rapid7 InsightIDR"
+description: "Rapid7 InsightIDR is an intruder analytics solution that gives you the confidence to detect and investigate security incidents faster"
+version: 1.1.0
+vendor: rapid7
+tags: [ "IDR", "SIEM" ]
+support: rapid7
+status: []
+
+types:
+  investigation_metadata:
+    index:
+      title: Index
+      description: The zero-based index of the page retrieved
+      type: integer
+      required: false
+    size:
+      title: Size
+      description: The size of the page requested
+      type: integer
+      required: false
+    total_data:
+      title: Total Data
+      description: The total number of results available with the given filter parameters
+      type: integer
+      required: false
+    total_pages:
+      title: Total Pages
+      description: The total number of pages available with the given filter parameters
+      type: integer
+      required: false
+  alerts:
+    first_event_time:
+      title: First Event Time
+      description: The time the first event involved in this alert occurred
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Alert type
+      type: string
+      required: false
+    type_description:
+      title: Type Description
+      description: An optional description of this type of alert
+      type: string
+      required: false
+  assignee:
+    email:
+      title: Email
+      description: The email of the assigned user
+      type: string
+      required: false
+    name:
+      title: Name
+      description: The name of the assigned user
+      type: string
+      required: false
+  investigation:
+    assignee:
+      title: Assignee
+      description: The user assigned to this investigation, if any
+      type: assignee
+      required: false
+    alerts:
+      title: Alerts
+      description: The alerts involved in this investigation, if any
+      type: "[]alerts"
+      required: false
+    created_time:
+      title: Created Time
+      description: The time the investigation was created as an ISO formatted timestamp
+      type: string
+      required: false
+    id:
+      title: ID
+      description: The ID of the investigation
+      type: string
+      required: false
+    source:
+      title: Source
+      description: The source of this investigation
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The status of the investigation
+      type: string
+      required: false
+    title:
+      title: Title
+      description: Investigation title
+      type: string
+      required: false
+  threat:
+    indicator_count:
+      title: Indicator Count
+      description: The number of indicators in this threat
+      type: integer
+      required: false
+    name:
+      title: Name
+      description: The name of the threat
+      type: string
+      required: false
+    note:
+      title: Note
+      description: Notes about this threat
+      type: string
+      required: false
+    published:
+      title: Published
+      description: Indicates whether this threat has been published
+      type: boolean
+      required: false
+
+
+connection:
+  api_key:
+    title: API Key
+    description: InsightIDR API key
+    type: credential_secret_key
+    required: true
+  url:
+    title: URL
+    description: The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com
+    type: string
+    required: true
+    default: https://us.api.insight.rapid7.com
+
+actions:
+  list_investigations:
+    title: List Investigations
+    description: Retrieve a page of investigations matching the given request parameters
+    input:
+      statuses:
+        title: Statuses
+        description: An optional-comma separated set of investigation statuses. Only the investigation whose status matches one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned
+        type: string
+        required: true
+        default: CLOSED
+        enum:
+        - "OPEN"
+        - "CLOSED"
+        - "EITHER"
+      start_time:
+        title: Start Time
+        description: An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned
+        type: date
+        required: false
+      end_time:
+        title: End Time
+        description: An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned
+        type: date
+        required: false
+      size:
+        title: Size
+        description: The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000
+        type: integer
+        required: true
+        default: 20
+      index:
+        title: Index
+        description: The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0
+        type: integer
+        required: true
+        default: 0
+    output:
+      investigations:
+        title: Investigations
+        description: A list of found investigations
+        type: "[]investigation"
+        required: true
+      metadata:
+        title: Metadata
+        description: The pagination parameters used to generate this page result
+        type: investigation_metadata
+        required: true
+
+
+  set_status_of_investigation_action:
+    title: Set Status of Investigation
+    description: Set the status of the investigation with the given ID
+    input:
+      id:
+        title: ID
+        description: The ID of the investigation to change the status of
+        type: string
+        required: true
+      status:
+        title: Status
+        description: The new status for the investigation
+        type: string
+        required: true
+        default: CLOSED
+        enum:
+        - "OPEN"
+        - "CLOSED"
+    output:
+      investigation:
+        title: Investigations
+        description: The investigation for which the status was set
+        type: investigation
+        required: true
+
+  add_indicators_to_a_threat:
+    title: Add Indicators to a Threat
+    description: Add InsightIDR threat indicators to a threat with the given threat key
+    input:
+      key:
+        title: Key
+        description: The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3
+        type: string
+        required: true
+      ips:
+        title: IP Addresses
+        description: IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]
+        type: "[]string"
+        required: false
+      hashes:
+        title: Process Hashes
+        description: Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]
+        type: "[]string"
+        required: false
+      domain_names:
+        title: Domain Names
+        description: Domain names to add. e.g. ["rapid7.com","google.com"]
+        type: "[]string"
+        required: false
+      urls:
+        title: URLs
+        description: URL's to add. e.g. ["https://example.com","https://test.com"]
+        type: "[]string"
+        required: false
+    output:
+      rejected_indicators:
+        title: Rejected Indicators
+        description: The list of indicators that have been rejected during the update
+        type: "[]string"
+        required: false
+      threat:
+        title: Threat
+        description: The information about the threat
+        type: threat
+        required: false

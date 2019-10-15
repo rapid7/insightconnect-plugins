@@ -25,7 +25,7 @@ class CreateIssue(komand.Action):
             project = self.connection.parameters.get('project')
 
         issueType = params.get('type')
-        summary = params.get('summary', " ")
+        summary = params.get('summary', " ").replace("\n", " ")
         description = params.get("description", " ")
         fields = params.get('fields', {})
 

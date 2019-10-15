@@ -7,10 +7,10 @@
     },
     "connection": {
       "api_token": {
-        "secretKey": ""
+        "secretKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uX2tleSI6IlNmM1F6UUVnWXRYRDZ2ejZTeXYvNzBJTTFIUFlLc1doWkEvNWJhekFHbUQvYUlIaXRBRE9tRWF6TlpiYUVzSGdLN3psUHQ1MW1XM1R2OEE4VTBYdkNBPT0ifQ.Y0eMz5d1GErKIynD08TZObQbWOl1z4Ownu2K7zXIq4w"
       },
       "ssl_verify": false,
-      "url": ""
+      "url": "https://192.168.10.179:8080"
     }
   },
   "type": "action_start",

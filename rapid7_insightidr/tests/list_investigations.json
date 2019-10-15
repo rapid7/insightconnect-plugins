@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "list_investigations",
+    "meta": {},
+    "input": {
+      "end_time": "",
+      "index": 0,
+      "size": 20,
+      "start_time": "",
+      "statuses": "EITHER"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "url": "https://us.api.insight.rapid7.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

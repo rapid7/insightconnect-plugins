@@ -3,9 +3,10 @@ name: smtp
 title: SMTP
 description: Simple Mail Transfer Protocol (SMTP) is an Internet standard for electronic
   mail (email) transmission
-version: 2.0.2
+version: 2.0.3
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - smtp
 - email

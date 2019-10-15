@@ -152,6 +152,48 @@ This action is used to retrieve user information.
 |id|string|False|None|
 |job_title|string|False|None|
 
+### Get User Info from Login
+
+This action is used to retrieve user information using their login ID.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|login|string|None|True|User's login e.g. bob@hotmail.com|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address|string|False|User address|
+|avatar_url|string|False|User avatar|
+|id|string|False|User ID|
+|job_title|string|False|Job title|
+|login|string|False|User email|
+|name|string|False|Username|
+|phone|string|False|User phone number|
+|space_amount|float|False|Max space amount|
+|space_used|float|False|Space used|
+|timezone|string|False|Timezone|
+
+Example output:
+
+```
+{
+  "address": "103 memory lane, apt. 21, 61801",
+  "avatar_url": "https://app.box.com/api/avatar/large/8830457340",
+  "id": "8830457340",
+  "job_title": "guinepig3",
+  "login": "randomtestuser@somerandomdomain.com",
+  "name": "bob",
+  "phone": "5555555555",
+  "space_amount": 10737418240,
+  "space_used": 0,
+  "timezone": "America/Los_Angeles"
+}
+```
+
 ### Download File
 
 This action is used to download file by ID.
@@ -220,6 +262,113 @@ This action is used to upload a file. Input "0" for root folder. Include extenti
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
+### Get Enterprise Groups
+
+This action is used to get all enterprise groups.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|group_name|string|None|False|Group name to find|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|groups|[]group|False|Groups|
+
+Example output:
+
+```
+{
+  "groups": [
+    {
+      "type": "group",
+      "id": "38901557",
+      "name": "group1",
+      "group_type": "managed_group"
+    },
+    {
+      "type": "group",
+      "id": "66186068",
+      "name": "group2",
+      "group_type": "managed_group"
+    }
+  ]
+}
+```
+
+### Add User to Group
+
+This action is used to add a user to a group.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|group_id|string|None|True|Group ID|None|
+|role|string|None|True|Role|['admin', 'member']|
+|user_id|string|None|True|None|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|group|object|False|Group|
+
+Example output:
+
+```
+{
+  "group": {
+    "user_id": "8830457340",
+    "group_id": "66186068",
+    "role": "member",
+    "type": "group_membership"
+  }
+}
+```
+
+### Get User Groups
+
+This action is used to get groups for a given user.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|user_id|string|None|False|User ID|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|groups|[]group|False|Groups|
+
+Example output:
+
+```
+{
+  "groups": [
+    {
+      "user_id": "8830457340",
+      "group_id": "66186068",
+      "role": "member",
+      "type": "group_membership",
+      "name": "bloop"
+    },
+    {
+      "user_id": "8830457340",
+      "group_id": "38901557",
+      "role": "member",
+      "type": "group_membership",
+      "name": "blah"
+    }
+  ]
+}
+```
+
 ## Triggers
 
 This plugin does not contain any triggers.
@@ -258,6 +407,9 @@ Examples:
 * 2.0.2 - Fix issue with credentials in InsightConnect
 * 2.0.3 - Fix issue where size was sometimes reported as a float
 * 2.0.4 - Update to `Create User` action `Space Amount` input showing input for unlimited size
+* 2.1.0 - New actions Get Enterprise Groups and Add User to Group
+* 2.2.0 - New actions Get User Groups and Get User Info from Login
+* 2.2.1 - Fix issue where a misleading error message could be given in the log
 
 ## References
 
@@ -265,3 +417,14 @@ Examples:
 * [BOX Developers](https://docs.box.com/docs/)
 * [BOX](https://app.box.com/login/)
 * [boxsdk](https://box-python-sdk.readthedocs.io/en/latest/)
+
+## Custom Output Types
+
+### group
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|group_id|string|False|Group ID|
+|role|string|False|Role|
+|type|string|False|Type|
+|user_id|string|False|User ID|

@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_group_detail",
+    "meta": {},
+    "input": {
+      "id": 2
+    },
+    "connection": {
+      "client_login": {
+        "password": "",
+        "username": ""
+      },
+      "timeout": 30,
+      "url": "https://rapid7dev.jamfcloud.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

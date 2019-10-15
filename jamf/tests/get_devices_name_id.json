@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_devices_name_id",
+    "meta": {},
+    "input": {
+      "name": "Jon"
+    },
+    "connection": {
+      "client_login": {
+        "password": "",
+        "username": ""
+      },
+      "timeout": 30,
+      "url": "https://rapid7dev.jamfcloud.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

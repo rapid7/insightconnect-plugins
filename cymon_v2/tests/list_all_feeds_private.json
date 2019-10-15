@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "list_all_feeds",
+    "input": {
+      "privacy": "private"
+    },
+    "connection": {
+      "api_credentials": {
+        "username": "komand_test",
+        "password": "komand"
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

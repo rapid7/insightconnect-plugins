@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete an existing tag"
+
+
 class Input:
     ID = "id"
     

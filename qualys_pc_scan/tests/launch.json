@@ -1,0 +1,23 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "launch",
+    "trigger": "",
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "hostname": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "ip": "",
+      "option_title": "",
+      "priority": "",
+      "title": ""
+    }
+  }
+}

@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: duo_auth
 title: Duo Auth API
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 description: Integration for Duo Auth API
 version: 1.0.1
 tags:

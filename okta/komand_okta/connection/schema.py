@@ -28,8 +28,8 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "okta_url",
-    "okta_key"
+    "okta_key",
+    "okta_url"
   ],
   "definitions": {
     "credential_secret_key": {

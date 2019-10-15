@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "expand",
+    "input": {
+      "follow": false,
+      "url": "http://bit.ly/1bdDlXc"
+    },
+    "connection": null,
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

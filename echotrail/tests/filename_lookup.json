@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "filename_lookup",
+    "meta": {},
+    "input": {
+      "filename": "cmd.exe"
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": "yczQyV4mZ21QktVMxhR5LaPZeS2RY6xr5YwKbfMg"
+      },
+      "server": "https://api.echotrail.io:443"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

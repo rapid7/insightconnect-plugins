@@ -6,7 +6,7 @@ from komand_rapid7_insightvm import connection, actions, triggers
 
 Name = 'Rapid7 InsightVM'
 Vendor = 'rapid7'
-Version = '3.2.0'
+Version = '3.4.0'
 Description = 'InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities'
 
 
@@ -19,6 +19,8 @@ class ICONRapid7Insightvm(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_trigger(triggers.NewScans())
+
         self.add_action(actions.AddScanEnginePoolEngine())
 
         self.add_action(actions.AddUserAssetGroupAccess())
@@ -57,11 +59,19 @@ class ICONRapid7Insightvm(komand.Plugin):
 
         self.add_action(actions.EnableUser())
 
+        self.add_action(actions.GenerateAdhocSqlReport())
+
         self.add_action(actions.GenerateSharedSecret())
+
+        self.add_action(actions.GetAsset())
 
         self.add_action(actions.GetAssetGroup())
 
         self.add_action(actions.GetAssetGroups())
+
+        self.add_action(actions.GetAssetSoftware())
+
+        self.add_action(actions.GetAssetTags())
 
         self.add_action(actions.GetAssetVulnerabilities())
 
@@ -74,6 +84,8 @@ class ICONRapid7Insightvm(komand.Plugin):
         self.add_action(actions.GetRoles())
 
         self.add_action(actions.GetScan())
+
+        self.add_action(actions.GetScanAssets())
 
         self.add_action(actions.GetScanEngine())
 
@@ -134,6 +146,8 @@ class ICONRapid7Insightvm(komand.Plugin):
         self.add_action(actions.TagAssetGroup())
 
         self.add_action(actions.TagSite())
+
+        self.add_action(actions.TopRemediations())
 
         self.add_action(actions.UpdateAssetGroupSearchCriteria())
 

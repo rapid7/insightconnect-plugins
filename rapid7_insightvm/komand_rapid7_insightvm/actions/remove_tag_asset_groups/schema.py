@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove all asset group associations from a tag"
+
+
 class Input:
     ID = "id"
     

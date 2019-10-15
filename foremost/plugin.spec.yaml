@@ -4,7 +4,8 @@ title: Foremost
 description: A data carving tool to recover files
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - foremost
 - extraction

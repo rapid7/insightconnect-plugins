@@ -5,7 +5,7 @@
     "connection": {
       "protocol": "http",
       "proxy": {},
-      "host": "",
+      "host": "cortex-1-1.vuln.lax.rapid7.com",
       "port": "9999",
       "verify": true
     },

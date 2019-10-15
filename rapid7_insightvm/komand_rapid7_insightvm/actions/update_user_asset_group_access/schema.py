@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update the asset groups to which a user has access in bulk. It can be used to remove asset group access as well"
+
+
 class Input:
     ASSET_GROUP_IDS = "asset_group_ids"
     USER_ID = "user_id"

@@ -2,23 +2,23 @@
   "body": {
     "action": "update",
     "input": {
-      "id_or_email": "",
-      "name": "",
+      "id_or_email": "tientest11@grr.la",
+      "name": "tientest11",
       "roles": [],
       "title": "Update User API",
       "presence": {},
-      "mention_name": "",
+      "mention_name": "tien11",
       "is_group_admin": false,
       "timezone": "UTC",
       "password": "",
-      "email": ""
+      "email": "tientest11@grr.la"
     },
     "connection": {
       "host": "https://hipchat.com/",
       "version": "v2",
       "credentials": {
         "username": "",
-        "password": ""
+        "password": "wOOLYOaDNIYt9gi5GvDAhKQOp1gNysceum1ULEel"
       }
     },
     "meta": {}

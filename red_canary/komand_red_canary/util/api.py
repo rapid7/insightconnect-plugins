@@ -1,4 +1,5 @@
-from requests import request, HTTPError
+from requests import request, adapters, HTTPError, Session, Request
+import urllib3
 import komand
 from komand.exceptions import ConnectionTestException
 import logging
@@ -147,7 +148,23 @@ class RedCanary3:
         }
 
         while True:
-            response = request(method, url, **kwargs)
+            # Create session and prepare request
+            s = Session()
+            req = Request(method, url, **kwargs)
+
+            prepped = req.prepare()
+
+            # Set Max Retry
+            retry_adapter = adapters.HTTPAdapter(max_retries=3)
+            s.mount("https://", retry_adapter)
+
+            try:
+                response = s.send(prepped,
+                                  )
+            except urllib3.exceptions.ProtocolError:
+                self.logger.info("[-] Connection aborted. Retrying request")
+                response = s.send(prepped)
+
             try:
                 response.raise_for_status()
             except HTTPError:

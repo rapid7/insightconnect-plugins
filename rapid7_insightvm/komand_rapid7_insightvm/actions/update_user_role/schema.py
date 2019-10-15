@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update the role associated with an user account"
+
+
 class Input:
     ACCESS_ALL_ASSET_GROUPS = "access_all_asset_groups"
     ACCESS_ALL_SITES = "access_all_sites"

@@ -6,7 +6,7 @@
       "analyzer_id": ""
     },
     "connection": {
-      "host": "",
+      "host": "cortex-1-1.vuln.lax.rapid7.com",
       "verify": true,
       "proxy": {},
       "protocol": "http",

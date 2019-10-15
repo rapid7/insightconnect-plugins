@@ -2,8 +2,10 @@ plugin_spec_version: v2
 name: powershell
 title: PowerShell
 description: Run a PowerShell script on a remote host
-version: 2.0.1
+version: 2.1.0
 vendor: rapid7
+support: community
+status: []
 tags:
 - powershell
 - microsoft
@@ -42,6 +44,7 @@ connection:
     enum:
     - NTLM
     - Kerberos
+    - CredSSP
     - None
     required: true
   kerberos:

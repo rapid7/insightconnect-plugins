@@ -1,0 +1,30 @@
+plugin_spec_version: v2
+name: port_knocking
+title: Port Knocking
+vendor: rapid7
+support: community
+status: []
+description: Knocks the specified ports on a host, optionally including a payload
+version: 1.0.0
+tags:
+- ip address
+- port knock
+- hostname
+- knockd
+- ssh
+enable_cache: false
+actions:
+  knock:
+    title: Knock
+    description: Knocks the specified ports on a host
+    input:
+      host:
+        type: string
+        description: IP address or hostname to knock
+        required: true
+        title: Host
+      ports:
+        type: '[]string'
+        description: E.g. 7000/tcp, 8000/udp
+        required: true
+        title: Ports

@@ -10,7 +10,7 @@
         "password": ""
       },
       "timeout": 60,
-      "server": ""
+      "server": "192.168.2.183:9390"
     },
     "meta": {}
   },

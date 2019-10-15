@@ -123,6 +123,31 @@ When the user is not found, the action returns:
 }
 ```
 
+### Delete User
+
+This action is used to delete a user. If a user is not deprovisioned, this will deprovision a user, a second delete will be needed to remove the user. Warning: This action annot be recovered from.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|send_admin_email|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false.|None|
+|user_email|string|None|True|The Email of the employee to delete|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Whether deactivation was successful|
+
+Example output:
+
+```
+{
+  "success": false
+}
+```
+
 ### Unsuspend User
 
 This action is used to unsuspend a user.
@@ -544,6 +569,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 * 3.1.0 - New action Reset Factors
 * 3.1.1 - Update descriptions
 * 3.1.2 - Update connection test
+* 3.2.0 - New action Delete User
 
 ## References
 

@@ -1,18 +1,12 @@
 {
-  "body": {
-    "action": "search_for_mac_address_usages",
-    "meta": {},
-    "input": {
-      "mac_address": "",
-      "max_results": 100
+    "body": {
+        "action": "search_for_mac_address_usages",
+        "input": {
+            "mac_address": "00-14-22-01-23-45",
+            "max_results": 100
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_token": {
-        "secretKey": ""
-      },
-      "customer_id": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

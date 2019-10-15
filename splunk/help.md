@@ -46,7 +46,7 @@ This action allows you run a search command in Splunk.
 
 ### Modify Saved Search Properties
 
-This action is used to modifies the properties of a saved search.
+This action is used to modify the properties of a saved search.
 A full list of saved search properties can be found [here](http://dev.splunk.com/view/python-sdk/SP-CAAAEK2#savedsearchparams).
 
 #### Input
@@ -64,7 +64,7 @@ A full list of saved search properties can be found [here](http://dev.splunk.com
 
 ### Run Saved Search
 
-This action is used to runs a saved search.
+This action is used to run a saved search.
 
 #### Input
 
@@ -80,7 +80,7 @@ This action is used to runs a saved search.
 
 ### View Saved Search Properties
 
-This action is used to returns the properties for a saved search.
+This action is used to return the properties for a saved search.
 
 #### Input
 
@@ -96,7 +96,7 @@ This action is used to returns the properties for a saved search.
 
 ### Delete Saved Search
 
-This action is used to deletes a saved search.
+This action is used to delete a saved search.
 
 #### Input
 
@@ -112,7 +112,7 @@ This action is used to deletes a saved search.
 
 ### Display Search Results
 
-This action is used to displays the search results from a job.
+This action is used to display the search results from a job.
 
 #### Input
 
@@ -129,7 +129,7 @@ This action is used to displays the search results from a job.
 
 ### List Saved Searches
 
-This action is used to lists all saved searches. Note that the Splunk API returns credential information in clear-text for this action's output.
+This action is used to list all saved searches. Note that the Splunk API returns credential information in clear-text for this action's output.
 
 #### Input
 
@@ -143,7 +143,7 @@ This action does not contain any inputs.
 
 ### Create Saved Search
 
-This action is used to creates a saved search.
+This action is used to create a saved search.
 
 #### Input
 
@@ -161,7 +161,7 @@ This action is used to creates a saved search.
 
 ### Get Saved Search Job History
 
-This action is used to returns the job history of a specified saved search.
+This action is used to return the job history of a specified saved search.
 
 #### Input
 
@@ -229,7 +229,8 @@ The connection configuration accepts the following parameters:
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+* If issues are encountered when using the `Search` action, try prefixing your query with `search`, example: 
+`search index="*" | head 5`.
 
 ## Workflows
 
@@ -254,6 +255,7 @@ Examples:
 * 1.0.1 - Fix issue where json module was not imported in Search action
 * 1.1.0 - Add support for user specified number of results in the Search action
 * 2.0.0 - Support SSL Verify option in the Connection | Improve error handling in Connection | Update documentation
+* 3.0.0 - Remove Komand-specific Alert trigger | Fix invalid output properties | Numerous typographical fixes | Improve error handling | Smaller plugin size due to slim SDK migration | New connection test code
 
 ## References
 

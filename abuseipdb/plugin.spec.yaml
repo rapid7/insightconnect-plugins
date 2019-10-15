@@ -3,64 +3,90 @@ name: abuseipdb
 title: AbuseIPDB
 description: AbuseIPDB is a free service which allows you to look up IP reports, or
   report an abusive IP
-version: 3.0.1
+version: 5.0.0
 vendor: rapid7
-status: ["supported"]
+support: community
+status: []
 tags:
 - ip
 - intelligence
 - abuse
 enable_cache: false
 types:
-  ip:
-    category:
-      type: '[]integer'
-    created:
+
+  blacklisted:
+    ipAddress:
+      title: IP Address
+      description: IP Address of abusive IP
       type: string
-    ip:
-      title: IP
+      required: true
+    abuseConfidenceScore:
+      title: Abuse Confidence Score
+      description: Confidence that IP is abusive
       type: string
-    isWhitelisted:
-      title: Is Whitelisted
-      type: boolean
-    country:
+      required: true
+
+  report:
+    reportedAt:
+      title: Reported At
+      description: Date and time of report
       type: string
-    isoCode:
-      title: ISO Code
-      type: string
+      required: false
     comment:
+      title: Comment
+      description: Comment by reporter
       type: string
-    userId:
-      title: User ID
-      description: Reporter's user id number (0 if reported anonymously)
+      required: false
+    categories:
+      title: Categories
+      description: List of categories
+      type: '[]integer'
+      required: false
+    reporterId:
+      title: Reporter ID
+      description: ID number of reporter
       type: integer
-  reportedIPs:
-    CountryCode:
-      title: Country Code
+      required: false
+    reporterCountryCode:
+      title: Reporter Country Code
+      description: Country code of the reporter
       type: string
-    IP:
+      required: false
+    reporterCountryName:
+      title: Reporter Country Name
+      description: Name of country reporter is from
+      type: string
+      required: false
+
+  reportedIPs:
+    ipAddress:
       title: IP
       type: string
-    IsWhitelisted:
-      title: Is Whitelisted
-      type: integer
-    MostRecentReport:
-      title: Most Recent Report
-      type: string
-    NumReports:
+      description: IP Address of reported resource
+    numReports:
       title: Number of Reports
       type: integer
-    Public:
-      type: integer
+      description: Number of reports of this IP
+    mostRecentReport:
+      title: Most Recent Report
+      type: string
+      description: Most recent report for this IP
     abuseConfidenceScore:
       title: Abuse Confidence Score
       type: integer
+      description: Confidence that this IP is abusive
+    countryCode:
+      title: Country Code
+      type: string
+      description: Country code of IP
+
 connection:
   credentials:
     title: API Key
     description: API key
     type: credential_secret_key
     required: true
+
 actions:
   check_ip:
     title: Check IP
@@ -80,21 +106,87 @@ actions:
       verbose:
         title: Verbose
         description: When set, reports will include the comment (if any) and the reporter's
-          user id number (0 if reported anonymously)
+          user ID number (0 if reported anonymously)
         type: boolean
         default: true
         required: true
     output:
-      list:
+      ipAddress:
+        title: IP Address
+        description: Queried IP Address
+        type: string
+        required: false
+      isPublic:
+        title: Is Public
+        description: Whether or not the IP Address is public
+        type: boolean
+        required: false
+      ipVersion:
+        title: IP Version
+        description: Version of IP Address
+        type: integer
+        required: false
+      isWhitelisted:
+        title: Is Whitelisted
+        description: Whether or not IP Address is whitelisted
+        type: boolean
+        required: false
+      abuseConfidenceScore:
+        title: Abuse Confidence Score
+        description: Confidence of Abuse
+        type: integer
+        required: false
+      countryCode:
+        title: Country Code
+        description: Code of country IP is registered in
+        type: string
+        required: false
+      usageType:
+        title: Usage Type
+        description: How IP is used
+        type: string
+        required: false
+      isp:
+        title: ISP
+        description: Internet Service Provider for IP
+        type: string
+        required: false
+      domain:
+        title: Domain
+        description: Domain Name of IP
+        type: string
+        required: false
+      countryName:
+        title: Country Name
+        description: Name of Country IP is registered in
+        type: string
+        required: false
+      totalReports:
+        title: Total Reports
+        description: Total number of reports of abuse
+        type: integer
+        required: false
+      numDistinctUsers:
+        title: Number of Distinct Users
+        description: Number of distinct users who reported IP
+        type: integer
+        required: false
+      lastReportedAt:
+        title: Last Reported At
+        description: Date of last report
+        type: string
+        required: false
+      reports:
         title: Reports
-        description: List of IP reports
-        type: '[]ip'
+        description: List of reports
+        type: '[]report'
         required: false
       found:
         title: Found
         description: Whether an IP address was found in the database
         type: boolean
-        required: true
+        required: false
+
   check_cidr:
     title: Check CIDR
     description: Look up a CIDR address in the database
@@ -116,14 +208,9 @@ actions:
         description: Network address
         type: string
         required: false
-      maxAddress:
-        title: Maximum Address
-        description: Maximum address
-        type: string
-        required: false
-      addressSpaceDesc:
-        title: Address Space Description
-        description: Address space description
+      netmask:
+        title: Netmask
+        description: Netmask
         type: string
         required: false
       minAddress:
@@ -131,9 +218,9 @@ actions:
         description: Minimum address
         type: string
         required: false
-      netmask:
-        title: Netmask
-        description: Netmask
+      maxAddress:
+        title: Maximum Address
+        description: Maximum address
         type: string
         required: false
       numPossibleHosts:
@@ -141,16 +228,26 @@ actions:
         description: Number of possible hosts
         type: integer
         required: false
-      reportedIPs:
+      addressSpaceDesc:
+        title: Address Space Description
+        description: Address space description
+        type: string
+        required: false
+      reportedAddress:
         title: Reported IPs
         description: List of reported IPs
         type: '[]reportedIPs'
         required: false
+      found:
+        title: Found
+        description: Whether the CIDR was found in the database
+        type: boolean
+        required: true
   report_ip:
     title: Report IP
     description: Report an abusive IP address
     input:
-      address:
+      ip:
         title: IP Address
         description: IPv4 or IPv6 address to report e.g. 8.8.8.8, ::1
         type: string
@@ -168,13 +265,44 @@ actions:
         type: string
         required: false
     output:
-      ip:
+      ipAddress:
         title: Comment
         description: IP address submitted
         type: string
+        required: false
+      abuseConfidenceScore:
+        title: Abuse Confidence Score
+        description: Confidence that reported IP is abusive
+        type: integer
         required: false
       success:
         title: Success
         description: Submission success
         type: boolean
+        required: True
+  get_blacklist:
+    title: Get Blacklist
+    description: List of blacklisted IP addresses
+    input:
+      confidenceMinimum:
+        title: Confidence Minimum
+        description: Minimum confidence to filter by
+        type: string
+        required: true
+      limit:
+        title: Limit
+        description: Max length of blacklist
+        type: string
         required: false
+    output:
+      blacklist:
+        title: Blacklist
+        description: List of abusive IPs
+        type: '[]blacklisted'
+        required: false
+      success:
+        title: Success
+        description: Was the blacklist successfully retrieved
+        type: boolean
+        required: true
+

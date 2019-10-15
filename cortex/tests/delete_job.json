@@ -5,7 +5,7 @@
     "action": "delete_job",
     "connection": {
       "port": "9999",
-      "host": "",
+      "host": "cortex-1-1.vuln.lax.rapid7.com",
       "protocol": "http",
       "proxy": {},
       "verify": true

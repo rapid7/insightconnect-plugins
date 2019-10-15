@@ -1,0 +1,27 @@
+{
+	"body": {
+		"connection": {
+                   "access_key": {
+                     "secretKey": ""
+                   },
+		   "region": "us-east-1",
+                   "secret_key": {
+                     "secretKey": ""
+                   }
+		},
+		"meta": {},
+		"action": "insert",
+		"input": {
+            "data": {
+				"uname":"James2",
+				"enabled":true,
+                "ordinal": 40
+            },
+			"index": "",
+			"table": "komand_test_2",
+			"condition_expression": "attribute_not_exists(uname)"
+		}
+	},
+	"version": "v1",
+	"type": "action_start"
+}

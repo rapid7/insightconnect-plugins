@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_user_groups",
+        "input": {
+            "user_id": "8830457340"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

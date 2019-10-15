@@ -2,7 +2,7 @@
   "type": "action_start",
   "body": {
     "connection": {
-      "server": ""
+      "server": "http://localhost:8086"
     },
     "meta": {},
     "action": "write",

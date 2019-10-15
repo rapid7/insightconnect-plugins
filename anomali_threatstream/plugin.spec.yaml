@@ -5,7 +5,8 @@ description: ThreatStream operationalizes threat intelligence, automating collec
   and integration that enables security teams to analyze and respond to threats
 version: 2.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - anomali
 - threatstream

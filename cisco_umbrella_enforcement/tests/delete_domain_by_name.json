@@ -7,7 +7,7 @@
     },
     "connection": {
       "api_key": {
-        "secretKey": ""
+        "secretKey": "asdf"
       }
     }
   },

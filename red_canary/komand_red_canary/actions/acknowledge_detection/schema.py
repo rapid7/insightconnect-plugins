@@ -151,9 +151,9 @@ class AcknowledgeDetectionOutput(komand.Output):
               "description": "Summary",
               "order": 3
             },
-            "time_of_occurence": {
+            "time_of_occurrence": {
               "type": "string",
-              "title": "Time of Occurence",
+              "title": "Time of Occurrence",
               "displayType": "date",
               "description": "The time the detection was confirmed as a threat by Red Canary",
               "format": "date-time",
@@ -821,9 +821,9 @@ class AcknowledgeDetectionOutput(komand.Output):
           "description": "Summary",
           "order": 3
         },
-        "time_of_occurence": {
+        "time_of_occurrence": {
           "type": "string",
-          "title": "Time of Occurence",
+          "title": "Time of Occurrence",
           "displayType": "date",
           "description": "The time the detection was confirmed as a threat by Red Canary",
           "format": "date-time",

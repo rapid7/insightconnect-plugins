@@ -32,7 +32,7 @@
         "Subject": "UnitTest",
         "TimeUnit": 0
       },
-      "CustomerUser": "",
+      "CustomerUser": "luke.milby@rapid7.com",
       "Lock": "",
       "Priority": "4 high",
       "PendingTime": "2018-09-29T18:01:21+00:00",

@@ -17,7 +17,7 @@
       "port": "9999",
       "protocol": "http",
       "verify": true,
-      "host": ""
+      "host": "cortex-1-1.vuln.lax.rapid7.com"
     }
   }
 }

@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: geoip2precision
 title: GeoIP2 Precision
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: MaxMind service that offers industry-leading IP intelligence data
 version: 1.0.0
 tags:

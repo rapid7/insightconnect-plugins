@@ -17,9 +17,9 @@
       "port": "9999",
       "protocol": "HTTP",
       "verify": true,
-      "host": "",
+      "host": "10.7.9.252",
       "api_key": {
-        "secretKey": ""
+        "secretKey": "gCf1EI6TsmZzL6t7lW0wZkJqdzpyLlr+"
       }
     }
   }

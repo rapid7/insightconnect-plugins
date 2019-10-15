@@ -1,3 +1,0 @@
-tests/get_all_domain_users.json
-tests/suspend_user.json
-tests/unsuspend_user.json

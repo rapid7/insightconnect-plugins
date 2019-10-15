@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup URL in Safe Browsing Service"
+
+
 class Input:
     CLIENT_ID = "client_id"
     PLATFORM_TYPE_ALL = "platform_type_all"

@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "remove_member_from_org",
+    "input": {
+      "id_member": "",
+      "id_or_name": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "version": 1,
+      "api_token": {
+        "domain": "",
+        "token": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

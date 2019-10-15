@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action is used to perform a freetext search across all Recorded Future entity types (IP address, domain, hash, malware, and vulnerability)"
+
+
 class Input:
     FREETEXT = "freetext"
     

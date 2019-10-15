@@ -15,7 +15,7 @@ class SendResolveEvent(komand.Action):
 
     def run(self, params={}):
         """Resolve event"""
-
+        
         ev = pypd.Event.create(data={
             'service_key': params['service_key'],
             'event_type': 'resolve',

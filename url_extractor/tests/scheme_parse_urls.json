@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": null,
+    "action": "parse_urls",
+    "connection": null,
+    "dispatcher": {},
+    "input": {
+      "text": "Should have one URL for Komandhttp://komand.com/.",
+      "scheme": "https?://"
+    }
+  }
+}

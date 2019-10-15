@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "generate_adhoc_sql_report",
+    "meta": {},
+    "input": {
+      "filters": "{}",
+      "query": "",
+      "scope": "",
+      "scope_ids": []
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

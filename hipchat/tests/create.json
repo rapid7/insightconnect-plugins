@@ -2,14 +2,14 @@
   "body": {
     "action": "create",
     "input": {
-      "name": "",
+      "name": "tientest11",
       "roles": [],
       "title": "",
       "mention_name": "tien11",
       "is_group_admin": false,
       "timezone": "UTC",
-      "password": "",
-      "email": ""
+      "password": "tientest11",
+      "email": "tientest11@grr.la"
     },
     "connection": {
       "host": "https://hipchat.com/",
@@ -17,7 +17,7 @@
       "user": "",
       "credentials": {
         "username": "",
-        "password": ""
+        "password": "wOOLYOaDNIYt9gi5GvDAhKQOp1gNysceum1ULEel"
       }
     },
     "meta": {}

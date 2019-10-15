@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "array_to_string",
+    "trigger": "",
+    "connection": {
+      "connection_cache_key": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "delimiter": ",",
+      "input": ["hello","world"]
+    }
+  }
+}

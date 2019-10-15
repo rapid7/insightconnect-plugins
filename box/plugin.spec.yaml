@@ -2,15 +2,44 @@ plugin_spec_version: v2
 name: box
 title: Box
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Box gives you access to secure content management and content experience
   features of the Box Enterprise API
-version: 2.0.4
+version: 2.2.1
 tags:
 - box
 - cloud
 - storage
 - document
+types:
+  group:
+    user_id:
+      title: User ID
+      description: User ID
+      type: string
+      required: false
+    group_id:
+      title: Group ID
+      description: Group ID
+      type: string
+      required: false
+    role:
+      title: Role
+      description: Role
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+
 connection:
   client_id:
     description: Box client ID
@@ -386,4 +415,122 @@ actions:
         title: User Avatar
         description: User avatar
         type: string
+        required: false
+  user_info_from_login:
+    title: Get User Info from Login
+    description: Retrieve user information using their login ID
+    input:
+      login:
+        type: string
+        title: User Login
+        description: User's login e.g. bob@hotmail.com
+        required: true
+    output:
+      login:
+        title: User Email
+        description: User email
+        type: string
+        required: false
+      id:
+        title: User ID
+        description: User ID
+        type: string
+        required: false
+      name:
+        title: Username
+        description: Username
+        type: string
+        required: false
+      timezone:
+        title: Timezone
+        description: Timezone
+        type: string
+        required: false
+      space_amount:
+        title: Max Space Amount
+        description: Max space amount
+        type: float
+        required: false
+      space_used:
+        title: Space Used
+        description: Space used
+        type: float
+        required: false
+      job_title:
+        title: Job Title
+        description: Job title
+        type: string
+        required: false
+      phone:
+        title: User Phone Number
+        description: User phone number
+        type: string
+        required: false
+      address:
+        title: User Address
+        description: User address
+        type: string
+        required: false
+      avatar_url:
+        title: User Avatar
+        description: User avatar
+        type: string
+        required: false
+  get_enterprise_groups:
+    title: Get Enterprise Groups
+    description: Get all enterprise groups
+    input:
+      group_name:
+        title: Group Name
+        description: Group name to find
+        type: string
+        required: false
+    output:
+      groups:
+          title: "Groups"
+          type: "[]group"
+          description: "Groups"
+          required: false
+  get_user_groups:
+    title: Get User Groups
+    description: Get groups for a given user
+    input:
+      user_id:
+        title: User ID
+        description: User ID
+        type: string
+        required: false
+    output:
+      groups:
+        title: "Groups"
+        type: "[]group"
+        description: "Groups"
+        required: false
+  add_user_to_group:
+    title: Add User to Group
+    description: Add a user to a group
+    input:
+      user_id:
+        title: "User ID"
+        description: "User ID e.g. 12345678"
+        type: string
+        required: true
+      group_id:
+        title: "Group ID"
+        description: "Group ID e.g. 12345678"
+        type: string
+        required: true
+      role:
+        title: "Role"
+        description: "Role"
+        type: string
+        required: true
+        enum:
+          - admin
+          - member
+    output:
+      group:
+        title: "Group"
+        description: "Group"
+        type: object
         required: false

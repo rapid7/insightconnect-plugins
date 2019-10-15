@@ -7,9 +7,9 @@
     },
     "connection": {
       "api_key": {
-        "secretKey": ""
+        "secretKey": "72c02460e04a2c2116b54c87fc899915"
       },
-      "app_key": "",
+      "app_key": "45a2009f5f3c82f47c63c41df3544ba45920d032",
       "url": "https://api.datadoghq.com/api/v1/"
     }
   },

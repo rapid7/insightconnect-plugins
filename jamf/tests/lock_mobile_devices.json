@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "lock_mobile_devices",
+    "meta": {},
+    "input":{
+      "devices_id": ["2"]
+    },
+    "connection": {
+      "client_login": {
+        "password": "",
+        "username": ""
+      },
+      "timeout": 30,
+      "url": "https://rapid7dev.jamfcloud.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

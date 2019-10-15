@@ -1,0 +1,28 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "launch_compliance_policy_report",
+    "trigger": "",
+    "connection": {
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "hostname": ""
+    },
+    "dispatcher": {},
+    "input": {
+      "asset_group_ids": "",
+      "host_id": 0,
+      "instance": "",
+      "ips": "",
+      "output_format": "",
+      "policy_id": 0,
+      "report_refs": "",
+      "template_id": 0,
+      "title": ""
+    }
+  }
+}

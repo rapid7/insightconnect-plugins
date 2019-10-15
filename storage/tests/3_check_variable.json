@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "delete_variable",
+    "meta": {},
+    "input": {
+      "variable_name": "some_cool_variable"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

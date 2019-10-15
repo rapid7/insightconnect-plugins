@@ -2,6 +2,7 @@
 from .add_group_member.action import AddGroupMember
 from .create_blocked_sender_policy.action import CreateBlockedSenderPolicy
 from .create_managed_url.action import CreateManagedUrl
+from .decode_url.action import DecodeUrl
 from .find_groups.action import FindGroups
 from .get_managed_url.action import GetManagedUrl
 from .get_ttp_url_logs.action import GetTtpUrlLogs

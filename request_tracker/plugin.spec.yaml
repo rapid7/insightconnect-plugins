@@ -4,7 +4,8 @@ title: Request Tracker
 description: The open-source enterprise grade issue and ticket tracking system
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - issue
 - track

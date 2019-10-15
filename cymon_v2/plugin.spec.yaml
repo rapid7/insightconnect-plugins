@@ -1,0 +1,508 @@
+plugin_spec_version: v2
+name: cymon_v2
+title: Cymon v2
+description: Cymon is the largest tracker of open-source security reports about phishing,
+  malware, botnets and other malicious activities
+version: 1.0.1
+vendor: rapid7
+support: community
+status: ["obsolete"]
+tags:
+- cymon
+- intel
+connection:
+  api_credentials:
+    title: API Credentials
+    description: Cymon API v2 credentials
+    type: credential_username_password
+    required: false
+types:
+  report_ioc:
+    ip:
+      title: IP
+      description: IPv4 or IPv6
+      type: string
+    url:
+      title: URL
+      description: Malicious URL indicator
+      type: string
+    hostname:
+      title: Hostname
+      description: Domain with all subdomains
+      type: string
+    domain:
+      title: Domain
+      description: Root domain
+      type: string
+    md5:
+      title: MD5
+      description: MD5 hash of a malicious binary
+      type: string
+    sha1:
+      title: SHA1
+      description: SHA1 hash of a malicious binary
+      type: string
+    sha256:
+      title: SHA256
+      description: SHA256 hash of a malicious binary
+      type: string
+    ssdeep:
+      title: SSDEEP
+      description: SSDEEP hash of a malicious binary
+      type: string
+  coordinates:
+    lat:
+      title: Lat
+      description: Latitude
+      type: float
+    lon:
+      title: Lon
+      description: Longitude
+      type: float
+  geo_ip_location:
+    country:
+      title: Country
+      description: Country code
+      type: string
+    city:
+      title: City
+      description: City name
+      type: string
+    point:
+      title: Point
+      description: Longitude and latitude coordinates
+      type: coordinates
+  threat_report:
+    feed_id:
+      title: Feed ID
+      description: The feed ID
+      type: string
+    feed:
+      title: Feed
+      description: The feed name
+      type: string
+    title:
+      title: Title
+      description: Short report title
+      type: string
+    description:
+      title: Description
+      descriptions: Long technical description
+      type: string
+    tags:
+      title: Tags
+      description: List of tags to categorize and help others find this report
+      type: '[]string'
+    timestamp:
+      title: Timestamp
+      description: An ISO8601 date string for when this IoC was observed
+      type: integer
+    ioc:
+      title: IoC
+      description: Object with observables
+      type: report_ioc
+    reported_by:
+      title: Reported By
+      description: The username of the person who submitted the report
+      type: string
+    location:
+      title: Location
+      description: Geo IP location
+      type: geo_ip_location
+  searched_threat_report:
+    feed_id:
+      title: Feed ID
+      description: The feed ID
+      type: string
+    feed:
+      title: Feed
+      description: The feed name
+      type: string
+    title:
+      title: Title
+      description: Short report title
+      type: string
+    description:
+      title: Description
+      descriptions: Long technical description
+      type: string
+    tags:
+      title: Tags
+      description: List of tags to categorize and help others find this report
+      type: '[]string'
+    timestamp:
+      title: Timestamp
+      description: An ISO8601 date string for when this IoC was observed
+      type: date
+    ioc:
+      title: IoC
+      description: Object with observables
+      type: report_ioc
+    reported_by:
+      title: Reported By
+      description: The username of the person who submitted the report
+      type: string
+    location:
+      title: Location
+      description: Geo IP location
+      type: geo_ip_location
+  feed:
+    id:
+      title: ID
+      description: Feed ID
+      type: string
+    name:
+      title: Name
+      description: Feed name
+      type: string
+    slug:
+      title: Slug
+      description: URL-friendly slug
+      type: string
+    description:
+      title: Description
+      description: Feed description text
+      type: string
+    link:
+      title: Link
+      description: URL for blog or website where users can learn more about this feed
+      type: string
+    tos:
+      title: TOS
+      description: Terms of Use for this feed
+      type: string
+    logo:
+      title: Logo
+      description: 'URL for small thumbnail for this feed (must be hosted on imgur
+        CDN: `https://i.imgur.com/img-id`)'
+      type: string
+    privacy:
+      title: Privacy
+      description: Can be set to either `private` or `public` (default)
+      type: string
+    tags:
+      title: Tags
+      description: List of tags to categorize and help others find this feed
+      type: '[]string'
+    is_owner:
+      title: Is Owner
+      description: Boolean indicating if current user owns this feed
+      type: boolean
+    is_admin:
+      title: Is Admin
+      description: Boolean indicating if current user can administer this feed
+      type: boolean
+    is_member:
+      title: Is Member
+      description: Boolean indicating if current user can contribute to this feed
+      type: boolean
+    is_guest:
+      title: Is Guest
+      description: Boolean indicating if current user can read from this feed
+      type: boolean
+  uploaded_report:
+    feed_id:
+      title: Feed ID
+      description: The feed ID to post this report in
+      type: string
+      required: true
+    title:
+      title: Title
+      description: Short report title
+      type: string
+      required: true
+    description:
+      title: Description
+      descriptions: Long technical description
+      type: string
+      required: false
+    tags:
+      title: Tags
+      description: List of tags to categorize and help others find this report
+      type: '[]string'
+      required: true
+    timestamp:
+      title: Timestamp
+      description: An ISO8601 date string for when this IoC was observed
+      type: integer
+      required: false
+    ioc:
+      title: IoC
+      description: Object with observables
+      type: report_ioc
+      required: true
+actions:
+  search:
+    title: Search
+    description: Search threat reports
+    input:
+      search_by:
+        title: Search By
+        description: Type of search value
+        type: string
+        required: true
+        enum:
+        - ip_address
+        - domain_name
+        - hostname
+        - md5_hash
+        - sha1_hash
+        - sha256_hash
+        - ssdeep_hash
+        - term
+        - feed_id
+      value:
+        title: Value
+        description: The query value to search for
+        type: string
+        required: true
+      start_date:
+        title: Start Date
+        description: The start date for searching
+        type: string
+        required: false
+      end_date:
+        title: End Data
+        description: The end date for searching
+        type: string
+        required: false
+    output:
+      hits:
+        title: Hits
+        description: Threat reports matching search value
+        type: '[]searched_threat_report'
+        required: true
+  list_all_feeds:
+    title: List All Feeds
+    description: Get the list of feeds
+    input:
+      privacy:
+        title: Privacy
+        description: Return list of `private` or `public` feeds
+        required: true
+        type: string
+        enum:
+        - all
+        - private
+        - public
+    output:
+      feeds:
+        title: Feeds
+        description: Feeds
+        type: '[]feed'
+        required: true
+  list_user_feeds:
+    title: List User Feeds
+    description: Get the list of feeds that a user has access to
+    output:
+      feeds:
+        title: Feeds
+        description: Feeds
+        type: '[]feed'
+        required: true
+  get_feed_details:
+    title: Get Feed Details
+    description: Get a feed object
+    input:
+      feed_id:
+        title: Feed ID
+        description: Feed ID
+        required: true
+        type: string
+    output:
+      feed:
+        title: Feed
+        description: Feed
+        type: feed
+        required: true
+  get_report_document:
+    title: Get Report Document
+    description: Get the threat report from a feed
+    input:
+      feed_id:
+        title: Feed ID
+        description: Feed ID
+        required: true
+        type: string
+      report_id:
+        title: Report ID
+        description: Report ID
+        required: true
+        type: string
+    output:
+      feed:
+        title: Feed
+        description: Feed
+        type: feed
+        required: true
+      report:
+        title: Report
+        description: Report
+        type: searched_threat_report
+        required: true
+  create_feed:
+    title: Create Feed
+    description: Create a new feed for threat reports
+    input:
+      name:
+        title: Name
+        description: Feed name
+        type: string
+        required: true
+      description:
+        title: Description
+        description: Feed description text
+        type: string
+        required: false
+      link:
+        title: Link
+        description: URL for blog or website where users can learn more about this
+          feed
+        type: string
+        required: false
+      tos:
+        title: TOS
+        description: Terms of Use for this feed
+        type: string
+        required: false
+      logo:
+        title: Logo
+        description: URL for small thumbnail for this feed (must be hosted on imgur
+          CDN)
+        type: string
+        required: false
+      privacy:
+        title: Privacy
+        description: Can be set to either `private` or `public` (default)
+        type: string
+        required: true
+        enum:
+        - private
+        - public
+        default: public
+      tags:
+        title: Tags
+        description: List of tags to categorize and help others find this feed
+        type: '[]string'
+        required: true
+      admins:
+        title: Admins
+        description: List of usernames that have `update`, `post`, and `read` permissions
+          to this feed
+        type: '[]string'
+        required: false
+      members:
+        title: Members
+        description: List of usernames that have `post` and `read` permissions to
+          this feed
+        type: '[]string'
+        required: false
+      guests:
+        title: Guests
+        description: List of usernames that have `read` permission to this feed
+        type: '[]string'
+        required: false
+    output:
+      feed:
+        title: Feed
+        description: Newly created feed
+        type: feed
+        required: true
+  update_feed:
+    title: Update Feed
+    description: Update details of an existing feed
+    input:
+      feed_id:
+        title: Feed ID
+        description: The feed ID
+        type: string
+        required: true
+      description:
+        title: Description
+        description: Feed description text
+        type: string
+        required: false
+      link:
+        title: Link
+        description: URL for blog or website where users can learn more about this
+          feed
+        type: string
+        required: false
+      tos:
+        title: TOS
+        description: Terms of Use for this feed
+        type: string
+        required: false
+      logo:
+        title: Logo
+        description: URL for small thumbnail for this feed (must be hosted on imgur
+          CDN)
+        type: string
+        required: false
+      privacy:
+        title: Privacy
+        description: Can be set to either `private` or `public` (default)
+        type: string
+        required: false
+        enum:
+        - private
+        - public
+        default: public
+      tags:
+        title: Tags
+        description: List of tags to categorize and help others find this feed
+        type: '[]string'
+        required: false
+      admins:
+        title: Admins
+        description: List of usernames that have `update`, `post`, and `read` permissions
+          to this feed
+        type: '[]string'
+        required: false
+      members:
+        title: Members
+        description: List of usernames that have `post` and `read` permissions to
+          this feed
+        type: '[]string'
+        required: false
+      guests:
+        title: Guests
+        description: List of usernames that have `read` permission to this feed
+        type: '[]string'
+        required: false
+    output:
+      feed:
+        title: Feed
+        description: Updated feed
+        type: feed
+        required: true
+  submit_report:
+    title: Submit Report
+    description: Upload a threat report with observables
+    input:
+      report:
+        title: Report
+        description: Report to upload
+        required: true
+        type: uploaded_report
+    output:
+      report:
+        title: Report
+        description: Uploaded report
+        type: threat_report
+        required: true
+  submit_reports_in_bulk:
+    title: Submit Reports in Bulk
+    description: Upload multiple threat reports in one request
+    input:
+      reports:
+        title: Reports
+        description: Reports to upload
+        required: true
+        type: '[]uploaded_report'
+    output:
+      reports:
+        title: Reports
+        description: Uploaded reports
+        type: '[]threat_report'
+        required: true

@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_asset_tags",
+    "meta": {},
+    "input": {
+      "asset_id": 0
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://insightvm:3780"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

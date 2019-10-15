@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "add_user_to_group",
+        "input": {
+            "group_id": "66186068",
+            "role": "member",
+            "user_id": "8830457340"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

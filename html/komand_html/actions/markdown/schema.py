@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Convert HTML to Markdown"
+
+
 class Input:
     DOC = "doc"
     

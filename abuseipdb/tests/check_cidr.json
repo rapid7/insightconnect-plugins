@@ -2,7 +2,7 @@
     "body": {
         "action": "check_cidr",
         "input": {
-            "cidr": "207.126.144.0/20",
+            "cidr": "1.2.3.0/24",
             "days": "30"
         },
         "meta": {}

@@ -1,0 +1,33 @@
+{
+  "body": {
+    "action": "get_boards_by_member",
+    "input": {
+      "memberships": "",
+      "actions_entities": false,
+      "id_or_name": "",
+      "fields": "all",
+      "actions": "",
+      "action_fields": "all",
+      "filter": "all",
+      "lists": "none",
+      "actions_since": "",
+      "actions_limit": 50,
+      "organization": false,
+      "actions_format": "list",
+      "organization_fields": ""
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "version": 1,
+      "api_token": {
+        "domain": "",
+        "token": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

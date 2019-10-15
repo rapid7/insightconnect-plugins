@@ -5,9 +5,9 @@
       "key": {"filename": "", "content": ""},
       "username": "admin",
       "host": "ciscoasa.com",
-      "password": "",
+      "password": "password",
       "verbose": false,
-      "secret": "",
+      "secret": "password",
       "port": 22
     },
     "action": "show_commands",

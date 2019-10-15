@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "add_computer_to_group",
+        "connection": {
+            "client_login": {
+                "password": "",
+                "username": ""
+            },
+            "timeout": 30,
+            "url": "https://rapid7dev.jamfcloud.com"
+        },
+        "input": {
+            "ID": 4,
+            "computer_ids": [3]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

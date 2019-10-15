@@ -2,9 +2,10 @@ plugin_spec_version: v2
 name: google_safe_browsing
 title: Google Safe Browsing
 description: Check URLs against the Google Safe Browsing service
-version: 1.0.0
+version: 2.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: ["obsolete"]
 tags:
 - google
 - safe browsing

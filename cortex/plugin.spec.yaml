@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: cortex
 title: Cortex
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Cortex, an open source and free software, for analyzing observables
 version: 1.0.0
 tags:

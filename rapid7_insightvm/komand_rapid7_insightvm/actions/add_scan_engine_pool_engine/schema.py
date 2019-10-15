@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a scan engine to a scan engine pool (AWS pre-authorized engine AMI engines cannot be pooled)"
+
+
 class Input:
     ENGINE_ID = "engine_id"
     POOL_ID = "pool_id"

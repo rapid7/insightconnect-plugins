@@ -1,0 +1,15 @@
+{
+  "body": {
+    "action": "list_user_feeds",
+    "input": {},
+    "connection": {
+      "api_credentials": {
+        "username": "komand_test",
+        "password": "komand"
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

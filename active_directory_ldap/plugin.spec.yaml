@@ -2,9 +2,10 @@ plugin_spec_version: v2
 name: active_directory_ldap
 title: Active Directory LDAP
 description: Active Directory LDAP
-version: 3.2.1
+version: 3.2.4
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - ldap
 - active directory

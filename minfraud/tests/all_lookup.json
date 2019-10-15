@@ -7,7 +7,7 @@
       "billing_city": "New Haven",
       "payment_was_authorized": false,
       "order_subaffiliate_id": "saf42",
-      "billing_first_name": "",
+      "billing_first_name": "John",
       "event_type": "purchase",
       "shipping_country": "US",
       "shipping_address": "82 Wall St.",
@@ -63,7 +63,7 @@
     "meta": {},
     "connection": {
       "license": {
-        "secretKey": ""
+        "secretKey": "lVZifoFZDDO8"
       },
       "user": 118625
     }

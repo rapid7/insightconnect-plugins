@@ -3,7 +3,7 @@
     "action": "assign_incident",
     "meta": {},
     "input": {
-      "assignee": "",
+      "assignee": "123@service.hmail.eu",
       "incident_id": 31851783
     },
     "connection": {

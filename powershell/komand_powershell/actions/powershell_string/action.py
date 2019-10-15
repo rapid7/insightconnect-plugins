@@ -29,8 +29,8 @@ class PowershellString(komand.Action):
         # This will run PowerShell on the linux VM
         if auth == 'None' or not host_ip:
             data = util.local(action=self, powershell_script=powershell_script)
-            output = data['output']
-            stderr = data['stderr']
+            output = data.get('output')
+            stderr = data.get('stderr')
 
             if output:
                 output = self.safe_encode(output)
@@ -45,8 +45,8 @@ class PowershellString(komand.Action):
             data = util.ntlm(action=self, host_ip=host_ip,
                              powershell_script=powershell_script,
                              username=username, password=password, port=port)
-            output = data['output']
-            stderr = data['stderr']
+            output = data.get('output')
+            stderr = data.get('stderr')
 
             if output:
                 output = self.safe_encode(output)
@@ -62,8 +62,22 @@ class PowershellString(komand.Action):
                                  host_name=host_name,
                                  powershell_script=powershell_script,
                                  password=password, username=username, port=port)
-            output = data['output']
-            stderr = data['stderr']
+            output = data.get('output')
+            stderr = data.get('stderr')
+
+            if output:
+                output = self.safe_encode(output)
+
+            if stderr:
+                stderr = self.safe_encode(stderr)
+
+            return {'stdout': output, 'stderr': stderr}
+        if auth == 'CredSSP':
+            data = util.credssp(action=self, host_ip=host_ip,
+                                powershell_script=powershell_script,
+                                username=username, password=password, port=port)
+            output = data.get('output')
+            stderr = data.get('stderr')
 
             if output:
                 output = self.safe_encode(output)
@@ -76,7 +90,3 @@ class PowershellString(komand.Action):
     def safe_encode(self, in_byte):
         new_string = str(in_byte)
         return in_byte.replace("\u0000", "")
-
-    def test(self):
-        # TODO: Implement test function
-        return {}

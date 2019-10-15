@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Move an Active Directory object from one organizational unit to another"
+
+
 class Input:
     DISTINGUISHED_NAME = "distinguished_name"
     NEW_OU = "new_ou"

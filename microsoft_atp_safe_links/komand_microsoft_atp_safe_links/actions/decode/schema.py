@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Decodes a Microsoft Safe Link"
+
+
 class Input:
     URL = "url"
     

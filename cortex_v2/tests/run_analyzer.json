@@ -13,9 +13,9 @@
     },
     "action": "run_analyzer",
     "connection": {
-      "host": "",
+      "host": "10.7.9.252",
       "api_key": {
-        "secretKey": ""
+        "secretKey": "gCf1EI6TsmZzL6t7lW0wZkJqdzpyLlr+"
       },
       "verify": true,
       "proxy": {},

@@ -13,7 +13,7 @@
       "api_secret": {
         "secretKey": ""
       },
-      "server": ""
+      "server": "https://demo15.vxstream-sandbox.com"
     }
   },
   "type": "action_start",

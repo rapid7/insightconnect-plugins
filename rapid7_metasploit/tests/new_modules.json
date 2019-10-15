@@ -7,8 +7,8 @@
       "ssl": true,
       "port": 55553,
       "credentials": {
-        "username": "",
-        "password": ""
+        "username": "msf",
+        "password": "password"
       }
     },
     "trigger": "new_modules",

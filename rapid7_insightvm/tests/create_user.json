@@ -5,7 +5,7 @@
     "input": {
       "authentication_id": 5,
       "authentication_type": "ldap",
-      "email": "",
+      "email": "komand_test@rapid7esc.com",
       "enabled": true,
       "login": "komand-test",
       "name": "Komand Test User",
@@ -18,7 +18,7 @@
         "username": "",
         "password": ""
       },
-      "url": ""
+      "url": "https://insightvm:3780"
     }
   },
   "type": "action_start",

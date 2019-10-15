@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "create_user",
+        "input": {
+            "notify_from": "",
+            "notify_recipient": "",
+            "notify_email_body": "$password",
+            "account_enabled": true,
+            "display_name": "testy",
+            "mail_nickname": "testy",
+            "user_principal_name": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

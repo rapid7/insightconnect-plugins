@@ -12,11 +12,11 @@
     "meta": {},
     "action": "add_indicator",
     "connection": {
-      "url": "",
+      "url": "https://192.168.99.100:8443",
       "ssl_verify": false,
-      "username": "",
+      "username": "nonroot",
       "api_key": {
-        "secretKey": ""
+        "secretKey": "639fa4b0d205b034df46434f64fd8eacf47390f9"
       }
     }
   },

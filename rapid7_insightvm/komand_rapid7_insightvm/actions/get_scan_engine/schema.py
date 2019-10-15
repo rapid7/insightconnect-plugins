@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a scan engine by ID"
+
+
 class Input:
     ID = "id"
     

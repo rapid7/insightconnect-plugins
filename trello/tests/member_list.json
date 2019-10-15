@@ -1,0 +1,48 @@
+{
+  "body": {
+    "action": "member_list",
+    "input": {
+      "memberships_member_fields": "",
+      "actions_entities": false,
+      "actions_display": false,
+      "actions": "",
+      "action_fields": "all",
+      "member_fields": "",
+      "actions_limit": 50,
+      "memberships": "none",
+      "membersInvited": "none",
+      "board_actions_entities": false,
+      "board_pluginData": false,
+      "board_actions": "",
+      "membersInvited_fields": "",
+      "board_lists": "none",
+      "board_actions_format": "list",
+      "id_or_name": "",
+      "board_actions_limit": 50,
+      "memberships_member": false,
+      "members": "none",
+      "board_action_fields": "all",
+      "board_actions_display": false,
+      "board_fields": "all",
+      "boards": "",
+      "fields": "",
+      "member_activity": false,
+      "paid_account": false,
+      "board_actions_since": "",
+      "pluginData": false
+    },
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "version": 1,
+      "api_token": {
+        "domain": "",
+        "token": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

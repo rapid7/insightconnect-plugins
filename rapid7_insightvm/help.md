@@ -8,6 +8,274 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 ## Actions
 
+### Get Asset
+
+This action gets an asset by ID.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|id|integer|None|True|Get an asset by ID|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|asset|asset|True|Asset details|
+
+Example output:
+
+```
+{
+  "asset": {
+    "addresses": [
+      {
+        "ip": "10.0.0.1",
+        "mac": "00:50:56:8A:3D:8C"
+      }
+    ],
+    "assessedForPolicies": False,
+    "assessedForVulnerabilities": True,
+    "history": [
+      {
+        "date": "2018-08-28T11:06:47.738Z",
+        "scanId": 189170,
+        "type": "SCAN",
+        "version": 1
+      }
+    ],
+    "id": 74708,
+    "ip": "10.0.0.1",
+    "links": [
+      {
+        "href": "https://insightvm:3780/api/3/assets/74708",
+        "rel": "self"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/assets/74708/software",
+        "rel": "Software"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/assets/74708/files",
+        "rel": "Files"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/assets/74708/users",
+        "rel": "Users"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/assets/74708/user_groups",
+        "rel": "User Groups"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/assets/74708/databases",
+        "rel": "Databases"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/assets/74708/services",
+        "rel": "Services"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/assets/74708/tags",
+        "rel": "Tags"
+      }
+    ],
+    "mac": "00:50:56:8A:3D:8C",
+    "os": "Microsoft Windows Server 2012",
+    "osFingerprint": {
+      "cpe": {
+        "part": "o",
+        "product": "windows_server_2012",
+        "update": "gold",
+        "v2.2": "cpe:/o:microsoft:windows_server_2012:-:gold",
+        "v2.3": "cpe:2.3:o:microsoft:windows_server_2012:-:gold:*:*:*:*:*:*",
+        "vendor": "microsoft",
+        "version": "-"
+      },
+      "description": "Microsoft Windows Server 2012",
+      "family": "Windows",
+      "id": 720,
+      "product": "Windows Server 2012",
+      "systemName": "Microsoft Windows",
+      "type": "General",
+      "vendor": "Microsoft"
+    },
+    "rawRiskScore": 4787.376953125,
+    "riskScore": 4787.376953125,
+    "services": [
+      {
+        "configurations": [
+          {
+            "name": "ssl",
+            "value": "true"
+          },
+          {
+            "name": "ssl.cert.chainerror",
+            "value": "[Path does not chain with any of the trust anchors]"
+          }
+        ],
+        "links": [
+          {
+            "href": "https://insightvm:3780/api/3/assets/74708/services/tcp/3389",
+            "rel": "self"
+          },
+          {
+            "href": "https://insightvm:3780/api/3/assets/74708/services/tcp/3389/configurations",
+            "rel": "Configurations"
+          },
+          {
+            "href": "https://insightvm:3780/api/3/assets/74708/services/tcp/3389/databases",
+            "rel": "Databases"
+          },
+          {
+            "href": "https://insightvm:3780/api/3/assets/74708/services/tcp/3389/users",
+            "rel": "Users"
+          },
+          {
+            "href": "https://insightvm:3780/api/3/assets/74708/services/tcp/3389/user_groups",
+            "rel": "User Groups"
+          },
+          {
+            "href": "https://insightvm:3780/api/3/assets/74708/services/tcp/3389/web_applications",
+            "rel": "Web Applications"
+          }
+        ],
+        "port": 3389,
+        "protocol": "tcp"
+      }
+    ],
+    "vulnerabilities": {
+      "critical": 0,
+      "exploits": 1,
+      "malwareKits": 0,
+      "moderate": 7,
+      "severe": 7,
+      "total": 14
+    }
+  }
+}
+```
+
+### Get Asset Tags
+
+This action is used to get a listing of all tags for an asset.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|asset_id|integer|None|True|Identifier of asset|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|tags|[]tag|True|List of tags|
+
+Example output:
+
+```
+{
+  "tags": [
+    {
+      "color": "default",
+      "created": "2019-02-06T15:07:07.517Z",
+      "id": 83,
+      "links": [
+        {
+          "href": "https://insightvm:3780/api/3/tags/83",
+          "rel": "self"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/tags/83/assets",
+          "rel": "Tag Assets"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/tags/83/asset_groups",
+          "rel": "Tag Asset Groups"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/tags/83/sites",
+          "rel": "Tag Sites"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/tags/83/search_criteria",
+          "rel": "Tag Search Criteria"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/users/2",
+          "rel": "Tag Creator"
+        }
+      ],
+      "name": "windows",
+      "source": "custom",
+      "sources": [
+        {
+          "id": 9,
+          "links": [
+            {
+              "id": 9,
+              "href": "https://insightvm:3780/api/3/asset_groups/9",
+              "rel": "Asset Group"
+            }
+          ],
+          "source": "asset-group"
+        }
+      ],
+      "type": "custom"
+    },
+    {
+      "color": "default",
+      "created": "2019-04-24T17:06:29.296Z",
+      "id": 168,
+      "links": [
+        {
+          "href": "https://insightvm:3780/api/3/tags/168",
+          "rel": "self"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/tags/168/assets",
+          "rel": "Tag Assets"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/tags/168/asset_groups",
+          "rel": "Tag Asset Groups"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/tags/168/sites",
+          "rel": "Tag Sites"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/tags/168/search_criteria",
+          "rel": "Tag Search Criteria"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/users/1",
+          "rel": "Tag Creator"
+        }
+      ],
+      "name": "Windows Servers",
+      "source": "custom",
+      "sources": [
+        {
+          "id": 12,
+          "links": [
+            {
+              "id": 12,
+              "href": "https://insightvm:3780/api/3/asset_groups/12",
+              "rel": "Asset Group"
+            }
+          ],
+          "source": "asset-group"
+        }
+      ],
+      "type": "custom"
+    }
+  ]
+}
+```
+
 ### Get Asset Vulnerabilities
 
 This action is used to get vulnerabilities found on an asset. Can only be used if the asset has first been scanned (via Komand or other means).
@@ -72,6 +340,40 @@ Example output:
   }]
 }
 
+```
+
+### Get Asset Software
+
+This action is used to get software found on an asset. Can only be used if the asset has first been scanned.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|asset_id|string|None|True|ID of the asset for which to find software|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|software|[]software|False|Software found on the asset|
+
+Example output:
+
+```
+{
+  "software": [
+    {
+      "description": "Apache Struts 1.3.10",
+      "family": "Struts",
+      "id": 3910,
+      "product": "Struts",
+      "type": "Middleware",
+      "vendor": "Apache",
+      "version": "1.3.10"
+    }
+  }
+}
 ```
 
 ### Get Scan
@@ -240,6 +542,36 @@ Example output:
   }
 }
 
+```
+
+### Generate AdHoc SQL Report
+
+This action is used to create, generate, download, and cleanup a SQL report based on the provided query.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|filters|string|{}|False|Filters in JSON format to be applied to the contents of the report; review InsightVM API documentation for filter options|None|
+|query|string|None|True|Reporting Data Model SQL query|None|
+|scope|string|none|True|Scope context for generated report; if set, remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID; scan scope only supports single scan ID as input|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|
+|scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|report|file|True|Base64 encoded file making up the report|
+
+Example output:
+
+```
+{
+  "report": {
+    "content": "YXNzZXRfaWQsbWFjX2FkZHJlc3MsaXBfYWRkcmVzcyxob3N0X25hbWUsb3BlcmF0aW5nX3N5c3RlbV9pZCxob3N0X3R5cGVfaWQsbWF0Y2hfdmFsdWUsc2l0ZXMsbGFzdF9hc3Nlc3NlZF9mb3JfdnVsbmVyYWJpbGl0aWVzCjE0OCwsMy4xNy4yMTQuNjgsZWMyLTMtMTctMjE0LTY4LnVzLWVhc3QtMi5jb21wdXRlLmFtYXpvbmF3cy5jb20sNjEsLTEsMC4zMjQ5OTk5ODgsVGVzdC1FQzIsMjAxOS0wNC0xNiAyMDoyNzo0Mi4yNTUKMTQ5LCwzLjE5LjEyNC4yNCxlYzItMy0xOS0xMjQtMjQudXMtZWFzdC0yLmNvbXB1dGUuYW1hem9uYXdzLmNvbSwtMSwtMSwwLjMyNDk5OTk4OCxUZXN0LUVDMiwyMDE5LTA0LTE2IDIwOjI3OjU3LjM4OQo=",
+    "filename": "adhoc_sql_report.csv"
+  }
+}
 ```
 
 ### Download Report
@@ -1871,6 +2203,119 @@ Example output:
 }
 ```
 
+### Get Scan Assets
+
+This action gets assets for a scan.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|scan_id|integer|None|True|ID of the scan to get assets for|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|assets|[]asset|False|Assets|
+
+Example output:
+
+```
+{
+  "assets": [
+    {
+      "addresses": [
+        {
+          "ip": "10.0.0.1"
+        }
+      ],
+      "assessedForPolicies": false,
+      "assessedForVulnerabilities": true,
+      "history": [
+        {
+          "date": "2019-04-17T00:27:42.255Z",
+          "scanId": 1235,
+          "type": "SCAN",
+          "version": 1
+        },
+        {
+          "date": "2019-06-17T17:05:26.236Z",
+          "scanId": 2160,
+          "type": "SCAN",
+          "version": 2
+        },
+        {
+          "date": "2019-06-17T18:23:42.565Z",
+          "scanId": 2161,
+          "type": "SCAN",
+          "version": 3
+        },
+        {
+          "date": "2019-06-17T18:31:13.270Z",
+          "scanId": 2162,
+          "type": "SCAN",
+          "version": 4
+        }
+      ],
+      "hostName": "hostname.us-east-2.compute.amazonaws.com",
+      "hostNames": [
+        {
+          "name": "hostname.us-east-2.compute.amazonaws.com",
+          "source": "dns"
+        }
+      ],
+      "id": 148,
+      "ip": "10.0.0.1",
+      "links": [
+        {
+          "href": "https://insightvm:3780/api/3/assets/148",
+          "rel": "self"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/assets/148/software",
+          "rel": "Software"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/assets/148/files",
+          "rel": "Files"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/assets/148/users",
+          "rel": "Users"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/assets/148/user_groups",
+          "rel": "User Groups"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/assets/148/databases",
+          "rel": "Databases"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/assets/148/services",
+          "rel": "Services"
+        },
+        {
+          "href": "https://insightvm:3780/api/3/assets/148/tags",
+          "rel": "Tags"
+        }
+      ],
+      "rawRiskScore": 0,
+      "riskScore": 0,
+      "vulnerabilities": {
+        "critical": 0,
+        "exploits": 0,
+        "malwareKits": 0,
+        "moderate": 0,
+        "severe": 0,
+        "total": 0
+      }
+    }
+  ]
+}
+```
+
 ### Get Scans
 
 This action is used to get scans with optional site filter.
@@ -2858,7 +3303,7 @@ Example output:
         "name": "Builtin Administrators",
         "type": "admin"
       },
-      "email": "nxadmin@company.com",
+      "email": "nxadmin@rapid7testesc.com",
       "enabled": true,
       "id": 1,
       "links": [
@@ -2978,7 +3423,7 @@ Example output:
       "name": "Builtin Administrators",
       "type": "admin"
     },
-    "email": "nxadmin@company.com",
+    "email": "nxadmin@rapid7testesc.com",
     "enabled": true,
     "id": 1,
     "links": [
@@ -3440,9 +3885,117 @@ Example output:
 }
 ```
 
+### Top Remediations
+
+This action is used to generate results for the top remediations based on a defined scope.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|asset_limit|integer|None|False|The amount of assets to be returned with each top remediation; this can be used to reduce message size and processing time|None|
+|limit|integer|25|True|Number of remediations for which tickets should be generated|[10, 25, 50, 100]|
+|scope|string|none|True|Scope context for generated report; if set remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|
+|scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|
+|vulnerability_limit|integer|None|False|The amount of vulnerabilities to be returned with each top remediation; this can be used to reduce message size and processing time|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|remediations|[]remediation|True|List of top remediations|
+
+Example output:
+
+```
+{
+  "remediations": [
+    {
+      "solutionId": 50460,
+      "nexposeId": "mozilla-firefox-upgrade-latest",
+      "summary": "Upgrade to the latest version of Mozilla Firefox",
+      "fix": "Install the latest version of Mozilla Firefox from the Mozilla Products (http://www.mozilla.org/products/firefox/) page.",
+      "assetCount": 1,
+      "vulnerabilityCount": 689,
+      "riskScore": 595588,
+      "assets": [
+        {
+          "id": 44,
+          "hostName": "hostname",
+          "ip": "10.0.0.1",
+          "mac": "00:00:00:00:00:00",
+          "os": "Windows Server 2012 R2 Standard Edition",
+          "riskScore": 2116158,
+          "criticalityTag": "Very High"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": 73213,
+          "title": "Obsolete Version of Mozilla Firefox",
+          "description": "\n    \n<p>\n      Versions of Mozilla Firefox prior to 57.0.x are no longer supported. Unsupported\n      versions of Firefox may contain unpatched security flaws. It is recommended to \n      upgrade to the latest version.\n    </p>\n  ",
+          "cvssScore": "10",
+          "severity": 10,
+          "riskScore": 871
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Triggers
 
-This plugin does not contain any triggers.
+### New Scans
+
+This trigger is used to check for new InsightVM scans by site and scan status.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|frequency|integer|5|True|How often the trigger should check for new scans in minutes|None|
+|most_recent_scan|boolean|True|True|Only process the most recent scan for a site since the last time the trigger was run|None|
+|site_name_filter|string|.*|True|Regular expression to match sites where new scans should be triggered|None|
+|status_filter|[]string|['Successful']|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|scan|scan|False|InsightVM Scan|
+
+Example output:
+
+```
+{
+  "scan": {
+    "assets": 2,
+    "duration": "PT1M30.77S",
+    "endTime": "2019-06-17T19:23:50.927Z",
+    "engineName": "Local scan engine",
+    "id": 2163,
+    "links": [
+      {
+        "href": "https://insightvm:3780/api/3/scans/2163",
+        "rel": "self"
+      }
+    ],
+    "scanName": "Mon 17 Jun 2019 03:22 PM",
+    "scanType": "Manual",
+    "startTime": "2019-06-17T19:22:20.157Z",
+    "status": "finished",
+    "vulnerabilities": {
+      "critical": 0,
+      "moderate": 0,
+      "severe": 0,
+      "total": 0
+    },
+    "siteId": 31,
+    "siteName": "Test-Site"
+  }
+}
+```
 
 ## Connection
 
@@ -3469,6 +4022,9 @@ This plugin does not contain any troubleshooting information.
 * 3.0.1 - Update descriptions
 * 3.1.0 - New Actions Get Authentication Sources, Get Authentication Source, Get Roles, Get Role, Get Users, Get User, Create User, Update User, Update User Asset Group Access, Add User Asset Group Access, Remove User Asset Group Access, Update User Site Access, Add User Site Access, Remove User Site Access, Disable User, Enable User, Delete User, Update User Role
 * 3.2.0 - New Actions Create Site, Update Site, Delete Site, Update Site Included Targets, Update Site Excluded Targets, Update Site Included Asset Groups, and Update Site Excluded Asset Groups
+* 3.3.0 - New Actions Get Asset, Get Asset Tags, Get Scan Assets, Generate AdHoc SQL Report, Top Remediations | New trigger New Scans
+* 3.3.1 - Fix issue in Top Remediations action that causes assets without criticality tags to not be returned in asset list
+* 3.4.0 - New Action Get Asset Software | Fix issue with New Scan trigger not properly caching new scan IDs
 
 ## Workflows
 

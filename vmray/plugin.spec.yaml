@@ -4,7 +4,8 @@ title: VMRay Sandbox
 description: VMRay allows you to analyze and detect malware before it lands
 version: 4.0.1
 vendor: rapid7
-status: ["unsupported"]
+support: rapid7
+status: []
 tags:
 - sandbox
 - malware

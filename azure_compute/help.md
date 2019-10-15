@@ -268,9 +268,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|Client ID|string|None|True|The application id that the application registration portal assigned to your app|None|
+|Client ID|string|None|True|The application ID that the application registration portal assigned to your app|None|
 |Client Secret|string|None|True|The application secret that you generated for your app in the app registration portal|None|
-|Tenant ID|string|None|True|This is active directory id|None|
+|Tenant ID|string|None|True|This is active directory ID|None|
 |API Version|string|2016-04-30-preview|True|The version of the API to use. The current version is 2016-04-30-preview|None|
 |Host|string|https\://management.azure.com|True|Azure REST API Server|None|
 
@@ -291,6 +291,8 @@ Examples:
 * 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture
 * 2.0.0 - Support web server mode | Update to new credential types | Rename "Get information about a virtual machine" to "Get Information About a Virtual Machine"
+* 3.0.0 - Updated to support Python3 and fix issue with exception handling
+
 
 ## References
 

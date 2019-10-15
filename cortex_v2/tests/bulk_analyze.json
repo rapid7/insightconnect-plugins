@@ -15,7 +15,7 @@
       "api_key": {
         "secretKey": ""
       },
-      "host": "",
+      "host": "10.7.9.252",
       "port": "9001",
       "protocol": "HTTP",
       "proxy": {},

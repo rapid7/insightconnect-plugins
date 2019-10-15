@@ -14,7 +14,7 @@
           {
             "field": "host-name",
             "operator": "is",
-            "value": "example.com"
+            "value": "w2012r2-cis-c.vuln.lax.rapid7.com"
           }
         ]
       }
@@ -24,7 +24,7 @@
         "username": "",
         "password": ""
       },
-      "url": ""
+      "url": "https://insightvm:3780"
     }
   },
   "type": "action_start",

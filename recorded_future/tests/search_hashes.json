@@ -1,18 +1,15 @@
 {
-  "body": {
-    "action": "search_hashes",
-    "connection": {
-      "api_key": ""
+    "body": {
+        "action": "search_hashes",
+        "input": {
+            "algorithm": "MD5",
+            "direction": "asc",
+            "from": 2,
+            "limit": 10,
+            "orderby": "Created"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-      "limit": 10,
-      "orderby": "Created",
-      "from": 2,
-      "direction": "asc",
-      "algorithm": "MD5"
-    }
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

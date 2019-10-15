@@ -6,9 +6,9 @@
       "parameters": ""
     },
     "connection": {
-      "username": "",
+      "username": "root",
       "poll_interval": 1,
-      "host": "",
+      "host": "192.168.99.100",
       "source": "pyhive",
       "catalog": "jmx",
       "port": 8080,

@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "update_feed",
+    "input": {
+      "feed_id": "AWcd2qUMuPEX_z4v01Q2",
+      "description": "Hello World",
+      "tags": ["malware", "ransomware"]
+    },
+    "connection": {
+      "api_credentials": {
+        "username": "komand_test",
+        "password": "komand"
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

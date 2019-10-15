@@ -7,7 +7,7 @@
             }
         },
         "input": {
-            "domain_name": "",
+            "domain_name": "mikerinehart.com",
             "property": "name",
             "record_id": "22107636",
             "value": "test."

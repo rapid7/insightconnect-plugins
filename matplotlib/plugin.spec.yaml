@@ -5,7 +5,8 @@ description: Provides graphing capability of base64 encoded CSV data using Matpl
   NumPy, Pandas, and Seaborn
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - plotting
 - graphing

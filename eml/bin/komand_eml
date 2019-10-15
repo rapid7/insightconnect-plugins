@@ -6,7 +6,7 @@ from komand_eml import connection, actions, triggers
 
 Name = 'EML'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.1.1'
 Description = 'Extract Information from EML Files'
 
 
@@ -20,6 +20,8 @@ class ICONEml(komand.Plugin):
                 connection=connection.Connection()
                 )
         self.add_action(actions.Parse())
+
+        self.add_action(actions.ParseFromString())
 
 
 def main():

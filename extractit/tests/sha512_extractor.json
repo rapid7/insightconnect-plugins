@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "sha512_extractor",
+    "connection": {},
+    "dispatcher": {},
+    "input": {
+      "file": null,
+      "str": "c24c627d82ddd67a0c8737e003d376d1 3a672947e51ce1f7af5cc24c627d82ddd67a0c8737e003d376d174973029b7ebe08684761c0b85d4bbe6c9604992a53ba9fe33b9e6cbca41e908ef3240c4a73e 4bbe6c9604992a53ba9fe33b9e64bbe6c9604992a53ba9fe33b9e6"
+    }
+  }
+}

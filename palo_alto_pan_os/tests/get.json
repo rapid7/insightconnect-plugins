@@ -3,14 +3,14 @@
     "action": "get",
     "meta": {},
     "input": {
-      "xpath": ""
+      "xpath": "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='newrule']"
     },
     "connection": {
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "admin",
+        "username": "admin"
       },
-      "server": "",
+      "server": "https://10.4.27.237",
       "verify_cert": false
     }
   },

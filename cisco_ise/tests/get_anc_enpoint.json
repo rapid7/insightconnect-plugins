@@ -6,10 +6,10 @@
       "mac": "00:50:56:8A:62:35"
     },
     "connection": {
-      "address": "",
+      "address": "10.4.22.225",
       "credentials": {
         "password": "",
-        "username": ""
+        "username": "ers-admin"
       },
       "ssl_verify": true
     }

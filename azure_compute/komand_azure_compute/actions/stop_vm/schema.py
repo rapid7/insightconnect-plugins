@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Stop a virtual machine"
+
+
 class Input:
     RESOURCEGROUP = "resourceGroup"
     SUBSCRIPTIONID = "subscriptionId"
@@ -39,8 +43,8 @@ class StopVmInput(komand.Input):
     }
   },
   "required": [
-    "subscriptionId",
     "resourceGroup",
+    "subscriptionId",
     "vm"
   ]
 }

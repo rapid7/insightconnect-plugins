@@ -4,10 +4,10 @@
     "meta": {},
     "input": {
       "data_request": {
-        "BusObId": "",
+        "BusObId": "93405caa107c376a2bd15c4c8885a900be316f3a72",
         "Filters": [
           {
-            "fieldId": "",
+            "fieldId": "BO:93405caa107c376a2bd15c4c8885a900be316f3a72,FI:9337c2330f1a99b24f0c7d4afcafbf3a5d84d66edf",
             "operator": "eq",
             "value": "001Test"
           }
@@ -20,10 +20,10 @@
         "secretKey": ""
       },
       "ssl_verify": true,
-      "url": "",
+      "url": "carterstest.cherwellondemand.com",
       "username_and_password": {
         "password": "",
-        "username": ""
+        "username": "Rapid7"
       }
     }
   },

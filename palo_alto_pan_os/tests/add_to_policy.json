@@ -5,12 +5,12 @@
     "input": {
       "action": "",
       "application": "",
-      "destination": "192.168.1.2",
+      "destination": "192.168.9.2",
       "dst_zone": "",
       "hip_profiles": "",
       "rule_name": "newrule",
       "service": "",
-      "source": "192.168.1.2",
+      "source": "192.168.6.2",
       "source_user": "",
       "src_zone": "",
       "update_active_or_candidate_configuration": "candidate",
@@ -18,10 +18,10 @@
     },
     "connection": {
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "admin",
+        "username": "admin"
       },
-      "server": "",
+      "server": "https://10.4.27.237",
       "verify_cert": false
     }
   },

@@ -7,9 +7,9 @@
       "file_path": "assets/icon.png"
     },
     "connection": {
-      "url": "",
+      "url": "https://gitlab.com/komand-test/test-repository.git",
       "credentials": {
-        "password": "",
+        "password": "t5_r6Kf6zjUX4EiyKsZ9",
         "username": ""
       }
     }

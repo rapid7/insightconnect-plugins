@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "user_info_from_login",
+        "input": {
+            "login": "randomtestuser@somerandomdomain.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

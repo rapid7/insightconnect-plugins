@@ -8,10 +8,10 @@
     },
     "connection": {
       "credentials": {
-        "password": "",
-        "username": ""
+        "password": "password",
+        "username": "root"
       },
-      "url": ""
+      "url": "http://192.168.99.100:8080"
     }
   },
   "type": "action_start",

@@ -2,9 +2,9 @@
   "type": "action_start",
   "body": {
     "connection": {
-      "url": "",
+      "url": "https://cif-3-ub16.vuln.lax.rapid7.com",
       "api_key": {
-        "secretKey": ""
+        "secretKey": "ff71a5e0eb52532c5c3800fb6f00c148ea451c86f0576030e651a12af949e9c3"
       },
       "ssl_verify": false
     },

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get role details by ID"
+
+
 class Input:
     ID = "id"
     

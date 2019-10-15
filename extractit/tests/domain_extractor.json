@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": {},
+    "action": "domain_extractor",
+    "connection": {},
+    "dispatcher": {},
+    "input": {
+      "file": null,
+      "str": "bla bla bla https://github.com/rapid7 bla bla",
+      "subdomain": false
+    }
+  }
+}

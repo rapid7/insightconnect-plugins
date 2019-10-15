@@ -1,22 +1,13 @@
 {
-  "body": {
-    "action": "modify_groups",
-    "meta": {},
-    "input": {
-      "add_remove": "add",
-      "distinguished_name": "",
-      "group_dn": ""
+    "body": {
+        "action": "modify_groups",
+        "input": {
+            "add_remove": "add",
+            "distinguished_name": "",
+            "group_dn": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "username_password": {
-        "password": "",
-        "username": ""
-      },
-      "host": "",
-      "port": 389,
-      "use_ssl": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

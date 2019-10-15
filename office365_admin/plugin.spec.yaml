@@ -1,0 +1,84 @@
+plugin_spec_version: v2
+name: office365_admin
+title: Office365 Admin
+description: Administrative functions for Office365
+version: 1.1.1
+vendor: rapid7
+support: community
+status: []
+tags:
+- office365
+- email
+- user access
+connection:
+  tenant_id:
+    title: Tenant ID
+    description: The ID of the directory that identifies the tenant
+    type: string
+    required: true
+  app_id:
+    title: App ID
+    description: The ID of the registered app that obtained the refresh token
+    type: string
+    required: true
+  app_secret:
+    title: App Secret
+    description: The secret of the registered app that obtained the refresh token
+    type: credential_token
+    required: true
+actions:
+  delete_user:
+    title: Delete User
+    description: Remove a user's access to Office365
+    input:
+      user_principal_name:
+        title: User Principal Name
+        description: The user principal name to delete
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: Return true if it worked
+        type: boolean
+        required: false
+  add_user:
+    title: Add User
+    description: Add a user to Office365
+    input:
+      account_enabled:
+        title: Account Enabled
+        description: If true, the account will be enabled
+        type: boolean
+        required: true
+      display_name:
+        title: Display Name
+        description: The user's display name e.g. John Doe
+        type: string
+        required: true
+      mail_nickname:
+        title: Mail Nickname
+        description: The mail alias for the user
+        type: string
+        required: true
+      user_principal_name:
+        title: User Principal Name
+        description: The user principal name e.g. jdoe@mydomain.com
+        type: string
+        required: true
+      force_change_password:
+        title: Force Password Change
+        description: If true, the user will have to change their password at login
+        type: boolean
+        required: true
+      password:
+        title: Password
+        description: Set the user's password
+        type: password
+        required: true
+    output:
+      user:
+        title: User
+        description: Return a user object in JSON format
+        type: object
+        required: false

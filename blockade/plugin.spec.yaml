@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: blockade
 title: Blockade
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Blockade brings antivirus-like capabilities to users who run the Chrome
   browser
 version: 1.0.0

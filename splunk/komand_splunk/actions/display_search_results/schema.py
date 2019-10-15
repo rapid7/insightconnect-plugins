@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Displays the search results from a job"
+
+
 class Input:
     JOB_ID = "job_id"
     TIMEOUT = "timeout"

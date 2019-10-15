@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the properties for a saved search"
+
+
 class Input:
     SAVED_SEARCH_NAME = "saved_search_name"
     

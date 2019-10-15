@@ -3,7 +3,7 @@
     "action": "build_job",
     "meta": {},
     "input": {
-      "name": "",
+      "name": "rapid7-komand-plugins-master",
       "parameters": {"KOMAND_FORCE_UPDATE": false, "KOMAND_SKIP_VALIDATION": false, "KOMAND_CLEAN": true, "KOMAND_PLUGIN": "google_drive"}
     },
     "connection": {

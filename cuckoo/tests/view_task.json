@@ -5,7 +5,7 @@
     "action": "view_task",
     "meta": {},
     "connection": {
-      "url": ""
+      "url": "http://cuckoo-2-0-5.vuln.lax.rapid7.com:8090"
     },
     "input": {
       "task_id": 22

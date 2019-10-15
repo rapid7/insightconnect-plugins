@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_sample_analysis",
+        "input": {
+            "sample_id": "8c91e0431f14f5ce405e00ec6b9192b7"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

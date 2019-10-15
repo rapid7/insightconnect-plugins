@@ -2,10 +2,10 @@
     "body": {
         "action": "labeling",
         "connection": {
-            "api_endpoint": "",
+            "api_endpoint": "http://grr-server.vuln.lax.rapid7.com:8000/",
             "credentials": {
-              "username": "",
-              "password": ""
+              "username": "admin",
+              "password": "notpassword"
             },
             "ssl_verify": true
         },

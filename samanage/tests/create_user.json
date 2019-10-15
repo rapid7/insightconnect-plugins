@@ -4,7 +4,7 @@
     "meta": {},
     "input": {
       "department": "Marketing",
-      "email": "",
+      "email": "abc@example.com",
       "mobile_phone": "0012345",
       "name": "John Snow",
       "phone": "123456",

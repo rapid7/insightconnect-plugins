@@ -1,21 +1,12 @@
 {
-  "body": {
-    "action": "move_object",
-    "meta": {},
-    "input": {
-      "distinguished_name": "",
-      "new_ou": ""
+    "body": {
+        "action": "move_object",
+        "input": {
+            "distinguished_name": "",
+            "new_ou": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "username_password": {
-        "password": "",
-        "username": ""
-      },
-      "host": "",
-      "port": 389,
-      "use_ssl": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

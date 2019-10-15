@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update the status of a scan"
+
+
 class Input:
     ID = "id"
     STATUS = "status"

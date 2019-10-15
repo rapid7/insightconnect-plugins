@@ -13,9 +13,9 @@
     "connection": {
       "credentials": {
         "password": "",
-        "username": ""
+        "username": "jonathan_schipp@rapid7.com"
       },
-      "url": ""
+      "url": "https://usea1-partners.sentinelone.net/"
     }
   },
   "type": "trigger_start",

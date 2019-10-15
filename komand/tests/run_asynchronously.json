@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "run_asynchronously",
+    "meta": {},
+    "input": {
+      "input": {},
+      "workflow_name": "",
+      "workflow_uid": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

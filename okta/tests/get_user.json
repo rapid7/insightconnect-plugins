@@ -1,17 +1,11 @@
 {
-  "body": {
-    "action": "get_user",
-    "input": {
-      "email": ""
+    "body": {
+        "action": "get_user",
+        "input": {
+            "email": "mrinehart@komand.com"
+        },
+        "meta": {}
     },
-    "connection": {
-      "okta_url": "",
-      "okta_key": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

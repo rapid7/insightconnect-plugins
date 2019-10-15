@@ -7,7 +7,7 @@
         "password": "",
         "username": "TestUser"
       },
-      "url": ""
+      "url": "https://komand.atlassian.net/wiki"
     },
     "input": {
       "content": "hello",

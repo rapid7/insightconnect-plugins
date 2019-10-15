@@ -1,4 +1,5 @@
 import dicttoxml
+from komand.exceptions import PluginException
 from komand_palo_alto_pan_os.util.log_helper import LogHelper
 
 
@@ -15,6 +16,8 @@ class SecurityPolicy:
         :param policy: A PAN-OS security policy
         :return A new cleaner dictionary containing the polices current config.
         """
+        self.logger.debug(f' Base policy {policy}')
+
         key_list = ['source', 'destination', 'service',
                     'application', 'source-user', 'to',
                     'from', 'category', 'hip-profiles']
@@ -23,19 +26,34 @@ class SecurityPolicy:
             try:
                 output[i] = policy['response']['result']['entry'][i]['member']
             except KeyError:
-                self.logger.info('Current policy has no policy config: {}. Setting to any'.format(policy))
+                self.logger.info(f'Current policy {policy}')
+                self.logger.info(f'The current policy has no {i} policy: Setting to any.')
                 output[i] = 'any'
+            except TypeError:
+                self.logger.info(f'Current policy {policy}')
+                self.logger.info(f'The current policy has no policy config for {i}: Setting to any.')
+                output[i] = 'any'
+            except BaseException:
+                raise PluginException(cause='An unknown formatting error occurred when formatting a security policy.',
+                                      assistance='Contact support for help.',
+                                      data=f'Policy config: {policy}')
         try:
             output['action'] = policy['response']['result']['entry']['action']
         except KeyError:
-            self.logger.error('policy config: {}'.format(policy))
-            raise Exception('Current policy config missing an action key.')
+            raise PluginException(cause='Current policy config missing an action key.',
+                                  assistance='Contact support for help',
+                                  data=f'Policy config: {policy}')
 
         for i in output:
             if isinstance(output[i], list):
                 if isinstance(output[i][0], dict):
                     for k, val in enumerate(output[i]):
-                        output[i][k] = val['#text']
+                        try:
+                            output[i][k] = val['#text']
+                        except KeyError:
+                            raise PluginException(cause='An unknown formatting error occurred when formatting a security subpolicy.',
+                                                  assistance='Contact support for help.',
+                                                  data=f'Subpolicy {output[i][0]}')
             if isinstance(output[i], dict):
                 if isinstance(output[i], dict) and '#text' in output[i]:
                     output[i] = output[i]['#text']
@@ -50,6 +68,10 @@ class SecurityPolicy:
         :param add: The string to add to the key, or in the case of the key being 'any' replace with
         :return The updated policy key
         """
+
+        self.logger.debug(f'Starting key {key}')
+        self.logger.debug(f'String to add {add}')
+
         if add not in key:
             if isinstance(key, list):
                 key.append(add)
@@ -57,6 +79,8 @@ class SecurityPolicy:
                 key = [key, add]
             else:
                 key = add
+
+        self.logger.debug(f'Ending key {key}')
         return key
 
     def remove_from_key(self, key, remove: str):
@@ -67,6 +91,10 @@ class SecurityPolicy:
         :param remove: The string to remove from the key, or in the case of the key being 'any' to replace with
         :return The updated policy key
         """
+
+        self.logger.debug(f'Starting key {key}')
+        self.logger.debug(f'String to remove {remove}')
+
         if remove in key:
             # If a list is reduced to len 1 it must be cast as a str. for 2 or more leave as list
             if isinstance(key, list) and len(key) > 3:
@@ -76,6 +104,7 @@ class SecurityPolicy:
                 key = key[0]
             else:
                 key = 'any'
+            self.logger.debug(f'Ending key {key}')
             return key
         self.logger.error("{remove} was not found in {key}."
                           " {remove} will not be removed from policy.".format(remove=remove,
@@ -86,7 +115,7 @@ class SecurityPolicy:
                                   service, application, category, hip_profiles, source_user,
                                   fire_wall_action) -> str:
         """
-        Builds the update policy dictionary into a xml string
+        Builds the updated policy dictionary into a XML string
         :param rule_name: Used to pass the name of the policy to be updated
         :param to: The new to list/str
         :param from_: The new from list/str
@@ -98,13 +127,15 @@ class SecurityPolicy:
         :param hip_profiles: The new hip-profiles list/str
         :param source_user: The new source-user list/str
         :param fire_wall_action: The new fire_wall_action list/str
-        :return A properly formatted xml file for the security policy
+        :return A properly formatted XML file for the security policy
         """
         # Build dic for xml
         element = {'to': to, 'from': from_, 'source': source, 'destination': destination,
                    'service': service, 'application': application, 'category': category,
                    'hip-profiles': hip_profiles, 'source-user': source_user,
                    'action': fire_wall_action}
+
+        self.logger.debug(f'Dictionary to convert to XML {element}')
 
         for value in element:
             if not value == 'action' and isinstance(element[value], str):

@@ -1,0 +1,13 @@
+{
+   "version": "v1",
+   "type": "action_start",
+   "body": {
+     "meta": {},
+     "action": "string_to_object",
+     "connection": {},
+     "dispatcher": {},
+     "input": {
+       "input": "{\"object\":[\"yeah\",\"so\",{\"cooo\":\"oool\"}],\"some\":\"cool\"}"
+     }
+   }
+ }

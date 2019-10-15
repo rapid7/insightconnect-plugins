@@ -1,0 +1,20 @@
+{
+    "version": "v1",
+    "type": "action_start",
+    "body": {
+      "meta": {},
+      "action": "read",
+      "connection": {
+        "client_external_ip": "",
+        "client_machine_name": "",
+        "exports_file_hostname": "",
+        "mount_pathname": "",
+        "timeout": 0
+      },
+      "dispatcher": {},
+      "input": {
+        "file_pathname": "",
+        "lines_to_read": 0
+      }
+    }
+  }

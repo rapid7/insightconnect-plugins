@@ -89,7 +89,7 @@ This action is used to submit a URL for analysis.
 
 ### Get Report
 
-This action is used to query for an XML or pDF report for a particular sample.
+This action is used to query for an XML or PDF report for a particular sample.
 
 #### Input
 
@@ -150,7 +150,7 @@ The connection configuration accepts the following parameters:
 |verify|boolean|True|True|Verify the certificate|None|
 |host|string|wildfire.paloaltonetworks.com|True|Palo Alto Wildfire host in cloud or on-premise, e.g. wildfire.paloaltonetworks.com or 10.3.4.50|None|
 |api_key|password|None|True|Wildfire API Key, available at https\://wildfire.paloaltonetworks.com/wildfire/account or on your appliance|None|
-|proxy|object|None|False|An optional dictionary containing proxy data, with https as the key, and the proxy path as the value|None|
+|proxy|object|None|False|An optional dictionary containing proxy data, with HTTPS as the key, and the proxy path as the value|None|
 
 ## Troubleshooting
 
@@ -170,9 +170,32 @@ Examples:
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Rename "Submit a File" action to "Submit File" | Rename "Submit File From URL" action to "Submit File from URL" | Rename "Submit a URL" action to "Submit URL"
 * 1.0.1 - Fix plugin description
 * 1.0.2 - Fixed issue where connection was not passing the API key properly
+* 1.1.0 - Fixed issue where unsupported file types failed | Update to add `supported_file` to filedata type
 
 ## References
 
 * [Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/subscriptions/wildfire)
 * [Wildfire Documentation](https://www.paloaltonetworks.com/documentation/80/wildfire)
 * [pyldfire](https://pypi.python.org/pypi/pyldfire/7.1.3)
+
+## Custom Output Types
+
+### filedata
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|filename|string|False|None|
+|filetype|string|False|None|
+|md5|string|True|MD5 hash of file|
+|sha256|string|True|SHA256 hash of file|
+|size|string|True|File size|
+|supported_file_type|boolean|True|Boolean indicating whether the filetype of the sample is supported|
+|url|string|False|None|
+
+### urldata
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|md5|string|True|MD5 hash of file|
+|sha256|string|True|SHA256 hash of file|
+|url|string|True|None|

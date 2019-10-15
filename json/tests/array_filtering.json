@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "meta": null,
+    "action": "transform",
+    "connection": {},
+    "dispatcher": {},
+    "input": {
+      "source_data": {
+        "Reviews": ["so-so", "banal", "special!", "puzzling", "quite good!"]
+      },
+      "extraction_template": {
+        "Reviews": "$1:.*special.*|.*good.*|.*great.*"
+      },
+      "target_template": {
+        "Critics Raved!": "$1"
+      }
+    }
+  }
+}

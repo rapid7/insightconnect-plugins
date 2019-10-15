@@ -1,0 +1,14 @@
+{
+   "version": "v1",
+   "type": "action_start",
+   "body": {
+     "meta": {},
+     "action": "string_to_integer",
+     "connection": {},
+     "dispatcher": {},
+     "input": {
+       "input": " 123 ",
+       "strip": false
+     }
+   }
+ }

@@ -1,7 +1,7 @@
 {
   "body": {
     "connection": {
-      "server": ""
+      "server": "http://localhost:8086"
     },
     "action": "query",
     "input": {

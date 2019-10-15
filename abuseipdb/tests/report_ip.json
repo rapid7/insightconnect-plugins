@@ -2,9 +2,9 @@
     "body": {
         "action": "report_ip",
         "input": {
-            "address": "1.2.3.4",
             "categories": "10,12",
-            "comment": "Testing"
+            "comment": "Testing",
+            "ip": "1.2.3.4"
         },
         "meta": {}
     },

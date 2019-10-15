@@ -12,7 +12,7 @@
         "secretKey": ""
       },
       "ssl_verify": false,
-      "url": ""
+      "url": "https://cb-response-dev.vuln.lax.rapid7.com"
     }
   },
   "type": "action_start",

@@ -187,6 +187,7 @@ Examples:
 * 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 1.0.1 - Update to [PagerDuty REST API v2](https://v2.developer.pagerduty.com/docs/migrating-to-api-v2)
+* 2.0.0 - Fix issue to make 'service_key' required in Send Resolve Request action
 
 ## References
 

@@ -1,18 +1,12 @@
 {
-  "body": {
-    "action": "search_for_ip_address_usages",
-    "meta": {},
-    "input": {
-      "ip_address": "",
-      "max_results": 100
+    "body": {
+        "action": "search_for_ip_address_usages",
+        "input": {
+            "ip_address": "192.168.0.1",
+            "max_results": 100
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_token": {
-        "secretKey": ""
-      },
-      "customer_id": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

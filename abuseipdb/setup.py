@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='abuseipdb-rapid7-plugin',
-      version='3.0.1',
+      version='5.0.0',
       description='AbuseIPDB is a free service which allows you to look up IP reports, or report an abusive IP',
       author='rapid7',
       author_email='',

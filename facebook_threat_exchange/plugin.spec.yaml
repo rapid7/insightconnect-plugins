@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: facebook_threat_exchange
 title: Facebook Threat Exchange
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: A platform for sharing threat information between selected entities
 version: 1.0.0
 tags:

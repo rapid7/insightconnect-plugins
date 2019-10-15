@@ -1,0 +1,78 @@
+plugin_spec_version: v2
+name: freegeoip
+title: FreeGeoIP
+description: Lookup GeoIP information for a host
+version: 1.0.0
+vendor: rapid7
+support: community
+status: ["obsolete"]
+tags:
+- geoip
+- ip
+- location
+actions:
+  lookup:
+    title: GeoIP Lookup
+    description: Get GeoIP Info for a Host
+    input:
+      host:
+        title: Host
+        description: Host to Lookup
+        type: string
+        required: true
+    output:
+      address:
+        title: IP Address
+        description: IP address
+        type: string
+        required: false
+      city:
+        title: City
+        description: City
+        type: string
+        required: false
+      country_name:
+        title: Country Name
+        description: Country name
+        type: string
+        required: false
+      country_code:
+        title: Country Code
+        description: Country code
+        type: string
+        required: false
+      latitude:
+        title: Latitude
+        description: Latitude
+        type: string
+        required: false
+      longitude:
+        title: Latitude
+        description: Longitude
+        type: string
+        required: false
+      metro_code:
+        title: Metro Code
+        description: Metro code
+        type: integer
+        required: false
+      region_code:
+        title: Region Code
+        description: Region code
+        type: string
+        required: false
+      region_name:
+        title: Region Name
+        description: Region name
+        type: string
+        required: false
+      time_zone:
+        title: Public IP Address in Decimal
+        description: Time zone
+        type: string
+        required: false
+      zip_code:
+        title: Zip Code
+        description: Zip code
+        type: string
+        required: false

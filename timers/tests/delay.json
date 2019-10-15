@@ -1,0 +1,13 @@
+{
+    "version": "v1",
+    "type": "action_start",
+    "body": {
+      "meta": {},
+      "action": "delay",
+      "connection": {},
+      "dispatcher": {},
+      "input": {
+        "delay": 1
+      }
+    }
+  }

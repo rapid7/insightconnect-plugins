@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "lookup",
+    "meta": {},
+    "input": {
+      "threatTypes": ["MALWARE"],
+      "url": "https://malware.wicar.org"
+    },
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

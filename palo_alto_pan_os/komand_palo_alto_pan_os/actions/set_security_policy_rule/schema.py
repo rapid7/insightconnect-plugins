@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new Security Policy Rule"
+
+
 class Input:
     ACTION = "action"
     APPLICATION = "application"
@@ -130,22 +134,22 @@ class SetSecurityPolicyRuleInput(komand.Input):
     }
   },
   "required": [
-    "application",
-    "rule_name",
-    "destination",
-    "service",
-    "source_user",
-    "source",
     "action",
-    "disable_server_response_inspection",
-    "negate_destination",
-    "disabled",
-    "src_zone",
-    "negate_source",
-    "log_start",
-    "log_end",
+    "application",
     "description",
-    "dst_zone"
+    "destination",
+    "disable_server_response_inspection",
+    "disabled",
+    "dst_zone",
+    "log_end",
+    "log_start",
+    "negate_destination",
+    "negate_source",
+    "rule_name",
+    "service",
+    "source",
+    "source_user",
+    "src_zone"
   ]
 }
     """)

@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "create_saved_search",
+        "input": {
+            "properties": {},
+            "query": "index=\"*\"",
+            "saved_search_name": "Mike Test 1"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}
