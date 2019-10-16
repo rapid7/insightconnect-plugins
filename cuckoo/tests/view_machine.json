@@ -1,14 +1,14 @@
 {
-  "version": "v1",
-  "body": {
-    "action": "view_machine",
-    "input": {
-      "machine_name": "cuckoo1"
+    "body": {
+        "action": "view_machine",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "machine_name": "cuckoo1"
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": ""
-    },
-    "meta": {}
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

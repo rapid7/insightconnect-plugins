@@ -1,25 +1,25 @@
 {
-  "version": "v1",
-  "body": {
-    "connection": {
-      "url": "",
-      "ssl_verify": false,
-      "username": "",
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "add_actor",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username": null
+        },
+        "input": {
+            "name": "",
+            "params": {
+                "aliases": "foo,bar",
+                "campaign": "NetTraveler",
+                "description": "Similique autem quidem inventore eos aperiam assumenda praesentium"
+            },
+            "source": ""
+        },
+        "meta": {}
     },
-    "action": "add_actor",
-    "input": {
-      "name": "",
-      "source": "",
-      "params": {
-        "campaign": "NetTraveler",
-        "description": "Similique autem quidem inventore eos aperiam assumenda praesentium",
-        "aliases": "foo,bar"
-      }
-    },
-    "meta": {}
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

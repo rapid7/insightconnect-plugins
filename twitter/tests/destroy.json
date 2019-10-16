@@ -1,21 +1,21 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "action": "destroy",
-    "meta": {},
-    "connection": {
-      "access_token_credentials": {
-        "username": "",
-        "password": ""
+    "body": {
+        "action": "destroy",
+        "connection": {
+            "access_token_credentials": {
+                "password": null,
+                "username": null
+            },
+            "consumer_credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "message_id": 837049058992730118
+        },
+        "meta": {}
     },
-    "consumer_credentials": {
-        "username": "",
-        "password": ""
-    }
-    },
-    "input": {
-      "message_id": 837049058992730118
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

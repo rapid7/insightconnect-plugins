@@ -1,28 +1,28 @@
 {
-  "body": {
-    "action": "update",
-    "input": {
-      "id_or_email": "",
-      "name": "",
-      "roles": [],
-      "title": "Update User API",
-      "presence": {},
-      "mention_name": "",
-      "is_group_admin": false,
-      "timezone": "UTC",
-      "password": "",
-      "email": ""
+    "body": {
+        "action": "update",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "version": null
+        },
+        "input": {
+            "email": "",
+            "id_or_email": "",
+            "is_group_admin": false,
+            "mention_name": "",
+            "name": "",
+            "password": "",
+            "presence": {},
+            "roles": [],
+            "timezone": "UTC",
+            "title": "Update User API"
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "https://hipchat.com/",
-      "version": "v2",
-      "credentials": {
-        "username": "",
-        "password": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

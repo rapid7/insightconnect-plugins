@@ -1,16 +1,16 @@
 {
-  "body": {
-    "input": {
-      "id": "PZ6H9ZE"
+    "body": {
+        "action": "delete_user_by_id",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "id": "PZ6H9ZE"
+        },
+        "meta": {}
     },
-    "action": "delete_user_by_id",
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

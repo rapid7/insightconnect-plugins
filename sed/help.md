@@ -92,6 +92,7 @@ Examples:
 * 1.0.0 - Support web server mode | Rename action to "Process String"
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 2.0.0 - Update action inputs to allow for multiple expressions
+* 2.0.1 - Fix issue with both actions not returning all results
 
 ## References
 

@@ -1,27 +1,27 @@
 {
-  "body": {
-    "action": "list_share_files",
-    "meta": {},
-    "input": {
-      "path": "/",
-      "pattern": "*",
-      "share_name": "",
-      "timeout": 30,
-      "timezone": "UTC"
+    "body": {
+        "action": "list_share_files",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "domain": null,
+            "host": null,
+            "netbios_name": null,
+            "port": null,
+            "timeout": null,
+            "use_ntlmv2": null
+        },
+        "input": {
+            "path": "/",
+            "pattern": "*",
+            "share_name": "",
+            "timeout": 30,
+            "timezone": "UTC"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "domain": "",
-      "host": "",
-      "netbios_name": "",
-      "port": 445,
-      "timeout": 60,
-      "use_ntlmv2": true
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

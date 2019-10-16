@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "add_scan_engine_pool_engine",
-    "meta": {},
-    "input": {
-      "pool_id": 6,
-      "engine_id": 5
+    "body": {
+        "action": "add_scan_engine_pool_engine",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "engine_id": 5,
+            "pool_id": 6
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

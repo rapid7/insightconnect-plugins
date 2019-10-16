@@ -195,6 +195,7 @@ Examples:
 * 3.0.0 - Bug fix where output schema did not match returned API data for Lookup Domain and Lookup User actions | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
 * 3.0.1 - Set user-agent string to Rapid7 InsightConnect | Implement use of Retry-After header for rate limit | Update documentation
 * 4.0.0 - Support the v3 API which requires authentication
+* 4.0.1 - Fix issue with connection exception typo
 
 ## References
 

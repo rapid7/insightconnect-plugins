@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "ticket_attachment",
-    "meta": {},
-    "input": {
-      "attachment_id": 4,
-      "ticket_id": 2
+    "body": {
+        "action": "ticket_attachment",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "attachment_id": 4,
+            "ticket_id": 2
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

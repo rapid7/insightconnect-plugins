@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_roles",
-    "meta": {},
-    "input": {
-      "name": ".*custom.*"
+    "body": {
+        "action": "get_roles",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "name": ".*custom.*"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

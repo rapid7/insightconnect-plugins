@@ -1,26 +1,26 @@
 {
-  "body": {
-    "action": "gauge",
-    "input": {
-      "rate": 0,
-      "stat": "",
-      "value": 0,
-      "delta": false
+    "body": {
+        "action": "gauge",
+        "connection": {
+            "host": null,
+            "port": null,
+            "prefix": null,
+            "protocol": null,
+            "tcp": {
+                "timeout": null
+            },
+            "udp": {
+                "maxudpsize": null
+            }
+        },
+        "input": {
+            "delta": false,
+            "rate": 0,
+            "stat": "",
+            "value": 0
+        },
+        "meta": {}
     },
-    "connection": {
-      "udp": {
-        "maxudpsize": 512
-      },
-      "protocol": "UDP",
-      "prefix": "",
-      "tcp": {
-        "timeout": 0
-      },
-      "host": "",
-      "port": 0
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

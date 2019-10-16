@@ -4,7 +4,8 @@ title: Subnet
 description: Return Useful Subnet Information
 version: 1.0.1
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - subnet
 - ip

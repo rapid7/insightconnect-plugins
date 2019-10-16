@@ -1,22 +1,28 @@
 {
-  "version": "v1",
-  "body": {
-    "action": "post",
-    "connection": {
-      "base_url": "https://httpbin.org",
-      "default_headers": { "User-Agent": "Mozilla/5.0" },
-      "ssl_verify": false,
-      "basic_auth_credentials": {
-        "password": "",
-        "username": ""
-      }
+    "body": {
+        "action": "post",
+        "connection": {
+            "base_url": null,
+            "basic_auth_credentials": {
+                "password": null,
+                "username": null
+            },
+            "default_headers": {
+                "User-Agent": null
+            },
+            "ssl_verify": null
+        },
+        "input": {
+            "body": {
+                "Best": "Komand"
+            },
+            "headers": {
+                "Referer": "https://google.com"
+            },
+            "route": "/post"
+        },
+        "meta": {}
     },
-    "input": {
-      "body": { "Best": "Komand" },
-      "route": "/post",
-      "headers": { "Referer": "https://google.com" }
-    },
-    "meta": {}
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

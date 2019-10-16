@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes the LDAP object specified"
+
+
 class Input:
     DISTINGUISHED_NAME = "distinguished_name"
     

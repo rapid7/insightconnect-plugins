@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: lastpass_enterprise
 title: LastPass Enterprise
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: A tool for conveniently and securely managing passwords
 version: 1.0.1
 tags:

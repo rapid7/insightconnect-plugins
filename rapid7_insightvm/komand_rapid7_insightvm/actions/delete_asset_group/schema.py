@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete an existing asset group"
+
+
 class Input:
     ID = "id"
     

@@ -1,6 +1,7 @@
 import komand
 from .schema import SampleInput, SampleOutput
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class Sample(komand.Action):
@@ -25,8 +26,7 @@ class Sample(komand.Action):
         try:
             sample = self.connection.investigate.sample(hash, limit=limit, offset=offset)
         except Exception as e:
-            self.logger.error("Sample: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         return sample
 

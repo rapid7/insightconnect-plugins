@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='whois-rapid7-plugin',
-      version='1.0.3',
+      version='1.0.4',
       description='Whois Lookups',
       author='rapid7',
       author_email='',

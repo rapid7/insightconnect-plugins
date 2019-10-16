@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "to_unicode",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "domain": "www.xn--e1awd7f.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

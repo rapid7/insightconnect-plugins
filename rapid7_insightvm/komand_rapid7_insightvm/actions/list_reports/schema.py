@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List reports and return their identifiers"
+
+
 class Input:
     NAME = "name"
     SORT = "sort"

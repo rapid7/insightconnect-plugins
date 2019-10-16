@@ -1,12 +1,12 @@
 {
-  "body": {
-    "input": {
-      "alert": "** Alert 1472871632.3108300: - syslog,attacks,authentication_failures,\n2016 Sep 03 03:00:32 (ci.dev.komand.local) any->/var/log/messages\nRule: 40111 (level 10) -> 'Multiple authentication failures.'\nSep  3 03:00:31 ci komand-engine: Error while syncing table workflows: pq: password authentication failed for user 'komand'\nSep  3 03:00:31 ci komand-engine: Error while syncing table triggers: pq: password authentication failed for user 'komand'\nSep  3 03:00:31 ci komand-engine: Error while syncing table actions: pq: password authentication failed for user 'komand'\n"
+    "body": {
+        "action": "alert_parse",
+        "connection": null,
+        "input": {
+            "alert": "** Alert 1472871632.3108300: - syslog,attacks,authentication_failures,\n2016 Sep 03 03:00:32 (ci.dev.komand.local) any->/var/log/messages\nRule: 40111 (level 10) -> 'Multiple authentication failures.'\nSep  3 03:00:31 ci komand-engine: Error while syncing table workflows: pq: password authentication failed for user 'komand'\nSep  3 03:00:31 ci komand-engine: Error while syncing table triggers: pq: password authentication failed for user 'komand'\nSep  3 03:00:31 ci komand-engine: Error while syncing table actions: pq: password authentication failed for user 'komand'\n"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {},
-    "action": "alert_parse"
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

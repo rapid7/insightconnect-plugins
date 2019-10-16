@@ -1,12 +1,12 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "input": {},
-    "connection": {
-      "url": ""
+    "body": {
+        "action": "list_machines",
+        "connection": {
+            "url": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "meta": {},
-    "action": "list_machines"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

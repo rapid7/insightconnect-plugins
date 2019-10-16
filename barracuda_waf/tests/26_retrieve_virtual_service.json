@@ -1,17 +1,16 @@
 {
-  "body": {
-    "meta": {},
-    "input": {
+    "body": {
+        "action": "retrieve_virtual_service",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {},
+        "meta": {}
     },
-    "action": "retrieve_virtual_service",
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

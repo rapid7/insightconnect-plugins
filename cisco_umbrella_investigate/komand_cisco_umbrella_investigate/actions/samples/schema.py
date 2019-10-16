@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return all samples associated with the domain"
+
+
 class Input:
     URL = "URL"
     LIMIT = "limit"
@@ -107,11 +111,11 @@ class SamplesOutput(komand.Output):
     }
   },
   "required": [
-    "moreDataAvailable",
     "limit",
+    "moreDataAvailable",
     "offset",
-    "samples",
     "query",
+    "samples",
     "totalResults"
   ],
   "definitions": {
@@ -181,15 +185,15 @@ class SamplesOutput(komand.Output):
         }
       },
       "required": [
-        "sha256",
-        "md5",
-        "size",
         "avresults",
-        "sha1",
-        "magicType",
-        "threatScore",
         "firstSeen",
         "lastSeen",
+        "magicType",
+        "md5",
+        "sha1",
+        "sha256",
+        "size",
+        "threatScore",
         "visible"
       ]
     }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return artifacts which are files created or modified during a sample analysis"
+
+
 class Input:
     HASH = "hash"
     LIMIT = "limit"

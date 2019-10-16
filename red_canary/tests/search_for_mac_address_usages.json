@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "search_for_mac_address_usages",
-    "meta": {},
-    "input": {
-      "mac_address": "",
-      "max_results": 100
+    "body": {
+        "action": "search_for_mac_address_usages",
+        "connection": {
+            "api_token": {
+                "secretKey": null
+            },
+            "customer_id": null
+        },
+        "input": {
+            "mac_address": "",
+            "max_results": 100
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_token": {
-        "secretKey": ""
-      },
-      "customer_id": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,23 +1,23 @@
 {
-  "body": {
-    "action": "list_shares",
-    "meta": {},
-    "input": {
-      "timeout": 30
+    "body": {
+        "action": "list_shares",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "domain": null,
+            "host": null,
+            "netbios_name": null,
+            "port": null,
+            "timeout": null,
+            "use_ntlmv2": null
+        },
+        "input": {
+            "timeout": 30
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "domain": "",
-      "host": "",
-      "netbios_name": "",
-      "port": 445,
-      "timeout": 60,
-      "use_ntlmv2": true
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

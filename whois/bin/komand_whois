@@ -6,7 +6,7 @@ from komand_whois import connection, actions, triggers
 
 Name = 'Whois'
 Vendor = 'rapid7'
-Version = '1.0.3'
+Version = '1.0.4'
 Description = 'Whois Lookups'
 
 

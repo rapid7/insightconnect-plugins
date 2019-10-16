@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: chaosreader
 title: Chaosreader
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: A tool to trace sessions and fetch application data from snoop or tcpdump
   logs
 version: 1.0.1

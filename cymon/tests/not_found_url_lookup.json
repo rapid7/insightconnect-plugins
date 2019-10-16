@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "url_lookup",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "url": "https://google.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "domain_lookup",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "domain": "komand.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

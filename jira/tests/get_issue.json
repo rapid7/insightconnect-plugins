@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "get_issue",
-    "meta": {},
-    "input": {
-      "id": "IDR-1"
+    "body": {
+        "action": "get_issue",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "input": {
+            "id": "IDR-1"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "project": "",
-      "url": "https://komand-demo.atlassian.net"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

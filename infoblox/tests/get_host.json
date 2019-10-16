@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "get_host",
-    "meta": {},
-    "input": {
-      "_ref": "ZG5zLmhvc3QkLm5vbl9ETlNfaG9zdF9yb290LjAuMTUzMjY4OTgzMDkxMC5jb20uZXhhbXBsZS5hZG1pbg:admin.example.com"
+    "body": {
+        "action": "get_host",
+        "connection": {
+            "api_version": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "infoblox_host": null
+        },
+        "input": {
+            "_ref": "ZG5zLmhvc3QkLm5vbl9ETlNfaG9zdF9yb290LjAuMTUzMjY4OTgzMDkxMC5jb20uZXhhbXBsZS5hZG1pbg:admin.example.com"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_version": "2.7",
-      "infoblox_host": "https://192.168.1.2",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,0 +1,199 @@
+plugin_spec_version: v2
+name: komand
+title: Komand
+description: Komand Meta-Actions
+version: 1.0.2
+vendor: rapid7
+support: community
+status: []
+tags:
+- komand
+- job
+connection:
+  url:
+    title: URL
+    type: string
+    description: URL to Komand server, e.g. https://komand.company.com
+    required: true
+  credentials:
+    title: Username and Password
+    type: credential_username_password
+    description: Username and password for user
+    required: true
+triggers:
+  job:
+    title: Job
+    description: Trigger on new jobs
+    input:
+      status:
+        title: Status
+        type: string
+        description: Status to trigger on
+        enum:
+        - failed
+        - queued
+        - succeeded
+        - retried
+        required: true
+    output:
+      status:
+        title: Status
+        type: string
+        description: Job status
+        required: false
+      job_id:
+        title: Job ID
+        type: string
+        description: Job ID
+        required: false
+      group_id:
+        title: Group ID
+        type: string
+        description: Job group ID
+        required: false
+      workflow_uid:
+        title: Workflow UID
+        type: string
+        description: Workflow UID
+        required: false
+      name:
+        title: Name
+        type: string
+        description: Name
+        required: false
+      created_at:
+        title: Created At
+        type: string
+        description: Created at
+        required: false
+      updated_at:
+        title: Updated At
+        type: string
+        description: Updated at
+        required: false
+      ended_at:
+        title: Ended At
+        type: string
+        description: Ended at
+        required: false
+      url:
+        title: URL
+        type: string
+        description: Job URL
+        required: false
+actions:
+  run_asynchronously:
+    title: Run Asynchronously
+    description: Run a workflow without waiting for results
+    input:
+      workflow_name:
+        title: Workflow Name
+        type: string
+        description: Workflow name to run. Either this or UID should be provided
+        required: false
+      workflow_uid:
+        title: Workflow UID
+        type: string
+        description: Workflow UID to run. Either this or name should be provided
+        required: false
+      input:
+        title: Input
+        type: object
+        description: Input object to supply to the workflow job
+        required: false
+    output:
+      job_id:
+        title: Job ID
+        type: string
+        description: Job ID
+        required: false
+      url:
+        title: URL
+        type: string
+        description: Job URL
+        required: false
+  run_synchronously:
+    title: Run Synchronously
+    description: Run a workflow and wait for results
+    input:
+      workflow_name:
+        title: Workflow Name
+        type: string
+        description: Workflow name to run. Either this or UID should be provided
+        required: false
+      workflow_uid:
+        title: Workflow UID
+        type: string
+        description: Workflow UID to run. Either this or name should be provided
+        required: false
+      timeout:
+        title: Timeout
+        type: number
+        description: Timeout for executed workflow to finish, in seconds. Use 0 for
+          no timeout
+        required: true
+        default: 150
+      completion_checks:
+        title: Completion Checks
+        description: How many times the executed workflow should be checked for completion
+          during the timeout period. Higher numbers should result in quicker job turnover.
+          Leave blank if timeout is set to 0
+        type: number
+        default: 10
+        required: false
+      input:
+        title: Input
+        type: object
+        description: Input object to supply to the workflow job
+        required: false
+    output:
+      status:
+        title: Status
+        type: string
+        description: Job Status
+        required: false
+      job_id:
+        title: Job ID
+        type: string
+        description: Job ID
+        required: false
+      group_id:
+        title: Group ID
+        type: string
+        description: Job Group ID
+        required: false
+      workflow_uid:
+        title: Workflow UID
+        type: string
+        description: Workflow UID
+        required: false
+      name:
+        title: Name
+        type: string
+        description: Name
+        required: false
+      steps:
+        title: Steps
+        description: Step outputs
+        type: '[]object'
+        required: false
+      created_at:
+        title: Created At
+        type: string
+        description: Created at
+        required: false
+      updated_at:
+        title: Updated At
+        type: string
+        description: Updated at
+        required: false
+      ended_at:
+        title: Ended At
+        type: string
+        description: Ended at
+        required: false
+      url:
+        title: URL
+        type: string
+        description: Job URL
+        required: false

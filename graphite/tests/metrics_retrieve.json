@@ -1,19 +1,19 @@
 {
-  "type": "action_start",
-  "body": {
-    "input": {
-      "target": "test.bash.*",
-      "templates": {},
-      "from": "-2min",
-      "until": "-1min"
+    "body": {
+        "action": "metrics_retrieve",
+        "connection": {
+            "graphite_port": null,
+            "graphite_url": null,
+            "ssl_verify": null
+        },
+        "input": {
+            "from": "-2min",
+            "target": "test.bash.*",
+            "templates": {},
+            "until": "-1min"
+        },
+        "meta": {}
     },
-    "connection": {
-      "graphite_port": 443,
-      "graphite_url": "",
-      "ssl_verify": false
-    },
-    "action": "metrics_retrieve",
-    "meta": {}
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

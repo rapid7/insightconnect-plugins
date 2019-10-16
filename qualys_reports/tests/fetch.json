@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "fetch",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "hostname": null
+        },
+        "dispatcher": {},
+        "input": {
+            "file_name": "",
+            "id": 0
+        },
+        "meta": {},
+        "trigger": ""
+    },
+    "type": "action_start",
+    "version": "v1"
+}

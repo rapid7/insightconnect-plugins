@@ -1,22 +1,21 @@
 {
-  "body": {
-    "action": "show_user",
-    "input": {
-      "user_id": "no_exist_id"
+    "body": {
+        "action": "show_user",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "subdomain": null
+        },
+        "input": {
+            "user_id": "no_exist_id"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "subdomain": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }
-  

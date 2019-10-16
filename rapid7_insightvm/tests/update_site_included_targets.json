@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "update_site_included_targets",
-    "meta": {},
-    "input": {
-      "id": 0,
-      "included_targets": [],
-      "overwrite": true
+    "body": {
+        "action": "update_site_included_targets",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 0,
+            "included_targets": [],
+            "overwrite": true
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": "https://insightvm:3780"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Force a user to reset their password on next login"
+
+
 class Input:
     DISTINGUISHED_NAME = "distinguished_name"
     

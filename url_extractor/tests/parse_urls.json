@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "parse_urls",
+        "connection": null,
+        "dispatcher": {},
+        "input": {
+            "text": "Should have one URL for Komand, https://komand.com/."
+        },
+        "meta": null
+    },
+    "type": "action_start",
+    "version": "v1"
+}

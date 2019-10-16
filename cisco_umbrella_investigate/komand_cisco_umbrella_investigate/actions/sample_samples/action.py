@@ -1,6 +1,7 @@
 import komand
 from .schema import SampleSamplesInput, SampleSamplesOutput
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class SampleSamples(komand.Action):
@@ -25,12 +26,10 @@ class SampleSamples(komand.Action):
         try:
             sample_samples = self.connection.investigate.sample_samples(hash, limit=limit, offset=offset)
         except Exception as e:
-            self.logger.error("SampleSamples: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         if "error" in sample_samples:
-            self.logger.error("SampleSamples: Run: Only Threat Grid customers have access to artifact data")
-            raise Exception("SampleSamples: Run: Only Threat Grid customers have access to artifact data")
+            raise PluginException(cause='Unable to return artifact data.', assistance='Only Threat Grid customers have access to artifact data.')
 
         return sample_samples
 

@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_scan_engine_pool",
-    "meta": {},
-    "input": {
-      "id": 6
+    "body": {
+        "action": "get_scan_engine_pool",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 6
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": "https://insightvm:3780"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

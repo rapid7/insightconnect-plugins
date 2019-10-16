@@ -12,6 +12,7 @@ from .lookup_domain.action import LookupDomain
 from .lookup_entity_list.action import LookupEntityList
 from .lookup_hash.action import LookupHash
 from .lookup_malware.action import LookupMalware
+from .lookup_url.action import LookupUrl
 from .lookup_vulnerability.action import LookupVulnerability
 from .search_IP_addresses.action import SearchIPAddresses
 from .search_domains.action import SearchDomains

@@ -1,23 +1,26 @@
 {
-  "body": {
-    "trigger": "get_threats",
-    "meta": {},
-    "input": {
-      "engines": ["reputation", "penetration"],
-      "frequency": 5
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "engines": [
+                "reputation",
+                "penetration"
+            ],
+            "frequency": 5
+        },
+        "meta": {},
+        "trigger": "get_threats"
     },
-    "dispatcher": {
-      "url": "http://localhost:8000",
-      "webhook_url": ""
-    },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "trigger_start",
-  "version": "v1"
+    "type": "trigger_start",
+    "version": "v1"
 }

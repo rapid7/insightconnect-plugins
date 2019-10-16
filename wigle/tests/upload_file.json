@@ -1,21 +1,21 @@
 {
-  "body": {
-    "action": "upload_file",
-    "meta": {},
-    "input": {
-      "donate": false,
-      "file": {
-        "filename": "a_test_file",
-        "content": "aGVsbG8K"
-      }
+    "body": {
+        "action": "upload_file",
+        "connection": {
+            "name": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "donate": false,
+            "file": {
+                "content": "aGVsbG8K",
+                "filename": "a_test_file"
+            }
+        },
+        "meta": {}
     },
-    "connection": {
-      "name": "",
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

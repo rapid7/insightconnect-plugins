@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action is used to fetch a specified entity list by ID"
+
+
 class Input:
     ENTITY_LIST_ID = "entity_list_id"
     

@@ -2,9 +2,9 @@
     "body": {
         "action": "patch_incident",
         "connection": {
-            "email": "",
-            "hostname": "",
-            "password": ""
+            "email": null,
+            "hostname": null,
+            "password": null
         },
         "input": {
             "incident_id": 3944,

@@ -1,5 +1,5 @@
 import komand
-from .schema import InsertInput, InsertOutput
+from .schema import InsertInput, InsertOutput, Input, Output, Component
 # Custom imports below
 
 
@@ -8,35 +8,27 @@ class Insert(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='insert',
-                description='Insert events into an index',
+                description=Component.DESCRIPTION,
                 input=InsertInput(),
                 output=InsertOutput())
 
     def run(self, params={}):
         """Run insert action"""
-        index_name = params.get('index')
-        if not index_name:
-            raise ValueError('index name is required')
-        event = params.get('event').encode('utf-8')
-        if not event:
-            raise ValueError('event is required')
+        index_name = params.get(Input.INDEX)
+        event = params.get(Input.EVENT).encode("utf-8")
 
-        index = None
         try:
             index = self.connection.client.indexes[index_name]
-        except:
+        except (KeyError, IndexError):
             index = self.connection.client.indexes.create(index_name)
 
         kwargs = {}
-        if params.get('host'):
-            kwargs['host'] = params.get('host')
-        if params.get('source'):
-            kwargs['source'] = params.get('source')
-        if params.get('sourcetype'):
-            kwargs['sourcetype'] = params.get('sourcetype')
+        if params.get(Input.HOST):
+            kwargs["host"] = params.get(Input.HOST)
+        if params.get(Input.SOURCE):
+            kwargs["source"] = params.get(Input.SOURCE)
+        if params.get(Input.SOURCETYPE):
+            kwargs["sourcetype"] = params.get(Input.SOURCETYPE)
 
         index.submit(event, **kwargs)
-        return {}
-
-    def test(self):
         return {}

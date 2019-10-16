@@ -1,25 +1,25 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
+    "body": {
+        "action": "update_data_theft",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "action": "cloak",
+            "custom_identity_theft_type": "test",
+            "enabled": "yes",
+            "id": "test-v14-data-theft",
+            "identity_theft_type": "custom",
+            "initial_characters_to_keep": 0,
+            "policy_id": "test-v14-policy",
+            "trailing_characters_to_keep": 0
+        },
+        "meta": {}
     },
-    "meta": {},
-    "action": "update_data_theft",
-    "input": {
-      "id": "test-v14-data-theft",
-      "policy_id": "test-v14-policy",
-      "initial_characters_to_keep": 0,
-      "identity_theft_type": "custom",
-      "enabled": "yes",
-      "action": "cloak",
-      "custom_identity_theft_type": "test",
-      "trailing_characters_to_keep": 0
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

@@ -4,6 +4,8 @@ title: Ping
 description: Ping networking tool
 version: 1.0.1
 vendor: rapid7
+support: community
+status: []
 tags:
 - ping
 - network diagnostics

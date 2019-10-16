@@ -1,22 +1,22 @@
 {
-  "body": {
-    "action": "remove_issue_from_epic",
-    "meta": {},
-    "input": {
-      "epic_id": 0,
-      "issue": {
-        "issue_number": 0,
-        "issue_url": "",
-        "repo_id": 0
-      },
-      "repo_id": 0
+    "body": {
+        "action": "remove_issue_from_epic",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "epic_id": 0,
+            "issue": {
+                "issue_number": 0,
+                "issue_url": "",
+                "repo_id": 0
+            },
+            "repo_id": 0
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,0 +1,37 @@
+plugin_spec_version: v2
+name: microsoft_teams
+title: Microsoft Teams
+description: Microsoft Teams actions and triggers
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+tags:
+- microsoft
+- teams
+- office 365
+- chat
+
+connection: 
+  webhook:
+    title: Webhook
+    type: string
+    description: Webhook
+    required: true
+
+actions:
+  send_message:
+    title: Send message
+    description: Send message
+    input:
+      message:
+        title: Message
+        type: string
+        description: Message to send
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was send successful
+        type: boolean
+        required: true

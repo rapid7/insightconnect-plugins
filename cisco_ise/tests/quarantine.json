@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "quarantine",
-    "meta": {},
-    "input": {
-      "mac_address": "00:0A:35:E4:D7:42",
-      "policy": "quarantine"
+    "body": {
+        "action": "quarantine",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "ssl_verify": null
+        },
+        "input": {
+            "mac_address": "00:0A:35:E4:D7:42",
+            "policy": "quarantine"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "address": "",
-      "ssl_verify": false 
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

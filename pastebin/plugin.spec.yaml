@@ -5,7 +5,8 @@ description: Pastebin.com is the number one paste tool since 2002. Pastebin is a
   where you can store text online for a set period of time
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - scrape
 - paste

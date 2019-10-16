@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get TTP URL Logs"
+    DESCRIPTION = "Get TTP URL logs"
 
 
 class Input:
@@ -139,7 +139,7 @@ class GetTtpUrlLogsOutput(komand.Output):
         "url": {
           "type": "string",
           "title": "URL",
-          "description": "The url clicked",
+          "description": "The URL clicked",
           "order": 3
         },
         "userAwarenessAction": {

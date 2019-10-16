@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "update_incident",
+        "input": {
+            "assigned_group": "",
+            "impact": "",
+            "incident_description": "",
+            "incident_id": "",
+            "other_inputs": {},
+            "status": "",
+            "urgency": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

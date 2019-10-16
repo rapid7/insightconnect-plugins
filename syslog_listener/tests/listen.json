@@ -1,0 +1,20 @@
+{
+    "body": {
+        "connection": null,
+        "dispatcher": {
+            "url": "http://localhost:8000"
+        },
+        "input": {
+            "endpoint": "0.0.0.0",
+            "facility": "None",
+            "filter": "",
+            "level": "None",
+            "port": 5114,
+            "transport": "UDP"
+        },
+        "meta": {},
+        "trigger": "listen"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

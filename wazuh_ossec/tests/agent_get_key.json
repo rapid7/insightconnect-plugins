@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "agent_get_key",
-    "meta": {},
-    "input": {
-      "agent_id": ""
+    "body": {
+        "action": "agent_get_key",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "agent_id": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

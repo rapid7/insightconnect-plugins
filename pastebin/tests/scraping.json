@@ -1,27 +1,27 @@
 {
-  "body": {
-    "input": {
-      "pattern": "google",
-      "limit": 100,
-      "language": "Python",
-      "frequency": 10
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "key": {
+                "secretKey": null
+            }
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "frequency": 10,
+            "language": "Python",
+            "limit": 100,
+            "pattern": "google"
+        },
+        "meta": {},
+        "trigger": "scraping"
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "key": {
-        "secretKey": ""
-      }
-    },
-    "trigger": "scraping",
-    "meta": {},
-    "dispatcher": {
-      "url": "http://localhost:8000",
-      "webhook_url": ""
-    }
-  },
-  "type": "trigger_start",
-  "version": "v1"
+    "type": "trigger_start",
+    "version": "v1"
 }

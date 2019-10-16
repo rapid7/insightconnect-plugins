@@ -1,25 +1,25 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "url": "",
-      "ssl_verify": false,
-      "username": "",
-      "api_key": {
-        "secretKey": ""
-      }
-    },
-    "action": "add_event",
-    "input": {
-      "source": "Faker Vault",
-      "type": "Application Compromise",
-        "params": {
-            "campaign": "NetTraveler"
+    "body": {
+        "action": "add_event",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username": null
         },
-      "title": "voluptates",
-      "description": "Consectetur soluta deserunt at exercitationem beatae."
+        "input": {
+            "description": "Consectetur soluta deserunt at exercitationem beatae.",
+            "params": {
+                "campaign": "NetTraveler"
+            },
+            "source": "Faker Vault",
+            "title": "voluptates",
+            "type": "Application Compromise"
+        },
+        "meta": {}
     },
-    "meta": {}
-  }
+    "type": "action_start",
+    "version": "v1"
 }

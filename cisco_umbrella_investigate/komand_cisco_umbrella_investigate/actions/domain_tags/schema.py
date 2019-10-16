@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the date range when the domain being queried was a part of the Umbrella block list"
+
+
 class Input:
     DOMAIN = "domain"
     
@@ -85,8 +89,8 @@ class DomainTagsOutput(komand.Output):
       },
       "required": [
         "begin",
-        "end",
         "category",
+        "end",
         "url"
       ]
     }

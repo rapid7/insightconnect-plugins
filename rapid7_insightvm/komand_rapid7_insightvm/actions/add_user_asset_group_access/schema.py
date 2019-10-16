@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Grant an user account access to an asset group by ID"
+
+
 class Input:
     ASSET_GROUP_ID = "asset_group_id"
     USER_ID = "user_id"

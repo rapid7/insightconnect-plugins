@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "look_up_by_email",
+        "connection": {
+            "server": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "dispatcher": {},
+        "input": {
+            "email": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

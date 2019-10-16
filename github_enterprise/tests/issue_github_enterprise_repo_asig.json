@@ -1,23 +1,23 @@
 {
-  "body": {
-    "input": {
-      "organization": "",
-      "repository": "test_outside_org",
-      "assignee": ""
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000"
+        },
+        "input": {
+            "assignee": "",
+            "organization": "",
+            "repository": "test_outside_org"
+        },
+        "meta": {},
+        "trigger": "issue"
     },
-    "connection": {
-      "host": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "trigger": "issue",
-    "meta": {},
-    "dispatcher": {
-      "url": "http://localhost:8000"
-    }
-  },
-  "version": "v1",
-  "type": "trigger_start"
+    "type": "trigger_start",
+    "version": "v1"
 }

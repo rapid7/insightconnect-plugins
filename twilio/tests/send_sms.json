@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "send_sms",
-    "input": {
-      "message": "",
-      "to_number": ""
+    "body": {
+        "action": "send_sms",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "twilio_phone_number": null
+        },
+        "input": {
+            "message": "",
+            "to_number": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "twilio_phone_number": "",
-      "credentials": {
-        "username": "",
-        "password": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

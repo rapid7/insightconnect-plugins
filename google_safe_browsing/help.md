@@ -1,5 +1,6 @@
 
 # Google Safe Browsing
+**This plugin is obsolete, cannot be used, and has been superceded by the Google Web Risk plugin.**
 
 ## About
 
@@ -102,6 +103,7 @@ Examples:
 * 0.1.7 - SSL bug fix in SDK
 * 0.1.8 - Bug fix for no results | Updated to v2 architecture
 * 1.0.0 - Support web server mode | Update to new credential types
+* 2.0.0 - Obsolete
 
 ## References
 

@@ -1,5 +1,15 @@
 FROM komand/python-3-plugin:2
-# Refer to the following documentation for available SDK parent images: https://komand.github.io/python/sdk.html#version
+# The three supported python parent images are:
+# - komand/python-2-plugin
+# - komand/python-3-plugin
+# - komand/python-pypy3-plugin
+#
+# Update the tag to a full semver version
+
+# Add any custom package dependencies here
+# NOTE: Add pip packages to requirements.txt
+
+# End package dependencies
 
 # Add source code
 WORKDIR /python/src

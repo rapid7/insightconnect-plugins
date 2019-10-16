@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "get_config",
-    "meta": {},
-    "input": {
-      "app_id": "LowprofileappcreatedforKomandplugintests-1oRtT",
-      "config_id": 1
+    "body": {
+        "action": "get_config",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "app_id": "LowprofileappcreatedforKomandplugintests-1oRtT",
+            "config_id": 1
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

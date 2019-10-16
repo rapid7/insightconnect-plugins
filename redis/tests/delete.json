@@ -1,16 +1,16 @@
 {
-  "body": {
-    "input": {
-      "key": "foo"
+    "body": {
+        "action": "delete",
+        "connection": {
+            "db": null,
+            "host": null,
+            "port": null
+        },
+        "input": {
+            "key": "foo"
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "",
-      "db": 0,
-      "port": 6379
-    },
-    "action": "delete",
-    "meta": {}
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

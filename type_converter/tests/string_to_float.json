@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "string_to_float",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "input": "123.456"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

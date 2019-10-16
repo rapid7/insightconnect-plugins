@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "pdf",
-    "input": {
-      "doc": "Not Html"
+    "body": {
+        "action": "pdf",
+        "connection": {},
+        "input": {
+            "doc": "Not Html"
+        },
+        "meta": {}
     },
-    "connection": {},
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

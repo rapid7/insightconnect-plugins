@@ -1,28 +1,28 @@
 {
-  "body": {
-    "action": "update_global_acl_rule",
-    "input": {
-      "id": "test-v14-global-acl-rule",
-      "policy_id": "test-v14-policy",
-      "redirect_url": "",
-      "url_match": "/",
-      "comments": "",
-      "response_page": "default",
-      "deny_response": "reset",
-      "action": "process",
-      "extended_match_sequence": 0,
-      "enable_url_acl": "yes",
-      "extended_match": "*"
+    "body": {
+        "action": "update_global_acl_rule",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "action": "process",
+            "comments": "",
+            "deny_response": "reset",
+            "enable_url_acl": "yes",
+            "extended_match": "*",
+            "extended_match_sequence": 0,
+            "id": "test-v14-global-acl-rule",
+            "policy_id": "test-v14-policy",
+            "redirect_url": "",
+            "response_page": "default",
+            "url_match": "/"
+        },
+        "meta": {}
     },
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

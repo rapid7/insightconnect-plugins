@@ -2,9 +2,10 @@ plugin_spec_version: v2
 name: eml
 title: EML
 description: Extract Information from EML Files
-version: 1.0.0
+version: 1.1.1
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - eml
 - mail
@@ -12,28 +13,39 @@ types:
   header:
     key:
       type: string
+      required: false
     value:
       type: string
+      required: false
   attachment:
     filename:
       type: string
+      required: false
     contents:
       type: string
+      required: false
   result:
     date:
       type: string
+      required: false
     from:
       type: string
+      required: false
     to:
       type: string
+      required: false
     subject:
       type: string
+      required: false
     body:
       type: string
+      required: false
     headers:
       type: '[]header'
+      required: false
     attachments:
       type: '[]attachment'
+      required: false
 actions:
   parse:
     title: Parse EML File
@@ -43,6 +55,20 @@ actions:
         title: EML File
         description: EML File
         type: bytes
+        required: true
+    output:
+      result:
+        type: result
+        description: Contents of parsed EML file
+        required: false
+  parse_from_string:
+    title: Parse EML File from String
+    description: Extract headers and file attachments from a string
+    input:
+      email_string:
+        title: Email String
+        description: Email as string
+        type: string
         required: true
     output:
       result:

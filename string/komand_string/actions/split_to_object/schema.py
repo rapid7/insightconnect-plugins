@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Converts a string to an object containing key:value strings"
+
+
 class Input:
     BLOCK_DELIMITER = "block_delimiter"
     STRING = "string"

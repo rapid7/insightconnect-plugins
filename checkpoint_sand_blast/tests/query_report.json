@@ -1,23 +1,23 @@
 {
-  "body": {
-    "action": "query_report",
-    "meta": {},
-    "input": {
-      "features": "",
-      "file_digest": "c2efcd148a4739a2f5676a513aa905f6",
-      "file_digest_type": "md5",
-      "file_name": "",
-      "file_type": "",
-      "quota": false
+    "body": {
+        "action": "query_report",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "service_address": null,
+            "using_cloud_server": null
+        },
+        "input": {
+            "features": "",
+            "file_digest": "c2efcd148a4739a2f5676a513aa905f6",
+            "file_digest_type": "md5",
+            "file_name": "",
+            "file_type": "",
+            "quota": false
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "service_address": "te.checkpoint.com",
-      "using_cloud_server": true
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

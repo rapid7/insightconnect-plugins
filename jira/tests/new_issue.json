@@ -1,23 +1,23 @@
 {
-  "body": {
-    "trigger": "new_issue",
-    "meta": {},
-    "input": {
-      "jql": ""
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "jql": ""
+        },
+        "meta": {},
+        "trigger": "new_issue"
     },
-    "dispatcher": {
-      "url": "http://localhost:8000",
-      "webhook_url": ""
-    },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "project": "test",
-      "url": "https://komand-demo4.atlassian.net"
-    }
-  },
-  "type": "trigger_start",
-  "version": "v1"
+    "type": "trigger_start",
+    "version": "v1"
 }

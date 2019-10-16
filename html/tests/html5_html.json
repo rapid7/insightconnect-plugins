@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "html5",
-    "input": {
-      "doc": "<html><head><title>Test</title></head><body><p></p><h1></h1></body></html>"
+    "body": {
+        "action": "html5",
+        "connection": {},
+        "input": {
+            "doc": "<html><head><title>Test</title></head><body><p></p><h1></h1></body></html>"
+        },
+        "meta": {}
     },
-    "connection": {},
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

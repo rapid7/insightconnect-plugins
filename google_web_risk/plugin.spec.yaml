@@ -1,0 +1,60 @@
+plugin_spec_version: v2
+name: google_web_risk
+title: Google Web Risk
+description: Check URLs against the Google Web Risk service
+version: 2.0.0
+vendor: rapid7
+support: community
+status: []
+tags:
+- google
+- web risk
+- url
+- blacklist
+- phishing
+enable_cache: false
+connection:
+  credentials:
+    title: API Token
+    description: API token
+    type: credential_secret_key
+    required: true
+actions:
+  lookup:
+    title: Lookup URL
+    description: Lookup URL in Web Risk Service
+    input:
+      url:
+        title: URL
+        description: URL to lookup
+        type: string
+        required: true
+      threat_type_malware:
+        title: 'Threat Type: Malware'
+        type: boolean
+        description: Check if URL is of 'malware' threat
+        required: false
+        default: true
+      threat_type_social:
+        title: 'Threat Type: Social'
+        type: boolean
+        description: Check if URL is of 'social engineering/phishing' threat
+        required: false
+        default: true
+      threat_type_unwanted:
+        type: boolean
+        title: 'Threat type: Unwanted Software'
+        description: Check if URL is of 'unwanted software' threat
+        required: false
+        default: true
+    output:
+      threatTypes:
+        title: Threat Types
+        description: Threat types detected
+        type: '[]string'
+        required: false
+      expireTime:
+        title: Expire Time
+        description: Time at which match should be considered expired
+        type: string
+        required: false

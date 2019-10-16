@@ -1,17 +1,17 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "input": {
-      "key": "k2eylist",
-      "count": 1000
+    "body": {
+        "action": "list_get",
+        "connection": {
+            "db": null,
+            "host": null,
+            "port": null
+        },
+        "input": {
+            "count": 1000,
+            "key": "k2eylist"
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "",
-      "db": 0,
-      "port": 6379
-    },
-    "action": "list_get",
-    "meta": {}
-  }
+    "type": "action_start",
+    "version": "v1"
 }

@@ -2,10 +2,11 @@ plugin_spec_version: v2
 name: recorded_future
 title: Recorded Future
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 description: Recorded Future arms threat analysts, security operators, and incident
   responders to rapidly connect the dots and reveal unknown threats
-version: 1.0.2
+version: 1.5.2
 tags:
 - recorded future
 - threat intelligence
@@ -214,6 +215,54 @@ types:
     timestamps:
       type: timestamps
       required: false
+  location_data:
+    continent:
+      title: Continent
+      description: Continent
+      type: string
+      required: false
+    city:
+      title: City
+      description: City
+      type: string
+      required: false
+    country:
+      title: Country
+      description: Country
+      type: string
+      required: false
+  cidr:
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+  ip:
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
   search_data:
     counts:
       type: '[]counts'
@@ -249,6 +298,39 @@ types:
     timestamps:
       type: timestamps
       required: false
+  location:
+    asn:
+      title: ASN
+      description: ASN
+      type: string
+      required: false
+    location:
+      title: Location
+      description: Location
+      type: location_data
+      required: false
+    cidr:
+      title: CIDR
+      description: Classless Inter-Domain Routing
+      type: cidr
+      required: false
+    organization:
+      title: Organization
+      description: Organization
+      type: string
+      required: false
+  riskyCIDRIP:
+    ip:
+      title: IP
+      description: IP
+      type: ip
+      required: false
+    score:
+      title: Score
+      description: Score
+      type: integer
+      required: false
+
 connection:
   api_key:
     title: API Key
@@ -353,13 +435,24 @@ actions:
         required: false
   lookup_domain:
     title: Lookup Domain
-    description: This action is used to return information about a specific domain
+    description: Return information about a specific domain
       entry
     input:
       domain:
+        title: Domain
         type: string
         description: Domain
         required: true
+      fields:
+        title: Fields
+        description: List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities" , "risk" , "timestamps"]
+        type: "[]string"
+        required: false
+      comment:
+        title: Comment
+        description: Add a comment to a domain
+        type: string
+        required: false
     output:
       entity:
         type: entity
@@ -368,6 +461,46 @@ actions:
       timestamps:
         type: timestamps
         description: Timestamps
+        required: false
+      analystNotes:
+        title: "Analyst Notes"
+        description: "Notes from an analyst"
+        type: "[]string"
+        required: false
+      counts:
+        title: "Counts"
+        description: "Counts"
+        type: "[]counts"
+        required: false
+      intelCard:
+        title: "Intel Card"
+        description: "Intel card"
+        type: string
+        required: false
+      metrics:
+        title: "Metrics"
+        description: "Metrics"
+        type: "[]metrics"
+        required: false
+      relatedEntities:
+        title: "Related Entities"
+        description: "Related entities"
+        type: "[]relatedEntities"
+        required: false
+      sightings:
+        title: "Sightings"
+        description: "Sightings"
+        type: "[]sightings"
+        required: false
+      threatLists:
+        title: "Threat Lists"
+        description: "Threat lists"
+        type: "[]string"
+        required: false
+      risk:
+        title: "Risk"
+        description: "Risk"
+        type: risk
         required: false
   search_entity_lists:
     title: Search Entity Lists
@@ -483,12 +616,23 @@ actions:
         required: false
   lookup_hash:
     title: Lookup Hash
-    description: This action is used to retrieve information about a specified hash
+    description: Used to retrieve information about a specified hash
     input:
       hash:
+        title: "Hash"
         type: string
         description: Hash
         required: true
+      fields:
+        title: "Fields"
+        description: List of fields to include with results e.g ["timestamps", "sightings", "threatLists", "analystNotes", "counts", "entity", "hashAlgorithm", "intelCard", "metrics", "relatedEntities", "risk", "timestamps"]
+        type: "[]string"
+        required: false
+      comment:
+        title: Comment
+        description: Add a comment to a hash
+        type: string
+        required: false
     output:
       entity:
         type: entity
@@ -498,6 +642,52 @@ actions:
         type: timestamps
         description: Timestamps
         required: false
+      analystNotes:
+        title: "Analyst Notes"
+        description: "Notes from an analyst"
+        type: "[]string"
+        required: false
+      counts:
+        title: "Counts"
+        description: "Counts"
+        type: "[]counts"
+        required: false
+      hashAlgorithm:
+        title: "Hash Algorithm"
+        description: "Hash Algorithm"
+        type: string
+        required: false
+      intelCard:
+        title: "Intel Card"
+        description: "Intel card"
+        type: string
+        required: false
+      metrics:
+        title: "Metrics"
+        description: "Metrics"
+        type: "[]metrics"
+        required: false
+      relatedEntities:
+        title: "Related Entities"
+        description: "Related entities"
+        type: "[]relatedEntities"
+        required: false
+      sightings:
+        title: "Sightings"
+        description: "Sightings"
+        type: "[]sightings"
+        required: false
+      threatLists:
+        title: "Threat Lists"
+        description: "Threat Lists"
+        type: "[]string"
+        required: false
+      risk:
+        title: "Risk"
+        description: "Risk"
+        type: risk
+        required: false
+
   download_IP_addresses_risk_list:
     title: Download IP Addresses Risk List
     description: This action is used to fetch a risk list of the IP addresses that
@@ -611,21 +801,86 @@ actions:
         required: false
   lookup_IP_address:
     title: Lookup IP Address
-    description: This action is used to query for data related to a specific IP address
+    description: Query for data related to a specific IP address
     input:
       IP_address:
         title: IP Address
         description: IP address
         type: string
         required: true
+      fields:
+        title: Fields
+        description: List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "riskyCIDRIPs","risk", "location", "timestamps"]
+        type: "[]string"
+        required: false
+      comment:
+        title: Comment
+        description: Add comment to IP address lookup for Recorded Future
+        type: string
+        required: false
     output:
       entity:
         type: entity
-        description: Timestamps
+        description: Entity
         required: false
       timestamps:
         type: timestamps
         description: Timestamps
+        required: false
+      analystNotes:
+        title: "Analyst Notes"
+        description: "Notes from an analyst"
+        type: "[]string"
+        required: false
+      counts:
+        title: "Counts"
+        description: "Counts"
+        type: "[]counts"
+        required: false
+      intelCard:
+        title: "Intel Card"
+        description: "Intel card"
+        type: string
+        required: false
+      metrics:
+        title: "Metrics"
+        description: "Metrics"
+        type: "[]metrics"
+        required: false
+      relatedEntities:
+        title: "Related Entities"
+        description: "Related entities"
+        type: "[]relatedEntities"
+        required: false
+      sightings:
+        title: "Sightings"
+        description: "Sightings"
+        type: "[]sightings"
+        required: false
+      threatLists:
+        title: "Threat Lists"
+        description: "Threat lists"
+        type: "[]string"
+        required: false
+      location:
+        title: "Location"
+        description: "Location"
+        type: location
+        required: false
+      risk:
+        title: Risk
+        description: Risk
+        type: risk
+        required: false
+      riskyCIDRIPs:
+        title: Risky CIDR IPs
+        description: Risky CIDR IPs
+        type: "[]riskyCIDRIP"
+        required: false
+      found:
+        title: Found
+        description: Has the IP been found in Recorded Future
+        type: boolean
         required: false
   search_malware:
     title: Search Malware
@@ -799,4 +1054,62 @@ actions:
       data:
         type: vulnerability_search_data
         description: Data
+        required: false
+  lookup_url:
+    title: Lookup URL
+    description: Retrieve information about a specified URL
+    input:
+      url:
+        title: URL
+        type: string
+        description: URL
+        required: true
+      fields:
+        title: Fields
+        description: List of fields to include with results e.g ["sightings", "analystNotes", "counts", "entity", "metrics", "relatedEntities", "risk", "timestamps"]
+        type: "[]string"
+        required: false
+      comment:
+        title: Comment
+        description: Add a comment to an IP address lookup for Recorded Future
+        type: string
+        required: false
+    output:
+      entity:
+        type: entity
+        description: Entity
+        required: false
+      timestamps:
+        type: timestamps
+        description: Timestamps
+        required: false
+      analystNotes:
+        title: "Analyst Notes"
+        description: "Notes from an analyst"
+        type: "[]string"
+        required: false
+      counts:
+        title: "Counts"
+        description: "Counts"
+        type: "[]counts"
+        required: false
+      metrics:
+        title: "Metrics"
+        description: "Metrics"
+        type: "[]metrics"
+        required: false
+      relatedEntities:
+        title: "Related Entities"
+        description: "Related entities"
+        type: "[]relatedEntities"
+        required: false
+      sightings:
+        title: "Sightings"
+        description: "Sightings"
+        type: "[]sightings"
+        required: false
+      risk:
+        title: Risk
+        description: Risk
+        type: risk
         required: false

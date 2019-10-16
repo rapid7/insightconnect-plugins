@@ -1,23 +1,22 @@
 {
-  "body": {
-    "action": "search",
-    "input": {
-      "item": "This_9()_3xi@t",
-      "type": "Ticket"
+    "body": {
+        "action": "search",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "subdomain": null
+        },
+        "input": {
+            "item": "This_9()_3xi@t",
+            "type": "Ticket"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "subdomain": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }
-  

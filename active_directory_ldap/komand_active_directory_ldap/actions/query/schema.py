@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run an LDAP query"
+
+
 class Input:
     SEARCH_BASE = "search_base"
     SEARCH_FILTER = "search_filter"
@@ -32,8 +36,8 @@ class QueryInput(komand.Input):
     }
   },
   "required": [
-    "search_filter",
-    "search_base"
+    "search_base",
+    "search_filter"
   ]
 }
     """)

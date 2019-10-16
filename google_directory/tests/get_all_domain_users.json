@@ -1,26 +1,26 @@
 {
-  "body": {
-    "action": "get_all_domain_users",
-    "meta": {},
-    "input": {
-      "domain": ""
+    "body": {
+        "action": "get_all_domain_users",
+        "connection": {
+            "admin_user": null,
+            "auth_provider_x509_cert_url": null,
+            "auth_uri": null,
+            "client_email": null,
+            "client_id": null,
+            "client_x509_cert_url": null,
+            "oauth_scope": null,
+            "private_key": {
+                "privateKey": null
+            },
+            "private_key_id": null,
+            "project_id": null,
+            "token_uri": null
+        },
+        "input": {
+            "domain": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "admin_user": "",
-      "auth_provider_x509_cert_url": "",
-      "auth_uri": "",
-      "client_email": "",
-      "client_id": "",
-      "client_x509_cert_url": "",
-      "private_key": {
-        "privateKey": ""
-      },
-      "private_key_id": "",
-      "project_id": "",
-      "token_uri": "",
-      "oauth_scope": "https://www.googleapis.com/auth/admin.directory.user.readonly"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

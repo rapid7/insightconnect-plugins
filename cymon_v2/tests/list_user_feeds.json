@@ -1,0 +1,15 @@
+{
+    "body": {
+        "action": "list_user_feeds",
+        "connection": {
+            "api_credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {},
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

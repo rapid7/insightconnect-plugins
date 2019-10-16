@@ -1,21 +1,21 @@
 {
-  "body": {
-    "action": "list_project_issues",
-    "meta": {},
-    "input": {
-      "organization_slug": "komand-test",
-      "project_slug": "pythontest",
-      "query": "is:resolved",
-      "shortIdLookup": false,
-      "statsPeriod": "14d"
+    "body": {
+        "action": "list_project_issues",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "organization_slug": "komand-test",
+            "project_slug": "pythontest",
+            "query": "is:resolved",
+            "shortIdLookup": false,
+            "statsPeriod": "14d"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "https://sentry.io/api/0/"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

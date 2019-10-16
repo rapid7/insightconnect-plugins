@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Execute PowerShell script in the form of a string"
+
+
 class Input:
     ADDRESS = "address"
     HOST_NAME = "host_name"

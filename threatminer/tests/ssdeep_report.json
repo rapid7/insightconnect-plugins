@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "ssdeep_report",
-    "meta": {},
-    "input": {
-      "query": ""
+    "body": {
+        "action": "ssdeep_report",
+        "connection": null,
+        "input": {
+            "query": ""
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

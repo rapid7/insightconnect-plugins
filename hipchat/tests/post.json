@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "post",
-    "input": {
-      "message": "Post message from api",
-      "room_id_or_name": "3489242"
+    "body": {
+        "action": "post",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "version": null
+        },
+        "input": {
+            "message": "Post message from api",
+            "room_id_or_name": "3489242"
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "https://hipchat.com/",
-      "version": "v2",
-      "credentials": {
-        "username": "",
-        "password": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

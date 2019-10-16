@@ -1,22 +1,22 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "input": {},
-    "connection": {
-      "api_version": "auto",
-      "ca_cert": {
-        "secretKey": ""
-      },
-      "client_cert": {
-        "secretKey": ""
-      },
-      "client_key": {
-        "secretKey": ""
-      },
-      "url": "https://localhost:2376"
+    "body": {
+        "action": "image_list",
+        "connection": {
+            "api_version": null,
+            "ca_cert": {
+                "secretKey": null
+            },
+            "client_cert": {
+                "secretKey": null
+            },
+            "client_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "action": "image_list",
-    "meta": {}
-  }
+    "type": "action_start",
+    "version": "v1"
 }

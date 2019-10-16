@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return network activity information associated with a sample"
+
+
 class Input:
     HASH = "hash"
     LIMIT = "limit"

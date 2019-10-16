@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "port_lookup",
-    "input": {
-      "port": 8080
+    "body": {
+        "action": "port_lookup",
+        "connection": null,
+        "input": {
+            "port": 8080
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

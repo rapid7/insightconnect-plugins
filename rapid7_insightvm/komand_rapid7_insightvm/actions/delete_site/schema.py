@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete an existing site"
+
+
 class Input:
     ID = "id"
     

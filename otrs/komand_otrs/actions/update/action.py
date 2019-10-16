@@ -16,6 +16,7 @@ class Update(komand.Action):
                 output=UpdateOutput())
 
     def run(self, params={}):
+        no_article = params.pop("NoArticle")
         client = self.connection.client
         attachments = []
         try:
@@ -51,9 +52,8 @@ class Update(komand.Action):
             new_article = Article(new_article)
 
         # Set attachments
-        if params.get("Attachements"):
-            new_attachments = params.get("Attachments")
-            del(params["Attachments"])
+        if params.get("Attachments"):
+            new_attachments = params.pop("Attachments")
 
 
             for attachment in new_attachments:
@@ -82,18 +82,21 @@ class Update(komand.Action):
 
         other_options = params
 
-        if new_article:
+        if no_article:
+            # If attachment exists it will add default Article
+            if other_options.get("Attachments"):
+                del other_options["Attachments"]
 
             ticket_update_results = client.ticket_update(
                 ticket_id=ticket_id,
-                article=new_article,
-                attachments=attachments,
                 dynamic_fields=dynamic_fields,
                 **other_options
             )
         else:
             ticket_update_results = client.ticket_update(
                 ticket_id=ticket_id,
+                article=new_article,
+                attachments=attachments,
                 dynamic_fields=dynamic_fields,
                 **other_options
             )

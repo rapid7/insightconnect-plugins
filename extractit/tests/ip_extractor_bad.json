@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "ip_extractor",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "file": null,
+            "str": "addresses like 2001:0db8:85a3:0000:0000:8a2e:0370:7334 will never replace addresses like good 192.168.255.255 bad 25.2019.04.16.20.24.45 bad 259.27.400.322"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

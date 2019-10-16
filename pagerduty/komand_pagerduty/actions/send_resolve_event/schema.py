@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Resolve an incident"
+
+
 class Input:
     DESCRIPTION = "description"
     DETAILS = "details"
@@ -48,7 +52,8 @@ class SendResolveEventInput(komand.Input):
     }
   },
   "required": [
-    "incident_key"
+    "incident_key",
+    "service_key"
   ]
 }
     """)

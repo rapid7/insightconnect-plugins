@@ -1,13 +1,13 @@
 {
-  "body": {
-    "action": "forward",
-    "input": {
-      "query": "A",
-      "domain": "asdfasdfasdfasdfasdfads.com"
+    "body": {
+        "action": "forward",
+        "connection": null,
+        "input": {
+            "domain": "asdfasdfasdfasdfasdfads.com",
+            "query": "A"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

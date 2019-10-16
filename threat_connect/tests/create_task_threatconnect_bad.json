@@ -1,30 +1,34 @@
 {
-  "body": {
-    "action": "create_task",
-    "input": {
-      "owner": "No owner",
-      "name": "test_task-1", 
-      "attributes": [{"Description": "Test Description"}], 
-      "tags": "tag1,tag2,tag3,tag4,tag5,tag6",
-      "due_date" : "2017-05-03T00:00:00",
-      "escalation_date" : "2017-05-04T00:00:00",
-      "reminder_date" : "2017-05-05T00:00:00",
-      "escalated" : false,
-      "overdue" : false,
-      "reminded" : false,
-      "status" : "In Progress",
-      "assignee" : "",
-      "escalatee" : "",
-      "security_label": "sec_label"
+    "body": {
+        "action": "create_task",
+        "connection": {
+            "api_access_id": null,
+            "api_base_url": null,
+            "api_default_org": null,
+            "api_secret_key": null
+        },
+        "input": {
+            "assignee": "",
+            "attributes": [
+                {
+                    "Description": "Test Description"
+                }
+            ],
+            "due_date": "2017-05-03T00:00:00",
+            "escalated": false,
+            "escalatee": "",
+            "escalation_date": "2017-05-04T00:00:00",
+            "name": "test_task-1",
+            "overdue": false,
+            "owner": "No owner",
+            "reminded": false,
+            "reminder_date": "2017-05-05T00:00:00",
+            "security_label": "sec_label",
+            "status": "In Progress",
+            "tags": "tag1,tag2,tag3,tag4,tag5,tag6"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_access_id": "",
-      "api_default_org": "",
-      "api_secret_key": "",
-      "api_base_url": "https://sandbox.threatconnect.com/api"
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

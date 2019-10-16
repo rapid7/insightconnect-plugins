@@ -1,23 +1,23 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "input": {
-      "analyzer_id": "",
-      "attributes": {
-        "dataType": "ip",
-        "tlp": 2
-      },
-      "observable": "1.2.3.4"
+    "body": {
+        "action": "run_analyzer",
+        "connection": {
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "analyzer_id": "",
+            "attributes": {
+                "dataType": "ip",
+                "tlp": 2
+            },
+            "observable": "1.2.3.4"
+        },
+        "meta": {}
     },
-    "action": "run_analyzer",
-    "connection": {
-      "proxy": {},
-      "port": "9999",
-      "protocol": "http",
-      "verify": true,
-      "host": ""
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

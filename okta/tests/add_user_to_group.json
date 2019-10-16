@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "add_user_to_group",
-    "input": {
-      "group_id": "00gftwyoqyVBvcpdn0h7",
-      "email": ""
+    "body": {
+        "action": "add_user_to_group",
+        "connection": {
+            "okta_key": {
+                "secretKey": null
+            },
+            "okta_url": null
+        },
+        "input": {
+            "email": "",
+            "group_id": "00gftwyoqyVBvcpdn0h7"
+        },
+        "meta": {}
     },
-    "connection": {
-      "okta_url": "",
-      "okta_key": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

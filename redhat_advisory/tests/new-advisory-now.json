@@ -1,15 +1,15 @@
 {
-  "body": {
-    "meta": {},
-    "input": {
-      "start": ""
+    "body": {
+        "connection": null,
+        "dispatcher": {
+            "url": "http://localhost:8000"
+        },
+        "input": {
+            "start": ""
+        },
+        "meta": {},
+        "trigger": "new_advisory"
     },
-    "dispatcher": {
-      "url": "http://localhost:8000"
-    },
-    "connection": null,
-    "trigger": "new_advisory"
-  },
-  "version": "v1",
-  "type": "trigger_start"
+    "type": "trigger_start",
+    "version": "v1"
 }

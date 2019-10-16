@@ -1,27 +1,27 @@
 {
-  "version": "v1",
-  "body": {
-    "input": {
-      "path": "/query",
-      "parameters": {
-        "db": "komand",
-        "q": "SHOW DATABASES"
-      },
-      "datasource_id": 1
+    "body": {
+        "action": "do_proxied_datasource_call",
+        "connection": {
+            "basic_auth": {
+                "password": null,
+                "username": null
+            },
+            "port": null,
+            "token_auth": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "datasource_id": 1,
+            "parameters": {
+                "db": "komand",
+                "q": "SHOW DATABASES"
+            },
+            "path": "/query"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "basic_auth": {
-        "password": "",
-        "username": ""
-      },
-      "token_auth": {
-        "secretKey": ""
-      },
-      "port": 3000,
-      "url": ""
-    },
-    "action": "do_proxied_datasource_call"
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

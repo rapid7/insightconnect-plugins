@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "remove_from_quarantine",
-    "meta": {},
-    "input": {
-      "mac_address": "00:0A:35:E4:D7:42"
+    "body": {
+        "action": "remove_from_quarantine",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "ssl_verify": null
+        },
+        "input": {
+            "mac_address": "00:0A:35:E4:D7:42"
+        },
+        "meta": {}
     },
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "ssl_verify": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

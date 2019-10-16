@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "organization",
-    "input": {
-      "name": "TestOrg"
+    "body": {
+        "action": "organization",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "input": {
+            "name": "TestOrg"
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

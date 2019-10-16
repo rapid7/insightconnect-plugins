@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "decode",
+        "connection": null,
+        "input": {
+            "url": "rapid7.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

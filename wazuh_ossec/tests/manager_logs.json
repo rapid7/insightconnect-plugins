@@ -1,23 +1,23 @@
 {
-  "body": {
-    "action": "manager_logs",
-    "meta": {},
-    "input": {
-      "category": "",
-      "limit": 0,
-      "offset": 0,
-      "search": "",
-      "sort": "",
-      "type_log": "All"
+    "body": {
+        "action": "manager_logs",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "category": "",
+            "limit": 0,
+            "offset": 0,
+            "search": "",
+            "sort": "",
+            "type_log": "All"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

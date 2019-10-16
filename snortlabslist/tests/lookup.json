@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "lookup",
-    "input": {
-      "address": "212.21.66.6"
+    "body": {
+        "action": "lookup",
+        "connection": null,
+        "input": {
+            "address": "212.21.66.6"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

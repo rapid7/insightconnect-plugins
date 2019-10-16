@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "get",
-    "meta": {},
-    "input": {
-      "xpath": ""
+    "body": {
+        "action": "get",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "verify_cert": null
+        },
+        "input": {
+            "xpath": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "server": "",
-      "verify_cert": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

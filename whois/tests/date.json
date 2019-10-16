@@ -1,12 +1,12 @@
 {
-  "body": {
-    "meta": {},
-    "input": {
-      "domain": "ref.peerce-io.date"
+    "body": {
+        "action": "domain",
+        "connection": null,
+        "input": {
+            "domain": "ref.peerce-io.date"
+        },
+        "meta": {}
     },
-    "action": "domain",
-    "connection": null
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

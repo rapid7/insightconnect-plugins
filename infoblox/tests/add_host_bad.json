@@ -1,22 +1,26 @@
 {
-  "body": {
-    "action": "add_host",
-    "meta": {},
-    "input": {
-      "host": {
-        "ipv4addrs": [{"ipv4addr": "10.10.10.52"}],
-        "name": "abx.info.com"
-      }
+    "body": {
+        "action": "add_host",
+        "connection": {
+            "api_version": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "infoblox_host": null
+        },
+        "input": {
+            "host": {
+                "ipv4addrs": [
+                    {
+                        "ipv4addr": "10.10.10.52"
+                    }
+                ],
+                "name": "abx.info.com"
+            }
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_version": "2.7",
-      "infoblox_host": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

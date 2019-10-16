@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_user",
-    "meta": {},
-    "input": {
-      "id": 1
+    "body": {
+        "action": "get_user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 1
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": "https://insightvm:3780"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

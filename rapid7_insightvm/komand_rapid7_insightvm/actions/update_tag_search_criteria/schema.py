@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update the search criteria for an existing tag"
+
+
 class Input:
     ID = "id"
     SEARCHCRITERIA = "searchCriteria"

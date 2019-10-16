@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return if domain has been flagged as malicious by the Cisco Security Labs team"
+
+
 class Input:
     DOMAINS = "domains"
     

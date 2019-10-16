@@ -6,7 +6,8 @@ description: Joe Sandbox Cloud executes files and URLs fully automated in a cont
   suspicious activities
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - security
 - malware

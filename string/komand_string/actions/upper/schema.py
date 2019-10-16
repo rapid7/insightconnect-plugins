@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Converts lowercase letters to uppercase"
+
+
 class Input:
     STRING = "string"
     

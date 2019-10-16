@@ -1,23 +1,23 @@
 {
-  "body": {
-    "action": "info",
-    "meta": {},
-    "input": {
-      "release": "",
-      "version": "",
-      "arch": "x86_64",
-      "epoch": "",
-      "repo": "http://code.seas.harvard.edu/openstack/devstack/blobs/raw/WORKING_EC2_ESSEX_NOQUANTUM/seas-configs/etc/yum.repos.d/CentOS-Base.repo",
-      "name": "flute",
-      "key": "https://www.centos.org/keys/RPM-GPG-KEY-CentOS-6",
-      "distro": "CentOS 6"
+    "body": {
+        "action": "info",
+        "connection": {
+            "password": null,
+            "server": null,
+            "user": null
+        },
+        "input": {
+            "arch": "x86_64",
+            "distro": "CentOS 6",
+            "epoch": "",
+            "key": "https://www.centos.org/keys/RPM-GPG-KEY-CentOS-6",
+            "name": "flute",
+            "release": "",
+            "repo": "http://code.seas.harvard.edu/openstack/devstack/blobs/raw/WORKING_EC2_ESSEX_NOQUANTUM/seas-configs/etc/yum.repos.d/CentOS-Base.repo",
+            "version": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "server": "",
-      "user": "",
-      "password": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

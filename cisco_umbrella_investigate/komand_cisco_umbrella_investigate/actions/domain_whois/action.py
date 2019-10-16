@@ -1,6 +1,7 @@
 import komand
 from .schema import DomainWhoisInput, DomainWhoisOutput
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class DomainWhois(komand.Action):
@@ -16,8 +17,7 @@ class DomainWhois(komand.Action):
         try:
             domain_whois = self.connection.investigate.domain_whois(domain)
         except Exception as e:
-            self.logger.error("DomainWhois: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         return {"whois": [domain_whois]}
 

@@ -1,23 +1,23 @@
 {
-  "body": {
-    "action": "search",
-    "input": {
-      "query": "komand",
-      "limit": 100
+    "body": {
+        "action": "search",
+        "connection": {
+            "client_id": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "proxy": null
+        },
+        "input": {
+            "limit": 100,
+            "query": "komand"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "host": "",
-      "proxy": "",
-      "client_id": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

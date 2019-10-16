@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     COMMENT = "comment"
+    FIELDS = "fields"
     ID = "id"
     TRANSITION = "transition"
     
@@ -28,6 +29,12 @@ class TransitionIssueInput(komand.Input):
       "title": "Comment",
       "description": "Comment to add",
       "order": 3
+    },
+    "fields": {
+      "type": "object",
+      "title": "Fields",
+      "description": "Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { \\"field1\\": { \\"attribute1\\": \\"value1\\" }, \\"field2\\": { \\"attribute2\\": \\"value2\\" }}",
+      "order": 4
     },
     "id": {
       "type": "string",

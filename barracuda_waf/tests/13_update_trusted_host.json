@@ -1,22 +1,22 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "input": {
-      "mask": "255.255.255.0",
-      "address": "192.168.19.3",
-      "name": "test-v14-trusted-host",
-      "group_name": "test-v14-group",
-      "comments": "test comment"
+    "body": {
+        "action": "update_trusted_host",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "address": "192.168.19.3",
+            "comments": "test comment",
+            "group_name": "test-v14-group",
+            "mask": "255.255.255.0",
+            "name": "test-v14-trusted-host"
+        },
+        "meta": {}
     },
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "action": "update_trusted_host"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

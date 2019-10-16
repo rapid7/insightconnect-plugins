@@ -1,13 +1,13 @@
 {
-  "body": {
-    "action": "filter_string",
-    "input": {
-      "fields": "e1-f3",
-      "csv": "a,b,c,d,e\nf,g,h,i,j\nk,l,m,n,o"
+    "body": {
+        "action": "filter_string",
+        "connection": null,
+        "input": {
+            "csv": "a,b,c,d,e\nf,g,h,i,j\nk,l,m,n,o",
+            "fields": "e1-f3"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

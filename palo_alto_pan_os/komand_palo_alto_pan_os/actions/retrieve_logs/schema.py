@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Queries firewall logs"
+
+
 class Input:
     COUNT = "count"
     DIRECTION = "direction"

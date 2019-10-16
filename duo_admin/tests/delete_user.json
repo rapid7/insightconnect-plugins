@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "delete_user",
-    "meta": {},
-    "input": {
-      "user_id": ""
-    },
-    "connection": {
-        "hostname": "",
-        "integration_key": {
-          "secretKey": ""
+    "body": {
+        "action": "delete_user",
+        "connection": {
+            "hostname": null,
+            "integration_key": {
+                "secretKey": null
+            },
+            "secret_key": {
+                "secretKey": null
+            }
         },
-        "secret_key": {
-          "secretKey": ""
-        }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+        "input": {
+            "user_id": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

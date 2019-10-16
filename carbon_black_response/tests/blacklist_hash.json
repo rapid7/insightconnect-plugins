@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "blacklist_hash",
-    "meta": {},
-    "input": {
-      "md5_hash": "asdfasdfasdfasdf"
+    "body": {
+        "action": "blacklist_hash",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null
+        },
+        "input": {
+            "md5_hash": "asdfasdfasdfasdf"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "ssl_verify": false,
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

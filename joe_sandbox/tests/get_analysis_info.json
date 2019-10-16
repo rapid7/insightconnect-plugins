@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "get_analysis_info",
-    "meta": {},
-    "input": {
-      "webid": "792649"
+    "body": {
+        "action": "get_analysis_info",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "webid": "792649"
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": "",
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

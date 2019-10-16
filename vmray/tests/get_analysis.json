@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "get_analysis",
-    "meta": {},
-    "input": {
-      "id": "1490045",
-      "id_type": "submission",
-      "optional_params": {}
+    "body": {
+        "action": "get_analysis",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": "1490045",
+            "id_type": "submission",
+            "optional_params": {}
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "https://cloud.vmray.com"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

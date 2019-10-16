@@ -1,22 +1,22 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "connection": {
-      "basic_auth": {
-        "password": "",
-        "username": ""
-      },
-      "token_auth": {
-        "secretKey": ""
-      },
-      "port": 3000,
-      "url": ""
+    "body": {
+        "action": "get_organization_users",
+        "connection": {
+            "basic_auth": {
+                "password": null,
+                "username": null
+            },
+            "port": null,
+            "token_auth": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "organization_id": 1
+        },
+        "meta": {}
     },
-    "action": "get_organization_users",
-    "input": {
-      "organization_id": 1
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "vpn_status",
-    "meta": {},
-    "input": {},
-    "connection": {
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "body": {
+        "action": "vpn_status",
+        "connection": {
+            "url": null
+        },
+        "input": {},
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

@@ -24,11 +24,6 @@ class Connection(komand.Connection):
         self.session = requests.Session()
         self.session.headers.update(header)
 
-        assert url is not None and len(url) > 0, \
-            "Connect: Property 'domain' was None or 0 length. Make sure it is marked required."
-        assert key is not None and len(key) > 0, \
-            "Connect: Property 'key' was None or 0 length. Make sure it is marked required."
-
         self.okta_url = url
 
     def test(self):

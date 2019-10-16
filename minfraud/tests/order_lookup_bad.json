@@ -1,25 +1,25 @@
 {
-  "body": {
-    "action": "order_lookup",
-    "connection": {
-      "license": {
-        "secretKey": ""
-      },
-      "user": 118625
+    "body": {
+        "action": "order_lookup",
+        "connection": {
+            "license": {
+                "secretKey": null
+            },
+            "user": null
+        },
+        "input": {
+            "address": "8.8.8.8.8",
+            "order_affiliate_id": "af12",
+            "order_amount": "323.21",
+            "order_currency": "USD",
+            "order_discount_code": "FIRST",
+            "order_has_gift_message": false,
+            "order_is_gift": false,
+            "order_referrer_uri": "http://www.google.com/",
+            "order_subaffiliate_id": "saf42"
+        },
+        "meta": {}
     },
-    "input": {
-      "order_referrer_uri": "http://www.google.com/",
-      "order_is_gift": false,
-      "order_currency": "USD",
-      "address": "8.8.8.8.8",
-      "order_discount_code": "FIRST",
-      "order_has_gift_message": false,
-      "order_affiliate_id": "af12",
-      "order_subaffiliate_id": "saf42",
-      "order_amount": "323.21"
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,24 +1,24 @@
 {
-  "body": {
-    "action": "simple_search",
-    "meta": {},
-    "input": {
-      "text": "Acme"
+    "body": {
+        "action": "simple_search",
+        "connection": {
+            "client_id": null,
+            "client_secret": {
+                "secretKey": null
+            },
+            "salesforce_account_username_and_password": {
+                "password": null,
+                "username": null
+            },
+            "security_token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "text": "Acme"
+        },
+        "meta": {}
     },
-    "connection": {
-      "client_id": "",
-      "client_secret": {
-        "secretKey": ""
-      },
-      "salesforce_account_username_and_password": {
-        "password": "",
-        "username": ""
-      },
-      "security_token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,6 +1,7 @@
 import komand
 from .schema import ResetPasswordInput, ResetPasswordOutput
 # Custom imports below
+from komand.exceptions import PluginException
 from ldap3 import extend
 from komand_active_directory_ldap.util.utils import ADUtils
 
@@ -24,12 +25,14 @@ class ResetPassword(komand.Action):
         ssl = self.connection.ssl
 
         if ssl is False:
-            raise Exception('SSL must be enabled for the reset password action')
+            raise PluginException(cause='SSL must be enabled',
+                                  assistance='SSL must be enabled for the reset password action')
 
         success = extend.ad_modify_password(conn, dn, new_password, old_password=None)
         result = conn.result
 
         if success is False:
-            raise Exception('something went wrong %s' % result)
+            raise PluginException(PluginException.Preset.UNKNOWN,
+                                  data=result)
 
         return {'success': success}

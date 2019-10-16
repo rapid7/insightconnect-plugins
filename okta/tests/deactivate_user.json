@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "deactivate_user",
-    "meta": {},
-    "input": {
-      "email": ""
+    "body": {
+        "action": "deactivate_user",
+        "connection": {
+            "okta_key": {
+                "secretKey": null
+            },
+            "okta_url": null
+        },
+        "input": {
+            "email": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "okta_url": "",
-      "okta_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "delete_scan",
-    "input": {
-      "scan_id": "LOLNOTEXIST"
+    "body": {
+        "action": "delete_scan",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "timeout": null
+        },
+        "input": {
+            "scan_id": "LOLNOTEXIST"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "timeout": 10,
-      "server": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

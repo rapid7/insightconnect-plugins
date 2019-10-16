@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "lookup_user",
-    "meta": {},
-    "input": {
-      "breach": "",
-      "include_unverified": false,
-      "truncate_response": true,
-      "user": "somebody@gmail.com"
+    "body": {
+        "action": "lookup_user",
+        "connection": {
+            "credentials": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "breach": "",
+            "include_unverified": false,
+            "truncate_response": true,
+            "user": "somebody@gmail.com"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

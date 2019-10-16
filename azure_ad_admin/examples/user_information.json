@@ -1,0 +1,17 @@
+{
+  "user_information": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+    "businessPhones": [],
+    "displayName": "Joey McAdams",
+    "givenName": "Joey",
+    "jobTitle": "Sr. Software Engineer",
+    "mail": "",
+    "mobilePhone": "",
+    "officeLocation": "",
+    "preferredLanguage": "",
+    "surname": "McAdams",
+    "userPrincipalName": "jmcadams@komanddev.onmicrosoft.com",
+    "id": "08290005-23ba-46b4-a377-b381d651a2fb",
+    "accountEnabled": true
+  }
+}

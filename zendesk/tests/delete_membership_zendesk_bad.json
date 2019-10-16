@@ -1,22 +1,21 @@
 {
-  "body": {
-    "action": "delete_membership",
-    "input": {
-      "membership_id": "blahBlah"
+    "body": {
+        "action": "delete_membership",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "subdomain": null
+        },
+        "input": {
+            "membership_id": "blahBlah"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "subdomain": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }
-  

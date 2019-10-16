@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "to_ascii",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "domain": "https://www.\u0435\u0440\u0456\u0441.com/"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

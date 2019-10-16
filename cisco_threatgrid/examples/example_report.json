@@ -1,0 +1,99 @@
+{
+  "report": {
+    "properties": {
+      "metadata": null
+    },
+    "tags": [
+      "EICAR"
+    ],
+    "vm_runtime": 300,
+    "md5": "6c9653ef2e223af8fc480c70423250fe",
+    "private": false,
+    "organization_id": 93361,
+    "state": "succ",
+    "login": "joschipp",
+    "sha1": "042980244914e98de9b96abf218f6c926cfed2ec",
+    "sample": "87e6c357fafbc2cfcec1e1432aa03eee",
+    "filename": "aadroid.net_.url",
+    "analysis": {
+      "metadata": {
+        "sandcastle_env": {
+          "controlsubject": "win7-x64-intel-2018.08.09",
+          "vm": "win7-x64",
+          "vm_id": "87e6c357fafbc2cfcec1e1432aa03eee",
+          "sample_executed": 1561476420,
+          "analysis_end": "2019-06-25T15:32:25Z",
+          "analysis_features": [],
+          "analysis_start": "2019-06-25T15:26:13Z",
+          "display_name": "Windows 7 64-bit",
+          "run_time": 300,
+          "sandcastle": "3.5.33.16246.1a4501ed0-1",
+          "current_os": "7601.18798.amd64fre.win7sp1_gdr.150316-1654"
+        },
+        "submitted_file": {
+          "magic": "MS Windows 95 Internet shortcut text (URL=<http://aadroid.net>), ASCII text",
+          "sha1": "042980244914e98de9b96abf218f6c926cfed2ec",
+          "filename": "aadroid.net_.url",
+          "sha256": "95fe2192da12930617b37419574e0e2800e61be0cd8958de2aea44d2053b9699",
+          "type": "url",
+          "md5": "6c9653ef2e223af8fc480c70423250fe"
+        },
+        "general_details": {
+          "report_created": "2019-06-25T15:32:28Z",
+          "sandbox_version": "pilot-d",
+          "sandbox_id": "mtv-work-034"
+        },
+        "malware_desc": [
+          {
+            "sha1": "042980244914e98de9b96abf218f6c926cfed2ec",
+            "magic": "MS Windows 95 Internet shortcut text (URL=<http://aadroid.net>), ASCII text",
+            "filename": "aadroid.net_.url",
+            "size": 42,
+            "sha256": "95fe2192da12930617b37419574e0e2800e61be0cd8958de2aea44d2053b9699",
+            "type": "url",
+            "md5": "6c9653ef2e223af8fc480c70423250fe"
+          }
+        ],
+        "analyzed_file": {
+          "magic": "MS Windows 95 Internet shortcut text (URL=<http://aadroid.net>), ASCII text",
+          "sha1": "042980244914e98de9b96abf218f6c926cfed2ec",
+          "filename": "aadroid.net_.url",
+          "sha256": "95fe2192da12930617b37419574e0e2800e61be0cd8958de2aea44d2053b9699",
+          "type": "url",
+          "md5": "6c9653ef2e223af8fc480c70423250fe"
+        }
+      },
+      "behaviors": [
+        {
+          "name": "network-file-downloaded-to-disk",
+          "threat": 27,
+          "title": "File Downloaded to Disk"
+        },
+        {
+          "name": "js-uses-fromcharcode",
+          "threat": 40,
+          "title": "JavaScript Obfuscation Using \"fromCharCode()\" Function"
+        },
+        {
+          "name": "url-not-found",
+          "threat": 6,
+          "title": "URL Resulted in 404 or Empty File"
+        },
+        {
+          "name": "network-communications-http-get-url",
+          "threat": 6,
+          "title": "Outbound HTTP GET Request From URL Submission"
+        },
+        {
+          "name": "http-response-server-error",
+          "threat": 25,
+          "title": "HTTP Server Error Response"
+        }
+      ],
+      "threat_score": 40
+    },
+    "status": "job_done",
+    "submitted_at": "2019-06-25T15:26:11Z",
+    "sha256": "95fe2192da12930617b37419574e0e2800e61be0cd8958de2aea44d2053b9699"
+  }
+}

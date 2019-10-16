@@ -1,21 +1,21 @@
 {
-  "body": {
-    "action": "execute_one",
-    "input": {
-      "operation": "show tables",
-      "parameters": ""
+    "body": {
+        "action": "execute_one",
+        "connection": {
+            "catalog": null,
+            "host": null,
+            "poll_interval": null,
+            "port": null,
+            "schema": null,
+            "source": null,
+            "username": null
+        },
+        "input": {
+            "operation": "show tables",
+            "parameters": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "username": "",
-      "poll_interval": 1,
-      "host": "",
-      "source": "pyhive",
-      "catalog": "jmx",
-      "port": 8080,
-      "schema": "jmx"
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "hincrby",
-    "meta": {},
-    "input": {
-      "field": "lawl",
-      "key": "derp",
-      "value": 4
+    "body": {
+        "action": "hincrby",
+        "connection": {
+            "db": null,
+            "host": null,
+            "port": null
+        },
+        "input": {
+            "field": "lawl",
+            "key": "derp",
+            "value": 4
+        },
+        "meta": {}
     },
-    "connection": {
-      "db": 0,
-      "host": "",
-      "port": 7001
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

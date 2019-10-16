@@ -1,16 +1,16 @@
 {
-  "body": {
-    "action": "manager_status",
-    "meta": {},
-    "input": {},
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "body": {
+        "action": "manager_status",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {},
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

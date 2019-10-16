@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "search_for_sample_report_by_sha256",
+        "input": {
+            "sha256": "95fe2192da12930617b37419574e0e2800e61be0cd8958de2aea44d2053b9699"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

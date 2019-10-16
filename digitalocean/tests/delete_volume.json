@@ -2,8 +2,8 @@
     "body": {
         "action": "delete_volume",
         "connection": {
-            "token":{
-                "secretKey": ""
+            "token": {
+                "secretKey": null
             }
         },
         "input": {

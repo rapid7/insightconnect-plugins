@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get vulnerability details associated with a CVE"
+
+
 class Input:
     CVE_ID = "cve_id"
     

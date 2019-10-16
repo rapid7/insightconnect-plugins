@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "detect_encoding",
-    "meta": {},
-    "input": {
-      "bytes_to_analyze": "V2hlbiBJIHdhcyAxNywgSSBkcmFuayBteSB2ZXJ5IGZpcnN0IGJlZXIuLi4gLUhvbWVyIFNpbXBzb24="
+    "body": {
+        "action": "detect_encoding",
+        "connection": null,
+        "input": {
+            "bytes_to_analyze": "V2hlbiBJIHdhcyAxNywgSSBkcmFuayBteSB2ZXJ5IGZpcnN0IGJlZXIuLi4gLUhvbWVyIFNpbXBzb24="
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

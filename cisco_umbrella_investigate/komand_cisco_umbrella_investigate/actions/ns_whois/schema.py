@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Allows you to search a nameserver to find all domains registered by that nameserver"
+
+
 class Input:
     NAMESERVER = "nameserver"
     
@@ -87,9 +91,9 @@ class NsWhoisOutput(komand.Output):
         }
       },
       "required": [
-        "more_data_available",
+        "domains",
         "limit",
-        "domains"
+        "more_data_available"
       ],
       "definitions": {
         "whois_domain": {
@@ -110,8 +114,8 @@ class NsWhoisOutput(komand.Output):
             }
           },
           "required": [
-            "domain",
-            "current"
+            "current",
+            "domain"
           ]
         }
       }
@@ -134,8 +138,8 @@ class NsWhoisOutput(komand.Output):
         }
       },
       "required": [
-        "domain",
-        "current"
+        "current",
+        "domain"
       ]
     }
   }

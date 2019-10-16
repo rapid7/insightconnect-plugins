@@ -3,9 +3,9 @@
         "action": "extract_archive",
         "connection": null,
         "input": {
-            "archive":{
-                "filename": "test.zip",
-                "content": ""
+            "archive": {
+                "content": "",
+                "filename": "test.zip"
             }
         },
         "meta": {}

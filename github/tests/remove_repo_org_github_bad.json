@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "remove",
-    "input": {
-      "username": "blah",
-      "organization": "testkomand",
-      "repository": "fakeRepo"
+    "body": {
+        "action": "remove",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "organization": "testkomand",
+            "repository": "fakeRepo",
+            "username": "blah"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

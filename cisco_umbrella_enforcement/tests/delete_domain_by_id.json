@@ -1,16 +1,16 @@
 {
-  "body": {
-    "action": "delete_domain_by_id",
-    "meta": {},
-    "input": {
-      "ID": 28698821
+    "body": {
+        "action": "delete_domain_by_id",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "ID": 28698821
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

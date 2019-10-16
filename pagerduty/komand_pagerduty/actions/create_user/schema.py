@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a User"
+
+
 class Input:
     EMAIL = "email"
     FROM_EMAIL = "from_email"
@@ -54,9 +58,9 @@ class CreateUserInput(komand.Input):
     }
   },
   "required": [
-    "name",
     "email",
-    "from_email"
+    "from_email",
+    "name"
   ]
 }
     """)
@@ -164,8 +168,8 @@ class CreateUserOutput(komand.Output):
         }
       },
       "required": [
-        "name",
-        "email"
+        "email",
+        "name"
       ]
     }
   }

@@ -7,7 +7,8 @@ description: WiGLE (Wireless Geographic Logging Engine) consolidates location an
   web
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - network
 - location

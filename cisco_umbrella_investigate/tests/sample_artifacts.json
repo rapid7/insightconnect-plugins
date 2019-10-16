@@ -1,16 +1,16 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "sample_artifacts",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "hash": "414e38ed0b5d507734361c2ba94f734252ca33b8259ca32334f32c4dba69b01c"
+        },
+        "meta": {}
     },
-    "action": "sample_artifacts",
-    "input": {
-      "hash": "414e38ed0b5d507734361c2ba94f734252ca33b8259ca32334f32c4dba69b01c"
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

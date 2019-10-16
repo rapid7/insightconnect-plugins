@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "download_report",
-    "meta": {},
-    "input": {
-      "id": 265,
-      "instance": "latest"
+    "body": {
+        "action": "download_report",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 265,
+            "instance": "latest"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

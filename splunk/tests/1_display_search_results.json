@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "display_search_results",
+        "input": {
+            "job_id": "1568823056.87599",
+            "timeout": 0
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

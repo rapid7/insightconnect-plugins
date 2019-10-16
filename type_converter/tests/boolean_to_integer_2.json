@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "boolean_to_integer",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "input": true
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

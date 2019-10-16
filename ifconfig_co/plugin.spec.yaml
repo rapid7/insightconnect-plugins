@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: ifconfig_co
 title: ifconfig.co
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: An IP Address Lookup API
 version: 1.0.1
 tags:

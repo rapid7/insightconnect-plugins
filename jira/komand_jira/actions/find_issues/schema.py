@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    GET_ATTACHMENTS = "get_attachments"
     JQL = "jql"
     MAX = "max"
     
@@ -22,6 +23,13 @@ class FindIssuesInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "get_attachments": {
+      "type": "boolean",
+      "title": "Get Attachments",
+      "description": "Get attachments from issue",
+      "default": false,
+      "order": 3
+    },
     "jql": {
       "type": "string",
       "title": "JQL",

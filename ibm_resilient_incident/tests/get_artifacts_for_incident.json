@@ -2,9 +2,9 @@
     "body": {
         "action": "get_artifacts_for_incident",
         "connection": {
-            "email": "",
-            "hostname": "",
-            "password": ""
+            "email": null,
+            "hostname": null,
+            "password": null
         },
         "input": {
             "incident_id": 2110,

@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_vulnerabilities_by_cve",
-    "meta": {},
-    "input": {
-      "cve_id": "CVE-2008-4250"
+    "body": {
+        "action": "get_vulnerabilities_by_cve",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "cve_id": "CVE-2008-4250"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": "https://insightvm:3780"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

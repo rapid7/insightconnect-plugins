@@ -1,0 +1,14 @@
+{
+    "body": {
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "message": "Timer went off!",
+            "minute": 28
+        },
+        "meta": {},
+        "trigger": "hourly"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

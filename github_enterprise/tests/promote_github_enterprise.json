@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "promote",
-    "input": {
-      "user": "jon"
+    "body": {
+        "action": "promote",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "input": {
+            "user": "jon"
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,23 +1,26 @@
 {
-  "body": {
-    "action": "get_event",
-    "input": {
-      "with": ["indicators", "adversaries"],
-      "id": 6
+    "body": {
+        "action": "get_event",
+        "connection": {
+            "client_id": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "proxy": null
+        },
+        "input": {
+            "id": 6,
+            "with": [
+                "indicators",
+                "adversaries"
+            ]
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "host": "",
-      "proxy": "",
-      "client_id": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

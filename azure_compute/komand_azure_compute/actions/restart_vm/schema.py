@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Restart a virtual machine"
+
+
 class Input:
     RESOURCEGROUP = "resourceGroup"
     SUBSCRIPTIONID = "subscriptionId"
@@ -39,8 +43,8 @@ class RestartVmInput(komand.Input):
     }
   },
   "required": [
-    "subscriptionId",
     "resourceGroup",
+    "subscriptionId",
     "vm"
   ]
 }

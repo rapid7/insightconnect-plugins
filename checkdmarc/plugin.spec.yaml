@@ -4,7 +4,8 @@ title: Checkdmarc
 description: A Python module and command line parser for SPF and DMARC records
 version: 2.1.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - checkdmarc
 - SPF

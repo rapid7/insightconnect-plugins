@@ -1,14 +1,16 @@
 {
-  "body": {
-    "action": "process_string",
-    "input": {
-      "expression": ["p"],
-      "options": "",
-      "string": "one\ntwo\nthree"
+    "body": {
+        "action": "process_string",
+        "connection": null,
+        "input": {
+            "expression": [
+                "p"
+            ],
+            "options": "",
+            "string": "one\ntwo\nthree"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

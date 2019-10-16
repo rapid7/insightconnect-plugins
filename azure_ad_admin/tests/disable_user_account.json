@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "disable_user_account",
+        "input": {
+            "user_id": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

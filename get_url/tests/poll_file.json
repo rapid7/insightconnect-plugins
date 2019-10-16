@@ -1,17 +1,17 @@
 {
-  "body": {
-    "input": {
-      "url": "http://www.irongeek.com/robots.txt",
-      "poll": 5,
-      "is_verify": true
+    "body": {
+        "connection": null,
+        "dispatcher": {
+            "url": "http://localhost:8000"
+        },
+        "input": {
+            "is_verify": true,
+            "poll": 5,
+            "url": "http://www.irongeek.com/robots.txt"
+        },
+        "meta": {},
+        "trigger": "poll_file"
     },
-    "connection": null,
-    "trigger": "poll_file",
-    "meta": {},
-    "dispatcher": {
-      "url": "http://localhost:8000"
-    }
-  },
-  "version": "v1",
-  "type": "trigger_start"
+    "type": "trigger_start",
+    "version": "v1"
 }

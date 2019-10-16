@@ -2,7 +2,6 @@ import komand
 from .schema import ProcessStringInput, ProcessStringOutput, Input, Output
 # Custom imports below
 import subprocess
-import pipes
 
 
 class ProcessString(komand.Action):
@@ -27,15 +26,11 @@ class ProcessString(komand.Action):
         else:
             raise Exception('The sed expression must not be an empty string')
 
-        esc_str = pipes.quote(input_str)
-        echo_cmd = f"echo ${esc_str}"
         sed_cmd = f"sed {sed_opts} {sed_exp}"
 
-        process0 = subprocess.Popen(echo_cmd, shell=True, stdout=subprocess.PIPE)
-        process1 = subprocess.Popen(sed_cmd, shell=True, stdin=process0.stdout, stdout=subprocess.PIPE)
-        output = process1.communicate()[0]
+        p = subprocess.Popen(sed_cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+        output = p.communicate(input=input_str.encode())[0]
 
-        output = output[1:-1]         # Remove leading "$" and trailing newline
         output = output.decode("utf-8")
 
         return {Output.OUTPUT: output}

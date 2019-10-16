@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "filepath_extractor",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "file": null,
+            "str": "hello you might want to checkout this /tmp/image.jpg and /code/script.py"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

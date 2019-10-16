@@ -1,26 +1,26 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "action": "run_file_analyzer",
-    "input": {
-      "analyzer_id": "EmlParser_1_0",
-      "attributes": {
-        "tlp": 1,
-        "filename": "Hello.txt"
-      },
-      "file": "SGVsbG8gV29ybGQsIHRoaXMgaXMgYSB0ZXN0Cg=="
+    "body": {
+        "action": "run_file_analyzer",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "analyzer_id": "EmlParser_1_0",
+            "attributes": {
+                "filename": "Hello.txt",
+                "tlp": 1
+            },
+            "file": "SGVsbG8gV29ybGQsIHRoaXMgaXMgYSB0ZXN0Cg=="
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "",
-      "api_key": {
-        "secretKey": ""
-      },
-      "verify": true,
-      "proxy": {},
-      "protocol": "HTTP",
-      "port": "9001"
-    },
-    "meta": {}
-  }
+    "type": "action_start",
+    "version": "v1"
 }

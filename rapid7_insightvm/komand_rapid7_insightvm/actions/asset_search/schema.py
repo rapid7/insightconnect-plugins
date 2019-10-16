@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search for assets using filtered asset search"
+
+
 class Input:
     SEARCHCRITERIA = "searchCriteria"
     

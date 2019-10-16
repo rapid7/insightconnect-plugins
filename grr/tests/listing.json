@@ -2,17 +2,16 @@
     "body": {
         "action": "listing",
         "connection": {
-            "api_endpoint": "",
+            "api_endpoint": null,
             "credentials": {
-              "username": "",
-              "password": ""
+                "password": null,
+                "username": null
             },
-            "ssl_verify": false
+            "ssl_verify": null
         },
         "input": {
             "clients": true,
             "query": "host:anonymous"
-
         },
         "meta": {}
     },

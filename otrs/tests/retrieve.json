@@ -1,18 +1,18 @@
 {
-  "body": {
-    "meta": {},
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": "root@localhost"
-      },
-      "server": ""
+    "body": {
+        "action": "retrieve",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null
+        },
+        "input": {
+            "ticket_id": 67
+        },
+        "meta": {}
     },
-    "input": {
-      "ticket_id": 67
-    },
-    "action": "retrieve"
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

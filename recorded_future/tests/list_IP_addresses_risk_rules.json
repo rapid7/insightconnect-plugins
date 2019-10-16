@@ -1,12 +1,12 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "input": {},
-    "connection": {
-      "api_key": ""
+    "body": {
+        "action": "list_IP_addresses_risk_rules",
+        "connection": {
+            "api_key": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "action": "list_IP_addresses_risk_rules",
-    "meta": {}
-  }
+    "type": "action_start",
+    "version": "v1"
 }

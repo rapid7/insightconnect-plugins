@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "decode_url",
+        "connection": {
+            "app_id": null,
+            "app_key": {
+                "secretKey": null
+            },
+            "auth_type": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "encoded_url": "https://protect-us.mimecast.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,5 +1,5 @@
 FROM komand/python-3-plugin
-LABEL organization=komand
+LABEL organization=rapid7
 LABEL sdk=python
 LABEL type=plugin
 

@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_metadata",
-    "meta": {},
-    "input": {
-      "mcc": "288",
-      "mnc": ""
+    "body": {
+        "action": "get_metadata",
+        "connection": {
+            "name": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "mcc": "288",
+            "mnc": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "name": "",
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

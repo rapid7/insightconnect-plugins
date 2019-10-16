@@ -4,7 +4,8 @@ title: Google Apps Admin
 description: Google Admin Actions
 version: 1.0.2
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - google
 - admin

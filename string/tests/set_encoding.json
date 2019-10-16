@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "set_encoding",
+        "connection": null,
+        "input": {
+            "encoding": "ASCII",
+            "error_handling": "replace",
+            "string": "\ud83d\ude08"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

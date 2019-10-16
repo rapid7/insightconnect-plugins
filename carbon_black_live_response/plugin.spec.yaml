@@ -7,7 +7,8 @@ description: The Cb Response Live Response feature allows security operators to 
   entries, dump contents of physical memory, execute and terminate processes
 version: 1.0.0
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - carbon black
 - live response

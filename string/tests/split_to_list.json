@@ -1,13 +1,13 @@
 {
-  "body": {
-    "action": "split_to_list",
-    "meta": {},
-    "input": {
-      "delimiter": " ",
-      "string": "This is a sentence"
+    "body": {
+        "action": "split_to_list",
+        "connection": null,
+        "input": {
+            "delimiter": " ",
+            "string": "This is a sentence"
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

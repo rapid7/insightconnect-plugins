@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "get_agent",
-    "meta": {},
-    "input": {
-      "agent_id": "",
-      "fields": []
+    "body": {
+        "action": "get_agent",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "api_version": null,
+            "org_id": null,
+            "timeout": null
+        },
+        "input": {
+            "agent_id": "",
+            "fields": []
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "api_version": 1,
-      "org_id": "",
-      "timeout": 120
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

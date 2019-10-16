@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "lookup_domain",
-    "meta": {},
-    "input": {
-      "domain": "google.com"
+    "body": {
+        "action": "lookup_domain",
+        "connection": null,
+        "input": {
+            "domain": "google.com"
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "upper",
-    "meta": {},
-    "input": {
-      "string": "ldap"
+    "body": {
+        "action": "upper",
+        "connection": null,
+        "input": {
+            "string": "ldap"
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,0 +1,26 @@
+{
+    "body": {
+        "action": "insert",
+        "connection": {
+            "access_key": {
+                "secretKey": null
+            },
+            "region": null,
+            "secret_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "data": {
+                "enabled": true,
+                "ordinal": 40,
+                "uname": "James2"
+            },
+            "index": "",
+            "table": "komand_test_2"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

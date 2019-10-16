@@ -35,9 +35,9 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "verify_cert",
+    "credentials",
     "server",
-    "credentials"
+    "verify_cert"
   ],
   "definitions": {
     "credential_username_password": {

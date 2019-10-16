@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "unsuspend_user",
-    "input": {
-      "email": ""
+    "body": {
+        "action": "unsuspend_user",
+        "connection": {
+            "okta_key": {
+                "secretKey": null
+            },
+            "okta_url": null
+        },
+        "input": {
+            "email": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "okta_url": "",
-      "okta_key": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

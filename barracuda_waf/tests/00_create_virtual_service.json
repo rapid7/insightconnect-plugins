@@ -1,25 +1,25 @@
 {
-  "body": {
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
+    "body": {
+        "action": "create_virtual_service",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "address": "192.168.19.1",
+            "address_version": "ipv4",
+            "certificate": "",
+            "group": "default",
+            "name": "test-v14-virtual-service",
+            "port": 8080,
+            "service_hostname": "test",
+            "type": "http"
+        },
+        "meta": {}
     },
-    "action": "create_virtual_service",
-    "input": {
-      "name": "test-v14-virtual-service",
-      "group": "default",
-      "type": "http",
-      "port": 8080,
-      "address": "192.168.19.1",
-      "address_version": "ipv4",
-      "certificate": "",
-      "service_hostname": "test"
-    },
-    "meta": {}
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

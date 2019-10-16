@@ -1,25 +1,25 @@
 {
-  "body": {
-    "action": "create_issue",
-    "meta": {},
-    "input": {
-      "attachment_bytes": "",
-      "attachment_filename": "",
-      "description": "Test test",
-      "fields": {},
-      "project": "",
-      "summary": "Test issue",
-      "type": "Blah"
+    "body": {
+        "action": "create_issue",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "input": {
+            "attachment_bytes": "",
+            "attachment_filename": "",
+            "description": "Test test",
+            "fields": {},
+            "project": "",
+            "summary": "Test issue",
+            "type": "Blah"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "project": "TEST",
-      "url": "https://komand-demo.atlassian.net"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

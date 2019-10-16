@@ -4,6 +4,8 @@ title: Shodan
 description: A Search Engine for Internet-Connected Devices
 version: 1.0.0
 vendor: rapid7
+support: community
+status: []
 tags:
 - intel
 - scan

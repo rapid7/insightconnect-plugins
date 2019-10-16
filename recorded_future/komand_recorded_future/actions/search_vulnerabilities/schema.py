@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action is used to search for data related to vulnerabilities"
+
+
 class Input:
     DIRECTION = "direction"
     FREETEXT = "freetext"
@@ -70,11 +74,11 @@ class SearchVulnerabilitiesInput(komand.Input):
     }
   },
   "required": [
-    "from",
-    "orderby",
     "direction",
     "freetext",
-    "limit"
+    "from",
+    "limit",
+    "orderby"
   ]
 }
     """)

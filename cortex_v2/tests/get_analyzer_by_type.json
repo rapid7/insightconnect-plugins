@@ -1,21 +1,21 @@
 {
-  "version": "v1",
-  "body": {
-    "action": "get_analyzer_by_type",
-    "input": {
-      "type": "domain"
+    "body": {
+        "action": "get_analyzer_by_type",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "type": "domain"
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "",
-      "api_key": {
-        "secretKey": ""
-      },
-      "verify": true,
-      "proxy": {},
-      "protocol": "HTTP",
-      "port": "9001"
-    },
-    "meta": {}
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

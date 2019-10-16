@@ -1,22 +1,22 @@
 {
-  "body": {
-    "action": "add_fixed_address",
-    "meta": {},
-    "input": {
-      "address": {
-        "ipv4addr": "10.10.10.5",
-        "mac": "aa:bb:cc:11:22:35"
-      }
+    "body": {
+        "action": "add_fixed_address",
+        "connection": {
+            "api_version": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "infoblox_host": null
+        },
+        "input": {
+            "address": {
+                "ipv4addr": "10.10.10.5",
+                "mac": "aa:bb:cc:11:22:35"
+            }
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_version": "2.7",
-      "infoblox_host": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,12 +1,12 @@
 {
-  "body": {
-    "meta": {},
-    "input": {
-      "domain": "ntgridgenerator.online"
+    "body": {
+        "action": "domain",
+        "connection": null,
+        "input": {
+            "domain": "ntgridgenerator.online"
+        },
+        "meta": {}
     },
-    "action": "domain",
-    "connection": null
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

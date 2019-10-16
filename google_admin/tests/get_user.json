@@ -1,25 +1,25 @@
 {
-  "body": {
-    "action": "get_user",
-    "meta": {},
-    "input": {
-      "user": ""
+    "body": {
+        "action": "get_user",
+        "connection": {
+            "admin_user": null,
+            "auth_provider_x509_cert_url": null,
+            "auth_uri": null,
+            "client_email": null,
+            "client_id": null,
+            "client_x509_cert_url": null,
+            "private_key": {
+                "privateKey": null
+            },
+            "private_key_id": null,
+            "project_id": null,
+            "token_uri": null
+        },
+        "input": {
+            "user": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "admin_user": "",
-      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "client_email": "",
-      "client_id": "",
-      "client_x509_cert_url": "",
-      "private_key": {
-        "privateKey": ""
-      },
-      "private_key_id": "",
-      "project_id": "",
-      "token_uri": "https://accounts.google.com/o/oauth2/token"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

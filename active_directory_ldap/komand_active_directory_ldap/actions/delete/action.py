@@ -1,6 +1,7 @@
 import komand
 from .schema import DeleteInput, DeleteOutput
 # Custom imports below
+from komand.exceptions import PluginException
 from komand_active_directory_ldap.util.utils import ADUtils
 
 
@@ -27,4 +28,5 @@ class Delete(komand.Action):
             return {'success': True}
 
         self.logger.error('failed: error message %s' % output)
-        raise Exception('failed: error message %s' % output)
+        raise PluginException(PluginException.Preset.UNKNOWN,
+                              assistance='failed: error message %s' % output)

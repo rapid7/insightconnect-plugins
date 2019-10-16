@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: bhr
 title: BHR
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Block addresses using the Black Hole Router
 version: 1.0.0
 tags:

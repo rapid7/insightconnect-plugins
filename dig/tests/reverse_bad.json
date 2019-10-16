@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "reverse",
-    "input": {
-      "address": "1.1.1.1.1"
+    "body": {
+        "action": "reverse",
+        "connection": null,
+        "input": {
+            "address": "1.1.1.1.1"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

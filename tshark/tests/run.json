@@ -1,14 +1,14 @@
 {
-  "body": {
-    "action": "run",
-    "meta": {},
-    "input": {
-      "file": "",
-      "filter": "ip or ipv6",
-      "options": ""
+    "body": {
+        "action": "run",
+        "connection": null,
+        "input": {
+            "file": "",
+            "filter": "ip or ipv6",
+            "options": ""
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -411,7 +411,7 @@ class MimecastRequests:
                     'Unknown error. The Mimecast server did not respond correctly. Response in logs')
 
         try:
-            if response['fail']:
+            if response['meta']['status'] != 200:
                 self.logger.error(response['fail'])
                 logout = Authentication()
                 logout.logout(url, username, password,

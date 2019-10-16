@@ -1,21 +1,21 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "connection": {
-      "url": "",
-      "ssl_verify": false,
-      "username": "",
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "get_collection",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username": null
+        },
+        "input": {
+            "collection": "Actors",
+            "params": {},
+            "total": 1
+        },
+        "meta": {}
     },
-    "action": "get_collection",
-    "input": {
-      "total": 1,
-      "params": {},
-      "collection": "Actors"
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

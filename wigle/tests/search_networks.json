@@ -1,35 +1,35 @@
 {
-  "body": {
-    "action": "search_networks",
-    "meta": {},
-    "input": {
-      "encryption": "None",
-      "endTransID": "",
-      "freenet": false,
-      "lastupdt": "",
-      "latrange1": 30,
-      "latrange2": 35,
-      "longrange1": 132,
-      "longrange2": 135,
-      "minQoS": 3,
-      "netid": "",
-      "notmine": "",
-      "onlymine": "",
-      "paynet": false,
-      "resultsPerPage": 0,
-      "searchAfter": 0,
-      "ssid": "",
-      "ssidlike": "%setup%",
-      "startTransID": "20150603-00000",
-      "variance": 0.03
+    "body": {
+        "action": "search_networks",
+        "connection": {
+            "name": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "encryption": "None",
+            "endTransID": "",
+            "freenet": false,
+            "lastupdt": "",
+            "latrange1": 30,
+            "latrange2": 35,
+            "longrange1": 132,
+            "longrange2": 135,
+            "minQoS": 3,
+            "netid": "",
+            "notmine": "",
+            "onlymine": "",
+            "paynet": false,
+            "resultsPerPage": 0,
+            "searchAfter": 0,
+            "ssid": "",
+            "ssidlike": "%setup%",
+            "startTransID": "20150603-00000",
+            "variance": 0.03
+        },
+        "meta": {}
     },
-    "connection": {
-      "name": "",
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

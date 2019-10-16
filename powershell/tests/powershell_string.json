@@ -1,25 +1,25 @@
 {
-  "body": {
-    "action": "powershell_string",
-    "meta": {},
-    "input": {
-      "address": "",
-      "host_name": "",
-      "script": "$test = \"bob\";$test2 = ' said hello';echo 'Mr $test  $test2';echo \"Mr $test $test2\";echo \"$test `n $test2\";$myarray = @(1,5,6,8);echo $myarray[1]"
+    "body": {
+        "action": "powershell_string",
+        "connection": {
+            "auth": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "kerberos": {
+                "domain_name": null,
+                "kdc": null
+            },
+            "port": null
+        },
+        "input": {
+            "address": "",
+            "host_name": "",
+            "script": "$test = \"bob\";$test2 = ' said hello';echo 'Mr $test  $test2';echo \"Mr $test $test2\";echo \"$test `n $test2\";$myarray = @(1,5,6,8);echo $myarray[1]"
+        },
+        "meta": {}
     },
-    "connection": {
-      "auth": "None",
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "kerberos": {
-        "domain_name": "",
-        "kdc": ""
-      },
-      "port": 5986
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

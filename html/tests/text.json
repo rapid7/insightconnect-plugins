@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "text",
+        "connection": null,
+        "input": {
+            "doc": "<a href='www.google.com'>This is a link</a> <i>this is some text</i>"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

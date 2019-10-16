@@ -1,16 +1,18 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "categorization",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "domains": [
+                "google.pl"
+            ]
+        },
+        "meta": {}
     },
-    "action": "categorization",
-    "input": {
-      "domains": ["google.pl"]
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

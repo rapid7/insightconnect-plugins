@@ -22,12 +22,10 @@ class Investigate(object):
     DEFAULT_SORT = None
     IP_PATTERN = re.compile(r'(\d{1,3}\.){3}\d{1,3}')
 
-    DOMAIN_ERR = ValueError("domains must be a string or a list of strings")
-    IP_ERR = ValueError("invalid IP address")
-    UNSUPPORTED_DNS_QUERY = ValueError("supported query types are: {}"
-        .format(SUPPORTED_DNS_TYPES)
-    )
-    SEARCH_ERR = ValueError("Start argument must be a datetime or a timedelta")
+    DOMAIN_ERR = "Domains must be a string or a list of strings"
+    IP_ERR = "Invalid IP address"
+    UNSUPPORTED_DNS_QUERY = "Supported query types are: {}".format(SUPPORTED_DNS_TYPES)
+    SEARCH_ERR = "Start argument must be a datetime or a timedelta"
 
     def __init__(self, api_key, proxies={}):
         self.api_key = api_key
@@ -114,7 +112,7 @@ class Investigate(object):
         elif type(domains) is list:
             return self._post_categorization(domains, labels)
         else:
-            raise Investigate.DOMAIN_ERR
+            raise PluginException(cause='Unable to retrieve domain information.', assistance=Investigate.DOMAIN_ERR)
 
     def cooccurrences(self, domain):
         '''Get the cooccurrences of the given domain.
@@ -160,7 +158,7 @@ class Investigate(object):
         For details, see https://sgraph.opendns.com/docs/api#dnsrr_domain
         '''
         if query_type not in Investigate.SUPPORTED_DNS_TYPES:
-            raise Investigate.UNSUPPORTED_DNS_QUERY
+            raise PluginException(cause='Unable to retrieve resource record.', assistance=Investigate.UNSUPPORTED_DNS_QUERY)
 
         # if this is an IP address, query the IP
         if Investigate.IP_PATTERN.match(query):
@@ -174,7 +172,7 @@ class Investigate(object):
         IP address, if any. Returns the list of malicious domains.
         '''
         if not Investigate.IP_PATTERN.match(ip):
-            raise Investigate.IP_ERR
+            raise PluginException(cause='Unable to retrieve domains for IP address.', assistance='Please try submitting another address.')
 
         uri = self._uris["latest_domains"].format(ip)
         resp_json = self.get_parse(uri)
@@ -239,7 +237,7 @@ class Investigate(object):
         elif isinstance(start, datetime.datetime):
             params['start'] = int(time.mktime(start.timetuple()) * 1000)
         else:
-            raise Investigate.SEARCH_ERR
+            raise PluginException(cause='Unable to retrieve domains for search.', assistance=Investigate.SEARCH_ERR)
         
         if limit is not None and isinstance(limit, int):
             params['limit'] = limit
@@ -296,7 +294,7 @@ class Investigate(object):
     def as_for_ip(self, ip):
         '''Gets the AS information for a given IP address.'''
         if not Investigate.IP_PATTERN.match(ip):
-            raise Investigate.IP_ERR
+            raise PluginException(cause='Unable to retrieve AS for IP address.', assistance='Please try submitting another address.')
 
         uri = self._uris["as_for_ip"].format(ip)
         resp_json = self.get_parse(uri)

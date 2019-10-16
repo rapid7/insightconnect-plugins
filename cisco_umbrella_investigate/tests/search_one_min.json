@@ -1,19 +1,19 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "search",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "expression": "paypal.*",
+            "include_category": true,
+            "limit": 0,
+            "start": "1minutes"
+        },
+        "meta": {}
     },
-    "action": "search",
-    "input": {
-      "expression": "paypal.*",
-      "start": "1minutes",
-      "include_category": true,
-      "limit": 0
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

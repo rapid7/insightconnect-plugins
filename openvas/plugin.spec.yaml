@@ -4,7 +4,8 @@ title: OpenVAS
 description: The Open Vulnerability Assessment System (OpenVAS)
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - openvas
 - vulnerability

@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "get_report_html",
-    "input": {
-      "scan_id": "ed582e15-76be-4fe0-8402-3958ae656840"
+    "body": {
+        "action": "get_report_html",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "ssl_verify": null,
+            "timeout": null
+        },
+        "input": {
+            "scan_id": "ed582e15-76be-4fe0-8402-3958ae656840"
+        },
+        "meta": {}
     },
-    "connection": {
-      "ssl_verify": true,
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "timeout": 10,
-      "server": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

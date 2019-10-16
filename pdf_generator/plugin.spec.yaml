@@ -6,7 +6,8 @@ description: The Portable Document Format (PDF) is a file format developed by Ad
   independent of application software, hardware, and operating systems
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - pdf
 - document

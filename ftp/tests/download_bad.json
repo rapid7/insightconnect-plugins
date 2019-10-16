@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "download",
-    "input": {
-      "path": "this_file_doesnt_exist"
+    "body": {
+        "action": "download",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "passive": null,
+            "secure": null
+        },
+        "input": {
+            "path": "this_file_doesnt_exist"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "host": "ftp.gnu.org",
-      "secure": false,
-      "credentials": {
-        "password": "anonymous",
-        "username": "anonymous"
-      },
-      "passive": true
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

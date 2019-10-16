@@ -2,9 +2,9 @@
     "body": {
         "action": "list_all_incidents",
         "connection": {
-          "api_key": {
-             "secretKey": ""
-           }
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {
             "created_after": "",

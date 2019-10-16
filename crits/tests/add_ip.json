@@ -1,22 +1,22 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "input": {
-      "ip": "250.14.50.172",
-      "source": "Faker Vault",
-      "type": "IPv4 Address",
-      "params": {}
+    "body": {
+        "action": "add_ip",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username": null
+        },
+        "input": {
+            "ip": "250.14.50.172",
+            "params": {},
+            "source": "Faker Vault",
+            "type": "IPv4 Address"
+        },
+        "meta": {}
     },
-    "action": "add_ip",
-    "meta": {},
-    "connection": {
-      "url": "",
-      "ssl_verify": false,
-      "username": "",
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

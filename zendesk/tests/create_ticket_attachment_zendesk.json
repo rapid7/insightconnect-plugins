@@ -1,24 +1,26 @@
 {
-  "body": {
-    "action": "create_ticket",
-    "input": {
-      "attachment": {"content": "Hello", "filename": "hello.txt"},
-      "subject": "hello Subject",
-      "description": "Hello description"
+    "body": {
+        "action": "create_ticket",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "subdomain": null
+        },
+        "input": {
+            "attachment": {
+                "content": "Hello",
+                "filename": "hello.txt"
+            },
+            "description": "Hello description",
+            "subject": "hello Subject"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "subdomain": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }
-  

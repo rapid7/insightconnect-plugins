@@ -1,26 +1,29 @@
 {
-  "body": {
-    "action": "get_fields",
-    "meta": {},
-    "input": {
-      "fields": ["Name", "PhotoUrl"],
-      "object_name": "Account",
-      "record_id": "0011t00000FPQVKAA5"
+    "body": {
+        "action": "get_fields",
+        "connection": {
+            "client_id": null,
+            "client_secret": {
+                "secretKey": null
+            },
+            "salesforce_account_username_and_password": {
+                "password": null,
+                "username": null
+            },
+            "security_token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "fields": [
+                "Name",
+                "PhotoUrl"
+            ],
+            "object_name": "Account",
+            "record_id": "0011t00000FPQVKAA5"
+        },
+        "meta": {}
     },
-    "connection": {
-      "client_id": "",
-      "client_secret": {
-        "secretKey": ""
-      },
-      "salesforce_account_username_and_password": {
-        "password": "",
-        "username": ""
-      },
-      "security_token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

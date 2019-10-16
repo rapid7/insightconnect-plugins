@@ -1,19 +1,19 @@
 {
-  "body": {
-    "meta": {},
-    "input": {
-      "from_email": "",
-      "role": "admin",
-      "email": "",
-      "name": ""
+    "body": {
+        "action": "create_user",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "email": "",
+            "from_email": "",
+            "name": "",
+            "role": "admin"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    },
-    "action": "create_user"
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get scans with optional site filter"
+
+
 class Input:
     ACTIVE = "active"
     ID = "id"

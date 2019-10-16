@@ -6,7 +6,7 @@ from komand_red_canary import connection, actions, triggers
 
 Name = 'Red Canary'
 Vendor = 'rapid7'
-Version = '2.1.2'
+Version = '2.1.4'
 Description = 'Managed endpoint detection and response'
 
 

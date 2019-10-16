@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get the details for an authentication source"
+
+
 class Input:
     ID = "id"
     

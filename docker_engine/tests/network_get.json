@@ -1,24 +1,24 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "api_version": "auto",
-      "ca_cert": {
-        "secretKey": ""
-      },
-      "client_cert": {
-        "secretKey": ""
-      },
-      "client_key": {
-        "secretKey": ""
-      },
-      "url": "https://localhost:2376"
+    "body": {
+        "action": "network_get",
+        "connection": {
+            "api_version": null,
+            "ca_cert": {
+                "secretKey": null
+            },
+            "client_cert": {
+                "secretKey": null
+            },
+            "client_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": "c9623d91c3244605d64f79d6ebee5b982fb350e70780a93461abff561f9388af"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-      "id": "c9623d91c3244605d64f79d6ebee5b982fb350e70780a93461abff561f9388af"
-    },
-    "action": "network_get"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

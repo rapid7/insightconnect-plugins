@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action is used to search for results related to a specific parent domain"
+
+
 class Input:
     DIRECTION = "direction"
     FROM = "from"
@@ -71,10 +75,10 @@ class SearchDomainsInput(komand.Input):
   },
   "required": [
     "direction",
-    "parent",
-    "limit",
     "from",
-    "orderby"
+    "limit",
+    "orderby",
+    "parent"
   ]
 }
     """)

@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: github_enterprise
 title: GitHub Enterprise
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: GitHub Enterprise is the on-premises version of GitHub
 version: 1.0.0
 tags:

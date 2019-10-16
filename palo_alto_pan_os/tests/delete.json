@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "delete",
-    "meta": {},
-    "input": {
-      "xpath": "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/virus/entry[@name='new bad profile']"
+    "body": {
+        "action": "delete",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "verify_cert": null
+        },
+        "input": {
+            "xpath": "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/virus/entry[@name='new bad profile']"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "server": "",
-      "verify_cert": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

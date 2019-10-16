@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: ipinfo
 title: IPinfo
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Query IP Address Information
 version: 1.0.1
 tags:

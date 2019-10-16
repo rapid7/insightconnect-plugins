@@ -1,14 +1,14 @@
 {
-  "body": {
-    "meta": {},
-    "action": "get_screenshots",
-    "input": {
-      "task_id": 1
+    "body": {
+        "action": "get_screenshots",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "task_id": 1
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": ""
-    }
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

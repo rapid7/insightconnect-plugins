@@ -1,26 +1,26 @@
 {
-  "body": {
-    "action": "create_issue",
-    "input": {
-      "title": "Test_love",
-      "content": "Test Content body",
-      "repository": "test_repo",
-      "assignee": "",  
-      "milestone": "", 
-      "component": "compo", 
-      "version": "",     
-      "kind": "Bug",           
-      "priority": "None",   
-      "state": "None"
+    "body": {
+        "action": "create_issue",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "assignee": "",
+            "component": "compo",
+            "content": "Test Content body",
+            "kind": "Bug",
+            "milestone": "",
+            "priority": "None",
+            "repository": "test_repo",
+            "state": "None",
+            "title": "Test_love",
+            "version": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

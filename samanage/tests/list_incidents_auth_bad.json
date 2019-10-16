@@ -1,15 +1,15 @@
 {
-  "body": {
-    "action": "list_incidents",
-    "meta": {},
-    "input": {},
-    "connection": {
-      "eu_customer": false,
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "body": {
+        "action": "list_incidents",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {},
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

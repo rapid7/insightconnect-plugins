@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "clam_av",
+        "connection": {
+            "access_key": {
+                "secretKey": null
+            },
+            "secret_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "directory": "/home/ubuntu/test",
+            "instance_id": "i-07c446962cf4b1b55",
+            "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEAn33EHOFbd/FjA4gEmYS9FPP8qmCfsQzM99IV/bICWXTIOO7+vhPca+9ZkB7a\n48lGA7Elc/WZYOBQix4uwOrmvkHKU+BhVueIUpqadFknfsTfX1ctCCmF8cdQGDmR0gEZBIc0Z+5t\n176BVDIeyhG/gm3IJVjEUxNeovcTNuPP8rSCP5SMhELRJtEEvepgyFCUO+MXgzeZXa2klyAcC9MS\nwZf/QqHmJu8GHxnqWr/rOWAcoLVGuT1UG8K54r/T8NjtDr0fZAH2b+61qXCByBkB7oxxjxtjadBL\nj6pcub+gPnPEKoEleMaNG0Syuwy3mxDtRI8Ht0rV93TiPR8R5osQfQIDAQABAoIBAQCV3SpC7Ory\n6GnebpfL3TOClcSsH8DOL7YFg23Qhcy5XAern77UwnrTHQOubZ/GfGECpRkJPhTSN9TW9BSAh/kr\ne0xvxh4Q99xbqhRKEWAQOVOfFZ4l1kabKmqzaJ0BlLB6VcVDh4HFQKfrgnD19PlbyGZR2XgYi9HY\nFYwDfsruRXu2X00Hgc/sRf4O4TVBPXuhGbCIeW+OXPPEIBpWjR0apll995SWCWAuexe5QEnLW19Q\noO2hHls1pqotK2lnCWS97b5ICxuqUp1sHYea0ybgC2Pb0AGDpXiw/YeqJ3cqloElxyuOBxuWcEOh\nwDWGslxsV/T0smm1TcDCTiN7VxahAoGBAN7BEiSVZrqwjOvLXNE0TpiP7rUgseRiEsFR2v39noHa\n4GrY3X2nQtBkB4cecfzild3bXEr38H+cbq/pPBAi9SeSXxVzlFijVDjvtgq27D6+9NRHqqLJCTeg\nluk1nuqubXKP5B7jR9PV2uqHMw/Mt439tL/jHoMh3ZV9b8qPVADpAoGBALdLkFKHX3SO5KcRU7sC\ni/zd1JvYDo4m5j5T9SlV0Gn5kmspIcVTJVfumSgbeb0WPMrCCZod0BgYrDdryqqbJhDoPzVtgZWU\nLGhV/rWsBC+ce5/1pkhMHAkgqlkZUXRQ93MnquJakbPdVxU/Gq4b0D+1coA2ndP8Jo3acLxP2bZ1\nAoGBALKlhTdx2oG/NkWlQztFCAOy6264WfMf9Iq2aztoO8dJEtKeOoSbsCoRDzh+Yky+LBNR6iL1\n1huCCgNqupD2eEbUTQ2XNFIiK1m+ZfER40YvP4tALsl/EbVbRayjJGByo7RNUlazUNfDm16cL4ds\nV4m4/00liUMB1gQeJZn+eRCBAoGBALHB6Wvv9wWt0leneSFCvgn0A81DghIf7WiCuZ5lp6Ius+2S\nzTp1gSC+tu9rfet/lmM4PGGnCflkbBevRLOhlRAOe8ZPtb0fHtXsmAENml2mD0o4zBMPJJ1BfZK8\n9/6qyt91l8a++NCLFnn3YeN5+8LdL/bhgLxlq+oj7vLhKY1FAoGAIZRYHV3Tn1WrLiz1NdqzMof0\nxOTWkC6xOYr/hGPYq+b1z8nidwE+f3XnXM4y6ugWRFUhmrQAZq2siaZPOWLCRhIbX7GYjtn0YuZE\nSt8r/0A+2uSUOXIZak1RyzPnCEG2PbHZ6fKe91onefWyVJcgH3n9/apmVy806z4ULQpaes0=\n-----END RSA PRIVATE KEY-----",
+            "region": "us-east-1",
+            "user": "ubuntu"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

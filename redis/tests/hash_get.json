@@ -1,16 +1,16 @@
 {
-  "body": {
-    "input": {
-      "key": "hashfoo"
+    "body": {
+        "action": "hash_get",
+        "connection": {
+            "db": null,
+            "host": null,
+            "port": null
+        },
+        "input": {
+            "key": "hashfoo"
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "",
-      "db": 0,
-      "port": 6379
-    },
-    "meta": {},
-    "action": "hash_get"
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

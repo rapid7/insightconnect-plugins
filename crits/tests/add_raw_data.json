@@ -1,28 +1,28 @@
 {
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "url": "",
-      "ssl_verify": false,
-      "username": "",
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "add_raw_data",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username": null
+        },
+        "input": {
+            "data": "Similique autem quidem inventore eos aperiam assumenda praesentium. Esse quo consequuntur ullam neque impedit repudiandae repellendus. Excepturi facere quod quo possimus.",
+            "data_type": "Text",
+            "file": {
+                "content": "RWxpZ2VuZGkgbW9sZXN0aWFzIHNpdCB2aXRhZSBkZWxlbml0aSBhbGlxdWlkIG9mZmljaWEgaXBzYW0uIFF1aXNxdWFtIGVvcyBjdW0gcXVhbSBleHBlZGl0YSBzb2x1dGEuIE1hZ25pIG1pbnVzIHZlbGl0IGJsYW5kaXRpaXMgYW5pbWkgdm9sdXB0YXRlbS4=",
+                "filename": "raw_data.b64.txt"
+            },
+            "params": {},
+            "source": "Faker Vault",
+            "title": "Foo Bar",
+            "type": "metadata"
+        },
+        "meta": {}
     },
-    "action": "add_raw_data",
-    "meta": {},
-    "input": {
-      "data_type": "Text",
-      "params": {},
-      "source": "Faker Vault",
-      "type": "metadata",
-      "data": "Similique autem quidem inventore eos aperiam assumenda praesentium. Esse quo consequuntur ullam neque impedit repudiandae repellendus. Excepturi facere quod quo possimus.",
-      "title": "Foo Bar",
-      "file": {
-        "content": "RWxpZ2VuZGkgbW9sZXN0aWFzIHNpdCB2aXRhZSBkZWxlbml0aSBhbGlxdWlkIG9mZmljaWEgaXBzYW0uIFF1aXNxdWFtIGVvcyBjdW0gcXVhbSBleHBlZGl0YSBzb2x1dGEuIE1hZ25pIG1pbnVzIHZlbGl0IGJsYW5kaXRpaXMgYW5pbWkgdm9sdXB0YXRlbS4=",
-        "filename": "raw_data.b64.txt"
-      }
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

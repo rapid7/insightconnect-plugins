@@ -1,0 +1,103 @@
+plugin_spec_version: v2
+name: ec2_investigations
+title: EC2 Investigations
+vendor: rapid7
+support: community
+status: []
+description: EC2 Investigations
+version: 1.0.0
+tags:
+- ec2
+- aws
+types:
+  malicious_files:
+    file:
+      type: string
+      required: false
+    owner:
+      type: string
+      required: false
+    hash_value:
+      type: string
+      required: false
+    created_time:
+      type: string
+      required: false
+connection:
+  secret_key:
+    title: Secret Key
+    description: Secret access key
+    type: credential_secret_key
+    required: true
+  access_key:
+    title: Access Key
+    description: Access Key ID
+    type: credential_secret_key
+    required: true
+actions:
+  mount_drive:
+    title: Mount Drive
+    description: Mount drive
+    input:
+      instance_id:
+        description: Instance ID
+        type: string
+        required: true
+      region:
+        description: Region
+        type: string
+        required: true
+      private_key:
+        description: Private key
+        type: string
+        required: true
+      user:
+        description: User name
+        type: string
+        required: true
+      directory:
+        type: string
+        description: Directory
+        required: true
+      device:
+        type: string
+        description: Device
+        required: true
+    output:
+      directory:
+        type: string
+        description: Directory
+        required: false
+      status:
+        type: string
+        description: Status
+        required: false
+  clam_av:
+    title: Clam AV
+    description: Scan directory with ClamAV
+    input:
+      instance_id:
+        description: Instance ID
+        type: string
+        required: true
+      region:
+        description: Region
+        type: string
+        required: true
+      private_key:
+        description: Private key
+        type: string
+        required: true
+      user:
+        description: User name
+        type: string
+        required: true
+      directory:
+        type: string
+        description: Directory to scan
+        required: true
+    output:
+      malware:
+        type: '[]malicious_files'
+        description: Malware
+        required: false

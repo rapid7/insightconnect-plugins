@@ -1,19 +1,18 @@
 {
     "body": {
-      "action": "get_users",
-      "input": {},
-      "connection": {
-        "hostname": "",
-        "integration_key": {
-          "secretKey": ""
+        "action": "get_users",
+        "connection": {
+            "hostname": null,
+            "integration_key": {
+                "secretKey": null
+            },
+            "secret_key": {
+                "secretKey": null
+            }
         },
-        "secret_key": {
-          "secretKey": ""
-        }
+        "input": {},
+        "meta": {}
     },
-      "meta": {}
-    },
-    "version": "v1",
-    "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }
-  

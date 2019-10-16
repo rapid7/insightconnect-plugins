@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "get_monitor_alerts",
-    "input": {
-      "project": "My Public Project",
-      "artifact": "",
-      "start": "",
-      "end": ""
+    "body": {
+        "action": "get_monitor_alerts",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "artifact": "",
+            "end": "",
+            "project": "My Public Project",
+            "start": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "username": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

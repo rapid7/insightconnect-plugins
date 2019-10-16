@@ -1,24 +1,24 @@
 {
-  "body": {
-    "action": "rootcheck_database",
-    "meta": {},
-    "input": {
-      "agent_id": "",
-      "cis": "",
-      "limit": 0,
-      "offset": 0,
-      "pci": "",
-      "search": "",
-      "sort": ""
+    "body": {
+        "action": "rootcheck_database",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "agent_id": "",
+            "cis": "",
+            "limit": 0,
+            "offset": 0,
+            "pci": "",
+            "search": "",
+            "sort": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

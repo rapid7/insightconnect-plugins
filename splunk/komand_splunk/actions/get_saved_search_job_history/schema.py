@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the job history of a specified saved search"
+
+
 class Input:
     SAVED_SEARCH_NAME = "saved_search_name"
     

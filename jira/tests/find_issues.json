@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "find_issues",
-    "meta": {},
-    "input": {
-      "jql": "asdf",
-      "max": 10
+    "body": {
+        "action": "find_issues",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "input": {
+            "jql": "asdf",
+            "max": 10
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "project": "test",
-      "url": "https://komand-demo4.atlassian.net"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,20 +1,20 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "input": {
-      "payment_decline_code": "card_declined",
-      "address": "8.8.8.8.8",
-      "payment_was_authorized": true,
-      "payment_processor": "stripe"
+    "body": {
+        "action": "payment_lookup",
+        "connection": {
+            "license": {
+                "secretKey": null
+            },
+            "user": null
+        },
+        "input": {
+            "address": "8.8.8.8.8",
+            "payment_decline_code": "card_declined",
+            "payment_processor": "stripe",
+            "payment_was_authorized": true
+        },
+        "meta": {}
     },
-    "meta": {},
-    "action": "payment_lookup",
-    "connection": {
-      "license": {
-        "secretKey": ""
-      },
-      "user": 118625
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

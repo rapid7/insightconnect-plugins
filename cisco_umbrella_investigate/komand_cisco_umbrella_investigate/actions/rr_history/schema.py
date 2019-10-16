@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return the history that Umbrella has seen for a given domain"
+
+
 class Input:
     DOMAIN = "domain"
     TYPE = "type"
@@ -68,8 +72,8 @@ class RrHistoryOutput(komand.Output):
     }
   },
   "required": [
-    "rrs_tf",
-    "features"
+    "features",
+    "rrs_tf"
   ],
   "definitions": {
     "feature": {
@@ -228,8 +232,8 @@ class RrHistoryOutput(komand.Output):
         }
       },
       "required": [
-        "is_subdomain",
-        "base_domain"
+        "base_domain",
+        "is_subdomain"
       ]
     },
     "resource_record": {

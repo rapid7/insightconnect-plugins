@@ -1,13 +1,13 @@
 {
-  "body": {
-    "action": "replace",
-    "meta": {},
-    "input": {
-      "expression": "-s [:space:] ' '",
-      "text": "Way    too   many              spaces"
+    "body": {
+        "action": "replace",
+        "connection": null,
+        "input": {
+            "expression": "-s [:space:] ' '",
+            "text": "Way    too   many              spaces"
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "suspend_user",
-    "meta": {},
-    "input": {
-      "email": "unknown@blah.com"
+    "body": {
+        "action": "suspend_user",
+        "connection": {
+            "okta_key": {
+                "secretKey": null
+            },
+            "okta_url": null
+        },
+        "input": {
+            "email": "unknown@blah.com"
+        },
+        "meta": {}
     },
-    "connection": {
-      "okta_url": "",
-      "okta_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Save an image of a virtual machine (VM must be stopped and generalized before saving an image)"
+
+
 class Input:
     DESTINATIONCONTAINERNAME = "destinationContainerName"
     OVERWRITEVHDS = "overwriteVhds"
@@ -61,12 +65,12 @@ class SaveImageVmInput(komand.Input):
     }
   },
   "required": [
-    "subscriptionId",
-    "resourceGroup",
-    "vm",
-    "vhdPrefix",
     "destinationContainerName",
-    "overwriteVhds"
+    "overwriteVhds",
+    "resourceGroup",
+    "subscriptionId",
+    "vhdPrefix",
+    "vm"
   ]
 }
     """)

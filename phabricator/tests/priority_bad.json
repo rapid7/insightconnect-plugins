@@ -1,18 +1,18 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "action": "priority",
-    "input": {
-      "id": "1",
-      "priority": "lower"
+    "body": {
+        "action": "priority",
+        "connection": {
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": "1",
+            "priority": "lower"
+        },
+        "meta": {}
     },
-    "connection": {
-      "token": {
-        "secretKey": ""
-      },
-      "url": ""
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

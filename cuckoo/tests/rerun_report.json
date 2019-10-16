@@ -1,14 +1,14 @@
 {
-  "body": {
-    "action": "rerun_report",
-    "meta": {},
-    "input": {
-      "task_id": 0
+    "body": {
+        "action": "rerun_report",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "task_id": 0
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

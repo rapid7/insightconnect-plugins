@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Process bytes of base64 encoded string"
+
+
 class Input:
     BYTES = "bytes"
     EXPRESSION = "expression"

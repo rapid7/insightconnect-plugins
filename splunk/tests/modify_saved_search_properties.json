@@ -1,23 +1,23 @@
 {
-  "body": {
-    "action": "modify_saved_search_properties",
-    "meta": {},
-    "input": {
-      "properties": {},
-      "saved_search_name": ""
+    "body": {
+        "action": "modify_saved_search_properties",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "license": null,
+            "port": null,
+            "ssl_verify": null,
+            "use_ssl": null
+        },
+        "input": {
+            "properties": {},
+            "saved_search_name": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "host": "",
-      "license": "Enterprise",
-      "port": 8089,
-      "ssl_verify": false,
-      "use_ssl": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }
