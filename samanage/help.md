@@ -652,7 +652,7 @@ Example output:
       "name": "Tom",
       "disabled": false,
       "title": "Panic",
-      "email": "20180913dp@gmail.com",
+      "email": "20180913dp@example.com",
       "created_at": "2018-11-21T12:28:31.000-05:00",
       "phone": "12345678",
       "mobile_phone": "87654321",

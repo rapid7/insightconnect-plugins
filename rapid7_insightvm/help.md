@@ -3303,7 +3303,7 @@ Example output:
         "name": "Builtin Administrators",
         "type": "admin"
       },
-      "email": "user@example.com",
+      "email": "blaah@rapid7testesc.com",
       "enabled": true,
       "id": 1,
       "links": [
@@ -3337,8 +3337,8 @@ Example output:
         "reports": "en-US"
       },
       "locked": false,
-      "login": "user1",
-      "name": "user1",
+      "login": "blaah",
+      "name": "blaah",
       "role": {
         "allAssetGroups": true,
         "allSites": true,
@@ -3423,7 +3423,7 @@ Example output:
       "name": "Builtin Administrators",
       "type": "admin"
     },
-    "email": "user1@example.com",
+    "email": "blaah@rapid7testesc.com",
     "enabled": true,
     "id": 1,
     "links": [
@@ -3457,8 +3457,8 @@ Example output:
       "reports": "en-US"
     },
     "locked": false,
-    "login": "user1",
-    "name": "user1",
+    "login": "blaah",
+    "name": "blaah",
     "role": {
       "allAssetGroups": true,
       "allSites": true,

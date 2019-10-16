@@ -42,11 +42,11 @@ Example output:
        "path": "awssec_pkg.egg-info/PKG-INFO",
        "branch": "origin/master",
        "commit": "Clean up\n",
-       "diff": "@@ -0,0 +1,16 @@\n+Metadata-Version: 2.1\n+Name: awssec-pkg\n+Version: 1.0.0\n+Summary: AWS security posture\n+Home-page: https://github.com/rephric/awssec\n+Author: Zachary Estrella\n+Author-email: zjestrella1@gmail.com\n+License: UNKNOWN\n+Description: AKIAIEXK7JLP3GHRLHBA\n+        0SKunBVneoNiRJQAkfd0NumqsQJZ455aAFMrT5mv\n+        \n+Platform: UNKNOWN\n+Classifier: Programming Language :: Python :: 3.6.5\n+Classifier: License :: OSI Approved :: MIT License\n+Classifier: Operating System :: OS Independent\n+Description-Content-Type: text/markdown\n",
+       "diff": "@@ -0,0 +1,16 @@\n+Metadata-Version: 2.1\n+Name: awssec-pkg\n+Version: 1.0.0\n+Summary: AWS security posture\n+Home-page: https://github.com/rephric/awssec\n+Author: Zachary Estrella\n+Author-email: zjestrella1@example.com\n+License: UNKNOWN\n+Description: AKIAIEXK7JLP3GHRLHBA\n+        0SKunBVneoNiRJQAkfd0NumqsQJZ455aAFMrT5mv\n+        \n+Platform: UNKNOWN\n+Classifier: Programming Language :: Python :: 3.6.5\n+Classifier: License :: OSI Approved :: MIT License\n+Classifier: Operating System :: OS Independent\n+Description-Content-Type: text/markdown\n",
        "stringsFound": [
          "0SKunBVneoNiRJQAkfd0NumqsQJZ455aAFMrT5mv"
        ],
-       "printDiff": "@@ -0,0 +1,16 @@\n+Metadata-Version: 2.1\n+Name: awssec-pkg\n+Version: 1.0.0\n+Summary: AWS security posture\n+Home-page: https://github.com/rephric/awssec\n+Author: Zachary Estrella\n+Author-email: zjestrella1@gmail.com\n+License: UNKNOWN\n+Description: AKIAIEXK7JLP3GHRLHBA\n+        \u001b[93m0SKunBVneoNiRJQAkfd0NumqsQJZ455aAFMrT5mv\u001b[0m\n+        \n+Platform: UNKNOWN\n+Classifier: Programming Language :: Python :: 3.6.5\n+Classifier: License :: OSI Approved :: MIT License\n+Classifier: Operating System :: OS Independent\n+Description-Content-Type: text/markdown\n",
+       "printDiff": "@@ -0,0 +1,16 @@\n+Metadata-Version: 2.1\n+Name: awssec-pkg\n+Version: 1.0.0\n+Summary: AWS security posture\n+Home-page: https://github.com/rephric/awssec\n+Author: Zachary Estrella\n+Author-email: zjestrella1@example.com\n+License: UNKNOWN\n+Description: AKIAIEXK7JLP3GHRLHBA\n+        \u001b[93m0SKunBVneoNiRJQAkfd0NumqsQJZ455aAFMrT5mv\u001b[0m\n+        \n+Platform: UNKNOWN\n+Classifier: Programming Language :: Python :: 3.6.5\n+Classifier: License :: OSI Approved :: MIT License\n+Classifier: Operating System :: OS Independent\n+Description-Content-Type: text/markdown\n",
        "commitHash": "31f671b298c122ee35855395ef4a137fb261c545",
        "reason": "High Entropy",
        "url": "https://github.com/rephric/awssec/commit/31f671b298c122ee35855395ef4a137fb261c545"
