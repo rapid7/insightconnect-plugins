@@ -3303,7 +3303,7 @@ Example output:
         "name": "Builtin Administrators",
         "type": "admin"
       },
-      "email": "nxadmin@rapid7testesc.com",
+      "email": "user@example.com",
       "enabled": true,
       "id": 1,
       "links": [
@@ -3337,8 +3337,8 @@ Example output:
         "reports": "en-US"
       },
       "locked": false,
-      "login": "nxadmin",
-      "name": "nxadmin",
+      "login": "user1",
+      "name": "user1",
       "role": {
         "allAssetGroups": true,
         "allSites": true,
@@ -3423,7 +3423,7 @@ Example output:
       "name": "Builtin Administrators",
       "type": "admin"
     },
-    "email": "nxadmin@rapid7testesc.com",
+    "email": "user1@example.com",
     "enabled": true,
     "id": 1,
     "links": [
@@ -3457,8 +3457,8 @@ Example output:
       "reports": "en-US"
     },
     "locked": false,
-    "login": "nxadmin",
-    "name": "nxadmin",
+    "login": "user1",
+    "name": "user1",
     "role": {
       "allAssetGroups": true,
       "allSites": true,
