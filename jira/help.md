@@ -430,7 +430,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "mike_rinehart@example.com",
+              "emailAddress": "bob_ross@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -447,7 +447,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "mike_rinehart@example.com",
+              "emailAddress": "bob_ross@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -483,7 +483,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "mike_rinehart@example.com",
+                      "emailAddress": "bob_ross@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -500,7 +500,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "mike_rinehart@example.com",
+                      "emailAddress": "bob_ross@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -557,7 +557,7 @@ Example output:
       "id": "10000",
       "author": {
           "name": "admin",
-          "email_address": "mike_rinehart@example.com",
+          "email_address": "bob_ross@example.com",
           "display_name": "Mike Rinehart",
           "active": true
       },
@@ -567,7 +567,7 @@ Example output:
           "name": "admin",
           "key": "admin",
           "accountId": "5bd733f3f8460347a10cbdd9",
-          "emailAddress": "mike_rinehart@example.com",
+          "emailAddress": "bob_ross@example.com",
           "avatarUrls": {
               "48x48": "",
               "24x24": "",
@@ -788,7 +788,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "mike_rinehart@example.com",
+              "emailAddress": "bob_ross@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -805,7 +805,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "mike_rinehart@example.com",
+              "emailAddress": "bob_ross@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -841,7 +841,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "mike_rinehart@example.com",
+                      "emailAddress": "bob_ross@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -858,7 +858,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "mike_rinehart@example.com",
+                      "emailAddress": "bob_ross@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
