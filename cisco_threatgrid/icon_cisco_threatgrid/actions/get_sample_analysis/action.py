@@ -56,7 +56,7 @@ def clean_data(analysis_data):
     :param analysis_data API get analysis request
     :return:
     """
-    data = None
+    data = {}
 
     if analysis_data.get("data"):
         data = analysis_data.get("data")
@@ -80,7 +80,7 @@ def clean_data(analysis_data):
 
 def clean_artifact(artifact_data):
     items = []
-    data = None
+    data = {}
 
     if artifact_data.get("data"):
         data = artifact_data.get("data")
@@ -117,6 +117,8 @@ def clean_artifact(artifact_data):
 
 
 def clean_annotations(annotation_data):
+    data = {}
+
     if annotation_data.get("data"):
         data = annotation_data.get("data")
 

@@ -2,7 +2,7 @@ plugin_spec_version: v2
 name: cisco_threatgrid
 title: Cisco ThreatGrid
 description: Threat Grid combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware
-version: 1.2.0
+version: 1.2.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -758,9 +758,9 @@ types:
       required: false
   query_hash_artifact:
     sha256:
-      title: "Sha256"
+      title: "SHA256"
       type: string
-      description: "Sha256"
+      description: "SHA256"
       required: false
   reversing_labs_artifact:
     classification:
@@ -1191,9 +1191,9 @@ types:
       description: "Magic"
       required: false
     mime:
-      title: "Mime"
+      title: "MIME"
       type: string
-      description: "Mime"
+      description: "MIME"
       required: false
     name:
       title: "Name"
@@ -1953,7 +1953,6 @@ types:
       type: sandcastle_env_metadata
       description: "Sandcastle env"
       required: false
-
 
   artifact_report:
     api_version:

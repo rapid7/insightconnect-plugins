@@ -93,10 +93,8 @@ class ThreatGrid:
             results = resp.json()
             return results
         except JSONDecodeError:
-            raise Exception(
-                f"Error: Received an unexpected response from {action_name}"
-                f"(non-JSON or no response was received). Response was: {resp.text}"
-            )
+            raise PluginException(cause=f"Error: Received an unexpected response from {action_name}.",
+                                  assistance=f"(non-JSON or no response was received). Response was: {resp.text}")
 
     def submit_sample(self, data, files):
         """

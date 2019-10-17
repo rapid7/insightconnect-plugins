@@ -3303,8 +3303,7 @@ Example output:
         "name": "Builtin Administrators",
         "type": "admin"
       },
-      "email": "nxadmin@example.com",
-      "email": "blaah@rapid7testesc.com",
+      "email": "blaah@example.com",
       "enabled": true,
       "id": 1,
       "links": [
@@ -3424,8 +3423,7 @@ Example output:
       "name": "Builtin Administrators",
       "type": "admin"
     },
-    "email": "nxadmin@example.com",
-    "email": "blaah@rapid7testesc.com",
+    "email": "blaah@example.com",
     "enabled": true,
     "id": 1,
     "links": [

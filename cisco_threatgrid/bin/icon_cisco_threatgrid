@@ -6,7 +6,7 @@ from icon_cisco_threatgrid import connection, actions, triggers
 
 Name = 'Cisco ThreatGrid'
 Vendor = 'rapid7'
-Version = '1.2.0'
+Version = '1.2.1'
 Description = 'Threat Grid combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware'
 
 

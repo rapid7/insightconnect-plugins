@@ -486,8 +486,8 @@ class GetSampleAnalysisOutput(komand.Output):
           "properties": {
             "sha256": {
               "type": "string",
-              "title": "Sha256",
-              "description": "Sha256",
+              "title": "SHA256",
+              "description": "SHA256",
               "order": 1
             }
           }
@@ -588,8 +588,8 @@ class GetSampleAnalysisOutput(komand.Output):
               "properties": {
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 1
                 }
               }
@@ -781,8 +781,8 @@ class GetSampleAnalysisOutput(komand.Output):
               "properties": {
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 1
                 }
               }
@@ -883,8 +883,8 @@ class GetSampleAnalysisOutput(komand.Output):
                   "properties": {
                     "sha256": {
                       "type": "string",
-                      "title": "Sha256",
-                      "description": "Sha256",
+                      "title": "SHA256",
+                      "description": "SHA256",
                       "order": 1
                     }
                   }
@@ -1196,8 +1196,8 @@ class GetSampleAnalysisOutput(komand.Output):
                   "properties": {
                     "sha256": {
                       "type": "string",
-                      "title": "Sha256",
-                      "description": "Sha256",
+                      "title": "SHA256",
+                      "description": "SHA256",
                       "order": 1
                     }
                   }
@@ -1298,8 +1298,8 @@ class GetSampleAnalysisOutput(komand.Output):
                       "properties": {
                         "sha256": {
                           "type": "string",
-                          "title": "Sha256",
-                          "description": "Sha256",
+                          "title": "SHA256",
+                          "description": "SHA256",
                           "order": 1
                         }
                       }
@@ -3274,8 +3274,8 @@ class GetSampleAnalysisOutput(komand.Output):
                     },
                     "mime": {
                       "type": "string",
-                      "title": "Mime",
-                      "description": "Mime",
+                      "title": "MIME",
+                      "description": "MIME",
                       "order": 5
                     },
                     "name": {
@@ -4623,8 +4623,8 @@ class GetSampleAnalysisOutput(komand.Output):
               "properties": {
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 1
                 }
               }
@@ -4701,8 +4701,8 @@ class GetSampleAnalysisOutput(komand.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 5
                 },
                 "name": {
@@ -4845,8 +4845,8 @@ class GetSampleAnalysisOutput(komand.Output):
                   "properties": {
                     "sha256": {
                       "type": "string",
-                      "title": "Sha256",
-                      "description": "Sha256",
+                      "title": "SHA256",
+                      "description": "SHA256",
                       "order": 1
                     }
                   }
@@ -6899,8 +6899,8 @@ class GetSampleAnalysisOutput(komand.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 5
                 },
                 "name": {
@@ -8248,8 +8248,8 @@ class GetSampleAnalysisOutput(komand.Output):
           "properties": {
             "sha256": {
               "type": "string",
-              "title": "Sha256",
-              "description": "Sha256",
+              "title": "SHA256",
+              "description": "SHA256",
               "order": 1
             }
           }
@@ -8326,8 +8326,8 @@ class GetSampleAnalysisOutput(komand.Output):
             },
             "mime": {
               "type": "string",
-              "title": "Mime",
-              "description": "Mime",
+              "title": "MIME",
+              "description": "MIME",
               "order": 5
             },
             "name": {
@@ -8470,8 +8470,8 @@ class GetSampleAnalysisOutput(komand.Output):
               "properties": {
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 1
                 }
               }
@@ -8861,8 +8861,8 @@ class GetSampleAnalysisOutput(komand.Output):
               "properties": {
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 1
                 }
               }
@@ -8963,8 +8963,8 @@ class GetSampleAnalysisOutput(komand.Output):
                   "properties": {
                     "sha256": {
                       "type": "string",
-                      "title": "Sha256",
-                      "description": "Sha256",
+                      "title": "SHA256",
+                      "description": "SHA256",
                       "order": 1
                     }
                   }
@@ -10939,8 +10939,8 @@ class GetSampleAnalysisOutput(komand.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 5
                 },
                 "name": {
@@ -12288,8 +12288,8 @@ class GetSampleAnalysisOutput(komand.Output):
           "properties": {
             "sha256": {
               "type": "string",
-              "title": "Sha256",
-              "description": "Sha256",
+              "title": "SHA256",
+              "description": "SHA256",
               "order": 1
             }
           }
@@ -12366,8 +12366,8 @@ class GetSampleAnalysisOutput(komand.Output):
             },
             "mime": {
               "type": "string",
-              "title": "Mime",
-              "description": "Mime",
+              "title": "MIME",
+              "description": "MIME",
               "order": 5
             },
             "name": {
@@ -12510,8 +12510,8 @@ class GetSampleAnalysisOutput(komand.Output):
               "properties": {
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 1
                 }
               }
@@ -12790,8 +12790,8 @@ class GetSampleAnalysisOutput(komand.Output):
               "properties": {
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 1
                 }
               }
@@ -12892,8 +12892,8 @@ class GetSampleAnalysisOutput(komand.Output):
                   "properties": {
                     "sha256": {
                       "type": "string",
-                      "title": "Sha256",
-                      "description": "Sha256",
+                      "title": "SHA256",
+                      "description": "SHA256",
                       "order": 1
                     }
                   }
@@ -13085,8 +13085,8 @@ class GetSampleAnalysisOutput(komand.Output):
                   "properties": {
                     "sha256": {
                       "type": "string",
-                      "title": "Sha256",
-                      "description": "Sha256",
+                      "title": "SHA256",
+                      "description": "SHA256",
                       "order": 1
                     }
                   }
@@ -13187,8 +13187,8 @@ class GetSampleAnalysisOutput(komand.Output):
                       "properties": {
                         "sha256": {
                           "type": "string",
-                          "title": "Sha256",
-                          "description": "Sha256",
+                          "title": "SHA256",
+                          "description": "SHA256",
                           "order": 1
                         }
                       }
@@ -13500,8 +13500,8 @@ class GetSampleAnalysisOutput(komand.Output):
                       "properties": {
                         "sha256": {
                           "type": "string",
-                          "title": "Sha256",
-                          "description": "Sha256",
+                          "title": "SHA256",
+                          "description": "SHA256",
                           "order": 1
                         }
                       }
@@ -13602,8 +13602,8 @@ class GetSampleAnalysisOutput(komand.Output):
                           "properties": {
                             "sha256": {
                               "type": "string",
-                              "title": "Sha256",
-                              "description": "Sha256",
+                              "title": "SHA256",
+                              "description": "SHA256",
                               "order": 1
                             }
                           }
@@ -15578,8 +15578,8 @@ class GetSampleAnalysisOutput(komand.Output):
                         },
                         "mime": {
                           "type": "string",
-                          "title": "Mime",
-                          "description": "Mime",
+                          "title": "MIME",
+                          "description": "MIME",
                           "order": 5
                         },
                         "name": {
@@ -16927,8 +16927,8 @@ class GetSampleAnalysisOutput(komand.Output):
                   "properties": {
                     "sha256": {
                       "type": "string",
-                      "title": "Sha256",
-                      "description": "Sha256",
+                      "title": "SHA256",
+                      "description": "SHA256",
                       "order": 1
                     }
                   }
@@ -17005,8 +17005,8 @@ class GetSampleAnalysisOutput(komand.Output):
                     },
                     "mime": {
                       "type": "string",
-                      "title": "Mime",
-                      "description": "Mime",
+                      "title": "MIME",
+                      "description": "MIME",
                       "order": 5
                     },
                     "name": {
@@ -17149,8 +17149,8 @@ class GetSampleAnalysisOutput(komand.Output):
                       "properties": {
                         "sha256": {
                           "type": "string",
-                          "title": "Sha256",
-                          "description": "Sha256",
+                          "title": "SHA256",
+                          "description": "SHA256",
                           "order": 1
                         }
                       }
@@ -19203,8 +19203,8 @@ class GetSampleAnalysisOutput(komand.Output):
                     },
                     "mime": {
                       "type": "string",
-                      "title": "Mime",
-                      "description": "Mime",
+                      "title": "MIME",
+                      "description": "MIME",
                       "order": 5
                     },
                     "name": {
@@ -20552,8 +20552,8 @@ class GetSampleAnalysisOutput(komand.Output):
               "properties": {
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 1
                 }
               }
@@ -20630,8 +20630,8 @@ class GetSampleAnalysisOutput(komand.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 5
                 },
                 "name": {
@@ -20774,8 +20774,8 @@ class GetSampleAnalysisOutput(komand.Output):
                   "properties": {
                     "sha256": {
                       "type": "string",
-                      "title": "Sha256",
-                      "description": "Sha256",
+                      "title": "SHA256",
+                      "description": "SHA256",
                       "order": 1
                     }
                   }
@@ -21165,8 +21165,8 @@ class GetSampleAnalysisOutput(komand.Output):
                   "properties": {
                     "sha256": {
                       "type": "string",
-                      "title": "Sha256",
-                      "description": "Sha256",
+                      "title": "SHA256",
+                      "description": "SHA256",
                       "order": 1
                     }
                   }
@@ -21267,8 +21267,8 @@ class GetSampleAnalysisOutput(komand.Output):
                       "properties": {
                         "sha256": {
                           "type": "string",
-                          "title": "Sha256",
-                          "description": "Sha256",
+                          "title": "SHA256",
+                          "description": "SHA256",
                           "order": 1
                         }
                       }
@@ -23243,8 +23243,8 @@ class GetSampleAnalysisOutput(komand.Output):
                     },
                     "mime": {
                       "type": "string",
-                      "title": "Mime",
-                      "description": "Mime",
+                      "title": "MIME",
+                      "description": "MIME",
                       "order": 5
                     },
                     "name": {
@@ -24592,8 +24592,8 @@ class GetSampleAnalysisOutput(komand.Output):
               "properties": {
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 1
                 }
               }
@@ -24670,8 +24670,8 @@ class GetSampleAnalysisOutput(komand.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 5
                 },
                 "name": {
@@ -24814,8 +24814,8 @@ class GetSampleAnalysisOutput(komand.Output):
                   "properties": {
                     "sha256": {
                       "type": "string",
-                      "title": "Sha256",
-                      "description": "Sha256",
+                      "title": "SHA256",
+                      "description": "SHA256",
                       "order": 1
                     }
                   }
@@ -26868,8 +26868,8 @@ class GetSampleAnalysisOutput(komand.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 5
                 },
                 "name": {
@@ -28217,8 +28217,8 @@ class GetSampleAnalysisOutput(komand.Output):
           "properties": {
             "sha256": {
               "type": "string",
-              "title": "Sha256",
-              "description": "Sha256",
+              "title": "SHA256",
+              "description": "SHA256",
               "order": 1
             }
           }
@@ -28295,8 +28295,8 @@ class GetSampleAnalysisOutput(komand.Output):
             },
             "mime": {
               "type": "string",
-              "title": "Mime",
-              "description": "Mime",
+              "title": "MIME",
+              "description": "MIME",
               "order": 5
             },
             "name": {
@@ -28439,8 +28439,8 @@ class GetSampleAnalysisOutput(komand.Output):
               "properties": {
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 1
                 }
               }
@@ -30782,8 +30782,8 @@ class GetSampleAnalysisOutput(komand.Output):
             },
             "mime": {
               "type": "string",
-              "title": "Mime",
-              "description": "Mime",
+              "title": "MIME",
+              "description": "MIME",
               "order": 5
             },
             "name": {
@@ -38250,8 +38250,8 @@ class GetSampleAnalysisOutput(komand.Output):
       "properties": {
         "sha256": {
           "type": "string",
-          "title": "Sha256",
-          "description": "Sha256",
+          "title": "SHA256",
+          "description": "SHA256",
           "order": 1
         }
       }
@@ -38328,8 +38328,8 @@ class GetSampleAnalysisOutput(komand.Output):
         },
         "mime": {
           "type": "string",
-          "title": "Mime",
-          "description": "Mime",
+          "title": "MIME",
+          "description": "MIME",
           "order": 5
         },
         "name": {
@@ -38472,8 +38472,8 @@ class GetSampleAnalysisOutput(komand.Output):
           "properties": {
             "sha256": {
               "type": "string",
-              "title": "Sha256",
-              "description": "Sha256",
+              "title": "SHA256",
+              "description": "SHA256",
               "order": 1
             }
           }

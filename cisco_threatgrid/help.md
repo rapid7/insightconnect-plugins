@@ -396,7 +396,7 @@ This action submits a sample to Threat Grid for analysis.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|callback_url|string|None|False|A url where the results will `POST` to, upon completion of analysis|None|
+|callback_url|string|None|False|A URL where the results will `POST` to, upon completion of analysis|None|
 |email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|
 |network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|
 |playbook|string|None|False|Name of a playbook to apply to this sample run|None|
@@ -563,6 +563,7 @@ Examples:
 * 1.0.0 - Initial plugin
 * 1.1.0 - New action Submit Sample
 * 1.2.0 - New action Get Sample Analysis
+* 1.2.1 - Bug fix for action Get Sample Analysis
 
 ## References
 
@@ -821,7 +822,7 @@ Examples:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sha256|string|False|Sha256|
+|sha256|string|False|SHA256|
 
 ### reversing_labs_artifact
 
@@ -904,7 +905,7 @@ Examples:
 |----|----|--------|-----------|
 |md5|string|False|Md5|
 |sha1|string|False|Sha1|
-|sha256|string|False|Sha256|
+|sha256|string|False|SHA256|
 
 ### certificates_artifact
 
@@ -920,7 +921,7 @@ Examples:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sha256|string|False|Sha256|
+|sha256|string|False|SHA256|
 
 ### certificate_artifact
 
@@ -935,7 +936,7 @@ Examples:
 |signed|signed_artifact|False|Signed|
 |subject|string|False|Subject|
 |timestamp|string|False|Timestamp|
-|url|string|False|Url|
+|url|string|False|URL|
 
 ### pe_artifact
 
@@ -978,7 +979,7 @@ Examples:
 |name|string|False|Name|
 |offset|integer|False|Offset|
 |path|string|False|Path|
-|resource_sha256|string|False|Resource sha256|
+|resource_sha256|string|False|Resource SHA256|
 |size|integer|False|Size|
 |sublanguage|string|False|Sublanguage|
 |type|string|False|Type|
@@ -1038,7 +1039,7 @@ Examples:
 |read_by|[]integer|False|Read by|
 |relation|relation_artifact|False|Relation|
 |sha1|string|False|Sha1|
-|sha256|string|False|Sha256|
+|sha256|string|False|SHA256|
 |size|integer|False|Size|
 |type|string|False|Type|
 |whitelist|[]object|False|Whitelist|
@@ -1114,7 +1115,7 @@ Examples:
 |----|----|--------|-----------|
 |actual_content_type|string|False|Actual content type|
 |body_len|integer|False|Body len|
-|decoded_url|string|False|Decoded url|
+|decoded_url|string|False|Decoded URL|
 |fuids|[]string|False|Filesystem access user ID|
 |headers|network_headers|False|Headers|
 |host|string|False|Host|
@@ -1122,10 +1123,10 @@ Examples:
 |port|integer|False|Port|
 |request_filename|string|False|Request filename|
 |request_path|string|False|Request path|
-|sha256|string|False|Sha256|
+|sha256|string|False|SHA256|
 |ts|float|False|Ts|
 |type|string|False|Type|
-|url|string|False|Url|
+|url|string|False|URL|
 |version|string|False|Version|
 
 ### network_relation
@@ -1199,7 +1200,7 @@ Examples:
 |magic|string|False|Magic|
 |md5|string|False|Md5|
 |sha1|string|False|Sha1|
-|sha256|string|False|Sha256|
+|sha256|string|False|SHA256|
 |size|integer|False|Size|
 |type|string|False|Type|
 
