@@ -3304,6 +3304,7 @@ Example output:
         "type": "admin"
       },
       "email": "nxadmin@example.com",
+      "email": "blaah@rapid7testesc.com",
       "enabled": true,
       "id": 1,
       "links": [
@@ -3424,6 +3425,7 @@ Example output:
       "type": "admin"
     },
     "email": "nxadmin@example.com",
+    "email": "blaah@rapid7testesc.com",
     "enabled": true,
     "id": 1,
     "links": [
