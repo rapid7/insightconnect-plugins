@@ -1,0 +1,62 @@
+plugin_spec_version: v2
+name: cisco_firepower_management_center
+title: Cisco Firepower Management Center
+vendor: rapid7
+status: []
+description: Firepower Management Center is your administrative nerve center for managing critical Cisco network security solutions
+version: 1.0.0
+tags:
+- cisco
+- firesight
+- firepower
+language: python
+types:
+  url_object:
+    name:
+      title: Name
+      required: true
+      type: string
+      description: Name of URL object
+    url:
+      title: URL
+      required: true
+      type: string
+      description: URL to block (max 400 chars)
+
+connection:
+  server:
+    title: Server Address
+    type: string
+    description: Enter the address for the server
+    required: false
+  username_and_password:
+    title: Username and Password
+    description: Cisco username and password
+    type: credential_username_password
+    required: true
+actions:
+  block_url_policy:
+    title: Block URL Policy
+    description: Create a new block URL policy
+    input:
+      url_objects:
+        title: URL Objects
+        required: true
+        type: "[]url_object"
+        description: URL objects to block
+      access_policy:
+        title: Access Policy Name
+        required: true
+        type: string
+        description: Access Policy name
+      rule_name:
+        title: Access Rule Name
+        required: true
+        type: string
+        description: Name for the Access Rule to be created
+    output:
+      success:
+        type: boolean
+        title: Success
+        required: true
+        description: Success
