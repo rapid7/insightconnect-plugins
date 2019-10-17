@@ -6,7 +6,7 @@ from komand_box import connection, actions, triggers
 
 Name = 'Box'
 Vendor = 'rapid7'
-Version = '2.0.4'
+Version = '2.2.1'
 Description = 'Box gives you access to secure content management and content experience features of the Box Enterprise API'
 
 
@@ -19,6 +19,8 @@ class ICONBox(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.AddUserToGroup())
+
         self.add_action(actions.CreateUser())
 
         self.add_action(actions.DeleteFile())
@@ -29,9 +31,13 @@ class ICONBox(komand.Plugin):
 
         self.add_action(actions.DownloadFile())
 
+        self.add_action(actions.GetEnterpriseGroups())
+
         self.add_action(actions.GetFile())
 
         self.add_action(actions.GetFolder())
+
+        self.add_action(actions.GetUserGroups())
 
         self.add_action(actions.LockFile())
 
@@ -40,6 +46,8 @@ class ICONBox(komand.Plugin):
         self.add_action(actions.UploadFile())
 
         self.add_action(actions.UserInfo())
+
+        self.add_action(actions.UserInfoFromLogin())
 
 
 def main():

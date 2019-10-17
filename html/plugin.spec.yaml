@@ -2,9 +2,10 @@ plugin_spec_version: v2
 name: html
 title: HTML
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Validate or convert an html document
-version: 1.0.1
+version: 1.1.0
 tags:
 - markdown
 - html
@@ -113,4 +114,19 @@ actions:
         title: Docx
         description: Docx File
         type: bytes"
+        required: false
+  text:
+    title: Text
+    description: Strip an HTML string of all tags and return only the text
+    input:
+      doc:
+        title: Document
+        description: Document to transform
+        type: string
+        required: true
+    output:
+      text:
+        title: Text
+        description: String without HTML tags
+        type: string
         required: false

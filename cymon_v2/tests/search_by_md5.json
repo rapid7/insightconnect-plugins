@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "search",
+        "connection": {
+            "api_credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "end_date": "",
+            "search_by": "md5_hash",
+            "start_date": "",
+            "value": "86845ea1079ea26ecac6115ba6f4a66e"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

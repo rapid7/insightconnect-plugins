@@ -1,13 +1,13 @@
 {
-  "body": {
-    "action": "replace",
-    "meta": {},
-    "input": {
-      "expression": "[:lower:] [:upper:]",
-      "text": "hello"
+    "body": {
+        "action": "replace",
+        "connection": null,
+        "input": {
+            "expression": "[:lower:] [:upper:]",
+            "text": "hello"
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

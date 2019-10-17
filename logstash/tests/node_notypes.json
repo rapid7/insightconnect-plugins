@@ -1,13 +1,12 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "connection": {
-      "url": ""
+    "body": {
+        "action": "node",
+        "connection": {
+            "url": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-    },
-    "action": "node"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

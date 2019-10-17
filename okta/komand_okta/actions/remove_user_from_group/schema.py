@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove a user from an existing group"
+
+
 class Input:
     EMAIL = "email"
     GROUP_ID = "group_id"

@@ -2,9 +2,10 @@ plugin_spec_version: v2
 name: okta
 title: Okta
 vendor: rapid7
+support: rapid7
+status: []
 description: Secure identity management and single sign-on to any application
-version: 3.1.2
-status: ["supported"]
+version: 3.2.0
 tags:
 - okta
 - sso
@@ -143,6 +144,27 @@ actions:
         description: The user ID of the Okta user
         type: string
         required: false
+      success:
+        title: Success
+        description: Whether deactivation was successful
+        type: boolean
+        required: true
+  delete_user:
+    title: Delete User
+    description: Delete a user. Warning, this action cannot be recovered from
+    input:
+      user_email:
+        title: Okta User Email
+        description: The email of the user to delete
+        type: string
+        required: true
+      send_admin_email:
+        title: Send Admin Email
+        description: Sends a deactivation email to the administrator if true. Default value is false
+        type: boolean
+        default: false
+        required: true
+    output:
       success:
         title: Success
         description: Whether deactivation was successful
@@ -477,3 +499,4 @@ actions:
         description: The user ID of the Okta user
         type: string
         required: false
+

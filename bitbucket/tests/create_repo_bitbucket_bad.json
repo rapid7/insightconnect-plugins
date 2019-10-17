@@ -1,22 +1,22 @@
 {
-  "body": {
-    "action": "create_repo",
-    "input": {
-      "description": "Test Repo Descripton",
-      "has_issues": true,
-      "has_wiki": true,
-      "is_private": false,
-      "title": "Bad Title has spaces",
-      "type": "Hg"
+    "body": {
+        "action": "create_repo",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "description": "Test Repo Descripton",
+            "has_issues": true,
+            "has_wiki": true,
+            "is_private": false,
+            "title": "Bad Title has spaces",
+            "type": "Hg"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

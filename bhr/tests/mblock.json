@@ -1,18 +1,31 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "ssl_verify": false,
-      "url": "http://192.168.0.15:8000",
-      "token": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "mblock",
+        "connection": {
+            "ssl_verify": null,
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "batch": [
+                {
+                    "cidr": "1.2.3.5",
+                    "duration": 300,
+                    "source": "readme",
+                    "why": "because!"
+                },
+                {
+                    "cidr": "1.2.3.6",
+                    "duration": 300,
+                    "source": "malhosts",
+                    "why": "test"
+                }
+            ]
+        },
+        "meta": {}
     },
-    "action": "mblock",
-    "meta": {},
-    "input": {
-      "batch": [{"duration": 300, "source": "readme", "cidr": "1.2.3.5", "why": "because!"}, {"duration": 300, "source": "malhosts", "cidr": "1.2.3.6", "why": "test"}]
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

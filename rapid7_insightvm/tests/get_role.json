@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_role",
-    "meta": {},
-    "input": {
-      "id": "global-admin"
+    "body": {
+        "action": "get_role",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": "global-admin"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

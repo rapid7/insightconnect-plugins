@@ -1,16 +1,16 @@
 {
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "port": 6379,
-      "db": 0,
-      "host": ""
+    "body": {
+        "action": "get",
+        "connection": {
+            "db": null,
+            "host": null,
+            "port": null
+        },
+        "input": {
+            "key": "foo"
+        },
+        "meta": {}
     },
-    "input": {
-      "key": "foo"
-    },
-    "action": "get",
-    "meta": {}
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

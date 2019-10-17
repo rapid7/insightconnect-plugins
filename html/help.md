@@ -111,6 +111,30 @@ This action is used to convert an HTML document to EPUB.
 |----|----|--------|-----------|
 |epub|bytes"|False|epub File|
 
+### Text
+
+This action is used to strip an HTML string of all tags and return only the text.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|doc|string|None|True|Document to transform|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|text|string|False|String without HTML tags|
+
+Example output:
+
+```
+{
+  "text": "Yup, this is some text"
+}
+```
+
 ## Triggers
 
 This plugin does not contain any triggers.
@@ -136,6 +160,7 @@ Examples:
 * 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
+* 1.1.0 - New action: Text
 
 ## References
 

@@ -1,20 +1,23 @@
 {
-  "body": {
-    "action": "hipposcore",
-    "meta": {},
-    "input": {
-      "observables": [{
-        "value": "perugemstones.com",
-        "type": "domain"
-      },{
-        "value": "223.184.173.74",
-        "type": "ip"
-      }]
+    "body": {
+        "action": "hipposcore",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "observables": [
+                {
+                    "type": "domain",
+                    "value": "perugemstones.com"
+                },
+                {
+                    "type": "ip",
+                    "value": "223.184.173.74"
+                }
+            ]
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

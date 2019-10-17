@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Converts a string to a list of strings"
+
+
 class Input:
     DELIMITER = "delimiter"
     STRING = "string"

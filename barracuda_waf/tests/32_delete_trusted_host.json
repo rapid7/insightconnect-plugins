@@ -1,19 +1,19 @@
 {
-  "type": "action_start",
-  "body": {
-    "input": {
-      "name": "test-v14-trusted-host",
-      "group_name": "test-v14-group"
+    "body": {
+        "action": "delete_trusted_host",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "group_name": "test-v14-group",
+            "name": "test-v14-trusted-host"
+        },
+        "meta": {}
     },
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "action": "delete_trusted_host",
-    "meta": {}
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

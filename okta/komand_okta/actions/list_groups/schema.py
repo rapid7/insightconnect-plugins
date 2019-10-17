@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List available groups"
+
+
 class Input:
     QUERY = "query"
     

@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "get_policies",
-    "meta": {},
-    "input": {
-      "fields": []
+    "body": {
+        "action": "get_policies",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "api_version": null,
+            "org_id": null,
+            "timeout": null
+        },
+        "input": {
+            "fields": []
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "api_version": 1,
-      "org_id": "",
-      "timeout": 120
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

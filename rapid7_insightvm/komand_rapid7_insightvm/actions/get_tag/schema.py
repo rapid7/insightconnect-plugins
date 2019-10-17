@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get tag details by tag ID"
+
+
 class Input:
     ID = "id"
     

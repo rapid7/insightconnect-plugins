@@ -1,26 +1,26 @@
 {
-  "body": {
-    "action": "find_event",
-    "meta": {},
-    "input": {
-      "applicationName": "wininit.exe",
-      "eventType": "CREATE_PROCESS",
-      "hostName": "",
-      "hostNameExact": "",
-      "ipAddress": "12.42.111.98",
-      "ownerName": "",
-      "ownerNameExact": "",
-      "searchWindow": "",
-      "sha256hash": ""
+    "body": {
+        "action": "find_event",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "connector": null,
+            "url": null
+        },
+        "input": {
+            "applicationName": "wininit.exe",
+            "eventType": "CREATE_PROCESS",
+            "hostName": "",
+            "hostNameExact": "",
+            "ipAddress": "12.42.111.98",
+            "ownerName": "",
+            "ownerNameExact": "",
+            "searchWindow": "",
+            "sha256hash": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "connector": "",
-      "url": "https://api5.conferdeploy.net"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "get_comments",
-    "meta": {},
-    "input": {
-      "id": ""
+    "body": {
+        "action": "get_comments",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "input": {
+            "id": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "project": "test",
-      "url": "https://komand-demo4.atlassian.net"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

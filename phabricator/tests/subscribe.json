@@ -1,18 +1,22 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "action": "subscribe",
-    "input": {
-      "id": "1",
-      "subscribes": ["PHID-USER-nzap27l4bzb5qmgmrxkn", "PHID-PROJ-bt57fe56aclifk3262hd", "PHID-PROJ-5vzfefz4syh7lhxyb2m3"]
+    "body": {
+        "action": "subscribe",
+        "connection": {
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": "1",
+            "subscribes": [
+                "PHID-USER-nzap27l4bzb5qmgmrxkn",
+                "PHID-PROJ-bt57fe56aclifk3262hd",
+                "PHID-PROJ-5vzfefz4syh7lhxyb2m3"
+            ]
+        },
+        "meta": {}
     },
-    "connection": {
-      "token": {
-        "secretKey": ""
-      },
-      "url": ""
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

@@ -3,12 +3,12 @@
         "action": "post",
         "connection": {
             "access_token_credentials": {
-                "username": "",
-                "password": ""
+                "password": null,
+                "username": null
             },
             "consumer_credentials": {
-                "username": "",
-                "password": ""
+                "password": null,
+                "username": null
             }
         },
         "input": {

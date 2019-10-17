@@ -241,14 +241,42 @@ This action is used to return information about a specific domain entry.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|domain|string|None|True|None|None|
+|comment|string|None|False|Add a comment to a domain|None|
+|domain|string|None|True|Domain|None|
+|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities" , "risk" , "timestamps"]|None|
 
 #### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|timestamps|timestamps|False|None|
-|entity|entity|False|None|
+|analystNotes|[]string|False|Notes from an analyst|
+|counts|[]counts|False|Counts|
+|entity|entity|False|Entity|
+|intelCard|string|False|Intel card|
+|metrics|[]metrics|False|Metrics|
+|relatedEntities|[]relatedEntities|False|Related entities|
+|risk|risk|False|Risk|
+|sightings|[]sightings|False|Sightings|
+|threatLists|[]string|False|Threat lists|
+|timestamps|timestamps|False|Timestamps|
+
+Example output:
+
+```
+{
+  "data": {
+    "entity": {
+      "id": "idn:google.com",
+      "name": "google.com",
+      "type": "InternetDomainName"
+    },
+    "timestamps": {
+      "firstSeen": "2009-01-23T02:00:08.000Z",
+      "lastSeen": "2019-07-25T15:44:00.328Z"
+    }
+  }
+}
+```
 
 ### Lookup Hash
 
@@ -258,14 +286,111 @@ This action is used to retrieve information about a specified hash.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|hash|string|None|True|None|None|
+|comment|string|None|False|Add a comment to a hash|None|
+|fields|[]string|None|False|List of fields to include with results e.g ["timestamps", "sightings", "threatLists", "analystNotes", "counts", "entity", "hashAlgorithm", "intelCard", "metrics", "relatedEntities", "risk", "timestamps"]|None|
+|hash|string|None|True|Hash|None|
 
 #### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|timestamps|timestamps|False|None|
-|entity|entity|False|None|
+|analystNotes|[]string|False|Notes from an analyst|
+|counts|[]counts|False|Counts|
+|entity|entity|False|Entity|
+|hashAlgorithm|string|False|Hash Algorithm|
+|intelCard|string|False|Intel card|
+|metrics|[]metrics|False|Metrics|
+|relatedEntities|[]relatedEntities|False|Related entities|
+|risk|risk|False|Risk|
+|sightings|[]sightings|False|Sightings|
+|threatLists|[]string|False|Threat Lists|
+|timestamps|timestamps|False|Timestamps|
+
+Example output:
+
+```
+{
+  "data": {
+    "risk": {
+      "criticalityLabel": "Malicious",
+      "score": 68,
+      "evidenceDetails": [
+        {
+          "timestamp": "2015-06-17T15:09:38.000Z",
+          "criticalityLabel": "Unusual",
+          "evidenceString": "3 sightings on 1 source: Kaspersky Securelist and Lab. Most recent link (Jun 17, 2015): https://securelist.ru/blog/issledovaniya/25905/modul-duqu-2-0-soxranyayushhij-prisutstvie-v-seti/",
+          "rule": "Threat Researcher",
+          "criticality": 1
+        },
+        {
+          "timestamp": "2015-06-17T15:09:38.000Z",
+          "criticalityLabel": "Suspicious",
+          "evidenceString": "6 sightings on 3 sources: Kaspersky Securelist and Lab, Hei Shou, www.hx95.com. 2 related malwares: Duqu2, Computer Worm. Most recent link (Jun 17, 2015): https://securelist.ru/blog/issledovaniya/25905/modul-duqu-2-0-soxranyayushhij-prisutstvie-v-seti/",
+          "rule": "Linked to Malware",
+          "criticality": 2
+        },
+        {
+          "timestamp": "2015-06-14T00:00:00.000Z",
+          "criticalityLabel": "Malicious",
+          "evidenceString": "1 sighting on 1 source: VirusTotal. Most recent link (Jun 14, 2015): https://www.virustotal.com/en/file/bc4ae56434b45818f57724f4cd19354a13e5964fd097d1933a30e2e31c9bdfa5/analysis/",
+          "rule": "Positive Malware Verdict",
+          "criticality": 3
+        }
+      ],
+      "riskString": "3/12",
+      "rules": 3,
+      "criticality": 3,
+      "riskSummary": "3 of 12 Risk Rules currently observed."
+    },
+    "analystNotes": []
+  },
+  "warnings": [
+    "Unknown field nope"
+  ]
+}
+```
+
+### Lookup URL
+
+This action is used to retrieve information about a specified URL.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|comment|string|None|False|Add a comment to an IP address lookup for Recorded Future|None|
+|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "analystNotes", "counts", "entity", "metrics", "relatedEntities", "risk", "timestamps"]|None|
+|url|string|None|True|URL|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|analystNotes|[]string|False|Notes from an analyst|
+|counts|[]counts|False|Counts|
+|entity|entity|False|Entity|
+|metrics|[]metrics|False|Metrics|
+|relatedEntities|[]relatedEntities|False|Related entities|
+|risk|risk|False|Risk|
+|sightings|[]sightings|False|Sightings|
+|timestamps|timestamps|False|Timestamps|
+
+Example output:
+
+```
+{
+  "entity": {
+    "id": "url:http://www.google.com",
+    "name": "http://www.google.com",
+    "type": "URL"
+  },
+  "timestamps": {
+    "firstSeen": "2019-07-26T00:00:00.000Z",
+    "lastSeen": "2019-07-26T23:59:59.000Z"
+  }
+}
+
+```
 
 ### Download IP Addresses Risk List
 
@@ -291,14 +416,43 @@ This action is used to query for data related to a specific IP address.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|IP_address|string|None|True|None|None|
+|IP_address|string|None|True|IP address|None|
+|comment|string|None|False|Add comment to IP address lookup for Recorded Future|None|
+|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "riskyCIDRIPs","risk", "location", "timestamps"]|None|
 
 #### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|timestamps|timestamps|False|None|
-|entity|entity|False|None|
+|analystNotes|[]string|False|Notes from an analyst|
+|counts|[]counts|False|Counts|
+|entity|entity|False|Entity|
+|intelCard|string|False|Intel card|
+|location|location|False|Location|
+|metrics|[]metrics|False|Metrics|
+|relatedEntities|[]relatedEntities|False|Related entities|
+|risk|risk|False|Risk|
+|riskyCIDRIPs|[]riskyCIDRIP|False|Risky CIDR IPs|
+|sightings|[]sightings|False|Sightings|
+|threatLists|[]string|False|Threat lists|
+|timestamps|timestamps|False|Timestamps|
+|found|boolean|False|Has the IP been found in Recorded Future|
+
+Example output:
+
+```
+{
+  "entity": {
+    "id": "ip:8.8.8.8",
+    "name": "8.8.8.8",
+    "type": "IpAddress"
+  },
+  "timestamps": {
+    "firstSeen": "2010-04-27T12:46:51.000Z",
+    "lastSeen": "2019-07-26T15:26:50.084Z"
+  }
+}
+```
 
 ### Download Vulnerability Risk List
 
@@ -375,8 +529,182 @@ Examples:
 * 1.0.0 - Update to v2 Python plugin architecture
 * 1.0.1 - Support web server mode | Use new credential types
 * 1.0.2 - Fix typo in plugin spec
+* 1.1.0 - Add additional output for action Lookup Hash | Add input fields to action Lookup Hash
+* 1.2.0 - Add additional output for action Lookup Domain | Add input fields to action Lookup Domain
+* 1.3.0 - Add additional output for action Lookup IP Address | Add input fields to action Lookup IP Address
+* 1.4.0 - New action Lookup URL | Add input comment to actions Lookup Hash and Lookup Domain
+* 1.4.1 - Add missing output and remove extra output for actions Lookup Hash, Lookup Domain, Lookup IP Address and Lookup URL
+* 1.5.0 - Add support for handling IP addresses not found for action Lookup IP Address | Add found parameter to  action Lookup IP Address 
+* 1.5.1 - Fix issue where parameter timestamp in evidenceDetails was set as a string in Lookup IP Address action, timestamp is now an integer
+* 1.5.2 - Fix issue where timestamp for evidenceDetails was set to integer, timestamp is now expected as datetime from RecordedFuture 
 
 ## References
 
 * [Recorded Future](https://recordedfuture.com)
 * [Recorded Future API](https://api.recordedfuture.com/v2)
+
+## Custom Output Types
+
+### counts
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|count|integer|False|None|
+|date|string|False|None|
+
+### entity
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|description|string|False|None|
+|id|string|False|None|
+|name|string|False|None|
+|type|string|False|None|
+
+### metrics
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|type|string|False|None|
+|value|integer|False|None|
+
+### entities
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|count|integer|False|None|
+|entity|entity|False|None|
+
+### relatedEntities
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|entities|[]entities|False|None|
+|type|string|False|None|
+
+### evidenceDetails
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|criticality|integer|False|None|
+|criticalityLabel|string|False|None|
+|evidenceString|string|False|None|
+|rule|string|False|None|
+|timestamp|string|False|None|
+
+### risk
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|criticality|integer|False|None|
+|criticalityLabel|string|False|None|
+|evidenceDetails|[]evidenceDetails|False|None|
+|riskSummary|string|False|None|
+|rules|integer|False|None|
+|score|integer|False|None|
+
+### sightings
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|fragment|string|False|None|
+|published|string|False|None|
+|source|string|False|None|
+|title|string|False|None|
+|type|string|False|None|
+|url|string|False|None|
+
+### timestamps
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|firstSeen|string|False|None|
+|lastSeen|string|False|None|
+
+### risk_rule
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|criticality|integer|False|None|
+|criticalityLabel|string|False|None|
+|description|string|False|None|
+|name|string|False|None|
+
+### cvss
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|accessComplexity|string|False|None|
+|accessVector|string|False|None|
+|authentication|string|False|None|
+|availability|string|False|None|
+|confidentiality|string|False|None|
+|integrity|string|False|None|
+|lastModified|string|False|None|
+|published|string|False|None|
+|score|integer|False|None|
+
+### vulnerability_search_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|counts|[]counts|False|None|
+|cpe|[]string|False|None|
+|cvss|cvss|False|None|
+|entity|entity|False|None|
+|hashAlgorithm|string|False|None|
+|intelCard|string|False|None|
+|metrics|[]metrics|False|None|
+|nvdDescription|string|False|None|
+|relatedEntities|[]relatedEntities|False|None|
+|risk|risk|False|None|
+|sightings|[]sightings|False|None|
+|threatLists|[]object|False|None|
+|timestamps|timestamps|False|None|
+
+### cidr
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|string|False|ID|
+|name|string|False|Name|
+|type|string|False|Type|
+
+### ip
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|string|False|ID|
+|name|string|False|Name|
+|type|string|False|Type|
+
+### search_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|counts|[]counts|False|None|
+|entity|entity|False|None|
+|hashAlgorithm|string|False|None|
+|intelCard|string|False|None|
+|metrics|[]metrics|False|None|
+|relatedEntities|[]relatedEntities|False|None|
+|risk|risk|False|None|
+|sightings|[]sightings|False|None|
+|threatLists|[]object|False|None|
+|timestamps|timestamps|False|None|
+
+### location
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|asn|string|False|ASN|
+|cidr|cidr|False|Classless Inter-Domain Routing|
+|location|location_data|False|Location|
+|organization|string|False|Organization|
+
+### riskyCIDRIP
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ip|ip|False|IP|
+|score|integer|False|Score|

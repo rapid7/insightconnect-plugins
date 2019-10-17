@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove all site associations from a tag"
+
+
 class Input:
     ID = "id"
     

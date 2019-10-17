@@ -1,6 +1,7 @@
 import komand
 from .schema import EmailWhoisInput, EmailWhoisOutput
 # Custom imports below
+from komand.exceptions import PluginException
 from validate_email import validate_email
 
 
@@ -16,19 +17,16 @@ class EmailWhois(komand.Action):
         email = params.get('email')
         is_valid = validate_email(email)
         if not is_valid:
-            self.logger.error("EmailWhois: Run: Wrong email")
-            raise Exception("EmailWhois: run: Wrong email")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         try:
             email_whois = self.connection.investigate.email_whois(email)
         except Exception as e:
-            self.logger.error("LatestDomains: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         one_email_whois = email_whois.get(email)
         if not one_email_whois:
-            self.logger.error("EmailWhois: Run: Wrong object")
-            raise Exception("EmailWhois: run: Wrong object")
+            raise PluginException(cause='Unable to return WHOIS data.', assistance='Please try submitting another query.')
 
         return {"email_whois": [{"more_data_available": one_email_whois.get("moreDataAvailable"), "limit": one_email_whois.get("limit"), "domains": one_email_whois.get("domains"), "total_results": one_email_whois.get("totalResults")}]}
 

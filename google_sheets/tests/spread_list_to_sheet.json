@@ -1,29 +1,35 @@
 {
-  "body": {
-    "action": "spread_list_to_sheet",
-    "meta": {},
-    "input": {
-      "cell": "C3",
-      "sheet_id": "1rmAH-sHB84Z0mwKMD7GpBok9mSKTW5op-b4ncvoz3H0",
-      "update_list": ["test","test","test","test","test"],
-      "worksheet": "Sheet1",
-      "direction": "column"
+    "body": {
+        "action": "spread_list_to_sheet",
+        "connection": {
+            "admin_user": null,
+            "auth_provider_x509_cert_url": null,
+            "auth_uri": null,
+            "client_email": null,
+            "client_id": null,
+            "client_x509_cert_url": null,
+            "private_key": {
+                "privateKey": null
+            },
+            "private_key_id": null,
+            "project_id": null,
+            "token_uri": null
+        },
+        "input": {
+            "cell": "C3",
+            "direction": "column",
+            "sheet_id": "1rmAH-sHB84Z0mwKMD7GpBok9mSKTW5op-b4ncvoz3H0",
+            "update_list": [
+                "test",
+                "test",
+                "test",
+                "test",
+                "test"
+            ],
+            "worksheet": "Sheet1"
+        },
+        "meta": {}
     },
-    "connection": {
-      "admin_user": "",
-      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "client_email": "",
-      "client_id": "",
-      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/jmcadams%40reflected-drake-230022.iam.gserviceaccount.com",
-      "private_key": {
-        "privateKey": ""
-      },
-      "private_key_id": "",
-      "project_id": "",
-      "token_uri": "https://oauth2.googleapis.com/token"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

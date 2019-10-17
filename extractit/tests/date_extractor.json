@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "date_extractor",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "file": null,
+            "str": "other stuff thats not a date 05/12/1982 and more stuff"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

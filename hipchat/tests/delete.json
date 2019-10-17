@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "delete",
-    "input": {
-      "id_or_email": ""
+    "body": {
+        "action": "delete",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "version": null
+        },
+        "input": {
+            "id_or_email": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "https://hipchat.com/",
-      "version": "v2",
-      "credentials": {
-        "username": "",
-        "password": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

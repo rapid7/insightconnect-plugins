@@ -1,17 +1,17 @@
 {
-  "body": {
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "https://api.mxtoolbox.com/api/v1/"
+    "body": {
+        "action": "dns",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "hostname": "google.com"
+        },
+        "meta": {}
     },
-    "action": "dns",
-    "input": {
-      "hostname": "google.com"
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

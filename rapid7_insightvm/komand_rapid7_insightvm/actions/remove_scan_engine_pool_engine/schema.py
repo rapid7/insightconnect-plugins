@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove a scan engine from a scan engine pool"
+
+
 class Input:
     ENGINE_ID = "engine_id"
     POOL_ID = "pool_id"

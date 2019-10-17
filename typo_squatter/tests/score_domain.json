@@ -1,8 +1,7 @@
 {
     "body": {
         "action": "score_domain",
-        "connection": {
-        },
+        "connection": {},
         "input": {
             "domain": "google.com"
         },
@@ -11,5 +10,3 @@
     "type": "action_start",
     "version": "v1"
 }
-
-

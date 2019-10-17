@@ -1,14 +1,14 @@
 {
-  "body": {
-    "action": "match_base64",
-    "input": {
-      "pattern": "example.com",
-      "data": "",
-      "behavior": "Default"
+    "body": {
+        "action": "match_base64",
+        "connection": null,
+        "input": {
+            "behavior": "Default",
+            "data": "",
+            "pattern": "example.com"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

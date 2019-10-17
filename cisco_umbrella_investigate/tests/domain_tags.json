@@ -1,16 +1,16 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "domain_tags",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "domain": "bibikun.ru"
+        },
+        "meta": {}
     },
-    "action": "domain_tags",
-    "input": {
-      "domain": "bibikun.ru"
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

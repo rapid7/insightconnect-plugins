@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new object"
+
+
 class Input:
     ELEMENT = "element"
     XPATH = "xpath"

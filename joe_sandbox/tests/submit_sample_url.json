@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "submit_sample_url",
-    "meta": {},
-    "input": {
-      "sample_url": "https://raw.githubusercontent.com/kennethreitz/requests/master/README.md"
+    "body": {
+        "action": "submit_sample_url",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "sample_url": "https://raw.githubusercontent.com/kennethreitz/requests/master/README.md"
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": "",
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,19 +1,19 @@
 {
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "input": {
-      "wildcards": false,
-      "from": "",
-      "until": "",
-      "query": "*"
+    "body": {
+        "action": "metrics_find",
+        "connection": {
+            "graphite_port": null,
+            "graphite_url": null,
+            "ssl_verify": null
+        },
+        "input": {
+            "from": "",
+            "query": "*",
+            "until": "",
+            "wildcards": false
+        },
+        "meta": {}
     },
-    "action": "metrics_find",
-    "connection": {
-      "graphite_port": 443,
-      "graphite_url": "",
-      "ssl_verify": false
-    }
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

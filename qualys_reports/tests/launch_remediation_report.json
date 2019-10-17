@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "launch_remediation_report",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "hostname": null
+        },
+        "dispatcher": {},
+        "input": {
+            "asset_group_ids": "",
+            "assignee_type": "",
+            "ips": "",
+            "output_format": "",
+            "template_id": 0,
+            "title": ""
+        },
+        "meta": {},
+        "trigger": ""
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "delete_user",
-    "meta": {},
-    "input": {
-      "reassignee": "",
-      "username": ""
+    "body": {
+        "action": "delete_user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "input": {
+            "reassignee": "",
+            "username": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "host": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

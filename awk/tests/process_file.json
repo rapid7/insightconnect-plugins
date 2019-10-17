@@ -1,1 +1,13 @@
-{"body": {"action": "process_file", "input": {"data": "aGVsbG8gd29ybGQ=", "expression": "' {print $2}'"}, "connection": null, "meta": {}}, "version": "v1", "type": "action_start"}
+{
+    "body": {
+        "action": "process_file",
+        "connection": null,
+        "input": {
+            "data": "aGVsbG8gd29ybGQ=",
+            "expression": "' {print $2}'"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

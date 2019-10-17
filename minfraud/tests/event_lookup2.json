@@ -1,21 +1,21 @@
 {
-  "body": {
-    "action": "event_lookup",
-    "connection": {
-      "license": {
-        "secretKey": ""
-      },
-      "user": 118625
+    "body": {
+        "action": "event_lookup",
+        "connection": {
+            "license": {
+                "secretKey": null
+            },
+            "user": null
+        },
+        "input": {
+            "address": "8.8.8.8",
+            "event_type": "none",
+            "shop_id": "",
+            "time": "",
+            "transaction_id": ""
+        },
+        "meta": {}
     },
-    "input": {
-      "address": "8.8.8.8",
-      "event_type": "none",
-      "shop_id": "",
-      "time": "",
-      "transaction_id": ""
-    },
-    "meta": {}
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

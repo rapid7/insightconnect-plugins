@@ -2,33 +2,33 @@
     "body": {
         "action": "update_artifact",
         "connection": {
-            "email": "",
-            "hostname": "",
-            "password": ""
+            "email": null,
+            "hostname": null,
+            "password": null
         },
         "input": {
             "artifact": {
-  "type": {
-    "name": "Mutex"
-  },
-  "value": "New Test",
-  "hits": [],
-  "inc_owner": {
-    "name": "mike@komand.com"
-  },
-  "created": 0,
-  "pending_sources": [
-    null
-  ],
-  "perms": {
-    "read": true,
-    "write": true,
-    "delete": true
-  },
-  "properties": [],
-  "actions": [],
-  "relating": true
-},
+                "actions": [],
+                "created": 0,
+                "hits": [],
+                "inc_owner": {
+                    "name": "mike@komand.com"
+                },
+                "pending_sources": [
+                    null
+                ],
+                "perms": {
+                    "delete": true,
+                    "read": true,
+                    "write": true
+                },
+                "properties": [],
+                "relating": true,
+                "type": {
+                    "name": "Mutex"
+                },
+                "value": "New Test"
+            },
             "artifact_id": 2946,
             "incident_id": 3944,
             "organization_id": 201

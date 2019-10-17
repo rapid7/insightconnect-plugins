@@ -1,14 +1,16 @@
 {
-  "body": {
-    "action": "process_bytes",
-    "input": {
-      "expression": ["s/one/ONE/"],
-      "options": "",
-      "bytes": "J29uZScgdHdvIHRocmVlIG9uZQ=="
+    "body": {
+        "action": "process_bytes",
+        "connection": null,
+        "input": {
+            "bytes": "J29uZScgdHdvIHRocmVlIG9uZQ==",
+            "expression": [
+                "s/one/ONE/"
+            ],
+            "options": ""
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

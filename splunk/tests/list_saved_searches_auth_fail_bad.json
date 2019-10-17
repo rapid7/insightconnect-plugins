@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "list_saved_searches",
-    "meta": {},
-    "input": {},
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "host": "",
-      "license": "Enterprise",
-      "port": 8089,
-      "ssl_verify": false,
-      "use_ssl": true
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "body": {
+        "action": "list_saved_searches",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "license": null,
+            "port": null,
+            "ssl_verify": null,
+            "use_ssl": null
+        },
+        "input": {},
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

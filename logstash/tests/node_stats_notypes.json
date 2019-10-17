@@ -1,14 +1,14 @@
 {
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "url": ""
+    "body": {
+        "action": "node_stats",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "types": ""
+        },
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-      "types": ""
-    },
-    "action": "node_stats"
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

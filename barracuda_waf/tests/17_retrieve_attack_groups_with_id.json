@@ -1,19 +1,19 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
+    "body": {
+        "action": "retrieve_attack_groups",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "attack_group_id": "protocol-violations",
+            "policy_id": "default"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "action": "retrieve_attack_groups",
-    "input": {
-      "policy_id": "default",
-      "attack_group_id": "protocol-violations"
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

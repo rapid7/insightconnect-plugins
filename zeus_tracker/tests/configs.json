@@ -1,14 +1,14 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "server": "https://zeustracker.abuse.ch"
+    "body": {
+        "action": "configs",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "limit": 15
+        },
+        "meta": {}
     },
-    "input": {
-      "limit": 15
-    },
-    "meta": {},
-    "action": "configs"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

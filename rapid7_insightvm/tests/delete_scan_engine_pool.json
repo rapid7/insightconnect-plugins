@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "delete_scan_engine_pool",
-    "meta": {},
-    "input": {
-      "id": 13
+    "body": {
+        "action": "delete_scan_engine_pool",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 13
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

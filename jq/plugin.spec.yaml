@@ -4,6 +4,8 @@ title: jq
 description: Send JSON data through jq
 version: 2.0.4
 vendor: rapid7
+support: rapid7
+status: []
 tags:
 - jq
 - JSON

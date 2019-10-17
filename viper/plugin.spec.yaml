@@ -5,7 +5,8 @@ description: "Viper is a binary analysis and management framework. Its fundament
 version: 2.0.0
 vendor: rapid7
 tags: [ "binary", "analysis", "malware" ]
-status: ["unsupported"]
+support: community
+status: []
 
 types:
   Archive:

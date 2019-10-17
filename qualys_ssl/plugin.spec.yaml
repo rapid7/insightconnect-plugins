@@ -5,7 +5,8 @@ description: Qualys SSL Labs is a collection of documents, tools and thoughts re
   to SSL
 version: 1.0.1
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - ssl
 - certificate

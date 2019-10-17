@@ -1,26 +1,44 @@
 {
-  "body": {
-    "action": "modify_host",
-    "meta": {},
-    "input": {
-      "_ref": "record:host/ZG5zLmhvc3QkLm5vbl9ETlNfaG9zdF9yb290LjAuMTUzMjY4OTgzMDkxMC5jb20uZXhhbXBsZS5hZG1pbg:admin.example.com/%20",
-      "updated_host": {
-        "aliases": ["testing"],
-        "extattrs": {"Site": {"value": "East"}},
-        "ipv4addrs": [{"ipv4addr": "10.10.10.75"}],
-        "ipv4addrs+": [{"ipv4addr": "10.10.10.77"}],
-        "ipv4addrs-": [{"ipv4addr": "10.10.10.77"}]
-      }
+    "body": {
+        "action": "modify_host",
+        "connection": {
+            "api_version": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "infoblox_host": null
+        },
+        "input": {
+            "_ref": "record:host/ZG5zLmhvc3QkLm5vbl9ETlNfaG9zdF9yb290LjAuMTUzMjY4OTgzMDkxMC5jb20uZXhhbXBsZS5hZG1pbg:admin.example.com/%20",
+            "updated_host": {
+                "aliases": [
+                    "testing"
+                ],
+                "extattrs": {
+                    "Site": {
+                        "value": "East"
+                    }
+                },
+                "ipv4addrs": [
+                    {
+                        "ipv4addr": "10.10.10.75"
+                    }
+                ],
+                "ipv4addrs+": [
+                    {
+                        "ipv4addr": "10.10.10.77"
+                    }
+                ],
+                "ipv4addrs-": [
+                    {
+                        "ipv4addr": "10.10.10.77"
+                    }
+                ]
+            }
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_version": "2.7",
-      "infoblox_host": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

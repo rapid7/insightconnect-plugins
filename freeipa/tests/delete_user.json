@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "delete_user",
-    "meta": {},
-    "input": {
-      "preserve": true,
-      "username": "tuser"
+    "body": {
+        "action": "delete_user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null
+        },
+        "input": {
+            "preserve": true,
+            "username": "tuser"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "server": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,21 +1,21 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "action": "delete_job",
-    "connection": {
-      "host": "",
-      "api_key": {
-        "secretKey": ""
-      },
-      "verify": true,
-      "proxy": {},
-      "protocol": "HTTP",
-      "port": "9001"
+    "body": {
+        "action": "delete_job",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "job_id": "AWeaFlnYkDwhOfz60XIl"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-      "job_id": "AWeaFlnYkDwhOfz60XIl"
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

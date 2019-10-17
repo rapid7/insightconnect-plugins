@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "add_file",
-    "meta": {},
-    "input": {
-      "file_contents": "",
-      "file_path": "files/empty.txt"
+    "body": {
+        "action": "add_file",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "file_contents": "",
+            "file_path": "files/empty.txt"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

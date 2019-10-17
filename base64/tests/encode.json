@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "encode",
-    "input": {
-      "content": "lets encode this message\nsilly boy"
+    "body": {
+        "action": "encode",
+        "connection": null,
+        "input": {
+            "content": "lets encode this message\nsilly boy"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -5,7 +5,8 @@ description: Searches through git repositories for high entropy strings and secr
   digging deep into commit history
 version: 1.1.1
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - entropy
 - secret

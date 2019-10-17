@@ -28,7 +28,7 @@ class Epub(komand.Action):
         os.remove(temp_file)
 
     except:
-        return {'error': 'Error occured please try again'}
+        return {'error': 'Error occurred please try again'}
 
   def test(self):
     return {'test': 'test Success'}

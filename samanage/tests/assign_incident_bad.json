@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "assign_incident",
-    "meta": {},
-    "input": {
-      "assignee": "",
-      "incident_id": 31851783
+    "body": {
+        "action": "assign_incident",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "assignee": "",
+            "incident_id": 31851783
+        },
+        "meta": {}
     },
-    "connection": {
-      "eu_customer": false,
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

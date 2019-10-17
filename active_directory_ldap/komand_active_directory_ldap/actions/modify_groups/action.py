@@ -1,6 +1,7 @@
 import komand
 from .schema import ModifyGroupsInput, ModifyGroupsOutput
 # Custom imports below
+from komand.exceptions import PluginException
 from komand_active_directory_ldap.util.utils import ADUtils
 from ldap3 import extend
 
@@ -29,6 +30,7 @@ class ModifyGroups(komand.Action):
             group = extend.ad_remove_members_from_groups(conn, dn, group_dn, fix=True)
 
         if group is False:
-            raise Exception('something went wrong')
+            self.logger.log("ModifyGroups: Unexpected result for group. Group was " + str(group))
+            raise PluginException(PluginException.Preset.UNKNOWN)
 
         return {'success': group}

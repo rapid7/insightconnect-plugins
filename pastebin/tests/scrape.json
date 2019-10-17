@@ -1,22 +1,22 @@
 {
-  "body": {
-    "action": "scrape",
-    "meta": {},
-    "input": {
-      "language": "All",
-      "limit": 1,
-      "pattern": ""
+    "body": {
+        "action": "scrape",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "language": "All",
+            "limit": 1,
+            "pattern": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

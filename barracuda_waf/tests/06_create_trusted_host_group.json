@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "create_trusted_host_group",
-    "meta": {},
-    "input": {
-      "name": "test-v14-group"
+    "body": {
+        "action": "create_trusted_host_group",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "name": "test-v14-group"
+        },
+        "meta": {}
     },
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,13 +1,13 @@
 {
-  "body": {
-    "action": "finger",
-    "input": {
-      "host": "218.18.11.18",
-      "user": "teststuff"
+    "body": {
+        "action": "finger",
+        "connection": null,
+        "input": {
+            "host": "218.18.11.18",
+            "user": "teststuff"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -80,7 +80,7 @@ The connection configuration accepts the following parameters:
 |credentials|credential_username_password|None|False|Username and password|None|
 |kerberos|kerberos|None|False|Connection information required for Kerberos|None|
 |port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|
-|auth|string|None|True|Authentication type|['NTLM', 'Kerberos', 'None']|
+|auth|string|None|True|Authentication type|['NTLM', 'Kerberos', 'None', 'CredSSP']|
 
 ## Troubleshooting
 
@@ -143,6 +143,7 @@ Examples:
 * 1.1.0 - Add functionality to allow PowerShell to execute locally
 * 2.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 2.0.1 - Fix issue with unicode characters
+* 2.1.0 - Add functionality to allow CredSSP connections
 
 ## References
 

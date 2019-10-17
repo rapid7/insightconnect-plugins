@@ -1,20 +1,20 @@
 {
-  "body": {
-    "trigger": "new_alert",
-    "meta": {},
-    "input": {},
-    "dispatcher": {
-      "url": "http://localhost:8000",
-      "webhook_url": ""
+    "body": {
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {},
+        "meta": {},
+        "trigger": "new_alert"
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "ssl_verify": false,
-      "url": ""
-    }
-  },
-  "type": "trigger_start",
-  "version": "v1"
+    "type": "trigger_start",
+    "version": "v1"
 }

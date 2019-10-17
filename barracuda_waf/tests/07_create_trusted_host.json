@@ -1,23 +1,23 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "input": {
-      "name": "test-v14-trusted-host",
-      "group_name": "test-v14-group",
-      "comments": "No comments",
-      "mask": "255.255.255.0",
-      "address": "192.168.19.2",
-      "address_version": "ipv4"
+    "body": {
+        "action": "create_trusted_host",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "address": "192.168.19.2",
+            "address_version": "ipv4",
+            "comments": "No comments",
+            "group_name": "test-v14-group",
+            "mask": "255.255.255.0",
+            "name": "test-v14-trusted-host"
+        },
+        "meta": {}
     },
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "meta": {},
-    "action": "create_trusted_host"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

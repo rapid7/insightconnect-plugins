@@ -4,7 +4,8 @@ title: HipChat
 description: HipChat is group chat built for teams & business
 version: 1.0.0
 vendor: rapid7
-status: ["deprecated"]
+support: community
+status: []
 tags:
 - hipchat
 - chat

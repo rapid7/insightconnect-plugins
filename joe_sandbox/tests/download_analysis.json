@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "download_analysis",
-    "meta": {},
-    "input": {
-      "run": 0,
-      "type": "html",
-      "webid": "792649"
+    "body": {
+        "action": "download_analysis",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "run": 0,
+            "type": "html",
+            "webid": "792649"
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": "",
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

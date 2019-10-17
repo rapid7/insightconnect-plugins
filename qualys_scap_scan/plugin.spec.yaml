@@ -1,0 +1,191 @@
+plugin_spec_version: v2
+name: qualys_scap_scan
+title: Qualys Security Content Automation Protocol (SCAP) Scans
+description: Qualys plugin for managing SCAP scans
+version: 1.0.2
+vendor: rapid7
+support: community
+status: []
+tags:
+- qualys
+- scap
+- scan
+connection:
+  hostname:
+    title: Hostname
+    description: Hostname of the Qualys API server for your region
+    type: string
+    default: https://qualysapi.qualys.com/
+    required: true
+  credentials:
+    title: Credentials
+    description: Qualys username and password
+    type: credential_username_password
+    required: true
+types:
+  scan:
+    id:
+      title: ID
+      description: ID of the scan
+      type: int
+    reference:
+      title: Reference
+      description: Reference of the scan
+      type: string
+    type:
+      title: Type
+      description: Type of scan
+      type: string
+    target:
+      title: Target
+      description: Target of the scan
+      type: string
+    status:
+      title: Status
+      description: Status of the scan
+      type: string
+    duration:
+      title: Duration
+      description: Duration of the scan
+      type: string
+    launch_datetime:
+      title: Launch Datetime
+      description: Launch date and time of the scan
+      type: date
+    processed:
+      title: Processed
+      description: Whether tha scan has been processed (1) or not (0)
+      type: integer
+actions:
+  list:
+    title: List
+    description: List Scans
+    input:
+      reference:
+        title: Reference
+        description: Filter scans by reference
+        type: string
+        required: false
+      state:
+        title: State
+        description: Filter scans by state
+        type: string
+        required: false
+      processed:
+        title: Processed
+        description: Filter whether scans have been processed or not
+        type: integer
+        required: false
+      type:
+        title: Type
+        description: Filter scans by type
+        type: string
+        required: false
+      target:
+        title: Target
+        description: Filter scans by target
+        type: string
+        required: false
+      user_login:
+        title: User Login
+        description: Filter scans by user login
+        type: string
+        required: false
+      launched_after:
+        title: Launched After
+        description: Filter scans by launched after a date and time
+        type: date
+        required: false
+      launched_before:
+        title: Launched Before
+        description: Filter scans by launched before a date and time
+        type: date
+        required: false
+    output:
+      scans:
+        title: Scans
+        description: List of Scans
+        type: '[]scan'
+        required: true
+  launch:
+    title: Launch
+    description: Launch a Scan
+    input:
+      title:
+        title: Title
+        description: Title of the scan to be launched
+        type: string
+        required: true
+      option_title:
+        title: Option Title
+        description: Title of the option profile to use
+        type: string
+        required: true
+      priority:
+        title: Priority
+        description: Priority of the scan to be launched
+        type: string
+        enum:
+        - 0 - No Priority
+        - 1 - Emergency
+        - 2 - Ultimate
+        - 3 - Critical
+        - 4 - Major
+        - 5 - High
+        - 6 - Standard
+        - 7 - Medium
+        - 8 - Minor
+        - 9 - Low
+        required: true
+      ip:
+        title: IP
+        description: IPs to scan (can be single, comma-separated, or range)
+        type: string
+        required: true
+    output:
+      id:
+        title: ID
+        description: ID of the launched scan
+        type: integer
+        required: true
+      reference:
+        title: Reference
+        description: Reference of the launched scan
+        type: string
+        required: true
+  cancel:
+    title: Cancel
+    description: Cancel a Scan
+    input:
+      reference:
+        title: Scan Reference
+        description: Scan Reference (e.g. scan/987659876.19876)
+        type: string
+        required: true
+  pause:
+    title: Pause
+    description: Pause a Scan
+    input:
+      reference:
+        title: Scan Reference
+        description: Scan Reference (e.g. scan/987659876.19876)
+        type: string
+        required: true
+  resume:
+    title: Resume
+    description: Resume a Scan
+    input:
+      reference:
+        title: Scan Reference
+        description: Scan Reference (e.g. scan/987659876.19876)
+        type: string
+        required: true
+  delete:
+    title: Delete
+    description: Delete a Scan
+    input:
+      reference:
+        title: Scan Reference
+        description: Scan Reference (e.g. scan/987659876.19876)
+        type: string
+        required: true

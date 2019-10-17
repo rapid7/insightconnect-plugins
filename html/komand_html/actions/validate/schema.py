@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Validate an HTML file"
+
+
 class Input:
     HTML_CONTENTS = "html_contents"
     

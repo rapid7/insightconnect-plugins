@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns scores or security features"
+
+
 class Input:
     DOMAIN = "domain"
     
@@ -153,17 +157,17 @@ class SecurityOutput(komand.Output):
     }
   },
   "required": [
-    "geodiversity_normalized",
-    "tld_geodiversity",
-    "ks_test",
-    "securerank2",
-    "geoscore",
     "dga_score",
-    "perplexity",
     "entropy",
+    "geodiversity",
+    "geodiversity_normalized",
+    "geoscore",
+    "ks_test",
     "pagerank",
+    "perplexity",
     "popularity",
-    "geodiversity"
+    "securerank2",
+    "tld_geodiversity"
   ]
 }
     """)

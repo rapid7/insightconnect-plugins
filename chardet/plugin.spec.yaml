@@ -1,10 +1,11 @@
 plugin_spec_version: v2
 name: chardet
 title: Chardet
-description: Python-compatible character encoding detector
+description: Python compatible character encoding detector
 version: 1.0.0
 vendor: rapid7
-status: ["supported"]
+support: community
+status: []
 tags:
 - base64
 - encoder

@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    GET_ATTACHMENTS = "get_attachments"
     ID = "id"
     
 
@@ -22,6 +23,13 @@ class GetIssueInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "get_attachments": {
+      "type": "boolean",
+      "title": "Get Attachments",
+      "description": "Get attachments from issue",
+      "default": false,
+      "order": 2
+    },
     "id": {
       "type": "string",
       "title": "ID",

@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "query_endpoint",
-    "meta": {},
-    "input": {
-      "hostname": "00:0E:35:D4:D8:52"
+    "body": {
+        "action": "query_endpoint",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "ssl_verify": null
+        },
+        "input": {
+            "hostname": "00:0E:35:D4:D8:52"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "address": "",
-      "ssl_verify": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

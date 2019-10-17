@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: cloudshark
 title: Cloud Shark
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: The easiest way to analyze and share network capture files
 version: 1.0.0
 tags:

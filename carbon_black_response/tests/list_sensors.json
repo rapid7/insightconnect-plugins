@@ -1,21 +1,21 @@
 {
-  "body": {
-    "action": "list_sensors",
-    "meta": {},
-    "input": {
-      "groupid": "",
-      "hostname": "",
-      "id": "",
-      "ip": ""
+    "body": {
+        "action": "list_sensors",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null
+        },
+        "input": {
+            "groupid": "",
+            "hostname": "",
+            "id": "",
+            "ip": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "ssl_verify": false,
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

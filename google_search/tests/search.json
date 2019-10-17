@@ -1,17 +1,17 @@
 {
-  "type": "action_start",
-  "body": {
-    "action": "search",
-    "connection": null,
-    "input": {
-      "query": "komand",
-      "only_standard": false,
-      "stop": 16,
-      "pause": 1.0,
-      "num": 10,
-      "lang": "en"
+    "body": {
+        "action": "search",
+        "connection": null,
+        "input": {
+            "lang": "en",
+            "num": 10,
+            "only_standard": false,
+            "pause": 1.0,
+            "query": "komand",
+            "stop": 16
+        },
+        "meta": {}
     },
-    "meta": {}
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

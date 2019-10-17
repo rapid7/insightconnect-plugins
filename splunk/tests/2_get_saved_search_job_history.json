@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_saved_search_job_history",
+        "input": {
+            "saved_search_name": "Mike Test 1"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

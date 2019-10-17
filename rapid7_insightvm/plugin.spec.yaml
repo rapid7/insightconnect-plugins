@@ -3,9 +3,10 @@ name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes,
   and remediates vulnerabilities
-version: 3.2.0
+version: 3.4.0
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - insightvm
 - rapid7
@@ -1375,6 +1376,119 @@ types:
       description: The privileges and role the user is assigned
       type: user_account_role
       required: false
+  remediation_asset:
+    id:
+      description: Identifier of the asset
+      title: ID
+      type: integer
+      required: true
+    hostName:
+      description: Primary host name (local or FQDN) of the asset
+      title: Hostname
+      type: string
+      required: false
+    ip:
+      description: Primary IPv4 or IPv6 address of the asset
+      title: IP
+      type: string
+      required: true
+    mac:
+      description: Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48
+      title: MAC
+      type: string
+      required: false
+    os:
+      description: Full description of the operating system of the asset
+      title: OS
+      type: string
+      required: false
+    riskScore:
+      description: Risk score (with criticality adjustments) of the asset
+      title: Risk Score
+      type: float
+      required: false
+    criticalityTag:
+      description: The criticality tag assigned to the asset
+      title: Criticality Tag
+      type: string
+      required: false
+  remediation_vulnerability:
+    id:
+      title: ID
+      description: Identifier of the vulnerability
+      type: integer
+      required: true
+    title:
+      title: Title
+      description: The title of the vulnerability
+      type: string
+      required: true
+    description:
+      title: Description
+      description: The description of the vulnerability
+      type: string
+      required: true
+    cvssScore:
+      title: CVSS Score
+      description: The CVSS score of the vulnerability
+      type: string
+      required: true
+    severity:
+      title: Severity
+      description: The severity of the vulnerability
+      type: integer
+      required: true
+    riskScore:
+      title: Risk Score
+      description: The risk score of the vulnerability
+      type: integer
+      required: true
+  remediation:
+    solutionId:
+      title: Solution ID
+      description: The identifier of the solution
+      type: integer
+      required: true
+    nexposeId:
+      title: Rapid7 Solution ID
+      description: The identifier of the solution within InsightVM/Nexpose
+      type: string
+      required: true
+    summary:
+      title: Summary
+      description: Remediation summary
+      type: string
+      required: true
+    fix:
+      title: Fix
+      description: The steps that are part of the fix this solution prescribes
+      type: string
+      required: false
+    assetCount:
+      title: Asset Count
+      description: The number of assets that require the solution to be applied
+      type: integer
+      required: true
+    vulnerabilityCount:
+      title: Vulnerability Count
+      description: The number of vulnerabilities that would be remediated
+      type: integer
+      required: true
+    riskScore:
+      title: Risk Score
+      description: The risk score that is reduced by performing the solution
+      type: integer
+      required: true
+    assets:
+      title: Assets
+      description: The assets that require the solution to be applied
+      type: '[]remediation_asset'
+      required: true
+    vulnerabilities:
+      title: Vulnerabilities
+      description: The vulnerabilities that would be remediated
+      type: '[]remediation_vulnerability'
+      required: true
 connection:
   url:
     title: URL
@@ -1488,6 +1602,21 @@ actions:
         description: Assets
         type: '[]asset'
         required: false
+  get_scan_assets:
+    title: Get Scan Assets
+    description: Gets assets for a scan
+    input:
+      scan_id:
+        title: Scan ID
+        description: ID of the scan to get assets for
+        type: integer
+        required: true
+    output:
+      assets:
+        title: Assets
+        description: Assets
+        type: '[]asset'
+        required: false
   get_asset_vulnerabilities:
     title: Get Asset Vulnerabilities
     description: Get vulnerabilities found on an asset. Can only be used if the asset
@@ -1503,6 +1632,21 @@ actions:
         title: Vulnerabilities
         description: Vulnerabilities found on the asset
         type: '[]asset_vulnerability'
+        required: false
+  get_asset_software:
+    title: Get Asset Software
+    description: Get software found on an asset. Can only be used if the asset has first been scanned
+    input:
+      asset_id:
+        title: Asset ID
+        description: ID of the asset for which to find software
+        type: string
+        required: true
+    output:
+      software:
+        title: Software
+        description: Software found on the asset
+        type: '[]software'
         required: false
   download_report:
     title: Download Report
@@ -1889,6 +2033,36 @@ actions:
         title: Assets
         description: List of asset details returned by the search
         type: '[]asset'
+        required: true
+  get_asset:
+    title: Get Asset
+    description: Gets an asset by ID
+    input:
+      id:
+        title: ID
+        description: Get an asset by ID
+        type: integer
+        required: true
+    output:
+      asset:
+        title: Asset
+        description: Asset details
+        type: asset
+        required: true
+  get_asset_tags:
+    title: Get Asset Tags
+    description: Get a listing of all tags for an asset
+    input:
+      asset_id:
+        title: Asset ID
+        description: Identifier of asset
+        type: integer
+        required: true
+    output:
+      tags:
+        title: Tags
+        description: List of tags
+        type: '[]tag'
         required: true
   get_sites:
     title: Get Sites
@@ -3056,3 +3230,128 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+  top_remediations:
+    title: Top Remediations
+    description: Generate results for the top remediations based on a defined scope
+    input:
+      limit:
+        title: Limit
+        description: Number of remediations for which tickets should be generated
+        type: integer
+        required: true
+        default: 25
+        enum:
+          - 10
+          - 25
+          - 50
+          - 100
+      scope:
+        title: Scope
+        description: Scope context for generated report; if set remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID
+        type: string
+        required: true
+        default: none
+        enum:
+          - none
+          - assets
+          - assetGroups
+          - sites
+          - tags
+          - scan
+      scope_ids:
+        title: Scope IDs
+        description: Scope IDs for which tickets should be generated, by default all are included
+        type: '[]integer'
+        required: false
+        default: []
+      asset_limit:
+        title: Asset Limit
+        description: The amount of assets to be returned with each top remediation; this can be used to reduce message size and processing time
+        type: integer
+        required: false
+      vulnerability_limit:
+        title: Vulnerability Limit
+        description: The amount of vulnerabilities to be returned with each top remediation; this can be used to reduce message size and processing time
+        type: integer
+        required: false
+    output:
+      remediations:
+        title: Remediations
+        description: List of top remediations
+        type: '[]remediation'
+        required: true
+  generate_adhoc_sql_report:
+    title: Generate AdHoc SQL Report
+    description: Create, generate, download, and cleanup a SQL report based on the provided query
+    input:
+      query:
+        title: Query
+        type: string
+        description: Reporting Data Model SQL query
+        required: true
+      scope:
+        title: Scope
+        description: Scope context for generated report; if set, remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID; scan scope only supports single scan ID as input
+        type: string
+        required: true
+        default: none
+        enum:
+          - none
+          - assets
+          - assetGroups
+          - sites
+          - tags
+          - scan
+      scope_ids:
+        title: Scope IDs
+        description: Scope IDs for which tickets should be generated, by default all are included
+        type: '[]integer'
+        required: false
+        default: []
+      filters:
+        title: Report Filters
+        description: Filters in JSON format to be applied to the contents of the report; review InsightVM API documentation for filter options
+        type: string
+        required: false
+        default: '{}'
+    output:
+      report:
+        type: file
+        title: Base64 Encoded Report
+        description: Base64 encoded file making up the report
+        required: true
+triggers:
+  new_scans:
+    title: New Scans
+    description: Check for new InsightVM scans by site and scan status
+    input:
+      frequency:
+        title: Frequency
+        description: How often the trigger should check for new scans in minutes
+        type: integer
+        required: true
+        default: 5
+      site_name_filter:
+        title: Site Name Filter
+        description: Regular expression to match sites where new scans should be triggered
+        type: string
+        required: true
+        default: .*
+      most_recent_scan:
+        title: Most Recent Scan Only
+        description: Only process the most recent scan for a site since the last time the trigger was run
+        type: boolean
+        required: true
+        default: true
+      status_filter:
+        title: Status Filter
+        description: 'List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown'
+        type: '[]string'
+        required: false
+        default: ['Successful']
+    output:
+      scan:
+        title: Scan
+        description: InsightVM Scan
+        type: scan
+        required: false

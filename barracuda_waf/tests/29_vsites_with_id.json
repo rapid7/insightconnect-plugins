@@ -1,18 +1,18 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "action": "vsites",
-    "input": {
-      "id": "test-v14-virtual-service"
+    "body": {
+        "action": "vsites",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "id": "test-v14-virtual-service"
+        },
+        "meta": {}
     },
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,22 +1,21 @@
 {
-  "body": {
-    "action": "delete_user",
-    "input": {
-      "user_id": "not and id"
+    "body": {
+        "action": "delete_user",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "subdomain": null
+        },
+        "input": {
+            "user_id": "not and id"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "subdomain": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }
-  

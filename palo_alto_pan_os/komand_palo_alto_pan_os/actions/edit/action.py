@@ -1,5 +1,6 @@
 import komand
 from .schema import EditInput, EditOutput
+from komand.exceptions import PluginException
 # Custom imports below
 
 
@@ -15,10 +16,11 @@ class Edit(komand.Action):
     def run(self, params={}):
         xpath = params.get("xpath")
         element = params.get("element")
+
+        output = self.connection.request.edit_(action=self, xpath=xpath, element=element)
         try:
-            output = self.connection.request.edit_(action=self, xpath=xpath, element=element)
             return {"response": output['response']}
         except KeyError:
-            self.logger.error('The output did not contain a proper response.')
-            self.logger.error(output)
-            raise
+            raise PluginException(cause='The output did not contain expected keys.',
+                                  assistance='Contact support for help.',
+                                  data=output)

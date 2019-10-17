@@ -3,7 +3,8 @@ name: wordpress
 title: WordPress
 description: Open Source CMS
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 version: 1.0.0
 tags:
 - wordpress

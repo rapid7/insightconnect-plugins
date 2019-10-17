@@ -1,22 +1,22 @@
 {
-  "body": {
-    "action": "query",
-    "input": {
-      "query": "select * from plugins",
-      "parameters": {}
+    "body": {
+        "action": "query",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "db": null,
+            "host": null,
+            "port": null,
+            "type": null
+        },
+        "input": {
+            "parameters": {},
+            "query": "select * from plugins"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "host": "",
-      "db": "",
-      "port": "1433",
-      "type": "mssql"
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

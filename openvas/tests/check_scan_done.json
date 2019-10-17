@@ -1,24 +1,24 @@
 {
-  "body": {
-    "input": {
-      "scan_id": "9a849831-23a0-48ba-8e8f-a3deeaa45f7e",
-      "poll": 0.1666
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "ssl_verify": null,
+            "timeout": null
+        },
+        "dispatcher": {
+            "url": ""
+        },
+        "input": {
+            "poll": 0.1666,
+            "scan_id": "9a849831-23a0-48ba-8e8f-a3deeaa45f7e"
+        },
+        "meta": {},
+        "trigger": "check_scan_done"
     },
-    "connection": {
-      "ssl_verify": false,
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "timeout": 10,
-      "server": "192.168.2.183:9390"
-    },
-    "trigger": "check_scan_done",
-    "meta": {},
-    "dispatcher": {
-      "url": ""
-    }
-  },
-  "version": "v1",
-  "type": "trigger_start"
+    "type": "trigger_start",
+    "version": "v1"
 }

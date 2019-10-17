@@ -5,7 +5,8 @@ description: Cb Protection allows users to lock down and harden systems to preve
   malware, ransomware, and more
 version: 2.2.0
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - carbon black
 - cb

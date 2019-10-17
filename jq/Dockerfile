@@ -1,8 +1,16 @@
 FROM komand/python-3-slim-plugin:2
-# Refer to the following documentation for available SDK parent images: https://komand.github.io/python/sdk.html#version
-
+# The three supported python parent images are:
+# - komand/python-2-plugin
+# - komand/python-3-plugin
+# - komand/python-pypy3-plugin
+#
 LABEL organization=rapid7
 LABEL sdk=python
+
+# Add any custom package dependencies here
+# NOTE: Add pip packages to requirements.txt
+
+# End package dependencies
 
 # Add source code
 WORKDIR /python/src

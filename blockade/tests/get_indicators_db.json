@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_indicators",
-    "meta": {},
-    "input": {
-      "db_route": "backup"
+    "body": {
+        "action": "get_indicators",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "email": null,
+            "url": null
+        },
+        "input": {
+            "db_route": "backup"
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": "http://192.168.99.100:5000",
-      "email": "",
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

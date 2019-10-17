@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List the virtual machines in a resource group"
+
+
 class Input:
     RESOURCEGROUP = "resourceGroup"
     SUBSCRIPTIONID = "subscriptionId"
@@ -32,8 +36,8 @@ class ListVmInput(komand.Input):
     }
   },
   "required": [
-    "subscriptionId",
-    "resourceGroup"
+    "resourceGroup",
+    "subscriptionId"
   ]
 }
     """)
@@ -59,6 +63,41 @@ class ListVmOutput(komand.Output):
     }
   },
   "definitions": {
+    "SSH": {
+      "type": "object",
+      "title": "SSH",
+      "properties": {
+        "publicKeys": {
+          "type": "array",
+          "title": "Public Keys",
+          "description": "Specifies a collection of keys to be placed on the virtual machine",
+          "items": {
+            "$ref": "#/definitions/publicKeys"
+          },
+          "order": 1
+        }
+      },
+      "definitions": {
+        "publicKeys": {
+          "type": "object",
+          "title": "publicKeys",
+          "properties": {
+            "keyData": {
+              "type": "string",
+              "title": "Key Data",
+              "description": "SSH public key certificate used to authenticate with the vm through SSH",
+              "order": 1
+            },
+            "path": {
+              "type": "string",
+              "title": "Path",
+              "description": "Specifies the full path on the created VM where SSH public key is stored",
+              "order": 2
+            }
+          }
+        }
+      }
+    },
     "additionalUnattendContent": {
       "type": "object",
       "title": "additionalUnattendContent",
@@ -72,7 +111,7 @@ class ListVmOutput(komand.Output):
         "content": {
           "type": "string",
           "title": "Content",
-          "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+          "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
           "order": 2
         },
         "pass": {
@@ -113,8 +152,8 @@ class ListVmOutput(komand.Output):
         },
         "storageUri": {
           "type": "string",
-          "title": "Storage Uri",
-          "description": "Uri of the storage account to use for placing the console output and screenshot",
+          "title": "Storage URI",
+          "description": "URI of the storage account to use for placing the console output and screenshot",
           "order": 2
         }
       }
@@ -143,8 +182,8 @@ class ListVmOutput(komand.Output):
             },
             "storageUri": {
               "type": "string",
-              "title": "Storage Uri",
-              "description": "Uri of the storage account to use for placing the console output and screenshot",
+              "title": "Storage URI",
+              "description": "URI of the storage account to use for placing the console output and screenshot",
               "order": 2
             }
           }
@@ -203,41 +242,23 @@ class ListVmOutput(komand.Output):
       "type": "object",
       "title": "linuxConfiguration",
       "properties": {
+        "SSH": {
+          "$ref": "#/definitions/SSH",
+          "title": "SSH",
+          "description": "Specifies a collection of keys to be placed on the virtual machine",
+          "order": 2
+        },
         "disablePasswordAuthentication": {
           "type": "boolean",
           "title": "Disable Password Authentication",
           "description": "Specifies whether password authentication should be disabled",
           "order": 1
-        },
-        "ssh": {
-          "$ref": "#/definitions/ssh",
-          "title": "SSH",
-          "description": "Specifies a collection of keys to be placed on the virtual machine",
-          "order": 2
         }
       },
       "definitions": {
-        "publicKeys": {
+        "SSH": {
           "type": "object",
-          "title": "publicKeys",
-          "properties": {
-            "keyData": {
-              "type": "string",
-              "title": "Key Data",
-              "description": "SSH public key certificate used to authenticate with the vm through ssh",
-              "order": 1
-            },
-            "path": {
-              "type": "string",
-              "title": "Path",
-              "description": "Specifies the full path on the created VM where ssh public key is stored",
-              "order": 2
-            }
-          }
-        },
-        "ssh": {
-          "type": "object",
-          "title": "ssh",
+          "title": "SSH",
           "properties": {
             "publicKeys": {
               "type": "array",
@@ -257,16 +278,34 @@ class ListVmOutput(komand.Output):
                 "keyData": {
                   "type": "string",
                   "title": "Key Data",
-                  "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                  "description": "SSH public key certificate used to authenticate with the vm through SSH",
                   "order": 1
                 },
                 "path": {
                   "type": "string",
                   "title": "Path",
-                  "description": "Specifies the full path on the created VM where ssh public key is stored",
+                  "description": "Specifies the full path on the created VM where SSH public key is stored",
                   "order": 2
                 }
               }
+            }
+          }
+        },
+        "publicKeys": {
+          "type": "object",
+          "title": "publicKeys",
+          "properties": {
+            "keyData": {
+              "type": "string",
+              "title": "Key Data",
+              "description": "SSH public key certificate used to authenticate with the vm through SSH",
+              "order": 1
+            },
+            "path": {
+              "type": "string",
+              "title": "Path",
+              "description": "Specifies the full path on the created VM where SSH public key is stored",
+              "order": 2
             }
           }
         }
@@ -278,8 +317,8 @@ class ListVmOutput(komand.Output):
       "properties": {
         "certificateUrl": {
           "type": "string",
-          "title": "Certificate Url",
-          "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+          "title": "Certificate URL",
+          "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
           "order": 1
         },
         "protocol": {
@@ -374,7 +413,7 @@ class ListVmOutput(komand.Output):
         "vhd": {
           "$ref": "#/definitions/vhd",
           "title": "VHD",
-          "description": "Specifies the uri of the location in storage where the vhd for the virtual machine should be placed",
+          "description": "Specifies the URI of the location in storage where the vhd for the virtual machine should be placed",
           "order": 6
         }
       },
@@ -404,7 +443,7 @@ class ListVmOutput(komand.Output):
             "uri": {
               "type": "string",
               "title": "VHD",
-              "description": "Specifies the vhd uri",
+              "description": "Specifies the vhd URI",
               "order": 1
             }
           }
@@ -462,6 +501,41 @@ class ListVmOutput(komand.Output):
         }
       },
       "definitions": {
+        "SSH": {
+          "type": "object",
+          "title": "SSH",
+          "properties": {
+            "publicKeys": {
+              "type": "array",
+              "title": "Public Keys",
+              "description": "Specifies a collection of keys to be placed on the virtual machine",
+              "items": {
+                "$ref": "#/definitions/publicKeys"
+              },
+              "order": 1
+            }
+          },
+          "definitions": {
+            "publicKeys": {
+              "type": "object",
+              "title": "publicKeys",
+              "properties": {
+                "keyData": {
+                  "type": "string",
+                  "title": "Key Data",
+                  "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                  "order": 1
+                },
+                "path": {
+                  "type": "string",
+                  "title": "Path",
+                  "description": "Specifies the full path on the created VM where SSH public key is stored",
+                  "order": 2
+                }
+              }
+            }
+          }
+        },
         "additionalUnattendContent": {
           "type": "object",
           "title": "additionalUnattendContent",
@@ -475,7 +549,7 @@ class ListVmOutput(komand.Output):
             "content": {
               "type": "string",
               "title": "Content",
-              "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+              "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
               "order": 2
             },
             "pass": {
@@ -496,41 +570,23 @@ class ListVmOutput(komand.Output):
           "type": "object",
           "title": "linuxConfiguration",
           "properties": {
+            "SSH": {
+              "$ref": "#/definitions/SSH",
+              "title": "SSH",
+              "description": "Specifies a collection of keys to be placed on the virtual machine",
+              "order": 2
+            },
             "disablePasswordAuthentication": {
               "type": "boolean",
               "title": "Disable Password Authentication",
               "description": "Specifies whether password authentication should be disabled",
               "order": 1
-            },
-            "ssh": {
-              "$ref": "#/definitions/ssh",
-              "title": "SSH",
-              "description": "Specifies a collection of keys to be placed on the virtual machine",
-              "order": 2
             }
           },
           "definitions": {
-            "publicKeys": {
+            "SSH": {
               "type": "object",
-              "title": "publicKeys",
-              "properties": {
-                "keyData": {
-                  "type": "string",
-                  "title": "Key Data",
-                  "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                  "order": 1
-                },
-                "path": {
-                  "type": "string",
-                  "title": "Path",
-                  "description": "Specifies the full path on the created VM where ssh public key is stored",
-                  "order": 2
-                }
-              }
-            },
-            "ssh": {
-              "type": "object",
-              "title": "ssh",
+              "title": "SSH",
               "properties": {
                 "publicKeys": {
                   "type": "array",
@@ -550,16 +606,34 @@ class ListVmOutput(komand.Output):
                     "keyData": {
                       "type": "string",
                       "title": "Key Data",
-                      "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                      "description": "SSH public key certificate used to authenticate with the vm through SSH",
                       "order": 1
                     },
                     "path": {
                       "type": "string",
                       "title": "Path",
-                      "description": "Specifies the full path on the created VM where ssh public key is stored",
+                      "description": "Specifies the full path on the created VM where SSH public key is stored",
                       "order": 2
                     }
                   }
+                }
+              }
+            },
+            "publicKeys": {
+              "type": "object",
+              "title": "publicKeys",
+              "properties": {
+                "keyData": {
+                  "type": "string",
+                  "title": "Key Data",
+                  "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                  "order": 1
+                },
+                "path": {
+                  "type": "string",
+                  "title": "Path",
+                  "description": "Specifies the full path on the created VM where SSH public key is stored",
+                  "order": 2
                 }
               }
             }
@@ -571,8 +645,8 @@ class ListVmOutput(komand.Output):
           "properties": {
             "certificateUrl": {
               "type": "string",
-              "title": "Certificate Url",
-              "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+              "title": "Certificate URL",
+              "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
               "order": 1
             },
             "protocol": {
@@ -590,49 +664,14 @@ class ListVmOutput(komand.Output):
             "keyData": {
               "type": "string",
               "title": "Key Data",
-              "description": "SSH public key certificate used to authenticate with the vm through ssh",
+              "description": "SSH public key certificate used to authenticate with the vm through SSH",
               "order": 1
             },
             "path": {
               "type": "string",
               "title": "Path",
-              "description": "Specifies the full path on the created VM where ssh public key is stored",
+              "description": "Specifies the full path on the created VM where SSH public key is stored",
               "order": 2
-            }
-          }
-        },
-        "ssh": {
-          "type": "object",
-          "title": "ssh",
-          "properties": {
-            "publicKeys": {
-              "type": "array",
-              "title": "Public Keys",
-              "description": "Specifies a collection of keys to be placed on the virtual machine",
-              "items": {
-                "$ref": "#/definitions/publicKeys"
-              },
-              "order": 1
-            }
-          },
-          "definitions": {
-            "publicKeys": {
-              "type": "object",
-              "title": "publicKeys",
-              "properties": {
-                "keyData": {
-                  "type": "string",
-                  "title": "Key Data",
-                  "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                  "order": 1
-                },
-                "path": {
-                  "type": "string",
-                  "title": "Path",
-                  "description": "Specifies the full path on the created VM where ssh public key is stored",
-                  "order": 2
-                }
-              }
             }
           }
         },
@@ -656,8 +695,8 @@ class ListVmOutput(komand.Output):
               "properties": {
                 "certificateUrl": {
                   "type": "string",
-                  "title": "Certificate Url",
-                  "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                  "title": "Certificate URL",
+                  "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                   "order": 1
                 },
                 "protocol": {
@@ -677,7 +716,7 @@ class ListVmOutput(komand.Output):
             "additionalUnattendContent": {
               "$ref": "#/definitions/additionalUnattendContent",
               "title": "Additional Unattend Content",
-              "description": "Specifies additional xml formatted information that can be included in the unattend.xml file, which is used by windows setup",
+              "description": "Specifies additional XML formatted information that can be included in the unattend.xml file, which is used by windows setup",
               "order": 1
             },
             "enableAutomaticUpdates": {
@@ -719,7 +758,7 @@ class ListVmOutput(komand.Output):
                 "content": {
                   "type": "string",
                   "title": "Content",
-                  "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+                  "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
                   "order": 2
                 },
                 "pass": {
@@ -742,8 +781,8 @@ class ListVmOutput(komand.Output):
               "properties": {
                 "certificateUrl": {
                   "type": "string",
-                  "title": "Certificate Url",
-                  "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                  "title": "Certificate URL",
+                  "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                   "order": 1
                 },
                 "protocol": {
@@ -774,8 +813,8 @@ class ListVmOutput(komand.Output):
                   "properties": {
                     "certificateUrl": {
                       "type": "string",
-                      "title": "Certificate Url",
-                      "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                      "title": "Certificate URL",
+                      "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                       "order": 1
                     },
                     "protocol": {
@@ -841,11 +880,46 @@ class ListVmOutput(komand.Output):
         "vmId": {
           "type": "string",
           "title": "Virtual Machine ID",
-          "description": "The vm unique id",
+          "description": "The vm unique ID",
           "order": 8
         }
       },
       "definitions": {
+        "SSH": {
+          "type": "object",
+          "title": "SSH",
+          "properties": {
+            "publicKeys": {
+              "type": "array",
+              "title": "Public Keys",
+              "description": "Specifies a collection of keys to be placed on the virtual machine",
+              "items": {
+                "$ref": "#/definitions/publicKeys"
+              },
+              "order": 1
+            }
+          },
+          "definitions": {
+            "publicKeys": {
+              "type": "object",
+              "title": "publicKeys",
+              "properties": {
+                "keyData": {
+                  "type": "string",
+                  "title": "Key Data",
+                  "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                  "order": 1
+                },
+                "path": {
+                  "type": "string",
+                  "title": "Path",
+                  "description": "Specifies the full path on the created VM where SSH public key is stored",
+                  "order": 2
+                }
+              }
+            }
+          }
+        },
         "additionalUnattendContent": {
           "type": "object",
           "title": "additionalUnattendContent",
@@ -859,7 +933,7 @@ class ListVmOutput(komand.Output):
             "content": {
               "type": "string",
               "title": "Content",
-              "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+              "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
               "order": 2
             },
             "pass": {
@@ -900,8 +974,8 @@ class ListVmOutput(komand.Output):
             },
             "storageUri": {
               "type": "string",
-              "title": "Storage Uri",
-              "description": "Uri of the storage account to use for placing the console output and screenshot",
+              "title": "Storage URI",
+              "description": "URI of the storage account to use for placing the console output and screenshot",
               "order": 2
             }
           }
@@ -930,8 +1004,8 @@ class ListVmOutput(komand.Output):
                 },
                 "storageUri": {
                   "type": "string",
-                  "title": "Storage Uri",
-                  "description": "Uri of the storage account to use for placing the console output and screenshot",
+                  "title": "Storage URI",
+                  "description": "URI of the storage account to use for placing the console output and screenshot",
                   "order": 2
                 }
               }
@@ -990,41 +1064,23 @@ class ListVmOutput(komand.Output):
           "type": "object",
           "title": "linuxConfiguration",
           "properties": {
+            "SSH": {
+              "$ref": "#/definitions/SSH",
+              "title": "SSH",
+              "description": "Specifies a collection of keys to be placed on the virtual machine",
+              "order": 2
+            },
             "disablePasswordAuthentication": {
               "type": "boolean",
               "title": "Disable Password Authentication",
               "description": "Specifies whether password authentication should be disabled",
               "order": 1
-            },
-            "ssh": {
-              "$ref": "#/definitions/ssh",
-              "title": "SSH",
-              "description": "Specifies a collection of keys to be placed on the virtual machine",
-              "order": 2
             }
           },
           "definitions": {
-            "publicKeys": {
+            "SSH": {
               "type": "object",
-              "title": "publicKeys",
-              "properties": {
-                "keyData": {
-                  "type": "string",
-                  "title": "Key Data",
-                  "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                  "order": 1
-                },
-                "path": {
-                  "type": "string",
-                  "title": "Path",
-                  "description": "Specifies the full path on the created VM where ssh public key is stored",
-                  "order": 2
-                }
-              }
-            },
-            "ssh": {
-              "type": "object",
-              "title": "ssh",
+              "title": "SSH",
               "properties": {
                 "publicKeys": {
                   "type": "array",
@@ -1044,16 +1100,34 @@ class ListVmOutput(komand.Output):
                     "keyData": {
                       "type": "string",
                       "title": "Key Data",
-                      "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                      "description": "SSH public key certificate used to authenticate with the vm through SSH",
                       "order": 1
                     },
                     "path": {
                       "type": "string",
                       "title": "Path",
-                      "description": "Specifies the full path on the created VM where ssh public key is stored",
+                      "description": "Specifies the full path on the created VM where SSH public key is stored",
                       "order": 2
                     }
                   }
+                }
+              }
+            },
+            "publicKeys": {
+              "type": "object",
+              "title": "publicKeys",
+              "properties": {
+                "keyData": {
+                  "type": "string",
+                  "title": "Key Data",
+                  "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                  "order": 1
+                },
+                "path": {
+                  "type": "string",
+                  "title": "Path",
+                  "description": "Specifies the full path on the created VM where SSH public key is stored",
+                  "order": 2
                 }
               }
             }
@@ -1065,8 +1139,8 @@ class ListVmOutput(komand.Output):
           "properties": {
             "certificateUrl": {
               "type": "string",
-              "title": "Certificate Url",
-              "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+              "title": "Certificate URL",
+              "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
               "order": 1
             },
             "protocol": {
@@ -1161,7 +1235,7 @@ class ListVmOutput(komand.Output):
             "vhd": {
               "$ref": "#/definitions/vhd",
               "title": "VHD",
-              "description": "Specifies the uri of the location in storage where the vhd for the virtual machine should be placed",
+              "description": "Specifies the URI of the location in storage where the vhd for the virtual machine should be placed",
               "order": 6
             }
           },
@@ -1191,7 +1265,7 @@ class ListVmOutput(komand.Output):
                 "uri": {
                   "type": "string",
                   "title": "VHD",
-                  "description": "Specifies the vhd uri",
+                  "description": "Specifies the vhd URI",
                   "order": 1
                 }
               }
@@ -1249,6 +1323,41 @@ class ListVmOutput(komand.Output):
             }
           },
           "definitions": {
+            "SSH": {
+              "type": "object",
+              "title": "SSH",
+              "properties": {
+                "publicKeys": {
+                  "type": "array",
+                  "title": "Public Keys",
+                  "description": "Specifies a collection of keys to be placed on the virtual machine",
+                  "items": {
+                    "$ref": "#/definitions/publicKeys"
+                  },
+                  "order": 1
+                }
+              },
+              "definitions": {
+                "publicKeys": {
+                  "type": "object",
+                  "title": "publicKeys",
+                  "properties": {
+                    "keyData": {
+                      "type": "string",
+                      "title": "Key Data",
+                      "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                      "order": 1
+                    },
+                    "path": {
+                      "type": "string",
+                      "title": "Path",
+                      "description": "Specifies the full path on the created VM where SSH public key is stored",
+                      "order": 2
+                    }
+                  }
+                }
+              }
+            },
             "additionalUnattendContent": {
               "type": "object",
               "title": "additionalUnattendContent",
@@ -1262,7 +1371,7 @@ class ListVmOutput(komand.Output):
                 "content": {
                   "type": "string",
                   "title": "Content",
-                  "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+                  "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
                   "order": 2
                 },
                 "pass": {
@@ -1283,41 +1392,23 @@ class ListVmOutput(komand.Output):
               "type": "object",
               "title": "linuxConfiguration",
               "properties": {
+                "SSH": {
+                  "$ref": "#/definitions/SSH",
+                  "title": "SSH",
+                  "description": "Specifies a collection of keys to be placed on the virtual machine",
+                  "order": 2
+                },
                 "disablePasswordAuthentication": {
                   "type": "boolean",
                   "title": "Disable Password Authentication",
                   "description": "Specifies whether password authentication should be disabled",
                   "order": 1
-                },
-                "ssh": {
-                  "$ref": "#/definitions/ssh",
-                  "title": "SSH",
-                  "description": "Specifies a collection of keys to be placed on the virtual machine",
-                  "order": 2
                 }
               },
               "definitions": {
-                "publicKeys": {
+                "SSH": {
                   "type": "object",
-                  "title": "publicKeys",
-                  "properties": {
-                    "keyData": {
-                      "type": "string",
-                      "title": "Key Data",
-                      "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                      "order": 1
-                    },
-                    "path": {
-                      "type": "string",
-                      "title": "Path",
-                      "description": "Specifies the full path on the created VM where ssh public key is stored",
-                      "order": 2
-                    }
-                  }
-                },
-                "ssh": {
-                  "type": "object",
-                  "title": "ssh",
+                  "title": "SSH",
                   "properties": {
                     "publicKeys": {
                       "type": "array",
@@ -1337,16 +1428,34 @@ class ListVmOutput(komand.Output):
                         "keyData": {
                           "type": "string",
                           "title": "Key Data",
-                          "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                          "description": "SSH public key certificate used to authenticate with the vm through SSH",
                           "order": 1
                         },
                         "path": {
                           "type": "string",
                           "title": "Path",
-                          "description": "Specifies the full path on the created VM where ssh public key is stored",
+                          "description": "Specifies the full path on the created VM where SSH public key is stored",
                           "order": 2
                         }
                       }
+                    }
+                  }
+                },
+                "publicKeys": {
+                  "type": "object",
+                  "title": "publicKeys",
+                  "properties": {
+                    "keyData": {
+                      "type": "string",
+                      "title": "Key Data",
+                      "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                      "order": 1
+                    },
+                    "path": {
+                      "type": "string",
+                      "title": "Path",
+                      "description": "Specifies the full path on the created VM where SSH public key is stored",
+                      "order": 2
                     }
                   }
                 }
@@ -1358,8 +1467,8 @@ class ListVmOutput(komand.Output):
               "properties": {
                 "certificateUrl": {
                   "type": "string",
-                  "title": "Certificate Url",
-                  "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                  "title": "Certificate URL",
+                  "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                   "order": 1
                 },
                 "protocol": {
@@ -1377,49 +1486,14 @@ class ListVmOutput(komand.Output):
                 "keyData": {
                   "type": "string",
                   "title": "Key Data",
-                  "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                  "description": "SSH public key certificate used to authenticate with the vm through SSH",
                   "order": 1
                 },
                 "path": {
                   "type": "string",
                   "title": "Path",
-                  "description": "Specifies the full path on the created VM where ssh public key is stored",
+                  "description": "Specifies the full path on the created VM where SSH public key is stored",
                   "order": 2
-                }
-              }
-            },
-            "ssh": {
-              "type": "object",
-              "title": "ssh",
-              "properties": {
-                "publicKeys": {
-                  "type": "array",
-                  "title": "Public Keys",
-                  "description": "Specifies a collection of keys to be placed on the virtual machine",
-                  "items": {
-                    "$ref": "#/definitions/publicKeys"
-                  },
-                  "order": 1
-                }
-              },
-              "definitions": {
-                "publicKeys": {
-                  "type": "object",
-                  "title": "publicKeys",
-                  "properties": {
-                    "keyData": {
-                      "type": "string",
-                      "title": "Key Data",
-                      "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                      "order": 1
-                    },
-                    "path": {
-                      "type": "string",
-                      "title": "Path",
-                      "description": "Specifies the full path on the created VM where ssh public key is stored",
-                      "order": 2
-                    }
-                  }
                 }
               }
             },
@@ -1443,8 +1517,8 @@ class ListVmOutput(komand.Output):
                   "properties": {
                     "certificateUrl": {
                       "type": "string",
-                      "title": "Certificate Url",
-                      "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                      "title": "Certificate URL",
+                      "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                       "order": 1
                     },
                     "protocol": {
@@ -1464,7 +1538,7 @@ class ListVmOutput(komand.Output):
                 "additionalUnattendContent": {
                   "$ref": "#/definitions/additionalUnattendContent",
                   "title": "Additional Unattend Content",
-                  "description": "Specifies additional xml formatted information that can be included in the unattend.xml file, which is used by windows setup",
+                  "description": "Specifies additional XML formatted information that can be included in the unattend.xml file, which is used by windows setup",
                   "order": 1
                 },
                 "enableAutomaticUpdates": {
@@ -1506,7 +1580,7 @@ class ListVmOutput(komand.Output):
                     "content": {
                       "type": "string",
                       "title": "Content",
-                      "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+                      "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
                       "order": 2
                     },
                     "pass": {
@@ -1529,8 +1603,8 @@ class ListVmOutput(komand.Output):
                   "properties": {
                     "certificateUrl": {
                       "type": "string",
-                      "title": "Certificate Url",
-                      "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                      "title": "Certificate URL",
+                      "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                       "order": 1
                     },
                     "protocol": {
@@ -1561,8 +1635,8 @@ class ListVmOutput(komand.Output):
                       "properties": {
                         "certificateUrl": {
                           "type": "string",
-                          "title": "Certificate Url",
-                          "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                          "title": "Certificate URL",
+                          "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                           "order": 1
                         },
                         "protocol": {
@@ -1586,49 +1660,14 @@ class ListVmOutput(komand.Output):
             "keyData": {
               "type": "string",
               "title": "Key Data",
-              "description": "SSH public key certificate used to authenticate with the vm through ssh",
+              "description": "SSH public key certificate used to authenticate with the vm through SSH",
               "order": 1
             },
             "path": {
               "type": "string",
               "title": "Path",
-              "description": "Specifies the full path on the created VM where ssh public key is stored",
+              "description": "Specifies the full path on the created VM where SSH public key is stored",
               "order": 2
-            }
-          }
-        },
-        "ssh": {
-          "type": "object",
-          "title": "ssh",
-          "properties": {
-            "publicKeys": {
-              "type": "array",
-              "title": "Public Keys",
-              "description": "Specifies a collection of keys to be placed on the virtual machine",
-              "items": {
-                "$ref": "#/definitions/publicKeys"
-              },
-              "order": 1
-            }
-          },
-          "definitions": {
-            "publicKeys": {
-              "type": "object",
-              "title": "publicKeys",
-              "properties": {
-                "keyData": {
-                  "type": "string",
-                  "title": "Key Data",
-                  "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                  "order": 1
-                },
-                "path": {
-                  "type": "string",
-                  "title": "Path",
-                  "description": "Specifies the full path on the created VM where ssh public key is stored",
-                  "order": 2
-                }
-              }
             }
           }
         },
@@ -1750,7 +1789,7 @@ class ListVmOutput(komand.Output):
                 "vhd": {
                   "$ref": "#/definitions/vhd",
                   "title": "VHD",
-                  "description": "Specifies the uri of the location in storage where the vhd for the virtual machine should be placed",
+                  "description": "Specifies the URI of the location in storage where the vhd for the virtual machine should be placed",
                   "order": 6
                 }
               },
@@ -1780,7 +1819,7 @@ class ListVmOutput(komand.Output):
                     "uri": {
                       "type": "string",
                       "title": "VHD",
-                      "description": "Specifies the vhd uri",
+                      "description": "Specifies the vhd URI",
                       "order": 1
                     }
                   }
@@ -1794,7 +1833,7 @@ class ListVmOutput(komand.Output):
                 "uri": {
                   "type": "string",
                   "title": "VHD",
-                  "description": "Specifies the vhd uri",
+                  "description": "Specifies the vhd URI",
                   "order": 1
                 }
               }
@@ -1808,7 +1847,7 @@ class ListVmOutput(komand.Output):
             "uri": {
               "type": "string",
               "title": "VHD",
-              "description": "Specifies the vhd uri",
+              "description": "Specifies the vhd URI",
               "order": 1
             }
           }
@@ -1833,8 +1872,8 @@ class ListVmOutput(komand.Output):
               "properties": {
                 "certificateUrl": {
                   "type": "string",
-                  "title": "Certificate Url",
-                  "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                  "title": "Certificate URL",
+                  "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                   "order": 1
                 },
                 "protocol": {
@@ -1854,7 +1893,7 @@ class ListVmOutput(komand.Output):
             "additionalUnattendContent": {
               "$ref": "#/definitions/additionalUnattendContent",
               "title": "Additional Unattend Content",
-              "description": "Specifies additional xml formatted information that can be included in the unattend.xml file, which is used by windows setup",
+              "description": "Specifies additional XML formatted information that can be included in the unattend.xml file, which is used by windows setup",
               "order": 1
             },
             "enableAutomaticUpdates": {
@@ -1896,7 +1935,7 @@ class ListVmOutput(komand.Output):
                 "content": {
                   "type": "string",
                   "title": "Content",
-                  "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+                  "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
                   "order": 2
                 },
                 "pass": {
@@ -1919,8 +1958,8 @@ class ListVmOutput(komand.Output):
               "properties": {
                 "certificateUrl": {
                   "type": "string",
-                  "title": "Certificate Url",
-                  "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                  "title": "Certificate URL",
+                  "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                   "order": 1
                 },
                 "protocol": {
@@ -1951,8 +1990,8 @@ class ListVmOutput(komand.Output):
                   "properties": {
                     "certificateUrl": {
                       "type": "string",
-                      "title": "Certificate Url",
-                      "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                      "title": "Certificate URL",
+                      "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                       "order": 1
                     },
                     "protocol": {
@@ -1976,49 +2015,14 @@ class ListVmOutput(komand.Output):
         "keyData": {
           "type": "string",
           "title": "Key Data",
-          "description": "SSH public key certificate used to authenticate with the vm through ssh",
+          "description": "SSH public key certificate used to authenticate with the vm through SSH",
           "order": 1
         },
         "path": {
           "type": "string",
           "title": "Path",
-          "description": "Specifies the full path on the created VM where ssh public key is stored",
+          "description": "Specifies the full path on the created VM where SSH public key is stored",
           "order": 2
-        }
-      }
-    },
-    "ssh": {
-      "type": "object",
-      "title": "ssh",
-      "properties": {
-        "publicKeys": {
-          "type": "array",
-          "title": "Public Keys",
-          "description": "Specifies a collection of keys to be placed on the virtual machine",
-          "items": {
-            "$ref": "#/definitions/publicKeys"
-          },
-          "order": 1
-        }
-      },
-      "definitions": {
-        "publicKeys": {
-          "type": "object",
-          "title": "publicKeys",
-          "properties": {
-            "keyData": {
-              "type": "string",
-              "title": "Key Data",
-              "description": "SSH public key certificate used to authenticate with the vm through ssh",
-              "order": 1
-            },
-            "path": {
-              "type": "string",
-              "title": "Path",
-              "description": "Specifies the full path on the created VM where ssh public key is stored",
-              "order": 2
-            }
-          }
         }
       }
     },
@@ -2140,7 +2144,7 @@ class ListVmOutput(komand.Output):
             "vhd": {
               "$ref": "#/definitions/vhd",
               "title": "VHD",
-              "description": "Specifies the uri of the location in storage where the vhd for the virtual machine should be placed",
+              "description": "Specifies the URI of the location in storage where the vhd for the virtual machine should be placed",
               "order": 6
             }
           },
@@ -2170,7 +2174,7 @@ class ListVmOutput(komand.Output):
                 "uri": {
                   "type": "string",
                   "title": "VHD",
-                  "description": "Specifies the vhd uri",
+                  "description": "Specifies the vhd URI",
                   "order": 1
                 }
               }
@@ -2184,7 +2188,7 @@ class ListVmOutput(komand.Output):
             "uri": {
               "type": "string",
               "title": "VHD",
-              "description": "Specifies the vhd uri",
+              "description": "Specifies the vhd URI",
               "order": 1
             }
           }
@@ -2210,7 +2214,7 @@ class ListVmOutput(komand.Output):
         "id": {
           "type": "string",
           "title": "ID",
-          "description": "Specifies the identifying url of the virtual machine",
+          "description": "Specifies the identifying URL of the virtual machine",
           "order": 1
         },
         "location": {
@@ -2245,6 +2249,41 @@ class ListVmOutput(komand.Output):
         }
       },
       "definitions": {
+        "SSH": {
+          "type": "object",
+          "title": "SSH",
+          "properties": {
+            "publicKeys": {
+              "type": "array",
+              "title": "Public Keys",
+              "description": "Specifies a collection of keys to be placed on the virtual machine",
+              "items": {
+                "$ref": "#/definitions/publicKeys"
+              },
+              "order": 1
+            }
+          },
+          "definitions": {
+            "publicKeys": {
+              "type": "object",
+              "title": "publicKeys",
+              "properties": {
+                "keyData": {
+                  "type": "string",
+                  "title": "Key Data",
+                  "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                  "order": 1
+                },
+                "path": {
+                  "type": "string",
+                  "title": "Path",
+                  "description": "Specifies the full path on the created VM where SSH public key is stored",
+                  "order": 2
+                }
+              }
+            }
+          }
+        },
         "additionalUnattendContent": {
           "type": "object",
           "title": "additionalUnattendContent",
@@ -2258,7 +2297,7 @@ class ListVmOutput(komand.Output):
             "content": {
               "type": "string",
               "title": "Content",
-              "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+              "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
               "order": 2
             },
             "pass": {
@@ -2299,8 +2338,8 @@ class ListVmOutput(komand.Output):
             },
             "storageUri": {
               "type": "string",
-              "title": "Storage Uri",
-              "description": "Uri of the storage account to use for placing the console output and screenshot",
+              "title": "Storage URI",
+              "description": "URI of the storage account to use for placing the console output and screenshot",
               "order": 2
             }
           }
@@ -2329,8 +2368,8 @@ class ListVmOutput(komand.Output):
                 },
                 "storageUri": {
                   "type": "string",
-                  "title": "Storage Uri",
-                  "description": "Uri of the storage account to use for placing the console output and screenshot",
+                  "title": "Storage URI",
+                  "description": "URI of the storage account to use for placing the console output and screenshot",
                   "order": 2
                 }
               }
@@ -2389,41 +2428,23 @@ class ListVmOutput(komand.Output):
           "type": "object",
           "title": "linuxConfiguration",
           "properties": {
+            "SSH": {
+              "$ref": "#/definitions/SSH",
+              "title": "SSH",
+              "description": "Specifies a collection of keys to be placed on the virtual machine",
+              "order": 2
+            },
             "disablePasswordAuthentication": {
               "type": "boolean",
               "title": "Disable Password Authentication",
               "description": "Specifies whether password authentication should be disabled",
               "order": 1
-            },
-            "ssh": {
-              "$ref": "#/definitions/ssh",
-              "title": "SSH",
-              "description": "Specifies a collection of keys to be placed on the virtual machine",
-              "order": 2
             }
           },
           "definitions": {
-            "publicKeys": {
+            "SSH": {
               "type": "object",
-              "title": "publicKeys",
-              "properties": {
-                "keyData": {
-                  "type": "string",
-                  "title": "Key Data",
-                  "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                  "order": 1
-                },
-                "path": {
-                  "type": "string",
-                  "title": "Path",
-                  "description": "Specifies the full path on the created VM where ssh public key is stored",
-                  "order": 2
-                }
-              }
-            },
-            "ssh": {
-              "type": "object",
-              "title": "ssh",
+              "title": "SSH",
               "properties": {
                 "publicKeys": {
                   "type": "array",
@@ -2443,16 +2464,34 @@ class ListVmOutput(komand.Output):
                     "keyData": {
                       "type": "string",
                       "title": "Key Data",
-                      "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                      "description": "SSH public key certificate used to authenticate with the vm through SSH",
                       "order": 1
                     },
                     "path": {
                       "type": "string",
                       "title": "Path",
-                      "description": "Specifies the full path on the created VM where ssh public key is stored",
+                      "description": "Specifies the full path on the created VM where SSH public key is stored",
                       "order": 2
                     }
                   }
+                }
+              }
+            },
+            "publicKeys": {
+              "type": "object",
+              "title": "publicKeys",
+              "properties": {
+                "keyData": {
+                  "type": "string",
+                  "title": "Key Data",
+                  "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                  "order": 1
+                },
+                "path": {
+                  "type": "string",
+                  "title": "Path",
+                  "description": "Specifies the full path on the created VM where SSH public key is stored",
+                  "order": 2
                 }
               }
             }
@@ -2464,8 +2503,8 @@ class ListVmOutput(komand.Output):
           "properties": {
             "certificateUrl": {
               "type": "string",
-              "title": "Certificate Url",
-              "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+              "title": "Certificate URL",
+              "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
               "order": 1
             },
             "protocol": {
@@ -2560,7 +2599,7 @@ class ListVmOutput(komand.Output):
             "vhd": {
               "$ref": "#/definitions/vhd",
               "title": "VHD",
-              "description": "Specifies the uri of the location in storage where the vhd for the virtual machine should be placed",
+              "description": "Specifies the URI of the location in storage where the vhd for the virtual machine should be placed",
               "order": 6
             }
           },
@@ -2590,7 +2629,7 @@ class ListVmOutput(komand.Output):
                 "uri": {
                   "type": "string",
                   "title": "VHD",
-                  "description": "Specifies the vhd uri",
+                  "description": "Specifies the vhd URI",
                   "order": 1
                 }
               }
@@ -2648,6 +2687,41 @@ class ListVmOutput(komand.Output):
             }
           },
           "definitions": {
+            "SSH": {
+              "type": "object",
+              "title": "SSH",
+              "properties": {
+                "publicKeys": {
+                  "type": "array",
+                  "title": "Public Keys",
+                  "description": "Specifies a collection of keys to be placed on the virtual machine",
+                  "items": {
+                    "$ref": "#/definitions/publicKeys"
+                  },
+                  "order": 1
+                }
+              },
+              "definitions": {
+                "publicKeys": {
+                  "type": "object",
+                  "title": "publicKeys",
+                  "properties": {
+                    "keyData": {
+                      "type": "string",
+                      "title": "Key Data",
+                      "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                      "order": 1
+                    },
+                    "path": {
+                      "type": "string",
+                      "title": "Path",
+                      "description": "Specifies the full path on the created VM where SSH public key is stored",
+                      "order": 2
+                    }
+                  }
+                }
+              }
+            },
             "additionalUnattendContent": {
               "type": "object",
               "title": "additionalUnattendContent",
@@ -2661,7 +2735,7 @@ class ListVmOutput(komand.Output):
                 "content": {
                   "type": "string",
                   "title": "Content",
-                  "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+                  "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
                   "order": 2
                 },
                 "pass": {
@@ -2682,41 +2756,23 @@ class ListVmOutput(komand.Output):
               "type": "object",
               "title": "linuxConfiguration",
               "properties": {
+                "SSH": {
+                  "$ref": "#/definitions/SSH",
+                  "title": "SSH",
+                  "description": "Specifies a collection of keys to be placed on the virtual machine",
+                  "order": 2
+                },
                 "disablePasswordAuthentication": {
                   "type": "boolean",
                   "title": "Disable Password Authentication",
                   "description": "Specifies whether password authentication should be disabled",
                   "order": 1
-                },
-                "ssh": {
-                  "$ref": "#/definitions/ssh",
-                  "title": "SSH",
-                  "description": "Specifies a collection of keys to be placed on the virtual machine",
-                  "order": 2
                 }
               },
               "definitions": {
-                "publicKeys": {
+                "SSH": {
                   "type": "object",
-                  "title": "publicKeys",
-                  "properties": {
-                    "keyData": {
-                      "type": "string",
-                      "title": "Key Data",
-                      "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                      "order": 1
-                    },
-                    "path": {
-                      "type": "string",
-                      "title": "Path",
-                      "description": "Specifies the full path on the created VM where ssh public key is stored",
-                      "order": 2
-                    }
-                  }
-                },
-                "ssh": {
-                  "type": "object",
-                  "title": "ssh",
+                  "title": "SSH",
                   "properties": {
                     "publicKeys": {
                       "type": "array",
@@ -2736,16 +2792,34 @@ class ListVmOutput(komand.Output):
                         "keyData": {
                           "type": "string",
                           "title": "Key Data",
-                          "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                          "description": "SSH public key certificate used to authenticate with the vm through SSH",
                           "order": 1
                         },
                         "path": {
                           "type": "string",
                           "title": "Path",
-                          "description": "Specifies the full path on the created VM where ssh public key is stored",
+                          "description": "Specifies the full path on the created VM where SSH public key is stored",
                           "order": 2
                         }
                       }
+                    }
+                  }
+                },
+                "publicKeys": {
+                  "type": "object",
+                  "title": "publicKeys",
+                  "properties": {
+                    "keyData": {
+                      "type": "string",
+                      "title": "Key Data",
+                      "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                      "order": 1
+                    },
+                    "path": {
+                      "type": "string",
+                      "title": "Path",
+                      "description": "Specifies the full path on the created VM where SSH public key is stored",
+                      "order": 2
                     }
                   }
                 }
@@ -2757,8 +2831,8 @@ class ListVmOutput(komand.Output):
               "properties": {
                 "certificateUrl": {
                   "type": "string",
-                  "title": "Certificate Url",
-                  "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                  "title": "Certificate URL",
+                  "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                   "order": 1
                 },
                 "protocol": {
@@ -2776,49 +2850,14 @@ class ListVmOutput(komand.Output):
                 "keyData": {
                   "type": "string",
                   "title": "Key Data",
-                  "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                  "description": "SSH public key certificate used to authenticate with the vm through SSH",
                   "order": 1
                 },
                 "path": {
                   "type": "string",
                   "title": "Path",
-                  "description": "Specifies the full path on the created VM where ssh public key is stored",
+                  "description": "Specifies the full path on the created VM where SSH public key is stored",
                   "order": 2
-                }
-              }
-            },
-            "ssh": {
-              "type": "object",
-              "title": "ssh",
-              "properties": {
-                "publicKeys": {
-                  "type": "array",
-                  "title": "Public Keys",
-                  "description": "Specifies a collection of keys to be placed on the virtual machine",
-                  "items": {
-                    "$ref": "#/definitions/publicKeys"
-                  },
-                  "order": 1
-                }
-              },
-              "definitions": {
-                "publicKeys": {
-                  "type": "object",
-                  "title": "publicKeys",
-                  "properties": {
-                    "keyData": {
-                      "type": "string",
-                      "title": "Key Data",
-                      "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                      "order": 1
-                    },
-                    "path": {
-                      "type": "string",
-                      "title": "Path",
-                      "description": "Specifies the full path on the created VM where ssh public key is stored",
-                      "order": 2
-                    }
-                  }
                 }
               }
             },
@@ -2842,8 +2881,8 @@ class ListVmOutput(komand.Output):
                   "properties": {
                     "certificateUrl": {
                       "type": "string",
-                      "title": "Certificate Url",
-                      "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                      "title": "Certificate URL",
+                      "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                       "order": 1
                     },
                     "protocol": {
@@ -2863,7 +2902,7 @@ class ListVmOutput(komand.Output):
                 "additionalUnattendContent": {
                   "$ref": "#/definitions/additionalUnattendContent",
                   "title": "Additional Unattend Content",
-                  "description": "Specifies additional xml formatted information that can be included in the unattend.xml file, which is used by windows setup",
+                  "description": "Specifies additional XML formatted information that can be included in the unattend.xml file, which is used by windows setup",
                   "order": 1
                 },
                 "enableAutomaticUpdates": {
@@ -2905,7 +2944,7 @@ class ListVmOutput(komand.Output):
                     "content": {
                       "type": "string",
                       "title": "Content",
-                      "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+                      "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
                       "order": 2
                     },
                     "pass": {
@@ -2928,8 +2967,8 @@ class ListVmOutput(komand.Output):
                   "properties": {
                     "certificateUrl": {
                       "type": "string",
-                      "title": "Certificate Url",
-                      "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                      "title": "Certificate URL",
+                      "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                       "order": 1
                     },
                     "protocol": {
@@ -2960,8 +2999,8 @@ class ListVmOutput(komand.Output):
                       "properties": {
                         "certificateUrl": {
                           "type": "string",
-                          "title": "Certificate Url",
-                          "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                          "title": "Certificate URL",
+                          "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                           "order": 1
                         },
                         "protocol": {
@@ -3027,11 +3066,46 @@ class ListVmOutput(komand.Output):
             "vmId": {
               "type": "string",
               "title": "Virtual Machine ID",
-              "description": "The vm unique id",
+              "description": "The vm unique ID",
               "order": 8
             }
           },
           "definitions": {
+            "SSH": {
+              "type": "object",
+              "title": "SSH",
+              "properties": {
+                "publicKeys": {
+                  "type": "array",
+                  "title": "Public Keys",
+                  "description": "Specifies a collection of keys to be placed on the virtual machine",
+                  "items": {
+                    "$ref": "#/definitions/publicKeys"
+                  },
+                  "order": 1
+                }
+              },
+              "definitions": {
+                "publicKeys": {
+                  "type": "object",
+                  "title": "publicKeys",
+                  "properties": {
+                    "keyData": {
+                      "type": "string",
+                      "title": "Key Data",
+                      "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                      "order": 1
+                    },
+                    "path": {
+                      "type": "string",
+                      "title": "Path",
+                      "description": "Specifies the full path on the created VM where SSH public key is stored",
+                      "order": 2
+                    }
+                  }
+                }
+              }
+            },
             "additionalUnattendContent": {
               "type": "object",
               "title": "additionalUnattendContent",
@@ -3045,7 +3119,7 @@ class ListVmOutput(komand.Output):
                 "content": {
                   "type": "string",
                   "title": "Content",
-                  "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+                  "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
                   "order": 2
                 },
                 "pass": {
@@ -3086,8 +3160,8 @@ class ListVmOutput(komand.Output):
                 },
                 "storageUri": {
                   "type": "string",
-                  "title": "Storage Uri",
-                  "description": "Uri of the storage account to use for placing the console output and screenshot",
+                  "title": "Storage URI",
+                  "description": "URI of the storage account to use for placing the console output and screenshot",
                   "order": 2
                 }
               }
@@ -3116,8 +3190,8 @@ class ListVmOutput(komand.Output):
                     },
                     "storageUri": {
                       "type": "string",
-                      "title": "Storage Uri",
-                      "description": "Uri of the storage account to use for placing the console output and screenshot",
+                      "title": "Storage URI",
+                      "description": "URI of the storage account to use for placing the console output and screenshot",
                       "order": 2
                     }
                   }
@@ -3176,41 +3250,23 @@ class ListVmOutput(komand.Output):
               "type": "object",
               "title": "linuxConfiguration",
               "properties": {
+                "SSH": {
+                  "$ref": "#/definitions/SSH",
+                  "title": "SSH",
+                  "description": "Specifies a collection of keys to be placed on the virtual machine",
+                  "order": 2
+                },
                 "disablePasswordAuthentication": {
                   "type": "boolean",
                   "title": "Disable Password Authentication",
                   "description": "Specifies whether password authentication should be disabled",
                   "order": 1
-                },
-                "ssh": {
-                  "$ref": "#/definitions/ssh",
-                  "title": "SSH",
-                  "description": "Specifies a collection of keys to be placed on the virtual machine",
-                  "order": 2
                 }
               },
               "definitions": {
-                "publicKeys": {
+                "SSH": {
                   "type": "object",
-                  "title": "publicKeys",
-                  "properties": {
-                    "keyData": {
-                      "type": "string",
-                      "title": "Key Data",
-                      "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                      "order": 1
-                    },
-                    "path": {
-                      "type": "string",
-                      "title": "Path",
-                      "description": "Specifies the full path on the created VM where ssh public key is stored",
-                      "order": 2
-                    }
-                  }
-                },
-                "ssh": {
-                  "type": "object",
-                  "title": "ssh",
+                  "title": "SSH",
                   "properties": {
                     "publicKeys": {
                       "type": "array",
@@ -3230,16 +3286,34 @@ class ListVmOutput(komand.Output):
                         "keyData": {
                           "type": "string",
                           "title": "Key Data",
-                          "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                          "description": "SSH public key certificate used to authenticate with the vm through SSH",
                           "order": 1
                         },
                         "path": {
                           "type": "string",
                           "title": "Path",
-                          "description": "Specifies the full path on the created VM where ssh public key is stored",
+                          "description": "Specifies the full path on the created VM where SSH public key is stored",
                           "order": 2
                         }
                       }
+                    }
+                  }
+                },
+                "publicKeys": {
+                  "type": "object",
+                  "title": "publicKeys",
+                  "properties": {
+                    "keyData": {
+                      "type": "string",
+                      "title": "Key Data",
+                      "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                      "order": 1
+                    },
+                    "path": {
+                      "type": "string",
+                      "title": "Path",
+                      "description": "Specifies the full path on the created VM where SSH public key is stored",
+                      "order": 2
                     }
                   }
                 }
@@ -3251,8 +3325,8 @@ class ListVmOutput(komand.Output):
               "properties": {
                 "certificateUrl": {
                   "type": "string",
-                  "title": "Certificate Url",
-                  "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                  "title": "Certificate URL",
+                  "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                   "order": 1
                 },
                 "protocol": {
@@ -3347,7 +3421,7 @@ class ListVmOutput(komand.Output):
                 "vhd": {
                   "$ref": "#/definitions/vhd",
                   "title": "VHD",
-                  "description": "Specifies the uri of the location in storage where the vhd for the virtual machine should be placed",
+                  "description": "Specifies the URI of the location in storage where the vhd for the virtual machine should be placed",
                   "order": 6
                 }
               },
@@ -3377,7 +3451,7 @@ class ListVmOutput(komand.Output):
                     "uri": {
                       "type": "string",
                       "title": "VHD",
-                      "description": "Specifies the vhd uri",
+                      "description": "Specifies the vhd URI",
                       "order": 1
                     }
                   }
@@ -3435,6 +3509,41 @@ class ListVmOutput(komand.Output):
                 }
               },
               "definitions": {
+                "SSH": {
+                  "type": "object",
+                  "title": "SSH",
+                  "properties": {
+                    "publicKeys": {
+                      "type": "array",
+                      "title": "Public Keys",
+                      "description": "Specifies a collection of keys to be placed on the virtual machine",
+                      "items": {
+                        "$ref": "#/definitions/publicKeys"
+                      },
+                      "order": 1
+                    }
+                  },
+                  "definitions": {
+                    "publicKeys": {
+                      "type": "object",
+                      "title": "publicKeys",
+                      "properties": {
+                        "keyData": {
+                          "type": "string",
+                          "title": "Key Data",
+                          "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                          "order": 1
+                        },
+                        "path": {
+                          "type": "string",
+                          "title": "Path",
+                          "description": "Specifies the full path on the created VM where SSH public key is stored",
+                          "order": 2
+                        }
+                      }
+                    }
+                  }
+                },
                 "additionalUnattendContent": {
                   "type": "object",
                   "title": "additionalUnattendContent",
@@ -3448,7 +3557,7 @@ class ListVmOutput(komand.Output):
                     "content": {
                       "type": "string",
                       "title": "Content",
-                      "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+                      "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
                       "order": 2
                     },
                     "pass": {
@@ -3469,41 +3578,23 @@ class ListVmOutput(komand.Output):
                   "type": "object",
                   "title": "linuxConfiguration",
                   "properties": {
+                    "SSH": {
+                      "$ref": "#/definitions/SSH",
+                      "title": "SSH",
+                      "description": "Specifies a collection of keys to be placed on the virtual machine",
+                      "order": 2
+                    },
                     "disablePasswordAuthentication": {
                       "type": "boolean",
                       "title": "Disable Password Authentication",
                       "description": "Specifies whether password authentication should be disabled",
                       "order": 1
-                    },
-                    "ssh": {
-                      "$ref": "#/definitions/ssh",
-                      "title": "SSH",
-                      "description": "Specifies a collection of keys to be placed on the virtual machine",
-                      "order": 2
                     }
                   },
                   "definitions": {
-                    "publicKeys": {
+                    "SSH": {
                       "type": "object",
-                      "title": "publicKeys",
-                      "properties": {
-                        "keyData": {
-                          "type": "string",
-                          "title": "Key Data",
-                          "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                          "order": 1
-                        },
-                        "path": {
-                          "type": "string",
-                          "title": "Path",
-                          "description": "Specifies the full path on the created VM where ssh public key is stored",
-                          "order": 2
-                        }
-                      }
-                    },
-                    "ssh": {
-                      "type": "object",
-                      "title": "ssh",
+                      "title": "SSH",
                       "properties": {
                         "publicKeys": {
                           "type": "array",
@@ -3523,16 +3614,34 @@ class ListVmOutput(komand.Output):
                             "keyData": {
                               "type": "string",
                               "title": "Key Data",
-                              "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                              "description": "SSH public key certificate used to authenticate with the vm through SSH",
                               "order": 1
                             },
                             "path": {
                               "type": "string",
                               "title": "Path",
-                              "description": "Specifies the full path on the created VM where ssh public key is stored",
+                              "description": "Specifies the full path on the created VM where SSH public key is stored",
                               "order": 2
                             }
                           }
+                        }
+                      }
+                    },
+                    "publicKeys": {
+                      "type": "object",
+                      "title": "publicKeys",
+                      "properties": {
+                        "keyData": {
+                          "type": "string",
+                          "title": "Key Data",
+                          "description": "SSH public key certificate used to authenticate with the vm through SSH",
+                          "order": 1
+                        },
+                        "path": {
+                          "type": "string",
+                          "title": "Path",
+                          "description": "Specifies the full path on the created VM where SSH public key is stored",
+                          "order": 2
                         }
                       }
                     }
@@ -3544,8 +3653,8 @@ class ListVmOutput(komand.Output):
                   "properties": {
                     "certificateUrl": {
                       "type": "string",
-                      "title": "Certificate Url",
-                      "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                      "title": "Certificate URL",
+                      "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                       "order": 1
                     },
                     "protocol": {
@@ -3563,49 +3672,14 @@ class ListVmOutput(komand.Output):
                     "keyData": {
                       "type": "string",
                       "title": "Key Data",
-                      "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                      "description": "SSH public key certificate used to authenticate with the vm through SSH",
                       "order": 1
                     },
                     "path": {
                       "type": "string",
                       "title": "Path",
-                      "description": "Specifies the full path on the created VM where ssh public key is stored",
+                      "description": "Specifies the full path on the created VM where SSH public key is stored",
                       "order": 2
-                    }
-                  }
-                },
-                "ssh": {
-                  "type": "object",
-                  "title": "ssh",
-                  "properties": {
-                    "publicKeys": {
-                      "type": "array",
-                      "title": "Public Keys",
-                      "description": "Specifies a collection of keys to be placed on the virtual machine",
-                      "items": {
-                        "$ref": "#/definitions/publicKeys"
-                      },
-                      "order": 1
-                    }
-                  },
-                  "definitions": {
-                    "publicKeys": {
-                      "type": "object",
-                      "title": "publicKeys",
-                      "properties": {
-                        "keyData": {
-                          "type": "string",
-                          "title": "Key Data",
-                          "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                          "order": 1
-                        },
-                        "path": {
-                          "type": "string",
-                          "title": "Path",
-                          "description": "Specifies the full path on the created VM where ssh public key is stored",
-                          "order": 2
-                        }
-                      }
                     }
                   }
                 },
@@ -3629,8 +3703,8 @@ class ListVmOutput(komand.Output):
                       "properties": {
                         "certificateUrl": {
                           "type": "string",
-                          "title": "Certificate Url",
-                          "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                          "title": "Certificate URL",
+                          "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                           "order": 1
                         },
                         "protocol": {
@@ -3650,7 +3724,7 @@ class ListVmOutput(komand.Output):
                     "additionalUnattendContent": {
                       "$ref": "#/definitions/additionalUnattendContent",
                       "title": "Additional Unattend Content",
-                      "description": "Specifies additional xml formatted information that can be included in the unattend.xml file, which is used by windows setup",
+                      "description": "Specifies additional XML formatted information that can be included in the unattend.xml file, which is used by windows setup",
                       "order": 1
                     },
                     "enableAutomaticUpdates": {
@@ -3692,7 +3766,7 @@ class ListVmOutput(komand.Output):
                         "content": {
                           "type": "string",
                           "title": "Content",
-                          "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+                          "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
                           "order": 2
                         },
                         "pass": {
@@ -3715,8 +3789,8 @@ class ListVmOutput(komand.Output):
                       "properties": {
                         "certificateUrl": {
                           "type": "string",
-                          "title": "Certificate Url",
-                          "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                          "title": "Certificate URL",
+                          "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                           "order": 1
                         },
                         "protocol": {
@@ -3747,8 +3821,8 @@ class ListVmOutput(komand.Output):
                           "properties": {
                             "certificateUrl": {
                               "type": "string",
-                              "title": "Certificate Url",
-                              "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                              "title": "Certificate URL",
+                              "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                               "order": 1
                             },
                             "protocol": {
@@ -3772,49 +3846,14 @@ class ListVmOutput(komand.Output):
                 "keyData": {
                   "type": "string",
                   "title": "Key Data",
-                  "description": "SSH public key certificate used to authenticate with the vm through ssh",
+                  "description": "SSH public key certificate used to authenticate with the vm through SSH",
                   "order": 1
                 },
                 "path": {
                   "type": "string",
                   "title": "Path",
-                  "description": "Specifies the full path on the created VM where ssh public key is stored",
+                  "description": "Specifies the full path on the created VM where SSH public key is stored",
                   "order": 2
-                }
-              }
-            },
-            "ssh": {
-              "type": "object",
-              "title": "ssh",
-              "properties": {
-                "publicKeys": {
-                  "type": "array",
-                  "title": "Public Keys",
-                  "description": "Specifies a collection of keys to be placed on the virtual machine",
-                  "items": {
-                    "$ref": "#/definitions/publicKeys"
-                  },
-                  "order": 1
-                }
-              },
-              "definitions": {
-                "publicKeys": {
-                  "type": "object",
-                  "title": "publicKeys",
-                  "properties": {
-                    "keyData": {
-                      "type": "string",
-                      "title": "Key Data",
-                      "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                      "order": 1
-                    },
-                    "path": {
-                      "type": "string",
-                      "title": "Path",
-                      "description": "Specifies the full path on the created VM where ssh public key is stored",
-                      "order": 2
-                    }
-                  }
                 }
               }
             },
@@ -3936,7 +3975,7 @@ class ListVmOutput(komand.Output):
                     "vhd": {
                       "$ref": "#/definitions/vhd",
                       "title": "VHD",
-                      "description": "Specifies the uri of the location in storage where the vhd for the virtual machine should be placed",
+                      "description": "Specifies the URI of the location in storage where the vhd for the virtual machine should be placed",
                       "order": 6
                     }
                   },
@@ -3966,7 +4005,7 @@ class ListVmOutput(komand.Output):
                         "uri": {
                           "type": "string",
                           "title": "VHD",
-                          "description": "Specifies the vhd uri",
+                          "description": "Specifies the vhd URI",
                           "order": 1
                         }
                       }
@@ -3980,7 +4019,7 @@ class ListVmOutput(komand.Output):
                     "uri": {
                       "type": "string",
                       "title": "VHD",
-                      "description": "Specifies the vhd uri",
+                      "description": "Specifies the vhd URI",
                       "order": 1
                     }
                   }
@@ -3994,7 +4033,7 @@ class ListVmOutput(komand.Output):
                 "uri": {
                   "type": "string",
                   "title": "VHD",
-                  "description": "Specifies the vhd uri",
+                  "description": "Specifies the vhd URI",
                   "order": 1
                 }
               }
@@ -4019,8 +4058,8 @@ class ListVmOutput(komand.Output):
                   "properties": {
                     "certificateUrl": {
                       "type": "string",
-                      "title": "Certificate Url",
-                      "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                      "title": "Certificate URL",
+                      "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                       "order": 1
                     },
                     "protocol": {
@@ -4040,7 +4079,7 @@ class ListVmOutput(komand.Output):
                 "additionalUnattendContent": {
                   "$ref": "#/definitions/additionalUnattendContent",
                   "title": "Additional Unattend Content",
-                  "description": "Specifies additional xml formatted information that can be included in the unattend.xml file, which is used by windows setup",
+                  "description": "Specifies additional XML formatted information that can be included in the unattend.xml file, which is used by windows setup",
                   "order": 1
                 },
                 "enableAutomaticUpdates": {
@@ -4082,7 +4121,7 @@ class ListVmOutput(komand.Output):
                     "content": {
                       "type": "string",
                       "title": "Content",
-                      "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+                      "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
                       "order": 2
                     },
                     "pass": {
@@ -4105,8 +4144,8 @@ class ListVmOutput(komand.Output):
                   "properties": {
                     "certificateUrl": {
                       "type": "string",
-                      "title": "Certificate Url",
-                      "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                      "title": "Certificate URL",
+                      "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                       "order": 1
                     },
                     "protocol": {
@@ -4137,8 +4176,8 @@ class ListVmOutput(komand.Output):
                       "properties": {
                         "certificateUrl": {
                           "type": "string",
-                          "title": "Certificate Url",
-                          "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                          "title": "Certificate URL",
+                          "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                           "order": 1
                         },
                         "protocol": {
@@ -4162,49 +4201,14 @@ class ListVmOutput(komand.Output):
             "keyData": {
               "type": "string",
               "title": "Key Data",
-              "description": "SSH public key certificate used to authenticate with the vm through ssh",
+              "description": "SSH public key certificate used to authenticate with the vm through SSH",
               "order": 1
             },
             "path": {
               "type": "string",
               "title": "Path",
-              "description": "Specifies the full path on the created VM where ssh public key is stored",
+              "description": "Specifies the full path on the created VM where SSH public key is stored",
               "order": 2
-            }
-          }
-        },
-        "ssh": {
-          "type": "object",
-          "title": "ssh",
-          "properties": {
-            "publicKeys": {
-              "type": "array",
-              "title": "Public Keys",
-              "description": "Specifies a collection of keys to be placed on the virtual machine",
-              "items": {
-                "$ref": "#/definitions/publicKeys"
-              },
-              "order": 1
-            }
-          },
-          "definitions": {
-            "publicKeys": {
-              "type": "object",
-              "title": "publicKeys",
-              "properties": {
-                "keyData": {
-                  "type": "string",
-                  "title": "Key Data",
-                  "description": "SSH public key certificate used to authenticate with the vm through ssh",
-                  "order": 1
-                },
-                "path": {
-                  "type": "string",
-                  "title": "Path",
-                  "description": "Specifies the full path on the created VM where ssh public key is stored",
-                  "order": 2
-                }
-              }
             }
           }
         },
@@ -4326,7 +4330,7 @@ class ListVmOutput(komand.Output):
                 "vhd": {
                   "$ref": "#/definitions/vhd",
                   "title": "VHD",
-                  "description": "Specifies the uri of the location in storage where the vhd for the virtual machine should be placed",
+                  "description": "Specifies the URI of the location in storage where the vhd for the virtual machine should be placed",
                   "order": 6
                 }
               },
@@ -4356,7 +4360,7 @@ class ListVmOutput(komand.Output):
                     "uri": {
                       "type": "string",
                       "title": "VHD",
-                      "description": "Specifies the vhd uri",
+                      "description": "Specifies the vhd URI",
                       "order": 1
                     }
                   }
@@ -4370,7 +4374,7 @@ class ListVmOutput(komand.Output):
                 "uri": {
                   "type": "string",
                   "title": "VHD",
-                  "description": "Specifies the vhd uri",
+                  "description": "Specifies the vhd URI",
                   "order": 1
                 }
               }
@@ -4396,7 +4400,7 @@ class ListVmOutput(komand.Output):
             "uri": {
               "type": "string",
               "title": "VHD",
-              "description": "Specifies the vhd uri",
+              "description": "Specifies the vhd URI",
               "order": 1
             }
           }
@@ -4421,8 +4425,8 @@ class ListVmOutput(komand.Output):
               "properties": {
                 "certificateUrl": {
                   "type": "string",
-                  "title": "Certificate Url",
-                  "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                  "title": "Certificate URL",
+                  "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                   "order": 1
                 },
                 "protocol": {
@@ -4442,7 +4446,7 @@ class ListVmOutput(komand.Output):
             "additionalUnattendContent": {
               "$ref": "#/definitions/additionalUnattendContent",
               "title": "Additional Unattend Content",
-              "description": "Specifies additional xml formatted information that can be included in the unattend.xml file, which is used by windows setup",
+              "description": "Specifies additional XML formatted information that can be included in the unattend.xml file, which is used by windows setup",
               "order": 1
             },
             "enableAutomaticUpdates": {
@@ -4484,7 +4488,7 @@ class ListVmOutput(komand.Output):
                 "content": {
                   "type": "string",
                   "title": "Content",
-                  "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+                  "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
                   "order": 2
                 },
                 "pass": {
@@ -4507,8 +4511,8 @@ class ListVmOutput(komand.Output):
               "properties": {
                 "certificateUrl": {
                   "type": "string",
-                  "title": "Certificate Url",
-                  "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                  "title": "Certificate URL",
+                  "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                   "order": 1
                 },
                 "protocol": {
@@ -4539,8 +4543,8 @@ class ListVmOutput(komand.Output):
                   "properties": {
                     "certificateUrl": {
                       "type": "string",
-                      "title": "Certificate Url",
-                      "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                      "title": "Certificate URL",
+                      "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                       "order": 1
                     },
                     "protocol": {
@@ -4564,7 +4568,7 @@ class ListVmOutput(komand.Output):
         "uri": {
           "type": "string",
           "title": "VHD",
-          "description": "Specifies the vhd uri",
+          "description": "Specifies the vhd URI",
           "order": 1
         }
       }
@@ -4589,8 +4593,8 @@ class ListVmOutput(komand.Output):
           "properties": {
             "certificateUrl": {
               "type": "string",
-              "title": "Certificate Url",
-              "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+              "title": "Certificate URL",
+              "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
               "order": 1
             },
             "protocol": {
@@ -4610,7 +4614,7 @@ class ListVmOutput(komand.Output):
         "additionalUnattendContent": {
           "$ref": "#/definitions/additionalUnattendContent",
           "title": "Additional Unattend Content",
-          "description": "Specifies additional xml formatted information that can be included in the unattend.xml file, which is used by windows setup",
+          "description": "Specifies additional XML formatted information that can be included in the unattend.xml file, which is used by windows setup",
           "order": 1
         },
         "enableAutomaticUpdates": {
@@ -4652,7 +4656,7 @@ class ListVmOutput(komand.Output):
             "content": {
               "type": "string",
               "title": "Content",
-              "description": "Specifies the xml formatted content that is added to the unattend.xml file for the specified path and component",
+              "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component",
               "order": 2
             },
             "pass": {
@@ -4675,8 +4679,8 @@ class ListVmOutput(komand.Output):
           "properties": {
             "certificateUrl": {
               "type": "string",
-              "title": "Certificate Url",
-              "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+              "title": "Certificate URL",
+              "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
               "order": 1
             },
             "protocol": {
@@ -4707,8 +4711,8 @@ class ListVmOutput(komand.Output):
               "properties": {
                 "certificateUrl": {
                   "type": "string",
-                  "title": "Certificate Url",
-                  "description": "Specifies url of the certificate with which new virtual machines is provisioned",
+                  "title": "Certificate URL",
+                  "description": "Specifies URL of the certificate with which new virtual machines is provisioned",
                   "order": 1
                 },
                 "protocol": {

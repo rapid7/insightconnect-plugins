@@ -2,9 +2,10 @@ plugin_spec_version: v2
 name: proofpoint_tap
 title: Proofpoint TAP
 description: A plugin for Proofpoint Targeted Attack Protection (TAP)
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - Proofpoint
 - TAP

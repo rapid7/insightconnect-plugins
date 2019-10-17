@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "ip_lookup",
-    "input": {
-      "ip": "8.8.8.8.8"
+    "body": {
+        "action": "ip_lookup",
+        "connection": {
+            "credentials": {
+                "domain": null,
+                "token": null
+            }
+        },
+        "input": {
+            "ip": "8.8.8.8.8"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "domain": "",
-        "token": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

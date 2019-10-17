@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Mark a virtual machine as generalized in Azure (VM must be stopped before generalizing)"
+
+
 class Input:
     RESOURCEGROUP = "resourceGroup"
     SUBSCRIPTIONID = "subscriptionId"
@@ -39,8 +43,8 @@ class GeneralizedVmInput(komand.Input):
     }
   },
   "required": [
-    "subscriptionId",
     "resourceGroup",
+    "subscriptionId",
     "vm"
   ]
 }

@@ -1,25 +1,25 @@
 {
-  "body": {
-    "input": {
-      "source": "Faker Vault",
-      "domain": "harmon-dunlap.net",
-        "params": {
-            "campaign": "NetTraveler",
-            "bucket_list": "Fake Malware DB",
-            "add_indicator": true
-        }
+    "body": {
+        "action": "add_domain",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username": null
+        },
+        "input": {
+            "domain": "harmon-dunlap.net",
+            "params": {
+                "add_indicator": true,
+                "bucket_list": "Fake Malware DB",
+                "campaign": "NetTraveler"
+            },
+            "source": "Faker Vault"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "url": "",
-      "ssl_verify": false,
-      "username": "",
-      "api_key": {
-        "secretKey": ""
-      }
-    },
-    "action": "add_domain"
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

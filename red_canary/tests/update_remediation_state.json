@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "update_remediation_state",
-    "meta": {},
-    "input": {
-      "comment": "A comment",
-      "detection_id": 1,
-      "remediation_state": "remediated"
+    "body": {
+        "action": "update_remediation_state",
+        "connection": {
+            "api_token": {
+                "secretKey": null
+            },
+            "customer_id": null
+        },
+        "input": {
+            "comment": "A comment",
+            "detection_id": 1,
+            "remediation_state": "remediated"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_token": {
-        "secretKey": ""
-      },
-      "customer_id": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

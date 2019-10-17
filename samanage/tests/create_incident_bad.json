@@ -1,26 +1,30 @@
 {
-  "body": {
-    "action": "create_incident",
-    "meta": {},
-    "input": {
-      "assignee": "",
-      "category_name": "Hardware",
-      "description": "More text",
-      "due_at": "2022-11-11",
-      "problem": 3,
-      "incidents": [4],
-      "solutions": [1],
-      "name": "An incident",
-      "priority": "Medium",
-      "requester": ""
+    "body": {
+        "action": "create_incident",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "assignee": "",
+            "category_name": "Hardware",
+            "description": "More text",
+            "due_at": "2022-11-11",
+            "incidents": [
+                4
+            ],
+            "name": "An incident",
+            "priority": "Medium",
+            "problem": 3,
+            "requester": "",
+            "solutions": [
+                1
+            ]
+        },
+        "meta": {}
     },
-    "connection": {
-      "eu_customer": false,
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

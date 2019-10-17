@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a listing of all tags and return their details"
+
+
 class Input:
     NAME = "name"
     TYPE = "type"

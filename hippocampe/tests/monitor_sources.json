@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "monitor_sources",
-    "meta": {},
-    "input": {},
-    "connection": {
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "body": {
+        "action": "monitor_sources",
+        "connection": {
+            "url": null
+        },
+        "input": {},
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

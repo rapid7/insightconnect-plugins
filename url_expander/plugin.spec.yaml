@@ -1,0 +1,55 @@
+plugin_spec_version: v2
+name: url_expander
+title: URL Expander
+description: Expands a shortened URL
+version: 1.1.2
+vendor: rapid7
+support: community
+status: []
+tags:
+- url expander
+- phishing investigation
+- utilities
+actions:
+  expand_all:
+    title: Expand All
+    description: Expand all shortened URLs in some text
+    input:
+      text:
+        title: Text
+        description: Block of text with URL's to expand
+        type: string
+        required: true
+      follow:
+        title: Follow
+        description: Whether to follow the URL
+        type: boolean
+        required: true
+        default: false
+    output:
+      text:
+        title: Text
+        description: Text with expanded URLs
+        type: string
+        required: false
+  expand:
+    title: Expand
+    description: Expand a shortened URL
+    input:
+      url:
+        title: URL
+        description: Shortened URL
+        type: string
+        required: true
+      follow:
+        title: Follow
+        description: Whether to follow the URL
+        type: boolean
+        required: true
+        default: false
+    output:
+      url:
+        title: URL
+        description: Expanded URL
+        type: string
+        required: false

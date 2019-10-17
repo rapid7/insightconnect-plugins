@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "to_unicode",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "domain": "xn--e1awd7fkdsjfbdskajlfbdsaklfbsdkafbsdafhbadskfbdsakfhbdsafhbdsahfjbsadfjhsdabfjhdsbfksdalbfkdsabfdksjfbsdaklfbsdsaldfnasdjlfndsaflndsakfjnajk4no4jlnt3wraejlan4ojlarwno4lwngfol;4wngao;vlw4nfo;l4wjnf4lwjfn4wkjnkajfbdskjflbsadkfjldsabkfldsbfkjsdabfklsadbfaskdljfbsadkjlfbdsakljfbsdfkjlb"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

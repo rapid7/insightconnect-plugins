@@ -120,7 +120,7 @@ Example output:
     {
       "id": "MTOKEN:eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ",
       "sender": "example@example.com",
-      "to": "user@rapid7.com",
+      "to": "user@example.com",
       "type": "Block"
     }
   ]
@@ -213,8 +213,32 @@ Example output:
 {
   "id": "eNqrVipOTS4tSs1MUbJSctdOd43RNy3K9klKdA038M4xq8otcfIMqTQods2MNIrR99NOD_IsCyovdEt11A4pSQvKyPL2SS4orgjOTy01jdEvzlbSUUouLS7Jz00tSs5PSQUa6hzs52LoaG5pagKUK0stKs7Mz1OyMtRRSsvPSUktysnMywZZbmxgYmFRCwBatS7G",
   "folder_id": "eNoVzrkOgkAUQNF_eTWFIIjQEdk0OEaUgCUyD8HMojNiROO_i_3Nyf2AxmZQ2FPwgUgRxWbnzZOxKwsyiCjP-BnTe7jYxA5Pq1xsmRhJ4Sbv9SU4zfgrq8vjdSdbO3eDPRjAaH0Dv62ZRgOaQT8kR9VIihO_OpDQDFzPsafwiUr3UoBvGtBKRlH9F-ylZXnfH3hjMBs",
-  "email_address": "test10@rapid7.com",
+  "email_address": "test10@example.com",
   "internal": true
+}
+```
+
+### Decode URL
+
+This action is used to decode a Mimecast encoded URL.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|encoded_url|string|None|True|The Mimecast encoded URL (e.g. https://protect-xx.mimecast.com/...)|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|decoded_url|string|True|Original decoded URL|
+
+Example output:
+
+```
+{
+  "decoded_url": "https://example.com"
 }
 ```
 
@@ -285,7 +309,7 @@ Example output:
 {
   [
     {
-       "userEmailAddress": "mimecast_dhamilton@rapid7.com",
+       "userEmailAddress": "mimecast_dhamilton@example.com",
        "url": "https://www.dummy-mimecast-blacklist.com",
        "ttpDefinition": "Default URL Protection Definition",
        "action": "warn",
@@ -331,6 +355,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 * 2.2.0 - New action Create Blocked Sender Policy
 * 2.3.0 - New actions Add Group Member and Find Group
 * 2.4.0 - New action Get TTP URL Logs
+* 2.5.0 - New action Decode URL
 
 ## Workflows
 

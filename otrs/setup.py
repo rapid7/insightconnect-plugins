@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='otrs-rapid7-plugin',
-      version='4.0.0',
+      version='4.0.1',
       description='Open Source Ticket Request System',
       author='rapid7',
       author_email='',

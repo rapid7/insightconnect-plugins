@@ -4,7 +4,8 @@ title: Rapid7 Metasploit
 description: Metasploit is the most widely used penetration testing framework
 version: 2.0.0
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - metasploit
 - rapid7

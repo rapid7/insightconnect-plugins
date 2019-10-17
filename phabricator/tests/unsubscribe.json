@@ -1,17 +1,17 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "action": "unsubscribe",
-    "input": {
-      "id": "1"
+    "body": {
+        "action": "unsubscribe",
+        "connection": {
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": "1"
+        },
+        "meta": {}
     },
-    "connection": {
-      "token": {
-        "secretKey": ""
-      },
-      "url": ""
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

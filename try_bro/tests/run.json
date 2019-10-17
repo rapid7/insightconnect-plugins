@@ -1,16 +1,18 @@
 {
-  "body": {
-    "action": "run",
-    "input": {
-      "version": "master",
-      "pcap": "1MOyoQIABAAAAAAAAAAAAP//AAABAAAA/PkgWDyfDQBCAAAAQgAAADgsSqNIY/RcicwGnQgARQAANDnNQABABqj8wKgCt2j0K6f14wG7snBq474O4r+AERAAzDkAAAEBCAoG1vRxhIQM+g==",
-      "scripts": ["QGxvYWQgbG9jYWwuYnJvCg=="]
+    "body": {
+        "action": "run",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "pcap": "1MOyoQIABAAAAAAAAAAAAP//AAABAAAA/PkgWDyfDQBCAAAAQgAAADgsSqNIY/RcicwGnQgARQAANDnNQABABqj8wKgCt2j0K6f14wG7snBq474O4r+AERAAzDkAAAEBCAoG1vRxhIQM+g==",
+            "scripts": [
+                "QGxvYWQgbG9jYWwuYnJvCg=="
+            ],
+            "version": "master"
+        },
+        "meta": {}
     },
-    "connection": {
-      "server": "http://try.bro.org"
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

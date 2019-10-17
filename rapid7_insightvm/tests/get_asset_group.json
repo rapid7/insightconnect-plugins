@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_asset_group",
-    "meta": {},
-    "input": {
-      "id": 56
+    "body": {
+        "action": "get_asset_group",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 56
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

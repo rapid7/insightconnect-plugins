@@ -1,27 +1,27 @@
 {
-  "body": {
-    "action": "submit",
-    "meta": {},
-    "input": {
-      "customcmdline": "",
-      "env_id": 100,
-      "experimentalantievasion": true,
-      "file": "",
-      "filename": "",
-      "hybridanalysis": true,
-      "promptfill_password": "",
-      "scriptlogging": true
+    "body": {
+        "action": "submit",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "api_secret": {
+                "secretKey": null
+            },
+            "server": null
+        },
+        "input": {
+            "customcmdline": "",
+            "env_id": 100,
+            "experimentalantievasion": true,
+            "file": "",
+            "filename": "",
+            "hybridanalysis": true,
+            "promptfill_password": "",
+            "scriptlogging": true
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "api_secret": {
-        "secretKey": ""
-      },
-      "server": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

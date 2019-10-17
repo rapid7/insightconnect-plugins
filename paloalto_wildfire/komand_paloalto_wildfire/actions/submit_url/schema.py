@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Submit a URL for analysis"
+
+
 class Input:
     URL = "url"
     
@@ -72,12 +76,7 @@ class SubmitUrlOutput(komand.Output):
           "title": "URL",
           "order": 1
         }
-      },
-      "required": [
-        "url",
-        "sha256",
-        "md5"
-      ]
+      }
     }
   }
 }

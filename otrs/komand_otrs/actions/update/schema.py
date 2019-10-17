@@ -13,6 +13,7 @@ class Input:
     CUSTOMERUSER = "CustomerUser"
     DYNAMICFIELDS = "DynamicFields"
     LOCK = "Lock"
+    NOARTICLE = "NoArticle"
     PENDINGTIME = "PendingTime"
     PRIORITY = "Priority"
     QUEUE = "Queue"
@@ -39,16 +40,16 @@ class UpdateInput(komand.Input):
       "$ref": "#/definitions/new_article",
       "title": "Article",
       "description": "New article (gets appended)",
-      "order": 12
+      "order": 13
     },
     "Attachments": {
       "type": "array",
-      "title": "Attachements",
+      "title": "Attachments",
       "description": "New attachments as array of objects e.g. [{\\"filename\\":\\"notes.txt\\",\\"content\\":\\"VGhpcyBpcyBhIHRlc3QK\\"}]",
       "items": {
         "$ref": "#/definitions/attachment"
       },
-      "order": 14
+      "order": 15
     },
     "CustomerUser": {
       "type": "string",
@@ -63,13 +64,19 @@ class UpdateInput(komand.Input):
       "items": {
         "$ref": "#/definitions/dynamic_field"
       },
-      "order": 13
+      "order": 14
     },
     "Lock": {
       "type": "string",
       "title": "Lock",
       "description": "Lock",
       "order": 4
+    },
+    "NoArticle": {
+      "type": "boolean",
+      "title": "No Article",
+      "description": "Will not add article to ticket",
+      "order": 12
     },
     "PendingTime": {
       "type": "string",
@@ -128,6 +135,9 @@ class UpdateInput(komand.Input):
       "order": 11
     }
   },
+  "required": [
+    "NoArticle"
+  ],
   "definitions": {
     "attachment": {
       "type": "object",

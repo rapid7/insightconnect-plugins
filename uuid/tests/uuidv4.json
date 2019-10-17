@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "uuidv4",
+        "connection": {},
+        "dispatcher": {},
+        "input": {},
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

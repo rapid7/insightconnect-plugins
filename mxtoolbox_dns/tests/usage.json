@@ -1,14 +1,14 @@
 {
-  "version": "v1",
-  "body": {
-    "action": "usage",
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "https://api.mxtoolbox.com/api/v1/"
-    }
-  },
-  "type": "action_start"
+    "body": {
+        "action": "usage",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

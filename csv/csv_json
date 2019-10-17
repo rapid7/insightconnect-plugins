@@ -1,0 +1,4 @@
+Asset Names,Asset IP Address,Asset OS Family,Asset OS Name,Asset OS Version
+"BIGFIX-CLT-W12,bigfix-clt-w12.vuln.lax.rapid7.com",10.4.23.46,Microsoft Windows,Microsoft Windows Server 2012 Standard Edition,
+"BIGFIX-SRV,bigfix-srv.vuln.lax.rapid7.com",10.4.23.69,Microsoft Windows,Microsoft Windows Server 2012 Standard Edition,
+"BIGFIX-CLT-W7,bigfix-clt-w7.vuln.lax.rapid7.com",10.4.23.55,Microsoft Windows,Microsoft Windows 7 Enterprise Edition,SP1

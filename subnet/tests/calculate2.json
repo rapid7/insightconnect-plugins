@@ -1,12 +1,12 @@
 {
-  "type": "action_start",
-  "body": {
-    "action": "calculate",
-    "input": {
-      "cidr": "10.168.1.14/16"
+    "body": {
+        "action": "calculate",
+        "connection": null,
+        "input": {
+            "cidr": "10.168.1.14/16"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": null
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

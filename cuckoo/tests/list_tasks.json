@@ -1,13 +1,12 @@
 {
-  "type": "action_start",
-  "body": {
-    "action": "list_tasks",
-    "connection": {
-      "url": ""
+    "body": {
+        "action": "list_tasks",
+        "connection": {
+            "url": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

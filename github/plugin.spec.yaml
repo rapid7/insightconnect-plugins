@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: github
 title: GitHub
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: GitHub is a web-based Git or version control repository and Internet
   hosting service
 version: 2.1.0

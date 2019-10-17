@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "write_record",
+        "input": {
+            "app_id": "2",
+            "record_body": {
+                "Data": {
+                    "value": "This is some sample data"
+                },
+                "Title": {
+                    "value": "Sample Title"
+                }
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

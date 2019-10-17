@@ -1,22 +1,22 @@
 {
-  "body": {
-    "action": "launch_scan",
-    "input": {
-      "profile": "Full and fast",
-      "schedule": "fa6e4b5c-3b19-47e9-83fa-525df16b4189",
-      "target": "127.0.0.1"
+    "body": {
+        "action": "launch_scan",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "ssl_verify": null,
+            "timeout": null
+        },
+        "input": {
+            "profile": "Full and fast",
+            "schedule": "fa6e4b5c-3b19-47e9-83fa-525df16b4189",
+            "target": "127.0.0.1"
+        },
+        "meta": {}
     },
-    "connection": {
-      "ssl_verify": false,
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "timeout": 10,
-      "server": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

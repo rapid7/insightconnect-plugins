@@ -1,33 +1,33 @@
 {
-  "body": {
-    "input": {
-      "limit": 0,
-      "owner": [],
-      "max_confidence": 100,
-      "review_status": "",
-      "strict_text": false,
-      "sort_by": "",
-      "share_level": "",
-      "text": "proxy",
-      "status": "",
-      "type": "",
-      "until": "",
-      "include_expired": false,
-      "tags": [],
-      "since": "",
-      "min_confidence": 0,
-      "sort_order": "",
-      "fields": []
+    "body": {
+        "action": "threat_descriptors",
+        "connection": {
+            "app_id": null,
+            "secret_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "fields": [],
+            "include_expired": false,
+            "limit": 0,
+            "max_confidence": 100,
+            "min_confidence": 0,
+            "owner": [],
+            "review_status": "",
+            "share_level": "",
+            "since": "",
+            "sort_by": "",
+            "sort_order": "",
+            "status": "",
+            "strict_text": false,
+            "tags": [],
+            "text": "proxy",
+            "type": "",
+            "until": ""
+        },
+        "meta": {}
     },
-    "action": "threat_descriptors",
-    "connection": {
-      "app_id": "Facebook App ID",
-      "secret_key": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

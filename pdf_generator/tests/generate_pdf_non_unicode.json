@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "generate_pdf",
-    "input": {
-      "text": "Hello \ue062"
+    "body": {
+        "action": "generate_pdf",
+        "connection": null,
+        "input": {
+            "text": "Hello \ue062"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

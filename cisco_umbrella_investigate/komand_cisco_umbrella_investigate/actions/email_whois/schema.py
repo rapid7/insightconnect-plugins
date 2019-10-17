@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the WHOIS information for the specified email address(es), nameserver(s) and domains"
+
+
 class Input:
     EMAIL = "email"
     
@@ -87,9 +91,9 @@ class EmailWhoisOutput(komand.Output):
         }
       },
       "required": [
-        "more_data_available",
+        "domains",
         "limit",
-        "domains"
+        "more_data_available"
       ],
       "definitions": {
         "whois_domain": {
@@ -110,8 +114,8 @@ class EmailWhoisOutput(komand.Output):
             }
           },
           "required": [
-            "domain",
-            "current"
+            "current",
+            "domain"
           ]
         }
       }
@@ -134,8 +138,8 @@ class EmailWhoisOutput(komand.Output):
         }
       },
       "required": [
-        "domain",
-        "current"
+        "current",
+        "domain"
       ]
     }
   }

@@ -4,4 +4,5 @@ from .epub.action import Epub
 from .html5.action import Html5
 from .markdown.action import Markdown
 from .pdf.action import Pdf
+from .text.action import Text
 from .validate.action import Validate

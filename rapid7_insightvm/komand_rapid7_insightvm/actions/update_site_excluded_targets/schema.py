@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update an existing site scope of excluded IP address and hostname targets"
+
+
 class Input:
     EXCLUDED_TARGETS = "excluded_targets"
     ID = "id"

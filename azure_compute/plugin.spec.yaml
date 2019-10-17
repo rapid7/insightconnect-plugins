@@ -3,9 +3,10 @@ name: azure_compute
 title: Azure Compute
 description: Azure Virtual Machines is one of several types of on-demand, scalable
   computing resources that Azure offers
-version: 2.0.0
+version: 3.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 author: komand
 tags:
 - Azure Compute
@@ -43,7 +44,7 @@ types:
     content:
       type: string
       title: Content
-      description: Specifies the xml formatted content that is added to the unattend.xml
+      description: Specifies the XML formatted content that is added to the unattend.xml
         file for the specified path and component
     pass:
       type: string
@@ -58,8 +59,8 @@ types:
   listeners:
     certificateUrl:
       type: string
-      title: Certificate Url
-      description: Specifies url of the certificate with which new virtual machines
+      title: Certificate URL
+      description: Specifies URL of the certificate with which new virtual machines
         is provisioned
     protocol:
       type: string
@@ -73,7 +74,7 @@ types:
     additionalUnattendContent:
       type: additionalUnattendContent
       title: Additional Unattend Content
-      description: Specifies additional xml formatted information that can be included
+      description: Specifies additional XML formatted information that can be included
         in the unattend.xml file, which is used by windows setup
     enableAutomaticUpdates:
       type: bool
@@ -101,8 +102,8 @@ types:
       description: Specifies if the boot diagnostics is enabled
     storageUri:
       type: string
-      title: Storage Uri
-      description: Uri of the storage account to use for placing the console output
+      title: Storage URI
+      description: URI of the storage account to use for placing the console output
         and screenshot
   diagnosticsProfile:
     bootDiagnostics:
@@ -115,13 +116,13 @@ types:
       type: string
       title: Key Data
       description: SSH public key certificate used to authenticate with the vm through
-        ssh
+        SSH
     path:
       type: string
       title: Path
-      description: Specifies the full path on the created VM where ssh public key
+      description: Specifies the full path on the created VM where SSH public key
         is stored
-  ssh:
+  SSH:
     publicKeys:
       type: '[]publicKeys'
       title: Public Keys
@@ -131,8 +132,8 @@ types:
       type: bool
       title: Disable Password Authentication
       description: Specifies whether password authentication should be disabled
-    ssh:
-      type: ssh
+    SSH:
+      type: SSH
       title: SSH
       description: Specifies a collection of keys to be placed on the virtual machine
   osProfile:
@@ -204,7 +205,7 @@ types:
     uri:
       type: string
       title: VHD
-      description: Specifies the vhd uri
+      description: Specifies the vhd URI
   osDisk:
     caching:
       type: string
@@ -231,7 +232,7 @@ types:
     vhd:
       type: vhd
       title: VHD
-      description: Specifies the uri of the location in storage where the vhd for
+      description: Specifies the URI of the location in storage where the vhd for
         the virtual machine should be placed
   storageProfile:
     dataDisks:
@@ -280,12 +281,12 @@ types:
     vmId:
       type: string
       title: Virtual Machine ID
-      description: The vm unique id
+      description: The vm unique ID
   value_vm:
     id:
       type: string
       title: ID
-      description: Specifies the identifying url of the virtual machine
+      description: Specifies the identifying URL of the virtual machine
     location:
       type: string
       title: Location
@@ -324,7 +325,7 @@ types:
     numberOfCores:
       type: int
       title: Number Of Cores
-      description: Specifies the number of available cpu cores
+      description: Specifies the number of available CPU cores
     osDiskSizeInMB:
       type: int
       title: OS Disk Size In MB
@@ -343,7 +344,7 @@ connection:
   client_id:
     title: Client ID
     type: string
-    description: The application id that the application registration portal assigned
+    description: The application ID that the application registration portal assigned
       to your app
     required: true
   client_secret:
@@ -355,7 +356,7 @@ connection:
   tenant_id:
     title: Tenant ID
     type: string
-    description: This is active directory id
+    description: This is active directory ID
     required: true
   api_version:
     title: API Version
@@ -366,7 +367,7 @@ connection:
 actions:
   generalized_vm:
     title: Generalize a Virtual Machine
-    description: Mark a virtual machine as generalized in Azure
+    description: Mark a virtual machine as generalized in Azure (VM must be stopped before generalizing)
     input:
       subscriptionId:
         type: string
@@ -611,7 +612,7 @@ actions:
         required: false
   save_image_vm:
     title: Capture Virtual Machine
-    description: Save an image of a virtual machine
+    description: Save an image of a virtual machine (VM must be stopped, generalized, and be an unmanaged disk)
     input:
       subscriptionId:
         type: string

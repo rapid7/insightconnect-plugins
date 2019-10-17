@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_enterprise_groups",
+        "input": {
+            "group_name": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

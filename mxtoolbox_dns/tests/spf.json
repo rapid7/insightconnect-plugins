@@ -1,17 +1,17 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "action": "spf",
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "https://api.mxtoolbox.com/api/v1/"
+    "body": {
+        "action": "spf",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "hostname": "example.com"
+        },
+        "meta": {}
     },
-    "input": {
-      "hostname": "example.com"
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

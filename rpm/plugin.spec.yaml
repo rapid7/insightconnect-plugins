@@ -4,7 +4,8 @@ title: RPM
 description: RPM Package Manager
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - rpm
 - package

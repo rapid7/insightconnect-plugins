@@ -1,0 +1,81 @@
+plugin_spec_version: v2
+name: storage
+title: Storage
+description: Store variables in a plugin cache
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+enable_cache: true
+tags:
+- utilities
+- variables
+
+actions:
+  store:
+    title: Store
+    description: Store a variable in cache
+    input:
+      variable_name:
+        title: Variable Name
+        type: string
+        description: Name of the variable to store
+        required: true
+        order: 1
+      variable_value:
+        title: Variable Value
+        type: string
+        description: Value of the variable to store
+        required: true
+        order: 2
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  retrieve:
+    title: Retrieve
+    description: Retrieve the value of a variable
+    input:
+      variable_name:
+        title: Variable Name
+        type: string
+        description: Variable to get value from
+        required: true
+    output:
+      value:
+        title: Variable Value
+        description: Value
+        type: string
+        required: true
+  delete_variable:
+    title: Delete Variable
+    description: Delete a variable and its contents
+    input:
+      variable_name:
+        title: Variable Name
+        type: string
+        description: Variable to delete
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  check_for_variable:
+    title: Check for Variable
+    description: Find out if a variable exists
+    input:
+      variable_name:
+        title: Variable Name
+        type: string
+        description: Variable to look for
+        required: true
+    output:
+      variable_found:
+        title: Variable Found
+        description: Was variable found
+        type: boolean
+        required: true

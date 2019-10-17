@@ -4,7 +4,8 @@ title: Syslog Forwarder
 description: Forward messages to a syslog server
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - syslog
 - logs

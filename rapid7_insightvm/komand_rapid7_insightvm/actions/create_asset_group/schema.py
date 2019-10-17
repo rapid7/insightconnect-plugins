@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create an asset group"
+
+
 class Input:
     DESCRIPTION = "description"
     NAME = "name"

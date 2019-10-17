@@ -2,14 +2,45 @@ plugin_spec_version: v2
 name: string
 title: String Operations
 description: Provides common programmatic string operations
-version: 1.0.1
+version: 1.1.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - utilities
 - string
 - split
 actions:
+  set_encoding:
+    title: Set Encoding
+    description: Encode a string
+    input:
+      string:
+        title: String Input
+        description: String to encode
+        type: string
+        required: true
+      encoding:
+        type: string
+        description: Encoding to use
+        enum:
+        - "UTF-8"
+        - "ASCII"
+        required: true
+      error_handling:
+        type: string
+        description: Error handler to use for encoding and decoding
+        enum:
+        - "strict"
+        - "replace"
+        - "ignore"
+        required: true
+    output:
+      encoded:
+        type: string
+        title: Encoded String
+        description: Encoded string
+        required: true
   split_to_list:
     title: Split String to List
     description: Converts a string to a list of strings

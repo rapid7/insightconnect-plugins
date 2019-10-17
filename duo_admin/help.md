@@ -182,7 +182,7 @@ Example output:
     "user_id": "DU9B7X097A3G9A4BABBA",
     "alias3": "Test Test",
     "phones": [],
-    "email": "test@gmail.com"
+    "email": "test@example.com"
   }
 }
 

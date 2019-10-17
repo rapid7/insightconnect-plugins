@@ -10,7 +10,7 @@ This plugin utilizes the [Python OpenDNS Investigate](https://github.com/opendns
 
 ### DNS RR History for IP Address
 
-This action is used to return the history that umbrella has seen for a given ip address.
+This action is used to return the history that umbrella has seen for a given IP address.
 
 #### Input
 
@@ -60,7 +60,7 @@ This action is used to return co-occurences for the specified domain.
 
 ### WHOIS by Domain
 
-This action is used to a standard whois response record for a single domain with all available whois data returned in an array.
+This action is used to a standard WHOIS response record for a single domain with all available WHOIS data returned in an array.
 
 #### Input
 
@@ -128,7 +128,7 @@ This action is used to return the history that Umbrella has seen for a given dom
 
 ### Latest Malicious Domains by IP
 
-This action is used to return associated malicious domains for an ip address.
+This action is used to return associated malicious domains for an IP address.
 
 #### Input
 
@@ -163,7 +163,7 @@ This action is used to return artifacts which are files created or modified duri
 
 ### WHOIS Information by Email
 
-This action is used to returns the whois information for the specified email address(es), nameserver(s) and domains.
+This action is used to returns the WHOIS information for the specified email address(es), nameserver(s) and domains.
 
 #### Input
 
@@ -352,6 +352,7 @@ Examples:
 * 0.1.0 - Initial plugin
 * 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 1.0.1 - Add connection test | Fix where connection was returning "Wrong api_key" on valid keys | Run plugin as least privileged user | Update to use the `komand/python-3-slim-plugin` Docker image to reduce plugin size
 
 ## References
 

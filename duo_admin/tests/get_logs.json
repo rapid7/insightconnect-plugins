@@ -1,20 +1,20 @@
 {
     "body": {
-      "action": "get_logs",
-      "meta": {},
-      "input": {
-        "mintime": 0
-      },
-      "connection": {
-        "hostname": "",
-        "integration_key": {
-          "secretKey": ""
+        "action": "get_logs",
+        "connection": {
+            "hostname": null,
+            "integration_key": {
+                "secretKey": null
+            },
+            "secret_key": {
+                "secretKey": null
+            }
         },
-        "secret_key": {
-          "secretKey": ""
-        }
-    }
+        "input": {
+            "mintime": 0
+        },
+        "meta": {}
     },
     "type": "action_start",
     "version": "v1"
-  }
+}

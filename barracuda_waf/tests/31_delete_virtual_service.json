@@ -1,18 +1,18 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "action": "delete_virtual_service",
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
+    "body": {
+        "action": "delete_virtual_service",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "id": "test-v14-virtual-service"
+        },
+        "meta": {}
     },
-    "input": {
-      "id": "test-v14-virtual-service"
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

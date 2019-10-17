@@ -1,16 +1,16 @@
 {
-  "body": {
-    "input": {
-      "human": true,
-      "ignore_idle_threads": true,
-      "threads": 3
+    "body": {
+        "action": "hot_threads",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "human": true,
+            "ignore_idle_threads": true,
+            "threads": 3
+        },
+        "meta": {}
     },
-    "action": "hot_threads",
-    "connection": {
-      "url": ""
-    },
-    "meta": {}
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

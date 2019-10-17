@@ -1,17 +1,17 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "username": ""
+    "body": {
+        "action": "parsed_whois",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "domain": "google.com"
+        },
+        "meta": {}
     },
-    "input": {
-      "domain": "google.com"
-    },
-    "action": "parsed_whois",
-    "meta": {}
-  }
+    "type": "action_start",
+    "version": "v1"
 }

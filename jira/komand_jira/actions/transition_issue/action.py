@@ -1,7 +1,9 @@
 import komand 
 from .schema import TransitionIssueInput, TransitionIssueOutput
-# Custom imports below
 
+# Custom imports below
+from jira.exceptions import JIRAError
+from komand.exceptions import PluginException
 
 class TransitionIssue(komand.Action):
 
@@ -20,11 +22,15 @@ class TransitionIssue(komand.Action):
         if not issue:
             raise Exception('Error: No issue found with ID: ' + params['id'])
 
-        result = self.connection.client.transition_issue(
-            issue=issue,
-            transition=params['transition'],
-            comment=params.get('comment')
-        )
+        try:
+            result = self.connection.client.transition_issue(
+                issue=issue,
+                transition=params['transition'],
+                comment=params.get('comment'),
+                fields=params.get('fields')
+            )
+        except JIRAError as e:
+            raise PluginException(cause=e.text if e.text else "Invalid input.", data=e)
 
         self.logger.info('Result: %s', result)
 

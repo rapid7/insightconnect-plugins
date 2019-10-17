@@ -1,17 +1,19 @@
 {
-  "body": {
-    "action": "remove_tags",
-    "meta": {},
-    "input": {
-      "app_id": "LowprofileappcreatedforKomandplugintests-1oRtT",
-      "tags": ["new"]
+    "body": {
+        "action": "remove_tags",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "app_id": "LowprofileappcreatedforKomandplugintests-1oRtT",
+            "tags": [
+                "new"
+            ]
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

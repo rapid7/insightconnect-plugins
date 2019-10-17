@@ -1,6 +1,7 @@
 import komand
 from .schema import DomainTagsInput, DomainTagsOutput
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class DomainTags(komand.Action):
@@ -16,8 +17,7 @@ class DomainTags(komand.Action):
         try:
             domain_tags = self.connection.investigate.domain_tags(domain)
         except Exception as e:
-            self.logger.error("DomainTags: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         if not domain_tags:
             self.logger.info("DomainTags: Run: No results")

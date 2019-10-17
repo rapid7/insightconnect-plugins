@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "search_analysis",
-    "meta": {},
-    "input": {
-      "query": "README.md"
+    "body": {
+        "action": "search_analysis",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "query": "README.md"
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": "",
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

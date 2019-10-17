@@ -1,27 +1,31 @@
 {
-  "body": {
-    "action": "bulk_analyze",
-    "meta": {},
-    "input": {
-      "analyze_all": false,
-      "analyzer_ids": ["MaxMind_GeoIP_3_0", "Fortiguard_URLCategory_2_1", "thats the wrong one"],
-      "attributes": {
-        "dataType": "ip",
-        "tlp": 0
-      },
-      "observable": "1.2.3.4"
+    "body": {
+        "action": "bulk_analyze",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "analyze_all": false,
+            "analyzer_ids": [
+                "MaxMind_GeoIP_3_0",
+                "Fortiguard_URLCategory_2_1",
+                "thats the wrong one"
+            ],
+            "attributes": {
+                "dataType": "ip",
+                "tlp": 0
+            },
+            "observable": "1.2.3.4"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "host": "",
-      "port": "9001",
-      "protocol": "HTTP",
-      "proxy": {},
-      "verify": true
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: graphite
 title: Graphite
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Graphite is an enterprise-ready monitoring tool that allows you store
   and graph metrics
 version: 1.0.0

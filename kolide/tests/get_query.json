@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_query_results",
-    "meta": {},
-    "input": {
-      "queryid": "12"
+    "body": {
+        "action": "get_query_results",
+        "connection": {
+            "api_token": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null
+        },
+        "input": {
+            "queryid": "12"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_token": {
-        "secretKey": ""
-      },
-      "ssl_verify": false,
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

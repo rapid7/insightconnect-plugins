@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the contents of a generated report"
+
+
 class Input:
     ID = "id"
     INSTANCE = "instance"

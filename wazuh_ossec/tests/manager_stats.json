@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "manager_stats",
-    "meta": {},
-    "input": {
-      "date": ""
+    "body": {
+        "action": "manager_stats",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "date": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

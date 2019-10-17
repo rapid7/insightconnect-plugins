@@ -1,0 +1,24 @@
+{
+    "body": {
+        "action": "launch_manual_scan_report",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "hostname": null
+        },
+        "dispatcher": {},
+        "input": {
+            "ip_restriction": "",
+            "output_format": "",
+            "report_refs": "",
+            "template_id": 0,
+            "title": ""
+        },
+        "meta": {},
+        "trigger": ""
+    },
+    "type": "action_start",
+    "version": "v1"
+}

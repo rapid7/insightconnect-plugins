@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "update_scan_status",
-    "meta": {},
-    "input": {
-      "id": 188934,
-      "status": "stop"
+    "body": {
+        "action": "update_scan_status",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 188934,
+            "status": "stop"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": "https://insightvm:3780"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,18 +1,18 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "action": "get_job_details",
-    "connection": {
-      "verify": true,
-      "host": "",
-      "proxy": {},
-      "port": "9999",
-      "protocol": "http"
+    "body": {
+        "action": "get_job_details",
+        "connection": {
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "job_id": "lsqxdgngBF3rdAFe"
+        },
+        "meta": {}
     },
-    "input": {
-      "job_id": "lsqxdgngBF3rdAFe"
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

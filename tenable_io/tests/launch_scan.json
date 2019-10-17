@@ -1,21 +1,21 @@
 {
     "body": {
-      "action": "launch_scan",
-      "meta": {},
-      "input": {
-        "name": "",
-        "targets": [],
-        "template": ""
-      },
-      "connection": {
-        "access_key": {
-          "secretKey": ""
+        "action": "launch_scan",
+        "connection": {
+            "access_key": {
+                "secretKey": null
+            },
+            "secret_key": {
+                "secretKey": null
+            }
         },
-        "secret_key": {
-          "secretKey": ""
-        }
-      }
+        "input": {
+            "name": "",
+            "targets": [],
+            "template": ""
+        },
+        "meta": {}
     },
     "type": "action_start",
     "version": "v1"
-  }
+}

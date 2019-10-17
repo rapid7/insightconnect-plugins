@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new scan engine with console engine connectivity"
+
+
 class Input:
     ADDRESS = "address"
     NAME = "name"

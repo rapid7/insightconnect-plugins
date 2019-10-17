@@ -2,9 +2,9 @@
     "body": {
         "action": "list_all_organization_applications",
         "connection": {
-          "api_key": {
-             "secretKey": ""
-           }
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {
             "classification": "Unclassified",

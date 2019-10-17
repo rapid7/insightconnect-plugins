@@ -28,9 +28,9 @@ class AddUser(komand.Action):
         user_principal_name = params.get('user_principal_name')
 
         if account_disabled == 'true':
-            user_account_control = 512
-        else:
             user_account_control = 514
+        else:
+            user_account_control = 512
 
         full_name = first_name + ' ' + last_name
         domain_dn = domain_name.replace('.', ',DC=')

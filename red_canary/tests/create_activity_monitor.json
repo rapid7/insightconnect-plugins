@@ -1,23 +1,31 @@
 {
-  "body": {
-    "action": "create_activity_monitor",
-    "meta": {},
-    "input": {
-      "active": true,
-      "name": "SSH directory changes",
-      "type": "file_modification",
-      "file_modification_types_monitored": ["file_modification"],
-      "file_paths_monitored": ["/var/log/syslog"],
-      "usernames_excluded": ["james_bond"],
-      "usernames_matched": ["everybody"]
+    "body": {
+        "action": "create_activity_monitor",
+        "connection": {
+            "api_token": {
+                "secretKey": null
+            },
+            "customer_id": null
+        },
+        "input": {
+            "active": true,
+            "file_modification_types_monitored": [
+                "file_modification"
+            ],
+            "file_paths_monitored": [
+                "/var/log/syslog"
+            ],
+            "name": "SSH directory changes",
+            "type": "file_modification",
+            "usernames_excluded": [
+                "james_bond"
+            ],
+            "usernames_matched": [
+                "everybody"
+            ]
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_token": {
-        "secretKey": ""
-      },
-      "customer_id": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

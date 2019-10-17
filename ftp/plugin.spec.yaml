@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: ftp
 title: FTP
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Upload and download files using the File Transfer Protocol
 version: 2.0.0
 tags:

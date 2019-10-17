@@ -8,13 +8,14 @@ class Component:
 
 
 class Input:
-    ADDRESS = "address"
     CATEGORIES = "categories"
     COMMENT = "comment"
+    IP = "ip"
     
 
 class Output:
-    IP = "ip"
+    ABUSECONFIDENCESCORE = "abuseConfidenceScore"
+    IPADDRESS = "ipAddress"
     SUCCESS = "success"
     
 
@@ -24,12 +25,6 @@ class ReportIpInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address": {
-      "type": "string",
-      "title": "IP Address",
-      "description": "IPv4 or IPv6 address to report e.g. 8.8.8.8, ::1",
-      "order": 1
-    },
     "categories": {
       "type": "string",
       "title": "Categories",
@@ -41,11 +36,17 @@ class ReportIpInput(komand.Input):
       "title": "Comment",
       "description": "Describe the type of malicious activity e.g. Brute forcing Wordpress login",
       "order": 3
+    },
+    "ip": {
+      "type": "string",
+      "title": "IP Address",
+      "description": "IPv4 or IPv6 address to report e.g. 8.8.8.8, ::1",
+      "order": 1
     }
   },
   "required": [
-    "address",
-    "categories"
+    "categories",
+    "ip"
   ]
 }
     """)
@@ -60,7 +61,13 @@ class ReportIpOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "ip": {
+    "abuseConfidenceScore": {
+      "type": "integer",
+      "title": "Abuse Confidence Score",
+      "description": "Confidence that reported IP is abusive",
+      "order": 2
+    },
+    "ipAddress": {
       "type": "string",
       "title": "Comment",
       "description": "IP address submitted",
@@ -70,9 +77,12 @@ class ReportIpOutput(komand.Output):
       "type": "boolean",
       "title": "Success",
       "description": "Submission success",
-      "order": 2
+      "order": 3
     }
-  }
+  },
+  "required": [
+    "success"
+  ]
 }
     """)
 

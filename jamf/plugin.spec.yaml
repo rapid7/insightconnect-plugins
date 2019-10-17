@@ -1,0 +1,289 @@
+plugin_spec_version: v2
+name: jamf
+title: Jamf
+description: Jamf is a popular product for managing iPads, iPhones, Macs, and Apple TVs for schools and businesses
+version: 1.1.0
+vendor: rapid7
+support: community
+status: []
+tags:
+- jamf
+- ios
+- mac
+- apple
+
+types:
+  mobile_device:
+    id:
+       title: Device ID
+       description: Device ID
+       type: integer
+       required: true
+    name:
+       title: Device Name
+       description: Device name
+       type: string
+       required: true
+    mac_address:
+       title: MAC Address
+       description: MAC address
+       type: integer
+       required: true
+    udid:
+       title: Unique Device ID
+       description: Unique device ID
+       type: string
+       required: true
+    wifi_mac_address:
+       title: WIFI MAC Address
+       description: WIFI MAC address
+       type: string
+       required: true
+    serial_number:
+       title: Serial Number
+       description: Serial number
+       type: string
+       required: true
+  device_group_detail:
+    id:
+      title: Group ID
+      description: Group ID
+      type: integer
+      required: true
+    name:
+      title: Group Name
+      description: Group name
+      type: string
+      required: true
+  search_criteria:
+    name:
+      title: Name
+      desciption: Name
+      type: string
+      required: false
+    priority:
+      title: Priority
+      description: Priority
+      type: integer
+      required: false
+    and_or:
+      title:  AND_OR
+      description: AND_OR
+      type: string
+      required: false
+    search_type:
+      title: Search Type
+      description: Search type
+      type: string
+      required: false
+    value:
+      title: Value
+      description: Value
+      type: string
+      required: false
+    opening_par:
+      title: Opening Parenthesis
+      description: Opening parenthesis
+      type: boolean
+      required: false
+    closing_paren:
+      title: Closing Parenthesis
+      description: Closing parenthesis
+      type: boolean
+      required: false
+  site_detail:
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+  group_detail:
+    id:
+      title: Group ID
+      description: Group ID
+      type: integer
+      required: false
+    name:
+      title: Group Name
+      description: Group name
+      type: string
+      required: false
+    is_smart:
+      title: Is Smart Group
+      description: Is smart group
+      type: boolean
+      required: false
+    criteria:
+      title: Criteria
+      description: Criteria
+      type: '[]search_criteria'
+      requierd: false
+    site:
+      title: Site
+      description: Site
+      type: site_detail
+      required: false
+    mobile_devices:
+      title: Mobile Devices
+      description: Mobile devices
+      type: '[]mobile_device'
+      required: false
+  user_location_detail:
+    username:
+      title: Username
+      description: Username
+      type: string
+      required: true
+    real_name:
+      title: Real Name
+      description: Real name
+      type: string
+      required: true
+    email_address:
+      title: Email Address
+      description: Email address
+      type: string
+      required: true
+    position:
+      title: Position
+      description: Position
+      type: string
+      required: true
+    phone:
+      title: Phone
+      description: Phone
+      type: string
+      required: true
+    department:
+      title: Department
+      description: Department
+      type: string
+      required: true
+    building:
+      title: Building
+      description: Building
+      type: string
+      required: true
+    room:
+      title: Room Number
+      description: Room number
+      type: string
+      required: true
+connection:
+  url:
+    title: Jamf URL
+    description: The full URL for your Jamf instance, e.g. https://instance.jamfcloud.com
+    type: string
+    required: true
+  client_login:
+    title: Client Login Information
+    description: The Jamf username and password for basic authentication API interaction
+    type: credential_username_password
+    required: true
+  timeout:
+    title: Timeout
+    description: The interval in seconds before abandoning an attempt to access Jamf
+    type: integer
+    required: false
+    default: 30
+actions:
+  get_group_detail:
+    title: Get Group Details
+    description: Get group details
+    input:
+      id:
+        title: Group ID
+        description: Group ID
+        type: integer
+        required: true
+    output:
+      group_detail:
+        title: Group Detail
+        description: Group detail
+        type: group_detail
+        required: true
+  get_devices_name_id:
+    title: Get Devices Names and IDs
+    description: Gets a list of user's devices names and IDs
+    input:
+      name:
+        title: User Name
+        description: User name
+        type: string
+        required: true
+    output:
+      device_detail:
+        title: Device Detail
+        description: Device detail
+        type: object
+        required: true
+  get_device_groups:
+    title: Get Device Groups
+    description: Gets a list of all groups a device is member of
+    input:
+      ID:
+        title: Device ID
+        description: Device ID
+        type: integer
+        required: true
+    output:
+      device_groups:
+        title: Device Groups
+        description: List of device groups
+        type: '[]device_group_detail'
+        required: true
+  lock_mobile_devices:
+    title: Lock Mobile Devices
+    description: Lock mobile devices
+    input:
+      devices_id:
+        title: Devices IDs
+        description: List of devices IDs
+        type: '[]string'
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: integer
+        required: true
+  add_computer_to_group:
+    title: Add Computer To A Group
+    description: Add computer to a group
+    input:
+      ID:
+        title: Group ID
+        description: Group ID
+        type: integer
+        required: true
+      computer_ids:
+        title: Computer IDs
+        description: Computer IDs
+        type: '[]integer'
+        required: true
+    output:
+      status:
+        title: Status
+        description: Status
+        type: integer
+        required: true
+  get_user_location:
+    title: Get User Location Details
+    description: Get user location details by device ID
+    input:
+      ID:
+        title: Device ID
+        description: Device ID
+        type: string
+        required: true
+    output:
+      user_location_detail:
+        title: User Location Details
+        description: User location details
+        type: user_location_detail
+        required: true

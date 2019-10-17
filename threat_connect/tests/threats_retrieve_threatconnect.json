@@ -1,28 +1,28 @@
 {
-  "body": {
-    "action": "threats_retrieve",
-    "input": {
-      "adversary_id": null,
-      "document_id": null,
-      "email_id": null,
-      "id": null,
-      "incident_id":null,
-      "indicator":null,
-      "security_label":null,
-      "signature_id":null,
-      "tag": "ad1-th",
-      "threat_id":null,
-      "victim_id":null,
-      "owner": "Komand"
+    "body": {
+        "action": "threats_retrieve",
+        "connection": {
+            "api_access_id": null,
+            "api_base_url": null,
+            "api_default_org": null,
+            "api_secret_key": null
+        },
+        "input": {
+            "adversary_id": null,
+            "document_id": null,
+            "email_id": null,
+            "id": null,
+            "incident_id": null,
+            "indicator": null,
+            "owner": "Komand",
+            "security_label": null,
+            "signature_id": null,
+            "tag": "ad1-th",
+            "threat_id": null,
+            "victim_id": null
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_access_id": "",
-      "api_default_org": "",
-      "api_secret_key": "",
-      "api_base_url": "https://sandbox.threatconnect.com/api"
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,18 +1,18 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "action": "reverse_ip",
-    "input": {
-      "limit": 0,
-      "domain": "google.com"
+    "body": {
+        "action": "reverse_ip",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "domain": "google.com",
+            "limit": 0
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "username": ""
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

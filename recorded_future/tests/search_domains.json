@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "search_domains",
-    "meta": {},
-    "input": {
-      "orderby": "Created",
-      "from": 0,
-      "direction": "asc",
-      "limit": 10,
-      "parent": "recordedfuture.com"
+    "body": {
+        "action": "search_domains",
+        "connection": {
+            "api_key": null
+        },
+        "input": {
+            "direction": "asc",
+            "from": 0,
+            "limit": 10,
+            "orderby": "Created",
+            "parent": "recordedfuture.com"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": ""
-    }
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

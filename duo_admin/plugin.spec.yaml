@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: duo_admin
 title: Duo Admin API
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 description: Integration for Duo Admin API
 version: 3.3.1
 tags:

@@ -1,20 +1,20 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "action": "add_target",
-    "connection": {
-      "url": "",
-      "ssl_verify": false,
-      "username": "",
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "add_target",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username": null
+        },
+        "input": {
+            "email": "foo@bar.com",
+            "params": {}
+        },
+        "meta": {}
     },
-    "input": {
-      "email": "foo@bar.com",
-      "params": {}
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

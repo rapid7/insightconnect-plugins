@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "generate_pdf",
-    "input": {
-      "text": "Helloalinewithalotoftextshouldbewrappedsothatallthetextisvisibletotheuseronthescreenandnothingishidden"
+    "body": {
+        "action": "generate_pdf",
+        "connection": null,
+        "input": {
+            "text": "Helloalinewithalotoftextshouldbewrappedsothatallthetextisvisibletotheuseronthescreenandnothingishidden"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

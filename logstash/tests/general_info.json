@@ -1,12 +1,12 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "input": {},
-    "connection": {
-      "url": ""
+    "body": {
+        "action": "general_info",
+        "connection": {
+            "url": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "meta": {},
-    "action": "general_info"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

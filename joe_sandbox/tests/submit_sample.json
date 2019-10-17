@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "submit_sample",
-    "meta": {},
-    "input": {
-      "sample": "SGVsbG8gV29ybGQhCg=="
+    "body": {
+        "action": "submit_sample",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "sample": "SGVsbG8gV29ybGQhCg=="
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": "",
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

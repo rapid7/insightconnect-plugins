@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "get_group_detail",
+        "connection": {
+            "client_login": {
+                "password": null,
+                "username": null
+            },
+            "timeout": null,
+            "url": null
+        },
+        "input": {
+            "id": 2
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

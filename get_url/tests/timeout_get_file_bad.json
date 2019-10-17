@@ -1,15 +1,15 @@
 {
-  "body": {
-    "action": "get_file",
-    "input": {
-      "url": "http://speedtest.ftp.otenet.gr/files/test10Mb.db",
-      "checksum": "",
-      "is_verify": false,
-      "timeout": 1
+    "body": {
+        "action": "get_file",
+        "connection": null,
+        "input": {
+            "checksum": "",
+            "is_verify": false,
+            "timeout": 1,
+            "url": "http://speedtest.ftp.otenet.gr/files/test10Mb.db"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

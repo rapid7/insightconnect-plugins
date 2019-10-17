@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_tag_sites",
-    "meta": {},
-    "input": {
-      "id": 73
+    "body": {
+        "action": "get_tag_sites",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 73
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": "https://insightvm:3780"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

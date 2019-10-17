@@ -1,0 +1,20 @@
+{
+    "body": {
+        "connection": {
+            "client_external_ip": null,
+            "client_machine_name": null,
+            "exports_file_hostname": null,
+            "mount_pathname": null,
+            "timeout": null
+        },
+        "dispatcher": {},
+        "input": {
+            "file_pathname": "",
+            "interval": 1
+        },
+        "meta": {},
+        "trigger": "file_changed"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

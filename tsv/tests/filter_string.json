@@ -1,13 +1,13 @@
 {
-  "body": {
-    "action": "filter_string",
-    "input": {
-      "tsv": "",
-      "fields": ""
+    "body": {
+        "action": "filter_string",
+        "connection": null,
+        "input": {
+            "fields": "",
+            "tsv": ""
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

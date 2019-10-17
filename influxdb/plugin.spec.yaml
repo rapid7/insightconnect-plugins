@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: influxdb
 title: InfluxDB
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Scalable datastore for metrics, events, and real-time analytics
 version: 1.0.0
 tags:

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List authentication sources available for InsightVM users"
+
+
 class Input:
     NAME = "name"
     TYPE = "type"

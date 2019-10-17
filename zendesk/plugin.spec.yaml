@@ -5,7 +5,8 @@ description: Zendesk helps improve communication and make sense of massive amoun
   of data
 version: 1.1.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - zendesk
 - ticket

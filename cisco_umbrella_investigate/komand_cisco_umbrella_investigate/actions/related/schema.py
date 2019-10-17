@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns a list of domain names that have been frequently seen"
+
+
 class Input:
     DOMAIN = "domain"
     

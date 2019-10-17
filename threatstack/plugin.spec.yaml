@@ -5,7 +5,8 @@ description: Threat Stack is a cloud security monitoring provider helping compan
   to achieve compliance and cloud security
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 author: Tom McLaughlin
 tags:
 - threatstack

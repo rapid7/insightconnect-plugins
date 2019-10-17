@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: cisco_umbrella_enforcement
 title: Cisco Umbrella Enforcement
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 description: Cisco Umbrella Enforcement give technology partners the ability to send
   security events from their platform/service/appliance within a customer environment
   to the Cisco security cloud for enforcement

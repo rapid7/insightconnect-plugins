@@ -1,14 +1,14 @@
 {
-  "body": {
-    "meta": {},
-    "action": "download_domain_risk_list",
-    "connection": {
-      "api_key": ""
+    "body": {
+        "action": "download_domain_risk_list",
+        "connection": {
+            "api_key": null
+        },
+        "input": {
+            "list": "active_phishing_url"
+        },
+        "meta": {}
     },
-    "input": {
-      "list": "active_phishing_url"
-    }
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -2,12 +2,12 @@
     "body": {
         "connection": {
             "access_token_credentials": {
-                "username": "",
-                "password": ""
+                "password": null,
+                "username": null
             },
             "consumer_credentials": {
-                "username": "",
-                "password": ""
+                "password": null,
+                "username": null
             }
         },
         "dispatcher": {
@@ -15,8 +15,8 @@
             "webhook_url": ""
         },
         "input": {
-            "pattern": "",
-            "interval": 300
+            "interval": 300,
+            "pattern": ""
         },
         "meta": {},
         "trigger": "messages"

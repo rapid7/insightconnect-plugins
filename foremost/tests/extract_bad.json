@@ -1,12 +1,12 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "action": "extract",
-    "connection": null,
-    "meta": {},
-    "input": {
-      "file": "2314127!!@$!@%@#%"
-    }
-  }
+    "body": {
+        "action": "extract",
+        "connection": null,
+        "input": {
+            "file": "2314127!!@$!@%@#%"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

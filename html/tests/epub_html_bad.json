@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "epub",
-    "input": {
-      "doc": "kjbjkbkhjbkjbkj"
+    "body": {
+        "action": "epub",
+        "connection": {},
+        "input": {
+            "doc": "kjbjkbkhjbkjbkj"
+        },
+        "meta": {}
     },
-    "connection": {},
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

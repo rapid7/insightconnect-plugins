@@ -1,14 +1,14 @@
 {
     "body": {
-        "action":"match_base64",
-        "input": {
-            "pattern": "hello",
-            "data": "aGVsbG8gdGhlcmUgCiB3aGF0IG5vdyAKIGhlbGxvIHdvcmxk",
-            "behavior": "Default"
-        },
+        "action": "match_base64",
         "connection": null,
+        "input": {
+            "behavior": "Default",
+            "data": "aGVsbG8gdGhlcmUgCiB3aGF0IG5vdyAKIGhlbGxvIHdvcmxk",
+            "pattern": "hello"
+        },
         "meta": {}
     },
-    "version": "v1",
-    "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

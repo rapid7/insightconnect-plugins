@@ -1,17 +1,17 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "https://api.mxtoolbox.com/api/v1/"
+    "body": {
+        "action": "ptr",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "ip_address": "8.8.8.8"
+        },
+        "meta": {}
     },
-    "action": "ptr",
-    "meta": {},
-    "input": {
-      "ip_address": "8.8.8.8"
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

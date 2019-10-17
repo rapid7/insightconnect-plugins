@@ -4,7 +4,8 @@ title: Rapid7 InsightAppSec
 description: Application security testing for the modern web
 version: 1.0.0
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - insightappsec
 - Rapid7

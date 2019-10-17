@@ -4,7 +4,8 @@ title: "FireEye HX"
 description: "FireEye HX is an integrated endpoint solution that detects, prevents and responds effectively to known malware and threats traditional anti-virus endpoint security products miss"
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags: ["fireeye","hx"]
 
 types:

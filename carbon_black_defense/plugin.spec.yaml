@@ -4,7 +4,8 @@ title: Carbon Black Defense
 description: Next-generation antivirus and EDR in one cloud-delivered platform
 version: 1.1.1
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - carbon black
 - defense

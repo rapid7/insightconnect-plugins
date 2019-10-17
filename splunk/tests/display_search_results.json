@@ -1,23 +1,23 @@
 {
-  "body": {
-    "action": "display_search_results",
-    "meta": {},
-    "input": {
-      "job_id": "",
-      "timeout": 0
+    "body": {
+        "action": "display_search_results",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "license": null,
+            "port": null,
+            "ssl_verify": null,
+            "use_ssl": null
+        },
+        "input": {
+            "job_id": "",
+            "timeout": 0
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "host": "",
-      "license": "Enterprise",
-      "port": 8089,
-      "ssl_verify": false,
-      "use_ssl": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

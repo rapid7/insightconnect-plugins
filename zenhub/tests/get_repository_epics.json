@@ -1,16 +1,16 @@
 {
-  "body": {
-    "action": "get_repository_epics",
-    "meta": {},
-    "input": {
-      "repo_id": 0
+    "body": {
+        "action": "get_repository_epics",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "repo_id": 0
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

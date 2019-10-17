@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "search_incident",
+        "input": {
+            "search_parameters": "'Urgency' = \"4-Low\" AND 'Impact' = \"2-Significant/Large\""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

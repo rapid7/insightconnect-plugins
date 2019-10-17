@@ -1,19 +1,19 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "action": "account_lookup",
-    "connection": {
-      "license": {
-        "secretKey": ""
-      },
-      "user": 118625
+    "body": {
+        "action": "account_lookup",
+        "connection": {
+            "license": {
+                "secretKey": null
+            },
+            "user": null
+        },
+        "input": {
+            "address": "8.8.8.8.8.8.8.8.8.8.8.8",
+            "user_id": "3132",
+            "username_md5": "570a90bfbf8c7eab5dc5d4e26832d5b1"
+        },
+        "meta": {}
     },
-    "input": {
-      "address": "8.8.8.8.8.8.8.8.8.8.8.8",
-      "username_md5": "570a90bfbf8c7eab5dc5d4e26832d5b1",
-      "user_id": "3132"
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

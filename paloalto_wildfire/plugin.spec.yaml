@@ -2,11 +2,12 @@ plugin_spec_version: v2
 name: paloalto_wildfire
 title: Palo Alto Wildfire
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 description: WildFire cloud-based threat analysis service is the industry\'s most
   advanced analysis and prevention engine for highly evasive zero-day exploits and
   malware
-version: 1.0.2
+version: 1.1.0
 tags:
 - palo
 - wildfire
@@ -29,31 +30,36 @@ types:
       title: SHA256
       description: SHA256 hash of file
       type: string
-      required: true
+      required: false
     md5:
       title: MD5
       description: MD5 hash of file
       type: string
-      required: true
+      required: false
     size:
       description: File size
       type: string
-      required: true
+      required: false
+    supported_file_type:
+      title: Supported File
+      description: Boolean indicating whether the filetype of the sample is supported
+      type: boolean
+      required: false
   urldata:
     url:
       title: URL
       type: string
-      required: true
+      required: false
     sha256:
       title: SHA256
       description: SHA256 hash of file
       type: string
-      required: true
+      required: false
     md5:
       title: MD5
       description: MD5 hash of file
       type: string
-      required: true
+      required: false
 connection:
   host:
     type: string
@@ -71,7 +77,7 @@ connection:
   proxy:
     type: object
     title: Proxy
-    description: An optional dictionary containing proxy data, with https as the key,
+    description: An optional dictionary containing proxy data, with HTTPS as the key,
       and the proxy path as the value
     required: false
   verify:

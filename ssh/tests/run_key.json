@@ -1,26 +1,26 @@
 {
-  "body": {
-    "action": "run",
-    "input": {
-      "host": "",
-      "command": "ls -l"
+    "body": {
+        "action": "run",
+        "connection": {
+            "host": null,
+            "key": {
+                "privateKey": null
+            },
+            "password": {
+                "secretKey": null
+            },
+            "port": null,
+            "use_key": null,
+            "username": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "command": "ls -l",
+            "host": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "",
-      "key": {
-        "privateKey": ""
-      },
-      "password": {
-        "secretKey": ""
-      },
-      "port": 22,
-      "use_key": false,
-      "username": {
-        "secretKey": "vagrant"
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

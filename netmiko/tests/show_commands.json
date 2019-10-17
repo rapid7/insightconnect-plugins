@@ -1,22 +1,25 @@
 {
-  "body": {
-    "connection": {
-      "device_type": "cisco_asa",
-      "key": {"filename": "", "content": ""},
-      "username": "admin",
-      "host": "ciscoasa.com",
-      "password": "",
-      "verbose": false,
-      "secret": "",
-      "port": 22
+    "body": {
+        "action": "show_commands",
+        "connection": {
+            "device_type": null,
+            "host": null,
+            "key": {
+                "content": null,
+                "filename": null
+            },
+            "password": null,
+            "port": null,
+            "secret": null,
+            "username": null,
+            "verbose": null
+        },
+        "input": {
+            "command": "show interface vlan 1",
+            "host": "ciscoasa.com"
+        },
+        "meta": {}
     },
-    "action": "show_commands",
-    "input": {
-      "command": "show interface vlan 1",
-      "host": "ciscoasa.com"
-    },
-    "meta": {}
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

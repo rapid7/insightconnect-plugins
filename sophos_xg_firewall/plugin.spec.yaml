@@ -4,7 +4,8 @@ title: Sophos XG Firewall
 description: Next Generation Endpoint Protection and Enterprise Firewall
 version: 2.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - Sophos
 - Endpoint

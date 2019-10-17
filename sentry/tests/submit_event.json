@@ -1,29 +1,33 @@
 {
-  "body": {
-    "action": "submit_event",
-    "meta": {},
-    "input": {
-      "dsn": "https://54d8be025fd64f82a542f8e00fe0470c:ff106edc26644865acfa17abf8520d68@sentry.io/1244809",
-      "event_json": {
-        "culprit": "myself",
-        "event_id": "abcdef",
-        "exception": [{
-          "type": "SyntaxError",
-          "value": "MyBad",
-          "module": "__builtins__"
-        }],
-        "tags": { "android": "7.0.1" },
-        "timestamp": "2018-01-01T01:23:45Z"
-      },
-      "sentry_version": 7
+    "body": {
+        "action": "submit_event",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "dsn": "https://54d8be025fd64f82a542f8e00fe0470c:ff106edc26644865acfa17abf8520d68@sentry.io/1244809",
+            "event_json": {
+                "culprit": "myself",
+                "event_id": "abcdef",
+                "exception": [
+                    {
+                        "module": "__builtins__",
+                        "type": "SyntaxError",
+                        "value": "MyBad"
+                    }
+                ],
+                "tags": {
+                    "android": "7.0.1"
+                },
+                "timestamp": "2018-01-01T01:23:45Z"
+            },
+            "sentry_version": 7
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "https://sentry.io/api/0/"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

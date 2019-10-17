@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "run",
+        "connection": null,
+        "input": {
+            "function": "def run(params={}):\n return { 'result1': str(params.get('one')), 'result2': str(params.get('two')) }",
+            "input": {
+                "one": 1,
+                "two": 2
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

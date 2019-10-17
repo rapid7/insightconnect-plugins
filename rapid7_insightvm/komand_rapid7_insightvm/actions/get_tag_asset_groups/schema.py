@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get asset groups associated with a tag"
+
+
 class Input:
     ID = "id"
     

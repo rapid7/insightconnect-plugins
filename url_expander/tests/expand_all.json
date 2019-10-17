@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "expand_all",
+        "connection": null,
+        "input": {
+            "follow": false,
+            "text": "Tweeting some helpful info https://t.co/Ma3xEDLXX8 hello.com http://google.foo"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

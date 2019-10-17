@@ -1,21 +1,21 @@
 {
-  "type": "action_start",
-  "body": {
-    "action": "launch_scan",
-    "input": {
-      "scan_name": "hoots"
+    "body": {
+        "action": "launch_scan",
+        "connection": {
+            "access_key": {
+                "secretKey": null
+            },
+            "hostname": null,
+            "secret_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null
+        },
+        "input": {
+            "scan_name": "hoots"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "access_key": {
-        "secretKey": ""
-      },
-      "hostname": "",
-      "secret_key": {
-        "secretKey": ""
-      },
-      "ssl_verify": true
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

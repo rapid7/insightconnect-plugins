@@ -1,0 +1,15 @@
+{
+    "body": {
+        "action": "enable",
+        "connection": {
+            "token": null
+        },
+        "dispatcher": {},
+        "input": {
+            "email": "user@example.com"
+        },
+        "meta": null
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,6 +1,7 @@
 import komand
 from .schema import SearchInput, SearchOutput
 # Custom imports below
+from komand.exceptions import PluginException
 import re
 import datetime
 
@@ -27,8 +28,7 @@ class Search(komand.Action):
 
         nr = re.search(r'[+-]?\d+', start)
         if not nr:
-            self.logger.error("Search: Run: Wrong number")
-            raise Exception("Search: Run: Wrong number")
+            raise PluginException(cause='An invalid start time was provided.', assistance='For more information, see: https://docs.umbrella.com/investigate-api/docs/pattern-search-1#section-parameters-for-input')
 
         if "sec" in start:
             start = datetime.timedelta(seconds=int(nr.group()))
@@ -44,8 +44,7 @@ class Search(komand.Action):
         try:
             search = self.connection.investigate.search(expression, start=start, limit=limit, include_category=include_category)
         except Exception as e:
-            self.logger.error("Search: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
         return search
 
     def test(self):

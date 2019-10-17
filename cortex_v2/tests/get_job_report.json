@@ -1,21 +1,21 @@
 {
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "connection": {
-      "host": "",
-      "api_key": {
-        "secretKey": ""
-      },
-      "verify": true,
-      "proxy": {},
-      "protocol": "HTTP",
-      "port": "9001"
+    "body": {
+        "action": "get_job_report",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "job_id": "AWeaFlnYkDwhOfz60XIl"
+        },
+        "meta": {}
     },
-    "input": {
-      "job_id": "AWeaFlnYkDwhOfz60XIl"
-    },
-    "action": "get_job_report"
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

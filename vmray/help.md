@@ -54,7 +54,7 @@ Example output:
         "reputation_job_status": "queued",
         "reputation_job_statuschanged": "2018-12-03T16:22:32",
         "reputation_job_submission_id": 2361855,
-        "reputation_job_user_email": "jonathan_schipp@rapid7.com",
+        "reputation_job_user_email": "jonathan_schipp@example.com",
         "reputation_job_user_id": 1099
       }
     ],
@@ -105,7 +105,7 @@ Example output:
         "submission_user_account_id": 320,
         "submission_user_account_name": "Rapid7/Komand",
         "submission_user_account_subscription_mode": "free_account",
-        "submission_user_email": "jonathan_schipp@rapid7.com",
+        "submission_user_email": "jonathan_schipp@example.com",
         "submission_user_id": 1099,
         "submission_webif_url": "https://cloud.vmray.com/user/sample/view?id=2101187",
         "submission_whois_mode": "disabled"
@@ -328,7 +328,7 @@ Example output:
       "job_submission_id": 2361900,
       "job_tracking_state": "//waiting",
       "job_type": "full_analysis",
-      "job_user_email": "jonathan_schipp@rapid7.com",
+      "job_user_email": "jonathan_schipp@example.com",
       "job_user_id": 1099,
       "job_vm_id": 9,
       "job_vm_name": "win7_64_sp1",
@@ -358,7 +358,7 @@ Example output:
       "job_submission_id": 2361900,
       "job_tracking_state": "//waiting",
       "job_type": "full_analysis",
-      "job_user_email": "jonathan_schipp@rapid7.com",
+      "job_user_email": "jonathan_schipp@example.com",
       "job_user_id": 1099,
       "job_vm_id": 17,
       "job_vm_name": "win7_32_sp1",
@@ -388,7 +388,7 @@ Example output:
       "job_submission_id": 2361900,
       "job_tracking_state": "//waiting",
       "job_type": "full_analysis",
-      "job_user_email": "jonathan_schipp@rapid7.com",
+      "job_user_email": "jonathan_schipp@example.com",
       "job_user_id": 1099,
       "job_vm_id": 20,
       "job_vm_name": "win10_64",
@@ -409,7 +409,7 @@ Example output:
       "reputation_job_status": "queued",
       "reputation_job_statuschanged": "2018-12-03T16:37:00",
       "reputation_job_submission_id": 2361900,
-      "reputation_job_user_email": "jonathan_schipp@rapid7.com",
+      "reputation_job_user_email": "jonathan_schipp@example.com",
       "reputation_job_user_id": 1099
     }
   ],
@@ -460,7 +460,7 @@ Example output:
       "submission_user_account_id": 320,
       "submission_user_account_name": "Rapid7/Komand",
       "submission_user_account_subscription_mode": "free_account",
-      "submission_user_email": "jonathan_schipp@rapid7.com",
+      "submission_user_email": "jonathan_schipp@example.com",
       "submission_user_id": 1099,
       "submission_webif_url": "https://cloud.vmray.com/user/sample/view?id=2118603",
       "submission_whois_mode": "disabled"
@@ -481,7 +481,7 @@ Example output:
       "whois_job_status": "queued",
       "whois_job_statuschanged": "2018-12-03T16:37:00",
       "whois_job_submission_id": 2361900,
-      "whois_job_user_email": "jonathan_schipp@rapid7.com",
+      "whois_job_user_email": "jonathan_schipp@example.com",
       "whois_job_user_id": 1099
     }
   ]

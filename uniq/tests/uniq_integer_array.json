@@ -1,12 +1,20 @@
 {
-  "body": {
-    "connection": null,
-    "input": {
-      "data": [ 1, 2, 3, 1, 2, 3, 4 ]
+    "body": {
+        "action": "uniq_integer_array",
+        "connection": null,
+        "input": {
+            "data": [
+                1,
+                2,
+                3,
+                1,
+                2,
+                3,
+                4
+            ]
+        },
+        "meta": {}
     },
-    "action": "uniq_integer_array",
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

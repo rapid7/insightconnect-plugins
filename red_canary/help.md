@@ -343,7 +343,7 @@ This action is used to create a new activity monitor.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|activity_monitor|activity_monitor|True|Newly created actvity monitor|
+|activity_monitor|activity_monitor|True|Newly created activity monitor|
 
 Example output:
 
@@ -423,9 +423,9 @@ Example output:
       "last_acknowledged_by": {
         "type": "PortalUser",
         "attributes": {
-          "email": "tyler_terenzoni@rapid7.com",
+          "email": "tyler_terenzoni@example.com",
           "name": "Tyler Terenzoni",
-          "name_and_email": "Tyler Terenzoni (tyler_terenzoni@rapid7.com)"
+          "name_and_email": "Tyler Terenzoni (tyler_terenzoni@example.com)"
         }
       },
       "last_remediated_status": {
@@ -433,9 +433,9 @@ Example output:
         "marked_by": {
           "type": "PortalUser",
           "attributes": {
-            "email": "tyler_terenzoni@rapid7.com",
+            "email": "tyler_terenzoni@example.com",
             "name": "Tyler Terenzoni",
-            "name_and_email": "Tyler Terenzoni (tyler_terenzoni@rapid7.com)"
+            "name_and_email": "Tyler Terenzoni (tyler_terenzoni@example.com)"
           }
         },
         "marked_at": "2018-11-15T19:18:19.785Z"
@@ -519,9 +519,9 @@ Example output:
       "last_acknowledged_by": {
         "type": "PortalUser",
         "attributes": {
-          "email": "tyler_terenzoni@rapid7.com",
+          "email": "tyler_terenzoni@example.com",
           "name": "Tyler Terenzoni",
-          "name_and_email": "Tyler Terenzoni (tyler_terenzoni@rapid7.com)"
+          "name_and_email": "Tyler Terenzoni (tyler_terenzoni@example.com)"
         }
       }
     },
@@ -896,7 +896,7 @@ This trigger is used to check for new events.
 |----|----|-------|--------|-----------|----|
 |frequency|integer|5|True|How often the trigger should check for new events in seconds|None|
 |date_offset|date|None|False|Set past date to pull events from that time forward|None|
-|force_offset|boolean|None|False|Forces offset no matter whats in the cache|None|
+|force_offset|boolean|None|False|Forces offset no matter what's in the cache|None|
 
 #### Output
 
@@ -1050,9 +1050,9 @@ Example output:
       "last_acknowledged_by": {
         "type": "PortalUser",
         "attributes": {
-          "email": "tyler_terenzoni@rapid7.com",
+          "email": "tyler_terenzoni@example.com",
           "name": "Tyler Terenzoni",
-          "name_and_email": "Tyler Terenzoni (tyler_terenzoni@rapid7.com)"
+          "name_and_email": "Tyler Terenzoni (tyler_terenzoni@example.com)"
         }
       },
       "last_remediated_status": {
@@ -1060,9 +1060,9 @@ Example output:
         "marked_by": {
           "type": "PortalUser",
           "attributes": {
-            "email": "tyler_terenzoni@rapid7.com",
+            "email": "tyler_terenzoni@example.com",
             "name": "Tyler Terenzoni",
-            "name_and_email": "Tyler Terenzoni (tyler_terenzoni@rapid7.com)"
+            "name_and_email": "Tyler Terenzoni (tyler_terenzoni@example.com)"
           }
         },
         "marked_at": "2018-11-15T19:18:19.785Z"
@@ -1135,6 +1135,8 @@ When upgrading the Red Canary plugin, the detection cache is separate per versio
 * 2.1.0 - Updated caching for New Events and New Detection triggers. Caching will now use date vs. caching a seperate event ID. The trigger also has the option of setting a date offset for testing workflows
 * 2.1.1 - Bug fix for connection test
 * 2.1.2 - Bug fix for New Detection where needed to be loaded every time the trigger was called
+* 2.1.3 - Bug fix for New Detection trigger cache where additional dates were being added to the cache file. When the cache was loaded from the file it would set the lastest cache to an older date, allowing old detections to be triggered on
+* 2.1.4 - Bug fix for New Events trigger where PluginException was not supported in SDK image | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
 
 ## Workflows
 

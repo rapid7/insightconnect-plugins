@@ -27,7 +27,7 @@ class NewIssue(komand.Trigger):
         new_issues = self.connection.client.search_issues(self.jql, startAt=0)
         for issue in new_issues:
             if issue.id not in self.found:
-                output = normalize_issue(issue, logger=self.logger)
+                output = normalize_issue(issue, get_attachments=self.get_attachments, logger=self.logger)
                 self.found[issue.id] = True
                 self.logger.debug('found: %s', output)
                 self.send({"issue": output})
@@ -36,6 +36,7 @@ class NewIssue(komand.Trigger):
         """Run the trigger"""
         # send a test event
         self.jql = params.get('jql') or ''
+        self.get_attachments = params.get('get_attachments', False)
         if self.connection.parameters.get('project'):
             if self.jql:
                 self.jql = 'project=' + self.connection.parameters['project'] + ' and ' + self.jql

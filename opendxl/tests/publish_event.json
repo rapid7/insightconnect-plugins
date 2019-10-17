@@ -1,24 +1,24 @@
 {
-  "body": {
-    "action": "publish_event",
-    "meta": {},
-    "input": {
-      "event_message": "This is a testing message",
-      "topic": "test"
+    "body": {
+        "action": "publish_event",
+        "connection": {
+            "broker_ca": {
+                "privateKey": null
+            },
+            "client_crt": {
+                "privateKey": null
+            },
+            "client_key": {
+                "privateKey": null
+            },
+            "host": null
+        },
+        "input": {
+            "event_message": "This is a testing message",
+            "topic": "test"
+        },
+        "meta": {}
     },
-    "connection": {
-      "broker_ca": {
-        "privateKey": ""
-      },
-      "client_crt": {
-        "privateKey": ""
-      },
-      "client_key": {
-        "privateKey": ""
-      },
-      "host": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

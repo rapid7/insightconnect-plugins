@@ -1,23 +1,23 @@
 {
-  "body": {
-    "action": "capture",
-    "meta": {},
-    "input": {
-      "size": "tiny",
-      "cache_age_days": 0,
-      "format": "JPG",
-      "url": "http://www.komand.com",
-      "timeout": 200
+    "body": {
+        "action": "capture",
+        "connection": {
+            "key": {
+                "secretKey": null
+            },
+            "secret": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "cache_age_days": 0,
+            "format": "JPG",
+            "size": "tiny",
+            "timeout": 200,
+            "url": "http://www.komand.com"
+        },
+        "meta": {}
     },
-    "connection": {
-      "key": {
-        "secretKey": ""
-      },
-      "secret": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

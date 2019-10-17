@@ -1,27 +1,27 @@
 {
-  "body": {
-    "trigger": "poll_documents",
-    "meta": {},
-    "input": {
-      "_index": "twitter",
-      "_type": "tweet",
-      "frequency": 60,
-      "query": {},
-      "routing": ""
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null,
+            "use_authentication": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "_index": "twitter",
+            "_type": "tweet",
+            "frequency": 60,
+            "query": {},
+            "routing": ""
+        },
+        "meta": {},
+        "trigger": "poll_documents"
     },
-    "dispatcher": {
-      "url": "http://localhost:8000",
-      "webhook_url": ""
-    },
-    "connection": {
-      "credentials": {
-        "password": "t",
-        "username": "tt"
-      },
-      "url": "",
-      "use_authentication": false
-    }
-  },
-  "type": "trigger_start",
-  "version": "v1"
+    "type": "trigger_start",
+    "version": "v1"
 }

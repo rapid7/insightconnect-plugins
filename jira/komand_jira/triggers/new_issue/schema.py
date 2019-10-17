@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     
+    GET_ATTACHMENTS = "get_attachments"
     JQL = "jql"
     
 
@@ -23,6 +24,13 @@ class NewIssueInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "get_attachments": {
+      "type": "boolean",
+      "title": "Get Attachments",
+      "description": "Get attachments from issue",
+      "default": false,
+      "order": 2
+    },
     "jql": {
       "type": "string",
       "title": "JQL",

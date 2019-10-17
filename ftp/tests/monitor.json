@@ -1,28 +1,28 @@
 {
-  "type": "trigger_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "trigger": "monitor",
-    "connection": {
-      "passive": true,
-      "credentials": {
-        "password": "anonymous",
-        "username": "anonymous"
-      },
-      "host": "ftp.gnu.org",
-      "secure": false
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "passive": null,
+            "secure": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "interval": 10,
+            "monitor_mode": true,
+            "monitor_size": true,
+            "monitor_time": true,
+            "path": "pub"
+        },
+        "meta": {},
+        "trigger": "monitor"
     },
-    "input": {
-      "path": "pub",
-      "monitor_time": true,
-      "monitor_size": true,
-      "interval": 10,
-      "monitor_mode": true
-    },
-    "dispatcher": {
-      "url": "http://localhost:8000",
-      "webhook_url": ""
-    }
-  }
+    "type": "trigger_start",
+    "version": "v1"
 }

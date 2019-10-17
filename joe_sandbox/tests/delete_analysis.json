@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "delete_analysis",
-    "meta": {},
-    "input": {
-      "webid": "793100"
+    "body": {
+        "action": "delete_analysis",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "webid": "793100"
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": "",
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

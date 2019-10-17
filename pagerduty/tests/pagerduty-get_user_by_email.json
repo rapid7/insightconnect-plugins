@@ -1,16 +1,16 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "action": "get_user_by_email",
-    "input": {
-      "email": ""
+    "body": {
+        "action": "get_user_by_email",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "email": ""
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

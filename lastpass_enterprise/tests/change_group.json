@@ -1,19 +1,22 @@
 {
-  "body": {
-    "action": "change_group",
-    "input": {
-      "action": "add",
-      "user_name": "tim@lastpass.com",
-      "groups": [ "CC", "users" ]
+    "body": {
+        "action": "change_group",
+        "connection": {
+            "account": null,
+            "provhash": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "action": "add",
+            "groups": [
+                "CC",
+                "users"
+            ],
+            "user_name": "tim@lastpass.com"
+        },
+        "meta": {}
     },
-    "connection": {
-      "account": 0,
-      "provhash": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

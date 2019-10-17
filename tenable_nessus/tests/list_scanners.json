@@ -1,19 +1,19 @@
 {
-  "body": {
-    "connection": {
-      "access_key": {
-        "secretKey": ""
-      },
-      "hostname": "",
-      "secret_key": {
-        "secretKey": ""
-      },
-      "ssl_verify": true
+    "body": {
+        "action": "list_scanners",
+        "connection": {
+            "access_key": {
+                "secretKey": null
+            },
+            "hostname": null,
+            "secret_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "meta": {},
-    "action": "list_scanners",
-    "input": {}
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

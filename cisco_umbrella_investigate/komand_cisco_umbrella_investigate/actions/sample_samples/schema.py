@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return other samples associated with a sample"
+
+
 class Input:
     HASH = "hash"
     LIMIT = "limit"

@@ -1,18 +1,18 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "action": "lookup",
-    "input": {
-      "address": "8.8.8.8.8"
+    "body": {
+        "action": "lookup",
+        "connection": {
+            "credentials": {
+                "domain": null,
+                "token": null
+            },
+            "user": null
+        },
+        "input": {
+            "address": "8.8.8.8.8"
+        },
+        "meta": {}
     },
-    "connection": {
-      "user": 1,
-      "credentials": {
-        "domain": "",
-        "token": ""
-      }
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

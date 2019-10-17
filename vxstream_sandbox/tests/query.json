@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "query",
-    "meta": {},
-    "input": {
-      "query": "filetype:exe"
+    "body": {
+        "action": "query",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "api_secret": {
+                "secretKey": null
+            },
+            "server": null
+        },
+        "input": {
+            "query": "filetype:exe"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "api_secret": {
-        "secretKey": ""
-      },
-      "server": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

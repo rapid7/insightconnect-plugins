@@ -1,19 +1,19 @@
 {
     "body": {
-      "action": "blacklist_by_ioc_hash",
-      "meta": {},
-      "input": {
-        "hash": "3395856ce81f2b7382dee72602f798b642f14140",
-        "agent_id": "560700200554747611"        
-      },
-      "connection": {
-        "credentials": {
-            "username": "",
-            "password": ""
+        "action": "blacklist_by_ioc_hash",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
         },
-        "url": ""
-      }
+        "input": {
+            "agent_id": "560700200554747611",
+            "hash": "3395856ce81f2b7382dee72602f798b642f14140"
+        },
+        "meta": {}
     },
     "type": "action_start",
     "version": "v1"
-  }
+}

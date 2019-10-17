@@ -3,6 +3,8 @@ from .schema import SubmitFileInput, SubmitFileOutput
 # Custom imports below
 import base64
 import io
+import pyldfire
+from komand.exceptions import PluginException
 
 
 class SubmitFile(komand.Action):
@@ -19,21 +21,29 @@ class SubmitFile(komand.Action):
         _file = io.BytesIO(base64.b64decode(params.get('file')))
         filename = params.get('filename')
 
-        if filename:
-            self.logger.info('Filename specified: %s', filename)
-            out = client.submit_file(_file, filename)
-        else:
-            out = client.submit_file(_file)
-            
-        if not out['filename']:
+        out = {}
+        try:
+            if filename:
+                self.logger.info('Filename specified: %s', filename)
+                out = client.submit_file(_file, filename)
+            else:
+                out = client.submit_file(_file)
+            out['supported_file_type'] = True
+        except pyldfire.WildFireException as e:
+            if e.args and "Unsupport File type" in e.args[0]:  # Yes, that's the error, not a typo
+                out['supported_file_type'] = False
+            else:
+                raise PluginException(PluginException.Preset.UNKNOWN) from e
+
+        if 'filename' not in out.keys():
             out['filename'] = 'Unknown'
 
-        if not out['url']:
+        if 'url' not in out.keys():
             out['url'] = 'Unknown'
 
-        return { 'submission': dict(out) }
+        return {'submission': komand.helper.clean(out)}
 
     def test(self):
         """TODO: Test action"""
         client = self.connection.client
-        return { 'submission': { 'filetype': 'Test', 'filename': 'Test', 'sha256': 'Test', 'md5': 'Test', 'size': 'Test' } }
+        return {'submission': {'filetype': 'Test', 'filename': 'Test', 'sha256': 'Test', 'md5': 'Test', 'size': 'Test'}}

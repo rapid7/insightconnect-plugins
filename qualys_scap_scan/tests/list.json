@@ -1,0 +1,27 @@
+{
+    "body": {
+        "action": "list",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "hostname": null
+        },
+        "dispatcher": {},
+        "input": {
+            "launched_after": "0001-01-01T00:00:00Z",
+            "launched_before": "0001-01-01T00:00:00Z",
+            "processed": 0,
+            "reference": "",
+            "state": "",
+            "target": "",
+            "type": "",
+            "user_login": ""
+        },
+        "meta": {},
+        "trigger": ""
+    },
+    "type": "action_start",
+    "version": "v1"
+}

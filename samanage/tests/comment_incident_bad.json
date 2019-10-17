@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "comment_incident",
-    "meta": {},
-    "input": {
-      "body": "A comment",
-      "incident_id": 31851783,
-      "is_private": true
+    "body": {
+        "action": "comment_incident",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "body": "A comment",
+            "incident_id": 31851783,
+            "is_private": true
+        },
+        "meta": {}
     },
-    "connection": {
-      "eu_customer": false,
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

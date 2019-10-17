@@ -1,0 +1,22 @@
+{
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "status": "failed"
+        },
+        "meta": {},
+        "trigger": "job"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

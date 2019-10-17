@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return co-occurences for the specified domain"
+
+
 class Input:
     DOMAIN = "domain"
     

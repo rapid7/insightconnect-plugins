@@ -1,25 +1,25 @@
 {
-  "body": {
-    "action": "search",
-    "input": {
-      "timeout": 60,
-      "timeone": "UTC",
-      "to_time": "",
-      "page_limit": 100,
-      "page_offset": 0,
-      "query": "_sourceCategory=\"uploads/linux/system\"",
-      "from_time": ""
+    "body": {
+        "action": "search",
+        "connection": {
+            "access_id": {
+                "secretKey": null
+            },
+            "access_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "from_time": "",
+            "page_limit": 100,
+            "page_offset": 0,
+            "query": "_sourceCategory=\"uploads/linux/system\"",
+            "timeone": "UTC",
+            "timeout": 60,
+            "to_time": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "access_key": {
-        "secretKey": ""
-      },
-      "access_id": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

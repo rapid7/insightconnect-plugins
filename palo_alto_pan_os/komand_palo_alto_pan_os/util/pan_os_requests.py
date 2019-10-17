@@ -1,4 +1,4 @@
-from komand.exceptions import ConnectionTestException
+from komand.exceptions import ConnectionTestException, PluginException, ServerException
 import xmltodict
 import requests
 import json
@@ -30,7 +30,9 @@ class Request(object):
                     preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
 
         except BaseException as e:
-            raise Exception("Could not authenticate with PAN-OS: " + str(e))
+            raise ConnectionTestException(cause='Unknown authentication error with PAN-OS.',
+                                          assistance='Contact support for help.',
+                                          data=e)
         return cls(logger=connection.logger, url=url, session=session, key=pan_os_key,
                    verify_cert=verify_cert)
 
@@ -44,18 +46,29 @@ class Request(object):
 
         querystring = {"type": "config", "action": "edit", "key": self.key, "xpath": xpath,
                        "element": element}
+
+        response = self.session.post(self.url, params=querystring, verify=self.verify_cert)
         try:
-            response = self.session.post(self.url, params=querystring, verify=self.verify_cert)
             output = xmltodict.parse(response.text)
+        except TypeError:
+            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
+        except SyntaxError:
+            raise ServerException(cause='The response from PAN-OS was malformed.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
         except BaseException as e:
-            self.logger.error("Could not edit specified PAN-OS config object. Error: " + str(e))
-            raise
+            raise PluginException(cause='An unknown error occurred when parsing the PAN-OS response.',
+                                  assistance='Contact support for help.',
+                                  data=f'{response.text}, error {e}')
+
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            self.logger.error(
-                'Palo Alto PAN-OS returned an error in response to the request: {}'.format(error))
-            raise Exception('Palo Alto PAN-OS error')
+            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+                                  assistance='Double that check inputs are valid. Contact support if this issue persists.',
+                                  data=error)
         return {"response": output}
 
     def delete_(self, xpath: str) -> dict:
@@ -66,19 +79,30 @@ class Request(object):
         """
 
         querystring = {"type": "config", "action": "delete", "key": self.key, "xpath": xpath}
+
+        response = self.session.get(self.url, params=querystring, verify=self.verify_cert)
+
         try:
-            response = self.session.get(self.url, params=querystring, verify=self.verify_cert)
             output = xmltodict.parse(response.text)
+        except TypeError:
+            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
+        except SyntaxError:
+            raise ServerException(cause='The response from PAN-OS was malformed.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
         except BaseException as e:
-            self.logger.error("Could not create specified PAN-OS config object"
-                              " at the specified location. Error: " + str(e))
-            raise
+            raise PluginException(cause='An unknown error occurred when parsing the PAN-OS response.',
+                                  assistance='Contact support for help.',
+                                  data=f'{response.text}, error {e}')
+
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            self.logger.error(
-                'Palo Alto PAN-OS returned an error in response to the request: {}'.format(error))
-            raise Exception('Palo Alto PAN-OS error')
+            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+                                  assistance='Double that check inputs are valid. Contact support if this issue persists.',
+                                  data=error)
         return output
 
     def get_(self, xpath: str) -> dict:
@@ -89,19 +113,29 @@ class Request(object):
         """
 
         querystring = {"type": "config", "action": "get", "key": self.key, "xpath": xpath}
+
+        response = self.session.get(self.url, params=querystring, verify=self.verify_cert)
         try:
-            response = self.session.get(self.url, params=querystring, verify=self.verify_cert)
             output = xmltodict.parse(response.text)
+        except TypeError:
+            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
+        except SyntaxError:
+            raise ServerException(cause='The response from PAN-OS was malformed.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
         except BaseException as e:
-            self.logger.error("Could not create specified PAN-OS config object"
-                              " at the specified location. Error: " + str(e))
-            raise
+            raise PluginException(cause='An unknown error occurred when parsing the PAN-OS response.',
+                                  assistance='Contact support for help.',
+                                  data=f'{response.text}, error {e}')
+
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            self.logger.error(
-                'Palo Alto PAN-OS returned an error in response to the request: {}'.format(error))
-            raise Exception('Palo Alto PAN-OS error')
+            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+                                  assistance='Double that check inputs are valid. Contact support if this issue persists.',
+                                  data=error)
         return output
 
     def set_(self, xpath: str, element: str) -> dict:
@@ -114,19 +148,29 @@ class Request(object):
 
         querystring = {"type": "config", "action": "set", "key": self.key, "xpath": xpath,
                        "element": element}
+
+        response = self.session.post(self.url, params=querystring, verify=self.verify_cert)
         try:
-            response = self.session.post(self.url, params=querystring, verify=self.verify_cert)
             output = xmltodict.parse(response.text)
+        except TypeError:
+            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
+        except SyntaxError:
+            raise ServerException(cause='The response from PAN-OS was malformed.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
         except BaseException as e:
-            self.logger.error("Could not create specified PAN-OS config object"
-                              " at the specified location. Error: " + str(e))
-            raise
+            raise PluginException(cause='An unknown error occurred when parsing the PAN-OS response.',
+                                  assistance='Contact support for help.',
+                                  data=f'{response.text}, error {e}')
+
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            self.logger.error(
-                'Palo Alto PAN-OS returned an error in response to the request: {}'.format(error))
-            raise Exception('Palo Alto PAN-OS error')
+            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+                                  assistance='Double that check inputs are valid. Contact support if this issue persists.',
+                                  data=error)
         return output
 
     def show_(self, xpath: str) -> dict:
@@ -137,53 +181,82 @@ class Request(object):
         """
 
         querystring = {"type": "config", "action": "show", "key": self.key, "xpath": xpath}
+
+        response = self.session.get(self.url, params=querystring, verify=self.verify_cert)
         try:
-            response = self.session.get(self.url, params=querystring, verify=self.verify_cert)
             output = xmltodict.parse(response.text)
+        except TypeError:
+            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
+        except SyntaxError:
+            raise ServerException(cause='The response from PAN-OS was malformed.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
         except BaseException as e:
-            self.logger.error("Could not create specified PAN-OS config object"
-                              " at the specified location. Error: " + str(e))
-            raise
+            raise PluginException(cause='An unknown error occurred when parsing the PAN-OS response.',
+                                  assistance='Contact support for help.',
+                                  data=f'{response.text}, error {e}')
+
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            self.logger.error(
-                'Palo Alto PAN-OS returned an error in response to the request: {}'.format(error))
-            raise Exception('Palo Alto PAN-OS error')
+            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+                                  assistance='Double that check inputs are valid. Contact support if this issue persists.',
+                                  data=error)
         return output
 
-    def op(self, cmd: str)-> dict:
+    def op(self, cmd: str) -> dict:
         querystring = {"type": "op", "key": self.key, "cmd": cmd}
+
+        response = self.session.get(self.url, params=querystring, verify=self.verify_cert)
         try:
-            response = self.session.get(self.url, params=querystring, verify=self.verify_cert)
             output = xmltodict.parse(response.text)
+        except TypeError:
+            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
+        except SyntaxError:
+            raise ServerException(cause='The response from PAN-OS was malformed.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
         except BaseException as e:
-            self.logger.error("Could not create specified PAN-OS config object"
-                              " at the specified location. Error: " + str(e))
-            raise
+            raise PluginException(cause='An unknown error occurred when parsing the PAN-OS response.',
+                                  assistance='Contact support for help.',
+                                  data=f'{response.text}, error {e}')
+
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            self.logger.error(
-                'Palo Alto PAN-OS returned an error in response to the request: {}'.format(error))
-            raise Exception('Palo Alto PAN-OS error')
+            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+                                  assistance='Double that check inputs are valid. Contact support if this issue persists.',
+                                  data=error)
         return output
 
-    def commit(self, action: str, cmd: str)-> dict:
+    def commit(self, action: str, cmd: str) -> dict:
         querystring = {"type": "commit", "action": action,
                        "key": self.key, "cmd": cmd}
+
+        response = requests.get(self.url, params=querystring, verify=self.verify_cert)
         try:
-            response = requests.get(self.url,
-                                    params=querystring, verify=self.verify_cert)
             output = xmltodict.parse(response.text)
+        except TypeError:
+            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
+        except SyntaxError:
+            raise ServerException(cause='The response from PAN-OS was malformed.',
+                                  assistance='Contact support for help.',
+                                  data=response.text)
         except BaseException as e:
-            self.logger.error("Could not commit candidate configuration. Error: " + str(e))
-            raise
+            raise PluginException(cause='An unknown error occurred when parsing the PAN-OS response.',
+                                  assistance='Contact support for help.',
+                                  data=f'{response.text}, error {e}')
 
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            self.logger.error(
-                'Palo Alto PAN-OS returned an error in response to the request: {}'.format(error))
-            raise Exception('Palo Alto PAN-OS error')
+            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+                                  assistance='Double that check inputs are valid. Contact support if this issue persists.',
+                                  data=error)
         return output

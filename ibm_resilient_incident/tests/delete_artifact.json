@@ -2,9 +2,9 @@
     "body": {
         "action": "delete_artifact",
         "connection": {
-            "email": "mike@komand.com",
-            "hostname": "",
-            "password": ""
+            "email": null,
+            "hostname": null,
+            "password": null
         },
         "input": {
             "artifact_id": 2939,

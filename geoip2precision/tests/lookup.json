@@ -1,17 +1,17 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "action": "lookup",
-    "input": {
-      "address": "8.8.8.8"
+    "body": {
+        "action": "lookup",
+        "connection": {
+            "license_key": {
+                "secretKey": null
+            },
+            "user": null
+        },
+        "input": {
+            "address": "8.8.8.8"
+        },
+        "meta": {}
     },
-    "connection": {
-      "user": 1,
-      "license_key": {
-        "secretKey": ""
-      }
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

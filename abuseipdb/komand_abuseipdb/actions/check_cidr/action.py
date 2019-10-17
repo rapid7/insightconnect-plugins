@@ -1,5 +1,5 @@
 import komand
-from .schema import CheckCidrInput, CheckCidrOutput
+from .schema import CheckCidrInput, CheckCidrOutput, Input
 # Custom imports below
 from komand.exceptions import PluginException
 import json
@@ -18,33 +18,30 @@ class CheckCidr(komand.Action):
                 output=CheckCidrOutput())
 
     def run(self, params={}):
-        try:
-            url = '{base}/{endpoint}/json?key={key}&network={cidr}&days={days}'.format(
-                base=self.connection.base, 
-                endpoint='check-block',
-                key=self.connection.api_key,
-                cidr=params.get('cidr'),
-                days=params.get('days', '30')
-            )
-            r = requests.get(url)
-            # Not using r.raise_for_status() since we get useful JSON information on an API 4**
-            out = r.json()
-        except json.decoder.JSONDecodeError:
-            raise PluginException(cause='Received an unexpected response from AbuseIPDB.', 
-                                  assistance="(non-JSON or no response was received). Response was: %s" % r.text)
-        except Exception as e:
-            self.logger.error(e)
-            raise
+        base = self.connection.base
+        endpoint = 'check-block'
+        url = f'{base}/{endpoint}'
+
+        params = {
+            'network': params.get(Input.CIDR),
+            'maxAgeInDays': params.get(Input.DAYS),
+        }
+
+        r = requests.get(url, params=params, headers=self.connection.headers)
 
         try:
-            if isinstance(out, list):
-                error = out[0]
-                if isinstance(error, dict):
-                    if error['id']:
-                        msg = '{}: {}: {}'.format(error.get('id'), error.get('title'), error.get('detail'))
-                        raise PluginException(cause='Received an error response from AbuseIPDB.', assistance=msg)
-        except KeyError:
-            # All good, no error because 'id' key is not present
-            self.logger.info('No errors')
+            json_ = r.json()
+            if "errors" in json_:
+                raise PluginException(cause='Received an error response from AbuseIPDB.',
+                                      assistance=json_['errors'][0]["detail"])
+            out = json_["data"]
+        except json.decoder.JSONDecodeError:
+            raise PluginException(cause='Received an unexpected response from AbuseIPDB.',
+                                  assistance="(non-JSON or no response was received). Response was: %s" % r.text)
+
+        if len(out) > 0:
+            out["found"] = True
+        else:
+            out["found"] = False
 
         return out

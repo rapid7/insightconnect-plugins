@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "address",
-    "input": {
-      "address": "185.231.155.180"
+    "body": {
+        "action": "address",
+        "connection": null,
+        "input": {
+            "address": "185.231.155.180"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,6 +1,7 @@
 import komand
 from .schema import LatestDomainsInput, LatestDomainsOutput
 # Custom imports below
+from komand.exceptions import PluginException
 from IPy import IP as IP_Validate
 
 
@@ -17,14 +18,12 @@ class LatestDomains(komand.Action):
         try:
             IP_Validate(IP)
         except Exception as e:
-            self.logger.error("LatestDomains: Run: Wrong IP format")
-            raise e
+            raise PluginException(cause='Invalid IP provided by user.', assistance='Please try again by submitting a valid IP address.')
 
         try:
             latest_domains = self.connection.investigate.latest_domains(IP)
         except Exception as e:
-            self.logger.error("LatestDomains: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
         return {"domains": latest_domains}
 
     def test(self):

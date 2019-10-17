@@ -1,0 +1,22 @@
+{
+    "body": {
+        "action": "create_feed",
+        "connection": {
+            "api_credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "name": "A totally different test feed for Komand",
+            "privacy": "private",
+            "tags": [
+                "malware",
+                "ransomware"
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

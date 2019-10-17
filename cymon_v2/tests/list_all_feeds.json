@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "list_all_feeds",
+        "connection": {
+            "api_credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "privacy": "all"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

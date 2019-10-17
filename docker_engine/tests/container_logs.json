@@ -1,24 +1,24 @@
 {
-  "body": {
-    "meta": {},
-    "input": {
-      "id": "71d10ad61f"
+    "body": {
+        "action": "container_logs",
+        "connection": {
+            "api_version": null,
+            "ca_cert": {
+                "secretKey": null
+            },
+            "client_cert": {
+                "secretKey": null
+            },
+            "client_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": "71d10ad61f"
+        },
+        "meta": {}
     },
-    "action": "container_logs",
-    "connection": {
-      "api_version": "auto",
-      "ca_cert": {
-        "secretKey": ""
-      },
-      "client_cert": {
-        "secretKey": ""
-      },
-      "client_key": {
-        "secretKey": ""
-      },
-      "url": "https://localhost:2376"
-    }
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

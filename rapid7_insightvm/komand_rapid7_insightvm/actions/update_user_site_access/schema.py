@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update the sites to which a user has access in bulk. It can be used to remove sites as well"
+
+
 class Input:
     SITE_IDS = "site_ids"
     USER_ID = "user_id"

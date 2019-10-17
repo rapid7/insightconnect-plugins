@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove all search criteria from a tag"
+
+
 class Input:
     ID = "id"
     

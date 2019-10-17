@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List scan engines paired with the security console"
+
+
 class Input:
     ADDRESS = "address"
     NAME = "name"

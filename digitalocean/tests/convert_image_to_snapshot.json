@@ -2,8 +2,8 @@
     "body": {
         "action": "convert_image_to_snapshot",
         "connection": {
-            "token":{
-                "secretKey": ""
+            "token": {
+                "secretKey": null
             }
         },
         "input": {

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a tag to an asset group"
+
+
 class Input:
     ASSET_GROUP_ID = "asset_group_id"
     TAG_ID = "tag_id"

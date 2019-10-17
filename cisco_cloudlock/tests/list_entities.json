@@ -2,9 +2,9 @@
     "body": {
         "action": "list_entities",
         "connection": {
-          "api_key": {
-             "secretKey": ""
-           }
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {
             "limit": 20,

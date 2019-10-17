@@ -2,9 +2,9 @@
     "body": {
         "action": "retrieve_specific_artifact",
         "connection": {
-            "email": "",
-            "hostname": "",
-            "password": ""
+            "email": null,
+            "hostname": null,
+            "password": null
         },
         "input": {
             "artifact_id": 1,

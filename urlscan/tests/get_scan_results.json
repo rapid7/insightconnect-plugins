@@ -3,7 +3,7 @@
         "action": "get_scan_results",
         "connection": {
             "api_key": {
-                "secretKey": ""
+                "secretKey": null
             }
         },
         "input": {

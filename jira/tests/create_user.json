@@ -1,22 +1,22 @@
 {
-  "body": {
-    "action": "create_user",
-    "meta": {},
-    "input": {
-      "email": "",
-      "notify": false,
-      "password": "",
-      "username": ""
+    "body": {
+        "action": "create_user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "input": {
+            "email": "",
+            "notify": false,
+            "password": "",
+            "username": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "project": "test",
-      "url": "https://komand-demo4.atlassian.net"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "attach_incident",
-    "meta": {},
-    "input": {
-      "attachment_bytes": "SGVsbG8gV29ybGQK",
-      "attachment_name": "Greetings.txt",
-      "incident_id": 31851783
+    "body": {
+        "action": "attach_incident",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "attachment_bytes": "SGVsbG8gV29ybGQK",
+            "attachment_name": "Greetings.txt",
+            "incident_id": 31851783
+        },
+        "meta": {}
     },
-    "connection": {
-      "eu_customer": false,
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

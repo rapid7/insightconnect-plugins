@@ -27,7 +27,7 @@ class ConnectionSchema(komand.Input):
     "client_id": {
       "type": "string",
       "title": "Client ID",
-      "description": "The application id that the application registration portal assigned to your app",
+      "description": "The application ID that the application registration portal assigned to your app",
       "order": 2
     },
     "client_secret": {
@@ -46,16 +46,16 @@ class ConnectionSchema(komand.Input):
     "tenant_id": {
       "type": "string",
       "title": "Tenant ID",
-      "description": "This is active directory id",
+      "description": "This is active directory ID",
       "order": 4
     }
   },
   "required": [
-    "host",
+    "api_version",
     "client_id",
     "client_secret",
-    "tenant_id",
-    "api_version"
+    "host",
+    "tenant_id"
   ],
   "definitions": {
     "credential_asymmetric_key": {

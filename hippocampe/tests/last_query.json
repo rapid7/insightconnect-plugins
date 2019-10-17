@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "last_query",
-    "meta": {},
-    "input": {},
-    "connection": {
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "body": {
+        "action": "last_query",
+        "connection": {
+            "url": null
+        },
+        "input": {},
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,20 +1,20 @@
 {
-  "body": {
-    "meta": {},
-    "action": "registrant_monitor",
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "username": ""
+    "body": {
+        "action": "registrant_monitor",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "days_back": 1,
+            "exclude": "",
+            "limit": 0,
+            "query": "google.com"
+        },
+        "meta": {}
     },
-    "input": {
-      "query": "google.com",
-      "exclude": "",
-      "days_back": 1,
-      "limit": 0
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

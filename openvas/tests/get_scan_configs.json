@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_scan_configs",
-    "input": {},
-    "connection": {
-      "ssl_verify": false,
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "timeout": 10,
-      "server": ""
+    "body": {
+        "action": "get_scan_configs",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "ssl_verify": null,
+            "timeout": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

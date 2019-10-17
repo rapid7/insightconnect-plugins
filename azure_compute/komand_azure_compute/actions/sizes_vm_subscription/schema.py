@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists available virtual machine sizes for a subscription"
+
+
 class Input:
     LOCATION = "location"
     SUBSCRIPTIONID = "subscriptionId"
@@ -32,8 +36,8 @@ class SizesVmSubscriptionInput(komand.Input):
     }
   },
   "required": [
-    "subscriptionId",
-    "location"
+    "location",
+    "subscriptionId"
   ]
 }
     """)
@@ -84,7 +88,7 @@ class SizesVmSubscriptionOutput(komand.Output):
         "numberOfCores": {
           "type": "integer",
           "title": "Number Of Cores",
-          "description": "Specifies the number of available cpu cores",
+          "description": "Specifies the number of available CPU cores",
           "order": 4
         },
         "osDiskSizeInMB": {

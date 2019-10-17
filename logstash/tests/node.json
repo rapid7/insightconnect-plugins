@@ -1,14 +1,14 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "connection": {
-      "url": ""
+    "body": {
+        "action": "node",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "types": "os,jvm"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-      "types": "os,jvm"
-    },
-    "action": "node"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

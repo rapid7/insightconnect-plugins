@@ -1,24 +1,24 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "action": "add_organization_user",
-    "connection": {
-      "basic_auth": {
-        "password": "",
-        "username": ""
-      },
-      "token_auth": {
-        "secretKey": ""
-      },
-      "port": 3000,
-      "url": ""
+    "body": {
+        "action": "add_organization_user",
+        "connection": {
+            "basic_auth": {
+                "password": null,
+                "username": null
+            },
+            "port": null,
+            "token_auth": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "login_or_email": "admin2",
+            "organization_id": -1,
+            "role": "Admin"
+        },
+        "meta": {}
     },
-    "input": {
-      "role": "Admin",
-      "login_or_email": "admin2",
-      "organization_id": -1
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

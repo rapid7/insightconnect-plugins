@@ -1,6 +1,7 @@
 import komand
 from .schema import CooccurrencesInput, CooccurrencesOutput
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class Cooccurrences(komand.Action):
@@ -17,8 +18,7 @@ class Cooccurrences(komand.Action):
         try:
             cooccurrences = self.connection.investigate.cooccurrences(domain)
         except Exception as e:
-            self.logger.error("Cooccurrences: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         founded = cooccurrences.get('found')
         if founded:

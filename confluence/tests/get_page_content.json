@@ -1,19 +1,19 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": "TestUser"
-      },
-      "url": ""
+    "body": {
+        "action": "get_page_content",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "page": "HelloWorld",
+            "space": "demo"
+        },
+        "meta": {}
     },
-    "action": "get_page_content",
-    "input": {
-      "page": "HelloWorld",
-      "space": "demo"
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

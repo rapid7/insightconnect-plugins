@@ -1,24 +1,24 @@
 {
-  "body": {
-    "action": "edit_issue",
-    "meta": {},
-    "input": {
-      "description": "Updated from Komand",
-      "fields": {},
-      "id": "TEST-298",
-      "notify": true,
-      "summary": "",
-      "update": {}
+    "body": {
+        "action": "edit_issue",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "input": {
+            "description": "Updated from Komand",
+            "fields": {},
+            "id": "TEST-298",
+            "notify": true,
+            "summary": "",
+            "update": {}
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "project": "Test",
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

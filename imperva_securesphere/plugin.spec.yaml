@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: imperva_securesphere
 title: Imperva SecureSphere
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Imperva SecureSphere WAF protects your applications and data from cyber-attacks.
   The industry leading SecureSphere WAF blocks technical, business logic botnets and
   DDoS attacks

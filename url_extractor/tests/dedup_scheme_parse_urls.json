@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "parse_urls",
+        "connection": null,
+        "dispatcher": {},
+        "input": {
+            "scheme": "https://",
+            "text": "Should have one URL for Komandhttps://komand.com/, even though there are two URLs, https://komand.com/."
+        },
+        "meta": null
+    },
+    "type": "action_start",
+    "version": "v1"
+}

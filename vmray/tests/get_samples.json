@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "get_samples",
-    "meta": {},
-    "input": {
-      "optional_params": {},
-      "sample": "",
-      "sample_type": "all"
+    "body": {
+        "action": "get_samples",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "optional_params": {},
+            "sample": "",
+            "sample_type": "all"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "https://cloud.vmray.com"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

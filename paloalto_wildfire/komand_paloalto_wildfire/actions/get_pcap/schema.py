@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query for a PCAP"
+
+
 class Input:
     HASH = "hash"
     PLATFORM = "platform"

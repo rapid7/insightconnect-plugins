@@ -2,9 +2,10 @@ plugin_spec_version: v2
 name: rapid7_insightops
 title: Rapid7 InsightOps
 vendor: rapid7
+support: rapid7
+status: []
 description: Log Management and Monitoring Solution
 version: 1.0.1
-status: ["supported"]
 tags:
 - InsightOps
 - log management

@@ -1,20 +1,19 @@
 {
-  "body": {
-    "action": "op",
-    "meta": {},
-    "input": {
-      "cmd": "<show><jobs><id>18849</id></jobs></show>"
+    "body": {
+        "action": "op",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "verify_cert": null
+        },
+        "input": {
+            "cmd": "<show><jobs><id>18849</id></jobs></show>"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "server": "",
-      "verify_cert": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }
-

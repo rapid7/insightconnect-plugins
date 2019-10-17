@@ -1,27 +1,27 @@
 {
-  "version": "v1",
-  "body": {
-    "connection": {
-      "url": "",
-      "ssl_verify": false,
-      "username": "",
-      "api_key": {
-        "secretKey": ""
-      }
-    },
-    "action": "add_email",
-    "meta": {},
-    "input": {
-      "type": "msg",
-        "params": {
-            "campaign": "NetTraveler"
+    "body": {
+        "action": "add_email",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username": null
         },
-      "source": "Faker Vault",
-      "file": {
-        "content": "",
-        "filename": ""
-      }
-    }
-  },
-  "type": "action_start"
+        "input": {
+            "file": {
+                "content": "",
+                "filename": ""
+            },
+            "params": {
+                "campaign": "NetTraveler"
+            },
+            "source": "Faker Vault",
+            "type": "msg"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "convert_issue_to_epic",
-    "meta": {},
-    "input": {
-      "issue_number": 0,
-      "issues": [],
-      "repo_id": 0
+    "body": {
+        "action": "convert_issue_to_epic",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "issue_number": 0,
+            "issues": [],
+            "repo_id": 0
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

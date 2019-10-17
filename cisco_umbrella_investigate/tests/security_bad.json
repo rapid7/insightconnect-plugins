@@ -1,16 +1,16 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "security",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "domain": "wrong.something"
+        },
+        "meta": {}
     },
-    "action": "security",
-    "input": {
-      "domain": "wrong.something"
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

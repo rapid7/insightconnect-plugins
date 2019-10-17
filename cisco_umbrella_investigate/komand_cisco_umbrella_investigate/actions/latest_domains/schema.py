@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return associated malicious domains for an IP address"
+
+
 class Input:
     IP = "IP"
     

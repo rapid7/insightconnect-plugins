@@ -7,7 +7,7 @@ from icon_chardet import connection, actions, triggers
 Name = 'Chardet'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Python-compatible character encoding detector'
+Description = 'Python compatible character encoding detector'
 
 
 class ICONChardet(komand.Plugin):

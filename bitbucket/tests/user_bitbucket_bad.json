@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "user",
-    "input": {
-      "username": "the Fak3NEss"
+    "body": {
+        "action": "user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "username": "the Fak3NEss"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

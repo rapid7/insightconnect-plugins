@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "upload_url",
-    "input": {
-      "url": "",
-      "filename": "",
-      "comments": "",
-      "tags": ""
+    "body": {
+        "action": "upload_url",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "comments": "",
+            "filename": "",
+            "tags": "",
+            "url": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

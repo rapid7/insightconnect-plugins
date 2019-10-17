@@ -4,6 +4,8 @@ title: TSV
 description: Tab Separated Values
 version: 1.0.0
 vendor: rapid7
+support: community
+status: []
 tags:
 - tsv
 - utilities

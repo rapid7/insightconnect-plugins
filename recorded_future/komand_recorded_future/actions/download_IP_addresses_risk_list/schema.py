@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action is used to fetch a risk list of the IP addresses that match a specified filtration rule"
+
+
 class Input:
     LIST = "list"
     

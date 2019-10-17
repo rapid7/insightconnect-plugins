@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "sketchify",
-    "meta": {},
-    "input": {
-      "url": "www.google.com"
+    "body": {
+        "action": "sketchify",
+        "connection": null,
+        "input": {
+            "url": "www.google.com"
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

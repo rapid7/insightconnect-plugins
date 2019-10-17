@@ -107,7 +107,7 @@ class CreateActivityMonitorOutput(komand.Output):
     "activity_monitor": {
       "$ref": "#/definitions/activity_monitor",
       "title": "Activity Monitor",
-      "description": "Newly created actvity monitor",
+      "description": "Newly created activity monitor",
       "order": 1
     }
   },

@@ -1,0 +1,61 @@
+{
+    "body": {
+        "action": "get_writeable_partitions",
+        "connection": {
+            "broker_address": null,
+            "config": {
+                "consumer": {
+                    "fetch": {
+                        "default": null,
+                        "max": null,
+                        "min": null
+                    },
+                    "max_processing_time": null,
+                    "max_wait_time": null,
+                    "retry": {
+                        "backoff": null
+                    }
+                },
+                "metadata": {
+                    "refresh_frequency": null,
+                    "retry": {
+                        "backoff": null,
+                        "max": null
+                    }
+                },
+                "net": {
+                    "dial_timeout": null,
+                    "keep_alive": null,
+                    "max_open_requests": null,
+                    "read_timeout": null,
+                    "write_timeout": null
+                },
+                "producer": {
+                    "compression": null,
+                    "flush": {
+                        "bytes": null,
+                        "frequency": null,
+                        "max_messages": null,
+                        "messages": null
+                    },
+                    "max_message_bytes": null,
+                    "partitioner": null,
+                    "required_acks": null,
+                    "retry": {
+                        "backoff": null,
+                        "max": null
+                    },
+                    "timeout": null
+                }
+            }
+        },
+        "dispatcher": {},
+        "input": {
+            "topic": ""
+        },
+        "meta": {},
+        "trigger": ""
+    },
+    "type": "action_start",
+    "version": "v1"
+}

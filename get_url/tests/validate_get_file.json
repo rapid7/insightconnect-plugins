@@ -1,15 +1,15 @@
 {
-  "body": {
-    "action": "get_file",
-    "input": {
-      "url": "https://yahoo.com",
-      "checksum": "",
-      "is_verify": true,
-      "timeout": 60
+    "body": {
+        "action": "get_file",
+        "connection": null,
+        "input": {
+            "checksum": "",
+            "is_verify": true,
+            "timeout": 60,
+            "url": "https://yahoo.com"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

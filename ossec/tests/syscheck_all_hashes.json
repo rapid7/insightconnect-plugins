@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "syscheck_parse",
-    "meta": {},
-    "connection": null,
-    "input": {
-      "alert": "** Alert 1475146364.5660: - ossec,syscheck,\n2016 Sep 29 10:52:44 (komand.dev.komand.local2) any->syscheck\nRule: 550 (level 7) -> 'Integrity checksum changed.'\nIntegrity checksum changed for: '/bin/openssl'\nSize changed from '508664' to '508656'\nOld md5sum was: '2ec933a677c9cf1d3ca46c6830c6890f'\nNew md5sum is : 'b4d006f0b53ccf7be855346cc5cdd2b9'\nOld sha1sum was: 'f5c2ff9963fb2a6e8eb2a02259e8c05960dfe9f8'\nNew sha1sum is : 'a3b348a86b54b0185a5d3c0df8c785f5b72dfc04'\n"
-    }
-  },
-  "version": "v1",
-  "type": "action_start"
+    "body": {
+        "action": "syscheck_parse",
+        "connection": null,
+        "input": {
+            "alert": "** Alert 1475146364.5660: - ossec,syscheck,\n2016 Sep 29 10:52:44 (komand.dev.komand.local2) any->syscheck\nRule: 550 (level 7) -> 'Integrity checksum changed.'\nIntegrity checksum changed for: '/bin/openssl'\nSize changed from '508664' to '508656'\nOld md5sum was: '2ec933a677c9cf1d3ca46c6830c6890f'\nNew md5sum is : 'b4d006f0b53ccf7be855346cc5cdd2b9'\nOld sha1sum was: 'f5c2ff9963fb2a6e8eb2a02259e8c05960dfe9f8'\nNew sha1sum is : 'a3b348a86b54b0185a5d3c0df8c785f5b72dfc04'\n"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Assign user to application for SSO and provisioning"
+
+
 class Input:
     APPLICATIONID = "applicationId"
     APPUSER = "appuser"

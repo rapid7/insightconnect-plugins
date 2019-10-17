@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Edit an existing object"
+
+
 class Input:
     ELEMENT = "element"
     XPATH = "xpath"
@@ -32,8 +36,8 @@ class EditInput(komand.Input):
     }
   },
   "required": [
-    "xpath",
-    "element"
+    "element",
+    "xpath"
   ]
 }
     """)
