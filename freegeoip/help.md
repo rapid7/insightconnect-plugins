@@ -8,7 +8,7 @@
 ## Actions
 
 ### GeoIP Lookup
-
+ 
 This action is used to get GeoIP info for a host.
 
 #### Input
