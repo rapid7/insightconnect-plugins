@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "agents_reload",
+    "meta": {},
+    "input": {
+      "filter": {},
+      "module": "monitor"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://usea1-partners.sentinelone.net"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

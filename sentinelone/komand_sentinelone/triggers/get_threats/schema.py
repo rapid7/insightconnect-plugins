@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get threats"
+
+
 class Input:
     
     AGENT_IS_ACTIVE = "agent_is_active"

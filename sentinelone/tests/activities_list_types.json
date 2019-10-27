@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "activities_list",
+    "meta": {},
+    "input": {
+      "limit": 5,
+      "activity_types": [
+        "5020",
+        "27"
+      ]
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://usea1-partners.sentinelone.net"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -6,7 +6,7 @@ from komand_sentinelone import connection, actions, triggers
 
 Name = 'SentinelOne'
 Vendor = 'rapid7'
-Version = '1.1.0'
+Version = '1.2.0'
 Description = 'SentinelOne is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint'
 
 
@@ -21,6 +21,36 @@ class ICONSentinelone(komand.Plugin):
                 )
         self.add_trigger(triggers.GetThreats())
 
+        self.add_action(actions.ActivitiesList())
+
+        self.add_action(actions.ActivitiesTypes())
+
+        self.add_action(actions.AgentsAbortScan())
+
+        self.add_action(actions.AgentsConnect())
+
+        self.add_action(actions.AgentsDecommission())
+
+        self.add_action(actions.AgentsDisconnect())
+
+        self.add_action(actions.AgentsFetchLogs())
+
+        self.add_action(actions.AgentsInitiate())
+
+        self.add_action(actions.AgentsProcesses())
+
+        self.add_action(actions.AgentsReload())
+
+        self.add_action(actions.AgentsRestart())
+
+        self.add_action(actions.AgentsShutdown())
+
+        self.add_action(actions.AgentsSummary())
+
+        self.add_action(actions.AgentsUninstall())
+
+        self.add_action(actions.AppsByAgentIds())
+
         self.add_action(actions.BlacklistByContentHash())
 
         self.add_action(actions.BlacklistByIocHash())
@@ -34,6 +64,8 @@ class ICONSentinelone(komand.Plugin):
         self.add_action(actions.MarkAsThreat())
 
         self.add_action(actions.MitigateThreat())
+
+        self.add_action(actions.NameAvailable())
 
 
 def main():

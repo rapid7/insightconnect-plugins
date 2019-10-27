@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "agents_disconnect",
+    "meta": {},
+    "input": {
+      "filter": {}
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": "https://usea1-partners.sentinelone.net"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
