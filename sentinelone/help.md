@@ -2,9 +2,9 @@
 
 ## About
 
-[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint.
+[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint
 
-This plugin utilizes the [SentinelOne API](https://usea1-partners.sentinelone.net/apidoc/).
+This plugin utilizes the [SentinelOne API](https://usea1-partners.sentinelone.net/apidoc/)
 
 ## Actions
 

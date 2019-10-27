@@ -726,7 +726,7 @@ actions:
         required: false
       skip:
         title: Skip First N Items
-        description: Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead.
+        description: Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead
         type: integer
         required: false
       site_ids:
@@ -751,17 +751,17 @@ actions:
         required: false
       created_at_lt:
         title: Less Then Date
-        description: Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z.
+        description: Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
         type: string
         required: false
       created_at_lte:
         title: Less Or Equal Date
-        description: Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z.
+        description: Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
         type: string
         required: false
       created_at_gt:
         title: Greater Then Date
-        description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z.
+        description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
         type: string
         required: false
       created_at_gte:
@@ -798,6 +798,7 @@ actions:
         title: Sort By
         description: The column to sort the results by
         type: string
+        required: false
         enum:
           - id
           - activityType
@@ -886,7 +887,7 @@ actions:
         type: integer
         required: false
       out_of_date:
-        title: Out Of Date Number
+        title: Out of Date Number
         description: Number of agents running an older software version
         type: integer
         required: false
@@ -930,7 +931,7 @@ actions:
     description: Decommissions all agents matching the input filter
     input:
       filter:
-        title: Filter Json
+        title: Filter JSON
         description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
         type: object
         required: true
@@ -945,8 +946,8 @@ actions:
     description: Disconnects agents associated to marked threats from network
     input:
       filter:
-        title: Filter Json
-        description: Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats.
+        title: Filter JSON
+        description: Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats
         type: object
         required: true
     output:
@@ -975,7 +976,7 @@ actions:
     description: Sends a scan command to all agents matching the input filter
     input:
       filter:
-        title: Filter Json
+        title: Filter JSON
         description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
         type: object
         required: true
@@ -990,7 +991,7 @@ actions:
     description: Sends an uninstall command to all agents matching the input filter
     input:
       filter:
-        title: Filter Json
+        title: Filter JSON
         description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
         type: object
         required: true
@@ -1005,7 +1006,7 @@ actions:
     description: Sends a shutdown command to all agents matching the input filter
     input:
       filter:
-        title: Filter Json
+        title: Filter JSON
         description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
         type: object
         required: true
@@ -1020,7 +1021,7 @@ actions:
     description: Sends a restart command to all agents matching the input filter
     input:
       filter:
-        title: Filter Json
+        title: Filter JSON
         description: Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId
         type: object
         required: true
@@ -1035,7 +1036,7 @@ actions:
     description: Reload an agent module (applies to Windows agents only)
     input:
       filter:
-        title: Filter Json
+        title: Filter JSON
         description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
         type: object
         required: true
@@ -1060,7 +1061,7 @@ actions:
     description: Sends a fetch logs command to all agents matching the input filter
     input:
       filter:
-        title: Filter Json
+        title: Filter JSON
         description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
         type: object
         required: true
@@ -1075,7 +1076,7 @@ actions:
     description: Aborts running scan on all agents matching the input filter
     input:
       filter:
-        title: Filter Json
+        title: Filter JSON
         description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
         type: object
         required: true
@@ -1090,7 +1091,7 @@ actions:
     description: Sends a connect to network command to all agents matching the input filter
     input:
       filter:
-        title: Filter Json
+        title: Filter JSON
         description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
         type: object
         required: true
