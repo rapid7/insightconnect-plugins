@@ -1,51 +1,56 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": "root@localhost"
-      },
-      "server": ""
+    "body": {
+        "action": "update",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null
+        },
+        "input": {
+            "Article": {
+                "AutoResponseType": "",
+                "Body": "",
+                "Charset": "UTF8",
+                "CommunicationChannel": "email",
+                "CommunicationChannelID": 0,
+                "ContentType": "text/plain; charset=ISO-8859-15",
+                "ExcludeMuteNotificationToUserID": [],
+                "ExcludeNotificationToUserID": [],
+                "ForceNotificationToUserID": [],
+                "From": "root@localhost",
+                "HistoryComment": "",
+                "HistoryType": "",
+                "IsVisibleForCustomer": 0,
+                "MimeType": "text/plain",
+                "NoAgentNotify": 0,
+                "SenderType": "agent",
+                "SenderTypeID": 1,
+                "Subject": "UnitTest",
+                "TimeUnit": 0
+            },
+            "Attachments": [
+                {
+                    "content": "RGlkIHlvdSByZWFsbHkgZGVjb2RlIHRoaXM/Cg==",
+                    "filename": "new_file.txt"
+                }
+            ],
+            "CustomerUser": "",
+            "DynamicFields": [],
+            "Lock": "",
+            "PendingTime": "2018-09-29T18:01:21+00:00",
+            "Priority": "4 high",
+            "Queue": "",
+            "Responsible": "",
+            "SLA": "",
+            "Service": "",
+            "TicketID": 82,
+            "Title": "",
+            "Type": ""
+        },
+        "meta": {}
     },
-    "input": {
-      "Article": {
-        "AutoResponseType": "",
-        "Body": "",
-        "Charset": "UTF8",
-        "CommunicationChannel": "email",
-        "CommunicationChannelID": 0,
-        "ContentType": "text/plain; charset=ISO-8859-15",
-        "ExcludeMuteNotificationToUserID": [],
-        "ExcludeNotificationToUserID": [],
-        "ForceNotificationToUserID": [],
-        "From": "root@localhost",
-        "HistoryComment": "",
-        "HistoryType": "",
-        "IsVisibleForCustomer": 0,
-        "MimeType": "text/plain",
-        "NoAgentNotify": 0,
-        "SenderType": "agent",
-        "SenderTypeID": 1,
-        "Subject": "UnitTest",
-        "TimeUnit": 0
-      },
-      "CustomerUser": "",
-      "Lock": "",
-      "Priority": "4 high",
-      "PendingTime": "2018-09-29T18:01:21+00:00",
-      "Queue": "",
-      "Responsible": "",
-      "SLA": "",
-      "Service": "",
-      "TicketID": 82,
-      "Title": "",
-      "Type": "",
-      "Attachments": [{"filename": "new_file.txt", "content": "RGlkIHlvdSByZWFsbHkgZGVjb2RlIHRoaXM/Cg=="}],
-      "DynamicFields": []
-    },
-    "meta": {},
-    "action": "update"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

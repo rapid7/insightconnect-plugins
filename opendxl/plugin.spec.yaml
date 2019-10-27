@@ -6,7 +6,8 @@ description: OpenDXL is an initiative to create adaptive systems of interconnect
   decisions and actions
 version: 1.1.1
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - opendxl
 - message broker

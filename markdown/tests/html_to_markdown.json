@@ -1,13 +1,13 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "input": {
-      "html": "PGgxIGlkPSJrb21hbmQiPktvbWFuZDwvaDE+Cg==",
-      "html_string": ""
+    "body": {
+        "action": "html_to_markdown",
+        "connection": null,
+        "input": {
+            "html": "PGgxIGlkPSJrb21hbmQiPktvbWFuZDwvaDE+Cg==",
+            "html_string": ""
+        },
+        "meta": {}
     },
-    "connection": null,
-    "action": "html_to_markdown"
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

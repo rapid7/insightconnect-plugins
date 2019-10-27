@@ -1,26 +1,26 @@
 {
-  "body": {
-    "action": "create_issue",
-    "input": {
-      "title": "Test Issue",
-      "content": "Test Content body",
-      "repository": "test_repo",
-      "assignee": "lmilby",
-      "milestone": "",
-      "component": "",
-      "version": "",
-      "kind": "Bug",           
-      "priority": "Critical",   
-      "state": "New"
+    "body": {
+        "action": "create_issue",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "assignee": "lmilby",
+            "component": "",
+            "content": "Test Content body",
+            "kind": "Bug",
+            "milestone": "",
+            "priority": "Critical",
+            "repository": "test_repo",
+            "state": "New",
+            "title": "Test Issue",
+            "version": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

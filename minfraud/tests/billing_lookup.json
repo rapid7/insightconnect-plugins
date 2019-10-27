@@ -1,28 +1,28 @@
 {
-  "body": {
-    "input": {
-      "billing_country": "US",
-      "billing_first_name": "John",
-      "billing_address_2": "Suite 5",
-      "billing_address": "400 Blake St.",
-      "billing_last_name": "Doe",
-      "billing_phone_country_code": "1",
-      "address": "8.8.8.8",
-      "billing_city": "New Haven",
-      "billing_company": "Big Corp.",
-      "billing_phone_number": "203-000-0000",
-      "billing_postal": "06511",
-      "billing_region": "CT"
+    "body": {
+        "action": "billing_lookup",
+        "connection": {
+            "license": {
+                "secretKey": null
+            },
+            "user": null
+        },
+        "input": {
+            "address": "8.8.8.8",
+            "billing_address": "400 Blake St.",
+            "billing_address_2": "Suite 5",
+            "billing_city": "New Haven",
+            "billing_company": "Big Corp.",
+            "billing_country": "US",
+            "billing_first_name": "John",
+            "billing_last_name": "Doe",
+            "billing_phone_country_code": "1",
+            "billing_phone_number": "203-000-0000",
+            "billing_postal": "06511",
+            "billing_region": "CT"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "license": {
-        "secretKey": ""
-      },
-      "user": 118625
-    },
-    "action": "billing_lookup"
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

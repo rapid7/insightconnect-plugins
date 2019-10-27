@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve a list of configured scan engine pools"
+
+
 class Input:
     NAME = "name"
     

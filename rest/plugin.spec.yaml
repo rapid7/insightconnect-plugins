@@ -4,7 +4,8 @@ title: REST
 description: REST plugin to make it easy to integrate with RESTful services
 version: 3.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - rest
 - http

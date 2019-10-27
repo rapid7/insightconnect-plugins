@@ -1,23 +1,23 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "connection": {
-      "basic_auth": {
-        "password": "",
-        "username": ""
-      },
-      "token_auth": {
-        "secretKey": ""
-      },
-      "port": 3000,
-      "url": ""
+    "body": {
+        "action": "update_organization",
+        "connection": {
+            "basic_auth": {
+                "password": null,
+                "username": null
+            },
+            "port": null,
+            "token_auth": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "name": "komand",
+            "organization_id": -1
+        },
+        "meta": {}
     },
-    "action": "update_organization",
-    "input": {
-      "name": "komand",
-      "organization_id": -1
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

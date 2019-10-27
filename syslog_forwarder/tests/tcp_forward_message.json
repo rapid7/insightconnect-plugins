@@ -1,21 +1,21 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "action": "forward_message",
-    "connection": {
-      "host": "",
-      "port": 514,
-      "transport": "TCP"
+    "body": {
+        "action": "forward_message",
+        "connection": {
+            "host": null,
+            "port": null,
+            "transport": null
+        },
+        "input": {
+            "facility": "KERN",
+            "host": "",
+            "level": "EMERG",
+            "msg": "Incoming TCP Message",
+            "msgid": "",
+            "proc": ""
+        },
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-      "msg": "Incoming TCP Message",
-      "facility": "KERN",
-      "level": "EMERG",
-      "proc": "",
-      "host": "",
-      "msgid": ""
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

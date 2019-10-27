@@ -2,8 +2,10 @@ plugin_spec_version: v2
 name: otrs
 title: OTRS
 description: Open Source Ticket Request System
-version: 4.0.0
+version: 4.0.1
 vendor: rapid7
+support: community
+status: []
 tags:
 - ticket
 - OTRS
@@ -815,6 +817,11 @@ actions:
         description: Updated type e.g. Incident
         type: string
         required: false
+      NoArticle:
+        title: No Article
+        description: Will not add article to ticket
+        type: boolean
+        required: true
       Article:
         title: Article
         description: New article (gets appended)
@@ -826,7 +833,7 @@ actions:
         type: '[]dynamic_field'
         required: false
       Attachments:
-        title: Attachements
+        title: Attachments
         description: New attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]
         type: '[]attachment'
         required: false

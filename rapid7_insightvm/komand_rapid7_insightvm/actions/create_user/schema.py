@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new user account (limited to external authentication sources)"
+
+
 class Input:
     ACCESS_ALL_ASSET_GROUPS = "access_all_asset_groups"
     ACCESS_ALL_SITES = "access_all_sites"

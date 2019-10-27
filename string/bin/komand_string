@@ -6,7 +6,7 @@ from komand_string import connection, actions, triggers
 
 Name = 'String Operations'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.1.0'
 Description = 'Provides common programmatic string operations'
 
 
@@ -20,6 +20,8 @@ class ICONString(komand.Plugin):
                 connection=connection.Connection()
                 )
         self.add_action(actions.Lower())
+
+        self.add_action(actions.SetEncoding())
 
         self.add_action(actions.SplitToList())
 

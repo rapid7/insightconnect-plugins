@@ -1,0 +1,205 @@
+plugin_spec_version: v2
+name: echotrail
+title: "EchoTrail Insights"
+description: "EchoTrail Insights is a database of executable behavioral analytics, searchable by filename or SHA256 or MD5 hash"
+version: 1.0.0
+vendor: echotrail
+support: partner
+status: []
+tags: ["filename", "hash", "behavior", "analytics", "search"]
+enable_cache: true
+types:
+  paths:
+    path:
+      title: "Path"
+      type: string
+    score:
+      title: "Score"
+      type: float
+  children:
+    child:
+      title: "Child"
+      type: string
+    score:
+      title: "Score"
+      type: float
+  parents:
+    parent:
+      title: "Parent"
+      type: string
+    score:
+      title: "Score"
+      type: float
+  grandparents:
+    grandparent:
+      title: "Grandparent"
+      type: string
+    score:
+      title: "Score"
+      type: float
+  hashes:
+    hash:
+      title: "Hash"
+      type: string
+    score:
+      title: "Score"
+      type: float
+  filenames:
+    filename:
+      title: "Filename"
+      type: string
+    score:
+      title: "Score"
+      type: float
+  network:
+    network:
+      title: "Network"
+      type: string
+    score:
+      title: "Score"
+      type: float
+
+connection:
+  server:
+    type: string
+    description: "EchoTrail API Server"
+    required: true
+    default: "https://api.echotrail.io:443"
+  api_key:
+    type: credential_secret_key
+    title: "API Key"
+    description: "API Key"
+    required: true
+
+actions:
+  filename_lookup:
+    title: "Filename Lookup"
+    description: "Search for a Windows filename by name to obtain process behavioral analytics"
+    input:
+      filename:
+        title: "Filename"
+        description: "Filename to lookup"
+        type: string
+        required: true
+    output:
+      rank:
+        title: "Rank"
+        description: "Execution rank"
+        type: number
+        required: false
+      host_prev:
+        title: "Host Prevalence"
+        description: "Host prevalence"
+        type: float
+        required: false
+      eps:
+        title: "EchoTrail Prevalence Score"
+        description: "EchoTrail prevalence score"
+        type: float
+        required: false
+      description:
+        title: "Description"
+        description: "Overview description of the executable"
+        type: string
+        required: false
+      intel:
+        title: "Intelligence"
+        description: "Additional intelligence about this executable"
+        type: string
+        required: false
+      paths:
+        title: "Paths"
+        description: "Common paths"
+        type: "[]paths"
+        required: false
+      parents:
+        title: "Parents"
+        description: "Common parents"
+        type: "[]parents"
+        required: false
+      children:
+        title: "Children"
+        description: "Common children"
+        type: "[]children"
+        required: false
+      grandparents:
+        title: "Grandparents"
+        description: "Common grandparents"
+        type: "[]grandparents"
+        required: false
+      hashes:
+        title: "Hashes"
+        description: "Common hashes"
+        type: "[]hashes"
+        required: false
+      network:
+        title: "Network"
+        description: "Common outgoing network ports"
+        type: "[]network"
+        required: false
+
+  hash_lookup:
+    title: "Hash Lookup"
+    description: "Search for a Windows executable by SHA256 or MD5 hash"
+    input:
+      hash:
+        title: "Hash"
+        description: "SHA256 or MD5 Hash Lookup"
+        type: string
+        required: true
+    output:
+      rank:
+        title: "Execution Rank"
+        description: "Execution rank"
+        type: number
+        required: false
+      host_prev:
+        title: "Host Prevalence"
+        description: "Host prevalance"
+        type: float
+        required: false
+      eps:
+        title: "EchoTrail Prevalence Score"
+        description: "Prevalence score"
+        type: float
+        required: false
+      description:
+        title: "Description"
+        description: "Overview description of the executable"
+        type: string
+        required: false
+      intel:
+        title: "Intelligence"
+        description: "Additional intelligence about this executable"
+        type: string
+        required: false
+      paths:
+        title: "Paths"
+        description: "Common paths"
+        type: "[]paths"
+        required: false
+      parents:
+        title: "Parents"
+        description: "Common parents"
+        type: "[]parents"
+        required: false
+      children:
+        title: "Children"
+        description: "Common children"
+        type: "[]children"
+        required: false
+      grandparents:
+        title: "Grandparents"
+        description: "Common grandparents"
+        type: "[]grandparents"
+        required: false
+      filenames:
+        title: "Filenames"
+        description: "Common filenames"
+        type: "[]filenames"
+        required: false
+      network:
+        title: "Network"
+        description: "Common outgoing network ports"
+        type: "[]network"
+        required: false

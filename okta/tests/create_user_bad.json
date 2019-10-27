@@ -1,20 +1,22 @@
 {
-  "body": {
-    "action": "create_user",
-    "input": {
-      "profile": { "crap": "bad" },
-      "activate": false,
-      "provider": false,
-      "nextLogin": false
+    "body": {
+        "action": "create_user",
+        "connection": {
+            "okta_key": {
+                "secretKey": null
+            },
+            "okta_url": null
+        },
+        "input": {
+            "activate": false,
+            "nextLogin": false,
+            "profile": {
+                "crap": "bad"
+            },
+            "provider": false
+        },
+        "meta": {}
     },
-    "connection": {
-      "okta_url": "",
-      "okta_key": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

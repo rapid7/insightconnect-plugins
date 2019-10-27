@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "delete_target",
-    "input": {
-      "target_id": "b23fafc5-ca0c-4cde-91a2-e667ccb58cea"
+    "body": {
+        "action": "delete_target",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "timeout": null
+        },
+        "input": {
+            "target_id": "b23fafc5-ca0c-4cde-91a2-e667ccb58cea"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "timeout": 10,
-      "server": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

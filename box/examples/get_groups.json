@@ -1,0 +1,16 @@
+{
+  "groups": [
+    {
+      "type": "group",
+      "id": "38901557",
+      "name": "blah",
+      "group_type": "managed_group"
+    },
+    {
+      "type": "group",
+      "id": "66186068",
+      "name": "bloop",
+      "group_type": "managed_group"
+    }
+  ]
+}

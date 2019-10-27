@@ -1,13 +1,13 @@
 {
-  "body": {
-    "action": "decode",
-    "meta": {},
-    "input": {
-      "base64": "aGV5LHRoaXMsaXMsY29vbCxyaWdodAp0ZWxsLG1lLHdoYXQseW91LHRoaW5rCg==",
-      "errors": "replace"
+    "body": {
+        "action": "decode",
+        "connection": null,
+        "input": {
+            "base64": "aGV5LHRoaXMsaXMsY29vbCxyaWdodAp0ZWxsLG1lLHdoYXQseW91LHRoaW5rCg==",
+            "errors": "replace"
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

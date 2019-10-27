@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "merge",
-    "input": {
-      "duplicates": "remove",
-      "cids": "",
-      "filename": "",
-      "tags": ""
+    "body": {
+        "action": "merge",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "cids": "",
+            "duplicates": "remove",
+            "filename": "",
+            "tags": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,17 +1,17 @@
 {
-  "type": "action_start",
-  "body": {
-    "action": "domain_profile",
-    "input": {
-      "domain": "google.com"
+    "body": {
+        "action": "domain_profile",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "domain": "google.com"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "username": ""
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

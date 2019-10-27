@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "dirname",
-    "input": {
-      "path": "/usr/local/bin/stuff"
+    "body": {
+        "action": "dirname",
+        "connection": null,
+        "input": {
+            "path": "/usr/local/bin/stuff"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

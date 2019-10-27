@@ -1,16 +1,16 @@
 {
-  "body": {
-    "action": "check",
-    "input": {
-      "url": ""
+    "body": {
+        "action": "check",
+        "connection": {
+            "credentials": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "url": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,18 +1,21 @@
 {
-  "body": {
-    "connection": {
-      "email": "test@komand.com",
-      "url": "http://192.168.99.100:5000",
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "add_indicators",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "email": null,
+            "url": null
+        },
+        "input": {
+            "indicators": [
+                "crap",
+                "more_crap"
+            ]
+        },
+        "meta": {}
     },
-    "input": {
-      "indicators": ["crap", "more_crap"]
-    },
-    "meta": {},
-    "action": "add_indicators"
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

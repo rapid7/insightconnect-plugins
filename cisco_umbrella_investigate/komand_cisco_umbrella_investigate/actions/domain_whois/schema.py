@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "A standard WHOIS response record for a single domain with all available WHOIS data returned in an array"
+
+
 class Input:
     DOMAIN = "domain"
     

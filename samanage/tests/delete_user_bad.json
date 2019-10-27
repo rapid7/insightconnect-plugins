@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "delete_user",
-    "meta": {},
-    "input": {
-      "user_id": 4245316
+    "body": {
+        "action": "delete_user",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "user_id": 4245316
+        },
+        "meta": {}
     },
-    "connection": {
-      "eu_customer": false,
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

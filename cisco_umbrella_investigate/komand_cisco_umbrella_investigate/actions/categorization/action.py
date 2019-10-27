@@ -1,6 +1,7 @@
 import komand
 from .schema import CategorizationInput, CategorizationOutput
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class Categorization(komand.Action):
@@ -18,8 +19,7 @@ class Categorization(komand.Action):
         try:
             remoteCategories = self.connection.investigate.categorization(domains, labels=True)
         except Exception as e:
-            self.logger.error("Categorization: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         categories = []
         for key, value in remoteCategories.items():

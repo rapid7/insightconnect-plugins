@@ -1,21 +1,23 @@
 {
-  "type": "action_start",
-  "body": {
-    "action": "send_trigger_event",
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "send_trigger_event",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "client": "komand",
+            "client_url": "",
+            "contexts": [],
+            "description": "hi there",
+            "details": {
+                "stuff": "things "
+            },
+            "service_key": ""
+        },
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-      "details": { "stuff": "things "},
-      "contexts": [],
-      "client_url": "",
-      "client": "komand",
-      "description": "hi there",
-      "service_key": ""
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

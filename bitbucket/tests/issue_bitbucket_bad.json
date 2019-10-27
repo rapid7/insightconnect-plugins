@@ -1,29 +1,29 @@
 {
-  "body": {
-    "input": {
-      "repository": "bad repo",
-      "assignee": "brandonium21",  
-      "milestone": "mile", 
-      "component": "compo", 
-      "version": "v1",     
-      "kind": "bug",           
-      "priority": "critical",   
-      "state": "new",         
-      "reporter": "brandonium21" 
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "assignee": "brandonium21",
+            "component": "compo",
+            "kind": "bug",
+            "milestone": "mile",
+            "priority": "critical",
+            "reporter": "brandonium21",
+            "repository": "bad repo",
+            "state": "new",
+            "version": "v1"
+        },
+        "meta": {},
+        "trigger": "issue"
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "trigger": "issue",
-    "meta": {},
-    "dispatcher": {
-      "url": "http://localhost:8000",
-      "webhook_url": ""
-    }
-  },
-  "version": "v1",
-  "type": "trigger_start"
+    "type": "trigger_start",
+    "version": "v1"
 }

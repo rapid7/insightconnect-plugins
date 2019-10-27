@@ -4,7 +4,8 @@ title: Cherwell
 description: Work with Cherwell Web Services records
 version: 2.1.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - cherwell
 - itsm

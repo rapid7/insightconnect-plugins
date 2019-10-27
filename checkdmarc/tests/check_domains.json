@@ -1,13 +1,13 @@
 {
-  "body": {
-    "action": "check_domains",
-    "meta": {},
-    "input": {
-      "domain": "whitehouse.gov",
-      "timeout": 10.0
+    "body": {
+        "action": "check_domains",
+        "connection": null,
+        "input": {
+            "domain": "whitehouse.gov",
+            "timeout": 10.0
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

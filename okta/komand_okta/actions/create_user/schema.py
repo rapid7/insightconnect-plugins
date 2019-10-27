@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new user"
+
+
 class Input:
     ACTIVATE = "activate"
     CREDENTIALS = "credentials"
@@ -75,10 +79,10 @@ class CreateUserInput(komand.Input):
     }
   },
   "required": [
-    "nextLogin",
     "activate",
-    "provider",
-    "profile"
+    "nextLogin",
+    "profile",
+    "provider"
   ],
   "definitions": {
     "credentials_input": {

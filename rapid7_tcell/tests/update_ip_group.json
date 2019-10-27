@@ -1,20 +1,22 @@
 {
-  "body": {
-    "action": "update_ip_group",
-    "meta": {},
-    "input": {
-      "group_name": "test-ipgroup5",
-      "items": [{
-        "type": "cidr",
-        "value": "allow from 1.1.1.3/32"
-      }]
+    "body": {
+        "action": "update_ip_group",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "group_name": "test-ipgroup5",
+            "items": [
+                {
+                    "type": "cidr",
+                    "value": "allow from 1.1.1.3/32"
+                }
+            ]
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

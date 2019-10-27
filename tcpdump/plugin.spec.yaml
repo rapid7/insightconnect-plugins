@@ -4,7 +4,8 @@ title: Tcpdump
 description: Read contents of a PCAP
 version: 1.0.1
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - tcpdump
 - nsm

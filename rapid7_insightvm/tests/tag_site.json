@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "tag_site",
-    "meta": {},
-    "input": {
-      "tag_id": 69,
-      "site_id": 42
+    "body": {
+        "action": "tag_site",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "site_id": 42,
+            "tag_id": 69
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": "https://insightvm:3780"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "change_incident_state",
-    "meta": {},
-    "input": {
-      "incident_id": 31851783,
-      "state": "On Hold"
+    "body": {
+        "action": "change_incident_state",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "incident_id": 31851783,
+            "state": "On Hold"
+        },
+        "meta": {}
     },
-    "connection": {
-      "eu_customer": false,
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

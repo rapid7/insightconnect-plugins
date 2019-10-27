@@ -1,21 +1,24 @@
 {
-  "body": {
-    "input": {
-      "user_name": "tim@lastpass.com",
-      "full_name": "Tim Schmidt",
-      "password_reset_required": false,
-      "password": "test",
-      "groups": [ "users", "CC" ]
+    "body": {
+        "action": "provision_user",
+        "connection": {
+            "account": null,
+            "provhash": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "full_name": "Tim Schmidt",
+            "groups": [
+                "users",
+                "CC"
+            ],
+            "password": "test",
+            "password_reset_required": false,
+            "user_name": "tim@lastpass.com"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "account": 0,
-      "provhash": {
-        "secretKey": ""
-      }
-    },
-    "action": "provision_user"
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

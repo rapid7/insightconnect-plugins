@@ -1,20 +1,20 @@
 {
-  "type": "action_start",
-  "body": {
-    "action": "reverse_whois",
-    "meta": {},
-    "input": {
-      "mode": "latest",
-      "exclude": "",
-      "terms": "Amazon",
-      "scope": "current"
+    "body": {
+        "action": "reverse_whois",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "exclude": "",
+            "mode": "latest",
+            "scope": "current",
+            "terms": "Amazon"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "username": ""
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -4,7 +4,8 @@ title: VirusTotal Yara
 description: The pattern matching swiss knife for malware researchers
 version: 1.1.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - malware
 - pattern

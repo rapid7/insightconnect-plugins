@@ -1,12 +1,12 @@
 {
-  "body": {
-    "connection": {
-      "api_key": ""
+    "body": {
+        "action": "list_hash_risk_rules",
+        "connection": {
+            "api_key": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "meta": {},
-    "action": "list_hash_risk_rules",
-    "input": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

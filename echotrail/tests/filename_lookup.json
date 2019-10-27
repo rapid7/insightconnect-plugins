@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "filename_lookup",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "server": null
+        },
+        "input": {
+            "filename": "cmd.exe"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "basename",
-    "input": {
-      "path": "blah/"
+    "body": {
+        "action": "basename",
+        "connection": null,
+        "input": {
+            "path": "blah/"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

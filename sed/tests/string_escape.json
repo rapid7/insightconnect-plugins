@@ -1,14 +1,16 @@
 {
-  "body": {
-    "action": "process_string",
-    "input": {
-      "expression": ["s/one/ONE/"],
-      "options": "",
-      "string": "'one' two three one"
+    "body": {
+        "action": "process_string",
+        "connection": null,
+        "input": {
+            "expression": [
+                "s/one/ONE/"
+            ],
+            "options": "",
+            "string": "'one' two three one"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

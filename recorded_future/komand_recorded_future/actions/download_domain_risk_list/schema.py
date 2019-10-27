@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action returns a risk list of domains matching a filtration rule"
+
+
 class Input:
     LIST = "list"
     

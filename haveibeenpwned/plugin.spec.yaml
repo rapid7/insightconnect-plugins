@@ -2,10 +2,11 @@ plugin_spec_version: v2
 name: haveibeenpwned
 title: HaveIBeenPwned
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 description: Have I been pwned? allows you to search across multiple data breaches
   to see if your email addresses has been compromised
-version: 4.0.0
+version: 4.0.1
 tags:
 - breach
 - compromise

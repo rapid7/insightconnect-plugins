@@ -1,21 +1,23 @@
 {
-  "body": {
-    "input": {
-      "user_name": "",
-      "full_name": "",
-      "password_reset_required": false,
-      "password": "",
-      "groups": [ "users" ]
+    "body": {
+        "action": "provision_user",
+        "connection": {
+            "account": null,
+            "provhash": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "full_name": "",
+            "groups": [
+                "users"
+            ],
+            "password": "",
+            "password_reset_required": false,
+            "user_name": ""
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "account": 0,
-      "provhash": {
-        "secretKey": ""
-      }
-    },
-    "action": "provision_user"
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

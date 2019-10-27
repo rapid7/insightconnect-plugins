@@ -5,7 +5,8 @@ description: Multilayered security technology provides protection against advanc
   cyber attacks
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - threat intelligence
 - breach prevention

@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "get_scan_config",
-    "meta": {},
-    "input": {
-      "scan_config_id": "6a33ae79-5ebd-44a9-9a0a-f269876e90c9"
+    "body": {
+        "action": "get_scan_config",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "scan_config_id": "6a33ae79-5ebd-44a9-9a0a-f269876e90c9"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "https://us.api.insight.rapid7.com"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

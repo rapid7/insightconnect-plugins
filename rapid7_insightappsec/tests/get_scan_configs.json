@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "get_scan_configs",
-    "meta": {},
-    "input": {
-      "index": 0,
-      "size": 0,
-      "sort": ""
+    "body": {
+        "action": "get_scan_configs",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "index": 0,
+            "size": 0,
+            "sort": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "https://us.api.insight.rapid7.com"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

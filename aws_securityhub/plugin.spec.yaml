@@ -5,7 +5,8 @@ description: "A comprehensive view of your high-priority security alerts and com
 version: 1.0.0
 vendor: rapid7
 tags: [ "aws", "securityhub", "alerts" ]
-status: ["supported"]
+support: rapid7
+status: []
 
 types:
   Compliance:

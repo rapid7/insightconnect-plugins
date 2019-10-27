@@ -1,8 +1,7 @@
 {
     "body": {
         "action": "check_for_squatters",
-        "connection": {
-        },
+        "connection": {},
         "input": {
             "domain": "rapid7.com"
         },
@@ -11,5 +10,3 @@
     "type": "action_start",
     "version": "v1"
 }
-
-

@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_user",
-    "input": {
-      "id": 89
+    "body": {
+        "action": "get_user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 89
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

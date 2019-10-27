@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return the history that Umbrella has seen for a given IP address"
+
+
 class Input:
     IP = "IP"
     TYPE = "type"
@@ -132,15 +136,15 @@ class RrHistoryIpOutput(komand.Output):
         }
       },
       "required": [
-        "ld2_1_count",
         "div_ld2",
         "div_ld2_1",
         "div_ld2_2",
-        "rr_count",
+        "div_ld3",
+        "ld2_1_count",
+        "ld2_2_count",
         "ld2_count",
         "ld3_count",
-        "ld2_2_count",
-        "div_ld3"
+        "rr_count"
       ]
     },
     "ip_resource_record": {
@@ -179,10 +183,10 @@ class RrHistoryIpOutput(komand.Output):
         }
       },
       "required": [
-        "rr",
         "class",
-        "type",
-        "name"
+        "name",
+        "rr",
+        "type"
       ]
     }
   }

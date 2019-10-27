@@ -1,27 +1,27 @@
 {
-  "body": {
-    "action": "domain_search",
-    "meta": {},
-    "input": {
-      "page": 1,
-      "deleted_only": false,
-      "min_length": 1,
-      "exclude_query": "",
-      "anchor_left": false,
-      "max_length": 25,
-      "active_only": false,
-      "has_hyphen": true,
-      "anchor_right": false,
-      "has_number": true,
-      "query": "google.com"
+    "body": {
+        "action": "domain_search",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "active_only": false,
+            "anchor_left": false,
+            "anchor_right": false,
+            "deleted_only": false,
+            "exclude_query": "",
+            "has_hyphen": true,
+            "has_number": true,
+            "max_length": 25,
+            "min_length": 1,
+            "page": 1,
+            "query": "google.com"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "username": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

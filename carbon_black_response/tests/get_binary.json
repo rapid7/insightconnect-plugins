@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_binary",
-    "meta": {},
-    "input": {
-      "hash": "asdfasdfasdfasdf"
+    "body": {
+        "action": "get_binary",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null
+        },
+        "input": {
+            "hash": "asdfasdfasdfasdf"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "ssl_verify": false,
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

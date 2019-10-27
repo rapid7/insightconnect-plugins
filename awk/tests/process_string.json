@@ -1,1 +1,13 @@
-{"body": {"action": "process_string", "input": {"text": "hello world", "expression": "' {print $2}'"}, "connection": null, "meta": {}}, "version": "v1", "type": "action_start"}
+{
+    "body": {
+        "action": "process_string",
+        "connection": null,
+        "input": {
+            "expression": "' {print $2}'",
+            "text": "hello world"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

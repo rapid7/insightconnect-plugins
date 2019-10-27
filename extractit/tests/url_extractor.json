@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "url_extractor",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "file": null,
+            "str": "please go to facebook.com and https://mail.google.com\nand facebook.com/q=\ntype lots of cool words 2603:10b6:805:93::17  8.16.0.27/8.16.0.27 DM3PR03CA0010.NAMPRD03.PROD.OUTLOOK.COM 1e100.net ppops.net smtp.gmail.com 2603:10b6:805:93::17 8.16.0.27/8.16.0.27 protection.outlook.com mail-qt1-f169.google.com 2603:10b6:0:50::20 2603:10b6:803:2c::19 BN3NAM04FT035.mail.protection.outlook.com spf.google.com SN4PR0501CA0141.namprd05.prod.outlook.com BN3NAM04FT035.eop-NAM04.prod.protection.outlook.com 209.85.160.169 ec2-34-227-242-44.compute-1.amazonaws.com mx.google.com primelending.com mx0b-001d0301.pphosted.com gmail.com 10.152.92.151 127.0.0.1 2a01:111:f400:7e4e::200 148.163.159.41 34.227.242.44 16.20.24.45 DM6PR05MB4682.namprd05.prod.outlook.com m0086602.ppops.net SN6PR05MB4687.namprd05.prod.outlook.com SN4PR0501CA0141.outlook.office365.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

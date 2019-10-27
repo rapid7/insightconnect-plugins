@@ -1,15 +1,15 @@
 {
-  "body": {
-    "action": "get_file",
-    "input": {
-      "url": "hxxp://blah.com",
-      "checksum": "",
-      "is_verify": false,
-      "timeout": 60
+    "body": {
+        "action": "get_file",
+        "connection": null,
+        "input": {
+            "checksum": "",
+            "is_verify": false,
+            "timeout": 60,
+            "url": "hxxp://blah.com"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

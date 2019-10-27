@@ -1,13 +1,13 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "connection": null,
-    "input": {
-      "input": {},
-      "function": "def run(params={}):\n from bs4 import BeautifulSoup\n import requests\n url = 'https://www.google.com'\n r  = requests.get(url) \n data = r.text\n soup = BeautifulSoup(data)\n l = []\n for link in soup.find_all('a'): l.append(link.get('href'))\n return { 'result1': str(l) }"
+    "body": {
+        "action": "run",
+        "connection": null,
+        "input": {
+            "function": "def run(params={}):\n from bs4 import BeautifulSoup\n import requests\n url = 'https://www.google.com'\n r  = requests.get(url) \n data = r.text\n soup = BeautifulSoup(data)\n l = []\n for link in soup.find_all('a'): l.append(link.get('href'))\n return { 'result1': str(l) }",
+            "input": {}
+        },
+        "meta": {}
     },
-    "action": "run",
-    "meta": {}
-  }
+    "type": "action_start",
+    "version": "v1"
 }

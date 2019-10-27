@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "ioc_extractor",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "file": null,
+            "str": "innocent email@aol.com ordinary 142.2.45.8 text d44c0513559ba8ace6a50534ab6b7335"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

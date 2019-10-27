@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Whois IP Lookup"
+
+
 class Input:
     ADDRESS = "address"
     

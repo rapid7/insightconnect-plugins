@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "get_anc_endpoint",
-    "meta": {},
-    "input": {
-      "mac": "00:50:56:8A:62:35"
+    "body": {
+        "action": "get_anc_endpoint",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "ssl_verify": null
+        },
+        "input": {
+            "mac": "00:50:56:8A:62:35"
+        },
+        "meta": {}
     },
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "ssl_verify": true
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

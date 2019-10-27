@@ -1,14 +1,13 @@
 {
-    "version": "v1",
-    "type": "action_start",
     "body": {
-      "input": {
-        "markdown_string": "Komand\n======",
-        "markdown": "S29tYW5kCj09PT09PQo="
-      },
-      "connection": null,
-      "action": "markdown_to_pdf",
-      "meta": {}
-    }
-  }
-  
+        "action": "markdown_to_pdf",
+        "connection": null,
+        "input": {
+            "markdown": "S29tYW5kCj09PT09PQo=",
+            "markdown_string": "Komand\n======"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

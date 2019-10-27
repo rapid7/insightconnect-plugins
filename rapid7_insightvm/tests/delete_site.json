@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "delete_site",
-    "meta": {},
-    "input": {
-      "id": 0
+    "body": {
+        "action": "delete_site",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 0
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

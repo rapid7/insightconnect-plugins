@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "update_site_scan_engine",
-    "meta": {},
-    "input": {
-      "site_id": 272,
-      "engine_id": 3
+    "body": {
+        "action": "update_site_scan_engine",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "engine_id": 3,
+            "site_id": 272
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": "https://insightvm:3780"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

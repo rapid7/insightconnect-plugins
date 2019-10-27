@@ -5,7 +5,8 @@ description: Search the worlds information, including webpages, images, videos a
   more using Google
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - google
 - web

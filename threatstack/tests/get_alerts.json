@@ -1,21 +1,21 @@
 {
-  "body": {
-    "action": "get_alerts",
-    "meta": {},
-    "input": {
-      "end": "",
-      "fields": [],
-      "start": ""
+    "body": {
+        "action": "get_alerts",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "api_version": null,
+            "org_id": null,
+            "timeout": null
+        },
+        "input": {
+            "end": "",
+            "fields": [],
+            "start": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "api_version": 1,
-      "org_id": "",
-      "timeout": 120
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

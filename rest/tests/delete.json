@@ -1,22 +1,26 @@
 {
-  "version": "v1",
-  "body": {
-    "action": "delete",
-    "input": {
-      "route": "/delete",
-      "body": {},
-      "headers": { "Referer": "https://google.com" }
+    "body": {
+        "action": "delete",
+        "connection": {
+            "base_url": null,
+            "basic_auth_credentials": {
+                "password": null,
+                "username": null
+            },
+            "default_headers": {
+                "User-Agent": null
+            },
+            "ssl_verify": null
+        },
+        "input": {
+            "body": {},
+            "headers": {
+                "Referer": "https://google.com"
+            },
+            "route": "/delete"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "default_headers": { "User-Agent": "Mozilla/5.0" },
-      "base_url": "https://httpbin.org/",
-      "ssl_verify": false,
-      "basic_auth_credentials": {
-        "password": "",
-        "username": ""
-      }
-    }
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

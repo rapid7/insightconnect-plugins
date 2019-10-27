@@ -1,21 +1,21 @@
 {
-  "body": {
-    "action": "move_object",
-    "meta": {},
-    "input": {
-      "distinguished_name": "",
-      "new_ou": ""
+    "body": {
+        "action": "move_object",
+        "connection": {
+            "host": null,
+            "port": null,
+            "use_ssl": null,
+            "username_password": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "distinguished_name": "",
+            "new_ou": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "username_password": {
-        "password": "",
-        "username": ""
-      },
-      "host": "",
-      "port": 389,
-      "use_ssl": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

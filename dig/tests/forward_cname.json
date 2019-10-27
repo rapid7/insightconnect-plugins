@@ -1,13 +1,13 @@
 {
-  "body": {
-    "action": "forward",
-    "input": {
-      "query": "CNAME",
-      "domain": "www.komand.com"
+    "body": {
+        "action": "forward",
+        "connection": null,
+        "input": {
+            "domain": "www.komand.com",
+            "query": "CNAME"
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

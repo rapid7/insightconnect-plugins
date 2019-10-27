@@ -1,35 +1,34 @@
 {
-  "body": {
-    "action": "set_security_policy_rule",
-    "meta": {},
-    "input": {
-      "action": "deny",
-      "application": "any",
-      "description": "komand test",
-      "destination": "any",
-      "disable_server_response_inspection": false,
-      "disabled": false,
-      "dst_zone": "any",
-      "log_end": true,
-      "log_start": false,
-      "negate_destination": false,
-      "negate_source": false,
-      "rule_name": "test",
-      "service": "any",
-      "source": "RU",
-      "source_user": "any",
-      "src_zone": "any"
+    "body": {
+        "action": "set_security_policy_rule",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "verify_cert": null
+        },
+        "input": {
+            "action": "deny",
+            "application": "any",
+            "description": "komand test",
+            "destination": "any",
+            "disable_server_response_inspection": false,
+            "disabled": false,
+            "dst_zone": "any",
+            "log_end": true,
+            "log_start": false,
+            "negate_destination": false,
+            "negate_source": false,
+            "rule_name": "test",
+            "service": "any",
+            "source": "RU",
+            "source_user": "any",
+            "src_zone": "any"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "server": "",
-      "verify_cert": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }
-

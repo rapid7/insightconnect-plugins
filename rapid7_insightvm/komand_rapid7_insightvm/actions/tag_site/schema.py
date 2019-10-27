@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a tag to a site"
+
+
 class Input:
     SITE_ID = "site_id"
     TAG_ID = "tag_id"

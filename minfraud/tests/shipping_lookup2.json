@@ -1,29 +1,29 @@
 {
-  "body": {
-    "meta": {},
-    "connection": {
-      "license": {
-        "secretKey": ""
-      },
-      "user": 118625
+    "body": {
+        "action": "shipping_lookup",
+        "connection": {
+            "license": {
+                "secretKey": null
+            },
+            "user": null
+        },
+        "input": {
+            "address": "8.8.8.8",
+            "shipping_address": "",
+            "shipping_address_2": "",
+            "shipping_city": "",
+            "shipping_company": "",
+            "shipping_country": "",
+            "shipping_delivery_speed": "none",
+            "shipping_first_name": "",
+            "shipping_last_name": "",
+            "shipping_phone_country_code": "",
+            "shipping_phone_number": "",
+            "shipping_postal": "",
+            "shipping_region": ""
+        },
+        "meta": {}
     },
-    "action": "shipping_lookup",
-    "input": {
-      "shipping_city": "",
-      "shipping_first_name": "",
-      "shipping_region": "",
-      "shipping_phone_country_code": "",
-      "shipping_last_name": "",
-      "shipping_address_2": "",
-      "shipping_address": "",
-      "shipping_phone_number": "",
-      "shipping_country": "",
-      "shipping_company": "",
-      "shipping_delivery_speed": "none",
-      "address": "8.8.8.8",
-      "shipping_postal": ""
-    }
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

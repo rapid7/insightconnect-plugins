@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove site access from an user account"
+
+
 class Input:
     SITE_ID = "site_id"
     USER_ID = "user_id"

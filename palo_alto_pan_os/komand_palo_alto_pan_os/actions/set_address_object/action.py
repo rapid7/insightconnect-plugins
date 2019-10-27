@@ -1,5 +1,6 @@
 import komand
 from .schema import SetAddressObjectInput, SetAddressObjectOutput, Input, Output
+from komand.exceptions import PluginException
 # Custom imports below
 
 
@@ -13,11 +14,11 @@ class SetAddressObject(komand.Action):
                 output=SetAddressObjectOutput())
 
     def run(self, params={}):
-        address = params.get('address')
-        object_type = params.get('type')
-        name = params.get('object_name')
-        description = params.get('object_description')
-        tag_list = params.get('tags')
+        address = params.get(Input.ADDRESS)
+        object_type = params.get(Input.TYPE)
+        name = params.get(Input.OBJECT_NAME)
+        description = params.get(Input.OBJECT_DESCRIPTION)
+        tag_list = params.get(Input.TAGS)
 
         # create tags XML
         tag = ''
@@ -39,10 +40,10 @@ class SetAddressObject(komand.Action):
 
         output = self.connection.request.set_(xpath=xpath, element=element)
         try:
-            return {"message": output['response']['msg'],
-                    "status": output['response']['@status'],
-                    "code": output['response']['@code']}
+            return {Output.MESSAGE: output['response']['msg'],
+                    Output.STATUS: output['response']['@status'],
+                    Output.CODE: output['response']['@code']}
         except KeyError:
-            self.logger.error('The output did not contain a proper response.')
-            self.logger.error(output)
-            raise
+            raise PluginException(cause='The output did not contain expected keys.',
+                                  assistance='Contact support for help.',
+                                  data=output)

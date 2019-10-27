@@ -1,25 +1,25 @@
 {
-  "body": {
-    "action": "create_event",
-    "input": {
-      "source": "a reliable source",
-      "type": "Malware",
-      "description": "sos malware",
-      "title": "bad stuff exposed"
+    "body": {
+        "action": "create_event",
+        "connection": {
+            "client_id": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "proxy": null
+        },
+        "input": {
+            "description": "sos malware",
+            "source": "a reliable source",
+            "title": "bad stuff exposed",
+            "type": "Malware"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "host": "",
-      "proxy": "",
-      "client_id": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add or remove a user from an Active Directory group"
+
+
 class Input:
     ADD_REMOVE = "add_remove"
     DISTINGUISHED_NAME = "distinguished_name"
@@ -43,9 +47,9 @@ class ModifyGroupsInput(komand.Input):
     }
   },
   "required": [
+    "add_remove",
     "distinguished_name",
-    "group_dn",
-    "add_remove"
+    "group_dn"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new tag"
+
+
 class Input:
     COLOR = "color"
     NAME = "name"

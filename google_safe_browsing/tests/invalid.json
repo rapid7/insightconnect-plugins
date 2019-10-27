@@ -3,8 +3,8 @@
         "action": "lookup",
         "connection": {
             "credentials": {
-              "domain": "",
-              "token": ""
+                "domain": null,
+                "token": null
             }
         },
         "input": {
@@ -27,7 +27,10 @@
             "threat_type_social": false,
             "threat_type_unspecified": false,
             "threat_type_unwanted": false,
-            "urls": ["freefilesdownloader.com", "jardindebambou.fr"]
+            "urls": [
+                "freefilesdownloader.com",
+                "jardindebambou.fr"
+            ]
         },
         "meta": {}
     },

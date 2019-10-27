@@ -1,16 +1,16 @@
 {
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "ssl_verify": false,
-      "url": "http://192.168.0.15:8000",
-      "token": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "stats",
+        "connection": {
+            "ssl_verify": null,
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "input": {},
-    "meta": {},
-    "action": "stats"
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -3,8 +3,8 @@
         "action": "lookup",
         "connection": {
             "credentials": {
-              "domain": "",
-              "token": ""
+                "domain": null,
+                "token": null
             }
         },
         "input": {
@@ -27,7 +27,10 @@
             "threat_type_social": true,
             "threat_type_unspecified": true,
             "threat_type_unwanted": true,
-            "urls": ["google.com", "microsoft.com"]
+            "urls": [
+                "google.com",
+                "microsoft.com"
+            ]
         },
         "meta": {}
     },

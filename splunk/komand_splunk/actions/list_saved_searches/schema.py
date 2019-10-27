@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all saved searches"
+
+
 class Input:
     pass
 

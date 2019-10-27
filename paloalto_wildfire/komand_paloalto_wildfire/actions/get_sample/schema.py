@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query for a sample file"
+
+
 class Input:
     HASH = "hash"
     

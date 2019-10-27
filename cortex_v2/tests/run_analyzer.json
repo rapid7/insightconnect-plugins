@@ -1,26 +1,26 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "input": {
-      "analyzer_id": "Abuse_Finder_2_0",
-      "attributes": {
-        "dataType": "ip",
-        "tlp": 2
-      },
-      "observable": "1.2.3.4"
+    "body": {
+        "action": "run_analyzer",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "analyzer_id": "Abuse_Finder_2_0",
+            "attributes": {
+                "dataType": "ip",
+                "tlp": 2
+            },
+            "observable": "1.2.3.4"
+        },
+        "meta": {}
     },
-    "action": "run_analyzer",
-    "connection": {
-      "host": "",
-      "api_key": {
-        "secretKey": ""
-      },
-      "verify": true,
-      "proxy": {},
-      "protocol": "HTTP",
-      "port": "9001"
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,22 +1,26 @@
 {
-  "body": {
-    "action": "create_port_list",
-    "input": {
-      "port_list_TCP": ["22-25","80","443"],
-      "name": "Testing Port Lists",
-      "port_list_UDP": []
+    "body": {
+        "action": "create_port_list",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "ssl_verify": null,
+            "timeout": null
+        },
+        "input": {
+            "name": "Testing Port Lists",
+            "port_list_TCP": [
+                "22-25",
+                "80",
+                "443"
+            ],
+            "port_list_UDP": []
+        },
+        "meta": {}
     },
-    "connection": {
-      "ssl_verify": false,
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "timeout": 10,
-      "server": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

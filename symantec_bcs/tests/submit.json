@@ -1,21 +1,21 @@
 {
-  "body": {
-    "action": "submit",
-    "meta": {},
-    "input": {
-      "cname": "",
-      "comments": "Test file",
-      "critical": false,
-      "data": "",
-      "email": "",
-      "filename": "test.txt",
-      "fname": "",
-      "lname": "",
-      "pin": "",
-      "stype": "upfile"
+    "body": {
+        "action": "submit",
+        "connection": null,
+        "input": {
+            "cname": "",
+            "comments": "Test file",
+            "critical": false,
+            "data": "",
+            "email": "",
+            "filename": "test.txt",
+            "fname": "",
+            "lname": "",
+            "pin": "",
+            "stype": "upfile"
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

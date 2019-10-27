@@ -1,0 +1,374 @@
+plugin_spec_version: v2
+name: cymon
+title: Cymon
+description: Cymon Open Threat Intelligence
+version: 1.0.1
+vendor: rapid7
+support: community
+status: ["obsolete"]
+tags:
+- cymon
+- intel
+connection:
+  api_key:
+    type: credential_secret_key
+    title: API Key
+    description: API Token (Empty for unauthenticated access)
+    required: false
+  url:
+    title: URL
+    type: string
+    description: API URL
+    default: https://cymon.io:443
+    required: false
+types:
+  ip_results:
+    addr:
+      type: string
+    url:
+      type: string
+  domain_results:
+    name:
+      type: string
+    url:
+      type: string
+  ip_blacklist:
+    count:
+      type: integer
+    next:
+      type: string
+    previous:
+      type: string
+    results:
+      type: '[]ip_results'
+  domain_blacklist:
+    count:
+      type: integer
+    next:
+      type: string
+    previous:
+      type: string
+    results:
+      type: '[]domain_results'
+triggers:
+  poll_address_blacklist:
+    description: Poll for Blacklisted Addresses
+    input:
+      frequency:
+        type: integer
+        description: Poll frequency in seconds
+        required: false
+        default: 300
+      limit:
+        type: integer
+        description: Number of Results, 1-5000
+        required: true
+        default: 1
+      days:
+        type: integer
+        description: Age of Data in Days
+        required: true
+        enum:
+        - 1
+        - 2
+        - 3
+      tag:
+        type: string
+        description: Tag
+        required: true
+        enum:
+        - blacklist
+        - malware
+        - botnet
+        - spam
+        - phishing
+        - malicious activity
+        - dnsbl
+    output:
+      results:
+        type: ip_blacklist
+        description: Results
+        required: false
+  poll_domain_blacklist:
+    description: Poll for Blacklisted Domains
+    input:
+      frequency:
+        type: integer
+        description: Poll frequency in seconds
+        required: false
+        default: 300
+      limit:
+        type: integer
+        description: Number of Results, 1-5000
+        required: true
+        default: 1
+      days:
+        type: integer
+        description: Age of Data in Days
+        required: true
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+      tag:
+        type: string
+        description: Tag
+        required: true
+        enum:
+        - blacklist
+        - malware
+        - botnet
+        - spam
+        - phishing
+        - malicious activity
+        - dnsbl
+    output:
+      results:
+        type: domain_blacklist
+        description: Results
+        required: true
+actions:
+  domain_lookup:
+    description: Lookup Domain Name
+    input:
+      domain:
+        type: string
+        description: Domain name
+        required: true
+    output:
+      name:
+        type: string
+        title: Domain
+        description: Name
+        required: false
+      created:
+        type: string
+        title: Created Date
+        description: Created
+        required: false
+      updated:
+        type: string
+        title: Updated Date
+        description: Updated
+        required: false
+      sources:
+        type: '[]string'
+        title: Sources
+        description: Sources
+        required: false
+      ips:
+        type: '[]string'
+        title: Cymon IP URLs
+        description: IPs
+        required: false
+      urls:
+        type: '[]string'
+        title: Cymon URL URLs
+        description: Cymon URL URLs
+        required: false
+      found:
+        type: boolean
+        title: Found in Database
+        description: Found
+        required: false
+  address_lookup:
+    description: Lookup IP Address
+    input:
+      address:
+        type: string
+        description: IP Address
+        required: true
+    output:
+      addr:
+        type: string
+        title: IP Address
+        description: IP address
+        required: false
+      created:
+        type: string
+        title: Created Date
+        description: Created date
+        required: false
+      updated:
+        type: string
+        title: Updated Date
+        description: Updated date
+        required: false
+      sources:
+        type: '[]string'
+        title: Sources
+        description: Sources
+        required: false
+      events:
+        type: string
+        title: Cymon Events URLs
+        description: Events
+        required: false
+      domains:
+        type: string
+        title: Cymon Domain URLs
+        description: Cymon doman URLs
+        required: false
+      urls:
+        type: string
+        title: Cymon URL URLs
+        description: Cymon URL URLs
+        required: false
+      found:
+        type: boolean
+        title: Found
+        description: Found in database
+        required: false
+  url_lookup:
+    description: Lookup URL
+    input:
+      url:
+        type: string
+        description: Full URL E.g. http://faker.su/data/entry/steam/Steam.exe
+        required: true
+    output:
+      location:
+        type: string
+        title: Location
+        description: Location
+        required: false
+      created:
+        type: string
+        title: Created Date
+        description: Created date
+        required: false
+      updated:
+        type: string
+        title: Updated Date
+        description: Updated date
+        required: false
+      sources:
+        type: '[]string'
+        title: Sources
+        description: Sources
+        required: false
+      ips:
+        type: '[]string'
+        title: Cymon IP URLs
+        description: Cymon IPs URL
+        required: false
+      domain:
+        type: string
+        title: Cymon Domain URL
+        description: Cymon Domain URL
+        required: false
+      found:
+        type: boolean
+        title: Found
+        description: Found in database
+        required: false
+  address_blacklist:
+    description: Retrieve Blacklisted Addresses
+    input:
+      limit:
+        type: integer
+        description: Number of Results, 1-5000
+        required: true
+        default: 10
+      days:
+        type: integer
+        description: Age of Data in Days
+        required: true
+        enum:
+        - 1
+        - 2
+        - 3
+      tag:
+        type: string
+        description: Tag
+        required: true
+        enum:
+        - blacklist
+        - malware
+        - botnet
+        - spam
+        - phishing
+        - malicious activity
+        - dnsbl
+    output:
+      count:
+        type: integer
+        title: Blacklist Count
+        description: Blacklist count
+        required: false
+      addr:
+        type: '[]string'
+        title: Blacklisted Addresses
+        description: Blacklisted addresses
+        required: false
+      url:
+        type: '[]string'
+        title: Cymon URL References
+        description: Cymon URL references
+        required: false
+  domain_blacklist:
+    description: Retrieve Blacklisted Domains
+    input:
+      limit:
+        type: integer
+        description: Number of Results, 1-5000
+        required: true
+        default: 10
+      days:
+        type: integer
+        description: Age of Data in Days
+        required: true
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+      tag:
+        type: string
+        description: Tag
+        required: true
+        enum:
+        - blacklist
+        - malware
+        - botnet
+        - spam
+        - phishing
+        - malicious activity
+        - dnsbl
+    output:
+      count:
+        type: integer
+        title: Blacklist Count
+        description: Blacklist count
+        required: false
+      addr:
+        type: '[]string'
+        title: Blacklisted Domains
+        description: Blacklisted domains
+        required: false
+      url:
+        type: '[]string'
+        title: Cymon URL References
+        description: Cymon URL references
+        required: false

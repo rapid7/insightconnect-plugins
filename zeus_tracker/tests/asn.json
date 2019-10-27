@@ -1,15 +1,15 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "action": "asn",
-    "input": {
-      "as": "132717",
-      "limit": 10
+    "body": {
+        "action": "asn",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "as": "132717",
+            "limit": 10
+        },
+        "meta": {}
     },
-    "connection": {
-      "server": "https://zeustracker.abuse.ch"
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

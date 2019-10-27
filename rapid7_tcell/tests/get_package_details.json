@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "get_package_details",
-    "meta": {},
-    "input": {
-      "app_id": "MooseLifeTest-gIglw",
-      "package_id": 129
+    "body": {
+        "action": "get_package_details",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "app_id": "MooseLifeTest-gIglw",
+            "package_id": 129
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

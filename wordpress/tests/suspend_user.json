@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "suspend_user",
-    "meta": {},
-    "input": {
-      "username": ""
+    "body": {
+        "action": "suspend_user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "input": {
+            "username": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "host": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

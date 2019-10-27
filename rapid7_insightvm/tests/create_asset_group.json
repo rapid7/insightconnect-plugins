@@ -1,30 +1,30 @@
 {
-  "body": {
-    "action": "create_asset_group",
-    "meta": {},
-    "input": {
-      "name": "Komand Asset Group",
-      "description": "This is a test",
-      "type": "dynamic",
-      "searchCriteria": {
-        "match": "all",
-        "filters": [
-          {
-            "field": "host-name",
-            "operator": "contains",
-            "value": "meta"
-          }
-        ]
-      }
+    "body": {
+        "action": "create_asset_group",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "description": "This is a test",
+            "name": "Komand Asset Group",
+            "searchCriteria": {
+                "filters": [
+                    {
+                        "field": "host-name",
+                        "operator": "contains",
+                        "value": "meta"
+                    }
+                ],
+                "match": "all"
+            },
+            "type": "dynamic"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

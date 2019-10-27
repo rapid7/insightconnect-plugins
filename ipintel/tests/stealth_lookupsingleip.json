@@ -1,14 +1,16 @@
 {
-  "body": {
-    "action": "lookup",
-    "input": {
-      "geolookup": false,
-      "stealth": true,
-      "addresses": ["189.103.226.129"]
+    "body": {
+        "action": "lookup",
+        "connection": null,
+        "input": {
+            "addresses": [
+                "189.103.226.129"
+            ],
+            "geolookup": false,
+            "stealth": true
+        },
+        "meta": {}
     },
-    "connection": null,
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

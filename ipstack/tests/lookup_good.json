@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "lookup",
-    "input": {
-      "host": "google.com"
+    "body": {
+        "action": "lookup",
+        "connection": {
+            "cred_token": {
+                "domain": null,
+                "token": null
+            }
+        },
+        "input": {
+            "host": "google.com"
+        },
+        "meta": {}
     },
-    "connection": {
-      "cred_token": {
-        "domain": "",
-        "token": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

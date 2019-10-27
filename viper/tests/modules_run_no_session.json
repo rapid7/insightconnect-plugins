@@ -1,20 +1,20 @@
 {
-  "body": {
-    "input": {
-      "sha256": "",
-      "project": "",
-      "cmdline": "pe compiletime"
+    "body": {
+        "action": "modules_run",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "cmdline": "pe compiletime",
+            "project": "",
+            "sha256": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": "http://192.168.99.100:4000",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "meta": {},
-    "action": "modules_run"
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

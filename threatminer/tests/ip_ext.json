@@ -1,13 +1,13 @@
 {
-  "body": {
-    "action": "ip_ext",
-    "meta": {},
-    "input": {
-      "address": "",
-      "query_type": "Related Samples"
+    "body": {
+        "action": "ip_ext",
+        "connection": null,
+        "input": {
+            "address": "",
+            "query_type": "Related Samples"
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add an external dynamic list"
+
+
 class Input:
     DAY = "day"
     DESCRIPTION = "description"
@@ -119,13 +123,13 @@ class AddExternalDynamicListInput(komand.Input):
     }
   },
   "required": [
-    "name",
-    "list_type",
+    "day",
     "description",
-    "source",
+    "list_type",
+    "name",
     "repeat",
-    "time",
-    "day"
+    "source",
+    "time"
   ]
 }
     """)

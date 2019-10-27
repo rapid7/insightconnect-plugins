@@ -3,7 +3,7 @@
         "action": "search",
         "connection": {
             "api_key": {
-                "secretKey": ""
+                "secretKey": null
             }
         },
         "input": {

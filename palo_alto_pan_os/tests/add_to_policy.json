@@ -1,30 +1,30 @@
 {
-  "body": {
-    "action": "add_to_policy",
-    "meta": {},
-    "input": {
-      "action": "",
-      "application": "",
-      "destination": "192.168.1.2",
-      "dst_zone": "",
-      "hip_profiles": "",
-      "rule_name": "newrule",
-      "service": "",
-      "source": "192.168.1.2",
-      "source_user": "",
-      "src_zone": "",
-      "update_active_or_candidate_configuration": "candidate",
-      "url_category": ""
+    "body": {
+        "action": "add_to_policy",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "verify_cert": null
+        },
+        "input": {
+            "action": "",
+            "application": "",
+            "destination": "192.168.1.2",
+            "dst_zone": "",
+            "hip_profiles": "",
+            "rule_name": "newrule",
+            "service": "",
+            "source": "192.168.1.2",
+            "source_user": "",
+            "src_zone": "",
+            "update_active_or_candidate_configuration": "candidate",
+            "url_category": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "server": "",
-      "verify_cert": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

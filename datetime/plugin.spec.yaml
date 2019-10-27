@@ -4,7 +4,8 @@ title: Datetime
 description: Actions for getting and manipulating timestamps
 version: 2.0.4
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - datetime
 - utilities

@@ -1,16 +1,16 @@
 {
-  "body": {
-    "action": "delete",
-    "input": {
-      "cid": ""
+    "body": {
+        "action": "delete",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "cid": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_scan",
-    "meta": {},
-    "input": {
-      "scan_id": "188934"
+    "body": {
+        "action": "get_scan",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "scan_id": "188934"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

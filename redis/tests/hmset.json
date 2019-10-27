@@ -1,18 +1,22 @@
 {
-  "body": {
-    "action": "hmset",
-    "meta": {},
-    "input": {
-      "expire": 0,
-      "key": "lol",
-      "values": {"herp":"lawl","lawl":"derp", "lol":"nope"}
+    "body": {
+        "action": "hmset",
+        "connection": {
+            "db": null,
+            "host": null,
+            "port": null
+        },
+        "input": {
+            "expire": 0,
+            "key": "lol",
+            "values": {
+                "herp": "lawl",
+                "lawl": "derp",
+                "lol": "nope"
+            }
+        },
+        "meta": {}
     },
-    "connection": {
-      "db": 0,
-      "host": "",
-      "port": 7001
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

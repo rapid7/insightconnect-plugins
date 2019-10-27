@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_alerts_by_host_id",
-    "meta": {},
-    "input": {
-      "host_id": "BoT1FTG1l92f2LeJVh6e3p"
+    "body": {
+        "action": "get_alerts_by_host_id",
+        "connection": {
+            "url": null,
+            "username_password": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "host_id": "BoT1FTG1l92f2LeJVh6e3p"
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": "",
-      "username_password": {
-        "password": "",
-        "username": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

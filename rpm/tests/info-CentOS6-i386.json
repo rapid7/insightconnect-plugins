@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "info",
-    "meta": {},
-    "input": {
-      "release": "",
-      "version": "",
-      "arch": "i386",
-      "epoch": "",
-      "repo": "",
-      "name": "publican",
-      "key": "",
-      "distro": "CentOS 6"
+    "body": {
+        "action": "info",
+        "connection": null,
+        "input": {
+            "arch": "i386",
+            "distro": "CentOS 6",
+            "epoch": "",
+            "key": "",
+            "name": "publican",
+            "release": "",
+            "repo": "",
+            "version": ""
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

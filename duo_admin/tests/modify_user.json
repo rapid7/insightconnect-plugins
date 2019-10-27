@@ -1,21 +1,21 @@
 {
-  "body": {
-    "action": "modify_user",
-    "input": {
-      "status": "active",
-      "user_id": "DUCUULP5HBMZ43IG9MBH"
-    },
-    "connection": {
-        "hostname": "",
-        "integration_key": {
-          "secretKey": ""
+    "body": {
+        "action": "modify_user",
+        "connection": {
+            "hostname": null,
+            "integration_key": {
+                "secretKey": null
+            },
+            "secret_key": {
+                "secretKey": null
+            }
         },
-        "secret_key": {
-          "secretKey": ""
-        }
+        "input": {
+            "status": "active",
+            "user_id": "DUCUULP5HBMZ43IG9MBH"
+        },
+        "meta": {}
     },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

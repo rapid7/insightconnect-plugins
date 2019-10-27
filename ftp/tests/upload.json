@@ -1,21 +1,21 @@
 {
-  "body": {
-    "connection": {
-      "secure": false,
-      "passive": false,
-      "credentials": {
-        "password": "anonymous",
-        "username": "anonymous"
-      },
-      "host": ""
+    "body": {
+        "action": "upload",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "passive": null,
+            "secure": null
+        },
+        "input": {
+            "file_content": "",
+            "remote_path": ""
+        },
+        "meta": {}
     },
-    "input": {
-      "remote_path": "",
-      "file_content": ""
-    },
-    "meta": {},
-    "action": "upload"
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,14 +1,14 @@
 {
-  "body": {
-    "action": "dropzones",
-    "meta": {},
-    "input": {
-      "limit": 12
+    "body": {
+        "action": "dropzones",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "limit": 12
+        },
+        "meta": {}
     },
-    "connection": {
-      "server": "https://zeustracker.abuse.ch"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

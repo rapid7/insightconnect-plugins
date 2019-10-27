@@ -1,18 +1,18 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "action": "retrieve_security_policies",
-    "input": {
-      "id": "test-v14-policy"
+    "body": {
+        "action": "retrieve_security_policies",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "id": "test-v14-policy"
+        },
+        "meta": {}
     },
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

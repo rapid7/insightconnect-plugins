@@ -1,23 +1,33 @@
 import komand
-from .. import demo_test
-from .schema import LookupDomainInput, LookupDomainOutput
+
+from .schema import LookupDomainInput, LookupDomainOutput, Input
+from komand.exceptions import PluginException
 
 
 class LookupDomain(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='lookup_domain',
-                description='This action is used to return information about a specific domain entry',
-                input=LookupDomainInput(),
-                output=LookupDomainOutput())
+            name="lookup_domain",
+            description="This action is used to return information about a specific domain entry",
+            input=LookupDomainInput(),
+            output=LookupDomainOutput(),
+        )
 
     def run(self, params={}):
         try:
-            domain = params.get("domain")
-            domain_report = self.connection.client.lookup_domain(domain)
-            return domain_report
+            domain = params.get(Input.DOMAIN)
+            fields = params.get(Input.FIELDS)
+            comment = params.get(Input.COMMENT)
+            if not len(fields):
+                fields = None
+            if not comment:
+                comment = None
+            domain_report = self.connection.client.lookup_domain(domain, fields=fields, comment=comment)
+            if domain_report.get("warnings", False):
+                self.logger.warning(f"Warning: {domain_report.get('warnings')}")
+                self.logger.info(
+                    'Option for fields are: ["sightings","threatLists","analystNotes","counts","entity","hashAlgorithm","intelCard","metrics", "relatedEntities" ,"risk" ,"timestamps"]'
+                )
+            return komand.helper.clean(domain_report["data"])
         except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        return demo_test.demo_test(self.connection.token, self.logger)
+            PluginException(cause=f"Error: {e}", assistance="Review exception")

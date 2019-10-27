@@ -1,22 +1,22 @@
 {
-  "body": {
-    "action": "availability_set_vm",
-    "input": {
-      "resourceGroup": "",
-      "subscriptionId": "",
-      "availabilitySet": ""
+    "body": {
+        "action": "availability_set_vm",
+        "connection": {
+            "api_version": null,
+            "client_id": null,
+            "client_secret": {
+                "privateKey": null
+            },
+            "host": null,
+            "tenant_id": null
+        },
+        "input": {
+            "availabilitySet": "",
+            "resourceGroup": "",
+            "subscriptionId": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "client_secret": {
-        "privateKey": ""
-      },
-      "host": "https://management.azure.com",
-      "client_id": "",
-      "api_version": "2016-04-30-preview",
-      "tenant_id": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

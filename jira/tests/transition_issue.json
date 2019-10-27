@@ -1,21 +1,21 @@
 {
-  "body": {
-    "action": "transition_issue",
-    "meta": {},
-    "input": {
-      "comment": "",
-      "id": "",
-      "transition": ""
+    "body": {
+        "action": "transition_issue",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "input": {
+            "comment": "",
+            "id": "",
+            "transition": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "project": "test",
-      "url": "https://komand-demo4.atlassian.net"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

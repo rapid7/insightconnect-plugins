@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "disable_user",
-    "meta": {},
-    "input": {
-      "distinguished_name": "CN=hollis, brown,OU=domain_users,DC=mattsdomain,DC=local"
+    "body": {
+        "action": "disable_user",
+        "connection": {
+            "host": null,
+            "port": null,
+            "use_ssl": null,
+            "username_password": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "distinguished_name": "CN=hollis, brown,OU=domain_users,DC=mattsdomain,DC=local"
+        },
+        "meta": {}
     },
-    "connection": {
-      "username_password": {
-        "password": "",
-        "username": "MATTSDOMAIN\\mhofert"
-      },
-      "host": "192.168.1.10",
-      "port": 636,
-      "use_ssl": true
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

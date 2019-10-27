@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "lower",
-    "meta": {},
-    "input": {
-      "string": "HELLO"
+    "body": {
+        "action": "lower",
+        "connection": null,
+        "input": {
+            "string": "HELLO"
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

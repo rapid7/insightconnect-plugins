@@ -1,36 +1,36 @@
 {
-  "body": {
-    "action": "add_approval_indicator",
-    "meta": {},
-    "input": {
-      "file": {
-        "content": "dmFsdWUsaXR5cGUsdGFncwo0ZDY4NDYyY2E2MDcxZjliNmFkMGZhYmVhOGJkMWM5ZixtYWxfbWQ1LAo=",
-        "filename": "TestHashesAnom.csv"
-      },
-      "indicator_settings": {
-        "classification": "private",
-        "confidence": 0,
-        "domain_mapping": "",
-        "email_mapping": "",
-        "expiration_ts": "2018-12-19T00:00:00-05:00",
-        "ip_mapping": "",
-        "md5_mapping": "",
-        "notes": [],
-        "severity": "",
-        "source_confidence_weight": 0,
-        "trustedcircles": [],
-        "url_mapping": ""
-      }
+    "body": {
+        "action": "add_approval_indicator",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username": null
+        },
+        "input": {
+            "file": {
+                "content": "dmFsdWUsaXR5cGUsdGFncwo0ZDY4NDYyY2E2MDcxZjliNmFkMGZhYmVhOGJkMWM5ZixtYWxfbWQ1LAo=",
+                "filename": "TestHashesAnom.csv"
+            },
+            "indicator_settings": {
+                "classification": "private",
+                "confidence": 0,
+                "domain_mapping": "",
+                "email_mapping": "",
+                "expiration_ts": "2018-12-19T00:00:00-05:00",
+                "ip_mapping": "",
+                "md5_mapping": "",
+                "notes": [],
+                "severity": "",
+                "source_confidence_weight": 0,
+                "trustedcircles": [],
+                "url_mapping": ""
+            }
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "",
-      "username": "",
-      "ssl_verify": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

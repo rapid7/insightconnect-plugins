@@ -1,6 +1,7 @@
 import komand
 from .schema import SamplesInput, SamplesOutput
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class Samples(komand.Action):
@@ -29,8 +30,7 @@ class Samples(komand.Action):
         try:
             samples = self.connection.investigate.samples(URL, limit=limit, offset=offset, sortby=sortby)
         except Exception as e:
-            self.logger.error("Samples: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
         return samples
 
     def test(self):

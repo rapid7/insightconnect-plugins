@@ -1,23 +1,23 @@
 {
-  "body": {
-    "action": "info",
-    "meta": {},
-    "input": {
-      "release": "",
-      "version": "",
-      "arch": "x86_64",
-      "epoch": "",
-      "repo": "",
-      "name": "flute",
-      "key": "",
-      "distro": "Fedora 25"
+    "body": {
+        "action": "info",
+        "connection": {
+            "password": null,
+            "server": null,
+            "user": null
+        },
+        "input": {
+            "arch": "x86_64",
+            "distro": "Fedora 25",
+            "epoch": "",
+            "key": "",
+            "name": "flute",
+            "release": "",
+            "repo": "",
+            "version": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "server": "",
-      "user": "",
-      "password": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

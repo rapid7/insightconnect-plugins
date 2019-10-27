@@ -1,12 +1,12 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "action": "url_decode",
-    "input": {
-      "encoded_url": "http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwf"
+    "body": {
+        "action": "url_decode",
+        "connection": null,
+        "input": {
+            "encoded_url": "http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwf"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": null
-  }
+    "type": "action_start",
+    "version": "v1"
 }

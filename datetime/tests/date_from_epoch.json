@@ -1,12 +1,12 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "connection": null,
-    "input": {
-      "epoch": 1510693673.773
+    "body": {
+        "action": "date_from_epoch",
+        "connection": null,
+        "input": {
+            "epoch": 1510693673.773
+        },
+        "meta": {}
     },
-    "action": "date_from_epoch",
-    "meta": {}
-  }
+    "type": "action_start",
+    "version": "v1"
 }

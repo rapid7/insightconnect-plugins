@@ -1,22 +1,22 @@
 {
-  "body": {
-    "action": "ticket_create",
-    "meta": {},
-    "input": {
-      "keywords": {
-        "Subject": "Hello test ticket",
-        "Text": "Testy test test, test. Test test testy test!"
-      },
-      "queue": ""
+    "body": {
+        "action": "ticket_create",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "keywords": {
+                "Subject": "Hello test ticket",
+                "Text": "Testy test test, test. Test test testy test!"
+            },
+            "queue": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

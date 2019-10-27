@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "close_incident",
+        "input": {
+            "incident_id": "",
+            "resolution_description": "",
+            "resolution_type": "Resolved"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "list_issue_events",
-    "meta": {},
-    "input": {
-      "issue_id": "12345"
+    "body": {
+        "action": "list_issue_events",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "issue_id": "12345"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "url": "https://sentry.io/api/0/"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

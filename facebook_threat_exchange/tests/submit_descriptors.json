@@ -1,33 +1,33 @@
 {
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "input": {
-      "expired_on": "",
-      "remove_tags": "",
-      "status": "MALICIOUS",
-      "tags": [],
-      "confidence": 0,
-      "privacy_type": "VISIBLE",
-      "last_active": "",
-      "type": "DOMAIN",
-      "share_level": "WHITE",
-      "privacy_members": [],
-      "first_active": "",
-      "review_status": "",
-      "indicator": "evil-domain.biz",
-      "precision": "",
-      "description": "This domain was hosting malware",
-      "severity": "",
-      "add_tags": ""
+    "body": {
+        "action": "submit_descriptors",
+        "connection": {
+            "app_id": null,
+            "secret_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "add_tags": "",
+            "confidence": 0,
+            "description": "This domain was hosting malware",
+            "expired_on": "",
+            "first_active": "",
+            "indicator": "evil-domain.biz",
+            "last_active": "",
+            "precision": "",
+            "privacy_members": [],
+            "privacy_type": "VISIBLE",
+            "remove_tags": "",
+            "review_status": "",
+            "severity": "",
+            "share_level": "WHITE",
+            "status": "MALICIOUS",
+            "tags": [],
+            "type": "DOMAIN"
+        },
+        "meta": {}
     },
-    "connection": {
-      "app_id": "Facebook App ID",
-      "secret_key": {
-        "secretKey": ""
-      }
-    },
-    "action": "submit_descriptors"
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

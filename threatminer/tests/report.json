@@ -1,14 +1,14 @@
 {
-  "body": {
-    "action": "report",
-    "meta": {},
-    "input": {
-      "filename": "",
-      "query_type": "Domains",
-      "year": ""
+    "body": {
+        "action": "report",
+        "connection": null,
+        "input": {
+            "filename": "",
+            "query_type": "Domains",
+            "year": ""
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

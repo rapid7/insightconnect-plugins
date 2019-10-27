@@ -68,6 +68,7 @@ This plugin does not contain any troubleshooting information.
 * 1.0.0 - Initial plugin
 * 1.0.1 - Fixed issue where TAP alerts with attachments are not parsed correctly
 * 1.0.2 - Sanitize example output in Parse Alert action documentation
+* 1.0.3 - Fixed issue where headers were occasionally parsed improperly
 
 ## Workflows
 

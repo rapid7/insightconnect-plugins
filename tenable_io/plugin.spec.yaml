@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: tenable_io
 title: TenableIO
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Scan external assets with TenableIO
 version: 1.0.0
 tags:

@@ -1,27 +1,27 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "action": "container_remove",
-    "meta": {},
-    "input": {
-      "force": true,
-      "id": "9575c14bc17dfd45aef0f4dbcd322c4adc722cc4dba44263e0bcf2448a63f569",
-      "link": false,
-      "v": false
+    "body": {
+        "action": "container_remove",
+        "connection": {
+            "api_version": null,
+            "ca_cert": {
+                "secretKey": null
+            },
+            "client_cert": {
+                "secretKey": null
+            },
+            "client_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "force": true,
+            "id": "9575c14bc17dfd45aef0f4dbcd322c4adc722cc4dba44263e0bcf2448a63f569",
+            "link": false,
+            "v": false
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_version": "auto",
-      "ca_cert": {
-        "secretKey": ""
-      },
-      "client_cert": {
-        "secretKey": ""
-      },
-      "client_key": {
-        "secretKey": ""
-      },
-      "url": "https://localhost:2376"
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

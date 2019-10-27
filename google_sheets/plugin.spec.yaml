@@ -4,7 +4,8 @@ title: Google Sheets
 description: Create, edit and collaborate with others on spreadsheets
 version: 1.1.1
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - google
 - sheets

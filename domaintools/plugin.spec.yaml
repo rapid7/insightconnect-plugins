@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: domaintools
 title: DomainTools
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Domain name search tool that allows a wildcard search, monitoring of
   WHOIS record changes and history caching, as well as Reverse IP queries
 version: 1.0.0

@@ -1,5 +1,5 @@
 import komand
-from .schema import CheckIpInput, CheckIpOutput
+from .schema import CheckIpInput, CheckIpOutput, Input
 # Custom imports below
 from komand.exceptions import PluginException
 import json
@@ -17,57 +17,41 @@ class CheckIp(komand.Action):
                 input=CheckIpInput(),
                 output=CheckIpOutput())
 
+    def transform_output(self, out: dict) -> dict:
+        if out["isPublic"] is None:
+            out["isPublic"] = False
+
+        out = komand.helper.clean(out)
+
+        return out
+
     def run(self, params={}):
+        base = self.connection.base
+        endpoint = 'check'
+        url = f'{base}/{endpoint}'
+        params = {
+            'ipAddress': params.get(Input.ADDRESS),
+            'maxAgeInDays': params.get(Input.DAYS),
+            'verbose': params.get(Input.VERBOSE)
+        }
+
+        r = requests.get(url, params=params, headers=self.connection.headers)
+
         try:
-            # https://www.abuseipdb.com/check/[IP]/json?key=[API_KEY]&days=[DAYS][&verbose]
-            url = '{base}/{endpoint}/{ip}/json?key={key}&days={days}'.format(
-                base=self.connection.base, 
-                endpoint='check',
-                ip=params.get('address'),
-                key=self.connection.api_key,
-                days=params.get('days', '30')
-            )
+            json_ = r.json()
+            if "errors" in json_:
+                raise PluginException(cause='Received an error response from AbuseIPDB.',
+                                      assistance=json_['errors'][0]["detail"])
 
-            if params.get('verbose') == True: 
-                # Verbose mode selected
-                url = '{}&verbose'.format(url)
+            out = self.transform_output(json_["data"])
 
-            r = requests.get(url)
-            # Not using r.raise_for_status() since we get useful JSON information on an API 4**
-            out = r.json()
         except json.decoder.JSONDecodeError:
-            raise PluginException(cause='Received an unexpected response from AbuseIPDB.', 
+            raise PluginException(cause='Received an unexpected response from AbuseIPDB.',
                                   assistance="(non-JSON or no response was received). Response was: %s" % r.text)
-        except Exception as e:
-            self.logger.error(e)
-            raise
-
-        try:
-            if isinstance(out, list):
-
-                try:
-                    error = out[0]
-                except IndexError:
-                    self.logger.info('No items in list')
-
-                try:
-                    if isinstance(error, dict):
-                        # If the id key is present, an error has occurred
-                        if error['id']:
-                            msg = '{}: {}: {}'.format(error.get('id'), error.get('title'), error.get('detail'))
-                            raise PluginException(cause='Received an error response from AbuseIPDB.', assistance=msg)
-                # UnboundLocalError is raised if variable error is not set
-                # Error will not be set if out[0] doesn't exist per the catching of the IndexError exception above
-                except UnboundLocalError:
-                    self.logger.info('No error')
-                      
-        except KeyError:
-            # All good, no error because 'id' key is not present
-            self.logger.info('No errors')
 
         if len(out) > 0:
-            found = True
+            out["found"] = True
         else:
-            found = False
+            out["found"] = False
 
-        return { 'list': out, 'found': found }
+        return out

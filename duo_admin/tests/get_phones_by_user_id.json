@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "get_phones_by_user_id",
-    "meta": {},
-    "input": {
-      "user_id": ""
-    },
-    "connection": {
-        "hostname": "",
-        "integration_key": {
-          "secretKey": ""
+    "body": {
+        "action": "get_phones_by_user_id",
+        "connection": {
+            "hostname": null,
+            "integration_key": {
+                "secretKey": null
+            },
+            "secret_key": {
+                "secretKey": null
+            }
         },
-        "secret_key": {
-          "secretKey": ""
-        }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+        "input": {
+            "user_id": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

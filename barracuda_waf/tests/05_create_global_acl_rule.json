@@ -1,23 +1,23 @@
 {
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "address": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
+    "body": {
+        "action": "create_global_acl_rule",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "global_acl": {
+                "extended_match": "*",
+                "extended_match_sequence": 0,
+                "name": "test-v14-global-acl-rule"
+            },
+            "policy_id": "test-v14-policy"
+        },
+        "meta": {}
     },
-    "action": "create_global_acl_rule",
-    "meta": {},
-    "input": {
-      "global_acl": {
-        "name": "test-v14-global-acl-rule",
-        "extended_match": "*",
-        "extended_match_sequence": 0
-      },
-      "policy_id": "test-v14-policy"
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

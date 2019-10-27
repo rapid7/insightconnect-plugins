@@ -214,7 +214,7 @@ Example output:
           "absoluteUrl": "https://jenkins.example.com/user/mrinehart",
           "fullName": "Mike Rinehart"
         }a
-        "authorEmail": "mike_rinehart@example.com",
+        "authorEmail": "bob_ross@example.com",
         "comment": "Update to v2\n",
         "date": "2018-07-31 22:49:24 -0500",
         "id": "aae7faa0389dbc3a461aedf0324913dba34a748a",

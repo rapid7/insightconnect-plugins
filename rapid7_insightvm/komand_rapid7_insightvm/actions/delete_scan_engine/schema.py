@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete an existing scan engine from the security console"
+
+
 class Input:
     ID = "id"
     

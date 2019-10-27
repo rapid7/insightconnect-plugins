@@ -1,12 +1,12 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "input": {
-      "url": "https://www.komand.com"
+    "body": {
+        "action": "get_page",
+        "connection": null,
+        "input": {
+            "url": "https://www.komand.com"
+        },
+        "meta": {}
     },
-    "action": "get_page",
-    "connection": null,
-    "meta": {}
-  }
+    "type": "action_start",
+    "version": "v1"
 }

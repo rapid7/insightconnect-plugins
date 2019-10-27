@@ -35,7 +35,7 @@ This action is used to fetches information related to an email address.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|email|string|None|True|Email address to search e.g. janagreen2000@gmail.com|None|
+|email|string|None|True|Email address to search e.g. janagreen2000@example.com|None|
 
 #### Output
 
@@ -190,7 +190,7 @@ This action is used to fetches information related to an email address.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|email|string|None|True|Email address to search e.g. janagreen2000@gmail.com|None|
+|email|string|None|True|Email address to search e.g. janagreen2000@example.com|None|
 
 #### Output
 

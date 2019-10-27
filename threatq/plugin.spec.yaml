@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: threatq
 title: Threat Quotient
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Provides ability to work with Threat Quotient indicators and events
 version: 1.0.0
 tags:

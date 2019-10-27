@@ -1,6 +1,7 @@
 import komand
 from .schema import RrHistoryInput, RrHistoryOutput
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class RrHistory(komand.Action):
@@ -21,8 +22,7 @@ class RrHistory(komand.Action):
             else:
                 rr_history = self.connection.investigate.rr_history(domain, type)
         except Exception as e:
-            self.logger.error("RrHistoryIp: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         return {"features": [rr_history.get("features")], "rrs_tf": rr_history.get("rrs_tf")}
 

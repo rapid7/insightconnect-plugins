@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "sha1_extractor",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "file": null,
+            "str": "FVT78B67BGRN78HTN68R F9170554A46AA5511F0CCE3096D5668C53A76CC9 trhy4tnh8yn"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

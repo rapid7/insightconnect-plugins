@@ -2,10 +2,11 @@ plugin_spec_version: v2
 name: jira
 title: Jira
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 description: Jira is an issue tracking product, developed by Atlassian. It provides
   bug tracking, issue tracking, and project management functions
-version: 3.1.1
+version: 3.2.1
 tags:
 - ticket
 - Jira
@@ -142,6 +143,12 @@ actions:
         type: string
         description: Comment to add
         required: false
+      fields:
+        title: Fields
+        type: object
+        description: 'Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type
+           e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}'
+        required: false
     output:
       success:
         title: Success
@@ -163,6 +170,12 @@ actions:
         description: Max results to return
         default: 10
         required: true
+      get_attachments:
+        title: Get Attachments
+        description: Get attachments from issue
+        required: false
+        type: boolean
+        default: false
     output:
       issues:
         title: Issues
@@ -258,6 +271,12 @@ actions:
         type: string
         description: Issue ID
         required: true
+      get_attachments:
+        title: Get Attachments
+        description: Get attachments from issue
+        required: false
+        type: boolean
+        default: false
     output:
       found:
         title: Found
@@ -464,6 +483,12 @@ triggers:
         type: string
         description: JQL search string to use
         required: false
+      get_attachments:
+        title: Get Attachments
+        description: Get attachments from issue
+        required: false
+        type: boolean
+        default: false
     output:
       issue:
         title: Issue

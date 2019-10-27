@@ -1,28 +1,28 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "connection": {
-      "url": "",
-      "ssl_verify": false,
-      "username": "",
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "add_sample",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username": null
+        },
+        "input": {
+            "file": {
+                "content": "UXVpcyBxdWFlcmF0IG5vc3RydW0gbGFib3J1bSBhbGlxdWFtIHRlbXBvcmlidXMuIFBvc3NpbXVzIG5vYmlzIGFtZXQgbGFib3J1bSByZXBlbGxlbmR1cyBhdXRlbSBzZWQuIEN1bHBhIHJlcGVsbGF0IGFkaXBpc2NpIGNvcnJ1cHRpIHZvbHVwdGFzIHByYWVzZW50aXVtIG1vZGku",
+                "filename": "sample.b64.txt"
+            },
+            "params": {
+                "bucket_list": "Fake Malware DB",
+                "md5": "2905ce7862c53530e91f8a0d8fc00e54"
+            },
+            "source": "Faker Vault",
+            "type": "metadata"
+        },
+        "meta": {}
     },
-    "action": "add_sample",
-    "input": {
-      "type": "metadata",
-      "file": {
-        "content": "UXVpcyBxdWFlcmF0IG5vc3RydW0gbGFib3J1bSBhbGlxdWFtIHRlbXBvcmlidXMuIFBvc3NpbXVzIG5vYmlzIGFtZXQgbGFib3J1bSByZXBlbGxlbmR1cyBhdXRlbSBzZWQuIEN1bHBhIHJlcGVsbGF0IGFkaXBpc2NpIGNvcnJ1cHRpIHZvbHVwdGFzIHByYWVzZW50aXVtIG1vZGku",
-        "filename": "sample.b64.txt"
-      },
-      "source": "Faker Vault",
-        "params": {
-            "md5": "2905ce7862c53530e91f8a0d8fc00e54",
-            "bucket_list": "Fake Malware DB"
-        }
-    },
-    "meta": {}
-  }
+    "type": "action_start",
+    "version": "v1"
 }

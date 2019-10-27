@@ -2,8 +2,8 @@
     "body": {
         "action": "list_floating_ips",
         "connection": {
-            "token":{
-                "secretKey": ""
+            "token": {
+                "secretKey": null
             }
         },
         "input": {},

@@ -1,26 +1,26 @@
 {
-  "body": {
-    "action": "insert",
-    "meta": {},
-    "input": {
-      "event": "",
-      "host": "",
-      "index": "",
-      "source": "",
-      "sourcetype": ""
+    "body": {
+        "action": "insert",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "license": null,
+            "port": null,
+            "ssl_verify": null,
+            "use_ssl": null
+        },
+        "input": {
+            "event": "",
+            "host": "",
+            "index": "",
+            "source": "",
+            "sourcetype": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "host": "",
-      "license": "Enterprise",
-      "port": 8089,
-      "ssl_verify": false,
-      "use_ssl": false
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

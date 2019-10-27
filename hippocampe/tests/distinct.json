@@ -1,14 +1,16 @@
 {
-  "body": {
-    "action": "distinct",
-    "meta": {},
-    "input": {
-      "intelligence_types": ["ip"]
+    "body": {
+        "action": "distinct",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "intelligence_types": [
+                "ip"
+            ]
+        },
+        "meta": {}
     },
-    "connection": {
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

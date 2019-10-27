@@ -1,30 +1,30 @@
 {
-  "body": {
-    "action": "get_firewall",
-    "input": {
-      "firewall": ""
+    "body": {
+        "action": "get_firewall",
+        "connection": {
+            "auth_provider_x509_cert_url": null,
+            "auth_uri": null,
+            "client_email": null,
+            "client_id": null,
+            "client_x509_cert_url": null,
+            "host": null,
+            "private_key": {
+                "domain": null,
+                "token": null
+            },
+            "private_key_id": {
+                "domain": null,
+                "token": null
+            },
+            "project_id": null,
+            "token_uri": null,
+            "version": null
+        },
+        "input": {
+            "firewall": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "private_key": {
-        "domain": "",
-        "token": ""
-      },
-      "private_key_id": {
-        "domain": "",
-        "token": ""
-      },
-      "token_uri": "https://accounts.google.com/o/oauth2/token",
-      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "host": "https://www.googleapis.com/compute/",
-      "version": "v1",
-      "client_email": "",
-      "client_id": "",
-      "project_id": "",
-      "client_x509_cert_url": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "build_info",
-    "meta": {},
-    "input": {
-      "build number": 529,
-      "name": ""
+    "body": {
+        "action": "build_info",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "input": {
+            "build number": 529,
+            "name": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "host": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

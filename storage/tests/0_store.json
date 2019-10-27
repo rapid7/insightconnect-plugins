@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "store",
+        "connection": null,
+        "input": {
+            "variable_name": "some_cool_variable",
+            "variable_value": "some_cool_value"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

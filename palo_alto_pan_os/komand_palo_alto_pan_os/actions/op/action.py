@@ -1,5 +1,6 @@
 import komand
 from .schema import OpInput, OpOutput
+from komand.exceptions import PluginException
 # Custom imports below
 
 
@@ -18,6 +19,6 @@ class Op(komand.Action):
         try:
             return {"response": output['response']}
         except KeyError:
-            self.logger.error('The output did not contain a proper response.')
-            self.logger.error(output)
-            raise
+            raise PluginException(cause='The output did not contain expected keys.',
+                                  assistance='Contact support for help.',
+                                  data=output)

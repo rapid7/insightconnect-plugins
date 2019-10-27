@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "search_by_name",
-    "meta": {},
-    "input": {
-      "name_pattern": "info.com"
+    "body": {
+        "action": "search_by_name",
+        "connection": {
+            "api_version": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "infoblox_host": null
+        },
+        "input": {
+            "name_pattern": "info.com"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_version": "2.7",
-      "infoblox_host": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

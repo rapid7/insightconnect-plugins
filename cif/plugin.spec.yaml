@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: cif
 title: Collective Intelligence Framework
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: CIF is a cyber threat intelligence management system
 version: 2.0.0
 tags:

@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "get_event",
-    "meta": {},
-    "input": {
-      "event_id": 17
+    "body": {
+        "action": "get_event",
+        "connection": {
+            "api_token": {
+                "secretKey": null
+            },
+            "customer_id": null
+        },
+        "input": {
+            "event_id": 17
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_token": {
-        "secretKey": ""
-      },
-      "customer_id": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

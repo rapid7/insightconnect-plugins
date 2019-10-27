@@ -1,28 +1,28 @@
 {
-  "body": {
-    "input": {
-      "max-results": 1,
-      "timezone": "UTC",
-      "include_deleted": true,
-      "room_id_or_name": "blaroom",
-      "not-before": "",
-      "interval": 10
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "version": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "include_deleted": true,
+            "interval": 10,
+            "max-results": 1,
+            "not-before": "",
+            "room_id_or_name": "blaroom",
+            "timezone": "UTC"
+        },
+        "meta": {},
+        "trigger": "latest_message"
     },
-    "connection": {
-      "host": "https://hipchat.com/",
-      "version": "v2",
-      "credentials": {
-        "username": "",
-        "password": ""
-      }
-    },
-    "trigger": "latest_message",
-    "meta": {},
-    "dispatcher": {
-      "url": "http://localhost:8000",
-      "webhook_url": ""
-    }
-  },
-  "version": "v1",
-  "type": "trigger_start"
+    "type": "trigger_start",
+    "version": "v1"
 }

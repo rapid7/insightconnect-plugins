@@ -6,7 +6,8 @@ description: Salesforce is a CRM solution that brings together all customer info
   from marketing right through to sales, customer service and business analysis
 version: 1.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - marketing
 - sales

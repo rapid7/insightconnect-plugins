@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Insert events into an index"
+
+
 class Input:
     EVENT = "event"
     HOST = "host"
@@ -52,8 +56,8 @@ class InsertInput(komand.Input):
     }
   },
   "required": [
-    "index",
-    "event"
+    "event",
+    "index"
   ]
 }
     """)

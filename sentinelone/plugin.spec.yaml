@@ -5,7 +5,8 @@ description: SentinelOne is a next-gen cybersecurity company focused on protecti
   the enterprise through the endpoint
 version: 1.2.0
 vendor: rapid7
-status: ["supported"]
+support: rapid7
+status: []
 tags:
 - sentinelone
 - endpoint

@@ -1,17 +1,19 @@
 {
-  "body": {
-    "action": "add_ips_to_blacklist",
-    "meta": {},
-    "input": {
-      "app_id": "LowprofileappcreatedforKomandplugintests-1oRtT",
-      "ips": ["192.168.0.100"]
+    "body": {
+        "action": "add_ips_to_blacklist",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "app_id": "LowprofileappcreatedforKomandplugintests-1oRtT",
+            "ips": [
+                "192.168.0.100"
+            ]
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

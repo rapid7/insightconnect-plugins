@@ -1,0 +1,46 @@
+{
+    "body": {
+        "action": "submit_reports_in_bulk",
+        "connection": {
+            "api_credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "reports": [
+                {
+                    "description": "Very technical text for bulk",
+                    "feed_id": "AWcd2qUMuPEX_z4v01Q2",
+                    "ioc": {
+                        "domain": "google.com",
+                        "ip": "8.8.8.8",
+                        "url": "https://google.com"
+                    },
+                    "tags": [
+                        "malware"
+                    ],
+                    "timestamp": 1500396994,
+                    "title": "New test bulk report"
+                },
+                {
+                    "description": "Very technical text for bulk 2",
+                    "feed_id": "AWcd2qUMuPEX_z4v01Q2",
+                    "ioc": {
+                        "domain": "not-google.com",
+                        "ip": "1.1.1.1",
+                        "url": "https://really-google.com"
+                    },
+                    "tags": [
+                        "malware"
+                    ],
+                    "timestamp": 1500396994,
+                    "title": "New test bulk report 2"
+                }
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

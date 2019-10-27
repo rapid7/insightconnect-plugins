@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_tags",
-    "meta": {},
-    "input": {
-      "name": "^Komand.*"
+    "body": {
+        "action": "get_tags",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "name": "^Komand.*"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": "https://insightvm:3780"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

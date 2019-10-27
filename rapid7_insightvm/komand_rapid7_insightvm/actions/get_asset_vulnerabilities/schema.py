@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get vulnerabilities found on an asset. Can only be used if the asset has first been scanned"
+
+
 class Input:
     ASSET_ID = "asset_id"
     

@@ -1,12 +1,12 @@
 {
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "connection": {
-      "api_key": ""
+    "body": {
+        "action": "list_domain_risk_rules",
+        "connection": {
+            "api_key": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "action": "list_domain_risk_rules",
-    "input": {}
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

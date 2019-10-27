@@ -1,21 +1,21 @@
 {
-  "type": "action_start",
-  "body": {
-    "action": "get_analyzer",
-    "input": {
-      "analyzer_id": ""
+    "body": {
+        "action": "get_analyzer",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "analyzer_id": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "host": "",
-      "api_key": {
-        "secretKey": ""
-      },
-      "verify": true,
-      "proxy": {},
-      "protocol": "HTTP",
-      "port": "9001"
-    },
-    "meta": {}
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

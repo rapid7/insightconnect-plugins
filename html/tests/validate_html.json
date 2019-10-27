@@ -1,12 +1,12 @@
 {
-  "body": {
-    "action": "validate",
-    "input": {
-      "html_contents": "<!DOCTYPE html><html><head><title>Test</title></head><body><p></p><h1></h1></body></html>"
+    "body": {
+        "action": "validate",
+        "connection": {},
+        "input": {
+            "html_contents": "<!DOCTYPE html><html><head><title>Test</title></head><body><p></p><h1></h1></body></html>"
+        },
+        "meta": {}
     },
-    "connection": {},
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

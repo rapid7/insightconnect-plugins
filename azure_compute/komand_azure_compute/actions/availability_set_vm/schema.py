@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List available virtual machine sizes in an availability set"
+
+
 class Input:
     AVAILABILITYSET = "availabilitySet"
     RESOURCEGROUP = "resourceGroup"
@@ -39,9 +43,9 @@ class AvailabilitySetVmInput(komand.Input):
     }
   },
   "required": [
-    "subscriptionId",
+    "availabilitySet",
     "resourceGroup",
-    "availabilitySet"
+    "subscriptionId"
   ]
 }
     """)
@@ -92,7 +96,7 @@ class AvailabilitySetVmOutput(komand.Output):
         "numberOfCores": {
           "type": "integer",
           "title": "Number Of Cores",
-          "description": "Specifies the number of available cpu cores",
+          "description": "Specifies the number of available CPU cores",
           "order": 4
         },
         "osDiskSizeInMB": {

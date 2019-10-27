@@ -1,22 +1,24 @@
 {
-  "body": {
-    "action": "create_target",
-    "input": {
-      "port_list_id": "",
-      "host_list": ["256.999.888.777"],
-      "name": "TESTing create_target BAD host list"
+    "body": {
+        "action": "create_target",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "ssl_verify": null,
+            "timeout": null
+        },
+        "input": {
+            "host_list": [
+                "256.999.888.777"
+            ],
+            "name": "TESTing create_target BAD host list",
+            "port_list_id": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "ssl_verify": false,
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "timeout": 10,
-      "server": ""
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

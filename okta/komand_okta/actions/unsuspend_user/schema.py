@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Unsuspend a user"
+
+
 class Input:
     EMAIL = "email"
     

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='pagerduty-rapid7-plugin',
-      version='1.0.1',
+      version='2.0.0',
       description='PagerDuty',
       author='rapid7',
       author_email='',

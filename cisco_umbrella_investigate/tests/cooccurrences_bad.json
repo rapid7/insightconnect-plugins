@@ -1,16 +1,16 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "cooccurrences",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "domain": "test.local.com"
+        },
+        "meta": {}
     },
-    "action": "cooccurrences",
-    "input": {
-      "domain": "test.local.com"
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

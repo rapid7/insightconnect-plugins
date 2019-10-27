@@ -1,12 +1,12 @@
 {
-  "version": "v1",
-  "body": {
-    "action": "ping",
-    "meta": {},
-    "connection": {
-      "server": "http://localhost:8086"
+    "body": {
+        "action": "ping",
+        "connection": {
+            "server": null
+        },
+        "input": {},
+        "meta": {}
     },
-    "input": {}
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

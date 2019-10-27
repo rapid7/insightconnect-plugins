@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a saved search"
+
+
 class Input:
     PROPERTIES = "properties"
     QUERY = "query"
@@ -39,8 +43,8 @@ class CreateSavedSearchInput(komand.Input):
     }
   },
   "required": [
-    "saved_search_name",
-    "query"
+    "query",
+    "saved_search_name"
   ]
 }
     """)

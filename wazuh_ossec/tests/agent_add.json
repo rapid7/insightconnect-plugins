@@ -1,20 +1,20 @@
 {
-  "body": {
-    "action": "agent_add",
-    "meta": {},
-    "input": {
-      "force": "",
-      "ip": "",
-      "name": ""
+    "body": {
+        "action": "agent_add",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "force": "",
+            "ip": "",
+            "name": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "delete_task",
-    "input": {
-      "id": 112222,
-      "owner": "Komand"
+    "body": {
+        "action": "delete_task",
+        "connection": {
+            "api_access_id": null,
+            "api_base_url": null,
+            "api_default_org": null,
+            "api_secret_key": null
+        },
+        "input": {
+            "id": 112222,
+            "owner": "Komand"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_access_id": "",
-      "api_default_org": "",
-      "api_secret_key": "",
-      "api_base_url": "https://sandbox.threatconnect.com/api"
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

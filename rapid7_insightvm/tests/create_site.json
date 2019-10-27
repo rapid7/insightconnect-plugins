@@ -1,26 +1,26 @@
 {
-  "body": {
-    "action": "create_site",
-    "meta": {},
-    "input": {
-      "description": "",
-      "engine_id": 0,
-      "excluded_addresses": [],
-      "excluded_asset_groups": [],
-      "importance": "normal",
-      "included_addresses": [],
-      "included_asset_groups": [],
-      "name": "",
-      "scan_template_id": ""
+    "body": {
+        "action": "create_site",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "description": "",
+            "engine_id": 0,
+            "excluded_addresses": [],
+            "excluded_asset_groups": [],
+            "importance": "normal",
+            "included_addresses": [],
+            "included_asset_groups": [],
+            "name": "",
+            "scan_template_id": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

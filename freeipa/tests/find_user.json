@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "find_user",
-    "meta": {},
-    "input": {
-      "search_parameters": "helpdesk"
+    "body": {
+        "action": "find_user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null
+        },
+        "input": {
+            "search_parameters": "helpdesk"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "server": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

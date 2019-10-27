@@ -1,14 +1,14 @@
 {
-  "body": {
-    "action": "binaries",
-    "input": {
-      "limit": 10
+    "body": {
+        "action": "binaries",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "limit": 10
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "server": "https://zeustracker.abuse.ch"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

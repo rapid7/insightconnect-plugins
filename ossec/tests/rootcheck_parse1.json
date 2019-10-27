@@ -1,12 +1,12 @@
 {
-  "body": {
-    "meta": {},
-    "input": {
-      "alert": "** Alert 1470870797.2581763: - ossec,rootcheck,\n2016 Aug 10 23:13:17 (monitor.dev.komand.local) any->rootcheck\nRule: 516 (level 3) -> 'System Audit event.'\nSystem Audit: PHP - Expose PHP is enabled. File: /etc/php.ini.\n"
+    "body": {
+        "action": "rootcheck_parse",
+        "connection": null,
+        "input": {
+            "alert": "** Alert 1470870797.2581763: - ossec,rootcheck,\n2016 Aug 10 23:13:17 (monitor.dev.komand.local) any->rootcheck\nRule: 516 (level 3) -> 'System Audit event.'\nSystem Audit: PHP - Expose PHP is enabled. File: /etc/php.ini.\n"
+        },
+        "meta": {}
     },
-    "action": "rootcheck_parse",
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

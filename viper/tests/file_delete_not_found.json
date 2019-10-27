@@ -1,18 +1,18 @@
 {
-  "version": "v1",
-  "body": {
-    "connection": {
-      "url": "http://192.168.99.100:4000",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
+    "body": {
+        "action": "file_delete",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "hash": "e702c522270ba8aed77c07d7a3f4c648215d54d955e86b840625a1eecaabd4b5"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "action": "file_delete",
-    "input": {
-      "hash": "e702c522270ba8aed77c07d7a3f4c648215d54d955e86b840625a1eecaabd4b5"
-    }
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

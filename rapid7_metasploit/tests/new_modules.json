@@ -1,23 +1,23 @@
 {
-  "body": {
-    "input": {},
-    "connection": {
-      "uri": "/api/",
-      "server": "192.168.0.23",
-      "ssl": true,
-      "port": 55553,
-      "credentials": {
-        "username": "",
-        "password": ""
-      }
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "port": null,
+            "server": null,
+            "ssl": null,
+            "uri": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {},
+        "meta": {},
+        "trigger": "new_modules"
     },
-    "trigger": "new_modules",
-    "meta": {},
-    "dispatcher": {
-      "url": "http://localhost:8000",
-      "webhook_url": ""
-    }
-  },
-  "version": "v1",
-  "type": "trigger_start"
+    "type": "trigger_start",
+    "version": "v1"
 }

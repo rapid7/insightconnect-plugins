@@ -1,17 +1,16 @@
 {
-  "body": {
-    "action": "show_user",
-    "meta": {},
-    "input": {
-      "id": 2162712
+    "body": {
+        "action": "show_user",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "id": 2162712
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

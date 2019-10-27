@@ -1,25 +1,25 @@
 {
-  "body": {
-    "action": "delete_file",
-    "meta": {},
-    "input": {
-      "file_path": "",
-      "share_name": "",
-      "timeout": 30
+    "body": {
+        "action": "delete_file",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "domain": null,
+            "host": null,
+            "netbios_name": null,
+            "port": null,
+            "timeout": null,
+            "use_ntlmv2": null
+        },
+        "input": {
+            "file_path": "",
+            "share_name": "",
+            "timeout": 30
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "domain": "",
-      "host": "",
-      "netbios_name": "",
-      "port": 445,
-      "timeout": 60,
-      "use_ntlmv2": true
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new address object"
+
+
 class Input:
     ADDRESS = "address"
     OBJECT_DESCRIPTION = "object_description"
@@ -61,8 +65,8 @@ class SetAddressObjectInput(komand.Input):
   },
   "required": [
     "address",
-    "type",
-    "object_name"
+    "object_name",
+    "type"
   ]
 }
     """)

@@ -1,13 +1,13 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "connection": null,
-    "input": {
-      "input": {},
-      "function": "def run(params={}):\n return { 'result1': 'foo', 'result2': 'bar' }"
+    "body": {
+        "action": "run",
+        "connection": null,
+        "input": {
+            "function": "def run(params={}):\n return { 'result1': 'foo', 'result2': 'bar' }",
+            "input": {}
+        },
+        "meta": {}
     },
-    "action": "run",
-    "meta": {}
-  }
+    "type": "action_start",
+    "version": "v1"
 }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List available virtual machine sizes for resizing"
+
+
 class Input:
     RESOURCEGROUP = "resourceGroup"
     SUBSCRIPTIONID = "subscriptionId"
@@ -39,8 +43,8 @@ class SizesVmInput(komand.Input):
     }
   },
   "required": [
-    "subscriptionId",
     "resourceGroup",
+    "subscriptionId",
     "vm"
   ]
 }
@@ -92,7 +96,7 @@ class SizesVmOutput(komand.Output):
         "numberOfCores": {
           "type": "integer",
           "title": "Number Of Cores",
-          "description": "Specifies the number of available cpu cores",
+          "description": "Specifies the number of available CPU cores",
           "order": 4
         },
         "osDiskSizeInMB": {

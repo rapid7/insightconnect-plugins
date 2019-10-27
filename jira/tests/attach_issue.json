@@ -1,21 +1,21 @@
 {
-  "body": {
-    "action": "attach_issue",
-    "meta": {},
-    "input": {
-      "attachment_bytes": "",
-      "attachment_filename": "",
-      "id": ""
+    "body": {
+        "action": "attach_issue",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "input": {
+            "attachment_bytes": "",
+            "attachment_filename": "",
+            "id": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "project": "test",
-      "url": "https://komand-demo4.atlassian.net"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

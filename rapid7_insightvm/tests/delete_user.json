@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "delete_user",
-    "meta": {},
-    "input": {
-      "id": 86
+    "body": {
+        "action": "delete_user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 86
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

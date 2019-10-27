@@ -1,23 +1,23 @@
 {
-  "body": {
-    "input": {
-      "why": "SSH Bruteforce",
-      "source": "malhosts",
-      "duration": "300",
-      "skip_whitelist": false,
-      "cidr": "1.2.3.4",
-      "autoscale": false
+    "body": {
+        "action": "block",
+        "connection": {
+            "ssl_verify": null,
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "autoscale": false,
+            "cidr": "1.2.3.4",
+            "duration": "300",
+            "skip_whitelist": false,
+            "source": "malhosts",
+            "why": "SSH Bruteforce"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "action": "block",
-    "connection": {
-      "ssl_verify": false,
-      "url": "http://192.168.0.15:8000",
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

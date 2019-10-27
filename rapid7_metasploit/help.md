@@ -125,7 +125,7 @@ Example output:
     "mod_time": "2018-04-03 15:16:13 +0000",
     "is_client": false,
     "description": "This module exploits the trusted $PATH environment variable of the SUID binary \"ibstat\".",
-    "author": ["Kristian Erik Hermansen", "Sagi Shahar <sagi.shahar@mwrinfosecurity.com>",
+    "author": ["Kristian Erik Hermansen", "Sagi Shahar <blah@example.com>",
     "Kostas Lintovois <kostas.lintovois@mwrinfosecurity.com>"],
     "arch": "cmd",
     "rank": 600,

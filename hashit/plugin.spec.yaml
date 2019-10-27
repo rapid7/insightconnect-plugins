@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: hashit
 title: HashIt
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Generate Common Hashes from a File or String
 version: 2.0.1
 tags:

@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "get_incident",
-    "meta": {},
-    "input": {
-      "incident_id": 31851783
+    "body": {
+        "action": "get_incident",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "incident_id": 31851783
+        },
+        "meta": {}
     },
-    "connection": {
-      "eu_customer": false,
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

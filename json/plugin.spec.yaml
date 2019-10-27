@@ -1,0 +1,42 @@
+plugin_spec_version: v2
+name: json
+title: JSON
+description: Transform JSON data per template
+version: 1.1.3
+vendor: rapid7
+support: community
+status: []
+tags:
+- JSON
+- template
+- transform
+- XSLt for JSON
+- utilities
+actions:
+  transform:
+    title: Transform
+    description: Transform JSON data per template
+    input:
+      source_data:
+        title: JSON source data
+        description: Input data in JSON layout
+        type: object
+        required: true
+      extraction_template:
+        title: JSON extraction template
+        description: Input layout containing placeholders (strings beginning with
+          $)
+        type: object
+        required: true
+      target_template:
+        title: JSON target template
+        description: Desired output layout containing the same $ placeholder strings
+        type: object
+        required: true
+    output:
+      target_data:
+        title: Transformed JSON
+        description: Desired JSON layout, populated by placeholder data extracted
+          from input
+        type: object
+        required: true

@@ -2,17 +2,19 @@
     "body": {
         "action": "labeling",
         "connection": {
-            "api_endpoint": "",
+            "api_endpoint": null,
             "credentials": {
-              "username": "",
-              "password": ""
+                "password": null,
+                "username": null
             },
-            "ssl_verify": true
+            "ssl_verify": null
         },
         "input": {
-            "label": ["woah", "lookinto"],
+            "label": [
+                "woah",
+                "lookinto"
+            ],
             "query": "host:anonymous"
-
         },
         "meta": {}
     },

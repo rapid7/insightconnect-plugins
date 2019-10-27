@@ -150,3 +150,37 @@ default_domain = {udomain}
         raise Exception('An error occurred in the PowerShell script, see logging for more info')
 
     return {'output': output, 'stderr': error_value}
+
+
+def credssp(action, host_ip, powershell_script, username, password, port):
+    # Adds needed https and port number to host IP
+    action.logger.info('Running a CredSSP connection')
+    host_connection = 'https://{host_ip}:{port}/wsman'.format(host_ip=host_ip, port=port)
+    action.logger.debug('Host Connection: ' + host_connection)
+    action.logger.debug('PowerShell script: ' + powershell_script)
+
+    powershell_session = winrm.Session(host_connection, auth=(username, password), transport='credssp')
+    # Forces the Protocol to not fail with self signed certs
+    p = winrm.Protocol(endpoint=host_connection,
+                       transport='credssp',
+                       username=username,
+                       password=password,
+                       server_cert_validation='ignore',
+                       message_encryption='auto')
+    powershell_session.protocol = p
+    run_script = powershell_session.run_ps(powershell_script)
+    exit_code = run_script.status_code
+    error_value = run_script.std_err
+    output = run_script.std_out
+
+    try:
+        error_value = error_value.decode('utf-8')
+    except AttributeError:
+        pass
+    output = output.decode('utf-8')
+
+    if exit_code != 0:
+        action.logger.error(error_value)
+        raise Exception('An error occurred in the PowerShell script, see logging for more info')
+
+    return {'output': output, 'stderr': error_value}

@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "ticket_history_entry",
-    "meta": {},
-    "input": {
-      "history_id": 1,
-      "ticket_id": 3
+    "body": {
+        "action": "ticket_history_entry",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "history_id": 1,
+            "ticket_id": 3
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

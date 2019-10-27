@@ -1,22 +1,22 @@
 {
-  "body": {
-    "input": {
-      "dataFilter": "",
-      "dataTypeFilter": "",
-      "start": 0,
-      "limit": 0,
-      "analyzerFilter": ""
+    "body": {
+        "action": "get_jobs",
+        "connection": {
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "analyzerFilter": "",
+            "dataFilter": "",
+            "dataTypeFilter": "",
+            "limit": 0,
+            "start": 0
+        },
+        "meta": {}
     },
-    "action": "get_jobs",
-    "connection": {
-      "port": "9999",
-      "proxy": {},
-      "verify": true,
-      "host": "",
-      "protocol": "http"
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -1,14 +1,14 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "action": "reschedule_task",
-    "input": {
-      "task_id": 18
+    "body": {
+        "action": "reschedule_task",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "task_id": 18
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "url": ""
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

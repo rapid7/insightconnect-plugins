@@ -1,23 +1,23 @@
 {
-  "body": {
-    "connection": {
-      "basic_auth": {
-        "password": "",
-        "username": ""
-      },
-      "token_auth": {
-        "secretKey": ""
-      },
-      "port": 3000,
-      "url": ""
+    "body": {
+        "action": "delete_organization_user",
+        "connection": {
+            "basic_auth": {
+                "password": null,
+                "username": null
+            },
+            "port": null,
+            "token_auth": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "organization_id": 1,
+            "user_id": 2
+        },
+        "meta": {}
     },
-    "action": "delete_organization_user",
-    "meta": {},
-    "input": {
-      "user_id": 2,
-      "organization_id": 1
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

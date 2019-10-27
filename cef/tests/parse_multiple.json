@@ -1,12 +1,12 @@
 {
-  "version": "v1",
-  "body": {
-    "connection": null,
-    "meta": {}, 
-    "input": {
-      "file": "Q0VGOjB8S29tYW5kfEtvbWFuZHwxfDJ8U29tZSBFdmVudHxMb3d8IF9jZWZWZXI9MC4xCkNFRjowfEtvbWFuZHxLb21hbmR8MXwyfFNvbWUgRXZlbnR8TG93fCBfY2VmVmVyPTAuMQpDRUY6MHxLb21hbmR8S29tYW5kfDF8MnxTb21lIEV2ZW50fExvd3wgX2NlZlZlcj0wLjE="
-    }, 
-    "action": "parse_multiple"
-  }, 
-  "type": "action_start"
+    "body": {
+        "action": "parse_multiple",
+        "connection": null,
+        "input": {
+            "file": "Q0VGOjB8S29tYW5kfEtvbWFuZHwxfDJ8U29tZSBFdmVudHxMb3d8IF9jZWZWZXI9MC4xCkNFRjowfEtvbWFuZHxLb21hbmR8MXwyfFNvbWUgRXZlbnR8TG93fCBfY2VmVmVyPTAuMQpDRUY6MHxLb21hbmR8S29tYW5kfDF8MnxTb21lIEV2ZW50fExvd3wgX2NlZlZlcj0wLjE="
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

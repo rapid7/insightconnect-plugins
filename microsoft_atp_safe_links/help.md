@@ -45,6 +45,7 @@ This plugin does not contain any troubleshooting information.
 ## Versions
 
 * 1.0.0 - Initial plugin
+* 1.0.1 - Fixed issue where non-safelinks returned a blank string
 
 ## Workflows
 

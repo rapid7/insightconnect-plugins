@@ -1,16 +1,16 @@
 {
-  "body": {
-    "action": "list_inline_scripts",
-    "meta": {},
-    "input": {
-      "app_id": "MooseLifeTest-gIglw"
+    "body": {
+        "action": "list_inline_scripts",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "app_id": "MooseLifeTest-gIglw"
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

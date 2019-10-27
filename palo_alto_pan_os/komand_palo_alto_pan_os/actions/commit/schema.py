@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Commits the candidate configuration"
+
+
 class Input:
     ACTION = "action"
     CMD = "cmd"

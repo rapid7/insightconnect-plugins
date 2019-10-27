@@ -1,21 +1,25 @@
 {
-  "version": "v1",
-  "body": {
-    "meta": {},
-    "action": "get",
-    "input": {
-      "route": "/get",
-      "headers": { "Referer": "https://google.com" }
+    "body": {
+        "action": "get",
+        "connection": {
+            "base_url": null,
+            "basic_auth_credentials": {
+                "password": null,
+                "username": null
+            },
+            "default_headers": {
+                "User-Agent": null
+            },
+            "ssl_verify": null
+        },
+        "input": {
+            "headers": {
+                "Referer": "https://google.com"
+            },
+            "route": "/get"
+        },
+        "meta": {}
     },
-    "connection": {
-      "default_headers": { "User-Agent": "Mozilla/5.0" },
-      "base_url": "https://httpbin.org",
-      "ssl_verify": false,
-      "basic_auth_credentials": {
-        "username": "foo",
-        "password": "bar"
-      }
-    }
-  },
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

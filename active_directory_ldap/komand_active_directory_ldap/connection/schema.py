@@ -43,10 +43,10 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "use_ssl",
-    "username_password",
     "host",
-    "port"
+    "port",
+    "use_ssl",
+    "username_password"
   ],
   "definitions": {
     "credential_username_password": {

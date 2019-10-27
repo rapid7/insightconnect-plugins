@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "sha256_extractor",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "file": null,
+            "str": "v6grb6rb78e67e t87rb6rtbrt6b fb83817170be1069dbb8ca491817d0c6653ec882a4a397bcef007b03db1f8715 7866v87rev6t78eb687s6bvev87"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

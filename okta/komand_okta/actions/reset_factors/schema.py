@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Reset all multifactors for user by email"
+
+
 class Input:
     EMAIL = "email"
     

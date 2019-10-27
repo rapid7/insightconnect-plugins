@@ -1,14 +1,14 @@
 {
-  "type": "action_start",
-  "version": "v1",
-  "body": {
-    "action": "view_task",
-    "meta": {},
-    "connection": {
-      "url": ""
+    "body": {
+        "action": "view_task",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "task_id": 22
+        },
+        "meta": {}
     },
-    "input": {
-      "task_id": 22
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

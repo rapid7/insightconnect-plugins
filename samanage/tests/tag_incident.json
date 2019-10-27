@@ -1,18 +1,21 @@
 {
-  "body": {
-    "action": "tag_incident",
-    "meta": {},
-    "input": {
-      "incident_id": 31851783,
-      "tags": ["tag1", "tag2"]
+    "body": {
+        "action": "tag_incident",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "incident_id": 31851783,
+            "tags": [
+                "tag1",
+                "tag2"
+            ]
+        },
+        "meta": {}
     },
-    "connection": {
-      "eu_customer": false,
-      "token": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

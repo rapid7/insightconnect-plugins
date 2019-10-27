@@ -1,8 +1,9 @@
 import komand
-from .schema import DisplaySearchResultsInput, DisplaySearchResultsOutput
+from .schema import DisplaySearchResultsInput, DisplaySearchResultsOutput, Input, Output, Component
 # Custom imports below
 import splunklib.results as results
 from time import sleep
+from komand.exceptions import PluginException
 
 
 class DisplaySearchResults(komand.Action):
@@ -10,20 +11,22 @@ class DisplaySearchResults(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='display_search_results',
-                description='Displays the search results from a job',
+                description=Component.DESCRIPTION,
                 input=DisplaySearchResultsInput(),
                 output=DisplaySearchResultsOutput())
 
     def run(self, params={}):
-        job_id = params.get("job_id")
-        timeout = params.get("timeout")
+        job_id = params.get(Input.JOB_ID)
+        timeout = params.get(Input.TIMEOUT)
         timer_step = 0.2  # What we should increment the timeout counter by
 
         try:
             search_job = self.connection.client.jobs[job_id]
         except KeyError as error:
             self.logger.error(error)
-            raise
+            raise PluginException(cause="Unable to find job.",
+                                  assistance="Ensure the provided job ID input is valid.",
+                                  data=f"Job ID: {job_id}")
 
         timer = 0  # Keep track of the timeout
 
@@ -44,7 +47,4 @@ class DisplaySearchResults(komand.Action):
             if isinstance(result, dict):
                 gathered_results.append(result)
 
-        return {"results": gathered_results}
-
-    def test(self):
-        return {}
+        return {Output.SEARCH_RESULTS: gathered_results}

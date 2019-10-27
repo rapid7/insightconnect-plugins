@@ -14,12 +14,13 @@ class Input:
 
 class Output:
     ADDRESSSPACEDESC = "addressSpaceDesc"
+    FOUND = "found"
     MAXADDRESS = "maxAddress"
     MINADDRESS = "minAddress"
     NETMASK = "netmask"
     NETWORKADDRESS = "networkAddress"
     NUMPOSSIBLEHOSTS = "numPossibleHosts"
-    REPORTEDIPS = "reportedIPs"
+    REPORTEDADDRESS = "reportedAddress"
     
 
 class CheckCidrInput(komand.Input):
@@ -63,25 +64,31 @@ class CheckCidrOutput(komand.Output):
       "type": "string",
       "title": "Address Space Description",
       "description": "Address space description",
-      "order": 3
+      "order": 6
+    },
+    "found": {
+      "type": "boolean",
+      "title": "Found",
+      "description": "Whether the CIDR was found in the database",
+      "order": 8
     },
     "maxAddress": {
       "type": "string",
       "title": "Maximum Address",
       "description": "Maximum address",
-      "order": 2
+      "order": 4
     },
     "minAddress": {
       "type": "string",
       "title": "Minimum Address",
       "description": "Minimum address",
-      "order": 4
+      "order": 3
     },
     "netmask": {
       "type": "string",
       "title": "Netmask",
       "description": "Netmask",
-      "order": 5
+      "order": 2
     },
     "networkAddress": {
       "type": "string",
@@ -93,9 +100,9 @@ class CheckCidrOutput(komand.Output):
       "type": "integer",
       "title": "Number of Hosts",
       "description": "Number of possible hosts",
-      "order": 6
+      "order": 5
     },
-    "reportedIPs": {
+    "reportedAddress": {
       "type": "array",
       "title": "Reported IPs",
       "description": "List of reported IPs",
@@ -105,45 +112,43 @@ class CheckCidrOutput(komand.Output):
       "order": 7
     }
   },
+  "required": [
+    "found"
+  ],
   "definitions": {
     "reportedIPs": {
       "type": "object",
       "title": "reportedIPs",
       "properties": {
-        "CountryCode": {
-          "type": "string",
-          "title": "Country Code",
-          "order": 1
-        },
-        "IP": {
-          "type": "string",
-          "title": "IP",
-          "order": 2
-        },
-        "IsWhitelisted": {
-          "type": "integer",
-          "title": "Is Whitelisted",
-          "order": 3
-        },
-        "MostRecentReport": {
-          "type": "string",
-          "title": "Most Recent Report",
-          "order": 4
-        },
-        "NumReports": {
-          "type": "integer",
-          "title": "Number of Reports",
-          "order": 5
-        },
-        "Public": {
-          "type": "integer",
-          "title": "Public",
-          "order": 6
-        },
         "abuseConfidenceScore": {
           "type": "integer",
           "title": "Abuse Confidence Score",
-          "order": 7
+          "description": "Confidence that this IP is abusive",
+          "order": 4
+        },
+        "countryCode": {
+          "type": "string",
+          "title": "Country Code",
+          "description": "Country code of IP",
+          "order": 5
+        },
+        "ipAddress": {
+          "type": "string",
+          "title": "IP",
+          "description": "IP Address of reported resource",
+          "order": 1
+        },
+        "mostRecentReport": {
+          "type": "string",
+          "title": "Most Recent Report",
+          "description": "Most recent report for this IP",
+          "order": 3
+        },
+        "numReports": {
+          "type": "integer",
+          "title": "Number of Reports",
+          "description": "Number of reports of this IP",
+          "order": 2
         }
       }
     }

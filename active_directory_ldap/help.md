@@ -73,6 +73,8 @@ Example output:
 
 This action is used to run an LDAP query.
 
+For more information on LDAP queries see https://ldap3.readthedocs.io/tutorial_searches.html
+
 #### Input
 
 |Name|Type|Default|Required|Description|Enum|
@@ -319,7 +321,7 @@ The connection configuration accepts the following parameters:
 
 If you cannot connect, ensure that network access is available, and view the logs to identify any auth errors.
 
-For the Add User action it is recomended that SSL be enabled. With out SSL the action is only paracaly funcational.
+For the Add User action it is recommended that SSL be enabled. Without SSL the action is only partially functional.
 It will create the user, but it will not be able to assign a password or enable the account.
 
 SSL must be enabled for the Reset Password action to function.
@@ -327,6 +329,9 @@ SSL must be enabled for the Reset Password action to function.
 To look up a Distinguished Name (DN) in Microsoft AD use the query action. Use the search filter (sAMAccountName=objectname ) where
 objectname is the logon name of the user you are looking for. The DN can then be fed into another action by Repeating a collection for
 the query results, and then using the variable step $item.dn
+
+For the Query action, this plugin does not support objects that use `*`, `\`, or an unpaired `\(\)` as part of their names.
+paired `\(\)` are supported
 
 ## Workflows
 
@@ -348,11 +353,14 @@ Examples:
 * 3.0.1 - Bug fix preventing successful connections
 * 3.1.0 - Add user action expanded to allow setting of all attributes
 * 3.1.1 - Bug fix for normalizing Distinguished Name
-* 3.1.2 - Update help to clarify use of ldap URI prefix
+* 3.1.2 - Update help to clarify use of LDAP URI prefix
 * 3.1.3 - Update action descriptions
 * 3.1.4 - Add Connection test | Improve error handling in Connection
 * 3.2.0 - New action Force Password Reset
 * 3.2.1 - Fix issue regarding escaping Distinguished Names containing commas
+* 3.2.2 - Fix issue regarding escaping of `(` and `)` in the Query action
+* 3.2.3 - Fix issue with Add User action disable and enable flags | Update Query action to allow for `<=` and `>=` searches
+* 3.2.4 - Fix issue with Query where some output was not unescaped properly | Update to exception handling to leverage PluginException
 
 ## References
 

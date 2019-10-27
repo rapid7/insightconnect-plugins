@@ -1,20 +1,26 @@
 {
-  "body": {
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "server": ""
+    "body": {
+        "action": "search",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null
+        },
+        "input": {
+            "cust_id": "Test Customer",
+            "dynamic_fields": [
+                {
+                    "name": "TestName1",
+                    "operator": "Like",
+                    "value": "TestV%"
+                }
+            ],
+            "queue": "Test"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-      "cust_id": "Test Customer",
-      "dynamic_fields": [{"name": "TestName1", "value": "TestV%", "operator": "Like"}],
-      "queue": "Test"
-    },
-    "action": "search"
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

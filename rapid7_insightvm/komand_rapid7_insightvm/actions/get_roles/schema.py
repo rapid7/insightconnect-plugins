@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List role details"
+
+
 class Input:
     NAME = "name"
     

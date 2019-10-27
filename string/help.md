@@ -146,6 +146,32 @@ Example output:
 }
 ```
 
+### Set Encoding
+
+This action is used to encode a string.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|encoding|string|None|True|Encoding to use|['UTF-8', 'ASCII']|
+|error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|
+|string|string|None|True|String to encode|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|encoded|string|True|Encoded string|
+
+Example output:
+
+```
+{
+  "encoded": "hello"
+}
+```
+
 ## Triggers
 
 This plugin does not contain any triggers.
@@ -163,6 +189,7 @@ If this is the case, consider using the Python 3 Script plugin instead.
 
 * 1.0.0 - Initial plugin
 * 1.0.1 - Update plugin tag from `util` to `utilities` for Marketplace searchability
+* 1.1.0 - New action Set Encoding
 
 ## Workflows
 

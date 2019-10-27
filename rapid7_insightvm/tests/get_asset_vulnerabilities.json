@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "get_asset_vulnerabilities",
-    "meta": {},
-    "input": {
-      "asset_id": "23650"
+    "body": {
+        "action": "get_asset_vulnerabilities",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "asset_id": "23650"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "url": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

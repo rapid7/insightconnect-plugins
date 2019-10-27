@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='paloalto_wildfire-rapid7-plugin',
-      version='1.0.2',
+      version='1.1.0',
       description='WildFire cloud-based threat analysis service is the industry\'s most advanced analysis and prevention engine for highly evasive zero-day exploits and malware',
       author='rapid7',
       author_email='',

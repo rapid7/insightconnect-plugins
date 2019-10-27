@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: mcafee_epo
 title: McAfee ePO
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: McAfee ePolicy Orchestrator provides a web API for McAfee endpoint protection
   management activities
 version: 1.0.0

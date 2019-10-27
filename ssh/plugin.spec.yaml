@@ -5,7 +5,8 @@ description: The SSH protocol is a method for secure remote login from one compu
   to another
 version: 1.0.1
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - ssh
 - remote

@@ -1,22 +1,22 @@
 {
-  "body": {
-    "action": "enroll_user",
-    "meta": {},
-    "input": {
-      "email": "",
-      "time_to_expiration": 0,
-      "username": ""
+    "body": {
+        "action": "enroll_user",
+        "connection": {
+            "hostname": null,
+            "integration_key": {
+                "secretKey": null
+            },
+            "secret_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "email": "",
+            "time_to_expiration": 0,
+            "username": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "hostname": "",
-      "integration_key": {
-        "secretKey": ""
-      },
-      "secret_key": {
-        "secretKey": ""
-      }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

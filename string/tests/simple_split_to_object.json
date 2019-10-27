@@ -1,14 +1,14 @@
 {
-  "body": {
-    "action": "split_to_object",
-    "meta": {},
-    "input": {
-      "block_delimiter": "",
-      "string": "Dog=Percy",
-      "string_delimiter": "="
+    "body": {
+        "action": "split_to_object",
+        "connection": null,
+        "input": {
+            "block_delimiter": "",
+            "string": "Dog=Percy",
+            "string_delimiter": "="
+        },
+        "meta": {}
     },
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

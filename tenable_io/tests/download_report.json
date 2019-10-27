@@ -1,21 +1,21 @@
 {
     "body": {
-      "action": "download_report",
-      "meta": {},
-      "input": {
-        "file_format": "CSV",
-        "name": "",
-        "report_type": "Vulnerabilities by Host"
-      },
-      "connection": {
-        "access_key": {
-          "secretKey": ""
+        "action": "download_report",
+        "connection": {
+            "access_key": {
+                "secretKey": null
+            },
+            "secret_key": {
+                "secretKey": null
+            }
         },
-        "secret_key": {
-          "secretKey": ""
-        }
-      }
+        "input": {
+            "file_format": "CSV",
+            "name": "",
+            "report_type": "Vulnerabilities by Host"
+        },
+        "meta": {}
     },
     "type": "action_start",
     "version": "v1"
-  }
+}

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action is used to search for data related to hashes of a specified type"
+
+
 class Input:
     ALGORITHM = "algorithm"
     DIRECTION = "direction"
@@ -76,11 +80,11 @@ class SearchHashesInput(komand.Input):
     }
   },
   "required": [
-    "limit",
-    "from",
-    "orderby",
+    "algorithm",
     "direction",
-    "algorithm"
+    "from",
+    "limit",
+    "orderby"
   ]
 }
     """)

@@ -1,27 +1,27 @@
 {
-  "body": {
-    "action": "add_user",
-    "meta": {},
-    "input": {
-      "alias": [],
-      "email": "",
-      "firstname": "",
-      "lastname": "",
-      "notes": "",
-      "realname": "",
-      "status": "active",
-      "username": "testuser01"
-    },
-    "connection": {
-        "hostname": "",
-        "integration_key": {
-          "secretKey": ""
+    "body": {
+        "action": "add_user",
+        "connection": {
+            "hostname": null,
+            "integration_key": {
+                "secretKey": null
+            },
+            "secret_key": {
+                "secretKey": null
+            }
         },
-        "secret_key": {
-          "secretKey": ""
-        }
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+        "input": {
+            "alias": [],
+            "email": "",
+            "firstname": "",
+            "lastname": "",
+            "notes": "",
+            "realname": "",
+            "status": "active",
+            "username": "testuser01"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
 }

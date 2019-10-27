@@ -1,20 +1,20 @@
 {
-  "body": {
-    "input": {
-      "user_role": "analyst",
-      "user_email": "bob@komand.com",
-      "user_name": "Bob"
+    "body": {
+        "action": "add_user",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "email": null,
+            "url": null
+        },
+        "input": {
+            "user_email": "bob@komand.com",
+            "user_name": "Bob",
+            "user_role": "analyst"
+        },
+        "meta": {}
     },
-    "action": "add_user",
-    "connection": {
-      "email": "jon@komand.com",
-      "url": "http://192.168.99.100:5000",
-      "api_key": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

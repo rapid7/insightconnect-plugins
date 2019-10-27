@@ -3,18 +3,18 @@
         "action": "create_archive",
         "connection": null,
         "input": {
-            "files":[
+            "algorithm": "zip",
+            "filename": "tester.zip",
+            "files": [
                 {
-                    "filename": "test1.txt",
-                    "content": "dGV4dDIK"
+                    "content": "dGV4dDIK",
+                    "filename": "test1.txt"
                 },
                 {
-                    "filename": "test2.txt",
-                    "content": "dGV4dDE="
+                    "content": "dGV4dDE=",
+                    "filename": "test2.txt"
                 }
-            ],
-            "algorithm":"zip",
-            "filename":"tester.zip"
+            ]
         },
         "meta": {}
     },

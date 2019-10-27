@@ -2,7 +2,8 @@ plugin_spec_version: v2
 name: logstash
 title: Logstash
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 description: Data collection engine with real-time pipelining capabilities
 version: 1.0.0
 tags:

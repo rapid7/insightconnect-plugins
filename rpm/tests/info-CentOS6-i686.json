@@ -1,23 +1,23 @@
 {
-  "body": {
-    "action": "info",
-    "meta": {},
-    "input": {
-      "release": "",
-      "version": "",
-      "arch": "i686",
-      "epoch": "",
-      "repo": "",
-      "name": "powertop",
-      "key": "",
-      "distro": "CentOS 6"
+    "body": {
+        "action": "info",
+        "connection": {
+            "password": null,
+            "server": null,
+            "user": null
+        },
+        "input": {
+            "arch": "i686",
+            "distro": "CentOS 6",
+            "epoch": "",
+            "key": "",
+            "name": "powertop",
+            "release": "",
+            "repo": "",
+            "version": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "server": "",
-      "user": "",
-      "password": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

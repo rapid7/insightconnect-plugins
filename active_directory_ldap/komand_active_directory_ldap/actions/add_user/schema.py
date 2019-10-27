@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Adds the specified Active Directory user"
+
+
 class Input:
     ACCOUNT_DISABLED = "account_disabled"
     ADDITIONAL_PARAMETERS = "additional_parameters"
@@ -89,13 +93,13 @@ class AddUserInput(komand.Input):
     }
   },
   "required": [
+    "account_disabled",
     "domain_name",
-    "logon_name",
     "first_name",
     "last_name",
-    "account_disabled",
-    "user_ou",
+    "logon_name",
     "password",
+    "user_ou",
     "user_principal_name"
   ]
 }

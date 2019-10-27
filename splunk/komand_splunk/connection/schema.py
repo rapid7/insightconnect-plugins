@@ -43,7 +43,7 @@ class ConnectionSchema(komand.Input):
     "port": {
       "type": "integer",
       "title": "Port",
-      "description": "Port the Splunk API is listening on",
+      "description": "Port the Splunk API is listening on. Default is 8089",
       "default": 8089,
       "order": 2
     },
@@ -62,10 +62,10 @@ class ConnectionSchema(komand.Input):
   },
   "required": [
     "host",
-    "port",
-    "use_ssl",
     "license",
-    "ssl_verify"
+    "port",
+    "ssl_verify",
+    "use_ssl"
   ],
   "definitions": {
     "credential_username_password": {

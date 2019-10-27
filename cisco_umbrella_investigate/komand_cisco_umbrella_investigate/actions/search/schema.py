@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "The pattern search functionality in Investigate uses regular expressions (RegEx) to search against the Investigate database"
+
+
 class Input:
     EXPRESSION = "expression"
     INCLUDE_CATEGORY = "include_category"
@@ -98,11 +102,11 @@ class SearchOutput(komand.Output):
     }
   },
   "required": [
-    "matches",
     "expression",
-    "totalResults",
+    "limit",
+    "matches",
     "moreDataAvailable",
-    "limit"
+    "totalResults"
   ]
 }
     """)

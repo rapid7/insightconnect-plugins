@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return a file, or a file-like object, such as a process running in memory"
+
+
 class Input:
     HASH = "hash"
     LIMIT = "limit"
@@ -128,15 +132,15 @@ class SampleOutput(komand.Output):
         }
       },
       "required": [
-        "sha256",
-        "md5",
-        "size",
         "avresults",
-        "sha1",
-        "magicType",
-        "threatScore",
         "firstSeen",
         "lastSeen",
+        "magicType",
+        "md5",
+        "sha1",
+        "sha256",
+        "size",
+        "threatScore",
         "visible"
       ]
     }

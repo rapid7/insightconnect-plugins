@@ -1,19 +1,19 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "license": {
-        "secretKey": ""
-      },
-      "user": 118625
+    "body": {
+        "action": "device_lookup",
+        "connection": {
+            "license": {
+                "secretKey": null
+            },
+            "user": null
+        },
+        "input": {
+            "accept_language": "",
+            "address": "8.8.8.8.8",
+            "user_agent": ""
+        },
+        "meta": {}
     },
-    "action": "device_lookup",
-    "meta": {},
-    "input": {
-      "address": "8.8.8.8.8",
-      "accept_language": "",
-      "user_agent": ""
-    }
-  }
+    "type": "action_start",
+    "version": "v1"
 }

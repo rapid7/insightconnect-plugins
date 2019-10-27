@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "user_status",
-    "meta": {},
-    "input": {
-      "username": "helpdesk"
+    "body": {
+        "action": "user_status",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null
+        },
+        "input": {
+            "username": "helpdesk"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "server": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update an existing site"
+
+
 class Input:
     DESCRIPTION = "description"
     ENGINE_ID = "engine_id"

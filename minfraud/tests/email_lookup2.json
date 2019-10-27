@@ -1,19 +1,19 @@
 {
-  "body": {
-    "action": "email_lookup",
-    "meta": {},
-    "connection": {
-      "license": {
-        "secretKey": ""
-      },
-      "user": 118625
+    "body": {
+        "action": "email_lookup",
+        "connection": {
+            "license": {
+                "secretKey": null
+            },
+            "user": null
+        },
+        "input": {
+            "address": "8.8.8.8",
+            "domain": "",
+            "email": ""
+        },
+        "meta": {}
     },
-    "input": {
-      "address": "8.8.8.8",
-      "domain": "",
-      "email": ""
-    }
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

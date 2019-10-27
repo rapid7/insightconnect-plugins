@@ -1,21 +1,21 @@
 {
-  "type": "action_start",
-  "body": {
-    "connection": {
-      "access_key": {
-        "secretKey": ""
-      },
-      "hostname": "",
-      "secret_key": {
-        "secretKey": ""
-      },
-      "ssl_verify": true
+    "body": {
+        "action": "get_scans",
+        "connection": {
+            "access_key": {
+                "secretKey": null
+            },
+            "hostname": null,
+            "secret_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null
+        },
+        "input": {
+            "scanner_name": "Local Scanner"
+        },
+        "meta": {}
     },
-    "input": {
-      "scanner_name": "Local Scanner"
-    },
-    "action": "get_scans",
-    "meta": {}
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

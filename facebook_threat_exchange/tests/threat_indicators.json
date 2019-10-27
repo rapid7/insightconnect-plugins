@@ -1,25 +1,25 @@
 {
-  "version": "v1",
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "connection": {
-      "app_id": "Facebook App ID",
-      "secret_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "threat_indicators",
+        "connection": {
+            "app_id": null,
+            "secret_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "limit": "",
+            "since": "",
+            "sort_by": "RELEVANCE",
+            "sort_order": "ASCENDING",
+            "strict_text": false,
+            "text": "CMD",
+            "threat_type": "",
+            "type": "CMD_LINE",
+            "until": ""
+        },
+        "meta": {}
     },
-    "input": {
-      "type": "CMD_LINE",
-      "text": "CMD",
-      "threat_type": "",
-      "sort_by": "RELEVANCE",
-      "limit": "",
-      "until": "",
-      "strict_text": false,
-      "sort_order": "ASCENDING",
-      "since": ""
-    },
-    "action": "threat_indicators"
-  }
+    "type": "action_start",
+    "version": "v1"
 }

@@ -42,7 +42,8 @@ class Send(komand.Action):
         msg.attach(MIMEText(params.get('message'), 'plain' if not html else 'html'))
 
         # Check if attachment exists. If it does, attach it!
-        if len(params.get("attachment", {"content": "", "filename": ""}).get("content")) > 0:
+        attachment = params.get("attachment", {"content": "", "filename": ""})
+        if attachment is not None and len(attachment.get("content")) > 0:
             self.logger.info("Found attachment! Attaching...")
             attachment_base64 = params.get("attachment").get("content")
             attachment_filename = params.get("attachment").get("filename")

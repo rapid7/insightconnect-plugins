@@ -1,12 +1,12 @@
 {
-  "body": {
-    "meta": {},
-    "input": {
-      "alert": "** Alert 1471016950.7633: - ossec,rootcheck,\n2016 Aug 12 15:49:10 (komand.dev.komand.local) any->rootcheck\nRule: 510 (level 7) -> 'Host-based anomaly detection event (rootcheck).'\nFile '/var/lib/docker/containers/d1cc36313c308122fb4170a6e6637176ed13763c98f7ef1473470ddc800c054b/hostconfig.json' is owned by root and has written permissions to anyone.\n"
+    "body": {
+        "action": "rootcheck_parse",
+        "connection": null,
+        "input": {
+            "alert": "** Alert 1471016950.7633: - ossec,rootcheck,\n2016 Aug 12 15:49:10 (komand.dev.komand.local) any->rootcheck\nRule: 510 (level 7) -> 'Host-based anomaly detection event (rootcheck).'\nFile '/var/lib/docker/containers/d1cc36313c308122fb4170a6e6637176ed13763c98f7ef1473470ddc800c054b/hostconfig.json' is owned by root and has written permissions to anyone.\n"
+        },
+        "meta": {}
     },
-    "action": "rootcheck_parse",
-    "connection": null
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

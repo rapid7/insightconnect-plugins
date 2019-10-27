@@ -1,24 +1,24 @@
 {
-  "body": {
-    "meta": {},
-    "action": "post",
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "post",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "paste_expire_date": "10 Minutes",
+            "paste_format": "Python",
+            "paste_name": "Test post",
+            "paste_private": "private",
+            "text": "def test:\n]tprint 1"
+        },
+        "meta": {}
     },
-    "input": {
-      "paste_private": "private",
-      "paste_name": "Test post",
-      "text": "def test:\n]tprint 1",
-      "paste_format": "Python",
-      "paste_expire_date": "10 Minutes"
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

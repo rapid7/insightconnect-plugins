@@ -6,7 +6,7 @@ from komand_recorded_future import connection, actions, triggers
 
 Name = 'Recorded Future'
 Vendor = 'rapid7'
-Version = '1.0.2'
+Version = '1.5.2'
 Description = 'Recorded Future arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats'
 
 
@@ -44,6 +44,8 @@ class ICONRecordedFuture(komand.Plugin):
         self.add_action(actions.LookupHash())
 
         self.add_action(actions.LookupMalware())
+
+        self.add_action(actions.LookupUrl())
 
         self.add_action(actions.LookupVulnerability())
 

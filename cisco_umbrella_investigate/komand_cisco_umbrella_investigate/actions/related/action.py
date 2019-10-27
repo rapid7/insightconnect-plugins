@@ -1,6 +1,7 @@
 import komand
 from .schema import RelatedInput, RelatedOutput
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class Related(komand.Action):
@@ -16,8 +17,7 @@ class Related(komand.Action):
         try:
             related = self.connection.investigate.related(domain)
         except Exception as e:
-            self.logger.error("Related: Run: Problem with request")
-            raise e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
         founded = related.get('found')
         if founded:
             return {"related": related.get('tb1')}

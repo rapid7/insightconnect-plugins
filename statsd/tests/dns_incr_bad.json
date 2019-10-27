@@ -1,25 +1,25 @@
 {
-  "body": {
-    "action": "incr",
-    "input": {
-      "count": 1,
-      "rate": 1,
-      "stat": "perstest1"
+    "body": {
+        "action": "incr",
+        "connection": {
+            "host": null,
+            "port": null,
+            "prefix": null,
+            "protocol": null,
+            "tcp": {
+                "timeout": null
+            },
+            "udp": {
+                "maxudpsize": null
+            }
+        },
+        "input": {
+            "count": 1,
+            "rate": 1,
+            "stat": "perstest1"
+        },
+        "meta": {}
     },
-    "connection": {
-      "udp": {
-        "maxudpsize": 512
-      },
-      "protocol": "TCP",
-      "prefix": "",
-      "tcp": {
-        "timeout": 5
-      },
-      "host": "",
-      "port": 2003
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

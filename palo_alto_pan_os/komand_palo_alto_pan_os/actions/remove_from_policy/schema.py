@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove a rule from a PAN-OS security policy"
+
+
 class Input:
     ACTION = "action"
     APPLICATION = "application"

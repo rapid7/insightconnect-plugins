@@ -1,19 +1,24 @@
 {
-  "body": {
-    "action": "build_job",
-    "meta": {},
-    "input": {
-      "name": "",
-      "parameters": {"KOMAND_FORCE_UPDATE": false, "KOMAND_SKIP_VALIDATION": false, "KOMAND_CLEAN": true, "KOMAND_PLUGIN": "google_drive"}
+    "body": {
+        "action": "build_job",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "input": {
+            "name": "",
+            "parameters": {
+                "KOMAND_CLEAN": true,
+                "KOMAND_FORCE_UPDATE": false,
+                "KOMAND_PLUGIN": "google_drive",
+                "KOMAND_SKIP_VALIDATION": false
+            }
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "password": "",
-        "username": ""
-      },
-      "host": ""
-    }
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

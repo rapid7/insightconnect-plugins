@@ -1,17 +1,17 @@
 {
-  "type": "action_start",
-  "body": {
-    "meta": {},
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      }
+    "body": {
+        "action": "rr_history",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "domain": "bibikun.ru",
+            "type": "A"
+        },
+        "meta": {}
     },
-    "action": "rr_history",
-    "input": {
-      "domain": "bibikun.ru",
-      "type": "A"
-    }
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

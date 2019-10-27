@@ -1,25 +1,25 @@
 {
-  "body": {
-    "action": "create_indicator",
-    "input": {
-      "status": "Active",
-      "source": "news media",
-      "type": "String",
-      "value": "a string value"
+    "body": {
+        "action": "create_indicator",
+        "connection": {
+            "client_id": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "proxy": null
+        },
+        "input": {
+            "source": "news media",
+            "status": "Active",
+            "type": "String",
+            "value": "a string value"
+        },
+        "meta": {}
     },
-    "connection": {
-      "credentials": {
-        "username": "",
-        "password": ""
-      },
-      "host": "",
-      "proxy": "",
-      "client_id": {
-        "secretKey": ""
-      }
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

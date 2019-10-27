@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update an existing site scope of included asset groups"
+
+
 class Input:
     ID = "id"
     INCLUDED_ASSET_GROUPS = "included_asset_groups"

@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "reputation",
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "username": ""
+    "body": {
+        "action": "reputation",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "domain": "google.com",
+            "include_reasons": false
+        },
+        "meta": {}
     },
-    "meta": {},
-    "input": {
-      "domain": "google.com",
-      "include_reasons": false
-    }
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

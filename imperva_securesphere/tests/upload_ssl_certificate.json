@@ -1,27 +1,27 @@
 {
-  "type": "action_start",
-  "body": {
-    "input": {
-      "sslkeyname": "mytestssl",
-      "hsm": false,
-      "webservicename": "Komand Service",
-      "servergroupname": "Komand Group",
-      "private": "",
-      "pkcs12file": "",
-      "pkcs12password": "",
-      "format": "pem",
-      "certificate": "",
-      "sitename": "Default Site"
+    "body": {
+        "action": "upload_ssl_certificate",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "certificate": "",
+            "format": "pem",
+            "hsm": false,
+            "pkcs12file": "",
+            "pkcs12password": "",
+            "private": "",
+            "servergroupname": "Komand Group",
+            "sitename": "Default Site",
+            "sslkeyname": "mytestssl",
+            "webservicename": "Komand Service"
+        },
+        "meta": {}
     },
-    "meta": {},
-    "connection": {
-      "url": "",
-      "credentials": {
-        "password": "",
-        "username": ""
-      }
-    },
-    "action": "upload_ssl_certificate"
-  },
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

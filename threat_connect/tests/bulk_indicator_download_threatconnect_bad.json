@@ -1,23 +1,23 @@
 {
-  "body": {
-    "action": "bulk_indicator_download",
-    "input": {
-      "attribute":"",
-      "date_added":"",
-      "last_modified":"",
-      "rating":"",
-      "tag":"",
-      "type":"",
-      "owner": "&T&T*GIUY"
+    "body": {
+        "action": "bulk_indicator_download",
+        "connection": {
+            "api_access_id": null,
+            "api_base_url": null,
+            "api_default_org": null,
+            "api_secret_key": null
+        },
+        "input": {
+            "attribute": "",
+            "date_added": "",
+            "last_modified": "",
+            "owner": "&T&T*GIUY",
+            "rating": "",
+            "tag": "",
+            "type": ""
+        },
+        "meta": {}
     },
-    "connection": {
-      "api_access_id": "",
-      "api_default_org": "",
-      "api_secret_key": "",
-      "api_base_url": "https://sandbox.threatconnect.com/api"
-    },
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
+    "type": "action_start",
+    "version": "v1"
 }

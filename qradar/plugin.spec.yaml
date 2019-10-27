@@ -4,7 +4,8 @@ title: QRadar Security Intelligence Platform
 description: IBM QRadar is an enterprise security information and event management
 version: 2.0.0
 vendor: rapid7
-status: ["unsupported"]
+support: community
+status: []
 tags:
 - qradar
 - siem
