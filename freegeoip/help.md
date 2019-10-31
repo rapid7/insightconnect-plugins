@@ -3,7 +3,7 @@
 
 ## About
 
-[FreeGeoIP](https://freegeoip.net/) is a free service for Geo IP lookups. 
+[FreeGeoIP](https://freegeoip.net/) is a free service for Geo IP lookups.
 
 ## Actions
 
