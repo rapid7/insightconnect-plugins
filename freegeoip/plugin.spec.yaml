@@ -1,7 +1,7 @@
 plugin_spec_version: v2
 name: freegeoip
 title: FreeGeoIP
-description: Lookup GeoIP information for a host
+description: Lookup GeoIP information for a host 
 version: 1.0.0
 vendor: rapid7
 support: community
