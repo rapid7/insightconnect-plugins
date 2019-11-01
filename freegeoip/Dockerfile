@@ -9,7 +9,7 @@ LABEL organization=komand
 # Add any custom package dependencies here!
 # NOTE: Add pip packages to requirements.txt
 
-# End package dependencies
+# End package dependencies.
 
 # Add source code 
 WORKDIR /python/src
