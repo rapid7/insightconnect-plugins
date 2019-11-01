@@ -30,7 +30,7 @@ class SearchForSampleReportByDomain(komand.Action):
                 raise PluginException(cause=f"Could not find sample with domain {domain}",
                                       assistance=f"Please check your input domain and verify it matches the sample "
                                                  f"filename. It should look exactly like \'{domain_filename}\'")
-        except json.JSONDecodeError as e:
+        except json.JSONDecodeError:
             raise PluginException(
                 preset=ConnectionTestException.Preset.INVALID_JSON,
                 data=results.text

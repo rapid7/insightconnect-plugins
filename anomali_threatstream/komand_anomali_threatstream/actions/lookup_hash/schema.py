@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup a file hash in Anomali"
+
+
 class Input:
     HASH = "hash"
     

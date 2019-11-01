@@ -1,0 +1,647 @@
+{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#teams('7af08a76-01fe-4a1d-bfa1-84d2b5509cdd')/channels('19%3A4af30b754058411fa475d2b416417089%40thread.skype')/messages",
+    "@odata.count": 20,
+    "@odata.nextLink": "https://graph.microsoft.com/beta/teams/7af08a76-01fe-4a1d-bfa1-84d2b5509cdd/channels/19:4af30b754058411fa475d2b416417089@thread.skype/messages?$skiptoken=%2bRID%3a~vpsQAJ9uAC1as1EAAABQCw%3d%3d%23RT%3a1%23TRC%3a20%23RTD%3auDcxOTo0YWYzMGI3NTQwNTg0MTFmYTQ3NWQyYjQxNjQxNzA4OUB0aHJlYWQuc2t5cGU7MTU3MTk1MzI2OTc0Nw%3d%3d%23ISV%3a1%23FPC%3aAggvAQAAQC0AAEYBAABALQAALwEAAEAtAAAUAEEtBgAjgGmBAIBBAAAG2YABwIgAMQEAAEAtAAAMAEau2ILkg8ECBEAzgDkBAABALQAAAgAomj0BAABALQAAAgDsvj4BAABALQAAAgDFh0ABAABALQAABABYvRCCQQEAAEAtAAAOABuAHYCwgB2GmYG4gSGAQwEAAEAtAAACAA6eRgEAAEAtAAAgAEEyBAJrgCWAYQBAvFIAAPAPAGEAQgAggC6AAsACQAAE",
+    "value": [
+        {
+            "id": "1571954116332",
+            "replyToId": null,
+            "etag": "1571954116332",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:55:16.332Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571954116332?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571954116332&parentMessageId=1571954116332",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "html",
+                "content": "<div>\n<div itemprop=\"copy-paste-block\">\n\n<div style=\"font-size:14px\">Regex is hard CHOPPA stuff</div>\n</div>\n</div>"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571954077141",
+            "replyToId": null,
+            "etag": "1571954077141",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:54:37.141Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571954077141?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571954077141&parentMessageId=1571954077141",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "Regex is hard CHOPPA stuff"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571954060191",
+            "replyToId": null,
+            "etag": "1571954060191",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:54:20.191Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571954060191?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571954060191&parentMessageId=1571954060191",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "The CHOPPA"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571954050026",
+            "replyToId": null,
+            "etag": "1571954050026",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:54:10.026Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571954050026?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571954050026&parentMessageId=1571954050026",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "CHOPPA"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953942053",
+            "replyToId": null,
+            "etag": "1571953942053",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:52:22.053Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953942053?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953942053&parentMessageId=1571953942053",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "GET TO DA CHOPPA test"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953810777",
+            "replyToId": null,
+            "etag": "1571953810777",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:50:10.777Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953810777?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953810777&parentMessageId=1571953810777",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "CHOPPA"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953798277",
+            "replyToId": null,
+            "etag": "1571953798277",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:49:58.277Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953798277?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953798277&parentMessageId=1571953798277",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "GET TO DA CHOPPA and some more text to test a regex"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953498025",
+            "replyToId": null,
+            "etag": "1571953498025",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:44:58.025Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953498025?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953498025&parentMessageId=1571953498025",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "8"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953497385",
+            "replyToId": null,
+            "etag": "1571953497385",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:44:57.385Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953497385?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953497385&parentMessageId=1571953497385",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "7"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953497105",
+            "replyToId": null,
+            "etag": "1571953497105",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:44:57.105Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953497105?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953497105&parentMessageId=1571953497105",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "6"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953496770",
+            "replyToId": null,
+            "etag": "1571953496770",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:44:56.77Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953496770?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953496770&parentMessageId=1571953496770",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "5"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953496515",
+            "replyToId": null,
+            "etag": "1571953496515",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:44:56.515Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953496515?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953496515&parentMessageId=1571953496515",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "4"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953496170",
+            "replyToId": null,
+            "etag": "1571953496170",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:44:56.17Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953496170?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953496170&parentMessageId=1571953496170",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "3"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953495815",
+            "replyToId": null,
+            "etag": "1571953495815",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:44:55.815Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953495815?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953495815&parentMessageId=1571953495815",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "2"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953495435",
+            "replyToId": null,
+            "etag": "1571953495435",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:44:55.435Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953495435?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953495435&parentMessageId=1571953495435",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "1"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953271172",
+            "replyToId": null,
+            "etag": "1571953271172",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:41:11.172Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953271172?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953271172&parentMessageId=1571953271172",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "5"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953270812",
+            "replyToId": null,
+            "etag": "1571953270812",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:41:10.812Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953270812?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953270812&parentMessageId=1571953270812",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "4"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953270337",
+            "replyToId": null,
+            "etag": "1571953270337",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:41:10.337Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953270337?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953270337&parentMessageId=1571953270337",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "3"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953270012",
+            "replyToId": null,
+            "etag": "1571953270012",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:41:10.012Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953270012?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953270012&parentMessageId=1571953270012",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "2"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1571953269747",
+            "replyToId": null,
+            "etag": "1571953269747",
+            "messageType": "message",
+            "createdDateTime": "2019-10-24T21:41:09.747Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": "",
+            "summary": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571953269747?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571953269747&parentMessageId=1571953269747",
+            "policyViolation": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "conversation": null,
+                "user": {
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "displayName": "Jon Schipp",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "body": {
+                "contentType": "text",
+                "content": "1"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        }
+    ]
+}

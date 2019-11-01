@@ -9,4 +9,4 @@ class Connection(komand.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
-        pass  # Pass because there is no connection needed, EoL plugin
+        pass

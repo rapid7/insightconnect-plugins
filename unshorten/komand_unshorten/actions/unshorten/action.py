@@ -25,6 +25,8 @@ class Unshorten(komand.Action):
 
         try:
             if out['error']:
+                if out['error'] == "Connection Error":
+                    out['error'] = "Unshorten.me is unable to resolve the URL"
                 self.logger.error(out.get('error'))
         except KeyError:
             # All good, no error key is present

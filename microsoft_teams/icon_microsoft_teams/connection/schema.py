@@ -4,7 +4,10 @@ import json
 
 
 class Input:
-    WEBHOOK = "webhook"
+    APPLICATION_ID = "application_id"
+    APPLICATION_SECRET = "application_secret"
+    DIRECTORY_ID = "directory_id"
+    USERNAME_PASSWORD = "username_password"
     
 
 class ConnectionSchema(komand.Input):
@@ -13,16 +16,81 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "webhook": {
+    "application_id": {
       "type": "string",
-      "title": "Webhook",
-      "description": "Webhook",
+      "title": "Application ID",
+      "description": "Application (client) ID",
       "order": 1
+    },
+    "application_secret": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Application Secret",
+      "description": "Application secret",
+      "order": 3
+    },
+    "directory_id": {
+      "type": "string",
+      "title": "Directory ID",
+      "description": "Directory (tenant) ID",
+      "order": 2
+    },
+    "username_password": {
+      "$ref": "#/definitions/credential_username_password",
+      "title": "Credentials",
+      "description": "Username and password",
+      "order": 4
     }
   },
   "required": [
-    "webhook"
-  ]
+    "application_id",
+    "application_secret",
+    "directory_id",
+    "username_password"
+  ],
+  "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "displayType": "password",
+          "description": "The shared secret key",
+          "format": "password"
+        }
+      },
+      "required": [
+        "secretKey"
+      ]
+    },
+    "credential_username_password": {
+      "id": "credential_username_password",
+      "type": "object",
+      "title": "Credential: Username and Password",
+      "description": "A username and password combination",
+      "properties": {
+        "password": {
+          "type": "string",
+          "title": "Password",
+          "displayType": "password",
+          "description": "The password",
+          "format": "password"
+        },
+        "username": {
+          "type": "string",
+          "title": "Username",
+          "description": "The username to log in with"
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    }
+  }
 }
     """)
 

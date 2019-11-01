@@ -1,4 +1,6 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: cisco_umbrella_enforcement
 title: Cisco Umbrella Enforcement
 vendor: rapid7
@@ -8,6 +10,9 @@ description: Cisco Umbrella Enforcement give technology partners the ability to 
   security events from their platform/service/appliance within a customer environment
   to the Cisco security cloud for enforcement
 version: 1.0.0
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - cisco
 - umbrella

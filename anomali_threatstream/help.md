@@ -125,18 +125,62 @@ Example output:
 }
 ```
 
-### Add Approval Indicator
+### Get Observables
 
-This action is used to import indicator(s) into Anomali with approval.
+This action is used to get observables.
 
 #### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|file|file|None|False|File of data to be imported into Anomali|None|
-|indicator_settings|indicator_settings|None|False|Settings needed for importing an indicator that needs approval|None|
+|value|string|None|False|Value|None|
 
-Indicator Settings
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|[]result|False|Results returned|
+
+Example output:
+
+```
+{
+  "results": [
+    {
+      "classification": "private",
+      "confidence": "17",
+      "date_first": "2019-10-16T16:12:48",
+      "date_last": "2019-10-21T14:01:39",
+      "detail": "Delivery",
+      "detail2": "imported by user 121",
+      "domain": "window.google",
+      "id": 112879000,
+      "import_session_id": 205,
+      "itype": "apt_domain",
+      "maltype": "Delivery",
+      "resource_uri": "/api/v1/intelligence/112879000/",
+      "severity": "very-high",
+      "source": "user@example.com",
+      "srcip": "127.0.53.53",
+      "state": "active",
+      "update_id": "272270002"
+    }
+  ]
+}
+```
+
+### Import Observable
+
+This action is used to import observable(s) into Anomali with approval.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|file|file|None|True|File of data to be imported into Anomali|None|
+|observable_settings|observable_settings|None|False|Settings needed for importing an observable that needs approval|None|
+
+Observable Settings
 
   Each mapping can have nothing passed or an iType:
   * When passing unstructured data via `file` its best that mappings be set.
@@ -146,7 +190,7 @@ Indicator Settings
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|import_indicator_response|False|Results from adding indicator(s)|
+|results|import_observable_response|False|Results from importing observable(s)|
 
 Example output:
 
@@ -183,6 +227,8 @@ If you're unable to import data without approval, the Anomali user configured in
 * 1.0.0 - Initial plugin
 * 1.1.0 - New action Add Approval Indicator
 * 2.0.0 - Support optional server SSL/TLS certificate validation
+* 3.0.0 - Add new action Get Observables | Rename action Add Approval Indicator to Import Observable | Add connection test
+* 3.0.1 - Update actions to use SSL Verify from connection settings
 
 ## Workflows
 
@@ -193,3 +239,68 @@ Examples:
 ## References
 
 * [Anomali ThreatStream](https://www.anomali.com/)
+
+## Custom Output Types
+
+### meta
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|limit|integer|False|Limit|
+|offset|integer|False|Offset|
+|total_count|integer|False|Total Count|
+
+### result
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|asn|string|False|Autonomous system number|
+|classification|string|False|Classification|
+|confidence|string|False|Confidence level|
+|country|string|False|Country|
+|date_first|string|False|Date first|
+|date_last|string|False|Date last|
+|details2|string|False|Details|
+|domain|string|False|Domain|
+|email|string|False|Email|
+|id|integer|False|ID|
+|itype|string|False|Itype|
+|lat|number|False|Latitude|
+|lon|number|False|Longitude|
+|md5|string|False|MD5 Hash|
+|org|string|False|Organization|
+|resource_uri|string|False|Resource URI|
+|severity|string|False|Severity|
+|source|string|False|Source|
+|source_feed_id|integer|False|Source Feed ID|
+|srcip|string|False|Source IP|
+|state|string|False|State|
+|update_id|string|False|Update ID|
+|url|string|False|URL|
+
+### observable_settings
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|classification|string|True|Classification of the observable|
+|confidence|integer|False|Confidence value assigned to the observable. Confidence score can range from 0-100, in increasing order of confidence|
+|domain_mapping|string|False|Indicator type to assign if a specific type is not associated with an observable|
+|email_mapping|string|False|Indicator type to assign if a specific type is not associated with an observable|
+|expiration_ts|date|False|Time stamp of when intelligence will expire on ThreatStream|
+|ip_mapping|string|False|Indicator type to assign if a specific type is not associated with an observable|
+|md5_mapping|string|False|Indicator type to assign if a specific type is not associated with an observable|
+|notes|[]string|False|Additional details for the observable. This information is displayed in the Tags column of the ThreatStream UI e.g ['note1', 'note2', 'note3']|
+|severity|string|False|Severity you want to assign to the observable when it is imported|
+|source_confidence_weight|integer|False|Specifies the ratio between the amount of the source confidence of each observable and the ThreatStream confidence|
+|threat_type|string|False|Type of threat associated with the imported observables|
+|trustedcircles|[]integer|False|ID of the trusted circle to which this threat data should be imported. If you want to import the threat data to multiple trusted circles, enter the list of comma-separated IDs e.g [1,2,3]|
+|url_mapping|string|False|Indicator type to assign if a specific type is not associated with an observable|
+
+### import_observable_response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|import_session_id|string|False|ID for import session|
+|job_id|string|False|Job ID|
+|success|boolean|False|If import was successful|
+

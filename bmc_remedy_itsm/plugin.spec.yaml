@@ -1,9 +1,14 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: bmc_remedy_itsm
 title: "BMC Remedy ITSM"
 description: "Transform your service desk with the right ITSM solution"
-version: 1.5.0
+version: 1.6.0
 vendor: rapid7
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags: [ "ITSM", "BMC", "Remedy", "Service Management" ]
 support: community
 status: []
@@ -876,10 +881,10 @@ actions:
         description: A description of the resolution
         required: true
     output:
-      success:
-        title: Success
-        description: Will return true if successful
-        type: boolean
+      incident:
+        title: "Incident"
+        type: incident
+        description: "Incident"
         required: false
   update_incident:
     title: Update Incident
@@ -953,6 +958,36 @@ actions:
       status:
         title: Status
         description: Incident status e.g. Assigned, In Progress, Pending, Resolved, Closed, Cancelled
+        type: string
+        required: true
+      resolution:
+        title: Resolution
+        description: A resolution to the incident. Required for Resolved or Closed
+        type: string
+        required: false
+    output:
+      incident:
+        title: "Incident"
+        type: incident
+        description: "Incident"
+        required: false
+  assign_incident:
+    title: Assign Incident
+    description: Assign an Incident
+    input:
+      incident_id:
+        type: string
+        title: Incident ID
+        description: Incident ID
+        required: true
+      assignee:
+        title: Assignee
+        description: The name of the assignee e.g. Allen Allbrook
+        type: string
+        required: true
+      Assignee_login_id:
+        title: Assignee Login ID
+        description: The assignees ID. Often the first name of the assignee e.g. Allen
         type: string
         required: true
     output:

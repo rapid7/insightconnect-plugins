@@ -1,4 +1,6 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: barracuda_waf
 title: Barracuda Web Application Firewall
 description: Barracuda Web Application Firewall is the ideal solution for organizations
@@ -9,6 +11,9 @@ version: 1.0.0
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - barracuda
 - waf

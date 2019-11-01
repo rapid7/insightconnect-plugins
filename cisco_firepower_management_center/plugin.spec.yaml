@@ -1,4 +1,6 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: cisco_firepower_management_center
 title: Cisco Firepower Management Center
 vendor: rapid7

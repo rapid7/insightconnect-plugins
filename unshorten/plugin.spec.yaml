@@ -1,12 +1,17 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: unshorten
 title: Unshorten.me
 description: Unshorten.me provides an easy method to unshorten a wide range of shortened
   URLs
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - url
 - link
@@ -42,7 +47,7 @@ actions:
         title: Usage Count
         type: integer
         description: Usage count
-        required: true
+        required: false
       error:
         title: Error
         type: string

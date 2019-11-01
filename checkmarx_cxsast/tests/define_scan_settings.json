@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "define_scan_settings",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "input": {
+            "engineConfigurationId": 2,
+            "presetId": 100000,
+            "projectId": 34
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

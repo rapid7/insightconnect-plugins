@@ -5,6 +5,7 @@ from .schema import ConnectionSchema, Input
 import requests
 import maya
 
+
 class Connection(komand.Connection):
 
     def __init__(self):

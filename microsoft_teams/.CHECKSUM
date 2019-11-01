@@ -1,0 +1,31 @@
+{
+	"spec": "bfe99cf27f3000b250203f2672da7d43",
+	"manifest": "a47d009bb49ba94187df300bc52186af",
+	"setup": "c9965a8dfee81d7ae4fd3ce7610539a3",
+	"schemas": [
+		{
+			"identifier": "get_channels_for_team/schema.py",
+			"hash": "aa9254adf534eda56ced26be1f45678f"
+		},
+		{
+			"identifier": "get_teams/schema.py",
+			"hash": "a1793406f678d71cad014bf1b5321192"
+		},
+		{
+			"identifier": "send_html_message/schema.py",
+			"hash": "2c85b6d123630ea0001379baf34d1086"
+		},
+		{
+			"identifier": "send_message/schema.py",
+			"hash": "4248262519b5357c6285a0c646104bda"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "a73885fe9af956ad991726f702255554"
+		},
+		{
+			"identifier": "new_message_received/schema.py",
+			"hash": "2ad20f8eea65fc83099143a8e55281b1"
+		}
+	]
+}

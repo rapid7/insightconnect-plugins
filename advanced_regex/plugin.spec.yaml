@@ -1,0 +1,164 @@
+plugin_spec_version: v2
+name: advanced_regex
+title: Advanced Regex
+description: Perform advanced regex operations on a string using Python regex
+version: 1.0.0
+support: community
+vendor: rapid7
+status: []
+tags:
+- data manipulation
+- utility
+enable_cache: true
+language: python
+
+actions:
+  data_extraction:
+    title: Data Extraction
+    description: Extract data via regex from a string
+    input:
+      in_string:
+        title: Input String
+        description: Input string
+        type: string
+        required: true
+      in_regex:
+        title: Regex
+        description: Regex to use for data extraction
+        type: string
+        required: true
+      ignorecase:
+        title: Ignore Case
+        description: Make regex non-case sensitive
+        type: boolean
+        required: false
+        default: false
+      multiline:
+        title: Multiline
+        description: Make begin/end consider each line
+        type: boolean
+        required: false
+        default: false
+      dotall:
+        title: Dot All
+        description: Make . match newline
+        type: boolean
+        required: false
+        default: false
+      ascii:
+        title: ASCII
+        description: Make \w \W \b \B follow ASCII rules
+        type: boolean
+        required: false
+        default: false
+    output:
+      matches:
+        title: Matches
+        description: An array of string arrays matching the output of Python re.findall()
+        type: "[][]string"
+        required: true
+  replace:
+    title: Search and Replace
+    description: Regex search and replace string
+    input:
+      in_string:
+        title: Input String
+        description: Input string
+        type: string
+        required: true
+      replace_string:
+        title: New String
+        description: The string to replace matches with
+        type: string
+        required: true
+      in_regex:
+        title: Regex
+        description: Regex to match
+        type: string
+        required: true
+      max_replace:
+        title: Max Replace
+        description: Max occurences to replace - if zero all will be replaced
+        type: integer
+        required: false
+        default: 0
+      ignorecase:
+        title: Ignore Case
+        description: Make regex non-case sensitive
+        type: boolean
+        required: false
+        default: false
+      multiline:
+        title: Multiline
+        description: Make begin/end consider each line
+        type: boolean
+        required: false
+        default: false
+      dotall:
+        title: Dot All
+        description: Make . match newline
+        type: boolean
+        required: false
+        default: false
+      ascii:
+        title: ASCII
+        description: Make \w \W \b \B follow ASCII rules
+        type: boolean
+        required: false
+        default: false
+    output:
+      result:
+        title: Result String
+        description: The result of the replace operation
+        type: string
+        required: true
+  split:
+    title: Split by Regex
+    description: Split a string into array using regex
+    input:
+      in_string:
+        title: Input String
+        description: Input string
+        type: string
+        required: true
+      in_regex:
+        title: Regex
+        description: Regex to split string on matches
+        type: string
+        required: true
+      max_split:
+        title: Max Split
+        description: Max splits - if non-zero last element is remainder of string
+        type: integer
+        required: false
+        default: 0
+      ignorecase:
+        title: Ignore Case
+        description: Make regex non-case sensitive
+        type: boolean
+        required: false
+        default: false
+      multiline:
+        title: Multiline
+        description: Make begin/end consider each line
+        type: boolean
+        required: false
+        default: false
+      dotall:
+        title: Dot All
+        description: Make . match newline
+        type: boolean
+        required: false
+        default: false
+      ascii:
+        title: ASCII
+        description: Make \w \W \b \B follow ASCII rules
+        type: boolean
+        required: false
+        default: false
+    output:
+      result:
+        title: Result Strings
+        description: An array of the strings returned by the split operation
+        type: "[]string"
+        required: true

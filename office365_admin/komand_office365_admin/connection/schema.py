@@ -35,9 +35,9 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "tenant_id",
     "app_id",
-    "app_secret"
+    "app_secret",
+    "tenant_id"
   ],
   "definitions": {
     "credential_token": {

@@ -20,7 +20,7 @@ class SubmitSample(komand.Action):
         file_ = params.get(Input.SAMPLE, None)
         try:
             file_bytes = base64.b64decode(file_['content'])
-        except:
+        except Exception:
             raise PluginException(cause=PluginException.Preset.BASE64_DECODE, data=file_["content"])
 
         callback_url = params.get(Input.CALLBACK_URL)

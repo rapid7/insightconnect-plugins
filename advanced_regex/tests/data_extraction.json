@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "data_extraction",
+        "connection": {},
+        "input": {
+            "ascii": false,
+            "dotall": true,
+            "ignorecase": true,
+            "in_regex": "((lo)r(em))",
+            "in_string": "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales sed luctus ac, dapibus quis augue. Vivamus in cursus libero. (Donec vehicula turpis eu ante viverra, id lacinia.",
+            "multiline": true
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}
