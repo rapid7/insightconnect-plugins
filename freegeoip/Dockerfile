@@ -6,12 +6,12 @@ FROM komand/python-3-plugin:2
 #
 LABEL organization=komand
 
-# Add any custom package dependencies here
+# Add any custom package dependencies here!
 # NOTE: Add pip packages to requirements.txt
 
 # End package dependencies
 
-# Add source code
+# Add source code 
 WORKDIR /python/src
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
