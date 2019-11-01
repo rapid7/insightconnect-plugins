@@ -13,7 +13,7 @@ tags:
 actions:
   lookup:
     title: GeoIP Lookup
-    description: Get GeoIP Info for a Host
+    description: Get GeoIP Info for a host
     input:
       host:
         title: Host
