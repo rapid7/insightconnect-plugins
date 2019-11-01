@@ -1,7 +1,7 @@
 FROM komand/python-3-plugin:2
 # The three supported python parent images are: 
 # - komand/python-2-plugin 
-# - komand/python-3-plugin
+# - komand/python-3-plugin 
 # - komand/python-pypy3-plugin 
 #
 LABEL organization=komand
