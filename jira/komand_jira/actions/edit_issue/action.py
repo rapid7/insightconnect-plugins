@@ -2,6 +2,7 @@ import komand
 from .schema import EditIssueInput, EditIssueOutput, Input, Output, Component
 
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class EditIssue(komand.Action):
@@ -29,6 +30,7 @@ class EditIssue(komand.Action):
         try:
             issue.update(notify=notify, **clean_params)
         except Exception as e:
-            raise Exception(f"Any error occurred: {e}")
+            raise PluginException(cause="An unknown error occurred.",
+                                  data=e)
 
         return {Output.SUCCESS: True}

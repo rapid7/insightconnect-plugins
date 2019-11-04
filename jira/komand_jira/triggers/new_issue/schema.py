@@ -11,6 +11,7 @@ class Input:
     
     GET_ATTACHMENTS = "get_attachments"
     JQL = "jql"
+    PROJECT = "project"
     
 
 class Output:
@@ -29,15 +30,24 @@ class NewIssueInput(komand.Input):
       "title": "Get Attachments",
       "description": "Get attachments from issue",
       "default": false,
-      "order": 2
+      "order": 3
     },
     "jql": {
       "type": "string",
       "title": "JQL",
       "description": "JQL search string to use",
+      "order": 2
+    },
+    "project": {
+      "type": "string",
+      "title": "Project",
+      "description": "Project ID or name",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "project"
+  ]
 }
     """)
 

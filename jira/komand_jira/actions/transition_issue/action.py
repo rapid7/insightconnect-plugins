@@ -20,7 +20,8 @@ class TransitionIssue(komand.Action):
         issue = self.connection.client.issue(id=params['id'])
 
         if not issue:
-            raise Exception('Error: No issue found with ID: ' + params['id'])
+            raise PluginException(cause=f"No issue found with ID: {params['id']}.",
+                                  assistance='Please provide a valid issue ID.')
 
         try:
             result = self.connection.client.transition_issue(
