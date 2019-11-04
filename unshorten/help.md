@@ -25,7 +25,7 @@ This action is used to unshorten a URL.
 |----|----|--------|-----------|
 |resolved_url|string|True|Long URL|
 |success|boolean|True|Success|
-|usage_count|integer|True|Usage count|
+|usage_count|integer|False|Usage count|
 |requested_url|string|True|Short URL|
 |error|string|False|Error message|
 
@@ -74,6 +74,7 @@ Note that the API is limited to 10 requests per hour per IP address.
 ## Versions
 
 * 1.0.0 - Initial plugin
+* 1.0.1 - Graceful exit for invalid URLs
 
 ## Workflows
 

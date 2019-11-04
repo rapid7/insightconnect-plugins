@@ -1,12 +1,17 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 2.5.0
+version: 3.0.0
 vendor: rapid7
 support: rapid7
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - mimecast
 - email
@@ -286,23 +291,19 @@ connection:
     description: Application ID
     type: string
     required: true
-  auth_type:
-    title: Authentication Type
-    description: 'The type of authentication: cloud or domain'
-    type: string
-    required: true
-    default: Basic-Cloud
-    enum:
-    - Basic-Cloud
-    - Basic-Ad
-  credentials:
-    type: credential_username_password
-    title: Basic Auth Username and Password
-    description: Basic auth username and password
-    required: true
   app_key:
     title: Application Key
     description: The application key
+    type: credential_secret_key
+    required: true
+  secret_key:
+    title: Application Secret Key
+    description: The application secret key
+    type: credential_secret_key
+    required: true
+  access_key:
+    title: Application Access Key
+    description: The application access key
     type: credential_secret_key
     required: true
 
@@ -654,6 +655,11 @@ actions:
         - clean
         - malicious
         - all
+      url_to_filter:
+        title: URL filter
+        description: URL to filter results with
+        type: string
+        required: false
     output:
       click_logs:
         title: Click Logs

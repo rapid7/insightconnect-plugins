@@ -1,4 +1,5 @@
 import komand
+from komand.exceptions import PluginException
 from .schema import NewIncidentFoundInput, NewIncidentFoundOutput, Input, Output, Component
 # Custom Imports below
 import re
@@ -8,7 +9,6 @@ import maya
 import requests
 import json
 from typing import Optional
-from komand.exceptions import PluginException
 
 
 class NewIncidentFound(komand.Trigger):

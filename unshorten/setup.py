@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='unshorten-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='Unshorten.me provides an easy method to unshorten a wide range of shortened URLs',
       author='rapid7',
       author_email='',

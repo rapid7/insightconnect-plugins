@@ -1,12 +1,17 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: anomali_threatstream
 title: Anomali ThreatStream
 description: ThreatStream operationalizes threat intelligence, automating collection
   and integration that enables security teams to analyze and respond to threats
-version: 2.0.0
+version: 3.0.1
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - anomali
 - threatstream
@@ -117,20 +122,20 @@ types:
       title: URL
       description: URL
       type: string
-  indicator_settings:
+  observable_settings:
     confidence:
       title: Confidence
-      description: Confidence value assigned to the indicator. Confidence score can
+      description: Confidence value assigned to the observable. Confidence score can
         range from 0-100, in increasing order of confidence
       type: integer
     source_confidence_weight:
       title: Source Confidence Weight
       description: Specifies the ratio between the amount of the source confidence
-        of each indicator and the ThreatStream confidence
+        of each observable and the ThreatStream confidence
       type: integer
     severity:
       title: Severity
-      description: Severity you want to assign to the indicator when it is imported
+      description: Severity you want to assign to the observable when it is imported
       type: string
       default: ''
       enum:
@@ -141,7 +146,7 @@ types:
       - ''
     classification:
       title: Classification
-      description: Classification of the indicator
+      description: Classification of the observable
       type: string
       default: private
       enum:
@@ -154,37 +159,37 @@ types:
       type: date
     notes:
       title: Notes
-      description: Additional details for the indicator. This information is displayed
+      description: Additional details for the observable. This information is displayed
         in the Tags column of the ThreatStream UI e.g ['note1', 'note2', 'note3']
       type: '[]string'
     ip_mapping:
       title: IP Mapping
       description: Indicator type to assign if a specific type is not associated with
-        an indicator
+        an observable
       type: string
       required: false
     domain_mapping:
       title: Domain Mapping
       description: Indicator type to assign if a specific type is not associated with
-        an indicator
+        an observable
       type: string
       required: false
     url_mapping:
       title: URL Mapping
       description: Indicator type to assign if a specific type is not associated with
-        an indicator
+        an observable
       type: string
       required: false
     email_mapping:
       title: Email Mapping
       description: Indicator type to assign if a specific type is not associated with
-        an indicator
+        an observable
       type: string
       required: false
     md5_mapping:
       title: MD5 Mapping
       description: Indicator type to assign if a specific type is not associated with
-        an indicator
+        an observable
       type: string
       required: false
     trustedcircles:
@@ -193,7 +198,12 @@ types:
         If you want to import the threat data to multiple trusted circles, enter the
         list of comma-separated IDs e.g [1,2,3]
       type: '[]integer'
-  import_indicator_response:
+    threat_type:
+      title: Threat Type
+      description: Type of threat associated with the imported observables
+      type: string
+      required: false
+  import_observable_response:
     job_id:
       title: Job ID
       description: Job ID
@@ -274,23 +284,38 @@ actions:
         description: Results returned
         type: '[]result'
         required: false
-  add_approval_indicator:
-    title: Add Approval Indicator
-    description: Import indicator(s) into Anomali with approval
+  import_observable:
+    title: Import Observable
+    description: Import observable(s) into Anomali with approval
     input:
       file:
         title: File
         description: File of data to be imported into Anomali
         type: file
         required: true
-      indicator_settings:
-        title: Indicator Settings
-        description: Settings needed for importing an indicator that needs approval
-        type: indicator_settings
+      observable_settings:
+        title: Observable Settings
+        description: Settings needed for importing an observable that needs approval
+        type: observable_settings
         required: false
     output:
       results:
         title: Results
-        description: Results from adding indicators(s)
-        type: import_indicator_response
+        description: Results from importing observable(s)
+        type: import_observable_response
+        required: false
+  get_observables:
+    title: Get Observables
+    description: Get observables
+    input:
+      value:
+        title: Value
+        description: Value
+        type: string
+        required: false
+    output:
+      results:
+        title: Results
+        description: Results returned
+        type: '[]result'
         required: false

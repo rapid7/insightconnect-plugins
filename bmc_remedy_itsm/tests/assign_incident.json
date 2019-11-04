@@ -1,0 +1,22 @@
+{
+    "body": {
+        "action": "assign_incident",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "port": null,
+            "ssl_verify": null,
+            "url": null
+        },
+        "input": {
+            "Assignee_login_id": "Ian",
+            "assignee": "Ian Plyment",
+            "incident_id": "INC000000000026"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

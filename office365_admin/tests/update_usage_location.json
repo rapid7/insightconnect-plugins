@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "update_usage_location",
+        "connection": {
+            "app_id": null,
+            "app_secret": {
+                "domain": null,
+                "token": null
+            },
+            "tenant_id": null
+        },
+        "input": {
+            "location": "US",
+            "user_principal_name": "jdoe2@komanddev.onmicrosoft.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

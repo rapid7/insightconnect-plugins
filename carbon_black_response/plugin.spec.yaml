@@ -1,4 +1,6 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: carbon_black_response
 title: Cb Response
 vendor: rapid7
@@ -7,6 +9,9 @@ status: []
 description: Cb Response is the most complete endpoint detection and response solution
   available to security teams
 version: 3.1.7
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - carbon black
 - response

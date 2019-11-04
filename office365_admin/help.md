@@ -16,18 +16,19 @@ This action is used to add a user to Office365.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|account_enabled|boolean|None|True|If true, the account will be enabled|None|
+|display_name|string|None|True|The user's display name e.g. John Doe|None|
+|force_change_password|boolean|None|True|If true, the user will have to change their password at login|None|
 |mail_nickname|string|None|True|The mail alias for the user|None|
-|password|string|None|True|set the users password|None|
-|display_name|string|None|True|The users display name e.g. john doe|None|
-|force_change_password|boolean|None|True|If true the user will have to change their password at login|None|
-|account_enabled|boolean|None|True|If true the account will be enabled|None|
+|office_location|string|None|False|User Office Location|None|
+|password|password|None|True|Set the user's password|None|
 |user_principal_name|string|None|True|The user principal name e.g. jdoe@mydomain.com|None|
 
 #### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user|object|False|Return a user object in json format|
+|user|object|False|Return a user object in JSON format|
 
 Example output:
 
@@ -109,6 +110,31 @@ Example output:
 
 ```
 
+### Assign License To User
+
+This action assigns a license to a given user.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|sku_id|string|None|True|ID for SKU to be applied|None|
+|user_principal_name|string|None|True|The user principal name to delete|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Return true if it worked|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 ### Delete User
 
 This action is used to remove a user from Office365.
@@ -124,6 +150,31 @@ This action is used to remove a user from Office365.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |success|boolean|False|return true if it worked|
+
+Example output:
+
+```
+
+
+
+```
+
+### Update Usage Location
+
+This action updates usage location for a given user.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|location|string|None|True|A two letter country code (ISO standard 3166)|None|
+|user_principal_name|string|None|True|The user principal name to update e.g. bob@hotmail.com|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|True if successful|
 
 Example output:
 
@@ -149,6 +200,50 @@ The connection configuration accepts the following parameters:
 |app_secret|password|None|True|The secret of the registered app that obtained the refresh token|None|
 |app_id|string|None|True|The ID of the registered app that obtained the refresh token|None|
 
+### Get Subscribed SKUs
+
+This action gets a list of commercial subscriptions that an organization has acquired.
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|sku_item|[]skuItem|True|SKU item containing all information about a given SKU|
+
+Example output:
+
+```
+[
+  {
+    "capabilityStatus": "Enabled",
+    "consumedUnits": 14,
+    "id": "48a80680-7326-48cd-9935-b556b81d3a4e_c7df2760-2c81-4ef7-b578-5b5392b571df",
+    "prepaidUnits": {
+        "enabled": 25,
+        "suspended": 0,
+        "warning": 0
+    },
+    "servicePlans": [
+        {
+            "servicePlanId": "8c098270-9dd4-4350-9b30-ba4703f3b36b",
+            "servicePlanName": "ADALLOM_S_O365",
+            "provisioningStatus": "Success",
+            "appliesTo": "User"
+        },
+        {
+            "servicePlanId": "9f431833-0334-42de-a7dc-70aa40db46db",
+            "servicePlanName": "LOCKBOX_ENTERPRISE",
+            "provisioningStatus": "Success",
+            "appliesTo": "User"
+        }
+    ],
+    "skuId": "c7df2760-2c81-4ef7-b578-5b5392b571df",
+    "skuPartNumber": "ENTERPRISEPREMIUM",
+    "appliesTo": "User"
+  }
+]
+```
+
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
@@ -158,6 +253,8 @@ This plugin does not contain any troubleshooting information.
 * 1.0.0 - Initial plugin
 * 1.1.0 - Add new Add User action
 * 1.1.1 - Fix security bug where `password` field in Create User action was not masked
+* 1.2.0 - New actions Get Subscribed SKUs and Assign License
+* 1.2.1 - Fix issue where input was undefined in Add and Delete User actions | Add office location to Add User action
 
 ## Workflows
 
@@ -169,3 +266,25 @@ Examples:
 ## References
 
 * [Graph API](https://developer.microsoft.com/en-us/graph/docs/concepts/use_the_api)
+
+## Custom Output Types
+
+### serviceItem
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|appliesTo|string|True|Entity SKU applies to|
+|servicePlanId|string|False|Service Plan ID|
+|servicePlanName|string|False|Service Plan Name|
+
+### skuItem
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|appliesTo|string|True|Entity SKU applies to|
+|capabilityStatus|string|False|Availability of SKU|
+|consumedUnits|integer|False|Consumed Units|
+|id|string|False|SKU item ID|
+|servicePlans|[]serviceItem|True|List of service plans|
+|skuId|string|True|SkuID|
+|skuPartNumber|string|True|SKU Part Number|

@@ -535,6 +535,53 @@ Example output:
 
 ```
 
+### Submit URL
+
+This action is used to submit a URL to Threat Grid for analysis.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|callback_url|string|None|False|A URL where the results will `POST` to, upon completion of analysis|None|
+|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|
+|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|
+|playbook|string|None|False|Name of a playbook to apply to this sample run|None|
+|private|string|None|False|If present, and set to any value but `false` the sample will be marked private|None|
+|tags|string|None|False|A comma-separated list of tags applied to this sample|None|
+|url|string|None|True|The URL to submit for analysis|None|
+|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|submit_sample_results|False|Results from submit sample|
+
+Example output:
+
+```
+{
+  "results": {
+    "api_version": 2,
+    "id": 8359575,
+    "data": {
+      "tags": [],
+      "md5": "09c1bcbccc67632319c9f21f8d10db22",
+      "submission_id": 828013007,
+      "state": "wait",
+      "login": "elijahmm",
+      "sha1": "a29459aba4c45c1ec9486d5e1ebb5691c679d5a5",
+      "filename": "sample",
+      "status": "pending",
+      "submitted_at": "2019-10-28T01:57:20Z",
+      "id": "2ff0509ce5ba06ecda1716ac54129132",
+      "sha256": "e0abbdb65e182ac51bc6a91b1c2ea4f6ff264e1c1827170616c7af37ad8e57ba"
+    }
+  }
+}
+```
+
 ## Triggers
 
 _This plugin does not contain any triggers._
@@ -564,6 +611,7 @@ Examples:
 * 1.1.0 - New action Submit Sample
 * 1.2.0 - New action Get Sample Analysis
 * 1.2.1 - Bug fix for action Get Sample Analysis
+* 1.2.2 - New action Submit URL
 
 ## References
 

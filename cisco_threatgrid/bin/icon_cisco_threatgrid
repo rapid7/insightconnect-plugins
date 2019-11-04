@@ -6,7 +6,7 @@ from icon_cisco_threatgrid import connection, actions, triggers
 
 Name = 'Cisco ThreatGrid'
 Vendor = 'rapid7'
-Version = '1.2.1'
+Version = '1.3.0'
 Description = 'Threat Grid combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware'
 
 
@@ -28,6 +28,8 @@ class ICONCiscoThreatgrid(komand.Plugin):
         self.add_action(actions.SearchForSampleReportBySha256())
 
         self.add_action(actions.SubmitSample())
+
+        self.add_action(actions.SubmitUrl())
 
 
 def main():

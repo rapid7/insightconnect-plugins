@@ -4,3 +4,4 @@ from .search_for_sample_report_by_domain.action import SearchForSampleReportByDo
 from .search_for_sample_report_by_id.action import SearchForSampleReportById
 from .search_for_sample_report_by_sha256.action import SearchForSampleReportBySha256
 from .submit_sample.action import SubmitSample
+from .submit_url.action import SubmitUrl

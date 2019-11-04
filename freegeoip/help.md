@@ -3,12 +3,12 @@
 
 ## About
 
-[FreeGeoIP](https://freegeoip.net/) is a free service for Geo IP lookups. 
+[FreeGeoIP](https://freegeoip.net/) is a free service for Geo IP lookups.
 
 ## Actions
 
 ### GeoIP Lookup
- 
+
 This action is used to get GeoIP info for a host.
 
 #### Input

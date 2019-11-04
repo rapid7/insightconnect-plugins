@@ -1,4 +1,6 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: phabricator
 title: Phabricator
 vendor: rapid7
@@ -7,6 +9,9 @@ status: []
 description: Phabricator is a suite of open source tools for peer code review, task
   management, and project communication
 version: 1.0.0
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - phabricator
 - code review

@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "create_project",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "input": {
+            "isPublic": true,
+            "name": "infosec-demo-last",
+            "owningTeam": "9a1e6005-1489-4201-a17e-f6a6a493cb3e"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

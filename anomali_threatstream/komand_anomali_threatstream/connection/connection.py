@@ -1,10 +1,13 @@
 import komand
 from .schema import ConnectionSchema
+
 # Custom imports below
 import requests
 from requests import Session, Request
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
+from copy import copy
+from komand.exceptions import ConnectionTestException
 
 
 class Connection(komand.Connection):
@@ -28,3 +31,15 @@ class Connection(komand.Connection):
             "username": username,
             "api_key": api_key
         }
+
+    def test(self):
+        self.request = copy(self.request)
+        self.request.url, self.request.method = self.request.url + "/intelligence", "GET"
+
+        response = self.session.send(self.request.prepare(), verify=self.request.verify)
+
+        if response.status_code not in range(200, 299):
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.INVALID_JSON,
+                                          data=response.text)
+
+        return {'connection': 'successful'}
