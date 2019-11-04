@@ -1,10 +1,12 @@
 import komand
 from .schema import ConnectionSchema
-from komand.exceptions import ConnectionTestException
+
 # Custom imports below
 from jira import JIRA
 import requests
 from requests.auth import HTTPBasicAuth
+from komand.exceptions import ConnectionTestException
+
 
 
 class Connection(komand.Connection):

@@ -8,7 +8,7 @@ support: rapid7
 status: []
 description: Jira is an issue tracking product, developed by Atlassian. It provides
   bug tracking, issue tracking, and project management functions
-version: 3.2.1
+version: 4.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -117,11 +117,6 @@ connection:
     type: string
     description: Jira URL, e.g. https://company.atlassian.net
     default: https://company.atlassian.net
-    required: false
-  project:
-    title: Project
-    type: string
-    description: Project ID
     required: false
   credentials:
     title: Username and API Key
@@ -408,13 +403,13 @@ actions:
         title: Description
         type: string
         description: Issue description
-        required: true
+        required: false
         default: ''
       project:
         title: Project
-        description: Project name. If not provided, uses default from connection
+        description: Project ID
         type: string
-        required: false
+        required: true
       fields:
         title: Fields
         type: object
@@ -483,6 +478,11 @@ triggers:
     title: New Issue
     description: Trigger which indicates that a new issue has been created
     input:
+      project:
+        title: Project
+        description: Project ID or name
+        type: string
+        required: true
       jql:
         title: JQL
         type: string

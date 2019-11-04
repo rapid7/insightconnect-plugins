@@ -1,6 +1,8 @@
 import komand
 from .schema import AssignIssueInput, AssignIssueOutput
+
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class AssignIssue(komand.Action):
@@ -18,7 +20,8 @@ class AssignIssue(komand.Action):
         issue = self.connection.client.issue(id=id_)
 
         if not issue:
-            raise Exception('Error: No issue found with ID: ' + id_)
+            raise PluginException(cause=f'No issue found with ID: {id_}.',
+                                  assistance='Please provide a valid issue ID.')
 
         result = self.connection.client.assign_issue(issue=issue, assignee=params['assignee'])
         return {'success': result}

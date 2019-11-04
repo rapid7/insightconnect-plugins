@@ -154,13 +154,13 @@ This action is used to create an issue in Jira.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|project|string|None|False|Project name. If not provided, uses default from connection|None|
+|attachment_bytes|bytes|None|False|Attachment bytes|None|
 |attachment_filename|string|None|False|Attachment filename|None|
-|description|string||True|Issue description|None|
+|description|string||False|Issue description|None|
 |fields|object|None|False|Custom fields to assign. Fields used must be present on the same screen as the Create screen in Jira|None|
+|project|string|None|True|Project ID|None|
 |summary|string|None|False|Issue summary|None|
 |type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|
-|attachment_bytes|bytes|None|False|Attachment bytes|None|
 
 #### Output
 
@@ -663,7 +663,9 @@ This trigger is used to trigger which indicates that a new issue has been create
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|get_attachments|boolean|False|False|Get attachments from issue|None|
 |jql|string|None|False|JQL search string to use|None|
+|project|string|None|True|Project ID or name|None|
 
 #### Output
 
@@ -895,7 +897,6 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |credentials|credential_username_password|None|True|Username and API key|None|
-|project|string|None|False|Project ID|None|
 |url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|
 
 ## Troubleshooting
