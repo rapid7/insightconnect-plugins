@@ -3,6 +3,7 @@ from .schema import CreateScanEngineInput, CreateScanEngineOutput
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand.exceptions import PluginException
 
 
 class CreateScanEngine(komand.Action):
@@ -32,6 +33,6 @@ class CreateScanEngine(komand.Action):
                         f"This may be due to an engine with this IP or name already existing in the Security Console."
             else:
                 error = e
-            raise Exception(error)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         return response

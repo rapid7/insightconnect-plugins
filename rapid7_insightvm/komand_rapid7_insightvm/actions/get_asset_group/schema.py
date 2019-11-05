@@ -118,13 +118,13 @@ class GetAssetGroupOutput(komand.Output):
         }
       },
       "required": [
+        "assets",
+        "id",
         "links",
         "name",
-        "type",
-        "vulnerabilities",
-        "id",
         "riskScore",
-        "assets"
+        "type",
+        "vulnerabilities"
       ],
       "definitions": {
         "link": {

@@ -57,10 +57,10 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "use_key",
-    "username",
     "host",
-    "port"
+    "port",
+    "use_key",
+    "username"
   ],
   "definitions": {
     "credential_asymmetric_key": {

@@ -48,8 +48,8 @@ class UpdateSiteIncludedAssetGroupsInput(komand.Input):
     }
   },
   "required": [
-    "overwrite",
-    "id"
+    "id",
+    "overwrite"
   ]
 }
     """)

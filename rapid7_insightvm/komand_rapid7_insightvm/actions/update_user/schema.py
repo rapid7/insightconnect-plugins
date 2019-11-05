@@ -103,14 +103,14 @@ class UpdateUserInput(komand.Input):
     }
   },
   "required": [
-    "id",
-    "authentication_type",
-    "login",
+    "access_all_asset_groups",
     "access_all_sites",
+    "authentication_type",
     "email",
     "enabled",
+    "id",
+    "login",
     "name",
-    "access_all_asset_groups",
     "role_id"
   ]
 }

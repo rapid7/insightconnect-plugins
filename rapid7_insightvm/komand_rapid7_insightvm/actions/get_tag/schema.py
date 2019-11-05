@@ -138,9 +138,9 @@ class GetTagOutput(komand.Output):
         }
       },
       "required": [
-        "type",
+        "id",
         "name",
-        "id"
+        "type"
       ],
       "definitions": {
         "link": {

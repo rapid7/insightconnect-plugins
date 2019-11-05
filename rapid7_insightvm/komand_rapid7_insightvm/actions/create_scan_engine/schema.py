@@ -56,8 +56,8 @@ class CreateScanEngineInput(komand.Input):
     }
   },
   "required": [
-    "name",
     "address",
+    "name",
     "port"
   ]
 }

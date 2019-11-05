@@ -87,6 +87,7 @@ Examples:
 * 0.1.3 - SSL bug fix in SDK
 * 1.0.0 - Support web server mode | Update to new credential types | Rename "Run remote command" action to "Run Remote Command"
 * 1.0.1 - Fix issue where run action was excluded from plugin on build
+* 1.0.2 - Fixed issue where Run was excluded
 
 ## References
 

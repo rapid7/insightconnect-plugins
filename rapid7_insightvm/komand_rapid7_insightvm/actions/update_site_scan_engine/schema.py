@@ -36,8 +36,8 @@ class UpdateSiteScanEngineInput(komand.Input):
     }
   },
   "required": [
-    "site_id",
-    "engine_id"
+    "engine_id",
+    "site_id"
   ]
 }
     """)

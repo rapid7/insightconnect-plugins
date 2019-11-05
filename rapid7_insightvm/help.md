@@ -3020,6 +3020,206 @@ Example output:
 }
 ```
 
+### Create Vulnerability Exception Submission
+
+This action is used to create a vulnerability exception submission.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|comment|string|Exception created with InsightConnect|True|Comment to include in the vulnerability exception submission|None|
+|expiration|date|None|False|The date the vulnerability exception expires|None|
+|key|string|None|False|The key to identify a specific instance if the type is Instance|None|
+|port|integer|None|False|The port the vulnerability appears on if the type is Instance|None|
+|reason|string|None|True|Reason for the exception|['False Positive', 'Compensating Control', 'Acceptable Use', 'Acceptable Risk', 'Other']|
+|scope|integer|None|False|The ID of the scope the vulnerability exception applies to.  May be empty if type is Global|None|
+|type|string|None|True|The type of vulnerability exception to create|['Global', 'Site', 'Asset', 'Asset Group', 'Instance']|
+|vulnerability|string|None|True|The vulnerability this exception applies to|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|integer|True|The vulnerability exception that was created|
+|links|[]link|True|Hypermedia links to corresponding or related resources|
+
+Example output:
+
+```
+{
+  "id": 35,
+  "links": [
+    {
+      "href": "https://insightvm:3780/api/3/vulnerability_exceptions",
+      "rel": "self"
+    },
+    {
+      "href": "https://insightvm:3780/api/3/vulnerability_exceptions/35",
+      "id": 35,
+      "rel": "Vulenrability Exception"
+    }
+  ]
+}
+```
+
+### Delete Vulnerability Exception
+
+This action is used to delete an existing vulnerability exception.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|exception_id|integer|None|True|Vulnerability Exception ID to delete|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|links|[]link|True|Hypermedia links to corresponding or related resources|
+
+Example output:
+
+```
+{
+  "links": [
+    {
+      "href": "https://insightvm:3780/api/3/vulnerability_exceptions/32",
+      "rel": "self"
+    }
+  ]
+}
+```
+
+### Get Vulnerability Details
+
+This action is used to get the details of a specific vulnerability by ID.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|id|string|None|True|The identifier of the vulnerability to retrieve from InsightVM|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|vulnerability|vulnerability|True|The details of the vulnerability requested|
+
+Example output:
+
+```
+{
+  "vulnerability": {
+    "added": "2012-02-06",
+    "categories": [
+      "Apple",
+      "Apple iTunes",
+      "Obsolete Software"
+    ],
+    "cvss": {
+      "links": [
+        {
+          "href": "https://nvd.nist.gov/vuln-metrics/cvss/v2-calculator?vector=(AV:N/AC:L/Au:N/C:C/I:C/A:C)",
+          "rel": "CVSS v2 Calculator"
+        }
+      ],
+      "v2": {
+        "accessComplexity": "L",
+        "accessVector": "N",
+        "authentication": "N",
+        "availabilityImpact": "C",
+        "confidentialityImpact": "C",
+        "exploitScore": 9.9968,
+        "impactScore": 10.0008,
+        "integrityImpact": "C",
+        "score": 10,
+        "vector": "AV:N/AC:L/Au:N/C:C/I:C/A:C"
+      }
+    },
+    "denialOfService": false,
+    "description": {
+      "html": "\u003cp\u003e\n        Apple only maintains one major version of iTunes.  Versions prior to\n        this are not supported. Unsupported versions of iTunes may contain\n        unpatched security flaws. It is recommended to upgrade to the latest\n        version.\n     \u003c/p\u003e",
+      "text": "Apple only maintains one major version of iTunes. Versions prior to this are not supported. Unsupported versions of iTunes may contain unpatched security flaws. It is recommended to upgrade to the latest version."
+    },
+    "exploits": 0,
+    "id": "apple-itunes-obsolete",
+    "links": [
+      {
+        "href": "https://insightvm:3780/api/3/vulnerabilities/apple-itunes-obsolete",
+        "rel": "self"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/vulnerabilities/apple-itunes-obsolete/checks",
+        "rel": "Vulnerability Checks"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/vulnerabilities/apple-itunes-obsolete/references",
+        "rel": "Vulnerability References"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/vulnerabilities/apple-itunes-obsolete/malware_kits",
+        "rel": "Vulnerability Malware Kits"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/vulnerabilities/apple-itunes-obsolete/exploits",
+        "rel": "Vulnerability Exploits"
+      },
+      {
+        "href": "https://insightvm:3780/api/3/vulnerabilities/apple-itunes-obsolete/solutions",
+        "rel": "Vulnerability Solutions"
+      }
+    ],
+    "malwareKits": 0,
+    "modified": "2013-05-03",
+    "pci": {
+      "adjustedCVSSScore": 10,
+      "adjustedSeverityScore": 5,
+      "fail": true,
+      "status": "Fail"
+    },
+    "published": "2001-01-09",
+    "riskScore": 911.25,
+    "severity": "Critical",
+    "severityScore": 10,
+    "title": "Obsolete version of Apple iTunes"
+  }
+}
+```
+
+### Review Vulnerability Exception
+
+This action is used to approve or reject a vulnerability exception.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|comment|string|None|False|Comment to include in the review|None|
+|exception|integer|None|True|The Vulnerability Exception ID to Approve or Reject|None|
+|review|string|None|True|Approval or Rejection of the exception|['Approved', 'Rejected']|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|links|[]link|True|Hypermedia links to corresponding or related resources|
+
+Example output:
+
+```
+{
+  "links": [
+    {
+      "href": "https://insightvm:3780/api/3/vulnerability_exceptions/35/approve",
+      "rel": "self"
+    }
+  ]
+}
+```
+
 ### Get Authentication Sources
 
 This action is used to list authentication sources available for InsightVM users.
@@ -3946,6 +4146,70 @@ Example output:
 
 ## Triggers
 
+### New Vulnerability Exception Activity
+
+This trigger is used to check for new InsightVM vulnerability exception activity.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|
+|status_filter|[]string|['Under Review']|False|List of vulnerabiliti statuses to match for trigger; options include: Under Review, Approved, Rejected, Expired, Deleted|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|exception|vulnerability_exception|False|InsightVM Vulnerability Exception|
+
+Example output:
+
+```
+{
+  "expires": "2019-10-31T00:00:00Z",
+  "id": 31,
+  "links": [
+    {
+      "href": "https://insightvm:3780/api/3/vulnerability_exceptions/31",
+      "rel": "self"
+    }
+  ],
+  "scope": {
+    "id": 80,
+    "links": [
+      {
+        "id": "apple-itunes-obsolete",
+        "href": "https://insightvm:3780/api/3/vulnerabilities/apple-itunes-obsolete",
+        "rel": "Vulnerability"
+      },
+      {
+        "id": 80,
+        "href": "https://insightvm:3780/api/3/assets/80",
+        "rel": "Asset"
+      }
+    ],
+    "type": "asset",
+    "vulnerability": "apple-itunes-obsolete"
+  },
+  "state": "under review",
+  "submit": {
+    "comment": "ICON Test Exception",
+    "date": "2019-10-27T14:59:31.449114Z",
+    "links": [
+      {
+        "id": 5,
+        "href": "https://insightvm:3780/api/3/users/5",
+        "rel": "Submitter"
+      }
+    ],
+    "name": "blaah",
+    "reason": "acceptable use",
+    "user": 5
+  }
+}
+```
+
 ### New Scans
 
 This trigger is used to check for new InsightVM scans by site and scan status.
@@ -4025,6 +4289,7 @@ This plugin does not contain any troubleshooting information.
 * 3.3.0 - New Actions Get Asset, Get Asset Tags, Get Scan Assets, Generate AdHoc SQL Report, Top Remediations | New trigger New Scans
 * 3.3.1 - Fix issue in Top Remediations action that causes assets without criticality tags to not be returned in asset list
 * 3.4.0 - New Action Get Asset Software | Fix issue with New Scan trigger not properly caching new scan IDs
+* 3.5.0 - New Actions Get Vulnerability Details, Create Vulnerability Exception Submission,  Delete Vulnerability Exception, Review Vulnerability Exception  | New Trigger New Vulnerability Exception Activity | Misc. Cleanup
 
 ## Workflows
 
@@ -4039,3 +4304,556 @@ Examples:
 
 * [InsightVM](https://www.rapid7.com/products/insightvm/)
 * [InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)
+
+## Custom Output Types
+
+### report_id
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|integer|False|Identifer|
+|name|string|False|Name of report|
+
+### link
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|href|string|False|A hypertext reference, which is either a URI (see RFC 3986) or URI template (see RFC 6570)|
+|rel|string|False|Link relation type following RFC 5988|
+
+### address
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ip|string|False|IPv4 or IPv6 address|
+|mac|string|False|Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48|
+
+### configuration
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|name|string|False|Name of the configuration value|
+|value|string|False|Configuration value|
+
+### database
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|description|string|False|Description of the database instance|
+|id|integer|False|Identifier of the database|
+|name|string|False|Name of the database instance|
+
+### file
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|attributes|[]configuration|False|Attributes detected on the file|
+|name|string|False|Name of the file|
+|size|integer|False|Size of the regular file (in bytes). If the file is a directory, no value is returned|
+|type|string|False|Type of the file, e.g. file or directory|
+
+### history
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|date|string|False|Date the asset information was collected or changed|
+|description|string|False|Additional information describing the change|
+|scanId|integer|False|If a scan-oriented change, the identifier of the corresponding scan the asset was scanned in|
+|type|string|False|Type, for additional information see the help section of this plugin|
+|user|string|False|User|
+|version|integer|False|Version|
+|vulnerabilityExceptionId|integer|False|Vulnerability exception ID|
+
+### hostName
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|name|string|False|Name|
+|source|string|False|Source|
+
+### id
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|string|False|ID|
+|source|string|False|Source|
+
+### cpe
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|edition|string|False|Edition-related terms applied by the vendor to the product|
+|language|string|False|Defines the language supported in the user interface of the product being described. The format of the language tag adheres to RFC 5646|
+|other|string|False|Captures any other general descriptive or identifying information which is vendor- or product-specific and which does not logically fit in any other attribute value|
+|part|string|False|A single letter code that designates the particular platform part that is being identified|
+|product|string|False|Most common and recognizable title or name of the product|
+|swEdition|string|False|Characterizes how the product is tailored to a particular market or class of end users|
+|targetHW|string|False|Characterize the instruction set architecture on which the product operates|
+|targetSW|string|False|Characterizes the software computing environment within which the product operates|
+|update|string|False|Vendor-specific alphanumeric strings characterizing the particular update, service pack, or point release of the product|
+|v2.2|string|False|The full CPE string in the CPE 2.2 format|
+|v2.3|string|False|The full CPE string in the CPE 2.3 format|
+|vendor|string|False|The person or organization that manufactured or created the product|
+|version|string|False|Vendor-specific alphanumeric strings characterizing the particular release version of the product|
+
+### osFingerprint
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|architecture|string|False|The architecture of the operating system|
+|configurations|[]configuration|False|Configuration key-values pairs enumerated on the operating system|
+|cpe|cpe|False|Common Platform Enumeration|
+|description|string|False|The description of the operating system (containing vendor, family, product, version and architecture in a single string)|
+|family|string|False|Family of the operating system|
+|id|integer|False|Identifier of the operating system|
+|product|string|False|Name of the operating system|
+|systemName|string|False|A combination of vendor and family (with redundancies removed), suitable for grouping|
+|type|string|False|Type of operating system|
+|vendor|string|False|Vendor of the operating system|
+|version|string|False|Version of the operating system|
+
+### userGroup
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|integer|False|Identifier of the user group|
+|name|string|False|Name of the user group|
+
+### user
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|fullName|string|False|Full name of the user account|
+|id|integer|False|Identifier of the user account|
+|name|string|False|Name of the user account|
+
+### page
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|linkType|string|False|Type of link used to traverse or detect the page|
+|path|string|False|Path to the page (URI)|
+|response|integer|False|HTTP response code observed with retrieving the page|
+
+### webApplication
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|integer|False|Identifier of the web application|
+|pages|[]page|False|Pages|
+|root|string|False|Web root of the web application|
+|virtualHost|string|False|Virtual host of the web application|
+
+### service
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|configurations|[]configuration|False|Configuration key-values pairs enumerated on the service|
+|databases|[]database|False|Databases enumerated on the service|
+|family|string|False|Family of the service|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
+|name|string|False|Name of the service|
+|port|integer|False|Port of the service|
+|product|string|False|Product running the service|
+|protocol|string|False|Protocol of the service|
+|userGroups|[]userGroup|False|User groups|
+|users|[]user|False|Users|
+|vendor|string|False|Vendor of the service|
+|version|string|False|Version of the service|
+|webApplications|[]webApplication|False|Web applications found on the service|
+
+### software
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|configurations|[]configuration|False|Configurations|
+|cpe|cpe|False|CPE|
+|description|string|False|Description of the software|
+|family|string|False|Family of the software|
+|id|integer|False|ID|
+|product|string|False|Product of the software|
+|type|string|False|Type of the software|
+|vendor|string|False|Vendor of the software|
+|version|string|False|Version of the software|
+
+### vulnerabilities
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|critical|integer|False|Number of critical vulnerabilities|
+|exploits|integer|False|Number of distinct exploits that can exploit any of the vulnerabilities on the asset|
+|malwareKits|integer|False|Number of distinct malware kits that vulnerabilities on the asset are susceptible to|
+|moderate|integer|False|Number of moderate vulnerabilities|
+|severe|integer|False|Number of severe vulnerabilities|
+|total|integer|False|Total number of vulnerabilities|
+
+### vulnerabilities_count
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|critical|integer|False|Number of critical vulnerabilities|
+|moderate|integer|False|Number of moderate vulnerabilities|
+|severe|integer|False|Number of severe vulnerabilities|
+|total|integer|False|Total|
+
+### vulnerability_exception
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|expires|date|False|The date and time the vulnerability exception is set to expire|
+|id|integer|True|The ID uniquely identifying the vulnerability exception|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
+|review|object|False|Details of the exception review|
+|scope|object|True|Details of the scope of the exception|
+|state|string|True|The state of the vulnerability exception|
+|submit|object|True|Details of the exception submission|
+
+### exception_review
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|comment|string|False|The comment from the reviewer detailing the review|
+|date|date|False|The date and time the review took place|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
+|name|string|False|The login name of the user that reviewed the vulnerability exception|
+|user|integer|False|The identifier of the user that reviewed the vulnerability exception|
+
+### exception_submit
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|comment|string|False|The comment from the submit detailing the exception|
+|date|date|False|The date and time the exception request took place|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
+|name|string|False|The login name of the user that submitted the vulnerability exception|
+|user|integer|False|The identifier of the user that submitted the vulnerability exception|
+
+### exception_scope
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|integer|True|The identifer of the scope (asset, group, site) the vulnerability exception applies to|
+|key|string|False|Optional key to discriminate the instance when the scope type is Instance|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
+|port|integer|False|If the scope type is Instance, the port the exception applies to|
+|type|string|True|The type of vulnerability exception - Global, Site, Asset, Asset Group, Instance|
+|vulnerability|string|True|The vulnerability the exception applies to|
+
+### asset
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|addresses|[]address|False|All addresses discovered on the asset|
+|assessedForPolicies|boolean|False|Whether the asset has been assessed for policies at least once|
+|assessedForVulnerabilities|boolean|False|Whether the asset has been assessed for vulnerabilities at least once|
+|configurations|[]configuration|False|Configuration key-values pairs enumerated on the asset|
+|databases|[]database|False|Databases enumerated on the asset|
+|files|[]file|False|Files discovered with searching on the asset|
+|history|[]history|False|History of changes to the asset over time|
+|hostName|string|False|Primary host name (local or FQDN) of the asset|
+|hostNames|[]hostName|False|All hostnames or aliases discovered on the asset|
+|id|integer|False|Identifier of the asset|
+|ids|[]id|False|Unique identifiers found on the asset, such as hardware or operating system identifiers|
+|ip|string|False|Primary IPv4 or IPv6 address of the asset|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
+|mac|string|False|Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48|
+|os|string|False|Full description of the operating system of the asset|
+|osFingerprint|osFingerprint|False|Details of the operating system of the asset|
+|rawRiskScore|float|False|Base risk score of the asset|
+|riskScore|float|False|Risk score (with criticality adjustments) of the asset|
+|services|[]service|False|Services discovered on the asset|
+|software|[]software|False|Software discovered on the asset|
+|type|string|False|Type of asset e.g. unknown, guest, hypervisor, physical, mobile|
+|userGroups|[]userGroup|False|User group accounts enumerated on the asset|
+|users|[]user|False|User accounts enumerated on the asset|
+|vulnerabilities|vulnerabilities|False| Summary information for vulnerabilities on the asset|
+
+### asset_vulnerability_result
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|checkId|string|False|Check ID, ie. ssh-openssh-x11uselocalhost-x11-forwarding-session-hijack|
+|exceptions|[]integer|False|If the result is vulnerable with exceptions applied, the identifier(s) of the exceptions actively applied to the result|
+|key|string|False|An additional discriminating key used to uniquely identify between multiple instances of results on the same finding|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
+|port|integer|False|Port of the service the result was discovered on e.g. 22|
+|proof|string|False|Proof of the vulnerability, ie. <p><p>OpenBSD OpenSSH 4.3 on Linux</p></p>|
+|protocol|string|False|Protocol of the service the result was discovered on, ie. TCP|
+|status|string|False|Status of the vulnerability check result, ie. vulnerable-version|
+
+### asset_vulnerability
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|string|False|Vulnerability ID, ie. ssh-openssh-x11uselocalhost-x11-forwarding-session-hijack|
+|instances|integer|False|Identifier of the report instance|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
+|results|[]asset_vulnerability_result|False|The vulnerability check results for the finding. Multiple instances may be present if one or more checks fired, or a check has multiple independent results|
+|status|string|False|Status, ie. vulnerable|
+
+### site
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|assets|integer|True|Site asset count|
+|connectionType|string|False|Site discovery connection type (if applicable)|
+|description|string|False|Site description|
+|id|integer|True|Identifier of the site|
+|importance|string|True|Site importance, used with the 'weighted' risk scoring strategy|
+|lastScanTime|date|False|Site last scan time|
+|links|[]link|True|Hypermedia links to corresponding or related resources|
+|name|string|True|Site name|
+|riskScore|float|True|Site risk score|
+|scanEngine|integer|True|Site default scan engine ID|
+|scanTemplate|string|True|Site default scan template|
+|type|string|True|Site type|
+|vulnerabilities|vulnerabilities_count|True|Site vulnerability counts|
+
+### asset_group
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|assets|integer|True|Site asset count|
+|description|string|False|Asset group description|
+|id|integer|True|Site ID|
+|links|[]link|True|Hypermedia links to corresponding or related resources|
+|name|string|True|Asset group name|
+|riskScore|float|True|Site risk score|
+|searchCriteria|object|False|Asset group search criteria|
+|type|string|True|Asset group type|
+|vulnerabilities|vulnerabilities_count|True|Asset group vulnerability counts|
+
+### vulnerability_description
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|html|string|False|Vulnerability description HTML|
+|text|string|False|Vulnerability description raw text|
+
+### pci
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|adjustedCVSSScore|integer|False|PCI adjusted CVSS score|
+|adjustedSeverityScore|integer|False|PCI adjusted severity score|
+|fail|boolean|False|Whether this vulnerability results in a PCI assessment failure|
+|specialNotes|string|False|PCI special notes|
+|status|string|False|PCI status|
+
+### cvss_v2
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|accessComplexity|string|False|CVSSv2 access complexity metric|
+|accessVector|string|False|CVSSv2 access vector metric|
+|authentication|string|False|CVSSv2 authentication metric|
+|availabilityImpact|string|False|CVSSv2 availability impact metric|
+|confidentialityImpact|string|False|CVSSv2 confidentiality impact metric|
+|exploitScore|float|False|CVSSv2 combined exploit metric score (Access Complexity/Access Vector/Authentication)|
+|impactScore|float|False|CVSSv2 combined impact metric score (Confidentiality/Integrity/Availability)|
+|integrityImpact|string|False|CVSSv2 integrity impact metric|
+|score|float|False|CVSSv2 score|
+|vector|string|False|CVSSv2 combined vector string|
+
+### cvss_v3
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|attackComplexity|string|False|CVSSv3 attack complexity metric|
+|attackVector|string|False|CVSSv3 attack vector metric|
+|availabilityImpact|string|False|CVSSv3 availability impact metric|
+|confidentialityImpact|string|False|CVSSv3 confidentiality impact metric|
+|exploitScore|float|False|CVSSv3 combined exploit metric score (Attack Complexity/Attack Vector/Privilege Required/Scope/User Interaction)|
+|impactScore|float|False|CVSSv3 combined impact metric score (Confidentiality/Integrity/Availability)|
+|integrityImpact|string|False|CVSSv3 integrity impact metric|
+|privilegeRequired|string|False|CVSSv3 privilege required metric|
+|scope|string|False|CVSSv3 scope metric|
+|score|float|False|CVSSv3 score|
+|userInteraction|string|False|CVSSv3 user interaction metric|
+|vector|string|False|CVSSv3 combined vector string|
+
+### cvss
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|links|[]link|False|List of hypermedia links to corresponding resources|
+|v2|cvss_v2|False|CVSSv2 details|
+|v3|cvss_v3|False|CVSSv3 details|
+
+### vulnerability
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|added|date|False|Date that the vulnerability was added to InsightVM|
+|categories|[]string|False|List of vulnerabilities categories with which this vulnerability is affiliated|
+|cves|[]string|False|List of CVE identifiers associated with this vulnerability|
+|cvss|cvss|False|Vulnerability CVSS details|
+|denialOfService|boolean|False|Whether the vulnerability is a denial of service vulnerability|
+|description|vulnerability_description|False|Vulnerability description|
+|exploits|integer|False|Exploit count|
+|id|string|False|Vulnerability ID|
+|links|[]link|False|List of hypermedia links to corresponding resources|
+|malwareKits|integer|False|Malware kit count|
+|modified|date|False|Date the vulnerability was last modified in InsightVM|
+|pci|pci|False|Vulnerability PCI details|
+|published|date|False|Date the vulnerability was published|
+|riskScore|float|False|Vulnerability risk score using the configured risk scoring strategy (RealRisk by default)|
+|severity|string|False|Vulnerability severity string (Moderate/Severe/Critical)|
+|severityScore|integer|False|Vulnerability severity score|
+|title|string|False|Vulnerability title|
+
+### tag
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|color|string|False|Tag color|
+|created|date|False|Tag creation date|
+|id|integer|True|Tag ID|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
+|name|string|True|Tag name|
+|riskModifier|string|False|Tag risk score modifier|
+|searchCriteria|object|False|Tag search criteria|
+|source|string|False|Tag source|
+|type|string|True|Tag type|
+
+### tag_asset
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|integer|True|Asset ID|
+|sources|[]string|True|Tag association sources|
+
+### scan
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|assets|integer|False|Count of assets identified during the scan|
+|duration|date|False|Duration of the scan|
+|endTime|date|False|End time of the scan|
+|engineId|integer|False|ID for the scan engine/scan engine pool used for the scan|
+|engineName|string|False|Name of the scan engine/scan engine pool used for the scan|
+|id|integer|False|ID of the scan|
+|links|[]link|False|List of hypermedia links to corresponding resources|
+|message|string|False|Scan status message|
+|scanName|string|False|Name of the scan|
+|scanType|string|False|Type of scan (automated, manual, scheduled)|
+|siteId|integer|False|ID of the site scanned|
+|siteName|string|False|Name of the site scanned|
+|startTime|date|False|Start time for the scan|
+|startedBy|string|False|User that started the scan|
+|status|string|False|Scan status (aborted, unknown, running, finished, stopped, error, paused, dispatched, integrating)|
+|vulnerabilities|vulnerabilities_count|False|Counts of vulnerabilities identified during the scan|
+
+### scan_engine
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address|string|True|Scan engine address (IP/hostname)|
+|contentVersion|string|False|Scan engine content version|
+|enginePools|[]integer|True|Engine pool IDs with which the scan engine is associated|
+|id|integer|True|Scan engine identifier|
+|lastRefreshedDate|date|False|Date and time when the engine last communicated with the console|
+|lastUpdatedDate|date|False|Date and time when the engine was last updated|
+|links|[]link|True|List of hypermedia links to corresponding resources|
+|name|string|True|Scan engine name|
+|port|integer|True|Scan engine communication port|
+|productVersion|string|False|Scan engine product version|
+|sites|[]integer|False|Sites with which the scan engine is associated|
+
+### scan_engine_pool
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|engines|[]integer|True|List of scan engine IDs associated with the scan engine pool|
+|id|integer|True|Scan engine pool identifier|
+|links|[]link|True|List of hypermedia links to corresponding resources|
+|name|string|True|Scan engine pool name|
+
+### authentication_source
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|external|boolean|True|Whether the authentication source is external (true) or internal (false)|
+|id|integer|True|Authentication source identifier|
+|links|[]link|True|List of hypermedia links to corresponding or related resources|
+|name|string|True|Authentication source name|
+|type|string|True|Authentication source type|
+
+### role
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|description|string|True|The description of the role|
+|id|string|True|ID of the role, e.g 'global-admin'|
+|links|[]link|True|List of hypermedia links to corresponding or related resources|
+|name|string|True|Name of the role|
+|privileges|[]string|True|List of privileges assigned to the role|
+
+### user_account_role
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|allAssetGroups|boolean|False|Whether the user has access to all asset groups|
+|allSites|boolean|False|Whether the user has access to all sites|
+|id|string|False|The identifier of the role the user is assigned to|
+|privileges|[]string|False|None|
+|superuser|boolean|False|Whether the user is a superuser|
+
+### user_account_locale
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|default|string|True|Default locale|
+|reports|string|True|Reports locale|
+
+### user_account
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|authentication|authentication_source|False|The authentication source used to authenticate the user|
+|email|string|False|The email address of the user|
+|enabled|boolean|False|Whether the user account is enabled|
+|id|integer|False|The identifier of the user|
+|links|[]link|False|List of hypermedia links to corresponding or related resources|
+|locale|user_account_locale|False|The locale and language preferences for the user|
+|locked|boolean|True|Whether the user account is locked (exceeded maximum password retry attempts)|
+|login|string|True|The login name of the user|
+|name|string|True|The full name of the user|
+|role|user_account_role|False|The privileges and role the user is assigned|
+
+### remediation_asset
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|criticalityTag|string|False|The criticality tag assigned to the asset|
+|hostName|string|False|Primary host name (local or FQDN) of the asset|
+|id|integer|True|Identifier of the asset|
+|ip|string|True|Primary IPv4 or IPv6 address of the asset|
+|mac|string|False|Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48|
+|os|string|False|Full description of the operating system of the asset|
+|riskScore|float|False|Risk score (with criticality adjustments) of the asset|
+
+### remediation_vulnerability
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|cvssScore|string|True|The CVSS score of the vulnerability|
+|description|string|True|The description of the vulnerability|
+|id|integer|True|Identifier of the vulnerability|
+|riskScore|integer|True|The risk score of the vulnerability|
+|severity|integer|True|The severity of the vulnerability|
+|title|string|True|The title of the vulnerability|
+
+### remediation
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|assetCount|integer|True|The number of assets that require the solution to be applied|
+|assets|[]remediation_asset|True|The assets that require the solution to be applied|
+|fix|string|False|The steps that are part of the fix this solution prescribes|
+|nexposeId|string|True|The identifier of the solution within InsightVM/Nexpose|
+|riskScore|integer|True|The risk score that is reduced by performing the solution|
+|solutionId|integer|True|The identifier of the solution|
+|summary|string|True|Remediation summary|
+|vulnerabilities|[]remediation_vulnerability|True|The vulnerabilities that would be remediated|
+|vulnerabilityCount|integer|True|The number of vulnerabilities that would be remediated|
