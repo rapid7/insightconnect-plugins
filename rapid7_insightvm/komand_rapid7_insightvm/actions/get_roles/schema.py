@@ -115,11 +115,11 @@ class GetRolesOutput(komand.Output):
         }
       },
       "required": [
+        "description",
+        "id",
         "links",
         "name",
-        "privileges",
-        "description",
-        "id"
+        "privileges"
       ],
       "definitions": {
         "link": {

@@ -3,6 +3,7 @@ from .schema import CreateScanEnginePoolInput, CreateScanEnginePoolOutput
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand.exceptions import PluginException
 
 
 class CreateScanEnginePool(komand.Action):
@@ -24,7 +25,7 @@ class CreateScanEnginePool(komand.Action):
 
         if ('engines' not in params) or (('engines' in params) and (len(params['engines']) == 0)):
             error = "At least 1 scan engine must be assigned to the scan engine pool for creation."
-            raise Exception(error)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         self.logger.info("Creating scan engine pool...")
         response = resource_helper.resource_request(endpoint=endpoint, method='post', payload=params)

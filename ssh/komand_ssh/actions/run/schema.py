@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run remote command"
+
+
 class Input:
     COMMAND = "command"
     HOST = "host"

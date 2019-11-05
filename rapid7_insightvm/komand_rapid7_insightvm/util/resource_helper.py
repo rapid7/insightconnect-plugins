@@ -79,6 +79,8 @@ class ResourceHelper(object):
                 params = {}
             if payload is None:
                 response = request_method(url=endpoint, headers=headers, params=params, verify=False)
+            elif 'rawbody' in payload.keys():
+                response = request_method(url=endpoint, headers=headers, params=params, data=payload['rawbody'], verify=False)
             else:
                 response = request_method(url=endpoint, headers=headers, params=params, json=payload, verify=False)
         except requests.RequestException as e:
@@ -151,7 +153,7 @@ class ResourceHelper(object):
             self.logger.info(f"Got {len(response.resources)} resources "
                              f"from page {response.page_num} / {response.total_pages}")
 
-            if (response.total_pages is 0) or ((response.total_pages - 1) is response.page_num):
+            if (response.total_pages == 0) or ((response.total_pages - 1) == response.page_num):
                 self.logger.info("All pages consumed, returning results...")
                 break  # exit the loop
             else:

@@ -162,15 +162,15 @@ class GetSiteOutput(komand.Output):
         }
       },
       "required": [
-        "type",
-        "name",
-        "scanTemplate",
-        "importance",
-        "links",
-        "riskScore",
-        "scanEngine",
         "assets",
         "id",
+        "importance",
+        "links",
+        "name",
+        "riskScore",
+        "scanEngine",
+        "scanTemplate",
+        "type",
         "vulnerabilities"
       ],
       "definitions": {

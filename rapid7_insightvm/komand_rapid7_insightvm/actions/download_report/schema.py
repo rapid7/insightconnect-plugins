@@ -36,8 +36,8 @@ class DownloadReportInput(komand.Input):
     }
   },
   "required": [
-    "instance",
-    "id"
+    "id",
+    "instance"
   ]
 }
     """)

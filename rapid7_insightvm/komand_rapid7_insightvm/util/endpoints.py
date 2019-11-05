@@ -453,6 +453,48 @@ class Vulnerability:
         return f"{console_url}/api/3/vulnerability_checks"
 
 
+class VulnerabilityException:
+
+    @staticmethod
+    def vulnerability_exceptions(console_url):
+        """
+        Interacts with all vulnerability exceptions
+        :param console_url: URL to the InsightVM console
+        :return: pre-populated GET /api/3/vulnerability_exceptions
+        """
+        return f"{console_url}/api/3/vulnerability_exceptions"
+
+    @staticmethod
+    def vulnerability_exception(console_url, id):
+        """
+        Interacts with a single vulnerability exception
+        :param console_url: URL to the InsightVM console
+        :parm id: optional sort order for results
+        :return: pre-populated GET /api/3/vulnerability_exceptions
+        """
+        return f"{console_url}/api/3/vulnerability_exceptions/{id}"
+
+    @staticmethod
+    def vulnerability_exception_expiration(console_url, id):
+        """
+        Interacts with vulnerability exception expiration
+        :param console_url: URL to the InsightVM console
+        :parm id: optional sort order for results
+        :return: pre-populated GET /api/3/vulnerability_exceptions
+        """
+        return f"{console_url}/api/3/vulnerability_exceptions/{id}/expires"
+
+    @staticmethod
+    def vulnerability_exception_status(console_url, id, status):
+        """
+        Update vulnerability exception status
+        :param console_url: URL to the InsightVM console
+        :parm id: optional sort order for results
+        :return: pre-populated POST /api/3/vulnerability_exceptions
+        """
+        return f"{console_url}/api/3/vulnerability_exceptions/{id}/{status}"
+
+
 class User:
 
     @staticmethod

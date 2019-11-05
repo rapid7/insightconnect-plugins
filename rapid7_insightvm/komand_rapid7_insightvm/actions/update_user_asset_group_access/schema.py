@@ -39,8 +39,8 @@ class UpdateUserAssetGroupAccessInput(komand.Input):
     }
   },
   "required": [
-    "user_id",
-    "asset_group_ids"
+    "asset_group_ids",
+    "user_id"
   ]
 }
     """)
