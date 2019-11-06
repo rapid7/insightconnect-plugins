@@ -1,24 +1,47 @@
-# AWS Security Hub
-
-## About
+# Description
 
 [AWS Security Hub](https://aws.amazon.com/security-hub/) is a comprehensive view of your high-priority security alerts and compliance status across AWS accounts.
 
 This plugin utilizes the [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html) and [Boto3](https://github.com/boto/boto3) Python library.
 
-## Actions
+# Key Features
 
-### Get Findings
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|aws_access_key_id|credential_secret_key|None|True|The ID of the AWS Access Key to use for authentication with AWS|None|
+|aws_secret_access_key|credential_secret_key|None|True|The AWS Secret Access Key used for signing requests with the given AWS Access Key ID|None|
+|region|string|None|False|AWS Region. This is not required|['us-east-2', 'us-east-1', 'us-west-1', 'us-west-2', 'ca-central-1', 'ap-south-1', 'ap-northeast-2', 'ap-southeast-1', 'ap-southeast-2', 'ap-northeast-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'sa-east-1']|
+
+## Technical Details
+
+### Actions
+
+#### Get Findings
 
 This action is used to lists and describes Security Hub-aggregated findings that are specified by filter attributes.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filters|object|None|False|An object of filters|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -86,13 +109,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-### Get SQS Message
+#### Get SQS Message
 
 This trigger is used to poll from a SQS Queue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -108,7 +131,7 @@ This trigger is used to poll from a SQS Queue.
 Additional Configuration Information:
   To enable long-poll support for the SQS Feed increase `WaitTimeSeconds`.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -160,46 +183,15 @@ Example output:
 }
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|aws_access_key_id|credential_secret_key|None|True|The ID of the AWS Access Key to use for authentication with AWS|None|
-|aws_secret_access_key|credential_secret_key|None|True|The AWS Secret Access Key used for signing requests with the given AWS Access Key ID|None|
-|region|string|None|False|AWS Region. This is not required|['us-east-2', 'us-east-1', 'us-west-1', 'us-west-2', 'ca-central-1', 'ap-south-1', 'ap-northeast-2', 'ap-southeast-1', 'ap-southeast-2', 'ap-northeast-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'sa-east-1']|
-
-## Troubleshooting
-
-This plugin does not contain any troubleshooting information.
-
-## Versions
-
-* 1.0.0 - Initial plugin
-
-## Workflows
-
-Examples:
-
-* Get a list of findings, iterate over findings and enrich or alert on the type of finding.
-* Access an SQS feed that contains findings from Security Hub and perform data enrichment on the finding.
-
-## References
-
-* [AWS Security Hub](https://aws.amazon.com/security-hub/)
-* [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html)
-* [Boto3](https://github.com/boto/boto3)
-
-## Custom Output Types
-
-### Compliance
+#### Compliance
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Status|string|False|Status|
 
-### Malware
+#### Malware
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -208,7 +200,7 @@ Examples:
 |State|string|False|State|
 |Type|string|False|Type|
 
-### Network
+#### Network
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -224,7 +216,7 @@ Examples:
 |SourceMac|string|False|Source MAC|
 |SourcePort|integer|False|Source port|
 
-### Note
+#### Note
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -232,7 +224,7 @@ Examples:
 |UpdatedAt|string|False|Updated At|
 |UpdatedBy|string|False|Updated by|
 
-### Process
+#### Process
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -243,33 +235,33 @@ Examples:
 |Pid|integer|False|PID|
 |TerminatedAt|string|False|Terminated at|
 
-### ProductFields
+#### ProductFields
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |string|string|False|String|
 
-### RelatedFindings
+#### RelatedFindings
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Id|string|False|ID|
 |ProductArn|string|False|Product ARN|
 
-### Recommendation
+#### Recommendation
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Text|string|False|Text|
 |Url|string|False|URL|
 
-### Remediation
+#### Remediation
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Recommendation|Recommendation|False|Recommendation|
 
-### AwsEc2Instance
+#### AwsEc2Instance
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -283,7 +275,7 @@ Examples:
 |Type|string|False|Type|
 |VpcId|string|False|VPC ID|
 
-### AwsIamAccessKey
+#### AwsIamAccessKey
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -291,14 +283,14 @@ Examples:
 |Status|string|False|Status|
 |UserName|string|False|Username|
 
-### AwsS3Bucket
+#### AwsS3Bucket
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |OwnerId|string|False|Owner ID|
 |OwnerName|string|False|Owner name|
 
-### Container
+#### Container
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -307,7 +299,7 @@ Examples:
 |LaunchedAt|string|False|Launched at|
 |Name|string|False|Name|
 
-### Details
+#### Details
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -317,7 +309,7 @@ Examples:
 |Container|Container|False|Container|
 |Other|ProductFields|False|Other|
 
-### Resources
+#### Resources
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -328,14 +320,14 @@ Examples:
 |Tags|ProductFields|False|Tags|
 |Type|string|False|Type|
 
-### Severity
+#### Severity
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Normalized|integer|False|Normalized|
 |Product|integer|False|Product|
 
-### ThreatIntelIndicators
+#### ThreatIntelIndicators
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -346,7 +338,7 @@ Examples:
 |Type|string|False|Type|
 |Value|string|False|Value|
 
-### Findings
+#### Findings
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -381,20 +373,20 @@ Examples:
 |VerificationState|string|False|Verification state|
 |WorkflowState|string|False|Workflow state|
 
-### Attributes
+#### Attributes
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |SentTimestamp|string|False|Sent timestamp|
 
-### Author
+#### Author
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |DataType|string|False|Data type|
 |StringValue|string|False|String value|
 
-### MessageAttributes
+#### MessageAttributes
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -402,7 +394,7 @@ Examples:
 |Title|Author|False|Title|
 |WeeksOn|Author|False|Weeks on|
 
-### Message
+#### Message
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -414,7 +406,7 @@ Examples:
 |MessageId|string|False|Message ID|
 |ReceiptHandle|string|False|Receipt handle|
 
-### HTTPHeaders
+#### HTTPHeaders
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -423,7 +415,7 @@ Examples:
 |date|string|False|Date|
 |x-amzn-requestid|string|False|X-amzn-requestid|
 
-### ResponseMetadata
+#### ResponseMetadata
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -431,3 +423,24 @@ Examples:
 |HTTPStatusCode|integer|False|HTTP status code|
 |RequestId|string|False|Request ID|
 |RetryAttempts|integer|False|Retry attempts|
+
+## Troubleshooting
+
+This plugin does not contain any troubleshooting information.
+
+# Version History
+
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [AWS Security Hub](https://aws.amazon.com/security-hub/)
+* [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html)
+* [Boto3](https://github.com/boto/boto3)
+

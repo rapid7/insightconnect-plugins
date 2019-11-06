@@ -1,18 +1,34 @@
-
-# Nmap
-
-## About
+# Description
 
 [Nmap](https://nmap.org) ("Network Mapper") is an open source tool for network exploration and security auditing.
 The Nmap plugin runs Nmap directly and returns the results.
 
-## Actions
+# Key Features
 
-### Scan
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Scan
 
 This action is used to run an Nmap scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -21,7 +37,7 @@ This action is used to run an Nmap scan.
 |ports|string|None|False|Port(s) to scan in Nmap-allowed formats|None|
 |arguments|string|None|False|Arguments to supply to the Nmap command, Nmap <arguments>|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -76,33 +92,33 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Port scanning
-* Host discovery
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 0.2.0 - Update to v2 Python plugin architecture
-* 1.0.0 - Overhaul with additional inputs and typed output
 * 1.0.1 - Support web server mode
+* 1.0.0 - Overhaul with additional inputs and typed output
+* 0.2.0 - Update to v2 Python plugin architecture
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Nmap](https://nmap.org/)
+

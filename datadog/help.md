@@ -1,18 +1,41 @@
-# Datadog
-
-## About
+# Description
 
 [Datadog](https://www.datadoghq.com/) is a monitoring service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform
 
 This plugin utilizes the [Datadog API](https://docs.datadoghq.com/api/?lang=python#overview).
 
-## Actions
+# Key Features
 
-### Post Event
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|The API key for Datadog|None|
+|app_key|string|None|True|Application key|None|
+|url|string|None|True|The Datadog URL. Normally https\://api.datadoghq.com/api/v1/|None|
+
+## Technical Details
+
+### Actions
+
+#### Post Event
 
 This action is used to post an event.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -24,7 +47,7 @@ This action is used to post an event.
 |tags|string|None|False|A comma separated list of tags to apply to the event|None|
 |alert_type|string|None|True|Event alert type|['error', 'warning', 'info', 'success']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -50,12 +73,12 @@ Example output:
 }
 ```
 
-### Post Metrics
+#### Post Metrics
 
 This action is used to post time-series data that can be graphed on Datadog's dashboards. The limit for compressed payloads is 3.2 megabytes (3200000), and 62 megabytes (62914560) for decompressed payloads.
 It expects the body of the [timeseries data structure](https://docs.datadoghq.com/api/?lang=bash#post-timeseries-points).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -80,7 +103,7 @@ Example input:
 ]
 ```
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -98,35 +121,30 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|The API key for Datadog|None|
-|app_key|string|None|True|Application key|None|
-|url|string|None|True|The Datadog URL. Normally https\://api.datadoghq.com/api/v1/|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
 * 1.1.0 - New action Post Metrics | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Run plugin as least privileged user
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Get information on a specified event
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Datadog API](https://docs.datadoghq.com/api/?lang=python#overview)
+

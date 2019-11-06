@@ -1,6 +1,4 @@
-# Azure AD Admin
-
-## About
+# Description
 
 [Azure](https://azure.microsoft.com) AD Admin will perform administrative tasks in Azure AD.
 It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in
@@ -15,13 +13,38 @@ NOTE: The application this plugin connects to needs the following permissions:
 The application will need to be added to the Global Administrator role. This can be done in `Roles and administrators`
 in Azure Active directory via the Azure Portal.
 
-## Actions
+# Key Features
 
-### Create User and Notify
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|app_id|string|None|True|The ID of the registered app that obtained the refresh token|None|
+|app_secret|credential_secret_key|None|True|The secret of the registered app that obtained the refresh token|None|
+|tenant_id|string|None|True|The ID of the directory that identifies the tenant|None|
+
+## Technical Details
+
+### Actions
+
+#### Create User and Notify
 
 This action is used to create a user with a randomly generated password and send out an email with the password.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -33,7 +56,7 @@ This action is used to create a user with a randomly generated password and send
 |notify_recipient|string|None|True|Email address of the account to be notified of user creation|None|
 |user_principal_name|string|None|True|The user principal name e.g. someuser@contoso.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -47,17 +70,17 @@ Example output:
 }
 ```
 
-### Disable User Account
+#### Disable User Account
 
 This action is used to disable a user account. This action will not disable an administrative account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|string|None|True|User ID to disable e.g. bob@hotmail.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -71,17 +94,17 @@ Example output:
 }
 ```
 
-### Enable User Account
+#### Enable User Account
 
 This action is used to enable a user account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|string|None|True|User ID to enable e.g. bob@hotmail.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -95,17 +118,17 @@ Example output:
 }
 ```
 
-### Force User to Change Password
+#### Force User to Change Password
 
 This action forces a user to change their password on their next successful login.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|string|None|True|User ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -119,17 +142,17 @@ Example output:
 }
 ```
 
-### Get User Info
+#### Get User Info
 
 This action is used to get user information.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|string|None|True|User ID e.g. bob@hotmail.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -157,17 +180,17 @@ Example output:
 }
 ```
 
-### Get Group by Name
+#### Get Group by Name
 
 This action is used to get a group by it's name.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|True|Name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -210,18 +233,18 @@ Example output:
 }
 ```
 
-### Add User to Group
+#### Add User to Group
 
 This action is used to add a user to a group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group_name|string|None|True|Group Name e.g. My Azure Group|None|
 |user_id|string|None|True|User ID e.g. bob@hotmail.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -235,18 +258,18 @@ Example output:
 }
 ```
 
-### Remove User from Group
+#### Remove User from Group
 
 This action is used to remove a user from a group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group_name|string|None|True|Group Name e.g. My Azure Group|None|
 |user_id|string|None|True|User ID e.g. bob@hotmail.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -260,48 +283,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|app_id|string|None|True|The ID of the registered app that obtained the refresh token|None|
-|app_secret|credential_secret_key|None|True|The secret of the registered app that obtained the refresh token|None|
-|tenant_id|string|None|True|The ID of the directory that identifies the tenant|None|
-
-## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
-
-## Workflows
-
-Examples:
-
-* Disable a user
-* Enable a user
-* Get user information
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 1.1.0 - New action Force User to Change Password
-* 1.2.0 - New actions Get Group by Name, Add User to Group, and Remove User from Group
-* 1.3.0 - New action Create User
-
-## References
-
-* [Azure AD Admin](https://azure.microsoft.com)
-* [User API](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0)
-* [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)
-
-## Custom Output Types
-
-### user_information
+#### user_information
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -319,7 +307,7 @@ Examples:
 |surname|string|False|Surname|
 |userPrincipalName|string|False|User Principal Name|
 
-### group
+#### group
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -337,4 +325,26 @@ Examples:
 |securityEnabled|boolean|False|Security enabled|
 |visibility|string|False|Visibility|
 
+## Troubleshooting
+
+_This plugin does not contain any troubleshooting information._
+
+# Version History
+
+* 1.3.0 - New action Create User
+* 1.2.0 - New actions Get Group by Name, Add User to Group, and Remove User from Group
+* 1.1.0 - New action Force User to Change Password
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [Azure AD Admin](https://azure.microsoft.com)
+* [User API](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0)
+* [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)
 

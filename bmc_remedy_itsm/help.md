@@ -1,16 +1,40 @@
-# BMC Remedy ITSM
-
-## About
+# Description
 
 [BMC Remedy ITSM](https://www.bmc.com/it-solutions/it-service-management.html) transforms your service desk with the right ITSM solution.
 
-## Actions
+# Key Features
 
-### Assign Incident
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+||Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_username_password|None|True|Username and password|None|
+|port|string|None|True|The port the REST API is listening on. This may be different than the port for the web interface|None|
+|ssl_verify|boolean|None|True|Boolean property used to decide whether to verify a TSL or SSL certificate|None|
+|url|string|None|True|The URL for the BCM Remedy ITSM server. e.g. http://remd-itsm1902.xxx.xxx.rapid7.com|None|
+
+## Technical Details
+
+### Actions
+
+#### Assign Incident
 
 This action is used to assign an Incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -18,7 +42,7 @@ This action is used to assign an Incident.
 |assignee|string|None|True|The name of the assignee e.g. Allen Allbrook|None|
 |incident_id|string|None|True|Incident ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -142,11 +166,11 @@ Example output:
 
 ```
 
-### Close Incident
+#### Close Incident
 
 This action is used to close an Incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -154,7 +178,7 @@ This action is used to close an Incident.
 |resolution_description|string|None|True|A description of the resolution|None|
 |resolution_type|string|None|True|resolution type Closed, Resolved, Cancelled|['Closed', 'Resolved', 'Cancelled']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -278,11 +302,11 @@ Example output:
 
 ```
 
-### Create Incident
+#### Create Incident
 
 This action is used to create an Incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -297,7 +321,7 @@ This action is used to create an Incident.
 |status|string|None|True|Incident status|None|
 |urgency|string|None|True|Incident urgency|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -311,17 +335,17 @@ Example output:
 }
 ```
 
-### Get Incident Information
+#### Get Incident Information
 
 This action is used to get incident information.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |incident_id|string|None|True|Incident ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -489,17 +513,17 @@ Example output:
 }
 ```
 
-### Search Incident
+#### Search Incident
 
 This action is used to search for incidents by their properties.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |search_parameters|string|None|True|Search query. Reference the plugin help documentation for properly constructing a query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -618,11 +642,11 @@ Example output:
 
 ```
 
-### Update Incident
+#### Update Incident
 
 This action is used to update an Incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -634,7 +658,7 @@ This action is used to update an Incident.
 |status|string|None|False|Incident status|None|
 |urgency|string|None|False|Incident urgency|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -794,18 +818,18 @@ Example output:
 }
 ```
 
-### Update Incident Status
+#### Update Incident Status
 
 This action is used to update the status of an incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |incident_id|string|None|True|Incident ID|None|
 |status|string|None|True|Incident status e.g. Assigned, In Progress, Pending, Resolved, Closed, Cancelled|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -965,20 +989,20 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-### New Incident Found
+#### New Incident Found
 
 This trigger returns any new incidents found.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |description_query|string|None|False|Description query. Regex capable|None|
 |interval|integer|15|False|How often to poll for new incidents in seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1138,72 +1162,35 @@ Example output:
 }
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-||Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Username and password|None|
-|port|string|None|True|The port the REST API is listening on. This may be different than the port for the web interface|None|
-|ssl_verify|boolean|None|True|Boolean property used to decide whether to verify a TSL or SSL certificate|None|
-|url|string|None|True|The URL for the BCM Remedy ITSM server. e.g. http://remd-itsm1902.xxx.xxx.rapid7.com|None|
-
-## Troubleshooting
-
-By default the API port is 8008.
-To configure the BMC server for API usage: https://docs.bmc.com/docs/ars9000/configuring-the-rest-api-529403222.html
-
-## Workflows
-
-Examples:
-
-* Get an ITSM incident
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 1.1.0 - New action Create Incident
-* 1.2.0 - New action Close Incident
-* 1.3.0 - New action Update Incident
-* 1.4.0 - New actions Update Incident Status and Search Incident
-* 1.5.0 - New trigger New Incident Found
-* 1.6.0 - New action Assign Incident
-
-## References
-
-* [BMC Remedy ITSM](https://www.bmc.com/it-solutions/it-service-management.html)
-* [BMC Remedy ITSM API](https://docs.bmc.com/docs/ars9000/bmc-remedy-ar-system-rest-api-overview-515804627.html)
-
-## Custom Output Types
-
-### self
+#### self
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |href|string|False|HREF|
 
-### _links
+#### _links
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |self|[]self|False|Self|
 
-### Closed_Type
+#### Closed_Type
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |timestamp|string|False|Timestamp|
 |user|string|False|User|
 
-### Status_History_Type
+#### Status_History_Type
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Closed|Closed_Type|False|Closed|
 |New|Closed_Type|False|New|
 
-### values
+#### values
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1343,9 +1330,36 @@ Examples:
 |Vendor Assignee Groups|string|False|Vendor assignee groups|
 |z1D_PreviousAssignedCompany|string|False|z1D previous assigned company|
 
-### incident
+#### incident
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |_links|_links|False| links|
 |values|values|False|Values|
+
+## Troubleshooting
+
+By default the API port is 8008.
+To configure the BMC server for API usage: https://docs.bmc.com/docs/ars9000/configuring-the-rest-api-529403222.html
+
+# Version History
+
+* 1.6.0 - New action Assign Incident
+* 1.5.0 - New trigger New Incident Found
+* 1.4.0 - New actions Update Incident Status and Search Incident
+* 1.3.0 - New action Update Incident
+* 1.2.0 - New action Close Incident
+* 1.1.0 - New action Create Incident
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [BMC Remedy ITSM](https://www.bmc.com/it-solutions/it-service-management.html)
+* [BMC Remedy ITSM API](https://docs.bmc.com/docs/ars9000/bmc-remedy-ar-system-rest-api-overview-515804627.html)
+

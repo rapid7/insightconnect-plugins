@@ -1,24 +1,40 @@
-
-# PDF Reader
-
-## About
+# Description
 
 PDF Reader is a plugin for extracting text from a PDF file.
 This plugin utilizes a python package called [PyPDF2](https://pypi.org/project/PyPDF2/).
 
-## Actions
+# Key Features
 
-### Extract Text
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Extract Text
 
 This action is used to extract text from a PDF file.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |contents|bytes|None|True|PDF file to extract text from|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -34,29 +50,30 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 0.1.0 - Initial plugin
 * 1.0.0 - Support web server mode
+* 0.1.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* PDF content analysis
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [PyPDF2](https://pypi.org/project/PyPDF2/)
+

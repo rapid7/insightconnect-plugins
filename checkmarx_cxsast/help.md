@@ -1,23 +1,45 @@
-# Checkmarx CxSAST
-
-## About
+# Description
 
 [Checkmarx CxSAST](https://www.checkmarx.com/products/static-application-security-testing/) Static analysis solution used to identify security vulnerabilities in custom code and open source components.
 
-## Actions
+# Key Features
 
-### Create Branched Project
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_username_password|None|True|CxSAST username and password|None|
+|host|string|None|True|Host URL|None|
+
+## Technical Details
+
+### Actions
+
+#### Create Branched Project
 
 This action is used to create a branch of an existing project.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|ID of the project off which to create a branch|None|
 |project|project|None|True|Details of the project|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -36,11 +58,11 @@ Example output:
 }
 ```
 
-### Create Project
+#### Create Project
 
 This action is used to create a new project with default preset and configuration settings.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -48,7 +70,7 @@ This action is used to create a new project with default preset and configuratio
 |name|string|None|True|Name of the project|None|
 |owningTeam|string|None|True|ID of the team that owns the project|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -67,11 +89,11 @@ Example output:
 }
 ```
 
-### Create Scan
+#### Create Scan
 
 This action creates a new Checkmarx Scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -81,7 +103,7 @@ This action creates a new Checkmarx Scan.
 |isPublic|boolean|None|False|Specifies whether the requested scan is public or private|None|
 |projectId|integer|None|False|Unique ID of the project to be scanned|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -100,11 +122,11 @@ Example output:
 }
 ```
 
-### Define Scan Settings
+#### Define Scan Settings
 
 This action is used to define the SAST scan settings according to a project (preset and engine configuration).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -113,7 +135,7 @@ This action is used to define the SAST scan settings according to a project (pre
 |presetId|integer|None|True|Unique ID of the preset|None|
 |projectId|integer|None|True|Unique ID of the project|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -132,17 +154,17 @@ Example output:
 }
 ```
 
-### Get Scan Details
+#### Get Scan Details
 
 This action is used to get details of a specific SAST scan. Scan details can only be retrieved once a scan has been performed and the scan ID (id) is known.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Unique ID of the scan|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -235,53 +257,27 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|CxSAST username and password|None|
-|host|string|None|True|Host URL|None|
-
-## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
-
-## Workflows
-
-_This plugin does not contain any example workflows._
-
-## Versions
-
-* 1.0.0 - Initial plugin
-
-## References
-
-* [Checkmarx CxSAST](https://www.checkmarx.com/products/static-application-security-testing/)
-* [CxSAST REST API](https://checkmarx.atlassian.net/wiki/spaces/KC/pages/131039271/CxSAST%2BREST%2BAPI)
-
-## Custom Output Types
-
-### custom_field
+#### custom_field
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|True|Unique ID of the custom field|
 |value|string|False|Custom field value|
 
-### link
+#### link
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |rel|string|False|Relation of the link|
 |uri|string|False|Relative URL of the project|
 
-### source_settings_link
+#### source_settings_link
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -289,7 +285,7 @@ _This plugin does not contain any example workflows._
 |type|string|False|Type of Source Control Repository|
 |uri|string|False|Relative URL of the project|
 
-### project
+#### project
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -300,14 +296,14 @@ _This plugin does not contain any example workflows._
 |sourceSettingsLink|source_settings_link|False|None|
 |team_id|string|False|ID of the team to which this project belongs|
 
-### status_details
+#### status_details
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |stage|string|False|Status stage|
 |step|string|False|Status step|
 
-### status
+#### status
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -315,14 +311,14 @@ _This plugin does not contain any example workflows._
 |id|integer|False|ID of the status|
 |name|string|False|Name of the status|
 
-### scan_type
+#### scan_type
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|False|ID of the scan type|
 |value|string|False|Value of the scan type|
 
-### date_and_time
+#### date_and_time
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -331,7 +327,7 @@ _This plugin does not contain any example workflows._
 |finishedOn|date|False|Date the scan finished on|
 |startedOn|date|False|Date the scan was fired|
 
-### language_state_collection
+#### language_state_collection
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -340,7 +336,7 @@ _This plugin does not contain any example workflows._
 |languageName|string|False|Name of the programming language|
 |stateCreationDate|date|False|State creation date of the language|
 
-### scan_state
+#### scan_state
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -352,7 +348,7 @@ _This plugin does not contain any example workflows._
 |path|string|False|Path of the scan state|
 |sourceId|string|False|ID of the source|
 
-### engine_server
+#### engine_server
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -360,14 +356,14 @@ _This plugin does not contain any example workflows._
 |link|link|False|Link to the engine server|
 |name|string|False|Name of the engine serer|
 
-### finished_scan_status
+#### finished_scan_status
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|False|ID of the finished scan status|
 |value|string|False|Value of the finished scan status|
 
-### scan_details
+#### scan_details
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -392,7 +388,7 @@ _This plugin does not contain any example workflows._
 |scanType|scan_type|False|Type of the scan|
 |status|status|False|Status of the scan|
 
-### email_notifications
+#### email_notifications
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -400,4 +396,22 @@ _This plugin does not contain any example workflows._
 |beforeScan|string|False|Specifies the email to send the pre-scan message|
 |failedScans|string|False|Specifies the email to send the scan failure message|
 
+## Troubleshooting
+
+_This plugin does not contain any troubleshooting information._
+
+# Version History
+
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [Checkmarx CxSAST](https://www.checkmarx.com/products/static-application-security-testing/)
+* [CxSAST REST API](https://checkmarx.atlassian.net/wiki/spaces/KC/pages/131039271/CxSAST%2BREST%2BAPI)
 

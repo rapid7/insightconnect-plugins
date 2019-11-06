@@ -1,7 +1,4 @@
-
-# Dirname
-
-## About
+# Description
 
 The `dirname` utility deletes any suffix beginning with the slash `/` character
 This plugin is used to get the directory name of a file path or protocol and domain of a URL. Examples, using Python
@@ -15,19 +12,38 @@ This plugin is used to get the directory name of a file path or protocol and dom
 
 ```
 
-## Actions
+# Key Features
 
-### Dirname
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Dirname
 
 This action is used to get the directory name of a path.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |path|string|None|True|URL or file path|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -43,31 +59,32 @@ Example output
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 If the input doesn't contain a slash `/` in the path, the result will be an empty string.
 
-## Versions
+# Version History
 
-* 0.1.0 - Initial plugin
-* 0.1.1 - Update to v2 Python plugin architecture
-* 1.0.0 - Support web server mode
 * 1.0.1 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size
+* 1.0.0 - Support web server mode
+* 0.1.1 - Update to v2 Python plugin architecture
+* 0.1.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Data formatting for any workflow
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Python Dirname](https://docs.python.org/2/library/os.path.html#os.path.dirname)
+

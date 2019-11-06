@@ -1,25 +1,41 @@
-
-# Unshorten.me
-
-## About
+# Description
 
 [Unshorten.me](https://unshorten.me/) is a free service which unshorten's a wide range of shortened URLs.
 
 This plugin utilizes the [Unshorten.me API](https://unshorten.me/api).
 
-## Actions
+# Key Features
 
-### Unshorten
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Unshorten
 
 This action is used to unshorten a URL.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|Short URL|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -59,30 +75,31 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Note that the API is limited to 10 requests per hour per IP address.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
 * 1.0.1 - Graceful exit for invalid URLs
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Phishing campaigns
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Unshorten.me](https://unshorten.me/)
 * [API](https://unshorten.me/)
+

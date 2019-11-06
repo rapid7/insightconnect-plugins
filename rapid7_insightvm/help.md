@@ -1,24 +1,46 @@
-# Rapid7 InsightVM
-
-## About
+# Description
 
 Utilizing the power of Rapid7's Insight platform and the heritage of our award-winning Nexpose product, InsightVM - our vulnerability management solution - provides a fully available, scalable, and efficient way to collect your vulnerability data, turn it into answers, and minimize your risk in modern networks.
 
 This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html).
 
-## Actions
+# Key Features
 
-### Get Asset
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https\://insightvm.example.com\:3780|None|
+|credentials|credential_username_password|None|True|Username and password|None|
+
+## Technical Details
+
+### Actions
+
+#### Get Asset
 
 This action gets an asset by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Get an asset by ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -157,17 +179,17 @@ Example output:
 }
 ```
 
-### Get Asset Tags
+#### Get Asset Tags
 
 This action is used to get a listing of all tags for an asset.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |asset_id|integer|None|True|Identifier of asset|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -276,17 +298,17 @@ Example output:
 }
 ```
 
-### Get Asset Vulnerabilities
+#### Get Asset Vulnerabilities
 
 This action is used to get vulnerabilities found on an asset. Can only be used if the asset has first been scanned (via Komand or other means).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |asset_id|string|None|True|ID of the asset for which to find vulnerabilities|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -342,17 +364,17 @@ Example output:
 
 ```
 
-### Get Asset Software
+#### Get Asset Software
 
 This action is used to get software found on an asset. Can only be used if the asset has first been scanned.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |asset_id|string|None|True|ID of the asset for which to find software|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -376,17 +398,17 @@ Example output:
 }
 ```
 
-### Get Scan
+#### Get Scan
 
 This action is used to get the status of a scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_id|string|None|True|ID of the scan to obtain|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -431,17 +453,17 @@ Example output:
 }
 ```
 
-### Get Site Assets
+#### Get Site Assets
 
 This action is used to get assets for a site.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |site_id|string|None|True|ID of the site to get assets for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -504,17 +526,17 @@ Example output:
 
 ```
 
-### Scan
+#### Scan
 
 This action is used to start a scan on a site.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |site_id|string|None|True|ID of the site to scan|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -544,11 +566,11 @@ Example output:
 
 ```
 
-### Generate AdHoc SQL Report
+#### Generate AdHoc SQL Report
 
 This action is used to create, generate, download, and cleanup a SQL report based on the provided query.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -557,7 +579,7 @@ This action is used to create, generate, download, and cleanup a SQL report base
 |scope|string|none|True|Scope context for generated report; if set, remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID; scan scope only supports single scan ID as input|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|
 |scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -574,18 +596,18 @@ Example output:
 }
 ```
 
-### Download Report
+#### Download Report
 
 This action is used to return the contents of a generated report.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |instance|string|None|True|The identifier of the report instance, 'latest' or ID e.g. 100|None|
 |id|integer|None|True|Identifier of the report to download e.g. 265|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -601,18 +623,18 @@ Example output:
 
 ```
 
-### List Reports
+#### List Reports
 
 This action is used to list reports and return their identifiers.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |sort|string|None|True|Sort order, ascending or descending|['Ascending', 'Descending']|
 |name|string|None|False|Name of report, otherwise all reports by criteria|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -639,17 +661,17 @@ Example output:
 
 ```
 
-### Get Vulnerability Affected Assets
+#### Get Vulnerability Affected Assets
 
 This action is used to get the assets affected by the vulnerability.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |vulnerability_id|string|None|True|The identifier of the vulnerability e.g. jre-vuln-cve-2013-2471|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -683,11 +705,11 @@ Example output:
 
 ```
 
-### Create Tag
+#### Create Tag
 
 This action is used to create a new tag.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -696,7 +718,7 @@ This action is used to create a new tag.
 |color|string|default|False|Tag color (only available for custom tags)|['default', 'blue', 'green', 'orange', 'purple', 'red']|
 |searchCriteria|object|None|False|Tag search Criteria - options documentation https\://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -710,17 +732,17 @@ Example output:
 }
 ```
 
-### Delete Tag
+#### Delete Tag
 
 This action is used to delete an existing tag.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Tag ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -739,18 +761,18 @@ Example output:
 }
 ```
 
-### Get Tags
+#### Get Tags
 
 This action is used to get a listing of all tags and return their details.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |type|string||False|Type of tag by which to filter, all types are returned if none is specified|['owner', 'location', 'custom', 'criticality', '']|
 |name|string||False|Tag name regular expression by which to filter|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -835,17 +857,17 @@ Example output:
 }
 ```
 
-### Get Tag
+#### Get Tag
 
 This action is used to get tag details by tag ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Tag ID, e.g. 1|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -910,17 +932,17 @@ Example output:
 }
 ```
 
-### Get Tag Sites
+#### Get Tag Sites
 
 This action is used to get site IDs associated with a tag.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |tag_id|integer|None|True|Tag ID for which to retrieve site associations|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -936,17 +958,17 @@ Example output:
 }
 ```
 
-### Get Tag Assets
+#### Get Tag Assets
 
 This action is used to tag ID for which to retrieve asset associations.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |tag_id|integer|None|True|Tag ID to add to site|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -974,17 +996,17 @@ Example output:
 }
 ```
 
-### Get Tag Asset Groups
+#### Get Tag Asset Groups
 
 This action is used to get asset groups associated with a tag.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |tag_id|integer|None|True|Tag ID for which to retrieve asset group associations|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1001,18 +1023,18 @@ Example output:
 }
 ```
 
-### Remove Asset Tag
+#### Remove Asset Tag
 
 This action is used to remove a tag from an asset.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |asset_id|integer|None|True|Asset ID from which to remove the tag|None|
 |tag_id|integer|None|True|Tag ID to remove from the asset|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1031,17 +1053,17 @@ Example output:
 }
 ```
 
-### Remove Asset Group Tags
+#### Remove Asset Group Tags
 
 This action is used to remove all tags from an asset group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Asset group ID from which to remove all tags|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1060,17 +1082,17 @@ Example output:
 }
 ```
 
-### Remove Tag Asset Groups
+#### Remove Tag Asset Groups
 
 This action is used to remove all asset group associations from a tag.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Tag ID from which to remove all asset group associations|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1089,17 +1111,17 @@ Example output:
 }
 ```
 
-### Remove Tag Sites
+#### Remove Tag Sites
 
 This action is used to remove all site associations from a tag.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Tag ID from which to remove all site associations|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1118,17 +1140,17 @@ Example output:
 }
 ```
 
-### Remove Tag Search Criteria
+#### Remove Tag Search Criteria
 
 This action is used to remove all search criteria from a tag.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Tag ID from which to remove all search criteria|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1147,18 +1169,18 @@ Example output:
 }
 ```
 
-### Tag Asset
+#### Tag Asset
 
 This action is used to add a tag to an asset.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |asset_id|integer|None|True|Asset ID to tag|None|
 |tag_id|integer|None|True|Tag ID to add to site|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1177,18 +1199,18 @@ Example output:
 }
 ```
 
-### Tag Asset Group
+#### Tag Asset Group
 
 This action is used to add a tag to an asset group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |asset_group_id|integer|None|True|Asset group ID to tag|None|
 |tag_id|integer|None|True|Tag ID to add to site|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1207,18 +1229,18 @@ Example output:
 }
 ```
 
-### Tag Site
+#### Tag Site
 
 This action is used to add a tag to a site.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |site_id|integer|None|True|Site ID to tag|None|
 |tag_id|integer|None|True|Tag ID to add to site|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1237,18 +1259,18 @@ Example output:
 }
 ```
 
-### Update Tag Search Criteria
+#### Update Tag Search Criteria
 
 This action is used to update the search criteria for an existing tag.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Tag ID|None|
 |searchCriteria|object|None|True|Tag search criteria - options documentation\: https\://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1267,17 +1289,17 @@ Example output:
 }
 ```
 
-### Asset Search
+#### Asset Search
 
 This action is used to search for assets using a filtered asset search.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |searchCriteria|object|None|True|Tag search criteria - options documentation\: https\://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1418,11 +1440,11 @@ Example output:
 }
 ```
 
-### Create Asset Group
+#### Create Asset Group
 
 This action is used to create an asset group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1431,7 +1453,7 @@ This action is used to create an asset group.
 |name|string|None|True|Asset group name|None|
 |searchCriteria|object|None|False|Asset group search criteria - options documentation\: https\://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1445,11 +1467,11 @@ Example output:
 }
 ```
 
-### Create Site
+#### Create Site
 
 This action is used to create a new site.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1463,7 +1485,7 @@ This action is used to create a new site.
 |included_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be included in the site|None|
 |excluded_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be excluded in the site|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1489,11 +1511,11 @@ Example output:
 }
 ```
 
-### Update Site
+#### Update Site
 
 This action is used to update an existing site.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1504,7 +1526,7 @@ This action is used to update an existing site.
 |importance|string|normal|True|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|
 |scan_template_id|string|None|True|The identifier of a scan template|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1525,11 +1547,11 @@ Example output:
 }
 ```
 
-### Update Site Included Targets
+#### Update Site Included Targets
 
 This action is used to update an existing site scope of included IP address and hostname targets.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1537,7 +1559,7 @@ This action is used to update an existing site scope of included IP address and 
 |included_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|
 |overwrite|boolean|True|True|Whether to overwrite the included targets to the current site or append to the previous list of included targets|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1558,11 +1580,11 @@ Example output:
 }
 ```
 
-### Update Site Excluded Targets
+#### Update Site Excluded Targets
 
 This action is used to update an existing site scope of excluded IP address and hostname targets.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1570,7 +1592,7 @@ This action is used to update an existing site scope of excluded IP address and 
 |excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|
 |overwrite|boolean|True|True|Whether to overwrite the excluded targets to the current site or append to the previous list of excluded targets|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1591,11 +1613,11 @@ Example output:
 }
 ```
 
-### Update Site Included Asset Groups
+#### Update Site Included Asset Groups
 
 This action is used to update an existing site scope of included asset groups.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1603,7 +1625,7 @@ This action is used to update an existing site scope of included asset groups.
 |included_asset_groups|[]integer|None|False|Assets associated with these asset group IDs will be included in the site|None|
 |overwrite|boolean|True|True|Whether to overwrite the included asset group IDs to the current site or append to the previous list of asset group IDs|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1624,11 +1646,11 @@ Example output:
 }
 ```
 
-### Update Site Excluded Asset Groups
+#### Update Site Excluded Asset Groups
 
 This action is used to update an existing site scope of excluded asset groups.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1636,7 +1658,7 @@ This action is used to update an existing site scope of excluded asset groups.
 |excluded_asset_groups|[]integer|None|False|Assets associated with these asset group IDs will be excluded from the site|None|
 |overwrite|boolean|True|True|Whether to overwrite the excluded asset group IDs to the current site or append to the previous list of asset group IDs|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1657,17 +1679,17 @@ Example output:
 }
 ```
 
-### Delete Site
+#### Delete Site
 
 This action is used to delete an existing site.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Site ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1686,17 +1708,17 @@ Example output:
 }
 ```
 
-### Get Asset Groups
+#### Get Asset Groups
 
 This action is used to get a list of asset groups.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string||False|Asset group name regular expression by which to filter|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1753,17 +1775,17 @@ Example output:
 }
 ```
 
-### Get Asset Group
+#### Get Asset Group
 
 This action is used to get an asset group by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Asset group ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1818,17 +1840,17 @@ Example output:
 }
 ```
 
-### Delete Asset Group
+#### Delete Asset Group
 
 This action is used to delete an existing asset group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Asset group ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1847,18 +1869,18 @@ Example output:
 }
 ```
 
-### Update Asset Group Search Criteria
+#### Update Asset Group Search Criteria
 
 This action is used to update the search criteria for an existing asset group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Asset group ID|None|
 |searchCriteria|object|None|True|Asset group search criteria - options documentation\: https\://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1877,17 +1899,17 @@ Example output:
 }
 ```
 
-### Get Sites
+#### Get Sites
 
 This action is used to get a list of sites.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string||False|Site name regular expression by which to filter|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1989,17 +2011,17 @@ Example output:
 }
 ```
 
-### Get Site
+#### Get Site
 
 This action is used to get a site by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Site ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2098,17 +2120,17 @@ Example output:
 }
 ```
 
-### Get Vulnerabilities by CVE
+#### Get Vulnerabilities by CVE
 
 This action is used to get vulnerability details associated with a CVE.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |cve_id|string|None|True|Common Vulnerabilities and Exposures ID, e.g CVE-2018-12345|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2203,17 +2225,17 @@ Example output:
 }
 ```
 
-### Get Scan Assets
+#### Get Scan Assets
 
 This action gets assets for a scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_id|integer|None|True|ID of the scan to get assets for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2316,18 +2338,18 @@ Example output:
 }
 ```
 
-### Get Scans
+#### Get Scans
 
 This action is used to get scans with optional site filter.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|False|Site ID|None|
 |active|boolean|False|False|Return running scans or past scans|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2373,18 +2395,18 @@ Example output:
 }
 ```
 
-### Update Scan Status
+#### Update Scan Status
 
 This action is used to update the status of a scan (pause, resume, stop).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Scan ID|None|
 |status|string|stop|True|Status to which the scan should be set|['stop', 'resume', 'pause']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2403,17 +2425,17 @@ Example output:
 }
 ```
 
-### Generate Shared Secret
+#### Generate Shared Secret
 
 This action is used to generate a shared secret for use with pairing a scan engine using the engine -> console communication direction.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |time_to_live|integer|3600|True|Time to live in seconds for the shared secret|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2427,18 +2449,18 @@ Example output:
 }
 ```
 
-### Get Scan Engines
+#### Get Scan Engines
 
 This action is used to list scan engines paired with the security console.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|False|Optional engine name by which to filter, accepts regular expression patterns|None|
 |address|string|None|False|Optional address (IP/hostname) by which to filter, accepts regular expression patterns|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2621,17 +2643,17 @@ Example output:
 }
 ```
 
-### Get Scan Engine
+#### Get Scan Engine
 
 This action is used to get a scan engine by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Scan engine identifier|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2680,11 +2702,11 @@ Example output:
 }
 ```
 
-### Create Scan Engine
+#### Create Scan Engine
 
 This action is used to create a new scan engine with console -> engine connectivity.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -2693,7 +2715,7 @@ This action is used to create a new scan engine with console -> engine connectiv
 |name|string|None|True|Scan engine name|None|
 |sites|[]integer|[]|False|List of site IDs with which to associate the engine|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2719,17 +2741,17 @@ Example output:
 }
 ```
 
-### Delete Scan Engine
+#### Delete Scan Engine
 
 This action is used to delete an existing scan engine from the security console.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Scan engine identifier|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2748,17 +2770,17 @@ Example output:
 }
 ```
 
-### Get Scan Engine Pools
+#### Get Scan Engine Pools
 
 This action is used to retrieve a list of configured scan engine pools.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|False|Scan engine pool name by which to filter, accepts regular expression patterns|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2816,17 +2838,17 @@ Example output:
 }
 ```
 
-### Get Scan Engine Pool
+#### Get Scan Engine Pool
 
 This action is used to retrieve scan engine pool details by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Scan engine pool identifier|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2862,20 +2884,20 @@ Example output:
 }
 ```
 
-### Create Scan Engine Pool
+#### Create Scan Engine Pool
 
 This action is used to create a new scan engine pool. NOTE: If you are using output from a prior step to configure
 the engines assigned to the pool and that output is NOT an array, you will need to use a separate plugin
 (e.g Python script) to convert the data to an array.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|True|Scan engine pool name|None|
 |engines|[]integer|None|False|List of scan engine IDs to associate with the scan engine pool|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2901,18 +2923,18 @@ Example output:
 }
 ```
 
-### Add Scan Engine Pool Engine
+#### Add Scan Engine Pool Engine
 
 This action is used to add a scan engine to a scan engine pool (AWS pre-authorized engine AMI engines cannot be pooled).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |pool_id|integer|None|True|Scan engine pool ID|None|
 |engine_id|integer|None|True|Scan engine ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2931,18 +2953,18 @@ Example output:
 }
 ```
 
-### Remove Scan Engine Pool Engine
+#### Remove Scan Engine Pool Engine
 
 This action is used to remove a scan engine from a scan engine pool.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |pool_id|integer|None|True|Scan engine pool ID|None|
 |engine_id|integer|None|True|Scan engine ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2961,17 +2983,17 @@ Example output:
 }
 ```
 
-### Delete Scan Engine Pool
+#### Delete Scan Engine Pool
 
 This action is used to delete an existing scan engine pool from the security console.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Scan engine pool identifier|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2990,18 +3012,18 @@ Example output:
 }
 ```
 
-### Update Site Scan Engine
+#### Update Site Scan Engine
 
 This action is used to update the scan engine/scan engine pool associated with a site.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |site_id|integer|None|True|Identifier of the site to update|None|
 |engine_id|integer|None|True|Identifier of the scan engine/scan engine pool to associate with the site|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3020,11 +3042,11 @@ Example output:
 }
 ```
 
-### Create Vulnerability Exception Submission
+#### Create Vulnerability Exception Submission
 
 This action is used to create a vulnerability exception submission.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -3037,7 +3059,7 @@ This action is used to create a vulnerability exception submission.
 |type|string|None|True|The type of vulnerability exception to create|['Global', 'Site', 'Asset', 'Asset Group', 'Instance']|
 |vulnerability|string|None|True|The vulnerability this exception applies to|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3063,17 +3085,17 @@ Example output:
 }
 ```
 
-### Delete Vulnerability Exception
+#### Delete Vulnerability Exception
 
 This action is used to delete an existing vulnerability exception.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |exception_id|integer|None|True|Vulnerability Exception ID to delete|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3092,17 +3114,17 @@ Example output:
 }
 ```
 
-### Get Vulnerability Details
+#### Get Vulnerability Details
 
 This action is used to get the details of a specific vulnerability by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|The identifier of the vulnerability to retrieve from InsightVM|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3189,11 +3211,11 @@ Example output:
 }
 ```
 
-### Review Vulnerability Exception
+#### Review Vulnerability Exception
 
 This action is used to approve or reject a vulnerability exception.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -3201,7 +3223,7 @@ This action is used to approve or reject a vulnerability exception.
 |exception|integer|None|True|The Vulnerability Exception ID to Approve or Reject|None|
 |review|string|None|True|Approval or Rejection of the exception|['Approved', 'Rejected']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3220,18 +3242,18 @@ Example output:
 }
 ```
 
-### Get Authentication Sources
+#### Get Authentication Sources
 
 This action is used to list authentication sources available for InsightVM users.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|False|Authentication source name by which to filter, accepts regular expression patterns|None|
 |type|string||False|Authentication source type by which to filter|['', 'admin', 'kerberos', 'ldap', 'normal', 'saml']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3262,17 +3284,17 @@ Example output:
 }
 ```
 
-### Get Authentication Source
+#### Get Authentication Source
 
 This action is used to get the details for an authentication source.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Authentication source ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3301,17 +3323,17 @@ Example output:
 }
 ```
 
-### Get Roles
+#### Get Roles
 
 This action is used to list role details.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|False|Role name by which to filter, accepts regular expression patterns|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3391,17 +3413,17 @@ Example output:
 }
 ```
 
-### Get Role
+#### Get Role
 
 This action is used to get role details by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|Role ID, e.g 'global-admin'|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3464,18 +3486,18 @@ Example output:
 }
 ```
 
-### Get Users
+#### Get Users
 
 This action is used to list user accounts.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|False|User account name by which to filter, accepts regular expression patterns|None|
 |login|string|None|False|User account login name by which to filter, accepts regular expression patterns|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3586,17 +3608,17 @@ Example output:
 }
 ```
 
-### Get User
+#### Get User
 
 This action is used to get user account details by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|User account ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3705,11 +3727,11 @@ Example output:
 }
 ```
 
-### Create User
+#### Create User
 
 This action is used to create a new user account (limited to external authentication sources).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -3723,7 +3745,7 @@ This action is used to create a new user account (limited to external authentica
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|
 |role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3748,11 +3770,11 @@ Example output:
 }
 ```
 
-### Update User
+#### Update User
 
 This action is used to update the configuration of an existing user account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -3767,7 +3789,7 @@ This action is used to update the configuration of an existing user account.
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|
 |role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3786,17 +3808,17 @@ Example output:
 }
 ```
 
-### Delete User
+#### Delete User
 
 This action is used to delete an user account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|The identifier of the user account|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3815,17 +3837,17 @@ Example output:
 }
 ```
 
-### Disable User
+#### Disable User
 
 This action is used to disable an user account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|The identifier of the user account|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3844,17 +3866,17 @@ Example output:
 }
 ```
 
-### Enable User
+#### Enable User
 
 This action is used to enable an user account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|The identifier of the user account|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3873,11 +3895,11 @@ Example output:
 }
 ```
 
-### Update User Role
+#### Update User Role
 
 This action is used to update the role associated with an user account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -3886,7 +3908,7 @@ This action is used to update the role associated with an user account.
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|
 |role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3905,18 +3927,18 @@ Example output:
 }
 ```
 
-### Update User Asset Group Access
+#### Update User Asset Group Access
 
 This action is used to update the asset groups to which a user has access in bulk. It can be used to remove asset group access as well.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|integer|None|True|The identifier of the user account|None|
 |asset_group_ids|[]integer|None|True|The identifiers of the asset groups to which the user account should be granted access, ignored if the user has access to all asset groups|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3935,18 +3957,18 @@ Example output:
 }
 ```
 
-### Add User Asset Group Access
+#### Add User Asset Group Access
 
 This action is used to grant an user account access to an asset group by id.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|integer|None|True|The identifier of the user account|None|
 |asset_group_id|integer|None|True|The identifier of the asset group|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3965,18 +3987,18 @@ Example output:
 }
 ```
 
-### Remove User Asset Group Access
+#### Remove User Asset Group Access
 
 This action is used to remove asset group access from an user account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|integer|None|True|The identifier of the user account|None|
 |asset_group_id|integer|None|True|The identifier of the asset group|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -3995,18 +4017,18 @@ Example output:
 }
 ```
 
-### Update User Site Access
+#### Update User Site Access
 
 This action is used to update the sites to which a user has access in bulk. It can be used to remove sites as well.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|integer|None|True|The identifier of the user account|None|
 |site_ids|[]integer|None|True|The identifiers of the sites to which the user account should be granted access, ignored if the user has access to all sites|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4025,18 +4047,18 @@ Example output:
 }
 ```
 
-### Add User Site Access
+#### Add User Site Access
 
 This action is used to grant an user account access to a site by id.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|integer|None|True|The identifier of the user account|None|
 |site_id|integer|None|True|The identifier of the site|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4055,18 +4077,18 @@ Example output:
 }
 ```
 
-### Remove User Site Access
+#### Remove User Site Access
 
 This action is used to remove site access from an user account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|integer|None|True|The identifier of the user account|None|
 |site_id|integer|None|True|The identifier of the site|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4085,11 +4107,11 @@ Example output:
 }
 ```
 
-### Top Remediations
+#### Top Remediations
 
 This action is used to generate results for the top remediations based on a defined scope.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -4099,7 +4121,7 @@ This action is used to generate results for the top remediations based on a defi
 |scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|
 |vulnerability_limit|integer|None|False|The amount of vulnerabilities to be returned with each top remediation; this can be used to reduce message size and processing time|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4144,20 +4166,20 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-### New Vulnerability Exception Activity
+#### New Vulnerability Exception Activity
 
 This trigger is used to check for new InsightVM vulnerability exception activity.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|
 |status_filter|[]string|['Under Review']|False|List of vulnerabiliti statuses to match for trigger; options include: Under Review, Approved, Rejected, Expired, Deleted|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4210,11 +4232,11 @@ Example output:
 }
 ```
 
-### New Scans
+#### New Scans
 
 This trigger is used to check for new InsightVM scans by site and scan status.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -4223,7 +4245,7 @@ This trigger is used to check for new InsightVM scans by site and scan status.
 |site_name_filter|string|.*|True|Regular expression to match sites where new scans should be triggered|None|
 |status_filter|[]string|['Successful']|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4261,81 +4283,37 @@ Example output:
 }
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https\://insightvm.example.com\:3780|None|
-|credentials|credential_username_password|None|True|Username and password|None|
-
-## Troubleshooting
-
-This plugin does not contain any troubleshooting information.
-
-## Versions
-
-* 1.0.0 - Initial plugin release
-* 2.0.0 - Support web server mode
-* 2.1.0 - Add Download Report and List Reports action
-* 2.2.0 - New Action Get Vulnerability Affected Assets
-* 2.2.1 - Correct output of the Get Scan action
-* 2.3.0 - New Actions Create Tag, Delete Tag, Get Tag, Get Tag Sites, Get Tag Assets, Get Tag Asset Groups, Get Tags, Remove Asset Tag, Remove Asset Group Tags, Remove Tag Asset Groups, Remove Tag Sites, Remove Tag Search Criteria, Tag Site, Tag Asset, Tag Asset Group, Update Tag Search Criteria, Asset Search, Get Sites, Get Site, Get Asset Groups, Get Asset Group, Create Asset Group, Delete Asset Group, and Update Asset Group Search Criteria
-* 3.0.0 - Rename Action Get Vulnerabilities to Get Asset Vulnerabilities | Correct output of Scan action | New Actions Get Vulnerabilities by CVE, Get Scans, Update Scan Status, Generate Shared Secret, Get Scan Engines, Get Scan Engine, Create Scan Engine, Delete Scan Engine, Get Scan Engine Pools, Get Scan Engine Pool, Create Scan Engine Pool, Add Scan Engine Pool Engine, Remove Scan Engine Pool Engine, Delete Scan Engine Pool, Update Site Scan Engine
-* 3.0.1 - Update descriptions
-* 3.1.0 - New Actions Get Authentication Sources, Get Authentication Source, Get Roles, Get Role, Get Users, Get User, Create User, Update User, Update User Asset Group Access, Add User Asset Group Access, Remove User Asset Group Access, Update User Site Access, Add User Site Access, Remove User Site Access, Disable User, Enable User, Delete User, Update User Role
-* 3.2.0 - New Actions Create Site, Update Site, Delete Site, Update Site Included Targets, Update Site Excluded Targets, Update Site Included Asset Groups, and Update Site Excluded Asset Groups
-* 3.3.0 - New Actions Get Asset, Get Asset Tags, Get Scan Assets, Generate AdHoc SQL Report, Top Remediations | New trigger New Scans
-* 3.3.1 - Fix issue in Top Remediations action that causes assets without criticality tags to not be returned in asset list
-* 3.4.0 - New Action Get Asset Software | Fix issue with New Scan trigger not properly caching new scan IDs
-* 3.5.0 - New Actions Get Vulnerability Details, Create Vulnerability Exception Submission,  Delete Vulnerability Exception, Review Vulnerability Exception  | New Trigger New Vulnerability Exception Activity | Misc. Cleanup
-
-## Workflows
-
-Examples:
-
-* Assess assets for vulnerabilities and validate them with Metasploit
-* Tag assets in InsightVM using data from an external system (e.g ServiceNow, database, csv)
-* Generate shared secrets to pair newly provisioned scan engines
-* Identify scanned assets affected by a particular CVE
-
-## References
-
-* [InsightVM](https://www.rapid7.com/products/insightvm/)
-* [InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)
-
-## Custom Output Types
-
-### report_id
+#### report_id
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|False|Identifer|
 |name|string|False|Name of report|
 
-### link
+#### link
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |href|string|False|A hypertext reference, which is either a URI (see RFC 3986) or URI template (see RFC 6570)|
 |rel|string|False|Link relation type following RFC 5988|
 
-### address
+#### address
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |ip|string|False|IPv4 or IPv6 address|
 |mac|string|False|Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48|
 
-### configuration
+#### configuration
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |name|string|False|Name of the configuration value|
 |value|string|False|Configuration value|
 
-### database
+#### database
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4343,7 +4321,7 @@ Examples:
 |id|integer|False|Identifier of the database|
 |name|string|False|Name of the database instance|
 
-### file
+#### file
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4352,7 +4330,7 @@ Examples:
 |size|integer|False|Size of the regular file (in bytes). If the file is a directory, no value is returned|
 |type|string|False|Type of the file, e.g. file or directory|
 
-### history
+#### history
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4364,21 +4342,21 @@ Examples:
 |version|integer|False|Version|
 |vulnerabilityExceptionId|integer|False|Vulnerability exception ID|
 
-### hostName
+#### hostName
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |name|string|False|Name|
 |source|string|False|Source|
 
-### id
+#### id
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|string|False|ID|
 |source|string|False|Source|
 
-### cpe
+#### cpe
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4396,7 +4374,7 @@ Examples:
 |vendor|string|False|The person or organization that manufactured or created the product|
 |version|string|False|Vendor-specific alphanumeric strings characterizing the particular release version of the product|
 
-### osFingerprint
+#### osFingerprint
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4412,14 +4390,14 @@ Examples:
 |vendor|string|False|Vendor of the operating system|
 |version|string|False|Version of the operating system|
 
-### userGroup
+#### userGroup
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|False|Identifier of the user group|
 |name|string|False|Name of the user group|
 
-### user
+#### user
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4427,7 +4405,7 @@ Examples:
 |id|integer|False|Identifier of the user account|
 |name|string|False|Name of the user account|
 
-### page
+#### page
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4435,7 +4413,7 @@ Examples:
 |path|string|False|Path to the page (URI)|
 |response|integer|False|HTTP response code observed with retrieving the page|
 
-### webApplication
+#### webApplication
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4444,7 +4422,7 @@ Examples:
 |root|string|False|Web root of the web application|
 |virtualHost|string|False|Virtual host of the web application|
 
-### service
+#### service
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4462,7 +4440,7 @@ Examples:
 |version|string|False|Version of the service|
 |webApplications|[]webApplication|False|Web applications found on the service|
 
-### software
+#### software
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4476,7 +4454,7 @@ Examples:
 |vendor|string|False|Vendor of the software|
 |version|string|False|Version of the software|
 
-### vulnerabilities
+#### vulnerabilities
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4487,7 +4465,7 @@ Examples:
 |severe|integer|False|Number of severe vulnerabilities|
 |total|integer|False|Total number of vulnerabilities|
 
-### vulnerabilities_count
+#### vulnerabilities_count
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4496,7 +4474,7 @@ Examples:
 |severe|integer|False|Number of severe vulnerabilities|
 |total|integer|False|Total|
 
-### vulnerability_exception
+#### vulnerability_exception
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4508,7 +4486,7 @@ Examples:
 |state|string|True|The state of the vulnerability exception|
 |submit|object|True|Details of the exception submission|
 
-### exception_review
+#### exception_review
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4518,7 +4496,7 @@ Examples:
 |name|string|False|The login name of the user that reviewed the vulnerability exception|
 |user|integer|False|The identifier of the user that reviewed the vulnerability exception|
 
-### exception_submit
+#### exception_submit
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4528,7 +4506,7 @@ Examples:
 |name|string|False|The login name of the user that submitted the vulnerability exception|
 |user|integer|False|The identifier of the user that submitted the vulnerability exception|
 
-### exception_scope
+#### exception_scope
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4539,7 +4517,7 @@ Examples:
 |type|string|True|The type of vulnerability exception - Global, Site, Asset, Asset Group, Instance|
 |vulnerability|string|True|The vulnerability the exception applies to|
 
-### asset
+#### asset
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4568,7 +4546,7 @@ Examples:
 |users|[]user|False|User accounts enumerated on the asset|
 |vulnerabilities|vulnerabilities|False| Summary information for vulnerabilities on the asset|
 
-### asset_vulnerability_result
+#### asset_vulnerability_result
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4581,7 +4559,7 @@ Examples:
 |protocol|string|False|Protocol of the service the result was discovered on, ie. TCP|
 |status|string|False|Status of the vulnerability check result, ie. vulnerable-version|
 
-### asset_vulnerability
+#### asset_vulnerability
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4591,7 +4569,7 @@ Examples:
 |results|[]asset_vulnerability_result|False|The vulnerability check results for the finding. Multiple instances may be present if one or more checks fired, or a check has multiple independent results|
 |status|string|False|Status, ie. vulnerable|
 
-### site
+#### site
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4609,7 +4587,7 @@ Examples:
 |type|string|True|Site type|
 |vulnerabilities|vulnerabilities_count|True|Site vulnerability counts|
 
-### asset_group
+#### asset_group
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4623,14 +4601,14 @@ Examples:
 |type|string|True|Asset group type|
 |vulnerabilities|vulnerabilities_count|True|Asset group vulnerability counts|
 
-### vulnerability_description
+#### vulnerability_description
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |html|string|False|Vulnerability description HTML|
 |text|string|False|Vulnerability description raw text|
 
-### pci
+#### pci
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4640,7 +4618,7 @@ Examples:
 |specialNotes|string|False|PCI special notes|
 |status|string|False|PCI status|
 
-### cvss_v2
+#### cvss_v2
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4655,7 +4633,7 @@ Examples:
 |score|float|False|CVSSv2 score|
 |vector|string|False|CVSSv2 combined vector string|
 
-### cvss_v3
+#### cvss_v3
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4672,7 +4650,7 @@ Examples:
 |userInteraction|string|False|CVSSv3 user interaction metric|
 |vector|string|False|CVSSv3 combined vector string|
 
-### cvss
+#### cvss
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4680,7 +4658,7 @@ Examples:
 |v2|cvss_v2|False|CVSSv2 details|
 |v3|cvss_v3|False|CVSSv3 details|
 
-### vulnerability
+#### vulnerability
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4702,7 +4680,7 @@ Examples:
 |severityScore|integer|False|Vulnerability severity score|
 |title|string|False|Vulnerability title|
 
-### tag
+#### tag
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4716,14 +4694,14 @@ Examples:
 |source|string|False|Tag source|
 |type|string|True|Tag type|
 
-### tag_asset
+#### tag_asset
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|True|Asset ID|
 |sources|[]string|True|Tag association sources|
 
-### scan
+#### scan
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4744,7 +4722,7 @@ Examples:
 |status|string|False|Scan status (aborted, unknown, running, finished, stopped, error, paused, dispatched, integrating)|
 |vulnerabilities|vulnerabilities_count|False|Counts of vulnerabilities identified during the scan|
 
-### scan_engine
+#### scan_engine
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4760,7 +4738,7 @@ Examples:
 |productVersion|string|False|Scan engine product version|
 |sites|[]integer|False|Sites with which the scan engine is associated|
 
-### scan_engine_pool
+#### scan_engine_pool
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4769,7 +4747,7 @@ Examples:
 |links|[]link|True|List of hypermedia links to corresponding resources|
 |name|string|True|Scan engine pool name|
 
-### authentication_source
+#### authentication_source
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4779,7 +4757,7 @@ Examples:
 |name|string|True|Authentication source name|
 |type|string|True|Authentication source type|
 
-### role
+#### role
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4789,7 +4767,7 @@ Examples:
 |name|string|True|Name of the role|
 |privileges|[]string|True|List of privileges assigned to the role|
 
-### user_account_role
+#### user_account_role
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4799,14 +4777,14 @@ Examples:
 |privileges|[]string|False|None|
 |superuser|boolean|False|Whether the user is a superuser|
 
-### user_account_locale
+#### user_account_locale
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |default|string|True|Default locale|
 |reports|string|True|Reports locale|
 
-### user_account
+#### user_account
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4821,7 +4799,7 @@ Examples:
 |name|string|True|The full name of the user|
 |role|user_account_role|False|The privileges and role the user is assigned|
 
-### remediation_asset
+#### remediation_asset
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4833,7 +4811,7 @@ Examples:
 |os|string|False|Full description of the operating system of the asset|
 |riskScore|float|False|Risk score (with criticality adjustments) of the asset|
 
-### remediation_vulnerability
+#### remediation_vulnerability
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4844,7 +4822,7 @@ Examples:
 |severity|integer|True|The severity of the vulnerability|
 |title|string|True|The title of the vulnerability|
 
-### remediation
+#### remediation
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -4857,3 +4835,36 @@ Examples:
 |summary|string|True|Remediation summary|
 |vulnerabilities|[]remediation_vulnerability|True|The vulnerabilities that would be remediated|
 |vulnerabilityCount|integer|True|The number of vulnerabilities that would be remediated|
+
+## Troubleshooting
+
+This plugin does not contain any troubleshooting information.
+
+# Version History
+
+* 3.5.0 - New Actions Get Vulnerability Details, Create Vulnerability Exception Submission,  Delete Vulnerability Exception, Review Vulnerability Exception  | New Trigger New Vulnerability Exception Activity | Misc. Cleanup
+* 3.4.0 - New Action Get Asset Software | Fix issue with New Scan trigger not properly caching new scan IDs
+* 3.3.1 - Fix issue in Top Remediations action that causes assets without criticality tags to not be returned in asset list
+* 3.3.0 - New Actions Get Asset, Get Asset Tags, Get Scan Assets, Generate AdHoc SQL Report, Top Remediations | New trigger New Scans
+* 3.2.0 - New Actions Create Site, Update Site, Delete Site, Update Site Included Targets, Update Site Excluded Targets, Update Site Included Asset Groups, and Update Site Excluded Asset Groups
+* 3.1.0 - New Actions Get Authentication Sources, Get Authentication Source, Get Roles, Get Role, Get Users, Get User, Create User, Update User, Update User Asset Group Access, Add User Asset Group Access, Remove User Asset Group Access, Update User Site Access, Add User Site Access, Remove User Site Access, Disable User, Enable User, Delete User, Update User Role
+* 3.0.1 - Update descriptions
+* 3.0.0 - Rename Action Get Vulnerabilities to Get Asset Vulnerabilities | Correct output of Scan action | New Actions Get Vulnerabilities by CVE, Get Scans, Update Scan Status, Generate Shared Secret, Get Scan Engines, Get Scan Engine, Create Scan Engine, Delete Scan Engine, Get Scan Engine Pools, Get Scan Engine Pool, Create Scan Engine Pool, Add Scan Engine Pool Engine, Remove Scan Engine Pool Engine, Delete Scan Engine Pool, Update Site Scan Engine
+* 2.3.0 - New Actions Create Tag, Delete Tag, Get Tag, Get Tag Sites, Get Tag Assets, Get Tag Asset Groups, Get Tags, Remove Asset Tag, Remove Asset Group Tags, Remove Tag Asset Groups, Remove Tag Sites, Remove Tag Search Criteria, Tag Site, Tag Asset, Tag Asset Group, Update Tag Search Criteria, Asset Search, Get Sites, Get Site, Get Asset Groups, Get Asset Group, Create Asset Group, Delete Asset Group, and Update Asset Group Search Criteria
+* 2.2.1 - Correct output of the Get Scan action
+* 2.2.0 - New Action Get Vulnerability Affected Assets
+* 2.1.0 - Add Download Report and List Reports action
+* 2.0.0 - Support web server mode
+* 1.0.0 - Initial plugin release
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [InsightVM](https://www.rapid7.com/products/insightvm/)
+* [InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)
+

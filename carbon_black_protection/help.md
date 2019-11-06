@@ -1,19 +1,41 @@
-
-# Carbon Black Protection
-
-## About
+# Description
 
 [Carbon Black Protection](https://www.carbonblack.com/products/cb-protection/) allows users to lock down and harden systems to prevent malware, ransomware, and more.
 
 This plugin utilizes the [Carbon Black Protection API](https://developer.carbonblack.com/reference/enterprise-protection/7.2/rest-api/).
 
-## Actions
+# Key Features
 
-### Unban File
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|Root Host URL|None|
+|ssl_verify|boolean|True|True|True for Certificate Validation|None|
+|api_key|credential_secret_key|None|True|API key|None|
+
+## Technical Details
+
+### Actions
+
+#### Unban File
 
 This action is used to unban a file globally or by policy.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -22,7 +44,7 @@ This action is used to unban a file globally or by policy.
 |new_state|string|Approved|True|New state of the file. Either approved or unapproved|['Approved', 'Unapproved']|
 |method|string|Globally|True|Unban globally or by policy|['Globally', 'Policy']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -57,11 +79,11 @@ Example output:
 
 ```
 
-### Ban File
+#### Ban File
 
 This action is used to ban a file globally or by policy.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -69,7 +91,7 @@ This action is used to ban a file globally or by policy.
 |hash|string|None|True|Hash for file to ban|None|
 |method|string|Globally|True|Ban globally or by policy|['Globally', 'Policy']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -102,17 +124,17 @@ Example output:
 
 ```
 
-### Approve File Locally
+#### Approve File Locally
 
 This action is used to approve a file locally.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |file_id|integer|None|True|File ID of file to approve locally|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -140,17 +162,17 @@ Example output:
 
 ```
 
-### Unapprove File Locally
+#### Unapprove File Locally
 
 This action is used to remove local approval for a file.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |file_id|integer|None|True|File ID of file to remove local approval for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -178,11 +200,11 @@ Example output:
 
 ```
 
-### Create File Rule
+#### Create File Rule
 
 This action creates a file rule, this allows for the creation and editing of file Approvals and Bans.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -198,7 +220,7 @@ This action creates a file rule, this allows for the creation and editing of fil
 |report_only|boolean|False|False|Set to true to create a report-only ban. Note - fileState has to be set to 1 (unapproved) before this flag can be set|None|
 |reputation_approvals_enabled|boolean|False|False|True if reputation approvals are enabled for this file|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -238,17 +260,17 @@ Example output:
 }
 ```
 
-### Get Approval Request
+#### Get Approval Request
 
 This action is used to get an Approval Request.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |approval_request_id|integer|None|True|Approval Request ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -285,17 +307,17 @@ Example output:
 }
 ```
 
-### Get File Rule
+#### Get File Rule
 
 This action is used to get a File Rule.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |file_rule_id|integer|None|True|File rule ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -335,18 +357,18 @@ Example output:
 }
 ```
 
-### Resolve Approval Request
+#### Resolve Approval Request
 
 This action is used to resolve approval requests with a desired status.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |approval_request_id|string|None|True|Resolve an approval request with the desired status|None|
 |resolution|string|Not Resolved|True|Method for resolving the approval request|['Not Resolved', 'Rejected', 'Resolved - Approved', 'Resolved - Rule Change', 'Resolved - Installer', 'Resolved - Updater', 'Resolved - Publisher', 'Resolved - Other']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -371,17 +393,17 @@ Example output:
 
 ```
 
-### Retrieve File Catalog Entry
+#### Retrieve File Catalog Entry
 
 This action is used to retrieve a file catalog entry for a file given the file catalog ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |file_catalog_id|integer|None|True|File catalog ID for a file|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -429,18 +451,18 @@ Example output:
 
 ```
 
-### Retrieve File Instance
+#### Retrieve File Instance
 
 This action retrieves a local file instance ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |computer_id|int|None|True|Name of the target computer for this file instance|None|
 |file_catalog_id|integer|None|True|File catalog ID for a file|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -471,19 +493,19 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-### New Approval Request
+#### New Approval Request
 
 This trigger is used to trigger when a new approval request is created.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |poll_rate|integer|10|True|How often to poll for new approval requests, in seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -522,48 +544,9 @@ Example output:
 
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|Root Host URL|None|
-|ssl_verify|boolean|True|True|True for Certificate Validation|None|
-|api_key|credential_secret_key|None|True|API key|None|
-
-## Troubleshooting
-
-Carbon Black Protection schedules events to happen, therefore what you see in output may not be accurate as the Carbon Black Protection server may not yet have processed the event
-
-## Workflows
-
-Examples:
-
-* Prevent malicious executables from running
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.2.0 - Add Resolve Approval Request action
-* 0.3.0 - Add trigger: New Approval Request
-* 0.4.0 - Add action: Retrieve File Catalog Entry
-* 0.4.1 - SSL bug fix in SDK
-* 1.0.0 - Support web server mode | Update to new credential types
-* 1.0.1 - Fix bug where SSL Verify option was passed incorrectly
-* 1.0.2 - Fix Approve File Locally action request payload | Update to Python 3.7 Slim SDK (plugin size reduction)
-* 1.1.0 - New action Retrieve File Instance
-* 2.0.0 - Fix for Approve File Locally action | Fix for Unapprove File Locally action | Update to rename Unapprove Local Approval action to Unapprove File Locally
-* 2.1.0 - Add Action: Create File Rule | Add Action: Get File Rule
-* 2.2.0 - Update to add Status to Resolve Approval Request | New action Get Approval Reqeust
-
-## References
-
-* [Carbon Black Protection REST API](https://developer.carbonblack.com/reference/enterprise-protection/7.2/rest-api/)
-
-## Custom Output Types
-
-### file_catalog_entry_object
+#### file_catalog_entry_object
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -582,7 +565,7 @@ Examples:
 |policyId|integer|False|Policyid|
 |topLevel|boolean|False|Toplevel|
 
-### approvalRequest
+#### approvalRequest
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -610,7 +593,7 @@ Examples:
 |resolutionComments|string|False|Comments by Request Resolver|
 |status|integer|False|Request Status|
 
-### certificate
+#### certificate
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -642,7 +625,7 @@ Examples:
 |validFrom|date|False|Certificate Valid from Datetime|
 |validTo|date|False|Certificate Valid to Datetime|
 
-### computer
+#### computer
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -716,7 +699,7 @@ Examples:
 |virtualPlatform|string|False|Platform for Virtualization|
 |virtualized|string|False|True if computer Is Virtualized|
 
-### connector
+#### connector
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -730,7 +713,7 @@ Examples:
 |isInternal|boolean|False|True if This is Internal connector|
 |name|string|False|Name of the connector|
 
-### event
+#### event
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -767,7 +750,7 @@ Examples:
 |updaterName|string|False|None|
 |userName|string|False|None|
 
-### fileAnalysis
+#### fileAnalysis
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -785,7 +768,7 @@ Examples:
 |pathName|string|False|Name of the Path where File Exists on Endpoint|
 |priority|integer|False|fileAnalysis Priority in range [-2,2], where 2 Is Highest Priority|
 
-### fileCatalog
+#### fileCatalog
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -823,7 +806,7 @@ Examples:
 |trust|integer|False|Trust of file (0-10), -1=unknown|
 |trustMessages|string|False|More Details about Trust of File|
 
-### fileInstance
+#### fileInstance
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -840,7 +823,7 @@ Examples:
 |localState|integer|False|None|
 |pathName|string|False|None|
 
-### fileInstanceDeleted
+#### fileInstanceDeleted
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -854,7 +837,7 @@ Examples:
 |id|integer|False|None|
 |pathName|string|False|None|
 
-### fileInstanceGroup
+#### fileInstanceGroup
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -868,7 +851,7 @@ Examples:
 |pathName|string|False|None|
 |userName|string|False|User Associated with Group Creation on Agent|
 
-### fileRule
+#### fileRule
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -892,7 +875,7 @@ Examples:
 |sourceId|integer|False|Can Be Event Rule ID or Trusted Directory ID|
 |sourceType|integer|False|Mechanism that Created Rule|
 
-### fileUpload
+#### fileUpload
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -909,7 +892,7 @@ Examples:
 |uploadStatus|integer|False|None|
 |uploadedFileSize|integer|False|Will Be 0 unless uploadStatus=3|
 
-### internalEvent
+#### internalEvent
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -946,7 +929,7 @@ Examples:
 |updaterName|string|False|None|
 |userName|string|False|None|
 
-### meteredExecution
+#### meteredExecution
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -962,7 +945,7 @@ Examples:
 |type|integer|False|None|
 |userName|string|False|User Name Associated with this Execution|
 
-### notifier
+#### notifier
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -988,7 +971,7 @@ Examples:
 |url|string|False|None|
 |usageCount|integer|False|Number of customRule Objects that Reference this Notifier|
 
-### pendingAnalysis
+#### pendingAnalysis
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1012,7 +995,7 @@ Examples:
 |uploadPath|string|False|Local Upload Path for File on Server. File is Compressed in ZIP|
 |uploadedFileSize|integer|False|Will be 0 of analysisStatus is 0|
 
-### policy
+#### policy
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1037,7 +1020,7 @@ Examples:
 |readOnly|boolean|False|True if Read-Only|
 |reputationEnabled|boolean|False|True if Reputation Approvals Enabled|
 
-### publisher
+#### publisher
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1059,7 +1042,7 @@ Examples:
 |signedFilesCount|integer|False|None|
 |sourceType|integer|False|1=manual,3=reputation,5=external(API)|
 
-### serverConfig
+#### serverConfig
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1069,7 +1052,7 @@ Examples:
 |name|string|False|None|
 |value|string|False|None|
 
-### serverPerformance
+#### serverPerformance
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1097,7 +1080,7 @@ Examples:
 |sqlLatencyMs|number|False|Average Network Latency between CB Protection Server and SQL Server|
 |sqlMemoryPressure|number|False|Memory Pressure of SQL Server in % of Maximum Recommended Value|
 
-### updater
+#### updater
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1111,3 +1094,33 @@ Examples:
 |name|string|False|None|
 |platformFlags|integer|False|1=windows,2=mac,4=linux|
 |version|string|False|None|
+
+## Troubleshooting
+
+Carbon Black Protection schedules events to happen, therefore what you see in output may not be accurate as the Carbon Black Protection server may not yet have processed the event
+
+# Version History
+
+* 2.2.0 - Update to add Status to Resolve Approval Request | New action Get Approval Reqeust
+* 2.1.0 - Add Action: Create File Rule | Add Action: Get File Rule
+* 2.0.0 - Fix for Approve File Locally action | Fix for Unapprove File Locally action | Update to rename Unapprove Local Approval action to Unapprove File Locally
+* 1.1.0 - New action Retrieve File Instance
+* 1.0.2 - Fix Approve File Locally action request payload | Update to Python 3.7 Slim SDK (plugin size reduction)
+* 1.0.1 - Fix bug where SSL Verify option was passed incorrectly
+* 1.0.0 - Support web server mode | Update to new credential types
+* 0.4.1 - SSL bug fix in SDK
+* 0.4.0 - Add action: Retrieve File Catalog Entry
+* 0.3.0 - Add trigger: New Approval Request
+* 0.2.0 - Add Resolve Approval Request action
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [Carbon Black Protection REST API](https://developer.carbonblack.com/reference/enterprise-protection/7.2/rest-api/)
+

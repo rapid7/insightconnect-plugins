@@ -1,25 +1,45 @@
-
-# New Relic
-
-## About
+# Description
 
 [New Relic](https://www.newrelic.com) monitors the performance of applications and infrastructure.
 This plugin utilizes the [newrelic-api](https://pypi.python.org/pypi/newrelic-api/1.0.4) python library.
 
-## Actions
+# Key Features
 
-### List Users
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|API key|None|
+
+## Technical Details
+
+### Actions
+
+#### List Users
 
 This action is used to show a paginated list of all users. Users can be filtered by their IDs or email.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|False|Filter by user email|None|
 |ids|string|None|False|Filter by user IDs. IDs should be a comma separated list eg 123,345,678|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -43,17 +63,17 @@ Example output:
 
 ```
 
-### Show User
+#### Show User
 
 This action is used to return a single user, identified by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|User ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -79,32 +99,31 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
 * 2.0.0 - Support web server mode and update to new credential types
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-* Find users with access to a New Relic account
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [New Relic API Docs](http://new-relic-api.readthedocs.io/en/develop/examples.html)
 * [newrelic-api](https://pypi.python.org/pypi/newrelic-api/1.0.4)
+

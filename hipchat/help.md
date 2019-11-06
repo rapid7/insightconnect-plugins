@@ -1,7 +1,4 @@
-
-# HipChat
-
-## About
+# Description
 
 [HipChat](https://www.hipchat.com) is a web service for internal private online chat
 and instant messaging. As well as one-on-one and group/topic chat, it also features
@@ -9,47 +6,76 @@ cloud-based file storage, video calling, searchable message-history and inline-i
 This plugin accesses the [HipChat API](https://www.hipchat.com/docs/apiv2/)
 The output of this plugin is the JSON data returned by HipChat.
 
-## Actions
+# Key Features
 
-### Post Message
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin requires network access to a HipChat API server, as well as authentication data: API Token.
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|host|string|https\://hipchat.com/|True|HipChat API Server|None|
+|version|string|v2|True|API Version|None|
+|user|string|None|False|User Account|None|
+|token|string|None|False|API Token|None|
+|pass|password|None|False|Password|None|
+
+## Technical Details
+
+### Actions
+
+#### Post Message
 
 This action is used to send a message to a room.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |message|string|None|True|The message post to room. Valid length range\: 1 - 1000|None|
 |room_id_or_name|string|None|True|The id or url encoded name of the room|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |timestamp|string|False|The utc timestamp representing when the message was processed|
 |id|string|False|The unique identifier of the sent message|
 
-### Delete User
+#### Delete User
 
 This action is used to delete a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id_or_email|string|None|True|The id, email address, or mention name (beginning with an '@') of the user to update|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status_code|integer|False|Http status code|
 
-### Create User
+#### Create User
 
 This action is used to create a new user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -62,7 +88,7 @@ This action is used to create a new user.
 |password|string|None|False|If not provided, a randomly generated password will be returned|None|
 |email|string|None|True|The email address|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -70,11 +96,11 @@ This action is used to create a new user.
 |links|object|False|None|
 |entity|object|False|None|
 
-### Update User
+#### Update User
 
 This action an be used to update a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -89,19 +115,19 @@ This action an be used to update a user.
 |password|string|None|False|If not provided, the existing password is kept|None|
 |email|string|None|True|Email of user|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status_code|integer|False|Http status code|
 
-## Triggers
+### Triggers
 
-### Latest Message
+#### Latest Message
 
 This trigger is used to monitor for latest chat message.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -111,7 +137,7 @@ This trigger is used to monitor for latest chat message.
 |room_id_or_name|string|None|True|Room id or name|None|
 |not-before|string|None|False|The id of the message that is oldest in the set of messages to be returned. The server will not return any messages that chronologically precede this message|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -120,38 +146,28 @@ This trigger is used to monitor for latest chat message.
 |maxResults|integer|False|The maximum number of results returned|
 |links|object|False|Links|
 
-## Connection
+### Custom Output Types
 
-This plugin requires network access to a HipChat API server, as well as authentication data: API Token.
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|https\://hipchat.com/|True|HipChat API Server|None|
-|version|string|v2|True|API Version|None|
-|user|string|None|False|User Account|None|
-|token|string|None|False|API Token|None|
-|pass|password|None|False|Password|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Error values use the standard HTTP codes (200 OK, 404 Not Found, etc)
 
-## Workflows
+# Version History
 
-Examples:
-
-* User deprovisioning
-* Project management
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [HipChat](https://hipchat.com/)
 * [HipChat API](https://www.hipchat.com/docs/apiv2/)
+

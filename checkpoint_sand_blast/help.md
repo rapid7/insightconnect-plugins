@@ -1,16 +1,39 @@
-# Checkpoint Sand Blast
-
-## About
+# Description
 
 [checkpoint_sand_blast](https://www.checkpoint.com/solutions/zero-day-protection/) is a Multilayered security technology provides protection against advanced cyber attacks.
 
-## Actions
+# Key Features
 
-### Query Report
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|service_address|string|te.checkpoint.com|True|The Service Address|None|
+|api_key|credential_secret_key|None|True|API Key|None|
+|using_cloud_server|boolean|None|True|Set to true if using the cloud version|None|
+
+## Technical Details
+
+### Actions
+
+#### Query Report
 
 This action is used to query the status of a file.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -21,7 +44,7 @@ This action is used to query the status of a file.
 |file_digest_type|string|None|True|The type of hash used for the digest|['md5', 'sha1', 'sha2']|
 |quota|boolean|None|False|Quota|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -77,11 +100,11 @@ Example output:
 }
 ```
 
-### Upload
+#### Upload
 
 This action is used to upload a file for analysis.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -89,7 +112,7 @@ This action is used to upload a file for analysis.
 |file_name|string|None|True|The name of the file|None|
 |file_bytes|bytes|None|True|The file bytes|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -144,36 +167,30 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|service_address|string|te.checkpoint.com|True|The Service Address|None|
-|api_key|credential_secret_key|None|True|API Key|None|
-|using_cloud_server|boolean|None|True|Set to true if using the cloud version|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 For the local version of Checkpoint Sand Blast, using the query report action the
 hash must be SHA1
 
-## Versions
+# Version History
 
 * 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples
+## Source Code
 
-* Upload files to be analysed.
-* Use a hash to query database about possible threats.
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Checkpoint website](https://www.checkpoint.com/)
+

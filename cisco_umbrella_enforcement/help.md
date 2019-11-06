@@ -1,22 +1,44 @@
-
-# Cisco Umbrella Enforcement
-
-## About
+# Description
 
 [Cisco Umbrella Enforcement](https://docs.umbrella.com/developer/networkdevices-api/) allows partners and customers with their own homegrown SIEM/Threat Intelligence Platform (TIP) environments to inject events and/or threat intelligence into their Umbrella environment. These events are then instantly converted into visibility and enforcement that can extend beyond the perimeter and thus the reach of the systems that might have generated those events or threat intelligence.
 This plugin utilizes the [Cisco Umbrella Enforcement API](https://enforcement-api.readme.io/).
 
-## Actions
+# Key Features
 
-### List Domains
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|Enter API key e.g. 1111-2222-3333-4444|None|
+
+The API key is a UUID-v4 [Customer key](https://docs.umbrella.com/developer/enforcement-api/authentication-and-versioning/).
+
+## Technical Details
+
+### Actions
+
+#### List Domains
 
 This action is used to gather the lists of domains already added to the shared customer's domain list.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -50,18 +72,18 @@ Example output:
 
 ```
 
-### Delete Domain by Name
+#### Delete Domain by Name
 
 This action is used to delete domain from user domain list.
 The delete comand should include the numerical identifier (ID) as specified in the LIST endpoint or the actual domain name you'd like to delete.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -77,12 +99,12 @@ Example output:
 
 ```
 
-### Add Event
+#### Add Event
 
 This action is used to post a malware event for processing and optionally adds it to the customer's domain list.
 It accepts an array of JSON objects of the [Generic Event Format](https://docs.umbrella.com/developer/enforcement-api/generic-event-format2/).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -124,7 +146,7 @@ Example input:
 
 ```
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -142,18 +164,18 @@ Example output:
 
 ```
 
-### Delete Domain by ID
+#### Delete Domain by ID
 
 This action is used to delete domain from user domain list by ID.
 The delete comand should include the numerical identifier (ID) as specified in the LIST endpoint or the actual domain name you'd like to delete.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ID|integer|None|True|Unique ID number of domain|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -169,38 +191,33 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|Enter API key e.g. 1111-2222-3333-4444|None|
-
-The API key is a UUID-v4 [Customer key](https://docs.umbrella.com/developer/enforcement-api/authentication-and-versioning/).
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Intelligence
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Cisco Umbrella Enforcement](https://enforcement-api.readme.io/)
 * [Generic Event Format](https://docs.umbrella.com/developer/enforcement-api/generic-event-format2/)
 * [Authentication](https://docs.umbrella.com/developer/enforcement-api/authentication-and-versioning/)
+

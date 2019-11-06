@@ -1,16 +1,33 @@
-# Advanced Regex
-
-## About
+# Description
 
 Perform regex operations on a string using Python regex.
 
-## Actions
+# Key Features
 
-### Data Extraction
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+_This plugin does not contain a connection._
+
+## Technical Details
+
+### Actions
+
+#### Data Extraction
 
 This action is used to extract data via regex from a string.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -21,7 +38,7 @@ This action is used to extract data via regex from a string.
 |in_string|string|None|True|Input string|None|
 |multiline|boolean|False|False|Make begin/end consider each line|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -38,11 +55,11 @@ Example output:
 }
 ```
 
-### Search and Replace
+#### Search and Replace
 
 This action is used to regex search and replace string.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -55,7 +72,7 @@ This action is used to regex search and replace string.
 |multiline|boolean|False|False|Make begin/end consider each line|None|
 |replace_string|string|None|True|The string to replace matches with|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -69,11 +86,11 @@ Example output:
 }
 ```
 
-### Split by Regex
+#### Split by Regex
 
 This action is used to split a string into array using regex.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -85,7 +102,7 @@ This action is used to split a string into array using regex.
 |max_split|integer|0|False|Max splits - if non-zero last element is remainder of string|None|
 |multiline|boolean|False|False|Make begin/end consider each line|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -103,32 +120,29 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-_This plugin does not contain a connection._
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
-## Workflows
-
-Examples:
-
-This is a utility plugin used to manipulate string data using regex
-
-## Versions
+# Version History
 
 * 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Python Regex](https://docs.python.org/library/re.html)
 
-## Custom Output Types
-
-_This plugin does not contain any custom output types._

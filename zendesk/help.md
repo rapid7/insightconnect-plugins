@@ -1,25 +1,48 @@
-
-# Zendesk
-
-## About
+# Description
 
 [Zendesk](https://www.zendesk.com) helps improve communication and make sense of massive amounts of data.
 This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
 
-## Actions
+# Key Features
 
-### Search
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|password|password|None|False|Zendesk password|None|
+|api_key|credential_secret_key|None|False|Zendesk API key|None|
+|subdomain|string|None|True|Zendesk subdomain E.g. mycompany|None|
+|email|string|None|True|Email address|None|
+
+## Technical Details
+
+### Actions
+
+#### Search
 
 This action is used to search Zendesk.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |item|string|None|True|Search item E.g. password reset|None|
 |type|string|None|True|Search type|['User', 'Organization', 'Ticket']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -95,91 +118,91 @@ Example output:
 
 ```
 
-### Delete Ticket
+#### Delete Ticket
 
 This action is used to delete a ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ticket_id|string|None|True|Delete ticket|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Delete Membership
+#### Delete Membership
 
 This action is used to delete an organization membership.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |membership_id|string|None|True|ID of membership to delete E.g. 1657574807|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Show User
+#### Show User
 
 This action is used to retrieve user information.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|string|None|True|ID of user to show E.g. 20444826487|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |user|object|False|None|
 
-### Suspend User
+#### Suspend User
 
 This action is used to suspend a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|string|None|True|ID of user to delete E.g. 20444826487|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Delete User
+#### Delete User
 
 This action is used to delete a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|string|None|True|ID of user to delete E.g. 20444826487|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Create Ticket
+#### Create Ticket
 
 This action is used to create a ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -199,17 +222,17 @@ This action is used to create a ticket.
 |problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|
 |external_id|string|None|False|Support ticket ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |ticket|object|False|None|
 
-### Update Ticket
+#### Update Ticket
 
 This action is used to update ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -230,7 +253,7 @@ This action is used to update ticket.
 |type|string|None|False|Ticket type|['Problem', 'Incident', 'Task', 'Question', '']|
 |attachment|file|None|False|Optional file attachment|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -276,60 +299,54 @@ Example output:
 
 ```
 
-### Show Organization Memberships
+#### Show Organization Memberships
 
 This action is used to show all organization memberships.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|string|None|True|ID of user to show E.g. 20444826487|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |memberships|[]object|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|password|password|None|False|Zendesk password|None|
-|api_key|credential_secret_key|None|False|Zendesk API key|None|
-|subdomain|string|None|True|Zendesk subdomain E.g. mycompany|None|
-|email|string|None|True|Email address|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Ticketing
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 0.1.2 - Update to v2 Python plugin architecture. Filename bug fix in Create Ticket action.
-* 0.2.0 - Update connection to allow API key usage
-* 1.0.0 - Add Update Ticket action and fix for documentation | Support web server mode
-* 1.0.1 - Updated to use PyPy3 SDK
-* 1.1.0 - Updated Search action to return multiple results
 * 2.0.0 - Use new credential types
+* 1.1.0 - Updated Search action to return multiple results
+* 1.0.1 - Updated to use PyPy3 SDK
+* 1.0.0 - Add Update Ticket action and fix for documentation | Support web server mode
+* 0.2.0 - Update connection to allow API key usage
+* 0.1.2 - Update to v2 Python plugin architecture. Filename bug fix in Create Ticket action.
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Zendesk](https://www.zendesk.com)
 * [Zendesk Python SDK](https://github.com/facetoe/zenpy)
 * [Zendesk Developer Portal](https://developer.zendesk.com)
+

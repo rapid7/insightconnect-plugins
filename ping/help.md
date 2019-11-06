@@ -1,17 +1,33 @@
-
-# Ping
-
-## About
+# Description
 
 This plugin uses the uses the [GNU Ping](https://www.gnu.org/software/inetutils/manual/html_node/ping-invocation.html#ping-invocation) networking tool to check for host connectivity.
 
-## Actions
+# Key Features
 
-### Ping
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Ping
 
 This action is used to `ping` a host to check for connectivity.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -19,7 +35,7 @@ This action is used to `ping` a host to check for connectivity.
 |resolve_hostname|boolean|None|True|Whether to resolve a domain name to an IP address first|None|
 |host|string|None|True|The domain name or IP of the the host to check|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -51,29 +67,30 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
 * 1.0.1 - Support web server mode
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Check if a remote host is up
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [GNU Ping](https://www.gnu.org/software/inetutils/manual/html_node/ping-invocation.html#ping-invocation)
+

@@ -1,21 +1,44 @@
-
-# Tenable Nessus
-
-## About
+# Description
 
 Tenable [Nessus Professional](https://www.tenable.com/products/nessus-vulnerability-scanner/nessus-professional) prevents network attacks by identifying the vulnerabilities and configuration issues that hackers use to penetrate your network.
 
-## Actions
+# Key Features
 
-### List Scanners
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|access_key|credential_secret_key|None|True|None|None|
+|ssl_verify|boolean|True|True|Validate certificate|None|
+|secret_key|credential_secret_key|None|True|None|None|
+|hostname|string|None|True|Nessus instance hostname e.g. 192.168.1.10\:1234|None|
+
+## Technical Details
+
+### Actions
+
+#### List Scanners
 
 This action is used to return an array of all available scanners.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -67,7 +90,7 @@ Example Output:
 
 ```
 
-### Launch Scan
+#### Launch Scan
 
 This action is used to run a specified scan.
 
@@ -75,13 +98,13 @@ Attempting to launch a scan with the same name as one that is already running wi
 
 This API endpoint was deprecated in Nessus 7.0.0
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_name|string|None|True|Name of the specified scan|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -97,17 +120,17 @@ Example Output:
 
 ```
 
-### Get Scans
+#### Get Scans
 
 This action is used to returns a list of scans running on the requested scanner..
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scanner_name|string|None|False|Name of the requested scanner. Retrieve all scans if none specified|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -160,18 +183,18 @@ Example Output:
 
 ```
 
-### Download Report
+#### Download Report
 
 This action is used to export and download a specified report.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_name|string|None|True|Name of the specified scan|None|
 |report_format|string|None|True|File format of the downloaded report|['nessus', 'csv', 'html']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -187,13 +210,13 @@ Example Output:
 
 ```
 
-### Create Scan
+#### Create Scan
 
 This action is used to create a new scan.
 
 This API endpoint was deprecated in Nessus 7.0.0
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -203,7 +226,7 @@ This API endpoint was deprecated in Nessus 7.0.0
 |description|string|None|False|Additional information to attach to the scan|None|
 |targets|[]string|None|True|IP addresses or host names to scan|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -248,40 +271,34 @@ Example Output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|access_key|credential_secret_key|None|True|None|None|
-|ssl_verify|boolean|True|True|Validate certificate|None|
-|secret_key|credential_secret_key|None|True|None|None|
-|hostname|string|None|True|Nessus instance hostname e.g. 192.168.1.10\:1234|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 *Note:* Tenable Nessus deprecated create and launch scan in version 7.0.0
 
-## Workflows
+# Version History
 
-Examples:
-
-* [Run Scan and Generate Report](https://market.komand.com/workflows/ntaylor/nessus-scan-reporting/0.1.0)
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 2.0.0 - Use new credential types
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Nessus Professional Product Page](https://www.tenable.com/products/nessus-vulnerability-scanner/nessus-professional)
 * Nessus API documentation is only available through your Nessus instance. Assuming default configuration, it can be found at [https://localhost:8834/api](https://localhost:8834/api)
+

@@ -1,18 +1,40 @@
-
-# MISP
-
-## About
+# Description
 
 [MISP](http://www.misp-project.org/) is an open source threat sharing platform.
 This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.html) and leverages the [pymisp](https://github.com/CIRCL/PyMISP) library.
 
-## Actions
+# Key Features
 
-### Add Context
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|URL of the MISP server e.g. https://misp-2-4.example.com|None|
+|automation_code|credential_secret_key|None|True|API/Automation code of MISP server|None|
+|ssl|boolean|None|True|If true will use SSL for communication to MISP|None|
+
+## Technical Details
+
+### Actions
+
+#### Add Context
 
 This action is used to add context. This action returns `true` or `false` on whether the context was successfully added.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -21,7 +43,7 @@ This action is used to add context. This action returns `true` or `false` on whe
 |other|other_input|None|True|None|None|
 |link|link_input|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -37,11 +59,11 @@ Example output:
 
 ```
 
-### Export Events
+#### Export Events
 
 This action is used to export all events in XML format.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -52,17 +74,17 @@ This action is used to export all events in XML format.
 |last|string|None|False|Events within x amount of time E.g. 5d|None|
 |encode_attachments|boolean|True|True|Encode attachments in export|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |events|bytes|False|Event output|
 
-### Create Event
+#### Create Event
 
 This action is used to create a MISP event.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -75,7 +97,7 @@ This action is used to create a MISP event.
 |distribution|string|This Organization|False|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |threat_level_id|string|None|True|Importance of the threat|['4', '3', '2', '1']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -102,11 +124,11 @@ This action is used to create a MISP event.
 |proposal_email_lock|boolean|False|Lock proposal email|
 |RelatedEvent|[]object|False|Related event|
 
-### Export RPZ
+#### Export RPZ
 
 This action is used to export RPZ zone files.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -115,24 +137,24 @@ This action is used to export RPZ zone files.
 |from|string|None|False|From date E.g. 2015-02-15|None|
 |tags|[]string|None|False|Array of tags to include in results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |rpz|bytes|False|RPZ output|
 
-### Add Tag
+#### Add Tag
 
 This action is used to add a tag. The event tag must already exist in MISP. This action returns `true` or `false` on whether the tag successfully added.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |tag|string|None|True|Event tag for search|None|
 |event|string|None|True|Event ID to append to|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -148,11 +170,11 @@ Example output:
 
 ```
 
-### Export STIX
+#### Export STIX
 
 This action is used to export events in STIX format.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -163,23 +185,23 @@ This action is used to export events in STIX format.
 |last|string|None|False|Events within x amount of time E.g. 5d|None|
 |encode_attachments|boolean|True|True|Encode attachments in export|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |stix|bytes|False|STIX output|
 
-### Add Sightings
+#### Add Sightings
 
 This action is used to add sightings to an organization.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |sightings|[]string|None|True|Event sightings|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -195,11 +217,11 @@ Example output:
 
 ```
 
-### Add URLs
+#### Add URLs
 
 This action is used to add URLs to an event. This action returns `true` or `false` on whether the URLs were successfully added.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -208,7 +230,7 @@ This action is used to add URLs to an event. This action returns `true` or `fals
 |event|string|None|False|Event ID to append to|None|
 |urls|[]string|None|False|URLs to add|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -224,11 +246,11 @@ Example output:
 
 ```
 
-### Export Hashes
+#### Export Hashes
 
 This action is used to export hashes from the HIDS database.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -238,17 +260,17 @@ This action is used to export hashes from the HIDS database.
 |last|string|None|False|Events within x amount of time E.g. 5d|None|
 |tags|[]string|None|False|Array of tags to include in results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |hashes|bytes|False|Hashes|
 
-### Rules Export
+#### Rules Export
 
 This action is used to export snort or suricata rules.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -260,17 +282,17 @@ This action is used to export snort or suricata rules.
 |frame|boolean|True|True|Commented out expliantion framing the data|None|
 |format|string|None|True|Export format as either Suricata or Snort|['suricata', 'snort']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |rules|bytes|False|Rules output|
 
-### Export Attributes
+#### Export Attributes
 
 This action is used to export all attributes in CSV format.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -284,33 +306,33 @@ This action is used to export all attributes in CSV format.
 |include|boolean|True|True|Include attributes not marked as to_ids|None|
 |type|string|None|False|Attribute type|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |attributes|bytes|False|Attributes output|
 
-### Download Attachment
+#### Download Attachment
 
 This action is used to download an attachment.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |attribute_id|string|None|True|Attribute ID of attachment or malware sample|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |attachment|bytes|False|Attachment|
 
-### Add Email Recipient
+#### Add Email Recipient
 
 This action is used to add email recipient to event. This action returns `true` or `false` on whether the email was successfully added.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -319,7 +341,7 @@ This action is used to add email recipient to event. This action returns `true` 
 |recipient|string|None|True|Recipient email address|None|
 |event|string|None|True|Event ID to append to|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -335,11 +357,11 @@ Example output:
 
 ```
 
-### Add Email Sender
+#### Add Email Sender
 
 This action is used to add email sender to event. This action returns `true` or `false` on whether the email was successfully added.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -348,7 +370,7 @@ This action is used to add email sender to event. This action returns `true` or 
 |sender|string|None|True|Sender email address|None|
 |event|string|None|True|Event ID to append to|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -364,11 +386,11 @@ Example output:
 
 ```
 
-### Add Email Subject
+#### Add Email Subject
 
 This action is used to add email subject to event. This action returns `true` or `false` on whether the email was successfully added.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -377,7 +399,7 @@ This action is used to add email subject to event. This action returns `true` or
 |event|string|None|True|Event ID to append to|None|
 |subject|string|None|True|Email subject|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -393,17 +415,17 @@ Example output:
 
 ```
 
-### Find Event
+#### Find Event
 
 This action is used to receive events based on criteria.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |event_id|string|None|True|Event ID e.g. 123|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -500,11 +522,11 @@ Example output:
 
 ```
 
-### Search Events
+#### Search Events
 
 This action is used to search for events.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -517,7 +539,7 @@ This action is used to search for events.
 |threat_level|string|None|False|Search by threat Level|['Undefined', 'Low', 'Medium', 'High']|
 |date_from|string|None|False|Search after this data e.g. 2018-03-22|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -542,18 +564,18 @@ Example output:
 
 ```
 
-### Remove Tag
+#### Remove Tag
 
 This action is used to remove a tag.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |tag|string|None|True|Event tag for search|None|
 |event|string|None|True|Event ID to append to|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -569,11 +591,11 @@ Example output:
 
 ```
 
-### Add Attribute
+#### Add Attribute
 
 This action is used to add an attribute to an event.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -583,7 +605,7 @@ This action is used to add an attribute to an event.
 |event|string|None|True|Event ID to append to|None|
 |value|string|None|True|The Value of the attribute e.g. for a url https\://malware.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -615,17 +637,17 @@ Example output:
 
 ```
 
-### Publish
+#### Publish
 
 This action is used to publish an event.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |event|string|None|False|Search by event ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -646,11 +668,11 @@ Example output:
 
 ```
 
-### Add Attachment
+#### Add Attachment
 
 This action is used to add an attachment to event.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -658,7 +680,7 @@ This action is used to add an attachment to event.
 |event|string|None|True|Event ID to append to|None|
 |filename|string|None|False|Filename of attachment|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -669,13 +691,13 @@ Example output:
 ```
 ```
 
-## Triggers
+### Triggers
 
-### Search For Tag
+#### Search For Tag
 
 This trigger is used to search MISP for any events with a specified tag.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -683,50 +705,42 @@ This trigger is used to search MISP for any events with a specified tag.
 |tag|string|None|True|The tag to search for|None|
 |remove|boolean|None|True|If true the tag will be removed|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |events|[]string|True|A list of event_ids with the tag|
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|URL of the MISP server e.g. https://misp-2-4.example.com|None|
-|automation_code|credential_secret_key|None|True|API/Automation code of MISP server|None|
-|ssl|boolean|None|True|If true will use SSL for communication to MISP|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Threat intelligence
-* Export events
-* Export RPZ zone files
-* Download attachment
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.2.0 - 8 new actions to add data to MISP: Add Email Recipient, Add Email Sender, Add Email Subject, Add Sightings, Add Tag, Add Context, Add URL, and Create An Event
-* 0.2.1 - SSL bug fix in SDK
-* 0.3.0 - Add Find Event action
-* 0.4.0 - Added add attachment feature | Update to v2 architecture
-* 0.4.1 - Bug fix for CI tool incorrectly uploading plugins
-* 1.0.0 - Add trigger. Add actions: Add Attachment, Remove Tag, Search Events, Publish. Support web server mode
-* 2.0.0 - Updated to new credential types | Update `hostname` variable in Connection to `url`
-* 3.0.0 - Fixed issue where Add URLs, Add Context, Add Email Sender, Add Email Subject and Add Email Recipient actions sent requests as a proposal | Fixed an issue where the distribution list was set incorrectly within Add URLs, Add Context, Create an Event, Add Email Sender, Add Email Subject, Add Email Recipient actions
 * 3.0.1 - Fix typo in plugin spec
+* 3.0.0 - Fixed issue where Add URLs, Add Context, Add Email Sender, Add Email Subject and Add Email Recipient actions sent requests as a proposal | Fixed an issue where the distribution list was set incorrectly within Add URLs, Add Context, Create an Event, Add Email Sender, Add Email Subject, Add Email Recipient actions
+* 2.0.0 - Updated to new credential types | Update `hostname` variable in Connection to `url`
+* 1.0.0 - Add trigger. Add actions: Add Attachment, Remove Tag, Search Events, Publish. Support web server mode
+* 0.4.1 - Bug fix for CI tool incorrectly uploading plugins
+* 0.4.0 - Added add attachment feature | Update to v2 architecture
+* 0.3.0 - Add Find Event action
+* 0.2.1 - SSL bug fix in SDK
+* 0.2.0 - 8 new actions to add data to MISP: Add Email Recipient, Add Email Sender, Add Email Subject, Add Sightings, Add Tag, Add Context, Add URL, and Create An Event
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [MISP](http://www.misp-project.org/)
 * [MISP API](https://circl.lu/doc/misp/automation/index.html)
 * [pymisp](https://github.com/CIRCL/PyMISP)
+

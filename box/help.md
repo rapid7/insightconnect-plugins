@@ -1,52 +1,78 @@
-
-# Box
-
-## About
+# Description
 
 [Box](https://www.box.com/) is a popular cloud storage solutions for consumers and businesses of any size.
 
 This plugin utilizes the [Box SDK](https://box-python-sdk.readthedocs.io/en/latest/) Python library.
 
-## Actions
+# Key Features
 
-### Lock File
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin requires a Box enterprise account and a self generated and submitted RSA token and (optional) password.
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|client_id|string|None|True|Box client ID|None|
+|client_secret|credential_secret_key|None|True|Box client secret|None|
+|enterprise_id|string|None|True|Box enterprise ID|None|
+|private_key|credential_secret_key|None|True|User generated private key|None|
+|rsa_password|credential_secret_key|None|False|Private key password|None|
+|jwt_key_id|string|None|True|Box generated JWT key ID|None|
+
+## Technical Details
+
+### Actions
+
+#### Lock File
 
 This action is used to lock a file.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |file_id|string|None|True|Specific file to lock|None|
 |download_prevented|boolean|None|False|File cannot be downloaded while locked|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Delete File
+#### Delete File
 
 This action is used to delete a file by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|File ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Create User
+#### Create User
 
 This action is used to create a user account in Box enterprise.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -62,7 +88,7 @@ This action is used to create a user account in Box enterprise.
 |timezone|string|None|False|User's timezone|None|
 |two_factor|boolean|None|False|Exempt two-factor authentication|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -79,65 +105,65 @@ This action is used to create a user account in Box enterprise.
 |address|string|False|User address|
 |avatar_url|string|False|User avatar|
 
-### Get Folder
+#### Get Folder
 
 This action is used to fetch a folder by name to obtain ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |folder_name|string|None|True|Folder Name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|string|False|None|
 
-### Delete Folder
+#### Delete Folder
 
 This action is used to delete a folder by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|Folder ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Delete User Account
+#### Delete User Account
 
 This action is used to delete specific user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|User ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Get User Info
+#### Get User Info
 
 This action is used to retrieve user information.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|string|None|True|User's ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -152,17 +178,17 @@ This action is used to retrieve user information.
 |id|string|False|None|
 |job_title|string|False|None|
 
-### Get User Info from Login
+#### Get User Info from Login
 
 This action is used to retrieve user information using their login ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |login|string|None|True|User's login e.g. bob@hotmail.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -194,17 +220,17 @@ Example output:
 }
 ```
 
-### Download File
+#### Download File
 
 This action is used to download file by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |file_id|string|None|True|Specific file ID to download|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -212,43 +238,43 @@ This action is used to download file by ID.
 |url|string|False|None|
 |file|bytes|False|None|
 
-### Unlock File
+#### Unlock File
 
 This action is used to unlock a file.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |file_id|string|None|True|Specific file to unlock|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Get File
+#### Get File
 
 This action is used to retrieve a specific file ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |file_name|string|None|True|File Name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|string|False|None|
 
-### Upload File
+#### Upload File
 
 This action is used to upload a file. Input "0" for root folder. Include extention in filename.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -256,23 +282,23 @@ This action is used to upload a file. Input "0" for root folder. Include extenti
 |file|string|None|True|File to upload|None|
 |folder_id|string|None|True|Parent folder ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Get Enterprise Groups
+#### Get Enterprise Groups
 
 This action is used to get all enterprise groups.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group_name|string|None|False|Group name to find|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -299,11 +325,11 @@ Example output:
 }
 ```
 
-### Add User to Group
+#### Add User to Group
 
 This action is used to add a user to a group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -311,7 +337,7 @@ This action is used to add a user to a group.
 |role|string|None|True|Role|['admin', 'member']|
 |user_id|string|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -330,17 +356,17 @@ Example output:
 }
 ```
 
-### Get User Groups
+#### Get User Groups
 
 This action is used to get groups for a given user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|string|None|False|User ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -369,47 +395,44 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin requires a Box enterprise account and a self generated and submitted RSA token and (optional) password.
-The connection configuration accepts the following parameters:
+#### group
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|client_id|string|None|True|Box client ID|None|
-|client_secret|credential_secret_key|None|True|Box client secret|None|
-|enterprise_id|string|None|True|Box enterprise ID|None|
-|private_key|credential_secret_key|None|True|User generated private key|None|
-|rsa_password|credential_secret_key|None|False|Private key password|None|
-|jwt_key_id|string|None|True|Box generated JWT key ID|None|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|group_id|string|False|Group ID|
+|role|string|False|Role|
+|type|string|False|Type|
+|user_id|string|False|User ID|
 
 ## Troubleshooting
 
 The RSA token private key, JWT, client ID and secret must be provided to the plugin, and the public key must be submitted to your Box account.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Enterprise file management
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
-* 2.0.0 - Update formatting of connection credentials
-* 2.0.1 - Improper escaping of `\n` could cause connection error bug fix
-* 2.0.2 - Fix issue with credentials in InsightConnect
-* 2.0.3 - Fix issue where size was sometimes reported as a float
-* 2.0.4 - Update to `Create User` action `Space Amount` input showing input for unlimited size
-* 2.1.0 - New actions Get Enterprise Groups and Add User to Group
-* 2.2.0 - New actions Get User Groups and Get User Info from Login
 * 2.2.1 - Fix issue where a misleading error message could be given in the log
+* 2.2.0 - New actions Get User Groups and Get User Info from Login
+* 2.1.0 - New actions Get Enterprise Groups and Add User to Group
+* 2.0.4 - Update to `Create User` action `Space Amount` input showing input for unlimited size
+* 2.0.3 - Fix issue where size was sometimes reported as a float
+* 2.0.2 - Fix issue with credentials in InsightConnect
+* 2.0.1 - Improper escaping of `\n` could cause connection error bug fix
+* 2.0.0 - Update formatting of connection credentials
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
@@ -418,13 +441,3 @@ Examples:
 * [BOX](https://app.box.com/login/)
 * [boxsdk](https://box-python-sdk.readthedocs.io/en/latest/)
 
-## Custom Output Types
-
-### group
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|group_id|string|False|Group ID|
-|role|string|False|Role|
-|type|string|False|Type|
-|user_id|string|False|User ID|

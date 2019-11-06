@@ -1,22 +1,38 @@
-
-# Qualys SSL Labs
-
-## About
+# Description
 
 [Qualys SSL Labs](https://www.ssllabs.com) is used to test SSL servers available on the public Internet.
 This plugin uses the [Assessment APIs](https://github.com/ssllabs/ssllabs-scan/blob/stable/ssllabs-api-docs.md).
 
-## Actions
+# Key Features
 
-### Info
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Info
 
 This action is used to check SSL Labs server availability.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -46,21 +62,21 @@ Example response:
 
 ```
 
-### Status
+#### Status
 
 This action is used to retrieve status codes.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |statusDetails|object|False|None|
 
-### Analyze
+#### Analyze
 
 This action is used to initialize an SSL assessment.
 
@@ -74,7 +90,7 @@ INFO:root:Endpoints not found in response
 
 See the Output section for an example.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -85,7 +101,7 @@ See the Output section for an example.
 |start_new|string|None|True|Cached results ignored; New assessment started|['Off', 'On']|
 |from_cache|string|None|True|Always deliver cached assessment reports if available|['Off', 'On']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -163,7 +179,7 @@ Second request:
 
 The difference is that the response to the second request contains `endpoints` data, which may not always be available.
 
-### Endpoint
+#### Endpoint
 
 This action is used to retrieve detailed endpoint info.
 
@@ -171,14 +187,14 @@ This action is used to retrieve detailed endpoint info.
 To handle this, add this action to a loop in the Workflow Builder where the loop exits when the plugin's `$success = true`. Enabling
 `Continue workflow on step failure` in the action's configuration of the Workflow Builder is required for this to work.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ip|string|None|True|Server IP Address|None|
 |host|string|None|True|Server hostname|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -194,46 +210,47 @@ To handle this, add this action to a loop in the Workflow Builder where the loop
 |gradeTrustIgnore|string|False|None|
 |ipAddress|string|False|None|
 
-### Certificate
+#### Certificate
 
 This action is used to retrieve root certificates.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |certificates|bytes|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Test SSL Servers
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 1.0.1 - Fix typo in plugin spec
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Qualys SSL Labs](https://www.ssllabs.com)
 * [Assessment APIs](https://github.com/ssllabs/ssllabs-scan/blob/stable/ssllabs-api-docs.md)
+

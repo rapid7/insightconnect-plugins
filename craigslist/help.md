@@ -1,18 +1,34 @@
-
-# Craigslist
-
-## About
+# Description
 
 [Craigslist](https://www.craigslist.com) is provides local classifieds and forums for jobs, housing, for sale, personals, services, local community, and events.
 This plugin allows searching for sale postings on Craigslist.
 
-## Actions
+# Key Features
 
-### Search For Sale
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Search For Sale
 
 This action is used to search the for sale section.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -26,7 +42,7 @@ This action is used to search the for sale section.
 |search_distance|integer|None|False|Search distance in miles|None|
 |zip_code|integer|None|False|Zipcode|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -65,31 +81,32 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Search Craigslist for items
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Craigslist](https://www.craigslist.org)
 * [python-craigslist](https://pypi.python.org/pypi/python-craigslist/1.0.4)
+

@@ -1,24 +1,49 @@
-# Cherwell
-
-## About
+# Description
 
 [Cherwell](https://www.cherwell.com/) is a comprehensive service desk verified for eleven ITIL processes.
 This plugin utilizes the [Cherwell API](https://cherwellsupport.com/CherwellAPI/Documentation/en-US/csm_rest_api.html).
 
-## Actions
+# Key Features
 
-### Lookup Incident
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|guideit.cherwellondemand.com|True|Hostname of the Cherwell instance|None|
+|authentication_mode|string|Internal|True|Authentication mode. Either Internal, Windows, LDAP, SAML, Auto|['Internal', 'Windows', 'LDAP', 'SAML', 'Auto']|
+|username_and_password|credential_username_password|None|True|Cherwell username and password|None|
+|client_id|credential_secret_key|None|True|Cherwell Client ID / API Key|None|
+|ssl_verify|boolean|None|True|Whether to access the server over HTTPS|None|
+
+## Technical Details
+
+### Actions
+
+#### Lookup Incident
 
 This action is used to lookup an incident, including a list of fields and their record IDs, names, and set values.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |public_id|string|None|True|PublicID of the incident|None|
 |business_object_id|string|None|True|BusObjID of the incident|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -54,17 +79,17 @@ Example output:
 }
 ```
 
-### Perform Ad Hoc Search
+#### Perform Ad Hoc Search
 
 This action is used to run an ad-hoc business object search.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |data_request|object|None|True|Request object to specify search parameters|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -203,18 +228,18 @@ Example output:
 }
 ```
 
-### Create Incident
+#### Create Incident
 
 This action is used to create a Cherwell incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |fields_to_change|object|None|True|A JSON blob of keys and values that are to be replaced in the template e.g. {"Status", "New"} will update the Status field from the templateNone|
 |business_object_id|string|None|True|BusObjID of the template to create the incident off of|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -249,11 +274,11 @@ Example output:
 }
 ```
 
-### Update Incident
+#### Update Incident
 
 This action is used to update an incident within Cherwell.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -261,7 +286,7 @@ This action is used to update an incident within Cherwell.
 |public_id|string|None|True|Public ID of the incident|None|
 |fields_to_update|object|None|True|A JSON blob of keys and values that are to be updated in the incident e.g. {"Status", "New"} will update the Status field of the incident|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -284,40 +309,33 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|guideit.cherwellondemand.com|True|Hostname of the Cherwell instance|None|
-|authentication_mode|string|Internal|True|Authentication mode. Either Internal, Windows, LDAP, SAML, Auto|['Internal', 'Windows', 'LDAP', 'SAML', 'Auto']|
-|username_and_password|credential_username_password|None|True|Cherwell username and password|None|
-|client_id|credential_secret_key|None|True|Cherwell Client ID / API Key|None|
-|ssl_verify|boolean|None|True|Whether to access the server over HTTPS|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
-* 1.0.1 - Update vendor and descriptions
-* 2.0.0 - Fixes issue where `client_id` was using the wrong credential type | Update pinned requests version to resolve security vulnerability [CVE-2018-18074](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-18074)
-* 2.0.1 - Fixes issue where Create Incident was not properly formatting data to be passed to Cherwell
 * 2.1.0 - New action Update Incident
+* 2.0.1 - Fixes issue where Create Incident was not properly formatting data to be passed to Cherwell
+* 2.0.0 - Fixes issue where `client_id` was using the wrong credential type | Update pinned requests version to resolve security vulnerability [CVE-2018-18074](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-18074)
+* 1.0.1 - Update vendor and descriptions
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples
+## Source Code
 
-* Create and update records
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Cherwell API Documentation](https://cherwellsupport.com/CherwellAPI/Documentation/en-US/csm_rest_api.html)
+

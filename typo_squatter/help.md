@@ -1,52 +1,68 @@
-
-# Typo Squatter
-
-## About
+# Description
 
 The Type Squatter plugin looks for cybersquatters on a domain.
 
-## Actions
+# Key Features
 
-### Check for Squatters
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Check for Squatters
 
 This action is used to look for potential squatters.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|google.com|True|Domain to check|None|
 |flag|string|None|False|Flag to pass for dnstwist (Advanced)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |potential_squatters|[]object|False|JSON representation of potential squatters|
 
-### Score Domain
+#### Score Domain
 
 This action is used to get phishing score for domain. score > 90: very suspicous, > 65 likely phising.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|google.com|True|Domain to check|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |score|number|False|Phishing score|
 
-## Triggers
+### Triggers
 
-### Search Certstream
+#### Search Certstream
 
 This trigger is used to searches certstream for new certs matching query.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -54,35 +70,36 @@ This trigger is used to searches certstream for new certs matching query.
 |domain|string|google.com|False|Domain to check|None|
 |levenshtein|number|None|False|Levenshtein distance from domain score to match|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |domain|string|False|Matched domain|
 |score|number|False|Phishing score|
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 0.1.0 - Initial plugin
-* 0.1.1 - Search certstream flag bug fix
 * 1.0.0 - Support web server mode | Rename "Score domain" action to "Score Domain" | Rename "Search certstream" trigger to "Search Certstream"
+* 0.1.1 - Search certstream flag bug fix
+* 0.1.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Uncover squatting attacks
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [dnstwist](https://github.com/elceef/dnstwist)
 * [phishing_catcher](https://github.com/x0rz/phishing_catcher)
 * [Typo Squatting](https://en.wikipedia.org/wiki/Typosquatting)
+

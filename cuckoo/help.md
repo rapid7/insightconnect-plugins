@@ -1,7 +1,4 @@
-
-# Cuckoo Sandbox
-
-## About
+# Description
 
 [Cuckoo](https://cuckoosandbox.org/) is a malware analysis system, enabling tracing of API calls,
 file behavior, and analysis of memory and network traffic. This plugin utilizes
@@ -11,19 +8,41 @@ with your running Cuckoo instance.
 For brevity and readability, the term "base64-encoded file" is used in examples
 throughout this documentation in place of real base64-encoded data.
 
-## Actions
+# Key Features
 
-### View Task
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|http\://localhost\:8090/api|True|Cuckoo Sandbox API URL|None|
+
+## Technical Details
+
+### Actions
+
+#### View Task
 
 This action is used to return details on the task associated with the specified ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |task_id|integer|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -65,18 +84,18 @@ Example output:
 
 ```
 
-### List Tasks
+#### List Tasks
 
 This action is used to return list of tasks.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |limit|integer|None|False|Maximum number of returned tasks|None|
 |offset|integer|None|False|Data offset|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -140,17 +159,17 @@ Example output:
 
 ```
 
-### Delete Task
+#### Delete Task
 
 This action is used to remove the given task from the database and delete the results.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |task_id|integer|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -168,18 +187,18 @@ Example output:
 
 ```
 
-### Reschedule Task
+#### Reschedule Task
 
 This action is used to reschedule a task with the specified ID and priority (default priority is 1).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |priority|integer|None|False|None|None|
 |task_id|integer|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -197,17 +216,17 @@ Example output:
 
 ```
 
-### View Machine
+#### View Machine
 
 This action is used to return details on the analysis machine associated with the given name.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |machine_name|string|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -241,15 +260,15 @@ Example output:
 
 ```
 
-### Cuckoo Status
+#### Cuckoo Status
 
 This action is used to return the status of the cuckoo server.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -305,18 +324,18 @@ Example output:
 
 ```
 
-### Get Screenshots
+#### Get Screenshots
 
 This action is used to return one (JPEG) or all (ZIP) screenshots associated with the specified task ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |screenshot_id|string|None|False|None|None|
 |task_id|integer|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -334,18 +353,18 @@ Example output:
 
 ```
 
-### Get Report
+#### Get Report
 
 This action is used to return the report associated with the specified task ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |task_id|integer|None|True|None|None|
 |format|string|None|False|One of [json/html/all/dropped/package_files]. Details on formats here\: http\://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -363,18 +382,18 @@ Example output:
 
 ```
 
-### Get Memory
+#### Get Memory
 
 This action is used to return one memory dump file associated with the specified task ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |pid|string|None|True|None|None|
 |task_id|integer|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -392,15 +411,15 @@ Example output:
 
 ```
 
-### VPN Status
+#### VPN Status
 
 This action is used to return VPN status.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -409,15 +428,15 @@ This action does not contain any inputs.
 
 This action is currently not supported by Cuckoo for Mac OS and will return a 500.
 
-### List Machines
+#### List Machines
 
 This action is used to return a list with details on the analysis machines available to Cuckoo.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -453,17 +472,17 @@ Example output:
 
 ```
 
-### Get PCAP
+#### Get PCAP
 
 This action is used to return the content of the PCAP associated with the given task.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |task_id|integer|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -481,17 +500,17 @@ Example output:
 
 ```
 
-### Submit Files
+#### Submit Files
 
 This action is used to add one or more files and/or files embedded in archives to the list of pending tasks.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |files|[]file|None|True|List of files of the format\: {'filename'\: 'blah.exe', 'contents'\: 'YmFzZTY0Cg=='}|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -513,11 +532,11 @@ Example output:
 
 ```
 
-### View File
+#### View File
 
 This action is used to return details on the file matching either the specified MD5 hash, SHA256 hash or ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -525,7 +544,7 @@ This action is used to return details on the file matching either the specified 
 |id|integer|None|False|None|None|
 |md5|string|None|False|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -553,17 +572,17 @@ Example output:
 
 ```
 
-### Submit URL
+#### Submit URL
 
 This action is used to add a file (from URL) to the list of pending tasks.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|URL to analyze (multipart encoded content)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -579,17 +598,17 @@ Example output:
 
 ```
 
-### List Memory
+#### List Memory
 
 This action is used to return a list of memory dump files or one memory dump file associated with the specified task ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |task_id|integer|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -607,15 +626,15 @@ Example output:
 
 ```
 
-### Exit
+#### Exit
 
 This action is used to shut down the server if in debug mode and using the werkzeug server.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -633,17 +652,17 @@ Example output:
 
 ```
 
-### Reboot Task
+#### Reboot Task
 
 This action is used to add a reboot task to the database from an existing analysis ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |task_id|integer|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -663,17 +682,17 @@ Example output:
 
 ```
 
-### Rerun Report
+#### Rerun Report
 
 This action is used to re-run reporting for a task associated with the specified task ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |task_id|integer|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -689,17 +708,17 @@ Example output:
 
 ```
 
-### Get File
+#### Get File
 
 This action is used to return the binary content of the file matching the specified SHA256 hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |sha256|string|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -717,17 +736,17 @@ Example output:
 
 ```
 
-### Re-run Reporting
+#### Re-run Reporting
 
 This action is used to re-run reporting for a task associated with the specified task ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |task_id|integer|None|True|Task ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -738,38 +757,36 @@ Example output:
 ```
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|http\://localhost\:8090/api|True|Cuckoo Sandbox API URL|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Submit malware for analysis
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.2.0 - Rewrite
-* 0.2.1 - SSL bug fix in SDK
-* 0.2.2 - URL endpoints not ending in `/`, rename server to URL in connection, and bug fix for file submission
-* 0.2.3 - Bug fix for Cuckoo API version 2.0.5
-* 1.0.0 - Support web server mode | Bug fix for testing outputs | Semver compliance
 * 1.0.1 - Bug fix for Submit Files where Submit ID was required
+* 1.0.0 - Support web server mode | Bug fix for testing outputs | Semver compliance
+* 0.2.3 - Bug fix for Cuckoo API version 2.0.5
+* 0.2.2 - URL endpoints not ending in `/`, rename server to URL in connection, and bug fix for file submission
+* 0.2.1 - SSL bug fix in SDK
+* 0.2.0 - Rewrite
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Cuckoo Sandbox](https://cuckoosandbox.org/)
 * [Cuckoo API](http://docs.cuckoosandbox.org/en/latest/)
+

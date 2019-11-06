@@ -1,18 +1,43 @@
-
-# Cortex v2
-
-## About
+# Description
 
 [Cortex](https://github.com/TheHive-Project/Cortex) is a an open source and free software for analyzing observables.
 This plugin utilizes the Cortex API v2 via [cortex4py](https://github.com/TheHive-Project/Cortex4py/blob/master/Usage.md).
 
-## Actions
+# Key Features
 
-### Run Analyzer
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|verify|boolean|True|True|Verify the certificate|None|
+|host|string|None|True|Cortex host e.g. cortex.company.com or 10.3.4.50|None|
+|protocol|string|None|True|HTTP protocol|['HTTP', 'HTTPS']|
+|port|string|9999|True|Cortex API port e.g. 9999|None|
+|proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|
+|api_key|credential_secret_key|None|True|API key assigned to the user|None|
+
+## Technical Details
+
+### Actions
+
+#### Run Analyzer
 
 This action is used to run an analyzer on an observable.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -20,7 +45,7 @@ This action is used to run an analyzer on an observable.
 |analyzer_id|string|None|True|Analyzer ID e.g. Hipposcore_1_0|None|
 |attributes|attributes|None|True|Attributes|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -40,17 +65,17 @@ Example output:
 }
 ```
 
-### Get Job Details
+#### Get Job Details
 
 This action is used to list the details of a given job, identified by its ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |job_id|string|None|True|Job ID e.g. c9uZDbHBf32DdIVJ|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -70,17 +95,17 @@ Example output:
 }
 ```
 
-### Get Analyzer by Type
+#### Get Analyzer by Type
 
 This action is used to list analyzers that can act upon a given datatype.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |type|string|None|True|Data type, e.g. IP address, hash, domain|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -165,17 +190,17 @@ Example output:
 }
 ```
 
-### Get Job Report
+#### Get Job Report
 
 This action is used to list the report of a given job, identified by its ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |job_id|string|None|True|Job ID e.g. c9uZDbHBf32DdIVJ|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -251,17 +276,17 @@ Example output:
 }
 ```
 
-### Get Analyzers
+#### Get Analyzers
 
 This action is used to list enabled analyzers within Cortex.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |analyzer_id|string|None|False|Analyzer ID e.g. VirusTotal_Scan_3_0. If empty, all enabled analyzers will be returned|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -382,11 +407,11 @@ Example output:
 }
 ```
 
-### Get Jobs
+#### Get Jobs
 
 This action is used to list analysis jobs.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -396,7 +421,7 @@ This action is used to list analysis jobs.
 |dataFilter|string|None|False|A string representing a part of an observable value. Could be an IP or part of an IP, a domain, URL and so on|None|
 |limit|integer|10|False|A number representing a page size|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -467,17 +492,17 @@ Example output:
 }
 ```
 
-### Delete Job
+#### Delete Job
 
 This action is used to delete an existing job, identified by its ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |job_id|string|None|True|Job ID e.g. c9uZDbHBf32DdIVJ|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -491,11 +516,11 @@ Example output:
 }
 ```
 
-### Run a File Analyzer
+#### Run a File Analyzer
 
 This action is used to run analyzers on a file.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -503,7 +528,7 @@ This action is used to run analyzers on a file.
 |analyzer_id|string|None|True|Analyzer ID e.g. File_Info_2_0|None|
 |file|bytes|None|True|A file to analyze|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -522,11 +547,11 @@ Example output:
   }
 }
 ```
-### Bulk Analyze
+#### Bulk Analyze
 
 This action is used to run all or a collection of analyzers on an observable.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -535,7 +560,7 @@ This action is used to run all or a collection of analyzers on an observable.
 |observable|string|None|True|A string representing an observable value. This could be an IP address, a domain, URL, or other indicator|None|
 |attributes|attributes|None|True|Attributes|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -564,40 +589,31 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|verify|boolean|True|True|Verify the certificate|None|
-|host|string|None|True|Cortex host e.g. cortex.company.com or 10.3.4.50|None|
-|protocol|string|None|True|HTTP protocol|['HTTP', 'HTTPS']|
-|port|string|9999|True|Cortex API port e.g. 9999|None|
-|proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|
-|api_key|credential_secret_key|None|True|API key assigned to the user|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Intelligence
-* Enrichment
-
-## Versions
-
-* 1.0.0 - Initial plugin
 * 1.1.0 - New action Bulk Analyze
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Cortex](https://github.com/TheHive-Project/Cortex)
 * [cortex4py](https://github.com/TheHive-Project/Cortex4py/blob/master/Usage.md)
+

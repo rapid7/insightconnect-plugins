@@ -1,27 +1,43 @@
-
-# Chaosreader
-
-## About
+# Description
 
 [Chaosreader](http://chaosreader.sourceforge.net/) is a tool to trace sessions and fetch application data from snoop or tcpdump logs.
 This plugin runs the Chaosreader tool directly.
 
-## Actions
+# Key Features
 
-### Run
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Run
 
 This action is used to run Chaosreader on a given capture (PCAP or Snoop) file.
 Session details are provided in the output, as well as the extracted files in a `bytes array`.
 Specific file traffic/file types can be excluded.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |exclude|string|None|False|Exclude traffic/files|['None', 'Info', 'Raw', 'TCP', 'UDP', 'ICMP']|
 |dump|bytes|None|True|Base64 encoded PCAP or snoop file|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -34,33 +50,32 @@ Specific file traffic/file types can be excluded.
 |ip_count|[]count|False|List of IPs and their count|
 |file_count|integer|False|Number of files extracted|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Packet analysis
-* File carving
-* Forensics
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 1.0.1 - Fix issue where run action was excluded from plugin on build
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Chaosreader](http://chaosreader.sourceforge.net/)
+

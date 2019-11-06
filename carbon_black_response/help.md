@@ -1,18 +1,40 @@
-
-# Cb Response
-
-## About
+# Description
 
 [Cb Response](https://www.carbonblack.com/products/cb-response/) is the most complete endpoint detection and response solution available to security teams.
 This plugin utilizes the [Cb Response REST API](https://developer.carbonblack.com/reference/enterprise-response/6.1/rest-api/).
 
-## Actions
+# Key Features
 
-### List Alerts
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|https\://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|
+|ssl_verify|boolean|True|True|SSL certificate verification|None|
+|api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|
+
+## Technical Details
+
+### Actions
+
+#### List Alerts
 
 This action is used to list alerts with given parameters.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -20,7 +42,7 @@ This action is used to list alerts with given parameters.
 |rows|integer|10|False|How many rows of data to return. Default is 10|None|
 |start|integer|0|False|What row of data to start at. Default is 0|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -86,18 +108,18 @@ Example output:
 
 ```
 
-### Delete Feed
+#### Delete Feed
 
 This action is used to delete a feed.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |force|boolean|None|True|Force deletion of all matches if multiple matches found|None|
 |id|string|None|True|The ID of the feed|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -113,11 +135,11 @@ Example output:
 
 ```
 
-### List Binaries
+#### List Binaries
 
 This action is used to list binaries with given parameters.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -125,7 +147,7 @@ This action is used to list binaries with given parameters.
 |rows|integer|10|False|How many rows of data to return. Default is 10|None|
 |start|integer|0|False|What row of data to start at. Default is 0|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -184,11 +206,11 @@ Example output:
 
 ```
 
-### Add Feed
+#### Add Feed
 
 This action is used to add a feed.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -202,7 +224,7 @@ This action is used to add a feed.
 |password|password|None|False|Password|None|
 |validate_server_cert|boolean|None|False|Whether or not to validate server certificate|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -218,17 +240,17 @@ Example output:
 
 ```
 
-### Blacklist Hash
+#### Blacklist Hash
 
 This action is used to ban a hash given its MD5.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |md5_hash|string|None|True|An MD5 hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -244,11 +266,11 @@ Example output:
 
 ```
 
-### List Watchlists
+#### List Watchlists
 
 This action is used to list all watchlists.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -279,18 +301,18 @@ Example output:
 
 ```
 
-### Delete Watchlist
+#### Delete Watchlist
 
 This action is used to delete a watchlist.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |force|boolean|None|True|Force deletion of all matches if multiple matches found|None|
 |id|string|None|True|The ID of the watchlist|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -306,11 +328,11 @@ Example output:
 
 ```
 
-### List Processes
+#### List Processes
 
 This action is used to list processes with given parameters.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -318,7 +340,7 @@ This action is used to list processes with given parameters.
 |rows|integer|10|False|How many rows of data to return. Default is 10|None|
 |start|integer|0|False|What row of data to start at. Default is 0|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -368,11 +390,11 @@ Example output:
 
 ```
 
-### List Sensors
+#### List Sensors
 
 This action is used to list all sensors.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -381,7 +403,7 @@ This action is used to list all sensors.
 |id|string|None|False|The sensor ID|None|
 |groupid|string|None|False|The sensor group ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -441,17 +463,17 @@ Example output:
 ]
 ```
 
-### Get Binary
+#### Get Binary
 
 This action is used to retrieve a binary by its MD5 hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hash|string|None|True|An MD5 hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -467,18 +489,18 @@ Example output:
 
 ```
 
-### Update Alert
+#### Update Alert
 
 This action is used to update or resolve an alert.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |status|string|Resolved|True|The status to update|['Resolved', 'Unresolved', 'In Progress', 'False Positive']|
 |id|string|None|True|Unique ID of the alert. Example\: 1cb11d0d-f86b-415d-aeb3-05f085973fbb|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -494,11 +516,11 @@ Example output:
 
 ```
 
-### Add Watchlist
+#### Add Watchlist
 
 This action is used to add a watchlist.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -506,7 +528,7 @@ This action is used to add a watchlist.
 |name|string|None|True|Watchlist name|None|
 |query|string|None|True|Raw Carbon Black query that this watchlist matches|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -522,17 +544,17 @@ Example output:
 
 ```
 
-### Isolate Sensor
+#### Isolate Sensor
 
 This action is used to isolate a sensor from the network.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hostname|string|None|False|Hostname of the sensor to isolate|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -548,15 +570,15 @@ Example output:
 
 ```
 
-### List Feeds
+#### List Feeds
 
 This action is used to list all feeds.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -595,17 +617,17 @@ Example output:
 
 ```
 
-### Unisolate Sensor
+#### Unisolate Sensor
 
 This action is used to bring a sensor back into the network.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hostname|string|None|False|Hostname of the sensor to unisolate|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -621,17 +643,17 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
-### New Alert
+#### New Alert
 
 This trigger is used to fire when a new alert is found.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -697,43 +719,36 @@ Example output:
 
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|https\://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|
-|ssl_verify|boolean|True|True|SSL certificate verification|None|
-|api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Blacklist malicious binaries
-* Isolate compromised hosts from the network
-* Reduce low-priority alerts
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 1.0.1 - SSL bug fix in SDK
-* 2.0.0 - Update to v2 Python plugin architecture | Support web server mode
-* 3.0.0 - Plugin audited and various minor bugs corrected
-* 3.1.0 - Added action List Sensors
-* 3.1.1 - New input parameters for List Sensors action
-* 3.1.2 - Fixed List Sensors action from failing when sensor dosen't exist
-* 3.1.3 - Pull the ConnectionCacheKey update from SDK
-* 3.1.4 - Update descriptions
-* 3.1.5 - Update connection tests
-* 3.1.6 - Fix issue where output from the New Alert trigger did not match the output schema
 * 3.1.7 - Fix issue where Delete Watchlist action would not run successfully
+* 3.1.6 - Fix issue where output from the New Alert trigger did not match the output schema
+* 3.1.5 - Update connection tests
+* 3.1.4 - Update descriptions
+* 3.1.3 - Pull the ConnectionCacheKey update from SDK
+* 3.1.2 - Fixed List Sensors action from failing when sensor dosen't exist
+* 3.1.1 - New input parameters for List Sensors action
+* 3.1.0 - Added action List Sensors
+* 3.0.0 - Plugin audited and various minor bugs corrected
+* 2.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 1.0.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Carbon Black REST API Reference](https://developer.carbonblack.com/reference/enterprise-response/6.1/rest-api/)
+

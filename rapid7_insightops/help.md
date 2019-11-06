@@ -1,49 +1,70 @@
-
-# Rapid7 InsightOps
-
-## About
+# Description
 
 [Rapid 7 InsightOps](https://insightops.help.rapid7.com/docs) is a log management and monitoring solution.
 This plugin utilizes [Rapid7 InsightOps API](https://insightops.help.rapid7.com/docs).
 
-## Actions
+# Key Features
 
-### Query Logs
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|region|string|us|True|Region of InsightOps service to access e.g. eu|['eu', 'us']|
+|api_key|string|None|True|API Key to access InsightOps service e.g. 39dd20eb-1337-45a0-a4044-133f237b50fa|None|
+
+## Technical Details
+
+### Actions
+
+#### Query Logs
 
 This action is used to retrieve logs from InsightOps service.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |logs|logs|True|None|
 
-### Submit Log Data
+#### Submit Log Data
 
 This action is used to submit JSON to a specified log within an InsightOps logset.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |data|object|None|False|JSON that will be passed to InsightOps logset|None|
 |logset_container_id|string|None|False|An UUID that specifics a container within an InsightOps logset|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |success|boolean|False|Reports if data was submitted successfully|
 
-### Create Logset Container
+#### Create Logset Container
 
 This action is used to create a container within the specified logset for the InsightOps service.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -55,52 +76,46 @@ This action is used to create a container within the specified logset for the In
 |id|string|None|False|ID points to the [logset](https://insightops.help.rapid7.com/docs/using-log-search) ID to which the container will be created e.g. c17cef2e-01c1-404e-b42b-ea5088c2f713|None|
 |le_agent_follow|string|None|False|Log entry agent follow|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |log|logset_container|False|Returned data from created container|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |log|post_log|False|Data returned from the posted log|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|region|string|us|True|Region of InsightOps service to access e.g. eu|['eu', 'us']|
-|api_key|string|None|True|API Key to access InsightOps service e.g. 39dd20eb-1337-45a0-a4044-133f237b50fa|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Create logset containers
-* Submit JSON to logset containers
-* Query for logs
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture
 * 1.0.1 - Support web server mode | Use new credential types
+* 1.0.0 - Update to v2 Python plugin architecture
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [InsightOps](https://www.rapid7.com/products/insightops/m)
 * [InsightOps API](https://insightops.help.rapid7.com/docs)
 * [Logsets](https://insightops.help.rapid7.com/docs/using-log-search)
+

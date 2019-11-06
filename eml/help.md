@@ -1,23 +1,39 @@
-
-# EML
-
-## About
+# Description
 
 Extract information from EML files.
 
-## Actions
+# Key Features
 
-### Parse EML File
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Parse EML File
 
 This action is used to extract headers and file attachments.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |eml_file|bytes|None|True|EML File|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -63,17 +79,17 @@ Example output:
 
 ```
 
-### Parse EML File from String
+#### Parse EML File from String
 
 This action is used to extract headers and file attachments from a string.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |eml_file|string|None|True|EML File string|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -117,37 +133,40 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-* Email parsing
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 0.1.2 - Bug fix body parsing | Updated to v2 architecture
-* 0.1.3 - Bug fix for unicode chars and attached emails
-* 0.1.4 - Bug fix for emails with no To
-* 0.1.5 - Bug fix improved handling of HTML bodies
-* 0.1.6 - Bug fix for CI tool incorrectly uploading plugins
-* 0.1.7 - Bug fix for better UTF-8 encoding support
-* 1.0.0 - Support web server mode
-* 1.1.0 - New action Parse EML File from String
 * 1.1.1 - Fix issue where plugin would fail on empty date returned
+* 1.1.0 - New action Parse EML File from String
+* 1.0.0 - Support web server mode
+* 0.1.7 - Bug fix for better UTF-8 encoding support
+* 0.1.6 - Bug fix for CI tool incorrectly uploading plugins
+* 0.1.5 - Bug fix improved handling of HTML bodies
+* 0.1.4 - Bug fix for emails with no To
+* 0.1.3 - Bug fix for unicode chars and attached emails
+* 0.1.2 - Bug fix body parsing | Updated to v2 architecture
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [EML](http://forensicswiki.org/wiki/EML)
 * [RFC0822](https://www.ietf.org/rfc/rfc0822.txt)
+

@@ -1,7 +1,4 @@
-
-# Basename
-
-## About
+# Description
 
 The `basename` utility deletes any prefix ending with the last slash `/` character
 This plugin is used to get the last item of a file path or URL. Examples, using Python
@@ -15,48 +12,68 @@ This plugin is used to get the last item of a file path or URL. Examples, using 
 
 ```
 
-## Actions
+# Key Features
 
-### Basename
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Basename
 
 This action is used to get the `basename` of a path.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |path|string|None|True|URL or file path|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |basename|string|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 If the input doesn't contain a slash `/` in the path the result will be the original string unmodified.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Data formatting for any workflow
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - Update to v2 Python plugin architecture
 * 1.0.0 - Support web server mode
+* 0.1.1 - Update to v2 Python plugin architecture
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Python Basename](https://docs.python.org/2/library/os.path.html#os.path.basename)
+

@@ -1,22 +1,44 @@
-# SentinelOne
-
-## About
+# Description
 
 [SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint.
 
 This plugin utilizes the [SentinelOne API](https://usea1-partners.sentinelone.net/apidoc/).
 
-## Actions
+# Key Features
 
-### Get Threat Summary
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_username_password|None|True|Username and password|None|
+|url|string|https\://usea1-partners.sentinelone.net/|True|URL and endpoint of SentinelOne instance. For example\: https\://usea1-partners.sentinelone.net/|None|
+
+## Technical Details
+
+### Actions
+
+#### Get Threat Summary
 
 This action is used to get a summary of all threats.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -120,17 +142,17 @@ Example output:
 }
 ```
 
-### Blacklist by Content Hash
+#### Blacklist by Content Hash
 
 This action is used to add hashed content to global blacklist. The input for this action makes use of `contentHash` from the threat summary.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hash|string|None|True|Content hash to add to blacklist|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -146,18 +168,18 @@ Example output:
 }
 ```
 
-### Blacklist by IoC Hash
+#### Blacklist by IoC Hash
 
 This action is used to add hashed indicator of compromise to global blacklist.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hash|string|None|True|Indicator of compromise hash to add to blacklist|None|
 |agent_id|string|None|True|Agent ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -173,18 +195,18 @@ Example output:
 }
 ```
 
-### Mitigate Threat
+#### Mitigate Threat
 
 This action is used to apply a mitigation action to a threat.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |action|string|None|True|Mitigation action|['rollback-remediation', 'quarantine', 'kill', 'remediate', 'un-quarantine']|
 |threat_id|string|None|True|ID of a threat|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -198,11 +220,11 @@ Example output:
 }
 ```
 
-### Mark as Benign
+#### Mark as Benign
 
 This action is used to mark a threat as resolved.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -210,7 +232,7 @@ This action is used to mark a threat as resolved.
 |whitening_option|string|None|False|Selected whitening option|['browser-type', 'certificate', 'file-type', 'file_hash', 'path']|
 |target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -224,11 +246,11 @@ Example output:
 }
 ```
 
-### Create IOC Threat
+#### Create IOC Threat
 
 This action is used to create a threat from an IOC event.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -239,7 +261,7 @@ This action is used to create a threat from an IOC event.
 |annotation_url|string|None|True|Vigilance annotation URL|None|
 |annotation|string|None|True|Vigilance annotation|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -253,11 +275,11 @@ Example output:
 }
 ```
 
-### Mark as Threat
+#### Mark as Threat
 
 This action is used to mark a suspicious threat as a threat.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -265,7 +287,7 @@ This action is used to mark a suspicious threat as a threat.
 |whitening_option|string|None|False|Selected whitening option|['browser-type', 'certificate', 'file-type', 'file_hash', 'path']|
 |target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -279,13 +301,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-### Get Threats
+#### Get Threats
 
 This trigger is used to get threats.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -295,7 +317,7 @@ This trigger is used to get threats.
 |classifications|[]string|None|False|List of classifications to search|None|
 |engines|[]string|None|False|Included engines|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -391,33 +413,28 @@ Example output:
 }
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Username and password|None|
-|url|string|https\://usea1-partners.sentinelone.net/|True|URL and endpoint of SentinelOne instance. For example\: https\://usea1-partners.sentinelone.net/|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
-* 1.0.1 - Update to add Blacklist by IoC Hash and Blacklist by Content Hash
 * 1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark as Threat and Create IOC Threat
+* 1.0.1 - Update to add Blacklist by IoC Hash and Blacklist by Content Hash
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Get a summary of all threats for further analysis
-* Blacklist a file by its hash
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [SentinelOne Product Page](https://www.sentinelone.com/)
 * [SentinelOne API](https://usea1-partners.sentinelone.net/apidoc/)
+

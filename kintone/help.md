@@ -1,23 +1,44 @@
-# Kintone
-
-## About
+# Description
 
 [Kintone](https://www.kintone.com/) allows for custom workflows and data management for businesses and non-profits in one place.
 
-## Actions
+# Key Features
 
-### Get Record by ID
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api-key|credential_secret_key|None|True|API key|None|
+
+## Technical Details
+
+### Actions
+
+#### Get Record by ID
 
 This action is used to get a record by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |app_id|string|None|True|Application ID|None|
 |record_id|string|None|True|Record ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -74,18 +95,18 @@ Example output:
 }
 ```
 
-### Write Record
+#### Write Record
 
 This action is used to write a record.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |app_id|string|None|True|Application ID|None|
 |record_body|object|None|True|Record Body as JSON|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -102,39 +123,31 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api-key|credential_secret_key|None|True|API key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
-## Workflows
+# Version History
 
-Examples:
-
-* Get a record
-* Write a record
-
-## Versions
-
-* 1.0.0 - Initial plugin
 * 1.0.1 - Fix issue where SSL Verify was set to false
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Kintone](https://www.kintone.com/)
 * [Kintone Developer Portal](https://developer.kintone.io/hc/en-us)
 
-## Custom Output Types
-
-_This plugin does not contain any custom output types._

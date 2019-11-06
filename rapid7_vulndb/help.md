@@ -1,24 +1,40 @@
-
-# Rapid7 Vulnerability & Exploit Database
-
-## About
+# Description
 
 Rapid7's [Vulndb](https://www.rapid7.com/db) is a curated repository of vetted computer software exploits and exploitable vulnerabilities. Technical details for over 70,000 vulnerabilities and 3,000 exploits are available for security professionals and researchers to review. These vulnerabilities are utilized by our vulnerability management tool Nexpose. The exploits are all included in the Metasploit framework and utilized by our penetration testing tool, Metasploit Pro. Our vulnerability and exploit database is updated frequently and contains the most recent security research.
 
-## Actions
+# Key Features
 
-### Search Database
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Search Database
 
 This action is used to search the database for vulnerabilities and exploits.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |database|string|All|True|Name of the database|['Vulnerability Database', 'Metasploit Modules', 'All']|
 |search|string|None|True|Search parameter for database|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -42,30 +58,31 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Search for vulnerabilities and exploits.
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 1.0.1 - Update to v2 Python plugin architecture and support web server mode
 * 1.1.0 - Fix issue where Published Date input in the Search Database action would not always parse correctly | Fix issue with memory leaks
+* 1.0.1 - Update to v2 Python plugin architecture and support web server mode
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [VulnDB](https://www.rapid7.com/db)
+

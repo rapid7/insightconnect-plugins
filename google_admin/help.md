@@ -1,50 +1,21 @@
-
-# Google Apps Admin
-
-## About
+# Description
 
 Provide access to the [Google Apps](https://gsuite.google.com/) Admin API.
 
-## Actions
+# Key Features
 
-### Get User
+* Feature 1
+* Feature 2
+* Feature 3
 
-This action is used to retrieve information about a user by their primary email address, unique ID, or alias email.
+# Requirements
 
-#### Input
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user|string|None|True|The user's primary email address, unique ID, or alias email.|None|
+# Documentation
 
-#### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|False|True if found|
-|user|user|False|User Response Returned|
-
-### Suspend User
-
-This action is used to suspend a user by their primary email address, unique ID, or alias email.
-
-#### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user|string|None|True|The user's primary email address, unique ID, or alias email.|None|
-
-#### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|user|user|False|User Response Returned|
-
-## Triggers
-
-This plugin does not contain any triggers.
-
-## Connection
+## Setup
 
 To authentiate to Google admin, you will need to create a service account on your Google apps domain that is capable of delegation. See [https://developers.google.com/admin-sdk/directory/v1/guides/delegation](https://developers.google.com/admin-sdk/directory/v1/guides/delegation)
 
@@ -71,28 +42,70 @@ The connection configuration accepts the following parameters:
 |project_id|string|None|True|Project ID from service credentials|None|
 |client_x509_cert_url|string|None|True|x509 cert URL from service credentials|None|
 
+## Technical Details
+
+### Actions
+
+#### Get User
+
+This action is used to retrieve information about a user by their primary email address, unique ID, or alias email.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|user|string|None|True|The user's primary email address, unique ID, or alias email.|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|found|boolean|False|True if found|
+|user|user|False|User Response Returned|
+
+#### Suspend User
+
+This action is used to suspend a user by their primary email address, unique ID, or alias email.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|user|string|None|True|The user's primary email address, unique ID, or alias email.|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|user|user|False|User Response Returned|
+
+### Triggers
+
+This plugin does not contain any triggers.
+
+### Custom Output Types
+
+_This plugin does not contain any custom output types._
+
 ## Troubleshooting
 
-### Connection
+#
 
-Please make sure the [Admin SDK](https://console.developers.google.com/apis/library/admin.googleapis.com) is enabled for the project.
-If you encounter `Encountered 403 Forbidden with reason "accessNotConfigured"`, the Admin SDK may not be enabled for the project you're configuring. Once enabled wait a few minutes for the setting changes to propagate.
+# Version History
 
-
-## Workflows
-
-Examples:
-
-* User deprovisioning
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
-* 1.0.1 - Update to connection and troubleshooting documentation
 * 1.0.2 - Fix typo in plugin spec
+* 1.0.1 - Update to connection and troubleshooting documentation
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Google API's](https://www.googleapis.com/)
+

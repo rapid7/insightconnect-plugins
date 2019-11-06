@@ -1,17 +1,33 @@
-
-# RPM
-
-## About
+# Description
 
 The [RPM](http://rpm.org/) plugin replicates the `info` (`-i`) capabilities of RPM while utilizing yum to help resolve packages correctly and download them for inspection.
 
-## Actions
+# Key Features
 
-### Info
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Info
 
 This action is used to get information about a package.
 
-#### Input
+##### Input
 
 As input, the plugin takes the expected parts of a complete RPM package label: name<epoch:>-version-release.arch.
 For better accuracy in identifying the users intended package, the user is also asked to specify their distro and architecture.
@@ -33,7 +49,7 @@ If it does not, yumdownloader downloads the package and automatically performs a
 |arch|string|None|True|System architecture|['x86_64', 'i686', 'i386', 'noarch']|
 |distro|string|None|True|Distribution|['CentOS 6', 'CentOS 7', 'Fedora 23', 'Fedora 24', 'Fedora 25', 'Fedora 26']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -56,13 +72,13 @@ If it does not, yumdownloader downloads the package and automatically performs a
 |release|string|False|Distro Release|
 |found|boolean|False|Package Found|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -75,18 +91,19 @@ The choice was made to use yum instead of building a custom repo search tool bec
 That being said, I was unable to find a library to assist in querying remote repos which would been a major help. In addition, yum will soon be deprecated in favor of DNF, and I have some code written for dnf if we ever have a docker container that runs CentOS or Fedora.
 The complexity of this plugin overwhelmingly involves hacking around with yum, which does some strange things. For example, changing the order of architectures specified with --archlist and putting 'noarch' first leads to no results in all cases. In addition, repofiles must be modified in order for yum to work correctly.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Verify package contents and hashes
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Support web server mode | Update to v2 Python plugin architecture
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [RPM](http://rpm.org/)
+

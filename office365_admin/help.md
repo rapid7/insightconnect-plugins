@@ -1,18 +1,42 @@
-
-# Office365 Admin
-
-## About
+# Description
 
 The [Office365 Admin](https://www.office.com/) plugin allows control of the administrative functions for Office365.
 This plugin utilizes the [Microsoft Graph API](https://developer.microsoft.com/en-us/graph/docs/concepts/overview).
 
-## Actions
+# Key Features
 
-### Add User
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|tenant_id|string|None|True|The ID of the directory that identifies the tenant|None|
+|app_secret|password|None|True|The secret of the registered app that obtained the refresh token|None|
+|app_id|string|None|True|The ID of the registered app that obtained the refresh token|None|
+
+#
+
+## Technical Details
+
+### Actions
+
+#### Add User
 
 This action is used to add a user to Office365.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -24,7 +48,7 @@ This action is used to add a user to Office365.
 |password|password|None|True|Set the user's password|None|
 |user_principal_name|string|None|True|The user principal name e.g. jdoe@mydomain.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -110,18 +134,18 @@ Example output:
 
 ```
 
-### Assign License To User
+#### Assign License To User
 
 This action assigns a license to a given user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |sku_id|string|None|True|ID for SKU to be applied|None|
 |user_principal_name|string|None|True|The user principal name to delete|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -135,17 +159,17 @@ Example output:
 }
 ```
 
-### Delete User
+#### Delete User
 
 This action is used to remove a user from Office365.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_principal_name|string|None|True|The user principal name to delete|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -159,18 +183,18 @@ Example output:
 
 ```
 
-### Update Usage Location
+#### Update Usage Location
 
 This action updates usage location for a given user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |location|string|None|True|A two letter country code (ISO standard 3166)|None|
 |user_principal_name|string|None|True|The user principal name to update e.g. bob@hotmail.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -186,90 +210,13 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|tenant_id|string|None|True|The ID of the directory that identifies the tenant|None|
-|app_secret|password|None|True|The secret of the registered app that obtained the refresh token|None|
-|app_id|string|None|True|The ID of the registered app that obtained the refresh token|None|
-
-### Get Subscribed SKUs
-
-This action gets a list of commercial subscriptions that an organization has acquired.
-
-#### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|sku_item|[]skuItem|True|SKU item containing all information about a given SKU|
-
-Example output:
-
-```
-[
-  {
-    "capabilityStatus": "Enabled",
-    "consumedUnits": 14,
-    "id": "48a80680-7326-48cd-9935-b556b81d3a4e_c7df2760-2c81-4ef7-b578-5b5392b571df",
-    "prepaidUnits": {
-        "enabled": 25,
-        "suspended": 0,
-        "warning": 0
-    },
-    "servicePlans": [
-        {
-            "servicePlanId": "8c098270-9dd4-4350-9b30-ba4703f3b36b",
-            "servicePlanName": "ADALLOM_S_O365",
-            "provisioningStatus": "Success",
-            "appliesTo": "User"
-        },
-        {
-            "servicePlanId": "9f431833-0334-42de-a7dc-70aa40db46db",
-            "servicePlanName": "LOCKBOX_ENTERPRISE",
-            "provisioningStatus": "Success",
-            "appliesTo": "User"
-        }
-    ],
-    "skuId": "c7df2760-2c81-4ef7-b578-5b5392b571df",
-    "skuPartNumber": "ENTERPRISEPREMIUM",
-    "appliesTo": "User"
-  }
-]
-```
-
-## Troubleshooting
-
-This plugin does not contain any troubleshooting information.
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 1.1.0 - Add new Add User action
-* 1.1.1 - Fix security bug where `password` field in Create User action was not masked
-* 1.2.0 - New actions Get Subscribed SKUs and Assign License
-* 1.2.1 - Fix issue where input was undefined in Add and Delete User actions | Add office location to Add User action
-
-## Workflows
-
-Examples:
-
-* Add a user as part of the onboarding process
-* Remove a user as part of the offboarding process
-
-## References
-
-* [Graph API](https://developer.microsoft.com/en-us/graph/docs/concepts/use_the_api)
-
-## Custom Output Types
-
-### serviceItem
+#### serviceItem
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -277,7 +224,7 @@ Examples:
 |servicePlanId|string|False|Service Plan ID|
 |servicePlanName|string|False|Service Plan Name|
 
-### skuItem
+#### skuItem
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -288,3 +235,26 @@ Examples:
 |servicePlans|[]serviceItem|True|List of service plans|
 |skuId|string|True|SkuID|
 |skuPartNumber|string|True|SKU Part Number|
+
+## Troubleshooting
+
+This plugin does not contain any troubleshooting information.
+
+# Version History
+
+* 1.2.1 - Fix issue where input was undefined in Add and Delete User actions | Add office location to Add User action
+* 1.2.0 - New actions Get Subscribed SKUs and Assign License
+* 1.1.1 - Fix security bug where `password` field in Create User action was not masked
+* 1.1.0 - Add new Add User action
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [Graph API](https://developer.microsoft.com/en-us/graph/docs/concepts/use_the_api)
+

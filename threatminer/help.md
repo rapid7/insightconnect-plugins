@@ -1,160 +1,176 @@
-
-# Threat Miner
-
-## About
+# Description
 
 [Threat Miner](https://www.threatminer.org) is an open source search engine for
 fast threat intelligence research and pivoting with context.
 
 This plugin utilizes the [ThreatMiner API](https://www.threatminer.org/api.php).
 
-## Actions
+# Key Features
 
-### Domain Lookup
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Domain Lookup
 
 This action is used to fetches information related to a domain by URIs, certificates, or related samples.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query_type|string|None|True|None|['WHOIS', 'PASSIVE DNS', 'Example Query URI', 'Report Tagging']|
 |domain|string|None|True|Domain to search|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### Email (Reverse WHOIS) - Report Tagging
+#### Email (Reverse WHOIS) - Report Tagging
 
 This action is used to fetches information related to an email address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|Email address to search e.g. janagreen2000@example.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### IP Lookup
+#### IP Lookup
 
 This action is used to fetch information related to an IP by Whois, URIs, passive DNS, or report tagging.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query_type|string|None|True|None|['WHOIS', 'PASSIVE DNS', 'URIs', 'Report Tagging']|
 |address|string|None|True|IP address to search|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### Search APTNotes
+#### Search APTNotes
 
 This action is used to fetches information related to a text search.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|Text to search e.g. sofacy|None|
 |query_type|string|None|True|None|['Full Text', 'By Year']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### SSL Hosts
+#### SSL Hosts
 
 This action is used to fetches host information related to a certificate.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|Certificate SHA1 hash to search e.g. 42a8d5b3a867a59a79f44ffadd61460780fe58f2|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### Domain Lookup Extended
+#### Domain Lookup Extended
 
 This action is used to fetch information related to a domain by URIs, certificates, or related samples.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query_type|string|None|True|None|['Related Samples', 'Subdomains']|
 |domain|string|None|True|Domain to search|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### Hash Report
+#### Hash Report
 
 This action is used to fetches information related to a hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039|None|
 |query_type|string|None|True|None|['Samples', 'Report Tagging']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### Hash Samples
+#### Hash Samples
 
 This action is used to fetches information related to a hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039|None|
 |query_type|string|None|True|None|['Samples', 'Report Tagging']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### AV Report
+#### AV Report
 
 This action is used to query for an AV report.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|Virus name to query e.g. Trojan.Enfal|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -165,44 +181,44 @@ Example output:
 ```
 ```
 
-### Get Samples
+#### Get Samples
 
 This action is used to fetches samples of data intelligence data by metadata, http traffic, hosts, mutants, registry keys, av detections, or report tagging.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|MD5, SHA1, or SHA256 hash to search|None|
 |query_type|string|None|True|None|['Metadata', 'HTTP Traffic', 'Hosts', 'Mutants', 'Registry keys', 'AV detections', 'Report Tagging']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### Email (Reverse WHOIS) - Domain
+#### Email (Reverse WHOIS) - Domain
 
 This action is used to fetches information related to an email address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|Email address to search e.g. janagreen2000@example.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### Search IOC Reports
+#### Search IOC Reports
 
 This action is used to fetch information related to an indicator by domains, hosts, emails, or samples.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -210,118 +226,118 @@ This action is used to fetch information related to an indicator by domains, hos
 |filename|string|None|True|Indicator to search e.g. C5_APT_C2InTheFifthDomain.pdf|None|
 |year|string|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### SSDeep Report
+#### SSDeep Report
 
 This action is used to fetches information related to a fuzzy hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|SSDeep fuzzy hash to search e.g. 1536\:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4\:TJs0oG2KSTj3o8a9PFeEHn4l|None|
 |query_type|string|None|True|None|['Samples', 'Report Tagging']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### SSDeep Samples
+#### SSDeep Samples
 
 This action is used to fetches information related to a fuzzy hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|SSDeep fuzzy hash to search e.g. 1536\:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4\:TJs0oG2KSTj3o8a9PFeEHn4l|None|
 |query_type|string|None|True|None|['Samples', 'Report Tagging']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### AV Samples
+#### AV Samples
 
 This action is used to fetches information related to a virus.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|Virus name to query e.g. Trojan.Enfal|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### SSL Report
+#### SSL Report
 
 This action is used to fetches information related to a certificate.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|Certificate SHA1 hash to search e.g. 42a8d5b3a867a59a79f44ffadd61460780fe58f2|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### IP Lookup Extended
+#### IP Lookup Extended
 
 This action is used to fetch information related to an IP by SSL certificates, or related samples.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query_type|string|None|True|None|['Related Samples', 'SSL Certificates']|
 |address|string|None|True|IP address to search|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-### AV Detection Samples
+#### AV Detection Samples
 
 This action is used to fetches information related to a virus.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|Virus name to query e.g. Trojan.Enfal|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|response|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -373,35 +389,22 @@ An example raw response from the domain action:
 Working through the `[]results` object array which resides in the `result` object, will require some JSON manipulation to get what you need.
 The [jq](https://market.komand.com/plugins/komand/jq/0.1.0) and [JSON](https://market.komand.com/plugins/komand/json/0.1.1) plugins are great at sifting through the data.
 
-### Error Handling
+#
 
-A query with an empty response is considered successful. It will look like the following:
+# Version History
 
-```
-
-"response": {
-  "status_code": "404",
-  "status_message": "No results found.",
-  "results": []
-}
-
-```
-
-A filter or decision can be used to test for the presence of a response with data in a workflow by the `status_code` or `status_message` outputs e.g.:
-`({{[Domain Lookup].status_message}} = "Results found.")` or `({{[Domain Lookup].status_code}} = "200")`
-
-## Workflows
-
-* Threat intelligence
-* Enrichment
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Rename "Email (Reverse WHOIS) - Report tagging" action to "Email (Reverse WHOIS) - Report Tagging"
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Threat Miner](https://www.threatminer.org)
 * [Threat Miner API](http://www.threatminer.org/api.php)
+

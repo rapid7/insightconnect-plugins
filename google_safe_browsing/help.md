@@ -1,18 +1,37 @@
-
-# Google Safe Browsing
-**This plugin is obsolete, cannot be used, and has been superceded by the Google Web Risk plugin.**
-
-## About
+# Description
 
 Submit URLs to the [Google Safe Browsing](https://safebrowsing.google.com/) Service to detect whether a URL is malicious or not.
 
-## Actions
+# Key Features
 
-### Lookup URL
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_secret_key|None|True|API token|None|
+
+## Technical Details
+
+### Actions
+
+#### Lookup URL
 
 This action is used to lookup URL in Safe Browsing Service.
 
-#### Input
+##### Input
 
 This action is used to submit a URL. It accepts the following options:
 
@@ -44,7 +63,7 @@ This action is used to submit a URL. It accepts the following options:
 |urls|[]string|None|True|URLs to check (up to 500)|None|
 |platform_type_chrome|boolean|None|False|Check URL against Chrome platform|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -72,17 +91,13 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_secret_key|None|True|API token|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -90,21 +105,21 @@ The connection configuration accepts the following parameters:
 * URLs must be submitted as an array e.g. `[ "harmfulapps.com" ]`
 * You can test the plugin with the following example URL harmfulapps.com
 
-## Workflows
+# Version History
 
-Examples:
-
-* Phishing investigation
-* Malware investigation
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.7 - SSL bug fix in SDK
-* 0.1.8 - Bug fix for no results | Updated to v2 architecture
-* 1.0.0 - Support web server mode | Update to new credential types
 * 2.0.0 - Obsolete
+* 1.0.0 - Support web server mode | Update to new credential types
+* 0.1.8 - Bug fix for no results | Updated to v2 architecture
+* 0.1.7 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Google Safe Browsing](https://developers.google.com/safe-browsing/)
+

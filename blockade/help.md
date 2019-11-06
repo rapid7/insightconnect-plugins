@@ -1,24 +1,46 @@
-
-# Blockade
-
-## About
+# Description
 
 [Blockade](https://www.blockade.com) brings antivirus-like capabilities to users who run the Chrome browser.
 This plugin utilizes the [Blockade Cloud Node API](https://github.com/blockadeio/cloud_node).
 
-## Actions
+# Key Features
 
-### Add Indicators
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|None|None|
+|api_key|string|None|False|None|None|
+|email|string|None|False|None|None|
+
+## Technical Details
+
+### Actions
+
+#### Add Indicators
 
 This action is used to add indicators to the cloud node.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |indicators|[]string|None|False|Indicators as array e.g. [ 'c9867172dca8b07d06566c78c7265ff2', '8f55ea93778722e32403b0c961295aed' ]|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -26,15 +48,15 @@ This action is used to add indicators to the cloud node.
 |message|string|False|None|
 |success|boolean|False|None|
 
-### Get Events
+#### Get Events
 
 This action is used to get list of indicators from the cloud node.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -42,11 +64,11 @@ This action does not contain any inputs.
 |events|[]string|False|List of events|
 |success|boolean|True|None|
 
-### Add User
+#### Add User
 
 This action is used to add a cloud node user. The connection must contain the API key and email of an admin user to work.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -54,7 +76,7 @@ This action is used to add a cloud node user. The connection must contain the AP
 |user_role|string|None|True|Role of new user|['analyst', 'admin']|
 |user_email|string|None|True|Email of new user|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -65,17 +87,17 @@ This action is used to add a cloud node user. The connection must contain the AP
 |api_key|string|False|None|
 |email|string|False|None|
 
-### Get Indicators
+#### Get Indicators
 
 This action is used to get list of indicators from the cloud node.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |db_route|string|None|False|Database name, leave empty if only a single database is used|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -83,37 +105,32 @@ This action is used to get list of indicators from the cloud node.
 |indicatorCount|integer|True|None|
 |success|boolean|True|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|None|None|
-|api_key|string|None|False|None|None|
-|email|string|None|False|None|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 The `Get Indicators` and `Get Events` actions do not require authentication.
 
-## Workflows
+# Version History
 
-Examples:
-
-* IOC submission
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Blockade](https://www.blockade.com)
 * [Blockade Cloud Node API](https//api.blockade.co://github.com/blockadeio/cloud_node)
+

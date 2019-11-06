@@ -1,19 +1,42 @@
-# Kolide
-
-## About
+# Description
 
 [Kolide](https://www.kolide.co/) is a state of the art host monitoring platform tailored to security experts.
 Leveraging Facebook's battle-tested osquery project, Kolide delivers fast answers to big questions.
 
 This plugin utilizes the [Kolide API](https://github.com/kolide/fleet/tree/master/docs/api).
 
-## Actions
+# Key Features
 
-### Create Query
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|https\://localhost\:8080|True|URL to connect to|None|
+|api_token|credential_secret_key|None|True|API token for Kolide|None|
+|ssl_verify|boolean|False|True|Verify SSL certificate|None|
+
+## Technical Details
+
+### Actions
+
+#### Create Query
 
 This action is used to create a new query in Kolide
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -21,7 +44,7 @@ This action is used to create a new query in Kolide
 |description|string|None|True|Description of query|None|
 |query|string|None|True|Query to run on fleet|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -50,11 +73,11 @@ Example output:
 }
 ```
 
-### Run Query
+#### Run Query
 
 This action is used to run selected query on fleet.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -62,7 +85,7 @@ This action is used to run selected query on fleet.
 |hosts|[]integer|None|False|A list of host IDs the query will be ran on|None|
 |labels|[]integer|None|False|A list of label IDs the query will be ran on|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -85,17 +108,17 @@ Example output:
 }
 ```
 
-### Get Query
+#### Get Query
 
 This action is used to get query details on past queries by specified query ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |queryid|string|None|True|Query ID from a query already ran|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -124,37 +147,32 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|https\://localhost\:8080|True|URL to connect to|None|
-|api_token|credential_secret_key|None|True|API token for Kolide|None|
-|ssl_verify|boolean|False|True|Verify SSL certificate|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Host detection
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Use new credential types
 * 2.0.0 - New actions Create Query, Run Query and Get Query | Removed action Query Node
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Use new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Kolide](https://www.kolide.co/)
+

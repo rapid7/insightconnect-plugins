@@ -1,18 +1,38 @@
-
-# SQLmap
-
-## About
+# Description
 
 [SQLmap](http://sqlmap.org/) is a scalable, open-source security incident response solutions designed for SOCs & CERTs to execute malicious SQL statements to test their backend databases.
 This plugin was tested successfully on the [DWVA](http://www.dvwa.co.uk/) project virtual machine.
 
-## Actions
+# Key Features
 
-### Scan
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|host|string|None|False|Host of the REST-JSON API server (Default: localhost)|None|
+|port|string|None|False|Port of the the REST-JSON API server, the default is 8775|None|
+
+## Technical Details
+
+### Actions
+
+#### Scan
 
 This action is used to perform a scan on a target.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -160,7 +180,7 @@ This action is used to perform a scan on a target.
 |commonColumns|string|None|False|Check existence of common columns|None|
 |keepAlive|boolean|None|False|Use persistent HTTP(s) connections|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -187,35 +207,32 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|None|False|Host of the REST-JSON API server (Default: localhost)|None|
-|port|string|None|False|Port of the the REST-JSON API server, the default is 8775|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 To troubleshoot SQLmap, look at the INFO logs that are printed to see where the plugin failed.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Exploit SQL Database
-
-## Versions
-
-* 1.0.0 - Initial plugin
 * 1.1.0 - Support web server mode
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [SQLmap](https://github.com/sqlmapproject/sqlmap)
 * [Unofficial SQLmap API Documentation](http://volatile-minds.blogspot.com/2013/04/unofficial-sqlmap-restful-api.html)
 * [DVWA](http://www.dvwa.co.uk/)
+

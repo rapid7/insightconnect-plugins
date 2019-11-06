@@ -1,25 +1,49 @@
-
-# SQL
-
-## About
+# Description
 
 [SQLAlchemy](http://docs.sqlalchemy.org/en/latest/) is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.
 This plugin allows users to run and execute queries against a SQL database.
 
-## Actions
+# Key Features
 
-### Query
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+  |Name|Type|Default|Required|Description|Enum|
+  |----|----|-------|--------|-----------|----|
+  |type|string|None|True|Database type (i.e. mysql, postgres... etc.)|None|
+  |host|string|None|True|Database hostname|None|
+  |port|string|None|False|Database port|None|
+  |db|string|None|True|Database name|None|
+  |credentials|credential_username_password|None|True|Database username and password|None|
+
+## Technical Details
+
+### Actions
+
+#### Query
 
 This action is used to run an arbitrary SQL query against the connected database.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|query to run|None|
 |parameters|object|None|True|parameter for parameterized query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -43,42 +67,35 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-  |Name|Type|Default|Required|Description|Enum|
-  |----|----|-------|--------|-----------|----|
-  |type|string|None|True|Database type (i.e. mysql, postgres... etc.)|None|
-  |host|string|None|True|Database hostname|None|
-  |port|string|None|False|Database port|None|
-  |db|string|None|True|Database name|None|
-  |credentials|credential_username_password|None|True|Database username and password|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 For the SQL query action, be sure that your query is valid SQL.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Data formatting for any workflow
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 1.0.0 - Add port to connection, make results array of objects | Support web server mode
-* 2.0.0 - Update to new credential types | Rename "query" action to "Query"
-* 2.0.1 - Add MSSQL support
-* 2.0.2 - Fix issue where credentials was spelled wrong in connection
-* 2.0.3 - Fix issue where credentials used incorrect username | Update help
 * 2.0.4 - Add support for Microsoft SQL server
+* 2.0.3 - Fix issue where credentials used incorrect username | Update help
+* 2.0.2 - Fix issue where credentials was spelled wrong in connection
+* 2.0.1 - Add MSSQL support
+* 2.0.0 - Update to new credential types | Rename "query" action to "Query"
+* 1.0.0 - Add port to connection, make results array of objects | Support web server mode
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [SQLAlchemy](http://docs.sqlalchemy.org/en/latest/)
+

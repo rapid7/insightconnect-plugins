@@ -1,7 +1,4 @@
-
-# Sed
-
-## About
+# Description
 
 [Sed](https://www.gnu.org/software/sed/manual/sed.html) is a powerful stream editor. This plugin uses GNU Sed 4.2.2 to manipulate input data.
 For example, from the command line, an example of the stream editor becomes clear:
@@ -13,13 +10,32 @@ Dogs are enjoyable animals
 
 ```
 
-## Actions
+# Key Features
 
-### Process Bytes
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Process Bytes
 
 This action is used to process base64 encoded data. The data is decoded and then ran through the stream editor.
 
-#### Input
+##### Input
 
 It accepts an expression, options and a file input.
 
@@ -32,17 +48,17 @@ It accepts an expression, options and a file input.
 The entire input expression will be surrounded in double-quotes on the backend and thus are not required in the expression input.
 E.g. the following will replace a lowercase one with a capitalized ONE: `s/one/ONE/`
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |output|string|False|Processed String|
 
-### Process String
+#### Process String
 
 This action is used to process a string through the stream editor.
 
-#### Input
+##### Input
 
 It accepts an expression, options, and a string to process. The command-line options can be passed in via the options input.
 
@@ -56,19 +72,19 @@ The entire input expression will be surrounded in double-quotes on the backend, 
 E.g. the following will replace a lowercase `one` with a capitalized `ONE`: `s/one/ONE/`. Note that the expression is not surrounded
 by any quotes, although, you could surround it with single-quotes and still maintain functionality.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |output|string|False|Processed String|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -78,22 +94,23 @@ If a literal double-quote is required it must be escaped by a backslash `\`. For
 * `s/\"//g` - A stream editor expression to remove all double-quotes from a string.
 * `'s/\"/\'/g'` - A stream editor expression to replace all double-quotes with single-quotes.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Data format and extraction
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 0.1.2 - Update to v2 Python plugin architecture
-* 1.0.0 - Support web server mode | Rename action to "Process String"
-* 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
-* 2.0.0 - Update action inputs to allow for multiple expressions
 * 2.0.1 - Fix issue with both actions not returning all results
+* 2.0.0 - Update action inputs to allow for multiple expressions
+* 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
+* 1.0.0 - Support web server mode | Rename action to "Process String"
+* 0.1.2 - Update to v2 Python plugin architecture
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Sed](https://www.gnu.org/software/sed/manual/sed.html)
+

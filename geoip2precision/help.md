@@ -1,25 +1,48 @@
-
-# GeoIP2 Precision
-
-## About
+# Description
 
 [MaxMind GeoIP2 Precision](https://www.maxmind.com/en/geoip2-precision-services) provides IP intelligence data.
 
 The GeoIP2 Precision plugin queries the MaxMind Insights service via its API and returns relevant data on the provided IP.
 
-## Actions
+# Key Features
 
-### Lookup
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+A MaxMind Precision user ID and license key is needed.
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|user|integer|None|True|User ID number|None|
+|license_key|credential_secret_key|None|True|License key|None|
+
+## Technical Details
+
+### Actions
+
+#### Lookup
 
 This action is used to lookup IP address information.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|IP address to query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -36,38 +59,31 @@ This action is used to lookup IP address information.
 |postal|integer|False|Postal Code for location|
 |asn|integer|False|Autonomous system number|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-A MaxMind Precision user ID and license key is needed.
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user|integer|None|True|User ID number|None|
-|license_key|credential_secret_key|None|True|License key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 A valid IP address must be provided.
 
-## Workflows
+# Version History
 
-Examples:
-
-* IP enrichment
-* Location services
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [GeoIP Precision](https://www.maxmind.com/en/geoip2-precision-services)
+

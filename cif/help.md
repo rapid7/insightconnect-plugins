@@ -1,19 +1,41 @@
-
-# Collective Intelligence Framework
-
-## About
+# Description
 
 The [Collective Intelligence Framework](http://csirtgadgets.org/collective-intelligence-framework) is a cyber threat intelligence management system.
 It allows you to combine known malicious threat information from many sources and use that information for identification (incident response), detection (IDS) and mitigation (null route).
 This plugin utilizes the [CIF API](https://github.com/csirtgadgets/massive-octo-spice/wiki/API). It does not support CIFv3.
 
-## Actions
+# Key Features
 
-### Query
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|CIF URL e.g. https\://cif.example.com|None|
+|ssl_verify|boolean|True|True|SSL certificate verification|None|
+|api_key|credential_secret_key|None|True|CIF API key|None|
+
+## Technical Details
+
+### Actions
+
+#### Query
 
 This action is used to query for observables.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -30,58 +52,53 @@ This action is used to query for observables.
 |q|string|None|False|The observable to query for|None|
 |itypes|string||False|Itypes|['ipv4', 'ipv6', 'fqdn', 'url', 'email', 'md5', 'sha1', 'sha256']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |query|[]result|False|None|
 
-### Ping
+#### Ping
 
 This action is used to ping the router.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |timestamp|[]integer|True|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|CIF URL e.g. https\://cif.example.com|None|
-|ssl_verify|boolean|True|True|SSL certificate verification|None|
-|api_key|credential_secret_key|None|True|CIF API key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Threat intelligence
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Added support for itypes
 * 2.0.0 - Update to new credential types
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Added support for itypes
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Collective Intelligence Framework](http://csirtgadgets.org/collective-intelligence-framework)
 * [CIF API](https://github.com/csirtgadgets/massive-octo-spice/wiki/API)
+

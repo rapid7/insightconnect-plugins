@@ -1,18 +1,34 @@
-
-# Google Search
-
-## About
+# Description
 
 [Google](https://www.google.com/) allows you to search the world's information, including webpages, images, videos and more.
 This plugin utilizes the Python [google library](https://pypi.python.org/pypi/google) to perform searches.
 
-## Actions
+# Key Features
 
-### Search
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Search
 
 This action is used to return URLs from a Google Search.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -24,54 +40,55 @@ This action is used to return URLs from a Google Search.
 |stop|integer|16|True|Number of results to retrieve to limit amount, default is 16 and the search will allows return at least 16 results if available. This option seems to have odd behavior|None|
 |only_standard|boolean|False|True|Only returns the standard results from each page. If false, it returns every possible link from each page, except for those that point back to Google itself|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |urls|[]string|True|List of URLs|
 
-### Get Page
+#### Get Page
 
 This action is used to request the given url and return the response page, using the cookie jar.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|URL to retrieve e.g. https://www.google.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |web_page|string|True|Web page|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Search Google
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Bug fix for no google module
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Google](https://www.google.com/)
 * [Python Google library](https://pypi.python.org/pypi/google)
 * [Python Google library docs](https://pythonhosted.org/google/)
+

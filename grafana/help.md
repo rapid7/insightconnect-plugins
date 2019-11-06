@@ -1,25 +1,41 @@
-
-# Grafana
-
-## About
+# Description
 
 [Grafana](https://grafana.org) is an open platform for analytics and monitoring.
 This plugin utilizes the [Grafana HTTP API](http://docs.grafana.org/http_api/) to manage organizations and users.
 
-## Actions
+# Key Features
 
-### Update Organization
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+
+
+## Technical Details
+
+### Actions
+
+#### Update Organization
 
 This action is used to update the name of the organization.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|integer|-1|False|Unique ID of the organization eg. 123 (-1 implies current)|None|
 |name|string|None|True|New name for organization|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -35,18 +51,18 @@ This action is used to update the name of the organization.
 
 ```
 
-### Delete Organization User
+#### Delete Organization User
 
 This action is used to a delete user in actual organization.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|integer|-1|False|Unique ID of the organization eg. 123 (-1 implies current)|None|
 |user_id|integer|None|True|Unique ID of the user eg. 123|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -62,15 +78,15 @@ This action is used to a delete user in actual organization.
 
 ```
 
-### Search Users
+#### Search Users
 
 This action is used to search users.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -92,17 +108,17 @@ This action does not contain any inputs.
 
 ```
 
-### Get Organization Users
+#### Get Organization Users
 
 This action is used to get all users within the organization.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|integer|-1|False|Unique ID of the organization eg. 123 (-1 implies current)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -124,17 +140,17 @@ This action is used to get all users within the organization.
 
 ```
 
-### Delete Global User
+#### Delete Global User
 
 This action is used to delete a global user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|integer|None|True|Unique ID of the user eg. 123|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -150,11 +166,11 @@ This action is used to delete a global user.
 
 ```
 
-### Proxy Call to Data Source
+#### Proxy Call to Data Source
 
 This action is used to proxy all calls to the actual datasource.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -162,7 +178,7 @@ This action is used to proxy all calls to the actual datasource.
 |datasource_id|integer|None|True|Unique ID of the Datasource eg. 123|None|
 |parameters|object|None|False|Query Parameters, if any, to be used for the request|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -200,11 +216,11 @@ This sample is from a call made to the `/query` endpoint of an elasticsearch dat
 
 ```
 
-### Update Organization User
+#### Update Organization User
 
 This action is used to update the role of the user in actual organization.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -212,7 +228,7 @@ This action is used to update the role of the user in actual organization.
 |role|string|None|True|New role for the user|['Admin', 'Editor', 'Viewer']|
 |user_id|integer|None|True|Unique ID of the user eg. 123|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -228,17 +244,17 @@ This action is used to update the role of the user in actual organization.
 
 ```
 
-### Get User
+#### Get User
 
 This action is used to get a single user by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |user_id|integer|None|True|Unique ID of the user eg. 123|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -259,11 +275,11 @@ This action is used to get a single user by ID.
 
 ```
 
-### Add Organization User
+#### Add Organization User
 
 This action is used to add a global user to the organization.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -271,7 +287,7 @@ This action is used to add a global user to the organization.
 |login_or_email|string|None|True|Username or Email ID of the global user|None|
 |role|string|None|True|Role for the global user in the organization|['Admin', 'Editor', 'Viewer']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -287,42 +303,32 @@ This action is used to add a global user to the organization.
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-## Connection
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|Grafana URL/Address|None|
-|port|integer|3000|False|Grafana Port|None|
-|token_auth|credential_secret_key|None|False|Token authentication via admin API token|None|
-|basic_auth|credential_username_password|None|False|Basic authentication via admin login credentials|None|
-
-You must specify either Basic (username:password) or Token (API) authentication to access Grafana.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Manage Grafana
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Grafana](https://grafana.org)
 * [Grafana HTTP API](http://docs.grafana.org/http_api/)
+

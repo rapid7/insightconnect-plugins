@@ -1,17 +1,40 @@
-
-# Bitbucket
-
-## About
+# Description
 
 [Bitbucket](https://www.bitbucket.com) is the Git solution for professional teams. This plugin allows management of your Bitbucket account using its API.
 
-## Actions
+# Key Features
 
-### Create Issue
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+A Bitbucket account is required to use this plugin.
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|username|string|None|True|Bitbucket username|None|
+|secret|credential_token|None|True|Bitbucket password or token|None|
+
+## Technical Details
+
+### Actions
+
+#### Create Issue
 
 This action is used to create a Bitbucket issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -26,17 +49,17 @@ This action is used to create a Bitbucket issue.
 |version|string|None|False|Version name|None|
 |milestone|string|None|False|Milestone name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |issue|object|False|None|
 
-### Create Repository
+#### Create Repository
 
 This action is used to create a repository.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -47,51 +70,51 @@ This action is used to create a repository.
 |type|string|Git|False|Repo type e.g. Git, Mercurial, etc.|['Hg', 'Git']|
 |is_private|boolean|False|False|Repository is private|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |repository|object|False|None|
 
-### Delete Repository
+#### Delete Repository
 
 This action is used to delete a repository.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |title|string|None|True|Title of repository|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|string|False|None|
 
-### User
+#### User
 
 This action is used to retrieve information about a given Bitbucket account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username|string|None|True|Bitbucket username|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |user|object|False|None|
 
-## Triggers
+### Triggers
 
-### Issue
+#### Issue
 
 This trigger allows monitoring a repository for newly created issues. It checks for new issues at every poll interval and returns any issues found.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -105,40 +128,33 @@ This trigger allows monitoring a repository for newly created issues. It checks 
 |milestone|string|None|False|Milestone name|None|
 |poll|integer|None|False|Poll interval in seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |issues|[]object|False|None|
 
-## Connection
+### Custom Output Types
 
-A Bitbucket account is required to use this plugin.
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Bitbucket username|None|
-|secret|credential_token|None|True|Bitbucket password or token|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Be sure the provided Bitbucket account used has permissions to perform the actions.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Repo deprovisioning
-* User enrichment
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [BitBucket](https://bitbucket.org/)
+

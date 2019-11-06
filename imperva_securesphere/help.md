@@ -1,18 +1,39 @@
-
-# Imperva SecureSphere
-
-## About
+# Description
 
 [Imperva SecureSphere](https://www.imperva.com/Products/WebApplicationFirewall-WAF) is a web application firewall that analyzes all user access to your business-critical web applications and protects your applications and data from cyber attacks.
 This plugin utilizes the API builting to Impervase SecureSphere appliance.
 
-## Actions
+# Key Features
 
-### Upload SSL Certificate
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_username_password|None|True|Username and password|None|
+|url|string|None|False|URL to SecureSphere Server|None|
+
+## Technical Details
+
+### Actions
+
+#### Upload SSL Certificate
 
 This action is used to upload a SSL certificate to your SecureSphere server.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -27,41 +48,37 @@ This action is used to upload a SSL certificate to your SecureSphere server.
 |pkcs12file|bytes|None|False|PKCS12 file content|None|
 |webservicename|string|None|True|The name of the web service to access|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status_code|integer|False|HTTP status code|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Username and password|None|
-|url|string|None|False|URL to SecureSphere Server|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Upload SSL certificates
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Imperva SecureSphere](https://www.imperva.com/Products/WebApplicationFirewall-WAF)
+

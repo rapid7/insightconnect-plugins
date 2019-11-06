@@ -1,23 +1,39 @@
-
-# Math
-
-## About
+# Description
 
 This plugin allows basic arithmetic functions to be performed.
 
-## Actions
+# Key Features
 
-### Calculate
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Calculate
 
 This action is used to run a calculation.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |equation|string|None|True|Equation to calculate. Uses Python arithmetic operators (+, -, /, *, **, %)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -33,32 +49,32 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Calculating differences in timestamps
-* General utility
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 1.0.0 - Update Calculate action: Allow freeform input
-* 1.1.0 - Update to v2 Python plugin architecture | Support web server mode
 * 1.1.1 - Update plugin tag from `utility` to `utilities` for Marketplace searchability
+* 1.1.0 - Update to v2 Python plugin architecture | Support web server mode
+* 1.0.0 - Update Calculate action: Allow freeform input
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Arithmetic](https://en.wikipedia.org/wiki/Arithmetic)
+

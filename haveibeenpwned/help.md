@@ -1,19 +1,35 @@
-
-# HaveIBeenPwned
-
-## About
+# Description
 
 [Have I been pwned?](https://haveibeenpwned.com/) is a free [Creative Commons](https://creativecommons.org/licenses/by/4.0/) service that allows you to search across multiple data breaches to see if your username, email address, or password has been compromised.
 
-This plugin utilizes the public [have I been pwned? API](https://haveibeenpwned.com/API/v3). 
+This plugin utilizes the public [have I been pwned? API](https://haveibeenpwned.com/API/v3).
 
-## Actions
+# Key Features
 
-### Lookup Domain
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Lookup Domain
 
 This action is used to list domain breaches.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -21,7 +37,7 @@ This action is used to list domain breaches.
 |include_unverified|boolean|None|False|If true will include breaches that are unverified (default - false)|None|
 |truncate_response|boolean|None|False|If true only name of breach will be shown (default - true)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -63,18 +79,18 @@ Example output:
 
 ```
 
-### Lookup Password
+#### Lookup Password
 
 This action is used to lookup a password in list of known breached passwords.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |password_to_check|string|None|True|Password to check E.g. 'P@ssw0rd'|None|
 |original_password_is_a_hash|boolean|None|True|Whether the password itself is a sha1 hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -90,11 +106,11 @@ Example output:
 
 ```
 
-### Lookup User
+#### Lookup User
 
 This action is used to check an email for compromise.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -103,7 +119,7 @@ This action is used to check an email for compromise.
 |truncate_response|boolean|None|False|If true only name of breach will be shown (default - true)|None|
 |user|string|None|True|Email to check|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -166,45 +182,13 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
-
-## Troubleshooting
-
-This plugin does not contain any troubleshooting information.
-
-## Workflows
-
-Examples:
-
-* Account validation
-* Intelligence
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.2 - Match schema with spec for output
-* 0.1.3 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
-* 2.0.0 - Code overhaul | Port to Python 3
-* 3.0.0 - Bug fix where output schema did not match returned API data for Lookup Domain and Lookup User actions | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
-* 3.0.1 - Set user-agent string to Rapid7 InsightConnect | Implement use of Retry-After header for rate limit | Update documentation
-* 4.0.0 - Support the v3 API which requires authentication
-* 4.0.1 - Fix issue with connection exception typo
-
-## References
-
-* [have i been pwned?](https://haveibeenpwned.com/)
-* [have i been pwned? API](https://haveibeenpwned.com/API/v3)
-
-## Custom Output Types
-
-### domain
+#### domain
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -224,3 +208,31 @@ Examples:
 |Name|string|False|A Pascal-cased name representing the breach which is unique across all other breaches|
 |PwnCount|integer|False|The total number of accounts loaded into the system|
 |Title|string|False|A descriptive title for the breach suitable for displaying to end users|
+
+## Troubleshooting
+
+This plugin does not contain any troubleshooting information.
+
+# Version History
+
+* 4.0.1 - Fix issue with connection exception typo
+* 4.0.0 - Support the v3 API which requires authentication
+* 3.0.1 - Set user-agent string to Rapid7 InsightConnect | Implement use of Retry-After header for rate limit | Update documentation
+* 3.0.0 - Bug fix where output schema did not match returned API data for Lookup Domain and Lookup User actions | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
+* 2.0.0 - Code overhaul | Port to Python 3
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.3 - SSL bug fix in SDK
+* 0.1.2 - Match schema with spec for output
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [have i been pwned?](https://haveibeenpwned.com/)
+* [have i been pwned? API](https://haveibeenpwned.com/API/v3)
+

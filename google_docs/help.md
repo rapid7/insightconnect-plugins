@@ -1,22 +1,43 @@
-# Google Docs
-
-## About
+# Description
 
 [Google Docs](https://developers.google.com/docs/api/reference/rest/v1/documents) allows you to manage and edit Google documents.
 
-## Actions
+# Key Features
 
-### Create Blank Document
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials_file_contents|credential_secret_key|None|True|Copy and paste the contents of the credentials file from google|None|
+
+## Technical Details
+
+### Actions
+
+#### Create Blank Document
 
 This action is used to create a blank Google document.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |title|string|None|True|Document Title|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -442,18 +463,18 @@ Example output:
 }
 ```
 
-### Create Document
+#### Create Document
 
 This action is used to create a Google document.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |content|string|None|False|Document Content|None|
 |title|string|None|True|Document Title|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -475,17 +496,17 @@ Example output:
 }
 ```
 
-### Get Document
+#### Get Document
 
 This action is used to get a Google document.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |document_id|string|None|True|Document ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -911,40 +932,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials_file_contents|credential_secret_key|None|True|Copy and paste the contents of the credentials file from google|None|
-
-## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
-
-## Workflows
-
-Examples:
-
-* Create document
-* Get document
-
-## Versions
-
-* 1.0.0 - Initial plugin
-
-## References
-
-* [Google Docs](https://developers.google.com/docs/api/reference/rest/v1/documents)
-
-## Custom Output Types
-
-### create_result
+#### create_result
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -952,7 +946,7 @@ Examples:
 |replies|[]object|False|Replies|
 |writeControl|object|False|Write control|
 
-### document
+#### document
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -963,3 +957,22 @@ Examples:
 |revisionId|string|False|Revision ID|
 |suggestionsViewMode|string|False|Suggestions view mode|
 |title|string|False|Title|
+
+## Troubleshooting
+
+_This plugin does not contain any troubleshooting information._
+
+# Version History
+
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [Google Docs](https://developers.google.com/docs/api/reference/rest/v1/documents)
+

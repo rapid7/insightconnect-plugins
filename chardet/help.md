@@ -1,22 +1,39 @@
-# Chardet
-
-## About
+# Description
 
 [Chardet](https://chardet.readthedocs.io/en/latest/index.html) is a python compatible character encoding detector.
 
-## Actions
+# Key Features
 
-### Detect Encoding
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+_This plugin does not contain a connection._
+
+## Technical Details
+
+### Actions
+
+#### Detect Encoding
 
 This action is used to detect encoding.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |bytes_to_analyze|bytes|None|True|Bytes to analyze|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -34,39 +51,36 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-_This plugin does not contain a connection._
-
-## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
-
-## Workflows
-
-Examples:
-
-* Find encoding of unknown set of bytes
-
-## Versions
-
-* 1.0.0 - Initial plugin
-
-## References
-
-* [Chardet](https://chardet.readthedocs.io/en/latest/index.html)
-* [How it Works](https://chardet.readthedocs.io/en/latest/how-it-works.html)
-
-## Custom Output Types
-
-### recommendation
+#### recommendation
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |confidence|number|False|Confidence|
 |encoding|string|False|Encoding|
 |language|string|False|Language|
+
+## Troubleshooting
+
+_This plugin does not contain any troubleshooting information._
+
+# Version History
+
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [Chardet](https://chardet.readthedocs.io/en/latest/index.html)
+* [How it Works](https://chardet.readthedocs.io/en/latest/how-it-works.html)
+

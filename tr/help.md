@@ -1,17 +1,33 @@
-
-# Translate
-
-## About
+# Description
 
 The Translate plugin uses the `tr` command in UNIX which is a command line utility for translating or deleting characters. It supports a range of transformations including uppercase to lowercase, squeezing repeating characters, deleting specific characters and basic find and replace. `tr` stands for Translate.
 
-## Actions
+# Key Features
 
-### Replace
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Replace
 
 This action is used to run a `tr` expression on a string input.
 
-#### Input
+##### Input
 
 It accepts a `tr` expression and a string to process using that expression. Any correct `tr` expression can be used, including all the options and interpreted sequences.
 
@@ -20,7 +36,7 @@ It accepts a `tr` expression and a string to process using that expression. Any 
 |text|string|None|True|Text to process|None|
 |expression|string|None|True|Correct tr expression (e.g. -s [\:space\:] ' ')|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -36,31 +52,31 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 In case an error is raised, make sure that the given expression can be correctly handled by the `tr` program.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
-* 2.0.0 - Rename "Tr" plugin title to "Translate"
 * 2.0.1 - Add `utilities` plugin tag for Marketplace searchability
+* 2.0.0 - Rename "Tr" plugin title to "Translate"
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Removing characters from input
-* Replacing characters (e.g. round brackets with square ones)
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [tr examples](https://www.geeksforgeeks.org/tr-command-unixlinux-examples/)
+

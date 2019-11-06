@@ -1,23 +1,40 @@
-# Checkdmarc
-
-## About
+# Description
 
 [Checkdmarc](https://domainaware.github.io/checkdmarc/) is a Python module and command line parser for SPF and DMARC records.
 
-## Actions
+# Key Features
 
-### Check Domains
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+_This plugin does not contain a connection._
+
+## Technical Details
+
+### Actions
+
+#### Check Domains
 
 This action is used to check domains.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain to check. e.g. fbi.gov, google.com|None|
 |timeout|float|6.0|True|Timeout in seconds for request. Default is 6 seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -194,11 +211,11 @@ Example output:
 }
 ```
 
-### Check Domains Alternate Nameservers
+#### Check Domains Alternate Nameservers
 
 This action will check DMARC records against alternate name servers.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -206,7 +223,7 @@ This action will check DMARC records against alternate name servers.
 |nameservers|[]string|['1.1.1.1', '1.0.0.1']|True|Nameserver to check against. e.g ["1.1.1.1","1.0.0.1"]|None|
 |timeout|float|6.0|True|Timeout in seconds for request. Default is 6 seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -381,37 +398,13 @@ This action will check DMARC records against alternate name servers.
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-_This plugin does not contain a connection._
-
-## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
-
-## Workflows
-
-Examples:
-
-* Analyze domain
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 2.0.0 - Added timeout to Check Domain
-* 2.1.0 - Added action Check Domains Alternate Nameservers
-
-## References
-
-* [Checkdmarc](https://domainaware.github.io/checkdmarc/)
-
-## Custom Output Types
-
-### report
+#### report
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -421,3 +414,24 @@ Examples:
 |mx|object|False|MX|
 |ns|object|False|NS|
 |spf|object|False|SPF|
+
+## Troubleshooting
+
+_This plugin does not contain any troubleshooting information._
+
+# Version History
+
+* 2.1.0 - Added action Check Domains Alternate Nameservers
+* 2.0.0 - Added timeout to Check Domain
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [Checkdmarc](https://domainaware.github.io/checkdmarc/)
+

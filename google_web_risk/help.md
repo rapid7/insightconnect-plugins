@@ -1,16 +1,37 @@
-# Google Web Risk
-
-## About
+# Description
 
 [Google Web Risk](https://cloud.google.com/web-risk/) checks URLs against the Google Web Risk service.
 
-## Actions
+# Key Features
 
-### Lookup URL
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_secret_key|None|True|API token|None|
+
+## Technical Details
+
+### Actions
+
+#### Lookup URL
 
 This action is used to lookup a URL in Web Risk Service.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -19,7 +40,7 @@ This action is used to lookup a URL in Web Risk Service.
 |threat_type_unwanted|boolean|true|false|Check if URL is of 'unwanted software' threat|None|
 |url|string|None|true|URL to lookup|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -38,35 +59,30 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_secret_key|None|True|API token|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Google's Web Risk API requires an API key for use. Sign up for the beta [here](https://docs.google.com/forms/d/e/1FAIpQLSf2mccuP6McSrhwOk1FXnsNY6c7xE-Url_pmjvFgz73A8qOxg/viewform)
 
-## Workflows
+# Version History
 
-Examples:
-
-* Phishing investigation
-* Malicious website detection
-
-
-## Versions
-
-* 1.0.0 - Initial plugin
 * 2.0.0 - New inputs for lookup action
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Google Web Risk API Documentation](https://cloud.google.com/web-risk/docs/)
+

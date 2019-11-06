@@ -1,50 +1,67 @@
-
-# PDF Generator
-
-## About
+# Description
 
 The PDF Generator plugin creates a PDF from user provided data.
 
-## Actions
+# Key Features
 
-### Generate PDF
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Generate PDF
 
 This action is used to generate a PDF from a text input.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |text|string|None|True|Text input|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |pdf|bytes|True|Generated PDF|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
-
-Examples:
-
-* Taking arbitrary input data in a workflow, generating a PDF out of it, and sending an e-mail to management
-
-## Versions
+# Version History
 
 * 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [PDF](https://en.wikipedia.org/wiki/Portable_Document_Format)
+

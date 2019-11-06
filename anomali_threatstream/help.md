@@ -1,23 +1,46 @@
-# Anomali ThreatStream
-
-## About
+# Description
 
 [Anomali ThreatStream](https://www.anomali.com/) is an operationalized threat intelligence stream, automating collection and integration that enables security teams to analyze and respond to threats.
 This plugin utilizes the Anomali ThreatStream API, which is located with the cloud instance at `http://<Anomali ThreatStream API host>/optic-doc/ThreatStream_OnlineHelp.htm`.
 
-## Actions
+# Key Features
 
-### Lookup IP Address
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|username|string|None|True|Anomali ThreatStream username|None|
+|threatstream_url|string|None|True|URL for the ThreatStream instance. Example\: https\://ts.example.com|None|
+|api_key|credential_secret_key|None|True|Anomali ThreatStream API key|None|
+
+## Technical Details
+
+### Actions
+
+#### Lookup IP Address
 
 This action is used to lookup an IP address in Anomali.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ip_address|string|None|False|IP address|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -54,17 +77,17 @@ Example output:
 }
 ```
 
-### Lookup URL
+#### Lookup URL
 
 This action is used to lookup a URL in Anomali.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|False|URL|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -101,17 +124,17 @@ Example output:
 }
 ```
 
-### Lookup Hash
+#### Lookup Hash
 
 This action is used to lookup a file hash in Anomali.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hash|string|None|False|Hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -125,17 +148,17 @@ Example output:
 }
 ```
 
-### Get Observables
+#### Get Observables
 
 This action is used to get observables.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |value|string|None|False|Value|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -169,11 +192,11 @@ Example output:
 }
 ```
 
-### Import Observable
+#### Import Observable
 
 This action is used to import observable(s) into Anomali with approval.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -186,7 +209,7 @@ Observable Settings
   * When passing unstructured data via `file` its best that mappings be set.
   * A list of iTypes can be located here `https://<Amonali Server>//optic-doc/ThreatStream_OnlineHelp.htm#appendices/app_indicators.htm`
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -204,45 +227,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Anomali ThreatStream username|None|
-|threatstream_url|string|None|True|URL for the ThreatStream instance. Example\: https\://ts.example.com|None|
-|api_key|credential_secret_key|None|True|Anomali ThreatStream API key|None|
-
-## Troubleshooting
-
-If you're unable to import data without approval, the Anomali user configured in InsightConnect will need to have `approver` permissions.
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 1.1.0 - New action Add Approval Indicator
-* 2.0.0 - Support optional server SSL/TLS certificate validation
-* 3.0.0 - Add new action Get Observables | Rename action Add Approval Indicator to Import Observable | Add connection test
-* 3.0.1 - Update actions to use SSL Verify from connection settings
-
-## Workflows
-
-Examples:
-
-* Hash an email attachment, then pass the hash of the attachment to Anomali for IOC enrichment.
-
-## References
-
-* [Anomali ThreatStream](https://www.anomali.com/)
-
-## Custom Output Types
-
-### meta
+#### meta
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -250,7 +241,7 @@ Examples:
 |offset|integer|False|Offset|
 |total_count|integer|False|Total Count|
 
-### result
+#### result
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -278,7 +269,7 @@ Examples:
 |update_id|string|False|Update ID|
 |url|string|False|URL|
 
-### observable_settings
+#### observable_settings
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -296,11 +287,33 @@ Examples:
 |trustedcircles|[]integer|False|ID of the trusted circle to which this threat data should be imported. If you want to import the threat data to multiple trusted circles, enter the list of comma-separated IDs e.g [1,2,3]|
 |url_mapping|string|False|Indicator type to assign if a specific type is not associated with an observable|
 
-### import_observable_response
+#### import_observable_response
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |import_session_id|string|False|ID for import session|
 |job_id|string|False|Job ID|
 |success|boolean|False|If import was successful|
+
+## Troubleshooting
+
+If you're unable to import data without approval, the Anomali user configured in InsightConnect will need to have `approver` permissions.
+
+# Version History
+
+* 3.0.1 - Update actions to use SSL Verify from connection settings
+* 3.0.0 - Add new action Get Observables | Rename action Add Approval Indicator to Import Observable | Add connection test
+* 2.0.0 - Support optional server SSL/TLS certificate validation
+* 1.1.0 - New action Add Approval Indicator
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [Anomali ThreatStream](https://www.anomali.com/)
 

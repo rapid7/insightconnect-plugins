@@ -1,18 +1,40 @@
-
-# GitHub
-
-## About
+# Description
 
 [GitHub](https://github.com/) is a popular web-based Git or version control repository and Internet hosting service.
 This plugin supports authentication from both personal and organization member accounts.
 
-## Actions
+# Key Features
 
-### Add Collaborator
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin requires a GitHub username and password (or token).
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_username_password|None|True|GitHub credentials|None|
+
+## Technical Details
+
+### Actions
+
+#### Add Collaborator
 
 This action is used to add a user as a collaborator to a GitHub repository.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -21,7 +43,7 @@ This action is used to add a user as a collaborator to a GitHub repository.
 |repository|string|None|False|Remove from repository|None|
 |permission|string|push|False|The permission to grant the collaborator. Only valid on organization-owned repositories|['pull', 'push', 'admin']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -151,11 +173,11 @@ Example output:
 
 ```
 
-### Add Membership
+#### Add Membership
 
 This action is used to add or update user's membership in an organization.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -163,7 +185,7 @@ This action is used to add or update user's membership in an organization.
 |username|string|None|False|The user that will be added or updated|None|
 |role|string|member|False|The role to give the user in the organization|['admin', 'member']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -224,14 +246,14 @@ Example output:
 
 ```
 
-### Create Issue
+#### Create Issue
 
 This action is used to create an issue ticket.
 
 GitHub users to assign to the ticket must be specified by their GitHub username. They must have the privileges necessary to access the repository.
 Milestones must be specified by their relative ID, which is their location in the list of active milestones. Milestone IDs are reused after milestone deletion.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -243,7 +265,7 @@ Milestones must be specified by their relative ID, which is their location in th
 |milestone|number|None|False|ID of the milestone to associate this issue with|None|
 |labels|string|None|False|GitHub search tags delimited by commas|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -259,11 +281,11 @@ Example output:
 
 ```
 
-### Create Issue Comment
+#### Create Issue Comment
 
 This action is used to add a comment to an existing issue ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -272,7 +294,7 @@ This action is used to add a comment to an existing issue ticket.
 |repository|string|None|True|Repository to post issue|None|
 |organization|string|None|False|Organizational owner of repository|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -286,11 +308,11 @@ Example output:
 }
 ```
 
-### Close Issue
+#### Close Issue
 
 This action is used to close an issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -298,7 +320,7 @@ This action is used to close an issue.
 |repository|string|None|True|Repository to post issue|None|
 |organization|string|None|False|Organizational owner of repository|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -312,11 +334,11 @@ Example output:
 }
 ```
 
-### Add Issue Label
+#### Add Issue Label
 
 This action is used to add a single label to an issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -325,7 +347,7 @@ This action is used to add a single label to an issue.
 |repository|string|None|True|Repository to post issue|None|
 |organization|string|None|False|Organizational owner of repository|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -339,17 +361,17 @@ Example output:
 }
 ```
 
-### Get User
+#### Get User
 
 This action is used to retrieve information about a GitHub user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username|string|None|True|GitHub username|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -373,11 +395,11 @@ Example output:
 
 ```
 
-### Remove User
+#### Remove User
 
 This action is used to remove a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -385,7 +407,7 @@ This action is used to remove a user.
 |organization|string|None|False|Remove from organization|None|
 |repository|string|None|False|Remove from repository|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -401,18 +423,18 @@ Example output:
 
 ```
 
-### Search
+#### Search
 
 This action is used to search GitHub for data. The search by commits endpoint is currently in developer preview and is not supported at this time.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |search_type|string|None|False|The type of search to perform|['Repositories', 'Commits', 'Code', 'Issues']|
 |query|string|None|False|Query to match against|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -510,18 +532,18 @@ Example output:
 
 ```
 
-### Get Repo
+#### Get Repo
 
 This action is used to retrieve details, including id, about a specific repo.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |owner|string|None|True|Owner of the repository|None|
 |title|string|None|True|Name of the repository|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -641,15 +663,15 @@ Example output:
 
 ```
 
-### Get My Issues
+#### Get My Issues
 
 This action is used to retrieve all issues assigned to the currently authenticated user.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -850,18 +872,18 @@ Example output:
 
 ```
 
-### Get Issues by Repo
+#### Get Issues by Repo
 
 This action is used to retrieve all issues currently open on the specified repo.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |owner|string|None|True|Owner of the repository|None|
 |title|string|None|True|Name of the repository|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -919,20 +941,20 @@ Example output:
 
 ```
 
-### Block User
+#### Block User
 
 This action is used to block a user.
 
 The User Blocking API on GitHub is currently available for developers to preview.
 Warning: The API may change without advance notice during the preview period. Preview features are not supported for production use.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username|string|None|True|Username to block|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -948,20 +970,20 @@ Example output:
 
 ```
 
-### Unblock User
+#### Unblock User
 
 This action is used to unblock a user.
 
 The User Blocking API on GitHub is currently available for developers to preview.
 Warning: The API may change without advance notice during the preview period. Preview features are not supported for production use.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username|string|None|True|Username to unblock|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -977,13 +999,13 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
-### Issue
+#### Issue
 
 This trigger is used to monitor a repository for new issues and returns any new issues found.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -992,7 +1014,7 @@ This trigger is used to monitor a repository for new issues and returns any new 
 |repository|string|None|True|Return issues of a specific repository|None|
 |assignee|string|None|False|Username of assignee|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1014,50 +1036,39 @@ Example output:
 
 ```
 
-## Connection
+### Custom Output Types
 
-This plugin requires a GitHub username and password (or token).
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|GitHub credentials|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 If two-factor authentication is enabled on the GitHub account you will need to [generate an access token](https://github.com/settings/tokens) to use instead of your regular password.
 
-### Permissions
+#
 
-By default, a newly created token will be unprivileged. Removing users, creating issues, and viewing any data associated with private repositories will require a token with the appropriate permissions.
+# Version History
 
-All actions can use the "repo" permission scope except "Remove User" which requires the "admin:org" permission scope.
-
-## Workflows
-
-Examples:
-
-* [ChatOps: GitHub Commands](https://market.komand.com/workflows/ross/chatops-github-commands/1.0.0)
-* Ticket creation
-* User deprovisioning
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.2.0 - New actions: Get Repo, Get My Issues, Get Issues by Repo, and Search
-* 0.2.1 - New optional Assignee input to Create Issue action
-* 0.2.2 - New optional Milestone input to Create Issue action
-* 0.2.3 - SSL bug fix in SDK
-* 1.0.0 - Add Collaborator action | Update to v2 Python plugin architecture | Support web server mode
-* 1.1.0 - Add Membership action
-* 1.2.0 - Add Block User and Unblock User action
-* 1.2.1 - Update connection documentation and add example outputs to remaining actions and triggers
-* 2.0.0 - Rename "User" action to "Get User"
-* 2.0.1 - Fix missing Search action | Pin pygithub and python-dateutil libraries | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Enable verification of SSL/TLS certificates for github.com
 * 2.1.0 - New actions: Create Issue Comment, Close Issue, Add Issue Label
+* 2.0.1 - Fix missing Search action | Pin pygithub and python-dateutil libraries | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Enable verification of SSL/TLS certificates for github.com
+* 2.0.0 - Rename "User" action to "Get User"
+* 1.2.1 - Update connection documentation and add example outputs to remaining actions and triggers
+* 1.2.0 - Add Block User and Unblock User action
+* 1.1.0 - Add Membership action
+* 1.0.0 - Add Collaborator action | Update to v2 Python plugin architecture | Support web server mode
+* 0.2.3 - SSL bug fix in SDK
+* 0.2.2 - New optional Milestone input to Create Issue action
+* 0.2.1 - New optional Assignee input to Create Issue action
+* 0.2.0 - New actions: Get Repo, Get My Issues, Get Issues by Repo, and Search
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [GitHub](https://github.com)
 * [GitHub REST API](https://developer.github.com/v3/)
+

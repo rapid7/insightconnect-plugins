@@ -1,17 +1,37 @@
-
-# IPStack
-
-## About
+# Description
 
 [IPStack](https://ipstack.com) is a free service for Geo IP lookups (previously FreeGeoIP).
 
-## Actions
+# Key Features
 
-### GeoIP Lookup
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|cred_token|credential_token|None|True|API Token|None|
+
+## Technical Details
+
+### Actions
+
+#### GeoIP Lookup
 
 This action is used to lookup IPStack information for a host.
 
-#### Input
+##### Input
 
 It accepts a user to query and host (IP or domain) to perform the query.
 
@@ -19,7 +39,7 @@ It accepts a user to query and host (IP or domain) to perform the query.
 |----|----|-------|--------|-----------|----|
 |host|string|None|False|Host to Lookup|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -55,33 +75,30 @@ On success, the raw output will look like the following:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|cred_token|credential_token|None|True|API Token|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 A valid domain or IP address must be provided.
 
-## Workflows
+# Version History
 
-Examples:
-
-* IP enrichment
-
-## Versions
-
-* 0.1.0 - Initial plugin
 * 1.0.0 - Support web server mode
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [IPStack](https://ipstack.com)
+

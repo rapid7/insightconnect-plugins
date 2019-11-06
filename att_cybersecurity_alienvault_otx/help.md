@@ -1,18 +1,40 @@
-# AT&T Cybersecurity AlienVault Open Threat Exchange
-
-## About
+# Description
 
 AT&T Cybersecurity [Alienvault OTX](https://otx.alienvault.com/) is an open threat exchange service.
 
 This plugin utilizes the Python library [OTXv2](https://github.com/AlienVault-OTX/OTX-Python-SDK).
 
-## Actions
+# Key Features
 
-### Get Indicator Details
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|AlienVault Open Threat Exchange API key|None|
+|url|string|https\://otx.alienvault.com/|True|AlienVault Open Threat Exchange URL|None|
+
+## Technical Details
+
+### Actions
+
+#### Get Indicator Details
 
 This action is used to return details about an indicator.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -30,7 +52,7 @@ Below is a list for each indicator type and the sections they support.
 |URL|['general', 'url_list', 'full']|
 |HOSTNAME|['general', 'geo', 'malware', 'url_list', 'passive_dns', 'full']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -200,35 +222,31 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|AlienVault Open Threat Exchange API key|None|
-|url|string|https\://otx.alienvault.com/|True|AlienVault Open Threat Exchange URL|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
 * 1.0.1 - Update custom type and added HOSTNAME as a supported indicator type for Get Indicator Details
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Enrichment of IPs and URLs sent with emails
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Alienvault OTX](https://otx.alienvault.com/)
 * [OTXv2](https://github.com/AlienVault-OTX/OTX-Python-SDK)
+

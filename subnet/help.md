@@ -1,24 +1,40 @@
-
-# Subnet
-
-## About
+# Description
 
 The Subnet plugin takes input as a network in CIDR notation and returns useful information, including:
 the number of network, the number of hosts, the ID, host address range, and broadcast address.
 
-## Actions
+# Key Features
 
-### Calculate
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Calculate
 
 This action is used to returns network information information for IP and Netmask.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |cidr|string|None|True|Network in CIDR Notation, E.g. 192.168.1.1/24|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -34,33 +50,34 @@ This action is used to returns network information information for IP and Netmas
 |wildcard|string|False|None|
 |cidr|string|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 The number of hosts per network does not include the ID and broadcast address.
 However, the number of network does include the all-ones and all-zeros network.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Network configuration
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Subnetwork](https://en.wikipedia.org/wiki/Subnetwork)
 * [Python IPCalc](https://github.com/tehmaze/ipcalc)
+

@@ -1,18 +1,41 @@
-# Pushover.net
-
-## About
+# Description
 
 Pushover allows you to send push notifications to Apple, Android, and PC clients.
 
 For more information, please see [Pushover.net](https://pushover.net)
 
-## Actions
+# Key Features
 
-### Send pushover notification
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|token|credential_secret_key|None|True|App Token|None|
+
+The connection represents an 'app' in Pushover.  The key determins which 'source' it will be coming from.
+
+## Technical Details
+
+### Actions
+
+#### Send pushover notification
 
 This action sends a message to a user or group
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -27,7 +50,7 @@ This action sends a message to a user or group
 |sound|string|None|False|Sound to play - names at https://pushover.net/api#sounds|None|
 |timestamp|date|None|False|Override default timestamp on message|None|
 
-#### output
+##### output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -35,38 +58,29 @@ This action sends a message to a user or group
 |request|string|True|Identifier of the request in the pushover system|
 |receipt|string|False|For emergency messages, the receipt ID to lookup if has been acknowledged|
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers_
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|token|credential_secret_key|None|True|App Token|None|
-
-The connection represents an 'app' in Pushover.  The key determins which 'source' it will be coming from.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
-
-Examples:
-
-* real-time notification of key people of events/workflow activities
-
-## Versions
+# Version History
 
 * 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Pushover.net](https://pushover.net)
 
-## Custom Output Types
-
-_This plugin does not contain any custom output types._

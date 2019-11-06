@@ -1,17 +1,33 @@
-
-# Symantec Business Critical Services
-
-## About
+# Description
 
 [Symantec BCS](https://submit.symantec.com/websubmit/bcs.cgi) is a suspected infected file or hash submission form that sends data to Symantec Security Response.
 
-## Actions
+# Key Features
 
-### Submit
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Submit
 
 This action is used to submit a malicious file or hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -26,37 +42,37 @@ This action is used to submit a malicious file or hash.
 |stype|string|None|True|Submission type|['upfile', 'url', 'hash']|
 |filename|string|None|False|Optional filename if submission type is upfile|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|string|True|HTML response|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* [Symantec BCS File Submission](https://market.komand.com/workflows/jschipp/symantec-bcs-file-submission/0.1.0)
-* [Symantec BCS Hash Submission](https://market.komand.com/workflows/jschipp/symantec-bcs-hash-submission/0.1.0)
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Symantec BCS](https://submit.symantec.com/websubmit/bcs.cgi)
+

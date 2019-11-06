@@ -1,23 +1,40 @@
-# Storage
-
-## About
+# Description
 
 This utility creates a place to store information across loops and workflows.
 
-## Actions
+# Key Features
 
-### Store
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+_This plugin does not contain a connection._
+
+## Technical Details
+
+### Actions
+
+#### Store
 
 This action is used to store a variable in cache.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |variable_name|string|None|True|Name of the variable to store|None|
 |variable_value|string|None|True|Name of the variable to store|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -31,17 +48,17 @@ Example output:
 }
 ```
 
-### Delete Variable
+#### Delete Variable
 
 This action is used to delete a variable and its contents.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |variable_name|string|None|True|Variable to delete|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -55,17 +72,17 @@ Example output:
 }
 ```
 
-### Retrieve
+#### Retrieve
 
 This action is used to retrieve the value of a variable.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |variable_name|string|None|True|Variable to get value from|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -79,17 +96,17 @@ Example output:
 }
 ```
 
-### Check for Variable
+#### Check for Variable
 
 This action is used to find out if a variable exists.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |variable_name|string|None|True|Variable to look for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -101,31 +118,29 @@ This action is used to find out if a variable exists.
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-_This plugin does not contain a connection._
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
-## Workflows
-
-Examples:
-
-* Create a flag in a loop step, then later check that flag outside the loop
-* Count the number of malicious indicators found across workflows
-
-## Versions
+# Version History
 
 * 1.0.0 - Initial plugin
 
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
 ## References
 
-## Custom Output Types
 
-_This plugin does not contain any custom output types._
+

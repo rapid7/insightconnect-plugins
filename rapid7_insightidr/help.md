@@ -1,16 +1,38 @@
-# Rapid7 InsightIDR
-
-## About
+# Description
 
 [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/) is an intruder analytics solution that gives you the confidence to detect and investigate security incidents faster.
 
-## Actions
+# Key Features
 
-### Add Indicators to a Threat
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|The API key for InsightAppSec|None|
+|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightAppSec. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|
+
+## Technical Details
+
+### Actions
+
+#### Add Indicators to a Threat
 
 This action is used to add InsightIDR threat indicators to a threat with the given threat key.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -20,7 +42,7 @@ This action is used to add InsightIDR threat indicators to a threat with the giv
 |key|string|None|True|The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3|None|
 |urls|[]string|None|False|URL's to add. e.g. ["https://example.com","https://test.com"]|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -43,11 +65,11 @@ Example output:
 }
 ```
 
-### List Investigations
+#### List Investigations
 
 This action is used to retrieve a page of investigations matching the given request parameters. The investigations will always be sorted by investigation created time in descending order.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -57,7 +79,7 @@ This action is used to retrieve a page of investigations matching the given requ
 |start_time|date|None|False|An optional ISO formatted timestamp. Only investigations whose created time is after this date will be returned by the API. If this parameter is omitted investigations with any created time may be returned|None|
 |statuses|string|CLOSED|False|An optional comma separated set of investigation statuses. Only investigation whose status match one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned|['OPEN', 'CLOSED', 'EITHER']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -99,18 +121,18 @@ Example output:
 }
 ```
 
-### Set Status of Investigation Action
+#### Set Status of Investigation Action
 
 This action is used to set the status of the investigation with the given ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|The ID of the investigation to change the status of|None|
 |status|string|EITHER|True|The new status for the investigation |['OPEN', 'CLOSED']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -135,41 +157,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|The API key for InsightAppSec|None|
-|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightAppSec. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|
-
-## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
-
-## Workflows
-
-Examples:
-
-* Close investigations
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 1.1.0 - New Action Add Indicators to a Threat
-
-## References
-
-* [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)
-
-## Custom Output Types
-
-### investigation_metadata
+#### investigation_metadata
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -178,7 +172,7 @@ Examples:
 |total_data|integer|False|The total number of results available with the given filter parameters|
 |total_pages|integer|False|The total number of pages available with the given filter parameters|
 
-### alerts
+#### alerts
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -186,14 +180,14 @@ Examples:
 |type|string|False|The alert's type|
 |type_description|string|False|An optional description of this type of alert|
 
-### assignee
+#### assignee
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |email|string|False|The email of the assigned user|
 |name|string|False|The name of the assigned user|
 
-### investigation
+#### investigation
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -205,7 +199,7 @@ Examples:
 |status|string|False|The status of the investigations|
 |title|string|False|The investigation's title|
 
-### threat
+#### threat
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -213,3 +207,23 @@ Examples:
 |name|string|False|The name of the threat|
 |note|string|False|Notes about this threat|
 |published|boolean|False|Indicates whether this threat has been published|
+
+## Troubleshooting
+
+_This plugin does not contain any troubleshooting information._
+
+# Version History
+
+* 1.1.0 - New Action Add Indicators to a Threat
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)
+

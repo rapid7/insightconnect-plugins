@@ -1,25 +1,48 @@
-# Jamf
-
-## About
+# Description
 
 [Jamf](https://instancename.jamfcloud.com/) is a popular product for managing iPads, iPhones, Macs, and Apple TVs for schools and businesses.
 
 This plugin utilizes the [Jamf API](https://developer.jamf.com/apis/classic-api/index).
 
-## Actions
+# Key Features
 
-### Add Computer To A Group
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|client_login|credential_username_password|None|True|The Jamf username and password for basic authentication API interaction|None|
+|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access Jamf|None|
+|url|string|None|True|The full URL for your instance of Jamf, e.g. https://instance.jamfcloud.com|None|
+
+## Technical Details
+
+### Actions
+
+#### Add Computer To A Group
 
 This action is used to add a computer to a group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ID|integer|None|True|Group ID|None|
 |computer_ids|[]integer|None|True|Computer IDs|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -33,17 +56,17 @@ Example output:
 }
 ```
 
-### Get Device Groups
+#### Get Device Groups
 
 This action gets a list of all groups a device is a member of.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ID|integer|None|True|Device ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -66,17 +89,17 @@ Example output:
 }
 ```
 
-### Get Devices Names and IDs
+#### Get Devices Names and IDs
 
 This action is used to get a list of user's devices names and IDs.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|True|User name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -101,17 +124,17 @@ Example output:
 }
 ```
 
-### Get Group Details
+#### Get Group Details
 
 This action is used to get group details.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Group ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -174,17 +197,17 @@ Example output:
 }
 ```
 
-### Lock Mobile Devices
+#### Lock Mobile Devices
 
 This action is used to lock mobile devices.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |devices_id|[]string|None|True|List of devices IDs|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -198,17 +221,17 @@ Example output:
 }
 ```
 
-### Get User Location Details
+#### Get User Location Details
 
 This action is used to get user location details by device ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ID|string|None|True|Device ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -231,45 +254,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|client_login|credential_username_password|None|True|The Jamf username and password for basic authentication API interaction|None|
-|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access Jamf|None|
-|url|string|None|True|The full URL for your instance of Jamf, e.g. https://instance.jamfcloud.com|None|
-
-## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
-
-## Workflows
-
-Examples:
-
-* Get list of device groups
-* Lock mobile devices
-* Get group details
-* Get device name and ID
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 1.1.0 - Add action to get user location details by device ID
-
-## References
-
-* [Jamf](https://developer.jamf.com/apis/classic-api/index)
-
-## Custom Output Types
-
-### mobile_device
+#### mobile_device
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -280,14 +271,14 @@ Examples:
 |udid|string|True|Unique device ID|
 |wifi_mac_address|string|True|WIFI MAC address|
 
-### device_group_detail
+#### device_group_detail
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|True|Group ID|
 |name|string|True|Group name|
 
-### search_criteria
+#### search_criteria
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -299,14 +290,14 @@ Examples:
 |search_type|string|False|Search type|
 |value|string|False|Value|
 
-### site_detail
+#### site_detail
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|False|ID|
 |name|string|False|Name|
 
-### group_detail
+#### group_detail
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -317,7 +308,7 @@ Examples:
 |name|string|False|Group name|
 |site|site_detail|False|Site|
 
-### user_location_detail
+#### user_location_detail
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -329,4 +320,23 @@ Examples:
 |real_name|string|True|Real name|
 |room|string|True|Room number|
 |username|string|True|Username|
+
+## Troubleshooting
+
+_This plugin does not contain any troubleshooting information._
+
+# Version History
+
+* 1.1.0 - Add action to get user location details by device ID
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [Jamf](https://developer.jamf.com/apis/classic-api/index)
 

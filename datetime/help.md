@@ -1,24 +1,40 @@
-
-# Datetime
-
-## About
+# Description
 
 This plugin gets the current Datetime and outputs it in a format specified by the user.
 
-## Actions
+# Key Features
 
-### Get Datetime
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Get Datetime
 
 This action is used to get the current Datetime in a specified format.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |format_string|string|%d %b %Y %H\:%M\:%S|True|Format string for the output. Example\: %H\:%M\:%S or %d/%m/%Y|None|
 |use_rfc3339_format|boolean|None|True|Use RFC3339 format (eg. 2017-10-24T18\:27\:36.23Z). This is the most compatible date format for timestamp manipulation. Enabling this will override the format string input|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -36,11 +52,11 @@ Example output:
 
 ```
 
-### Subtract from Datetime
+#### Subtract from Datetime
 
 This action is used to subtract Datetime units from a Datetime.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -52,7 +68,7 @@ This action is used to subtract Datetime units from a Datetime.
 |days|integer|0|True|How many days to subtract from the specified Datetime|None|
 |years|integer|0|True|How many years to subtract from the specified Datetime|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -68,11 +84,11 @@ Example output:
 
 ```
 
-### Add to Datetime
+#### Add to Datetime
 
 This action is used to add Datetime units to a Datetime.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -84,7 +100,7 @@ This action is used to add Datetime units to a Datetime.
 |days|integer|0|True|How many days to add to the specified Datetime|None|
 |years|integer|0|True|How many years to add to the specified Datetime|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -100,17 +116,17 @@ Example output:
 
 ```
 
-### Date from Epoch
+#### Date from Epoch
 
 This action is used to convert an epoch as an integer to a Datetime.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |epoch|number|None|True|Epoch as integer or float|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -126,17 +142,17 @@ Example output:
 
 ```
 
-### Epoch from Date
+#### Epoch from Date
 
 This action is used to convert a Datetime to an epoch.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |datetime|date|None|True|Date in RFC3339 format|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -152,11 +168,11 @@ Example output:
 
 ```
 
-### Time Elapsed
+#### Time Elapsed
 
 This action is used to find the difference between two Datetime inputs.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -164,7 +180,7 @@ This action is used to find the difference between two Datetime inputs.
 |second_time|date|None|True|Second date|None|
 |result_unit|string|'Days'|True|Unit of time for output|['Years', 'Months', 'Days', 'Hours', 'Minutes', 'Seconds']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -182,42 +198,42 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-* Insert date into actions
-* Tag sent emails with dates
-* General utility
-* Get timestamps for past/future dates
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.2.0 - Add actions: Add to Datetime, Subtract from Datetime
-* 0.2.1 - Update Get Datetime: Add option to output in RFC3339 format for greater compatibility
-* 0.3.0 - Update Get Datetime: Add output for epoch timestamp
-* 0.3.1 - SSL bug fix in SDK
-* 0.4.0 - Add action: Date from Epoch
-* 0.4.1 - Bug fix for CI tool incorrectly uploading plugins
-* 0.5.0 - Add action: Epoch from Date
-* 1.0.0 - Add action: Time Elapsed | Support web server mode
-* 2.0.0 - Bug fix for epoch type
-* 2.0.1 - Fixed issue where action Epoch from Date may return a float and not an integer
-* 2.0.2 - Fixed issue where action Date from Epoch will not accept floats
-* 2.0.3 - Fixed issue where connection test failed
 * 2.0.4 - Update plugin tag from `utility` to `utilities` for Marketplace searchability
+* 2.0.3 - Fixed issue where connection test failed
+* 2.0.2 - Fixed issue where action Date from Epoch will not accept floats
+* 2.0.1 - Fixed issue where action Epoch from Date may return a float and not an integer
+* 2.0.0 - Bug fix for epoch type
+* 1.0.0 - Add action: Time Elapsed | Support web server mode
+* 0.5.0 - Add action: Epoch from Date
+* 0.4.1 - Bug fix for CI tool incorrectly uploading plugins
+* 0.4.0 - Add action: Date from Epoch
+* 0.3.1 - SSL bug fix in SDK
+* 0.3.0 - Update Get Datetime: Add output for epoch timestamp
+* 0.2.1 - Update Get Datetime: Add option to output in RFC3339 format for greater compatibility
+* 0.2.0 - Add actions: Add to Datetime, Subtract from Datetime
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Python Time](https://docs.python.org/3/library/time.html#time.strftime)
+

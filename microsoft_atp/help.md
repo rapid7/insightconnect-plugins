@@ -1,24 +1,50 @@
-# Microsoft Windows Defender ATP
-
-## About
+# Description
 
 [Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp) is a unified platform for preventative protection, post-breach detection, automated investigation, and response.
 
 This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis).
 
-## Actions
+# Key Features
 
-### Get Machine ID from Alert
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|auth_url|string|None|True|Server used to obtain OAuth token. Example\: https\://login.windows.net/{Azure Tenant ID}/oauth2/token|None|
+|client_id|string|None|True|Client ID obtained from Windows Defender Security Center API settings|None|
+|client_secret|string|None|True|Client secret obtained when authorizing an application to connect to Windows Defender|None|
+|host|string|https\://wdatp-alertexporter-us.securitycenter.windows.com|True|Base URL for endpoints, e.g. https\://wdatp-alertexporter-us.securitycenter.windows.com|None|
+|resource_url|string|https\://api.securitycenter.windows.com|False|This will be the server that will return information from the plug-in requests. This will typically be https\://graph.windows.net (for alert information) or https\://api.securitycenter.windows.com (for machine information and actions).|None|
+|seconds_ago|integer|0|False|Seconds before the first run of the trigger to check for alerts. If left blank, the trigger will start scanning from the time the workflow begins.|None|
+
+## Technical Details
+
+### Actions
+
+#### Get Machine ID from Alert
 
 This action is used to retrieve the machine ID related to an alert.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |alert_id|string|None|True|Alert ID to get a machine ID from|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -48,17 +74,17 @@ Example output:
 }
 ```
 
-### Get File ID from Alert
+#### Get File ID from Alert
 
 This action is used to retrieve the file ID related to an alert.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |alert_id|string|None|True|Alert ID to get files from|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -92,11 +118,11 @@ Example output:
 }
 ```
 
-### Isolate Machine
+#### Isolate Machine
 
 This action is used to isolate a machine from the network, but keep the connection to windows atp open.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -104,7 +130,7 @@ This action is used to isolate a machine from the network, but keep the connecti
 |isolation_type|string|None|True|Type of isolation to perform on target machine|['Full', 'Selective']|
 |comment|string|None|True|Comment to associate with the isolation action|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -127,18 +153,18 @@ Example output:
 }
 ```
 
-### Unisolate Machine
+#### Unisolate Machine
 
 This action is used to restore network connectivity to a machine.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |machine_id|string|None|True|Machine ID|None|
 |comment|string|None|True|Comment to associate with the unisolate action|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -161,11 +187,11 @@ Example output:
 }
 ```
 
-### Stop and Quarantine File
+#### Stop and Quarantine File
 
 This action is used to stop the execution of a file on a machine and delete it.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -173,7 +199,7 @@ This action is used to stop the execution of a file on a machine and delete it.
 |comment|string|None|True|Comment to associate with the stop and quarantine action|None|
 |sha1|string|None|True|Sha1 of the file to stop and quarantine on the machine|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -199,11 +225,11 @@ Example output:
 }
 ```
 
-### Run Antivirus Scan
+#### Run Antivirus Scan
 
 This action is used to initiate a Windows Defender antivirus scan on a machine.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -211,7 +237,7 @@ This action is used to initiate a Windows Defender antivirus scan on a machine.
 |comment|string|None|True|Comment to associate with the antivirus scan action|None|
 |scan_type|string|None|True|The type of antivirus scan to run|['Full', 'Quick']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -234,17 +260,17 @@ Example output:
 }
 ```
 
-### Get Machine Action
+#### Get Machine Action
 
 This action is used to retrieve details about an action taken on a machine.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |action_id|string|None|True|Action ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -267,19 +293,19 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-### Get Alerts for ID
+#### Get Alerts for ID
 
 This trigger is used to get alerts by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|ID to get|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -322,17 +348,17 @@ Example output:
 }
 ```
 
-### Get Alerts for Domain
+#### Get Alerts for Domain
 
 This trigger is used to get alerts by domain.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain to get|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -375,17 +401,17 @@ Example output:
 }
 ```
 
-### Get Alerts for Actor
+#### Get Alerts for Actor
 
 This trigger is used to get alerts by an actor.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |actor|string|None|True|Actor to get|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -428,17 +454,17 @@ Example output:
 }
 ```
 
-### Get Alerts by File Name
+#### Get Alerts by File Name
 
 This trigger is used to get alerts by file name.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filename|string|None|True|File name to get|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -481,18 +507,18 @@ Example output:
 }
 ```
 
-### Get Alerts Matching Key
+#### Get Alerts Matching Key
 
 This trigger is used to get alerts that match a given key to its value.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |key|string|None|True|The key to look for in the alert|None|
 |value|string|None|True|The value to look for in the alert|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -535,17 +561,17 @@ Example output:
 }
 ```
 
-### Get Alerts
+#### Get Alerts
 
 This trigger is used to return all new alerts.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |frequency|integer|5|False|Poll frequency in seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -588,47 +614,32 @@ Example output:
 }
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|auth_url|string|None|True|Server used to obtain OAuth token. Example\: https\://login.windows.net/{Azure Tenant ID}/oauth2/token|None|
-|client_id|string|None|True|Client ID obtained from Windows Defender Security Center API settings|None|
-|client_secret|string|None|True|Client secret obtained when authorizing an application to connect to Windows Defender|None|
-|host|string|https\://wdatp-alertexporter-us.securitycenter.windows.com|True|Base URL for endpoints, e.g. https\://wdatp-alertexporter-us.securitycenter.windows.com|None|
-|resource_url|string|https\://api.securitycenter.windows.com|False|This will be the server that will return information from the plug-in requests. This will typically be https\://graph.windows.net (for alert information) or https\://api.securitycenter.windows.com (for machine information and actions).|None|
-|seconds_ago|integer|0|False|Seconds before the first run of the trigger to check for alerts. If left blank, the trigger will start scanning from the time the workflow begins.|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
-* 1.1.0 - New actions Get Machine ID from Alert, Isolate Machine, and Unisolate Machine
-* 1.2.0 - New action Get File IDs from Alert
-* 1.3.0 - New actions Stop and Quarantine File and Run Antivirus Scan
-* 1.4.0 - New trigger Get Alerts | New action Get Machine Action
 * 1.5.0 - Fix issue where triggers always returned a blank payload
+* 1.4.0 - New trigger Get Alerts | New action Get Machine Action
+* 1.3.0 - New actions Stop and Quarantine File and Run Antivirus Scan
+* 1.2.0 - New action Get File IDs from Alert
+* 1.1.0 - New actions Get Machine ID from Alert, Isolate Machine, and Unisolate Machine
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Isolate Machine
-* Check for Alerts
-
-### Machine Actions
-
-The typical workflow with this plug-in begins by getting an alert ID with one of the retrieve alert triggers. The
-alert ID is used to retrieve a `file_id` or `machine_id` to take action.  With the `file_id` or `machine_id`, the
-workflow can then isolate a machine, quarantine a file, or trigger a virus scan.
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp)
 * [Windows Defender ATP API Start Page](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis)
 * [Windows Defender ATP API Endpoints](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/exposed-apis-list)
+

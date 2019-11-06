@@ -1,24 +1,48 @@
-# OpenDXL
-
-## About
+# Description
 
 [OpenDXL](https://www.opendxl.com/) is used to create adaptive systems of interconnected services that communicate and share information for real-time, accurate security decisions and actions.
 This plugin utilizes the [OpenDXL Python Client API](https://github.com/opendxl/opendxl-client-python).
 
-## Actions
+# Key Features
 
-### Publish Event
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|client_crt|credential_asymmetric_key|None|True|Client certificate file|None|
+|host|string|None|True|The broker host e.g. example.com\:8883|None|
+|broker_ca|credential_asymmetric_key|None|True|Broker certificate authority bundle|None|
+|client_key|credential_asymmetric_key|None|True|Client key file|None|
+
+## Technical Details
+
+### Actions
+
+#### Publish Event
 
 This action is used to publish a new event to a specified topic.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |topic|string|None|True|The topic to publish messages to|None|
 |event_message|string|None|True|The event message|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -30,20 +54,20 @@ Example output:
   "success": true
 }
 
-## Triggers
+### Triggers
 
-### Receive Event
+#### Receive Event
 
 This trigger is used to trigger on receiving a new event from a specified topic.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |topic|string|None|True|The topic to receive messages from|None|
 |number_of_messages|integer|1|True|The number of messages to return at one time as a list. Must be one or more|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -57,16 +81,9 @@ Example output:
 }
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|client_crt|credential_asymmetric_key|None|True|Client certificate file|None|
-|host|string|None|True|The broker host e.g. example.com\:8883|None|
-|broker_ca|credential_asymmetric_key|None|True|Broker certificate authority bundle|None|
-|client_key|credential_asymmetric_key|None|True|Client key file|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -78,19 +95,20 @@ The connection configuration accepts the following parameters:
 
 * All certificates must end with a '\n' when copying the certificate, please ensure that the ending '\n' is included.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
-* 1.1.0 - New action Publish Event
 * 1.1.1 - Fix issue where certificates in connection were not being escaped correctly
+* 1.1.0 - New action Publish Event
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Pull new messages from an OpenDXL topic
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [OpenDXL](https://www.opendxl.com/)
 * [API documentation](https://opendxl.github.io/opendxl-client-python/pydoc/index.html#)
+

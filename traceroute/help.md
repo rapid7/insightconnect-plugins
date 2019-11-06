@@ -1,18 +1,34 @@
-
-# Traceroute
-
-## About
+# Description
 
 This plugin uses [tcptraceroute](https://linux.die.net/man/1/tcptraceroute) version 1.5beta, an implementation of Traceroute that uses TCP rather than ICMP.
 tcptraceroute can bypass some firewalls that block ICMP and UDP.
 
-## Actions
+# Key Features
 
-### Traceroute
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Traceroute
 
 This action is used to trace a route to a host. It returns the route used to communicate with the host.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -24,7 +40,7 @@ This action is used to trace a route to a host. It returns the route used to com
 |time_out|integer|3|True|Set the timeout, in seconds, to wait for a response for each probe. The default is 3|None|
 |port|integer|80|True|Set the port that Traceroute will try to reach default 80 eg set it to port 25 for a host that is running a mail server|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -52,31 +68,31 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
 * 1.0.1 - Support web server mode
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Check for bad routing paths
-* Check for high latency points on a routing path
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [Man Page for tcptraceroute](https://linux.die.net/man/1/tcptraceroute)
 * [Git Repository](https://github.com/mct/tcptraceroute)
+

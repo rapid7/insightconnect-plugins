@@ -1,26 +1,47 @@
-
-# EchoTrail Insights
-
-## About
+# Description
 
 [EchoTrail](https://www.echotrail.io/products/insights/) is a database of executable behavioral analytics, searchable by filename or SHA256 or MD5 hash.
 Search our Insights database manually for an [example](https://www.echotrail.io/insights/search/) of the type of analytics we provide.
 
 This plugin utilizes the [EchoTrail API](https://api.echotrail.io).
 
-## Actions
+# Key Features
 
-### Filename Lookup
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|server|string|https\://api.echotrail.io\:443|True|EchoTrail API Server|None|
+|api_key|credential_secret_key|None|True|API Key|None|
+
+## Technical Details
+
+### Actions
+
+#### Filename Lookup
 
 This action is used to search for a Windows filename by name to obtain process behavioral analytics.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filename|string|None|True|Filename to lookup|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -148,17 +169,17 @@ Example output:
 }
 ```
 
-### Hash Lookup
+#### Hash Lookup
 
 This action is used to search for a Windows executable by SHA256 or MD5 hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hash|string|None|True|SHA256 or MD5 Hash Lookup|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -270,37 +291,31 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|server|string|https\://api.echotrail.io\:443|True|EchoTrail API Server|None|
-|api_key|credential_secret_key|None|True|API Key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
 * 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Get a description for a given Windows filename or hash
-* Get global prevalance information for a Windows executable
-* Get behavioral information about a Windows executable, i.e. filepath, typical parents, grandparents and children
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [EchoTrail](https://www.echotrail.io)
 * [EchoTrail Example](https://www.echotrail.io/insights/search/powershell.exe)
 * [EchoTrail API](https://www.echotrail.io/docs/api/)
+

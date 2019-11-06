@@ -1,25 +1,46 @@
-
-# GitLab
-
-## About
+# Description
 
 [GitLab](https://www.gitlab.com) is a next generation developer collaboration software with version control capabilities.
 This plugin utilizes the [GitLab API](https://docs.gitlab.com/ee/api/).
 
-## Actions
+# Key Features
 
-### Create Issue
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|False|Host URL e.g. https\://gitlab.example.com\:8000/api/v4/|None|
+|credentials|credential_username_password|None|True|Enter GitLab username and password (or token)|None|
+
+## Technical Details
+
+### Actions
+
+#### Create Issue
 
 This action is used to create an issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|User ID to unblock|None|
 |parameters|issue_input|None|False|Issue parameters|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -42,66 +63,66 @@ This action is used to create an issue.
 |assignee|user_output|False|None|
 |project_id|integer|False|None|
 
-### List User SSH Keys
+#### List User SSH Keys
 
 This action is used to list user SSH keys.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|User ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |ssh_keys|[]ssh_output|False|None|
 
-### Delete User
+#### Delete User
 
 This action is used to delete a GitLab user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|User ID to unblock|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Delete User SSH Key
+#### Delete User SSH Key
 
 This action is used to delete a user SSH key.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |key_id|integer|None|True|Key ID|None|
 |id|integer|None|True|User ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Get User
+#### Get User
 
 This action is used to get GitLab user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|User ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -120,45 +141,45 @@ This action is used to get GitLab user.
 |created_at|date|False|None|
 |website_url|string|False|None|
 
-### Unblock User
+#### Unblock User
 
 This action is used to unlock GitLab user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|User ID to unblock|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Block User
+#### Block User
 
 This action is used to block GitLab user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|User ID to block|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-## Triggers
+### Triggers
 
-### Issue
+#### Issue
 
 This trigger is used to monitor new issues.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -169,40 +190,34 @@ This trigger is used to monitor new issues.
 |interval|integer|None|False|How often recieve new issues|None|
 |state|string|None|False|Return all issues or just those that are opened or closed|['Opened', 'Closed']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |issue|object|False|None|
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|False|Host URL e.g. https\://gitlab.example.com\:8000/api/v4/|None|
-|credentials|credential_username_password|None|True|Enter GitLab username and password (or token)|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Manage GitLab team
-* Project version control
-* Issue tracking
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [GitLab](https://gitlab.com)
 * [GitLab API](https://docs.gitlab.com/ce/api/README.html)
+

@@ -1,22 +1,44 @@
-# Cisco ThreatGrid
-
-## About
+# Description
 
 [Cisco ThreatGrid](https://www.cisco.com/c/en/us/products/security/threat-grid/index.html) combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware.
 
-## Actions
+# Key Features
 
-### Search for a Sample Report by URL
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|API Key|None|
+|region|string|US|True|Region|['US', 'Europe']|
+
+## Technical Details
+
+### Actions
+
+#### Search for a Sample Report by URL
 
 This action is used to search for a sample report matching the given domain. e.g. rapid7.com.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain to search for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -137,17 +159,17 @@ Example output:
 }
 ```
 
-### Search for a Sample Report by ID
+#### Search for a Sample Report by ID
 
 This action is used to search for a sample report matching the given ID. e.g. rapid7.com.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |sample_id|string|None|True|Sample ID to search for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -268,17 +290,17 @@ Example output:
 }
 ```
 
-### Search for a Sample Report by SHA256
+#### Search for a Sample Report by SHA256
 
 This action is used to search for a sample report matching the given hash. e.g. 95fe2192da12930617b37419574exxx.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |sha256|string|None|True|SHA256|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -388,11 +410,11 @@ Example output:
 }
 ```
 
-### Submit Sample
+#### Submit Sample
 
 This action submits a sample to Threat Grid for analysis.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -407,7 +429,7 @@ This action submits a sample to Threat Grid for analysis.
 |tags|string|None|False|A comma-separated list of tags applied to this sample|None|
 |vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -438,17 +460,17 @@ Example output:
 
 ```
 
-### Get Sample Analysis
+#### Get Sample Analysis
 
 This action retrieves analysis on a sample with the given ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |sample_id|string|None|True|ID in ThreadGrid of sample|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -535,11 +557,11 @@ Example output:
 
 ```
 
-### Submit URL
+#### Submit URL
 
 This action is used to submit a URL to Threat Grid for analysis.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -552,7 +574,7 @@ This action is used to submit a URL to Threat Grid for analysis.
 |url|string|None|True|The URL to submit for analysis|None|
 |vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -582,45 +604,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API Key|None|
-|region|string|US|True|Region|['US', 'Europe']|
-
-## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
-
-## Workflows
-
-Examples:
-
-* Get a sample report
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 1.1.0 - New action Submit Sample
-* 1.2.0 - New action Get Sample Analysis
-* 1.2.1 - Bug fix for action Get Sample Analysis
-* 1.2.2 - New action Submit URL
-
-## References
-
-* [Cisco ThreatGrid](https://www.cisco.com/c/en/us/products/security/threat-grid/index.html)
-* [Cisco ThreatGrid API](https://panacea.threatgrid.com/mask/doc/mask/index)
-
-## Custom Output Types
-
-### behaviors
+#### behaviors
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -628,7 +618,7 @@ Examples:
 |threat|integer|False|Threat|
 |title|string|False|Title|
 
-### analyzed_file
+#### analyzed_file
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -639,7 +629,7 @@ Examples:
 |sha256|string|False|SHA256|
 |type|string|False|Type|
 
-### general_details
+#### general_details
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -647,7 +637,7 @@ Examples:
 |sandbox_id|string|False|Sandbox ID|
 |sandbox_version|string|False|Sandbox version|
 
-### malware_desc
+#### malware_desc
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -659,7 +649,7 @@ Examples:
 |size|integer|False|Size|
 |type|string|False|Type|
 
-### sandcastle_env
+#### sandcastle_env
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -675,7 +665,7 @@ Examples:
 |vm|string|False|VM|
 |vm_id|string|False|VM ID|
 
-### metadata
+#### metadata
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -685,7 +675,7 @@ Examples:
 |sandcastle_env|sandcastle_env|False|Sandcastle ENV|
 |submitted_file|analyzed_file|False|Submitted file|
 
-### analysis
+#### analysis
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -693,13 +683,13 @@ Examples:
 |metadata|metadata|False|Metadata|
 |threat_score|integer|False|Threat score|
 
-### properties
+#### properties
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |metadata|object|False|Metadata|
 
-### sample_report
+#### sample_report
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -719,7 +709,7 @@ Examples:
 |tags|[]string|False|Tags|
 |vm_runtime|integer|False|VM runtime|
 
-### submit_sample_data
+#### submit_sample_data
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -737,7 +727,7 @@ Examples:
 |tags|[]object|False|Tags|
 |vm|string|False|VM|
 
-### submit_sample_results
+#### submit_sample_results
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -745,14 +735,14 @@ Examples:
 |data|submit_sample_data|False|Data|
 |id|integer|False|ID|
 
-### file_transaction_process
+#### file_transaction_process
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |path|string|False|Path|
 |rolled_back|boolean|False|Rolled back|
 
-### error_process_data
+#### error_process_data
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -761,7 +751,7 @@ Examples:
 |number_of_params|integer|False|Number of params|
 |parameters|string|False|Parameters|
 
-### error_process
+#### error_process
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -769,14 +759,14 @@ Examples:
 |timestamp|float|False|Timestamp|
 |type|string|False|Type|
 
-### entry_process
+#### entry_process
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |base_address|string|False|Base address|
 |size|string|False|Size|
 
-### memory_process
+#### memory_process
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -787,7 +777,7 @@ Examples:
 |protect|[]string|False|Protect|
 |zero_bits|integer|False|Zero bits|
 
-### startup_info_process
+#### startup_info_process
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -803,7 +793,7 @@ Examples:
 |uthread|integer|False|Uthread|
 |window_title|string|False|Window title|
 
-### threads_process
+#### threads_process
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -814,7 +804,7 @@ Examples:
 |return|integer|False|Return|
 |thread|string|False|Thread|
 
-### process_analysis_item
+#### process_analysis_item
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -849,7 +839,7 @@ Examples:
 |threads|[]threads_process|False|Threads|
 |time|string|False|Time|
 
-### ClamAV_artifact
+#### ClamAV_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -858,7 +848,7 @@ Examples:
 |result|string|False|Result|
 |signature_version|string|False|Signature version|
 
-### classification_artifact
+#### classification_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -866,13 +856,13 @@ Examples:
 |platform|string|False|Platform|
 |type|string|False|Type|
 
-### query_hash_artifact
+#### query_hash_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |sha256|string|False|SHA256|
 
-### reversing_labs_artifact
+#### reversing_labs_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -887,7 +877,7 @@ Examples:
 |threat_name|string|False|Threat name|
 |trust_factor|integer|False|Trust factor|
 
-### yara_artifact
+#### yara_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -895,7 +885,7 @@ Examples:
 |id|string|False|Id|
 |tags|[]string|False|Tags|
 
-### antivirus_artifact
+#### antivirus_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -903,7 +893,7 @@ Examples:
 |reversing_labs|reversing_labs_artifact|False|Reversing labs|
 |yara|[]yara_artifact|False|Yara|
 
-### file_info_artifact
+#### file_info_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -916,7 +906,7 @@ Examples:
 |product_name|string|False|Product name|
 |product_version|string|False|Product version|
 
-### dos_artifact
+#### dos_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -929,7 +919,7 @@ Examples:
 |pages|integer|False|Pages|
 |size_in_paragraphs|integer|False|Size in paragraphs|
 
-### optional_header_artifact
+#### optional_header_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -947,7 +937,7 @@ Examples:
 |subsystem|integer|False|Subsystem|
 |type|integer|False|Type|
 
-### actual_artifact
+#### actual_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -955,7 +945,7 @@ Examples:
 |sha1|string|False|Sha1|
 |sha256|string|False|SHA256|
 
-### certificates_artifact
+#### certificates_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -965,13 +955,13 @@ Examples:
 |serial|string|False|Serial|
 |subject|string|False|Subject|
 
-### signed_artifact
+#### signed_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |sha256|string|False|SHA256|
 
-### certificate_artifact
+#### certificate_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -986,7 +976,7 @@ Examples:
 |timestamp|string|False|Timestamp|
 |url|string|False|URL|
 
-### pe_artifact
+#### pe_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1001,21 +991,21 @@ Examples:
 |tls_callback_rva|integer|False|Tls callback rva|
 |vt_import_hash|string|False|VT import hash|
 
-### headers_artifact
+#### headers_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |dos|dos_artifact|False|Dos|
 |pe|pe_artifact|False|PE|
 
-### imports_artifact
+#### imports_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |dll|string|False|DLL|
 |entries|[][]string|False|Entries|
 
-### resources_artifact
+#### resources_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1032,7 +1022,7 @@ Examples:
 |sublanguage|string|False|Sublanguage|
 |type|string|False|Type|
 
-### sections_artifact
+#### sections_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1046,7 +1036,7 @@ Examples:
 |size|integer|False|Size|
 |virtual_size|integer|False|Virtual size|
 
-### forensics_artifact
+#### forensics_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1059,7 +1049,7 @@ Examples:
 |sections|[]sections_artifact|False|Sections|
 |signatures|[]string|False|Signatures|
 
-### relation_artifact
+#### relation_artifact
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1068,7 +1058,7 @@ Examples:
 |network|[]string|False|Network|
 |process|[]string|False|Process|
 
-### artifact_analysis_item
+#### artifact_analysis_item
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1092,7 +1082,7 @@ Examples:
 |type|string|False|Type|
 |whitelist|[]object|False|Whitelist|
 
-### ioc_data
+#### ioc_data
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1101,7 +1091,7 @@ Examples:
 |Artifact_ID|integer|False|Artifact ID|
 |Path|string|False|Path|
 
-### ioc_analysis_item
+#### ioc_analysis_item
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1118,7 +1108,7 @@ Examples:
 |title|string|False|Title|
 |truncated|boolean|False|Truncated|
 
-### annotation_network
+#### annotation_network
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1130,25 +1120,25 @@ Examples:
 |reverse_dns|[]string|False|Reverse DNS list|
 |ts|integer|False|TS|
 
-### annotation_item
+#### annotation_item
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |network|[]annotation_network|False|Network|
 
-### artifact_analysis
+#### artifact_analysis
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |items|[]artifact_analysis_item|False|Items|
 
-### iocs_analysis
+#### iocs_analysis
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |items|[]ioc_analysis_item|False|Items|
 
-### network_headers
+#### network_headers
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1157,7 +1147,7 @@ Examples:
 |host|string|False|Host|
 |user-agent|string|False|User-agent|
 
-### network_decoded
+#### network_decoded
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1177,19 +1167,19 @@ Examples:
 |url|string|False|URL|
 |version|string|False|Version|
 
-### network_relation
+#### network_relation
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |process|[]integer|False|Process|
 
-### network_decoded_list
+#### network_decoded_list
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |decoded|[]network_decoded|False|List of decoded results|
 
-### network_streams_analysis
+#### network_streams_analysis
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1220,19 +1210,19 @@ Examples:
 |ts_end|float|False|Ts end|
 |uid|string|False|Uid|
 
-### processes_analysis
+#### processes_analysis
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |items|[]process_analysis_item|False|Items|
 
-### annotations_analysis
+#### annotations_analysis
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |items|annotation_network|False|Items|
 
-### general_details_metadata
+#### general_details_metadata
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1240,7 +1230,7 @@ Examples:
 |sandbox_id|string|False|Sandbox id|
 |sandbox_version|string|False|Sandbox version|
 
-### malware_desc_metadata
+#### malware_desc_metadata
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1252,7 +1242,7 @@ Examples:
 |size|integer|False|Size|
 |type|string|False|Type|
 
-### sandcastle_env_metadata
+#### sandcastle_env_metadata
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1267,7 +1257,7 @@ Examples:
 |vm|string|False|Vm|
 |vm_id|string|False|Vm id|
 
-### data_metadata
+#### data_metadata
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1275,7 +1265,7 @@ Examples:
 |malware_desc|[]malware_desc_metadata|False|Malware desc|
 |sandcastle_env|sandcastle_env_metadata|False|Sandcastle env|
 
-### artifact_report
+#### artifact_report
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1283,7 +1273,7 @@ Examples:
 |data|artifact_analysis|False|Data|
 |id|integer|False|ID|
 
-### iocs_report
+#### iocs_report
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1291,7 +1281,7 @@ Examples:
 |data|iocs_analysis|False|Data|
 |id|integer|False|ID|
 
-### network_streams_report
+#### network_streams_report
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1299,7 +1289,7 @@ Examples:
 |data|network_streams_analysis|False|Data|
 |id|integer|False|ID|
 
-### processes_report
+#### processes_report
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1307,7 +1297,7 @@ Examples:
 |data|processes_analysis|False|Data|
 |id|integer|False|ID|
 
-### annotations_report
+#### annotations_report
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1315,10 +1305,34 @@ Examples:
 |data|annotations_analysis|False|Data|
 |id|integer|False|ID|
 
-### metadata_report
+#### metadata_report
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |api_version|integer|False|API version|
 |data|data_metadata|False|Data|
 |id|integer|False|ID|
+
+## Troubleshooting
+
+_This plugin does not contain any troubleshooting information._
+
+# Version History
+
+* 1.2.2 - New action Submit URL
+* 1.2.1 - Bug fix for action Get Sample Analysis
+* 1.2.0 - New action Get Sample Analysis
+* 1.1.0 - New action Submit Sample
+* 1.0.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
+
+## References
+
+* [Cisco ThreatGrid](https://www.cisco.com/c/en/us/products/security/threat-grid/index.html)
+* [Cisco ThreatGrid API](https://panacea.threatgrid.com/mask/doc/mask/index)
+

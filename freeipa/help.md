@@ -1,25 +1,47 @@
-
-# FreeIPA
-
-## About
+# Description
 
 [FreeIPA](https://www.freeipa.org/) is an integrated Identity and Authentication solution for Linux/UNIX networked environments.
 This plugin runs commands on a FreeIPA server using this [freeipa](https://github.com/nordnet/python-freeipa-json) python library.
 The FreeIPA API is viewable on the FreeIPA server web interface.
 
-## Actions
+# Key Features
 
-### User Status
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|username|string|None|True|Username to logon to FreeIPA server|None|
+|password|password|None|True|Password|None|
+|server|string|None|True|The name of the FreeIPA server e.g. ipa.demo1.freeipa.org|None|
+
+## Technical Details
+
+### Actions
+
+#### User Status
 
 This action returns information on a user's status.
 
-### Input
+#### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username|string|None|True|The UID of the user to return status of|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -50,17 +72,17 @@ Example output:
 
 ```
 
-### Find User
+#### Find User
 
 This action is used to search for a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |search_parameters|string|None|False|A string to look for in relevant user fields. If blank will return all users with a return limit of 40000|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -172,17 +194,17 @@ Example output:
 
 ```
 
-### Show User
+#### Show User
 
 This action is used to return all available information on a specified user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username|string|None|True|The login name of the user to search for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -292,18 +314,18 @@ Example output:
 
 ```
 
-### Delete User
+#### Delete User
 
 This action is used to delete a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username|string|None|True|The UID of the user to delete|None|
 |preserve|boolean|None|True|If true the user will be preserved rather than deleted|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -320,38 +342,32 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Username to logon to FreeIPA server|None|
-|password|password|None|True|Password|None|
-|server|string|None|True|The name of the FreeIPA server e.g. ipa.demo1.freeipa.org|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 For the delete user action, setting `Preserve` to `True` will preserve the user rather than deleting them.
 Note that deletion is permanent and cannot be undone.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
 * 2.0.0 - Support web server mode | Update to new credential types
+* 1.0.0 - Initial plugin
 
-## Workflows
+# Links
 
-Examples:
+## Source Code
 
-* Deprovision a user
-* Look up user
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [FreeIPA Demo](https://ipa.demo1.freeipa.org)
 * [ipahttp library](https://github.com/nordnet/python-freeipa-json)
+

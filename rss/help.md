@@ -1,30 +1,51 @@
-
-# RSS
-
-## About
+# Description
 
 The RSS plugin can monitor any generic [RSS](https://en.wikipedia.org/wiki/RSS) feed.
 
 This plugin returns a generic `object` since each RSS feed can have its own data structure.
 Use [input templating](https://docs.komand.com/docs/input-templating), [Python Script plugin](https://docs.komand.com/docs/python-script-plugin), or the [JQ plugin](https://market.komand.com/plugins/komand/jq/0.1.3) to retrieve specific outputs.
 
-## Actions
+# Key Features
+
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin requires a RSS feed URL.
+
+The connection configuration accepts the following parameters:
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|False|Feed URL|None|
+
+## Technical Details
+
+### Actions
 
 This plugin does not contain any actions.
 
-## Triggers
+### Triggers
 
-### Poll Feed
+#### Poll Feed
 
 This trigger monitors an RSS feed for the latest event.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |frequency|integer|15|False|How frequently to poll for new events|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -143,35 +164,30 @@ Example output:
 
 ```
 
-## Connection
+### Custom Output Types
 
-This plugin requires a RSS feed URL.
-
-The connection configuration accepts the following parameters:
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|False|Feed URL|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Between workflow runs, new items will *not* be reported on.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Advisories
-* Security news
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Add granular object output
-* 1.0.1 - Support web server mode
 * 1.0.2 - Fixed issue where Poll Feed was logging unnecessary information
+* 1.0.1 - Support web server mode
+* 1.0.0 - Update to v2 Python plugin architecture | Add granular object output
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [feedparser](https://github.com/kurtmckee/feedparser)
 * [Input Templating](https://docs.komand.com/docs/input-templating)
+

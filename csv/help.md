@@ -1,19 +1,35 @@
-
-# CSV
-
-## About
+# Description
 
 [Comma Separated Value](https://en.wikipedia.org/wiki/Comma-separated_values) (CSV) is a common format to express data.
 This plugin allows one to extract fields from CSV strings and files.
 
-## Actions
+# Key Features
 
-### Filter Bytes
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Filter Bytes
 
 This action is used to extract fields from a user supplied CSV file expressed a base64 encoded data (bytes) and return a new CSV file
 with the extracted fields only.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -23,17 +39,17 @@ with the extracted fields only.
 Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to defined the extraction.
 For example, to extract fields 1, 2, 4, 5, 6 the following fields value can be used: `f1, f2, f4-6`.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |filtered|bytes|False|Filtered CSV file|
 
-### Filter String
+#### Filter String
 
 This action is used to extract fields from a user supplied CSV string and return a new CSV string with the extracted fields only.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -43,23 +59,23 @@ This action is used to extract fields from a user supplied CSV string and return
 Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to defined the extraction. For example, to extract fields
 1, 2, 4, 5, 6 the following fields value can be used: `f1, f2, f4-6`.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |string|string|False|Filtered CSV string|
 
-### To JSON
+#### To JSON
 
 This action is used to convert CSV to JSON.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |csv|bytes|None|True|Base64 encoded CSV file|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -88,17 +104,17 @@ Example output:
 
 ```
 
-### JSON to CSV
+#### JSON to CSV
 
 This action is used to convert a JSON array to CSV.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |json|[]object|None|True|JSON array to convert to CSV|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -114,36 +130,37 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Ensure that the supplied file or string is valid CSV. Any CSV files containing double-quotes will need to have them triple escaped to work properly.
 CSV files must not have non-CSV data such as comments.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Data format
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 0.1.2 - Update to v2 Python plugin architecture
-* 1.0.0 - Add CSV to JSON action | Support web server mode
-* 1.1.0 - Add JSON to CSV action
-* 1.1.1 - Fix JSON to CSV action to account for correct input type
-* 1.1.2 - Support webserver mode
 * 1.1.3 - Fix issue where connection tests were failing, output did not match spec
+* 1.1.2 - Support webserver mode
+* 1.1.1 - Fix JSON to CSV action to account for correct input type
+* 1.1.0 - Add JSON to CSV action
+* 1.0.0 - Add CSV to JSON action | Support web server mode
+* 0.1.2 - Update to v2 Python plugin architecture
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
+
+## Source Code
+
+https://github.com/rapid7/insightconnect-plugins
 
 ## References
 
 * [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)
+
