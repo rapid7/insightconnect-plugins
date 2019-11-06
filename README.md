@@ -1,8 +1,9 @@
 # InsightConnect Plugins
 
 We made a large number of our plugins open-source in order to benefit our customers, partners, and the greater community.
-The integrations here include some new, some old, and many that need a little TLC. We'll continue to add more over time based on user requests and our own updates.
-The full list of integrations is available on our [Marketplace](https://market.komand.com/).
+
+The integrations here include some new, some old, and many that are community supported. These are automatically released to the product marketplace from this repository for convenient orchestration.
+The full list of integrations is available on our [Marketplace](https://www.rapid7.com/marketplace/).
 
 For general questions and requests, reach out to us at `IntegrationAlliance@rapid7.com`.
 
