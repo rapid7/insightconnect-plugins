@@ -204,6 +204,92 @@ Example output:
 }
 ```
 
+### Submit File
+
+This action is used to submit a file to ThreatStream sandbox.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|classification|string|private|False|Classification of the Sandbox submission—public or private|['private', 'public']|
+|detail|string|None|False|A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"|None|
+|file|file|None|True|File to detonate|None|
+|platform|string|None|True|Platform on which the submitted URL or file will be run|['ALL', 'ANDROID4.4', 'ANDROID5.1', 'ANDROID6.0', 'MACOSX', 'WINDOWSXP', 'WINDOWSXPNATIVE', 'WINDOWS7', 'WINDOWS7NATIVE', 'WINDOWS7OFFICE2010', 'WINDOWS7OFFICE2013', 'WINDOWS10', 'WINDOWS10x64']|
+|use_premium_sandbox|boolean|None|True|Specify whether the premium sandbox should be used for detonation|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|reports|[]report|False|Reports containing submission details|
+|success|boolean|False|Operation status|
+
+Example output:
+
+```
+{
+  "success": true,
+  "reports": [
+    {
+      "status": "/api/v1/submit/101/",
+      "detail": "/api/v1/submit/101/report/",
+      "id": 101,
+      "platform": "WINDOWS7"
+    },
+    {
+      "status": "/api/v1/submit/100/",
+       "detail": "/api/v1/submit/100/report/",
+      "id": 100,
+      "platform": "WINDOWSXP"
+    }
+  ]
+}
+```
+
+### Submit URL
+
+This action is used to submit a URL to ThreatStream sandbox.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|classification|string|private|False|Classification of the Sandbox submission—public or private|['private', 'public']|
+|detail|string|None|False|A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"|None|
+|platform|string|None|True|Platform on which the submitted URL or file will be run|['ALL', 'ANDROID4.4', 'ANDROID5.1', 'ANDROID6.0', 'MACOSX', 'WINDOWSXP', 'WINDOWSXPNATIVE', 'WINDOWS7', 'WINDOWS7NATIVE', 'WINDOWS7OFFICE2010', 'WINDOWS7OFFICE2013', 'WINDOWS10', 'WINDOWS10x64']|
+|url|string|None|True|URL to detonate|None|
+|use_premium_sandbox|boolean|None|True|Specify whether the premium sandbox should be used for detonation|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|reports|[]report|False|Reports containing submission details|
+|success|boolean|False|Operation status|
+
+Example output:
+
+```
+{
+  "success": true,
+  "reports": [
+    {
+      "status": "/api/v1/submit/101/",
+      "detail": "/api/v1/submit/101/report/",
+      "id": 101,
+      "platform": "WINDOWS7"
+    },
+    {
+      "status": "/api/v1/submit/100/",
+       "detail": "/api/v1/submit/100/report/",
+      "id": 100,
+      "platform": "WINDOWSXP"
+    }
+  ]
+}
+```
+
 ## Triggers
 
 This plugin does not contain any triggers.
@@ -229,6 +315,7 @@ If you're unable to import data without approval, the Anomali user configured in
 * 2.0.0 - Support optional server SSL/TLS certificate validation
 * 3.0.0 - Add new action Get Observables | Rename action Add Approval Indicator to Import Observable | Add connection test
 * 3.0.1 - Update actions to use SSL Verify from connection settings
+* 3.1.0 - Add new actions Submit File and Submit URL
 
 ## Workflows
 
@@ -304,3 +391,11 @@ Examples:
 |job_id|string|False|Job ID|
 |success|boolean|False|If import was successful|
 
+### report
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|detail|string|False|None|
+|id|integer|False|Submission ID|
+|platform|string|False|Platform on which the submitted URL or file will be run|
+|status|string|False|None|
