@@ -1,9 +1,8 @@
 {
     "body": {
-        "action": "send_message",
+        "action": "remove_member_from_team",
         "input": {
-            "channel_name": "Komand Test Channel",
-            "message": "Hello from a comand line test.",
+            "member_login": "jmcadams@komanddev.onmicrosoft.com",
             "team_name": "Komand-Test-Everyone"
         },
         "meta": {}

@@ -47,7 +47,10 @@ class Connection(komand.Connection):
             result.raise_for_status()
         except Exception as e:
             raise PluginException(cause="Authentication to Microsoft Graph failed.",
-                                  assistance=result.text,
+                                  assistance=f"Some common causes for this error include an invalid username, password, or connection settings."
+                                             f"Verify you are using the correct domain name for your user, and verify that user has access to "
+                                             f"the target tenant. Verify you can log into Office365 with the user account as well.\n"
+                                             f"The result returned was:\n{result.text}",
                                   data=e) from e
 
         result_json = result.json()
