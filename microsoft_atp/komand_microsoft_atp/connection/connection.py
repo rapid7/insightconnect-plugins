@@ -114,6 +114,21 @@ class Connection(komand.Connection):
 
         return machines.json()
 
+    def translate_machine_name(self, name):
+        self.update_access_token()
+        translate_machine_name_endpoint = self.setup_translate_machine_name(name)
+
+        try:
+            machine = self.session.get(translate_machine_name_endpoint)
+        except Exception as e:
+            raise ConnectionTestException(cause="Connection error occurred while connecting to: {0}. Error "
+                                                "was: {1}".format(translate_machine_name_endpoint, str(e)),
+                                          assistance="Check connection settings for proper resource URL and host "
+                                                     "server. Verify application has Machine.Read.All permissions "
+                                                     "in the Azure portal."
+                                          )
+        return machine.json()
+
     def get_files_from_alert_id(self, id):
         self.update_access_token()
         file_id_endpoint = self.setup_get_files_endpoint(id)
@@ -230,6 +245,11 @@ class Connection(komand.Connection):
 
     def setup_stop_and_quarantine_endpoint(self, machine_id):
         endpoint_url = self.host_url + "/api/machines/" + machine_id + "/StopAndQuarantineFile"
+        return endpoint_url
+
+    def setup_translate_machine_name(self, name):
+        ending = f"/api/machines?computerDnsName={name}"
+        endpoint_url = self.host_url + ending
         return endpoint_url
 
     def setup_get_machines_endpoint(self, id):

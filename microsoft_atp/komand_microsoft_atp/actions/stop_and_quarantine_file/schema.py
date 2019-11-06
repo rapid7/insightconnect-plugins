@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Stop the execution of a file on a machine and delete it"
+
+
 class Input:
     COMMENT = "comment"
     MACHINE_ID = "machine_id"
@@ -39,8 +43,8 @@ class StopAndQuarantineFileInput(komand.Input):
     }
   },
   "required": [
-    "machine_id",
     "comment",
+    "machine_id",
     "sha1"
   ]
 }
@@ -98,7 +102,7 @@ class StopAndQuarantineFileOutput(komand.Output):
         "creationDateTimeUtc": {
           "type": "string",
           "title": "Creation Date Time UTC",
-          "description": "Creation date time utc",
+          "description": "Creation date time UTC",
           "order": 2
         },
         "id": {

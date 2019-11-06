@@ -1,12 +1,18 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: Windows Defender Advanced Threat Protection (ATP) is a unified platform
   for preventative protection, post-breach detection, automated investigation, and
   response
-version: 1.5.0
+version: 1.6.0
 vendor: rapid7
-status: ["unsupported"]
+support: rapid7
+status: []
+resources:
+  source_url:
+  license_url:
 tags:
 - windows
 - atp
@@ -55,7 +61,7 @@ types:
     ThreatFamily:
       type: string
     IocUniqueId:
-      title: IoC Unique ID
+      title: IOC Unique ID
       definition: Indicator of Compromise unique ID
       type: string
     LinkToWDATP:
@@ -79,7 +85,7 @@ types:
       title: SHA-1
       type: string
     CreatorIocName:
-      title: Creator IoC Name
+      title: Creator IOC Name
       type: string
     Url:
       title: URL
@@ -105,7 +111,7 @@ types:
       title: Threat Name
       type: string
     IocValue:
-      title: IoC Value
+      title: IOC Value
       definition: Indicator of Compromise value
       type: string
     WasExecutingWhileDetected:
@@ -119,7 +125,7 @@ types:
     FilePath:
       type: string
     IocName:
-      title: IoC Name
+      title: IOC Name
       definition: Indicator of Compromise name
       type: string
     ComputerDnsName:
@@ -347,7 +353,7 @@ types:
     creationDateTimeUtc:
       title: Creation Date Time UTC
       type: string
-      description: Creation date time utc
+      description: Creation date time UTC
       required: false
     machineId:
       title: Machine ID
@@ -580,6 +586,21 @@ actions:
         title: Machine Action Response
         description: A response that includes the result of the action, and supplemental
           information about the action taken
+        required: true
+  get_computer_id_from_name:
+    title: Get Computer ID from Machine Name
+    description: Transalte a machine name to computer ID
+    input:
+      machine_name:
+        title: Machine Name
+        description: Machine Name
+        required: true
+        type: string
+    output:
+      machine_id:
+        title: Machine ID
+        description: Machine ID
+        type: string
         required: true
 triggers:
   get_alert_for_id:

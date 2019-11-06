@@ -8,6 +8,30 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 ## Actions
 
+### Get Computer ID from Machine Name
+
+This action is used to transalte a machine name to computer ID.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|machine_name|string|None|True|Machine Name|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|machine_id|string|True|Machine ID|
+
+Example output:
+
+```
+{
+    "machine_name": "MyComputer"
+}
+```
+
 ### Get Machine ID from Alert
 
 This action is used to retrieve the machine ID related to an alert.
@@ -171,7 +195,7 @@ This action is used to stop the execution of a file on a machine and delete it.
 |----|----|-------|--------|-----------|----|
 |machine_id|string|None|True|Machine ID|None|
 |comment|string|None|True|Comment to associate with the stop and quarantine action|None|
-|sha1|string|None|True|Sha1 of the file to stop and quarantine on the machine|None|
+|sha1|string|None|True|SHA1 of the file to stop and quarantine on the machine|None|
 
 #### Output
 
@@ -194,7 +218,7 @@ Example output:
   "lastUpdateTimeUtc": "2018-12-04T12:15:04.3825985Z",
   "relatedFileInfo": {
       "fileIdentifier": "87662bc3d60e4200ceaf7aae249d1c343f4b83c9",
-      "fileIdentifierType": "Sha1"
+      "fileIdentifierType": "SHA1"
   }
 }
 ```
@@ -298,7 +322,7 @@ Example output:
          "Severity":"Medium",
          "AlertId":"636772141692393966_614861963",
          "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
+         "SHA1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
          "FileName":"powershell.exe",
          "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
          "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
@@ -351,7 +375,7 @@ Example output:
          "Severity":"Medium",
          "AlertId":"636772141692393966_614861963",
          "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
+         "SHA1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
          "FileName":"powershell.exe",
          "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
          "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
@@ -404,7 +428,7 @@ Example output:
          "Severity":"Medium",
          "AlertId":"636772141692393966_614861963",
          "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
+         "SHA1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
          "FileName":"powershell.exe",
          "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
          "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
@@ -457,7 +481,7 @@ Example output:
          "Severity":"Medium",
          "AlertId":"636772141692393966_614861963",
          "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
+         "SHA1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
          "FileName":"powershell.exe",
          "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
          "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
@@ -511,7 +535,7 @@ Example output:
          "Severity":"Medium",
          "AlertId":"636772141692393966_614861963",
          "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
+         "SHA1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
          "FileName":"powershell.exe",
          "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
          "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
@@ -564,7 +588,7 @@ Example output:
          "Severity":"Medium",
          "AlertId":"636772141692393966_614861963",
          "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
+         "SHA1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
          "FileName":"powershell.exe",
          "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
          "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
@@ -613,6 +637,7 @@ This plugin does not contain any troubleshooting information.
 * 1.3.0 - New actions Stop and Quarantine File and Run Antivirus Scan
 * 1.4.0 - New trigger Get Alerts | New action Get Machine Action
 * 1.5.0 - Fix issue where triggers always returned a blank payload
+* 1.6.0 - New action Get Machine ID from Alert
 
 ## Workflows
 

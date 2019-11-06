@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get alerts by file name"
+
+
 class Input:
     
     FILENAME = "filename"
@@ -107,7 +111,7 @@ class GetAlertForFileOutput(komand.Output):
         },
         "CreatorIocName": {
           "type": "string",
-          "title": "Creator IoC Name",
+          "title": "Creator IOC Name",
           "order": 27
         },
         "CreatorIocValue": {
@@ -167,17 +171,17 @@ class GetAlertForFileOutput(komand.Output):
         },
         "IocName": {
           "type": "string",
-          "title": "IoC Name",
+          "title": "IOC Name",
           "order": 42
         },
         "IocUniqueId": {
           "type": "string",
-          "title": "IoC Unique ID",
+          "title": "IOC Unique ID",
           "order": 18
         },
         "IocValue": {
           "type": "string",
-          "title": "IoC Value",
+          "title": "IOC Value",
           "order": 36
         },
         "IpAddress": {
