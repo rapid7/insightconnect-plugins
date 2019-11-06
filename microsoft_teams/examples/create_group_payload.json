@@ -1,0 +1,34 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
+  "id": "fc76886f-135c-422b-98f8-562fd7b4583f",
+  "deletedDateTime": null,
+  "classification": null,
+  "createdDateTime": "2019-11-04T17:47:26Z",
+  "creationOptions": [],
+  "description": "A test group to delete",
+  "displayName": "test_group_delete_me",
+  "groupTypes": [
+    "Unified"
+  ],
+  "isAssignableToRole": null,
+  "mail": "nickname_goes_here@komanddev.onmicrosoft.com",
+  "mailEnabled": true,
+  "mailNickname": "nickname_goes_here",
+  "onPremisesDomainName": null,
+  "onPremisesLastSyncDateTime": null,
+  "onPremisesNetBiosName": null,
+  "onPremisesSamAccountName": null,
+  "onPremisesSecurityIdentifier": null,
+  "onPremisesSyncEnabled": null,
+  "preferredDataLocation": null,
+  "proxyAddresses": [
+    "SMTP:nickname_goes_here@komanddev.onmicrosoft.com"
+  ],
+  "renewedDateTime": "2019-11-04T17:47:26Z",
+  "resourceBehaviorOptions": [],
+  "resourceProvisioningOptions": [],
+  "securityEnabled": false,
+  "securityIdentifier": "S-1-12-1-4235626607-1110119260-794228888-1062778071",
+  "visibility": "Public",
+  "onPremisesProvisioningErrors": []
+}

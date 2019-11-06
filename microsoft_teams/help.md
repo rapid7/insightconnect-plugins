@@ -203,6 +203,183 @@ Example output:
 }
 ```
 
+### Add Member to Team
+
+This action is used to add a member to a team.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|member_login|string|None|False|Member Login e.g. user@example.com|None|
+|team_name|string|None|True|Team Name|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Boolean indicating if this action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+### Add Channel to Team
+
+This action is used to add a channel to a team.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|channel_description|string|None|True|Channel description|None|
+|channel_name|string|None|True|Channel name|None|
+|team_name|string|None|True|Team name|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Boolean indicating if this action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+### Remove Channel from Team
+
+This action is used to remove a channel from a team.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|channel_name|string|None|True|Channel name|None|
+|team_name|string|None|True|Team name|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Boolean indicating if this action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+### Remove Member from Team
+
+This action is used to remove a member from a team.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|member_login|string|None|False|Member Login e.g. user@example.com|None|
+|team_name|string|None|True|Team Name|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Boolean indicating if this action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+### Create Teams Enabled Group
+
+This action is used to create a group in Azure and enable it for Microsoft Teams.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|group_description|string|None|True|Group Description|None|
+|group_name|string|None|True|Team name|None|
+|mail_enabled|boolean|None|False|should e-mail should be enabled for this group|None|
+|mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|
+|members|string[]|None|False|A list of usernames to set as members|None|
+|owners|string[]|None|False|A list of usernames to set as owners|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|group|group|False|Information about the group that was created|
+
+Example output:
+
+```
+{
+  "group": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
+    "id": "xxxxx-xxxx-xxx-xxxxx",
+    "createdDateTime": "2019-11-05T19:34:21Z",
+    "creationOptions": [],
+    "description": "Superheros",
+    "displayName": "Avengers",
+    "groupTypes": [
+      "Unified"
+    ],
+    "mail": "avengers@marvel.onmicrosoft.com",
+    "mailEnabled": true,
+    "mailNickname": "CMDTestDeleteMe",
+    "proxyAddresses": [
+      "SMTP:CMDTestDeleteMe@komanddev.onmicrosoft.com"
+    ],
+    "renewedDateTime": "2019-11-05T19:34:21Z",
+    "resourceBehaviorOptions": [],
+    "resourceProvisioningOptions": [],
+    "securityEnabled": false,
+    "securityIdentifier": "xxxx-xxxx-xxxx-xxxx",
+    "visibility": "Public",
+    "onPremisesProvisioningErrors": []
+  }
+}
+```
+
+### Delete Team
+
+This action is used to delete a team and the associated group from Azure.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|team_name|string|None|True|Team Name|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Boolean indicating if this action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 ## Triggers
 
 ### New Message Received
@@ -281,7 +458,8 @@ Examples:
 
 * 1.0.0 - Initial plugin
 * 1.0.1 - Fix issue where improper exception could be raised
-* 1.1.0 - New trigger New Message Received | New action Send HTML Message 
+* 1.1.0 - New trigger New Message Received | New action Send HTML Message
+* 1.2.0 - New actions Add Member to Team, Remove Member from Team, Create Teams Enabled Group, Delete Team, Add Channel to Team, and Remove Channel from Team
 
 ## References
 
@@ -340,3 +518,16 @@ Examples:
 |locale|string|False|Locale|
 |messageType|string|False|Message type|
 |webUrl|string|False|Web URL|
+
+### group
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|createdDateTime|string|False|Created date time|
+|description|string|False|Description|
+|displayName|string|False|Display Name|
+|id|string|False|ID|
+|mail|string|False|Mail|
+|mailEnabled|boolean|False|Mail enabled|
+|mailNickname|string|False|Mail Nickname|
+|securityEnabled|boolean|False|Security Enabled|

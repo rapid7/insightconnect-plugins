@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "delete_team",
+        "input": {
+            "team_name": "a_command_line_test_group_delete_me"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

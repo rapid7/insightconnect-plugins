@@ -1,9 +1,8 @@
 {
     "body": {
-        "action": "send_message",
+        "action": "remove_channel_from_team",
         "input": {
-            "channel_name": "Komand Test Channel",
-            "message": "Hello from a comand line test.",
+            "channel_name": "another_test_channel",
             "team_name": "Komand-Test-Everyone"
         },
         "meta": {}

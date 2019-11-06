@@ -1,9 +1,13 @@
 from komand.exceptions import PluginException
 import requests
 import re
+from logging import Logger
+import komand.connection
 
 
-def get_teams_from_microsoft(logger, connection, team_name=None):
+def get_teams_from_microsoft(logger: Logger,
+                             connection: komand.connection,
+                             team_name=None) -> list:
     """
     This will get teams from the Graph API. If a team_name is provided it will only return that team, or throw
     an error if that team is not found
@@ -48,7 +52,10 @@ def get_teams_from_microsoft(logger, connection, team_name=None):
     return teams
 
 
-def get_channels_from_microsoft(logger, connection, team_id, channel_name=None):
+def get_channels_from_microsoft(logger: Logger,
+                                connection: komand.connection,
+                                team_id: str,
+                                channel_name=None) -> list:
     """
     This will get all channels available to a team from the Graph API
     If the channel_name is provided it will only return that channel or throw an error
@@ -59,7 +66,7 @@ def get_channels_from_microsoft(logger, connection, team_id, channel_name=None):
     :param connection: (komand.connection)
     :param team_id: String
     :param channel_name: String
-    :return: Array
+    :return: list
     """
     compiled_channel_name = None
     if channel_name:
@@ -97,7 +104,11 @@ def get_channels_from_microsoft(logger, connection, team_id, channel_name=None):
     return channels
 
 
-def send_message(logger, connection, message, team_id, channel_id):
+def send_message(logger: Logger,
+                 connection: komand.connection,
+                 message: str,
+                 team_id: str,
+                 channel_id: str) -> dict:
     """
     Send a message to Teams
 
@@ -129,7 +140,11 @@ def send_message(logger, connection, message, team_id, channel_id):
     return message
 
 
-def send_html_message(logger, connection, message, team_id, channel_id):
+def send_html_message(logger: Logger,
+                      connection: komand.connection,
+                      message: str,
+                      team_id: str,
+                      channel_id: str) -> dict:
     """
     Send HTML content as a message to Teams
 
@@ -160,3 +175,76 @@ def send_html_message(logger, connection, message, team_id, channel_id):
 
     message = result.json()
     return message
+
+
+def create_channel(logger: Logger,
+                   connection: komand.connection,
+                   team_id: str,
+                   channel_name: str,
+                   description: str) -> bool:
+    """
+    Creates a channel for a given team
+
+    :param logger: (logging.logger)
+    :param connection: Object (komand.connection)
+    :param team_id: String
+    :param channel_name: String
+    :return: boolean
+    """
+
+    create_channel_endpoint = f"https://graph.microsoft.com/beta/teams/{team_id}/channels"
+    create_channel_paylaod = {
+      "description": description,
+      "displayName": channel_name
+    }
+
+    headers = connection.get_headers()
+
+    logger.info(f"Creating channel with: {create_channel_endpoint}")
+    result = requests.post(create_channel_endpoint, json=create_channel_paylaod, headers=headers)
+
+    try:
+        result.raise_for_status()
+    except Exception as e:
+        raise PluginException(cause=f"Create channel {channel_name} failed.",
+                              assistance=result.text) from e
+
+    if not result.status_code == 201:
+        raise PluginException(cause=f"Create channel returned an unexpected result.",
+                              assistance=result.text)
+
+    return True
+
+
+def delete_channel(logger: Logger,
+                   connection: komand.connection,
+                   team_id: str,
+                   channel_id: str) -> bool:
+    """
+    Deletes a channel for a given team
+
+    :param logger: (logging.logger)
+    :param connection: Object (komand.connection)
+    :param team_id: String
+    :param channel_id: String
+    :return: boolean
+    """
+
+    delete_channel_endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}"
+
+    headers = connection.get_headers()
+
+    logger.info(f"Deleting channel with: {delete_channel_endpoint}")
+    result = requests.delete(delete_channel_endpoint, headers=headers)
+
+    try:
+        result.raise_for_status()
+    except Exception as e:
+        raise PluginException(cause=f"Delete channel {channel_id} failed.",
+                              assistance=result.text) from e
+
+    if not result.status_code == 204:
+        raise PluginException(cause=f"Delete channel returned an unexpected result.",
+                              assistance=result.text)
+
+    return True

@@ -4,7 +4,7 @@ product: ["insightconnect"]
 name: microsoft_teams
 title: Microsoft Teams
 description: Microsoft Teams actions and triggers
-version: 1.1.0
+version: 1.2.0
 vendor: rapid7
 support: community
 status: []
@@ -118,6 +118,47 @@ types:
        type: string
        description: "ID"
        required: false
+  group:
+      mailNickname:
+        title: "Mail Nickname"
+        type: string
+        description: "Mail nickname"
+        required: false
+      id:
+        title: "ID"
+        type: string
+        description: "ID"
+        required: false
+      mail:
+        title: "Mail"
+        type: string
+        description: "Mail"
+        required: false
+      description:
+        title: "Description"
+        type: string
+        description: "Description"
+        required: false
+      securityEnabled:
+        title: "Security Enabled"
+        type: boolean
+        description: "Security enabled"
+        required: false
+      displayName:
+        title: "Display Name"
+        type: string
+        description: "Display name"
+        required: false
+      createdDateTime:
+        title: "Created Date Time"
+        type: string
+        description: "Created date time"
+        required: false
+      mailEnabled:
+        title: "Mail Enabled"
+        type: boolean
+        description: "Mail enabled"
+        required: false
 
 connection:
   application_id:
@@ -265,3 +306,160 @@ actions:
         description: The message object that was created
         type: message
         required: false
+  add_member_to_team:
+    title: Add Member to Team
+    description: Add a member to a team
+    input:
+      team_name:
+        title: Team Name
+        description: Team name
+        type: string
+        required: true
+        order: 1
+      member_login:
+        title: Member Login
+        description: Member login e.g. user@example.com
+        type: string
+        required: true
+        order: 2
+    output:
+      success:
+        title: Success
+        description: Boolean indicating if this action was successful
+        type: boolean
+        required: true
+  remove_member_from_team:
+    title: Remove Member from Team
+    description: Remove a member from a team
+    input:
+      team_name:
+        title: Team Name
+        description: Team name
+        type: string
+        required: true
+        order: 1
+      member_login:
+        title: Member Login
+        description: Member Login e.g. user@example.com
+        type: string
+        required: true
+        order: 2
+    output:
+      success:
+        title: Success
+        description: Boolean indicating if this action was successful
+        type: boolean
+        required: true
+  add_channel_to_team:
+    title: Add Channel to Team
+    description: Add a channel to a team
+    input:
+      team_name:
+        title: Team Name
+        description: Team name
+        type: string
+        required: true
+        order: 1
+      channel_name:
+        title: Channel Name
+        description: Channel name
+        type: string
+        required: true
+        order: 2
+      channel_description:
+        title: Channel Description
+        description: Channel description
+        type: string
+        required: true
+        order: 3
+    output:
+      success:
+        title: Success
+        description: Boolean indicating if this action was successful
+        type: boolean
+        required: true
+  remove_channel_from_team:
+    title: Remove Channel from Team
+    description: Remove a channel from a team
+    input:
+      team_name:
+        title: Team Name
+        description: Team name
+        type: string
+        required: true
+        order: 1
+      channel_name:
+        title: Channel Name
+        description: Channel name
+        type: string
+        required: true
+        order: 2
+    output:
+      success:
+        title: Success
+        description: Boolean indicating if this action was successful
+        type: boolean
+        required: true
+  create_teams_enabled_group:
+    title: Create Teams Enabled Group
+    description: Create a group in Azure and enable it for Microsoft Teams
+    input:
+      group_name:
+        title: Team Name
+        description: Team name
+        type: string
+        required: true
+        order: 1
+      group_description:
+        title: Group Description
+        description: Group description
+        type: string
+        required: true
+        order: 2
+      mail_nickname:
+        title: Mail Nickname
+        description: The nickname for the email address of this group in Outlook
+        type: string
+        required: true
+        order: 3
+      mail_enabled:
+        title: Mail Enabled
+        description: Should e-mail should be enabled for this group
+        type: boolean
+        required: true
+        order: 4
+      owners:
+        title: Owners
+        description: A list of usernames to set as owners
+        type: "string[]"
+        required: false
+        order: 5
+      members:
+        title: Members
+        description: A list of usernames to set as members
+        type: "string[]"
+        required: false
+        order: 6
+    output:
+      group:
+        title: Group
+        description: Information about the group that was created
+        type: group
+        required: false
+  delete_team:
+    title: Delete Team
+    description: Delete a team and the associated group from Azure
+    input:
+      team_name:
+        title: Team Name
+        description: Team Name
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: Boolean indicating if this action was successful
+        type: boolean
+        required: true
+
+
