@@ -57,13 +57,7 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-#### recommendation
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|confidence|number|False|Confidence|
-|encoding|string|False|Encoding|
-|language|string|False|Language|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

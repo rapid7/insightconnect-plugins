@@ -163,50 +163,7 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-#### investigation_metadata
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|index|integer|False|The 0 based index of the page retrieved|
-|size|integer|False|The size of the page requested|
-|total_data|integer|False|The total number of results available with the given filter parameters|
-|total_pages|integer|False|The total number of pages available with the given filter parameters|
-
-#### alerts
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|first_event_time|string|False|The time the first event involved in this alert occurred|
-|type|string|False|The alert's type|
-|type_description|string|False|An optional description of this type of alert|
-
-#### assignee
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|email|string|False|The email of the assigned user|
-|name|string|False|The name of the assigned user|
-
-#### investigation
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alerts|alerts|False|The alerts involved in this investigation if any|
-|assignee|assignee|False|The user assigned to this investigation if any|
-|created_time|string|False|The time the investigation was created as an ISO formatted timestamp|
-|id|string|False|The ID of the investigation|
-|source|string|False|The source of this investigation|
-|status|string|False|The status of the investigations|
-|title|string|False|The investigation's title|
-
-#### threat
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|indicator_count|integer|False|The number of indicators in this threat|
-|name|string|False|The name of the threat|
-|note|string|False|Notes about this threat|
-|published|boolean|False|Indicates whether this threat has been published|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

@@ -938,25 +938,7 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-#### create_result
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|documentId|string|False|Document ID|
-|replies|[]object|False|Replies|
-|writeControl|object|False|Write control|
-
-#### document
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|body|object|False|Body|
-|documentId|string|False|Document ID|
-|documentStyle|object|False|Document Style|
-|namedStyles|object|False|Named styles|
-|revisionId|string|False|Revision ID|
-|suggestionsViewMode|string|False|Suggestions view mode|
-|title|string|False|Title|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

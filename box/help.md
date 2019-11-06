@@ -401,14 +401,7 @@ This plugin does not contain any triggers.
 
 ### Custom Output Types
 
-#### group
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|group_id|string|False|Group ID|
-|role|string|False|Role|
-|type|string|False|Type|
-|user_id|string|False|User ID|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

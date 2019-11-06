@@ -216,25 +216,7 @@ This plugin does not contain any triggers.
 
 ### Custom Output Types
 
-#### serviceItem
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|appliesTo|string|True|Entity SKU applies to|
-|servicePlanId|string|False|Service Plan ID|
-|servicePlanName|string|False|Service Plan Name|
-
-#### skuItem
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|appliesTo|string|True|Entity SKU applies to|
-|capabilityStatus|string|False|Availability of SKU|
-|consumedUnits|integer|False|Consumed Units|
-|id|string|False|SKU item ID|
-|servicePlans|[]serviceItem|True|List of service plans|
-|skuId|string|True|SkuID|
-|skuPartNumber|string|True|SKU Part Number|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

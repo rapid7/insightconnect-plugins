@@ -60,12 +60,7 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-#### url_object
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|name|string|True|Name of URL object|
-|url|string|True|URL to block (max 400 chars)|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

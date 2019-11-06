@@ -289,41 +289,7 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-#### user_information
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|@odata.context|string|False|@odata.context|
-|accountEnabled|boolean|False|Account enabled|
-|businessPhones|[]string|False|Business phones|
-|displayName|string|False|Display name|
-|givenName|string|False|Given Name|
-|id|string|False|ID|
-|jobTitle|string|False|Job title|
-|mail|string|False|Mail|
-|mobilePhone|string|False|Mobile phone|
-|officeLocation|string|False|Office Location|
-|preferredLanguage|string|False|Preferred language|
-|surname|string|False|Surname|
-|userPrincipalName|string|False|User Principal Name|
-
-#### group
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|createdDateTime|string|False|Created date time|
-|description|string|False|Description|
-|displayName|string|False|Display name|
-|groupTypes|[]string|False|Group types|
-|id|string|False|ID|
-|isAssignableToRole|boolean|False|Is assignable to role|
-|mail|string|False|Mail|
-|mailEnabled|boolean|False|Mail enabled|
-|mailNickname|string|False|Mail nickname|
-|proxyAddresses|[]string|False|Proxy addresses|
-|renewedDateTime|string|False|Renewed date time|
-|securityEnabled|boolean|False|Security enabled|
-|visibility|string|False|Visibility|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

@@ -459,67 +459,7 @@ Example output:
 
 ### Custom Output Types
 
-#### team
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|description|string|False|Description|
-|displayName|string|False|Display name|
-|id|string|False|ID|
-
-#### channel
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|description|string|False|Description|
-|displayName|string|False|Display name|
-|id|string|False|ID|
-
-#### body
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|content|string|False|Content|
-|contentType|string|False|Content Type|
-
-#### user
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|displayName|string|False|Display name|
-|id|string|False|ID|
-
-#### from
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|user|user|False|User|
-
-#### message
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|body|body|False|Body|
-|createdDateTime|string|False|Created date time|
-|from|from|False|From|
-|id|string|False|ID|
-|importance|string|False|Importance|
-|locale|string|False|Locale|
-|messageType|string|False|Message type|
-|webUrl|string|False|Web URL|
-
-#### group
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|createdDateTime|string|False|Created date time|
-|description|string|False|Description|
-|displayName|string|False|Display Name|
-|id|string|False|ID|
-|mail|string|False|Mail|
-|mailEnabled|boolean|False|Mail enabled|
-|mailNickname|string|False|Mail Nickname|
-|securityEnabled|boolean|False|Security Enabled|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

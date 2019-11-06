@@ -69,29 +69,7 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-#### workspace_properties
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|compute_type_name|string|False|Compute type name|
-|root_volume_size|integer|False|Root volume size in gigabytes|
-|running_mode|string|False|Running mode|
-|running_mode_auto_stop_time_out|integer|False|Running mode auto stop time out in minutes. It should be a multiple of 60|
-|user_volume_size|integer|False|User volume size in gigabytes|
-
-#### tag
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|key|string|False|The key in a key-value pair of a tag|
-|value|string|False|The value in a key-value pair of a tag|
-
-#### workspace_id_state
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|string|True|ID of a created workspace|
-|state|string|True|Current status of a created workspace|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

@@ -283,17 +283,6 @@ This plugin does not contain any triggers.
 |mostRecentReport|string|False|Most recent report for this IP|
 |numReports|integer|False|Number of reports of this IP|
 
-### Workflows
-
-Examples:
-
-* Intelligence
-
-### References
-
-* [AbuseIPDB](https://www.abuseipdb.com)
-* [AbuseIPDB API](https://docs.abuseipdb.com)
-
 ## Troubleshooting
 
 There's a rate limit on the free API service. The following error messags `429 Client Error: Too Many Requests for url` indicates that threshold has been hit.

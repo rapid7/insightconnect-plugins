@@ -188,26 +188,7 @@ This plugin does not contain any triggers.
 
 ### Custom Output Types
 
-#### domain
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|AddedDate|string|False|The date and time (precision to the minute) the breach was added to the system in ISO 8601 format|
-|BreachDate|string|False|The date (with no time) the breach originally occurred on in ISO 8601 format|
-|DataClasses|[]string|False|This attribute describes the nature of the data compromised in the breach and contains an alphabetically ordered string array of impacted data classes|
-|Description|string|False|Contains an overview of the breach represented in HTML markup. The description may include markup such as emphasis and strong tags as well as hyperlinks|
-|Domain|string|False|The domain of the primary website the breach occurred on|
-|IsActive|boolean|False|Indicates if the breach investigation is ongoing.|
-|IsFabricated|boolean|False|Indicates that the breach is considered fabricated. A fabricated breach is unlikely to have been hacked from the indicated website and usually contains a large amount of manufactured data. However, it still contains legitimate email addresses and asserts that the account owners were compromised in the alleged breach|
-|IsRetired|boolean|False|Indicates if the breach has been retired|
-|IsSensitive|boolean|False|Indicates if the breach is considered sensitive. The public API will not return any accounts for a breach flagged as sensitive|
-|IsSpamList|boolean|False|Indicates if the breach is considered a spam list. This flag has no impact on any other attributes but it means that the data has not come as a result of a security compromise|
-|IsVerified|boolean|False|Indicates that the breach is considered verified|
-|LogoType|string|False|None|
-|ModifiedDate|string|False|The date and time (precision to the minute) the breach was modified in ISO 8601 format|
-|Name|string|False|A Pascal-cased name representing the breach which is unique across all other breaches|
-|PwnCount|integer|False|The total number of accounts loaded into the system|
-|Title|string|False|A descriptive title for the breach suitable for displaying to end users|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

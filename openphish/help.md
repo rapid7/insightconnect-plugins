@@ -66,13 +66,7 @@ Note that the trigger only returns data if the feed has changed since the last f
 
 ### Custom Output Types
 
-#### URLReputation
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|False|Was URL found in feed?|
-|matches|object|False|Object of URL matches found along with count|
-|total_matches|integer|False|Total URL matches found|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

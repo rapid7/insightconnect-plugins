@@ -715,73 +715,7 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-#### Archive
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|cls_name|string|True|Compressor class name|
-|extensions|[]string|True|Which extension are connected to archive?|
-|password|boolean|True|Is password required on archive?|
-|title|string|True|Title of compressed file|
-
-#### Module
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|description|string|False|Description of module|
-|name|string|False|Title of module|
-
-#### Project
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|name|string|False|Project name|
-
-#### Analysis
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|cmd_line|string|False|Command for running analysis|
-|id|integer|False|ID of analysis|
-|results|string|False|Result of analysis|
-|stored_at|string|False|Datetime when analysis was created|
-
-#### Note
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|body|string|False|Note description|
-|id|integer|False|Note ID|
-|title|string|False|Note title|
-
-#### Tag
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|integer|False|Tag ID|
-|tag|string|False|Tag name|
-
-#### Malware
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|analysis_set|[]Analysis|False|Analysis connected with malware|
-|crc32|string|False|CRC32 hash|
-|created_at|string|False|Date when the file was created|
-|id|integer|False|Malware ID|
-|md5|string|False|MD5 hash|
-|mime|string|False|MIME type|
-|name|string|False|Malware name|
-|note_set|[]Note|False|Notes added to malware|
-|parent|string|False|Parent file name|
-|parent_id|string|False|ID of parent file|
-|sha1|string|False|SHA1 hash|
-|sha256|string|False|SHA256 hash|
-|sha512|string|False|SHA512 hash|
-|size|integer|False|Size of malware file in bytes|
-|ssdeep|string|False|Ssdeep|
-|tag_set|[]Tag|False|Tags added to malware|
-|type|string|False|Malware type|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

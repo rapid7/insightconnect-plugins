@@ -404,16 +404,7 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-#### report
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|base_domain|string|False|Base domain|
-|dmarc|object|False|DMARC|
-|domain|string|False|Domain|
-|mx|object|False|MX|
-|ns|object|False|NS|
-|spf|object|False|SPF|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

@@ -72,7 +72,7 @@ class HelpUpdate:
         troubleshooting = "## Troubleshooting\n\n" + match.strip() + "\n\n"
 
         # grab custom types
-        pattern = "## Custom Output Types([\s\S]*)"
+        pattern = "## Custom Output Types([\s\S]*)## Workflows"
         try:
             match = re.findall(pattern, contents)[0]
             match = re.sub("# ", "## ", match)

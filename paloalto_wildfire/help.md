@@ -166,25 +166,7 @@ This plugin does not contain any triggers.
 
 ### Custom Output Types
 
-#### filedata
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|filename|string|False|None|
-|filetype|string|False|None|
-|md5|string|True|MD5 hash of file|
-|sha256|string|True|SHA256 hash of file|
-|size|string|True|File size|
-|supported_file_type|boolean|True|Boolean indicating whether the filetype of the sample is supported|
-|url|string|False|None|
-
-#### urldata
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|md5|string|True|MD5 hash of file|
-|sha256|string|True|SHA256 hash of file|
-|url|string|True|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 

@@ -260,66 +260,7 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-#### mobile_device
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|integer|True|Device ID|
-|mac_address|integer|True|MAC address|
-|name|string|True|Device name|
-|serial_number|string|True|Serial number|
-|udid|string|True|Unique device ID|
-|wifi_mac_address|string|True|WIFI MAC address|
-
-#### device_group_detail
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|integer|True|Group ID|
-|name|string|True|Group name|
-
-#### search_criteria
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|and_or|string|False|AND_OR|
-|closing_paren|boolean|False|Closing Parenthesis|
-|name|string|False|None|
-|opening_par|boolean|False|Opening Parenthesis|
-|priority|integer|False|Priority|
-|search_type|string|False|Search type|
-|value|string|False|Value|
-
-#### site_detail
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|integer|False|ID|
-|name|string|False|Name|
-
-#### group_detail
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|criteria|[]search_criteria|False|Criteria|
-|id|integer|False|Group ID|
-|is_smart|boolean|False|Is smart group|
-|mobile_devices|[]mobile_device|False|Mobile devices|
-|name|string|False|Group name|
-|site|site_detail|False|Site|
-
-#### user_location_detail
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|building|string|True|Building|
-|department|string|True|Department|
-|email_address|string|True|Email address|
-|phone|string|True|Phone|
-|position|string|True|Position|
-|real_name|string|True|Real name|
-|room|string|True|Room number|
-|username|string|True|Username|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
