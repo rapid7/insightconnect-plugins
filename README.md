@@ -149,7 +149,7 @@ You can also generate all samples for a plugin with this shorthand: `./run.sh -c
 
 ### Plugin Support
 
-The `status` key in a plugin's spec indicates which are officially supported by Rapid7 developers (rapid7) and which ones are supported by our ecosystem of external developers or by Rapid7 as best-effort (community).
+The `status` key in a plugin's `plugin.spec.yaml` file indicates which plugins are officially supported by Rapid7 developers (rapid7) and which ones are supported by our ecosystem of external developers or by Rapid7 as best-effort (community).
 
 ```
 $ grep '^support:' microsoft_teams/plugin.spec.yaml
