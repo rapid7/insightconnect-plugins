@@ -16,6 +16,10 @@ tags:
 - elk
 - log
 - elastic
+hub_tags:
+  use_cases: []
+  keywords: [logstash, elk, log, elastic]
+  features: []
 types:
   response:
     host:

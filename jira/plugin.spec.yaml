@@ -15,6 +15,10 @@ resources:
 tags:
 - ticket
 - Jira
+hub_tags:
+  use_cases: []
+  keywords: [ticket, Jira]
+  features: []
 types:
   user:
     name:

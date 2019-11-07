@@ -16,6 +16,10 @@ tags:
 - enterprise
 - issue
 - authentication
+hub_tags:
+  use_cases: []
+  keywords: [github, enterprise, issue, authentication]
+  features: []
 connection:
   credentials:
     title: GitHub Username and Password (or token)

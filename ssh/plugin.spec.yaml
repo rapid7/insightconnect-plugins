@@ -16,6 +16,10 @@ tags:
 - ssh
 - remote
 - tunnel
+hub_tags:
+  use_cases: []
+  keywords: [ssh, remote, tunnel]
+  features: []
 connection:
   username:
     type: credential_secret_key

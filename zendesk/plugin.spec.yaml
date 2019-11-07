@@ -16,6 +16,10 @@ tags:
 - zendesk
 - ticket
 - communication
+hub_tags:
+  use_cases: []
+  keywords: [zendesk, ticket, communication]
+  features: []
 types:
   ticket:
     attachment:

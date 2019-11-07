@@ -16,6 +16,10 @@ tags:
 - scrape
 - paste
 - post
+hub_tags:
+  use_cases: []
+  keywords: [scrape, paste, post]
+  features: []
 connection:
   key:
     type: credential_secret_key

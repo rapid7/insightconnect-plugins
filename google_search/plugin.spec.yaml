@@ -16,6 +16,10 @@ tags:
 - google
 - web
 - search
+hub_tags:
+  use_cases: []
+  keywords: [google, web, search]
+  features: []
 actions:
   search:
     title: Search

@@ -14,6 +14,10 @@ resources:
 tags:
 - geoip
 - ipstack
+hub_tags:
+  use_cases: []
+  keywords: [geoip, ipstack]
+  features: []
 connection:
   cred_token:
     type: credential_token

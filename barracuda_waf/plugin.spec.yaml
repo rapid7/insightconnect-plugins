@@ -20,6 +20,10 @@ tags:
 - web
 - application
 - firewall
+hub_tags:
+  use_cases: []
+  keywords: [barracuda, waf, web, application, firewall]
+  features: []
 types:
   vsite:
     id:

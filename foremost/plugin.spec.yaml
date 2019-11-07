@@ -16,6 +16,10 @@ tags:
 - extraction
 - forensics
 - carving
+hub_tags:
+  use_cases: []
+  keywords: [foremost, extraction, forensics, carving]
+  features: []
 actions:
   extract:
     title: Extract

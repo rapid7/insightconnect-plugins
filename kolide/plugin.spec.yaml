@@ -14,6 +14,10 @@ resources:
 tags:
 - kolide
 - osquery
+hub_tags:
+  use_cases: []
+  keywords: [kolide, osquery]
+  features: []
 connection:
   url:
     title: URL

@@ -15,6 +15,10 @@ tags:
 - wordpress
 - web
 - site
+hub_tags:
+  use_cases: []
+  keywords: [wordpress, web, site]
+  features: []
 connection:
   host:
     title: Host

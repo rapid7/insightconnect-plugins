@@ -16,6 +16,10 @@ resources:
 tags:
 - pdf
 - document
+hub_tags:
+  use_cases: []
+  keywords: [pdf, document]
+  features: []
 actions:
   generate_pdf:
     title: Generate PDF

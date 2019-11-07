@@ -14,6 +14,10 @@ resources:
 tags:
 - screenshot
 - url
+hub_tags:
+  use_cases: []
+  keywords: [screenshot, url]
+  features: []
 connection:
   key:
     title: API Key

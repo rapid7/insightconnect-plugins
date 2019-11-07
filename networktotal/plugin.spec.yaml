@@ -16,6 +16,10 @@ tags:
 - network total
 - suricata
 - Emerging Threats PRO
+hub_tags:
+  use_cases: []
+  keywords: [pcap, network total, suricata, Emerging Threats PRO]
+  features: []
 enable_cache: false
 actions:
   upload:

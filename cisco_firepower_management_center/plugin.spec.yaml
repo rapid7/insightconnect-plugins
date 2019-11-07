@@ -11,6 +11,10 @@ tags:
 - cisco
 - firesight
 - firepower
+hub_tags:
+  use_cases: []
+  keywords: [cisco, firesight, firepower]
+  features: []
 language: python
 types:
   url_object:

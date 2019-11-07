@@ -16,6 +16,10 @@ tags:
 - ip
 - geoip
 - minfraud
+hub_tags:
+  use_cases: []
+  keywords: [maxmind, ip, geoip, minfraud]
+  features: []
 types:
   city:
     confidence:

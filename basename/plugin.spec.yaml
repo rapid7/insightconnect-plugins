@@ -14,6 +14,10 @@ resources:
 tags:
 - basename
 - utilities
+hub_tags:
+  use_cases: []
+  keywords: [basename, utilities]
+  features: []
 actions:
   basename:
     title: Basename

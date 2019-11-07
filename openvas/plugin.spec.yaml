@@ -15,6 +15,10 @@ tags:
 - openvas
 - vulnerability
 - scanner
+hub_tags:
+  use_cases: []
+  keywords: [openvas, vulnerability, scanner]
+  features: []
 types:
   scan:
     name:

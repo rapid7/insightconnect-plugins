@@ -18,6 +18,10 @@ tags:
 - dns
 - traffic
 - domain
+hub_tags:
+  use_cases: []
+  keywords: [whois, security, threat, dns, traffic, domain]
+  features: []
 types:
   response:
     status_code:

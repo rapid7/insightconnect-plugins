@@ -15,6 +15,10 @@ tags:
 - url
 - analysis
 - intel
+hub_tags:
+  use_cases: []
+  keywords: [url, analysis, intel]
+  features: []
 types:
   page:
     asn:

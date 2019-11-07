@@ -22,6 +22,10 @@ tags:
 - xz
 - bytes
 - zip
+hub_tags:
+  use_cases: []
+  keywords: [compress, decompress, base64, file, gzip, bzip, lz, xz, bytes, zip]
+  features: []
 enable_cache: false
 actions:
   create_archive:

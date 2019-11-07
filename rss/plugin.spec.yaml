@@ -15,6 +15,10 @@ tags:
 - rss
 - atom
 - feed
+hub_tags:
+  use_cases: []
+  keywords: [rss, atom, feed]
+  features: []
 enable_cache: true
 language: python
 connection:

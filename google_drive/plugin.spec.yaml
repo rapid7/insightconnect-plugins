@@ -15,6 +15,10 @@ tags:
 - google
 - google drive
 - cloud storage
+hub_tags:
+  use_cases: []
+  keywords: [google, google drive, cloud storage]
+  features: []
 types:
   file_info:
     file_name:

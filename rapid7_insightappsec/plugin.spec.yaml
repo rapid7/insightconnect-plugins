@@ -14,6 +14,10 @@ resources:
 tags:
 - insightappsec
 - Rapid7
+hub_tags:
+  use_cases: []
+  keywords: [insightappsec, Rapid7]
+  features: []
 types:
   link:
     href:

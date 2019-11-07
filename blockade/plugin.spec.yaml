@@ -16,6 +16,10 @@ tags:
 - blockade
 - intel
 - chrome
+hub_tags:
+  use_cases: []
+  keywords: [blockade, intel, chrome]
+  features: []
 enable_cache: false
 types:
   metadata:

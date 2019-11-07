@@ -17,6 +17,10 @@ tags:
 - hive
 - intel
 - case
+hub_tags:
+  use_cases: []
+  keywords: [thehive, hive, intel, case]
+  features: []
 enable_cache: true
 language: python
 connection:

@@ -16,6 +16,10 @@ tags:
 - cloudlock
 - cloud
 - CASB
+hub_tags:
+  use_cases: []
+  keywords: [cisco, cloudlock, cloud, CASB]
+  features: []
 language: python
 types:
   vendor:

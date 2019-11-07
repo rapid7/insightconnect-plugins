@@ -15,6 +15,10 @@ tags:
 - office365
 - email
 - user access
+hub_tags:
+  use_cases: []
+  keywords: [office365, email, user access]
+  features: []
 
 types:
   serviceItem:

@@ -15,6 +15,10 @@ tags:
 - pagerduty
 - on call
 - incident
+hub_tags:
+  use_cases: []
+  keywords: [pagerduty, on call, incident]
+  features: []
 connection:
   api_key:
     title: API Key

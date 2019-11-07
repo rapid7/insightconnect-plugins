@@ -16,6 +16,10 @@ tags:
 - carbon black
 - cb
 - protection
+hub_tags:
+  use_cases: []
+  keywords: [carbon black, cb, protection]
+  features: []
 enable_cache: true
 connection:
   url:

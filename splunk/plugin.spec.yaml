@@ -16,6 +16,10 @@ tags:
 - splunk
 - siem
 - logs
+hub_tags:
+  use_cases: []
+  keywords: [splunk, siem, logs]
+  features: []
 connection:
   host:
     description: Hostname or IP address of Splunk server to connect to e.g. splunk.example.com

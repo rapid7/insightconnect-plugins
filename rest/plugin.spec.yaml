@@ -17,6 +17,10 @@ tags:
 - rpc
 - microservices
 - api
+hub_tags:
+  use_cases: []
+  keywords: [rest, http, rpc, microservices, api]
+  features: []
 enable_cache: true
 connection:
   base_url:

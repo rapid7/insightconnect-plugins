@@ -16,6 +16,10 @@ resources:
 tags:
 - opendxl
 - message broker
+hub_tags:
+  use_cases: []
+  keywords: [opendxl, message broker]
+  features: []
 connection:
   broker_ca:
     type: credential_asymmetric_key

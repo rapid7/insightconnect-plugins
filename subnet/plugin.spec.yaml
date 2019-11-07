@@ -17,6 +17,10 @@ tags:
 - netmask
 - network
 - utilities
+hub_tags:
+  use_cases: []
+  keywords: [subnet, ip, netmask, network, utilities]
+  features: []
 actions:
   calculate:
     title: Calculate

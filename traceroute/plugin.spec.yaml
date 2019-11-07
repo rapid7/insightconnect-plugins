@@ -14,6 +14,10 @@ resources:
 tags:
 - Tracerout
 - network diagnostics
+hub_tags:
+  use_cases: []
+  keywords: [Tracerout, network diagnostics]
+  features: []
 actions:
   traceroute:
     title: Traceroute

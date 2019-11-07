@@ -16,6 +16,10 @@ tags:
 - threat
 - analysis
 - aggregation
+hub_tags:
+  use_cases: []
+  keywords: [threat, analysis, aggregation]
+  features: []
 types:
   observable:
     value:

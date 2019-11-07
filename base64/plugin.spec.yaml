@@ -16,6 +16,10 @@ tags:
 - encoder
 - decoder
 - utilities
+hub_tags:
+  use_cases: []
+  keywords: [base64, encoder, decoder, utilities]
+  features: []
 actions:
   encode:
     title: Encoder

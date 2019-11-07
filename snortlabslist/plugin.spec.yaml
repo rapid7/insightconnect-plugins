@@ -15,6 +15,10 @@ tags:
 - ip
 - intel
 - reputation
+hub_tags:
+  use_cases: []
+  keywords: [ip, intel, reputation]
+  features: []
 actions:
   lookup:
     title: IP Lookup

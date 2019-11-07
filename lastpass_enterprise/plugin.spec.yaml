@@ -15,6 +15,10 @@ tags:
 - lastpass
 - password
 - vault
+hub_tags:
+  use_cases: []
+  keywords: [lastpass, password, vault]
+  features: []
 connection:
   account:
     title: Account

@@ -17,6 +17,10 @@ tags:
 - security advisories
 - feeds
 - cve
+hub_tags:
+  use_cases: []
+  keywords: [redhat, vulnerability management, security advisories, feeds, cve]
+  features: []
 types:
   reference:
     description:

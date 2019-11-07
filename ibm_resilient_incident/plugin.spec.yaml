@@ -16,6 +16,10 @@ tags:
 - resilient
 - orchestration
 - incident response
+hub_tags:
+  use_cases: []
+  keywords: [resilient, orchestration, incident response]
+  features: []
 enable_cache: false
 language: python
 types:

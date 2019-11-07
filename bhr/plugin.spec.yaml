@@ -15,6 +15,10 @@ tags:
 - block
 - ips
 - blackhole
+hub_tags:
+  use_cases: []
+  keywords: [block, ips, blackhole]
+  features: []
 enable_cache: false
 connection:
   ssl_verify:

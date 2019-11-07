@@ -16,6 +16,10 @@ tags:
 - pcap
 - passive
 - fingerprinting
+hub_tags:
+  use_cases: []
+  keywords: [p0f, pcap, passive, fingerprinting]
+  features: []
 actions:
   run:
     title: Run

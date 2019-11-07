@@ -19,6 +19,10 @@ tags:
 - docx
 - convert
 - utilities
+hub_tags:
+  use_cases: []
+  keywords: [markdown, html, pdf, epub, docx, convert, utilities]
+  features: []
 actions:
   validate:
     title: Validate

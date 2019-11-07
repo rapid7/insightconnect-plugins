@@ -15,6 +15,10 @@ resources:
 tags:
 - anomali
 - threatstream
+hub_tags:
+  use_cases: []
+  keywords: [anomali, threatstream]
+  features: []
 types:
   meta:
     limit:

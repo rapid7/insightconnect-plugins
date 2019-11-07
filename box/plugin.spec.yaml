@@ -17,6 +17,10 @@ tags:
 - cloud
 - storage
 - document
+hub_tags:
+  use_cases: []
+  keywords: [box, cloud, storage, document]
+  features: []
 types:
   group:
     user_id:
