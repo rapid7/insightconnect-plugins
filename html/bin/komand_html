@@ -6,7 +6,7 @@ from komand_html import connection, actions, triggers
 
 Name = 'HTML'
 Vendor = 'rapid7'
-Version = '1.1.0'
+Version = '1.2.0'
 Description = 'Validate or convert an HTML document'
 
 
