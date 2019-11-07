@@ -67,7 +67,7 @@ This plugin does not contain any troubleshooting information.
 
 * 1.0.0 - Initial plugin
 * 1.0.1 - Support web server mode
-* 1.0.2 - Regex bug fix
+* 1.0.2 - Bug fix to correct regex's search pattern
 
 ## Workflows
 
