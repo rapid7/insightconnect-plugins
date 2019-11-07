@@ -18,7 +18,7 @@ tags:
 - search
 hub_tags:
   use_cases: []
-  key_words: [google, web, search]
+  keywords: [google, web, search]
   features: []
 actions:
   search:

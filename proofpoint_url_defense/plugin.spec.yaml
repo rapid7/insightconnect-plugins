@@ -18,7 +18,7 @@ tags:
 - URL
 hub_tags:
   use_cases: []
-  key_words: [proofpoint, decode, URL]
+  keywords: [proofpoint, decode, URL]
   features: []
 actions:
   url_decode:

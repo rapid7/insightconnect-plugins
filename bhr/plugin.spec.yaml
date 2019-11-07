@@ -17,7 +17,7 @@ tags:
 - blackhole
 hub_tags:
   use_cases: []
-  key_words: [block, ips, blackhole]
+  keywords: [block, ips, blackhole]
   features: []
 enable_cache: false
 connection:

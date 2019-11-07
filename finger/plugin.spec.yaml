@@ -16,7 +16,7 @@ tags:
 - users
 hub_tags:
   use_cases: []
-  key_words: [finger, users]
+  keywords: [finger, users]
   features: []
 actions:
   finger:

@@ -20,7 +20,7 @@ tags:
 - wf
 hub_tags:
   use_cases: []
-  key_words: [palo, wildfire, intel, wf]
+  keywords: [palo, wildfire, intel, wf]
   features: []
 types:
   filedata:

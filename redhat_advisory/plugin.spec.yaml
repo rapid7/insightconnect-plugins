@@ -19,7 +19,7 @@ tags:
 - cve
 hub_tags:
   use_cases: []
-  key_words: [redhat, vulnerability management, security advisories, feeds, cve]
+  keywords: [redhat, vulnerability management, security advisories, feeds, cve]
   features: []
 types:
   reference:

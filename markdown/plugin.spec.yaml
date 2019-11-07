@@ -18,7 +18,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  key_words: [markdown, html, pdf, utilities]
+  keywords: [markdown, html, pdf, utilities]
   features: []
 actions:
   html_to_markdown:

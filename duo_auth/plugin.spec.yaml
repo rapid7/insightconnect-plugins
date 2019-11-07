@@ -16,7 +16,7 @@ tags:
 - auth
 hub_tags:
   use_cases: []
-  key_words: [duo, auth]
+  keywords: [duo, auth]
   features: []
 connection:
   integration_key:

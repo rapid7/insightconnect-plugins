@@ -18,7 +18,7 @@ tags:
 - chrome
 hub_tags:
   use_cases: []
-  key_words: [blockade, intel, chrome]
+  keywords: [blockade, intel, chrome]
   features: []
 enable_cache: false
 types:

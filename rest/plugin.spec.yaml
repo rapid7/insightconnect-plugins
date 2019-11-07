@@ -19,7 +19,7 @@ tags:
 - api
 hub_tags:
   use_cases: []
-  key_words: [rest, http, rpc, microservices, api]
+  keywords: [rest, http, rpc, microservices, api]
   features: []
 enable_cache: true
 connection:

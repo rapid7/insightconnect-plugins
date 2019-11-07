@@ -17,7 +17,7 @@ tags:
 - feed
 hub_tags:
   use_cases: []
-  key_words: [rss, atom, feed]
+  keywords: [rss, atom, feed]
   features: []
 enable_cache: true
 language: python

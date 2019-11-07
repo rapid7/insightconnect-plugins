@@ -17,7 +17,7 @@ tags:
 - variables
 hub_tags:
   use_cases: []
-  key_words: [utilities, variables]
+  keywords: [utilities, variables]
   features: []
 
 actions:

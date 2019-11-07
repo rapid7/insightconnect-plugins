@@ -16,7 +16,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  key_words: [diff, utilities]
+  keywords: [diff, utilities]
   features: []
 enable_cache: true
 actions:

@@ -16,7 +16,7 @@ tags:
 - ip lookup
 hub_tags:
   use_cases: []
-  key_words: [whois, ip lookup]
+  keywords: [whois, ip lookup]
   features: []
 actions:
   domain:

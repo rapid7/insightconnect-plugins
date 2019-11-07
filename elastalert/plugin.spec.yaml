@@ -17,7 +17,7 @@ tags:
 - alert
 hub_tags:
   use_cases: []
-  key_words: [elasticsearch, elk, alert]
+  keywords: [elasticsearch, elk, alert]
   features: []
 connection:
   credentials:

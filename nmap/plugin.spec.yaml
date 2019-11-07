@@ -18,7 +18,7 @@ tags:
 - network
 hub_tags:
   use_cases: []
-  key_words: [nmap, scanner, auditing, network]
+  keywords: [nmap, scanner, auditing, network]
   features: []
 types:
   addresses:

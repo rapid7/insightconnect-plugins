@@ -19,7 +19,7 @@ tags:
 - document
 hub_tags:
   use_cases: []
-  key_words: [box, cloud, storage, document]
+  keywords: [box, cloud, storage, document]
   features: []
 types:
   group:

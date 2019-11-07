@@ -18,7 +18,7 @@ tags:
 - authentication
 hub_tags:
   use_cases: []
-  key_words: [github, issue, authentication]
+  keywords: [github, issue, authentication]
   features: []
 types:
   organization:

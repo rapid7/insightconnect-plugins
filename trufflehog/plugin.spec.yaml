@@ -17,7 +17,7 @@ tags:
 - secret
 hub_tags:
   use_cases: []
-  key_words: [entropy, secret]
+  keywords: [entropy, secret]
   features: []
 - entropy-checks
 - regex

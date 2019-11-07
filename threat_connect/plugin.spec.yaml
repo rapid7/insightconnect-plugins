@@ -21,7 +21,7 @@ tags:
 - connect
 hub_tags:
   use_cases: []
-  key_words: [threat, malicious, analyze, manage, identify, connect]
+  keywords: [threat, malicious, analyze, manage, identify, connect]
   features: []
 types:
   filter:

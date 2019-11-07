@@ -20,7 +20,7 @@ tags:
 - rasp
 hub_tags:
   use_cases: []
-  key_words: [rapid7, web, waf, rasp]
+  keywords: [rapid7, web, waf, rasp]
   features: []
 types:
   app:

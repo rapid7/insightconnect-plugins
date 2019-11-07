@@ -18,7 +18,7 @@ tags:
 - short
 hub_tags:
   use_cases: []
-  key_words: [url, link, short]
+  keywords: [url, link, short]
   features: []
 enable_cache: false
 actions:

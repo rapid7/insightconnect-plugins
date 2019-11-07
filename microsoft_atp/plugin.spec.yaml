@@ -14,7 +14,7 @@ tags:
 - defender
 hub_tags:
   use_cases: []
-  key_words: [windows, atp, microsoft, defender]
+  keywords: [windows, atp, microsoft, defender]
   features: []
 types:
   alert:

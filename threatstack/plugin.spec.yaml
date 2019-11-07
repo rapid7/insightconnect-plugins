@@ -19,7 +19,7 @@ tags:
 - cloud
 hub_tags:
   use_cases: []
-  key_words: [threatstack, ts, cloud]
+  keywords: [threatstack, ts, cloud]
   features: []
 language: python
 connection:

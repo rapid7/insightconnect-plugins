@@ -17,7 +17,7 @@ tags:
 - lookup
 hub_tags:
   use_cases: []
-  key_words: [mxtoolbox, dns, lookup]
+  keywords: [mxtoolbox, dns, lookup]
   features: []
 types:
   MX_RelatedLookups:

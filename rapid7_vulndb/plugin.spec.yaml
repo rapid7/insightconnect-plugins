@@ -20,7 +20,7 @@ tags:
 - vulndb
 hub_tags:
   use_cases: []
-  key_words: [vulnerability, exploit, rapid7, database, vulndb]
+  keywords: [vulnerability, exploit, rapid7, database, vulndb]
   features: []
 enable_cache: true
 language: python

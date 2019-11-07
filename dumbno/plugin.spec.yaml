@@ -18,7 +18,7 @@ tags:
 - firewall
 hub_tags:
   use_cases: []
-  key_words: [dumbno, blocking, arista, firewall]
+  keywords: [dumbno, blocking, arista, firewall]
   features: []
 enable_cache: false
 connection:

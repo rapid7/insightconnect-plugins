@@ -17,7 +17,7 @@ tags:
 - incident
 hub_tags:
   use_cases: []
-  key_words: [pagerduty, on call, incident]
+  keywords: [pagerduty, on call, incident]
   features: []
 connection:
   api_key:

@@ -17,7 +17,7 @@ tags:
 - collisions
 hub_tags:
   use_cases: []
-  key_words: [sha1, hash, collisions]
+  keywords: [sha1, hash, collisions]
   features: []
 enable_cache: false
 actions:

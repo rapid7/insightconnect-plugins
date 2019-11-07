@@ -16,7 +16,7 @@ tags:
 - siem
 hub_tags:
   use_cases: []
-  key_words: [qradar, siem]
+  keywords: [qradar, siem]
   features: []
 types:
   recovery:

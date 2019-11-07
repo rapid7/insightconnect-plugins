@@ -18,7 +18,7 @@ tags:
 - ATT
 hub_tags:
   use_cases: []
-  key_words: [Threat, Exchange, ATT]
+  keywords: [Threat, Exchange, ATT]
   features: []
 types:
   groups:

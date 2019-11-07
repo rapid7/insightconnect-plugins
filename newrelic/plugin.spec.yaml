@@ -16,7 +16,7 @@ tags:
 - performance monitoring
 hub_tags:
   use_cases: []
-  key_words: [newrelic, performance monitoring]
+  keywords: [newrelic, performance monitoring]
   features: []
 connection:
   api_key:

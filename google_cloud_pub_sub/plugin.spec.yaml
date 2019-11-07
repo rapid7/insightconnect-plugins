@@ -17,7 +17,7 @@ tags:
 - message broker
 hub_tags:
   use_cases: []
-  key_words: [google cloud, message broker]
+  keywords: [google cloud, message broker]
   features: []
 connection:
   admin_user:

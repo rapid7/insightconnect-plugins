@@ -18,7 +18,7 @@ tags:
 - chat
 hub_tags:
   use_cases: []
-  key_words: [microsoft, teams, office 365, chat]
+  keywords: [microsoft, teams, office 365, chat]
   features: []
 types:
   team:

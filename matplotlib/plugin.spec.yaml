@@ -19,7 +19,7 @@ tags:
 - csv
 hub_tags:
   use_cases: []
-  key_words: [plotting, graphing, data, csv]
+  keywords: [plotting, graphing, data, csv]
   features: []
 actions:
   create_line_plot:

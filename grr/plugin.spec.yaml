@@ -20,7 +20,7 @@ tags:
 - list
 hub_tags:
   use_cases: []
-  key_words: [incident response, google, grr, hunt, label, list]
+  keywords: [incident response, google, grr, hunt, label, list]
   features: []
 enable_cache: true
 connection:

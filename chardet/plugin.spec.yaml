@@ -17,7 +17,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  key_words: [base64, encoder, utilities]
+  keywords: [base64, encoder, utilities]
   features: []
 
 types:

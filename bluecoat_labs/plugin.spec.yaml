@@ -18,7 +18,7 @@ tags:
 - URL
 hub_tags:
   use_cases: []
-  key_words: [bluecoat, categorize, URL]
+  keywords: [bluecoat, categorize, URL]
   features: []
 types:
   url_properties:

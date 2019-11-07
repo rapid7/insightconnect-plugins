@@ -16,7 +16,7 @@ tags:
 - pattern
 hub_tags:
   use_cases: []
-  key_words: [malware, pattern]
+  keywords: [malware, pattern]
   features: []
 types:
   results:

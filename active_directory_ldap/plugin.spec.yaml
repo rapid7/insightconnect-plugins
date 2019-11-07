@@ -16,7 +16,7 @@ tags:
 - active directory
 hub_tags:
   use_cases: []
-  key_words: [ldap, active directory]
+  keywords: [ldap, active directory]
   features: []
 types:
   result:

@@ -19,7 +19,7 @@ tags:
 - live response
 hub_tags:
   use_cases: []
-  key_words: [carbon black, live response]
+  keywords: [carbon black, live response]
   features: []
 types:
   session:

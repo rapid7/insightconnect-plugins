@@ -17,7 +17,7 @@ tags:
 - breach prevention
 hub_tags:
   use_cases: []
-  key_words: [threat intelligence, breach prevention]
+  keywords: [threat intelligence, breach prevention]
   features: []
 types:
   status:

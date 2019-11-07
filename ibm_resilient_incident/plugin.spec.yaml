@@ -18,7 +18,7 @@ tags:
 - incident response
 hub_tags:
   use_cases: []
-  key_words: [resilient, orchestration, incident response]
+  keywords: [resilient, orchestration, incident response]
   features: []
 enable_cache: false
 language: python

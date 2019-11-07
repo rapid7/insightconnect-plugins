@@ -17,7 +17,7 @@ tags:
 - malware analysis
 hub_tags:
   use_cases: []
-  key_words: [sandbox, malware, malware analysis]
+  keywords: [sandbox, malware, malware analysis]
   features: []
 types:
   vpn:

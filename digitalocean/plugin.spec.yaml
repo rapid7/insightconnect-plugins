@@ -19,7 +19,7 @@ tags:
 - vm
 hub_tags:
   use_cases: []
-  key_words: [digital ocean, vps, cloud, vm]
+  keywords: [digital ocean, vps, cloud, vm]
   features: []
 enable_cache: false
 types:

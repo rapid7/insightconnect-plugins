@@ -16,7 +16,7 @@ tags:
 - graphite
 hub_tags:
   use_cases: []
-  key_words: [graphite]
+  keywords: [graphite]
   features: []
 - graphite-api
 - metrics

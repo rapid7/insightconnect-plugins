@@ -19,7 +19,7 @@ tags:
 - phishing
 hub_tags:
   use_cases: []
-  key_words: [google, safe browsing, url, blacklist, phishing]
+  keywords: [google, safe browsing, url, blacklist, phishing]
   features: []
 enable_cache: false
 types:

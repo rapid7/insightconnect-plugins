@@ -16,7 +16,7 @@ tags:
 - url
 hub_tags:
   use_cases: []
-  key_words: [screenshot, url]
+  keywords: [screenshot, url]
   features: []
 connection:
   key:

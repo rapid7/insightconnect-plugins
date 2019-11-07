@@ -17,7 +17,7 @@ tags:
 - phishing
 hub_tags:
   use_cases: []
-  key_words: [komand, phishtank, phishing]
+  keywords: [komand, phishtank, phishing]
   features: []
 connection:
   credentials:

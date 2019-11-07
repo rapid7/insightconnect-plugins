@@ -19,7 +19,7 @@ tags:
 - database
 hub_tags:
   use_cases: []
-  key_words: [dynamodb, aws, amazon, database]
+  keywords: [dynamodb, aws, amazon, database]
   features: []
 enable_cache: true
 connection:

@@ -17,7 +17,7 @@ tags:
 - intel
 hub_tags:
   use_cases: []
-  key_words: [cortex, hive, intel]
+  keywords: [cortex, hive, intel]
   features: []
 types:
   analyzers:

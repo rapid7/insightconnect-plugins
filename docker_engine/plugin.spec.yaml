@@ -16,7 +16,7 @@ tags:
 - containers
 hub_tags:
   use_cases: []
-  key_words: [docker, containers]
+  keywords: [docker, containers]
   features: []
 types:
   image:

@@ -17,7 +17,7 @@ tags:
 - rapid7
 hub_tags:
   use_cases: []
-  key_words: [insightvm, rapid7]
+  keywords: [insightvm, rapid7]
   features: []
 types:
   report_id:

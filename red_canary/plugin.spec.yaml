@@ -17,7 +17,7 @@ tags:
 - response
 hub_tags:
   use_cases: []
-  key_words: [red canary, detection, response]
+  keywords: [red canary, detection, response]
   features: []
 enable_cache: true
 types:

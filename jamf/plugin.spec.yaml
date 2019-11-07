@@ -18,7 +18,7 @@ tags:
 - apple
 hub_tags:
   use_cases: []
-  key_words: [jamf, ios, mac, apple]
+  keywords: [jamf, ios, mac, apple]
   features: []
 
 types:

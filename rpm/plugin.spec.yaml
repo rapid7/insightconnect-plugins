@@ -16,7 +16,7 @@ tags:
 - package
 hub_tags:
   use_cases: []
-  key_words: [rpm, package]
+  keywords: [rpm, package]
   features: []
 enable_cache: true
 types:

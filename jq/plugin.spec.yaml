@@ -18,7 +18,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  key_words: [jq, JSON, sed for JSON, utilities]
+  keywords: [jq, JSON, sed for JSON, utilities]
   features: []
 actions:
   run_jq:

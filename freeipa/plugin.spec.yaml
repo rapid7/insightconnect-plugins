@@ -17,7 +17,7 @@ tags:
 - access control
 hub_tags:
   use_cases: []
-  key_words: [freeipa, access control]
+  keywords: [freeipa, access control]
   features: []
 types:
   show_user_out:

@@ -18,7 +18,7 @@ tags:
 - exchange
 hub_tags:
   use_cases: []
-  key_words: [facebook, threat, search, exchange]
+  keywords: [facebook, threat, search, exchange]
   features: []
 types:
   cursors:

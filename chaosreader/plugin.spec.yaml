@@ -20,7 +20,7 @@ tags:
 - session
 hub_tags:
   use_cases: []
-  key_words: [chaosreader, pcap, snoop, forensics, session]
+  keywords: [chaosreader, pcap, snoop, forensics, session]
   features: []
 types:
   count:

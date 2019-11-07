@@ -17,7 +17,7 @@ tags:
 - Jira
 hub_tags:
   use_cases: []
-  key_words: [ticket, Jira]
+  keywords: [ticket, Jira]
   features: []
 types:
   user:

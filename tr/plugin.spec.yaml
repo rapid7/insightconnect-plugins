@@ -18,7 +18,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  key_words: [tr, translate, text, utilities]
+  keywords: [tr, translate, text, utilities]
   features: []
 actions:
   replace:

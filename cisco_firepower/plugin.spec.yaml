@@ -19,7 +19,7 @@ tags:
 - firepower
 hub_tags:
   use_cases: []
-  key_words: [firewall, cisco, firesight, firepower]
+  keywords: [firewall, cisco, firesight, firepower]
   features: []
 language: python
 types:

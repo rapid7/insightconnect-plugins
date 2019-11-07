@@ -17,7 +17,7 @@ tags:
 - user provisioning
 hub_tags:
   use_cases: []
-  key_words: [google, admin, user provisioning]
+  keywords: [google, admin, user provisioning]
   features: []
 types:
   email:

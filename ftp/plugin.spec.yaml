@@ -16,7 +16,7 @@ tags:
 - authentication
 hub_tags:
   use_cases: []
-  key_words: [ftp, authentication]
+  keywords: [ftp, authentication]
   features: []
 enable_cache: true
 connection:

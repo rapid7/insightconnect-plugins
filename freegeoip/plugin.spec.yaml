@@ -17,7 +17,7 @@ tags:
 - location
 hub_tags:
   use_cases: []
-  key_words: [geoip, ip, location]
+  keywords: [geoip, ip, location]
   features: []
 actions:
   lookup:

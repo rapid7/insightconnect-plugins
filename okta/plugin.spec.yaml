@@ -20,7 +20,7 @@ tags:
 - enterprise
 hub_tags:
   use_cases: []
-  key_words: [okta, sso, provisioning, deprovisioning, saml, enterprise]
+  keywords: [okta, sso, provisioning, deprovisioning, saml, enterprise]
   features: []
 enable_cache: true
 types:

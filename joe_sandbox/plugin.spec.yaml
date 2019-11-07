@@ -20,7 +20,7 @@ tags:
 - automation
 hub_tags:
   use_cases: []
-  key_words: [security, malware, analysis, automation]
+  keywords: [security, malware, analysis, automation]
   features: []
 types:
   system:

@@ -16,7 +16,7 @@ tags:
 - wiki
 hub_tags:
   use_cases: []
-  key_words: [confluence, wiki]
+  keywords: [confluence, wiki]
   features: []
 types:
   page:

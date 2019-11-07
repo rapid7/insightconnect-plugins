@@ -16,7 +16,7 @@ tags:
 - tracking
 hub_tags:
   use_cases: []
-  key_words: [sentry, tracking]
+  keywords: [sentry, tracking]
   features: []
 types:
   Issue:

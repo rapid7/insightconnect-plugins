@@ -17,7 +17,7 @@ tags:
 - threatstream
 hub_tags:
   use_cases: []
-  key_words: [anomali, threatstream]
+  keywords: [anomali, threatstream]
   features: []
 types:
   meta:

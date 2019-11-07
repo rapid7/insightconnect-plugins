@@ -19,7 +19,7 @@ tags:
 - investigate
 hub_tags:
   use_cases: []
-  key_words: [cisco, umbrella, investigate]
+  keywords: [cisco, umbrella, investigate]
   features: []
 language: python
 types:

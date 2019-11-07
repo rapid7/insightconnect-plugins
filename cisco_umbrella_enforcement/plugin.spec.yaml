@@ -19,7 +19,7 @@ tags:
 - enforcement
 hub_tags:
   use_cases: []
-  key_words: [cisco, umbrella, enforcement]
+  keywords: [cisco, umbrella, enforcement]
   features: []
 language: python
 types:

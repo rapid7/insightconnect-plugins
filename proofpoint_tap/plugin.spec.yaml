@@ -17,7 +17,7 @@ tags:
 - parser
 hub_tags:
   use_cases: []
-  key_words: [Proofpoint, TAP, parser]
+  keywords: [Proofpoint, TAP, parser]
   features: []
 types:
   threat:

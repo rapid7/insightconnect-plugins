@@ -15,7 +15,7 @@ resources:
 tags:
 hub_tags:
   use_cases: []
-  key_words: []
+  keywords: []
   features: []
  - python
  - python3

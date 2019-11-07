@@ -20,7 +20,7 @@ tags:
 - file
 hub_tags:
   use_cases: []
-  key_words: [ThreatGrid, Cisco, malware, analysis, url, file]
+  keywords: [ThreatGrid, Cisco, malware, analysis, url, file]
   features: []
 
 types:

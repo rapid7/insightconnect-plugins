@@ -16,7 +16,7 @@ tags:
 - job
 hub_tags:
   use_cases: []
-  key_words: [komand, job]
+  keywords: [komand, job]
   features: []
 connection:
   url:
