@@ -15,6 +15,10 @@ resources:
 tags:
 - utilities
 - variables
+hub_tags:
+  use_cases: []
+  keywords: [utilities, variables]
+  features: []
 
 actions:
   store:

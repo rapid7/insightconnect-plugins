@@ -18,6 +18,10 @@ tags:
 - phishing
 - offense
 - pentest
+hub_tags:
+  use_cases: []
+  keywords: [sketchy, url, link, phishing, offense, pentest]
+  features: []
 enable_cache: false
 actions:
   sketchify:

@@ -18,6 +18,10 @@ tags:
 - wildfire
 - intel
 - wf
+hub_tags:
+  use_cases: []
+  keywords: [palo, wildfire, intel, wf]
+  features: []
 types:
   filedata:
     url:

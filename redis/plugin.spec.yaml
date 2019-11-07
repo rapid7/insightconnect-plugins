@@ -15,6 +15,10 @@ resources:
 tags:
 - database
 - redis
+hub_tags:
+  use_cases: []
+  keywords: [database, redis]
+  features: []
 connection:
   host:
     type: string

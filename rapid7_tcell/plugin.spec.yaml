@@ -18,6 +18,10 @@ tags:
 - web
 - waf
 - rasp
+hub_tags:
+  use_cases: []
+  keywords: [rapid7, web, waf, rasp]
+  features: []
 types:
   app:
     id:

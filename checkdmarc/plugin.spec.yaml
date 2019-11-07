@@ -16,6 +16,10 @@ tags:
 - SPF
 - DMARC DNS
 - DNS
+hub_tags:
+  use_cases: []
+  keywords: [checkdmarc, SPF, DMARC DNS, DNS]
+  features: []
 types:
   report:
     domain:

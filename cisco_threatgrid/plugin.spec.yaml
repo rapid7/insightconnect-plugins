@@ -18,6 +18,10 @@ tags:
 - analysis
 - url
 - file
+hub_tags:
+  use_cases: []
+  keywords: [ThreatGrid, Cisco, malware, analysis, url, file]
+  features: []
 
 types:
   behaviors:

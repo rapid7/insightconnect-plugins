@@ -16,6 +16,10 @@ tags:
 - es
 - search
 - elastic
+hub_tags:
+  use_cases: []
+  keywords: [elasticsearch, es, search, elastic]
+  features: []
 connection:
   url:
     title: URL

@@ -17,6 +17,10 @@ tags:
 - tenableio
 - scanner
 - vulnerability scanner
+hub_tags:
+  use_cases: []
+  keywords: [tenable, tenable.io, tenableio, scanner, vulnerability scanner]
+  features: []
 connection:
   access_key:
     type: credential_secret_key

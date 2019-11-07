@@ -18,6 +18,10 @@ tags:
 - network
 - location
 - wireless
+hub_tags:
+  use_cases: []
+  keywords: [network, location, wireless]
+  features: []
 types:
   token:
     authName:

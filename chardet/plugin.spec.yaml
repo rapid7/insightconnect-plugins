@@ -15,6 +15,10 @@ tags:
 - base64
 - encoder
 - utilities
+hub_tags:
+  use_cases: []
+  keywords: [base64, encoder, utilities]
+  features: []
 
 types:
   recommendation:

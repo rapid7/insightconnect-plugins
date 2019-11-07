@@ -15,6 +15,10 @@ tags:
 - komand
 - phishtank
 - phishing
+hub_tags:
+  use_cases: []
+  keywords: [komand, phishtank, phishing]
+  features: []
 connection:
   credentials:
     title: API Key

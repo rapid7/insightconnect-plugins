@@ -15,6 +15,10 @@ tags:
 - awk
 - regex
 - utilities
+hub_tags:
+  use_cases: []
+  keywords: [awk, regex, utilities]
+  features: []
 actions:
   process_string:
     title: Process String

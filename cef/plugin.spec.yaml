@@ -17,6 +17,10 @@ tags:
 - events
 - syslog
 - logs
+hub_tags:
+  use_cases: []
+  keywords: [cef, arcsight, events, syslog, logs]
+  features: []
 language: python
 types:
   cef:

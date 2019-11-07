@@ -16,6 +16,10 @@ tags:
 - github
 - issue
 - authentication
+hub_tags:
+  use_cases: []
+  keywords: [github, issue, authentication]
+  features: []
 types:
   organization:
     avatar_url:

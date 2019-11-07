@@ -14,6 +14,10 @@ resources:
 tags:
 - confluence
 - wiki
+hub_tags:
+  use_cases: []
+  keywords: [confluence, wiki]
+  features: []
 types:
   page:
     title:

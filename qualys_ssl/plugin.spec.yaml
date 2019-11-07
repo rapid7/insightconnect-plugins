@@ -16,6 +16,10 @@ tags:
 - ssl
 - certificate
 - qualys
+hub_tags:
+  use_cases: []
+  keywords: [ssl, certificate, qualys]
+  features: []
 types:
   key:
     size:

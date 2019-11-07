@@ -15,6 +15,10 @@ resources:
 tags:
 - threat intelligence
 - breach prevention
+hub_tags:
+  use_cases: []
+  keywords: [threat intelligence, breach prevention]
+  features: []
 types:
   status:
     code:

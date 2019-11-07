@@ -15,6 +15,10 @@ resources:
 tags:
 - freeipa
 - access control
+hub_tags:
+  use_cases: []
+  keywords: [freeipa, access control]
+  features: []
 types:
   show_user_out:
     sshpubkeyfp:

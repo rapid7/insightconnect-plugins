@@ -15,6 +15,10 @@ resources:
 tags:
 - mimecast
 - email
+hub_tags:
+  use_cases: []
+  keywords: [mimecast, email]
+  features: []
 
 types:
   managed_url:

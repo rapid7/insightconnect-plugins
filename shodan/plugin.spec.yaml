@@ -15,6 +15,10 @@ tags:
 - intel
 - scan
 - public
+hub_tags:
+  use_cases: []
+  keywords: [intel, scan, public]
+  features: []
 connection:
   token:
     type: credential_secret_key

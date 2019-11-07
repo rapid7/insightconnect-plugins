@@ -16,6 +16,10 @@ tags:
 - tweet
 - social networking
 - post
+hub_tags:
+  use_cases: []
+  keywords: [twitter, tweet, social networking, post]
+  features: []
 connection:
   consumer_credentials:
     type: credential_username_password

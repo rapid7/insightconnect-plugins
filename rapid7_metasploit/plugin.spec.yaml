@@ -15,6 +15,10 @@ tags:
 - metasploit
 - rapid7
 - penetration testing
+hub_tags:
+  use_cases: []
+  keywords: [metasploit, rapid7, penetration testing]
+  features: []
 enable_cache: true
 language: python
 types:

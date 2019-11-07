@@ -16,6 +16,10 @@ tags:
 - issue
 - authentication
 - git
+hub_tags:
+  use_cases: []
+  keywords: [bitbucket, issue, authentication, git]
+  features: []
 connection:
   credentials:
     description: Bitbucket username and password

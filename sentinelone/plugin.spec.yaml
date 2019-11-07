@@ -16,6 +16,10 @@ tags:
 - sentinelone
 - endpoint
 - detection
+hub_tags:
+  use_cases: []
+  keywords: [sentinelone, endpoint, detection]
+  features: []
 types:
   blacklist_data:
     affected:

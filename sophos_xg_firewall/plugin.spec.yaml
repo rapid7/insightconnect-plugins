@@ -15,6 +15,10 @@ tags:
 - Sophos
 - Endpoint
 - Firewall
+hub_tags:
+  use_cases: []
+  keywords: [Sophos, Endpoint, Firewall]
+  features: []
 types:
   securitypolicy:
     Name:

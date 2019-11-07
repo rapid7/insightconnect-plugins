@@ -15,6 +15,10 @@ resources:
 tags:
 - google cloud
 - message broker
+hub_tags:
+  use_cases: []
+  keywords: [google cloud, message broker]
+  features: []
 connection:
   admin_user:
     title: Admin User

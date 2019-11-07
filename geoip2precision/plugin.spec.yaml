@@ -16,6 +16,10 @@ tags:
 - geoip2
 - precision
 - ip
+hub_tags:
+  use_cases: []
+  keywords: [geoip, geoip2, precision, ip]
+  features: []
 connection:
   user:
     type: integer

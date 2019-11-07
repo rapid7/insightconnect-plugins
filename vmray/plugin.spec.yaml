@@ -15,6 +15,10 @@ tags:
 - sandbox
 - malware
 - malware analysis
+hub_tags:
+  use_cases: []
+  keywords: [sandbox, malware, malware analysis]
+  features: []
 types:
   analysis_serialized_result:
     code:

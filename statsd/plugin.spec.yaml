@@ -15,6 +15,10 @@ tags:
 - stats
 - statsd
 - graphite
+hub_tags:
+  use_cases: []
+  keywords: [stats, statsd, graphite]
+  features: []
 types:
   timeout:
     timeout:

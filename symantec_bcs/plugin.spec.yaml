@@ -15,6 +15,10 @@ tags:
 - symantec
 - bcs
 - security response
+hub_tags:
+  use_cases: []
+  keywords: [symantec, bcs, security response]
+  features: []
 actions:
   submit:
     title: Submit

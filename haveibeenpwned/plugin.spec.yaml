@@ -16,6 +16,10 @@ tags:
 - breach
 - compromise
 - pwn
+hub_tags:
+  use_cases: []
+  keywords: [breach, compromise, pwn]
+  features: []
 enable_cache: true
 
 connection:

@@ -15,6 +15,10 @@ resources:
 tags:
 - presto
 - pyhive
+hub_tags:
+  use_cases: []
+  keywords: [presto, pyhive]
+  features: []
 types:
   row:
     row:

@@ -15,6 +15,10 @@ version: 1.0.0
 tags:
 - aws
 - workspaces
+hub_tags:
+  use_cases: []
+  keywords: [aws, workspaces]
+  features: []
 types:
   workspace_properties:
     running_mode:

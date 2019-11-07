@@ -16,6 +16,10 @@ tags:
 - translate
 - text
 - utilities
+hub_tags:
+  use_cases: []
+  keywords: [tr, translate, text, utilities]
+  features: []
 actions:
   replace:
     title: Replace

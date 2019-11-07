@@ -14,6 +14,10 @@ resources:
 tags:
 - duo
 - auth
+hub_tags:
+  use_cases: []
+  keywords: [duo, auth]
+  features: []
 connection:
   integration_key:
     type: credential_secret_key

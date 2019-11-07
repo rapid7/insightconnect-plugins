@@ -17,6 +17,10 @@ tags:
 - integrity
 - files
 - utilities
+hub_tags:
+  use_cases: []
+  keywords: [hashes, crypto, integrity, files, utilities]
+  features: []
 actions:
   string:
     title: Hash String

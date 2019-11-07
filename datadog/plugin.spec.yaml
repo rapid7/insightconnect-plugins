@@ -46,6 +46,10 @@ types:
       type: "[]string"
       required: false
     tags:
+hub_tags:
+  use_cases: []
+  keywords: []
+  features: []
       title: "Tags"
       description: "A list of tags for the event"
       type: "[]string"

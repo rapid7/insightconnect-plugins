@@ -17,6 +17,10 @@ tags:
 - file transfer
 - samba
 - cifs
+hub_tags:
+  use_cases: []
+  keywords: [smb, file transfer, samba, cifs]
+  features: []
 types:
   share:
     name:

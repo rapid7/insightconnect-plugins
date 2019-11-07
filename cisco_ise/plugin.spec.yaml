@@ -15,6 +15,10 @@ resources:
 tags:
 - cisco
 - network access
+hub_tags:
+  use_cases: []
+  keywords: [cisco, network access]
+  features: []
 types:
   link:
     href:

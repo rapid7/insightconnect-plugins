@@ -15,6 +15,10 @@ resources:
 tags:
 - smtp
 - email
+hub_tags:
+  use_cases: []
+  keywords: [smtp, email]
+  features: []
 connection:
   host:
     description: Host of SMTP server to connect to

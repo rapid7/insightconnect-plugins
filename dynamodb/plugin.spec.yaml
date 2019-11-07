@@ -17,6 +17,10 @@ tags:
 - aws
 - amazon
 - database
+hub_tags:
+  use_cases: []
+  keywords: [dynamodb, aws, amazon, database]
+  features: []
 enable_cache: true
 connection:
   access_key:

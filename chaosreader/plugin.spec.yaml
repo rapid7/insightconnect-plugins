@@ -18,6 +18,10 @@ tags:
 - snoop
 - forensics
 - session
+hub_tags:
+  use_cases: []
+  keywords: [chaosreader, pcap, snoop, forensics, session]
+  features: []
 types:
   count:
     source:

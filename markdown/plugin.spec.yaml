@@ -16,6 +16,10 @@ tags:
 - html
 - pdf
 - utilities
+hub_tags:
+  use_cases: []
+  keywords: [markdown, html, pdf, utilities]
+  features: []
 actions:
   html_to_markdown:
     title: HTML to Markdown

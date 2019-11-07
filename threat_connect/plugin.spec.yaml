@@ -19,6 +19,10 @@ tags:
 - manage
 - identify
 - connect
+hub_tags:
+  use_cases: []
+  keywords: [threat, malicious, analyze, manage, identify, connect]
+  features: []
 types:
   filter:
     adversary_id:

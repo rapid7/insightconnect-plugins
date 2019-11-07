@@ -17,6 +17,10 @@ tags:
 - vps
 - cloud
 - vm
+hub_tags:
+  use_cases: []
+  keywords: [digital ocean, vps, cloud, vm]
+  features: []
 enable_cache: false
 types:
   snapshot:

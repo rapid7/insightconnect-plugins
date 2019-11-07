@@ -18,6 +18,10 @@ tags:
 - malware
 - analysis
 - automation
+hub_tags:
+  use_cases: []
+  keywords: [security, malware, analysis, automation]
+  features: []
 types:
   system:
     name:

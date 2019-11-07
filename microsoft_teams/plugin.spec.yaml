@@ -16,6 +16,10 @@ tags:
 - teams
 - office 365
 - chat
+hub_tags:
+  use_cases: []
+  keywords: [microsoft, teams, office 365, chat]
+  features: []
 types:
   team:
     displayName:

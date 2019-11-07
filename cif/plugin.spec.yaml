@@ -15,6 +15,10 @@ tags:
 - cif
 - intel
 - indicator
+hub_tags:
+  use_cases: []
+  keywords: [cif, intel, indicator]
+  features: []
 types:
   peers:
     asn:

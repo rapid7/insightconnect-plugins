@@ -17,6 +17,10 @@ tags:
 - cisco
 - umbrella
 - enforcement
+hub_tags:
+  use_cases: []
+  keywords: [cisco, umbrella, enforcement]
+  features: []
 language: python
 types:
   event:

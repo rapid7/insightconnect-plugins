@@ -15,6 +15,10 @@ tags:
 - dns
 - typo
 - squat
+hub_tags:
+  use_cases: []
+  keywords: [dns, typo, squat]
+  features: []
 triggers:
   search_certstream:
     title: Search Certstream

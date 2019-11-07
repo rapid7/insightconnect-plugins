@@ -17,6 +17,10 @@ tags:
 - Microsoft
 - safe
 - links
+hub_tags:
+  use_cases: []
+  keywords: [ATP, Microsoft, safe, links]
+  features: []
 actions:
   decode:
     title: Decode Safe Links

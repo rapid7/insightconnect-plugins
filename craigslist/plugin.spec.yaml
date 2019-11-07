@@ -18,6 +18,10 @@ tags:
 - stolen
 - events
 - physical
+hub_tags:
+  use_cases: []
+  keywords: [craigslist, sale, stolen, events, physical]
+  features: []
 types:
   sale_posting:
     name:

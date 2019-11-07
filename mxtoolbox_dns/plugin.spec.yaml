@@ -15,6 +15,10 @@ tags:
 - mxtoolbox
 - dns
 - lookup
+hub_tags:
+  use_cases: []
+  keywords: [mxtoolbox, dns, lookup]
+  features: []
 types:
   MX_RelatedLookups:
     Command:

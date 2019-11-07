@@ -16,6 +16,10 @@ tags:
 - threatq
 - threat
 - intel
+hub_tags:
+  use_cases: []
+  keywords: [threat quotient, threatq, threat, intel]
+  features: []
 types:
   indicator:
     last_detected_at:

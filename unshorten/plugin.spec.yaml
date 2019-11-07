@@ -16,6 +16,10 @@ tags:
 - url
 - link
 - short
+hub_tags:
+  use_cases: []
+  keywords: [url, link, short]
+  features: []
 enable_cache: false
 actions:
   unshorten:

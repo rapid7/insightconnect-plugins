@@ -15,6 +15,10 @@ tags:
 - sql
 - postgres
 - mssql
+hub_tags:
+  use_cases: []
+  keywords: [sql, postgres, mssql]
+  features: []
 connection:
   type:
     description: Database type (i.e. mysql, postgres... etc.)
