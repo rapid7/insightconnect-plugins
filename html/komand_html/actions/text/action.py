@@ -16,6 +16,8 @@ class Text(komand.Action):
         in_text = params.get(Input.DOC)
         if in_text: # BeautifulSoup will bomb on null text
             soup = BeautifulSoup(in_text, features='html.parser')
+            for script in soup(["script", "style"]):  # remove all javascript and stylesheet code
+                script.extract()
             output = soup.get_text()
             return {Output.TEXT: output}
         else:
