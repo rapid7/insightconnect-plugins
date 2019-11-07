@@ -1,5 +1,7 @@
 import komand
 import base64
+
+from komand.exceptions import PluginException
 import pypandoc
 import os
 import re
@@ -20,13 +22,12 @@ class Epub(komand.Action):
     tags = re.findall(tag_parser, params.get('doc'))
     try:
         if not len(tags):
-            raise Exception('Run: Input Invalid, Input must be of type HTML')
+            raise PluginException(cause='Run: Input Invalid',
+                                  assistance='Input must be of type HTML')
         pypandoc.convert(params.get('doc'), 'epub', outputfile=temp_file, format='html')
         with open(temp_file, 'rb') as output:
                 #Reading the output and sending it in base64
                 return {'epub': base64.b64encode(output.read()).decode('utf-8')}
-        os.remove(temp_file)
-
     except:
         return {'error': 'Error occurred please try again'}
 

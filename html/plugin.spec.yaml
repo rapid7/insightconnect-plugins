@@ -6,7 +6,7 @@ title: HTML
 vendor: rapid7
 support: community
 status: []
-description: Validate or convert an html document
+description: Validate or convert an HTML document
 version: 1.1.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/
@@ -129,6 +129,11 @@ actions:
         description: Document to transform
         type: string
         required: true
+      remove_scripts:
+        title: Remove Scripts
+        description: Remove scripts from doc as well as HTML
+        type: boolean
+        required: false
     output:
       text:
         title: Text

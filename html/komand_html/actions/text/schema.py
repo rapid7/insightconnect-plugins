@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     DOC = "doc"
+    REMOVE_SCRIPTS = "remove_scripts"
     
 
 class Output:
@@ -26,6 +27,12 @@ class TextInput(komand.Input):
       "title": "Document",
       "description": "Document to transform",
       "order": 1
+    },
+    "remove_scripts": {
+      "type": "boolean",
+      "title": "Remove Scripts",
+      "description": "Remove scripts from doc as well as HTML",
+      "order": 2
     }
   },
   "required": [

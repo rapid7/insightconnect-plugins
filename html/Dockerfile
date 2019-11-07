@@ -1,4 +1,4 @@
-FROM komand/python-3-plugin
+FROM komand/python-pypy3-full-plugin
 LABEL organization=rapid7
 LABEL sdk=python
 LABEL type=plugin
@@ -18,5 +18,8 @@ WORKDIR /python/src
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
+
+# needed for SSL
+USER root
 
 ENTRYPOINT ["/usr/local/bin/komand_html"]
