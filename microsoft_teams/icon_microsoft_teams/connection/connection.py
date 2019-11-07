@@ -40,6 +40,9 @@ class Connection(komand.Connection):
             "password": self.password
         }
 
+        if self.refresh_token:
+            body["refresh_token"] = self.refresh_token
+
         self.logger.info(f"Getting token from: {token_url}")
         result = requests.post(token_url, data=body)
 

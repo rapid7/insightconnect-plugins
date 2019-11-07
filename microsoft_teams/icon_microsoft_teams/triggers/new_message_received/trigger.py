@@ -53,9 +53,9 @@ class NewMessageReceived(komand.Trigger):
                 temp_time = most_recent_message_time
 
                 for message in sorted_messages:  # For each new message
-                    self.logger.info("Analyzing message...")
                     message = remove_null_and_clean(message)
                     if maya.parse(message.get("createdDateTime")) > last_time_we_checked:
+                        self.logger.info("Analyzing message...")
                         if message_content:
                             self.logger.info("Checking message content.")
                             if compiled_message_content.match(message.get("body", {}).get("content", "")):
