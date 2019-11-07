@@ -17,7 +17,7 @@ tags:
 - pcap
 hub_tags:
   use_cases: []
-  keywords: [tcpdump, nsm, pcap]
+  key_words: [tcpdump, nsm, pcap]
   features: []
 enable_cache: false
 actions:

@@ -311,7 +311,7 @@ actions:
   list_tags:
 hub_tags:
   use_cases: []
-  keywords: []
+  key_words: []
   features: []
     title: "Project Tags"
     description: "List tags for this project"

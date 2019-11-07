@@ -11,7 +11,7 @@ tags:
 - utility
 hub_tags:
   use_cases: []
-  keywords: [data manipulation, utility]
+  key_words: [data manipulation, utility]
   features: []
 enable_cache: true
 language: python

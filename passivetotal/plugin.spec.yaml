@@ -16,7 +16,7 @@ tags:
 - threat intelligence
 hub_tags:
   use_cases: []
-  keywords: [passivetotal, threat intelligence]
+  key_words: [passivetotal, threat intelligence]
   features: []
 connection:
   username:

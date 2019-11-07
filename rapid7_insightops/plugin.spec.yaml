@@ -18,7 +18,7 @@ tags:
 - monitoring
 hub_tags:
   use_cases: []
-  keywords: [InsightOps, log management, log, monitoring]
+  key_words: [InsightOps, log management, log, monitoring]
   features: []
 types:
   logsets_info_id:

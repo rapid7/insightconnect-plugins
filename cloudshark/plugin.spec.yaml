@@ -17,7 +17,7 @@ tags:
 - wireshark
 hub_tags:
   use_cases: []
-  keywords: [cloudshark, pcap, wireshark]
+  key_words: [cloudshark, pcap, wireshark]
   features: []
 connection:
   api_key:

@@ -20,7 +20,7 @@ tags:
 - vulnerability prioritization
 hub_tags:
   use_cases: []
-  keywords: [recorded future, threat intelligence, machine learning, threat analysis, vulnerability prioritization]
+  key_words: [recorded future, threat intelligence, machine learning, threat analysis, vulnerability prioritization]
   features: []
 enable_cache: false
 language: python

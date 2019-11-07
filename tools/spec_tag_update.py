@@ -26,7 +26,7 @@ def update_tags(spec_path):
     tags = ", ".join([tag.strip() for tag in match.split("-")[1:]])
     addition = f'''hub_tags:
   use_cases: []
-  keywords: [{tags}]
+  key_words: [{tags}]
   features: []
 '''
     content = content.replace(match, match + addition, 1)

@@ -17,7 +17,7 @@ tags:
 - Firewall
 hub_tags:
   use_cases: []
-  keywords: [Sophos, Endpoint, Firewall]
+  key_words: [Sophos, Endpoint, Firewall]
   features: []
 types:
   securitypolicy:

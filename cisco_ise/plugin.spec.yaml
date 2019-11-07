@@ -17,7 +17,7 @@ tags:
 - network access
 hub_tags:
   use_cases: []
-  keywords: [cisco, network access]
+  key_words: [cisco, network access]
   features: []
 types:
   link:

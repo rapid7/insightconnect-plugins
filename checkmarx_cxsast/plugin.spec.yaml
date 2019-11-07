@@ -16,7 +16,7 @@ tags:
 - static analysis
 hub_tags:
   use_cases: []
-  keywords: [SAST, static analysis]
+  key_words: [SAST, static analysis]
   features: []
 types:
   custom_field:

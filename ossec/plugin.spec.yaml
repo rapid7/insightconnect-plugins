@@ -16,7 +16,7 @@ tags:
 - hids
 hub_tags:
   use_cases: []
-  keywords: [ossec, hids]
+  key_words: [ossec, hids]
   features: []
 types:
   syscheck_alert:

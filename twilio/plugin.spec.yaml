@@ -16,7 +16,7 @@ tags:
 - SMS
 hub_tags:
   use_cases: []
-  keywords: [twilio, SMS]
+  key_words: [twilio, SMS]
   features: []
 connection:
   twilio_phone_number:

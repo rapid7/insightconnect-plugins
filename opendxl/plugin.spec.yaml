@@ -18,7 +18,7 @@ tags:
 - message broker
 hub_tags:
   use_cases: []
-  keywords: [opendxl, message broker]
+  key_words: [opendxl, message broker]
   features: []
 connection:
   broker_ca:

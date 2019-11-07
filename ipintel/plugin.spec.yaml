@@ -17,7 +17,7 @@ tags:
 - threat
 hub_tags:
   use_cases: []
-  keywords: [ipintel, intel, threat]
+  key_words: [ipintel, intel, threat]
   features: []
 types:
   intel:

@@ -18,7 +18,7 @@ tags:
 - elastic
 hub_tags:
   use_cases: []
-  keywords: [elasticsearch, es, search, elastic]
+  key_words: [elasticsearch, es, search, elastic]
   features: []
 connection:
   url:

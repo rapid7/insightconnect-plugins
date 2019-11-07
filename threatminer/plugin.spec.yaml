@@ -20,7 +20,7 @@ tags:
 - domain
 hub_tags:
   use_cases: []
-  keywords: [whois, security, threat, dns, traffic, domain]
+  key_words: [whois, security, threat, dns, traffic, domain]
   features: []
 types:
   response:

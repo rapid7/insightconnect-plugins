@@ -17,7 +17,7 @@ tags:
 - email
 hub_tags:
   use_cases: []
-  keywords: [mimecast, email]
+  key_words: [mimecast, email]
   features: []
 
 types:

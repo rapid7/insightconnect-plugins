@@ -17,7 +17,7 @@ tags:
 - redis
 hub_tags:
   use_cases: []
-  keywords: [database, redis]
+  key_words: [database, redis]
   features: []
 connection:
   host:

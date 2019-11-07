@@ -17,7 +17,7 @@ tags:
 - workspaces
 hub_tags:
   use_cases: []
-  keywords: [aws, workspaces]
+  key_words: [aws, workspaces]
   features: []
 types:
   workspace_properties:

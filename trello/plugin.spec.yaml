@@ -17,7 +17,7 @@ tags:
 - lists
 hub_tags:
   use_cases: []
-  keywords: [trello, lists]
+  key_words: [trello, lists]
   features: []
 connection:
   version:

@@ -17,7 +17,7 @@ tags:
 - squat
 hub_tags:
   use_cases: []
-  keywords: [dns, typo, squat]
+  key_words: [dns, typo, squat]
   features: []
 triggers:
   search_certstream:

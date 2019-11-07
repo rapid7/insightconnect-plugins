@@ -20,7 +20,7 @@ tags:
 - wireless
 hub_tags:
   use_cases: []
-  keywords: [network, location, wireless]
+  key_words: [network, location, wireless]
   features: []
 types:
   token:

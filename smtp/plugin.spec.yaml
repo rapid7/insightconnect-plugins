@@ -17,7 +17,7 @@ tags:
 - email
 hub_tags:
   use_cases: []
-  keywords: [smtp, email]
+  key_words: [smtp, email]
   features: []
 connection:
   host:

@@ -16,7 +16,7 @@ tags:
 - agile
 hub_tags:
   use_cases: []
-  keywords: [grafana, agile]
+  key_words: [grafana, agile]
   features: []
 types:
   organization_user:

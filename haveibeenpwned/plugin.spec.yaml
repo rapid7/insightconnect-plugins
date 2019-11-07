@@ -18,7 +18,7 @@ tags:
 - pwn
 hub_tags:
   use_cases: []
-  keywords: [breach, compromise, pwn]
+  key_words: [breach, compromise, pwn]
   features: []
 enable_cache: true
 

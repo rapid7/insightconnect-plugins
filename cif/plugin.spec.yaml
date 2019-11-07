@@ -17,7 +17,7 @@ tags:
 - indicator
 hub_tags:
   use_cases: []
-  keywords: [cif, intel, indicator]
+  key_words: [cif, intel, indicator]
   features: []
 types:
   peers:

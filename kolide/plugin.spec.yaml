@@ -16,7 +16,7 @@ tags:
 - osquery
 hub_tags:
   use_cases: []
-  keywords: [kolide, osquery]
+  key_words: [kolide, osquery]
   features: []
 connection:
   url:

@@ -16,7 +16,7 @@ tags:
 - logs
 hub_tags:
   use_cases: []
-  keywords: [syslog, logs]
+  key_words: [syslog, logs]
   features: []
 enable_cache: false
 connection:

@@ -48,7 +48,7 @@ types:
     tags:
 hub_tags:
   use_cases: []
-  keywords: []
+  key_words: []
   features: []
       title: "Tags"
       description: "A list of tags for the event"

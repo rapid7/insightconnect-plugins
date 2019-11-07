@@ -18,7 +18,7 @@ tags:
 - post
 hub_tags:
   use_cases: []
-  keywords: [twitter, tweet, social networking, post]
+  key_words: [twitter, tweet, social networking, post]
   features: []
 connection:
   consumer_credentials:

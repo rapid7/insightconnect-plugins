@@ -17,7 +17,7 @@ tags:
 - intel
 hub_tags:
   use_cases: []
-  keywords: [url, analysis, intel]
+  key_words: [url, analysis, intel]
   features: []
 types:
   page:

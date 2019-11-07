@@ -16,7 +16,7 @@ tags:
 - dns
 hub_tags:
   use_cases: []
-  keywords: [dig, dns]
+  key_words: [dig, dns]
   features: []
 actions:
   forward:

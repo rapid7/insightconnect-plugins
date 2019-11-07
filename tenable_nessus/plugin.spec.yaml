@@ -18,7 +18,7 @@ tags:
 - vulnerability scanner
 hub_tags:
   use_cases: []
-  keywords: [tenable, nessus, vulnerability scanner]
+  key_words: [tenable, nessus, vulnerability scanner]
   features: []
 types:
   scanner:

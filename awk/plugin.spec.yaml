@@ -17,7 +17,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  keywords: [awk, regex, utilities]
+  key_words: [awk, regex, utilities]
   features: []
 actions:
   process_string:

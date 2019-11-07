@@ -18,7 +18,7 @@ tags:
 - ids
 hub_tags:
   use_cases: []
-  keywords: [bro, nsm, pcap, ids]
+  key_words: [bro, nsm, pcap, ids]
   features: []
 enable_cache: false
 connection:

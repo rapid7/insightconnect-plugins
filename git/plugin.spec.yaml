@@ -17,7 +17,7 @@ tags:
 - repository
 hub_tags:
   use_cases: []
-  keywords: [git, version control, repository]
+  key_words: [git, version control, repository]
   features: []
 connection:
   url:

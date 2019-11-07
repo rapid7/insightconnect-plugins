@@ -18,7 +18,7 @@ tags:
 - reporting
 hub_tags:
   use_cases: []
-  keywords: [kintone, data, workflow, reporting]
+  key_words: [kintone, data, workflow, reporting]
   features: []
 
 connection: 

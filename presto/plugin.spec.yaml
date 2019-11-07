@@ -17,7 +17,7 @@ tags:
 - pyhive
 hub_tags:
   use_cases: []
-  keywords: [presto, pyhive]
+  key_words: [presto, pyhive]
   features: []
 types:
   row:

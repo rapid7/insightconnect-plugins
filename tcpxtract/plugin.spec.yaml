@@ -19,7 +19,7 @@ tags:
 - carving
 hub_tags:
   use_cases: []
-  keywords: [tcpxtract, pcap, extraction, forensics, carving]
+  key_words: [tcpxtract, pcap, extraction, forensics, carving]
   features: []
 actions:
   extract:

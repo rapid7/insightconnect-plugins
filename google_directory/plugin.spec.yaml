@@ -18,7 +18,7 @@ tags:
 - directory
 hub_tags:
   use_cases: []
-  keywords: [google, admin, directory]
+  key_words: [google, admin, directory]
   features: []
 types:
   user:

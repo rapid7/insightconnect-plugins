@@ -19,7 +19,7 @@ tags:
 - ftp
 hub_tags:
   use_cases: []
-  keywords: [url, file, download, http, ftp]
+  key_words: [url, file, download, http, ftp]
   features: []
 enable_cache: true
 triggers:

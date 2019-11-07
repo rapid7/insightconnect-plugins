@@ -16,7 +16,7 @@ tags:
 - intel
 hub_tags:
   use_cases: []
-  keywords: [cymon, intel]
+  key_words: [cymon, intel]
   features: []
 connection:
   api_key:

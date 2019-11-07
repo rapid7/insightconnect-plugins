@@ -17,7 +17,7 @@ tags:
 - public
 hub_tags:
   use_cases: []
-  keywords: [ip, nat, public]
+  key_words: [ip, nat, public]
   features: []
 
 actions:

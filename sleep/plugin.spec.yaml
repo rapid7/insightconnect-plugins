@@ -16,7 +16,7 @@ tags:
 - delay
 hub_tags:
   use_cases: []
-  keywords: [sleep, delay]
+  key_words: [sleep, delay]
   features: []
 enable_cache: false
 actions:

@@ -20,7 +20,7 @@ tags:
 - SecureSphere
 hub_tags:
   use_cases: []
-  keywords: [Web Application Firewall, WAF, Imperva, SecureSphere]
+  key_words: [Web Application Firewall, WAF, Imperva, SecureSphere]
   features: []
 connection:
   credentials:

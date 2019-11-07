@@ -21,7 +21,7 @@ tags:
 - snippet
 hub_tags:
   use_cases: []
-  keywords: [gitlab, version control, repository, manage, project, snippet]
+  key_words: [gitlab, version control, repository, manage, project, snippet]
   features: []
 types:
   ssh_output:

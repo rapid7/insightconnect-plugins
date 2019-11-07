@@ -24,7 +24,7 @@ tags:
 - zip
 hub_tags:
   use_cases: []
-  keywords: [compress, decompress, base64, file, gzip, bzip, lz, xz, bytes, zip]
+  key_words: [compress, decompress, base64, file, gzip, bzip, lz, xz, bytes, zip]
   features: []
 enable_cache: false
 actions:

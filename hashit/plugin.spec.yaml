@@ -19,7 +19,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  keywords: [hashes, crypto, integrity, files, utilities]
+  key_words: [hashes, crypto, integrity, files, utilities]
   features: []
 actions:
   string:

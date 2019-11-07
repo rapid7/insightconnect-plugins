@@ -20,7 +20,7 @@ tags:
 - database
 hub_tags:
   use_cases: []
-  keywords: [vulnerability, exploit, sqlmap, injection, database]
+  key_words: [vulnerability, exploit, sqlmap, injection, database]
   features: []
 enable_cache: true
 connection:

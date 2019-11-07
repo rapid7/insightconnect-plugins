@@ -18,7 +18,7 @@ tags:
 - hids
 hub_tags:
   use_cases: []
-  keywords: [ossec, wazuh, hids]
+  key_words: [ossec, wazuh, hids]
   features: []
 types:
   agents:

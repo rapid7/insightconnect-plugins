@@ -16,7 +16,7 @@ tags:
 - agile
 hub_tags:
   use_cases: []
-  keywords: [zenhub, agile]
+  key_words: [zenhub, agile]
   features: []
 connection:
   api_key:

@@ -17,7 +17,7 @@ tags:
 - traffic
 hub_tags:
   use_cases: []
-  keywords: [tshark, pcap, traffic]
+  key_words: [tshark, pcap, traffic]
   features: []
 actions:
   run:

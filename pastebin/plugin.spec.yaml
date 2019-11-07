@@ -18,7 +18,7 @@ tags:
 - post
 hub_tags:
   use_cases: []
-  keywords: [scrape, paste, post]
+  key_words: [scrape, paste, post]
   features: []
 connection:
   key:

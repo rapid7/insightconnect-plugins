@@ -18,7 +18,7 @@ tags:
 - build
 hub_tags:
   use_cases: []
-  keywords: [jenkins, software development, ci, build]
+  key_words: [jenkins, software development, ci, build]
   features: []
 types:
   build_info:

@@ -16,7 +16,7 @@ tags:
 - network
 hub_tags:
   use_cases: []
-  keywords: [infoblox, network]
+  key_words: [infoblox, network]
   features: []
 connection:
   url:

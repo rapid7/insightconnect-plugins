@@ -16,7 +16,7 @@ tags:
 - microsoft
 hub_tags:
   use_cases: []
-  keywords: [powershell, microsoft]
+  key_words: [powershell, microsoft]
   features: []
 enable_cache: false
 language: python

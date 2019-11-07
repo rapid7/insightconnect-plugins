@@ -20,7 +20,7 @@ tags:
 - crm
 hub_tags:
   use_cases: []
-  keywords: [marketing, sales, analysis, crm]
+  key_words: [marketing, sales, analysis, crm]
   features: []
 types:
   search_result:

@@ -17,7 +17,7 @@ tags:
 - geoip
 hub_tags:
   use_cases: []
-  keywords: [ipinfo, ip, geoip]
+  key_words: [ipinfo, ip, geoip]
   features: []
 
 connection:

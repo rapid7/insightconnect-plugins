@@ -17,7 +17,7 @@ tags:
 - network automation
 hub_tags:
   use_cases: []
-  keywords: [netmiko, SSH, network automation]
+  key_words: [netmiko, SSH, network automation]
   features: []
 enable_cache: true
 language: python

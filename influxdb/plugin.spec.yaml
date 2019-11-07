@@ -16,7 +16,7 @@ tags:
 - influxdb
 hub_tags:
   use_cases: []
-  keywords: [database, influxdb]
+  key_words: [database, influxdb]
   features: []
 types:
   point:

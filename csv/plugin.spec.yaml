@@ -16,7 +16,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  keywords: [csv, utilities]
+  key_words: [csv, utilities]
   features: []
 actions:
   filter_string:

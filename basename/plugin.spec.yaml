@@ -16,7 +16,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  keywords: [basename, utilities]
+  key_words: [basename, utilities]
   features: []
 actions:
   basename:

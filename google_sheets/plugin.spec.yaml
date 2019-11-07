@@ -17,7 +17,7 @@ tags:
 - spreadsheet
 hub_tags:
   use_cases: []
-  keywords: [google, sheets, spreadsheet]
+  key_words: [google, sheets, spreadsheet]
   features: []
 types:
   update:

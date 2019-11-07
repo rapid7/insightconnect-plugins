@@ -17,7 +17,7 @@ tags:
 - zeus
 hub_tags:
   use_cases: []
-  keywords: [feeds, c2, zeus]
+  key_words: [feeds, c2, zeus]
   features: []
 types:
   default:

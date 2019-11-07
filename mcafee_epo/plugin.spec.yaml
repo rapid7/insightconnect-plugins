@@ -18,7 +18,7 @@ tags:
 - endpoint protection
 hub_tags:
   use_cases: []
-  keywords: [mcafee, epo, endpoint protection]
+  key_words: [mcafee, epo, endpoint protection]
   features: []
 types:
   computer_properties:

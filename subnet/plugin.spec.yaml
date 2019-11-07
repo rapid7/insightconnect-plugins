@@ -19,7 +19,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  keywords: [subnet, ip, netmask, network, utilities]
+  key_words: [subnet, ip, netmask, network, utilities]
   features: []
 actions:
   calculate:

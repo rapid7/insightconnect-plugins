@@ -18,7 +18,7 @@ tags:
 - calculator
 hub_tags:
   use_cases: []
-  keywords: [math, computation, utilities, calculator]
+  key_words: [math, computation, utilities, calculator]
   features: []
 actions:
   calculate:

@@ -20,7 +20,7 @@ tags:
 - intel
 hub_tags:
   use_cases: []
-  keywords: [domain, whois, ip, domain, intel]
+  key_words: [domain, whois, ip, domain, intel]
   features: []
 enable_cache: true
 language: python

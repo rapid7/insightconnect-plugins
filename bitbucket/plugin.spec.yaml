@@ -18,7 +18,7 @@ tags:
 - git
 hub_tags:
   use_cases: []
-  keywords: [bitbucket, issue, authentication, git]
+  key_words: [bitbucket, issue, authentication, git]
   features: []
 connection:
   credentials:

@@ -17,7 +17,7 @@ tags:
 - vault
 hub_tags:
   use_cases: []
-  keywords: [lastpass, password, vault]
+  key_words: [lastpass, password, vault]
   features: []
 connection:
   account:

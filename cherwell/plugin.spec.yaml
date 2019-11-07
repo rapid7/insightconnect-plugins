@@ -17,7 +17,7 @@ tags:
 - it
 hub_tags:
   use_cases: []
-  keywords: [cherwell, itsm, it]
+  key_words: [cherwell, itsm, it]
   features: []
 connection:
   url:

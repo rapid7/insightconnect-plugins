@@ -16,7 +16,7 @@ tags:
 - chat
 hub_tags:
   use_cases: []
-  keywords: [hipchat, chat]
+  key_words: [hipchat, chat]
   features: []
 enable_cache: true
 connection:

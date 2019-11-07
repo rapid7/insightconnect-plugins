@@ -17,7 +17,7 @@ tags:
 - malware analysis
 hub_tags:
   use_cases: []
-  keywords: [malware, sandbox, malware analysis]
+  key_words: [malware, sandbox, malware analysis]
   features: []
 types:
   report:

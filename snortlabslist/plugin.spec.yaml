@@ -17,7 +17,7 @@ tags:
 - reputation
 hub_tags:
   use_cases: []
-  keywords: [ip, intel, reputation]
+  key_words: [ip, intel, reputation]
   features: []
 actions:
   lookup:

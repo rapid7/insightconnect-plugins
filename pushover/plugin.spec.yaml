@@ -16,7 +16,7 @@ tags:
 - alerting
 hub_tags:
   use_cases: []
-  keywords: [messaging, alerting]
+  key_words: [messaging, alerting]
   features: []
 enable_cache: true
 language: python

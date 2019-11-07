@@ -21,7 +21,7 @@ tags:
 - cloud
 hub_tags:
   use_cases: []
-  keywords: [Azure Compute, Azure Virtual Machines, Azure, VM, cloud]
+  key_words: [Azure Compute, Azure Virtual Machines, Azure, VM, cloud]
   features: []
 types:
   tags:

@@ -20,7 +20,7 @@ tags:
 - detection
 hub_tags:
   use_cases: []
-  keywords: [carbon black, response, endpoint, cb, detection]
+  key_words: [carbon black, response, endpoint, cb, detection]
   features: []
 enable_cache: true
 types:

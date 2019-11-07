@@ -17,7 +17,7 @@ tags:
 - mssql
 hub_tags:
   use_cases: []
-  keywords: [sql, postgres, mssql]
+  key_words: [sql, postgres, mssql]
   features: []
 connection:
   type:

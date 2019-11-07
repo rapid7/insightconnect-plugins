@@ -20,7 +20,7 @@ tags:
 - physical
 hub_tags:
   use_cases: []
-  keywords: [craigslist, sale, stolen, events, physical]
+  key_words: [craigslist, sale, stolen, events, physical]
   features: []
 types:
   sale_posting:

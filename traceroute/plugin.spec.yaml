@@ -16,7 +16,7 @@ tags:
 - network diagnostics
 hub_tags:
   use_cases: []
-  keywords: [Tracerout, network diagnostics]
+  key_words: [Tracerout, network diagnostics]
   features: []
 actions:
   traceroute:

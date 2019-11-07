@@ -17,7 +17,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  keywords: [sed, edit, utilities]
+  key_words: [sed, edit, utilities]
   features: []
 actions:
   process_string:

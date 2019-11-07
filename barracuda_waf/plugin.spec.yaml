@@ -22,7 +22,7 @@ tags:
 - firewall
 hub_tags:
   use_cases: []
-  keywords: [barracuda, waf, web, application, firewall]
+  key_words: [barracuda, waf, web, application, firewall]
   features: []
 types:
   vsite:

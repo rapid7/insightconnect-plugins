@@ -16,7 +16,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  keywords: [datetime, utilities]
+  key_words: [datetime, utilities]
   features: []
 actions:
   get_datetime:

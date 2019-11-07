@@ -17,7 +17,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: []
-  keywords: [grep, regex, utilities]
+  key_words: [grep, regex, utilities]
   features: []
 actions:
   match_string:

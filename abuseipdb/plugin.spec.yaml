@@ -18,7 +18,7 @@ tags:
 - abuse
 hub_tags:
   use_cases: []
-  keywords: [ip, intelligence, abuse]
+  key_words: [ip, intelligence, abuse]
   features: []
 enable_cache: false
 types:

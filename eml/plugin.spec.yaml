@@ -16,7 +16,7 @@ tags:
 - mail
 hub_tags:
   use_cases: []
-  keywords: [eml, mail]
+  key_words: [eml, mail]
   features: []
 types:
   header:

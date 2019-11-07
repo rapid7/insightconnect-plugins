@@ -18,7 +18,7 @@ tags:
 - ug tracker
 hub_tags:
   use_cases: []
-  keywords: [phabricator, code review, ug tracker]
+  key_words: [phabricator, code review, ug tracker]
   features: []
 language: python
 connection:

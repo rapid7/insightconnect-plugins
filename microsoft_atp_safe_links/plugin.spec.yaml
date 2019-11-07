@@ -19,7 +19,7 @@ tags:
 - links
 hub_tags:
   use_cases: []
-  keywords: [ATP, Microsoft, safe, links]
+  key_words: [ATP, Microsoft, safe, links]
   features: []
 actions:
   decode:

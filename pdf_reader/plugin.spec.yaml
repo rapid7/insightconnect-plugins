@@ -17,7 +17,7 @@ tags:
 - Extract
 hub_tags:
   use_cases: []
-  keywords: [PDF, Reader, Extract]
+  key_words: [PDF, Reader, Extract]
   features: []
 actions:
   extract_text:

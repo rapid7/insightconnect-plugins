@@ -16,7 +16,7 @@ tags:
 - ipstack
 hub_tags:
   use_cases: []
-  keywords: [geoip, ipstack]
+  key_words: [geoip, ipstack]
   features: []
 connection:
   cred_token:
