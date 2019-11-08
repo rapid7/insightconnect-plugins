@@ -31,7 +31,7 @@ class TextInput(komand.Input):
     "remove_scripts": {
       "type": "boolean",
       "title": "Remove Scripts",
-      "description": "Remove scripts from doc as well as HTML",
+      "description": "Remove non-HTML scripts from the document",
       "order": 2
     }
   },

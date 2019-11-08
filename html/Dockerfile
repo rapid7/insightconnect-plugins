@@ -1,4 +1,4 @@
-FROM komand/python-pypy3-full-plugin
+FROM komand/python-3-37-plugin:3
 LABEL organization=rapid7
 LABEL sdk=python
 LABEL type=plugin
@@ -7,7 +7,7 @@ ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR /etc/ssl/certs
 ENV REQUESTS_CA_BUNDLE  /etc/ssl/certs/ca-certificates.crt
 
-RUN apt-get update && apt-get install -y pandoc texlive && pip install pypandoc
+RUN apt-get update && apt-get install -y pandoc texlive --no-install-recommends
 
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
