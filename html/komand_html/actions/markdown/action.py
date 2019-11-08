@@ -19,8 +19,8 @@ class Markdown(komand.Action):
     tags = re.findall(tag_parser, params.get('doc'))
     try:
         if not len(tags):
-            raise PluginException(cause='Run: Input Invalid',
-                                  assistance='Input must be of type HTML')
+            raise PluginException(cause='Run: Input Invalid.',
+                                  assistance='Input must be of type HTML.')
         output = pypandoc.convert_text(params.get('doc'), 'md', format='html')
         f = base64.b64encode(output.encode('ascii')).decode()
         return {'markdown_contents': output, 'markdown_file': f}

@@ -22,8 +22,8 @@ class Epub(komand.Action):
     tags = re.findall(tag_parser, params.get('doc'))
     try:
         if not len(tags):
-            raise PluginException(cause='Run: Input Invalid',
-                                  assistance='Input must be of type HTML')
+            raise PluginException(cause='Run: Input Invalid.',
+                                  assistance='Input must be of type HTML.')
         pypandoc.convert(params.get('doc'), 'epub', outputfile=temp_file, format='html')
         with open(temp_file, 'rb') as output:
                 #Reading the output and sending it in base64
