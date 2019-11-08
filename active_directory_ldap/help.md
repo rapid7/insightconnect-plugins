@@ -3,7 +3,7 @@
 
 ## About
 
-This plugin utilizes Active Directory to run LDAP queries. This plugin supports Windows Server 2003 and later.
+This plugin utilizes Active Directory to run LDAP queries. This plugin supports Windows Server 2008 and later. Some testing has been done with Windows server 2003, however it is not officially supported.
 
 ## Actions
 
