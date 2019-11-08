@@ -63,9 +63,9 @@ class Connection(komand.Connection):
         self.logger.info(f"Authentication was successful, token is: ******************{self.api_token[-5:]}")
         self.logger.info(f"Detected Permissions: {result_json.get('scope')}")
 
-    def check_and_refresh_api_token(self, forceRefreshToken=False):
+    def check_and_refresh_api_token(self, force_refresh_token=False):
         self.time_now = time.time()
-        if (self.time_now - self.time_ago) > 3500 or forceRefreshToken:  # 1 hour in seconds (minus some buffer time)
+        if (self.time_now - self.time_ago) > 3500 or force_refresh_token:  # 1 hour in seconds (minus some buffer time)
             self.logger.info("Refreshing auth token")
             self.get_token()
         self.time_ago = time.time()
