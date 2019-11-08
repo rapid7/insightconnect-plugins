@@ -131,7 +131,7 @@ actions:
         required: true
       remove_scripts:
         title: Remove Scripts
-        description: Remove scripts from doc as well as HTML
+        description: Remove non-HTML scripts from the document
         type: boolean
         required: false
     output:
