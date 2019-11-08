@@ -6,7 +6,7 @@ from icon_microsoft_teams import connection, actions, triggers
 
 Name = 'Microsoft Teams'
 Vendor = 'rapid7'
-Version = '1.2.0'
+Version = '1.2.1'
 Description = 'Microsoft Teams actions and triggers'
 
 

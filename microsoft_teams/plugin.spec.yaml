@@ -4,7 +4,7 @@ product: ["insightconnect"]
 name: microsoft_teams
 title: Microsoft Teams
 description: Microsoft Teams actions and triggers
-version: 1.2.0
+version: 1.2.1
 vendor: rapid7
 support: community
 status: []
