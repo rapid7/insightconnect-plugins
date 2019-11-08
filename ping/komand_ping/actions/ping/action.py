@@ -1,8 +1,10 @@
 import komand
 from .schema import PingInput, PingOutput
+
 # Custom imports below
 import subprocess
 import re
+from komand.exceptions import PluginException
 
 
 class Ping(komand.Action):
@@ -41,38 +43,49 @@ class Ping(komand.Action):
             except AttributeError:
                 self.logger.error('The regular expression search for transmitted packets failed')
                 self.logger.error('Standard Output: %s', output)
-                raise Exception('A AttributeError occurred,see log for details')
+                raise PluginException(cause='An AttributeError occurred.',
+                                      assistance='Please see log for details.')
             except ValueError:
                 self.logger.error('The transmitted packets value is not valid. The value was %s' % transmitted)
                 self.logger.error('Standard Output: %s' % output)
-                raise Exception('A ValueError occurred,see log for details')
+                raise PluginException(cause='A ValueError occurred.',
+                                      assistance='Please see log for details.')
             except:
                 self.logger.error('Standard Output: %s', output)
                 self.logger.error('Return form regex %s' % temp)
                 self.logger.error('Substring built by regex %s' % sub)
-                raise Exception('Unknown error occurred, see log for details')
+                raise PluginException(preset=PluginException.Preset.UNKNOWN,
+                                      assistance='Please see log for details.')
 
             try:
                 temp = re.search(r'\d* packets r', output)
-                sub = temp.group()
-                received = sub[:-10]
+                if temp is None:
+                    temp = re.search(r'\d* received', output)
+                    sub = temp.group()
+                    received = sub[:-9]
+                else:
+                    sub = temp.group()
+                    received = sub[:-10]
                 received = int(received)
             except AttributeError:
                 self.logger.error('The regular expression search for received packets failed')
                 self.logger.error('Standard Output: %s', output)
-                raise Exception('A AttributeError occurred,see log for details')
+                raise PluginException(cause='An AttributeError occurred.',
+                                      assistance='Please see log for details.')
             except ValueError:
                 self.logger.error('The received packets value is not valid. The value was %s', received)
                 self.logger.error('Standard Output: %s', output)
-                raise Exception('A ValueError occurred,see log for details')
+                raise PluginException(cause='A ValueError occurred.',
+                                      assistance='Please see log for details.')
             except:
                 self.logger.error('Standard Output: %s', output)
                 self.logger.error('Return form regex %s', temp)
                 self.logger.error('Substring built by regex %s', sub)
-                raise Exception('Unknown error occurred, see log for details')
+                raise PluginException(preset=PluginException.Preset.UNKNOWN,
+                                      assistance='Please see log for details.')
 
             try:
-                temp = re.search(r'received.*', output)
+                temp = re.search(r'received.* packet loss', output)
                 sub = temp.group()
                 sub = sub[:-13]
                 sub = sub[10:]
@@ -80,45 +93,50 @@ class Ping(komand.Action):
             except AttributeError:
                 self.logger.error('The regular expression search for % packet loss failed')
                 self.logger.error('Standard Output: %s', output)
-                raise Exception('A AttributeError occurred,see log for details')
+                raise PluginException(cause='An AttributeError occurred.',
+                                      assistance='Please see log for details.')
             except ValueError:
                 self.logger.error('The % packet loss value is not valid. The value was %s', packet_loss)
                 self.logger.error('Standard Output: %s', output)
-                raise Exception('A ValueError occurred,see log for details')
+                raise PluginException(cause='A ValueError occurred.',
+                                      assistance='Please see log for details.')
             except:
                 self.logger.error('Standard Output: %s', output)
                 self.logger.error('return form regex %s', temp)
                 self.logger.error('substring built by regex %s', sub)
-                raise Exception('Unknown error occurred, see log for details')
+                raise PluginException(preset=PluginException.Preset.UNKNOWN,
+                                      assistance='Please see log for details.')
 
             try:
-                temp = re.search(r'stddev.*', output)
+                temp = re.search(r'mdev.*', output)
                 sub = temp.group()
-                sub = sub[9:]
+                sub = sub[7:]
                 sub = sub[:-3]
                 values = sub.split('/')
-
                 if sub == '':
                     self.logger.error('Standard Output: %s', output)
                     self.logger.error('Return form regex %s', temp)
-                    raise Exception('The value for average latency was not found, see log for details')
+                    raise PluginException(cause='The value for average latency was not found.',
+                                          assistance='Please see log for details.')
                 try:
                     average_latency = values[1] + 'ms'
                     minimum_latency = values[0] + 'ms'
                     maximum_latency = values[2] + 'ms'
                     standard_deviation = values[3] + 'ms'
                 except IndexError:
-                    self.logger.error('Failed to find min avg max and stdev %s' % sub)
+                    self.logger.error('Failed to find min avg max and mdev %s' % sub)
 
             except AttributeError:
                 self.logger.error('The regular expression search for average latency failed')
                 self.logger.error('Standard Output: %s', output)
-                raise Exception('A AttributeError occurred,see log for details')
+                raise PluginException(cause='An AttributeError occurred.',
+                                      assistance='Please see log for details.')
             except:
                 self.logger.error('Standard Output: %s', output)
                 self.logger.error('Return form regex %s', temp)
                 self.logger.error('Substring built by regex %s', sub)
-                raise Exception('Unknown error occurred, see log for details')
+                raise PluginException(preset=PluginException.Preset.UNKNOWN,
+                                      assistance='Please see log for details.')
 
             return {'reply': True, 'response': output,
                     'packets_percent_lost': packet_loss,
@@ -131,7 +149,8 @@ class Ping(komand.Action):
         else:
             self.logger.error('Standard Output: %s', output)
             self.logger.error('Standard Error: %s', err)
-            raise Exception('Unknown error occurred, see log for details')
+            raise PluginException(preset=PluginException.Preset.UNKNOWN,
+                                  assistance='Please see log for details.')
 
     def test(self):
         response = subprocess.Popen(['ping -c 4 127.0.0.1'], stdout=subprocess.PIPE, shell=True)
