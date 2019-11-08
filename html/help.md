@@ -120,7 +120,7 @@ This action is used to strip an HTML string of all tags and return only the text
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |doc|string|None|True|Document to transform|None|
-|remove_scripts|boolean|None|False|Remove scripts from doc as well as HTML|None|
+|remove_scripts|boolean|None|False|Remove non-HTML scripts from the document|None|
 
 #### Output
 
