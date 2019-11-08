@@ -362,7 +362,7 @@ Examples:
 * 3.2.3 - Fix issue with Add User action disable and enable flags | Update Query action to allow for `<=` and `>=` searches
 * 3.2.4 - Fix issue with Query where some output was not unescaped properly | Update to exception handling to leverage PluginException
 * 3.2.5 - Clean connection test output
-* 3.2.6 - Update help to document supported Windows Servers
+* 3.2.6 - Update help to document supported Windows Server versions
 
 ## References
 
