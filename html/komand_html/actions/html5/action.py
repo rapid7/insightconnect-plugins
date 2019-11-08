@@ -19,7 +19,7 @@ class Html5(komand.Action):
     tags = re.findall(tag_parser, params.get('doc'))
     try:
         if not len(tags):
-            raise PluginException(cause='Run: Input Invalid.',
+            raise PluginException(cause='Run: Invalid input.',
                                   assistance='Input must be of type HTML.')
         output = pypandoc.convert_text(params.get('doc'), 'html', format='md')
         new_output = pypandoc.convert(output, 'html5', format="md")
