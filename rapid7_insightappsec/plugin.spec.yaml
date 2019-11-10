@@ -1,4 +1,6 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
 description: Application security testing for the modern web
@@ -6,6 +8,9 @@ version: 1.0.0
 vendor: rapid7
 support: rapid7
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - insightappsec
 - Rapid7

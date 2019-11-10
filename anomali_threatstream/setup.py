@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='anomali_threatstream-rapid7-plugin',
-      version='2.0.0',
+      version='3.0.1',
       description='ThreatStream operationalizes threat intelligence, automating collection and integration that enables security teams to analyze and respond to threats',
       author='rapid7',
       author_email='',

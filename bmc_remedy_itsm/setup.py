@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='bmc_remedy_itsm-rapid7-plugin',
-      version='1.5.0',
+      version='1.6.0',
       description='Transform your service desk with the right ITSM solution',
       author='rapid7',
       author_email='',

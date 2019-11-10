@@ -1,7 +1,9 @@
 import komand
 from .schema import GetCommentsInput, GetCommentsOutput
+
 # Custom imports below
 from ...util import *
+from komand.exceptions import PluginException
 
 
 class GetComments(komand.Action):
@@ -18,7 +20,8 @@ class GetComments(komand.Action):
         issue = self.connection.client.issue(id=params['id'])
 
         if not issue:
-            raise Exception('Error: No issue found: ' + params['id'])
+            raise PluginException(cause=f"No issue found with ID: {params['id']}.",
+                                  assistance='Please provide a valid issue ID.')
 
         comments = issue.fields.comment.comments or []
 

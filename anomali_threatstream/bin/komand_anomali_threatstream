@@ -6,7 +6,7 @@ from komand_anomali_threatstream import connection, actions, triggers
 
 Name = 'Anomali ThreatStream'
 Vendor = 'rapid7'
-Version = '2.0.0'
+Version = '3.0.1'
 Description = 'ThreatStream operationalizes threat intelligence, automating collection and integration that enables security teams to analyze and respond to threats'
 
 
@@ -19,7 +19,9 @@ class ICONAnomaliThreatstream(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
-        self.add_action(actions.AddApprovalIndicator())
+        self.add_action(actions.GetObservables())
+
+        self.add_action(actions.ImportObservable())
 
         self.add_action(actions.LookupHash())
 

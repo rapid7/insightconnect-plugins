@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     INCIDENT_ID = "incident_id"
+    RESOLUTION = "resolution"
     STATUS = "status"
     
 
@@ -27,6 +28,12 @@ class UpdateIncidentStatusInput(komand.Input):
       "title": "Incident ID",
       "description": "Incident ID",
       "order": 1
+    },
+    "resolution": {
+      "type": "string",
+      "title": "Resolution",
+      "description": "A resolution to the incident. Required for Resolved or Closed",
+      "order": 3
     },
     "status": {
       "type": "string",

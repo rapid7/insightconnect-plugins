@@ -6,7 +6,7 @@ from icon_microsoft_teams import connection, actions, triggers
 
 Name = 'Microsoft Teams'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.2.0'
 Description = 'Microsoft Teams actions and triggers'
 
 
@@ -19,6 +19,26 @@ class ICONMicrosoftTeams(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_trigger(triggers.NewMessageReceived())
+
+        self.add_action(actions.AddChannelToTeam())
+
+        self.add_action(actions.AddMemberToTeam())
+
+        self.add_action(actions.CreateTeamsEnabledGroup())
+
+        self.add_action(actions.DeleteTeam())
+
+        self.add_action(actions.GetChannelsForTeam())
+
+        self.add_action(actions.GetTeams())
+
+        self.add_action(actions.RemoveChannelFromTeam())
+
+        self.add_action(actions.RemoveMemberFromTeam())
+
+        self.add_action(actions.SendHtmlMessage())
+
         self.add_action(actions.SendMessage())
 
 

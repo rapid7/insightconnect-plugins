@@ -1,10 +1,11 @@
 import komand
 from .schema import GetIncidentInformationInput, GetIncidentInformationOutput, Input, Output, Component
 # Custom imports below
+from komand.exceptions import PluginException
+from icon_bmc_remedy_itsm.util import error_handling
 import requests
 import json
 import urllib.parse
-from komand.exceptions import PluginException
 
 
 class GetIncidentInformation(komand.Action):
@@ -17,6 +18,7 @@ class GetIncidentInformation(komand.Action):
             output=GetIncidentInformationOutput())
 
     def run(self, params={}):
+        handler = error_handling.ErrorHelper()
         incident_id = params.get(Input.INCIDENT_ID)
         get_incident_id_endpoint = f"api/arsys/v1/entry/HPD%3AHelp%20Desk/{incident_id}"
 
@@ -25,22 +27,12 @@ class GetIncidentInformation(komand.Action):
 
         self.logger.info(f"Attempting to retrieve: {url}")
         result = requests.get(url, headers=headers)
-
-        if result.status_code == 400:
-            raise PluginException(cause="An HTTP 400 status code was returned.",
-                                  assistance="This status code indicates that the JSON Token was invalid."
-                                             " This is normally caused by an incorrect username or password.")
-        try:
-            result.raise_for_status()
-        except requests.HTTPError as e:
-            raise PluginException(cause=f"An unexpected status code was returned. Status code was {result.status_code}.",
-                                  assistance="Please contact support with the status code and error information.",
-                                  data=e)
+        handler.error_handling(result)
 
         try:
             incident = result.json()
         except json.JSONDecodeError as e:
-            raise PluginException(PluginException.Preset.INVALID_JSON,
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
                                   data=e)
 
         return {Output.INCIDENT: komand.helper.clean(incident)}

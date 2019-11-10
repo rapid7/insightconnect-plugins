@@ -3,6 +3,8 @@ from .schema import GetScanInput, GetScanOutput
 # Custom imports below
 import requests
 from komand_rapid7_insightvm.util import endpoints
+import json
+from komand.exceptions import PluginException
 
 
 class GetScan(komand.Action):
@@ -43,9 +45,11 @@ class GetScan(komand.Action):
                     reason = response.json()["message"]
                 except KeyError:
                     reason = "Unknown error occurred. Please contact support or try again later."
+                except json.decoder.JSONDecodeError:
+                    raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=reason.text)
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
                 self.logger.error("{status} ({code}): {reason}".format(status=status_code_message,
                                                                        code=response.status_code,
                                                                        reason=reason))
-                raise Exception
+                raise PluginException(preset=PluginException.Preset.UNKNOWN)

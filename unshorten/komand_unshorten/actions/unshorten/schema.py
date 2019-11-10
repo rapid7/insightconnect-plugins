@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Unshorten a shortened URL"
+
+
 class Input:
     URL = "url"
     
@@ -76,7 +80,6 @@ class UnshortenOutput(komand.Output):
     }
   },
   "required": [
-    "usage_count",
     "requested_url",
     "resolved_url",
     "success"

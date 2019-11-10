@@ -1,8 +1,10 @@
 import komand
 from .schema import AttachIssueInput, AttachIssueOutput
+
 # Custom imports below
 import base64
 from io import BytesIO
+from komand.exceptions import PluginException
 
 
 class AttachIssue(komand.Action):
@@ -20,7 +22,8 @@ class AttachIssue(komand.Action):
         issue = self.connection.client.issue(id=id_)
 
         if not issue:
-            raise Exception('Error: No issue found with ID: ' + id_)
+            raise PluginException(cause=f'No issue found with ID: {id_}.',
+                                  assistance='Please provide a valid issue ID.')
 
         filename = params.get('attachment_filename')
         file_bytes = params.get('attachment_bytes')
@@ -28,7 +31,8 @@ class AttachIssue(komand.Action):
         try:
             data = base64.b64decode(file_bytes)
         except:
-            raise Exception("Error: Unable to decode file input!")
+            raise PluginException(cause='Unable to decode attachment bytes.',
+                                  assistance="Please provide a valid attachment bytes.")
 
         attachment = BytesIO()
         attachment.write(data)

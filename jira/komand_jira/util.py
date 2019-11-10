@@ -33,6 +33,11 @@ def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logg
     else:
         resolution_date = ""
 
+    if issue.fields.description:
+        description = issue.fields.description
+    else:
+        description = ""
+
     fields = {}
     if include_raw_fields:
         fields = issue.raw["fields"]
@@ -51,7 +56,7 @@ def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logg
         "key": issue.key,
         "url": url,
         "summary": issue.fields.summary,
-        "description": issue.fields.description,
+        "description": description,
         "status": issue.fields.status.name,
         "resolution": resolution,
         "reporter": reporter,
@@ -79,3 +84,14 @@ def normalize_user(user, logger=logging.getLogger()):
     logger.debug("Result user: %s", output)
 
     return output
+
+
+def look_up_project(_id, client, logger=logging.getLogger()):
+    project_detail = client.projects()
+    project_id_name = list(filter(lambda x: x.name == _id or x.key == _id, project_detail))
+
+    if project_id_name:
+        logger.debug("Project %s exists", project_id_name)
+        return True
+    return False
+

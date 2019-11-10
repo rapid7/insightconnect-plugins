@@ -1,7 +1,8 @@
 import komand
 from .schema import SendMessageInput, SendMessageOutput, Input, Output, Component
 # Custom imports below
-from icon_microsoft_teams.util import pymsteams
+from icon_microsoft_teams.util.teams_utils import get_teams_from_microsoft, get_channels_from_microsoft, send_message
+from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 
 
 class SendMessage(komand.Action):
@@ -14,12 +15,17 @@ class SendMessage(komand.Action):
                 output=SendMessageOutput())
 
     def run(self, params={}):
+        team_name = params.get(Input.TEAM_NAME)
+        channel_name = params.get(Input.CHANNEL_NAME)
         message = params.get(Input.MESSAGE)
-        webhook = self.connection.webhook
 
-        teams_message_card = pymsteams.connectorcard(webhook)
-        teams_message_card.text(message)
+        teams = get_teams_from_microsoft(self.logger, self.connection, team_name)
+        team_id = teams[0].get("id")
+        channels = get_channels_from_microsoft(self.logger, self.connection, team_id, channel_name)
+        channel_id = channels[0].get("id")
 
-        teams_message_card.send()
+        message = send_message(self.logger, self.connection, message, team_id, channel_id)
 
-        return {Output.SUCCESS: True}
+        clean_message = remove_null_and_clean(message)
+
+        return {Output.MESSAGE: clean_message}

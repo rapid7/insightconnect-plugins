@@ -109,10 +109,10 @@ class GetScanEnginePoolOutput(komand.Output):
         }
       },
       "required": [
-        "name",
-        "id",
         "engines",
-        "links"
+        "id",
+        "links",
+        "name"
       ],
       "definitions": {
         "link": {

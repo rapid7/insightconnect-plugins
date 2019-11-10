@@ -43,10 +43,10 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "username",
-    "url",
     "api_key",
-    "ssl_verify"
+    "ssl_verify",
+    "url",
+    "username"
   ],
   "definitions": {
     "credential_secret_key": {

@@ -2,6 +2,7 @@ import komand
 from .schema import SearchIncidentInput, SearchIncidentOutput, Input, Output, Component
 # Custom imports below
 from komand.exceptions import PluginException
+from icon_bmc_remedy_itsm.util import error_handling
 import requests
 import json
 import urllib.parse
@@ -17,6 +18,7 @@ class SearchIncident(komand.Action):
                 output=SearchIncidentOutput())
 
     def run(self, params={}):
+        handler = error_handling.ErrorHelper()
         search = params.get(Input.SEARCH_PARAMETERS)
         uri = f"api/arsys/v1/entry/HPD%3AIncidentInterface/?q={search}"
 
@@ -24,21 +26,12 @@ class SearchIncident(komand.Action):
         headers = self.connection.make_headers_and_refresh_token()
 
         result = requests.get(url, headers=headers)
+        handler.error_handling(result)
 
-        if result.status_code == 400:
-            raise PluginException(cause="An HTTP 400 status code was returned.",
-                                  assistance="This status code indicates that the JSON Token was invalid."
-                                             " This is normally caused by an incorrect username or password.")
-        try:
-            result.raise_for_status()
-        except requests.HTTPError as e:
-            raise PluginException(cause=f"An unexpected status code was returned. Status code was {result.status_code}.",
-                                  assistance="Please contact support with the status code and error information.",
-                                  data=e)
         try:
             incident = result.json()
         except json.JSONDecodeError as e:
-            raise PluginException(PluginException.Preset.INVALID_JSON,
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
                                   data=e)
         try:
             incident_list = incident["entries"]

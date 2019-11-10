@@ -1,12 +1,17 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes,
   and remediates vulnerabilities
-version: 3.4.0
+version: 3.5.0
 vendor: rapid7
 support: rapid7
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - insightvm
 - rapid7
@@ -515,6 +520,137 @@ types:
       description: Total
       title: Total number of vulnerabilities
       type: integer
+      required: false
+  vulnerability_exception:
+    expires:
+      title: Expires
+      description: The date and time the vulnerability exception is set to expire
+      type: date
+      required: false
+    state:
+      title: State
+      description: The state of the vulnerability exception
+      type: string
+      required: true
+      enum:
+      - Deleted
+      - Expired
+      - Approved
+      - Rejected
+      - Under Review
+    id:
+      title: Vulnerability Exception ID
+      description: The ID uniquely identifying the vulnerability exception
+      type: integer
+      required: true
+    scope:
+      title: Exception Scope
+      description: Details of the scope of the exception
+      type: object
+      required: true
+    submit:
+      title: Submission Details
+      description: Details of the exception submission
+      type: object
+      required: true
+    review:
+      title: Review Details
+      description: Details of the exception review
+      type: object
+      required: false
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+  exception_review:
+    comment:
+      title: Review Comment
+      description: The comment from the reviewer detailing the review
+      type: string
+      required: false
+    date:
+      title: Review Date
+      description: The date and time the review took place
+      type: date
+      required: false
+    name:
+      title: Reviewer Name
+      description: The login name of the user that reviewed the vulnerability exception
+      type: string
+      required: false
+    user:
+      title: Reviewer ID
+      description: The identifier of the user that reviewed the vulnerability exception
+      type: integer
+      required: false
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+  exception_submit:
+    comment:
+      title: Submit Comment
+      description: The comment from the submit detailing the exception
+      type: string
+      required: false
+    date:
+      title: Submit Date
+      description: The date and time the exception request took place
+      type: date
+      required: false
+    name:
+      title: Submitter Name
+      description: The login name of the user that submitted the vulnerability exception
+      type: string
+      required: false
+    user:
+      title: Submitter ID
+      description: The identifier of the user that submitted the vulnerability exception
+      type: integer
+      required: false
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+  exception_scope:
+    id:
+      title: Vulnerability Scope ID
+      description: The identifer of the scope (asset, group, site) the vulnerability exception applies to
+      type: integer
+      required: true
+    key:
+      title: Exception Scope Key
+      description: Optional key to discriminate the instance when the scope type is Instance
+      type: string
+      required: false
+    port:
+      title: Port
+      description: If the scope type is Instance, the port the exception applies to
+      type: integer
+      required: false
+    type:
+      title: Exception Scope Type
+      description: The type of vulnerability exception - Global, Site, Asset, Asset Group, Instance
+      type: string
+      required: true
+      enum:
+      - Global
+      - Site
+      - Asset
+      - Asset Group
+      - Instance
+    vulnerability:
+      title: Vulnerability
+      description: The vulnerability the exception applies to
+      type: string
+      required: true
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
       required: false
   asset:
     addresses:
@@ -3320,6 +3456,132 @@ actions:
         title: Base64 Encoded Report
         description: Base64 encoded file making up the report
         required: true
+  review_exception:
+    title: Review Vulnerability Exception
+    description: Approve or Reject a Vulnerability Exception
+    input:
+      exception:
+        title: Exception ID
+        description: The vulnerability exception ID to approve or reject
+        type: integer
+        required: true
+      review:
+        title: Review Outcome
+        description: Approval or rejection of the exception
+        type: string
+        required: true
+        enum:
+        - Approved
+        - Rejected
+      comment:
+        title: Review Comment
+        description: Comment to include in the review
+        type: string
+        required: false
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  delete_exception:
+    title: Delete Vulnerability Exception
+    description: Delete an existing vulnerability exception
+    input:
+      exception_id:
+        title: Exception ID
+        description: Vulnerability exception ID to delete
+        type: integer
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  create_exception:
+    title: Create Vulnerability Exception Submission
+    description: Create a vulnerability exception submission
+    input:
+      type:
+        title: Exception Type
+        description: The type of vulnerability exception to create
+        type: string
+        required: true
+        enum:
+        - Global
+        - Site
+        - Asset
+        - Asset Group
+        - Instance
+      vulnerability:
+        title: Vulnerability
+        description: The vulnerability this exception applies to
+        type: string
+        required: true
+      scope:
+        title: Scope ID
+        description: The ID of the scope the vulnerability exception applies to.  May be empty if type is Global
+        type: integer
+        required: false
+      expiration:
+        title: Expiration
+        description: The date the vulnerability exception expires
+        type: date
+        required: false
+      comment:
+        title: Comment
+        description: Comment to include in the vulnerability exception submission
+        type: string
+        required: true
+        default: Exception created with InsightConnect
+      reason:
+        title: Reason
+        description: Reason for the exception
+        type: string
+        required: true
+        enum:
+        - False Positive
+        - Compensating Control
+        - Acceptable Use
+        - Acceptable Risk
+        - Other
+      key:
+        title: Vulnerability Key
+        description: The key to identify a specific instance if the type is Instance
+        type: string
+        required: false
+      port:
+        title: Vulnerability Port
+        description: The port the vulnerability appears on if the type is Instance
+        type: integer
+        required: false
+    output:
+      id:
+        title: Created Exception ID
+        description: The vulnerability exception that was created
+        type: integer
+        required: true
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  get_vulnerability:
+    title: Get Vulnerability Details
+    description: Get the details of a specific vulnerability by id
+    input:
+      id:
+        title: Vulnerability ID
+        description: The identifier of the vulnerability to retrieve from InsightVM
+        type: string
+        required: true
+    output:
+      vulnerability:
+        title: Vulnerability Details
+        description: The details of the vulnerability requested
+        type: vulnerability
+        required: true
 triggers:
   new_scans:
     title: New Scans
@@ -3354,4 +3616,26 @@ triggers:
         title: Scan
         description: InsightVM Scan
         type: scan
+        required: false
+  new_exception_request:
+    title: New Vulnerability Exception
+    description: Check for new InsightVM vulnerability exceptions
+    input:
+      frequency:
+        title: Frequency
+        description: How often the trigger should check for new vulnerability exception requests
+        type: integer
+        required: true
+        default: 5
+      status_filter:
+        title: Status Filter
+        description: 'List of vulnerability statuses to match against. Options include: Under Review and Approved'
+        type: '[]string'
+        required: false
+        default: ['Under Review']
+    output:
+      exception:
+        title: Vulnerability Exception
+        description: InsightVM vulnerability exception
+        type: vulnerability_exception
         required: false

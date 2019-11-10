@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='active_directory_ldap-rapid7-plugin',
-      version='3.2.4',
+      version='3.2.6',
       description='Active Directory LDAP',
       author='rapid7',
       author_email='',

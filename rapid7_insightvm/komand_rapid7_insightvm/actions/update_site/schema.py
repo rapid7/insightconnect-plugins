@@ -73,12 +73,12 @@ class UpdateSiteInput(komand.Input):
     }
   },
   "required": [
-    "scan_template_id",
-    "id",
-    "name",
     "description",
     "engine_id",
-    "importance"
+    "id",
+    "importance",
+    "name",
+    "scan_template_id"
   ]
 }
     """)

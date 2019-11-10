@@ -3,11 +3,16 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a user to Office365"
+
+
 class Input:
     ACCOUNT_ENABLED = "account_enabled"
     DISPLAY_NAME = "display_name"
     FORCE_CHANGE_PASSWORD = "force_change_password"
     MAIL_NICKNAME = "mail_nickname"
+    OFFICE_LOCATION = "office_location"
     PASSWORD = "password"
     USER_PRINCIPAL_NAME = "user_principal_name"
     
@@ -46,6 +51,12 @@ class AddUserInput(komand.Input):
       "description": "The mail alias for the user",
       "order": 3
     },
+    "office_location": {
+      "type": "string",
+      "title": "Office Location",
+      "description": "User Office Location",
+      "order": 7
+    },
     "password": {
       "type": "string",
       "title": "Password",
@@ -64,10 +75,10 @@ class AddUserInput(komand.Input):
   "required": [
     "account_enabled",
     "display_name",
-    "mail_nickname",
-    "user_principal_name",
     "force_change_password",
-    "password"
+    "mail_nickname",
+    "password",
+    "user_principal_name"
   ]
 }
     """)

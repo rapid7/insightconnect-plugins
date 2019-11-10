@@ -3,7 +3,7 @@
 
 ## About
 
-This plugin utilizes Active Directory to run LDAP queries.
+This plugin utilizes Active Directory to run LDAP queries. This plugin supports Windows Server 2008 and later. Some testing has been done with Windows server 2003; however, it is not officially supported.
 
 ## Actions
 
@@ -361,6 +361,8 @@ Examples:
 * 3.2.2 - Fix issue regarding escaping of `(` and `)` in the Query action
 * 3.2.3 - Fix issue with Add User action disable and enable flags | Update Query action to allow for `<=` and `>=` searches
 * 3.2.4 - Fix issue with Query where some output was not unescaped properly | Update to exception handling to leverage PluginException
+* 3.2.5 - Clean connection test output
+* 3.2.6 - Update help to document supported Windows Server versions
 
 ## References
 

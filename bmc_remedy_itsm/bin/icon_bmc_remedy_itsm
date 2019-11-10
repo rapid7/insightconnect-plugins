@@ -6,7 +6,7 @@ from icon_bmc_remedy_itsm import connection, actions, triggers
 
 Name = 'BMC Remedy ITSM'
 Vendor = 'rapid7'
-Version = '1.5.0'
+Version = '1.6.0'
 Description = 'Transform your service desk with the right ITSM solution'
 
 
@@ -20,6 +20,8 @@ class ICONBmcRemedyItsm(komand.Plugin):
                 connection=connection.Connection()
                 )
         self.add_trigger(triggers.NewIncidentFound())
+
+        self.add_action(actions.AssignIncident())
 
         self.add_action(actions.CloseIncident())
 

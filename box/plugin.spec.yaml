@@ -1,4 +1,6 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: box
 title: Box
 vendor: rapid7
@@ -7,6 +9,9 @@ status: []
 description: Box gives you access to secure content management and content experience
   features of the Box Enterprise API
 version: 2.2.1
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - box
 - cloud

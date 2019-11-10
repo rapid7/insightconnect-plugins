@@ -4,10 +4,10 @@ import json
 
 
 class Input:
+    ACCESS_KEY = "access_key"
     APP_ID = "app_id"
     APP_KEY = "app_key"
-    AUTH_TYPE = "auth_type"
-    CREDENTIALS = "credentials"
+    SECRET_KEY = "secret_key"
     URL = "url"
     
 
@@ -17,6 +17,12 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "access_key": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Application Access Key",
+      "description": "The application access key",
+      "order": 5
+    },
     "app_id": {
       "type": "string",
       "title": "App ID",
@@ -27,23 +33,12 @@ class ConnectionSchema(komand.Input):
       "$ref": "#/definitions/credential_secret_key",
       "title": "Application Key",
       "description": "The application key",
-      "order": 5
-    },
-    "auth_type": {
-      "type": "string",
-      "title": "Authentication Type",
-      "description": "The type of authentication: cloud or domain",
-      "default": "Basic-Cloud",
-      "enum": [
-        "Basic-Cloud",
-        "Basic-Ad"
-      ],
       "order": 3
     },
-    "credentials": {
-      "$ref": "#/definitions/credential_username_password",
-      "title": "Basic Auth Username and Password",
-      "description": "Basic auth username and password",
+    "secret_key": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Application Secret Key",
+      "description": "The application secret key",
       "order": 4
     },
     "url": {
@@ -54,10 +49,10 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
+    "access_key",
     "app_id",
     "app_key",
-    "auth_type",
-    "credentials",
+    "secret_key",
     "url"
   ],
   "definitions": {
@@ -77,30 +72,6 @@ class ConnectionSchema(komand.Input):
       },
       "required": [
         "secretKey"
-      ]
-    },
-    "credential_username_password": {
-      "id": "credential_username_password",
-      "type": "object",
-      "title": "Credential: Username and Password",
-      "description": "A username and password combination",
-      "properties": {
-        "password": {
-          "type": "string",
-          "title": "Password",
-          "displayType": "password",
-          "description": "The password",
-          "format": "password"
-        },
-        "username": {
-          "type": "string",
-          "title": "Username",
-          "description": "The username to log in with"
-        }
-      },
-      "required": [
-        "username",
-        "password"
       ]
     }
   }

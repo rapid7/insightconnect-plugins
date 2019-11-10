@@ -36,8 +36,8 @@ class UpdateAssetGroupSearchCriteriaInput(komand.Input):
     }
   },
   "required": [
-    "searchCriteria",
-    "id"
+    "id",
+    "searchCriteria"
   ]
 }
     """)

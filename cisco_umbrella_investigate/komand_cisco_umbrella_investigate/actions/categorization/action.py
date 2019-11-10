@@ -15,6 +15,8 @@ class Categorization(komand.Action):
     def run(self, params={}):
 
         domains = params.get('domains')
+        if (len(domains) == 1):
+            domains = str(domains[0])
         
         try:
             remoteCategories = self.connection.investigate.categorization(domains, labels=True)

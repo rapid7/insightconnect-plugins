@@ -1,4 +1,6 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: pastebin
 title: Pastebin
 description: Pastebin.com is the number one paste tool since 2002. Pastebin is a website
@@ -7,6 +9,9 @@ version: 1.0.0
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - scrape
 - paste

@@ -6,7 +6,7 @@ from komand_rapid7_insightvm import connection, actions, triggers
 
 Name = 'Rapid7 InsightVM'
 Vendor = 'rapid7'
-Version = '3.4.0'
+Version = '3.5.0'
 Description = 'InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities'
 
 
@@ -19,6 +19,8 @@ class ICONRapid7Insightvm(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_trigger(triggers.NewExceptionRequest())
+
         self.add_trigger(triggers.NewScans())
 
         self.add_action(actions.AddScanEnginePoolEngine())
@@ -31,6 +33,8 @@ class ICONRapid7Insightvm(komand.Plugin):
 
         self.add_action(actions.CreateAssetGroup())
 
+        self.add_action(actions.CreateException())
+
         self.add_action(actions.CreateScanEngine())
 
         self.add_action(actions.CreateScanEnginePool())
@@ -42,6 +46,8 @@ class ICONRapid7Insightvm(komand.Plugin):
         self.add_action(actions.CreateUser())
 
         self.add_action(actions.DeleteAssetGroup())
+
+        self.add_action(actions.DeleteException())
 
         self.add_action(actions.DeleteScanEngine())
 
@@ -119,6 +125,8 @@ class ICONRapid7Insightvm(komand.Plugin):
 
         self.add_action(actions.GetVulnerabilitiesByCve())
 
+        self.add_action(actions.GetVulnerability())
+
         self.add_action(actions.GetVulnerabilityAffectedAssets())
 
         self.add_action(actions.ListReports())
@@ -138,6 +146,8 @@ class ICONRapid7Insightvm(komand.Plugin):
         self.add_action(actions.RemoveUserAssetGroupAccess())
 
         self.add_action(actions.RemoveUserSiteAccess())
+
+        self.add_action(actions.ReviewException())
 
         self.add_action(actions.Scan())
 

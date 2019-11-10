@@ -5,7 +5,6 @@ import json
 
 class Input:
     CREDENTIALS = "credentials"
-    PROJECT = "project"
     URL = "url"
     
 
@@ -19,12 +18,6 @@ class ConnectionSchema(komand.Input):
       "$ref": "#/definitions/credential_username_password",
       "title": "Username and API Key",
       "description": "Username and API key",
-      "order": 3
-    },
-    "project": {
-      "type": "string",
-      "title": "Project",
-      "description": "Project ID",
       "order": 2
     },
     "url": {

@@ -1,0 +1,38 @@
+{
+    "body": {
+        "action": "create_workspace",
+        "connection": {
+            "aws_access_key_id": {
+                "secretKey": null
+            },
+            "aws_secret_access_key": {
+                "secretKey": null
+            },
+            "region": null
+        },
+        "input": {
+            "bundle_id": "wsb-clj85qzj1",
+            "directory_id": "d-926714c63a",
+            "root_volume_encryption_enabled": true,
+            "tags": [
+                {
+                    "Key": "test",
+                    "Value": "testing"
+                }
+            ],
+            "user_volume_encryption_enabled": false,
+            "username": "username",
+            "volume_encryption_key": "",
+            "workspace_properties": {
+                "compute_type_name": "STANDARD",
+                "root_volume_size": 80,
+                "running_mode": "AUTO_STOP",
+                "running_mode_auto_stop_time_out": 60,
+                "user_volume_size": 50
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "create_branched_project",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "input": {
+            "id": 14,
+            "project": {
+                "name": "new-branched-project-14"
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

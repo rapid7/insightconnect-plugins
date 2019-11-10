@@ -52,10 +52,10 @@ class UpdateUserRoleInput(komand.Input):
     }
   },
   "required": [
-    "role_id",
-    "user_id",
     "access_all_asset_groups",
-    "access_all_sites"
+    "access_all_sites",
+    "role_id",
+    "user_id"
   ]
 }
     """)

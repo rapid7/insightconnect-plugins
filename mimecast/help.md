@@ -292,10 +292,11 @@ This action is used to get TTP URL logs.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|from|string|None|False|Start date of logs to return in the following format 2015-11-16T14\:49\:18+0000. Default is the start of the current day|None|
-|to|string|None|False|End date of logs to return in the following format 2015-11-16T14\:49\:18+0000. Default is time of request|None|
+|from|string|None|False|Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day|None|
 |route|string|all|True|Filters logs by route, must be one of inbound, outbound, internal, or all|['all', 'inbound', 'outbound', 'internal']|
 |scan_result|string|all|True|Filters logs by scan result, must be one of clean, malicious, or all|['clean', 'malicious', 'all']|
+|to|string|None|False|End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request|None|
+|url_to_filter|string|None|False|URL filter results with|None|
 
 #### Output
 
@@ -335,15 +336,14 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|The URL for the Mimecast server|None|
-|auth_type|string|None|True|The type of authentication\: cloud or domain|['Basic-Cloud', 'Basic-Ad']|
+|access_key|credential_secret_key|None|True|The application access key|None|
 |app_id|string|None|True|Application ID|None|
 |app_key|credential_secret_key|None|True|The application key|None|
-|credentials|credential_username_password|None|True|Basic Auth username and password|None|
+|secret_key|credential_secret_key|None|True|The application secret key|None|
+|url|string|None|True|The URL for the Mimecast server|None|
 
 ## Troubleshooting
 
-The username in the connection should be a user's email address e.g. jdoe@example.com
 For the Create Managed URL action, the URL must include `http://` or `https://` e.g. `http://google.com`
 Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api-overview/global-base-urls/)
 
@@ -356,6 +356,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 * 2.3.0 - New actions Add Group Member and Find Group
 * 2.4.0 - New action Get TTP URL Logs
 * 2.5.0 - New action Decode URL
+* 3.0.0 - Add URL in Get TTP URL Logs action to filter output | Update connection settings to the proper authentication supported by the Mimecast API
 
 ## Workflows
 
@@ -442,7 +443,7 @@ Examples:
 |route|string|False|The route of the email that contained the link|
 |scanResult|string|False|The result of the URL scan|
 |ttpDefinition|string|False|The description of the definition that triggered the URL to be rewritten by Mimecast|
-|url|string|False|The url clicked|
+|url|string|False|The URL clicked|
 |userAwarenessAction|string|False|The action taken by the user if user awareness was applied|
 |userEmailAddress|string|False|The email address of the user who clicked the link|
 |userOverride|string|False|The action requested by the user|

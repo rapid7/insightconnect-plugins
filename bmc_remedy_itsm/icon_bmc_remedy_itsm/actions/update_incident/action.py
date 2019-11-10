@@ -1,10 +1,11 @@
 import komand
 from .schema import UpdateIncidentInput, UpdateIncidentOutput, Input, Output, Component
 # Custom imports below
+from komand.exceptions import PluginException
+from icon_bmc_remedy_itsm.util import error_handling
 import requests
 import json
 import urllib.parse
-from komand.exceptions import PluginException
 
 
 class UpdateIncident(komand.Action):
@@ -19,9 +20,22 @@ class UpdateIncident(komand.Action):
             output=UpdateIncidentOutput())
 
     def run(self, params={}):
+        handler = error_handling.ErrorHelper()
         incident_id = params.pop(Input.INCIDENT_ID)
         uri = f"api/arsys/v1/entry/HPD%3AIncidentInterface/{incident_id}|{incident_id}"
         other_inputs = params.pop(Input.OTHER_INPUTS)
+
+        url = urllib.parse.urljoin(self.connection.url, uri)
+        headers = self.connection.make_headers_and_refresh_token()
+
+        original_incident_response = requests.get(url, headers=headers)
+        handler.error_handling(original_incident_response)
+
+        try:
+            original_incident = komand.helper.clean(original_incident_response.json())
+        except json.JSONDecodeError as e:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
+                                  data=e)
 
         values = dict()
 
@@ -30,46 +44,28 @@ class UpdateIncident(komand.Action):
                 values.update({key: params[value]})
         values.update(other_inputs)
 
-        payload = {"values": values}
-
-        url = urllib.parse.urljoin(self.connection.url, uri)
-        headers = self.connection.make_headers_and_refresh_token()
-
-        result = requests.put(url, headers=headers, json=payload)
-
-        if result.status_code == 400:
-            raise PluginException(cause="A 400 error code was returned",
-                                  assistance="The error code indicates that the JSON Token was invalid."
-                                             " This is normally caused by an incorrect username or password")
         try:
-            result.raise_for_status()
-        except requests.HTTPError as e:
-            raise PluginException(cause=f"An unexpected error code was returned. Status code was {result.status_code}",
-                                  assistance="Please contact support with the status code and error information",
-                                  data=e)
+            for key, value in values:
+                original_incident.get("values")[key] = value
+        except KeyError:
+            raise PluginException(cause="One or more of the input keys is invalid.",
+                                  assistance="Check that the input keys in 'Other Inputs' are all valid.",
+                                  data=values)
 
-        get_incident_id_endpoint = f"api/arsys/v1/entry/HPD%3AHelp%20Desk/{incident_id}"
+        result = requests.put(url, headers=headers, json=original_incident)
+        handler.error_handling(result)
 
-        url = urllib.parse.urljoin(self.connection.url, get_incident_id_endpoint)
-        headers = self.connection.make_headers_and_refresh_token()
+        original_incident_response = requests.get(url, headers=headers)
 
-        result = requests.get(url, headers=headers)
-
-        if result.status_code == 400:
-            raise PluginException(cause="An HTTP 400 status code was returned.",
-                                  assistance="This status code indicates that the JSON Token was invalid."
-                                             " This is normally caused by an incorrect username or password.")
-        try:
-            result.raise_for_status()
-        except requests.HTTPError as e:
-            raise PluginException(cause=f"An unexpected status code was returned. Status code was {result.status_code}.",
-                                  assistance="Please contact support with the status code and error information.",
-                                  data=e)
+        # If we made it this far, and this call fails, something really unexpected happened.
+        if not original_incident_response.status_code == 200:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR,
+                                  data=original_incident_response.text)
 
         try:
-            incident = result.json()
+            original_incident = original_incident_response.json()
         except json.JSONDecodeError as e:
-            raise PluginException(PluginException.Preset.INVALID_JSON,
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
                                   data=e)
 
-        return {Output.INCIDENT: komand.helper.clean(incident)}
+        return {Output.INCIDENT: komand.helper.clean(original_incident)}

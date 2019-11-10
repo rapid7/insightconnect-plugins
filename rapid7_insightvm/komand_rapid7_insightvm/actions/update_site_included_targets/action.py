@@ -1,5 +1,5 @@
 import komand
-from .schema import UpdateSiteIncludedTargetsInput, UpdateSiteIncludedTargetsOutput, Input, Output
+from .schema import UpdateSiteIncludedTargetsInput, UpdateSiteIncludedTargetsOutput, Input
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_helper import ResourceHelper

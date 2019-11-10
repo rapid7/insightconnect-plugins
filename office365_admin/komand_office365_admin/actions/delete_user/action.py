@@ -1,7 +1,8 @@
 import komand
-from .schema import DeleteUserInput, DeleteUserOutput
+from .schema import DeleteUserInput, DeleteUserOutput, Input, Output, Component
 # Custom imports below
 import requests
+from komand.exceptions import PluginException
 
 
 class DeleteUser(komand.Action):
@@ -9,12 +10,12 @@ class DeleteUser(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='delete_user',
-                description='Remove a user\'s access to Office365',
+                description=Component.DESCRIPTION,
                 input=DeleteUserInput(),
                 output=DeleteUserOutput())
 
     def run(self, params={}):
-        user_principal_name = params.get('user_principal_name')
+        user_principal_name = params.get(Input.USER_PRINCIPAL_NAME)
         token = self.connection.access_token
 
         base_url = 'https://graph.microsoft.com/beta/users/%s' % user_principal_name
@@ -23,20 +24,11 @@ class DeleteUser(komand.Action):
         try:
             response = requests.delete(base_url, headers=headers)
         except requests.HTTPError:
-            self.logger.error('There was an issue with the delete user request double check the user name: %s'
-                              % user_principal_name)
-            raise
+            raise PluginException(cause=f"There was an issue with the Delete User request. Double-check the username: {user_principal_name}",
+                                  data=response.text)
         if response.status_code == 204:
             success = True
-            return {'success': success}
+            return {Output.SUCCESS: success}
         else:
-            self.logger.error('The response from Microsoft Office indicated something went wrong %s'
-                              % response.status_code)
-            self.logger.error(response.json())
-            raise requests.HTTPError
-
-    def test(self):
-        if self.connection.access_token:
-            return {'success': True}
-        else:
-            raise Exception('could not retrieve access token check your connection information')
+            raise PluginException(cause="The response from Office365 indicated something went wrong: {response.status_code}",
+                                  data=response.text)

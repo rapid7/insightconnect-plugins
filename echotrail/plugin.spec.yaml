@@ -1,4 +1,6 @@
 plugin_spec_version: v2
+extension: plugin
+product: ["insightconnect"]
 name: echotrail
 title: "EchoTrail Insights"
 description: "EchoTrail Insights is a database of executable behavioral analytics, searchable by filename or SHA256 or MD5 hash"
@@ -6,6 +8,9 @@ version: 1.0.0
 vendor: echotrail
 support: partner
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags: ["filename", "hash", "behavior", "analytics", "search"]
 enable_cache: true
 types:

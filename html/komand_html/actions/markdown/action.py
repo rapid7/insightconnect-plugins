@@ -3,6 +3,7 @@ import pypandoc
 import base64
 import re
 from .schema import MarkdownInput, MarkdownOutput
+from komand.exceptions import PluginException
 
 
 class Markdown(komand.Action):
@@ -18,7 +19,8 @@ class Markdown(komand.Action):
     tags = re.findall(tag_parser, params.get('doc'))
     try:
         if not len(tags):
-            raise Exception('Run: Input Invalid, Input must be of type HTML')
+            raise PluginException(cause='Run: Invalid input.',
+                                  assistance='Input must be of type HTML.')
         output = pypandoc.convert_text(params.get('doc'), 'md', format='html')
         f = base64.b64encode(output.encode('ascii')).decode()
         return {'markdown_contents': output, 'markdown_file': f}

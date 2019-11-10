@@ -1,7 +1,9 @@
 import komand
 from .schema import GetIssueInput, GetIssueOutput, Input, Output, Component
+
 # Custom imports below
 from ...util import *
+from komand.exceptions import PluginException
 
 
 class GetIssue(komand.Action):
@@ -19,7 +21,8 @@ class GetIssue(komand.Action):
         get_attachments = params.get(Input.GET_ATTACHMENTS)
 
         if not issue:
-            raise Exception('no issue found: ' + params['id'])
+            raise PluginException(cause=f"No issue found with ID: {params['id']}.",
+                                  assistance='Please provide a valid issue ID.')
 
         output = normalize_issue(issue=issue, get_attachments=get_attachments, include_raw_fields=True, logger=self.logger)
 

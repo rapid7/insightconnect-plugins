@@ -6,7 +6,7 @@ from komand_active_directory_ldap import connection, actions, triggers
 
 Name = 'Active Directory LDAP'
 Vendor = 'rapid7'
-Version = '3.2.4'
+Version = '3.2.6'
 Description = 'Active Directory LDAP'
 
 

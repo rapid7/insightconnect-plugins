@@ -95,13 +95,13 @@ class CreateUserInput(komand.Input):
     }
   },
   "required": [
-    "email",
-    "enabled",
-    "name",
-    "authentication_type",
-    "login",
     "access_all_asset_groups",
     "access_all_sites",
+    "authentication_type",
+    "email",
+    "enabled",
+    "login",
+    "name",
     "role_id"
   ]
 }
@@ -134,8 +134,8 @@ class CreateUserOutput(komand.Output):
     }
   },
   "required": [
-    "links",
-    "id"
+    "id",
+    "links"
   ],
   "definitions": {
     "link": {
