@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Trim a string of leading or trailing whitespace"
+    DESCRIPTION = "Trim a string of leading and trailing whitespace"
 
 
 class Input:

@@ -174,7 +174,7 @@ Example output:
 
 ### Trim
 
-This action is used to trim a string of leading or trailing whitespace.
+This action is used to trim a string of leading and trailing whitespace.
 
 #### Input
 

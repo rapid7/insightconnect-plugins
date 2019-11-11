@@ -129,7 +129,7 @@ actions:
         required: false
   trim:
     title: Trim
-    description: Trim a string of leading or trailing whitespace
+    description: Trim a string of leading and trailing whitespace
     input:
       string:
         title: String Input
