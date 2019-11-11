@@ -27,6 +27,8 @@ class ICONString(komand.Plugin):
 
         self.add_action(actions.SplitToObject())
 
+        self.add_action(actions.Trim())
+
         self.add_action(actions.Upper())
 
 

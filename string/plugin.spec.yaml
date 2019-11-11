@@ -127,3 +127,18 @@ actions:
         title: Lowercase
         description: Lowercase string
         required: false
+  trim:
+    title: Trim
+    description: Trim a string of leading or trailing whitespace
+    input:
+      string:
+        title: String Input
+        description: String to convert
+        type: string
+        required: true
+    output:
+      trimmed:
+        type: string
+        title: Trimmed
+        description: Trimmed String
+        required: false

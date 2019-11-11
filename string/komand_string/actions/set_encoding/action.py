@@ -3,6 +3,7 @@ from .schema import SetEncodingInput, SetEncodingOutput, Input, Output, Componen
 # Custom imports below
 from komand.exceptions import PluginException
 
+
 class SetEncoding(komand.Action):
 
     def __init__(self):
@@ -21,7 +22,7 @@ class SetEncoding(komand.Action):
             output = string.encode(encoding_val, error_handler)
         except UnicodeError:
             raise PluginException(cause="Encoding failed.", assistance="Could not encode given string.")
-        
+
         output = output.decode(encoding_val, error_handler)
 
         return {Output.ENCODED: output}
