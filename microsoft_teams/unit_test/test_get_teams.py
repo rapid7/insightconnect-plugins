@@ -30,7 +30,7 @@ class TestGetTeams(TestCase):
         self.assertIsNotNone(result)
         self.assertEqual(result.get('teams')[0].get('displayName'), 'Dream Team')
 
-    def test_get_teams(self):
+    def test_get_teams_with_regex(self):
         log = logging.getLogger("Test")
 
         test_action = GetTeams()

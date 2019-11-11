@@ -106,13 +106,12 @@ class NewMessageReceived(komand.Trigger):
         try:
             messages_result.raise_for_status()
 
-
         # The beta API bombs out every once in a while with Auth denied. Try forcing a refersh of our auth token and
         # retry getting messages before raising an exception.
-        except Exception as e:
+        except Exception:
             self.logger.info("Get messages failed, refreshing token and trying again.")
-            time.sleep(10) # sleep for 10 seconds to make sure we're not killing the API
-            headers = self.connection.get_headers(True) # This will force a refresh of our auth token
+            time.sleep(10)  # sleep for 10 seconds to make sure we're not killing the API
+            headers = self.connection.get_headers(True)  # This will force a refresh of our auth token
             messages_result = requests.get(messages_endpoint, headers=headers)
             try:
                 messages_result.raise_for_status()
