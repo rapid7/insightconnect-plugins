@@ -6,7 +6,7 @@
         },
         "input": {
             "channel_name": "Komand Test Channel",
-            "message_content": ".*CHOPPA.*",
+            "message_content": "[Cc]HOPPA",
             "team_name": "Komand-Test-Everyone"
         },
         "meta": {},

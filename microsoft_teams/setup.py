@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='microsoft_teams-rapid7-plugin',
-      version='1.2.1',
+      version='1.2.2',
       description='Microsoft Teams actions and triggers',
       author='rapid7',
       author_email='',
