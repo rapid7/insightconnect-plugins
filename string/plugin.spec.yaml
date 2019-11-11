@@ -140,5 +140,5 @@ actions:
       trimmed:
         type: string
         title: Trimmed
-        description: Trimmed String
+        description: Trimmed string
         required: false

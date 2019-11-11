@@ -186,7 +186,7 @@ This action is used to trim a string of leading and trailing whitespace.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|trimmed|string|False|Trimmed String|
+|trimmed|string|False|Trimmed string|
 
 Example output:
 

@@ -47,7 +47,7 @@ class TrimOutput(komand.Output):
     "trimmed": {
       "type": "string",
       "title": "Trimmed",
-      "description": "Trimmed String",
+      "description": "Trimmed string",
       "order": 1
     }
   }
