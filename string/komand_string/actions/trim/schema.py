@@ -24,7 +24,7 @@ class TrimInput(komand.Input):
     "string": {
       "type": "string",
       "title": "String Input",
-      "description": "String to convert",
+      "description": "String to trim",
       "order": 1
     }
   },

@@ -180,7 +180,7 @@ This action is used to trim a string of leading or trailing whitespace.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert|None|
+|string|string|None|True|String to trim|None|
 
 #### Output
 

@@ -133,7 +133,7 @@ actions:
     input:
       string:
         title: String Input
-        description: String to convert
+        description: String to trim
         type: string
         required: true
     output:
