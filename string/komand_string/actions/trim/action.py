@@ -15,8 +15,4 @@ class Trim(komand.Action):
 
     def run(self, params={}):
         string = params.get(Input.STRING)
-        if not string:
-            raise PluginException(cause='Action failed! Missing required user input.',
-                                  assistance='Please provide the input string.')
-
         return {Output.TRIMMED: string.strip()}
