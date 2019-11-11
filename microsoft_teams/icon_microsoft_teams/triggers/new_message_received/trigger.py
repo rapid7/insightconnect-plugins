@@ -58,7 +58,7 @@ class NewMessageReceived(komand.Trigger):
                         self.logger.info("Analyzing message...")
                         if message_content:
                             self.logger.info("Checking message content.")
-                            if compiled_message_content.match(message.get("body", {}).get("content", "")):
+                            if compiled_message_content.search(message.get("body", {}).get("content", "")):
                                 self.logger.info("Returning new message.")
                                 self.send({Output.MESSAGE: message})
                             else:
