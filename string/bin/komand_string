@@ -6,7 +6,7 @@ from komand_string import connection, actions, triggers
 
 Name = 'String Operations'
 Vendor = 'rapid7'
-Version = '1.1.0'
+Version = '1.2.0'
 Description = 'Provides common programmatic string operations'
 
 
