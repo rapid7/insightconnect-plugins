@@ -1,14 +1,9 @@
 plugin_spec_version: v2
-extension: plugin
-product: ["insightconnect"]
 name: bmc_remedy_itsm
 title: "BMC Remedy ITSM"
 description: "Transform your service desk with the right ITSM solution"
-version: 1.6.0
+version: 1.7.0
 vendor: rapid7
-resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
-  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags: [ "ITSM", "BMC", "Remedy", "Service Management" ]
 support: community
 status: []
@@ -988,6 +983,26 @@ actions:
       Assignee_login_id:
         title: Assignee Login ID
         description: The assignees ID. Often the first name of the assignee e.g. Allen
+        type: string
+        required: true
+    output:
+      incident:
+        title: "Incident"
+        type: incident
+        description: "Incident"
+        required: false
+  add_incident_work_note:
+    title: Add Incident Work Note
+    description: Add a work note to an incident
+    input:
+      incident_id:
+        type: string
+        title: Incident ID
+        description: Incident ID
+        required: true
+      work_note:
+        title: Work Note
+        description: Work note
         type: string
         required: true
     output:
