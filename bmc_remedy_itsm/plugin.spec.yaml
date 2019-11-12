@@ -993,7 +993,7 @@ actions:
         required: false
   add_incident_work_note:
     title: Add Incident Work Note
-    description: Add a work note to an incident
+    description: Add a work note to an Incident
     input:
       incident_id:
         type: string
