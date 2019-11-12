@@ -8,7 +8,7 @@
 
 ### Add Incident Work Note
 
-This action is used to add a work note to an incident.
+This action is used to add a work note to an Incident.
 
 #### Input
 
