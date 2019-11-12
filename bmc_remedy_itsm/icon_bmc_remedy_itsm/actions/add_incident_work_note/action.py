@@ -35,10 +35,14 @@ class AddIncidentWorkNote(komand.Action):
 
         handler.error_handling(original_incident_response)
 
-        original_incident = komand.helper.clean(original_incident_response.json())
+        try:
+            original_incident = komand.helper.clean(original_incident_response.json())
+        except json.JSONDecodeError as e:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
+                                  data=e)
 
         original_incident.get("values")["z1D Action"] = "Modify"
-        original_incident.get("values")["z1D_WorklogDetails"] = work_note
+        original_incident.get("values")["z1D_Details"] = work_note
 
         result = requests.put(url, headers=headers, json=original_incident)
         handler.error_handling(result)
