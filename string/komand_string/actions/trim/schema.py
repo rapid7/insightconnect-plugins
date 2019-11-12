@@ -50,7 +50,10 @@ class TrimOutput(komand.Output):
       "description": "Trimmed string",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "trimmed"
+  ]
 }
     """)
 

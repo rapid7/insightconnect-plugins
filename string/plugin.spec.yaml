@@ -141,4 +141,4 @@ actions:
         type: string
         title: Trimmed
         description: Trimmed string
-        required: false
+        required: true
