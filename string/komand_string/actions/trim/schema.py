@@ -4,39 +4,32 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Strip an HTML string of all tags and return only the text"
+    DESCRIPTION = "Trim a string of leading and trailing whitespace"
 
 
 class Input:
-    DOC = "doc"
-    REMOVE_SCRIPTS = "remove_scripts"
+    STRING = "string"
     
 
 class Output:
-    TEXT = "text"
+    TRIMMED = "trimmed"
     
 
-class TextInput(komand.Input):
+class TrimInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "doc": {
+    "string": {
       "type": "string",
-      "title": "Document",
-      "description": "Document to transform",
+      "title": "String Input",
+      "description": "String to trim",
       "order": 1
-    },
-    "remove_scripts": {
-      "type": "boolean",
-      "title": "Remove Scripts",
-      "description": "Remove non-HTML scripts from the document",
-      "order": 2
     }
   },
   "required": [
-    "doc"
+    "string"
   ]
 }
     """)
@@ -45,19 +38,22 @@ class TextInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class TextOutput(komand.Output):
+class TrimOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "text": {
+    "trimmed": {
       "type": "string",
-      "title": "Text",
-      "description": "String without HTML tags",
+      "title": "Trimmed",
+      "description": "Trimmed string",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "trimmed"
+  ]
 }
     """)
 

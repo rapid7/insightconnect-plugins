@@ -467,6 +467,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.1 - Fix issue where New Message Received trigger could receive an unauthorized error after sustained use
+* 1.2.2 - Fix issue where regular expressions would only match at the beginning of a string
 * 1.2.0 - New actions Add Member to Team, Remove Member from Team, Create Teams Enabled Group, Delete Team, Add Channel to Team, and Remove Channel from Team
 * 1.1.0 - New trigger New Message Received | New action Send HTML Message
 * 1.0.1 - Fix issue where improper exception could be raised
@@ -480,4 +482,3 @@ _This plugin does not contain any troubleshooting information._
 * [Microsoft Teams API](https://docs.microsoft.com/en-us/graph/api/resources/teams-api-overview?view=graph-rest-1.0)
 * [Adaptive Cards Actions](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/cards/cards-actions#adaptive-cards-actions)
 * [Python Regular Expression Library (Re)](https://docs.python.org/3.7/library/re.html)
-

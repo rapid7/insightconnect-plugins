@@ -4,7 +4,7 @@ product: ["insightconnect"]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: Active Directory LDAP
-version: 3.2.5
+version: 3.2.6
 vendor: rapid7
 support: rapid7
 status: []
