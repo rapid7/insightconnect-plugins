@@ -156,10 +156,6 @@ CSV files must not have non-CSV data such as comments.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)

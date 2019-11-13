@@ -114,10 +114,6 @@ Scraping tasks require the IP of the machine running Komand to need be [whitelis
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Pastebin](http://pastebin.com/)

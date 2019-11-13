@@ -94,10 +94,6 @@ A valid domain or IP address must be provided.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [IPStack](https://ipstack.com)

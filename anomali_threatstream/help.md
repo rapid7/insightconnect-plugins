@@ -249,10 +249,6 @@ If you're unable to import data without approval, the Anomali user configured in
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Anomali ThreatStream](https://www.anomali.com/)

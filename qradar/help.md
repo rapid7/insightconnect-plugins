@@ -248,10 +248,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [QRadar](https://www-03.ibm.com/software/products/en/qradar)

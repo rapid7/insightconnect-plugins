@@ -106,10 +106,6 @@ Make sure the credentials are valid and the Confluence URL is correct.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Confluence](https://www.atlassian.com/software/confluence)

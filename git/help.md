@@ -143,10 +143,6 @@ If a token is used, make sure that it has sufficient permissions assigned to it.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [git-clone](https://www.git-scm.com/docs/git-clone)

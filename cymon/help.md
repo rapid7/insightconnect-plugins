@@ -455,10 +455,6 @@ the count range 1-2000 has been tested and verified working by us.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Cymon](https://cymon.io/)

@@ -75,10 +75,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Sumo Logic](https://www.sumologic.com/)

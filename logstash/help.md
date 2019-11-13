@@ -134,10 +134,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Logstash monitoring API](https://www.elastic.co/guide/en/logstash/current/monitoring.html).

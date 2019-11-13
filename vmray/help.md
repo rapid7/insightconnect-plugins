@@ -533,10 +533,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [VMRay API](https://cloud.vmray.com/static_doc/html/api/REST_API_Documentation.html)

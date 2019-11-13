@@ -273,10 +273,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Jamf](https://developer.jamf.com/apis/classic-api/index)

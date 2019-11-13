@@ -98,8 +98,6 @@ class HelpUpdate:
     @staticmethod
     def get_links(contents: str) -> str:
         output = "# Links\n\n"
-        # base_path = os.path.basename(os.getcwd())
-        src_code = "## Source Code\n\n" + "https://github.com/rapid7/insightconnect-plugins" + "\n\n"
 
         try:
             pattern = "## References([\s\S]*?)## "
@@ -109,5 +107,5 @@ class HelpUpdate:
             match = re.findall(pattern, contents)[0]
         references = "## References\n\n" + match.strip() + "\n\n"
 
-        output += src_code + references
+        output += references
         return output

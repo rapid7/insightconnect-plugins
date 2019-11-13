@@ -94,10 +94,6 @@ The `--seq` and `--stream` flags are not supported in version 0.1.0 of this plug
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [jq](https://stedolan.github.io/jq/)

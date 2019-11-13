@@ -116,10 +116,6 @@ For example, `-V` is used to return the following `dump_contents` array where ea
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Tshark](https://www.wireshark.org/docs/man-pages/tshark.html)

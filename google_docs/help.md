@@ -950,10 +950,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Google Docs](https://developers.google.com/docs/api/reference/rest/v1/documents)

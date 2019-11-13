@@ -193,10 +193,6 @@ test for the existence of a value if it's needed later in the workflow.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Example](https://example.com)

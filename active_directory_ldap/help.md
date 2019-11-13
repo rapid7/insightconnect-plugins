@@ -375,10 +375,6 @@ paired `\(\)` are supported
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 [Python LDAP3 Search](https://ldap3.readthedocs.io/searches.html)

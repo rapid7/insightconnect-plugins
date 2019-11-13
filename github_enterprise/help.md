@@ -150,10 +150,6 @@ The GitHub Enterprise account must have sufficient privileges to perform the act
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [GitHub Enterprise](https://enterprise.github.com/home)

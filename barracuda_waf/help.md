@@ -1783,10 +1783,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Barracuda Web Application Firewall](https://campus.barracuda.com/product/webapplicationfirewall/)

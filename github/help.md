@@ -1063,10 +1063,6 @@ If two-factor authentication is enabled on the GitHub account you will need to [
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [GitHub](https://github.com)

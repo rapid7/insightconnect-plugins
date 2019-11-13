@@ -299,10 +299,6 @@ There's a rate limit on the free API service. The following error messags `429 C
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [AbuseIPDB](https://www.abuseipdb.com)

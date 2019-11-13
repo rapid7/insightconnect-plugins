@@ -399,10 +399,6 @@ The [jq](https://market.komand.com/plugins/komand/jq/0.1.0) and [JSON](https://m
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Threat Miner](https://www.threatminer.org)

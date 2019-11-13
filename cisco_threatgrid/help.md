@@ -626,10 +626,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Cisco ThreatGrid](https://www.cisco.com/c/en/us/products/security/threat-grid/index.html)

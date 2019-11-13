@@ -194,10 +194,6 @@ This plugin currently doesn't support the ident parameter which would allow bloc
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Black Hole Router Site](https://github.com/ncsa/bhr-site)

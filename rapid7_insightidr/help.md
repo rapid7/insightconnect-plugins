@@ -176,10 +176,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)

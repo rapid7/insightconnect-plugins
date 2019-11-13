@@ -150,10 +150,6 @@ Be sure the provided Bitbucket account used has permissions to perform the actio
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [BitBucket](https://bitbucket.org/)

@@ -133,10 +133,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [FireEye HX](https://www.fireeye.com/solutions/hx-endpoint-security-products.html)

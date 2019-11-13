@@ -1059,10 +1059,6 @@ In the case where this plugin is used extensively, the API can respond with 'Too
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [WiGLE](https://wigle.net/index)

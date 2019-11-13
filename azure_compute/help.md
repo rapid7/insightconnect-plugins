@@ -304,10 +304,6 @@ Error values use the standard HTTP codes (200 OK, 404 Not Found, etc)
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Microsoft Azure](https://azure.microsoft.com/)

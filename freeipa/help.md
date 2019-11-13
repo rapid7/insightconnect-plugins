@@ -362,10 +362,6 @@ Note that deletion is permanent and cannot be undone.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [FreeIPA Demo](https://ipa.demo1.freeipa.org)

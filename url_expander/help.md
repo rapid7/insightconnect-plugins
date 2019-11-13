@@ -100,10 +100,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Python Urllib2 urlopen](https://docs.python.org/2/library/urllib2.html#urllib2.urlopen)

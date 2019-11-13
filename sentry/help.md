@@ -318,10 +318,6 @@ You can find the [https://sentry.io/settings/{organization_slug}/{project_slug}/
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Submit Event](https://docs.sentry.io/clientdev/overview/#a-working-example)

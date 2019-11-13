@@ -79,10 +79,6 @@ A valid IP address must be provided.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [GeoIP Precision](https://www.maxmind.com/en/geoip2-precision-services)

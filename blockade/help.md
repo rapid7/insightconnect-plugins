@@ -125,10 +125,6 @@ The `Get Indicators` and `Get Events` actions do not require authentication.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Blockade](https://www.blockade.com)

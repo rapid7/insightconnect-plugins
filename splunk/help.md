@@ -267,10 +267,6 @@ _This plugin does not contain any custom output types._
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Tutorial: Connecting Splunk Alerts To Komand](https://komand.zendesk.com/hc/en-us/articles/115001374187)

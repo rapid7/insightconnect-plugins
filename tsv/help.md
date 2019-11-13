@@ -83,10 +83,6 @@ TSV files must not have non-TSV data such as comments.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [TSV](https://en.wikipedia.org/wiki/Tab-separated_values)

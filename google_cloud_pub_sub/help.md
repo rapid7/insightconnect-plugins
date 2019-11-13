@@ -201,10 +201,6 @@ This plugin requires a Google [service account](https://cloud.google.com/storage
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [API docs](https://google-cloud-python.readthedocs.io/en/latest/pubsub/index.html)

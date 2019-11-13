@@ -106,10 +106,6 @@ the discovery process does not work on locally run webservers, as the API root w
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [WordPress](https://wordpress.com/)

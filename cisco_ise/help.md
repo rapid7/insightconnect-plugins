@@ -191,10 +191,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * Cisco ISE API can be found at <your Cisco ISE server address>:9060/ers/sdk

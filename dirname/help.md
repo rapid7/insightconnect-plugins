@@ -80,10 +80,6 @@ If the input doesn't contain a slash `/` in the path, the result will be an empt
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Python Dirname](https://docs.python.org/2/library/os.path.html#os.path.dirname)

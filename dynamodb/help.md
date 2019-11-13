@@ -121,10 +121,6 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Dynamo Developer Resources](https://aws.amazon.com/dynamodb/developer-resources/)

@@ -97,10 +97,6 @@ by setting the ORS (Output Record Separator) variable to nothing e.g. `-v ORS= '
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Awk](https://www.gnu.org/software/gawk/manual/gawk.html)

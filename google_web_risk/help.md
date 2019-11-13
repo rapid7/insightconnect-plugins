@@ -78,10 +78,6 @@ Google's Web Risk API requires an API key for use. Sign up for the beta [here](h
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Google Web Risk API Documentation](https://cloud.google.com/web-risk/docs/)

@@ -374,10 +374,6 @@ Note: GitHub Repository IDs (repo_id) can be obtained via the GitHub API at the 
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [ZenHub](https://zenhub.com)

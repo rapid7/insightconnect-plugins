@@ -87,10 +87,6 @@ Some web servers do not support cache control mechanisms, or do not use them pro
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Handling Last-Modified and ETag](http://www.diveintopython.net/http_web_services/etags.html)

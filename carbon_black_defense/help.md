@@ -328,10 +328,6 @@ Get Notifications trigger requiers that the [API key type](https://developer.car
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Carbon Black Defense](https://www.carbonblack.com/products/cb-defense/)

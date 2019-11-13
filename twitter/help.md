@@ -196,10 +196,6 @@ If you suspect the failures are caused by a bug in the plugin, please contact Ko
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Twitter Apps](https://apps.twitter.com/)

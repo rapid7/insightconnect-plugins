@@ -1183,10 +1183,6 @@ To configure the BMC server for API usage: https://docs.bmc.com/docs/ars9000/con
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [BMC Remedy ITSM](https://www.bmc.com/it-solutions/it-service-management.html)

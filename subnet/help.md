@@ -72,10 +72,6 @@ However, the number of network does include the all-ones and all-zeros network.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Subnetwork](https://en.wikipedia.org/wiki/Subnetwork)

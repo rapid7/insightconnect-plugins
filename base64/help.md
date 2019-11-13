@@ -86,10 +86,6 @@ characters to `\uffd` or `?`. While ignore will drop the character from the outp
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Base64](https://en.wikipedia.org/wiki/Base64)

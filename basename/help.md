@@ -69,10 +69,6 @@ If the input doesn't contain a slash `/` in the path the result will be the orig
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Python Basename](https://docs.python.org/2/library/os.path.html#os.path.basename)

@@ -57,10 +57,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [PDF](https://en.wikipedia.org/wiki/Portable_Document_Format)

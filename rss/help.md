@@ -182,10 +182,6 @@ Between workflow runs, new items will *not* be reported on.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [feedparser](https://github.com/kurtmckee/feedparser)

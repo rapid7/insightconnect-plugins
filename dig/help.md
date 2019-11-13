@@ -187,10 +187,6 @@ Common examples:
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Dig](https://linux.die.net/man/1/dig)

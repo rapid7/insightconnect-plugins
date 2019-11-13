@@ -167,10 +167,6 @@ Multiple records can be returned by the server, this plugin currently only retur
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Whois](https://en.wikipedia.org/wiki/WHOIS)

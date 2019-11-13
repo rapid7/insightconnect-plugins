@@ -72,10 +72,6 @@ In case an error is raised, make sure that the given expression can be correctly
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [tr examples](https://www.geeksforgeeks.org/tr-command-unixlinux-examples/)

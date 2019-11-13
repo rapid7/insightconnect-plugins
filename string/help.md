@@ -209,10 +209,6 @@ If this is the case, consider using the Python 3 Script plugin instead.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Python 3 String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)

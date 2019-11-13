@@ -331,10 +331,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Cherwell API Documentation](https://cherwellsupport.com/CherwellAPI/Documentation/en-US/csm_rest_api.html)

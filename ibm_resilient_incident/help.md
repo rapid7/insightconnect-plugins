@@ -975,10 +975,6 @@ For actions that take a JSON object as input, Resilient will sometimes throw an 
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [API Documentation](http://your-resilient-hostname/docs/rest-api/index.html)

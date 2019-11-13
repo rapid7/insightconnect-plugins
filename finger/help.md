@@ -147,10 +147,6 @@ Some `finger` daemons return answers in a different format which will cause this
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Finger](https://linux.die.net/man/1/finger)

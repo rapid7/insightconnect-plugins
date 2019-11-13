@@ -2250,10 +2250,6 @@ an entity with the exact same data (e.g. IP groups), and in that case an excepti
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [tCell](https://www.tcell.io/)

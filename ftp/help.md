@@ -128,10 +128,6 @@ The FTP user must have permission to execute the respective tasks.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [FTP](https://en.wikipedia.org/wiki/File_Transfer_Protocolkj)

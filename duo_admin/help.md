@@ -473,10 +473,6 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Duo Security](https://duo.com/)

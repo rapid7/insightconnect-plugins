@@ -70,10 +70,6 @@ Before sending the SMS make sure that the country you're sending the message to 
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Twilio](https://www.twilio.com/)

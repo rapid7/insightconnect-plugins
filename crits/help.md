@@ -644,10 +644,6 @@ Ensure that the user associated with the API key is subscribed to the `source`.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [CRITs](https://crits.github.io/)

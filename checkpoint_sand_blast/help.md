@@ -186,10 +186,6 @@ hash must be SHA1
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Checkpoint website](https://www.checkpoint.com/)

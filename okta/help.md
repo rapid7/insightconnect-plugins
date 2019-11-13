@@ -585,10 +585,6 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Okta API Spec](http://developer.okta.com/docs/api/resources)

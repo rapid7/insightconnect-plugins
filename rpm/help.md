@@ -99,10 +99,6 @@ The complexity of this plugin overwhelmingly involves hacking around with yum, w
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [RPM](http://rpm.org/)

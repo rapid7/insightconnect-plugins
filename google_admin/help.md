@@ -101,10 +101,6 @@ _This plugin does not contain any custom output types._
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Google API's](https://www.googleapis.com/)

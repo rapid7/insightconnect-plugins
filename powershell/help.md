@@ -157,10 +157,6 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [pywinrm library](https://pypi.python.org/pypi/pywinrm)

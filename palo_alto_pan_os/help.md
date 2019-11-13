@@ -586,10 +586,6 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Palo Alto PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os)

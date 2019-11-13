@@ -226,10 +226,6 @@ To troubleshoot SQLmap, look at the INFO logs that are printed to see where the 
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [SQLmap](https://github.com/sqlmapproject/sqlmap)

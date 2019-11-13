@@ -569,10 +569,6 @@ Carbon Black Protection schedules events to happen, therefore what you see in ou
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Carbon Black Protection REST API](https://developer.carbonblack.com/reference/enterprise-protection/7.2/rest-api/)

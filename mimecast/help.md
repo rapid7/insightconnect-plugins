@@ -377,10 +377,6 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Mimecast API](https://www.mimecast.com/developer/documentation)

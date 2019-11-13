@@ -91,10 +91,6 @@ For the SQL query action, be sure that your query is valid SQL.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [SQLAlchemy](http://docs.sqlalchemy.org/en/latest/)

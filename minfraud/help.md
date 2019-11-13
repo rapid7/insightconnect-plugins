@@ -349,10 +349,6 @@ Refer to the minFraud API documentation for explicit details.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [minFraud](https://www.maxmind.com/en/minfraud-services)

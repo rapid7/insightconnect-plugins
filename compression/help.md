@@ -141,10 +141,6 @@ On decompression, be sure that the inputted file has been compressed using one o
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [bz2 python library](https://docs.python.org/3/library/bz2.html)

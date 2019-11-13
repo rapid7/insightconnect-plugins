@@ -106,10 +106,6 @@ If a literal double-quote is required it must be escaped by a backslash `\`. For
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Sed](https://www.gnu.org/software/sed/manual/sed.html)

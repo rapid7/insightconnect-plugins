@@ -289,10 +289,6 @@ e.g. `{"mykeyone": false, "mykeytwo": "mystring", "mykeythree": 27}`
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [API Documentation](https://python-jenkins.readthedocs.io/en/latest/api.html)

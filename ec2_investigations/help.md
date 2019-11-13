@@ -97,10 +97,6 @@ For example, the ClamAV action requires ClamAV to be installed on the destinatio
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 [Boto](http://boto.cloudhackers.com/en/latest/ref/manage.html)

@@ -164,10 +164,6 @@ To enable API access within Sophos XG, the setting is located in Backup & Firmwa
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Sophos XG Firewall](https://www.sophos.com/en-us/products/next-gen-firewall.aspx)

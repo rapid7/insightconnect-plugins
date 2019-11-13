@@ -304,10 +304,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Azure AD Admin](https://azure.microsoft.com)

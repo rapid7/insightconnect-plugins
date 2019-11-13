@@ -88,10 +88,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Proofpoint TAP](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection)

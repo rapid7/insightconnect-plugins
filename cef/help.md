@@ -93,10 +93,6 @@ Ensure your CEF strings are properly formatted.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [ArcSight Common Event Format (CEF) Guide](https://www.protect724.hpe.com/docs/DOC-1072)

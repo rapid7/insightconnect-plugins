@@ -423,10 +423,6 @@ The RSA token private key, JWT, client ID and secret must be provided to the plu
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Box](https://www.box.com/)

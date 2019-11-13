@@ -62,10 +62,6 @@ Foremost only works on disk images such as those created by the `dd` tool.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Foremost](http://foremost.sourceforge.net/)

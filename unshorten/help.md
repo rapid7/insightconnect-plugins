@@ -94,10 +94,6 @@ Note that the API is limited to 10 requests per hour per IP address.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [Unshorten.me](https://unshorten.me/)

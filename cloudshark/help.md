@@ -192,10 +192,6 @@ For uploads, make sure that a supported [capture file format](https://wiki.wires
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [CloudShark](https://www.cloudshark.org/)

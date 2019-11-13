@@ -86,10 +86,6 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
-## Source Code
-
-https://github.com/rapid7/insightconnect-plugins
-
 ## References
 
 * [GNU Ping](https://www.gnu.org/software/inetutils/manual/html_node/ping-invocation.html#ping-invocation)
