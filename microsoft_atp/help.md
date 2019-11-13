@@ -10,7 +10,7 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 ### Get Computer ID from Machine Name
 
-This action is used to transalte a machine name to computer ID.
+This action is used to translate a machine name to computer ID.
 
 #### Input
 
