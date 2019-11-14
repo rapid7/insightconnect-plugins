@@ -18,7 +18,7 @@ tags:
 - malware analysis
 hub_tags:
   use_cases: [threat_detection_and_response, threat_hunting]
-  keywords: [malware, sandbox, malware analysis]
+  keywords: [malware, sandbox, malware analysis, vxstream]
   features: []
 types:
   dates:
