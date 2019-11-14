@@ -10,7 +10,7 @@ This plugin utilizes [Rapid7 InsightOps API](https://insightops.help.rapid7.com/
 
 # Requirements
 
-* API Key
+* Requires an API Key from Insight platform
 
 # Documentation
 

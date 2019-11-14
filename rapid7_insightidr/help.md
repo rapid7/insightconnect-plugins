@@ -10,7 +10,7 @@
 
 # Requirements
 
-* API Key
+* Requires an API Key from Insight platform
 
 # Documentation
 

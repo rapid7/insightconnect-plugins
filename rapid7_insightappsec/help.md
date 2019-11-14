@@ -11,7 +11,7 @@ This plugin utilizes the [Rapid7 InsightAppSec API](https://insightappsec.help.r
 
 # Requirements
 
-* API Key
+* Requires an API Key from Insight platform
 
 # Documentation
 

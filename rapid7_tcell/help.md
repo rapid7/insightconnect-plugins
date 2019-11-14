@@ -11,7 +11,7 @@ This plugin utilizes the [tCell API](https://docs.tcell.io).
 
 # Requirements
 
-* API Key
+* Requires an API Key from Insight platform
 
 # Documentation
 
