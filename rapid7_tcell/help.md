@@ -6,14 +6,12 @@ This plugin utilizes the [tCell API](https://docs.tcell.io).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Add and remove IP's from black lists
+* Post configuration changes
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires an API Key from the product
 
 # Documentation
 

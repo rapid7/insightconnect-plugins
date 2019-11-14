@@ -5,14 +5,12 @@ This plugin utilizes the Metasploit [RPC API](https://metasploit.help.rapid7.com
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Search for exploits
+* Execute exploits
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Username and password
 
 # Documentation
 

@@ -17,7 +17,7 @@ tags:
 - insightappsec
 - Rapid7
 hub_tags:
-  use_cases: [Remediation Prioritization, Reporting & Analytics, Vulnerability Management]
+  use_cases: [remediation_prioritization, reporting_and_analytics, vulnerability_management]
   keywords: [insightappsec, Rapid7]
   features: [security testing, identify vulnerabilities]
 types:

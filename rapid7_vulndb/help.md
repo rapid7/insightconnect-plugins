@@ -4,14 +4,11 @@ Rapid7's [Vulndb](https://www.rapid7.com/db) is a curated repository of vetted c
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Search Database for vulnerabilities
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* None
 
 # Documentation
 

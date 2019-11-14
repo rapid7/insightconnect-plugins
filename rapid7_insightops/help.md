@@ -7,7 +7,6 @@ This plugin utilizes [Rapid7 InsightOps API](https://insightops.help.rapid7.com/
 
 * Submit Log Data
 * Query logs
-* Feature 3
 
 # Requirements
 

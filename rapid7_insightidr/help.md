@@ -170,8 +170,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin
 * 1.1.0 - New Action Add Indicators to a Threat
+* 1.0.0 - Initial plugin
 
 # Links
 

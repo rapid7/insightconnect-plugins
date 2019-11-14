@@ -6,14 +6,13 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Get top remediations
+* Start scans
+* Get scan results
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Username and Password for a user with the necessary permissions 
 
 # Documentation
 
