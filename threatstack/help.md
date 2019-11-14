@@ -1,6 +1,6 @@
 # Description
 
-The Threat Stack plugin is used to get information about alerts, assets, and policies from Threat Stack.
+The Threat Stack plugin is used to get information about alerts, assets, and policies.
 
 [Threat Stack](https://www.threatstack.com) is a cloud security monitoring provider helping companies to achieve compliance and cloud security.
 This plugin utilizes the [Threatstack API](https://app.threatstack.com/api/docs/).
