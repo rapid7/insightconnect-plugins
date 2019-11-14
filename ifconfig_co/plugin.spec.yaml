@@ -19,7 +19,6 @@ hub_tags:
   use_cases: []
   keywords: [ip, nat, public]
   features: []
-
 actions:
   address_lookup:
     title: Lookup IP Address
