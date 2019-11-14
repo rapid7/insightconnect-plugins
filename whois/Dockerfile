@@ -1,4 +1,4 @@
-FROM komand/python-2-plugin:2
+FROM komand/python-3-37-plugin:3
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin
@@ -14,7 +14,7 @@ ADD . /python/src
 WORKDIR /python/src
 # Add any package dependencies here
 RUN apt-get update && apt-get install -y whois git
-RUN pip install git+https://github.com/komand/python-whois.git@0.4.0
+RUN pip install git+https://github.com/komand/python-whois.git@0.4.1
 
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
