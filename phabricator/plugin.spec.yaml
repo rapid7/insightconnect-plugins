@@ -13,6 +13,10 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/phabricator
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- phabricator
+- code review
+- ug tracker
+hub_tags:
   use_cases: []
   keywords: [phabricator, code review, ug tracker]
   features: []

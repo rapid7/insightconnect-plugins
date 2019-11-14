@@ -12,6 +12,11 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/kintone
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- kintone
+- data
+- workflow
+- reporting
+hub_tags:
   use_cases: []
   keywords: [kintone, data, workflow, reporting]
   features: []

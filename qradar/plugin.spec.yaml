@@ -12,6 +12,31 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/qradar
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- qradar
+- siem
+hub_tags:
+  use_cases: []
+  keywords: [qradar, siem]
+  features: []
+types:
+  recovery:
+    collection_name_suffix:
+      title: Collection Name Suffix
+      description: Suffix that is used to name the collection(s) to store the recovered
+        data in
+      type: string
+      required: false
+    bpf:
+      description: The Berkeley Packet Filter to pass to the capture device
+      title: BPF
+      type: string
+      required: false
+    recovery_task_ids:
+      description: IDs for all recovery tasks belonging to this recovery
+      title: Recovery Task IDs
+      type: '[]integer'
+      required: false
+    tags:
       title: Tags
       description: Identifiers applied to recovered data to assist with grouping when
         searching. These are user supplied string identifiers that are used to mark

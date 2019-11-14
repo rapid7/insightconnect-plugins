@@ -12,6 +12,12 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/google_safe_browsing
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- google
+- safe browsing
+- url
+- blacklist
+- phishing
+hub_tags:
   use_cases: []
   keywords: [google, safe browsing, url, blacklist, phishing]
   features: []

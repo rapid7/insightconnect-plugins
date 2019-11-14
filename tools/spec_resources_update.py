@@ -25,7 +25,7 @@ def update_source_url(spec_path, plugin_name):
   source_url: {source_url}
   license_url: {license_url}
 """
-    pattern = "(resources:[\s\S]*)tags:"
+    pattern = "(resources:[\s\S]*?)tags:"
     with open(spec_path, 'r') as spec:
         content = spec.read()
     match = re.findall(pattern, content)[0]

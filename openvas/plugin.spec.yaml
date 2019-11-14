@@ -12,6 +12,10 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/openvas
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- openvas
+- vulnerability
+- scanner
+hub_tags:
   use_cases: []
   keywords: [openvas, vulnerability, scanner]
   features: []

@@ -12,6 +12,9 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/duo_auth
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- duo
+- auth
+hub_tags:
   use_cases: []
   keywords: [duo, auth]
   features: []
