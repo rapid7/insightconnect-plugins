@@ -10,7 +10,7 @@ The Datetime InsightConnect plugin manipulate timestamps using Python's [Maya](h
 
 # Requirements
 
-* Python maya library
+This plugin does not contain any requirements.
 
 # Documentation
 

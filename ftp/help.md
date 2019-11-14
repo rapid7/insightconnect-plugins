@@ -1,20 +1,19 @@
 # Description
 
-The File Transfer Protocol (FTP) is a standard network protocol used to transfer computer files
+The `ftp` InsightConnect plugin uses File Transfer Protocol (FTP) standard network protocol to transfer computer files
 between a client and server on a computer network. This plugin provides FTP functionality using
 [ftplib](https://docs.python.org/3/library/ftplib.html) and [ftputil](http://ftputil.sschwarzer.net/trac/wiki/Documentation)
 and supports SSL/TLS transactions.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Download file
+* Upload file 
+* Delete file
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+This plugin does not contain any requirements.
 
 # Documentation
 
