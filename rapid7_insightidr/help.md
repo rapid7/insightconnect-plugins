@@ -6,7 +6,7 @@
 
 * Set status of investigation
 * Add indicators
-* List Investigations
+* List investigations
 
 # Requirements
 
