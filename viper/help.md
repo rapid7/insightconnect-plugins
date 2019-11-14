@@ -14,7 +14,7 @@ This plugin utilizes the [Viper API](https://viper.li/en/latest/usage/web.html#a
 
 # Requirements
 
-* Viper Token
+* Viper token
 * Viper server URL
 
 # Documentation
