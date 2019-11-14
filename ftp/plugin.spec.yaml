@@ -6,12 +6,12 @@ title: FTP
 vendor: rapid7
 support: community
 status: []
-description: This plugin upload, download and delete files between a client and server on a computer network using the File Transfer Protocol
+description: This plugin can upload, download and delete files between a client and server on a computer network using the File Transfer Protocol
 version: 2.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ftp
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://docs.python.org/3/library/ftplib.html
+  vendor_url: https://www.python.org
 tags:
 - ftp
 - authentication

@@ -6,12 +6,12 @@ The FreeIPA API is viewable on the FreeIPA server web interface.
 
 # Key Features
 
-* Search user and retrieve user details
+* User management
 * Delete user
 
 # Requirements
 
-* Username and Password to logon to [freeipa](https://www.freeipa.org/) server.
+* Username and password to logon to [freeipa](https://www.freeipa.org/) server.
 
 # Documentation
 

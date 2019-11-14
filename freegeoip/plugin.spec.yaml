@@ -17,7 +17,7 @@ tags:
 - ip
 - location
 hub_tags:
-  use_cases: [log_search]
+  use_cases: [threat_intel]
   keywords: [geoip, ip, location]
   features: []
 actions:

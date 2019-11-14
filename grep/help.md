@@ -18,7 +18,7 @@ birds
 
 # Requirements
 
-This plugin does not contain any requirements.
+_This plugin does not contain any requirements._
 
 # Documentation
 

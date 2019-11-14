@@ -9,7 +9,7 @@ This plugin utilizes allows data to be encoded or decoded using the standard Bas
 * Decode text
 
 # Requirements
-This plugin does not contain any requirements.
+_This plugin does not contain any requirements._
 
 # Documentation
 

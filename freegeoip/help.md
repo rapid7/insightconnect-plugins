@@ -4,11 +4,11 @@ The `freegeoip` InsightConnect plugin lookup GeoIP information for specified hos
 
 # Key Features
 
-* GeoIP lookup
+* Obtain GeoIP information for an IP address.
 
 # Requirements
 
-This plugin does not contain any requirements.
+_This plugin does not contain any requirements._
 
 # Documentation
 

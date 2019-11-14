@@ -3,7 +3,8 @@ extension: plugin
 product: ["insightconnect"]
 name: freeipa
 title: FreeIPA
-description: This plugin retrieve user details, status and delete user from FreeIPA server
+description: This plugin can retrieve user details and statuses and delete users from FreeIPA servers
+
 version: 2.0.0
 vendor: rapid7
 support: community

@@ -1,6 +1,6 @@
 # Description
 
-The Awk InsightConnect plugin manipulate input data using GNU [Awk](https://www.gnu.org/software/gawk/manual/gawk.html)
+The Awk InsightConnect plugin manipulates input data using GNU [Awk](https://www.gnu.org/software/gawk/manual/gawk.html)
  which is a pattern scanning and processing language. 
 
 For example, here's a simple example of Awk from the command line:
@@ -17,11 +17,11 @@ Second column contents: birds
 
 # Key Features
 
-* Manipulate string
-* Manipulate file
+* Search and replace a string
+* Search and replace text in a file
 
 # Requirements
-This plugin does not contain any requirements.
+_This plugin does not contain any requirements._
 
 # Documentation
 

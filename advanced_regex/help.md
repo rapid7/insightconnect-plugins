@@ -9,7 +9,7 @@ The Advanced Regex InsightConnect plugin perform regex operations on a string us
 * Split text
 
 # Requirements
-This plugin does not contain any requirements.
+_This plugin does not contain any requirements._
 
 # Documentation
 

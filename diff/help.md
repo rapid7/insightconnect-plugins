@@ -9,7 +9,7 @@ Results persist across runs of workflows (using the unique label).
 
 # Requirements
 
-This plugin does not contain any requirements.
+_This plugin does not contain any requirements._
 
 # Documentation
 

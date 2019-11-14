@@ -15,9 +15,10 @@ resources:
 tags:
 - ldap
 - active directory
+- microsoft
 hub_tags:
   use_cases: [user_management, credential_management, application_security]
-  keywords: [ldap, active directory]
+  keywords: [ldap, active directory, microsoft]
   features: []
 types:
   result:

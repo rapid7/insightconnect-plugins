@@ -15,10 +15,10 @@ For example:
 
 # Key Features
 
-* Delete input's prefix ending with last slash '/' character
+* Obtain basename of a file path or URL.
 
 # Requirements
-This plugin does not contain any requirements.
+_This plugin does not contain any requirements._
 
 # Documentation
 
