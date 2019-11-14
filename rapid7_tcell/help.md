@@ -6,7 +6,7 @@ This plugin utilizes the [tCell API](https://docs.tcell.io).
 
 # Key Features
 
-* Add and remove IP's from black lists
+* Add and remove IP addresses from blacklists
 * Post configuration changes
 
 # Requirements
