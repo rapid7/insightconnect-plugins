@@ -6,7 +6,7 @@ This plugin utilizes the [Rapid7 InsightAppSec API](https://insightappsec.help.r
 
 # Key Features
 
-* Create, and configure scans
+* Create and configure scans
 * Run scans and return results
 
 # Requirements
