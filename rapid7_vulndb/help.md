@@ -8,7 +8,7 @@ Rapid7's [Vulndb](https://www.rapid7.com/db) is a curated repository of vetted c
 
 # Requirements
 
-* None
+_This plugin does not contain any requirements._
 
 # Documentation
 

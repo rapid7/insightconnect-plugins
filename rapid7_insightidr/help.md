@@ -6,11 +6,11 @@
 
 * Set status of investigation
 * Add indicators
-* List Investigations
+* List investigations
 
 # Requirements
 
-Requires an API Key from the product
+* API Key
 
 # Documentation
 
