@@ -9,7 +9,7 @@ status: []
 description: Manage Grafana organizations and users
 version: 1.0.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/grafana
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - grafana

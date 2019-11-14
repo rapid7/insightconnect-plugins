@@ -17,7 +17,7 @@ tags:
 - intelligence
 - abuse
 hub_tags:
-  use_cases: [investigations, reporting_and_analytics]
+  use_cases: [alert_enrichment, threat_intel]
   keywords: [ip, intelligence, abuse]
   features: []
 enable_cache: false
