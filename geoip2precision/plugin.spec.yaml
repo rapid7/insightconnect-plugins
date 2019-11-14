@@ -9,14 +9,9 @@ status: []
 description: MaxMind service that offers industry-leading IP intelligence data
 version: 1.0.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/geoip2precision
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- geoip
-- geoip2
-- precision
-- ip
-hub_tags:
   use_cases: []
   keywords: [geoip, geoip2, precision, ip]
   features: []

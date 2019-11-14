@@ -10,13 +10,9 @@ description: Provides hardware, software, and services designed for cybersecurit
   and network management
 version: 2.0.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/bluecoat_labs
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- bluecoat
-- categorize
-- URL
-hub_tags:
   use_cases: []
   keywords: [bluecoat, categorize, URL]
   features: []

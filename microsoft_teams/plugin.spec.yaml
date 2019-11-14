@@ -9,14 +9,9 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url:
-  license_url:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/microsoft_teams
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- microsoft
-- teams
-- office 365
-- chat
-hub_tags:
   use_cases: []
   keywords: [microsoft, teams, office 365, chat]
   features: []

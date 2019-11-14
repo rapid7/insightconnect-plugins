@@ -10,14 +10,9 @@ description: Dynamo DB is a Key/Value store powered by Amazon available for memb
   of AWS
 version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/dynamodb
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- dynamodb
-- aws
-- amazon
-- database
-hub_tags:
   use_cases: []
   keywords: [dynamodb, aws, amazon, database]
   features: []

@@ -10,13 +10,9 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ssh
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- ssh
-- remote
-- tunnel
-hub_tags:
   use_cases: []
   keywords: [ssh, remote, tunnel]
   features: []
