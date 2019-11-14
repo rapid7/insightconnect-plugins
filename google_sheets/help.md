@@ -5,20 +5,31 @@ This plugin utilizes the [Google Sheets API](https://developers.google.com/sheet
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Update cells
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A JWT with Google Sheets permissions
+* The Google Sheets API must be enabled
 
 # Documentation
 
 ## Setup
 
-#
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|admin_user|string|None|False|Admin user to impersonate, e.g. admin@domain.com|None|
+|auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAuth2 auth provider X.509 certificate URL|None|
+|auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|OAuth2 auth URI|None|
+|client_email|string|None|True|Client email from service credentials|None|
+|client_id|string|None|True|Client ID|None|
+|client_x509_cert_url|string|None|True|X.509 certificate URL from service credentials|None|
+|private_key|credential_asymmetric_key|None|True|Private Key from service credentials|None|
+|private_key_id|string|None|True|Private Key ID from service credentials|None|
+|project_id|string|None|True|Project ID from service credentials|None|
+|token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAuth2 token URI|None|
 
 ## Technical Details
 
@@ -103,7 +114,6 @@ _This plugin does not contain any custom output types._
 
 This plugin does not contain any troubleshooting information.
 
-#
 
 # Version History
 
