@@ -5,14 +5,13 @@ This plugin utilizes [Rapid7 InsightOps API](https://insightops.help.rapid7.com/
 
 # Key Features
 
-* Feature 1
-* Feature 2
+* Submit Log Data
+* Query logs
 * Feature 3
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+Requires an API Key from the product
 
 # Documentation
 
@@ -111,7 +110,7 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [InsightOps](https://www.rapid7.com/products/insightops/m)
+* [InsightOps](https://www.rapid7.com/products/insightops/)
 * [InsightOps API](https://insightops.help.rapid7.com/docs)
 * [Logsets](https://insightops.help.rapid7.com/docs/using-log-search)
 
