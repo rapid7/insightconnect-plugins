@@ -9,7 +9,7 @@
 
 # Requirements
 
-* None
+_This plugin does not contain any requirements_
 
 # Documentation
 
