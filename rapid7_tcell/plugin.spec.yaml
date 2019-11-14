@@ -13,7 +13,7 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_tcell
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://rapid7.com
+  vendor_url: https://www.rapid7.com
 tags:
 - rapid7
 - web
