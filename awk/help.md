@@ -1,6 +1,8 @@
 # Description
 
-[Awk](https://www.gnu.org/software/gawk/manual/gawk.html) is a pattern scanning and processing language. This plugin uses GNU Awk to manipulate input data.
+The Awk InsightConnect plugin manipulate input data using GNU [Awk](https://www.gnu.org/software/gawk/manual/gawk.html)
+ which is a pattern scanning and processing language. 
+
 For example, here's a simple example of Awk from the command line:
 
 ```
@@ -15,14 +17,10 @@ Second column contents: birds
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manipulate string
+* Manipulate file
 
 # Requirements
-
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
 
 # Documentation
 
