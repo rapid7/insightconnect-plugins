@@ -4,11 +4,11 @@ Submit URLs to the [Google Safe Browsing](https://safebrowsing.google.com/) Serv
 
 # Key Features
 
-* N/A plugin is obsolete
+* URL enrichment
 
 # Requirements
 
-* N/A plugin is obsolete
+* API Key
 
 # Documentation
 

@@ -17,7 +17,7 @@ tags:
 - google cloud
 - message broker
 hub_tags:
-  use_cases: [data_ingestion, automation_and_orchestration]
+  use_cases: [data_ingestion, automation_and_orchestration, alerting and notification]
   keywords: [google cloud, message broker, google]
   features: []
 connection:

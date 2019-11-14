@@ -4,7 +4,7 @@
 
 # Key Features
 
-* Lookup URl in web risk service
+* Lookup URL in web risk service
 
 # Requirements
 

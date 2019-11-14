@@ -4,12 +4,12 @@ Provide access to the [Google Apps](https://gsuite.google.com/) Admin API.
 
 # Key Features
 
-* Disable gsuite users
+* Disable Gsuite users
 
 # Requirements
 
 * A JWT with administrative permissions
-* API access to gsuite administrative functions enabled
+* API access to Gsuite administrative functions enabled
 
 # Documentation
 
