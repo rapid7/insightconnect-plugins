@@ -9,7 +9,7 @@ status: []
 description: EC2 Investigations
 version: 1.0.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ec2_investigations
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - ec2

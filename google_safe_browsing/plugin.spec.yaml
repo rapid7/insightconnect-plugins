@@ -9,7 +9,7 @@ vendor: rapid7
 support: community
 status: ["obsolete"]
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/google_safe_browsing
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - google

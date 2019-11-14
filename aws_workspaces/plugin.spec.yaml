@@ -7,11 +7,8 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/aws_workspaces
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-description: Amazon WorkSpaces is a fully managed desktop computing service in the cloud that allows its customers
-  to provide cloud-based desktops to their end-users
-version: 1.0.0
 tags:
 - aws
 - workspaces
