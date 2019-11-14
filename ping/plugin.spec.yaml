@@ -9,9 +9,12 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ping
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- ping
+- network diagnostics
+hub_tags:
   use_cases: []
   keywords: [ping, network diagnostics]
   features: []

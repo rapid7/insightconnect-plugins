@@ -10,9 +10,15 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/sqlmap
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- vulnerability
+- exploit
+- sqlmap
+- injection
+- database
+hub_tags:
   use_cases: []
   keywords: [vulnerability, exploit, sqlmap, injection, database]
   features: []

@@ -9,9 +9,14 @@ status: []
 description: A tool to perform passive OS fingerprinting
 version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/p0f
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- p0f
+- pcap
+- passive
+- fingerprinting
+hub_tags:
   use_cases: []
   keywords: [p0f, pcap, passive, fingerprinting]
   features: []

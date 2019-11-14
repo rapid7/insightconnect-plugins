@@ -9,9 +9,12 @@ support: community
 vendor: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/pushover
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- messaging
+- alerting
+hub_tags:
   use_cases: []
   keywords: [messaging, alerting]
   features: []

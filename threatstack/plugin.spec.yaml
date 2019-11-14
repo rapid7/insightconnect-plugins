@@ -11,9 +11,13 @@ support: community
 status: []
 author: Tom McLaughlin
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/threatstack
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- threatstack
+- ts
+- cloud
+hub_tags:
   use_cases: []
   keywords: [threatstack, ts, cloud]
   features: []

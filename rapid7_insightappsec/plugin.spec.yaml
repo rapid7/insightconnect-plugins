@@ -9,9 +9,12 @@ vendor: rapid7
 support: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightappsec
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- insightappsec
+- Rapid7
+hub_tags:
   use_cases: []
   keywords: [insightappsec, Rapid7]
   features: []

@@ -9,9 +9,16 @@ status: []
 description: Secure identity management and single sign-on to any application
 version: 3.2.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/okta
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- okta
+- sso
+- provisioning
+- deprovisioning
+- saml
+- enterprise
+hub_tags:
   use_cases: []
   keywords: [okta, sso, provisioning, deprovisioning, saml, enterprise]
   features: []

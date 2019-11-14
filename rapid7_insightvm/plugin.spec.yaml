@@ -10,9 +10,2196 @@ vendor: rapid7
 support: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightvm
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- insightvm
+- rapid7
+hub_tags:
+  use_cases: []
+  keywords: [insightvm, rapid7]
+  features: []
+types:
+  report_id:
+    id:
+      description: Identifer
+      title: Report ID
+      type: integer
+      required: false
+    name:
+      title: Report Name
+      description: Name of report
+      type: string
+      required: false
+  link:
+    href:
+      description: A hypertext reference, which is either a URI (see RFC 3986) or
+        URI template (see RFC 6570)
+      title: URL
+      type: string
+      required: false
+    rel:
+      description: Link relation type following RFC 5988
+      title: Rel
+      type: string
+      required: false
+  address:
+    ip:
+      description: IPv4 or IPv6 address
+      title: IP
+      type: string
+      required: false
+    mac:
+      description: Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48
+      title: MAC
+      type: string
+      required: false
+  configuration:
+    name:
+      description: Name of the configuration value
+      title: Name
+      type: string
+      required: false
+    value:
+      description: Configuration value
+      title: Value
+      type: string
+      required: false
+  database:
+    description:
+      description: Description of the database instance
+      title: Description
+      type: string
+      required: false
+    id:
+      description: Identifier of the database
+      title: ID
+      type: integer
+      required: false
+    name:
+      description: Name of the database instance
+      title: Name
+      type: string
+      required: false
+  file:
+    attributes:
+      description: Attributes detected on the file
+      title: Attributes
+      type: '[]configuration'
+      required: false
+    name:
+      description: Name of the file
+      title: Name
+      type: string
+      required: false
+    size:
+      description: Size of the regular file (in bytes). If the file is a directory,
+        no value is returned
+      title: Size
+      type: integer
+      required: false
+    type:
+      description: Type of the file, e.g. file or directory
+      title: Type
+      type: string
+      required: false
+  history:
+    date:
+      description: Date the asset information was collected or changed
+      title: Date
+      type: string
+      required: false
+    description:
+      description: Additional information describing the change
+      title: Description
+      type: string
+      required: false
+    scanId:
+      description: If a scan-oriented change, the identifier of the corresponding
+        scan the asset was scanned in
+      title: Scan ID
+      type: integer
+      required: false
+    type:
+      description: Type, for additional information see the help section of this plugin
+      title: Type
+      type: string
+      required: false
+    user:
+      description: User
+      title: User
+      type: string
+      required: false
+    version:
+      description: Version
+      title: Version
+      type: integer
+      required: false
+    vulnerabilityExceptionId:
+      description: Vulnerability exception ID
+      title: Vulnerability Exception ID
+      type: integer
+      required: false
+  hostName:
+    name:
+      description: Name
+      title: Name
+      type: string
+      required: false
+    source:
+      description: Source
+      title: Source
+      type: string
+      required: false
+  id:
+    id:
+      description: ID
+      title: ID
+      type: string
+      required: false
+    source:
+      description: Source
+      title: Source
+      type: string
+      required: false
+  cpe:
+    edition:
+      description: Edition-related terms applied by the vendor to the product
+      title: Edition
+      type: string
+      required: false
+    language:
+      description: Defines the language supported in the user interface of the product
+        being described. The format of the language tag adheres to RFC 5646
+      title: Language
+      type: string
+      required: false
+    other:
+      description: Captures any other general descriptive or identifying information
+        which is vendor- or product-specific and which does not logically fit in any
+        other attribute value
+      title: Other
+      type: string
+      required: false
+    part:
+      description: A single letter code that designates the particular platform part
+        that is being identified
+      title: Part
+      type: string
+      required: false
+    product:
+      description: Most common and recognizable title or name of the product
+      title: Product
+      type: string
+      required: false
+    swEdition:
+      description: Characterizes how the product is tailored to a particular market
+        or class of end users
+      title: Software Edition
+      type: string
+      required: false
+    targetHW:
+      description: Characterize the instruction set architecture on which the product
+        operates
+      title: Target Hardware
+      type: string
+      required: false
+    targetSW:
+      description: Characterizes the software computing environment within which the
+        product operates
+      title: Target Software
+      type: string
+      required: false
+    update:
+      description: Vendor-specific alphanumeric strings characterizing the particular
+        update, service pack, or point release of the product
+      title: Update
+      type: string
+      required: false
+    v2.2:
+      description: The full CPE string in the CPE 2.2 format
+      title: Version 2.2
+      type: string
+      required: false
+    v2.3:
+      description: The full CPE string in the CPE 2.3 format
+      title: Version 2.3
+      type: string
+      required: false
+    vendor:
+      description: The person or organization that manufactured or created the product
+      title: Vendor
+      type: string
+      required: false
+    version:
+      description: Vendor-specific alphanumeric strings characterizing the particular
+        release version of the product
+      title: Version
+      type: string
+      required: false
+  osFingerprint:
+    architecture:
+      description: The architecture of the operating system
+      title: Architecture
+      type: string
+      required: false
+    configurations:
+      description: Configuration key-values pairs enumerated on the operating system
+      title: Configuration
+      type: '[]configuration'
+      required: false
+    cpe:
+      description: Common Platform Enumeration
+      title: CPE
+      type: cpe
+      required: false
+    description:
+      description: The description of the operating system (containing vendor, family,
+        product, version and architecture in a single string)
+      title: Description
+      type: string
+      required: false
+    family:
+      description: Family of the operating system
+      title: Family
+      type: string
+      required: false
+    id:
+      description: Identifier of the operating system
+      title: ID
+      type: integer
+      required: false
+    product:
+      description: Name of the operating system
+      title: Product
+      type: string
+      required: false
+    systemName:
+      description: A combination of vendor and family (with redundancies removed),
+        suitable for grouping
+      title: System Name
+      type: string
+      required: false
+    type:
+      description: Type of operating system
+      title: Type
+      type: string
+      required: false
+    vendor:
+      description: Vendor of the operating system
+      title: Vendor
+      type: string
+      required: false
+    version:
+      description: Version of the operating system
+      title: Version
+      type: string
+      required: false
+  userGroup:
+    id:
+      description: Identifier of the user group
+      title: ID
+      type: integer
+      required: false
+    name:
+      description: Name of the user group
+      title: Name
+      type: string
+      required: false
+  user:
+    fullName:
+      description: Full name of the user account
+      title: Full Name
+      type: string
+      required: false
+    id:
+      description: Identifier of the user account
+      title: ID
+      type: integer
+      required: false
+    name:
+      description: Name of the user account
+      title: Name
+      type: string
+      required: false
+  page:
+    linkType:
+      description: Type of link used to traverse or detect the page
+      title: Link Type
+      type: string
+      required: false
+    path:
+      description: Path to the page (URI)
+      title: Path
+      type: string
+      required: false
+    response:
+      description: HTTP response code observed with retrieving the page
+      title: Response
+      type: integer
+      required: false
+  webApplication:
+    id:
+      description: Identifier of the web application
+      title: ID
+      type: integer
+      required: false
+    pages:
+      description: Pages
+      title: Pages
+      type: '[]page'
+      required: false
+    root:
+      description: Web root of the web application
+      title: Root
+      type: string
+      required: false
+    virtualHost:
+      description: Virtual host of the web application
+      title: Virtual Host
+      type: string
+      required: false
+  service:
+    configurations:
+      description: Configuration key-values pairs enumerated on the service
+      title: Configurations
+      type: '[]configuration'
+      required: false
+    databases:
+      description: Databases enumerated on the service
+      title: Databases
+      type: '[]database'
+      required: false
+    family:
+      description: Family of the service
+      title: Family
+      type: string
+      required: false
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+    name:
+      description: Name of the service
+      title: Name
+      type: string
+      required: false
+    port:
+      description: Port of the service
+      title: Port
+      type: integer
+      required: false
+    product:
+      description: Product running the service
+      title: Product
+      type: string
+      required: false
+    protocol:
+      description: Protocol of the service
+      title: Protocol
+      type: string
+      required: false
+    userGroups:
+      description: User groups
+      title: User Groups
+      type: '[]userGroup'
+      required: false
+    users:
+      description: Users
+      title: Users
+      type: '[]user'
+      required: false
+    vendor:
+      description: Vendor of the service
+      title: Vendor
+      type: string
+      required: false
+    version:
+      description: Version of the service
+      title: Version
+      type: string
+      required: false
+    webApplications:
+      description: Web applications found on the service
+      title: Web Applications
+      type: '[]webApplication'
+      required: false
+  software:
+    configurations:
+      description: Configurations
+      title: Configurations
+      type: '[]configuration'
+      required: false
+    cpe:
+      description: CPE
+      title: CPE
+      type: cpe
+      required: false
+    description:
+      description: Description of the software
+      title: Description
+      type: string
+      required: false
+    family:
+      description: Family of the software
+      title: Family
+      type: string
+      required: false
+    id:
+      description: ID
+      title: ID
+      type: integer
+      required: false
+    product:
+      description: Product of the software
+      title: Product
+      type: string
+      required: false
+    type:
+      description: Type of the software
+      title: Type
+      type: string
+      required: false
+    vendor:
+      description: Vendor of the software
+      title: Vendor
+      type: string
+      required: false
+    version:
+      description: Version of the software
+      title: Version
+      type: string
+      required: false
+  vulnerabilities:
+    critical:
+      description: Number of critical vulnerabilities
+      title: Critical
+      type: integer
+      required: false
+    exploits:
+      description: Number of distinct exploits that can exploit any of the vulnerabilities
+        on the asset
+      title: Exploits
+      type: integer
+      required: false
+    malwareKits:
+      description: Number of distinct malware kits that vulnerabilities on the asset
+        are susceptible to
+      title: Malware Kits
+      type: integer
+      required: false
+    moderate:
+      description: Number of moderate vulnerabilities
+      title: Moderate
+      type: integer
+      required: false
+    severe:
+      description: Number of severe vulnerabilities
+      title: Severe
+      type: integer
+      required: false
+    total:
+      description: Total number of vulnerabilities
+      title: Total
+      type: integer
+      required: false
+  vulnerabilities_count:
+    critical:
+      description: Number of critical vulnerabilities
+      title: Critical
+      type: integer
+      required: false
+    moderate:
+      description: Number of moderate vulnerabilities
+      title: Moderate
+      type: integer
+      required: false
+    severe:
+      description: Number of severe vulnerabilities
+      title: Severe
+      type: integer
+      required: false
+    total:
+      description: Total
+      title: Total number of vulnerabilities
+      type: integer
+      required: false
+  vulnerability_exception:
+    expires:
+      title: Expires
+      description: The date and time the vulnerability exception is set to expire
+      type: date
+      required: false
+    state:
+      title: State
+      description: The state of the vulnerability exception
+      type: string
+      required: true
+      enum:
+      - Deleted
+      - Expired
+      - Approved
+      - Rejected
+      - Under Review
+    id:
+      title: Vulnerability Exception ID
+      description: The ID uniquely identifying the vulnerability exception
+      type: integer
+      required: true
+    scope:
+      title: Exception Scope
+      description: Details of the scope of the exception
+      type: object
+      required: true
+    submit:
+      title: Submission Details
+      description: Details of the exception submission
+      type: object
+      required: true
+    review:
+      title: Review Details
+      description: Details of the exception review
+      type: object
+      required: false
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+  exception_review:
+    comment:
+      title: Review Comment
+      description: The comment from the reviewer detailing the review
+      type: string
+      required: false
+    date:
+      title: Review Date
+      description: The date and time the review took place
+      type: date
+      required: false
+    name:
+      title: Reviewer Name
+      description: The login name of the user that reviewed the vulnerability exception
+      type: string
+      required: false
+    user:
+      title: Reviewer ID
+      description: The identifier of the user that reviewed the vulnerability exception
+      type: integer
+      required: false
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+  exception_submit:
+    comment:
+      title: Submit Comment
+      description: The comment from the submit detailing the exception
+      type: string
+      required: false
+    date:
+      title: Submit Date
+      description: The date and time the exception request took place
+      type: date
+      required: false
+    name:
+      title: Submitter Name
+      description: The login name of the user that submitted the vulnerability exception
+      type: string
+      required: false
+    user:
+      title: Submitter ID
+      description: The identifier of the user that submitted the vulnerability exception
+      type: integer
+      required: false
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+  exception_scope:
+    id:
+      title: Vulnerability Scope ID
+      description: The identifer of the scope (asset, group, site) the vulnerability exception applies to
+      type: integer
+      required: true
+    key:
+      title: Exception Scope Key
+      description: Optional key to discriminate the instance when the scope type is Instance
+      type: string
+      required: false
+    port:
+      title: Port
+      description: If the scope type is Instance, the port the exception applies to
+      type: integer
+      required: false
+    type:
+      title: Exception Scope Type
+      description: The type of vulnerability exception - Global, Site, Asset, Asset Group, Instance
+      type: string
+      required: true
+      enum:
+      - Global
+      - Site
+      - Asset
+      - Asset Group
+      - Instance
+    vulnerability:
+      title: Vulnerability
+      description: The vulnerability the exception applies to
+      type: string
+      required: true
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+  asset:
+    addresses:
+      description: All addresses discovered on the asset
+      title: Addresses
+      type: '[]address'
+      required: false
+    assessedForPolicies:
+      description: Whether the asset has been assessed for policies at least once
+      title: Assessed for Policies
+      type: boolean
+      required: false
+    assessedForVulnerabilities:
+      description: Whether the asset has been assessed for vulnerabilities at least
+        once
+      title: Assessed for Vulnerabilities
+      type: boolean
+      required: false
+    configurations:
+      description: Configuration key-values pairs enumerated on the asset
+      title: Configurations
+      type: '[]configuration'
+      required: false
+    databases:
+      description: Databases enumerated on the asset
+      title: Databases
+      type: '[]database'
+      required: false
+    files:
+      description: Files discovered with searching on the asset
+      title: Files
+      type: '[]file'
+      required: false
+    history:
+      description: History of changes to the asset over time
+      title: History
+      type: '[]history'
+      required: false
+    hostName:
+      description: Primary host name (local or FQDN) of the asset
+      title: Hostname
+      type: string
+      required: false
+    hostNames:
+      description: All hostnames or aliases discovered on the asset
+      title: Hostnames
+      type: '[]hostName'
+      required: false
+    id:
+      description: Identifier of the asset
+      title: ID
+      type: integer
+      required: false
+    ids:
+      description: Unique identifiers found on the asset, such as hardware or operating
+        system identifiers
+      title: IDs
+      type: '[]id'
+      required: false
+    ip:
+      description: Primary IPv4 or IPv6 address of the asset
+      title: IP
+      type: string
+      required: false
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+    mac:
+      description: Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48
+      title: MAC
+      type: string
+      required: false
+    os:
+      description: Full description of the operating system of the asset
+      title: OS
+      type: string
+      required: false
+    osFingerprint:
+      description: Details of the operating system of the asset
+      title: OS Fingerprint
+      type: osFingerprint
+      required: false
+    rawRiskScore:
+      description: Base risk score of the asset
+      title: Raw Risk Score
+      type: float
+      required: false
+    riskScore:
+      description: Risk score (with criticality adjustments) of the asset
+      title: Risk Score
+      type: float
+      required: false
+    services:
+      description: Services discovered on the asset
+      title: Services
+      type: '[]service'
+      required: false
+    software:
+      description: Software discovered on the asset
+      title: Software
+      type: '[]software'
+      required: false
+    type:
+      description: Type of asset e.g. unknown, guest, hypervisor, physical, mobile
+      title: Type
+      type: string
+      required: false
+    userGroups:
+      description: User group accounts enumerated on the asset
+      title: User Groups
+      type: '[]userGroup'
+      required: false
+    users:
+      description: User accounts enumerated on the asset
+      title: Users
+      type: '[]user'
+      required: false
+    vulnerabilities:
+      description: ' Summary information for vulnerabilities on the asset'
+      title: Vulnerabilities
+      type: vulnerabilities
+      required: false
+  asset_vulnerability_result:
+    checkId:
+      description: Check ID, ie. ssh-openssh-x11uselocalhost-x11-forwarding-session-hijack
+      title: Check ID
+      type: string
+      required: false
+    exceptions:
+      description: If the result is vulnerable with exceptions applied, the identifier(s)
+        of the exceptions actively applied to the result
+      title: Exceptions
+      type: '[]integer'
+      required: false
+    key:
+      description: An additional discriminating key used to uniquely identify between
+        multiple instances of results on the same finding
+      title: Key
+      type: string
+      required: false
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+    port:
+      description: Port of the service the result was discovered on e.g. 22
+      title: Port
+      type: integer
+      required: false
+    proof:
+      description: Proof of the vulnerability, ie. <p><p>OpenBSD OpenSSH 4.3 on Linux</p></p>
+      title: Proof
+      type: string
+      required: false
+    protocol:
+      description: Protocol of the service the result was discovered on, ie. TCP
+      title: Protocol
+      type: string
+      required: false
+    status:
+      description: Status of the vulnerability check result, ie. vulnerable-version
+      title: Status
+      type: string
+      required: false
+  asset_vulnerability:
+    id:
+      description: Vulnerability ID, ie. ssh-openssh-x11uselocalhost-x11-forwarding-session-hijack
+      title: ID
+      type: string
+      required: false
+    instances:
+      description: Identifier of the report instance
+      title: Instances
+      type: integer
+      required: false
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+    results:
+      description: The vulnerability check results for the finding. Multiple instances
+        may be present if one or more checks fired, or a check has multiple independent
+        results
+      title: Results
+      type: '[]asset_vulnerability_result'
+      required: false
+    status:
+      description: Status, ie. vulnerable
+      title: Status
+      type: string
+      required: false
+  site:
+    assets:
+      title: Assets
+      description: Site asset count
+      type: integer
+      required: true
+    connectionType:
+      title: Connection Type
+      description: Site discovery connection type (if applicable)
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Site description
+      type: string
+      required: false
+    id:
+      title: ID
+      description: Identifier of the site
+      type: integer
+      required: true
+    importance:
+      title: Importance
+      description: Site importance, used with the 'weighted' risk scoring strategy
+      type: string
+      required: true
+    lastScanTime:
+      title: Last Scan Time
+      description: Site last scan time
+      type: date
+      required: false
+    links:
+      title: Links
+      description: Hypermedia links to corresponding or related resources
+      type: '[]link'
+      required: true
+    name:
+      title: Name
+      description: Site name
+      type: string
+      required: true
+    riskScore:
+      title: Risk Score
+      description: Site risk score
+      type: float
+      required: true
+    scanEngine:
+      title: Scan Engine
+      description: Site default scan engine ID
+      type: integer
+      required: true
+    scanTemplate:
+      title: Scan Template
+      description: Site default scan template
+      type: string
+      required: true
+    type:
+      title: Type
+      description: Site type
+      type: string
+      required: true
+    vulnerabilities:
+      title: Vulnerabilities
+      description: Site vulnerability counts
+      type: vulnerabilities_count
+      required: true
+  asset_group:
+    assets:
+      title: Assets
+      description: Site asset count
+      type: integer
+      required: true
+    description:
+      title: Description
+      description: Asset group description
+      type: string
+      required: false
+    id:
+      title: ID
+      description: Site ID
+      type: integer
+      required: true
+    links:
+      title: Links
+      description: Hypermedia links to corresponding or related resources
+      type: '[]link'
+      required: true
+    name:
+      title: Name
+      description: Asset group name
+      type: string
+      required: true
+    riskScore:
+      title: Risk Score
+      description: Site risk score
+      type: float
+      required: true
+    searchCriteria:
+      title: Search Criteria
+      description: Asset group search criteria
+      type: object
+      required: false
+    type:
+      title: Type
+      description: Asset group type
+      type: string
+      required: true
+    vulnerabilities:
+      title: Vulnerabilities
+      description: Asset group vulnerability counts
+      type: vulnerabilities_count
+      required: true
+  vulnerability_description:
+    html:
+      title: HTML
+      description: Vulnerability description HTML
+      type: string
+    text:
+      title: Text
+      description: Vulnerability description raw text
+      type: string
+  pci:
+    adjustedCVSSScore:
+      title: Adjusted CVSS score
+      description: PCI adjusted CVSS score
+      type: integer
+    adjustedSeverityScore:
+      title: Adjusted severity score
+      description: PCI adjusted severity score
+      type: integer
+    fail:
+      title: Fail
+      description: Whether this vulnerability results in a PCI assessment failure
+      type: boolean
+    specialNotes:
+      title: Special Notes
+      description: PCI special notes
+      type: string
+    status:
+      title: Status
+      description: PCI status
+      type: string
+  cvss_v2:
+    accessComplexity:
+      title: Access Complexity
+      description: CVSSv2 access complexity metric
+      type: string
+    accessVector:
+      title: Access Vector
+      description: CVSSv2 access vector metric
+      type: string
+    authentication:
+      title: Authentication
+      description: CVSSv2 authentication metric
+      type: string
+    availabilityImpact:
+      title: Availability Impact
+      description: CVSSv2 availability impact metric
+      type: string
+    confidentialityImpact:
+      title: Confidentiality Impact
+      description: CVSSv2 confidentiality impact metric
+      type: string
+    exploitScore:
+      title: Exploit Score
+      description: CVSSv2 combined exploit metric score (Access Complexity/Access
+        Vector/Authentication)
+      type: float
+    impactScore:
+      title: Impact Score
+      description: CVSSv2 combined impact metric score (Confidentiality/Integrity/Availability)
+      type: float
+    integrityImpact:
+      title: Integrity Impact
+      description: CVSSv2 integrity impact metric
+      type: string
+    score:
+      title: Score
+      description: CVSSv2 score
+      type: float
+    vector:
+      title: Vector
+      description: CVSSv2 combined vector string
+      type: string
+  cvss_v3:
+    attackComplexity:
+      title: Attack Complexity
+      description: CVSSv3 attack complexity metric
+      type: string
+    attackVector:
+      title: Attack Vector
+      description: CVSSv3 attack vector metric
+      type: string
+    availabilityImpact:
+      title: Availability Impact
+      description: CVSSv3 availability impact metric
+      type: string
+    confidentialityImpact:
+      title: Confidentiality Impact
+      description: CVSSv3 confidentiality impact metric
+      type: string
+    exploitScore:
+      title: Exploit Score
+      description: CVSSv3 combined exploit metric score (Attack Complexity/Attack
+        Vector/Privilege Required/Scope/User Interaction)
+      type: float
+    impactScore:
+      title: Impact Score
+      description: CVSSv3 combined impact metric score (Confidentiality/Integrity/Availability)
+      type: float
+    integrityImpact:
+      title: Integrity Impact
+      description: CVSSv3 integrity impact metric
+      type: string
+    privilegeRequired:
+      title: Privilege Required
+      description: CVSSv3 privilege required metric
+      type: string
+    scope:
+      title: Scope
+      description: CVSSv3 scope metric
+      type: string
+    score:
+      title: Score
+      description: CVSSv3 score
+      type: float
+    userInteraction:
+      title: User Interaction
+      description: CVSSv3 user interaction metric
+      type: string
+    vector:
+      title: Vector
+      description: CVSSv3 combined vector string
+      type: string
+  cvss:
+    links:
+      title: Links
+      description: List of hypermedia links to corresponding resources
+      type: '[]link'
+    v2:
+      title: V2
+      description: CVSSv2 details
+      type: cvss_v2
+    v3:
+      title: V3
+      description: CVSSv3 details
+      type: cvss_v3
+  vulnerability:
+    added:
+      title: Added
+      description: Date that the vulnerability was added to InsightVM
+      type: date
+    exploits:
+      title: Exploits
+      description: Exploit count
+      type: integer
+    description:
+      title: Description
+      description: Vulnerability description
+      type: vulnerability_description
+    links:
+      title: Links
+      description: List of hypermedia links to corresponding resources
+      type: '[]link'
+    title:
+      title: Title
+      description: Vulnerability title
+      type: string
+    malwareKits:
+      title: Malware Kits
+      description: Malware kit count
+      type: integer
+    denialOfService:
+      title: Denial of Service
+      description: Whether the vulnerability is a denial of service vulnerability
+      type: boolean
+    modified:
+      title: Modified
+      description: Date the vulnerability was last modified in InsightVM
+      type: date
+    id:
+      title: ID
+      description: Vulnerability ID
+      type: string
+    severityScore:
+      title: Severity Score
+      description: Vulnerability severity score
+      type: integer
+    pci:
+      title: PCI
+      description: Vulnerability PCI details
+      type: pci
+    published:
+      title: Published
+      description: Date the vulnerability was published
+      type: date
+    severity:
+      title: Severity
+      description: Vulnerability severity string (Moderate/Severe/Critical)
+      type: string
+    riskScore:
+      title: Risk Score
+      description: Vulnerability risk score using the configured risk scoring strategy
+        (RealRisk by default)
+      type: float
+    cvss:
+      title: CVSS
+      description: Vulnerability CVSS details
+      type: cvss
+    categories:
+      title: Categories
+      description: List of vulnerabilities categories with which this vulnerability
+        is affiliated
+      type: '[]string'
+    cves:
+      title: CVEs
+      description: List of CVE identifiers associated with this vulnerability
+      type: '[]string'
+  tag:
+    color:
+      title: Color
+      description: Tag color
+      type: string
+      required: false
+    created:
+      title: Created
+      description: Tag creation date
+      type: date
+      require: false
+    id:
+      title: ID
+      description: Tag ID
+      type: integer
+      required: true
+    links:
+      title: Links
+      description: Hypermedia links to corresponding or related resources
+      type: '[]link'
+      required: false
+    name:
+      title: Name
+      description: Tag name
+      type: string
+      required: true
+    riskModifier:
+      title: Risk Modifier
+      description: Tag risk score modifier
+      type: string
+      required: false
+    searchCriteria:
+      title: Search Criteria
+      description: Tag search criteria
+      type: object
+      required: false
+    source:
+      title: Source
+      description: Tag source
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Tag type
+      type: string
+      required: true
+  tag_asset:
+    id:
+      title: ID
+      description: Asset ID
+      type: integer
+      required: true
+    sources:
+      title: Sources
+      description: Tag association sources
+      type: '[]string'
+      required: true
+  scan:
+    status:
+      title: Status
+      description: Scan status (aborted, unknown, running, finished, stopped, error,
+        paused, dispatched, integrating)
+      type: string
+    scanType:
+      title: Scan Type
+      description: Type of scan (automated, manual, scheduled)
+      type: string
+    assets:
+      title: Assets
+      description: Count of assets identified during the scan
+      type: integer
+    links:
+      title: Links
+      description: List of hypermedia links to corresponding resources
+      type: '[]link'
+    siteName:
+      title: Site Name
+      description: Name of the site scanned
+      type: string
+    vulnerabilities:
+      title: Vulnerabilities
+      description: Counts of vulnerabilities identified during the scan
+      type: vulnerabilities_count
+    startedBy:
+      title: Started By
+      description: User that started the scan
+      type: string
+    engineId:
+      title: Engine ID
+      description: ID for the scan engine/scan engine pool used for the scan
+      type: integer
+    siteId:
+      title: Site ID
+      description: ID of the site scanned
+      type: integer
+    startTime:
+      title: Start Time
+      description: Start time for the scan
+      type: date
+    duration:
+      title: Duration
+      description: Duration of the scan
+      type: date
+    engineName:
+      title: Engine Name
+      description: Name of the scan engine/scan engine pool used for the scan
+      type: string
+    message:
+      title: Message
+      description: Scan status message
+      type: string
+    endTime:
+      title: End Time
+      description: End time of the scan
+      type: date
+    id:
+      title: ID
+      description: ID of the scan
+      type: integer
+    scanName:
+      title: Scan Name
+      description: Name of the scan
+      type: string
+  scan_engine:
+    address:
+      title: Address
+      description: Scan engine address (IP/hostname)
+      type: string
+      required: true
+    contentVersion:
+      title: Content Version
+      description: Scan engine content version
+      type: string
+      required: false
+    enginePools:
+      title: Engine Pools
+      description: Engine pool IDs with which the scan engine is associated
+      type: '[]integer'
+      required: true
+    id:
+      title: ID
+      description: Scan engine identifier
+      type: integer
+      required: true
+    lastRefreshedDate:
+      title: Last Refreshed Date
+      description: Date and time when the engine last communicated with the console
+      type: date
+      required: false
+    lastUpdatedDate:
+      title: Last Updated Date
+      description: Date and time when the engine was last updated
+      type: date
+      required: false
+    links:
+      title: Links
+      description: List of hypermedia links to corresponding resources
+      type: '[]link'
+      required: true
+    name:
+      title: Name
+      description: Scan engine name
+      type: string
+      required: true
+    port:
+      title: Port
+      description: Scan engine communication port
+      type: integer
+      required: true
+    productVersion:
+      title: Product Version
+      description: Scan engine product version
+      type: string
+      required: false
+    sites:
+      title: Sites
+      description: Sites with which the scan engine is associated
+      type: '[]integer'
+      required: false
+  scan_engine_pool:
+    name:
+      title: Name
+      description: Scan engine pool name
+      type: string
+      required: true
+    id:
+      title: ID
+      description: Scan engine pool identifier
+      type: integer
+      required: true
+    engines:
+      title: Engines
+      description: List of scan engine IDs associated with the scan engine pool
+      type: '[]integer'
+      required: true
+    links:
+      title: Links
+      description: List of hypermedia links to corresponding resources
+      type: '[]link'
+      required: true
+  authentication_source:
+    external:
+      title: External
+      description: Whether the authentication source is external (true) or internal
+        (false)
+      type: boolean
+      required: true
+    id:
+      title: ID
+      description: Authentication source identifier
+      type: integer
+      required: true
+    links:
+      title: Links
+      description: List of hypermedia links to corresponding or related resources
+      type: '[]link'
+      required: true
+    name:
+      title: Name
+      description: Authentication source name
+      type: string
+      required: true
+    type:
+      title: Type
+      description: Authentication source type
+      type: string
+      required: true
+      enum:
+      - normal
+      - kerberos
+      - ldap
+      - saml
+      - admin
+  role:
+    description:
+      title: Description
+      description: The description of the role
+      type: string
+      required: true
+    id:
+      titler: ID
+      description: ID of the role, e.g 'global-admin'
+      type: string
+      required: true
+    links:
+      title: Links
+      description: List of hypermedia links to corresponding or related resources
+      type: '[]link'
+      required: true
+    name:
+      title: Name
+      description: Name of the role
+      type: string
+      required: true
+    privileges:
+      title: Privileges
+      description: List of privileges assigned to the role
+      type: '[]string'
+      required: true
+  user_account_role:
+    allAssetGroups:
+      title: All Asset Groups
+      description: Whether the user has access to all asset groups
+      type: boolean
+      required: false
+    allSites:
+      title: All Sites
+      description: Whether the user has access to all sites
+      type: boolean
+      required: false
+    id:
+      title: ID
+      description: The identifier of the role the user is assigned to
+      type: string
+      required: false
+    privileges:
+      title: Privileges
+      desceiption: The privileges granted to the user by their role
+      type: '[]string'
+      required: false
+    superuser:
+      title: Superuser
+      description: Whether the user is a superuser
+      type: boolean
+      required: false
+  user_account_locale:
+    default:
+      title: Default
+      description: Default locale
+      type: string
+      required: true
+    reports:
+      title: Reports
+      description: Reports locale
+      type: string
+      required: true
+  user_account:
+    authentication:
+      title: Authentication
+      description: The authentication source used to authenticate the user
+      type: authentication_source
+      required: false
+    email:
+      title: Email
+      description: The email address of the user
+      type: string
+      required: false
+    enabled:
+      title: Enabled
+      description: Whether the user account is enabled
+      type: boolean
+      required: false
+    id:
+      title: ID
+      description: The identifier of the user
+      type: integer
+      required: false
+    links:
+      title: Links
+      description: List of hypermedia links to corresponding or related resources
+      type: '[]link'
+      required: false
+    locale:
+      title: Locale
+      description: The locale and language preferences for the user
+      type: user_account_locale
+      required: false
+    locked:
+      title: Locked
+      description: Whether the user account is locked (exceeded maximum password retry
+        attempts)
+      type: boolean
+      required: true
+    login:
+      title: Login
+      description: The login name of the user
+      type: string
+      required: true
+    name:
+      title: Name
+      description: The full name of the user
+      type: string
+      required: true
+    role:
+      title: Role
+      description: The privileges and role the user is assigned
+      type: user_account_role
+      required: false
+  remediation_asset:
+    id:
+      description: Identifier of the asset
+      title: ID
+      type: integer
+      required: true
+    hostName:
+      description: Primary host name (local or FQDN) of the asset
+      title: Hostname
+      type: string
+      required: false
+    ip:
+      description: Primary IPv4 or IPv6 address of the asset
+      title: IP
+      type: string
+      required: true
+    mac:
+      description: Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48
+      title: MAC
+      type: string
+      required: false
+    os:
+      description: Full description of the operating system of the asset
+      title: OS
+      type: string
+      required: false
+    riskScore:
+      description: Risk score (with criticality adjustments) of the asset
+      title: Risk Score
+      type: float
+      required: false
+    criticalityTag:
+      description: The criticality tag assigned to the asset
+      title: Criticality Tag
+      type: string
+      required: false
+  remediation_vulnerability:
+    id:
+      title: ID
+      description: Identifier of the vulnerability
+      type: integer
+      required: true
+    title:
+      title: Title
+      description: The title of the vulnerability
+      type: string
+      required: true
+    description:
+      title: Description
+      description: The description of the vulnerability
+      type: string
+      required: true
+    cvssScore:
+      title: CVSS Score
+      description: The CVSS score of the vulnerability
+      type: string
+      required: true
+    severity:
+      title: Severity
+      description: The severity of the vulnerability
+      type: integer
+      required: true
+    riskScore:
+      title: Risk Score
+      description: The risk score of the vulnerability
+      type: integer
+      required: true
+  remediation:
+    solutionId:
+      title: Solution ID
+      description: The identifier of the solution
+      type: integer
+      required: true
+    nexposeId:
+      title: Rapid7 Solution ID
+      description: The identifier of the solution within InsightVM/Nexpose
+      type: string
+      required: true
+    summary:
+      title: Summary
+      description: Remediation summary
+      type: string
+      required: true
+    fix:
+      title: Fix
+      description: The steps that are part of the fix this solution prescribes
+      type: string
+      required: false
+    assetCount:
+      title: Asset Count
+      description: The number of assets that require the solution to be applied
+      type: integer
+      required: true
+    vulnerabilityCount:
+      title: Vulnerability Count
+      description: The number of vulnerabilities that would be remediated
+      type: integer
+      required: true
+    riskScore:
+      title: Risk Score
+      description: The risk score that is reduced by performing the solution
+      type: integer
+      required: true
+    assets:
+      title: Assets
+      description: The assets that require the solution to be applied
+      type: '[]remediation_asset'
+      required: true
+    vulnerabilities:
+      title: Vulnerabilities
+      description: The vulnerabilities that would be remediated
+      type: '[]remediation_vulnerability'
+      required: true
+connection:
+  url:
+    title: URL
+    description: URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780
+    type: string
+    required: true
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: true
+actions:
+  scan:
+    title: Scan
+    description: Start a scan on a site
+    input:
+      site_id:
+        title: Site ID
+        description: ID of the site to scan
+        type: string
+        required: true
+    output:
+      id:
+        description: Scan ID
+        title: Identifier of the resource created
+        type: integer
+        required: false
+      links:
+        description: Hypermedia links to corresponding or related resources
+        title: Links
+        type: '[]link'
+        required: false
+  get_scan:
+    title: Get Scan
+    description: Get the status of a scan
+    input:
+      scan_id:
+        title: Scan ID
+        description: ID of the scan to obtain
+        type: string
+        required: true
+    output:
+      status:
+        description: Scan status (aborted, unknown, running, finished, stopped, error,
+          paused, dispatched or integrating)
+        title: Status
+        type: string
+        required: false
+      scanType:
+        description: Scan type (manual, automated, scheduled)
+        title: Scan Type
+        type: string
+        required: false
+      assets:
+        description: Number of assets within the scan
+        title: Assets
+        type: integer
+        required: false
+      links:
+        description: Links
+        title: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: false
+      vulnerabilities:
+        description: Counts of vulnerabilities found within the scan
+        title: Vulnerabilities
+        type: vulnerabilities_count
+        required: false
+      startTime:
+        description: Start time of the scan in ISO8601 format
+        title: Start Time
+        type: string
+        required: false
+      duration:
+        description: Duration of the scan in ISO8601 format
+        title: Duration
+        type: string
+        required: false
+      engineName:
+        description: Name of the engine used for the scan
+        title: Engine Name
+        type: string
+        required: false
+      endTime:
+        description: End time of the scan in ISO8601 format
+        title: End Time
+        type: string
+        required: false
+      id:
+        description: ID of the scan
+        title: ID
+        type: integer
+        required: false
+      scanName:
+        description: User-driven scan name for the scan
+        title: Scan Name
+        type: string
+        required: false
+  get_site_assets:
+    title: Get Site Assets
+    description: Gets assets for a site
+    input:
+      site_id:
+        title: Site ID
+        description: ID of the site to get assets for
+        type: string
+        required: true
+    output:
+      assets:
+        title: Assets
+        description: Assets
+        type: '[]asset'
+        required: false
+  get_scan_assets:
+    title: Get Scan Assets
+    description: Gets assets for a scan
+    input:
+      scan_id:
+        title: Scan ID
+        description: ID of the scan to get assets for
+        type: integer
+        required: true
+    output:
+      assets:
+        title: Assets
+        description: Assets
+        type: '[]asset'
+        required: false
+  get_asset_vulnerabilities:
+    title: Get Asset Vulnerabilities
+    description: Get vulnerabilities found on an asset. Can only be used if the asset
+      has first been scanned
+    input:
+      asset_id:
+        title: Asset ID
+        description: ID of the asset for which to find vulnerabilities
+        type: string
+        required: true
+    output:
+      vulnerabilities:
+        title: Vulnerabilities
+        description: Vulnerabilities found on the asset
+        type: '[]asset_vulnerability'
+        required: false
+  get_asset_software:
+    title: Get Asset Software
+    description: Get software found on an asset. Can only be used if the asset has first been scanned
+    input:
+      asset_id:
+        title: Asset ID
+        description: ID of the asset for which to find software
+        type: string
+        required: true
+    output:
+      software:
+        title: Software
+        description: Software found on the asset
+        type: '[]software'
+        required: false
+  download_report:
+    title: Download Report
+    description: Returns the contents of a generated report
+    input:
+      id:
+        title: Report ID
+        description: Identifier of the report to download e.g. 265
+        type: integer
+        required: true
+      instance:
+        title: Instance
+        description: The identifier of the report instance, 'latest' or ID e.g. 100
+        type: string
+        required: true
+    output:
+      report:
+        title: Report
+        description: Base64 encoded report
+        type: bytes
+        required: false
+  list_reports:
+    title: List Reports
+    description: List reports and return their identifiers
+    input:
+      name:
+        description: Name of report, otherwise all reports by criteria
+        type: string
+        required: false
+      sort:
+        description: Sort order, ascending or descending
+        type: string
+        enum:
+        - Ascending
+        - Descending
+        required: true
+    output:
+      found:
+        description: Whether optional user supplied report name was found
+        type: boolean
+        required: false
+      list:
+        title: List of Reports
+        description: List of report identifiers
+        type: '[]report_id'
+        required: false
+  get_vulnerability_affected_assets:
+    title: Get Vulnerability Affected Assets
+    description: Get the assets affected by the vulnerability
+    input:
+      vulnerability_id:
+        title: Vulnerability ID
+        description: The identifier of the vulnerability e.g. jre-vuln-cve-2013-2471
+        type: string
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+      resources:
+        title: Resources
+        description: The identifiers of the associated resources
+        type: '[]integer'
+        required: true
+  create_tag:
+    title: Create Tag
+    description: Create a new tag
+    input:
+      name:
+        title: Name
+        description: Tag name
+        type: string
+        required: true
+      type:
+        title: Type
+        description: Tag type
+        type: string
+        required: true
+        enum:
+        - owner
+        - location
+        - custom
+      color:
+        title: Color
+        description: Tag color (only available for custom tags)
+        type: string
+        required: false
+        default: default
+        enum:
+        - default
+        - blue
+        - green
+        - orange
+        - purple
+        - red
+      searchCriteria:
+        title: Search Criteria
+        description: Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
+        type: object
+        required: false
+    output:
+      id:
+        title: ID
+        description: ID of the created tag
+        type: integer
+        required: true
+  delete_tag:
+    title: Delete Tag
+    description: Delete an existing tag
+    input:
+      id:
+        title: ID
+        description: Tag ID
+        type: integer
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  get_tags:
+    title: Get Tags
+    description: Get a listing of all tags and return their details
+    input:
+      name:
+        title: Name
+        description: Tag name regular expression by which to filter
+        type: string
+        required: false
+        default: ''
+      type:
+        title: Type
+        description: Type of tag by which to filter, all types are returned if none
+          is specified
+        type: string
+        required: false
+        default: ''
+        enum:
+        - owner
+        - location
+        - custom
+        - criticality
+        - ''
+    output:
+      tags:
+        title: Tags
+        description: List of tags
+        type: '[]tag'
+        required: true
+  get_tag:
+    title: Get Tag
+    description: Get tag details by tag ID
+    input:
+      id:
+        title: ID
+        description: Tag ID, e.g. 1
+        type: integer
+        required: true
+    output:
+      tag:
+        title: Tag
+        description: Tag Details
+        type: tag
+        required: true
+  get_tag_sites:
+    title: Get Tag Sites
+    description: Get site IDs associated with a tag
+    input:
+      id:
+        title: ID
+        description: Tag ID for which to retrieve site associations
+        type: integer
+        required: true
+    output:
+      site_ids:
+        title: Site IDs
+        description: Site IDs associated with the tag
+        type: '[]integer'
+        required: true
+  get_tag_assets:
+    title: Get Tag Assets
+    description: Get asset IDs associated with a tag
+    input:
+      id:
+        title: ID
+        description: Tag ID to add to site
+        type: integer
+        required: true
+    output:
+      assets:
+        title: Assets
+        description: Asset IDs and tag association sources for the tag
+        type: '[]tag_asset'
+        required: true
+  get_tag_asset_groups:
+    title: Get Tag Asset Groups
+    description: Get asset groups associated with a tag
+    input:
+      id:
+        title: ID
+        description: Tag ID for which to retrieve asset group associations
+        type: integer
+        required: true
+    output:
+      asset_group_ids:
+        title: Asset Group IDs
+        description: Asset group IDs associated with the tag
+        type: '[]integer'
+        required: true
+  remove_asset_tag:
+    title: Remove Asset Tag
+    description: Remove a tag from an asset
+    input:
+      asset_id:
+        title: Asset ID
+        description: Asset ID from which to remove the tag
+        type: integer
+        required: true
+      tag_id:
+        title: Tag ID
+        description: Tag ID to remove from the asset
+        type: integer
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  remove_asset_group_tags:
+    title: Remove Asset Group Tags
+    description: Remove all tags from an asset group
+    input:
+      id:
+        title: ID
+        description: Asset group ID from which to remove all tags
+        type: integer
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  remove_tag_asset_groups:
+    title: Remove Tag Asset Groups
+    description: Remove all asset group associations from a tag
+    input:
+      id:
+        title: ID
+        description: Tag ID from which to remove all asset group associations
+        type: integer
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  remove_tag_sites:
+    title: Remove Tag Sites
+    description: Remove all site associations from a tag
+    input:
+      id:
+        title: ID
+        description: Tag ID from which to remove all site associations
+        type: integer
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  remove_tag_search_criteria:
+    title: Remove Tag Search Criteria
+    description: Remove all search criteria from a tag
+    input:
+      id:
+        title: ID
+        description: Tag ID from which to remove all search criteria
+        type: integer
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  tag_site:
+    title: Tag Site
+    description: Add a tag to a site
+    input:
+      site_id:
+        title: Site ID
+        description: Site ID to tag
+        type: integer
+        required: true
+      tag_id:
+        title: Tag ID
+        description: Tag ID to add to site
+        type: integer
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  tag_asset:
+    title: Tag Asset
+    description: Add a tag to an asset
+    input:
+      asset_id:
+        title: Asset ID
+        description: Asset ID to tag
+        type: integer
+        required: true
+      tag_id:
+        title: Tag ID
+        description: Tag ID to add to site
+        type: integer
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  tag_asset_group:
+    title: Tag Asset Group
+    description: Add a tag to an asset group
+    input:
+      asset_group_id:
+        title: Asset Group ID
+        description: Asset group ID to tag
+        type: integer
+        required: true
+      tag_id:
+        title: Tag ID
+        description: Tag ID to add to site
+        type: integer
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  update_tag_search_criteria:
+    title: Update Tag Search Criteria
+    description: Update the search criteria for an existing tag
+    input:
+      id:
+        title: ID
+        description: Tag ID
+        type: integer
+        required: true
+      searchCriteria:
+        title: Search Criteria
+        description: 'Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
+        type: object
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+  asset_search:
+    title: Asset Search
+    description: Search for assets using filtered asset search
+    input:
+      searchCriteria:
+        title: Search Criteria
+        description: 'Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
+        type: object
+        required: true
+    output:
+      assets:
+        title: Assets
+        description: List of asset details returned by the search
+        type: '[]asset'
+        required: true
+  get_asset:
+    title: Get Asset
+    description: Gets an asset by ID
+    input:
+      id:
+        title: ID
+        description: Get an asset by ID
+        type: integer
+        required: true
+    output:
+      asset:
+        title: Asset
+        description: Asset details
+        type: asset
+        required: true
+  get_asset_tags:
+    title: Get Asset Tags
+    description: Get a listing of all tags for an asset
+    input:
+      asset_id:
+        title: Asset ID
+        description: Identifier of asset
+        type: integer
+        required: true
+    output:
+      tags:
         title: Tags
         description: List of tags
         type: '[]tag'

@@ -12,9 +12,13 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/wigle
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- network
+- location
+- wireless
+hub_tags:
   use_cases: []
   keywords: [network, location, wireless]
   features: []

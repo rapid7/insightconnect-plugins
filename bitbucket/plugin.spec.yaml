@@ -9,9 +9,14 @@ status: []
 description: Utilize Bitbucket API
 version: 1.0.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/bitbucket
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- bitbucket
+- issue
+- authentication
+- git
+hub_tags:
   use_cases: []
   keywords: [bitbucket, issue, authentication, git]
   features: []

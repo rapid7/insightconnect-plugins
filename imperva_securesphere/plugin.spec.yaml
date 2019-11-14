@@ -11,9 +11,14 @@ description: Imperva SecureSphere WAF protects your applications and data from c
   DDoS attacks
 version: 1.0.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/imperva_securesphere
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- Web Application Firewall
+- WAF
+- Imperva
+- SecureSphere
+hub_tags:
   use_cases: []
   keywords: [Web Application Firewall, WAF, Imperva, SecureSphere]
   features: []

@@ -11,9 +11,13 @@ description: Cisco Umbrella Enforcement give technology partners the ability to 
   to the Cisco security cloud for enforcement
 version: 1.0.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_umbrella_enforcement
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- cisco
+- umbrella
+- enforcement
+hub_tags:
   use_cases: []
   keywords: [cisco, umbrella, enforcement]
   features: []

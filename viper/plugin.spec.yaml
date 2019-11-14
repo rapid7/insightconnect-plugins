@@ -7,9 +7,396 @@ description: "Viper is a binary analysis and management framework. Its fundament
 version: 2.0.0
 vendor: rapid7
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/viper
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-tags:
+tags: [ "binary", "analysis", "malware" ]
+support: community
+status: []
+
+types:
+  Archive:
+    cls_name:
+      title: "Class Name"
+      description: "Compressor class name"
+      type: string
+      required: true
+    title:
+      title: "File Title"
+      description: "Title of compressed file"
+      type: string
+      required: true
+    extensions:
+      title: "Compressor Extensions"
+      description: "Which extension are connected to archive?"
+      type: "[]string"
+      required: true
+    password:
+      title: "Password Required?"
+      description: "Is password required on archive?"
+      type: boolean
+      required: true
+  Module:
+    name:
+      title: "Module Title"
+      description: "Title of module"
+      type: string
+    description:
+      title: "Module Description"
+      description: "Description of module"
+      type: string
+  Project:
+    name:
+      title: "Name"
+      description: "Project name"
+      type: string
+  Analysis:
+    id:
+      title: "Analysis ID"
+      description: "ID of analysis"
+      type: integer
+    cmd_line:
+      title: "Command"
+      description: "Command for running analysis"
+      type: string
+    stored_at:
+      title: "Created At"
+      description: "Datetime when analysis was created"
+      type: string
+    results:
+      title: "Result"
+      description: "Result of analysis"
+      type: string
+  Note:
+    id:
+      title: "ID"
+      description: "Note ID"
+      type: integer
+      required: false
+    title:
+      title: "Title"
+      description: "Note title"
+      type: string
+    body:
+      title: "Description"
+      description: "Note description"
+      type: string
+  Tag:
+    id:
+      title: "ID"
+      description: "Tag ID"
+      type: integer
+    tag:
+      title: "Name"
+      description: "Tag name"
+      type: string
+  Malware:
+    id:
+      title: "ID"
+      description: "Malware ID"
+      type: integer
+    name:
+      title: "Name"
+      description: "Malware name"
+      type: string
+    crc32:
+      title: "CRC32"
+      description: "CRC32 hash"
+      type: string
+    md5:
+      title: "MD5"
+      description: "MD5 hash"
+      type: string
+    sha1:
+      title: "SHA1"
+      description: "SHA1 hash"
+      type: string
+    sha256:
+      title: "SHA256"
+      description: "SHA256 hash"
+      type: string
+    sha512:
+      title: "SHA512"
+      description: "SHA512 hash"
+      type: string
+    size:
+      title: "Size In Bytes"
+      description: "Size of malware file in bytes"
+      type: integer
+    ssdeep:
+      title: "Ssdeep"
+      description: "Ssdeep"
+      type: string
+    type:
+      title: "Type"
+      description: "Malware type"
+      type: string
+    mime:
+      title: "MIME"
+      description: "MIME type"
+      type: string
+    created_at:
+      title: "Created At"
+      description: "Date when the file was created"
+      type: string
+    parent:
+      title: "Parent File"
+      description: "Parent file name"
+      type: string
+    parent_id:
+      title: "Parent ID"
+      description: "ID of parent file"
+      type: string
+    analysis_set:
+      title: "Connected Analysis"
+      description: "Analysis connected with malware"
+      type: "[]Analysis"
+    tag_set:
+      title: "Malware Tags"
+      description: "Tags added to malware"
+      type: "[]Tag"
+    note_set:
+      title: "Malware Notes"
+      description: "Notes added to malware"
+      type: "[]Note"
+
+connection:
+  url:
+    title: "API URL"
+    description: "API URL to Viper server e.g. http://example.com:8080/api/v3/"
+    type: string
+    required: true
+  token:
+    title: "Token"
+    description: "Token to authenticate to Viper API"
+    type: credential_secret_key
+    required: true
+
+actions:
+  list_available_compressors:
+    title: "Available Compressors"
+    description: "List available archive compressors"
+    output:
+      compressors:
+        title: "Archive Compressor"
+        type: "[]Archive"
+        description: "Archive compressor"
+        required: true
+  list_available_extractors:
+    title: "Available Extractors"
+    description: "List available archive extractors"
+    output:
+      extractors:
+        title: "Archive Extractor"
+        type: "[]Archive"
+        description: "Archive extractor"
+        required: true
+  list_available_modules:
+    title: "Available Modules"
+    description: "List available modules"
+    output:
+      modules:
+        title: "Available Modules"
+        description: "Available modules"
+        type: "[]Module"
+        required: true
+  list_available_projects:
+    title: "Existing Projects"
+    description: "List existing projects"
+    output:
+      projects:
+        title: "Available Projects"
+        description: "Available projects"
+        type: "[]Project"
+        required: true
+  get_project:
+    title: "Project by Name"
+    description: "Gets a single project by a given name"
+    input:
+      name:
+        title: "Project Name"
+        description: "Project name"
+        type: string
+        required: true
+    output:
+      project:
+        title: "Project"
+        description: "Project"
+        type: "Project"
+        required: true
+  create_project:
+    title: "Create New Project"
+    description: "Create a new project with a given name"
+    input:
+      name:
+        title: "New Project"
+        description: "New project"
+        type: string
+        required: true
+    output:
+      project:
+        title: "Project"
+        description: "Project"
+        type: "Project"
+        required: true
+  list_analyses:
+    title: "Project Analyses"
+    description: "List analyses for this project"
+    input:
+      project_name:
+        title: "Project Name"
+        description: "Project name"
+        type: string
+        required: true
+    output:
+      analyses:
+        title: "Analyses"
+        description: "List of analyses"
+        type: "[]Analysis"
+        required: true
+  get_analysis:
+    title: "Project Analysis"
+    description: "Get a single analysis for this project"
+    input:
+      project_name:
+        title: "Project Name"
+        description: "Project name"
+        type: string
+        required: true
+      id:
+        title: "Analysis ID"
+        description: "Analysis ID"
+        type: integer
+        required: true
+    output:
+      analyses:
+        title: "Analysis"
+        description: "Project analysis"
+        type: "Analysis"
+        required: true
+  list_notes:
+    title: "Project Notes"
+    description: "List notes for this project"
+    input:
+      project_name:
+        title: "Project Name"
+        description: "Project name"
+        type: string
+        required: true
+    output:
+      notes:
+        title: "Notes"
+        description: "List of notes"
+        type: "[]Note"
+        required: true
+  get_note:
+    title: "Project Note"
+    description: "Get a single note for this project"
+    input:
+      project_name:
+        title: "Project Name"
+        description: "Project name"
+        type: string
+        required: true
+      id:
+        title: "Note ID"
+        description: "Note ID"
+        type: integer
+        required: true
+    output:
+      note:
+        title: "Note"
+        description: "Project note"
+        type: "Note"
+        required: true
+  list_tags:
+hub_tags:
+  use_cases: []
+  keywords: []
+  features: []
+    title: "Project Tags"
+    description: "List tags for this project"
+    input:
+      project_name:
+        title: "Project Name"
+        description: "Project name"
+        type: string
+        required: true
+    output:
+      tags:
+        title: "Tags"
+        description: "Project tags"
+        type: "[]Tag"
+        required: true
+  get_tag:
+    title: "Project Tag"
+    description: "Get a single tag for this project"
+    input:
+      project_name:
+        title: "Project Name"
+        description: "Project name"
+        type: string
+        required: true
+      id:
+        title: "Tag ID"
+        description: "Tag ID"
+        type: integer
+        required: true
+    output:
+      tag:
+        title: "Tag"
+        description: "Project tag"
+        type: "Tag"
+        required: true
+  list_malware:
+    title: "Malwares"
+    description: "List malware for this project"
+    input:
+      project_name:
+        title: "Project Name"
+        description: "Project name"
+        type: string
+        required: true
+    output:
+      malware:
+        title: "Malware"
+        description: "List of malware"
+        type: "[]Malware"
+        required: true
+  get_malware:
+    title: "Project Malware"
+    description: "Get a single malware for this project"
+    input:
+      project_name:
+        title: "Project Name"
+        description: "Project name"
+        type: string
+        required: true
+      sha256:
+        title: "SHA256 Hash"
+        description: "SHA256 hash"
+        type: string
+        required: true
+    output:
+      malware:
+        title: "Malware"
+        description: "Project malware"
+        type: "Malware"
+        required: true
+  upload_malware:
+    title: "Upload File"
+    description: "Upload file and create new malware"
+    input:
+      project_name:
+        title: "Project Name"
+        description: "Project name"
+        type: string
+        required: true
+      file:
+        title: "File For Upload"
+        description: "File for upload"
+        type: file
+        required: true
+      tags:
         title: "Tags"
         description: "Tags"
         type: "[]string"

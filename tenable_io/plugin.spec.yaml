@@ -9,9 +9,15 @@ status: []
 description: Scan external assets with TenableIO
 version: 1.0.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/tenable_io
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- tenable
+- tenable.io
+- tenableio
+- scanner
+- vulnerability scanner
+hub_tags:
   use_cases: []
   keywords: [tenable, tenable.io, tenableio, scanner, vulnerability scanner]
   features: []

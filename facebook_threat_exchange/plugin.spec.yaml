@@ -9,9 +9,680 @@ status: []
 description: A platform for sharing threat information between selected entities
 version: 1.0.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/facebook_threat_exchange
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- facebook
+- threat
+- search
+- exchange
+hub_tags:
+  use_cases: []
+  keywords: [facebook, threat, search, exchange]
+  features: []
+types:
+  cursors:
+    after:
+      description: End of page
+      title: After
+      type: string
+      required: false
+    before:
+      description: Start of page
+      title: Before
+      type: string
+      required: false
+  paging:
+    cursors:
+      description: Start and end of the page
+      title: Cursor
+      type: cursors
+      required: false
+    next:
+      description: Next result
+      title: Next Result
+      type: string
+      required: false
+  indicator:
+    indicator:
+      title: Indicator
+      type: string
+      required: false
+    type:
+      title: Type
+      type: string
+      required: false
+    id:
+      title: ID
+      type: string
+      required: false
+  owner:
+    id:
+      title: ID
+      type: string
+      required: false
+    email:
+      title: Email
+      type: string
+      required: false
+    name:
+      title: Name
+      type: string
+      required: false
+  data:
+    id:
+      description: Indicator ID
+      title: Indicator IP
+      type: string
+      required: false
+    indicator:
+      description: IP Address
+      title: Indicator
+      type: string
+      required: false
+    type:
+      description: Type of Indicator
+      title: Indicator Type
+      type: string
+      required: false
+  descriptor_data:
+    id:
+      title: Descriptor ID
+      type: string
+      required: false
+    indicator:
+      title: Indicator
+      type: indicator
+      required: false
+    owner:
+      title: Owner
+      type: owner
+      required: false
+    type:
+      title: Type
+      type: string
+      required: false
+    raw_indicator:
+      title: Raw Indicator
+      type: string
+      required: false
+    description:
+      title: Description
+      type: string
+      required: false
+    status:
+      title: Status
+      type: string
+      required: false
+connection:
+  app_id:
+    type: string
+    description: Facebook application ID e.g 1234567890123456
+    required: false
+  secret_key:
+    title: Secret Key
+    type: credential_secret_key
+    description: Secret to Facebook application e.g 3ef3234587654093fc954381043fc348
+    required: true
+actions:
+  threat_indicators:
+    title: Threat Indicator Search
+    description: Searching for indicators of compromise stored in ThreatExchange
+    input:
+      limit:
+        type: string
+        description: Defines the maximum size of a page of results. The maximum is
+          1,000
+        required: false
+        title: Limit
+      text:
+        type: string
+        description: Freeform text field with a value to search for. This can be a
+          file hash or a string found in other fields of the objects
+        required: false
+        title: Text
+      sort_order:
+        type: string
+        description: Sorts responses by ascending or descending
+        required: false
+        enum:
+        - ASCENDING
+        - DESCENDING
+        title: Sort Order
+      sort_by:
+        type: string
+        description: 'Sort results by Relevance, create_time '
+        required: false
+        enum:
+        - RELEVANCE
+        - CREATE_Time
+        title: Sort By
+      strict_text:
+        type: boolean
+        description: When set to 'true', the API will not do approximate matching
+          on the value in text
+        required: false
+        default: false
+        title: Strict Text
+      threat_type:
+        type: string
+        description: The broad threat type the indicator is associated with
+        required: false
+        enum:
+        - ''
+        - ADJUST_TOKEN
+        - API_KEY
+        - AS_NUMBER
+        - BANNER
+        - CMD_LINE
+        - COOKIE_NAME
+        - CRX
+        - DEBUG_STRING
+        - DEST_PORT
+        - DIRECTORY_QUERIED
+        - DOMAIN
+        - EMAIL_ADDRESS
+        - FILE_CREATED
+        - FILE_DELETED
+        - FILE_MOVED
+        - FILE_NAME
+        - FILE_OPENED
+        - FILE_READ
+        - FILE_WRITTEN
+        - GET_PARAM
+        - HASH_IMPHASH
+        - HASH_MD5
+        - HASH_SHA1
+        - HASH_SHA256
+        - HASH_SSDEEP
+        - HTML_ID
+        - HTTP_REQUEST
+        - IP_ADDRESS
+        - IP_SUBNET
+        - ISP
+        - LATITUDE
+        - LAUNCH_AGENT
+        - LOCATION
+        - LONGITUDE
+        - MALWARE_NAME
+        - MEMORY_ALLOC
+        - MEMORY_PROTECT
+        - MEMORY_WRITTEN
+        - MUTANT_CREATED
+        - MUTEX
+        - NAME_SERVER
+        - OTHER_FILE_OP
+        - PASSWORD
+        - PASSWORD_SALT
+        - PAYLOAD_DATA
+        - PAYLOAD_TYPE
+        - POST_DATA
+        - PROTOCOL
+        - REFERER
+        - REGISTRAR
+        - REGISTRY_KEY
+        - REG_KEY_CREATED
+        - REG_KEY_DELETED
+        - REG_KEY_ENUMERATED
+        - REG_KEY_MONITORED
+        - REG_KEY_OPENED
+        - REG_KEY_VALUE_CREATED
+        - REG_KEY_VALUE_DELETED
+        - REG_KEY_VALUE_MODIFIED
+        - REG_KEY_VALUE_QUERIED
+        - SIGNATURE
+        - SOURCE_PORT
+        - TELEPHONE
+        - URI
+        - USER_AGENT
+        - VOLUME_QUERIED
+        - WEBSTORAGE_KEY
+        - WEB_PAYLOAD
+        - WHOIS_NAME
+        - WHOIS_ADDR1
+        - WHOIS_ADDR2
+        - XPI
+        title: Threat Type
+      type:
+        type: string
+        description: The type of indicators to search for IndicatorTypes
+        required: false
+        enum:
+        - ''
+        - ADJUST_TOKEN
+        - API_KEY
+        - AS_NUMBER
+        - BANNER
+        - CMD_LINE
+        - COOKIE_NAME
+        - CRX
+        - DEBUG_STRING
+        - DEST_PORT
+        - DIRECTORY_QUERIED
+        - DOMAIN
+        - EMAIL_ADDRESS
+        - FILE_CREATED
+        - FILE_DELETED
+        - FILE_MOVED
+        - FILE_NAME
+        - FILE_OPENED
+        - FILE_READ
+        - FILE_WRITTEN
+        - GET_PARAM
+        - HASH_IMPHASH
+        - HASH_MD5
+        - HASH_SHA1
+        - HASH_SHA256
+        - HASH_SSDEEP
+        - HTML_ID
+        - HTTP_REQUEST
+        - IP_ADDRESS
+        - IP_SUBNET
+        - ISP
+        - LATITUDE
+        - LAUNCH_AGENT
+        - LOCATION
+        - LONGITUDE
+        - MALWARE_NAME
+        - MEMORY_ALLOC
+        - MEMORY_PROTECT
+        - MEMORY_WRITTEN
+        - MUTANT_CREATED
+        - MUTEX
+        - NAME_SERVER
+        - OTHER_FILE_OP
+        - PASSWORD
+        - PASSWORD_SALT
+        - PAYLOAD_DATA
+        - PAYLOAD_TYPE
+        - POST_DATA
+        - PROTOCOL
+        - REFERER
+        - REGISTRAR
+        - REGISTRY_KEY
+        - REG_KEY_CREATED
+        - REG_KEY_DELETED
+        - REG_KEY_ENUMERATED
+        - REG_KEY_MONITORED
+        - REG_KEY_OPENED
+        - REG_KEY_VALUE_CREATED
+        - REG_KEY_VALUE_DELETED
+        - REG_KEY_VALUE_MODIFIED
+        - REG_KEY_VALUE_QUERIED
+        - SIGNATURE
+        - SOURCE_PORT
+        - TELEPHONE
+        - URI
+        - USER_AGENT
+        - VOLUME_QUERIED
+        - WEBSTORAGE_KEY
+        - WEB_PAYLOAD
+        - WHOIS_NAME
+        - WHOIS_ADDR1
+        - WHOIS_ADDR2
+        - XPI
+        title: Type
+      since:
+        type: date
+        description: Returns indicators collected after a timestamp
+        required: false
+        title: Since
+      until:
+        type: date
+        description: Returns indicators collected before a timestamp
+        required: false
+        title: Until
+    output:
+      fields:
+        type: '[]string'
+        description: A list of fields to return in the response
+        required: false
+        title: Fields
+      paging:
+        description: Paging information
+        title: Paging
+        type: paging
+        required: true
+      data:
+        description: Information around the indicator such as the Indicator, Type
+          and ID
+        title: Data
+        type: '[]data'
+        required: true
+  threat_descriptors:
+    title: Threat Descriptors Search
+    description: Enables searching for subjective opinions on indicators of compromise
+      stored in ThreatExchange
+    input:
+      include_expired:
+        title: Include Expired
+        type: boolean
+        description: When set to true, the API can return data which has expired
+        default: false
+        required: false
+      limit:
+        title: Limit
+        type: integer
+        description: Defines the maximum size of a page of result
+        required: false
+      max_confidence:
+        title: Max Confidence
+        type: integer
+        description: Define the maximum allowed confidence value for the data returned,
+          range 0 - 100
+        default: 100
+        required: false
+      min_confidence:
+        title: Minimum Confidence
+        type: integer
+        description: Define the minimum allowed confidence value for the data returned,
+          range 0 - 100
+        default: 0
+        required: false
+      owner:
+        title: Owner
+        type: '[]string'
+        description: Comma separated list of AppIDs of the person who submitted the
+          data
+        required: false
+      text:
+        title: Text
+        type: string
+        description: Freeform text field with a value to search for. This can be a
+          file hash or a string found in other fields of the objects
+        required: false
+      review_status:
+        title: Review Status
+        type: string
+        description: A given ReviewStatusType
+        enum:
+        - ''
+        - UNKNOWN
+        - UNREVIEWED
+        - PENDING
+        - REVIEWED_MANUALLY
+        - REVIEWED_AUTOMATICALLY
+        required: false
+      share_level:
+        title: Share Level
+        type: string
+        description: The following Share Level Type designations are based on the
+          US-CERT's Traffic Light Protocol and govern how ThreatData may be re-shared
+          both within and outside of ThreatExchange
+        enum:
+        - ''
+        - RED
+        - AMBER
+        - GREEN
+        - WHITE
+        required: false
+      sort_order:
+        title: Sort Order
+        type: string
+        description: An ordering with which to sort ThreatExchange results
+        enum:
+        - ''
+        - ASCENDING
+        - DESCENDING
+        required: false
+      sort_by:
+        title: Sort By
+        type: string
+        description: Sort search results by RELEVANCE or by CREATE_TIME. When sorting
+          by RELEVANCE, your query will return results sorted by similarity against
+          your text query
+        enum:
+        - ''
+        - RELEVANCE
+        - CREATE_TIME
+        required: false
+      status:
+        title: Status
+        type: string
+        description: A description of the maliciousness of any object within ThreatExchange
+        enum:
+        - ''
+        - UNKNOWN
+        - NON_MALICIOUS
+        - SUSPICIOUS
+        - MALICIOUS
+        required: false
+      strict_text:
+        title: Strict Text
+        type: boolean
+        description: When set to 'true', the API will not do approximate matching
+          on the value in text
+        required: false
+      tags:
+        title: Tags
+        type: '[]string'
+        description: Comma separated list of tags to filter results
+        required: false
+      type:
+        title: Type
+        type: string
+        description: The type of descriptor to search for
+        enum:
+        - ''
+        - ADJUST_TOKEN
+        - API_KEY
+        - AS_NUMBER
+        - BANNER
+        - CMD_LINE
+        - COOKIE_NAME
+        - CRX
+        - DEBUG_STRING
+        - DEST_PORT
+        - DIRECTORY_QUERIED
+        - DOMAIN
+        - EMAIL_ADDRESS
+        - FILE_CREATED
+        - FILE_DELETED
+        - FILE_MOVED
+        - FILE_NAME
+        - FILE_OPENED
+        - FILE_READ
+        - FILE_WRITTEN
+        - GET_PARAM
+        - HASH_IMPHASH
+        - HASH_MD5
+        - HASH_SHA1
+        - HASH_SHA256
+        - HASH_SSDEEP
+        - HTML_ID
+        - HTTP_REQUEST
+        - IP_ADDRESS
+        - IP_SUBNET
+        - ISP
+        - LATITUDE
+        - LAUNCH_AGENT
+        - LOCATION
+        - LONGITUDE
+        - MALWARE_NAME
+        - MEMORY_ALLOC
+        - MEMORY_PROTECT
+        - MEMORY_WRITTEN
+        - MUTANT_CREATED
+        - MUTEX
+        - NAME_SERVER
+        - OTHER_FILE_OP
+        - PASSWORD
+        - PASSWORD_SALT
+        - PAYLOAD_DATA
+        - PAYLOAD_TYPE
+        - POST_DATA
+        - PROTOCOL
+        - REFERER
+        - REGISTRAR
+        - REGISTRY_KEY
+        - REG_KEY_CREATED
+        - REG_KEY_DELETED
+        - REG_KEY_ENUMERATED
+        - REG_KEY_MONITORED
+        - REG_KEY_OPENED
+        - REG_KEY_VALUE_CREATED
+        - REG_KEY_VALUE_DELETED
+        - REG_KEY_VALUE_MODIFIED
+        - REG_KEY_VALUE_QUERIED
+        - SIGNATURE
+        - SOURCE_PORT
+        - TELEPHONE
+        - URI
+        - USER_AGENT
+        - VOLUME_QUERIED
+        - WEBSTORAGE_KEY
+        - WEB_PAYLOAD
+        - WHOIS_NAME
+        - WHOIS_ADDR1
+        - WHOIS_ADDR2
+        - XPI
+        required: false
+      since:
+        title: Since
+        type: string
+        description: Returns descriptors collected after a timestamp
+        required: false
+      until:
+        title: Until
+        type: string
+        description: 'Returns descriptors collected before a timestamp '
+        required: false
+      fields:
+        title: Fields
+        type: '[]string'
+        description: A list of fields to return in the response
+        required: false
+    output:
+      data:
+        description: Information around the indicator such as the Indicator, Type
+          and ID
+        title: Data
+        type: '[]descriptor_data'
+        required: true
+      paging:
+        description: Paging Information
+        title: Paging
+        type: paging
+        required: true
+  submit_descriptors:
+    title: Submit Descriptor
+    description: Submit data to Facebook's graph API
+    input:
+      confidence:
+        title: Confidence
+        type: integer
+        description: A score for how likely the indicator's status is accurate, ranges
+          from 0 to 100
+        required: false
+      description:
+        title: Description
+        type: string
+        description: A short summary of the indicator and threat
+        required: true
+      expired_on:
+        title: Expired On
+        type: date
+        description: Time the indicator is no longer considered a threat, in ISO 8601
+          date format
+        required: false
+      first_active:
+        title: First Active
+        type: date
+        description: Time when the opinion first became valid
+        required: false
+      last_active:
+        title: Last Active
+        type: date
+        description: Time when the opinion  became valid
+        required: false
+      indicator:
+        title: Indicator
+        type: string
+        description: The indicator data being submitted
+        required: true
+      precision:
+        title: Precision
+        type: string
+        description: The degree of accuracy of the indicator
+        enum:
+        - ''
+        - UNKNOWN
+        - LOW
+        - MEDIUM
+        - HIGH
+        required: false
+      privacy_type:
+        title: Privacy Type
+        type: string
+        description: The kind of privacy for the indicator
+        enum:
+        - ''
+        - HAS_PRIVACY_GROUP
+        - HAS_WHITELIST
+        - VISIBLE
+        required: true
+      privacy_members:
+        title: Privacy Members
+        type: '[]string'
+        description: A comma-delimited list of ThreatExchangeMembers allowed to see
+          the indicator and only applies when privacy_type is set to HAS_WHITELIST
+        required: false
+      review_status:
+        title: Review Status
+        type: string
+        description: Describes how the indicator was vetted, see ReviewStatusType
+          for the list of allowed values
+        enum:
+        - ''
+        - UNKNOWN
+        - UNREVIEWED
+        - PENDING
+        - REVIEWED_MANUALLY
+        - REVIEWED_AUTOMATICALLY
+        required: false
+      severity:
+        title: Severity
+        type: string
+        description: A description of the dangerousness of the threat associated with
+          a ThreatIndicator object
+        enum:
+        - ''
+        - UNKNOWN
+        - INFO
+        - WARNING
+        - SUSPICIOUS
+        - SEVERE
+        - APOCALYPSE
+        required: false
+      share_level:
+        title: Share Level
+        type: string
+        description: The following Share Level Type designations are based on the
+          US-CERT's Traffic Light Protocol and govern how ThreatData may be re-shared
+          both within and outside of ThreatExchange
+        enum:
+        - RED
+        - AMBER
+        - GREEN
+        - WHITE
+        required: true
+      status:
+        title: Status
+        type: string
+        description: Indicates if the indicator is labeled as malicious
+        required: true
+      tags:
+        title: Tags
+        type: '[]string'
+        description: A comma separated list of tags you want to publish. This will
+          overwrite any existing tags
+        required: false
+      add_tags:
+        title: Add Tags
+        type: string
+        description: To add tags to an object without overwriting existing tags
+        required: false
+      remove_tags:
         title: Remove Tags
         type: string
         description: Remove tags associated with an object

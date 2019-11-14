@@ -10,9 +10,13 @@ description: Phabricator is a suite of open source tools for peer code review, t
   management, and project communication
 version: 1.0.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/phabricator
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- phabricator
+- code review
+- ug tracker
+hub_tags:
   use_cases: []
   keywords: [phabricator, code review, ug tracker]
   features: []

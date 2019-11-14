@@ -11,9 +11,135 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/joe_sandbox
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- security
+- malware
+- analysis
+- automation
+hub_tags:
+  use_cases: []
+  keywords: [security, malware, analysis, automation]
+  features: []
+types:
+  system:
+    name:
+      title: Name
+      description: Name
+      type: string
+    description:
+      title: Description
+      description: Description
+      type: string
+    arch:
+      title: Arch
+      description: Architecture (one of WINDOWS, MAC, LINUX, IOS, ANDROID)
+      type: string
+    count:
+      title: Count
+      description: How many systems of given type exist
+      type: integer
+  country:
+    name:
+      title: Name
+      description: Name of the country
+      type: string
+  keyboard_layout:
+    name:
+      title: Name
+      description: Name of the keyboard layout language
+      type: string
+  single_quota:
+    current:
+      title: Current
+      description: Current quota
+      type: integer
+    limit:
+      title: Limit
+      description: Limit of quota
+      type: integer
+    remaining:
+      title: Remaining
+      description: Remaining quota
+      type: integer
+  full_quota:
+    daily:
+      title: Daily
+      description: Daily quota
+      type: single_quota
+    monthly:
+      title: Monthly
+      description: Monthly quota
+      type: single_quota
+  webid:
+    webid:
+      title: WebID
+      description: Web ID
+      type: string
+  run:
+    detection:
+      title: Detection
+      description: 'Detection, one of: unknown, clean, suspicious, malicious'
+      type: string
+    error:
+      title: Error
+      description: Error description, will not be present if no error was detected
+      type: string
+    system:
+      title: System
+      description: System
+      type: string
+    yara:
+      title: Yara
+      description: Yara
+      type: boolean
+  analysis:
+    webid:
+      title: WebID
+      description: Web ID
+      type: string
+    analysisid:
+      title: AnalysisID
+      description: Analysis ID. Will not be returned if the analysis is not finished
+      type: string
+    status:
+      title: Status
+      description: 'Status of the analysis, one of: submitted, running, finished'
+      type: string
+    comments:
+      title: Comments
+      description: Comments
+      type: string
+    filename:
+      title: Filename
+      description: File name
+      type: string
+    scriptname:
+      title: Scriptname
+      description: Script name
+      type: string
+    time:
+      title: Time
+      description: Time
+      type: date
+    duration:
+      title: Duration
+      description: Duration of the analysis in seconds (only for finished analyses)
+      type: integer
+    md5:
+      title: MD5
+      description: MD5
+      type: string
+    sha1:
+      title: SHA1
+      description: SHA1
+      type: string
+    sha256:
+      title: SHA256
+      description: SHA256
+      type: string
+    tags:
       title: Tags
       description: Tags
       type: '[]string'

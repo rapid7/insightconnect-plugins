@@ -9,9 +9,13 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/chardet
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- base64
+- encoder
+- utilities
+hub_tags:
   use_cases: []
   keywords: [base64, encoder, utilities]
   features: []

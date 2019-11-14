@@ -9,9 +9,137 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/passivetotal
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- passivetotal
+- threat intelligence
+hub_tags:
+  use_cases: []
+  keywords: [passivetotal, threat intelligence]
+  features: []
+connection:
+  username:
+    title: Username
+    type: string
+    description: Username and API key
+    required: true
+  api_key:
+    title: API Key
+    description: API key for PassiveTotal
+    type: credential_secret_key
+    required: true
+types:
+  links:
+    project:
+      description: Link to project
+      title: Project
+      type: string
+    self:
+      description: Link to artifact
+      title: Self
+      type: string
+    tag:
+      description: Tag
+      title: Tag
+      type: string
+  artifact:
+    monitor:
+      description: Monitor
+      title: Monitor
+      type: boolean
+    user_tags:
+      description: User assigned tag
+      title: User Tags
+      type: '[]string'
+    creator:
+      description: Person or organization who added this artifact
+      title: Creator
+      type: string
+    system_tags:
+      description: System assigned tag
+      title: System Tags
+      type: '[]string'
+    created:
+      description: Creation date
+      title: Created
+      type: string
+    links:
+      description: Web links to project and artifact
+      title: Links
+      type: links
+    project:
+      description: Project GUID
+      title: Project
+      type: string
+    owner:
+      description: Artifact owner
+      title: Owner
+      type: string
+    monitorable:
+      description: Artifact can be monitored
+      title: Monitorable
+      type: boolean
+    organization:
+      description: Organization
+      title: Organization
+      type: string
+    tag_meta:
+      description: Tag Meta
+      title: Tag Meta
+      type: object
+    query:
+      description: Query
+      title: Query
+      type: string
+    guid:
+      description: Artifact GUID
+      title: Guid
+      type: string
+    type:
+      description: Type of artifact eg. domain
+      title: Type
+      type: string
+    tags:
+      description: Tags
+      title: Tags
+      type: '[]string'
+  address_record:
+    network:
+      description: Network subnet
+      type: string
+    autonomous_system_name:
+      description: Autonomous System Name
+      type: string
+    country:
+      description: Country Code
+      type: string
+    ever_compromised:
+      description: True if ever compromised
+      type: boolean
+    sinkhole:
+      description: True if sinkholed
+      type: boolean
+    latitude:
+      dsecription: Latitude
+      type: number
+    longitude:
+      dsecription: Longitude
+      type: number
+    autonomous_system_number:
+      dsecription: Autonomous System Number
+      type: string
+    tags:
+      description: Tags
+      type: '[]string'
+  domain_record:
+    ever_compromised:
+      description: True if ever compromised
+      type: boolean
+    primary_domain:
+      description: True if primary Domain
+      type: string
+    tags:
       description: Tags
       type: '[]string'
     subdomains:

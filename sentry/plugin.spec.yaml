@@ -9,9 +9,132 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/sentry
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- sentry
+- tracking
+hub_tags:
+  use_cases: []
+  keywords: [sentry, tracking]
+  features: []
+types:
+  Issue:
+    lastSeen:
+      type: date
+    firstSeen:
+      type: date
+    hasSeen:
+      type: boolean
+    id:
+      type: string
+    shortId:
+      type: string
+    count:
+      type: string
+    userCount:
+      type: integer
+    stats:
+      type: object
+    culprit:
+      type: string
+    title:
+      type: string
+    numComments:
+      type: integer
+    type:
+      type: string
+    annotations:
+      type: '[]string'
+    status:
+      type: string
+    isPublic:
+      type: boolean
+    isSubscribed:
+      type: boolean
+    isBookmarked:
+      type: boolean
+    metadata:
+      type: object
+    level:
+      type: string
+    project:
+      type: object
+    permalink:
+      type: string
+    statusDetails:
+      type: object
+    assignedTo:
+      type: string
+    logger:
+      type: string
+    subscriptionDetails:
+      type: object
+    shareId:
+      type: string
+  Exception:
+    type:
+      type: string
+    value:
+      type: string
+    module:
+      type: string
+  EventJSON:
+    event_id:
+      type: string
+    culprit:
+      type: string
+    timestamp:
+      type: date
+    tags:
+      type: object
+    exception:
+      type: '[]Exception'
+  User:
+    username:
+      type: string
+    ip_address:
+      type: string
+    email:
+      type: string
+    name:
+      type: string
+    id:
+      type: string
+  Tag:
+    value:
+      type: string
+    key:
+      type: string
+  Entry:
+    type:
+      type: string
+    data:
+      type: object
+  Event:
+    eventID:
+      type: string
+    sdk:
+      type: object
+    errors:
+      type: '[]object'
+    dist:
+      type: string
+    platform:
+      type: string
+    contexts:
+      type: object
+    fingerprint:
+      type: '[]string'
+    dateCreated:
+      type: date
+    dateReceived:
+      type: date
+    size:
+      type: integer
+    metadata:
+      type: object
+    tags:
       type: '[]Tag'
     groupId:
       type: string

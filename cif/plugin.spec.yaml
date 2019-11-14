@@ -9,9 +9,285 @@ status: []
 description: CIF is a cyber threat intelligence management system
 version: 2.0.0
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cif
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- cif
+- intel
+- indicator
+hub_tags:
+  use_cases: []
+  keywords: [cif, intel, indicator]
+  features: []
+types:
+  peers:
+    asn:
+      title: ASN
+      description: ANS
+      type: string
+      required: false
+    asn_description:
+      title: ASN Description
+      description: ANS description
+      type: string
+      required: false
+    cc:
+      title: Country Code
+      description: Country code
+      type: string
+      required: false
+    date:
+      title: Date
+      description: Date
+      type: string
+      required: false
+    prefix:
+      title: Prefix
+      description: Prefix
+      type: string
+      required: false
+    rir:
+      title: RIR
+      description: RIR
+      type: string
+      required: false
+  result:
+    geolocation:
+      title: Geolocation
+      description: Geolocation
+      type: string
+      required: false
+    protocol:
+      title: Protocol
+      description: Protocol
+      type: integer
+      required: false
+    cc:
+      title: Country Code
+      description: Country code
+      type: string
+      required: false
+    rir:
+      title: RIR
+      description: RIR
+      type: string
+      required: false
+    related:
+      title: Related
+      description: Related
+      type: string
+      required: false
+    prefix:
+      title: Prefix
+      description: Prefix
+      type: string
+      required: false
+    timezone:
+      title: Timezone
+      description: Timezone
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    citycode:
+      title: City Code
+      description: City code
+      type: string
+      required: false
+    group:
+      title: Group
+      description: Group
+      type: '[]string'
+      required: false
+    altid:
+      title: Alt ID
+      description: Alt ID
+      type: string
+      required: false
+    application:
+      title: Application
+      description: Application
+      type: '[]string'
+      required: false
+    asn_desc:
+      title: ASN Desc
+      description: ASN Desc
+      type: string
+      required: false
+    provider:
+      title: Provider
+      description: Provider
+      type: string
+      required: false
+    latitude:
+      title: Latitude
+      description: Latitude
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+    tags:
+      title: Tags
+      description: Tags
+      type: '[]string'
+      required: false
+    portlist:
+      title: Portlist
+      description: Portlist
+      type: string
+      required: false
+    altid_tlp:
+      title: Alt ID TLP
+      description: Alt ID TLP
+      type: string
+      required: false
+    confidence:
+      title: Confidence
+      description: Confidence
+      type: number
+      required: false
+    rdata:
+      title: rdata
+      description: rdata
+      type: '[]string'
+      required: false
+    firsttime:
+      title: First Time
+      description: First time
+      type: string
+      required: false
+    lasttime:
+      title: Last Time
+      description: Last Time
+      type: string
+      required: false
+    asn:
+      title: ASN
+      description: ASN
+      type: string
+      required: false
+    lang:
+      title: Lang
+      description: Lang
+      type: string
+      required: false
+    observable:
+      title: Observable
+      description: Observable
+      type: string
+      required: false
+    peers:
+      title: Peers
+      description: Peers
+      type: '[]peers'
+      required: false
+    tlp:
+      title: TLP
+      description: TLP
+      type: string
+      required: false
+    subdivision:
+      title: Subdivision
+      description: Subdivision
+      type: string
+      required: false
+    longitude:
+      title: Longitude
+      description: Logitude
+      type: string
+      required: false
+    otype:
+      title: O Type
+      type: string
+      description: O type
+      required: false
+connection:
+  api_key:
+    title: API Key
+    description: CIF API key
+    type: credential_secret_key
+    required: true
+  url:
+    title: URL
+    description: CIF URL e.g. https://cif.example.com
+    type: string
+    required: true
+  ssl_verify:
+    title: SSL Verify
+    type: boolean
+    description: SSL certificate verification
+    default: true
+    required: true
+actions:
+  query:
+    title: Query
+    description: Query for observables
+    input:
+      q:
+        title: Query
+        description: The observable to query for
+        type: string
+        required: false
+      observable:
+        title: Observable
+        description: The observable to query for
+        type: string
+        required: false
+      otype:
+        title: Type
+        description: Type of observable
+        enum:
+        - all
+        - ipv4
+        - ipv6
+        - fqdn
+        - url
+        - email
+        type: string
+        required: true
+      nolog:
+        title: No Log
+        description: Whether CIF should log the query
+        type: boolean
+        required: true
+      confidence:
+        title: Confidence
+        description: Minimum confidence level to return e.g. 65
+        type: integer
+        default: 65
+        required: true
+      cc:
+        title: Country Code
+        description: The country code to filter on e.g. us
+        type: string
+        required: false
+      protocol:
+        title: Protocol
+        description: Layer 4 protocol (icmp, tcp, udp)
+        enum:
+        - all
+        - icmp
+        - tcp
+        - udp
+        type: string
+        required: false
+      portlist:
+        title: Ports
+        description: 'List of ports (ex: 1,2,445-557)'
+        type: string
+        required: false
+      provider:
+        title: Provider
+        description: The provider(s) to filter on e.g. dragonresearchgroup.com
+        type: string
+        required: false
+      tags:
         title: Tags
         description: The tag(s) to filter on e.g. tags=botnet,zeus
         type: string

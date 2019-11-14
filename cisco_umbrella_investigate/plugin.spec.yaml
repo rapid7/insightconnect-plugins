@@ -11,9 +11,535 @@ description: Cisco Umbrella Investigate provides the most complete view of the r
   attackers infrastructures and predict future threats
 version: 1.0.2
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_umbrella_investigate
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- cisco
+- umbrella
+- investigate
+hub_tags:
+  use_cases: []
+  keywords: [cisco, umbrella, investigate]
+  features: []
+language: python
+types:
+  category:
+    name:
+      type: string
+      description: Domain name
+      required: false
+    status:
+      type: integer
+      description: The status will be '-1' if the domain is believed to be malicious,
+        '1' if the domain is believed to be benign, '0' if it hasn't been classified
+        yet
+      required: false
+    security_categories:
+      type: array
+      description: The Umbrella security category, or categories, that match this
+        domain or that this domain is associated with. If none match, the return will
+        be blank
+      required: false
+    content_categories:
+      type: array
+      description: The Umbrella content category or categories that match this domain.
+        If none match, the return will be blank
+      required: false
+  tag_date:
+    begin:
+      type: string
+      description: The date of adding the domain to the block list. If the domain
+        is currently in the block list, this date will be 'Current'
+      required: true
+    end:
+      type: string
+      description: The date of removing the domain to the block list. If the domain
+        is currently in the block list, this date will be 'Current'
+      required: true
+    category:
+      type: string
+      description: The Umbrella security category or categories that match this domain
+      required: true
+    url:
+      title: URL
+      type: string
+      description: The full URL containing the malicious code at the domain requested.
+        Return is null if URL is not available
+      required: true
+  resource_record:
+    first_seen:
+      type: string
+      description: Date when the domain was first seen to our DNS database
+      required: true
+    last_seen:
+      type: string
+      description: Date when domain was last seen in our DNS database
+      required: true
+    name:
+      type: string
+      description: Name of the domain
+      required: false
+    ttl:
+      title: TTL
+      type: integer
+      description: TTL of the domain
+      required: false
+    class:
+      type: string
+      description: DNS class type
+      required: false
+    type:
+      type: string
+      description: Query type
+      required: false
+    rr:
+      title: RR
+      type: string
+      description: Resource record IP for the domain
+      required: false
+  feature:
+    base_domain:
+      type: string
+      description: The base domain of the requested domain
+      required: true
+    is_subdomain:
+      type: boolean
+      description: Returns true if the requested domain is a subdomain of another
+      required: true
+    age:
+      type: integer
+      description: The day in days between now and the last request for this domain.
+        This value is only useful if present. A low score helps isolate attack domains
+        that are short-lived
+      required: false
+    ttls_min:
+      title: TTL Min
+      type: integer
+      description: Minimum amount of time set that DNS records should be cached
+      required: false
+    ttls_max:
+      title: TTL Max
+      type: integer
+      description: Maximum amount of time set that DNS records should be cached
+      required: false
+    ttls_mean:
+      title: TTL Mean
+      type: number
+      description: Average amount of time set that DNS records should be cached
+      required: false
+    ttls_median:
+      title: TTL Median
+      type: number
+      description: Median amount of time set that DNS records should be cached
+      required: false
+    ttls_stddev:
+      title: TTL Standard Deviation
+      type: number
+      description: Standard deviation of the amount of time set that DNS records should
+        be cached
+      required: false
+    country_codes:
+      type: array
+      description: 'List of country codes (ex: US, FR, TW) for the IPs the name maps
+        to'
+      required: false
+    country_count:
+      type: integer
+      description: Number of countries the IPs are hosted in
+      required: false
+    asns:
+      title: ASNs
+      type: array
+      description: List of ASN numbers the IPs are in
+      required: false
+    asns_count:
+      title: ASNs Count
+      type: integer
+      description: Number of ASNs the IPs map to
+      required: false
+    prefixes:
+      type: array
+      description: List of network prefixes the IPs map to
+      required: false
+    prefixes_count:
+      type: integer
+      description: Number of network prefixes the IPs map to
+      required: false
+    rips:
+      type: integer
+      description: Number of IPs seen for the domain name
+      required: false
+    div_rips:
+      type: number
+      description: The number of prefixes over the number of IPs
+      required: false
+    locations:
+      type: array
+      description: List of geo coordinates (WGS84 datum, decimal format) the IPs are
+        mapping to
+      required: false
+    locations_count:
+      type: integer
+      description: Number of distinct geo coordinates the IPs are mapping to
+      required: false
+    geo_distance_sum:
+      type: number
+      description: Minimum sum of distance between locations, in kilometers
+      required: false
+    geo_distance_mean:
+      type: number
+      description: Mean distance between the geo median and each location, in kilometers
+      required: false
+    non_routable:
+      type: boolean
+      description: If one of the IPs is in a reserved, non-routable IP range
+      required: false
+    mail_exchanger:
+      type: boolean
+      description: If an MX query for this domain name has been seen
+      required: false
+    cname:
+      title: CNAME
+      type: boolean
+      description: Returns true if a CNAME record has been seen for this domain name
+      required: false
+    ff_candidate:
+      title: FF Candidate
+      type: boolean
+      description: If the domain name looks like a candidate for fast flux. This does
+        not necessarily mean the domain is in fast flux, but rather that the IP address
+        the domain resolves to changes rapidly (or has changed rapidly)
+      required: false
+    rips_stability:
+      type: number
+      description: 1.0 divided by the number of times the set of IP addresses changed
+      required: false
+  ip_resource_record:
+    rr:
+      type: string
+      description: Resource record owner
+      required: true
+    ttl:
+      type: integer
+      description: Time to live for this record
+      required: false
+    class:
+      type: string
+      description: DNS class type
+      required: true
+    type:
+      type: string
+      description: Query type
+      required: true
+    name:
+      type: string
+      description: The looked up IP address
+      required: true
+  ip_feature:
+    rr_count:
+      type: integer
+      description: Number of records of that type mapping to the given IP
+      required: true
+    ld2_count:
+      type: integer
+      description: Number of 2-level names mapping to the given IP (for www.example.com,
+        this considers example.com)
+      required: true
+    ld3_count:
+      type: integer
+      description: Number of 3-level names mapping to the given IP (for www.example.com,
+        this considers www.example.com)
+      required: true
+    ld2_1_count:
+      type: integer
+      description: Number of 2-level names, without the TLD, mapping to the given
+        IP (for www.example.com, this considers example)
+      required: true
+    ld2_2_count:
+      type: integer
+      description: Number of 3-level names, without the TLD, mapping to a given IP
+        (for www.example.com, this considers www.example)
+      required: true
+    div_ld2:
+      type: number
+      description: ld2_count divided by the number of records
+      required: true
+    div_ld3:
+      type: number
+      description: ld3_count divided by the number of records
+      required: true
+    div_ld2_1:
+      type: number
+      description: ld2_1_count divided by the number of records
+      required: true
+    div_ld2_2:
+      type: number
+      description: ld2_2_count divided by the number of records
+      required: true
+  whois_domain:
+    domain:
+      type: string
+      description: Domain registered by this email
+      required: true
+    current:
+      type: boolean
+      description: Whether the domain is current, meaning currently registered by
+        this email address
+      required: true
+  email_whois:
+    total_results:
+      type: integer
+      description: Total number of results for this email
+      required: false
+    more_data_available:
+      type: boolean
+      description: Whether or not there are more than 500 results for this email,
+        either yes or no
+      required: true
+    limit:
+      type: integer
+      description: Total number of results for this page of results, default 500
+      required: true
+    domains:
+      type: '[]whois_domain'
+      description: Domains registered by this email and whether the domain is current,
+        meaning currently registered by this email address
+      required: true
+  sample_info:
+    sha256:
+      title: SHA256
+      type: string
+      description: The SHA256 checksum of the sample. This checksum is important if
+        you’d like to find out more about this sample in the /sample/ endpoint
+      required: true
+    sha1:
+      title: SHA1
+      type: string
+      description: The SHA1 checksum of the sample. As above, can be searched in /sample/
+        endpoint
+      required: true
+    md5:
+      title: MD5
+      type: string
+      description: The MD5 checksum of the sample, as above, can be searched in /sample/
+        endpoint
+      required: true
+    magicType:
+      type: string
+      description: A ‘magic type’ is better understood as a file type. Specifically,
+        it is the output of the Linux “file” utility
+      required: true
+    threatScore:
+      type: integer
+      description: A threatScore is a measure of the amount of system weakening, obfuscation,
+        persistence, modification, data exfiltration, and other behaviors which may
+        be a threat to the host system’s integrity
+      required: true
+    size:
+      type: integer
+      description: The size of the sample in bytes
+      required: true
+    firstSeen:
+      type: number
+      description: The epoch time stamp for when this sample was first seen by Threat
+        Grid
+      required: true
+    lastSeen:
+      type: number
+      description: The epoch time stamp for when this sample was last seen by Threat
+        Grid. The lastSeen and firstSeen will often be the same if the sample is more
+        recent
+      required: true
+    visible:
+      type: boolean
+      description: Boolean, either true or false. For internal Umbrella use only,
+        please ignore
+      required: true
+    avresults:
+      title: AV Results
+      type: array
+      description: AntiVirus results according to ClamAV. A sample can have more than
+        one signature if it is possibly detected under more than one family of malware.
+        A sample may also have no signatures associated
+      required: true
+connection:
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: Enter API key e.g. 1111-2222-3333-4444
+    required: true
+actions:
+  categorization:
+    title: Domain Status and Categorization
+    description: Return if domain has been flagged as malicious by the Cisco Security
+      Labs team
+    input:
+      domains:
+        type: '[]string'
+        description: Domain names
+        required: true
+    output:
+      categories:
+        title: Categories
+        description: Information about content categories and security categories
+        type: '[]category'
+        required: true
+  cooccurrences:
+    title: Co-occurrences for a Domain
+    description: Return co-occurences for the specified domain
+    input:
+      domain:
+        type: string
+        description: Domain name
+        required: true
+    output:
+      cooccurrences:
+        title: Co-occurences
+        description: Array of [domain name, scores] tuples. The values range between
+          0 and 1 and should not exceed 1. All co-occurences of requests from client
+          IPs are returned for the previous seven days whether the co-occurence is
+          suspicious or not
+        type: array
+        required: true
+  related:
+    title: Related Domains
+    description: Returns a list of domain names that have been frequently seen
+    input:
+      domain:
+        type: string
+        description: Domain name
+        required: true
+    output:
+      related:
+        description: Array of [domain name, scores] tuples where the score is the
+          number of client IP requests to the site in 60 seconds from the time of
+          the original lookup request
+        type: array
+        required: true
+  security:
+    title: Security Information
+    description: Returns scores or security features
+    input:
+      domain:
+        title: Domain Name
+        type: string
+        description: Domain name
+        required: true
+    output:
+      dga_score:
+        title: Domain Generation Algorithm
+        description: Domain Generation Algorithm. This score is generated based on
+          the likeliness of the domain name being generated by an algorithm rather
+          than a human
+        type: number
+        required: true
+      perplexity:
+        title: Perplexity
+        description: A second score on the likeliness of the name to be algorithmically
+          generated, on a scale from 0 to 1
+        type: number
+        required: true
+      entropy:
+        title: Entropy
+        description: The number of bits required to encode the domain name, as a score.
+          This score is to be used in conjunction with DGA and Perplexity
+        type: number
+        required: true
+      securerank2:
+        title: Suspicious Domain Rank
+        description: Securerank is designed to identify hostnames requested by known
+          infected clients but never requested by clean clients, assuming these domains
+          are more likely to be bad. Scores range from -100 (suspicious) to 100 (benign)
+        type: number
+        required: true
+      pagerank:
+        title: Google Pagerank
+        description: Popularity according to Google's pagerank algorithm
+        type: number
+        required: true
+      asn_score:
+        title: ASN Score
+        description: ASN reputation score, ranges from -100 to 0 with -100 being very
+          suspicious
+        type: number
+        required: false
+      prefix_score:
+        title: Prefix Score
+        description: Prefix ranks domains given their IP prefixes (an IP prefix is
+          the first three octets in an IP address) and the reputation score of these
+          prefixes. Ranges from -100 to 0, -100 being very suspicious
+        type: number
+        required: false
+      rip_score:
+        title: RIP Score
+        description: RIP ranks domains given their IP addresses and the reputation
+          score of these IP addresses. Ranges from -100 to 0, -100 being very suspicious
+        type: number
+        required: false
+      popularity:
+        title: Popularity
+        description: The number of unique client IPs visiting this site, relative
+          to the all requests to all sites. A score of how many different client/unique
+          IPs go to this domain compared to others
+        type: number
+        required: true
+      geodiversity:
+        title: Geodiversity
+        description: A score representing the number of queries from clients visiting
+          the domain, broken down by country. Score is a non-normalized ratio between
+          0 and 1
+        type: array
+        required: true
+      geodiversity_normalized:
+        title: Geodiversity Normalized
+        description: A score representing the amount of queries for clients visiting
+          the domain, broken down by country. Score is a normalized ratio between
+          0 and 1
+        type: array
+        required: true
+      tld_geodiversity:
+        title: TLD Country Code Geodiversity
+        description: A score that represents the TLD country code geodiversity as
+          a percentage of clients visiting the domain. Occurs most often with domains
+          that have a ccTLD. Score is normalized ratio between 0 and 1
+        type: array
+        required: true
+      geoscore:
+        title: Geo Score
+        description: A score that represents how far the different physical locations
+          serving this name are from each other
+        type: number
+        required: true
+      ks_test:
+        title: Kolmogorov–Smirnov Test
+        description: Kolmogorov–Smirnov test on geodiversity. 0 means that the client
+          traffic matches what is expected for this TLD
+        type: number
+        required: true
+      attack:
+        title: Attack
+        description: The name of any known attacks associated with this domain. Returns
+          blank if no known threat associated with domain
+        type: string
+        required: false
+      threat_type:
+        title: Threat Type
+        description: The type of the known attack, such as botnet or APT. Returns
+          blank if no known threat associated with domain
+        type: string
+        required: false
+  domain_tags:
+    title: Domain Tags
+    description: Returns the date range when the domain being queried was a part of
+      the Umbrella block list
+    input:
+      domain:
+        title: Domain Name
+        type: string
+        description: Domain name
+        required: true
+    output:
+      domain_tags:
         title: Domain Tags
         description: Date range for which this domain has been in the block list,
           domain tag such as malware or phishing, identifying the security category

@@ -9,9 +9,12 @@ status: []
 description: Diff Utilities
 version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/diff
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- diff
+- utilities
+hub_tags:
   use_cases: []
   keywords: [diff, utilities]
   features: []

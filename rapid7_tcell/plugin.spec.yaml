@@ -11,9 +11,393 @@ vendor: rapid7
 support: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_tcell
+  source_url: https://github.com/rapid7/insightconnect-plugins/
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- rapid7
+- web
+- waf
+- rasp
+hub_tags:
+  use_cases: []
+  keywords: [rapid7, web, waf, rasp]
+  features: []
+types:
+  app:
+    id:
+      title: ID
+      description: The app ID
+      type: string
+    name:
+      title: Name
+      description: The name of the app
+      type: string
+  agent:
+    id:
+      title: ID
+      description: The agent ID
+      type: string
+    type:
+      title: Type
+      description: The agent type
+      type: string
+    version:
+      title: Version
+      description: The version of the agent
+      type: string
+    from:
+      title: From
+      description: The Unix timestamp (in milliseconds) when the agent was first seen
+      type: integer
+    to:
+      title: To
+      description: The Unix timestamp (in milliseconds) when the agent was last seen
+      type: integer
+    last_process_id:
+      title: Last Process ID
+      description: The most recent process ID associated with the agent
+      type: string
+    active:
+      title: Active
+      description: Whether or not the agent is currently active
+      type: boolean
+  route:
+    id:
+      title: ID
+      description: The ID of the route
+      type: string
+    method:
+      title: Method
+      description: The HTTP method (GET, POST, ...) for the route
+      type: string
+    pattern:
+      title: Pattern
+      description: The path pattern for the route
+      type: string
+    controller:
+      title: Controller
+      description: The name of the controller associated with the route (when applicable)
+      type: string
+  inline_script:
+    id:
+      title: ID
+      description: The ID of the script
+      type: string
+    approved:
+      title: Approved
+      description: Is the script approved
+      type: boolean
+    template:
+      title: Template
+      description: Template
+      type: string
+    created_at:
+      title: Created At
+      description: Timestamp representing the date of creation
+      type: integer
+    last_reported_at:
+      title: Last Reported At
+      description: Timestamp representing the date when script was last reported
+      type: integer
+  package:
+    id:
+      title: ID
+      description: The ID of the package
+      type: integer
+    vendor:
+      title: Vendor
+      description: The vendor providing the package
+      type: string
+    name:
+      title: Name
+      description: The name of the package
+      type: string
+    version:
+      title: Version
+      description: The version of the package
+      type: string
+    build:
+      title: Build
+      description: The build ID of the package
+      type: string
+    created_at:
+      title: Created At
+      description: Unix timestamp (in milliseconds) when the package was first seen
+      type: integer
+  location:
+    latitude:
+      title: Latitude
+      description: Latitude
+      type: float
+    longitude:
+      title: Longitude
+      description: Longitude
+      type: float
+    city:
+      title: City
+      description: City
+      type: string
+    country:
+      title: Country
+      description: Country
+      type: string
+    iso:
+      title: ISO
+      description: ISO code
+      type: string
+  event:
+    id:
+      title: ID
+      description: ID
+      type: string
+    method:
+      title: Method
+      description: Method
+      type: string
+    city:
+      title: City
+      description: City
+      type: string
+    country:
+      title: Country
+      description: Country
+      type: string
+    full_uri:
+      title: Full URI
+      description: Full URI
+      type: string
+    ip:
+      title: IP
+      description: IP address
+      type: string
+    time:
+      title: Time
+      description: Time (timestamp)
+      type: integer
+    route:
+      title: Route
+      description: Route
+      type: string
+    route_id:
+      title: Route ID
+      description: Route ID
+      type: string
+    app_id:
+      title: App ID
+      description: App ID
+      type: string
+    session_id:
+      title: Session ID
+      description: Session ID
+      type: string
+    path:
+      title: Path
+      description: Path
+      type: string
+    from:
+      title: From
+      description: From
+      type: integer
+    to:
+      title: To
+      description: To
+      type: integer
+    tags:
+      title: Tags
+      description: Tags
+      type: '[]string'
+    stripped_uri:
+      title: Stripped URI
+      description: Stripped URI
+      type: string
+    document_uri:
+      title: Document URI
+      description: Document URI
+      type: string
+    browser:
+      title: Browser
+      description: Browser
+      type: string
+    static_hash:
+      title: Static Hash
+      description: Static hash
+      type: string
+    script_id:
+      title: Script ID
+      description: Script ID
+      type: string
+    detection_point:
+      title: Detection Point
+      description: Detection Point
+      type: string
+    script_pod:
+      title: Script Pos
+      description: Script pos
+      type: string
+    location:
+      title: Location
+      description: Location
+      type: location
+connection:
+  api_key:
+    title: API Key
+    description: API key generated for the tCell account
+    type: credential_secret_key
+    required: true
+triggers:
+  get_events:
+    title: Get Events
+    description: Fetch events of the provided type
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      source:
+        title: Source
+        description: The type of events to fetch
+        type: string
+        required: true
+        enum:
+        - appfirewall
+        - inline
+        - login
+        - csp
+      frequency:
+        title: Frequency
+        description: How often the trigger should check for new detections in seconds
+        type: integer
+        required: true
+        default: 5
+      filter:
+        title: Filter
+        description: 'Filters out events based on a predicate. The syntax is filter=field:operator:value,
+          where: field is a field present in the data operator is one of include (equals),
+          exclude (not equals), gt (greater than), and lt (less than) value is the
+          value to apply the operator to'
+        type: string
+        required: false
+    output:
+      event:
+        title: Event
+        description: Matching event
+        type: event
+        required: false
+actions:
+  list_apps:
+    title: List Apps
+    description: Fetch app name and app ID for all apps in a customer environment
+    output:
+      apps:
+        title: Apps
+        description: A list of apps
+        type: '[]app'
+        required: false
+      total:
+        title: Total
+        description: The number of items returned
+        type: integer
+        required: false
+  get_app:
+    title: Get App
+    description: Fetch the display name and app ID for the app with the given ID
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+    output:
+      app:
+        title: App
+        description: A JSON object with the app ID and the user-friendly app display
+          name
+        type: app
+        required: false
+  get_app_tags:
+    title: Get App Tags
+    description: Fetch the set of tags for a tCell app
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+    output:
+      tags:
+        title: Tags
+        description: An array of tags for the chosen app
+        type: '[]string'
+        required: false
+  create_app:
+    title: Create App
+    description: Create an application
+    input:
+      app_display_name:
+        title: App Display Name
+        description: The display name of your new application (an app ID will be derived
+          from this name)
+        type: string
+        required: true
+    output:
+      app_id:
+        title: App ID
+        description: The application ID for the newly created tCell app
+        type: string
+        required: false
+  change_tags:
+    title: Change Tags
+    description: Assign a completely new set of tags to an app, removing any previously
+      existing tags
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      tags:
+        title: Tags
+        description: List of strings, choosing the new tags for the application
+        type: '[]string'
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successfully updated tags
+        type: boolean
+        required: false
+  add_tags:
+    title: Add Tags
+    description: Add all the tags posted in the body to the set of tags the app already
+      has
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      tags:
+        title: Tags
+        description: List of strings, choosing the new tags for the application
+        type: '[]string'
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successfully updated tags
+        type: boolean
+        required: false
+  remove_tags:
+    title: Remove Tags
+    description: Remove tags from the application
+    input:
+      app_id:
+        title: App ID
+        description: App ID
+        type: string
+        required: true
+      tags:
         title: Tags
         description: List of strings, choosing the tags to be removed from the application
         type: '[]string'
