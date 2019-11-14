@@ -1,18 +1,17 @@
 # Description
 
-[Wazuh](https://www.wazuh.com) is an open source project that provides security visibility, compliance and infrastructure monitoring capabilities.
+The Wazuh plugin will allow a user to manage their Wazuh deployment. [Wazuh](https://www.wazuh.com) is an open source project that provides security visibility, compliance and infrastructure monitoring capabilities.
 The project was born as a fork of OSSEC HIDS. This plugin utilizes the [Wazuh API](https://documentation.wazuh.com/current/user-manual/api/reference.html).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage Wazuh agents
+* Investigate Wazuh logs
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* An administrative username and password
+* The url of your Wazuah deployment
 
 # Documentation
 

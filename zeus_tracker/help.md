@@ -1,18 +1,15 @@
 # Description
 
-The ZeuS Tracker plugin uses the API of the [Abuse.ch ZeuS Tracker](https://zeustracker.abuse.ch/)
-which tracks ZeuS Command&Control servers (hosts) around the world.
+This plugin uses the API of the [Abuse.ch ZeuS Tracker](https://zeustracker.abuse.ch/)
+which tracks ZeuS Command & Control servers (hosts) around the world.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* NA - Depreciated
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* NA - Depreciated
 
 # Documentation
 

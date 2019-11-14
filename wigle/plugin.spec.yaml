@@ -3,10 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: wigle
 title: WiGLE
-description: WiGLE (Wireless Geographic Logging Engine) consolidates location and
-  information of wireless networks world-wide to a central database, and has user-friendly
-  desktop and web applications that can map, query and update the database via the
-  web
+description: The WiGLE (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks.
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -14,12 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/wigle
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.wigle.net/
 tags:
 - network
 - location
 - wireless
 hub_tags:
-  use_cases: []
+  use_cases: [threat_intel]
   keywords: [network, location, wireless]
   features: []
 types:

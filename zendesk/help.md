@@ -1,18 +1,19 @@
 # Description
 
-[Zendesk](https://www.zendesk.com) helps improve communication and make sense of massive amounts of data.
+The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk.
+
 This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage tickets
+* Manage users
+* Search Zendesk
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A Zendesk API key
+* Information about your Zendesk instance
 
 # Documentation
 

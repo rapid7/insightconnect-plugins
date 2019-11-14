@@ -1,19 +1,16 @@
 # Description
 
-[WordPress](https://wordpress.com/) is a leading website and bself.logger software. Our WordPress plugin makes it easy
-to deprovision users by implementing two of the available API calls. The plugin first follows
-the WP discovery process and then uses the HTTP API v2 to perform deprovisioning.
+The [WordPress](https://wordpress.com/) plugin allows you to manage users on the WordPress platform
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage users
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* WordPress configuration (see connection details)
+* WordPress administrative username and password
+* WordPress host name
 
 # Documentation
 

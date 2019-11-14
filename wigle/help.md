@@ -1,19 +1,20 @@
 # Description
 
-[WiGLE](https://wigle.net/index) (Wireless Geographic Logging Engine) consolidates location and information of wireless networks world-wide to a central database, and has user-friendly desktop and web applications that can map, query and update the database via the web.
+The [WiGLE](https://wigle.net/index) (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks. The WiGLE consolidates location and information of wireless networks world-wide to a central database. This plugin will allow users to 
+retrieve and update information in the WiGLE database
 
 This plugin utilizes the [WiGLE API](https://api.wigle.net/swagger).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Retrieve wireless network information
+* Update wireless information in WiGLE
+* Get statistics about regions or countries
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A WiGLE api token
+* The WiGLE api name to use
 
 # Documentation
 
