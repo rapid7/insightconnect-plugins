@@ -1,18 +1,19 @@
 # Description
 
-[AbuseIPDB](https://www.abuseipdb.com) is a free service which allows you to look up IP reports, or report an abusive IP.
+The AbuseIPDB InsightConnect plugin allows you to look up IP reports, provides list and details of blacklisted IPs, or report an abusive IP.
+
 This plugin utilizes [AbuseIPDB API v2](https://docs.abuseipdb.com).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Report abusive IPs
+* Get blacklisted IPs
+* Get IP details
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires a [free AbuseIPDB account](https://www.abuseipdb.com/register) and accompanying API Key
+
 
 # Documentation
 
