@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: traceroute
 title: Traceroute
-description: Traceroute networking tool
+description: The traceroute plugin will trace a network route to a host
 version: 1.0.1
 vendor: rapid7
 support: community
@@ -11,11 +11,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/traceroute
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: ttps://linux.die.net/man/1/tcptraceroute
 tags:
 - Tracerout
 - network diagnostics
 hub_tags:
-  use_cases: []
+  use_cases: [threat_intel]
   keywords: [Tracerout, network diagnostics]
   features: []
 actions:
