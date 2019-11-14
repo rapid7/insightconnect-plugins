@@ -13,8 +13,6 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://https://www.rapid7.com
   documentation_url: https://www.rapid7.com/products/insightappsec/
-
-
 tags:
 - insightappsec
 - Rapid7
