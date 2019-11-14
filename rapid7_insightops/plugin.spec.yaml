@@ -19,7 +19,7 @@ tags:
 - log
 - monitoring
 hub_tags:
-  use_cases: [log_search, reporting_and_analytics, 	data_ingestion, data_aggregation]
+  use_cases: [log_search, reporting_and_analytics, data_ingestion, data_aggregation]
   keywords: [InsightOps, log management, log, monitoring]
   features: []
 types:
