@@ -4,7 +4,7 @@ product: ["insightconnect"]
 name: string
 title: String Operations
 description: Provides common programmatic string operations
-version: 1.1.0
+version: 1.2.0
 vendor: rapid7
 support: community
 status: []
@@ -127,3 +127,18 @@ actions:
         title: Lowercase
         description: Lowercase string
         required: false
+  trim:
+    title: Trim
+    description: Trim a string of leading and trailing whitespace
+    input:
+      string:
+        title: String Input
+        description: String to trim
+        type: string
+        required: true
+    output:
+      trimmed:
+        type: string
+        title: Trimmed
+        description: Trimmed string
+        required: true

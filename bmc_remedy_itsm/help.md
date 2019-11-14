@@ -30,7 +30,141 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-#### Assign Incident
+### Add Incident Work Note
+
+This action is used to add a work note to an Incident.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|incident_id|string|None|True|Incident ID|None|
+|work_note|string|None|True|Work note|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|False|Incident|
+
+Example output:
+
+```
+{
+  "incident": {
+    "values": {
+      "Request ID": "INC000000000026|INC000000000026",
+      "Submitter": "Remedy Application Service",
+      "Submit Date": "2008-11-07T05:14:17.000+0000",
+      "Assignee Login ID": "Allen",
+      "Last Modified By": "ARAdmin",
+      "Last Modified Date": "2019-10-15T23:36:18.000+0000",
+      "Status": "Assigned",
+      "Status-History": {
+        "New": {
+          "user": "Action Request Installer Account",
+          "timestamp": "2019-06-11T18:54:42.000+0000"
+        },
+        "Assigned": {
+          "user": "ARAdmin",
+          "timestamp": "2019-10-15T23:36:18.000+0000"
+        },
+        "Pending": {
+          "user": "Action Request Installer Account",
+          "timestamp": "2019-06-11T18:54:42.000+0000"
+        }
+      },
+      "Assignee Groups": "1000000001;",
+      "InstanceId": "AG00123F73CF5Eqc4TSQTOQxAgc0QB",
+      "Vendor Assignee Groups": "1000000001;",
+      "Product Categorization Tier 1": "Software",
+      "Product Categorization Tier 2": "Software Application/System",
+      "Product Categorization Tier 3": "Database Software",
+      "Department": "Customer Service",
+      "Site Group": "United States",
+      "Region": "Americas",
+      "Site": "Headquarters, Building 1.31",
+      "SRInstanceID": "NA",
+      "Entry ID": "INC000000000026",
+      "SRMS Registry Instance ID": "SR0011439CCAD4ec8UQwCkOLAQlQAA",
+      "InfrastructureEventType": "None",
+      "Description": "User needs local Database System installed.",
+      "Company": "Calbro Services",
+      "Country": "United States",
+      "State Province": "New York",
+      "City": "New York",
+      "Organization": "Information Technology",
+      "Assigned Support Organization": "IT Support",
+      "Last Name": "Allbrook",
+      "First Name": "Allen",
+      "Contact Client Type": "Office-Based Employee",
+      "VIP": "No",
+      "Contact Sensitivity": "Standard",
+      "Street": "1114 Eighth Avenue, 31st Floor",
+      "Internet E-mail": "user@example.com",
+      "Phone Number": "1 212 5555454 (11)",
+      "Categorization Tier 1": "Request",
+      "Categorization Tier 2": "Software",
+      "Categorization Tier 3": "Install",
+      "Site ID": "STE_SOLN0002846",
+      "Assigned Group ID": "SGP000000000010",
+      "Person ID": "PPL000000000013",
+      "Contact Company": "Calbro Services",
+      "Service Type": "User Service Request",
+      "Incident Number": "INC_CAL_1000024",
+      "Urgency": "4-Low",
+      "Impact": "4-Minor/Localized",
+      "Priority": "Low",
+      "Priority Weight": 0,
+      "Reported Source": "Email",
+      "Assigned Group": "Frontoffice Support",
+      "Assignee": "Allen Allbrook",
+      "Assigned Support Company": "Calbro Services",
+      "Owner Support Organization": "IT Support",
+      "Owner Group": "Frontoffice Support",
+      "Owner Support Company": "Calbro Services",
+      "Owner Group ID": "SGP000000000010",
+      "Reported Date": "2008-10-01T04:00:00.000+0000",
+      "Responded Date": "2008-10-02T12:00:00.000+0000",
+      "Last Acknowledged Date": "2008-10-02T12:00:00.000+0000",
+      "Direct Contact Internet E-mail": "user@example.com",
+      "Total Transfers": 1,
+      "Estimated Resolution Date": "2008-10-06T21:00:00.000+0000",
+      "Required Resolution DateTime": "2008-10-06T21:00:00.000+0000",
+      "Direct Contact Company": "Calbro Services",
+      "Direct Contact Last Name": "Allbrook",
+      "Direct Contact First Name": "Allen",
+      "Direct Contact Phone Number": "1 212 555-5454 (11)",
+      "Direct Contact Organization": "Information Technology",
+      "Direct Contact Department": "Customer Service",
+      "Direct Contact Region": "Americas",
+      "Direct Contact Site Group": "United States",
+      "Direct Contact Site": "Headquarters, Building 1.31",
+      "Direct Contact Person ID": "PPL000000000013",
+      "Direct Contact Street": "1114 Eighth Avenue, 31st Floor",
+      "Direct Contact Country": "United States",
+      "Direct Contact State/Province": "New York",
+      "Direct Contact City": "New York",
+      "Direct Contact Zip/Postal Code": "10036",
+      "Direct Contact Time Zone": "(GMT-05:00) Eastern Time (US & Canada)",
+      "Direct Contact Site ID": "STE_SOLN0002846",
+      "Direct Contact Country Code": "1",
+      "Direct Contact Area Code": "212",
+      "Direct Contact Local Number": "555-5454",
+      "Direct Contact Extension": "11"
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "example.com:8008/api/arsys/v1/entry/HPD:IncidentInterface/INC000000000026%7CINC000000000026"
+        }
+      ]
+    }
+  }
+}
+```
+
+### Assign Incident
 
 This action is used to assign an Incident.
 
@@ -102,7 +236,7 @@ Example output:
       "VIP": "No",
       "Contact Sensitivity": "Standard",
       "Street": "1114 Eighth Avenue, 31st Floor",
-      "Internet E-mail": "A.Allbrook@calbroservices.com",
+      "Internet E-mail": "user@example.com",
       "Phone Number": "1 212 5555454 (11)",
       "Categorization Tier 1": "Request",
       "Categorization Tier 2": "Software",
@@ -128,7 +262,7 @@ Example output:
       "Reported Date": "2008-10-01T04:00:00.000+0000",
       "Responded Date": "2008-10-02T12:00:00.000+0000",
       "Last Acknowledged Date": "2008-10-02T12:00:00.000+0000",
-      "Direct Contact Internet E-mail": "A.Allbrook@calbroservices.com",
+      "Direct Contact Internet E-mail": "user@example.com",
       "Total Transfers": 1,
       "Estimated Resolution Date": "2008-10-06T21:00:00.000+0000",
       "Required Resolution DateTime": "2008-10-06T21:00:00.000+0000",
@@ -238,7 +372,7 @@ Example output:
       "VIP": "No",
       "Contact Sensitivity": "Standard",
       "Street": "1114 Eighth Avenue, 31st Floor",
-      "Internet E-mail": "A.Allbrook@calbroservices.com",
+      "Internet E-mail": "user@example.com",
       "Phone Number": "1 212 5555454 (11)",
       "Categorization Tier 1": "Request",
       "Categorization Tier 2": "Software",
@@ -264,7 +398,7 @@ Example output:
       "Reported Date": "2008-10-01T04:00:00.000+0000",
       "Responded Date": "2008-10-02T12:00:00.000+0000",
       "Last Acknowledged Date": "2008-10-02T12:00:00.000+0000",
-      "Direct Contact Internet E-mail": "A.Allbrook@calbroservices.com",
+      "Direct Contact Internet E-mail": "user@example.com",
       "Total Transfers": 1,
       "Estimated Resolution Date": "2008-10-06T21:00:00.000+0000",
       "Required Resolution DateTime": "2008-10-06T21:00:00.000+0000",
@@ -419,7 +553,7 @@ Example output:
       "Local Phone": "555-5454",
       "Extension": "66",
       "Street": "1114 Eighth Avenue, 31st Floor",
-      "Internet E-mail": "blah@example.com",
+      "Internet E-mail": "user@example.com",
       "Phone Number": "1 212 5555454 (66)",
       "Categorization Tier 1": "Request",
       "Categorization Tier 2": "Hardware",
@@ -468,7 +602,7 @@ Example output:
       "DR": 0,
       "SLA Res Business Hour Seconds": 0,
       "Resolution Category": "Request",
-      "Direct Contact Internet E-mail": "blah@example.com",
+      "Direct Contact Internet E-mail": "user@example.com",
       "Group Transfers": 0,
       "Total Transfers": 0,
       "Individual Transfers": 0,
@@ -578,7 +712,7 @@ Example output:
         "VIP": "No",
         "Contact Sensitivity": "Standard",
         "Street": "1114 Eighth Avenue, 31st Floor",
-        "Internet E-mail": "blah@example.com",
+        "Internet E-mail": "user@example.com",
         "Phone Number": "1 212 5555454 (66)",
         "Categorization Tier 1": "Request",
         "Categorization Tier 2": "Hardware",
@@ -604,7 +738,7 @@ Example output:
         "Reported Date": "2008-10-01T04:00:00.000+0000",
         "Responded Date": "2008-10-02T12:00:00.000+0000",
         "Last Acknowledged Date": "2008-10-02T12:00:00.000+0000",
-        "Direct Contact Internet E-mail": "blah@example.com",
+        "Direct Contact Internet E-mail": "user@example.com",
         "Total Transfers": 0,
         "Estimated Resolution Date": "2008-10-06T21:00:00.000+0000",
         "Required Resolution DateTime": "2008-10-06T21:00:00.000+0000",
@@ -734,7 +868,7 @@ Example output:
       "Local Phone": "555-5454",
       "Extension": "66",
       "Street": "1114 Eighth Avenue, 31st Floor",
-      "Internet E-mail": "blah@example.com",
+      "Internet E-mail": "user@example.com",
       "Phone Number": "1 212 5555454 (66)",
       "Categorization Tier 1": "Request",
       "Categorization Tier 2": "Hardware",
@@ -778,7 +912,7 @@ Example output:
       "EH": 0,
       "DR": 0,
       "SLA Res Business Hour Seconds": 0,
-      "Direct Contact Internet E-mail": "blah@example.com",
+      "Direct Contact Internet E-mail": "user@example.com",
       "Group Transfers": 0,
       "Total Transfers": 0,
       "Individual Transfers": 0,
@@ -905,7 +1039,7 @@ Example output:
       "Local Phone": "555-5454",
       "Extension": "66",
       "Street": "1114 Eighth Avenue, 31st Floor",
-      "Internet E-mail": "blah@example.com",
+      "Internet E-mail": "user@example.com",
       "Phone Number": "1 212 5555454 (66)",
       "Categorization Tier 1": "Request",
       "Categorization Tier 2": "Hardware",
@@ -949,7 +1083,7 @@ Example output:
       "EH": 0,
       "DR": 0,
       "SLA Res Business Hour Seconds": 0,
-      "Direct Contact Internet E-mail": "blah@example.com",
+      "Direct Contact Internet E-mail": "user@example.com",
       "Group Transfers": 0,
       "Total Transfers": 0,
       "Individual Transfers": 0,
@@ -1078,7 +1212,7 @@ Example output:
       "Local Phone": "555-5454",
       "Extension": "66",
       "Street": "1114 Eighth Avenue, 31st Floor",
-      "Internet E-mail": "blah@example.com",
+      "Internet E-mail": "user@example.com",
       "Phone Number": "1 212 5555454 (66)",
       "Categorization Tier 1": "Request",
       "Categorization Tier 2": "Hardware",
@@ -1122,7 +1256,7 @@ Example output:
       "EH": 0,
       "DR": 0,
       "SLA Res Business Hour Seconds": 0,
-      "Direct Contact Internet E-mail": "blah@example.com",
+      "Direct Contact Internet E-mail": "user@example.com",
       "Group Transfers": 0,
       "Total Transfers": 0,
       "Individual Transfers": 0,
@@ -1187,4 +1321,3 @@ To configure the BMC server for API usage: https://docs.bmc.com/docs/ars9000/con
 
 * [BMC Remedy ITSM](https://www.bmc.com/it-solutions/it-service-management.html)
 * [BMC Remedy ITSM API](https://docs.bmc.com/docs/ars9000/bmc-remedy-ar-system-rest-api-overview-515804627.html)
-

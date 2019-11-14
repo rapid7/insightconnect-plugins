@@ -53,12 +53,12 @@ class NewMessageReceived(komand.Trigger):
                 temp_time = most_recent_message_time
 
                 for message in sorted_messages:  # For each new message
-                    self.logger.info("Analyzing message...")
                     message = remove_null_and_clean(message)
                     if maya.parse(message.get("createdDateTime")) > last_time_we_checked:
+                        self.logger.info("Analyzing message...")
                         if message_content:
                             self.logger.info("Checking message content.")
-                            if compiled_message_content.match(message.get("body", {}).get("content", "")):
+                            if compiled_message_content.search(message.get("body", {}).get("content", "")):
                                 self.logger.info("Returning new message.")
                                 self.send({Output.MESSAGE: message})
                             else:
@@ -105,10 +105,21 @@ class NewMessageReceived(komand.Trigger):
         messages_result = requests.get(messages_endpoint, headers=headers)
         try:
             messages_result.raise_for_status()
-        except Exception as e:
-            raise PluginException(cause=f"Could not get messages from Microsoft Graph API."
-                                        f"Get messages result code: {messages_result.status_code}",
-                                  assistance=messages_result.text) from e
+
+        # The beta API bombs out every once in a while with Auth denied. Try forcing a refersh of our auth token and
+        # retry getting messages before raising an exception.
+        except Exception:
+            self.logger.info("Get messages failed, refreshing token and trying again.")
+            time.sleep(10)  # sleep for 10 seconds to make sure we're not killing the API
+            headers = self.connection.get_headers(True)  # This will force a refresh of our auth token
+            messages_result = requests.get(messages_endpoint, headers=headers)
+            try:
+                messages_result.raise_for_status()
+            except Exception as e:
+                raise PluginException(cause=f"Could not get messages from Microsoft Graph API."
+                                            f"Get messages result code: {messages_result.status_code}",
+                                      assistance=messages_result.text) from e
+
         sorted_messages = self.sort_messages_from_request(messages_result.json())
         return sorted_messages
 

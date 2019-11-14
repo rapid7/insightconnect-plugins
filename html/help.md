@@ -136,6 +136,7 @@ This action is used to strip an HTML string of all tags and return only the text
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |doc|string|None|True|Document to transform|None|
+|remove_scripts|boolean|None|False|Remove non-HTML scripts from the document|None|
 
 ##### Output
 
@@ -165,6 +166,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.2.0 - Update to add the Remove Scripts option to Text
 * 1.1.0 - New action: Text
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
@@ -177,4 +179,3 @@ This plugin does not contain any troubleshooting information.
 
 * [pypandoc](https://pypi.python.org/pypi/pypandoc)
 * [W3 Validator](https://validator.w3.org)
-

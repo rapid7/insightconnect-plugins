@@ -1,7 +1,9 @@
-FROM komand/python-3-plugin:2
+FROM komand/python-3-37-plugin:3
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin
+
+RUN apt-get update && apt install -y iputils-ping
 
 ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR /etc/ssl/certs

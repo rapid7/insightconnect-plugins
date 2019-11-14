@@ -1,4 +1,5 @@
 import komand
+from komand.exceptions import PluginException
 import pypandoc
 import base64
 import re
@@ -18,7 +19,8 @@ class Html5(komand.Action):
     tags = re.findall(tag_parser, params.get('doc'))
     try:
         if not len(tags):
-            raise Exception('Run: Input Invalid, Input must be of type HTML')
+            raise PluginException(cause='Run: Invalid input.',
+                                  assistance='Input must be of type HTML.')
         output = pypandoc.convert_text(params.get('doc'), 'html', format='md')
         new_output = pypandoc.convert(output, 'html5', format="md")
         f = base64.b64encode(new_output.encode('ascii')).decode()

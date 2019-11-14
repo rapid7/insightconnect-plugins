@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Ping a host to check for connectivity"
+
+
 class Input:
     COUNT = "count"
     HOST = "host"
@@ -48,8 +52,8 @@ class PingInput(komand.Input):
     }
   },
   "required": [
-    "host",
     "count",
+    "host",
     "resolve_hostname"
   ]
 }
@@ -121,8 +125,8 @@ class PingOutput(komand.Output):
     }
   },
   "required": [
-    "response",
-    "reply"
+    "reply",
+    "response"
   ]
 }
     """)
