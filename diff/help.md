@@ -1,18 +1,15 @@
 # Description
 
-The Diff plugin allows you to find the difference between strings.
+The Diff InsightConnect plugin allows you to find the difference between strings using Python's [difflib](https://docs.python.org/3/library/difflib.html) library.
 Results persist across runs of workflows (using the unique label).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Get differences between strings.
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+This plugin does not contain any requirements.
 
 # Documentation
 

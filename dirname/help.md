@@ -1,7 +1,7 @@
 # Description
 
-The `dirname` utility deletes any suffix beginning with the slash `/` character
-This plugin is used to get the directory name of a file path or protocol and domain of a URL. Examples, using Python
+The `dirname` InsightConnect plugin is used to get the directory name of a file path or protocol and domain of a URL. This deletes any suffix beginning with the slash `/` character.
+ Examples, using Python:
 
 ```
 
@@ -14,14 +14,11 @@ This plugin is used to get the directory name of a file path or protocol and dom
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Retrieve directory name of a file path or protocol and domain of a URL.
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+This plugin does not contain any requirements.
 
 # Documentation
 
