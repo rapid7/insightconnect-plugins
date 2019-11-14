@@ -11,7 +11,7 @@ This plugin utilizes the [tCell API](https://docs.tcell.io).
 
 # Requirements
 
-* Requires an API Key from the product
+* API Key
 
 # Documentation
 
