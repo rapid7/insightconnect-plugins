@@ -5,14 +5,11 @@ This plugin utilizes allows data to be encoded or decoded using the standard Bas
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Encode text
+* Decode text
 
 # Requirements
-
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+This plugin does not contain any requirements.
 
 # Documentation
 

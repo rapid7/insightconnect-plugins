@@ -21,6 +21,7 @@ Second column contents: birds
 * Manipulate file
 
 # Requirements
+This plugin does not contain any requirements.
 
 # Documentation
 

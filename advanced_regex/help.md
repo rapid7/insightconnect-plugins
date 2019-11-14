@@ -1,17 +1,15 @@
 # Description
 
-Perform regex operations on a string using Python regex.
+The Advanced Regex InsightConnect plugin perform regex operations on a string using Python regex.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Data extraction
+* Search and replace text
+* Split text
 
 # Requirements
-
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+This plugin does not contain any requirements.
 
 # Documentation
 

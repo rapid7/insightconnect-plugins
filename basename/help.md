@@ -1,7 +1,8 @@
 # Description
 
-The `basename` utility deletes any prefix ending with the last slash `/` character
-This plugin is used to get the last item of a file path or URL. Examples, using Python
+The Basename InsightConnect plugin is used to get the last item of a file path or URL using Python's `basename` utility.
+The `basename` utility deletes any prefix ending with the last slash `/` character. 
+For example:
 
 ```
 
@@ -14,14 +15,10 @@ This plugin is used to get the last item of a file path or URL. Examples, using 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Delete input's prefix ending with last slash '/' character
 
 # Requirements
-
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+This plugin does not contain any requirements.
 
 # Documentation
 
