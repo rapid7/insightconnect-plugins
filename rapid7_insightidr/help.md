@@ -4,14 +4,13 @@
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Set status of investigation
+* Add indicators
+* List Investigations
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+Requires an API Key from the product
 
 # Documentation
 
@@ -171,8 +170,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - New Action Add Indicators to a Threat
 * 1.0.0 - Initial plugin
+* 1.1.0 - New Action Add Indicators to a Threat
 
 # Links
 

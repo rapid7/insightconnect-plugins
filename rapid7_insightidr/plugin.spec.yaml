@@ -9,9 +9,15 @@ vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightidr
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://rapid7.com
+  documentation_url: https://www.rapid7.com/products/insightidr/
 tags: [ "IDR", "SIEM" ]
 support: rapid7
 status: []
+hub_tags:
+  use_cases: [SIEM, Investigations, Threat Detection & Response]
+  keywords: [IDR, SIEM]
+  features: []
 
 types:
   investigation_metadata:
