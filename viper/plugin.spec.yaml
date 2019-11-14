@@ -3,12 +3,13 @@ extension: plugin
 product: ["insightconnect"]
 name: viper
 title: "Viper"
-description: "Viper is a binary analysis and management framework. Its fundamental objective is to provide a solution to easily organize your collection of malware and exploit samples as well as your collection of scripts you created, or found over time to facilitate your daily research. Think of it as a Metasploit for malware researchers: it provides a terminal interface that you can use to store, search and analyze arbitrary files"
+description: "The Viper plugins allows you to use Viper's platform to store, search, and analyze files."
 version: 2.0.0
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/viper
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://github.com/viper-framework/viper
 tags: [ "binary", "analysis", "malware" ]
 support: community
 status: []
