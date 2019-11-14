@@ -12,6 +12,10 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/proofpoint_tap
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- Proofpoint
+- TAP
+- parser
+hub_tags:
   use_cases: []
   keywords: [Proofpoint, TAP, parser]
   features: []

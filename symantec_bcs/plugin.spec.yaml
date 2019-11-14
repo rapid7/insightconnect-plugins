@@ -12,6 +12,10 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/symantec_bcs
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- symantec
+- bcs
+- security response
+hub_tags:
   use_cases: []
   keywords: [symantec, bcs, security response]
   features: []

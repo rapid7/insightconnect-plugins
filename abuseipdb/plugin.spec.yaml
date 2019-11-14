@@ -3,8 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: abuseipdb
 title: AbuseIPDB
-description: AbuseIPDB is a free service which allows you to look up IP reports, or
-  report an abusive IP
+description: This plugin allows you to look up IP reports, provides list and details of blacklisted IPs, or report an abusive IP.
 version: 5.0.0
 vendor: rapid7
 support: community
@@ -12,8 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/abuseipdb
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.abuseipdb.com
 tags:
-  use_cases: []
+- ip
+- intelligence
+- abuse
+hub_tags:
+  use_cases: [alert_enrichment, threat_intel]
   keywords: [ip, intelligence, abuse]
   features: []
 enable_cache: false

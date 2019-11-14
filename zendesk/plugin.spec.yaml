@@ -13,6 +13,380 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/zendesk
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- zendesk
+- ticket
+- communication
+hub_tags:
+  use_cases: []
+  keywords: [zendesk, ticket, communication]
+  features: []
+types:
+  ticket:
+    attachment:
+      title: Attachment
+      type: file
+    assignee_id:
+      title: Assignee ID
+      type: string
+    collaborator_ids:
+      title: Collaborator IDs
+      type: '[]string'
+    description:
+      title: Description
+      type: string
+    due_at:
+      title: Due At
+      type: date
+    external_id:
+      title: External ID
+      type: string
+    group_id:
+      title: Group ID
+      type: integer
+    requester_id:
+      title: Requester ID
+      type: string
+    recipient:
+      title: Recipient ID
+      type: string
+    problem_id:
+      title: Problem ID
+      type: string
+    subject:
+      title: Subject
+      type: string
+    tags:
+      title: Tags
+      type: '[]string'
+    type:
+      title: Type
+      type: string
+      enum:
+      - Problem
+      - Incident
+      - Task
+      - Question
+      - ''
+    priority:
+      title: Priority
+      type: string
+      enum:
+      - Urgent
+      - High
+      - Normal
+      - Low
+      - ''
+    status:
+      title: Status
+      type: string
+      enum:
+      - New
+      - Open
+      - Pending
+      - Hold
+      - Solved
+      - Closed
+      - ''
+connection:
+  credentials:
+    title: Email and Password
+    description: Email and password
+    type: credential_username_password
+    required: true
+  api_key:
+    type: credential_secret_key
+    title: API Key
+    description: Zendesk API key
+    required: false
+  subdomain:
+    type: string
+    title: Subdomain
+    description: Zendesk subdomain E.g. mycompany
+    required: true
+actions:
+  search:
+    title: Search
+    description: Search Zendesk
+    input:
+      type:
+        title: Type
+        type: string
+        description: Search type
+        enum:
+        - User
+        - Organization
+        - Ticket
+        required: true
+      item:
+        title: Item
+        type: string
+        description: Search item E.g. password reset
+        required: true
+    output:
+      results:
+        title: Search Results
+        type: '[]object'
+        description: Get Zendesk query results
+        required: false
+  delete_user:
+    title: Delete User
+    description: Delete user
+    input:
+      user_id:
+        title: User ID
+        type: string
+        description: ID of user to delete E.g. 20444826487
+        required: true
+    output:
+      status:
+        title: Status
+        type: boolean
+        description: Success or failure
+        required: true
+  suspend_user:
+    title: Suspend User
+    description: Suspend user
+    input:
+      user_id:
+        title: User ID
+        type: string
+        description: ID of user to delete E.g. 20444826487
+        required: true
+    output:
+      status:
+        title: Status
+        type: boolean
+        description: Success or failure
+        required: true
+  show_user:
+    title: Show User
+    description: Retrieve user information
+    input:
+      user_id:
+        title: User ID
+        type: string
+        description: ID of user to show E.g. 20444826487
+        required: true
+    output:
+      user:
+        title: User Info
+        type: object
+        description: User meta data
+        required: true
+  show_memberships:
+    title: Show Organization Memberships
+    description: Show all organization memberships
+    input:
+      user_id:
+        title: User ID
+        type: string
+        description: ID of user to show E.g. 20444826487
+        required: true
+    output:
+      memberships:
+        title: Memberships
+        type: '[]object'
+        description: Members data
+        required: true
+  delete_membership:
+    title: Delete Membership
+    description: Delete organization membership
+    input:
+      membership_id:
+        title: Membership ID
+        type: string
+        description: ID of membership to delete E.g. 1657574807
+        required: true
+    output:
+      status:
+        title: Status
+        type: boolean
+        description: Success or failure
+        required: true
+  delete_ticket:
+    title: Delete Ticket
+    description: Delete ticket
+    input:
+      ticket_id:
+        title: Delete Ticket
+        type: string
+        description: Delete ticket
+        required: true
+    output:
+      status:
+        title: Status
+        type: boolean
+        description: Success or failure
+        required: true
+  create_ticket:
+    title: Create Ticket
+    description: Create ticket
+    input:
+      attachment:
+        title: Attachment
+        type: file
+        description: Optional file attachment
+        required: false
+      assignee_id:
+        title: Assignee ID
+        type: string
+        description: Assignee ID
+        required: false
+      collaborator_ids:
+        title: Collaborator IDs
+        type: '[]string'
+        description: List of collaborator IDs
+        required: false
+      description:
+        title: Description
+        type: string
+        description: Ticket description
+        required: true
+      due_at:
+        title: Due At
+        type: date
+        description: Time ticket is due
+        required: false
+      external_id:
+        title: External ID
+        type: string
+        description: Support ticket ID
+        required: false
+      group_id:
+        title: Group ID
+        type: integer
+        description: Group ID
+        required: false
+      requester_id:
+        title: Requester ID
+        type: string
+        description: ID of user requesting support
+        required: false
+      recipient:
+        title: Recipient ID
+        type: string
+        description: ID of user recipient
+        required: false
+      problem_id:
+        title: Problem ID
+        type: string
+        description: For tickets of type 'incident', the numeric ID of the problem
+          the incident is linked to
+        required: false
+      subject:
+        title: Subject
+        type: string
+        description: Subject of ticket
+        required: true
+      tags:
+        title: Tags
+        type: '[]string'
+        description: Tags describing ticket
+        required: false
+      type:
+        title: Type
+        type: string
+        description: Ticket type
+        enum:
+        - Problem
+        - Incident
+        - Task
+        - Question
+        required: false
+      priority:
+        title: Priority
+        type: string
+        description: Ticket priority
+        enum:
+        - Urgent
+        - High
+        - Normal
+        - Low
+        required: false
+      status:
+        title: Status
+        type: string
+        description: Ticket status
+        enum:
+        - New
+        - Open
+        - Pending
+        - Hold
+        - Solved
+        - Closed
+        required: false
+    output:
+      ticket:
+        title: Ticket
+        type: object
+        description: Ticket meta data
+        required: false
+  update_ticket:
+    title: Update Ticket
+    description: Update ticket
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: Ticket ID
+        type: string
+        required: true
+      requester_id:
+        title: Requester ID
+        type: string
+        description: ID of user requesting support
+        required: true
+      attachment:
+        title: Attachment
+        type: file
+        description: Optional file attachment
+        required: false
+      assignee_id:
+        title: Assignee ID
+        type: string
+        description: Assignee ID
+        required: false
+      collaborator_ids:
+        title: Collaborator IDs
+        type: '[]string'
+        description: List of collaborator IDs
+        required: false
+      description:
+        title: Description
+        type: string
+        description: Ticket description
+        required: false
+      due_at:
+        title: Due At
+        type: date
+        description: Time ticket is due
+        required: false
+      external_id:
+        title: External ID
+        type: string
+        description: Support ticket ID
+        required: false
+      group_id:
+        title: Group ID
+        type: string
+        description: Group ID
+        required: false
+      recipient:
+        title: Recipient ID
+        type: string
+        description: ID of user recipient
+        required: false
+      problem_id:
+        title: Problem ID
+        type: string
+        description: For tickets of type 'incident', the numeric ID of the problem
+          the incident is linked to
+        required: false
+      subject:
+        title: Subject
+        type: string
+        description: Subject of ticket
+        required: false
+      tags:
         title: Tags
         type: '[]string'
         description: Tags describing ticket

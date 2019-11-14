@@ -12,6 +12,10 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/bhr
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- block
+- ips
+- blackhole
+hub_tags:
   use_cases: []
   keywords: [block, ips, blackhole]
   features: []

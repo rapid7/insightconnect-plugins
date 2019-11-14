@@ -12,6 +12,9 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ec2_investigations
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- ec2
+- aws
+hub_tags:
   use_cases: []
   keywords: [ec2, aws]
   features: []

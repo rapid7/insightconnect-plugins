@@ -12,6 +12,13 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/grr
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- incident response
+- google
+- grr
+- hunt
+- label
+- list
+hub_tags:
   use_cases: []
   keywords: [incident response, google, grr, hunt, label, list]
   features: []
