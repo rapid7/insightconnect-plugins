@@ -12,7 +12,7 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 # Requirements
 
-* Username and Password for a user with the necessary permissions 
+* Username and password for a user with the necessary permissions 
 
 # Documentation
 
