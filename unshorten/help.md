@@ -1,19 +1,18 @@
 # Description
 
-[Unshorten.me](https://unshorten.me/) is a free service which unshorten's a wide range of shortened URLs.
+[Unshorten.me](https://unshorten.me/) provides an easy and free method to unshorten a wide range of shortened URLs. 
+The Unshorten.me plugin for Rapid7 InsightConnect can help assist phishing investigations, URL analysis,
+ deobfuscation, and more.
 
 This plugin utilizes the [Unshorten.me API](https://unshorten.me/api).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* URL unshortening
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
