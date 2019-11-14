@@ -5,14 +5,15 @@ This plugin utilizes the [Google Cloud PubSub API](https://github.com/GoogleClou
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Publish messages
+* Pull new messages from a subscription
+* Create new topics
+* Create new subscriptions
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A JWT With permissions to Google Cloud Pub Sub
+* Google Cloud Pub Sub API enabled
 
 # Documentation
 
