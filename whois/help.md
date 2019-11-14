@@ -12,7 +12,7 @@ The WHOIS plugin enables address and domain lookups in the WHOIS databases.
 
 # Requirements
 
-* None
+* _This plugin does not contain any requirements._
 
 # Documentation
 
