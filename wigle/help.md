@@ -13,8 +13,8 @@ This plugin utilizes the [WiGLE API](https://api.wigle.net/swagger).
 
 # Requirements
 
-* A WiGLE api token
-* The WiGLE api name to use
+* A WiGLE API token
+* The WiGLE API name to use
 
 # Documentation
 

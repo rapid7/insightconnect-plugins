@@ -9,7 +9,7 @@ which tracks ZeuS Command & Control servers (hosts) around the world.
 
 # Requirements
 
-* NA - Depreciated
+_This plugin does not contain any requirements._
 
 # Documentation
 

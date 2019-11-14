@@ -11,7 +11,7 @@ The project was born as a fork of OSSEC HIDS. This plugin utilizes the [Wazuh AP
 # Requirements
 
 * An administrative username and password
-* The url of your Wazuah deployment
+* The URL of your Wazuah deployment
 
 # Documentation
 

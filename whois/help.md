@@ -3,7 +3,7 @@
 [WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying databases that store the registered users
 or assignees of an Internet resource, such as a domain name, an IP address block, or an autonomous system, but is also used for a wider range of other information.
 
-The WHOIS plugin enables address and domain lookups in the WHOIS databases. 
+The WHOIS plugin enables address and domain lookups in the WHOIS databases.
 
 # Key Features
 
