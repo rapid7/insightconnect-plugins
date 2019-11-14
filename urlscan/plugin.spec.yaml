@@ -6,18 +6,20 @@ title: urlscan.io
 vendor: rapid7
 support: community
 status: []
-description: Scan your website
+description: The URLScan plugin uses URLScan to analyze urls for malicious indicators.
 version: 2.1.2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/urlscan
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://urlscan.io/
 tags:
 - url
 - analysis
 - intel
+- urlscan
 hub_tags:
-  use_cases: []
-  keywords: [url, analysis, intel]
+  use_cases: [threat_intel]
+  keywords: [url, analysis, intel, urlscan]
   features: []
 types:
   page:
