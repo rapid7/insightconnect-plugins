@@ -1,6 +1,6 @@
 # Description
 
-[Grep](https://www.gnu.org/software/grep/) is a file pattern searcher. This plugin uses BusyBox grep, calling `egrep` which supports extended regular expressions to manipulate input data.
+The `grep` InsightConnect plugin search for pattern in a string or a file by utilizing BusyBox grep, calling `egrep` which supports extended regular expressions to manipulate input data.
 For example, here's a simple example of `egrep` from the command line:
 
 ```
@@ -13,14 +13,12 @@ birds
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Search pattern in a string
+* Search pattern in a file
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+This plugin does not contain any requirements.
 
 # Documentation
 
