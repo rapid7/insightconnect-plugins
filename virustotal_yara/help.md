@@ -1,18 +1,17 @@
 # Description
 
+The VirusTotal Yara plugin allows the user to analyze files with the Yara Python libarary.
+
 [VirusTotal Yara](http://virustotal.github.io/yara/) is a pattern matching swiss knife for malware researchers.
 This plugin utilizes [yara-python](https://pypi.python.org/pypi/yara-python), a Python library for Yara.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Scan a file
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

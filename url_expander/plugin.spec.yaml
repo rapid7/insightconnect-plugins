@@ -16,7 +16,7 @@ tags:
 - phishing investigation
 - utilities
 hub_tags:
-  use_cases: []
+  use_cases: [data_utility, soc_automation]
   keywords: [url expander, phishing investigation, utilities]
   features: []
 actions:

@@ -3,18 +3,16 @@
 [WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying databases that store the registered users
 or assignees of an Internet resource, such as a domain name, an IP address block, or an autonomous system, but is also used for a wider range of other information.
 
-This plugin uses the Linux Whois client to make requests.
+The WHOIS plugin enables address and domain lookups in the WHOIS databases.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Query for an address
+* Query for a URL
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* _This plugin does not contain any requirements._
 
 # Documentation
 

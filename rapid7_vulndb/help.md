@@ -1,17 +1,14 @@
 # Description
 
-Rapid7's [Vulndb](https://www.rapid7.com/db) is a curated repository of vetted computer software exploits and exploitable vulnerabilities. Technical details for over 70,000 vulnerabilities and 3,000 exploits are available for security professionals and researchers to review. These vulnerabilities are utilized by our vulnerability management tool Nexpose. The exploits are all included in the Metasploit framework and utilized by our penetration testing tool, Metasploit Pro. Our vulnerability and exploit database is updated frequently and contains the most recent security research.
+Make searching the Rapid7 vulnerability and exploit data fast, easy and efficient with the InsigthConnect plugin. Leverage this curated repository of vetted computer software exploits and exploitable vulnerabilities to ensure your security operations are always aware of the latest threats that could be used against your environment
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Search Database for vulnerabilities
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: wordpress
 title: WordPress
-description: Open Source CMS
+description: The WordPress plugin allows for user management on the WordPress platform
 vendor: rapid7
 support: community
 status: []
@@ -11,12 +11,13 @@ version: 1.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/wordpress
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://wordpress.com/
 tags:
 - wordpress
 - web
 - site
 hub_tags:
-  use_cases: []
+  use_cases: [user_management]
   keywords: [wordpress, web, site]
   features: []
 connection:

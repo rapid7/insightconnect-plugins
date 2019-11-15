@@ -1,18 +1,16 @@
 # Description
+Streamline your data for analysis and action with the Rapid7 [InsightOps](https://insightops.help.rapid7.com/docs) plugin using InsightConnect. With the ability to submit new log data as well as query existing log data, you can drive a lot more efficiency in getting your data out of InsightOps and into the hands of your security and IT teams!
 
-[Rapid 7 InsightOps](https://insightops.help.rapid7.com/docs) is a log management and monitoring solution.
 This plugin utilizes [Rapid7 InsightOps API](https://insightops.help.rapid7.com/docs).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Submit Log Data
+* Query logs
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires an API Key from the Insight platform
 
 # Documentation
 
@@ -111,7 +109,7 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [InsightOps](https://www.rapid7.com/products/insightops/m)
+* [InsightOps](https://www.rapid7.com/products/insightops/)
 * [InsightOps API](https://insightops.help.rapid7.com/docs)
 * [Logsets](https://insightops.help.rapid7.com/docs/using-log-search)
 

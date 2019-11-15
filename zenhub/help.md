@@ -1,18 +1,18 @@
 # Description
 
-[Zenhub](https://www.zenhub.com) is an agile project management tool for GitHub.
+The [Zenhub](https://www.zenhub.com) plugin allows for agile project management in GitHub. This plugin will allow you to manage issues, epics, and pipelines in a ZenHub enable Git repository. 
+
 This plugin utilizes the [Zenhub API](https://github.com/ZenHubIO/API) to manage ZenHub Epics, Pipelines, and Estimates.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Create an Issue
+* Create an Epic
+* Move an issue to another pipeline
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* ZenHub API token
 
 # Documentation
 

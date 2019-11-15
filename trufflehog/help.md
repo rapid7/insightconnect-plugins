@@ -1,20 +1,17 @@
 # Description
 
-[TruffleHog](https://github.com/dxa4481/truffleHog) uses regex and entropy checks to go through the entire commit history of each branch, and check each diff for every commit as well as for secrets.
+The [TruffleHog](https://github.com/dxa4481/truffleHog) plugin uses regex and entropy checks to go through the entire commit history of each branch, and check each diff for every commit as well as for secrets.
 
 For entropy checks, TruffleHog will evaluate the shannon entropy for both the base64 character set and hexidecimal character set for every blob of text greater than 20 characters comprised of those character sets in each diff.
 If at any point a high entropy string is greater than 20 characters is detected, it will collect the hashes and provide them for use once complete.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Search through github commit histories, and checks if there is any leaked keys
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

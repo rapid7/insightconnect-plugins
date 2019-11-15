@@ -1,6 +1,6 @@
 # Description
 
-The Advanced Regex InsightConnect plugin perform regex operations on a string using Python regex.
+The Advanced Regex InsightConnect plugin performs regex operations on a string using Python regex.
 
 # Key Features
 

@@ -1,18 +1,19 @@
 # Description
 
+The VMRay plugin allows the user to submit files or URLs for malware analysis. 
+
 [VMRay](https://www.vmray.com) delivers advanced threat analysis and detection that combines a unique agentless hypervisor-based network sandbox with a real-time reputation engine. The combination provides both fast, high volume file classification and in-depth malware analysis. The VMRay Analyzer is platform independent and highly scalable, the result of a decade of R&D by some of the world's leading experts on dynamic malware analysis. By monitoring at the hypervisor level, it is undetectable by malware running in the target operating system. VMRay serves leading enterprises around the world.
+
 This plugin utilizes the [VMRay API](https://cloud.vmray.com/static_doc/html/api/REST_API_Documentation.html).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Submit a file or URL for analysis
+* Get reports about files or URLs
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* An API key
 
 # Documentation
 
