@@ -1,6 +1,6 @@
 # Description
 
-This plugin allows you to upload and retrieve files from google drive.
+Google Drive is an online file storage and management system. This plugin allows you to upload and retrieve files from google drive.
 
 This plugin utilizes the [Google Drive API](https://developers.google.com/drive/v3/web/about-sdk).
 

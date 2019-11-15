@@ -1,6 +1,6 @@
 # Description
 
-The Google Directory plugin allows you to suspend and unsuspend users
+The Google Directory plugin allows you to suspend and unsuspend users.
 
 # Key Features
 

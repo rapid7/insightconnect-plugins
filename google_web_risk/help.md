@@ -1,6 +1,6 @@
 # Description
 
-[Google Web Risk](https://cloud.google.com/web-risk/) checks URLs against the Google Web Risk service. With the InsightConnect plugin automatically evaluate suspicious URLs and take action when you find them
+[Google Web Risk](https://cloud.google.com/web-risk/) checks URLs against the Google Web Risk service. With the InsightConnect plugin automatically evaluate suspicious URLs and take action when you find them.
 
 # Key Features
 

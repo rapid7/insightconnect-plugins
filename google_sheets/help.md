@@ -1,6 +1,7 @@
 # Description
 
 [Google Sheets](https://www.google.com/sheets/about/) is used to create, edit and collaborate with others on spreadsheets.
+
 This plugin utilizes the [Google Sheets API](https://developers.google.com/sheets/api/) and [Gspread library](https://github.com/burnash/gspread/).
 
 # Key Features
