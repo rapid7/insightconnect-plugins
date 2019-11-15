@@ -1,17 +1,16 @@
 # Description
 
-This plugin uses the uses the [GNU Ping](https://www.gnu.org/software/inetutils/manual/html_node/ping-invocation.html#ping-invocation) networking tool to check for host connectivity.
+The Ping plugin is used to check for network connectivity and response times. 
+
+This plugin uses the uses the [GNU Ping](https://www.gnu.org/software/inetutils/manual/html_node/ping-invocation.html#ping-invocation).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Ping an address
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

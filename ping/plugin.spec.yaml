@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: ping
 title: Ping
-description: Ping networking tool
+description: The Ping plugin is used to check for network connectivity and response times. 
 version: 1.0.2
 vendor: rapid7
 support: community
@@ -11,11 +11,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ping
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url:
 tags:
 - ping
 - network diagnostics
 hub_tags:
-  use_cases: []
+  use_cases: [data_utility]
   keywords: [ping, network diagnostics]
   features: []
 actions:

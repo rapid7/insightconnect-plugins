@@ -1,18 +1,17 @@
 # Description
 
-[Qualys SSL Labs](https://www.ssllabs.com) is used to test SSL servers available on the public Internet.
+[Qualys SSL Labs](https://www.ssllabs.com) is used to test SSL servers available on the public Internet. The Qualys SSL plugin allows the user to get information and test SSL servers. 
+
+
 This plugin uses the [Assessment APIs](https://github.com/ssllabs/ssllabs-scan/blob/stable/ssllabs-api-docs.md).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Scan an SSL server
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

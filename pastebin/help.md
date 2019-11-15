@@ -6,16 +6,17 @@ sources code or configuration information, but anyone is more than welcome to
 paste any type of text. The idea behind the site is to make it more convenient
 for people to share large amounts of text online.
 
+The Pastebin plugin allows you to post text online, and analyze posts. 
+
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Send text to Pastebin
+* Trigger workflows on new posts
+* Get ana analyze posts
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Pastebin credentials and API key
 
 # Documentation
 
