@@ -1,6 +1,6 @@
 # Description
 
-[Rapid7 tCell](https://www.tcell.io/) is a Next-Gen Cloud WAF that enables web applications to defend themselves by combining in-app instrumentation (RASP) and analytics in the cloud.
+Drive faster action with your Rapid7's Next-Gen Cloud WAF and InsightConnect plugin. Automate your administrative processes to allow you to focus on the the real task at hand - defending against attacks against your web applications in real time!
 
 This plugin utilizes the [tCell API](https://docs.tcell.io).
 
