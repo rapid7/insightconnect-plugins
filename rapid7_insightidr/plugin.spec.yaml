@@ -14,7 +14,7 @@ tags: [ "IDR", "SIEM" ]
 support: rapid7
 status: []
 hub_tags:
-  use_cases: [siem, investigations, threat_detection_and_response]
+  use_cases: [soar, soc_automation, siem, investigations, threat_detection_and_response]
   keywords: [idr, siem, rapid7]
   features: []
 

@@ -17,7 +17,7 @@ tags:
 - rapid7
 - penetration testing
 hub_tags:
-  use_cases: [threat_hunting, penetration_testing, vulnerability_management]
+  use_cases: [soar, soc_automation, penetration_testing, vulnerability_management]
   keywords: [metasploit, rapid7, penetration testing]
   features: []
 enable_cache: true
