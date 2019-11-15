@@ -9,7 +9,7 @@ Do more with Investigations in [InsightIDR](https://www.rapid7.com/products/insi
 
 # Requirements
 
-* Requires an API Key from Insight platform
+* Requires an API Key from the Insight platform
 
 # Documentation
 
