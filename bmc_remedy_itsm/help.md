@@ -11,6 +11,7 @@
 # Requirements
 
 * User name and password
+* BMC server 9.1.x
 
 # Documentation
 
