@@ -1,18 +1,15 @@
 # Description
 
-[Tshark](https://www.wireshark.org/docs/man-pages/tshark.html) is a powerful command-line packet analyzer,
-the Wireshark command-line counterpart. This plugins runs the Tshark packet tracer directly.
+[TShark](https://www.wireshark.org/docs/man-pages/tshark.html) is a tool for dumping and analyzing network traffic.
+ With the TShark plugin for Rapid7 InsightConnect, users can open pcap data for further analysis and intel gathering.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Run TShark on a pcap file
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
