@@ -6,7 +6,7 @@ This plugin utilizes the [Docker API](https://docs.docker.com/engine/api/) via t
 
 # Key Features
 
-* Kill or stop containers
+* Docker container management
 * List images
 * List containers
 
