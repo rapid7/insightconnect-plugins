@@ -1,18 +1,18 @@
 # Description
 
-[Cisco Umbrella Investigate](https://learn-umbrella.cisco.com/threat-intelligence/cisco-umbrella-investigate-overview) provides the most complete view of the relationships and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats.
+The `cisco_umbrella_investigate` InsightConnect plugin utilizes [Cisco Umbrella Investigate](https://learn-umbrella.cisco.com/threat-intelligence/cisco-umbrella-investigate-overview) to get the most complete view of the relationships and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats.
 This plugin utilizes the [Python OpenDNS Investigate](https://github.com/opendns/pyinvestigate) library.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Retrieve details of sample artifacts, sample connections, sample samples
+* Retrieve WHOIS details by email, domain and name server
+* Retrieve IP's and domain's history
+* Retrieve domain's security features, content category, security category
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Cisco Umbrella Investigate API key
 
 # Documentation
 
