@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: zendesk
 title: Zendesk
-description: Zendesk helps improve communication and make sense of massive amounts
+description: The Zendesk plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk.
   of data
 version: 1.1.0
 vendor: rapid7
@@ -12,12 +12,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/zendesk
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.zendesk.com/
 tags:
 - zendesk
 - ticket
 - communication
 hub_tags:
-  use_cases: []
+  use_cases: [remediation_ticketing]
   keywords: [zendesk, ticket, communication]
   features: []
 types:
