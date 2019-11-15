@@ -4,9 +4,9 @@
 
 # Key Features
 
-* administrate ACL rules
-* administrate content rules
-* administrate security policies
+* Administrate ACL rules
+* Administrate content rules
+* Administrate security policies
 
 # Requirements
 

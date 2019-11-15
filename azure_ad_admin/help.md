@@ -5,18 +5,18 @@
 It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in
 the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0).
 
-
 # Key Features
 
 * Add and remove users
 * Disable and enable users
 * Force users to change their password
+
 # Requirements
 
 * The application this plugin connects to needs the following permissions:
-* Directory.AccessAsUser.All
-* Directory.ReadWrite.All
-* User.ReadWrite.All
+  * Directory.AccessAsUser.All
+  * Directory.ReadWrite.All
+  * User.ReadWrite.All
 * The application will need to be added to the Global Administrator role. This can be done in `Roles and administrators` in Azure Active directory via the Azure Portal.
 
 # Documentation

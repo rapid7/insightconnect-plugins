@@ -10,15 +10,14 @@
 
 # Requirements
 
-* This plugin requires network access to a Azure REST API server. Follow the [guide](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal)
-to acquire the required connection information.
+* This plugin requires network access to a Azure REST API server.
 * This plugin requires a client secret
 
 # Documentation
 
 ## Setup
 
-
+Follow the [guide](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal) to acquire the required connection information.
 
 The connection configuration accepts the following parameters:
 
