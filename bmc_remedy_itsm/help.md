@@ -1,6 +1,6 @@
 # Description
 
-[BMC Remedy ITSM](https://www.bmc.com/it-solutions/it-service-management.html) is a management system for IT infrastructure. The InsightConnect plugin allows you to search create update and close Incidents.
+[BMC Remedy ITSM](https://www.bmc.com/it-solutions/it-service-management.html) is a management system for IT infrastructure. The InsightConnect plugin allows you to search, create, update, and close Incidents.
 
 # Key Features
 
@@ -10,8 +10,12 @@
 
 # Requirements
 
+<<<<<<< HEAD
 * User name and password
 * BMC server 9.1.x
+=======
+* Username and password
+>>>>>>> b4f356800cf60da8f136b90957a45fe35826fb30
 
 # Documentation
 

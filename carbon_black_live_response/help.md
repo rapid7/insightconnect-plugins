@@ -1,6 +1,6 @@
 # Description
 
-[Carbon Black Live Response](https://developer.carbonblack.com/reference/cb-defense/1/live-response-api/) allows security operators to collect information and take action on remote endpoints in real time. These actions include the ability to upload, download, and remove files, retrieve and remove registry entries, dump contents of physical memory, execute and terminate processes.
+[Carbon Black Live Response](https://developer.carbonblack.com/reference/cb-defense/1/live-response-api/) allows security operators to collect information and take action on remote endpoints in real time. The InsightConnect plugin can delete files. 
 
 # Key Features
 
