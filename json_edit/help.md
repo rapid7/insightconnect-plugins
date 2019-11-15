@@ -1,6 +1,6 @@
 # Description
 
-JSON Edit allows for the manipulation of JSON data.
+[JSON Edit](https://www.json.org/) allows for the manipulation of JSON data.
 
 # Key Features
 
@@ -13,6 +13,8 @@ _This plugin does not contain any requirements_
 # Documentation
 
 ## Setup
+
+## Connection
 
 This plugin does not contain a connection.
 
@@ -125,4 +127,3 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [JSON](https://www.json.org/)
-
