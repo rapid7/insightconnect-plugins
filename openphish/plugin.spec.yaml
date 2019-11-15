@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: openphish
 title: "OpenPhish"
-description: "Identify zero-day phishing sites and provide comprehensive, actionable, real-time threat intelligence"
+description: "OpenPhish is a fully automated self-contained platform for phishing intelligence. Use the OpenPhish plugin to identify zero-day phishing sites and provide real-time threat intelligence"
 version: 1.0.0
 vendor: rapid7
 resources:
