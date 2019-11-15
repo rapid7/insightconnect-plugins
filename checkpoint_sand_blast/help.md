@@ -1,17 +1,14 @@
 # Description
 
-[checkpoint_sand_blast](https://www.checkpoint.com/solutions/zero-day-protection/) is a Multilayered security technology provides protection against advanced cyber attacks.
+description: The Checkpoint Sand Blast plugin extends the Sand Blast service and enables report status and suspicious file upload.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Suspicious file analysis
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires an API Key from the product
 
 # Documentation
 
