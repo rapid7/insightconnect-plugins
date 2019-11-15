@@ -1,19 +1,17 @@
 # Description
 
-[Hippocampe](https://github.com/TheHive-Project/Hippocampe) is a threat feed aggregator, which creates a threat feed memory and allows queries through a REST API or from a Web UI.
+[Hippocampe](https://github.com/TheHive-Project/Hippocampe) is a threat feed aggregator, which creates a threat feed memory and allows queries through a REST API or from a Web UI. Hippocampe aggregates feeds from the Internet in an Elasticsearch cluster. It has a REST API which allows to search into its 'memory'. It is based on a Python script which fetchs URLs corresponding to feeds, parses and indexes them. The Hippocampe plugin allows for advanced queries and management of your Hippocampe feeds.
 
 This plugin utilizes the [Hippocampe API](https://github.com/TheHive-Project/Hippocampe/blob/master/docs/api_guide.md).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Query Hippocampe for new threats
+* Manage Hippocampe feeds
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A Hippocampe instance
 
 # Documentation
 

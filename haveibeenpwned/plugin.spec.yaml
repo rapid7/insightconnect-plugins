@@ -6,19 +6,20 @@ title: HaveIBeenPwned
 vendor: rapid7
 support: rapid7
 status: []
-description: Have I been pwned? allows you to search across multiple data breaches
-  to see if your email addresses has been compromised
+description: The HaveIBeenPwned plugin allows you find out if a user, domain, or password has been leaked
 version: 4.0.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/haveibeenpwned
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://haveibeenpwned.com
 tags:
 - breach
 - compromise
 - pwn
+- haveibeenpwned
 hub_tags:
-  use_cases: []
-  keywords: [breach, compromise, pwn]
+  use_cases: [threat_hunting, threat_intel, threat_detection_and_response]
+  keywords: [breach, compromise, pwn, haveibeenpwned]
   features: []
 enable_cache: true
 

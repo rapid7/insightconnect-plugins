@@ -7,17 +7,15 @@ Utility plugin to convert an HTML document into a variety of formats using [pypa
 * Markdown
 * PDF
 * HTML5
+* Plain Text
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Convert HTML into another format
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
