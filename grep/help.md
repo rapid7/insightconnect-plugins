@@ -1,6 +1,6 @@
 # Description
 
-The `grep` InsightConnect plugin search for pattern in a string or a file by utilizing BusyBox grep, calling `egrep` which supports extended regular expressions to manipulate input data.
+The `grep` InsightConnect plugin searches for a specified pattern in a string or a file by utilizing BusyBox grep, calling `egrep` which supports extended regular expressions to manipulate input data.
 For example, here's a simple example of `egrep` from the command line:
 
 ```

@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: advanced_regex
 title: Advanced Regex
-description: This plugin perform advanced regex operations on a string using Python regex
+description: This plugin performs advanced regex operations on a string using Python regex
 version: 1.0.0
 support: community
 vendor: rapid7
