@@ -1,19 +1,17 @@
 # Description
 
-AT&T Cybersecurity [Alienvault OTX](https://otx.alienvault.com/) is an open threat exchange service.
+The `att_cybersecurity_alienvault_otx` InsightConnect plugin utilizes AT&T Cybersecurity [Alienvault OTX](https://otx.alienvault.com/) to retrieve details about an indicator. Alienvault OTX is an open threat exchange service.
 
 This plugin utilizes the Python library [OTXv2](https://github.com/AlienVault-OTX/OTX-Python-SDK).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Retrieve details about an indicator
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* AlienVault Open Threat Exchange API key
+* AlienVault Open Threat Exchange instance URL
 
 # Documentation
 
