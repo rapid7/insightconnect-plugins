@@ -1,18 +1,17 @@
 # Description
 
 This plugin uses [tcptraceroute](https://linux.die.net/man/1/tcptraceroute) version 1.5beta, an implementation of Traceroute that uses TCP rather than ICMP.
-tcptraceroute can bypass some firewalls that block ICMP and UDP.
+Tcptraceroute can bypass some firewalls that block ICMP and UDP. 
+
+Traceroute sends out either UDP or ICMP ECHO packets with a TTL of one, and increments the TTL until the destination has been reached. By printing the gateways that generate ICMP time exceeded messages along the way, it is able to determine the path packets are taking to reach the destination.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Trace a route to a host
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

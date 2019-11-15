@@ -1,17 +1,19 @@
 # Description
 
-[Threatq](https://www.threatq.com) provides ability to work with Threat Quotient indicators and events.
+The [Threatq](https://www.threatq.com) plugin provides the ability to work with Threat Quotient indicators and events. Using The ThreatQ as a threat intelligence platform equips you with a threat library that automatically scores and prioritizes threat intelligence based on parameters you set. Prioritization is calculated across many separate sources, both external and internal, to deliver a single source of truth using the aggregated context provided.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Search for indicators
+* Manage indicators
+* Manage events
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Administrative credentials for Threatq
+* The host address of your instance of Threatq
+* A client ID
+* Proxy information if needed
 
 # Documentation
 
