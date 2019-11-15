@@ -1,25 +1,23 @@
 # Description
 
-[Microsoft Azure](https://azure.microsoft.com/) is a growing collection of integrated cloud services that developers and IT professionals
-use to build, deploy, and manage applications through our global network of datacenters.
+[Microsoft Azure](https://azure.microsoft.com/) is Microsoft's cloud platform. The Azure Compute plugin automates virtual machine (VM) administration.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Start and stop VM's
+* Resize VM's
+* Get VM info
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* This plugin requires network access to a Azure REST API server.
+* This plugin requires a client secret
 
 # Documentation
 
 ## Setup
 
-This plugin requires network access to a Azure REST API server. Follow the [guide](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal)
-to acquire the required connection information.
+Follow the [guide](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal) to acquire the required connection information.
 
 The connection configuration accepts the following parameters:
 

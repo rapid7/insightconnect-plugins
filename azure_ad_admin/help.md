@@ -1,28 +1,23 @@
 # Description
 
 [Azure](https://azure.microsoft.com) AD Admin will perform administrative tasks in Azure AD.
+
 It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in
 the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0).
 
-NOTE: The application this plugin connects to needs the following permissions:
-
-* Directory.AccessAsUser.All
-* Directory.ReadWrite.All
-* User.ReadWrite.All
-
-The application will need to be added to the Global Administrator role. This can be done in `Roles and administrators`
-in Azure Active directory via the Azure Portal.
-
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Add and remove users
+* Disable and enable users
+* Force users to change their password
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* The application this plugin connects to needs the following permissions:
+  * Directory.AccessAsUser.All
+  * Directory.ReadWrite.All
+  * User.ReadWrite.All
+* The application will need to be added to the Global Administrator role. This can be done in `Roles and administrators` in Azure Active directory via the Azure Portal.
 
 # Documentation
 
