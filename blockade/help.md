@@ -1,18 +1,17 @@
 # Description
 
-[Blockade](https://www.blockade.com) brings antivirus-like capabilities to users who run the Chrome browser.
-This plugin utilizes the [Blockade Cloud Node API](https://github.com/blockadeio/cloud_node).
+The Blockade plugins assists with administrating users and incidents of compromise
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage Incidents of Compromise
+* User management
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires a Blockade Node setup
+* Requires an API Key from the product
+* Requires an email setup in the Blockade Node
 
 # Documentation
 
@@ -127,6 +126,6 @@ The `Get Indicators` and `Get Events` actions do not require authentication.
 
 ## References
 
-* [Blockade](https://www.blockade.com)
-* [Blockade Cloud Node API](https//api.blockade.co://github.com/blockadeio/cloud_node)
+* [Blockade](https://www.blockade.io)
+* [Blockade Cloud Node API](https://github.com/blockadeio/cloud_node)
 
