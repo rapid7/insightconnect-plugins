@@ -5,7 +5,7 @@ security health of their devices before they connect to the apps they use. Using
 
 # Key Features
 
-* Add and Delete users
+* Add and delete users
 * Enroll users
 * Get User information
 
