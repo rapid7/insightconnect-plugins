@@ -7,14 +7,13 @@ This plugin utilizes the [Kolide API](https://github.com/kolide/fleet/tree/maste
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Security Policy Enforcement
+* Device Inventory
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* API Key
+* Kolide Server
 
 # Documentation
 

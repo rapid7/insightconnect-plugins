@@ -150,22 +150,9 @@ Multiple records can be returned by the server, this plugin currently only retur
 # Version History
 
 * 1.0.4 - Fix variable name in domain lookup
-* 1.0.3 - Handle instances where domain name is prefixed with a protocol
-* 1.0.2 - Fix typo in plugin spec
-* 1.0.1 - Add support for LACNIC, APNIC, RIPE registries
-* 1.0.0 - Support web server mode
-* 0.3.3 - Bug fix for CI tool incorrectly uploading plugins
-* 0.3.2 - Added new date formats
-* 0.3.1 - Update to v2 Python plugin architecture
-* 0.3.0 - Support for more TLDs
-* 0.2.1 - SSL bug fix in SDK
-* 0.2.0 - Fix domain query and adjust output
-* 0.1.1 - Bugfixes and pagination support
-* 0.1.0 - Initial plugin
-
-# Links
+* 1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK
 
 ## References
 
-* [Whois](https://en.wikipedia.org/wiki/WHOIS)
+* [WHOIS](https://en.wikipedia.org/wiki/WHOIS)
 

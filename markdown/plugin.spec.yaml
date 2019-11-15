@@ -11,13 +11,14 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/markdown
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://en.wikipedia.org/wiki/Markdown
 tags:
 - markdown
 - html
 - pdf
 - utilities
 hub_tags:
-  use_cases: []
+  use_cases: [data_utility]
   keywords: [markdown, html, pdf, utilities]
   features: []
 actions:

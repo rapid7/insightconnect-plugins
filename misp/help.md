@@ -5,14 +5,13 @@ This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.h
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Library of known threats
+* Global sharing platform of know threats
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* MISP server
+* Username and Password
 
 # Documentation
 

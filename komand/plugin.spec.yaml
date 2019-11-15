@@ -11,11 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/komand
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://komand.com
 tags:
+- soar
 - komand
 - job
 hub_tags:
-  use_cases: []
+  use_cases: [soc_automation, soar]
   keywords: [komand, job]
   features: []
 connection:

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Whois Domain Lookup"
+    DESCRIPTION = "WHOIS Domain Lookup"
 
 
 class Input:
@@ -157,8 +157,8 @@ class DomainOutput(komand.Output):
     },
     "registrar_whois_server": {
       "type": "string",
-      "title": "Registrar Whois Server",
-      "description": "Registrar Whois server",
+      "title": "Registrar WHOIS Server",
+      "description": "Registrar WHOIS server",
       "order": 10
     },
     "registry_domain_id": {

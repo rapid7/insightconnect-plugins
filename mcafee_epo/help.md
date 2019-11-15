@@ -5,14 +5,12 @@ This plugin utilizes libraries available through McAfee's ePolicy Orchestrator M
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Policy enforcement
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Username and Password
+* McAfee ePO server
 
 # Documentation
 
