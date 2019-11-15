@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: anomali_threatstream
 title: Anomali ThreatStream
-description: ThreatStream operationalizes threat intelligence, automating collection
+description: This plugin operationalizes threat intelligence, automating collection
   and integration that enables security teams to analyze and respond to threats
 version: 3.0.1
 vendor: rapid7
@@ -12,11 +12,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/anomali_threatstream
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.anomali.com
 tags:
 - anomali
 - threatstream
 hub_tags:
-  use_cases: []
+  use_cases: [threat_hunting]
   keywords: [anomali, threatstream]
   features: []
 types:

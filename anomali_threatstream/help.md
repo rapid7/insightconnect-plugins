@@ -1,18 +1,19 @@
 # Description
 
-[Anomali ThreatStream](https://www.anomali.com/) is an operationalized threat intelligence stream, automating collection and integration that enables security teams to analyze and respond to threats.
+The `anomali_threatstream` plugin utilizes [Anomali ThreatStream](https://www.anomali.com/) which is an operational threat intelligence stream, automating collection and integration that enables security teams to analyze and respond to threats.
 This plugin utilizes the Anomali ThreatStream API, which is located with the cloud instance at `http://<Anomali ThreatStream API host>/optic-doc/ThreatStream_OnlineHelp.htm`.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Lookup Hash, IP and URL
+* Import observables
+* Get observables
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Anomali Threatstream username
+* Anomali ThreatStream instance URL
+* Anomali Threatstream API key
 
 # Documentation
 
