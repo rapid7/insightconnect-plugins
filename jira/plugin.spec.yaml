@@ -17,7 +17,7 @@ tags:
 - ticket
 - Jira
 hub_tags:
-  use_cases: [remediation_ticketing, investigations]
+  use_cases: [remediation_ticketing, investigations, reporting_and_analytics]
   keywords: [ticket, jira]
   features: []
 types:
