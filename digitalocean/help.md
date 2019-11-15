@@ -10,7 +10,7 @@ This plugin allows the user to interact with their Digital Ocean account for man
 
 # Requirements
 
-* Requires an API Key from the DigitalOcean
+* Requires an API Key from DigitalOcean
 
 # Documentation
 
