@@ -1,17 +1,16 @@
 # Description
 
-The Type Squatter plugin looks for cybersquatters on a domain.
+Typosquatter detects cybersquatting of domains and allows for domain scoring. This plugin can be used
+to aid in phishing investigation and analysis.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Score domains
+* Detect cybersquatters
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
