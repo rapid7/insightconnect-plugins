@@ -1,20 +1,20 @@
 # Description
 
-[Cisco ISE](https://www.cisco.com/c/en/us/products/security/identity-services-engine/index.html) is a secure network access tool.
-Cisco ISE allows for controlled access to a network and the ability to quarantine suspicious endpoints.
+The `cisco_ise` InsightConnect plugin utilizes [Cisco ISE](https://www.cisco.com/c/en/us/products/security/identity-services-engine/index.html) to retrieve ANC details, endpoint details and manage quarantine.
+Cisco_ISE is a secure network access tool. Cisco ISE allows for controlled access to a network and the ability to quarantine suspicious endpoints.
 
 This plugin utilizes the [ISE](https://github.com/bobthebutcher/ise) library.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage Quarantine
+* Retrieve endpoint details
+* Retrieve ANC details
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Cisco_ISE host's IP address
+* Cisco_ISE username and password
 
 # Documentation
 
