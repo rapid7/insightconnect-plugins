@@ -16,7 +16,7 @@ tags:
 - threat intelligence
 - breach prevention
 hub_tags:
-  use_cases: [soc_automation, soar, ]
+  use_cases: [soc_automation, soar]
   keywords: [threat intelligence, breach prevention]
   features: []
 types:
