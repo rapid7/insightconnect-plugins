@@ -7,11 +7,13 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Recorded Future arms threat analysts, security operators, and incident
-  responders to rapidly connect the dots and reveal unknown threats
+  responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
+InsightConnect, users can search domain lists, entity lists, and more.
 version: 1.5.2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/recorded_future
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.recordedfuture.com/
 tags:
 - recorded future
 - threat intelligence
@@ -19,7 +21,7 @@ tags:
 - threat analysis
 - vulnerability prioritization
 hub_tags:
-  use_cases: []
+  use_cases: [threat_intel, phishing_investigations, investigations]
   keywords: [recorded future, threat intelligence, machine learning, threat analysis, vulnerability prioritization]
   features: []
 enable_cache: false
