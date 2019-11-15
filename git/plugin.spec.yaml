@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: git
 title: Git
-description: Git is a free and open source distributed version control system
+description: Git plugin allows you to add, remove and commit files to Git repository
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -11,12 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/git
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.git-scm.com
 tags:
 - git
 - version control
 - repository
 hub_tags:
-  use_cases: []
+  use_cases: [soc_automation, data_utility]
   keywords: [git, version control, repository]
   features: []
 connection:

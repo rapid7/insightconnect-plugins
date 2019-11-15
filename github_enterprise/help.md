@@ -1,12 +1,13 @@
 # Description
 
 [GitHub Enterprise](https://enterprise.github.com/) is the on-premises version of GitHub.
+GitHub Enterprise InsightConnect plugin allows user management.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Promote and demote users
+* Suspend and unsuspend users
+* Create an organization
 
 # Requirements
 
