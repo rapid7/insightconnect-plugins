@@ -1,17 +1,16 @@
 # Description
 
-The Komand plugin provides meta-actions and trigger you can use with [Komand](https://www.komand.com/).
+The [Komand](https://www.komand.com) plugin provides meta-actions and trigger you can use with [Komand](https://www.komand.com/).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Respond to threats faster
+* Securtiy Orchestration
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Username and Password
+* Komand Server
 
 # Documentation
 
