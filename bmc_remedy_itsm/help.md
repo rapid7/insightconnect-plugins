@@ -4,14 +4,13 @@
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Create incidents
+* update incidents
+* search incidents
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* User name and password
 
 # Documentation
 
