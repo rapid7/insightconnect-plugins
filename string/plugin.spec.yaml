@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: string
 title: String Operations
-description: Provides common programmatic string operations
+description: The String plugin provides common programmatic string operations
 version: 1.2.0
 vendor: rapid7
 support: community
@@ -11,12 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/string
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.rapid7.com
 tags:
 - utilities
 - string
 - split
 hub_tags:
-  use_cases: []
+  use_cases: [data_utility]
   keywords: [utilities, string, split]
   features: []
 actions:
