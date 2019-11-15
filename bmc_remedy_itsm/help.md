@@ -10,7 +10,7 @@
 
 # Requirements
 
-* User name and password
+* Username and password
 
 # Documentation
 
