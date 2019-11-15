@@ -8,7 +8,7 @@ This plugin utilizes the [DomainTools Python API](https://github.com/domaintools
 
 * Whois
 * Domain search
-* Brand Monitor
+* Brand monitor
 
 # Requirements
 
