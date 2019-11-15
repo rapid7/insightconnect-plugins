@@ -1,18 +1,20 @@
 # Description
 
-[Samanage](https://www.samanage.com) is an enterprise service-desk and IT asset-management provider.
+The [Samanage](https://www.samanage.com) application is a unified, cloud-based IT service desk and asset management platform. The asset management solution is an agent-based system that collects data from Windows, Mac, Linux, and Unix systems; and then normalizes and categorizes the data for simplified consumption. The ITIL-ready service desk includes a self-service portal, service catalog, knowledge base, and SLA management tool. 
+
+The Samanage plugin allows you to start workflows on new incidents, manage incidents, and manage users. 
+
 This plugin utilizes the [Samanage API](https://www.samanage.com/api).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage users
+* Manage incidents
+* Trigger new workflows on new incidents
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A Samanage token
 
 # Documentation
 
