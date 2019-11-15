@@ -17,7 +17,7 @@ The requirements for running the Powershell plugin will vary depending on the us
 * Administrative credentials to a Powershell enabled server
 
 ## Local Requirements
-* Powershell can be run locally on the InsightConnect Orchestrator, in this case, you must assure connectivity to any network resources the Powershell script will use. Typically this involves opening ports in your firewall or windows servers. 
+* Powershell can be run locally on the InsightConnect Orchestrator, in this case, you must ensure connectivity to any network resources the Powershell script will use. Typically this involves opening ports in your firewall or windows servers. 
 
 # Documentation
 
