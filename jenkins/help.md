@@ -10,7 +10,8 @@ This plugin utilizes the [Jenkins Python API](http://git.openstack.org/cgit/open
 
 # Requirements
 
-_This plugin does not contain any requirements_
+* Username and Password
+* Jenkins Server
 
 # Documentation
 
