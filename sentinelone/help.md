@@ -1,19 +1,18 @@
 # Description
 
-[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint.
+[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint. The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne.
 
 This plugin utilizes the [SentinelOne API](https://usea1-partners.sentinelone.net/apidoc/).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Blacklist vulnerable devices
+* Trigger workflows on security alerts
+* Manage Threats
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Sentinel one API administrative credentials
 
 # Documentation
 
