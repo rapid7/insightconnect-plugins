@@ -15,7 +15,7 @@ resources:
 tags:
 - graphite
 hub_tags:
-  use_cases: [data_utility, data_aggregation]
+  use_cases: [data_utility, data_aggregation, reporting_and_analytics, soc_automation]
   keywords: [graphite]
   features: []
 - graphite-api
