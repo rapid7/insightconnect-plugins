@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: checkmarx_cxsast
 title: Checkmarx CxSAST
-description: The Checkmarx CxSAST plugin access CxSAST service to manage projects and scans.
+description: The Checkmarx CxSAST plugin access CxSAST service to manage projects and scans
 vendor: rapid7
 support: community
 status: []

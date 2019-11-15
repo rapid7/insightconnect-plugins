@@ -3,7 +3,7 @@ extension: plugin
 product: [insightconnect]
 name: cherwell
 title: Cherwell
-description: The Cherwell plugin is used to administrate incidents in Cherwell.
+description: The Cherwell plugin is used to administrate incidents in Cherwell
 version: 2.1.0
 vendor: rapid7
 support: community

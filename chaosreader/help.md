@@ -1,6 +1,7 @@
 # Description
 
-The plugin is used to trace sessions and fetch application data from snoop or tcpdump logs.
+[Chaosreader](http://chaosreader.sourceforge.net/) is a tool to trace sessions and fetch application data from snoop or tcpdump logs.	The plugin is used to trace sessions and fetch application data from snoop or tcpdump logs.
+This plugin runs the Chaosreader tool directly.
 
 # Key Features
 

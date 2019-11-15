@@ -1,6 +1,6 @@
 # Description
 
-This plugin is a Python compatible character encoding detector
+This plugin is a Python compatible character encoding detector.
 
 # Key Features
 

@@ -1,6 +1,7 @@
 # Description
 
-The Cherwell plugin is used to administrate incidents in Cherwell.
+[Cherwell](https://www.cherwell.com/) is a comprehensive service desk verified for eleven ITIL processes.	The Cherwell plugin is used to administrate incidents in Cherwell.
+This plugin utilizes the [Cherwell API](https://cherwellsupport.com/CherwellAPI/Documentation/en-US/csm_rest_api.html). The Cherwell plugin is used to administrate incidents in Cherwell.
 
 # Key Features
 
