@@ -1,9 +1,9 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: newrelic
 title: New Relic
-description: Monitor the performance of applications and infrastructure
+description: Monitors the performance of applications and infrastructure
 version: 2.0.0
 vendor: rapid7
 support: community
@@ -15,7 +15,7 @@ tags:
 - newrelic
 - performance monitoring
 hub_tags:
-  use_cases: []
+  use_cases: [asset_inventory, soc_automation, soar]
   keywords: [newrelic, performance monitoring]
   features: []
 connection:
