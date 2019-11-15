@@ -1,6 +1,7 @@
 # Description
 
-[Google Cloud PubSub](https://cloud.google.com/pubsub/) is a fully-managed real-time messaging service that allows you to send and receive messages. The InsightConnect plugin allows you to automate sending and receiving messages. Trigger of of receiving new messages and take action with the message content
+[Google Cloud PubSub](https://cloud.google.com/pubsub/) is a fully-managed real-time messaging service that allows you to send and receive messages. The InsightConnect plugin allows you to automate sending and receiving messages. Trigger of of receiving new messages and take action with the message content.
+
 This plugin utilizes the [Google Cloud PubSub API](https://github.com/GoogleCloudPlatform/google-cloud-python/tree/master/pubsub).
 
 # Key Features
