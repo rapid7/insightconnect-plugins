@@ -6,14 +6,15 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Cloud based Security
+* Automated Security
+* Threat management
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* OAuth server
+* Client Credentials
+* Windows ATP Server
 
 # Documentation
 
