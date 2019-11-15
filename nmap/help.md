@@ -5,20 +5,18 @@ The Nmap plugin runs Nmap directly and returns the results.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Network Audit
+* Network Discovery
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
