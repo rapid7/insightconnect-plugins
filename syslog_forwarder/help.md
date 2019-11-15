@@ -17,9 +17,7 @@ It supports:
 
 # Requirements
 
-* A host address 
-* A port
-* Type of transport
+* A remote syslog server
 
 # Documentation
 
