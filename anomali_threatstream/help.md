@@ -1,11 +1,12 @@
 # Description
 
-The `anomali_threatstream` plugin utilizes [Anomali ThreatStream](https://www.anomali.com/) which is an operational threat intelligence stream, automating collection and integration that enables security teams to analyze and respond to threats.
+[Anomali ThreatStream](https://www.anomali.com/) is an operational threat intelligence stream, automating collection and integration that enables security teams to analyze and respond to threats.
+The Anomali ThreatStream InsightConnect plugin allows you lookup hashes, IP addresses, URLs, observables. It also allows importing observables.
 This plugin utilizes the Anomali ThreatStream API, which is located with the cloud instance at `http://<Anomali ThreatStream API host>/optic-doc/ThreatStream_OnlineHelp.htm`.
 
 # Key Features
 
-* Lookup Hash, IP and URL
+* Lookup hashes, IP addresses, and URLs
 * Import observables
 * Get observables
 

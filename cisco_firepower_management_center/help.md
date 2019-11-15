@@ -1,6 +1,7 @@
 # Description
-The `cisco_firepower_management_center` InsightConnect plugin utilizes Cisco Firepower Management Center to create a new block URL policy.
+
 [Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) is your administrative nerve center for managing critical Cisco network security solutions.
+The Cisco Firepower Management Center InsightConnect plugin allows you to create a new block URL policy.
 
 # Key Features
 

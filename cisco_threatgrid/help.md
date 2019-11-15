@@ -1,7 +1,7 @@
 # Description
 
-The `cisco_threatgrid` InsightConnect plugin retrieves malware reports, report samples and URLs for analysis to [Cisco ThreatGrid](https://www.cisco.com/c/en/us/products/security/threat-grid/index.html) server.
- Cisco_ThreatGrid combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware.
+[Cisco ThreatGrid](https://www.cisco.com/c/en/us/products/security/threat-grid/index.html) combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware.
+ The Cisco ThreatGrid InsightConnect plugin allows you to retrieve malware reports, report samples and URLs for analysis to server.
 
 # Key Features
 

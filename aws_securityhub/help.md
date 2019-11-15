@@ -1,6 +1,7 @@
 # Description
 
-The `aws_securityhub` InsightConnect plugin utilizes [AWS Security Hub](https://aws.amazon.com/security-hub/) to lists and describes security hub-aggregated findings and retrieve SQS messages. AWS Security Hub is a comprehensive view of your high-priority security alerts and compliance status across AWS accounts.
+[AWS Security Hub](https://aws.amazon.com/security-hub/) is a comprehensive view of your high-priority security alerts and compliance status across AWS accounts.
+The AWS Security Hub InsightConnect plugin allows you to list and describe security hub-aggregated findings and retrieve SQS messages.
 
 This plugin utilizes the [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html) and [Boto3](https://github.com/boto/boto3) Python library.
 
