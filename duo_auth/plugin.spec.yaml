@@ -6,7 +6,8 @@ title: Duo Auth API
 vendor: rapid7
 support: rapid7
 status: []
-description: Send 2FA push notifications
+description: Duo's Trusted Access platform verifies the identity of your users with two-factor authentication and
+security health of their devices before they connect to the apps they use. The Duo Auth plugin for Rapid7 InsightConnect enables users to create and send two-factor authentication push notifications
 version: 1.0.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/duo_auth
