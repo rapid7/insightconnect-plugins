@@ -314,10 +314,6 @@ actions:
         type: "Note"
         required: true
   list_tags:
-hub_tags:
-  use_cases: []
-  keywords: []
-  features: []
     title: "Project Tags"
     description: "List tags for this project"
     input:
