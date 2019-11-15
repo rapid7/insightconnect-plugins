@@ -1,18 +1,15 @@
 # Description
 
-[Cherwell](https://www.cherwell.com/) is a comprehensive service desk verified for eleven ITIL processes.
-This plugin utilizes the [Cherwell API](https://cherwellsupport.com/CherwellAPI/Documentation/en-US/csm_rest_api.html).
+The Cherwell plugin is used to administrate incidents in Cherwell.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage incidents
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires a Client ID, username and password from the product
+
 
 # Documentation
 
