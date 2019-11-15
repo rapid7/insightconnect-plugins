@@ -1,9 +1,9 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: cherwell
 title: Cherwell
-description: Work with Cherwell Web Services records
+description: The Cherwell plugin is used to administrate incidents in Cherwell
 version: 2.1.0
 vendor: rapid7
 support: community
@@ -11,12 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cherwell
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.cherwell.com
 tags:
 - cherwell
 - itsm
 - it
 hub_tags:
-  use_cases: []
+  use_cases: [investigations, soar, soc_automation, threat_detection_and_response, remediation_ticketing]
   keywords: [cherwell, itsm, it]
   features: []
 connection:
