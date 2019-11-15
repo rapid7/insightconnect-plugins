@@ -5,14 +5,13 @@ Using innovative techniques and research processes, PassiveTotal provides analys
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Look up domains and addresses
+* Search WHOIS
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* PassiveTotal account
+* PassiveTotal API key
 
 # Documentation
 
@@ -231,7 +230,7 @@ Example output:
 
 #### Project Updated
 
-This trigger is used to look for updates to a project.
+_This trigger is used to look for updates to a project._
 
 ##### Input
 
@@ -252,7 +251,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -268,4 +267,3 @@ This plugin does not contain any troubleshooting information.
 
 * [PassiveTotal](https://www.passivetotal.org/)
 * [PassiveTotal API](https://api.passivetotal.org/api/docs/)
-
