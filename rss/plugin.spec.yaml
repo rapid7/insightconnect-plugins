@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: rss
 title: RSS
-description: Poll an RSS or Atom feed for events
+description: The RSS plugin allows you to monitor an RSS feed
 version: 1.0.2
 vendor: rapid7
 support: community
@@ -11,12 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rss
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url:
 tags:
 - rss
 - atom
 - feed
 hub_tags:
-  use_cases: []
+  use_cases: [threat_intel, threat_hunting, log_search, alerting_and_notifications]
   keywords: [rss, atom, feed]
   features: []
 enable_cache: true

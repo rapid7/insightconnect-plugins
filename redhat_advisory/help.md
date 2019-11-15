@@ -1,17 +1,16 @@
 # Description
 
-This plugin monitors the [Red Hat Security Advisories](https://access.redhat.com/security/updates/advisory) list, and triggers on any new advisories that come in.
+This plugin monitors the [Red Hat Security Advisories](https://access.redhat.com/security/updates/advisory) list, and triggers on any new advisories that come in. The Red Hat Security Advisory gives information about security flaws that affect Red Hat products and services. 
+
+Advisories and update notifications are also provided via the Red Hat Network for products serviced by the Red Hat Network.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Trigger a workflow on a new advisory
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
