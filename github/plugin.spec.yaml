@@ -6,18 +6,18 @@ title: GitHub
 vendor: rapid7
 support: community
 status: []
-description: GitHub is a web-based Git or version control repository and Internet
-  hosting service
+description: Github plugin allows users and issues management in Github
 version: 2.1.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/github
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://github.com
 tags:
 - github
 - issue
 - authentication
 hub_tags:
-  use_cases: []
+  use_cases: [user_management]
   keywords: [github, issue, authentication]
   features: []
 types:

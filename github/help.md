@@ -1,18 +1,17 @@
 # Description
 
 [GitHub](https://github.com/) is a popular web-based Git or version control repository and Internet hosting service.
+GitHub InsightConnect plugin allows users and issues management.
 This plugin supports authentication from both personal and organization member accounts.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Issue management
+* User management 
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* GitHub username and password
 
 # Documentation
 
