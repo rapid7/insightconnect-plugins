@@ -1,6 +1,6 @@
 # Description
 
-[SHAterred](http://shattered.io) is a free service for checking SHA-1 hash collisions. Using the SHAttered plugin for
+[SHAtterred](http://shattered.io) is a free service for checking SHA-1 hash collisions. Using the SHAttered plugin for
 Rapid7 InsightConnect, users can quickly determine if a file is part of a collision attack. SHAttered can assist
 with forensics, phishing analysis, and other needs.
 

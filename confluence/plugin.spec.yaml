@@ -6,8 +6,8 @@ title: Confluence
 vendor: rapid7
 support: community
 status: []
-description: Confluence is an open and shared workspace for managing documents and files within an organization. Using
-the Confluence plugin for Rapid7 InsightConnect, users can view and update pages dynamically within automation workflows.
+description: "Confluence is an open and shared workspace for managing documents and files within an organization. Using
+the Confluence plugin for Rapid7 InsightConnect, users can view and update pages dynamically within automation workflows"
 version: 1.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/confluence

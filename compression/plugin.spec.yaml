@@ -3,8 +3,8 @@ extension: plugin
 product: ["insightconnect"]
 name: compression
 title: Compression
-description: The Compression plugin for Rapid7 InsightConnect allows users to compress/decompress files using different
-compression algorithms.
+description: "The Compression plugin for Rapid7 InsightConnect allows users to compress/decompress files using different
+compression algorithms"
 version: 2.0.0
 vendor: rapid7
 support: community

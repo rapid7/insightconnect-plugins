@@ -1,6 +1,6 @@
 # Description
 
-Typosquatter detects cybersquatting of domains and allows for domain scoring. This plugin can be used
+Typo Squatter detects cybersquatting of domains and allows for domain scoring. This plugin can be used
 to aid in phishing investigation and analysis.
 
 # Key Features

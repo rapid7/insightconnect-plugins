@@ -1,11 +1,11 @@
 # Description
 
 [TShark](https://www.wireshark.org/docs/man-pages/tshark.html) is a tool for dumping and analyzing network traffic.
- With the TShark plugin for Rapid7 InsightConnect, users can open pcap data for further analysis and intel gathering.
+ With the TShark plugin for Rapid7 InsightConnect, users can open PCAP data for further analysis and intel gathering.
 
 # Key Features
 
-* Run TShark on a pcap file
+* Run TShark on a PCAP file
 
 # Requirements
 

@@ -3,9 +3,9 @@ extension: plugin
 product: ["insightconnect"]
 name: threat_connect
 title: ThreatConnect
-description: ThreatConnect is a Threat Intelligence Platform (TIP) that empowers large
+description: "ThreatConnect is a Threat Intelligence Platform (TIP) that empowers large
   organizations to aggregate, analyze and act on their threat intelligence. The ThreatConnect plugin for Rapid7
-InsightConnect allows users to view incidents, emails, threats, victims, and more.
+InsightConnect allows users to view incidents, emails, threats, victims, and more"
 version: 1.0.0
 vendor: rapid7
 support: community

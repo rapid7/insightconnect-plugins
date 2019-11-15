@@ -1,6 +1,6 @@
 # Description
 
-[Sketchify](https://verylegit.link/) Sketchify is a service used to turn any link into one that appears suspicious. 
+[Sketchify](https://verylegit.link/) is a service used to turn any link into one that appears suspicious. 
 With the Sketchify plugin for Rapid7 InsightConnect, users can conduct internal phishing campaigns or other forms of 
 penetration testing within their organization.
 

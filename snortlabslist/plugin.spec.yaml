@@ -3,8 +3,8 @@ extension: plugin
 product: ["insightconnect"]
 name: snortlabslist
 title: Snort Labs IP Reputation
-description: Snort Labs List is an IP blacklist service provided by Snort. Users of this plugin can query with
-IP addresses to check their status.
+description: "Snort Labs List is an IP blacklist service provided by Snort. Users of this plugin can query with
+IP addresses to check their status"
 version: 1.0.0
 vendor: rapid7
 support: community

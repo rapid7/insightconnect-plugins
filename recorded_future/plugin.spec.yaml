@@ -6,9 +6,9 @@ title: Recorded Future
 vendor: rapid7
 support: rapid7
 status: []
-description: Recorded Future arms threat analysts, security operators, and incident
+description: "Recorded Future arms threat analysts, security operators, and incident
   responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
-InsightConnect, users can search domain lists, entity lists, and more.
+InsightConnect, users can search domain lists, entity lists, and more"
 version: 1.5.2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/recorded_future
