@@ -7,7 +7,7 @@ security health of their devices before they connect to the apps they use. Using
 
 * Add and delete users
 * Enroll users
-* Get User information
+* Get user information
 
 # Requirements
 
