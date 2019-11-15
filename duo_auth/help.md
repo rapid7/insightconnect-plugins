@@ -1,15 +1,17 @@
 # Description
 
 [Duo](https://duo.com/)'s Trusted Access platform verifies the identity of your users with two-factor authentication and
-security health of their devices before they connect to the apps they use. The InsightConnect plugin allow for push notifications in workflows.
+security health of their devices before they connect to the apps they use. The Duo Auth InsightConnect plugin enables users to create and send push notifications from within automation workflows.
 
 # Key Features
 
-* Send push notifications for 2FA
+* Send push notifications for two-factor authentication
 
 # Requirements
 
-* Requires two secret keys from Duo
+* Requires a Duo integration key
+* Requires a Duo secret key
+* Requires a Duo hostname
 
 # Documentation
 
