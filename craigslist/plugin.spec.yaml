@@ -7,11 +7,13 @@ vendor: rapid7
 support: community
 status: []
 description: Craigslist provides local classifieds and forums for jobs, housing, for
-  sale, personals, services, local community, and events
+  sale, personals, services, local community, and events. Using the Craigslist plugin for Rapid7 InsightConnect,
+organizations can monitor their brand as well as automate searches for lost or stolen assets.
 version: 1.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/craigslist
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.craigslist.org
 tags:
 - craigslist
 - sale
@@ -19,7 +21,7 @@ tags:
 - events
 - physical
 hub_tags:
-  use_cases: []
+  use_cases: [asset_inventory, investigations]
   keywords: [craigslist, sale, stolen, events, physical]
   features: []
 types:

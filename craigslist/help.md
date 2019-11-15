@@ -1,18 +1,16 @@
 # Description
 
-[Craigslist](https://www.craigslist.com) is provides local classifieds and forums for jobs, housing, for sale, personals, services, local community, and events.
-This plugin allows searching for sale postings on Craigslist.
+[Craigslist](https://www.craigslist.com) provides local classifieds and forums for jobs, housing, for
+  sale, personals, services, local community, and events. Using the Craigslist plugin for Rapid7 InsightConnect,
+organizations can monitor their brand as well as automate searches for lost or stolen assets.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Monitor the For Sale section
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
