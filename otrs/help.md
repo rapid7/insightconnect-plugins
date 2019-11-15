@@ -6,14 +6,12 @@ This plugin utilizes the [OTRS Python library](https://pyotrs.readthedocs.io/en/
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Create tickets
+* Manage tickets
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* OTRS web server
 
 # Documentation
 
@@ -26,7 +24,7 @@ The connection configuration accepts the following parameters:
 |credentials|credential_username_password|None|True|OTRS username and password|None|
 |server|string|None|True|OTRS Server|None|
 
-To create a REST web service please save a copy [GenericTicketConnectorREST.yml](https://gitlab.com/rhab/PyOTRS/raw/master/webservices_templates/GenericTicketConnectorREST.yml), updated the `FrameworkVersion` to the version of OTRS you're using and import it to OTRS's web server.
+To create a REST web service please save a copy [GenericTicketConnectorREST.yml](https://gitlab.com/rhab/PyOTRS/raw/master/webservices_templates/GenericTicketConnectorREST.yml), update the `FrameworkVersion` to the version of OTRS you're using, and import it to OTRS's web server.
 
 ## Technical Details
 
