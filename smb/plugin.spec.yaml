@@ -3,8 +3,8 @@ extension: plugin
 product: ["insightconnect"]
 name: smb
 title: SMB
-description: Server Message Block (SMB) is used for interacting with files on an SMB
-  server
+description: Server Message Block (SMB) is a protocol used for interacting with files on an SMB server. Using this
+plugin, users can interact with shares and delete files.
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -18,7 +18,7 @@ tags:
 - samba
 - cifs
 hub_tags:
-  use_cases: []
+  use_cases: [data_utility, asset_containment]
   keywords: [smb, file transfer, samba, cifs]
   features: []
 types:

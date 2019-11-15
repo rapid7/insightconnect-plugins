@@ -1,19 +1,19 @@
 # Description
 
-[SMB](https://en.wikipedia.org/wiki/Server_Message_Block) is used for interacting with files on an SMB server.
-
-This plugin utilizes the [SMB](https://en.wikipedia.org/wiki/Server_Message_Block) protocol.
+[SMB](https://en.wikipedia.org/wiki/Server_Message_Block) is a protocol used for interacting with files on an SMB 
+server. Using this plugin, users can interact with shares and delete files automatically within Rapid7 InsightConnect
+workflows. 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* List shares and files
+* Delete files
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* SMB server hostname
+* SMB server credentials
+* SMB server NetBios name
 
 # Documentation
 
