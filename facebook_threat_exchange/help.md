@@ -1,18 +1,16 @@
 # Description
 
-[Facebook Threat Exchange](https://developers.facebook.com/docs/threat-exchange/) is a platform for sharing threat information between selected entities.
+[Facebook Threat Exchange](https://developers.facebook.com/docs/threat-exchange/) is a platform for sharing threat information between selected entities. The Facebook Threat Exchange Plugin allows you to share and search IOCs
 This plugin utilizes the [Threat Exchange API](https://developers.facebook.com/docs/threat-exchange/v2.11).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Search for IOCs
+* Submit IOCs
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* An applicaiton ID and secret key
 
 # Documentation
 

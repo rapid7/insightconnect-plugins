@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: foremost
 title: Foremost
-description: A data carving tool to recover files
+description: The Foremost plugin will take a disk image and attempt to recover files from it
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -17,7 +17,7 @@ tags:
 - forensics
 - carving
 hub_tags:
-  use_cases: []
+  use_cases: [data_utility]
   keywords: [foremost, extraction, forensics, carving]
   features: []
 actions:

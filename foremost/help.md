@@ -1,19 +1,16 @@
 # Description
 
-[Foremost](http://foremost.sourceforge.net/) is a data carving tool and is used to recover files from a disk image file.
+[Foremost](http://foremost.sourceforge.net/) is a data carving tool and is used to recover files from a disk image file. The Foremost plugin will take a disk image and attempt to recover files from it.
 
 It supports carving the following file types: jpg, gif, png, bmp, avi, exe, mpg, mp4, wav, riff, wmv, mov, pdf, ole, doc, zip, rar, htm, cpp, nts.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Extract files from a disk image
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

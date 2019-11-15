@@ -1,17 +1,14 @@
 # Description
 
-Extract information from EML files.
+The EML plugins will parse and extract data from an EML file. 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Parse an EML file
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
