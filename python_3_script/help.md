@@ -9,7 +9,7 @@ The Python 3 Script plugin allows you to run Python 3 code. It includes Python 3
 * [pyyaml 3.12](http://pyyaml.org/)
 * [records 0.5.2](https://github.com/kennethreitz/records)
 
-The Python 3 plugin also allows you load custom modules via its connection parameters
+The Python 3 plugin also allows you to load custom modules via its connection parameters.
 
 # Key Features
 

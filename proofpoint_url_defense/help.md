@@ -5,7 +5,7 @@ This plugin decodes URLs that are encoded by Proofpoints URL Defense service usi
 
 # Key Features
 
-* Decode a URL to it's original form
+* Decode a URL to its original form
 
 # Requirements
 
