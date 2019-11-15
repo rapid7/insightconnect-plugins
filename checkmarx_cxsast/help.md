@@ -1,17 +1,15 @@
 # Description
 
-[Checkmarx CxSAST](https://www.checkmarx.com/products/static-application-security-testing/) Static analysis solution used to identify security vulnerabilities in custom code and open source components.
+The Checkmarx CxSAST plugin access CxSAST service to manage projects and scans.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage CxSAST projects
+* Manage CxSAST scans
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires username and password for the CxSAST service.
 
 # Documentation
 
