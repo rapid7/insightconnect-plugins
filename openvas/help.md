@@ -22,7 +22,7 @@ the date given to the create_schedule function is given in the UTC timezone.
 
 # Key Features
 
-* Run vulnerability scans on network reachable services
+* Run vulnerability scans on networked services
 * Schedule scans
 * Get scan reports
 
