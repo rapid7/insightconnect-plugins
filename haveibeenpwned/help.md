@@ -1,19 +1,16 @@
 # Description
 
-[Have I been pwned?](https://haveibeenpwned.com/) is a free [Creative Commons](https://creativecommons.org/licenses/by/4.0/) service that allows you to search across multiple data breaches to see if your username, email address, or password has been compromised.
+[Have I been pwned?](https://haveibeenpwned.com/) is a free [Creative Commons](https://creativecommons.org/licenses/by/4.0/) service that allows you to search across multiple data breaches to see if your username, email address, or password has been compromised. The HaveIBeenPwned plugin allows you find out if a user, domain, or password has been leaked. 
 
 This plugin utilizes the public [have I been pwned? API](https://haveibeenpwned.com/API/v3).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Look for a user, domain, or password in the HaveIBeenPwned service for a possible breech
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
