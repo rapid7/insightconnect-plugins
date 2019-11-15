@@ -17,7 +17,7 @@ tags:
 - on call
 - incident
 hub_tags:
-  use_cases: [alerting_and_notifications]
+  use_cases: [alerting_and_notifications, soc_automation]
   keywords: [pagerduty, on call, incident]
   features: []
 connection:

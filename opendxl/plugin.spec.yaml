@@ -17,7 +17,7 @@ tags:
 - opendxl
 - message broker
 hub_tags:
-  use_cases: [data_aggregation]
+  use_cases: [network_containment, asset_containment, threat_detection_and_response, soc_automation]
   keywords: [opendxl, message broker]
   features: []
 connection:

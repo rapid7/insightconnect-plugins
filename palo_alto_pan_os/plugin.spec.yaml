@@ -18,7 +18,7 @@ tags:
 - firewall
 - palo alto
 hub_tags:
-  use_cases: [asset_inventory]
+  use_cases: [asset_inventory, network_containment, soc_automation, threat_detection_and_response]
   keywords: [pan os, panorama, firewall, palo alto]
   features: []
 types:
