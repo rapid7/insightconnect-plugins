@@ -8,7 +8,7 @@
 
 # Requirements
 
-* Example: Requires an API Key from Carbon Black Live Response
+* Requires an API Key from Carbon Black Live Response
 
 # Documentation
 

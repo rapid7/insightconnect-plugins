@@ -12,7 +12,7 @@ This plugin utilizes the [Cb Response REST API](https://developer.carbonblack.co
 
 # Requirements
 
-* Example: Requires an API Key from Carbon Black Response
+* Requires an API Key from Carbon Black Response
 
 # Documentation
 
