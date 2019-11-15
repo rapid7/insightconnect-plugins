@@ -1,17 +1,14 @@
 # Description
 
-[FreeGeoIP](https://freegeoip.net/) is a free service for Geo IP lookups.
+The `freegeoip` InsightConnect plugin lookup GeoIP information for specified host using [FreeGeoIP](https://freegeoip.net/) which is a free service for Geo IP lookups.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Obtain GeoIP information for an IP address.
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

@@ -1,17 +1,14 @@
 # Description
 
-[Tcpdump](http://www.tcpdump.org) is a powerful command-line packet analyzer. This plugins run the Tcpdump packet tracer on a user supplied PCAP.
+The [Tcpdump](http://www.tcpdump.org) plugin is used to parse PCAP file. 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Parse and return the contents of a PCAP file. 
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

@@ -4,14 +4,11 @@
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Geolocation of IP address or a domain
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* API Key from the product
 
 # Documentation
 

@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: freegeoip
 title: FreeGeoIP
-description: Lookup GeoIP information for a host
+description: This plugin lookup GeoIP information for a specified host
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -11,12 +11,13 @@ status: ["obsolete"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/freegeoip
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://freegeoip.net
 tags:
 - geoip
 - ip
 - location
 hub_tags:
-  use_cases: []
+  use_cases: [threat_intel]
   keywords: [geoip, ip, location]
   features: []
 actions:

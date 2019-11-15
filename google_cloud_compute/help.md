@@ -1,18 +1,17 @@
 # Description
 
 [Google Compute](https://cloud.google.com/compute/) Google Compute Engine lets you create and run virtual machines on Google infrastructure.
-Compute Engine offers scale, performance, and value that allows you to easily launch large compute clusters on Google's infrastructure.
+Compute Engine offers scale, performance, and value that allows you to easily launch large compute clusters on Google's infrastructure. Use the InsightConnect plugin to automate administrative tasks like starting and stopping instances.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Start and stop instances
+* Attach and detach disks
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A JWT with Google Cloud Compute permissions
+* Google Cloud Compute API enabled
 
 # Documentation
 

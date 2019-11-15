@@ -1,17 +1,18 @@
 # Description
 
-[AWS WorkSpaces](https://aws.amazon.com/workspaces/) is a fully managed desktop computing service in the cloud that allows its customers to provide cloud-based desktops to their end-users.
-
+This plugin utilizes [AWS WorkSpaces](https://aws.amazon.com/workspaces/) to create workspaces. Amazon WorkSpaces is a fully managed
+ desktop computing service in the cloud that allows its customers to provide cloud-based desktops to their end-users
+ 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Create workspace
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* AWS account
+* AWS access key ID for authentication
+* AWS secret key for signing requests with the given AWS access key ID
+* AWS region to use for requests
 
 # Documentation
 

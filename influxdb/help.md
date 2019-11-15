@@ -1,7 +1,16 @@
 
 # InfluxDB
 
-## About
+# Key Features
+
+* Metrics
+* Analysis
+
+# Requirements
+
+_This plugin does not contain any requirements_
+
+## Description
 
 [InfluxDB](https://docs.influxdata.com/influxdb) is a scalable datastore for metrics, events, and real-time analytics.
 This plugin utilizes the [InfluxDB API](https://docs.influxdata.com/influxdb/v1.2/tools/api/).
