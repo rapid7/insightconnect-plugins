@@ -18,7 +18,7 @@ tags:
 - intel
 - urlscan
 hub_tags:
-  use_cases: [threat_intel]
+  use_cases: [threat_intel, alert_enrichment]
   keywords: [url, analysis, intel, urlscan]
   features: []
 types:

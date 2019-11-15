@@ -14,7 +14,6 @@ This plugin utilizes the [VMRay API](https://cloud.vmray.com/static_doc/html/api
 # Requirements
 
 * An API key
-* The url for the API
 
 # Documentation
 
