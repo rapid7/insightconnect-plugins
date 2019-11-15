@@ -16,7 +16,7 @@ tags:
 - eml
 - mail
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [data_utility, phishing_investigations]
   keywords: [eml, mail]
   features: []
 types:

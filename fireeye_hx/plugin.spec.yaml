@@ -14,7 +14,7 @@ resources:
   vendor_url: https://www.fireeye.com/
 tags: ["fireeye", "hx"]
 hub_tags: 
-  use_cases: [threat_intel, alerting_and_notifications, investigations]
+  use_cases: [threat_intel, alerting_and_notifications, investigations, threat_detection, soc_automation]
   keywords: [fireye, hx]
   features: []
 

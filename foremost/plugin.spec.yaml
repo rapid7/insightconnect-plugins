@@ -17,7 +17,7 @@ tags:
 - forensics
 - carving
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [data_utility, threat_hunting]
   keywords: [foremost, extraction, forensics, carving]
   features: []
 actions:

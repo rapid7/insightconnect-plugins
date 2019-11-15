@@ -18,7 +18,7 @@ tags:
 - search
 - elastic
 hub_tags:
-  use_cases: [data_utility, data_aggregation, data_ingestion]
+  use_cases: [data_utility, data_aggregation, data_ingestion, seim, soc_automation, log_search]
   keywords: [elasticsearch, es, search, elastic]
   features: []
 connection:
