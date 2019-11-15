@@ -6,13 +6,13 @@ This plugin utilizes the [Box SDK](https://box-python-sdk.readthedocs.io/en/late
 
 # Key Features
 
-* add and delete users
-* download and upload files
+* Add and delete users
+* Download and upload files
 
 # Requirements
 
-* Create a RSA token and submit it to box
-* Create a JWT key in box
+* Create a RSA token and submit it to Box
+* Create a JWT key in Box
 
 # Documentation
 

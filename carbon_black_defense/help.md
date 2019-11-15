@@ -1,13 +1,13 @@
 # Description
 
-[Carbon Black Defense](https://www.carbonblack.com/products/cb-defense/) is a next-generation antivirus and EDR in one cloud-delivered platform. InsightConnect allows you to find events and retrieve details for specific events.
+[Carbon Black Defense](https://www.carbonblack.com/products/cb-defense/) is a next-generation antivirus and EDR in one cloud-delivered platform. The InsightConnect plugin allows you to find events and retrieve details for specific events.
 
 This plugin utilizes the [Carbon Black Defense API](https://developer.carbonblack.com/reference/cb-defense/1/rest-api/).
 
 # Key Features
 
 * Find events
-* get details for specific events
+* Get details for specific events
 
 # Requirements
 

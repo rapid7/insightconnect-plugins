@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: bmc_remedy_itsm
 title: "BMC Remedy ITSM"
-description: "Create update and close Incidents BMC Remedy ITSM Incidents"
+description: "Create update and close BMC Remedy ITSM Incidents"
 version: 1.7.0
 vendor: rapid7
 resources:

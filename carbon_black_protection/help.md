@@ -8,11 +8,11 @@ This plugin utilizes the [Carbon Black Protection API](https://developer.carbonb
 
 * Ban and unban files
 * Approve files
-* resolve approval requests
+* Resolve approval requests
 
 # Requirements
 
-* Requires an API Key from Carbon Black
+* Requires an API Key from Carbon Black Protection
 
 # Documentation
 
