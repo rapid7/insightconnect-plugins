@@ -1,17 +1,16 @@
 # Description
 
-This plugin gets the current Datetime and outputs it in a format specified by the user.
+The Datetime InsightConnect plugin manipulate timestamps using Python's [Maya](https://pypi.org/project/maya/) library.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Convert a datetime to an Epoch and vice versa
+* Convert a datetime to specified format
+* Determine the elapsed time between two dates
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
