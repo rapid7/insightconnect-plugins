@@ -13,14 +13,14 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/thehive
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://thehive-project.org
 tags:
 - thehive
-- hive
 - intel
 - case
 hub_tags:
-  use_cases: []
-  keywords: [thehive, hive, intel, case]
+  use_cases: [soc_automation, investigations, siem]
+  keywords: [thehive, intel, case]
   features: []
 enable_cache: true
 language: python
