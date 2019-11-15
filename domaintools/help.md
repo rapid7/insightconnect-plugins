@@ -1,6 +1,6 @@
 # Description
 
-[DomainTools](https://www.domaintools.com) data and products work in harmony to enable security teams to start getting ahead of attacks, gain context and visibility into potential threats, and lower the skills barrier. The InsightConnect plugin allows for the automation domain lookups and retrieval of threat information related to the domain.
+[DomainTools](https://www.domaintools.com) data and products work in harmony to enable security teams to start getting ahead of attacks, gain context and visibility into potential threats, and lower the skills barrier. The InsightConnect plugin allows for the automation of domain lookups and retrieval of threat information related to the domain.
 
 This plugin utilizes the [DomainTools Python API](https://github.com/domaintools/python_api).
 
