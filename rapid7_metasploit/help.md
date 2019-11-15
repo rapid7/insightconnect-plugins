@@ -1,6 +1,8 @@
 # Description
 
 [Metasploit Framework](https://www.metasploit.com/) is the world's most used penetration testing framework.
+Make the premier penetration testing solution even more powerful with the ability to search and execute Exploits using this InsightConnect plugin. Automate your pen-tests and find the weak points in your environments faster with remote execution of exploits and retrieve the results for further analysis.
+
 This plugin utilizes the Metasploit [RPC API](https://metasploit.help.rapid7.com/docs/rpc-api).
 
 # Key Features

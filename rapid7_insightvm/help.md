@@ -1,6 +1,6 @@
 # Description
 
-Utilizing the power of Rapid7's Insight platform and the heritage of our award-winning Nexpose product, InsightVM - our vulnerability management solution - provides a fully available, scalable, and efficient way to collect your vulnerability data, turn it into answers, and minimize your risk in modern networks.
+Automate your vulnerability management operations with the combined power of [InsightVM](https://www.rapid7.com/products/insightvm/) and InsightConnect by using this plugin and simplify getting data in and data out of InsightVM. As a Security Admin your time is valuable - save time by orchestrating site administration, user management, asset tagging, asset scanning and much much more!
 
 This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html).
 

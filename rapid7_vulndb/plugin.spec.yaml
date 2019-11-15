@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: rapid7_vulndb
 title: Rapid7 Vulnerability & Exploit Database
-description: A curated repository of vetted computer software exploits and exploitable
+description: Vulnerability & Exploit Database is a curated repository of vetted computer software exploits and exploitable
   vulnerabilities
 version: 1.1.0
 vendor: rapid7
