@@ -18,7 +18,7 @@ tags:
 - geoip
 - minfraud
 hub_tags:
-  use_cases: [threat_intel, application_security]
+  use_cases: [investigations, threat_intel, soc_automation]
   keywords: [maxmind, ip, geoip, minfraud]
   features: []
 types:

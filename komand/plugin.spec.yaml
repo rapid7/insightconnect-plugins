@@ -17,7 +17,7 @@ tags:
 - komand
 - job
 hub_tags:
-  use_cases: [soc_automation, soar, threat_detection_and_response]
+  use_cases: [soc_automation, soar]
   keywords: [komand, job]
   features: []
 connection:

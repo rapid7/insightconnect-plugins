@@ -17,7 +17,7 @@ tags:
 - IOC
 - threat
 hub_tags:
-  use_cases: [threat_intel]
+  use_cases: [soc_automation, investigations, threat_intel, threat_hunting, threat_detection_and_response]
   keywords: [misp, IOC, threat]
   features: []
 types:

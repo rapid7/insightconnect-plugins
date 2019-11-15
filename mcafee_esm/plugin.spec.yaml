@@ -19,7 +19,7 @@ tags:
 - ESM
 - SIEM
 hub_tags:
-  use_cases: [siem, threat_detection_and_response]
+  use_cases: [siem, threat_detection_and_response, soc_automation]
   keywords: [McAfee, ESM, SIEM]
   features: []
 enable_cache: true

@@ -18,7 +18,7 @@ tags:
 - log
 - elastic
 hub_tags:
-  use_cases: [data_aggregation, data_utility, external_enrichement]
+  use_cases: [data_utility, log_search, application_management]
   keywords: [logstash, elk, log, elastic]
   features: []
 types:

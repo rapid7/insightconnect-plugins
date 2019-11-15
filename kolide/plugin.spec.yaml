@@ -16,7 +16,7 @@ tags:
 - kolide
 - osquery
 hub_tags:
-  use_cases: [policy_management, asset_inventory]
+  use_cases: [asset_inventory, investigations, threat_detection_and_response, threat_hunting, soc_automation]
   keywords: [kolide, osquery]
   features: []
 connection:

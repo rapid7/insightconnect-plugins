@@ -17,7 +17,7 @@ tags:
 - password
 - vault
 hub_tags:
-  use_cases: [vulnerability_management, thread_detection_and_response, asset_containment, penetration_testing]
+  use_cases: [user_management]
   keywords: [lastpass, password, vault]
   features: []
 connection:
