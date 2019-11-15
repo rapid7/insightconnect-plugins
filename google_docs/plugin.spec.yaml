@@ -18,7 +18,7 @@ tags:
 - drive
 - utilities
 hub_tags:
-  use_cases: [automation_and_orchestration, data_aggregation, data_ingestion]
+  use_cases: [data_aggregation, data_ingestion]
   keywords: [docuement, google, drive, utilities]
   features: []
 types:

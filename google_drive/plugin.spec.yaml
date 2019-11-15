@@ -17,7 +17,7 @@ tags:
 - google drive
 - cloud storage
 hub_tags:
-  use_cases: [data_ingestion, automation_and_orchestration]
+  use_cases: [data_ingestion]
   keywords: [google, google drive, cloud storage]
   features: []
 types:

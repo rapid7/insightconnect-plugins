@@ -17,7 +17,7 @@ tags:
 - sheets
 - spreadsheet
 hub_tags:
-  use_cases: [data_aggregation, automation_and_orchestration]
+  use_cases: [data_aggregation]
   keywords: [google, sheets, spreadsheet]
   features: []
 types:
