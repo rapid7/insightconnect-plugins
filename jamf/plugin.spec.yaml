@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: jamf
 title: Jamf
 description: Jamf is a popular product for managing iPads, iPhones, Macs, and Apple TVs for schools and businesses
@@ -18,7 +18,7 @@ tags:
 - mac
 - apple
 hub_tags:
-  use_cases: [user_management, device_security]
+  use_cases: [user_management, asset_inventory]
   keywords: [jamf, ios, mac, apple]
   features: []
 types:

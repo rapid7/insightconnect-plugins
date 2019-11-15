@@ -16,7 +16,7 @@ tags:
 - json
 - utilities
 hub_tags:
-  use_cases: []
+  use_cases: [data_utility]
   keywords: [json, utilities]
   features: []
 actions:

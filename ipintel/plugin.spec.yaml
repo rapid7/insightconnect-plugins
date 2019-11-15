@@ -16,7 +16,7 @@ tags:
   - ipintel
   - intel
 hub_tags:
-  use_cases: [investigations]
+  use_cases: [threat_intel, soc_automation]
   keywords: [ipintel, intel, threat]
   features: []
 types:
