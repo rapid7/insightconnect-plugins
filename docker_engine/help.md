@@ -1,6 +1,6 @@
 # Description
 
-Docker Engine enables control of Docker Images, Containers, and Networks.
+Docker Engine enables control of Docker Images, Containers, and Networks. The InsightConnect plugin enables automation of container image and network management.
 
 This plugin utilizes the [Docker API](https://docs.docker.com/engine/api/) via the [docker-py](http://docker-py.readthedocs.io/en/stable) plugin for python.
 
