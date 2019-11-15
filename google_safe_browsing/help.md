@@ -4,14 +4,11 @@ Submit URLs to the [Google Safe Browsing](https://safebrowsing.google.com/) Serv
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* URL enrichment
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* API Key
 
 # Documentation
 

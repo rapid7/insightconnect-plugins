@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: google_admin
 title: Google Apps Admin
-description: Google Admin Actions
+description: Get and suspend users with the Google admin plugin
 version: 1.0.2
 vendor: rapid7
 support: community
@@ -11,12 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/google_admin
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.google.com
 tags:
 - google
 - admin
 - user provisioning
 hub_tags:
-  use_cases: []
+  use_cases: [user_management]
   keywords: [google, admin, user provisioning]
   features: []
 types:
