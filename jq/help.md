@@ -12,7 +12,7 @@ returned as a string.
 
 # Requirements
 
-_This plugin contains no requirements_
+_This plugin does not contain any requirements_
 
 # Documentation
 
