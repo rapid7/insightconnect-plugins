@@ -19,7 +19,7 @@ tags:
 - palo alto
 hub_tags:
   use_cases: [asset_inventory]
-  keywords: [pan os, panorma, firewall, palo alto]
+  keywords: [pan os, panorama, firewall, palo alto]
   features: []
 types:
   config:
