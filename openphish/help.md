@@ -5,14 +5,11 @@ It identifies phishing sites and performs intelligence analysis in real time wit
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Investigate suspicous URLs
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
@@ -83,4 +80,3 @@ This plugin does not contain any troubleshooting information.
 * [OpenPhish](http://openphish.com)
 * [OpenPhish feed file](https://openphish.com/feed.txt)
 * [OpenPhish FAQ](https://openphish.com/faq.html)
-
