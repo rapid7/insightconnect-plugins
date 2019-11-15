@@ -1,7 +1,7 @@
 # Description
 
 [Duo](https://duo.com/)'s Trusted Access platform verifies the identity of your users with two-factor authentication and
-security health of their devices before they connect to the apps they use. The InsightConnect plugin can be used to manage Duo users.
+security health of their devices before they connect to the apps they use. Using the Duo plugin for InsightConnect will allow Duo user management within automation workflows.
 
 # Key Features
 
