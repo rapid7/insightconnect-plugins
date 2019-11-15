@@ -17,7 +17,7 @@ tags:
 - remote
 - tunnel
 hub_tags:
-  use_cases: [automation_and_orchestration]
+  use_cases: [soar, soc_automation, threat_detection_and_response]
   keywords: [ssh, remote, tunnel]
   features: []
 connection:

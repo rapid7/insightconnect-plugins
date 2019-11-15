@@ -16,7 +16,7 @@ tags:
 - rpm
 - package
 hub_tags:
-  use_cases: [threat_hunting, patch_management, application_security]
+  use_cases: [patch_management, application_security]
   keywords: [rpm, package]
   features: []
 enable_cache: true

@@ -1,12 +1,8 @@
 # Description
 
-The [Splunk](https://www.splunk.com/) plugin allows you to interact with Splunk by hooking alerts to trigger Komand workflows,
-running additional searches, and even inserting data back into Splunk from a Komand workflow.
-
-Splunk captures, indexes, and correlates real-time data in a searchable repository from which it can generate graphs, reports, alerts, dashboards, and visualizations.
-
-Splunk intends to make machine data accessible across an organization by identifying data patterns, providing metrics, diagnosing problems, and providing intelligence for business operations. Splunk is a horizontal technology used for application management, security and compliance, as well as business and web analytics.
-
+[Splunk](https://www.splunk.com/) captures, indexes, and correlates real-time data in a searchable repository from which it can generate graphs, reports, alerts, dashboards, and visualizations.
+Splunk intends to make machine data accessible across an organization by identifying data patterns, providing metrics, diagnosing problems, and providing intelligence for business operations.
+The Splunk plugin allows you to interact with Splunk by hooking alerts to trigger Komand workflows, running additional searches, and even inserting data back into Splunk from a workflow.
 
 # Key Features
 

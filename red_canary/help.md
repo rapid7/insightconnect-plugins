@@ -1,6 +1,6 @@
 # Description
 
-[Red Canary](https://www.redcanary.com) is a managed endpoint detection and response platform. With the InsightConnect Red Canary plugin you can identify, detect, and mitigate threats to your organization
+[Red Canary](https://www.redcanary.com) is a managed endpoint detection and response platform. With the InsightConnect Red Canary plugin you can identify, detect, and mitigate threats to your organization.
 
 # Key Features
 
@@ -10,7 +10,7 @@
 
 # Requirements
 
-* Red canary customer id and api token
+* Red Canary customer ID and API token
 
 # Documentation
 

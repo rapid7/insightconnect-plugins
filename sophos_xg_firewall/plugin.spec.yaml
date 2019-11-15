@@ -17,7 +17,7 @@ tags:
 - Endpoint
 - Firewall
 hub_tags:
-  use_cases: [network_containment]
+  use_cases: [network_containment, soc_automation]
   keywords: [Sophos, Endpoint, Firewall]
   features: []
 types:

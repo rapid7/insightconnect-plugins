@@ -17,7 +17,7 @@ tags:
 - siem
 - logs
 hub_tags:
-  use_cases: [threat_intel, threat_hunting, reporting_and_analytics, phishing_investigations, log_search, detection_and_response, data_aggregation data_ingestion data_utility, alerting_and_notifications]
+  use_cases: [siem, threat_hunting, reporting_and_analytics, log_search, threat_detection_and_response, data_aggregation, data_ingestion, alerting_and_notifications, soc_automation]
   keywords: [splunk, siem, logs]
   features: []
 connection:
