@@ -10,12 +10,8 @@
 
 # Requirements
 
-<<<<<<< HEAD
-* User name and password
 * BMC server 9.1.x
-=======
 * Username and password
->>>>>>> b4f356800cf60da8f136b90957a45fe35826fb30
 
 # Documentation
 
