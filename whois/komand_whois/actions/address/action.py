@@ -78,7 +78,7 @@ class Address(komand.Action):
         binary = "/usr/bin/whois"
         cmd = "%s %s" % (binary, params.get("address"))
         stdout = komand.helper.exec_command(cmd)["stdout"]
-
+        stdout = stdout.decode('utf-8')
         results = self.parse_stdout(stdout=stdout)
         results = komand.helper.clean_dict(results)
 
@@ -95,6 +95,7 @@ class Address(komand.Action):
         regex = r"\S*:\s*.*"
         r = re.compile(pattern=regex, flags=re.IGNORECASE | re.MULTILINE)
         results = r.findall(string=stdout)
+
         pairs = dict()
         for result in results:
             pair = list(map(str.strip, result.split(":")))
@@ -104,16 +105,14 @@ class Address(komand.Action):
 
     def _get_registry(self, stdout):
         lines = stdout.splitlines()[:4]
-
-        if filter(lambda l: self.ARIN in l.lower(), lines):
+        if list(filter(lambda l: self.ARIN in l.lower(), lines)):
             registry = self.ARIN
-        elif filter(lambda l: self.LACNIC in l.lower(), lines):
+        elif list(filter(lambda l: self.LACNIC in l.lower(), lines)):
             registry = self.LACNIC
-        elif filter(lambda l: self.APNIC in l.lower(), lines):
+        elif list(filter(lambda l: self.APNIC in l.lower(), lines)):
             registry = self.APNIC
-        elif filter(lambda l: self.RIPE in l.lower(), lines):
+        elif list(filter(lambda l: self.RIPE in l.lower(), lines)):
             registry = self.RIPE
-
         else:
             self.logger.info("Warning: No WHOIS registry detected from stdout, defaulting to ARIN...")
             registry = self.ARIN
