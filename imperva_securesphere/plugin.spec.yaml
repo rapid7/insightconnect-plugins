@@ -1,25 +1,21 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: imperva_securesphere
 title: Imperva SecureSphere
 vendor: rapid7
 support: community
 status: []
-description: Imperva SecureSphere WAF protects your applications and data from cyber-attacks.
-  The industry leading SecureSphere WAF blocks technical, business logic botnets and
-  DDoS attacks
+description: Imperva SecureSphere WAF protects your applications and data from cyber-attacks.  It blocks technical, business logic botnets and DDoS attacks
 version: 1.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/imperva_securesphere
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.imperva.com/products/securesphere
 tags:
-- Web Application Firewall
-- WAF
-- Imperva
-- SecureSphere
+  - firewall
 hub_tags:
-  use_cases: []
+  use_cases: [application_security]
   keywords: [Web Application Firewall, WAF, Imperva, SecureSphere]
   features: []
 connection:

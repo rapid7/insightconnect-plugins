@@ -6,14 +6,13 @@ This plugin utilizes the [Jamf API](https://developer.jamf.com/apis/classic-api/
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* User Management
+* Device Security
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Username and Password, or
+* API Key
 
 # Documentation
 

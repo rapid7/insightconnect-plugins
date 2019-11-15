@@ -5,14 +5,13 @@ This plugin utilizes the [Jenkins Python API](http://git.openstack.org/cgit/open
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Continuous Integration
+* Continuous Deploy
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Username and Password
+* Jenkins Server
 
 # Documentation
 
