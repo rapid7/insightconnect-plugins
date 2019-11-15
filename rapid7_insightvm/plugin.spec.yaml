@@ -16,7 +16,7 @@ tags:
 - insightvm
 - rapid7
 hub_tags:
-  use_cases: [remediation_prioritization, vulnerability_management, reporting_and_analytics]
+  use_cases: [soar, soc_automation, asset_inventory, remediation_prioritization, vulnerability_management, reporting_and_analytics]
   keywords: [insightvm, rapid7]
   features: []
 types:

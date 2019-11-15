@@ -20,7 +20,7 @@ tags:
 - database
 - vulndb
 hub_tags:
-  use_cases: [vulnerability_management, remediation_prioritization]
+  use_cases: [soar, soc_automation, vulnerability_management, remediation_prioritization]
   keywords: [vulnerability, exploit, rapid7, database, vulndb]
   features: []
 enable_cache: true
