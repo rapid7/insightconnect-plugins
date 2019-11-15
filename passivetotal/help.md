@@ -11,7 +11,7 @@ Using innovative techniques and research processes, PassiveTotal provides analys
 # Requirements
 
 * PassiveTotal account
-* PassiveTotal API
+* PassiveTotal API key
 
 # Documentation
 
