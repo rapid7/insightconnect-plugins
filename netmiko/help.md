@@ -1,17 +1,14 @@
 # Description
 
-[Netmiko](https://www.api.netmiko.com) is a network device configuration tool that sends commands over SSHv2.  Netmiko is a fork of Paramiko.
+Netmiko is a network device configuration tool that sends commands over SSHv2. Netmiko is a fork of Paramiko.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Automate network configuration
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
@@ -108,6 +105,5 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [Netmiko](https://github.com/ktbyers/netmiko)
 * [Paramiko](http://www.paramiko.org/)
 
