@@ -11,13 +11,14 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/carbon_black_defense
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.carbonblack.com/
 tags:
 - carbon black
 - defense
 - antivirus
 - cloud
 hub_tags:
-  use_cases: []
+  use_cases: [soar, soc_automation, threat_hunting, threat_detection_and_response, investigations]
   keywords: [carbon black, defense, antivirus, cloud]
   features: []
 types:

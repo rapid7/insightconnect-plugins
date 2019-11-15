@@ -1,18 +1,18 @@
 # Description
 
-[Cb Response](https://www.carbonblack.com/products/cb-response/) is the most complete endpoint detection and response solution available to security teams.
+[Cb Response](https://www.carbonblack.com/products/cb-response/) is the most complete endpoint detection and response solution available to security teams. The InsigthConnect plugin allows you to automate information collection, endpoint isolation and hash blacklisting 
+
 This plugin utilizes the [Cb Response REST API](https://developer.carbonblack.com/reference/enterprise-response/6.1/rest-api/).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Investigate endpoints
+* Blacklist hashes
+* Isolate endpoints
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Example: Requires an API Key from Carbon Black
 
 # Documentation
 

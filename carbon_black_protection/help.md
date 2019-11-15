@@ -1,19 +1,18 @@
 # Description
 
-[Carbon Black Protection](https://www.carbonblack.com/products/cb-protection/) allows users to lock down and harden systems to prevent malware, ransomware, and more.
+[Carbon Black Protection](https://www.carbonblack.com/products/cb-protection/) allows users to lock down and harden systems to prevent malware, ransomware, and more. the InsigthConnect plugin can ban and unban files and manage manage approval requests.
 
 This plugin utilizes the [Carbon Black Protection API](https://developer.carbonblack.com/reference/enterprise-protection/7.2/rest-api/).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Ban and unban files
+* Approve files
+* resolve approval requests
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires an API Key from Carbon Black
 
 # Documentation
 

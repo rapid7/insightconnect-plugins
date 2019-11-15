@@ -1,19 +1,18 @@
 # Description
 
-[Box](https://www.box.com/) is a popular cloud storage solutions for consumers and businesses of any size.
+[Box](https://www.box.com/) is a popular cloud storage solutions for consumers and businesses of any size. Using InsightConnect you can manage users and files.
 
 This plugin utilizes the [Box SDK](https://box-python-sdk.readthedocs.io/en/latest/) Python library.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* add and delete users
+* download and upload files
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Create a RSA token and submit it to box
+* Create a JWT key in box
 
 # Documentation
 
