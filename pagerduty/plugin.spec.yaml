@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: pagerduty
 title: PagerDuty
-description: Leverage PagerDuty for incident management and response
+description: PagerDuty provides enterprise-grade incident management. Leverage PagerDuty for incident management and response with the PagerDuty plugin for InsightConnect
 version: 2.0.0
 vendor: rapid7
 support: community
