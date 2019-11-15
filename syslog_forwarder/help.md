@@ -13,14 +13,13 @@ It supports:
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Forward a custom syslog message
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A host address 
+* A port
+* Type of transport
 
 # Documentation
 

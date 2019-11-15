@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: sumologic
 title: Sumo Logic
-description: Sumo Logic
+description: The Sumo Logic plugin allows you to run a Sumo Logic query and view the results.
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -11,11 +11,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/sumologic
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.sumologic.com/
 tags:
 - sumo logic
 - search
 hub_tags:
-  use_cases: []
+  use_cases: [threat_intel, threat_hunting]
   keywords: [sumo logic, search]
   features: []
 types:

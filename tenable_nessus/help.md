@@ -1,17 +1,20 @@
 # Description
 
+The Tenable Nessus plugin allows you to get, start, and analyze scans. 
+
 Tenable [Nessus Professional](https://www.tenable.com/products/nessus-vulnerability-scanner/nessus-professional) prevents network attacks by identifying the vulnerabilities and configuration issues that hackers use to penetrate your network.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Get a scan
+* Start a scan
+* Get a scan report
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Tenable Nessus access key
+* Tenable Nessus secret key
+* The address of your Tenable Nessus instance
 
 # Documentation
 
