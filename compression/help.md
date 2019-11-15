@@ -1,17 +1,17 @@
 # Description
 
-Compression is useful utility plugin that allows you to compress and decompress files in workflows.
+The Compression plugin for Rapid7 InsightConnect allows users to compress/decompress files using different
+compression algorithms. Use this plugin to help enable interoperability between different services, compress data
+for faster file transmission, and more.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* File compression
+* File decompression
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
