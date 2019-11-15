@@ -4,7 +4,7 @@ product: ["insightconnect"]
 name: openvas
 title: OpenVAS
 description: "Allows users to perform common tasks such as
-starting, stopping, deleting and scheduling scans from an OpenVAS server
+starting, stopping, deleting and scheduling scans from an OpenVAS server"
 version: 1.0.0
 vendor: rapid7
 support: community
