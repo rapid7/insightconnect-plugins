@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: google_admin
 title: Google Apps Admin
-description: Google Admin Actions
+description: Get and suspend users with the Google admin plugin
 version: 1.0.2
 vendor: rapid7
 support: community

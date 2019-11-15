@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: google_drive
 title: Google Drive
-description: Store, access, and share your files in one secure place
+description: Upload and retrieve files from google drive
 version: 2.1.1
 vendor: rapid7
 support: community

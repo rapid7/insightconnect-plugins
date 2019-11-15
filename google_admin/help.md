@@ -1,6 +1,6 @@
 # Description
 
-Provide access to the [Google Apps](https://gsuite.google.com/) Admin API.
+Gsuite administrative functions allow you to manage users. With the InsightConnect plugin suspend users as part of containment or deprovisioning workflows 
 
 # Key Features
 

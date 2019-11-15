@@ -1,6 +1,6 @@
 # Description
 
-[Google Docs](https://developers.google.com/docs/api/reference/rest/v1/documents) allows you to manage and edit Google documents.
+[Google Docs](https://developers.google.com/docs/api/reference/rest/v1/documents) is a online word processor. With the plugin allows you to create and retrieve Google documents.
 
 # Key Features
 

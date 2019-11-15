@@ -1,6 +1,9 @@
 # Description
 
-[Google](https://www.google.com/) allows you to search the world's information, including webpages, images, videos and more.
+[Google](https://www.google.com/) allows you to search the world's information, including webpages, images, videos and more. With this plugin search the web with queries
+
+
+
 This plugin utilizes the Python [google library](https://pypi.python.org/pypi/google) to perform searches.
 
 # Key Features

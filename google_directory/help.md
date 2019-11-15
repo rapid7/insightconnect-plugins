@@ -1,6 +1,6 @@
 # Description
 
-The Google Directory plugin uses the [Google Directory Admin API](https://developers.google.com/admin-sdk/directory/) to manage mobile and Chrome OS devices, groups, group aliases, members, organization units, users, and user aliases.
+The Google Directory plugin allows you to suspend and unsuspend users
 
 # Key Features
 

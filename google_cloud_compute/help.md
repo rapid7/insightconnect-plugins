@@ -1,7 +1,7 @@
 # Description
 
 [Google Compute](https://cloud.google.com/compute/) Google Compute Engine lets you create and run virtual machines on Google infrastructure.
-Compute Engine offers scale, performance, and value that allows you to easily launch large compute clusters on Google's infrastructure.
+Compute Engine offers scale, performance, and value that allows you to easily launch large compute clusters on Google's infrastructure. With the InsightConnect plugin automate administrative tasks like starting and stopping instances
 
 # Key Features
 

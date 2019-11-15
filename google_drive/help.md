@@ -1,6 +1,7 @@
 # Description
 
-This plugin allows interaction with Google Drive.
+This plugin allows you to upload and retrieve files from google drive.
+
 This plugin utilizes the [Google Drive API](https://developers.google.com/drive/v3/web/about-sdk).
 
 # Key Features

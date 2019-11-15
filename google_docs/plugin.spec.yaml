@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: google_docs
 title: Google Docs
-description: Manage and edit Google documents
+description: Create and retrieve Google documents
 version: 1.0.0
 vendor: rapid7
 support: community
