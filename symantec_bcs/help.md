@@ -1,17 +1,16 @@
 # Description
 
+The Symantec BCS plugin allows you to submit a file to Symantec Security Response.
+
 [Symantec BCS](https://submit.symantec.com/websubmit/bcs.cgi) is a suspected infected file or hash submission form that sends data to Symantec Security Response.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Submit a malicious file or hash
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

@@ -1,19 +1,20 @@
 # Description
 
-[Viper](https://viper.li/en/latest/) is a binary analysis and management framework. Viper's fundamental objective is to provide a solution to easily organize your collection of malware and exploit samples as well as your collection of scripts you created, or found over time to facilitate your daily research. Think of it as a Metasploit for malware researchers: it provides a terminal interface that you can use to store, search and analyze arbitrary files.
+[Viper](https://viper.li/en/latest/) is a binary analysis and management framework. Viper's fundamental objective is to provide a solution to easily organize your collection of malware and exploit samples as well as your collection of scripts you created, or found over time to facilitate your daily research. Think of it as a Metasploit for malware researchers.
+The Viper plugins allows you to use Viper's platform to store, search, and analyze files. 
 
 This plugin utilizes the [Viper API](https://viper.li/en/latest/usage/web.html#api)
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Analyze a file 
+* Share malicious files
+* Create and manage projects
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Viper token
+* Viper server URL
 
 # Documentation
 

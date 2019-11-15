@@ -11,7 +11,7 @@ version: 1.0.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/diff
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://www.python.org
+  vendor_url:
 tags:
 - diff
 - utilities

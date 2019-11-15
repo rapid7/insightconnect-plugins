@@ -1,19 +1,16 @@
 # Description
 
-[Urlscan](https://urlscan.io/) is a free URL scanning service.
+The [URLScan](https://urlscan.io/) plugin uses URLScan to analyze urls for malicious indicators.
 
-This plugin utilizes the [Urlscan API](https://urlscan.io/about-api/).
+This plugin utilizes the [URLScan API](https://urlscan.io/about-api/).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Scan a URL and get a report on that URL
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A URLScan API key
 
 # Documentation
 

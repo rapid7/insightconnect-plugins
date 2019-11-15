@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: json_edit
 title: JSON Edit
 description: Provides the ability to edit JSON data
@@ -11,11 +11,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/json_edit
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://json.org
 tags:
 - json
 - utilities
 hub_tags:
-  use_cases: []
+  use_cases: [data_utility]
   keywords: [json, utilities]
   features: []
 actions:

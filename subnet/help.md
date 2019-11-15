@@ -1,18 +1,14 @@
 # Description
 
-The Subnet plugin takes input as a network in CIDR notation and returns useful information, including:
-the number of network, the number of hosts, the ID, host address range, and broadcast address.
+The Subnet plugin takes input as a network in CIDR notation and returns useful information, such as the number of hosts, the ID, host address range, and broadcast address.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Returns network information about CIDR
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

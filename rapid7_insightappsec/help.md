@@ -1,19 +1,17 @@
 # Description
 
-[Rapid7 InsightAppSec](https://www.rapid7.com/products/insightappsec/) is an application security testing tool for the modern web.
+[InsightAppSec’s](https://www.rapid7.com/products/insightappsec/) DAST capabilities and InsightConnect’s automation prowess can help you simplify your SDLC Process with this scan management plugin. The need for automation becomes paramount in the fast moving landscape of modern web scanning and automating you web app scanning with this plugin can save you loads of time to allow you to focus on remediating issues to get your app into product faster!
 
 This plugin utilizes the [Rapid7 InsightAppSec API](https://insightappsec.help.rapid7.com/docs/get-started-with-the-insightappsec-api).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Create and configure scans
+* Run scans and return results
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires an API Key from Insight platform
 
 # Documentation
 

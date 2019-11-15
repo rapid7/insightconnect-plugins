@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: zenhub
 title: ZenHub
-description: Manage ZenHub Epics, Pipelines, and Estimates
+description: The ZenHub plugin allows for agile project management in GitHub.
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -11,11 +11,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/zenhub
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.zenhub.com/
 tags:
 - zenhub
 - agile
 hub_tags:
-  use_cases: []
+  use_cases: [reporting_and_analytics, remediation_ticketing]
   keywords: [zenhub, agile]
   features: []
 connection:

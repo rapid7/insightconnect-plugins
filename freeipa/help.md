@@ -1,7 +1,8 @@
 # Description
 
-The `freeipa` InsightConnect plugin retrieve user details, status and delete user from [FreeIPA](https://www.freeipa.org/) which is an integrated Identity and Authentication solution for Linux/UNIX networked environments.
-This plugin runs commands on a FreeIPA server using this [freeipa](https://github.com/nordnet/python-freeipa-json) python library.
+[FreeIPA](https://www.freeipa.org/) which is an integrated Identity and Authentication solution for Linux/UNIX networked environments. The FreeIPA InsightConnect plugin retrieves user details, status and allows you to deprovision a user.
+
+This plugin runs commands on a FreeIPA server using the [freeipa](https://github.com/nordnet/python-freeipa-json) python library.
 The FreeIPA API is viewable on the FreeIPA server web interface.
 
 # Key Features

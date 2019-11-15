@@ -6,14 +6,11 @@ This plugin utilizes the [Infoblox API](https://www.infoblox.com/wp-content/uplo
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Get information about devices on the network
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* An account from the vendor to login to services
 
 # Documentation
 
