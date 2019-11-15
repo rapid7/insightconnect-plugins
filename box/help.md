@@ -1,6 +1,6 @@
 # Description
 
-[Box](https://www.box.com/) is a popular cloud storage solutions for consumers and businesses of any size. Using InsightConnect you can manage users and files.
+[Box](https://www.box.com/) is a popular cloud storage solutions for consumers and businesses of any size. Using the InsightConnect plugin you can manage users and files.
 
 This plugin utilizes the [Box SDK](https://box-python-sdk.readthedocs.io/en/latest/) Python library.
 
