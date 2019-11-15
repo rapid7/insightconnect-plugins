@@ -1,6 +1,6 @@
 # Description
 
-The Bluecoat Labs plugins enables submitions of suspicous URL to be reviewed by Bluecoat Labs.
+The Bluecoat Labs plugins enables submissions of suspicous URLs to be reviewed by Bluecoat Labs.
 
 # Key Features
 

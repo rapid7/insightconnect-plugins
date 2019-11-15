@@ -1,6 +1,6 @@
 # Description
 
-The Blockade plugins assists with administrating users and incidents of compromise
+The Blockade plugins assists with administrating users and incidents of compromise.
 
 # Key Features
 
