@@ -1,23 +1,21 @@
 # Description
 
-[Bitbucket](https://www.bitbucket.com) is the Git solution for professional teams. This plugin allows management of your Bitbucket account using its API.
+Bitbucket is the Git solution for professional teams. This plugin allows management of your Bitbucket account using its API.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Repository administration
+* User administration
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires Bitbucket account
+* Requires username and API Key from the product
+* API Token must be generated in the product
 
 # Documentation
 
 ## Setup
-
-A Bitbucket account is required to use this plugin.
 
 The connection configuration accepts the following parameters:
 
