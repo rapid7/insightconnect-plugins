@@ -4,7 +4,7 @@
 
 # Key Features
 
-* Team Collaboration
+* Store and retrieve data
 
 # Requirements
 

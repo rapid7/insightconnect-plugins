@@ -5,14 +5,11 @@ This plugin utilizes the [OpenDXL Python Client API](https://github.com/opendxl/
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Publish events to the Data Exchange Layer (DXL)
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
@@ -107,4 +104,3 @@ _This plugin does not contain any custom output types._
 
 * [OpenDXL](https://www.opendxl.com/)
 * [API documentation](https://opendxl.github.io/opendxl-client-python/pydoc/index.html#)
-

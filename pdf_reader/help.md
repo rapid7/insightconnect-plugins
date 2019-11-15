@@ -1,18 +1,16 @@
 # Description
 
 PDF Reader is a plugin for extracting text from a PDF file.
+
 This plugin utilizes a python package called [PyPDF2](https://pypi.org/project/PyPDF2/).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Extract text from a PDF document
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

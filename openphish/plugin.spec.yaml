@@ -3,13 +3,21 @@ extension: plugin
 product: ["insightconnect"]
 name: openphish
 title: "OpenPhish"
-description: "OpenPhish uses proprietary Artificial Intelligence algorithms to automatically identify zero-day phishing sites and provide comprehensive, actionable, real-time threat intelligence"
+description: "OpenPhish is a fully automated self-contained platform for phishing intelligence. Use the OpenPhish plugin to identify zero-day phishing sites and provide real-time threat intelligence"
 version: 1.0.0
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/openphish
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-tags: [ "data enrichment", "threat intelligence"]
+  vendor_url: https://openphish.com/
+tags:
+- "data enrichment"
+- "threat intelligence"
+hub_tags:
+  use_cases: [phishing_investigations]
+  keywords: ["data enrichment", "threat intelligence"]
+  features: []
+
 status: [ "supported" ]
 enable_cache: true
 

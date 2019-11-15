@@ -11,14 +11,11 @@ The Python plugin allows you to run Python 2 code. It includes Python 2.7.15 and
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Run a Python 2 script
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

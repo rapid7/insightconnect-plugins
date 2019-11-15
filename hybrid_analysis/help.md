@@ -1,17 +1,14 @@
 # Description
 
-[Hybrid Analysis](https://www.hybrid-analysis.com/) is a free malware analysis service powered by Payload Security that detects and analyzes unknown threats using a unique Hybrid Analysis technology.
+[Hybrid Analysis](https://www.hybrid-analysis.com/) is a free malware analysis service powered by Payload Security that detects and analyzes unknown threats using a unique Hybrid Analysis technology. This plugin allows you to lookup file hashes to find out if they are malicious. 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Look up a file hash
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A HybridAnalysis API key and token
 
 # Documentation
 

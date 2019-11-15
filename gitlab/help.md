@@ -1,18 +1,20 @@
 # Description
 
 [GitLab](https://www.gitlab.com) is a next generation developer collaboration software with version control capabilities.
+GitLab InsightConnect plugin allows user and issue management.
 This plugin utilizes the [GitLab API](https://docs.gitlab.com/ee/api/).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Block and unblock users
+* Delete ssh keys
+* Retrieve users details
+* Create issues
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* GitLab host URL
+* GitlLab account username and password (or token)
 
 # Documentation
 

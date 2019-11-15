@@ -1,18 +1,17 @@
 # Description
 
 [SQLAlchemy](http://docs.sqlalchemy.org/en/latest/) is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.
-This plugin allows users to run and execute queries against a SQL database.
+This plugin allows users to run and execute queries against a SQL database. 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Run SQL queries
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Type of SQL database
+* The host and port of your SQL database
+* Credentials for your SQL database
 
 # Documentation
 

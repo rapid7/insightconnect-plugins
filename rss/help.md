@@ -7,14 +7,11 @@ Use [input templating](https://docs.komand.com/docs/input-templating), [Python S
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Monitor an RSS feed
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* The URL for the feed you want to monitor
 
 # Documentation
 

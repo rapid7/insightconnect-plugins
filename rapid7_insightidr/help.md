@@ -1,17 +1,15 @@
 # Description
-
-[Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/) is an intruder analytics solution that gives you the confidence to detect and investigate security incidents faster.
+Do more with Investigations in [InsightIDR](https://www.rapid7.com/products/insightidr/) with the InsightConnect plugin. Add indicators to a threat or view the status of an investigation to drive accuracy and faster time to resolutions for your detections.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Set status of investigation
+* Add indicators
+* List investigations
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires an API Key from the Insight platform
 
 # Documentation
 

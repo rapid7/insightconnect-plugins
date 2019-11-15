@@ -2,16 +2,15 @@
 
 The Pork Knocking plugin knocks the specified ports on a host and optionally supports a payload.
 
+Port knocking is a method of externally opening ports on a firewall by generating a connection attempt on a set of prespecified closed ports. Once a correct sequence of connection attempts is received, the firewall rules are dynamically modified to allow the host which sent the connection attempts to connect over specific port(s). A variant called single packet authorization exists, where only a single "knock" is needed, consisting of an encrypted packet.
+
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Port knock a sequence of ports
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

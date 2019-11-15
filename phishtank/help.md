@@ -1,18 +1,15 @@
 # Description
 
 [PhishTank](https://www.phishtank.com/) is a clearing house for information on phishing sites reported by the public plus an open API to integrate the data into anti-phishing applications.
-The PhishTank plugin utilizes the [PhishTank API](https://www.phishtank.com/api_info.php).
+The PhishTank plugin utilizes the [PhishTank API](https://www.phishtank.com/api_info.php). The Phishtank plugin allows you to submit URLs for analysis. 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Submit a URL for analysis
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A PhishTank API key
 
 # Documentation
 

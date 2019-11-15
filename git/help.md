@@ -1,17 +1,18 @@
 # Description
 
 [Git](https://www.git-scm.com/) is a free and open source distributed version control system.
+Git InsightConnect plugin allow you to add, remove, commit files to Git repository.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Add file to Git repository
+* Remove file from Git repository
+* Commit file to Git repository
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Git repository URL
+* Git account's username and password
 
 # Documentation
 

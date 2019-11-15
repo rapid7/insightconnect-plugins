@@ -1,18 +1,16 @@
 # Description
 
 [Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network.
-This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote host via the library.
+This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote host via the library. The SSH plugin allows you to run commands on a remote host. 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Run a command on a remote host
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Credentials for the target remote host
+* Address and port for the target remote host
 
 # Documentation
 

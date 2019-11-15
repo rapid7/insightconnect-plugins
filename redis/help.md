@@ -1,17 +1,16 @@
 # Description
 
+Redis is an in-memory data structure project implementing a distributed, in-memory key-value database with optional durability. Redis supports different kinds of abstract data structures, such as strings, lists, maps, sets, sorted sets, HyperLogLogs, bitmaps, streams, and spatial indexes.
+
 This package allows you to interact with the [Redis](https://redis.io/) database API.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Set and retrieve data from redis. 
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Connection information for your Redis database
 
 # Documentation
 

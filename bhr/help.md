@@ -1,23 +1,20 @@
 # Description
 
-The [Black Hole Router](https://github.com/ncsa/bhr-site) (BHR) site is a Free and Open Source API endpoint tool for router blocks where multiple router backends are supported.
+The Black Hole Router plugin is use to assist with managing networks blocked within Black Hole Router site. 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Identify suspicious network activity
+* Network segment isolation
+* Block network traffic
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires the URL of an accessible instance of the Black Hole Router and an API token.
 
 # Documentation
 
 ## Setup
-
-This plugin requires the URL of an accessible instance of the Black Hole Router and an API token.
 
 The connection configuration accepts the following parameters:
 

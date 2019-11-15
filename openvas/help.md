@@ -22,14 +22,14 @@ the date given to the create_schedule function is given in the UTC timezone.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Run vulnerability scans on networked services
+* Schedule scans
+* Get scan reports
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* OpenVAS server
+* Username and password
 
 # Documentation
 
@@ -325,7 +325,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -339,4 +339,3 @@ This plugin does not contain any troubleshooting information.
 
 * [Example](https://example.com)
 * [Example API](http://docs.example.com)
-

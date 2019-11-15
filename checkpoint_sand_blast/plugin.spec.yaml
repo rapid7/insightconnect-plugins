@@ -1,10 +1,9 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: checkpoint_sand_blast
 title: Checkpoint Sand Blast
-description: Multilayered security technology provides protection against advanced
-  cyber attacks
+description: The Checkpoint Sand Blast plugin extends the Sand Blast service and enables report status and suspicious file upload
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -12,11 +11,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/checkpoint_sand_blast
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url:
 tags:
 - threat intelligence
 - breach prevention
 hub_tags:
-  use_cases: []
+  use_cases: [soc_automation, soar]
   keywords: [threat intelligence, breach prevention]
   features: []
 types:

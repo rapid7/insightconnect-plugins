@@ -1,18 +1,19 @@
 # Description
 
-[Graphite](https://graphiteapp.org/) is an enterprise-ready monitoring tool that allows you store and graph metrics.
+[Graphite](https://graphiteapp.org/) Graphite is an enterprise-ready monitoring tool that runs equally well on cheap hardware or Cloud infrastructure. Teams use Graphite to track the performance of their websites, applications, business services, and networked servers. It marked the start of a new generation of monitoring tools, making it easier than ever to store, retrieve, share, and visualize time-series data. 
+
+The Graphite plugin allows you to store, retrieve, and update your metrics. The plugin will also return a byte array of graphed data. 
+
 This plugin utilizes the [Graphite API](https://graphite-api.readthedocs.io/en/latest/) to help you fetch metrics or render graphs from the time-series database.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Store and retrieve data
+* Graph data
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A Graphite server
 
 # Documentation
 

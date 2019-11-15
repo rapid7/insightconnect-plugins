@@ -1,18 +1,18 @@
 # Description
 
-The [Office365 Admin](https://www.office.com/) plugin allows control of the administrative functions for Office365.
+The [Office365 Admin](https://www.office.com/) plugin enables user management in Office 365. 
+
 This plugin utilizes the [Microsoft Graph API](https://developer.microsoft.com/en-us/graph/docs/concepts/overview).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Add and remove users
+* Assign licenses
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* An Azure application with administrative permissions (User.ReadWrite.All)
+* Azure application credentials
 
 # Documentation
 

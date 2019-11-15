@@ -1,19 +1,14 @@
 # Description
 
-Pushover allows you to send push notifications to Apple, Android, and PC clients.
-
-For more information, please see [Pushover.net](https://pushover.net)
+[Pushover](https://pushover.net) is a simple push notification service that integrates easily into web apps like IFTTT, network monitors like Nagios, shell scripts, servers, and anything else that needs to send alerts to your Android, iPhone, iPad, and Desktop. The Pushover plugin allows you to send Pushover notifications.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Send a notification to a device
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A Pushover API token
 
 # Documentation
 

@@ -1,17 +1,16 @@
 # Description
 
-This utility creates a place to store information across loops and workflows.
+The Storage plugin is a utility that stores information across loops and workflows. It is intended to make extracting small pieces of information from complicated workflows easier. 
+
+This should not be used to store large objects (for example, images, or entire emails)
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Stores information to be retrieved later
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

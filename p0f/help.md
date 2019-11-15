@@ -5,20 +5,17 @@ The p0f plugin runs the tool directly.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Detection of operating systems from PCAP
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -43,7 +40,7 @@ It returns the traffic details including p0f's detection of the operating system
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -51,7 +48,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -65,4 +62,3 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [p0f](http://lcamtuf.coredump.cx/p0f3/)
-

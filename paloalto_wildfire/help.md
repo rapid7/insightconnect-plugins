@@ -1,18 +1,17 @@
 # Description
 
-[Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/subscriptions/wildfire) is a  cloud-based threat analysis service is the industry's most advanced analysis and prevention engine for highly evasive zero-day exploits and malware.
+[Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/subscriptions/wildfire), a cloud-based threat analysis service, is the industry's most advanced analysis and prevention engine for highly evasive zero-day exploits and malware.
 This plugin utilizes the [Pyldfire library](https://pypi.python.org/pypi/pyldfire/7.1.3).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Get vulnerability information for files and URLs
+* Get reports and verdicts on samples
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Palo Alto Wildfire host
+* Palo Alto Wildefire API key
 
 # Documentation
 
@@ -162,7 +161,7 @@ This action is used to query for a file's classification.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -170,7 +169,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -188,4 +187,3 @@ This plugin does not contain any troubleshooting information.
 * [Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/subscriptions/wildfire)
 * [Wildfire Documentation](https://www.paloaltonetworks.com/documentation/80/wildfire)
 * [pyldfire](https://pypi.python.org/pypi/pyldfire/7.1.3)
-

@@ -1,30 +1,27 @@
 # Description
 
 [Duo](https://duo.com/)'s Trusted Access platform verifies the identity of your users with two-factor authentication and
-security health of their devices before they connect to the apps they use. This plugin makes calls to the Duo Auth API V2.
+security health of their devices before they connect to the apps they use. The Duo Auth InsightConnect plugin enables users to create and send push notifications from within automation workflows.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Send push notifications for two-factor authentication
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires a Duo integration key
+* Requires a Duo secret key
+* Requires a Duo hostname
 
 # Documentation
 
 ## Setup
 
-The connection configuration accepts the following parameters:
-
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|api_hostname|string|None|False|API hostname|None|
-|secret_key|password|None|False|None|None|
-|integration_key|string|None|False|None|None|
+|hostname|string|None|True|Enter the Duo API hostname and secret key|None|
+|integration_key|credential_secret_key|None|True|API integration key|None|
+|secret_key|credential_secret_key|None|True|API secret key|None|
 
 ## Technical Details
 

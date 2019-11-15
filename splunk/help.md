@@ -1,18 +1,19 @@
 # Description
 
-The [Splunk](https://www.splunk.com/) plugin allows you to interact with Splunk by hooking alerts to trigger Komand workflows,
-running additional searches, and even inserting data back into Splunk from a Komand workflow.
+[Splunk](https://www.splunk.com/) captures, indexes, and correlates real-time data in a searchable repository from which it can generate graphs, reports, alerts, dashboards, and visualizations.
+Splunk intends to make machine data accessible across an organization by identifying data patterns, providing metrics, diagnosing problems, and providing intelligence for business operations.
+The Splunk plugin allows you to interact with Splunk by hooking alerts to trigger Komand workflows, running additional searches, and even inserting data back into Splunk from a workflow.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Create, manage, and view the results of Splunk searches
+* Manage splunk events
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Splunk credentials
+* The Splunk API port
+* License type
 
 # Documentation
 

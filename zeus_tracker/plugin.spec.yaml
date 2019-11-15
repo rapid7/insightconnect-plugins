@@ -3,14 +3,15 @@ extension: plugin
 product: ["insightconnect"]
 name: zeus_tracker
 title: ZeuS Tracker
-description: ZeuS Command&Control Server Tracking
+description: The ZeuS Command&Control Server Tracking plugin
 version: 1.0.0
 vendor: rapid7
 support: community
-status: ["obsolete"]
+status: [obsolete]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/zeus_tracker
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://zeustracker.abuse.ch/
 tags:
 - feeds
 - c2

@@ -1,25 +1,22 @@
 # Description
 
-Common Event Format (CEF) is an extensible, text-based format that defines a syntax for log records comprised of a
-standard header and a variable extension, formatted as key-value pairs. It is used to promote
-interoperability among various devices and apps.
+Common Event Format (CEF) is an extensible, text-based format that defines a syntax for log records comprised of a standard header and a variable extension, formatted as key-value pairs. It is used to promote	
+interoperability among various devices and apps. This plugin is used for generating and manipulating event in a Common Event Format (CEF).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Generate events in CEF
+* Manipulate events in CEF
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
 ## Setup
 
-This plugin does not require a connection.
+_This plugin does not require a connection._
 
 ## Technical Details
 
