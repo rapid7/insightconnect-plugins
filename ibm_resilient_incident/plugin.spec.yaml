@@ -13,7 +13,6 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.ibm.com/security/intelligent-orchestration/resilient
 tags:
-
   - resilient
   - orchestration
   - incident response

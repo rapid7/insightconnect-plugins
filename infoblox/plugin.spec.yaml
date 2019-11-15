@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [ insightconnect ]
+product: [insightconnect]
 name: infoblox
 title: Infoblox
 description: Infoblox helps with managing and identifying devices connected to networks
@@ -16,7 +16,6 @@ tags:
   - network devices
 hub_tags:
   use_cases: [asset_inventory]
-
   keywords: [infoblox, network]
   features: []
 connection:
