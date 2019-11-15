@@ -6,16 +6,17 @@ title: Duo Admin API
 vendor: rapid7
 support: rapid7
 status: []
-description: Integration for Duo Admin API
+description: Manage Duo users
 version: 3.3.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/duo_admin
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://duo.com/
 tags:
 - duo
 - admin
 hub_tags:
-  use_cases: []
+  use_cases: [soar, user_management, policy_management]
   keywords: [duo, admin]
   features: []
 

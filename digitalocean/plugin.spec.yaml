@@ -6,20 +6,20 @@ title: Digital Ocean
 vendor: rapid7
 support: community
 status: []
-description: DigitalOcean is a simple and robust cloud computing platform, designed
-  for developers
+description: interact with Digital Ocean account for managing accounts, droplets, shapshots, and more.
 version: 1.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/digitalocean
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.digitalocean.com/
 tags:
 - digital ocean
 - vps
 - cloud
 - vm
 hub_tags:
-  use_cases: []
-  keywords: [digital ocean, vps, cloud, vm]
+  use_cases: [data_utility, soar, asset_containment]
+  keywords: [digitalocean, vps, cloud, vm]
   features: []
 enable_cache: false
 types:

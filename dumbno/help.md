@@ -1,24 +1,18 @@
 # Description
 
-[Dumbno](https://github.com/ncsa/dumbno) is free and open source flow shunting software for Arista switches using EOS API.
-This plugin utilizes the Dumbno client library.
+[Dumbno](https://github.com/ncsa/dumbno) is free and open source flow shunting software for Arista switches using EOS API. The InsightConnect plugin can add ACLs to the switches 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Add ACL switch
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
 ## Setup
-
-This plugin requires the Dumbno host address and the port it's running on.
 
 The connection configuration accepts the following parameters:
 

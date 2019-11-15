@@ -1,18 +1,17 @@
 # Description
 
 [Duo](https://duo.com/)'s Trusted Access platform verifies the identity of your users with two-factor authentication and
-security health of their devices before they connect to the apps they use. This plugin makes calls to the Duo Admin API.
+security health of their devices before they connect to the apps they use. The InsightConnect plugin can be used to manage Duo users.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Add and Delete users
+* Enroll users
+* Get User information
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires two secret keys from Duo
 
 # Documentation
 
