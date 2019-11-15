@@ -1,18 +1,17 @@
 # Description
 
-[Phabricator](https://secure.phabricator.com/) is a suite of open source tools for peer code review, task management, and project communication.
+[Phabricator](https://secure.phabricator.com/) is a suite of open source tools for peer code review, task management, and project communication. The Phabricator plugin allows you to setup and manage code reviews. 
+
 This plugin utilizes the [Python Phabricator](https://github.com/disqus/python-phabricator) library.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Create and edit tasks
+* Create projects
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A Phabricator API token
 
 # Documentation
 

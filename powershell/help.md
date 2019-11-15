@@ -1,17 +1,23 @@
 # Description
 
-This plugin runs a PowerShell script on a remote host or locally on the Komand host.
+This plugin runs a PowerShell script on a remote host or locally on the InsightConnect Orchestrator.
+
+PowerShell is a task automation and configuration management framework from Microsoft, consisting of a command-line shell and associated scripting language. Initially a Windows component only, known as Windows PowerShell, it was made open-source and cross-platform on 18 August 2016 with the introduction of PowerShell Core. The former is built on .NET Framework while the latter on .NET Core.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Run a powershell script
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+The requirements for running the Powershell plugin will vary depending on the use case. Your powershell scripts can either be run locally on the InsightConnect Orchestrator or remotely on a powershell enabled server. 
+
+## Remote Requirements
+* A powershell enabled server
+* Administrative credentials to a Powershell enabled server
+
+## Local Requirements
+* Powershell can be run locally on the InsightConnect Orchestrator, in this case, you must ensure connectivity to any network resources the Powershell script will use. Typically this involves opening ports in your firewall or windows servers. 
 
 # Documentation
 
