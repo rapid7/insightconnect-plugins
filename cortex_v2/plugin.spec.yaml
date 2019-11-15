@@ -6,17 +6,19 @@ title: Cortex v2
 vendor: rapid7
 support: community
 status: []
-description: Cortex, an open source and free software for analyzing observables
+description: Cortex is an observable analysis and active response engine. With the Cortex plugin for
+  Rapid7 InsightConnect, users can manage analyzers, jobs, and run file analyzers.
 version: 1.1.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cortex_v2
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.thehive-project.org
 tags:
 - cortex
 - hive
 - intel
 hub_tags:
-  use_cases: []
+  use_cases: [alert_enrichment, data_ingestion, phishing_investigations, threat_detection_and_response]
   keywords: [cortex, hive, intel]
   features: []
 types:

@@ -1,18 +1,21 @@
 # Description
 
-[Cortex](https://github.com/TheHive-Project/Cortex) is a an open source and free software for analyzing observables.
-This plugin utilizes the Cortex API v2 via [cortex4py](https://github.com/TheHive-Project/Cortex4py/blob/master/Usage.md).
+[Cortex](https://github.com/CERT-BDF/Cortex) is an observable analysis and active response engine. 
+With the Cortex plugin for Rapid7 InsightConnect, users can manage analyzers, jobs, and run file analyzers.
+
+Use Cortex within an automation workflow to analyze files using hundreds of analyzers to help determine if they are 
+malicious or safe.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage analyzers
+* Manage jobs
+* Run file analyzers
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* API key
+* Cortex hostname
 
 # Documentation
 
