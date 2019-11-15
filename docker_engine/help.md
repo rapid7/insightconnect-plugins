@@ -12,7 +12,7 @@ This plugin utilizes the [Docker API](https://docs.docker.com/engine/api/) via t
 
 # Requirements
 
-* Setup a publicly-accessible TLS-enabled docker server secured with signed SSL certificates.
+* Setup a publicly-accessible TLS-enabled Docker server secured with signed SSL certificates.
 
 # Documentation
 
