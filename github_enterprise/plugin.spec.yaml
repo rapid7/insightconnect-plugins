@@ -18,7 +18,7 @@ tags:
 - issue
 - authentication
 hub_tags:
-  use_cases: [user_management]
+  use_cases: [soc_automation, user_management]
   keywords: [github, enterprise, issue, authentication]
   features: []
 connection:

@@ -19,7 +19,7 @@ tags:
 - http
 - ftp
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [data_utility, data_ingestion]
   keywords: [url, file, download, http, ftp]
   features: []
 enable_cache: true
