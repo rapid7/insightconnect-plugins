@@ -6,12 +6,12 @@ title: Cb Response
 vendor: rapid7
 support: rapid7
 status: []
-description: Cb Response is the most complete endpoint detection and response solution
-  available to security teams
+description: Automate information collection, endpoint isolation and hash blacklisting
 version: 3.1.7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/carbon_black_response
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.carbonblack.com/
 tags:
 - carbon black
 - response
@@ -19,7 +19,7 @@ tags:
 - cb
 - detection
 hub_tags:
-  use_cases: []
+  use_cases: [alerting_and_notifications, asset_containment, investigations, soar, soc_automation, threat_hunting, threat_detection_and_response]
   keywords: [carbon black, response, endpoint, cb, detection]
   features: []
 enable_cache: true
