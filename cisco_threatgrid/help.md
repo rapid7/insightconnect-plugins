@@ -1,17 +1,17 @@
 # Description
 
-[Cisco ThreatGrid](https://www.cisco.com/c/en/us/products/security/threat-grid/index.html) combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware.
+The `cisco_threatgrid` InsightConnect plugin retrieves malware reports, report samples and URLs for analysis to [Cisco ThreatGrid](https://www.cisco.com/c/en/us/products/security/threat-grid/index.html) server.
+ Cisco_ThreatGrid combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Retrieve sample reports by domain, ID and SHA256
+* Report samples and URLs for analysis
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Cisco ThreatGrid server's region
+* Cisco ThreatGrid API key 
 
 # Documentation
 
