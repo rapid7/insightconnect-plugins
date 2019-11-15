@@ -1,8 +1,10 @@
 # Description
 
-The [Collective Intelligence Framework](http://csirtgadgets.org/collective-intelligence-framework) is a cyber threat intelligence management system.	This plugin is used to manage an instance of Collective Intelligence Framework service.
+The [Collective Intelligence Framework](http://csirtgadgets.org/collective-intelligence-framework) is a cyber threat intelligence management system. 
 It allows you to combine known malicious threat information from many sources and use that information for identification (incident response), detection (IDS) and mitigation (null route).	
-This plugin utilizes the [CIF API](https://github.com/csirtgadgets/massive-octo-spice/wiki/API). It does not support CIFv3. This plugin is used to manage an instance of Collective Intelligence Framework service.
+This plugin is used to manage an instance of Collective Intelligence Framework service. It does not support CIFv3.
+
+This plugin utilizes the [CIF API](https://github.com/csirtgadgets/massive-octo-spice/wiki/API). 
 
 # Key Features
 

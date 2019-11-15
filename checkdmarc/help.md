@@ -1,6 +1,6 @@
 # Description
 
-[Checkdmarc](https://domainaware.github.io/checkdmarc/) is a Python module and command line parser for SPF and DMARC records. The checkdmarc plugin is used to parser SPF and DMARC records.
+[Checkdmarc](https://domainaware.github.io/checkdmarc/) is a Python module and command line parser for SPF and DMARC records. The checkdmarc plugin is used to parse SPF and DMARC records.
 
 # Key Features
 
