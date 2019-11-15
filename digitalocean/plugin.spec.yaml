@@ -18,7 +18,7 @@ tags:
 - cloud
 - vm
 hub_tags:
-  use_cases: [data_utility, soar, asset_containment]
+  use_cases: [soar, asset_containment, asset_inventory, soc_automation]
   keywords: [digitalocean, vps, cloud, vm]
   features: []
 enable_cache: false

@@ -16,7 +16,7 @@ tags:
 - duo
 - admin
 hub_tags:
-  use_cases: [soar, user_management, policy_management]
+  use_cases: [soar, user_management, policy_management, soc_automation]
   keywords: [duo, admin]
   features: []
 
