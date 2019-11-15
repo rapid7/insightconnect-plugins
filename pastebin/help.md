@@ -12,7 +12,7 @@ The Pastebin plugin allows you to post text online, and analyze posts.
 
 * Send text to Pastebin
 * Trigger workflows on new posts
-* Get ana analyze posts
+* Get and analyze posts
 
 # Requirements
 
