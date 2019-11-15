@@ -1,8 +1,7 @@
 # Description
 
-The Sumo Logic plugin allows you to run a Sumo Logic query and view the results.
-
 [Sumo Logic](https://www.sumologic.com/) is a cloud log management and metrics monitoring solution used by IT, Security and Development teams across all customer sizes.
+The Sumo Logic plugin allows you to run a Sumo Logic query and view the results.
 
 # Key Features
 
