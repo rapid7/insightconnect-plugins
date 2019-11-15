@@ -1,6 +1,6 @@
 # Description
 
-[Tcpxtract](http://tcpxtract.sourceforge.net/) is a tool for extracting files from network traffic.
+The [Tcpxtract](http://tcpxtract.sourceforge.net/) plugin is a tool for extracting files from network traffic.
 
 It supports extracting the following file types:
 
@@ -28,14 +28,11 @@ It supports extracting the following file types:
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Extract a file from a PCAP file. 
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
