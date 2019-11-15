@@ -16,7 +16,7 @@ tags:
 - whois
 - ip lookup
 hub_tags:
-  use_cases: [threat_intel, investigations]
+  use_cases: [threat_intel, investigations, soc_automation]
   keywords: [whois, ip lookup]
   features: []
 actions:

@@ -5,7 +5,7 @@ which tracks ZeuS Command & Control servers (hosts) around the world.
 
 # Key Features
 
-* NA - Depreciated
+* Obtain and look up ZeuS indicators
 
 # Requirements
 

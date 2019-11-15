@@ -18,7 +18,7 @@ tags:
 - wazuh
 - hids
 hub_tags:
-  use_cases: [threat_intel, vulnerability_management, log_search,. detection_and_response, asset_containment, asset_inventory]
+  use_cases: [log_search, threat_detection_and_response, asset_containment, asset_inventory, soc_automation]
   keywords: [ossec, wazuh, hids]
   features: []
 types:
