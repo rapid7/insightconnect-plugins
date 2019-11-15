@@ -6,7 +6,7 @@ title: Palo Alto Wildfire
 vendor: rapid7
 support: rapid7
 status: []
-description: Analysis and prevention for highly evasive zero-day exploits and 
+description: Palo Alto Wildfire is a cloud-based threat analysis service. Perform malware analysis with the Palo Alto Wildfire plugin for InsightConnect
 malware
 version: 1.1.0
 resources:
