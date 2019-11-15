@@ -1,7 +1,7 @@
 # Description
 
 [DigitalOcean](https://www.digitalocean.com) is a simple and robust cloud computing platform, designed for developers.
-This plugin allows the user to interact with their Digital Ocean account for managing their account, droplets, shapshots, and more.
+This plugin allows the user to interact with their DigitalOcean account for managing their account, droplets, shapshots, and more.
 
 # Key Features
 
