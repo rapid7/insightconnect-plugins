@@ -10,7 +10,7 @@ support: community
 status: []
 tags: [ "binary", "analysis", "malware", "viper" ]
 hub_tags:
-  use_cases: [threat_intel, threat_hunting]
+  use_cases: [threat_intel, threat_hunting, soc_automation]
   keywords: [binary, analysis, malware, viper]
   features: []
 resources:

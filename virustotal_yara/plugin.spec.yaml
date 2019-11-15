@@ -16,7 +16,7 @@ tags:
 - malware
 - pattern
 hub_tags:
-  use_cases: [threat_hunting, threat_intel]
+  use_cases: [threat_hunting, threat_intel, soc_automation]
   keywords: [malware, pattern, yara, virustotal]
   features: []
 types:
