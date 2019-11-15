@@ -16,7 +16,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
