@@ -5,7 +5,7 @@ The Sumo Logic plugin allows you to run a Sumo Logic query and view the results.
 
 # Key Features
 
-* run a Sumo Logic search query and return the results
+* Run a Sumo Logic search query and return the results
 
 # Requirements
 
