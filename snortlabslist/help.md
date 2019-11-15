@@ -1,18 +1,16 @@
 # Description
 
-The [Snort Labs IP Reputation](http://blog.snort.org/2015/09/ip-blacklist-feed-has-moved-locations.html) list is a IP intelligence list.
-This plugin allows you to query the list for an IP address.
+[Snort Labs List](http://talosintel.com/feeds/ip-filter.blf) is an IP blacklist provided by Snort. 
+Users of this plugin can query it with an IP address to check the status, assisting with alert enrichment and
+other threat intelligence needs.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* IP address blacklist query
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
