@@ -5,14 +5,11 @@ This plugin utilizes [pandoc](https://pandoc.org/) via [pypandoc](https://pypi.p
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Convert from HTML to Markdown and vice-versa
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements_
 
 # Documentation
 
