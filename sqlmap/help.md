@@ -1,18 +1,16 @@
 # Description
 
-[SQLmap](http://sqlmap.org/) is a scalable, open-source security incident response solutions designed for SOCs & CERTs to execute malicious SQL statements to test their backend databases.
-This plugin was tested successfully on the [DWVA](http://www.dvwa.co.uk/) project virtual machine.
+[SQLmap](http://sqlmap.org/) is an open source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database servers. It comes with a powerful detection engine, many niche features for the ultimate penetration tester and a broad range of switches lasting from database fingerprinting, over data fetching from the database, to accessing the underlying file system and executing commands on the operating system via out-of-band connections. 
+
+The SQLMap plugin allows you to scan targets and analyze the results. 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Scan a target
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Host and port of a target machine
 
 # Documentation
 
