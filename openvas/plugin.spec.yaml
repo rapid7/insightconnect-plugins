@@ -5,7 +5,7 @@ name: openvas
 title: OpenVAS
 description: "Allows users to perform common tasks such as
 starting, stopping, deleting and scheduling scans from an OpenVAS server"
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

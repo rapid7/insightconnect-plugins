@@ -4,7 +4,7 @@ product: [insightconnect]
 name: barracuda_waf
 title: Barracuda Web Application Firewall
 description: The Barracuda WAF plugin automates administrative tasks as well as rule creation and modification
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

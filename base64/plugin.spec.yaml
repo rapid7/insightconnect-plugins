@@ -4,7 +4,7 @@ product: [insightconnect]
 name: base64
 title: Base64
 description: Encode and decode data using the base64 alphabet
-version: 1.1.1
+version: 1.1.2
 vendor: rapid7
 support: community
 status: []

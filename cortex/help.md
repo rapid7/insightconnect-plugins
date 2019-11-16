@@ -6,6 +6,7 @@ With the Cortex plugin for Rapid7 InsightConnect, users can manage analyzers, jo
 Use Cortex within an automation workflow to analyze files using hundreds of analyzers to help determine if they are 
 malicious or safe.
 
+* 1.0.1 - New spec and help.md format for the Hub
 Note: This plugin utilizes the older unauthenticated [Cortex v1 API](https://github.com/CERT-BDF/CortexDocs/tree/master/api) via [cortex4py](https://pypi.python.org/pypi/cortex4py/1.0.0) and [requests](http://www.python-requests.org/).
 For users of Cortex 3.1.0+ please use the newer plugin, Cortex v2, which supports authentication.
 
@@ -499,6 +500,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Pin library version to 1.0.0
 * 0.2.1 - SSL bug fix in SDK
 * 0.2.0 - Add File Analyzer action
@@ -510,5 +512,6 @@ This plugin does not contain any troubleshooting information.
 
 * [Cortex](https://github.com/CERT-BDF/Cortex)
 * [Cortex API](https://github.com/CERT-BDF/CortexDocs/tree/master/api)
+* 1.0.1 - New spec and help.md format for the Hub
 * [cortex4py](https://pypi.python.org/pypi/cortex4py/1.0.0)
 

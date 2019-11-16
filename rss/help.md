@@ -171,6 +171,7 @@ Between workflow runs, new items will *not* be reported on.
 
 # Version History
 
+* 1.0.3 - New spec and help.md format for the Hub
 * 1.0.2 - Fixed issue where Poll Feed was logging unnecessary information
 * 1.0.1 - Support web server mode
 * 1.0.0 - Update to v2 Python plugin architecture | Add granular object output

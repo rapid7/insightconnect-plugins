@@ -4,7 +4,7 @@ product: [insightconnect]
 name: subnet
 title: Subnet
 description: The Subnet plugin takes input as a network in CIDR notation and returns useful information, such as the number of hosts, the ID, host address range, and broadcast address
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

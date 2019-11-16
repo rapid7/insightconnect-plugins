@@ -89,6 +89,7 @@ by setting the ORS (Output Record Separator) variable to nothing e.g. `-v ORS= '
 
 # Version History
 
+* 1.2.1 - New spec and help.md format for the Hub
 * 1.2.0 - Support web server mode
 * 1.1.2 - Update to v2 Python plugin architecture
 * 1.1.1 - SSL bug fix in SDK

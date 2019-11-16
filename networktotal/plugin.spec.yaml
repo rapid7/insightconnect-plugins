@@ -4,7 +4,7 @@ product: [insightconnect]
 name: networktotal
 title: Network Total
 description: Networktotal is used to upload a PCAP for analysis
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

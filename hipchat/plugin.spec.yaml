@@ -4,7 +4,7 @@ product: [insightconnect]
 name: hipchat
 title: HipChat
 description: The HipChat plugin can send and receive messages along with managing users
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

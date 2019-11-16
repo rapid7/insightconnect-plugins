@@ -182,6 +182,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.2.1 - New spec and help.md format for the Hub
 * 2.2.0 - New action Get ANC Endpoint
 * 2.1.2 - Fixed issue where Query Endpoint would return an error if endpoint was not found | Update to input description for Query Endpoint
 * 2.1.1 - Fixed issue where error message wasn't printed correctly in case of failure

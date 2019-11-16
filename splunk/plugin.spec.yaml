@@ -4,7 +4,7 @@ product: [insightconnect]
 name: splunk
 title: Splunk
 description: The Splunk plugin allows you to search, monitor, analyze and analyze machine data
-version: 3.0.0
+version: 3.0.1
 vendor: rapid7
 support: rapid7
 status: []

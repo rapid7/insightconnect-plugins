@@ -102,6 +102,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Fix issue where custom_regexes input field in Search action was not working
 * 1.1.0 - Update to v2 Python plugin architecture | Support web server mode
 * 1.0.0 - Initial plugin

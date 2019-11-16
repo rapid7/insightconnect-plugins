@@ -4,7 +4,7 @@ product: [insightconnect]
 name: phishtank
 title: PhishTank
 description: The Phishtank plugin allows you to submit URLs for analysis by the PhishTank community
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

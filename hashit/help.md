@@ -104,6 +104,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 2.0.0 - Rename "Hash a String" action to "Hash String"
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode

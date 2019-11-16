@@ -4,7 +4,7 @@ product: [insightconnect]
 name: rpm
 title: RPM
 description: The RPM plugin allows you to download and analyze an RPM pacakge
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

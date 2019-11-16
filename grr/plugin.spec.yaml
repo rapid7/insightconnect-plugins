@@ -4,7 +4,7 @@ product: [insightconnect]
 name: grr
 title: Google Rapid Response
 description: The GRR plugin allows you to organize and start hunts using GRR
-version: 2.0.0
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []

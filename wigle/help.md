@@ -1056,6 +1056,7 @@ In the case where this plugin is used extensively, the API can respond with 'Too
 
 # Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
 # Links

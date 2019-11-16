@@ -4,7 +4,7 @@ product: [insightconnect]
 name: newrelic
 title: New Relic
 description: Monitors the performance of applications and infrastructure
-version: 2.0.0
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []

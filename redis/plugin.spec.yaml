@@ -4,7 +4,7 @@ product: [insightconnect]
 name: redis
 title: Redis
 description: The Redis plugin allows you to add, update, and manage data in a Redis database
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

@@ -79,6 +79,7 @@ Some web servers do not support cache control mechanisms, or do not use them pro
 
 # Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Support web server mode
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

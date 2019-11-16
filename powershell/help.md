@@ -150,6 +150,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
+* 2.1.1 - New spec and help.md format for the Hub
 * 2.1.0 - Add functionality to allow CredSSP connections
 * 2.0.1 - Fix issue with unicode characters
 * 2.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

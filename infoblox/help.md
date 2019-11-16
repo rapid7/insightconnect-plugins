@@ -315,6 +315,7 @@ When adding a new host make sure that a corresponding network is already created
 
 # Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
 # Links

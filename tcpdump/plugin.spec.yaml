@@ -4,7 +4,7 @@ product: [insightconnect]
 name: tcpdump
 title: Tcpdump
 description: The Tcpdump plugin is used to read contents of a PCAP
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

@@ -7,7 +7,7 @@ vendor: rapid7
 support: community
 status: []
 description: GitLab plugin allows user management and issue management in Gitlab
-version: 1.0.0
+version: 1.0.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/gitlab
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE

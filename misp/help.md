@@ -720,6 +720,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.0.2 - New spec and help.md format for the Hub
 * 3.0.1 - Fix typo in plugin spec
 * 3.0.0 - Fixed issue where Add URLs, Add Context, Add Email Sender, Add Email Subject and Add Email Recipient actions sent requests as a proposal | Fixed an issue where the distribution list was set incorrectly within Add URLs, Add Context, Create an Event, Add Email Sender, Add Email Subject, Add Email Recipient actions
 * 2.0.0 - Updated to new credential types | Update `hostname` variable in Connection to `url`

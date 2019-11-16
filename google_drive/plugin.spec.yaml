@@ -4,7 +4,7 @@ product: [insightconnect]
 name: google_drive
 title: Google Drive
 description: Upload and retrieve files from Google drive
-version: 2.1.1
+version: 2.1.2
 vendor: rapid7
 support: community
 status: []

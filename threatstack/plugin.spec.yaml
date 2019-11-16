@@ -4,7 +4,7 @@ product: [insightconnect]
 name: threatstack
 title: Threat Stack
 description: The Threat Stack plugin is used to get information about alerts, assets, and policies
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

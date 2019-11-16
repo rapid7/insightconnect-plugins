@@ -625,6 +625,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.5.1 - New spec and help.md format for the Hub
 * 1.5.0 - Fix issue where triggers always returned a blank payload
 * 1.4.0 - New trigger Get Alerts | New action Get Machine Action
 * 1.3.0 - New actions Stop and Quarantine File and Run Antivirus Scan

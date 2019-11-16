@@ -4,7 +4,7 @@ product: [insightconnect]
 name: cymon
 title: Cymon
 description: Cymon Open Threat Intelligence
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: [obsolete]

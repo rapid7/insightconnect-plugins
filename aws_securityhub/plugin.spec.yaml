@@ -4,7 +4,7 @@ product: [insightconnect]
 name: aws_securityhub
 title: "AWS Security Hub"
 description: This plugin utilizes AWS Security Hub to lists and describes security hub-aggregated findings and retrieve SQS messages
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: rapid7
 status: []

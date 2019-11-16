@@ -4,7 +4,7 @@ product: [insightconnect]
 name: carbon_black_live_response
 title: Carbon Black Live Response
 description: Delete malicious files
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: rapid7
 status: []

@@ -4,7 +4,7 @@ product: [insightconnect]
 name: checkdmarc
 title: Checkdmarc
 description: The checkdmarc plugin is used to parser SPF and DMARC records
-version: 2.1.0
+version: 2.1.1
 vendor: rapid7
 support: community
 status: []

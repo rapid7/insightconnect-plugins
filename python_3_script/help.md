@@ -102,6 +102,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - Add the ability to download and install third-party libraries for use while configuring the plugin Connection
 * 1.0.6 - Fix issue where undefined output exceptions were not being handled correctly
 * 1.0.5 - Add `utilities` plugin tag for Marketplace searchability

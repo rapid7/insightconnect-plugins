@@ -120,6 +120,7 @@ The FTP user must have permission to execute the respective tasks.
 
 # Version History
 
+* 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - Rename "Upload file" action to "Upload File" | Rename "Download file" action to "Download File" | Rename "Delete file" action to "Delete File"
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK

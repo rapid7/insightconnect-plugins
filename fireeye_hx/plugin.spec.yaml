@@ -4,7 +4,7 @@ product: [insightconnect]
 name: fireeye_hx
 title: "FireEye HX"
 description: The FireEye plugin will allow you to get alerts from a given host
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

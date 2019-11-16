@@ -6,7 +6,7 @@ title: Joe Sandbox
 description: Joe Sandbox Cloud executes files and URLs fully automated in a controlled
   environment and monitors the behavior of applications and the operating system for
   suspicious activities
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

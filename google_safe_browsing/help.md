@@ -104,6 +104,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - Obsolete
 * 1.0.0 - Support web server mode | Update to new credential types
 * 0.1.8 - Bug fix for no results | Updated to v2 architecture

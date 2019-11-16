@@ -4,7 +4,7 @@ product: [insightconnect]
 name: rss
 title: RSS
 description: The RSS plugin allows you to monitor an RSS feed
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []

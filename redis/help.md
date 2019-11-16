@@ -385,6 +385,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Support web server mode | Add actions HMSET, HMGET and HINCRBY
 * 0.1.2 - Update to new plugin architecture, fix action "keys"
 * 0.1.1 - SSL bug fix in SDK

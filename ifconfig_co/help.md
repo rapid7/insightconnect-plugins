@@ -98,6 +98,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Convert to Python 3
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Rename "Lookup Your IP Address" action to "Lookup IP Address" | Rename "Check Your Ports" action to "Check Ports"
 * 0.1.1 - SSL bug fix in SDK

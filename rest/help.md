@@ -342,6 +342,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 3.0.1 - New spec and help.md format for the Hub
 * 3.0.0 - Add basic auth support
 * 2.0.0 - Update connection to handle SSL verification
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode

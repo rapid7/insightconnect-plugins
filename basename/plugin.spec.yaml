@@ -4,7 +4,7 @@ product: [insightconnect]
 name: basename
 title: Basename
 description: This plugin is used to get the last item of a file path or URL using Python's basename utility
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

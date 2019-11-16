@@ -170,6 +170,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Rename "Get indicator" action to "Get Indicator" | Rename "Get event" action to "Get Event"
 * 0.2.3 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

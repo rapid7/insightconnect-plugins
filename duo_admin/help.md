@@ -456,6 +456,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
+* 3.3.2 - New spec and help.md format for the Hub
 * 3.3.1 - Update default `mintime` input and description for `Get Logs` action
 * 3.3.0 - New action Enroll User | Support Duo Admin API v2 where applicable | Various bug fixes & improvements
 * 3.2.0 - New action Get Phones by User ID

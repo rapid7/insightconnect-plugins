@@ -4292,6 +4292,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.5.1 - New spec and help.md format for the Hub
 * 3.5.0 - New Actions Get Vulnerability Details, Create Vulnerability Exception Submission,  Delete Vulnerability Exception, Review Vulnerability Exception  | New Trigger New Vulnerability Exception Activity | Misc. Cleanup
 * 3.4.0 - New Action Get Asset Software | Fix issue with New Scan trigger not properly caching new scan IDs
 * 3.3.1 - Fix issue in Top Remediations action that causes assets without criticality tags to not be returned in asset list

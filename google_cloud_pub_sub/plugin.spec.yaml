@@ -5,7 +5,7 @@ name: google_cloud_pub_sub
 title: Google Cloud Pub Sub
 description: A fully-managed real-time messaging service that allows you to send and
   receive messages
-version: 3.1.1
+version: 3.1.2
 vendor: rapid7
 support: community
 status: []

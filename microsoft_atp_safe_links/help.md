@@ -58,6 +58,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Fixed issue where non-safelinks returned a blank string
 * 1.0.0 - Initial plugin
 

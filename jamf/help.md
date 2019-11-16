@@ -267,6 +267,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Add action to get user location details by device ID
 * 1.0.0 - Initial plugin
 

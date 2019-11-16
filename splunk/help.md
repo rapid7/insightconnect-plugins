@@ -251,6 +251,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 3.0.1 - New spec and help.md format for the Hub
 * 3.0.0 - Remove Komand-specific Alert trigger | Fix invalid output properties | Numerous typographical fixes | Improve error handling | Smaller plugin size due to slim SDK migration | New connection test code
 * 2.0.0 - Support SSL Verify option in the Connection | Improve error handling in Connection | Update documentation
 * 1.1.0 - Add support for user specified number of results in the Search action

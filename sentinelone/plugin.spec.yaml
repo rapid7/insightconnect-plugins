@@ -4,7 +4,7 @@ product: [insightconnect]
 name: sentinelone
 title: SentinelOne
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
-version: 1.1.0
+version: 1.1.1
 vendor: rapid7
 support: rapid7
 status: []

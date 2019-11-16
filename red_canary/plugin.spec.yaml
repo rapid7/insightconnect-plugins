@@ -4,7 +4,7 @@ product: [insightconnect]
 name: red_canary
 title: Red Canary
 description: The RedCanary plugin allows you to manage endpoint detection and respond to threats
-version: 2.1.4
+version: 2.1.5
 vendor: rapid7
 support: rapid7
 status: []

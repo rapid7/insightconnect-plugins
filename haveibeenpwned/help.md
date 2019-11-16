@@ -193,6 +193,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.0.2 - New spec and help.md format for the Hub
 * 4.0.1 - Fix issue with connection exception typo
 * 4.0.0 - Support the v3 API which requires authentication
 * 3.0.1 - Set user-agent string to Rapid7 InsightConnect | Implement use of Retry-After header for rate limit | Update documentation

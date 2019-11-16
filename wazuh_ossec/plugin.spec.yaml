@@ -5,7 +5,7 @@ name: wazuh_ossec
 title: Wazuh OSSEC
 description: Provides security visibility, compliance and infrastructure monitoring
   capabilities
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

@@ -4,7 +4,7 @@ product: [insightconnect]
 name: chardet
 title: Chardet
 description: This plugin is a Python compatible character encoding detector
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

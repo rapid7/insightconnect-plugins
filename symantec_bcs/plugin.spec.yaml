@@ -4,7 +4,7 @@ product: [insightconnect]
 name: symantec_bcs
 title: Symantec Business Critical Services
 description: The Symantec Business Critical Services plugin allows you to submit a file to Symantec Security Response
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

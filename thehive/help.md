@@ -399,6 +399,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.5 - New spec and help.md format for the Hub
 * 2.0.4 - Update to use the `komand/python-2-27-slim-plugin` Docker image to reduce plugin size and to support SSL Verify
 * 2.0.3 - Fix issue where SSL Verify was not used in actions that utilize requests | Updated test method and moved it to connection
 * 2.0.2 - Fix issue where SSL Verify was not used in the connection

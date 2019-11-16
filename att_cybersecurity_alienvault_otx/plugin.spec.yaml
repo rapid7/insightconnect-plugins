@@ -5,7 +5,7 @@ name: att_cybersecurity_alienvault_otx
 title: AT&T Cybersecurity AlienVault Open Threat Exchange
 description: This plugin utilizes AT&T Cybersecurity (AlienVault OTX) to retrieve details about an indicator
  Open Threat Exchange is the neighborhood watch of the global intelligence community
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

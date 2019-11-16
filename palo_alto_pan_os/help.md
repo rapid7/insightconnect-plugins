@@ -567,6 +567,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 1.5.5 - New spec and help.md format for the Hub
 * 1.5.4 - Fix issue where new plugin version was causing SSL to fail
 * 1.5.3 - Fix issue where undefined objects in security configurations caused actions to crash | Add debug logging to assist with future troubleshooting | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
 * 1.5.2 - Fix typo in plugin spec

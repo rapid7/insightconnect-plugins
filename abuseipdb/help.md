@@ -290,6 +290,7 @@ There's a rate limit on the free API service. The following error messags `429 C
 
 # Version History
 
+* 5.0.1 - New spec and help.md format for the Hub
 * 5.0.0 - Mark certain outputs as optional as they are not always returned by the AbuseIPDB service | Clean output of null values
 * 4.0.1 - Transform null value of various output properties of Check IP action to false or empty string.
 * 4.0.0 - Update to APIv2 and new action Get Blacklist

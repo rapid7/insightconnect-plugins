@@ -422,6 +422,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark as Threat and Create IOC Threat
 * 1.0.1 - Update to add Blacklist by IoC Hash and Blacklist by Content Hash
 * 1.0.0 - Initial plugin

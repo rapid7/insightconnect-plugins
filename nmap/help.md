@@ -104,6 +104,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Support web server mode
 * 1.0.0 - Overhaul with additional inputs and typed output
 * 0.2.0 - Update to v2 Python plugin architecture

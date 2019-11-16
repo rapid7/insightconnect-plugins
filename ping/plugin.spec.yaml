@@ -4,7 +4,7 @@ product: [insightconnect]
 name: ping
 title: Ping
 description: The Ping plugin is used to check for network connectivity and response times
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []

@@ -5,7 +5,7 @@ name: elastalert
 title: ElastAlert
 description: "ElastAlert provides easy & flexible alerting with Elasticsearch. Users of the ElastAlert plugin can
 monitor alerts in real-time for automation use"
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

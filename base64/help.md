@@ -72,6 +72,7 @@ characters to `\uffd` or `?`. While ignore will drop the character from the outp
 
 # Version History
 
+* 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Fixed issue where action Decode required error parameter
 * 1.1.0 - Bug fix in decode action, added an option for error handling
 * 1.0.0 - Support web server mode

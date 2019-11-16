@@ -4,7 +4,7 @@ product: [insightconnect]
 name: vmray
 title: VMRay Sandbox
 description: The VMRay plugin allows you to analyze and detect malware before it lands
-version: 4.0.1
+version: 4.0.2
 vendor: rapid7
 support: community
 status: []

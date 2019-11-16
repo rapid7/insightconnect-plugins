@@ -4,7 +4,7 @@ product: [insightconnect]
 name: google_docs
 title: Google Docs
 description: Create and retrieve Google documents
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

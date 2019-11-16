@@ -610,6 +610,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Add discontinuation of Cymon notice
 * 1.0.0 - Initial plugin
 

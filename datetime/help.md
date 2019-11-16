@@ -211,6 +211,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.5 - New spec and help.md format for the Hub
 * 2.0.4 - Update plugin tag from `utility` to `utilities` for Marketplace searchability
 * 2.0.3 - Fixed issue where connection test failed
 * 2.0.2 - Fixed issue where action Date from Epoch will not accept floats

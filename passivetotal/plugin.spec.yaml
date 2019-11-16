@@ -4,7 +4,7 @@ product: [insightconnect]
 name: passivetotal
 title: PassiveTotal
 description: PassiveTotal
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

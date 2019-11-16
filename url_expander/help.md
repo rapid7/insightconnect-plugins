@@ -88,6 +88,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.1.3 - New spec and help.md format for the Hub
 * 1.1.2 - Fix typo in plugin spec
 * 1.1.1 - Add `utilities` plugin tag for Marketplace searchability
 * 1.1.0 - Support web server mode

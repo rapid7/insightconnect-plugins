@@ -4,7 +4,7 @@ product: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto PAN-OS
 description: Manage Palo Alto Networks devices via PAN-OS
-version: 1.5.4
+version: 1.5.5
 vendor: rapid7
 support: rapid7
 status: []

@@ -5,7 +5,7 @@ name: uniq
 title: Uniq
 description: "Uniq removes redundant lines or items from data. Using the Uniq plugin can allow users to deduplicate
 datasets or items prior to processing within a workflow"
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

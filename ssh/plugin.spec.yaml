@@ -4,7 +4,7 @@ product: [insightconnect]
 name: ssh
 title: SSH
 description: The SSH plugin allows you to run commands on a remote host
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []

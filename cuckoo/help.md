@@ -773,6 +773,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Bug fix for Submit Files where Submit ID was required
 * 1.0.0 - Support web server mode | Bug fix for testing outputs | Semver compliance
 * 0.2.3 - Bug fix for Cuckoo API version 2.0.5
