@@ -11,7 +11,7 @@ The Python plugin allows you to run Python 2 code. It includes Python 2.7.15 and
 
 # Key Features
 
-* Run a Python 2 code
+* Run Python 2 code
 
 # Requirements
 
