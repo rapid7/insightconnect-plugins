@@ -6,6 +6,8 @@ title: "OpenPhish"
 description: "OpenPhish is a fully automated self-contained platform for phishing intelligence. Use the OpenPhish plugin to identify zero-day phishing sites and provide real-time threat intelligence"
 version: 1.0.0
 vendor: rapid7
+support: community
+status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/openphish
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -15,10 +17,8 @@ tags:
 - "threat intelligence"
 hub_tags:
   use_cases: [phishing_investigations]
-  keywords: ["data enrichment", "threat intelligence"]
+  keywords: [data enrichment, threat intelligence]
   features: []
-
-status: [ "supported" ]
 enable_cache: true
 
 types:

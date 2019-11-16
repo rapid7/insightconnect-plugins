@@ -20,13 +20,12 @@ This plugin utilizes the [Microsoft Graph API](https://developer.microsoft.com/e
 
 The connection configuration accepts the following parameters:
 
+
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |tenant_id|string|None|True|The ID of the directory that identifies the tenant|None|
 |app_secret|password|None|True|The secret of the registered app that obtained the refresh token|None|
 |app_id|string|None|True|The ID of the registered app that obtained the refresh token|None|
-
-#
 
 ## Technical Details
 
@@ -208,6 +207,21 @@ Example output:
   "success": true
 }
 
+```
+
+#### Get Subscribed SKUs
+
+This action gets a list of commercial subscriptions that an organization has acquired.
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|sku_item|[]skuItem|True|Information about a given SKU|
+
+Example output:
+
+```
 ```
 
 ### Triggers
