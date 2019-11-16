@@ -4,8 +4,8 @@ The Datetime InsightConnect plugin manipulate timestamps using Python's [Maya](h
 
 # Key Features
 
-* Convert a datetime to an Epoch and vice versa
-* Convert a datetime to specified format
+* Convert a Datetime to an Epoch and vice versa
+* Convert a Datetime to specified format
 * Determine the elapsed time between two dates
 
 # Requirements

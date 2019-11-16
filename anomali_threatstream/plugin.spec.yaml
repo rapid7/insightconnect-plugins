@@ -246,7 +246,7 @@ connection:
 actions:
   lookup_ip:
     title: Lookup IP Address
-    description: Lookup an IP address in Anomali
+    description: Lookup an IP address in Anomali ThreatStream
     input:
       ip_address:
         title: IP Address
@@ -261,7 +261,7 @@ actions:
         required: false
   lookup_url:
     title: Lookup URL
-    description: Lookup a URL in Anomali
+    description: Lookup a URL in Anomali ThreatStream
     input:
       url:
         title: URL
@@ -276,7 +276,7 @@ actions:
         required: false
   lookup_hash:
     title: Lookup Hash
-    description: Lookup a file hash in Anomali
+    description: Lookup a file hash in Anomali ThreatStream
     input:
       hash:
         title: Hash
@@ -291,11 +291,11 @@ actions:
         required: false
   import_observable:
     title: Import Observable
-    description: Import observable(s) into Anomali with approval
+    description: Import observable(s) into Anomali ThreatStream with approval
     input:
       file:
         title: File
-        description: File of data to be imported into Anomali
+        description: File of data to be imported into Anomali ThreatStream
         type: file
         required: true
       observable_settings:
