@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run Nmap scan"
+
+
 class Input:
     ARGUMENTS = "arguments"
     HOSTS = "hosts"

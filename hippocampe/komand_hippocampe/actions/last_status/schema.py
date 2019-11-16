@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check if the indexation went well"
+
+
 class Input:
     pass
 

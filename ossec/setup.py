@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='ossec-rapid7-plugin',
       version='1.0.0',
-      description='OSSEC is a free, open-source host-based intrusion detection system',
+      description='OSSEC is a free, open-source host-based intrusion detection system. Using the OSSEC plugin for InsightConnect, users can parse OSSEC alerts into JSON format',
       author='rapid7',
       author_email='',
       url='',

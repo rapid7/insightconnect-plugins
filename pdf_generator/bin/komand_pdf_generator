@@ -7,7 +7,7 @@ from komand_pdf_generator import connection, actions, triggers
 Name = 'PDF Generator'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'The Portable Document Format (PDF) is a file format developed by Adobe in the 1990s to present documents, including text formatting and images, in a manner independent of application software, hardware, and operating systems'
+Description = 'The PDF plugin allows the user to create PDF reports from workflow data'
 
 
 class ICONPdfGenerator(komand.Plugin):

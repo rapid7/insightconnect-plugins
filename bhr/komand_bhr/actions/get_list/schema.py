@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get list of current blocks"
+
+
 class Input:
     pass
 

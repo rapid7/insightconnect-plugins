@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Monitor for tweets of interest"
+
+
 class Input:
     
     INTERVAL = "interval"

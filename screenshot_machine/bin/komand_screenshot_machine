@@ -7,7 +7,7 @@ from komand_screenshot_machine import connection, actions, triggers
 Name = 'Screenshot Machine'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Screenshot Machine'
+Description = 'The Screenshot Machine plugin allows you to capture screenshots'
 
 
 class ICONScreenshotMachine(komand.Plugin):

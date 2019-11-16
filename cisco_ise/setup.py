@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='cisco_ise-rapid7-plugin',
       version='2.2.0',
-      description='Cisco Identity Services Engine allows users to gain awareness of everything hitting their networks',
+      description='This plugin utilizes Cisco Identity Services Engine to retrieve ANC details, endpoint details and manage Quarantine Cisco Identity Services Engine allows users to gain awareness of everything hitting their networks',
       author='rapid7',
       author_email='',
       url='',

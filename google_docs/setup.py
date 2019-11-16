@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='google_docs-rapid7-plugin',
       version='1.0.0',
-      description='Manage and edit Google documents',
+      description='Create and retrieve Google documents',
       author='rapid7',
       author_email='',
       url='',

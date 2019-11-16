@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='tcpxtract-rapid7-plugin',
       version='1.0.0',
-      description='A tool for extracting files from network traffic',
+      description='The Tcpxtract plugin is a tool for extracting files from network traffic',
       author='rapid7',
       author_email='',
       url='',

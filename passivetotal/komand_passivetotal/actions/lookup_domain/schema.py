@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup Domain"
+
+
 class Input:
     DOMAIN = "domain"
     

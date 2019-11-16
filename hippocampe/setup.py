@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='hippocampe-rapid7-plugin',
       version='1.0.0',
-      description='Hippocampe is a threat feed aggregator, which creates a threat feed memory and allows queries through a REST API or from a Web UI',
+      description='The Hippocampe plugin allows for advanced queries and management of your Hippocampe feeds',
       author='rapid7',
       author_email='',
       url='',

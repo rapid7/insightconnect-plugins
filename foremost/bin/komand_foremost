@@ -7,7 +7,7 @@ from komand_foremost import connection, actions, triggers
 Name = 'Foremost'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'A data carving tool to recover files'
+Description = 'The Foremost plugin will take a disk image and attempt to recover files from it'
 
 
 class ICONForemost(komand.Plugin):

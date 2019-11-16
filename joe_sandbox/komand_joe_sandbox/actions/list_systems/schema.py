@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve a list of systems on the server"
+
+
 class Input:
     pass
 

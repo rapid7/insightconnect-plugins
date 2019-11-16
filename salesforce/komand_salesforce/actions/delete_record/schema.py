@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete a record"
+
+
 class Input:
     OBJECT_NAME = "object_name"
     RECORD_ID = "record_id"
@@ -33,8 +37,8 @@ class DeleteRecordInput(komand.Input):
     }
   },
   "required": [
-    "record_id",
-    "object_name"
+    "object_name",
+    "record_id"
   ]
 }
     """)

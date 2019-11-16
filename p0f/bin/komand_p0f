@@ -7,7 +7,7 @@ from komand_p0f import connection, actions, triggers
 Name = 'p0f'
 Vendor = 'rapid7'
 Version = '1.0.1'
-Description = 'A tool to perform passive OS fingerprinting'
+Description = 'P0f is a free and open source passive OS fingerprinting tool. Users can perform passive OS fingerprinting with the p0f plugin for InsightConnect'
 
 
 class ICONP0f(komand.Plugin):

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup that returns an incident that includes a list of fields and their record IDs, names, and set values"
+
+
 class Input:
     BUSINESS_OBJECT_ID = "business_object_id"
     PUBLIC_ID = "public_id"
@@ -63,8 +67,8 @@ class LookupIncidentOutput(komand.Output):
     }
   },
   "required": [
-    "success",
-    "raw_response"
+    "raw_response",
+    "success"
   ]
 }
     """)

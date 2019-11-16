@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='openphish-rapid7-plugin',
       version='1.0.0',
-      description='OpenPhish uses proprietary Artificial Intelligence algorithms to automatically identify zero-day phishing sites and provide comprehensive, actionable, real-time threat intelligence',
+      description='OpenPhish is a fully automated self-contained platform for phishing intelligence. Use the OpenPhish plugin to identify zero-day phishing sites and provide real-time threat intelligence',
       author='rapid7',
       author_email='',
       url='',

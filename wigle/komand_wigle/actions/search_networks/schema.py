@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query the WiGLE network database for paginated results based on multiple criteria"
+
+
 class Input:
     ENCRYPTION = "encryption"
     ENDTRANSID = "endTransID"
@@ -221,11 +225,11 @@ class SearchNetworksOutput(komand.Output):
     }
   },
   "required": [
-    "results",
-    "totalResults",
     "first",
     "last",
-    "resultCount"
+    "resultCount",
+    "results",
+    "totalResults"
   ],
   "definitions": {
     "location": {
@@ -458,13 +462,13 @@ class SearchNetworksOutput(komand.Output):
         }
       },
       "required": [
-        "trilong",
         "firsttime",
         "lasttime",
-        "trilat",
+        "lastupdt",
         "qos",
         "transid",
-        "lastupdt"
+        "trilat",
+        "trilong"
       ],
       "definitions": {
         "location": {

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup IPStack Information for a Host"
+
+
 class Input:
     HOST = "host"
     

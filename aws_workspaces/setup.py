@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='aws_workspaces-rapid7-plugin',
       version='1.0.0',
-      description='Amazon WorkSpaces is a fully managed desktop computing service in the cloud that allows its customers to provide cloud-based desktops to their end-users',
+      description='This plugin utilizes Amazon WorkSpaces product to create workspaces. Amazon WorkSpaces is a fully managed desktop computing service in the cloud that allows its customers to provide cloud-based desktops to their end-users',
       author='rapid7',
       author_email='',
       url='',

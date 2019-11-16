@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Transmit a file for processing and incorporation into the database"
+
+
 class Input:
     DONATE = "donate"
     FILE = "file"
@@ -120,9 +124,9 @@ class UploadFileOutput(komand.Output):
         }
       },
       "required": [
-        "timeTaken",
-        "filesize",
         "filename",
+        "filesize",
+        "timeTaken",
         "transids"
       ],
       "definitions": {

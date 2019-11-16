@@ -6,8 +6,8 @@ from icon_checkmarx_cxsast import connection, actions, triggers
 
 Name = 'Checkmarx CxSAST'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Static analysis solution used to identify security vulnerabilities in custom code and open source components'
+Version = ''
+Description = 'The Checkmarx CxSAST plugin access CxSAST service to manage projects and scans'
 
 
 class ICONCheckmarxCxsast(komand.Plugin):

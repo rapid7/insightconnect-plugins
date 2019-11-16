@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves new events from McAfee ESM"
+
+
 class Input:
     
     FIELDS = "fields"
@@ -67,9 +71,9 @@ class GetNewEventsInput(komand.Input):
     }
   },
   "required": [
-    "timerange",
     "fields",
-    "filters"
+    "filters",
+    "timerange"
   ],
   "definitions": {
     "field": {

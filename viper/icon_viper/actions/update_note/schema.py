@@ -28,26 +28,31 @@ class UpdateNoteInput(komand.Input):
     "body": {
       "type": "string",
       "title": "Note Description",
+      "description": "Note body",
       "order": 5
     },
     "id": {
       "type": "integer",
       "title": "Note ID",
+      "description": "Note ID",
       "order": 3
     },
     "malware_sha256": {
       "type": "string",
       "title": "Malware SHA256",
+      "description": "Malware SHA256",
       "order": 2
     },
     "project_name": {
       "type": "string",
       "title": "Project Name",
+      "description": "Project name",
       "order": 1
     },
     "title": {
       "type": "string",
       "title": "Note Title",
+      "description": "Note title",
       "order": 4
     }
   },
@@ -74,6 +79,7 @@ class UpdateNoteOutput(komand.Output):
     "note": {
       "$ref": "#/definitions/Note",
       "title": "Note",
+      "description": "Updated note",
       "order": 1
     }
   },

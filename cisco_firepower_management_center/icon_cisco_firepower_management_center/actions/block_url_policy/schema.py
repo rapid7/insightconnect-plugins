@@ -32,13 +32,13 @@ class BlockUrlPolicyInput(komand.Input):
     "rule_name": {
       "type": "string",
       "title": "Access Rule Name",
-      "description": "Name for Access Rule to be created",
+      "description": "Name for the Access Rule to be created",
       "order": 3
     },
     "url_objects": {
       "type": "array",
       "title": "URL Objects",
-      "description": "URL Objects to block",
+      "description": "URL objects to block",
       "items": {
         "$ref": "#/definitions/url_object"
       },

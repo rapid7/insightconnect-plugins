@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a firewall rule in the specified project using the data included in the request"
+
+
 class Input:
     ALLOWED = "allowed"
     CREATIONTIMESTAMP = "creationTimestamp"
@@ -128,8 +132,8 @@ class InsertFirewallInput(komand.Input):
     }
   },
   "required": [
-    "name",
-    "allowed"
+    "allowed",
+    "name"
   ],
   "definitions": {
     "allowed": {

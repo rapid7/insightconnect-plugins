@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a NonHTTPBased policy"
+
+
 class Input:
     POLICY = "policy"
     

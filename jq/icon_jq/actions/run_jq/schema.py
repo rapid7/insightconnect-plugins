@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Pass the given JSON to the jq command, using the given flags and filter"
+
+
 class Input:
     FILTER = "filter"
     FLAGS = "flags"

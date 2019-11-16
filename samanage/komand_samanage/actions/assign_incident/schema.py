@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Assign a person to an incident"
+
+
 class Input:
     ASSIGNEE = "assignee"
     INCIDENT_ID = "incident_id"
@@ -32,8 +36,8 @@ class AssignIncidentInput(komand.Input):
     }
   },
   "required": [
-    "incident_id",
-    "assignee"
+    "assignee",
+    "incident_id"
   ]
 }
     """)

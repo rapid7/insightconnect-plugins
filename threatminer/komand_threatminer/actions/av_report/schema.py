@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "AV Report"
+
+
 class Input:
     QUERY = "query"
     

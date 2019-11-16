@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new event"
+
+
 class Input:
     DESCRIPTION = "description"
     PARAMS = "params"
@@ -72,10 +76,10 @@ class AddEventInput(komand.Input):
     }
   },
   "required": [
-    "type",
-    "title",
     "description",
-    "source"
+    "source",
+    "title",
+    "type"
   ]
 }
     """)

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='crits-rapid7-plugin',
       version='1.0.0',
-      description='CRITs is an open source malware and threat repository for conducting malware analyses',
+      description='CRITs is an open source malware and threat repository for conducting malware analyses. With the CRITs plugin for Rapid7 InsightConnect, users can manage actors, events, collections, domains, and more',
       author='rapid7',
       author_email='',
       url='',

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all SSH keys from the account"
+
+
 class Input:
     pass
 

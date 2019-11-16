@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Revert configuration from previous iteration"
+
+
 class Input:
     APP_ID = "app_id"
     ID = "id"

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='qualys_ssl-rapid7-plugin',
       version='1.0.1',
-      description='Qualys SSL Labs is a collection of documents, tools and thoughts related to SSL',
+      description='The Qualys SSL plugin allows the user to get information and test SSL servers',
       author='rapid7',
       author_email='',
       url='',

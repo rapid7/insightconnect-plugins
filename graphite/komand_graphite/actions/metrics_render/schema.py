@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Render metrics data as a graph"
+
+
 class Input:
     FORMAT = "format"
     FROM = "from"

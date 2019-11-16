@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Extract files from pcap"
+
+
 class Input:
     FILE = "file"
     

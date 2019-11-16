@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a content rule for the given service"
+
+
 class Input:
     EXTENDED_MATCH = "extended_match"
     EXTENDED_MATCH_SEQUENCE = "extended_match_sequence"
@@ -78,14 +82,14 @@ class CreateContentRuleInput(komand.Input):
     }
   },
   "required": [
-    "web_firewall_policy",
-    "host_match",
-    "url_match",
     "extended_match",
     "extended_match_sequence",
-    "virtual_service_id",
+    "host_match",
     "name",
-    "status"
+    "status",
+    "url_match",
+    "virtual_service_id",
+    "web_firewall_policy"
   ]
 }
     """)

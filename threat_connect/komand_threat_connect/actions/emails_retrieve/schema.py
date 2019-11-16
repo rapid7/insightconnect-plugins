@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve ThreatConnect emails"
+
+
 class Input:
     ADVERSARY_ID = "adversary_id"
     DOCUMENT_ID = "document_id"

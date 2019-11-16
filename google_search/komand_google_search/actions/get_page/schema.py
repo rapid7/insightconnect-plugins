@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Request the given URL and return the response page, using the cookie jar"
+
+
 class Input:
     URL = "url"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Destroy a direct message"
+
+
 class Input:
     MESSAGE_ID = "message_id"
     

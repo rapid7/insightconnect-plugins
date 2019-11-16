@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return URLs from a Google Search"
+
+
 class Input:
     LANG = "lang"
     NUM = "num"
@@ -65,12 +69,12 @@ class SearchInput(komand.Input):
     }
   },
   "required": [
-    "query",
     "lang",
-    "stop",
     "num",
     "only_standard",
-    "pause"
+    "pause",
+    "query",
+    "stop"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Download a file by URL"
+
+
 class Input:
     CHECKSUM = "checksum"
     IS_VERIFY = "is_verify"
@@ -49,8 +53,8 @@ class GetFileInput(komand.Input):
     }
   },
   "required": [
-    "url",
-    "is_verify"
+    "is_verify",
+    "url"
   ]
 }
     """)

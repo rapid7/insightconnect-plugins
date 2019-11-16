@@ -7,7 +7,7 @@ from komand_bhr import connection, actions, triggers
 Name = 'BHR'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Block addresses using the Black Hole Router'
+Description = 'The Black Hole Router plugin is use to assist with managing networks blocked within Black Hole Router site'
 
 
 class ICONBhr(komand.Plugin):

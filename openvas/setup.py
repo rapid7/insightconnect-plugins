@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='openvas-rapid7-plugin',
       version='1.0.0',
-      description='The Open Vulnerability Assessment System (OpenVAS)',
+      description='Allows users to perform common tasks such as starting, stopping, deleting and scheduling scans from an OpenVAS server',
       author='rapid7',
       author_email='',
       url='',

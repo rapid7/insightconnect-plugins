@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check TXT records on a domain"
+
+
 class Input:
     HOSTNAME = "hostname"
     

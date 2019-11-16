@@ -7,7 +7,7 @@ from komand_subnet import connection, actions, triggers
 Name = 'Subnet'
 Vendor = 'rapid7'
 Version = '1.0.1'
-Description = 'Return Useful Subnet Information'
+Description = 'The Subnet plugin takes input as a network in CIDR notation and returns useful information, such as the number of hosts, the ID, host address range, and broadcast address'
 
 
 class ICONSubnet(komand.Plugin):

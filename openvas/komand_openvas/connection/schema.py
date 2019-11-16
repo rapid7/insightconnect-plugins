@@ -45,10 +45,10 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "server",
     "credentials",
-    "timeout",
-    "ssl_verify"
+    "server",
+    "ssl_verify",
+    "timeout"
   ],
   "definitions": {
     "credential_username_password": {

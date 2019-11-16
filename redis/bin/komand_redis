@@ -7,7 +7,7 @@ from komand_redis import connection, actions, triggers
 Name = 'Redis'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'An open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker'
+Description = 'The Redis plugin allows you to add, update, and manage data in a Redis database'
 
 
 class ICONRedis(komand.Plugin):

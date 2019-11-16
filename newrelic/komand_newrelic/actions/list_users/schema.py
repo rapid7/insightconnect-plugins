@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Show a paginated list of all users. Users can be filtered by their IDs or email"
+
+
 class Input:
     EMAIL = "email"
     IDS = "ids"

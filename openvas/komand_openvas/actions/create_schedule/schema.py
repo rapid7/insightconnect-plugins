@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a schedule to run a scan on"
+
+
 class Input:
     DURATION = "duration"
     FIRST_TIME = "first_time"
@@ -48,8 +52,8 @@ class CreateScheduleInput(komand.Input):
     }
   },
   "required": [
-    "name",
-    "first_time"
+    "first_time",
+    "name"
   ],
   "definitions": {
     "datetime": {

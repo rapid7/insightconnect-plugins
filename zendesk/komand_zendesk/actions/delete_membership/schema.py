@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete organization membership"
+
+
 class Input:
     MEMBERSHIP_ID = "membership_id"
     

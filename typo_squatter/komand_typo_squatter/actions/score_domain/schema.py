@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get phishing score for domain. score > 90: Very Suspicous, > 65 likely phising"
+
+
 class Input:
     DOMAIN = "domain"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return the last query date for every source"
+
+
 class Input:
     pass
 

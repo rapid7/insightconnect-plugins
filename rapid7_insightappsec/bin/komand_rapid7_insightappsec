@@ -7,7 +7,7 @@ from komand_rapid7_insightappsec import connection, actions, triggers
 Name = 'Rapid7 InsightAppSec'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Application security testing for the modern web'
+Description = 'This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan'
 
 
 class ICONRapid7Insightappsec(komand.Plugin):

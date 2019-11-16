@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='imperva_securesphere-rapid7-plugin',
       version='1.0.0',
-      description='Imperva SecureSphere WAF protects your applications and data from cyber-attacks. The industry leading SecureSphere WAF blocks technical, business logic botnets and DDoS attacks',
+      description='Imperva SecureSphere WAF protects your applications and data from cyber-attacks.  It blocks technical, business logic botnets and DDoS attacks',
       author='rapid7',
       author_email='',
       url='',

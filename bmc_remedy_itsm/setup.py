@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='bmc_remedy_itsm-rapid7-plugin',
       version='1.7.0',
-      description='Transform your service desk with the right ITSM solution',
+      description='Create update and close BMC Remedy ITSM Incidents',
       author='rapid7',
       author_email='',
       url='',

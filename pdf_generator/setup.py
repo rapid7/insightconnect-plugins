@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='pdf_generator-rapid7-plugin',
       version='1.0.0',
-      description='The Portable Document Format (PDF) is a file format developed by Adobe in the 1990s to present documents, including text formatting and images, in a manner independent of application software, hardware, and operating systems',
+      description='The PDF plugin allows the user to create PDF reports from workflow data',
       author='rapid7',
       author_email='',
       url='',

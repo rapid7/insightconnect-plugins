@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get GeoIP Info for a Host"
+
+
 class Input:
     HOST = "host"
     

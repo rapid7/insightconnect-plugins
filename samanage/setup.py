@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='samanage-rapid7-plugin',
       version='1.0.0',
-      description='Samanage is an enterprise service-desk and IT asset-management provider',
+      description='The Samanage plugin allows you to start workflows on new incidents, manage incidents, and manage users',
       author='rapid7',
       author_email='',
       url='',

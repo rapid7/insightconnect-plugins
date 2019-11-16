@@ -7,7 +7,7 @@ from komand_opendxl import connection, actions, triggers
 Name = 'OpenDXL'
 Vendor = 'rapid7'
 Version = '1.1.1'
-Description = 'OpenDXL is an initiative to create adaptive systems of interconnected services that communicate and share information for real-time, accurate security decisions and actions'
+Description = 'Communicate and share information for real-time, accurate security decisions and actions using OpenDXL'
 
 
 class ICONOpendxl(komand.Plugin):

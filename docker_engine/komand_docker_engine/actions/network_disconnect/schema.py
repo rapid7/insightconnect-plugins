@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Disconnect a container from a network by ID"
+
+
 class Input:
     CONTAINER_ID = "container_id"
     NETWORK_ID = "network_id"

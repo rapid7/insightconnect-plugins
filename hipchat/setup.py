@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='hipchat-rapid7-plugin',
       version='1.0.0',
-      description='HipChat is group chat built for teams & business',
+      description='The HipChat plugin can send and receive messages along with managing users',
       author='rapid7',
       author_email='',
       url='',

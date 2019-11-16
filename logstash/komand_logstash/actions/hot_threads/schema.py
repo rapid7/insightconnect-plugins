@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves the current hot threads for Logstash"
+
+
 class Input:
     HUMAN = "human"
     IGNORE_IDLE_THREADS = "ignore_idle_threads"

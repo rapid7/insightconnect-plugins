@@ -27,21 +27,25 @@ class CreateNoteInput(komand.Input):
     "body": {
       "type": "string",
       "title": "Note Description",
+      "description": "Note body",
       "order": 4
     },
     "malware_sha256": {
       "type": "string",
       "title": "Malware SHA256",
+      "description": "Malware SHA256",
       "order": 2
     },
     "project_name": {
       "type": "string",
       "title": "Project Name",
+      "description": "Project name",
       "order": 1
     },
     "title": {
       "type": "string",
       "title": "Note Title",
+      "description": "Note title",
       "order": 3
     }
   },
@@ -67,6 +71,7 @@ class CreateNoteOutput(komand.Output):
     "note": {
       "$ref": "#/definitions/Note",
       "title": "Note",
+      "description": "New note",
       "order": 1
     }
   },

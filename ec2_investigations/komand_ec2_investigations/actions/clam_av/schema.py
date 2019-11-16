@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Scan directory with ClamAV"
+
+
 class Input:
     DIRECTORY = "directory"
     INSTANCE_ID = "instance_id"
@@ -53,11 +57,11 @@ class ClamAvInput(komand.Input):
     }
   },
   "required": [
-    "private_key",
-    "user",
     "directory",
     "instance_id",
-    "region"
+    "private_key",
+    "region",
+    "user"
   ]
 }
     """)

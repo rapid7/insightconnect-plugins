@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates or Resolves an Alert in Carbon Black"
+
+
 class Input:
     ID = "id"
     STATUS = "status"

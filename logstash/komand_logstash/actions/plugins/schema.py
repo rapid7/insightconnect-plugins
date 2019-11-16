@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves information about all Logstash plugins that are currently installed"
+
+
 class Input:
     pass
 

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check TCP Port on Public IP Address"
+
+
 class Input:
     PORT = "port"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve details about an action taken on a machine"
+
+
 class Input:
     ACTION_ID = "action_id"
     

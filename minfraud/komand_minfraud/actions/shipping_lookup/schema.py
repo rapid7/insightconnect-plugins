@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query shipping address info"
+
+
 class Input:
     ADDRESS = "address"
     SHIPPING_ADDRESS = "shipping_address"

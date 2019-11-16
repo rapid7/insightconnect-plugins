@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete virtual service with service ID"
+
+
 class Input:
     ID = "id"
     

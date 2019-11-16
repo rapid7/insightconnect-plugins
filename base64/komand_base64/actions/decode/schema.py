@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Decode Base64 to data"
+
+
 class Input:
     BASE64 = "base64"
     ERRORS = "errors"

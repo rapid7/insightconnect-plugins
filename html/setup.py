@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='html-rapid7-plugin',
       version='1.2.0',
-      description='Validate or convert an HTML document',
+      description='The HTML plugin will validate HTML, convert an HTML document to another format, or strip a HTML document of all tags',
       author='rapid7',
       author_email='',
       url='',

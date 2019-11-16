@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get alerts by filter"
+
+
 class Input:
     END = "end"
     FIELDS = "fields"
@@ -72,8 +76,8 @@ class GetAlertsOutput(komand.Output):
     }
   },
   "required": [
-    "count",
-    "alerts"
+    "alerts",
+    "count"
   ]
 }
     """)

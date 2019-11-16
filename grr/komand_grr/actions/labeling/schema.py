@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Label clients based on search"
+
+
 class Input:
     LABEL = "label"
     QUERY = "query"
@@ -35,8 +39,8 @@ class LabelingInput(komand.Input):
     }
   },
   "required": [
-    "query",
-    "label"
+    "label",
+    "query"
   ]
 }
     """)

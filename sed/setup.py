@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='sed-rapid7-plugin',
       version='2.0.1',
-      description='Run the GNU stream editor on strings and files',
+      description='The Sed plugin allows you to run the GNU stream editor on strings and files',
       author='rapid7',
       author_email='',
       url='',

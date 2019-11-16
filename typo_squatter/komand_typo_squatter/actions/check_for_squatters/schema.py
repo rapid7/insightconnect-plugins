@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Look for potential typo squatters"
+
+
 class Input:
     DOMAIN = "domain"
     FLAG = "flag"

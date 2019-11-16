@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='carbon_black_defense-rapid7-plugin',
       version='1.1.1',
-      description='Next-generation antivirus and EDR in one cloud-delivered platform',
+      description='Find events and retrieve details for specific events',
       author='rapid7',
       author_email='',
       url='',

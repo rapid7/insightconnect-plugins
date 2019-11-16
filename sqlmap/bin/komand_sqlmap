@@ -4,10 +4,10 @@ import komand
 from komand_sqlmap import connection, actions, triggers
 
 
-Name = 'SQLmap'
+Name = 'SQLMap'
 Vendor = 'rapid7'
 Version = '1.1.0'
-Description = 'An open-source penetration testing tool that performs the process of SQL injection'
+Description = 'The SQLMap plugin allows you to scan targets and analyze the results'
 
 
 class ICONSqlmap(komand.Plugin):

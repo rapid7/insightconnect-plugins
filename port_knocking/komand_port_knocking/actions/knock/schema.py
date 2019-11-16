@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Knocks the specified ports on a host"
+
+
 class Input:
     HOST = "host"
     PORTS = "ports"

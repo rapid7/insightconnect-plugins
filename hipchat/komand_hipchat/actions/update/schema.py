@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update a user"
+
+
 class Input:
     EMAIL = "email"
     ID_OR_EMAIL = "id_or_email"
@@ -92,9 +96,9 @@ class UpdateInput(komand.Input):
     }
   },
   "required": [
-    "mention_name",
     "email",
     "id_or_email",
+    "mention_name",
     "name"
   ]
 }

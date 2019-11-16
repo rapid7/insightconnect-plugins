@@ -36,9 +36,9 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "port",
     "credentials",
-    "hostname"
+    "hostname",
+    "port"
   ],
   "definitions": {
     "credential_username_password": {

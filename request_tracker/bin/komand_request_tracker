@@ -7,7 +7,7 @@ from komand_request_tracker import connection, actions, triggers
 Name = 'Request Tracker'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'The open-source enterprise grade issue and ticket tracking system'
+Description = 'The Request Tracker plugin allows you to create and manage tickets in Request Tracker'
 
 
 class ICONRequestTracker(komand.Plugin):

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='sophos_xg_firewall-rapid7-plugin',
       version='2.0.0',
-      description='Next Generation Endpoint Protection and Enterprise Firewall',
+      description='The Sophos XG Firewall plugin allows you to manage your Sophos XG Firewall through policies',
       author='rapid7',
       author_email='',
       url='',

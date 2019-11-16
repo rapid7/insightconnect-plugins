@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='typo_squatter-rapid7-plugin',
       version='1.0.0',
-      description='Look for typosquatters on a domain',
+      description='Typo Squatter detects cybersquatting of domains and allows for domain scoring. This plugin can be used to aid in phishing investigation and analysis',
       author='rapid7',
       author_email='',
       url='',

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Searching for indicators of compromise stored in ThreatExchange"
+
+
 class Input:
     LIMIT = "limit"
     SINCE = "since"
@@ -284,8 +288,8 @@ class ThreatIndicatorsOutput(komand.Output):
     }
   },
   "required": [
-    "paging",
-    "data"
+    "data",
+    "paging"
   ],
   "definitions": {
     "cursors": {

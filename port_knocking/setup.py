@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='port_knocking-rapid7-plugin',
       version='1.0.0',
-      description='Knocks the specified ports on a host, optionally including a payload',
+      description='The Pork Knocking plugin knocks the specified ports on a host and optionally supports a payload',
       author='rapid7',
       author_email='',
       url='',

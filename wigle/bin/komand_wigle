@@ -7,7 +7,7 @@ from komand_wigle import connection, actions, triggers
 Name = 'WiGLE'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'WiGLE (Wireless Geographic Logging Engine) consolidates location and information of wireless networks world-wide to a central database, and has user-friendly desktop and web applications that can map, query and update the database via the web'
+Description = 'The WiGLE (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks'
 
 
 class ICONWigle(komand.Plugin):

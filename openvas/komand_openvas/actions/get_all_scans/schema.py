@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a list of all scans in the OpenVAS server"
+
+
 class Input:
     pass
 

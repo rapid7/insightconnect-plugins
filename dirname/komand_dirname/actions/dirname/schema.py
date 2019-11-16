@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get the directory name of a path"
+
+
 class Input:
     PATH = "path"
     

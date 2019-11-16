@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a snapshot from a volume"
+
+
 class Input:
     SNAPSHOT_NAME = "snapshot_name"
     VOLUME_ID = "volume_id"
@@ -32,8 +36,8 @@ class CreateSnapshotFromVolumeInput(komand.Input):
     }
   },
   "required": [
-    "volume_id",
-    "snapshot_name"
+    "snapshot_name",
+    "volume_id"
   ]
 }
     """)

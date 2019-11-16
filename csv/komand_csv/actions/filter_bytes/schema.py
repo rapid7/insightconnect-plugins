@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Keep fields from base64 CSV file"
+
+
 class Input:
     CSV = "csv"
     FIELDS = "fields"

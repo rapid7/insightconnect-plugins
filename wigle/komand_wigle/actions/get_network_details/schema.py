@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get details and observation records for a single network"
+
+
 class Input:
     BASESTATION = "basestation"
     CID = "cid"
@@ -405,13 +409,13 @@ class GetNetworkDetailsOutput(komand.Output):
         }
       },
       "required": [
-        "trilong",
         "firsttime",
         "lasttime",
-        "trilat",
+        "lastupdt",
         "qos",
         "transid",
-        "lastupdt"
+        "trilat",
+        "trilong"
       ],
       "definitions": {
         "location": {

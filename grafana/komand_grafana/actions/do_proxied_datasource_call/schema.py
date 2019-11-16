@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Proxies all calls to the actual datasource"
+
+
 class Input:
     DATASOURCE_ID = "datasource_id"
     PARAMETERS = "parameters"

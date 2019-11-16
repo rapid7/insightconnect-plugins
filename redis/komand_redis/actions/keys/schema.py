@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return keys matching pattern"
+
+
 class Input:
     PATTERN = "pattern"
     

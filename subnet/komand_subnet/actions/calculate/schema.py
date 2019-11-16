@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns Subnet Information for IP and Netmask"
+
+
 class Input:
     CIDR = "cidr"
     

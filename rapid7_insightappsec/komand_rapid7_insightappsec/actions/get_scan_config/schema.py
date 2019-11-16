@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a scan configuration"
+
+
 class Input:
     SCAN_CONFIG_ID = "scan_config_id"
     

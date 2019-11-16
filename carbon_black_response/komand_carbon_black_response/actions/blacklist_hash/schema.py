@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Ban a hash given its MD5"
+
+
 class Input:
     MD5_HASH = "md5_hash"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new incident"
+
+
 class Input:
     ASSIGNEE = "assignee"
     CATEGORY_NAME = "category_name"
@@ -104,8 +108,8 @@ class CreateIncidentInput(komand.Input):
   },
   "required": [
     "name",
-    "requester",
-    "priority"
+    "priority",
+    "requester"
   ]
 }
     """)

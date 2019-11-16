@@ -257,7 +257,6 @@ _This plugin does not contain any custom output types._
 * 1.0.1 - Fix issue where json module was not imported in Search action
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Support free Splunk license
 * 0.2.4 - SSL bug fix in SDK
-* 0.2.4 - SSL bug fix in SDK
 * 0.2.3 - UTF-8 encode events in the insert action
 * 0.2.2 - Fix bug when using multiple alert names
 * 0.2.1 - Bugfix in connection attempts

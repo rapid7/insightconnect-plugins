@@ -7,7 +7,7 @@ from komand_tenable_io import connection, actions, triggers
 Name = 'TenableIO'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Scan external assets with TenableIO'
+Description = 'The TenableIO plugin allows you to launch scans and analyze reports'
 
 
 class ICONTenableIo(komand.Plugin):

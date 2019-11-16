@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get alerts that match a given key to its value"
+
+
 class Input:
     
     KEY = "key"

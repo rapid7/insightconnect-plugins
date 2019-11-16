@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search for any object with an IP address"
+
+
 class Input:
     IP = "ip"
     

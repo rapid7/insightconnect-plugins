@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='google_admin-rapid7-plugin',
       version='1.0.2',
-      description='Google Admin Actions',
+      description='Get and suspend users with the Google admin plugin',
       author='rapid7',
       author_email='',
       url='',

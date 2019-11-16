@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List all asset list pages and exports"
+
+
 class Input:
     LIMIT = "limit"
     OFFSET = "offset"

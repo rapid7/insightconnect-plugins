@@ -7,7 +7,7 @@ from komand_splunk import connection, actions, triggers
 Name = 'Splunk'
 Vendor = 'rapid7'
 Version = '3.0.0'
-Description = 'Splunk provides the leading platform for Operational Intelligence. Customers use Splunk to search, monitor, analyze and visualize machine data'
+Description = 'The Splunk plugin allows you to search, monitor, analyze and analyze machine data'
 
 
 class ICONSplunk(komand.Plugin):

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Compress bytes"
+
+
 class Input:
     ALGORITHM = "algorithm"
     BYTES = "bytes"
@@ -41,8 +45,8 @@ class CompressBytesInput(komand.Input):
     }
   },
   "required": [
-    "bytes",
-    "algorithm"
+    "algorithm",
+    "bytes"
   ]
 }
     """)

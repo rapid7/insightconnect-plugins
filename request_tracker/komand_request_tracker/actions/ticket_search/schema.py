@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets tickets matching defined parameters"
+
+
 class Input:
     KEYWORDS = "keywords"
     ORDER = "order"

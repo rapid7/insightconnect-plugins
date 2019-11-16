@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Adds a watchlist"
+
+
 class Input:
     INDEX_TYPE = "index_type"
     NAME = "name"
@@ -44,8 +48,8 @@ class AddWatchlistInput(komand.Input):
     }
   },
   "required": [
-    "name",
     "index_type",
+    "name",
     "query"
   ]
 }

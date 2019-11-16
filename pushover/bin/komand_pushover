@@ -7,7 +7,7 @@ from komand_pushover import connection, actions, triggers
 Name = 'Pushover.net'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Send push messages through Pushover.net'
+Description = 'The Pushover plugin allows you to send Pushover notifications'
 
 
 class ICONPushover(komand.Plugin):

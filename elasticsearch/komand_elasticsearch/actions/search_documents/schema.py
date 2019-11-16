@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Execute a search query and get back search hits that match the query"
+
+
 class Input:
     _INDEX = "_index"
     _TYPE = "_type"

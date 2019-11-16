@@ -7,7 +7,7 @@ from komand_github import connection, actions, triggers
 Name = 'GitHub'
 Vendor = 'rapid7'
 Version = '2.1.0'
-Description = 'GitHub is a web-based Git or version control repository and Internet hosting service'
+Description = 'Github plugin allows users and issues management in Github'
 
 
 class ICONGithub(komand.Plugin):

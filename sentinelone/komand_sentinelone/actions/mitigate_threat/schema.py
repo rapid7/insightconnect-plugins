@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Apply a mitigation action to a threat"
+
+
 class Input:
     ACTION = "action"
     THREAT_ID = "threat_id"
@@ -39,8 +43,8 @@ class MitigateThreatInput(komand.Input):
     }
   },
   "required": [
-    "threat_id",
-    "action"
+    "action",
+    "threat_id"
   ]
 }
     """)

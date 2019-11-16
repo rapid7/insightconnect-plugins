@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='ssh-rapid7-plugin',
       version='1.0.2',
-      description='The SSH protocol is a method for secure remote login from one computer to another',
+      description='The SSH plugin allows you to run commands on a remote host',
       author='rapid7',
       author_email='',
       url='',

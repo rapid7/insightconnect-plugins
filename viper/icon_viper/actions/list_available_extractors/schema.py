@@ -32,6 +32,7 @@ class ListAvailableExtractorsOutput(komand.Output):
     "extractors": {
       "type": "array",
       "title": "Archive Extractor",
+      "description": "Archive extractor",
       "items": {
         "$ref": "#/definitions/Archive"
       },

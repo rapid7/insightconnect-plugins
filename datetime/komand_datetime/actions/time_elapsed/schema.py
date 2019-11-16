@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Determine the elapsed time between two dates"
+
+
 class Input:
     FIRST_TIME = "first_time"
     RESULT_UNIT = "result_unit"
@@ -53,8 +57,8 @@ class TimeElapsedInput(komand.Input):
   },
   "required": [
     "first_time",
-    "second_time",
-    "result_unit"
+    "result_unit",
+    "second_time"
   ]
 }
     """)
@@ -83,8 +87,8 @@ class TimeElapsedOutput(komand.Output):
     }
   },
   "required": [
-    "time_unit",
-    "difference"
+    "difference",
+    "time_unit"
   ]
 }
     """)

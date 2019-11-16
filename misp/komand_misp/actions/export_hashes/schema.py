@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Export hashes from HIDS database"
+
+
 class Input:
     FORMAT = "format"
     FROM = "from"
