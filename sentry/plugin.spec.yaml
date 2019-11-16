@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: sentry
 title: Sentry
-description: "Sentry is an open-source error tracking tool that helps developers monitor and fix crashes in real time.
+description: "Sentry is an open source error tracking tool that helps developers monitor and fix crashes in real time.
 Users can manage issues and events with the Sentry plugin for Rapid7 InsightConnect"
 version: 1.0.0
 vendor: rapid7
