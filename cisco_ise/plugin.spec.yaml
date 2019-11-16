@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: cisco_ise
 title: Cisco ISE
-description: This plugin utilizes Cisco Identity Services Engine to retrieve ANC details, endpoint details and manage Quarantine.
+description: This plugin utilizes Cisco Identity Services Engine to retrieve ANC details, endpoint details and manage Quarantine
  Cisco Identity Services Engine allows users to gain awareness of everything hitting their networks
 version: 2.2.0
 vendor: rapid7

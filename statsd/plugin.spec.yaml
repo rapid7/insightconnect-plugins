@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: statsd
 title: Statsd
-description: The Statsd plugin will allow you to create metrics from your workflow.
+description: The Statsd plugin will allow you to create metrics from your workflow
 version: 1.0.0
 vendor: rapid7
 support: community
