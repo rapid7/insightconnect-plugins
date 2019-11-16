@@ -6,7 +6,7 @@ This package allows you to interact with the [Redis](https://redis.io/) database
 
 # Key Features
 
-* Set and retrieve data from redis. 
+* Set and retrieve data from Redis. 
 
 # Requirements
 
