@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: passivetotal
 title: PassiveTotal
 description: PassiveTotal
@@ -16,7 +16,7 @@ tags:
 - passivetotal
 - threat intelligence
 hub_tags:
-  use_cases: [investigations, threat_intel, threat_detection_and_response, soc_automation]
+  use_cases: [soar, investigations, threat_intel, threat_detection_and_response, soc_automation]
   keywords: [passivetotal, threat intelligence]
   features: []
 connection:

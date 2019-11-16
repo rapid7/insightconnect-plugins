@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: presto
 title: Presto
 vendor: rapid7
@@ -17,7 +17,7 @@ tags:
 - pyhive
 - database
 hub_tags:
-  use_cases: [data_ingestion, data_aggregation]
+  use_cases: [soar, data_ingestion, data_aggregation]
   keywords: [presto, pyhive, database]
   features: []
 types:

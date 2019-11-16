@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: tenable_nessus
 title: Tenable Nessus
 vendor: rapid7
@@ -17,7 +17,7 @@ tags:
 - nessus
 - vulnerability scanner
 hub_tags:
-  use_cases: [vulnerability_management]
+  use_cases: [soar, vulnerability_management]
   keywords: [tenable, nessus, vulnerability scanner]
   features: []
 types:

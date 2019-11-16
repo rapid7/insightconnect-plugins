@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: rpm
 title: RPM
 description: The RPM plugin allows you to download and analyze an RPM pacakge
@@ -16,7 +16,7 @@ tags:
 - rpm
 - package
 hub_tags:
-  use_cases: [patch_management, application_security]
+  use_cases: [soar, patch_management, application_security]
   keywords: [rpm, package]
   features: []
 enable_cache: true

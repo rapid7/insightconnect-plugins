@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: google_search
 title: Google Search
 description: Search the worlds information, including webpages, images, videos and
@@ -18,7 +18,7 @@ tags:
 - web
 - search
 hub_tags:
-  use_cases: [investigations, data_ingestion]
+  use_cases: [soar, investigations, data_ingestion]
   keywords: [google, web, search]
   features: []
 actions:

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: trello
 title: Trello
 description: Boards, lists, and cards enable you to organize and prioritize your projects in a fun, flexible and rewarding way
@@ -15,7 +15,7 @@ tags:
 - trello
 - lists
 hub_tags:
-  use_cases: []
+  use_cases: [soar, ]
   keywords: [trello, lists]
   features: []
 connection:

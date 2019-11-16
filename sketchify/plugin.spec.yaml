@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: sketchify
 title: Sketchify
 description: "Sketchify is a service used to turn any link into one that appears suspicious. With the Sketchify plugin
@@ -22,7 +22,7 @@ tags:
 - offense
 - pentest
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [sketchify, url, link, phishing, offense, pentest, verylegit]
   features: []
 enable_cache: false

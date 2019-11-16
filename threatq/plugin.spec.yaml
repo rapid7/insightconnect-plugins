@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: threatq
 title: Threat Quotient
 vendor: rapid7
@@ -17,7 +17,7 @@ tags:
 - threat
 - intel
 hub_tags:
-  use_cases: [alerting_and_notifications, threat_intel, threat_hunting]
+  use_cases: [soar, alerting_and_notifications, threat_intel, threat_hunting]
   keywords: [threat quotient, threatq, threat, intel]
   features: []
 types:

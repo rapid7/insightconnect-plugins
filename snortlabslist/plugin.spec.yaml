@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: snortlabslist
 title: Snort Labs IP Reputation
 description: "Snort Labs List is an IP blacklist service provided by Snort. Users of this plugin can query with
@@ -18,7 +18,7 @@ tags:
 - intel
 - reputation
 hub_tags:
-  use_cases: [soc_automation]
+  use_cases: [soar, soc_automation]
   keywords: [ip, intel, reputation]
   features: []
 actions:

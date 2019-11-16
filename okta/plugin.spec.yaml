@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: okta
 title: Okta
 vendor: rapid7
@@ -20,7 +20,7 @@ tags:
 - saml
 - enterprise
 hub_tags:
-  use_cases: [policy_management, soc_automation, user_management]
+  use_cases: [soar, policy_management, soc_automation, user_management]
   keywords: [okta, sso, provisioning, deprovisioning, saml, enterprise]
   features: []
 enable_cache: true

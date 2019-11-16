@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: dirname
 title: Dirname
 description: This plugin gets the directory name of a file path or protocol and domain of a URL
@@ -16,7 +16,7 @@ tags:
 - dirname
 - utilities
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [dirname, utilities]
   features: []
 actions:

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: salesforce
 title: Salesforce
 description: The Salesforce plugin allows you to search, update, and manage salesforce records
@@ -18,7 +18,7 @@ tags:
 - analysis
 - crm
 hub_tags:
-  use_cases: [remediation_ticketing, reporting_and_analytics, soc_automation]
+  use_cases: [soar, remediation_ticketing, reporting_and_analytics, soc_automation]
   keywords: [marketing, sales, analysis, crm]
   features: []
 types:

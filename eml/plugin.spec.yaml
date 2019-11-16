@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: eml
 title: EML
 description: The EML plugins will parse and extract data from an EML file
@@ -16,7 +16,7 @@ tags:
 - eml
 - mail
 hub_tags:
-  use_cases: [data_utility, phishing_investigations]
+  use_cases: [soar, data_utility, phishing_investigations]
   keywords: [eml, mail]
   features: []
 types:

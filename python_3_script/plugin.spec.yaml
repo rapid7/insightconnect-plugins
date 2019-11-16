@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: python_3_script
 title: Python 3 Script
 vendor: rapid7
@@ -19,7 +19,7 @@ tags:
  - scripting
  - utilities
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [python, python3, scripting, utilities]
   features: []
 

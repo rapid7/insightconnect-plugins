@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: thehive
 title: TheHive
 description: "TheHive is a scalable, open source security incident response solution designed for
@@ -19,7 +19,7 @@ tags:
 - intel
 - case
 hub_tags:
-  use_cases: [remediation_ticketing]
+  use_cases: [soar, remediation_ticketing]
   keywords: [thehive, intel, case]
   features: []
 enable_cache: true

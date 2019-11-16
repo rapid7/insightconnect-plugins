@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: shodan
 title: Shodan
 description: "Shodan is a search engine for internet-connected devices. Using the Shodan plugin for Rapid7 InsightConnect,
@@ -18,7 +18,7 @@ tags:
 - scan
 - public
 hub_tags:
-  use_cases: [investigations]
+  use_cases: [soar, investigations]
   keywords: [intel, scan, public, shodan]
   features: []
 connection:

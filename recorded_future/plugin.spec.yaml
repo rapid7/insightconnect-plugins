@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: recorded_future
 title: Recorded Future
 vendor: rapid7
@@ -21,7 +21,7 @@ tags:
 - threat analysis
 - vulnerability prioritization
 hub_tags:
-  use_cases: [soc_automation, threat_detection_and_response]
+  use_cases: [soar, soc_automation, threat_detection_and_response]
   keywords: [recorded future, threat intelligence, machine learning, threat analysis, vulnerability prioritization]
   features: []
 enable_cache: false

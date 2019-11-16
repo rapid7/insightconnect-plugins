@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: wigle
 title: WiGLE
 description: The WiGLE (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks
@@ -17,7 +17,7 @@ tags:
 - location
 - wireless
 hub_tags:
-  use_cases: [threat_intel]
+  use_cases: [soar, threat_intel]
   keywords: [network, location, wireless, wigle]
   features: []
 types:

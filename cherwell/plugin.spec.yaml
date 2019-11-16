@@ -17,7 +17,7 @@ tags:
 - itsm
 - it
 hub_tags:
-  use_cases: [investigations, soar, soc_automation, threat_detection_and_response, remediation_ticketing]
+  use_cases: [soar, investigations, soc_automation, threat_detection_and_response, remediation_ticketing]
   keywords: [cherwell, itsm, it]
   features: []
 connection:

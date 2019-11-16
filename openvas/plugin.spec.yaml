@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: openvas
 title: OpenVAS
 description: "Allows users to perform common tasks such as
@@ -18,7 +18,7 @@ tags:
 - vulnerability
 - scanner
 hub_tags:
-  use_cases: [vulnerability_management]
+  use_cases: [soar, vulnerability_management]
   keywords: [openvas, vulnerability, scanner]
   features: []
 types:

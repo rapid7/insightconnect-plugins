@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: sqlmap
 title: SQLMap
 description: The SQLMap plugin allows you to scan targets and analyze the results
@@ -19,7 +19,7 @@ tags:
 - injection
 - database
 hub_tags:
-  use_cases: [threat_hunting, vulnerability_management, application_security]
+  use_cases: [soar, threat_hunting, vulnerability_management, application_security]
   keywords: [vulnerability, exploit, sqlmap, injection, database]
   features: []
 enable_cache: true

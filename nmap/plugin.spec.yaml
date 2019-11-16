@@ -18,7 +18,7 @@ tags:
 - auditing
 - network
 hub_tags:
-  use_cases: [soc_automation, soar, vulnerability_management, penetration_testing ]
+  use_cases: [soar, soc_automation, vulnerability_management, penetration_testing ]
   keywords: [nmap, scanner, auditing, network]
   features: []
 types:

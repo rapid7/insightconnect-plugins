@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: port_knocking
 title: Port Knocking
 vendor: rapid7
@@ -18,7 +18,7 @@ tags:
 - knockd
 - ssh
 hub_tags:
-  use_cases: [threat_hunting, penetration_testing]
+  use_cases: [soar, threat_hunting, penetration_testing]
   keywords: [ip address, port knock, hostname, knockd, ssh]
   features: []
 enable_cache: false

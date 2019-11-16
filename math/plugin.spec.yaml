@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: math
 title: Math
 description: Basic mathematical operations
@@ -18,7 +18,7 @@ tags:
 - utilities
 - calculator
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [math, computation, utilities, calculator]
   features: []
 actions:

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: syslog_forwarder
 title: Syslog Forwarder
 description: The Syslog Forwarder plugin will forward messages to a syslog server
@@ -16,7 +16,7 @@ tags:
 - syslog
 - logs
 hub_tags:
-  use_cases: [log_search, alerting_and_notifications]
+  use_cases: [soar, log_search, alerting_and_notifications]
   keywords: [syslog, logs]
   features: []
 enable_cache: false

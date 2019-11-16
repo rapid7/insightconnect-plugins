@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: trufflehog
 title: TruffleHog
 description: The TruffleHog plugin searches through git repositories for high entropy strings and secrets digging deep into commit history
@@ -19,7 +19,7 @@ tags:
 - regex
 - trufflehog
 hub_tags:
-  use_cases: [log_search, soc_automation]
+  use_cases: [soar, log_search, soc_automation]
   keywords: [entropy, secret]
   features: []
 enable_cache: true

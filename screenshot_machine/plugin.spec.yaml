@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: screenshot_machine
 title: Screenshot Machine
 description: The Screenshot Machine plugin allows you to capture screenshots
@@ -16,7 +16,7 @@ tags:
 - screenshot
 - url
 hub_tags:
-  use_cases: [data_utility, reporting_and_analytics, threat_intel, soc_automation]
+  use_cases: [soar, data_utility, reporting_and_analytics, threat_intel, soc_automation]
   keywords: [screenshot, url]
   features: []
 connection:

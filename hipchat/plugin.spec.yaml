@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: hipchat
 title: HipChat
 description: The HipChat plugin can send and receive messages along with managing users
@@ -16,7 +16,7 @@ tags:
 - hipchat
 - chat
 hub_tags:
-  use_cases: [user_management, alerting_and_notifications]
+  use_cases: [soar, user_management, alerting_and_notifications]
   keywords: [hipchat, chat]
   features: []
 enable_cache: true

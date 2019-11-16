@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: advanced_regex
 title: Advanced Regex
 description: This plugin performs advanced regex operations on a string using Python regex
@@ -16,7 +16,7 @@ tags:
 - data manipulation
 - utility
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [data manipulation, utility]
   features: []
 enable_cache: true

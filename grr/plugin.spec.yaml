@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: grr
 title: Google Rapid Response
 description: The GRR plugin allows you to organize and start hunts using GRR
@@ -20,7 +20,7 @@ tags:
 - label
 - list
 hub_tags:
-  use_cases: [soc_automation, threat_intel, threat_hunting, threat_detection_and_response]
+  use_cases: [soar, soc_automation, threat_intel, threat_hunting, threat_detection_and_response]
   keywords: [incident response, google, grr, hunt, label, list]
   features: []
 enable_cache: true

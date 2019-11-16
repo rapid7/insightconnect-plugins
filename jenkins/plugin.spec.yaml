@@ -18,7 +18,7 @@ tags:
 - ci
 - build
 hub_tags:
-  use_cases: [ci_cd]
+  use_cases: [soar, ci_cd]
   keywords: [jenkins, software development, ci, build]
   features: []
 types:

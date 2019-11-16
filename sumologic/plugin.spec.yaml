@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: sumologic
 title: Sumo Logic
 description: The Sumo Logic plugin allows you to run a Sumo Logic query and view the results
@@ -16,7 +16,7 @@ tags:
 - sumo logic
 - search
 hub_tags:
-  use_cases: [threat_intel, threat_hunting, data_ingestion]
+  use_cases: [soar, threat_intel, threat_hunting, data_ingestion]
   keywords: [sumo logic, search]
   features: []
 types:

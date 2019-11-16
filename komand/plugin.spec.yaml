@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: komand
 title: Komand
 description: Komand Meta-Actions
@@ -17,7 +17,7 @@ tags:
 - komand
 - job
 hub_tags:
-  use_cases: [soc_automation, soar]
+  use_cases: [soar, soc_automation]
   keywords: [komand, job]
   features: []
 connection:

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: try_bro
 title: Try Bro
 description: "With the Try Bro plugin for Rapid7 InsightConnect, users can use a free instance of Bro Network Security
@@ -19,7 +19,7 @@ tags:
 - pcap
 - ids
 hub_tags:
-  use_cases: [threat_detection_and_response, threat_hunting, investigations]
+  use_cases: [soar, threat_detection_and_response, threat_hunting, investigations]
   keywords: [bro, nsm, pcap, ids]
   features: []
 enable_cache: false

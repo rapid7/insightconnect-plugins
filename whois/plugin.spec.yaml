@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: whois
 title: WHOIS
 description: The WHOIS plugin enables address and domain lookups in the WHOIS databases
@@ -16,7 +16,7 @@ tags:
 - whois
 - ip lookup
 hub_tags:
-  use_cases: [threat_intel, investigations, soc_automation]
+  use_cases: [soar, threat_intel, investigations, soc_automation]
   keywords: [whois, ip lookup]
   features: []
 actions:

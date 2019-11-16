@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: smb
 title: SMB
 description: "Server Message Block (SMB) is a protocol used for interacting with files on an SMB server. Using this
@@ -18,7 +18,7 @@ tags:
 - samba
 - cifs
 hub_tags:
-  use_cases: [data_ingestion, application_management]
+  use_cases: [soar, data_ingestion, application_management]
   keywords: [smb, file transfer, samba, cifs]
   features: []
 types:

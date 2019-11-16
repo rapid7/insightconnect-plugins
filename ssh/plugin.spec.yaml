@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: ssh
 title: SSH
 description: The SSH plugin allows you to run commands on a remote host

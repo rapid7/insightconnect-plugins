@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: att_cybersecurity_alienvault_otx
 title: AT&T Cybersecurity AlienVault Open Threat Exchange
 description: This plugin utilizes AT&T Cybersecurity (AlienVault OTX) to retrieve details about an indicator
@@ -18,7 +18,7 @@ tags:
 - Exchange
 - ATT
 hub_tags:
-  use_cases: [threat_hunting, threat_intel, threat_detection_and_response, soc_automation]
+  use_cases: [soar, threat_hunting, threat_intel, threat_detection_and_response, soc_automation]
   keywords: [Threat, Exchange, ATT]
   features: []
 types:

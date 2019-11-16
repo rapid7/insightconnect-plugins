@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: url_expander
 title: URL Expander
 description: Expands a shortened URL
@@ -16,7 +16,7 @@ tags:
 - phishing investigation
 - utilities
 hub_tags:
-  use_cases: [data_utility, soc_automation]
+  use_cases: [soar, data_utility, soc_automation]
   keywords: [url expander, phishing investigation, utilities]
   features: []
 actions:

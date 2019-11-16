@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: base64
 title: Base64
 description: Encode and decode data using the base64 alphabet
@@ -18,7 +18,7 @@ tags:
 - decoder
 - utilities
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [base64, encoder, decoder, utilities]
   features: []
 actions:

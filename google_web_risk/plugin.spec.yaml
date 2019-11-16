@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: google_web_risk
 title: Google Web Risk
 description: Check URLs against the Google Web Risk service
@@ -19,7 +19,7 @@ tags:
 - blacklist
 - phishing
 hub_tags:
-  use_cases: [application_security, soc_automation]
+  use_cases: [soar, application_security, soc_automation]
   keywords: [google, web risk, url, blacklist, phishing]
   features: []
 enable_cache: false

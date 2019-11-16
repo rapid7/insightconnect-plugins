@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: google_sheets
 title: Google Sheets
 description: Create, edit and collaborate with others on spreadsheets
@@ -17,7 +17,7 @@ tags:
 - sheets
 - spreadsheet
 hub_tags:
-  use_cases: [data_aggregation]
+  use_cases: [soar, data_aggregation]
   keywords: [google, sheets, spreadsheet]
   features: []
 types:

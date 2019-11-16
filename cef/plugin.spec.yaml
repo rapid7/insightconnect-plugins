@@ -19,7 +19,7 @@ tags:
 - syslog
 - logs
 hub_tags:
-  use_cases: [data_utility, soc_automation, soar, alert_enrichment]
+  use_cases: [soar, data_utility, soc_automation, alert_enrichment]
   keywords: [cef, arcsight, events, syslog, logs]
   features: []
 language: python

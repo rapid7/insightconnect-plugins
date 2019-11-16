@@ -1,13 +1,13 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: google_safe_browsing
 title: Google Safe Browsing
 description: Check URLs against the Google Safe Browsing service
 version: 2.0.0
 vendor: rapid7
 support: community
-status: ["obsolete"]
+status: [obsolete]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/google_safe_browsing
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -19,7 +19,7 @@ tags:
 - blacklist
 - phishing
 hub_tags:
-  use_cases: [threat_intel, soc_automation]
+  use_cases: [soar, threat_intel, soc_automation]
   keywords: [google, safe browsing, url, blacklist, phishing]
   features: []
 enable_cache: false

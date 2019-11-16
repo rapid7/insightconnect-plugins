@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: twilio
 title: Twilio
 description: "Twilio is a cloud communications platform for building SMS, Voice & Messaging applications
@@ -16,7 +16,7 @@ tags:
 - twilio
 - SMS
 hub_tags:
-  use_cases: []
+  use_cases: [soar, ]
   keywords: [twilio, SMS]
   features: []
 connection:

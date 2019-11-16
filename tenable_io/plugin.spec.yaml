@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: tenable_io
 title: TenableIO
 vendor: rapid7
@@ -19,7 +19,7 @@ tags:
 - scanner
 - vulnerability scanner
 hub_tags:
-  use_cases: [vulnerability_management]
+  use_cases: [soar, vulnerability_management]
   keywords: [tenable, tenable.io, tenableio, scanner, vulnerability scanner]
   features: []
 connection:

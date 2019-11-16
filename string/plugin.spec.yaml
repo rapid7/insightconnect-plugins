@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: string
 title: String Operations
 description: The String plugin provides common programmatic string operations
@@ -17,7 +17,7 @@ tags:
 - string
 - split
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [utilities, string, split]
   features: []
 actions:

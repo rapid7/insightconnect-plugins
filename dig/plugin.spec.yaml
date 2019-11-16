@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: dig
 title: Dig
 description: Dig is used for forward and reverse DNS lookups
@@ -16,7 +16,7 @@ tags:
 - dig
 - dns
 hub_tags:
-  use_cases: [threat_hunting, threat_intel, soar, soc_automation, investigations, penetration_testing]
+  use_cases: [soar, threat_hunting, threat_intel, soc_automation, investigations, penetration_testing]
   keywords: [dig, dns]
   features: []
 actions:

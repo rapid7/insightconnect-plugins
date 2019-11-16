@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: tr
 title: Translate
 description: Translate or replace characters from text using the tr command line utility
@@ -18,7 +18,7 @@ tags:
 - text
 - utilities
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [tr, translate, text, utilities]
   features: []
 actions:

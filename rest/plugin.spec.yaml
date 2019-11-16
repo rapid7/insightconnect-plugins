@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: rest
 title: REST
 description: The REST plugin to make it easy to integrate with RESTful services
@@ -19,7 +19,7 @@ tags:
 - microservices
 - api
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [rest, http, rpc, microservices, api]
   features: []
 enable_cache: true

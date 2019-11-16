@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: unshorten
 title: Unshorten.me
 description: "Unshorten.me provides an easy method to unshorten a wide range of shortened URLs. The Unshorten.me plugin
@@ -19,7 +19,7 @@ tags:
 - short
 - unshorten
 hub_tags:
-  use_cases: [alert_enrichment, external_enrichment, investigations, threat_intel, threat_detection_and_response]
+  use_cases: [soar, alert_enrichment, external_enrichment, investigations, threat_intel, threat_detection_and_response]
   keywords: [url, link, short, unshorten]
   features: []
 enable_cache: false

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: vmray
 title: VMRay Sandbox
 description: The VMRay plugin allows you to analyze and detect malware before it lands
@@ -17,7 +17,7 @@ tags:
 - malware
 - malware analysis
 hub_tags:
-  use_cases: [threat_intel, threat_hunting, soc_automation]
+  use_cases: [soar, threat_intel, threat_hunting, soc_automation]
   keywords: [sandbox, malware, malware analysis]
   features: []
 types:

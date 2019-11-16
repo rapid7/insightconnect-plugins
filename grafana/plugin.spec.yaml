@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: grafana
 title: Grafana
 vendor: rapid7
@@ -16,7 +16,7 @@ tags:
 - grafana
 - agile
 hub_tags:
-  use_cases: [user_management]
+  use_cases: [soar, user_management]
   keywords: [grafana, agile]
   features: []
 types:

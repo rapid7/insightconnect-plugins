@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: phishtank
 title: PhishTank
 description: The Phishtank plugin allows you to submit URLs for analysis by the PhishTank community
@@ -17,7 +17,7 @@ tags:
 - phishtank
 - phishing
 hub_tags:
-  use_cases: [threat_hunting, threat_intel, investigations]
+  use_cases: [soar, threat_hunting, threat_intel, investigations]
   keywords: [komand, phishtank, phishing]
   features: []
 connection:

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: statsd
 title: Statsd
 description: The Statsd plugin will allow you to create metrics from your workflow
@@ -17,7 +17,7 @@ tags:
 - statsd
 - graphite
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [stats, statsd, graphite]
   features: []
 types:

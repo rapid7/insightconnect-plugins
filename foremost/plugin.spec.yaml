@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: foremost
 title: Foremost
 description: The Foremost plugin will take a disk image and attempt to recover files from it
@@ -17,7 +17,7 @@ tags:
 - forensics
 - carving
 hub_tags:
-  use_cases: [data_utility, threat_hunting]
+  use_cases: [soar, data_utility, threat_hunting]
   keywords: [foremost, extraction, forensics, carving]
   features: []
 actions:

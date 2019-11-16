@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: facebook_threat_exchange
 title: Facebook Threat Exchange
 vendor: rapid7
@@ -18,7 +18,7 @@ tags:
 - search
 - exchange
 hub_tags:
-  use_cases: [investigations, threat_detection_and_response, threat_intel, soc_automation]
+  use_cases: [soar, investigations, threat_detection_and_response, threat_intel, soc_automation]
   keywords: [facebook, threat, search, exchange]
   features: []
 types:

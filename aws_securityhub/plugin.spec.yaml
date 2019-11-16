@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: aws_securityhub
 title: "AWS Security Hub"
 description: This plugin utilizes AWS Security Hub to lists and describes security hub-aggregated findings and retrieve SQS messages
@@ -17,7 +17,7 @@ tags:
 - securityhub
 - alerts
 hub_tags:
-  use_cases: [siem, log_search, data_aggregation, threat_detection_and_response]
+  use_cases: [soar, siem, log_search, data_aggregation, threat_detection_and_response]
   keywords: [aws, securityhub, alerts]
   features: []
 

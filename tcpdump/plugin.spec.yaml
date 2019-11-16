@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: tcpdump
 title: Tcpdump
 description: The Tcpdump plugin is used to read contents of a PCAP
@@ -17,7 +17,7 @@ tags:
 - nsm
 - pcap
 hub_tags:
-  use_cases: [threat_hunting]
+  use_cases: [soar, threat_hunting]
   keywords: [tcpdump, nsm, pcap]
   features: []
 enable_cache: false

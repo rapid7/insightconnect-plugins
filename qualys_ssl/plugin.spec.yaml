@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: qualys_ssl
 title: Qualys SSL Labs
 description: The Qualys SSL plugin allows the user to get information and test SSL servers
@@ -17,7 +17,7 @@ tags:
 - certificate
 - qualys
 hub_tags:
-  use_cases: [threat_hunting, penetration_testing]
+  use_cases: [soar, threat_hunting, penetration_testing]
   keywords: [ssl, certificate, qualys]
   features: []
 types:

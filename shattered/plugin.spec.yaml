@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: shattered
 title: SHAttered
 description: "SHAttered is a free service for checking SHA-1 hash collisions. Using the SHAttered plugin for
@@ -19,7 +19,7 @@ tags:
 - collisions
 - shattered
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [sha1, hash, collisions, shattered]
   features: []
 enable_cache: false

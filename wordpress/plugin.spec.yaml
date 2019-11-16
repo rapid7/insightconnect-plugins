@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: wordpress
 title: WordPress
 description: The WordPress plugin allows for user management on the WordPress platform
@@ -17,7 +17,7 @@ tags:
 - web
 - site
 hub_tags:
-  use_cases: [user_management]
+  use_cases: [soar, user_management]
   keywords: [wordpress, web, site]
   features: []
 connection:

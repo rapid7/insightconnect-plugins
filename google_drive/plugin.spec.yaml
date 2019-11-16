@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: google_drive
 title: Google Drive
 description: Upload and retrieve files from Google drive
@@ -17,7 +17,7 @@ tags:
 - google drive
 - cloud storage
 hub_tags:
-  use_cases: [data_ingestion]
+  use_cases: [soar, data_ingestion]
   keywords: [google, google drive, cloud storage]
   features: []
 types:

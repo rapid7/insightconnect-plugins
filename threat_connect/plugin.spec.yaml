@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: threat_connect
 title: ThreatConnect
 description: "ThreatConnect is a Threat Intelligence Platform (TIP) that empowers large
@@ -22,7 +22,7 @@ tags:
 - identify
 - threatconnect
 hub_tags:
-  use_cases: [investigations, soc_automation]
+  use_cases: [soar, investigations, soc_automation]
   keywords: [threat, malicious, analyze, manage, identify, threatconnect]
   features: []
 types:

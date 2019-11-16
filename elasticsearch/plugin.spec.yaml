@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: elasticsearch
 title: Elasticsearch
 description: Distributed Real-Time Search and Analytics Engine
@@ -18,7 +18,7 @@ tags:
 - search
 - elastic
 hub_tags:
-  use_cases: [data_utility, data_aggregation, data_ingestion, siem, soc_automation, log_search]
+  use_cases: [soar, data_utility, data_aggregation, data_ingestion, siem, soc_automation, log_search]
   keywords: [elasticsearch, es, search, elastic]
   features: []
 connection:

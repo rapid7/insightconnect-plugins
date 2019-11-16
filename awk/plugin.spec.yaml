@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: awk
 title: Awk
 description: This plugin manipulates an input string or file with the GNU awk programming language
@@ -17,7 +17,7 @@ tags:
 - regex
 - utilities
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [awk, regex, utilities]
   features: []
 actions:

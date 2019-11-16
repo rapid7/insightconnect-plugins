@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: uniq
 title: Uniq
 description: "Uniq removes redundant lines or items from data. Using the Uniq plugin can allow users to deduplicate
@@ -20,7 +20,7 @@ tags:
 - duplicate
 - dedup
 hub_tags:
-  use_cases: []
+  use_cases: [soar, ]
   keywords: [uniq, unique, utilities, duplicate, dedup]
   features: []
 actions:

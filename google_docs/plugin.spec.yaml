@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: google_docs
 title: Google Docs
 description: Create and retrieve Google documents
@@ -18,7 +18,7 @@ tags:
 - drive
 - utilities
 hub_tags:
-  use_cases: [data_aggregation, data_ingestion]
+  use_cases: [soar, data_aggregation, data_ingestion]
   keywords: [docuement, google, drive, utilities]
   features: []
 types:

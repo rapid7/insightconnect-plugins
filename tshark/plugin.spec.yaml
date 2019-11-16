@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: tshark
 title: TShark
 description: "TShark is a tool for dumping and analyzing network traffic. With the TShark plugin for
@@ -18,7 +18,7 @@ tags:
 - pcap
 - traffic
 hub_tags:
-  use_cases: [threat_hunting, investigations, log_search]
+  use_cases: [soar, threat_hunting, investigations, log_search]
   keywords: [tshark, pcap, traffic]
   features: []
 actions:

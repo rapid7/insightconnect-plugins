@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: confluence
 title: Confluence
 vendor: rapid7
@@ -17,7 +17,7 @@ tags:
 - confluence
 - wiki
 hub_tags:
-  use_cases: [asset_inventory]
+  use_cases: [soar, asset_inventory]
   keywords: [confluence, wiki]
   features: []
 types:

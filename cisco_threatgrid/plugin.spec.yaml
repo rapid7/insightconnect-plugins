@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: cisco_threatgrid
 title: Cisco ThreatGrid
 description: This plugin retrieves malware reports, report samples and URLs for analysis to Cisco ThreatGrid server
@@ -21,7 +21,7 @@ tags:
 - url
 - file
 hub_tags:
-  use_cases: [investigations, soc_automation, threat_intel, threat_detection_and_response]
+  use_cases: [soar, investigations, soc_automation, threat_intel, threat_detection_and_response]
   keywords: [ThreatGrid, Cisco, malware, analysis, url, file]
   features: []
 

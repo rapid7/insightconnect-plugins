@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: git
 title: Git
 description: Git plugin allows you to add, remove and commit files to Git repository
@@ -17,7 +17,7 @@ tags:
 - version control
 - repository
 hub_tags:
-  use_cases: [soc_automation, data_utility]
+  use_cases: [soar, soc_automation, data_utility]
   keywords: [git, version control, repository]
   features: []
 connection:

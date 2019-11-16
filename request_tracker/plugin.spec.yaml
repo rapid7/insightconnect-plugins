@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: request_tracker
 title: Request Tracker
 description: The Request Tracker plugin allows you to create and manage tickets in Request Tracker
@@ -18,7 +18,7 @@ tags:
 - incidents
 - ticket
 hub_tags:
-  use_cases: [remediation_ticketing]
+  use_cases: [soar, remediation_ticketing]
   keywords: [issue, track, incidents, ticket]
   features: []
 types:

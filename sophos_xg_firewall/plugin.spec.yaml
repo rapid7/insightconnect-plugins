@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: sophos_xg_firewall
 title: Sophos XG Firewall
 description: The Sophos XG Firewall plugin allows you to manage your Sophos XG Firewall through policies
@@ -17,7 +17,7 @@ tags:
 - Endpoint
 - Firewall
 hub_tags:
-  use_cases: [network_containment, soc_automation]
+  use_cases: [soar, network_containment, soc_automation]
   keywords: [Sophos, Endpoint, Firewall]
   features: []
 types:

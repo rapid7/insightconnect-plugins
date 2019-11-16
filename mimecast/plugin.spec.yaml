@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
@@ -17,7 +17,7 @@ tags:
 - mimecast
 - email
 hub_tags:
-  use_cases: [phishing_investigations, network_containment, soc_automation, threat_detection_and_response]
+  use_cases: [soar, phishing_investigations, network_containment, soc_automation, threat_detection_and_response]
   keywords: [mimecast, email]
   features: []
 
