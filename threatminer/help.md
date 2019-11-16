@@ -1,20 +1,22 @@
 # Description
 
-[Threat Miner](https://www.threatminer.org) is an open source search engine for
-fast threat intelligence research and pivoting with context.
+[Threat Miner](https://www.threatminer.org) is an open source search engine for fast threat intelligence 
+research and pivoting with context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup 
+various pieces of information for threat intelligence gathering.
 
-This plugin utilizes the [ThreatMiner API](https://www.threatminer.org/api.php).
+The Threat Miner plugin can aid in phishing analysis through its various lookup actions for domains, IP addresses, and
+email addresses. In addition, it can assist in malicious attachment detection when used with email plugins using its
+hash report feature.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Domain lookup
+* IP address lookup
+* Email address lookup
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

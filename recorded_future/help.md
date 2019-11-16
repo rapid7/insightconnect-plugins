@@ -1,20 +1,24 @@
 # Description
 
-[Recorded Future](https://www.recordedfuture.com/) arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats by automatically collecting and analyzing threat intelligence from technical, open, and dark web sources.
-This plugin utilizes the [Recorded Future API](https://api.recordedfuture.com/v2).
+[Recorded Future](https://www.recordedfuture.com/) arms threat analysts, security operators, and incident
+  responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
+InsightConnect, users can search domain lists, entity lists, and more.
 
-When an action that causes a file to be downloaded is invoked, the file data is parsed internally and returned in the [STIX](https://stixproject.github.io/about/) format.
+Use Recorded Future within an automation workflow to quickly assist with threat analysis, incident response, and 
+vulnerability management.
+
+Note: When a plugin action that causes a file to be downloaded is invoked, the file data is parsed internally and 
+returned in the [STIX](https://stixproject.github.io/about/) format.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Search domain lists
+* Download risk lists
+* Lookup and search hashes
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Recorded Future API key
 
 # Documentation
 

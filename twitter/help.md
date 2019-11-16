@@ -1,20 +1,20 @@
 # Description
 
-[Twitter](https://twitter.com) is an online news and social networking service where users post and interact with messages, "tweets,"
-restricted to 140 characters. Registered users can post tweets, but those who are unregistered can only read them.
-
-This plugin utilizes the [python-twitter](https://github.com/bear/python-twitter/wiki) Python library.
+[Twitter](https://twitter.com) is a microblogging and social networking service. Using the Twitter plugin for 
+Rapid7 InsightConnect, users can monitor tweets, post, and block users. This plugin can be effective in discovering
+social media campaigns, threat intelligence, and more.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Monitor tweets
+* Post tweet
+* Block users
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Consume key and secret
+* Access token and secret
+* OAuth token registered to a Twitter account (see: https://apps.twitter.com/)
 
 # Documentation
 

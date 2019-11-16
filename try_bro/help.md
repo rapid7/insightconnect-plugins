@@ -1,17 +1,16 @@
 # Description
 
-[Try Bro](http://try.bro.org/) is a free service that runs the Bro Network Security Monitor in the cloud.
+With the [Try Bro](http://try.bro.org/) plugin for Rapid7 InsightConnect, users can use a free instance of the
+Bro Network Security Monitor in the cloud. Users can upload PCAP files for analysis and get Bro logs.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* PCAP analysis
+* Get Bro logs
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Try Bro server URL
 
 # Documentation
 

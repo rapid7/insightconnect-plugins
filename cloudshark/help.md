@@ -1,18 +1,17 @@
 # Description
 
-[Cloudshark](https://www.cloudshark.org/) is a cloud packet analysis and sharing product based on tshark.
-This plugin implements most of the CloudShark API calls.
+[CloudShark](https://www.cloudshark.org/) is an on-premises platform for packet analysis. 
+Users can upload and manage capture files using the CloudShark plugin for Rapid7 InsightConnect. Use CloudShark to
+assist with alert investigations, internal penetration testing, and more. 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Capture file management
+* View capture file metadata
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* API Key
 
 # Documentation
 

@@ -1,18 +1,17 @@
 # Description
 
-[Sentry](https://sentry.io/) is an open-source error tracking tool that helps developers monitor and fix crashes in real time.
-This plugin utilizes the [Sentry API](https://docs.sentry.io/).
+[Sentry](https://sentry.io/) is an open-source error tracking tool that helps developers monitor and fix crashes 
+in real time. Users can manage issues and events with the Sentry plugin for Rapid7 InsightConnect. Automatically
+triage application issues to other ticketing systems, quickly and effectively when using Sentry within a workflow.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Update issues
+* Submit events
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Sentry authentication token
 
 # Documentation
 

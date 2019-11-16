@@ -1,19 +1,18 @@
 # Description
 
-[MaxMind GeoIP2 Precision](https://www.maxmind.com/en/geoip2-precision-services) provides IP intelligence data.
-
-The GeoIP2 Precision plugin queries the MaxMind Insights service via its API and returns relevant data on the provided IP.
+[MaxMind GeoIP2 Precision](https://www.maxmind.com/en/geoip2-precision-services) is a MaxMind service that offers 
+industry-leading IP intelligence data. Users of the GeoIP2 Precision plugin for Rapid7 InsightConnect can use it to 
+geolocate IP addresses. Use this plugin in combination with alerting plugins to enrich and provide additional detail
+in real-time.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Geolocate IP addresses
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* User ID
+* License key
 
 # Documentation
 

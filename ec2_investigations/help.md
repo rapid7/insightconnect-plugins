@@ -3,16 +3,18 @@
 The EC2 Investigation plugin runs security tools on AWS instances.
 In many cases, actions require the security tool to be installed on the EC2 host.
 
+Using the EC2 Investigations plugin for Rapid7 InsightConnect will allow users to mount drives and scan 
+directories with ClamAV.
+
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Mount drives
+* Scan directories with ClamAV
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Access key
+* Secret key
 
 # Documentation
 
