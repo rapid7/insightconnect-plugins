@@ -1,18 +1,18 @@
 # Description
 
-[Confluence](https://atlassian.com/software/confluence) is team collaboration software that changes how modern teams work.
-This plugin performs actions on the Confluence Wiki.
+[Confluence](https://atlassian.com/software/confluence) is an open and shared workspace for managing documents and 
+files within an organization. Using the Confluence plugin for Rapid7 InsightConnect, users can view and update pages 
+dynamically within automation workflows.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Update pages
+* View pages
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Confluence URL
+* Confluence username and password
 
 # Documentation
 

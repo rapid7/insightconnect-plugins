@@ -3,7 +3,9 @@ extension: plugin
 product: ["insightconnect"]
 name: datadog
 title: "Datadog"
-description: "Datadog is a monitoring service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform"
+description: "Datadog is a monitoring service for cloud-scale applications, providing monitoring of servers,
+databases, tools, and services, through a SaaS-based data analytics platform. Datadog plugin users can post events and
+ metrics"
 version: 1.1.0
 vendor: rapid7
 support: community
@@ -11,7 +13,15 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/datadog
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-tags: [ "datadog", "monitoring service" ]
+  vendor_url: https://www.datadoghq.com/
+tags:
+  - datadog
+  - monitoring
+  - alerting
+hub_tags:
+  use_cases: [reporting_and_analytics]
+  keywords: [datadog, monitoring, alerting]
+  features: []
 
 types:
   event:
@@ -46,10 +56,6 @@ types:
       type: "[]string"
       required: false
     tags:
-hub_tags:
-  use_cases: []
-  keywords: []
-  features: []
       title: "Tags"
       description: "A list of tags for the event"
       type: "[]string"

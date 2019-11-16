@@ -1,20 +1,23 @@
 # Description
 
-[EchoTrail](https://www.echotrail.io/products/insights/) is a database of executable behavioral analytics, searchable by filename or SHA256 or MD5 hash.
-Search our Insights database manually for an [example](https://www.echotrail.io/insights/search/) of the type of analytics we provide.
+[EchoTrail](https://www.echotrail.io/products/insights/) is a database of executable behavioral analytics, searchable 
+by filename or SHA256 or MD5 hash. Search our Insights database manually 
+for an [example](https://www.echotrail.io/insights/search/) of the type of analytics we provide.
+
+Users can lookup filenames and hashes within their automation workflows using the EchoTrail Insights plugin for 
+Rapid7 InsightConnect.
 
 This plugin utilizes the [EchoTrail API](https://api.echotrail.io).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Lookup filenames
+* Lookup hashes
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* API key
+* API server
 
 # Documentation
 

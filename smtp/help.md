@@ -1,12 +1,24 @@
+# Description
 
-# SMTP Mailer
+[Simple Mail Transfer Protocol](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol) (SMTP) is an 
+Internet standard for electronic mail (email) transmission. Users of this plugin will be able to craft and automatically 
+send email through their Rapid7 InsightConnect workflows.
 
-## About
+This plugin can aid in automated notifications, alerting, employee onboarding/offboarding, and more.
 
-[Simple Mail Transfer Protocol](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol) (SMTP) is an Internet standard for electronic mail (email) transmission.
-This plugin allows you to craft and send an email to an SMTP server.
+# Key Features
 
-## Connection
+* Send email
+
+# Requirements
+
+* SMTP server credentials (optional depending on SMTP server configuration)
+* SMTP server hostname
+* SMTP server port
+
+# Documentation
+
+## Setup
 
 The connection configuration accepts the following parameters:
 
@@ -20,13 +32,15 @@ The connection configuration accepts the following parameters:
 
 NOTE: If username and password are left blank, the plugin will not try to authenticate.
 
-## Actions
+## Technical Details
 
-### Send Email
+### Actions
+
+#### Send Email
 
 This action is used to send an email.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -48,13 +62,13 @@ Example output:
 
 ```
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |result|string|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
@@ -70,18 +84,20 @@ Examples:
 * Notification
 * Send logs from artifacts
 
-## Versions
+## Version History
 
-* 0.1.0 - Initial plugin
-* 0.2.0 - Add attachment support
-* 0.2.1 - SSL bug fix in SDK
-* 0.3.0 - Added HTML body support | Updated to v2 architecture
-* 1.0.0 - Add support for carbon copy field in email
-* 1.0.1 - Support web server mode | Support for SMTP relays
-* 2.0.0 - Update to new credential types | Rename "SMTP" plugin title to "SMTP Mailer" | Rename "Send an email" action to "Send Email"
-* 2.0.1 - Fix issue where credentials were required
-* 2.0.2 - Fix issue where Send action doesn't handle empty attachments correctly
 * 2.0.3 - Fix issue with reliability in regards to previous Send action empty attachment fix
+* 2.0.2 - Fix issue where Send action doesn't handle empty attachments correctly
+* 2.0.1 - Fix issue where credentials were required
+* 2.0.0 - Update to new credential types | Rename "SMTP" plugin title to "SMTP Mailer" | Rename "Send an email" action to "Send Email"
+* 1.0.1 - Support web server mode | Support for SMTP relays
+* 1.0.0 - Add support for carbon copy field in email
+* 0.3.0 - Added HTML body support | Updated to v2 architecture
+* 0.2.1 - SSL bug fix in SDK
+* 0.2.0 - Add attachment support
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 

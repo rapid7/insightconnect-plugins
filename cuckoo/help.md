@@ -1,23 +1,25 @@
 # Description
 
-[Cuckoo](https://cuckoosandbox.org/) is a malware analysis system, enabling tracing of API calls,
-file behavior, and analysis of memory and network traffic. This plugin utilizes
-the [Cuckoo API](http://docs.cuckoosandbox.org/en/latest/usage/api/) and enables you to interact
-with your running Cuckoo instance.
+
+[Cuckoo Sandbox](https://cuckoosandbox.org/) is an open source automated malware analysis system. It enables
+ tracing of API calls, file behavior, and analysis of memory and network traffic. Using the Cuckoo Sandbox plugin for
+Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more.
+
+Use Cuckoo Sandbox in your automation workflows to manage tasks and analyze PCAPs or suspicious files obtained through
+investigations. Automatically report findings to your favorite ticketing system when this plugin is used in combination
+with any of our available ticketing plugins.
 
 For brevity and readability, the term "base64-encoded file" is used in examples
 throughout this documentation in place of real base64-encoded data.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* File analysis
+* Manage tasks
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Cuckoo sandbox API URL for your Cuckoo instance
 
 # Documentation
 

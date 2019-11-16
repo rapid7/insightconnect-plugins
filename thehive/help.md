@@ -1,18 +1,17 @@
 # Description
 
-[TheHive](https://thehive-project.org/) is a scalable, open source security incident response solutions designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done.
-This plugin utilizes the [thehive4py](https://github.com/CERT-BDF/TheHive4py) and [TheHive API](https://github.com/CERT-BDF/TheHiveDocs/tree/master/api) directly where necessary.
+[TheHive](https://thehive-project.org/) TheHive is a scalable, open source security incident response solution 
+designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done. 
+Handle your case management needs with TheHive plugin for Rapid7 InsightConnect.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Case management
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* TheHive instance hostname
+* TheHive username and password
 
 # Documentation
 

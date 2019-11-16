@@ -1,20 +1,23 @@
 # Description
 
-[Cortex](https://github.com/CERT-BDF/Cortex) is a an open source and free software, for analyzing observables.
+[Cortex](https://github.com/CERT-BDF/Cortex) is an observable analysis and active response engine. 
+With the Cortex plugin for Rapid7 InsightConnect, users can manage analyzers, jobs, and run file analyzers.
 
-This plugin utilizes the older unauthenticated [Cortex v1 API](https://github.com/CERT-BDF/CortexDocs/tree/master/api) via [cortex4py](https://pypi.python.org/pypi/cortex4py/1.0.0) and [requests](http://www.python-requests.org/).
-For users of Cortex 3.1.0+, please use the newer [Cortex v2 plugin](https://market.komand.com/plugins/rapid7/cortex_v2/1.0.0) which supports authentication via API key.
+Use Cortex within an automation workflow to analyze files using hundreds of analyzers to help determine if they are 
+malicious or safe.
+
+Note: This plugin utilizes the older unauthenticated [Cortex v1 API](https://github.com/CERT-BDF/CortexDocs/tree/master/api) via [cortex4py](https://pypi.python.org/pypi/cortex4py/1.0.0) and [requests](http://www.python-requests.org/).
+For users of Cortex 3.1.0+ please use the newer plugin, Cortex v2, which supports authentication.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage analyzers
+* Manage jobs
+* Run file analyzers
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Cortex hostname
 
 # Documentation
 

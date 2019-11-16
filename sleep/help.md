@@ -1,18 +1,15 @@
 # Description
 
-Sleep suspends execution for an interval of time expressed in seconds.
-It's used to create artificial delays in a workflow when desirable.
+Sleep allows Rapid7 InsightConnect users to suspend workflow execution for a specified period of time.
+Popular uses are to avoid rate limiting by a service or to wait for processing by a service to complete.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Suspend workflow execution
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

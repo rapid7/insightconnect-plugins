@@ -1,22 +1,20 @@
 # Description
 
-[Dynamo DB](https://aws.amazon.com/dynamodb/) is a Key/Value store powered by Amazon available for members of AWS.
-
-It provides a relatively easy to use and scalable system that exposes some basic indexing
-and queryability, making it a versatile and convenient way to store data.
-
-It replaced Amazons legacy Key/Value offering, SimpleDB.
+[Dynamo DB](https://aws.amazon.com/dynamodb/) is a key/value store powered by Amazon available for members 
+of AWS. It provides an easy-to-use and scalable system that exposes some basic indexing and querying capabilities, 
+making it a versatile and convenient way to store data. Users can manage their data using the DynamoDB plugin for 
+Rapid7 InsightConnect.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Scan data
+* Store data
+* Update data
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Access key
+* Secret key
 
 # Documentation
 

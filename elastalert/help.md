@@ -1,18 +1,15 @@
 # Description
 
-[ElastAlert](https://github.com/Yelp/elastalert) allows for easy & flexible alerting with ElasticSearch.
-This plugin listens for alerts from an ElastAlert webhook and triggers on them.
+[ElastAlert](https://github.com/Yelp/elastalert) allows for easy & flexible alerting with ElasticSearch. Users of the 
+ElastAlert plugin can monitor alerts using an ElastAlert webhook in real-time for automation use.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Monitor alerts
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Username and password
 
 # Documentation
 

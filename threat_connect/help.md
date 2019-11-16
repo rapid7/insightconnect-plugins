@@ -1,19 +1,22 @@
 # Description
 
-[ThreatConnect](https://threatconnect.com) is a Threat Intelligence Platform (TIP) that empowers large organizations to aggregate, analyze and act on their threat intelligence.
+[ThreatConnect](https://threatconnect.com) is a Threat Intelligence Platform (TIP) that empowers large
+  organizations to aggregate, analyze and act on their threat intelligence. The ThreatConnect plugin for Rapid7
+InsightConnect allows users to view incidents, emails, threats, victims, and more.
 
-[ThreatConnect Python SDK](https://docs.threatconnect.com/en/latest/python/python_sdk.html)
+ThreatConnect can aid in phishing analysis and general threat intelligence collection through its platform.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* View incidents
+* View ThreatConnect emails
+* Creat tasks
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* API access ID
+* API secret key
+* API base URL
 
 # Documentation
 

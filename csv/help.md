@@ -3,16 +3,17 @@
 [Comma Separated Value](https://en.wikipedia.org/wiki/Comma-separated_values) (CSV) is a common format to express data.
 This plugin allows one to extract fields from CSV strings and files.
 
+Using the CSV plugin, users can automate conversions between JSON and CSV to help enable service interoperability
+as well as filter data within a CSV file.
+
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Convert between JSON and CSV
+* Filter strings
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

@@ -3,8 +3,9 @@ extension: plugin
 product: ["insightconnect"]
 name: smtp
 title: SMTP
-description: Simple Mail Transfer Protocol (SMTP) is an Internet standard for electronic
-  mail (email) transmission
+description: "Simple Mail Transfer Protocol (SMTP) is an Internet standard for electronic
+  mail (email) transmission. Users of this plugin will be able to automatically send email through their
+Rapid7 InsightConnect workflows"
 version: 2.0.3
 vendor: rapid7
 support: community
@@ -12,11 +13,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/smtp
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.rapid7.com
 tags:
 - smtp
 - email
 hub_tags:
-  use_cases: []
+  use_cases: [alerting_and_notifications]
   keywords: [smtp, email]
   features: []
 connection:

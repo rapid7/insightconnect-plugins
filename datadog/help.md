@@ -1,19 +1,19 @@
 # Description
 
-[Datadog](https://www.datadoghq.com/) is a monitoring service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform
-
-This plugin utilizes the [Datadog API](https://docs.datadoghq.com/api/?lang=python#overview).
+[Datadog](https://www.datadoghq.com/) is a monitoring service for cloud-scale applications, providing monitoring of 
+servers, databases, tools, and services, through a SaaS-based data analytics platform. Users can post events and 
+metrics using the Datadog plugin for Rapid7 InsightConnect.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Post events
+* Post metrics
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* API key
+* App key
+* Datadog URL
 
 # Documentation
 

@@ -1,18 +1,22 @@
 # Description
 
-[CRITs](https://crits.github.io/) is an open source malware and threat repository that leverages other open source software to create a unified tool for conducting malware analyses.
-This plugin utilizes a [fork](https://github.com/komand/pycrits) of the [pycrits](https://github.com/crits/pycrits) library. The CRITs server API endpoint, by default, is `/api/$API_VERSION`.
+[CRITs](https://crits.github.io/) is an open source malware and threat repository for conducting malware analyses. 
+With the CRITs plugin for Rapid7 InsightConnect, users can manage actors, events, collections, domains, and more.
+
+Using the CRITs plugin, users can quickly automate usecases around threat intelligence, malware analysis, email
+file attachment analysis, and other scenarios.
+
+Note: The CRITs server API endpoint, by default, is `/api/$API_VERSION`.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Malware analysis
+* Manage events
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* API key
+* Username
 
 # Documentation
 
@@ -633,8 +637,6 @@ CRITs comes with an authenticated API. It is disabled by default and must be ena
 Once it is enabled you must restart the web server for the URLs to be exposed.
 
 Ensure that the user associated with the API key is subscribed to the `source`.
-
-#
 
 # Version History
 
