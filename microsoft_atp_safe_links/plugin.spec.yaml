@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: microsoft_atp_safe_links
 title: Microsoft Office 365 ATP Safe Links
 description: Helps protect your organization by providing time-of-click verification

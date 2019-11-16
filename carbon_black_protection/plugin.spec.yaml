@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: carbon_black_protection
 title: Carbon Black Protection
 description: Ban and unban files and as well as manage approval requests

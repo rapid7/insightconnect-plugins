@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: bmc_remedy_itsm
 title: "BMC Remedy ITSM"
 description: "Create update and close BMC Remedy ITSM Incidents"

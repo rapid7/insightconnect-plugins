@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: azure_compute
 title: Azure Compute
 description: Azure Virtual Machines is one of several types of on-demand, scalable computing resources that Azure offers

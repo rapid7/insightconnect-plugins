@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: zendesk
 title: Zendesk
 description: The Zendesk plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk

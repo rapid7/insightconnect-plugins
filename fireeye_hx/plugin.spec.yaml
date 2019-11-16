@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: fireeye_hx
 title: "FireEye HX"
 description: The FireEye plugin will allow you to get alerts from a given host

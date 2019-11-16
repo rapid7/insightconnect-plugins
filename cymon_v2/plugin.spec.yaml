@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: cymon_v2
 title: Cymon v2
 description: Cymon is the largest tracker of open-source security reports about phishing,

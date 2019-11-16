@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: rest
 title: REST
 description: The REST plugin to make it easy to integrate with RESTful services

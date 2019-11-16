@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: dig
 title: Dig
 description: Dig is used for forward and reverse DNS lookups

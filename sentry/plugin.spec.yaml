@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: sentry
 title: Sentry
 description: "Sentry is an open source error tracking tool that helps developers monitor and fix crashes in real time.

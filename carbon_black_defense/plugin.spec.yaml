@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: carbon_black_defense
 title: Carbon Black Defense
 description: Find events and retrieve details for specific events

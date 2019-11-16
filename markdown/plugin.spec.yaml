@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: markdown
 title: Markdown
 description: Convert markdown to and from various popular formats

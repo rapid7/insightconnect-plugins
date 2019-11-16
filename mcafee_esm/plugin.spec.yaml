@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: mcafee_esm
 title: McAfee ESM
 description: McAfee Enterprise Security Manager is a security information and event

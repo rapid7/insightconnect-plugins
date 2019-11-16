@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: wazuh_ossec
 title: Wazuh OSSEC
 description: Provides security visibility, compliance and infrastructure monitoring

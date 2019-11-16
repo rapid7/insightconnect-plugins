@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: misp
 title: MISP
 description: MISP is an open source threat sharing platform

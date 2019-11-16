@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: pdf_reader
 title: PDF Reader
 description: Tools for extracting text from a PDF

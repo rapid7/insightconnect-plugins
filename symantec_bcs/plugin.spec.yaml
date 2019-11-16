@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: symantec_bcs
 title: Symantec Business Critical Services
 description: The Symantec Business Critical Services plugin allows you to submit a file to Symantec Security Response

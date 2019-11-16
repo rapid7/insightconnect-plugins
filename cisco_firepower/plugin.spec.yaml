@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: cisco_firepower
 title: Cisco Firepower
 vendor: rapid7

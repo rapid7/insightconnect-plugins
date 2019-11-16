@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: cuckoo
 title: Cuckoo Sandbox
 description: "Cuckoo Sandbox is an open source automated malware analysis system. Using the Cuckoo Sandbox plugin for

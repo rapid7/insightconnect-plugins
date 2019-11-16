@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: samanage
 title: Samanage
 description: The Samanage plugin allows you to start workflows on new incidents, manage incidents, and manage users. 

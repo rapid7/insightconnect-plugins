@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: google_cloud_pub_sub
 title: Google Cloud Pub Sub
 description: A fully-managed real-time messaging service that allows you to send and

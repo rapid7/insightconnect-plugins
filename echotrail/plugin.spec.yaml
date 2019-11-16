@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: echotrail
 title: "EchoTrail Insights"
 description: "EchoTrail Insights is a database of executable behavioral analytics, searchable by filename or

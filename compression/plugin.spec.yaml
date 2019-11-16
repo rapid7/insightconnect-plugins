@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: compression
 title: Compression
 description: "The Compression plugin for Rapid7 InsightConnect allows users to compress/decompress files using different

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: opendxl
 title: OpenDXL
 description: Communicate and share information for real-time, accurate security

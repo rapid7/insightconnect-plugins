@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: checkmarx_cxsast
 title: Checkmarx CxSAST
 description: The Checkmarx CxSAST plugin access CxSAST service to manage projects and scans

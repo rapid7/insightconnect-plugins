@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: virustotal_yara
 title: VirusTotal Yara
 description: The VirusTotal Yara plugin allows the user to analyze files with the Yara Python libarary

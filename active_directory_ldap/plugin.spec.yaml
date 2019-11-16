@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network

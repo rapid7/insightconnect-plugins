@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: sql
 title: SQL
 description: The SQL plugin allows you to run SQL queries

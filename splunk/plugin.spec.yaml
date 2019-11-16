@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: splunk
 title: Splunk
 description: The Splunk plugin allows you to search, monitor, analyze and analyze machine data
