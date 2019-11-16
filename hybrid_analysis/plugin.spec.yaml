@@ -17,7 +17,7 @@ tags:
 - sandbox
 - malware analysis
 hub_tags:
-  use_cases: [soc_automation, threat_hunting, threat_intel, threat_detection_and_response]
+  use_cases: [soar, soc_automation, threat_hunting, threat_intel, threat_detection_and_response]
   keywords: [malware, sandbox, malware analysis]
   features: []
 types:

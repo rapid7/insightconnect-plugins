@@ -16,7 +16,7 @@ tags:
 - cymon
 - intel
 hub_tags:
-  use_cases: []
+  use_cases: [soar, ]
   keywords: [cymon, intel]
   features: []
 connection:

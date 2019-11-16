@@ -17,7 +17,7 @@ tags:
 - postgres
 - mssql
 hub_tags:
-  use_cases: [data_utility, data_aggregation, data_ingestion]
+  use_cases: [soar, data_utility, data_aggregation, data_ingestion]
   keywords: [sql, postgres, mssql]
   features: []
 connection:

@@ -17,7 +17,7 @@ tags:
   - orchestration
   - incident response
 hub_tags:
-  use_cases: [threat_detection_and_response]
+  use_cases: [soar, threat_detection_and_response]
   keywords: [resilient, orchestration, incident response]
   features: []
 enable_cache: false

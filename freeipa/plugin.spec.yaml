@@ -17,7 +17,7 @@ tags:
 - freeipa
 - access control
 hub_tags:
-  use_cases: [user_management]
+  use_cases: [soar, user_management]
   keywords: [freeipa, access control]
   features: []
 types:

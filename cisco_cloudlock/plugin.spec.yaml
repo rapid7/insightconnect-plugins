@@ -18,7 +18,7 @@ tags:
 - cloud
 - CASB
 hub_tags:
-  use_cases: [container_and_cloud_security, user_management, application_security, asset_containment, network_containment]
+  use_cases: [soar, container_and_cloud_security, user_management, application_security, asset_containment, network_containment]
   keywords: [cisco, cloudlock, cloud, CASB]
   features: []
 language: python

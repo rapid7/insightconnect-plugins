@@ -18,7 +18,7 @@ tags:
 - decoder
 - utilities
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [base64, encoder, decoder, utilities]
   features: []
 actions:

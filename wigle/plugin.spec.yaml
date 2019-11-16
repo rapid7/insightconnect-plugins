@@ -17,7 +17,7 @@ tags:
 - location
 - wireless
 hub_tags:
-  use_cases: [threat_intel]
+  use_cases: [soar, threat_intel]
   keywords: [network, location, wireless, wigle]
   features: []
 types:

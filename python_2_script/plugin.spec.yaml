@@ -18,7 +18,7 @@ tags:
 - code
 - utilities
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [python, python2, code, utilities]
   features: []
 actions:

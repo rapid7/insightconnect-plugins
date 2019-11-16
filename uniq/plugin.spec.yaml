@@ -20,7 +20,7 @@ tags:
 - duplicate
 - dedup
 hub_tags:
-  use_cases: []
+  use_cases: [soar, ]
   keywords: [uniq, unique, utilities, duplicate, dedup]
   features: []
 actions:

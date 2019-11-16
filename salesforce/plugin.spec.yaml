@@ -18,7 +18,7 @@ tags:
 - analysis
 - crm
 hub_tags:
-  use_cases: [remediation_ticketing, reporting_and_analytics, soc_automation]
+  use_cases: [soar, remediation_ticketing, reporting_and_analytics, soc_automation]
   keywords: [marketing, sales, analysis, crm]
   features: []
 types:

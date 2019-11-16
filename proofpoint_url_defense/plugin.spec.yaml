@@ -17,7 +17,7 @@ tags:
 - decode
 - URL
 hub_tags:
-  use_cases: [data_utility, phishing_investigations, threat_intel]
+  use_cases: [soar, data_utility, phishing_investigations, threat_intel]
   keywords: [proofpoint, decode, URL]
   features: []
 actions:

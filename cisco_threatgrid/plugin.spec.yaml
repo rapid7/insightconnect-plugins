@@ -21,7 +21,7 @@ tags:
 - url
 - file
 hub_tags:
-  use_cases: [investigations, soc_automation, threat_intel, threat_detection_and_response]
+  use_cases: [soar, investigations, soc_automation, threat_intel, threat_detection_and_response]
   keywords: [ThreatGrid, Cisco, malware, analysis, url, file]
   features: []
 

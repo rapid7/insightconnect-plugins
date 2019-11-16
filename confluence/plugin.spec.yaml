@@ -17,7 +17,7 @@ tags:
 - confluence
 - wiki
 hub_tags:
-  use_cases: [asset_inventory]
+  use_cases: [soar, asset_inventory]
   keywords: [confluence, wiki]
   features: []
 types:

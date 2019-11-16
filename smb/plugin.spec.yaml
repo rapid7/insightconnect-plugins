@@ -18,7 +18,7 @@ tags:
 - samba
 - cifs
 hub_tags:
-  use_cases: [data_ingestion, application_management]
+  use_cases: [soar, data_ingestion, application_management]
   keywords: [smb, file transfer, samba, cifs]
   features: []
 types:

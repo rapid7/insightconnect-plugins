@@ -18,7 +18,7 @@ tags:
 - chrome
 - firefox
 hub_tags:
-  use_cases: [threat_detection_and_response, soar, soc_automation, threat_intel]
+  use_cases: [soar, threat_detection_and_response, soc_automation, threat_intel]
   keywords: [blockade, intel, chrome, firefox]
   features: []
 enable_cache: false

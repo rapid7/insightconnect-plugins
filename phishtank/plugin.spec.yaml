@@ -17,7 +17,7 @@ tags:
 - phishtank
 - phishing
 hub_tags:
-  use_cases: [threat_hunting, threat_intel, investigations]
+  use_cases: [soar, threat_hunting, threat_intel, investigations]
   keywords: [komand, phishtank, phishing]
   features: []
 connection:

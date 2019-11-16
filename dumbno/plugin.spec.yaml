@@ -18,7 +18,7 @@ tags:
 - arista
 - firewall
 hub_tags:
-  use_cases: [network_containment, soar]
+  use_cases: [soar, network_containment]
   keywords: [dumbno, blocking, arista, firewall]
   features: []
 enable_cache: false

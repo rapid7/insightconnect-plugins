@@ -17,7 +17,7 @@ tags:
 - categorize
 - URL
 hub_tags:
-  use_cases: [threat_intel, soar, soc_automation, external_enrichment]
+  use_cases: [soar, threat_intel, soc_automation, external_enrichment]
   keywords: [bluecoat, categorize, URL]
   features: []
 types:

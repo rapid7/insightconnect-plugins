@@ -17,7 +17,7 @@ tags:
 - active directory
 - microsoft
 hub_tags:
-  use_cases: [user_management, credential_management, policy_management, soc_automation, threat_detection_and_response]
+  use_cases: [soar, user_management, credential_management, policy_management, soc_automation, threat_detection_and_response]
   keywords: [ldap, active directory, microsoft]
   features: []
 types:

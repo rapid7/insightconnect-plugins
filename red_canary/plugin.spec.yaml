@@ -17,7 +17,7 @@ tags:
 - detection
 - response
 hub_tags:
-  use_cases: [alert_enrichment, alerting_and_notifications, investigations, threat_hunting, threat_intel, threat_detection_and_response]
+  use_cases: [soar, alert_enrichment, alerting_and_notifications, investigations, threat_hunting, threat_intel, threat_detection_and_response]
   keywords: [red canary, detection, response]
   features: []
 enable_cache: true

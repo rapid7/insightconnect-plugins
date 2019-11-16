@@ -16,7 +16,7 @@ tags:
 - screenshot
 - url
 hub_tags:
-  use_cases: [data_utility, reporting_and_analytics, threat_intel, soc_automation]
+  use_cases: [soar, data_utility, reporting_and_analytics, threat_intel, soc_automation]
   keywords: [screenshot, url]
   features: []
 connection:

@@ -17,7 +17,7 @@ tags:
 - nessus
 - vulnerability scanner
 hub_tags:
-  use_cases: [vulnerability_management]
+  use_cases: [soar, vulnerability_management]
   keywords: [tenable, nessus, vulnerability scanner]
   features: []
 types:

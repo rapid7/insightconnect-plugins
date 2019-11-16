@@ -16,7 +16,7 @@ tags:
 - zenhub
 - agile
 hub_tags:
-  use_cases: [reporting_and_analytics, remediation_ticketing]
+  use_cases: [soar, reporting_and_analytics, remediation_ticketing]
   keywords: [zenhub, agile]
   features: []
 connection:

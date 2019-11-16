@@ -18,7 +18,7 @@ tags:
 - pwn
 - haveibeenpwned
 hub_tags:
-  use_cases: [soc_automation, threat_hunting, threat_intel, threat_detection_and_response]
+  use_cases: [soar, soc_automation, threat_hunting, threat_intel, threat_detection_and_response]
   keywords: [breach, compromise, pwn, haveibeenpwned]
   features: []
 enable_cache: true

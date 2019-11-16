@@ -17,7 +17,7 @@ tags:
 - cb
 - protection
 hub_tags:
-  use_cases: [threat_detection_and_response, soar, soc_automation, alerting_and_notifications]
+  use_cases: [soar, threat_detection_and_response, soc_automation, alerting_and_notifications]
   keywords: [carbon black, cb, protection]
   features: []
 enable_cache: true

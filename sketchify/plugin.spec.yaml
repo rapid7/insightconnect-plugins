@@ -22,7 +22,7 @@ tags:
 - offense
 - pentest
 hub_tags:
-  use_cases: [data_utility]
+  use_cases: [soar, data_utility]
   keywords: [sketchify, url, link, phishing, offense, pentest, verylegit]
   features: []
 enable_cache: false

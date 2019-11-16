@@ -16,7 +16,7 @@ tags:
 - incidents
 - management
 hub_tags:
-  use_cases: [investigations, remediation_ticketing, user_management, soc_automation]
+  use_cases: [soar, investigations, remediation_ticketing, user_management, soc_automation]
   keywords: [incidents, management]
   features: []
 types:

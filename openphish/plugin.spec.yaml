@@ -16,7 +16,7 @@ tags:
 - "data enrichment"
 - "threat intelligence"
 hub_tags:
-  use_cases: [phishing_investigations]
+  use_cases: [soar, phishing_investigations]
   keywords: [data enrichment, threat intelligence]
   features: []
 enable_cache: true

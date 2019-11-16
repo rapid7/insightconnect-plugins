@@ -18,7 +18,7 @@ tags:
 - suricata
 - emerging threats pro
 hub_tags:
-  use_cases: [threat_intel, threat_detection_and_response, soc_automation, soar]
+  use_cases: [soar, threat_intel, threat_detection_and_response, soc_automation]
   keywords: [pcap, network total, suricata, emerging threats pro]
   features: []
 enable_cache: false

@@ -14,7 +14,7 @@ tags: [ "ITSM", "BMC", "Remedy", "Service Management" ]
 support: community
 status: []
 hub_tags:
-  use_cases: [remediation_ticketing, reporting_and_analytics, asset_inventory, data_aggregation]
+  use_cases: [soar, remediation_ticketing, reporting_and_analytics, asset_inventory, data_aggregation]
   keywords: [service management, itsm, bmc, remedy]
   features: []
 

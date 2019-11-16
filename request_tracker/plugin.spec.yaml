@@ -18,7 +18,7 @@ tags:
 - incidents
 - ticket
 hub_tags:
-  use_cases: [remediation_ticketing]
+  use_cases: [soar, remediation_ticketing]
   keywords: [issue, track, incidents, ticket]
   features: []
 types:

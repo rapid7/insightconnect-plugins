@@ -17,7 +17,7 @@ tags:
 - Google Cloud Compute
 - Virtual Machines
 hub_tags:
-  use_cases: [asset_inventory, asset_containment, soc_automation]
+  use_cases: [soar, asset_inventory, asset_containment, soc_automation]
   keywords: [google cloud compute, virtual machines, google]
   features: []
 author: komand

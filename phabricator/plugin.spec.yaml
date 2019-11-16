@@ -17,7 +17,7 @@ tags:
 - code review
 - ug tracker
 hub_tags:
-  use_cases: [reporting_and_analytics, remediation_ticketing, investigations, data_aggregation]
+  use_cases: [soar, reporting_and_analytics, remediation_ticketing, investigations, data_aggregation]
   keywords: [phabricator, code review, ug tracker]
   features: []
 language: python
