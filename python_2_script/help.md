@@ -11,7 +11,7 @@ The Python plugin allows you to run Python 2 code. It includes Python 2.7.15 and
 
 # Key Features
 
-* Run a Python 2 script
+* Run Python 2 code
 
 # Requirements
 
@@ -29,7 +29,7 @@ This plugin does not contain a connection.
 
 #### Run Function
 
-This action is used to run custom python code using a function called `run`.
+This action is used to run custom Python code using a function called `run`.
 
 See the [official documentation](https://docs.komand.com/docs/python-script-plugin) for more information.
 

@@ -13,7 +13,7 @@ The Python 3 plugin also allows you to load custom modules via its connection pa
 
 # Key Features
 
-* Run a Python 3 script
+* Run Python 3 code
 
 # Requirements
 

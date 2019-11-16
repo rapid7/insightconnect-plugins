@@ -6,18 +6,18 @@ PowerShell is a task automation and configuration management framework from Micr
 
 # Key Features
 
-* Run a powershell script
+* Run a PowerShell script
 
 # Requirements
 
-The requirements for running the Powershell plugin will vary depending on the use case. Your powershell scripts can either be run locally on the InsightConnect Orchestrator or remotely on a powershell enabled server. 
+The requirements for running the PowerShell plugin will vary depending on the use case. Your PowerShell scripts can either be run locally on the InsightConnect Orchestrator or remotely on a PowerShell enabled server. 
 
 ## Remote Requirements
-* A powershell enabled server
-* Administrative credentials to a Powershell enabled server
+* A PowerShell enabled server
+* Administrative credentials to a PowerShell enabled server
 
 ## Local Requirements
-* Powershell can be run locally on the InsightConnect Orchestrator, in this case, you must ensure connectivity to any network resources the Powershell script will use. Typically this involves opening ports in your firewall or windows servers. 
+* PowerShell can be run locally on the InsightConnect Orchestrator, in this case, you must ensure connectivity to any network resources the PowerShell script will use. Typically this involves opening ports in your firewall or windows servers. 
 
 # Documentation
 
@@ -91,7 +91,7 @@ Example output:
 
 {
   "stdout": "Mr $test  $test2\r\nMr bob  said hello\r\nbob \n  said hello\r\n5\r\ntesting chars in lit string \\ / \\r /r // \\\\ ! @ ## $ %\r\ntesting chars in interpreted string // \\\\ /r/n ! @ ## $\r\n\r\nPath            \r\n----            \r\nC:\\Users\\mhofert\r\nC:\\Users        \r\nC:\\             \r\n\r\n\r\n",
-  "stderr": "#< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/powershell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>"
+  "stderr": "#< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/PowerShell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>"
 }
 
 ```
@@ -117,7 +117,7 @@ This plugin can connect over HTTP, the default port for this is 5985. It should 
 not secure as all information passed is in plain text. In addition, Windows will not allow HTTP connections by default.
 The following commands must be run on the Windows computer that you want to connect to.
 
-For more information see [Compromising Yourself with WinRM's AllowUnencrypted = True](https://blogs.msdn.microsoft.com/powershell/2015/10/27/compromising-yourself-with-winrms-allowunencrypted-true/)
+For more information see [Compromising Yourself with WinRM's AllowUnencrypted = True](https://blogs.msdn.microsoft.com/PowerShell/2015/10/27/compromising-yourself-with-winrms-allowunencrypted-true/)
 
 ```
 

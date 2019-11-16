@@ -186,29 +186,35 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
+
+### Custom Output Types
+
+#### timeout
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|timeout|integer|False|TCP timeout|
+
+#### maxudpsize
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|maxudpsize|integer|False|Max UDP Size|
 
 ## Troubleshooting
 
 The sample `rate` value defaults to 1 if not provided by the user.
 
-## Workflows
-
-Examples:
-
-* Increment counter
-* Decrement counter
-* Set gauge value
-* Increment set value
-* Record timer information
-
-## Versions
+# Version History
 
 * 1.0.0 - Update to Python v2 architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
