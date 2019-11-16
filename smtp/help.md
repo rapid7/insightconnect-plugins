@@ -72,17 +72,13 @@ Example output:
 
 This plugin does not contain any triggers.
 
+### Custom Output Types
+
+_This plugin does not contain any custom output types._
+
 ## Troubleshooting
 
 If you are passing a variable into the Attachment 'Content' field, you must make sure it is base64-encoded.
-
-## Workflows
-
-Examples:
-
-* [Security Mailbox Triage](https://market.komand.com/workflows/komand/security-mailbox-triage/1.0.0)
-* Notification
-* Send logs from artifacts
 
 ## Version History
 
@@ -102,7 +98,3 @@ Examples:
 ## References
 
 * [SMTP](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol)
-
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
