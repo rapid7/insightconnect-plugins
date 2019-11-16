@@ -19,7 +19,7 @@ tags:
 - pcap
 - ids
 hub_tags:
-  use_cases: [log_search, alert_enrichment, application_security, data_ingestion, detection_and_response, log_search, network_containment]
+  use_cases: [threat_detection_and_response, threat_hunting, investigations]
   keywords: [bro, nsm, pcap, ids]
   features: []
 enable_cache: false

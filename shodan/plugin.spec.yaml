@@ -18,7 +18,7 @@ tags:
 - scan
 - public
 hub_tags:
-  use_cases: [application_security, penetration_testing, threat_hunting]
+  use_cases: [investigations]
   keywords: [intel, scan, public, shodan]
   features: []
 connection:

@@ -22,7 +22,7 @@ tags:
 - traffic
 - domain
 hub_tags:
-  use_cases: [threat_intel]
+  use_cases: [investigations, threat_detection_and_response, soc_automation]
   keywords: [whois, security, threat, dns, traffic, domain, threatminer]
   features: []
 types:

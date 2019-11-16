@@ -21,7 +21,7 @@ tags:
 - threat analysis
 - vulnerability prioritization
 hub_tags:
-  use_cases: [threat_intel, phishing_investigations, investigations]
+  use_cases: [soc_automation, threat_detection_and_response]
   keywords: [recorded future, threat intelligence, machine learning, threat analysis, vulnerability prioritization]
   features: []
 enable_cache: false

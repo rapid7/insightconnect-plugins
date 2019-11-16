@@ -20,7 +20,7 @@ tags:
 - domains
 - malware
 hub_tags:
-  use_cases: [threat_intel, phishing_investigations, investigations]
+  use_cases: [threat_detection_and_response, soc_automation]
   keywords: [threat, intelligence, crits, domains, malware]
   features: []
 types:

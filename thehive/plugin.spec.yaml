@@ -19,7 +19,7 @@ tags:
 - intel
 - case
 hub_tags:
-  use_cases: [soc_automation, investigations, siem]
+  use_cases: [remediation_ticketing]
   keywords: [thehive, intel, case]
   features: []
 enable_cache: true

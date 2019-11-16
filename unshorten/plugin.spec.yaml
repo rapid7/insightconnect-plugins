@@ -19,7 +19,7 @@ tags:
 - short
 - unshorten
 hub_tags:
-  use_cases: [alert_enrichment, external_enrichment, investigations]
+  use_cases: [alert_enrichment, external_enrichment, investigations, threat_intel, threat_detection_and_response]
   keywords: [url, link, short, unshorten]
   features: []
 enable_cache: false
