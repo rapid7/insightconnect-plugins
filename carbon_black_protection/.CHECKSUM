@@ -1,0 +1,55 @@
+{
+	"spec": "95fabaa2fb5068b17688c01907cfcd9a",
+	"manifest": "8972fc99d5663fcd066ecf715f99ef0e",
+	"setup": "17ed68c438accc9e905afd7fb971b461",
+	"schemas": [
+		{
+			"identifier": "approve_file_locally/schema.py",
+			"hash": "ec413b80e71e3071f8a6ea440178795a"
+		},
+		{
+			"identifier": "ban_file/schema.py",
+			"hash": "86fa5371879ac97c4bc0e7ab20afa7a8"
+		},
+		{
+			"identifier": "create_file_rule/schema.py",
+			"hash": "29d60c215bba968b083b2d8fb782b9db"
+		},
+		{
+			"identifier": "get_approval_request/schema.py",
+			"hash": "6fd4fab873b37cdbc758d850fb44d42f"
+		},
+		{
+			"identifier": "get_file_rule/schema.py",
+			"hash": "affdc40d379723400d6fa86d0e4b7400"
+		},
+		{
+			"identifier": "resolve_approval_request/schema.py",
+			"hash": "36b75241722a92c5814b8d3800962a41"
+		},
+		{
+			"identifier": "retrieve_file_catalog_entry/schema.py",
+			"hash": "8ab44062bfbe0f0720ff72d5a37ff1b6"
+		},
+		{
+			"identifier": "retrieve_file_instance/schema.py",
+			"hash": "b0e032222b92cb9e8819f27f8b9cca14"
+		},
+		{
+			"identifier": "unapprove_file_locally/schema.py",
+			"hash": "7725d5908d86a85219409a5fb2328680"
+		},
+		{
+			"identifier": "unban_file/schema.py",
+			"hash": "8badef4b66d540951d8c5e917f3f5a20"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "d0f9d6f117a310070ede82a6bb6b05d1"
+		},
+		{
+			"identifier": "new_approval_request/schema.py",
+			"hash": "583b8d5bb697fb35a8aa0c0ff6b5af32"
+		}
+	]
+}

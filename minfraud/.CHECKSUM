@@ -1,0 +1,55 @@
+{
+	"spec": "90ec0cb4066dd22988885f16c1cbded2",
+	"manifest": "aa490f1de008325ea741eed51063209e",
+	"setup": "25572a710df2d1bb291daf363b204e9e",
+	"schemas": [
+		{
+			"identifier": "account_lookup/schema.py",
+			"hash": "2a40b950a551e62e2519c7a72b53fdaf"
+		},
+		{
+			"identifier": "all_lookup/schema.py",
+			"hash": "3c458ba09bd2e3f43a23771216667f97"
+		},
+		{
+			"identifier": "billing_lookup/schema.py",
+			"hash": "c3a30601655966edd61ab3f048d624eb"
+		},
+		{
+			"identifier": "card_lookup/schema.py",
+			"hash": "3d9d2e061a2b4b5f8e04d033c0b97979"
+		},
+		{
+			"identifier": "cart_lookup/schema.py",
+			"hash": "ed11f4eadd3a6a33141c26f3c97fd742"
+		},
+		{
+			"identifier": "device_lookup/schema.py",
+			"hash": "b7a615671489ec6a2ebef25bbb9a3e67"
+		},
+		{
+			"identifier": "email_lookup/schema.py",
+			"hash": "d2758e2e08ac662e14321b4c309947df"
+		},
+		{
+			"identifier": "event_lookup/schema.py",
+			"hash": "c68934d874a42659969bb62b6e1175f6"
+		},
+		{
+			"identifier": "order_lookup/schema.py",
+			"hash": "a3678752e599a605055147ee36ce9c2a"
+		},
+		{
+			"identifier": "payment_lookup/schema.py",
+			"hash": "2878d03d759569adc08ba34037d3f993"
+		},
+		{
+			"identifier": "shipping_lookup/schema.py",
+			"hash": "4ccf793e881f062278d3eff1a3c292f6"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "ad7ce472e8c811c0cb8de4daaef346fb"
+		}
+	]
+}

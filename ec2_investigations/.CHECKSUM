@@ -1,0 +1,19 @@
+{
+	"spec": "1eea260bfb4a1b7f4785f226c3dd8413",
+	"manifest": "d2c48ae503e797f560a6b56f8d2758dd",
+	"setup": "8576ff9e611da396dc303ca198b4927d",
+	"schemas": [
+		{
+			"identifier": "clam_av/schema.py",
+			"hash": "9a04b3865c53c7dd4d8fe5bbbae0b742"
+		},
+		{
+			"identifier": "mount_drive/schema.py",
+			"hash": "2f37cf1ea462746d062b625c63424f49"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "534cb1c67de5e3a04bd8410d054203ca"
+		}
+	]
+}

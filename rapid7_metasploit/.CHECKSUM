@@ -1,0 +1,23 @@
+{
+	"spec": "7fbe5691bd0d43c13357b22b6bd7c2b2",
+	"manifest": "9a69cb94da22d52493392f45cdcfd1c2",
+	"setup": "0032b9fdedb90de9b1dd6dcd947f7f3b",
+	"schemas": [
+		{
+			"identifier": "execute_exploit/schema.py",
+			"hash": "4aa81ba3b575622d8fb8999e901248e4"
+		},
+		{
+			"identifier": "search_for_exploit/schema.py",
+			"hash": "f6fd5d55b81b26abf1f4ab30caf838da"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "ea4553715fcea00a481379d411b11cf6"
+		},
+		{
+			"identifier": "new_modules/schema.py",
+			"hash": "fbc77f7b3785eb52e0eeea06b7159ac2"
+		}
+	]
+}

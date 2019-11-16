@@ -1,0 +1,47 @@
+{
+	"spec": "eb355190a3e924ad2df64750a55c524b",
+	"manifest": "3eae8468cf35398b3d1349d5222104af",
+	"setup": "8c09ac7ca0d75d31874f26b0b261486e",
+	"schemas": [
+		{
+			"identifier": "bulk_indicator_download/schema.py",
+			"hash": "a79a68e3390fa2cdae8703ed3b8ea8bb"
+		},
+		{
+			"identifier": "create_adversary/schema.py",
+			"hash": "2d407006d4eb98bc360c903c21e5ddae"
+		},
+		{
+			"identifier": "create_task/schema.py",
+			"hash": "bef3d3a3fa60e87dbcdf4bdf164f8e77"
+		},
+		{
+			"identifier": "delete_adversary/schema.py",
+			"hash": "c34e8751d63ba5e5c739e31075ed63ab"
+		},
+		{
+			"identifier": "emails_retrieve/schema.py",
+			"hash": "49f3c2a48517504218527eeeb40f1ec4"
+		},
+		{
+			"identifier": "incidents_retrieve/schema.py",
+			"hash": "3734068711d0a88b6d7f1e6c96cc96e5"
+		},
+		{
+			"identifier": "signatures_retrieve/schema.py",
+			"hash": "7437a136dab5900e51066f1904c17c7f"
+		},
+		{
+			"identifier": "threats_retrieve/schema.py",
+			"hash": "f594a0ab76eeab462b712fbf210e155b"
+		},
+		{
+			"identifier": "victims_retrieve/schema.py",
+			"hash": "875b190949b2b2e6064531b7573e1ad9"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "3d1c1ea7479d5a77a37c092713078393"
+		}
+	]
+}

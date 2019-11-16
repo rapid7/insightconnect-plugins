@@ -1,0 +1,15 @@
+{
+	"spec": "3e6daeecc2af72117f0a1443238d1f47",
+	"manifest": "6cb665669b0ab90fee92e69b7343775a",
+	"setup": "97e8b1581a43513b4d4bc71d238d9fdd",
+	"schemas": [
+		{
+			"identifier": "traceroute/schema.py",
+			"hash": "70b0e42d2f4cc8bac26e3ce85a3b6894"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "cb60c2b5b62fafb9634d667a8ad96277"
+		}
+	]
+}

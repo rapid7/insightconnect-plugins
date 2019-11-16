@@ -1,0 +1,15 @@
+{
+	"spec": "29fe88b19894a1278ad8004e378e2c42",
+	"manifest": "70d03f7b4955c5285ee3cc966e751aa4",
+	"setup": "a60df413544ad98f9fb878380e3a209c",
+	"schemas": [
+		{
+			"identifier": "knock/schema.py",
+			"hash": "903e1e5239f549f361719165986e1c54"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "cb60c2b5b62fafb9634d667a8ad96277"
+		}
+	]
+}

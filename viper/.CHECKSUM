@@ -1,0 +1,99 @@
+{
+	"spec": "5f5c628a1f30d997056d15aa1fd308a2",
+	"manifest": "1ea188f0b626b7919aea850050aabd35",
+	"setup": "133f18ae62cfbd0cccb21ec03e639fbf",
+	"schemas": [
+		{
+			"identifier": "create_note/schema.py",
+			"hash": "c3a814873538e87ebdace5e7ca4d30c9"
+		},
+		{
+			"identifier": "create_project/schema.py",
+			"hash": "34f6f5ab4457ae225b65abdd9a11f85e"
+		},
+		{
+			"identifier": "delete_analysis/schema.py",
+			"hash": "12de79b94a078e0d253c949aa0125b9d"
+		},
+		{
+			"identifier": "delete_malware/schema.py",
+			"hash": "6670a6aa817b6ac3c3721a69d9fe7896"
+		},
+		{
+			"identifier": "delete_note/schema.py",
+			"hash": "e831c223cf898be8d8466f4d40c3fccb"
+		},
+		{
+			"identifier": "delete_tag/schema.py",
+			"hash": "546bddd5d376ad052a745f6830765ba4"
+		},
+		{
+			"identifier": "download_malware_file/schema.py",
+			"hash": "eb69ae47541943a0c0849c3459bf4d24"
+		},
+		{
+			"identifier": "get_analysis/schema.py",
+			"hash": "de19e6386d3a2e631b6a34df512a3730"
+		},
+		{
+			"identifier": "get_malware/schema.py",
+			"hash": "d797f3175b2cebbe5ea17cb7589313c7"
+		},
+		{
+			"identifier": "get_note/schema.py",
+			"hash": "0a831b50ffc36c2fbcc3b019062d4787"
+		},
+		{
+			"identifier": "get_project/schema.py",
+			"hash": "8019bbdcc9f543a5c38779af119d50af"
+		},
+		{
+			"identifier": "get_tag/schema.py",
+			"hash": "f7b32209b0b0a57b0c4e044a03d5a272"
+		},
+		{
+			"identifier": "list_analyses/schema.py",
+			"hash": "0db5797f39f8ef54900f3e0d564bbc8f"
+		},
+		{
+			"identifier": "list_available_compressors/schema.py",
+			"hash": "75639285cc1e023d30d7391a96a32161"
+		},
+		{
+			"identifier": "list_available_extractors/schema.py",
+			"hash": "149879c9e855ddc8394259e5fab52bf3"
+		},
+		{
+			"identifier": "list_available_modules/schema.py",
+			"hash": "ec7cb150681de0e0215ae82ec1820903"
+		},
+		{
+			"identifier": "list_available_projects/schema.py",
+			"hash": "a0be2aec544047f6da0e4a896badb3dd"
+		},
+		{
+			"identifier": "list_malware/schema.py",
+			"hash": "b3cc0c329ad6f45f9581972ec339cf0e"
+		},
+		{
+			"identifier": "list_notes/schema.py",
+			"hash": "3d15d41fbe425a784a7508a05a117e0b"
+		},
+		{
+			"identifier": "list_tags/schema.py",
+			"hash": "e1f496418ae8b8e96b1bbdbdaa777e33"
+		},
+		{
+			"identifier": "update_note/schema.py",
+			"hash": "e29e6a7a9b14c4beee06516949f01b70"
+		},
+		{
+			"identifier": "upload_malware/schema.py",
+			"hash": "fa9463886c7a0166325f67e4f1ba0052"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "76702041f35545b0c219f7134e941758"
+		}
+	]
+}

@@ -1,0 +1,15 @@
+{
+	"spec": "f2f917e31eededc07ad48bad0f60b4b1",
+	"manifest": "7866e5cf7e5646e351971eead13d85d9",
+	"setup": "248c7a9612c72a59486ed3ffad07377f",
+	"schemas": [
+		{
+			"identifier": "connection/schema.py",
+			"hash": "ff9483963dda45af0ef36f39e0c6c764"
+		},
+		{
+			"identifier": "poll/schema.py",
+			"hash": "3b8908d6186cb19cde91b1c8f6e84f8c"
+		}
+	]
+}

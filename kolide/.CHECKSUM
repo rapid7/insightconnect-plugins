@@ -1,0 +1,23 @@
+{
+	"spec": "7267b2802e598c2bff78fad36c389d5a",
+	"manifest": "531b98d6db5332417a1516a0e6164d6c",
+	"setup": "4904efeb9ca7e9566aeb9db2c2086d8b",
+	"schemas": [
+		{
+			"identifier": "create_query/schema.py",
+			"hash": "a8e0852e01efd4d83337e6a576600735"
+		},
+		{
+			"identifier": "get_query/schema.py",
+			"hash": "1d5bca17341b80f72226c42696928afe"
+		},
+		{
+			"identifier": "run_query/schema.py",
+			"hash": "e44d6490c21bbcf48d930788573360fe"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "c607cf3fed4c801dbe42b8cf97e25938"
+		}
+	]
+}

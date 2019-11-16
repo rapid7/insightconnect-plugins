@@ -1,0 +1,19 @@
+{
+	"spec": "0179c9e09b5753fb67f3bf9c385a5e2a",
+	"manifest": "a3f8c6b90ec150db99b303e734d05a37",
+	"setup": "f8f262fb663299d74ef3d7f2f98e29a1",
+	"schemas": [
+		{
+			"identifier": "execute_script/schema.py",
+			"hash": "ab4ddf237c0f067c6286c132fc66ad30"
+		},
+		{
+			"identifier": "powershell_string/schema.py",
+			"hash": "cec583283bf674c8fc00fc330009a330"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "11d031312d2f590f959374cf34ab78af"
+		}
+	]
+}

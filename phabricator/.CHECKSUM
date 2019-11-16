@@ -1,0 +1,47 @@
+{
+	"spec": "50484f53e2a81f263ad940c3954ce475",
+	"manifest": "c587a9b1c2cbb7b39464ac8387491e4b",
+	"setup": "7082b5347ace88d8b5c6943f5686fa28",
+	"schemas": [
+		{
+			"identifier": "assign/schema.py",
+			"hash": "f96f8259ecc5b91d21f65abc8223d8a5"
+		},
+		{
+			"identifier": "claim/schema.py",
+			"hash": "54540212e91075eb2215e64eb1f9aa52"
+		},
+		{
+			"identifier": "close/schema.py",
+			"hash": "d8e28a8977a57047eecee848b9f9125e"
+		},
+		{
+			"identifier": "createtask/schema.py",
+			"hash": "fc9de294d2b5e3517312c9b331fccc15"
+		},
+		{
+			"identifier": "priority/schema.py",
+			"hash": "bb0ff19a33b7090e6dbc0efd63a240a2"
+		},
+		{
+			"identifier": "projects/schema.py",
+			"hash": "e5e0248a810a1d831f56b7eda07bbb32"
+		},
+		{
+			"identifier": "status/schema.py",
+			"hash": "e36b8d48b1c833ab8da550e2affae937"
+		},
+		{
+			"identifier": "subscribe/schema.py",
+			"hash": "e2cf47b5a709ecd415bda1b708377e18"
+		},
+		{
+			"identifier": "unsubscribe/schema.py",
+			"hash": "e3d53ee2a35c8781c5a8c9dcc04fa4a6"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "ac76b05233e646bbf00ad6cabbc20a4e"
+		}
+	]
+}

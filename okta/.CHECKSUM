@@ -1,0 +1,55 @@
+{
+	"spec": "fe3c25f6ba62b133df07c7e148d2ad61",
+	"manifest": "9c38b0c7099a504b01978f2057aed06a",
+	"setup": "18f648c6c34330e50ddc03591abe3f83",
+	"schemas": [
+		{
+			"identifier": "add_user_to_group/schema.py",
+			"hash": "2f182057461654f58f8ccf74cd0780ba"
+		},
+		{
+			"identifier": "assign_user_to_app_sso/schema.py",
+			"hash": "70d73e12fb323a5f1a88de381a016d49"
+		},
+		{
+			"identifier": "create_user/schema.py",
+			"hash": "b3eaa8551dbc0feede2acc6d2a26a4f8"
+		},
+		{
+			"identifier": "deactivate_user/schema.py",
+			"hash": "6742054ef385936bf5989b25356ec62e"
+		},
+		{
+			"identifier": "delete_user/schema.py",
+			"hash": "45cb3c3622d55f3e78ae2f5cedac3b75"
+		},
+		{
+			"identifier": "get_user/schema.py",
+			"hash": "2c1c9602c8ac51864c6a2980466e7150"
+		},
+		{
+			"identifier": "list_groups/schema.py",
+			"hash": "935dc1d6162dc29c24fd224668b4552f"
+		},
+		{
+			"identifier": "remove_user_from_group/schema.py",
+			"hash": "7dd210127b90c220431672d10b1f0801"
+		},
+		{
+			"identifier": "reset_factors/schema.py",
+			"hash": "7051e1a894b1a309e62b5ec118abe4b8"
+		},
+		{
+			"identifier": "suspend_user/schema.py",
+			"hash": "f59d4b691fea385fd301029241e6a77a"
+		},
+		{
+			"identifier": "unsuspend_user/schema.py",
+			"hash": "ab62ae562b35b25fe96493ee49bf0cdd"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "e48b04fea723639c4cc7074907d8063a"
+		}
+	]
+}

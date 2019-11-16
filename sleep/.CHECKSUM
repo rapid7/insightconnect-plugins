@@ -1,0 +1,15 @@
+{
+	"spec": "4774669b971c5ac0b79fd1f35f9b8d49",
+	"manifest": "0a4d35393aaf8905f3aa82acb9d82fc4",
+	"setup": "a85c434aafbc8146aabb9c30bb3dfb19",
+	"schemas": [
+		{
+			"identifier": "sleep/schema.py",
+			"hash": "8c6a11589e0e0b4c641e3459477b306f"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "cb60c2b5b62fafb9634d667a8ad96277"
+		}
+	]
+}

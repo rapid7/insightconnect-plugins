@@ -1,0 +1,47 @@
+{
+	"spec": "d7681f97180964164b68dd7340788955",
+	"manifest": "51d8e5d7162010a55682d79dd21e10f8",
+	"setup": "29db00d4100376ba49f182f16d85dc50",
+	"schemas": [
+		{
+			"identifier": "create_ticket/schema.py",
+			"hash": "466a3ea1cb6ea57a1b873f966bf2dabb"
+		},
+		{
+			"identifier": "delete_membership/schema.py",
+			"hash": "77e8290359c909da849d804725c276fa"
+		},
+		{
+			"identifier": "delete_ticket/schema.py",
+			"hash": "8201d513b8887f4bd866c1a27c96eb5a"
+		},
+		{
+			"identifier": "delete_user/schema.py",
+			"hash": "4cbf7bc9ffabaea78deff5bf4ebabb0f"
+		},
+		{
+			"identifier": "search/schema.py",
+			"hash": "6d892d6499a1e5e33440ff110d10f6ce"
+		},
+		{
+			"identifier": "show_memberships/schema.py",
+			"hash": "92135539b423799d78afdfad4a89e032"
+		},
+		{
+			"identifier": "show_user/schema.py",
+			"hash": "365351c6d9099b67ff4ac680fed4c3b1"
+		},
+		{
+			"identifier": "suspend_user/schema.py",
+			"hash": "3864e66f5e2659364d0aea2eb4488449"
+		},
+		{
+			"identifier": "update_ticket/schema.py",
+			"hash": "311399c7004bfe9bfd69881cf21b0e68"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "03a29eea8ee5761db468f1764e8f7283"
+		}
+	]
+}

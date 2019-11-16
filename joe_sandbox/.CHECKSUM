@@ -1,0 +1,71 @@
+{
+	"spec": "0dd90025f0fe09a6901126a1fbe311da",
+	"manifest": "06bc784aaadb06b67913a6bd267e8258",
+	"setup": "df7d8c2288cb90ac6172c25654cdb809",
+	"schemas": [
+		{
+			"identifier": "check_server_status/schema.py",
+			"hash": "3e7fb7580f6680838cd5bcf5866c1ead"
+		},
+		{
+			"identifier": "delete_analysis/schema.py",
+			"hash": "8f9947fb1183831b140048f1c4d0b38b"
+		},
+		{
+			"identifier": "download_analysis/schema.py",
+			"hash": "7485139aa6dc0e77414a25b763c13267"
+		},
+		{
+			"identifier": "get_account_info/schema.py",
+			"hash": "6931b38cc17c678d0bc37706b0555915"
+		},
+		{
+			"identifier": "get_analysis_info/schema.py",
+			"hash": "0f518d697136ce905eed863a66c456c6"
+		},
+		{
+			"identifier": "get_server_info/schema.py",
+			"hash": "8a643241eef37ec17025d6a5571598d7"
+		},
+		{
+			"identifier": "list_analyses/schema.py",
+			"hash": "fbce3b2c09e1731e84670dab7829feec"
+		},
+		{
+			"identifier": "list_countries/schema.py",
+			"hash": "f4eea13027db59513ba2a79f4b9f8a9f"
+		},
+		{
+			"identifier": "list_keyboard_layouts/schema.py",
+			"hash": "706dec6c7917f20ee015205d0c15e4d2"
+		},
+		{
+			"identifier": "list_systems/schema.py",
+			"hash": "afed9210c7e4943e16a1d81f5098022c"
+		},
+		{
+			"identifier": "search_analysis/schema.py",
+			"hash": "44b6d7f8bb02f9fe166a158a4d0237c4"
+		},
+		{
+			"identifier": "submit_cookbook/schema.py",
+			"hash": "fc6831fcbfc079666e940e07b8345a39"
+		},
+		{
+			"identifier": "submit_sample/schema.py",
+			"hash": "0d2d929d40d37981da7b59f06de0a6dd"
+		},
+		{
+			"identifier": "submit_sample_url/schema.py",
+			"hash": "fca7b6c2e86deb98dccf0e1b69d736d8"
+		},
+		{
+			"identifier": "submit_url/schema.py",
+			"hash": "32c43a3fd162f4ee5a827f455e06b56c"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "5bedf3d55b08fa8b2806cbd0a8c4cb97"
+		}
+	]
+}

@@ -1,0 +1,55 @@
+{
+	"spec": "6f80854a65c2f70d9c2c458a2a7dedeb",
+	"manifest": "00ec9d789c83b65c2ccb507265b50da2",
+	"setup": "84bb36b53779a2566cd4d8f69a21e8e1",
+	"schemas": [
+		{
+			"identifier": "add_issue_to_epic/schema.py",
+			"hash": "e34f89f62d8dd85b51e15ecfd7429541"
+		},
+		{
+			"identifier": "convert_epic_to_issue/schema.py",
+			"hash": "d4f80f292f83a26d4d353d79485b1a1a"
+		},
+		{
+			"identifier": "convert_issue_to_epic/schema.py",
+			"hash": "00aafb509c437f4f1f313ecbf3042549"
+		},
+		{
+			"identifier": "get_epic_data/schema.py",
+			"hash": "2ad529d952fc5e849ba3bd5980d75c8b"
+		},
+		{
+			"identifier": "get_issue_data/schema.py",
+			"hash": "4ea4b106507c14024644c7cd0bf26751"
+		},
+		{
+			"identifier": "get_issue_events/schema.py",
+			"hash": "286f5c49690e0b6bf5da9a7f18b5695c"
+		},
+		{
+			"identifier": "get_repository_board_data/schema.py",
+			"hash": "e3b8e2efbaf966ca9356dc4631d26882"
+		},
+		{
+			"identifier": "get_repository_epics/schema.py",
+			"hash": "25a734d3a93772e95d981937d6a0b399"
+		},
+		{
+			"identifier": "move_issue_between_pipelines/schema.py",
+			"hash": "2ecaf74f2de6bbe40b89a58923b80b80"
+		},
+		{
+			"identifier": "remove_issue_from_epic/schema.py",
+			"hash": "3166df40732e56d5f53bf648ad7c0923"
+		},
+		{
+			"identifier": "set_estimate_for_issue/schema.py",
+			"hash": "5b93bf0f671894cdaa784dcf1875a185"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "312383f5b2d79cf397f8da0ada1c1a96"
+		}
+	]
+}
