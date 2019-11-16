@@ -1,7 +1,7 @@
 {
-	"spec": "090a4569bfd53bbd3449f579a3fc1294",
-	"manifest": "8001285a90822ce0e95eab1c064e3de9",
-	"setup": "6b0d6d65fb9e0a27c004be51e42f10d9",
+	"spec": "d0eac3dd52c0be67525c064efb408a20",
+	"manifest": "b8dd4d12334f2237a1eefcc57f461f8f",
+	"setup": "eb2cc2af50cf99af19da94578a0cd711",
 	"schemas": [
 		{
 			"identifier": "diff/schema.py",

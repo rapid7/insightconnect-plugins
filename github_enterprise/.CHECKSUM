@@ -1,7 +1,7 @@
 {
-	"spec": "896b2c703fa2612ff2fd74f1e3bf0176",
-	"manifest": "e46a489295347d462c9261b3725d63f5",
-	"setup": "0a00f5e59abecf0fcf94e69096b82d02",
+	"spec": "30286687450605b2912f8302ff03cd8f",
+	"manifest": "9bec62f55758f5f048521190b2024531",
+	"setup": "68a3f04caf72a375369ae0ae99bfc1a6",
 	"schemas": [
 		{
 			"identifier": "demote/schema.py",

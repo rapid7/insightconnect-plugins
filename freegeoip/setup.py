@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='freegeoip-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='This plugin lookup GeoIP information for a specified host',
       author='rapid7',
       author_email='',

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='grep-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.3',
       description='This plugin searches for a specified pattern in a string or a file',
       author='rapid7',
       author_email='',

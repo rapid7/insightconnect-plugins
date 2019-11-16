@@ -6,7 +6,7 @@ from komand_cisco_umbrella_enforcement import connection, actions, triggers
 
 Name = 'Cisco Umbrella Enforcement'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'This plugin utilizes Cisco Umbrella Enforcement to inherit the ability to send security events from platform/service/appliance within a customer environment to the Cisco security cloud for enforcement'
 
 

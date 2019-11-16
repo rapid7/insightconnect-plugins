@@ -1,7 +1,7 @@
 {
-	"spec": "aad89e085c83d9f9b6f50abfcc0c310b",
-	"manifest": "62b4a74e393e7a5fccb7c6376ebeb37f",
-	"setup": "5a81aee789dcaba2ee0728911a65ac81",
+	"spec": "8d502011305e29eebcb39faf63a209c7",
+	"manifest": "88b1395d7a6f13c68a5b759fad658d13",
+	"setup": "e530c9454087ca785265a63dc00f6376",
 	"schemas": [
 		{
 			"identifier": "post/schema.py",

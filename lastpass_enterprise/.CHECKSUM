@@ -1,7 +1,7 @@
 {
-	"spec": "e9a7e308affd2c2ce2a23999b61f1694",
-	"manifest": "a4c9b270c328367808da505f9f78365c",
-	"setup": "e5e37203ff819cd44bb1de6f8a94c799",
+	"spec": "4d255d0cb6a950a213379172c10bbd81",
+	"manifest": "09f65288c98b73124520ebbd3720ab7a",
+	"setup": "e4d9b7d4cbdde87832698df56b10a51b",
 	"schemas": [
 		{
 			"identifier": "change_group/schema.py",

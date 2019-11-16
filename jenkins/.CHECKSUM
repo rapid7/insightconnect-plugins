@@ -1,7 +1,7 @@
 {
-	"spec": "612299d06e152126c181c20014c47ef2",
-	"manifest": "ad9f635734cb23c618a5bbd634aef6be",
-	"setup": "5ab5621372b216c538c770806c54647c",
+	"spec": "cbb4efe66883f197670bb3552642f56b",
+	"manifest": "cae973585aa97f0db944d0650d3c6215",
+	"setup": "8a20fdb41a485178c5a885b434b2f0bc",
 	"schemas": [
 		{
 			"identifier": "build_info/schema.py",

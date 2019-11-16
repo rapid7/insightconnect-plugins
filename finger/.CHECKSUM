@@ -1,7 +1,7 @@
 {
-	"spec": "44514fa391c5db687e8dabb7e0dd9c38",
-	"manifest": "a1cca25f8208d3e8451017e6ee708979",
-	"setup": "5c79ee9f8d5c500d433a97b46c705e24",
+	"spec": "a9976a0c576b9e6a06c3295846a6025c",
+	"manifest": "05d1e411fc2c422c27eea29f6cf50ba6",
+	"setup": "f14f51be2b7490ebe7130293a69de370",
 	"schemas": [
 		{
 			"identifier": "finger/schema.py",

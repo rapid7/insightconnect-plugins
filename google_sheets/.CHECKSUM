@@ -1,7 +1,7 @@
 {
-	"spec": "0830c1ddb196b8c10a55e38f346b93cb",
-	"manifest": "b2450c6585aa5e02c3aa2475d3ee96a6",
-	"setup": "176f1d910298e3e23a7ee62832c63708",
+	"spec": "4d4fdf0d65e8199c2531ba4c5987b572",
+	"manifest": "2402d6a12e2d3a3655474a84047c5106",
+	"setup": "0d77bd21c3a8c14923ca53256a60bd29",
 	"schemas": [
 		{
 			"identifier": "spread_list_to_sheet/schema.py",

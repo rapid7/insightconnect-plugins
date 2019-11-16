@@ -6,7 +6,7 @@ from komand_eml import connection, actions, triggers
 
 Name = 'EML'
 Vendor = 'rapid7'
-Version = '1.1.1'
+Version = '1.1.2'
 Description = 'The EML plugins will parse and extract data from an EML file'
 
 

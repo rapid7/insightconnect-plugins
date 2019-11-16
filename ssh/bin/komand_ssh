@@ -6,7 +6,7 @@ from komand_ssh import connection, actions, triggers
 
 Name = 'SSH'
 Vendor = 'rapid7'
-Version = '1.0.2'
+Version = '1.0.3'
 Description = 'The SSH plugin allows you to run commands on a remote host'
 
 

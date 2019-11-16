@@ -6,7 +6,7 @@ from komand_python_2_script import connection, actions, triggers
 
 Name = 'Python 2 Script'
 Vendor = 'rapid7'
-Version = '2.0.2'
+Version = '2.0.3'
 Description = 'The Python 2 plugin allows you to run a Python 2 script'
 
 

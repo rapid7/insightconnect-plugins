@@ -1,7 +1,7 @@
 {
-	"spec": "b7b7fa1e3d94c04f4664564abd75df84",
-	"manifest": "a410fa9a863fed53377b2ff52c1a07ef",
-	"setup": "c425ac2a28f5307a336e87ed10604321",
+	"spec": "1b93ef41362c5a6b68e636cdcf691e77",
+	"manifest": "32deb298a47e7a297d9796a6cead4f7a",
+	"setup": "46215a4ecf0e27df02439003d54ebff0",
 	"schemas": [
 		{
 			"identifier": "create_logset_container/schema.py",

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='carbon_black_protection-rapid7-plugin',
-      version='2.2.0',
+      version='2.2.1',
       description='Ban and unban files and as well as manage approval requests',
       author='rapid7',
       author_email='',

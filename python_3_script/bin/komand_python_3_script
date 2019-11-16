@@ -6,7 +6,7 @@ from komand_python_3_script import connection, actions, triggers
 
 Name = 'Python 3 Script'
 Vendor = 'rapid7'
-Version = '2.0.0'
+Version = '2.0.1'
 Description = 'The Python 3 plugin allows you to run Python 3 scripts'
 
 

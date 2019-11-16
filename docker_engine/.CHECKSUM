@@ -1,7 +1,7 @@
 {
-	"spec": "bcef78c709859749a797a31ca7582387",
-	"manifest": "2c9589b3c1eb2818dc300520b3e0063b",
-	"setup": "d3fda8238dc2390d30893e199d62c766",
+	"spec": "0bb2a8d6335f1ec27f98f3ed6b0818e5",
+	"manifest": "415bee77d836d8d0c055bcd1619dc87b",
+	"setup": "cc89e6c07acc81e453c6bcb4848789d4",
 	"schemas": [
 		{
 			"identifier": "container_kill/schema.py",

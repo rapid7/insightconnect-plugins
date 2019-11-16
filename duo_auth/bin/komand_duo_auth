@@ -6,7 +6,7 @@ from komand_duo_auth import connection, actions, triggers
 
 Name = 'Duo Auth API'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Duo's Trusted Access platform verifies the identity of your users with two-factor authentication and security health of their devices before they connect to the apps they use. The Duo Auth plugin for Rapid7 InsightConnect enables users to create and send two-factor authentication push notifications'
 
 

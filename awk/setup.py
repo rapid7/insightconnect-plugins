@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='awk-rapid7-plugin',
-      version='1.2.0',
+      version='1.2.1',
       description='This plugin manipulates an input string or file with the GNU awk programming language',
       author='rapid7',
       author_email='',

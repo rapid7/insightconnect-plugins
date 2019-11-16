@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='geoip2precision-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='GeoIP2 Precision is a MaxMind service that offers industry-leading IP intelligence data. Users of the GeoIP2 Precision plugin for Rapid7 InsightConnect can use it to geolocate IP addresses',
       author='rapid7',
       author_email='',

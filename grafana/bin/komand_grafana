@@ -6,7 +6,7 @@ from komand_grafana import connection, actions, triggers
 
 Name = 'Grafana'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'The Grafana plugin allows you to manage users in your Grafana organization'
 
 

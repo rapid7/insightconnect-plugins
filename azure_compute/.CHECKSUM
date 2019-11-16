@@ -1,7 +1,7 @@
 {
-	"spec": "58e0f320087d0661362709991a6bdbd9",
-	"manifest": "daddfe92a65748c21c23d1853c2da2bc",
-	"setup": "10d890405adf0a7923ad905aa0f5ce24",
+	"spec": "0f05a284b21c518279704d199f0862b6",
+	"manifest": "8f8bc76b1b0c0012003d9c9ff623bd9a",
+	"setup": "54722bf1516575c04245c9ba5540173e",
 	"schemas": [
 		{
 			"identifier": "availability_set_vm/schema.py",

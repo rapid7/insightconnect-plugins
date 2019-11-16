@@ -6,7 +6,7 @@ from icon_checkmarx_cxsast import connection, actions, triggers
 
 Name = 'Checkmarx CxSAST'
 Vendor = 'rapid7'
-Version = ''
+Version = '1.0.1'
 Description = 'The Checkmarx CxSAST plugin access CxSAST service to manage projects and scans'
 
 

@@ -6,7 +6,7 @@ from komand_echotrail import connection, actions, triggers
 
 Name = 'EchoTrail Insights'
 Vendor = 'echotrail'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'EchoTrail Insights is a database of executable behavioral analytics, searchable by filename or SHA256 or MD5 hash. Users can lookup filenames and hashes using the EchoTrail Insights plugin for Rapid7 InsightConnect'
 
 

@@ -6,7 +6,7 @@ from komand_paloalto_wildfire import connection, actions, triggers
 
 Name = 'Palo Alto Wildfire'
 Vendor = 'rapid7'
-Version = '1.1.0'
+Version = '1.1.1'
 Description = 'Palo Alto Wildfire is a cloud-based threat analysis service. Perform malware analysis with the Palo Alto Wildfire plugin for InsightConnect malware'
 
 

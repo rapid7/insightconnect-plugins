@@ -1,7 +1,7 @@
 {
-	"spec": "892432998ba7bed734d6f20330bdb585",
-	"manifest": "2be0e51e8d543d6ee278171aa53b45fd",
-	"setup": "ea254e1df78fc0211a886ab694311400",
+	"spec": "75dd75371e464e76c5199f9eeff061d0",
+	"manifest": "4ac2989a990c035c7c074289958462fb",
+	"setup": "6a9b22ad5681210c1185124a439e3013",
 	"schemas": [
 		{
 			"identifier": "av_report/schema.py",

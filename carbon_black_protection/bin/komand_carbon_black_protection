@@ -6,7 +6,7 @@ from komand_carbon_black_protection import connection, actions, triggers
 
 Name = 'Carbon Black Protection'
 Vendor = 'rapid7'
-Version = '2.2.0'
+Version = '2.2.1'
 Description = 'Ban and unban files and as well as manage approval requests'
 
 

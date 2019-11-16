@@ -6,7 +6,7 @@ from komand_hippocampe import connection, actions, triggers
 
 Name = 'Hippocampe'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'The Hippocampe plugin allows for advanced queries and management of your Hippocampe feeds'
 
 

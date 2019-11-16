@@ -1,7 +1,7 @@
 {
-	"spec": "72bf887d87550eb5ecfb5985bc96a229",
-	"manifest": "a7cc73eaea7eb4f3fe3f403a3cc06497",
-	"setup": "5f7901c42b1421568379b44057b835cf",
+	"spec": "ac23d0b0bb40b4b1ff4dc11134bd8a79",
+	"manifest": "7f69e7d2dd28445390bb2d82b58334bd",
+	"setup": "769d413eac06a62a810928406dee4297",
 	"schemas": [
 		{
 			"identifier": "add_actor/schema.py",

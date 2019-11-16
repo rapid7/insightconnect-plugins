@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='pagerduty-rapid7-plugin',
-      version='2.0.0',
+      version='2.0.1',
       description='PagerDuty provides enterprise-grade incident management. Leverage PagerDuty for incident management and response with the PagerDuty plugin for InsightConnect',
       author='rapid7',
       author_email='',

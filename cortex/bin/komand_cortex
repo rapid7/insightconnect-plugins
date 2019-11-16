@@ -6,7 +6,7 @@ from komand_cortex import connection, actions, triggers
 
 Name = 'Cortex'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'Cortex is an observable analysis and active response engine. With the Cortex plugin for Rapid7 InsightConnect, users can manage analyzers, jobs, and run file analyzers'
 
 

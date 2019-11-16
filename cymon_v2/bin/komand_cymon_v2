@@ -6,7 +6,7 @@ from komand_cymon_v2 import connection, actions, triggers
 
 Name = 'Cymon v2'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Cymon is the largest tracker of open-source security reports about phishing, malware, botnets and other malicious activities'
 
 

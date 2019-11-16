@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='statsd-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='The Statsd plugin will allow you to create metrics from your workflow',
       author='rapid7',
       author_email='',

@@ -6,7 +6,7 @@ from komand_salesforce import connection, actions, triggers
 
 Name = 'Salesforce'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'The Salesforce plugin allows you to search, update, and manage salesforce records'
 
 

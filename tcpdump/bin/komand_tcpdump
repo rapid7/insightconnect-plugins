@@ -6,7 +6,7 @@ from komand_tcpdump import connection, actions, triggers
 
 Name = 'Tcpdump'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The Tcpdump plugin is used to read contents of a PCAP'
 
 

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='barracuda_waf-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='The Barracuda WAF plugin automates administrative tasks as well as rule creation and modification',
       author='rapid7',
       author_email='',

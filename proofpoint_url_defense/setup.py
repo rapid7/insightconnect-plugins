@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='proofpoint_url_defense-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='The Proofpoint URL Defense plugin decodes Proofpoint encoded URLs',
       author='rapid7',
       author_email='',

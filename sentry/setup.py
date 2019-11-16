@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='sentry-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='Sentry is an open source error tracking tool that helps developers monitor and fix crashes in real time. Users can manage issues and events with the Sentry plugin for Rapid7 InsightConnect',
       author='rapid7',
       author_email='',

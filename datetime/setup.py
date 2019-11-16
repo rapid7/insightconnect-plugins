@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='datetime-rapid7-plugin',
-      version='2.0.4',
+      version='2.0.5',
       description='This plugin manipulates timestamps using Python's maya library',
       author='rapid7',
       author_email='',

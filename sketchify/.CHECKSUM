@@ -1,7 +1,7 @@
 {
-	"spec": "df302aa80e9bab1ece5e8b3260a70110",
-	"manifest": "9e2c60ab6e692f40e7a4f3295bc2c43f",
-	"setup": "70266bd542a847a9ea3628315fdea33d",
+	"spec": "ba95796e8560e449ddb68d0ba625c28f",
+	"manifest": "5b4714f7f1bf7a533b43e260dad09b7b",
+	"setup": "ef559f9809e1b283a4778cee63c5c132",
 	"schemas": [
 		{
 			"identifier": "sketchify/schema.py",

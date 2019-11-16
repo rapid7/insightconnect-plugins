@@ -6,7 +6,7 @@ from komand_ping import connection, actions, triggers
 
 Name = 'Ping'
 Vendor = 'rapid7'
-Version = '1.0.2'
+Version = '1.0.3'
 Description = 'The Ping plugin is used to check for network connectivity and response times'
 
 

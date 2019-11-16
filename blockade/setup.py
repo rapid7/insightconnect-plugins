@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='blockade-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='The Blockade plugins assists with administrating users and Incidents of Compromise',
       author='rapid7',
       author_email='',

@@ -1,7 +1,7 @@
 {
-	"spec": "76ad6a06902285d28af1f31dc70a6936",
-	"manifest": "3a871ab1afd194c9a9729eef471404af",
-	"setup": "01264bc7ade57d6afbfa0f14c68c7706",
+	"spec": "7cce61bb18999ef1da6e590771fc573b",
+	"manifest": "816fa25f7ab68d204514c25c3d4f6d2b",
+	"setup": "5fbfd0ca1f0accbca319e6ea11785161",
 	"schemas": [
 		{
 			"identifier": "check_for_squatters/schema.py",

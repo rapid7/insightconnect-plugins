@@ -1,7 +1,7 @@
 {
-	"spec": "43db0a3a635a1bcac57592ca8091ca15",
-	"manifest": "96bb3adc665f411f42d7ffcff4e05b5c",
-	"setup": "5f604da8a80fa8c7b6d5b3b9a9f47b24",
+	"spec": "b5ff479fc8db5d85329ce420c9695791",
+	"manifest": "273dafc999ea4b615cce4b28c7d18a25",
+	"setup": "85ebb85128c4bfc9f913cee4258bf3d8",
 	"schemas": [
 		{
 			"identifier": "add_domain_record/schema.py",

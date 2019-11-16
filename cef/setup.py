@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='cef-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='This plugin used for generating and manipulating event in a Common Event Format (CEF)',
       author='rapid7',
       author_email='',

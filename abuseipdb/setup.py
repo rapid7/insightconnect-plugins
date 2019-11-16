@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='abuseipdb-rapid7-plugin',
-      version='5.0.0',
+      version='5.0.1',
       description='This plugin allows you to look up IP reports, provides list and details of blacklisted IPs, or report an abusive IP',
       author='rapid7',
       author_email='',

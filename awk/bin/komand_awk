@@ -6,7 +6,7 @@ from komand_awk import connection, actions, triggers
 
 Name = 'Awk'
 Vendor = 'rapid7'
-Version = '1.2.0'
+Version = '1.2.1'
 Description = 'This plugin manipulates an input string or file with the GNU awk programming language'
 
 

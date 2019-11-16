@@ -6,7 +6,7 @@ from komand_wordpress import connection, actions, triggers
 
 Name = 'WordPress'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'The WordPress plugin allows for user management on the WordPress platform'
 
 

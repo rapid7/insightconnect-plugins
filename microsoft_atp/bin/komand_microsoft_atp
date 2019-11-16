@@ -6,7 +6,7 @@ from komand_microsoft_atp import connection, actions, triggers
 
 Name = 'Microsoft Windows Defender ATP'
 Vendor = 'rapid7'
-Version = '1.5.0'
+Version = '1.5.1'
 Description = 'Windows Defender Advanced Threat Protection (ATP) is a unified platform for preventative protection, post-breach detection, automated investigation, and response'
 
 

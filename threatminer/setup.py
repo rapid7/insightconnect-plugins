@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='threatminer-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='Threat Miner is an open source search engine for fast threat intelligence research and pivoting with context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup various pieces of information for threat intelligence gathering',
       author='rapid7',
       author_email='',

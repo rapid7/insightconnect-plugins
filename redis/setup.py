@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='redis-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='The Redis plugin allows you to add, update, and manage data in a Redis database',
       author='rapid7',
       author_email='',

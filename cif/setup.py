@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='cif-rapid7-plugin',
-      version='2.0.0',
+      version='2.0.1',
       description='This plugin is used to manage an instance of Collective Intelligence Framework service',
       author='rapid7',
       author_email='',

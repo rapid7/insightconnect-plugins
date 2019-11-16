@@ -1,7 +1,7 @@
 {
-	"spec": "ecde769528387c85e1789df1eaa11341",
-	"manifest": "98b7bc2d76c4b8af3294cd1d4656bb3e",
-	"setup": "4811b2b7413787cd53be5650ba6bbd46",
+	"spec": "29ac407de6a4979368ab82d718780037",
+	"manifest": "52cae49e2ab645a2d26632b27509bb33",
+	"setup": "99a1619d21b80020578a8bdf9076e91d",
 	"schemas": [
 		{
 			"identifier": "brand_monitor/schema.py",

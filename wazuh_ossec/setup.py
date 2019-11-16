@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='wazuh_ossec-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='Provides security visibility, compliance and infrastructure monitoring capabilities',
       author='rapid7',
       author_email='',

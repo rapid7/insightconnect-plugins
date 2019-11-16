@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='jenkins-rapid7-plugin',
-      version='1.1.0',
+      version='1.1.1',
       description='Reliably build, test, and deploy their software',
       author='rapid7',
       author_email='',

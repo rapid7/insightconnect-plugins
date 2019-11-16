@@ -6,7 +6,7 @@ from komand_threatminer import connection, actions, triggers
 
 Name = 'Threat Miner'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'Threat Miner is an open source search engine for fast threat intelligence research and pivoting with context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup various pieces of information for threat intelligence gathering'
 
 

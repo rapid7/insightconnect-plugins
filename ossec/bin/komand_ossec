@@ -6,7 +6,7 @@ from komand_ossec import connection, actions, triggers
 
 Name = 'OSSEC'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'OSSEC is a free, open-source host-based intrusion detection system. Using the OSSEC plugin for InsightConnect, users can parse OSSEC alerts into JSON format'
 
 

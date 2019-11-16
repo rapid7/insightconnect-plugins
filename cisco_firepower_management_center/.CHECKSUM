@@ -1,7 +1,7 @@
 {
-	"spec": "4383be104842ac92ff4d58d9c94c0d01",
-	"manifest": "539fb61f7c363f8698f8be27bd706078",
-	"setup": "b93f32759aa3af3f414576dd0951bf68",
+	"spec": "7933a2b408feec329b8298a7cfebfcd3",
+	"manifest": "b944b32e9ae728775eafad925ea4a490",
+	"setup": "340d0b73692be66d424c06bcb86741bb",
 	"schemas": [
 		{
 			"identifier": "block_url_policy/schema.py",

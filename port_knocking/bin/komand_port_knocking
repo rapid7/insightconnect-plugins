@@ -6,7 +6,7 @@ from komand_port_knocking import connection, actions, triggers
 
 Name = 'Port Knocking'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'The Pork Knocking plugin knocks the specified ports on a host and optionally supports a payload'
 
 

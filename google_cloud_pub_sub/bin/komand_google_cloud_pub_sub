@@ -6,7 +6,7 @@ from komand_google_cloud_pub_sub import connection, actions, triggers
 
 Name = 'Google Cloud Pub Sub'
 Vendor = 'rapid7'
-Version = '3.1.1'
+Version = '3.1.2'
 Description = 'A fully-managed real-time messaging service that allows you to send and receive messages'
 
 

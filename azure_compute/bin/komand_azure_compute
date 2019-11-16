@@ -6,7 +6,7 @@ from komand_azure_compute import connection, actions, triggers
 
 Name = 'Azure Compute'
 Vendor = 'rapid7'
-Version = '3.0.0'
+Version = '3.0.1'
 Description = 'Azure Virtual Machines is one of several types of on-demand, scalable computing resources that Azure offers'
 
 

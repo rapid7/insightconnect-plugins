@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='craigslist-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='Craigslist provides local classifieds and forums for jobs, housing, for sale, personals, services, local community, and events. Using the Craigslist plugin for Rapid7 InsightConnect, organizations can monitor their brand as well as automate searches for lost or stolen assets',
       author='rapid7',
       author_email='',

@@ -6,7 +6,7 @@ from icon_aws_workspaces import connection, actions, triggers
 
 Name = 'AWS WorkSpaces'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'This plugin utilizes Amazon WorkSpaces product to create workspaces. Amazon WorkSpaces is a fully managed desktop computing service in the cloud that allows its customers to provide cloud-based desktops to their end-users'
 
 

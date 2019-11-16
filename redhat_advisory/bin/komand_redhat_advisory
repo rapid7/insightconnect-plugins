@@ -6,7 +6,7 @@ from komand_redhat_advisory import connection, actions, triggers
 
 Name = 'Redhat Security Advisories'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'This plugin will trigger workflows on new Red Hat Security Advisories'
 
 

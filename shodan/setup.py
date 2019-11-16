@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='shodan-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='Shodan is a search engine for internet-connected devices. Using the Shodan plugin for Rapid7 InsightConnect, users can lookup hosts and run queries against their database in real-time',
       author='rapid7',
       author_email='',

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='rapid7_insightops-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='This plugin allows you to submit and query InsightOps logs',
       author='rapid7',
       author_email='',

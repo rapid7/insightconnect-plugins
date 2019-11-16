@@ -6,7 +6,7 @@ from komand_tenable_nessus import connection, actions, triggers
 
 Name = 'Tenable Nessus'
 Vendor = 'rapid7'
-Version = '2.0.0'
+Version = '2.0.1'
 Description = 'The Tenable Nessus plugin allows you to get, start, and analyze scans'
 
 

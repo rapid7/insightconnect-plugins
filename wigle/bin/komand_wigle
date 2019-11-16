@@ -6,7 +6,7 @@ from komand_wigle import connection, actions, triggers
 
 Name = 'WiGLE'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'The WiGLE (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks'
 
 

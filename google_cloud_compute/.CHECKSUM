@@ -1,7 +1,7 @@
 {
-	"spec": "7d629f39f48bf652a3f8c48602f7f0a9",
-	"manifest": "4df962c18b061f311a003734770d2991",
-	"setup": "c1badffedc23f2a56d318f501bec64a4",
+	"spec": "772e6b9f289464c821cea359c4ef1e4c",
+	"manifest": "5e2b4e0aad403a7e76ab9cf5f5fc60ac",
+	"setup": "3312fc3ae9a8afb88269b7ae05c47b20",
 	"schemas": [
 		{
 			"identifier": "delete_firewall/schema.py",

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='threat_connect-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='ThreatConnect is a Threat Intelligence Platform (TIP) that empowers large organizations to aggregate, analyze and act on their threat intelligence. The ThreatConnect plugin for Rapid7 InsightConnect allows users to view incidents, emails, threats, victims, and more',
       author='rapid7',
       author_email='',

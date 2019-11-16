@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='ssh-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.3',
       description='The SSH plugin allows you to run commands on a remote host',
       author='rapid7',
       author_email='',

@@ -1,7 +1,7 @@
 {
-	"spec": "f05539e5626eeeb259f66bc5e279feaa",
-	"manifest": "a43dedd029dffcb36b2dafc4f1acf35a",
-	"setup": "994c18589449fcbc78f1fad462498361",
+	"spec": "45fc5dc00b1e59e96b070e86e2ff8f53",
+	"manifest": "46e73244e359868a1ae7287a5fc91469",
+	"setup": "2306d33ccf82f7d95ce18e387a8234f6",
 	"schemas": [
 		{
 			"identifier": "upload_ssl_certificate/schema.py",

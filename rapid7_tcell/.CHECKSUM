@@ -1,7 +1,7 @@
 {
-	"spec": "2cb6f4a23ff4270b003813cf85cde2f0",
-	"manifest": "19174d0d607c004cc7b0177b66ffda12",
-	"setup": "b97d221b0ba444ef35d45af6013927a8",
+	"spec": "a41f307aab6a7d917c2dbe51f67352bd",
+	"manifest": "e51e32d8cd72b08895095fa0a2f8aef7",
+	"setup": "6be622dda2090bc85404d31c713dabbf",
 	"schemas": [
 		{
 			"identifier": "add_ips_to_blacklist/schema.py",

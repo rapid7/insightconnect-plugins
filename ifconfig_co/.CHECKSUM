@@ -1,7 +1,7 @@
 {
-	"spec": "541eb5fd03113889de2f6f4dd1d57eec",
-	"manifest": "8f4073b009f547043acacbf59a2cd08d",
-	"setup": "2a0eff3c66cdc5bb48203e8cc34e0bc5",
+	"spec": "893281d73c2a304e6a04aa7c76243d54",
+	"manifest": "4afc5f7411d013850456e190da2fabe9",
+	"setup": "d9d121ff07bfd6a21d30b22187d64cfb",
 	"schemas": [
 		{
 			"identifier": "address_lookup/schema.py",

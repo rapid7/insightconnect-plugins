@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='tenable_nessus-rapid7-plugin',
-      version='2.0.0',
+      version='2.0.1',
       description='The Tenable Nessus plugin allows you to get, start, and analyze scans',
       author='rapid7',
       author_email='',

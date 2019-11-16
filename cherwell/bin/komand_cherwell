@@ -6,7 +6,7 @@ from komand_cherwell import connection, actions, triggers
 
 Name = 'Cherwell'
 Vendor = 'rapid7'
-Version = '2.1.0'
+Version = '2.1.1'
 Description = 'The Cherwell plugin is used to administrate incidents in Cherwell'
 
 

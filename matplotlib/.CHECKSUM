@@ -1,7 +1,7 @@
 {
-	"spec": "4793bc93f7be1661454751f9c1c33c5b",
-	"manifest": "17faaf570e1a8a0ea4c1b5ed3c0c9c82",
-	"setup": "23f7a6fb0435f30861826b0ccc752b7f",
+	"spec": "367dd5649120ed3b865dc2122761c494",
+	"manifest": "b9acb2dd2cd971d30777ff544e81f22e",
+	"setup": "007bc41152cc515ad1faaba14e13ce6e",
 	"schemas": [
 		{
 			"identifier": "create_distribution_plot/schema.py",

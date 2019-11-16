@@ -6,7 +6,7 @@ from komand_phabricator import connection, actions, triggers
 
 Name = 'Phabricator'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'The Phabricator plugin allows you to setup and manage code reviews'
 
 

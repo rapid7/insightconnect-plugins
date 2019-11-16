@@ -1,7 +1,7 @@
 {
-	"spec": "1eea260bfb4a1b7f4785f226c3dd8413",
-	"manifest": "d2c48ae503e797f560a6b56f8d2758dd",
-	"setup": "8576ff9e611da396dc303ca198b4927d",
+	"spec": "2c4d3fec754a9c53c1b85054c85f2767",
+	"manifest": "230229b90f7401d13d7faaba0a507bbc",
+	"setup": "79504282d430015036d1963931f13d3d",
 	"schemas": [
 		{
 			"identifier": "clam_av/schema.py",

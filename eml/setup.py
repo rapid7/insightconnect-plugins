@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='eml-rapid7-plugin',
-      version='1.1.1',
+      version='1.1.2',
       description='The EML plugins will parse and extract data from an EML file',
       author='rapid7',
       author_email='',

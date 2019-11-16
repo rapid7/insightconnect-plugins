@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='echotrail-echotrail-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='EchoTrail Insights is a database of executable behavioral analytics, searchable by filename or SHA256 or MD5 hash. Users can lookup filenames and hashes using the EchoTrail Insights plugin for Rapid7 InsightConnect',
       author='echotrail',
       author_email='',

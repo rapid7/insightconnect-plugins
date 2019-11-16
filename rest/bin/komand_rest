@@ -6,7 +6,7 @@ from komand_rest import connection, actions, triggers
 
 Name = 'REST'
 Vendor = 'rapid7'
-Version = '3.0.0'
+Version = '3.0.1'
 Description = 'The REST plugin to make it easy to integrate with RESTful services'
 
 

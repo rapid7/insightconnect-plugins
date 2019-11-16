@@ -1,7 +1,7 @@
 {
-	"spec": "9f3fa16e8568b91336b8a418b86b5656",
-	"manifest": "93826f20ebb284bbf97d140c3d3354a3",
-	"setup": "c26885b4c28e620ee08168e67f02227c",
+	"spec": "2a9d64b664b4f881a2694ab69426699f",
+	"manifest": "611b2092482591538f0122ff4a5e21b9",
+	"setup": "373b8ed12132f3d170a04726a4c4dbee",
 	"schemas": [
 		{
 			"identifier": "hunting/schema.py",
