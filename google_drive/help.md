@@ -1,18 +1,18 @@
 # Description
 
-This plugin allows interaction with Google Drive.
+Google Drive is an online file storage and management system. This plugin allows you to upload and retrieve files from Google drive.
+
 This plugin utilizes the [Google Drive API](https://developers.google.com/drive/v3/web/about-sdk).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Get file contents
+* upload files
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A JWT With Google Drive Permissions
+* The Google Drive API must be enabled
 
 # Documentation
 

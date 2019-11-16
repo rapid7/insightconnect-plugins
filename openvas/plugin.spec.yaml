@@ -3,7 +3,8 @@ extension: plugin
 product: ["insightconnect"]
 name: openvas
 title: OpenVAS
-description: The Open Vulnerability Assessment System (OpenVAS)
+description: "Allows users to perform common tasks such as
+starting, stopping, deleting and scheduling scans from an OpenVAS server"
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -11,12 +12,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/openvas
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: http://openvas.org/
 tags:
 - openvas
 - vulnerability
 - scanner
 hub_tags:
-  use_cases: []
+  use_cases: [vulnerability_management]
   keywords: [openvas, vulnerability, scanner]
   features: []
 types:

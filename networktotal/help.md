@@ -1,24 +1,21 @@
 # Description
 
-[Networktotal](https://www.networktotal.com/) is a free service that analyzes pcap files and facilitates the quick detection of viruses, worms, trojans, and all kinds of malware detected by Intrusion Detection Engines and their rulesets.
+[Networktotal](https://www.networktotal.com/) is a free service that analyzes PCAP files and facilitates the quick detection of viruses, worms, trojans, and all kinds of malware detected by Intrusion Detection Engines and their rulesets.
 The Networktotal plugin allows you to submit files and perform searches against on the public service.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Send PCAP for analysis
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 

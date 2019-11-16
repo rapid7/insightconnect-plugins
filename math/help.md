@@ -4,14 +4,12 @@ This plugin allows basic arithmetic functions to be performed.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Math operations module and exponents
+* Math Division and multiplication, addition and subtraction
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements_
 
 # Documentation
 

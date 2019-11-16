@@ -1,17 +1,14 @@
 # Description
 
-[Chardet](https://chardet.readthedocs.io/en/latest/index.html) is a python compatible character encoding detector.
+This plugin is a Python compatible character encoding detector.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Detect character encoding
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

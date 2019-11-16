@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: samanage
 title: Samanage
-description: Samanage is an enterprise service-desk and IT asset-management provider
+description: The Samanage plugin allows you to start workflows on new incidents, manage incidents, and manage users. 
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -11,11 +11,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/samanage
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.samanage.com/
 tags:
 - incidents
 - management
 hub_tags:
-  use_cases: []
+  use_cases: [investigations, remediation_ticketing, user_management, soc_automation]
   keywords: [incidents, management]
   features: []
 types:

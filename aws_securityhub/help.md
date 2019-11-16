@@ -1,19 +1,21 @@
 # Description
 
 [AWS Security Hub](https://aws.amazon.com/security-hub/) is a comprehensive view of your high-priority security alerts and compliance status across AWS accounts.
+The AWS Security Hub InsightConnect plugin allows you to list and describe security hub-aggregated findings and retrieve SQS messages.
 
 This plugin utilizes the [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html) and [Boto3](https://github.com/boto/boto3) Python library.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Lists and describes Security Hub-aggregated findings
+* Get SQS messages
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* AWS account
+* AWS access key ID for authentication
+* AWS secret key for signing requests with the given AWS access key ID
+* AWS region to use for requests
 
 # Documentation
 

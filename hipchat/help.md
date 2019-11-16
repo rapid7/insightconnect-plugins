@@ -3,19 +3,17 @@
 [HipChat](https://www.hipchat.com) is a web service for internal private online chat
 and instant messaging. As well as one-on-one and group/topic chat, it also features
 cloud-based file storage, video calling, searchable message-history and inline-image viewing.
-This plugin accesses the [HipChat API](https://www.hipchat.com/docs/apiv2/)
-The output of this plugin is the JSON data returned by HipChat.
+This plugin accesses the [HipChat API](https://www.hipchat.com/docs/apiv2/) to send and receive messages. The plugin can also manage users. 
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Send and receive messages
+* Manage users
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* HipChat credentials
+* A HipChat token
 
 # Documentation
 

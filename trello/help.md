@@ -1,5 +1,7 @@
 # Description
 
+The Trello plugin allows you to manage users in your Trello project. 
+
 [Trello](https://trello.com) gives you perspective over all your projects, at work and at home.
 Whether it's managing a team, writing an epic screenplay, or just making a grocery list,
 This plugin accesses the [Trello API](https://developers.trello.com/advanced-reference)
@@ -7,14 +9,13 @@ The output of this plugin is the JSON data returned by Trello.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage users in Trello
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A Trello API key
+* A Trello API Token
+* The Trello version
 
 # Documentation
 

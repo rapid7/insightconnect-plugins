@@ -3,8 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: pastebin
 title: Pastebin
-description: Pastebin.com is the number one paste tool since 2002. Pastebin is a website
-  where you can store text online for a set period of time
+description: The Pastebin plugin allows you to send text to and check posts on Pastebin
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -12,12 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/pastebin
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://pastebin.com/
 tags:
 - scrape
 - paste
 - post
 hub_tags:
-  use_cases: []
+  use_cases: [threat_intel, threat_hunting]
   keywords: [scrape, paste, post]
   features: []
 connection:

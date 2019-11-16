@@ -5,20 +5,18 @@ This plugin parses the standard multi-line OSSEC alerts found in `/var/ossec/log
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Parse OSSEC alerts 
+* Convert alerts to JSON
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -185,7 +183,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -193,7 +191,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -206,4 +204,3 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [OSSEC](https://ossec.github.io/)
-

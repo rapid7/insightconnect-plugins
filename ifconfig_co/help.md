@@ -4,14 +4,12 @@
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Network Address Translation
+* IP details
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements_
 
 # Documentation
 

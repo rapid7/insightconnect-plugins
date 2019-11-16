@@ -1,17 +1,18 @@
 # Description
 
-This plugin utilizes Active Directory to run LDAP queries. This plugin supports Windows Server 2008 and later. Some testing has been done with Windows server 2003; however, it is not officially supported.
+This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network.
+This plugin supports Windows Server 2008 and later. Some testing has been done with Windows server 2003; however, it is not officially supported.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Add, delete, disable and enable user
+* Password reset
+* Modify user groups
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Host name and port number
+* User name and password to authenticate
 
 # Documentation
 

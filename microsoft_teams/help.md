@@ -6,14 +6,12 @@ This plugin uses the [Microsoft Teams API](https://docs.microsoft.com/en-us/grap
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Communication Management for all microsoft products
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Username and Password
+* Secret Key, similar to API Key
 
 # Documentation
 

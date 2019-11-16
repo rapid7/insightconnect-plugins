@@ -6,14 +6,13 @@ This plugin utilizes the Python 3 String library [set of methods](https://docs.p
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Split a string to a list of elements
+* Split a string to an object
+* Upper and Lower case a string
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 

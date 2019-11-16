@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: eml
 title: EML
-description: Extract Information from EML Files
+description: The EML plugins will parse and extract data from an EML file. 
 version: 1.1.1
 vendor: rapid7
 support: community
@@ -11,11 +11,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/eml
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: 
 tags:
 - eml
 - mail
 hub_tags:
-  use_cases: []
+  use_cases: [data_utility, phishing_investigations]
   keywords: [eml, mail]
   features: []
 types:

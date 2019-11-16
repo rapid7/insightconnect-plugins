@@ -3,8 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: hippocampe
 title: Hippocampe
-description: Hippocampe is a threat feed aggregator, which creates a threat feed memory
-  and allows queries through a REST API or from a Web UI
+description: The Hippocampe plugin allows for advanced queries and management of your Hippocampe feeds
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -12,12 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/hippocampe
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://thehive-project.org/
 tags:
 - threat
 - analysis
 - aggregation
 hub_tags:
-  use_cases: []
+  use_cases: [threat_intel, threat_hunting, soc_automation, threat_detection_and_response]
   keywords: [threat, analysis, aggregation]
   features: []
 types:

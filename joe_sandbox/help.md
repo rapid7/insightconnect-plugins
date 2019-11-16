@@ -6,14 +6,13 @@ This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances an
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* File Analysis
+* Threat Detection
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* API Key
+* Sandbox server
 
 # Documentation
 

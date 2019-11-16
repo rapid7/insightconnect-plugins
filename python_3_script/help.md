@@ -9,16 +9,17 @@ The Python 3 Script plugin allows you to run Python 3 code. It includes Python 3
 * [pyyaml 3.12](http://pyyaml.org/)
 * [records 0.5.2](https://github.com/kennethreitz/records)
 
+The Python 3 plugin also allows you to load custom modules via its connection parameters.
+
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Run a Python 3 script
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
+
+NOTE: Custom Python 3 modules can be loaded via connection parameters
 
 # Documentation
 

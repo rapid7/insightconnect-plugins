@@ -1,17 +1,16 @@
 # Description
 
-[Barracuda Web Application Firewall](https://campus.barracuda.com/product/webapplicationfirewall/) is the a solution for organizations looking to protect web applications from data breaches and defacement. With the Barracuda Web Application Firewall, administrators do not need to wait for clean code or even know how an application works to secure their applications.
+[Barracuda Web Application Firewall](https://campus.barracuda.com/product/webapplicationfirewall/) is the a solution for organizations looking to protect web applications from data breaches and defacement. With the Barracuda Web Application Firewall, administrators do not need to wait for clean code or even know how an application works to secure their applications. The Barracuda WAF plugin automates administrative tasks as well as rule creation and modification.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Administrate ACL rules
+* Administrate content rules
+* Administrate security policies
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Requires a username and password
 
 # Documentation
 

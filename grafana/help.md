@@ -1,24 +1,31 @@
 # Description
 
-[Grafana](https://grafana.org) is an open platform for analytics and monitoring.
+[Grafana](https://grafana.org) is an open platform for analytics and monitoring. The Grafana plugin allows you to manage users in your Grafana organization
+
 This plugin utilizes the [Grafana HTTP API](http://docs.grafana.org/http_api/) to manage organizations and users.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Manage users in Grafana
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Either an API Token or Username and Password for an administrative user
 
 # Documentation
 
 ## Setup
 
+You must specify either Basic (username:password) or Token (API) authentication to access Grafana.
 
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|Grafana URL/Address|None|
+|port|integer|3000|False|Grafana Port|None|
+|token_auth|credential_secret_key|None|False|Token authentication via admin API token|None|
+|basic_auth|credential_username_password|None|False|Basic authentication via admin login credentials|None|
 
 ## Technical Details
 

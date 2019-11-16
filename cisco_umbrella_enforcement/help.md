@@ -1,18 +1,18 @@
 # Description
 
 [Cisco Umbrella Enforcement](https://docs.umbrella.com/developer/networkdevices-api/) allows partners and customers with their own homegrown SIEM/Threat Intelligence Platform (TIP) environments to inject events and/or threat intelligence into their Umbrella environment. These events are then instantly converted into visibility and enforcement that can extend beyond the perimeter and thus the reach of the systems that might have generated those events or threat intelligence.
+The Cisco Umbrella Enforcement InsightConnect plugin allows you to inherit the ability to send security events from platform/service/appliance within a customer environment to the Cisco security cloud for enforcement.
 This plugin utilizes the [Cisco Umbrella Enforcement API](https://enforcement-api.readme.io/).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Delete domain from user domain list
+* Retrieve list of domains already added to the shared customer's domain list
+* Post a malware event to the customer's domain list
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Cisco Umbrella Enforcement API key
 
 # Documentation
 

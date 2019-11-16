@@ -3,8 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: redis
 title: Redis
-description: An open source (BSD licensed), in-memory data structure store, used as
-  a database, cache and message broker
+description: The Redis plugin allows you to add, update, and manage data in a Redis database
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -12,11 +11,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/redis
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://redis.io/
 tags:
 - database
 - redis
 hub_tags:
-  use_cases: []
+  use_cases: [data_aggregation, data_ingestion, reporting_and_analytics]
   keywords: [database, redis]
   features: []
 connection:

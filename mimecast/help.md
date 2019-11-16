@@ -5,14 +5,14 @@ This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/docum
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Email security
+* Malicious URL and attachment detection
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Access API Key
+* Secret Key
+* Mimecast server
 
 # Documentation
 

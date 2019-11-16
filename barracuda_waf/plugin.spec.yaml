@@ -3,10 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: barracuda_waf
 title: Barracuda Web Application Firewall
-description: Barracuda Web Application Firewall is the ideal solution for organizations
-  looking to protect web applications from data breaches and defacement. With the
-  Barracuda Web Application Firewall, administrators do not need to wait for clean
-  code or even know how an application works to secure their applications
+description: The Barracuda WAF plugin automates administrative tasks as well as rule creation and modification
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -14,6 +11,7 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/barracuda_waf
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.barracuda.com/
 tags:
 - barracuda
 - waf
@@ -21,7 +19,7 @@ tags:
 - application
 - firewall
 hub_tags:
-  use_cases: []
+  use_cases: [network_containment, soar, soc_automation, threat_detection_and_response]
   keywords: [barracuda, waf, web, application, firewall]
   features: []
 types:

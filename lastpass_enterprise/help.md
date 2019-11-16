@@ -5,14 +5,12 @@ This plugin utilizes the [LastPass API](https://enterprise.lastpass.com/users/se
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Network Access Point Managment
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Lastpass Account Number
+* Provisioning Hash (API Key)
 
 # Documentation
 

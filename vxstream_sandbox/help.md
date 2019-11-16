@@ -5,14 +5,15 @@ that includes the unique Hybrid Analysis technology. Our plugin connects to your
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Search by file Hash
+* Submit file for analysis
+* Get file analysis report details
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* VxStream API Key
+* VxStream API Secret
+* VxStream server address
 
 # Documentation
 

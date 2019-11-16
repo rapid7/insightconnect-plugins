@@ -1,18 +1,19 @@
 # Description
 
 [Firepower](https://www.cisco.com/c/en_uk/products/security/firewalls/index.html) is a Next-Generation Firewall (NGFW) with NGIPS, incorporating access and application control, threat prevention and firewall capabilities.
+The Cisco Firepower InsightConnect plugin allows you to add scan results from a third-party vulnerability scanner.
+
 This plugin utilizes the [Host Input API](https://www.cisco.com/c/en/us/td/docs/security/firepower/60/api/host-input/HostInputAPIGuide.html).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Add scan results from a third-party vulnerability scanner
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Cisco Firepower server name and port number
+* Base64-encoded certificate to authenticate with the host input API
+* The passphrase to access the certificate
 
 # Documentation
 

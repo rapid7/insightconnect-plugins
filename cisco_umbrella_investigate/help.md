@@ -1,18 +1,19 @@
 # Description
 
-[Cisco Umbrella Investigate](https://learn-umbrella.cisco.com/threat-intelligence/cisco-umbrella-investigate-overview) provides the most complete view of the relationships and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats.
+[Cisco Umbrella Enforcement](https://docs.umbrella.com/developer/networkdevices-api/) allows partners and customers with their own homegrown SIEM/Threat Intelligence Platform (TIP) environments to inject events and/or threat intelligence into their Umbrella environment. These events are then instantly converted into visibility and enforcement that can extend beyond the perimeter and thus the reach of the systems that might have generated those events or threat intelligence.
+The Cisco Umbrella Enforcement InsightConnect plugin allows you to lookup sample artifacts, sample connections, sample samples, WHOIS details, IP and domain history etc.
 This plugin utilizes the [Python OpenDNS Investigate](https://github.com/opendns/pyinvestigate) library.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Retrieve details of sample artifacts, sample connections, sample samples
+* Retrieve WHOIS details by email, domain and name server
+* Retrieve IP's and domain's history
+* Retrieve domain's security features, content category, security category
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Cisco Umbrella Investigate API key
 
 # Documentation
 

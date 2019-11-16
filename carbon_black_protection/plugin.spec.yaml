@@ -3,8 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: carbon_black_protection
 title: Carbon Black Protection
-description: Cb Protection allows users to lock down and harden systems to prevent
-  malware, ransomware, and more
+description: Ban and unban files and as well as manage approval requests
 version: 2.2.0
 vendor: rapid7
 support: rapid7
@@ -12,12 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/carbon_black_protection
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.carbonblack.com/
 tags:
 - carbon black
 - cb
 - protection
 hub_tags:
-  use_cases: []
+  use_cases: [threat_detection_and_response, soar, soc_automation, alerting_and_notifications]
   keywords: [carbon black, cb, protection]
   features: []
 enable_cache: true

@@ -3,10 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: carbon_black_live_response
 title: Carbon Black Live Response
-description: The Cb Response Live Response feature allows security operators to collect
-  information and take action on remote endpoints in real time. These actions include
-  the ability to upload, download, and remove files, retrieve and remove registry
-  entries, dump contents of physical memory, execute and terminate processes
+description: Delete malicious files
 version: 1.0.0
 vendor: rapid7
 support: rapid7
@@ -14,11 +11,12 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/carbon_black_live_response
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.carbonblack.com/
 tags:
 - carbon black
 - live response
 hub_tags:
-  use_cases: []
+  use_cases: [soar, threat_detection_and_response, soc_automation]
   keywords: [carbon black, live response]
   features: []
 types:

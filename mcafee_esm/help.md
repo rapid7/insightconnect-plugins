@@ -5,14 +5,14 @@ This plugin utilizes the McAfee ESM API. Documentation about the API can be foun
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* SEIM
+* Threat Management
+* Network security Management
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Username and Password
+* McAfee ESM Server
 
 # Documentation
 

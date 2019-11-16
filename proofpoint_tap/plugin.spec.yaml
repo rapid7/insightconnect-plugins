@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: proofpoint_tap
 title: Proofpoint TAP
-description: A plugin for Proofpoint Targeted Attack Protection (TAP)
+description: A plugin for Proofpoint Targeted Attack Protection (TAP) alerts
 version: 1.0.3
 vendor: rapid7
 support: community
@@ -11,12 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/proofpoint_tap
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.proofpoint.com/
 tags:
 - Proofpoint
 - TAP
 - parser
 hub_tags:
-  use_cases: []
+  use_cases: [alerting_and_notifications, threat_intel, threat_hunting]
   keywords: [Proofpoint, TAP, parser]
   features: []
 types:

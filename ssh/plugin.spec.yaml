@@ -3,8 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: ssh
 title: SSH
-description: The SSH protocol is a method for secure remote login from one computer
-  to another
+description: The SSH plugin allows you to run commands on a remote host. 
 version: 1.0.2
 vendor: rapid7
 support: community
@@ -12,12 +11,13 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ssh
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url:
 tags:
 - ssh
 - remote
 - tunnel
 hub_tags:
-  use_cases: []
+  use_cases: [soar, soc_automation, threat_detection_and_response]
   keywords: [ssh, remote, tunnel]
   features: []
 connection:

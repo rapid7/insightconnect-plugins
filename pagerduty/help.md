@@ -5,14 +5,12 @@ The PagerDuty plugin makes requests to the V2 API.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Create and manage PagerDuty incidents
+* Access PagerDuty user information
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* PagerDuty API key
 
 # Documentation
 
@@ -172,7 +170,7 @@ This action is used to get information about a user by ID.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -180,7 +178,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -196,4 +194,3 @@ This plugin does not contain any troubleshooting information.
 
 * [Connecting PagerDuty To Komand](https://komand.zendesk.com/hc/en-us/articles/115003012007)
 * [PagerDuty API V2](https://v2.developer.pagerduty.com/v2/page/api-reference)
-

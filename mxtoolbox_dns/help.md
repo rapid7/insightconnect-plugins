@@ -1,18 +1,16 @@
 # Description
 
-[mxtoolbox_dns](https://www.mxtoolbox_dns.com) is a Interface with MxToolBox DNS lookup API
-This plugin utilizes the [mxtoolbox_dns API](https//api.mxtoolbox_dns.com).
+[mxtoolbox_dns](https://www.mxtoolbox.com) is a Interface with MxToolBox DNS lookup API
+This plugin utilizes the [mxtoolbox_dns API](https//api.mxtoolbox.com).
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Blacklist checking for domains
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* API Key
+* MxToolBox server
 
 # Documentation
 
