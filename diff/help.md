@@ -5,7 +5,7 @@ Results persist across runs of workflows (using the unique label).
 
 # Key Features
 
-* Get differences between strings.
+* Get changes between strings.
 
 # Requirements
 

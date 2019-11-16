@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
-description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans.
+description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
 version: 3.5.0
 vendor: rapid7
 support: rapid7

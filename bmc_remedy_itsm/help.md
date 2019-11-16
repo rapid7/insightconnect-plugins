@@ -30,7 +30,7 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-### Add Incident Work Note
+#### Add Incident Work Note
 
 This action is used to add a work note to an Incident.
 
@@ -164,7 +164,7 @@ Example output:
 }
 ```
 
-### Assign Incident
+#### Assign Incident
 
 This action is used to assign an Incident.
 

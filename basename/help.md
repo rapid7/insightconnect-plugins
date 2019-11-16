@@ -16,9 +16,10 @@ For example:
 
 # Key Features
 
-* Obtain basename of a file path or URL.
+* Obtain Basename of a file path or URL.
 
 # Requirements
+
 _This plugin does not contain any requirements._
 
 # Documentation

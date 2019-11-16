@@ -12,9 +12,9 @@ This plugin utilizes the Anomali ThreatStream API, which is located with the clo
 
 # Requirements
 
-* Anomali Threatstream username
+* Anomali ThreatStream username
 * Anomali ThreatStream instance URL
-* Anomali Threatstream API key
+* Anomali ThreatStream API key
 
 # Documentation
 

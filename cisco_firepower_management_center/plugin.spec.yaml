@@ -5,7 +5,7 @@ name: cisco_firepower_management_center
 title: Cisco Firepower Management Center
 vendor: rapid7
 status: []
-description: This plugin utilizes Cisco Firepower Management Center to create a new block URL policy.
+description: This plugin utilizes Cisco Firepower Management Center to create a new block URL policy
  Cisco Firepower Management Center is an administrative nerve center for managing critical Cisco network security solutions
 version: 1.0.0
 resources:

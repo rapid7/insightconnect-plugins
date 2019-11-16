@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: zendesk
 title: Zendesk
-description: The Zendesk plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk.
+description: The Zendesk plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk
   of data
 version: 1.1.0
 vendor: rapid7

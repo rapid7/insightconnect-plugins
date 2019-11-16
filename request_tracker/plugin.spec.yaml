@@ -3,7 +3,7 @@ extension: plugin
 product: ["insightconnect"]
 name: request_tracker
 title: Request Tracker
-description: The Request Tracker plugin allows you to create and manage tickets in Request Tracker.
+description: The Request Tracker plugin allows you to create and manage tickets in Request Tracker
 version: 1.0.0
 vendor: rapid7
 support: community
