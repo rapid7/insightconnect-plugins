@@ -147,6 +147,12 @@ _This plugin does not contain any custom output types._
 
 Multiple records can be returned by the server, this plugin currently only returns the first unique records found.
 
+# Links
+
+## References
+
+_This plugin has no references._
+
 # Version History
 
 * 1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK

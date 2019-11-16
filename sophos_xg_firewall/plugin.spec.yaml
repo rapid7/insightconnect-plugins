@@ -3,7 +3,7 @@ extension: plugin
 product: [insightconnect]
 name: sophos_xg_firewall
 title: Sophos XG Firewall
-description: The Sophos XG Firewall plugin allows you to manage your Sophos XG Firewall through policies. 
+description: The Sophos XG Firewall plugin allows you to manage your Sophos XG Firewall through policies
 version: 2.0.0
 vendor: rapid7
 support: community

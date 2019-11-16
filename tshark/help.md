@@ -23,13 +23,13 @@ This plugin does not contain a connection.
 
 #### Run
 
-This action is used to run Tshark on a user supplied PCAP file and return the output as `bytes` and a `string array` of packets.
+This action is used to run TShark on a user supplied PCAP file and return the output as `bytes` and a `string array` of packets.
 
 ##### Input
 
 Supported options:
 
-* Tshark Flags
+* TShark Flags
 * Display Filter
 
 A display filter is required, the default is set to `ip or ipv6` to encompass most traffic one would want to analyze.

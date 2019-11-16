@@ -2,8 +2,8 @@ plugin_spec_version: v2
 extension: plugin
 product: [insightconnect]
 name: sqlmap
-title: SQLmap
-description: The SQLMap plugin allows you to scan targets and analyze the results. 
+title: SQLMßap
+description: The SQLMap plugin allows you to scan targets and analyze the results
 version: 1.1.0
 vendor: rapid7
 support: community

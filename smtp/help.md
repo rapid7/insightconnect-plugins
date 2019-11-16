@@ -102,3 +102,7 @@ Examples:
 ## References
 
 * [SMTP](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol)
+
+### Custom Output Types
+
+_This plugin does not contain any custom output types._

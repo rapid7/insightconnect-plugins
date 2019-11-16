@@ -3,7 +3,7 @@ extension: plugin
 product: [insightconnect]
 name: viper
 title: "Viper"
-description: "The Viper plugins allows you to use Viper's platform to store, search, and analyze files."
+description: "The Viper plugins allows you to use Viper's platform to store, search, and analyze files"
 version: 2.0.0
 vendor: rapid7
 support: community

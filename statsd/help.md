@@ -186,7 +186,7 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
@@ -204,13 +204,29 @@ Examples:
 * Increment set value
 * Record timer information
 
-## Versions
+# Version History
 
 * 1.0.0 - Update to Python v2 architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
 
+# Links
+
 ## References
 
 * [Statsd](https://github.com/etsy/statsd)
 * [Python Statsd](https://statsd.readthedocs.io/en/latest/)
+
+### Custom Output Types
+
+#### timeout
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|timeout|integer|False|TCP timeout|
+
+#### maxudpsize
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|maxudpsize|integer|False|Max UDP Size|
