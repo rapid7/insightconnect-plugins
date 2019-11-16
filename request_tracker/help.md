@@ -11,7 +11,7 @@ The Request Tracker plugin allows you to create and manage tickets.
 
 # Requirements
 
-* Request tracker credentials
+* Request Tracker credentials
 
 # Documentation
 

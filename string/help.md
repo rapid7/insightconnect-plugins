@@ -187,17 +187,17 @@ Example output:
 }
 ```
 
-### Trim
+#### Trim
 
 This action is used to trim a string of leading and trailing whitespace.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |string|string|None|True|String to trim|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|

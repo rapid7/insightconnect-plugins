@@ -7,7 +7,7 @@ The Splunk plugin allows you to interact with Splunk by hooking alerts to trigge
 # Key Features
 
 * Create, manage, and view the results of Splunk searches
-* Manage splunk events
+* Manage Splunk events
 
 # Requirements
 
