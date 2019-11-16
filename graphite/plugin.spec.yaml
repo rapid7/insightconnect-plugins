@@ -14,13 +14,13 @@ resources:
   vendor_url: https://graphiteapp.org/
 tags:
 - graphite
+- graphite-api
+- metrics
+- graphs
 hub_tags:
   use_cases: [data_utility, data_aggregation, reporting_and_analytics, soc_automation]
   keywords: [graphite]
   features: []
-- graphite-api
-- metrics
-- graphs
 types:
   metric:
     name:
