@@ -19,7 +19,7 @@ throughout this documentation in place of real base64-encoded data.
 
 # Requirements
 
-* Cuckoo sandbox API URL for your Cuckoo instance
+* Cuckoo Sandbox API URL for your Cuckoo instance
 
 # Documentation
 

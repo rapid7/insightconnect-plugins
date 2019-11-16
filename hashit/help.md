@@ -1,6 +1,6 @@
 # Description
 
-The Hashit plugin will generate common hashes from a file or string. Supported hashes are:
+The HashIt plugin will generate common hashes from a file or string. Supported hashes are:
 
 * MD5
 * SHA1

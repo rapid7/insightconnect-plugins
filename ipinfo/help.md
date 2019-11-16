@@ -3,7 +3,7 @@
 [IPinfo](https://ipinfo.io/) returns IP information including: hostname, ASN, organization, and GeoIP data.
 The IPinfo plugin queries the IPinfo webpage via its API and returns relevant information.
 
-# Features
+# Key Features
 
 * IP Info, IP or domain lookup
 

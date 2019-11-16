@@ -9,7 +9,7 @@
 
 # Requirements
 
-* A JWT with google Docs permissions
+* A JWT with Google Docs permissions
 * Google Docs API must be enabled
 
 # Documentation

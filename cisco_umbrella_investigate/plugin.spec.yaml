@@ -19,7 +19,7 @@ tags:
 - umbrella
 - investigate
 hub_tags:
-  use_cases: [threat_intel, threat_hunting, thread_detection_and_response, soc_automation]
+  use_cases: [threat_intel, threat_hunting, threat_detection_and_response, soc_automation]
   keywords: [cisco, umbrella, investigate]
   features: []
 language: python

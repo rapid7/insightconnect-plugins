@@ -6,7 +6,7 @@ for faster file transmission, and more.
 
 # Key Features
 
-* File compression
+* File Compression
 * File decompression
 
 # Requirements

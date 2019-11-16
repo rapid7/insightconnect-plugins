@@ -14,6 +14,7 @@ resources:
   vendor_url: https://www.imperva.com/products/securesphere
 tags:
   - firewall
+  - Imperva
 hub_tags:
   use_cases: [application_security]
   keywords: [Web Application Firewall, WAF, Imperva, SecureSphere]

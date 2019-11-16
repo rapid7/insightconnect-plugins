@@ -1,16 +1,17 @@
 # Description
 
-[Imperva SecureSphere](https://www.imperva.com/Products/WebApplicationFirewall-WAF) is a web application firewall that analyzes all user access to your business-critical web applications and protects your applications and data from cyber attacks.
-This plugin utilizes the API builting to Impervase SecureSphere appliance.
+[Imperva SecureSphere](https://www.imperva.com/Products/WebApplicationFirewall-WAF) is a web application firewall 
+that analyzes all user access to your business-critical web applications and protects your applications and data 
+from cyber attacks.
 
 # Key Features
 
 * Bot mitigation
-* Website Protection
+* Website protection
 
 # Requirements
 
-* Requires an API Key from the product
+* API Key from the product
 
 # Documentation
 

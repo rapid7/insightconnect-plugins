@@ -14,6 +14,7 @@ resources:
   vendor_url: https://docs.influxdata.com/influxdb
 tags:
   - database
+  - influxdb
 hub_tags:
   use_cases: [reporting_and_analytics]
   keywords: [database, influxdb]
