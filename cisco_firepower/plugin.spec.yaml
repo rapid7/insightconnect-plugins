@@ -6,7 +6,7 @@ title: Cisco Firepower
 vendor: rapid7
 support: rapid7
 status: []
-description: This plugin utilizes Ciso Firepower to add scan results from a third-party vulnerability scanner
+description: This plugin utilizes Cisco Firepower to add scan results from a third-party vulnerability scanner
  Cisco Firepower is a Next-Generation Firewall (NGFW) with NGIPS, incorporating access and application control, threat
  prevention and firewall capabilities
 version: 1.0.1
