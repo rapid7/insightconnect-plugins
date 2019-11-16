@@ -1,0 +1,15 @@
+{
+	"spec": "df302aa80e9bab1ece5e8b3260a70110",
+	"manifest": "9e2c60ab6e692f40e7a4f3295bc2c43f",
+	"setup": "70266bd542a847a9ea3628315fdea33d",
+	"schemas": [
+		{
+			"identifier": "sketchify/schema.py",
+			"hash": "41321656b53094bafebfa037b3c4199d"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "cb60c2b5b62fafb9634d667a8ad96277"
+		}
+	]
+}

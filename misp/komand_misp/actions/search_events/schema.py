@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search for events"
+
+
 class Input:
     ANALYSIS = "analysis"
     DATE_FROM = "date_from"

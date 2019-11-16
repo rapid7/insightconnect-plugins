@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='rapid7_metasploit-rapid7-plugin',
       version='2.0.0',
-      description='Metasploit is the most widely used penetration testing framework',
+      description='This plugin allows you to search for and execute exploits in Metasploit',
       author='rapid7',
       author_email='',
       url='',

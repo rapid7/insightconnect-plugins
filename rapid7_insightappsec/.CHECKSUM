@@ -1,0 +1,63 @@
+{
+	"spec": "73dd54e7201c60a28008bbc97aaf135b",
+	"manifest": "7feca25ec59c86ae90df45abdf7a4984",
+	"setup": "d6c8914395214dd38e3c86f673bd92aa",
+	"schemas": [
+		{
+			"identifier": "create_scan_config/schema.py",
+			"hash": "5540d17993d1a2c9a53d60a11cb017a3"
+		},
+		{
+			"identifier": "delete_scan/schema.py",
+			"hash": "551110f753352cc47fa99aa4b4c766f0"
+		},
+		{
+			"identifier": "delete_scan_config/schema.py",
+			"hash": "e9a2efee2d2a7e749d05a75eb53ede35"
+		},
+		{
+			"identifier": "get_scan/schema.py",
+			"hash": "c988c7c697e87677f708184d727ceaa2"
+		},
+		{
+			"identifier": "get_scan_config/schema.py",
+			"hash": "1d0dc265059d3c9a4163265247fb2679"
+		},
+		{
+			"identifier": "get_scan_configs/schema.py",
+			"hash": "861a4368741afaf101146fd22a80d858"
+		},
+		{
+			"identifier": "get_scan_engine_events/schema.py",
+			"hash": "f8f3425f8707b183e7803f38e1be74b0"
+		},
+		{
+			"identifier": "get_scan_execution_details/schema.py",
+			"hash": "f055aa87f93847738c7219648122bfa0"
+		},
+		{
+			"identifier": "get_scan_platform_events/schema.py",
+			"hash": "b733b6cd805ed97c230abdcb1df13fa7"
+		},
+		{
+			"identifier": "get_scans/schema.py",
+			"hash": "58fb1b46226cd52a6683091ebc6be99f"
+		},
+		{
+			"identifier": "submit_scan/schema.py",
+			"hash": "4d9d93179a6d504477d3ab31638f877c"
+		},
+		{
+			"identifier": "submit_scan_action/schema.py",
+			"hash": "b68a779200a361a18b96a5d2dd8c3693"
+		},
+		{
+			"identifier": "update_scan_config/schema.py",
+			"hash": "855cd2dddd131ef90ab2b8998a719188"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "8cca9352a05f1b0318fdd0fb978f1e75"
+		}
+	]
+}

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='rest-rapid7-plugin',
       version='3.0.0',
-      description='REST plugin to make it easy to integrate with RESTful services',
+      description='The REST plugin to make it easy to integrate with RESTful services',
       author='rapid7',
       author_email='',
       url='',

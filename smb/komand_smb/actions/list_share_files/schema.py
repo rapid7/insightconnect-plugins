@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List files on the remote server share"
+
+
 class Input:
     PATH = "path"
     PATTERN = "pattern"
@@ -57,8 +61,8 @@ class ListShareFilesInput(komand.Input):
     }
   },
   "required": [
-    "share_name",
     "path",
+    "share_name",
     "timezone"
   ]
 }

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Save an image of a virtual machine (VM must be stopped and generalized before saving an image)"
+    DESCRIPTION = "Save an image of a virtual machine (VM must be stopped, generalized, and be an unmanaged disk)"
 
 
 class Input:

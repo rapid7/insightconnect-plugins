@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='rss-rapid7-plugin',
       version='1.0.2',
-      description='Poll an RSS or Atom feed for events',
+      description='The RSS plugin allows you to monitor an RSS feed',
       author='rapid7',
       author_email='',
       url='',

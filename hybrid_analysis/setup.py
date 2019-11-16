@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='hybrid_analysis-rapid7-plugin',
       version='2.0.0',
-      description='Hybrid Analysis Free Sandbox',
+      description='The Hybrid Analysis plugin allows you to lookup file hashes to find out if they are malicious',
       author='rapid7',
       author_email='',
       url='',

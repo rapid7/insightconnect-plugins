@@ -3,12 +3,16 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Trigger on chat latest message"
+
+
 class Input:
     
     INCLUDE_DELETED = "include_deleted"
     INTERVAL = "interval"
-    MAX-RESULTS = "max-results"
-    NOT-BEFORE = "not-before"
+    MAXRESULTS = "max-results"
+    NOTBEFORE = "not-before"
     ROOM_ID_OR_NAME = "room_id_or_name"
     TIMEZONE = "timezone"
     

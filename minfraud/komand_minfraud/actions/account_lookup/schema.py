@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query account info"
+
+
 class Input:
     ADDRESS = "address"
     USER_ID = "user_id"

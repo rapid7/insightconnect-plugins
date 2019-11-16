@@ -7,7 +7,7 @@ from komand_shodan import connection, actions, triggers
 Name = 'Shodan'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'A Search Engine for Internet-Connected Devices'
+Description = 'Shodan is a search engine for internet-connected devices. Using the Shodan plugin for Rapid7 InsightConnect, users can lookup hosts and run queries against their database in real-time'
 
 
 class ICONShodan(komand.Plugin):

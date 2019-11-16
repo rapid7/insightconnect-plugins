@@ -1,0 +1,51 @@
+{
+	"spec": "22ba9a7b7f1c66347a7241724ba1933b",
+	"manifest": "e8028160bb62f1a016f4d92395510285",
+	"setup": "eb168299bb2bd389dcca5d5aef6e7266",
+	"schemas": [
+		{
+			"identifier": "add_user/schema.py",
+			"hash": "92db10bf221502d498943c8fb8f102d4"
+		},
+		{
+			"identifier": "delete_user/schema.py",
+			"hash": "18e14fd5a5943dfabe5478c9080930d8"
+		},
+		{
+			"identifier": "enroll_user/schema.py",
+			"hash": "8a03545f1a257c70d9cb10c7e82bac70"
+		},
+		{
+			"identifier": "get_logs/schema.py",
+			"hash": "c1c199d2fa4e6782cae3e637d7997112"
+		},
+		{
+			"identifier": "get_phones_by_user_id/schema.py",
+			"hash": "506d0cf3cd891b1d3ac90181cb864838"
+		},
+		{
+			"identifier": "get_user_by_id/schema.py",
+			"hash": "e53ed4b5ffbe5c8fa5f9c50149a4b65b"
+		},
+		{
+			"identifier": "get_user_by_username/schema.py",
+			"hash": "f8ad658d5b78ac8a8f353d127f3cb82f"
+		},
+		{
+			"identifier": "get_user_status/schema.py",
+			"hash": "1aebf23d9ec05b954fbacbcc3b17961d"
+		},
+		{
+			"identifier": "get_users/schema.py",
+			"hash": "bc3fdbf60123db559899d29c8db4fb76"
+		},
+		{
+			"identifier": "modify_user/schema.py",
+			"hash": "b01c67291c3fc52b0cd4d593941844a6"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "39d0840ea6b20db15377f970b9a5c751"
+		}
+	]
+}

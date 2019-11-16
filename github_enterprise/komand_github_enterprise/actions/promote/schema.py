@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Promote an ordinary user to admin"
+
+
 class Input:
     USER = "user"
     

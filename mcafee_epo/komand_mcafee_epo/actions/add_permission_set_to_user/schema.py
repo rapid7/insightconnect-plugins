@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Adds permission set(s) to specified user"
+
+
 class Input:
     PERMISSION_SET = "permission_set"
     USER = "user"

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='trufflehog-rapid7-plugin',
       version='1.1.1',
-      description='Searches through git repositories for high entropy strings and secrets, digging deep into commit history',
+      description='The TruffleHog plugin searches through git repositories for high entropy strings and secrets digging deep into commit history',
       author='rapid7',
       author_email='',
       url='',

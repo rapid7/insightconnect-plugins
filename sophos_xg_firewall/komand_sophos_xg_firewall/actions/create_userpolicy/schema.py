@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a user firewall policy"
+
+
 class Input:
     POLICY = "policy"
     

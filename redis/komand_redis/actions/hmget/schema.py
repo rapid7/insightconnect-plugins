@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the values associated with the specified fields in the hash stored at key"
+
+
 class Input:
     FIELDS = "fields"
     GET_ALL = "get_all"
@@ -43,8 +47,8 @@ class HmgetInput(komand.Input):
     }
   },
   "required": [
-    "key",
-    "get_all"
+    "get_all",
+    "key"
   ]
 }
     """)

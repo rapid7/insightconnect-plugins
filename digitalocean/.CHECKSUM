@@ -1,0 +1,115 @@
+{
+	"spec": "43db0a3a635a1bcac57592ca8091ca15",
+	"manifest": "96bb3adc665f411f42d7ffcff4e05b5c",
+	"setup": "5f604da8a80fa8c7b6d5b3b9a9f47b24",
+	"schemas": [
+		{
+			"identifier": "add_domain_record/schema.py",
+			"hash": "29f0565fad7281a6035de2ddbbd1497e"
+		},
+		{
+			"identifier": "convert_image_to_snapshot/schema.py",
+			"hash": "76c3a05d4e22a2842a398bab0bb9a063"
+		},
+		{
+			"identifier": "create_snapshot_from_volume/schema.py",
+			"hash": "2f1981df081c993bd3ed6f1ae95d58db"
+		},
+		{
+			"identifier": "delete_domain_record/schema.py",
+			"hash": "3a1429f80edc5e566239a7fc35034892"
+		},
+		{
+			"identifier": "delete_droplet/schema.py",
+			"hash": "0bc1881d3fc83579ed4ad4c0a75e5063"
+		},
+		{
+			"identifier": "delete_floating_ip/schema.py",
+			"hash": "8f251dc91d1e41863c9b889bd2be5d1b"
+		},
+		{
+			"identifier": "delete_snapshot/schema.py",
+			"hash": "50d0f27d8c0fd87e708b610e0be67d74"
+		},
+		{
+			"identifier": "delete_ssh_key/schema.py",
+			"hash": "2bda3f513600b63213497d7a8796d3c3"
+		},
+		{
+			"identifier": "delete_volume/schema.py",
+			"hash": "4b4e35efed80ae21afae6e96ed2430f7"
+		},
+		{
+			"identifier": "get_user_information/schema.py",
+			"hash": "341450ee2e96f3759f2b37e7c0aab51f"
+		},
+		{
+			"identifier": "list_domain_records/schema.py",
+			"hash": "d42f97627085a7c02b08fe287c1c5ad5"
+		},
+		{
+			"identifier": "list_domains/schema.py",
+			"hash": "9cd46fab020ec7b730e8ca485828a9ae"
+		},
+		{
+			"identifier": "list_droplets/schema.py",
+			"hash": "bb6e3fe238037e62335908776390b1ee"
+		},
+		{
+			"identifier": "list_floating_ips/schema.py",
+			"hash": "82be83e013b235948fc2b0d65eed9559"
+		},
+		{
+			"identifier": "list_snapshots/schema.py",
+			"hash": "0686a0688d2b838d92b0284c60c96faf"
+		},
+		{
+			"identifier": "list_ssh_keys/schema.py",
+			"hash": "c080841e70e1aec54a338d2525f0c350"
+		},
+		{
+			"identifier": "password_reset_droplet/schema.py",
+			"hash": "1ea6d67badd39415a16e6722b7776836"
+		},
+		{
+			"identifier": "power_off_droplet/schema.py",
+			"hash": "bd7b65b870cd296706fbbbcca33ca67f"
+		},
+		{
+			"identifier": "power_on_droplet/schema.py",
+			"hash": "850ff2e73ccf69c6c59f5a074cd7633f"
+		},
+		{
+			"identifier": "reboot_droplet/schema.py",
+			"hash": "98e885f4d06d4c2d5398b76160170b27"
+		},
+		{
+			"identifier": "rebuild_droplet/schema.py",
+			"hash": "3af4c57f2815a3d49c05174785f034a6"
+		},
+		{
+			"identifier": "retrieve_existing_floating_ip/schema.py",
+			"hash": "f9d07d4613c40f9511250932a02f791e"
+		},
+		{
+			"identifier": "retrieve_snapshot/schema.py",
+			"hash": "e72f2caa6aba82622a228cd911347b24"
+		},
+		{
+			"identifier": "shutdown_droplet/schema.py",
+			"hash": "158bd1ad4c333da07a12c94303df9524"
+		},
+		{
+			"identifier": "update_domain_record/schema.py",
+			"hash": "330b029903ae4edc2b34a622b084c6e1"
+		},
+		{
+			"identifier": "update_ssh_key/schema.py",
+			"hash": "019cdbc512b36f1bd2a4f1d47d9ae20a"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "876a23799802814906086a1766e1576d"
+		}
+	]
+}

@@ -7,7 +7,7 @@ from komand_newrelic import connection, actions, triggers
 Name = 'New Relic'
 Vendor = 'rapid7'
 Version = '2.0.0'
-Description = 'Monitor the performance of applications and infrastructure'
+Description = 'Monitors the performance of applications and infrastructure'
 
 
 class ICONNewrelic(komand.Plugin):

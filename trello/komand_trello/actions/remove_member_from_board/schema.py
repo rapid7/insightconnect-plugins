@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove member from board"
+
+
 class Input:
     BOARD_ID = "board_id"
     ID_MEMBER = "id_member"

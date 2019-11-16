@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Upload an IP address group definition to tCell"
+
+
 class Input:
     GROUP = "group"
     

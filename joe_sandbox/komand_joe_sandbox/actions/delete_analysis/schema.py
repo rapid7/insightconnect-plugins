@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete an analysis"
+
+
 class Input:
     WEBID = "webid"
     

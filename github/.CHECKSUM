@@ -1,0 +1,71 @@
+{
+	"spec": "0bb9b2f6a95ed88d3d4561acac40b813",
+	"manifest": "de9a945b3f3947612745672bffab5a1d",
+	"setup": "9f0bdf2eb65a7f8867255a45129cbaa6",
+	"schemas": [
+		{
+			"identifier": "add_collaborator/schema.py",
+			"hash": "6ac4fdf84b6ac531435bded9f4a6be80"
+		},
+		{
+			"identifier": "add_issue_label/schema.py",
+			"hash": "ab915f112fbc6668bda1223e981329b5"
+		},
+		{
+			"identifier": "add_membership/schema.py",
+			"hash": "daa042c214afa22649ea15e986f4c7bc"
+		},
+		{
+			"identifier": "block_user/schema.py",
+			"hash": "d03d652448ad41a3a6959a10bfa24bc3"
+		},
+		{
+			"identifier": "close_issue/schema.py",
+			"hash": "8541e6b4b9f42322edf7f3cb5441a4c7"
+		},
+		{
+			"identifier": "create/schema.py",
+			"hash": "166c162c6646024440d5ad06e9b5369e"
+		},
+		{
+			"identifier": "create_issue_comment/schema.py",
+			"hash": "b49226af99f48a01f2c916bebf255e1f"
+		},
+		{
+			"identifier": "get_issues_by_repo/schema.py",
+			"hash": "875bafa11466d0bf551ad4682d41132d"
+		},
+		{
+			"identifier": "get_my_issues/schema.py",
+			"hash": "6a05ae079f413388d95504d31f930953"
+		},
+		{
+			"identifier": "get_repo/schema.py",
+			"hash": "ee8f60f10d72f8221ab8ecb3a6969892"
+		},
+		{
+			"identifier": "remove/schema.py",
+			"hash": "4b6946da23ed1b3f3167eee5e762e272"
+		},
+		{
+			"identifier": "search/schema.py",
+			"hash": "6155c6fca28bc78551e202a772fa33f4"
+		},
+		{
+			"identifier": "unblock_user/schema.py",
+			"hash": "1e005eebe289242004235a1d5b7b8217"
+		},
+		{
+			"identifier": "user/schema.py",
+			"hash": "42e0192d416ec136fea78b5fbc2329f3"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "faceb7559adf08dac4bba5d5e39d6bcc"
+		},
+		{
+			"identifier": "issue/schema.py",
+			"hash": "5b0a27004f9fa3039e010af4c2e99c33"
+		}
+	]
+}

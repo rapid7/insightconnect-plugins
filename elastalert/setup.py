@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='elastalert-rapid7-plugin',
       version='1.0.0',
-      description='Easy & flexible alerting with Elasticsearch',
+      description='ElastAlert provides easy & flexible alerting with Elasticsearch. Users of the ElastAlert plugin can monitor alerts in real-time for automation use',
       author='rapid7',
       author_email='',
       url='',

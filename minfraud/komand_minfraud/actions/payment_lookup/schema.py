@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query payment info"
+
+
 class Input:
     ADDRESS = "address"
     PAYMENT_DECLINE_CODE = "payment_decline_code"

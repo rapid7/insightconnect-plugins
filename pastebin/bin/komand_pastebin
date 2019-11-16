@@ -7,7 +7,7 @@ from komand_pastebin import connection, actions, triggers
 Name = 'Pastebin'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Pastebin.com is the number one paste tool since 2002. Pastebin is a website where you can store text online for a set period of time'
+Description = 'The Pastebin plugin allows you to send text to and check posts on Pastebin'
 
 
 class ICONPastebin(komand.Plugin):

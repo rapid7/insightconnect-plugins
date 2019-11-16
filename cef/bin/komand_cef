@@ -7,7 +7,7 @@ from komand_cef import connection, actions, triggers
 Name = 'CEF'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Work with Common Event Format (CEF) data'
+Description = 'This plugin used for generating and manipulating event in a Common Event Format (CEF)'
 
 
 class ICONCef(komand.Plugin):

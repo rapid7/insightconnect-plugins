@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Restarts all agents, or a specified agent"
+
+
 class Input:
     AGENT_ID = "agent_id"
     
@@ -55,8 +59,8 @@ class AgentRestartOutput(komand.Output):
     }
   },
   "required": [
-    "message",
-    "error"
+    "error",
+    "message"
   ]
 }
     """)

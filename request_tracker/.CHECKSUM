@@ -1,0 +1,47 @@
+{
+	"spec": "85d5af30d8934288aacaa91eb2e797ea",
+	"manifest": "93723a99792455bd586cae8002381aff",
+	"setup": "984d34931233c51f7442ac85abc15f8d",
+	"schemas": [
+		{
+			"identifier": "ticket_attachment/schema.py",
+			"hash": "b4bdb08933da98a4053d4c96da0c86d1"
+		},
+		{
+			"identifier": "ticket_attachment_content/schema.py",
+			"hash": "7017dc16f8ff45e01945b51f2748bede"
+		},
+		{
+			"identifier": "ticket_attachments/schema.py",
+			"hash": "5c823d2ec85960545c08044aa1d779b9"
+		},
+		{
+			"identifier": "ticket_create/schema.py",
+			"hash": "70e2fd0f972e0fb867967bd838bc8672"
+		},
+		{
+			"identifier": "ticket_history/schema.py",
+			"hash": "5e1183f048a6c4683cdc822d37ea120e"
+		},
+		{
+			"identifier": "ticket_history_entry/schema.py",
+			"hash": "e0a2373fef2d93540df9a19cce429deb"
+		},
+		{
+			"identifier": "ticket_links/schema.py",
+			"hash": "7fe49b6eeb5da27633ee1c702223724c"
+		},
+		{
+			"identifier": "ticket_properties/schema.py",
+			"hash": "f28239597fa125ff08a77f2aa9296641"
+		},
+		{
+			"identifier": "ticket_search/schema.py",
+			"hash": "415ed293ff6bbb448d7a952bb797d1ee"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "c49476c0980b3f0d6e1a909acd2bd926"
+		}
+	]
+}

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get all elements in a list"
+
+
 class Input:
     COUNT = "count"
     KEY = "key"

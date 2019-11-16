@@ -7,7 +7,7 @@ from komand_vxstream_sandbox import connection, actions, triggers
 Name = 'VxStream Sandbox'
 Vendor = 'rapid7'
 Version = '2.0.0'
-Description = 'VxStream Malware Analysis Service'
+Description = 'A plugin to interact with a VxStream Malware analysis service. This plugin allows a user to submit files for analysis and view the file report details. It can also search the service for any matching file hashes'
 
 
 class ICONVxstreamSandbox(komand.Plugin):

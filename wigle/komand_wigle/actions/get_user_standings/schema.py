@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get user standings"
+
+
 class Input:
     PAGEEND = "pageend"
     PAGESTART = "pagestart"
@@ -115,13 +119,13 @@ class GetUserStandingsOutput(komand.Output):
     }
   },
   "required": [
-    "totalUsers",
-    "results",
-    "sortBy",
     "eventView",
     "myUsername",
+    "pageEnd",
     "pageStart",
-    "pageEnd"
+    "results",
+    "sortBy",
+    "totalUsers"
   ],
   "definitions": {
     "standing": {

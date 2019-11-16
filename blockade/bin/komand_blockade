@@ -7,7 +7,7 @@ from komand_blockade import connection, actions, triggers
 Name = 'Blockade'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Blockade brings antivirus-like capabilities to users who run the Chrome browser'
+Description = 'The Blockade plugins assists with administrating users and Incidents of Compromise'
 
 
 class ICONBlockade(komand.Plugin):

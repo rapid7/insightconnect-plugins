@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add tags to an incident"
+
+
 class Input:
     INCIDENT_ID = "incident_id"
     TAGS = "tags"

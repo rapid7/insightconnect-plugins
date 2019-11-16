@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get list of deactivated users"
+
+
 class Input:
     FILTER = "filter"
     ID_OR_NAME = "id_or_name"

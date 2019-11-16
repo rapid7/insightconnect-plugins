@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a comment to the network"
+
+
 class Input:
     COMMENT = "comment"
     NETID = "netid"

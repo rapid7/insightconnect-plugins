@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Assign a completely new set of tags to an app, removing any previously existing tags"
+
+
 class Input:
     APP_ID = "app_id"
     TAGS = "tags"

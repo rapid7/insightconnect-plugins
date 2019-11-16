@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch the set of tags for a tCell app"
+
+
 class Input:
     APP_ID = "app_id"
     

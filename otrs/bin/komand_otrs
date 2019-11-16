@@ -7,7 +7,7 @@ from komand_otrs import connection, actions, triggers
 Name = 'OTRS'
 Vendor = 'rapid7'
 Version = '4.0.1'
-Description = 'Open Source Ticket Request System'
+Description = 'Create and manage OTRS tickets'
 
 
 class ICONOtrs(komand.Plugin):

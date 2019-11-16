@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='proofpoint_url_defense-rapid7-plugin',
       version='1.0.0',
-      description='Proofpoint URL Defense is a service designed to handle emails that contain malicious URLs',
+      description='The Proofpoint URL Defense plugin decodes Proofpoint encoded URLs',
       author='rapid7',
       author_email='',
       url='',

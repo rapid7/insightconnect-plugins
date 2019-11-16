@@ -7,7 +7,7 @@ from komand_zendesk import connection, actions, triggers
 Name = 'Zendesk'
 Vendor = 'rapid7'
 Version = '1.1.0'
-Description = 'Zendesk helps improve communication and make sense of massive amounts of data'
+Description = 'The Zendesk plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk of data'
 
 
 class ICONZendesk(komand.Plugin):

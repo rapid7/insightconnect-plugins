@@ -1,0 +1,19 @@
+{
+	"spec": "541eb5fd03113889de2f6f4dd1d57eec",
+	"manifest": "8f4073b009f547043acacbf59a2cd08d",
+	"setup": "2a0eff3c66cdc5bb48203e8cc34e0bc5",
+	"schemas": [
+		{
+			"identifier": "address_lookup/schema.py",
+			"hash": "c7bc80c0bc3ec9d4b0f871a464608753"
+		},
+		{
+			"identifier": "port_lookup/schema.py",
+			"hash": "d4a754d16d138cce49e4fb65c134a332"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "cb60c2b5b62fafb9634d667a8ad96277"
+		}
+	]
+}

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get Start of Authority record for a domain"
+
+
 class Input:
     HOSTNAME = "hostname"
     

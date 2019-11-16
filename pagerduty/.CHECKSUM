@@ -1,0 +1,39 @@
+{
+	"spec": "d7fb9f0a45eb903764cf882d6cbb2e83",
+	"manifest": "d34d8459ec821ab9df33927a9a4151e3",
+	"setup": "8be7a079c449054ec4f1f107af70678e",
+	"schemas": [
+		{
+			"identifier": "create_user/schema.py",
+			"hash": "085dc47d255b8b8d6dc154ba61bbc28c"
+		},
+		{
+			"identifier": "delete_user_by_id/schema.py",
+			"hash": "11b87088f070c1d3cfa26b8ab0275c68"
+		},
+		{
+			"identifier": "get_user_by_email/schema.py",
+			"hash": "175aee9513cbe80f0ca8185bf674db61"
+		},
+		{
+			"identifier": "get_user_by_id/schema.py",
+			"hash": "9db03bf68cf754ba6cb0f41e35f963cf"
+		},
+		{
+			"identifier": "send_acknowledge_event/schema.py",
+			"hash": "7e3d3140ac5804b9e2a5de4e3a8d3993"
+		},
+		{
+			"identifier": "send_resolve_event/schema.py",
+			"hash": "58f77ec2c2bab7c612e8bbbf8eac1c22"
+		},
+		{
+			"identifier": "send_trigger_event/schema.py",
+			"hash": "6a3ac76ba82b037170bc4e5834d724d7"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "2c9c70568b14fff94b67ca70a9cac36c"
+		}
+	]
+}

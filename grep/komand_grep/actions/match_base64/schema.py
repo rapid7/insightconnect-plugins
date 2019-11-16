@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Find pattern in base64 file"
+
+
 class Input:
     BEHAVIOR = "behavior"
     DATA = "data"
@@ -48,8 +52,8 @@ class MatchBase64Input(komand.Input):
     }
   },
   "required": [
-    "pattern",
-    "data"
+    "data",
+    "pattern"
   ]
 }
     """)

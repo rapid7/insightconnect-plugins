@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Convert Markdown to PDF"
+
+
 class Input:
     MARKDOWN = "markdown"
     MARKDOWN_STRING = "markdown_string"

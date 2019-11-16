@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add all the tags posted in the body to the set of tags the app already has"
+
+
 class Input:
     APP_ID = "app_id"
     TAGS = "tags"

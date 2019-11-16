@@ -7,7 +7,7 @@ from komand_carbon_black_defense import connection, actions, triggers
 Name = 'Carbon Black Defense'
 Vendor = 'rapid7'
 Version = '1.1.1'
-Description = 'Next-generation antivirus and EDR in one cloud-delivered platform'
+Description = 'Find events and retrieve details for specific events'
 
 
 class ICONCarbonBlackDefense(komand.Plugin):

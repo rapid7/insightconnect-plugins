@@ -6,7 +6,7 @@ from icon_google_web_risk import connection, actions, triggers
 
 Name = 'Google Web Risk'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '2.0.0'
 Description = 'Check URLs against the Google Web Risk service'
 
 

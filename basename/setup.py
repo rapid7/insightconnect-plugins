@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='basename-rapid7-plugin',
       version='1.0.0',
-      description='Basename a path',
+      description='This plugin is used to get the last item of a file path or URL using Python's basename utility',
       author='rapid7',
       author_email='',
       url='',

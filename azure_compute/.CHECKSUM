@@ -1,0 +1,63 @@
+{
+	"spec": "58e0f320087d0661362709991a6bdbd9",
+	"manifest": "daddfe92a65748c21c23d1853c2da2bc",
+	"setup": "10d890405adf0a7923ad905aa0f5ce24",
+	"schemas": [
+		{
+			"identifier": "availability_set_vm/schema.py",
+			"hash": "fabde647aa3b96fa6a74c14271db3cf3"
+		},
+		{
+			"identifier": "delete_vm/schema.py",
+			"hash": "797561eeb6154c006df293db9a3f554d"
+		},
+		{
+			"identifier": "generalized_vm/schema.py",
+			"hash": "0a53bf4a6e4d1457164595b0841d9cd5"
+		},
+		{
+			"identifier": "info_vm/schema.py",
+			"hash": "1aa1993faf8a449b019f024081c2ed14"
+		},
+		{
+			"identifier": "list_vm/schema.py",
+			"hash": "6a0bb61c558f4c407e6e8189bd3b938d"
+		},
+		{
+			"identifier": "restart_vm/schema.py",
+			"hash": "2c8e069eaa16d648db9345c2ff16f116"
+		},
+		{
+			"identifier": "save_image_vm/schema.py",
+			"hash": "798fa1f0f93dd201a9477442e6f93d72"
+		},
+		{
+			"identifier": "sizes_vm/schema.py",
+			"hash": "8cf2070234d1e99e85f78d1e253740c8"
+		},
+		{
+			"identifier": "sizes_vm_subscription/schema.py",
+			"hash": "565d56c0ca17df0d21a182c0a2e665bd"
+		},
+		{
+			"identifier": "start_vm/schema.py",
+			"hash": "aa2de62471c7b6bd6856c30538971dc8"
+		},
+		{
+			"identifier": "stop_deallocate_vm/schema.py",
+			"hash": "74490d277437305ad9f9bf1ca9f66b6a"
+		},
+		{
+			"identifier": "stop_vm/schema.py",
+			"hash": "bde3974a40fc625b56e5b2b73745e826"
+		},
+		{
+			"identifier": "vm_in_subscription/schema.py",
+			"hash": "14f61d9f63463eef39ebdaaab4ffa336"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "6e84247d6c777667eb003e1875a57fa7"
+		}
+	]
+}

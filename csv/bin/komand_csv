@@ -7,7 +7,7 @@ from komand_csv import connection, actions, triggers
 Name = 'CSV'
 Vendor = 'rapid7'
 Version = '1.1.3'
-Description = 'Comma Separated Values'
+Description = 'CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to extract fields from CSV strings and files'
 
 
 class ICONCsv(komand.Plugin):

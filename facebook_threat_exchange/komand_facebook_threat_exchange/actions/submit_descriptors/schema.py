@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Submit data to Facebook's graph API"
+
+
 class Input:
     ADD_TAGS = "add_tags"
     CONFIDENCE = "confidence"
@@ -260,12 +264,12 @@ class SubmitDescriptorsInput(komand.Input):
     }
   },
   "required": [
-    "privacy_type",
-    "type",
     "description",
     "indicator",
+    "privacy_type",
     "share_level",
-    "status"
+    "status",
+    "type"
   ]
 }
     """)

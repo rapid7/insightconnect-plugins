@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='advanced_regex-rapid7-plugin',
       version='1.0.0',
-      description='Perform advanced regex operations on a string using Python regex',
+      description='This plugin performs advanced regex operations on a string using Python regex',
       author='rapid7',
       author_email='',
       url='',

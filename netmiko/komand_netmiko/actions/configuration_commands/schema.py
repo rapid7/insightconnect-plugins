@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Change the device's configuration Global configuration mode"
+
+
 class Input:
     COMMAND = "command"
     HOST = "host"

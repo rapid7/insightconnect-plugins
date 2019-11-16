@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves a specific incident artifact"
+
+
 class Input:
     ARTIFACT_ID = "artifact_id"
     INCIDENT_ID = "incident_id"
@@ -39,8 +43,8 @@ class RetrieveSpecificArtifactInput(komand.Input):
     }
   },
   "required": [
-    "incident_id",
     "artifact_id",
+    "incident_id",
     "organization_id"
   ]
 }

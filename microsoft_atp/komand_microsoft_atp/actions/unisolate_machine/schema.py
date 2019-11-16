@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Restore network connectivity to a machine"
+
+
 class Input:
     COMMENT = "comment"
     MACHINE_ID = "machine_id"
@@ -32,8 +36,8 @@ class UnisolateMachineInput(komand.Input):
     }
   },
   "required": [
-    "machine_id",
-    "comment"
+    "comment",
+    "machine_id"
   ]
 }
     """)

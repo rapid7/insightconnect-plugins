@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets the ticket links for a single ticket"
+
+
 class Input:
     TICKET_ID = "ticket_id"
     

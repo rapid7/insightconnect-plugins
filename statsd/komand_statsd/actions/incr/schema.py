@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action is used to increment a counter"
+
+
 class Input:
     COUNT = "count"
     RATE = "rate"

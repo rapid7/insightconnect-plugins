@@ -7,7 +7,7 @@ from komand_sumologic import connection, actions, triggers
 Name = 'Sumo Logic'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Sumo Logic'
+Description = 'The Sumo Logic plugin allows you to run a Sumo Logic query and view the results'
 
 
 class ICONSumologic(komand.Plugin):

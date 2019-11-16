@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new actor identifier"
+
+
 class Input:
     ID = "id"
     ID_TYPE = "id_type"
@@ -47,8 +51,8 @@ class AddActorIdentifierInput(komand.Input):
   },
   "required": [
     "id",
-    "source",
-    "id_type"
+    "id_type",
+    "source"
   ]
 }
     """)

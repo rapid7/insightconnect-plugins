@@ -1,0 +1,35 @@
+{
+	"spec": "0d59741f7600545d178562121ad870be",
+	"manifest": "f719652ab843dc29f64bada86672d667",
+	"setup": "e834e94612c864d278033d016617d442",
+	"schemas": [
+		{
+			"identifier": "add_computer_to_group/schema.py",
+			"hash": "56d41de593080fd88ca12e525f7681ef"
+		},
+		{
+			"identifier": "get_device_groups/schema.py",
+			"hash": "5202e61eaba33cde1eb228924daa8a21"
+		},
+		{
+			"identifier": "get_devices_name_id/schema.py",
+			"hash": "e46cb8f4189babcbe93f6140945ec85a"
+		},
+		{
+			"identifier": "get_group_detail/schema.py",
+			"hash": "da1f0df15ded93cf82b62667d21254fa"
+		},
+		{
+			"identifier": "get_user_location/schema.py",
+			"hash": "494153bfeb67ee571b62eecbe0be726f"
+		},
+		{
+			"identifier": "lock_mobile_devices/schema.py",
+			"hash": "d43ee4d7b1d2549b414ad3198ce97ba7"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "284a4af765c57cb1beb43e2c19d4c77e"
+		}
+	]
+}

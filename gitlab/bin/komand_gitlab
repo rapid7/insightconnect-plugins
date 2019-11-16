@@ -7,7 +7,7 @@ from komand_gitlab import connection, actions, triggers
 Name = 'GitLab'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'GitLab is a next generation developer collaboration software with version control capabilities'
+Description = 'GitLab plugin allows user management and issue management in Gitlab'
 
 
 class ICONGitlab(komand.Plugin):

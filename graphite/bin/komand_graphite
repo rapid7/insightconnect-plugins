@@ -7,7 +7,7 @@ from komand_graphite import connection, actions, triggers
 Name = 'Graphite'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Graphite is an enterprise-ready monitoring tool that allows you store and graph metrics'
+Description = 'The Graphite plugin allows you to store, retrieve, and update your metrics. The plugin will also return a byte array of graphed data'
 
 
 class ICONGraphite(komand.Plugin):

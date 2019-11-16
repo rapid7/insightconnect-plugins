@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='sketchify-rapid7-plugin',
       version='1.0.0',
-      description='Turn any link into a suspicious looking one',
+      description='Sketchify is a service used to turn any link into one that appears suspicious. With the Sketchify plugin for Rapid7 InsightConnect, users can conduct internal phishing campaigns or other forms of penetration testing within their organization',
       author='rapid7',
       author_email='',
       url='',

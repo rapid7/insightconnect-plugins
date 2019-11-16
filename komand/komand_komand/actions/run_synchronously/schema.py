@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run a workflow and wait for results"
+
+
 class Input:
     COMPLETION_CHECKS = "completion_checks"
     INPUT = "input"

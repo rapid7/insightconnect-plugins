@@ -7,7 +7,7 @@ from komand_threatstack import connection, actions, triggers
 Name = 'Threat Stack'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Threat Stack is a cloud security monitoring provider helping companies to achieve compliance and cloud security'
+Description = 'The Threat Stack plugin is used to get information about alerts, assets, and policies'
 
 
 class ICONThreatstack(komand.Plugin):

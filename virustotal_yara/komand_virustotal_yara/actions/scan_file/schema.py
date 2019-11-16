@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Scans a file using Yara"
+
+
 class Input:
     FILE = "file"
     RULES = "rules"

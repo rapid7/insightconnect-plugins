@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Download attachment"
+
+
 class Input:
     ATTRIBUTE_ID = "attribute_id"
     

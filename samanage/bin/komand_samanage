@@ -7,7 +7,7 @@ from komand_samanage import connection, actions, triggers
 Name = 'Samanage'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Samanage is an enterprise service-desk and IT asset-management provider'
+Description = 'The Samanage plugin allows you to start workflows on new incidents, manage incidents, and manage users'
 
 
 class ICONSamanage(komand.Plugin):

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove tags from the application"
+
+
 class Input:
     APP_ID = "app_id"
     TAGS = "tags"

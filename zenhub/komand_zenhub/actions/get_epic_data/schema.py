@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get the ZenHub Data for a ZenHub Epic"
+
+
 class Input:
     EPIC_ID = "epic_id"
     REPO_ID = "repo_id"
@@ -32,8 +36,8 @@ class GetEpicDataInput(komand.Input):
     }
   },
   "required": [
-    "repo_id",
-    "epic_id"
+    "epic_id",
+    "repo_id"
   ]
 }
     """)

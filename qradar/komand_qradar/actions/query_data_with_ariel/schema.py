@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Asynchronously query data using the Ariel Query Language"
+
+
 class Input:
     QUERY = "query"
     

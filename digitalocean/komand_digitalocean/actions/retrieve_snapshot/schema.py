@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves an existing snapshot from an account"
+
+
 class Input:
     SNAPSHOT_ID = "snapshot_id"
     

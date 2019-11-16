@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Tweet"
+
+
 class Input:
     MSG = "msg"
     

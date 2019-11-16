@@ -7,7 +7,7 @@ from komand_github_enterprise import connection, actions, triggers
 Name = 'GitHub Enterprise'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'GitHub Enterprise is the on-premises version of GitHub'
+Description = 'GitHub Enterprise plugin allows user management'
 
 
 class ICONGithubEnterprise(komand.Plugin):

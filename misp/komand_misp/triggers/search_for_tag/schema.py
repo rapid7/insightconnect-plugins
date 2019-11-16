@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This trigger will search MISP for any events with a specified tag"
+
+
 class Input:
     
     INTERVAL = "interval"
@@ -43,8 +47,8 @@ class SearchForTagInput(komand.Input):
   },
   "required": [
     "interval",
-    "tag",
-    "remove"
+    "remove",
+    "tag"
   ]
 }
     """)

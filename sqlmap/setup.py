@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='sqlmap-rapid7-plugin',
       version='1.1.0',
-      description='An open-source penetration testing tool that performs the process of SQL injection',
+      description='The SQLMap plugin allows you to scan targets and analyze the results',
       author='rapid7',
       author_email='',
       url='',

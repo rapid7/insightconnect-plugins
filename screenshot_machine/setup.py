@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='screenshot_machine-rapid7-plugin',
       version='1.0.0',
-      description='Screenshot Machine',
+      description='The Screenshot Machine plugin allows you to capture screenshots',
       author='rapid7',
       author_email='',
       url='',

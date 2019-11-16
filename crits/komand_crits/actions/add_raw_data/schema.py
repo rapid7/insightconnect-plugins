@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates new raw data"
+
+
 class Input:
     DATA = "data"
     DATA_TYPE = "data_type"
@@ -75,11 +79,11 @@ class AddRawDataInput(komand.Input):
     }
   },
   "required": [
-    "type",
-    "title",
     "data_type",
+    "file",
     "source",
-    "file"
+    "title",
+    "type"
   ],
   "definitions": {
     "file": {

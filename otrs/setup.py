@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='otrs-rapid7-plugin',
       version='4.0.1',
-      description='Open Source Ticket Request System',
+      description='Create and manage OTRS tickets',
       author='rapid7',
       author_email='',
       url='',

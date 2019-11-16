@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets the metadata and content of a specific attachment"
+
+
 class Input:
     ATTACHMENT_ID = "attachment_id"
     TICKET_ID = "ticket_id"
@@ -43,8 +47,8 @@ class TicketAttachmentInput(komand.Input):
     }
   },
   "required": [
-    "ticket_id",
-    "attachment_id"
+    "attachment_id",
+    "ticket_id"
   ]
 }
     """)

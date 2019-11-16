@@ -7,7 +7,7 @@ from komand_rapid7_metasploit import connection, actions, triggers
 Name = 'Rapid7 Metasploit'
 Vendor = 'rapid7'
 Version = '2.0.0'
-Description = 'Metasploit is the most widely used penetration testing framework'
+Description = 'This plugin allows you to search for and execute exploits in Metasploit'
 
 
 class ICONRapid7Metasploit(komand.Plugin):

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='wordpress-rapid7-plugin',
       version='1.0.0',
-      description='Open Source CMS',
+      description='The WordPress plugin allows for user management on the WordPress platform',
       author='rapid7',
       author_email='',
       url='',

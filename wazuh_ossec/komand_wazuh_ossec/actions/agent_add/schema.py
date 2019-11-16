@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a new agent"
+
+
 class Input:
     FORCE = "force"
     IP = "ip"
@@ -69,8 +73,8 @@ class AgentAddOutput(komand.Output):
     }
   },
   "required": [
-    "id",
-    "error"
+    "error",
+    "id"
   ]
 }
     """)

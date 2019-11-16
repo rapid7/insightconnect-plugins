@@ -7,7 +7,7 @@ from komand_snortlabslist import connection, actions, triggers
 Name = 'Snort Labs IP Reputation'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'IPv4 address to validate'
+Description = 'Snort Labs List is an IP blacklist service provided by Snort. Users of this plugin can query with IP addresses to check their status'
 
 
 class ICONSnortlabslist(komand.Plugin):

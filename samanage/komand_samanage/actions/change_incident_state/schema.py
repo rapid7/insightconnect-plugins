@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update the state of an incident"
+
+
 class Input:
     INCIDENT_ID = "incident_id"
     STATE = "state"

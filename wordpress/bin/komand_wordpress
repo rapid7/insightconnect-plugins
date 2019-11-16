@@ -7,7 +7,7 @@ from komand_wordpress import connection, actions, triggers
 Name = 'WordPress'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Open Source CMS'
+Description = 'The WordPress plugin allows for user management on the WordPress platform'
 
 
 class ICONWordpress(komand.Plugin):

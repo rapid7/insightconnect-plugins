@@ -7,7 +7,7 @@ from komand_duo_admin import connection, actions, triggers
 Name = 'Duo Admin API'
 Vendor = 'rapid7'
 Version = '3.3.1'
-Description = 'Integration for Duo Admin API'
+Description = 'Duo is a trusted access solution for organizations. The Duo Admin plugin for Rapid7 InsightConnect allows users to manage and administrate their Duo organization'
 
 
 class ICONDuoAdmin(komand.Plugin):

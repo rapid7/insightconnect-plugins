@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets a list of open and closed incidents"
+
+
 class Input:
     ORGANIZATION_ID = "organization_id"
     

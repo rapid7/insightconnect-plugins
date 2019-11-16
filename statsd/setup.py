@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='statsd-rapid7-plugin',
       version='1.0.0',
-      description='StatsD is a front-end proxy for the Graphite/Carbon metrics server',
+      description='The Statsd plugin will allow you to create metrics from your workflow',
       author='rapid7',
       author_email='',
       url='',

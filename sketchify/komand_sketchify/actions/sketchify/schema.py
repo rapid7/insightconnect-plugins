@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Turn a URL into a suspicious looking one"
+
+
 class Input:
     URL = "url"
     

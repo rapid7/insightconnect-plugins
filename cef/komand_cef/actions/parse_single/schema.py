@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Parse a single CEF formatted string"
+
+
 class Input:
     CEF_STRING = "cef_string"
     

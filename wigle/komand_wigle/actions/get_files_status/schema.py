@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get the status of files uploaded by the current user"
+
+
 class Input:
     PAGEEND = "pageend"
     PAGESTART = "pagestart"
@@ -64,8 +68,8 @@ class GetFilesStatusOutput(komand.Output):
     }
   },
   "required": [
-    "results",
-    "processingQueueDepth"
+    "processingQueueDepth",
+    "results"
   ],
   "definitions": {
     "transaction": {
@@ -183,26 +187,26 @@ class GetFilesStatusOutput(komand.Output):
         }
       },
       "required": [
-        "genTotalGps",
-        "username",
-        "fileName",
-        "lastupdt",
-        "totalLocations",
-        "timeParsing",
-        "transid",
-        "genTotalLocations",
-        "discoveredGps",
         "discovered",
-        "genTotal",
-        "totalGps",
-        "percentDone",
-        "genDiscovered",
-        "status",
-        "firstTime",
-        "fileSize",
+        "discoveredGps",
         "fileLines",
+        "fileName",
+        "fileSize",
+        "firstTime",
+        "genDiscovered",
+        "genDiscoveredGps",
+        "genTotal",
+        "genTotalGps",
+        "genTotalLocations",
+        "lastupdt",
+        "percentDone",
+        "status",
+        "timeParsing",
         "total",
-        "genDiscoveredGps"
+        "totalGps",
+        "totalLocations",
+        "transid",
+        "username"
       ]
     }
   }

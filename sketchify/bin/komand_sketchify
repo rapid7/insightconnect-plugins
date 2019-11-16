@@ -7,7 +7,7 @@ from komand_sketchify import connection, actions, triggers
 Name = 'Sketchify'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Turn any link into a suspicious looking one'
+Description = 'Sketchify is a service used to turn any link into one that appears suspicious. With the Sketchify plugin for Rapid7 InsightConnect, users can conduct internal phishing campaigns or other forms of penetration testing within their organization'
 
 
 class ICONSketchify(komand.Plugin):

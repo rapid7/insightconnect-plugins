@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run Tshark on a pcap"
+
+
 class Input:
     FILE = "file"
     FILTER = "filter"

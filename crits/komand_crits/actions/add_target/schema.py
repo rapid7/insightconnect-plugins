@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new target"
+
+
 class Input:
     EMAIL = "email"
     PARAMS = "params"

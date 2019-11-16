@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove a host from quarantine"
+
+
 class Input:
     MAC_ADDRESS = "mac_address"
     

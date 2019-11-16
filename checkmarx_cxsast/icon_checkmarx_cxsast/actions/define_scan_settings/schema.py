@@ -12,12 +12,12 @@ class Input:
     ENGINECONFIGURATIONID = "engineConfigurationId"
     PRESETID = "presetId"
     PROJECTID = "projectId"
-
+    
 
 class Output:
     ID = "id"
     LINK = "link"
-
+    
 
 class DefineScanSettingsInput(komand.Input):
     schema = json.loads("""

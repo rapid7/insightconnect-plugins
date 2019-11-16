@@ -7,7 +7,7 @@ from komand_cisco_firepower import connection, actions, triggers
 Name = 'Cisco Firepower'
 Vendor = 'rapid7'
 Version = '1.0.1'
-Description = 'Firepower is a Next-Generation Firewall (NGFW) with NGIPS, incorporating access and application control, threat prevention and firewall capabilities'
+Description = 'This plugin utilizes Cisco Firepower to add scan results from a third-party vulnerability scanner Cisco Firepower is a Next-Generation Firewall (NGFW) with NGIPS, incorporating access and application control, threat prevention and firewall capabilities'
 
 
 class ICONCiscoFirepower(komand.Plugin):

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Monitor received messages"
+
+
 class Input:
     
     INTERVAL = "interval"

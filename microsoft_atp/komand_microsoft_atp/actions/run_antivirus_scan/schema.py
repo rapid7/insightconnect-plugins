@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Initiate a Windows Defender Antivirus scan on a machine"
+
+
 class Input:
     COMMENT = "comment"
     MACHINE_ID = "machine_id"
@@ -43,9 +47,9 @@ class RunAntivirusScanInput(komand.Input):
     }
   },
   "required": [
-    "scan_type",
+    "comment",
     "machine_id",
-    "comment"
+    "scan_type"
   ]
 }
     """)

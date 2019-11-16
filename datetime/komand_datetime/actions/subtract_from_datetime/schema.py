@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Subtract Datetime units from a Datetime"
+
+
 class Input:
     BASE_TIME = "base_time"
     DAYS = "days"
@@ -76,12 +80,12 @@ class SubtractFromDatetimeInput(komand.Input):
   },
   "required": [
     "base_time",
-    "years",
-    "months",
     "days",
     "hours",
     "minutes",
-    "seconds"
+    "months",
+    "seconds",
+    "years"
   ]
 }
     """)

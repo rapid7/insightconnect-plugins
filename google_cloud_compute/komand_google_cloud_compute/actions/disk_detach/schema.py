@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Detaches a disk from an instance"
+
+
 class Input:
     DEVICENAME = "deviceName"
     INSTANCE = "instance"
@@ -60,9 +64,9 @@ class DiskDetachInput(komand.Input):
     }
   },
   "required": [
-    "zone",
+    "deviceName",
     "instance",
-    "deviceName"
+    "zone"
   ]
 }
     """)

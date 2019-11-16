@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search the database using query syntax provided at https://www.hybrid-analysis.com/faq"
+
+
 class Input:
     QUERY = "query"
     

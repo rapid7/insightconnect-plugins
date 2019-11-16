@@ -7,7 +7,7 @@ from komand_threat_connect import connection, actions, triggers
 Name = 'ThreatConnect'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'ThreatConnect is a Threat Intelligence Platform (TIP) that empowers large organizations to aggregate, analyze and act on their threat intelligence'
+Description = 'ThreatConnect is a Threat Intelligence Platform (TIP) that empowers large organizations to aggregate, analyze and act on their threat intelligence. The ThreatConnect plugin for Rapid7 InsightConnect allows users to view incidents, emails, threats, victims, and more'
 
 
 class ICONThreatConnect(komand.Plugin):

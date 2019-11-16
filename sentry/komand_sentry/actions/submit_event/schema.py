@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create new Sentry event"
+
+
 class Input:
     DSN = "dsn"
     EVENT_JSON = "event_json"
@@ -40,8 +44,8 @@ class SubmitEventInput(komand.Input):
     }
   },
   "required": [
-    "event_json",
-    "dsn"
+    "dsn",
+    "event_json"
   ],
   "definitions": {
     "EventJSON": {

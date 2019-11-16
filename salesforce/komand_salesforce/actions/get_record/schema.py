@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve a record"
+
+
 class Input:
     EXTERNAL_ID_FIELD_NAME = "external_id_field_name"
     OBJECT_NAME = "object_name"
@@ -41,8 +45,8 @@ class GetRecordInput(komand.Input):
     }
   },
   "required": [
-    "record_id",
-    "object_name"
+    "object_name",
+    "record_id"
   ]
 }
     """)

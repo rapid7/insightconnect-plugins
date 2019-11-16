@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves runtime stats about Logstash"
+
+
 class Input:
     TYPES = "types"
     

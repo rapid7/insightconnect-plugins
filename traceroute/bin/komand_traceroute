@@ -7,7 +7,7 @@ from komand_traceroute import connection, actions, triggers
 Name = 'Traceroute'
 Vendor = 'rapid7'
 Version = '1.0.1'
-Description = 'Traceroute networking tool'
+Description = 'The traceroute plugin will trace a network route to a host'
 
 
 class ICONTraceroute(komand.Plugin):

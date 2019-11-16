@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run a workflow without waiting for results"
+
+
 class Input:
     INPUT = "input"
     WORKFLOW_NAME = "workflow_name"

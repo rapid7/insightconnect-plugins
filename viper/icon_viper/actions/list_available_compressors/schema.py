@@ -32,6 +32,7 @@ class ListAvailableCompressorsOutput(komand.Output):
     "compressors": {
       "type": "array",
       "title": "Archive Compressor",
+      "description": "Archive compressor",
       "items": {
         "$ref": "#/definitions/Archive"
       },

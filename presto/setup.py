@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='presto-rapid7-plugin',
       version='1.0.0',
-      description='Presto is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes',
+      description='The Presto plugin will allow you to run database commands with Presto',
       author='rapid7',
       author_email='',
       url='',

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Submit a malicious file or hash"
+
+
 class Input:
     CNAME = "cname"
     COMMENTS = "comments"
@@ -96,15 +100,15 @@ class SubmitInput(komand.Input):
     }
   },
   "required": [
+    "cname",
+    "comments",
+    "critical",
+    "data",
+    "email",
+    "fname",
     "lname",
     "pin",
-    "stype",
-    "comments",
-    "data",
-    "fname",
-    "cname",
-    "email",
-    "critical"
+    "stype"
   ]
 }
     """)

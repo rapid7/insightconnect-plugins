@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all virtual services"
+
+
 class Input:
     ID = "id"
     
@@ -129,19 +133,19 @@ class RetrieveVirtualServiceOutput(komand.Output):
     }
   },
   "required": [
-    "group",
     "address",
-    "enable_access_log",
-    "content_rules",
-    "name",
-    "port",
     "address_version",
-    "security",
+    "comments",
+    "content_rules",
+    "enable_access_log",
+    "group",
     "id",
     "load_balance",
-    "comments",
-    "ssl_off_loading",
-    "servers"
+    "name",
+    "port",
+    "security",
+    "servers",
+    "ssl_off_loading"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Attach a file to an incident"
+
+
 class Input:
     ATTACHMENT_BYTES = "attachment_bytes"
     ATTACHMENT_NAME = "attachment_name"
@@ -41,9 +45,9 @@ class AttachIncidentInput(komand.Input):
     }
   },
   "required": [
-    "incident_id",
     "attachment_bytes",
-    "attachment_name"
+    "attachment_name",
+    "incident_id"
   ]
 }
     """)

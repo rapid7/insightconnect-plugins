@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='graphite-rapid7-plugin',
       version='1.0.0',
-      description='Graphite is an enterprise-ready monitoring tool that allows you store and graph metrics',
+      description='The Graphite plugin allows you to store, retrieve, and update your metrics. The plugin will also return a byte array of graphed data',
       author='rapid7',
       author_email='',
       url='',

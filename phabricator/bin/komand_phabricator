@@ -7,7 +7,7 @@ from komand_phabricator import connection, actions, triggers
 Name = 'Phabricator'
 Vendor = 'rapid7'
 Version = '1.0.0'
-Description = 'Phabricator is a suite of open source tools for peer code review, task management, and project communication'
+Description = 'The Phabricator plugin allows you to setup and manage code reviews'
 
 
 class ICONPhabricator(komand.Plugin):

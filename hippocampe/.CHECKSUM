@@ -1,0 +1,75 @@
+{
+	"spec": "3f5fb498d227f68849e2e62115c84d48",
+	"manifest": "f5dfbc322621343f927183e27573e12e",
+	"setup": "b1faad11cf92647f29bcb4169f4c0588",
+	"schemas": [
+		{
+			"identifier": "distinct/schema.py",
+			"hash": "6b07c637e7ca3049ea748e8289911352"
+		},
+		{
+			"identifier": "freshness/schema.py",
+			"hash": "9597c99c94aac7d13b58a1e260df66ee"
+		},
+		{
+			"identifier": "hipposched/schema.py",
+			"hash": "633478ae1ce77ddc9e70bc344aae715b"
+		},
+		{
+			"identifier": "hipposcore/schema.py",
+			"hash": "3449b276945c53d8216e37e6c5e49814"
+		},
+		{
+			"identifier": "jobs/schema.py",
+			"hash": "d39c1956a7afa3149d5389cb600a7be1"
+		},
+		{
+			"identifier": "last_query/schema.py",
+			"hash": "4c27cf22c92bd9f545bce8888d27ab12"
+		},
+		{
+			"identifier": "last_status/schema.py",
+			"hash": "56269579bfce64d08364ed5683fad761"
+		},
+		{
+			"identifier": "monitor_sources/schema.py",
+			"hash": "f11feae40d3e823e8b7379780226b543"
+		},
+		{
+			"identifier": "more/schema.py",
+			"hash": "639b0f701510a42618bebca2f74062e7"
+		},
+		{
+			"identifier": "new/schema.py",
+			"hash": "0572cc91b6ce29dfc2a2d70d2f0e769b"
+		},
+		{
+			"identifier": "sched_report/schema.py",
+			"hash": "d8576047ebb4850f5baee019aa56d6f6"
+		},
+		{
+			"identifier": "shadowbook/schema.py",
+			"hash": "d08a4c69ad448ef75c9547ace8a073db"
+		},
+		{
+			"identifier": "size_by_source/schema.py",
+			"hash": "44f217208faf0d4584900fff7f26ab68"
+		},
+		{
+			"identifier": "size_by_type/schema.py",
+			"hash": "ed72d92fb84b0de93d316e09833ec0cd"
+		},
+		{
+			"identifier": "sources/schema.py",
+			"hash": "b8d028dbaa6de174039e7edbe53902b3"
+		},
+		{
+			"identifier": "type/schema.py",
+			"hash": "e969e2b7b08febf3a82d47d3734a0084"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "11852fca8e816077384b6af0827b0a98"
+		}
+	]
+}

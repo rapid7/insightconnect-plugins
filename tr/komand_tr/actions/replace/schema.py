@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run a translate expression on a string input"
+
+
 class Input:
     EXPRESSION = "expression"
     TEXT = "text"
@@ -32,8 +36,8 @@ class ReplaceInput(komand.Input):
     }
   },
   "required": [
-    "text",
-    "expression"
+    "expression",
+    "text"
   ]
 }
     """)

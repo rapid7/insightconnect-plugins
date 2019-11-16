@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get the ZenHub Board Data for a GitHub Repository"
+
+
 class Input:
     REPO_ID = "repo_id"
     

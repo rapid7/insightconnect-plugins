@@ -7,7 +7,7 @@ from komand_cherwell import connection, actions, triggers
 Name = 'Cherwell'
 Vendor = 'rapid7'
 Version = '2.1.0'
-Description = 'Work with Cherwell Web Services records'
+Description = 'The Cherwell plugin is used to administrate incidents in Cherwell'
 
 
 class ICONCherwell(komand.Plugin):

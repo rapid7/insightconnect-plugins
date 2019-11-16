@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes a droplet from the account"
+
+
 class Input:
     DROPLET_ID = "droplet_id"
     

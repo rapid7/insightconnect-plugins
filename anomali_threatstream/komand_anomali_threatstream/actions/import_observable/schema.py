@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Import observable(s) into Anomali with approval"
+    DESCRIPTION = "Import observable(s) into Anomali ThreatStream with approval"
 
 
 class Input:
@@ -25,7 +25,7 @@ class ImportObservableInput(komand.Input):
     "file": {
       "$ref": "#/definitions/file",
       "title": "File",
-      "description": "File of data to be imported into Anomali",
+      "description": "File of data to be imported into Anomali ThreatStream",
       "order": 1
     },
     "observable_settings": {

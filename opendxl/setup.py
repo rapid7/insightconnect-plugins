@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='opendxl-rapid7-plugin',
       version='1.1.1',
-      description='OpenDXL is an initiative to create adaptive systems of interconnected services that communicate and share information for real-time, accurate security decisions and actions',
+      description='Communicate and share information for real-time, accurate security decisions and actions using OpenDXL',
       author='rapid7',
       author_email='',
       url='',

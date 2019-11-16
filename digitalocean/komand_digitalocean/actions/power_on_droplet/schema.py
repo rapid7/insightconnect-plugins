@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Powers on the droplet"
+
+
 class Input:
     DROPLET_ID = "droplet_id"
     

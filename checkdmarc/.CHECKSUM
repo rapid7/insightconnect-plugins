@@ -1,0 +1,19 @@
+{
+	"spec": "264f4f31faabb774cef3cbc49eea49fd",
+	"manifest": "9e4de2deca9916dc2c6fd0a5c7642c7c",
+	"setup": "50d17f8dc116fd4f11dafadb8430e52b",
+	"schemas": [
+		{
+			"identifier": "check_domains/schema.py",
+			"hash": "3567fad9afc26db3e9388fb8b04d59cb"
+		},
+		{
+			"identifier": "check_domains_alternate_nameservers/schema.py",
+			"hash": "d718a9e7dc8800025237ad53c3faef7c"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "cb60c2b5b62fafb9634d667a8ad96277"
+		}
+	]
+}

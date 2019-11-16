@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add fixed address (a specific IP address that a DHCP server always assigns when a lease request comes from a particular MAC address of the client)"
+
+
 class Input:
     ADDRESS = "address"
     

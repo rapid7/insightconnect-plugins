@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns OSSEC statistical information per hour. Each item in averages field represents the average of alerts per hour"
+
+
 class Input:
     pass
 
@@ -50,9 +54,9 @@ class ManagerStatsHourlyOutput(komand.Output):
     }
   },
   "required": [
-    "interactions",
     "averages",
-    "error"
+    "error",
+    "interactions"
   ]
 }
     """)

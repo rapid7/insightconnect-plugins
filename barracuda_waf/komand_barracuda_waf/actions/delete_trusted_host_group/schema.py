@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes the given service group"
+
+
 class Input:
     NAME = "name"
     

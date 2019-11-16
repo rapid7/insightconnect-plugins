@@ -7,7 +7,7 @@ from komand_recorded_future import connection, actions, triggers
 Name = 'Recorded Future'
 Vendor = 'rapid7'
 Version = '1.5.2'
-Description = 'Recorded Future arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats'
+Description = 'Recorded Future arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7 InsightConnect, users can search domain lists, entity lists, and more'
 
 
 class ICONRecordedFuture(komand.Plugin):

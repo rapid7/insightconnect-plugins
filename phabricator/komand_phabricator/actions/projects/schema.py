@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add related projects to a task"
+
+
 class Input:
     ID = "id"
     PROJECTS = "projects"
@@ -35,8 +39,8 @@ class ProjectsInput(komand.Input):
     }
   },
   "required": [
-    "projects",
-    "id"
+    "id",
+    "projects"
   ]
 }
     """)

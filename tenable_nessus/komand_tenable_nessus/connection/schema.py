@@ -41,10 +41,10 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "ssl_verify",
     "access_key",
+    "hostname",
     "secret_key",
-    "hostname"
+    "ssl_verify"
   ],
   "definitions": {
     "credential_secret_key": {

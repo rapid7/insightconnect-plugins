@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get list of boards by member"
+
+
 class Input:
     ACTION_FIELDS = "action_fields"
     ACTIONS = "actions"

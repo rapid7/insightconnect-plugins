@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='tenable_nessus-rapid7-plugin',
       version='2.0.0',
-      description='Identify the vulnerabilities, policy-violating configurations and malware that attackers could use to penetrate your network',
+      description='The Tenable Nessus plugin allows you to get, start, and analyze scans',
       author='rapid7',
       author_email='',
       url='',

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='rapid7_insightidr-rapid7-plugin',
       version='1.1.0',
-      description='Rapid7 InsightIDR is an intruder analytics solution that gives you the confidence to detect and investigate security incidents faster',
+      description='This plugin allows you to add indicators to a threat and see the status of investigations',
       author='rapid7',
       author_email='',
       url='',

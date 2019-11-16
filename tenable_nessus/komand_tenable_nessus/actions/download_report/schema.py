@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Export and download a specified report"
+
+
 class Input:
     REPORT_FORMAT = "report_format"
     SCAN_NAME = "scan_name"
@@ -37,8 +41,8 @@ class DownloadReportInput(komand.Input):
     }
   },
   "required": [
-    "scan_name",
-    "report_format"
+    "report_format",
+    "scan_name"
   ]
 }
     """)

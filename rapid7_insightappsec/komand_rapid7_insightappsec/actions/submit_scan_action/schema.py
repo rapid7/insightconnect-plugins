@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Submit a new scan action"
+
+
 class Input:
     ACTION = "action"
     SCAN_ID = "scan_id"
@@ -39,8 +43,8 @@ class SubmitScanActionInput(komand.Input):
     }
   },
   "required": [
-    "scan_id",
-    "action"
+    "action",
+    "scan_id"
   ]
 }
     """)

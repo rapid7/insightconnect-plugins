@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Decompress bytes"
+
+
 class Input:
     BYTES = "bytes"
     

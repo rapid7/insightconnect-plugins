@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Show the status and most important attributes of an analysis"
+
+
 class Input:
     WEBID = "webid"
     

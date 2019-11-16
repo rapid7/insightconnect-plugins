@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Download a resource for an analysis. This can be a full report, binaries, screenshots, etc"
+
+
 class Input:
     RUN = "run"
     TYPE = "type"
@@ -108,8 +112,8 @@ class DownloadAnalysisOutput(komand.Output):
     }
   },
   "required": [
-    "resource_name",
-    "resource_content"
+    "resource_content",
+    "resource_name"
   ]
 }
     """)

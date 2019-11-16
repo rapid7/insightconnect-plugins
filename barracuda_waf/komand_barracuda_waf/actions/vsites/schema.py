@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all vsites"
+
+
 class Input:
     ID = "id"
     
@@ -87,10 +91,10 @@ class VsitesOutput(komand.Output):
         }
       },
       "required": [
+        "active_on",
         "id",
-        "service_group",
         "name",
-        "active_on"
+        "service_group"
       ]
     }
   }

@@ -7,7 +7,7 @@ from komand_proofpoint_tap import connection, actions, triggers
 Name = 'Proofpoint TAP'
 Vendor = 'rapid7'
 Version = '1.0.3'
-Description = 'A plugin for Proofpoint Targeted Attack Protection (TAP)'
+Description = 'A plugin for Proofpoint Targeted Attack Protection (TAP) alerts'
 
 
 class ICONProofpointTap(komand.Plugin):

@@ -7,7 +7,7 @@ from komand_rapid7_insightidr import connection, actions, triggers
 Name = 'Rapid7 InsightIDR'
 Vendor = 'rapid7'
 Version = '1.1.0'
-Description = 'Rapid7 InsightIDR is an intruder analytics solution that gives you the confidence to detect and investigate security incidents faster'
+Description = 'This plugin allows you to add indicators to a threat and see the status of investigations'
 
 
 class ICONRapid7Insightidr(komand.Plugin):

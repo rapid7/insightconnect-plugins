@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Download capture file"
+
+
 class Input:
     CID = "cid"
     

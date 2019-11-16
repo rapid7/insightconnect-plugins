@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a named map of general statistics"
+
+
 class Input:
     pass
 

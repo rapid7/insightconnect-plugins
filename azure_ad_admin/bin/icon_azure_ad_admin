@@ -7,7 +7,7 @@ from icon_azure_ad_admin import connection, actions, triggers
 Name = 'Azure AD Admin'
 Vendor = 'rapid7'
 Version = '1.3.0'
-Description = 'Administrative tasks in Azure AD'
+Description = 'Preform Administrative tasks in Azure AD'
 
 
 class ICONAzureAdAdmin(komand.Plugin):

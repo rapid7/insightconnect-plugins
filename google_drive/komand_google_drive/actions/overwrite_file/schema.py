@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Overwrites a file with new data"
+
+
 class Input:
     CONTENT = "content"
     FILE_ID = "file_id"
@@ -53,9 +57,9 @@ class OverwriteFileInput(komand.Input):
     }
   },
   "required": [
-    "new_mime_type",
     "content",
-    "file_id"
+    "file_id",
+    "new_mime_type"
   ]
 }
     """)

@@ -1,0 +1,43 @@
+{
+	"spec": "74700145432cfac0135cdf95719d08b7",
+	"manifest": "d7292d5e31243b86d12ff34d414203e6",
+	"setup": "347023044e573cfa4efc329452d9f4c4",
+	"schemas": [
+		{
+			"identifier": "add_user_to_group/schema.py",
+			"hash": "03dd18e61c4612047d06ea8928472d31"
+		},
+		{
+			"identifier": "create_user/schema.py",
+			"hash": "7d7e869b59216f5e1d6e8defc309e9fd"
+		},
+		{
+			"identifier": "disable_user_account/schema.py",
+			"hash": "b1c29d09ec9465eadd864b7019202b4b"
+		},
+		{
+			"identifier": "enable_user_account/schema.py",
+			"hash": "de914b2222e5835fb9125bf0cfc26de0"
+		},
+		{
+			"identifier": "force_user_to_change_password/schema.py",
+			"hash": "e8e05927fd9e163592772e5a2cf69a00"
+		},
+		{
+			"identifier": "get_group_by_name/schema.py",
+			"hash": "e7a9de3d0fd3aa9ca88cae2affb8a758"
+		},
+		{
+			"identifier": "get_user_info/schema.py",
+			"hash": "bf7522dc3ba5e85bcebc4a11d10415ba"
+		},
+		{
+			"identifier": "remove_user_from_group/schema.py",
+			"hash": "a6e85332fdf3258fa3e0f6eb8e3dfe8a"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "31d2433906f78cb78b3bc34ab36f1e6c"
+		}
+	]
+}
