@@ -1,6 +1,9 @@
 import komand
 from .schema import DomainInput, DomainOutput, Input
+
+# Custom imports below
 import whois
+from komand.exceptions import PluginException
 
 
 class Domain(komand.Action):
@@ -17,7 +20,8 @@ class Domain(komand.Action):
         self.logger.info("Getting whois information for %s" % domain)
 
         if not self.is_valid_domain(domain=domain):
-            raise Exception("Error: Invalid domain as input. Ensure the domain is not prefixed with a protocol.")
+            raise PluginException(cause="Invalid domain as input.",
+                                  assistance="Ensure the domain is not prefixed with a protocol.")
 
         try:
             lookup_results = whois.query(domain, ignore_returncode=1)  # ignore_returncode required for plugin

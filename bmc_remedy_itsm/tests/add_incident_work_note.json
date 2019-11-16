@@ -1,9 +1,10 @@
 {
   "body": {
-    "action": "search_incident",
+    "action": "add_incident_work_note",
     "meta": {},
     "input": {
-      "search_parameters": "'Urgency' = \"4-Low\" AND 'Impact' = \"4-Minor/Localized\""
+      "incident_id": "INC000000000026",
+      "work_note": "Testing work notes V2"
     },
     "connection": {
       "credentials": {

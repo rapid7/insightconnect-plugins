@@ -1,6 +1,7 @@
 import komand
 from .schema import LowerInput, LowerOutput
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class Lower(komand.Action):
@@ -15,7 +16,7 @@ class Lower(komand.Action):
     def run(self, params={}):
         string = params.get('string')
         if not string:
-            raise Exception('Action failed! Missing required user input. '
-                            'Please provide the input string.')
+            raise PluginException(cause='Action failed! Missing required user input.',
+                                  assistance='Please provide the input string.')
 
         return {'lower': string.lower()}

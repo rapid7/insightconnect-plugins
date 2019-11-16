@@ -3,4 +3,5 @@ from .lower.action import Lower
 from .set_encoding.action import SetEncoding
 from .split_to_list.action import SplitToList
 from .split_to_object.action import SplitToObject
+from .trim.action import Trim
 from .upper.action import Upper

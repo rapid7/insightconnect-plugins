@@ -460,6 +460,8 @@ Examples:
 * 1.0.1 - Fix issue where improper exception could be raised
 * 1.1.0 - New trigger New Message Received | New action Send HTML Message
 * 1.2.0 - New actions Add Member to Team, Remove Member from Team, Create Teams Enabled Group, Delete Team, Add Channel to Team, and Remove Channel from Team
+* 1.2.1 - Fix issue where New Message Received trigger could receive an unauthorized error after sustained use
+* 1.2.2 - Fix issue where regular expressions would only match at the beginning of a string
 
 ## References
 
