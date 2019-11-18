@@ -52,15 +52,46 @@ class RunOutput(komand.Output):
   "title": "Variables",
   "properties": {
     "results": {
-      "type": "string",
+      "$ref": "#/definitions/results",
       "title": "Results",
-      "description": "Output results",
+      "description": "Results",
       "order": 1
     }
   },
   "required": [
     "results"
-  ]
+  ],
+  "definitions": {
+    "results": {
+      "type": "object",
+      "title": "results",
+      "properties": {
+        "stderr": {
+          "type": "string",
+          "title": "STDERR",
+          "description": "Stderr",
+          "order": 2
+        },
+        "stdout": {
+          "type": "string",
+          "title": "STDOUT",
+          "description": "Stdout",
+          "order": 1
+        },
+        "stdout_stderr": {
+          "type": "string",
+          "title": "Stdout Stderr",
+          "description": "Stdout stderr",
+          "order": 3
+        }
+      },
+      "required": [
+        "stderr",
+        "stdout",
+        "stdout_stderr"
+      ]
+    }
+  }
 }
     """)
 
