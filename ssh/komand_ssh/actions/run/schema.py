@@ -66,6 +66,12 @@ class RunOutput(komand.Output):
       "type": "object",
       "title": "results",
       "properties": {
+        "all_output": {
+          "type": "string",
+          "title": "All Output",
+          "description": "All output",
+          "order": 3
+        },
         "stderr": {
           "type": "string",
           "title": "STDERR",
@@ -77,18 +83,12 @@ class RunOutput(komand.Output):
           "title": "STDOUT",
           "description": "Stdout",
           "order": 1
-        },
-        "stdout_stderr": {
-          "type": "string",
-          "title": "STDOUT \\u0026 STDERR",
-          "description": "Stdout \\u0026 stderr",
-          "order": 3
         }
       },
       "required": [
+        "all_output",
         "stderr",
-        "stdout",
-        "stdout_stderr"
+        "stdout"
       ]
     }
   }

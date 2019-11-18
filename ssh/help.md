@@ -23,14 +23,18 @@ This action is used to run a command on a remote host using SSH.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|string|False|Output results|
+|results|results|True|Results|
 
 Example output:
 
 ```
 
 {
-  "results": "total 0\n\ndrwxr-xr-x. 2 root root 6 Sep 26 18:12 go\n"
+  "results": {
+    "all_output": "total 57068\n\ndrwxrwxr-x. 2 rapid7 rapid7        6 Nov  4 20:15 test\n\n-rw-rw-r--. 1 rapid7 rapid7       13 Nov  4 20:15 test.txt\n\n-rw-r--r--. 1 rapid7 rapid7 58433536 Mar 26  2019 VBoxGuestAdditions.iso\n",
+    "stderr": "",
+    "stdout": "total 57068\n\ndrwxrwxr-x. 2 rapid7 rapid7        6 Nov  4 20:15 test\n\n-rw-rw-r--. 1 rapid7 rapid7       13 Nov  4 20:15 test.txt\n\n-rw-r--r--. 1 rapid7 rapid7 58433536 Mar 26  2019 VBoxGuestAdditions.iso\n"
+  }
 }
 
 ```
@@ -95,3 +99,13 @@ Examples:
 * [Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell)
 * [OpenSSH](https://www.openssh.com/)
 * [paramiko](http://www.paramiko.org/)
+
+## Custom Output Types
+
+### results
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|stderr|string|True|Stderr|
+|stdout|string|True|Stdout|
+|stdout_stderr|string|True|All output|

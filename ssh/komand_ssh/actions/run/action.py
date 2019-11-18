@@ -19,7 +19,7 @@ class Run(komand.Action):
         (stdin, stdout, stderr) = client.exec_command(command)
         results['stdout'] = "\n".join(stdout.readlines())
         results['stderr'] = "\n".join(stderr.readlines())
-        results['stdout_stderr'] = results['stdout'] + results['stderr']
+        results['all_output'] = results['stdout'] + results['stderr']
         client.close()
         return {Output.RESULTS: results}
 
