@@ -80,8 +80,8 @@ class RunOutput(komand.Output):
         },
         "stdout_stderr": {
           "type": "string",
-          "title": "Stdout Stderr",
-          "description": "Stdout stderr",
+          "title": "STDOUT \\u0026 STDERR",
+          "description": "Stdout \\u0026 stderr",
           "order": 3
         }
       },

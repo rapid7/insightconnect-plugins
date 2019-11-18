@@ -29,8 +29,8 @@ types:
       type: string
       required: true
     stdout_stderr:
-      title: Stdout Stderr
-      description: Stdout stderr
+      title: STDOUT & STDERR
+      description: Stdout & stderr
       type: string
       required: true
 connection:
