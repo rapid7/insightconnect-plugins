@@ -172,6 +172,30 @@ Example output:
 }
 ```
 
+### Trim
+
+This action is used to trim a string of leading and trailing whitespace.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|string|string|None|True|String to trim|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|trimmed|string|False|Trimmed string|
+
+Example output:
+
+```
+{
+  "trimmed": "hello"
+}
+```
+
 ## Triggers
 
 This plugin does not contain any triggers.
@@ -190,6 +214,7 @@ If this is the case, consider using the Python 3 Script plugin instead.
 * 1.0.0 - Initial plugin
 * 1.0.1 - Update plugin tag from `util` to `utilities` for Marketplace searchability
 * 1.1.0 - New action Set Encoding
+* 1.2.0 - New action Trim
 
 ## Workflows
 

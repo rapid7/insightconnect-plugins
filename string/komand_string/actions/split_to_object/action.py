@@ -1,6 +1,7 @@
 import komand
 from .schema import SplitToObjectInput, SplitToObjectOutput
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class SplitToObject(komand.Action):
@@ -24,8 +25,8 @@ class SplitToObject(komand.Action):
             sd = ' '
 
         if not string:
-            raise Exception('Action failed! Missing required user input. '
-                            'Please provide the input string.')
+            raise PluginException(cause='Action failed! Missing required user input.',
+                                  assistance='Please provide the input string.')
 
         if bd:
             block_split = True
@@ -52,7 +53,7 @@ class SplitToObject(komand.Action):
             d[list_[0]] = list_[1]
         except (ValueError, IndexError):
             self.logger.error('It looks like the input contained more than a single key:value split.')
-            raise Exception('Action failed! Unable to split string cleanly. '
-                            'Please try specifying the block delimiter for more multi-key:value input.')
+            raise PluginException(cause='Action failed! Unable to split string cleanly.',
+                                  assistance='Please try specifying the block delimiter for more multi-key:value input.')
 
         return {'object': d}
