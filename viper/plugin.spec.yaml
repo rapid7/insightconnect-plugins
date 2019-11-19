@@ -16,7 +16,6 @@ hub_tags:
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/viper
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url:
 
 types:
   Archive:
