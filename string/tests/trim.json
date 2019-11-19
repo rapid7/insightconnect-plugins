@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "trim",
+        "connection": null,
+        "input": {
+            "string": " this is a string "
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

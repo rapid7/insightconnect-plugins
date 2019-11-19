@@ -23,14 +23,18 @@ This action is used to run a command on a remote host using SSH.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|string|False|Output results|
+|results|results|True|Results|
 
 Example output:
 
 ```
 
 {
-  "results": "total 0\n\ndrwxr-xr-x. 2 root root 6 Sep 26 18:12 go\n"
+  "results": {
+    "all_output": "total 57068\n\ndrwxrwxr-x. 2 rapid7 rapid7        6 Nov  4 20:15 test\n\n-rw-rw-r--. 1 rapid7 rapid7       13 Nov  4 20:15 test.txt\n\n-rw-r--r--. 1 rapid7 rapid7 58433536 Mar 26  2019 VBoxGuestAdditions.iso\n",
+    "stderr": "",
+    "stdout": "total 57068\n\ndrwxrwxr-x. 2 rapid7 rapid7        6 Nov  4 20:15 test\n\n-rw-rw-r--. 1 rapid7 rapid7       13 Nov  4 20:15 test.txt\n\n-rw-r--r--. 1 rapid7 rapid7 58433536 Mar 26  2019 VBoxGuestAdditions.iso\n"
+  }
 }
 
 ```
@@ -88,9 +92,20 @@ Examples:
 * 1.0.0 - Support web server mode | Update to new credential types | Rename "Run remote command" action to "Run Remote Command"
 * 1.0.1 - Fix issue where run action was excluded from plugin on build
 * 1.0.2 - Fixed issue where Run was excluded
+* 2.0.0 - Update Run action output to return 3 output fields i.e. `stderr`, `stdout`, and `all_output`
 
 ## References
 
 * [Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell)
 * [OpenSSH](https://www.openssh.com/)
 * [paramiko](http://www.paramiko.org/)
+
+## Custom Output Types
+
+### results
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|stderr|string|True|Stderr|
+|stdout|string|True|Stdout|
+|all_output|string|True|All output|

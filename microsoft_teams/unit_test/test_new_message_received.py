@@ -62,7 +62,7 @@ class TestNewMessageReceived(TestCase):
     def test_compile_message_content(self):
         nmr = NewMessageReceived()
         regex = nmr.compile_message_content(".")
-        self.assertTrue(regex.match("stuff"))
+        self.assertTrue(regex.search("stuff"))
 
         with self.assertRaises(PluginException):
             nmr.compile_message_content("[")
