@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new email"
+
+
 class Input:
     FILE = "file"
     PARAMS = "params"
@@ -53,9 +57,9 @@ class AddEmailInput(komand.Input):
     }
   },
   "required": [
-    "type",
     "file",
-    "source"
+    "source",
+    "type"
   ],
   "definitions": {
     "file": {

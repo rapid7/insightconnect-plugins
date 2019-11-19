@@ -1,20 +1,27 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: elastalert
 title: ElastAlert
-description: Easy & flexible alerting with Elasticsearch
-version: 1.0.0
+description: "ElastAlert provides easy & flexible alerting with Elasticsearch. Users of the ElastAlert plugin can
+monitor alerts in real-time for automation use"
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/elastalert
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.yelp.com
 tags:
 - elasticsearch
 - elk
 - alert
+hub_tags:
+  use_cases: [soar, alerting_and_notifications]
+  keywords: [elasticsearch, elk, alert]
+  features: []
+
 connection:
   credentials:
     title: Basic Auth Username and Password

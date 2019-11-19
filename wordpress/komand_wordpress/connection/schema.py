@@ -28,8 +28,8 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "host",
-    "credentials"
+    "credentials",
+    "host"
   ],
   "definitions": {
     "credential_username_password": {

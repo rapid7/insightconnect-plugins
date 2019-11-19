@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Prepare and execute a database operation (query or command)"
+
+
 class Input:
     OPERATION = "operation"
     PARAMETERS = "parameters"

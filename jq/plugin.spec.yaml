@@ -1,21 +1,26 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: jq
 title: jq
 description: Send JSON data through jq
-version: 2.0.4
+version: 2.0.5
 vendor: rapid7
 support: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/jq
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url:
 tags:
 - jq
 - JSON
 - sed for JSON
 - utilities
+hub_tags:
+  use_cases: [soar, data_utility]
+  keywords: [jq, JSON, sed for JSON, utilities]
+  features: []
 actions:
   run_jq:
     title: Run

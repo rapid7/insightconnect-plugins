@@ -1,21 +1,27 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: geoip2precision
 title: GeoIP2 Precision
 vendor: rapid7
 support: community
 status: []
-description: MaxMind service that offers industry-leading IP intelligence data
-version: 1.0.0
+description: "GeoIP2 Precision is a MaxMind service that offers industry-leading IP intelligence data.
+  Users of the GeoIP2 Precision plugin for Rapid7 InsightConnect can use it to geolocate IP addresses"
+version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/geoip2precision
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.maxmind.com
 tags:
 - geoip
 - geoip2
 - precision
 - ip
+hub_tags:
+  use_cases: [soar, alerting_and_notifications, reporting_and_analytics, external_enrichment]
+  keywords: [geoip, geoip2, precision, ip]
+  features: []
 connection:
   user:
     type: integer

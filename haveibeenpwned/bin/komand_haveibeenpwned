@@ -6,8 +6,8 @@ from komand_haveibeenpwned import connection, actions, triggers
 
 Name = 'HaveIBeenPwned'
 Vendor = 'rapid7'
-Version = '4.0.1'
-Description = 'Have I been pwned? allows you to search across multiple data breaches to see if your email addresses has been compromised'
+Version = '4.0.2'
+Description = 'The HaveIBeenPwned plugin allows you find out if a user, domain, or password has been leaked'
 
 
 class ICONHaveibeenpwned(komand.Plugin):

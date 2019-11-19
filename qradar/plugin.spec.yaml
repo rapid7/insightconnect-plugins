@@ -1,19 +1,24 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: qradar
 title: QRadar Security Intelligence Platform
-description: IBM QRadar is an enterprise security information and event management
-version: 2.0.0
+description: The QRadar plugin allows you to run Ariel queries and retrieve policy offense data
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/qradar
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: http://www.ibm.com
 tags:
 - qradar
 - siem
+hub_tags:
+  use_cases: [soar, data_ingestion, threat_hunting, threat_intel, reporting_and_analytics]
+  keywords: [qradar, siem]
+  features: []
 types:
   recovery:
     collection_name_suffix:

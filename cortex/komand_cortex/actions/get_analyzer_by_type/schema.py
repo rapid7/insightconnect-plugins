@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List analyzers that can act upon a given datatype"
+
+
 class Input:
     TYPE = "type"
     

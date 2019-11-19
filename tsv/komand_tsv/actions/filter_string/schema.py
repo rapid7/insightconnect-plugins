@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Keep fields from TSV string"
+
+
 class Input:
     FIELDS = "fields"
     TSV = "tsv"

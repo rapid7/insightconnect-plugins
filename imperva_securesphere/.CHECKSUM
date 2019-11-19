@@ -1,0 +1,15 @@
+{
+	"spec": "45fc5dc00b1e59e96b070e86e2ff8f53",
+	"manifest": "46e73244e359868a1ae7287a5fc91469",
+	"setup": "2306d33ccf82f7d95ce18e387a8234f6",
+	"schemas": [
+		{
+			"identifier": "upload_ssl_certificate/schema.py",
+			"hash": "ebe077ee4c7ac449bd300dc4141fb5bc"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "523eb95ae20e575eba40ff9378eccc0f"
+		}
+	]
+}

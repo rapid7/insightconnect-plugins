@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='cortex_v2-rapid7-plugin',
-      version='1.1.0',
-      description='Cortex, an open source and free software for analyzing observables',
+      version='1.1.1',
+      description='Cortex is an observable analysis and active response engine. With the Cortex plugin for Rapid7 InsightConnect, users can manage analyzers, jobs, and run file analyzers',
       author='rapid7',
       author_email='',
       url='',

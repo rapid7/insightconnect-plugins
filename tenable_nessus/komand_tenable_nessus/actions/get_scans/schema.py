@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns a list of scans running on the requested scanner"
+
+
 class Input:
     SCANNER_NAME = "scanner_name"
     

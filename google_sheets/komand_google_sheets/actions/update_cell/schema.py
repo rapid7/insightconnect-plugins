@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates a specified cell in Google Sheets with new data"
+
+
 class Input:
     CELL = "cell"
     SHEET_ID = "sheet_id"
@@ -47,8 +51,8 @@ class UpdateCellInput(komand.Input):
     }
   },
   "required": [
-    "sheet_id",
     "cell",
+    "sheet_id",
     "update",
     "worksheet"
   ]

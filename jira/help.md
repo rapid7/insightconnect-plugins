@@ -1,24 +1,46 @@
+# Description
 
-# Jira
+[Jira](https://www.atlassian.com/software/jira) is a tool developed by Australian Company Atlassian. 
+It is used for bug tracking, issue tracking, and project management.
 
-## About
+# Key Features
 
-[Jira](https://www.atlassian.com/software/jira) is a tool developed by Australian Company Atlassian. It is used for bug tracking, issue tracking, and project management.
+* Ticket Managment
+* Reporting
+* Planning and Delegation
 
-## Actions
+# Requirements
 
-### Find Issues
+* User Name and Password
+* Jira server
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_username_password|None|True|Username and API key|None|
+|url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|
+
+## Technical Details
+
+### Actions
+
+#### Find Issues
 
 This action is used to search for issues.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |max|integer|10|True|Max results to return|None|
 |jql|string|None|True|JQL search string to use|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -44,11 +66,11 @@ Example output:
 }
 ```
 
-### Add Attachment to Issue
+#### Add Attachment to Issue
 
 This action is used to add an attachment to an issue in Jira.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -56,7 +78,7 @@ This action is used to add an attachment to an issue in Jira.
 |id|string|None|True|Issue ID|None|
 |attachment_bytes|bytes|None|True|Attachment bytes|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -70,11 +92,11 @@ Example output:
 }
 ```
 
-### Transition Issue
+#### Transition Issue
 
 This action is used to transition an issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -83,7 +105,7 @@ This action is used to transition an issue.
 |id|string|None|True|Issue ID|None|
 |transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -97,17 +119,17 @@ Example output:
 }
 ```
 
-### Delete User
+#### Delete User
 
 This action is used to delete a user account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username|string|None|True|Username|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -121,18 +143,18 @@ Example output:
 }
 ```
 
-### Assign Issue
+#### Assign Issue
 
 This action is used to assign an issue to a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |assignee|string|None|True|Username of assignee|None|
 |id|string|None|True|Issue ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -146,11 +168,11 @@ Example output:
 }
 ```
 
-### Create Issue
+#### Create Issue
 
 This action is used to create an issue in Jira.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -162,7 +184,7 @@ This action is used to create an issue in Jira.
 |summary|string|None|False|Issue summary|None|
 |type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -189,11 +211,11 @@ Example output:
 }
 ```
 
-### Create User
+#### Create User
 
 This action is used to create a user account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -202,7 +224,7 @@ This action is used to create a user account.
 |email|string|None|True|Email|None|
 |notify|boolean|False|True|Notify if true|[True, False]|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -216,18 +238,18 @@ Example output:
 }
 ```
 
-### Label Issue
+#### Label Issue
 
 This action is used to label an issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|Issue ID|None|
 |label|string|None|True|Label to add. To add multiple labels, separate by commas|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -241,18 +263,18 @@ Example output:
 }
 ```
 
-### Find Users
+#### Find Users
 
 This action is used to find users.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|Query String, e.g. Joe|None|
 |max|integer|10|True|Max results to return|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -271,18 +293,18 @@ Example output:
 }
 ```
 
-### Comment Issue
+#### Comment Issue
 
 This action is used to comment on an issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |comment|string|None|True|Comment to add|None|
 |id|string|None|True|Issue ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -296,17 +318,17 @@ Example output:
 }
 ```
 
-### Get Issue
+#### Get Issue
 
 This action is used to retrieve an issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|Issue ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -530,17 +552,17 @@ Example output:
 }
 ```
 
-### Get Comments
+#### Get Comments
 
 This action is used to retrieve all comments on an issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|Issue ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -585,11 +607,11 @@ Example output:
 }
 ```
 
-### Edit Issue
+#### Edit Issue
 
 This action is used to edit an issue within Jira.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -639,7 +661,7 @@ Updating multiple fields with `update` parameter
 
 Additional information can be found [here](https://developer.atlassian.com/server/jira/platform/jira-rest-api-example-edit-issues-6291632/)
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -653,13 +675,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-### New Issue
+#### New Issue
 
 This trigger is used to trigger which indicates that a new issue has been created.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -667,7 +689,7 @@ This trigger is used to trigger which indicates that a new issue has been create
 |jql|string|None|False|JQL search string to use|None|
 |project|string|None|True|Project ID or name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -890,63 +912,40 @@ Example output:
 }
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Username and API key|None|
-|url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-### Authentication
+#
 
-If you receive an error while trying to connect to the Jira instance verify that you are using both username _and_ **API
-key** to authenticate. Use of a username and password is not allowed by the Jira API.
+# Version History
 
-### Create Issue
-
-When running the Create Issue action, if you receive the following error output in the Log
-it may indicate the user provided an issue Type that is not present in the Jira system, or the user doesn't have permission to use it.
-
-```
-text: issue type is required
-...
-response text = {"errorMessages":[],"errors":{"issuetype":"issue type is required"}}
-```
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.2.2 - Fix action: Find Issue
-* 1.0.0 - Fix action: Create Issue
-* 1.0.1 - SSL bug fix in SDK
-* 1.0.2 - Fix custom fields input in Create Issue
-* 1.0.3 - Fix custom fields adding to Create Issue request
-* 1.0.4 - Update to v2 Python plugin architecture
-* 2.0.0 - Support web server mode
-* 2.0.1 - Fix issue where test method is missing in Create Issue action
-* 3.0.0 - Rename 'Attach Issue' action to 'Add Attachment to Issue' | Update 'Create Issue' action description to include note about case sensitivity | Update 'Create Issue' action and 'New Issue' trigger to use uniform 'Issue' output type | Fix issue where attachments were not being uploaded properly | Fix issue where trigger could fail with an empty ticket description
-* 3.0.1 - Fix issue where the New Issue trigger and Create Issue action may not output properly
-* 3.0.2 - Update action and trigger descriptions
-* 3.0.3 - Implement new connection test messaging
-* 3.0.4 - Improve error handling by checking for known issue type before creating ticket in Create Issue action
-* 3.0.5 - Fix issue where description in Get Issue action would return None if description was left empty
-* 3.1.0 - Added new Edit Issue action
-* 3.1.1 - Update connection input labels to reflect Jira API changes
-* 3.1.2 - Update Create Issue action to remove newlines from summaries
-* 3.2.0 - Update Transition Issue action to allow for assignment of fields during issue transition
 * 3.2.1 - Update Get Issue, Find Issues and New Issue action to support a Get Attachments option
-## Workflows
+* 3.2.0 - Update Transition Issue action to allow for assignment of fields during issue transition
+* 3.1.2 - Update Create Issue action to remove newlines from summaries
+* 3.1.1 - Update connection input labels to reflect Jira API changes
+* 3.1.0 - Added new Edit Issue action
+* 3.0.5 - Fix issue where description in Get Issue action would return None if description was left empty
+* 3.0.4 - Improve error handling by checking for known issue type before creating ticket in Create Issue action
+* 3.0.3 - Implement new connection test messaging
+* 3.0.2 - Update action and trigger descriptions
+* 3.0.1 - Fix issue where the New Issue trigger and Create Issue action may not output properly
+* 3.0.0 - Rename 'Attach Issue' action to 'Add Attachment to Issue' | Update 'Create Issue' action description to include note about case sensitivity | Update 'Create Issue' action and 'New Issue' trigger to use uniform 'Issue' output type | Fix issue where attachments were not being uploaded properly | Fix issue where trigger could fail with an empty ticket description
+* 2.0.1 - Fix issue where test method is missing in Create Issue action
+* 2.0.0 - Support web server mode
+* 1.0.4 - Update to v2 Python plugin architecture
+* 1.0.3 - Fix custom fields adding to Create Issue request
+* 1.0.2 - Fix custom fields input in Create Issue
+* 1.0.1 - SSL bug fix in SDK
+* 1.0.0 - Fix action: Create Issue
+* 0.2.2 - Fix action: Find Issue
+* 0.1.0 - Initial plugin
 
-Examples:
-
-* [Domain Enrichment](https://market.komand.com/snippets/komand/domain-enrichment/0.1.0)
-* Ticket management
-* User provisioning
+# Links
 
 ## References
 
 * [Jira](https://www.atlassian.com/software/jira)
+

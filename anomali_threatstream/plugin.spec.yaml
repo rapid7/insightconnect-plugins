@@ -1,20 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: anomali_threatstream
 title: Anomali ThreatStream
-description: ThreatStream operationalizes threat intelligence, automating collection
+description: Anomali ThreatStream operationalizes threat intelligence, automating collection
   and integration that enables security teams to analyze and respond to threats
-version: 3.0.1
+version: 3.0.2
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/anomali_threatstream
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.anomali.com
 tags:
 - anomali
 - threatstream
+hub_tags:
+  use_cases: [soar, threat_hunting, threat_intel, soc_automation, threat_detection_and_response]
+  keywords: [anomali, threatstream]
+  features: []
 types:
   meta:
     limit:
@@ -241,7 +246,7 @@ connection:
 actions:
   lookup_ip:
     title: Lookup IP Address
-    description: Lookup an IP address in Anomali
+    description: Lookup an IP address in Anomali ThreatStream
     input:
       ip_address:
         title: IP Address
@@ -256,7 +261,7 @@ actions:
         required: false
   lookup_url:
     title: Lookup URL
-    description: Lookup a URL in Anomali
+    description: Lookup a URL in Anomali ThreatStream
     input:
       url:
         title: URL
@@ -271,7 +276,7 @@ actions:
         required: false
   lookup_hash:
     title: Lookup Hash
-    description: Lookup a file hash in Anomali
+    description: Lookup a file hash in Anomali ThreatStream
     input:
       hash:
         title: Hash
@@ -286,11 +291,11 @@ actions:
         required: false
   import_observable:
     title: Import Observable
-    description: Import observable(s) into Anomali with approval
+    description: Import observable(s) into Anomali ThreatStream with approval
     input:
       file:
         title: File
-        description: File of data to be imported into Anomali
+        description: File of data to be imported into Anomali ThreatStream
         type: file
         required: true
       observable_settings:

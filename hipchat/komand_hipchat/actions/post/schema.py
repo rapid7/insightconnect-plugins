@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Send a message to a room"
+
+
 class Input:
     MESSAGE = "message"
     ROOM_ID_OR_NAME = "room_id_or_name"
@@ -33,8 +37,8 @@ class PostInput(komand.Input):
     }
   },
   "required": [
-    "room_id_or_name",
-    "message"
+    "message",
+    "room_id_or_name"
   ]
 }
     """)

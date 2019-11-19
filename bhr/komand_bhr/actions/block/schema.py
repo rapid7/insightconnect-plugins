@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Send a block request"
+
+
 class Input:
     AUTOSCALE = "autoscale"
     CIDR = "cidr"

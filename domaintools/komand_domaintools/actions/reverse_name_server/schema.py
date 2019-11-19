@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Provides a list of domain names that share the same primary or secondary name server"
+
+
 class Input:
     DOMAIN = "domain"
     LIMIT = "limit"

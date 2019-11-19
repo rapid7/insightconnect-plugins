@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add an attribute to an event"
+
+
 class Input:
     CATEGORY = "category"
     COMMENT = "comment"
@@ -53,9 +57,9 @@ class AddAttributeInput(komand.Input):
     }
   },
   "required": [
+    "category",
     "event",
     "type_value",
-    "category",
     "value"
   ]
 }

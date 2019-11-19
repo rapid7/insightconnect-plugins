@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch details for the inline script with the given ID"
+
+
 class Input:
     APP_ID = "app_id"
     INLINE_SCRIPT_ID = "inline_script_id"
@@ -32,8 +36,8 @@ class GetInlineScriptDetailsInput(komand.Input):
     }
   },
   "required": [
-    "inline_script_id",
-    "app_id"
+    "app_id",
+    "inline_script_id"
   ]
 }
     """)

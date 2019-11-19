@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get subdomains https://api.passivetotal.org/api/docs/#api-Enrichment-GetV2EnrichmentSubdomains"
+
+
 class Input:
     QUERY = "query"
     

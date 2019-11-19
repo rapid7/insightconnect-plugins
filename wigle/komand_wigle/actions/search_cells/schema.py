@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query the WiGLE cell database for paginated results based on multiple criteria"
+
+
 class Input:
     CELL_ID = "cell_id"
     CELL_NET = "cell_net"
@@ -217,11 +221,11 @@ class SearchCellsOutput(komand.Output):
     }
   },
   "required": [
+    "first",
     "last",
     "resultCount",
     "results",
-    "totalResults",
-    "first"
+    "totalResults"
   ],
   "definitions": {
     "cell_record": {
@@ -316,15 +320,15 @@ class SearchCellsOutput(komand.Output):
         }
       },
       "required": [
-        "lasttime",
-        "transid",
         "firsttime",
         "gentype",
-        "trilat",
-        "qos",
-        "trilong",
+        "id",
+        "lasttime",
         "lastupdt",
-        "id"
+        "qos",
+        "transid",
+        "trilat",
+        "trilong"
       ]
     }
   }

@@ -1,19 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: sleep
 title: Sleep
 vendor: rapid7
 support: community
 status: []
-description: Suspend execution for an interval of time
-version: 1.0.0
+description: "Sleep allows Rapid7 InsightConnect users to suspend workflow execution for a specified period of time.
+Popular uses are to avoid rate limiting by a service or to wait for processing by a service to complete"
+version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/sleep
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url:
 tags:
 - sleep
 - delay
+hub_tags:
+  use_cases: [soar]
+  keywords: [sleep, delay]
+  features: []
 enable_cache: false
 actions:
   sleep:

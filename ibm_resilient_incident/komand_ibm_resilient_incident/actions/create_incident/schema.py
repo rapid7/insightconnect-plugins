@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates an incident"
+
+
 class Input:
     INCIDENT = "incident"
     ORGANIZATION_ID = "organization_id"
@@ -32,8 +36,8 @@ class CreateIncidentInput(komand.Input):
     }
   },
   "required": [
-    "organization_id",
-    "incident"
+    "incident",
+    "organization_id"
   ]
 }
     """)

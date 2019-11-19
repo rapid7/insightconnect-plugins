@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a scatter plot with an X/Y axis"
+
+
 class Input:
     COLOR_PALETTE = "color_palette"
     CSV_DATA = "csv_data"
@@ -81,8 +85,8 @@ class CreateScatterPlotInput(komand.Input):
   },
   "required": [
     "color_palette",
-    "margin_style",
     "csv_data",
+    "margin_style",
     "x_value",
     "y_value"
   ]

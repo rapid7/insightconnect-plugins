@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Enables searching for subjective opinions on indicators of compromise stored in ThreatExchange"
+
+
 class Input:
     FIELDS = "fields"
     INCLUDE_EXPIRED = "include_expired"

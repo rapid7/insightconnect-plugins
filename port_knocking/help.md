@@ -1,52 +1,64 @@
-
-# Port Knocking
-
-## About
+# Description
 
 The Pork Knocking plugin knocks the specified ports on a host and optionally supports a payload.
 
-## Actions
+Port knocking is a method of externally opening ports on a firewall by generating a connection attempt on a set of prespecified closed ports. Once a correct sequence of connection attempts is received, the firewall rules are dynamically modified to allow the host which sent the connection attempts to connect over specific port(s). A variant called single packet authorization exists, where only a single "knock" is needed, consisting of an encrypted packet.
 
-### Knock
+# Key Features
+
+* Port knock a sequence of ports
+
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Knock
 
 This action is used to port knock a given host (IP address or domain).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |host|string|None|True|IP address or hostname to knock|None|
 |ports|[]string|None|True|E.g. 7000/tcp, 8000/udp|None|
 
-#### Output
+##### Output
 
 This action does not contain any outputs.
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Authentication
-* Port checking
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Port Knocking](https://en.wikipedia.org/wiki/Port_knocking)
+

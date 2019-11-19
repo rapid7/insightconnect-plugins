@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the 3 last months of ossec.log"
+
+
 class Input:
     CATEGORY = "category"
     LIMIT = "limit"
@@ -102,9 +106,9 @@ class ManagerLogsOutput(komand.Output):
     }
   },
   "required": [
-    "totalItems",
+    "error",
     "logs",
-    "error"
+    "totalItems"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a scan result from a third-party vulnerability scanner"
+
+
 class Input:
     OPERATION = "operation"
     SCAN_RESULT = "scan_result"
@@ -166,8 +170,8 @@ class AddScanResultInput(komand.Input):
         }
       },
       "required": [
-        "source_id",
         "scanner_id",
+        "source_id",
         "vulnerability_id",
         "vulnerability_title"
       ]
@@ -316,8 +320,8 @@ class AddScanResultInput(komand.Input):
             }
           },
           "required": [
-            "source_id",
             "scanner_id",
+            "source_id",
             "vulnerability_id",
             "vulnerability_title"
           ]
@@ -352,8 +356,8 @@ class AddScanResultOutput(komand.Output):
     }
   },
   "required": [
-    "errors",
-    "commands_processed"
+    "commands_processed",
+    "errors"
   ]
 }
     """)

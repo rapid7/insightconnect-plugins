@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete file(s) from the share; allows wildcards"
+
+
 class Input:
     FILE_PATH = "file_path"
     SHARE_NAME = "share_name"
@@ -40,8 +44,8 @@ class DeleteFilesInput(komand.Input):
     }
   },
   "required": [
-    "share_name",
-    "file_path"
+    "file_path",
+    "share_name"
   ]
 }
     """)

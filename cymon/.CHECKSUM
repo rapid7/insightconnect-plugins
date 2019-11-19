@@ -1,0 +1,39 @@
+{
+	"spec": "476267682fcfdceb63b3eaea147af953",
+	"manifest": "5e1c9b14c4431689500058c3ab3963df",
+	"setup": "f3e3106d437ed9eb654520cd9cb2986d",
+	"schemas": [
+		{
+			"identifier": "address_blacklist/schema.py",
+			"hash": "03057ba2595abe495a4bffc17e37d1fc"
+		},
+		{
+			"identifier": "address_lookup/schema.py",
+			"hash": "4097a4f16973d791b7b69387c2b4372c"
+		},
+		{
+			"identifier": "domain_blacklist/schema.py",
+			"hash": "c0f61763520cd8d726a6e9d024b26044"
+		},
+		{
+			"identifier": "domain_lookup/schema.py",
+			"hash": "cc1d3e1399a655a8ae1d806fbe21acbe"
+		},
+		{
+			"identifier": "url_lookup/schema.py",
+			"hash": "77d7450b16270071a796c8c03f4f2f26"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "f27d7940aade927ff9151a798c5089f0"
+		},
+		{
+			"identifier": "poll_address_blacklist/schema.py",
+			"hash": "74204da68f2163be75a0b744cb1928ca"
+		},
+		{
+			"identifier": "poll_domain_blacklist/schema.py",
+			"hash": "82670be0b50b18f21ec81fb654fe0812"
+		}
+	]
+}

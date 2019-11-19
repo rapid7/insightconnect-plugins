@@ -1,19 +1,24 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: ipstack
 title: IPStack
 description: Lookup geographical information for a host
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ipstack
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://ipstack.com
 tags:
-- geoip
-- ipstack
+  - geoip
+  - ipstack
+hub_tags:
+  use_cases: [soar, threat_intel, soc_automation]
+  keywords: [geoip, ipstack]
+  features: []
 connection:
   cred_token:
     type: credential_token

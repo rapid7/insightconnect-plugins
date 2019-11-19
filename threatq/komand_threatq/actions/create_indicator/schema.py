@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new indicator"
+
+
 class Input:
     SOURCE = "source"
     STATUS = "status"

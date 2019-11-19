@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates the values of given parameters in the given global ACL rule"
+
+
 class Input:
     ACTION = "action"
     COMMENTS = "comments"
@@ -121,8 +125,8 @@ class UpdateGlobalAclRuleInput(komand.Input):
     }
   },
   "required": [
-    "policy_id",
-    "global_acl_id"
+    "global_acl_id",
+    "policy_id"
   ]
 }
     """)

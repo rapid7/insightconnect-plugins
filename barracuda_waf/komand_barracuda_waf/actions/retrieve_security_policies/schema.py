@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all security policies"
+
+
 class Input:
     ID = "id"
     
@@ -415,22 +419,22 @@ class RetrieveSecurityPoliciesOutput(komand.Output):
       },
       "required": [
         "allowed_acls",
-        "cookie_protection",
-        "data_theft_protection",
-        "request_limits",
-        "parameter_protection_status",
-        "url_protection_status",
         "apply_double_decoding",
-        "url_protection",
-        "url_normalization",
-        "name",
+        "character",
+        "cloaking",
+        "cookie_protection",
+        "cookie_security",
+        "data_theft_protection",
         "disallowed_acls",
         "id",
-        "cloaking",
-        "parameter_protection",
-        "cookie_security",
         "limit_checks",
-        "character"
+        "name",
+        "parameter_protection",
+        "parameter_protection_status",
+        "request_limits",
+        "url_normalization",
+        "url_protection",
+        "url_protection_status"
       ],
       "definitions": {
         "cookie_security": {

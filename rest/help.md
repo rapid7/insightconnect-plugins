@@ -1,7 +1,6 @@
+# Description
 
-# REST
-
-## About
+The REST plugin to make it easy to integrate with RESTful services.
 
 [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) is a means of communicating over HTTP using verbs and actions to represent operations performed over resources, held in remote locations. It's based off of a document put together by Roy Fielding.
 All actions take 2 pieces of configuration: a route, and an optional series of headers. Any headers set this way will overwrite the default ones in the connection.
@@ -16,13 +15,42 @@ All of the actions return the same set of data:
 * The status code
 * The response headers
 
-## Actions
+# Key Features
 
-### PUT
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+Configuring a REST connection requires an endpoint to hit, which includes the protocol (`http://` or `https://` should be explicitly set by the user).
+Additionally, you can set a series of default Headers for every request to use. This would be useful if every request needed to send an auth token along inside of a header, so you don't need to specify it in each individual action.
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|default_headers|object|None|False|None|None|
+|base_url|string|None|False|None|None|
+|ssl_verify|boolean|True|False|None|None|
+|basic_auth_credentials|credential_username_password|None|False|None|None|
+
+## Technical Details
+
+### Actions
+
+#### PUT
 
 This action is used to make a PUT request.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -30,7 +58,7 @@ This action is used to make a PUT request.
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -79,11 +107,11 @@ Example output:
 }
 ```
 
-### POST
+#### POST
 
 This action is used to make a POST request.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -91,7 +119,7 @@ This action is used to make a POST request.
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -140,11 +168,11 @@ Example output:
 }
 ```
 
-### PATCH
+#### PATCH
 
 This action is used to make a PATCH request.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -152,7 +180,7 @@ This action is used to make a PATCH request.
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -198,18 +226,18 @@ Example output:
 }
 ```
 
-### GET
+#### GET
 
 This action is used to make a GET request.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -240,11 +268,11 @@ Example output:
 }
 ```
 
-### DELETE
+#### DELETE
 
 This action is used to make a DELETE request.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -252,7 +280,7 @@ This action is used to make a DELETE request.
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -298,23 +326,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-Configuring a REST connection requires an endpoint to hit, which includes the protocol (`http://` or `https://` should be explicitly set by the user).
-Additionally, you can set a series of default Headers for every request to use. This would be useful if every request needed to send an auth token along inside of a header, so you don't need to specify it in each individual action.
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|default_headers|object|None|False|None|None|
-|base_url|string|None|False|None|None|
-|ssl_verify|boolean|True|False|None|None|
-|basic_auth_credentials|credential_username_password|None|False|None|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -322,24 +340,21 @@ Any headers set in the action will overwrite the default ones in the connection.
 
 Any issues connecting to the remote service should be present in the log of the job that ran. If you find any issues that represent bugs in the plugin itself, please contact someone at Komand directly.
 
-## Workflows
+# Version History
 
-Examples
-
-* Create a request to interact with an in house API
-* Create a request to pull phishing web page for further enrichment
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - Update tags
-* 0.1.2 - SSL bug fix in SDK
-* 0.1.3 - Fix post and put actions by using json argument instead of body
-* 0.1.4 - Bug fix for CI tool incorrectly uploading plugins
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
-* 2.0.0 - Update connection to handle SSL verification
+* 3.0.1 - New spec and help.md format for the Hub
 * 3.0.0 - Add basic auth support
+* 2.0.0 - Update connection to handle SSL verification
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.4 - Bug fix for CI tool incorrectly uploading plugins
+* 0.1.3 - Fix post and put actions by using json argument instead of body
+* 0.1.2 - SSL bug fix in SDK
+* 0.1.1 - Update tags
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [REST Architecture Style](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
+

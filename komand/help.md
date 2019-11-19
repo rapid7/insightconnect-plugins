@@ -1,17 +1,37 @@
+# Description
 
-# Komand
+The [Komand](https://www.komand.com) plugin provides meta-actions and trigger you can use with [Komand](https://www.komand.com/).
 
-## About
+# Key Features
 
-The Komand plugin provides meta-actions and trigger you can use with [Komand](https://www.komand.com/).
+* Respond to threats faster
+* Securtiy Orchestration
 
-## Actions
+# Requirements
 
-### Run Asynchronously
+* Username and Password
+* Komand Server
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|URL to Komand server, e.g. https\://komand.company.com|None|
+|credentials|credential_username_password|None|True|Username and password for user|None|
+
+## Technical Details
+
+### Actions
+
+#### Run Asynchronously
 
 This action is used to run a workflow without waiting for results.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -19,18 +39,18 @@ This action is used to run a workflow without waiting for results.
 |input|object|None|False|Input object to supply to the workflow job|None|
 |workflow_name|string|None|False|Workflow name to run. Either this or UID should be provided.|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |url|string|False|Job URL|
 |job_id|string|False|Job ID|
 
-### Run Synchronously
+#### Run Synchronously
 
 This action is used to run a workflow and wait for results.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -40,7 +60,7 @@ This action is used to run a workflow and wait for results.
 |timeout|number|150|True|Timeout for executed workflow to finish, in seconds. Use 0 for no timeout|None|
 |completion_checks|number|10|False|How many times the executed workflow should be checked for completion during the timeout period. Higher numbers should result in quicker job turnover. Leave blank if timeout is set to 0|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -55,19 +75,19 @@ This action is used to run a workflow and wait for results.
 |group_id|string|False|Job Group ID|
 |name|string|False|None|
 
-## Triggers
+### Triggers
 
-### Job
+#### Job
 
 This trigger is used to monitor for new jobs.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |status|string|None|True|Status to trigger on|['failed', 'queued', 'succeeded', 'retried']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -81,37 +101,30 @@ This trigger is used to monitor for new jobs.
 |group_id|string|False|Job Group ID|
 |name|string|False|None|
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to Komand server, e.g. https\://komand.company.com|None|
-|credentials|credential_username_password|None|True|Username and password for user|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Orchestration
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 0.1.2 - Port plugin to new architecture
-* 0.2.0 - Update connection to match new Komand API
-* 0.2.1 - Update help
-* 0.3.0 - Bugfix: Run Synchronously not waiting for executed workflow to finish, customizable timeout period
-* 1.0.0 - Support web server mode | Update to new credential types | Plugin spec revision
-* 1.0.1 - Fix issue where Lookup Workflow Name can crash due to excessive data
+* 1.0.3 - New spec and help.md format for the Hub
 * 1.0.2 - Add `utilities` plugin tag for Marketplace searchability
+* 1.0.1 - Fix issue where Lookup Workflow Name can crash due to excessive data
+* 1.0.0 - Support web server mode | Update to new credential types | Plugin spec revision
+* 0.3.0 - Bugfix: Run Synchronously not waiting for executed workflow to finish, customizable timeout period
+* 0.2.1 - Update help
+* 0.2.0 - Update connection to match new Komand API
+* 0.1.2 - Port plugin to new architecture
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Komand](https://www.komand.com/)
+

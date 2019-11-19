@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get single user by ID"
+
+
 class Input:
     USER_ID = "user_id"
     

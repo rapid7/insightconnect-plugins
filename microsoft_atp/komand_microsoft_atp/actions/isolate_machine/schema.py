@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Isolate a machine from the network, but keep the connection to Windows ATP open"
+
+
 class Input:
     COMMENT = "comment"
     ISOLATION_TYPE = "isolation_type"
@@ -43,9 +47,9 @@ class IsolateMachineInput(komand.Input):
     }
   },
   "required": [
-    "machine_id",
+    "comment",
     "isolation_type",
-    "comment"
+    "machine_id"
   ]
 }
     """)

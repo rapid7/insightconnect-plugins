@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the information of an agent"
+
+
 class Input:
     AGENT_ID = "agent_id"
     
@@ -111,16 +115,16 @@ class AgentInfoOutput(komand.Output):
     }
   },
   "required": [
-    "lastKeepAlive",
-    "id",
-    "status",
-    "name",
-    "ip",
     "dateAdd",
-    "version",
-    "os_family",
     "error",
-    "os"
+    "id",
+    "ip",
+    "lastKeepAlive",
+    "name",
+    "os",
+    "os_family",
+    "status",
+    "version"
   ]
 }
     """)

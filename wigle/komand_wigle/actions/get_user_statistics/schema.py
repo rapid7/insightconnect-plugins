@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get statistics and badge image for the authenticated user"
+
+
 class Input:
     pass
 
@@ -68,10 +72,10 @@ class GetUserStatisticsOutput(komand.Output):
     }
   },
   "required": [
-    "statistics",
     "imageBadgeUrl",
-    "rank",
     "monthRank",
+    "rank",
+    "statistics",
     "user"
   ],
   "definitions": {

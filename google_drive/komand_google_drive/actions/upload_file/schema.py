@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Upload a file to Google Drive"
+
+
 class Input:
     FILE = "file"
     FOLDER_ID = "folder_id"

@@ -1,0 +1,31 @@
+{
+	"spec": "7a814cc8d02b42a1936216ae0b564929",
+	"manifest": "eaf15d33d7086035ac66357a0a89cf88",
+	"setup": "dd8deb07a2ef84583ee78d4654e884f3",
+	"schemas": [
+		{
+			"identifier": "decr/schema.py",
+			"hash": "dbb8b16648faaa1ed7b8882501c9157e"
+		},
+		{
+			"identifier": "gauge/schema.py",
+			"hash": "5aec4fa788b9a83887ce5befbb505f45"
+		},
+		{
+			"identifier": "incr/schema.py",
+			"hash": "074ef7fe74d258350728e8751f4842b9"
+		},
+		{
+			"identifier": "set/schema.py",
+			"hash": "79a811c9a500f5db65eaa3b03e45d0bf"
+		},
+		{
+			"identifier": "timing/schema.py",
+			"hash": "a5e512ae2e2d8fcfc6ef597de6f2a93b"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "8e5addcab5d592a856cc9004a9fea9d4"
+		}
+	]
+}

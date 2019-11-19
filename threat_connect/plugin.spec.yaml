@@ -1,24 +1,30 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: threat_connect
 title: ThreatConnect
-description: ThreatConnect is a Threat Intelligence Platform (TIP) that empowers large
-  organizations to aggregate, analyze and act on their threat intelligence
-version: 1.0.0
+description: "ThreatConnect is a Threat Intelligence Platform (TIP) that empowers large
+  organizations to aggregate, analyze and act on their threat intelligence. The ThreatConnect plugin for Rapid7
+InsightConnect allows users to view incidents, emails, threats, victims, and more"
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/threat_connect
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://threatconnect.com/
 tags:
 - threat
 - malicious
 - analyze
 - manage
 - identify
-- connect
+- threatconnect
+hub_tags:
+  use_cases: [soar, investigations, soc_automation]
+  keywords: [threat, malicious, analyze, manage, identify, threatconnect]
+  features: []
 types:
   filter:
     adversary_id:

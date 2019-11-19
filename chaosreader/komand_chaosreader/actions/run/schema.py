@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run Chaosreader on a PCAP or snoop file"
+
+
 class Input:
     DUMP = "dump"
     EXCLUDE = "exclude"

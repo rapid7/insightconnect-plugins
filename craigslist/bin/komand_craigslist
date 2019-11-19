@@ -6,8 +6,8 @@ from komand_craigslist import connection, actions, triggers
 
 Name = 'Craigslist'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Craigslist provides local classifieds and forums for jobs, housing, for sale, personals, services, local community, and events'
+Version = '1.0.1'
+Description = 'Craigslist provides local classifieds and forums for jobs, housing, for sale, personals, services, local community, and events. Using the Craigslist plugin for Rapid7 InsightConnect, organizations can monitor their brand as well as automate searches for lost or stolen assets'
 
 
 class ICONCraigslist(komand.Plugin):

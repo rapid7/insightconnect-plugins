@@ -1,25 +1,45 @@
-
-# Jenkins
-
-## About
+# Description
 
 [Jenkins](https://jenkins.io/) is an open source automation server which enables developers around the world to reliably build, test, and deploy their software.
 This plugin utilizes the [Jenkins Python API](http://git.openstack.org/cgit/openstack/python-jenkins).
 
-## Actions
+# Key Features
 
-### Build Job
+* Continuous Integration
+* Continuous Deploy
+
+# Requirements
+
+* Username and Password
+* Jenkins Server
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_username_password|None|True|Username and password|None|
+|host|string|None|True|Jenkins server URL|None|
+
+## Technical Details
+
+### Actions
+
+#### Build Job
 
 This action is used to start a build job.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|True|Name of job|None|
 |parameters|string|None|False|Dictionary of job parameters|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -35,18 +55,18 @@ Example output:
 
 ```
 
-### Build Info
+#### Build Info
 
 This action is used to return detailed information on a build.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|True|Job name|None|
 |Build number|integer|None|True|The build number you want detailed information on|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -248,35 +268,28 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Username and password|None|
-|host|string|None|True|Jenkins server URL|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 For build job parameters boolean values must be lower case and strings must be in quotes.
 e.g. `{"mykeyone": false, "mykeytwo": "mystring", "mykeythree": 27}`
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
+* 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Add build info action
+* 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Automate Jenkins builds
+# Links
 
 ## References
 
 * [API Documentation](https://python-jenkins.readthedocs.io/en/latest/api.html)
+

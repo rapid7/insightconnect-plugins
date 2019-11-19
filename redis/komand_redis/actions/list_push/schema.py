@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List key's push"
+
+
 class Input:
     EXPIRE = "expire"
     KEY = "key"

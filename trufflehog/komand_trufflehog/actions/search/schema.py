@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Looks for exposed secrets in the git commit history and branches"
+
+
 class Input:
     CUSTOM_REGEXES = "custom_regexes"
     DO_ENTROPY = "do_entropy"

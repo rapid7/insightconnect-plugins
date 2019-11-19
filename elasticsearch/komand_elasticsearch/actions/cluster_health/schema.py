@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check cluster health"
+
+
 class Input:
     pass
 

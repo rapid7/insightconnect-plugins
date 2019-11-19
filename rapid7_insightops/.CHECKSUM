@@ -1,0 +1,23 @@
+{
+	"spec": "1b93ef41362c5a6b68e636cdcf691e77",
+	"manifest": "32deb298a47e7a297d9796a6cead4f7a",
+	"setup": "46215a4ecf0e27df02439003d54ebff0",
+	"schemas": [
+		{
+			"identifier": "create_logset_container/schema.py",
+			"hash": "b05376b3bcb326d1d38dae6d7451582e"
+		},
+		{
+			"identifier": "query_logs/schema.py",
+			"hash": "3884d5d43b0ec3727c41a9048f9689c3"
+		},
+		{
+			"identifier": "submit_log_data/schema.py",
+			"hash": "dc9df4bf912645a669521c2825030e40"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "1692173e1da0f47209cf2014b496a450"
+		}
+	]
+}

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Write data to a pre-existing database"
+
+
 class Input:
     CONSISTENCY = "consistency"
     DATA = "data"

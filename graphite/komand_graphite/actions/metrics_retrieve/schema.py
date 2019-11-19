@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve raw metrics data"
+
+
 class Input:
     FROM = "from"
     TARGET = "target"

@@ -1,21 +1,26 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: dumbno
 title: Dumbno
 vendor: rapid7
 support: community
 status: []
 description: Flow shunting for Arista switches using EOS
-version: 1.0.0
+version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/dumbno
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url:
 tags:
 - dumbno
 - blocking
 - arista
 - firewall
+hub_tags:
+  use_cases: [soar, network_containment]
+  keywords: [dumbno, blocking, arista, firewall]
+  features: []
 enable_cache: false
 connection:
   host:

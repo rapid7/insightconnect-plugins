@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Scan external assets"
+
+
 class Input:
     NAME = "name"
     TARGETS = "targets"

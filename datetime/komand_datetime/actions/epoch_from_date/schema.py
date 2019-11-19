@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Convert a Datetime to an Epoch"
+
+
 class Input:
     DATETIME = "datetime"
     

@@ -6,7 +6,7 @@ from komand_rapid7_tcell import connection, actions, triggers
 
 Name = 'Rapid7 tCell'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'Rapid7 tCell is a Next-Gen Cloud WAF that enables web applications to defend themselves by combining in-app instrumentation (RASP) and analytics in the cloud'
 
 

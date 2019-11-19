@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve container logs"
+
+
 class Input:
     ID = "id"
     

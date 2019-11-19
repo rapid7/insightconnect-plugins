@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='zendesk-rapid7-plugin',
-      version='1.1.0',
-      description='Zendesk helps improve communication and make sense of massive amounts of data',
+      version='1.1.1',
+      description='The Zendesk plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk of data',
       author='rapid7',
       author_email='',
       url='',

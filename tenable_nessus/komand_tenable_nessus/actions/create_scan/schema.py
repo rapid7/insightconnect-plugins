@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new scan"
+
+
 class Input:
     DESCRIPTION = "description"
     SCAN_NAME = "scan_name"
@@ -57,10 +61,10 @@ class CreateScanInput(komand.Input):
     }
   },
   "required": [
-    "targets",
-    "template_name",
     "scan_name",
-    "scanner_name"
+    "scanner_name",
+    "targets",
+    "template_name"
   ]
 }
     """)

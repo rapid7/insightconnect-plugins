@@ -1,22 +1,27 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: redhat_advisory
 title: Redhat Security Advisories
 vendor: rapid7
 support: community
 status: []
-description: Trigger on new Redhat Security Advisories
-version: 1.0.1
+description: This plugin will trigger workflows on new Red Hat Security Advisories
+version: 1.0.2
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/redhat_advisory
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.redhat.com/
 tags:
 - redhat
 - vulnerability management
 - security advisories
 - feeds
 - cve
+hub_tags:
+  use_cases: [soar, alerting_and_notifications, threat_intel, vulnerability_management]
+  keywords: [redhat, vulnerability management, security advisories, feeds, cve]
+  features: []
 types:
   reference:
     description:

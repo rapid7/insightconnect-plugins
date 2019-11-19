@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve a list of localized internet anonymization countries"
+
+
 class Input:
     pass
 

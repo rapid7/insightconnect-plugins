@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve ThreatConnect Bulk Indicator Download"
+
+
 class Input:
     ATTRIBUTE = "attribute"
     CONFIDENCE = "confidence"

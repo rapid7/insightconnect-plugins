@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check SSL Labs server availability"
+
+
 class Input:
     pass
 
@@ -78,13 +82,13 @@ class InfoOutput(komand.Output):
     }
   },
   "required": [
-    "engineVersion",
-    "criteriaVersion",
-    "maxAssessments",
     "clientMaxAssessments",
+    "criteriaVersion",
     "currentAssessments",
-    "newAssessmentCoolOff",
-    "messages"
+    "engineVersion",
+    "maxAssessments",
+    "messages",
+    "newAssessmentCoolOff"
   ]
 }
     """)

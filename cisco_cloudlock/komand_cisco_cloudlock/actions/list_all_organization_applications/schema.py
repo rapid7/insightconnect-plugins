@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists an organizations installed applications"
+
+
 class Input:
     CLASSIFICATION = "classification"
     LIMIT = "limit"

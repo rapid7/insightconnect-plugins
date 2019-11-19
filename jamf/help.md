@@ -1,25 +1,47 @@
-# Jamf
-
-## About
+# Description
 
 [Jamf](https://instancename.jamfcloud.com/) is a popular product for managing iPads, iPhones, Macs, and Apple TVs for schools and businesses.
 
 This plugin utilizes the [Jamf API](https://developer.jamf.com/apis/classic-api/index).
 
-## Actions
+# Key Features
 
-### Add Computer To A Group
+* User Management
+* Device Security
+
+# Requirements
+
+* Username and Password, or
+* API Key
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|client_login|credential_username_password|None|True|The Jamf username and password for basic authentication API interaction|None|
+|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access Jamf|None|
+|url|string|None|True|The full URL for your instance of Jamf, e.g. https://instance.jamfcloud.com|None|
+
+## Technical Details
+
+### Actions
+
+#### Add Computer To A Group
 
 This action is used to add a computer to a group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ID|integer|None|True|Group ID|None|
 |computer_ids|[]integer|None|True|Computer IDs|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -33,17 +55,17 @@ Example output:
 }
 ```
 
-### Get Device Groups
+#### Get Device Groups
 
 This action gets a list of all groups a device is a member of.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ID|integer|None|True|Device ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -66,17 +88,17 @@ Example output:
 }
 ```
 
-### Get Devices Names and IDs
+#### Get Devices Names and IDs
 
 This action is used to get a list of user's devices names and IDs.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|True|User name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -101,17 +123,17 @@ Example output:
 }
 ```
 
-### Get Group Details
+#### Get Group Details
 
 This action is used to get group details.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Group ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -174,17 +196,17 @@ Example output:
 }
 ```
 
-### Lock Mobile Devices
+#### Lock Mobile Devices
 
 This action is used to lock mobile devices.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |devices_id|[]string|None|True|List of devices IDs|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -198,17 +220,17 @@ Example output:
 }
 ```
 
-### Get User Location Details
+#### Get User Location Details
 
 This action is used to get user location details by device ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ID|string|None|True|Device ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -231,102 +253,27 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|client_login|credential_username_password|None|True|The Jamf username and password for basic authentication API interaction|None|
-|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access Jamf|None|
-|url|string|None|True|The full URL for your instance of Jamf, e.g. https://instance.jamfcloud.com|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
-## Workflows
+# Version History
 
-Examples:
-
-* Get list of device groups
-* Lock mobile devices
-* Get group details
-* Get device name and ID
-
-## Versions
-
-* 1.0.0 - Initial plugin
+* 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Add action to get user location details by device ID
+* 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Jamf](https://developer.jamf.com/apis/classic-api/index)
-
-## Custom Output Types
-
-### mobile_device
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|integer|True|Device ID|
-|mac_address|integer|True|MAC address|
-|name|string|True|Device name|
-|serial_number|string|True|Serial number|
-|udid|string|True|Unique device ID|
-|wifi_mac_address|string|True|WIFI MAC address|
-
-### device_group_detail
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|integer|True|Group ID|
-|name|string|True|Group name|
-
-### search_criteria
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|and_or|string|False|AND_OR|
-|closing_paren|boolean|False|Closing Parenthesis|
-|name|string|False|None|
-|opening_par|boolean|False|Opening Parenthesis|
-|priority|integer|False|Priority|
-|search_type|string|False|Search type|
-|value|string|False|Value|
-
-### site_detail
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|integer|False|ID|
-|name|string|False|Name|
-
-### group_detail
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|criteria|[]search_criteria|False|Criteria|
-|id|integer|False|Group ID|
-|is_smart|boolean|False|Is smart group|
-|mobile_devices|[]mobile_device|False|Mobile devices|
-|name|string|False|Group name|
-|site|site_detail|False|Site|
-
-### user_location_detail
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|building|string|True|Building|
-|department|string|True|Department|
-|email_address|string|True|Email address|
-|phone|string|True|Phone|
-|position|string|True|Position|
-|real_name|string|True|Real name|
-|room|string|True|Room number|
-|username|string|True|Username|
 

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Determine capture files metadata"
+
+
 class Input:
     CID = "cid"
     

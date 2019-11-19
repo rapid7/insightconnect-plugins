@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "WHOIS Query [https://api.passivetotal.org/api/docs/#api-WHOIS-GetV2WhoisQuery]"
+
+
 class Input:
     COMPACT_RECORD = "compact_record"
     QUERY = "query"

@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='fireeye_hx-rapid7-plugin',
-      version='1.0.0',
-      description='FireEye HX is an integrated endpoint solution that detects, prevents and responds effectively to known malware and threats traditional anti-virus endpoint security products miss',
+      version='1.0.1',
+      description='The FireEye plugin will allow you to get alerts from a given host',
       author='rapid7',
       author_email='',
       url='',

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List an issue's events"
+
+
 class Input:
     ISSUE_ID = "issue_id"
     

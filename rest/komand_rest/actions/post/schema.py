@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Make a POST request"
+
+
 class Input:
     BODY = "body"
     HEADERS = "headers"

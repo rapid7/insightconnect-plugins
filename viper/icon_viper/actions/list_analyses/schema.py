@@ -24,6 +24,7 @@ class ListAnalysesInput(komand.Input):
     "project_name": {
       "type": "string",
       "title": "Project Name",
+      "description": "Project name",
       "order": 1
     }
   },
@@ -46,6 +47,7 @@ class ListAnalysesOutput(komand.Output):
     "analyses": {
       "type": "array",
       "title": "Analyses",
+      "description": "List of analyses",
       "items": {
         "$ref": "#/definitions/Analysis"
       },

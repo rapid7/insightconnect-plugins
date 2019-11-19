@@ -1,22 +1,26 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: jamf
 title: Jamf
 description: Jamf is a popular product for managing iPads, iPhones, Macs, and Apple TVs for schools and businesses
-version: 1.1.0
+version: 1.1.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/jamf
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.jamf.com
 tags:
 - jamf
 - ios
 - mac
 - apple
-
+hub_tags:
+  use_cases: [soar, user_management, asset_inventory, asset_containment]
+  keywords: [jamf, ios, mac, apple]
+  features: []
 types:
   mobile_device:
     id:

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Stop a container by ID"
+
+
 class Input:
     ID = "id"
     TIMEOUT = "timeout"

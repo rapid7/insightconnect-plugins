@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add ACL to Arista Switch"
+
+
 class Input:
     DPORT = "dport"
     DSTIP = "dstip"

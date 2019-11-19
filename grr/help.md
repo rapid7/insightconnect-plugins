@@ -1,25 +1,48 @@
+# Description
 
-# Google Rapid Response
+[GRR Rapid Response](https://github.com/google/grr) is an incident reponse framework that allows you to focus on remote live forensics. GRR is a python client (agent) that is installed on target systems, and python server infrastructure that can manage and talk to clients.
 
-## About
+The GRR plugin allows you to organize clients and start hunts using GRR.
 
-[GRR Rapid Response](https://github.com/google/grr) is an incident reponse framework that allows you to focus on remote live forensics.
 This plugin utilizes the [GRR Python library](https://github.com/google/grr/tree/master/api_client/python).
 
-## Actions
+# Key Features
 
-### Labeling
+* Organize GRR clients
+* Start a hung
+
+# Requirements
+
+* GRR credentials
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_endpoint|string|None|True|The GRR API Endpoint to connect to|None|
+|credentials|credential_username_password|None|True|Username and password|None|
+|ssl_verify|boolean|True|True|Verify server's SSL/TLS certificate|None|
+
+## Technical Details
+
+### Actions
+
+#### Labeling
 
 This action is used to label clients based on a search query.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|Search for clients|None|
 |label|[]string|None|True|Label's clients|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -35,11 +58,11 @@ Example output:
 
 ```
 
-### Listing
+#### Listing
 
 This action is used to find and list clients based on a search query.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -49,7 +72,7 @@ This action is used to find and list clients based on a search query.
 |clients|boolean|None|False|Search clients|None|
 |grr_binaries|boolean|None|False|List GRR binaries|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -156,11 +179,11 @@ Example output:
 
 ```
 
-### Hunting
+#### Hunting
 
 This action is used to start a hunt on clients.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -260,7 +283,7 @@ This action is used to start a hunt on clients.
 |only_os|string|None|False|Limit checks to hosts of OS type(s) [Linux\|OSX\|Windows]|None|
 |ignore_interpolation_errors|boolean|None|False|If true, don't die if %%users.homedir%% and similar fail to expand. It's common on windows for some user attributes to be missing if users have never logged in. Enable this when you have multiple artifacts or paths and want to report partial results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -271,37 +294,28 @@ Example output:
 ```
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_endpoint|string|None|True|The GRR API Endpoint to connect to|None|
-|credentials|credential_username_password|None|True|Username and password|None|
-|ssl_verify|boolean|True|True|Verify server's SSL/TLS certificate|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Lists all cliend IDs for a given hostname
-* Add label to all clients with a given hostname
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 1.0.1 - Support web server mode
+* 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - Add certificate validation to connection
+* 1.0.1 - Support web server mode
+* 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [GRR](https://github.com/google/grr/tree/master/api_client/python)
+

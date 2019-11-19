@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a file to the repository"
+
+
 class Input:
     FILE_CONTENTS = "file_contents"
     FILE_PATH = "file_path"

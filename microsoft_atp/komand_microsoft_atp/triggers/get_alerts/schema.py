@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return all new alerts"
+
+
 class Input:
     
     FREQUENCY = "frequency"

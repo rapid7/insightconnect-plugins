@@ -1,20 +1,26 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: urlscan
 title: urlscan.io
 vendor: rapid7
 support: community
 status: []
-description: Scan your website
-version: 2.1.2
+description: The URLScan plugin uses URLScan to analyze urls for malicious indicators
+version: 2.1.3
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/urlscan
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://urlscan.io/
 tags:
 - url
 - analysis
 - intel
+- urlscan
+hub_tags:
+  use_cases: [soar, threat_intel, alert_enrichment, soc_automation]
+  keywords: [url, analysis, intel, urlscan]
+  features: []
 types:
   page:
     asn:

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update a record"
+
+
 class Input:
     OBJECT_DATA = "object_data"
     OBJECT_NAME = "object_name"
@@ -40,9 +44,9 @@ class UpdateRecordInput(komand.Input):
     }
   },
   "required": [
-    "record_id",
+    "object_data",
     "object_name",
-    "object_data"
+    "record_id"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Upload file to server"
+
+
 class Input:
     FILE_CONTENT = "file_content"
     REMOTE_PATH = "remote_path"

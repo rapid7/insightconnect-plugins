@@ -6,7 +6,7 @@ from komand_json_edit import connection, actions, triggers
 
 Name = 'JSON Edit'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Provides the ability to edit JSON data'
 
 

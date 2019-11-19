@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search based on MD5 hash"
+
+
 class Input:
     MD5 = "md5"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check if the feeds are up to date. A threshold can be defined in Hippocampe/core/conf/hippo/hippo.conf (by default 1 day)"
+
+
 class Input:
     pass
 

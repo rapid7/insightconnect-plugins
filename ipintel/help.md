@@ -1,18 +1,31 @@
-
-# IPIntel
-
-## About
+# Description
 
 [IPIntel](https://ipintel.io/) is a free IP address lookup tool for the DFIR field.
 
-## Actions
+# Key Features
 
-### Lookup Intelligence
+* Detect Users locations
+
+# Requirements
+
+* Requires an API Key from the product
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Lookup Intelligence
 
 This action is used to lookup intelligence information.
 Stealth mode and GeoIP only are additional parameters that can be passed.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -20,36 +33,34 @@ Stealth mode and GeoIP only are additional parameters that can be passed.
 |stealth|boolean|False|False|When enabled, all external third-party API lookups are disabled. Threat lookups are local only, and geolocation data may be less accurate.|None|
 |addresses|[]string|None|True|IP Addresses|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |result|[]intel|False|Intel object containing query results|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* IP enrichment
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [IPIntel](https://ipintel.io/)
+

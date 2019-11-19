@@ -1,17 +1,22 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: bmc_remedy_itsm
 title: "BMC Remedy ITSM"
-description: "Transform your service desk with the right ITSM solution"
-version: 1.7.0
+description: "Create update and close BMC Remedy ITSM Incidents"
+version: 1.7.1
 vendor: rapid7
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/bmc_remedy_itsm
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.bmc.com/
 tags: [ "ITSM", "BMC", "Remedy", "Service Management" ]
 support: community
 status: []
+hub_tags:
+  use_cases: [soar, remediation_ticketing, reporting_and_analytics, asset_inventory, data_aggregation]
+  keywords: [service management, itsm, bmc, remedy]
+  features: []
 
 types:
   self:

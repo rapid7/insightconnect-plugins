@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add indicators to the Cloud Node"
+
+
 class Input:
     INDICATORS = "indicators"
     

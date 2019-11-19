@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query information about the server"
+
+
 class Input:
     pass
 

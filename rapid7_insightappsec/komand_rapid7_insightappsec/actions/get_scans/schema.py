@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a page of scans, based on supplied pagination parameters"
+
+
 class Input:
     INDEX = "index"
     SIZE = "size"

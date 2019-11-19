@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Starts an instance"
+
+
 class Input:
     INSTANCE = "instance"
     ZONE = "zone"
@@ -53,8 +57,8 @@ class StartInstanceInput(komand.Input):
     }
   },
   "required": [
-    "zone",
-    "instance"
+    "instance",
+    "zone"
   ]
 }
     """)

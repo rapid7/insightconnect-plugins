@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List report of a given job, identified by its ID"
+
+
 class Input:
     JOB_ID = "job_id"
     

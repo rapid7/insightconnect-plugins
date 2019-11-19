@@ -1,18 +1,39 @@
+# Description
 
-# Redis
-
-## About
+Redis is an in-memory data structure project implementing a distributed, in-memory key-value database with optional durability. Redis supports different kinds of abstract data structures, such as strings, lists, maps, sets, sorted sets, HyperLogLogs, bitmaps, streams, and spatial indexes.
 
 This package allows you to interact with the [Redis](https://redis.io/) database API.
 
-## Actions
+# Key Features
 
-### Set
+* Set and retrieve data from Redis. 
+
+# Requirements
+
+* Connection information for your Redis database
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|host|string|None|True|Host, e.g. 10.4.4.4|None|
+|db|integer|0|True|Db to use usually (0-15)|None|
+|port|integer|6379|True|Port|None|
+
+## Technical Details
+
+### Actions
+
+#### Set
 
 This action is used to set a key to a string value.
 There is an optional expiration timeout which will auto remove the key when `expire` seconds have passed.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -20,7 +41,7 @@ There is an optional expiration timeout which will auto remove the key when `exp
 |key|string|None|True|Key to set|None|
 |value|string|None|True|Value to set|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -36,18 +57,18 @@ Example output:
 
 ```
 
-### List Get
+#### List Get
 
 This action is used to get all elements in a list.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |count|integer|1000|False|Max results to return|None|
 |key|string|None|True|Key to get|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -65,17 +86,17 @@ Example output:
 
 ```
 
-### Get
+#### Get
 
 This action is used to get a key. Get will return a value at `key` if found, otherwise found will be false
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |key|string|None|True|Key to get|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -93,17 +114,17 @@ Example output:
 
 ```
 
-### Keys
+#### Keys
 
 This action is used to return all keys matching a pattern.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |pattern|string|None|True|Pattern, e.g. *o*|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -149,12 +170,12 @@ Example output:
 
 ```
 
-### Hash Set
+#### Hash Set
 
 This action is used to set a given key to a key:value object. All values must be strings.
 There is an optional expiration timeout which will auto remove the key when `expire` seconds have passed.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -162,7 +183,7 @@ There is an optional expiration timeout which will auto remove the key when `exp
 |values|object|None|True|Object hash field\:value to set|None|
 |key|string|None|True|Key|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -178,11 +199,11 @@ Example output:
 
 ```
 
-### List Push
+#### List Push
 
 This action is used to list key's push.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -190,7 +211,7 @@ This action is used to list key's push.
 |key|string|None|True|Key|None|
 |value|string|None|True|Value to append|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -206,17 +227,17 @@ Example output:
 
 ```
 
-### Hash Get
+#### Hash Get
 
 This action is used to return all hash values at `key`. If no hash values are found `false` is returned.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |key|string|None|True|Key to get|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -234,17 +255,17 @@ Example output:
 
 ```
 
-### Delete
+#### Delete
 
 This action is used to delete a key.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |key|string|None|True|Key to delete|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -260,12 +281,12 @@ Example output:
 
 ```
 
-### Hash Increment By
+#### Hash Increment By
 
 This action is used to increments the number stored at field in the hash stored at key by increment.
 If key does not exist, a new key holding a hash is created. If field does not exist the value is set to 0 before the operation is performed
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -273,7 +294,7 @@ If key does not exist, a new key holding a hash is created. If field does not ex
 |field|string|None|True|Field to increment|None|
 |value|integer|0|True|How much to increment by|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -289,11 +310,11 @@ Example output:
 
 ```
 
-### Hash Multi Get
+#### Hash Multi Get
 
 This action is used to returns the values associated with the specified fields in the hash stored at key.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -301,7 +322,7 @@ This action is used to returns the values associated with the specified fields i
 |fields|[]string|None|False|Fields to retrieve values from|None|
 |get_all|boolean|False|True|Get all values|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -321,12 +342,12 @@ Example output:
 
 ```
 
-### Hash Multi Set
+#### Hash Multi Set
 
 This action is used to sets the specified fields to their respective values in the hash stored at key.
 This command overwrites any specified fields already existing in the hash. If key does not exist, a new key holding a hash is created
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -334,7 +355,7 @@ This command overwrites any specified fields already existing in the hash. If ke
 |values|object|None|True|Object hash field\:value to set|None|
 |expire|integer|None|False|Expiration in seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -350,37 +371,29 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|None|True|Host, e.g. 10.4.4.4|None|
-|db|integer|0|True|Db to use usually (0-15)|None|
-|port|integer|6379|True|Port|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Data retrieval
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 0.1.2 - Update to new plugin architecture, fix action "keys"
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Support web server mode | Add actions HMSET, HMGET and HINCRBY
+* 0.1.2 - Update to new plugin architecture, fix action "keys"
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [REDIS](https://redis.io/)
+

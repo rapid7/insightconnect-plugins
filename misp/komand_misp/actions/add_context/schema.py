@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add context"
+
+
 class Input:
     COMMENT = "comment"
     LINK = "link"
@@ -54,11 +58,11 @@ class AddContextInput(komand.Input):
     }
   },
   "required": [
+    "comment",
     "link",
     "other",
-    "text",
     "proposal",
-    "comment"
+    "text"
   ],
   "definitions": {
     "comment_input": {

@@ -1,24 +1,49 @@
-
-# Rapid7 Metasploit
-
-## About
+# Description
 
 [Metasploit Framework](https://www.metasploit.com/) is the world's most used penetration testing framework.
+Make the premier penetration testing solution even more powerful with the ability to search and execute Exploits using this InsightConnect plugin. Automate your pen-tests and find the weak points in your environments faster with remote execution of exploits and retrieve the results for further analysis.
+
 This plugin utilizes the Metasploit [RPC API](https://metasploit.help.rapid7.com/docs/rpc-api).
 
-## Actions
+# Key Features
 
-### Search for Exploit
+* Search for exploits
+* Execute exploits
+
+# Requirements
+
+* Username and password
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|username|string|msf|False|Username|None|
+|ssl|boolean|True|False|Use SSL|None|
+|port|integer|55553|False|Port|None|
+|password|password|None|True|Password|None|
+|uri|string|/api/|False|The msfrpcd URI|None|
+|server|string|None|False|Remote Server IP|None|
+
+## Technical Details
+
+### Actions
+
+#### Search for Exploit
 
 This action is used to search for an exploit within Metasploit over an RPC session.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |search_term|string|None|True|Search term, e.g. 'vsftp'|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -42,18 +67,18 @@ Example output:
 
 ```
 
-### Execute Exploit
+#### Execute Exploit
 
 This action is used to run a selected Metasploit exploit.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |options|object|None|False|Metasploit module options|None|
 |module|string|None|False|A Metasploit module|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -100,17 +125,17 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
-### New Modules
+#### New Modules
 
 This trigger is used to check for new Metasploit modules.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -145,41 +170,29 @@ Example output:
 
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|msf|False|Username|None|
-|ssl|boolean|True|False|Use SSL|None|
-|port|integer|55553|False|Port|None|
-|password|password|None|True|Password|None|
-|uri|string|/api/|False|The msfrpcd URI|None|
-|server|string|None|False|Remote Server IP|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 0.1.0 - Initial plugin
-* 1.0.0 - Trigger added: New Modules
-* 1.0.1 - Update Ruby script release
-* 1.0.2 - Bugfix: Plugin could occasionally crash due to unhandled unicode characters while searching for exploits
-* 1.0.3 - Support web server mode
-* 1.0.4 - Update to use new JSON API
+* 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - Update to new credential types
+* 1.0.4 - Update to use new JSON API
+* 1.0.3 - Support web server mode
+* 1.0.2 - Bugfix: Plugin could occasionally crash due to unhandled unicode characters while searching for exploits
+* 1.0.1 - Update Ruby script release
+* 1.0.0 - Trigger added: New Modules
+* 0.1.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Search for existing Metasploit exploits based on service or version
-* Remotely execute a Metasploit module and return information on the findings
+# Links
 
 ## References
 
 * [Metasploit](https://www.metasploit.com/)
 * [RPC API](https://metasploit.help.rapid7.com/docs/rpc-api)
+

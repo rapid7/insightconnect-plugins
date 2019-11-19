@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='salesforce-rapid7-plugin',
-      version='1.0.0',
-      description='Salesforce is a CRM solution that brings together all customer information in a single, integrated platform that enables building a customer-centred business from marketing right through to sales, customer service and business analysis',
+      version='1.0.1',
+      description='The Salesforce plugin allows you to search, update, and manage salesforce records',
       author='rapid7',
       author_email='',
       url='',

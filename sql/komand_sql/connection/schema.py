@@ -50,9 +50,9 @@ class ConnectionSchema(komand.Input):
   },
   "required": [
     "credentials",
-    "type",
+    "db",
     "host",
-    "db"
+    "type"
   ],
   "definitions": {
     "credential_username_password": {

@@ -1,16 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: cisco_firepower_management_center
 title: Cisco Firepower Management Center
 vendor: rapid7
 status: []
-description: Firepower Management Center is your administrative nerve center for managing critical Cisco network security solutions
-version: 1.0.0
+description: This plugin utilizes Cisco Firepower Management Center to create a new block URL policy
+ Cisco Firepower Management Center is an administrative nerve center for managing critical Cisco network security solutions
+version: 1.0.1
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_firepower_management_center
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.cisco.com
 tags:
 - cisco
 - firesight
 - firepower
+hub_tags:
+  use_cases: [soar, vulnerability_management]
+  keywords: [cisco, firesight, firepower]
+  features: []
 language: python
 types:
   url_object:

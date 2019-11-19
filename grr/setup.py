@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='grr-rapid7-plugin',
-      version='2.0.0',
-      description='An incident response framework used for live forensics',
+      version='2.0.1',
+      description='The GRR plugin allows you to organize and start hunts using GRR',
       author='rapid7',
       author_email='',
       url='',

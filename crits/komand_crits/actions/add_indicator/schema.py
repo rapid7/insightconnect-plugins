@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new indicator"
+
+
 class Input:
     PARAMS = "params"
     SOURCE = "source"
@@ -159,9 +163,9 @@ class AddIndicatorInput(komand.Input):
     }
   },
   "required": [
+    "source",
     "type",
-    "value",
-    "source"
+    "value"
   ]
 }
     """)

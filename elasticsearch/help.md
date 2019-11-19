@@ -1,32 +1,54 @@
+# Description
 
-# Elasticsearch
+[Elasticsearch](https://www.elastic.co) is a distrbuted real-time search and analytics engine. This plugin allows for indexing and updating documents, as well as searching indexes and polling for new documents given a query. The Elasticsearch plugin will allow you to update and search documents. It will also allow you to check your cluster's health. 
+This plugin utilizes the [Elasticsearch API](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html). 
 
-## About
+# Key Features
 
-[Elasticsearch](https://www.elastic.co) is a distrbuted real-time search and analytics engine. This plugin allows for indexing and updating documents, as well as searching indexes and polling for new documents given a query.
-This plugin utilizes the [Elasticsearch API](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
+* Search documents
+* Update documents
+* Check your cluster's health
 
-## Actions
+# Requirements
 
-### Cluster Health
+* An Elasticsearch server
+* Elasticsearch credentials
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|Host URL E.g. http\://10.0.2.2\:9200|None|
+|credentials|credential_username_password|None|True|Basic Auth username and password|None|
+|use_authentication|boolean|None|True|If the Elasticsearch host does not use authentication set this value to false|None|
+
+## Technical Details
+
+### Actions
+
+#### Cluster Health
 
 This action is used to check cluster health.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |cluster_health|health|False|None|
 
-### Update Document
+#### Update Document
 
 This action is used to update a document.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -43,17 +65,17 @@ This action is used to update a document.
 |timeout|string|1m|False|Custom Timeout Window|None|
 |_id|string|None|True|Optional ID of Indexed Document|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |update_response|op_response|False|None|
 
-### Search Documents
+#### Search Documents
 
 This action is used to search for documents.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -62,7 +84,7 @@ This action is used to search for documents.
 |routing|string|None|False|Optional Shards to Search|None|
 |_index|string|None|True|Document Index|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -71,11 +93,11 @@ This action is used to search for documents.
 |timed_out|boolean|False|Timed Out Flag|
 |_shards|_shards|False|Information About Replication Process|
 
-### Index Document
+#### Index Document
 
 This action is used to create or replace a document by index.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -89,19 +111,19 @@ This action is used to create or replace a document by index.
 |timeout|string|1m|False|Custom Timeout Window|None|
 |document|object|None|False|JSON Document to Index|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |index_response|op_response|False|None|
 
-## Triggers
+### Triggers
 
-### Poll Documents
+#### Poll Documents
 
 This trigger is used to poll for new documents given a query.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -111,43 +133,35 @@ This trigger is used to poll for new documents given a query.
 |routing|string|None|False|Optional Shards to Search|None|
 |_index|string|None|True|Document Index|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |hits|[]hit|False|New Hits|
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|Host URL E.g. http\://10.0.2.2\:9200|None|
-|credentials|credential_username_password|None|True|Basic Auth username and password|None|
-|use_authentication|boolean|None|True|If the Elasticsearch host does not use authentication set this value to false|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Log query
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - Bugfix for NoneType assignment
-* 0.1.2 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
-* 1.0.1 - Fix issue where Poll Documents trigger test would always fail
-* 2.0.0 - Fix issue where Poll Documents trigger will sometimes not return results | Update connection to allow optional authentication
+* 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - Fix typo in plugin spec
+* 2.0.0 - Fix issue where Poll Documents trigger will sometimes not return results | Update connection to allow optional authentication
+* 1.0.1 - Fix issue where Poll Documents trigger test would always fail
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.2 - SSL bug fix in SDK
+* 0.1.1 - Bugfix for NoneType assignment
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [ElasticSearch](https://www.elastic.co/)
 * [ElasticSearch API](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
+

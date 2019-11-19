@@ -1,16 +1,17 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+product: [insightconnect]
 name: grr
 title: Google Rapid Response
-description: An incident response framework used for live forensics
-version: 2.0.0
+description: The GRR plugin allows you to organize and start hunts using GRR
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/grr
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: http://www.google.com
 tags:
 - incident response
 - google
@@ -18,6 +19,10 @@ tags:
 - hunt
 - label
 - list
+hub_tags:
+  use_cases: [soar, soc_automation, threat_intel, threat_hunting, threat_detection_and_response]
+  keywords: [incident response, google, grr, hunt, label, list]
+  features: []
 enable_cache: true
 connection:
   api_endpoint:

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Given a starting cell, this action will take a list of data and push it to either rows or columns in a Google Sheet"
+
+
 class Input:
     CELL = "cell"
     DIRECTION = "direction"
@@ -62,9 +66,9 @@ class SpreadListToSheetInput(komand.Input):
   "required": [
     "cell",
     "direction",
+    "sheet_id",
     "update_list",
-    "worksheet",
-    "sheet_id"
+    "worksheet"
   ]
 }
     """)

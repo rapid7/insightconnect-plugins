@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Capture URL screenshot"
+
+
 class Input:
     CACHE_AGE_DAYS = "cache_age_days"
     FORMAT = "format"

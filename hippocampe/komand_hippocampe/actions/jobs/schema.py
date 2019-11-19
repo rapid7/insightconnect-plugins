@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return every report generated at the end of the indexing process"
+
+
 class Input:
     pass
 

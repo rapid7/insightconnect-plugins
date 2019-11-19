@@ -1,24 +1,38 @@
+# Description
 
-# Snort Labs IP Reputation
+[Snort Labs List](http://talosintel.com/feeds/ip-filter.blf) is an IP blacklist provided by Snort. 
+Users of this plugin can query it with an IP address to check the status, assisting with alert enrichment and
+other threat intelligence needs.
 
-## About
+# Key Features
 
-The [Snort Labs IP Reputation](http://blog.snort.org/2015/09/ip-blacklist-feed-has-moved-locations.html) list is a IP intelligence list.
-This plugin allows you to query the list for an IP address.
+* IP address blacklist query
 
-## Actions
+# Requirements
 
-### IP Lookup
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### IP Lookup
 
 This action is used to look up a given IP address in the intel feed and return whether is was found.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|IPv4 Address|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -27,30 +41,28 @@ This action is used to look up a given IP address in the intel feed and return w
 |status|string|False|None|
 |address|string|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 0.1.0 - Initial plugin
-* 0.1.1 - Feed URL [http://www.talosintelligence.com/feeds/ip-filter.blf](http://www.talosintelligence.com/feeds/ip-filter.blf) moved to S3, redirect required
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - Feed URL [http://www.talosintelligence.com/feeds/ip-filter.blf](http://www.talosintelligence.com/feeds/ip-filter.blf) moved to S3, redirect required
+* 0.1.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Intelligence
+# Links
 
 ## References
 
 * [Snort Labs IP Reputation](http://blog.snort.org/2015/09/ip-blacklist-feed-has-moved-locations.html)
+

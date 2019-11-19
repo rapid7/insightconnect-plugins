@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Increments the number stored at field in the hash stored at key by increment"
+
+
 class Input:
     FIELD = "field"
     KEY = "key"
@@ -40,8 +44,8 @@ class HincrbyInput(komand.Input):
     }
   },
   "required": [
-    "key",
     "field",
+    "key",
     "value"
   ]
 }

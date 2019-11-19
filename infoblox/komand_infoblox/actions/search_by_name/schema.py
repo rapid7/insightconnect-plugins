@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search hosts by name"
+
+
 class Input:
     NAME_PATTERN = "name_pattern"
     
@@ -103,8 +107,8 @@ class SearchByNameOutput(komand.Output):
       },
       "required": [
         "_ref",
-        "name",
-        "ipv4addrs"
+        "ipv4addrs",
+        "name"
       ],
       "definitions": {
         "IPv4Addr": {

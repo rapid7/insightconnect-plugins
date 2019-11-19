@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Mark a threat as resolved"
+
+
 class Input:
     TARGET_SCOPE = "target_scope"
     THREAT_ID = "threat_id"
@@ -52,8 +56,8 @@ class MarkAsBenignInput(komand.Input):
     }
   },
   "required": [
-    "threat_id",
-    "target_scope"
+    "target_scope",
+    "threat_id"
   ]
 }
     """)

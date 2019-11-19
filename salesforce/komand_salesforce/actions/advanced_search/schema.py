@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Execute a SOQL (Salesforce Object Query Language) query"
+
+
 class Input:
     QUERY = "query"
     

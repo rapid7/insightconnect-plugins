@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes the given trusted host"
+
+
 class Input:
     GROUP_NAME = "group_name"
     NAME = "name"

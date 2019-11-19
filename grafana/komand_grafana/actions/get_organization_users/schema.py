@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get all users within the organization"
+
+
 class Input:
     ORGANIZATION_ID = "organization_id"
     

@@ -1,53 +1,65 @@
+# Description
 
-# SHAttered
+[SHAtterred](http://shattered.io) is a free service for checking SHA-1 hash collisions. Using the SHAttered plugin for
+Rapid7 InsightConnect, users can quickly determine if a file is part of a collision attack. SHAttered can assist
+with forensics, phishing analysis, and other needs.
 
-## About
+# Key Features
 
-[SHAterred](http://shattered.io) is an SHA-1 collision checking service and attack knowledge website.
-The SHAttered plugin submits a file to SHAttered.io for analysis.
+* SHA-1 collision checking
 
-## Actions
+# Requirements
 
-### Check Collision
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Check Collision
 
 This action is used to check for a SHA-1 hash collision for a submitted file.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |file|bytes|None|False|File to check for a collision|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |has_collision|boolean|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Hash collision detection
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [SHAttered](http://shattered.io/)
+

@@ -1,7 +1,4 @@
-
-# minFraud
-
-## About
+# Description
 
 [Maxmind's minFraud](https://www.maxmind.com/en/minfraud-services) service provides fraud intelligence data. The minFraud service queries the insights service
 via its API and provides relevant data on the transaction data provided, including an overall risk score. The
@@ -9,13 +6,35 @@ actions have been broken down into each top-level request field.
 
 This plugin utilizes the minFraud API and implements all of its available lookups.
 
-## Actions
+# Key Features
 
-### Payment Lookup
+* Fraudulant Transactions Detection
+
+# Requirements
+
+* License
+
+# Documentation
+
+## Setup
+
+A valid user ID and license key are required to authenticate to the minFraud API.
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|user|integer|None|True|User ID number|None|
+|license|credential_secret_key|None|True|License key|None|
+
+## Technical Details
+
+### Actions
+
+#### Payment Lookup
 
 This action can be used to retrieve intelligence information for a given payment processor.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -24,17 +43,17 @@ This action can be used to retrieve intelligence information for a given payment
 |payment_was_authorized|boolean|None|False|Payment authroized\: true/false|None|
 |payment_decline_code|string|None|False|Payment decline code|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_score|string|False|Overall risk score|
 
-### Credit Card Lookup
+#### Credit Card Lookup
 
 This action can be used to retrieve intelligence information for a given credit card.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -48,18 +67,18 @@ This action can be used to retrieve intelligence information for a given credit 
 |bank_phone_number|string|None|False|Phone number for bank|None|
 |card_last_4_digits|string|None|False|Last 4 digits of credit card|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_score|string|False|Overall risk score|
 |credit_card_result|credit_card|False|Result for credit card|
 
-### Shopping Cart Lookup
+#### Shopping Cart Lookup
 
 This action can be used to retrieve intelligence information for a given shopping cart item.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -69,17 +88,17 @@ This action can be used to retrieve intelligence information for a given shoppin
 |item_category|string|None|False|Category of the item|None|
 |quantity|integer|None|False|Item quantity|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_score|string|False|Overall risk score|
 
-### Account Lookup
+#### Account Lookup
 
 This action can be used to retrieve intelligence information for a given end-user account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -87,17 +106,17 @@ This action can be used to retrieve intelligence information for a given end-use
 |username_md5|string|None|False|MD5 hash of the username|None|
 |address|string|None|True|IP address to query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_score|string|False|Overall risk score|
 
-### Billing Address Lookup
+#### Billing Address Lookup
 
 This action can be used to retrieve intelligence information for a given billing name or address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -114,18 +133,18 @@ This action can be used to retrieve intelligence information for a given billing
 |billing_country|string|None|False|Two character country code|None|
 |billing_last_name|string|None|False|Last name in billing info|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_score|string|False|Overall risk score|
 |billing_result|billing|False|Results for billing|
 
-### Master Lookup
+#### Master Lookup
 
 This action can be used to retrieve intelligence information for all query items from the minFraud services.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -187,18 +206,18 @@ This action can be used to retrieve intelligence information for all query items
 |avs_result|string|None|False|Address Verification System result|None|
 |quantity|integer|None|False|Item quantity|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_score|string|False|Overall risk score|
 |all_result|all|False|Result for all|
 
-### Event Lookup
+#### Event Lookup
 
 This action can be used to retrieve intelligence information for a given transaction event.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -208,17 +227,17 @@ This action can be used to retrieve intelligence information for a given transac
 |transaction_id|string|None|False|Transaction ID|None|
 |time|string|None|False|Time of event|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_score|string|False|Overall risk score|
 
-### Email Lookup
+#### Email Lookup
 
 This action can be used to retrieve intelligence information for a given email address, email domain, or MD5 email hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -226,18 +245,18 @@ This action can be used to retrieve intelligence information for a given email a
 |email|string|None|False|Email address used in transaction|None|
 |address|string|None|True|IP address to query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |email_result|email|False|Results for email|
 |risk_score|string|False|Overall risk score|
 
-### Shipping Address Lookup
+#### Shipping Address Lookup
 
 This action can be used to retrieve intelligence information for a given shipping name or address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -255,18 +274,18 @@ This action can be used to retrieve intelligence information for a given shippin
 |shipping_country|string|None|False|Two character country code|None|
 |address|string|None|True|IP address to query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_score|string|False|Overall risk score|
 |shipping_result|shipping|False|Results for shipping|
 
-### Device Lookup
+#### Device Lookup
 
 This action can be used to retrieve intelligence information for a given IP address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -274,7 +293,7 @@ This action can be used to retrieve intelligence information for a given IP addr
 |accept_language|string|None|False|HTTP Accept-Language header|None|
 |address|string|None|True|IP address to query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -282,11 +301,11 @@ This action can be used to retrieve intelligence information for a given IP addr
 |risk_score|string|False|Overall risk score|
 |device_result|device|False|Results for device|
 
-### Order Lookup
+#### Order Lookup
 
 This action can be used to retrieve intelligence information for a given order transaction.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -300,45 +319,36 @@ This action can be used to retrieve intelligence information for a given order t
 |order_currency|string|None|False|Currency code for the currency used|None|
 |order_discount_code|string|None|False|Discount code applied to transaction|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_score|string|False|Overall risk score|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-A valid user ID and license key are required to authenticate to the minFraud API.
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user|integer|None|True|User ID number|None|
-|license|credential_secret_key|None|True|License key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Make sure you supply a valid license key and user ID as an integer. Also, be sure that the correct items for each input are given.
 Refer to the minFraud API documentation for explicit details.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Retail fraud scoring
-* IP and e-mail enrichment and intelligence
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Rename actions
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [minFraud](https://www.maxmind.com/en/minfraud-services)
 * [minFraud API](https://dev.maxmind.com/minfraud/)
+

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets the results of an Ariel query by search ID"
+
+
 class Input:
     SEARCH_ID = "search_id"
     

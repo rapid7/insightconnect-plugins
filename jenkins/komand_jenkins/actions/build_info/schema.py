@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns detailed information on a build"
+
+
 class Input:
     BUILD NUMBER = "build number"
     NAME = "name"
@@ -32,8 +36,8 @@ class BuildInfoInput(komand.Input):
     }
   },
   "required": [
-    "name",
-    "build number"
+    "build number",
+    "name"
   ]
 }
     """)

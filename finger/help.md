@@ -1,7 +1,4 @@
-
-# Finger
-
-## About
+# Description
 
 [Finger](https://linux.die.net/man/1/finger) is a utility that queries a `finger` daemon for information. This plugin uses GNU Finger to get information about a system's user.
 For example, from the command line:
@@ -21,13 +18,29 @@ This user has no mail or mail spool.
 
 ```
 
-## Actions
+# Key Features
 
-### Finger
+* Retrieve information about a user
+
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Finger
 
 This action is used to retrieve information about a user account.
 
-#### Input
+##### Input
 
 It accepts a user to query and a `finger` host (IP or domain) to perform the query.
 
@@ -36,7 +49,7 @@ It accepts a user to query and a `finger` host (IP or domain) to perform the que
 |host|string|None|True|Finger server host|None|
 |user|string|None|True|User|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -105,36 +118,34 @@ On failure, the raw output may look like the following:
 
 ```
 
-#### Notes
+##### Notes
 
 If a user does not exist on the system but the `finger` daemon gives a response that doesn't contain stderr then `found` will be set to `true`.
 This is a best guess for determining whether the user actually exists because some `finger` daemons will not return any or very little information
 about a user that exists. We can improve this in the future.
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Some `finger` daemons return answers in a different format which will cause this plugin to be unable to interpet the data correctly.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Employee and user validation
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Finger](https://linux.die.net/man/1/finger)
+

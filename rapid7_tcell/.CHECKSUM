@@ -1,0 +1,111 @@
+{
+	"spec": "a41f307aab6a7d917c2dbe51f67352bd",
+	"manifest": "e51e32d8cd72b08895095fa0a2f8aef7",
+	"setup": "6be622dda2090bc85404d31c713dabbf",
+	"schemas": [
+		{
+			"identifier": "add_ips_to_blacklist/schema.py",
+			"hash": "234c9e40329a1feb10da00370517c8b3"
+		},
+		{
+			"identifier": "add_tags/schema.py",
+			"hash": "cf3a9a517abe7af6c17d49d1821c6a81"
+		},
+		{
+			"identifier": "change_tags/schema.py",
+			"hash": "134f93d039e893c72ac11ab698553716"
+		},
+		{
+			"identifier": "create_app/schema.py",
+			"hash": "84e2898047acbd7b343836cf076eeadc"
+		},
+		{
+			"identifier": "create_ip_group/schema.py",
+			"hash": "7ff08f6d77155352a4bbc3861fac0be1"
+		},
+		{
+			"identifier": "get_active_config/schema.py",
+			"hash": "19a1b7b04318a038c162fc320c6fabeb"
+		},
+		{
+			"identifier": "get_agent_details/schema.py",
+			"hash": "bacb8cf80b9eee1fbbd8633b11e7bc21"
+		},
+		{
+			"identifier": "get_app/schema.py",
+			"hash": "c08dc7a211c95cdc2efe639bceff6cc5"
+		},
+		{
+			"identifier": "get_app_tags/schema.py",
+			"hash": "a9b055d372abc400c38315969bdcbb97"
+		},
+		{
+			"identifier": "get_config/schema.py",
+			"hash": "01dd8b53789ab15c5fa87279e6ec6fc0"
+		},
+		{
+			"identifier": "get_inline_script_details/schema.py",
+			"hash": "319a372f523db14a3909ed5bf0e5741b"
+		},
+		{
+			"identifier": "get_package_details/schema.py",
+			"hash": "6c845c394710a6d3b5e56ac994d6b2ad"
+		},
+		{
+			"identifier": "get_route_details/schema.py",
+			"hash": "fc54ea5384858641c9fb8d8f97dc025b"
+		},
+		{
+			"identifier": "list_agents/schema.py",
+			"hash": "299c558b380011968c8bcda4faff95cc"
+		},
+		{
+			"identifier": "list_apps/schema.py",
+			"hash": "3c2a6449da5942d1504975384a675084"
+		},
+		{
+			"identifier": "list_configs/schema.py",
+			"hash": "fef08019970640f4c791e33eefdbb74f"
+		},
+		{
+			"identifier": "list_inline_scripts/schema.py",
+			"hash": "b46ddcba65d66dfe9734e592eb635fb4"
+		},
+		{
+			"identifier": "list_packages/schema.py",
+			"hash": "e078a420b5f68194c2e32432793be2ce"
+		},
+		{
+			"identifier": "list_routes/schema.py",
+			"hash": "d83120929d6f66a1a83e675797acbc65"
+		},
+		{
+			"identifier": "post_config_changes/schema.py",
+			"hash": "60dd69e1494ecc559887081afa120c08"
+		},
+		{
+			"identifier": "remove_ips_from_blacklist/schema.py",
+			"hash": "cab149e0f0bc2c0c182890d49fdfa977"
+		},
+		{
+			"identifier": "remove_tags/schema.py",
+			"hash": "4c7d48a26a15a859e80fb564694b7e4d"
+		},
+		{
+			"identifier": "revert_config_changes/schema.py",
+			"hash": "16ef0c3c4fe73fdc88dcabd1b3cb8e47"
+		},
+		{
+			"identifier": "update_ip_group/schema.py",
+			"hash": "41479b3627d436fb421e462bd8ca83c1"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "5882dc1d671dfa9063fcc5cb13ae85af"
+		},
+		{
+			"identifier": "get_events/schema.py",
+			"hash": "26654395d354f2fe6ec07e826a10916b"
+		}
+	]
+}

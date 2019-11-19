@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Forward syslog message"
+
+
 class Input:
     FACILITY = "facility"
     HOST = "host"

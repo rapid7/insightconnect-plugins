@@ -1,44 +1,67 @@
+# Description
 
-# Trello
-
-## About
+The Trello plugin allows you to manage users in your Trello project. 
 
 [Trello](https://trello.com) gives you perspective over all your projects, at work and at home.
 Whether it's managing a team, writing an epic screenplay, or just making a grocery list,
 This plugin accesses the [Trello API](https://developers.trello.com/advanced-reference)
 The output of this plugin is the JSON data returned by Trello.
 
-## Actions
+# Key Features
 
-### Remove Member from Cards
+* Manage users in Trello
+
+# Requirements
+
+* A Trello API key
+* A Trello API Token
+* The Trello version
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|API key|None|
+|version|integer|1|True|Version|None|
+|api_token|credential_token|None|True|API Token|None|
+
+## Technical Details
+
+### Actions
+
+#### Remove Member from Cards
 
 This action is used to remove member from cards.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id_member|string|None|True|The id of the member to remove from the card|None|
 |card_id|string|None|True|Card id or shortlink|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |result|[]object|False|Trello return an array json, result variable is used for response|
 
-### Remove Member from Organization
+#### Remove Member from Organization
 
 This action is used to this will remove a member from your organization.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id_member|string|None|True|The id of the member to remove from the organization|None|
 |id_or_name|string|None|True|ID or name of organization|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -52,11 +75,11 @@ This action is used to this will remove a member from your organization.
 |id|string|False|Organization id|
 |desc|string|False|Description about organization|
 
-### Deactivated List
+#### Deactivated List
 
 This action is used to list deactivated users and requires a Trello Business Class account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -64,17 +87,17 @@ This action is used to list deactivated users and requires a Trello Business Cla
 |member|boolean|False|False|Response with member or none|None|
 |id_or_name|string|None|True|ID or name of organization|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |result|[]object|False|Trello return an array json, result variable is used for response|
 
-### Boards Member
+#### Boards Member
 
 This action is used to list members of a board.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -98,17 +121,17 @@ Value of the parameter `actions_since` is valid with:
 * null
 * lastView
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |result|[]object|False|Trello return an array json, result variable is used for response|
 
-### Deactivate User
+#### Deactivate User
 
 This action is used to deactivate a user and requires a Trello Business Class account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -116,17 +139,17 @@ This action is used to deactivate a user and requires a Trello Business Class ac
 |value|boolean|True|False|None|None|
 |id_or_name|string|None|True|ID or name of organization|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status_code|integer|False|Http status code|
 
-### Members List
+#### Members List
 
 This action is used to list members of an organization.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -165,7 +188,7 @@ Value of the parameter `board_actions_since` is valid with:
 * null
 * lastView
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -190,18 +213,18 @@ Value of the parameter `board_actions_since` is valid with:
 |prefs|object|False|None|
 |activeBillableMemberCount|integer|False|None|
 
-### Remove Member from Board
+#### Remove Member from Board
 
 This action is used to remove member from board.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |board_id|string|None|False|The id of board|None|
 |id_member|string|None|True|The id of the member to remove from the board|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -217,41 +240,32 @@ This action is used to remove member from board.
 |id|string|False|The id of board|
 |desc|string|False|Description about board|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API key|None|
-|version|integer|1|True|Version|None|
-|api_token|credential_token|None|True|API Token|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* User deprovisioning
-* Project management
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
-* 2.0.0 - Update to new secret key credential type
+* 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - Remove erroneous data from plugin spec
+* 2.0.0 - Update to new secret key credential type
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Trello](https://trello.com)
 * [Trello API](https://developers.trello.com/advanced-reference)
 * [Trello Business Class](https://trello.com/business-class)
+

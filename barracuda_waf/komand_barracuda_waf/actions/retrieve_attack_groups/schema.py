@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all attack groups with attack group ID"
+
+
 class Input:
     ATTACK_GROUP_ID = "attack_group_ID"
     POLICY_ID = "policy_id"

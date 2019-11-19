@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch events of the provided type"
+
+
 class Input:
     
     APP_ID = "app_id"
@@ -56,8 +60,8 @@ class GetEventsInput(komand.Input):
   },
   "required": [
     "app_id",
-    "source",
-    "frequency"
+    "frequency",
+    "source"
   ]
 }
     """)
