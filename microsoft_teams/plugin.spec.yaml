@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
-description: Microsoft Teams actions and triggers
+description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users. 
 version: 1.2.3
 vendor: rapid7
 support: community
