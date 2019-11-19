@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: newrelic
 title: New Relic
 description: Monitors the performance of applications and infrastructure

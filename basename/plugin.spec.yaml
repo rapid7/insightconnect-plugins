@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: basename
 title: Basename
 description: This plugin is used to get the last item of a file path or URL using Python's basename utility

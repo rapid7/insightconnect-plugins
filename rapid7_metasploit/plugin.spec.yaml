@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: rapid7_metasploit
 title: Rapid7 Metasploit
 description: This plugin allows you to search for and execute exploits in Metasploit

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: git
 title: Git
 description: Git plugin allows you to add, remove and commit files to Git repository

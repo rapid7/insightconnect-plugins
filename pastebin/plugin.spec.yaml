@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: pastebin
 title: Pastebin
 description: The Pastebin plugin allows you to send text to and check posts on Pastebin

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: string
 title: String Operations
 description: The String plugin provides common programmatic string operations

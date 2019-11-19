@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: foremost
 title: Foremost
 description: The Foremost plugin will take a disk image and attempt to recover files from it

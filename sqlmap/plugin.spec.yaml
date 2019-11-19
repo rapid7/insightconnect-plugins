@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: sqlmap
 title: SQLMap
 description: The SQLMap plugin allows you to scan targets and analyze the results

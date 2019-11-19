@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: ossec
 title: OSSEC
 description: OSSEC is a free, open-source host-based intrusion detection system. Using the OSSEC plugin for InsightConnect, users can parse OSSEC alerts into JSON format

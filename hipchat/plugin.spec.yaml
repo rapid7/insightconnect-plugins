@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: hipchat
 title: HipChat
 description: The HipChat plugin can send and receive messages along with managing users

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: eml
 title: EML
 description: The EML plugins will parse and extract data from an EML file

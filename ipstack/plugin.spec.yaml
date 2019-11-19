@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: ipstack
 title: IPStack
 description: Lookup geographical information for a host

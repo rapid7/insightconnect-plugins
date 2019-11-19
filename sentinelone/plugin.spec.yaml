@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: sentinelone
 title: SentinelOne
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne

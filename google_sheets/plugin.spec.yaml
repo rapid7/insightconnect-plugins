@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: google_sheets
 title: Google Sheets
 description: Create, edit and collaborate with others on spreadsheets

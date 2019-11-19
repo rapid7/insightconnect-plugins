@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: request_tracker
 title: Request Tracker
 description: The Request Tracker plugin allows you to create and manage tickets in Request Tracker

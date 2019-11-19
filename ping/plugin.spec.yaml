@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: ping
 title: Ping
 description: The Ping plugin is used to check for network connectivity and response times

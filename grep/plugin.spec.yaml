@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: grep
 title: Grep
 description: This plugin searches for a specified pattern in a string or a file

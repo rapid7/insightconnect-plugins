@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: cisco_threatgrid
 title: Cisco ThreatGrid
 description: This plugin retrieves malware reports, report samples and URLs for analysis to Cisco ThreatGrid server

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: google_admin
 title: Google Apps Admin
 description: Get and suspend users with the Google admin plugin

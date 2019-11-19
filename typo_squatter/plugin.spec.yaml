@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: typo_squatter
 title: Typo Squatter
 description: "Typo Squatter detects cybersquatting of domains and allows for domain scoring. This plugin can be used

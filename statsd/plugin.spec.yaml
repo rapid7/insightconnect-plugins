@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: statsd
 title: Statsd
 description: The Statsd plugin will allow you to create metrics from your workflow

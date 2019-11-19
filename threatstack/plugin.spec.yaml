@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: threatstack
 title: Threat Stack
 description: The Threat Stack plugin is used to get information about alerts, assets, and policies

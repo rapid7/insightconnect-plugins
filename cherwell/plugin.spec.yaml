@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: cherwell
 title: Cherwell
 description: The Cherwell plugin is used to administrate incidents in Cherwell
