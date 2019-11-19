@@ -11,7 +11,6 @@ version: 2.0.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ftp
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url:
 tags:
 - ftp
 - authentication
