@@ -3,9 +3,41 @@
 [Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network.
 This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote host via the library. The SSH plugin allows you to run commands on a remote host. 
 
+## Actions
+
+### Run Remote Command
+
+This action is used to run a command on a remote host using SSH.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|host|string|None|False|(Optional) Host to run remote commands. If not provided, the connection host will be used|None|
+|command|string|None|False|Command to execute on remote host|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|results|True|Results|
+
+Example output:
+
+```
+{
+  "results": {
+    "all_output": "total 57068\n\ndrwxrwxr-x. 2 rapid7 rapid7        6 Nov  4 20:15 test\n\n-rw-rw-r--. 1 rapid7 rapid7       13 Nov  4 20:15 test.txt\n\n-rw-r--r--. 1 rapid7 rapid7 58433536 Mar 26  2019 VBoxGuestAdditions.iso\n",
+    "stderr": "",
+    "stdout": "total 57068\n\ndrwxrwxr-x. 2 rapid7 rapid7        6 Nov  4 20:15 test\n\n-rw-rw-r--. 1 rapid7 rapid7       13 Nov  4 20:15 test.txt\n\n-rw-r--r--. 1 rapid7 rapid7 58433536 Mar 26  2019 VBoxGuestAdditions.iso\n"
+  }
+}
+```
+
 # Key Features
 
 * Run a command on a remote host
+
 
 # Requirements
 
@@ -88,6 +120,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.0 - Update Run action output to return 3 output fields i.e. `stderr`, `stdout`, and `all_output`
 * 1.0.3 - New spec and help.md format for the Hub
 * 1.0.2 - Fixed issue where Run was excluded
 * 1.0.1 - Fix issue where run action was excluded from plugin on build
@@ -105,3 +138,12 @@ This plugin does not contain any troubleshooting information.
 * [OpenSSH](https://www.openssh.com/)
 * [paramiko](http://www.paramiko.org/)
 
+## Custom Output Types
+
+### results
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|stderr|string|True|Stderr|
+|stdout|string|True|Stdout|
+|all_output|string|True|All output|

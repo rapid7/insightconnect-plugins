@@ -6,8 +6,8 @@ from komand_ssh import connection, actions, triggers
 
 Name = 'SSH'
 Vendor = 'rapid7'
-Version = '1.0.3'
-Description = 'The SSH plugin allows you to run commands on a remote host'
+Version = '2.0.0'
+Description = 'The SSH protocol is a method for secure remote login from one computer to another'
 
 
 class ICONSsh(komand.Plugin):
