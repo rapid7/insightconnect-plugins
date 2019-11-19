@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='microsoft_teams-rapid7-plugin',
       version='1.2.3',
-      description='The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users.',
+      description='The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users',
       author='rapid7',
       author_email='',
       url='',
