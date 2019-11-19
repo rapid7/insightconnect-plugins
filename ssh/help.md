@@ -108,4 +108,4 @@ Examples:
 |----|----|--------|-----------|
 |stderr|string|True|Stderr|
 |stdout|string|True|Stdout|
-|stdout_stderr|string|True|All output|
+|all_output|string|True|All output|
