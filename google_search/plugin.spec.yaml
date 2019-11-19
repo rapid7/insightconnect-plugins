@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: google_search
 title: Google Search
 description: Search the worlds information, including webpages, images, videos and

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: kintone
 title: Kintone
 description: Custom workflows and data management for businesses and non-profits in one place

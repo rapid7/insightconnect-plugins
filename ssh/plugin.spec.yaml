@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: ssh
 title: SSH
 description: The SSH protocol is a method for secure remote login from one computer

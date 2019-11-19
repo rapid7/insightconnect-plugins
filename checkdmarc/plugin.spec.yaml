@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: checkdmarc
 title: Checkdmarc
 description: The checkdmarc plugin is used to parser SPF and DMARC records

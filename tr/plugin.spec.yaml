@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: tr
 title: Translate
 description: Translate or replace characters from text using the tr command line utility

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: powershell
 title: PowerShell
 description: The PowerShell plugin runs a PowerShell script on a remote host or locally on the InsightConnect Orchestrator

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: barracuda_waf
 title: Barracuda Web Application Firewall
 description: The Barracuda WAF plugin automates administrative tasks as well as rule creation and modification

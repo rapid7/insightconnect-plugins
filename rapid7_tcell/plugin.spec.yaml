@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: rapid7_tcell
 title: Rapid7 tCell
 description: Rapid7 tCell is a Next-Gen Cloud WAF that enables web applications to

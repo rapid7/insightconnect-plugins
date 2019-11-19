@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: shattered
 title: SHAttered
 description: "SHAttered is a free service for checking SHA-1 hash collisions. Using the SHAttered plugin for

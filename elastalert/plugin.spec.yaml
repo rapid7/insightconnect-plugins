@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: elastalert
 title: ElastAlert
 description: "ElastAlert provides easy & flexible alerting with Elasticsearch. Users of the ElastAlert plugin can

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: abuseipdb
 title: AbuseIPDB
 description: This plugin allows you to look up IP reports, provides list and details of blacklisted IPs, or report an abusive IP

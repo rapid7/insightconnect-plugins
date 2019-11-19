@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: trufflehog
 title: TruffleHog
 description: The TruffleHog plugin searches through git repositories for high entropy strings and secrets digging deep into commit history

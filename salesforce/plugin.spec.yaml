@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: salesforce
 title: Salesforce
 description: The Salesforce plugin allows you to search, update, and manage salesforce records

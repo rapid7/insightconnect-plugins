@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: traceroute
 title: Traceroute
 description: The traceroute plugin will trace a network route to a host

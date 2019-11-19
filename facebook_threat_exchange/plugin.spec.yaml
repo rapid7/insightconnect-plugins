@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: facebook_threat_exchange
 title: Facebook Threat Exchange
 vendor: rapid7

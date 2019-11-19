@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: cif
 title: Collective Intelligence Framework
 vendor: rapid7

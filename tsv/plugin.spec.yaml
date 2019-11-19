@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: tsv
 title: TSV
 description: "TSV (Tab Separated Values) is a simple data format for storing data. This plugin allows one to

@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: advanced_regex
 title: Advanced Regex
 description: This plugin performs advanced regex operations on a string using Python regex

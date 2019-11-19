@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: mxtoolbox_dns
 title: MxToolBox DNS
 vendor: rapid7

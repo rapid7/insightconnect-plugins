@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: smtp
 title: SMTP
 description: "Simple Mail Transfer Protocol (SMTP) is an Internet standard for electronic

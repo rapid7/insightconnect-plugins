@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: paloalto_wildfire
 title: Palo Alto Wildfire
 vendor: rapid7

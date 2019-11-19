@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: python_2_script
 title: Python 2 Script
 description: The Python 2 plugin allows you to run a Python 2 script

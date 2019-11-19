@@ -1,6 +1,6 @@
 plugin_spec_version: v2
 extension: plugin
-product: [insightconnect]
+products: [insightconnect]
 name: google_safe_browsing
 title: Google Safe Browsing
 description: Check URLs against the Google Safe Browsing service
