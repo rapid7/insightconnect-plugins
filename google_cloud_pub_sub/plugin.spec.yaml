@@ -17,7 +17,7 @@ tags:
 - google cloud
 - message broker
 hub_tags:
-  use_cases: [soar, data_ingestion, alerting_and_notification, soc_automation]
+  use_cases: [soar, data_ingestion, alerting_and_notifications, soc_automation]
   keywords: [google cloud, message broker, google]
   features: []
 connection:
