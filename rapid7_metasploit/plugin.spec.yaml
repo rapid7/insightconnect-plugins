@@ -18,7 +18,7 @@ tags:
 - penetration testing
 hub_tags:
   use_cases: [soar, soc_automation, penetration_testing, vulnerability_management]
-  keywords: [metasploit, rapid7, penetration testing]
+  keywords: [metasploit, rapid7]
   features: []
 enable_cache: true
 language: python
