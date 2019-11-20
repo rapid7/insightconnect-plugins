@@ -5,8 +5,6 @@ from komand_mimecast.util import util
 
 
 class GetManagedUrl(komand.Action):
-    # URI for create managed url
-    _URI = "/api/ttp/url/get-all-managed-urls"
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -18,6 +16,7 @@ class GetManagedUrl(komand.Action):
     def run(self, params={}):
         # Import variables from connection
         url = self.connection.url
+        uri = self.connection.GET_MANAGED_URL_URI
         access_key = self.connection.access_key
         secret_key = self.connection.secret_key
         app_id = self.connection.app_id
@@ -25,7 +24,7 @@ class GetManagedUrl(komand.Action):
 
         # Mimecast request
         mimecast_request = util.MimecastRequests()
-        response = mimecast_request.mimecast_post(url=url, uri=GetManagedUrl._URI,
+        response = mimecast_request.mimecast_post(url=url, uri=uri,
                                                   access_key=access_key, secret_key=secret_key,
                                                   app_id=app_id, app_key=app_key, data=None)
 

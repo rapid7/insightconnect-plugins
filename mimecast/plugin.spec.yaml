@@ -1,21 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: ["insightconnect"]
 name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 3.0.0
+version: 3.1.0
 vendor: rapid7
 support: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://mimecast.com
+hub_tags:
+  use_cases: [ vulnerability_management, network_containment ]
+  keywords: [ mimecast ]
+  features: [ "Domain Blocked List" ]
 tags:
 - mimecast
 - email
-
 types:
   managed_url:
     comment:
@@ -279,6 +283,12 @@ types:
       description: The action requested by the user
       type: string
       required: false
+  total_deletions:
+    numberOfDeletions:
+      title: Number of Deletions
+      description: The number of URL entries deleted from the blocked list
+      type: integer
+      required: false
 
 connection:
   url:
@@ -363,6 +373,27 @@ actions:
         title: Managed URL
         description: Managed URL that was created
         type: '[]managed_url'
+        required: false
+  delete_managed_url:
+    title: Delete Managed URL
+    description: Delete a managed URL
+    input:
+      url:
+        title: URL
+        description: The URL to unblock or permit. This must match a URL that is already in
+        type: string
+        required: true
+      delete_all_entries:
+        title: Delete all matching block URLs
+        description: Remove all blocked URLs that match the input.  Otherwise, only 0 or 1 entries are deleted
+        type: boolean
+        required: false
+        default: true
+    output:
+      response:
+        title: Deletions
+        description: Number of Records deleted
+        type: '[]total_deletions'
         required: false
   get_managed_url:
     title: Get Managed URL

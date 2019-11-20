@@ -1,5 +1,32 @@
 # Mimecast
 
+## Help
+
+# Description
+
+Manage Mimecast Services
+
+# Key Features
+
+Manage blocked email domains, manage black list of browsing domains
+
+# Requirements
+
+* API Username and Password
+* API Key
+
+# Documentation
+
+* https://www.mimecast.com/tech-connect/documentation/api-overview
+
+## Setup
+
+No special instructions for setting up this plugin
+
+## Technical Details
+
+No notable technical requirements to highlight
+
 ## About
 
 [Mimecast](https://www.mimecast.com) is a set of cloud services designed to provide next generation protection against advanced email-borne threats such as malicious URLs, malware, impersonation attacks, as well as internally generated threats.

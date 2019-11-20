@@ -4,14 +4,19 @@
         "connection": {
             "app_id": null,
             "app_key": {
-                "secretKey": null
+                "secretKey": null,
             },
-            "auth_type": null,
             "credentials": {
                 "password": null,
-                "username": null
+                "username": null,
             },
-            "url": null
+            "url": null,
+	    "access_key" : {
+                "secretKey": null,
+            },
+	    "secret_key" : {
+                "secretKey": null,
+            }
         },
         "input": {
             "action": "none",

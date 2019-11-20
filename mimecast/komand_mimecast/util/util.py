@@ -7,6 +7,29 @@ import hmac
 import uuid
 import datetime
 import requests
+from urllib.parse import urlparse
+
+
+class UrlMimecastFinder:
+    def __init__(self, url: str):
+        parsed_url = urlparse(url)
+        self.path = parsed_url[2]
+        self.domain = parsed_url[1]
+        self.scheme = parsed_url[0]
+
+    def does_mimecast_json_object_match(self, the_json_obj):
+        # do elimination tests
+        if 'path' in the_json_obj:
+            if not the_json_obj['path'] == self.path:
+                return False
+        else:
+            if not self.path == '':
+                return False
+
+        if not the_json_obj['scheme'] == self.scheme or not the_json_obj['domain'] == self.domain:
+            return False
+
+        return True
 
 
 # For mapping params{} to the values needed for request payloads

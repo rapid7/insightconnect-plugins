@@ -6,6 +6,15 @@ from komand_mimecast.util import util
 
 
 class Connection(komand.Connection):
+    # The distinct URIs from Mimecast for each action
+    GET_MANAGED_URL_URI = '/api/ttp/url/get-all-managed-urls'
+    DELETE_MANAGED_URl_URI = '/api/ttp/url/delete-managed-url'
+    CREATE_MANAGED_URl_URI = '/api/ttp/url/create-managed-url'
+    ADD_GROUP_MEMBER_URI = '/api/directory/add-group-member'
+    CREATE_BLOCKED_SENDER_POLICY_URI = '/api/policy/blockedsenders/create-policy'
+    FIND_GROUPS_URI = '/api/directory/find-groups'
+    DECODE_URL_URI = '/api/ttp/url/decode-url'
+    GET_TTP_URL_LOGS_URI = '/api/ttp/url/get-logs'
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())

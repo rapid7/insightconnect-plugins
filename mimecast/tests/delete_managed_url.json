@@ -1,16 +1,16 @@
 {
     "body": {
-        "action": "create_managed_url",
+        "action": "delete_managed_url",
         "connection": {
             "app_id": null,
             "app_key": {
-                "secretKey": null, 
+                "secretKey": null,
             },
             "credentials": {
                 "password": null,
                 "username": null,
             },
-            "url": null,
+            "url": ",
 	    "access_key" : {
                 "secretKey": null,
             },
@@ -19,13 +19,8 @@
             }
         },
         "input": {
-            "action": "block",
-            "comment": "test",
-            "disable_log_click": false,
-            "disable_rewrite": false,
-            "disable_user_awareness": false,
-            "match_type": "explicit",
-            "url": "http://asdf.com"
+            "url": "http://youtube.com",
+            "delete_all_entries": true
         }
     },
     "type": "action_start",
