@@ -1,20 +1,20 @@
 # Description
 
-[Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp) is a unified platform for preventative protection, post-breach detection, automated investigation, and response.
+The [Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp) plugin allows preventative protection, post-breach detection, automated investigation, and response on Windows Defender Advanced Threat Protection enabled Office 365 instances.
 
 This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis).
 
 # Key Features
 
-* Cloud based Security
-* Automated Security
-* Threat management
+* Trigger workflows on new security alerts
+* Manage isolation of network resources
+* Start virus scans
+* Stop execution of malicious code
 
 # Requirements
 
-* OAuth server
-* Client Credentials
-* Windows ATP Server
+* Windows Defender Advanced Threat Protection application credentials
+* Authentication and Resource URLs for your instance of Windows ATP
 
 # Documentation
 
@@ -144,7 +144,7 @@ Example output:
     "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity",
     "id": "b89eb834-4578-496c-8be0-03f004061435",
     "type": "Isolate",
-    "requestor": "Analyst@contoso.com ",
+    "requestor": "user@example.com",
     "requestorComment": "Isolate machine due to alert 1234",
     "status": "InProgress",
     "machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07",
@@ -178,7 +178,7 @@ Example output:
     "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity",
     "id": "b89eb834-4578-496c-8be0-03f004061435",
     "type": "Unisolate",
-    "requestor": "Analyst@contoso.com ",
+    "requestor": "user@example.com",
     "requestorComment": "Isolate machine due to alert 1234",
     "status": "InProgress",
     "machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07",
@@ -213,7 +213,7 @@ Example output:
   "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity",
   "id": "141408d1-384c-4c19-8b57-ba39e378011a",
   "type": "StopAndQuarantineFile",
-  "requestor": "Analyst@contoso.com ",
+  "requestor": "user@example.com",
   "requestorComment": "Stop and quarantine file on machine due to alert 441688558380765161_2136280442",
   "status": "InProgress",
   "machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07",
@@ -251,7 +251,7 @@ Example output:
     "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity",
     "id": "2e9da30d-27f6-4208-81f2-9cd3d67893ba",
     "type": "RunAntiVirusScan",
-    "requestor": "Analyst@contoso.com",
+    "requestor": "user@example.com",
     "requestorComment": "Check machine for viruses due to alert 3212",
     "status": "InProgress",
     "machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07",
@@ -284,7 +284,7 @@ Example output:
     "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity",
     "id": "2e9da30d-27f6-4208-81f2-9cd3d67893ba",
     "type": "RunAntiVirusScan",
-    "requestor": "Analyst@contoso.com",
+    "requestor": "user@example.com",
     "requestorComment": "Check machine for viruses due to alert 3212",
     "status": "InProgress",
     "machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07",
