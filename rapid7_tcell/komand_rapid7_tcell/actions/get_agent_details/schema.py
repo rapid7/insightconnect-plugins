@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch details for the agent with the given ID"
+
+
 class Input:
     AGENT_ID = "agent_id"
     APP_ID = "app_id"
@@ -32,8 +36,8 @@ class GetAgentDetailsInput(komand.Input):
     }
   },
   "required": [
-    "app_id",
-    "agent_id"
+    "agent_id",
+    "app_id"
   ]
 }
     """)

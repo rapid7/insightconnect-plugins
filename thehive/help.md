@@ -1,25 +1,49 @@
+# Description
 
-# TheHive
+[TheHive](https://thehive-project.org/) TheHive is a scalable, open source security incident response solution 
+designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done. 
+Handle your case management needs with TheHive plugin for Rapid7 InsightConnect.
 
-## About
+# Key Features
 
-[TheHive](https://thehive-project.org/) is a scalable, open source security incident response solutions designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done.
-This plugin utilizes the [thehive4py](https://github.com/CERT-BDF/TheHive4py) and [TheHive API](https://github.com/CERT-BDF/TheHiveDocs/tree/master/api) directly where necessary.
+* Case management
 
-## Actions
+# Requirements
 
-### Create Task
+* TheHive instance hostname
+* TheHive username and password
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|host|string|None|True|TheHive host e.g. thehive.company.com or 10.3.4.50|None|
+|protocol|string|None|True|HTTP Protocol|['http', 'https']|
+|proxy|object|None|False|An optional dictionary containing proxy data, with http or https as the key, and the proxy url as the value|None|
+|credentials|credential_username_password|None|True|Username and password|None|
+|verify|boolean|True|True|Verify the certificate|None|
+|port|string|9000|True|TheHive API port e.g. 9000|None|
+
+## Technical Details
+
+### Actions
+
+#### Create Task
 
 This action is used to create a new case task.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |task|itask|None|True|Task name|None|
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -48,18 +72,18 @@ Example output:
 
 ```
 
-### Create Observable
+#### Create Observable
 
 This action is used to create a new case observable.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |observable|iobservable|None|True|Observable|None|
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -93,15 +117,15 @@ Example output:
 
 ```
 
-### Get Cases
+#### Get Cases
 
 This action is used to retrieve a list of cases.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -165,17 +189,17 @@ Example output:
 
 ```
 
-### Get User
+#### Get User
 
 This action is used to get user information.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|False|User ID. If empty, the current user is used|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -219,17 +243,17 @@ Example output:
 
 ```
 
-### Get Case
+#### Get Case
 
 This action is used to retrieve a case by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -266,11 +290,11 @@ Example output:
 
 ```
 
-### Create Case
+#### Create Case
 
 This action is used to create a new case.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -282,7 +306,7 @@ This action is used to create a new case.
 |customFields|object|None|False|Case custom fields|None|
 |title|string|None|True|Name of the case|None|
 
-#### customFields
+##### customFields
 
 To assign `customFields` to a new case, pass in custom JSON to the input. The `object` contains the name of the customField that was created as its key, yielding a new `object`
 that has the datatype of the field and a value you want assigned to the new custom field e.g.:
@@ -294,7 +318,7 @@ that has the datatype of the field and a value you want assigned to the new cust
 |booleans|{"testCustomField":{"boolean":true}}|
 |dates|{"testCustomField":{"date":1529696160000}}|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -330,11 +354,11 @@ Example output:
 
 ```
 
-### Close Case
+#### Close Case
 
 This action is used to close a case by ID. It returns `Found` or `NotFound` in the `type` key and `Closed` or `NotClosed` in the `message` key if there's no errors.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -343,7 +367,7 @@ This action is used to close a case by ID. It returns `Found` or `NotFound` in t
 |impact_status|string|None|False|Case impact status|['low', 'medium', 'high']|
 |summary|string|None|False|Case Summary|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -361,48 +385,37 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|None|True|TheHive host e.g. thehive.company.com or 10.3.4.50|None|
-|protocol|string|None|True|HTTP Protocol|['http', 'https']|
-|proxy|object|None|False|An optional dictionary containing proxy data, with http or https as the key, and the proxy url as the value|None|
-|credentials|credential_username_password|None|True|Username and password|None|
-|verify|boolean|True|True|Verify the certificate|None|
-|port|string|9000|True|TheHive API port e.g. 9000|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Case management
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 0.1.2 - Bug fix for constant "waiting" in Status field | Updated to v2 architecture
-* 0.2.0 - Bug fix, add more input variables for Close Case action
-* 1.0.0 - Custom Field support added to Create Case action | Support web server mode
-* 2.0.0 - Update to new credential types
-* 2.0.1 - Update descriptions
-* 2.0.2 - Fix issue where SSL Verify was not used in the connection
-* 2.0.3 - Fix issue where SSL Verify was not used in actions that utilize requests | Updated test method and moved it to connection
+* 2.0.5 - New spec and help.md format for the Hub
 * 2.0.4 - Update to use the `komand/python-2-27-slim-plugin` Docker image to reduce plugin size and to support SSL Verify
+* 2.0.3 - Fix issue where SSL Verify was not used in actions that utilize requests | Updated test method and moved it to connection
+* 2.0.2 - Fix issue where SSL Verify was not used in the connection
+* 2.0.1 - Update descriptions
+* 2.0.0 - Update to new credential types
+* 1.0.0 - Custom Field support added to Create Case action | Support web server mode
+* 0.2.0 - Bug fix, add more input variables for Close Case action
+* 0.1.2 - Bug fix for constant "waiting" in Status field | Updated to v2 architecture
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [TheHive](https://thehive-project.org/)
 * [thehive4py](https://github.com/CERT-BDF/TheHive4py)
 * [TheHive API](https://github.com/CERT-BDF/TheHiveDocs/tree/master/api)
+

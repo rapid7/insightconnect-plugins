@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Whois IP Lookup"
+    DESCRIPTION = "WHOIS IP Lookup"
 
 
 class Input:
@@ -158,8 +158,8 @@ class AddressOutput(komand.Output):
     },
     "update": {
       "type": "string",
-      "title": "Whois Updated Date",
-      "description": "Whois updated date",
+      "title": "WHOIS Updated Date",
+      "description": "WHOIS updated date",
       "order": 8
     }
   }

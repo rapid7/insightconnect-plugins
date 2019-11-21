@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Shuts down the droplet from a specified image"
+
+
 class Input:
     DROPLET_ID = "droplet_id"
     

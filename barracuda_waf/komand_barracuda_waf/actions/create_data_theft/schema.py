@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Adds a data theft element with the given values"
+
+
 class Input:
     ACTION = "action"
     CUSTOM_IDENTITY_THEFT_TYPE = "custom_identity_theft_type"
@@ -88,10 +92,10 @@ class CreateDataTheftInput(komand.Input):
     }
   },
   "required": [
-    "policy_id",
-    "name",
     "enabled",
-    "identity_theft_type"
+    "identity_theft_type",
+    "name",
+    "policy_id"
   ]
 }
     """)

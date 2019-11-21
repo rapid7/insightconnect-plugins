@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query the status of a file"
+
+
 class Input:
     FEATURES = "features"
     FILE_DIGEST = "file_digest"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get statistics organized by group"
+
+
 class Input:
     pass
 

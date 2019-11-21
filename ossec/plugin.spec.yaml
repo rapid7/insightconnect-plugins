@@ -1,19 +1,24 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: ossec
 title: OSSEC
-description: OSSEC is a free, open-source host-based intrusion detection system
-version: 1.0.0
+description: OSSEC is a free, open-source host-based intrusion detection system. Using the OSSEC plugin for InsightConnect, users can parse OSSEC alerts into JSON format
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ossec
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.ossec.net/
 tags:
 - ossec
 - hids
+hub_tags:
+  use_cases: [soar, data_utility, alert_enrichment, threat_detection_and_response, data_ingestion]
+  keywords: [ossec, hids]
+  features: []
 types:
   syscheck_alert:
     alert_id:
@@ -239,3 +244,4 @@ actions:
         type: alert_alert
         description: Alert
         required: true
+        

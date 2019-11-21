@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "add_member_to_team",
+        "input": {
+            "member_login": "jmcadams@komanddev.onmicrosoft.com",
+            "team_name": "Komand-Test-Everyone"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

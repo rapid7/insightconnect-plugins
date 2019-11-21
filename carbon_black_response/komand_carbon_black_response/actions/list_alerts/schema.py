@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List Carbon Black alerts with given parameters"
+
+
 class Input:
     QUERY = "query"
     ROWS = "rows"

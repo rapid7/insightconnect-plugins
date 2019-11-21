@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Provides a list of IP network ranges with WHOIS records that match a specific query"
+
+
 class Input:
     COUNTRY = "country"
     INCLUDE_TOTAL_COUNT = "include_total_count"

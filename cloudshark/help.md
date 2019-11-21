@@ -1,24 +1,45 @@
+# Description
 
-# Cloud Shark
+[CloudShark](https://www.cloudshark.org/) is an on-premises platform for packet analysis. 
+Users can upload and manage capture files using the CloudShark plugin for Rapid7 InsightConnect. Use CloudShark to
+assist with alert investigations, internal penetration testing, and more. 
 
-## About
+# Key Features
 
-[Cloudshark](https://www.cloudshark.org/) is a cloud packet analysis and sharing product based on tshark.
-This plugin implements most of the CloudShark API calls.
+* Capture file management
+* View capture file metadata
 
-## Actions
+# Requirements
 
-### Info
+* API Key
+
+# Documentation
+
+## Setup
+
+A CloudShark API token is required to authenticate to the API. The default domain is `https://www.cloudshark.org`.
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|API Key|None|
+
+## Technical Details
+
+### Actions
+
+#### Info
 
 This action is used to obtain metadata from a capture file by id.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |cid|string|None|True|Cloud Shark ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -50,11 +71,11 @@ This action is used to obtain metadata from a capture file by id.
 |public|boolean|False|None|
 |end_time|date|False|None|
 
-### Merge
+#### Merge
 
 This action is used merge multiple captures files by id into one larger capture file.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -63,35 +84,35 @@ This action is used merge multiple captures files by id into one larger capture 
 |tags|string|None|False|Comma-separated list of tags|None|
 |filename|string|None|False|Resulting filename|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|string|False|None|
 |filename|string|False|None|
 
-### Download
+#### Download
 
 This action is used to download a capture file by id.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |cid|string|None|True|Cloud Shark ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|integer|False|None|
 |capture_file|bytes|False|None|
 
-### Upload URL
+#### Upload URL
 
 This action is used upload a capture file by URL.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -100,7 +121,7 @@ This action is used upload a capture file by URL.
 |comments|string|None|False|File comments|None|
 |filename|string|None|False|Resulting filename|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -109,11 +130,11 @@ This action is used upload a capture file by URL.
 |id|string|False|Cloud Shark ID|
 |filename|string|False|Filename|
 
-### Upload
+#### Upload
 
 This action is used to upload capture file.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -122,7 +143,7 @@ This action is used to upload capture file.
 |comments|string|None|False|File comments|None|
 |filename|string|None|False|Resulting filename|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -131,17 +152,17 @@ This action is used to upload capture file.
 |id|string|False|Cloud Shark ID|
 |filename|string|False|Filename|
 
-### Delete
+#### Delete
 
 This action is used to delete capture file by id.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |cid|string|None|True|Cloud Shark ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -149,39 +170,31 @@ This action is used to delete capture file by id.
 |message|string|False|None|
 |id|string|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-A CloudShark API token is required to authenticate to the API. The default domain is `https://www.cloudshark.org`.
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API Key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 The API token provided in the CloudShark free trial doesn't contain sufficient privileges to utilize this plugin.
 For uploads, make sure that a supported [capture file format](https://wiki.wireshark.org/FileFormatReference) is passed as input.
 
-## Workflows
+# Version History
 
-Examples:
-
-* PCAP analysis
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [CloudShark](https://www.cloudshark.org/)
 * [CloudShark API](https://support.cloudshark.org/api/)
 * [Capture File Formats](https://wiki.wireshark.org/FileFormatReference)
+

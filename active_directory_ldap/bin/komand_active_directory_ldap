@@ -6,8 +6,8 @@ from komand_active_directory_ldap import connection, actions, triggers
 
 Name = 'Active Directory LDAP'
 Vendor = 'rapid7'
-Version = '3.2.5'
-Description = 'Active Directory LDAP'
+Version = '3.2.7'
+Description = 'This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network'
 
 
 class ICONActiveDirectoryLdap(komand.Plugin):

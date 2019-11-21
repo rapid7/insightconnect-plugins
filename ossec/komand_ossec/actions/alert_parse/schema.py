@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Parse OSSEC Alert alerts"
+
+
 class Input:
     ALERT = "alert"
     
@@ -120,13 +124,13 @@ class AlertParseOutput(komand.Output):
         }
       },
       "required": [
+        "alert_id",
+        "category",
         "level",
         "logs",
-        "category",
-        "timestamp",
         "rule_id",
         "rule_name",
-        "alert_id"
+        "timestamp"
       ]
     }
   }

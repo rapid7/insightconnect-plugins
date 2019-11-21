@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search fixed addresses by MAC address"
+
+
 class Input:
     MAC = "mac"
     

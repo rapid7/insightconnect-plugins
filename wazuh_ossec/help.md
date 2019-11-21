@@ -1,22 +1,43 @@
+# Description
 
-# Wazuh OSSEC
-
-## About
-
-[Wazuh](https://www.wazuh.com) is an open source project that provides security visibility, compliance and infrastructure monitoring capabilities.
+The Wazuh plugin will allow a user to manage their Wazuh deployment. [Wazuh](https://www.wazuh.com) is an open source project that provides security visibility, compliance and infrastructure monitoring capabilities.
 The project was born as a fork of OSSEC HIDS. This plugin utilizes the [Wazuh API](https://documentation.wazuh.com/current/user-manual/api/reference.html).
 
-## Actions
+# Key Features
 
-### Manager Logs Summary
+* Manage Wazuh agents
+* Investigate Wazuh logs
+
+# Requirements
+
+* An administrative username and password
+* The URL of your Wazuah deployment
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|Wazuh API URL e.g. https\://127.0.0.1\:55000|None|
+|username|string|None|True|Wazuh API Username|None|
+|password|string|None|True|Wazuh API Password|None|
+
+## Technical Details
+
+### Actions
+
+#### Manager Logs Summary
 
 This action is used to return a summary about the 3 last months of ossec.log.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -103,32 +124,32 @@ Example output:
 
 ```
 
-### Agent Restart
+#### Agent Restart
 
 This action is used to restart all agents, or a specified agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |agent_id|string|None|True|Agent ID e.g. 003. If no agent is specified, all agents will be restarted|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |message|string|True|Status message|
 |error|integer|True|None|
 
-### Manager Information
+#### Manager Information
 
 This action is used to return basic information about the manager.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -143,17 +164,17 @@ This action does not contain any inputs.
 |path|string|True|None|
 |type|string|True|None|
 
-### Manager Stats
+#### Manager Stats
 
 This action is used to returns OSSEC statistical information of current date.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |date|string|None|False|Selects the date for getting the statistical information. Format\: YYYYMMDD|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -224,11 +245,11 @@ Example output:
 
 ```
 
-### Syscheck Database
+#### Syscheck Database
 
 This action is used to return the syscheck files of an agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -244,7 +265,7 @@ This action is used to return the syscheck files of an agent.
 |event|string|None|False|Filters files by event|['All', 'Added', 'Readded', 'Modified', 'Deleted']|
 |md5|string|None|False|Returns the files with the specified MD5 hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -252,34 +273,34 @@ This action is used to return the syscheck files of an agent.
 |syscheck_events|[]rootcheck_events|True|None|
 |error|integer|True|None|
 
-### Agent Delete
+#### Agent Delete
 
 This action is used to removes an agent. You must restart OSSEC after removing an agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |agent_id|string|None|True|Agent ID e.g. 003|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |message|string|True|Status message|
 |error|integer|True|Error code|
 
-### Agent Info
+#### Agent Info
 
 This action is used to return the information of an agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |agent_id|string|None|True|Agent ID e.g. 003|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -294,32 +315,32 @@ This action is used to return the information of an agent.
 |os|string|True|None|
 |id|string|True|None|
 
-### Syscheck Delete
+#### Syscheck Delete
 
 This action is used to clear the syscheck database for all agents, or a specified agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |agent_id|string|None|False|Agent ID e.g. 003. If no agent is specified, the database will be cleared for all agents|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |message|string|True|Status message|
 |error|integer|True|Error code|
 
-### Manager Stats Hourly
+#### Manager Stats Hourly
 
 This action is used to return OSSEC statistical information per hour. Each item in averages field represents the average of alerts per hour.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -327,17 +348,17 @@ This action does not contain any inputs.
 |averages|[]integer|True|None|
 |error|integer|True|None|
 
-### Rootcheck Info
+#### Rootcheck Info
 
 This action is used to return the timestamp of the last rootcheck scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |agent_id|string|None|True|Agent ID e.g. 003|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -345,34 +366,34 @@ This action is used to return the timestamp of the last rootcheck scan.
 |rootcheckTime|string|True|None|
 |error|integer|True|Error code|
 
-### Agent Key
+#### Agent Key
 
 This action is used to return the key of an agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |agent_id|string|None|True|Agent ID e.g. 003|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |key|string|True|None|
 |error|integer|True|None|
 
-### Syscheck Info
+#### Syscheck Info
 
 This action is used to return the timestamp of the last syscheck scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |agent_id|string|None|True|Agent ID e.g. 003|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -380,11 +401,11 @@ This action is used to return the timestamp of the last syscheck scan.
 |syscheckEndTime|string|True|None|
 |error|integer|True|Error code|
 
-### Rootcheck Database
+#### Rootcheck Database
 
 This action is used to return the rootcheck database of an agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -396,7 +417,7 @@ This action is used to return the rootcheck database of an agent.
 |agent_id|string|None|True|Agent ID e.g. 003|None|
 |offset|integer|None|False|First element to return in the collection|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -404,32 +425,32 @@ This action is used to return the rootcheck database of an agent.
 |rootcheck_events|[]rootcheck_events|True|None|
 |error|integer|True|None|
 
-### Rootcheck Delete
+#### Rootcheck Delete
 
 This action is used to clear the rootcheck database for all agents, or a specified agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |agent_id|string|None|False|Agent ID e.g. 003. If no agent is specified, the database will be cleared for all agents|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |message|string|True|Status message|
 |error|integer|True|Error code|
 
-### Manager Status
+#### Manager Status
 
 This action is used to return the manager processes that are running.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -444,11 +465,11 @@ This action does not contain any inputs.
 |ossec-analysisd|string|True|None|
 |ossec-maild|string|True|None|
 
-### Manager Logs
+#### Manager Logs
 
 This action is used to return the 3 last months of ossec.log.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -459,7 +480,7 @@ This action is used to return the 3 last months of ossec.log.
 |limit|integer|None|False|Maximum number of elements to return|None|
 |offset|integer|None|False|First element to return in the collection|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -467,15 +488,15 @@ This action is used to return the 3 last months of ossec.log.
 |logs|[]string|True|None|
 |error|integer|True|None|
 
-### Agent Summary
+#### Agent Summary
 
 This action is used to return a summary of the available agents.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -485,11 +506,11 @@ This action does not contain any inputs.
 |Disconnected|integer|True|Disconnected agents|
 |error|integer|True|None|
 
-### Agents List
+#### Agents List
 
 This action is used to return a list with the available agents.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -499,7 +520,7 @@ This action is used to return a list with the available agents.
 |limit|integer|None|False|Maximum number of elements to return|None|
 |offset|integer|None|False|First element to return in the collection|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -532,11 +553,11 @@ Example output:
 
 ```
 
-### Agent Add
+#### Agent Add
 
 This action is used to add a new agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -544,60 +565,53 @@ This action is used to add a new agent.
 |force|string|None|False|Remove old agent with same IP if disconnected since force seconds|None|
 |name|string|None|True|Agent name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|string|True|Agent ID|
 |error|integer|True|Error code|
 
-### Agent Scan
+#### Agent Scan
 
 This action is used to run syscheck and rootcheck on all agents, or a specified agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |agent_id|string|None|False|Agent ID e.g. 003. If no agent is specified, scans will take place on all agents|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |message|string|True|Status message|
 |error|integer|True|Error code|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|Wazuh API URL e.g. https\://127.0.0.1\:55000|None|
-|username|string|None|True|Wazuh API Username|None|
-|password|string|None|True|Wazuh API Password|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-* Agent management
-* Alert enrichment
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Wazuh](https://wazuh.com)
 * [Wazuh API](https://documentation.wazuh.com/current/user-manual/api/reference.html)
+

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "DNS A record IP address for host name"
+
+
 class Input:
     HOSTNAME = "hostname"
     

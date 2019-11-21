@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='google_directory-rapid7-plugin',
-      version='2.0.0',
-      description='Uses the Google Directory Admin API to manage mobile and Chrome OS devices, groups, group aliases, members, organization units, users, and user aliases',
+      version='2.0.1',
+      description='Uses the Google Directory plugin to manage members, users, and user aliases',
       author='rapid7',
       author_email='',
       url='',

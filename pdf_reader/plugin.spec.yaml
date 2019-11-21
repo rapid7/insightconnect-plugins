@@ -1,20 +1,24 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: pdf_reader
 title: PDF Reader
 description: Tools for extracting text from a PDF
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/pdf_reader
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - PDF
 - Reader
 - Extract
+hub_tags:
+  use_cases: [soar, data_utility, data_ingestion]
+  keywords: [PDF, Reader, Extract]
+  features: []
 actions:
   extract_text:
     title: Extract Text

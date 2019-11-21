@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new domain"
+
+
 class Input:
     DOMAIN = "domain"
     PARAMS = "params"

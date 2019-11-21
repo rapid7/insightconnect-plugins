@@ -4,10 +4,10 @@ import komand
 from komand_whois import connection, actions, triggers
 
 
-Name = 'Whois'
+Name = 'WHOIS'
 Vendor = 'rapid7'
-Version = '1.0.4'
-Description = 'Whois Lookups'
+Version = '1.0.6'
+Description = 'The WHOIS plugin enables address and domain lookups in the WHOIS databases'
 
 
 class ICONWhois(komand.Plugin):

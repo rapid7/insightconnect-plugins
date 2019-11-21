@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search for a user"
+
+
 class Input:
     SEARCH_PARAMETERS = "search_parameters"
     

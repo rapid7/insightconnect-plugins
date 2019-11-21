@@ -1,19 +1,41 @@
-
-# OTRS
-
-## About
+# Description
 
 [OTRS](https://github.com/OTRS/otrs) is the Open Source Ticket Request System.
 
 This plugin utilizes the [OTRS Python library](https://pyotrs.readthedocs.io/en/latest/).
 
-## Actions
+# Key Features
 
-### Ticket Search
+* Create tickets
+* Manage tickets
+
+# Requirements
+
+* OTRS web server
+* Update `FrameworkVersion` to the version of OTRS you're using, and import it to OTRS's web server
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_username_password|None|True|OTRS username and password|None|
+|server|string|None|True|OTRS Server|None|
+
+To create a REST web service please save a copy [GenericTicketConnectorREST.yml](https://gitlab.com/rhab/PyOTRS/raw/master/webservices_templates/GenericTicketConnectorREST.yml)
+
+## Technical Details
+
+### Actions
+
+#### Ticket Search
 
 This action is used to search for OTRS tickets.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -22,7 +44,7 @@ This action is used to search for OTRS tickets.
 |queue|string|None|False|Queue to search in|None|
 |dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name"\:"TestName1","pattern"\:"TestValue1", "operation"\:"Equals"},{"name"\:"TestName2","pattern"\:"TestValue2"}]. The value field is what will be searched for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -43,17 +65,17 @@ Example output:
 
 ```
 
-### Retrieve Ticket
+#### Retrieve Ticket
 
 This action is used to retrieve OTRS ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ticket_id|integer|None|False|Ticket ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -281,11 +303,11 @@ Example output:
 
 ```
 
-### Create Ticket
+#### Create Ticket
 
 This action is used to create OTRS ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -305,7 +327,7 @@ This action is used to create OTRS ticket.
 |dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name"\:"TestName1","value"\:"TestValue1"},{"name"\:"TestName2","value"\:"TestValue2"}]|None|
 |attachments|[]attachment|None|False|Attachments as array of objects e.g. [{"filename"\:"notes.txt","content"\:"VGhpcyBpcyBhIHRlc3QK"}]|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -323,11 +345,11 @@ Exmple output:
 
 ```
 
-### Update Ticket
+#### Update Ticket
 
 This action is used to update an OTRS ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -346,7 +368,7 @@ This action is used to update an OTRS ticket.
 |DynamicFields|[]dynamic_field|None|False|Updated dynamic fields e.g. [{"name"\:"TestName1","value"\:"TestValue1"},{"name"\:"TestName2","value"\:"TestValue2"}]|None|
 |Attachments|[]attachment|None|False|New attachments as array of objects e.g. [{"filename"\:"notes.txt","content"\:"VGhpcyBpcyBhIHRlc3QK"}]|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -364,44 +386,36 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|OTRS username and password|None|
-|server|string|None|True|OTRS Server|None|
-
-To create a REST web service please save a copy [GenericTicketConnectorREST.yml](https://gitlab.com/rhab/PyOTRS/raw/master/webservices_templates/GenericTicketConnectorREST.yml), updated the `FrameworkVersion` to the version of OTRS you're using and import it to OTRS's web server.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
-## Workflows
+# Version History
 
-* Ticketing
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 0.1.2 - Update to v2 Python plugin architecture | Fix bug with schema, spec, and retrieve action
-* 1.0.0 - Bug fix for creating and updating article fields
-* 2.0.0 - Support web server mode | Update to new credential types | Bug fix for creating article and ticket fields
-* 3.0.0 - Update all actions | Moved OTRS web service to REST | Added support for pending time to actions Create and Update
-* 3.0.1 - Bug fix for dynamic fields missing values | Update web service to KomandConnectorREST
-* 3.0.2 - Fixed retrieve action to process dynamic fields containing multiselect values
-* 3.0.3 - Fixed issue where FilesizeRaw schema is returning a string when it needs to return an integer for Retrieve action
-* 3.0.4 - Fixed issue where SLA and Service would be set if passed as a parameter for the action Create
-* 3.0.5 - Update dependency to PyOTRS v2.1 for security bug [CWE-601](https://cwe.mitre.org/data/definitions/601.html)
-* 4.0.0 - Updated the Web Service configuration file | Update dependency on PyOTRS | Fixed issue where Article and Attachment was required to update a ticket in action `update` | Added an External Parameters field to action `search` | Fixed issue with action `search` where dynamic fields were not used correctly for searching | Fixed issue where Escalation parameters where not set to the right type
+* 4.0.2 - New spec and help.md format for the Hub
 * 4.0.1 - Fix issue in Retrieve action to handle Escalation parameters being returned as strings | Adds new parameter No Article to update, this will submit updates to a ticket without adding a generated article
+* 4.0.0 - Updated the Web Service configuration file | Update dependency on PyOTRS | Fixed issue where Article and Attachment was required to update a ticket in action `update` | Added an External Parameters field to action `search` | Fixed issue with action `search` where dynamic fields were not used correctly for searching | Fixed issue where Escalation parameters where not set to the right type
+* 3.0.5 - Update dependency to PyOTRS v2.1 for security bug [CWE-601](https://cwe.mitre.org/data/definitions/601.html)
+* 3.0.4 - Fixed issue where SLA and Service would be set if passed as a parameter for the action Create
+* 3.0.3 - Fixed issue where FilesizeRaw schema is returning a string when it needs to return an integer for Retrieve action
+* 3.0.2 - Fixed retrieve action to process dynamic fields containing multiselect values
+* 3.0.1 - Bug fix for dynamic fields missing values | Update web service to KomandConnectorREST
+* 3.0.0 - Update all actions | Moved OTRS web service to REST | Added support for pending time to actions Create and Update
+* 2.0.0 - Support web server mode | Update to new credential types | Bug fix for creating article and ticket fields
+* 1.0.0 - Bug fix for creating and updating article fields
+* 0.1.2 - Update to v2 Python plugin architecture | Fix bug with schema, spec, and retrieve action
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 

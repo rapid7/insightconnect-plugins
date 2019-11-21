@@ -1,0 +1,19 @@
+{
+	"spec": "42ec70dc5dd0cd250b24e3394f518133",
+	"manifest": "a16c43d9dd146f89a523d981a8894eb4",
+	"setup": "12c049dfd5146a15bc12d7e7cd31944d",
+	"schemas": [
+		{
+			"identifier": "get_file/schema.py",
+			"hash": "8a7d2efdb60e2774933ec9bec2ba5955"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "cb60c2b5b62fafb9634d667a8ad96277"
+		},
+		{
+			"identifier": "poll_file/schema.py",
+			"hash": "a121e297759770fdfd6a9597c1b724fa"
+		}
+	]
+}

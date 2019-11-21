@@ -6,8 +6,8 @@ from komand_ftp import connection, actions, triggers
 
 Name = 'FTP'
 Vendor = 'rapid7'
-Version = '2.0.0'
-Description = 'Upload and download files using the File Transfer Protocol'
+Version = '2.0.1'
+Description = 'This plugin can upload, download and delete files between a client and server on a computer network using the File Transfer Protocol'
 
 
 class ICONFtp(komand.Plugin):

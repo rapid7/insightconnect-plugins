@@ -1,5 +1,7 @@
 import komand
 import base64
+
+from komand.exceptions import PluginException
 import pypandoc
 import os
 import re
@@ -20,12 +22,12 @@ class Pdf(komand.Action):
     tags = re.findall(tag_parser, params.get('doc'))
     try:
         if not len(tags):
-            raise Exception('Run: Input Invalid, Input must be of type HTML')
+            raise PluginException(cause='Run: Invalid input.',
+                                  assistance='Input must be of type HTML.')
         pypandoc.convert(params.get('doc'), 'pdf', outputfile=temp_file, format='html')
         with open(temp_file, 'rb') as output:
             #Reading the output and sending it in base64
             return {'pdf': base64.b64encode(output.read()).decode('utf-8')}
-        os.remove(temp_file)
     except:
         return {'error': 'Error occured please try again'}
 

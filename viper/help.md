@@ -1,18 +1,41 @@
-# Viper
+# Description
 
-## About
-
-[Viper](https://viper.li/en/latest/) is a binary analysis and management framework. Viper's fundamental objective is to provide a solution to easily organize your collection of malware and exploit samples as well as your collection of scripts you created, or found over time to facilitate your daily research. Think of it as a Metasploit for malware researchers: it provides a terminal interface that you can use to store, search and analyze arbitrary files.
+[Viper](https://viper.li/en/latest/) is a binary analysis and management framework. Viper's fundamental objective is to provide a solution to easily organize your collection of malware and exploit samples as well as your collection of scripts you created, or found over time to facilitate your daily research. Think of it as a Metasploit for malware researchers.
+The Viper plugins allows you to use Viper's platform to store, search, and analyze files. 
 
 This plugin utilizes the [Viper API](https://viper.li/en/latest/usage/web.html#api)
 
-## Actions
+# Key Features
 
-### Create Note
+* Analyze a file 
+* Share malicious files
+* Create and manage projects
+
+# Requirements
+
+* Viper token
+* Viper server URL
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|token|credential_secret_key|None|True|Token to authenticate to Viper API|None|
+|url|string|None|True|API URL to Viper server e.g. http://example.com:8080/api/v3/|None|
+
+## Technical Details
+
+### Actions
+
+#### Create Note
 
 This action is used to create a note for malware.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -21,7 +44,7 @@ This action is used to create a note for malware.
 |project_name|string|None|True|Project name|None|
 |title|string|None|True|Note title|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -41,17 +64,17 @@ Example output:
 }
 ```
 
-### Create New Project
+#### Create New Project
 
 This action is used to create a new project with a given name.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|True|New project|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -67,11 +90,11 @@ Example output:
 }
 ```
 
-### Delete Analysis
+#### Delete Analysis
 
 This action is used to delete an analysis by ID and malware SHA256 hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -79,22 +102,22 @@ This action is used to delete an analysis by ID and malware SHA256 hash.
 |malware_sha256|string|None|True|Malware SHA256 hash|None|
 |project_name|string|None|True|Project name|None|
 
-### Delete Malware
+#### Delete Malware
 
 This action is used to delete malware by SHA256 hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |project_name|string|None|True|Project name|None|
 |sha256|string|None|True|Malware SHA256|None|
 
-### Delete Note
+#### Delete Note
 
 This action is used to delete a note by ID and malware SHA256 hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -102,22 +125,22 @@ This action is used to delete a note by ID and malware SHA256 hash.
 |malware_sha256|string|None|True|Malware SHA256|None|
 |project_name|string|None|True|Project name|None|
 
-### Delete Tag
+#### Delete Tag
 
 This action is used to delete a tag by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Tag ID|None|
 |project_name|string|None|True|Project name|None|
 
-### Download Malware
+#### Download Malware
 
 This action is used to download a malware instance as a raw file.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -126,7 +149,7 @@ This action is used to download a malware instance as a raw file.
 |password|password|None|False|Password|None|
 |project_name|string|None|True|Project name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -145,18 +168,18 @@ Example output:
 }
 ```
 
-### Project Analysis
+#### Project Analysis
 
 This action is used to get a single analysis for this project.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Analysis ID|None|
 |project_name|string|None|True|Project name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -177,18 +200,18 @@ Example output:
 }
 ```
 
-### Project Malware
+#### Project Malware
 
 This action is used to get a single malware for this project.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |project_name|string|None|True|Project name|None|
 |sha256|string|None|True|SHA256 hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -216,18 +239,18 @@ Example output:
 }
 ```
 
-### Project Note
+#### Project Note
 
 This action is used to get a single note for this project.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Note ID|None|
 |project_name|string|None|True|Project name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -247,17 +270,17 @@ Example output:
 }
 ```
 
-### Project by Name
+#### Project by Name
 
 This action gets a single project by a given name.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|True|Project name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -273,18 +296,18 @@ Example output:
 }
 ```
 
-### Project Tag
+#### Project Tag
 
 This action is used to get a single tag for this project.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|None|None|
 |project_name|string|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -302,17 +325,17 @@ Example output:
 }
 ```
 
-### Project Analyses
+#### Project Analyses
 
 This action is used to list analyses for this project.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |project_name|string|None|True|Project name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -343,11 +366,11 @@ Example output:
 }
 ```
 
-### Available Compressors
+#### Available Compressors
 
 This action is used to list available archive compressors.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -378,11 +401,11 @@ Example output:
 }
 ```
 
-### Available Extractors
+#### Available Extractors
 
 This action is used to list available archive extractors.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -447,11 +470,11 @@ Example output:
 }
 ```
 
-### Available Modules
+#### Available Modules
 
 This action is used to list available modules.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -478,11 +501,11 @@ Example output:
 }
 ```
 
-### Existing Projects
+#### Existing Projects
 
 This action is used to list existing projects.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -503,17 +526,17 @@ Example output:
 }
 ```
 
-### Malwares
+#### Malwares
 
 This action is used to list malware for this project.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |project_name|string|None|True|Project name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -543,17 +566,17 @@ Example output:
 }
 ```
 
-### Project Notes
+#### Project Notes
 
 This action is used to list notes for this project.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |project_name|string|None|True|Project name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -575,17 +598,17 @@ Example output:
 }
 ```
 
-### Project Tags
+#### Project Tags
 
 This action is used to list tags for this project.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |project_name|string|None|True|Project name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -605,11 +628,11 @@ Example output:
 }
 ```
 
-### Update Note
+#### Update Note
 
 This action is used to update a note for malware.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -619,7 +642,7 @@ This action is used to update a note for malware.
 |project_name|string|None|True|Project name|None|
 |title|string|None|True|Note title|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -639,11 +662,11 @@ Example output:
 }
 ```
 
-### Upload File
+#### Upload File
 
 This action is used to upload a file and create new malware.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -657,7 +680,7 @@ This action is used to upload a file and create new malware.
 |store_archive|boolean|None|False|Store archive, true or false|None|
 |tags|[]string|None|False|Tags|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -687,107 +710,30 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|token|credential_secret_key|None|True|Token to authenticate to Viper API|None|
-|url|string|None|True|API URL to Viper server e.g. http://example.com:8080/api/v3/|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
-## Workflows
+# Version History
 
-Examples:
-
-* Binary analysis
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - Update plugin to use the Viper v3 API
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Viper](https://viper.li/en/latest/)
 * [Viper API](https://viper.li/en/latest/usage/web.html#api)
 
-## Custom Output Types
-
-### Archive
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|cls_name|string|True|Compressor class name|
-|extensions|[]string|True|Which extension are connected to archive?|
-|password|boolean|True|Is password required on archive?|
-|title|string|True|Title of compressed file|
-
-### Module
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|description|string|False|Description of module|
-|name|string|False|Title of module|
-
-### Project
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|name|string|False|Project name|
-
-### Analysis
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|cmd_line|string|False|Command for running analysis|
-|id|integer|False|ID of analysis|
-|results|string|False|Result of analysis|
-|stored_at|string|False|Datetime when analysis was created|
-
-### Note
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|body|string|False|Note description|
-|id|integer|False|Note ID|
-|title|string|False|Note title|
-
-### Tag
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|integer|False|Tag ID|
-|tag|string|False|Tag name|
-
-### Malware
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|analysis_set|[]Analysis|False|Analysis connected with malware|
-|crc32|string|False|CRC32 hash|
-|created_at|string|False|Date when the file was created|
-|id|integer|False|Malware ID|
-|md5|string|False|MD5 hash|
-|mime|string|False|MIME type|
-|name|string|False|Malware name|
-|note_set|[]Note|False|Notes added to malware|
-|parent|string|False|Parent file name|
-|parent_id|string|False|ID of parent file|
-|sha1|string|False|SHA1 hash|
-|sha256|string|False|SHA256 hash|
-|sha512|string|False|SHA512 hash|
-|size|integer|False|Size of malware file in bytes|
-|ssdeep|string|False|Ssdeep|
-|tag_set|[]Tag|False|Tags added to malware|
-|type|string|False|Malware type|

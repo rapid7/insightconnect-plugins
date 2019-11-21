@@ -1,27 +1,46 @@
-
-# Okta
-
-## About
+# Description
 
 [Okta](https://www.okta.com/) is a SSO and account lifecycle management provider that allows companies
 to integrate their central user account system with a wide variety of other.
 applications and services.
 
-## Actions
+# Key Features
 
-### Suspend User
+* Single Sign On User management
+
+# Requirements
+
+* API Key
+* Okta server
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|okta_url|string|None|True|Okta Domain e.g. dev-114295-admin.oktapreview.com|None|
+|okta_key|credential_secret_key|None|True|Okta key|None|
+
+## Technical Details
+
+### Actions
+
+#### Suspend User
 
 This action can be used to suspend a user from the Okta system. The user will retain
 membership and permissions as currently configured, but be unable to access the system
 as a whole.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|The email of the employee to suspend|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -47,17 +66,17 @@ When the user is not found, the action returns:
 }
 ```
 
-### Reset Factors
+#### Reset Factors
 
 This action is used to reset all multifactors for a user by email.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|The email of the employee to reset factors|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -83,7 +102,7 @@ When the user is not found or the user has no enrolled factors:
 }
 ```
 
-### Deactivate User
+#### Deactivate User
 
 This action can be used to deactivate / deprovision a user from the Okta system. In addition
 to losing the ability to log in, the user will be removed from all configured applications
@@ -91,13 +110,13 @@ and lose all configured settings. This is a non-reversible, destructive operatio
 action is also considered asynchronous by the Okta API, meaning there is some delay between
 the API returning a successful result and the actual deactivation / deprovisioning of a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|The email of the employee to deactivate|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -123,18 +142,18 @@ When the user is not found, the action returns:
 }
 ```
 
-### Delete User
+#### Delete User
 
 This action is used to delete a user. If a user is not deprovisioned, this will deprovision a user, a second delete will be needed to remove the user. Warning: This action annot be recovered from.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |send_admin_email|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false.|None|
 |user_email|string|None|True|The Email of the employee to delete|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -148,17 +167,17 @@ Example output:
 }
 ```
 
-### Unsuspend User
+#### Unsuspend User
 
 This action is used to unsuspend a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|The email of the Okta user|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -184,17 +203,17 @@ When the user is not found, the action returns:
 }
 ```
 
-### Get User
+#### Get User
 
 This action is used to obtain information about a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|The email of the user to obtain information about|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -291,18 +310,18 @@ When the user is not found, the action returns:
 }
 ```
 
-### Remove User from Group
+#### Remove User from Group
 
 This action is used to remove a user from an existing group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group_id|string|None|True|The ID of the group to which the user should be added|None|
 |email|string|None|True|The email of the Okta user|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -318,18 +337,18 @@ Example output:
 }
 ```
 
-### Add User to Group
+#### Add User to Group
 
 This action is used to add a user to an existing group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group_id|string|None|True|The ID of the group to which the user should be added|None|
 |email|string|None|True|The email of the Okta user|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -345,17 +364,17 @@ Example output:
 }
 ```
 
-### List Groups
+#### List Groups
 
 This action is used to list available groups.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|False|Query to list groups, otherwise all groups will be returned|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -413,11 +432,11 @@ When no groups are found, the action returns:
 }
 ```
 
-### Assign User to Application for Provisioning
+#### Assign User to Application for Provisioning
 
 This action is used to assign a user to an application for SSO and provisioning.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -445,7 +464,7 @@ Example input:
 }
 ```
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -456,11 +475,11 @@ Example output:
 ```
 ```
 
-### Create User
+#### Create User
 
 This action is used to create a new user.
 
-#### Input
+##### Input
 
 The profile object is a required input and is defined by Okta as [profile properties for a user](https://developer.okta.com/docs/api/resources/users#profile-object).
 e.g.: `{ "firstName": "Isaac", "lastName": "Brock", "email": "isaac.brock@example.com", "login": "isaac.brock@example.com", "mobilePhone": "555-415-1337" }`
@@ -477,7 +496,7 @@ This action will attempt to prevent that be removing the entire input if it dete
 |credentials|credentials_input|None|False|Credentials for user|None|
 |nextLogin|boolean|None|True|Change password next time the user logs in|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -533,18 +552,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|okta_url|string|None|True|Okta Domain e.g. dev-114295-admin.oktapreview.com|None|
-|okta_key|credential_secret_key|None|True|Okta key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -553,24 +567,24 @@ They will return a best-effort message indicating why the Okta API responded the
 did when possible. Depending on the API endpoint, this message is either provided
 by Okta themselves, or constructed by the plugin based on the information it has at hand.
 
-## Workflows
+# Version History
 
-* [Temporary Deprovision of User Accounts from Slack](https://market.komand.com/workflows/jschipp/temporary-deprovision-of-user-accounts-from-slack/0.1.0)
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
-* 1.1.0 - Added new Get User, Unsuspend User, Add User to Group, and List Groups actions
-* 2.0.0 - Update to new secret key credential type
-* 2.1.0 - Improved connection code | New action Create User
-* 3.0.0 - Rename "Remove User to Group" action to "Remove User from Group"
-* 3.1.0 - New action Reset Factors
-* 3.1.1 - Update descriptions
-* 3.1.2 - Update connection test
+* 3.2.1 - New spec and help.md format for the Hub
 * 3.2.0 - New action Delete User
+* 3.1.2 - Update connection test
+* 3.1.1 - Update descriptions
+* 3.1.0 - New action Reset Factors
+* 3.0.0 - Rename "Remove User to Group" action to "Remove User from Group"
+* 2.1.0 - Improved connection code | New action Create User
+* 2.0.0 - Update to new secret key credential type
+* 1.1.0 - Added new Get User, Unsuspend User, Add User to Group, and List Groups actions
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Okta API Spec](http://developer.okta.com/docs/api/resources)
+

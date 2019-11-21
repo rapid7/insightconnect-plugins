@@ -1,26 +1,40 @@
-
-# Whois
-
-## About
+# Description
 
 [WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying databases that store the registered users
 or assignees of an Internet resource, such as a domain name, an IP address block, or an autonomous system, but is also used for a wider range of other information.
 
-This plugin uses the Linux Whois client to make requests.
+The WHOIS plugin enables address and domain lookups in the WHOIS databases.
 
-## Actions
+# Key Features
 
-### Domain Lookup
+* Query for an address
+* Query for a URL
+
+# Requirements
+
+* _This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Domain Lookup
 
 This action is used to retrieve data about a domain name.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain name to lookup|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -63,17 +77,17 @@ Example output:
 
 ```
 
-### Address Lookup
+#### Address Lookup
 
 This action is used to retrieve data about an IP address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|IP to Lookup|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -121,42 +135,42 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Multiple records can be returned by the server, this plugin currently only returns the first unique records found.
 
-## Workflows
-
-Examples:
-
-* [Basic Domain Enrichment](https://market.komand.com/snippets/jschipp/basic-domain-enrichment-report/0.1.0)
-* [Chatops Domain and IP Investigation](https://market.komand.com/workflows/komand/chatops-investigate/0.1.0)
-* Address validation
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - Bugfixes and pagination support
-* 0.2.0 - Fix domain query and adjust output
-* 0.2.1 - SSL bug fix in SDK
-* 0.3.0 - Support for more TLDs
-* 0.3.1 - Update to v2 Python plugin architecture
-* 0.3.2 - Added new date formats
-* 0.3.3 - Bug fix for CI tool incorrectly uploading plugins
-* 1.0.0 - Support web server mode
-* 1.0.1 - Add support for LACNIC, APNIC, RIPE registries
-* 1.0.2 - Fix typo in plugin spec
-* 1.0.3 - Handle instances where domain name is prefixed with a protocol
-* 1.0.4 - Fix variable name in domain lookup
+# Links
 
 ## References
 
-* [Whois](https://en.wikipedia.org/wiki/WHOIS)
+_This plugin has no references._
+
+# Version History
+
+* 1.0.6 - New spec and help.md format for the Hub
+* 1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK
+* 1.0.4 - Fix variable name in domain lookup
+* 1.0.3 - Handle instances where domain name is prefixed with a protocol
+* 1.0.2 - Fix typo in plugin spec
+* 1.0.1 - Add support for LACNIC, APNIC, RIPE registries
+* 1.0.0 - Support web server mode
+* 0.3.3 - Bug fix for CI tool incorrectly uploading plugins
+* 0.3.2 - Added new date formats
+* 0.3.1 - Update to v2 Python plugin architecture
+* 0.3.0 - Support for more TLDs
+* 0.2.1 - SSL bug fix in SDK
+* 0.2.0 - Fix domain query and adjust output
+* 0.1.1 - Bugfixes and pagination support
+* 0.1.0 - Initial plugin
+
+## References
+
+* [WHOIS](https://en.wikipedia.org/wiki/WHOIS)

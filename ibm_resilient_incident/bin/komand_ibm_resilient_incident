@@ -4,9 +4,9 @@ import komand
 from komand_ibm_resilient_incident import connection, actions, triggers
 
 
-Name = 'Resilient Incident'
+Name = 'IBM Resilient Incident'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'The Resilient Incident Response Platform (IRP) is a leading platform for orchestrating and automating incident response processes'
 
 

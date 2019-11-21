@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a container within the specified logset for InsightOps service"
+
+
 class Input:
     ID = "id"
     LE_AGENT_FILENAME = "le_agent_filename"

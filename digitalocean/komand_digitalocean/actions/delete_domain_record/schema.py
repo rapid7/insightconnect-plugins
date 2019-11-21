@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes a domain record from the domain name"
+
+
 class Input:
     DOMAIN_NAME = "domain_name"
     RECORD_ID = "record_id"

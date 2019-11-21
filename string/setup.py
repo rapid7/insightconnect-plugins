@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='string-rapid7-plugin',
-      version='1.1.0',
-      description='Provides common programmatic string operations',
+      version='1.2.1',
+      description='The String plugin provides common programmatic string operations',
       author='rapid7',
       author_email='',
       url='',

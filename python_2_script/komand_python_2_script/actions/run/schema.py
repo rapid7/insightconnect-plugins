@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run Python function"
+
+
 class Input:
     FUNCTION = "function"
     INPUT = "input"

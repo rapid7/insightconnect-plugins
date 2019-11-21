@@ -1,23 +1,27 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: whois
-title: Whois
-description: Whois Lookups
-version: 1.0.4
+title: WHOIS
+description: The WHOIS plugin enables address and domain lookups in the WHOIS databases
+version: 1.0.6
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/whois
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - whois
 - ip lookup
+hub_tags:
+  use_cases: [soar, threat_intel, investigations, soc_automation]
+  keywords: [whois, ip lookup]
+  features: []
 actions:
   domain:
     title: Domain Lookup
-    description: Whois Domain Lookup
+    description: WHOIS Domain Lookup
     input:
       domain:
         title: Domain
@@ -71,8 +75,8 @@ actions:
         type: string
         required: false
       registrar_whois_server:
-        title: Registrar Whois Server
-        description: Registrar Whois server
+        title: Registrar WHOIS Server
+        description: Registrar WHOIS server
         type: string
         required: false
       registrar_url:
@@ -107,7 +111,7 @@ actions:
         required: false
   address:
     title: Address Lookup
-    description: Whois IP Lookup
+    description: WHOIS IP Lookup
     input:
       address:
         title: Address
@@ -151,8 +155,8 @@ actions:
         type: string
         required: false
       update:
-        title: Whois Updated Date
-        description: Whois updated date
+        title: WHOIS Updated Date
+        description: WHOIS updated date
         type: string
         required: false
       address:

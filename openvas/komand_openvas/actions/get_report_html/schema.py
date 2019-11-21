@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get the HTML version of the report for a particular scan"
+
+
 class Input:
     SCAN_ID = "scan_id"
     

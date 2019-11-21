@@ -6,8 +6,8 @@ from komand_box import connection, actions, triggers
 
 Name = 'Box'
 Vendor = 'rapid7'
-Version = '2.2.1'
-Description = 'Box gives you access to secure content management and content experience features of the Box Enterprise API'
+Version = '2.2.2'
+Description = 'Manage Box users and files'
 
 
 class ICONBox(komand.Plugin):

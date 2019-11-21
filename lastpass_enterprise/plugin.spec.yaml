@@ -1,20 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: lastpass_enterprise
 title: LastPass Enterprise
 vendor: rapid7
 support: community
 status: []
 description: A tool for conveniently and securely managing passwords
-version: 1.0.1
+version: 1.0.2
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/lastpass_enterprise
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.lastpass.com/enterprise
 tags:
 - lastpass
 - password
 - vault
+hub_tags:
+  use_cases: [soar, user_management]
+  keywords: [lastpass, password, vault]
+  features: []
 connection:
   account:
     title: Account

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Expand a shortened URL"
+
+
 class Input:
     FOLLOW = "follow"
     URL = "url"
@@ -33,8 +37,8 @@ class ExpandInput(komand.Input):
     }
   },
   "required": [
-    "url",
-    "follow"
+    "follow",
+    "url"
   ]
 }
     """)

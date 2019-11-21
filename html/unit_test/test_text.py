@@ -39,7 +39,8 @@ and they lived at the bottom of a well.</p>
 <p class="story">...</p>
 """
         params = {
-            'doc': test_text
+            'doc': test_text,
+            'remove_scripts': True
         }
 
         test_action = Text()

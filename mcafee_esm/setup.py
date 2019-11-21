@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='mcafee_esm-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='McAfee Enterprise Security Manager is a security information and event management (SIEM) solution that delivers actionable intelligence and integrations to prioritize, investigate, and respond to threats',
       author='rapid7',
       author_email='',

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List client information based on search"
+
+
 class Input:
     CLIENTS = "clients"
     GRR_BINARIES = "grr_binaries"

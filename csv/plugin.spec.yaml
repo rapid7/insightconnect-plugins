@@ -1,19 +1,24 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: csv
 title: CSV
-description: Comma Separated Values
-version: 1.1.3
+description: "CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to
+  extract fields from CSV strings and files"
+version: 1.1.4
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/csv
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - csv
 - utilities
+hub_tags:
+  use_cases: [soar, data_utility]
+  keywords: [csv, utilities]
+  features: []
 actions:
   filter_string:
     description: Keep fields from CSV string

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return merged results from freshness, last_query, sched_report, size_by_source"
+
+
 class Input:
     pass
 

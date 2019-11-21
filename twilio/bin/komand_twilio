@@ -6,8 +6,8 @@ from komand_twilio import connection, actions, triggers
 
 Name = 'Twilio'
 Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'Twilio integration'
+Version = '1.0.2'
+Description = 'Twilio is a cloud communications platform for building SMS, Voice & Messaging applications on an API built for global scale. Users can send SMS using the Twilio plugin for Rapid7 InsightConnect'
 
 
 class ICONTwilio(komand.Plugin):

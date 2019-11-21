@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query data and manage databases, retention policies, and users"
+
+
 class Input:
     CHUNKED = "chunked"
     DATABASE_NAME = "database_name"

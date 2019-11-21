@@ -1,24 +1,44 @@
+# Description
 
-# Shodan
+[Shodan](https://www.shodan.io/) is a search engine for internet-connected devices. 
+Using the Shodan plugin for Rapid7 InsightConnect, users can lookup hosts and run queries against their database in 
+real-time. Internal penetration tests and other security campaigns can be assisted and made more powerful with the
+help of Shodan.
 
-## About
+# Key Features
 
-[Shodan](https://www.shodan.io/) is a search engine for internet-connected devices.
-The Shodan plugin performs queries against Shodan's database.
+* Shodan database query
+* Host lookup
 
-## Actions
+# Requirements
 
-### Shodan Query
+* Shodan API token
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|token|credential_secret_key|None|True|API Token|None|
+
+## Technical Details
+
+### Actions
+
+#### Shodan Query
 
 This action is used to return information from a Shodan query (E.g. IPs, organizations, and total number of results).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|Shodan Search Query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -26,17 +46,17 @@ This action is used to return information from a Shodan query (E.g. IPs, organiz
 |total|integer|False|None|
 |org|[]string|False|None|
 
-### Host Information Lookup
+#### Host Information Lookup
 
 This action is used to provide information on a given IP address, including banners for the discovered services.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ip|string|None|True|Lookup Host IP for Discovered Services|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -50,35 +70,28 @@ This action is used to provide information on a given IP address, including bann
 |data|[]string|False|None|
 |ports|[]integer|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|token|credential_secret_key|None|True|API Token|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Host discovery
-* IP enrichment
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Shodan](https://www.shodan.io/)
+

@@ -1,0 +1,31 @@
+{
+	"spec": "367dd5649120ed3b865dc2122761c494",
+	"manifest": "b9acb2dd2cd971d30777ff544e81f22e",
+	"setup": "007bc41152cc515ad1faaba14e13ce6e",
+	"schemas": [
+		{
+			"identifier": "create_distribution_plot/schema.py",
+			"hash": "dccf2c10e8441f2cac80bdceedaff568"
+		},
+		{
+			"identifier": "create_joint_plot/schema.py",
+			"hash": "bb7c14a2201712df65cd6091cf5a30b2"
+		},
+		{
+			"identifier": "create_line_plot/schema.py",
+			"hash": "67bd90877c3e734c0e5b8c1b24e1b19d"
+		},
+		{
+			"identifier": "create_pair_plot/schema.py",
+			"hash": "323ac65a32fa52c00ea745878bb723a8"
+		},
+		{
+			"identifier": "create_scatter_plot/schema.py",
+			"hash": "c20368986d9ab23257d72e775e9e89ed"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "cb60c2b5b62fafb9634d667a8ad96277"
+		}
+	]
+}

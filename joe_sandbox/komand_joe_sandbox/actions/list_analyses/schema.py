@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch a list of all analyses"
+
+
 class Input:
     pass
 

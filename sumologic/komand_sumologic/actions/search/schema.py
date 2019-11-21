@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run a search"
+
+
 class Input:
     FROM_TIME = "from_time"
     PAGE_LIMIT = "page_limit"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete a scan"
+
+
 class Input:
     SCAN_ID = "scan_id"
     

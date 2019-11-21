@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns OSSEC statistical information of current date"
+
+
 class Input:
     DATE = "date"
     
@@ -55,8 +59,8 @@ class ManagerStatsOutput(komand.Output):
     }
   },
   "required": [
-    "stats",
-    "error"
+    "error",
+    "stats"
   ],
   "definitions": {
     "alerts": {

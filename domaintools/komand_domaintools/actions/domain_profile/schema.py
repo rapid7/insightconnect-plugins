@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Provides basic domain name registration details and a preview of additional data"
+
+
 class Input:
     DOMAIN = "domain"
     

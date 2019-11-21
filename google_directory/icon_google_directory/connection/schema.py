@@ -100,16 +100,16 @@ class ConnectionSchema(komand.Input):
   },
   "required": [
     "admin_user",
-    "project_id",
-    "private_key",
-    "client_email",
+    "auth_provider_x509_cert_url",
     "auth_uri",
-    "oauth_scope",
-    "private_key_id",
+    "client_email",
     "client_id",
     "client_x509_cert_url",
-    "token_uri",
-    "auth_provider_x509_cert_url"
+    "oauth_scope",
+    "private_key",
+    "private_key_id",
+    "project_id",
+    "token_uri"
   ],
   "definitions": {
     "credential_asymmetric_key": {

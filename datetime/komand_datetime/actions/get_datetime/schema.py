@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets the current Datetime in a specified format"
+
+
 class Input:
     FORMAT_STRING = "format_string"
     USE_RFC3339_FORMAT = "use_rfc3339_format"
@@ -34,8 +38,8 @@ class GetDatetimeInput(komand.Input):
     }
   },
   "required": [
-    "use_rfc3339_format",
-    "format_string"
+    "format_string",
+    "use_rfc3339_format"
   ]
 }
     """)
@@ -64,8 +68,8 @@ class GetDatetimeOutput(komand.Output):
     }
   },
   "required": [
-    "epoch_timestamp",
-    "datetime"
+    "datetime",
+    "epoch_timestamp"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add data to reference_data lists"
+
+
 class Input:
     ELEMENT_TYPE = "element_type"
     NAME = "name"

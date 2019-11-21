@@ -6,8 +6,8 @@ from komand_bluecoat_labs import connection, actions, triggers
 
 Name = 'Bluecoat Labs'
 Vendor = 'rapid7'
-Version = '2.0.0'
-Description = 'Provides hardware, software, and services designed for cybersecurity and network management'
+Version = '2.0.1'
+Description = 'The Bluecoat Labs plugins enables submissions of suspicous URLs to be reviewed by Bluecoat Labs'
 
 
 class ICONBluecoatLabs(komand.Plugin):

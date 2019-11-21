@@ -1,0 +1,15 @@
+{
+	"spec": "66df9fa6fe699df8d77740e28a7984a4",
+	"manifest": "86de09ce4c4e272f4b0afc3a7951ceac",
+	"setup": "3d9ee66920df87641f79ca8d9f29759d",
+	"schemas": [
+		{
+			"identifier": "run/schema.py",
+			"hash": "7e466856f2d337f10dafd23f24abdc9a"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "cb60c2b5b62fafb9634d667a8ad96277"
+		}
+	]
+}

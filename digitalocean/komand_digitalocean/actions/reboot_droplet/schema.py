@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Reboots the droplet"
+
+
 class Input:
     DROPLET_ID = "droplet_id"
     

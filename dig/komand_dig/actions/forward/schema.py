@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Forward DNS Query"
+
+
 class Input:
     DOMAIN = "domain"
     QUERY = "query"
@@ -55,8 +59,8 @@ class ForwardInput(komand.Input):
     }
   },
   "required": [
-    "query",
-    "domain"
+    "domain",
+    "query"
   ]
 }
     """)

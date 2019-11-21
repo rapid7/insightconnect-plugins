@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new PCAP"
+
+
 class Input:
     FILE = "file"
     PARAMS = "params"

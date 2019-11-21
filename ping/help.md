@@ -1,17 +1,32 @@
+# Description
 
-# Ping
+The Ping plugin is used to check for network connectivity and response times. 
 
-## About
+This plugin uses the uses the [GNU Ping](https://www.gnu.org/software/inetutils/manual/html_node/ping-invocation.html#ping-invocation).
 
-This plugin uses the uses the [GNU Ping](https://www.gnu.org/software/inetutils/manual/html_node/ping-invocation.html#ping-invocation) networking tool to check for host connectivity.
+# Key Features
 
-## Actions
+* Ping an address
 
-### Ping
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Ping
 
 This action is used to `ping` a host to check for connectivity.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -19,7 +34,7 @@ This action is used to `ping` a host to check for connectivity.
 |resolve_hostname|boolean|None|True|Whether to resolve a domain name to an IP address first|None|
 |host|string|None|True|The domain name or IP of the the host to check|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -38,41 +53,39 @@ Example output:
 ```
 
 {
-  "average_latency": "50.135ms",
-  "maximum_latency": "55.433",
-  "minimum_latency": "48.005",
+  "average_latency": "0.059ms",
+  "maximum_latency": "0.069ms",
+  "minimum_latency": "0.044ms",
   "packets_percent_lost": 0,
   "packets_received": 4,
   "packets_transmitted": 4,
   "reply": true,
-  "response": "PING 8.8.8.8 (8.8.8.8): 56 data bytes\n64 bytes from 8.8 .8 .8: icmp_seq = 0 ttl = 63 time = 50.108 ms\n64 bytes from 8.8 .8 .8: icmp_seq = 1 ttl = 63 time = 48.491 ms\n64 bytes from 8.8 .8 .8: icmp_seq = 2 ttl = 63 time = 49.144 ms\n64 bytes from 8.8 .8 .8: icmp_seq = 3 ttl = 63 time = 89.385 ms\n\n-- - 8.8 .8 .8 ping statistics---\n4 packets transmitted, 4 packets received, 0 % packet loss\nround - trip min / avg / max / stddev = 48.491 / 59.282 / 89.385 / 17.389 ms ",
-  "standard_deviation": "3.083"
+  "response": "PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.\n64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.044 ms\n64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.069 ms\n64 bytes from 127.0.0.1: icmp_seq=3 ttl=64 time=0.066 ms\n64 bytes from 127.0.0.1: icmp_seq=4 ttl=64 time=0.059 ms\n\n--- 127.0.0.1 ping statistics ---\n4 packets transmitted, 4 received, 0% packet loss, time 3131ms\nrtt min/avg/max/mdev = 0.044/0.059/0.069/0.012 ms\n",
+  "standard_deviation": "0.012ms"
 }
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
+* 1.0.3 - New spec and help.md format for the Hub
+* 1.0.2 - Bug fix to correct regex's search pattern
 * 1.0.1 - Support web server mode
+* 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Check if a remote host is up
+# Links
 
 ## References
 

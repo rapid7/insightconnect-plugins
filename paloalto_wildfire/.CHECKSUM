@@ -1,0 +1,43 @@
+{
+	"spec": "dae3c58398653f59669a140b5019dc02",
+	"manifest": "604007b7b8912e0ef0296c1f92e929a7",
+	"setup": "d9f0545b625f60bee4fedb54899e3c42",
+	"schemas": [
+		{
+			"identifier": "get_malware_test_file/schema.py",
+			"hash": "467543c22d6770fb27efe581342e4b60"
+		},
+		{
+			"identifier": "get_pcap/schema.py",
+			"hash": "055d8fb95dbe7e807026dc0f08e1b008"
+		},
+		{
+			"identifier": "get_report/schema.py",
+			"hash": "ec68b989f53f580e429f9b687a768f1e"
+		},
+		{
+			"identifier": "get_sample/schema.py",
+			"hash": "201f4171f1fdbabd0bcfbb4ca38b0a3a"
+		},
+		{
+			"identifier": "get_verdict/schema.py",
+			"hash": "8f39ef4a5e164f58060b1b40e4537ec4"
+		},
+		{
+			"identifier": "submit_file/schema.py",
+			"hash": "d4f69dc7653bf14cf22d9527228f3c11"
+		},
+		{
+			"identifier": "submit_file_from_url/schema.py",
+			"hash": "1bd3799b7ab9c9f985e79838a05c1f80"
+		},
+		{
+			"identifier": "submit_url/schema.py",
+			"hash": "eb7284ce505a577fb326c8c663e96e32"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "bc69dbe6e41ed2dc978845094163348b"
+		}
+	]
+}

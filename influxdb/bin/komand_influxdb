@@ -6,7 +6,7 @@ from komand_influxdb import connection, actions, triggers
 
 Name = 'InfluxDB'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'Scalable datastore for metrics, events, and real-time analytics'
 
 

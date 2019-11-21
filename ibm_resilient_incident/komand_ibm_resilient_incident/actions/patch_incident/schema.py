@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Patches a single incident"
+
+
 class Input:
     INCIDENT_ID = "incident_id"
     ORGANIZATION_ID = "organization_id"
@@ -39,8 +43,8 @@ class PatchIncidentInput(komand.Input):
     }
   },
   "required": [
-    "organization_id",
     "incident_id",
+    "organization_id",
     "patch"
   ]
 }

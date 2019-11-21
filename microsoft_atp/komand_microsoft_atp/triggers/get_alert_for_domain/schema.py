@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get alerts by domain"
+
+
 class Input:
     
     DOMAIN = "domain"

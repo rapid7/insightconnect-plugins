@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves logs from InsightOps service"
+
+
 class Input:
     pass
 

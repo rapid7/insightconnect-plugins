@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Trigger on receiving a new event from a specified topic"
+
+
 class Input:
     
     NUMBER_OF_MESSAGES = "number_of_messages"
@@ -35,8 +39,8 @@ class ReceiveEventInput(komand.Input):
     }
   },
   "required": [
-    "topic",
-    "number_of_messages"
+    "number_of_messages",
+    "topic"
   ]
 }
     """)

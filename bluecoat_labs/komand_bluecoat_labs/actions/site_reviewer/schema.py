@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Categorizes the given URL"
+
+
 class Input:
     TARGET_URL = "target_url"
     

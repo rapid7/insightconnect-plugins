@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Start a hunt on clients"
+
+
 class Input:
     ACTION = "action"
     ANNOTATIONS = "annotations"

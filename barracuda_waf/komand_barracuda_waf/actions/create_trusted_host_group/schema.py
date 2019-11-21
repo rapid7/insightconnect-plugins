@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a trusted host group with the given name"
+
+
 class Input:
     NAME = "name"
     

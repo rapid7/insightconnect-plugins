@@ -1,20 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: misp
 title: MISP
 description: MISP is an open source threat sharing platform
-version: 3.0.1
+version: 3.0.2
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/misp
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: http://www.misp-project.org
 tags:
 - misp
 - IOC
 - threat
+hub_tags:
+  use_cases: [soar, soc_automation, investigations, threat_intel, threat_hunting, threat_detection_and_response]
+  keywords: [misp, IOC, threat]
+  features: []
 types:
   org:
     uuid:

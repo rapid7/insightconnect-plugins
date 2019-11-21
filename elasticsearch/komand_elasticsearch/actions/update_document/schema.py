@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update a document"
+
+
 class Input:
     _ID = "_id"
     _INDEX = "_index"
@@ -109,9 +113,9 @@ class UpdateDocumentInput(komand.Input):
     }
   },
   "required": [
-    "script",
     "_id",
-    "_index"
+    "_index",
+    "script"
   ]
 }
     """)

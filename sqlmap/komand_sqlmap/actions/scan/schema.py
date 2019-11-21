@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Performs a SQLmap scan on target"
+
+
 class Input:
     ACERT = "aCert"
     ACRED = "aCred"

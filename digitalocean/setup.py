@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='digitalocean-rapid7-plugin',
-      version='1.0.0',
-      description='DigitalOcean is a simple and robust cloud computing platform, designed for developers',
+      version='1.0.1',
+      description='DigitalOcean is a simple and robust cloud computing platform, designed for developers. Using this plugin, users can manage accounts, droplets, snapshots, and more',
       author='rapid7',
       author_email='',
       url='',

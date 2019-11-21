@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetches information related to a domain by URIs, certificates, or related samples"
+
+
 class Input:
     DOMAIN = "domain"
     QUERY_TYPE = "query_type"

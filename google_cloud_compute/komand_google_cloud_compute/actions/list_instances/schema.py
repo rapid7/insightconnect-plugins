@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves the list of instances contained within the specified zone"
+
+
 class Input:
     FILTER = "filter"
     MAXRESULTS = "maxResults"

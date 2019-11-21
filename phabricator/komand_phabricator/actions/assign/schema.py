@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Assign specific user to task"
+
+
 class Input:
     ID = "id"
     USER = "user"

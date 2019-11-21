@@ -1,0 +1,27 @@
+{
+	"spec": "a27131fddcd96b439cf1a5c45ddddb09",
+	"manifest": "72c6522fd227a2d7541bbe7dcd676c06",
+	"setup": "bc3609302ba229dc40c920fb2d1a6406",
+	"schemas": [
+		{
+			"identifier": "check_cidr/schema.py",
+			"hash": "d914ed5eebc4c63a5506f8ce22b3770d"
+		},
+		{
+			"identifier": "check_ip/schema.py",
+			"hash": "145cf31842e684859bf9bee318d67663"
+		},
+		{
+			"identifier": "get_blacklist/schema.py",
+			"hash": "fec002173854f2a01493a792c6cba762"
+		},
+		{
+			"identifier": "report_ip/schema.py",
+			"hash": "174d5747b88c4ba0ce34b50e12d11177"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "4a9612e474a02b1fce58dd27df826e18"
+		}
+	]
+}

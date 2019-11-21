@@ -1,18 +1,45 @@
+# Description
 
-# CRITs
+[CRITs](https://crits.github.io/) is an open source malware and threat repository for conducting malware analyses. 
+With the CRITs plugin for Rapid7 InsightConnect, users can manage actors, events, collections, domains, and more.
 
-## About
+Using the CRITs plugin, users can quickly automate usecases around threat intelligence, malware analysis, email
+file attachment analysis, and other scenarios.
 
-[CRITs](https://crits.github.io/) is an open source malware and threat repository that leverages other open source software to create a unified tool for conducting malware analyses.
-This plugin utilizes a [fork](https://github.com/komand/pycrits) of the [pycrits](https://github.com/crits/pycrits) library. The CRITs server API endpoint, by default, is `/api/$API_VERSION`.
+Note: The CRITs server API endpoint, by default, is `/api/$API_VERSION`.
 
-## Actions
+# Key Features
 
-### Add Actor Identifier
+* Malware analysis
+* Manage events
+
+# Requirements
+
+* API key
+* Username
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|Host URL, E.g. https\://localhost\:8443|None|
+|username|string|None|True|Enter the API username|None|
+|api_key|credential_secret_key|None|True|Enter the API key|None|
+|ssl_verify|boolean|False|True|Verify server's certificate|None|
+
+## Technical Details
+
+### Actions
+
+#### Add Actor Identifier
 
 This action is used to create a new actor identifier.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -21,7 +48,7 @@ This action is used to create a new actor identifier.
 |id_type|string|None|True|Identity Type|None|
 |id|string|None|True|The name your organization refers to this Actor by|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -42,18 +69,18 @@ Example output:
 
 ```
 
-### Add Target
+#### Add Target
 
 This action is used to create a new target.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |params|object|None|False|Object containing related data or metadata|None|
 |email|string|None|True|The email address of the Target|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -75,11 +102,11 @@ Example output:
 
 ```
 
-### Add Actor
+#### Add Actor
 
 This action is used to create a new actor.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -87,7 +114,7 @@ This action is used to create a new actor.
 |params|object|None|False|Object containing related data or metadata|None|
 |name|string|None|True|The name your organization refers to this Actor by|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -109,11 +136,11 @@ Example output:
 
 ```
 
-### Add Raw Data
+#### Add Raw Data
 
 This action is used to create new raw data.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -125,7 +152,7 @@ This action is used to create new raw data.
 |data|string|None|False|The raw data if the upload type is 'metadata'|None|
 |type|string|None|True|Upload type|['metadata', 'file']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -147,11 +174,11 @@ Example output:
 
 ```
 
-### Add PCAP
+#### Add PCAP
 
 This action is used to create a new PCAP.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -159,7 +186,7 @@ This action is used to create a new PCAP.
 |params|object|None|False|Additional data or metadata|None|
 |file|file|None|True|The actual file data|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -181,11 +208,11 @@ Example output:
 
 ```
 
-### Add Event
+#### Add Event
 
 This action is used to create a new event.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -195,7 +222,7 @@ This action is used to create a new event.
 |description|string|None|True|description of what happened during this Event.|None|
 |params|object|None|False|Object containing related data or metadata|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -217,11 +244,11 @@ Example output:
 
 ```
 
-### Add Sample
+#### Add Sample
 
 This action is used to create a new sample.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -230,7 +257,7 @@ This action is used to create a new sample.
 |file|file|None|True|The actual file data|None|
 |params|object|None|False|Object containing related data or metadata|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -252,11 +279,11 @@ Example output:
 
 ```
 
-### Add IP
+#### Add IP
 
 This action is used to create a new IP.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -265,7 +292,7 @@ This action is used to create a new IP.
 |type|string|None|True|Type of IP Address|None|
 |params|object|None|False|Additional data or metadata|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -287,11 +314,11 @@ Example output:
 
 ```
 
-### Add Indicator
+#### Add Indicator
 
 This action is used to create a new indicator.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -300,7 +327,7 @@ This action is used to create a new indicator.
 |value|string|None|True|The value of the Indicator|None|
 |params|object|None|False|Additional data or metadata|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -321,11 +348,11 @@ Example output:
 
 ```
 
-### Get Collection
+#### Get Collection
 
 This action is used to fetches a collection.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -333,7 +360,7 @@ This action is used to fetches a collection.
 |params|object|None|False|Additional parameters|None|
 |collection|string|None|True|Type of collection|['Actors', 'Actor Identifiers', 'Campaigns', 'Certificates', 'Domains', 'Emails', 'Events', 'Indicators', 'IPs', 'PCAPs', 'Raw Datas', 'Samples', 'Screenshots', 'Targets']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -398,11 +425,11 @@ Example output:
 
 ```
 
-### Get Item
+#### Get Item
 
 This action is used to fetches a single item.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -410,7 +437,7 @@ This action is used to fetches a single item.
 |type|string|None|True|Item Type|['Actor', 'Actor Identifier', 'Campaign', 'Certificate', 'Domain', 'Email', 'Event', 'Indicator', 'IP', 'PCAP', 'Raw Data', 'Sample', 'Screenshot', 'Target']|
 |params|object|None|False|Additional parameters|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -464,11 +491,11 @@ Example output:
 
 ```
 
-### Add Certificate
+#### Add Certificate
 
 This action is used to create a new certificate.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -476,7 +503,7 @@ This action is used to create a new certificate.
 |params|object|None|False|Object containing related data or metadata|None|
 |file|file|None|True|The actual file data|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -498,11 +525,11 @@ Example output:
 
 ```
 
-### Add Domain
+#### Add Domain
 
 This action is used to create a new domain.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -510,7 +537,7 @@ This action is used to create a new domain.
 |domain|string|None|True|The domain name|None|
 |params|object|None|False|Object containing related data or metadata|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -532,11 +559,11 @@ Example output:
 
 ```
 
-### Add Email
+#### Add Email
 
 This action is used to create a new email.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -545,7 +572,7 @@ This action is used to create a new email.
 |file|file|None|True|The actual file |None|
 |params|object|None|False|Object containing related data or metadata|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -565,18 +592,18 @@ Example output:
 
 ```
 
-### Add Campaign
+#### Add Campaign
 
 This action is used to create a new campaign.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |params|object|None|False|Object containing related data or metadata|None|
 |name|string|None|True|Name of the campaign|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -596,20 +623,13 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|Host URL, E.g. https\://localhost\:8443|None|
-|username|string|None|True|Enter the API username|None|
-|api_key|credential_secret_key|None|True|Enter the API key|None|
-|ssl_verify|boolean|False|True|Verify server's certificate|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -618,38 +638,14 @@ Once it is enabled you must restart the web server for the URLs to be exposed.
 
 Ensure that the user associated with the API key is subscribed to the `source`.
 
-### POST Responses
+# Version History
 
-In most cases, when submitting a POST to add new content to CRITs you will get a response in the following JSON format:
-
-```json
-
-{
-  "return_code": <code>,
-  "type": <type>,
-  "id": <object_id>,
-  "message": <message>,
-  "url": <url>
-}
-
-```
-
-The return_code is usually `0` for success, `1` for failure. If the request was successful, the TLO type and ID will be returned to you.
-In addition, a URL will be provided which can be used to query the API for the details of that TLO.
-
-If there is a message to give context, whether the request was successful or not, it will also be provided.
-
-## Workflows
-
-Examples:
-
-* Add IOCs
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
@@ -657,3 +653,4 @@ Examples:
 * [CRITs Wiki](https://github.com/crits/crits/wiki)
 * [pycrits fork](https://github.com/rpip/pycrits)
 * [pycrits](https://github.com/crits/pycrits)
+

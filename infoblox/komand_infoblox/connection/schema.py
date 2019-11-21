@@ -56,9 +56,9 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "url",
+    "api_version",
     "credentials",
-    "api_version"
+    "url"
   ],
   "definitions": {
     "credential_username_password": {

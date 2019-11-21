@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='tenable_io-rapid7-plugin',
-      version='1.0.0',
-      description='Scan external assets with TenableIO',
+      version='1.0.1',
+      description='The TenableIO plugin allows you to launch scans and analyze reports',
       author='rapid7',
       author_email='',
       url='',

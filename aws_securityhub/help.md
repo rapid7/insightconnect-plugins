@@ -1,24 +1,49 @@
-# AWS Security Hub
-
-## About
+# Description
 
 [AWS Security Hub](https://aws.amazon.com/security-hub/) is a comprehensive view of your high-priority security alerts and compliance status across AWS accounts.
+The AWS Security Hub InsightConnect plugin allows you to list and describe security hub-aggregated findings and retrieve SQS messages.
 
 This plugin utilizes the [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html) and [Boto3](https://github.com/boto/boto3) Python library.
 
-## Actions
+# Key Features
 
-### Get Findings
+* Lists and describes Security Hub-aggregated findings
+* Get SQS messages
+
+# Requirements
+
+* AWS account
+* AWS access key ID for authentication
+* AWS secret key for signing requests with the given AWS access key ID
+* AWS region to use for requests
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|aws_access_key_id|credential_secret_key|None|True|The ID of the AWS Access Key to use for authentication with AWS|None|
+|aws_secret_access_key|credential_secret_key|None|True|The AWS Secret Access Key used for signing requests with the given AWS Access Key ID|None|
+|region|string|None|False|AWS Region. This is not required|['us-east-2', 'us-east-1', 'us-west-1', 'us-west-2', 'ca-central-1', 'ap-south-1', 'ap-northeast-2', 'ap-southeast-1', 'ap-southeast-2', 'ap-northeast-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'sa-east-1']|
+
+## Technical Details
+
+### Actions
+
+#### Get Findings
 
 This action is used to lists and describes Security Hub-aggregated findings that are specified by filter attributes.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filters|object|None|False|An object of filters|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -86,13 +111,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-### Get SQS Message
+#### Get SQS Message
 
 This trigger is used to poll from a SQS Queue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -108,7 +133,7 @@ This trigger is used to poll from a SQS Queue.
 Additional Configuration Information:
   To enable long-poll support for the SQS Feed increase `WaitTimeSeconds`.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -160,30 +185,20 @@ Example output:
 }
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|aws_access_key_id|credential_secret_key|None|True|The ID of the AWS Access Key to use for authentication with AWS|None|
-|aws_secret_access_key|credential_secret_key|None|True|The AWS Secret Access Key used for signing requests with the given AWS Access Key ID|None|
-|region|string|None|False|AWS Region. This is not required|['us-east-2', 'us-east-1', 'us-west-1', 'us-west-2', 'ca-central-1', 'ap-south-1', 'ap-northeast-2', 'ap-southeast-1', 'ap-southeast-2', 'ap-northeast-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'sa-east-1']|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Get a list of findings, iterate over findings and enrich or alert on the type of finding.
-* Access an SQS feed that contains findings from Security Hub and perform data enrichment on the finding.
+# Links
 
 ## References
 
@@ -191,243 +206,3 @@ Examples:
 * [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html)
 * [Boto3](https://github.com/boto/boto3)
 
-## Custom Output Types
-
-### Compliance
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Status|string|False|Status|
-
-### Malware
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Name|string|False|Name|
-|Path|string|False|Path|
-|State|string|False|State|
-|Type|string|False|Type|
-
-### Network
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|DestinationDomain|string|False|Destination domain|
-|DestinationIpV4|string|False|Destination IPv4|
-|DestinationIpV6|string|False|Destination IPv6|
-|DestinationPort|integer|False|Destination port|
-|Direction|string|False|Direction|
-|Protocol|string|False|Protocol|
-|SourceDomain|string|False|Source domain|
-|SourceIpV4|string|False|Source IPv4|
-|SourceIpV6|string|False|Source IPv6|
-|SourceMac|string|False|Source MAC|
-|SourcePort|integer|False|Source port|
-
-### Note
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Text|string|False|Text|
-|UpdatedAt|string|False|Updated At|
-|UpdatedBy|string|False|Updated by|
-
-### Process
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|LaunchedAt|string|False|Launched at|
-|Name|string|False|Name|
-|ParentPid|integer|False|Parent PID|
-|Path|string|False|Path|
-|Pid|integer|False|PID|
-|TerminatedAt|string|False|Terminated at|
-
-### ProductFields
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|string|string|False|String|
-
-### RelatedFindings
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|string|False|ID|
-|ProductArn|string|False|Product ARN|
-
-### Recommendation
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Text|string|False|Text|
-|Url|string|False|URL|
-
-### Remediation
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Recommendation|Recommendation|False|Recommendation|
-
-### AwsEc2Instance
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|IamInstanceProfileArn|string|False|IAM instance profile ARN|
-|ImageId|string|False|Image ID|
-|IpV4Addresses|[]string|False|IPv4 addresses|
-|IpV6Addresses|[]string|False|IPv6 addresses|
-|KeyName|string|False|Keyname|
-|LaunchedAt|string|False|Launched at|
-|SubnetId|string|False|Subnet ID|
-|Type|string|False|Type|
-|VpcId|string|False|VPC ID|
-
-### AwsIamAccessKey
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|CreatedAt|string|False|Created at|
-|Status|string|False|Status|
-|UserName|string|False|Username|
-
-### AwsS3Bucket
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|OwnerId|string|False|Owner ID|
-|OwnerName|string|False|Owner name|
-
-### Container
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ImageId|string|False|Image ID|
-|ImageName|string|False|Image name|
-|LaunchedAt|string|False|Launched at|
-|Name|string|False|Name|
-
-### Details
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|AwsEc2Instance|AwsEc2Instance|False|AWS EC2 instance|
-|AwsIamAccessKey|AwsIamAccessKey|False|AWS IAM access key|
-|AwsS3Bucket|AwsS3Bucket|False|AWS S3 bucket|
-|Container|Container|False|Container|
-|Other|ProductFields|False|Other|
-
-### Resources
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Details|Details|False|Details|
-|Id|string|False|ID|
-|Partition|string|False|Partition|
-|Region|string|False|Region|
-|Tags|ProductFields|False|Tags|
-|Type|string|False|Type|
-
-### Severity
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Normalized|integer|False|Normalized|
-|Product|integer|False|Product|
-
-### ThreatIntelIndicators
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Category|string|False|Category|
-|LastObservedAt|string|False|Last observed at|
-|Source|string|False|Source|
-|SourceUrl|string|False|Source URL|
-|Type|string|False|Type|
-|Value|string|False|Value|
-
-### Findings
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|AwsAccountId|string|False|AWS account ID|
-|Compliance|Compliance|False|Compliance|
-|Confidence|integer|False|Confidence|
-|CreatedAt|string|False|Created at|
-|Criticality|integer|False|Criticality|
-|Description|string|False|Description|
-|FirstObservedAt|string|False|First observed at|
-|GeneratorId|string|False|Generator ID|
-|Id|string|False|ID|
-|LastObservedAt|string|False|Last observed at|
-|Malware|[]Malware|False|Malware|
-|Network|Network|False|Network|
-|Note|Note|False|Note|
-|Process|Process|False|Process|
-|ProductArn|string|False|Product ARN|
-|ProductFields|ProductFields|False|Product fields|
-|RecordState|string|False|Record state|
-|RelatedFindings|[]RelatedFindings|False|Related findings|
-|Remediation|Remediation|False|Remediation|
-|Resources|[]Resources|False|Resources|
-|SchemaVersion|string|False|Schema version|
-|Severity|Severity|False|Severity|
-|SourceUrl|string|False|Source URL|
-|ThreatIntelIndicators|[]ThreatIntelIndicators|False|Threat intel indicators|
-|Title|string|False|Title|
-|Types|[]string|False|Types|
-|UpdatedAt|string|False|Updated at|
-|UserDefinedFields|ProductFields|False|User-defined fields|
-|VerificationState|string|False|Verification state|
-|WorkflowState|string|False|Workflow state|
-
-### Attributes
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|SentTimestamp|string|False|Sent timestamp|
-
-### Author
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|DataType|string|False|Data type|
-|StringValue|string|False|String value|
-
-### MessageAttributes
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Author|Author|False|Author|
-|Title|Author|False|Title|
-|WeeksOn|Author|False|Weeks on|
-
-### Message
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Attributes|Attributes|False|Attributes|
-|Body|string|False|Body|
-|MD5OfBody|string|False|MD5 of body|
-|MD5OfMessageAttributes|string|False|MD5 of message attributes|
-|MessageAttributes|MessageAttributes|False|Message attributes|
-|MessageId|string|False|Message ID|
-|ReceiptHandle|string|False|Receipt handle|
-
-### HTTPHeaders
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|content-length|string|False|Content length|
-|content-type|string|False|Content type|
-|date|string|False|Date|
-|x-amzn-requestid|string|False|X-amzn-requestid|
-
-### ResponseMetadata
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|HTTPHeaders|HTTPHeaders|False|HTTP headers|
-|HTTPStatusCode|integer|False|HTTP status code|
-|RequestId|string|False|Request ID|
-|RetryAttempts|integer|False|Retry attempts|

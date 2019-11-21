@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve the file ID related to an alert"
+
+
 class Input:
     ALERT_ID = "alert_id"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetches host information related to a certificate"
+
+
 class Input:
     QUERY = "query"
     

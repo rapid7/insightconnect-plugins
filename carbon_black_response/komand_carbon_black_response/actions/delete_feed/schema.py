@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes a feed"
+
+
 class Input:
     FORCE = "force"
     ID = "id"
@@ -32,8 +36,8 @@ class DeleteFeedInput(komand.Input):
     }
   },
   "required": [
-    "id",
-    "force"
+    "force",
+    "id"
   ]
 }
     """)

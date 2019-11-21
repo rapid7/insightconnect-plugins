@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create an application"
+
+
 class Input:
     APP_DISPLAY_NAME = "app_display_name"
     

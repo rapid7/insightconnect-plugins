@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new target in the OpenVAS server"
+
+
 class Input:
     HOST_LIST = "host_list"
     NAME = "name"
@@ -44,8 +48,8 @@ class CreateTargetInput(komand.Input):
     }
   },
   "required": [
-    "name",
-    "host_list"
+    "host_list",
+    "name"
   ]
 }
     """)

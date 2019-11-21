@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run selected query on fleet"
+
+
 class Input:
     HOSTS = "hosts"
     LABELS = "labels"

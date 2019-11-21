@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query information about Joe Sandbox user account"
+
+
 class Input:
     pass
 
@@ -40,8 +44,8 @@ class GetAccountInfoOutput(komand.Output):
     }
   },
   "required": [
-    "type",
-    "quota"
+    "quota",
+    "type"
   ],
   "definitions": {
     "full_quota": {

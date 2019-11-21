@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List the details of a given job, identified by its ID"
+
+
 class Input:
     JOB_ID = "job_id"
     
@@ -77,10 +81,10 @@ class GetJobDetailsOutput(komand.Output):
   },
   "required": [
     "analyzerId",
-    "status",
+    "artifact",
     "date",
     "id",
-    "artifact"
+    "status"
   ],
   "definitions": {
     "artifact": {

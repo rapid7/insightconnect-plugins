@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Attaches an existing disk resource to an instance"
+
+
 class Input:
     INSTANCE = "instance"
     SOURCE = "source"
@@ -60,9 +64,9 @@ class DiskAttachInput(komand.Input):
     }
   },
   "required": [
-    "zone",
     "instance",
-    "source"
+    "source",
+    "zone"
   ]
 }
     """)

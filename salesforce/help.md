@@ -1,24 +1,50 @@
-# Salesforce
+# Description
 
-## About
-
-[Salesforce](https://www.salesforce.com) is a CRM solution that brings together all customer information in a single, integrated platform that enables building a customer-centered business from marketing right through to sales, customer service and business analysis.
+[Salesforce](https://www.salesforce.com) is a CRM solution that brings together all customer information in a single, integrated platform that enables building a customer-centered business from marketing right through to sales, customer service and business analysis. 
+The Salesforce plugin allows you to search, update, and manage salesforce records. 
 
 This plugin utilizes the [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm).
 
-## Actions
+# Key Features
 
-### Advanced Search
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|username|string|None|True|Name of the Salesforce user|None|
+|client_secret|password|None|True|'Consumer Secret' of the connected app|None|
+|password|password|None|True|Password of the Salesforce user|None|
+|client_id|string|None|True|'Consumer Key' of the connected app|None|
+|security_token|password|None|True|Security token of the Salesforce user|None|
+
+## Technical Details
+
+### Actions
+
+#### Advanced Search
 
 This action is used to execute a SOQL (Salesforce Object Query Language) query.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|SOQL query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -58,11 +84,11 @@ Example output:
 }
 ```
 
-### Update Record
+#### Update Record
 
 This action is used to update a record.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -70,7 +96,7 @@ This action is used to update a record.
 |object_name|string|Account|True|The name of the object (e.g. 'Account')|None|
 |object_data|object|None|True|Updated SObject information|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -84,11 +110,11 @@ Example output:
 }
 ```
 
-### Get Fields
+#### Get Fields
 
 This action is used to retrieve field values from a record.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -96,7 +122,7 @@ This action is used to retrieve field values from a record.
 |fields|[]string|None|True|The fields which values should be retrieved|None|
 |object_name|string|Account|True|The name of the object (e.g. 'Account')|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -113,11 +139,11 @@ Example output:
 }
 ```
 
-### Get Record
+#### Get Record
 
 This action is used to retrieve a record.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -125,7 +151,7 @@ This action is used to retrieve a record.
 |external_id_field_name|string||False|The name of the external ID field that should be matched with record_id. If empty, the 'Id' field of the record is used|None|
 |object_name|string|Account|True|The name of the object (e.g. 'Account')|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -209,11 +235,11 @@ Example output:
 }
 ```
 
-### Get Blob Data
+#### Get Blob Data
 
 This action is used to retrieve blob data for a given record.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -221,7 +247,7 @@ This action is used to retrieve blob data for a given record.
 |object_name|string|Attachment|True|The name of the object (e.g. 'Account')|None|
 |field_name|string|body|True|Blob field name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -235,17 +261,17 @@ Example output:
 }
 ```
 
-### Simple Search
+#### Simple Search
 
 This action is used to execute a simple search for a text.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |text|string|None|True|Text to search for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -265,18 +291,18 @@ Example output:
 }
 ```
 
-### Create Record
+#### Create Record
 
 This action is used to create a new SObject record.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |object_name|string|Account|True|The name of the object (e.g. 'Account')|None|
 |object_data|object|None|True|SObject information for the newly created record|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -290,18 +316,18 @@ Example output:
 }
 ```
 
-### Delete Record
+#### Delete Record
 
 This action is used to delete a record.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |record_id|string|None|True|The ID of an existing record|None|
 |object_name|string|Account|True|The name of the object (e.g. 'Account')|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -315,36 +341,24 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Name of the Salesforce user|None|
-|client_secret|password|None|True|'Consumer Secret' of the connected app|None|
-|password|password|None|True|Password of the Salesforce user|None|
-|client_id|string|None|True|'Consumer Key' of the connected app|None|
-|security_token|password|None|True|Security token of the Salesforce user|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Downloading binary data
-* Searching for accounts
+# Links
 
 ## References
 
@@ -352,3 +366,4 @@ Examples:
 * [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm)
 * [Connecting your app to the API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/quickstart.htm)
 * [SOQL](https://developer.salesforce.com/docs/atlas.en-us.216.0.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)
+

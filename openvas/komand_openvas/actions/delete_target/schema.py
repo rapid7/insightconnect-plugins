@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete specified target ID in the OpenVAS server"
+
+
 class Input:
     TARGET_ID = "target_id"
     

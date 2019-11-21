@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new SObject record"
+
+
 class Input:
     OBJECT_DATA = "object_data"
     OBJECT_NAME = "object_name"
@@ -33,8 +37,8 @@ class CreateRecordInput(komand.Input):
     }
   },
   "required": [
-    "object_name",
-    "object_data"
+    "object_data",
+    "object_name"
   ]
 }
     """)

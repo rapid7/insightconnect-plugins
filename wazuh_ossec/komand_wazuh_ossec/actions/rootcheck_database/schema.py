@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the rootcheck database of an agent"
+
+
 class Input:
     AGENT_ID = "agent_id"
     CIS = "cis"
@@ -107,9 +111,9 @@ class RootcheckDatabaseOutput(komand.Output):
     }
   },
   "required": [
-    "totalItems",
+    "error",
     "rootcheck_events",
-    "error"
+    "totalItems"
   ],
   "definitions": {
     "rootcheck_events": {

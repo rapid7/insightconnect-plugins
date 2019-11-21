@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the key of an agent"
+
+
 class Input:
     AGENT_ID = "agent_id"
     
@@ -55,8 +59,8 @@ class AgentGetKeyOutput(komand.Output):
     }
   },
   "required": [
-    "key",
-    "error"
+    "error",
+    "key"
   ]
 }
     """)

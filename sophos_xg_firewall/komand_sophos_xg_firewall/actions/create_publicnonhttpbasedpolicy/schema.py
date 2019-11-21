@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a PublicHTTPBased policy"
+
+
 class Input:
     POLICY = "policy"
     

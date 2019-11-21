@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='checkmarx_cxsast-rapid7-plugin',
-      version='1.0.0',
-      description='Static analysis solution used to identify security vulnerabilities in custom code and open source components',
+      version='1.0.1',
+      description='The Checkmarx CxSAST plugin access CxSAST service to manage projects and scans',
       author='rapid7',
       author_email='',
       url='',

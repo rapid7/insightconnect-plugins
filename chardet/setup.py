@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='chardet-rapid7-plugin',
-      version='1.0.0',
-      description='Python compatible character encoding detector',
+      version='1.0.1',
+      description='This plugin is a Python compatible character encoding detector',
       author='rapid7',
       author_email='',
       url='',

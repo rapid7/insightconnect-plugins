@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add sightings to organization"
+
+
 class Input:
     SIGHTINGS = "sightings"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get Page"
+
+
 class Input:
     PAGE = "page"
     SPACE = "space"

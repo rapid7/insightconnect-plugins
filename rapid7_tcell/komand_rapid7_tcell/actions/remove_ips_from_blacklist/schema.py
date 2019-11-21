@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove IP addresses from the existing blacklist within the blocked IP address configuration"
+
+
 class Input:
     APP_ID = "app_id"
     IPS = "ips"

@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='sentinelone-rapid7-plugin',
-      version='1.1.0',
-      description='SentinelOne is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint',
+      version='1.1.1',
+      description='The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne',
       author='rapid7',
       author_email='',
       url='',

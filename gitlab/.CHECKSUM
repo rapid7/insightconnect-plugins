@@ -1,0 +1,43 @@
+{
+	"spec": "5d5577417f023fcf2268c3415218b74c",
+	"manifest": "f16e9fe528e87bdd7b9ce596ef81ea9b",
+	"setup": "aa417f692ef783eb43e4a7df1f142654",
+	"schemas": [
+		{
+			"identifier": "block_user/schema.py",
+			"hash": "4c2b9783ecb95d29c1632669127bf3f0"
+		},
+		{
+			"identifier": "create_issue/schema.py",
+			"hash": "4f78738c56701368f43fa1066c9d6704"
+		},
+		{
+			"identifier": "delete_ssh/schema.py",
+			"hash": "bd976a92e83220407b3b7f5448a07b17"
+		},
+		{
+			"identifier": "delete_user/schema.py",
+			"hash": "9d261d20ffbfbaacacc524e11d8d58c7"
+		},
+		{
+			"identifier": "get_user/schema.py",
+			"hash": "0dd5e47099a82d204f0a9f526fc822d5"
+		},
+		{
+			"identifier": "list_ssh/schema.py",
+			"hash": "023fd6875d22f2ba1ae6609b6f122a56"
+		},
+		{
+			"identifier": "unblock_user/schema.py",
+			"hash": "a3ca69dbc7bf7f8bda4fd4e9fcf7ea95"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "2014cdad71a6dc0ae730c165922dc907"
+		},
+		{
+			"identifier": "issue/schema.py",
+			"hash": "07c6fcac54fa166a1f29f23297e5f15e"
+		}
+	]
+}

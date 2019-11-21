@@ -25,11 +25,13 @@ class GetAnalysisInput(komand.Input):
     "id": {
       "type": "integer",
       "title": "Analysis ID",
+      "description": "Analysis ID",
       "order": 2
     },
     "project_name": {
       "type": "string",
       "title": "Project Name",
+      "description": "Project name",
       "order": 1
     }
   },
@@ -53,6 +55,7 @@ class GetAnalysisOutput(komand.Output):
     "analyses": {
       "$ref": "#/definitions/Analysis",
       "title": "Analysis",
+      "description": "Project analysis",
       "order": 1
     }
   },

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete a key by name"
+
+
 class Input:
     ARRAY = "array"
     KEY = "key"

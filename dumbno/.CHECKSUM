@@ -1,0 +1,15 @@
+{
+	"spec": "debb5639c14a3369ff50c79ca66228d1",
+	"manifest": "ebe864dbe4b80523bb4b0f06d02bd6b4",
+	"setup": "4633321210d64bf0b4c6fb0e1a5986d6",
+	"schemas": [
+		{
+			"identifier": "add_acl/schema.py",
+			"hash": "dcbf107fedbfffce048e8a0a4e13862b"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "165de5b7907e4be834104963122071c6"
+		}
+	]
+}

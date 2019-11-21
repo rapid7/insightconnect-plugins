@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='komand-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.3',
       description='Komand Meta-Actions',
       author='rapid7',
       author_email='',

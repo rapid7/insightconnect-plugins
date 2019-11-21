@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='redhat_advisory-rapid7-plugin',
-      version='1.0.1',
-      description='Trigger on new Redhat Security Advisories',
+      version='1.0.2',
+      description='This plugin will trigger workflows on new Red Hat Security Advisories',
       author='rapid7',
       author_email='',
       url='',

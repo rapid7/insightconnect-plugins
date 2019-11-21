@@ -1,24 +1,43 @@
-# FireEye HX
+# Description
 
-## About
-
-[FireEye HX](https://www.fireeye.com/solutions/hx-endpoint-security-products.html) is an integrated endpoint solution that detects, prevents and responds effectively to known malware and threats traditional anti-virus endpoint security products miss.
+[FireEye HX](https://www.fireeye.com/solutions/hx-endpoint-security-products.html) is an integrated endpoint solution that detects, prevents and responds effectively to known malware and threats traditional anti-virus endpoint security products miss. The FireEye plugin will allow you to get alerts from a given host. 
 
 This plugin utilizes the FireEye HX API. Documentation for the API is located in your FireEye HX appliance.
 
-## Actions
+# Key Features
 
-### Get Host ID from Hostname
+* Get alerts for a host
+
+# Requirements
+
+* FireEye credentials
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|username_password|credential_username_password|None|True|Username and password to authenticate with FireEye HX|None|
+|url|string|None|True|URL to the appliance, e.g. https\://test.fireeye.com|None|
+
+## Technical Details
+
+### Actions
+
+#### Get Host ID from Hostname
 
 This action is used to get a host ID from a given hostname.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hostname|string|None|True|Hostname|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -34,17 +53,17 @@ Example output:
 }
 ```
 
-### Get Alerts by Host ID
+#### Get Alerts by Host ID
 
 This action is used to get alerts for a host given the host ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |host_id|string|None|True|Host ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -93,33 +112,26 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username_password|credential_username_password|None|True|Username and password to authenticate with FireEye HX|None|
-|url|string|None|True|URL to the appliance, e.g. https\://test.fireeye.com|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Process alerts found on hosts
+# Links
 
 ## References
 
 * [FireEye HX](https://www.fireeye.com/solutions/hx-endpoint-security-products.html)
+

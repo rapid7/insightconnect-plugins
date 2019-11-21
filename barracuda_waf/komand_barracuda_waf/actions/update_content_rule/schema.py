@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates the values of given parameters in the given content rule"
+
+
 class Input:
     COMMENTS = "comments"
     COOKIE_AGE = "cookie_age"

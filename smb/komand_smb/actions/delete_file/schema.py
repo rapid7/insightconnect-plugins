@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete a file from the share"
+
+
 class Input:
     FILE_PATH = "file_path"
     SHARE_NAME = "share_name"
@@ -40,8 +44,8 @@ class DeleteFileInput(komand.Input):
     }
   },
   "required": [
-    "share_name",
-    "file_path"
+    "file_path",
+    "share_name"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return all the known types"
+
+
 class Input:
     pass
 

@@ -1,25 +1,47 @@
+# Description
 
-# Graphite
+[Graphite](https://graphiteapp.org/) Graphite is an enterprise-ready monitoring tool that runs equally well on cheap hardware or Cloud infrastructure. Teams use Graphite to track the performance of their websites, applications, business services, and networked servers. It marked the start of a new generation of monitoring tools, making it easier than ever to store, retrieve, share, and visualize time-series data. 
 
-## About
+The Graphite plugin allows you to store, retrieve, and update your metrics. The plugin will also return a byte array of graphed data. 
 
-[Graphite](https://graphiteapp.org/) is an enterprise-ready monitoring tool that allows you store and graph metrics.
 This plugin utilizes the [Graphite API](https://graphite-api.readthedocs.io/en/latest/) to help you fetch metrics or render graphs from the time-series database.
 
-## Actions
+# Key Features
 
-### Expand Metrics
+* Store and retrieve data
+* Graph data
+
+# Requirements
+
+* A Graphite server
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|graphite_url|string|None|True|Graphite API Server URL|None|
+|graphite_port|integer|8888|False|Graphite API Port Number|None|
+
+## Technical Details
+
+### Actions
+
+#### Expand Metrics
 
 This action is used to expands metrics with matching paths.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|Search query|None|
 |leaves_only|boolean|False|False|Display only leaves|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -38,11 +60,11 @@ Example output:
 
 ```
 
-### Render Metrics
+#### Render Metrics
 
 This action is used to render metrics data as a graph.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -56,7 +78,7 @@ This action is used to render metrics data as a graph.
 More information about relative and absolute from/until formats can be found [here](https://graphite-api.readthedocs.io/en/latest/api.html#from-until).
 More information about the various graph parameters can be found [here](https://graphite-api.readthedocs.io/en/latest/api.html#graph-parameters).
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -72,11 +94,11 @@ Example output:
 
 ```
 
-### Retrieve Metrics
+#### Retrieve Metrics
 
 This action is used to retrieve raw metrics data.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -87,7 +109,7 @@ This action is used to retrieve raw metrics data.
 
 More information about relative and absolute from/until formats can be found [here](https://graphite-api.readthedocs.io/en/latest/api.html#from-until).
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -113,15 +135,15 @@ Example output:
 
 ```
 
-### Index Metrics
+#### Index Metrics
 
 This action is used to walks the metrics tree and returns every metric found.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -157,11 +179,11 @@ Example output:
 
 ```
 
-### Find Metrics
+#### Find Metrics
 
 This action is used to find metrics under a given path.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -170,7 +192,7 @@ This action is used to find metrics under a given path.
 |from|date|None|False|Beginning of required range|None|
 |until|date|None|False|End of required range|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -201,37 +223,29 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|graphite_url|string|None|True|Graphite API Server URL|None|
-|graphite_port|integer|8888|False|Graphite API Port Number|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Pull in metrics
-* Rendering graphs as images
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Graphite](https://graphiteapp.org/)
 * [Graphite API](https://graphite-api.readthedocs.io)
+

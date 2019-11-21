@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets the data for a single ticket, not including the history and comments"
+
+
 class Input:
     TICKET_ID = "ticket_id"
     

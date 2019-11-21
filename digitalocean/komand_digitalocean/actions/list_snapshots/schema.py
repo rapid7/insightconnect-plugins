@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all snapshots belonging to the account"
+
+
 class Input:
     pass
 

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete a user"
+
+
 class Input:
     ID_OR_EMAIL = "id_or_email"
     

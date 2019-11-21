@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List all watchlists"
+
+
 class Input:
     pass
 

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update host data"
+
+
 class Input:
     _REF = "_ref"
     UPDATED_HOST = "updated_host"

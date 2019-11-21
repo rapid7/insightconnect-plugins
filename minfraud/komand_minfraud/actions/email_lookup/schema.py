@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query email info"
+
+
 class Input:
     ADDRESS = "address"
     DOMAIN = "domain"

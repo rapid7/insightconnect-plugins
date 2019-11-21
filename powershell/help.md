@@ -1,77 +1,27 @@
+# Description
 
-# PowerShell
+This plugin runs a PowerShell script on a remote host or locally on the InsightConnect Orchestrator.
 
-## About
+PowerShell is a task automation and configuration management framework from Microsoft, consisting of a command-line shell and associated scripting language. Initially a Windows component only, known as Windows PowerShell, it was made open-source and cross-platform on 18 August 2016 with the introduction of PowerShell Core. The former is built on .NET Framework while the latter on .NET Core.
 
-This plugin runs a PowerShell script on a remote host or locally on the Komand host.
+# Key Features
 
-## Actions
+* Run a PowerShell script
 
-### PowerShell String
+# Requirements
 
-This action is used to execute a PowerShell script in the form of a string on a remote host or locally on the Komand host.
+The requirements for running the PowerShell plugin will vary depending on the use case. Your PowerShell scripts can either be run locally on the InsightConnect Orchestrator or remotely on a PowerShell enabled server. 
 
-#### Input
+## Remote Requirements
+* A PowerShell enabled server
+* Administrative credentials to a PowerShell enabled server
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|script|string|None|True|PowerShell script as a string|None|
-|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|
-|address|string|None|True|IP address of the remote host e.g. 192.168.1.1|None|
+## Local Requirements
+* PowerShell can be run locally on the InsightConnect Orchestrator, in this case, you must ensure connectivity to any network resources the PowerShell script will use. Typically this involves opening ports in your firewall or windows servers. 
 
-#### Output
+# Documentation
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|stderr|string|False|PowerShell standard error|
-|stdout|string|False|PowerShell standard output|
-
-Example output:
-
-```
-
-{
-  "stdout": "Mr $test  $test2\r\nMr bob  said hello\r\nbob \n  said hello\r\n5\r\ntesting chars in lit string \\ / \\r /r // \\\\ ! @ # $ %\r\ntesting chars in interpreted string // \\\\ /r/n ! @ # $\r\n\r\nPath            \r\n----            \r\nC:\\Users\\mhofert\r\nC:\\Users        \r\nC:\\             \r\n\r\n\r\n",
-  "stderr": "#< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/powershell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>"
-}
-
-```
-
-### Execute Script
-
-This action is used to execute a PowerShell script on a remote host or locally on the Komand host.
-
-#### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|script|bytes|None|True|PowerShell script as base64|None|
-|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|
-|address|string|None|True|IP address of the remote host e.g. 192.168.1.1|None|
-
-#### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|stderr|string|False|PowerShell standard error|
-|stdout|string|False|PowerShell standard output|
-
-Example output:
-
-```
-
-{
-  "stdout": "Mr $test  $test2\r\nMr bob  said hello\r\nbob \n  said hello\r\n5\r\ntesting chars in lit string \\ / \\r /r // \\\\ ! @ # $ %\r\ntesting chars in interpreted string // \\\\ /r/n ! @ # $\r\n\r\nPath            \r\n----            \r\nC:\\Users\\mhofert\r\nC:\\Users        \r\nC:\\             \r\n\r\n\r\n",
-  "stderr": "#< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/powershell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>"
-}
-
-```
-
-## Triggers
-
-This plugin does not contain any triggers.
-
-## Connection
+## Setup
 
 The connection configuration accepts the following parameters:
 
@@ -81,6 +31,78 @@ The connection configuration accepts the following parameters:
 |kerberos|kerberos|None|False|Connection information required for Kerberos|None|
 |port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|
 |auth|string|None|True|Authentication type|['NTLM', 'Kerberos', 'None', 'CredSSP']|
+
+## Technical Details
+
+### Actions
+
+#### PowerShell String
+
+This action is used to execute a PowerShell script in the form of a string on a remote host or locally on the Komand host.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|script|string|None|True|PowerShell script as a string|None|
+|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|
+|address|string|None|True|IP address of the remote host e.g. 192.168.1.1|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|stderr|string|False|PowerShell standard error|
+|stdout|string|False|PowerShell standard output|
+
+Example output:
+
+```
+
+{
+  "stdout": "Mr $test  $test2\r\nMr bob  said hello\r\nbob \n  said hello\r\n5\r\ntesting chars in lit string \\ / \\r /r // \\\\ ! @ ## $ %\r\ntesting chars in interpreted string // \\\\ /r/n ! @ ## $\r\n\r\nPath            \r\n----            \r\nC:\\Users\\mhofert\r\nC:\\Users        \r\nC:\\             \r\n\r\n\r\n",
+  "stderr": "#< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/powershell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>"
+}
+
+```
+
+#### Execute Script
+
+This action is used to execute a PowerShell script on a remote host or locally on the Komand host.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|script|bytes|None|True|PowerShell script as base64|None|
+|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|
+|address|string|None|True|IP address of the remote host e.g. 192.168.1.1|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|stderr|string|False|PowerShell standard error|
+|stdout|string|False|PowerShell standard output|
+
+Example output:
+
+```
+
+{
+  "stdout": "Mr $test  $test2\r\nMr bob  said hello\r\nbob \n  said hello\r\n5\r\ntesting chars in lit string \\ / \\r /r // \\\\ ! @ ## $ %\r\ntesting chars in interpreted string // \\\\ /r/n ! @ ## $\r\n\r\nPath            \r\n----            \r\nC:\\Users\\mhofert\r\nC:\\Users        \r\nC:\\             \r\n\r\n\r\n",
+  "stderr": "#< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/PowerShell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>"
+}
+
+```
+
+### Triggers
+
+This plugin does not contain any triggers.
+
+### Custom Output Types
+
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -95,7 +117,7 @@ This plugin can connect over HTTP, the default port for this is 5985. It should 
 not secure as all information passed is in plain text. In addition, Windows will not allow HTTP connections by default.
 The following commands must be run on the Windows computer that you want to connect to.
 
-For more information see [Compromising Yourself with WinRM's AllowUnencrypted = True](https://blogs.msdn.microsoft.com/powershell/2015/10/27/compromising-yourself-with-winrms-allowunencrypted-true/)
+For more information see [Compromising Yourself with WinRM's AllowUnencrypted = True](https://blogs.msdn.microsoft.com/PowerShell/2015/10/27/compromising-yourself-with-winrms-allowunencrypted-true/)
 
 ```
 
@@ -126,24 +148,21 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 ```
 
-## Workflows
+# Version History
 
-Examples:
-
-* Remote code execution
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.2.0 - Allow connections on a Windows domain with Kerberos
-* 0.2.1 - Bug fix and improved error handling
-* 1.0.0 - Updated PyWinrm, bugfixes, add PowerShell String action
-* 1.0.1 - Bug fix for `stdout` output property name in String action
-* 1.0.2 - Bug fix for NTLM version `stdout` output property name in String action
-* 1.1.0 - Add functionality to allow PowerShell to execute locally
-* 2.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
-* 2.0.1 - Fix issue with unicode characters
+* 2.1.1 - New spec and help.md format for the Hub
 * 2.1.0 - Add functionality to allow CredSSP connections
+* 2.0.1 - Fix issue with unicode characters
+* 2.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 1.1.0 - Add functionality to allow PowerShell to execute locally
+* 1.0.2 - Bug fix for NTLM version `stdout` output property name in String action
+* 1.0.1 - Bug fix for `stdout` output property name in String action
+* 1.0.0 - Updated PyWinrm, bugfixes, add PowerShell String action
+* 0.2.1 - Bug fix and improved error handling
+* 0.2.0 - Allow connections on a Windows domain with Kerberos
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
@@ -151,3 +170,4 @@ Examples:
 * [samba-common](https://packages.debian.org/sid/samba-common)
 * [krb5-user](https://packages.debian.org/search?keywords=krb5-user)
 * [realmd](https://packages.debian.org/jessie/admin/realmd)
+

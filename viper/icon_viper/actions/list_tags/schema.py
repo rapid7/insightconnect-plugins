@@ -24,6 +24,7 @@ class ListTagsInput(komand.Input):
     "project_name": {
       "type": "string",
       "title": "Project Name",
+      "description": "Project name",
       "order": 1
     }
   },
@@ -46,6 +47,7 @@ class ListTagsOutput(komand.Output):
     "tags": {
       "type": "array",
       "title": "Tags",
+      "description": "Project tags",
       "items": {
         "$ref": "#/definitions/Tag"
       },

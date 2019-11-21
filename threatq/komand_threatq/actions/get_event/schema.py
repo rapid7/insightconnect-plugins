@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve detailed information associated with a given event"
+
+
 class Input:
     ID = "id"
     WITH = "with"

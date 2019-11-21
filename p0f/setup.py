@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='p0f-rapid7-plugin',
-      version='1.0.1',
-      description='A tool to perform passive OS fingerprinting',
+      version='1.0.2',
+      description='P0f is a free and open source passive OS fingerprinting tool. Users can perform passive OS fingerprinting with the p0f plugin for InsightConnect',
       author='rapid7',
       author_email='',
       url='',

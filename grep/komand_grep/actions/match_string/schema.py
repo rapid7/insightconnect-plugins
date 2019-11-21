@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Find pattern in string"
+
+
 class Input:
     BEHAVIOR = "behavior"
     PATTERN = "pattern"
@@ -46,8 +50,8 @@ class MatchStringInput(komand.Input):
     }
   },
   "required": [
-    "text",
-    "pattern"
+    "pattern",
+    "text"
   ]
 }
     """)

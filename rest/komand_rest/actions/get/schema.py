@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Make a GET request"
+
+
 class Input:
     HEADERS = "headers"
     ROUTE = "route"

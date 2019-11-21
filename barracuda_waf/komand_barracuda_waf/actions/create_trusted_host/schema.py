@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a trusted host in group"
+
+
 class Input:
     ADDRESS = "address"
     ADDRESS_VERSION = "address_version"
@@ -64,11 +68,11 @@ class CreateTrustedHostInput(komand.Input):
     }
   },
   "required": [
-    "mask",
-    "group_name",
-    "name",
+    "address",
     "address_version",
-    "address"
+    "group_name",
+    "mask",
+    "name"
   ]
 }
     """)

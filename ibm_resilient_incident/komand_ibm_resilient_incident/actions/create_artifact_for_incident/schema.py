@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new artifact on an incident"
+
+
 class Input:
     ARTIFACT = "artifact"
     INCIDENT_ID = "incident_id"
@@ -39,9 +43,9 @@ class CreateArtifactForIncidentInput(komand.Input):
     }
   },
   "required": [
-    "organization_id",
+    "artifact",
     "incident_id",
-    "artifact"
+    "organization_id"
   ]
 }
     """)

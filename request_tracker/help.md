@@ -1,24 +1,45 @@
-
-# Request Tracker
-
-## About
+# Description
 
 [Request Tracker](https://bestpractical.com/request-tracker) is the open-source enterprise grade issue and ticket tracking system.
 It allows organizations to keep track of what needs to get done, who is working on which tasks, what's already been done, and when tasks were (or weren't) completed.
+The Request Tracker plugin allows you to create and manage tickets. 
 
-## Actions
+# Key Features
 
-### Ticket Properties
+* Create Tickets
+* Get Ticket information
+
+# Requirements
+
+* Request Tracker credentials
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|user|string|None|False|Username|None|
+|pass|string|None|True|Password|None|
+|host|string|None|True|Server hosting Request Tracker|None|
+
+## Technical Details
+
+### Actions
+
+#### Ticket Properties
 
 This action is used to get the data for a single ticket, not including the history and comments.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ticket_id|integer|None|True|Ticket ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -41,17 +62,17 @@ This action is used to get the data for a single ticket, not including the histo
 |TimeWorked|string|False|None|
 |TimeLeft|string|False|None|
 
-### Ticket Links
+#### Ticket Links
 
 This action is used to get the ticket links for a single ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ticket_id|integer|None|True|Ticket ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -62,11 +83,11 @@ This action is used to get the ticket links for a single ticket.
 |RefersTo|string|False|None|
 |DependsTo|[]string|False|None|
 
-### Ticket Attachments
+#### Ticket Attachments
 
 This action is used to get a list of all attachments related to the ticket.
 
-#### Output
+##### Output
 
 Returns a list of attachments each structured as shown below:
 
@@ -77,18 +98,18 @@ Returns a list of attachments each structured as shown below:
 |Size|string|False|None|
 |ContentType|string|False|None|
 
-### Ticket Attachment
+#### Ticket Attachment
 
 This action is used to get the metadata and content of a specific attachment.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ticket_id|integer|None|True|Ticket ID|None|
 |attachment_id|integer|None|True|Attachment ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -105,49 +126,49 @@ This action is used to get the metadata and content of a specific attachment.
 |Headers|string|False|None|
 |Content|string|False|None|
 
-### Ticket Attachment Content
+#### Ticket Attachment Content
 
 This action is used to get the attachment data content without additional metadata or whitespace characters.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ticket_id|integer|None|True|Ticket ID|None|
 |attachment_id|integer|None|True|Attachment ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |content|string|False|string containing the original content|
 
-### Ticket History
+#### Ticket History
 
 This action is used to get a list of all the history items for a given ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ticket_id|integer|None|True|Ticket ID|None|
 
-#### Output
+##### Output
 
 Returns a list of Ticket History objects
 
-### Ticket History Entry
+#### Ticket History Entry
 
 This action is used to get the history information for a single history item. Note that the history item must actually correspond to the ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ticket_id|integer|None|True|Ticket ID|None|
 |history_id|integer|None|True|Ticket ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -165,11 +186,11 @@ This action is used to get the history information for a single history item. No
 |Created|date|False|None|
 |Attachments|[]object|False|None|
 
-### Ticket Search
+#### Ticket Search
 
 This action is used to get the ticket links for a single ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -178,7 +199,7 @@ This action is used to get the ticket links for a single ticket.
 |queue|string|None|False|Queue where to search|None|
 |keywords|object|None|False|Other arguments possible to set if not passing raw_query|None|
 
-##### Keywords Input
+###### Keywords Input
 
 Other arguments possible to set if not passing raw_query
 
@@ -203,22 +224,22 @@ __notlike  for operator NOT LIKE
 Setting values to keywords constrain search
 result to the tickets satisfying all of them.
 
-#### Output
+##### Output
 
 Returns a list of matching tickets. Each ticket is the same dictionary as in the Ticket type.
 
-### Ticket Create
+#### Ticket Create
 
 This action is used to get a new ticket.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |queue|string|None|False|Queue where to search|None|
 |keywords|object|None|False|Key-Value pairs map of ticket properties|None|
 
-#### Output
+##### Output
 
 Returns ID of new ticket or ``-1``, if creating failed.
 
@@ -226,35 +247,29 @@ Returns ID of new ticket or ``-1``, if creating failed.
 |----|----|--------|-----------|
 |id|integer|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user|string|None|False|Username|None|
-|pass|string|None|True|Password|None|
-|host|string|None|True|Server hosting Request Tracker|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-* Ticket management
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Request Tracker](https://bestpractical.com/request-tracker)
 * [REST API documentation](https://rt-wiki.bestpractical.com/wiki/REST#Ticket_Create)
+
