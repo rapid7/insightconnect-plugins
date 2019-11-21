@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "update_incident",
+    "meta": {},
+    "input": {
+      "system_id": "71e49470db1a7f00a7e99b3c8a961905",
+      "update_data": {
+        "short_description": "Short description"
+      }
+    },
+    "connection": {
+      "client_login": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
