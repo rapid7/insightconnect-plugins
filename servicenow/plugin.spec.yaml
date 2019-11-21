@@ -1,0 +1,398 @@
+plugin_spec_version: v2
+extension: plugin
+products: ["insightconnect"]
+name: servicenow
+title: ServiceNow
+description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
+version: 3.1.1
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  vendor_url: https://www.servicenow.com/
+tags:
+- servicenow
+- incident
+- tables
+hub_tags:
+  use_cases: [soar, remediation_ticketing, asset_inventory, soc_automation]
+  keywords: [servicenow, incident, tables, cmdb]
+  features: []
+
+types:
+  comments_worknotes:
+    sys_id:
+      title: System ID
+      description: System ID of comment or worknotes
+      type: string
+      required: true
+    sys_created_on:
+      title: Creation date
+      description: Comment or work notes creation date
+      type: string
+      required: true
+    name:
+      title: Name
+      description: Type of record
+      type: string
+      required: true
+    element_id:
+      title: Element ID
+      description: System ID of an incident
+      type: string
+      required: true
+    sys_tags:
+      title: System Tags
+      description: System tags
+      type: string
+      required: true
+    value:
+      title: Value
+      description: Value of comment or worknotes
+      type: string
+      required: true
+    sys_created_by:
+      title: Created By
+      description: User who added the comment
+      type: string
+      required: true
+    element:
+      title: Element
+      description: Either 'comments' or 'work_notes'
+      type: string
+      required: true
+connection:
+  url:
+    title: ServiceNow URL
+    description: The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com
+    type: string
+    required: true
+  client_login:
+    title: Client Login Information
+    description: The ServiceNow username and password for basic authentication API interaction
+    type: credential_username_password
+    required: true
+  timeout:
+    title: Timeout
+    description: The interval in seconds before abandoning an attempt to access ServiceNow
+    type: integer
+    required: false
+    default: 30
+actions:
+  create_incident:
+    title: Create Incident
+    description: Create a new ServiceNow Incident record
+    input:
+      create_data:
+        title: Create Data
+        description: JSON object containing the fields and values to create a new incident
+        type: object
+        required: false
+    output:
+      system_id:
+        title: System ID
+        description: System ID of the new Incident created
+        type: string
+        required: true
+  search_incident:
+    title: Search Incident
+    description: Search for Incidents satisfying the given query
+    input:
+      query:
+        title: Query
+        description: Non-encoded query string (e.g. number=INC0000055^ORshort_description=New
+          bug)
+        type: string
+        required: true
+    output:
+      system_ids:
+        title: System IDs
+        description: List of System IDs of Incidents satisfying the given query
+        type: '[]string'
+        required: true
+  read_incident:
+    title: Read Incident
+    description: Populate a JSON object with the specified fields of the given Incident
+    input:
+      system_id:
+        title: System ID
+        description: System ID of the Incident record from which to read
+        type: string
+        required: true
+      filtering_fields:
+        title: Filtering Fields
+        description: Comma-separated list of fields desired in output object (e.g.
+          opened_by,number)
+        type: string
+        required: true
+    output:
+      filtered_incident:
+        title: Filtered Incident
+        description: JSON object representing the incident containing the given fields
+        type: object
+        required: true
+  update_incident:
+    title: Update Incident
+    description: Update a ServiceNow Incident with the given data
+    input:
+      system_id:
+        title: System ID
+        description: System ID of the Incident record to update
+        type: string
+        required: true
+      update_data:
+        title: Update Data
+        description: JSON object containing the fields and values to update
+        type: object
+        required: true
+    output:
+      success:
+        title: Success
+        description: True if the update was successful
+        type: boolean
+        required: true
+  delete_incident:
+    title: Delete Incident
+    description: Remove the given ServiceNow Incident from the instance
+    input:
+      system_id:
+        title: System ID
+        description: System ID of the Incident record to delete
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: True if the deletion was successful, false otherwise
+        type: boolean
+        required: true
+  put_incident_attachment:
+    title: Put Incident Attachment
+    description: Associate a file with a ServiceNow Incident
+    input:
+      system_id:
+        title: System ID
+        description: System ID of the Incident record to which the file will be attached
+        type: string
+        required: true
+      attachment_name:
+        title: Attachment Name
+        description: Name of the attachment in the ServiceNow instance
+        type: string
+        required: true
+      base64_content:
+        title: Base64 Content
+        description: Content of the attachment, encoded into Base64
+        type: bytes
+        required: true
+      mime_type:
+        title: MIME Type
+        description: MIME type (a.k.a. content type) of the file to be attached
+        type: string
+        enum:
+        - text/plain (.txt)
+        - text/html (.html)
+        - application/rtf (.rtf)
+        - application/pdf (.pdf)
+        - application/msword (.doc)
+        - application/vnd.ms-powerpoint (.ppt)
+        - image/bmp (.bmp)
+        - image/gif (.gif)
+        - image/jpeg (.jpg)
+        - image/png (.png)
+        - image/tiff (.tiff)
+        - OTHER
+        required: true
+      other_mime_type:
+        title: Other MIME type
+        description: User-specified MIME type not in the enumerated list
+        type: string
+        required: false
+    output:
+      attachment_id:
+        title: Attachment ID
+        description: System ID of the newly created attachment
+        type: string
+        required: true
+  search_incident_attachment:
+    title: Search Incident Attachment
+    description: Search for attachment files with the given name
+    input:
+      name:
+        title: Name
+        description: Name of the attachment, i.e. the base file name used to create it
+        type: string
+        required: true
+    output:
+      attachment_ids:
+        title: Attachment IDs
+        description: List of System IDs of attachment records with the given name
+        type: '[]string'
+        required: true
+  get_incident_attachment:
+    title: Get Incident Attachment
+    description: Download the Base64-encoded contents of the given attachment
+    input:
+      attachment_id:
+        title: Attachment ID
+        description: System ID of the attachment to copy
+        type: string
+        required: true
+    output:
+      attachment_contents:
+        title: Attachment Contents
+        description: The Base64-encoded contents of the downloaded attachment
+        type: string
+        required: true
+  delete_incident_attachment:
+    title: Delete Incident Attachment
+    description: Remove the given attachment from the ServiceNow instance
+    input:
+      attachment_id:
+        title: Attachment ID
+        description: System ID of the attachment to delete
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: True if the deletion was successful, false otherwise
+        type: boolean
+        required: true
+  get_ci:
+    title: Get CI
+    description: Retrieve a CI record from ServiceNow
+    input:
+      table:
+        title: Table
+        description: The ServiceNow table to retrieve the CI from
+        type: string
+        required: true
+      system_id:
+        title: System ID
+        description: The system ID of the record to retrieve
+        type: string
+        required: true
+    output:
+      servicenow_ci:
+        title: ServiceNow CI
+        description: JSON object representing the CI record returned
+        type: object
+        required: true
+  search_ci:
+    title: Search CI
+    description: Retrieve CI record(s) from ServiceNow based on the provided query
+    input:
+      table:
+        title: Table
+        description: The ServiceNow table to execute the query against
+        type: string
+        required: true
+      query:
+        title: Query
+        description: Non-encoded query string for retrieving ServiceNow CI record(s)
+          (e.g. number=INC0000055^ORshort_description=New bug)
+        type: string
+        required: true
+    output:
+      servicenow_cis:
+        title: ServiceNow CIs
+        description: List of JSON objects representing the CI record(s) returned by the query
+        type: '[]object'
+        required: true
+  create_ci:
+    title: Create CI
+    description: Create a new ServiceNow CI record
+    input:
+      table:
+        title: Table
+        description: The ServiceNow table where the new CI record will be inserted
+        type: string
+        required: true
+      create_data:
+        title: Create Data
+        description: JSON object containing the fields and values to create a new CI
+        type: object
+        required: true
+    output:
+      system_id:
+        title: System ID
+        description: System ID of the new CI created
+        type: string
+        required: true
+  update_ci:
+    title: Update CI
+    description: Update an existing ServiceNow CI record
+    input:
+      table:
+        title: Table
+        description: The ServiceNow table where the CI record will be updated
+        type: string
+        required: true
+      system_id:
+        title: System ID
+        description: System ID of the CI record to update
+        type: string
+        required: true
+      update_data:
+        title: Update Data
+        description: JSON object containing the fields and values to perform a CI update
+        type: object
+        required: true
+    output:
+      success:
+        title: Success
+        description: True if the update was successful
+        type: boolean
+        required: true
+  get_incident_comments_worknotes:
+    title: Get Incident Comments and Work Notes
+    description: Get comments and work notes for an incident
+    input:
+      system_id:
+        title: System ID
+        description: System ID of Incident record for which comments and work notes will be retrieved
+        type: string
+        required: true
+      type:
+        title:  Type
+        description: Type of output to be retrieved
+        type: string
+        required: true
+        enum:
+          - all
+          - comments
+          - work notes
+    output:
+      incident_comments_worknotes:
+        title: Comments and Work Notes
+        description: List of comments and work notes for an incident
+        type: '[]comments_worknotes'
+        required: true
+triggers:
+  incident_changed:
+    title: Incident Changed
+    description: Reports changes of the given fields in the given Incident
+    input:
+      system_id:
+        title: System ID
+        description: System ID of the Incident record to monitor
+        type: string
+        required: true
+      monitored_fields:
+        title: Monitored Fields
+        description: Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)
+        type: string
+        required: true
+      interval:
+        title: Interval
+        description: How often to detect changes to the given Incident (in minutes)
+        type: integer
+        required: false
+        default: 5
+    output:
+      changed_fields:
+        title: Changed Fields
+        description: JSON object representing changed fields (map of field name to previous and current values)
+        type: object
+        required: true

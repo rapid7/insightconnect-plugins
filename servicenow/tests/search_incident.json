@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "search_incident",
+    "meta": {},
+    "input": {
+      "query": "name=test"
+    },
+    "connection": {
+      "client_login": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

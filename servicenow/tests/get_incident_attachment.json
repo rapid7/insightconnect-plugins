@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "get_incident_attachment",
+    "meta": {},
+    "input": {
+      "attachment_id": ""
+    },
+    "connection": {
+      "client_login": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
