@@ -12,7 +12,7 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 # Requirements
 
-* Username and password for a user with the necessary permissions 
+* Username and password for a user with the necessary permissions
 
 # Documentation
 
@@ -4176,7 +4176,7 @@ This trigger is used to check for new InsightVM vulnerability exception activity
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|
-|status_filter|[]string|['Under Review']|False|List of vulnerabiliti statuses to match for trigger; options include: Under Review, Approved, Rejected, Expired, Deleted|None|
+|status_filter|[]string|['under review']|False|List of vulnerabiliti statuses to match for trigger; options include: under review, approved, rejected, expired, deleted|None|
 
 ##### Output
 
@@ -4314,4 +4314,3 @@ This plugin does not contain any troubleshooting information.
 
 * [InsightVM](https://www.rapid7.com/products/insightvm/)
 * [InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)
-
