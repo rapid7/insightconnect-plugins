@@ -177,9 +177,9 @@ This action is used to remove a user from Office365.
 Example output:
 
 ```
-
-
-
+{
+  "success": true
+}
 ```
 
 #### Update Usage Location
