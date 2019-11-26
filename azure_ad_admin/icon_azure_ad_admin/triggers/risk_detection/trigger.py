@@ -24,14 +24,14 @@ class RiskDetection(komand.Trigger):
         new_risks = self.get_risks()
 
         try:
-            result = json.loads(new_risks.text)['value']
+            result = new_risks['value']
         except KeyError:
             raise PluginException(cause='Unexpected output format.',
                                   assistance='The output from Azure Active Directory was not in the expected format. Please contact support for help.',
                                   data=result)
 
         for risk in result:
-            self.found[risk['id']] = True
+            self.found[risk.get('id')] = True
 
     def get_risks(self):
         headers = self.connection.get_headers(self.connection.get_auth_token())
@@ -49,25 +49,28 @@ class RiskDetection(komand.Trigger):
                 assistance="Please contact support for help.",
                 data=new_risks.text)
 
-        return new_risks
+        try:
+            return new_risks.json()
+        except json.decoder.JSONDecodeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=new_risks)
 
     def poll(self):
         new_risks = self.get_risks()
 
         try:
-            result = remove_null_and_clean(json.loads(new_risks.text)['value'])
+            result = remove_null_and_clean(new_risks['value'])
         except KeyError:
             raise PluginException(cause='Unexpected output format.',
                                   assistance='The output from Azure Active Directory was not in the expected format. Please contact support for help.',
                                   data=result)
 
         for risk in result:
-            if risk['id'] not in self.found:
-                self.found[risk['id']] = True
+            if risk.get('id') not in self.found:
+                self.found[risk.get('id')] = True
                 self.send({Output.RISK: risk})
 
     def run(self, params={}):
-        self.risk_level = params.get('risk_level')
+        self.risk_level = params.get(Input.RISK_LEVEL)
         self.initialize()
         while True:
             self.poll()
