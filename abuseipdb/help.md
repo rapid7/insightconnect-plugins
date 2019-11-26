@@ -14,7 +14,6 @@ This plugin utilizes [AbuseIPDB API v2](https://docs.abuseipdb.com).
 
 * Requires a [free AbuseIPDB account](https://www.abuseipdb.com/register) and accompanying API Key
 
-
 # Documentation
 
 ## Setup

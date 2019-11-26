@@ -50,7 +50,7 @@ Example output:
 ```
 {
     "success": True
-}   
+}
 ```
 
 ### Triggers

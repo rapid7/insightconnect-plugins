@@ -47,8 +47,8 @@ Example input:
 }
 ```
 
-
 ###### Push
+
 |Parameter|Required?|Description|
 |---------|---------|-----------|
 |device|Required|ID of the device. This device must have the "push" capability. You may also specify "auto" to use the first of the user's devices with the "push" capability.|
@@ -57,16 +57,19 @@ Example input:
 |pushinfo|Optional|A set of URL-encoded key/value pairs with additional contextual information associated with this authentication attempt. The Duo Mobile app will display this information to the user. For example: from=login%20portal&domain=example.com. The URL-encoded string's total length must be less than 20,000 bytes.|
 
 ###### Passcode
+
 |Parameter|Required?|Description|
 |---------|---------|-----------|
 |passcode|true|Passcode entered by the user.|
 
 ###### Phone
+
 |Parameter|Required?|Description|
 |---------|---------|-----------|
 |device|true|ID of the device to call. This device must have the "phone" capability. You may also specify "auto" to use the first of the user's devices with the "phone" capability.|
 
 ###### SMS
+
 |Parameter|Required?|Description|
 |---------|---------|-----------|
 |device|true|ID of the device to send passcodes to. This device must have the "sms" capability. You may also specify "auto" to use the first of the user's devices with the "sms" capability.|

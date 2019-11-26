@@ -1,8 +1,8 @@
 # Description
 
-[CloudShark](https://www.cloudshark.org/) is an on-premises platform for packet analysis. 
+[CloudShark](https://www.cloudshark.org/) is an on-premises platform for packet analysis.
 Users can upload and manage capture files using the CloudShark plugin for Rapid7 InsightConnect. Use CloudShark to
-assist with alert investigations, internal penetration testing, and more. 
+assist with alert investigations, internal penetration testing, and more.
 
 # Key Features
 

@@ -10,14 +10,16 @@ PowerShell is a task automation and configuration management framework from Micr
 
 # Requirements
 
-The requirements for running the PowerShell plugin will vary depending on the use case. Your PowerShell scripts can either be run locally on the InsightConnect Orchestrator or remotely on a PowerShell enabled server. 
+The requirements for running the PowerShell plugin will vary depending on the use case. Your PowerShell scripts can either be run locally on the InsightConnect Orchestrator or remotely on a PowerShell enabled server.
 
 ## Remote Requirements
+
 * A PowerShell enabled server
 * Administrative credentials to a PowerShell enabled server
 
 ## Local Requirements
-* PowerShell can be run locally on the InsightConnect Orchestrator, in this case, you must ensure connectivity to any network resources the PowerShell script will use. Typically this involves opening ports in your firewall or windows servers. 
+
+* PowerShell can be run locally on the InsightConnect Orchestrator, in this case, you must ensure connectivity to any network resources the PowerShell script will use. Typically this involves opening ports in your firewall or windows servers.
 
 # Documentation
 

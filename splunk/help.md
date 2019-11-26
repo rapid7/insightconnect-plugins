@@ -246,8 +246,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-* If issues are encountered when using the `Search` action, try prefixing your query with `search`, example: 
-`search index="*" | head 5`.
+* If issues are encountered when using the `Search` action, try prefixing your query with `search`, example: `search index="*" | head 5`.
 
 # Version History
 

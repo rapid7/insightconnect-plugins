@@ -1,7 +1,7 @@
 # Description
 
-[Threat Miner](https://www.threatminer.org) is an open source search engine for fast threat intelligence 
-research and pivoting with context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup 
+[Threat Miner](https://www.threatminer.org) is an open source search engine for fast threat intelligence
+research and pivoting with context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup
 various pieces of information for threat intelligence gathering.
 
 The Threat Miner plugin can aid in phishing analysis through its various lookup actions for domains, IP addresses, and

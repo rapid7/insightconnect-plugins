@@ -1,7 +1,7 @@
 # Description
 
-[Imperva SecureSphere](https://www.imperva.com/Products/WebApplicationFirewall-WAF) is a web application firewall 
-that analyzes all user access to your business-critical web applications and protects your applications and data 
+[Imperva SecureSphere](https://www.imperva.com/Products/WebApplicationFirewall-WAF) is a web application firewall
+that analyzes all user access to your business-critical web applications and protects your applications and data
 from cyber attacks.
 
 # Key Features

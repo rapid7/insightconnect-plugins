@@ -1,6 +1,6 @@
 # Description
 
-[ElastAlert](https://github.com/Yelp/elastalert) allows for easy & flexible alerting with ElasticSearch. Users of the 
+[ElastAlert](https://github.com/Yelp/elastalert) allows for easy & flexible alerting with ElasticSearch. Users of the
 ElastAlert plugin can monitor alerts using an ElastAlert webhook in real-time for automation use.
 
 # Key Features

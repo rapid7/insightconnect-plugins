@@ -7,7 +7,7 @@ This plugin supports authentication from both personal and organization member a
 # Key Features
 
 * Issue management
-* User management 
+* User management
 
 # Requirements
 

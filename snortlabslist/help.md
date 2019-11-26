@@ -1,6 +1,6 @@
 # Description
 
-[Snort Labs List](http://talosintel.com/feeds/ip-filter.blf) is an IP blacklist provided by Snort. 
+[Snort Labs List](http://talosintel.com/feeds/ip-filter.blf) is an IP blacklist provided by Snort.
 Users of this plugin can query it with an IP address to check the status, assisting with alert enrichment and
 other threat intelligence needs.
 

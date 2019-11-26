@@ -1,6 +1,6 @@
 # Description
 
-The TenableIO plugin allows you to launch scans and analyze reports. 
+The TenableIO plugin allows you to launch scans and analyze reports.
 
 [TenableIO](http://www.tenable.com/products/tenable-io) is a cloud-based vulnerability management platform
 This plugin utilizes the [TenableIO API](https://cloud.tenable.com/api#/overview).

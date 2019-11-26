@@ -1,6 +1,6 @@
 # Description
 
-The Ping plugin is used to check for network connectivity and response times. 
+The Ping plugin is used to check for network connectivity and response times.
 
 This plugin uses the uses the [GNU Ping](https://www.gnu.org/software/inetutils/manual/html_node/ping-invocation.html#ping-invocation).
 

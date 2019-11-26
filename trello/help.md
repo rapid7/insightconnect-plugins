@@ -1,6 +1,6 @@
 # Description
 
-The Trello plugin allows you to manage users in your Trello project. 
+The Trello plugin allows you to manage users in your Trello project.
 
 [Trello](https://trello.com) gives you perspective over all your projects, at work and at home.
 Whether it's managing a team, writing an epic screenplay, or just making a grocery list,

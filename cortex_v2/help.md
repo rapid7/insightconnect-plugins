@@ -1,9 +1,9 @@
 # Description
 
-[Cortex](https://github.com/CERT-BDF/Cortex) is an observable analysis and active response engine. 
+[Cortex](https://github.com/CERT-BDF/Cortex) is an observable analysis and active response engine.
 With the Cortex plugin for Rapid7 InsightConnect, users can manage analyzers, jobs, and run file analyzers.
 
-Use Cortex within an automation workflow to analyze files using hundreds of analyzers to help determine if they are 
+Use Cortex within an automation workflow to analyze files using hundreds of analyzers to help determine if they are
 malicious or safe.
 
 # Key Features
@@ -550,6 +550,7 @@ Example output:
   }
 }
 ```
+
 #### Bulk Analyze
 
 This action is used to run all or a collection of analyzers on an observable.

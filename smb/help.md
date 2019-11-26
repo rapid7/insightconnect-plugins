@@ -1,8 +1,8 @@
 # Description
 
-[SMB](https://en.wikipedia.org/wiki/Server_Message_Block) is a protocol used for interacting with files on an SMB 
+[SMB](https://en.wikipedia.org/wiki/Server_Message_Block) is a protocol used for interacting with files on an SMB
 server. Using this plugin, users can interact with shares and delete files automatically within Rapid7 InsightConnect
-workflows. 
+workflows.
 
 # Key Features
 

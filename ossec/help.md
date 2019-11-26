@@ -5,7 +5,7 @@ This plugin parses the standard multi-line OSSEC alerts found in `/var/ossec/log
 
 # Key Features
 
-* Parse OSSEC alerts 
+* Parse OSSEC alerts
 * Convert alerts to JSON
 
 # Requirements

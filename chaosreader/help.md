@@ -4,7 +4,7 @@
 
 # Key Features
 
-* Analyze captured network traffic 
+* Analyze captured network traffic
 
 # Requirements
 

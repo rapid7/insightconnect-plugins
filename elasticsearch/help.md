@@ -1,7 +1,7 @@
 # Description
 
-[Elasticsearch](https://www.elastic.co) is a distrbuted real-time search and analytics engine. This plugin allows for indexing and updating documents, as well as searching indexes and polling for new documents given a query. The Elasticsearch plugin will allow you to update and search documents. It will also allow you to check your cluster's health. 
-This plugin utilizes the [Elasticsearch API](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html). 
+[Elasticsearch](https://www.elastic.co) is a distrbuted real-time search and analytics engine. This plugin allows for indexing and updating documents, as well as searching indexes and polling for new documents given a query. The Elasticsearch plugin will allow you to update and search documents. It will also allow you to check your cluster's health.
+This plugin utilizes the [Elasticsearch API](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
 
 # Key Features
 

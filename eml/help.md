@@ -1,6 +1,6 @@
 # Description
 
-The EML plugins will parse and extract data from an EML file. 
+The EML plugins will parse and extract data from an EML file.
 
 # Key Features
 

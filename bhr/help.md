@@ -1,6 +1,6 @@
 # Description
 
-The Black Hole Router plugin is use to assist with managing networks blocked within Black Hole Router site. 
+The Black Hole Router plugin is use to assist with managing networks blocked within Black Hole Router site.
 
 # Key Features
 

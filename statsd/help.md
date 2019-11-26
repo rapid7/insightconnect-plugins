@@ -1,7 +1,7 @@
 
 # Description
 
-[Statsd](https://github.com/etsy/statsd) is a friendly front-end proxy for the Graphite/Carbon metrics server. The Statsd plugin will allow you to create metrics from your workflow. It will allow you to increment, decrement, and set various metrics. 
+[Statsd](https://github.com/etsy/statsd) is a friendly front-end proxy for the Graphite/Carbon metrics server. The Statsd plugin will allow you to create metrics from your workflow. It will allow you to increment, decrement, and set various metrics.
 
 This plugin utilizes the [Python Statsd](https://statsd.readthedocs.io/en/latest/) library.
 
