@@ -229,7 +229,7 @@ Example output:
 }
 ```
 
-### Submit File
+##### Submit File
 
 This action is used to submit a file to ThreatStream sandbox.
 
@@ -272,7 +272,7 @@ Example output:
 }
 ```
 
-### Submit URL
+##### Submit URL
 
 This action is used to submit a URL to ThreatStream sandbox.
 
