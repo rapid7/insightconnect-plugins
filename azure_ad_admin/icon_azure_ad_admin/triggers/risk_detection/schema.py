@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "User and sign-in linked risk detections and associated information about the detection"
+    DESCRIPTION = "Provides list of both user and sign-in linked risk detections and associated information about the detection"
 
 
 class Input:

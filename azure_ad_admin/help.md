@@ -282,7 +282,7 @@ Example output:
 
 #### Risk Detection
 
-This trigger is used to user and sign-in linked risk detections and associated information about the detection.
+This trigger provides list of both user and sign-in linked risk detections and associated information about the detection.
 
 #### Input
 

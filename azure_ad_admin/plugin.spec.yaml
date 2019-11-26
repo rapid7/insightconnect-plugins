@@ -474,7 +474,7 @@ actions:
 triggers:
   risk_detection:
     title: Risk Detection
-    description: User and sign-in linked risk detections and associated information about the detection
+    description: Provides list of both user and sign-in linked risk detections and associated information about the detection
     input:
       risk_level:
         title: Risk Level
