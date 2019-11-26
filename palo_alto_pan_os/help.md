@@ -6,7 +6,7 @@ This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documenta
 # Key Features
 
 * Manage Palo Alto Networks devices
-* Manage configurations 
+* Manage configurations
 
 # Requirements
 

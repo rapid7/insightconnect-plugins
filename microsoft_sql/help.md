@@ -1,6 +1,6 @@
 # Description
 
-The [Microsoft SQL](https://www.microsoft.com/en-us/sql-server/default.aspx) plugin allows user to run queries against Microsoft SQL databases. 
+The [Microsoft SQL](https://www.microsoft.com/en-us/sql-server/default.aspx) plugin allows user to run queries against Microsoft SQL databases.
 
 # Key Features
 

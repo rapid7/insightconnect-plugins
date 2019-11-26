@@ -1,10 +1,10 @@
 # Description
 
-The [Tcpdump](http://www.tcpdump.org) plugin is used to parse PCAP file. 
+The [Tcpdump](http://www.tcpdump.org) plugin is used to parse PCAP file.
 
 # Key Features
 
-* Parse and return the contents of a PCAP file. 
+* Parse and return the contents of a PCAP file.
 
 # Requirements
 

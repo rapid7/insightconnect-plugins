@@ -1,6 +1,6 @@
 # Description
 
-[CRITs](https://crits.github.io/) is an open source malware and threat repository for conducting malware analyses. 
+[CRITs](https://crits.github.io/) is an open source malware and threat repository for conducting malware analyses.
 With the CRITs plugin for Rapid7 InsightConnect, users can manage actors, events, collections, domains, and more.
 
 Using the CRITs plugin, users can quickly automate usecases around threat intelligence, malware analysis, email

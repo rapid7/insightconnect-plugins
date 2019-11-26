@@ -1,7 +1,7 @@
 # Description
 
-[Twilio](https://www.twilio.com/) is a cloud communications platform for building SMS, Voice & Messaging applications 
-on an API built for global scale. Users can send SMS using the Twilio plugin for Rapid7 for notification or other 
+[Twilio](https://www.twilio.com/) is a cloud communications platform for building SMS, Voice & Messaging applications
+on an API built for global scale. Users can send SMS using the Twilio plugin for Rapid7 for notification or other
 purposes.
 
 # Key Features

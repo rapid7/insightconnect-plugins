@@ -2,7 +2,7 @@
 
 [Request Tracker](https://bestpractical.com/request-tracker) is the open-source enterprise grade issue and ticket tracking system.
 It allows organizations to keep track of what needs to get done, who is working on which tasks, what's already been done, and when tasks were (or weren't) completed.
-The Request Tracker plugin allows you to create and manage tickets. 
+The Request Tracker plugin allows you to create and manage tickets.
 
 # Key Features
 

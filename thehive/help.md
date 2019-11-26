@@ -1,7 +1,7 @@
 # Description
 
-[TheHive](https://thehive-project.org/) TheHive is a scalable, open source security incident response solution 
-designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done. 
+[TheHive](https://thehive-project.org/) TheHive is a scalable, open source security incident response solution
+designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done.
 Handle your case management needs with TheHive plugin for Rapid7 InsightConnect.
 
 # Key Features

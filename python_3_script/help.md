@@ -25,8 +25,8 @@ NOTE: Custom Python 3 modules can be loaded via connection parameters
 
 ## Setup
 
-The `connection` component accepts `modules` and `timeout` inputs. The `modules` input should be a JSON list of third-party 
-modules to install. Modules can be found on [PyPi.org](https://pypi.org/). The `timeout` input sets a timeout duration 
+The `connection` component accepts `modules` and `timeout` inputs. The `modules` input should be a JSON list of third-party
+modules to install. Modules can be found on [PyPi.org](https://pypi.org/). The `timeout` input sets a timeout duration
 for the installation of these modules.
 
 |Name|Type|Default|Required|Description|Enum|

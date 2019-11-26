@@ -11,7 +11,7 @@
 # Requirements
 
 * Cisco ThreatGrid server's region
-* Cisco ThreatGrid API key 
+* Cisco ThreatGrid API key
 
 # Documentation
 

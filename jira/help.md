@@ -1,6 +1,6 @@
 # Description
 
-[Jira](https://www.atlassian.com/software/jira) is a tool developed by Australian Company Atlassian. 
+[Jira](https://www.atlassian.com/software/jira) is a tool developed by Australian Company Atlassian.
 It is used for bug tracking, issue tracking, and project management.
 
 # Key Features

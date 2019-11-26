@@ -1,6 +1,6 @@
 # Description
 
-The [Office365 Admin](https://www.office.com/) plugin enables user management in Office 365. 
+The [Office365 Admin](https://www.office.com/) plugin enables user management in Office 365.
 
 This plugin utilizes the [Microsoft Graph API](https://developer.microsoft.com/en-us/graph/docs/concepts/overview).
 
@@ -19,7 +19,6 @@ This plugin utilizes the [Microsoft Graph API](https://developer.microsoft.com/e
 ## Setup
 
 The connection configuration accepts the following parameters:
-
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -177,9 +176,9 @@ This action is used to remove a user from Office365.
 Example output:
 
 ```
-
-
-
+{
+  "success": true
+}
 ```
 
 #### Update Usage Location

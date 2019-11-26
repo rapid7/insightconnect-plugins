@@ -10,12 +10,12 @@ In addition, Threat Stack will be deprecating this API in favor of version 2 whe
 
 # Key Features
 
-* Get information about Alerts, Organizations, Policies, and Agents 
+* Get information about Alerts, Organizations, Policies, and Agents
 
 # Requirements
 
-* A Threat Stack API key 
-* An Organization ID 
+* A Threat Stack API key
+* An Organization ID
 * The Threat Stack API version
 
 # Documentation

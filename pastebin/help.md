@@ -6,7 +6,7 @@ sources code or configuration information, but anyone is more than welcome to
 paste any type of text. The idea behind the site is to make it more convenient
 for people to share large amounts of text online.
 
-The Pastebin plugin allows you to post text online, and analyze posts. 
+The Pastebin plugin allows you to post text online, and analyze posts.
 
 # Key Features
 

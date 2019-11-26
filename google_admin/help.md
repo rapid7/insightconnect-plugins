@@ -1,6 +1,6 @@
 # Description
 
-Gsuite administrative functions allow you to manage users. The InsightConnect plugin can suspend users as part of containment or deprovisioning workflows. 
+Gsuite administrative functions allow you to manage users. The InsightConnect plugin can suspend users as part of containment or deprovisioning workflows.
 
 # Key Features
 

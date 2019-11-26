@@ -4,10 +4,10 @@
   responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
 InsightConnect, users can search domain lists, entity lists, and more.
 
-Use Recorded Future within an automation workflow to quickly assist with threat analysis, incident response, and 
+Use Recorded Future within an automation workflow to quickly assist with threat analysis, incident response, and
 vulnerability management.
 
-Note: When a plugin action that causes a file to be downloaded is invoked, the file data is parsed internally and 
+Note: When a plugin action that causes a file to be downloaded is invoked, the file data is parsed internally and
 returned in the [STIX](https://stixproject.github.io/about/) format.
 
 # Key Features
@@ -541,7 +541,7 @@ This plugin does not contain any troubleshooting information.
 * 1.5.3 - New spec and help.md format for the Hub
 * 1.5.2 - Fix issue where timestamp for evidenceDetails was set to integer, timestamp is now expected as datetime from RecordedFuture
 * 1.5.1 - Fix issue where parameter timestamp in evidenceDetails was set as a string in Lookup IP Address action, timestamp is now an integer
-* 1.5.0 - Add support for handling IP addresses not found for action Lookup IP Address | Add found parameter to  action Lookup IP Address 
+* 1.5.0 - Add support for handling IP addresses not found for action Lookup IP Address | Add found parameter to  action Lookup IP Address
 * 1.4.1 - Add missing output and remove extra output for actions Lookup Hash, Lookup Domain, Lookup IP Address and Lookup URL
 * 1.4.0 - New action Lookup URL | Add input comment to actions Lookup Hash and Lookup Domain
 * 1.3.0 - Add additional output for action Lookup IP Address | Add input fields to action Lookup IP Address
