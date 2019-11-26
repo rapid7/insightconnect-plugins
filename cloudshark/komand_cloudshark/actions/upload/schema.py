@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Upload capture file"
+
+
 class Input:
     COMMENTS = "comments"
     FILE = "file"

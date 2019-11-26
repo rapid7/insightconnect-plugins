@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Send an SMS message to a phone number"
+
+
 class Input:
     MESSAGE = "message"
     TO_NUMBER = "to_number"

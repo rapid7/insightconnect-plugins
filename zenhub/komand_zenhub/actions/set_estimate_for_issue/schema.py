@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Set the ZenHub Estimate Value for a GitHub Issue"
+
+
 class Input:
     ESTIMATE_VALUE = "estimate_value"
     ISSUE_NUMBER = "issue_number"
@@ -41,8 +45,8 @@ class SetEstimateForIssueInput(komand.Input):
   },
   "required": [
     "estimate_value",
-    "repo_id",
-    "issue_number"
+    "issue_number",
+    "repo_id"
   ]
 }
     """)

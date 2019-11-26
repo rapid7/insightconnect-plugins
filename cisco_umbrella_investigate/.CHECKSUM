@@ -1,0 +1,79 @@
+{
+	"spec": "b590d5b19cc4ce965e431f0102fdafbf",
+	"manifest": "9039331ea03e7067953d31cbcee0386a",
+	"setup": "1fb1380403a55b74d1e2969916a487f0",
+	"schemas": [
+		{
+			"identifier": "categorization/schema.py",
+			"hash": "8a3976a95c477f498e95276633f9fec5"
+		},
+		{
+			"identifier": "cooccurrences/schema.py",
+			"hash": "a36f3486c1b88fe9fa620279d9daf400"
+		},
+		{
+			"identifier": "domain_tags/schema.py",
+			"hash": "a038464a99f96f50ca45a15f3d3ee14c"
+		},
+		{
+			"identifier": "domain_whois/schema.py",
+			"hash": "1ca91a19def9661b596bde806f55d6db"
+		},
+		{
+			"identifier": "email_whois/schema.py",
+			"hash": "62dac7eb3abc154989ecc4dd6a6897da"
+		},
+		{
+			"identifier": "latest_domains/schema.py",
+			"hash": "28102ca435efe361d552ae16b8a2d4d1"
+		},
+		{
+			"identifier": "ns_whois/schema.py",
+			"hash": "85d55746c7dea7f6892ea5eaca1ecca5"
+		},
+		{
+			"identifier": "related/schema.py",
+			"hash": "47eb96c1d871f32594092573555ea678"
+		},
+		{
+			"identifier": "rr_history/schema.py",
+			"hash": "adda2e6008723cd8424249852e639304"
+		},
+		{
+			"identifier": "rr_history_ip/schema.py",
+			"hash": "854581643954db49cf7d2977d4119624"
+		},
+		{
+			"identifier": "sample/schema.py",
+			"hash": "81d21fdab1173b88c9f91c65b5410f3e"
+		},
+		{
+			"identifier": "sample_artifacts/schema.py",
+			"hash": "b4f12ba6a0461186ab33b19bb08ccdc5"
+		},
+		{
+			"identifier": "sample_connections/schema.py",
+			"hash": "a8ef64fc87a7704d1040fa778b42303e"
+		},
+		{
+			"identifier": "sample_samples/schema.py",
+			"hash": "dd7e4c44f33bbc5f0a6cb4c2eff790e6"
+		},
+		{
+			"identifier": "samples/schema.py",
+			"hash": "ada11d8cb95fdabfb935f7dec37bb21e"
+		},
+		{
+			"identifier": "search/schema.py",
+			"hash": "ae459167c7329c4233d871397e6499b5"
+		},
+		{
+			"identifier": "security/schema.py",
+			"hash": "a4998163329ed0ff6f46b7b7fed5f92d"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "bc1f9bcd1c75c53f576552c10c9b91cf"
+		}
+	]
+}

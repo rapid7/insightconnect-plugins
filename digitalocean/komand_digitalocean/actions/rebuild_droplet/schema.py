@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Rebuilds the droplet from a specified image"
+
+
 class Input:
     DROPLET_ID = "droplet_id"
     IMAGE_ID = "image_id"

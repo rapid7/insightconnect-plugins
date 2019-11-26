@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Extract text from PDF file"
+
+
 class Input:
     CONTENTS = "contents"
     

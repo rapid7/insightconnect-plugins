@@ -1,20 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: rapid7_metasploit
 title: Rapid7 Metasploit
-description: Metasploit is the most widely used penetration testing framework
-version: 2.0.0
+description: This plugin allows you to search for and execute exploits in Metasploit
+version: 2.0.1
 vendor: rapid7
 support: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_metasploit
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.metasploit.com/
 tags:
 - metasploit
 - rapid7
 - penetration testing
+hub_tags:
+  use_cases: [soar, soc_automation, penetration_testing, vulnerability_management]
+  keywords: [metasploit, rapid7]
+  features: []
 enable_cache: true
 language: python
 types:

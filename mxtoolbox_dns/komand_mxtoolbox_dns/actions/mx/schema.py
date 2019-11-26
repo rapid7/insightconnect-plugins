@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "DNS MX records for domain"
+
+
 class Input:
     HOSTNAME = "hostname"
     

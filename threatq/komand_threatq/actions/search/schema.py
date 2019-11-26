@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search all data"
+
+
 class Input:
     LIMIT = "limit"
     QUERY = "query"

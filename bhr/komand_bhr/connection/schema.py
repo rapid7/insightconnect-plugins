@@ -36,8 +36,8 @@ class ConnectionSchema(komand.Input):
   },
   "required": [
     "ssl_verify",
-    "url",
-    "token"
+    "token",
+    "url"
   ],
   "definitions": {
     "credential_secret_key": {

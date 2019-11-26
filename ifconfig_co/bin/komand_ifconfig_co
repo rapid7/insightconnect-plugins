@@ -6,7 +6,7 @@ from komand_ifconfig_co import connection, actions, triggers
 
 Name = 'ifconfig.co'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'An IP Address Lookup API'
 
 

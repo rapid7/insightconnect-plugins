@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns a list with the available agents"
+
+
 class Input:
     LIMIT = "limit"
     OFFSET = "offset"

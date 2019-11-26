@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete specified scan ID in the OpenVAS server"
+
+
 class Input:
     SCAN_ID = "scan_id"
     

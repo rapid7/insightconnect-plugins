@@ -1,24 +1,37 @@
-
-# URL Expander
-
-## About
+# Description
 
 The URL Expander plugin expands shortened URLs.
 
-## Actions
+# Key Features
 
-### Expand All
+* Expand a shortened URL
+
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Expand All
 
 This action is used to expand all shortened URLs in some text.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |text|string|None|True|Block of text with URL's to expand|None|
 |follow|boolean|None|True|Whether to follow the URL|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -34,18 +47,18 @@ Example output:
 
 ```
 
-### Expand
+#### Expand
 
 This action is used to expand a shortened URL.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|Shortened URL|None|
 |follow|boolean|None|True|Whether to follow the URL|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -61,33 +74,31 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Phishing investigation
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Added support for optional following of a URL
-* 1.1.0 - Support web server mode
-* 1.1.1 - Add `utilities` plugin tag for Marketplace searchability
+* 1.1.3 - New spec and help.md format for the Hub
 * 1.1.2 - Fix typo in plugin spec
+* 1.1.1 - Add `utilities` plugin tag for Marketplace searchability
+* 1.1.0 - Support web server mode
+* 1.0.0 - Added support for optional following of a URL
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Python Urllib2 urlopen](https://docs.python.org/2/library/urllib2.html#urllib2.urlopen)
+

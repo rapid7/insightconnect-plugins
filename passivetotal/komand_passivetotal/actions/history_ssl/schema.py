@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup SSL History"
+
+
 class Input:
     QUERY = "query"
     

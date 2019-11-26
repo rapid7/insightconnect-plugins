@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return current block stats"
+
+
 class Input:
     pass
 

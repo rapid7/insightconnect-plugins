@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Poll for files or directory changes"
+
+
 class Input:
     
     INTERVAL = "interval"

@@ -1,7 +1,7 @@
 {
-	"spec": "93b0a25d906112ea6ffaf50178e9a3dc",
-	"manifest": "6cd555c23f099262749326cc2b0c7d8f",
-	"setup": "d4c507119fb4c48b4217228433055edb",
+	"spec": "8634fcfd9748c4470d745582f81a0a1d",
+	"manifest": "3747f88d92896c3590447714b8d9c13e",
+	"setup": "1c6c02412809e8f6bba2411c72fc1309",
 	"schemas": [
 		{
 			"identifier": "create_workspace/schema.py",

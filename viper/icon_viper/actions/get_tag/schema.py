@@ -25,11 +25,13 @@ class GetTagInput(komand.Input):
     "id": {
       "type": "integer",
       "title": "Tag ID",
+      "description": "Tag ID",
       "order": 2
     },
     "project_name": {
       "type": "string",
       "title": "Project Name",
+      "description": "Project name",
       "order": 1
     }
   },
@@ -53,6 +55,7 @@ class GetTagOutput(komand.Output):
     "tag": {
       "$ref": "#/definitions/Tag",
       "title": "Tag",
+      "description": "Project tag",
       "order": 1
     }
   },

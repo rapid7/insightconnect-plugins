@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add hashed indicator of compromise to global blacklist"
+
+
 class Input:
     AGENT_ID = "agent_id"
     HASH = "hash"
@@ -32,8 +36,8 @@ class BlacklistByIocHashInput(komand.Input):
     }
   },
   "required": [
-    "hash",
-    "agent_id"
+    "agent_id",
+    "hash"
   ]
 }
     """)

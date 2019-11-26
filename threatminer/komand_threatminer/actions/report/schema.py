@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetches information related to an indicator by domains, hosts, emails, or samples"
+
+
 class Input:
     FILENAME = "filename"
     QUERY_TYPE = "query_type"
@@ -45,9 +49,9 @@ class ReportInput(komand.Input):
     }
   },
   "required": [
-    "year",
+    "filename",
     "query_type",
-    "filename"
+    "year"
   ]
 }
     """)

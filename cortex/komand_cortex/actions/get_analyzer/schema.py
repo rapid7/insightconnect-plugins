@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List enabled analyzers within Cortex"
+
+
 class Input:
     ANALYZER_ID = "analyzer_id"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check if Joe Sandbox is online or in maintenance mode"
+
+
 class Input:
     pass
 

@@ -1,0 +1,19 @@
+{
+	"spec": "5b76703ba66dacaf4ecf4c1aa892cf83",
+	"manifest": "3e9b5929b7ca4c498cdf46e478b6134f",
+	"setup": "5e640d37404e4047800518d6763b1db4",
+	"schemas": [
+		{
+			"identifier": "host_information/schema.py",
+			"hash": "008504f327a9b8f00cd418e1c2f6d261"
+		},
+		{
+			"identifier": "shodan_query/schema.py",
+			"hash": "0e7c97a98e2c31128ca59df956b615f3"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "9341a5088807eaae95ae13a48489aed3"
+		}
+	]
+}

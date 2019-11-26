@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete domain from user domain list by ID"
+
+
 class Input:
     ID = "ID"
     

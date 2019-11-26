@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='elasticsearch-rapid7-plugin',
-      version='2.0.1',
+      version='2.0.2',
       description='Distributed Real-Time Search and Analytics Engine',
       author='rapid7',
       author_email='',

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all suspicious IP entries"
+
+
 class Input:
     LIMIT = "limit"
     NAME = "name"

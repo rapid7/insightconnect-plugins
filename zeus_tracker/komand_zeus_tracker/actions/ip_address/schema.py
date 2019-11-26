@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup ZeuS hosts by IP address"
+
+
 class Input:
     IP = "ip"
     

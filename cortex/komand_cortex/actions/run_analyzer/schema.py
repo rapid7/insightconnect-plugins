@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run analyzers on an observable"
+
+
 class Input:
     ANALYZER_ID = "analyzer_id"
     ATTRIBUTES = "attributes"
@@ -43,9 +47,9 @@ class RunAnalyzerInput(komand.Input):
     }
   },
   "required": [
-    "observable",
+    "analyzer_id",
     "attributes",
-    "analyzer_id"
+    "observable"
   ],
   "definitions": {
     "attributes": {
@@ -112,11 +116,11 @@ class RunAnalyzerOutput(komand.Output):
     }
   },
   "required": [
-    "status",
+    "analyzerId",
+    "artifact",
     "date",
     "id",
-    "analyzerId",
-    "artifact"
+    "status"
   ],
   "definitions": {
     "artifact": {

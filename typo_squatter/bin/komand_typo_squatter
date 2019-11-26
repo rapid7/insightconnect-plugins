@@ -6,8 +6,8 @@ from komand_typo_squatter import connection, actions, triggers
 
 Name = 'Typo Squatter'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Look for typosquatters on a domain'
+Version = '1.0.1'
+Description = 'Typo Squatter detects cybersquatting of domains and allows for domain scoring. This plugin can be used to aid in phishing investigation and analysis'
 
 
 class ICONTypoSquatter(komand.Plugin):

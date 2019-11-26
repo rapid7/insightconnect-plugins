@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new event"
+
+
 class Input:
     DATE = "date"
     DESCRIPTION = "description"

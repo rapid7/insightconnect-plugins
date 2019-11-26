@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve blob data for a given record"
+
+
 class Input:
     FIELD_NAME = "field_name"
     OBJECT_NAME = "object_name"
@@ -41,9 +45,9 @@ class GetBlobDataInput(komand.Input):
     }
   },
   "required": [
-    "record_id",
+    "field_name",
     "object_name",
-    "field_name"
+    "record_id"
   ]
 }
     """)

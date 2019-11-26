@@ -1,17 +1,22 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: fireeye_hx
 title: "FireEye HX"
-description: "FireEye HX is an integrated endpoint solution that detects, prevents and responds effectively to known malware and threats traditional anti-virus endpoint security products miss"
-version: 1.0.0
+description: The FireEye plugin will allow you to get alerts from a given host
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/fireeye_hx
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-tags: ["fireeye","hx"]
+  vendor_url: https://www.fireeye.com/
+tags: ["fireeye", "hx"]
+hub_tags: 
+  use_cases: [soar, threat_intel, alerting_and_notifications, investigations, threat_detection_and_response, soc_automation]
+  keywords: [fireye, hx]
+  features: []
 
 types:
   agent:

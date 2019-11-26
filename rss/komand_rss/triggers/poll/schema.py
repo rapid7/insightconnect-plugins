@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Poll feed for latest event"
+
+
 class Input:
     
     FREQUENCY = "frequency"

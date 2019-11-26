@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove a GitHub Issue from a ZenHub Epic"
+
+
 class Input:
     EPIC_ID = "epic_id"
     ISSUE = "issue"
@@ -40,9 +44,9 @@ class RemoveIssueFromEpicInput(komand.Input):
     }
   },
   "required": [
+    "epic_id",
     "issue",
-    "repo_id",
-    "epic_id"
+    "repo_id"
   ],
   "definitions": {
     "issue_reference": {

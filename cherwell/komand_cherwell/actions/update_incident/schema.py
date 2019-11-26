@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates an incident within Cherwell"
+
+
 class Input:
     BUSINESS_OBJECT_ID = "business_object_id"
     FIELDS_TO_UPDATE = "fields_to_update"
@@ -41,8 +45,8 @@ class UpdateIncidentInput(komand.Input):
   },
   "required": [
     "business_object_id",
-    "public_id",
-    "fields_to_update"
+    "fields_to_update",
+    "public_id"
   ]
 }
     """)
@@ -71,8 +75,8 @@ class UpdateIncidentOutput(komand.Output):
     }
   },
   "required": [
-    "success",
-    "raw_response"
+    "raw_response",
+    "success"
   ]
 }
     """)

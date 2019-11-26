@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Submits JSON to a specified log within an InsightOps Logset"
+
+
 class Input:
     DATA = "data"
     LOGSET_CONTAINER_ID = "logset_container_id"

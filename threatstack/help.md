@@ -1,7 +1,6 @@
+# Description
 
-# Threat Stack
-
-## About
+The Threat Stack plugin is used to get information about alerts, assets, and policies.
 
 [Threat Stack](https://www.threatstack.com) is a cloud security monitoring provider helping companies to achieve compliance and cloud security.
 This plugin utilizes the [Threatstack API](https://app.threatstack.com/api/docs/).
@@ -9,20 +8,45 @@ This plugin utilizes the [Threatstack API](https://app.threatstack.com/api/docs/
 Note that the REST API is undocumented the plugin does not have custom types built which allows for the response outputs to be selectable by name in the UI.
 In addition, Threat Stack will be deprecating this API in favor of version 2 when it's released.
 
-## Actions
+# Key Features
 
-### Get Alert
+* Get information about Alerts, Organizations, Policies, and Agents
+
+# Requirements
+
+* A Threat Stack API key
+* An Organization ID
+* The Threat Stack API version
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|REST API key|None|
+|org_id|string||False|Threat Stack Org ID (For use when multiple orgs)|None|
+|api_version|integer|1|False|API version|None|
+|timeout|integer|120|False|API timeout|None|
+
+## Technical Details
+
+### Actions
+
+#### Get Alert
 
 This action is used to get alert data by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |fields|[]string|None|False|Fields to return|None|
 |alert_id|string|None|True|Alert ID e.g. 597b8c751c7ff17fcf028e54|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -237,18 +261,18 @@ Example output:
 
 ```
 
-### Get Policy
+#### Get Policy
 
 This action is used to get a policy.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |fields|[]string|None|False|Fields to return|None|
 |policy_id|string|None|True|Threat Stack policy ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -297,11 +321,11 @@ Example output:
 
 ```
 
-### Get Alerts
+#### Get Alerts
 
 This action is used to get alerts by filter.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -309,7 +333,7 @@ This action is used to get alerts by filter.
 |end|string|None|False|End date e.g. 2018-01-01|None|
 |fields|[]string|None|False|Fields to return|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -529,18 +553,18 @@ Example output:
 
 ```
 
-### Get Organization
+#### Get Organization
 
 This action is used to get an organization.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|string|None|True|Threat Stack organization ID e.g. 583cb310a3d05a733a4383ap|None|
 |fields|[]string|None|False|Fields to return|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -560,11 +584,11 @@ Example output:
 
 ```
 
-### Get Agents
+#### Get Agents
 
 This action is used to get agent data.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -572,7 +596,7 @@ This action is used to get agent data.
 |end|string|None|False|End date e.g. 2018-01-01|None|
 |fields|[]string|None|False|Fields to return|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -609,17 +633,17 @@ Example output:
 
 ```
 
-### Get Organizations
+#### Get Organizations
 
 This action is used to get organizations.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |fields|[]string|None|False|Fields to return|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -643,17 +667,17 @@ Example output:
 
 ```
 
-### Get Policies
+#### Get Policies
 
 This action is used to get policies.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |fields|[]string|None|False|Fields to return|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -709,18 +733,18 @@ Example output:
 
 ```
 
-### Get Agent
+#### Get Agent
 
 This action is used to get agent data.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |fields|[]string|None|False|Fields to return|None|
 |agent_id|string|None|True|Agent ID e.g. 597b2c751b7cc18fcf028e52|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -752,40 +776,30 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|REST API key|None|
-|org_id|string||False|Threat Stack Org ID (For use when multiple orgs)|None|
-|api_version|integer|1|False|API version|None|
-|timeout|integer|120|False|API timeout|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* [Create JIRA tickets for ThreatStack alerts](https://market.komand.com/workflows/jschipp/create-jira-tickets-for-threatstack-alerts/0.1.0)
-* Enrich alert data from ThreatStack
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Threat Stack](https://threatstack.com)
 * [Threat Stack API](https://app.threatstack.com/api/docs)
 * [Using the ThreatStack plugin](https://docs.komand.com/docs/using-the-threatstack-plugin)
+

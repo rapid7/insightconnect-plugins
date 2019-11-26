@@ -1,22 +1,27 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: matplotlib
 title: Matplotlib
 description: Provides graphing capability of base64 encoded CSV data using Matplotlib,
   NumPy, Pandas, and Seaborn
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/matplotlib
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.matplotlib.org
 tags:
 - plotting
 - graphing
 - data
 - csv
+hub_tags:
+  use_cases: [soar, data_utility]
+  keywords: [plotting, graphing, data, csv]
+  features: []
 actions:
   create_line_plot:
     title: Create Line Plot

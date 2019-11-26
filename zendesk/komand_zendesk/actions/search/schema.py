@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search Zendesk"
+
+
 class Input:
     ITEM = "item"
     TYPE = "type"
@@ -37,8 +41,8 @@ class SearchInput(komand.Input):
     }
   },
   "required": [
-    "type",
-    "item"
+    "item",
+    "type"
   ]
 }
     """)

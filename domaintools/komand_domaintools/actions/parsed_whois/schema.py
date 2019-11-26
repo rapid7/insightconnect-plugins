@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Provides parsed information extracted from the raw WHOIS record"
+
+
 class Input:
     DOMAIN = "domain"
     

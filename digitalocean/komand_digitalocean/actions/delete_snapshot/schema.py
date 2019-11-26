@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes a snapshot"
+
+
 class Input:
     IMAGE_ID = "image_id"
     

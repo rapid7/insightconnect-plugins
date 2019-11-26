@@ -1,17 +1,38 @@
-# AbuseIPDB
+# Description
 
-## About
+The AbuseIPDB InsightConnect plugin allows you to look up IP reports, provides list and details of blacklisted IPs, or report an abusive IP.
 
-[AbuseIPDB](https://www.abuseipdb.com) is a free service which allows you to look up IP reports, or report an abusive IP.
 This plugin utilizes [AbuseIPDB API v2](https://docs.abuseipdb.com).
 
-## Actions
+# Key Features
 
-### Report IP
+* Report abusive IPs
+* Get blacklisted IPs
+* Get IP details
+
+# Requirements
+
+* Requires a [free AbuseIPDB account](https://www.abuseipdb.com/register) and accompanying API Key
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_secret_key|None|True|API key|None|
+
+## Technical Details
+
+### Actions
+
+#### Report IP
 
 This action is used to report an abusive IP address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -19,7 +40,7 @@ This action is used to report an abusive IP address.
 |comment|string|None|False|Describe the type of malicious activity e.g. Brute forcing Wordpress login|None|
 |ip|string|None|True|IPv4 or IPv6 address to report e.g. 8.8.8.8, ::1|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -47,11 +68,11 @@ Failure Example:
 }
 ```
 
-### Check IP
+#### Check IP
 
 This action is used to look up an IP address in the database.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -59,7 +80,7 @@ This action is used to look up an IP address in the database.
 |days|string|30|True|Check for IP reports in the last x days|None|
 |verbose|boolean|True|True|When set, reports will include the comment (if any) and the reporter's user ID number (0 if reported anonymously)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -123,18 +144,18 @@ Failure Example:
 }
 ```
 
-### Check CIDR
+#### Check CIDR
 
 This action is used to look up a CIDR address in the database.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |cidr|string|None|True|IPv4 address block in CIDR notation e.g. 207.126.144.0/20|None|
 |days|string|30|True|Check for CIDR reports in the last x days|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -180,18 +201,18 @@ Failure Example:
 }
 ```
 
-### Get Blacklist
+#### Get Blacklist
 
 This action is used to list of blacklisted IP addresses.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |confidenceMinimum|string|None|True|Minimum confidence to filter by|None|
 |limit|string|None|False|Max length of blacklist|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -228,42 +249,20 @@ Failure Example:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_secret_key|None|True|API key|None|
-
-## Troubleshooting
-
-There's a rate limit on the free API service. The following error messags `429 Client Error: Too Many Requests for url` indicates that threshold has been hit.
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 2.0.0 - Add `found` output to Check IP action | Support new credential type
-* 3.0.0 - Support new credential_secret_key type
-* 3.0.1 - Improve error handling in the Check IP, Check CIDR, and Report IP actions | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Run plugin as least privileged user | Add connection test
-* 4.0.0 - Update to APIv2 and new action Get Blacklist
-* 4.0.1 - Transform null value of various output properties of Check IP action to false or empty string.
-* 5.0.0 - Mark certain outputs as optional as they are not always returned by the AbuseIPDB service | Clean output of null values
-
-## Custom Output Types
-
-### blacklisted
+#### blacklisted
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |abuseConfidenceScore|string|True|Confidence that IP is abusive|
 |ipAddress|string|True|IP Address of abusive IP|
 
-### report
+#### report
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -274,7 +273,7 @@ There's a rate limit on the free API service. The following error messags `429 C
 |reporterCountryName|string|True|Name of country reporter is from|
 |reporterId|integer|True|ID number of reporter|
 
-### reportedIPs
+#### reportedIPs
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -284,13 +283,25 @@ There's a rate limit on the free API service. The following error messags `429 C
 |mostRecentReport|string|False|Most recent report for this IP|
 |numReports|integer|False|Number of reports of this IP|
 
-## Workflows
+## Troubleshooting
 
-Examples:
+There's a rate limit on the free API service. The following error messags `429 Client Error: Too Many Requests for url` indicates that threshold has been hit.
 
-* Intelligence
+# Version History
+
+* 5.0.1 - New spec and help.md format for the Hub
+* 5.0.0 - Mark certain outputs as optional as they are not always returned by the AbuseIPDB service | Clean output of null values
+* 4.0.1 - Transform null value of various output properties of Check IP action to false or empty string.
+* 4.0.0 - Update to APIv2 and new action Get Blacklist
+* 3.0.1 - Improve error handling in the Check IP, Check CIDR, and Report IP actions | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Run plugin as least privileged user | Add connection test
+* 3.0.0 - Support new credential_secret_key type
+* 2.0.0 - Add `found` output to Check IP action | Support new credential type
+* 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [AbuseIPDB](https://www.abuseipdb.com)
 * [AbuseIPDB API](https://docs.abuseipdb.com)
+

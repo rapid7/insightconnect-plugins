@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add Cloud Node user"
+
+
 class Input:
     USER_EMAIL = "user_email"
     USER_NAME = "user_name"
@@ -103,8 +107,8 @@ class AddUserOutput(komand.Output):
     }
   },
   "required": [
-    "success",
-    "message"
+    "message",
+    "success"
   ]
 }
     """)

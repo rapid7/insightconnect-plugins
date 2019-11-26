@@ -1,21 +1,27 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: unshorten
 title: Unshorten.me
-description: Unshorten.me provides an easy method to unshorten a wide range of shortened
-  URLs
-version: 1.0.1
+description: "Unshorten.me provides an easy method to unshorten a wide range of shortened URLs. The Unshorten.me plugin
+for Rapid7 InsightConnect can help assist phishing investigations, URL analysis, and more"
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/unshorten
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://unshorten.me/
 tags:
 - url
 - link
 - short
+- unshorten
+hub_tags:
+  use_cases: [soar, alert_enrichment, external_enrichment, investigations, threat_intel, threat_detection_and_response]
+  keywords: [url, link, short, unshorten]
+  features: []
 enable_cache: false
 actions:
   unshorten:

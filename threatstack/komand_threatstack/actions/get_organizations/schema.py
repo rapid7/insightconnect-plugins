@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get organizations"
+
+
 class Input:
     FIELDS = "fields"
     

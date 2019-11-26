@@ -1,7 +1,7 @@
 {
-	"spec": "004bc2329f1208b66aefe538de013ee0",
-	"manifest": "a3eaba43a8be38c09242e3937118f69a",
-	"setup": "fde617d0ab4f4f33eb61b393b8918a4c",
+	"spec": "4de3f4ff0c80b25511b07b75c687ab88",
+	"manifest": "f375e995d5392caed7e4e9e11702403a",
+	"setup": "70001975268214b1d2d7c568f5f89bff",
 	"schemas": [
 		{
 			"identifier": "ping/schema.py",

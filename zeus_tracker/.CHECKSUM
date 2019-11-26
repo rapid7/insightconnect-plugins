@@ -1,0 +1,39 @@
+{
+	"spec": "f707c86f52c87a884728d5a399557651",
+	"manifest": "6ba214c3e0937147fb15402d94188b70",
+	"setup": "d1963f2d1d5dce6e562f599835a6e4bb",
+	"schemas": [
+		{
+			"identifier": "asn/schema.py",
+			"hash": "25a495647637114e6bf7f1bd603d0b14"
+		},
+		{
+			"identifier": "binaries/schema.py",
+			"hash": "b99a285a5c44fa0414626ec5efa5e627"
+		},
+		{
+			"identifier": "configs/schema.py",
+			"hash": "7f85e4495c89d7d4c8cb0517ba4c5d16"
+		},
+		{
+			"identifier": "countries/schema.py",
+			"hash": "e0acb4df16616ea76f4466c5164ae849"
+		},
+		{
+			"identifier": "dropzones/schema.py",
+			"hash": "a65bfddf4c748dea87c57fa815d1a083"
+		},
+		{
+			"identifier": "host/schema.py",
+			"hash": "b4a0ab44ed446f81250491da7f4f75f0"
+		},
+		{
+			"identifier": "ip_address/schema.py",
+			"hash": "9e9c2f2e93fb6fc2e3cdf72ea978f494"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "20a0dab475e09d95b1ae4e914315e67e"
+		}
+	]
+}

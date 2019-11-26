@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch app name and app ID for all apps in a customer environment"
+
+
 class Input:
     pass
 

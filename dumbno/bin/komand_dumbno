@@ -6,7 +6,7 @@ from komand_dumbno import connection, actions, triggers
 
 Name = 'Dumbno'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'Flow shunting for Arista switches using EOS'
 
 

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return intelligence about given observables"
+
+
 class Input:
     OBSERVABLES = "observables"
     
@@ -49,8 +53,8 @@ class MoreInput(komand.Input):
         }
       },
       "required": [
-        "value",
-        "type"
+        "type",
+        "value"
       ]
     }
   }

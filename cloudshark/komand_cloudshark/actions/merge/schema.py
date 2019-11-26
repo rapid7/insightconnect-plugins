@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Merge capture files"
+
+
 class Input:
     CIDS = "cids"
     DUPLICATES = "duplicates"

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='jamf-rapid7-plugin',
-      version='1.1.0',
+      version='1.1.1',
       description='Jamf is a popular product for managing iPads, iPhones, Macs, and Apple TVs for schools and businesses',
       author='rapid7',
       author_email='',

@@ -1,7 +1,4 @@
-
-# Dig
-
-## About
+# Description
 
 [Dig](https://linux.die.net/man/1/dig) is a powerful DNS lookup utility. This plugin uses Dig to make forward and reverse DNS requests.
 
@@ -20,13 +17,29 @@ ord36s02-in-f14.1e100.net.
 
 ```
 
-## Actions
+# Key Features
 
-### Forward Lookup
+* Forward and reverse DNS lookup
+
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Forward Lookup
 
 This action is used to request a forward lookup for a domain.
 
-#### Input
+##### Input
 
 It accepts a domain name of type `string` and one of the following record types:
 
@@ -44,7 +57,7 @@ It accepts a domain name of type `string` and one of the following record types:
 |query|string|None|False|Query type e.g. ANY, A, MX, NS, etc|['A', 'AAAA', 'ANY', 'CNAME', 'MX', 'NS', 'PTR', 'SOA']|
 |domain|string|None|True|Domain name to resolve|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -86,17 +99,17 @@ On failure, the raw output will look like the following:
 
 ```
 
-### Reverse Lookup
+#### Reverse Lookup
 
 This action is used to request a reverse lookup for an IP address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|Internet address to resolve|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -120,13 +133,13 @@ On success, the raw output will look like the following:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -158,25 +171,22 @@ Common examples:
 * `status = "NOERRROR"` - The DNS response contains an answer
 * `status = "NXDOMAIN"` - The DNS response did not have an answer i.e. Non-Existent Domain
 
-## Workflows
+# Version History
 
-Examples:
-
-* [Basic Domain Enrichment](https://market.komand.com/snippets/jschipp/basic-domain-enrichment-report/0.1.0)
-* Reconnaissance
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - Increased result validation
-* 0.2.0 - Add option to use custom resolver
-* 0.3.0 - Add all_answers and last_answer to the forward lookup action
-* 0.3.1 - SSL bug fix in SDK
-* 0.3.2 - Update to v2 Python plugin architecture
-* 1.0.0 - Support web server mode
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Update to use the `komand/python-2-slim-plugin:2` Docker image to reduce plugin size
+* 1.0.0 - Support web server mode
+* 0.3.2 - Update to v2 Python plugin architecture
+* 0.3.1 - SSL bug fix in SDK
+* 0.3.0 - Add all_answers and last_answer to the forward lookup action
+* 0.2.0 - Add option to use custom resolver
+* 0.1.1 - Increased result validation
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Dig](https://linux.die.net/man/1/dig)
 * [DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)
+

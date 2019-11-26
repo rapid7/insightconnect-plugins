@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new user"
+
+
 class Input:
     EMAIL = "email"
     IS_GROUP_ADMIN = "is_group_admin"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves information about the node"
+
+
 class Input:
     TYPES = "types"
     

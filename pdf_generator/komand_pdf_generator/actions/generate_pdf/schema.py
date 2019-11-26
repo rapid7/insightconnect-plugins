@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Generate a PDF from a text input"
+
+
 class Input:
     TEXT = "text"
     

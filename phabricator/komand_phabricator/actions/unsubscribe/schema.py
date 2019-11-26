@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove yourself as a subscriber"
+
+
 class Input:
     ID = "id"
     

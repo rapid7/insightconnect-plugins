@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get the user object for the current logged-in user"
+
+
 class Input:
     pass
 
@@ -73,10 +77,10 @@ class GetUserProfileOutput(komand.Output):
   },
   "required": [
     "donate",
+    "email",
     "joindate",
     "lastlogin",
-    "userid",
-    "email"
+    "userid"
   ]
 }
     """)

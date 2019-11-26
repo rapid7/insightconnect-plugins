@@ -1,23 +1,28 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: rapid7_tcell
 title: Rapid7 tCell
 description: Rapid7 tCell is a Next-Gen Cloud WAF that enables web applications to
   defend themselves by combining in-app instrumentation (RASP) and analytics in the
   cloud
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_tcell
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.rapid7.com
 tags:
 - rapid7
 - web
 - waf
 - rasp
+hub_tags:
+  use_cases: [soar, soc_automation, application_security, container_and_cloud_security, network_containment]
+  keywords: [rapid7, web, waf, rasp]
+  features: []
 types:
   app:
     id:

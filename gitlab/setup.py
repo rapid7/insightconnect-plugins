@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='gitlab-rapid7-plugin',
-      version='1.0.0',
-      description='GitLab is a next generation developer collaboration software with version control capabilities',
+      version='1.0.1',
+      description='GitLab plugin allows user management and issue management in Gitlab',
       author='rapid7',
       author_email='',
       url='',

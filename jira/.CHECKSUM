@@ -1,0 +1,67 @@
+{
+	"spec": "7123c4c3d036ae6db0bc93d173e9374e",
+	"manifest": "4c3d58202c742858df7bb1d61e19434f",
+	"setup": "e8becc742b9dda57f7ca0473a29f69da",
+	"schemas": [
+		{
+			"identifier": "assign_issue/schema.py",
+			"hash": "da445d1d5023a42719a92a17ce423c1a"
+		},
+		{
+			"identifier": "attach_issue/schema.py",
+			"hash": "092ca398a3d890c7e46176fb8bf93eea"
+		},
+		{
+			"identifier": "comment_issue/schema.py",
+			"hash": "c81dd09ee54aff7c0bcd7055e9334e2c"
+		},
+		{
+			"identifier": "create_issue/schema.py",
+			"hash": "f11acb4effa1097fc33940470b080690"
+		},
+		{
+			"identifier": "create_user/schema.py",
+			"hash": "326af390411a2b6a7fba091c9c44a233"
+		},
+		{
+			"identifier": "delete_user/schema.py",
+			"hash": "300e06339118fe1943be43139df3e71d"
+		},
+		{
+			"identifier": "edit_issue/schema.py",
+			"hash": "ae1e2521d16cd25a8959f14f1db8f393"
+		},
+		{
+			"identifier": "find_issues/schema.py",
+			"hash": "fc69897b84fa7636fe6a8a3267d3a54f"
+		},
+		{
+			"identifier": "find_users/schema.py",
+			"hash": "a43d5be327a1e66d327616673b35065e"
+		},
+		{
+			"identifier": "get_comments/schema.py",
+			"hash": "1a2bff9d975ffe1745e5ab2ffc6bdc82"
+		},
+		{
+			"identifier": "get_issue/schema.py",
+			"hash": "16164898b2d1627386f671c8a059b9a8"
+		},
+		{
+			"identifier": "label_issue/schema.py",
+			"hash": "ec5bcc69b009aa41ac0f4bdc54d919e1"
+		},
+		{
+			"identifier": "transition_issue/schema.py",
+			"hash": "c7f0533bbfed71b23e81f5b46a3308d3"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "e57b40644178193508c270eb95703a12"
+		},
+		{
+			"identifier": "new_issue/schema.py",
+			"hash": "46df5a490efdd507576d67da91b8978c"
+		}
+	]
+}

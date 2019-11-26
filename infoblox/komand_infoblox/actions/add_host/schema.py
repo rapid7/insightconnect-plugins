@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a new host (host has to match one of the existing authoritative networks, e.g. network fqdn = info.com, host name = example.info.com)"
+
+
 class Input:
     HOST = "host"
     
@@ -55,8 +59,8 @@ class AddHostInput(komand.Input):
         }
       },
       "required": [
-        "name",
-        "ipv4addrs"
+        "ipv4addrs",
+        "name"
       ],
       "definitions": {
         "IPv4AddrCreate": {

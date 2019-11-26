@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Suspend user from WordPress instance"
+
+
 class Input:
     USERNAME = "username"
     

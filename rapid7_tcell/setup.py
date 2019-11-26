@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='rapid7_tcell-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='Rapid7 tCell is a Next-Gen Cloud WAF that enables web applications to defend themselves by combining in-app instrumentation (RASP) and analytics in the cloud',
       author='rapid7',
       author_email='',

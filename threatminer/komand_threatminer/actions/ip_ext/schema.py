@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetches information related to an IP by certificates, or related samples"
+
+
 class Input:
     ADDRESS = "address"
     QUERY_TYPE = "query_type"

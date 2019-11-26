@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return an array of all available scanners"
+
+
 class Input:
     pass
 

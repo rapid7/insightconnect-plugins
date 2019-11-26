@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a line plot with an X/Y axis"
+
+
 class Input:
     COLOR_PALETTE = "color_palette"
     CSV_DATA = "csv_data"
@@ -80,11 +84,11 @@ class CreateLinePlotInput(komand.Input):
     }
   },
   "required": [
-    "margin_style",
+    "color_palette",
     "csv_data",
+    "margin_style",
     "x_value",
-    "y_value",
-    "color_palette"
+    "y_value"
   ]
 }
     """)

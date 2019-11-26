@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='jq-rapid7-plugin',
-      version='2.0.4',
+      version='2.0.5',
       description='Send JSON data through jq',
       author='rapid7',
       author_email='',

@@ -1,29 +1,38 @@
-
-# Palo Alto PAN-OS
-
-## About
+# Description
 
 [PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is a management console for Palo Alto Networks devices
 This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api).
 
-### Overview
+# Key Features
 
-PAN-OS handles all rules and pieces of state (e.g. the current IP blacklist) as configuration objects.
-The active configuration is the collection of all currently deployed configuration objects. PAN-OS can also hold
-onto any number of inactive objects as pieces of candidate configuration.
+* Manage Palo Alto Networks devices
+* Manage configurations
 
-SHOW should be used to view the active configuration, while GET can be used to retrieve candidate objects.
-SET, EDIT, and DELETE operate only on candidate objects. COMMIT activates all candidate objects. Note that
-this will commit all candidate objects on the managed machine, including those not created through Komand.
-OP is used to run operational commands against the current machine and its active configuration. RETRIEVE_LOGS retrieves traffic logs.
+# Requirements
 
-## Actions
+* PAN-OS credentials
 
-### Set Security Policy Rule
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_username_password|None|True|Username and password|None|
+|verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting PAN-OS over HTTPS|None|
+|server|string|None|True|URL pointing to instance of PAN-OS|None|
+
+## Technical Details
+
+### Actions
+
+#### Set Security Policy Rule
 
 This action is used to create a new security policy rule.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -44,7 +53,7 @@ This action is used to create a new security policy rule.
 |action|string|None|True|Action that will occur if an event meets the rule definitions|None|
 |log_end|boolean|None|True|Generates a traffic log entry for the end of a session|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -63,18 +72,18 @@ Example output:
 
 ```
 
-### Set
+#### Set
 
 This action is used to create a new object.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |xpath|string|None|True|Xpath location to create the new object|None|
 |element|string|None|True|XML representation of the object to be created|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -93,17 +102,17 @@ Example output:
 
 ```
 
-### Get
+#### Get
 
 This action is used to get candidate configuration.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |xpath|string|None|True|Xpath targeting the requested portion of the configuration|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -141,18 +150,18 @@ Example output:
 
 ```
 
-### Edit
+#### Edit
 
 This action is used to edit an existing object.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |xpath|string|None|True|Xpath location of the object to edit|None|
 |element|string|None|True|XML representation of the updated object. This replaces the previous object entirely, any unchanged attributes must be restated|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -171,17 +180,17 @@ Example output:
 
 ```
 
-### Show
+#### Show
 
 This action is used to get an active configuration.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |xpath|string|None|True|Xpath targeting the requested portion of the configuration|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -237,11 +246,11 @@ Example output:
 
 ```
 
-### Retrieve Logs
+#### Retrieve Logs
 
 This action is used to query firewall logs.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -253,7 +262,7 @@ This action is used to query firewall logs.
 |interval|float|0.5|False|Time interval in seconds to wait between queries for commit job completion (Default\: 0.5)|None|
 |log-type|string|None|False|Type of log to retrieve|['config', 'hipmatch', 'system', 'threat', 'traffic', 'url', 'wildfire']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -304,18 +313,18 @@ Example output:
 |----|----|--------|-----------|
 |response|log|False|Response from PAN-OS|
 
-### Commit
+#### Commit
 
 This action is used to commit the candidate configuration.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |action|string|commit-all|False|Commit action. (Default: 'commit-all')|None|
 |cmd|string|None|True|XML specifying any commit arguments|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -337,17 +346,17 @@ Example output:
 
 ```
 
-### Delete
+#### Delete
 
 This action is used to delete an object.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |xpath|string|None|True|Xpath targeting the object to delete|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -366,17 +375,17 @@ Example output:
 
 ```
 
-### Op
+#### Op
 
 This action is used to run operational command.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |cmd|string|None|False|XML specifying operation to be completed|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -395,11 +404,11 @@ Example output:
 
 ```
 
-### Add to Policy
+#### Add to Policy
 
 This action is used to add a rule to a PAN-OS security policy.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -416,7 +425,7 @@ This action is used to add a rule to a PAN-OS security policy.
 |hip_profiles|string|None|False|Host information profile|None|
 |action|string|None|False|Action that will occur if an event meets the rule definitions|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -432,11 +441,11 @@ Example output:
 }
 ```
 
-### Remove from Policy
+#### Remove from Policy
 
 This action is used to remove a rule from a PAN-OS security policy.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -453,7 +462,7 @@ This action is used to remove a rule from a PAN-OS security policy.
 |hip_profiles|string|None|False|Host information profile|None|
 |action|string|None|False|The action that will occur if an event meets the rule definitions|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -470,11 +479,11 @@ Example output:
 
 ```
 
-### Add External Dynamic List
+#### Add External Dynamic List
 
 This action is used to add an external dynamic list.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -486,7 +495,7 @@ This action is used to add an external dynamic list.
 |day|string|None|True|If repeat is weekly, choose a day to update|['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']|
 |description|string|None|True|A description of the list|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -504,11 +513,11 @@ Example output:
 }
 ```
 
-### Set Address Object
+#### Set Address Object
 
 This action is used to create a new address object.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -518,7 +527,7 @@ This action is used to create a new address object.
 |object_description|string|None|False|A description for the address object|None|
 |tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -536,9 +545,19 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
+
+### Troubleshooting
+
+For the URL, include `https://` e.g. `https://10.0.0.1` or `https://myfirewall`.
+
+When using the Add External Dynamic List action, a day and time must be chosen even if they are not used.
+
+### Custom Output Types
+
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -546,38 +565,25 @@ For the URL, include `https://` e.g. `https://10.0.0.1` or `https://myfirewall`.
 
 When using the Add External Dynamic List action, a day and time must be chosen even if they are not used.
 
-## Connection
+# Version History
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Username and password|None|
-|verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting PAN-OS over HTTPS|None|
-|server|string|None|True|URL pointing to instance of PAN-OS|None|
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Add action to set a new security policy | Update to v2 Python plugin architecture | Support web server mode | Add error handling
-* 1.1.0 - New action Add to Policy
-* 1.2.0 - New action Remove from Policy
-* 1.3.0 - New action Add External Dynamic List
-* 1.3.1 - Update descriptions
-* 1.4.0 - Update Add to Policy action to allow for updates to active configuration or candidate objects | Update Remove from Policy action to allow for updates to active configuration or candidate objects
-* 1.4.1 - Update connection tests
-* 1.5.0 - New action Set Address Object
-* 1.5.1 - Fix issue where the Add to Policy action would sometimes fail with candidate configurations
-* 1.5.2 - Fix typo in plugin spec
-* 1.5.3 - Fix issue where undefined objects in security configurations caused actions to crash | Add debug logging to assist with future troubleshooting | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
+* 1.5.5 - New spec and help.md format for the Hub
 * 1.5.4 - Fix issue where new plugin version was causing SSL to fail
+* 1.5.3 - Fix issue where undefined objects in security configurations caused actions to crash | Add debug logging to assist with future troubleshooting | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
+* 1.5.2 - Fix typo in plugin spec
+* 1.5.1 - Fix issue where the Add to Policy action would sometimes fail with candidate configurations
+* 1.5.0 - New action Set Address Object
+* 1.4.1 - Update connection tests
+* 1.4.0 - Update Add to Policy action to allow for updates to active configuration or candidate objects | Update Remove from Policy action to allow for updates to active configuration or candidate objects
+* 1.3.1 - Update descriptions
+* 1.3.0 - New action Add External Dynamic List
+* 1.2.0 - New action Remove from Policy
+* 1.1.0 - New action Add to Policy
+* 1.0.0 - Add action to set a new security policy | Update to v2 Python plugin architecture | Support web server mode | Add error handling
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Add new security policies
+# Links
 
 ## References
 

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Read contents from a PCAP file"
+
+
 class Input:
     FILTER = "filter"
     OPTIONS = "options"

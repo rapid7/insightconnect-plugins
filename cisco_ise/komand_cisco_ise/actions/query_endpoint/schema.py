@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query an endpoint for more information"
+
+
 class Input:
     HOSTNAME = "hostname"
     

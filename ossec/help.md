@@ -1,18 +1,32 @@
-
-# OSSEC
-
-## About
+# Description
 
 [OSSEC](https://ossec.github.io/) is a free, open-source host-based intrusion detection system with file integrity monitoring and log analysis capabilities.
 This plugin parses the standard multi-line OSSEC alerts found in `/var/ossec/logs/alerts/alerts.log` into usable JSON.
 
-## Actions
+# Key Features
 
-### Alert Parse
+* Parse OSSEC alerts
+* Convert alerts to JSON
+
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+_This plugin does not contain a connection._
+
+## Technical Details
+
+### Actions
+
+#### Alert Parse
 
 This action is used to parse standard OSSEC alerts. If the OSSEC log does contain the `User:` or `Src IP:` lines we set the values of missing fields to `Unknown`.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -31,7 +45,7 @@ Aug 12 15:13:29 bastion sshd[17047]: User root from 116.31.116.16 not allowed be
 
 ```
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -60,11 +74,11 @@ Example output:
 
 ```
 
-### Rootcheck Parse
+#### Rootcheck Parse
 
 This action is used to parse OSSEC Rootcheck alerts.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -81,7 +95,7 @@ File '/var/lib/docker/containers/d1cc36313c308122fb4170a6e6637176ed13763c98f7ef1
 
 ```
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -110,11 +124,11 @@ Example output:
 
 ```
 
-### Syscheck Parse
+#### Syscheck Parse
 
 This action is used to parse OSSEC Syscheck alerts. If the OSSEC log does contain the MD5, SHA, or Permissions lines we set the values for missing fields to `Unknown`.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -136,7 +150,7 @@ New sha1sum is : 'a3b348a86b54b0185a5d3c0df8c785f5b72dfc04'
 
 ```
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -167,29 +181,26 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
-## Workflows
+# Version History
 
-Examples:
-
-* Example goes here
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 

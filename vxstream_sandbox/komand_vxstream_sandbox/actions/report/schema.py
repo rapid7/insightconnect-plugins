@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve report by providing SHA256 hash"
+
+
 class Input:
     ENV_ID = "env_id"
     HASH = "hash"

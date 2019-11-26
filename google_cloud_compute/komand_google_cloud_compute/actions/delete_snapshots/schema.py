@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes the specified snapshot resource"
+
+
 class Input:
     SNAPSHOT = "snapshot"
     

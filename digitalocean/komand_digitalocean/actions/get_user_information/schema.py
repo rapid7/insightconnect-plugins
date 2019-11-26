@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets information about the account, such as email, droplet limit, etc"
+
+
 class Input:
     pass
 

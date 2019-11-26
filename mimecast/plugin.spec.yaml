@@ -1,20 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 3.0.0
+version: 3.0.1
 vendor: rapid7
 support: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/mimecast
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: http://mimecast.com
 tags:
 - mimecast
 - email
+hub_tags:
+  use_cases: [soar, phishing_investigations, network_containment, soc_automation, threat_detection_and_response]
+  keywords: [mimecast, email]
+  features: []
 
 types:
   managed_url:

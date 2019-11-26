@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new IP"
+
+
 class Input:
     IP = "ip"
     PARAMS = "params"
@@ -46,8 +50,8 @@ class AddIpInput(komand.Input):
     }
   },
   "required": [
-    "type",
-    "ip"
+    "ip",
+    "type"
   ]
 }
     """)

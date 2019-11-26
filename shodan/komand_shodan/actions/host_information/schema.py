@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return Services Found for the Given IP"
+
+
 class Input:
     IP = "ip"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup Public IP Address of Komand Host"
+
+
 class Input:
     pass
 

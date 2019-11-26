@@ -1,16 +1,15 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: sqlmap
-title: SQLmap
-description: An open-source penetration testing tool that performs the process of
-  SQL injection
-version: 1.1.0
+title: SQLMap
+description: The SQLMap plugin allows you to scan targets and analyze the results
+version: 1.1.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/sqlmap
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - vulnerability
@@ -18,6 +17,10 @@ tags:
 - sqlmap
 - injection
 - database
+hub_tags:
+  use_cases: [soar, threat_hunting, vulnerability_management, application_security]
+  keywords: [vulnerability, exploit, sqlmap, injection, database]
+  features: []
 enable_cache: true
 connection:
   api_host:

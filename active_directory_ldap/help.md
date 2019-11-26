@@ -1,17 +1,47 @@
+# Description
 
-# Active Directory LDAP
+This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network.
+This plugin supports Windows Server 2008 and later. Some testing has been done with Windows server 2003; however, it is not officially supported.
 
-## About
+# Key Features
 
-This plugin utilizes Active Directory to run LDAP queries. This plugin supports Windows Server 2008 and later. Some testing has been done with Windows server 2003; however, it is not officially supported.
+* Add, delete, disable and enable user
+* Password reset
+* Modify user groups
 
-## Actions
+# Requirements
 
-### Modify Groups
+* Host name and port number
+* User name and password to authenticate
+
+# Documentation
+
+## Setup
+
+To connect, you must have NTLM credentials.
+
+Please make sure you enter your credentials with the DOMAIN\username format.
+
+The hostname should start with the URI prefix of `ldap://` for an unencrypted connection or `ldaps://` for an encrypted connection using SSL.
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|use_ssl|boolean|None|True|Use SSL?|None|
+|host|string|None|True|Server Host, e.g. ldap\://192.5.5.5. Must use either ldap\:// or ldaps\:// for SSL prefix|None|
+|port|integer|389|True|Port, e.g. 389|None|
+|username_password|credential_username_password|None|True|Username and password|None|
+
+## Technical Details
+
+### Actions
+
+#### Modify Groups
 
 This action is used to add or remove a user from an Active Directory group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -19,7 +49,7 @@ This action is used to add or remove a user from an Active Directory group.
 |group_dn|string|None|True|The Distinguished Name of the group to add or remove|None|
 |add_remove|string|None|True|Add or remove the group|['add', 'remove']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -35,11 +65,11 @@ Example output:
 
 ```
 
-### Add
+#### Add
 
 This action is used to add the specified Active Directory user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -53,7 +83,7 @@ This action is used to add the specified Active Directory user.
 |password|password|None|True|The account's starting password|None|
 |user_principal_name|string|None|True|The users principal name, e.g. jdoe@example.com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -69,20 +99,20 @@ Example output:
 
 ```
 
-### Query
+#### Query
 
 This action is used to run an LDAP query.
 
 For more information on LDAP queries see https://ldap3.readthedocs.io/tutorial_searches.html
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515. Example\: (accountName=joesmith)|None|
 |search_base|string|None|True|The base of the search request|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -144,17 +174,17 @@ Example output:
 
 ```
 
-### Enable
+#### Enable
 
 This action is used to enable an account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |distinguished_name|string|None|True|The distinguished name of the user to enable e.g. CN=user,OU=domain_users,DC=mydomain,DC=com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -170,18 +200,18 @@ Example output:
 
 ```
 
-### Move Object
+#### Move Object
 
 This action is used to move an Active Directory object from one organizational unit to another.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified e.g. CN=user,OU=domain_users,DC=mydomain,DC=com|None|
 |new_ou|string|None|True|The distinguished name of the OU to move the object to e.g. OU=disabled_users,DC=mydomain,DC=com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -195,18 +225,18 @@ This action is used to move an Active Directory object from one organizational u
 
 ```
 
-### Reset Password
+#### Reset Password
 
 This action is used to reset a users password.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified e.g. CN=user,OU=domain_users,DC=mydomain,DC=com|None|
 |new_password|password|None|True|The new password|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -220,17 +250,17 @@ This action is used to reset a users password.
 
 ```
 
-### Disable
+#### Disable
 
 This action is used to disable an account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |distinguished_name|string|None|True|The distinguished name of the user to disable e.g. CN=user,OU=domain_users,DC=mydomain,DC=com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -246,17 +276,17 @@ Example output:
 
 ```
 
-### Delete
+#### Delete
 
 This action is used to delete the LDAP object specified.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |distinguished_name|string|None|True|The distinguished name of the object to delete. Example CN=user,OU=domain_users,DC=mydomain,DC=com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -272,17 +302,17 @@ Example output:
 
 ```
 
-### Force Password Reset
+#### Force Password Reset
 
 This action is used to force a user to reset their password on next login.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |distinguished_name|string|None|True|The distinguished name of the user who will be forced to reset their password  e.g. CN=user,OU=domain_users,DC=mydomain,DC=com|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -296,26 +326,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-To connect, you must have NTLM credentials.
-
-Please make sure you enter your credentials with the DOMAIN\username format.
-
-The hostname should start with the URI prefix of `ldap://` for an unencrypted connection or `ldaps://` for an encrypted connection using SSL.
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|use_ssl|boolean|None|True|Use SSL?|None|
-|host|string|None|True|Server Host, e.g. ldap\://192.5.5.5. Must use either ldap\:// or ldaps\:// for SSL prefix|None|
-|port|integer|389|True|Port, e.g. 389|None|
-|username_password|credential_username_password|None|True|Username and password|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -333,36 +350,33 @@ the query results, and then using the variable step $item.dn
 For the Query action, this plugin does not support objects that use `*`, `\`, or an unpaired `\(\)` as part of their names.
 paired `\(\)` are supported
 
-## Workflows
+# Version History
 
-Examples:
-
-* Deprovision a user
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 1.0.0 - Revise input names, bugfixes for missing attributes and character escaping, fix security issue
-* 1.0.1 - Bugfix for potentially non-existent raw_attributes
-* 2.0.0 - Simplify output to "attributes" and "dn", return attributes fixed, and major code cleanup
-* 2.0.1 - Update host input description
-* 2.0.2 - SSL bug fix in SDK
-* 2.1.0 - Add actions for account add/delete, disable/enable, modify
-* 2.2.0 - Add actions for move object, reset password and improved error logging
-* 3.0.0 - Support web server mode | Update to new credential types
-* 3.0.1 - Bug fix preventing successful connections
-* 3.1.0 - Add user action expanded to allow setting of all attributes
-* 3.1.1 - Bug fix for normalizing Distinguished Name
-* 3.1.2 - Update help to clarify use of LDAP URI prefix
-* 3.1.3 - Update action descriptions
-* 3.1.4 - Add Connection test | Improve error handling in Connection
-* 3.2.0 - New action Force Password Reset
-* 3.2.1 - Fix issue regarding escaping Distinguished Names containing commas
-* 3.2.2 - Fix issue regarding escaping of `(` and `)` in the Query action
-* 3.2.3 - Fix issue with Add User action disable and enable flags | Update Query action to allow for `<=` and `>=` searches
-* 3.2.4 - Fix issue with Query where some output was not unescaped properly | Update to exception handling to leverage PluginException
-* 3.2.5 - Clean connection test output
+* 3.2.7 - New spec and help.md format for the Hub
 * 3.2.6 - Update help to document supported Windows Server versions
+* 3.2.5 - Clean connection test output
+* 3.2.4 - Fix issue with Query where some output was not unescaped properly | Update to exception handling to leverage PluginException
+* 3.2.3 - Fix issue with Add User action disable and enable flags | Update Query action to allow for `<=` and `>=` searches
+* 3.2.2 - Fix issue regarding escaping of `(` and `)` in the Query action
+* 3.2.1 - Fix issue regarding escaping Distinguished Names containing commas
+* 3.2.0 - New action Force Password Reset
+* 3.1.4 - Add Connection test | Improve error handling in Connection
+* 3.1.3 - Update action descriptions
+* 3.1.2 - Update help to clarify use of LDAP URI prefix
+* 3.1.1 - Bug fix for normalizing Distinguished Name
+* 3.1.0 - Add user action expanded to allow setting of all attributes
+* 3.0.1 - Bug fix preventing successful connections
+* 3.0.0 - Support web server mode | Update to new credential types
+* 2.2.0 - Add actions for move object, reset password and improved error logging
+* 2.1.0 - Add actions for account add/delete, disable/enable, modify
+* 2.0.2 - SSL bug fix in SDK
+* 2.0.1 - Update host input description
+* 2.0.0 - Simplify output to "attributes" and "dn", return attributes fixed, and major code cleanup
+* 1.0.1 - Bugfix for potentially non-existent raw_attributes
+* 1.0.0 - Revise input names, bugfixes for missing attributes and character escaping, fix security issue
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 

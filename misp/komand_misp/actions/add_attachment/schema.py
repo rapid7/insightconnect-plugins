@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add attachment to event"
+
+
 class Input:
     ATTACHMENT = "attachment"
     EVENT = "event"
@@ -41,8 +45,8 @@ class AddAttachmentInput(komand.Input):
     }
   },
   "required": [
-    "event",
-    "attachment"
+    "attachment",
+    "event"
   ]
 }
     """)

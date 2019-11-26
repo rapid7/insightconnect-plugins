@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates the role of the user in actual organization"
+
+
 class Input:
     ORGANIZATION_ID = "organization_id"
     ROLE = "role"

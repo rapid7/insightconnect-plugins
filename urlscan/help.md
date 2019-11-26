@@ -1,19 +1,36 @@
+# Description
 
-# urlscan.io
+The [URLScan](https://urlscan.io/) plugin uses URLScan to analyze urls for malicious indicators.
 
-## About
+This plugin utilizes the [URLScan API](https://urlscan.io/about-api/).
 
-[Urlscan](https://urlscan.io/) is a free URL scanning service.
+# Key Features
 
-This plugin utilizes the [Urlscan API](https://urlscan.io/about-api/).
+* Scan a URL and get a report on that URL
 
-## Actions
+# Requirements
 
-### Search
+* A URLScan API key
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|False|urlscan API key. Not required for the search action|None|
+
+## Technical Details
+
+### Actions
+
+#### Search
 
 This action is used to search urlscan.io.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -22,7 +39,7 @@ This action is used to search urlscan.io.
 |size|integer|100|True|Number of results returned|None|
 |offset|integer|0|True|Offset of first result (for paginating)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -66,18 +83,18 @@ Example output:
 ]
 ```
 
-### Submit URL for Scan
+#### Submit URL for Scan
 
 This action is used to submit a url to generate a scan report that can be retrieved later.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|The URL to scan|None|
 |public|boolean|False|True|Set to false for a private scan|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -91,17 +108,17 @@ Example output:
 }
 ```
 
-### Get Scan Results
+#### Get Scan Results
 
 This action is used to get the results of a scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_id|string|None|True|UUID of the scan to retrieve|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -234,39 +251,33 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|False|urlscan API key. Not required for the search action|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* URL enrichment
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
-* 2.0.0 - Fixed issue where output of Get Scan Results did not match API output | Update connection input to secret key instead of token | Updates to help
-* 2.1.0 - Added ScreenshotURL to get scan results output
-* 2.1.1 - Add error messaging to Get Scan Results action to provide assistance for unavailable scan results | Update to Python 3.7 Slim SDK (plugin size reduction)
+* 2.1.3 - New spec and help.md format for the Hub
 * 2.1.2 - Set User-Agent string to Rapid7 InsightConnect | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size | Run plugin as least privileged user | Improve error handling and logging | Fix issue in Submit URL for Scan action where improper POST body was sent
+* 2.1.1 - Add error messaging to Get Scan Results action to provide assistance for unavailable scan results | Update to Python 3.7 Slim SDK (plugin size reduction)
+* 2.1.0 - Added ScreenshotURL to get scan results output
+* 2.0.0 - Fixed issue where output of Get Scan Results did not match API output | Update connection input to secret key instead of token | Updates to help
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Urlscan.io](https://urlscan.io/)
 * [Urlscan API](https://urlscan.io/about-api/)
+

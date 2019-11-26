@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns ANC information based on the MAC address supplied"
+
+
 class Input:
     MAC = "mac"
     

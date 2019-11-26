@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='dig-rapid7-plugin',
-      version='1.0.0',
-      description='DNS Lookups',
+      version='1.0.2',
+      description='Dig is used for forward and reverse DNS lookups',
       author='rapid7',
       author_email='',
       url='',

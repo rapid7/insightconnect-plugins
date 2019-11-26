@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='cherwell-rapid7-plugin',
-      version='2.1.0',
-      description='Work with Cherwell Web Services records',
+      version='2.1.1',
+      description='The Cherwell plugin is used to administrate incidents in Cherwell',
       author='rapid7',
       author_email='',
       url='',

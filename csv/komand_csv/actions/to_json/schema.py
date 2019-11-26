@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Convert CSV to JSON"
+
+
 class Input:
     CSV = "csv"
     VALIDATION = "validation"

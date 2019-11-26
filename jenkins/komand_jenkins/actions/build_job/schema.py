@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Start a build job"
+
+
 class Input:
     NAME = "name"
     PARAMETERS = "parameters"

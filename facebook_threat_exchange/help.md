@@ -1,18 +1,37 @@
+# Description
 
-# Facebook Threat Exchange
-
-## About
-
-[Facebook Threat Exchange](https://developers.facebook.com/docs/threat-exchange/) is a platform for sharing threat information between selected entities.
+[Facebook Threat Exchange](https://developers.facebook.com/docs/threat-exchange/) is a platform for sharing threat information between selected entities. The Facebook Threat Exchange Plugin allows you to share and search IOCs
 This plugin utilizes the [Threat Exchange API](https://developers.facebook.com/docs/threat-exchange/v2.11).
 
-## Actions
+# Key Features
 
-### Threat Descriptors Search
+* Search for IOCs
+* Submit IOCs
+
+# Requirements
+
+* An applicaiton ID and secret key
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|secret_key|credential_secret_key|None|True|Secret to Facebook application e.g 3ef3234587654093fc954381043fc348|None|
+|app_id|string|None|False|Facebook application ID e.g 1234567890123456|None|
+
+## Technical Details
+
+### Actions
+
+#### Threat Descriptors Search
 
 This action is used to enable searching for subjective opinions on indicators of compromise stored in Threat Exchange.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -34,18 +53,18 @@ This action is used to enable searching for subjective opinions on indicators of
 |type|string|None|False|The [type](https://developers.facebook.com/docs/threat-exchange/reference/apis/indicator-type/) of descriptor to search for|['', 'ADJUST_TOKEN', 'API_KEY', 'AS_NUMBER', 'BANNER', 'CMD_LINE', 'COOKIE_NAME', 'CRX', 'DEBUG_STRING', 'DEST_PORT', 'DIRECTORY_QUERIED', 'DOMAIN', 'EMAIL_ADDRESS', 'FILE_CREATED', 'FILE_DELETED', 'FILE_MOVED', 'FILE_NAME', 'FILE_OPENED', 'FILE_READ', 'FILE_WRITTEN', 'GET_PARAM', 'HASH_IMPHASH', 'HASH_MD5', 'HASH_SHA1', 'HASH_SHA256', 'HASH_SSDEEP', 'HTML_ID', 'HTTP_REQUEST', 'IP_ADDRESS', 'IP_SUBNET', 'ISP', 'LATITUDE', 'LAUNCH_AGENT', 'LOCATION', 'LONGITUDE', 'MALWARE_NAME', 'MEMORY_ALLOC', 'MEMORY_PROTECT', 'MEMORY_WRITTEN', 'MUTANT_CREATED', 'MUTEX', 'NAME_SERVER', 'OTHER_FILE_OP', 'PASSWORD', 'PASSWORD_SALT', 'PAYLOAD_DATA', 'PAYLOAD_TYPE', 'POST_DATA', 'PROTOCOL', 'REFERER', 'REGISTRAR', 'REGISTRY_KEY', 'REG_KEY_CREATED', 'REG_KEY_DELETED', 'REG_KEY_ENUMERATED', 'REG_KEY_MONITORED', 'REG_KEY_OPENED', 'REG_KEY_VALUE_CREATED', 'REG_KEY_VALUE_DELETED', 'REG_KEY_VALUE_MODIFIED', 'REG_KEY_VALUE_QUERIED', 'SIGNATURE', 'SOURCE_PORT', 'TELEPHONE', 'URI', 'USER_AGENT', 'VOLUME_QUERIED', 'WEBSTORAGE_KEY', 'WEB_PAYLOAD', 'WHOIS_NAME', 'WHOIS_ADDR1', 'WHOIS_ADDR2', 'XPI']|
 |until|string|None|False|Returns descriptors collected before a timestamp |None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |paging|paging|True|Paging Information|
 |data|[]descriptor_data|True|Information around the indicator such as the Indicator, Type and ID|
 
-### Threat Indicator Search
+#### Threat Indicator Search
 
 This action is used to search for indicators of compromise stored in Threat Exchange.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -59,7 +78,7 @@ This action is used to search for indicators of compromise stored in Threat Exch
 |type|string|None|False|The type of indicators to search for [IndicatorTypes](https://developers.facebook.com/docs/threat-exchange/reference/apis/indicator-type/)|['', 'ADJUST_TOKEN', 'API_KEY', 'AS_NUMBER', 'BANNER', 'CMD_LINE', 'COOKIE_NAME', 'CRX', 'DEBUG_STRING', 'DEST_PORT', 'DIRECTORY_QUERIED', 'DOMAIN', 'EMAIL_ADDRESS', 'FILE_CREATED', 'FILE_DELETED', 'FILE_MOVED', 'FILE_NAME', 'FILE_OPENED', 'FILE_READ', 'FILE_WRITTEN', 'GET_PARAM', 'HASH_IMPHASH', 'HASH_MD5', 'HASH_SHA1', 'HASH_SHA256', 'HASH_SSDEEP', 'HTML_ID', 'HTTP_REQUEST', 'IP_ADDRESS', 'IP_SUBNET', 'ISP', 'LATITUDE', 'LAUNCH_AGENT', 'LOCATION', 'LONGITUDE', 'MALWARE_NAME', 'MEMORY_ALLOC', 'MEMORY_PROTECT', 'MEMORY_WRITTEN', 'MUTANT_CREATED', 'MUTEX', 'NAME_SERVER', 'OTHER_FILE_OP', 'PASSWORD', 'PASSWORD_SALT', 'PAYLOAD_DATA', 'PAYLOAD_TYPE', 'POST_DATA', 'PROTOCOL', 'REFERER', 'REGISTRAR', 'REGISTRY_KEY', 'REG_KEY_CREATED', 'REG_KEY_DELETED', 'REG_KEY_ENUMERATED', 'REG_KEY_MONITORED', 'REG_KEY_OPENED', 'REG_KEY_VALUE_CREATED', 'REG_KEY_VALUE_DELETED', 'REG_KEY_VALUE_MODIFIED', 'REG_KEY_VALUE_QUERIED', 'SIGNATURE', 'SOURCE_PORT', 'TELEPHONE', 'URI', 'USER_AGENT', 'VOLUME_QUERIED', 'WEBSTORAGE_KEY', 'WEB_PAYLOAD', 'WHOIS_NAME', 'WHOIS_ADDR1', 'WHOIS_ADDR2', 'XPI']|
 |until|date|None|False|Returns indicators collected before a timestamp|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -67,11 +86,11 @@ This action is used to search for indicators of compromise stored in Threat Exch
 |paging|paging|True|Paging Information|
 |data|[]data|True|Information around the indicator such as the Indicator, Type and ID|
 
-### Submit Descriptors
+#### Submit Descriptors
 
 This action is used to submit data to Facebook's graph API.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -93,43 +112,33 @@ This action is used to submit data to Facebook's graph API.
 |remove_tags|string|None|False|Remove tags associated with an object|None|
 |type|string|None|True|The kind of indicator being described, see [IndicatorType](https://developers.facebook.com/docs/threat-exchange/reference/apis/indicator-type) for the list of allowed values|['ADJUST_TOKEN', 'API_KEY', 'AS_NUMBER', 'BANNER', 'CMD_LINE', 'COOKIE_NAME', 'CRX', 'DEBUG_STRING', 'DEST_PORT', 'DIRECTORY_QUERIED', 'DOMAIN', 'EMAIL_ADDRESS', 'FILE_CREATED', 'FILE_DELETED', 'FILE_MOVED', 'FILE_NAME', 'FILE_OPENED', 'FILE_READ', 'FILE_WRITTEN', 'GET_PARAM', 'HASH_IMPHASH', 'HASH_MD5', 'HASH_SHA1', 'HASH_SHA256', 'HASH_SSDEEP', 'HTML_ID', 'HTTP_REQUEST', 'IP_ADDRESS', 'IP_SUBNET', 'ISP', 'LATITUDE', 'LAUNCH_AGENT', 'LOCATION', 'LONGITUDE', 'MALWARE_NAME', 'MEMORY_ALLOC', 'MEMORY_PROTECT', 'MEMORY_WRITTEN', 'MUTANT_CREATED', 'MUTEX', 'NAME_SERVER', 'OTHER_FILE_OP', 'PASSWORD', 'PASSWORD_SALT', 'PAYLOAD_DATA', 'PAYLOAD_TYPE', 'POST_DATA', 'PROTOCOL', 'REFERER', 'REGISTRAR', 'REGISTRY_KEY', 'REG_KEY_CREATED', 'REG_KEY_DELETED', 'REG_KEY_ENUMERATED', 'REG_KEY_MONITORED', 'REG_KEY_OPENED', 'REG_KEY_VALUE_CREATED', 'REG_KEY_VALUE_DELETED', 'REG_KEY_VALUE_MODIFIED', 'REG_KEY_VALUE_QUERIED', 'SIGNATURE', 'SOURCE_PORT', 'TELEPHONE', 'URI', 'USER_AGENT', 'VOLUME_QUERIED', 'WEBSTORAGE_KEY', 'WEB_PAYLOAD', 'WHOIS_NAME', 'WHOIS_ADDR1', 'WHOIS_ADDR2', 'XPI']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|False|Identifier for the submission made|
 |success|boolean|False|Returns true if submission was successful|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|secret_key|credential_secret_key|None|True|Secret to Facebook application e.g 3ef3234587654093fc954381043fc348|None|
-|app_id|string|None|False|Facebook application ID e.g 1234567890123456|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Lookup Indicators
-* Lookup Threat Descriptors
-* Submit Threat Descriptors
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
@@ -145,3 +154,4 @@ Examples:
 * [Privacy Type](https://developers.facebook.com/docs/threat-exchange/reference/apis/privacy-type)
 * [Privacy Members](https://developers.facebook.com/docs/threat-exchange/reference/apis/threat-exchange-member)
 * [Severity Type](https://developers.facebook.com/docs/threat-exchange/reference/apis/severity-type)
+

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Provides a list of domain names that share the same Internet host (i.e. the same IP address)"
+
+
 class Input:
     DOMAIN = "domain"
     LIMIT = "limit"

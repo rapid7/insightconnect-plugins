@@ -1,25 +1,46 @@
+# Description
 
-# FreeIPA
+[FreeIPA](https://www.freeipa.org/) which is an integrated Identity and Authentication solution for Linux/UNIX networked environments. The FreeIPA InsightConnect plugin retrieves user details, status and allows you to deprovision a user.
 
-## About
-
-[FreeIPA](https://www.freeipa.org/) is an integrated Identity and Authentication solution for Linux/UNIX networked environments.
-This plugin runs commands on a FreeIPA server using this [freeipa](https://github.com/nordnet/python-freeipa-json) python library.
+This plugin runs commands on a FreeIPA server using the [freeipa](https://github.com/nordnet/python-freeipa-json) python library.
 The FreeIPA API is viewable on the FreeIPA server web interface.
 
-## Actions
+# Key Features
 
-### User Status
+* User management
+* Delete user
+
+# Requirements
+
+* Username and password to logon to [freeipa](https://www.freeipa.org/) server.
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|username|string|None|True|Username to logon to FreeIPA server|None|
+|password|password|None|True|Password|None|
+|server|string|None|True|The name of the FreeIPA server e.g. ipa.demo1.freeipa.org|None|
+
+## Technical Details
+
+### Actions
+
+#### User Status
 
 This action returns information on a user's status.
 
-### Input
+#### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username|string|None|True|The UID of the user to return status of|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -50,17 +71,17 @@ Example output:
 
 ```
 
-### Find User
+#### Find User
 
 This action is used to search for a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |search_parameters|string|None|False|A string to look for in relevant user fields. If blank will return all users with a return limit of 40000|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -172,17 +193,17 @@ Example output:
 
 ```
 
-### Show User
+#### Show User
 
 This action is used to return all available information on a specified user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username|string|None|True|The login name of the user to search for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -292,18 +313,18 @@ Example output:
 
 ```
 
-### Delete User
+#### Delete User
 
 This action is used to delete a user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username|string|None|True|The UID of the user to delete|None|
 |preserve|boolean|None|True|If true the user will be preserved rather than deleted|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -320,38 +341,29 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Username to logon to FreeIPA server|None|
-|password|password|None|True|Password|None|
-|server|string|None|True|The name of the FreeIPA server e.g. ipa.demo1.freeipa.org|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 For the delete user action, setting `Preserve` to `True` will preserve the user rather than deleting them.
 Note that deletion is permanent and cannot be undone.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
+* 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - Support web server mode | Update to new credential types
+* 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Deprovision a user
-* Look up user
+# Links
 
 ## References
 
 * [FreeIPA Demo](https://ipa.demo1.freeipa.org)
 * [ipahttp library](https://github.com/nordnet/python-freeipa-json)
+

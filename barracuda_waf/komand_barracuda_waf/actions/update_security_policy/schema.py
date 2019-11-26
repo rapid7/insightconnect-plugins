@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates a security policy with the given values"
+
+
 class Input:
     CLOAKING = "cloaking"
     COOKIE_SECURITY = "cookie_security"

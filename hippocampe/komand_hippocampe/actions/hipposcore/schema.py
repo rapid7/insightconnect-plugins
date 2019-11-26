@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return a score for each of the given observables. The score is ranged between 0 and -100 (0 = observable unknown, -100 = super evil observable)"
+
+
 class Input:
     OBSERVABLES = "observables"
     
@@ -49,8 +53,8 @@ class HipposcoreInput(komand.Input):
         }
       },
       "required": [
-        "value",
-        "type"
+        "type",
+        "value"
       ]
     }
   }

@@ -1,0 +1,71 @@
+{
+	"spec": "29ac407de6a4979368ab82d718780037",
+	"manifest": "52cae49e2ab645a2d26632b27509bb33",
+	"setup": "99a1619d21b80020578a8bdf9076e91d",
+	"schemas": [
+		{
+			"identifier": "brand_monitor/schema.py",
+			"hash": "add03328eb1d40bd404103f3de6da0b5"
+		},
+		{
+			"identifier": "domain_profile/schema.py",
+			"hash": "3bbb91825881ad40e453aeb9a25cfd77"
+		},
+		{
+			"identifier": "domain_search/schema.py",
+			"hash": "89a17462f21e2a8985dae853691f1601"
+		},
+		{
+			"identifier": "hosting_history/schema.py",
+			"hash": "389139a0abf02a9019a82a24efb5c46d"
+		},
+		{
+			"identifier": "ip_monitor/schema.py",
+			"hash": "805319de4329772be6e45312aa41e337"
+		},
+		{
+			"identifier": "name_server_monitor/schema.py",
+			"hash": "1b8273a20b6188cf15a3dda36752ad5d"
+		},
+		{
+			"identifier": "parsed_whois/schema.py",
+			"hash": "9e280df589ca5819d632abf7e209a869"
+		},
+		{
+			"identifier": "registrant_monitor/schema.py",
+			"hash": "2792d17f9fe3250b17b4a96ded2c97a1"
+		},
+		{
+			"identifier": "reputation/schema.py",
+			"hash": "4564827fcd98f1d684b36194a16718f6"
+		},
+		{
+			"identifier": "reverse_ip/schema.py",
+			"hash": "9d9fab64daf5e317aec750e981638140"
+		},
+		{
+			"identifier": "reverse_ip_whois/schema.py",
+			"hash": "a7602c0e6f0c31abfb025967e955564e"
+		},
+		{
+			"identifier": "reverse_name_server/schema.py",
+			"hash": "84766b0098319c9bd2c7fb70e60f6352"
+		},
+		{
+			"identifier": "reverse_whois/schema.py",
+			"hash": "29a0a97779ee6e2ab30cf5c2a9a97d76"
+		},
+		{
+			"identifier": "whois/schema.py",
+			"hash": "6d560a40db3535adb80008f34985154c"
+		},
+		{
+			"identifier": "whois_history/schema.py",
+			"hash": "bc140bfc8b4f8f3466b66a9c26ac6bb7"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "e570348862831a4a5efe7f3cc3aeaedd"
+		}
+	]
+}

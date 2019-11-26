@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update the name of the organization"
+
+
 class Input:
     NAME = "name"
     ORGANIZATION_ID = "organization_id"

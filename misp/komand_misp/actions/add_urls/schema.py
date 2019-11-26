@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add URLs to event"
+
+
 class Input:
     COMMENT = "comment"
     DISTRIBUTION = "distribution"

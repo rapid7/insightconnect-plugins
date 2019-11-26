@@ -6,8 +6,8 @@ from icon_storage import connection, actions, triggers
 
 Name = 'Storage'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Store variables in a plugin cache'
+Version = '1.0.1'
+Description = 'The Storage plugin is a utility that stores information across loops and workflows'
 
 
 class ICONStorage(komand.Plugin):

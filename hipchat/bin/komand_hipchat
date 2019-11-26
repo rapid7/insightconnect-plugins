@@ -6,8 +6,8 @@ from komand_hipchat import connection, actions, triggers
 
 Name = 'HipChat'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'HipChat is group chat built for teams & business'
+Version = '1.0.1'
+Description = 'The HipChat plugin can send and receive messages along with managing users'
 
 
 class ICONHipchat(komand.Plugin):

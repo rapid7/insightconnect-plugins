@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Schedule the launch of shadowbook (for automatic indexation)"
+
+
 class Input:
     TIME = "time"
     

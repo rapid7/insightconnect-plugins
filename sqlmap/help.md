@@ -1,18 +1,36 @@
+# Description
 
-# SQLmap
+[SQLMap](http://sqlmap.org/) is an open source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database servers. It comes with a powerful detection engine, many niche features for the ultimate penetration tester and a broad range of switches lasting from database fingerprinting, over data fetching from the database, to accessing the underlying file system and executing commands on the operating system via out-of-band connections.
 
-## About
+The SQLMap plugin allows you to scan targets and analyze the results.
 
-[SQLmap](http://sqlmap.org/) is a scalable, open-source security incident response solutions designed for SOCs & CERTs to execute malicious SQL statements to test their backend databases.
-This plugin was tested successfully on the [DWVA](http://www.dvwa.co.uk/) project virtual machine.
+# Key Features
 
-## Actions
+* Scan a target
 
-### Scan
+# Requirements
+
+* Host and port of a target machine
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|host|string|None|False|Host of the REST-JSON API server (Default: localhost)|None|
+|port|string|None|False|Port of the the REST-JSON API server, the default is 8775|None|
+
+## Technical Details
+
+### Actions
+
+#### Scan
 
 This action is used to perform a scan on a target.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -160,7 +178,7 @@ This action is used to perform a scan on a target.
 |commonColumns|string|None|False|Check existence of common columns|None|
 |keepAlive|boolean|None|False|Use persistent HTTP(s) connections|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -187,35 +205,29 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|None|False|Host of the REST-JSON API server (Default: localhost)|None|
-|port|string|None|False|Port of the the REST-JSON API server, the default is 8775|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 To troubleshoot SQLmap, look at the INFO logs that are printed to see where the plugin failed.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Exploit SQL Database
-
-## Versions
-
-* 1.0.0 - Initial plugin
+* 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Support web server mode
+* 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [SQLmap](https://github.com/sqlmapproject/sqlmap)
 * [Unofficial SQLmap API Documentation](http://volatile-minds.blogspot.com/2013/04/unofficial-sqlmap-restful-api.html)
 * [DVWA](http://www.dvwa.co.uk/)
+

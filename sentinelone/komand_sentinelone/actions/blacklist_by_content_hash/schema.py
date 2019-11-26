@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add hashed content to global blacklist. The input makes use of contentHash from the threat summary"
+
+
 class Input:
     HASH = "hash"
     

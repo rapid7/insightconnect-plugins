@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetches a single item"
+
+
 class Input:
     ITEM_ID = "item_id"
     PARAMS = "params"
@@ -55,8 +59,8 @@ class GetItemInput(komand.Input):
     }
   },
   "required": [
-    "type",
-    "item_id"
+    "item_id",
+    "type"
   ]
 }
     """)

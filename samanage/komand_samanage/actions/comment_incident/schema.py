@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a comment to an incident"
+
+
 class Input:
     BODY = "body"
     INCIDENT_ID = "incident_id"
@@ -40,8 +44,8 @@ class CommentIncidentInput(komand.Input):
     }
   },
   "required": [
-    "incident_id",
     "body",
+    "incident_id",
     "is_private"
   ]
 }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the route used to communicate with the host"
+
+
 class Input:
     COUNT = "count"
     HOST = "host"
@@ -76,13 +80,13 @@ class TracerouteInput(komand.Input):
     }
   },
   "required": [
-    "host",
     "count",
+    "host",
     "max_ttl",
-    "time_out",
     "port",
+    "resolve_hostname",
     "set_ack",
-    "resolve_hostname"
+    "time_out"
   ]
 }
     """)
@@ -129,10 +133,10 @@ class TracerouteOutput(komand.Output):
     }
   },
   "required": [
-    "reply",
-    "response",
+    "ip",
     "path",
-    "ip"
+    "reply",
+    "response"
   ]
 }
     """)

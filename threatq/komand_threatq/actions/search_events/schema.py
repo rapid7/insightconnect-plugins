@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List all events"
+
+
 class Input:
     EVENT = "event"
     
