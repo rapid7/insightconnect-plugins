@@ -1,14 +1,10 @@
-# Mimecast
-
-## Help
-
 # Description
 
 Manage Mimecast Services
 
 # Key Features
 
-Manage blocked email domains, manage black list of browsing domains
+Manage blocked email domains, manage block list of browsing domains
 
 # Requirements
 
@@ -143,6 +139,34 @@ Example output:
       "disableUserAwareness": true,
       "disableRewrite": true,
       "disableLogClick": false
+    }
+  ]
+}
+```
+
+#### Delete Managed URL
+
+This action is used to remove a Managed URL from the blocked list.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|URL to be removed from blocked list.|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|[]deletions|False|IDs of URLs removed from blocked list|
+
+Example output:
+
+```
+{
+  "response": [
+    {
+      "deletedRecordIds": [ "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c", "eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ" ]
     }
   ]
 }

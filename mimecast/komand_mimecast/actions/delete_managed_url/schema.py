@@ -54,23 +54,23 @@ class DeleteManagedUrlOutput(komand.Output):
   "properties": {
     "response": {
       "type": "array",
-      "title": "Deletions",
-      "description": "Number of Records deleted",
+      "title": "Deleted Records",
+      "description": "Mimecast IDs of the Records successfully deleted",
       "items": {
-        "$ref": "#/definitions/total_deletions"
+        "$ref": "#/definitions/deletions"
       },
       "order": 1
     }
   },
   "definitions": {
-    "total_deletions": {
+    "deletions": {
       "type": "object",
-      "title": "total_deletions",
+      "title": "deletions",
       "properties": {
-        "numberOfDeletions": {
-          "type": "integer",
-          "title": "Number of Deletions",
-          "description": "The number of URL entries deleted from the blocked list",
+        "deletedRecordIds": {
+          "type": "array",
+          "title": "Mimecast IDs of Deletions",
+          "description": "The IDs of records deleted from the blocked list",
           "order": 1
         }
       }

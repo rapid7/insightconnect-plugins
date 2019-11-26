@@ -6,9 +6,6 @@ from komand_mimecast.util import util
 
 class PermitOrBlockSender(komand.Action):
 
-    # URI for Permit or Block Sender
-    _URI = '/api/managedsender/permit-or-block-sender'
-
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='permit_or_block_sender',
@@ -19,6 +16,7 @@ class PermitOrBlockSender(komand.Action):
     def run(self, params={}):
         # Import variables from connection
         url = self.connection.url
+        uri = self.connection.PERMIT_OR_BLOCK_SENDER_URI
         access_key = self.connection.access_key
         secret_key = self.connection.secret_key
         app_id = self.connection.app_id
@@ -32,7 +30,7 @@ class PermitOrBlockSender(komand.Action):
 
         # Mimecast request
         mimecast_request = util.MimecastRequests()
-        response = mimecast_request.mimecast_post(url=url, uri=PermitOrBlockSender._URI,
+        response = mimecast_request.mimecast_post(url=url, uri=uri,
                                                   access_key=access_key, secret_key=secret_key,
                                                   app_id=app_id, app_key=app_key, data=data)
 

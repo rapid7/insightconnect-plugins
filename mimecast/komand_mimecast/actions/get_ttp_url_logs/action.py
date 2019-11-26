@@ -17,7 +17,7 @@ class GetTtpUrlLogs(komand.Action):
     def run(self, params={}):
         # Import variables from connection
         url = self.connection.url
-        uri = self.GET_TTP_URL_LOGS_URI
+        uri = self.connection.GET_TTP_URL_LOGS_URI
         access_key = self.connection.access_key
         secret_key = self.connection.secret_key
         app_id = self.connection.app_id

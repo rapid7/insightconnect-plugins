@@ -284,11 +284,11 @@ types:
       description: The action requested by the user
       type: string
       required: false
-  total_deletions:
-    numberOfDeletions:
-      title: Number of Deletions
-      description: The number of URL entries deleted from the blocked list
-      type: integer
+  deletions:
+    deletedRecordIds:
+      title: Mimecast IDs of Deletions
+      description: The IDs of records deleted from the blocked list
+      type: array
       required: false
 
 connection:
@@ -392,9 +392,9 @@ actions:
         default: true
     output:
       response:
-        title: Deletions
-        description: Number of Records deleted
-        type: '[]total_deletions'
+        title: Deleted Records
+        description: Mimecast IDs of the Records successfully deleted
+        type: '[]deletions'
         required: false
   get_managed_url:
     title: Get Managed URL

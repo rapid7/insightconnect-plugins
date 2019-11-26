@@ -2,6 +2,7 @@ import komand
 from .schema import DeleteManagedUrlInput, DeleteManagedUrlOutput, Component
 # Custom imports below
 from komand_mimecast.util import util
+from komand.exceptions import PluginException
 
 
 class DeleteManagedUrl(komand.Action):
@@ -42,7 +43,7 @@ class DeleteManagedUrl(komand.Action):
         delete_all_entries_boolean = bool(plugin_arguments.get('deleteAllEntries'))
 
         # get the IDS of only the ones that pertain to the URL we want blocked
-        url_comparer = util.UrlMimecastFinder(url_to_block = plugin_arguments.get('url'))
+        url_comparer = util.UrlMimecastFinder(url=plugin_arguments.get('url'))
         ids_of_items_to_delete = []
         for json_block in get_data:
             if url_comparer.does_mimecast_json_object_match(json_block):
@@ -56,9 +57,13 @@ class DeleteManagedUrl(komand.Action):
         ids_successfully_deleted = []
         for id_to_delete in ids_of_items_to_delete:
             mimecast_request = util.MimecastRequests()
-            response = mimecast_request.mimecast_post(url=url, uri=delete_uri,
-                                                      access_key=access_key, secret_key=secret_key,
-                                                      app_id=app_id, app_key=app_key, data={'id': id_to_delete})
-            ids_successfully_deleted.append(id_to_delete)
+            try:
+                response = mimecast_request.mimecast_post(url=url, uri=delete_uri,
+                                                          access_key=access_key, secret_key=secret_key,
+                                                          app_id=app_id, app_key=app_key, data={'id': id_to_delete})
+                ids_successfully_deleted.append(id_to_delete)
+            except PluginException:
+                # no deletion happened. But do not fail here, just keep going
+                pass
 
         return {'response': [{'deleted': ids_successfully_deleted}]}
