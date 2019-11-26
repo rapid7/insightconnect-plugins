@@ -39,11 +39,10 @@ class DeleteManagedUrl(komand.Action):
         get_data = {}
         if 'data' in response:
             get_data = response['data']
-        delete_all_entries_boolean = bool(plugin_arguments['deleteAllEntries'])
+        delete_all_entries_boolean = bool(plugin_arguments.get('deleteAllEntries'))
 
         # get the IDS of only the ones that pertain to the URL we want blocked
-        url_to_block = plugin_arguments['url']
-        url_comparer = util.UrlMimecastFinder(url_to_block)
+        url_comparer = util.UrlMimecastFinder(url_to_block = plugin_arguments.get('url'))
         ids_of_items_to_delete = []
         for json_block in get_data:
             if url_comparer.does_mimecast_json_object_match(json_block):
@@ -54,12 +53,12 @@ class DeleteManagedUrl(komand.Action):
             ids_of_items_to_delete = ids_of_items_to_delete[:1]
 
         # Mimecast request for delete
-        total_deleted_ids = 0
+        ids_successfully_deleted = []
         for id_to_delete in ids_of_items_to_delete:
             mimecast_request = util.MimecastRequests()
             response = mimecast_request.mimecast_post(url=url, uri=delete_uri,
                                                       access_key=access_key, secret_key=secret_key,
                                                       app_id=app_id, app_key=app_key, data={'id': id_to_delete})
-            total_deleted_ids += 1
+            ids_successfully_deleted.append(id_to_delete)
 
-        return {'response': [{'number_of_deletions': str(total_deleted_ids)}]}
+        return {'response': [{'deleted': ids_successfully_deleted}]}
