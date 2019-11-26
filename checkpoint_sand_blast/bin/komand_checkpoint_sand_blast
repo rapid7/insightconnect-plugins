@@ -6,8 +6,8 @@ from komand_checkpoint_sand_blast import connection, actions, triggers
 
 Name = 'Checkpoint Sand Blast'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Multilayered security technology provides protection against advanced cyber attacks'
+Version = '1.0.1'
+Description = 'The Checkpoint Sand Blast plugin extends the Sand Blast service and enables report status and suspicious file upload'
 
 
 class ICONCheckpointSandBlast(komand.Plugin):

@@ -6,8 +6,8 @@ from komand_hippocampe import connection, actions, triggers
 
 Name = 'Hippocampe'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Hippocampe is a threat feed aggregator, which creates a threat feed memory and allows queries through a REST API or from a Web UI'
+Version = '1.0.1'
+Description = 'The Hippocampe plugin allows for advanced queries and management of your Hippocampe feeds'
 
 
 class ICONHippocampe(komand.Plugin):

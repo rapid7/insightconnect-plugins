@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create ThreatConnect Adversary"
+
+
 class Input:
     ATTRIBUTES = "attributes"
     NAME = "name"

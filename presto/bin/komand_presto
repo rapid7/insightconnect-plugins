@@ -6,8 +6,8 @@ from komand_presto import connection, actions, triggers
 
 Name = 'Presto'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Presto is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes'
+Version = '1.0.1'
+Description = 'The Presto plugin will allow you to run database commands with Presto'
 
 
 class ICONPresto(komand.Plugin):

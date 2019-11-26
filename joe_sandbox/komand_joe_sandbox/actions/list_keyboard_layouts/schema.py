@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve a list of available keyboard layouts for Windows analyzers"
+
+
 class Input:
     pass
 

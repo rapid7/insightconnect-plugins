@@ -1,0 +1,47 @@
+{
+	"spec": "bf4779d65cdbe12f6f3e80525f91d267",
+	"manifest": "0208f900facb08d157cf7eb2b4d038a0",
+	"setup": "c2d2ca2903fdfcba8f93c2ac63e299ba",
+	"schemas": [
+		{
+			"identifier": "a/schema.py",
+			"hash": "6d4a23b88f343cb26a31062becf441a6"
+		},
+		{
+			"identifier": "blacklist/schema.py",
+			"hash": "e62b84fc89c2764c296047fe0de4bdc0"
+		},
+		{
+			"identifier": "dns/schema.py",
+			"hash": "49a5f1634fcfc416d7efc6781646add4"
+		},
+		{
+			"identifier": "mx/schema.py",
+			"hash": "7c9e6980720c63417ad0c6d7f1106b84"
+		},
+		{
+			"identifier": "ptr/schema.py",
+			"hash": "74fbe97ad89187b9d0f1be2888c91824"
+		},
+		{
+			"identifier": "soa/schema.py",
+			"hash": "1cff6ab2b7491b95bfbcb11e6e3f52f5"
+		},
+		{
+			"identifier": "spf/schema.py",
+			"hash": "fcbfe8a57799678d5a467277b734a8ac"
+		},
+		{
+			"identifier": "txt/schema.py",
+			"hash": "3d251ece78eef42f95b84683cbd7a391"
+		},
+		{
+			"identifier": "usage/schema.py",
+			"hash": "558e1b358a2ecb814a6a421e3629d401"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "c565adfe133612753925afe467256e7f"
+		}
+	]
+}

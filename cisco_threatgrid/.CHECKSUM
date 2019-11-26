@@ -1,0 +1,35 @@
+{
+	"spec": "03814d7d7fcaf1929c90f645c43c7f49",
+	"manifest": "461dd6f5b512ea847bc279fed23a6558",
+	"setup": "a9339b4233e5b166cb8d89042b111ec5",
+	"schemas": [
+		{
+			"identifier": "get_sample_analysis/schema.py",
+			"hash": "c4a293cc9b22bcae7b95c67cb4aefb70"
+		},
+		{
+			"identifier": "search_for_sample_report_by_domain/schema.py",
+			"hash": "5eead5cd8f53d9d57bd2d949578173c3"
+		},
+		{
+			"identifier": "search_for_sample_report_by_id/schema.py",
+			"hash": "a84ef4ae4878579ddf6c97c67075d296"
+		},
+		{
+			"identifier": "search_for_sample_report_by_sha256/schema.py",
+			"hash": "af7e0139359da1ec70af3c776d48ddd6"
+		},
+		{
+			"identifier": "submit_sample/schema.py",
+			"hash": "778dc796c36a44327821f7b261cc91b7"
+		},
+		{
+			"identifier": "submit_url/schema.py",
+			"hash": "62f35b4d3c7ac605296b409c7630c9ec"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "5b61b43682391f03fd29373e7e875a2b"
+		}
+	]
+}

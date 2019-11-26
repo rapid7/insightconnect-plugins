@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get real-time details of the execution of a scan"
+
+
 class Input:
     SCAN_ID = "scan_id"
     

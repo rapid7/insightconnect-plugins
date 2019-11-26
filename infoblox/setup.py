@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='infoblox-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='Infoblox helps with managing and identifying devices connected to networks',
       author='rapid7',
       author_email='',

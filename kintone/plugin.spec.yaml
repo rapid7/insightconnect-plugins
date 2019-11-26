@@ -1,22 +1,26 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: kintone
 title: Kintone
 description: Custom workflows and data management for businesses and non-profits in one place
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/kintone
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://kintone.com
 tags:
 - kintone
 - data
 - workflow
 - reporting
-
+hub_tags:
+  use_cases: [soar, data_ingestion, reporting_and_analytics]
+  keywords: [kintone, data, workflow, reporting]
+  features: []
 connection: 
   api_key:
     title: API Key

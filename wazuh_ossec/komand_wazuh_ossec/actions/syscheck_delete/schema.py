@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Clears the syscheck database for all agents, or a specified agent"
+
+
 class Input:
     AGENT_ID = "agent_id"
     
@@ -52,8 +56,8 @@ class SyscheckDeleteOutput(komand.Output):
     }
   },
   "required": [
-    "message",
-    "error"
+    "error",
+    "message"
   ]
 }
     """)

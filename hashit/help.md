@@ -1,28 +1,41 @@
+# Description
 
-# HashIt
-
-## About
-
-Generate common hashes from a file or string. Supported hashes are:
+The HashIt plugin will generate common hashes from a file or string. Supported hashes are:
 
 * MD5
 * SHA1
 * SHA256
 * SHA512
 
-## Actions
+# Key Features
 
-### Hash Bytes
+* Generate a hash
+
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Hash Bytes
 
 This action is used to return the supported hashes for a file type.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |bytes|bytes|None|True|Base64 encoded file bytes to hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -44,18 +57,18 @@ Example output:
 
 ```
 
-### Hash String
+#### Hash String
 
 This action is used to return the supported hashes for a string.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |foo|string|None|False|None|None|
 |string|string|None|True|String of text to hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -77,34 +90,31 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* [Security Mailbox Triage](https://market.komand.com/workflows/komand/security-mailbox-triage/1.0.0)
-* Integrity verification
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - Fix failing test in string action and remove unused foo input
-* 0.1.2 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
-* 2.0.0 - Rename "Hash a String" action to "Hash String"
+* 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - Add `utilities` plugin tag for Marketplace searchability
+* 2.0.0 - Rename "Hash a String" action to "Hash String"
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.2 - SSL bug fix in SDK
+* 0.1.1 - Fix failing test in string action and remove unused foo input
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Hashlib](https://docs.python.org/3.4/library/hashlib.html)
+

@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='wigle-rapid7-plugin',
-      version='1.0.0',
-      description='WiGLE (Wireless Geographic Logging Engine) consolidates location and information of wireless networks world-wide to a central database, and has user-friendly desktop and web applications that can map, query and update the database via the web',
+      version='1.0.1',
+      description='The WiGLE (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks',
       author='rapid7',
       author_email='',
       url='',

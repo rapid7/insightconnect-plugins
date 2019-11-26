@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Find metrics under a given path"
+
+
 class Input:
     FROM = "from"
     QUERY = "query"

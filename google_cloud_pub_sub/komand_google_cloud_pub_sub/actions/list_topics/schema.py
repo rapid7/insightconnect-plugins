@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List all topics within a project"
+
+
 class Input:
     PROJECT_ID = "project_id"
     

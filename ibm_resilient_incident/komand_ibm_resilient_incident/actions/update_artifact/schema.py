@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Saves changes to an artifact"
+
+
 class Input:
     ARTIFACT = "artifact"
     ARTIFACT_ID = "artifact_id"
@@ -46,10 +50,10 @@ class UpdateArtifactInput(komand.Input):
     }
   },
   "required": [
-    "organization_id",
-    "incident_id",
+    "artifact",
     "artifact_id",
-    "artifact"
+    "incident_id",
+    "organization_id"
   ]
 }
     """)

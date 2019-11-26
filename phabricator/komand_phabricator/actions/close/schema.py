@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Close a task"
+
+
 class Input:
     ID = "id"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete a file from the endpoint"
+
+
 class Input:
     HOSTNAME = "hostname"
     OBJECT_PATH = "object_path"

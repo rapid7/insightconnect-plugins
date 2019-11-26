@@ -1,15 +1,16 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: html
 title: HTML
 vendor: rapid7
 support: community
 status: []
-description: Validate or convert an HTML document
-version: 1.2.0
+description: "The HTML plugin will validate HTML, convert an HTML document to another format, or strip a HTML document
+  of all tags"
+version: 1.2.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/html
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - markdown
@@ -19,6 +20,10 @@ tags:
 - docx
 - convert
 - utilities
+hub_tags:
+  use_cases: [soar, data_utility]
+  keywords: [markdown, html, pdf, epub, docx, convert, utilities]
+  features: []
 actions:
   validate:
     title: Validate

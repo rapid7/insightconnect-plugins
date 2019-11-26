@@ -1,0 +1,79 @@
+{
+	"spec": "75dd75371e464e76c5199f9eeff061d0",
+	"manifest": "4ac2989a990c035c7c074289958462fb",
+	"setup": "6a9b22ad5681210c1185124a439e3013",
+	"schemas": [
+		{
+			"identifier": "av_report/schema.py",
+			"hash": "7be5d9a64508505866ba098d46c0511e"
+		},
+		{
+			"identifier": "av_sample/schema.py",
+			"hash": "b9259a031b6af0dc25a4194d940a64a2"
+		},
+		{
+			"identifier": "domain/schema.py",
+			"hash": "4023cd9f0f33657cb5f52513abad182d"
+		},
+		{
+			"identifier": "domain_ext/schema.py",
+			"hash": "134b24c07b0e8291014759a3dc45d392"
+		},
+		{
+			"identifier": "email_domain/schema.py",
+			"hash": "560c16c00c48ca71be707030a9d7555a"
+		},
+		{
+			"identifier": "email_report/schema.py",
+			"hash": "f2ebe24e400f058937c821df58b19f1b"
+		},
+		{
+			"identifier": "import_hash_report/schema.py",
+			"hash": "b5dae8493838fab3e922577c192d784a"
+		},
+		{
+			"identifier": "import_hash_samples/schema.py",
+			"hash": "43dfa59703618bad3bb026b521c9c66a"
+		},
+		{
+			"identifier": "ip/schema.py",
+			"hash": "80204968ea529e97acffdac12fbbea17"
+		},
+		{
+			"identifier": "ip_ext/schema.py",
+			"hash": "1fd840c98d942fbc1285381fe2d968f5"
+		},
+		{
+			"identifier": "report/schema.py",
+			"hash": "8e6e90997f75516106584705acef9005"
+		},
+		{
+			"identifier": "samples/schema.py",
+			"hash": "29b61c9ea962b9e1a6b0ff1a21ec4688"
+		},
+		{
+			"identifier": "search/schema.py",
+			"hash": "6f76ff5f4a8637003b41a7c9bdc2c966"
+		},
+		{
+			"identifier": "ssdeep_report/schema.py",
+			"hash": "237afcb339948d5196b575df9d374019"
+		},
+		{
+			"identifier": "ssdeep_sample/schema.py",
+			"hash": "72ec14b50b3c8051c2262d48a0c25334"
+		},
+		{
+			"identifier": "ssl_hosts/schema.py",
+			"hash": "9ef1998313e9872c0520940a978f73a2"
+		},
+		{
+			"identifier": "ssl_report/schema.py",
+			"hash": "5f97130efc819675afeb8ceb1a7a37b6"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "cb60c2b5b62fafb9634d667a8ad96277"
+		}
+	]
+}

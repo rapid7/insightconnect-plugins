@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all attack actions for the given attack group with actionID"
+
+
 class Input:
     ACTION_ID = "action_id"
     ATTACK_GROUP_ID = "attack_group_id"
@@ -39,9 +43,9 @@ class RetrieveAttackActionsInput(komand.Input):
     }
   },
   "required": [
-    "policy_id",
+    "action_id",
     "attack_group_id",
-    "action_id"
+    "policy_id"
   ]
 }
     """)

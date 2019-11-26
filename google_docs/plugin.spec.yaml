@@ -1,21 +1,26 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: google_docs
 title: Google Docs
-description: Manage and edit Google documents
-version: 1.0.0
+description: Create and retrieve Google documents
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/google_docs
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.google.com/
 tags:
 - docuement
 - google
 - drive
 - utilities
+hub_tags:
+  use_cases: [soar, data_aggregation, data_ingestion]
+  keywords: [docuement, google, drive, utilities]
+  features: []
 types:
   create_result:
     writeControl:

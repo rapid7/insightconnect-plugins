@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove duplicate items from an array of strings"
+
+
 class Input:
     DATA = "data"
     

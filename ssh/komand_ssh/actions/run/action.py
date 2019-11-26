@@ -13,11 +13,13 @@ class Run(komand.Action):
                 output=RunOutput())
 
     def run(self, params={}):
+        results = {}
         command = params.get(Input.COMMAND)
         client = self.connection.client(params.get(Input.HOST))
         (stdin, stdout, stderr) = client.exec_command(command)
-        stdout_string = "\n".join(stdout.readlines())
-        stderr_string = "\n".join(stderr.readlines())
+        results['stdout'] = "\n".join(stdout.readlines())
+        results['stderr'] = "\n".join(stderr.readlines())
+        results['all_output'] = results['stdout'] + results['stderr']
         client.close()
-        return {Output.RESULTS: stdout_string + stderr_string}
+        return {Output.RESULTS: results}
 

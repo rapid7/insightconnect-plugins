@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query event info"
+
+
 class Input:
     ADDRESS = "address"
     EVENT_TYPE = "event_type"

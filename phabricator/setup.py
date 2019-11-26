@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='phabricator-rapid7-plugin',
-      version='1.0.0',
-      description='Phabricator is a suite of open source tools for peer code review, task management, and project communication',
+      version='1.0.1',
+      description='The Phabricator plugin allows you to setup and manage code reviews',
       author='rapid7',
       author_email='',
       url='',

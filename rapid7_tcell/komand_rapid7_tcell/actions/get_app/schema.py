@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch the display name and app ID for the app with the given ID"
+
+
 class Input:
     APP_ID = "app_id"
     

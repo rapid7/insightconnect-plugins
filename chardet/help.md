@@ -1,22 +1,36 @@
-# Chardet
+# Description
 
-## About
+This plugin is a Python compatible character encoding detector.
 
-[Chardet](https://chardet.readthedocs.io/en/latest/index.html) is a python compatible character encoding detector.
+# Key Features
 
-## Actions
+* Detect character encoding
 
-### Detect Encoding
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+_This plugin does not contain a connection._
+
+## Technical Details
+
+### Actions
+
+#### Detect Encoding
 
 This action is used to detect encoding.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |bytes_to_analyze|bytes|None|True|Bytes to analyze|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -34,39 +48,27 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-_This plugin does not contain a connection._
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
-## Workflows
+# Version History
 
-Examples:
-
-* Find encoding of unknown set of bytes
-
-## Versions
-
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Chardet](https://chardet.readthedocs.io/en/latest/index.html)
 * [How it Works](https://chardet.readthedocs.io/en/latest/how-it-works.html)
 
-## Custom Output Types
-
-### recommendation
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|confidence|number|False|Confidence|
-|encoding|string|False|Encoding|
-|language|string|False|Language|

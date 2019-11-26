@@ -6,8 +6,8 @@ from komand_cisco_umbrella_investigate import connection, actions, triggers
 
 Name = 'Cisco Umbrella Investigate'
 Vendor = 'rapid7'
-Version = '1.0.2'
-Description = 'Cisco Umbrella Investigate provides the most complete view of the relationships and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats'
+Version = '1.0.3'
+Description = 'This plugin utilizes Cisco Umbrella Investigate to get the most complete view of the relationships and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats'
 
 
 class ICONCiscoUmbrellaInvestigate(komand.Plugin):

@@ -1,16 +1,40 @@
-# AWS WorkSpaces
+# Description
 
-## About
+This plugin utilizes [AWS WorkSpaces](https://aws.amazon.com/workspaces/) to create workspaces. Amazon WorkSpaces is a fully managed
+ desktop computing service in the cloud that allows its customers to provide cloud-based desktops to their end-users
 
-[AWS WorkSpaces](https://aws.amazon.com/workspaces/) is a fully managed desktop computing service in the cloud that allows its customers to provide cloud-based desktops to their end-users.
+# Key Features
 
-## Actions
+* Create workspace
 
-### Create Workspace
+# Requirements
+
+* AWS account
+* AWS access key ID for authentication
+* AWS secret key for signing requests with the given AWS access key ID
+* AWS region to use for requests
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|aws_access_key_id|credential_secret_key|None|True|The ID of the AWS access key to use for authentication|None|
+|aws_secret_access_key|credential_secret_key|None|True|The AWS secret access Key used for signing requests with the given AWS access key ID|None|
+|region|string|None|True|The AWS region to use for requests. An example would be us-east-1|['us-east-2', 'us-east-1', 'us-west-1', 'us-west-2', 'ca-central-1', 'ap-south-1', 'ap-northeast-2', 'ap-southeast-1', 'ap-southeast-2', 'ap-northeast-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'sa-east-1']|
+
+## Technical Details
+
+### Actions
+
+#### Create Workspace
 
 This action is used to create a workspace.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -23,7 +47,7 @@ This action is used to create a workspace.
 |volume_encryption_key|string|None|False|The KMS key used to encrypt data stored on your workspace|None|
 |workspace_properties|workspace_properties|None|False|Workspace properties|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -40,62 +64,26 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|aws_access_key_id|credential_secret_key|None|True|The ID of the AWS access key to use for authentication|None|
-|aws_secret_access_key|credential_secret_key|None|True|The AWS secret access Key used for signing requests with the given AWS access key ID|None|
-|region|string|None|True|The AWS region to use for requests. An example would be us-east-1|['us-east-2', 'us-east-1', 'us-west-1', 'us-west-2', 'ca-central-1', 'ap-south-1', 'ap-northeast-2', 'ap-southeast-1', 'ap-southeast-2', 'ap-northeast-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'sa-east-1']|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
-## Workflows
+# Version History
 
-Examples:
-
-* Create a workspace 
-
-## Versions
-
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [AWS WorkSpaces](https://aws.amazon.com/workspaces/)
-
-## Custom Output Types
-
-### workspace_properties
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|compute_type_name|string|False|Compute type name|
-|root_volume_size|integer|False|Root volume size in gigabytes|
-|running_mode|string|False|Running mode|
-|running_mode_auto_stop_time_out|integer|False|Running mode auto stop time out in minutes. It should be a multiple of 60|
-|user_volume_size|integer|False|User volume size in gigabytes|
-
-### tag
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|key|string|False|The key in a key-value pair of a tag|
-|value|string|False|The value in a key-value pair of a tag|
-
-### workspace_id_state
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|string|True|ID of a created workspace|
-|state|string|True|Current status of a created workspace|
-
 

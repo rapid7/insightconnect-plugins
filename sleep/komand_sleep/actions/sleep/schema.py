@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Suspend execution for an interval of time"
+
+
 class Input:
     INTERVAL = "interval"
     

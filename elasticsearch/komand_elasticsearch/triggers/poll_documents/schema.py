@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Poll for new documents given a query"
+
+
 class Input:
     
     _INDEX = "_index"

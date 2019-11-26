@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Receive events based on criteria"
+
+
 class Input:
     EVENT_ID = "event_id"
     

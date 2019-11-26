@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List members of organization"
+
+
 class Input:
     ACTION_FIELDS = "action_fields"
     ACTIONS = "actions"

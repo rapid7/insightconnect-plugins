@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Provides the ownership record for a domain name or IP address with basic registration details"
+
+
 class Input:
     QUERY = "query"
     

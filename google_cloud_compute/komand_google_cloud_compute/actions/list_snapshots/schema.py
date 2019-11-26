@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves the list of Snapshot resources contained within the specified project"
+
+
 class Input:
     FILTER = "filter"
     MAXRESULTS = "maxResults"

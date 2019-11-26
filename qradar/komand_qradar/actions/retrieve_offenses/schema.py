@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve a list of offenses currently in the system"
+
+
 class Input:
     pass
 

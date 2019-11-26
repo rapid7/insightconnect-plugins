@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Set a key"
+
+
 class Input:
     EXPIRE = "expire"
     KEY = "key"

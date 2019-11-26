@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Searches the ownership (WHOIS) records of domain names for specific search terms"
+
+
 class Input:
     DAYS_BACK = "days_back"
     EXCLUDE = "exclude"

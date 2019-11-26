@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets summary of all threats"
+
+
 class Input:
     pass
 

@@ -25,16 +25,19 @@ class DeleteNoteInput(komand.Input):
     "id": {
       "type": "integer",
       "title": "Note ID",
+      "description": "Note ID",
       "order": 3
     },
     "malware_sha256": {
       "type": "string",
       "title": "Malware SHA256",
+      "description": "Malware SHA256",
       "order": 2
     },
     "project_name": {
       "type": "string",
       "title": "Project Name",
+      "description": "Project name",
       "order": 1
     }
   },

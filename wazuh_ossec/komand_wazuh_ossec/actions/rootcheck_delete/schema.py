@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Clears the rootcheck database for all agents, or a specified agent"
+
+
 class Input:
     AGENT_ID = "agent_id"
     
@@ -52,8 +56,8 @@ class RootcheckDeleteOutput(komand.Output):
     }
   },
   "required": [
-    "message",
-    "error"
+    "error",
+    "message"
   ]
 }
     """)

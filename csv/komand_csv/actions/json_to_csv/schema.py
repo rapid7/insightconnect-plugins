@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Convert a JSON array to CSV"
+
+
 class Input:
     JSON = "json"
     

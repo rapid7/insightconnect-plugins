@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Submit a sample at a given URL for analysis and return the associated web IDs for the sample"
+
+
 class Input:
     ADDITIONAL_PARAMETERS = "additional_parameters"
     PARAMETERS = "parameters"

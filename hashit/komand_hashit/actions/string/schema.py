@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Generate hashes from text"
+
+
 class Input:
     STRING = "string"
     

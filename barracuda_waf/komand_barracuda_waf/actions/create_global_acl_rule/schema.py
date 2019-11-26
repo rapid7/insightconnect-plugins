@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Adds a global ACL rule with the given values"
+
+
 class Input:
     GLOBAL_ACL = "global_acl"
     POLICY_ID = "policy_id"
@@ -96,9 +100,9 @@ class CreateGlobalAclRuleInput(komand.Input):
         }
       },
       "required": [
+        "extended_match",
         "name",
-        "url_match",
-        "extended_match"
+        "url_match"
       ]
     }
   }

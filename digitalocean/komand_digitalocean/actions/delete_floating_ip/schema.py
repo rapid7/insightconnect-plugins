@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes a floating IP from the account"
+
+
 class Input:
     FLOATING_IP_ADDRESS = "floating_ip_address"
     

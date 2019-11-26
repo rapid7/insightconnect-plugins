@@ -1,23 +1,26 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: salesforce
 title: Salesforce
-description: Salesforce is a CRM solution that brings together all customer information
-  in a single, integrated platform that enables building a customer-centered business
-  from marketing right through to sales, customer service and business analysis
-version: 1.0.0
+description: The Salesforce plugin allows you to search, update, and manage salesforce records
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/salesforce
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.salesforce.com/
 tags:
 - marketing
 - sales
 - analysis
 - crm
+hub_tags:
+  use_cases: [soar, remediation_ticketing, reporting_and_analytics, soc_automation]
+  keywords: [marketing, sales, analysis, crm]
+  features: []
 types:
   search_result:
     type:

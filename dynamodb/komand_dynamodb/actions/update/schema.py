@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update an object in Dyanmo"
+
+
 class Input:
     CONDITION_EXPRESSION = "condition_expression"
     DATA = "data"
@@ -46,9 +50,9 @@ class UpdateInput(komand.Input):
     }
   },
   "required": [
-    "table",
+    "data",
     "key",
-    "data"
+    "table"
   ]
 }
     """)

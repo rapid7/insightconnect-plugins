@@ -6,8 +6,8 @@ from komand_twitter import connection, actions, triggers
 
 Name = 'Twitter'
 Vendor = 'rapid7'
-Version = '2.0.0'
-Description = 'Trigger for a pattern, post, and block a user on Twitter'
+Version = '2.0.1'
+Description = 'Twitter is a microblogging and social networking service. Using the Twitter plugin for Rapid7 InsightConnect, users can monitor tweets, post, and block users'
 
 
 class ICONTwitter(komand.Plugin):

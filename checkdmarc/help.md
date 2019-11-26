@@ -1,23 +1,37 @@
-# Checkdmarc
+# Description
 
-## About
+[Checkdmarc](https://domainaware.github.io/checkdmarc/) is a Python module and command line parser for SPF and DMARC records. The checkdmarc plugin is used to parse SPF and DMARC records.
 
-[Checkdmarc](https://domainaware.github.io/checkdmarc/) is a Python module and command line parser for SPF and DMARC records.
+# Key Features
 
-## Actions
+* Parse DNS records
 
-### Check Domains
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+_This plugin does not contain a connection._
+
+## Technical Details
+
+### Actions
+
+#### Check Domains
 
 This action is used to check domains.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain to check. e.g. fbi.gov, google.com|None|
 |timeout|float|6.0|True|Timeout in seconds for request. Default is 6 seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -194,11 +208,11 @@ Example output:
 }
 ```
 
-### Check Domains Alternate Nameservers
+#### Check Domains Alternate Nameservers
 
 This action will check DMARC records against alternate name servers.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -206,7 +220,7 @@ This action will check DMARC records against alternate name servers.
 |nameservers|[]string|['1.1.1.1', '1.0.0.1']|True|Nameserver to check against. e.g ["1.1.1.1","1.0.0.1"]|None|
 |timeout|float|6.0|True|Timeout in seconds for request. Default is 6 seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -381,43 +395,28 @@ This action will check DMARC records against alternate name servers.
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-_This plugin does not contain a connection._
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
-## Workflows
+# Version History
 
-Examples:
-
-* Analyze domain
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 2.0.0 - Added timeout to Check Domain
+* 2.1.1 - New spec and help.md format for the Hub
 * 2.1.0 - Added action Check Domains Alternate Nameservers
+* 2.0.0 - Added timeout to Check Domain
+* 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Checkdmarc](https://domainaware.github.io/checkdmarc/)
 
-## Custom Output Types
-
-### report
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|base_domain|string|False|Base domain|
-|dmarc|object|False|DMARC|
-|domain|string|False|Domain|
-|mx|object|False|MX|
-|ns|object|False|NS|
-|spf|object|False|SPF|

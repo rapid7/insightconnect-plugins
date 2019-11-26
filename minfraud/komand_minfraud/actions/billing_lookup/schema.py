@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query billing address info"
+
+
 class Input:
     ADDRESS = "address"
     BILLING_ADDRESS = "billing_address"

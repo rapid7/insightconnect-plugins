@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates the values of given parameters in the given data theft element"
+
+
 class Input:
     ACTION = "action"
     CUSTOM_IDENTITY_THEFT_TYPE = "custom_identity_theft_type"

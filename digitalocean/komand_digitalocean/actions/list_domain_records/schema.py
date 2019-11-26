@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List all domain records belonging to the domain name"
+
+
 class Input:
     DOMAIN_NAME = "domain_name"
     

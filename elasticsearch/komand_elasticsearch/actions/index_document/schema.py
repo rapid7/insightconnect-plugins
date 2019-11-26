@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create or replace a document by index"
+
+
 class Input:
     _ID = "_id"
     _INDEX = "_index"

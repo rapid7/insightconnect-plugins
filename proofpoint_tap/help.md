@@ -1,23 +1,36 @@
-
-# Proofpoint TAP Parser
-
-## About
+# Description
 
 Proofpoint TAP is a plugin for [Proofpoint Targeted Attack Protection](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection) (TAP) alerts.
 
-## Actions
+# Key Features
 
-### Parse Alert
+* Trigger a workflow on a new alert
+
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Parse Alert
 
 This action is used to parse a TAP alert.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |tap_alert|string|None|True|A Proofpoint TAP alert|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -51,31 +64,29 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
-* 1.0.1 - Fixed issue where TAP alerts with attachments are not parsed correctly
-* 1.0.2 - Sanitize example output in Parse Alert action documentation
+* 1.0.4 - New spec and help.md format for the Hub
 * 1.0.3 - Fixed issue where headers were occasionally parsed improperly
+* 1.0.2 - Sanitize example output in Parse Alert action documentation
+* 1.0.1 - Fixed issue where TAP alerts with attachments are not parsed correctly
+* 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Look up SHA256 hash and enrich data
+# Links
 
 ## References
 
 * [Proofpoint TAP](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection)
+

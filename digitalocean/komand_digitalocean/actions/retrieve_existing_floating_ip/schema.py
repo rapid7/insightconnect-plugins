@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves an existing floating IP from the account"
+
+
 class Input:
     FLOATING_IP_ADDRESS = "floating_ip_address"
     

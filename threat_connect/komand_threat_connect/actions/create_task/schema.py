@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a Task Resource in the ThreatConnect platform"
+
+
 class Input:
     ASSIGNEE = "assignee"
     ATTRIBUTES = "attributes"

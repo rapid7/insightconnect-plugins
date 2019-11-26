@@ -1,28 +1,43 @@
+# Description
 
-# Redhat Security Advisories
+This plugin monitors the [Red Hat Security Advisories](https://access.redhat.com/security/updates/advisory) list, and triggers on any new advisories that come in. The Red Hat Security Advisory gives information about security flaws that affect Red Hat products and services.
 
-## About
+Advisories and update notifications are also provided via the Red Hat Network for products serviced by the Red Hat Network.
 
-This plugin monitors the [Red Hat Security Advisories](https://access.redhat.com/security/updates/advisory) list, and triggers on any new advisories that come in.
+# Key Features
 
-## Actions
+* Trigger a workflow on a new advisory
+
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
 
 This plugin does not contain any actions.
 
-## Triggers
+### Triggers
 
-### New Advisory
+#### New Advisory
 
 This trigger is used to monitor for new new advisories.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |after|string|None|False|Look for new advisories after provided date. Default is when trigger starts.|None|
 |include_cvrf|boolean|False|False|Include the full source CVRF|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -42,29 +57,26 @@ This trigger is used to monitor for new new advisories.
 |rhsa|string|False|Red Hat Security Advisory ID|
 |cves|[]string|False|CVE IDs|
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Advisories
-* Vulnerability assessments
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Support web server mode
+* 1.0.0 - Update to v2 Python plugin architecture
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Red Hat Security Advisories](https://access.redhat.com/security/updates/advisory)
 * [Red Hat Advisory API](https://access.redhat.com/labs/securitydataapi)
+

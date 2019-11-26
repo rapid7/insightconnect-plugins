@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search Shodan Using the Query Syntax"
+
+
 class Input:
     QUERY = "query"
     

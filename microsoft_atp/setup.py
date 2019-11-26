@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='microsoft_atp-rapid7-plugin',
-      version='1.5.0',
-      description='Windows Defender Advanced Threat Protection (ATP) is a unified platform for preventative protection, post-breach detection, automated investigation, and response',
+      version='1.5.1',
+      description='The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files',
       author='rapid7',
       author_email='',
       url='',

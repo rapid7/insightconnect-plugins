@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup ZeuS hosts in specific autonomous system"
+
+
 class Input:
     AS = "as"
     LIMIT = "limit"

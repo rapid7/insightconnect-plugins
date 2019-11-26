@@ -6,8 +6,8 @@ from komand_barracuda_waf import connection, actions, triggers
 
 Name = 'Barracuda Web Application Firewall'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Barracuda Web Application Firewall is the ideal solution for organizations looking to protect web applications from data breaches and defacement. With the Barracuda Web Application Firewall, administrators do not need to wait for clean code or even know how an application works to secure their applications'
+Version = '1.0.1'
+Description = 'The Barracuda WAF plugin automates administrative tasks as well as rule creation and modification'
 
 
 class ICONBarracudaWaf(komand.Plugin):

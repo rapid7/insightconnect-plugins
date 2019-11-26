@@ -1,6 +1,4 @@
-# Matplotlib
-
-## About
+# Description
 
 [Matplotlib](https://www.matplotlib.com) is a Python 2D plotting library which produces publication quality
 figures in a variety of hardcopy formats and interactive environments across platforms. Matplotlib can be used in
@@ -8,13 +6,29 @@ Python scripts, the Python and IPython shells, the Jupyter notebook, web applica
 interface toolkits. The Matploitlib plugin provides graphing capability of Base64 encoded CSV data using Matplotlib,
 NumPy, Pandas, and Seaborn, utilizing the [matplotlib API](https//api.matplotlib.com).
 
-## Actions
+# Key Features
 
-### Create Line Plot
+* Plotting data from Excel files
+
+# Requirements
+
+_This plugin does not contain any requirements_
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Create Line Plot
 
 This action is used to create a line plot with an X/Y axis: [https://seaborn.pydata.org/generated/seaborn.lineplot.html#seaborn.lineplot](https://seaborn.pydata.org/generated/seaborn.lineplot.html#seaborn.lineplot).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -25,7 +39,7 @@ This action is used to create a line plot with an X/Y axis: [https://seaborn.pyd
 |color_palette|string|dark|True|Color palette of the plot|['deep', 'muted', 'bright', 'pastel', 'dark', 'colorblind']|
 |margin_style|string|dark|True|Style of the margin of the plot|['darkgrid', 'whitegrid', 'dark', 'white', 'ticks']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -41,11 +55,11 @@ Example output:
 }
 ```
 
-### Create Scatter Plot
+#### Create Scatter Plot
 
 This action is used to create a scatter plot with an X/Y axis: [https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot](https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -56,7 +70,7 @@ This action is used to create a scatter plot with an X/Y axis: [https://seaborn.
 |color_palette|string|dark|True|Color palette of the plot|['deep', 'muted', 'bright', 'pastel', 'dark', 'colorblind']|
 |margin_style|string|dark|True|Style of the margin of the plot|['darkgrid', 'whitegrid', 'dark', 'white', 'ticks']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -72,11 +86,11 @@ Example output:
 }
 ```
 
-### Create Distribution Plot
+#### Create Distribution Plot
 
 This action is used to create a distribution plot that illustrates the distribution between two data series: [https://seaborn.pydata.org/generated/seaborn.distplot.html#seaborn.distplot](https://seaborn.pydata.org/generated/seaborn.distplot.html#seaborn.distplot).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -86,7 +100,7 @@ This action is used to create a distribution plot that illustrates the distribut
 |color_palette|string|dark|True|Color palette of the plot|['deep', 'muted', 'bright', 'pastel', 'dark', 'colorblind']|
 |margin_style|string|dark|True|Style of the margin of the plot|['darkgrid', 'whitegrid', 'dark', 'white', 'ticks']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -102,11 +116,11 @@ Example output:
 }
 ```
 
-### Create Joint Plot
+#### Create Joint Plot
 
 This action is used to create a joint plot that illustrates the distribution between two data series: [https://seaborn.pydata.org/generated/seaborn.jointplot.html#seaborn.jointplot](https://seaborn.pydata.org/generated/seaborn.jointplot.html#seaborn.jointplot).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -117,7 +131,7 @@ This action is used to create a joint plot that illustrates the distribution bet
 |color_palette|string|dark|True|Color palette of the plot|['deep', 'muted', 'bright', 'pastel', 'dark', 'colorblind']|
 |margin_style|string|dark|True|Style of the margin of the plot|['darkgrid', 'whitegrid', 'dark', 'white', 'ticks']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -133,11 +147,11 @@ Example output:
 }
 ```
 
-### Create Pair Plot
+#### Create Pair Plot
 
 This action is used to create a pair plot that illustrates the distribution between all numerical columns in a data set: [https://seaborn.pydata.org/generated/seaborn.pairplot.html#seaborn.pairplot](https://seaborn.pydata.org/generated/seaborn.pairplot.html#seaborn.pairplot).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -147,7 +161,7 @@ This action is used to create a pair plot that illustrates the distribution betw
 |color_palette|string|dark|True|Color palette of the plot|['deep', 'muted', 'bright', 'pastel', 'dark', 'colorblind']|
 |margin_style|string|dark|True|Style of the margin of the plot|['darkgrid', 'whitegrid', 'dark', 'white', 'ticks']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -163,30 +177,27 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Generate and email plots based on InsightVM SQL Query Report data
-* Generate and display plots in artifacts within the a workflow
+# Links
 
 ## References
 
 * [Matplotlib](https://matplotlib.org/)
 * [Seabborn](https://seaborn.pydata.org)
+

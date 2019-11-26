@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='tshark-rapid7-plugin',
-      version='1.0.1',
-      description='A tool for dumping and analyzing network traffic',
+      version='1.0.2',
+      description='TShark is a tool for dumping and analyzing network traffic. With the TShark plugin for Rapid7 InsightConnect, users can open PCAP data for further analysis and intel gathering',
       author='rapid7',
       author_email='',
       url='',

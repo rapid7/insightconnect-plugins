@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetches information related to a text search"
+
+
 class Input:
     QUERY = "query"
     QUERY_TYPE = "query_type"

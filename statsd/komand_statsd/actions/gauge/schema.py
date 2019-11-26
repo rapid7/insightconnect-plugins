@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action is used to set a gauge value"
+
+
 class Input:
     DELTA = "delta"
     RATE = "rate"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Adds a custom task to the incident"
+
+
 class Input:
     BODY = "body"
     INCIDENT_ID = "incident_id"
@@ -39,8 +43,8 @@ class AddCustomTaskToIncidentInput(komand.Input):
     }
   },
   "required": [
-    "incident_id",
     "body",
+    "incident_id",
     "organization_id"
   ]
 }

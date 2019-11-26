@@ -120,10 +120,10 @@ class ConnectionSchema(komand.Input):
   },
   "required": [
     "credentials",
+    "device_type",
     "host",
     "port",
-    "verbose",
-    "device_type"
+    "verbose"
   ],
   "definitions": {
     "credential_asymmetric_key": {

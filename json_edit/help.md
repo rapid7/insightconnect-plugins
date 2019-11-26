@@ -1,20 +1,35 @@
+# Description
 
-# JSON Edit
+[JSON Edit](https://www.json.org/) allows for the manipulation of JSON data.
 
-## About
+# Key Features
 
-JSON Edit allows for the manipulation of JSON data.
+* Edit JSON string
 
-## Actions
+# Requirements
 
-### Update
+_This plugin does not contain any requirements_
+
+# Documentation
+
+## Setup
+
+## Connection
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Update
 
 This action is used to update a value by key. It updates any values matching the key for an `object` or an `array` of `object`s.
 A user must supply one of these data structure as input for the plugin to update.
 
 It will iterate through each dictionary but is not recursive so nested dictionaries will not be operated on.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -23,7 +38,7 @@ It will iterate through each dictionary but is not recursive so nested dictionar
 |key|string|None|True|JSON key to update|None|
 |value|string|None|True|New value|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -50,14 +65,14 @@ Example output:
 
 ```
 
-### Delete
+#### Delete
 
 This action is used to delete a key by name. It deletes any matching keys for an `object` or an `array` of `object`s.
 A user must supply one of these data structure as input for the plugin to update.
 
 It will iterate through each dictionary but is not recursive so nested dictionaries will not be operated on.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -65,7 +80,7 @@ It will iterate through each dictionary but is not recursive so nested dictionar
 |object|object|None|False|JSON object|None|
 |key|string|None|True|Key to remove|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -90,29 +105,25 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
+* 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Update JSON reports
-* Sanitize JSON fields
+# Links
 
 ## References
 

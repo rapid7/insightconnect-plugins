@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Monitor new issues"
+
+
 class Input:
     
     ASSIGNEE = "assignee"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve user information"
+
+
 class Input:
     USER_ID = "user_id"
     

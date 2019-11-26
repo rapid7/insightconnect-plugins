@@ -1,21 +1,26 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
-description: Microsoft Teams actions and triggers
-version: 1.2.2
+description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
+version: 1.2.3
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url:
-  license_url:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/microsoft_teams
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.microsoft.com
 tags:
 - microsoft
 - teams
 - office 365
 - chat
+hub_tags:
+  use_cases: [soar, chat_ops, application_management, soc_automation, threat_detection_and_response, user_management]
+  keywords: [microsoft, teams, office 365, chat]
+  features: []
 types:
   team:
     displayName:

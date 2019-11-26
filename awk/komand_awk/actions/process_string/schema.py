@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Process string with Awk"
+
+
 class Input:
     EXPRESSION = "expression"
     TEXT = "text"

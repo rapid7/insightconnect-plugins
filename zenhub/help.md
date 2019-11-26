@@ -1,25 +1,47 @@
+# Description
 
-# ZenHub
+The [Zenhub](https://www.zenhub.com) plugin allows for agile project management in GitHub. This plugin will allow you to manage issues, epics, and pipelines in a ZenHub enable Git repository.
 
-## About
-
-[Zenhub](https://www.zenhub.com) is an agile project management tool for GitHub.
 This plugin utilizes the [Zenhub API](https://github.com/ZenHubIO/API) to manage ZenHub Epics, Pipelines, and Estimates.
 
-## Actions
+# Key Features
 
-### Get Issue Events
+* Create an Issue
+* Create an Epic
+* Move an issue to another pipeline
+
+# Requirements
+
+* ZenHub API token
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_token|password|None|True|ZenHub API Token|None|
+
+A ZenHub API Token can be obtained [here](https://dashboard.zenhub.io/#/settings).
+
+## Technical Details
+
+### Actions
+
+#### Get Issue Events
 
 This action is used to get the ZenHub events for a github issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
 |issue_number|integer|None|False|GitHub Issue Number|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -55,11 +77,11 @@ Example output:
 
 ```
 
-### Remove Issue from Epic
+#### Remove Issue from Epic
 
 This action is used to remove a github issue from a ZenHub epic.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -67,25 +89,25 @@ This action is used to remove a github issue from a ZenHub epic.
 |issue|issue_reference|None|False|A GitHub Issue to remove from the ZenHub Epic|None|
 |epic_id|integer|None|False|GitHub Issue Number of the ZenHub Epic|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status_code|integer|False|HTTP status code|
 |issue|issue_reference|False|The GitHub Issue removed from the ZenHub Epic|
 
-### Get Epic Data
+#### Get Epic Data
 
 This action is used to get the ZenHub data for a ZenHub epic.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
 |epic_id|integer|None|False|GitHub Issue Number of the ZenHub Epic|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -114,11 +136,11 @@ Example output:
 
 ```
 
-### Convert Issue to Epic
+#### Convert Issue to Epic
 
 This action is used to convert a github issue to a ZenHub epic.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -126,17 +148,17 @@ This action is used to convert a github issue to a ZenHub epic.
 |issues|[]issue_reference|None|False|GitHub Issues to add to ZenHub Epic|None|
 |issue_number|integer|None|False|GitHub Issue Number|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status_code|integer|False|HTTP status code|
 
-### Set Estimate Value for Issue
+#### Set Estimate Value for Issue
 
 This action is used to set the ZenHub estimate value for a github issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -144,35 +166,35 @@ This action is used to set the ZenHub estimate value for a github issue.
 |estimate_value|integer|None|False|ZenHub Estimate Value|None|
 |issue_number|integer|None|False|GitHub Issue Number|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status_code|integer|False|HTTP status code|
 |estimate_value|integer|False|Set ZenHub Estimate Value|
 
-### Convert Epic to Issue
+#### Convert Epic to Issue
 
 This action is used to convert a ZenHub epic back to a Github issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
 |epic_id|integer|None|False|GitHub Issue Number of the ZenHub Epic|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status_code|integer|False|HTTP status code|
 
-### Add Issue to Epic
+#### Add Issue to Epic
 
 This action is used to add a github issue to a ZenHub epic.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -180,7 +202,7 @@ This action is used to add a github issue to a ZenHub epic.
 |issue|issue_reference|None|False|A GitHub Issue to add to the ZenHub Epic|None|
 |epic_id|integer|None|False|GitHub Issue Number of the ZenHub Epic|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -202,17 +224,17 @@ Example output:
 
 ```
 
-### Get Repository Epics
+#### Get Repository Epics
 
 This action is used to get the ZenHub epics for a github repository.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -234,11 +256,11 @@ Example output:
 
 ```
 
-### Move Issue Between Pipelines
+#### Move Issue Between Pipelines
 
 This action is used to move a github issue between ZenHub pipelines.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -247,23 +269,23 @@ This action is used to move a github issue between ZenHub pipelines.
 |issue_number|integer|None|False|GitHub Issue Number|None|
 |pipeline_id|string|None|False|ZenHub Pipeline ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status_code|integer|False|HTTP status code|
 
-### Get Repository Board Data
+#### Get Repository Board Data
 
 This action is used to get the ZenHub board data for a github repository.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -297,18 +319,18 @@ Example output:
 
 ```
 
-### Get Issue Data
+#### Get Issue Data
 
 This action is used to get the ZenHub data for a github issue.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
 |issue_number|integer|None|False|GitHub Issue Number|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -332,37 +354,29 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_token|password|None|True|ZenHub API Token|None|
-
-A ZenHub API Token can be obtained [here](https://dashboard.zenhub.io/#/settings).
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Note: GitHub Repository IDs (repo_id) can be obtained via the GitHub API at the [GET /user/repos endpoint](https://developer.github.com/v3/repos/#list-your-repositories).
 
-## Workflows
+# Version History
 
-Examples:
-
-* Ticket management
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Rename "Move Issue between Pipelines" action to "Move Issue Between Pipelines"
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [ZenHub](https://zenhub.com)
 * [ZenHub API](https://github.com/ZenHubIO/API)
+

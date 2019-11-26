@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Unsuspend user from enterprise"
+
+
 class Input:
     USERNAME = "username"
     

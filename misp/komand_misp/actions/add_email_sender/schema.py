@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add email sender to event"
+
+
 class Input:
     COMMENT = "comment"
     DISTRIBUTION = "distribution"
@@ -62,9 +66,9 @@ class AddEmailSenderInput(komand.Input):
   "required": [
     "comment",
     "distribution",
+    "event",
     "proposal",
-    "sender",
-    "event"
+    "sender"
   ]
 }
     """)

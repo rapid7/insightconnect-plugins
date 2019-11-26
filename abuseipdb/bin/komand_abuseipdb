@@ -6,8 +6,8 @@ from komand_abuseipdb import connection, actions, triggers
 
 Name = 'AbuseIPDB'
 Vendor = 'rapid7'
-Version = '5.0.0'
-Description = 'AbuseIPDB is a free service which allows you to look up IP reports, or report an abusive IP'
+Version = '5.0.1'
+Description = 'This plugin allows you to look up IP reports, provides list and details of blacklisted IPs, or report an abusive IP'
 
 
 class ICONAbuseipdb(komand.Plugin):

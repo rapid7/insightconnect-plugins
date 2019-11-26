@@ -23,7 +23,7 @@ class ConnectionSchema(komand.Input):
     "username": {
       "type": "string",
       "title": "Username",
-      "description": "Username and API key",
+      "description": "Username",
       "order": 1
     }
   },

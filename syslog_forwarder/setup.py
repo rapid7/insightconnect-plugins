@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='syslog_forwarder-rapid7-plugin',
-      version='1.0.0',
-      description='Forward messages to a syslog server',
+      version='1.0.1',
+      description='The Syslog Forwarder plugin will forward messages to a syslog server',
       author='rapid7',
       author_email='',
       url='',

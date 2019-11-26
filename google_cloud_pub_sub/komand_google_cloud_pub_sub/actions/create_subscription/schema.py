@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new subscription to a topic"
+
+
 class Input:
     PROJECT_ID = "project_id"
     SUBSCRIPTION_NAME = "subscription_name"
@@ -39,8 +43,8 @@ class CreateSubscriptionInput(komand.Input):
     }
   },
   "required": [
-    "topic",
-    "subscription_name"
+    "subscription_name",
+    "topic"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete a host"
+
+
 class Input:
     _REF = "_ref"
     

@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='red_canary-rapid7-plugin',
-      version='2.1.4',
-      description='Managed endpoint detection and response',
+      version='2.1.5',
+      description='The RedCanary plugin allows you to manage endpoint detection and respond to threats',
       author='rapid7',
       author_email='',
       url='',

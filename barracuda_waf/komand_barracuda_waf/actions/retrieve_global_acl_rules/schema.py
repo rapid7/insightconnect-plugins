@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all global ACL rules with global ACL ID"
+
+
 class Input:
     GLOBAL_ACL_ID = "global_acl_id"
     POLICY_ID = "policy_id"
@@ -39,8 +43,8 @@ class RetrieveGlobalAclRulesInput(komand.Input):
     }
   },
   "required": [
-    "policy_id",
-    "global_acl_id"
+    "global_acl_id",
+    "policy_id"
   ]
 }
     """)
@@ -105,14 +109,14 @@ class RetrieveGlobalAclRulesOutput(komand.Output):
     }
   },
   "required": [
-    "extended_match",
-    "url_match",
     "action",
-    "redirect_url",
-    "id",
+    "comments",
+    "extended_match",
     "extended_match_sequence",
+    "id",
     "name",
-    "comments"
+    "redirect_url",
+    "url_match"
   ]
 }
     """)

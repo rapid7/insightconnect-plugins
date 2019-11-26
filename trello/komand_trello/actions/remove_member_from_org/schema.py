@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This will remove a member from your organization"
+
+
 class Input:
     ID_MEMBER = "id_member"
     ID_OR_NAME = "id_or_name"

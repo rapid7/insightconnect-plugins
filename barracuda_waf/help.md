@@ -1,23 +1,43 @@
+# Description
 
-# Barracuda Web Application Firewall
+[Barracuda Web Application Firewall](https://campus.barracuda.com/product/webapplicationfirewall/) is the a solution for organizations looking to protect web applications from data breaches and defacement. With the Barracuda Web Application Firewall, administrators do not need to wait for clean code or even know how an application works to secure their applications. The Barracuda WAF plugin automates administrative tasks as well as rule creation and modification.
 
-## About
+# Key Features
 
-[Barracuda Web Application Firewall](https://campus.barracuda.com/product/webapplicationfirewall/) is the a solution for organizations looking to protect web applications from data breaches and defacement. With the Barracuda Web Application Firewall, administrators do not need to wait for clean code or even know how an application works to secure their applications.
+* Administrate ACL rules
+* Administrate content rules
+* Administrate security policies
 
-## Actions
+# Requirements
 
-### All Vsites
+* Requires a username and password
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|address|string|None|False|Enter address to Barracuda waf|None|
+|credentials|credential_username_password|None|True|Username and password|None|
+
+## Technical Details
+
+### Actions
+
+#### All Vsites
 
 Lists all Vsites.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|false|Vsite ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -420,17 +440,17 @@ Example output:
 
 ```
 
-### Delete Vsite
+#### Delete Vsite
 
 Deletes the given Vsite.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|true|vsite ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -446,11 +466,11 @@ Example output:
 
 ```
 
-### Create Virtual Service
+#### Create Virtual Service
 
 Creates a virtual service with the given values.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -464,7 +484,7 @@ Creates a virtual service with the given values.
 |certificate|string|None|false|The certificate that needs to be presented to the browser when accessing this Service|None|
 |service_hostname|string|None|false|The domain name to identify and rewrite HTTP requests to HTTPS|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -480,17 +500,17 @@ Example output:
 
 ```
 
-### Retrieve Virtual Service
+#### Retrieve Virtual Service
 
 Lists virtual service with service ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|false|Virtual service ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -642,17 +662,17 @@ Example output:
 
 ```
 
-### Delete Virtual Service
+#### Delete Virtual Service
 
 Delete virtual service with service ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|true|Virtual Service ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -668,17 +688,17 @@ Example output:
 
 ```
 
-### Create Security Policy
+#### Create Security Policy
 
 Creates a security policy with the default values.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|true|The name of the security policy that needs to be created|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -694,16 +714,16 @@ Example output:
 
 ```
 
-### Retrieve Security Policies
+#### Retrieve Security Policies
 
 Lists all security policies.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -849,11 +869,11 @@ Example output:
 
 ```
 
-### Update Security Policy
+#### Update Security Policy
 
 Updates a security policy with the given values.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -864,7 +884,7 @@ Updates a security policy with the given values.
 |cloaking|cloaking|None|false|Configuration of cloaking|None|
 |url_normalization|url_normalization|None|false|Configuration of requests|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -880,17 +900,17 @@ Example output:
 
 ```
 
-### Delete Security Policy
+#### Delete Security Policy
 
 Deletes the given security policy.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|true|ID of security policy|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -906,11 +926,11 @@ Example output:
 
 ```
 
-### Create Data Theft Element
+#### Create Data Theft Element
 
 Adds a data theft element with the given values.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -923,7 +943,7 @@ Adds a data theft element with the given values.
 |initial_characters_to_keep|string|None|true|The number of initial characters to be displayed to the user|None|
 |trailing_characters_to_keep|string|None|true|The number of trailing characters to be displayed to the user|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -939,18 +959,18 @@ Example output:
 
 ```
 
-### Retrieve Data Theft Element
+#### Retrieve Data Theft Element
 
 Lists data theft element by id.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |policy_id|string|None|true|ID of security policy|None|
 |id|string|None|true|ID of security policy|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -981,11 +1001,11 @@ Example output:
 
 ```
 
-### Update Data Theft Element
+#### Update Data Theft Element
 
 Updates the values of given parameters in the given data theft element.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -998,7 +1018,7 @@ Updates the values of given parameters in the given data theft element.
 |initial_characters_to_keep|string|None|false|The number of initial characters to be displayed to the user|None|
 |trailing_characters_to_keep|string|None|false|The number of trailing characters to be displayed to the user|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1014,18 +1034,18 @@ Example output:
 
 ```
 
-### Delete Data Theft Element
+#### Delete Data Theft Element
 
 Deletes the given data theft element.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |policy_id|string|None|true|ID of security policy|None|
 |id|string|None|false|ID of a Data Theft Element|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1041,17 +1061,17 @@ Example output:
 
 ```
 
-### Retrieve Attack Groups
+#### Retrieve Attack Groups
 
 Lists all attack groups.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |policy_id|string|None|true|ID of security policy|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1076,18 +1096,18 @@ Example output:
 
 ```
 
-### Retrieve Attack Groups by ID
+#### Retrieve Attack Groups by ID
 
 Lists all attack groups with attack group ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |policy_id|string|None|true|ID of security policy|None|
 |attack_group_id|string|None|true|Attack group ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1112,18 +1132,18 @@ Example output:
 
 ```
 
-### Retrieve Attack Actions
+#### Retrieve Attack Actions
 
 Lists all attack actions.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |policy_id|string|None|true|ID of security policy|None|
 |attack_group_id|string|None|true|Attack group ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1165,11 +1185,11 @@ Example output:
 
 ```
 
-### Retrieve Attack Actions by ID
+#### Retrieve Attack Actions by ID
 
 Lists all attack actions for the given attack group with actionID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1177,7 +1197,7 @@ Lists all attack actions for the given attack group with actionID.
 |attack_group_id|string|None|true|Attack group ID|None|
 |action_id|string|None|true|Attack group ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1219,11 +1239,11 @@ Example output:
 
 ```
 
-### Update an Action Policy
+#### Update an Action Policy
 
 Updates the values of given parameters in the given action policy.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1232,7 +1252,7 @@ Updates the values of given parameters in the given action policy.
 |action_id|string|None|true|Attack group ID|None|
 |action_policy|action_policy|true|Attack groups information|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1248,18 +1268,18 @@ Example output:
 
 ```
 
-### Create Global ACL Rule
+#### Create Global ACL Rule
 
 Adds a global ACL rule with the given values.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |policy_id|string|None|true|ID of security policy|None|
 |global_acl|globalACL|None|true|Global ACL object|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1275,18 +1295,18 @@ Example output:
 
 ```
 
-### Retrieve Global ACL Rules
+#### Retrieve Global ACL Rules
 
 Lists all global ACL rules with global ACL ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |policy_id|string|None|true|ID of security policy|None|
 |global_acl_id|integer|None|true|Global ACL ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1322,11 +1342,11 @@ Example output:
 
 ```
 
-### Update Global ACL Rule
+#### Update Global ACL Rule
 
 Updates the values of given parameters in the given global ACL rule.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1342,7 +1362,7 @@ Updates the values of given parameters in the given global ACL rule.
 |redirect_url|string|false|A URL to which a user should be redirected if action is temporary_redirect or permanent_redirect|
 |comments|string|false|Description about the global ACL rule|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1358,18 +1378,18 @@ Example output:
 
 ```
 
-### Delete Global ACL Rule
+#### Delete Global ACL Rule
 
 Deletes the given global ACL rule.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |policy_id|string|None|true|ID of security policy|None|
 |global_acl_id|integer|None|true|Global ACL ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1385,17 +1405,17 @@ Example output:
 
 ```
 
-### Create Host Group
+#### Create Host Group
 
 Creates a trusted host group with the given name.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|true|A name for the trusted host group that needs to be created|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1411,17 +1431,17 @@ Example output:
 
 ```
 
-### Delete Host Group
+#### Delete Host Group
 
 Deletes the given service group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|true|A name of trusted host group|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1437,11 +1457,11 @@ Example output:
 
 ```
 
-### Create Host in Group
+#### Create Host in Group
 
 Creates a trusted host with the given name.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1452,7 +1472,7 @@ Creates a trusted host with the given name.
 |mask|string|None|true|Associated subnet mask|None|
 |comments|string|None|false|Description about the trusted host|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1468,11 +1488,11 @@ Example output:
 
 ```
 
-### Update Trusted Host
+#### Update Trusted Host
 
 Updates the values of given parameters.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1482,7 +1502,7 @@ Updates the values of given parameters.
 |mask|string|None|true|Associated subnet mask|None|
 |comments|string|None|false|Description about the trusted host|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1498,18 +1518,18 @@ Example output:
 
 ```
 
-### Delete Trusted Host
+#### Delete Trusted Host
 
 Deletes the given trusted host.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group_name|string|None|true|Name for the trusted host group|None|
 |name|string|None|true|Name for the trusted host|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1525,11 +1545,11 @@ Example output:
 
 ```
 
-### Create Content Rule
+#### Create Content Rule
 
 Creates a content rule for the given service.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1542,7 +1562,7 @@ Creates a content rule for the given service.
 |extended_match|string|None|true|An expression that consists of a combination of HTTP headers and/or query string parameters|None|
 |extended_match_sequence|integer|None|true|A number to indicate the order in which the extended match rule must be evaluated in the requests|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1558,17 +1578,17 @@ Example output:
 
 ```
 
-### Retrieve Content Rules
+#### Retrieve Content Rules
 
 Lists all content rules.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |virtual_service_id|string|None|true|Virtual Service ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1614,18 +1634,18 @@ Example output:
 
 ```
 
-### Retrieve Content Rules by ID
+#### Retrieve Content Rules by ID
 
 Lists all content rules with rule ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|true|Content rule ID|None|
 |virtual_service_id|string|None|true|Virtual Service ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1671,18 +1691,18 @@ Example output:
 
 ```
 
-### Delete Content Rule
+#### Delete Content Rule
 
 Deletes the given content rule.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|true|Content rule ID|None|
 |virtual_service_id|string|None|true|Virtual Service ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1698,11 +1718,11 @@ Example output:
 
 ```
 
-### Update Content Rule
+#### Update Content Rule
 
 Updates the values of given parameters in the given content rule.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1727,7 +1747,7 @@ Updates the values of given parameters in the given content rule.
 |parameter_name|string|None|false|The name of the parameter for which the value needs to be checked in the URL|None|
 |comments|string|None|false|Description about the content rule|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1743,36 +1763,29 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address|string|None|False|Enter address to Barracuda waf|None|
-|credentials|credential_username_password|None|True|Username and password|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 0.1.0 - Initial plugin
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Rule configuration
+# Links
 
 ## References
 
 * [Barracuda Web Application Firewall](https://campus.barracuda.com/product/webapplicationfirewall/)
 * [REST API](https://campus.barracuda.com/product/webapplicationfirewall/doc/73698476/rest-api-version-1-v1/)
 * [Action policy attack names](https://campus.barracuda.com/product/webapplicationfirewall/doc/45026391/action-policy/)
+

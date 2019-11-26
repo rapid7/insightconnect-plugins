@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves reputation score of specified domain name"
+
+
 class Input:
     DOMAIN = "domain"
     INCLUDE_REASONS = "include_reasons"

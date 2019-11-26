@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieves general information about the Logstash instance, including the host and version"
+
+
 class Input:
     pass
 

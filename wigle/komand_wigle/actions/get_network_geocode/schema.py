@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get coordinates for an address for use in searching"
+
+
 class Input:
     ADDRESSCODE = "addresscode"
     

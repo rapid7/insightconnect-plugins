@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns a summary of the available agents"
+
+
 class Input:
     pass
 
@@ -61,11 +65,11 @@ class AgentSummaryOutput(komand.Output):
     }
   },
   "required": [
+    "Active",
+    "Disconnected",
     "Never_connected",
     "Total",
-    "Disconnected",
-    "error",
-    "Active"
+    "error"
   ]
 }
     """)

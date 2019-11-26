@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='google_cloud_pub_sub-rapid7-plugin',
-      version='3.1.1',
+      version='3.1.2',
       description='A fully-managed real-time messaging service that allows you to send and receive messages',
       author='rapid7',
       author_email='',

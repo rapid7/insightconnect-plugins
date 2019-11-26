@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets a list of all attachments related to the ticket"
+
+
 class Input:
     TICKET_ID = "ticket_id"
     

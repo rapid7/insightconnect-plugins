@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes the given content rule"
+
+
 class Input:
     ID = "id"
     VIRTUAL_SERVICE_ID = "virtual_service_id"
@@ -32,8 +36,8 @@ class DeleteContentRuleInput(komand.Input):
     }
   },
   "required": [
-    "virtual_service_id",
-    "id"
+    "id",
+    "virtual_service_id"
   ]
 }
     """)

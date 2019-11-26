@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Upload a file for analysis"
+
+
 class Input:
     FILE_BYTES = "file_bytes"
     FILE_NAME = "file_name"
@@ -41,8 +45,8 @@ class UploadInput(komand.Input):
     }
   },
   "required": [
-    "file_name",
-    "file_bytes"
+    "file_bytes",
+    "file_name"
   ]
 }
     """)

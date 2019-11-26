@@ -1,23 +1,37 @@
-
-# Math
-
-## About
+# Description
 
 This plugin allows basic arithmetic functions to be performed.
 
-## Actions
+# Key Features
 
-### Calculate
+* Math operations module and exponents
+* Math Division and multiplication, addition and subtraction
+
+# Requirements
+
+_This plugin does not contain any requirements_
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Calculate
 
 This action is used to run a calculation.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |equation|string|None|True|Equation to calculate. Uses Python arithmetic operators (+, -, /, *, **, %)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -33,32 +47,29 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Calculating differences in timestamps
-* General utility
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 1.0.0 - Update Calculate action: Allow freeform input
-* 1.1.0 - Update to v2 Python plugin architecture | Support web server mode
+* 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Update plugin tag from `utility` to `utilities` for Marketplace searchability
+* 1.1.0 - Update to v2 Python plugin architecture | Support web server mode
+* 1.0.0 - Update Calculate action: Allow freeform input
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Arithmetic](https://en.wikipedia.org/wiki/Arithmetic)
+

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a virtual service with the given values"
+
+
 class Input:
     ADDRESS = "address"
     ADDRESS_VERSION = "address_version"
@@ -96,11 +100,11 @@ class CreateVirtualServiceInput(komand.Input):
   },
   "required": [
     "address",
-    "type",
     "address_version",
     "group",
     "name",
-    "port"
+    "port",
+    "type"
   ]
 }
     """)

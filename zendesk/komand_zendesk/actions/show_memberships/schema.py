@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Show all organization memberships"
+
+
 class Input:
     USER_ID = "user_id"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Export all attributes in CSV format"
+
+
 class Input:
     CATEGORY = "category"
     EVENT_ID = "event_id"

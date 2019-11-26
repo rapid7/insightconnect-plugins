@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a threat from an IOC event"
+
+
 class Input:
     AGENT_ID = "agent_id"
     ANNOTATION = "annotation"
@@ -60,10 +64,10 @@ class CreateIocThreatInput(komand.Input):
     }
   },
   "required": [
-    "annotation_url",
-    "hash",
     "agent_id",
-    "annotation"
+    "annotation",
+    "annotation_url",
+    "hash"
   ]
 }
     """)

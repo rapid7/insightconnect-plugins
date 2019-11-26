@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Mount drive"
+
+
 class Input:
     DEVICE = "device"
     DIRECTORY = "directory"
@@ -62,11 +66,11 @@ class MountDriveInput(komand.Input):
   },
   "required": [
     "device",
+    "directory",
     "instance_id",
-    "region",
     "private_key",
-    "user",
-    "directory"
+    "region",
+    "user"
   ]
 }
     """)

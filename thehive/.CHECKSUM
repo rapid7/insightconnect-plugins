@@ -1,0 +1,39 @@
+{
+	"spec": "188817e568505f7dd0362762c5b37ba5",
+	"manifest": "823ba7ca489ed1e0014fd9da9c849021",
+	"setup": "6e48a8ca7e074bfed43a18316b181f48",
+	"schemas": [
+		{
+			"identifier": "close_case/schema.py",
+			"hash": "0b4fcdce5b5322fe1efd3358de8fb3f2"
+		},
+		{
+			"identifier": "create_case/schema.py",
+			"hash": "a66938998a9dab567c3cbb1177a40d22"
+		},
+		{
+			"identifier": "create_case_observable/schema.py",
+			"hash": "75762617fba7669ab0255529a2a1e5b8"
+		},
+		{
+			"identifier": "create_case_task/schema.py",
+			"hash": "b8cef6b05df6f88d568d249b346a8ece"
+		},
+		{
+			"identifier": "get_case/schema.py",
+			"hash": "b0ff9da0f8abdee15b193caa90115aa3"
+		},
+		{
+			"identifier": "get_cases/schema.py",
+			"hash": "f7415377c5dc5453fa9e1ebc9716485a"
+		},
+		{
+			"identifier": "get_user/schema.py",
+			"hash": "656a36cfaa3608ec1ff6cf99b8ceb5b1"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "2925a8818daf17f06efcd78a6805c33f"
+		}
+	]
+}

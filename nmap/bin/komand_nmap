@@ -6,8 +6,8 @@ from komand_nmap import connection, actions, triggers
 
 Name = 'Nmap'
 Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'Nmap'
+Version = '1.0.2'
+Description = 'Nmap is used to launch scan against a networt to discover and audit'
 
 
 class ICONNmap(komand.Plugin):

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "SQL query"
+
+
 class Input:
     PARAMETERS = "parameters"
     QUERY = "query"

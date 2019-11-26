@@ -1,18 +1,36 @@
-# Pushover.net
+# Description
 
-## About
+[Pushover](https://pushover.net) is a simple push notification service that integrates easily into web apps like IFTTT, network monitors like Nagios, shell scripts, servers, and anything else that needs to send alerts to your Android, iPhone, iPad, and Desktop. The Pushover plugin allows you to send Pushover notifications.
 
-Pushover allows you to send push notifications to Apple, Android, and PC clients.
+# Key Features
 
-For more information, please see [Pushover.net](https://pushover.net)
+* Send a notification to a device
 
-## Actions
+# Requirements
 
-### Send pushover notification
+* A Pushover API token
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|token|credential_secret_key|None|True|App Token|None|
+
+The connection represents an 'app' in Pushover.  The key determins which 'source' it will be coming from.
+
+## Technical Details
+
+### Actions
+
+#### Send pushover notification
 
 This action sends a message to a user or group
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -27,7 +45,7 @@ This action sends a message to a user or group
 |sound|string|None|False|Sound to play - names at https://pushover.net/api#sounds|None|
 |timestamp|date|None|False|Override default timestamp on message|None|
 
-#### output
+##### output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -35,38 +53,26 @@ This action sends a message to a user or group
 |request|string|True|Identifier of the request in the pushover system|
 |receipt|string|False|For emergency messages, the receipt ID to lookup if has been acknowledged|
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers_
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|token|credential_secret_key|None|True|App Token|None|
-
-The connection represents an 'app' in Pushover.  The key determins which 'source' it will be coming from.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* real-time notification of key people of events/workflow activities
-
-## Versions
-
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Pushover.net](https://pushover.net)
 
-## Custom Output Types
-
-_This plugin does not contain any custom output types._

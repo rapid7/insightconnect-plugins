@@ -28,8 +28,8 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "consumer_credentials",
-    "access_token_credentials"
+    "access_token_credentials",
+    "consumer_credentials"
   ],
   "definitions": {
     "credential_username_password": {

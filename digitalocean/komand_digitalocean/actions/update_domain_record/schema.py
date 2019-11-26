@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates a domain record on the domain name"
+
+
 class Input:
     DOMAIN_NAME = "domain_name"
     PROPERTY = "property"
@@ -47,8 +51,8 @@ class UpdateDomainRecordInput(komand.Input):
   },
   "required": [
     "domain_name",
-    "record_id",
     "property",
+    "record_id",
     "value"
   ]
 }

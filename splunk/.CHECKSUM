@@ -1,0 +1,51 @@
+{
+	"spec": "2d457dda6c0d95cf6df0688b04bda0f0",
+	"manifest": "96636003912ddaec74343a30fdc7f507",
+	"setup": "a087ea496a8b94888936db4b06a41dce",
+	"schemas": [
+		{
+			"identifier": "create_saved_search/schema.py",
+			"hash": "4e72c755dee496c43861a6f80dcf4c95"
+		},
+		{
+			"identifier": "delete_saved_search/schema.py",
+			"hash": "9da8d6fc2bdabb8e11ab3eab5115dc63"
+		},
+		{
+			"identifier": "display_search_results/schema.py",
+			"hash": "07f1a0cbead6a15793017bf89f482500"
+		},
+		{
+			"identifier": "get_saved_search_job_history/schema.py",
+			"hash": "b5d70af9eaa4ea78ff81052e035e7b94"
+		},
+		{
+			"identifier": "insert/schema.py",
+			"hash": "c81e91be1c05f2c1f6a9ffd2059b7f86"
+		},
+		{
+			"identifier": "list_saved_searches/schema.py",
+			"hash": "97b303054f99112f3d8e20f873402717"
+		},
+		{
+			"identifier": "modify_saved_search_properties/schema.py",
+			"hash": "c392107fef2569683526b7f0ebc7cdb3"
+		},
+		{
+			"identifier": "run_saved_search/schema.py",
+			"hash": "5944a1e82a644db4c84b02bcf7a75205"
+		},
+		{
+			"identifier": "search/schema.py",
+			"hash": "194fb833c92f57abc67bd48604831d98"
+		},
+		{
+			"identifier": "view_saved_search_properties/schema.py",
+			"hash": "f62ae566169c9774e9ee4fca27ac58b9"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "84b204c73b5d9c689a33f32b8225d05b"
+		}
+	]
+}

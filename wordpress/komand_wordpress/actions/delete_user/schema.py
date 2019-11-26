@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete user from WordPress instance"
+
+
 class Input:
     REASSIGNEE = "reassignee"
     USERNAME = "username"
@@ -32,8 +36,8 @@ class DeleteUserInput(komand.Input):
     }
   },
   "required": [
-    "username",
-    "reassignee"
+    "reassignee",
+    "username"
   ]
 }
     """)

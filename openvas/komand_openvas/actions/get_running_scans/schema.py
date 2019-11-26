@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a list of all currently running scans"
+
+
 class Input:
     pass
 

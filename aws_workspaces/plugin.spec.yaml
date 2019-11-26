@@ -1,20 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: aws_workspaces
 title: AWS WorkSpaces
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/aws_workspaces
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-description: Amazon WorkSpaces is a fully managed desktop computing service in the cloud that allows its customers
-  to provide cloud-based desktops to their end-users
-version: 1.0.0
+  vendor_url: https://aws.amazon.com
+description: This plugin utilizes Amazon WorkSpaces product to create workspaces. Amazon WorkSpaces is a fully managed
+  desktop computing service in the cloud that allows its customers to provide cloud-based desktops to their end-users
+version: 1.0.1
 tags:
 - aws
 - workspaces
+hub_tags:
+  use_cases: [soar, application_management]
+  keywords: [aws, workspaces]
+  features: []
 types:
   workspace_properties:
     running_mode:

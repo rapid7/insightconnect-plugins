@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check for new incidents"
+
+
 class Input:
     
     FREQUENCY = "frequency"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return the timestamp of the last syscheck scan"
+
+
 class Input:
     AGENT_ID = "agent_id"
     
@@ -62,9 +66,9 @@ class SyscheckInfoOutput(komand.Output):
     }
   },
   "required": [
-    "syscheckTime",
     "error",
-    "syscheckEndTime"
+    "syscheckEndTime",
+    "syscheckTime"
   ]
 }
     """)

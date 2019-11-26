@@ -1,26 +1,44 @@
+# Description
 
-# Rapid7 tCell
-
-## About
-
-[Rapid7 tCell](https://www.tcell.io/) is a Next-Gen Cloud WAF that enables web applications to defend themselves by combining in-app instrumentation (RASP) and analytics in the cloud.
+Drive faster action with your Rapid7's Next-Gen Cloud WAF and InsightConnect plugin. Automate your administrative processes to allow you to focus on the the real task at hand - defending against attacks against your web applications in real time!
 
 This plugin utilizes the [tCell API](https://docs.tcell.io).
 
-## Actions
+# Key Features
 
-### Post Configuration Changes
+* Add and remove IP addresses from blacklists
+* Post configuration changes
+
+# Requirements
+
+* Requires an API Key from Insight platform
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|API key generated for the tCell account|None|
+
+## Technical Details
+
+### Actions
+
+#### Post Configuration Changes
 
 This action is used to rewrite the app configurations, either in part or in full.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |config|object|None|True|Whole new configuration or a part of it that should be updated|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -35,15 +53,15 @@ Example output:
 }
 ```
 
-### List Apps
+#### List Apps
 
 This action is used to fetch app name and app ID for all apps in a customer environment.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -88,18 +106,18 @@ Example output:
 }
 ```
 
-### Add Tags
+#### Add Tags
 
 This action is used to add all the tags posted in the body to the set of tags the app already has.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |app_id|string|None|True|App ID|None|
 |tags|[]string|None|True|List of strings, choosing the new tags for the application|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -113,18 +131,18 @@ Example output:
 }
 ```
 
-### Get Route Details
+#### Get Route Details
 
 This action is used to fetch details for the route with the given ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |route_id|string|None|True|Route ID|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -143,18 +161,18 @@ Example output:
 }
 ```
 
-### Get Configuration
+#### Get Configuration
 
 This action is used to fetch the configuration with the given ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |config_id|integer|None|True|Configuration ID|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -526,18 +544,18 @@ Example output:
 }
 ```
 
-### Get Agent Details
+#### Get Agent Details
 
 This action is used to fetch details for the agent with the given ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |app_id|string|None|True|App ID|None|
 |agent_id|string|None|True|Agent ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -558,18 +576,18 @@ Example output:
 }
 ```
 
-### Remove IP Addresses from Blacklist
+#### Remove IP Addresses from Blacklist
 
 This action is used to remove IP addresses from the existing blacklist within the blocked IP address configuration.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ips|[]string|None|True|List of IP addresses|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -584,18 +602,18 @@ Example output:
 }
 ```
 
-### Add IP Addresses to Blacklist
+#### Add IP Addresses to Blacklist
 
 This action is used to add IP addresses to the existing blacklist within the blocked IP address configuration.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ips|[]string|None|True|List of IP addresses|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -610,17 +628,17 @@ Example output:
 }
 ```
 
-### Create IP Address Group
+#### Create IP Address Group
 
 This action is used to upload an IP address group definition to tCell.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group|object|None|True|IP group definition, containing a name and a list of items, in JSON format|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -634,17 +652,17 @@ Example output:
 }
 ```
 
-### Create App
+#### Create App
 
 This action is used to create an application.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |app_display_name|string|None|True|The display name of your new application (an app ID will be derived from this name)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -658,11 +676,11 @@ Example output:
 }
 ```
 
-### List Agents
+#### List Agents
 
 This action is used to fetch details for all seen agents (optionally matching the provided criteria).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -672,7 +690,7 @@ This action is used to fetch details for all seen agents (optionally matching th
 |page|integer|1|False|Select which page is returned, default/first page is 1|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -705,17 +723,17 @@ Example output:
 }
 ```
 
-### Get App
+#### Get App
 
 This action is used to fetch the display name and app ID for the app with the given ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -732,11 +750,11 @@ Example output:
 }
 ```
 
-### List Packages
+#### List Packages
 
 This action is used to fetch details for all seen packages (matching the provided criteria).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -746,7 +764,7 @@ This action is used to fetch details for all seen packages (matching the provide
 |page|integer|1|False|Select which page is returned, default/first page is 1|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -843,18 +861,18 @@ Example output:
 }
 ```
 
-### Get Inline Script Details
+#### Get Inline Script Details
 
 This action is used to fetch details for the inline script with the given ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |inline_script_id|string|None|True|Inline Script ID|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -874,11 +892,11 @@ Example output:
 }
 ```
 
-### List Routes
+#### List Routes
 
 This action is used to fetch details for all seen routes (matching the provided criteria).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -888,7 +906,7 @@ This action is used to fetch details for all seen routes (matching the provided 
 |page|integer|1|False|Select which page is returned, default/first page is 1|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -965,11 +983,11 @@ Example output:
 }
 ```
 
-### List Configurations
+#### List Configurations
 
 This action is used to fetch details for all configurations (matching the provided criteria).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -979,7 +997,7 @@ This action is used to fetch details for all configurations (matching the provid
 |page|integer|1|False|Select which page is returned (defaults to 1)|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1618,18 +1636,18 @@ Example output:
 }
 ```
 
-### Change Tags
+#### Change Tags
 
 This action is used to assign a completely new set of tags to an app, removing any previously existing tags.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |app_id|string|None|True|App ID|None|
 |tags|[]string|None|True|List of strings, choosing the new tags for the application|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1643,17 +1661,17 @@ Example output:
 }
 ```
 
-### Get App Tags
+#### Get App Tags
 
 This action is used to fetch the set of tags for a tCell app.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1671,11 +1689,11 @@ Example output:
 }
 ```
 
-### List Inline Scripts
+#### List Inline Scripts
 
 This action is used to fetch details for all seen inline scripts (matching the provided criteria).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1685,7 +1703,7 @@ This action is used to fetch details for all seen inline scripts (matching the p
 |page|integer|1|False|Select which page is returned, default/first page is 1|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1720,18 +1738,18 @@ Example output:
 }
 ```
 
-### Revert Configuration Changes
+#### Revert Configuration Changes
 
 This action is used to revert the configuration to the previous iteration.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |app_id|string|None|True|App ID|None|
 |id|integer|None|True|The ID of the configuration to use|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1745,18 +1763,18 @@ Example output:
 }
 ```
 
-### Get Package Details
+#### Get Package Details
 
 This action is used to fetch details for the package with the given ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |package_id|integer|None|True|Package ID|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1777,18 +1795,18 @@ Example output:
 }
 ```
 
-### Update IP Address Group
+#### Update IP Address Group
 
 This action is used to upload new items for an IP address group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |items|[]object|None|True|IP group items, in JSON format|None|
 |group_name|string|None|True|Name of an existing IP group|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1803,18 +1821,18 @@ Example output:
 }
 ```
 
-### Remove Tags
+#### Remove Tags
 
 This action is used to remove tags from the application.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |app_id|string|None|True|App ID|None|
 |tags|[]string|None|True|List of strings, choosing the tags to be removed from the application|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1828,17 +1846,17 @@ Example output:
 }
 ```
 
-### Get Active Configuration
+#### Get Active Configuration
 
 This action is used to fetch the currently active app configuration.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2149,13 +2167,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-### Get Events
+#### Get Events
 
 This trigger is used to fetch events of the provided type.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -2164,7 +2182,7 @@ This trigger is used to fetch events of the provided type.
 |frequency|integer|5|True|How often the trigger should check for new detections in seconds|None|
 |app_id|string|None|True|App ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2214,13 +2232,9 @@ Example output:
 }
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API key generated for the tCell account|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -2228,19 +2242,16 @@ Usually when trying to update the configuration with the same data, nothing will
 and the API will return an appropriate message. Also, it is usually forbidden to create
 an entity with the exact same data (e.g. IP groups), and in that case an exception will be raised.
 
-## Versions
+# Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Managing blocked IP addresses
-* Deployment process integration
+# Links
 
 ## References
 
 * [tCell](https://www.tcell.io/)
 * [tCell API](https://docs.tcell.io)
 * [IP groups documentation](https://github.com/tcellio/tcell-deployment-examples/tree/master/api/ip-groups)
+

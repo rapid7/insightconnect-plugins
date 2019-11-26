@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Kill or send a signal to the container"
+
+
 class Input:
     ID = "id"
     SIGNAL = "signal"

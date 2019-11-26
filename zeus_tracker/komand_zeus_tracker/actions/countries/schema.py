@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup ZeuS hosts in specific country"
+
+
 class Input:
     COUNTRY = "country"
     LIMIT = "limit"

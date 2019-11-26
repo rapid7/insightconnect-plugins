@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Parse OSSEC Rootcheck alerts"
+
+
 class Input:
     ALERT = "alert"
     
@@ -114,14 +118,14 @@ class RootcheckParseOutput(komand.Output):
         }
       },
       "required": [
-        "timestamp",
         "agent",
-        "rule_name",
-        "logs",
         "alert_id",
         "category",
+        "level",
+        "logs",
         "rule_id",
-        "level"
+        "rule_name",
+        "timestamp"
       ]
     }
   }

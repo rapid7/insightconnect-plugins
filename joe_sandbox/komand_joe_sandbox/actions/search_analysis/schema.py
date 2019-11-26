@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists the web IDs of the analyses that match the given query. Searches in MD5, SHA1, SHA256, filename, cookbook name, comment, URL and report ID"
+
+
 class Input:
     QUERY = "query"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Reverse DNS Query"
+
+
 class Input:
     ADDRESS = "address"
     RESOLVER = "resolver"

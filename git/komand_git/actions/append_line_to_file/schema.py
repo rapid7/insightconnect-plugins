@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Append a line to a file and commit it"
+
+
 class Input:
     FILE_PATH = "file_path"
     LINE = "line"

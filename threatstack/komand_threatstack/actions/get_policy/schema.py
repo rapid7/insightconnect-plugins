@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get policy"
+
+
 class Input:
     FIELDS = "fields"
     POLICY_ID = "policy_id"

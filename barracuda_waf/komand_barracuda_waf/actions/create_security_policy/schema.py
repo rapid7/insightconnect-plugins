@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a security policy with the default values"
+
+
 class Input:
     NAME = "name"
     

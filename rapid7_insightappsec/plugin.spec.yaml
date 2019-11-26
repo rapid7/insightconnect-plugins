@@ -1,19 +1,24 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
-description: Application security testing for the modern web
-version: 1.0.0
+description: This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan
+version: 1.0.1
 vendor: rapid7
-support: rapid7
 status: []
+support: rapid7
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightappsec
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.rapid7.com
 tags:
 - insightappsec
 - Rapid7
+hub_tags:
+  use_cases: [soar, soc_automation, application_security, remediation_prioritization, reporting_and_analytics, vulnerability_management]
+  keywords: [insightappsec, rapid7]
+  features: []
 types:
   link:
     href:

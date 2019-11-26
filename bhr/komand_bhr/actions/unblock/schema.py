@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Send a unblock request"
+
+
 class Input:
     CIDR = "cidr"
     WHY = "why"
@@ -32,8 +36,8 @@ class UnblockInput(komand.Input):
     }
   },
   "required": [
-    "why",
-    "cidr"
+    "cidr",
+    "why"
   ]
 }
     """)

@@ -1,19 +1,24 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: influxdb
 title: InfluxDB
 vendor: rapid7
 support: community
 status: []
 description: Scalable datastore for metrics, events, and real-time analytics
-version: 1.0.0
+version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/influxdb
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://docs.influxdata.com/influxdb
 tags:
-- database
-- influxdb
+  - database
+  - influxdb
+hub_tags:
+  use_cases: [soar, reporting_and_analytics]
+  keywords: [database, influxdb]
+  features: []
 types:
   point:
     name:

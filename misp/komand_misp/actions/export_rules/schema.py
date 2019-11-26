@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Export Snort or Suricata rules"
+
+
 class Input:
     EVENT_ID = "event_id"
     FORMAT = "format"
@@ -75,8 +79,8 @@ class ExportRulesInput(komand.Input):
     }
   },
   "required": [
-    "frame",
-    "format"
+    "format",
+    "frame"
   ]
 }
     """)

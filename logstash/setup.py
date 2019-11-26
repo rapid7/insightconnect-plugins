@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='logstash-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='Data collection engine with real-time pipelining capabilities',
       author='rapid7',
       author_email='',

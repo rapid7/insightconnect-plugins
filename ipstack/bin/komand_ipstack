@@ -6,7 +6,7 @@ from komand_ipstack import connection, actions, triggers
 
 Name = 'IPStack'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'Lookup geographical information for a host'
 
 

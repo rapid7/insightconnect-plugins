@@ -32,13 +32,40 @@ No notable technical requirements to highlight
 [Mimecast](https://www.mimecast.com) is a set of cloud services designed to provide next generation protection against advanced email-borne threats such as malicious URLs, malware, impersonation attacks, as well as internally generated threats.
 This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/documentation).
 
-## Actions
+# Key Features
 
-### Create Managed URL
+* Email security
+* Malicious URL and attachment detection
+
+# Requirements
+
+* Access API Key
+* Secret Key
+* Mimecast server
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|access_key|credential_secret_key|None|True|The application access key|None|
+|app_id|string|None|True|Application ID|None|
+|app_key|credential_secret_key|None|True|The application key|None|
+|secret_key|credential_secret_key|None|True|The application secret key|None|
+|url|string|None|True|The URL for the Mimecast server|None|
+
+## Technical Details
+
+### Actions
+
+#### Create Managed URL
 
 This action is used to create a managed URL.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -50,7 +77,7 @@ This action is used to create a managed URL.
 |disable_user_awareness|boolean|None|True|Disable User Awareness challenges for this URL. Applies only if action = 'permit'|None|
 |disable_log_click|boolean|None|True|Disable logging of user clicks on the URL|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -77,11 +104,11 @@ Example output:
 }
 ```
 
-### Get Managed URL
+#### Get Managed URL
 
 This action is used to get information on a managed URL.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -94,7 +121,7 @@ This action is used to get information on a managed URL.
 |disable_log_click|string|none|False|Filter on whether or not clicks are logged for this URL|['none', 'false', 'true']|
 |id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -121,11 +148,11 @@ Example output:
 }
 ```
 
-### Permit or Block Sender
+#### Permit or Block Sender
 
 This action is used to permit or block a sender.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -133,7 +160,7 @@ This action is used to permit or block a sender.
 |to|string|None|True|The email address of the internal recipient|None|
 |sender|string|None|True|The email address of the external sender|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -154,11 +181,11 @@ Example output:
 }
 ```
 
-### Create Blocked Sender Policy
+#### Create Blocked Sender Policy
 
 This action is used to create a blocked sender policy.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -171,7 +198,7 @@ This action is used to create a blocked sender policy.
 |to_value|string|None|False|Required if `To Type` is one of email_domain, profile_group, individual_email_address. Expected values\: If `To Type` is email_domain, a domain name without the @ symbol. If `To Type` is profile_group, the ID of the profile group. If `To Type` is individual_email_address, an email address|None|
 |source_ips|string|None|False|A comma separated list of IP addresses using CIDR notation (X.X.X.X/XX). When set the policy only applies for connections from matching addresses|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -213,11 +240,11 @@ Example output:
 }
 ```
 
-### Add Group Member
+#### Add Group Member
 
 This action is used to add an email address or domain to a group.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -225,7 +252,7 @@ This action is used to add an email address or domain to a group.
 |email_address|string|None|False|The email address of a user to add to a group. Use either emailAddress or domain|None|
 |domain|string|None|False|A domain to add to a group. Use either emailAddress or domain|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -245,17 +272,17 @@ Example output:
 }
 ```
 
-### Decode URL
+#### Decode URL
 
 This action is used to decode a Mimecast encoded URL.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |encoded_url|string|None|True|The Mimecast encoded URL (e.g. https://protect-xx.mimecast.com/...)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -269,18 +296,18 @@ Example output:
 }
 ```
 
-### Find Groups
+#### Find Groups
 
 This action is used to find groups that match a given query.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|False|A string to query for|None|
 |source|string|cloud|True|A group source to filter on, either "cloud" or "ldap"|['cloud', 'ldap']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -311,11 +338,11 @@ Example output:
 }
 ```
 
-### Get TTP URL Logs
+#### Get TTP URL Logs
 
 This action is used to get TTP URL logs.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -325,7 +352,7 @@ This action is used to get TTP URL logs.
 |to|string|None|False|End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request|None|
 |url_to_filter|string|None|False|URL filter results with|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -353,124 +380,35 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|access_key|credential_secret_key|None|True|The application access key|None|
-|app_id|string|None|True|Application ID|None|
-|app_key|credential_secret_key|None|True|The application key|None|
-|secret_key|credential_secret_key|None|True|The application secret key|None|
-|url|string|None|True|The URL for the Mimecast server|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 For the Create Managed URL action, the URL must include `http://` or `https://` e.g. `http://google.com`
 Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api-overview/global-base-urls/)
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
-* 2.0.0 - Add Get Managed URL Action | Update descriptions and output titles
-* 2.1.0 - New action Permit or Block Sender
-* 2.2.0 - New action Create Blocked Sender Policy
-* 2.3.0 - New actions Add Group Member and Find Group
-* 2.4.0 - New action Get TTP URL Logs
-* 2.5.0 - New action Decode URL
+* 3.1.0 - New Action Delete Managed URL
+* 3.0.1 - New spec and help.md format for the Hub
 * 3.0.0 - Add URL in Get TTP URL Logs action to filter output | Update connection settings to the proper authentication supported by the Mimecast API
+* 2.5.0 - New action Decode URL
+* 2.4.0 - New action Get TTP URL Logs
+* 2.3.0 - New actions Add Group Member and Find Group
+* 2.2.0 - New action Create Blocked Sender Policy
+* 2.1.0 - New action Permit or Block Sender
+* 2.0.0 - Add Get Managed URL Action | Update descriptions and output titles
+* 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Add a URL to the managed URL list.
+# Links
 
 ## References
 
 * [Mimecast API](https://www.mimecast.com/developer/documentation)
 
-## Custom Output Types
-
-### managed_url
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|action|string|False|Either block or permit|
-|comment|string|False|The comment that was posted in the request|
-|disableLogClick|boolean|False|If logging of user clicks on the URL is disabled|
-|disableRewrite|boolean|False|If rewriting of this URL in emails is disabled|
-|disableUserAwareness|boolean|False|If User Awareness challenges for this URL are disabled|
-|domain|string|False|The managed domain|
-|id|string|False|The Mimecast secure ID of the managed URL|
-|matchType|string|False|Either 'explicit' or 'domain'|
-|port|integer|False|Port|
-|scheme|string|False|The protocol to apply for the managed URL. Either HTTP or HTTPS|
-
-### managed_sender
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|string|False|The Mimecast secure ID of the managed sender object|
-|sender|string|False|The email address of the external sender|
-|to|string|False|The email address of the internal recipient|
-|type|string|False|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|
-
-### policy
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|bidirectional|boolean|False|If the policy is also applied in the reverse of the email flow, i.e. where the specified recipient in the policy becomes the sender, and the specified sender in the policy becomes the recipient|
-|conditions|object|False|An object with fields describing additional conditions that should affect when the policy is applied|
-|description|string|False|The description for the policy which is kept with the email in the archive for future reference|
-|from|object|False|An object containing type and value fields defining which sender addresses the policy applies to|
-|fromDate|string|False|The date that the policy will apply from|
-|fromEternal|boolean|False|If the policy is always applied or if there is a specific start date|
-|fromPart|string|False|Which from address is used in the policy. Can be any of envelope_from, header_from, both|
-|fromType|string|False|Which sender addresses the policy applies to. CCan be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name|
-|fromValue|string|False|A value defining which senders the policy applies to|
-|override|boolean|False|If true, this option overrides the order in which the policy is applied, and forces it to be applied first if there are multiple applicable policies, unless more specific policies of the same type have been configured with an override as well|
-|to|object|False|An object containing type and value fields defining which recipient addresses the policy applies to|
-|toDate|string|False|The date that the policy will apply until|
-|toEternal|boolean|False|If the policy should always be applied or if there is an end date|
-|toType|string|False|Which recipient addresses the policy applies to. Can be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name|
-
-### sender_policy
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|string|False|The Mimecast ID of the policy. Used when updating the policy|
-|option|string|False|The option set for the policy. Will be one of no_action, block_sender|
-|policy|policy|False|The policy that was created|
-
-### group
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|description|string|False|The name of the group|
-|folder_count|integer|False|None|
-|id|string|False|None|
-|parent_id|string|False|None|
-|source|string|False|None|
-|user_count|integer|False|None|
-
-### click_logs
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|action|string|False|The action that was taken for the click|
-|adminOverride|string|False|The action defined by the administrator for the URL|
-|category|string|False|The category of the URL clicked|
-|date|string|False|The date that the URL was clicked|
-|route|string|False|The route of the email that contained the link|
-|scanResult|string|False|The result of the URL scan|
-|ttpDefinition|string|False|The description of the definition that triggered the URL to be rewritten by Mimecast|
-|url|string|False|The URL clicked|
-|userAwarenessAction|string|False|The action taken by the user if user awareness was applied|
-|userEmailAddress|string|False|The email address of the user who clicked the link|
-|userOverride|string|False|The action requested by the user|

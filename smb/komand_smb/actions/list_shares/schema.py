@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List shares on the remote server"
+
+
 class Input:
     TIMEOUT = "timeout"
     

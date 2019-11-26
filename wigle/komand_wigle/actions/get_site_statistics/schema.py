@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a map of short-named statistics used in providing site-wide information"
+
+
 class Input:
     pass
 
