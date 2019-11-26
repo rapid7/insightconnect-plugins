@@ -1,6 +1,6 @@
 # Description
 
-The [WiGLE](https://wigle.net/index) (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks. The WiGLE consolidates location and information of wireless networks world-wide to a central database. This plugin will allow users to 
+The [WiGLE](https://wigle.net/index) (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks. The WiGLE consolidates location and information of wireless networks world-wide to a central database. This plugin will allow users to
 retrieve and update information in the WiGLE database
 
 This plugin utilizes the [WiGLE API](https://api.wigle.net/swagger).

@@ -1,6 +1,6 @@
 # Description
 
-[FireEye HX](https://www.fireeye.com/solutions/hx-endpoint-security-products.html) is an integrated endpoint solution that detects, prevents and responds effectively to known malware and threats traditional anti-virus endpoint security products miss. The FireEye plugin will allow you to get alerts from a given host. 
+[FireEye HX](https://www.fireeye.com/solutions/hx-endpoint-security-products.html) is an integrated endpoint solution that detects, prevents and responds effectively to known malware and threats traditional anti-virus endpoint security products miss. The FireEye plugin will allow you to get alerts from a given host.
 
 This plugin utilizes the FireEye HX API. Documentation for the API is located in your FireEye HX appliance.
 

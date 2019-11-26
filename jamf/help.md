@@ -73,7 +73,7 @@ This action gets a list of all groups a device is a member of.
 
 Example output:
 
-```                                   
+```
 {
   "device_groups": [
     {

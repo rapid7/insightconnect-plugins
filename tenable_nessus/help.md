@@ -1,6 +1,6 @@
 # Description
 
-The Tenable Nessus plugin allows you to get, start, and analyze scans. 
+The Tenable Nessus plugin allows you to get, start, and analyze scans.
 
 Tenable [Nessus Professional](https://www.tenable.com/products/nessus-vulnerability-scanner/nessus-professional) prevents network attacks by identifying the vulnerabilities and configuration issues that hackers use to penetrate your network.
 

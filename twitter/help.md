@@ -1,6 +1,6 @@
 # Description
 
-[Twitter](https://twitter.com) is a microblogging and social networking service. Using the Twitter plugin for 
+[Twitter](https://twitter.com) is a microblogging and social networking service. Using the Twitter plugin for
 Rapid7 InsightConnect, users can monitor tweets, post, and block users. This plugin can be effective in discovering
 social media campaigns, threat intelligence, and more.
 

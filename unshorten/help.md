@@ -1,6 +1,6 @@
 # Description
 
-[Unshorten.me](https://unshorten.me/) provides an easy and free method to unshorten a wide range of shortened URLs. 
+[Unshorten.me](https://unshorten.me/) provides an easy and free method to unshorten a wide range of shortened URLs.
 The Unshorten.me plugin for Rapid7 InsightConnect can help assist phishing investigations, URL analysis,
  deobfuscation, and more.
 

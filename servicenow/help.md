@@ -1,6 +1,6 @@
 # Description
 
-ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for 
+ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for
 Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, and updates. In addition,
 incident changes can be monitored and processed for use in a Rapid7 InsightConnect workflow.
 

@@ -1,7 +1,7 @@
 # Description
 
-[Datadog](https://www.datadoghq.com/) is a monitoring service for cloud-scale applications, providing monitoring of 
-servers, databases, tools, and services, through a SaaS-based data analytics platform. Users can post events and 
+[Datadog](https://www.datadoghq.com/) is a monitoring service for cloud-scale applications, providing monitoring of
+servers, databases, tools, and services, through a SaaS-based data analytics platform. Users can post events and
 metrics using the Datadog plugin for Rapid7 InsightConnect.
 
 # Key Features

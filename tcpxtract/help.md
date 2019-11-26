@@ -28,7 +28,7 @@ It supports extracting the following file types:
 
 # Key Features
 
-* Extract a file from a PCAP file. 
+* Extract a file from a PCAP file.
 
 # Requirements
 

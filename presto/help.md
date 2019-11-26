@@ -1,7 +1,7 @@
 # Description
 
 [Presto](https://prestodb.io/) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.
-This plugin utilizes the [PyHive](https://github.com/dropbox/PyHive) library. The Presto plugin will allow you to run database operations with Presto. 
+This plugin utilizes the [PyHive](https://github.com/dropbox/PyHive) library. The Presto plugin will allow you to run database operations with Presto.
 
 # Key Features
 

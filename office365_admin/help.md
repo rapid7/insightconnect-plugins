@@ -1,6 +1,6 @@
 # Description
 
-The [Office365 Admin](https://www.office.com/) plugin enables user management in Office 365. 
+The [Office365 Admin](https://www.office.com/) plugin enables user management in Office 365.
 
 This plugin utilizes the [Microsoft Graph API](https://developer.microsoft.com/en-us/graph/docs/concepts/overview).
 

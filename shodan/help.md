@@ -1,7 +1,7 @@
 # Description
 
-[Shodan](https://www.shodan.io/) is a search engine for internet-connected devices. 
-Using the Shodan plugin for Rapid7 InsightConnect, users can lookup hosts and run queries against their database in 
+[Shodan](https://www.shodan.io/) is a search engine for internet-connected devices.
+Using the Shodan plugin for Rapid7 InsightConnect, users can lookup hosts and run queries against their database in
 real-time. Internal penetration tests and other security campaigns can be assisted and made more powerful with the
 help of Shodan.
 

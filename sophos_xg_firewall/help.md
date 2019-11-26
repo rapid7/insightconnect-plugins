@@ -3,11 +3,11 @@
 [Sophos XG Firewall](https://www.sophos.com/en-us/products/next-gen-firewall.aspx) is a next generation endpoint protection and enterprise firewall.
 This plugin utilizes the [Sophos XG Firewall API](https://www.sophos.com/en-us/support/documentation/sophos-xg-firewall.aspx).
 
-The Sophos XG Firewall plugin allows you to manage your Sophos XG Firewall through policies. 
+The Sophos XG Firewall plugin allows you to manage your Sophos XG Firewall through policies.
 
 # Key Features
 
-* Manage your network policies 
+* Manage your network policies
 
 # Requirements
 

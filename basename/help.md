@@ -1,7 +1,7 @@
 # Description
 
 The Basename InsightConnect plugin is used to get the last item of a file path or URL using Python's `basename` utility.
-The `basename` utility deletes any prefix ending with the last slash `/` character. 
+The `basename` utility deletes any prefix ending with the last slash `/` character.
 
 For example:
 

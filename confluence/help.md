@@ -1,7 +1,7 @@
 # Description
 
-[Confluence](https://atlassian.com/software/confluence) is an open and shared workspace for managing documents and 
-files within an organization. Using the Confluence plugin for Rapid7 InsightConnect, users can view and update pages 
+[Confluence](https://atlassian.com/software/confluence) is an open and shared workspace for managing documents and
+files within an organization. Using the Confluence plugin for Rapid7 InsightConnect, users can view and update pages
 dynamically within automation workflows.
 
 # Key Features

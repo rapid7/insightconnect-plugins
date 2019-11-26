@@ -1,9 +1,9 @@
 # Description
 
-[Cortex](https://github.com/CERT-BDF/Cortex) is an observable analysis and active response engine. 
+[Cortex](https://github.com/CERT-BDF/Cortex) is an observable analysis and active response engine.
 With the Cortex plugin for Rapid7 InsightConnect, users can manage analyzers, jobs, and run file analyzers.
 
-Use Cortex within an automation workflow to analyze files using hundreds of analyzers to help determine if they are 
+Use Cortex within an automation workflow to analyze files using hundreds of analyzers to help determine if they are
 malicious or safe.
 
 Note: This plugin utilizes the older unauthenticated [Cortex v1 API](https://github.com/CERT-BDF/CortexDocs/tree/master/api) via [cortex4py](https://pypi.python.org/pypi/cortex4py/1.0.0) and [requests](http://www.python-requests.org/).
