@@ -1,20 +1,26 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: cuckoo
 title: Cuckoo Sandbox
-description: Analyze files and URLs with Cuckoo Sandbox
-version: 1.0.1
+description: "Cuckoo Sandbox is an open source automated malware analysis system. Using the Cuckoo Sandbox plugin for
+Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more"
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cuckoo
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://cuckoosandbox.org/
 tags:
 - sandbox
 - malware
 - malware analysis
+hub_tags:
+  use_cases: [soar, soc_automation, threat_hunting, threat_detection_and_response]
+  keywords: [sandbox, malware, malware analysis]
+  features: []
 types:
   vpn:
     name:

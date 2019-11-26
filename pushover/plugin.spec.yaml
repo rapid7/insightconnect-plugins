@@ -1,19 +1,24 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: pushover
 title: Pushover.net
-description: Send push messages through Pushover.net
-version: 1.0.0
+description: The Pushover plugin allows you to send Pushover notifications
+version: 1.0.1
 support: community
 vendor: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/pushover
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - messaging
 - alerting
+- pushover
+hub_tags:
+  use_cases: [soar, alerting_and_notifications]
+  keywords: [messaging, alerting, pushover]
+  features: []
 enable_cache: true
 language: python
 

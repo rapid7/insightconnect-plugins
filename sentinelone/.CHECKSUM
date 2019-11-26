@@ -1,0 +1,43 @@
+{
+	"spec": "05d3e5198bc5fae23e0aeabe4f99dea2",
+	"manifest": "1b3582c8af03aa05d972761eccb805f2",
+	"setup": "dfb49eda74949e7b0bbf5517a17d6fd7",
+	"schemas": [
+		{
+			"identifier": "blacklist_by_content_hash/schema.py",
+			"hash": "ac946280f99e8fd3d8ab3f9376b373b1"
+		},
+		{
+			"identifier": "blacklist_by_ioc_hash/schema.py",
+			"hash": "6bc15cb20f10a557de56e93076bbb40f"
+		},
+		{
+			"identifier": "create_ioc_threat/schema.py",
+			"hash": "ea407640aed1d5eba054c404bb7687c9"
+		},
+		{
+			"identifier": "get_threat_summary/schema.py",
+			"hash": "ab6415868cda8d60ef6aa0e05757d618"
+		},
+		{
+			"identifier": "mark_as_benign/schema.py",
+			"hash": "971bce7dda3ae1d4cb3cca4081877d15"
+		},
+		{
+			"identifier": "mark_as_threat/schema.py",
+			"hash": "20eb7d08b9923cce1e049622d820e101"
+		},
+		{
+			"identifier": "mitigate_threat/schema.py",
+			"hash": "e09b29840c9d0ed17b7477e2aa01c68b"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "c28fabb0d514fde4529f0a9831da57ad"
+		},
+		{
+			"identifier": "get_threats/schema.py",
+			"hash": "957dd4dad103ab1d6ba93c2dd157511a"
+		}
+	]
+}

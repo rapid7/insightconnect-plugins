@@ -1,0 +1,39 @@
+{
+	"spec": "bd27e7112c8bc6200f8b42f3a1adb0c5",
+	"manifest": "b1cdc120a47f85d309b0a9b0552d0d74",
+	"setup": "da4ddf2864d7242b476d4181556f2c41",
+	"schemas": [
+		{
+			"identifier": "deactivate_user/schema.py",
+			"hash": "4f8775d5674439b113ab8c37da6ed560"
+		},
+		{
+			"identifier": "deactivated_list/schema.py",
+			"hash": "a05777859bb7e24348222568df814287"
+		},
+		{
+			"identifier": "get_boards_by_member/schema.py",
+			"hash": "6f81fd972cd0baee68d07bb3467890f6"
+		},
+		{
+			"identifier": "member_list/schema.py",
+			"hash": "2210ff5be39bfd151f9c86cee1d1f759"
+		},
+		{
+			"identifier": "remove_member_from_board/schema.py",
+			"hash": "bef63f9b981104bff5cc7e6a0ae1d94d"
+		},
+		{
+			"identifier": "remove_member_from_cards/schema.py",
+			"hash": "1b8477d7eef3bc4a69bba6c9b13608c6"
+		},
+		{
+			"identifier": "remove_member_from_org/schema.py",
+			"hash": "7691591655006d55993cdc2ffab9ce6f"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "d4a337fc60a2e88a8d68546aa32b36b5"
+		}
+	]
+}

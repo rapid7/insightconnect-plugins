@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Converts an image to a snapshot"
+
+
 class Input:
     IMAGE_ID = "image_id"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search for a specific indicator"
+
+
 class Input:
     INDICATOR = "indicator"
     

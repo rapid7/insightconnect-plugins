@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup Public IP Address"
+
+
 class Input:
     pass
 

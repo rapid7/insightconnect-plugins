@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Runs syscheck and rootcheck on all agents, or a specified agent"
+
+
 class Input:
     AGENT_ID = "agent_id"
     
@@ -52,8 +56,8 @@ class AgentScanOutput(komand.Output):
     }
   },
   "required": [
-    "message",
-    "error"
+    "error",
+    "message"
   ]
 }
     """)

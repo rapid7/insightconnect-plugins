@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search the database to find vulnerabilities and exploits"
+
+
 class Input:
     DATABASE = "database"
     SEARCH = "search"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete capture file"
+
+
 class Input:
     CID = "cid"
     

@@ -1,23 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
-description: Windows Defender Advanced Threat Protection (ATP) is a unified platform
-  for preventative protection, post-breach detection, automated investigation, and
-  response
+description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
 version: 1.6.0
 vendor: rapid7
 support: rapid7
 status: []
 resources:
-  source_url:
-  license_url:
+  vendor_url: https://www.microsoft.com/
 tags:
 - windows
 - atp
 - microsoft
 - defender
+hub_tags:
+  use_cases: [soar, threat_detection_and_response, threat_intel, user_management, alerting_and_notifications, application_security, network_containment, soc_automation]
+  keywords: [windows, atp, microsoft, defender]
+  features: []
+
 types:
   alert:
     Category:

@@ -1,0 +1,83 @@
+{
+	"spec": "1815d447589384c69f9bc53df4f9941d",
+	"manifest": "2db59532e1229fda23e5516b551d5560",
+	"setup": "08030f94dbb8138e139481da3ce31b82",
+	"schemas": [
+		{
+			"identifier": "add_comment/schema.py",
+			"hash": "11a0daf75b2d452a5bf9fe933a686891"
+		},
+		{
+			"identifier": "get_country_statistics/schema.py",
+			"hash": "350c042ac88c9aafb96f1e20d35b247e"
+		},
+		{
+			"identifier": "get_files_status/schema.py",
+			"hash": "171e34c0b9c0b295cb3cdbce2d9bfb5f"
+		},
+		{
+			"identifier": "get_general_statistics/schema.py",
+			"hash": "a799bc40cbca40f7a4c1bd932f663cde"
+		},
+		{
+			"identifier": "get_group_statistics/schema.py",
+			"hash": "652076b3b63e7360ef0b1fa593d2b2dd"
+		},
+		{
+			"identifier": "get_kml/schema.py",
+			"hash": "4075b09ad817a4d6bfdb6521f8284175"
+		},
+		{
+			"identifier": "get_metadata/schema.py",
+			"hash": "76ca66d1ae5a2a788e8748acac424108"
+		},
+		{
+			"identifier": "get_network_details/schema.py",
+			"hash": "9a686cfd6b2757a1b0e75974dc648ee9"
+		},
+		{
+			"identifier": "get_network_geocode/schema.py",
+			"hash": "e8d3b9d292500683fde06e93dbdaa4cb"
+		},
+		{
+			"identifier": "get_region_statistics/schema.py",
+			"hash": "7e01de1e36edbce2c9e34881f7406acc"
+		},
+		{
+			"identifier": "get_site_statistics/schema.py",
+			"hash": "2580980d1777cb10a94e6e155d26f547"
+		},
+		{
+			"identifier": "get_user_profile/schema.py",
+			"hash": "feca34dfff2f3295fc27be34f60541f3"
+		},
+		{
+			"identifier": "get_user_standings/schema.py",
+			"hash": "826c01f28c55b40d20c19c774ba047a0"
+		},
+		{
+			"identifier": "get_user_statistics/schema.py",
+			"hash": "f332a24e2f993775da2cc7a346cd085c"
+		},
+		{
+			"identifier": "get_user_tokens/schema.py",
+			"hash": "e7ff5a486f2ac286ea7004592014ac29"
+		},
+		{
+			"identifier": "search_cells/schema.py",
+			"hash": "9a6b3848d024605750ab939d6f4bf3f7"
+		},
+		{
+			"identifier": "search_networks/schema.py",
+			"hash": "f25fc78adea668d028ed99e16b2a5696"
+		},
+		{
+			"identifier": "upload_file/schema.py",
+			"hash": "bd3b900c9ecedc049259df2dd6b6cdea"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "c2afab79cc5c78c8d05608a4aaa09fd4"
+		}
+	]
+}

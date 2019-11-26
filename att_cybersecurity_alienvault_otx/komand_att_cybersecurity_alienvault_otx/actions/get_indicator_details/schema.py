@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns details about an indicator"
+
+
 class Input:
     INDICATOR = "indicator"
     INDICATOR_TYPE = "indicator_type"
@@ -54,9 +58,9 @@ class GetIndicatorDetailsInput(komand.Input):
     }
   },
   "required": [
-    "section",
+    "indicator",
     "indicator_type",
-    "indicator"
+    "section"
   ]
 }
     """)

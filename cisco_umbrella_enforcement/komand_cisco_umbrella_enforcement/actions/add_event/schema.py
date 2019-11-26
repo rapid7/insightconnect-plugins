@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Posts a malware event for processing and optionally adds it to the customer's domain list"
+
+
 class Input:
     EVENTS = "events"
     
@@ -145,14 +149,14 @@ class AddEventInput(komand.Input):
         }
       },
       "required": [
+        "ID",
+        "alertTime",
+        "deviceVersion",
         "dstDomain",
         "dstURL",
         "eventTime",
-        "deviceVersion",
         "protocolVersion",
-        "providerName",
-        "ID",
-        "alertTime"
+        "providerName"
       ]
     }
   }

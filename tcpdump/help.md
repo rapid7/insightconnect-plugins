@@ -1,17 +1,30 @@
+# Description
 
-# Tcpdump
+The [Tcpdump](http://www.tcpdump.org) plugin is used to parse PCAP file.
 
-## About
+# Key Features
 
-[Tcpdump](http://www.tcpdump.org) is a powerful command-line packet analyzer. This plugins run the Tcpdump packet tracer on a user supplied PCAP.
+* Parse and return the contents of a PCAP file.
 
-## Actions
+# Requirements
 
-### Read PCAP
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Read PCAP
 
 This action is used to run Tcpdump on a user supplied PCAP file and return the output as `bytes` and a `string array` of packets.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -19,7 +32,7 @@ This action is used to run Tcpdump on a user supplied PCAP file and return the o
 |pcap|bytes|None|True|Base64 encoded PCAP file|None|
 |options|string|None|False|Tcpdump Flags and Options E.g. -n -c 10 -s 96. -r is implied|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -27,32 +40,30 @@ This action is used to run Tcpdump on a user supplied PCAP file and return the o
 |dump_file|bytes|False|Traffic Dump as File|
 |stderr|string|False|Tcpdump Standard Error|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Packet analysis
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Tcpdump](http://www.tcpdump.org)
 * [Tcpdump manual](http://www.tcpdump.org/tcpdump_man.html)
+

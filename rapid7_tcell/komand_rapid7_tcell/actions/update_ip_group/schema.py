@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Upload new items for an IP address group"
+
+
 class Input:
     GROUP_NAME = "group_name"
     ITEMS = "items"

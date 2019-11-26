@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a Cherwell incident"
+
+
 class Input:
     BUSINESS_OBJECT_ID = "business_object_id"
     FIELDS_TO_CHANGE = "fields_to_change"
@@ -33,8 +37,8 @@ class CreateIncidentInput(komand.Input):
     }
   },
   "required": [
-    "fields_to_change",
-    "business_object_id"
+    "business_object_id",
+    "fields_to_change"
   ]
 }
     """)
@@ -63,8 +67,8 @@ class CreateIncidentOutput(komand.Output):
     }
   },
   "required": [
-    "success",
-    "raw_response"
+    "raw_response",
+    "success"
   ]
 }
     """)

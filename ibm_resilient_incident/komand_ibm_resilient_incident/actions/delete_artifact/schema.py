@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes an artifact"
+
+
 class Input:
     ARTIFACT_ID = "artifact_id"
     INCIDENT_ID = "incident_id"
@@ -39,9 +43,9 @@ class DeleteArtifactInput(komand.Input):
     }
   },
   "required": [
-    "organization_id",
+    "artifact_id",
     "incident_id",
-    "artifact_id"
+    "organization_id"
   ]
 }
     """)

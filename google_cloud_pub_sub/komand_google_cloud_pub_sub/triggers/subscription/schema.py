@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Pulls new messages from a subscription"
+
+
 class Input:
     
     NUMBER_OF_MESSAGES = "number_of_messages"
@@ -42,9 +46,9 @@ class SubscriptionInput(komand.Input):
     }
   },
   "required": [
-    "subscription",
+    "number_of_messages",
     "project_id",
-    "number_of_messages"
+    "subscription"
   ]
 }
     """)

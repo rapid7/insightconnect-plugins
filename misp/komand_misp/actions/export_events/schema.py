@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Export all events in XML format"
+
+
 class Input:
     ENCODE_ATTACHMENTS = "encode_attachments"
     EVENT_ID = "event_id"

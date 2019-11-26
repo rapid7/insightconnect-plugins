@@ -1,17 +1,17 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: gitlab
 title: GitLab
 vendor: rapid7
 support: community
 status: []
-description: GitLab is a next generation developer collaboration software with version
-  control capabilities
-version: 1.0.0
+description: GitLab plugin allows user management and issue management in Gitlab
+version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/gitlab
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.gitlab.com
 tags:
 - gitlab
 - version control
@@ -19,6 +19,10 @@ tags:
 - manage
 - project
 - snippet
+hub_tags:
+  use_cases: [soar, soc_automation, user_management]
+  keywords: [gitlab, version control, repository, manage, project, snippet]
+  features: []
 types:
   ssh_output:
     id:

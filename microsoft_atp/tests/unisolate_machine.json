@@ -6,10 +6,17 @@
       "comment": "Unisolated by Komand"
     },
     "connection": {
+<<<<<<< HEAD
       "auth_url": "https://login.windows.net/5c824599-dc8c-4d31-96fb-3b886d4f8f10/oauth2/token",
       "client_id": "fe03e829-3283-40c3-970f-a5347348013f",
       "client_secret": "xxxxxx",
       "host": "https://api.securitycenter.windows.com",
+=======
+      "auth_url": "",
+      "client_id": "",
+      "client_secret": "",
+      "host": "",
+>>>>>>> 4c00def4d43b3934137d01685fad2190a8b92b3a
       "resource_url": "https://api.securitycenter.windows.com",
       "seconds_ago": 10512000
     }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Performs a password reset on the droplet"
+
+
 class Input:
     DROPLET_ID = "droplet_id"
     

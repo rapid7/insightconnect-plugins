@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove a file from the repository"
+
+
 class Input:
     FILE_PATH = "file_path"
     

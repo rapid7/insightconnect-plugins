@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add users or projects as subscribers"
+
+
 class Input:
     ID = "id"
     SUBSCRIBES = "subscribes"

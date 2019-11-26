@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query for incidents"
+
+
 class Input:
     ORGANIZATION_ID = "organization_id"
     QUERY = "query"

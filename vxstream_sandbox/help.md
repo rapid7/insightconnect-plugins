@@ -1,24 +1,47 @@
-
-# VxStream Sandbox
-
-## About
+# Description
 
 [VxStream Sandbox](https://www.payload-security.com/products/vxstream-sandbox) is an innovative and fully automated malware analysis system
 that includes the unique Hybrid Analysis technology. Our plugin connects to your VxStream instance. In addition, it supports the free and public [Hybrid Analysis](https://www.hybrid-analysis.com/) API.
 
-## Actions
+# Key Features
 
-### Search Database
+* Search by file Hash
+* Submit file for analysis
+* Get file analysis report details
+
+# Requirements
+
+* VxStream API Key
+* VxStream API Secret
+* VxStream server address
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_secret|credential_secret_key|None|True|API secret|None|
+|api_key|credential_secret_key|None|True|API key|None|
+|server|string|https\://www.hybrid-analysis.com/api|True|VxStream Sandbox API Server URL|None|
+
+## Technical Details
+
+### Actions
+
+#### Search Database
 
 This action is used to search the database using the [query syntax](https://www.hybrid-analysis.com/faq).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|False|Search parameters; syntax available at https\://www.hybrid-analysis.com/faq|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -54,17 +77,17 @@ Example output:
 
 ```
 
-### Lookup by Hash
+#### Lookup by Hash
 
 This action is used to get summary information for a given hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hash|string|None|False|MD5/SHA1/SHA256 hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -110,11 +133,11 @@ Example output:
 
 ```
 
-### Submit File
+#### Submit File
 
 This action is used to submit file for analysis.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -127,7 +150,7 @@ This action is used to submit file for analysis.
 |hybridanalysis|boolean|True|False|Enable a unique process memory inspection. This feature may slow down the overall analysis, but improves behavior analysis through instruction level inspection regardless of execution|None|
 |experimentalantievasion|boolean|True|False|Enable experimental anti-evasion features. This feature can have an impact application execution, but at the same time can improve performance for very evasive malware|None|
 
-#### Output
+##### Output
 
 |submission_url|string|False|None|
 |response_code|integer|True|None|
@@ -145,18 +168,18 @@ Example output:
 
 ```
 
-### Retrieve Report
+#### Retrieve Report
 
 This action is used to retrieve report by providing SHA256 hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |env_id|string|None|False|Environment ID|None|
 |hash|string|None|False|SHA256 Hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -177,44 +200,34 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_secret|credential_secret_key|None|True|API secret|None|
-|api_key|credential_secret_key|None|True|API key|None|
-|server|string|https\://www.hybrid-analysis.com/api|True|VxStream Sandbox API Server URL|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* [Security Mailbox Triage](https://market.komand.com/workflows/komand/security-mailbox-triage/1.0.0)
-* Malware analysis
-* Threat intelligence
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.2.0 - Update schema types for Lookup by Hash and Submit actions
-* 0.2.1 - Schema fixes for Search Database and Lookup by Hash actions to allow use in UI by name
-* 0.2.3 - SSL bug fix in SDK
-* 1.0.0 - Invalid key in types section of plugin specification, and style updates
-* 1.0.1 - Update to v2 Python plugin architecture, edit to input parsing for lookup, report, and query actions
+* 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - Support web server mode | Update to new credential types | Rename "Lookup By Hash" to "Lookup by Hash"
+* 1.0.1 - Update to v2 Python plugin architecture, edit to input parsing for lookup, report, and query actions
+* 1.0.0 - Invalid key in types section of plugin specification, and style updates
+* 0.2.3 - SSL bug fix in SDK
+* 0.2.1 - Schema fixes for Search Database and Lookup by Hash actions to allow use in UI by name
+* 0.2.0 - Update schema types for Lookup by Hash and Submit actions
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [VxStream Sandbox](https://www.payload-security.com/products/vxstream-sandbox)
 * [Hybrid Analysis](https://www.hybrid-analysis.com/)
 * [Hybrid Analysis Query Syntax](https://www.hybrid-analysis.com/faq)
+

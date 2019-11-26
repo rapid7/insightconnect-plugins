@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='snortlabslist-rapid7-plugin',
-      version='1.0.0',
-      description='IPv4 address to validate',
+      version='1.0.1',
+      description='Snort Labs List is an IP blacklist service provided by Snort. Users of this plugin can query with IP addresses to check their status',
       author='rapid7',
       author_email='',
       url='',

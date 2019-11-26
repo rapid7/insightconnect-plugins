@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Publish"
+
+
 class Input:
     MESSAGE = "message"
     PROJECT_ID = "project_id"
@@ -39,8 +43,8 @@ class PublishInput(komand.Input):
     }
   },
   "required": [
-    "topic",
-    "message"
+    "message",
+    "topic"
   ]
 }
     """)

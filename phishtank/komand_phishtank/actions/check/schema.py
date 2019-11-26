@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Submit URL to PhishTank"
+
+
 class Input:
     URL = "url"
     

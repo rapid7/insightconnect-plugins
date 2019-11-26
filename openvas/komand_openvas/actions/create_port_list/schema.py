@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new list of ports to scan in the OpenVAS server"
+
+
 class Input:
     NAME = "name"
     PORT_LIST_TCP = "port_list_TCP"

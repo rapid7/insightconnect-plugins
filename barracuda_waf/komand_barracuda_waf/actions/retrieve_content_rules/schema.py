@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all content rules with rule ID"
+
+
 class Input:
     ID = "id"
     VIRTUAL_SERVICE_ID = "virtual_service_id"
@@ -42,8 +46,8 @@ class RetrieveContentRulesInput(komand.Input):
     }
   },
   "required": [
-    "virtual_service_id",
-    "id"
+    "id",
+    "virtual_service_id"
   ]
 }
     """)
@@ -126,17 +130,17 @@ class RetrieveContentRulesOutput(komand.Output):
     }
   },
   "required": [
-    "id",
-    "servers",
-    "extended_match_sequence",
-    "name",
-    "host_match",
     "comments",
     "extended_match",
+    "extended_match_sequence",
+    "host_match",
+    "id",
     "lb_algorithm",
+    "name",
+    "persistence_method",
+    "servers",
     "service_name",
-    "url_match",
-    "persistence_method"
+    "url_match"
   ]
 }
     """)

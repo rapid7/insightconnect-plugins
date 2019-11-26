@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Stops a running instance, shutting it down cleanly, and allows you to restart the instance at a later time"
+
+
 class Input:
     INSTANCE = "instance"
     ZONE = "zone"
@@ -53,8 +57,8 @@ class StopInstanceInput(komand.Input):
     }
   },
   "required": [
-    "zone",
-    "instance"
+    "instance",
+    "zone"
   ]
 }
     """)

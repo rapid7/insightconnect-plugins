@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update ticket"
+
+
 class Input:
     ASSIGNEE_ID = "assignee_id"
     ATTACHMENT = "attachment"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new user"
+
+
 class Input:
     DEPARTMENT = "department"
     EMAIL = "email"

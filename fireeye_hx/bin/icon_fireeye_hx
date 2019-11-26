@@ -6,8 +6,8 @@ from icon_fireeye_hx import connection, actions, triggers
 
 Name = 'FireEye HX'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'FireEye HX is an integrated endpoint solution that detects, prevents and responds effectively to known malware and threats traditional anti-virus endpoint security products miss'
+Version = '1.0.1'
+Description = 'The FireEye plugin will allow you to get alerts from a given host'
 
 
 class ICONFireeyeHx(komand.Plugin):

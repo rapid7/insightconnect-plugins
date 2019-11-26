@@ -6,8 +6,8 @@ from komand_salesforce import connection, actions, triggers
 
 Name = 'Salesforce'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Salesforce is a CRM solution that brings together all customer information in a single, integrated platform that enables building a customer-centered business from marketing right through to sales, customer service and business analysis'
+Version = '1.0.1'
+Description = 'The Salesforce plugin allows you to search, update, and manage salesforce records'
 
 
 class ICONSalesforce(komand.Plugin):

@@ -32,6 +32,7 @@ class ListAvailableModulesOutput(komand.Output):
     "modules": {
       "type": "array",
       "title": "Available Modules",
+      "description": "Available modules",
       "items": {
         "$ref": "#/definitions/Module"
       },

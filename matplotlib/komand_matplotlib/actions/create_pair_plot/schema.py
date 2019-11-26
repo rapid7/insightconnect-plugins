@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a pair plot that illustrates the distribution between all numerical columns in a data set"
+
+
 class Input:
     COLOR_PALETTE = "color_palette"
     CSV_DATA = "csv_data"
@@ -81,9 +85,9 @@ class CreatePairPlotInput(komand.Input):
     }
   },
   "required": [
+    "color_palette",
     "csv_data",
     "kind",
-    "color_palette",
     "margin_style"
   ]
 }

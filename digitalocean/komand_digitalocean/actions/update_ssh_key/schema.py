@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates an SSH key from the account"
+
+
 class Input:
     NAME = "name"
     SSH_KEY_ID = "ssh_key_id"
@@ -32,8 +36,8 @@ class UpdateSshKeyInput(komand.Input):
     }
   },
   "required": [
-    "ssh_key_id",
-    "name"
+    "name",
+    "ssh_key_id"
   ]
 }
     """)

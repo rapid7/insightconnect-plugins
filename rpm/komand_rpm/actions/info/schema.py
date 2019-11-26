@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get information about a package"
+
+
 class Input:
     ARCH = "arch"
     DISTRO = "distro"
@@ -105,9 +109,9 @@ class InfoInput(komand.Input):
     }
   },
   "required": [
+    "arch",
     "distro",
-    "name",
-    "arch"
+    "name"
   ]
 }
     """)
@@ -279,9 +283,9 @@ class InfoOutput(komand.Output):
         }
       },
       "required": [
+        "key",
         "scheme",
-        "time",
-        "key"
+        "time"
       ]
     }
   }

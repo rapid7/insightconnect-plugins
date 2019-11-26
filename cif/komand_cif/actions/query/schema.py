@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query for observables"
+
+
 class Input:
     CC = "cc"
     CONFIDENCE = "confidence"
@@ -129,10 +133,10 @@ class QueryInput(komand.Input):
     }
   },
   "required": [
+    "confidence",
     "limit",
     "nolog",
-    "otype",
-    "confidence"
+    "otype"
   ]
 }
     """)

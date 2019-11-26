@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return the timestamp of the last rootcheck scan"
+
+
 class Input:
     AGENT_ID = "agent_id"
     
@@ -62,9 +66,9 @@ class RootcheckInfoOutput(komand.Output):
     }
   },
   "required": [
-    "rootcheckTime",
     "error",
-    "rootcheckEndTime"
+    "rootcheckEndTime",
+    "rootcheckTime"
   ]
 }
     """)

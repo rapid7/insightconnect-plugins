@@ -1,19 +1,24 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: newrelic
 title: New Relic
-description: Monitor the performance of applications and infrastructure
-version: 2.0.0
+description: Monitors the performance of applications and infrastructure
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/newrelic
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://newrelic.com
 tags:
 - newrelic
 - performance monitoring
+hub_tags:
+  use_cases: [soar, asset_inventory, soc_automation]
+  keywords: [newrelic, performance monitoring]
+  features: []
 connection:
   api_key:
     title: API Key

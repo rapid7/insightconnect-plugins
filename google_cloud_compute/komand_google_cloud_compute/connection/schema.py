@@ -89,16 +89,16 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
+    "auth_provider_x509_cert_url",
+    "auth_uri",
     "client_email",
     "client_id",
     "client_x509_cert_url",
-    "auth_uri",
-    "token_uri",
     "host",
-    "version",
-    "project_id",
     "private_key",
-    "auth_provider_x509_cert_url"
+    "project_id",
+    "token_uri",
+    "version"
   ],
   "definitions": {
     "credential_asymmetric_key": {

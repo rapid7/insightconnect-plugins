@@ -25,16 +25,19 @@ class DeleteAnalysisInput(komand.Input):
     "id": {
       "type": "integer",
       "title": "Analysis ID",
+      "description": "Analysis ID",
       "order": 3
     },
     "malware_sha256": {
       "type": "string",
       "title": "Malware SHA256 Hash",
+      "description": "Malware SHA256 hash",
       "order": 2
     },
     "project_name": {
       "type": "string",
       "title": "Project Name",
+      "description": "Project name",
       "order": 1
     }
   },

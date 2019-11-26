@@ -36,9 +36,9 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "url",
     "api_key",
-    "api_token"
+    "api_token",
+    "url"
   ],
   "definitions": {
     "credential_secret_key": {

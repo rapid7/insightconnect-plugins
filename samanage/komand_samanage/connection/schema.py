@@ -29,8 +29,8 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "token",
-    "eu_customer"
+    "eu_customer",
+    "token"
   ],
   "definitions": {
     "credential_secret_key": {

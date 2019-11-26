@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Checks for new Metasploit modules"
+
+
 class Input:
     pass
     

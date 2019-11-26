@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Publish a new event to a specified topic"
+
+
 class Input:
     EVENT_MESSAGE = "event_message"
     TOPIC = "topic"
@@ -32,8 +36,8 @@ class PublishEventInput(komand.Input):
     }
   },
   "required": [
-    "topic",
-    "event_message"
+    "event_message",
+    "topic"
   ]
 }
     """)

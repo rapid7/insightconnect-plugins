@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes the given security policy"
+
+
 class Input:
     ID = "id"
     

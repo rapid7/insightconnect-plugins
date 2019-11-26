@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Decodes an encoded URL"
+
+
 class Input:
     ENCODED_URL = "encoded_url"
     

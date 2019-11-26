@@ -6,7 +6,7 @@ from icon_kintone import connection, actions, triggers
 
 Name = 'Kintone'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Custom workflows and data management for businesses and non-profits in one place'
 
 

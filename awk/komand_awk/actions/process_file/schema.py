@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Process file with Awk"
+
+
 class Input:
     DATA = "data"
     EXPRESSION = "expression"
@@ -34,8 +38,8 @@ class ProcessFileInput(komand.Input):
     }
   },
   "required": [
-    "expression",
-    "data"
+    "data",
+    "expression"
   ]
 }
     """)

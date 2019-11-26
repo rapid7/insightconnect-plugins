@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create ticket"
+
+
 class Input:
     ASSIGNEE_ID = "assignee_id"
     ATTACHMENT = "attachment"
@@ -151,8 +155,8 @@ class CreateTicketInput(komand.Input):
     }
   },
   "required": [
-    "subject",
-    "description"
+    "description",
+    "subject"
   ],
   "definitions": {
     "file": {

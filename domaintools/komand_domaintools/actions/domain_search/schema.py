@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Searches for domain names that match your specific search string"
+
+
 class Input:
     ACTIVE_ONLY = "active_only"
     ANCHOR_LEFT = "anchor_left"

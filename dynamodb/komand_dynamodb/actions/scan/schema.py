@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Scan Dynamo and return any objects found"
+
+
 class Input:
     INDEX = "index"
     PARAMS = "params"

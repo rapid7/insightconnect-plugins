@@ -7,7 +7,7 @@ from komand_microsoft_atp import connection, actions, triggers
 Name = 'Microsoft Windows Defender ATP'
 Vendor = 'rapid7'
 Version = '1.6.0'
-Description = 'Windows Defender Advanced Threat Protection (ATP) is a unified platform for preventative protection, post-breach detection, automated investigation, and response'
+Description = 'The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files'
 
 
 class ICONMicrosoftAtp(komand.Plugin):

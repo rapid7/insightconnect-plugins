@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "This action is used to record timer information"
+
+
 class Input:
     DELTA = "delta"
     RATE = "rate"
@@ -40,8 +44,8 @@ class TimingInput(komand.Input):
     }
   },
   "required": [
-    "stat",
-    "delta"
+    "delta",
+    "stat"
   ]
 }
     """)

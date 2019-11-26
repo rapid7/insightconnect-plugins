@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new query in Kolide"
+
+
 class Input:
     DESCRIPTION = "description"
     NAME = "name"
@@ -39,8 +43,8 @@ class CreateQueryInput(komand.Input):
     }
   },
   "required": [
-    "name",
     "description",
+    "name",
     "query"
   ]
 }

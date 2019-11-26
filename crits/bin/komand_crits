@@ -6,8 +6,8 @@ from komand_crits import connection, actions, triggers
 
 Name = 'CRITs'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'CRITs is an open source malware and threat repository for conducting malware analyses'
+Version = '1.0.1'
+Description = 'CRITs is an open source malware and threat repository for conducting malware analyses. With the CRITs plugin for Rapid7 InsightConnect, users can manage actors, events, collections, domains, and more'
 
 
 class ICONCrits(komand.Plugin):

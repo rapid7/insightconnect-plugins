@@ -1,38 +1,58 @@
+# Description
 
-# BHR
+The Black Hole Router plugin is use to assist with managing networks blocked within Black Hole Router site.
 
-## About
+# Key Features
 
-The [Black Hole Router](https://github.com/ncsa/bhr-site) (BHR) site is a Free and Open Source API endpoint tool for router blocks where multiple router backends are supported.
+* Identify suspicious network activity
+* Network segment isolation
+* Block network traffic
 
-## Actions
+# Requirements
 
-### Unblock Address
+* Requires the URL of an accessible instance of the Black Hole Router and an API token.
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|ssl_no_verify|boolean|None|True|SSL No Verify|None|
+|token|credential_token|None|True|API Token and URL to BHR Host E.g. http\://bhr.company.com\:8000|None|
+
+## Technical Details
+
+### Actions
+
+#### Unblock Address
 
 This action is used to send an unblock request for an IP address or CIDR block.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |cidr|string|None|True|IP Address or CIDR network to block|None|
 |why|string|None|True|The reason for the unblock|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |result|string|False|None|
 
-### Block Stats
+#### Block Stats
 
 This action is used to retrieve the current block statistics.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -41,11 +61,11 @@ This action does not contain any inputs.
 |block_pending|integer|False|None|
 |unblock_pending|integer|False|None|
 
-### Mblock
+#### Mblock
 
 This action is used to send a batch of IP addresses as an `array` of block request `objects`.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -72,34 +92,34 @@ For example, 3 block requests would be specified like the following:
 
 ```
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |result|[]object|False|None|
 
-### Query Block History
+#### Query Block History
 
 This action is used to query the block history for an IP address or CIDR block.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |cidr|string|None|True|IP Address or CIDR network to block|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |is_blocked|boolean|False|None|
 |result|[]object|False|None|
 
-### Block Address
+#### Block Address
 
 This action is used to send a block request for an IP address or CIDR block.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -110,37 +130,37 @@ This action is used to send a block request for an IP address or CIDR block.
 |cidr|string|None|True|IP Address or CIDR network to block|None|
 |why|string|None|True|The reason for the block|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |result|object|False|None|
 
-### List Blocks
+#### List Blocks
 
 This action is used to retrieve a list of current blocks.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |list|string|False|None|
 
-### Batch Address Block
+#### Batch Address Block
 
 This action is used to send a batch block request.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |batch|[]object|None|True|A list of block objects E.g. [ { "cidr"\: "1.1.1.1", ..}, { "cidr"\: "1.2.3.4",..} ]|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -151,39 +171,30 @@ Example output:
 ```
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin requires the URL of an accessible instance of the Black Hole Router and an API token.
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ssl_no_verify|boolean|None|True|SSL No Verify|None|
-|token|credential_token|None|True|API Token and URL to BHR Host E.g. http\://bhr.company.com\:8000|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin currently doesn't support the ident parameter which would allow blocks across multiple backend systems.
 
-## Workflows
+# Version History
 
-Examples:
-
-* IP blocking
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Black Hole Router Site](https://github.com/ncsa/bhr-site)
 * [BHR Client](https://github.com/ncsa/bhr-client)
 * [BHR Client Docs](https://bhr-client.readthedocs.io)
+

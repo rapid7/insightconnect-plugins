@@ -6,8 +6,8 @@ from komand_pagerduty import connection, actions, triggers
 
 Name = 'PagerDuty'
 Vendor = 'rapid7'
-Version = '2.0.0'
-Description = 'PagerDuty'
+Version = '2.0.1'
+Description = 'PagerDuty provides enterprise-grade incident management. Leverage PagerDuty for incident management and response with the PagerDuty plugin for InsightConnect'
 
 
 class ICONPagerduty(komand.Plugin):

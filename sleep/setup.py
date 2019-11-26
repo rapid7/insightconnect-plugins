@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='sleep-rapid7-plugin',
-      version='1.0.0',
-      description='Suspend execution for an interval of time',
+      version='1.0.1',
+      description='Sleep allows Rapid7 InsightConnect users to suspend workflow execution for a specified period of time. Popular uses are to avoid rate limiting by a service or to wait for processing by a service to complete',
       author='rapid7',
       author_email='',
       url='',

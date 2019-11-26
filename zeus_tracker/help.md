@@ -1,24 +1,41 @@
+# Description
 
-# ZeuS Tracker
+This plugin uses the API of the [Abuse.ch ZeuS Tracker](https://zeustracker.abuse.ch/)
+which tracks ZeuS Command & Control servers (hosts) around the world.
 
-## About
+# Key Features
 
-The ZeuS Tracker plugin uses the API of the [Abuse.ch ZeuS Tracker](https://zeustracker.abuse.ch/)
-which tracks ZeuS Command&Control servers (hosts) around the world.
+* Obtain and look up ZeuS indicators
 
-## Actions
+# Requirements
 
-### Host Feed
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|server|string|https\://zeustracker.abuse.ch|True|ZeuS Tracker API Server|None|
+
+## Technical Details
+
+### Actions
+
+#### Host Feed
 
 This action is used to look up ZeuS hosts by hostname.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |host|string|None|False|Host to search for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -44,82 +61,82 @@ This action is used to look up ZeuS hosts by hostname.
 |as_name|string|False|Autonomous system name|
 |as_num|string|False|Autonomous system number|
 
-### Dropzones Feed
+#### Dropzones Feed
 
 This action is used to get information on ZeuS dropzone URLs.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |limit|integer|None|False|Limit number of results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |results|[]default|False|None|
 
-### Country Feed
+#### Country Feed
 
 This action is used to look up ZeuS hosts in a specific country.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |country|string|None|False|Two character country code (see ISO column of https\://countrycode.org)|None|
 |limit|integer|None|False|Limit number of results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |results|[]detailed|False|None|
 
-### Configs Feed
+#### Configs Feed
 
 This action is used to get information on ZeuS config URLs.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |limit|integer|None|False|Limit number of results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |results|[]default|False|None|
 
-### Binaries Feed
+#### Binaries Feed
 
 This action is used to get information on ZeuS binary URLs.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |limit|integer|None|False|Limit number of results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |results|[]default|False|None|
 
-### IP Address
+#### IP Address
 
 This action is used to look up ZeuS hosts by IP address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ip|string|None|False|IP address to search for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -134,51 +151,45 @@ This action is used to look up ZeuS hosts by IP address.
 |active_files|integer|False|Number of active files|
 |as_num|string|False|Autonomous system number|
 
-### ASN Feed
+#### ASN Feed
 
 This action is used to look up ZeuS hosts in a specific Autonomous System (AS).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |as|string|None|False|Autonomous System Number|None|
 |limit|integer|None|False|Limit number of results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |results|[]detailed|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|server|string|https\://zeustracker.abuse.ch|True|ZeuS Tracker API Server|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Threat Intelligence
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Rename "Host" action to "Host Feed"
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Abuse.ch ZeuS Tracker](https://zeustracker.abuse.ch/)
+

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List user SSH keys"
+
+
 class Input:
     ID = "id"
     

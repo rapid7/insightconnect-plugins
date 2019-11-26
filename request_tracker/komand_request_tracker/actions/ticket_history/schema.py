@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets a list of all the history items for a given ticket"
+
+
 class Input:
     TICKET_ID = "ticket_id"
     

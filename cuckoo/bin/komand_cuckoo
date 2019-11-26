@@ -6,8 +6,8 @@ from komand_cuckoo import connection, actions, triggers
 
 Name = 'Cuckoo Sandbox'
 Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'Analyze files and URLs with Cuckoo Sandbox'
+Version = '1.0.2'
+Description = 'Cuckoo Sandbox is an open source automated malware analysis system. Using the Cuckoo Sandbox plugin for Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more'
 
 
 class ICONCuckoo(komand.Plugin):

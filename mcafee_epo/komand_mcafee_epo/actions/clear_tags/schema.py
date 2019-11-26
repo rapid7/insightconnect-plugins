@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Clears the given tag to a supplied list of systems"
+
+
 class Input:
     DEVICES = "devices"
     TAG = "tag"

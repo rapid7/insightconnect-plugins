@@ -1,22 +1,44 @@
-# Cisco ThreatGrid
-
-## About
+# Description
 
 [Cisco ThreatGrid](https://www.cisco.com/c/en/us/products/security/threat-grid/index.html) combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware.
+ The Cisco ThreatGrid InsightConnect plugin allows you to retrieve malware reports, report samples and URLs for analysis to server.
 
-## Actions
+# Key Features
 
-### Search for a Sample Report by URL
+* Retrieve sample reports by domain, ID and SHA256
+* Report samples and URLs for analysis
+
+# Requirements
+
+* Cisco ThreatGrid server's region
+* Cisco ThreatGrid API key
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|API Key|None|
+|region|string|US|True|Region|['US', 'Europe']|
+
+## Technical Details
+
+### Actions
+
+#### Search for a Sample Report by URL
 
 This action is used to search for a sample report matching the given domain. e.g. rapid7.com.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain to search for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -137,17 +159,17 @@ Example output:
 }
 ```
 
-### Search for a Sample Report by ID
+#### Search for a Sample Report by ID
 
 This action is used to search for a sample report matching the given ID. e.g. rapid7.com.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |sample_id|string|None|True|Sample ID to search for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -268,17 +290,17 @@ Example output:
 }
 ```
 
-### Search for a Sample Report by SHA256
+#### Search for a Sample Report by SHA256
 
 This action is used to search for a sample report matching the given hash. e.g. 95fe2192da12930617b37419574exxx.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |sha256|string|None|True|SHA256|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -388,11 +410,11 @@ Example output:
 }
 ```
 
-### Submit Sample
+#### Submit Sample
 
 This action submits a sample to Threat Grid for analysis.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -407,7 +429,7 @@ This action submits a sample to Threat Grid for analysis.
 |tags|string|None|False|A comma-separated list of tags applied to this sample|None|
 |vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -438,17 +460,17 @@ Example output:
 
 ```
 
-### Get Sample Analysis
+#### Get Sample Analysis
 
 This action retrieves analysis on a sample with the given ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |sample_id|string|None|True|ID in ThreadGrid of sample|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -535,11 +557,11 @@ Example output:
 
 ```
 
-### Submit URL
+#### Submit URL
 
 This action is used to submit a URL to Threat Grid for analysis.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -552,7 +574,7 @@ This action is used to submit a URL to Threat Grid for analysis.
 |url|string|None|True|The URL to submit for analysis|None|
 |vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -582,743 +604,30 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API Key|None|
-|region|string|US|True|Region|['US', 'Europe']|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
-## Workflows
+# Version History
 
-Examples:
-
-* Get a sample report
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 1.1.0 - New action Submit Sample
-* 1.2.0 - New action Get Sample Analysis
-* 1.2.1 - Bug fix for action Get Sample Analysis
 * 1.2.2 - New action Submit URL
+* 1.2.1 - Bug fix for action Get Sample Analysis
+* 1.2.0 - New action Get Sample Analysis
+* 1.1.0 - New action Submit Sample
+* 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Cisco ThreatGrid](https://www.cisco.com/c/en/us/products/security/threat-grid/index.html)
 * [Cisco ThreatGrid API](https://panacea.threatgrid.com/mask/doc/mask/index)
 
-## Custom Output Types
-
-### behaviors
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|name|string|False|Name|
-|threat|integer|False|Threat|
-|title|string|False|Title|
-
-### analyzed_file
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|filename|string|False|Filename|
-|magic|string|False|Magic|
-|md5|string|False|MD5|
-|sha1|string|False|SHA1|
-|sha256|string|False|SHA256|
-|type|string|False|Type|
-
-### general_details
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|report_created|string|False|Report created|
-|sandbox_id|string|False|Sandbox ID|
-|sandbox_version|string|False|Sandbox version|
-
-### malware_desc
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|filename|string|False|Filename|
-|magic|string|False|Magic|
-|md5|string|False|MD5|
-|sha1|string|False|SHA1|
-|sha256|string|False|SHA256|
-|size|integer|False|Size|
-|type|string|False|Type|
-
-### sandcastle_env
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|analysis_end|string|False|Analysis end|
-|analysis_features|[]object|False|Analysis features|
-|analysis_start|string|False|Analysis start|
-|controlsubject|string|False|Control Subject|
-|current_os|string|False|Current OS|
-|display_name|string|False|Display name|
-|run_time|integer|False|Run time|
-|sample_executed|integer|False|Sample executed|
-|sandcastle|string|False|Sandcastle|
-|vm|string|False|VM|
-|vm_id|string|False|VM ID|
-
-### metadata
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|analyzed_file|analyzed_file|False|Analyzed file|
-|general_details|general_details|False|General details|
-|malware_desc|[]malware_desc|False|Malware description|
-|sandcastle_env|sandcastle_env|False|Sandcastle ENV|
-|submitted_file|analyzed_file|False|Submitted file|
-
-### analysis
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|behaviors|[]behaviors|False|Behaviors|
-|metadata|metadata|False|Metadata|
-|threat_score|integer|False|Threat score|
-
-### properties
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|metadata|object|False|Metadata|
-
-### sample_report
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|analysis|analysis|False|Analysis|
-|filename|string|False|Filename|
-|login|string|False|Login|
-|md5|string|False|MD5|
-|organization_id|integer|False|Organization ID|
-|private|boolean|False|Private|
-|properties|properties|False|Properties|
-|sample|string|False|Sample|
-|sha1|string|False|SHA1|
-|sha256|string|False|SHA256|
-|state|string|False|State|
-|status|string|False|Status|
-|submitted_at|string|False|Submitted at|
-|tags|[]string|False|Tags|
-|vm_runtime|integer|False|VM runtime|
-
-### submit_sample_data
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|filename|string|False|Filename|
-|id|string|False|ID|
-|login|string|False|Login|
-|md5|string|False|MD5|
-|os|string|False|OS|
-|sha1|string|False|SHA1|
-|sha256|string|False|SHA256|
-|state|string|False|State|
-|status|string|False|Status|
-|submission_id|integer|False|Submission ID|
-|submitted_at|string|False|Submitted at|
-|tags|[]object|False|Tags|
-|vm|string|False|VM|
-
-### submit_sample_results
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|api_version|integer|False|API version|
-|data|submit_sample_data|False|Data|
-|id|integer|False|ID|
-
-### file_transaction_process
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|path|string|False|Path|
-|rolled_back|boolean|False|Rolled back|
-
-### error_process_data
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|error_status|string|False|Error status|
-|nt_status|string|False|Nt status|
-|number_of_params|integer|False|Number of params|
-|parameters|string|False|Parameters|
-
-### error_process
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|error_process_data|False|Data|
-|timestamp|float|False|Timestamp|
-|type|string|False|Type|
-
-### entry_process
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|base_address|string|False|Base address|
-|size|string|False|Size|
-
-### memory_process
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|allocation_type|[]string|False|Allocation type|
-|entry|[]entry_process|False|Entry|
-|process|string|False|Process|
-|process_handle|string|False|Process handle|
-|protect|[]string|False|Protect|
-|zero_bits|integer|False|Zero bits|
-
-### startup_info_process
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|command_line|string|False|Command line|
-|current_directory|string|False|Current directory|
-|desktop_info|string|False|Desktop info|
-|dll_path|string|False|Dll path|
-|image_pathname|string|False|Image pathname|
-|runtime_data|string|False|Runtime data|
-|shell_info|string|False|Shell info|
-|tid|string|False|Tid|
-|upid|integer|False|Upid|
-|uthread|integer|False|Uthread|
-|window_title|string|False|Window title|
-
-### threads_process
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|client_id|integer|False|Client id|
-|create_suspended|string|False|Create suspended|
-|process|string|False|Process|
-|process_handle|string|False|Process handle|
-|return|integer|False|Return|
-|thread|string|False|Thread|
-
-### process_analysis_item
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|analyzed_because|string|False|Analyzed because|
-|atoms_added|[]string|False|Atoms added|
-|children|[]string|False|Children|
-|errors|[]error_process|False|Errors|
-|file_transactions|[]file_transaction_process|False|File transactions|
-|files_checked|[]string|False|Files checked|
-|files_created|[]string|False|Files created|
-|files_deleted|[]string|False|Files deleted|
-|files_modified|[]string|False|Files modified|
-|files_read|[]string|False|Files read|
-|kpid|string|False|Kpid|
-|memory|[]memory_process|False|Memory|
-|monitored|boolean|False|Monitored|
-|mutants_created|[]string|False|Mutants created|
-|mutants_opened|[]string|False|Mutants opened|
-|new|boolean|False|New|
-|parent|string|False|Parent|
-|pid|integer|False|Pid|
-|ppid|integer|False|Ppid|
-|process_name|string|False|Process name|
-|registry_keys_created|[]object|False|Registry keys created|
-|registry_keys_deleted|[]string|False|Registry keys deleted|
-|registry_keys_modified|[]object|False|Registry keys modified|
-|registry_keys_opened|[]object|False|Registry keys opened|
-|registry_keys_read|[]object|False|Registry keys read|
-|sockets|[]object|False|Sockets|
-|sockets_traffic|[]object|False|Sockets traffic|
-|startup_info|startup_info_process|False|Startup info|
-|threads|[]threads_process|False|Threads|
-|time|string|False|Time|
-
-### ClamAV_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|product|string|False|Product|
-|product_version|string|False|Product version|
-|result|string|False|Result|
-|signature_version|string|False|Signature version|
-
-### classification_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|family_name|string|False|Family name|
-|platform|string|False|Platform|
-|type|string|False|Type|
-
-### query_hash_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|sha256|string|False|SHA256|
-
-### reversing_labs_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|classification|classification_artifact|False|Classification|
-|first_seen|string|False|First seen|
-|last_seen|string|False|Last seen|
-|query_hash|query_hash_artifact|False|Query hash|
-|scanner_count|integer|False|Scanner count|
-|scanner_match|integer|False|Scanner match|
-|status|string|False|Status|
-|threat_level|integer|False|Threat level|
-|threat_name|string|False|Threat name|
-|trust_factor|integer|False|Trust factor|
-
-### yara_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|description|string|False|Description|
-|id|string|False|Id|
-|tags|[]string|False|Tags|
-
-### antivirus_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ClamAV|ClamAV_artifact|False|Clamav|
-|reversing_labs|reversing_labs_artifact|False|Reversing labs|
-|yara|[]yara_artifact|False|Yara|
-
-### file_info_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|company_name|string|False|Company name|
-|copyright|string|False|Copyright|
-|file_description|string|False|File description|
-|file_version|string|False|File version|
-|internal_name|string|False|Internal name|
-|original_file_name|string|False|Original file name|
-|product_name|string|False|Product name|
-|product_version|string|False|Product version|
-
-### dos_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|checksum|integer|False|Checksum|
-|header_relocations|integer|False|Header relocations|
-|initial_code_segment|integer|False|Initial code segment|
-|initial_instruction_pointer|integer|False|Initial instruction pointer|
-|initial_stack_pointer|integer|False|Initial stack pointer|
-|initial_stack_segment|integer|False|Initial stack segment|
-|pages|integer|False|Pages|
-|size_in_paragraphs|integer|False|Size in paragraphs|
-
-### optional_header_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|actual_checksum|integer|False|Actual checksum|
-|claimed_checksum|integer|False|Claimed checksum|
-|entrypoint_address|integer|False|Entrypoint address|
-|file_alignment|integer|False|File alignment|
-|linker_major_version|integer|False|Linker major version|
-|linker_minor_version|integer|False|Linker minor version|
-|loader_flag|integer|False|Loader flag|
-|number_of_rva_and_sizes|integer|False|Number of rva and sizes|
-|reserved_field|integer|False|Reserved field|
-|section_alignment|integer|False|Section alignment|
-|size|integer|False|Size|
-|subsystem|integer|False|Subsystem|
-|type|integer|False|Type|
-
-### actual_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|md5|string|False|Md5|
-|sha1|string|False|Sha1|
-|sha256|string|False|SHA256|
-
-### certificates_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|issuer|string|False|Issuer|
-|not_after|integer|False|Not after|
-|not_before|integer|False|Not before|
-|serial|string|False|Serial|
-|subject|string|False|Subject|
-
-### signed_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|sha256|string|False|SHA256|
-
-### certificate_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|actual|actual_artifact|False|Actual|
-|certificates|[]certificates_artifact|False|Certificates|
-|issuer|string|False|Issuer|
-|program|string|False|Program|
-|serial|string|False|Serial|
-|signature_match|boolean|False|Signature match|
-|signed|signed_artifact|False|Signed|
-|subject|string|False|Subject|
-|timestamp|string|False|Timestamp|
-|url|string|False|URL|
-
-### pe_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|certificate|certificate_artifact|False|Certificate|
-|import_hash|string|False|Import hash|
-|machine|string|False|Machine|
-|number_of_symbols|integer|False|Number of symbols|
-|optional_header|optional_header_artifact|False|Optional header|
-|signed|boolean|False|Signed|
-|timestamp|integer|False|Timestamp|
-|tls_callback_addr|integer|False|TLS callback address|
-|tls_callback_rva|integer|False|Tls callback rva|
-|vt_import_hash|string|False|VT import hash|
-
-### headers_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|dos|dos_artifact|False|Dos|
-|pe|pe_artifact|False|PE|
-
-### imports_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|dll|string|False|DLL|
-|entries|[][]string|False|Entries|
-
-### resources_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|codepage|integer|False|Codepage|
-|language|string|False|Language|
-|locale|string|False|Locale|
-|magic|string|False|Magic|
-|mime|string|False|Mime|
-|name|string|False|Name|
-|offset|integer|False|Offset|
-|path|string|False|Path|
-|resource_sha256|string|False|Resource SHA256|
-|size|integer|False|Size|
-|sublanguage|string|False|Sublanguage|
-|type|string|False|Type|
-
-### sections_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|address|integer|False|Address|
-|characteristics|[]string|False|Characteristics|
-|data_pointer|integer|False|Data pointer|
-|entropy|float|False|Entropy|
-|entropy_type|[]string|False|Entropy type|
-|section|string|False|Section|
-|section_hash|string|False|Section hash|
-|size|integer|False|Size|
-|virtual_size|integer|False|Virtual size|
-
-### forensics_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|exports|[][]string|False|Exports|
-|file_info|file_info_artifact|False|File info|
-|headers|headers_artifact|False|Headers|
-|imports|[]imports_artifact|False|Imports|
-|internal_checksum_match|boolean|False|Internal checksum match|
-|resources|[]resources_artifact|False|Resources|
-|sections|[]sections_artifact|False|Sections|
-|signatures|[]string|False|Signatures|
-
-### relation_artifact
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|contains|[]string|False|Contains|
-|extracted_from|[]string|False|Extracted from|
-|network|[]string|False|Network|
-|process|[]string|False|Process|
-
-### artifact_analysis_item
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|antivirus|antivirus_artifact|False|Antivirus|
-|created-time|number|False|Created-time|
-|created_by|[]integer|False|Created by|
-|entropy|float|False|Entropy|
-|executed_from|[]integer|False|Executed from|
-|forensics|forensics_artifact|False|Forensics|
-|magic-type|string|False|Magic-type|
-|md5|string|False|Md5|
-|mime-type|string|False|Mime-type|
-|modified_by|[]integer|False|Modified by|
-|origin|string|False|Origin|
-|path|string|False|Path|
-|read_by|[]integer|False|Read by|
-|relation|relation_artifact|False|Relation|
-|sha1|string|False|Sha1|
-|sha256|string|False|SHA256|
-|size|integer|False|Size|
-|type|string|False|Type|
-|whitelist|[]object|False|Whitelist|
-
-### ioc_data
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Antivirus_Product|string|False|Antivirus product|
-|Antivirus_Result|string|False|Antivirus result|
-|Artifact_ID|integer|False|Artifact ID|
-|Path|string|False|Path|
-
-### ioc_analysis_item
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|category|[]string|False|Category|
-|confidence|integer|False|Confidence|
-|data|[]ioc_data|False|Data|
-|description|string|False|Description|
-|heuristic_coefficient|float|False|Heuristic coefficient|
-|hits|integer|False|Hits|
-|ioc|string|False|Ioc|
-|mitre-tactics|[]string|False|Mitre-tactics|
-|severity|integer|False|Severity|
-|tags|[]string|False|Tags|
-|title|string|False|Title|
-|truncated|boolean|False|Truncated|
-
-### annotation_network
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|asn|integer|False|ASN|
-|country|string|False|Country|
-|country_name|string|False|Country name|
-|ip|string|False|IP|
-|org|string|False|Organization|
-|reverse_dns|[]string|False|Reverse DNS list|
-|ts|integer|False|TS|
-
-### annotation_item
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|network|[]annotation_network|False|Network|
-
-### artifact_analysis
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|items|[]artifact_analysis_item|False|Items|
-
-### iocs_analysis
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|items|[]ioc_analysis_item|False|Items|
-
-### network_headers
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|cache-control|string|False|Cache-control|
-|content-length|string|False|Content-length|
-|host|string|False|Host|
-|user-agent|string|False|User-agent|
-
-### network_decoded
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|actual_content_type|string|False|Actual content type|
-|body_len|integer|False|Body len|
-|decoded_url|string|False|Decoded URL|
-|fuids|[]string|False|Filesystem access user ID|
-|headers|network_headers|False|Headers|
-|host|string|False|Host|
-|method|string|False|Method|
-|port|integer|False|Port|
-|request_filename|string|False|Request filename|
-|request_path|string|False|Request path|
-|sha256|string|False|SHA256|
-|ts|float|False|Ts|
-|type|string|False|Type|
-|url|string|False|URL|
-|version|string|False|Version|
-
-### network_relation
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|process|[]integer|False|Process|
-
-### network_decoded_list
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|decoded|[]network_decoded|False|List of decoded results|
-
-### network_streams_analysis
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|bytes|integer|False|Bytes|
-|bytes_missed|integer|False|Bytes missed|
-|bytes_orig|integer|False|Bytes orig|
-|bytes_orig_payload|integer|False|Bytes orig payload|
-|bytes_payload|integer|False|Bytes payload|
-|bytes_resp|integer|False|Bytes resp|
-|bytes_resp_payload|integer|False|Bytes resp payload|
-|conn_state|string|False|Conn state|
-|decoded|[]network_decoded_list|False|Decoded|
-|dst|string|False|Dst|
-|dst_port|integer|False|Dst port|
-|duration|float|False|Duration|
-|history|string|False|History|
-|packets|integer|False|Packets|
-|packets_orig|integer|False|Packets orig|
-|packets_resp|integer|False|Packets resp|
-|protocol|string|False|Protocol|
-|relation|network_relation|False|Relation|
-|service|string|False|Service|
-|session|integer|False|Session|
-|src|string|False|Src|
-|src_port|integer|False|Src port|
-|transport|string|False|Transport|
-|ts_begin|float|False|Ts begin|
-|ts_end|float|False|Ts end|
-|uid|string|False|Uid|
-
-### processes_analysis
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|items|[]process_analysis_item|False|Items|
-
-### annotations_analysis
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|items|annotation_network|False|Items|
-
-### general_details_metadata
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|report_created|integer|False|Report created|
-|sandbox_id|string|False|Sandbox id|
-|sandbox_version|string|False|Sandbox version|
-
-### malware_desc_metadata
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|filename|string|False|Filename|
-|magic|string|False|Magic|
-|md5|string|False|Md5|
-|sha1|string|False|Sha1|
-|sha256|string|False|SHA256|
-|size|integer|False|Size|
-|type|string|False|Type|
-
-### sandcastle_env_metadata
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|analysis_end|integer|False|Analysis end|
-|analysis_start|integer|False|Analysis start|
-|controlsubject|string|False|Controlsubject|
-|current_os|string|False|Current OS|
-|display_name|string|False|Display name|
-|run_time|integer|False|Run time|
-|sample_executed|integer|False|Sample executed|
-|sandcastle|string|False|Sandcastle|
-|vm|string|False|Vm|
-|vm_id|string|False|Vm id|
-
-### data_metadata
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|general_details|general_details_metadata|False|General details|
-|malware_desc|[]malware_desc_metadata|False|Malware desc|
-|sandcastle_env|sandcastle_env_metadata|False|Sandcastle env|
-
-### artifact_report
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|api_version|integer|False|API version|
-|data|artifact_analysis|False|Data|
-|id|integer|False|ID|
-
-### iocs_report
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|api_version|integer|False|API version|
-|data|iocs_analysis|False|Data|
-|id|integer|False|ID|
-
-### network_streams_report
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|api_version|integer|False|API version|
-|data|network_streams_analysis|False|Data|
-|id|integer|False|ID|
-
-### processes_report
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|api_version|integer|False|API version|
-|data|processes_analysis|False|Data|
-|id|integer|False|ID|
-
-### annotations_report
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|api_version|integer|False|API version|
-|data|annotations_analysis|False|Data|
-|id|integer|False|ID|
-
-### metadata_report
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|api_version|integer|False|API version|
-|data|data_metadata|False|Data|
-|id|integer|False|ID|

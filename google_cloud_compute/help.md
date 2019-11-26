@@ -1,18 +1,54 @@
-
-# Google Cloud Compute
-
-## About
+# Description
 
 [Google Compute](https://cloud.google.com/compute/) Google Compute Engine lets you create and run virtual machines on Google infrastructure.
-Compute Engine offers scale, performance, and value that allows you to easily launch large compute clusters on Google's infrastructure.
+Compute Engine offers scale, performance, and value that allows you to easily launch large compute clusters on Google's infrastructure. Use the InsightConnect plugin to automate administrative tasks like starting and stopping instances.
 
-## Actions
+# Key Features
 
-### List Disks
+* Start and stop instances
+* Attach and detach disks
+
+# Requirements
+
+* A JWT with Google Cloud Compute permissions
+* Google Cloud Compute API enabled
+
+# Documentation
+
+## Setup
+
+This plugin requires network access to the Google Cloud Compute Engine API.
+
+1. Log into [https://console.cloud.google.com/compute](https://console.cloud.google.com/compute)
+2. Click the hamburger (stacked parallel lines) in the top left
+3. Click API & Services and then click Credentials
+4. Click Create Credentials and select Service Account Key
+5. Select a service account or create a new one
+6. Select JSON and click Create to download
+7. Use information in JSON file in Connection parameters below
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|private_key|credential_asymmetric_key|None|True|Private key from service credentials|None|
+|token_uri|string|https\://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
+|auth_provider_x509_cert_url|string|https\://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
+|auth_uri|string|https\://accounts.google.com/o/oauth2/auth|True|None|None|
+|host|string|https\://www.googleapis.com/compute/|True|Google Cloud Compute Server|None|
+|version|string|v1|True|API Version|None|
+|client_email|string|None|True|Client email from service credentials|None|
+|client_id|string|None|True|Client ID|None|
+|project_id|string|None|True|Project ID from service credentials|None|
+|client_x509_cert_url|string|None|True|x509 cert URL from service credentials|None|
+
+## Technical Details
+
+### Actions
+
+#### List Disks
 
 This action is used to retrieves a list of persistent disks contained within the specified zone.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -23,7 +59,7 @@ This action is used to retrieves a list of persistent disks contained within the
 |Order By|string|None|False|Sorts list results by a certain order|None|
 |Page Token|string|None|False|Set pageToken to the nextPageToken returned by a previous list request to get the next page of results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -33,11 +69,11 @@ This action is used to retrieves a list of persistent disks contained within the
 |Self Link|string|True|Server-defined url for this resource|
 |Next Page Token|string|True|This token allows you to get the next page of results for list requests|
 
-### Attach Disk
+#### Attach Disk
 
 This action is used to attaches an existing disk resource to an instance.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -46,7 +82,7 @@ This action is used to attaches an existing disk resource to an instance.
 |Instance|string|None|True|Name of the instance resource to stop|None|
 |Source|string|None|True|Specifies a valid partial or full url to an existing persistent disk resource|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -73,11 +109,11 @@ This action is used to attaches an existing disk resource to an instance.
 |Error|string|False|If errors are generated during processing of the operation, this field will be populated|
 |End Time|string|False|The time that this operation was completed|
 
-### Detach Disk
+#### Detach Disk
 
 This action is used to detaches a disk from an instance.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -86,7 +122,7 @@ This action is used to detaches a disk from an instance.
 |Instance|string|None|True|Name of the instance resource to stop|None|
 |Device Name|string|None|True|Disk device name to detach|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -113,11 +149,11 @@ This action is used to detaches a disk from an instance.
 |Error|string|False|If errors are generated during processing of the operation, this field will be populated|
 |End Time|string|False|The time that this operation was completed|
 
-### Snapshot Disk
+#### Snapshot Disk
 
 This action is used to creates a snapshot of a specified persistent disk.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -136,7 +172,7 @@ This action is used to creates a snapshot of a specified persistent disk.
 |Snapshot Encryption Key|snapshotEncryptionKey|None|False|Encrypts the snapshot|None|
 |Source Disk Encryption Key|snapshotEncryptionKey|None|False|The customer-supplied encryption key of the source disk|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -163,11 +199,11 @@ This action is used to creates a snapshot of a specified persistent disk.
 |Error|string|False|If errors are generated during processing of the operation, this field will be populated|
 |End Time|string|False|The time that this operation was completed|
 
-### List Snapshots
+#### List Snapshots
 
 This action is used to retrieves the list of Snapshot resources contained within the specified project.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -177,7 +213,7 @@ This action is used to retrieves the list of Snapshot resources contained within
 |Order By|string|None|False|Sorts list results by a certain order|None|
 |Page Token|string|None|False|Set pageToken to the nextPageToken returned by a previous list request to get the next page of results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -186,18 +222,18 @@ This action is used to retrieves the list of Snapshot resources contained within
 |items|[]item_snapshot|True|A list of snapshot resources|
 |Self Link|string|False|Server-defined url for this resource|
 
-### Delete Snapshots
+#### Delete Snapshots
 
 This action is used to deletes the specified snapshot resource.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |Project Id|string|None|True|ProjectID for this request|None|
 |Snapshot|string|None|True|Name of the snapshot resource to delete|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -224,18 +260,18 @@ This action is used to deletes the specified snapshot resource.
 |Error|string|False|If errors are generated during processing of the operation, this field will be populated|
 |End Time|string|False|The time that this operation was completed|
 
-### Get Firewall
+#### Get Firewall
 
 This action is used to get firewall.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |Project Id|string|None|True|ProjectID for this request|None|
 |Firewall|string|None|True|Name of the firewall rule to return|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -251,11 +287,11 @@ This action is used to get firewall.
 |Allowed|[]allowed|False|The list of allow rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a permitted connection|
 |Creation Timestamp|string|False|Creation Timestamp|
 
-### Insert Firewall
+#### Insert Firewall
 
 This action is used to creates a firewall rule in the specified project using the data included in the request.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -272,7 +308,7 @@ This action is used to creates a firewall rule in the specified project using th
 |Target Tags|[]string|None|False|A list of instance tags indicating sets of instances located in the network that may make network connections as specified in allowed[]|None|
 |Creation Timestamp|string|None|False|Creation Timestamp|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -299,11 +335,11 @@ This action is used to creates a firewall rule in the specified project using th
 |Error|string|False|If errors are generated during processing of the operation, this field will be populated|
 |End Time|string|False|The time that this operation was completed|
 
-### List Firewalls
+#### List Firewalls
 
 This action is used to retrieves a list of persistent disks contained within the specified zone.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -313,7 +349,7 @@ This action is used to retrieves a list of persistent disks contained within the
 |Order By|string|None|False|Sorts list results by a certain order|None|
 |Page Token|string|None|False|Set pageToken to the nextPageToken returned by a previous list request to get the next page of results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -323,11 +359,11 @@ This action is used to retrieves a list of persistent disks contained within the
 |Self Link|string|True|Server-defined url for the resource|
 |Next Page Token|string|False|This token allows you to get the next page of results for list requests|
 
-### Update Firewall
+#### Update Firewall
 
 This action is used to updates the specified firewall rule with the data included in the request.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -345,7 +381,7 @@ This action is used to updates the specified firewall rule with the data include
 |Target Tags|[]string|None|False|A list of instance tags indicating sets of instances located in the network that may make network connections as specified in allowed[]|None|
 |Creation Timestamp|string|None|False|Creation Timestamp|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -372,18 +408,18 @@ This action is used to updates the specified firewall rule with the data include
 |Error|string|False|If errors are generated during processing of the operation, this field will be populated|
 |End Time|string|False|The time that this operation was completed|
 
-### Delete Firewall
+#### Delete Firewall
 
 This action is used to deletes the specified firewall.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |Project Id|string|None|True|ProjectID for this request|None|
 |Firewall|string|None|True|Name of the firewall rule to delete|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -410,11 +446,11 @@ This action is used to deletes the specified firewall.
 |Error|string|False|If errors are generated during processing of the operation, this field will be populated|
 |End Time|string|False|The time that this operation was completed|
 
-### List Instances
+#### List Instances
 
 This action is used to retrieves the list of instances contained within the specified zone.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -425,7 +461,7 @@ This action is used to retrieves the list of instances contained within the spec
 |Order By|string|None|False|Sorts list results by a certain order|None|
 |Page Token|string|None|False|Set pageToken to the nextPageToken returned by a previous list request to get the next page of results|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -434,11 +470,11 @@ This action is used to retrieves the list of instances contained within the spec
 |Items|[]items_instance|True|A list of instances|
 |Self Link|string|True|The unique identifier for the resource. This identifier is defined by the server|
 
-### Stop Instance
+#### Stop Instance
 
 This action is used to stops a running instance, shutting it down cleanly, and allows you to restart the instance at a later time.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -446,7 +482,7 @@ This action is used to stops a running instance, shutting it down cleanly, and a
 |Zone|string|None|True|The name of the zone for this request|None|
 |Instance|string|None|True|Name of the instance resource to stop|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -473,11 +509,11 @@ This action is used to stops a running instance, shutting it down cleanly, and a
 |Error|string|False|If errors are generated during processing of the operation, this field will be populated|
 |End Time|string|False|The time that this operation was completed|
 
-### Start Instance
+#### Start Instance
 
 This action is used to starts an instance.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -485,7 +521,7 @@ This action is used to starts an instance.
 |Zone|string|None|True|The name of the zone for this request|None|
 |Instance|string|None|True|Name of the instance resource to stop|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -512,55 +548,31 @@ This action is used to starts an instance.
 |Error|string|False|If errors are generated during processing of the operation, this field will be populated|
 |End Time|string|False|The time that this operation was completed|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin requires network access to the Google Cloud Compute Engine API.
-
-1. Log into [https://console.cloud.google.com/compute](https://console.cloud.google.com/compute)
-2. Click the hamburger (stacked parallel lines) in the top left
-3. Click API & Services and then click Credentials
-4. Click Create Credentials and select Service Account Key
-5. Select a service account or create a new one
-6. Select JSON and click Create to download
-7. Use information in JSON file in Connection parameters below
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|private_key|credential_asymmetric_key|None|True|Private key from service credentials|None|
-|token_uri|string|https\://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
-|auth_provider_x509_cert_url|string|https\://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
-|auth_uri|string|https\://accounts.google.com/o/oauth2/auth|True|None|None|
-|host|string|https\://www.googleapis.com/compute/|True|Google Cloud Compute Server|None|
-|version|string|v1|True|API Version|None|
-|client_email|string|None|True|Client email from service credentials|None|
-|client_id|string|None|True|Client ID|None|
-|project_id|string|None|True|Project ID from service credentials|None|
-|client_x509_cert_url|string|None|True|x509 cert URL from service credentials|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Error values use the standard HTTP codes (200 OK, 404 Not Found, etc)
 
-## Workflows
+# Version History
 
-Examples:
-
-* User deprovisioning
-* Project management
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
-* 2.0.0 - Rename action titles to conform to style
+* 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - Fix typo in plugin spec
+* 2.0.0 - Rename action titles to conform to style
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Google Cloud](https://cloud.google.com/)
 * [Google Compute Engine](https://cloud.google.com/compute/docs/)
+

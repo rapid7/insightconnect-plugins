@@ -1,23 +1,45 @@
-
-# Joe Sandbox
-
-## About
+# Description
 
 [Joe Sandbox](https://www.joesecurity.org) executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities.
 
 This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances and utilizes the [Joe Sandbox API](https://github.com/joesecurity/jbxapi).
 
-## Actions
+# Key Features
 
-### List Countries
+* File Analysis
+* Threat Detection
+
+# Requirements
+
+* API Key
+* Sandbox server
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|https\://jbxcloud.joesecurity.org/api|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http\://example.com/joesandbox/index.php/api|None|
+|api_key|credential_secret_key|None|True|API key generated for Joe Sandbox user|None|
+
+The default setting is to use Joe Sandbox Cloud URL at `https://jbxcloud.joesecurity.org/api`. If you have a Sandbox at a different location such as hosting an on-premise instance, set the `url` field to your instance with the following URL format of `http://example.com/joesandbox/index.php/api`.
+
+## Technical Details
+
+### Actions
+
+#### List Countries
 
 This action is used to retrieve a list of localized internet anonymization countries.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -44,17 +66,17 @@ Example output:
 }
 ```
 
-### Search Analysis
+#### Search Analysis
 
 This action is used to list the web IDs of the analyses that match the given query. Searches in MD5, SHA1, SHA256, filename, cookbook name, comment, URL and report ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|String to search for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -75,15 +97,15 @@ Example output:
 }
 ```
 
-### Get Server Info
+#### Get Server Info
 
 This action is used to query information about the server.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -97,15 +119,15 @@ Example output:
 }
 ```
 
-### Check Server Status
+#### Check Server Status
 
 This action is used to check if Joe Sandbox is online or in maintenance mode.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -119,11 +141,11 @@ Example output:
 }
 ```
 
-### Submit Sample URL
+#### Submit Sample URL
 
 This action is used to submit a sample at a given URL for analysis and return the associated web IDs for the sample.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -131,7 +153,7 @@ This action is used to submit a sample at a given URL for analysis and return th
 |additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|
 |parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -147,15 +169,15 @@ Example output:
 }
 ```
 
-### List Analyses
+#### List Analyses
 
 This action is used to fetch a list of all analyses.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -182,15 +204,15 @@ Example output:
 }
 ```
 
-### List Keyboard Layouts
+#### List Keyboard Layouts
 
 This action is used to retrieve a list of available keyboard layouts for Windows analyzers.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -217,11 +239,11 @@ Example output:
 }
 ```
 
-### Submit URL
+#### Submit URL
 
 This action is used to submit a website for analysis and return the associated web IDs for the sample.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -229,7 +251,7 @@ This action is used to submit a website for analysis and return the associated w
 |additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|
 |parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -245,11 +267,11 @@ Example output:
 }
 ```
 
-### Download Analysis
+#### Download Analysis
 
 This action is used to download a resource for an analysis. This can be a full report, binaries, screenshots. The full list of resources can be found in the API documentation.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -257,7 +279,7 @@ This action is used to download a resource for an analysis. This can be a full r
 |type|string|html|False|The report type, e.g. 'html', 'bins'|['html', 'lighthtml', 'executive', 'pdf', 'classhtml', 'xml', 'lightxml', 'classxml', 'clusterxml', 'irxml', 'json', 'jsonfixed', 'lightjson', 'lightjsonfixed', 'irjson', 'irjsonfixed', 'shoots', 'ishots', 'openioc', 'maec', 'misp', 'graphreports', 'memstrings', 'binstrings', 'sample', 'cookbook', 'bins', 'unpackpe', 'unpack', 'ida', 'pcap', 'pcapslim', 'memdumps', 'yara']|
 |webid|string|None|True|The web ID of the analysis|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -273,11 +295,11 @@ Example output:
 }
 ```
 
-### Submit Sample
+#### Submit Sample
 
 This action is used to submit a sample for analysis and return the associated web IDs for the sample.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -286,7 +308,7 @@ This action is used to submit a sample for analysis and return the associated we
 |parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. In case the `cookbook` option is used, most other options are silently ignored since they can be specified inside the cookbook|None|
 |additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -302,15 +324,15 @@ Example output:
 }
 ```
 
-### List Systems
+#### List Systems
 
 This action is used to retrieve a list of systems on the server.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -343,15 +365,15 @@ Example output:
 }
 ```
 
-### Get Account Info
+#### Get Account Info
 
 This action is used to query information about Joe Sandbox user account.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -378,11 +400,11 @@ Example output:
 }
 ```
 
-### Submit Cookbook
+#### Submit Cookbook
 
 This action is used to submit a cookbook for analysis and return the associated web IDs for the cookbook.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -390,7 +412,7 @@ This action is used to submit a cookbook for analysis and return the associated 
 |parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0|None|
 |additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -406,17 +428,17 @@ Example output:
 }
 ```
 
-### Get Analysis Info
+#### Get Analysis Info
 
 This action is used to show the status and most important attributes of an analysis.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |webid|string|None|True|The web ID of the analysis|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -446,17 +468,17 @@ Example output:
 }
 ```
 
-### Delete Analysis
+#### Delete Analysis
 
 This action is used to delete an analysis.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |webid|string|None|True|The web ID of the analysis|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -470,35 +492,24 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|https\://jbxcloud.joesecurity.org/api|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http\://example.com/joesandbox/index.php/api|None|
-|api_key|credential_secret_key|None|True|API key generated for Joe Sandbox user|None|
-
-The default setting is to use Joe Sandbox Cloud URL at `https://jbxcloud.joesecurity.org/api`. If you have a Sandbox at a different location such as hosting an on-premise instance, set the `url` field to your instance with the following URL format of `http://example.com/joesandbox/index.php/api`.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Analyzing files
-* Checking websites for malicious content
+# Links
 
 ## References
 
@@ -506,3 +517,4 @@ Examples:
 * [Joe Sandbox API](https://jbxcloud.joesecurity.org/userguide?sphinxurl=usage%2Fwebapi.html)
 * [Joe Sandbox API wrapper](https://github.com/joesecurity/jbxapi)
 * [Report formats](https://jbxcloud.joesecurity.org/userguide?sphinxurl=usage/reportformats.html)
+

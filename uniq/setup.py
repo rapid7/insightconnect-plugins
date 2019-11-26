@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='uniq-rapid7-plugin',
-      version='1.0.1',
-      description='Filter out repeated lines or items',
+      version='1.0.2',
+      description='Uniq removes redundant lines or items from data. Using the Uniq plugin can allow users to deduplicate datasets or items prior to processing within a workflow',
       author='rapid7',
       author_email='',
       url='',

@@ -1,7 +1,4 @@
-
-# HTML
-
-## About
+# Description
 
 Utility plugin to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are:
 
@@ -10,119 +7,136 @@ Utility plugin to convert an HTML document into a variety of formats using [pypa
 * Markdown
 * PDF
 * HTML5
+* Plain Text
 
-## Actions
+# Key Features
 
-### Windows Document
+* Convert HTML into another format
+
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Windows Document
 
 This action is used to convert an HTML document to DOCX.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |doc|string|None|True|Document to transform|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |docx|bytes"|False|Docx File|
 
-### Markdown
+#### Markdown
 
 This action is used to convert an HTML document to Markdown.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |doc|string|None|True|Document to transform|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |markdown_contents|string|False|Markdown Contents|
 |markdown_file|bytes|False|Markdown File|
 
-### HTML5
+#### HTML5
 
 This action is used to convert an HTML document to HTML5.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |doc|string|None|True|Document to transform|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |html5_file|bytes|False|HTML5 File|
 |html5_contents|string|False|HTML5 Contents|
 
-### PDF
+#### PDF
 
 This action is used to convert an HTML document to PDF.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |doc|string|None|True|Document to transform|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |pdf|bytes"|False|PDF File|
 
-### Validate
+#### Validate
 
 This action is used to validate an HTML document using the [W3 validator](https://validator.w3.org).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |html_contents|string|None|True|HTML Contents|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |validated|boolean|False|HTML Syntax Validation Status|
 
-### EPUB
+#### EPUB
 
 This action is used to convert an HTML document to EPUB.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |doc|string|None|True|Document to transform|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |epub|bytes"|False|epub File|
 
-### Text
+#### Text
 
 This action is used to strip an HTML string of all tags and return only the text.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |doc|string|None|True|Document to transform|None|
 |remove_scripts|boolean|None|False|Remove non-HTML scripts from the document|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -136,33 +150,29 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Account validation
-* Intelligence
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
-* 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
-* 1.1.0 - New action: Text
+* 1.2.1 - New spec and help.md format for the Hub
 * 1.2.0 - Update to add the Remove Scripts option to Text
+* 1.1.0 - New action: Text
+* 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 

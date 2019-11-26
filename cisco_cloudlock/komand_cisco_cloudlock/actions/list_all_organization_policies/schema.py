@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all of an organizations configured policies"
+
+
 class Input:
     LIMIT = "limit"
     OFFSET = "offset"

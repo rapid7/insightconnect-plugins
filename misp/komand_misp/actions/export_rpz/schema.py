@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Export RPZ zone files"
+
+
 class Input:
     EVENT_ID = "event_id"
     FROM = "from"

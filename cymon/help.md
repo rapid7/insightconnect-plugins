@@ -1,26 +1,51 @@
-
-# Cymon
-
-## About
+# Description
 
 [Cymon](https://cymon.io/) is the largest open tracker of malware, phishing, botnets, spam, and more.
 This plugin utilizes the Cymon public API and implements all its available lookups.
 
 **NOTE:** The Cymon service will be discontinued on April 30, 2019. Please plan to transition off this plugin before then.
 
-## Actions
+# Key Features
 
-### Domain Lookup
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|https\://cymon.io\:443|False|API URL|None|
+|api_key|credential_secret_key|None|False|API Token (Empty for unauthenticated access)|None|
+
+The connection configuration asks for an API Token and Server. The API Token field is not required,
+since Cymon currently allows anonymous access but with a rate limit. For authenticated access, supply the token to allow for more requests.
+A default value is provided for the server and should be used unless the Cymon API URL changes.
+
+## Technical Details
+
+### Actions
+
+#### Domain Lookup
 
 This action is used to look up a domain name.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -80,7 +105,7 @@ Example output:
 
 ```
 
-### Domain Blacklist
+#### Domain Blacklist
 
 This action can be used to retrieve a user defined count of blacklisted domains based on one of the following threat categories:
 
@@ -92,7 +117,7 @@ This action can be used to retrieve a user defined count of blacklisted domains 
 * blacklist
 * dnsbl
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -100,7 +125,7 @@ This action can be used to retrieve a user defined count of blacklisted domains 
 |limit|integer|10|True|Number of Results, 1-5000|None|
 |days|integer|None|True|Age of Data in Days|[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -142,11 +167,11 @@ Example output:
 
 ```
 
-### Address Blacklist
+#### Address Blacklist
 
 This action is used to retrieve blacklisted addresses.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -154,7 +179,7 @@ This action is used to retrieve blacklisted addresses.
 |limit|integer|10|True|Number of Results, 1-5000|None|
 |days|integer|None|True|Age of Data in Days|[1, 2, 3]|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -196,17 +221,17 @@ Example output:
 
 ```
 
-### URL Lookup
+#### URL Lookup
 
 This action is used to look up a URL.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|Full URL E.g. http\://faker.su/data/entry/steam/Steam.exe|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -242,17 +267,17 @@ Example output:
 
 ```
 
-### Address Lookup
+#### Address Lookup
 
 This action is used to lookup an IP address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|IP Address|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -291,9 +316,9 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
-### Poll Domain Blacklist
+#### Poll Domain Blacklist
 
 This trigger is used to poll for a user defined count of blacklisted domains based on one of the following threat categories:
 
@@ -305,7 +330,7 @@ This trigger is used to poll for a user defined count of blacklisted domains bas
 * blacklist
 * dnsbl
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -314,7 +339,7 @@ This trigger is used to poll for a user defined count of blacklisted domains bas
 |days|integer|None|True|Age of Data in Days|[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]|
 |tag|string|None|True|Tag|['blacklist', 'malware', 'botnet', 'spam', 'phishing', 'malicious activity', 'dnsbl']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -338,7 +363,7 @@ Example output:
 
 ```
 
-### Poll Address Blacklist
+#### Poll Address Blacklist
 
 This trigger is used to poll for a user defined count of blacklisted IP addresses based on one of the following threat categories:
 
@@ -352,7 +377,7 @@ This trigger is used to poll for a user defined count of blacklisted IP addresse
 
 The poll frequency can be set by the user but its default value is 5 minutes.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -361,7 +386,7 @@ The poll frequency can be set by the user but its default value is 5 minutes.
 |days|integer|None|True|Age of Data in Days|[1, 2, 3]|
 |tag|string|None|True|Tag|['blacklist', 'malware', 'botnet', 'spam', 'phishing', 'malicious activity', 'dnsbl']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -401,25 +426,16 @@ Example output:
 
 ```
 
-#### Notes
+##### Notes
 
 One limitation of this trigger is that subsequent jobs may contain the same domains from previous requests.
 The results will not be unique unless the user requested count of domains has been updated by count number of entries by Cymon.
 To help reduce non-unique domains in subsequent requests, we recommend choosing a lower count value such as 5 or less and a
 longer frequency such as 30 minutes. This may allow enough time to pass so that the next request of domains have been updated by Cymon.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|https\://cymon.io\:443|False|API URL|None|
-|api_key|credential_secret_key|None|False|API Token (Empty for unauthenticated access)|None|
-
-The connection configuration asks for an API Token and Server. The API Token field is not required,
-since Cymon currently allows anonymous access but with a rate limit. For authenticated access, supply the token to allow for more requests.
-A default value is provided for the server and should be used unless the Cymon API URL changes.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -427,25 +443,21 @@ Too large a count (such as 1000 or greater) for the blacklist actions and trigge
 It's recommended to request a lower number of items. It's unclear what the maximum count number is from the API,
 the count range 1-2000 has been tested and verified working by us.
 
-## Workflows
+# Version History
 
-Examples:
-
-* [Basic Domain Enrichment](https://market.komand.com/snippets/jschipp/basic-domain-enrichment-report/0.1.0)
-* [Chatops Domain and IP Investigation](https://market.komand.com/workflows/komand/chatops-investigate/0.1.0)
-* Intelligence
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - Use password type for token, documentation updates
-* 0.1.2 - SSL bug fix in SDK
-* 0.1.3 - Update to v2 Python plugin architecture
-* 0.1.4 - Bug fix for CI tool incorrectly uploading plugins
-* 1.0.0 - Support web server mode
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Add discontinuation of Cymon notice
+* 1.0.0 - Support web server mode
+* 0.1.4 - Bug fix for CI tool incorrectly uploading plugins
+* 0.1.3 - Update to v2 Python plugin architecture
+* 0.1.2 - SSL bug fix in SDK
+* 0.1.1 - Use password type for token, documentation updates
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Cymon](https://cymon.io/)
 * [Cymon API](http://docs.cymon.io/)
+

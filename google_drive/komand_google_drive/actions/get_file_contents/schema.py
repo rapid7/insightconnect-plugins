@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get the contents of a file on Google Drive"
+
+
 class Input:
     FILE_ID = "file_id"
     MIME_TYPE = "mime_type"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a Repository"
+
+
 class Input:
     DESCRIPTION = "description"
     HAS_ISSUES = "has_issues"

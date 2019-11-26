@@ -1,0 +1,23 @@
+{
+	"spec": "046dd2814a7722e18c1f26af9e1ee9b2",
+	"manifest": "88c5cc6a5967a0affabb3d36d8e4560d",
+	"setup": "6864f3f3dbed8de9c76436f9b80c096a",
+	"schemas": [
+		{
+			"identifier": "submit_descriptors/schema.py",
+			"hash": "beb620f9d2db69980f944ac8764c7c43"
+		},
+		{
+			"identifier": "threat_descriptors/schema.py",
+			"hash": "3d94f82d4addf73b9fa714c685fe5e00"
+		},
+		{
+			"identifier": "threat_indicators/schema.py",
+			"hash": "035fae0c85c87e7c7a40ace841e112b3"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "21ada5fcb198c78d50ca1731b006cede"
+		}
+	]
+}

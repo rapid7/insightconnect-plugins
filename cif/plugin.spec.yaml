@@ -1,20 +1,24 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: cif
 title: Collective Intelligence Framework
 vendor: rapid7
 support: community
 status: []
-description: CIF is a cyber threat intelligence management system
-version: 2.0.0
+description: This plugin is used to manage an instance of Collective Intelligence Framework service
+version: 2.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cif
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - cif
 - intel
 - indicator
+hub_tags:
+  use_cases: [soar, threat_intel, soc_automation, threat_detection_and_response]
+  keywords: [cif, intel, indicator]
+  features: []
 types:
   peers:
     asn:

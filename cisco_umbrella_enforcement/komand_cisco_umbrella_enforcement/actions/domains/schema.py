@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gather the lists of domains already added to the shared customer's domain list"
+
+
 class Input:
     pass
 
@@ -43,8 +47,8 @@ class DomainsOutput(komand.Output):
     }
   },
   "required": [
-    "meta",
-    "data"
+    "data",
+    "meta"
   ],
   "definitions": {
     "data": {
@@ -71,8 +75,8 @@ class DomainsOutput(komand.Output):
         }
       },
       "required": [
-        "lastSeenAt",
         "ID",
+        "lastSeenAt",
         "name"
       ]
     },
@@ -107,9 +111,9 @@ class DomainsOutput(komand.Output):
       },
       "required": [
         "limit",
-        "prev",
         "next",
-        "page"
+        "page",
+        "prev"
       ]
     }
   }

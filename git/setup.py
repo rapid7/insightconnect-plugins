@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='git-rapid7-plugin',
-      version='1.0.0',
-      description='Git is a free and open source distributed version control system',
+      version='1.0.1',
+      description='Git plugin allows you to add, remove and commit files to Git repository',
       author='rapid7',
       author_email='',
       url='',

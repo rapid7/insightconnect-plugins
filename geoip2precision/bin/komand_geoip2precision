@@ -6,8 +6,8 @@ from komand_geoip2precision import connection, actions, triggers
 
 Name = 'GeoIP2 Precision'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'MaxMind service that offers industry-leading IP intelligence data'
+Version = '1.0.1'
+Description = 'GeoIP2 Precision is a MaxMind service that offers industry-leading IP intelligence data. Users of the GeoIP2 Precision plugin for Rapid7 InsightConnect can use it to geolocate IP addresses'
 
 
 class ICONGeoip2precision(komand.Plugin):

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve a binary by its MD5 Hash"
+
+
 class Input:
     HASH = "hash"
     

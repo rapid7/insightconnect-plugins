@@ -1,22 +1,41 @@
-# Hippocampe
+# Description
 
-## About
-
-[Hippocampe](https://github.com/TheHive-Project/Hippocampe) is a threat feed aggregator, which creates a threat feed memory and allows queries through a REST API or from a Web UI.
+[Hippocampe](https://github.com/TheHive-Project/Hippocampe) is a threat feed aggregator, which creates a threat feed memory and allows queries through a REST API or from a Web UI. Hippocampe aggregates feeds from the Internet in an Elasticsearch cluster. It has a REST API which allows to search into its 'memory'. It is based on a Python script which fetchs URLs corresponding to feeds, parses and indexes them. The Hippocampe plugin allows for advanced queries and management of your Hippocampe feeds.
 
 This plugin utilizes the [Hippocampe API](https://github.com/TheHive-Project/Hippocampe/blob/master/docs/api_guide.md).
 
-## Actions
+# Key Features
 
-### Jobs
+* Query Hippocampe for new threats
+* Manage Hippocampe feeds
+
+# Requirements
+
+* A Hippocampe instance
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|Address of a working Hippocampe instance, including the port number (e.g. https\://10.0.0.2\:5000)|None|
+
+## Technical Details
+
+### Actions
+
+#### Jobs
 
 This action is used to return every report generated at the end of the indexing process.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -36,15 +55,15 @@ Example output:
 }
 ```
 
-### Sources
+#### Sources
 
 This action is used to return all the known sources with their metadata.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -89,15 +108,15 @@ Example output:
 }
 ```
 
-### Monitor Sources
+#### Monitor Sources
 
 This action is used to return merged results from freshness, last_query, sched_report, size_by_source.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -126,15 +145,15 @@ Example output:
 }
 ```
 
-### Last Status
+#### Last Status
 
 This action is used to check if the indexation went well.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -151,15 +170,15 @@ Example output:
 }
 ```
 
-### New
+#### New
 
 This action is used to return all elements with Hippocampe/new.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -173,15 +192,15 @@ Example output:
 }
 ```
 
-### Scheduled Report
+#### Scheduled Report
 
 This action is used to check if an indexation has been launched within threshold (by default 12 days, can be changed in Hippocampe/core/conf/hippo/hippo.conf).
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -208,15 +227,15 @@ Example output:
 }
 ```
 
-### Last Query
+#### Last Query
 
 This action is used to return the last query date for every source.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -243,17 +262,17 @@ Example output:
 }
 ```
 
-### Distinct
+#### Distinct
 
 This action is used to return all distinct values that match the given intelligence types.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |intelligence_types|[]string|None|True|Intelligence types, e.g. 'ip' or 'url'|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -274,15 +293,15 @@ Example output:
 }
 ```
 
-### Freshness
+#### Freshness
 
 This action is used to check if the feeds are up to date. A threshold can be defined in Hippocampe/core/conf/hippo/hippo.conf (by default 1 day).
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -313,17 +332,17 @@ Example output:
 }
 ```
 
-### Hipposcore
+#### Hipposcore
 
 This action is used to return a score for each of the given observables. The score is ranged between 0 and -100 (0 = observable unknown, -100 = super evil observable).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |observables|[]observable|None|True|Observables to score|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -346,15 +365,15 @@ Example output:
 }
 ```
 
-### Size by Source
+#### Size by Source
 
 This action is used to return the size (number of elements) for every source.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -385,17 +404,17 @@ Example output:
 }
 ```
 
-### Hipposched
+#### Hipposched
 
 This action is used to schedule the launch of shadowbook (for automatic indexation).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |time|string|None|True|Job frequency in crontab syntax, e.g. `* */12 * * *`|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -409,15 +428,15 @@ Example output:
 }
 ```
 
-### Size by Type
+#### Size by Type
 
 This action is used to return the size (number of elements) for every type.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -444,15 +463,15 @@ Example output:
 }
 ```
 
-### Shadowbook
+#### Shadowbook
 
 This action is used to return the current job ID and status. If the service is indexing at the moment, this action will raise an error.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -468,15 +487,15 @@ Example output:
 }
 ```
 
-### Type
+#### Type
 
 This action is used to return all the known types.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -494,17 +513,17 @@ Example output:
 }
 ```
 
-### More
+#### More
 
 This action is used to return intelligence about given observables.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |observables|[]observable|None|True|Observables to get intelligence about|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -543,34 +562,27 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|Address of a working Hippocampe instance, including the port number (e.g. https\://10.0.0.2\:5000)|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Scheduling indexation for given time
-* Analyzing potentially malicious URLs
+# Links
 
 ## References
 
 * [Hippocampe](https://github.com/TheHive-Project/Hippocampe)
 * [Hippocampe API](https://github.com/TheHive-Project/Hippocampe/blob/master/docs/api_guide.md)
+

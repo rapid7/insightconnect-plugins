@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get policies"
+
+
 class Input:
     FIELDS = "fields"
     
@@ -58,8 +62,8 @@ class GetPoliciesOutput(komand.Output):
     }
   },
   "required": [
-    "policies",
-    "count"
+    "count",
+    "policies"
   ]
 }
     """)

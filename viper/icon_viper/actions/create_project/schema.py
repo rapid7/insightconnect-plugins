@@ -24,6 +24,7 @@ class CreateProjectInput(komand.Input):
     "name": {
       "type": "string",
       "title": "New Project",
+      "description": "New project",
       "order": 1
     }
   },
@@ -46,6 +47,7 @@ class CreateProjectOutput(komand.Output):
     "project": {
       "$ref": "#/definitions/Project",
       "title": "Project",
+      "description": "Project",
       "order": 1
     }
   },

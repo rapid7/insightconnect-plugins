@@ -1,18 +1,39 @@
+# Description
 
-# DomainTools
+[DomainTools](https://www.domaintools.com) data and products work in harmony to enable security teams to start getting ahead of attacks, gain context and visibility into potential threats, and lower the skills barrier. The DomainTools plugin for InsightConnect allows for the automation of domain lookups and retrieval of threat information related to the domain.
 
-## About
-
-[DomainTools](https://www.domaintools.com) data and products work in harmony to enable security teams to start getting ahead of attacks, gain context and visibility into potential threats, and lower the skills barrier.
 This plugin utilizes the [DomainTools Python API](https://github.com/domaintools/python_api).
 
-## Actions
+# Key Features
 
-### Brand Monitor
+* Whois
+* Domain search
+* Brand monitor
+
+# Requirements
+
+* Requires an API Key from DomainTools
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|username|string|None|False|Enter the API username|None|
+|key|credential_token|None|True|Enter the API key|None|
+
+## Technical Details
+
+### Actions
+
+#### Brand Monitor
 
 This action is used to search across all new domain registrations worldwide.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -22,7 +43,7 @@ This action is used to search across all new domain registrations worldwide.
 |exclude|string|None|False|Domain names with these words will be excluded from the result set. Separate multiple terms with the pipe character|None|
 |domain_status|string|None|False|Sets the scope of domain names to search|['new', 'on-hold']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -69,11 +90,11 @@ Example output:
 
 ```
 
-### IP Monitor
+#### IP Monitor
 
 This action is used to retrieve the daily activity of all our monitored TLDs on any given IP address
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -81,7 +102,7 @@ This action is used to retrieve the daily activity of all our monitored TLDs on 
 |days_back|integer|0|False|Use this parameter when you need to search domains registered up to six days prior to the current date| [1, 2, 3, 4, 5, 6]|
 |page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -105,11 +126,11 @@ Example output:
 
 ```
 
-### Name Server Monitor
+#### Name Server Monitor
 
 This action is used to search the daily activity of all our monitored TLDs on any given name server
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -117,7 +138,7 @@ This action is used to search the daily activity of all our monitored TLDs on an
 |days_back|integer|0|False|Use this parameter when you need to search domains registered up to six days prior to the current date| [1, 2, 3, 4, 5, 6]|
 |page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -154,11 +175,11 @@ Example output:
 
 ```
 
-### Domain Search
+#### Domain Search
 
 This action is used to search for domain names that match your specific search string
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -174,7 +195,7 @@ This action is used to search for domain names that match your specific search s
 |anchor_right|boolean|False|Fase|Return only domains that end with the query term|None|
 |page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -206,17 +227,17 @@ Example output:
 
 ```
 
-### Domain Profile
+#### Domain Profile
 
 This action is used to provide basic domain name registration details and a preview of additional data
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|False|Domain name you wish to query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -310,17 +331,17 @@ Example output:
 
 ```
 
-### Hosting History
+#### Hosting History
 
 This action is used to provide a list of changes that have occurred in a Domain Names registrar, IP address, and name servers
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain name you wish to query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -377,17 +398,17 @@ Example output:
 
 ```
 
-### Reputation
+#### Reputation
 
 This action is used to retrieve reputation score of specified domain name.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Input domain for which the risk score is desired|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -406,17 +427,17 @@ Example output:
 
 ```
 
-### Parsed WHOIS
+#### Parsed WHOIS
 
 This action is used to provide parsed information extracted from the raw WHOIS record
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain name you wish to query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -547,11 +568,11 @@ Example output:
 
 ```
 
-### Registrant Monitor
+#### Registrant Monitor
 
 This action is used to search the ownership (WHOIS) records of domain names for specific search terms.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -560,7 +581,7 @@ This action is used to search the ownership (WHOIS) records of domain names for 
 |exclude|string|None|False|Domain names with these words will be excluded from the result set. Separate multiple terms with the pipe character|None|
 |limit|integer|None|False|Limit the number of matched domain names that are returned in your result set|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -582,17 +603,17 @@ Example output:
 
 ```
 
-### Reverse IP
+#### Reverse IP
 
 This action is used to provide a list of domain names that share the same Internet host (i.e. the same IP address)
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain name you wish to query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -621,11 +642,11 @@ Example output:
 
 ```
 
-### Reverse IP WHOIS
+#### Reverse IP WHOIS
 
 This action is used to provide a list of IP ranges that are owned by an Organization.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -636,7 +657,7 @@ This action is used to provide a list of IP ranges that are owned by an Organiza
 |include_total_count|boolean|False|False|Returns the total number of results for a query|None|
 |page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -664,11 +685,11 @@ Example output:
 
 ```
 
-### Reverse WHOIS
+#### Reverse WHOIS
 
 This action is used to provide a list of domain names that share the same Registrant Information
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -677,7 +698,7 @@ This action is used to provide a list of domain names that share the same Regist
 |scope|string|None|False|Sets the scope of the report to include only current WHOIS records, or to include both current and historic records|None|
 |mode|string|None|False|quote only lists the size and retail price of the query whiles purchase includes the complete list of domain names|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -706,17 +727,17 @@ Example output:
 
 ```
 
-### WHOIS
+#### WHOIS
 
 This action is used to provide the ownership record for a domain name or IP address with basic registration details
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|True|Domain name or an IP address to perform a whois lookup|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -759,17 +780,17 @@ Example output:
 
 ```
 
-### WHOIS History
+#### WHOIS History
 
 This action is used to provide a list of historic WHOIS records for a domain name.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain name you wish to query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -827,18 +848,18 @@ Example output:
 
 ```
 
-### Reverse Name Server
+#### Reverse Name Server
 
 This action is used to provide a list of domain names that share the same primary or secondary name server.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain name you wish to query|None|
 |limit|integer|None|False|Limits the size of the domain list than can appear in a response|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -863,37 +884,30 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|False|Enter the API username|None|
-|key|credential_token|None|True|Enter the API key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* [Related Domains](https://market.komand.com/snippets/jschipp/related-domains/0.1.0)
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Bug fix logging credentials
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [DomainTools](https://www.domaintools.com)
 * [DomainTools API](https://www.domaintools.com/resources/api-documentation/)
 * [DomainTools Python API](https://github.com/domaintools/python_api)
+

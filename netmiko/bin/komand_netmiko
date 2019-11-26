@@ -6,8 +6,8 @@ from komand_netmiko import connection, actions, triggers
 
 Name = 'Netmiko'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Network device configuration over SSH'
+Version = '1.0.1'
+Description = 'Netmiko is used to access network devices over SSH'
 
 
 class ICONNetmiko(komand.Plugin):

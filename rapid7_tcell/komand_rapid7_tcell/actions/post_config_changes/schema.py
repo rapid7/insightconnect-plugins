@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Rewrite the app configuration, either in part or in full"
+
+
 class Input:
     APP_ID = "app_id"
     CONFIG = "config"

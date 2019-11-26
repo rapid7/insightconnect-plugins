@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='symantec_bcs-rapid7-plugin',
-      version='1.0.0',
-      description='Upload a suspected infected file or hash to Symantec Security Response',
+      version='1.0.1',
+      description='The Symantec Business Critical Services plugin allows you to submit a file to Symantec Security Response',
       author='rapid7',
       author_email='',
       url='',

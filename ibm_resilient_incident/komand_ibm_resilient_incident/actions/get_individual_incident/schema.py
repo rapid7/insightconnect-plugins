@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets an individual incident"
+
+
 class Input:
     INCIDENT_ID = "incident_id"
     ORGANIZATION_ID = "organization_id"
@@ -32,8 +36,8 @@ class GetIndividualIncidentInput(komand.Input):
     }
   },
   "required": [
-    "organization_id",
-    "incident_id"
+    "incident_id",
+    "organization_id"
   ]
 }
     """)

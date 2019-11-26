@@ -28,8 +28,8 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "twilio_phone_number",
-    "credentials"
+    "credentials",
+    "twilio_phone_number"
   ],
   "definitions": {
     "credential_username_password": {

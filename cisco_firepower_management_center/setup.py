@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='cisco_firepower_management_center-rapid7-plugin',
-      version='1.0.0',
-      description='Firepower Management Center is your administrative nerve center for managing critical Cisco network security solutions',
+      version='1.0.1',
+      description='This plugin utilizes Cisco Firepower Management Center to create a new block URL policy Cisco Firepower Management Center is an administrative nerve center for managing critical Cisco network security solutions',
       author='rapid7',
       author_email='',
       url='',

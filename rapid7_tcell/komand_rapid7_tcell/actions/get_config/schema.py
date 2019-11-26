@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch the configuration with the given ID"
+
+
 class Input:
     APP_ID = "app_id"
     CONFIG_ID = "config_id"

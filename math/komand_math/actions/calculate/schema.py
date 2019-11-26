@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run a calculation"
+
+
 class Input:
     EQUATION = "equation"
     

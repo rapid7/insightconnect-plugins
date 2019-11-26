@@ -1,0 +1,71 @@
+{
+	"spec": "a90f6ce6ab90d61628731c686d946600",
+	"manifest": "5c4784fe32c3827f3382166f73ebc0a2",
+	"setup": "036f4019bd1b2415405739b8f19e1eb4",
+	"schemas": [
+		{
+			"identifier": "acknowledge_detection/schema.py",
+			"hash": "3fa770e7373e6fa70852a13cd7f21bb1"
+		},
+		{
+			"identifier": "create_activity_monitor/schema.py",
+			"hash": "93b47e68f2d775ae9cd0244dbf6114d8"
+		},
+		{
+			"identifier": "deactivate_activity_monitor/schema.py",
+			"hash": "53fa71e06b07d0e1a65bd5dc8a1f00c2"
+		},
+		{
+			"identifier": "get_activity_monitor/schema.py",
+			"hash": "03043356a9f9056430a9984a95154e13"
+		},
+		{
+			"identifier": "get_event/schema.py",
+			"hash": "ff419048cae4e0a9b48d23649874e5bb"
+		},
+		{
+			"identifier": "list_activity_monitors/schema.py",
+			"hash": "5cbd54cea17da161a1f86824478a45aa"
+		},
+		{
+			"identifier": "list_all_activity_monitor_matches/schema.py",
+			"hash": "7e652625962909f799b789fad8dfceee"
+		},
+		{
+			"identifier": "retrieve_indicators/schema.py",
+			"hash": "4ff34ebffbce14f210e6d1dc9733ee7a"
+		},
+		{
+			"identifier": "search_for_endpoint_hostname_usages/schema.py",
+			"hash": "c740c2345c541cb774355bb0562f6f4d"
+		},
+		{
+			"identifier": "search_for_ip_address_usages/schema.py",
+			"hash": "9bf96682d1d1e5491ff3d1f15af1fe1f"
+		},
+		{
+			"identifier": "search_for_mac_address_usages/schema.py",
+			"hash": "17bff14dd76ab07b57abffad6f690cf5"
+		},
+		{
+			"identifier": "update_remediation_state/schema.py",
+			"hash": "fec729a27732c6077923b74fe9a0de15"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "5c26300fdf3064c3ca4e630489b0e19e"
+		},
+		{
+			"identifier": "new_activity_monitor_matches/schema.py",
+			"hash": "8ff6de957071a0e3288224d9338f9b32"
+		},
+		{
+			"identifier": "new_detections/schema.py",
+			"hash": "0447fee05fbac3e66cdd2116b2c89da5"
+		},
+		{
+			"identifier": "new_events/schema.py",
+			"hash": "de4d2480d9a55059c84c8118305907a8"
+		}
+	]
+}

@@ -1,24 +1,44 @@
-
-# Resilient Incident
-
-## About
+# Description
 
 [IBM Resilient](https://www.resilientsystems.com/) is an incident response, orchestration, and automation tool.
 
-## Actions
+# Key Features
 
-### Get Individual Incident
+* Threat Detection
+* Incident Reporting
+
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|password|password|None|False|Password used for login|None|
+|hostname|string|None|False|Hostname for the Resilient application|None|
+|email|string|None|False|Email used for login|None|
+
+## Technical Details
+
+### Actions
+
+#### Get Individual Incident
 
 This action is used to get an individual incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|number|None|True|The organization ID|None|
 |incident_id|number|None|True|The incident ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -129,18 +149,18 @@ Example output:
 
 ```
 
-### Create Incident
+#### Create Incident
 
 This action is used to create an incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|number|None|True|The organization ID|None|
 |incident|object|None|True|The incident to create, in JSON format. Please see the IncidentDTO JSON reference in your Resilient API documentation|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -235,11 +255,11 @@ Example output:
 
 ```
 
-### Create Artifact for Incident
+#### Create Artifact for Incident
 
 This action is used to create a new artifact on an incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -247,7 +267,7 @@ This action is used to create a new artifact on an incident.
 |incident_id|number|None|True|The incident ID|None|
 |artifact|object|None|True|Accepts a IncidentArtifactDTO JSON object. Please see the IncidentArtifactDTO JSON reference in your Resilient API documentation|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -300,11 +320,11 @@ Example output:
 
 ```
 
-### Update Artifact
+#### Update Artifact
 
 This action is used to save changes to an artifact.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -313,7 +333,7 @@ This action is used to save changes to an artifact.
 |artifact_id|number|None|True|The artifact ID|None|
 |artifact|object|None|True|Accepts a IncidentArtifactDTO JSON object. Please see the IncidentArtifactDTO JSON reference in your Resilient API documentation|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -366,18 +386,18 @@ Example output:
 
 ```
 
-### Get Incident Tasks
+#### Get Incident Tasks
 
 This action is used to get the list of tasks for the incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|number|None|True|The organization ID|None|
 |incident_id|number|None|True|The incident ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -441,18 +461,18 @@ Example output:
 
 ```
 
-### Get Artifacts for Incident
+#### Get Artifacts for Incident
 
 This action is used to get the list of artifacts associated with the specified incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|number|None|True|The organization ID|None|
 |incident_id|number|None|True|The incident ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -495,11 +515,11 @@ Example output:
 
 ```
 
-### Patch Incident
+#### Patch Incident
 
 This action is used to patch a single incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -507,7 +527,7 @@ This action is used to patch a single incident.
 |incident_id|number|None|True|The incident ID|None|
 |patch|object|None|True|The incident properties to update, in JSON format. Please see the PatchDTO JSON reference in your Resilient API documentation|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -524,18 +544,18 @@ Example output:
 
 ```
 
-### Query Incidents
+#### Query Incidents
 
 This action is used to query for incidents.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|number|None|True|The organization ID|None|
 |query|object|None|False|Accepts a QueryDTO JSON object. Please see the QueryDTO JSON reference in your Resilient API documentation|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -632,18 +652,18 @@ Example output:
 
 ```
 
-### Get Incident History
+#### Get Incident History
 
 This action is used to get history about an incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|number|None|True|The organization ID|None|
 |incident_id|number|None|True|The incident ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -684,18 +704,18 @@ Example output:
 
 ```
 
-### Delete Incident
+#### Delete Incident
 
 This action is used to delete an incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|number|None|True|The organization ID|None|
 |incident_id|number|None|True|The incident ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -714,17 +734,17 @@ Example output:
 
 ```
 
-### Get Incidents
+#### Get Incidents
 
 This action is used to get a list of open and closed incidents.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_id|number|None|True|The organization ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -821,11 +841,11 @@ Example output:
 
 ```
 
-### Delete Artifact
+#### Delete Artifact
 
 This action is used to delete an artifact.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -833,7 +853,7 @@ This action is used to delete an artifact.
 |incident_id|number|None|True|The incident ID|None|
 |artifact_id|number|None|True|The artifact ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -852,11 +872,11 @@ Example output:
 
 ```
 
-### Retrieve Specific Incident Artifact
+#### Retrieve Specific Incident Artifact
 
 This action is used to retrieve a specific incident artifact.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -864,7 +884,7 @@ This action is used to retrieve a specific incident artifact.
 |incident_id|number|None|True|The incident ID|None|
 |artifact_id|number|None|True|The artifact ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -905,11 +925,11 @@ Example output:
 
 ```
 
-### Add Custom Task to Incident
+#### Add Custom Task to Incident
 
 This action is used to add a custom task to the incident.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -917,7 +937,7 @@ This action is used to add a custom task to the incident.
 |incident_id|number|None|True|The incident ID|None|
 |body|object|None|True|Accepts a TaskDTO JSON object. Please see the TaskDTO JSON reference in your Resilient API documentation|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -933,36 +953,29 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|password|password|None|False|Password used for login|None|
-|hostname|string|None|False|Hostname for the Resilient application|None|
-|email|string|None|False|Email used for login|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 For actions that take a JSON object as input, Resilient will sometimes throw an HTTP 404 error code for malformed JSON or JSON that does not match what is required. The Interactive API Test in your Resilient installation is useful for debugging JSON creation.
 
-## Workflows
+# Version History
 
-* View ongoing incidents and extract recorded information for use in other plugins
-* Create new incidents with information from other plugins
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [API Documentation](http://your-resilient-hostname/docs/rest-api/index.html)
 * [Interactive REST API](http://your-resilient-hostname/docs/rest-api/ui/index.html)
+

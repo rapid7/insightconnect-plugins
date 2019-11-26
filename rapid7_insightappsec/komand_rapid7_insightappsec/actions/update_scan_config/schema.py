@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update an existing scan configuration"
+
+
 class Input:
     APP_ID = "app_id"
     ATTACK_TEMPLATE_ID = "attack_template_id"
@@ -53,10 +57,10 @@ class UpdateScanConfigInput(komand.Input):
     }
   },
   "required": [
-    "scan_config_id",
-    "config_name",
     "app_id",
-    "attack_template_id"
+    "attack_template_id",
+    "config_name",
+    "scan_config_id"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get metadata for cell networks"
+
+
 class Input:
     MCC = "mcc"
     MNC = "mnc"
@@ -79,8 +83,8 @@ class GetMetadataOutput(komand.Output):
         }
       },
       "required": [
-        "mcc",
-        "cell_mncs"
+        "cell_mncs",
+        "mcc"
       ],
       "definitions": {
         "cell_metadata": {
@@ -139,14 +143,14 @@ class GetMetadataOutput(komand.Output):
             }
           },
           "required": [
-            "status",
             "bands",
-            "type",
-            "countryName",
-            "operator",
             "countryCode",
+            "countryName",
             "mcc",
-            "mnc"
+            "mnc",
+            "operator",
+            "status",
+            "type"
           ]
         },
         "cell_mnc": {
@@ -167,8 +171,8 @@ class GetMetadataOutput(komand.Output):
             }
           },
           "required": [
-            "mnc",
-            "metadata"
+            "metadata",
+            "mnc"
           ],
           "definitions": {
             "cell_metadata": {
@@ -227,14 +231,14 @@ class GetMetadataOutput(komand.Output):
                 }
               },
               "required": [
-                "status",
                 "bands",
-                "type",
-                "countryName",
-                "operator",
                 "countryCode",
+                "countryName",
                 "mcc",
-                "mnc"
+                "mnc",
+                "operator",
+                "status",
+                "type"
               ]
             }
           }
@@ -297,14 +301,14 @@ class GetMetadataOutput(komand.Output):
         }
       },
       "required": [
-        "status",
         "bands",
-        "type",
-        "countryName",
-        "operator",
         "countryCode",
+        "countryName",
         "mcc",
-        "mnc"
+        "mnc",
+        "operator",
+        "status",
+        "type"
       ]
     },
     "cell_mnc": {
@@ -325,8 +329,8 @@ class GetMetadataOutput(komand.Output):
         }
       },
       "required": [
-        "mnc",
-        "metadata"
+        "metadata",
+        "mnc"
       ],
       "definitions": {
         "cell_metadata": {
@@ -385,14 +389,14 @@ class GetMetadataOutput(komand.Output):
             }
           },
           "required": [
-            "status",
             "bands",
-            "type",
-            "countryName",
-            "operator",
             "countryCode",
+            "countryName",
             "mcc",
-            "mnc"
+            "mnc",
+            "operator",
+            "status",
+            "type"
           ]
         }
       }

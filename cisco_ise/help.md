@@ -1,26 +1,48 @@
+# Description
 
-# Cisco ISE
-
-## About
-
-[Cisco ISE](https://www.cisco.com/c/en/us/products/security/identity-services-engine/index.html) is a secure network access tool.
-Cisco ISE allows for controlled access to a network and the ability to quarantine suspicious endpoints.
+[Cisco ISE](https://www.cisco.com/c/en/us/products/security/identity-services-engine/index.html) is a secure network access tool. Cisco ISE allows for controlled access to a network and the ability to quarantine suspicious endpoints.
+ The Cisco ISE InsightConnect plugin allows you to retrieve ANC details, endpoint details and manage quarantine.
 
 This plugin utilizes the [ISE](https://github.com/bobthebutcher/ise) library.
 
-## Actions
+# Key Features
 
-### Remove from Quarantine
+* Manage Quarantine
+* Retrieve endpoint details
+* Retrieve ANC details
+
+# Requirements
+
+* Cisco_ISE host's IP address
+* Cisco_ISE username and password
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|username|string|None|True|User with administrator privileges on Cisco ISE|None|
+|password|password|None|True|Password|None|
+|address|string|None|True|IP address for Cisco ISE|None|
+
+## Technical Details
+
+### Actions
+
+#### Remove from Quarantine
 
 This action is used to remove a host from quarantine.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |mac_address|string|None|True|The host MAC address|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -34,18 +56,18 @@ Example output:
 }
 ```
 
-### Quarantine
+#### Quarantine
 
 This action is used to quarantine a host.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |policy|string|None|True|The quarantine policy to apply|None|
 |mac_address|string|None|True|The host MAC address|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -72,17 +94,17 @@ Example output:
 
 ```
 
-### Query Endpoint
+#### Query Endpoint
 
 This action is used to query an endpoint for more information.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hostname|string|None|True|The host name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -115,17 +137,17 @@ Example output:
 
 ```
 
-### Get ANC Endpoint
+#### Get ANC Endpoint
 
 This action is used to return ANC information based on the MAC address supplied.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |mac|string|None|True|MAC address of the endpoint|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -146,43 +168,33 @@ Example output:
 }
 ```
 
-
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|User with administrator privileges on Cisco ISE|None|
-|password|password|None|True|Password|None|
-|address|string|None|True|IP address for Cisco ISE|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
-* 2.0.0 - Support web server mode | Add SSL verification support
-* 2.1.0 - New action Remove from Quarantine
-* 2.1.1 - Fixed issue where error message wasn't printed correctly in case of failure
-* 2.1.2 - Fixed issue where Query Endpoint would return an error if endpoint was not found | Update to input description for Query Endpoint
+* 2.2.1 - New spec and help.md format for the Hub
 * 2.2.0 - New action Get ANC Endpoint
+* 2.1.2 - Fixed issue where Query Endpoint would return an error if endpoint was not found | Update to input description for Query Endpoint
+* 2.1.1 - Fixed issue where error message wasn't printed correctly in case of failure
+* 2.1.0 - New action Remove from Quarantine
+* 2.0.0 - Support web server mode | Add SSL verification support
+* 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Quarantine suspicious endpoints.
-* Query endpoints for detailed information.
+# Links
 
 ## References
 
 * Cisco ISE API can be found at <your Cisco ISE server address>:9060/ers/sdk
 * [Cisco ISE](https://www.cisco.com/c/en/us/products/security/identity-services-engine/index.html)
 * [ISE Library](https://github.com/bobthebutcher/ise)
+

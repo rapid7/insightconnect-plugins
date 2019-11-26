@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='active_directory_ldap-rapid7-plugin',
-      version='3.2.6',
-      description='Active Directory LDAP',
+      version='3.2.7',
+      description='This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network',
       author='rapid7',
       author_email='',
       url='',

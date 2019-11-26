@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check the devices configurations Privilege EXEC mode"
+
+
 class Input:
     COMMAND = "command"
     HOST = "host"

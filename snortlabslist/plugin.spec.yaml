@@ -1,20 +1,26 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: snortlabslist
 title: Snort Labs IP Reputation
-description: IPv4 address to validate
-version: 1.0.0
+description: "Snort Labs List is an IP blacklist service provided by Snort. Users of this plugin can query with
+IP addresses to check their status"
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/snortlabslist
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://snort.org
 tags:
 - ip
 - intel
 - reputation
+hub_tags:
+  use_cases: [soar, soc_automation]
+  keywords: [ip, intel, reputation]
+  features: []
 actions:
   lookup:
     title: IP Lookup

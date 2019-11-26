@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Parse OSSEC Syscheck alerts"
+
+
 class Input:
     ALERT = "alert"
     
@@ -153,13 +157,13 @@ class SyscheckParseOutput(komand.Output):
         }
       },
       "required": [
+        "agent",
+        "alert_id",
         "category",
         "level",
-        "rule_name",
         "rule_id",
-        "timestamp",
-        "alert_id",
-        "agent"
+        "rule_name",
+        "timestamp"
       ]
     }
   }

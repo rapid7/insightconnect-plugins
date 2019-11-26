@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new ticket"
+
+
 class Input:
     KEYWORDS = "keywords"
     QUEUE = "queue"

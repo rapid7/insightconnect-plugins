@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete global user"
+
+
 class Input:
     USER_ID = "user_id"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Launch a new audit in OpenVAS"
+
+
 class Input:
     PROFILE = "profile"
     SCHEDULE = "schedule"
@@ -42,8 +46,8 @@ class LaunchScanInput(komand.Input):
     }
   },
   "required": [
-    "target",
-    "profile"
+    "profile",
+    "target"
   ]
 }
     """)

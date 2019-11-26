@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Generate hashes from file bytes"
+
+
 class Input:
     BYTES = "bytes"
     

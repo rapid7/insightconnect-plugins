@@ -37,8 +37,8 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "service_address",
     "api_key",
+    "service_address",
     "using_cloud_server"
   ],
   "definitions": {

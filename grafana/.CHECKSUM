@@ -1,0 +1,47 @@
+{
+	"spec": "c9361cfce79f3d659c82a3e4233987c4",
+	"manifest": "27bbeded77c7f8a4a646be5da1dd6bce",
+	"setup": "98d06a9d2301cfd42ed58def2589ddfd",
+	"schemas": [
+		{
+			"identifier": "add_organization_user/schema.py",
+			"hash": "a9f00f214ac5cdc30b992187fb7e89c7"
+		},
+		{
+			"identifier": "delete_global_user/schema.py",
+			"hash": "e190e427d9d329317161b6e89939e2e2"
+		},
+		{
+			"identifier": "delete_organization_user/schema.py",
+			"hash": "006338b296e95cf974fa66e0045c345f"
+		},
+		{
+			"identifier": "do_proxied_datasource_call/schema.py",
+			"hash": "fa1f11fdf13f431df9acea5f726cadfa"
+		},
+		{
+			"identifier": "get_organization_users/schema.py",
+			"hash": "829e19030abd03e2c1674a2366c2d010"
+		},
+		{
+			"identifier": "get_user/schema.py",
+			"hash": "d9997333bc85186e7374211787f5c03d"
+		},
+		{
+			"identifier": "search_users/schema.py",
+			"hash": "ad3d32c419ae1c4fa1cfa8f5f6245be0"
+		},
+		{
+			"identifier": "update_organization/schema.py",
+			"hash": "b1f5fb12fca9d1211074bf54de8ec60a"
+		},
+		{
+			"identifier": "update_organization_user/schema.py",
+			"hash": "4673d9c03dc7b22e2953fe08d4640406"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "e9e9daac6724907d9f255cc8805e19ce"
+		}
+	]
+}

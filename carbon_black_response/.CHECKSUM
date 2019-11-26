@@ -1,0 +1,75 @@
+{
+	"spec": "a8c05a9b9f57d6a770ecb5bb9ea99bd4",
+	"manifest": "c506351e8dbf8f8ec6f32f912cba7c17",
+	"setup": "2577ca0efc4a805e8c6bfa3a924d2b1f",
+	"schemas": [
+		{
+			"identifier": "add_feed/schema.py",
+			"hash": "b840c47ac1c7b6343c7b8f0b155d6e79"
+		},
+		{
+			"identifier": "add_watchlist/schema.py",
+			"hash": "3895c35e806dd2c5d4bbee959deaaaee"
+		},
+		{
+			"identifier": "blacklist_hash/schema.py",
+			"hash": "e8f40f76694803dd024aba98fd04071d"
+		},
+		{
+			"identifier": "delete_feed/schema.py",
+			"hash": "a48c80949518a6fc88d4936c507e5224"
+		},
+		{
+			"identifier": "delete_watchlist/schema.py",
+			"hash": "5727fc3534f700757ff0f98847d7dbdc"
+		},
+		{
+			"identifier": "get_binary/schema.py",
+			"hash": "03f03dacae605edcfbf92f45cd01d6c7"
+		},
+		{
+			"identifier": "isolate_sensor/schema.py",
+			"hash": "ee8f2de12c3630e4ad8e0f651d7a1a70"
+		},
+		{
+			"identifier": "list_alerts/schema.py",
+			"hash": "3e9552bec796dbe3a1a0e450f3454f31"
+		},
+		{
+			"identifier": "list_binaries/schema.py",
+			"hash": "697da08340fdbcb2fabea13c553af391"
+		},
+		{
+			"identifier": "list_feeds/schema.py",
+			"hash": "aec23d1056ca5b37057b642c17f6b798"
+		},
+		{
+			"identifier": "list_processes/schema.py",
+			"hash": "cad43ab76390f21682b5331f8abca835"
+		},
+		{
+			"identifier": "list_sensors/schema.py",
+			"hash": "19fc29fcacff2a0449bc93c8b28baade"
+		},
+		{
+			"identifier": "list_watchlists/schema.py",
+			"hash": "15077e13706336b22b80e0ab4c0b95fb"
+		},
+		{
+			"identifier": "unisolate_sensor/schema.py",
+			"hash": "befd3d134c19b46a8c4531fcf29c0df0"
+		},
+		{
+			"identifier": "update_alert/schema.py",
+			"hash": "44c2b1eef22804d4765c6acfbcd8cb26"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "75fa2bf5b9eef4f5683f206a07bda397"
+		},
+		{
+			"identifier": "new_alert/schema.py",
+			"hash": "bfb1583f5c2c0ef018708985ea89b9eb"
+		}
+	]
+}

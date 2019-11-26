@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get statistics for a specified country, organized by region"
+
+
 class Input:
     COUNTRY = "country"
     
@@ -77,9 +81,9 @@ class GetRegionStatisticsOutput(komand.Output):
   },
   "required": [
     "country",
-    "regions",
     "encryption",
-    "postalCode"
+    "postalCode",
+    "regions"
   ]
 }
     """)

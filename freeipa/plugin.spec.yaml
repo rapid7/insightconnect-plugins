@@ -1,20 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: freeipa
 title: FreeIPA
-description: FreeIPA is an integrated Identity and Authentication solution for Linux/UNIX
-  networked environments
-version: 2.0.0
+description: This plugin can retrieve user details and statuses and delete users from FreeIPA servers
+
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/freeipa
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.freeipa.org
 tags:
 - freeipa
 - access control
+hub_tags:
+  use_cases: [soar, user_management]
+  keywords: [freeipa, access control]
+  features: []
 types:
   show_user_out:
     sshpubkeyfp:

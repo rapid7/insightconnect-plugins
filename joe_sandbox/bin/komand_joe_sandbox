@@ -6,7 +6,7 @@ from komand_joe_sandbox import connection, actions, triggers
 
 Name = 'Joe Sandbox'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'Joe Sandbox Cloud executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities'
 
 

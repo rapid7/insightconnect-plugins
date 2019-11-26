@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Change the status of a task"
+
+
 class Input:
     ID = "id"
     STATUS = "status"

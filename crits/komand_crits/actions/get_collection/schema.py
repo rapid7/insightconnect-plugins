@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetches a collection"
+
+
 class Input:
     COLLECTION = "collection"
     PARAMS = "params"

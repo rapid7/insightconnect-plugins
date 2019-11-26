@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get status of a user"
+
+
 class Input:
     USERNAME = "username"
     

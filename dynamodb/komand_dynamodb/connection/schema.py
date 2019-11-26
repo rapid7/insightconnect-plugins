@@ -35,8 +35,8 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "secret_key",
-    "access_key"
+    "access_key",
+    "secret_key"
   ],
   "definitions": {
     "credential_secret_key": {

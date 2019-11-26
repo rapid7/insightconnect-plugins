@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fires when a new alert is found"
+
+
 class Input:
     pass
     

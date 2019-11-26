@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Upload a SSL Certificate to SecureSphere Server"
+
+
 class Input:
     CERTIFICATE = "certificate"
     FORMAT = "format"
@@ -101,11 +105,11 @@ class UploadSslCertificateInput(komand.Input):
     }
   },
   "required": [
+    "format",
     "servergroupname",
-    "webservicename",
     "sitename",
     "sslkeyname",
-    "format"
+    "webservicename"
   ]
 }
     """)

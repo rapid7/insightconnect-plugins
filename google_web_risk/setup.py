@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='google_web_risk-rapid7-plugin',
-      version='2.0.0',
+      version='2.0.1',
       description='Check URLs against the Google Web Risk service',
       author='rapid7',
       author_email='',
