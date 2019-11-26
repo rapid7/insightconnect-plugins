@@ -1,9 +1,0 @@
-{
-    "body": {
-        "action": "list_saved_searches",
-        "input": {},
-        "meta": {}
-    },
-    "type": "action_start",
-    "version": "v1"
-}
