@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='pastebin-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The Pastebin plugin allows you to send text to and check posts on Pastebin',
       author='rapid7',
       author_email='',

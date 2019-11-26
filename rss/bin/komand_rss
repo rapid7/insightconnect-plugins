@@ -6,7 +6,7 @@ from komand_rss import connection, actions, triggers
 
 Name = 'RSS'
 Vendor = 'rapid7'
-Version = '1.0.3'
+Version = '1.0.4'
 Description = 'The RSS plugin allows you to monitor an RSS feed'
 
 

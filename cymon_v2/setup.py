@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='cymon_v2-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.3',
       description='Cymon is the largest tracker of open-source security reports about phishing, malware, botnets and other malicious activities',
       author='rapid7',
       author_email='',

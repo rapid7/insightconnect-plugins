@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='ipinfo-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.3',
       description='Query IP Address Information',
       author='rapid7',
       author_email='',

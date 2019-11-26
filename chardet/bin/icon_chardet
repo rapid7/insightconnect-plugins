@@ -6,7 +6,7 @@ from icon_chardet import connection, actions, triggers
 
 Name = 'Chardet'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'This plugin is a Python compatible character encoding detector'
 
 

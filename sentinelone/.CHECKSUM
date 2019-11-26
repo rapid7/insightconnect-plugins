@@ -1,7 +1,7 @@
 {
-	"spec": "05d3e5198bc5fae23e0aeabe4f99dea2",
-	"manifest": "1b3582c8af03aa05d972761eccb805f2",
-	"setup": "dfb49eda74949e7b0bbf5517a17d6fd7",
+	"spec": "b3c20441c035be7415d967c2c7bf43cd",
+	"manifest": "156d7f96ad50460969362c8091948d25",
+	"setup": "849b7de756f802a16a422c765d9f5af2",
 	"schemas": [
 		{
 			"identifier": "blacklist_by_content_hash/schema.py",

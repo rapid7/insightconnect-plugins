@@ -6,7 +6,7 @@ from komand_basename import connection, actions, triggers
 
 Name = 'Basename'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'This plugin is used to get the last item of a file path or URL using Python's basename utility'
 
 

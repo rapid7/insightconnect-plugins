@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='ipintel-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='An IP address lookup tool for the DFIR field',
       author='rapid7',
       author_email='',

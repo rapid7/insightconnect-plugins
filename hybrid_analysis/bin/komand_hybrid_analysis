@@ -6,7 +6,7 @@ from komand_hybrid_analysis import connection, actions, triggers
 
 Name = 'Hybrid Analysis'
 Vendor = 'rapid7'
-Version = '2.0.1'
+Version = '2.0.2'
 Description = 'The Hybrid Analysis plugin allows you to lookup file hashes to find out if they are malicious'
 
 

@@ -1,7 +1,7 @@
 {
-	"spec": "23b6faea3ea533c183f197062e7a7adc",
-	"manifest": "de5ad22b5ee9f288d6ca118b5f022302",
-	"setup": "801bbac78fd43f6c4b9aa7c70b7caf7b",
+	"spec": "7fd326461137c34a9fd3abda86cf392a",
+	"manifest": "20e1a7fe178bd1a94507a63f011f27d2",
+	"setup": "dcf417bb4a416b189ae3d21f47f68e47",
 	"schemas": [
 		{
 			"identifier": "create_subscription/schema.py",

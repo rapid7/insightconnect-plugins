@@ -1,7 +1,7 @@
 {
-	"spec": "36f1772459005125680112e0314b5235",
-	"manifest": "04733e9bf3ce0fd3cdc9f80c722a51c0",
-	"setup": "1b69da59943f648dd4e23d144208f1a6",
+	"spec": "0f637983fcdd86ca4283bf783bf9cedb",
+	"manifest": "d8d233a399fe4f25a28d997db61beb3e",
+	"setup": "6d26045f931e15cb018aec27ecaf41c5",
 	"schemas": [
 		{
 			"identifier": "detect_encoding/schema.py",

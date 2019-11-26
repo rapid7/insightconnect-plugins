@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='smb-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='Server Message Block (SMB) is a protocol used for interacting with files on an SMB server. Using this plugin, users can interact with shares and delete files',
       author='rapid7',
       author_email='',

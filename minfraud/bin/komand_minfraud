@@ -6,7 +6,7 @@ from komand_minfraud import connection, actions, triggers
 
 Name = 'minFraud'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The MaxMind minFraud services help identify fraudulent online transactions'
 
 

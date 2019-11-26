@@ -6,7 +6,7 @@ from komand_docker_engine import connection, actions, triggers
 
 Name = 'Docker Engine'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Control Docker Images, Containers, and Networks'
 
 

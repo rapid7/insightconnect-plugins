@@ -6,7 +6,7 @@ from komand_anomali_threatstream import connection, actions, triggers
 
 Name = 'Anomali ThreatStream'
 Vendor = 'rapid7'
-Version = '3.0.2'
+Version = '3.0.3'
 Description = 'Anomali ThreatStream operationalizes threat intelligence, automating collection and integration that enables security teams to analyze and respond to threats'
 
 

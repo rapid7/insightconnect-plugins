@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='samanage-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The Samanage plugin allows you to start workflows on new incidents, manage incidents, and manage users',
       author='rapid7',
       author_email='',

@@ -1,7 +1,7 @@
 {
-	"spec": "f1d7ae86f361f0d9db6fbd5a232d6f6a",
-	"manifest": "23694ca31e5c7f592f5bbaf21ec527bd",
-	"setup": "28601da15223ae1a322c0dd403114572",
+	"spec": "7492f140af166b69e86aa3f29dff979b",
+	"manifest": "4d4793e253fb2af9056ffde938a3cb08",
+	"setup": "65f1a68c75de8134aabcd5a8252a6d89",
 	"schemas": [
 		{
 			"identifier": "ip_lookup/schema.py",

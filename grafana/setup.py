@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='grafana-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The Grafana plugin allows you to manage users in your Grafana organization',
       author='rapid7',
       author_email='',

@@ -1,7 +1,7 @@
 {
-	"spec": "debb5639c14a3369ff50c79ca66228d1",
-	"manifest": "ebe864dbe4b80523bb4b0f06d02bd6b4",
-	"setup": "4633321210d64bf0b4c6fb0e1a5986d6",
+	"spec": "037a953504e68fea4d8254bea2bcac07",
+	"manifest": "02b0468dc8480bab09221ab191125026",
+	"setup": "ebee250495523ab50ea2dbe34773e403",
 	"schemas": [
 		{
 			"identifier": "add_acl/schema.py",

@@ -6,7 +6,7 @@ from komand_haveibeenpwned import connection, actions, triggers
 
 Name = 'HaveIBeenPwned'
 Vendor = 'rapid7'
-Version = '4.0.2'
+Version = '4.0.3'
 Description = 'The HaveIBeenPwned plugin allows you find out if a user, domain, or password has been leaked'
 
 

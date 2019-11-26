@@ -6,7 +6,7 @@ from komand_zeus_tracker import connection, actions, triggers
 
 Name = 'ZeuS Tracker'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The ZeuS Command&Control Server Tracking plugin'
 
 

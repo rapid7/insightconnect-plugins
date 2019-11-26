@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='dirname-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.3',
       description='This plugin gets the directory name of a file path or protocol and domain of a URL',
       author='rapid7',
       author_email='',

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='ftp-rapid7-plugin',
-      version='2.0.1',
+      version='2.0.2',
       description='This plugin can upload, download and delete files between a client and server on a computer network using the File Transfer Protocol',
       author='rapid7',
       author_email='',

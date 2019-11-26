@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='cortex-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='Cortex is an observable analysis and active response engine. With the Cortex plugin for Rapid7 InsightConnect, users can manage analyzers, jobs, and run file analyzers',
       author='rapid7',
       author_email='',

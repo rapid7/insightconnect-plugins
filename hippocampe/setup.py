@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='hippocampe-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The Hippocampe plugin allows for advanced queries and management of your Hippocampe feeds',
       author='rapid7',
       author_email='',

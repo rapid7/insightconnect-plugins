@@ -6,7 +6,7 @@ from icon_aws_securityhub import connection, actions, triggers
 
 Name = 'AWS Security Hub'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'This plugin utilizes AWS Security Hub to lists and describes security hub-aggregated findings and retrieve SQS messages'
 
 

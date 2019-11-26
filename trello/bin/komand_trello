@@ -6,7 +6,7 @@ from komand_trello import connection, actions, triggers
 
 Name = 'Trello'
 Vendor = 'rapid7'
-Version = '2.0.2'
+Version = '2.0.3'
 Description = 'Boards, lists, and cards enable you to organize and prioritize your projects in a fun, flexible and rewarding way'
 
 

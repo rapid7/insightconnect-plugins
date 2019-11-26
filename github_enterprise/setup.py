@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='github_enterprise-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='GitHub Enterprise plugin allows user management',
       author='rapid7',
       author_email='',

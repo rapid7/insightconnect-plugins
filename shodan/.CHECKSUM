@@ -1,7 +1,7 @@
 {
-	"spec": "5b76703ba66dacaf4ecf4c1aa892cf83",
-	"manifest": "3e9b5929b7ca4c498cdf46e478b6134f",
-	"setup": "5e640d37404e4047800518d6763b1db4",
+	"spec": "c745019439de2ea24f4c6599f1e94982",
+	"manifest": "536d64d4a89c3cb99395c6e8cd1c6cfd",
+	"setup": "ac29f6cb688b84827b239cd000e96103",
 	"schemas": [
 		{
 			"identifier": "host_information/schema.py",

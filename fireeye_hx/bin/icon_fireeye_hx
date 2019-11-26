@@ -6,7 +6,7 @@ from icon_fireeye_hx import connection, actions, triggers
 
 Name = 'FireEye HX'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The FireEye plugin will allow you to get alerts from a given host'
 
 

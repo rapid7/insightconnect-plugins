@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='haveibeenpwned-rapid7-plugin',
-      version='4.0.2',
+      version='4.0.3',
       description='The HaveIBeenPwned plugin allows you find out if a user, domain, or password has been leaked',
       author='rapid7',
       author_email='',

@@ -6,7 +6,7 @@ from komand_pdf_generator import connection, actions, triggers
 
 Name = 'PDF Generator'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The PDF plugin allows the user to create PDF reports from workflow data'
 
 

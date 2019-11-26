@@ -6,7 +6,7 @@ from komand_sentry import connection, actions, triggers
 
 Name = 'Sentry'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Sentry is an open source error tracking tool that helps developers monitor and fix crashes in real time. Users can manage issues and events with the Sentry plugin for Rapid7 InsightConnect'
 
 

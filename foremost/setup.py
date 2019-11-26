@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='foremost-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The Foremost plugin will take a disk image and attempt to recover files from it',
       author='rapid7',
       author_email='',

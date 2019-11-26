@@ -1,7 +1,7 @@
 {
-	"spec": "266f82a684e5915368894f0e1fd1dbf8",
-	"manifest": "d5d8b21b9d31b63efa556b03e70a1da6",
-	"setup": "045b85028db4bda57531526f6e3f981d",
+	"spec": "db631d36b74891ea1d2b3ebcc308e0af",
+	"manifest": "5e722d521beb2aa14a3b6abe24dae608",
+	"setup": "0ac881c17e730cbecda68d2135ea03a1",
 	"schemas": [
 		{
 			"identifier": "bulk_indicator_download/schema.py",

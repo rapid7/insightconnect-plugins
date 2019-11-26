@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='chaosreader-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.3',
       description='The plugin is used to trace sessions and fetch application data from snoop or tcpdump logs',
       author='rapid7',
       author_email='',

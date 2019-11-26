@@ -6,7 +6,7 @@ from komand_ec2_investigations import connection, actions, triggers
 
 Name = 'EC2 Investigations'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'EC2 Investigations runs security tools on the AWS EC2 platform. Using the EC2 Investigations plugin for Rapid7 InsightConnect will allow users to mount drives and scan directories with ClamAV'
 
 

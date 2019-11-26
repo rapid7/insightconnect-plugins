@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='powershell-rapid7-plugin',
-      version='2.1.1',
+      version='2.1.2',
       description='The PowerShell plugin runs a PowerShell script on a remote host or locally on the InsightConnect Orchestrator',
       author='rapid7',
       author_email='',

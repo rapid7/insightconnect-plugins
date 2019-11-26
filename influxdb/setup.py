@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='influxdb-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='Scalable datastore for metrics, events, and real-time analytics',
       author='rapid7',
       author_email='',

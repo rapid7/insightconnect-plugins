@@ -1,7 +1,7 @@
 {
-	"spec": "d0ccfbb98c6fe93cc7c478be2c68def5",
-	"manifest": "6195bbd9eab2af750db6997c059f5ed6",
-	"setup": "ee26bb275c73d33ecd5fcdaf29f37d40",
+	"spec": "2bcd26f6c7b2b419c6125e16d6f502c3",
+	"manifest": "47f3231588a6d135554b8089f915b07c",
+	"setup": "602647427a37417b25fe1cc3c78db747",
 	"schemas": [
 		{
 			"identifier": "delete_job/schema.py",

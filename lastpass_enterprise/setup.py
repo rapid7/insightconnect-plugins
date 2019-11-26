@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='lastpass_enterprise-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.3',
       description='A tool for conveniently and securely managing passwords',
       author='rapid7',
       author_email='',

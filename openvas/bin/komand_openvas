@@ -6,7 +6,7 @@ from komand_openvas import connection, actions, triggers
 
 Name = 'OpenVAS'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Allows users to perform common tasks such as starting, stopping, deleting and scheduling scans from an OpenVAS server'
 
 

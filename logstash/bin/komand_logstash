@@ -6,7 +6,7 @@ from komand_logstash import connection, actions, triggers
 
 Name = 'Logstash'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Data collection engine with real-time pipelining capabilities'
 
 

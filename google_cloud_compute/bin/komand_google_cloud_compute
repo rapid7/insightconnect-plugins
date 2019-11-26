@@ -6,7 +6,7 @@ from komand_google_cloud_compute import connection, actions, triggers
 
 Name = 'Google Cloud Compute'
 Vendor = 'rapid7'
-Version = '2.0.2'
+Version = '2.0.3'
 Description = 'Google Compute Engine delivers virtual machines running in Google innovative data centers and worldwide fiber network'
 
 

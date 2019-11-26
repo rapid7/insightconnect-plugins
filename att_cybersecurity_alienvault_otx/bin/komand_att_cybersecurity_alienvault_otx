@@ -6,7 +6,7 @@ from komand_att_cybersecurity_alienvault_otx import connection, actions, trigger
 
 Name = 'AT&T Cybersecurity AlienVault Open Threat Exchange'
 Vendor = 'rapid7'
-Version = '1.0.2'
+Version = '1.0.3'
 Description = 'This plugin utilizes AT&T Cybersecurity (AlienVault OTX) to retrieve details about an indicator Open Threat Exchange is the neighborhood watch of the global intelligence community'
 
 

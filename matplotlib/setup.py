@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='matplotlib-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='Provides graphing capability of base64 encoded CSV data using Matplotlib, NumPy, Pandas, and Seaborn',
       author='rapid7',
       author_email='',

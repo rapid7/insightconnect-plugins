@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='pdf_reader-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='Tools for extracting text from a PDF',
       author='rapid7',
       author_email='',

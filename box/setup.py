@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='box-rapid7-plugin',
-      version='2.2.2',
+      version='2.2.3',
       description='Manage Box users and files',
       author='rapid7',
       author_email='',

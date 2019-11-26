@@ -6,7 +6,7 @@ from komand_shattered import connection, actions, triggers
 
 Name = 'SHAttered'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'SHAttered is a free service for checking SHA-1 hash collisions. Using the SHAttered plugin for Rapid7 InsightConnect, users can quickly determine if a file is part of a collision attack'
 
 

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='bhr-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The Black Hole Router plugin is use to assist with managing networks blocked within Black Hole Router site',
       author='rapid7',
       author_email='',

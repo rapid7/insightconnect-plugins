@@ -6,7 +6,7 @@ from komand_rpm import connection, actions, triggers
 
 Name = 'RPM'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The RPM plugin allows you to download and analyze an RPM pacakge'
 
 

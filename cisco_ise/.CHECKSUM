@@ -1,7 +1,7 @@
 {
-	"spec": "fe9d5a99b29addef25c70e82e413b1d3",
-	"manifest": "76dded6144e8a590c51beace950c1483",
-	"setup": "6825a6381dbccc50ad83e9b12f34ffca",
+	"spec": "f6328da96a04a8d7f7808b8c5e1571fb",
+	"manifest": "a41d2b5797a99b8f7e7bb9fc19f4848a",
+	"setup": "638263d3ce6d2c5027d0bd4536839c27",
 	"schemas": [
 		{
 			"identifier": "get_anc_endpoint/schema.py",

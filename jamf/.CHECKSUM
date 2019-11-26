@@ -1,7 +1,7 @@
 {
-	"spec": "fe5f706d483864042b2634dcca33ef67",
-	"manifest": "9be0502bf58b98930630557d047bdceb",
-	"setup": "2f778d20922d02018ae83401e7580c4c",
+	"spec": "de2790d5061a6f9dfd037a82a717b06f",
+	"manifest": "91e081d26ba6142d3752e670072479a4",
+	"setup": "641f410d5c20b2d2c52417feeda9ac34",
 	"schemas": [
 		{
 			"identifier": "add_computer_to_group/schema.py",

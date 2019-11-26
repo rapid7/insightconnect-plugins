@@ -6,7 +6,7 @@ from komand_tcpxtract import connection, actions, triggers
 
 Name = 'Tcpxtract'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The Tcpxtract plugin is a tool for extracting files from network traffic'
 
 

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='splunk-rapid7-plugin',
-      version='3.0.1',
+      version='3.0.2',
       description='The Splunk plugin allows you to search, monitor, analyze and analyze machine data',
       author='rapid7',
       author_email='',

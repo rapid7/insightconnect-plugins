@@ -6,7 +6,7 @@ from komand_compression import connection, actions, triggers
 
 Name = 'Compression'
 Vendor = 'rapid7'
-Version = '2.0.1'
+Version = '2.0.2'
 Description = 'The Compression plugin for Rapid7 InsightConnect allows users to compress/decompress files using different Compression algorithms'
 
 

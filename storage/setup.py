@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='storage-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The Storage plugin is a utility that stores information across loops and workflows',
       author='rapid7',
       author_email='',

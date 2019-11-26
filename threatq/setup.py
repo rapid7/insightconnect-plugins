@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='threatq-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The ThreatQ plugin provides ability to work with Threat Quotient indicators and events',
       author='rapid7',
       author_email='',

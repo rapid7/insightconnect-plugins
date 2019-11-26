@@ -6,7 +6,7 @@ from komand_request_tracker import connection, actions, triggers
 
 Name = 'Request Tracker'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The Request Tracker plugin allows you to create and manage tickets in Request Tracker'
 
 

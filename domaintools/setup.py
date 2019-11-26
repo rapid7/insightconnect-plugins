@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='domaintools-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='Domain name search tool that allows a wildcard search, monitoring of WHOIS record changes and history caching, as well as Reverse IP queries',
       author='rapid7',
       author_email='',

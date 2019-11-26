@@ -6,7 +6,7 @@ from komand_openphish import connection, actions, triggers
 
 Name = 'OpenPhish'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'OpenPhish is a fully automated self-contained platform for phishing intelligence. Use the OpenPhish plugin to identify zero-day phishing sites and provide real-time threat intelligence'
 
 

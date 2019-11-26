@@ -1,7 +1,7 @@
 {
-	"spec": "919b4c92cd9ee131fb246e8b502ed978",
-	"manifest": "1d1318058e58230817737fef1628d0d6",
-	"setup": "f30f83ea4ec98bc5572feeb1129a9af0",
+	"spec": "9de1a43bddb4444d1b23c914924b47c8",
+	"manifest": "b067de3a3f4e0922236bb60e2e16a01e",
+	"setup": "4b479cf75e18f8e605ead6a17c562719",
 	"schemas": [
 		{
 			"identifier": "create_networkpolicy/schema.py",

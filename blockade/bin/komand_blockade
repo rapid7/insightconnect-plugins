@@ -6,7 +6,7 @@ from komand_blockade import connection, actions, triggers
 
 Name = 'Blockade'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The Blockade plugins assists with administrating users and Incidents of Compromise'
 
 

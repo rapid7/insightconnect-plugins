@@ -6,7 +6,7 @@ from komand_unshorten import connection, actions, triggers
 
 Name = 'Unshorten.me'
 Vendor = 'rapid7'
-Version = '1.0.2'
+Version = '1.0.3'
 Description = 'Unshorten.me provides an easy method to unshorten a wide range of shortened URLs. The Unshorten.me plugin for Rapid7 InsightConnect can help assist phishing investigations, URL analysis, and more'
 
 

@@ -6,7 +6,7 @@ from komand_csv import connection, actions, triggers
 
 Name = 'CSV'
 Vendor = 'rapid7'
-Version = '1.1.4'
+Version = '1.1.5'
 Description = 'CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to extract fields from CSV strings and files'
 
 

@@ -6,7 +6,7 @@ from komand_imperva_securesphere import connection, actions, triggers
 
 Name = 'Imperva SecureSphere'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Imperva SecureSphere WAF protects your applications and data from cyber-attacks.  It blocks technical, business logic botnets and DDoS attacks'
 
 

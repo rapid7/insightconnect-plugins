@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='wordpress-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The WordPress plugin allows for user management on the WordPress platform',
       author='rapid7',
       author_email='',

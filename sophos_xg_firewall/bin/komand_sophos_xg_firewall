@@ -6,7 +6,7 @@ from komand_sophos_xg_firewall import connection, actions, triggers
 
 Name = 'Sophos XG Firewall'
 Vendor = 'rapid7'
-Version = '2.0.1'
+Version = '2.0.2'
 Description = 'The Sophos XG Firewall plugin allows you to manage your Sophos XG Firewall through policies'
 
 

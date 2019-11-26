@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='cisco_cloudlock-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='This plugin utilizes Cisco CloudLock to help protecting cloud users, data, and application. Cisco CloudLock is the cloud-native CASB and Cloud Cybersecurity Platform',
       author='rapid7',
       author_email='',

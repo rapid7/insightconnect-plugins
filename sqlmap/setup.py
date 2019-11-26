@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='sqlmap-rapid7-plugin',
-      version='1.1.1',
+      version='1.1.2',
       description='The SQLMap plugin allows you to scan targets and analyze the results',
       author='rapid7',
       author_email='',

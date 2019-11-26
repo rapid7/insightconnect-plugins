@@ -1,7 +1,7 @@
 {
-	"spec": "5664fcc7428b5809aba981ee14452b98",
-	"manifest": "9a90022a1cbeda074c6c7563c60f41b1",
-	"setup": "d76487a0fde1a4de562259148f1ebb0a",
+	"spec": "067d5e29b4adad7deb0fbf388bc5bd1d",
+	"manifest": "d542cff02d4eb376287261b1f08a3bcf",
+	"setup": "dfdf7474fde4cbaae9eadf66f175a1b7",
 	"schemas": [
 		{
 			"identifier": "create_feed/schema.py",

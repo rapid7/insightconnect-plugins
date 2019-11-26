@@ -1,7 +1,7 @@
 {
-	"spec": "f9ea3e4700db01f04e2bfd9e11ecd5de",
-	"manifest": "02ac4bfbdeeab9ee4691510434a37a6e",
-	"setup": "83e013d8716fa9c22abd707d3be12aaa",
+	"spec": "e94ed9755ad0f1d98fabbc2f85057b8d",
+	"manifest": "d4dada0367c3a04300d87b1f1c539091",
+	"setup": "cd760a1a5a0c147919ea89af031760f2",
 	"schemas": [
 		{
 			"identifier": "download_report/schema.py",

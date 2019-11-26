@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='vmray-rapid7-plugin',
-      version='4.0.2',
+      version='4.0.3',
       description='The VMRay plugin allows you to analyze and detect malware before it lands',
       author='rapid7',
       author_email='',

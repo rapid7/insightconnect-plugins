@@ -1,7 +1,7 @@
 {
-	"spec": "4fd1e0ddcf0a52997c45858249fb4c5a",
-	"manifest": "c4aba452c56c63b0438106865e63618e",
-	"setup": "ea24f3344f663f2168ad8e727d51cc62",
+	"spec": "ff6f127451af451cb020de1f3ab5222d",
+	"manifest": "93f4009db9fa35b220726802c4653913",
+	"setup": "d38c77061c17def7b2157b4f6b156b74",
 	"schemas": [
 		{
 			"identifier": "find_event/schema.py",

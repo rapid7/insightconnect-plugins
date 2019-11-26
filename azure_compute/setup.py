@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='azure_compute-rapid7-plugin',
-      version='3.0.1',
+      version='3.0.2',
       description='Azure Virtual Machines is one of several types of on-demand, scalable computing resources that Azure offers',
       author='rapid7',
       author_email='',

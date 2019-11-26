@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='request_tracker-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The Request Tracker plugin allows you to create and manage tickets in Request Tracker',
       author='rapid7',
       author_email='',

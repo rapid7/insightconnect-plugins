@@ -6,7 +6,7 @@ from komand_presto import connection, actions, triggers
 
 Name = 'Presto'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The Presto plugin will allow you to run database commands with Presto'
 
 

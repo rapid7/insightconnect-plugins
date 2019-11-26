@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='threatstack-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The Threat Stack plugin is used to get information about alerts, assets, and policies',
       author='rapid7',
       author_email='',

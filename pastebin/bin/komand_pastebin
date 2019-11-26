@@ -6,7 +6,7 @@ from komand_pastebin import connection, actions, triggers
 
 Name = 'Pastebin'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The Pastebin plugin allows you to send text to and check posts on Pastebin'
 
 

@@ -1,7 +1,7 @@
 {
-	"spec": "046dd2814a7722e18c1f26af9e1ee9b2",
-	"manifest": "88c5cc6a5967a0affabb3d36d8e4560d",
-	"setup": "6864f3f3dbed8de9c76436f9b80c096a",
+	"spec": "8f0812419ba6f49cc367878902033d73",
+	"manifest": "fa3dea6355d97808417836c394960107",
+	"setup": "bb95f91dccd1ad41a528d1ed6bec8a2a",
 	"schemas": [
 		{
 			"identifier": "submit_descriptors/schema.py",

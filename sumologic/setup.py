@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='sumologic-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The Sumo Logic plugin allows you to run a Sumo Logic query and view the results',
       author='rapid7',
       author_email='',

@@ -6,7 +6,7 @@ from komand_misp import connection, actions, triggers
 
 Name = 'MISP'
 Vendor = 'rapid7'
-Version = '3.0.2'
+Version = '3.0.3'
 Description = 'MISP is an open source threat sharing platform'
 
 

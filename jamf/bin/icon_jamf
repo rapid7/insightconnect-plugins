@@ -6,7 +6,7 @@ from icon_jamf import connection, actions, triggers
 
 Name = 'Jamf'
 Vendor = 'rapid7'
-Version = '1.1.1'
+Version = '1.1.2'
 Description = 'Jamf is a popular product for managing iPads, iPhones, Macs, and Apple TVs for schools and businesses'
 
 

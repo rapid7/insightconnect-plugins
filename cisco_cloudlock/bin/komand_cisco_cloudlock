@@ -6,7 +6,7 @@ from komand_cisco_cloudlock import connection, actions, triggers
 
 Name = 'CloudLock'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'This plugin utilizes Cisco CloudLock to help protecting cloud users, data, and application. Cisco CloudLock is the cloud-native CASB and Cloud Cybersecurity Platform'
 
 

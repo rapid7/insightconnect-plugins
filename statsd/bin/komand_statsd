@@ -6,7 +6,7 @@ from komand_statsd import connection, actions, triggers
 
 Name = 'Statsd'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The Statsd plugin will allow you to create metrics from your workflow'
 
 

@@ -6,7 +6,7 @@ from komand_mcafee_esm import connection, actions, triggers
 
 Name = 'McAfee ESM'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'McAfee Enterprise Security Manager is a security information and event management (SIEM) solution that delivers actionable intelligence and integrations to prioritize, investigate, and respond to threats'
 
 

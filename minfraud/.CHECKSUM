@@ -1,7 +1,7 @@
 {
-	"spec": "ba54885abed779e2c0cb101dcec159e8",
-	"manifest": "537d2eaae937bf3bdec7d13a9458f8cc",
-	"setup": "cd58eeae35378aa737e842f4d06d8da5",
+	"spec": "06ec3ecdf4950936d9f6255de818f744",
+	"manifest": "260f4668a048057605b99e4368585daa",
+	"setup": "ad7a0a1a9598c655ffaf8f986235898c",
 	"schemas": [
 		{
 			"identifier": "account_lookup/schema.py",

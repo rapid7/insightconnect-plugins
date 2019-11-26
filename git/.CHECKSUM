@@ -1,7 +1,7 @@
 {
-	"spec": "5b457e12330cd7292bbb394666c744d6",
-	"manifest": "0b4ada21b47574ef7d444138f1d7c0b2",
-	"setup": "fdad6070ab27084aebb7067af83db7a3",
+	"spec": "d790f2d9390a0da0278a671b059d674d",
+	"manifest": "6c173a3aa65782289af8c9f9ab6c1ff9",
+	"setup": "fbebf6edffe6153ffeeeabc46b540dac",
 	"schemas": [
 		{
 			"identifier": "add_file/schema.py",

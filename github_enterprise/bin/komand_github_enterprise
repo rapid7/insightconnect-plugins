@@ -6,7 +6,7 @@ from komand_github_enterprise import connection, actions, triggers
 
 Name = 'GitHub Enterprise'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'GitHub Enterprise plugin allows user management'
 
 

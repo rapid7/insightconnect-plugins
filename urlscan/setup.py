@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='urlscan-rapid7-plugin',
-      version='2.1.3',
+      version='2.1.4',
       description='The URLScan plugin uses URLScan to analyze urls for malicious indicators',
       author='rapid7',
       author_email='',

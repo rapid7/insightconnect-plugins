@@ -6,7 +6,7 @@ from komand_lastpass_enterprise import connection, actions, triggers
 
 Name = 'LastPass Enterprise'
 Vendor = 'rapid7'
-Version = '1.0.2'
+Version = '1.0.3'
 Description = 'A tool for conveniently and securely managing passwords'
 
 

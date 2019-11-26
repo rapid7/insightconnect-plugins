@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='checkdmarc-rapid7-plugin',
-      version='2.1.1',
+      version='2.1.2',
       description='The checkdmarc plugin is used to parser SPF and DMARC records',
       author='rapid7',
       author_email='',

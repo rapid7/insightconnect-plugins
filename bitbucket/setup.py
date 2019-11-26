@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='bitbucket-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='This plugin allows management of your Bitbucket account using its API',
       author='rapid7',
       author_email='',

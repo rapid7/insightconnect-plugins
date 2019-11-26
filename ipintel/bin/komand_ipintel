@@ -6,7 +6,7 @@ from komand_ipintel import connection, actions, triggers
 
 Name = 'IPIntel'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'An IP address lookup tool for the DFIR field'
 
 

@@ -6,7 +6,7 @@ from komand_pdf_reader import connection, actions, triggers
 
 Name = 'PDF Reader'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Tools for extracting text from a PDF'
 
 

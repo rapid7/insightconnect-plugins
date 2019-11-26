@@ -6,7 +6,7 @@ from komand_domaintools import connection, actions, triggers
 
 Name = 'DomainTools'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Domain name search tool that allows a wildcard search, monitoring of WHOIS record changes and history caching, as well as Reverse IP queries'
 
 

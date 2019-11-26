@@ -6,7 +6,7 @@ from icon_checkdmarc import connection, actions, triggers
 
 Name = 'Checkdmarc'
 Vendor = 'rapid7'
-Version = '2.1.1'
+Version = '2.1.2'
 Description = 'The checkdmarc plugin is used to parser SPF and DMARC records'
 
 

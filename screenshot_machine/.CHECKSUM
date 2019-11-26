@@ -1,7 +1,7 @@
 {
-	"spec": "7feb74eb5166a874d7c11b8b994a8d01",
-	"manifest": "ecfff3c7ac085db4ef751642ec85dbaa",
-	"setup": "695bf03e9bcfbe080e136f240fbb5fe1",
+	"spec": "5b8bfad9a56c42c12e0cf38feb95faa6",
+	"manifest": "0eb9f3b3cfcdfe4a223401f95acc6075",
+	"setup": "5aba05081115782b62aaff0daf50c324",
 	"schemas": [
 		{
 			"identifier": "capture/schema.py",

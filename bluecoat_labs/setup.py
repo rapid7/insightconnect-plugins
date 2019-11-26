@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='bluecoat_labs-rapid7-plugin',
-      version='2.0.1',
+      version='2.0.2',
       description='The Bluecoat Labs plugins enables submissions of suspicous URLs to be reviewed by Bluecoat Labs',
       author='rapid7',
       author_email='',

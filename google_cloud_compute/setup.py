@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='google_cloud_compute-rapid7-plugin',
-      version='2.0.2',
+      version='2.0.3',
       description='Google Compute Engine delivers virtual machines running in Google innovative data centers and worldwide fiber network',
       author='rapid7',
       author_email='',

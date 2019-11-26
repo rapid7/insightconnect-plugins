@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='zenhub-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='The ZenHub plugin allows for agile project management in GitHub',
       author='rapid7',
       author_email='',

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='facebook_threat_exchange-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='A platform for sharing threat information between selected entities',
       author='rapid7',
       author_email='',

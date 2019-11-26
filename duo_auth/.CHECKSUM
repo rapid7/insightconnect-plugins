@@ -1,7 +1,7 @@
 {
-	"spec": "ec311959791b3ae76b4e6c387fc69064",
-	"manifest": "0bc658a366d414feb8c70ab726029773",
-	"setup": "a8b7f3aeeee006a9b717cf3cab8283b8",
+	"spec": "6a8002c3f50703f434bfbf363f0aacb0",
+	"manifest": "cd22bea6cf45b6ecbf7e3ee26dbc3cd4",
+	"setup": "96fd8766c9b89ff2bb6024d3fdc68973",
 	"schemas": [
 		{
 			"identifier": "auth/schema.py",

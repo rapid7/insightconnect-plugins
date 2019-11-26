@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='kintone-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.3',
       description='Custom workflows and data management for businesses and non-profits in one place',
       author='rapid7',
       author_email='',

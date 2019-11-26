@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='tcpdump-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.3',
       description='The Tcpdump plugin is used to read contents of a PCAP',
       author='rapid7',
       author_email='',

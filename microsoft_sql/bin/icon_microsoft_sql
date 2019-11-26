@@ -6,7 +6,7 @@ from icon_microsoft_sql import connection, actions, triggers
 
 Name = 'Microsoft SQL'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'Microsoft SQL database plugin for Microsoft SQL queries'
 
 

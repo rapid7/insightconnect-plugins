@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='cymon-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.3',
       description='Cymon Open Threat Intelligence',
       author='rapid7',
       author_email='',

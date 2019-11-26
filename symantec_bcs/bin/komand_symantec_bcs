@@ -6,7 +6,7 @@ from komand_symantec_bcs import connection, actions, triggers
 
 Name = 'Symantec Business Critical Services'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '1.0.2'
 Description = 'The Symantec Business Critical Services plugin allows you to submit a file to Symantec Security Response'
 
 

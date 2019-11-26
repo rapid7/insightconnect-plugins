@@ -6,7 +6,7 @@ from komand_grr import connection, actions, triggers
 
 Name = 'Google Rapid Response'
 Vendor = 'rapid7'
-Version = '2.0.1'
+Version = '2.0.2'
 Description = 'The GRR plugin allows you to organize and start hunts using GRR'
 
 

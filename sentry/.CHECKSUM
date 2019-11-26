@@ -1,7 +1,7 @@
 {
-	"spec": "8b508f5b028387e57c83fc1c04e7aef5",
-	"manifest": "b9a158e395c6ce0b49d0e0e15102f4c0",
-	"setup": "1ae3a73ee542ac4510e817921d447782",
+	"spec": "89179009257c05892397cd164e32b1de",
+	"manifest": "5f4c2ccdc584343895cceb39bbfb1078",
+	"setup": "70497d9e6383688f40d6784209873b36",
 	"schemas": [
 		{
 			"identifier": "list_issue_events/schema.py",

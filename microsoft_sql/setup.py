@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='microsoft_sql-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='Microsoft SQL database plugin for Microsoft SQL queries',
       author='rapid7',
       author_email='',
