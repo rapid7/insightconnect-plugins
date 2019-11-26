@@ -1,0 +1,26 @@
+{
+    "body": {
+        "connection": {
+            "application_id": "",
+            "application_secret": {
+                "secretKey": ""
+            },
+            "tenant_id": "",
+            "username_password": {
+                "password": "",
+                "username": ""
+            }
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "risk_level": "low"
+        },
+        "meta": {},
+        "trigger": "risk_detection"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

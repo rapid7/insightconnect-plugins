@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
-description: Preform Administrative tasks in Azure AD
-version: 1.3.1
+description: Perform Administrative tasks in Azure AD
+version: 1.4.0
 vendor: rapid7
 support: community
 status: []
@@ -88,7 +88,6 @@ types:
       type: string
       description: "ID"
       required: false
-
   group:
     mailNickname:
       title: "Mail Nickname"
@@ -155,6 +154,144 @@ types:
       type: boolean
       description: "Mail enabled"
       required: false
+  geo_coordinates:
+    altitude:
+      title: Altitude
+      description: The altitude (height), in feet, above sea level
+      type: string
+      required: false
+    latitude:
+      title: Latitude
+      description: The latitude, in decimal
+      type: string
+      required: false
+    longitude:
+      title: Longitude
+      description: The longitude, in decimal
+      type: string
+      required: false
+  sign_in_location:
+    city:
+      title: City
+      description: City where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity
+      type: string
+      required: false
+    country_or_region:
+      title: Country Or Region
+      description: Country code info (2 letter code) where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity
+      type: string
+      required: false
+    geo_coordinates:
+      title: Geo Coordinates
+      description: Geo coordinates
+      type: geo_coordinates
+      required: false
+    state:
+      title: State
+      description: State where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity
+      type: string
+      required: false
+  risk:
+    id:
+      title: ID
+      description: Unique ID of the risk detection
+      type: string
+      required: true
+    request_id:
+      title: Request ID
+      description: Request ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in
+      type: string
+      required: false
+    correlation_id:
+      title: Correlation ID
+      description: Correlation ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in
+      type: string
+      required: false
+    risk_type:
+      title: Risk Type
+      description: The type of risk event detected
+      type: string
+      required: false
+    risk_state:
+      title: Risk State
+      description: The state of a detected risky user or sign-in
+      type: string
+      required: false
+    risk_level:
+      title: Risk Level
+      description: Level of the detected risk
+      type: string
+      required: false
+    risk_detail:
+      title: Risk Detail
+      description: Details of the detected risk. Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden
+      type: string
+      required: false
+    source:
+      title: Risk Level
+      description: Source of the risk detection. For example, activeDirectory
+      type: string
+      required: false
+    detection_timing_type:
+      title: Risk Level
+      description: Timing of the detected risk (real-time/offline). The possible values are notDefined, realtime, nearRealtime, offline, unknownFutureValue
+      type: string
+      required: false
+    activity:
+      title: Activity
+      description: Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue
+      type: string
+      required: false
+    token_issuer_type:
+      title: Activity
+      description: Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue
+      type: string
+      required: false
+    ip_address:
+      title: IP Address
+      description: IP address of the client from where the risk occurred
+      type: string
+      required: false
+    location:
+      title: Location
+      description: Location of the client from where the risk occurred
+      type: sign_in_location
+      required: false
+    activity_date_time:
+      title: Activity Date Time
+      description: Date and time that the risky activity occurred
+      type: string
+      required: false
+    detected_date_time:
+      title: Detected Date Time
+      description: Date and time that the risk was detected
+      type: string
+      required: false
+    last_updated_date_time:
+      title: Last Updated Date Time
+      description: Date and time that the risk detection was last updated
+      type: string
+      required: false
+    user_id:
+      title: User ID
+      description: User ID
+      type: string
+      required: false
+    user_display_name:
+      title: User Display Name
+      description: User display name
+      type: string
+      required: false
+    user_principal_name:
+      title: User Principal Name
+      description: The user principal name (UPN) of the user
+      type: string
+      required: false
+    additional_info:
+      title: Additional Information
+      description: Additional information associated with the risk detection
+      type: string
+      required: false
 
 connection:
   tenant_id:
@@ -172,8 +309,6 @@ connection:
     description: The secret of the registered application that obtained the refresh token
     type: credential_secret_key
     required: true
-
-
 actions:
   disable_user_account:
     title: Disable User Account
@@ -336,3 +471,26 @@ actions:
         description: Was operation successful
         type: boolean
         required: false
+triggers:
+  risk_detection:
+    title: Risk Detection
+    description: User and sign-in linked risk detections and associated information about the detection
+    input:
+      risk_level:
+        title: Risk Level
+        description: Risk level
+        type: string
+        required: true
+        enum:
+          - "low"
+          - "medium"
+          - "high"
+          - "hidden"
+          - "none"
+          - "all"
+    output:
+      risk:
+        title: Risk
+        description: Risk
+        type: risk
+        required: true
