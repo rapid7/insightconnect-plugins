@@ -115,7 +115,6 @@ _This plugin does not contain any custom output types._
 
 This plugin does not contain any troubleshooting information.
 
-
 # Version History
 
 * 1.1.2 - New spec and help.md format for the Hub

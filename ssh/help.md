@@ -38,7 +38,6 @@ Example output:
 
 * Run a command on a remote host
 
-
 # Requirements
 
 * Credentials for the target remote host

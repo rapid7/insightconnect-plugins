@@ -598,7 +598,7 @@ Example output:
 
 ### Triggers
 
-
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

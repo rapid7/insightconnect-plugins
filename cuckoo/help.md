@@ -1,6 +1,5 @@
 # Description
 
-
 [Cuckoo Sandbox](https://cuckoosandbox.org/) is an open source automated malware analysis system. It enables
  tracing of API calls, file behavior, and analysis of memory and network traffic. Using the Cuckoo Sandbox plugin for
 Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more.

@@ -117,7 +117,6 @@ Example output:
 
 #### Create NonHTTPBased Policy
 
-
 This action is used to create a non-HTTP based policy.
 
 ##### Input
