@@ -4,7 +4,7 @@ products: [insightconnect]
 name: dirname
 title: Dirname
 description: This plugin gets the directory name of a file path or protocol and domain of a URL
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []

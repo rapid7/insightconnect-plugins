@@ -7,7 +7,7 @@ vendor: rapid7
 status: []
 description: This plugin utilizes Cisco Firepower Management Center to create a new block URL policy
  Cisco Firepower Management Center is an administrative nerve center for managing critical Cisco network security solutions
-version: 1.0.1
+version: 1.0.2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_firepower_management_center
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE

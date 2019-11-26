@@ -111,6 +111,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.4 - New spec and help.md format for the Hub
 * 1.0.3 - New spec and help.md format for the Hub
 * 1.0.2 - Add `utilities` plugin tag for Marketplace searchability
 * 1.0.1 - Fix issue where Lookup Workflow Name can crash due to excessive data

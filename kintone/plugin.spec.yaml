@@ -4,7 +4,7 @@ products: [insightconnect]
 name: kintone
 title: Kintone
 description: Custom workflows and data management for businesses and non-profits in one place
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []

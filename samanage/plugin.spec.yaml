@@ -4,7 +4,7 @@ products: [insightconnect]
 name: samanage
 title: Samanage
 description: The Samanage plugin allows you to start workflows on new incidents, manage incidents, and manage users
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

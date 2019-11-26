@@ -4,7 +4,7 @@ products: [insightconnect]
 name: zeus_tracker
 title: ZeuS Tracker
 description: The ZeuS Command&Control Server Tracking plugin
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: [obsolete]

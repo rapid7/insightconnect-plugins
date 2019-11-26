@@ -4,7 +4,7 @@ products: [insightconnect]
 name: google_admin
 title: Google Apps Admin
 description: Get and suspend users with the Google admin plugin
-version: 1.0.3
+version: 1.0.4
 vendor: rapid7
 support: community
 status: []

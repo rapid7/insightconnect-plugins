@@ -366,6 +366,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 3.0.2 - New spec and help.md format for the Hub
 * 3.0.1 - New spec and help.md format for the Hub
 * 3.0.0 - Add URL in Get TTP URL Logs action to filter output | Update connection settings to the proper authentication supported by the Mimecast API
 * 2.5.0 - New action Decode URL

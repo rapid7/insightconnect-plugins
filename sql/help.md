@@ -80,6 +80,7 @@ For the SQL query action, be sure that your query is valid SQL.
 
 # Version History
 
+* 2.0.6 - New spec and help.md format for the Hub
 * 2.0.5 - New spec and help.md format for the Hub
 * 2.0.4 - Add support for Microsoft SQL server
 * 2.0.3 - Fix issue where credentials used incorrect username | Update help

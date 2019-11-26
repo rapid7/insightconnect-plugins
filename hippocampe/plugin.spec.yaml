@@ -4,7 +4,7 @@ products: [insightconnect]
 name: hippocampe
 title: Hippocampe
 description: The Hippocampe plugin allows for advanced queries and management of your Hippocampe feeds
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

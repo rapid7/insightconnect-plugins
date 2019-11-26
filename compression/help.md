@@ -129,6 +129,7 @@ On decompression, be sure that the inputted file has been compressed using one o
 
 # Version History
 
+* 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - Rename "Create archive" action to "Create Archive" | Rename "Decompress bytes" action to "Decompress Bytes" | Rename "Compress bytes" action to "Compress Bytes" | Rename "Extract Archive" to "Exctract archive"
 * 1.1.0 - Port to Python v2 architecture | Support web server mode

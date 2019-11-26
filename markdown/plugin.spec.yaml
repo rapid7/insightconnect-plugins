@@ -4,7 +4,7 @@ products: [insightconnect]
 name: markdown
 title: Markdown
 description: Convert markdown to and from various popular formats
-version: 2.2.2
+version: 2.2.3
 vendor: rapid7
 support: community
 status: []

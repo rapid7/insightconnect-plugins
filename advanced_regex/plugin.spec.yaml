@@ -4,7 +4,7 @@ products: [insightconnect]
 name: advanced_regex
 title: Advanced Regex
 description: This plugin performs advanced regex operations on a string using Python regex
-version: 1.0.1
+version: 1.0.2
 support: community
 vendor: rapid7
 status: []

@@ -218,6 +218,7 @@ Example output:
       ],
       "message": "SyntaxError Hello! \"myself\"",
       "sdk": {
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - New spec and help.md format for the Hub
         "version": "1.0.0",
         "name": "komand",
@@ -314,6 +315,7 @@ You can find the [https://sentry.io/settings/{organization_slug}/{project_slug}/
 
 # Version History
 
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 

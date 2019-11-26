@@ -4,7 +4,7 @@ products: [insightconnect]
 name: pushover
 title: Pushover.net
 description: The Pushover plugin allows you to send Pushover notifications
-version: 1.0.1
+version: 1.0.2
 support: community
 vendor: rapid7
 status: []

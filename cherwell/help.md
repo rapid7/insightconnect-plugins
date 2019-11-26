@@ -320,6 +320,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.1.2 - New spec and help.md format for the Hub
 * 2.1.1 - New spec and help.md format for the Hub
 * 2.1.0 - New action Update Incident
 * 2.0.1 - Fixes issue where Create Incident was not properly formatting data to be passed to Cherwell

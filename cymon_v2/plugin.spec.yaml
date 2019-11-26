@@ -5,7 +5,7 @@ name: cymon_v2
 title: Cymon v2
 description: Cymon is the largest tracker of open-source security reports about phishing,
   malware, botnets and other malicious activities
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: [obsolete]

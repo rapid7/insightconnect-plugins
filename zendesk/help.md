@@ -331,6 +331,7 @@ This plugin does not contain any troubleshooting information.
 # Version History
 
 * 2.0.0 - Use new credential types
+* 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Updated Search action to return multiple results
 * 1.0.1 - Updated to use PyPy3 SDK

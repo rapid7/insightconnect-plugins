@@ -173,6 +173,7 @@ Common examples:
 
 # Version History
 
+* 1.0.3 - New spec and help.md format for the Hub
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Update to use the `komand/python-2-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.0 - Support web server mode

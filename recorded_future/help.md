@@ -538,6 +538,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.5.4 - New spec and help.md format for the Hub
 * 1.5.3 - New spec and help.md format for the Hub
 * 1.5.2 - Fix issue where timestamp for evidenceDetails was set to integer, timestamp is now expected as datetime from RecordedFuture
 * 1.5.1 - Fix issue where parameter timestamp in evidenceDetails was set as a string in Lookup IP Address action, timestamp is now an integer

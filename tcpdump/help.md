@@ -54,6 +54,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.3 - New spec and help.md format for the Hub
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode

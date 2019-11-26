@@ -173,6 +173,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Fixed issue where unsupported file types failed | Update to add `supported_file` to filedata type
 * 1.0.2 - Fixed issue where connection was not passing the API key properly

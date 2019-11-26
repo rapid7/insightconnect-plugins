@@ -4,7 +4,7 @@ products: [insightconnect]
 name: openphish
 title: "OpenPhish"
 description: "OpenPhish is a fully automated self-contained platform for phishing intelligence. Use the OpenPhish plugin to identify zero-day phishing sites and provide real-time threat intelligence"
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

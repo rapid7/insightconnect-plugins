@@ -7,7 +7,7 @@ vendor: rapid7
 support: community
 status: []
 description: The Phabricator plugin allows you to setup and manage code reviews
-version: 1.0.1
+version: 1.0.2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/phabricator
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE

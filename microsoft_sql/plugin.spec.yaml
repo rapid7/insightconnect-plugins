@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: microsoft_sql
 title: "Microsoft SQL"
 description: "Microsoft SQL database plugin for Microsoft SQL queries"
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 tags: [ "mssql", "sql" ]
 support: rapid7

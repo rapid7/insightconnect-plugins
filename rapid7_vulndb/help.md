@@ -69,6 +69,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Fix issue where Published Date input in the Search Database action would not always parse correctly | Fix issue with memory leaks
 * 1.0.1 - Update to v2 Python plugin architecture and support web server mode

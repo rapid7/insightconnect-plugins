@@ -294,6 +294,7 @@ Error values use the standard HTTP codes (200 OK, 404 Not Found, etc)
 
 # Version History
 
+* 3.0.2 - New spec and help.md format for the Hub
 * 3.0.1 - New spec and help.md format for the Hub
 * 3.0.0 - Updated to support Python3 and fix issue with exception handling
 * 2.0.0 - Support web server mode | Update to new credential types | Rename "Get information about a virtual machine" to "Get Information About a Virtual Machine"

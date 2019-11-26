@@ -191,6 +191,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 2.1.3 - New spec and help.md format for the Hub
 * 2.1.2 - New spec and help.md format for the Hub
 * 2.1.1 - Fix typo in plugin spec
 * 2.1.0 - Add Download File action

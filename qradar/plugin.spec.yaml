@@ -4,7 +4,7 @@ products: [insightconnect]
 name: qradar
 title: QRadar Security Intelligence Platform
 description: The QRadar plugin allows you to run Ariel queries and retrieve policy offense data
-version: 2.0.1
+version: 2.0.2
 vendor: rapid7
 support: community
 status: []

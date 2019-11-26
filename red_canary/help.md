@@ -1137,6 +1137,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 2.1.6 - New spec and help.md format for the Hub
 * 2.1.5 - New spec and help.md format for the Hub
 * 2.1.4 - Bug fix for New Events trigger where PluginException was not supported in SDK image | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
 * 2.1.3 - Bug fix for New Detection trigger cache where additional dates were being added to the cache file. When the cache was loaded from the file it would set the lastest cache to an older date, allowing old detections to be triggered on

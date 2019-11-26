@@ -4,7 +4,7 @@ products: [insightconnect]
 name: git
 title: Git
 description: Git plugin allows you to add, remove and commit files to Git repository
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

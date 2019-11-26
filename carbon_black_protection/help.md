@@ -553,6 +553,7 @@ Carbon Black Protection schedules events to happen, therefore what you see in ou
 
 # Version History
 
+* 2.2.2 - New spec and help.md format for the Hub
 * 2.2.1 - New spec and help.md format for the Hub
 * 2.2.0 - Update to add Status to Resolve Approval Request | New action Get Approval Reqeust
 * 2.1.0 - Add Action: Create File Rule | Add Action: Get File Rule

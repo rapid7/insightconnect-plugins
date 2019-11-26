@@ -4,7 +4,7 @@ products: [insightconnect]
 name: freegeoip
 title: FreeGeoIP
 description: This plugin lookup GeoIP information for a specified host
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: [obsolete]

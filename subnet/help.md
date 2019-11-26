@@ -61,6 +61,7 @@ However, the number of network does include the all-ones and all-zeros network.
 
 # Version History
 
+* 1.0.3 - New spec and help.md format for the Hub
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode

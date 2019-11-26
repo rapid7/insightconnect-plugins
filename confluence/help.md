@@ -98,6 +98,7 @@ Make sure the credentials are valid and the Confluence URL is correct.
 
 # Version History
 
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.3 - Pin Confluence python library at 0.2

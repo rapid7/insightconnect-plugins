@@ -6,7 +6,7 @@ title: McAfee ESM
 description: McAfee Enterprise Security Manager is a security information and event
   management (SIEM) solution that delivers actionable intelligence and integrations
   to prioritize, investigate, and respond to threats
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

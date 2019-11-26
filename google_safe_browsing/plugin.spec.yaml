@@ -4,7 +4,7 @@ products: [insightconnect]
 name: google_safe_browsing
 title: Google Safe Browsing
 description: Check URLs against the Google Safe Browsing service
-version: 2.0.1
+version: 2.0.2
 vendor: rapid7
 support: community
 status: [obsolete]

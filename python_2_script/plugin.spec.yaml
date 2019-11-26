@@ -4,7 +4,7 @@ products: [insightconnect]
 name: python_2_script
 title: Python 2 Script
 description: The Python 2 plugin allows you to run a Python 2 script
-version: 2.0.3
+version: 2.0.4
 vendor: rapid7
 support: community
 status: [deprecated]

@@ -408,6 +408,7 @@ The RSA token private key, JWT, client ID and secret must be provided to the plu
 
 # Version History
 
+* 2.2.3 - New spec and help.md format for the Hub
 * 2.2.2 - New spec and help.md format for the Hub
 * 2.2.1 - Fix issue where a misleading error message could be given in the log
 * 2.2.0 - New actions Get User Groups and Get User Info from Login

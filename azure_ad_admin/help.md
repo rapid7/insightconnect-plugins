@@ -292,6 +292,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.2 - New spec and help.md format for the Hub
 * 1.3.1 - New spec and help.md format for the Hub
 * 1.3.0 - New action Create User
 * 1.2.0 - New actions Get Group by Name, Add User to Group, and Remove User from Group

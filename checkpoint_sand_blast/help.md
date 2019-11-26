@@ -179,6 +179,7 @@ hash must be SHA1
 
 # Version History
 
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 

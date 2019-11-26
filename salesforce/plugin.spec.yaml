@@ -4,7 +4,7 @@ products: [insightconnect]
 name: salesforce
 title: Salesforce
 description: The Salesforce plugin allows you to search, update, and manage salesforce records
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

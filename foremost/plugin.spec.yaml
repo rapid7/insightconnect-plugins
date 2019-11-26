@@ -4,7 +4,7 @@ products: [insightconnect]
 name: foremost
 title: Foremost
 description: The Foremost plugin will take a disk image and attempt to recover files from it
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: qualys_ssl
 title: Qualys SSL Labs
 description: The Qualys SSL plugin allows the user to get information and test SSL servers
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []

@@ -6,7 +6,7 @@ title: Rapid7 tCell
 description: Rapid7 tCell is a Next-Gen Cloud WAF that enables web applications to
   defend themselves by combining in-app instrumentation (RASP) and analytics in the
   cloud
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: rapid7
 status: []

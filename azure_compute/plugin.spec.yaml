@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_compute
 title: Azure Compute
 description: Azure Virtual Machines is one of several types of on-demand, scalable computing resources that Azure offers
-version: 3.0.1
+version: 3.0.2
 vendor: rapid7
 support: community
 status: []

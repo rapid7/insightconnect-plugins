@@ -524,6 +524,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.0.3 - New spec and help.md format for the Hub
 * 4.0.2 - New spec and help.md format for the Hub
 * 4.0.1 - Update actions Submit File and Submit URL to specify what analyzer to use | Update file type support for the Submit File action
 * 4.0.0 - New actions Get Samples and Submit URL | Removed action Get Analysis by Hash | Fixed issue where Submit File results are not available in the workflow builder, and filename would not be included when submitting the file for analysis | Get Samples should replace Get Analysis by Hash

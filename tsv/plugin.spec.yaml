@@ -5,7 +5,7 @@ name: tsv
 title: TSV
 description: "TSV (Tab Separated Values) is a simple data format for storing data. This plugin allows one to
   extract fields from TSV strings and files"
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

@@ -241,6 +241,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - Support web server mode | Update to new credential types | Rename "Add Data to Reference_Data Lists" action to "Add Data to Reference Data Lists"
 * 1.0.0 - Finalize plugin

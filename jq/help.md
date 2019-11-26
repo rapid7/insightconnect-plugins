@@ -77,6 +77,7 @@ The `--seq` and `--stream` flags are not supported in version 0.1.0 of this plug
 
 # Version History
 
+* 2.0.6 - New spec and help.md format for the Hub
 * 2.0.5 - New spec and help.md format for the Hub
 * 2.0.4 - Fix issue where jq was not available in the docker image | Update to python | Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size | Set a default `timeout` of 15 seconds in the Run action
 * 2.0.3 - Add `utilities` plugin tag for Marketplace searchability

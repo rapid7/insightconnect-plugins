@@ -4,7 +4,7 @@ products: [insightconnect]
 name: string
 title: String Operations
 description: The String plugin provides common programmatic string operations
-version: 1.2.1
+version: 1.2.2
 vendor: rapid7
 support: community
 status: []

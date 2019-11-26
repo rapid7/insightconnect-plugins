@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
 description: This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 status: []
 support: rapid7

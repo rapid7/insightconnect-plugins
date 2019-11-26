@@ -409,6 +409,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.2 - New spec and help.md format for the Hub
 * 2.1.1 - New spec and help.md format for the Hub
 * 2.1.0 - Added action Check Domains Alternate Nameservers
 * 2.0.0 - Added timeout to Check Domain

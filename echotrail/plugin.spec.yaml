@@ -5,7 +5,7 @@ name: echotrail
 title: "EchoTrail Insights"
 description: "EchoTrail Insights is a database of executable behavioral analytics, searchable by filename or
 SHA256 or MD5 hash. Users can lookup filenames and hashes using the EchoTrail Insights plugin for Rapid7 InsightConnect"
-version: 1.0.1
+version: 1.0.2
 vendor: echotrail
 support: partner
 status: []

@@ -569,6 +569,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.2.2 - New spec and help.md format for the Hub
 * 3.2.1 - New spec and help.md format for the Hub
 * 3.2.0 - New action Delete User
 * 3.1.2 - Update connection test

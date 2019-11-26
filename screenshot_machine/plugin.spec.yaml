@@ -4,7 +4,7 @@ products: [insightconnect]
 name: screenshot_machine
 title: Screenshot Machine
 description: The Screenshot Machine plugin allows you to capture screenshots
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

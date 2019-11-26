@@ -4,7 +4,7 @@ products: [insightconnect]
 name: eml
 title: EML
 description: The EML plugins will parse and extract data from an EML file
-version: 1.1.2
+version: 1.1.3
 vendor: rapid7
 support: community
 status: []

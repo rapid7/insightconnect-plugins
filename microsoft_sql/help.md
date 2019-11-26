@@ -94,6 +94,7 @@ This plugin uses version-specific drivers for Debian 9.x.
 
 # Version History
 
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 

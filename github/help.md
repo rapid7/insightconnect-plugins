@@ -1047,6 +1047,7 @@ If two-factor authentication is enabled on the GitHub account you will need to [
 
 # Version History
 
+* 2.1.2 - New spec and help.md format for the Hub
 * 2.1.1 - New spec and help.md format for the Hub
 * 2.1.0 - New actions: Create Issue Comment, Close Issue, Add Issue Label
 * 2.0.1 - Fix missing Search action | Pin pygithub and python-dateutil libraries | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Enable verification of SSL/TLS certificates for github.com

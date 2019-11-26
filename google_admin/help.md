@@ -91,6 +91,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 1.0.4 - New spec and help.md format for the Hub
 * 1.0.3 - New spec and help.md format for the Hub
 * 1.0.2 - Fix typo in plugin spec
 * 1.0.1 - Update to connection and troubleshooting documentation

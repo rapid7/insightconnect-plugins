@@ -4,7 +4,7 @@ products: [insightconnect]
 name: finger
 title: Finger
 description: Query the Finger Service
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

@@ -88,6 +88,7 @@ Note that the API is limited to 10 requests per hour per IP address.
 
 # Version History
 
+* 1.0.3 - New spec and help.md format for the Hub
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Graceful exit for invalid URLs
 * 1.0.0 - Initial plugin
