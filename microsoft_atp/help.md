@@ -35,7 +35,7 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-### Get Computer ID from Machine Name
+#### Get Computer ID from Machine Name
 
 This action is used to translate a machine name to computer ID.
 
@@ -59,7 +59,7 @@ Example output:
 }
 ```
 
-### Get Machine ID from Alert
+##### Get Machine ID from Alert
 
 This action is used to retrieve the machine ID related to an alert.
 
