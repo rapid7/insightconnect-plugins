@@ -53,3 +53,6 @@ demo-*.tar.gz
 
 # Ignore test output generated from icon-plugin tool
 **/.output
+
+# Ignore test json files. This is to stop accidental uploading of passwords
+*.json
