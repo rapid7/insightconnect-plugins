@@ -21,6 +21,7 @@ Second column contents: birds
 * Search and replace text in a file
 
 # Requirements
+
 _This plugin does not contain any requirements._
 
 # Documentation

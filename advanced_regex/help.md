@@ -9,6 +9,7 @@ The Advanced Regex InsightConnect plugin performs regex operations on a string u
 * Split text
 
 # Requirements
+
 _This plugin does not contain any requirements._
 
 # Documentation

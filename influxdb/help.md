@@ -15,6 +15,7 @@ This plugin utilizes the [InfluxDB API](https://docs.influxdata.com/influxdb/v1.
 # Documentation
 
 ## Setup
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
