@@ -317,7 +317,7 @@ actions:
       user_id:
         title: User ID
         type: string
-        description: User ID to disable e.g. bob@hotmail.com
+        description: User ID to disable e.g. user@example.com
         required: true
     output:
       success:
@@ -332,7 +332,7 @@ actions:
       user_id:
         title: User ID
         type: string
-        description: User ID to enable e.g. bob@hotmail.com
+        description: User ID to enable e.g. user@example.com
         required: true
     output:
       success:
@@ -347,7 +347,7 @@ actions:
       user_id:
         title: User ID
         type: string
-        description: User ID e.g. bob@hotmail.com
+        description: User ID e.g. user@example.com
         required: true
     output:
       user_information:
@@ -371,7 +371,7 @@ actions:
         type: string
       user_principal_name:
         title: User Principal Name
-        description: The user principal name e.g. someuser@contoso.com
+        description: The user principal name e.g. user@example.com
         required: true
         type: string
       account_enabled:
@@ -437,7 +437,7 @@ actions:
     input:
       user_id:
         title: User ID
-        description: User ID e.g. bob@hotmail.com
+        description: User ID e.g. user@example.com
         type: string
         required: true
       group_name:
@@ -457,7 +457,7 @@ actions:
     input:
       user_id:
         title: User ID
-        description: User ID e.g. bob@hotmail.com
+        description: User ID e.g. user@example.com
         type: string
         required: true
       group_name:

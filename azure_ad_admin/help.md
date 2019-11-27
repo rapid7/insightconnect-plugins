@@ -207,7 +207,7 @@ Example output:
       "Unified"
     ],
     "isAssignableToRole": false,
-    "mail": "AzureADTestGroup@komanddev.onmicrosoft.com",
+    "mail": "user@example.com",
     "mailEnabled": true,
     "mailNickname": "AzureADTestGroup",
     "onPremisesLastSyncDateTime": null,
@@ -216,7 +216,7 @@ Example output:
     "preferredDataLocation": null,
     "proxyAddresses": [
       "SPO:SPO_618d645a-541b-4349-a7c0-3bb73eedd701@SPO_5c824599-dc8c-4d31-96fb-3b886d4f8f10",
-      "SMTP:AzureADTestGroup@komanddev.onmicrosoft.com"
+      "SMTP:user@example.com"
     ],
     "renewedDateTime": "2019-09-20T12:15:21Z",
     "resourceBehaviorOptions": [],

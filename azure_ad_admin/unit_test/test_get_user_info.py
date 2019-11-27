@@ -22,7 +22,7 @@ class TestGetUserInfo(TestCase):
             connection_params = data.get("body").get("connection")
 
         action_params = {
-            "user_id": "jmcadams@komanddev.onmicrosoft.com"
+            "user_id": "user@example.com"
         }
 
         test_connection.connect(connection_params)
@@ -33,6 +33,6 @@ class TestGetUserInfo(TestCase):
                                          'businessPhones': [], 'displayName': 'Joey McAdams', 'givenName': 'Joey',
                                          'jobTitle': 'Sr. Software Engineer', 'mail': '', 'mobilePhone': '',
                                          'officeLocation': '', 'preferredLanguage': '', 'surname': 'McAdams',
-                                         'userPrincipalName': 'jmcadams@komanddev.onmicrosoft.com',
+                                         'userPrincipalName': 'user@example.com',
                                          'id': '08290005-23ba-46b4-a377-b381d651a2fb', 'accountEnabled': True}}
         self.assertEqual(result, expected)
