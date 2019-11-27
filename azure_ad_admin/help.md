@@ -49,7 +49,7 @@ This action is used to create a user with a randomly generated password and send
 |notify_email_body|string|None|False|Body of the email to be sent out. Use $password to place the generated password|None|
 |notify_from|string|None|True|User from which email notifcation will be sent|None|
 |notify_recipient|string|None|True|Email address of the account to be notified of user creation|None|
-|user_principal_name|string|None|True|The user principal name e.g. someuser@contoso.com|None|
+|user_principal_name|string|None|True|The user principal name e.g. user@example.com|None|
 
 ##### Output
 
@@ -73,7 +73,7 @@ This action is used to disable a user account. This action will not disable an a
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID to disable e.g. bob@hotmail.com|None|
+|user_id|string|None|True|User ID to disable e.g. user@example.com|None|
 
 ##### Output
 
@@ -97,7 +97,7 @@ This action is used to enable a user account.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID to enable e.g. bob@hotmail.com|None|
+|user_id|string|None|True|User ID to enable e.g. user@example.com|None|
 
 ##### Output
 
@@ -145,7 +145,7 @@ This action is used to get user information.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID e.g. bob@hotmail.com|None|
+|user_id|string|None|True|User ID e.g. user@example.com|None|
 
 ##### Output
 
@@ -168,7 +168,7 @@ Example output:
     "officeLocation": "",
     "preferredLanguage": "",
     "surname": "McAdams",
-    "userPrincipalName": "bob@hotmail.com",
+    "userPrincipalName": "user@example.com",
     "id": "08290005-23ba-46b4-a377-b381d651a2fb",
     "accountEnabled": true
   }
@@ -237,7 +237,7 @@ This action is used to add a user to a group.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group_name|string|None|True|Group Name e.g. My Azure Group|None|
-|user_id|string|None|True|User ID e.g. bob@hotmail.com|None|
+|user_id|string|None|True|User ID e.g. user@example.com|None|
 
 ##### Output
 
@@ -262,7 +262,7 @@ This action is used to remove a user from a group.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group_name|string|None|True|Group Name e.g. My Azure Group|None|
-|user_id|string|None|True|User ID e.g. bob@hotmail.com|None|
+|user_id|string|None|True|User ID e.g. user@example.com|None|
 
 ##### Output
 
