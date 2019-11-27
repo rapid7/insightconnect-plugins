@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "update_user_role",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "access_all_asset_groups": false,
+            "access_all_sites": true,
+            "role_id": "global-admin",
+            "user_id": 33
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

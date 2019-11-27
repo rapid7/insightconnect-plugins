@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "set",
+        "connection": {
+            "host": null,
+            "port": null,
+            "prefix": null,
+            "protocol": null,
+            "tcp": {
+                "timeout": null
+            },
+            "udp": {
+                "maxudpsize": null
+            }
+        },
+        "input": {
+            "rate": 1,
+            "stat": "settest",
+            "value": 2
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "display_search_results",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "license": null,
+            "port": null,
+            "ssl_verify": null,
+            "use_ssl": null
+        },
+        "input": {
+            "job_id": "",
+            "timeout": 0
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

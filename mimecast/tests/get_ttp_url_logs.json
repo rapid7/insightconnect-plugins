@@ -1,0 +1,28 @@
+{
+  "body": {
+    "action": "get_ttp_url_logs",
+    "meta": {},
+    "input": {
+      "from": "2015-11-16T14:49:18+0000",
+      "route": "all",
+      "scan_result": "all",
+      "to": "",
+      "url_to_filter": ""
+    },
+    "connection": {
+      "access_key": {
+        "secretKey": "mYtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-nk2JcI7ynUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-b6vCkv"
+      },
+      "app_id": "25d2e4b1-8cc2-4806-bd79-6ef332a47374",
+      "app_key": {
+        "secretKey": "323e54c6-9e61-4fab-8ec7-a0710f3859e3"
+      },
+      "secret_key": {
+        "secretKey": "MjVvgnkaU1LvoK+eKZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw=="
+      },
+      "url": "https://sandbox-api.mimecast.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

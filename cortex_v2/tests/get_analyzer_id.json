@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "get_analyzer",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "analyzer_id": "0f25f71570887a5eaf34811e410e044f"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

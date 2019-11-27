@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "add_urls",
+    "input": {
+      "urls": ["www.google.com", "www.facebook.com"],
+      "distribution": "This Organization",
+      "comment": "Test Comment",
+      "event": "2",
+      "proposal": false
+    },
+    "connection": {
+      "automation_code": {
+        "secretKey": ""
+      },
+      "url": "",
+      "ssl": false
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

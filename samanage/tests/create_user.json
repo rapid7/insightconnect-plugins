@@ -1,0 +1,22 @@
+{
+    "body": {
+        "action": "create_user",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "department": "Marketing",
+            "email": "",
+            "mobile_phone": "0012345",
+            "name": "John Snow",
+            "phone": "123456",
+            "role": "Read Only"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

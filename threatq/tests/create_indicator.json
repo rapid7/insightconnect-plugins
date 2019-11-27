@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "create_indicator",
+        "connection": {
+            "client_id": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "proxy": null
+        },
+        "input": {
+            "source": "news media",
+            "status": "Active",
+            "type": "String",
+            "value": "a string value"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

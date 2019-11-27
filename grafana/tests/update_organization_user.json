@@ -1,0 +1,24 @@
+{
+    "body": {
+        "action": "update_organization_user",
+        "connection": {
+            "basic_auth": {
+                "password": null,
+                "username": null
+            },
+            "port": null,
+            "token_auth": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "organization_id": -1,
+            "role": "Admin",
+            "user_id": 1
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

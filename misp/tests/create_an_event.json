@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "create_an_event",
+    "input": {
+      "distribution": "This Organization",
+      "threat_level_id": "2",
+      "analysis": "1",
+      "info": "Testing 1...2...3...4",
+      "published": false
+    },
+    "connection": {
+      "automation_code": {
+        "secretKey": ""
+      },
+      "url": "",
+      "ssl": false
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

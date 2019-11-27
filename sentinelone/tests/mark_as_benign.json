@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "mark_as_benign",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "target_scope": "site",
+            "threat_id": "566535959618699500"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

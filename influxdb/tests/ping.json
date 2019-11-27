@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "ping",
+        "connection": {
+            "server": null
+        },
+        "input": {},
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

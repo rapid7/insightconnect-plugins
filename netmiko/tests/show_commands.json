@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "show_commands",
+        "connection": {
+            "device_type": null,
+            "host": null,
+            "key": {
+                "content": null,
+                "filename": null
+            },
+            "password": null,
+            "port": null,
+            "secret": null,
+            "username": null,
+            "verbose": null
+        },
+        "input": {
+            "command": "show interface vlan 1",
+            "host": "ciscoasa.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "update_data_theft",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "action": "cloak",
+            "custom_identity_theft_type": "test",
+            "enabled": "yes",
+            "id": "test-v14-data-theft",
+            "identity_theft_type": "custom",
+            "initial_characters_to_keep": 0,
+            "policy_id": "test-v14-policy",
+            "trailing_characters_to_keep": 0
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

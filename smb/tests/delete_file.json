@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "delete_file",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "domain": null,
+            "host": null,
+            "netbios_name": null,
+            "port": null,
+            "timeout": null,
+            "use_ntlmv2": null
+        },
+        "input": {
+            "file_path": "",
+            "share_name": "",
+            "timeout": 30
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

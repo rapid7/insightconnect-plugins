@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "ping",
+        "connection": null,
+        "input": {
+            "count": 0,
+            "host": "8.8.8.8",
+            "resolve_hostname": false
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

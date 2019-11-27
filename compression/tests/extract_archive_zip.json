@@ -1,0 +1,15 @@
+{
+    "body": {
+        "action": "extract_archive",
+        "connection": null,
+        "input": {
+            "archive": {
+                "content": "",
+                "filename": "test.zip"
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

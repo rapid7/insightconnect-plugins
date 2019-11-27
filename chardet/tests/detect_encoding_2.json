@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "detect_encoding",
+        "connection": null,
+        "input": {
+            "bytes_to_analyze": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

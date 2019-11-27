@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "delete_host",
+        "connection": {
+            "api_version": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "infoblox_host": null
+        },
+        "input": {
+            "_ref": "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLmFieA:abx.info.com/default"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

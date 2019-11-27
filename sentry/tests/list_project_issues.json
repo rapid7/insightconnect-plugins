@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "list_project_issues",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "organization_slug": "komand-test",
+            "project_slug": "pythontest",
+            "query": "is:resolved",
+            "shortIdLookup": false,
+            "statsPeriod": "14d"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

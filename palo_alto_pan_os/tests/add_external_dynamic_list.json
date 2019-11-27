@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "add_external_dynamic_list",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "verify_cert": null
+        },
+        "input": {
+            "day": "Monday",
+            "description": "testing2",
+            "list_type": "Domain List",
+            "name": "test",
+            "repeat": "Five Minute",
+            "source": "https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt",
+            "time": "00"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

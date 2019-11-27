@@ -1,0 +1,24 @@
+{
+    "body": {
+        "action": "simple_search",
+        "connection": {
+            "client_id": null,
+            "client_secret": {
+                "secretKey": null
+            },
+            "salesforce_account_username_and_password": {
+                "password": null,
+                "username": null
+            },
+            "security_token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "text": "Acme"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

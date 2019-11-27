@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "info",
+        "connection": {
+            "password": null,
+            "server": null,
+            "user": null
+        },
+        "input": {
+            "arch": "x86_64",
+            "distro": "CentOS 7",
+            "epoch": "",
+            "key": "",
+            "name": "flute",
+            "release": "",
+            "repo": "",
+            "version": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

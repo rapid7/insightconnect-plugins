@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "create_snapshot_from_volume",
+        "connection": {
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "snapshot_name": "New Snapshot",
+            "volume_id": "69628664-db8b-11e6-b356-000f53315820"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

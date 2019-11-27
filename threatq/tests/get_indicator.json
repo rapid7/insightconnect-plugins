@@ -1,0 +1,26 @@
+{
+    "body": {
+        "action": "get_indicator",
+        "connection": {
+            "client_id": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "proxy": null
+        },
+        "input": {
+            "id": 5,
+            "with": [
+                "events",
+                "indicators"
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

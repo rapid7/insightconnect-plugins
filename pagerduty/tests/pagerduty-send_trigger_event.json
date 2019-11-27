@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "send_trigger_event",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "client": "komand",
+            "client_url": "",
+            "contexts": [],
+            "description": "hi there",
+            "details": {
+                "stuff": "things "
+            },
+            "service_key": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

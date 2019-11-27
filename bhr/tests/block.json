@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "block",
+        "connection": {
+            "ssl_verify": null,
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "autoscale": false,
+            "cidr": "1.2.3.4",
+            "duration": "300",
+            "skip_whitelist": false,
+            "source": "malhosts",
+            "why": "SSH Bruteforce"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

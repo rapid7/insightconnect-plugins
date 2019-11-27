@@ -1,0 +1,34 @@
+{
+    "body": {
+        "action": "create_incident",
+        "connection": {
+            "authentication_mode": null,
+            "client_id": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username_and_password": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "business_object_id": "j",
+            "fields_to_change": {
+                "Category": "",
+                "CustomerRecID": "",
+                "Description": "From Python using REST API",
+                "IncidentType": "Incident",
+                "Priority": "2",
+                "Service": "",
+                "ShortDescription": "New Incident",
+                "Source": "Phone",
+                "Subcategory": "New Employee Setup"
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

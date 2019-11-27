@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "search",
+        "connection": {
+            "access_id": {
+                "secretKey": null
+            },
+            "access_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "from_time": "",
+            "page_limit": 100,
+            "page_offset": 0,
+            "query": "_sourceCategory=\"uploads/linux/system\"",
+            "timeone": "UTC",
+            "timeout": 60,
+            "to_time": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

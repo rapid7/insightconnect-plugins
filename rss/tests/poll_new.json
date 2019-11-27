@@ -1,0 +1,18 @@
+{
+    "body": {
+        "connection": {
+            "url": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "frequency": 15
+        },
+        "meta": {},
+        "trigger": "poll"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

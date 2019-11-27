@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "patch_incident",
+        "connection": {
+            "email": null,
+            "hostname": null,
+            "password": null
+        },
+        "input": {
+            "incident_id": 3944,
+            "organization_id": 201,
+            "patch": {
+                "changes": [],
+                "version": 0
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

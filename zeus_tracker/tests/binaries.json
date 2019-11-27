@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "binaries",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "limit": 10
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

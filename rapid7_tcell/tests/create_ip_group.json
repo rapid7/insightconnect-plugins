@@ -1,0 +1,24 @@
+{
+    "body": {
+        "action": "create_ip_group",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "group": {
+                "items": [
+                    {
+                        "type": "cidr",
+                        "value": "allow from 1.1.1.1/32"
+                    }
+                ],
+                "name": "test-ipgroup"
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

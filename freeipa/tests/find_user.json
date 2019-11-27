@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "find_user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null
+        },
+        "input": {
+            "search_parameters": "helpdesk"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,28 @@
+{
+    "body": {
+        "action": "create_target",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "ssl_verify": null,
+            "timeout": null
+        },
+        "input": {
+            "host_list": [
+                "192.168.0.101",
+                "192.168.0.102",
+                "192.168.1.101,192.168.1.103,192.168.1.105",
+                "192.168.1.2/24",
+                "192.168.3.105-112"
+            ],
+            "name": "TESTing create_target",
+            "port_list_id": "LOLNOTEXISTINGHEHE"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "upload",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "passive": null,
+            "secure": null
+        },
+        "input": {
+            "file_content": "",
+            "remote_path": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

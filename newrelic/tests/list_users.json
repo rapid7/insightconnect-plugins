@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "list_users",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "email": "",
+            "ids": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

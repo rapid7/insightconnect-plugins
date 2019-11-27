@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "unlock_file",
+        "input": {
+            "file_id": "blah"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

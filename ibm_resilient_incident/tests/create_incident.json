@@ -1,0 +1,44 @@
+{
+    "body": {
+        "action": "create_incident",
+        "connection": {
+            "email": null,
+            "hostname": null,
+            "password": null
+        },
+        "input": {
+            "incident": {
+                "actions": [],
+                "artifacts": [],
+                "comments": [],
+                "description": {
+                    "content": "This is a new incident created by komand",
+                    "format": "text"
+                },
+                "discovered_date": 0,
+                "name": "New Komand Incident",
+                "perms": {
+                    "assign": true,
+                    "attach_file": true,
+                    "change_members": true,
+                    "close": true,
+                    "comment": true,
+                    "create_artifacts": true,
+                    "create_milestones": true,
+                    "delete": true,
+                    "delete_attachments": true,
+                    "list_artifacts": true,
+                    "list_milestones": true,
+                    "read": true,
+                    "read_attachments": true,
+                    "write": true
+                },
+                "tasks": []
+            },
+            "organization_id": 201
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

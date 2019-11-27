@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "delete_analysis",
+        "connection": {
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 1,
+            "malware_sha256": "838dbf82a37da99aa31d5d3583b75ea636fe504dbf115f399d56d679773eb7fe",
+            "project_name": "test"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

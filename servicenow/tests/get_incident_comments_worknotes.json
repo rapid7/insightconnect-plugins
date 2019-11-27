@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "get_incident_comments_worknotes",
+    "meta": {},
+    "input": {
+      "type": "all",
+      "system_id": "965f140bdb4c8c105f6f00b5ca961922"
+    },
+    "connection": {
+      "client_login": {
+        "username": "",
+        "password": ""
+      },
+      "url": "https://ven02238.service-now.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

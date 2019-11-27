@@ -1,0 +1,27 @@
+{
+    "body": {
+        "action": "emails_retrieve",
+        "connection": {
+            "api_access_id": null,
+            "api_base_url": null,
+            "api_default_org": null,
+            "api_secret_key": null
+        },
+        "input": {
+            "adversary_id": 0,
+            "document_id": 0,
+            "email_id": 0,
+            "id": 0,
+            "incident_id": 0,
+            "indicator": "",
+            "owner": "Komand",
+            "security_label": "",
+            "signature_id": 0,
+            "tag": "",
+            "threat_id": 0
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

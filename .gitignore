@@ -55,4 +55,4 @@ demo-*.tar.gz
 **/.output
 
 # Ignore test json files. This is to stop accidental uploading of passwords
-*.json
+

@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "files",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "job": "257919"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

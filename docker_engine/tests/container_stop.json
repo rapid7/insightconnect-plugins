@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "container_stop",
+        "connection": {
+            "api_version": null,
+            "ca_cert": {
+                "secretKey": null
+            },
+            "client_cert": {
+                "secretKey": null
+            },
+            "client_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": "30335e8911aeeb5930a9fc951f3ff31333c28c8da120067177fa2abc1d2ef658",
+            "timeout": 10
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "suspend_user",
+        "connection": {
+            "admin_user": null,
+            "auth_provider_x509_cert_url": null,
+            "auth_uri": null,
+            "client_email": null,
+            "client_id": null,
+            "client_x509_cert_url": null,
+            "private_key": {
+                "privateKey": null
+            },
+            "private_key_id": null,
+            "project_id": null,
+            "token_uri": null
+        },
+        "input": {
+            "user": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

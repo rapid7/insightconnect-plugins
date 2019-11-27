@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "search_for_ip_address_usages",
+        "connection": {
+            "api_token": {
+                "secretKey": null
+            },
+            "customer_id": null
+        },
+        "input": {
+            "ip_address": "",
+            "max_results": 100
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

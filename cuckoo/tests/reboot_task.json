@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "reboot_task",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "task_id": 32
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

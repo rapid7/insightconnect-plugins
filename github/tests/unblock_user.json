@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "unblock_user",
+    "meta": {},
+    "input": {
+      "username": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

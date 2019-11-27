@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "get_incident_information",
+    "meta": {},
+    "input": {
+      "incident_id": "INC000000000026"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "port": "8008",
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

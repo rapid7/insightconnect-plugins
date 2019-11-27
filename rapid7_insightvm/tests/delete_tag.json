@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "delete_tag",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 74
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

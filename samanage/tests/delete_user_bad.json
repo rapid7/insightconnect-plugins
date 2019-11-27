@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "delete_user",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "user_id": 4245316
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,31 @@
+{
+    "body": {
+        "action": "mblock",
+        "connection": {
+            "ssl_verify": null,
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "batch": [
+                {
+                    "cidr": "1.2.3.5",
+                    "duration": 300,
+                    "source": "readme",
+                    "why": "because!"
+                },
+                {
+                    "cidr": "1.2.3.6",
+                    "duration": 300,
+                    "source": "malhosts",
+                    "why": "test"
+                }
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

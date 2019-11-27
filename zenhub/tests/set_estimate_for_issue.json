@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "set_estimate_for_issue",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "estimate_value": 0,
+            "issue_number": 0,
+            "repo_id": 0
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

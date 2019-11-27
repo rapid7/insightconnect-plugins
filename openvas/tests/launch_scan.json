@@ -1,0 +1,22 @@
+{
+    "body": {
+        "action": "launch_scan",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "ssl_verify": null,
+            "timeout": null
+        },
+        "input": {
+            "profile": "Full and fast",
+            "schedule": "fa6e4b5c-3b19-47e9-83fa-525df16b4189",
+            "target": "127.0.0.1"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

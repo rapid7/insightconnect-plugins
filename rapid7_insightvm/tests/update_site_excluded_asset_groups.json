@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "update_site_excluded_asset_groups",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "excluded_asset_groups": [],
+            "id": 0,
+            "overwrite": true
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

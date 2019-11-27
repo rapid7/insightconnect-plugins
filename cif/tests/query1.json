@@ -1,0 +1,30 @@
+{
+  "body": {
+    "meta": {},
+    "input": {
+      "itype":"ipv4",
+      "otype": "all",
+      "nolog": true,
+      "protocol": "all",
+      "q": "",
+      "observable": "1.2.3.4",
+      "cc": "us",
+      "tags": "",
+      "confidence": 10,
+      "provider": "",
+      "limit": 10,
+      "portlist": ""
+      "itype": ""
+    },
+    "action": "query",
+    "connection": {
+      "url": "",
+      "api_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

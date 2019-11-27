@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "submit_url",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "optional_params": {},
+            "url": "www.reddit.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "delete_user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null
+        },
+        "input": {
+            "preserve": true,
+            "username": "tuser"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

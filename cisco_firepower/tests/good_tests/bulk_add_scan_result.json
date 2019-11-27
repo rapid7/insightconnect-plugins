@@ -1,0 +1,20 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "certificate": "",
+      "server": "",
+      "port": 0,
+      "certificate_passphrase": {
+        "secretKey": ""
+      }
+    },
+    "input": {
+      "operation": "ScanFlush",
+      "scan_results": []
+    },
+    "action": "bulk_add_scan_result",
+    "meta": {}
+  }
+}

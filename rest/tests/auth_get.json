@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "get",
+        "connection": {
+            "base_url": null,
+            "basic_auth_credentials": {
+                "password": null,
+                "username": null
+            },
+            "default_headers": {
+                "User-Agent": null
+            },
+            "ssl_verify": null
+        },
+        "input": {
+            "headers": {
+                "Referer": "https://google.com"
+            },
+            "route": "/get"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,32 @@
+{
+    "body": {
+        "action": "perform_ad_hoc_search",
+        "connection": {
+            "authentication_mode": null,
+            "client_id": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username_and_password": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "data_request": {
+                "BusObId": "",
+                "Filters": [
+                    {
+                        "fieldId": "",
+                        "operator": "eq",
+                        "value": "001Test"
+                    }
+                ]
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

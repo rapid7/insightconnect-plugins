@@ -1,0 +1,26 @@
+{
+    "body": {
+        "action": "insert",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "license": null,
+            "port": null,
+            "ssl_verify": null,
+            "use_ssl": null
+        },
+        "input": {
+            "event": "",
+            "host": "",
+            "index": "",
+            "source": "",
+            "sourcetype": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

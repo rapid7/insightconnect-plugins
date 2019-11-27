@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "set_address_object",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "verify_cert": null
+        },
+        "input": {
+            "address": "192.168.1.0/24",
+            "object_description": "komand test",
+            "object_name": "api_test",
+            "tags": "Bad",
+            "type": "IP-Netmask"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

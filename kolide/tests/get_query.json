@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "get_query_results",
+        "connection": {
+            "api_token": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null
+        },
+        "input": {
+            "queryid": "12"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

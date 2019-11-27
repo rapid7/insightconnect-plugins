@@ -1,0 +1,28 @@
+{
+    "body": {
+        "action": "upload_file",
+        "connection": {
+            "admin_user": null,
+            "auth_provider_x509_cert_url": null,
+            "auth_uri": null,
+            "client_email": null,
+            "client_id": null,
+            "client_x509_cert_url": null,
+            "private_key": null,
+            "private_key_id": null,
+            "project_id": null,
+            "token_uri": null
+        },
+        "input": {
+            "file": {
+                "content": "",
+                "filename": "komand_test.csv"
+            },
+            "folder_id": "1HqWcOdPKJI_4PPuaR-nIlicTuBF6ei4O",
+            "google_file_type": "Sheets"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

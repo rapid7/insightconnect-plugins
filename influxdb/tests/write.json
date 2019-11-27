@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "write",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "consistency": "",
+            "data": "mymeas,mytag=2 myfield=87 1463683075",
+            "database_name": "mydb",
+            "password": "",
+            "precision": "s",
+            "retention_policy": "",
+            "username": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

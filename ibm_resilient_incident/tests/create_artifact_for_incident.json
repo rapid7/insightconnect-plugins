@@ -1,0 +1,41 @@
+{
+    "body": {
+        "action": "create_artifact_for_incident",
+        "connection": {
+            "email": null,
+            "hostname": null,
+            "password": null
+        },
+        "input": {
+            "artifact": {
+                "actions": [],
+                "created": 0,
+                "hits": [],
+                "inc_id": 3944,
+                "inc_name": "string",
+                "inc_owner": {
+                    "name": "mike@komand.com"
+                },
+                "pending_sources": [
+                    null
+                ],
+                "perms": {
+                    "delete": true,
+                    "read": true,
+                    "write": true
+                },
+                "properties": [],
+                "relating": true,
+                "type": {
+                    "name": "Mutex"
+                },
+                "value": "Test"
+            },
+            "incident_id": 3944,
+            "organization_id": 201
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

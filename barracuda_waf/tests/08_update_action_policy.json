@@ -1,0 +1,28 @@
+{
+    "body": {
+        "action": "update_action_policy",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "action_id": "envelope-have-children-after-body",
+            "action_policy": {
+                "action": "none",
+                "deny_response": "send_response",
+                "follow_up_action": "none",
+                "follow_up_action_time": 2,
+                "redirect_url": "",
+                "response_page": "default"
+            },
+            "attack_group_id": "xmlfw-wsi-assertion-failures",
+            "policy_id": "default"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

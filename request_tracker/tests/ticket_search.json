@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "ticket_search",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "keywords": {},
+            "order": "",
+            "queue": "",
+            "raw_query": "id=1"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "check_cidr",
+        "input": {
+            "cidr": "207.126.144.0/20",
+            "days": "30"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "html_to_markdown",
+        "connection": null,
+        "input": {
+            "html": "",
+            "html_string": "<h1 id='komand'>Komand</h1>"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

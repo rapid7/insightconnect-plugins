@@ -1,0 +1,23 @@
+{
+    "body": {
+        "connection": {
+            "api_token": {
+                "secretKey": null
+            },
+            "customer_id": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "date_offset": "2017-01-24T23:15:42.112Z",
+            "force_offset": true,
+            "frequency": 10
+        },
+        "meta": {},
+        "trigger": "new_detections"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

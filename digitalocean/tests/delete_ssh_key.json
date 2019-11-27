@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "delete_ssh_key",
+        "connection": {
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "ssh_key_id": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

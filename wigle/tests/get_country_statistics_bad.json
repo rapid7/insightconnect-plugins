@@ -1,0 +1,15 @@
+{
+    "body": {
+        "action": "get_country_statistics",
+        "connection": {
+            "name": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {},
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

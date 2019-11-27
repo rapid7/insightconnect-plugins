@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "get_sample",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "host": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "hash": "2f92703138e8be9666b4f3efa2058e60"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

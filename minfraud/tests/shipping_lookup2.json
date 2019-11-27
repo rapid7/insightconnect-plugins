@@ -1,0 +1,29 @@
+{
+    "body": {
+        "action": "shipping_lookup",
+        "connection": {
+            "license": {
+                "secretKey": null
+            },
+            "user": null
+        },
+        "input": {
+            "address": "8.8.8.8",
+            "shipping_address": "",
+            "shipping_address_2": "",
+            "shipping_city": "",
+            "shipping_company": "",
+            "shipping_country": "",
+            "shipping_delivery_speed": "none",
+            "shipping_first_name": "",
+            "shipping_last_name": "",
+            "shipping_phone_country_code": "",
+            "shipping_phone_number": "",
+            "shipping_postal": "",
+            "shipping_region": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

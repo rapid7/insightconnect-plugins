@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "email_domain",
+        "connection": null,
+        "input": {
+            "email": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

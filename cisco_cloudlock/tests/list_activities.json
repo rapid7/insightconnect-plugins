@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "list_activities",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "limit": 20,
+            "offset": 0
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

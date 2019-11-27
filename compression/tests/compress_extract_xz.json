@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "compress_bytes",
+        "connection": null,
+        "input": {
+            "algorithm": "xz",
+            "bytes": "U29tZSBzdHVmZgo="
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

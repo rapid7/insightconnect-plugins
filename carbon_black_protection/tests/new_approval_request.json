@@ -1,0 +1,15 @@
+{
+    "body": {
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "poll_rate": 10
+        },
+        "meta": {},
+        "trigger": "new_approval_request"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

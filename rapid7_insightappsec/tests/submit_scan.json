@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "submit_scan",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "scan_config_id": "a709c972-cb1f-4790-bfce-6ab74653900c"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

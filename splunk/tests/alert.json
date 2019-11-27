@@ -1,0 +1,27 @@
+{
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "license": null,
+            "port": null,
+            "ssl_verify": null,
+            "use_ssl": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "interval": 15,
+            "names": []
+        },
+        "meta": {},
+        "trigger": "alert"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

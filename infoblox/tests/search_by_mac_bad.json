@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "search_by_mac",
+        "connection": {
+            "api_version": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "infoblox_host": null
+        },
+        "input": {
+            "mac": "aa:bb:cc:11:22:33"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

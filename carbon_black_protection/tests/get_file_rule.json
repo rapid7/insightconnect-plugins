@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_file_rule",
+        "input": {
+            "file_rule_id": 1341
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

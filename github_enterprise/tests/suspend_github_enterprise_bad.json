@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "suspend",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "input": {
+            "username": "blah"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

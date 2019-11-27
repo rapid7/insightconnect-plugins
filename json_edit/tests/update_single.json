@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "update",
+        "connection": null,
+        "input": {
+            "array": [],
+            "key": "Test",
+            "object": {
+                "Test": "Example"
+            },
+            "value": "Success!"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "split_to_object",
+        "connection": null,
+        "input": {
+            "block_delimiter": " ",
+            "string": "Computer_ID=\"bef41e8b-47b8-e188-8e43-3a2b662dd55d\" Computer_Name=\"dgdemo\\RGWin64\" Computer_Type=\"Windows\"",
+            "string_delimiter": "="
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

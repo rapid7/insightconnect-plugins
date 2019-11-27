@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "port_lookup",
+        "connection": null,
+        "input": {
+            "port": 8080
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

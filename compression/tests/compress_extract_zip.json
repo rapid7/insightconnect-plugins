@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "compress_bytes",
+        "connection": null,
+        "input": {
+            "algorithm": "zip",
+            "bytes": "VEVTVCBUSEUgVEVTVA=="
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

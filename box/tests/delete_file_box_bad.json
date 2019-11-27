@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "delete_file",
+        "input": {
+            "id": "delete the same file twice to error"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

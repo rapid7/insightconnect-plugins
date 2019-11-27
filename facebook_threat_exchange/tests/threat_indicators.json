@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "threat_indicators",
+        "connection": {
+            "app_id": null,
+            "secret_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "limit": "",
+            "since": "",
+            "sort_by": "RELEVANCE",
+            "sort_order": "ASCENDING",
+            "strict_text": false,
+            "text": "CMD",
+            "threat_type": "",
+            "type": "CMD_LINE",
+            "until": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

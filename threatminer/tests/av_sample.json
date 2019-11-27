@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "av_sample",
+        "connection": null,
+        "input": {
+            "query": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,24 @@
+{
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000"
+        },
+        "input": {
+            "assignee": "",
+            "issues": true,
+            "organization": "TestOrg-bad",
+            "repository": "testRepo"
+        },
+        "meta": {},
+        "trigger": "issue"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

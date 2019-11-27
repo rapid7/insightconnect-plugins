@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "parse_single",
+        "connection": null,
+        "input": {
+            "cef_string": "CEF:0|Komand|Komand|1|2|Some Event|Low| _cefVer=0.1"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

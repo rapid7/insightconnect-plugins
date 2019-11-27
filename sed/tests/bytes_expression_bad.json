@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "process_bytes",
+        "connection": null,
+        "input": {
+            "bytes": "one two three one",
+            "expression": [
+                "s/one/ONE"
+            ],
+            "options": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

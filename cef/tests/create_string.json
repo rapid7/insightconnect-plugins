@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "create_string",
+        "connection": null,
+        "input": {
+            "cef": {
+                "device_product": "Komand",
+                "device_vendor": "Komand",
+                "device_version": "1",
+                "name": "Some Event",
+                "severity": "Low",
+                "signature_id": "2",
+                "version": "1"
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

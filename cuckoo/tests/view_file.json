@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "view_file",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "id": 0,
+            "md5": "ed2cd14a28ff2d00a5cefcf6a074af8d",
+            "sha256": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

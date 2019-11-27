@@ -1,0 +1,24 @@
+{
+    "body": {
+        "action": "add_data_to_reference_data_lists",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "element_type": "ALN",
+            "name": "ALN TEST 1",
+            "time_to_live": "",
+            "timeout_type": "UNKNOWN"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

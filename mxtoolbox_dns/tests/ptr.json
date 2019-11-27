@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "ptr",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "ip_address": "8.8.8.8"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

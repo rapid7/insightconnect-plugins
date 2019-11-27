@@ -1,0 +1,25 @@
+{
+    "body": {
+        "action": "get_jobs",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "host": null,
+            "port": null,
+            "protocol": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "analyzerFilter": "",
+            "dataFilter": "google.com",
+            "dataTypeFilter": "domain",
+            "limit": 1,
+            "start": 1
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

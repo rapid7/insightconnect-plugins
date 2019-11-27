@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "delete_security_policy",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "id": "test-v14-policy"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

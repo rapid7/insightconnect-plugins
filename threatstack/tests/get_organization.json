@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "get_organization",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "api_version": null,
+            "org_id": null,
+            "timeout": null
+        },
+        "input": {
+            "fields": [],
+            "organization_id": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

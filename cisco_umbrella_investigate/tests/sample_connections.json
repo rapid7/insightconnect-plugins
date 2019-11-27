@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "sample_connections",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "hash": "414e38ed0b5d507734361c2ba94f734252ca33b8259ca32334f32c4dba69b01c"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

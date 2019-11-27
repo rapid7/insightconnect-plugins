@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "lookup_domains",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "domains": []
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

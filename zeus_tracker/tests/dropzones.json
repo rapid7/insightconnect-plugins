@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "dropzones",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "limit": 12
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

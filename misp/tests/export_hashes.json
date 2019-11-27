@@ -1,0 +1,22 @@
+{
+  "type": "action_start",
+  "body": {
+    "action": "export_hashes",
+    "input": {
+      "format": "md5",
+      "to": "",
+      "from": "",
+      "tags": ["test1"],
+      "last": ""
+    },
+    "meta": {},
+    "connection": {
+      "automation_code": {
+        "secretKey": ""
+      },
+      "url": "",
+      "ssl": false
+    }
+  },
+  "version": "v1"
+}

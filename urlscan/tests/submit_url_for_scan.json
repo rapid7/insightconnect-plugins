@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "submit_url_for_scan",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "public": true,
+            "url": "http://aadroid.net"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

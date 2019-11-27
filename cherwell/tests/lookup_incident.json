@@ -1,0 +1,24 @@
+{
+    "body": {
+        "action": "lookup_incident",
+        "connection": {
+            "authentication_mode": null,
+            "client_id": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username_and_password": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "business_object_id": "",
+            "public_id": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "sleep",
+        "connection": null,
+        "input": {
+            "interval": 10
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

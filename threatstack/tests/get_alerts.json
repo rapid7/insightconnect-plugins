@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "get_alerts",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "api_version": null,
+            "org_id": null,
+            "timeout": null
+        },
+        "input": {
+            "end": "",
+            "fields": [],
+            "start": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

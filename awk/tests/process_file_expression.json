@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "process_string",
+        "connection": null,
+        "input": {
+            "expression": "JyB7cHJpbnQgJDJ9Jw==",
+            "text": "hello world"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

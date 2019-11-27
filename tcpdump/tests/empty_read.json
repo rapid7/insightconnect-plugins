@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "read",
+        "connection": null,
+        "input": {
+            "filter": "tcp",
+            "options": "-nn",
+            "pcap": "1MOyoQIABAAAAAAAAAAAAP//AAABAAAAwks/WHFsAQBBAAAAQQAAAP////////RcicwGnQgARQAAMyuZAABAEYvCwKgCt/////8EFgQWAB9TkHJjX2lhbWhlcmU6NjU1NToxOjE6V3V0w0s/WKzYBwBeAAAAXgAAADgsSqNIY/RcicwGnQgARQAAUMGUAAD/EXP/wKgCt8CoAgHgjAA1ADwO292qAQAAAQAAAAAAABNVc2VyS25vd25Ib3N0c0ZpbGU9CFRoZVNoaXJlBWxvY2FsAAABAAHDSz9YSjIIAKkAAACpAAAA9FyJzAadOCxKo0hjCABFAACbAABAAEARtEnAqAIBwKgCtwA14IwAh6ZA3aqBgwABAAAAAQAAE1VzZXJLbm93bkhvc3RzRmlsZT0IVGhlU2hpcmUFbG9jYWwAAAEAAQAABgABAAAqMABAAWEMcm9vdC1zZXJ2ZXJzA25ldAAFbnN0bGQMdmVyaXNpZ24tZ3JzA2NvbQB4K3FpAAAHCAAAA4QACTqAAAFRgA=="
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

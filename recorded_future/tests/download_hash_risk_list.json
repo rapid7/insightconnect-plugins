@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "download_hash_risk_list",
+        "connection": {
+            "api_key": null
+        },
+        "input": {
+            "list": "linked_to_attack_vector"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

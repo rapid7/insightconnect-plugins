@@ -1,0 +1,20 @@
+{
+  "file_catalog_entry": [
+    {
+      "id": 7075,
+      "fileInstanceGroupId": 3,
+      "fileCatalogId": 5025,
+      "computerId": 2,
+      "policyId": 6,
+      "dateCreated": "2019-04-24T20:14:00Z",
+      "fileName": "mscorlib.resources.dll",
+      "pathName": "c:\\program files\\microsoft silverlight\\5.1.50428.0\\sl",
+      "executed": true,
+      "localState": 2,
+      "detailedLocalState": 4,
+      "certificateId": 53,
+      "initialized": true,
+      "topLevel": false
+    }
+  ]
+}

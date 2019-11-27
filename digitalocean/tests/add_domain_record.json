@@ -1,0 +1,22 @@
+{
+    "body": {
+        "action": "add_domain_record",
+        "connection": {
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "data": "qwerty",
+            "domain_name": "",
+            "name": "cats",
+            "port": 1234,
+            "priority": 1,
+            "record_type": "TXT",
+            "weight": 1
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

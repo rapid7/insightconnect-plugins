@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "epoch_from_date",
+        "connection": null,
+        "input": {
+            "datetime": "2018-03-14T16:44:28.77Z"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

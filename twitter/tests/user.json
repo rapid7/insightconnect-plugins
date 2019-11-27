@@ -1,0 +1,25 @@
+{
+    "body": {
+        "connection": {
+            "access_token_credentials": {
+                "password": null,
+                "username": null
+            },
+            "consumer_credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "screen_name": "StabbyCutyou"
+        },
+        "meta": {},
+        "trigger": "user"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

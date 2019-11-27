@@ -1,0 +1,31 @@
+{
+    "body": {
+        "connection": {
+            "admin_user": null,
+            "auth_provider_x509_cert_url": null,
+            "auth_uri": null,
+            "client_email": null,
+            "client_id": null,
+            "client_x509_cert_url": null,
+            "private_key": {
+                "privateKey": null
+            },
+            "private_key_id": null,
+            "project_id": null,
+            "token_uri": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "number_of_messages": 3,
+            "project_id": "subpub-1528163449245",
+            "subscription": "testing"
+        },
+        "meta": {},
+        "trigger": "subscription"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

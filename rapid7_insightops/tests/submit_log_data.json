@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "submit_log_data",
+        "connection": {
+            "api_key": null,
+            "region": null
+        },
+        "input": {
+            "data": {
+                "Action": true,
+                "Action_Test": "Action",
+                "komand": "yes",
+                "testing": "12345"
+            },
+            "logset_container_id": "59755ede-5d8a-4ddf-9617-e21cf920a35b"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

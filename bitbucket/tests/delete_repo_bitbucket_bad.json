@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "delete_repo",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "title": "not_a_real_title"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

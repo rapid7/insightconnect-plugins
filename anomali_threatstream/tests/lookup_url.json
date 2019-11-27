@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "lookup_url",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "ssl_verify": null,
+            "url": null,
+            "username": null
+        },
+        "input": {
+            "url": "http://aadroid.net/wp-includes/js/jquery/jquery.js"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "user",
+    "input": {
+      "username": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "lookup_address",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "address": "52.8.228.23"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

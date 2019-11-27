@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "shodan_query",
+        "connection": {
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "query": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "reverse_whois",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "exclude": "",
+            "mode": "latest",
+            "scope": "current",
+            "terms": "Amazon"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

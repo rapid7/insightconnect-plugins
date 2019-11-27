@@ -1,0 +1,83 @@
+{
+    "body": {
+        "action": "add_custom_task_to_incident",
+        "connection": {
+            "email": null,
+            "hostname": null,
+            "password": null
+        },
+        "input": {
+            "body": {
+                "actions": [],
+                "active": true,
+                "at_id": {
+                    "name": "John Doe"
+                },
+                "attachments_count": 0,
+                "auto_task_id": {
+                    "name": "string"
+                },
+                "cat_name": "string",
+                "closed_date": 0,
+                "creator": {
+                    "cell": "1112223333",
+                    "email": "mike@komand.com",
+                    "fname": "John",
+                    "id": 18,
+                    "is_external": false,
+                    "last_login": 0,
+                    "lname": "Rinehart",
+                    "locked": false,
+                    "notes": "No notes!",
+                    "phone": "1112223333",
+                    "title": "Test Title"
+                },
+                "custom": true,
+                "description": "string",
+                "due_date": 0,
+                "frozen": true,
+                "id": 3944,
+                "inc_id": 3944,
+                "inc_name": "Komand Test Incident 1",
+                "inc_owner_id": {
+                    "name": "mike@komand.com"
+                },
+                "inc_training": true,
+                "init_date": 0,
+                "instr_text": "string",
+                "members": [
+                    null
+                ],
+                "name": "Some Custom Task",
+                "notes": [],
+                "notes_count": 0,
+                "owner_fname": "string",
+                "owner_id": {
+                    "name": "mike@komand.com"
+                },
+                "owner_lname": "string",
+                "perms": {
+                    "assign": true,
+                    "attach_file": true,
+                    "change_members": true,
+                    "close": true,
+                    "comment": true,
+                    "delete_attachments": true,
+                    "read": true,
+                    "read_attachments": true,
+                    "write": true
+                },
+                "phase_id": {
+                    "name": "Engage"
+                },
+                "required": true,
+                "src_name": "string"
+            },
+            "incident_id": 3944,
+            "organization_id": 201
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

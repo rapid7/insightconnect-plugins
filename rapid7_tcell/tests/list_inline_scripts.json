@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "list_inline_scripts",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "app_id": "MooseLifeTest-gIglw"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

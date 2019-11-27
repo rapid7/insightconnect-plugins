@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "syscheck_parse",
+        "connection": null,
+        "input": {
+            "alert": "** Alert 1475274657.12315: - ossec,syscheck,\n2016 Sep 30 22:30:57 (splunk.dev.komand.local) any->syscheck\nRule: 550 (level 7) -> 'Integrity checksum changed.'\nIntegrity checksum changed for: '/bin/dig'\nPermissions changed from 'rwxr-xr-x' to '---------'\nOld sha1sum was: 'c23b5a33155c8ce9af03d9be6a1569f9776ff1b8'\nNew sha1sum is : '2b84372c9ba36ee9d1cd7f300d6dae07d0d747c6'\n"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

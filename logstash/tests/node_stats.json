@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "node_stats",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "types": "os,pipeline,reloads,process,jvm"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

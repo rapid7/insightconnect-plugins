@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "lookup_ssl",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "sha1": "3d7dbaf257520e7d06c092948b7a7ba99199dcdf"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "lookup_domain",
+        "connection": {
+            "credentials": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "domain": "adobe.com",
+            "include_unverified": false,
+            "truncate_response": true
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

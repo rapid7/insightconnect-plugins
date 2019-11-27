@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "get_report",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "host": null,
+            "proxy": {},
+            "verify": null
+        },
+        "input": {
+            "format": "xml",
+            "hash": "2f92703138e8be9666b4f3efa2058e60"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

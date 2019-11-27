@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "get_details_for_specific_event",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "connector": null,
+            "url": null
+        },
+        "input": {
+            "event_id": "8a57e38b24ca11e9ae3ab1dc32845eba"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

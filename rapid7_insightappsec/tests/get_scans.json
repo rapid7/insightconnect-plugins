@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "get_scans",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "index": 0,
+            "size": 50,
+            "sort": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

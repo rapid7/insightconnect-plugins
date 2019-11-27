@@ -1,0 +1,15 @@
+{
+    "body": {
+        "action": "countries",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "country": "US",
+            "limit": 10
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

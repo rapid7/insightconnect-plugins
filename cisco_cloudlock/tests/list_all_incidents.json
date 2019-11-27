@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "list_all_incidents",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "created_after": "",
+            "created_before": "",
+            "limit": 20,
+            "offset": 0,
+            "severity": "INFO"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

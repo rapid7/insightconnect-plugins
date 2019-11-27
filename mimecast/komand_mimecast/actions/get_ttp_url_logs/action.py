@@ -45,6 +45,7 @@ class GetTtpUrlLogs(komand.Action):
         try:
             if url_to_filter:
                 output = list(filter(lambda x: (x['url'] == url_to_filter), response['data'][0]['clickLogs']))
+
             else:
                 output = response['data'][0]['clickLogs']
         except (KeyError, IndexError):

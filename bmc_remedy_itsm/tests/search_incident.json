@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "search_incident",
+    "meta": {},
+    "input": {
+      "search_parameters": "'Urgency' = \"4-Low\" AND 'Impact' = \"4-Minor/Localized\""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "port": "8008",
+      "ssl_verify": false,
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,15 @@
+{
+    "body": {
+        "action": "get_file",
+        "connection": null,
+        "input": {
+            "checksum": "",
+            "is_verify": false,
+            "timeout": 60,
+            "url": "https://openclipart.org/image/2400px/svg_to_png/220425/Hearts-In-Heart.png"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

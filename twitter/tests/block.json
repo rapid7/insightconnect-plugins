@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "block",
+        "connection": {
+            "access_token_credentials": {
+                "password": null,
+                "username": null
+            },
+            "consumer_credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "user": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

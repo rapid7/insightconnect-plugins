@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "bulk_indicator_download",
+        "connection": {
+            "api_access_id": null,
+            "api_base_url": null,
+            "api_default_org": null,
+            "api_secret_key": null
+        },
+        "input": {
+            "attribute": "",
+            "date_added": "",
+            "last_modified": "",
+            "owner": "&T&T*GIUY",
+            "rating": "",
+            "tag": "",
+            "type": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

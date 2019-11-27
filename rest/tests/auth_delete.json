@@ -1,0 +1,26 @@
+{
+    "body": {
+        "action": "delete",
+        "connection": {
+            "base_url": null,
+            "basic_auth_credentials": {
+                "password": null,
+                "username": null
+            },
+            "default_headers": {
+                "User-Agent": null
+            },
+            "ssl_verify": null
+        },
+        "input": {
+            "body": {},
+            "headers": {
+                "Referer": "https://google.com"
+            },
+            "route": "/delete"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "get_repository_board_data",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "repo_id": 0
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

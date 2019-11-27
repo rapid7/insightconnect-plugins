@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "remove_ips_from_blacklist",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "app_id": "LowprofileappcreatedforKomandplugintests-1oRtT",
+            "ips": [
+                "192.168.0.1"
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

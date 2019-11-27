@@ -1,0 +1,1 @@
+{"type": "action_event", "version": "v1", "body": {"meta": {}, "output": {"endpoints": [], "isPublic": false, "engineVersion": "1.28.5", "host": "mail.cloudbizz.lu", "port": 443, "testTime": 0, "criteriaVersion": "2009o", "protocol": "HTTP", "status": "DNS", "startTime": 1497911503508, "statusMessage": "Resolving domain names"}, "status": "ok"}}

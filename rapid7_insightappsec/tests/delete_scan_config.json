@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "delete_scan_config",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "scan_config_id": "4569288e-2bb4-416e-a4ee-4f7add18afe0"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

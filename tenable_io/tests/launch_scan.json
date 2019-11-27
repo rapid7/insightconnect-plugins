@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "launch_scan",
+        "connection": {
+            "access_key": {
+                "secretKey": null
+            },
+            "secret_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "name": "",
+            "targets": [],
+            "template": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

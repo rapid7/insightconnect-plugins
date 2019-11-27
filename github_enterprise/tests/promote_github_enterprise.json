@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "promote",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null
+        },
+        "input": {
+            "user": "jon"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "info",
+        "connection": {
+            "password": null,
+            "server": null,
+            "user": null
+        },
+        "input": {
+            "arch": "i686",
+            "distro": "CentOS 6",
+            "epoch": "",
+            "key": "",
+            "name": "powertop",
+            "release": "",
+            "repo": "",
+            "version": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

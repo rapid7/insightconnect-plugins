@@ -1,0 +1,30 @@
+{
+    "body": {
+        "action": "post_metrics",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "app_key": null,
+            "url": null
+        },
+        "input": {
+            "series": [
+                {
+                    "interval": 20,
+                    "metric": "test.metric",
+                    "points": [
+                        [
+                            1554156247,
+                            1
+                        ]
+                    ],
+                    "type": "count"
+                }
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

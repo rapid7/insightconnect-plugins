@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "forward_message",
+        "connection": {
+            "host": null,
+            "port": null,
+            "transport": null
+        },
+        "input": {
+            "facility": "LOCAL0",
+            "host": "komand.local",
+            "level": "DEBUG",
+            "msg": "Incoming UDP Message",
+            "msgid": "ACTION",
+            "proc": "test_workflow"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

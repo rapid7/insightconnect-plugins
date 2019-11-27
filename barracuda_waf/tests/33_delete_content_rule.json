@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "delete_content_rule",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "id": "test-v14-content-rule",
+            "virtual_service_id": "test-v14-virtual-service"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

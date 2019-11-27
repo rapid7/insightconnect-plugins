@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "name_server_monitor",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "days_back": 0,
+            "page": 1,
+            "query": "google.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

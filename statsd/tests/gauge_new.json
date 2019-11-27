@@ -1,0 +1,26 @@
+{
+    "body": {
+        "action": "gauge",
+        "connection": {
+            "host": null,
+            "port": null,
+            "prefix": null,
+            "protocol": null,
+            "tcp": {
+                "timeout": null
+            },
+            "udp": {
+                "maxudpsize": null
+            }
+        },
+        "input": {
+            "delta": false,
+            "rate": 0,
+            "stat": "",
+            "value": 0
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

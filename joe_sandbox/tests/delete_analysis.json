@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "delete_analysis",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "webid": "793100"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

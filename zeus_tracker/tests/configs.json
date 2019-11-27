@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "configs",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "limit": 15
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

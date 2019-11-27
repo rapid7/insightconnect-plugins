@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "user",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "username": "the Fak3NEss"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

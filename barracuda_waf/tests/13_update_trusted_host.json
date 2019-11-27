@@ -1,0 +1,22 @@
+{
+    "body": {
+        "action": "update_trusted_host",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "address": "192.168.19.3",
+            "comments": "test comment",
+            "group_name": "test-v14-group",
+            "mask": "255.255.255.0",
+            "name": "test-v14-trusted-host"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "capture",
+        "connection": {
+            "key": null,
+            "secret": null
+        },
+        "input": {
+            "cache_age_days": 0,
+            "format": "JPG",
+            "size": "tiny",
+            "timeout": 200,
+            "url": "http://www.komand.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

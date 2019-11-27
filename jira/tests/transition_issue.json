@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "transition_issue",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "input": {
+            "comment": "",
+            "id": "",
+            "transition": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

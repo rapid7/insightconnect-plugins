@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "host",
+        "connection": {
+            "server": null
+        },
+        "input": {
+            "host": "metalexvietnamreed.tk"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

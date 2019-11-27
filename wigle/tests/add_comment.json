@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "add_comment",
+    "meta": {},
+    "input": {
+      "comment": "A comment",
+      "netid": "06:60:56:0A:60:AC"
+    },
+    "connection": {
+      "name": "",
+      "token": {
+        "secretKey": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

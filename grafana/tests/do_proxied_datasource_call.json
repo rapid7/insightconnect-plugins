@@ -1,0 +1,27 @@
+{
+    "body": {
+        "action": "do_proxied_datasource_call",
+        "connection": {
+            "basic_auth": {
+                "password": null,
+                "username": null
+            },
+            "port": null,
+            "token_auth": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "datasource_id": 1,
+            "parameters": {
+                "db": "komand",
+                "q": "SHOW DATABASES"
+            },
+            "path": "/query"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

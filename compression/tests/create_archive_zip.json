@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "create_archive",
+        "connection": null,
+        "input": {
+            "algorithm": "zip",
+            "filename": "tester.zip",
+            "files": [
+                {
+                    "content": "dGV4dDIK",
+                    "filename": "test1.txt"
+                },
+                {
+                    "content": "dGV4dDE=",
+                    "filename": "test2.txt"
+                }
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

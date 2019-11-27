@@ -1,0 +1,29 @@
+{
+  "body": {
+    "meta": {},
+    "input": {
+      "itype":"ipv4",
+      "otype": "ipv4",
+      "nolog": true,
+      "protocol": "tcp",
+      "q": "",
+      "observable": "",
+      "cc": "cn",
+      "tags": "",
+      "confidence": 9,
+      "provider": "",
+      "limit": 10,
+      "portlist": ""
+    },
+    "action": "query",
+    "connection": {
+      "url": "",
+      "api_key": {
+        "secretKey": ""
+      },
+      "ssl_verify": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

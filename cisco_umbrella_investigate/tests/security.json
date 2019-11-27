@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "security",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "domain": "google.pl"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

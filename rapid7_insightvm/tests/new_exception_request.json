@@ -1,0 +1,27 @@
+{
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "frequency": 1,
+            "status_filter": [
+                "Under Review"
+            ]
+        },
+        "meta": {
+            "workflow_uid": 1234
+        },
+        "trigger": "new_exception_request"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

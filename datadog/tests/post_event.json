@@ -1,0 +1,24 @@
+{
+    "body": {
+        "action": "post_event",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "app_key": null,
+            "url": null
+        },
+        "input": {
+            "alert_type": "error",
+            "date_happened": 0,
+            "event_title": "Komand_test",
+            "host": "",
+            "priority": "normal",
+            "tags": "environment:test",
+            "text": "Testing komand"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

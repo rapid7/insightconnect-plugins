@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "hmget",
+        "connection": {
+            "db": null,
+            "host": null,
+            "port": null
+        },
+        "input": {
+            "fields": [],
+            "get_all": true,
+            "key": "lol"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

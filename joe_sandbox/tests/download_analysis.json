@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "download_analysis",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "run": 0,
+            "type": "html",
+            "webid": "792649"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

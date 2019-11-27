@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "submit_sample_url",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "sample_url": "https://raw.githubusercontent.com/kennethreitz/requests/master/README.md"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

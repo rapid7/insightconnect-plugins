@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "get_issue",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "input": {
+            "id": "IDR-1"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

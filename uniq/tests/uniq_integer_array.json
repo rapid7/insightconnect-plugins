@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "uniq_integer_array",
+        "connection": null,
+        "input": {
+            "data": [
+                1,
+                2,
+                3,
+                1,
+                2,
+                3,
+                4
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

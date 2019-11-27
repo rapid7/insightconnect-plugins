@@ -1,0 +1,24 @@
+{
+  "body": {
+    "action": "export_rules",
+    "input": {
+      "last": "",
+      "tags": [],
+      "event_id": "",
+      "frame": false,
+      "format": "suricata",
+      "to": "",
+      "from": ""
+    },
+    "connection": {
+      "automation_code": {
+        "secretKey": ""
+      },
+      "url": "",
+      "ssl": false
+    },
+    "meta": {}
+  },
+  "version": "v1",
+  "type": "action_start"
+}

@@ -1,0 +1,21 @@
+{
+    "body": {
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "frequency": 10
+        },
+        "meta": {},
+        "trigger": "new_incidents"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

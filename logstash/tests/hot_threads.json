@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "hot_threads",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "human": false,
+            "ignore_idle_threads": true,
+            "threads": 5
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

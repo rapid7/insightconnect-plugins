@@ -1,0 +1,26 @@
+{
+    "body": {
+        "action": "create_issue",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "assignee": "",
+            "component": "compo",
+            "content": "Test Content body",
+            "kind": "Bug",
+            "milestone": "",
+            "priority": "None",
+            "repository": "test_repo",
+            "state": "None",
+            "title": "Test_love",
+            "version": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

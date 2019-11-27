@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_user",
+        "input": {
+            "id": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

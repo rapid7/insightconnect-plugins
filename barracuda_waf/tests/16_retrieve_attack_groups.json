@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "retrieve_attack_groups",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "attack_group_id": "",
+            "policy_id": "default"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

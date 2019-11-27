@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "update_issue",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "assignedTo": "",
+            "hasSeen": true,
+            "isBookmarked": true,
+            "isPublic": true,
+            "isSubscribed": true,
+            "issue_id": "612424900",
+            "status": "resolved"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

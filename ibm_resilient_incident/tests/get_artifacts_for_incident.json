@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "get_artifacts_for_incident",
+        "connection": {
+            "email": null,
+            "hostname": null,
+            "password": null
+        },
+        "input": {
+            "incident_id": 2110,
+            "organization_id": 201
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

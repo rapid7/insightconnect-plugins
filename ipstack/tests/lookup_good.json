@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "lookup",
+        "connection": {
+            "cred_token": {
+                "domain": null,
+                "token": null
+            }
+        },
+        "input": {
+            "host": "google.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

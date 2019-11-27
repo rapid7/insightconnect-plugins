@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "find_users",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "project": null,
+            "url": null
+        },
+        "input": {
+            "max": 10,
+            "query": "mike"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

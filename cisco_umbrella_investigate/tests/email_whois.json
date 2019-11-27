@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "email_whois",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "email": "test@example.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

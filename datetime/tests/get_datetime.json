@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "get_datetime",
+        "connection": null,
+        "input": {
+            "format_string": "%d %b %Y %H:%M:%S",
+            "use_rfc3339_format": true
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

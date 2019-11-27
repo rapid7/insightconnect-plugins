@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "get_page",
+        "connection": null,
+        "input": {
+            "url": "https://www.komand.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

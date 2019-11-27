@@ -1,0 +1,18 @@
+{
+  "version": "v1",
+  "type": "action_start",
+  "body": {
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "meta": {},
+    "action": "get_issues_by_repo",
+    "input": {
+      "title": "komand-docs",
+      "owner": "komand"
+    }
+  }
+}

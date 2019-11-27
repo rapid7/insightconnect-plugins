@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "replace",
+        "connection": null,
+        "input": {
+            "expression": "-abc [:wrong:]",
+            "text": "Test string"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

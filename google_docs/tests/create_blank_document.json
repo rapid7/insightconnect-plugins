@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "create_blank_document",
+        "input": {
+            "title": "Test Blank Komand Doc"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

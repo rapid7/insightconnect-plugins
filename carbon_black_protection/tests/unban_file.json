@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "unban_file",
+        "input": {
+            "hash": "06E77B5F6BB60E11A377B68BA4AA1DA7",
+            "method": "Globally",
+            "new_state": "Approved",
+            "policy_ids": []
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

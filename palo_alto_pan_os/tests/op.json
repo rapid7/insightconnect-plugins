@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "op",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "verify_cert": null
+        },
+        "input": {
+            "cmd": "<show><jobs><id>18849</id></jobs></show>"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "status",
+        "connection": {
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": "1",
+            "status": "resolved"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

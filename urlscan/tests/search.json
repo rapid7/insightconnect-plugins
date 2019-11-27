@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "search",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "offset": 0,
+            "q": "domain:urlscan.io",
+            "size": 100,
+            "sort": "_score"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "comment_incident",
+        "connection": {
+            "eu_customer": null,
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "body": "A comment",
+            "incident_id": 31851783,
+            "is_private": true
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

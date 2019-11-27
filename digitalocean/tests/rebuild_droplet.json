@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "rebuild_droplet",
+        "connection": {
+            "token": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "droplet_id": "37374013",
+            "image_id": "22870652"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

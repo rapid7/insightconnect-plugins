@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "vsites",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "id": "test-v14-virtual-service"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

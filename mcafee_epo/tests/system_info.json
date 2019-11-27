@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "system_info",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "port": null,
+            "url": null
+        },
+        "input": {
+            "query": "System Name"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,31 @@
+{
+    "body": {
+        "action": "create_activity_monitor",
+        "connection": {
+            "api_token": {
+                "secretKey": null
+            },
+            "customer_id": null
+        },
+        "input": {
+            "active": true,
+            "file_modification_types_monitored": [
+                "file_modification"
+            ],
+            "file_paths_monitored": [
+                "/var/log/syslog"
+            ],
+            "name": "SSH directory changes",
+            "type": "file_modification",
+            "usernames_excluded": [
+                "james_bond"
+            ],
+            "usernames_matched": [
+                "everybody"
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

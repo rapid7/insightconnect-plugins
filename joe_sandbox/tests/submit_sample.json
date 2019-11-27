@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "submit_sample",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "sample": "SGVsbG8gV29ybGQhCg=="
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

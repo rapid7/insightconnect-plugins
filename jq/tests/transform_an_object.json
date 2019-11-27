@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "run_jq",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "filter": "{(.Greeter):{\"says\":.Greetings[1]}}",
+            "flags": [
+                "-c"
+            ],
+            "json_in": {
+                "Greeter": "jh",
+                "Greetings": [
+                    "Hello!",
+                    "Hi!"
+                ]
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

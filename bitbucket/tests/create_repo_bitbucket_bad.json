@@ -1,0 +1,22 @@
+{
+    "body": {
+        "action": "create_repo",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "description": "Test Repo Descripton",
+            "has_issues": true,
+            "has_wiki": true,
+            "is_private": false,
+            "title": "Bad Title has spaces",
+            "type": "Hg"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

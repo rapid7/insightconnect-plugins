@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "show_user",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "subdomain": null
+        },
+        "input": {
+            "user_id": "361738647591"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

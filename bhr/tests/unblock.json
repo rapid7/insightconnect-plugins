@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "unblock",
+        "connection": {
+            "ssl_verify": null,
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "cidr": "1.2.3.6/32",
+            "why": "Repurposed host"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

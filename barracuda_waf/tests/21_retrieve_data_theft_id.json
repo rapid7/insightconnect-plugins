@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "retrieve_data_theft",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "id": "test-v14-data-theft",
+            "policy_id": "test-v14-policy"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

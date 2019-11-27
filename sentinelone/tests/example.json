@@ -1,0 +1,83 @@
+{
+    "pagination": {
+      "totalItems": 580,
+      "nextCursor": "YWdlbnRfaWQ6NTgwMjkzODE="
+    },
+    "errors": [
+      {}
+    ],
+    "data": [
+      {
+        "username": "string",
+        "classification": "string",
+        "siteName": "string",
+        "fileObjectId": "string",
+        "mitigationActions": [
+          "quarantine",
+          "un-quarantine"
+        ],
+        "fileCreatedDate": "2018-02-27T04:49:26.257525Z",
+        "mitigationReport": "string",
+        "rank": 10,
+        "agentIp": "string",
+        "agentNetworkStatus": "string",
+        "isInteractiveSession": true,
+        "agentVersion": "2.5.1.1320",
+        "updatedAt": "2018-02-27T04:49:26.257525Z",
+        "fileData": {},
+        "agentId": "225494730938493804",
+        "fileExtensionType": "string",
+        "id": "225494730938493804",
+        "createdAt": "2018-02-27T04:49:26.257525Z",
+        "whiteningOptions": "string",
+        "maliciousProcessArguments": "string",
+        "certId": "string",
+        "engines": [
+          "reputation",
+          "pre_execution"
+        ],
+        "annotationUrl": "string",
+        "inQuarantine": true,
+        "browserType": "string",
+        "fileIsSystem": true,
+        "markedAsBenign": true,
+        "cloudVerdict": "string",
+        "indicators": [
+          0
+        ],
+        "threatName": "string",
+        "agentComputerName": "string",
+        "mitigationStatus": "suspicious",
+        "resolved": true,
+        "fileSha256": "string",
+        "description": "string",
+        "filePath": "string",
+        "fromScan": true,
+        "classifierName": "string",
+        "agentMachineType": "string",
+        "isCertValid": true,
+        "fileIsDotNet": true,
+        "fromCloud": true,
+        "siteId": "225494730938493804",
+        "fileIsExecutable": true,
+        "createdDate": "2018-02-27T04:49:26.257525Z",
+        "agentOsType": "windows",
+        "agentIsDecommissioned": true,
+        "isPartialStory": true,
+        "annotation": "string",
+        "fileVerificationType": "string",
+        "publisher": "string",
+        "classificationSource": "Engine",
+        "maliciousGroupId": "string",
+        "collectionId": "225494730938493804",
+        "agentIsActive": true,
+        "fileContentHash": "ddd5030a3d029f3845fc1052419829f08f312240",
+        "mitigationMode": "string",
+        "agentDomain": "string",
+        "fileDisplayName": "string",
+        "agentInfected": true,
+        "threatAgentVersion": "2.5.1.1320",
+        "fileMaliciousContent": true
+      }
+    ]
+  }

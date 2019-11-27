@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "address",
+        "connection": null,
+        "input": {
+            "address": "8.8.8.8"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

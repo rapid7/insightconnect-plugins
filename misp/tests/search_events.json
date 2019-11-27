@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "search_events",
+    "meta": {},
+    "input": {
+      "analysis": "Initial",
+      "date_from": "",
+      "date_until": "",
+      "event": "",
+      "organisation": "",
+      "published": "",
+      "tag": "",
+      "threat_level": "Undefined"
+    },
+    "connection": {
+      "automation_code": {
+        "secretKey": ""
+      },
+      "url": "",
+      "ssl": false
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

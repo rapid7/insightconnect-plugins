@@ -1,0 +1,66 @@
+{
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "hostname": null,
+            "port": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "fields": [
+                {
+                    "name": "AvgSeverity",
+                    "types": [
+                        "FLOAT"
+                    ]
+                },
+                {
+                    "name": "Rule.msg",
+                    "types": [
+                        "STRING"
+                    ]
+                },
+                {
+                    "name": "Action",
+                    "types": [
+                        "SSTRING"
+                    ]
+                },
+                {
+                    "name": "SrcIP",
+                    "types": [
+                        "IP"
+                    ]
+                },
+                {
+                    "name": "AlertID",
+                    "types": [
+                        "STRING"
+                    ]
+                }
+            ],
+            "filters": [
+                {
+                    "field": {
+                        "name": "AvgSeverity",
+                        "types": [
+                            "STRING"
+                        ]
+                    },
+                    "type": "EsmFieldFilter"
+                }
+            ],
+            "timerange": "LAST_MINUTE"
+        },
+        "meta": {},
+        "trigger": "get_new_events"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

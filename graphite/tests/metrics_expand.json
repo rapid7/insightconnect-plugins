@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "metrics_expand",
+        "connection": {
+            "graphite_port": null,
+            "graphite_url": null,
+            "ssl_verify": null
+        },
+        "input": {
+            "leaves_only": false,
+            "query": "*"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

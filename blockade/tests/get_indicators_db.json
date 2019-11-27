@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "get_indicators",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "email": null,
+            "url": null
+        },
+        "input": {
+            "db_route": "backup"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

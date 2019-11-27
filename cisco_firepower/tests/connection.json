@@ -1,0 +1,10 @@
+{
+    "body": {
+        "connection": {
+            "certificate": null,
+            "certificate_passphrase": null,
+            "port": null,
+            "server": null
+        }
+    }
+}

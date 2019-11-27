@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "create_ioc_threat",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "agent_id": "560700200554747611",
+            "annotation": "Anno",
+            "annotation_url": "AnnoURL",
+            "hash": "3395856ce81f2b7382dee72602f798b642f14141"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

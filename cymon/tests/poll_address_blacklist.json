@@ -1,0 +1,24 @@
+{
+    "body": {
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "days": 1,
+            "frequency": 300,
+            "limit": 1,
+            "tag": "blacklist"
+        },
+        "meta": {},
+        "trigger": "poll_address_blacklist"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

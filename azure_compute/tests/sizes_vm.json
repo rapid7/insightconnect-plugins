@@ -1,0 +1,22 @@
+{
+    "body": {
+        "action": "sizes_vm",
+        "connection": {
+            "api_version": null,
+            "client_id": null,
+            "client_secret": {
+                "privateKey": null
+            },
+            "host": null,
+            "tenant_id": null
+        },
+        "input": {
+            "resourceGroup": "",
+            "subscriptionId": "",
+            "vm": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,19 @@
+{
+  "body": {
+    "action": "add_membership",
+    "meta": {},
+    "input": {
+      "organization": "KomandDev",
+      "role": "member",
+      "username": ""
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

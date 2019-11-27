@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "unlock_file",
+        "input": {
+            "file_id": "138475613311"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

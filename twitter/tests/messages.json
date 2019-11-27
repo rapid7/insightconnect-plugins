@@ -1,0 +1,26 @@
+{
+    "body": {
+        "connection": {
+            "access_token_credentials": {
+                "password": null,
+                "username": null
+            },
+            "consumer_credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "interval": 300,
+            "pattern": ""
+        },
+        "meta": {},
+        "trigger": "messages"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

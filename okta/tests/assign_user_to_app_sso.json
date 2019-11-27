@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "assign_user_to_app_sso",
+        "connection": {
+            "okta_key": {
+                "secretKey": null
+            },
+            "okta_url": null
+        },
+        "input": {
+            "applicationId": "",
+            "appuser": {}
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

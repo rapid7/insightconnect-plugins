@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "delete_scan",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "server": null,
+            "timeout": null
+        },
+        "input": {
+            "scan_id": "1b3cf977-822d-4a8e-92f2-fe773482c66f"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,39 @@
+{
+    "body": {
+        "action": "lookup",
+        "connection": {
+            "credentials": {
+                "domain": null,
+                "token": null
+            }
+        },
+        "input": {
+            "client_id": "",
+            "platform_type_all": false,
+            "platform_type_android": false,
+            "platform_type_any": false,
+            "platform_type_chrome": false,
+            "platform_type_ios": false,
+            "platform_type_linux": false,
+            "platform_type_mac": false,
+            "platform_type_unspecified": false,
+            "platform_type_windows": false,
+            "threat_entry_type_executable": false,
+            "threat_entry_type_ip": false,
+            "threat_entry_type_unspecified": false,
+            "threat_entry_type_url": false,
+            "threat_type_malware": false,
+            "threat_type_potential": false,
+            "threat_type_social": false,
+            "threat_type_unspecified": false,
+            "threat_type_unwanted": false,
+            "urls": [
+                "freefilesdownloader.com",
+                "jardindebambou.fr"
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

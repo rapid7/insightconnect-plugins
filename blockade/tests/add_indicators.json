@@ -1,0 +1,21 @@
+{
+    "body": {
+        "action": "add_indicators",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "email": null,
+            "url": null
+        },
+        "input": {
+            "indicators": [
+                "crap",
+                "more_crap"
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

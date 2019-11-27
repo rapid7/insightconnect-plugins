@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "finger",
+        "connection": null,
+        "input": {
+            "host": "1.1.1.1",
+            "user": "root"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "user_info",
+        "input": {
+            "user_id": "1109699029"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

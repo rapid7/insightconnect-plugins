@@ -1,0 +1,81 @@
+{
+    "body": {
+        "action": "update_security_policy",
+        "connection": {
+            "address": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "input": {
+            "cloaking": {
+                "filter_response_header": "yes",
+                "return_codes_to_exempt": "",
+                "suppress_return_code": "yes"
+            },
+            "cookie_security": {
+                "allow_unrecognized_cookies": "custom",
+                "cookie_max_age": 0,
+                "cookie_replay_protection_type": "none",
+                "cookies_exempted": [],
+                "custom_headers": [],
+                "days_allowed": 0,
+                "http_only": "yes",
+                "secure_cookie": "yes",
+                "tamper_proof_mode": "signed"
+            },
+            "parameter_protection": {
+                "allowed_file_upload_type": "extensions",
+                "base64_decode_parameter_value": "no",
+                "blocked_attack_types": [],
+                "custom_blocked_attack_types": [],
+                "denied_metacharacters": "",
+                "enable": "yes",
+                "exception_patterns": [],
+                "file_upload_extensions": [],
+                "file_upload_mime_types": [],
+                "ignore_parameters": [],
+                "maximum_instances": 0,
+                "maximum_parameter_value_length": 2,
+                "maximum_upload_file_size": 0
+            },
+            "policy_id": "test-v14-policy",
+            "request_limits": {
+                "enable": "yes",
+                "max_cookie_name_length": 2,
+                "max_cookie_value_length": 2,
+                "max_header_name_length": 2,
+                "max_header_value_length": 512,
+                "max_number_of_cookies": 2,
+                "max_number_of_headers": 2,
+                "max_query_length": 2,
+                "max_request_length": 2,
+                "max_request_line_length": 2,
+                "max_url_length": 2
+            },
+            "url_normalization": {
+                "apply_double_decoding": "yes",
+                "default_charset": "GBK",
+                "detect_response_charset": "yes",
+                "parameter_separators": "ampersand"
+            },
+            "url_protection": {
+                "allowed_content_types": [],
+                "allowed_methods": [],
+                "blocked_attack_types": [],
+                "csrf_prevention": "none",
+                "custom_blocked_attack_types": [],
+                "enable": "yes",
+                "exception_patterns": [],
+                "max_content_length": 0,
+                "max_parameters": 0,
+                "maximum_parameter_name_length": 2,
+                "maximum_upload_files": 0
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

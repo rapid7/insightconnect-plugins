@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "run_jq",
+        "connection": {},
+        "dispatcher": {},
+        "input": {
+            "filter": ". | length",
+            "flags": [],
+            "json_in": {},
+            "timeout": 10
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

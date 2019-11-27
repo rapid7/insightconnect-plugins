@@ -1,0 +1,23 @@
+{
+    "body": {
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            }
+        },
+        "dispatcher": {
+            "url": "http://localhost:8000",
+            "webhook_url": ""
+        },
+        "input": {
+            "endpoint": "0.0.0.0",
+            "interval": 5,
+            "tcp_port": 8080
+        },
+        "meta": {},
+        "trigger": "receive"
+    },
+    "type": "trigger_start",
+    "version": "v1"
+}

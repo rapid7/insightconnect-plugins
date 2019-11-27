@@ -1,0 +1,15 @@
+{
+    "body": {
+        "action": "scan",
+        "connection": null,
+        "input": {
+            "arguments": "-T 4 --max-retries 0 --max-rtt-timeout 100ms -sV",
+            "hosts": "192.168.1.*",
+            "ports": "22-443",
+            "sudo": false
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

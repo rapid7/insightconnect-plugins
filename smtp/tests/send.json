@@ -1,0 +1,29 @@
+{
+    "body": {
+        "action": "send",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "ignore_ssl_errors": null,
+            "port": null,
+            "use_ssl": null
+        },
+        "input": {
+            "attachment": {
+                "content": "",
+                "filename": ""
+            },
+            "email_from": "",
+            "email_to": "",
+            "html": false,
+            "message": "SOME TESTING MESSAGE",
+            "subject": "test"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

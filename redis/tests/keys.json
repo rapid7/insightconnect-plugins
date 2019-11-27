@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "keys",
+        "connection": {
+            "db": null,
+            "host": null,
+            "port": null
+        },
+        "input": {
+            "pattern": "*"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

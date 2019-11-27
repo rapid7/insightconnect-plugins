@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_document",
+        "input": {
+            "document_id": "1WTLf8-9swLvSJHQoyJyk-VCiU1ptTucJDrL4gZBUQ7Q"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_case",
+        "input": {
+            "id": "2"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

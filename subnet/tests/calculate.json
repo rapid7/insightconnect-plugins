@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "calculate",
+        "connection": null,
+        "input": {
+            "cidr": "192.168.1.14/28"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

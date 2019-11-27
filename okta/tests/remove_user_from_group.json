@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "remove_user_from_group",
+        "connection": {
+            "okta_key": {
+                "secretKey": null
+            },
+            "okta_url": null
+        },
+        "input": {
+            "email": "",
+            "group_id": "00gftwyoqyVBvcpdn0h7"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

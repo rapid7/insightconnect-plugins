@@ -1,0 +1,27 @@
+{
+    "body": {
+        "action": "create",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "host": null,
+            "user": null,
+            "version": null
+        },
+        "input": {
+            "email": "",
+            "is_group_admin": false,
+            "mention_name": "tien11",
+            "name": "",
+            "password": "",
+            "roles": [],
+            "timezone": "UTC",
+            "title": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

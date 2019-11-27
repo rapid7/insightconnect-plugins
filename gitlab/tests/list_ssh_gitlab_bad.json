@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "list_ssh",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": 89
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

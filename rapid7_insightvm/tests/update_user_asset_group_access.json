@@ -1,0 +1,22 @@
+{
+    "body": {
+        "action": "update_user_asset_group_access",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "url": null
+        },
+        "input": {
+            "asset_group_ids": [
+                136,
+                137
+            ],
+            "user_id": 86
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

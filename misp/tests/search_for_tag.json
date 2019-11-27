@@ -1,0 +1,24 @@
+{
+  "body": {
+    "trigger": "search_for_tag",
+    "meta": {},
+    "input": {
+      "interval": 10,
+      "remove": true,
+      "tag": "mytag"
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "connection": {
+      "automation_code": {
+        "secretKey": ""
+      },
+      "url": "",
+      "ssl": false
+    }
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}

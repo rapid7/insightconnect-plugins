@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "get_findings",
+        "input": {
+            "filters": {}
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

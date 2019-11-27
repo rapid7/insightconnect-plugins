@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "replace",
+        "connection": null,
+        "input": {
+            "expression": "-d [l]",
+            "text": "Some relevant letters have been deleted"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

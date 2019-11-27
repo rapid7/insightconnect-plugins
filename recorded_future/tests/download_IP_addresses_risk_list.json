@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "download_IP_addresses_risk_list",
+        "connection": {
+            "api_key": null
+        },
+        "input": {
+            "list": "current_cc_server"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

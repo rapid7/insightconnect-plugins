@@ -1,0 +1,22 @@
+{
+    "body": {
+        "action": "add_fixed_address",
+        "connection": {
+            "api_version": null,
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "infoblox_host": null
+        },
+        "input": {
+            "address": {
+                "ipv4addr": "10.10.10.111",
+                "mac": "aa:bb:cc:11:22:ab"
+            }
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

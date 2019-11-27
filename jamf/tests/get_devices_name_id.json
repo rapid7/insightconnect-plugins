@@ -1,0 +1,19 @@
+{
+    "body": {
+        "action": "get_devices_name_id",
+        "connection": {
+            "client_login": {
+                "password": null,
+                "username": null
+            },
+            "timeout": null,
+            "url": null
+        },
+        "input": {
+            "name": "Jon"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

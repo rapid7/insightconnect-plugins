@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "projects",
+        "connection": {
+            "token": {
+                "secretKey": null
+            },
+            "url": null
+        },
+        "input": {
+            "id": "1",
+            "projects": [
+                "test 1"
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

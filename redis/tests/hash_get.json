@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "hash_get",
+        "connection": {
+            "db": null,
+            "host": null,
+            "port": null
+        },
+        "input": {
+            "key": "hashfoo"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

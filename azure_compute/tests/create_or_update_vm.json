@@ -1,0 +1,74 @@
+{
+    "body": {
+        "action": "create_or_update_vm",
+        "connection": {
+            "api_version": null,
+            "client_id": null,
+            "client_secret": {
+                "privateKey": null
+            },
+            "host": null,
+            "tenant_id": null
+        },
+        "input": {
+            "location": "westus",
+            "name": "vmKomand2",
+            "plan": {},
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_A0"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "/subscriptions/9df5838e-0984-4c7c-8f1e-c35be1a33718/resourceGroups/VOOC/providers/Microsoft.Network/networkInterfaces/vooc2996",
+                            "properties": {
+                                "primary": true
+                            }
+                        }
+                    ]
+                },
+                "osProfile": {
+                    "adminPassword": "",
+                    "adminUsername": "",
+                    "computerName": "vmKomand2",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": false,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "keyData": "my key here",
+                                    "path": "/home/vmKomand2/.ssh/authorized_keys"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "offer": "UbuntuServer",
+                        "publisher": "Canonical",
+                        "sku": "16.10",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "caching": "ReadWrite",
+                        "createOption": "Attach",
+                        "name": "vmKomand2_disk",
+                        "osType": "Linux",
+                        "vhd": {
+                            "uri": "https://voocdisks486.blob.core.windows.net/vhds/vmKomand2_disk.vhd"
+                        }
+                    }
+                }
+            },
+            "resourceGroup": "VOOC",
+            "subscriptionId": "",
+            "tags": {},
+            "vm": "vmKomand2"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

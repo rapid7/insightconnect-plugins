@@ -1,0 +1,22 @@
+{
+    "body": {
+        "action": "query",
+        "connection": {
+            "credentials": {
+                "password": null,
+                "username": null
+            },
+            "db": null,
+            "host": null,
+            "port": null,
+            "type": null
+        },
+        "input": {
+            "parameters": {},
+            "query": "select * from plugins"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

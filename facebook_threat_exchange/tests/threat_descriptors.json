@@ -1,0 +1,33 @@
+{
+    "body": {
+        "action": "threat_descriptors",
+        "connection": {
+            "app_id": null,
+            "secret_key": {
+                "secretKey": null
+            }
+        },
+        "input": {
+            "fields": [],
+            "include_expired": false,
+            "limit": 0,
+            "max_confidence": 100,
+            "min_confidence": 0,
+            "owner": [],
+            "review_status": "",
+            "share_level": "",
+            "since": "",
+            "sort_by": "",
+            "sort_order": "",
+            "status": "",
+            "strict_text": false,
+            "tags": [],
+            "text": "proxy",
+            "type": "",
+            "until": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

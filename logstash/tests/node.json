@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "node",
+        "connection": {
+            "url": null
+        },
+        "input": {
+            "types": "os,jvm"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

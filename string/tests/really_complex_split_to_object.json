@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "split_to_object",
+        "connection": null,
+        "input": {
+            "block_delimiter": "\" ",
+            "string": "Agent_Begin_Local_Time=\"12/11/2018 12:29:52 PM\" Agent_Begin_UTC_Time=\"12/11/2018 5:29:52 PM\" Agent_End_Local_Time=\"12/11/2018 12:29:55 PM\" Agent_End_UTC_Time=\"12/11/2018 5:29:55 PM\" Agent_Local_Date=\"2018.12.11\" Application=\"microsoft.phot\" Application_Directory=\"c:\\program files\\windowsapps\\microsoft.windows.photos_2017.35063.44410.1000_x64__8wekyb3d8bbwe\" Application_Full_Name=\"microsoft.photos.exe\" Command_Line=\"\"C:\\Program Files\\WindowsApps\\Microsoft.Windows.Photos_2017.35063.44410.1000_x64__8wekyb3d8bbwe\\Microsoft.Photos.exe\" -ServerName:App.AppXzst44mncqdg84v7sv6p7yznqwssy6f7f.mca\" Computer_ID=\"bef41e8b-47b8-e188-8e43-3a2b662dd55d\" Computer_Name=\"dgdemo\\RGWin64\" Computer_Type=\"Windows\" Day_of_Week=\"Tuesday\" File_Extension=\"exe\" Hour_of_Day=\"12\" MAC_Address=\"000c291e11e0\" Maximum_Number_of_Threads=\"18\" MD5_Checksum=\"28ecbc7a01aeaeb08cb5b9d81b67b9f6\" MD5_Hash=\"7abcec28-ae01-b0ae-8cb5-b9d81b67b9f6\" Month=\"2018/12\" Product_Version=\"2017.35063.4441000000-2017.35063.13610.0\" Scan_Value_Status=\"Scanned\" Scan_Value_Status_Local_Time=\"8/25/2018 6:56:08 AM\" Scan_Value_Status_Text=\"Virus Total: 0 / 68 scans positive.\" Signature_Create_UTC_Time=\"\" Signature_Executable=\"\" Signature_Issuer=\"\" Signature_Publisher=\"\" Signature_Status=\"No Signature\" Signature_Subject=\"\" Signature_Verify_Status=\"\" Domain_Name=\"dgdemo\"",
+            "string_delimiter": "="
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

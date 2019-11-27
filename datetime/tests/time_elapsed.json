@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "time_elapsed",
+        "connection": null,
+        "input": {
+            "first_time": "2018-05-01T00:00:00.77Z",
+            "result_unit": "Days",
+            "second_time": "2018-05-07T04:00:00.77Z"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}
