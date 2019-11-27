@@ -282,7 +282,7 @@ Example output:
 
 #### Risk Detection
 
-This trigger provides list of both user and sign-in linked risk detections and associated information about the detection.
+This trigger provides a list of both user and sign-in linked risk detections and associated information about the detection.
 
 #### Input
 
@@ -436,4 +436,3 @@ _This plugin does not contain any troubleshooting information._
 * [Azure AD Admin](https://azure.microsoft.com)
 * [User API](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0)
 * [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)
-
