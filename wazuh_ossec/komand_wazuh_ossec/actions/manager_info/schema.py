@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns basic information about the Manager"
+
+
 class Input:
     pass
 
@@ -103,16 +107,16 @@ class ManagerInfoOutput(komand.Output):
     }
   },
   "required": [
-    "tz_name",
-    "tz_offset",
-    "version",
-    "max_agents",
     "description",
-    "type",
+    "error",
+    "installation_date",
+    "max_agents",
     "openssl_support",
     "ruleset_version",
-    "installation_date",
-    "error"
+    "type",
+    "tz_name",
+    "tz_offset",
+    "version"
   ]
 }
     """)

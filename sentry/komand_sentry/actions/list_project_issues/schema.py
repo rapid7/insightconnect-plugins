@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return a list of issues (groups) bound to a project"
+
+
 class Input:
     ORGANIZATION_SLUG = "organization_slug"
     PROJECT_SLUG = "project_slug"

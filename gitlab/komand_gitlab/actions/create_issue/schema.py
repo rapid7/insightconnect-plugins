@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create issue"
+
+
 class Input:
     ID = "id"
     PARAMETERS = "parameters"
@@ -131,8 +135,8 @@ class CreateIssueInput(komand.Input):
         }
       },
       "required": [
-        "title",
-        "project_id"
+        "project_id",
+        "title"
       ]
     }
   }

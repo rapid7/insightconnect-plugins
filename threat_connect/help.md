@@ -1,36 +1,61 @@
+# Description
 
-# ThreatConnect
+[ThreatConnect](https://threatconnect.com) is a Threat Intelligence Platform (TIP) that empowers large
+  organizations to aggregate, analyze and act on their threat intelligence. The ThreatConnect plugin for Rapid7
+InsightConnect allows users to view incidents, emails, threats, victims, and more.
 
-## About
+ThreatConnect can aid in phishing analysis and general threat intelligence collection through its platform.
 
-[ThreatConnect](https://threatconnect.com) is a Threat Intelligence Platform (TIP) that empowers large organizations to aggregate, analyze and act on their threat intelligence.
+# Key Features
 
-[ThreatConnect Python SDK](https://docs.threatconnect.com/en/latest/python/python_sdk.html)
+* View incidents
+* View ThreatConnect emails
+* Creat tasks
 
-## Actions
+# Requirements
 
-### Delete Adversary
+* API access ID
+* API secret key
+* API base URL
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_default_org|string|None|False|Enter API Default Org|None|
+|api_access_id|string|None|False|Enter API Access ID|None|
+|api_secret_key|string|None|False|Enter API Secret Key|None|
+|api_base_url|string|None|False|Enter API Base URL|None|
+
+## Technical Details
+
+### Actions
+
+#### Delete Adversary
 
 This action is used to delete an adversary in the ThreatConnect platform.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |owner|string|None|True|Owner/Organization|None|
 |id|integer|None|True|Adversary To Delete|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|False|None|
 
-### Create Task
+#### Create Task
 
 This action is used to create a task resource in the ThreatConnect platform.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -48,51 +73,51 @@ This action is used to create a task resource in the ThreatConnect platform.
 |attributes|[]object|None|False|Task Attributes|None|
 |overdue|boolean|None|False|Is task overdue|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|False|None|
 
-### Victims Retrieve
+#### Victims Retrieve
 
 This action is used to retrieve ThreatConnect victims.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|filter|None|False|ThreatConnect filters|None|
 |owner|string|None|True|Owner/Organization|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |victims|[]victim_output|False|None|
 
-### Threats Retrieve
+#### Threats Retrieve
 
 This action is used to retrieve ThreatConnect threats.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|filter|None|False|ThreatConnect filters|None|
 |owner|string|None|True|Owner/Organization|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |threats|[]signatures_output|False|None|
 
-### Create Adversary
+#### Create Adversary
 
 This action is used to create a ThreatConnect adversary.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -102,17 +127,17 @@ This action is used to create a ThreatConnect adversary.
 |name|string|None|True|Adversary Name|None|
 |security_label|string|None|False|Adversary Security Label|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|False|None|
 
-### Bulk Indicator Download
+#### Bulk Indicator Download
 
 This action is used to retrieve ThreatConnect bulk indicator download.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -127,34 +152,34 @@ This action is used to retrieve ThreatConnect bulk indicator download.
 |type|string|None|False|Indicator type|None|
 |threat_assess_rating|string|None|False|Threat Assess Rating filter|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |bulk_indicators|[]bulk_indicator_output|False|None|
 
-### Incidents Retrieve
+#### Incidents Retrieve
 
 This action is used to retrieve ThreatConnect incidents.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|filter|None|False|ThreatConnect filters|None|
 |owner|string|None|True|Owner/Organization|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |incidents|[]incidents_output|False|None|
 
-### Email Retrieve
+#### Email Retrieve
 
 This action is used to retrieve ThreatConnect e-mails.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -170,61 +195,52 @@ This action is used to retrieve ThreatConnect e-mails.
 |document_id|integer|None|False|Filter Groups on associated Document ID|None|
 |adversary_id|integer|None|False|Filter Groups on associated Adversary ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |emails|[]email_output|False|None|
 
-### Signatures Retrieve
+#### Signatures Retrieve
 
 This action is used to retrieve ThreatConnect signatures.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|filter|None|False|ThreatConnect filters|None|
 |owner|string|None|True|Owner/Organization|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |signatures|[]signatures_output|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_default_org|string|None|False|Enter API Default Org|None|
-|api_access_id|string|None|False|Enter API Access ID|None|
-|api_secret_key|string|None|False|Enter API Secret Key|None|
-|api_base_url|string|None|False|Enter API Base URL|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Threat Intelligence
-* Enrichment
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to Python v2 architecture | Support web server mode | Use new credential types | Rename "Threat Connect" plugin title to "ThreatConnect" | Rename "Email's Retrieve" to "Email Retrieve"
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [ThreatConnect](https://threatconnect.com)
 * [ThreatConnect Python SDK](https://docs.threatconnect.com/en/latest/python/python_sdk.html)
+

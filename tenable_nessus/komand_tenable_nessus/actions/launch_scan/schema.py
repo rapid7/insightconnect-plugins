@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run a specified scan"
+
+
 class Input:
     SCAN_NAME = "scan_name"
     
@@ -55,8 +59,8 @@ class LaunchScanOutput(komand.Output):
     }
   },
   "required": [
-    "scan_name",
-    "message"
+    "message",
+    "scan_name"
   ]
 }
     """)

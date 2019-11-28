@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a snapshot of a specified persistent disk"
+
+
 class Input:
     CREATIONTIMESTAMP = "creationTimestamp"
     DESCRIPTION = "description"
@@ -134,9 +138,9 @@ class DiskSnapshotInput(komand.Input):
     }
   },
   "required": [
-    "selfLink",
     "disk",
     "name",
+    "selfLink",
     "zone"
   ],
   "definitions": {

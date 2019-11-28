@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add email subject to event"
+
+
 class Input:
     COMMENT = "comment"
     DISTRIBUTION = "distribution"
@@ -60,11 +64,11 @@ class AddEmailSubjectInput(komand.Input):
     }
   },
   "required": [
-    "subject",
-    "event",
     "comment",
     "distribution",
-    "proposal"
+    "event",
+    "proposal",
+    "subject"
   ]
 }
     """)

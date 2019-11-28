@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List all floating IPs from the account"
+
+
 class Input:
     pass
 

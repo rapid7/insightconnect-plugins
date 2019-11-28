@@ -1,27 +1,11 @@
 {
-	"spec": "12b55846c53e9c551b4aef692be7ee9f",
-	"manifest": "d7cd93d169254352fd36ee54324c4ca8",
-	"setup": "2dddbf67cfa357200215dfa74aef90ac",
+	"spec": "b21c9b4ab472e02c3b4632e93f5fbe34",
+	"manifest": "476499cbc84e07b8c2758f80fd5b8014",
+	"setup": "156b2a2ed1ad582f38e6cfd24f187fc9",
 	"schemas": [
 		{
-			"identifier": "account_expire_now/schema.py",
-			"hash": "d5e3c66e6c8fd4bd532f3cc6558696fd"
-		},
-		{
-			"identifier": "account_reactivate/schema.py",
-			"hash": "de34a948ecac66a3702fcf7be1701825"
-		},
-		{
-			"identifier": "account_revert_policy/schema.py",
-			"hash": "8ac86e2228d76a83d50c9effc8adf622"
-		},
-		{
-			"identifier": "accounts_by_id/schema.py",
-			"hash": "4eaaa6316fff32dc1ea9d3099e5d61d3"
-		},
-		{
 			"identifier": "activities_list/schema.py",
-			"hash": "a3817702a99d52efe0d5dcaeb1a9be33"
+			"hash": "5ebbec2e3897f2c1a57bd9da9a4744d6"
 		},
 		{
 			"identifier": "activities_types/schema.py",
@@ -30,14 +14,6 @@
 		{
 			"identifier": "agents_abort_scan/schema.py",
 			"hash": "af534fe33c3358709107029e174b6614"
-		},
-		{
-			"identifier": "agents_approve_uninstall/schema.py",
-			"hash": "d47e6a3aef54b0c63ff0d133215265bd"
-		},
-		{
-			"identifier": "agents_can_start_remote_shell/schema.py",
-			"hash": "d38dca84790c36f8b43ecd5011034f75"
 		},
 		{
 			"identifier": "agents_connect/schema.py",
@@ -52,20 +28,8 @@
 			"hash": "30c6b9c11238f47dfe81939c734330b0"
 		},
 		{
-			"identifier": "agents_fetch_applications/schema.py",
-			"hash": "fbb501fcdba6b3593f16cc640308da20"
-		},
-		{
-			"identifier": "agents_fetch_firewall_rules/schema.py",
-			"hash": "cb294d2ec28492be175e67b59abb2246"
-		},
-		{
 			"identifier": "agents_fetch_logs/schema.py",
 			"hash": "bbd2f47b04ca7e204984ccdec28d4bf9"
-		},
-		{
-			"identifier": "agents_firewall_logging/schema.py",
-			"hash": "a25a24be3f2b02b04fd8366e63adf962"
 		},
 		{
 			"identifier": "agents_initiate/schema.py",
@@ -76,16 +40,8 @@
 			"hash": "5829282e911839f6876cdaed940739f2"
 		},
 		{
-			"identifier": "agents_reject_uninstall/schema.py",
-			"hash": "dcacf26f069e4158b5b43218d43082f5"
-		},
-		{
 			"identifier": "agents_reload/schema.py",
 			"hash": "6042c9c755d2ed69b6182b6f662ae33a"
-		},
-		{
-			"identifier": "agents_reset_local_config_policy/schema.py",
-			"hash": "4c9cca87563dae36d24a824025eef485"
 		},
 		{
 			"identifier": "agents_restart/schema.py",
@@ -96,24 +52,12 @@
 			"hash": "8ffcd7e051cbe844c0a3f49a03896d4c"
 		},
 		{
-			"identifier": "agents_start_remote_shell/schema.py",
-			"hash": "dcb7b8a869dfb01a4144c1794f758cc3"
-		},
-		{
 			"identifier": "agents_summary/schema.py",
 			"hash": "28db14c8d20f13e419af6b9435e14203"
 		},
 		{
-			"identifier": "agents_terminate_remote_shell/schema.py",
-			"hash": "f0cfb67d8f1a6783c16610cd06913582"
-		},
-		{
 			"identifier": "agents_uninstall/schema.py",
 			"hash": "a8aadf12df870c4aa829227c83078c40"
-		},
-		{
-			"identifier": "agents_update_software/schema.py",
-			"hash": "eaf20d0be1965e4369f20a071d0bfba3"
 		},
 		{
 			"identifier": "apps_by_agent_ids/schema.py",
@@ -128,28 +72,12 @@
 			"hash": "6bc15cb20f10a557de56e93076bbb40f"
 		},
 		{
-			"identifier": "create_account/schema.py",
-			"hash": "560a1cf965fb0589e726bbcd578aa619"
-		},
-		{
-			"identifier": "create_admin_account/schema.py",
-			"hash": "7bfcdf2e324d3c22d47265acb29098fe"
-		},
-		{
 			"identifier": "create_ioc_threat/schema.py",
 			"hash": "ea407640aed1d5eba054c404bb7687c9"
 		},
 		{
-			"identifier": "get_accounts/schema.py",
-			"hash": "956d2eb80f77b1dc55fc97cb0b9ca776"
-		},
-		{
 			"identifier": "get_threat_summary/schema.py",
 			"hash": "ab6415868cda8d60ef6aa0e05757d618"
-		},
-		{
-			"identifier": "last_activity_as_syslog/schema.py",
-			"hash": "23fe8b428517d9d88bdfaab35bfc07f4"
 		},
 		{
 			"identifier": "mark_as_benign/schema.py",
@@ -166,14 +94,6 @@
 		{
 			"identifier": "name_available/schema.py",
 			"hash": "7882f358d6395e2edb2ff5d82a45b4fc"
-		},
-		{
-			"identifier": "private_accounts/schema.py",
-			"hash": "9a64d3d5d9db61a8b50813d66e429d39"
-		},
-		{
-			"identifier": "update_account/schema.py",
-			"hash": "efd06d278168f7c430c206bf7db56e2d"
 		},
 		{
 			"identifier": "connection/schema.py",

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a global user to the organization"
+
+
 class Input:
     LOGIN_OR_EMAIL = "login_or_email"
     ORGANIZATION_ID = "organization_id"

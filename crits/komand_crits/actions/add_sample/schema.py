@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new sample"
+
+
 class Input:
     FILE = "file"
     PARAMS = "params"
@@ -50,9 +54,9 @@ class AddSampleInput(komand.Input):
     }
   },
   "required": [
-    "type",
+    "file",
     "source",
-    "file"
+    "type"
   ],
   "definitions": {
     "file": {

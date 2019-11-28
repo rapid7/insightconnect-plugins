@@ -1,23 +1,37 @@
-
-# ifconfig.co
-
-## About
+# Description
 
 [ifconfig.co](https://ifconfig.co/) is a free IP address lookup API.
 
-## Actions
+# Key Features
 
-### Check Ports
+* Network Address Translation
+* IP details
+
+# Requirements
+
+_This plugin does not contain any requirements_
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Check Ports
 
 This action is used to check for a given TCP port on your public facing IP address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |port|integer|None|True|TCP Port to Check|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -37,15 +51,15 @@ Example output:
 
 ```
 
-### Lookup IP Address
+#### Lookup IP Address
 
 This action is used to retrieve your public facing IP address.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -70,32 +84,29 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Address validation
-* Port checking
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Rename "Lookup Your IP Address" action to "Lookup IP Address" | Rename "Check Your Ports" action to "Check Ports"
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Convert to Python 3
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Rename "Lookup Your IP Address" action to "Lookup IP Address" | Rename "Check Your Ports" action to "Check Ports"
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [ifconfig.co](https://ifconfig.co/)
+

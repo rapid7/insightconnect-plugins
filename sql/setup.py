@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='sql-rapid7-plugin',
-      version='2.0.4',
-      description='SQL database module',
+      version='2.0.5',
+      description='The SQL plugin allows you to run SQL queries',
       author='rapid7',
       author_email='',
       url='',

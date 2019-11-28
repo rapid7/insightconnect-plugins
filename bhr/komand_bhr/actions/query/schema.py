@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query block history information for address"
+
+
 class Input:
     CIDR = "cidr"
     

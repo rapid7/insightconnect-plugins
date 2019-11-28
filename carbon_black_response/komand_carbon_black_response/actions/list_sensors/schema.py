@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List all sensors"
+
+
 class Input:
     GROUPID = "groupid"
     HOSTNAME = "hostname"

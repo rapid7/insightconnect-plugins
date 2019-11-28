@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets the list of artifacts associated with the specified incident"
+
+
 class Input:
     INCIDENT_ID = "incident_id"
     ORGANIZATION_ID = "organization_id"

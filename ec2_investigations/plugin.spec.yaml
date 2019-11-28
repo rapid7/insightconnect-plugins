@@ -1,19 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: ec2_investigations
 title: EC2 Investigations
 vendor: rapid7
 support: community
 status: []
-description: EC2 Investigations
-version: 1.0.0
+description: "EC2 Investigations runs security tools on the AWS EC2 platform. Using the EC2 Investigations plugin
+for Rapid7 InsightConnect will allow users to mount drives and scan directories with ClamAV"
+version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ec2_investigations
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.amazon.com
 tags:
 - ec2
 - aws
+hub_tags:
+  use_cases: [soar, application_security]
+  keywords: [ec2, aws]
+  features: []
 types:
   malicious_files:
     file:

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get information on ZeuS binary URLs"
+
+
 class Input:
     LIMIT = "limit"
     

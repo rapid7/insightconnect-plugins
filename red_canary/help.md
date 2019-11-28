@@ -1,25 +1,46 @@
+# Description
 
-# Red Canary
+[Red Canary](https://www.redcanary.com) is a managed endpoint detection and response platform. With the InsightConnect Red Canary plugin you can identify, detect, and mitigate threats to your organization.
 
-## About
+# Key Features
 
-[Red Canary](https://www.redcanary.com) is a managed endpoint detection and response platform.
-This plugin utilizes the Red Canary v3 API which is available in the help section of the management interface.
+* Manage activity monitors
+* Trigger new workflows with alert detection
+* Mitigate threats with event management
 
-## Actions
+# Requirements
 
-### Retrieve Indicators
+* Red Canary customer ID and API token
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|customer_id|string|None|True|Customer ID or name e.g. example from https://example.my.redcanary.co|None|
+|api_token|password|None|True|Red Canary API Authentication Token|None|
+
+The `customer_id` is the name or ID in the Red Canary web portal domain e.g. `example` in `https://example.my.redcanary.co`.
+
+## Technical Details
+
+### Actions
+
+#### Retrieve Indicators
 
 This action is used to fetch a list of all indicators of compromise associated with all confirmed detections.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |max_results|integer|100|False|Maximum number of indicators to return|None|
 |detection_id|integer|None|True|ID of detection e.g. 12|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -121,17 +142,17 @@ Example output:
 }
 ```
 
-### Deactivate Activity Monitor
+#### Deactivate Activity Monitor
 
 This action is used to deactivate an activity monitor.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |activity_monitor_id|integer|None|True|Activity Monitor identifier|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -173,17 +194,17 @@ Example output:
 }
 ```
 
-### Get Activity Monitor
+#### Get Activity Monitor
 
 This action is used to fetch a specific activity monitor by unique identifier.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |activity_monitor_id|integer|None|True|Activity Monitor identifier|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -225,17 +246,17 @@ Example output:
 }
 ```
 
-### Get Event
+#### Get Event
 
 This action is used to retrieve an event by unique identifier.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |event_id|integer|None|True|Event ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -272,7 +293,7 @@ Example output:
           "id": 1031,
           "attributes": {
             "name": "WIN-PUBPRN-SCRIPT-EXECUTION",
-            "description": "# Description\nThis detector identifies execution of `PubPrn.vbs` via Windows Script Host (`wscript.exe`) or Console Script Host (`cscript.exe`) with command line options to execute an arbitrary script.\nThis tactic is commonly used to download and execute arbitrary code using a trusted script and binary for bypassing application whitelisting.",
+            "description": "## Description\nThis detector identifies execution of `PubPrn.vbs` via Windows Script Host (`wscript.exe`) or Console Script Host (`cscript.exe`) with command line options to execute an arbitrary script.\nThis tactic is commonly used to download and execute arbitrary code using a trusted script and binary for bypassing application whitelisting.",
             "contributing_intelligence": "none",
             "attack_technique_identifiers": [
               "ATT&CK Technique T1064 - Scripting"
@@ -323,11 +344,11 @@ Example output:
 }
 ```
 
-### Create Activity Monitor
+#### Create Activity Monitor
 
 This action is used to create a new activity monitor.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -339,7 +360,7 @@ This action is used to create a new activity monitor.
 |type|string|file_modification|True|Type of the activity monitor, such as file_modification|None|
 |usernames_matched|[]string|None|False|List of case insensitive globstrings that select which usernames this monitor will match against|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -381,11 +402,11 @@ Example output:
 }
 ```
 
-### Update Remediation State
+#### Update Remediation State
 
 This action is used to update detection remediation state.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -393,7 +414,7 @@ This action is used to update detection remediation state.
 |remediation_state|string|remediated|True|Way in which the detection was remediated|['remediated', 'not_remediated_false_positive', 'not_remediated_sanctioned_activity', 'not_remediated_unwarranted']|
 |detection_id|integer|None|True|ID of detection e.g. 12|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -479,17 +500,17 @@ Example output:
 }
 ```
 
-### Acknowledge Detection
+#### Acknowledge Detection
 
 This action is used to mark a detection as acknowledged.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |detection_id|integer|None|True|ID of detection e.g. 12|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -563,18 +584,18 @@ Example output:
 }
 ```
 
-### Search for MAC Address Usages
+#### Search for MAC Address Usages
 
 This action is used to find usages of a MAC address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |max_results|integer|100|False|Maximum number of results to return|None|
 |mac_address|string|None|True|MAC Address to find usages for (e.g. 00-14-22-01-23-45)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -588,18 +609,18 @@ Example output:
 }
 ```
 
-### Search for Endpoint Hostname Usages
+#### Search for Endpoint Hostname Usages
 
 This action is used to find usages of an endpoint hostname.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |max_results|integer|100|False|Maximum number of results to return|None|
 |endpoint_hostname|string|None|True|Endpoint Hostname to find usages for (e.g. foo-endpoint.bardomain.com)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -613,17 +634,17 @@ Example output:
 }
 ```
 
-### List All Activity Monitor Matches
+#### List All Activity Monitor Matches
 
 This action is used to fetch a list of all activity monitor matches, sorted by the creation time of the match.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |max_results|integer|100|False|Maximum number of matches to return|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -637,17 +658,17 @@ Example output:
 }
 ```
 
-### List Activity Monitors
+#### List Activity Monitors
 
 This action is used to fetch a list of activity monitors.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |max_results|integer|100|False|Maximum number of activity monitors to return|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -859,18 +880,18 @@ Example output:
 }
 ```
 
-### Search for IP Address Usages
+#### Search for IP Address Usages
 
 This action is used to find usages of an IP address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |max_results|integer|100|False|Maximum number of results to return|None|
 |ip_address|string|None|True|IPv4 or IPv6 address to find usages for|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -884,13 +905,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-### New Events
+#### New Events
 
 This trigger is used to check for new events.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -898,7 +919,7 @@ This trigger is used to check for new events.
 |date_offset|date|None|False|Set past date to pull events from that time forward|None|
 |force_offset|boolean|None|False|Forces offset no matter what's in the cache|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -935,7 +956,7 @@ Example output:
           "id": 1031,
           "attributes": {
             "name": "WIN-PUBPRN-SCRIPT-EXECUTION",
-            "description": "# Description\nThis detector identifies execution of `PubPrn.vbs` via Windows Script Host (`wscript.exe`) or Console Script Host (`cscript.exe`) with command line options to execute an arbitrary script.\nThis tactic is commonly used to download and execute arbitrary code using a trusted script and binary for bypassing application whitelisting.",
+            "description": "## Description\nThis detector identifies execution of `PubPrn.vbs` via Windows Script Host (`wscript.exe`) or Console Script Host (`cscript.exe`) with command line options to execute an arbitrary script.\nThis tactic is commonly used to download and execute arbitrary code using a trusted script and binary for bypassing application whitelisting.",
             "contributing_intelligence": "none",
             "attack_technique_identifiers": [
               "ATT&CK Technique T1064 - Scripting"
@@ -986,18 +1007,18 @@ Example output:
 }
 ```
 
-### New Activity Monitor Matches
+#### New Activity Monitor Matches
 
 This trigger is used to check for new matches for a specific activity monitor.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |activity_monitor_id|integer|None|True|Activity Monitor identifier|None|
 |frequency|integer|5|True|How often the trigger should check for new matches in seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1008,11 +1029,11 @@ Example output:
 ```
 ```
 
-### New Detections
+#### New Detections
 
 This trigger is used to check for new detections.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -1020,7 +1041,7 @@ This trigger is used to check for new detections.
 |date_offset|date|None|False|Set past date to pull events from that time forward|None|
 |force_offset|boolean|None|False|Forces offset no matter whats in the cache|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1106,44 +1127,33 @@ Example output:
 }
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|customer_id|string|None|True|Customer ID or name e.g. example from https://example.my.redcanary.co|None|
-|api_token|password|None|True|Red Canary API Authentication Token|None|
-
-The `customer_id` is the name or ID in the Red Canary web portal domain e.g. `example` in `https://example.my.redcanary.co`.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-### Caching
+#
 
-When upgrading the Red Canary plugin, the detection cache is separate per version. So, before activating the new version of the plugin, please move the cache file `detection_cache_<org>`, located in `/opt/komand/var/volumes/global/komand-<plugin name>-<version>` e.g. `komand-red_canary-1.0.0` to the new version of the plugin. Alternatively, a workflow can be created with just the trigger to build the cache, this can take several minutes depending on how many detections you have.
+# Version History
 
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - Bug fix for schema validation
-* 1.0.0 - Bug fix for schema and cache file
-* 1.1.0 - Additional logging for trigger | Support web server mode | Bug fix for optimized trigger speed when processing detections
-* 1.1.1 - Bug fix for trigger not caching all detections
-* 1.1.2 - Use new credential types
-* 2.0.0 - Use Red Canary API v3 | New triggers New Activity Monitor Matches and New Events | New actions Create Activity Monitor, List Activity Monitors, Deactivate Activity Monitor, Get Activity Monitor, List All Activity Monitor Matches, Search for Endpoint Hostname Usages, Search For MAC Address Usages, Search for IP Address Usages | Rename action Retrieve Indicator to Retrieve Indicators, Remediate Detection to Update Remediation State
-* 2.1.0 - Updated caching for New Events and New Detection triggers. Caching will now use date vs. caching a seperate event ID. The trigger also has the option of setting a date offset for testing workflows
-* 2.1.1 - Bug fix for connection test
-* 2.1.2 - Bug fix for New Detection where needed to be loaded every time the trigger was called
-* 2.1.3 - Bug fix for New Detection trigger cache where additional dates were being added to the cache file. When the cache was loaded from the file it would set the lastest cache to an older date, allowing old detections to be triggered on
+* 2.1.5 - New spec and help.md format for the Hub
 * 2.1.4 - Bug fix for New Events trigger where PluginException was not supported in SDK image | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
+* 2.1.3 - Bug fix for New Detection trigger cache where additional dates were being added to the cache file. When the cache was loaded from the file it would set the lastest cache to an older date, allowing old detections to be triggered on
+* 2.1.2 - Bug fix for New Detection where needed to be loaded every time the trigger was called
+* 2.1.1 - Bug fix for connection test
+* 2.1.0 - Updated caching for New Events and New Detection triggers. Caching will now use date vs. caching a seperate event ID. The trigger also has the option of setting a date offset for testing workflows
+* 2.0.0 - Use Red Canary API v3 | New triggers New Activity Monitor Matches and New Events | New actions Create Activity Monitor, List Activity Monitors, Deactivate Activity Monitor, Get Activity Monitor, List All Activity Monitor Matches, Search for Endpoint Hostname Usages, Search For MAC Address Usages, Search for IP Address Usages | Rename action Retrieve Indicator to Retrieve Indicators, Remediate Detection to Update Remediation State
+* 1.1.2 - Use new credential types
+* 1.1.1 - Bug fix for trigger not caching all detections
+* 1.1.0 - Additional logging for trigger | Support web server mode | Bug fix for optimized trigger speed when processing detections
+* 1.0.0 - Bug fix for schema and cache file
+* 0.1.1 - Bug fix for schema validation
+* 0.1.0 - Initial plugin
 
-## Workflows
-
-* Retrieve detections and create a ticket based on the severity then acknowledge detection to show its been viewed.
-* Create ticket and acknowledge detections
-* Once ticket is closed mark detection as remediate
+# Links
 
 ## References
 
 * [Red Canary](https://www.redcanary.com)
+

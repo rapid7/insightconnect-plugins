@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get list of indicators from the Cloud Node"
+
+
 class Input:
     DB_ROUTE = "db_route"
     
@@ -62,8 +66,8 @@ class GetIndicatorsOutput(komand.Output):
     }
   },
   "required": [
-    "indicators",
     "indicatorCount",
+    "indicators",
     "success"
   ]
 }

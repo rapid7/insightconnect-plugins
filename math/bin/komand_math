@@ -6,7 +6,7 @@ from komand_math import connection, actions, triggers
 
 Name = 'Math'
 Vendor = 'rapid7'
-Version = '1.1.1'
+Version = '1.1.2'
 Description = 'Basic mathematical operations'
 
 

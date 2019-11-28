@@ -1,24 +1,51 @@
-# SMB
+# Description
 
-## About
+[SMB](https://en.wikipedia.org/wiki/Server_Message_Block) is a protocol used for interacting with files on an SMB
+server. Using this plugin, users can interact with shares and delete files automatically within Rapid7 InsightConnect
+workflows.
 
-[SMB](https://en.wikipedia.org/wiki/Server_Message_Block) is used for interacting with files on an SMB server.
+# Key Features
 
-This plugin utilizes the [SMB](https://en.wikipedia.org/wiki/Server_Message_Block) protocol.
+* List shares and files
+* Delete files
 
-## Actions
+# Requirements
 
-### Echo
+* SMB server hostname
+* SMB server credentials
+* SMB server NetBios name
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|host|string|None|True|Address or hostname of SMB server|None|
+|port|integer|445|False|Port of SMB server|None|
+|credentials|credential_username_password|None|True|Username and password|None|
+|domain|string|None|False|The network domain|None|
+|netbios_name|string|None|True|The NetBios machine name of the remote server|None|
+|use_ntlmv2|boolean|True|True|Defines use of NTLMv2 for authentication; will use NTLMv1 if set to False|None|
+|timeout|integer|60|True|Connection Timeout|None|
+
+## Technical Details
+
+### Actions
+
+#### Echo
 
 This action is used to send a message to a remote server and receive the same message as a reply if successful.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |message|string|None|True|Message to send to remote server|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -32,17 +59,17 @@ Example output:
 }
 ```
 
-### List Shares
+#### List Shares
 
 This action is used to list shares on a remote server.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |timeout|integer|30|False|Request timeout of operation in seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -65,11 +92,11 @@ Example output:
 }
 ```
 
-### List Share Files
+#### List Share Files
 
 This action is used to list files on a remote server share.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -79,7 +106,7 @@ This action is used to list files on a remote server share.
 |timeout|integer|30|False|Request timeout of operation in seconds|None|
 |timezone|string|UTC|True|Timezone to be applied to datetime fields (eg. UTC, US/Eastern, US/Pacific, Europe/London). Reference https\://en.wikipedia.org/wiki/List_of_tz_database_time_zones for valid timezone names|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -121,11 +148,11 @@ Example output:
 }
 ```
 
-### Delete File
+#### Delete File
 
 This action is used to delete a file from a share.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -133,7 +160,7 @@ This action is used to delete a file from a share.
 |file_path|string|None|True|Path of the file to delete|None|
 |timeout|integer|30|False|Request timeout of operation in seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -147,11 +174,11 @@ Example output:
 }
 ```
 
-### Delete Files
+#### Delete Files
 
 This action is used to delete file(s) from a share; allows wildcards. Important: this action requires the use of SMBv1.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -159,7 +186,7 @@ This action is used to delete file(s) from a share; allows wildcards. Important:
 |file_path|string|None|True|Path of file(s) to delete, accepts wildcard patterns (e.g. /test*.csv)|None|
 |timeout|integer|30|False|Request timeout of operation in seconds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -173,40 +200,28 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|None|True|Address or hostname of SMB server|None|
-|port|integer|445|False|Port of SMB server|None|
-|credentials|credential_username_password|None|True|Username and password|None|
-|domain|string|None|False|The network domain|None|
-|netbios_name|string|None|True|The NetBios machine name of the remote server|None|
-|use_ntlmv2|boolean|True|True|Defines use of NTLMv2 for authentication; will use NTLMv1 if set to False|None|
-|timeout|integer|60|True|Connection Timeout|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* List files from share and delete if creation time older than 90 days
+# Links
 
 ## References
 
 * [pysmb](https://pysmb.readthedocs.io/en/latest/)
 * [SMB](https://en.wikipedia.org/wiki/Server_Message_Block)
 * [Timezone Database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+

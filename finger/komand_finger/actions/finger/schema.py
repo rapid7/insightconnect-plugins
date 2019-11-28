@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Ask finger about a username"
+
+
 class Input:
     HOST = "host"
     USER = "user"
@@ -47,8 +51,8 @@ class FingerInput(komand.Input):
     }
   },
   "required": [
-    "user",
-    "host"
+    "host",
+    "user"
   ]
 }
     """)

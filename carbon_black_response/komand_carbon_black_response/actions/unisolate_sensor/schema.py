@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Brings a sensor back into the network"
+
+
 class Input:
     HOSTNAME = "hostname"
     

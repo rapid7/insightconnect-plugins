@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add Datetime units to a Datetime"
+
+
 class Input:
     BASE_TIME = "base_time"
     DAYS = "days"
@@ -76,12 +80,12 @@ class AddToDatetimeInput(komand.Input):
   },
   "required": [
     "base_time",
-    "years",
-    "months",
     "days",
     "hours",
     "minutes",
-    "seconds"
+    "months",
+    "seconds",
+    "years"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Obtain host details"
+
+
 class Input:
     _REF = "_ref"
     
@@ -100,8 +104,8 @@ class GetHostOutput(komand.Output):
       },
       "required": [
         "_ref",
-        "name",
-        "ipv4addrs"
+        "ipv4addrs",
+        "name"
       ],
       "definitions": {
         "IPv4Addr": {

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets query details on past queries by specified query ID"
+
+
 class Input:
     QUERYID = "queryid"
     

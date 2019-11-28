@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get alerts by an actor"
+
+
 class Input:
     
     ACTOR = "actor"

@@ -25,11 +25,13 @@ class GetNoteInput(komand.Input):
     "id": {
       "type": "integer",
       "title": "Note ID",
+      "description": "Note ID",
       "order": 2
     },
     "project_name": {
       "type": "string",
       "title": "Project Name",
+      "description": "Project name",
       "order": 1
     }
   },
@@ -53,6 +55,7 @@ class GetNoteOutput(komand.Output):
     "note": {
       "$ref": "#/definitions/Note",
       "title": "Note",
+      "description": "Project note",
       "order": 1
     }
   },

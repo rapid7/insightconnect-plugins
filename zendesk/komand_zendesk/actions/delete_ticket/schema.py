@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete ticket"
+
+
 class Input:
     TICKET_ID = "ticket_id"
     

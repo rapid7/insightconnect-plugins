@@ -6,7 +6,7 @@ from komand_facebook_threat_exchange import connection, actions, triggers
 
 Name = 'Facebook Threat Exchange'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'A platform for sharing threat information between selected entities'
 
 

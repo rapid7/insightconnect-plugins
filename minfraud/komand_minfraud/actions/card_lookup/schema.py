@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query credit card info"
+
+
 class Input:
     ADDRESS = "address"
     AVS_RESULT = "avs_result"

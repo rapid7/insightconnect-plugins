@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a joint plot that illustrates the distribution between two data series"
+
+
 class Input:
     COLOR_PALETTE = "color_palette"
     CSV_DATA = "csv_data"
@@ -88,12 +92,12 @@ class CreateJointPlotInput(komand.Input):
     }
   },
   "required": [
-    "csv_data",
-    "x_value",
-    "y_value",
-    "kind",
     "color_palette",
-    "margin_style"
+    "csv_data",
+    "kind",
+    "margin_style",
+    "x_value",
+    "y_value"
   ]
 }
     """)

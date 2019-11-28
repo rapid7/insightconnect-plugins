@@ -6,8 +6,8 @@ from komand_openvas import connection, actions, triggers
 
 Name = 'OpenVAS'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'The Open Vulnerability Assessment System (OpenVAS)'
+Version = '1.0.1'
+Description = 'Allows users to perform common tasks such as starting, stopping, deleting and scheduling scans from an OpenVAS server'
 
 
 class ICONOpenvas(komand.Plugin):

@@ -24,6 +24,7 @@ class GetProjectInput(komand.Input):
     "name": {
       "type": "string",
       "title": "Project Name",
+      "description": "Project name",
       "order": 1
     }
   },
@@ -46,6 +47,7 @@ class GetProjectOutput(komand.Output):
     "project": {
       "$ref": "#/definitions/Project",
       "title": "Project",
+      "description": "Project",
       "order": 1
     }
   },

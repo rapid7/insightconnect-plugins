@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='proofpoint_tap-rapid7-plugin',
-      version='1.0.3',
-      description='A plugin for Proofpoint Targeted Attack Protection (TAP)',
+      version='1.0.4',
+      description='A plugin for Proofpoint Targeted Attack Protection (TAP) alerts',
       author='rapid7',
       author_email='',
       url='',

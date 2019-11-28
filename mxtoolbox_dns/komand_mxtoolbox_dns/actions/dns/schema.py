@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run a DNS query"
+
+
 class Input:
     HOSTNAME = "hostname"
     

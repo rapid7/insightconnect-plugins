@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Suspends a user account"
+
+
 class Input:
     EMAIL = "email"
     

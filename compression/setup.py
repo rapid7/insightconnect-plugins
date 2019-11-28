@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='compression-rapid7-plugin',
-      version='2.0.0',
-      description='Compress/decompress a file using different algorithms',
+      version='2.0.1',
+      description='The Compression plugin for Rapid7 InsightConnect allows users to compress/decompress files using different Compression algorithms',
       author='rapid7',
       author_email='',
       url='',

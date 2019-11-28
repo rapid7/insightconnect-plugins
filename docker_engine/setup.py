@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='docker_engine-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='Control Docker Images, Containers, and Networks',
       author='rapid7',
       author_email='',

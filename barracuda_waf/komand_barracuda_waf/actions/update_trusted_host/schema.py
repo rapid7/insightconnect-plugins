@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates the values of given parameters"
+
+
 class Input:
     ADDRESS = "address"
     COMMENTS = "comments"
@@ -53,10 +57,10 @@ class UpdateTrustedHostInput(komand.Input):
     }
   },
   "required": [
-    "group_name",
-    "name",
     "address",
-    "mask"
+    "group_name",
+    "mask",
+    "name"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check SPF records on a domain"
+
+
 class Input:
     HOSTNAME = "hostname"
     

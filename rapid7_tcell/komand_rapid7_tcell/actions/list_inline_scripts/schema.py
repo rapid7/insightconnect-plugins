@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch details for all seen inline scripts (matching the provided criteria)"
+
+
 class Input:
     APP_ID = "app_id"
     FROM = "from"

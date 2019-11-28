@@ -1,22 +1,36 @@
-# Microsoft Office 365 ATP Safe Links
-
-## About
+# Description
 
 [Microsoft ATP Safe Links](https://docs.microsoft.com/en-us/office365/securitycompliance/atp-safe-links) is a service that helps protect your organization by providing time-of-click verification of web addresses (URLs) in email messages and Office documents.
 
-## Actions
+# Key Features
 
-### Decode Safe Links
+* Threat Management at the user level, links check when clicked
+
+# Requirements
+
+* Microsoft ATP
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Decode Safe Links
 
 This action is used to decode a Microsoft Safe Link.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|Safe Link to be decoded|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -30,29 +44,27 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Fixed issue where non-safelinks returned a blank string
+* 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Decode Safe Link for further enrichment of the URL
+# Links
 
 ## References
 
 * [Microsoft ATP Safe Links](https://docs.microsoft.com/en-us/office365/securitycompliance/atp-safe-links)
+

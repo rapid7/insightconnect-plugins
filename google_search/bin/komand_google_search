@@ -6,7 +6,7 @@ from komand_google_search import connection, actions, triggers
 
 Name = 'Google Search'
 Vendor = 'rapid7'
-Version = '1.0.0'
+Version = '1.0.1'
 Description = 'Search the worlds information, including webpages, images, videos and more using Google'
 
 

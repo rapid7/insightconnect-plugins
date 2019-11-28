@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a MISP event"
+
+
 class Input:
     ANALYSIS = "analysis"
     DISTRIBUTION = "distribution"

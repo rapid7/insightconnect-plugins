@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists data theft element"
+
+
 class Input:
     ID = "id"
     POLICY_ID = "policy_id"

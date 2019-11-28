@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='trello-rapid7-plugin',
-      version='2.0.1',
+      version='2.0.2',
       description='Boards, lists, and cards enable you to organize and prioritize your projects in a fun, flexible and rewarding way',
       author='rapid7',
       author_email='',

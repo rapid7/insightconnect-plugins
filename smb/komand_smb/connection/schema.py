@@ -66,11 +66,11 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "netbios_name",
-    "use_ntlmv2",
-    "timeout",
+    "credentials",
     "host",
-    "credentials"
+    "netbios_name",
+    "timeout",
+    "use_ntlmv2"
   ],
   "definitions": {
     "credential_username_password": {

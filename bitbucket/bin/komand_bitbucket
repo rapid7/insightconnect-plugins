@@ -6,8 +6,8 @@ from komand_bitbucket import connection, actions, triggers
 
 Name = 'Bitbucket'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Utilize Bitbucket API'
+Version = '1.0.1'
+Description = 'This plugin allows management of your Bitbucket account using its API'
 
 
 class ICONBitbucket(komand.Plugin):

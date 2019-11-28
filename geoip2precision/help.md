@@ -1,25 +1,47 @@
+# Description
 
-# GeoIP2 Precision
+[MaxMind GeoIP2 Precision](https://www.maxmind.com/en/geoip2-precision-services) is a MaxMind service that offers
+industry-leading IP intelligence data. Users of the GeoIP2 Precision plugin for Rapid7 InsightConnect can use it to
+geolocate IP addresses. Use this plugin in combination with alerting plugins to enrich and provide additional detail
+in real-time.
 
-## About
+# Key Features
 
-[MaxMind GeoIP2 Precision](https://www.maxmind.com/en/geoip2-precision-services) provides IP intelligence data.
+* Geolocate IP addresses
 
-The GeoIP2 Precision plugin queries the MaxMind Insights service via its API and returns relevant data on the provided IP.
+# Requirements
 
-## Actions
+* User ID
+* License key
 
-### Lookup
+# Documentation
+
+## Setup
+
+A MaxMind Precision user ID and license key is needed.
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|user|integer|None|True|User ID number|None|
+|license_key|credential_secret_key|None|True|License key|None|
+
+## Technical Details
+
+### Actions
+
+#### Lookup
 
 This action is used to lookup IP address information.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|IP address to query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -36,38 +58,28 @@ This action is used to lookup IP address information.
 |postal|integer|False|Postal Code for location|
 |asn|integer|False|Autonomous system number|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-A MaxMind Precision user ID and license key is needed.
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user|integer|None|True|User ID number|None|
-|license_key|credential_secret_key|None|True|License key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 A valid IP address must be provided.
 
-## Workflows
+# Version History
 
-Examples:
-
-* IP enrichment
-* Location services
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [GeoIP Precision](https://www.maxmind.com/en/geoip2-precision-services)
+

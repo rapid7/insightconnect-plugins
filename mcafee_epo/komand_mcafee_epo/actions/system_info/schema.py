@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List system information"
+
+
 class Input:
     QUERY = "query"
     

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Lookup a URL in Anomali"
+    DESCRIPTION = "Lookup a URL in Anomali ThreatStream"
 
 
 class Input:

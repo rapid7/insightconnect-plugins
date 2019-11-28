@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets the history information for a single history item. Note that the history item must actually correspond to the ticket"
+
+
 class Input:
     HISTORY_ID = "history_id"
     TICKET_ID = "ticket_id"
@@ -32,8 +36,8 @@ class TicketHistoryEntryInput(komand.Input):
     }
   },
   "required": [
-    "ticket_id",
-    "history_id"
+    "history_id",
+    "ticket_id"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update an individual issues's attributes (only the attributes submitted are modified)"
+
+
 class Input:
     ASSIGNEDTO = "assignedTo"
     HASSEEN = "hasSeen"

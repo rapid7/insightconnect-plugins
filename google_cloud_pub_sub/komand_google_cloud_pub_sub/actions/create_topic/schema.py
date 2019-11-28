@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a new topic"
+
+
 class Input:
     PROJECT_ID = "project_id"
     TOPIC = "topic"

@@ -1,34 +1,58 @@
+# Description
 
-# Recorded Future
+[Recorded Future](https://www.recordedfuture.com/) arms threat analysts, security operators, and incident
+  responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
+InsightConnect, users can search domain lists, entity lists, and more.
 
-## About
+Use Recorded Future within an automation workflow to quickly assist with threat analysis, incident response, and
+vulnerability management.
 
-[Recorded Future](https://www.recordedfuture.com/) arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats by automatically collecting and analyzing threat intelligence from technical, open, and dark web sources.
-This plugin utilizes the [Recorded Future API](https://api.recordedfuture.com/v2).
+Note: When a plugin action that causes a file to be downloaded is invoked, the file data is parsed internally and
+returned in the [STIX](https://stixproject.github.io/about/) format.
 
-When an action that causes a file to be downloaded is invoked, the file data is parsed internally and returned in the [STIX](https://stixproject.github.io/about/) format.
+# Key Features
 
-## Actions
+* Search domain lists
+* Download risk lists
+* Lookup and search hashes
 
-### List IP Addresses Risk Rules
+# Requirements
+
+* Recorded Future API key
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|string|None|False|API Key|None|
+
+## Technical Details
+
+### Actions
+
+#### List IP Addresses Risk Rules
 
 This action is used to list available filtration rules for IP address risk lists.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_rules|[]risk_rule|False|None|
 
-### Search Domains
+#### Search Domains
 
 This action is used to search for results related to a specific parent domain.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -38,31 +62,31 @@ This action is used to search for results related to a specific parent domain.
 |from|number|None|True|What number record to start from|None|
 |parent|string|None|False|Parent domain|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|search_data|False|None|
 
-### List Domain Risk Rules
+#### List Domain Risk Rules
 
 This action is used to list available filtration rules for domain risk lists.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_rules|[]risk_rule|False|None|
 
-### Search Malware
+#### Search Malware
 
 This action is used to search for data related to malware.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -72,49 +96,49 @@ This action is used to search for data related to malware.
 |from|number|None|True|What number record to start from|None|
 |freetext|string|None|False|Freetext search|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|search_data|False|None|
 
-### Search Entity Lists
+#### Search Entity Lists
 
 This action is used to perform a freetext search across all Recorded Future entity types (IP address, domain, hash, malware, and vulnerability).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |freetext|string|None|True|Freetext search|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |entities|[]entity|False|None|
 
-### Download Domain Risk List
+#### Download Domain Risk List
 
 This action returns a risk list of domains matching a filtration rule.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |list|string|None|False|The risk list to retrieve|['active_phishing_url', 'blacklisted_dns_name', 'cc_dns_name', 'cc_nameserver', 'cc_url', 'compromised_url', 'historical_malware_analysis_dns_name', 'historically_linked_to_cyber_attack', 'large', 'ransomware_distribution_url', 'ransomware_payment_dns_name', 'recent_fast_flux_dns_name', 'recent_malware_analysis_dns_name', 'recently_linked_to_cyber_attack', 'recently_resolved_to_host_of_many_ddns_names', 'recently_resolved_to_malicious_ip', 'recently_resolved_to_suspicious_ip', 'recently_resolved_to_unusual_ip', 'recently_resolved_to_very_malicious_ip', 'sinkhole_dns_name', 'typosquat_similarity__dns_sandwich', 'typosquat_similarity__typo_or_homograph']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_list|object|False|None|
 
-### Search Vulnerabilities
+#### Search Vulnerabilities
 
 This action is used to search for data related to vulnerabilities.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -124,17 +148,17 @@ This action is used to search for data related to vulnerabilities.
 |from|number|None|True|What number record to start from|None|
 |freetext|string|None|False|Text query|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|vulnerability_search_data|False|None|
 
-### Search IP Addresses
+#### Search IP Addresses
 
 This action is used to for data related to a specified IP range.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -144,47 +168,47 @@ This action is used to for data related to a specified IP range.
 |from|number|None|True|What number record to start from|None|
 |ip_range|string|None|False|IP address range to search|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|search_data|False|None|
 
-### List Vulnerability Risk Rules
+#### List Vulnerability Risk Rules
 
 This action is used to retrieve available filtration rules for vulnerability risk lists.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_rules|[]risk_rule|False|None|
 
-### Download Hash Risk List
+#### Download Hash Risk List
 
 This action is used to returns a list of hashes matching a specified risk rule.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |list|string|None|False|The risk list to retrieve|['large', 'linked_to_attack_vector', 'linked_to_cyber_attack', 'linked_to_malware', 'linked_to_vulnerability', 'positive_malware_verdict', 'threat_researcher']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_list|object|False|None|
 
-### Search Hashes
+#### Search Hashes
 
 This action is used to search for data related to hashes of a specified type.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -194,50 +218,50 @@ This action is used to search for data related to hashes of a specified type.
 |from|number|None|True|What number record to start from|None|
 |algorithm|string|None|False|Hashing algorithm to search by|['MD5', 'SHA-256', 'SHA-1']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|search_data|False|None|
 
-### Lookup Entity List
+#### Lookup Entity List
 
 This action is used to fetch a specified entity list by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |entity_list_id|string|None|True|Entity list ID, obtained from the 'Search Entity lists' action|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |entities|[]entity|False|None|
 
-### Lookup Malware
+#### Lookup Malware
 
 This action is used to return information about a specific malware entry by ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |malware_ID|string|None|True|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |timestamps|timestamps|False|None|
 |entity|entity|False|None|
 
-### Lookup Domain
+#### Lookup Domain
 
 This action is used to return information about a specific domain entry.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -245,7 +269,7 @@ This action is used to return information about a specific domain entry.
 |domain|string|None|True|Domain|None|
 |fields|[]string|None|False|List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities" , "risk" , "timestamps"]|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -278,11 +302,11 @@ Example output:
 }
 ```
 
-### Lookup Hash
+#### Lookup Hash
 
 This action is used to retrieve information about a specified hash.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -290,7 +314,7 @@ This action is used to retrieve information about a specified hash.
 |fields|[]string|None|False|List of fields to include with results e.g ["timestamps", "sightings", "threatLists", "analystNotes", "counts", "entity", "hashAlgorithm", "intelCard", "metrics", "relatedEntities", "risk", "timestamps"]|None|
 |hash|string|None|True|Hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -350,11 +374,11 @@ Example output:
 }
 ```
 
-### Lookup URL
+#### Lookup URL
 
 This action is used to retrieve information about a specified URL.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -362,7 +386,7 @@ This action is used to retrieve information about a specified URL.
 |fields|[]string|None|False|List of fields to include with results e.g ["sightings", "analystNotes", "counts", "entity", "metrics", "relatedEntities", "risk", "timestamps"]|None|
 |url|string|None|True|URL|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -392,27 +416,27 @@ Example output:
 
 ```
 
-### Download IP Addresses Risk List
+#### Download IP Addresses Risk List
 
 This action is used to fetch a risk list of the IP addresses that match a specified filtration rule.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |list|string|None|False|The risk list to retrieve|['current_cc_server', 'cyber_exploit_signal_medium', 'historical_bad_ssl_association', 'historical_botnet_traffic', 'historical_cc_server', 'historical_honeypot_sighting', 'historical_multicategory_blacklist', 'historical_open_proxies', 'historical_positive_malware_verdict', 'historical_spam_source', 'historical_sshdictionary_attacker', 'historical_threat_researcher', 'historically_linked_to_apt', 'historically_linked_to_cyber_attack', 'historically_linked_to_intrusion_method', 'honeypot_host', 'inside_possible_bogus_bgp_route', 'large', 'malicious_packet_source', 'malware_delivery', 'nameserver_for_cc_server', 'phishing_host', 'recent_botnet_traffic', 'recent_cc_server', 'recent_honeypot_sighting', 'recent_host_of_many_ddns_names', 'recent_multicategory_blacklist', 'recent_open_proxies', 'recent_positive_malware_verdict', 'recent_spam_source', 'recent_sshdictionary_attacker', 'recent_threat_researcher', 'recently_linked_to_apt', 'recently_linked_to_cyber_attack', 'recently_linked_to_intrusion_method', 'resolution_of_fast_flux_dns_name', 'tor_node', 'unusual_ip', 'vulnerable_host']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_list|object|False|None|
 
-### Lookup IP Address
+#### Lookup IP Address
 
 This action is used to query for data related to a specific IP address.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -420,7 +444,7 @@ This action is used to query for data related to a specific IP address.
 |comment|string|None|False|Add comment to IP address lookup for Recorded Future|None|
 |fields|[]string|None|False|List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "riskyCIDRIPs","risk", "location", "timestamps"]|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -454,257 +478,85 @@ Example output:
 }
 ```
 
-### Download Vulnerability Risk List
+#### Download Vulnerability Risk List
 
 This action is used to fetch a risk list of vulnerabilities matching a specified filtration rule.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |list|string|None|False|The risk list to retrieve|['cyber_exploit_signal_critical', 'cyber_exploit_signal_important', 'cyber_exploit_signal_medium', 'historical_scanner_uptake', 'historically_linked_to_exploit_kit', 'historically_linked_to_malware', 'historically_linked_to_ransomware', 'historically_linked_to_remote_access_trojan', 'large', 'linked_to_recent_cyber_exploit', 'nist_severity_critical', 'nist_severity_high', 'nist_severity_low', 'nist_severity_medium', 'recent_scanner_uptake', 'recently_linked_to_exploit_kit', 'recently_linked_to_malware', 'recently_linked_to_ransomware', 'recently_linked_to_remote_access_trojan', 'web_reporting_prior_to_nvd_disclosure']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_list|object|False|None|
 
-### List Hash Risk Rules
+#### List Hash Risk Rules
 
 This action is used to list available filtration rules for hash risk lists.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |risk_rules|[]risk_rule|False|None|
 
-### Lookup Vulnerability
+#### Lookup Vulnerability
 
 This action is used to fetch information about a specific vulnerability by CVE or RF ID.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|CVE or RF ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|vulnerability_search_data|False|None|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|string|None|False|API Key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* [Related Domains](https://market.komand.com/snippets/jschipp/related-domains/0.1.0)
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture
-* 1.0.1 - Support web server mode | Use new credential types
-* 1.0.2 - Fix typo in plugin spec
-* 1.1.0 - Add additional output for action Lookup Hash | Add input fields to action Lookup Hash
-* 1.2.0 - Add additional output for action Lookup Domain | Add input fields to action Lookup Domain
-* 1.3.0 - Add additional output for action Lookup IP Address | Add input fields to action Lookup IP Address
-* 1.4.0 - New action Lookup URL | Add input comment to actions Lookup Hash and Lookup Domain
-* 1.4.1 - Add missing output and remove extra output for actions Lookup Hash, Lookup Domain, Lookup IP Address and Lookup URL
-* 1.5.0 - Add support for handling IP addresses not found for action Lookup IP Address | Add found parameter to  action Lookup IP Address 
+* 1.5.3 - New spec and help.md format for the Hub
+* 1.5.2 - Fix issue where timestamp for evidenceDetails was set to integer, timestamp is now expected as datetime from RecordedFuture
 * 1.5.1 - Fix issue where parameter timestamp in evidenceDetails was set as a string in Lookup IP Address action, timestamp is now an integer
-* 1.5.2 - Fix issue where timestamp for evidenceDetails was set to integer, timestamp is now expected as datetime from RecordedFuture 
+* 1.5.0 - Add support for handling IP addresses not found for action Lookup IP Address | Add found parameter to  action Lookup IP Address
+* 1.4.1 - Add missing output and remove extra output for actions Lookup Hash, Lookup Domain, Lookup IP Address and Lookup URL
+* 1.4.0 - New action Lookup URL | Add input comment to actions Lookup Hash and Lookup Domain
+* 1.3.0 - Add additional output for action Lookup IP Address | Add input fields to action Lookup IP Address
+* 1.2.0 - Add additional output for action Lookup Domain | Add input fields to action Lookup Domain
+* 1.1.0 - Add additional output for action Lookup Hash | Add input fields to action Lookup Hash
+* 1.0.2 - Fix typo in plugin spec
+* 1.0.1 - Support web server mode | Use new credential types
+* 1.0.0 - Update to v2 Python plugin architecture
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Recorded Future](https://recordedfuture.com)
 * [Recorded Future API](https://api.recordedfuture.com/v2)
 
-## Custom Output Types
-
-### counts
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|False|None|
-|date|string|False|None|
-
-### entity
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|description|string|False|None|
-|id|string|False|None|
-|name|string|False|None|
-|type|string|False|None|
-
-### metrics
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|type|string|False|None|
-|value|integer|False|None|
-
-### entities
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|False|None|
-|entity|entity|False|None|
-
-### relatedEntities
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|entities|[]entities|False|None|
-|type|string|False|None|
-
-### evidenceDetails
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|criticality|integer|False|None|
-|criticalityLabel|string|False|None|
-|evidenceString|string|False|None|
-|rule|string|False|None|
-|timestamp|string|False|None|
-
-### risk
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|criticality|integer|False|None|
-|criticalityLabel|string|False|None|
-|evidenceDetails|[]evidenceDetails|False|None|
-|riskSummary|string|False|None|
-|rules|integer|False|None|
-|score|integer|False|None|
-
-### sightings
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|fragment|string|False|None|
-|published|string|False|None|
-|source|string|False|None|
-|title|string|False|None|
-|type|string|False|None|
-|url|string|False|None|
-
-### timestamps
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|firstSeen|string|False|None|
-|lastSeen|string|False|None|
-
-### risk_rule
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|criticality|integer|False|None|
-|criticalityLabel|string|False|None|
-|description|string|False|None|
-|name|string|False|None|
-
-### cvss
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|accessComplexity|string|False|None|
-|accessVector|string|False|None|
-|authentication|string|False|None|
-|availability|string|False|None|
-|confidentiality|string|False|None|
-|integrity|string|False|None|
-|lastModified|string|False|None|
-|published|string|False|None|
-|score|integer|False|None|
-
-### vulnerability_search_data
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|counts|[]counts|False|None|
-|cpe|[]string|False|None|
-|cvss|cvss|False|None|
-|entity|entity|False|None|
-|hashAlgorithm|string|False|None|
-|intelCard|string|False|None|
-|metrics|[]metrics|False|None|
-|nvdDescription|string|False|None|
-|relatedEntities|[]relatedEntities|False|None|
-|risk|risk|False|None|
-|sightings|[]sightings|False|None|
-|threatLists|[]object|False|None|
-|timestamps|timestamps|False|None|
-
-### cidr
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|string|False|ID|
-|name|string|False|Name|
-|type|string|False|Type|
-
-### ip
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|string|False|ID|
-|name|string|False|Name|
-|type|string|False|Type|
-
-### search_data
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|counts|[]counts|False|None|
-|entity|entity|False|None|
-|hashAlgorithm|string|False|None|
-|intelCard|string|False|None|
-|metrics|[]metrics|False|None|
-|relatedEntities|[]relatedEntities|False|None|
-|risk|risk|False|None|
-|sightings|[]sightings|False|None|
-|threatLists|[]object|False|None|
-|timestamps|timestamps|False|None|
-
-### location
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|asn|string|False|ASN|
-|cidr|cidr|False|Classless Inter-Domain Routing|
-|location|location_data|False|Location|
-|organization|string|False|Organization|
-
-### riskyCIDRIP
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ip|ip|False|IP|
-|score|integer|False|Score|

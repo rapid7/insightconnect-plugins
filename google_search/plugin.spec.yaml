@@ -1,21 +1,26 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: google_search
 title: Google Search
 description: Search the worlds information, including webpages, images, videos and
   more using Google
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/google_search
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.google.com/
 tags:
 - google
 - web
 - search
+hub_tags:
+  use_cases: [soar, investigations, data_ingestion]
+  keywords: [google, web, search]
+  features: []
 actions:
   search:
     title: Search

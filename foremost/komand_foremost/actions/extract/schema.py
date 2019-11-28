@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Extract files from image"
+
+
 class Input:
     FILE = "file"
     

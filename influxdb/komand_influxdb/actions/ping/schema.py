@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check the status of your InfluxDB instance and your version of InfluxDB"
+
+
 class Input:
     pass
 

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Send a batch block request"
+
+
 class Input:
     BATCH = "batch"
     

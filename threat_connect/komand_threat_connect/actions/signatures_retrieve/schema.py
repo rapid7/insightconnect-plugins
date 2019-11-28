@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve ThreatConnect Signatures"
+
+
 class Input:
     FILTER = "filter"
     OWNER = "owner"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deactivate user"
+
+
 class Input:
     ID_MEMBER = "id_member"
     ID_OR_NAME = "id_or_name"

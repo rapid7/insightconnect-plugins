@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='zeus_tracker-rapid7-plugin',
-      version='1.0.0',
-      description='ZeuS Command&Control Server Tracking',
+      version='1.0.1',
+      description='The ZeuS Command&Control Server Tracking plugin',
       author='rapid7',
       author_email='',
       url='',

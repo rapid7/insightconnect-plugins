@@ -1,22 +1,35 @@
+# Description
 
-# Tshark
+[TShark](https://www.wireshark.org/docs/man-pages/tshark.html) is a tool for dumping and analyzing network traffic.
+ With the TShark plugin for Rapid7 InsightConnect, users can open PCAP data for further analysis and intel gathering.
 
-## About
+# Key Features
 
-[Tshark](https://www.wireshark.org/docs/man-pages/tshark.html) is a powerful command-line packet analyzer,
-the Wireshark command-line counterpart. This plugins runs the Tshark packet tracer directly.
+* Run TShark on a PCAP file
 
-## Actions
+# Requirements
 
-### Run
+_This plugin does not contain any requirements._
 
-This action is used to run Tshark on a user supplied PCAP file and return the output as `bytes` and a `string array` of packets.
+# Documentation
 
-#### Input
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Run
+
+This action is used to run TShark on a user supplied PCAP file and return the output as `bytes` and a `string array` of packets.
+
+##### Input
 
 Supported options:
 
-* Tshark Flags
+* TShark Flags
 * Display Filter
 
 A display filter is required, the default is set to `ip or ipv6` to encompass most traffic one would want to analyze.
@@ -27,20 +40,20 @@ A display filter is required, the default is set to `ip or ipv6` to encompass mo
 |options|string|None|False|Tshark flags and options E.g. -n -c 10 -s 96. -r is implied|None|
 |file|bytes|None|True|Base64 encoded pcap|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |dump_contents|[]string|False|Traffic dump as array|
 |dump_file|bytes|False|Traffic dump file|
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -91,19 +104,17 @@ For example, `-V` is used to return the following `dump_contents` array where ea
 
 ```
 
-## Workflows
+# Version History
 
-Examples:
-
-* Packet analysis
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Fix issue where run action was excluded from plugin on build
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Tshark](https://www.wireshark.org/docs/man-pages/tshark.html)
+

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve field values from a record"
+
+
 class Input:
     FIELDS = "fields"
     OBJECT_NAME = "object_name"
@@ -44,8 +48,8 @@ class GetFieldsInput(komand.Input):
   },
   "required": [
     "fields",
-    "record_id",
-    "object_name"
+    "object_name",
+    "record_id"
   ]
 }
     """)

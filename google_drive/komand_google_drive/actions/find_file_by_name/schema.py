@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Find a file ID"
+
+
 class Input:
     FILENAME = "filename"
     FILENAME_OPERATOR = "filename_operator"
@@ -44,8 +48,8 @@ class FindFileByNameInput(komand.Input):
     }
   },
   "required": [
-    "filename_operator",
-    "filename"
+    "filename",
+    "filename_operator"
   ]
 }
     """)

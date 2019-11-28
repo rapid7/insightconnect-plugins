@@ -1,0 +1,43 @@
+{
+	"spec": "fe197eff4c87c677928033f9cb8e20fe",
+	"manifest": "37484a93adf53c7f991abd93700b4c7e",
+	"setup": "2d0201b8cc843b8ff1ed31b9bd7d3c28",
+	"schemas": [
+		{
+			"identifier": "advanced_search/schema.py",
+			"hash": "18a482914894317b7a06e57aa7dace1d"
+		},
+		{
+			"identifier": "create_record/schema.py",
+			"hash": "ea4abb35a09f9418283f28c51ec04f4b"
+		},
+		{
+			"identifier": "delete_record/schema.py",
+			"hash": "e133fa0cd248b6166d5b4a6706fb27ec"
+		},
+		{
+			"identifier": "get_blob_data/schema.py",
+			"hash": "f8ae4adb818c77bac527b30b1260e2b9"
+		},
+		{
+			"identifier": "get_fields/schema.py",
+			"hash": "d39138940b9beb01800c642f3ba3a42f"
+		},
+		{
+			"identifier": "get_record/schema.py",
+			"hash": "173006f0b1e3be6398fa74daec286716"
+		},
+		{
+			"identifier": "simple_search/schema.py",
+			"hash": "5d2fc48661364cabc2cf7dbf98963e41"
+		},
+		{
+			"identifier": "update_record/schema.py",
+			"hash": "5049583f55a1700b58ffb094f71ed5fb"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "4a6e9a07fd38b6a096b549157f846b53"
+		}
+	]
+}

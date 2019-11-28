@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return the size (number of elements) for every type"
+
+
 class Input:
     pass
 

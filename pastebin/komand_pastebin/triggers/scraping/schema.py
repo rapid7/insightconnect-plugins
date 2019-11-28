@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Scrape most recent pastes every interval for a given pattern"
+
+
 class Input:
     
     FREQUENCY = "frequency"
@@ -306,8 +310,8 @@ class ScrapingInput(komand.Input):
     }
   },
   "required": [
-    "pattern",
-    "language"
+    "language",
+    "pattern"
   ]
 }
     """)

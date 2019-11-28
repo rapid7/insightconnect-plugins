@@ -1,18 +1,37 @@
+# Description
 
-# Sentry
+[Sentry](https://sentry.io/) is an open-source error tracking tool that helps developers monitor and fix crashes
+in real time. Users can manage issues and events with the Sentry plugin for Rapid7 InsightConnect. Automatically
+triage application issues to other ticketing systems, quickly and effectively when using Sentry within a workflow.
 
-## About
+# Key Features
 
-[Sentry](https://sentry.io/) is an open-source error tracking tool that helps developers monitor and fix crashes in real time.
-This plugin utilizes the [Sentry API](https://docs.sentry.io/).
+* Update issues
+* Submit events
 
-## Actions
+# Requirements
 
-### Submit Event
+* Sentry authentication token
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|token|credential_token|None|True|Sentry Auth Token|None|
+
+## Technical Details
+
+### Actions
+
+#### Submit Event
 
 This action is used to create a new Sentry event.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -20,7 +39,7 @@ This action is used to create a new Sentry event.
 |sentry_version|integer|7|False|The protocol version. The current version of the protocol is '7'|None|
 |event_json|EventJSON|None|True|Data describing the event|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -36,11 +55,11 @@ Example output:
 
 ```
 
-### List Project Issues
+#### List Project Issues
 
 This action is used to return a list of issues (groups) bound to a project.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -50,7 +69,7 @@ This action is used to return a list of issues (groups) bound to a project.
 |shortIdLookup|boolean|None|False|If this is set to true then short IDs are looked up by this function as well. This can cause the return value of the function to return an event issue of a different project which is why this is an opt-in. Set to 1 to enable|None|
 |project_slug|string|None|True|The slug of the project the issues belong to|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -117,17 +136,17 @@ Example output:
 
 ```
 
-### List Issue Events
+#### List Issue Events
 
 This action is used to list an issue's events.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |issue_id|string|None|True|The ID of the issue to retrieve|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -199,6 +218,7 @@ Example output:
       ],
       "message": "SyntaxError Hello! \"myself\"",
       "sdk": {
+* 1.0.1 - New spec and help.md format for the Hub
         "version": "1.0.0",
         "name": "komand",
         "upstream": {
@@ -215,11 +235,11 @@ Example output:
 
 ```
 
-### Update Issue
+#### Update Issue
 
 This action is used to update an individual issues's attributes (only the attributes submitted are modified).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -231,7 +251,7 @@ This action is used to update an individual issues's attributes (only the attrib
 |isPublic|boolean|None|False|Sets the issue to public or private|None|
 |isBookmarked|boolean|None|False|In case this API call is invoked with a user context this allows changing of the bookmark flag|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -279,33 +299,25 @@ Example output:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|token|credential_token|None|True|Sentry Auth Token|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Make sure that you are using the correct Auth Token (for all actions) and DSN configuration (for submitting an event).
 You can find the [https://sentry.io/settings/{organization_slug}/{project_slug}/keys/](DNS configuration) and [https://sentry.io/settings/account/api/auth-tokens/](Auth Tokens), respectively.
 
-## Versions
+# Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Submiting new Sentry events when a step fails
-* Resolving existing Sentry issues when a step succeeds
+# Links
 
 ## References
 
@@ -313,3 +325,4 @@ Examples:
 * [Update Issue](https://docs.sentry.io/api/events/put-group-details/)
 * [List Project Issues](https://docs.sentry.io/api/events/get-project-group-index/)
 * [List Issue Events](https://docs.sentry.io/api/events/get-group-events/)
+

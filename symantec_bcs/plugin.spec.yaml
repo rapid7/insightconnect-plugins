@@ -1,20 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: symantec_bcs
 title: Symantec Business Critical Services
-description: Upload a suspected infected file or hash to Symantec Security Response
-version: 1.0.0
+description: The Symantec Business Critical Services plugin allows you to submit a file to Symantec Security Response
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/symantec_bcs
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.symantec.com
 tags:
 - symantec
 - bcs
 - security response
+hub_tags:
+  use_cases: [soar, threat_intel]
+  keywords: [symantec, bcs, security response]
+  features: []
 actions:
   submit:
     title: Submit

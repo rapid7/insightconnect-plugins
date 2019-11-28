@@ -10,7 +10,7 @@
       "auth_url": "",
       "client_id": "",
       "client_secret": "",
-      "host": "https://api.securitycenter.windows.com",
+      "host": "",
       "resource_url": "https://api.securitycenter.windows.com",
       "seconds_ago": 10512000
     }

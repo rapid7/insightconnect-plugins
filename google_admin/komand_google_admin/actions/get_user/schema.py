@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a User"
+
+
 class Input:
     USER = "user"
     

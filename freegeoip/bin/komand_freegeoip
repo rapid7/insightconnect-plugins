@@ -6,8 +6,8 @@ from komand_freegeoip import connection, actions, triggers
 
 Name = 'FreeGeoIP'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Lookup GeoIP information for a host'
+Version = '1.0.1'
+Description = 'This plugin lookup GeoIP information for a specified host'
 
 
 class ICONFreegeoip(komand.Plugin):

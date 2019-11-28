@@ -1,18 +1,41 @@
-# SentinelOne
+# Description
 
 ## About
 
-[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint
+[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint. The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne.
 
 This plugin utilizes the [SentinelOne API](https://usea1-partners.sentinelone.net/apidoc/)
 
-## Actions
+# Key Features
 
-### Get Activities
+* Blacklist vulnerable devices
+* Trigger workflows on security alerts
+* Manage Threats
+
+# Requirements
+
+* Sentinel one API administrative credentials
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_username_password|None|True|Username and password|None|
+|url|string|https\://usea1-partners.sentinelone.net/|True|URL and endpoint of SentinelOne instance. For example\: https\://usea1-partners.sentinelone.net/|None|
+
+## Technical Details
+
+### Actions
+
+#### Get Threat Summary
 
 This action is used to get a list of activities.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -39,7 +62,7 @@ This action is used to get a list of activities.
 |user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|
 |user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -82,11 +105,54 @@ Example output:
 }
 ```
 
-### Get Activity Types
+#### Get Activities
+
+This action is used to get a list of activities.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|account_ids|[]string|None|False|List of Account IDs to filter by|None|
+|activity_types|[]string|None|False|Return only these activity codes|None|
+|agent_ids|[]string|None|False|Return activities related to specified agent ids|None|
+|count_only|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|
+|created_at_between|string|None|False|Return activities created within this range (inclusive), example 1514978764288-1514978999999|None|
+|created_at_gt|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
+|created_at_gte|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
+|created_at_lt|string|None|False|Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
+|created_at_lte|string|None|False|Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
+|cursor|string|None|False|Cursor position returned by the last request. Should be used for iterating over more than 1000 items, example YWdlbnRfaWQ6NTgwMjkzODE=|None|
+|group_ids|[]string|None|False|Get a list of activities|None|
+|ids|[]string|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|
+|include_hidden|boolean|None|False|Include internal activities hidden from display?|None|
+|limit|integer|None|False|Limit number of returned items (1-100)|None|
+|site_ids|[]string|None|False|List of Site IDs to filter by|None|
+|skip|integer|None|False|Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead|None|
+|skip_count|boolean|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|
+|sort_by|string|None|False|The column to sort the results by|['id', 'activityType', 'createdAt']|
+|sort_order|string|None|False|Sort direction|['asc', 'desc']|
+|threat_ids|[]string|None|False|Return only these activity codes|None|
+|user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|
+|user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|[]activities_list|True|Result of activities list|
+|pagination|pagination|True|Pagination object|
+
+Example output:
+
+```
+```
+
+#### Get Activity Types
 
 This action is used to get a list of activity types.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -106,17 +172,17 @@ Example output:
 }
 ```
 
-### Agents Abort Scan
+#### Agents Abort Scan
 
 This action aborts running scan on all agents matching the input filter.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -130,17 +196,17 @@ Example output:
 }
 ```
 
-### Connect to network
+#### Connect to network
 
 This action sends a connect to network command to all agents matching the input filter.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -154,17 +220,17 @@ Example output:
 }
 ```
 
-### Agent Decommission
+#### Agent Decommission
 
 This action decommissions all agents matching the input filter.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -178,17 +244,17 @@ Example output:
 }
 ```
 
-### Disconnect Agents
+#### Disconnect Agents
 
 This action disconnects agents associated to marked threats from network.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|object|None|True|Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats.|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -202,17 +268,17 @@ Example output:
 }
 ```
 
-### Agents Fetch Logs
+#### Agents Fetch Logs
 
 This action sends a fetch logs command to all agents matching the input filter.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -226,17 +292,17 @@ Example output:
 }
 ```
 
-### Initiate scan
+#### Initiate scan
 
 This action sends a scan command to all agents matching the input filter.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -250,17 +316,17 @@ Example output:
 }
 ```
 
-### Agents Processes
+#### Agents Processes
 
 This action is used to retrieve running processes for a specific agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ids|[]string|None|True|Agent ID list|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -271,18 +337,18 @@ Example output:
 ```
 ```
 
-### Agents Reload
+#### Agents Reload
 
 This action is used to reload an agent module (applies to Windows agents only).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
 |module|string|None|True|Agent module to reload|['monitor', 'static', 'agent', 'log']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -296,17 +362,17 @@ Example output:
 }
 ```
 
-### Agents Restart
+#### Agents Restart
 
 This action sends a restart command to all agents matching the input filter.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -320,17 +386,17 @@ Example output:
 }
 ```
 
-### Agents Shutdown
+#### Agents Shutdown
 
 This action sends a shutdown command to all agents matching the input filter.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -344,18 +410,18 @@ Example output:
 }
 ```
 
-### Count Summary
+#### Count Summary
 
 This action is used to summary of agents by numbers.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |account_ids|[]string|None|False|List of Account IDs to filter by|None|
 |site_ids|[]string|None|False|List of Site IDs to filter by|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -371,17 +437,17 @@ Example output:
 ```
 ```
 
-### Uninstall
+#### Uninstall
 
 This action sends an uninstall command to all agents matching the input filter.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -395,17 +461,17 @@ Example output:
 }
 ```
 
-### Agents Applications
+#### Agents Applications
 
 This action is used to retrieve running applications for a specific agent.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ids|[]string|None|True|Agent ID list|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -416,17 +482,17 @@ Example output:
 ```
 ```
 
-### Blacklist by Content Hash
+#### Blacklist by Content Hash
 
 This action is used to add hashed content to global blacklist. The input for this action makes use of `contentHash` from the threat summary.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hash|string|None|True|Content hash to add to blacklist|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -442,18 +508,18 @@ Example output:
 }
 ```
 
-### Blacklist by IoC Hash
+#### Blacklist by IoC Hash
 
 This action is used to add hashed indicator of compromise to global blacklist.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hash|string|None|True|Indicator of compromise hash to add to blacklist|None|
 |agent_id|string|None|True|Agent ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -469,11 +535,11 @@ Example output:
 }
 ```
 
-### Create IOC Threat
+#### Create IOC Threat
 
 This action is used to create a threat from an IOC event.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -484,7 +550,7 @@ This action is used to create a threat from an IOC event.
 |hash|string|None|True|SHA1 hash|None|
 |path|string|None|False|Path|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -498,11 +564,11 @@ Example output:
 }
 ```
 
-### Get Threat Summary
+#### Get Threat Summary
 
 This action gets summary of all threats.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -515,11 +581,11 @@ Example output:
 ```
 ```
 
-### Mark as Benign
+#### Mark as Benign
 
 This action is used to mark a threat as resolved.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -527,7 +593,7 @@ This action is used to mark a threat as resolved.
 |whitening_option|string|None|False|Selected whitening option|['browser-type', 'certificate', 'file-type', 'file_hash', 'path']|
 |target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -541,11 +607,11 @@ Example output:
 }
 ```
 
-### Mark as Threat
+#### Mark as Threat
 
 This action is used to mark a suspicious threat as a threat.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -553,7 +619,7 @@ This action is used to mark a suspicious threat as a threat.
 |threat_id|string|None|True|ID of a threat|None|
 |whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -567,18 +633,18 @@ Example output:
 }
 ```
 
-### Mitigate Threat
+#### Mitigate Threat
 
 This action is used to apply a mitigation action to a threat.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |action|string|None|True|Mitigation action|['rollback-remediation', 'quarantine', 'kill', 'remediate', 'un-quarantine']|
 |threat_id|string|None|True|ID of a threat|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -592,17 +658,17 @@ Example output:
 }
 ```
 
-### Available Name
+#### Available Name
 
 This action is the account name available for this account.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |name|string|None|True|Account Name to validate|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -616,13 +682,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-### Get Threats
+#### Get Threats
 
 This trigger is used to get threats.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -632,7 +698,7 @@ This trigger is used to get threats.
 |classifications|[]string|None|False|List of classifications to search|None|
 |engines|[]string|None|False|Included engines|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -728,41 +794,9 @@ Example output:
 }
 ```
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Username and password|None|
-|url|string|https\://usea1-partners.sentinelone.net/|True|URL and endpoint of SentinelOne instance. For example\: https\://usea1-partners.sentinelone.net/|None|
-
-## Troubleshooting
-
-This plugin does not contain any troubleshooting information.
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 1.0.1 - Update to add Blacklist by IoC Hash and Blacklist by Content Hash
-* 1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark as Threat and Create IOC Threat
-* 1.2.0 - New actions activities_list, activities_types, agents_abort_scan, agents_connect, agents_decommission, agents_disconnect, agents_fetch_logs, agents_initiate, agents_processes, agents_reload, agents_restart, agents_shutdown, agents_summary, agents_uninstall, apps_by_agent_ids, name_available
-
-## Workflows
-
-Examples:
-
-* Get a summary of all threats for further analysis
-* Blacklist a file by its hash
-
-## References
-
-* [SentinelOne Product Page](https://www.sentinelone.com/)
-* [SentinelOne API](https://usea1-partners.sentinelone.net/apidoc/)
-
-## Custom Output Types
-
-### activities_types
+#### activities_types
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -770,7 +804,7 @@ Examples:
 |descriptionTemplate|string|False|Activity description template as seen in activity page|
 |id|float|False|Activity type ID|
 
-### activities_list
+#### activities_list
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -793,7 +827,7 @@ Examples:
 |updatedAt|string|False|Activity last updated time (UTC)|
 |userId|string|False|The user who invoked the activity (If applicable)|
 
-### agent_applications
+#### agent_applications
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -803,7 +837,7 @@ Examples:
 |size|string|False|Size of installed application|
 |version|string|False|Version of installed application|
 
-### agents_processes
+#### agents_processes
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -814,20 +848,20 @@ Examples:
 |processName|string|False|Process name|
 |startTime|string|False|Start time|
 
-### blacklist_data
+#### blacklist_data
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |affected|integer|False|Affected|
 
-### pagination
+#### pagination
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |nextCursor|string|False|Next cursor|
 |totalItems|integer|False|Total items|
 
-### data
+#### data
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -893,3 +927,23 @@ Examples:
 |updatedAt|string|False|Updated at|
 |username|string|False|Username|
 |whiteningOptions|[]string|False|Whitening options|
+
+## Troubleshooting
+
+This plugin does not contain any troubleshooting information.
+
+# Version History
+
+* 1.2.0 - New spec and help.md format for the Hub | New actions activities_list, activities_types, agents_abort_scan, agents_connect, agents_decommission, agents_disconnect, agents_fetch_logs, agents_initiate, agents_processes, agents_reload, agents_restart, agents_shutdown, agents_summary, agents_uninstall, apps_by_agent_ids, name_available
+* 1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark as Threat and Create IOC Threat
+* 1.0.1 - Update to add Blacklist by IoC Hash and Blacklist by Content Hash
+* 1.0.0 - Initial plugin
+
+# Links
+
+## References
+
+* [SentinelOne Product Page](https://www.sentinelone.com/)
+* [SentinelOne API](https://usea1-partners.sentinelone.net/apidoc/)
+
+

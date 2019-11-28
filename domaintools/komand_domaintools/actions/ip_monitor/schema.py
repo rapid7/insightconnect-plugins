@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Searches the daily activity of all our monitored TLDs on any given IP address"
+
+
 class Input:
     DAYS_BACK = "days_back"
     PAGE = "page"

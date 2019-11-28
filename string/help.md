@@ -1,26 +1,41 @@
-
-# String Operations
-
-## About
+# Description
 
 The String Operations plugin allows easy manipulation of string data.
 
 This plugin utilizes the Python 3 String library [set of methods](https://docs.python.org/3/library/stdtypes.html#string-methods).
 
-## Actions
+# Key Features
 
-### Split String to List
+* Split a string to a list of elements
+* Split a string to an object
+* Upper and Lower case a string
+
+# Requirements
+
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### Split String to List
 
 This action is used to convert a string to a list of strings.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |string|string|None|True|String to convert e.g. Sentence one\nSentence two|None|
 |delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -39,7 +54,7 @@ Example output:
 }
 ```
 
-### Split String to Object
+#### Split String to Object
 
 This action is used to convert a string to an object containing key:value strings.
 
@@ -51,7 +66,7 @@ The [output schema object](https://docs.komand.com/v0.42.1/docs/python-script-pl
 It allows users the ability to use the green selector and choose a specific variable later in the workflow by name.
 [Input templating](https://docs.komand.com/docs/input-templating) would need to be used to obtain variables by name otherwise.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -59,7 +74,7 @@ It allows users the ability to use the green selector and choose a specific vari
 |string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|
 |block_delimiter|string|None|False|The character used to split a block of text (e.g. paragraph) into slices before applying a split with the string delimiter. This is an optional parameter and necessary in more complex splitting situations where a character split isn't enough|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -98,17 +113,17 @@ Example output:
 }
 ```
 
-### Upper
+#### Upper
 
 This action is used to convert lowercase letters to uppercase.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |string|string|None|True|String to convert e.g. USER=bob|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -122,17 +137,17 @@ Example output:
 }
 ```
 
-### Lower
+#### Lower
 
 This action is used to convert uppercase letters to lowercase.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |string|string|None|True|String to convert e.g. USER=bob|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -146,11 +161,11 @@ Example output:
 }
 ```
 
-### Set Encoding
+#### Set Encoding
 
 This action is used to encode a string.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -158,7 +173,7 @@ This action is used to encode a string.
 |error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|
 |string|string|None|True|String to encode|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -172,17 +187,17 @@ Example output:
 }
 ```
 
-### Trim
+#### Trim
 
 This action is used to trim a string of leading and trailing whitespace.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |string|string|None|True|String to trim|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -196,31 +211,28 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 There may be complex string manipulation needs that are likely outside the scope of this plugin.
 If this is the case, consider using the Python 3 Script plugin instead.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
-* 1.0.1 - Update plugin tag from `util` to `utilities` for Marketplace searchability
-* 1.1.0 - New action Set Encoding
+* 1.2.1 - New spec and help.md format for the Hub
 * 1.2.0 - New action Trim
+* 1.1.0 - New action Set Encoding
+* 1.0.1 - Update plugin tag from `util` to `utilities` for Marketplace searchability
+* 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Manipulate string data
+# Links
 
 ## References
 

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Poll scan by scan ID for completion"
+
+
 class Input:
     
     POLL = "poll"

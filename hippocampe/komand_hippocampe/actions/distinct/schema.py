@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return all distinct values that match the given intelligence types"
+
+
 class Input:
     INTELLIGENCE_TYPES = "intelligence_types"
     

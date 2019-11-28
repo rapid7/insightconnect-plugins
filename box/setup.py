@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='box-rapid7-plugin',
-      version='2.2.1',
-      description='Box gives you access to secure content management and content experience features of the Box Enterprise API',
+      version='2.2.2',
+      description='Manage Box users and files',
       author='rapid7',
       author_email='',
       url='',

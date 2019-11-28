@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get list of events from the Cloud Node"
+
+
 class Input:
     pass
 

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup intelligence information"
+
+
 class Input:
     ADDRESSES = "addresses"
     GEOLOOKUP = "geolookup"

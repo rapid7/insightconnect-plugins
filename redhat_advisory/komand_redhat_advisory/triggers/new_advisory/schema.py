@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Trigger on new advisory"
+
+
 class Input:
     
     AFTER = "after"

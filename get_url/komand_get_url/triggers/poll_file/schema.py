@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Download modified file by URL"
+
+
 class Input:
     
     IS_VERIFY = "is_verify"
@@ -44,8 +48,8 @@ class PollFileInput(komand.Input):
     }
   },
   "required": [
-    "url",
-    "is_verify"
+    "is_verify",
+    "url"
   ]
 }
     """)

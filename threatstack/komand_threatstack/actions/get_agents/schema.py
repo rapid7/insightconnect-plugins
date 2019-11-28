@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get agent data"
+
+
 class Input:
     END = "end"
     FIELDS = "fields"

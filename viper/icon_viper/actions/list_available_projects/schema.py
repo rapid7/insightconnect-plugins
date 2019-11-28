@@ -32,6 +32,7 @@ class ListAvailableProjectsOutput(komand.Output):
     "projects": {
       "type": "array",
       "title": "Available Projects",
+      "description": "Available projects",
       "items": {
         "$ref": "#/definitions/Project"
       },

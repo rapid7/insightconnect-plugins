@@ -1,20 +1,24 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: bhr
 title: BHR
 vendor: rapid7
 support: community
 status: []
-description: Block addresses using the Black Hole Router
-version: 1.0.0
+description: The Black Hole Router plugin is use to assist with managing networks blocked within Black Hole Router site
+version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/bhr
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - block
 - ips
 - blackhole
+hub_tags:
+  use_cases: [soar, network_containment, soc_automation]
+  keywords: [block, ips, blackhole]
+  features: []
 enable_cache: false
 connection:
   ssl_verify:

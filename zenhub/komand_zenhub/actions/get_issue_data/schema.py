@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get the ZenHub Data for a GitHub Issue"
+
+
 class Input:
     ISSUE_NUMBER = "issue_number"
     REPO_ID = "repo_id"
@@ -32,8 +36,8 @@ class GetIssueDataInput(komand.Input):
     }
   },
   "required": [
-    "repo_id",
-    "issue_number"
+    "issue_number",
+    "repo_id"
   ]
 }
     """)

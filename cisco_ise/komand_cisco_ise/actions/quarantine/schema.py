@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Quarantine a host"
+
+
 class Input:
     MAC_ADDRESS = "mac_address"
     POLICY = "policy"

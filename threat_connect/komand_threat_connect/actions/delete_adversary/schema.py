@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete an Adversary in the ThreatConnect platform"
+
+
 class Input:
     ID = "id"
     OWNER = "owner"
@@ -32,8 +36,8 @@ class DeleteAdversaryInput(komand.Input):
     }
   },
   "required": [
-    "owner",
-    "id"
+    "id",
+    "owner"
   ]
 }
     """)

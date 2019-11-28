@@ -58,11 +58,11 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "url",
-    "client_id",
-    "username_and_password",
     "authentication_mode",
-    "ssl_verify"
+    "client_id",
+    "ssl_verify",
+    "url",
+    "username_and_password"
   ],
   "definitions": {
     "credential_secret_key": {

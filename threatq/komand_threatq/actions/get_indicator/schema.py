@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve detailed information associated with a given indicator"
+
+
 class Input:
     ID = "id"
     WITH = "with"

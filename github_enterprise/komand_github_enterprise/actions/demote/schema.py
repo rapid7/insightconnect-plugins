@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Demote admin to ordinary user"
+
+
 class Input:
     USER = "user"
     

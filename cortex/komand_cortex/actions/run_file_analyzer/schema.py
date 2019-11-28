@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run analyzers on a file"
+
+
 class Input:
     ANALYZER_ID = "analyzer_id"
     ATTRIBUTES = "attributes"
@@ -46,8 +50,8 @@ class RunFileAnalyzerInput(komand.Input):
   },
   "required": [
     "analyzer_id",
-    "file",
-    "attributes"
+    "attributes",
+    "file"
   ],
   "definitions": {
     "input_file_attributes": {
@@ -117,11 +121,11 @@ class RunFileAnalyzerOutput(komand.Output):
     }
   },
   "required": [
-    "status",
+    "analyzerId",
+    "artifact",
     "date",
     "id",
-    "analyzerId",
-    "artifact"
+    "status"
   ],
   "definitions": {
     "file_artifact": {

@@ -6,8 +6,8 @@ from komand_phishtank import connection, actions, triggers
 
 Name = 'PhishTank'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'PhishTank API'
+Version = '1.0.1'
+Description = 'The Phishtank plugin allows you to submit URLs for analysis by the PhishTank community'
 
 
 class ICONPhishtank(komand.Plugin):

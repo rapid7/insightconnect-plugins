@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Unlock GitLab user"
+
+
 class Input:
     ID = "id"
     

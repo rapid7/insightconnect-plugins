@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Search the for sale section"
+
+
 class Input:
     CATEGORY = "category"
     HAS_IMAGE = "has_image"
@@ -835,8 +839,8 @@ class ForSaleInput(komand.Input):
     }
   },
   "required": [
-    "site",
-    "category"
+    "category",
+    "site"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes the given global ACL rule"
+
+
 class Input:
     GLOBAL_ACL_ID = "global_acl_id"
     POLICY_ID = "policy_id"
@@ -32,8 +36,8 @@ class DeleteGlobalAclRuleInput(komand.Input):
     }
   },
   "required": [
-    "policy_id",
-    "global_acl_id"
+    "global_acl_id",
+    "policy_id"
   ]
 }
     """)

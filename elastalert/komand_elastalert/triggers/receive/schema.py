@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Listen for and trigger on new alerts from an ElastAlert webhook"
+
+
 class Input:
     
     ENDPOINT = "endpoint"

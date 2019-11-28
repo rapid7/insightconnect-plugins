@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Submit file for analysis"
+
+
 class Input:
     CUSTOMCMDLINE = "customcmdline"
     ENV_ID = "env_id"

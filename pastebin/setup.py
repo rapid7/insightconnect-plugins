@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='pastebin-rapid7-plugin',
-      version='1.0.0',
-      description='Pastebin.com is the number one paste tool since 2002. Pastebin is a website where you can store text online for a set period of time',
+      version='1.0.1',
+      description='The Pastebin plugin allows you to send text to and check posts on Pastebin',
       author='rapid7',
       author_email='',
       url='',

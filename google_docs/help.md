@@ -1,22 +1,42 @@
-# Google Docs
+# Description
 
-## About
+[Google Docs](https://developers.google.com/docs/api/reference/rest/v1/documents) is a online word processor. The plugin allows you to create and retrieve Google documents.
 
-[Google Docs](https://developers.google.com/docs/api/reference/rest/v1/documents) allows you to manage and edit Google documents.
+# Key Features
 
-## Actions
+* Create Google documents
+* Get Google documents
 
-### Create Blank Document
+# Requirements
+
+* A JWT with Google Docs permissions
+* Google Docs API must be enabled
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials_file_contents|credential_secret_key|None|True|Copy and paste the contents of the credentials file from google|None|
+
+## Technical Details
+
+### Actions
+
+#### Create Blank Document
 
 This action is used to create a blank Google document.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |title|string|None|True|Document Title|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -442,18 +462,18 @@ Example output:
 }
 ```
 
-### Create Document
+#### Create Document
 
 This action is used to create a Google document.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |content|string|None|False|Document Content|None|
 |title|string|None|True|Document Title|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -475,17 +495,17 @@ Example output:
 }
 ```
 
-### Get Document
+#### Get Document
 
 This action is used to get a Google document.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |document_id|string|None|True|Document ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -911,55 +931,26 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials_file_contents|credential_secret_key|None|True|Copy and paste the contents of the credentials file from google|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
-## Workflows
+# Version History
 
-Examples:
-
-* Create document
-* Get document
-
-## Versions
-
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Google Docs](https://developers.google.com/docs/api/reference/rest/v1/documents)
 
-## Custom Output Types
-
-### create_result
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|documentId|string|False|Document ID|
-|replies|[]object|False|Replies|
-|writeControl|object|False|Write control|
-
-### document
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|body|object|False|Body|
-|documentId|string|False|Document ID|
-|documentStyle|object|False|Document Style|
-|namedStyles|object|False|Named styles|
-|revisionId|string|False|Revision ID|
-|suggestionsViewMode|string|False|Suggestions view mode|
-|title|string|False|Title|

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Block GitLab user"
+
+
 class Input:
     ID = "id"
     

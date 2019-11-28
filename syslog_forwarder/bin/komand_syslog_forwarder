@@ -6,8 +6,8 @@ from komand_syslog_forwarder import connection, actions, triggers
 
 Name = 'Syslog Forwarder'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Forward messages to a syslog server'
+Version = '1.0.1'
+Description = 'The Syslog Forwarder plugin will forward messages to a syslog server'
 
 
 class ICONSyslogForwarder(komand.Plugin):

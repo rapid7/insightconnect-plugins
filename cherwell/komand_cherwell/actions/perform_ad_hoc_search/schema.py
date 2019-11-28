@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Runs an ad-hoc Business Object search. To execute a search with Prompts, the PromptId and Value are required in the data request object"
+
+
 class Input:
     DATA_REQUEST = "data_request"
     

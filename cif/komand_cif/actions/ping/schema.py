@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Ping the router"
+
+
 class Input:
     pass
 

@@ -1,15 +1,15 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: cef
 title: CEF
 vendor: rapid7
 support: community
 status: []
-description: Work with Common Event Format (CEF) data
-version: 1.0.0
+description: This plugin used for generating and manipulating event in a Common Event Format (CEF)
+version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cef
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - cef
@@ -17,6 +17,10 @@ tags:
 - events
 - syslog
 - logs
+hub_tags:
+  use_cases: [soar, data_utility, soc_automation, alert_enrichment]
+  keywords: [cef, arcsight, events, syslog, logs]
+  features: []
 language: python
 types:
   cef:

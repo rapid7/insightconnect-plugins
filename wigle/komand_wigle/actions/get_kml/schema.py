@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a KML summary approximation for a successfully processed file uploaded by the current user"
+
+
 class Input:
     TRANSID = "transid"
     
