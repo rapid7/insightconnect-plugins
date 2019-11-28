@@ -437,4 +437,3 @@ _This plugin does not contain any troubleshooting information._
 * [Azure AD Admin](https://azure.microsoft.com)
 * [User API](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0)
 * [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)
-
