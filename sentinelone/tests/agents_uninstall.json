@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "agents_uninstall",
+    "meta": {},
+    "input": {
+      "filter": {
+        "groupIds": [""]
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
