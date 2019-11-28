@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     
+    FREQUENCY = "frequency"
     RISK_LEVEL = "risk_level"
     
 
@@ -23,6 +24,13 @@ class RiskDetectionInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "frequency": {
+      "type": "integer",
+      "title": "Frequency",
+      "description": "Poll frequency in seconds",
+      "default": 60,
+      "order": 1
+    },
     "risk_level": {
       "type": "string",
       "title": "Risk Level",
@@ -35,7 +43,7 @@ class RiskDetectionInput(komand.Input):
         "none",
         "all"
       ],
-      "order": 1
+      "order": 2
     }
   },
   "required": [

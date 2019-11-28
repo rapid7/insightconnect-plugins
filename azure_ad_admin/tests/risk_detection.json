@@ -4,18 +4,15 @@
             "application_id": "",
             "application_secret": {
                 "secretKey": ""
-            },
-            "tenant_id": "",
-            "username_password": {
-                "password": "",
-                "username": ""
-            }
+             },
+            "tenant_id": ""
         },
         "dispatcher": {
             "url": "http://localhost:8000",
             "webhook_url": ""
         },
         "input": {
+            "frequency": 10,
             "risk_level": "low"
         },
         "meta": {},

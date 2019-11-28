@@ -71,7 +71,8 @@ class RiskDetection(komand.Trigger):
 
     def run(self, params={}):
         self.risk_level = params.get(Input.RISK_LEVEL)
+        self.frequency = params.get(Input.FREQUENCY, 60)
         self.initialize()
         while True:
             self.poll()
-            time.sleep(60)
+            time.sleep(self.frequency)

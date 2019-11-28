@@ -476,6 +476,11 @@ triggers:
     title: Risk Detection
     description: Provides list of both user and sign-in linked risk detections and associated information about the detection
     input:
+      frequency:
+        type: integer
+        description: Poll frequency in seconds
+        default: 60
+        required: false
       risk_level:
         title: Risk Level
         description: Risk level

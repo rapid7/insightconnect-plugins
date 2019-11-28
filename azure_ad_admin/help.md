@@ -282,12 +282,13 @@ Example output:
 
 #### Risk Detection
 
-This trigger provides list of both user and sign-in linked risk detections and associated information about the detection.
+This trigger provides a list of both user and sign-in linked risk detections and associated information about the detection.
 
 #### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|frequency|integer|60|False|Poll frequency in seconds|None|
 |risk_level|string|None|True|Risk level|['low', 'medium', 'high', 'hidden', 'none', 'all']|
 
 #### Output
