@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "agents_firewall_logging",
+    "meta": {},
+    "input": {
+      "data": {
+        "reportMgmt": false,
+        "reportLog": false
+      },
+      "filter": {}
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

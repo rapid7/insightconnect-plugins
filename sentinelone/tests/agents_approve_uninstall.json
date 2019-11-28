@@ -1,0 +1,20 @@
+{
+  "body": {
+    "action": "agents_approve_uninstall",
+    "meta": {},
+    "input": {
+      "filter": {
+        "updatedAt__lte": "2018-02-27T04:49:26.257525Z"
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

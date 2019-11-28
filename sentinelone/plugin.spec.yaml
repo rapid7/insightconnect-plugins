@@ -1,21 +1,25 @@
 plugin_spec_version: v2
 extension: plugin
-product: ["insightconnect"]
+products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-description: SentinelOne is a next-gen cybersecurity company focused on protecting
-  the enterprise through the endpoint
-version: 1.2.0
+description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
+version: 1.3.0
 vendor: rapid7
 support: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/sentinelone
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.sentinelone.com/
 tags:
 - sentinelone
 - endpoint
 - detection
+hub_tags:
+  use_cases: [soar, threat_detection_and_response, investigations, asset_containment, threat_hunting, soc_automation]
+  keywords: [sentinelone, endpoint, detection]
+  features: []
 types:
   activities_types:
     id:
@@ -62,7 +66,7 @@ types:
     agentUpdatedVersion:
       title: Agent Updated Version
       type: string
-      description: Agent's new version (If applicable)
+      description: Agents new version (If applicable)
       required: false
     siteId:
       title: Site ID
@@ -107,7 +111,7 @@ types:
     osFamily:
       title: OS Family
       type: string
-      description: Agent's OS type (if applicable)
+      description: Agents OS type (if applicable)
       required: false
     threatId:
       title: Threat ID
@@ -509,6 +513,505 @@ types:
       type: boolean
       description: File malicious content
       required: false
+  agents_update_system_data:
+    fileName:
+      title: File name
+      type: string
+      required: false
+    path:
+      title: Path
+      type: string
+      required: false
+    packageId:
+      title: Package ID
+      type: string
+      required: false
+    osType:
+      title: OS type
+      type: string
+      required: false
+      enum:
+        - windows_legacy
+        - macos
+        - linux
+        - windows
+  agents_firewall_rules_data:
+    format:
+      title: Format
+      description: Desired firewall configuration format. Use native to get configuration file in native format
+      type: string
+      required: false
+      enum:
+        - native
+        - asset
+    state:
+      title: State
+      description: Desired firewall configuration state. Use initial to get the firewall configuration that existed prior to installing the agent (Note - initial requires native format
+      type: string
+      required: false
+      enum:
+        - initial
+        - current
+  agents_fetch_applications_filter:
+    isDecommissioned:
+      title: Is decomissioned
+      description: Include active decommissioned or both
+      type: '[]boolean'
+      required: false
+    isUninstalled:
+      title: Is uninstalled
+      description: Only include uninstalled agents
+      type: boolean
+      required: false
+    query:
+      title: Query
+      description: A free-text search term, will match applicable attributes (sub-string match). Note - Devices physical addresses will be matched if they start with the search term only (instead of being matched if they contain the term)
+      type: string
+      required: false
+    ids:
+      title: IDs
+      description: A list of Agent IDs
+      type: '[]string'
+      required: false
+    groupIds:
+      title: Group IDs
+      description: A list of network groups
+      type: '[]string'
+      required: false
+    filterId:
+      title: Filter ID
+      description: Include all agents matching this saved filter
+      type: string
+      required: false
+    siteIds:
+      title: Site IDs
+      description: List of Site IDs to filter by
+      type: '[]string'
+      required: false
+    accountIds:
+      title: Account IDs
+      description: List of Account IDs to filter by
+      type: '[]string'
+      required: false
+  agents_firewall_logging_data:
+    reportMgmt:
+      title: Repoort management
+      description: Report blocking activity to management
+      type: boolean
+      required: true
+    reportLog:
+      title: Repoort log
+      description: Report blocking activity to log
+      type: boolean
+      required: true
+  account_data:
+    creator:
+      title: Creator
+      description: The user that created the group
+      type: string
+      required: false
+    agentsInCoreSku:
+      title: Agents in core SKU
+      description: Number of agents connected to a core site
+      type: integer
+      required: false
+    totalComplete:
+      title: Total complete
+      type: integer
+      required: false
+    unlimitedComplete:
+      title: Unlimited complete
+      type: boolean
+      required: false
+    numberOfSites:
+      title: Number of sites
+      description: Total number of sites in this account
+      type: integer
+      required: false
+    state:
+      title: Account state
+      type: string
+      required: false
+      enum:
+        - active
+        - expired
+        - deleted
+    accountType:
+      title: Account type
+      type: string
+      required: false
+    expiration:
+      title: Expiration
+      description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+      type: string
+      required: false
+    creatorId:
+      title: Creator ID
+      description: The ID of the user that created the group
+      type: string
+      required: false
+    updatedAt:
+      title: Updated at
+      description: Timestamp of last update
+      type: string
+      required: false
+    unlimitedExpiration:
+      title: Unlimited expiration
+      description: The account does not expire
+      type: boolean
+      required: false
+    totalCore:
+      title: Total core
+      type: integer
+      required: false
+    name:
+      title: Name
+      type: string
+      required: false
+    coreSites:
+      title: Core sites
+      description: Number of sites in suite Core
+      type: string
+      required: false
+    createdAt:
+      title: Created at
+      description: Timestamp of account creation
+      type: string
+      required: false
+    externalId:
+      title: Exteral ID
+      description: ID of CRM external system
+      type: string
+      required: true
+    id:
+      title: ID
+      description: Account ID
+      type: string
+      required: false
+    skus:
+      title: Skus
+      type: string
+      required: false
+    activeAgents:
+      title: Active agents number
+      description: Total agents in the account
+      type: integer
+      required: false
+    agentsInCompleteSku:
+      title: Agents in complete sku
+      description: Number of agents connected to a complete site
+      type: integer
+      required: false
+    isDefault:
+      title: Is default
+      type: boolean
+      required: false
+    completeSites:
+      title: Complete sites
+      description: Number of sites in suite Complete
+      type: integer
+      required: false
+    unlimitedCore:
+      title: Unlimited core
+      type: boolean
+      required: false
+  account_expire_now_data:
+    accountType:
+      title: Account type
+      type: string
+      required: false
+    activeAgents:
+      title: Active agents
+      description: Total agents in the account
+      type: integer
+      required: false
+    creator:
+      title: Creator
+      description: The user that created the group
+      type: string
+      required: false
+    expiration:
+      title: Expiration
+      description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+      type: string
+      required: false
+    creatorId:
+      title: Creator ID
+      description: The ID of the user that created the group
+      type: string
+      required: false
+    createdAt:
+      title: Created at
+      description: Timestamp of account creation
+      type: string
+      required: false
+    isDefault:
+      title: Is default
+      type: boolean
+      required: false
+    skus:
+      title: Skus
+      type: string
+      required: false
+    externalId:
+      title: External ID
+      description: Id of CRM external system
+      type: string
+      required: true
+    id:
+      title: ID
+      description: Account ID
+      type: string
+      required: true
+    updatedAt:
+      title: Updated at
+      description: Timestamp of last update
+      type: string
+      required: false
+    state:
+      title: Account state
+      type: string
+      required: false
+      enum:
+        - active
+        - expired
+        - deleted
+    unlimitedExpiration:
+      title: Unlimited expiration
+      description: The account does not expire
+      type: string
+      required: false
+    name:
+      title: Name
+      type: string
+      required: false
+  skus:
+    totalLicenses:
+      title: Total Licenses
+      description: Number of licenses for this specific SKU. Applicable only if unlimited is False
+      type: integer
+      required: false
+    unlimited:
+      title: Unlimited
+      description: True if this is an unlimited SKU. Total licenses will be ignored if unlimited is True
+      type: boolean
+      required: true
+    type:
+      title: Type
+      description: The suite of product features active for this account
+      type: string
+      required: false
+      enum:
+        - Core
+        - Complete
+  last_activities_data:
+    syslogMessage:
+      title: Syslog message corresponding to the activity
+      type: integer
+      required: false
+    activityId:
+      title: ID of the activity
+      type: boolean
+      required: false
+  private_account:
+    createAt:
+      title: Create At
+      type: string
+      required: false
+    id:
+      title: ID
+      type: string
+      required: false
+    updatedAt:
+      title: Updated At
+      type: string
+      required: false
+    name:
+      title: Name
+      type: string
+      required: false
+  admin_account_user:
+    primaryTwoFaMethod:
+      title: Primary Two Factor Method
+      type: string
+      required: false
+    password:
+      title: Password
+      type: password
+      required: true
+    id:
+      title: ID
+      type: string
+      required: false
+    twoFaEnabled:
+      title: Two Factor enabled
+      type: boolean
+      required: false
+    email:
+      title: Email
+      type: string
+      required: true
+    fullName:
+      title: Full Name
+      type: string
+      required: true
+  admin_account_response_user:
+    primaryTwoFaMethod:
+      title: Primary Two Factor Method
+      type: string
+      required: false
+    id:
+      title: ID
+      type: string
+      required: false
+    twoFaEnabled:
+      title: Two Factor enabled
+      type: boolean
+      required: false
+    email:
+      title: Email
+      type: string
+      required: true
+    fullName:
+      title: Full Name
+      type: string
+      required: true
+  admin_account_response:
+    externalId:
+      title: Exteral ID
+      description: ID of CRM external system
+      type: string
+      required: true
+    skus:
+      title: Skus
+      type: string
+      required: false
+    user:
+      title: User
+      description: The data of the admin user been created
+      type: admin_account_response_user
+      required: true
+    accountType:
+      title: Account type
+      type: string
+      required: false
+    state:
+      title: Account state
+      type: string
+      required: false
+      enum:
+        - active
+        - expired
+        - deleted
+    isDefault:
+      title: Is default
+      type: boolean
+      required: false
+    name:
+      title: Name
+      type: string
+      required: false
+    activeLicenses:
+      title: Active Licenses
+      description: How much licenses are active
+      type: integer
+      required: false
+    unlimitedExpiration:
+      title: Unlimited expiration
+      description: The account does not expire
+      type: boolean
+      required: false
+    updatedAt:
+      title: Updated at
+      description: Timestamp of last update
+      type: string
+      required: false
+    activeAgents:
+      title: Active agents number
+      description: Total agents in the account
+      type: integer
+      required: false
+    expiration:
+      title: Expiration
+      description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+      type: string
+      required: false
+    createdAt:
+      title: Created at
+      description: Timestamp of account creation
+      type: string
+      required: false
+    id:
+      title: ID
+      description: Account ID
+      type: string
+      required: false
+  update_account_response:
+    externalId:
+      title: External ID
+      description: Id of CRM external system
+      type: string
+      required: false
+    skus:
+      title: Skus
+      description: The list of allowed SKUs for the account
+      type: '[]skus'
+      required: true
+    accountType:
+      title: Account type
+      type: string
+      required: true
+      enum:
+        - Trial
+        - Paid
+    isDefault:
+      title: Is Default
+      type: boolean
+      required: false
+    state:
+      title: State
+      description: Account state
+      type: string
+      required: false
+      enum:
+        - active
+        - expired
+        - deleted
+    name:
+      title: Name
+      type: string
+      required: true
+    unlimitedExpiration:
+      title: Unlimited Expiration
+      description: Is expiration unlimited, if not expiration should be supplied
+      type: boolean
+      required: false
+    expiration:
+      title: Expiration
+      description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+      type: string
+      required: false
+    updatedAt:
+      title: Updated At
+      description: Timestamp of last update
+      type: string
+      required: false
+    activeAgents:
+      title: Active agents
+      description: Total agents in the account
+      type: integer
+      required: false
+    creator:
+      title: Creator
+      description: The user that created the group
+      type: string
+      required: false
+    creatorId:
+      title: Creator ID
+      description: The ID of the user that created the group
+      type: string
+      required: false
+
 connection:
   credentials:
     type: credential_username_password
@@ -800,7 +1303,7 @@ actions:
         type: integer
         required: false
       sort_by:
-        title: Sort By
+        title: Sort by
         description: The column to sort the results by
         type: string
         required: false
@@ -1106,6 +1609,781 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+  agents_update_software:
+    title: Update software
+    description: Send update software command to all agents matching the input filter
+    input:
+      data:
+        title: Data
+        description: Data with software informations
+        type: agents_update_system_data
+        required: true
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_firewall_logging:
+    title: Fetch firewall logging
+    description: Sends a firewall logging command to all agents matching the input filter. Note - Firewall control feature must be enabled
+    input:
+      data:
+        title: Data
+        description: Data with format informations
+        type: agents_firewall_logging_data
+        required: true
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_reject_uninstall:
+    title: Reject uninstall
+    description: Reject uninstall requests for all agents matching the input filter
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_approve_uninstall:
+    title: Approve uninstall
+    description: Approve uninstall requests for all agents matching the input filter
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_start_remote_shell:
+    title: Start remote shell
+    description: Start a remote shell if the 2FA code is valid the history password will be used to compress the shell history and rows/columns to configure the remote shell to the size UI is using
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+      columns:
+        title: Columns Number
+        description: Number of columns of the console shell
+        type: integer
+        required: true
+      two_fa_code:
+        title: 2FA Code
+        description: The 2FA code to authenticate the user
+        type: string
+        required: true
+      history_password:
+        title: History Password
+        description: Password to zip the shell history file at end of session
+        type: string
+        required: true
+      rows:
+        title: Rows
+        description: Number of rows of the console shell
+        type: integer
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_reset_local_config_policy:
+    title: Reset local config to policy
+    description: Reset policy overrides set by SentinelCtl for all agents matching the input filter
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_fetch_applications:
+    title: Fetch applications
+    description: Fetches full list of installed applications from applicable agents matching the input filter, and replaces existing data in the management console
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId
+        type: agents_fetch_applications_filter
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_fetch_firewall_rules:
+    title: Fetch applications
+    description: Fetches full list of installed applications from applicable agents matching the input filter, and replaces existing data in the management console
+    input:
+      data:
+        title: Data
+        description: Data instructions for report
+        type: agents_firewall_rules_data
+        required: true
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: agents_fetch_applications_filter
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_terminate_remote_shell:
+    title: Terminate remote shell
+    description: User updates about remote shell termination for an agent
+    input:
+      channel_id:
+        title: Channel ID
+        description: The channel the user is closing
+        type: string
+        required: true
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_can_start_remote_shell:
+    title: Can start remote shell
+    description: Check if user can start remote shell for the selected agent
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  accounts_by_id:
+    title: Get Account
+    description: Get an account by ID
+    input:
+      account_id:
+        title: Account ID
+        description: Account ID. Example 225494730938493804
+        type: string
+        required: true
+    output:
+      data:
+        title: Data
+        description: Response data
+        type: account_data
+        required: false
+  account_expire_now:
+    title: Expire account
+    description: Expire account now
+    input:
+      account_id:
+        title: Account ID
+        description: Account ID. Example 225494730938493804
+        type: string
+        required: true
+    output:
+      data:
+        title: Data
+        description: Response data
+        type: account_expire_now_data
+        required: false
+  account_reactivate:
+    title: Reactivate account
+    description: Reactivates an expired account
+    input:
+      account_id:
+        title: Account ID
+        description: Account ID. Example 225494730938493804
+        type: string
+        required: true
+      unlimited:
+        title: Unlimited
+        description: If false an expiration should be supplied
+        type: boolean
+        required: true
+      expiration:
+        title: Expiration
+        description: "New expiration date for the account, example: 2018-02-27T04:49:26.257525Z"
+        type: string
+        required: false
+    output:
+      success:
+        title: Success
+        description: Indicates a successful operation
+        type: boolean
+        required: false
+  account_revert_policy:
+    title: Revert policy
+    description: Reverts the account policy to the tenant policy
+    input:
+      account_id:
+        title: Account ID
+        description: Account ID. Example 225494730938493804
+        type: string
+        required: true
+      id:
+        title: ID
+        description: Reverted account ID
+        type: string
+        required: false
+    output:
+      success:
+        title: Success
+        description: Indicates a successful operation
+        type: boolean
+        required: false
+  create_account:
+    title: Create account
+    description: Create new account
+    input:
+      account_type:
+        title: Account type
+        description: Account type. Example Trial
+        type: string
+        required: true
+        enum:
+          - Trial
+          - Paid
+      expiration:
+        title: Expiration
+        description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+        type: string
+        required: false
+      skus:
+        title: Skus
+        description: The list of allowed SKUs for the account
+        type: '[]skus'
+        required: true
+      external_id:
+        title: External ID
+        description: Id of CRM external system
+        type: string
+        required: false
+      policy:
+        title: Policy
+        description: Policy is mandatory if inherits is false, else it will be ignored
+        type: object
+        required: false
+      unlimited_expiration:
+        title: Unlimited Expiration
+        description: Is expiration unlimited, if not expiration should be supplied
+        type: boolean
+        required: false
+      name:
+        title: Name
+        Description: User name
+        type: string
+        required: true
+      inherits:
+        title: Inherits Policy
+        description: True if the policy is inherited from Tenant, False if the account has its own edited policy
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: Indicates a successful operation
+        type: boolean
+        required: false
+  get_accounts:
+    title: Get accounts
+    description: Get a list of accounts
+    input:
+      features:
+        title: Features
+        description: If sent return only accounts that support this features. Example firewall-control
+        type: '[]string'
+        required: false
+      active_licenses:
+        title: Active Licenses
+        description: How much licenses are active
+        type: integer
+        required: false
+      skip:
+        title: Skip
+        description: Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead. Example 150
+        type: integer
+        required: false
+      cursor:
+        title: Cursor
+        description: Cursor position returned by the last request. Should be used for iterating over more than 1000 items. Example YWdlbnRfaWQ6NTgwMjkzODE=
+        type: string
+        required: false
+      account_type:
+        title: Account Type
+        description: Account type. Example Trial
+        type: string
+        required: false
+        enum:
+          - Trial
+          - Paid
+      expiration:
+        title: Expiration
+        description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+        type: string
+        required: false
+      query:
+        title: Query
+        description: Full text search for fields name. Note on single-account consoles account name will not be matched
+        type: string
+        required: false
+      ids:
+        title: IDs
+        description: A list of account IDs. Example 225494730938493804,225494730938493915
+        type: '[]string'
+        required: false
+      skip_count:
+        title: Skip Count
+        description: If true, total number of items will not be calculated, which speeds up execution time
+        type: boolean
+        required: false
+      updated_at:
+        title: Updated at
+        description: Timestamp of last update. Example 2018-02-27T04:49:26.257525Z
+        type: string
+        required: false
+      states:
+        title: States
+        description: List of states to filter
+        type: string
+        required: false
+      name:
+        title: Name
+        description: Name. Example My Account
+        type: string
+        required: false
+      account_ids:
+        title: Account IDs
+        description: List of account IDs to search for. Example 225494730938493804,225494730938493915
+        type: '[]string'
+        required: false
+      created_at:
+        title: Created At
+        description: Timestamp of account creation. Example 2018-02-27T04:49:26.257525Z
+        type: string
+        required: false
+      sort_order:
+        title: Sort Order
+        description: Sort direction. Example asc
+        type: string
+        required: false
+        enum:
+          - asc
+          - desc
+      limit:
+        title: Limit
+        description: Limit number of returned items (1-100). Example 10
+        type: integer
+        required: false
+      count_only:
+        title: Count Only
+        description: If true, only total number of items will be returned, without any of the actual objects
+        type: boolean
+        required: false
+      total_licenses:
+        title: Total Licenses
+        description: Filter by total licenses number
+        type: integer
+        required: false
+      is_default:
+        title: Is Default
+        description: Filter by default
+        type: boolean
+        required: false
+      sort_by:
+        title: Sort by
+        description: The column to sort the results by. Example id
+        type: string
+        required: false
+        enum:
+          - id
+          - name
+          - totalLicenses
+          - expiration
+          - accountType
+          - state
+          - createdAt
+          - updatetAt
+          - activeLicenses
+          - activeAgents
+          - numberOfSites
+    output:
+      data:
+        title: Data
+        description: Response data
+        type: '[]account_data'
+        required: false
+      pagination:
+        title: Pagination
+        description: Pagination information
+        type: pagination
+        required: false
+  private_accounts:
+    title: Get private accounts
+    description: 'DEPRECATED Get a list of accounts'
+    input:
+      query:
+        title: Query
+        description: Filtered query
+        type: string
+        required: false
+      ids:
+        title: IDs
+        description: A list of account IDs. Example 225494730938493804,225494730938493915
+        type: string
+        required: false
+      skip_count:
+        title: Skip Count
+        description: If true, total number of items will not be calculated, which speeds up execution time
+        type: boolean
+        required: false
+      skip:
+        title: Skip
+        description: Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead. Example 150
+        type: integer
+        required: false
+      sort_by:
+        title: Sort by
+        description: The column to sort the results by. Example id
+        type: string
+        required: false
+        enum:
+          - id
+          - name
+      sort_order:
+        title: Sort Order
+        description: Sort direction. Example asc
+        type: string
+        required: false
+        enum:
+          - asc
+          - desc
+      site_ids:
+        title: Site IDs
+        description: List of Site IDs to filter by. Example 225494730938493804,225494730938493915
+        type: string
+        required: false
+      account_ids:
+        title: Account IDs
+        description: List of Account IDs to filter by. Example 225494730938493804,225494730938493915
+        type: string
+        required: false
+      limit:
+        title: Limit
+        description: Limit number of returned items (1-100). Example 10
+        type: integer
+        required: false
+      count_only:
+        title: Count Only
+        description: If true, only total number of items will be returned, without any of the actual objects
+        type: boolean
+        required: false
+      cursor:
+        title: Cursor
+        description: Cursor position returned by the last request. Should be used for iterating over more than 1000 items. Example YWdlbnRfaWQ6NTgwMjkzODE=
+        type: string
+        required: false
+    output:
+      data:
+        title: Data
+        description: Response data
+        type: '[]private_account'
+        required: false
+      pagination:
+        title: Pagination
+        description: Pagination information
+        type: pagination
+        required: false
+  create_admin_account:
+    title: Create Admin Account
+    description: Create account with admin user
+    input:
+      account_type:
+        title: Account type
+        description: Account type. Example Trial
+        type: string
+        required: true
+        enum:
+          - Trial
+          - Paid
+      expiration:
+        title: Expiration
+        description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+        type: string
+        required: false
+      user:
+        title: User
+        description: The data of the admin user been created
+        type: admin_account_user
+        required: true
+      skus:
+        title: Skus
+        description: The list of allowed SKUs for the account
+        type: '[]skus'
+        required: true
+      external_id:
+        title: External ID
+        description: Id of CRM external system
+        type: string
+        required: false
+      policy:
+        title: Policy
+        description: Policy is mandatory if inherits is false, else it will be ignored
+        type: object
+        required: false
+      unlimited_expiration:
+        title: Unlimited Expiration
+        description: Is expiration unlimited, if not expiration should be supplied
+        type: boolean
+        required: false
+      name:
+        title: Name
+        description: User name
+        type: string
+        required: true
+      inherits:
+        title: Inherits Policy
+        description: True if the policy is inherited from Tenant, False if the account has its own edited policy
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: Indicates a successful operation
+        type: boolean
+        required: true
+  last_activity_as_syslog:
+    title: Last activity as Syslog message
+    description: Get Syslog message corresponding to the last activity matching the given criteria
+    input:
+      created_at_lte:
+        title: Less Or Equal Date
+        description: Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        type: string
+        required: false
+      activity_types:
+        title: Activity Types
+        description: Return only these activity codes
+        type: '[]string'
+        required: false
+      cursor:
+        title: Cursor Position
+        description: Cursor position returned by the last request. Should be used for iterating over more than 1000 items, example YWdlbnRfaWQ6NTgwMjkzODE=
+        type: string
+        required: false
+      limit:
+        title: Limit
+        description: Limit number of returned items (1-100)
+        type: integer
+        required: false
+      skip_count:
+        title: Skip Count
+        description: If true, total number of items will not be calculated, which speeds up execution time
+        type: boolean
+        required: false
+      threat_ids:
+        title: Threat IDS
+        description: Return only these activity codes
+        type: '[]string'
+        required: false
+      group_ids:
+        title: Group IDS
+        description: Get a list of activities
+        type: '[]string'
+        required: false
+      account_ids:
+        title: Account IDS
+        description: List of Account IDs to filter by
+        type: '[]string'
+        required: false
+      created_at_gte:
+        title: Greater Or Equal Date
+        description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        type: string
+        required: false
+      ids:
+        title: Activity IDS
+        description: If true, total number of items will not be calculated, which speeds up execution time
+        type: '[]string'
+        required: false
+      skip:
+        title: Skip First N Items
+        description: Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead
+        type: integer
+        required: false
+      count_only:
+        title: Count Only
+        description: If true, only total number of items will be returned, without any of the actual objects
+        type: boolean
+        required: false
+      user_ids:
+        title: User IDS
+        description: The user who invoked the activity (If applicable)
+        type: '[]string'
+        required: false
+      sort_by:
+        title: Sort by
+        description: The column to sort the results by
+        type: string
+        required: false
+        enum:
+          - id
+          - activityType
+          - createdAt
+      created_at_lt:
+        title: Less Then Date
+        description: Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        type: string
+        required: false
+      agent_ids:
+        title: Agent IDS
+        description: Return activities related to specified agent ids
+        type: '[]string'
+        required: false
+      site_ids:
+        title: Site IDS
+        description: List of Site IDs to filter by
+        type: '[]string'
+        required: false
+      include_hidden:
+        title: Include Hidden
+        description: Include internal activities hidden from display?
+        type: boolean
+        required: false
+      created_at_between:
+        title: Between Dates
+        description: Return activities created within this range (inclusive), example 1514978764288-1514978999999
+        type: string
+        required: false
+      created_at_gt:
+        title: Greater Then Date
+        description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        type: string
+        required: false
+      user_emails:
+        title: User Emails
+        description: Email of the user who invoked the activity (If applicable)
+        type: '[]string'
+        required: false
+      sort_order:
+        title: Sort Order
+        description: Sort direction
+        type: string
+        enum:
+          - asc
+          - desc
+        required: false
+    output:
+      data:
+        title: Data
+        description: Response data
+        type: last_activities_data
+        required: true
+      pagination:
+        title: Pagination
+        description: Pagination object
+        type: pagination
+        required: true
+  update_account:
+    title: Update account
+    description: Update accounts data
+    input:
+      account_id:
+        title: Account ID
+        description: Updated account ID, Example 225494730938493804
+        type: string
+        required: true
+      external_id:
+        title: External ID
+        description: Id of CRM external system
+        type: string
+        required: false
+      skus:
+        title: Skus
+        description: The list of allowed SKUs for the account
+        type: '[]skus'
+        required: true
+      account_type:
+        title: Account type
+        description: Account type. Example Trial
+        type: string
+        required: true
+        enum:
+          - Trial
+          - Paid
+      inherits:
+        title: Inherits Policy
+        description: True if the policy is inherited from Tenant, False if the account has its own edited policy
+        type: string
+        required: true
+      name:
+        title: Name
+        description: User name
+        type: string
+        required: true
+      policy:
+        title: Policy
+        description: Policy is mandatory if inherits is false, else it will be ignored
+        type: object
+        required: false
+      expiration:
+        title: Expiration
+        description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+        type: string
+        required: false
+      unlimited_expiration:
+        title: Unlimited Expiration
+        description: Is expiration unlimited, if not expiration should be supplied
+        type: boolean
+        required: false
+    output:
+      data:
+        title: Data
+        description: Response data
+        type: update_account_response
+        required: true
 
 triggers:
   get_threats:

@@ -1,0 +1,29 @@
+{
+  "body": {
+    "action": "agents_update_software",
+    "meta": {},
+    "input": {
+      "data": {
+        "fileName": "SentinelOne-win32_windows_legacy_v2_0_0_77.exe",
+        "osType": "windows_legacy",
+        "packageId": "",
+        "path": ""
+      },
+      "filter": {
+        "machineTypes": [
+          "laptop",
+          "desktop"
+        ]
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -23,7 +23,7 @@ class AgentsUninstallInput(komand.Input):
   "properties": {
     "filter": {
       "type": "object",
-      "title": "Filter Json",
+      "title": "Filter JSON",
       "description": "Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId",
       "order": 1
     }

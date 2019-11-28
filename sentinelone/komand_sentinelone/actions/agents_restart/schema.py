@@ -23,7 +23,7 @@ class AgentsRestartInput(komand.Input):
   "properties": {
     "filter": {
       "type": "object",
-      "title": "Filter Json",
+      "title": "Filter JSON",
       "description": "Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId",
       "order": 1
     }

@@ -1,0 +1,29 @@
+{
+  "body": {
+    "action": "agents_fetch_firewall_rules",
+    "meta": {},
+    "input": {
+      "data": {
+        "format": "native",
+        "state": "initial"
+      },
+      "filter": {
+        "accountIds": [],
+        "filterId": "",
+        "groupIds": [],
+        "ids": [],
+        "isDecommissioned": [],
+        "isUninstalled": true
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

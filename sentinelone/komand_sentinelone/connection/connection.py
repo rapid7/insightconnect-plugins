@@ -64,8 +64,40 @@ class Connection(komand.Connection):
     def activities_list(self, parameters):
         return self._call_api("GET", "activities", None, parameters)
 
+    def accounts_by_id(self, account_id):
+        return self._call_api("GET", "accounts/{}".format(account_id))
+
+    def accounts_by_id_expire_now(self, account_id):
+        return self._call_api("POST", "accounts/{}/expire-now".format(account_id))
+
+    def account_reactivate(self, account_id, unlimited, expiration):
+        return self._call_api("PUT", "accounts/{}/reactivate".format(account_id),
+                              json={"data": {"unlimited": unlimited, "expiration": expiration}})
+
+    def account_revert_policy(self, account_id, reverted_policy_id):
+        return self._call_api("PUT", "accounts/{}/revert-policy".format(account_id),
+                              json={"data": {"id": reverted_policy_id}})
+
     def name_available(self, name):
         return self._call_api("GET", "private/accounts/name-available", None, {"name": name})
+
+    def create_account(self, data):
+        return self._call_api("POST", "accounts", json={"data": data})
+
+    def create_admin_account(self, data):
+        return self._call_api("POST", "private/account-with-admin", json={"data": data})
+
+    def last_activity_as_syslog(self, data):
+        return self._call_api("GET", "last-activity-as-syslog", None, params=data)
+
+    def update_account(self, account_id, data):
+        return self._call_api("PUT", "accounts/{}".format(account_id), json={"data": data})
+
+    def get_accounts(self, params):
+        return self._call_api("GET", "accounts", None, params)
+
+    def private_accounts(self, params):
+        return self._call_api("GET", "private/accounts", None, params)
 
     def activities_types(self):
         return self._call_api("GET", "activities/types")
@@ -86,7 +118,10 @@ class Connection(komand.Connection):
         return self._call_api("GET", "private/agents/summary", None, {"siteIds": site_ids, "accountIds": account_ids})
 
     def agents_action(self, action: str, agents_filter: str):
-        return self._call_api("POST", "agents/actions/{}".format(action), {"filter": agents_filter})
+        return self.agents_action_with_data(action, agents_filter, {})
+
+    def agents_action_with_data(self, action: str, agents_filter: str, agents_data: str):
+        return self._call_api("POST", "agents/actions/{}".format(action), {"filter": agents_filter, "data": agents_data})
 
     def agents_support_action(self, action: str, agents_filter: str, module: str):
         return self._call_api("POST", "private/agents/support-actions/{}".format(action), {

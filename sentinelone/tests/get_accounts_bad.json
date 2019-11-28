@@ -1,0 +1,29 @@
+{
+  "body": {
+    "action": "get_accounts",
+    "meta": {},
+    "input": {
+      "active_licenses": 0,
+      "count_only": false,
+      "features": [
+        "wrong-feature"
+      ],
+      "is_default": false,
+      "limit": 0,
+      "skip": 0,
+      "skip_count": false,
+      "sort_by": "id",
+      "sort_order": "asc",
+      "total_licenses": 0
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

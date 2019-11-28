@@ -1,0 +1,39 @@
+{
+  "body": {
+    "action": "create_admin_account",
+    "meta": {},
+    "input": {
+      "account_type": "Trial",
+      "expiration": "2018-02-27T04:49:26.257525Z",
+      "external_id": "11",
+      "inherits": "true",
+      "name": "test-1",
+      "policy": {},
+      "skus": [
+        {
+          "type": "Core",
+          "unlimited": false,
+          "totalLicenses": 0
+        }
+      ],
+      "unlimited_expiration": false,
+      "user": {
+        "email": "mateusz.gorny@morecode.ai",
+        "fullName": "Mateusz Górny",
+        "id": "99",
+        "password": "qwerty",
+        "primaryTwoFaMethod": "sms",
+        "twoFaEnabled": true
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

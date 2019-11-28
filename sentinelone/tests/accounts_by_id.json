@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "accounts_by_id",
+    "meta": {},
+    "input": {
+      "account_id": "768962829865462837"
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

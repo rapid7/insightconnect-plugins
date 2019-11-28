@@ -23,7 +23,7 @@ class AgentsInitiateInput(komand.Input):
   "properties": {
     "filter": {
       "type": "object",
-      "title": "Filter Json",
+      "title": "Filter JSON",
       "description": "Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents",
       "order": 1
     }

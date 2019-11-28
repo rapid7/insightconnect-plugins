@@ -1,0 +1,80 @@
+{
+  "body": {
+    "action": "create_account",
+    "meta": {},
+    "input": {
+      "account_type": "Trial",
+      "expiration": "",
+      "external_id": "11",
+      "inherits": "false",
+      "name": "test-1",
+      "policy": {
+        "iocAttributes": {
+          "registry": true,
+          "behavioralIndicators": true,
+          "scheduledTask": true,
+          "process": true,
+          "login": true,
+          "url": true,
+          "headers": true,
+          "ip": true,
+          "file": true,
+          "fds": true,
+          "dns": true
+        },
+        "inheritedFrom": "site",
+        "iocSupported": true,
+        "ioc": true,
+        "monitorOnWrite": true,
+        "userFullName": "string",
+        "researchOn": true,
+        "autoMitigationAction": "string",
+        "agentLoggingOn": true,
+        "mitigationModeSuspicious": "detect",
+        "snapshotsOn": true,
+        "agentNotification": true,
+        "antiTamperingOn": true,
+        "autoDecommissionDays": 90,
+        "allowRemoteShell": true,
+        "cloudValidationOn": true,
+        "agentUiOn": true,
+        "mitigationMode": "detect",
+        "monitorOnExecute": true,
+        "autoImmuneOn": true,
+        "scanNewAgents": true,
+        "isDefault": true,
+        "engines": {
+          "penetration": "on",
+          "pup": "on",
+          "preExecutionSuspicious": "on",
+          "exploits": "on",
+          "dataFiles": "on",
+          "preExecution": "on",
+          "reputation": "on",
+          "executables": "on",
+          "remoteShell": "on",
+          "lateralMovement": "on"
+        },
+        "networkQuarantineOn": true,
+        "autoDecommissionOn": true
+      },
+      "skus": [
+        {
+          "type": "Core",
+          "unlimited": false,
+          "totalLicenses": 0
+        }
+      ],
+      "unlimited_expiration": true
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

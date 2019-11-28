@@ -1,0 +1,22 @@
+{
+  "body": {
+    "action": "agents_start_remote_shell",
+    "meta": {},
+    "input": {
+      "filter": {},
+      "columns": 5,
+      "two_fa_code": "qwerty",
+      "history_password": "qwerty",
+      "rows": 5
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

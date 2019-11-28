@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "last_activity_as_syslog",
+    "meta": {},
+    "input": {
+      "include_hidden": true,
+      "limit": 10,
+      "skip": 1,
+      "skip_count": true,
+      "sort_by": "id",
+      "sort_order": "asc"
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

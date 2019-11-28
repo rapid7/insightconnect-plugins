@@ -23,8 +23,8 @@ class AgentsDisconnectInput(komand.Input):
   "properties": {
     "filter": {
       "type": "object",
-      "title": "Filter Json",
-      "description": "Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats.",
+      "title": "Filter JSON",
+      "description": "Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats",
       "order": 1
     }
   },

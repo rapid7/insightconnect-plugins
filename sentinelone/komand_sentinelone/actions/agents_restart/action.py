@@ -1,5 +1,5 @@
 import komand
-from komand.exceptions import PluginException
+from komand_sentinelone.util.exceptions import PluginException
 from .schema import AgentsRestartInput, AgentsRestartOutput, Input, Output, Component
 
 

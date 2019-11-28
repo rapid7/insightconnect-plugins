@@ -1,0 +1,24 @@
+{
+  "body": {
+    "action": "private_accounts",
+    "meta": {},
+    "input": {
+      "count_only": false,
+      "limit": 5,
+      "query": "*",
+      "skip": 1,
+      "skip_count": true,
+      "sort_by": "id",
+      "sort_order": "asc"
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

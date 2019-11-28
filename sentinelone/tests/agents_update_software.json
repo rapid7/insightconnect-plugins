@@ -1,0 +1,29 @@
+{
+  "body": {
+    "action": "agents_update_software",
+    "meta": {},
+    "input": {
+      "data": {
+        "fileName": "",
+        "osType": "windows_legacy",
+        "packageId": "478311041193850215",
+        "path": ""
+      },
+      "filter": {
+        "machineTypes": [
+          "laptop",
+          "desktop"
+        ]
+      }
+    },
+    "connection": {
+      "credentials": {
+        "password": "!!$01Sentinel",
+        "username": "jonathan_schipp@rapid7.com"
+      },
+      "url": "https://usea1-partners.sentinelone.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
