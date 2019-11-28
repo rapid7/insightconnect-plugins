@@ -1,14 +1,14 @@
 menu:
 	$(Q)echo ""
 	$(Q)echo "$(BOLD)Plugin main targets:$(NORMAL)"
-	$(Q)echo " $(RED)default$(NORMAL)    - Builds the plugin and creates a tarball (image + tarball targets)"
-	$(Q)echo " $(RED)image$(NORMAL)      - Build a Docker image of the current plugin directory"
-	$(Q)echo " $(RED)tarball$(NORMAL)    - Create a plugin tarball of the current directory"
-	$(Q)echo " $(RED)regenerate$(NORMAL) - Regenerate the plugin schema from plugin.spec.yaml"
+	$(Q)echo " $(RED)default$(NORMAL)      - Builds the plugin and creates a tarball (image + tarball targets)"
+	$(Q)echo " $(RED)image$(NORMAL)        - Build a Docker image of the current plugin directory"
+	$(Q)echo " $(RED)tarball$(NORMAL)      - Create a plugin tarball of the current directory"
+	$(Q)echo " $(RED)regenerate$(NORMAL)   - Regenerate the plugin schema from plugin.spec.yaml"
 	$(Q)echo "$(BOLD)Plugin helper targets:$(NORMAL) (depends on installed tools: ../tools/)"
-	$(Q)echo " $(RED)menu$(NORMAL)       - This menu"
-	$(Q)echo " $(RED)validate$(NORMAL)   - Runs the plugin's files through installed validators"
-	$(Q)echo " $(RED)update-tools$(NORMAL)   - Automatically updates all your plugin tooling"
+	$(Q)echo " $(RED)menu$(NORMAL)         - This menu"
+	$(Q)echo " $(RED)validate$(NORMAL)     - Runs the plugin's files through installed validators"
+	$(Q)echo " $(RED)update-tools$(NORMAL) - Automatically updates all your plugin tooling"
 
 validate:
 	$(info [$(YELLOW)*$(NORMAL)] Running validators)
