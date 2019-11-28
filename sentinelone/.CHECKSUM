@@ -1,8 +1,68 @@
 {
-	"spec": "05d3e5198bc5fae23e0aeabe4f99dea2",
-	"manifest": "1b3582c8af03aa05d972761eccb805f2",
-	"setup": "dfb49eda74949e7b0bbf5517a17d6fd7",
+	"spec": "b21c9b4ab472e02c3b4632e93f5fbe34",
+	"manifest": "476499cbc84e07b8c2758f80fd5b8014",
+	"setup": "156b2a2ed1ad582f38e6cfd24f187fc9",
 	"schemas": [
+		{
+			"identifier": "activities_list/schema.py",
+			"hash": "5ebbec2e3897f2c1a57bd9da9a4744d6"
+		},
+		{
+			"identifier": "activities_types/schema.py",
+			"hash": "5e7a87efc45bf5b30625b622ac019574"
+		},
+		{
+			"identifier": "agents_abort_scan/schema.py",
+			"hash": "af534fe33c3358709107029e174b6614"
+		},
+		{
+			"identifier": "agents_connect/schema.py",
+			"hash": "2c6aab8586ce2e57551e8ec6c6c4da2e"
+		},
+		{
+			"identifier": "agents_decommission/schema.py",
+			"hash": "67788cf8462cab724bbfdf5255cf7fe0"
+		},
+		{
+			"identifier": "agents_disconnect/schema.py",
+			"hash": "30c6b9c11238f47dfe81939c734330b0"
+		},
+		{
+			"identifier": "agents_fetch_logs/schema.py",
+			"hash": "bbd2f47b04ca7e204984ccdec28d4bf9"
+		},
+		{
+			"identifier": "agents_initiate/schema.py",
+			"hash": "dc2ec546fe8bd6702bd007017e65062e"
+		},
+		{
+			"identifier": "agents_processes/schema.py",
+			"hash": "5829282e911839f6876cdaed940739f2"
+		},
+		{
+			"identifier": "agents_reload/schema.py",
+			"hash": "6042c9c755d2ed69b6182b6f662ae33a"
+		},
+		{
+			"identifier": "agents_restart/schema.py",
+			"hash": "bef5f00800aed1430bd4ba19c0bd29bf"
+		},
+		{
+			"identifier": "agents_shutdown/schema.py",
+			"hash": "8ffcd7e051cbe844c0a3f49a03896d4c"
+		},
+		{
+			"identifier": "agents_summary/schema.py",
+			"hash": "28db14c8d20f13e419af6b9435e14203"
+		},
+		{
+			"identifier": "agents_uninstall/schema.py",
+			"hash": "a8aadf12df870c4aa829227c83078c40"
+		},
+		{
+			"identifier": "apps_by_agent_ids/schema.py",
+			"hash": "f1a871cbbcdf7e1730215961e3b2ac99"
+		},
 		{
 			"identifier": "blacklist_by_content_hash/schema.py",
 			"hash": "ac946280f99e8fd3d8ab3f9376b373b1"
@@ -30,6 +90,10 @@
 		{
 			"identifier": "mitigate_threat/schema.py",
 			"hash": "e09b29840c9d0ed17b7477e2aa01c68b"
+		},
+		{
+			"identifier": "name_available/schema.py",
+			"hash": "7882f358d6395e2edb2ff5d82a45b4fc"
 		},
 		{
 			"identifier": "connection/schema.py",

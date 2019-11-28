@@ -28,6 +28,9 @@ class NewExceptionRequest(komand.Trigger):
             if r['id'] > last_id:
                 last_id = r['id']
         params['interval'] = params['frequency']
+        status_filter = []
+        for i in params.get('status_filter', []):
+            status_filter.append(i.lower())
         while True:
             # process all new exceptions.  The inner loop is to handle grabbing
             # multiple exceptions since last cycle.  It is broken when we run out
@@ -45,7 +48,7 @@ class NewExceptionRequest(komand.Trigger):
                     break
                 last_id += 1
                 # do we send it on it's way?
-                if response.get('state') not in params.get('status_filter'):
+                if response.get('state').lower() not in status_filter:
                     continue
                 # send it on it's way
                 self.send({Output.EXCEPTION: response})

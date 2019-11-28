@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "activities_types",
+    "meta": {},
+    "input": {},
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
