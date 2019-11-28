@@ -144,7 +144,7 @@ Example output:
   "response": [
     {
       "id": "MTOKEN:eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ",
-      "sender": "example@example.com",
+      "sender": "user@example.com",
       "to": "user@example.com",
       "type": "Block"
     }
@@ -220,8 +220,8 @@ This action is used to add an email address or domain to a group.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|The Mimecast ID of the group to add to|None|
-|email_address|string|None|False|The email address of a user to add to a group. Use either emailAddress or domain|None|
-|domain|string|None|False|A domain to add to a group. Use either emailAddress or domain|None|
+|email_address|string|None|False|The email address of a user to add to a group. Use either email address or domain|None|
+|domain|string|None|False|A domain to add to a group. Use either email address or domain|None|
 
 ##### Output
 
@@ -238,8 +238,35 @@ Example output:
 {
   "id": "eNqrVipOTS4tSs1MUbJSctdOd43RNy3K9klKdA038M4xq8otcfIMqTQods2MNIrR99NOD_IsCyovdEt11A4pSQvKyPL2SS4orgjOTy01jdEvzlbSUUouLS7Jz00tSs5PSQUa6hzs52LoaG5pagKUK0stKs7Mz1OyMtRRSsvPSUktysnMywZZbmxgYmFRCwBatS7G",
   "folder_id": "eNoVzrkOgkAUQNF_eTWFIIjQEdk0OEaUgCUyD8HMojNiROO_i_3Nyf2AxmZQ2FPwgUgRxWbnzZOxKwsyiCjP-BnTe7jYxA5Pq1xsmRhJ4Sbv9SU4zfgrq8vjdSdbO3eDPRjAaH0Dv62ZRgOaQT8kR9VIihO_OpDQDFzPsafwiUr3UoBvGtBKRlH9F-ylZXnfH3hjMBs",
-  "email_address": "test10@example.com",
+  "email_address": "user@example.com",
   "internal": true
+}
+```
+
+#### Delete Group Member
+
+This action is used to remove an email address or domain from a group.
+Delete on an email or domain that does not exist is will result in no operation performed.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|id|string|None|True|The Mimecast ID of the group to remove from|None|
+|email_address|string|None|False|The email address of user to remove from the group. Use either email address or domain|None|
+|domain|string|None|False|A domain to remove from a group. Use either email address or domain|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|bool|False|Success of the delete operation|
+
+Example output:
+
+```
+{
+  "success": true 
 }
 ```
 
@@ -335,7 +362,7 @@ Example output:
 {
   [
     {
-       "userEmailAddress": "mimecast_dhamilton@example.com",
+       "userEmailAddress": "user@example.com",
        "url": "https://www.dummy-mimecast-blacklist.com",
        "ttpDefinition": "Default URL Protection Definition",
        "action": "warn",
@@ -366,6 +393,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 3.2.0 - New action Delete Group Member
 * 3.0.1 - New spec and help.md format for the Hub
 * 3.0.0 - Add URL in Get TTP URL Logs action to filter output | Update connection settings to the proper authentication supported by the Mimecast API
 * 2.5.0 - New action Decode URL

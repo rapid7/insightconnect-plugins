@@ -1,22 +1,10 @@
 {
     "body": {
         "action": "add_group_member",
-        "connection": {
-            "app_id": null,
-            "app_key": {
-                "secretKey": null
-            },
-            "auth_type": null,
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "url": null
-        },
         "input": {
             "domain": "",
-            "email_address": "",
-            "id": "eNoVzrkOgkAUQNF_eTWFIIjQEdk0OEaUgCUyD8HMojNiROO_i_3Nyf2AxmZQ2FPwgUgRxWbnzZOxKwsyiCjP-BnTe7jYxA5Pq1xsmRhJ4Sbv9SU4zfgrq8vjdSdbO3eDPRjAaH0Dv62ZRgOaQT8kR9VIihO_OpDQDFzPsafwiUr3UoBvGtBKRlH9F-ylZXnfH3hjMBs"
+            "email_address": "user@example.com",
+            "id": "eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA"
         },
         "meta": {}
     },

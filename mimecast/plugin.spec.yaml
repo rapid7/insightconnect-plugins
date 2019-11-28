@@ -5,7 +5,7 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 3.0.1
+version: 3.2.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -572,12 +572,12 @@ actions:
         required: true
       email_address:
         title: Email Address
-        description: The email address of a user to add to a group. Use either emailAddress or domain
+        description: The email address of a user to add to a group. Use either email address or domain
         type: string
         required: false
       domain:
         title: Domain
-        description: A domain to add to a group. Use either emailAddress or domain
+        description: A domain to add to a group. Use either email address or domain
         type: string
         required: false
     output:
@@ -599,6 +599,31 @@ actions:
       internal:
         title: Internal
         description: If the user / doamin is internal or not
+        type: boolean
+        required: false
+  delete_group_member:
+    title: Delete Group Member
+    description: Delete an email address or domain from a group
+    input:
+      id:
+        title: ID
+        description: The Mimecast ID of the group to remove from
+        type: string
+        required: true
+      email_address:
+        title: Email Address
+        description: The email address of to remove from group. Use either email address or domain
+        type: string
+        required: false
+      domain:
+        title: Domain
+        description: A domain to remove from group. Use either email address or domain
+        type: string
+        required: false
+    output:
+      success:
+        title: Success
+        description: Status of success of the delete operation
         type: boolean
         required: false
   find_groups:
