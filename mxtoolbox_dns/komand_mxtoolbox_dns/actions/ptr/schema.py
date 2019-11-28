@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "DNS PTR record for host name"
+
+
 class Input:
     IP_ADDRESS = "ip_address"
     

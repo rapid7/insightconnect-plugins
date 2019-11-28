@@ -36,8 +36,8 @@ class RemoveUserSiteAccessInput(komand.Input):
     }
   },
   "required": [
-    "user_id",
-    "site_id"
+    "site_id",
+    "user_id"
   ]
 }
     """)

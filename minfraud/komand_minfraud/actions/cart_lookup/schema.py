@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query shopping cart info"
+
+
 class Input:
     ADDRESS = "address"
     ITEM_CATEGORY = "item_category"

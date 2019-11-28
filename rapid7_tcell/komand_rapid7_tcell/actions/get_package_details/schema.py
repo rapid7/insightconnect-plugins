@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch details for the package with the given ID"
+
+
 class Input:
     APP_ID = "app_id"
     PACKAGE_ID = "package_id"

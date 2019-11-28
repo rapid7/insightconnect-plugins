@@ -1,18 +1,40 @@
+# Description
 
-# VMRay Sandbox
-
-## About
+The VMRay plugin allows the user to submit files or URLs for malware analysis.
 
 [VMRay](https://www.vmray.com) delivers advanced threat analysis and detection that combines a unique agentless hypervisor-based network sandbox with a real-time reputation engine. The combination provides both fast, high volume file classification and in-depth malware analysis. The VMRay Analyzer is platform independent and highly scalable, the result of a decade of R&D by some of the world's leading experts on dynamic malware analysis. By monitoring at the hypervisor level, it is undetectable by malware running in the target operating system. VMRay serves leading enterprises around the world.
+
 This plugin utilizes the [VMRay API](https://cloud.vmray.com/static_doc/html/api/REST_API_Documentation.html).
 
-## Actions
+# Key Features
 
-### Submit File
+* Submit a file or URL for analysis
+* Get reports about files or URLs
+
+# Requirements
+
+* An API key
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|API key for VMRay|None|
+|url|string|https\://cloud.vmray.com|True|VMRay host e.g https\://cloud.vmray.com|None|
+
+## Technical Details
+
+### Actions
+
+#### Submit File
 
 This action is used to submit a file for analysis.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -26,7 +48,7 @@ Supported File Types:
 .exe, .scr, .lnk2, .dll, .sys, .ocx, .pdf, .doc,.docx, .docm, .dot, .dotx, .dotm, .xls,.xlsx, .xlsm, .xlt, .xltx, .xltm, .xlb, .xlsb, .iqy, .slk, .ppt,.pptx, .pptm, .pot, .potx, .potm .mpp, .accdb, .adn, .accdr, .accdt, .accda, .mdw, .accde, .ade, .mdb, .mda, .vsd, .vsdx, .vss, .vst, .vsw, .vdx, .vtx, .vsdx, .vsdm, .vssx, .vssm, .vstx, .vstm, .pub, .puz, .rtf, .url, .html, .htm, .hta, .swf, .msi, .bat, .vbs, .vbe, .js, .jse, .wsf, .jar, .class, .ps1
 ```
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -118,11 +140,11 @@ Example output:
 }
 ```
 
-### Get Analysis
+#### Get Analysis
 
 This action is used to get all dynamic and static analyses in the system or details about specific ones.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -132,7 +154,7 @@ This action is used to get all dynamic and static analyses in the system or deta
 
 Optional Parameters can be found in the API documentation, located `http://vmrayhost/static_doc/html/api/User_API_Reference.html`
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -238,11 +260,11 @@ Example output:
 ]
 ```
 
-### Get Samples
+#### Get Samples
 
 This action is used to get all samples in the system or details about specific ones. You can also search by hashes.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -250,7 +272,7 @@ This action is used to get all samples in the system or details about specific o
 |sample|string|None|True|Sample ID, hash or type,leave blank if 'all' is selected|None|
 |optional_params|object|None|False|Parameters that allow finer tuning of get analysis e.g {"analysis_id"\: 12345}|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -280,11 +302,11 @@ Example output:
 ]
 ```
 
-### Submit URL
+#### Submit URL
 
 This action is used to submits a URL for analysis.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -292,7 +314,7 @@ This action is used to submits a URL for analysis.
 |analyzer_mode|string|None|False|Specify what analyzer mode to use|['default','reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
 |optional_params|object|None|False|Parameters that allow finer tuning of the Submit URL action, e.g {"analysis_id"\: 12345}|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -488,39 +510,32 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API key for VMRay|None|
-|url|string|https\://cloud.vmray.com|True|VMRay host e.g https\://cloud.vmray.com|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Malware analysis
-
-## Versions
-
-* 1.0.0 - Initial plugin
-* 2.0.0 - Rename "Get Analysis By Hash" action to "Get Analysis by Hash"
-* 2.0.1 - Updating to Go SDK 2.6.4
-* 2.0.2 - Regenerate with latest Go SDK to solve bug with triggers
-* 3.0.0 - Added action Get Analysis | Ported over to Python from Go
-* 4.0.0 - New actions Get Samples and Submit URL | Removed action Get Analysis by Hash | Fixed issue where Submit File results are not available in the workflow builder, and filename would not be included when submitting the file for analysis | Get Samples should replace Get Analysis by Hash
+* 4.0.2 - New spec and help.md format for the Hub
 * 4.0.1 - Update actions Submit File and Submit URL to specify what analyzer to use | Update file type support for the Submit File action
+* 4.0.0 - New actions Get Samples and Submit URL | Removed action Get Analysis by Hash | Fixed issue where Submit File results are not available in the workflow builder, and filename would not be included when submitting the file for analysis | Get Samples should replace Get Analysis by Hash
+* 3.0.0 - Added action Get Analysis | Ported over to Python from Go
+* 2.0.2 - Regenerate with latest Go SDK to solve bug with triggers
+* 2.0.1 - Updating to Go SDK 2.6.4
+* 2.0.0 - Rename "Get Analysis By Hash" action to "Get Analysis by Hash"
+* 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [VMRay API](https://cloud.vmray.com/static_doc/html/api/REST_API_Documentation.html)
+

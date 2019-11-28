@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Make a DELETE request"
+
+
 class Input:
     BODY = "body"
     HEADERS = "headers"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes the specified firewall"
+
+
 class Input:
     FIREWALL = "firewall"
     

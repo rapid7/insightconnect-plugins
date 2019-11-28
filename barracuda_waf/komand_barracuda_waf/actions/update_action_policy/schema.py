@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Updates the values of given parameters in the given action policy"
+
+
 class Input:
     ACTION_ID = "action_id"
     ACTION_POLICY = "action_policy"
@@ -46,10 +50,10 @@ class UpdateActionPolicyInput(komand.Input):
     }
   },
   "required": [
-    "policy_id",
-    "attack_group_id",
     "action_id",
-    "action_policy"
+    "action_policy",
+    "attack_group_id",
+    "policy_id"
   ],
   "definitions": {
     "action_policy": {

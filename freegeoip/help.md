@@ -1,17 +1,30 @@
+# Description
 
-# FreeGeoIP
+The `freegeoip` InsightConnect plugin lookup GeoIP information for specified host using [FreeGeoIP](https://freegeoip.net/) which is a free service for Geo IP lookups.
 
-## About
+# Key Features
 
-[FreeGeoIP](https://freegeoip.net/) is a free service for Geo IP lookups.
+* Obtain GeoIP information for an IP address.
 
-## Actions
+# Requirements
 
-### GeoIP Lookup
- 
+_This plugin does not contain any requirements._
+
+# Documentation
+
+## Setup
+
+This plugin does not contain a connection.
+
+## Technical Details
+
+### Actions
+
+#### GeoIP Lookup
+
 This action is used to get GeoIP info for a host.
 
-#### Input
+##### Input
 
 It accepts a user to query and host (IP or domain) to perform the query.
 
@@ -19,7 +32,7 @@ It accepts a user to query and host (IP or domain) to perform the query.
 |----|----|-------|--------|-----------|----|
 |host|string|None|True|Host to Lookup|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -55,30 +68,28 @@ On success, the raw output will look like the following:
 
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-This plugin does not contain a connection.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 A valid domain or IP address must be provided.
 
-## Workflows
+# Version History
 
-Examples:
-
-* IP enrichment
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [FreeGeoIP](https://freegeoip.net/)
+

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch details for the route with the given ID"
+
+
 class Input:
     APP_ID = "app_id"
     ROUTE_ID = "route_id"
@@ -32,8 +36,8 @@ class GetRouteDetailsInput(komand.Input):
     }
   },
   "required": [
-    "route_id",
-    "app_id"
+    "app_id",
+    "route_id"
   ]
 }
     """)

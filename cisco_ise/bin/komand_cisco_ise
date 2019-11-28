@@ -6,8 +6,8 @@ from komand_cisco_ise import connection, actions, triggers
 
 Name = 'Cisco ISE'
 Vendor = 'rapid7'
-Version = '2.2.0'
-Description = 'Cisco Identity Services Engine allows users to gain awareness of everything hitting their networks'
+Version = '2.2.1'
+Description = 'This plugin utilizes Cisco Identity Services Engine to retrieve ANC details, endpoint details and manage Quarantine Cisco Identity Services Engine allows users to gain awareness of everything hitting their networks'
 
 
 class ICONCiscoIse(komand.Plugin):

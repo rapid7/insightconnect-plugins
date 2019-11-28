@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='nmap-rapid7-plugin',
-      version='1.0.1',
-      description='Nmap',
+      version='1.0.2',
+      description='Nmap is used to launch scan against a networt to discover and audit',
       author='rapid7',
       author_email='',
       url='',

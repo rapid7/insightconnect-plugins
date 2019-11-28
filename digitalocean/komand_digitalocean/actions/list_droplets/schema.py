@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists all droplets on the account"
+
+
 class Input:
     pass
 

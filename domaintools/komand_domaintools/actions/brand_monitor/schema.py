@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Searches across all new domain registrations worldwide"
+
+
 class Input:
     DAYS_BACK = "days_back"
     DOMAIN_STATUS = "domain_status"

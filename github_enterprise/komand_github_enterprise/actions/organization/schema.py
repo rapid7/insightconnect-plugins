@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create organization in enterprise"
+
+
 class Input:
     ADMIN = "admin"
     NAME = "name"
@@ -39,8 +43,8 @@ class OrganizationInput(komand.Input):
     }
   },
   "required": [
-    "name",
     "admin",
+    "name",
     "profile_name"
   ]
 }

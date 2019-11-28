@@ -215,8 +215,8 @@ class GetUserOutput(komand.Output):
         }
       },
       "required": [
-        "login",
         "locked",
+        "login",
         "name"
       ],
       "definitions": {

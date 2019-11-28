@@ -1,15 +1,80 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: office365_admin
 title: Office365 Admin
-description: Administrative functions for Office365
-version: 1.1.1
+description: The Office 365 Admin plugin allows you to manage users in Office 365
+version: 1.3.1
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/office365_admin
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.microsoft.com
 tags:
 - office365
 - email
 - user access
+hub_tags:
+  use_cases: [soar, user_management]
+  keywords: [office365, email, user access]
+  features: []
+
+types:
+  serviceItem:
+    servicePlanId:
+      type: string
+      description: Service plan ID
+      required: true
+      title: Service Plan ID
+    servicePlanName:
+      type: string
+      description: Service plan name
+      required: true
+      title: Service Plan Name
+    appliesTo:
+      title: Applies To  
+      required: true
+      description: Entity SKU applies to
+      type: string 
+  skuItem:
+    capabilityStatus:
+      type: string
+      description: Availability of SKU
+      required: true
+      title: Capability Status
+    consumedUnits:
+      type: integer
+      required: false
+      title: Consumed Units
+      description: Consumed units
+    id:
+      title: ID
+      required: false
+      type: string
+      description: SKU team ID
+    skuId:
+      title: SKU ID  
+      required: true
+      description: SKU ID
+      type: string
+    skuPartNumber:
+      title: SKU Part Number  
+      required: true
+      description: SKU part number
+      type: string  
+    appliesTo:
+      title: appliesTo  
+      required: true
+      description: Entity SKU applies to
+      type: string   
+    servicePlans:
+      title: Service Plans
+      description: List of service plans 
+      required: true
+      type: "[]serviceItem"
+
 connection:
   tenant_id:
     title: Tenant ID
@@ -76,9 +141,63 @@ actions:
         description: Set the user's password
         type: password
         required: true
+      office_location:
+        title: Office Location
+        description: User Office Location
+        required: false
+        type: string
     output:
       user:
         title: User
         description: Return a user object in JSON format
         type: object
+        required: false
+  get_subscribed_skus:
+    title: Get Subscribed SKUs
+    description: Gets a list of commercial subscriptions that an organization has acquired
+    output:
+      sku_item:
+        title: SKU Item
+        description: Information about a given SKU
+        type: "[]skuItem"
+        required: true
+  assign_license_to_user:
+    title: Assign License To User
+    description: Assigns a license to a given user 
+    input:
+      user_principal_name:
+        title: User Principal Name
+        description: The user principal name to delete
+        type: string
+        required: true
+      sku_id:
+        title: SKU ID
+        description: ID for SKU to be applied
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: True if successful
+        type: boolean
+        required: false
+  update_usage_location:
+    title: Update Usage Location
+    description: Updates usage location for a given user
+    input:
+      location:
+        title: Usage Location
+        description: A two letter country code (ISO standard 3166)
+        type: string
+        required: true
+      user_principal_name:
+        title: User Principal Name
+        description: The user principal name to update e.g. bob@hotmail.com
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: True if successful
+        type: boolean
         required: false

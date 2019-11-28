@@ -1,37 +1,470 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
-description: Microsoft Teams actions and triggers
-version: 1.0.0
+description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
+version: 1.2.3
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/microsoft_teams
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.microsoft.com
 tags:
 - microsoft
 - teams
 - office 365
 - chat
+hub_tags:
+  use_cases: [soar, chat_ops, application_management, soc_automation, threat_detection_and_response, user_management]
+  keywords: [microsoft, teams, office 365, chat]
+  features: []
+types:
+  team:
+    displayName:
+        title: "Display Name"
+        type: string
+        description: "Display name"
+        required: false
+    id:
+        title: "ID"
+        type: string
+        description: "ID"
+        required: false
+    description:
+        title: "Description"
+        type: string
+        description: "Description"
+        required: false
+  channel:
+    displayName:
+      title: "Display Name"
+      type: string
+      description: "Display name"
+      required: false
+    id:
+      title: "ID"
+      type: string
+      description: "ID"
+      required: false
+    description:
+      title: "Description"
+      type: string
+      description: "Description"
+      required: false
+  body:
+    content:
+      title: "Content"
+      type: string
+      description: "Content"
+      required: false
+    contentType:
+      title: "Content Type"
+      type: string
+      description: "Content type"
+      required: false
+  user:
+    displayName:
+      title: "Display name"
+      type: string
+      description: "Display name"
+      required: false
+    id:
+      title: "ID"
+      type: string
+      description: "ID"
+      required: false
+  from:
+    user:
+      title: "User"
+      type: user
+      description: "User"
+      required: false
+  message:
+     body:
+       title: "Body"
+       type: body
+       description: "Body"
+       required: false
+     from:
+       title: "From"
+       type: from
+       description: "From"
+       required: false
+     createdDateTime:
+       title: "Created Date Time"
+       type: string
+       description: "Created date time"
+       required: false
+     webUrl:
+       title: "Web URL"
+       type: string
+       description: "Web URL"
+       required: false
+     importance:
+       title: "Importance"
+       type: string
+       description: "Importance"
+       required: false
+     messageType:
+       title: "Message Type"
+       type: string
+       description: "Message type"
+       required: false
+     locale:
+       title: "Locale"
+       type: string
+       description: "Locale"
+       required: false
+     id:
+       title: "ID"
+       type: string
+       description: "ID"
+       required: false
+  group:
+      mailNickname:
+        title: "Mail Nickname"
+        type: string
+        description: "Mail nickname"
+        required: false
+      id:
+        title: "ID"
+        type: string
+        description: "ID"
+        required: false
+      mail:
+        title: "Mail"
+        type: string
+        description: "Mail"
+        required: false
+      description:
+        title: "Description"
+        type: string
+        description: "Description"
+        required: false
+      securityEnabled:
+        title: "Security Enabled"
+        type: boolean
+        description: "Security enabled"
+        required: false
+      displayName:
+        title: "Display Name"
+        type: string
+        description: "Display name"
+        required: false
+      createdDateTime:
+        title: "Created Date Time"
+        type: string
+        description: "Created date time"
+        required: false
+      mailEnabled:
+        title: "Mail Enabled"
+        type: boolean
+        description: "Mail enabled"
+        required: false
 
-connection: 
-  webhook:
-    title: Webhook
+connection:
+  application_id:
+    title: Application ID
+    description: Application (client) ID
     type: string
-    description: Webhook
+    required: true
+  directory_id:
+    title: Directory ID
+    description: Directory (tenant) ID
+    type: string
+    required: true
+  application_secret:
+    title: Application Secret
+    description: Application secret
+    type: credential_secret_key
+    required: true
+  username_password:
+    type: credential_username_password
+    title: "Credentials"
+    description: "Username and password"
     required: true
 
-actions:
-  send_message:
-    title: Send message
-    description: Send message
+triggers:
+  new_message_received:
+    title: New Message Received
+    description: Poll a channel for new messages
     input:
+      team_name:
+        title: Team Name
+        description: Regex-capable team name
+        type: string
+        required: true
+        order: 1
+      channel_name:
+        title: Channel Name
+        description: Regex-capable channel
+        type: string
+        required: true
+        order: 2
+      message_content:
+        title: Message Content
+        description: Regex to match new messages against
+        type: string
+        required: false
+        order: 3
+    output:
       message:
         title: Message
+        description: The message object that was created
+        type: message
+        required: false
+
+actions:
+  get_teams:
+    title: Get Teams
+    description: Returns all the teams the configured user is allowed to see
+    input:
+      team_name:
+        title: Team Name
+        description: Optional regex-capable optional team name to look for
         type: string
+        required: false
+    output:
+      teams:
+        title: Teams
+        description: Array of team objects
+        type: "[]team"
+        required: false
+  get_channels_for_team:
+    title: Get Channels for Team
+    description: Returns all the channels associated with a team
+    input:
+      team_name:
+        title: Team Name
+        description: Regex-capable team name to look for
+        type: string
+        required: true
+        order: 1
+      channel_name:
+        title: Channel Name
+        description: Optional regex-capable optional channel to look for
+        type: string
+        required: false
+        order: 2
+    output:
+      channels:
+        title: Channels
+        description: Array of channels
+        type: "[]channel"
+        required: false
+  send_message:
+    title: Send Message
+    description: Send a message
+    input:
+      team_name:
+        title: Team Name
+        description: Regex-capable team name
+        type: string
+        required: true
+        order: 1
+      channel_name:
+        title: Channel Name
+        description: Regex-capable channel
+        type: string
+        required: true
+        order: 2
+      message:
+        title: Message
         description: Message to send
+        type: string
+        required: true
+        order: 3
+    output:
+      message:
+        title: Message
+        description: The message object that was created
+        type: message
+        required: false
+  send_html_message:
+    title: Send HTML Message
+    description: Send HTML as a message
+    input:
+      team_name:
+        title: Team Name
+        description: Regex-capable team name
+        type: string
+        required: true
+        order: 1
+      channel_name:
+        title: Channel Name
+        description: Regex-capable channel
+        type: string
+        required: true
+        order: 2
+      message_content:
+        title: Message Content
+        description: HTML content to send
+        type: string
+        required: true
+        order: 3
+    output:
+      message:
+        title: Message
+        description: The message object that was created
+        type: message
+        required: false
+  add_member_to_team:
+    title: Add Member to Team
+    description: Add a member to a team
+    input:
+      team_name:
+        title: Team Name
+        description: Team name
+        type: string
+        required: true
+        order: 1
+      member_login:
+        title: Member Login
+        description: Member login e.g. user@example.com
+        type: string
+        required: true
+        order: 2
+    output:
+      success:
+        title: Success
+        description: Boolean indicating if this action was successful
+        type: boolean
+        required: true
+  remove_member_from_team:
+    title: Remove Member from Team
+    description: Remove a member from a team
+    input:
+      team_name:
+        title: Team Name
+        description: Team name
+        type: string
+        required: true
+        order: 1
+      member_login:
+        title: Member Login
+        description: Member Login e.g. user@example.com
+        type: string
+        required: true
+        order: 2
+    output:
+      success:
+        title: Success
+        description: Boolean indicating if this action was successful
+        type: boolean
+        required: true
+  add_channel_to_team:
+    title: Add Channel to Team
+    description: Add a channel to a team
+    input:
+      team_name:
+        title: Team Name
+        description: Team name
+        type: string
+        required: true
+        order: 1
+      channel_name:
+        title: Channel Name
+        description: Channel name
+        type: string
+        required: true
+        order: 2
+      channel_description:
+        title: Channel Description
+        description: Channel description
+        type: string
+        required: true
+        order: 3
+    output:
+      success:
+        title: Success
+        description: Boolean indicating if this action was successful
+        type: boolean
+        required: true
+  remove_channel_from_team:
+    title: Remove Channel from Team
+    description: Remove a channel from a team
+    input:
+      team_name:
+        title: Team Name
+        description: Team name
+        type: string
+        required: true
+        order: 1
+      channel_name:
+        title: Channel Name
+        description: Channel name
+        type: string
+        required: true
+        order: 2
+    output:
+      success:
+        title: Success
+        description: Boolean indicating if this action was successful
+        type: boolean
+        required: true
+  create_teams_enabled_group:
+    title: Create Teams Enabled Group
+    description: Create a group in Azure and enable it for Microsoft Teams
+    input:
+      group_name:
+        title: Team Name
+        description: Team name
+        type: string
+        required: true
+        order: 1
+      group_description:
+        title: Group Description
+        description: Group description
+        type: string
+        required: true
+        order: 2
+      mail_nickname:
+        title: Mail Nickname
+        description: The nickname for the email address of this group in Outlook
+        type: string
+        required: true
+        order: 3
+      mail_enabled:
+        title: Mail Enabled
+        description: Should e-mail should be enabled for this group
+        type: boolean
+        required: true
+        order: 4
+      owners:
+        title: Owners
+        description: A list of usernames to set as owners
+        type: "string[]"
+        required: false
+        order: 5
+      members:
+        title: Members
+        description: A list of usernames to set as members
+        type: "string[]"
+        required: false
+        order: 6
+    output:
+      group:
+        title: Group
+        description: Information about the group that was created
+        type: group
+        required: false
+  delete_team:
+    title: Delete Team
+    description: Delete a team and the associated group from Azure
+    input:
+      team_name:
+        title: Team Name
+        description: Team Name
+        type: string
         required: true
     output:
       success:
         title: Success
-        description: Was send successful
+        description: Boolean indicating if this action was successful
         type: boolean
         required: true
+
+

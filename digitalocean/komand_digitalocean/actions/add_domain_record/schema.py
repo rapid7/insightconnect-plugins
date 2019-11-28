@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Adds a domain record to the specified domain name"
+
+
 class Input:
     DATA = "data"
     DOMAIN_NAME = "domain_name"

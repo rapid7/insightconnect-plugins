@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Provides a list of historic WHOIS records for a domain name"
+
+
 class Input:
     DOMAIN = "domain"
     

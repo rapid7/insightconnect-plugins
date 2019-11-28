@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Fetch the currently active app configuration"
+
+
 class Input:
     APP_ID = "app_id"
     

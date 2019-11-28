@@ -81,8 +81,8 @@ class UpdateSiteIncludedTargetsOutput(komand.Output):
     }
   },
   "required": [
-    "links",
-    "id"
+    "id",
+    "links"
   ],
   "definitions": {
     "link": {

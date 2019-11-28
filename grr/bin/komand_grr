@@ -6,8 +6,8 @@ from komand_grr import connection, actions, triggers
 
 Name = 'Google Rapid Response'
 Vendor = 'rapid7'
-Version = '2.0.0'
-Description = 'An incident response framework used for live forensics'
+Version = '2.0.1'
+Description = 'The GRR plugin allows you to organize and start hunts using GRR'
 
 
 class ICONGrr(komand.Plugin):

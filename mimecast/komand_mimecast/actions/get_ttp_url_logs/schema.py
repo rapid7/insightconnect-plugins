@@ -12,6 +12,7 @@ class Input:
     ROUTE = "route"
     SCAN_RESULT = "scan_result"
     TO = "to"
+    URL_TO_FILTER = "url_to_filter"
     
 
 class Output:
@@ -60,6 +61,12 @@ class GetTtpUrlLogsInput(komand.Input):
       "title": "To",
       "description": "End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request",
       "order": 2
+    },
+    "url_to_filter": {
+      "type": "string",
+      "title": "URL filter",
+      "description": "URL to filter results with",
+      "order": 5
     }
   },
   "required": [

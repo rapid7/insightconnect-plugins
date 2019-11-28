@@ -1,7 +1,4 @@
-
-# Cymon v2
-
-## About
+# Description
 
 [Cymon](https://cymon.io/) is the largest open tracker of malware, phishing, botnets, spam, and more.
 This plugin utilizes the Cymon [v2 API](http://docs.cymon.io/) and implements all its available actions.
@@ -10,13 +7,38 @@ This plugin utilizes the Cymon [v2 API](http://docs.cymon.io/) and implements al
 
 The Cymon [v1 API](http://docs.cymon.io/v1/) actions can still be used in the original [Cymon](https://market.komand.com/plugins/rapid7/cymon/1.0.0) plugin.
 
-## Actions
+# Key Features
 
-### Create Feed
+* Feature 1
+* Feature 2
+* Feature 3
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_credentials|credential_username_password|None|False|Cymon API v2 credentials|None|
+
+Cymon API supports anonymous access but with a rate limit. To use anonymous access, supply a username and password of `anonymous`.
+
+## Technical Details
+
+### Actions
+
+#### Create Feed
 
 This action is used to create a new feed for threat reports.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -31,7 +53,7 @@ This action is used to create a new feed for threat reports.
 |logo|string|None|False|URL for small thumbnail for this feed (must be hosted on imgur CDN)|None|
 |description|string|None|False|Feed description text|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -60,11 +82,11 @@ Example output:
 }
 ```
 
-### Search
+#### Search
 
 This action is used to search threat reports.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -73,7 +95,7 @@ This action is used to search threat reports.
 |start_date|string|None|False|The start date for searching|None|
 |end_date|string|None|False|The end date for searching|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -175,17 +197,17 @@ Example output:
 }
 ```
 
-### Submit Report
+#### Submit Report
 
 This action is used to upload a threat report with observables.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |report|uploaded_report|None|True|Report to upload|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -215,17 +237,17 @@ Example output:
 }
 ```
 
-### Submit Reports in Bulk
+#### Submit Reports in Bulk
 
 This action is used to upload multiple threat reports in one request. Each bulk request can support up to 500 records. Each record in the request can be as large as 1 MB, up to a limit of 5 MB for the entire request, including feed IDs.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |reports|[]uploaded_report|None|True|Reports to upload|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -274,17 +296,17 @@ Example output:
 }
 ```
 
-### List All Feeds
+#### List All Feeds
 
 This action is used to get the list of feeds.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |privacy|string|None|False|Return list of `private` or `public` feeds|['all', 'private', 'public']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -346,11 +368,11 @@ Example output:
 }
 ```
 
-### Update Feed
+#### Update Feed
 
 This action is used to update details of an existing feed.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -365,7 +387,7 @@ This action is used to update details of an existing feed.
 |members|[]string|None|False|List of usernames that have `post` and `read` permissions to this feed|None|
 |logo|string|None|False|URL for small thumbnail for this feed (must be hosted on imgur CDN)|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -395,17 +417,17 @@ Example output:
 }
 ```
 
-### Get Feed Details
+#### Get Feed Details
 
 This action is used to get a feed object.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |feed_id|string|None|True|Feed ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -440,18 +462,18 @@ Example output:
 }
 ```
 
-### Get Report Document
+#### Get Report Document
 
 This action is used to get the threat report from a feed.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |feed_id|string|None|True|Feed ID|None|
 |report_id|string|None|True|Report ID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -504,15 +526,15 @@ Example output:
 }
 ```
 
-### List User Feeds
+#### List User Feeds
 
 This action is used to get the list of feeds that a user has access to.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -574,34 +596,28 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
-## Connection
+_This plugin does not contain any triggers._
 
-The connection configuration accepts the following parameters:
+### Custom Output Types
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_credentials|credential_username_password|None|False|Cymon API v2 credentials|None|
-
-Cymon API supports anonymous access but with a rate limit. To use anonymous access, supply a username and password of `anonymous`.
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Intelligence gathering and enrichment
-
-## Versions
-
-* 1.0.0 - Initial plugin
+* 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Add discontinuation of Cymon notice
+* 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Cymon](https://cymon.io/)
 * [Cymon API](http://docs.cymon.io/)
+

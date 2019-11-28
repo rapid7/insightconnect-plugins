@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve all alerts associated with an artifact or project"
+
+
 class Input:
     END = "end"
     PROJECT = "project"

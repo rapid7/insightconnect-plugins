@@ -74,6 +74,7 @@ class Connection(komand.Connection):
     def test(self):
         try:
             test = self.conn.extend.standard.who_am_i()
-            self.logger.info(f'Accessing LDAP with user {test}')
         except:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
+
+        return {'connection': 'successful'}

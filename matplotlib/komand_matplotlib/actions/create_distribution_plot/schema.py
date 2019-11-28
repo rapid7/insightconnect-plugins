@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create a distribution plot that illustrates the distribution between two data series"
+
+
 class Input:
     COLOR_PALETTE = "color_palette"
     COLUMN = "column"
@@ -74,11 +78,11 @@ class CreateDistributionPlotInput(komand.Input):
     }
   },
   "required": [
-    "margin_style",
-    "csv_data",
+    "color_palette",
     "column",
+    "csv_data",
     "kde",
-    "color_palette"
+    "margin_style"
   ]
 }
     """)

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check if an indexation has been launched within threshold (by default 12 days, can be changed in Hippocampe/core/conf/hippo/hippo.conf)"
+
+
 class Input:
     pass
 

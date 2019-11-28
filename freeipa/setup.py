@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='freeipa-rapid7-plugin',
-      version='2.0.0',
-      description='FreeIPA is an integrated Identity and Authentication solution for Linux/UNIX networked environments',
+      version='2.0.1',
+      description='This plugin can retrieve user details and statuses and delete users from FreeIPA servers',
       author='rapid7',
       author_email='',
       url='',

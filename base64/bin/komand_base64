@@ -6,7 +6,7 @@ from komand_base64 import connection, actions, triggers
 
 Name = 'Base64'
 Vendor = 'rapid7'
-Version = '1.1.1'
+Version = '1.1.2'
 Description = 'Encode and decode data using the base64 alphabet'
 
 

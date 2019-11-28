@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete user in actual organization"
+
+
 class Input:
     ORGANIZATION_ID = "organization_id"
     USER_ID = "user_id"

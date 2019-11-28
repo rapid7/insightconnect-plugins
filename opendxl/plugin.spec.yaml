@@ -1,16 +1,25 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: opendxl
 title: OpenDXL
-description: OpenDXL is an initiative to create adaptive systems of interconnected
-  services that communicate and share information for real-time, accurate security
-  decisions and actions
-version: 1.1.1
+description: Communicate and share information for real-time, accurate security
+  decisions and actions using OpenDXL
+version: 1.1.2
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/opendxl
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.opendxl.com/
 tags:
 - opendxl
 - message broker
+hub_tags:
+  use_cases: [soar, network_containment, asset_containment, threat_detection_and_response, soc_automation]
+  keywords: [opendxl, message broker]
+  features: []
 connection:
   broker_ca:
     type: credential_asymmetric_key

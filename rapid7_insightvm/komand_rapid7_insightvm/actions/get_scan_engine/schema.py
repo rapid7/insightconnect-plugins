@@ -158,12 +158,12 @@ class GetScanEngineOutput(komand.Output):
         }
       },
       "required": [
-        "id",
-        "name",
-        "port",
         "address",
         "enginePools",
-        "links"
+        "id",
+        "links",
+        "name",
+        "port"
       ],
       "definitions": {
         "link": {

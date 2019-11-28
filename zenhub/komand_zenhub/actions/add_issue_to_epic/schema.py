@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Add a GitHub Issue to a ZenHub Epic"
+
+
 class Input:
     EPIC_ID = "epic_id"
     ISSUE = "issue"
@@ -40,9 +44,9 @@ class AddIssueToEpicInput(komand.Input):
     }
   },
   "required": [
-    "repo_id",
     "epic_id",
-    "issue"
+    "issue",
+    "repo_id"
   ],
   "definitions": {
     "issue_reference": {

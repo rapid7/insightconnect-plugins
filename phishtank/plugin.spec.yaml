@@ -1,15 +1,25 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: phishtank
 title: PhishTank
-description: PhishTank API
-version: 1.0.0
+description: The Phishtank plugin allows you to submit URLs for analysis by the PhishTank community
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/phishtank
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.phishtank.com/
 tags:
 - komand
 - phishtank
 - phishing
+hub_tags:
+  use_cases: [soar, threat_hunting, threat_intel, investigations]
+  keywords: [komand, phishtank, phishing]
+  features: []
 connection:
   credentials:
     title: API Key

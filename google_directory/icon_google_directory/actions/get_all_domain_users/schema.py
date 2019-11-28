@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get all domain users"
+
+
 class Input:
     DOMAIN = "domain"
     

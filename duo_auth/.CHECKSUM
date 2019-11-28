@@ -1,0 +1,15 @@
+{
+	"spec": "ec311959791b3ae76b4e6c387fc69064",
+	"manifest": "0bc658a366d414feb8c70ab726029773",
+	"setup": "a8b7f3aeeee006a9b717cf3cab8283b8",
+	"schemas": [
+		{
+			"identifier": "auth/schema.py",
+			"hash": "fbc5545cf3c14ba63cabf57255f3273d"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "b4dd28f9a040343bb03350fc8a29d096"
+		}
+	]
+}

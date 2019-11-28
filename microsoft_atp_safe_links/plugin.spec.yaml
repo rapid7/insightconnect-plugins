@@ -1,17 +1,27 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: microsoft_atp_safe_links
 title: Microsoft Office 365 ATP Safe Links
 description: Helps protect your organization by providing time-of-click verification
   of web addresses (URLs) in email messages and Office documents
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: rapid7
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/microsoft_atp_safe_links
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.microsoft.com
 tags:
 - ATP
 - Microsoft
 - safe
 - links
+hub_tags:
+  use_cases: [soar, data_utility, investigations, soc_automation]
+  keywords: [ATP, Microsoft, safe, links]
+  features: []
 actions:
   decode:
     title: Decode Safe Links

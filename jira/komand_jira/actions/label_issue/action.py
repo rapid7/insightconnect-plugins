@@ -1,6 +1,8 @@
 import komand
 from .schema import LabelIssueInput, LabelIssueOutput
+
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class LabelIssue(komand.Action):
@@ -18,7 +20,8 @@ class LabelIssue(komand.Action):
         issue = self.connection.client.issue(id=params['id'])
 
         if not issue:
-            raise Exception('Error: No issue found with ID: ' + params['id'])
+            raise PluginException(cause=f"No issue found with ID: {params['id']}.",
+                                  assistance='Please provide a valid issue ID.')
 
         labels = params['label'].split(',')
 

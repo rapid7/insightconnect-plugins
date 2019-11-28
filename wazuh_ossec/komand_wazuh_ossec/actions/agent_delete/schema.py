@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Removes an agent. You must restart OSSEC after removing an agent"
+
+
 class Input:
     AGENT_ID = "agent_id"
     

@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='carbon_black_response-rapid7-plugin',
-      version='3.1.7',
-      description='Cb Response is the most complete endpoint detection and response solution available to security teams',
+      version='3.1.8',
+      description='Automate information collection, endpoint isolation and hash blacklisting',
       author='rapid7',
       author_email='',
       url='',

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Update value by key"
+
+
 class Input:
     ARRAY = "array"
     KEY = "key"

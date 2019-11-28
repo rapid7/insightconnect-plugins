@@ -36,8 +36,8 @@ class AddUserAssetGroupAccessInput(komand.Input):
     }
   },
   "required": [
-    "user_id",
-    "asset_group_id"
+    "asset_group_id",
+    "user_id"
   ]
 }
     """)

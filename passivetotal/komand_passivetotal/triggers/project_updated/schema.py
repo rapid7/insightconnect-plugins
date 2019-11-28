@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Looks for updates to a project"
+
+
 class Input:
     
     FREQUENCY = "frequency"

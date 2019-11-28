@@ -1,16 +1,34 @@
-# Google Web Risk
+# Description
 
-## About
+[Google Web Risk](https://cloud.google.com/web-risk/) checks URLs against the Google Web Risk service. Use the InsightConnect plugin to automatically evaluate suspicious URLs and take action when you find them.
 
-[Google Web Risk](https://cloud.google.com/web-risk/) checks URLs against the Google Web Risk service.
+# Key Features
 
-## Actions
+* Lookup URL in web risk service
 
-### Lookup URL
+# Requirements
+
+* WebRisk API token
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_secret_key|None|True|API token|None|
+
+## Technical Details
+
+### Actions
+
+#### Lookup URL
 
 This action is used to lookup a URL in Web Risk Service.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -19,7 +37,7 @@ This action is used to lookup a URL in Web Risk Service.
 |threat_type_unwanted|boolean|true|false|Check if URL is of 'unwanted software' threat|None|
 |url|string|None|true|URL to lookup|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -38,35 +56,27 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 _This plugin does not contain any triggers._
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_secret_key|None|True|API token|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 Google's Web Risk API requires an API key for use. Sign up for the beta [here](https://docs.google.com/forms/d/e/1FAIpQLSf2mccuP6McSrhwOk1FXnsNY6c7xE-Url_pmjvFgz73A8qOxg/viewform)
 
-## Workflows
+# Version History
 
-Examples:
-
-* Phishing investigation
-* Malicious website detection
-
-
-## Versions
-
-* 1.0.0 - Initial plugin
+* 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - New inputs for lookup action
+* 1.0.0 - Initial plugin
+
+# Links
 
 ## References
 
 * [Google Web Risk API Documentation](https://cloud.google.com/web-risk/docs/)
+

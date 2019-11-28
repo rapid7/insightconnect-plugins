@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='carbon_black_live_response-rapid7-plugin',
-      version='1.0.0',
-      description='The Cb Response Live Response feature allows security operators to collect information and take action on remote endpoints in real time. These actions include the ability to upload, download, and remove files, retrieve and remove registry entries, dump contents of physical memory, execute and terminate processes',
+      version='1.0.1',
+      description='Delete malicious files',
       author='rapid7',
       author_email='',
       url='',

@@ -1,8 +1,8 @@
 import komand
 from .schema import CreateIncidentInput, CreateIncidentOutput, Input, Output, Component
 # Custom imports below
+from icon_bmc_remedy_itsm.util import error_handling
 import requests
-from komand.exceptions import PluginException
 import urllib.parse
 
 
@@ -20,6 +20,7 @@ class CreateIncident(komand.Action):
             output=CreateIncidentOutput())
 
     def run(self, params={}):
+        handler = error_handling.ErrorHelper()
         values = {"values": {"z1D_Action": "CREATE"}}
         other_inputs = params.pop(Input.OTHER_INPUTS)
 
@@ -32,16 +33,6 @@ class CreateIncident(komand.Action):
         headers = self.connection.make_headers_and_refresh_token()
 
         result = requests.post(url, headers=headers, json=values)
-
-        if result.status_code == 400:
-            raise PluginException(cause="An HTTP 400 status code was returned.",
-                                  assistance="This status code indicates that the JSON Token was invalid."
-                                             " This is normally caused by an incorrect username or password.")
-        try:
-            result.raise_for_status()
-        except requests.HTTPError as e:
-            raise PluginException(cause=f"An unexpected status code was returned. Status code was {result.status_code}.",
-                                  assistance="Please contact support with the status code and error information.",
-                                  data=e)
+        handler.error_handling(result)
 
         return {Output.SUCCESS: True}

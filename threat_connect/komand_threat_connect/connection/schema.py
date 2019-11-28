@@ -43,9 +43,9 @@ class ConnectionSchema(komand.Input):
   },
   "required": [
     "api_access_id",
+    "api_base_url",
     "api_default_org",
-    "api_secret_key",
-    "api_base_url"
+    "api_secret_key"
   ],
   "definitions": {
     "credential_secret_key": {

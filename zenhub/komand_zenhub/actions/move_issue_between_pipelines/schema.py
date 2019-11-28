@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Move a Github Issue between ZenHub Pipelines"
+
+
 class Input:
     ISSUE_NUMBER = "issue_number"
     PIPELINE_ID = "pipeline_id"
@@ -46,10 +50,10 @@ class MoveIssueBetweenPipelinesInput(komand.Input):
     }
   },
   "required": [
-    "repo_id",
     "issue_number",
     "pipeline_id",
-    "position"
+    "position",
+    "repo_id"
   ]
 }
     """)

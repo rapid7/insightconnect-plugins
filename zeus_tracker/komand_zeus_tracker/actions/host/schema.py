@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup ZeuS hosts by hostname"
+
+
 class Input:
     HOST = "host"
     

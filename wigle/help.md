@@ -1,19 +1,41 @@
+# Description
 
-# WiGLE
-
-## About
-
-[WiGLE](https://wigle.net/index) (Wireless Geographic Logging Engine) consolidates location and information of wireless networks world-wide to a central database, and has user-friendly desktop and web applications that can map, query and update the database via the web.
+The [WiGLE](https://wigle.net/index) (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks. The WiGLE consolidates location and information of wireless networks world-wide to a central database. This plugin will allow users to
+retrieve and update information in the WiGLE database
 
 This plugin utilizes the [WiGLE API](https://api.wigle.net/swagger).
 
-## Actions
+# Key Features
 
-### Get Network Details
+* Retrieve wireless network information
+* Update wireless information in WiGLE
+* Get statistics about regions or countries
+
+# Requirements
+
+* A WiGLE API token
+* The WiGLE API name to use
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_name|string|None|True|API name provided by WiGLE|None|
+|api_token|password|None|True|API token provided by WiGLE|None|
+
+## Technical Details
+
+### Actions
+
+#### Get Network Details
 
 This action is used to get details and observation records for a single network. It provides unique information for a WiFi or cell network to request detailed information. Providing a netid value searches WiFi, operator searches GSM, and system searches CDMA.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -25,7 +47,7 @@ This action is used to get details and observation records for a single network.
 |system|integer|None|False|CDMA System ID|None|
 |lac|integer|None|False|GSM Location Area Code|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -107,18 +129,18 @@ Example output:
 }
 ```
 
-### Get Files Status
+#### Get Files Status
 
 This action is used to get the status of files uploaded by the current user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |pagestart|integer|0|False|Most recent record to fetch descending chronologically. Defaults to 0|None|
 |pageend|integer|100|False|Number of results to fetch from offset. Defaults to 100|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -158,18 +180,18 @@ Example output:
 }
 ```
 
-### Get Metadata
+#### Get Metadata
 
 This action is used to get metadata for cell networks - optionally filter by country and network codes (MCC and MNC).
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |mnc|string|None|False|Network code (MNC) to filter|None|
 |mcc|string|None|False|Country code (MCC) to filter|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -232,17 +254,17 @@ Example output:
 }
 ```
 
-### Get Region Statistics
+#### Get Region Statistics
 
 This action is used to get statistics for a specified country, organized by region.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |country|string|us|False|The two-letter code of the country for which you'd like a regional breakdown. Defaults to 'US'|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -289,15 +311,15 @@ Example output:
 }
 ```
 
-### Get User Profile
+#### Get User Profile
 
 This action is used to get the user object for the current logged-in user.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -320,15 +342,15 @@ Example output:
 }
 ```
 
-### Get Country Statistics
+#### Get Country Statistics
 
 This action is used to get statistics organized by country.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -363,11 +385,11 @@ Example output:
 }
 ```
 
-### Search Cells
+#### Search Cells
 
 This action is used to query the WiGLE cell database for paginated results based on multiple criteria. API and session authentication default to a page size of 100 results/page. COMMAPI defaults to a page size of 25 with a maximum of 1000 results per return. Number of daily queries allowed per user are throttled based on history and participation.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -392,7 +414,7 @@ This action is used to query the WiGLE cell database for paginated results based
 |resultsPerPage|integer|None|False|How many results to return per request. Defaults to 25 for COMMAPI, 100 for site. Bounded at 1000 for COMMAPI, 100 for site|None|
 |variance|float|None|False|How tightly to bound queries against the provided latitude/longitude box. Value must be between 0.001 and 0.2. Intended for use with non-exact decimals and geocoded bounds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -450,15 +472,15 @@ Example output:
 }
 ```
 
-### Get General Statistics
+#### Get General Statistics
 
 This action is used to get a named map of general statistics.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -529,18 +551,18 @@ Example output:
 }
 ```
 
-### Add Comment
+#### Add Comment
 
 This action is used to add a comment to the network.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |comment|string|None|False|The comment to attach|None|
 |netid|string|None|False|The BSSID of the network for the comment, e.g. '0A\:2C\:EF\:3D\:25\:1B'|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -556,17 +578,17 @@ Example output:
 }
 ```
 
-### Get KML
+#### Get KML
 
 This action is used to get a KML summary approximation for a successfully processed file uploaded by the current user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |transid|string|None|True|The unique transaction ID for the file|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -580,17 +602,17 @@ Example output:
 }
 ```
 
-### Get User Tokens
+#### Get User Tokens
 
 This action is used to get all authorization tokens for the logged-in user.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |type|string|None|False|Token types - 'API', 'COMMAPI', or 'ANDROID'|['API', 'COMMAPI', 'ANDROID']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -612,17 +634,17 @@ Example output:
 }
 ```
 
-### Get Network Geocode
+#### Get Network Geocode
 
 This action is used to get coordinates for an address for use in searching. Relies on OpenStreetMap nominatim.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |addresscode|string|None|False|An address string, Street, City, State/Region, Country|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -656,15 +678,15 @@ Example output:
 }
 ```
 
-### Get Group Statistics
+#### Get Group Statistics
 
 This action is used to get statistics organized by group.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -701,15 +723,15 @@ Example output:
 }
 ```
 
-### Get User Statistics
+#### Get User Statistics
 
 This action is used to get statistics and badge image for the authenticated user.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -751,11 +773,11 @@ Example output:
 }
 ```
 
-### Search Networks
+#### Search Networks
 
 This action is used to query the WiGLE network database for paginated results based on multiple criteria. API and session authentication default to a page size of 100 results/page. COMMAPI defaults to a page size of 25 with a maximum of 1000 results per return. Number of daily queries allowed per user are throttled based on history and participation.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -779,7 +801,7 @@ This action is used to query the WiGLE network database for paginated results ba
 |resultsPerPage|integer|None|False|How many results to return per request. Defaults to 25 for COMMAPI, 100 for site. Bounded at 1000 for COMMAPI, 100 for site|None|
 |variance|float|None|False|How tightly to bound queries against the provided latitude/longitude box. Value must be between 0.001 and 0.2. Intended for use with non-exact decimals and geocoded bounds|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -854,11 +876,11 @@ Example output:
 }
 ```
 
-### Get User Standings
+#### Get User Standings
 
 This action is used to get user standings.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -866,7 +888,7 @@ This action is used to get user standings.
 |pagestart|integer|None|False|The first record to request according to the 'sort' parameter|None|
 |pageend|integer|None|False|The last record to request according to the 'sort' parameter|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -929,18 +951,18 @@ Example output:
 }
 ```
 
-### Upload File
+#### Upload File
 
 This action is used to transmit a file for processing and incorporation into the database. Supports DStumbler, G-Mon, inSSIDer, Kismac, Kismet, MacStumbler, NetStumbler, Pocket Warrior, Wardrive-Android, WiFiFoFum, WiFi-Where, WiGLE WiFi Wardriving, and Apple consolidated DB formats. One or more files may be enclosed within a zip, tar, or tar.gz archive. Files may not exceed 140MiB, and archives WILL IGNORE more than 200 member files.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |donate|boolean|True|False|Allow commercial use of the file contents - 'on' to allow|None|
 |file|file|None|False|None|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -968,15 +990,15 @@ Example output:
 }
 ```
 
-### Get Site Statistics
+#### Get Site Statistics
 
 This action is used to get a map of short-named statistics used in providing site-wide information.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1016,18 +1038,13 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_name|string|None|True|API name provided by WiGLE|None|
-|api_token|password|None|True|API token provided by WiGLE|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
@@ -1037,20 +1054,16 @@ Analyzing a DB file takes a while. During that time, the Get KML action will rai
 
 In the case where this plugin is used extensively, the API can respond with 'Too many queries today'.
 
-## Versions
+# Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Searching for WiFi networks around the world
-* Getting the location and other details of a specific network
-* Extracting network information from DB files
+# Links
 
 ## References
 
 * [WiGLE](https://wigle.net/index)
 * [WiGLE API](https://api.wigle.net/swagger)
 * [Example WiGLE DB file](https://wigle.net/phpbb/viewtopic.php?t=1670)
+

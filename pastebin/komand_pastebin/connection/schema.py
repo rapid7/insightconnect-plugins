@@ -28,8 +28,8 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "key",
-    "credentials"
+    "credentials",
+    "key"
   ],
   "definitions": {
     "credential_secret_key": {

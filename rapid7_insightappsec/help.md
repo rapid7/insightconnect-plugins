@@ -1,19 +1,38 @@
+# Description
 
-# Rapid7 InsightAppSec
-
-## About
-
-[Rapid7 InsightAppSec](https://www.rapid7.com/products/insightappsec/) is an application security testing tool for the modern web.
+[InsightAppSec’s](https://www.rapid7.com/products/insightappsec/) DAST capabilities and InsightConnect’s automation prowess can help you simplify your SDLC Process with this scan management plugin. The need for automation becomes paramount in the fast moving landscape of modern web scanning and automating you web app scanning with this plugin can save you loads of time to allow you to focus on remediating issues to get your app into product faster!
 
 This plugin utilizes the [Rapid7 InsightAppSec API](https://insightappsec.help.rapid7.com/docs/get-started-with-the-insightappsec-api).
 
-## Actions
+# Key Features
 
-### Create Scan Config
+* Create and configure scans
+* Run scans and return results
+
+# Requirements
+
+* Requires an API Key from Insight platform
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|api_key|credential_secret_key|None|True|The API key for InsightAppSec|None|
+|url|string|https\://us.api.insight.rapid7.com|True|The URL endpoint for InsightAppSec. e.g. https\://<REGION_CODE>.api.insight.rapid7.com|None|
+
+## Technical Details
+
+### Actions
+
+#### Create Scan Config
 
 This action is used to create a new scan configuration.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -22,7 +41,7 @@ This action is used to create a new scan configuration.
 |app_id|string|None|True|App UUID|None|
 |attack_template_id|string|None|True|Attack template UUID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -36,17 +55,17 @@ Example output:
 }
 ```
 
-### Get Scan Config
+#### Get Scan Config
 
 This action is used to get a scan configuration.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_config_id|string|None|True|Scan configuration UUID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -80,11 +99,11 @@ Example output:
 }
 ```
 
-### Update Scan Config
+#### Update Scan Config
 
 This action is used to update an existing scan configuration.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -94,7 +113,7 @@ This action is used to update an existing scan configuration.
 |app_id|string|None|True|App UUID|None|
 |attack_template_id|string|None|True|Attack template UUID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -108,17 +127,17 @@ Example output:
 }
 ```
 
-### Delete Scan Config
+#### Delete Scan Config
 
 This action is used to delete an existing scan config.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_config_id|string|None|True|Scan configuration UUID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -132,11 +151,11 @@ Example output:
 }
 ```
 
-### Get Scan Configs
+#### Get Scan Configs
 
 This action is used to get a page of scan configurations, based on supplied pagination parameters.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -144,7 +163,7 @@ This action is used to get a page of scan configurations, based on supplied pagi
 |size|integer|None|False|The number of entries on each page. If blank size will be 50|None|
 |sort|string|None|False|How to sort the scan configs. If blank sort will be alphabetical by scan config name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -207,17 +226,17 @@ Example output:
 }
 ```
 
-### Sumbit Scan
+#### Sumbit Scan
 
 This action is used to submit a new scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_config_id|string|None|True|UUID of the scan config to use|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -231,17 +250,17 @@ Example output:
 }
 ```
 
-### Get Scan
+#### Get Scan
 
 This action is used to get a scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_id|string|None|True|The scans UUID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -273,11 +292,11 @@ Example output:
 }
 ```
 
-### Get Scans
+#### Get Scans
 
 This action is used to get a page of scans, based on supplied pagination parameters.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -285,7 +304,7 @@ This action is used to get a page of scans, based on supplied pagination paramet
 |size|integer|None|False|The number of entries on each page. If blank size will be 50|None|
 |sort|string|None|False|How to sort the scans. If blank sort will be alphabetical by scan name|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -319,17 +338,17 @@ Example output:
 }
 ```
 
-### Delete Scan
+#### Delete Scan
 
 This action is used to delete a scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_id|string|None|True|The scans UUID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -343,18 +362,18 @@ Example output:
 }
 ```
 
-### Submit Scan Action
+#### Submit Scan Action
 
 This action is used to submit a new scan action.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_id|string|None|True|Scan UUID|None|
 |action|string|PAUSE|True|Action to take|['PAUSE', 'RESUME', 'STOP', 'CANCEL']|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -368,17 +387,17 @@ Example output:
 }
 ```
 
-### Get Scan Engine Events
+#### Get Scan Engine Events
 
 This action is used to get the engine events from a scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_id|string|None|True|Scan UUID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -397,17 +416,17 @@ Example output:
 }
 ```
 
-### Get Scan Execution Details
+#### Get Scan Execution Details
 
 This action is used to get real-time details of the execution of a scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_id|string|None|True|Scan UUID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -432,17 +451,17 @@ Example output:
 }
 ```
 
-### Get Scan Platform Events
+#### Get Scan Platform Events
 
 This action is used to get the platform events from a scan.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |scan_id|string|None|True|Scan UUID|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -465,33 +484,26 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|The API key for InsightAppSec|None|
-|url|string|https\://us.api.insight.rapid7.com|True|The URL endpoint for InsightAppSec. e.g. https\://<REGION_CODE>.api.insight.rapid7.com|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Versions
+# Version History
 
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Run scans against target applications.
+# Links
 
 ## References
 
 * [InsightAppSec API](https://insightappsec.help.rapid7.com/docs/get-started-with-the-insightappsec-api)
+

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Retrieve detailed endpoint info"
+
+
 class Input:
     HOST = "host"
     IP = "ip"
@@ -126,17 +130,17 @@ class EndpointOutput(komand.Output):
     }
   },
   "required": [
-    "hasWarnings",
-    "isExceptional",
-    "duration",
-    "eta",
     "delegation",
     "details",
-    "ipAddress",
-    "statusMessage",
+    "duration",
+    "eta",
     "grade",
     "gradeTrustIgnored",
-    "progress"
+    "hasWarnings",
+    "ipAddress",
+    "isExceptional",
+    "progress",
+    "statusMessage"
   ],
   "definitions": {
     "cert": {

@@ -6,8 +6,8 @@ from komand_virustotal_yara import connection, actions, triggers
 
 Name = 'VirusTotal Yara'
 Vendor = 'rapid7'
-Version = '1.1.0'
-Description = 'The pattern matching swiss knife for malware researchers'
+Version = '1.1.1'
+Description = 'The VirusTotal Yara plugin allows the user to analyze files with the Yara Python libarary'
 
 
 class ICONVirustotalYara(komand.Plugin):

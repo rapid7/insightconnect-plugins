@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lists the UBA (User Behavioral Analysis) activities"
+
+
 class Input:
     LIMIT = "limit"
     OFFSET = "offset"

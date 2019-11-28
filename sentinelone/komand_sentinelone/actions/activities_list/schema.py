@@ -85,7 +85,7 @@ class ActivitiesListInput(komand.Input):
     "created_at_gt": {
       "type": "string",
       "title": "Greater Then Date",
-      "description": "Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z.",
+      "description": "Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
       "order": 10
     },
     "created_at_gte": {
@@ -97,13 +97,13 @@ class ActivitiesListInput(komand.Input):
     "created_at_lt": {
       "type": "string",
       "title": "Less Then Date",
-      "description": "Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z.",
+      "description": "Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
       "order": 8
     },
     "created_at_lte": {
       "type": "string",
       "title": "Less Or Equal Date",
-      "description": "Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z.",
+      "description": "Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
       "order": 9
     },
     "cursor": {
@@ -154,7 +154,7 @@ class ActivitiesListInput(komand.Input):
     "skip": {
       "type": "integer",
       "title": "Skip First N Items",
-      "description": "Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead.",
+      "description": "Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead",
       "order": 3
     },
     "skip_count": {

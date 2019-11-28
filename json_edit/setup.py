@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='json_edit-rapid7-plugin',
-      version='1.0.1',
+      version='1.0.2',
       description='Provides the ability to edit JSON data',
       author='rapid7',
       author_email='',

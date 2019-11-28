@@ -4,12 +4,14 @@ from .add_user_asset_group_access.action import AddUserAssetGroupAccess
 from .add_user_site_access.action import AddUserSiteAccess
 from .asset_search.action import AssetSearch
 from .create_asset_group.action import CreateAssetGroup
+from .create_exception.action import CreateException
 from .create_scan_engine.action import CreateScanEngine
 from .create_scan_engine_pool.action import CreateScanEnginePool
 from .create_site.action import CreateSite
 from .create_tag.action import CreateTag
 from .create_user.action import CreateUser
 from .delete_asset_group.action import DeleteAssetGroup
+from .delete_exception.action import DeleteException
 from .delete_scan_engine.action import DeleteScanEngine
 from .delete_scan_engine_pool.action import DeleteScanEnginePool
 from .delete_site.action import DeleteSite
@@ -48,6 +50,7 @@ from .get_tags.action import GetTags
 from .get_user.action import GetUser
 from .get_users.action import GetUsers
 from .get_vulnerabilities_by_cve.action import GetVulnerabilitiesByCve
+from .get_vulnerability.action import GetVulnerability
 from .get_vulnerability_affected_assets.action import GetVulnerabilityAffectedAssets
 from .list_reports.action import ListReports
 from .remove_asset_group_tags.action import RemoveAssetGroupTags
@@ -58,6 +61,7 @@ from .remove_tag_search_criteria.action import RemoveTagSearchCriteria
 from .remove_tag_sites.action import RemoveTagSites
 from .remove_user_asset_group_access.action import RemoveUserAssetGroupAccess
 from .remove_user_site_access.action import RemoveUserSiteAccess
+from .review_exception.action import ReviewException
 from .scan.action import Scan
 from .tag_asset.action import TagAsset
 from .tag_asset_group.action import TagAssetGroup

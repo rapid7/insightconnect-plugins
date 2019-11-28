@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='azure_ad_admin-rapid7-plugin',
-      version='1.3.0',
-      description='Administrative tasks in Azure AD',
+      version='1.3.1',
+      description='Preform Administrative tasks in Azure AD',
       author='rapid7',
       author_email='',
       url='',

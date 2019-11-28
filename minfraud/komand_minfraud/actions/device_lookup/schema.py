@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query device info"
+
+
 class Input:
     ACCEPT_LANGUAGE = "accept_language"
     ADDRESS = "address"

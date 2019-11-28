@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List all incidents triggered by the CloudLock policy engine"
+
+
 class Input:
     CREATED_AFTER = "created_after"
     CREATED_BEFORE = "created_before"

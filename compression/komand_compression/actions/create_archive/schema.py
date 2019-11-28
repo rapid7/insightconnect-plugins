@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Compress a files into archive"
+
+
 class Input:
     ALGORITHM = "algorithm"
     FILENAME = "filename"
@@ -46,9 +50,9 @@ class CreateArchiveInput(komand.Input):
     }
   },
   "required": [
-    "files",
     "algorithm",
-    "filename"
+    "filename",
+    "files"
   ],
   "definitions": {
     "file": {

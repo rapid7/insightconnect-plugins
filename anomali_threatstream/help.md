@@ -1,23 +1,48 @@
-# Anomali ThreatStream
+# Description
 
-## About
-
-[Anomali ThreatStream](https://www.anomali.com/) is an operationalized threat intelligence stream, automating collection and integration that enables security teams to analyze and respond to threats.
+[Anomali ThreatStream](https://www.anomali.com/) is an operational threat intelligence stream, automating collection and integration that enables security teams to analyze and respond to threats.
+The Anomali ThreatStream InsightConnect plugin allows you lookup hashes, IP addresses, URLs, observables. It also allows importing observables.
 This plugin utilizes the Anomali ThreatStream API, which is located with the cloud instance at `http://<Anomali ThreatStream API host>/optic-doc/ThreatStream_OnlineHelp.htm`.
 
-## Actions
+# Key Features
 
-### Lookup IP Address
+* Lookup hashes, IP addresses, and URLs
+* Import observables
+* Get observables
+
+# Requirements
+
+* Anomali ThreatStream username
+* Anomali ThreatStream instance URL
+* Anomali ThreatStream API key
+
+# Documentation
+
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|username|string|None|True|Anomali ThreatStream username|None|
+|threatstream_url|string|None|True|URL for the ThreatStream instance. Example\: https\://ts.example.com|None|
+|api_key|credential_secret_key|None|True|Anomali ThreatStream API key|None|
+
+## Technical Details
+
+### Actions
+
+#### Lookup IP Address
 
 This action is used to lookup an IP address in Anomali.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ip_address|string|None|False|IP address|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -54,17 +79,17 @@ Example output:
 }
 ```
 
-### Lookup URL
+#### Lookup URL
 
 This action is used to lookup a URL in Anomali.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|False|URL|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -101,17 +126,17 @@ Example output:
 }
 ```
 
-### Lookup Hash
+#### Lookup Hash
 
 This action is used to lookup a file hash in Anomali.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hash|string|None|False|Hash|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -125,28 +150,72 @@ Example output:
 }
 ```
 
-### Add Approval Indicator
+#### Get Observables
 
-This action is used to import indicator(s) into Anomali with approval.
+This action is used to get observables.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|file|file|None|False|File of data to be imported into Anomali|None|
-|indicator_settings|indicator_settings|None|False|Settings needed for importing an indicator that needs approval|None|
+|value|string|None|False|Value|None|
 
-Indicator Settings
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|[]result|False|Results returned|
+
+Example output:
+
+```
+{
+  "results": [
+    {
+      "classification": "private",
+      "confidence": "17",
+      "date_first": "2019-10-16T16:12:48",
+      "date_last": "2019-10-21T14:01:39",
+      "detail": "Delivery",
+      "detail2": "imported by user 121",
+      "domain": "window.google",
+      "id": 112879000,
+      "import_session_id": 205,
+      "itype": "apt_domain",
+      "maltype": "Delivery",
+      "resource_uri": "/api/v1/intelligence/112879000/",
+      "severity": "very-high",
+      "source": "user@example.com",
+      "srcip": "127.0.53.53",
+      "state": "active",
+      "update_id": "272270002"
+    }
+  ]
+}
+```
+
+#### Import Observable
+
+This action is used to import observable(s) into Anomali with approval.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|file|file|None|True|File of data to be imported into Anomali|None|
+|observable_settings|observable_settings|None|False|Settings needed for importing an observable that needs approval|None|
+
+Observable Settings
 
   Each mapping can have nothing passed or an iType:
   * When passing unstructured data via `file` its best that mappings be set.
   * A list of iTypes can be located here `https://<Amonali Server>//optic-doc/ThreatStream_OnlineHelp.htm#appendices/app_indicators.htm`
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|import_indicator_response|False|Results from adding indicator(s)|
+|results|import_observable_response|False|Results from importing observable(s)|
 
 Example output:
 
@@ -160,36 +229,30 @@ Example output:
 }
 ```
 
-## Triggers
+### Triggers
 
 This plugin does not contain any triggers.
 
-## Connection
+### Custom Output Types
 
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Anomali ThreatStream username|None|
-|threatstream_url|string|None|True|URL for the ThreatStream instance. Example\: https\://ts.example.com|None|
-|api_key|credential_secret_key|None|True|Anomali ThreatStream API key|None|
+_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
 If you're unable to import data without approval, the Anomali user configured in InsightConnect will need to have `approver` permissions.
 
-## Versions
+# Version History
 
-* 1.0.0 - Initial plugin
-* 1.1.0 - New action Add Approval Indicator
+* 3.0.2 - New spec and help.md format for the Hub
+* 3.0.1 - Update actions to use SSL Verify from connection settings
+* 3.0.0 - Add new action Get Observables | Rename action Add Approval Indicator to Import Observable | Add connection test
 * 2.0.0 - Support optional server SSL/TLS certificate validation
+* 1.1.0 - New action Add Approval Indicator
+* 1.0.0 - Initial plugin
 
-## Workflows
-
-Examples:
-
-* Hash an email attachment, then pass the hash of the attachment to Anomali for IOC enrichment.
+# Links
 
 ## References
 
 * [Anomali ThreatStream](https://www.anomali.com/)
+

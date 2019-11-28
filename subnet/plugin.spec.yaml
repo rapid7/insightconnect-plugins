@@ -1,17 +1,26 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: subnet
 title: Subnet
-description: Return Useful Subnet Information
-version: 1.0.1
+description: The Subnet plugin takes input as a network in CIDR notation and returns useful information, such as the number of hosts, the ID, host address range, and broadcast address
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/subnet
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - subnet
 - ip
 - netmask
 - network
 - utilities
+hub_tags:
+  use_cases: [soar, data_utility, threat_hunting, investigations]
+  keywords: [subnet, ip, netmask, network, utilities]
+  features: []
 actions:
   calculate:
     title: Calculate

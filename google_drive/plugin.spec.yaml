@@ -1,15 +1,25 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: google_drive
 title: Google Drive
-description: Store, access, and share your files in one secure place
-version: 2.1.1
+description: Upload and retrieve files from Google drive
+version: 2.1.2
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/google_drive
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.google.com/
 tags:
 - google
 - google drive
 - cloud storage
+hub_tags:
+  use_cases: [soar, data_ingestion]
+  keywords: [google, google drive, cloud storage]
+  features: []
 types:
   file_info:
     file_name:

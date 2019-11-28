@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Gets history about an incident"
+
+
 class Input:
     INCIDENT_ID = "incident_id"
     ORGANIZATION_ID = "organization_id"
@@ -32,8 +36,8 @@ class GetIncidentHistoryInput(komand.Input):
     }
   },
   "required": [
-    "organization_id",
-    "incident_id"
+    "incident_id",
+    "organization_id"
   ]
 }
     """)

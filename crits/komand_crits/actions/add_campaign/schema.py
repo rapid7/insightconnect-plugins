@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new campaign"
+
+
 class Input:
     NAME = "name"
     PARAMS = "params"

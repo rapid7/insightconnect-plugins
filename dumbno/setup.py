@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='dumbno-rapid7-plugin',
-      version='1.0.0',
+      version='1.0.1',
       description='Flow shunting for Arista switches using EOS',
       author='rapid7',
       author_email='',

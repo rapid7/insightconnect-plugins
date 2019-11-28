@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check a file for an SHA-1 collision"
+
+
 class Input:
     FILE = "file"
     

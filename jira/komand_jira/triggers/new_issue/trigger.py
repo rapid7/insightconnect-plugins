@@ -1,9 +1,10 @@
 import komand
+
 from .schema import NewIssueInput, NewIssueOutput
 # Custom imports below
 import time
 from ...util import *
-
+from komand.exceptions import PluginException
 
 class NewIssue(komand.Trigger):
 
@@ -37,11 +38,19 @@ class NewIssue(komand.Trigger):
         # send a test event
         self.jql = params.get('jql') or ''
         self.get_attachments = params.get('get_attachments', False)
-        if self.connection.parameters.get('project'):
+        self.project = params.get('project')
+
+        # Check if project exists
+        valid_project = look_up_project(self.project, self.connection.client)
+        if not valid_project:
+            raise PluginException(cause=f"Project {self.project} does not exist or user don't have permission to access the project.",
+                                  assistance='Please provide a valid project ID/name or make sure project is accessible to user.')
+
+        if self.project:
             if self.jql:
-                self.jql = 'project=' + self.connection.parameters['project'] + ' and ' + self.jql
+                self.jql = 'project=' + self.project + ' and ' + self.jql
             else:
-                self.jql = 'project=' + self.connection.parameters['project']
+                self.jql = 'project=' + self.project
 
         self.logger.info('Querying %s', self.jql)
 

@@ -39,8 +39,8 @@ class UpdateUserSiteAccessInput(komand.Input):
     }
   },
   "required": [
-    "user_id",
-    "site_ids"
+    "site_ids",
+    "user_id"
   ]
 }
     """)

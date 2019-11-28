@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Deletes an SSH key from the account"
+
+
 class Input:
     SSH_KEY_ID = "ssh_key_id"
     

@@ -1,16 +1,25 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: base64
 title: Base64
 description: Encode and decode data using the base64 alphabet
-version: 1.1.1
+version: 1.1.2
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/base64
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - base64
 - encoder
 - decoder
 - utilities
+hub_tags:
+  use_cases: [soar, data_utility]
+  keywords: [base64, encoder, decoder, utilities]
+  features: []
 actions:
   encode:
     title: Encoder

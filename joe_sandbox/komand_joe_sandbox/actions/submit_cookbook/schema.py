@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Submit a cookbook for analysis and return the associated web IDs for the cookbook"
+
+
 class Input:
     ADDITIONAL_PARAMETERS = "additional_parameters"
     COOKBOOK = "cookbook"

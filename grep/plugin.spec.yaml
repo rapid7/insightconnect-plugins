@@ -1,15 +1,24 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: grep
 title: Grep
-description: Match pattern
-version: 1.0.2
+description: This plugin searches for a specified pattern in a string or a file
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/grep
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - grep
 - regex
 - utilities
+hub_tags:
+  use_cases: [soar, data_utility]
+  keywords: [grep, regex, utilities]
+  features: []
 actions:
   match_string:
     title: Match String

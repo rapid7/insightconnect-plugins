@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Send a message to a remote server and receive the same message as a reply if successful"
+
+
 class Input:
     MESSAGE = "message"
     

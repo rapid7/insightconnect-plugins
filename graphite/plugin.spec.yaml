@@ -1,17 +1,26 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: graphite
 title: Graphite
 vendor: rapid7
 support: community
 status: []
-description: Graphite is an enterprise-ready monitoring tool that allows you store
-  and graph metrics
-version: 1.0.0
+description: The Graphite plugin allows you to store, retrieve, and update your metrics. The plugin will also return a byte array of graphed data
+version: 1.0.1
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/graphite
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://graphiteapp.org/
 tags:
 - graphite
 - graphite-api
 - metrics
 - graphs
+hub_tags:
+  use_cases: [soar, data_utility, data_aggregation, reporting_and_analytics, soc_automation]
+  keywords: [graphite]
+  features: []
 types:
   metric:
     name:

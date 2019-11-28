@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get key's hash"
+
+
 class Input:
     KEY = "key"
     

@@ -1,16 +1,26 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: logstash
 title: Logstash
 vendor: rapid7
 support: community
 status: []
 description: Data collection engine with real-time pipelining capabilities
-version: 1.0.0
+version: 1.0.1
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/logstash
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.elastic.co
 tags:
 - logstash
 - elk
 - log
 - elastic
+hub_tags:
+  use_cases: [soar, data_utility, log_search, application_management]
+  keywords: [logstash, elk, log, elastic]
+  features: []
 types:
   response:
     host:

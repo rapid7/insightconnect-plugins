@@ -1,17 +1,27 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: dynamodb
 title: Dynamo DB
 vendor: rapid7
 support: community
 status: []
-description: Dynamo DB is a Key/Value store powered by Amazon available for members
-  of AWS
-version: 1.0.1
+description: "Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data
+using the DynamoDB plugin for Rapid7 InsightConnect"
+version: 1.0.2
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/dynamodb
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.amazon.com
 tags:
 - dynamodb
 - aws
 - amazon
 - database
+hub_tags:
+  use_cases: [soar, application_management, reporting_and_analytics]
+  keywords: [dynamodb, aws, amazon, database]
+  features: []
 enable_cache: true
 connection:
   access_key:

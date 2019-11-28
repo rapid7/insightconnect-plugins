@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Initialize an SSL assessment"
+
+
 class Input:
     ALL = "all"
     FROM_CACHE = "from_cache"
@@ -83,9 +87,9 @@ class AnalyzeInput(komand.Input):
   "required": [
     "all",
     "from_cache",
-    "start_new",
     "host",
-    "publish"
+    "publish",
+    "start_new"
   ]
 }
     """)
@@ -165,16 +169,16 @@ class AnalyzeOutput(komand.Output):
     }
   },
   "required": [
-    "endpoints",
-    "port",
-    "isPublic",
-    "status",
-    "startTime",
-    "testTime",
-    "engineVersion",
     "criteriaVersion",
+    "endpoints",
+    "engineVersion",
     "host",
-    "protocol"
+    "isPublic",
+    "port",
+    "protocol",
+    "startTime",
+    "status",
+    "testTime"
   ],
   "definitions": {
     "cert": {

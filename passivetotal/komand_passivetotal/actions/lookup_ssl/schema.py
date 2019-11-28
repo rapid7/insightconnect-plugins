@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup SSL Certificate"
+
+
 class Input:
     SHA1 = "sha1"
     

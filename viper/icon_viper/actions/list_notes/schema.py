@@ -24,6 +24,7 @@ class ListNotesInput(komand.Input):
     "project_name": {
       "type": "string",
       "title": "Project Name",
+      "description": "Project name",
       "order": 1
     }
   },
@@ -46,6 +47,7 @@ class ListNotesOutput(komand.Output):
     "notes": {
       "type": "array",
       "title": "Notes",
+      "description": "List of notes",
       "items": {
         "$ref": "#/definitions/Note"
       },

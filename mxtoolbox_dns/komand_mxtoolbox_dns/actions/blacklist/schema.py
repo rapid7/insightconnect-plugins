@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Check IP or host for reputation"
+
+
 class Input:
     HOSTNAME = "hostname"
     

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get a Docker network by ID"
+
+
 class Input:
     ID = "id"
     

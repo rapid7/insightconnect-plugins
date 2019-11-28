@@ -6,8 +6,8 @@ from komand_zeus_tracker import connection, actions, triggers
 
 Name = 'ZeuS Tracker'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'ZeuS Command&Control Server Tracking'
+Version = '1.0.1'
+Description = 'The ZeuS Command&Control Server Tracking plugin'
 
 
 class ICONZeusTracker(komand.Plugin):

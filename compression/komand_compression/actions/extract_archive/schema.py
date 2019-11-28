@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Exctract file archive"
+
+
 class Input:
     ARCHIVE = "archive"
     

@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='paloalto_wildfire-rapid7-plugin',
-      version='1.1.0',
-      description='WildFire cloud-based threat analysis service is the industry\'s most advanced analysis and prevention engine for highly evasive zero-day exploits and malware',
+      version='1.1.1',
+      description='Palo Alto Wildfire is a cloud-based threat analysis service. Perform malware analysis with the Palo Alto Wildfire plugin for InsightConnect malware',
       author='rapid7',
       author_email='',
       url='',

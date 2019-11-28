@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Execute a simple search for a text"
+
+
 class Input:
     TEXT = "text"
     

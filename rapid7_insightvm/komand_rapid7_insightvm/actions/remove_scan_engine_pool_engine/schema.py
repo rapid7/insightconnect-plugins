@@ -36,8 +36,8 @@ class RemoveScanEnginePoolEngineInput(komand.Input):
     }
   },
   "required": [
-    "pool_id",
-    "engine_id"
+    "engine_id",
+    "pool_id"
   ]
 }
     """)

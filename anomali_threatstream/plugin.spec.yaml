@@ -1,15 +1,25 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: anomali_threatstream
 title: Anomali ThreatStream
-description: ThreatStream operationalizes threat intelligence, automating collection
+description: Anomali ThreatStream operationalizes threat intelligence, automating collection
   and integration that enables security teams to analyze and respond to threats
-version: 2.0.0
+version: 3.0.2
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/anomali_threatstream
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.anomali.com
 tags:
 - anomali
 - threatstream
+hub_tags:
+  use_cases: [soar, threat_hunting, threat_intel, soc_automation, threat_detection_and_response]
+  keywords: [anomali, threatstream]
+  features: []
 types:
   meta:
     limit:
@@ -117,20 +127,20 @@ types:
       title: URL
       description: URL
       type: string
-  indicator_settings:
+  observable_settings:
     confidence:
       title: Confidence
-      description: Confidence value assigned to the indicator. Confidence score can
+      description: Confidence value assigned to the observable. Confidence score can
         range from 0-100, in increasing order of confidence
       type: integer
     source_confidence_weight:
       title: Source Confidence Weight
       description: Specifies the ratio between the amount of the source confidence
-        of each indicator and the ThreatStream confidence
+        of each observable and the ThreatStream confidence
       type: integer
     severity:
       title: Severity
-      description: Severity you want to assign to the indicator when it is imported
+      description: Severity you want to assign to the observable when it is imported
       type: string
       default: ''
       enum:
@@ -141,7 +151,7 @@ types:
       - ''
     classification:
       title: Classification
-      description: Classification of the indicator
+      description: Classification of the observable
       type: string
       default: private
       enum:
@@ -154,37 +164,37 @@ types:
       type: date
     notes:
       title: Notes
-      description: Additional details for the indicator. This information is displayed
+      description: Additional details for the observable. This information is displayed
         in the Tags column of the ThreatStream UI e.g ['note1', 'note2', 'note3']
       type: '[]string'
     ip_mapping:
       title: IP Mapping
       description: Indicator type to assign if a specific type is not associated with
-        an indicator
+        an observable
       type: string
       required: false
     domain_mapping:
       title: Domain Mapping
       description: Indicator type to assign if a specific type is not associated with
-        an indicator
+        an observable
       type: string
       required: false
     url_mapping:
       title: URL Mapping
       description: Indicator type to assign if a specific type is not associated with
-        an indicator
+        an observable
       type: string
       required: false
     email_mapping:
       title: Email Mapping
       description: Indicator type to assign if a specific type is not associated with
-        an indicator
+        an observable
       type: string
       required: false
     md5_mapping:
       title: MD5 Mapping
       description: Indicator type to assign if a specific type is not associated with
-        an indicator
+        an observable
       type: string
       required: false
     trustedcircles:
@@ -193,7 +203,12 @@ types:
         If you want to import the threat data to multiple trusted circles, enter the
         list of comma-separated IDs e.g [1,2,3]
       type: '[]integer'
-  import_indicator_response:
+    threat_type:
+      title: Threat Type
+      description: Type of threat associated with the imported observables
+      type: string
+      required: false
+  import_observable_response:
     job_id:
       title: Job ID
       description: Job ID
@@ -231,7 +246,7 @@ connection:
 actions:
   lookup_ip:
     title: Lookup IP Address
-    description: Lookup an IP address in Anomali
+    description: Lookup an IP address in Anomali ThreatStream
     input:
       ip_address:
         title: IP Address
@@ -246,7 +261,7 @@ actions:
         required: false
   lookup_url:
     title: Lookup URL
-    description: Lookup a URL in Anomali
+    description: Lookup a URL in Anomali ThreatStream
     input:
       url:
         title: URL
@@ -261,7 +276,7 @@ actions:
         required: false
   lookup_hash:
     title: Lookup Hash
-    description: Lookup a file hash in Anomali
+    description: Lookup a file hash in Anomali ThreatStream
     input:
       hash:
         title: Hash
@@ -274,23 +289,38 @@ actions:
         description: Results returned
         type: '[]result'
         required: false
-  add_approval_indicator:
-    title: Add Approval Indicator
-    description: Import indicator(s) into Anomali with approval
+  import_observable:
+    title: Import Observable
+    description: Import observable(s) into Anomali ThreatStream with approval
     input:
       file:
         title: File
-        description: File of data to be imported into Anomali
+        description: File of data to be imported into Anomali ThreatStream
         type: file
         required: true
-      indicator_settings:
-        title: Indicator Settings
-        description: Settings needed for importing an indicator that needs approval
-        type: indicator_settings
+      observable_settings:
+        title: Observable Settings
+        description: Settings needed for importing an observable that needs approval
+        type: observable_settings
         required: false
     output:
       results:
         title: Results
-        description: Results from adding indicators(s)
-        type: import_indicator_response
+        description: Results from importing observable(s)
+        type: import_observable_response
+        required: false
+  get_observables:
+    title: Get Observables
+    description: Get observables
+    input:
+      value:
+        title: Value
+        description: Value
+        type: string
+        required: false
+    output:
+      results:
+        title: Results
+        description: Results returned
+        type: '[]result'
         required: false

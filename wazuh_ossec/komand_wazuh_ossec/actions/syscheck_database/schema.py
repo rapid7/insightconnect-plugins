@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the syscheck files of an agent"
+
+
 class Input:
     AGENT_ID = "agent_id"
     EVENT = "event"
@@ -147,9 +151,9 @@ class SyscheckDatabaseOutput(komand.Output):
     }
   },
   "required": [
-    "totalItems",
+    "error",
     "syscheck_events",
-    "error"
+    "totalItems"
   ],
   "definitions": {
     "rootcheck_events": {

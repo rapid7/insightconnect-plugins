@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Scrape the most recent pastes"
+
+
 class Input:
     LANGUAGE = "language"
     LIMIT = "limit"
@@ -296,9 +300,9 @@ class ScrapeInput(komand.Input):
     }
   },
   "required": [
-    "pattern",
     "language",
-    "limit"
+    "limit",
+    "pattern"
   ]
 }
     """)

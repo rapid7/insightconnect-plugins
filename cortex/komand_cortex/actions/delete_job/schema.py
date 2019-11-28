@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Delete an existing job, identified by its ID"
+
+
 class Input:
     JOB_ID = "job_id"
     

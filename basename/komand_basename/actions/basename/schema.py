@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get the basename of a path"
+
+
 class Input:
     PATH = "path"
     

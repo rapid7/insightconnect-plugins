@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Diff strings"
+
+
 class Input:
     COMPARE = "compare"
     LABEL = "label"
@@ -33,8 +37,8 @@ class DiffInput(komand.Input):
     }
   },
   "required": [
-    "label",
-    "compare"
+    "compare",
+    "label"
   ]
 }
     """)

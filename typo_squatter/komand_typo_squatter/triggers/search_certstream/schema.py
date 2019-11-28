@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Searches certstream for new certs matching query"
+
+
 class Input:
     
     DOMAIN = "domain"

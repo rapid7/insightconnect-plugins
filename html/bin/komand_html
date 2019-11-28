@@ -6,8 +6,8 @@ from komand_html import connection, actions, triggers
 
 Name = 'HTML'
 Vendor = 'rapid7'
-Version = '1.1.0'
-Description = 'Validate or convert an html document'
+Version = '1.2.1'
+Description = 'The HTML plugin will validate HTML, convert an HTML document to another format, or strip a HTML document of all tags'
 
 
 class ICONHtml(komand.Plugin):

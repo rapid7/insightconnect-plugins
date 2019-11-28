@@ -1,12 +1,20 @@
-
-# InfluxDB
-
-## About
+# Description
 
 [InfluxDB](https://docs.influxdata.com/influxdb) is a scalable datastore for metrics, events, and real-time analytics.
 This plugin utilizes the [InfluxDB API](https://docs.influxdata.com/influxdb/v1.2/tools/api/).
 
-## Connection
+# Key Features
+
+* Post metrics
+* Retrieve metrics
+
+# Requirements
+
+* An InfluxDB server
+
+# Documentation
+
+## Setup
 
 The connection configuration accepts the following parameters:
 
@@ -14,13 +22,15 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|
 |server|string|http\://localhost\:8086|True|InfluxDB API Server|None|
 
-## Actions
+## Technical Details
 
-### Write to Database
+### Actions
+
+#### Write to Database
 
 This action is used to write data to a pre-existing database.
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -32,20 +42,20 @@ This action is used to write data to a pre-existing database.
 |data|string|None|False|Data to be written into the database. Must be in Line Protocol format. See https\://docs.influxdata.com/influxdb/v1.2/write_protocols/line_protocol_tutorial/|None|
 |precision|string|None|False|Sets the precision for the supplied Unix time values|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status_code|integer|False|None|
 |message|string|False|None|
 
-### Query Database
+#### Query Database
 
 This action is used to query data and manage databases, retention policies, and users.
 
 An example query would be `select * from mytable`
 
-#### Input
+##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -56,46 +66,61 @@ An example query would be `select * from mytable`
 |database_name|string|None|True|Database name|None|
 |chunked|string|None|False|If set to true, InfluxDB chunks responses by series or by every 10,000 points, whichever occurs first. If set to a specific value, InfluxDB chunks responses by series or by that number of points|None|
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |results|[]result|False|None|
 
-### Ping Database
+#### Ping Database
 
 This action is used to check the status of your InfluxDB instance and your version of InfluxDB.
 
-#### Input
+##### Input
 
 This action does not contain any inputs.
 
-#### Output
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|string|False|None|
 |version|string|False|None|
 
-## Triggers
+### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
+
+### Custom Output Types
+
+#### point
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|columns|[]string|False|None|
+|name|string|False|None|
+|values|[][]string|False|None|
+
+#### result
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|error|string|False|None|
+|series|[]point|False|None|
+|statement_id|integer|False|None|
 
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
-## Workflows
+# Version History
 
-Examples:
-
-* Workflow metrics
-
-## Versions
-
-* 0.1.0 - Initial plugin
-* 0.1.1 - SSL bug fix in SDK
+* 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 

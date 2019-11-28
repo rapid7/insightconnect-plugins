@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove a user's access to Office365"
+
+
 class Input:
     USER_PRINCIPAL_NAME = "user_principal_name"
     

@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "create_teams_enabled_group",
+        "input": {
+            "group_description": "A command line test group",
+            "group_name": "a_command_line_test_group_delete_me",
+            "mail_enabled": false,
+            "mail_nickname": "CMDTestDeleteMe",
+            "members": "",
+            "owners": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

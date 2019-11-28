@@ -6,8 +6,8 @@ from komand_google_drive import connection, actions, triggers
 
 Name = 'Google Drive'
 Vendor = 'rapid7'
-Version = '2.1.1'
-Description = 'Store, access, and share your files in one secure place'
+Version = '2.1.2'
+Description = 'Upload and retrieve files from Google drive'
 
 
 class ICONGoogleDrive(komand.Plugin):

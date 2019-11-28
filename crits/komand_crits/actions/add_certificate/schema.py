@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Creates a new certificate"
+
+
 class Input:
     FILE = "file"
     PARAMS = "params"

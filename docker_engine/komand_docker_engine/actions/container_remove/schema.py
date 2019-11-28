@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Remove a container by ID"
+
+
 class Input:
     FORCE = "force"
     ID = "id"

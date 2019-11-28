@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Query order info"
+
+
 class Input:
     ADDRESS = "address"
     ORDER_AFFILIATE_ID = "order_affiliate_id"

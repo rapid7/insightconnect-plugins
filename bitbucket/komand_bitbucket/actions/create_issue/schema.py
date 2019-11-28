@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Create issue on Bitbucket"
+
+
 class Input:
     ASSIGNEE = "assignee"
     COMPONENT = "component"

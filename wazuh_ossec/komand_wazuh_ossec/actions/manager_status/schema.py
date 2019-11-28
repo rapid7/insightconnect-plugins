@@ -3,20 +3,24 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns the Manager processes that are running"
+
+
 class Input:
     pass
 
 class Output:
     ERROR = "error"
-    OSSEC-ANALYSISD = "ossec-analysisd"
-    OSSEC-AUTHD = "ossec-authd"
-    OSSEC-EXECD = "ossec-execd"
-    OSSEC-LOGCOLLECTOR = "ossec-logcollector"
-    OSSEC-MAILD = "ossec-maild"
-    OSSEC-MONITORD = "ossec-monitord"
-    OSSEC-REMOTED = "ossec-remoted"
-    OSSEC-SYSCHECKD = "ossec-syscheckd"
-    WAZUH-MODULESD = "wazuh-modulesd"
+    OSSECANALYSISD = "ossec-analysisd"
+    OSSECAUTHD = "ossec-authd"
+    OSSECEXECD = "ossec-execd"
+    OSSECLOGCOLLECTOR = "ossec-logcollector"
+    OSSECMAILD = "ossec-maild"
+    OSSECMONITORD = "ossec-monitord"
+    OSSECREMOTED = "ossec-remoted"
+    OSSECSYSCHECKD = "ossec-syscheckd"
+    WAZUHMODULESD = "wazuh-modulesd"
     
 
 class ManagerStatusInput(komand.Input):
@@ -96,16 +100,16 @@ class ManagerStatusOutput(komand.Output):
     }
   },
   "required": [
-    "ossec-logcollector",
-    "ossec-syscheckd",
-    "ossec-maild",
     "error",
     "ossec-analysisd",
-    "wazuh-modulesd",
     "ossec-authd",
-    "ossec-monitord",
     "ossec-execd",
-    "ossec-remoted"
+    "ossec-logcollector",
+    "ossec-maild",
+    "ossec-monitord",
+    "ossec-remoted",
+    "ossec-syscheckd",
+    "wazuh-modulesd"
   ]
 }
     """)

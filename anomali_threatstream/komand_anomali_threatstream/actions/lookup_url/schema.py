@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup a URL in Anomali ThreatStream"
+
+
 class Input:
     URL = "url"
     

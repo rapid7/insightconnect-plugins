@@ -1,10 +1,11 @@
 import komand
 from .schema import CreateIssueInput, CreateIssueOutput
+
 # Custom imports below
 from ...util import *
 import base64
 from io import BytesIO
-from komand.exceptions import ConnectionTestException
+from komand.exceptions import ConnectionTestException, PluginException
 
 
 class CreateIssue(komand.Action):
@@ -18,16 +19,19 @@ class CreateIssue(komand.Action):
 
     def run(self, params={}):
         """Run action"""
-
         project = params.get('project')
-
-        if not project:
-            project = self.connection.parameters.get('project')
 
         issueType = params.get('type')
         summary = params.get('summary', " ").replace("\n", " ")
         description = params.get("description", " ")
         fields = params.get('fields', {})
+
+        # Check if project exists
+        valid_project = look_up_project(project, self.connection.client)
+        if not valid_project:
+            raise PluginException(
+                cause=f"Project {project} does not exist or user don't have permission to access the project.",
+                assistance='Please provide a valid project ID/name or make sure project is accessible to user.')
 
         self.logger.debug('Create issue with: %s', params)
 
@@ -58,15 +62,16 @@ class CreateIssue(komand.Action):
                 fields[client_field['id']] = {'value': field_value}
 
         issue = self.connection.client.create_issue(fields=fields)
-
         output = normalize_issue(issue, logger=self.logger)
 
         # TODO: This code is a duplicate of what's in 'attach_issue' - they should share a common code
         if params.get('attachment_bytes') and not params.get('attachment_filename'):
-            raise Exception("Error: Attachment contents provided but no attachment filename")
+            raise PluginException(cause="Attachment contents provided but no attachment filename.",
+                                  assistance="Please provide attachment filename.")
 
         if params.get('attachment_filename') and not params.get('attachment_bytes'):
-            raise Exception("Error: Attachment filename provided but no attachment contents")
+            raise PluginException(cause="Attachment filename provided but no attachment contents.",
+                                  assistance="Please provide attachment contents.")
 
         if params.get('attachment_bytes') and params.get("attachment_filename"):
             filename = params['attachment_filename']
@@ -75,7 +80,8 @@ class CreateIssue(komand.Action):
             try:
                 data = base64.b64decode(file_bytes)
             except:
-                raise Exception("Error: Unable to decode file input!")
+                raise PluginException(cause='Unable to decode attachment bytes.',
+                                      assistance="Please provide a valid attachment bytes.")
 
             attachment = BytesIO()
             attachment.write(data)

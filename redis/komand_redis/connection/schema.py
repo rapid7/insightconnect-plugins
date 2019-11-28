@@ -37,9 +37,9 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
+    "db",
     "host",
-    "port",
-    "db"
+    "port"
   ]
 }
     """)

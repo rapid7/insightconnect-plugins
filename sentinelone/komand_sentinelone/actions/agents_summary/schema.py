@@ -79,7 +79,7 @@ class AgentsSummaryOutput(komand.Output):
     },
     "out_of_date": {
       "type": "integer",
-      "title": "Out Of Date Number",
+      "title": "Out of Date Number",
       "description": "Number of agents running an older software version",
       "order": 2
     },

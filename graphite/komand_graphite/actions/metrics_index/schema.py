@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Walks the metrics tree and returns every metric found"
+
+
 class Input:
     pass
 

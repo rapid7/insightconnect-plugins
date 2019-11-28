@@ -1,0 +1,15 @@
+{
+	"spec": "8634fcfd9748c4470d745582f81a0a1d",
+	"manifest": "3747f88d92896c3590447714b8d9c13e",
+	"setup": "1c6c02412809e8f6bba2411c72fc1309",
+	"schemas": [
+		{
+			"identifier": "create_workspace/schema.py",
+			"hash": "d640f34f6c0b4647311922855768becb"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "856e5a7d197dd71cdddcd2d6b6e88c87"
+		}
+	]
+}

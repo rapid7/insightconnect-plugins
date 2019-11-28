@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get alert data by ID"
+
+
 class Input:
     ALERT_ID = "alert_id"
     FIELDS = "fields"

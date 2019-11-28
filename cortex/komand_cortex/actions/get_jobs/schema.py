@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "List of analysis jobs"
+
+
 class Input:
     ANALYZERFILTER = "analyzerFilter"
     DATAFILTER = "dataFilter"
@@ -172,11 +176,11 @@ class GetJobsOutput(komand.Output):
         }
       },
       "required": [
-        "status",
+        "analyzerId",
+        "artifact",
         "date",
         "id",
-        "artifact",
-        "analyzerId"
+        "status"
       ],
       "definitions": {
         "artifact": {

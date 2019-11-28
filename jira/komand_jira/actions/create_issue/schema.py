@@ -57,7 +57,7 @@ class CreateIssueInput(komand.Input):
     "project": {
       "type": "string",
       "title": "Project",
-      "description": "Project name. If not provided, uses default from connection",
+      "description": "Project ID",
       "order": 4
     },
     "summary": {
@@ -75,7 +75,7 @@ class CreateIssueInput(komand.Input):
     }
   },
   "required": [
-    "description"
+    "project"
   ]
 }
     """)

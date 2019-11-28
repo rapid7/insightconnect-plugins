@@ -1,16 +1,26 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: wazuh_ossec
 title: Wazuh OSSEC
 description: Provides security visibility, compliance and infrastructure monitoring
   capabilities
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/wazuh_ossec
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://wazuh.com/
 tags:
 - ossec
 - wazuh
 - hids
+hub_tags:
+  use_cases: [soar, log_search, threat_detection_and_response, asset_containment, asset_inventory, soc_automation]
+  keywords: [ossec, wazuh, hids]
+  features: []
 types:
   agents:
     id:

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Post to pastebin"
+
+
 class Input:
     PASTE_EXPIRE_DATE = "paste_expire_date"
     PASTE_FORMAT = "paste_format"

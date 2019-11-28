@@ -1,0 +1,30 @@
+{
+  "body": {
+    "action": "update_ci",
+    "meta": {},
+    "input": {
+      "table": "cmdb_ci_hardware",
+      "system_id": "f18c8312db46bf001e61147239961951",
+      "update_data": {
+        "name": "TEST NAME",
+        "ip_address": "",
+        "mac_address": "234324234342",
+        "fqdn": "domaintest2",
+        "discovery_source": "discoverysource2",
+        "sys_domain": "sysdomain2",
+        "first_discovered": "2018-05-14 18:07:23",
+        "last_discovered": "2019-03-24 11:25:56",
+        "location": "US-West"
+      }
+    },
+    "connection": {
+      "client_login": {
+        "username": "",
+        "password": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

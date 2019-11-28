@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return the current job ID and status. If the service is indexing at the moment, this action will raise an error"
+
+
 class Input:
     pass
 
@@ -40,8 +44,8 @@ class ShadowbookOutput(komand.Output):
     }
   },
   "required": [
-    "job_status",
-    "job_id"
+    "job_id",
+    "job_status"
   ]
 }
     """)

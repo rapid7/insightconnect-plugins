@@ -13,7 +13,7 @@
       "auth_url": "",
       "client_id": "",
       "client_secret": "",
-      "host": "https://wdatp-alertexporter-us.securitycenter.windows.com",
+      "host": "",
       "seconds_ago": 10512000,
       "resource_url": "https://graph.windows.net"
     }

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get logs by ID"
+
+
 class Input:
     JOB = "job"
     

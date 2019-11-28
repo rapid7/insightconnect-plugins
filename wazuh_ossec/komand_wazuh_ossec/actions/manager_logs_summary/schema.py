@@ -3,22 +3,26 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Returns a summary about the 3 last months of ossec.log"
+
+
 class Input:
     pass
 
 class Output:
     ERROR = "error"
-    OSSEC-ANALYSISD = "ossec-analysisd"
-    OSSEC-EXECD = "ossec-execd"
-    OSSEC-LOGCOLLECTOR = "ossec-logcollector"
-    OSSEC-MONITORD = "ossec-monitord"
-    OSSEC-REMOTED = "ossec-remoted"
-    OSSEC-ROOTCHECK = "ossec-rootcheck"
-    OSSEC-SYSCHECKD = "ossec-syscheckd"
-    OSSEC-TESTRULE = "ossec-testrule"
-    WAZUH-MODULESD = "wazuh-modulesd"
-    WAZUH-MODULESD:DATABASE = "wazuh-modulesd:database"
-    WAZUH-MODULESD:OSCAP = "wazuh-modulesd:oscap"
+    OSSECANALYSISD = "ossec-analysisd"
+    OSSECEXECD = "ossec-execd"
+    OSSECLOGCOLLECTOR = "ossec-logcollector"
+    OSSECMONITORD = "ossec-monitord"
+    OSSECREMOTED = "ossec-remoted"
+    OSSECROOTCHECK = "ossec-rootcheck"
+    OSSECSYSCHECKD = "ossec-syscheckd"
+    OSSECTESTRULE = "ossec-testrule"
+    WAZUHMODULESD = "wazuh-modulesd"
+    WAZUHMODULESD:DATABASE = "wazuh-modulesd:database"
+    WAZUHMODULESD:OSCAP = "wazuh-modulesd:oscap"
     
 
 class ManagerLogsSummaryInput(komand.Input):

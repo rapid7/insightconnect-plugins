@@ -1,18 +1,28 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: joe_sandbox
 title: Joe Sandbox
 description: Joe Sandbox Cloud executes files and URLs fully automated in a controlled
   environment and monitors the behavior of applications and the operating system for
   suspicious activities
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/joe_sandbox
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.joesecurity.org
 tags:
 - security
 - malware
 - analysis
 - automation
+hub_tags:
+  use_cases: [soar, application_management, container_and_cloud_security]
+  keywords: [security, malware, analysis, automation]
+  features: []
 types:
   system:
     name:

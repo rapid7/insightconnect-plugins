@@ -6,8 +6,8 @@ from komand_string import connection, actions, triggers
 
 Name = 'String Operations'
 Vendor = 'rapid7'
-Version = '1.1.0'
-Description = 'Provides common programmatic string operations'
+Version = '1.2.1'
+Description = 'The String plugin provides common programmatic string operations'
 
 
 class ICONString(komand.Plugin):
@@ -26,6 +26,8 @@ class ICONString(komand.Plugin):
         self.add_action(actions.SplitToList())
 
         self.add_action(actions.SplitToObject())
+
+        self.add_action(actions.Trim())
 
         self.add_action(actions.Upper())
 

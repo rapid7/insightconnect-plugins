@@ -1,11 +1,10 @@
 {
     "body": {
         "action": "send_message",
-        "connection": {
-            "webhook": null
-        },
         "input": {
-            "message": "This is a message from InsightConnect. All your base are belong to us!"
+            "channel_name": "Komand Test Channel",
+            "message": "Hello from a comand line test.",
+            "team_name": "Komand-Test-Everyone"
         },
         "meta": {}
     },

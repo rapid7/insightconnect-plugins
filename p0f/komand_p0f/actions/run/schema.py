@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Run p0f on a PCAP"
+
+
 class Input:
     FILE = "file"
     

@@ -33,8 +33,8 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "region",
-    "api_key"
+    "api_key",
+    "region"
   ],
   "definitions": {
     "credential_secret_key": {

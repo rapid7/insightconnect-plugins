@@ -6,8 +6,8 @@ from komand_networktotal import connection, actions, triggers
 
 Name = 'Network Total'
 Vendor = 'rapid7'
-Version = '1.0.0'
-Description = 'Upload a PCAP for analysis'
+Version = '1.0.1'
+Description = 'Networktotal is used to upload a PCAP for analysis'
 
 
 class ICONNetworktotal(komand.Plugin):

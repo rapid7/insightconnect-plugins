@@ -1,6 +1,8 @@
 import komand
 from .schema import CommentIssueInput, CommentIssueOutput
+
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class CommentIssue(komand.Action):
@@ -18,7 +20,8 @@ class CommentIssue(komand.Action):
         issue = self.connection.client.issue(id=id_)
 
         if not issue:
-            raise Exception('Error: No issue found with ID: ' + id_)
+            raise PluginException(cause=f'No issue found with ID: {id_}.',
+                                  assistance='Please provide a valid issue ID.')
 
         comment = self.connection.client.add_comment(issue=issue, body=params['comment'])
         self.logger.info("Returned comment: %s", dir(comment))

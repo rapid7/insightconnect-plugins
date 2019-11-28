@@ -1,0 +1,20 @@
+{
+    "body": {
+        "action": "assign_license_to_user",
+        "connection": {
+            "app_id": null,
+            "app_secret": {
+                "domain": null,
+                "token": null
+            },
+            "tenant_id": null
+        },
+        "input": {
+            "sku_id": "",
+            "user_principal_name": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

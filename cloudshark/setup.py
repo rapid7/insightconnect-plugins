@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='cloudshark-rapid7-plugin',
-      version='1.0.0',
-      description='The easiest way to analyze and share network capture files',
+      version='1.0.1',
+      description='CloudShark is an on-premises platform for packet analysis. Users can upload and manage capture files using the CloudShark plugin for Rapid7 InsightConnect',
       author='rapid7',
       author_email='',
       url='',

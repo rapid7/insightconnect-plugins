@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get all authorization tokens for the logged-in user"
+
+
 class Input:
     TYPE = "type"
     
@@ -88,11 +92,11 @@ class GetUserTokensOutput(komand.Output):
         }
       },
       "required": [
-        "type",
-        "personId",
         "authName",
+        "personId",
+        "status",
         "token",
-        "status"
+        "type"
       ]
     }
   }

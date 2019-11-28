@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Store an object into Dynamo"
+
+
 class Input:
     CONDITION_EXPRESSION = "condition_expression"
     DATA = "data"
@@ -39,8 +43,8 @@ class InsertInput(komand.Input):
     }
   },
   "required": [
-    "table",
-    "data"
+    "data",
+    "table"
   ]
 }
     """)

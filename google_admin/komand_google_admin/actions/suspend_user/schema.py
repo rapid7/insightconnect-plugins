@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Suspend a User"
+
+
 class Input:
     USER = "user"
     

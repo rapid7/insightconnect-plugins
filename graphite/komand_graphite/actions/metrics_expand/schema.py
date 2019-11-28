@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Expands metrics with matching paths"
+
+
 class Input:
     LEAVES_ONLY = "leaves_only"
     QUERY = "query"

@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Return all elements with Hippocampe/new"
+
+
 class Input:
     pass
 

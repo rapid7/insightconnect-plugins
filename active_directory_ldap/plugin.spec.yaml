@@ -1,14 +1,25 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
-description: Active Directory LDAP
-version: 3.2.4
+description: This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network
+version: 3.2.7
 vendor: rapid7
 support: rapid7
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/active_directory_ldap
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.microsoft.com
 tags:
 - ldap
 - active directory
+- microsoft
+hub_tags:
+  use_cases: [soar, user_management, credential_management, policy_management, soc_automation, threat_detection_and_response]
+  keywords: [ldap, active directory, microsoft]
+  features: []
 types:
   result:
     attributes:

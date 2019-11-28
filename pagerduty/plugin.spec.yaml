@@ -1,15 +1,25 @@
 plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
 name: pagerduty
 title: PagerDuty
-description: PagerDuty
-version: 2.0.0
+description: PagerDuty provides enterprise-grade incident management. Leverage PagerDuty for incident management and response with the PagerDuty plugin for InsightConnect
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/pagerduty
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.pagerduty.com/
 tags:
 - pagerduty
 - on call
 - incident
+hub_tags:
+  use_cases: [soar, alerting_and_notifications, soc_automation]
+  keywords: [pagerduty, on call, incident]
+  features: []
 connection:
   api_key:
     title: API Key

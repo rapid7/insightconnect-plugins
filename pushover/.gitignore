@@ -1,0 +1,5 @@
+/*-run
+.idea/
+staging/*
+.CHECKSUM
+tests/test_data

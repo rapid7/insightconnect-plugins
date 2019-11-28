@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Lookup an IP address in Anomali ThreatStream"
+
+
 class Input:
     IP_ADDRESS = "ip_address"
     

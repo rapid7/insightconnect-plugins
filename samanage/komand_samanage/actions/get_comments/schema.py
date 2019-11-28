@@ -3,6 +3,10 @@ import komand
 import json
 
 
+class Component:
+    DESCRIPTION = "Get all comments of an incident"
+
+
 class Input:
     INCIDENT_ID = "incident_id"
     
