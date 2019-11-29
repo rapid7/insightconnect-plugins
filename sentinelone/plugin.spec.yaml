@@ -1913,7 +1913,7 @@ actions:
         required: false
       name:
         title: Name
-        Description: User name
+        description: User name
         type: string
         required: true
       inherits:

@@ -928,12 +928,177 @@ Example output:
 |username|string|False|Username|
 |whiteningOptions|[]string|False|Whitening options|
 
+#### agents_update_system_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|fileName|string|False|None|
+|osType|string|False|None|
+|packageId|string|False|None|
+|path|string|False|None|
+
+#### agents_firewall_rules_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|format|string|False|Desired firewall configuration format. Use native to get configuration file in native format|
+|state|string|False|Desired firewall configuration state. Use initial to get the firewall configuration that existed prior to installing the agent (Note - initial requires native format|
+
+#### agents_fetch_applications_filter
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|accountIds|[]string|False|List of Account IDs to filter by|
+|filterId|string|False|Include all agents matching this saved filter|
+|groupIds|[]string|False|A list of network groups|
+|ids|[]string|False|A list of Agent IDs|
+|isDecommissioned|[]boolean|False|Include active decommissioned or both|
+|isUninstalled|boolean|False|Only include uninstalled agents|
+|query|string|False|A free-text search term, will match applicable attributes (sub-string match). Note - Devices physical addresses will be matched if they start with the search term only (instead of being matched if they contain the term)|
+|siteIds|[]string|False|List of Site IDs to filter by|
+
+#### agents_firewall_logging_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|reportLog|boolean|True|Report blocking activity to log|
+|reportMgmt|boolean|True|Report blocking activity to management|
+
+#### account_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|accountType|string|False|None|
+|activeAgents|integer|False|Total agents in the account|
+|agentsInCompleteSku|integer|False|Number of agents connected to a complete site|
+|agentsInCoreSku|integer|False|Number of agents connected to a core site|
+|completeSites|integer|False|Number of sites in suite Complete|
+|coreSites|string|False|Number of sites in suite Core|
+|createdAt|string|False|Timestamp of account creation|
+|creator|string|False|The user that created the group|
+|creatorId|string|False|The ID of the user that created the group|
+|expiration|string|False|When account should expire, example: 2018-02-27T04:49:26.257525Z|
+|externalId|string|True|ID of CRM external system|
+|id|string|False|Account ID|
+|isDefault|boolean|False|None|
+|name|string|False|None|
+|numberOfSites|integer|False|Total number of sites in this account|
+|skus|string|False|None|
+|state|string|False|None|
+|totalComplete|integer|False|None|
+|totalCore|integer|False|None|
+|unlimitedComplete|boolean|False|None|
+|unlimitedCore|boolean|False|None|
+|unlimitedExpiration|boolean|False|The account does not expire|
+|updatedAt|string|False|Timestamp of last update|
+
+#### account_expire_now_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|accountType|string|False|None|
+|activeAgents|integer|False|Total agents in the account|
+|createdAt|string|False|Timestamp of account creation|
+|creator|string|False|The user that created the group|
+|creatorId|string|False|The ID of the user that created the group|
+|expiration|string|False|When account should expire, example: 2018-02-27T04:49:26.257525Z|
+|externalId|string|True|Id of CRM external system|
+|id|string|True|Account ID|
+|isDefault|boolean|False|None|
+|name|string|False|None|
+|skus|string|False|None|
+|state|string|False|None|
+|unlimitedExpiration|string|False|The account does not expire|
+|updatedAt|string|False|Timestamp of last update|
+
+#### skus
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|totalLicenses|integer|False|Number of licenses for this specific SKU. Applicable only if unlimited is False|
+|type|string|False|The suite of product features active for this account|
+|unlimited|boolean|True|True if this is an unlimited SKU. Total licenses will be ignored if unlimited is True|
+
+#### last_activities_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|activityId|boolean|False|None|
+|syslogMessage|integer|False|None|
+
+#### private_account
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|createAt|string|False|None|
+|id|string|False|None|
+|name|string|False|None|
+|updatedAt|string|False|None|
+
+#### admin_account_user
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|email|string|True|None|
+|fullName|string|True|None|
+|id|string|False|None|
+|password|password|True|None|
+|primaryTwoFaMethod|string|False|None|
+|twoFaEnabled|boolean|False|None|
+
+#### admin_account_response_user
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|email|string|True|None|
+|fullName|string|True|None|
+|id|string|False|None|
+|primaryTwoFaMethod|string|False|None|
+|twoFaEnabled|boolean|False|None|
+
+#### admin_account_response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|accountType|string|False|None|
+|activeAgents|integer|False|Total agents in the account|
+|activeLicenses|integer|False|How much licenses are active|
+|createdAt|string|False|Timestamp of account creation|
+|expiration|string|False|When account should expire, example: 2018-02-27T04:49:26.257525Z|
+|externalId|string|True|ID of CRM external system|
+|id|string|False|Account ID|
+|isDefault|boolean|False|None|
+|name|string|False|None|
+|skus|string|False|None|
+|state|string|False|None|
+|unlimitedExpiration|boolean|False|The account does not expire|
+|updatedAt|string|False|Timestamp of last update|
+|user|admin_account_response_user|True|The data of the admin user been created|
+
+#### update_account_response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|accountType|string|True|None|
+|activeAgents|integer|False|Total agents in the account|
+|creator|string|False|The user that created the group|
+|creatorId|string|False|The ID of the user that created the group|
+|expiration|string|False|When account should expire, example: 2018-02-27T04:49:26.257525Z|
+|externalId|string|False|Id of CRM external system|
+|isDefault|boolean|False|None|
+|name|string|True|None|
+|skus|[]skus|True|The list of allowed SKUs for the account|
+|state|string|False|Account state|
+|unlimitedExpiration|boolean|False|Is expiration unlimited, if not expiration should be supplied|
+|updatedAt|string|False|Timestamp of last update|
+
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.3.0 - New actions agents_update_software,agents_firewall_logging,agents_reject_uninstall,agents_approve_uninstall,agents_start_remote_shell,agents_reset_local_config_policy,agents_fetch_applications,agents_fetch_firewall_rules,agents_terminate_remote_shell,agents_can_start_remote_shell,accounts_by_id,account_expire_now,account_reactivate,account_revert_policy,create_account,get_accounts,private_accounts,create_admin_account,last_activity_as_syslog,update_account
 * 1.2.0 - New spec and help.md format for the Hub | New actions activities_list, activities_types, agents_abort_scan, agents_connect, agents_decommission, agents_disconnect, agents_fetch_logs, agents_initiate, agents_processes, agents_reload, agents_restart, agents_shutdown, agents_summary, agents_uninstall, apps_by_agent_ids, name_available
 * 1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark as Threat and Create IOC Threat
 * 1.0.1 - Update to add Blacklist by IoC Hash and Blacklist by Content Hash

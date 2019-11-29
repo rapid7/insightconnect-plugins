@@ -13,10 +13,10 @@
     },
     "connection": {
       "credentials": {
-        "password": "!!$01Sentinel",
-        "username": "jonathan_schipp@rapid7.com"
+        "password": "",
+        "username": ""
       },
-      "url": "https://usea1-partners.sentinelone.net/"
+      "url": ""
     }
   },
   "type": "action_start",
