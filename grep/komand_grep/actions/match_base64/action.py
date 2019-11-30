@@ -1,8 +1,6 @@
 import komand
-from .schema import MatchBase64Input, MatchBase64Output
+from .schema import MatchBase64Input, MatchBase64Output, Input, Output
 # Custom imports below
-import shutil
-import tempfile
 from bs4 import UnicodeDammit
 import base64
 from komand_grep.util import utils
@@ -18,28 +16,25 @@ class MatchBase64(komand.Action):
                 output=MatchBase64Output())
 
     def run(self, params={}):
+        data = params.get(Input.DATA)
         try:
-            decoded = base64.b64decode(params['data']).decode('utf-8')
+            decoded = base64.b64decode(data).decode('utf-8')
         except Exception as ex:
-            self.logger.debug(ex)
             self.logger.debug("Error decoding")
-            decoded = UnicodeDammit.detwingle(params['data']).decode('utf-8', errors='ignore')
+            self.logger.debug(ex)
+            decoded = UnicodeDammit.detwingle(data).decode('utf-8', errors='ignore')
 
-        path = tempfile.mkdtemp()+"/"
-        fname = "tmp.txt"
-        with open(path+fname,'w') as f:
-            f.write(decoded)
+        output = utils.process_grep(
+            utils.cat_lines(
+                self.logger,
+                decoded,
+                params.get(Input.PATTERN),
+                params.get(Input.BEHAVIOR)
+            )
+        )
 
-        pattern = params.get('pattern')
-        behavior = params.get('behavior')
-        matches = str.splitlines(utils.print_lines(self.logger, path+fname, pattern, behavior, path))
-        if matches:
-            found = True
-            hits = len(matches)
-        else:
-            found = False
-            matches = ""
-            hits = 0
-        shutil.rmtree(path)
-        matches = matches if hits != 0 else []
-        return {'found': found, 'hits': hits, 'matches': matches}
+        return {
+            Output.FOUND: output.get(utils.FOUND),
+            Output.HITS: output.get(utils.HITS),
+            Output.MATCHES: output.get(utils.MATCHES)
+        }

@@ -89,6 +89,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.4 - Remove duplicated code | Remove saving to file when string action | Changed bare strings to Input.* in params.get | Removed unused function
 * 1.0.3 - New spec and help.md format for the Hub
 * 1.0.2 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
