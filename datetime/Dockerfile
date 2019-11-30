@@ -1,4 +1,4 @@
-FROM komand/python-pypy3-plugin:2
+FROM komand/python-3-37-plugin
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin
@@ -12,6 +12,8 @@ ADD . /python/src
 
 WORKDIR /python/src
 # Add any package dependencies here
+
+RUN apt-get update && apt-get install -y gcc && rm -rf /var/lib/apt/lists/*
 
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi

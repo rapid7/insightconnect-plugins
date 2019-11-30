@@ -37,8 +37,8 @@ This action is used to get the current Datetime in a specified format.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|epoch_timestamp|integer|False|None|
-|datetime|string|False|None|
+|epoch_timestamp|integer|False|Datetime|
+|datetime|string|False|Epoch timestamp|
 
 Example output:
 
@@ -211,6 +211,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.6 - Changed const string in params.get to Input.* | Changed Dockerfile image to komand/python-3-37-plugin
 * 2.0.5 - New spec and help.md format for the Hub
 * 2.0.4 - Update plugin tag from `utility` to `utilities` for Marketplace searchability
 * 2.0.3 - Fixed issue where connection test failed

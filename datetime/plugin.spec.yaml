@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: datetime
 title: Datetime
-description: This plugin manipulates timestamps using Python's maya library
+description: This plugin manipulates timestamps using Pythons maya library
 version: 2.0.5
 vendor: rapid7
 support: rapid7

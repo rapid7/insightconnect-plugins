@@ -1,5 +1,5 @@
 import komand
-from .schema import TimeElapsedInput, TimeElapsedOutput
+from .schema import TimeElapsedInput, TimeElapsedOutput, Input, Output
 import maya
 
 
@@ -13,9 +13,9 @@ class TimeElapsed(komand.Action):
                 output=TimeElapsedOutput())
 
     def run(self, params={}):
-        time1 = maya.MayaDT.from_rfc3339(params.get("first_time"))
-        time2 = maya.MayaDT.from_rfc3339(params.get("second_time"))
-        unit = params.get("result_unit")
+        time1 = maya.MayaDT.from_rfc3339(params.get(Input.FIRST_TIME))
+        time2 = maya.MayaDT.from_rfc3339(params.get(Input.SECOND_TIME))
+        unit = params.get(Input.RESULT_UNIT)
         diff = int(maya.MayaInterval(start=time1, end=time2).timedelta.total_seconds())
         if unit == "Minutes":
             diff = int(round(diff / 60))
@@ -29,4 +29,4 @@ class TimeElapsed(komand.Action):
             diff = int(round(diff / 31540000))
         else:
             diff = diff
-        return {"difference": diff, "time_unit": unit}
+        return {Output.DIFFERENCE: diff, Output.TIME_UNIT: unit}
