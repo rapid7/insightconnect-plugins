@@ -1,5 +1,4 @@
-FROM komand/python-3-37-plugin:3
-# Refer to the following documentation for available SDK parent images: https://komand.github.io/python/sdk.html#version
+FROM komand/python-3-37-slim-plugin
 
 LABEL organization=rapid7
 LABEL sdk=python
