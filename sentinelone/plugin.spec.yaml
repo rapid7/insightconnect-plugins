@@ -1745,8 +1745,8 @@ actions:
         type: integer
         required: false
   agents_fetch_firewall_rules:
-    title: Fetch applications
-    description: Fetches full list of installed applications from applicable agents matching the input filter, and replaces existing data in the management console
+    title: Fetch firewall rules
+    description: Sends a fetch firewall rules command to all agents matching the input filter. Note Firewall control feature must be enabled
     input:
       data:
         title: Data

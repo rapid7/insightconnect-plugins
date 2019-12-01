@@ -682,6 +682,486 @@ Example output:
 }
 ```
 
+#### Create account
+
+This action is used to create new account.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|account_type|string|None|True|Account type. Example Trial|['Trial', 'Paid']|
+|expiration|string|None|False|When account should expire, example: 2018-02-27T04:49:26.257525Z|None|
+|external_id|string|None|False|Id of CRM external system|None|
+|inherits|string|None|True|True if the policy is inherited from Tenant, False if the account has its own edited policy|None|
+|name|string|None|True|User name|None|
+|policy|object|None|False|Policy is mandatory if inherits is false, else it will be ignored|None|
+|skus|[]skus|None|True|The list of allowed SKUs for the account|None|
+|unlimited_expiration|boolean|None|False|Is expiration unlimited, if not expiration should be supplied|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Indicates a successful operation|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Expire account
+
+This action is used to expire account now.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|account_id|string|None|True|Account ID. Example 225494730938493804|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|account_expire_now_data|False|Response data|
+
+Example output:
+
+```
+```
+
+#### Reactivate account
+
+This action reactivates an expired account.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|account_id|string|None|True|Account ID. Example 225494730938493804|None|
+|expiration|string|None|False|New expiration date for the account, example: 2018-02-27T04:49:26.257525Z|None|
+|unlimited|boolean|None|True|If false an expiration should be supplied|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Indicates a successful operation|
+
+Example output:
+
+```
+```
+
+### Revert policy
+
+This action reverts the account policy to the tenant policy.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|account_id|string|None|True|Account ID. Example 225494730938493804|None|
+|id|string|None|False|Reverted account ID|None|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Indicates a successful operation|
+
+Example output:
+
+```
+```
+
+#### Get Account
+
+This action is used to get an account by ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|account_id|string|None|True|Account ID. Example 225494730938493804|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|account_data|False|Response data|
+
+Example output:
+
+```
+```
+
+#### Approve uninstall
+
+This action is used to approve uninstall requests for all agents matching the input filter.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+```
+
+#### Can start remote shell
+
+This action is used to check if user can start remote shell for the selected agent.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+```
+
+#### Fetch firewall rules
+
+Sends a fetch firewall rules command to all agents matching the input filter. Note Firewall control feature must be enabled.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|data|agents_firewall_rules_data|None|True|Data instructions for report|None|
+|filter|agents_fetch_applications_filter|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+```
+
+#### Agents Fetch Logs
+
+This action sends a fetch logs command to all agents matching the input filter.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+```
+
+#### Fetch firewall logging
+
+This action sends a firewall logging command to all agents matching the input filter. Note - Firewall control feature must be enabled.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|data|agents_firewall_logging_data|None|True|Data with format informations|None|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+```
+
+#### Reject uninstall
+
+This action is used to reject uninstall requests for all agents matching the input filter.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+```
+
+#### Reset local config to policy
+
+This action is used to reset policy overrides set by SentinelCtl for all agents matching the input filter.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+```
+
+#### Update software
+
+This action is used to send update software command to all agents matching the input filter.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|data|agents_update_system_data|None|True|Data with software informations|None|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+```
+
+#### Get accounts
+
+This action is used to get a list of accounts.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|account_ids|[]string|None|False|List of account IDs to search for. Example 225494730938493804,225494730938493915|None|
+|account_type|string|None|False|Account type. Example Trial|['Trial', 'Paid']|
+|active_licenses|integer|None|False|How much licenses are active|None|
+|count_only|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|
+|created_at|string|None|False|Timestamp of account creation. Example 2018-02-27T04:49:26.257525Z|None|
+|cursor|string|None|False|Cursor position returned by the last request. Should be used for iterating over more than 1000 items. Example YWdlbnRfaWQ6NTgwMjkzODE=|None|
+|expiration|string|None|False|When account should expire, example: 2018-02-27T04:49:26.257525Z|None|
+|features|[]string|None|False|If sent return only accounts that support this features. Example firewall-control|None|
+|ids|[]string|None|False|A list of account IDs. Example 225494730938493804,225494730938493915|None|
+|is_default|boolean|None|False|Filter by default|None|
+|limit|integer|None|False|Limit number of returned items (1-100). Example 10|None|
+|name|string|None|False|Name. Example My Account|None|
+|query|string|None|False|Full text search for fields name. Note on single-account consoles account name will not be matched|None|
+|skip|integer|None|False|Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead. Example 150|None|
+|skip_count|boolean|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|
+|sort_by|string|None|False|The column to sort the results by. Example id|['id', 'name', 'totalLicenses', 'expiration', 'accountType', 'state', 'createdAt', 'updatetAt', 'activeLicenses', 'activeAgents', 'numberOfSites']|
+|sort_order|string|None|False|Sort direction. Example asc|['asc', 'desc']|
+|states|string|None|False|List of states to filter|None|
+|total_licenses|integer|None|False|Filter by total licenses number|None|
+|updated_at|string|None|False|Timestamp of last update. Example 2018-02-27T04:49:26.257525Z|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|[]account_data|False|Response data|
+|pagination|pagination|False|Pagination information|
+
+Example output:
+
+```
+```
+
+#### Last activity as Syslog message
+
+This action is used to get Syslog message corresponding to the last activity matching the given criteria.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|account_ids|[]string|None|False|List of Account IDs to filter by|None|
+|activity_types|[]string|None|False|Return only these activity codes|None|
+|agent_ids|[]string|None|False|Return activities related to specified agent ids|None|
+|count_only|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|
+|created_at_between|string|None|False|Return activities created within this range (inclusive), example 1514978764288-1514978999999|None|
+|created_at_gt|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
+|created_at_gte|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
+|created_at_lt|string|None|False|Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
+|created_at_lte|string|None|False|Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
+|cursor|string|None|False|Cursor position returned by the last request. Should be used for iterating over more than 1000 items, example YWdlbnRfaWQ6NTgwMjkzODE=|None|
+|group_ids|[]string|None|False|Get a list of activities|None|
+|ids|[]string|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|
+|include_hidden|boolean|None|False|Include internal activities hidden from display?|None|
+|limit|integer|None|False|Limit number of returned items (1-100)|None|
+|site_ids|[]string|None|False|List of Site IDs to filter by|None|
+|skip|integer|None|False|Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead|None|
+|skip_count|boolean|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|
+|sort_by|string|None|False|The column to sort the results by|['id', 'activityType', 'createdAt']|
+|sort_order|string|None|False|Sort direction|['asc', 'desc']|
+|threat_ids|[]string|None|False|Return only these activity codes|None|
+|user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|
+|user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|last_activities_data|True|Response data|
+|pagination|pagination|True|Pagination object|
+
+Example output:
+
+```
+```
+
+#### Get private accounts
+
+EPRECATED Get a list of accounts.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|account_ids|string|None|False|List of Account IDs to filter by. Example 225494730938493804,225494730938493915|None|
+|count_only|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|
+|cursor|string|None|False|Cursor position returned by the last request. Should be used for iterating over more than 1000 items. Example YWdlbnRfaWQ6NTgwMjkzODE=|None|
+|ids|string|None|False|A list of account IDs. Example 225494730938493804,225494730938493915|None|
+|limit|integer|None|False|Limit number of returned items (1-100). Example 10|None|
+|query|string|None|False|Filtered query|None|
+|site_ids|string|None|False|List of Site IDs to filter by. Example 225494730938493804,225494730938493915|None|
+|skip|integer|None|False|Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead. Example 150|None|
+|skip_count|boolean|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|
+|sort_by|string|None|False|The column to sort the results by. Example id|['id', 'name']|
+|sort_order|string|None|False|Sort direction. Example asc|['asc', 'desc']|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|[]private_account|False|Response data|
+|pagination|pagination|False|Pagination information|
+
+Example output:
+
+```
+```
+
+#### Update account
+
+This action is used to update accounts data.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|account_id|string|None|True|Updated account ID, Example 225494730938493804|None|
+|account_type|string|None|True|Account type. Example Trial|['Trial', 'Paid']|
+|expiration|string|None|False|When account should expire, example: 2018-02-27T04:49:26.257525Z|None|
+|external_id|string|None|False|Id of CRM external system|None|
+|inherits|string|None|True|True if the policy is inherited from Tenant, False if the account has its own edited policy|None|
+|name|string|None|True|User name|None|
+|policy|object|None|False|Policy is mandatory if inherits is false, else it will be ignored|None|
+|skus|[]skus|None|True|The list of allowed SKUs for the account|None|
+|unlimited_expiration|boolean|None|False|Is expiration unlimited, if not expiration should be supplied|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|update_account_response|True|Response data|
+
+Example output:
+
+```
+```
+
+#### Start remote shell
+
+This action is used to start a remote shell if the 2FA code is valid the history password will be used to compress the shell history and rows/columns to configure the remote shell to the size UI is using.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|columns|integer|None|True|Number of columns of the console shell|None|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+|history_password|string|None|True|Password to zip the shell history file at end of session|None|
+|rows|integer|None|True|Number of rows of the console shell|None|
+|two_fa_code|string|None|True|The 2FA code to authenticate the user|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+```
+
+#### Fetch applications
+
+This action fetches full list of installed applications from applicable agents matching the input filter, and replaces existing data in the management console.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|filter|agents_fetch_applications_filter|None|True|Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+```
+
 ### Triggers
 
 #### Get Threats
