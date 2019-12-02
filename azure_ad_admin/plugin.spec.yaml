@@ -233,7 +233,7 @@ types:
       type: string
       required: false
     detection_timing_type:
-      title: Risk Level
+      title: Detection Timimg Type
       description: Timing of the detected risk (real-time/offline). The possible values are notDefined, realtime, nearRealtime, offline, unknownFutureValue
       type: string
       required: false
@@ -243,8 +243,8 @@ types:
       type: string
       required: false
     token_issuer_type:
-      title: Activity
-      description: Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue
+      title: Token Issuer Type
+      description: Indicates the type of token issuer for the detected sign-in risk. The possible values are AzureAD, ADFederationServices, and unknownFutureValue
       type: string
       required: false
     ip_address:

@@ -133,7 +133,7 @@ class RiskDetectionOutput(komand.Output):
         },
         "detection_timing_type": {
           "type": "string",
-          "title": "Risk Level",
+          "title": "Detection Timimg Type",
           "description": "Timing of the detected risk (real-time/offline). The possible values are notDefined, realtime, nearRealtime, offline, unknownFutureValue",
           "order": 9
         },
@@ -199,8 +199,8 @@ class RiskDetectionOutput(komand.Output):
         },
         "token_issuer_type": {
           "type": "string",
-          "title": "Activity",
-          "description": "Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue",
+          "title": "Token Issuer Type",
+          "description": "Indicates the type of token issuer for the detected sign-in risk. The possible values are AzureAD, ADFederationServices, and unknownFutureValue",
           "order": 11
         },
         "user_display_name": {
