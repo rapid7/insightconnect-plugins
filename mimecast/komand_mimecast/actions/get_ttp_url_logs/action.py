@@ -47,8 +47,8 @@ class GetTtpUrlLogs(komand.Action):
             if url_to_filter:
                 output = list()
                 for log in response['data'][0]['clickLogs']:
-                    if re.search(r'{}'.format(url_to_filter), log):
-                        output = output.append(log)
+                    if re.search(r'{}'.format(url_to_filter), log['url']):
+                        output.append(log)
             else:
                 output = response['data'][0]['clickLogs']
         except (KeyError, IndexError):

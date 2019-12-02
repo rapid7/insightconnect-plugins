@@ -3,11 +3,11 @@
     "action": "get_ttp_url_logs",
     "meta": {},
     "input": {
-      "from": "",
+      "from": "2015-11-16T14:49:18+0000",
       "route": "all",
       "scan_result": "all",
       "to": "",
-      "url_to_filter": ""
+      "url_to_filter": "dum"
     },
     "connection": {
       "access_key": {
@@ -20,7 +20,7 @@
       "secret_key": {
         "secretKey": ""
       },
-      "url": ""
+      "url": "https://sandbox-api.mimecast.com"
     }
   },
   "type": "action_start",
