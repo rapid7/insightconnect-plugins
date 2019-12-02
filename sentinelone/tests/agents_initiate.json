@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "agents_initiate",
+    "meta": {},
+    "input": {
+      "filter": {}
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

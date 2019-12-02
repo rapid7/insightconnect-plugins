@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "activities_list",
+    "meta": {},
+    "input": {
+      "limit": 5,
+      "site_ids": [
+        ""
+      ]
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
