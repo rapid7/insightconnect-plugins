@@ -3,6 +3,7 @@ from .schema import GetTtpUrlLogsInput, GetTtpUrlLogsOutput, Input, Output, Comp
 # Custom imports below
 from komand_mimecast.util import util
 from komand.exceptions import PluginException
+import re
 
 
 class GetTtpUrlLogs(komand.Action):
@@ -44,7 +45,10 @@ class GetTtpUrlLogs(komand.Action):
 
         try:
             if url_to_filter:
-                output = list(filter(lambda x: (x['url'] == url_to_filter), response['data'][0]['clickLogs']))
+                output = list()
+                for log in response['data'][0]['clickLogs']:
+                    if re.search(r'{}'.format(url_to_filter), log):
+                        output = output.append(log)
             else:
                 output = response['data'][0]['clickLogs']
         except (KeyError, IndexError):
