@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
+version: 1.2.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
-version: 1.1.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -21,6 +21,170 @@ hub_tags:
   keywords: [sentinelone, endpoint, detection]
   features: []
 types:
+  activities_types:
+    id:
+      title: Type ID
+      description: Activity type ID
+      type: float
+      required: false
+    descriptionTemplate:
+      title: Description Template
+      description: Activity description template as seen in activity page
+      type: string
+      required: false
+    action:
+      title: Action
+      description: Action descripted in the activity
+      type: string
+      required: false
+  activities_list:
+    comments:
+      title: Comments
+      type: string
+      description: Comments
+      required: false
+    userId:
+      title: UserId
+      type: string
+      description: The user who invoked the activity (If applicable)
+      required: false
+    accountId:
+      title: Account ID
+      type: string
+      description: Related account (If applicable)
+      required: false
+    createdAt:
+      title: Created At
+      type: string
+      description: Activity creation time (UTC)
+      required: false
+    data:
+      title: Data
+      type: object
+      description: Extra activity specific data
+      required: false
+    agentUpdatedVersion:
+      title: Agent Updated Version
+      type: string
+      description: Agent's new version (If applicable)
+      required: false
+    siteId:
+      title: Site ID
+      type: string
+      description: Related site (If applicable)
+      required: false
+    id:
+      title: ID
+      type: string
+      description: Activity ID
+      required: false
+    updatedAt:
+      title: Updated At
+      type: string
+      description: Activity last updated time (UTC)
+      required: false
+    description:
+      title: Description
+      type: string
+      description: Extra activity information
+      required: false
+    primaryDescription:
+      title: Primary Description
+      type: string
+      description: Primary description
+      required: false
+    agentId:
+      title: Agent ID
+      type: string
+      description: Related agent (If applicable)
+      required: false
+    hash:
+      title: Hash
+      type: string
+      description: Threat file hash (If applicable)
+      required: false
+    activityType:
+      title: Activity Type
+      type: integer
+      description: Activity type
+      required: false
+    osFamily:
+      title: OS Family
+      type: string
+      description: Agent's OS type (if applicable)
+      required: false
+    threatId:
+      title: Threat ID
+      type: string
+      description: Related threat (If applicable)
+      required: false
+    groupId:
+      title: Group ID
+      type: string
+      description: Related group (If applicable)
+      required: false
+    secondaryDescription:
+      title: Secondary Description
+      type: string
+      description: Secondary description
+      required: false
+  agent_applications:
+    installedDate:
+      title: Installed Date
+      description: Date when application installed
+      type: string
+      required: false
+    version:
+      title: Version
+      description: Version of installed application
+      type: string
+      required: false
+    publisher:
+      title: Publisher
+      description: Publisher of installed application
+      type: string
+      required: false
+    size:
+      title: Size
+      description: Size of installed application
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name of installed application
+      type: string
+      required: false
+  agents_processes:
+    startTime:
+      title: Start time
+      description: Start time
+      type: string
+      required: false
+    processName:
+      title: Process name
+      description: Process name
+      type: string
+      required: false
+    memoryUsage:
+      title: Memory usage
+      description: Memory usage (MB)
+      type: integer
+      required: false
+    cpuUsage:
+      title: CPU Usage
+      description: CPU Usage (%)
+      type: integer
+      required: false
+    executablePath:
+      title: Executable path
+      description: Executable path
+      type: string
+      required: false
+    pid:
+      title: PID
+      description: Process ID
+      type: integer
+      required: false
   blacklist_data:
     affected:
       title: Affected
@@ -555,6 +719,398 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+  activities_list:
+    title: Get Activities
+    description: Get a list of activities
+    input:
+      group_ids:
+        title: Group IDS
+        description: Get a list of activities
+        type: '[]string'
+        required: false
+      include_hidden:
+        title: Include Hidden
+        description: Include internal activities hidden from display?
+        type: boolean
+        required: false
+      skip:
+        title: Skip First N Items
+        description: Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead
+        type: integer
+        required: false
+      site_ids:
+        title: Site IDS
+        description: List of Site IDs to filter by
+        type: '[]string'
+        required: false
+      agent_ids:
+        title: Agent IDS
+        description: Return activities related to specified agent ids
+        type: '[]string'
+        required: false
+      skip_count:
+        title: Skip Count
+        description: If true, total number of items will not be calculated, which speeds up execution time
+        type: boolean
+        required: false
+      ids:
+        title: Activity IDS
+        description: If true, total number of items will not be calculated, which speeds up execution time
+        type: '[]string'
+        required: false
+      created_at_lt:
+        title: Less Then Date
+        description: Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        type: string
+        required: false
+      created_at_lte:
+        title: Less Or Equal Date
+        description: Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        type: string
+        required: false
+      created_at_gt:
+        title: Greater Then Date
+        description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        type: string
+        required: false
+      created_at_gte:
+        title: Greater Or Equal Date
+        description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        type: string
+        required: false
+      created_at_between:
+        title: Between Dates
+        description: Return activities created within this range (inclusive), example 1514978764288-1514978999999
+        type: string
+        required: false
+      cursor:
+        title: Cursor Position
+        description: Cursor position returned by the last request. Should be used for iterating over more than 1000 items, example YWdlbnRfaWQ6NTgwMjkzODE=
+        type: string
+        required: false
+      count_only:
+        title: Count Only
+        description: If true, only total number of items will be returned, without any of the actual objects
+        type: boolean
+        required: false
+      account_ids:
+        title: Account IDS
+        description: List of Account IDs to filter by
+        type: '[]string'
+        required: false
+      limit:
+        title: Limit
+        description: Limit number of returned items (1-100)
+        type: integer
+        required: false
+      sort_by:
+        title: Sort By
+        description: The column to sort the results by
+        type: string
+        required: false
+        enum:
+          - id
+          - activityType
+          - createdAt
+      activity_types:
+        title: Activity Types
+        description: Return only these activity codes
+        type: '[]string'
+        required: false
+      threat_ids:
+        title: Threat IDS
+        description: Return only these activity codes
+        type: '[]string'
+        required: false
+      sort_order:
+        title: Sort Order
+        description: Sort direction
+        type: string
+        enum:
+          - asc
+          - desc
+        required: false
+      user_emails:
+        title: User Emails
+        description: Email of the user who invoked the activity (If applicable)
+        type: '[]string'
+        required: false
+      user_ids:
+        title: User IDS
+        description: The user who invoked the activity (If applicable)
+        type: '[]string'
+        required: false
+    output:
+      data:
+        title: Data
+        description: Result of activities list
+        type: '[]activities_list'
+        required: true
+      pagination:
+        title: Pagination
+        description: Pagination object
+        type: pagination
+        required: true
+  activities_types:
+    title: Get Activity Types
+    description: Get a list of activity types
+    output:
+      activity_types:
+        title: Activity Types
+        description: Result of activities types
+        type: '[]activities_types'
+        required: true
+  apps_by_agent_ids:
+    title: Agents Applications
+    description: Retrieve running applications for a specific agent
+    input:
+      ids:
+        title: Agent IDS
+        description: Agent ID list
+        type: '[]string'
+        required: true
+    output:
+      data:
+        title: Agent Applications
+        description: List of installed applications
+        type: '[]agent_applications'
+        required: true
+  agents_summary:
+    title: Count Summary
+    description: Summary of agents by numbers
+    input:
+      site_ids:
+        title: Site IDS
+        description: List of Site IDs to filter by
+        type: '[]string'
+        required: false
+      account_ids:
+        title: Account IDS
+        description: List of Account IDs to filter by
+        type: '[]string'
+        required: false
+    output:
+      up_to_date:
+        title: Up To Date Number
+        description: Number of agents with the most up-to-date software version
+        type: integer
+        required: false
+      out_of_date:
+        title: Out of Date Number
+        description: Number of agents running an older software version
+        type: integer
+        required: false
+      total:
+        title: Total
+        description: Number of installed active agents
+        type: integer
+        required: false
+      online:
+        title: Online
+        description: Number of online agents
+        type: integer
+        required: false
+      decommissioned:
+        title: Decommissioned
+        description: Number of decommissioned agents
+        type: integer
+        required: false
+      infected:
+        title: Infected
+        description: Number of agents with at least one active threat
+        type: integer
+        required: false
+  name_available:
+    title: Available Name
+    description: Is the account name available for this account
+    input:
+      name:
+        title: Name
+        description: Account Name to validate
+        type: string
+        required: true
+    output:
+      available:
+        title: Available
+        description: Account Name to validate
+        type: boolean
+        required: true
+  agents_decommission:
+    title: Agent Decommission
+    description: Decommissions all agents matching the input filter
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_disconnect:
+    title: Disconnect Agents
+    description: Disconnects agents associated to marked threats from network
+    input:
+      filter:
+        title: Filter JSON
+        description: Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_processes:
+    title: Agents Processes
+    description: Retrieve running processes for a specific agent
+    input:
+      ids:
+        title: IDS
+        description: Agent ID list
+        type: '[]string'
+        required: true
+    output:
+      agents_processes:
+        title: Agents Processes
+        description: Agents processes entities
+        type: '[]agents_processes'
+        required: false
+  agents_initiate:
+    title: Initiate scan
+    description: Sends a scan command to all agents matching the input filter
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_uninstall:
+    title: Uninstall
+    description: Sends an uninstall command to all agents matching the input filter
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_shutdown:
+    title: Agents Shutdown
+    description: Sends a shutdown command to all agents matching the input filter
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_restart:
+    title: Agents Restart
+    description: Sends a restart command to all agents matching the input filter
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_reload:
+    title: Agents Reload
+    description: Reload an agent module (applies to Windows agents only)
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+      module:
+        title: Data Module
+        description: Agent module to reload
+        type: string
+        required: true
+        enum:
+          - monitor
+          - static
+          - agent
+          - log
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_fetch_logs:
+    title: Agents Fetch Logs
+    description: Sends a fetch logs command to all agents matching the input filter
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_abort_scan:
+    title: Agents Abort Scan
+    description: Aborts running scan on all agents matching the input filter
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  agents_connect:
+    title: Connect to network
+    description: Sends a connect to network command to all agents matching the input filter
+    input:
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+
 triggers:
   get_threats:
     title: Get Threats

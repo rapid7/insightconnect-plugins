@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "name_available",
+    "meta": {},
+    "input": {
+      "name": "name"
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
