@@ -28,7 +28,7 @@ class RiskDetection(komand.Trigger):
         except KeyError:
             raise PluginException(cause='Unexpected output format.',
                                   assistance='The output from Azure Active Directory was not in the expected format. Please contact support for help.',
-                                  data=result)
+                                  data=new_risks)
 
         for risk in result:
             self.found[risk.get('id')] = True
