@@ -758,7 +758,7 @@ actions:
         - worldpay
       payment_was_authorized:
         title: Payment Was Authorized
-        description: 'Payment authroized: true/false'
+        description: 'Payment authorized: true/false'
         type: boolean
         required: false
       payment_decline_code:
@@ -1191,7 +1191,7 @@ actions:
         - worldpay
       payment_was_authorized:
         title: Payment Was Authorized
-        description: 'Payment authroized: true/false'
+        description: 'Payment authorized: true/false'
         type: boolean
         required: false
       payment_decline_code:
