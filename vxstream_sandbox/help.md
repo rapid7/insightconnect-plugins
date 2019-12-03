@@ -5,7 +5,7 @@ that includes the unique Hybrid Analysis technology. Our plugin connects to your
 
 # Key Features
 
-* Search by file Hash
+* Search by file hash
 * Submit file for analysis
 * Get file analysis report details
 
