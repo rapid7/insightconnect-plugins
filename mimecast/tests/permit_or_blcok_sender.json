@@ -15,7 +15,7 @@
         },
         "input": {
             "action": "block",
-            "sender": "test@example.com",
+            "sender": "",
             "to": ""
         },
         "meta": {}
