@@ -1,16 +1,1 @@
-{
-  "body": {
-    "action": "get_ttp_url_logs",
-    "meta": {},
-    "input": {
-      "from": "2015-11-16T14:49:18+0000",
-      "route": "all",
-      "scan_result": "all",
-      "to": "",
-      "url_to_filter": "dum"
-    },
 
-  },
-  "type": "action_start",
-  "version": "v1"
-}
