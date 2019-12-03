@@ -11,7 +11,7 @@ The project was born as a fork of OSSEC HIDS. This plugin utilizes the [Wazuh AP
 # Requirements
 
 * An administrative username and password
-* The URL of your Wazuah deployment
+* The URL of your Wazuh deployment
 
 # Documentation
 
@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|Wazuh API URL e.g. https\://127.0.0.1\:55000|None|
+|url|string|None|True|Wazuh API URL e.g. https://127.0.0.1:55000|None|
 |username|string|None|True|Wazuh API Username|None|
 |password|string|None|True|Wazuh API Password|None|
 
@@ -172,7 +172,7 @@ This action is used to returns OSSEC statistical information of current date.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|date|string|None|False|Selects the date for getting the statistical information. Format\: YYYYMMDD|None|
+|date|string|None|False|Selects the date for getting the statistical information. Format: YYYYMMDD|None|
 
 ##### Output
 
