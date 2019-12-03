@@ -144,7 +144,7 @@ Example output:
   "response": [
     {
       "id": "MTOKEN:eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ",
-      "sender": "example@example.com",
+      "sender": "user@example.com",
       "to": "user@example.com",
       "type": "Block"
     }
@@ -238,7 +238,7 @@ Example output:
 {
   "id": "eNqrVipOTS4tSs1MUbJSctdOd43RNy3K9klKdA038M4xq8otcfIMqTQods2MNIrR99NOD_IsCyovdEt11A4pSQvKyPL2SS4orgjOTy01jdEvzlbSUUouLS7Jz00tSs5PSQUa6hzs52LoaG5pagKUK0stKs7Mz1OyMtRRSsvPSUktysnMywZZbmxgYmFRCwBatS7G",
   "folder_id": "eNoVzrkOgkAUQNF_eTWFIIjQEdk0OEaUgCUyD8HMojNiROO_i_3Nyf2AxmZQ2FPwgUgRxWbnzZOxKwsyiCjP-BnTe7jYxA5Pq1xsmRhJ4Sbv9SU4zfgrq8vjdSdbO3eDPRjAaH0Dv62ZRgOaQT8kR9VIihO_OpDQDFzPsafwiUr3UoBvGtBKRlH9F-ylZXnfH3hjMBs",
-  "email_address": "test10@example.com",
+  "email_address": "user@example.com",
   "internal": true
 }
 ```
@@ -335,7 +335,7 @@ Example output:
 {
   [
     {
-       "userEmailAddress": "mimecast_dhamilton@example.com",
+       "userEmailAddress": "user@example.com",
        "url": "https://www.dummy-mimecast-blacklist.com",
        "ttpDefinition": "Default URL Protection Definition",
        "action": "warn",
