@@ -264,7 +264,7 @@ This action is used to move a github issue between ZenHub pipelines.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|position|integer|None|False|New Position in the ZenHub Pipeline (-1\: bottom, 0\: top, n\: nth index)|None|
+|position|integer|None|False|New Position in the ZenHub Pipeline (-1: bottom, 0: top, n: nth index)|None|
 |repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
 |issue_number|integer|None|False|GitHub Issue Number|None|
 |pipeline_id|string|None|False|ZenHub Pipeline ID|None|
