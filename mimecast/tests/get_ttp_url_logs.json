@@ -11,16 +11,16 @@
     },
     "connection": {
       "access_key": {
-        "secretKey": ""
+        "secretKey": null
       },
       "app_id": "",
       "app_key": {
-        "secretKey": ""
+        "secretKey": null
       },
       "secret_key": {
-        "secretKey": ""
+        "secretKey": null
       },
-      "url": "https://sandbox-api.mimecast.com"
+      "url": null
     }
   },
   "type": "action_start",
