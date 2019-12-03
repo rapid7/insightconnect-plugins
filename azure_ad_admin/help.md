@@ -49,7 +49,7 @@ This action is used to create a user with a randomly generated password and send
 |notify_email_body|string|None|False|Body of the email to be sent out. Use $password to place the generated password|None|
 |notify_from|string|None|True|User from which email notifcation will be sent|None|
 |notify_recipient|string|None|True|Email address of the account to be notified of user creation|None|
-|user_principal_name|string|None|True|The user principal name e.g. someuser@contoso.com|None|
+|user_principal_name|string|None|True|The user principal name e.g. user@example.com|None|
 
 ##### Output
 
@@ -73,7 +73,7 @@ This action is used to disable a user account. This action will not disable an a
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID to disable e.g. bob@hotmail.com|None|
+|user_id|string|None|True|User ID to disable e.g. user@example.com|None|
 
 ##### Output
 
@@ -97,7 +97,7 @@ This action is used to enable a user account.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID to enable e.g. bob@hotmail.com|None|
+|user_id|string|None|True|User ID to enable e.g. user@example.com|None|
 
 ##### Output
 
@@ -145,7 +145,7 @@ This action is used to get user information.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID e.g. bob@hotmail.com|None|
+|user_id|string|None|True|User ID e.g. user@example.com|None|
 
 ##### Output
 
@@ -168,7 +168,7 @@ Example output:
     "officeLocation": "",
     "preferredLanguage": "",
     "surname": "McAdams",
-    "userPrincipalName": "bob@hotmail.com",
+    "userPrincipalName": "user@example.com",
     "id": "08290005-23ba-46b4-a377-b381d651a2fb",
     "accountEnabled": true
   }
@@ -207,7 +207,7 @@ Example output:
       "Unified"
     ],
     "isAssignableToRole": false,
-    "mail": "AzureADTestGroup@komanddev.onmicrosoft.com",
+    "mail": "user@example.com",
     "mailEnabled": true,
     "mailNickname": "AzureADTestGroup",
     "onPremisesLastSyncDateTime": null,
@@ -216,7 +216,7 @@ Example output:
     "preferredDataLocation": null,
     "proxyAddresses": [
       "SPO:SPO_618d645a-541b-4349-a7c0-3bb73eedd701@SPO_5c824599-dc8c-4d31-96fb-3b886d4f8f10",
-      "SMTP:AzureADTestGroup@komanddev.onmicrosoft.com"
+      "SMTP:user@example.com"
     ],
     "renewedDateTime": "2019-09-20T12:15:21Z",
     "resourceBehaviorOptions": [],
@@ -237,7 +237,7 @@ This action is used to add a user to a group.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group_name|string|None|True|Group Name e.g. My Azure Group|None|
-|user_id|string|None|True|User ID e.g. bob@hotmail.com|None|
+|user_id|string|None|True|User ID e.g. user@example.com|None|
 
 ##### Output
 
@@ -262,7 +262,7 @@ This action is used to remove a user from a group.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group_name|string|None|True|Group Name e.g. My Azure Group|None|
-|user_id|string|None|True|User ID e.g. bob@hotmail.com|None|
+|user_id|string|None|True|User ID e.g. user@example.com|None|
 
 ##### Output
 
@@ -280,11 +280,142 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### Risk Detection
+
+This trigger provides a list of both user and sign-in linked risk detections and associated information about the detection.
+
+#### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|frequency|integer|60|False|Poll frequency in seconds|None|
+|risk_level|string|None|True|Risk level|['low', 'medium', 'high', 'hidden', 'none', 'all']|
+
+#### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|risk|risk|True|Risk|
+
+Example output:
+
+```
+{
+  "risk":
+    {
+      "id": "04da6f53cd292d990314fd05b2ba6cc06b3acc3a2eb85bf2fe6d48f2edbec301",
+      "requestId": "04c82f8e-f0c0-4971-a546-c18125fa3300",
+      "correlationId": "0977e5da-93a4-4e97-b1a2-bb03b8007e93",
+      "riskType": "unfamiliarFeatures",
+      "riskState": "atRisk",
+      "riskLevel": "low",
+      "riskDetail": "none",
+      "source": "IdentityProtection",
+      "detectionTimingType": "realtime",
+      "activity": "signin",
+      "tokenIssuerType": "AzureAD",
+      "ipAddress": "66.207.205.214",
+      "activityDateTime": "2019-11-25T14:09:08.6953666Z",
+      "detectedDateTime": "2019-11-25T14:09:08.6953666Z",
+      "lastUpdatedDateTime": "2019-11-25T14:12:04.5431877Z",
+      "userId": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+      "userDisplayName": "User Name",
+      "userPrincipalName": "user@domain",
+      "additionalInfo": "[{\"Key\":\"userAgent\",\"Value\":\"python-requests/2.22.0\"}]",
+      "location":
+        {
+          "city": "Toronto",
+          "state": "Ontario",
+          "countryOrRegion": "CA",
+          "geoCoordinates":
+            {
+              "latitude": 43.63831,
+              "longitude": -79.42555
+            }
+        }
+    }
+}
+```
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+### user_information
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|@odata.context|string|False|@odata.context|
+|accountEnabled|boolean|False|Account enabled|
+|businessPhones|[]string|False|Business phones|
+|displayName|string|False|Display name|
+|givenName|string|False|Given Name|
+|id|string|False|ID|
+|jobTitle|string|False|Job title|
+|mail|string|False|Mail|
+|mobilePhone|string|False|Mobile phone|
+|officeLocation|string|False|Office location|
+|preferredLanguage|string|False|Preferred language|
+|surname|string|False|Surname|
+|userPrincipalName|string|False|User principal name|
+
+### group
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|createdDateTime|string|False|Created date time|
+|description|string|False|Description|
+|displayName|string|False|Display name|
+|groupTypes|[]string|False|Group types|
+|id|string|False|ID|
+|isAssignableToRole|boolean|False|Is assignable to role|
+|mail|string|False|Mail|
+|mailEnabled|boolean|False|Mail enabled|
+|mailNickname|string|False|Mail nickname|
+|proxyAddresses|[]string|False|Proxy addresses|
+|renewedDateTime|string|False|Renewed date time|
+|securityEnabled|boolean|False|Security enabled|
+|visibility|string|False|Visibility|
+
+### geo_coordinates
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|altitude|string|False|The altitude (height), in feet, above sea level|
+|latitude|string|False|The latitude, in decimal|
+|longitude|string|False|The longitude, in decimal|
+
+### sign_in_location
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|city|string|False|City where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|
+|country_or_region|string|False|Country code info (2 letter code) where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|
+|geo_coordinates|geo_coordinates|False|Geo coordinates|
+|state|string|False|State where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|
+
+### risk
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|activity|string|False|Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue|
+|activity_date_time|string|False|Date and time that the risky activity occurred|
+|additional_info|string|False|Additional information associated with the risk detection|
+|correlation_id|string|False|Correlation ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in|
+|detected_date_time|string|False|Date and time that the risk was detected|
+|detection_timing_type|string|False|Timing of the detected risk (real-time/offline). The possible values are notDefined, realtime, nearRealtime, offline, unknownFutureValue|
+|id|string|True|Unique ID of the risk detection|
+|ip_address|string|False|IP address of the client from where the risk occurred|
+|last_updated_date_time|string|False|Date and time that the risk detection was last updated|
+|location|sign_in_location|False|Location of the client from where the risk occurred|
+|request_id|string|False|Request ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in|
+|risk_detail|string|False|Details of the detected risk. Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden|
+|risk_level|string|False|Level of the detected risk|
+|risk_state|string|False|The state of a detected risky user or sign-in|
+|risk_type|string|False|The type of risk event detected|
+|source|string|False|Source of the risk detection. For example, activeDirectory|
+|token_issuer_type|string|False|Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue|
+|user_display_name|string|False|User display name|
+|user_id|string|False|User ID|
+|user_principal_name|string|False|The user principal name (UPN) of the user|
 
 ## Troubleshooting
 
@@ -292,6 +423,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.4.0 - New trigger Risk Detection
 * 1.3.1 - New spec and help.md format for the Hub
 * 1.3.0 - New action Create User
 * 1.2.0 - New actions Get Group by Name, Add User to Group, and Remove User from Group
@@ -305,4 +437,3 @@ _This plugin does not contain any troubleshooting information._
 * [Azure AD Admin](https://azure.microsoft.com)
 * [User API](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0)
 * [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)
-
