@@ -35,7 +35,7 @@ This action is used to create a new Sentry event.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|dsn|string|None|True|DSN configuration of a Sentry project (e.g. 'https\://public\:secret@sentry.example.com/1')|None|
+|dsn|string|None|True|DSN configuration of a Sentry project (e.g. 'https://public:secret@sentry.example.com/1')|None|
 |sentry_version|integer|7|False|The protocol version. The current version of the protocol is '7'|None|
 |event_json|EventJSON|None|True|Data describing the event|None|
 
@@ -64,7 +64,7 @@ This action is used to return a list of issues (groups) bound to a project.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |organization_slug|string|None|True|The slug of the organization the issues belong to|None|
-|query|string|None|False|An optional Sentry structured search query. If not provided an implied 'is\:unresolved; is assumed|None|
+|query|string|None|False|An optional Sentry structured search query. If not provided an implied 'is:unresolved; is assumed|None|
 |statsPeriod|string||False|An optional stat period (can be one of '24h', '14d', and '')|['24h', '14d', '']|
 |shortIdLookup|boolean|None|False|If this is set to true then short IDs are looked up by this function as well. This can cause the return value of the function to return an event issue of a different project which is why this is an opt-in. Set to 1 to enable|None|
 |project_slug|string|None|True|The slug of the project the issues belong to|None|

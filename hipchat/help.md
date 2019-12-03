@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|host|string|https\://hipchat.com/|True|HipChat API Server|None|
+|host|string|https://hipchat.com/|True|HipChat API Server|None|
 |version|string|v2|True|API Version|None|
 |user|string|None|False|User Account|None|
 |token|string|None|False|API Token|None|
@@ -43,7 +43,7 @@ This action is used to send a message to a room.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|message|string|None|True|The message post to room. Valid length range\: 1 - 1000|None|
+|message|string|None|True|The message post to room. Valid length range: 1 - 1000|None|
 |room_id_or_name|string|None|True|The id or url encoded name of the room|None|
 
 ##### Output
@@ -77,7 +77,7 @@ This action is used to create a new user.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|name|string|None|True|User's full name. Valid length range\: 1 - 50|None|
+|name|string|None|True|User's full name. Valid length range: 1 - 50|None|
 |roles|[]string|None|False|The list of roles for the user|None|
 |title|string|None|False|Title of user|None|
 |mention_name|string|None|False|User's @mention name|None|
@@ -102,7 +102,7 @@ This action an be used to update a user.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|name|string|None|True|User's full name. Valid length range\: 1 - 50|None|
+|name|string|None|True|User's full name. Valid length range: 1 - 50|None|
 |roles|[]string|None|False|The list of roles for the user|None|
 |id_or_email|string|None|True|The id, email address, or mention name (beginning with an '@') of the user to update|None|
 |presence|object|None|False|Presence information for the user include fields (status, show) with data type is string|None|
@@ -129,7 +129,7 @@ This trigger is used to monitor for latest chat message.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|max-results|integer|75|False|The maximum number of messages to return. Valid length range\: 0 - 1000|None|
+|max-results|integer|75|False|The maximum number of messages to return. Valid length range: 0 - 1000|None|
 |timezone|string|UTC|False|Your timezone. Must be a supported timezone name|None|
 |include_deleted|boolean|True|False|Include records about deleted messages into results (body of a message isn't returned). Set to 'true'|None|
 |room_id_or_name|string|None|True|Room id or name|None|

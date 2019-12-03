@@ -27,7 +27,7 @@ throughout this documentation in place of real base64-encoded data.
 The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|http\://localhost\:8090/api|True|Cuckoo Sandbox API URL|None|
+|url|string|http://localhost:8090/api|True|Cuckoo Sandbox API URL|None|
 
 ## Technical Details
 
@@ -363,7 +363,7 @@ This action is used to return the report associated with the specified task ID.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |task_id|integer|None|True|None|None|
-|format|string|None|False|One of [json/html/all/dropped/package_files]. Details on formats here\: http\://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report|None|
+|format|string|None|False|One of [json/html/all/dropped/package_files]. Details on formats here: http://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report|None|
 
 ##### Output
 
@@ -509,7 +509,7 @@ This action is used to add one or more files and/or files embedded in archives t
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|files|[]file|None|True|List of files of the format\: {'filename'\: 'blah.exe', 'contents'\: 'YmFzZTY0Cg=='}|None|
+|files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': 'YmFzZTY0Cg=='}|None|
 
 ##### Output
 

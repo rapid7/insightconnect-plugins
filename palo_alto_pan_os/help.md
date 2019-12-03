@@ -254,12 +254,12 @@ This action is used to query firewall logs.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|count|integer|20|False|Number of logs (nlogs) to retrieve (Max 500), (Default\: 20)|None|
+|count|integer|20|False|Number of logs (nlogs) to retrieve (Max 500), (Default: 20)|None|
 |filter|string|None|False|Search query. Format as a log filter expression|None|
 |direction|string|None|False|Order in which to return the logs|['backward', 'forward']|
-|max_tries|integer|25|False|Maximum number of times to poll for job completion before timing out (Default\: 25)|None|
-|skip|integer|0|False|Log retrieval offset, number of entries to skip (Default\: 0)|None|
-|interval|float|0.5|False|Time interval in seconds to wait between queries for commit job completion (Default\: 0.5)|None|
+|max_tries|integer|25|False|Maximum number of times to poll for job completion before timing out (Default: 25)|None|
+|skip|integer|0|False|Log retrieval offset, number of entries to skip (Default: 0)|None|
+|interval|float|0.5|False|Time interval in seconds to wait between queries for commit job completion (Default: 0.5)|None|
 |log-type|string|None|False|Type of log to retrieve|['config', 'hipmatch', 'system', 'threat', 'traffic', 'url', 'wildfire']|
 
 ##### Output
@@ -487,11 +487,11 @@ This action is used to add an external dynamic list.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|source|string|None|True|The web site you will pull the list from e.g. http\://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt|None|
+|source|string|None|True|The web site you will pull the list from e.g. http://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt|None|
 |repeat|string|None|True|The interval at which to retrieve updates from the list|['Five Minute', 'Hourly', 'Daily', 'Weekly']|
 |name|string|None|True|An arbitrary name for the list. This name will be used to identify the list in PAN-OS|None|
 |list_type|string|None|True|The type of list|['IP List', 'Domain List', 'URL List']|
-|time|string|None|True|If repeat is daily or weekly, choose an hour on a 24 hour clock to update (Default\: '')|['', '00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']|
+|time|string|None|True|If repeat is daily or weekly, choose an hour on a 24 hour clock to update (Default: '')|['', '00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']|
 |day|string|None|True|If repeat is weekly, choose a day to update|['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']|
 |description|string|None|True|A description of the list|None|
 

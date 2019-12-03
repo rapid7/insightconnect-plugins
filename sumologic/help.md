@@ -42,7 +42,7 @@ This action is used to run a Sumo Logic search query and return the results.
 |query|string|None|True|Query|None|
 |page_offset|integer|0|False|Page offset for search|None|
 |timeout|integer|60|False|Timeout in seconds|None|
-|from_time|string|None|False|From time. Must be either ISO 8601 datetimes, or epoch milliseconds. If not\: searches 24 hours back by default.|None|
+|from_time|string|None|False|From time. Must be either ISO 8601 datetimes, or epoch milliseconds. If not: searches 24 hours back by default.|None|
 |page_limit|integer|100|False|Number of messages to return per page|None|
 
 ##### Output

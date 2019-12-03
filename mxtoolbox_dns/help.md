@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|https\://api.mxtoolbox.com/api/v1/|True|MxToolBox DNS Lookup|None|
+|url|string|https://api.mxtoolbox.com/api/v1/|True|MxToolBox DNS Lookup|None|
 |api_key|credential_secret_key|None|False|API access key|None|
 
 ## Technical Details

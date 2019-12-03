@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |credentials|credential_username_password|None|True|Username and password|None|
-|url|string|https\://usea1-partners.sentinelone.net/|True|URL and endpoint of SentinelOne instance. For example\: https\://usea1-partners.sentinelone.net/|None|
+|url|string|https://usea1-partners.sentinelone.net/|True|URL and endpoint of SentinelOne instance. For example: https://usea1-partners.sentinelone.net/|None|
 
 ## Technical Details
 

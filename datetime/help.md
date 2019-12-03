@@ -30,8 +30,8 @@ This action is used to get the current Datetime in a specified format.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|format_string|string|%d %b %Y %H\:%M\:%S|True|Format string for the output. Example\: %H\:%M\:%S or %d/%m/%Y|None|
-|use_rfc3339_format|boolean|None|True|Use RFC3339 format (eg. 2017-10-24T18\:27\:36.23Z). This is the most compatible date format for timestamp manipulation. Enabling this will override the format string input|None|
+|format_string|string|%d %b %Y %H:%M:%S|True|Format string for the output. Example: %H:%M:%S or %d/%m/%Y|None|
+|use_rfc3339_format|boolean|None|True|Use RFC3339 format (eg. 2017-10-24T18:27:36.23Z). This is the most compatible date format for timestamp manipulation. Enabling this will override the format string input|None|
 
 ##### Output
 

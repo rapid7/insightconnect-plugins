@@ -40,9 +40,9 @@ This action is used to search for OTRS tickets.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |cust_id|string|None|False|Customer ID|None|
-|expernal_params|[]external_param|None|False|A key value object that's not a Dynamic Field e.g [{"Title"\:"Test Ticket"}]|None|
+|expernal_params|[]external_param|None|False|A key value object that's not a Dynamic Field e.g [{"Title":"Test Ticket"}]|None|
 |queue|string|None|False|Queue to search in|None|
-|dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name"\:"TestName1","pattern"\:"TestValue1", "operation"\:"Equals"},{"name"\:"TestName2","pattern"\:"TestValue2"}]. The value field is what will be searched for|None|
+|dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","pattern":"TestValue1", "operation":"Equals"},{"name":"TestName2","pattern":"TestValue2"}]. The value field is what will be searched for|None|
 
 ##### Output
 
@@ -324,8 +324,8 @@ This action is used to create OTRS ticket.
 |Responsible|string|None|False|Whos responsible of the ticket|None|
 |CustomerUser|string|None|False|Customer user associated with the ticket e.g test_customer|None|
 |article|new_article|None|False|Ticket article|None|
-|dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name"\:"TestName1","value"\:"TestValue1"},{"name"\:"TestName2","value"\:"TestValue2"}]|None|
-|attachments|[]attachment|None|False|Attachments as array of objects e.g. [{"filename"\:"notes.txt","content"\:"VGhpcyBpcyBhIHRlc3QK"}]|None|
+|dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","value":"TestValue1"},{"name":"TestName2","value":"TestValue2"}]|None|
+|attachments|[]attachment|None|False|Attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|
 
 ##### Output
 
@@ -365,8 +365,8 @@ This action is used to update an OTRS ticket.
 |CustomerUser|string|None|False|Updated customer user|None|
 |Type|string|None|False|Updated type e.g. Incident|None|
 |Article|new_article|None|False|New article (gets appended)|None|
-|DynamicFields|[]dynamic_field|None|False|Updated dynamic fields e.g. [{"name"\:"TestName1","value"\:"TestValue1"},{"name"\:"TestName2","value"\:"TestValue2"}]|None|
-|Attachments|[]attachment|None|False|New attachments as array of objects e.g. [{"filename"\:"notes.txt","content"\:"VGhpcyBpcyBhIHRlc3QK"}]|None|
+|DynamicFields|[]dynamic_field|None|False|Updated dynamic fields e.g. [{"name":"TestName1","value":"TestValue1"},{"name":"TestName2","value":"TestValue2"}]|None|
+|Attachments|[]attachment|None|False|New attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|
 
 ##### Output
 

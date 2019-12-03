@@ -219,16 +219,16 @@ This action is used to obtain information about a user.
 |----|----|--------|-----------|
 |status|string|False|Status|
 |profile|profile|False|Profile|
-|passwordChanged|string|False|When the password was changed, e.g. 2013-07-02T21\:36\:25.344Z|
-|created|string|False|When the user was created, e.g. 2013-07-02T21\:36\:25.344Z|
-|activated|string|False|When the user was activated, e.g. 2013-07-02T21\:36\:25.344Z|
-|lastUpdated|string|False|When the user was last updated, e.g. 2013-07-02T21\:36\:25.344Z|
+|passwordChanged|string|False|When the password was changed, e.g. 2013-07-02T21:36:25.344Z|
+|created|string|False|When the user was created, e.g. 2013-07-02T21:36:25.344Z|
+|activated|string|False|When the user was activated, e.g. 2013-07-02T21:36:25.344Z|
+|lastUpdated|string|False|When the user was last updated, e.g. 2013-07-02T21:36:25.344Z|
 |_links|_links|False|Links|
-|lastLogin|string|False|When the last login for the user was, e.g. 2013-07-02T21\:36\:25.344Z|
+|lastLogin|string|False|When the last login for the user was, e.g. 2013-07-02T21:36:25.344Z|
 |credentials|credentials|False|Credentials|
 |found|boolean|True|Whether user was found|
 |id|string|False|User ID|
-|statusChanged|string|False|When the status of the user changed, e.g. 2013-07-02T21\:36\:25.344Z|
+|statusChanged|string|False|When the status of the user changed, e.g. 2013-07-02T21:36:25.344Z|
 
 Example output:
 
@@ -441,7 +441,7 @@ This action is used to assign a user to an application for SSO and provisioning.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |applicationId|string|None|True|Application ID|None|
-|appuser|object|None|False|Application user model as JSON object, see https\://developer.okta.com/docs/api/resources/apps#application-user-model|None|
+|appuser|object|None|False|Application user model as JSON object, see https://developer.okta.com/docs/api/resources/apps#application-user-model|None|
 
 `appuser` accepts a [application user model](https://developer.okta.com/docs/api/resources/apps#application-user-model) JSON object.
 
@@ -502,15 +502,15 @@ This action will attempt to prevent that be removing the entire input if it dete
 |----|----|--------|-----------|
 |status|string|False|Status|
 |profile|profile|False|Profile|
-|passwordChanged|string|False|When the password was changed, e.g. 2013-07-02T21\:36\:25.344Z|
-|created|string|False|When the user was created, e.g. 2013-07-02T21\:36\:25.344Z|
-|activated|string|False|When the user was activated, e.g. 2013-07-02T21\:36\:25.344Z|
-|lastUpdated|string|False|When the user was last updated, e.g. 2013-07-02T21\:36\:25.344Z|
+|passwordChanged|string|False|When the password was changed, e.g. 2013-07-02T21:36:25.344Z|
+|created|string|False|When the user was created, e.g. 2013-07-02T21:36:25.344Z|
+|activated|string|False|When the user was activated, e.g. 2013-07-02T21:36:25.344Z|
+|lastUpdated|string|False|When the user was last updated, e.g. 2013-07-02T21:36:25.344Z|
 |_links|_links|False|Links|
-|lastLogin|string|False|When the last login for the user was, e.g. 2013-07-02T21\:36\:25.344Z|
+|lastLogin|string|False|When the last login for the user was, e.g. 2013-07-02T21:36:25.344Z|
 |credentials|credentials|False|Credentials|
 |id|string|False|User ID|
-|statusChanged|string|False|When the status of the user changed, e.g. 2013-07-02T21\:36\:25.344Z|
+|statusChanged|string|False|When the status of the user changed, e.g. 2013-07-02T21:36:25.344Z|
 
 Example output:
 

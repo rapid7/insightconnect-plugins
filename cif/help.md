@@ -23,7 +23,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|CIF URL e.g. https\://cif.example.com|None|
+|url|string|None|True|CIF URL e.g. https://cif.example.com|None|
 |ssl_verify|boolean|True|True|SSL certificate verification|None|
 |api_key|credential_secret_key|None|True|CIF API key|None|
 
@@ -44,7 +44,7 @@ This action is used to query for observables.
 |protocol|string|None|False|Layer 4 protocol (icmp, tcp, udp)|['all', 'icmp', 'tcp', 'udp']|
 |tags|string|None|False|The tag(s) to filter on e.g. tags=botnet,zeus|None|
 |cc|string|None|False|The country code to filter on e.g. us|None|
-|portlist|string|None|False|List of ports (ex\: 1,2,445-557)|None|
+|portlist|string|None|False|List of ports (ex: 1,2,445-557)|None|
 |nolog|boolean|None|True|Whether CIF should log the query|None|
 |otype|string|None|True|Type of observable|['all', 'ipv4', 'ipv6', 'fqdn', 'url', 'email']|
 |limit|integer|10|True|Limit number of results|None|

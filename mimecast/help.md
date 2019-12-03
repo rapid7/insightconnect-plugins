@@ -160,13 +160,13 @@ This action is used to create a blocked sender policy.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|option|string|block_sender|True|The block, option must be\: no_action or block_sender|['block_sender', 'no_action']|
+|option|string|block_sender|True|The block, option must be: no_action or block_sender|['block_sender', 'no_action']|
 |description|string|None|True|A description for the policy which is kept with the email in the archive for future reference|None|
-|from_part|string|envelope_from|True|Must be\: envelope_from, header_from or both|['envelope_from', 'header_from', 'both']|
-|from_type|string|everyone|True|Can be one of\: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|
-|from_value|string|None|False|Required if `From Type` is one of email_domain, profile_group, individual_email_address. Expected values\: If `From Type` is email_domain, a domain name without the @ symbol. If `From Type` is profile_group, the ID of the profile group. If `From Type` is individual_email_address, an email address|None|
-|to_type|string|everyone|True|Can be one of\: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|
-|to_value|string|None|False|Required if `To Type` is one of email_domain, profile_group, individual_email_address. Expected values\: If `To Type` is email_domain, a domain name without the @ symbol. If `To Type` is profile_group, the ID of the profile group. If `To Type` is individual_email_address, an email address|None|
+|from_part|string|envelope_from|True|Must be: envelope_from, header_from or both|['envelope_from', 'header_from', 'both']|
+|from_type|string|everyone|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|
+|from_value|string|None|False|Required if `From Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `From Type` is email_domain, a domain name without the @ symbol. If `From Type` is profile_group, the ID of the profile group. If `From Type` is individual_email_address, an email address|None|
+|to_type|string|everyone|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|
+|to_value|string|None|False|Required if `To Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `To Type` is email_domain, a domain name without the @ symbol. If `To Type` is profile_group, the ID of the profile group. If `To Type` is individual_email_address, an email address|None|
 |source_ips|string|None|False|A comma separated list of IP addresses using CIDR notation (X.X.X.X/XX). When set the policy only applies for connections from matching addresses|None|
 
 ##### Output

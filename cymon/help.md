@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|https\://cymon.io\:443|False|API URL|None|
+|url|string|https://cymon.io:443|False|API URL|None|
 |api_key|credential_secret_key|None|False|API Token (Empty for unauthenticated access)|None|
 
 The connection configuration asks for an API Token and Server. The API Token field is not required,
@@ -229,7 +229,7 @@ This action is used to look up a URL.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|Full URL E.g. http\://faker.su/data/entry/steam/Steam.exe|None|
+|url|string|None|True|Full URL E.g. http://faker.su/data/entry/steam/Steam.exe|None|
 
 ##### Output
 

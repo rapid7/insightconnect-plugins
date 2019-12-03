@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|Host URL, E.g. http\://192.168.33.10\:9600|None|
+|url|string|None|True|Host URL, E.g. http://192.168.33.10:9600|None|
 
 ## Technical Details
 

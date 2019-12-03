@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|server|string|http\://localhost\:8086|True|InfluxDB API Server|None|
+|server|string|http://localhost:8086|True|InfluxDB API Server|None|
 
 ## Technical Details
 
@@ -39,7 +39,7 @@ This action is used to write data to a pre-existing database.
 |consistency|string|None|False|Sets the write consistency for the point. One of [any,one,quorum,all]|None|
 |database_name|string|None|True|Database name|None|
 |password|password|None|False|Set the password for authentication|None|
-|data|string|None|False|Data to be written into the database. Must be in Line Protocol format. See https\://docs.influxdata.com/influxdb/v1.2/write_protocols/line_protocol_tutorial/|None|
+|data|string|None|False|Data to be written into the database. Must be in Line Protocol format. See https://docs.influxdata.com/influxdb/v1.2/write_protocols/line_protocol_tutorial/|None|
 |precision|string|None|False|Sets the precision for the supplied Unix time values|None|
 
 ##### Output
@@ -62,7 +62,7 @@ An example query would be `select * from mytable`
 |username|string|None|False|Sets the username for authentication|None|
 |epoch|string|None|False|Returns epoch timestamps with the specified precision. Default is nanoseconds|None|
 |password|password|None|False|Sets the password for authentication|None|
-|query|string|None|False|Database query. Must follow InfluxQL syntax. See https\://docs.influxdata.com/influxdb/v1.2/query_language/|None|
+|query|string|None|False|Database query. Must follow InfluxQL syntax. See https://docs.influxdata.com/influxdb/v1.2/query_language/|None|
 |database_name|string|None|True|Database name|None|
 |chunked|string|None|False|If set to true, InfluxDB chunks responses by series or by every 10,000 points, whichever occurs first. If set to a specific value, InfluxDB chunks responses by series or by that number of points|None|
 

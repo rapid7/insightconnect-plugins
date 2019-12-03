@@ -27,10 +27,10 @@ The connection configuration accepts the following parameters:
 |client_email|string|None|True|Client email from service credentials|None|
 |client_id|string|None|True|Client ID|None|
 |client_x509_cert_url|string|None|True|x509 cert URL from service credentials|None|
-|auth_uri|string|https\://accounts.google.com/o/oauth2/auth|True|None|None|
-|token_uri|string|https\://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
-|auth_provider_x509_cert_url|string|https\://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
-|oauth_scope|string|`https\://www.googleapis.com/auth/admin.directory.user`|True|Google Admin Directory OAuth scope to use for the connection, note that read only will result in some actions not working.|[`https://www.googleapis.com/auth/admin.directory.user`, `https://www.googleapis.com/auth/admin.directory.user.readonly`]|
+|auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|None|None|
+|token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
+|auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
+|oauth_scope|string|`https://www.googleapis.com/auth/admin.directory.user`|True|Google Admin Directory OAuth scope to use for the connection, note that read only will result in some actions not working.|[`https://www.googleapis.com/auth/admin.directory.user`, `https://www.googleapis.com/auth/admin.directory.user.readonly`]|
 
 ## Technical Details
 

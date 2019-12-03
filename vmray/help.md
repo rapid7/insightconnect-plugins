@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |api_key|credential_secret_key|None|True|API key for VMRay|None|
-|url|string|https\://cloud.vmray.com|True|VMRay host e.g https\://cloud.vmray.com|None|
+|url|string|https://cloud.vmray.com|True|VMRay host e.g https://cloud.vmray.com|None|
 
 ## Technical Details
 
@@ -40,7 +40,7 @@ This action is used to submit a file for analysis.
 |----|----|-------|--------|-----------|----|
 |file|file|None|True|File and filename for analysis|None|
 |analyzer_mode|string|default|False|Specify what analyzer mode to use|['default', 'reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
-|optional_params|object|None|False|Parameters that allow finer tuning of the Submit File action, e.g {"analysis_id"\: 12345}|None|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Submit File action, e.g {"analysis_id": 12345}|None|
 
 Supported File Types:
 
@@ -150,7 +150,7 @@ This action is used to get all dynamic and static analyses in the system or deta
 |----|----|-------|--------|-----------|----|
 |id_type|string|None|True|Get analysis based on ID of a specified type|["analysis_id", "analyzer", "configuration", "static_config", "created", "job", "jobrule", "job_started", "prescript", "result_code", "sample", "size", "snapshot", "submission", "user", "vm", "vmhost", "vti_score", "all"]|
 |id|string|None|False|ID based on ID type selected, leave blank if "all" is selected|None|
-|optional_params|object|None|False|Parameters that allow finer tuning of get analysis  e.g {"analysis_id"\: 12345}|None|
+|optional_params|object|None|False|Parameters that allow finer tuning of get analysis  e.g {"analysis_id": 12345}|None|
 
 Optional Parameters can be found in the API documentation, located `http://vmrayhost/static_doc/html/api/User_API_Reference.html`
 
@@ -270,7 +270,7 @@ This action is used to get all samples in the system or details about specific o
 |----|----|-------|--------|-----------|----|
 |sample_type|string|None|False|Specified type of sample|['all', 'sample_id', 'created', 'filesize', 'md5', 'sha1', 'sha256', 'type']|
 |sample|string|None|True|Sample ID, hash or type,leave blank if 'all' is selected|None|
-|optional_params|object|None|False|Parameters that allow finer tuning of get analysis e.g {"analysis_id"\: 12345}|None|
+|optional_params|object|None|False|Parameters that allow finer tuning of get analysis e.g {"analysis_id": 12345}|None|
 
 ##### Output
 
@@ -312,7 +312,7 @@ This action is used to submits a URL for analysis.
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|URL to be submitted for analysis|None|
 |analyzer_mode|string|None|False|Specify what analyzer mode to use|['default','reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
-|optional_params|object|None|False|Parameters that allow finer tuning of the Submit URL action, e.g {"analysis_id"\: 12345}|None|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Submit URL action, e.g {"analysis_id": 12345}|None|
 
 ##### Output
 

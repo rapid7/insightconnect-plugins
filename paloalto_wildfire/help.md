@@ -23,7 +23,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|
 |verify|boolean|True|True|Verify the certificate|None|
 |host|string|wildfire.paloaltonetworks.com|True|Palo Alto Wildfire host in cloud or on-premise, e.g. wildfire.paloaltonetworks.com or 10.3.4.50|None|
-|api_key|password|None|True|Wildfire API Key, available at https\://wildfire.paloaltonetworks.com/wildfire/account or on your appliance|None|
+|api_key|password|None|True|Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account or on your appliance|None|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTPS as the key, and the proxy path as the value|None|
 
 ## Technical Details
@@ -38,7 +38,7 @@ This action is used to submit a file for analysis via a URL.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to submit. The URL must contain the file name, for example http\://paloaltonetworks.com/folder1/my-file.pdf|None|
+|url|string|None|True|URL to submit. The URL must contain the file name, for example http://paloaltonetworks.com/folder1/my-file.pdf|None|
 
 ##### Output
 
@@ -118,7 +118,7 @@ This action is used to query for an XML or PDF report for a particular sample.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hash|string|None|True|The MD5 or SHA-256 hash value of the sample|None|
-|format|string|None|True|Report format\: PDF or XML|['pdf', 'xml']|
+|format|string|None|True|Report format: PDF or XML|['pdf', 'xml']|
 
 ##### Output
 
@@ -157,7 +157,7 @@ This action is used to query for a file's classification.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|verdict|string|True|One of the following verdicts\: 'Benign', 'Malware', 'Greyware', 'Pending', 'Error', or 'Not found`|
+|verdict|string|True|One of the following verdicts: 'Benign', 'Malware', 'Greyware', 'Pending', 'Error', or 'Not found`|
 
 ### Triggers
 

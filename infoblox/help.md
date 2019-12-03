@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |credentials|credential_username_password|None|True|Infoblox username and password|None|
-|url|string|None|True|The URL of a running Infoblox instance (e.g. https\://192.168.1.2 or https\://example.infoblox.com)|None|
+|url|string|None|True|The URL of a running Infoblox instance (e.g. https://192.168.1.2 or https://example.infoblox.com)|None|
 |api_version|string|2.7|True|Version of the API|['1.0', '1.1', '1.2', '1.3', '1.4', '1.5', '1.6', '1.7', '1.8', '1.9', '2.0', '2.1', '2.2', '2.3', '2.4', '2.5', '2.6', '2.7']|
 
 ## Technical Details

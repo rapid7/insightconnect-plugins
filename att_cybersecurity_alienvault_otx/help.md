@@ -23,7 +23,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |api_key|credential_secret_key|None|True|AlienVault Open Threat Exchange API key|None|
-|url|string|https\://otx.alienvault.com/|True|AlienVault Open Threat Exchange URL|None|
+|url|string|https://otx.alienvault.com/|True|AlienVault Open Threat Exchange URL|None|
 
 ## Technical Details
 

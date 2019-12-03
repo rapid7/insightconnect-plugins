@@ -30,10 +30,10 @@ This plugin requires network access to the Google Cloud Compute Engine API.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |private_key|credential_asymmetric_key|None|True|Private key from service credentials|None|
-|token_uri|string|https\://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
-|auth_provider_x509_cert_url|string|https\://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
-|auth_uri|string|https\://accounts.google.com/o/oauth2/auth|True|None|None|
-|host|string|https\://www.googleapis.com/compute/|True|Google Cloud Compute Server|None|
+|token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
+|auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
+|auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|None|None|
+|host|string|https://www.googleapis.com/compute/|True|Google Cloud Compute Server|None|
 |version|string|v1|True|API Version|None|
 |client_email|string|None|True|Client email from service credentials|None|
 |client_id|string|None|True|Client ID|None|

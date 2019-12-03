@@ -31,7 +31,7 @@ It accepts a `tr` expression and a string to process using that expression. Any 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |text|string|None|True|Text to process|None|
-|expression|string|None|True|Correct tr expression (e.g. -s [\:space\:] ' ')|None|
+|expression|string|None|True|Correct tr expression (e.g. -s [:space:] ' ')|None|
 
 ##### Output
 

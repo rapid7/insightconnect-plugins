@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|server|string|http\://try.bro.org|True|Try Bro URL|None|
+|server|string|http://try.bro.org|True|Try Bro URL|None|
 
 ## Technical Details
 

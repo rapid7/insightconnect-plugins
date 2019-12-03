@@ -235,7 +235,7 @@ This action is used to the pattern search functionality in investigate uses regu
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|matches|array|True|Each match will contain the name of the domain matches, the and the first seen time, both in Epoch and ISO time format. This endpoint returns the security categories as strings rather than integers (eg\: 'malware','botnet', etc) if includeCategory is true|
+|matches|array|True|Each match will contain the name of the domain matches, the and the first seen time, both in Epoch and ISO time format. This endpoint returns the security categories as strings rather than integers (eg: 'malware','botnet', etc) if includeCategory is true|
 |limit|integer|True|Default is 100, can be expanded to 1000 which is the maximum number of results for this endpoint|
 |totalResults|integer|True|Total results from this search string. The default number of results is 100 and can be expanded using the limit parameter|
 |expression|string|True|This is the RegEx in the query as seen from the API. If results from your query do not match what you may have expected, check to see that the RegEx matches the one you tried to enter and that characters are correctly escaped in the query string|

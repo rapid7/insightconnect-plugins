@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 |access_key|credential_secret_key|None|True|None|None|
 |ssl_verify|boolean|True|True|Validate certificate|None|
 |secret_key|credential_secret_key|None|True|None|None|
-|hostname|string|None|True|Nessus instance hostname e.g. 192.168.1.10\:1234|None|
+|hostname|string|None|True|Nessus instance hostname e.g. 192.168.1.10:1234|None|
 
 ## Technical Details
 
