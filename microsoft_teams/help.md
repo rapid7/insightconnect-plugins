@@ -130,6 +130,56 @@ Example output:
 }
 ```
 
+#### Send Message by GUID
+
+This action sends a message using the GUID for the team and channel. This is more performant than send message.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|channel_guid|string|None|true|Channel GUID|None|
+|is_html|boolean|None|true|Is the message HTML|None|
+|message|string|None|true|Message to send|None|
+|team_guid|string|None|true|Team GUID|None|
+
+##### Output
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|message|message|None|false|The message object that was created|None|
+
+Example output:
+
+```
+{
+  "message": {
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#teams('xxxx')/channels('xxxxxxx')/messages/$entity",
+    "id": "1571769574238",
+    "etag": "1571769574238",
+    "messageType": "message",
+    "createdDateTime": "2019-10-22T18:39:34.238Z",
+    "importance": "normal",
+    "locale": "en-us",
+    "webUrl": "https://teams.microsoft.com/l/message/xxxxxxxxxxxxxx/xxxxxx?groupId=xxxxx",
+    "from": {
+      "user": {
+        "id": "xxxxxxx",
+        "displayName": "Test User",
+        "userIdentityType": "aadUser"
+      }
+    },
+    "body": {
+      "contentType": "text",
+      "content": "Hello from InsightConnect!"
+    },
+    "attachments": [],
+    "mentions": [],
+    "reactions": []
+  }
+}
+```
+
 #### Get Teams
 
 This action returns all the teams the configured user is allowed to see.
@@ -465,6 +515,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - New action Send Message by GUID
 * 1.2.1 - Fix issue where New Message Received trigger could receive an unauthorized error after sustained use
 * 1.2.3 - New spec and help.md format for the Hub
 * 1.2.2 - Fix issue where regular expressions would only match at the beginning of a string

@@ -9,3 +9,4 @@ from .remove_channel_from_team.action import RemoveChannelFromTeam
 from .remove_member_from_team.action import RemoveMemberFromTeam
 from .send_html_message.action import SendHtmlMessage
 from .send_message.action import SendMessage
+from .send_message_by_guid.action import SendMessageByGuid
