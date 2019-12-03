@@ -317,11 +317,11 @@ This action is used to get TTP URL logs.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|from|string|None|False|Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day|None|
-|route|string|all|True|Filters logs by route, must be one of inbound, outbound, internal, or all|['all', 'inbound', 'outbound', 'internal']|
-|scan_result|string|all|True|Filters logs by scan result, must be one of clean, malicious, or all|['clean', 'malicious', 'all']|
-|to|string|None|False|End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request|None|
-|url_to_filter|string|None|False|URL filter results with|None|
+|from|string|None|false|Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day|None|
+|route|string|all|true|Filters logs by route, must be one of inbound, outbound, internal, or all|['all','inbound','outbound','internal']|
+|scan_result|string|all|true|Filters logs by scan result, must be one of clean, malicious, or all|['clean','malicious','all']|
+|to|string|None|false|End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request|None|
+|url_to_filter|string|None|false|Reguler exprestion matching to filter on. e.g. `examp` will return only URLs with the letters exap in them|None|
 
 ##### Output
 
@@ -355,14 +355,90 @@ Example output:
 
 This plugin does not contain any triggers.
 
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
-
 ## Troubleshooting
 
 For the Create Managed URL action, the URL must include `http://` or `https://` e.g. `http://google.com`
 Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api-overview/global-base-urls/)
+
+### Custom Output Types
+
+#### click_logs
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Action|string|false|The action that was taken for the click|
+|Admin Override|string|false|The action defined by the administrator for the URL|
+|Category|string|false|The category of the URL clicked|
+|Date|string|false|The date that the URL was clicked|
+|Route|string|false|The route of the email that contained the link|
+|Scan Result|string|false|The result of the URL scan|
+|TTP Definition|string|false|The description of the definition that triggered the URL to be rewritten by Mimecast|
+|URL|string|false|The URL clicked|
+|User Awareness Action|string|false|The action taken by the user if user awareness was applied|
+|User Email Address|string|false|The email address of the user who clicked the link|
+|User Override|string|false|The action requested by the user|
+
+#### group
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Description|string|false|The name of the group|
+|Folder Count|integer|false|None|
+|Id|string|false|None|
+|Parent Id|string|false|None|
+|Source|string|false|None|
+|User Count|integer|false|None|
+
+#### managed_sender
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|false|The Mimecast secure ID of the managed sender object|
+|Sender|string|false|The email address of the external sender|
+|To|string|false|The email address of the internal recipient|
+|Type|string|false|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|
+
+#### managed_url
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Action|string|false|Either block or permit|
+|Comment|string|false|The comment that was posted in the request|
+|Click Logging|boolean|false|If logging of user clicks on the URL is disabled|
+|URL Rewriting|boolean|false|If rewriting of this URL in emails is disabled|
+|User Awareness|boolean|false|If User Awareness challenges for this URL are disabled|
+|Domain|string|false|The managed domain|
+|ID|string|false|The Mimecast secure ID of the managed URL|
+|Match Type|string|false|Either 'explicit' or 'domain'|
+|Port|integer|false|Port|
+|Scheme|string|false|The protocol to apply for the managed URL. Either HTTP or HTTPS|
+
+#### policy
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Bidirectional|boolean|false|If the policy is also applied in the reverse of the email flow, i.e. where the specified recipient in the policy becomes the sender, and the specified sender in the policy becomes the recipient|
+|Conditions|object|false|An object with fields describing additional conditions that should affect when the policy is applied|
+|Description|string|false|The description for the policy which is kept with the email in the archive for future reference|
+|From|object|false|An object containing type and value fields defining which sender addresses the policy applies to|
+|From Date|string|false|The date that the policy will apply from|
+|From Eternal|boolean|false|If the policy is always applied or if there is a specific start date|
+|From Part|string|false|Which from address is used in the policy. Can be any of envelope_from, header_from, both|
+|From Type|string|false|Which sender addresses the policy applies to. CCan be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name|
+|From Value|string|false|A value defining which senders the policy applies to|
+|Override|boolean|false|If true, this option overrides the order in which the policy is applied, and forces it to be applied first if there are multiple applicable policies, unless more specific policies of the same type have been configured with an override as well|
+|To|object|false|An object containing type and value fields defining which recipient addresses the policy applies to|
+|To Date|string|false|The date that the policy will apply until|
+|To Eternal|boolean|false|If the policy should always be applied or if there is an end date|
+|To Type|string|false|Which recipient addresses the policy applies to. Can be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name|
+
+#### sender_policy
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|false|The Mimecast ID of the policy. Used when updating the policy|
+|Option|string|false|The option set for the policy. Will be one of no_action, block_sender|
+|Policy|policy|false|The policy that was created|
 
 # Version History
 
