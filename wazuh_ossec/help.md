@@ -253,7 +253,7 @@ This action is used to return the syscheck files of an agent.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order. Allowed sort fields\: group, user, file, modificationDate, scanDate, and size|None|
+|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order. Allowed sort fields: group, user, file, modificationDate, scanDate, and size|None|
 |search|string|None|False|Looks for elements with the specified string|None|
 |sha1|string|None|False|Returns the files with the specified SHA1 hash|None|
 |hash|string|None|False|Returns the files with the specified hash (MD5 or SHA1)|None|
@@ -409,7 +409,7 @@ This action is used to return the rootcheck database of an agent.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order. Allowed sort fields\: status, oldDay, event, and readDay|None|
+|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order. Allowed sort fields: status, oldDay, event, and readDay|None|
 |cis|string|None|False|Filters by CIS|None|
 |search|string|None|False|Looks for elements with the specified string|None|
 |pci|string|None|False|Filters by PCI requirement|None|
