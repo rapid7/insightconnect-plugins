@@ -15,7 +15,7 @@ tags:
 - dig
 - dns
 hub_tags:
-  use_cases: [soar, threat_hunting, threat_intel, soc_automation, investigations, penetration_testing]
+  use_cases: [threat_detection_and_response, , offensive_security]
   keywords: [dig, dns]
   features: []
 actions:

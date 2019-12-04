@@ -20,7 +20,7 @@ tags:
 - saml
 - enterprise
 hub_tags:
-  use_cases: [soar, policy_management, soc_automation, user_management]
+  use_cases: [application_management, user_management]
   keywords: [okta, sso, provisioning, deprovisioning, saml, enterprise]
   features: []
 enable_cache: true

@@ -17,7 +17,7 @@ tags:
 - mimecast
 - email
 hub_tags:
-  use_cases: [soar, phishing_investigations, network_containment, soc_automation, threat_detection_and_response]
+  use_cases: [threat_detection_and_response]
   keywords: [mimecast, email]
   features: []
 

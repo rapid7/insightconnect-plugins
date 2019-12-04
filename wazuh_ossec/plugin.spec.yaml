@@ -18,7 +18,7 @@ tags:
 - wazuh
 - hids
 hub_tags:
-  use_cases: [soar, log_search, threat_detection_and_response, asset_containment, asset_inventory, soc_automation]
+  use_cases: [threat_detection_and_response, , asset_inventory]
   keywords: [ossec, wazuh, hids]
   features: []
 types:
