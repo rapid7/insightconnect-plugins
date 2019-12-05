@@ -33,9 +33,6 @@ The connection configuration accepts the following parameters:
 
 ## Technical Details
 
-No notable technical requirements to highlight
-
-
 ### Actions
 
 #### Create Managed URL
@@ -300,7 +297,7 @@ Example output:
 
 ```
 {
-  "success": true 
+  "success": true
 }
 ```
 
