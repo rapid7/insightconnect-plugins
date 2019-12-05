@@ -15,7 +15,7 @@ tags:
 - syslog
 - logs
 hub_tags:
-  use_cases: [soar, log_search, alerting_and_notifications]
+  use_cases: [threat_detection_and_response, alerting_and_notifications]
   keywords: [syslog, logs]
   features: []
 enable_cache: false

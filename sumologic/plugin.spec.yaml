@@ -16,7 +16,7 @@ tags:
 - sumo logic
 - search
 hub_tags:
-  use_cases: [soar, threat_intel, threat_hunting, data_ingestion]
+  use_cases: [threat_detection_and_response, data_utility]
   keywords: [sumo logic, search]
   features: []
 types:

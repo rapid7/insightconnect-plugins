@@ -19,7 +19,7 @@ tags:
 - ESM
 - SIEM
 hub_tags:
-  use_cases: [soar, siem, threat_detection_and_response, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [McAfee, ESM, SIEM]
   features: []
 enable_cache: true
