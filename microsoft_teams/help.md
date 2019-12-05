@@ -214,13 +214,13 @@ Example output:
       "groupTypes": [
         "Unified"
       ],
-      "mail": "xxxxx@xxxxx.xxxx",
+      "mail": "user@example.com",
       "mailEnabled": true,
       "mailNickname": "Test Nickname",
       "membershipTypes": [],
       "proxyAddresses": [
         "SPO:xxxxxx",
-        "SMTP:xxxx@xxxxx.xxx"
+        "SMTP:user@example.com"
       ],
       "renewedDateTime": "2019-10-14T17:18:55Z",
       "resourceBehaviorOptions": [
@@ -265,7 +265,7 @@ Example output:
 {
   "channels": [
     {
-      "id": "19:0a48f53ea9484091aba13271dc418c2a@thread.skype",
+      "id": "XXXXXXXXXXX",
       "displayName": "test123",
       "description": "komand rocks!",
       "webUrl": "https://teams.microsoft.com/l/channel/19%3a0a48f53ea9484091aba13271dc418c2a%40thread.skype/test123?groupId=d2cc6aa2-8071-44d9-a97a-0a758da420a8&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10",
@@ -411,11 +411,11 @@ Example output:
     "groupTypes": [
       "Unified"
     ],
-    "mail": "avengers@marvel.onmicrosoft.com",
+    "mail": "user@example.com",
     "mailEnabled": true,
     "mailNickname": "CMDTestDeleteMe",
     "proxyAddresses": [
-      "SMTP:CMDTestDeleteMe@komanddev.onmicrosoft.com"
+      "SMTP:XXXXXXXXX"
     ],
     "renewedDateTime": "2019-11-05T19:34:21Z",
     "resourceBehaviorOptions": [],
