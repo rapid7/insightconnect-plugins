@@ -7,7 +7,7 @@ description: The Checkpoint Sand Blast plugin extends the Sand Blast service and
 version: 1.0.1
 vendor: rapid7
 support: community
-status: [data_enrichment, threat_detection_and_response]
+status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/checkpoint_sand_blast
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -15,7 +15,7 @@ tags:
 - threat intelligence
 - breach prevention
 hub_tags:
-  use_cases: []
+  use_cases: [data_enrichment, threat_detection_and_response]
   keywords: [threat intelligence, breach prevention]
   features: []
 types:
