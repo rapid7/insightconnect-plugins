@@ -17,7 +17,7 @@ tags:
 - securityhub
 - alerts
 hub_tags:
-  use_cases: [soar, siem, log_search, data_aggregation, threat_detection_and_response]
+  use_cases: [threat_detection_and_response, data_utility]
   keywords: [aws, securityhub, alerts]
   features: []
 

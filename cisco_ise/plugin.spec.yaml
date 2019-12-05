@@ -17,7 +17,7 @@ tags:
 - cisco
 - network access
 hub_tags:
-  use_cases: [soar, asset_inventory, network_containment, asset_containment, threat_detection_and_response, soc_automation]
+  use_cases: [asset_inventory, threat_detection_and_response]
   keywords: [cisco, network access]
   features: []
 types:

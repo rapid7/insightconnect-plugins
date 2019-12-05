@@ -17,7 +17,7 @@ tags:
 - pyhive
 - database
 hub_tags:
-  use_cases: [soar, data_ingestion, data_aggregation]
+  use_cases: [data_utility]
   keywords: [presto, pyhive, database]
   features: []
 types:

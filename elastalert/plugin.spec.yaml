@@ -18,7 +18,7 @@ tags:
 - elk
 - alert
 hub_tags:
-  use_cases: [soar, alerting_and_notifications]
+  use_cases: [alerting_and_notifications]
   keywords: [elasticsearch, elk, alert]
   features: []
 
