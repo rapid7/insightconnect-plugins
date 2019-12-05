@@ -3,6 +3,7 @@ from .schema import AddUserInput, AddUserOutput
 # Custom imports below
 from ldap3 import extend
 from ldap3 import MODIFY_REPLACE
+import re
 
 
 class AddUser(komand.Action):
@@ -34,8 +35,14 @@ class AddUser(komand.Action):
 
         full_name = first_name + ' ' + last_name
         domain_dn = domain_name.replace('.', ',DC=')
-        user_ou = user_ou.replace(',', ',OU=')
-        dn = 'CN={},OU={},DC={}'.format(full_name, user_ou, domain_dn)
+        if user_ou == re.match("Users"):
+            user_ou = user_ou.replace(',', ',CN=')
+        else:
+            user_ou = user_ou.replace(',', ',OU=')
+        if user_ou == re.match("Users"):
+            dn = 'CN={},CN={},DC={}'.format(full_name, user_ou, domain_dn)
+        else:
+            dn = 'CN={},OU={},DC={}'.format(full_name, user_ou, domain_dn)
 
         self.logger.info("User DN=" + dn)
 
