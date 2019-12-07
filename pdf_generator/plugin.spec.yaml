@@ -15,7 +15,7 @@ tags:
 - pdf
 - document
 hub_tags:
-  use_cases: [soar, reporting_and_analytics, data_utility, data_aggregation]
+  use_cases: [reporting_and_analytics, data_utility]
   keywords: [pdf, document]
   features: []
 actions:

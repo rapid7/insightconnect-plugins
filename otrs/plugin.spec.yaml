@@ -16,7 +16,7 @@ tags:
 - ticket
 - OTRS
 hub_tags:
-  use_cases: [soar, remediation_ticketing, soc_automation]
+  use_cases: [remediation_management]
   keywords: [ticket, OTRS]
   features: []
 connection:

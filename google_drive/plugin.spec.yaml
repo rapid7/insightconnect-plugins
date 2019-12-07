@@ -17,7 +17,7 @@ tags:
 - google drive
 - cloud storage
 hub_tags:
-  use_cases: [soar, data_ingestion]
+  use_cases: [data_utility]
   keywords: [google, google drive, cloud storage]
   features: []
 types:

@@ -16,7 +16,7 @@ tags:
 - qradar
 - siem
 hub_tags:
-  use_cases: [soar, data_ingestion, threat_hunting, threat_intel, reporting_and_analytics]
+  use_cases: [data_utility, threat_detection_and_response, reporting_and_analytics]
   keywords: [qradar, siem]
   features: []
 types:

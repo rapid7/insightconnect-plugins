@@ -10,7 +10,7 @@ tags: [ "mssql", "sql" ]
 support: rapid7
 status: []
 hub_tags:
-  use_cases: [soar, data_ingestion, reporting_and_analytics]
+  use_cases: [data_utility, reporting_and_analytics]
   keywords: [mssql, sql]
   features: []
 resources:

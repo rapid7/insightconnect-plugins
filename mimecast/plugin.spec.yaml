@@ -5,7 +5,7 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 3.0.1
+version: 3.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -17,7 +17,7 @@ tags:
 - mimecast
 - email
 hub_tags:
-  use_cases: [soar, phishing_investigations, network_containment, soc_automation, threat_detection_and_response]
+  use_cases: [threat_detection_and_response]
   keywords: [mimecast, email]
   features: []
 
@@ -369,6 +369,21 @@ actions:
         description: Managed URL that was created
         type: '[]managed_url'
         required: false
+  delete_managed_url:
+    title: Delete Managed URL
+    description: Delete a managed URL
+    input:
+      id:
+        title: ID
+        description: The Mimecast secure ID of the managed URL
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: Success status of delete request
+        type: boolean
+        required: false
   get_managed_url:
     title: Get Managed URL
     description: Get information on a managed URL
@@ -572,12 +587,12 @@ actions:
         required: true
       email_address:
         title: Email Address
-        description: The email address of a user to add to a group. Use either emailAddress or domain
+        description: The email address of a user to add to a group. Use either email address or domain
         type: string
         required: false
       domain:
         title: Domain
-        description: A domain to add to a group. Use either emailAddress or domain
+        description: A domain to add to a group. Use either email address or domain
         type: string
         required: false
     output:
@@ -599,6 +614,31 @@ actions:
       internal:
         title: Internal
         description: If the user / doamin is internal or not
+        type: boolean
+        required: false
+  delete_group_member:
+    title: Delete Group Member
+    description: Delete an email address or domain from a group
+    input:
+      id:
+        title: ID
+        description: The Mimecast ID of the group to remove from
+        type: string
+        required: true
+      email_address:
+        title: Email Address
+        description: The email address to remove from group. Use either email address or domain
+        type: string
+        required: false
+      domain:
+        title: Domain
+        description: A domain to remove from group. Use either email address or domain
+        type: string
+        required: false
+    output:
+      success:
+        title: Success
+        description: Status of success of the delete operation
         type: boolean
         required: false
   find_groups:
