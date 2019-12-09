@@ -43,12 +43,12 @@ This action is used to create a managed URL.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|action|string|block|True|Set to 'block' to blacklist the URL, 'permit' to whitelist it|['block','permit']|
+|action|string|block|True|Set to 'block' to blacklist the URL, 'permit' to whitelist it|['block', 'permit']|
 |comment|string|None|False|A comment about the why the URL is managed; for tracking purposes|None|
 |disable_log_click|boolean|None|True|Disable logging of user clicks on the URL|None|
 |disable_rewrite|boolean|None|True|Disable rewriting of this URL in emails. Applies only if action = 'permit'|None|
 |disable_user_awareness|boolean|None|True|Disable User Awareness challenges for this URL. Applies only if action = 'permit'|None|
-|match_type|string|explicit|True|Set to 'explicit' to block or permit only instances of the full URL. Set to 'domain' to block or permit any URL with the same domain|['explicit','domain']|
+|match_type|string|explicit|True|Set to 'explicit' to block or permit only instances of the full URL. Set to 'domain' to block or permit any URL with the same domain|['explicit', 'domain']|
 |url|string|None|True|The URL to block or permit. Do not include a fragment|None|
 
 ##### Output
@@ -86,13 +86,13 @@ This action is used to get information on a managed URL.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|action|string|none|False|Filter on whether or not the action is 'block' or 'permit'|['none','block','permit']|
-|disable_log_click|string|none|False|Filter on whether or not clicks are logged for this URL|['none','false','true']|
-|disable_rewrite|string|none|False|Filter on whether or not rewriting of this URL in emails is enabled|['none','false','true']|
-|disable_user_awareness|string|none|False|Filter on whether or not User Awareness challenges for this URL|['none','false','true']|
+|action|string|none|False|Filter on whether or not the action is 'block' or 'permit'|['none', 'block', 'permit']|
+|disable_log_click|string|none|False|Filter on whether or not clicks are logged for this URL|['none', 'false', 'true']|
+|disable_rewrite|string|none|False|Filter on whether or not rewriting of this URL in emails is enabled|['none', 'false', 'true']|
+|disable_user_awareness|string|none|False|Filter on whether or not User Awareness challenges for this URL|['none', 'false', 'true']|
 |domain|string|None|False|The managed domain|None|
 |id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|
-|match_type|string|none|False|Filter on whether or not the match type is 'explicit' or 'domain'|['none','explicit','domain']|
+|match_type|string|none|False|Filter on whether or not the match type is 'explicit' or 'domain'|['none', 'explicit', 'domain']|
 |scheme|string|None|False|Filter on whether or not the protocol is HTTP or HTTPS|None|
 
 ##### Output
@@ -158,7 +158,7 @@ This action is used to permit or block a sender.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|action|string|block|True|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|['block','permit']|
+|action|string|block|True|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|['block', 'permit']|
 |sender|string|None|True|The email address of the external sender|None|
 |to|string|None|True|The email address of the internal recipient|None|
 
@@ -194,10 +194,10 @@ This action is used to create a blocked sender policy.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |description|string|None|True|A description for the policy which is kept with the email in the archive for future reference|None|
-|from_part|string|envelope_from|True|Must be: envelope_from, header_from or both|['envelope_from','header_from','both']|
+|from_part|string|envelope_from|True|Must be: envelope_from, header_from or both|['envelope_from', 'header_from', 'both']|
 |from_type|string|everyone|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone','internal_addresses','external_addresses','email_domain','profile_group','individual_email_address']|
 |from_value|string|None|False|Required if `From Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `From Type` is email_domain, a domain name without the @ symbol. If `From Type` is profile_group, the ID of the profile group. If `From Type` is individual_email_address, an email address|None|
-|option|string|block_sender|True|The block, option must be: no_action or block_sender|['block_sender','no_action']|
+|option|string|block_sender|True|The block, option must be: no_action or block_sender|['block_sender', 'no_action']|
 |source_ips|string|None|False|A comma separated list of IP addresses using CIDR notation (X.X.X.X/XX). When set the policy only applies for connections from matching addresses|None|
 |to_type|string|everyone|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone','internal_addresses','external_addresses','email_domain','profile_group','individual_email_address']|
 |to_value|string|None|False|Required if `To Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `To Type` is email_domain, a domain name without the @ symbol. If `To Type` is profile_group, the ID of the profile group. If `To Type` is individual_email_address, an email address|None|
@@ -336,7 +336,7 @@ This action is used to find groups that match a given query.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|False|A string to query for|None|
-|source|string|cloud|True|A group source to filter on, either "cloud" or "ldap"|['cloud','ldap']|
+|source|string|cloud|True|A group source to filter on, either "cloud" or "ldap"|['cloud', 'ldap']|
 
 ##### Output
 
@@ -378,8 +378,8 @@ This action is used to get TTP URL logs.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |from|string|None|False|Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day|None|
-|route|string|all|True|Filters logs by route, must be one of inbound, outbound, internal, or all|['all','inbound','outbound','internal']|
-|scan_result|string|all|True|Filters logs by scan result, must be one of clean, malicious, or all|['clean','malicious','all']|
+|route|string|all|True|Filters logs by route, must be one of inbound, outbound, internal, or all|['all', 'inbound', 'outbound', 'internal']|
+|scan_result|string|all|True|Filters logs by scan result, must be one of clean, malicious, or all|['clean', 'malicious', 'all']|
 |to|string|None|False|End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request|None|
 |url_to_filter|string|None|False|Regular expression matching to filter on. e.g. `examp` will return only URLs with the letters exap in them|None|
 
@@ -502,7 +502,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
-* 3.1.1 - Update Get TTP URL Logs to allow for better URL filtering
+* 4.0.0 - Update Get TTP URL Logs to allow for better URL filtering
 * 3.1.0 - New action Delete Managed URL and Delete Group Member
 * 3.0.1 - New spec and help.md format for the Hub
 * 3.0.0 - Add URL in Get TTP URL Logs action to filter output | Update connection settings to the proper authentication supported by the Mimecast API
