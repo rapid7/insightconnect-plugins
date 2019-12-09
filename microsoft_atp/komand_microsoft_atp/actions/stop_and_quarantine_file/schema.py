@@ -37,8 +37,8 @@ class StopAndQuarantineFileInput(komand.Input):
     },
     "sha1": {
       "type": "string",
-      "title": "Sha1",
-      "description": "Sha1 of the file to stop and quarantine on the machine",
+      "title": "SHA1",
+      "description": "SHA1 of the file to stop and quarantine on the machine",
       "order": 3
     }
   },
