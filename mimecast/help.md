@@ -381,7 +381,7 @@ This action is used to get TTP URL logs.
 |route|string|all|true|Filters logs by route, must be one of inbound, outbound, internal, or all|['all','inbound','outbound','internal']|
 |scan_result|string|all|true|Filters logs by scan result, must be one of clean, malicious, or all|['clean','malicious','all']|
 |to|string|None|false|End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request|None|
-|url_to_filter|string|None|false|Reguler exprestion matching to filter on. e.g. `examp` will return only URLs with the letters exap in them|None|
+|url_to_filter|string|None|false|Regular expression matching to filter on. e.g. `examp` will return only URLs with the letters exap in them|None|
 
 ##### Output
 
