@@ -1,11 +1,11 @@
 {
-	"spec": "db2d9d2eaceb18e17a00f54690691cbd",
-	"manifest": "ab3f2fa93def574b4eb44147243514ed",
-	"setup": "72f79b6041041636b4739c98c5436ac4",
+	"spec": "ccb9e2403737ac34ff45d396c86be019",
+	"manifest": "5a561a323b27e766a7813d346364d5d0",
+	"setup": "f92f624c2ee5f82429518909323b940c",
 	"schemas": [
 		{
 			"identifier": "add_group_member/schema.py",
-			"hash": "735c0d22ac218bf09b8ba845586ae845"
+			"hash": "89ceb64e4b7726b0d2370e2a50c15aa0"
 		},
 		{
 			"identifier": "create_blocked_sender_policy/schema.py",
@@ -18,6 +18,14 @@
 		{
 			"identifier": "decode_url/schema.py",
 			"hash": "d7bd6535b42a6511f21458bfe0c65497"
+		},
+		{
+			"identifier": "delete_group_member/schema.py",
+			"hash": "e6202b1ef1c23683b26943a3ecef0a27"
+		},
+		{
+			"identifier": "delete_managed_url/schema.py",
+			"hash": "5e309c920bf5b99bd1c0a07fd8c31821"
 		},
 		{
 			"identifier": "find_groups/schema.py",

@@ -1,1 +1,13 @@
-{}
+{
+    "body": {
+        "action": "add_group_member",
+        "input": {
+            "domain": "",
+            "email_address": "user@example.com",
+            "id": "eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

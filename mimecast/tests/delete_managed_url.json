@@ -1,0 +1,11 @@
+{
+    "body": {
+        "action": "delete_managed_url",
+        "input": {
+            "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhHMy6V8J3VOvTNMW2G-txx3o4zL0YXqWxuCVlGQ-1viE"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

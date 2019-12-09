@@ -18,7 +18,7 @@ tags:
 - web
 - search
 hub_tags:
-  use_cases: [soar, investigations, data_ingestion]
+  use_cases: [threat_detection_and_response, data_utility]
   keywords: [google, web, search]
   features: []
 actions:

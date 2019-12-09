@@ -13,8 +13,11 @@ This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/docum
 * Access API Key
 * Secret Key
 * Mimecast server
+* API Username and Password
 
 # Documentation
+
+* https://www.mimecast.com/tech-connect/documentation/api-overview
 
 ## Setup
 
@@ -114,6 +117,34 @@ Example output:
       "disableUserAwareness": true,
       "disableRewrite": true,
       "disableLogClick": false
+    }
+  ]
+}
+```
+
+#### Delete Managed URL
+
+This action is used to remove a Managed URL from the blocked list.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|id|string|None|True|Mimecast ID of the managed URL|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Success status of the action|
+
+Example output:
+
+```
+{
+  "response": [
+    {
+      "success": True
     }
   ]
 }
@@ -220,8 +251,8 @@ This action is used to add an email address or domain to a group.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|The Mimecast ID of the group to add to|None|
-|email_address|string|None|False|The email address of a user to add to a group. Use either emailAddress or domain|None|
-|domain|string|None|False|A domain to add to a group. Use either emailAddress or domain|None|
+|email_address|string|None|False|The email address of a user to add to a group. Use either email address or domain|None|
+|domain|string|None|False|A domain to add to a group. Use either email address or domain|None|
 
 ##### Output
 
@@ -230,7 +261,7 @@ This action is used to add an email address or domain to a group.
 |folder_id|string|False|The Mimecast ID of the group that the user / domain was added to|
 |email_address|string|False|The email address of the user that was added to the group|
 |id|string|False|The Mimecast ID of the user / domain that was added to the group|
-|internal|boolean|False|If the user / doamin is internal or not|
+|internal|boolean|False|If the user / domain is internal or not|
 
 Example output:
 
@@ -240,6 +271,33 @@ Example output:
   "folder_id": "eNoVzrkOgkAUQNF_eTWFIIjQEdk0OEaUgCUyD8HMojNiROO_i_3Nyf2AxmZQ2FPwgUgRxWbnzZOxKwsyiCjP-BnTe7jYxA5Pq1xsmRhJ4Sbv9SU4zfgrq8vjdSdbO3eDPRjAaH0Dv62ZRgOaQT8kR9VIihO_OpDQDFzPsafwiUr3UoBvGtBKRlH9F-ylZXnfH3hjMBs",
   "email_address": "user@example.com",
   "internal": true
+}
+```
+
+#### Delete Group Member
+
+This action is used to remove an email address or domain from a group.
+Delete on an email or domain that does not exist will result in no operation performed.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|id|string|None|True|The Mimecast ID of the group to remove from|None|
+|email_address|string|None|False|The email address of user to remove from the group. Use either email address or domain|None|
+|domain|string|None|False|A domain to remove from a group. Use either email address or domain|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|bool|False|Success of the delete operation|
+
+Example output:
+
+```
+{
+  "success": true
 }
 ```
 
@@ -443,6 +501,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 # Version History
 
 * 3.1.1 - Update Get TTP URL Logs to allow for better URL filtering
+* 3.1.0 - New action Delete Managed URL and Delete Group Member
 * 3.0.1 - New spec and help.md format for the Hub
 * 3.0.0 - Add URL in Get TTP URL Logs action to filter output | Update connection settings to the proper authentication supported by the Mimecast API
 * 2.5.0 - New action Decode URL

@@ -27,6 +27,10 @@ class ICONMimecast(komand.Plugin):
 
         self.add_action(actions.DecodeUrl())
 
+        self.add_action(actions.DeleteGroupMember())
+
+        self.add_action(actions.DeleteManagedUrl())
+
         self.add_action(actions.FindGroups())
 
         self.add_action(actions.GetManagedUrl())

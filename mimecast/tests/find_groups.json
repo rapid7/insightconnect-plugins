@@ -1,1 +1,12 @@
-{}
+{
+    "body": {
+        "action": "find_groups",
+        "input": {
+            "query": "",
+            "source": "cloud"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

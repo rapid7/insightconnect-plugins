@@ -18,7 +18,7 @@ tags:
 - search
 - exchange
 hub_tags:
-  use_cases: [soar, investigations, threat_detection_and_response, threat_intel, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [facebook, threat, search, exchange]
   features: []
 types:
