@@ -43,19 +43,19 @@ This action is used to create a managed URL.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|comment|string|None|False|A comment about the why the URL is managed; for tracking purposes|None|
-|action|string|block|True|Set to 'block' to blacklist the URL, 'permit' to whitelist it|['block', 'permit']|
-|match_type|string|explicit|True|Set to 'explicit' to block or permit only instances of the full URL. Set to 'domain' to block or permit any URL with the same domain|['explicit', 'domain']|
-|disable_rewrite|boolean|None|True|Disable rewriting of this URL in emails. Applies only if action = 'permit'|None|
-|url|string|None|True|The URL to block or permit. Do not include a fragment|None|
-|disable_user_awareness|boolean|None|True|Disable User Awareness challenges for this URL. Applies only if action = 'permit'|None|
-|disable_log_click|boolean|None|True|Disable logging of user clicks on the URL|None|
+|action|string|block|true|Set to 'block' to blacklist the URL, 'permit' to whitelist it|['block','permit']|
+|comment|string|None|false|A comment about the why the URL is managed; for tracking purposes|None|
+|disable_log_click|boolean|None|true|Disable logging of user clicks on the URL|None|
+|disable_rewrite|boolean|None|true|Disable rewriting of this URL in emails. Applies only if action = 'permit'|None|
+|disable_user_awareness|boolean|None|true|Disable User Awareness challenges for this URL. Applies only if action = 'permit'|None|
+|match_type|string|explicit|true|Set to 'explicit' to block or permit only instances of the full URL. Set to 'domain' to block or permit any URL with the same domain|['explicit','domain']|
+|url|string|None|true|The URL to block or permit. Do not include a fragment|None|
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|[]managed_url|False|Managed URL that was created|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|response|[]managed_url|None|false|Managed URL that was created|None|
 
 Example output:
 
@@ -86,20 +86,20 @@ This action is used to get information on a managed URL.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|domain|string|None|False|The managed domain|None|
-|scheme|string|None|False|Filter on whether or not the protocol is HTTP or HTTPS|None|
-|match_type|string|none|False|Filter on whether or not the match type is 'explicit' or 'domain'|['none', 'explicit', 'domain']|
-|disable_rewrite|string|none|False|Filter on whether or not rewriting of this URL in emails is enabled|['none', 'false', 'true']|
-|disable_user_awareness|string|none|False|Filter on whether or not User Awareness challenges for this URL|['none', 'false', 'true']|
-|action|string|none|False|Filter on whether or not the action is 'block' or 'permit'|['none', 'block', 'permit']|
-|disable_log_click|string|none|False|Filter on whether or not clicks are logged for this URL|['none', 'false', 'true']|
-|id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|
+|action|string|none|false|Filter on whether or not the action is 'block' or 'permit'|['none','block','permit']|
+|disable_log_click|string|none|false|Filter on whether or not clicks are logged for this URL|['none','false','true']|
+|disable_rewrite|string|none|false|Filter on whether or not rewriting of this URL in emails is enabled|['none','false','true']|
+|disable_user_awareness|string|none|false|Filter on whether or not User Awareness challenges for this URL|['none','false','true']|
+|domain|string|None|false|The managed domain|None|
+|id|string|None|false|Filter on the Mimecast secure ID of the managed URL|None|
+|match_type|string|none|false|Filter on whether or not the match type is 'explicit' or 'domain'|['none','explicit','domain']|
+|scheme|string|None|false|Filter on whether or not the protocol is HTTP or HTTPS|None|
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|[]managed_url|False|Managed URLs matching |
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|response|[]managed_url|None|false|Managed URLs matching |None|
 
 Example output:
 
@@ -130,13 +130,13 @@ This action is used to remove a Managed URL from the blocked list.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|string|None|True|Mimecast ID of the managed URL|None|
+|id|string|None|true|The Mimecast secure ID of the managed URL|None|
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Success status of the action|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|success|boolean|None|false|Success status of delete request|None|
 
 Example output:
 
@@ -158,15 +158,15 @@ This action is used to permit or block a sender.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|action|string|block|True|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|['block', 'permit']|
-|to|string|None|True|The email address of the internal recipient|None|
-|sender|string|None|True|The email address of the external sender|None|
+|action|string|block|true|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|['block','permit']|
+|sender|string|None|true|The email address of the external sender|None|
+|to|string|None|true|The email address of the internal recipient|None|
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|[]managed_sender|False|The Managed Sender that was created|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|response|[]managed_sender|None|false|The Managed Sender that was created|None|
 
 Example output:
 
@@ -189,22 +189,24 @@ This action is used to create a blocked sender policy.
 
 ##### Input
 
+##### Input
+
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|option|string|block_sender|True|The block, option must be\: no_action or block_sender|['block_sender', 'no_action']|
-|description|string|None|True|A description for the policy which is kept with the email in the archive for future reference|None|
-|from_part|string|envelope_from|True|Must be\: envelope_from, header_from or both|['envelope_from', 'header_from', 'both']|
-|from_type|string|everyone|True|Can be one of\: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|
-|from_value|string|None|False|Required if `From Type` is one of email_domain, profile_group, individual_email_address. Expected values\: If `From Type` is email_domain, a domain name without the @ symbol. If `From Type` is profile_group, the ID of the profile group. If `From Type` is individual_email_address, an email address|None|
-|to_type|string|everyone|True|Can be one of\: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|
-|to_value|string|None|False|Required if `To Type` is one of email_domain, profile_group, individual_email_address. Expected values\: If `To Type` is email_domain, a domain name without the @ symbol. If `To Type` is profile_group, the ID of the profile group. If `To Type` is individual_email_address, an email address|None|
-|source_ips|string|None|False|A comma separated list of IP addresses using CIDR notation (X.X.X.X/XX). When set the policy only applies for connections from matching addresses|None|
+|description|string|None|true|A description for the policy which is kept with the email in the archive for future reference|None|
+|from_part|string|envelope_from|true|Must be: envelope_from, header_from or both|['envelope_from','header_from','both']|
+|from_type|string|everyone|true|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone','internal_addresses','external_addresses','email_domain','profile_group','individual_email_address']|
+|from_value|string|None|false|Required if `From Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `From Type` is email_domain, a domain name without the @ symbol. If `From Type` is profile_group, the ID of the profile group. If `From Type` is individual_email_address, an email address|None|
+|option|string|block_sender|true|The block, option must be: no_action or block_sender|['block_sender','no_action']|
+|source_ips|string|None|false|A comma separated list of IP addresses using CIDR notation (X.X.X.X/XX). When set the policy only applies for connections from matching addresses|None|
+|to_type|string|everyone|true|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone','internal_addresses','external_addresses','email_domain','profile_group','individual_email_address']|
+|to_value|string|None|false|Required if `To Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `To Type` is email_domain, a domain name without the @ symbol. If `To Type` is profile_group, the ID of the profile group. If `To Type` is individual_email_address, an email address|None|
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|sender_policy|[]sender_policy|False|The policy that was created|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|sender_policy|[]sender_policy|None|false|The policy that was created|None|
 
 Example output:
 
@@ -250,18 +252,18 @@ This action is used to add an email address or domain to a group.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|string|None|True|The Mimecast ID of the group to add to|None|
-|email_address|string|None|False|The email address of a user to add to a group. Use either email address or domain|None|
-|domain|string|None|False|A domain to add to a group. Use either email address or domain|None|
+|domain|string|None|false|A domain to add to a group. Use either email address or domain|None|
+|email_address|string|None|false|The email address of a user to add to a group. Use either email address or domain|None|
+|id|string|None|true|The Mimecast ID of the group to add to|None|
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|folder_id|string|False|The Mimecast ID of the group that the user / domain was added to|
-|email_address|string|False|The email address of the user that was added to the group|
-|id|string|False|The Mimecast ID of the user / domain that was added to the group|
-|internal|boolean|False|If the user / domain is internal or not|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|email_address|string|None|false|The email address of the user that was added to the group|None|
+|folder_id|string|None|false|The Mimecast ID of the group that the user / domain was added to|None|
+|id|string|None|false|The Mimecast ID of the user / domain that was added to the group|None|
+|internal|boolean|None|false|If the user / doamin is internal or not|None|
 
 Example output:
 
@@ -283,15 +285,15 @@ Delete on an email or domain that does not exist will result in no operation per
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|string|None|True|The Mimecast ID of the group to remove from|None|
-|email_address|string|None|False|The email address of user to remove from the group. Use either email address or domain|None|
-|domain|string|None|False|A domain to remove from a group. Use either email address or domain|None|
+|domain|string|None|false|A domain to remove from group. Use either email address or domain|None|
+|email_address|string|None|false|The email address to remove from group. Use either email address or domain|None|
+|id|string|None|true|The Mimecast ID of the group to remove from|None|
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|bool|False|Success of the delete operation|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|success|boolean|None|false|Status of success of the delete operation|None|
 
 Example output:
 
@@ -309,13 +311,13 @@ This action is used to decode a Mimecast encoded URL.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|encoded_url|string|None|True|The Mimecast encoded URL (e.g. https://protect-xx.mimecast.com/...)|None|
+|encoded_url|string|None|true|The Mimecast encoded URL (e.g. https://protect-xx.mimecast.com/...)|None|
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|decoded_url|string|True|Original decoded URL|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|decoded_url|string|None|true|Original decoded URL|None|
 
 Example output:
 
@@ -333,14 +335,14 @@ This action is used to find groups that match a given query.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|query|string|None|False|A string to query for|None|
-|source|string|cloud|True|A group source to filter on, either "cloud" or "ldap"|['cloud', 'ldap']|
+|query|string|None|false|A string to query for|None|
+|source|string|cloud|true|A group source to filter on, either "cloud" or "ldap"|['cloud','ldap']|
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|groups|[]group|False|A list of groups that mach the query|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|groups|[]group|None|false|A list of groups that mach the query|None|
 
 Example output:
 
@@ -383,9 +385,9 @@ This action is used to get TTP URL logs.
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|click_logs|[]click_logs|False|Click Logs|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|click_logs|[]click_logs|None|false|Click Logs|None|
 
 Example output:
 
