@@ -21,7 +21,7 @@ class SubmitFile(komand.Action):
 
         platform = params.get(Input.PLATFORM)
         detail = params.get(Input.DETAIL)
-        premium = params.get(Input.USE_PREMIUM_SANDBOX)
+        premium = str(params.get(Input.USE_PREMIUM_SANDBOX)).lower()
         classification = params.get(Input.CLASSIFICATION, 'private')
         f = params.get(Input.FILE)
 
