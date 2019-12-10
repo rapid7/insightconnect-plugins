@@ -702,7 +702,7 @@ actions:
         - all
       url_to_filter:
         title: URL regular expression filter
-        description: Regular expression matching to filter on. e.g. `examp` will return only URLs with the letters exap in them
+        description: Regular expression matching to filter on. e.g. `examp` will return only URLs with the letters examp in them
         type: string
         required: false
     output:
