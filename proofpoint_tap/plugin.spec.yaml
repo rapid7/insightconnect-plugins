@@ -4,7 +4,7 @@ products: [insightconnect]
 name: proofpoint_tap
 title: Proofpoint TAP
 description: A plugin for Proofpoint Targeted Attack Protection (TAP) alerts
-version: 1.0.4
+version: 1.0.5
 vendor: rapid7
 support: community
 status: []
@@ -40,6 +40,11 @@ types:
     condemnation_time:
       title: Condemnation Time
       description: Condemnation Time
+      type: string
+      required: false
+    threat_details_url:
+      title: Threat Details URL
+      description: URL for Details of the Threat
       type: string
       required: false
   message:
