@@ -53,9 +53,9 @@ This action is used to create a managed URL.
 
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|response|[]managed_url|None|False|Managed URL that was created|None|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|[]managed_url|False|Managed URL that was created|
 
 Example output:
 
@@ -97,9 +97,9 @@ This action is used to get information on a managed URL.
 
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|response|[]managed_url|None|False|Managed URLs matching |None|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|[]managed_url|False|Managed URLs matching |
 
 Example output:
 
@@ -134,9 +134,9 @@ This action is used to remove a Managed URL from the blocked list.
 
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|success|boolean|None|False|Success status of delete request|None|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Success status of delete request|
 
 Example output:
 
@@ -164,9 +164,9 @@ This action is used to permit or block a sender.
 
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|response|[]managed_sender|None|False|The Managed Sender that was created|None|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|[]managed_sender|False|The Managed Sender that was created|
 
 Example output:
 
@@ -204,9 +204,9 @@ This action is used to create a blocked sender policy.
 
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sender_policy|[]sender_policy|None|False|The policy that was created|None|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|sender_policy|[]sender_policy|False|The policy that was created|
 
 Example output:
 
@@ -258,12 +258,12 @@ This action is used to add an email address or domain to a group.
 
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email_address|string|None|False|The email address of the user that was added to the group|None|
-|folder_id|string|None|False|The Mimecast ID of the group that the user / domain was added to|None|
-|id|string|None|False|The Mimecast ID of the user / domain that was added to the group|None|
-|internal|boolean|None|False|If the user / doamin is internal or not|None|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|email_address|string|False|The email address of the user that was added to the group|
+|folder_id|string|False|The Mimecast ID of the group that the user / domain was added to|
+|id|string|False|The Mimecast ID of the user / domain that was added to the group|
+|internal|boolean|False|If the user / doamin is internal or not|
 
 Example output:
 
@@ -291,9 +291,9 @@ Delete on an email or domain that does not exist will result in no operation per
 
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|success|boolean|None|False|Status of success of the delete operation|None|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Status of success of the delete operation|
 
 Example output:
 
@@ -315,9 +315,9 @@ This action is used to decode a Mimecast encoded URL.
 
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|decoded_url|string|None|True|Original decoded URL|None|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|decoded_url|string|True|Original decoded URL|
 
 Example output:
 
@@ -340,9 +340,9 @@ This action is used to find groups that match a given query.
 
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|groups|[]group|None|False|A list of groups that mach the query|None|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|groups|[]group|False|A list of groups that mach the query|
 
 Example output:
 
@@ -385,9 +385,9 @@ This action is used to get TTP URL logs.
 
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|click_logs|[]click_logs|None|False|Click Logs|None|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|click_logs|[]click_logs|False|Click Logs|
 
 Example output:
 
@@ -429,7 +429,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 |Action|string|False|The action that was taken for the click|
 |Admin Override|string|False|The action defined by the administrator for the URL|
 |Category|string|False|The category of the URL clicked|
-|Date|string|false|The date that the URL was clicked|
+|Date|string|False|The date that the URL was clicked|
 |Route|string|False|The route of the email that contained the link|
 |Scan Result|string|False|The result of the URL scan|
 |TTP Definition|string|False|The description of the definition that triggered the URL to be rewritten by Mimecast|
