@@ -17,6 +17,7 @@ validate:
 	@test -x ../tools/mdl.sh && ../tools/mdl.sh || true
 	@test -x ../tools/flake8.sh && ../tools/flake8.sh || true
 	@test -x ../tools/bandit.sh && ../tools/bandit.sh || true
+	@test -x ../tools/misspell.sh && ../tools/misspell.sh || true
 
 update-tools:
 	../tools/update-tools.sh
