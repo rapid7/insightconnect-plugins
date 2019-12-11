@@ -1,13 +1,13 @@
 # Description
 
-Google Drive is an online file storage and management system. This plugin allows you to upload and retrieve files from Google drive.
+[Google Drive](https://www.google.com/drive/) is an online file storage and management system. This plugin allows you to upload and retrieve files from Google drive.
 
 This plugin utilizes the [Google Drive API](https://developers.google.com/drive/v3/web/about-sdk).
 
 # Key Features
 
 * Get file contents
-* upload files
+* Upload files
 
 # Requirements
 
@@ -25,9 +25,9 @@ The connection configuration accepts the following parameters:
 |private_key|password|None|True|Private Key from service credentials|None|
 |admin_user|string|None|True|Admin user to impersonate, e.g. admin@domain.com|None|
 |private_key_id|password|None|True|Private Key ID from service credentials|None|
-|token_uri|string|https\://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
-|auth_provider_x509_cert_url|string|https\://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
-|auth_uri|string|https\://accounts.google.com/o/oauth2/auth|True|None|None|
+|token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
+|auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
+|auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|None|None|
 |client_email|string|None|True|Client email from service credentials|None|
 |client_id|string|None|True|Client ID|None|
 |project_id|string|None|True|Project ID from service credentials|None|
@@ -107,9 +107,9 @@ This action is used to upload a file to Google Drive.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|google_file_type|string|None|True||['Docs', 'Sheets', 'Slides']|
+|google_file_type|string|None|True|The file type that Google will convert the file to|['Docs', 'Sheets', 'Slides']|
 |folder_id|string|None|False|Folder to put the file in|None|
-|file|file|None|True|The File to upload|None|
+|file|file|None|True|The file to upload|None|
 
 ##### Output
 
@@ -177,7 +177,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -186,11 +186,12 @@ _This plugin does not contain any custom output types._
 ## Troubleshooting
 
 * It is very important to use the full filename including the file extension e.g. example.docx. Google Drive uses the file extension to determine how to format the file. Not using a file extension will result in a error and using the wrong file extension may result in file corruption
-* When using file overwrite, Google can not change formats. I.E. If the orignal file is a Google sheets file, then the new file will also be a Google sheets file.
+* When using file overwrite, Google can not change formats. I.E. If the original file is a Google sheets file, then the new file will also be a Google sheets file.
 * When using file overwrite, the MIME Type should be set to the correct type to avoid data formatting issues.
 
 # Version History
 
+* 2.1.3 - Hub styling update
 * 2.1.2 - New spec and help.md format for the Hub
 * 2.1.1 - Fix typo in plugin spec
 * 2.1.0 - Add Download File action
