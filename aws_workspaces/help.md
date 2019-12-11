@@ -1,7 +1,7 @@
 # Description
 
 This plugin utilizes [AWS WorkSpaces](https://aws.amazon.com/workspaces/) to create workspaces. Amazon WorkSpaces is a fully managed
- desktop computing service in the cloud that allows its customers to provide cloud-based desktops to their end-users. Can be utilized for bring you own device policies and product testing.
+ desktop computing service in the cloud that allows its customers to provide cloud-based desktops to their end-users. Can be utilized for bring your own device policies and product testing.
 
 # Key Features
 
