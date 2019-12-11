@@ -3,8 +3,8 @@
         "action": "unblock_user",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
             "url": null
         },
