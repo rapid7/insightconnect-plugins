@@ -102,13 +102,13 @@ class GetFirewallOutput(komand.Output):
     "selfLink": {
       "type": "string",
       "title": "Self Link",
-      "description": "Server-defined url for the resource",
+      "description": "Server-defined URL for the resource",
       "order": 4
     },
     "sourceRanges": {
       "type": "array",
       "title": "Source Ranges",
-      "description": "If source ranges are specified, the firewall will apply only to traffic that has source ip address in these ranges",
+      "description": "If source ranges are specified, the firewall will apply only to traffic that has source IP address in these ranges",
       "items": {
         "type": "string"
       },
@@ -117,7 +117,7 @@ class GetFirewallOutput(komand.Output):
     "sourceTags": {
       "type": "array",
       "title": "Source Tags",
-      "description": "If source tags are specified, the firewall will apply only to traffic with source ip that belongs to a tag listed in source tags",
+      "description": "If source tags are specified, the firewall will apply only to traffic with source IP that belongs to a tag listed in source tags",
       "items": {
         "type": "string"
       },

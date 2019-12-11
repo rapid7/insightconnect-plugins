@@ -434,7 +434,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for this resource
+        description: Server-defined URL for this resource
         title: Self Link
         type: string
         required: false
@@ -461,7 +461,7 @@ actions:
       source:
         type: string
         title: Source
-        description: Valid partial or full url to an existing persistent disk resource
+        description: Valid partial or full URL to an existing persistent disk resource
           (e.g. projects/my-project-171212/zones/us-central1-c/disks/new-disk)
         required: true
     output:
@@ -499,7 +499,7 @@ actions:
         type: integer
         required: false
       targetLink:
-        description: The url of the resource that the operation modifies
+        description: The URL of the resource that the operation modifies
         title: Target Link
         type: string
         required: false
@@ -510,7 +510,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -520,7 +520,7 @@ actions:
         type: string
         required: false
       zone:
-        description: The url of the zone where the operation resides. Only available
+        description: The URL of the zone where the operation resides. Only available
           when performing per-zone operations
         title: Zone
         type: string
@@ -543,15 +543,15 @@ actions:
         type: string
         required: false
       httpErrorMessage:
-        description: If the operation fails, this field contains the http error message
+        description: If the operation fails, this field contains the HTTP error message
           that was returned
-        title: Http Error Message
+        title: HTTP Error Message
         type: string
         required: false
       httpErrorStatusCode:
-        description: If the operation fails, this field contains the http error status
+        description: If the operation fails, this field contains the HTTP error status
           code that was returned
-        title: Http Error Status Code
+        title: HTTP Error Status Code
         type: integer
         required: false
       operationType:
@@ -571,7 +571,7 @@ actions:
         type: string
         required: false
       region:
-        description: The url of the region where the operation resides
+        description: The URL of the region where the operation resides
         title: Region
         type: string
         required: false
@@ -640,7 +640,7 @@ actions:
         type: integer
         required: false
       targetLink:
-        description: The url of the resource that the operation modifies
+        description: The URL of the resource that the operation modifies
         title: Target Link
         type: string
         required: false
@@ -651,7 +651,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -661,7 +661,7 @@ actions:
         type: string
         required: false
       zone:
-        description: The url of the zone where the operation resides. Only available
+        description: The URL of the zone where the operation resides. Only available
           when performing per-zone operations
         title: Zone
         type: string
@@ -684,15 +684,15 @@ actions:
         type: string
         required: false
       httpErrorMessage:
-        description: If the operation fails, this field contains the http error message
+        description: If the operation fails, this field contains the HTTP error message
           that was returned
-        title: Http Error Message
+        title: HTTP Error Message
         type: string
         required: false
       httpErrorStatusCode:
-        description: If the operation fails, this field contains the http error status
+        description: If the operation fails, this field contains the HTTP error status
           code that was returned
-        title: Http Error Status Code
+        title: HTTP Error Status Code
         type: integer
         required: false
       operationType:
@@ -712,7 +712,7 @@ actions:
         type: string
         required: false
       region:
-        description: The url of the region where the operation resides
+        description: The URL of the region where the operation resides
         title: Region
         type: string
         required: false
@@ -787,7 +787,7 @@ actions:
       selfLink:
         type: string
         title: Self Link
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         required: true
       snapshotEncryptionKey:
         description: Encrypts the snapshot
@@ -834,7 +834,7 @@ actions:
         type: integer
         required: false
       targetLink:
-        description: The url of the resource that the operation modifies
+        description: The URL of the resource that the operation modifies
         title: Target Link
         type: string
         required: false
@@ -845,7 +845,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -855,7 +855,7 @@ actions:
         type: string
         required: false
       zone:
-        description: The url of the zone where the operation resides. Only available
+        description: The URL of the zone where the operation resides. Only available
           when performing per-zone operations
         title: Zone
         type: string
@@ -878,15 +878,15 @@ actions:
         type: string
         required: false
       httpErrorMessage:
-        description: If the operation fails, this field contains the http error message
+        description: If the operation fails, this field contains the HTTP error message
           that was returned
-        title: Http Error Message
+        title: HTTP Error Message
         type: string
         required: false
       httpErrorStatusCode:
-        description: If the operation fails, this field contains the http error status
+        description: If the operation fails, this field contains the HTTP error status
           code that was returned
-        title: Http Error Status Code
+        title: HTTP Error Status Code
         type: integer
         required: false
       operationType:
@@ -906,7 +906,7 @@ actions:
         type: string
         required: false
       region:
-        description: The url of the region where the operation resides
+        description: The URL of the region where the operation resides
         title: Region
         type: string
         required: false
@@ -967,7 +967,7 @@ actions:
         type: '[]item_snapshot'
         required: false
       selfLink:
-        description: Server-defined url for this resource
+        description: Server-defined URL for this resource
         title: Self Link
         type: string
         required: false
@@ -1015,7 +1015,7 @@ actions:
         type: integer
         required: false
       targetLink:
-        description: The url of the resource that the operation modifies
+        description: The URL of the resource that the operation modifies
         title: Target Link
         type: string
         required: false
@@ -1026,7 +1026,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -1036,7 +1036,7 @@ actions:
         type: string
         required: false
       zone:
-        description: The url of the zone where the operation resides. Only available
+        description: The URL of the zone where the operation resides. Only available
           when performing per-zone operations
         title: Zone
         type: string
@@ -1059,15 +1059,15 @@ actions:
         type: string
         required: false
       httpErrorMessage:
-        description: If the operation fails, this field contains the http error message
+        description: If the operation fails, this field contains the HTTP error message
           that was returned
-        title: Http Error Message
+        title: HTTP Error Message
         type: string
         required: false
       httpErrorStatusCode:
-        description: If the operation fails, this field contains the http error status
+        description: If the operation fails, this field contains the HTTP error status
           code that was returned
-        title: Http Error Status Code
+        title: HTTP Error Status Code
         type: integer
         required: false
       operationType:
@@ -1087,7 +1087,7 @@ actions:
         type: string
         required: false
       region:
-        description: The url of the region where the operation resides
+        description: The URL of the region where the operation resides
         title: Region
         type: string
         required: false
@@ -1130,7 +1130,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -1148,13 +1148,13 @@ actions:
         required: false
       sourceTags:
         description: If source tags are specified, the firewall will apply only to
-          traffic with source ip that belongs to a tag listed in source tags
+          traffic with source IP that belongs to a tag listed in source tags
         title: Source Tags
         type: '[]string'
         required: false
       sourceRanges:
         description: If source ranges are specified, the firewall will apply only
-          to traffic that has source ip address in these ranges
+          to traffic that has source IP address in these ranges
         title: Source Ranges
         type: '[]string'
         required: false
@@ -1204,7 +1204,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -1221,13 +1221,13 @@ actions:
         required: false
       sourceTags:
         description: If source tags are specified, the firewall will apply only to
-          traffic with source ip that belongs to a tag listed in source tags
+          traffic with source IP that belongs to a tag listed in source tags
         title: Source Tags
         type: '[]string'
         required: false
       sourceRanges:
         description: If source ranges are specified, the firewall will apply only
-          to traffic that has source ip address in these ranges
+          to traffic that has source IP address in these ranges
         title: Source Ranges
         type: '[]string'
         required: false
@@ -1277,7 +1277,7 @@ actions:
         type: integer
         required: false
       targetLink:
-        description: The url of the resource that the operation modifies
+        description: The URL of the resource that the operation modifies
         title: Target Link
         type: string
         required: false
@@ -1288,7 +1288,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -1298,7 +1298,7 @@ actions:
         type: string
         required: false
       zone:
-        description: The url of the zone where the operation resides. Only available
+        description: The URL of the zone where the operation resides. Only available
           when performing per-zone operations
         title: Zone
         type: string
@@ -1321,15 +1321,15 @@ actions:
         type: string
         required: false
       httpErrorMessage:
-        description: If the operation fails, this field contains the http error message
+        description: If the operation fails, this field contains the HTTP error message
           that was returned
-        title: Http Error Message
+        title: HTTP Error Message
         type: string
         required: false
       httpErrorStatusCode:
-        description: If the operation fails, this field contains the http error status
+        description: If the operation fails, this field contains the HTTP error status
           code that was returned
-        title: Http Error Status Code
+        title: HTTP Error Status Code
         type: integer
         required: false
       operationType:
@@ -1349,7 +1349,7 @@ actions:
         type: string
         required: false
       region:
-        description: The url of the region where the operation resides
+        description: The URL of the region where the operation resides
         title: Region
         type: string
         required: false
@@ -1410,7 +1410,7 @@ actions:
       selfLink:
         type: string
         title: Self Link
-        description: Server-defined url for this resource
+        description: Server-defined URL for this resource
         required: false
       nextPageToken:
         type: string
@@ -1452,7 +1452,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -1469,13 +1469,13 @@ actions:
         required: false
       sourceTags:
         description: If source tags are specified, the firewall will apply only to
-          traffic with source ip that belongs to a tag listed in source tags
+          traffic with source IP that belongs to a tag listed in source tags
         title: Source Tags
         type: '[]string'
         required: false
       sourceRanges:
         description: If source ranges are specified, the firewall will apply only
-          to traffic that has source ip address in these ranges
+          to traffic that has source IP address in these ranges
         title: Source Ranges
         type: '[]string'
         required: false
@@ -1525,7 +1525,7 @@ actions:
         type: integer
         required: false
       targetLink:
-        description: The url of the resource that the operation modifies
+        description: The URL of the resource that the operation modifies
         title: Target Link
         type: string
         required: false
@@ -1536,7 +1536,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -1546,7 +1546,7 @@ actions:
         type: string
         required: false
       zone:
-        description: The url of the zone where the operation resides. Only available
+        description: The URL of the zone where the operation resides. Only available
           when performing per-zone operations
         title: Zone
         type: string
@@ -1569,15 +1569,15 @@ actions:
         type: string
         required: false
       httpErrorMessage:
-        description: If the operation fails, this field contains the http error message
+        description: If the operation fails, this field contains the HTTP error message
           that was returned
-        title: Http Error Message
+        title: HTTP Error Message
         type: string
         required: false
       httpErrorStatusCode:
-        description: If the operation fails, this field contains the http error status
+        description: If the operation fails, this field contains the HTTP error status
           code that was returned
-        title: Http Error Status Code
+        title: HTTP Error Status Code
         type: integer
         required: false
       operationType:
@@ -1597,7 +1597,7 @@ actions:
         type: string
         required: false
       region:
-        description: The url of the region where the operation resides
+        description: The URL of the region where the operation resides
         title: Region
         type: string
         required: false
@@ -1656,7 +1656,7 @@ actions:
         type: integer
         required: false
       targetLink:
-        description: The url of the resource that the operation modifies
+        description: The URL of the resource that the operation modifies
         title: Target Link
         type: string
         required: false
@@ -1667,7 +1667,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -1677,7 +1677,7 @@ actions:
         type: string
         required: false
       zone:
-        description: The url of the zone where the operation resides. Only available
+        description: The URL of the zone where the operation resides. Only available
           when performing per-zone operations
         title: Zone
         type: string
@@ -1700,15 +1700,15 @@ actions:
         type: string
         required: false
       httpErrorMessage:
-        description: If the operation fails, this field contains the http error message
+        description: If the operation fails, this field contains the HTTP error message
           that was returned
-        title: Http Error Message
+        title: HTTP Error Message
         type: string
         required: false
       httpErrorStatusCode:
-        description: If the operation fails, this field contains the http error status
+        description: If the operation fails, this field contains the HTTP error status
           code that was returned
-        title: Http Error Status Code
+        title: HTTP Error Status Code
         type: integer
         required: false
       operationType:
@@ -1728,7 +1728,7 @@ actions:
         type: string
         required: false
       region:
-        description: The url of the region where the operation resides
+        description: The URL of the region where the operation resides
         title: Region
         type: string
         required: false
@@ -1848,7 +1848,7 @@ actions:
         type: integer
         required: false
       targetLink:
-        description: The url of the resource that the operation modifies
+        description: The URL of the resource that the operation modifies
         title: Target Link
         type: string
         required: false
@@ -1859,7 +1859,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -1869,7 +1869,7 @@ actions:
         type: string
         required: false
       zone:
-        description: The url of the zone where the operation resides. Only available
+        description: The URL of the zone where the operation resides. Only available
           when performing per-zone operations
         title: Zone
         type: string
@@ -1892,15 +1892,15 @@ actions:
         type: string
         required: false
       httpErrorMessage:
-        description: If the operation fails, this field contains the http error message
+        description: If the operation fails, this field contains the HTTP error message
           that was returned
-        title: Http Error Message
+        title: HTTP Error Message
         type: string
         required: false
       httpErrorStatusCode:
-        description: If the operation fails, this field contains the http error status
+        description: If the operation fails, this field contains the HTTP error status
           code that was returned
-        title: Http Error Status Code
+        title: HTTP Error Status Code
         type: integer
         required: false
       operationType:
@@ -1920,7 +1920,7 @@ actions:
         type: string
         required: false
       region:
-        description: The url of the region where the operation resides
+        description: The URL of the region where the operation resides
         title: Region
         type: string
         required: false
@@ -1984,7 +1984,7 @@ actions:
         type: integer
         required: false
       targetLink:
-        description: The url of the resource that the operation modifies
+        description: The URL of the resource that the operation modifies
         title: Target Link
         type: string
         required: false
@@ -1995,7 +1995,7 @@ actions:
         type: string
         required: false
       selfLink:
-        description: Server-defined url for the resource
+        description: Server-defined URL for the resource
         title: Self Link
         type: string
         required: false
@@ -2005,7 +2005,7 @@ actions:
         type: string
         required: false
       zone:
-        description: The url of the zone where the operation resides. Only available
+        description: The URL of the zone where the operation resides. Only available
           when performing per-zone operations
         title: Zone
         type: string
@@ -2028,15 +2028,15 @@ actions:
         type: string
         required: false
       httpErrorMessage:
-        description: If the operation fails, this field contains the http error message
+        description: If the operation fails, this field contains the HTTP error message
           that was returned
-        title: Http Error Message
+        title: HTTP Error Message
         type: string
         required: false
       httpErrorStatusCode:
-        description: If the operation fails, this field contains the http error status
+        description: If the operation fails, this field contains the HTTP error status
           code that was returned
-        title: Http Error Status Code
+        title: HTTP Error Status Code
         type: integer
         required: false
       operationType:
@@ -2056,7 +2056,7 @@ actions:
         type: string
         required: false
       region:
-        description: The url of the region where the operation resides
+        description: The URL of the region where the operation resides
         title: Region
         type: string
         required: false
