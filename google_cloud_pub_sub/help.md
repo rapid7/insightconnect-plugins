@@ -27,9 +27,9 @@ The connection configuration accepts the following parameters:
 |private_key|password|None|True|Private Key from service credentials|None|
 |admin_user|string|None|False|Admin user to impersonate, e.g. admin@domain.com|None|
 |private_key_id|password|None|True|Private Key ID from service credentials|None|
-|token_uri|string|https\://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
-|auth_provider_x509_cert_url|string|https\://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
-|auth_uri|string|https\://accounts.google.com/o/oauth2/auth|True|None|None|
+|token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
+|auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
+|auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|None|None|
 |client_email|string|None|True|Client email from service credentials|None|
 |client_id|string|None|True|Client ID e.g. 109587155068933904953|None|
 |project_id|string|None|True|Project ID from service credentials e.g. subpub-1528163449245|None|
@@ -195,6 +195,7 @@ This plugin requires a Google [service account](https://cloud.google.com/storage
 
 # Version History
 
+* 3.1.3 - Hub Styling update
 * 3.1.2 - New spec and help.md format for the Hub
 * 3.1.1 - Fix typo in plugin spec
 * 3.1.0 - Update connection to make `admin_user` an optional input
