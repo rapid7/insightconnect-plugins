@@ -6,7 +6,7 @@ from komand_tsv import connection, actions, triggers
 
 Name = 'TSV'
 Vendor = 'rapid7'
-Version = '1.0.2'
+Version = '1.0.1'
 Description = 'Extract fields from TSV-formatted strings and files'
 
 

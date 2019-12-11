@@ -107,7 +107,6 @@ For example, `-V` is used to return the following `dump_contents` array where ea
 
 # Version History
 
-* 1.0.3 - Spec description update
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Fix issue where run action was excluded from plugin on build
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: traceroute
 title: Traceroute
 description: Trace a network route to a host
-version: 1.0.3
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

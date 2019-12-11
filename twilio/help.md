@@ -64,7 +64,6 @@ Before sending the SMS make sure that the country you're sending the message to 
 
 # Version History
 
-* 1.0.3 - Spec descripton update
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Update Twilio dependency to 6.19.1
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

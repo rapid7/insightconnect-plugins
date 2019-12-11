@@ -7,7 +7,7 @@ from komand_try_bro import connection, actions, triggers
 Name = 'Try Bro'
 Vendor = 'rapid7'
 Version = '1.0.2'
-Description = 'With the Try Bro plugin for Rapid7 InsightConnect, users can use a free instance of Bro Network Security Monitor in the cloud. Users can upload PCAP files for analysis and get Bro logs'
+Description = 'Upload PCAP files to a free instance of Bro Network Security Monitor for analysis and access to Bro logs'
 
 
 class ICONTryBro(komand.Plugin):

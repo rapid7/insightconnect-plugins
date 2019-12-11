@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='twilio-rapid7-plugin',
-      version='1.0.3',
+      version='1.0.2',
       description='Send SMS directly from a workflow using Twilio',
       author='rapid7',
       author_email='',

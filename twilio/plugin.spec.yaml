@@ -4,7 +4,7 @@ products: [insightconnect]
 name: twilio
 title: Twilio
 description: Send SMS directly from a workflow using Twilio
-version: 1.0.3
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

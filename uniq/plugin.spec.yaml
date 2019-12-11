@@ -4,7 +4,7 @@ products: [insightconnect]
 name: uniq
 title: Uniq
 description: Deduplicate datasets or items prior to processing within a workflow
-version: 1.0.3
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

@@ -250,7 +250,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.3 - Spec and help updates
 * 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - Remove erroneous data from plugin spec
 * 2.0.0 - Update to new secret key credential type

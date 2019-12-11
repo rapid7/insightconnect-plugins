@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='tsv-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.1',
       description='Extract fields from TSV-formatted strings and files',
       author='rapid7',
       author_email='',

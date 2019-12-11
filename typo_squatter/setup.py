@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='typo_squatter-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.1',
       description='Detect cybersquatting of domains to aid in phishing investigation and analysis',
       author='rapid7',
       author_email='',

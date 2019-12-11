@@ -1,7 +1,7 @@
 {
-	"spec": "910a4284406cf9b961dac143e8cd4839",
-	"manifest": "73ec88bd76dd22f798235959a2d826b7",
-	"setup": "fa76dc7805ac1a03b9386a690fc9f505",
+	"spec": "997a13c5b76b03762beadc6f03ea97dc",
+	"manifest": "db5cac86a07c4060a03a7bef5c6a4a78",
+	"setup": "3c9e26a204a08b0f8dafb456a21359a7",
 	"schemas": [
 		{
 			"identifier": "create_note/schema.py",

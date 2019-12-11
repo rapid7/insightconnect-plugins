@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='twitter-rapid7-plugin',
       version='2.0.1',
-      description='Twitter is a microblogging and social networking service. Using the Twitter plugin for Rapid7 InsightConnect, users can monitor tweets, post, and block users',
+      description='Monitor tweets and posts, and block users',
       author='rapid7',
       author_email='',
       url='',

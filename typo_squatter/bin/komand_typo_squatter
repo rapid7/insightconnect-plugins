@@ -6,7 +6,7 @@ from komand_typo_squatter import connection, actions, triggers
 
 Name = 'Typo Squatter'
 Vendor = 'rapid7'
-Version = '1.0.2'
+Version = '1.0.1'
 Description = 'Detect cybersquatting of domains to aid in phishing investigation and analysis'
 
 

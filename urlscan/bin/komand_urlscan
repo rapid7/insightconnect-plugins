@@ -6,7 +6,7 @@ from komand_urlscan import connection, actions, triggers
 
 Name = 'urlscan.io'
 Vendor = 'rapid7'
-Version = '2.1.4'
+Version = '2.1.3'
 Description = 'Analyze URLs for malicious indicators using URLScan's website scanner'
 
 

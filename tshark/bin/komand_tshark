@@ -6,7 +6,7 @@ from komand_tshark import connection, actions, triggers
 
 Name = 'TShark'
 Vendor = 'rapid7'
-Version = '1.0.3'
+Version = '1.0.2'
 Description = 'Open and explore PCAP data for further analysis and intel gathering'
 
 

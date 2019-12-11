@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='try_bro-rapid7-plugin',
       version='1.0.2',
-      description='With the Try Bro plugin for Rapid7 InsightConnect, users can use a free instance of Bro Network Security Monitor in the cloud. Users can upload PCAP files for analysis and get Bro logs',
+      description='Upload PCAP files to a free instance of Bro Network Security Monitor for analysis and access to Bro logs',
       author='rapid7',
       author_email='',
       url='',

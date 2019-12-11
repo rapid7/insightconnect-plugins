@@ -6,7 +6,7 @@ from komand_twilio import connection, actions, triggers
 
 Name = 'Twilio'
 Vendor = 'rapid7'
-Version = '1.0.3'
+Version = '1.0.2'
 Description = 'Send SMS directly from a workflow using Twilio'
 
 

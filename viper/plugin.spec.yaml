@@ -4,7 +4,7 @@ products: [insightconnect]
 name: viper
 title: "Viper"
 description: Utilize Viper's platform to store, search, and analyze files
-version: 2.0.2
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []

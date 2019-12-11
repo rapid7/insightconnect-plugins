@@ -4,7 +4,7 @@ products: [insightconnect]
 name: tsv
 title: TSV
 description: Extract fields from TSV-formatted strings and files
-version: 1.0.2
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='trello-rapid7-plugin',
-      version='2.0.3',
+      version='2.0.2',
       description='Manage members and their permissions in your Trello organization',
       author='rapid7',
       author_email='',
