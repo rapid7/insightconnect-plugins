@@ -1,6 +1,10 @@
 # Description
 
-[Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/subscriptions/wildfire), a cloud-based threat analysis service, is the industry's most advanced analysis and prevention engine for highly evasive zero-day exploits and malware.
+[Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/subscriptions/wildfire), 
+a cloud-based threat analysis service, is the industry's most advanced analysis and prevention engine 
+for highly evasive zero-day exploits and malware. Use this plugin to get vulnerability information and analyze malware 
+samples.
+
 This plugin utilizes the [Pyldfire library](https://pypi.python.org/pypi/pyldfire/7.1.3).
 
 # Key Features
