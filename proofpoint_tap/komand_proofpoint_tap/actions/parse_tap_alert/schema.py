@@ -266,6 +266,12 @@ class ParseTapAlertOutput(komand.Output):
               "description": "Condemnation Time",
               "order": 4
             },
+            "threat_details_url": {
+              "type": "string",
+              "title": "Threat Details URL",
+              "description": "URL for Details of the Threat",
+              "order": 5
+            },
             "url": {
               "type": "string",
               "title": "URL",
@@ -297,6 +303,12 @@ class ParseTapAlertOutput(komand.Output):
           "title": "Condemnation Time",
           "description": "Condemnation Time",
           "order": 4
+        },
+        "threat_details_url": {
+          "type": "string",
+          "title": "Threat Details URL",
+          "description": "URL for Details of the Threat",
+          "order": 5
         },
         "url": {
           "type": "string",

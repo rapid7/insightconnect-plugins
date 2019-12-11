@@ -14,7 +14,8 @@ class TAP:
                 "attachment_sha256": "",
                 "category": "",
                 "condemnation_time": "",
-                "url": ""
+                "url": "",
+                "threat_details_url": ""
             },
             "message": {
                 "time_delivered": "",
