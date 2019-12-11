@@ -623,12 +623,12 @@ types:
       required: false
   ResponseMetadata:
     HTTPHeaders:
-      title: Http Headers
+      title: HTTP Headers
       type: HTTPHeaders
       description: HTTP headers
       required: false
     HTTPStatusCode:
-      title: Http Status Code
+      title: HTTP Status Code
       type: integer
       description: HTTP status code
       required: false
@@ -707,9 +707,9 @@ types:
       required: false
   SHRecommendation:
     Url:
-      title: "Url"
+      title: "URL"
       type: string
-      description: "Url"
+      description: "URL"
       required: false
     Text:
       title: "Text"
