@@ -188,7 +188,7 @@ class InfoOutput(komand.Output):
     "release": {
       "type": "string",
       "title": "Release",
-      "description": "Distro release",
+      "description": "Distribution release",
       "order": 4
     },
     "relocations": {

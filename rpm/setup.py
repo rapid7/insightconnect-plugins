@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='rpm-rapid7-plugin',
-      version='1.0.1',
-      description='The RPM plugin allows you to download and analyze an RPM pacakge',
+      version='1.0.2',
+      description='The RPM plugin allows you to download and analyze an RPM package',
       author='rapid7',
       author_email='',
       url='',

@@ -27,13 +27,13 @@ This action is used to get information about a package.
 ##### Input
 
 As input, the plugin takes the expected parts of a complete RPM package label: name<epoch:>-version-release.arch.
-For better accuracy in identifying the users intended package, the user is also asked to specify their distro and architecture.
+For better accuracy in identifying the users intended package, the user is also asked to specify their distribution and architecture.
 Note that a label must match exactly to find a specific package, and label sections must be specified from left to right.
 Thus, release info without the version is ignored when searching. A custom repository URL may also be specified, which will disable all other repos.
-If a custom key URL is also given (note: URL), then the key is used to do a checksig on the package downloaded before it is examined by RPM.
+If a custom key URL is also given (note: URL), then the key is used to do a check signature on the package downloaded before it is examined by RPM.
 
 Briefly, when given a package, the plugin checks to see if the cache already holds the results of am `rpm -qi --dump`.
-If it does not, yumdownloader downloads the package and automatically performs a checksig before inspecting it and caching the result.
+If it does not, yum downloader downloads the package and automatically performs a check signature before inspecting it and caching the result.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -66,7 +66,7 @@ If it does not, yumdownloader downloads the package and automatically performs a
 |version|string|False|Package Version|
 |architecture|string|False|System Architecture|
 |signature|signature|False|Signature|
-|release|string|False|Distro Release|
+|release|string|False|Distribution Release|
 |found|boolean|False|Package Found|
 
 ### Triggers
@@ -90,6 +90,7 @@ The complexity of this plugin overwhelmingly involves hacking around with yum, w
 
 # Version History
 
+* 1.0.2 - Fix typos in yaml and help
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Support web server mode | Update to v2 Python plugin architecture
 * 0.1.1 - SSL bug fix in SDK
