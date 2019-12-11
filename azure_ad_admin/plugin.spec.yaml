@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
-description: Preform administrative operations in Azure AD
+description: Perform administrative operations in Azure AD
 version: 1.4.1
 vendor: rapid7
 support: community
