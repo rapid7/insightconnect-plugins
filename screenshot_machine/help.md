@@ -1,6 +1,6 @@
 # Description
 
-The Screenshot Machine plugin allows you to capture screenshots using the [Screenshot Machine](https://screenshotmachine.com/) API.
+The Screenshot Machine plugin allows you to capture screenshots using the [Screenshot Machine](https://screenshotmachine.com/) API. This can be used to capture screenshots as part of intelligence gathering. 
 
 # Key Features
 
