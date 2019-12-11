@@ -1,7 +1,7 @@
 {
-	"spec": "a27131fddcd96b439cf1a5c45ddddb09",
-	"manifest": "72c6522fd227a2d7541bbe7dcd676c06",
-	"setup": "bc3609302ba229dc40c920fb2d1a6406",
+	"spec": "3afcb3a004db00b363bd3ead2e970617",
+	"manifest": "2a5381bc84268c7382c0306c34ad3a9c",
+	"setup": "0eb9a0e311f5c35722e5341c50598f0f",
 	"schemas": [
 		{
 			"identifier": "check_cidr/schema.py",
