@@ -1,5 +1,6 @@
 # Description
 
+
 [Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.
 
 It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in
@@ -43,7 +44,7 @@ This action is used to create a user with a randomly generated password and send
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|account_enabled|boolean|True|False|true if the account is enabled; otherwise, false|None|
+|account_enabled|boolean|True|False|True if the account is enabled; otherwise, false|None|
 |display_name|string|None|True|The name to display in the address book for the user e.g. displayName-value|None|
 |mail_nickname|string|None|False|The mail alias for the user e.g. mailNickname-value|None|
 |notify_email_body|string|None|False|Body of the email to be sent out. Use $password to place the generated password|None|
@@ -151,7 +152,7 @@ This action is used to get user information.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user_information|object|True|Information about a user|
+|user_information|user_information|True|Information about a user|
 
 Example output:
 
@@ -189,7 +190,7 @@ This action is used to get a group by it's name.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|group|object|False|Group|
+|group|group|False|Group|
 
 Example output:
 
