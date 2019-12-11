@@ -80,7 +80,7 @@ This action is used to add the specified Active Directory user.
 |logon_name|string|None|True|The logon name for the account|None|
 |account_disabled|string|true|True|Set this to true to disable the user account at creation|['true', 'false']|
 |password|password|None|True|The account's starting password|None|
-|user_principal_name|string|None|True|The users principal name, e.g. jdoe@example.com|None|
+|user_principal_name|string|None|True|The users principal name, e.g. user@example.com|None|
 
 ##### Output
 
