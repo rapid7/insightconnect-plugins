@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: tshark
 title: TShark
-description: Open and explore PCAP data for further analysis and intel gathering"
+description: Open and explore PCAP data for further analysis and intel gathering
 version: 1.0.3
 vendor: rapid7
 support: community

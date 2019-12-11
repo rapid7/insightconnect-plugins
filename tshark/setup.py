@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='tshark-rapid7-plugin',
       version='1.0.3',
-      description='Open and explore PCAP data for further analysis and intel gathering"',
+      description='Open and explore PCAP data for further analysis and intel gathering',
       author='rapid7',
       author_email='',
       url='',
