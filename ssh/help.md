@@ -5,8 +5,8 @@ This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* Credentials for the target remote host
+* Address and port for the target remote host
 
 # Documentation
 
