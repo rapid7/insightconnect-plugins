@@ -3,6 +3,10 @@
 [Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network.
 This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote host via the library. The SSH plugin allows you to run commands on a remote host.
 
+# Key Features
+
+* Run remote commands with SSH
+
 # Requirements
 
 * Credentials for the target remote host
@@ -46,14 +50,14 @@ This can then be pasted into the Connection's `key` input field.
 
 #### Run Remote Command
 
-This action is used to run a command on a remote host using SSH.
+This action is used to run remote command.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|host|string|None|False|(Optional) Host to run remote commands. If not provided, the connection host will be used|None|
-|command|string|None|False|Command to execute on remote host|None|
+|command|string|None|True|Command to execute on remote host|None|
+|host|string|None|False|Host to run remote commands. If not provided, the connection host will be used|None|
 
 ##### Output
 
