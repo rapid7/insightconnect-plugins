@@ -1,6 +1,6 @@
 # Description
 
-[Red Canary](https://www.redcanary.com) is a managed endpoint detection and response platform. With the InsightConnect Red Canary plugin you can identify, detect, and mitigate threats to your organization.
+[Red Canary](https://www.redcanary.com) is a managed endpoint detection and response platform. With the InsightConnect Red Canary plugin you can automate responses to detections and events. The plugin allows retrieval of enrichment information such as indicators, as well as management of activity monitors.
 
 # Key Features
 
@@ -1142,7 +1142,7 @@ _This plugin does not contain any custom output types._
 * 2.1.3 - Bug fix for New Detection trigger cache where additional dates were being added to the cache file. When the cache was loaded from the file it would set the lastest cache to an older date, allowing old detections to be triggered on
 * 2.1.2 - Bug fix for New Detection where needed to be loaded every time the trigger was called
 * 2.1.1 - Bug fix for connection test
-* 2.1.0 - Updated caching for New Events and New Detection triggers. Caching will now use date vs. caching a seperate event ID. The trigger also has the option of setting a date offset for testing workflows
+* 2.1.0 - Updated caching for New Events and New Detection triggers. Caching will now use date vs. caching a separate event ID. The trigger also has the option of setting a date offset for testing workflows
 * 2.0.0 - Use Red Canary API v3 | New triggers New Activity Monitor Matches and New Events | New actions Create Activity Monitor, List Activity Monitors, Deactivate Activity Monitor, Get Activity Monitor, List All Activity Monitor Matches, Search for Endpoint Hostname Usages, Search For MAC Address Usages, Search for IP Address Usages | Rename action Retrieve Indicator to Retrieve Indicators, Remediate Detection to Update Remediation State
 * 1.1.2 - Use new credential types
 * 1.1.1 - Bug fix for trigger not caching all detections

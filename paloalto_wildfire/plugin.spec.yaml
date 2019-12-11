@@ -18,7 +18,7 @@ tags:
 - intel
 - wf
 hub_tags:
-  use_cases: [soar, investigations, threat_intel, threat_detection_and_response, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [palo, wildfire, intel, wf]
   features: []
 types:

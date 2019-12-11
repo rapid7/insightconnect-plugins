@@ -17,7 +17,7 @@ tags:
 - intelligence
 - abuse
 hub_tags:
-  use_cases: [soar, alert_enrichment, threat_intel]
+  use_cases: [data_enrichment, threat_detection_and_response]
   keywords: [ip, intelligence, abuse]
   features: []
 enable_cache: false

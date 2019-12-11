@@ -17,7 +17,7 @@ tags:
 - opendxl
 - message broker
 hub_tags:
-  use_cases: [soar, network_containment, asset_containment, threat_detection_and_response, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [opendxl, message broker]
   features: []
 connection:

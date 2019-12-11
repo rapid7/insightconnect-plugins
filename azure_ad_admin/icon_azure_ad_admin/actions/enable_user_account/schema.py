@@ -24,7 +24,7 @@ class EnableUserAccountInput(komand.Input):
     "user_id": {
       "type": "string",
       "title": "User ID",
-      "description": "User ID to enable e.g. bob@hotmail.com",
+      "description": "User ID to enable e.g. user@example.com",
       "order": 1
     }
   },

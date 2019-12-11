@@ -16,7 +16,7 @@ tags:
 - SSH
 - network automation
 hub_tags:
-  use_cases: [soar, soc_automation]
+  use_cases: [data_utility, threat_detection_and_response]
   keywords: [netmiko, SSH, network automation]
   features: []
 enable_cache: true

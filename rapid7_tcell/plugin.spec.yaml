@@ -20,7 +20,7 @@ tags:
 - waf
 - rasp
 hub_tags:
-  use_cases: [soar, soc_automation, application_security, container_and_cloud_security, network_containment]
+  use_cases: [devops, cloud_security, threat_detection_and_response]
   keywords: [rapid7, web, waf, rasp]
   features: []
 types:
