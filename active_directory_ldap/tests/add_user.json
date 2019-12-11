@@ -2,24 +2,24 @@
     "body": {
         "action": "add_user",
         "connection": {
-            "host": "",
+            "host": "192.168.1.10",
             "port": 636,
             "use_ssl": true,
             "username_password": {
-                "password": "",
-                "username": ""
+                "password": "M903bb1986194",
+                "username": "MATTSDOMAIN\\mhofert"
             }
         },
         "input": {
             "account_disabled": "true",
             "additional_parameters": {},
-            "domain_name": "",
+            "domain_name": "mattsdomain.local",
             "first_name": "Test",
             "last_name": "Person",
             "logon_name": "tperson",
-            "password": "",
+            "password": "testtest04!",
             "user_ou": "Users",
-            "user_principal_name": ""
+            "user_principal_name": "tperson@mattsdomain.local"
         },
         "meta": {}
     },

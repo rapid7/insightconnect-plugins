@@ -2,16 +2,16 @@
     "body": {
         "action": "disable_user",
         "connection": {
-            "host": null,
-            "port": null,
-            "use_ssl": null,
+            "host": "192.168.1.10",
+            "port": 636,
+            "use_ssl": true,
             "username_password": {
-                "password": null,
-                "username": null
+                "password": "M903bb1986194",
+                "username": "MATTSDOMAIN\\mhofert"
             }
         },
         "input": {
-            "distinguished_name": "CN=hollis, brown,OU=domain_users,DC=mattsdomain,DC=local"
+            "distinguished_name": "CN=Ass, Im,CN=Users,DC=mattsdomain,DC=local"
         },
         "meta": {}
     },

@@ -2,17 +2,17 @@
     "body": {
         "action": "query",
         "connection": {
-            "host": null,
-            "port": null,
-            "use_ssl": null,
+            "host": "10.0.0.253",
+            "port": 636,
+            "use_ssl": true,
             "username_password": {
-                "password": null,
-                "username": null
+                "password": "f=fPy9a7a&5",
+                "username": "Akbar\\Administrator"
             }
         },
         "input": {
-            "search_base": "DC=mattsdomain,DC=local",
-            "search_filter": "(distinguishedName=CN=hollis, brown,OU=domain_users,DC=mattsdomain,DC=local)"
+            "search_base": "DC=Akbar,DC=trap",
+            "search_filter": "(distinguishedName=CN=Syd Coffaro,CN=Users,DC=Akbar,DC=trap)"
         },
         "meta": {}
     },
