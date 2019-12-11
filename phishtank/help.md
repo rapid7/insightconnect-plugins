@@ -12,7 +12,7 @@ This plugin utilizes the [PhishTank API](https://www.phishtank.com/api_info.php)
 
 # Requirements
 
-* A PhishTank API key
+* PhishTank API key
 
 # Documentation
 
