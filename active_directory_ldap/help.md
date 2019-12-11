@@ -74,7 +74,7 @@ This action is used to add the specified Active Directory user.
 |----|----|-------|--------|-----------|----|
 |first_name|string|None|True|User's first name|None|
 |last_name|string|None|True|User's last name|None|
-|additional_parameters|object|None|False|Add additional user parameters in JSON format e.g. {'telephoneNumber'\: '(617)555-1234'}|None|
+|additional_parameters|object|None|False|Add additional user parameters in JSON format e.g. {'telephoneNumber': '(617)555-1234'}|None|
 |domain_name|string|None|True|The domain name this user will belong to, e.g. mydomain.com|None|
 |user_ou|string|Users|True|The OU that the user account will be created in|None|
 |logon_name|string|None|True|The logon name for the account|None|
@@ -108,7 +108,7 @@ For more information on LDAP queries see https://ldap3.readthedocs.io/tutorial_s
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515. Example\: (accountName=joesmith)|None|
+|search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515. Example: (accountName=joesmith)|None|
 |search_base|string|None|True|The base of the search request|None|
 
 ##### Output
