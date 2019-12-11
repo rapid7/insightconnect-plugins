@@ -351,7 +351,6 @@ paired `\(\)` are supported
 
 # Version History
 
-* 3.2.8 - Hub styling update
 * 3.2.7 - New spec and help.md format for the Hub
 * 3.2.6 - Update help to document supported Windows Server versions
 * 3.2.5 - Clean connection test output

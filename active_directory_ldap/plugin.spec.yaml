@@ -4,7 +4,7 @@ products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: Interfaces with Microsofts Active Directory service to manage domains, users, and objects within a network
-version: 3.2.8
+version: 3.2.7
 vendor: rapid7
 support: rapid7
 status: []
