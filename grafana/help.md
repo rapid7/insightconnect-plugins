@@ -1,8 +1,6 @@
 # Description
 
-[Grafana](https://grafana.org) is an open platform for analytics and monitoring. The Grafana plugin allows you to manage users in your Grafana organization
-
-This plugin utilizes the [Grafana HTTP API](http://docs.grafana.org/http_api/) to manage organizations and users.
+[Grafana](https://grafana.org) is an open platform for analytics and monitoring. The Grafana plugin utilizes the [Grafana HTTP API](http://docs.grafana.org/http_api/) to manage organizations and users.
 
 # Key Features
 
