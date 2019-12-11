@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: proofpoint_tap
 title: Proofpoint TAP
-description: A plugin for Proofpoint Targeted Attack Protection (TAP) alerts
+description: Parse Proofpoint Targeted Attack Protection (TAP) alerts
 version: 1.0.5
 vendor: rapid7
 support: community

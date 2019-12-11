@@ -7,7 +7,7 @@ from komand_powershell import connection, actions, triggers
 Name = 'PowerShell'
 Vendor = 'rapid7'
 Version = '2.1.1'
-Description = 'The PowerShell plugin runs a PowerShell script on a remote host or locally on the InsightConnect Orchestrator'
+Description = 'Run a PowerShell script'
 
 
 class ICONPowershell(komand.Plugin):
