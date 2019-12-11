@@ -23,7 +23,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |private_key|password|None|True|Private Key from service credentials|None|
-|admin_user|string|None|True|Admin user to impersonate, e.g. admin@domain.com|None|
+|admin_user|string|None|True|Admin user to impersonate, e.g. user@example.com|None|
 |private_key_id|password|None|True|Private Key ID from service credentials|None|
 |token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
 |auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
