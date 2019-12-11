@@ -47,7 +47,7 @@ Below is a list for each indicator type and the sections they support.
 |Indicator Type|Section|
 |--------------|-------|
 |IPv4|['general', 'geo', 'malware', 'url_list', 'passive_dns', 'reputation', 'full']|
-|IPv6|['general', 'geo', 'malware', 'url_list', 'passive_dns', 'reputation', 'full'|
+|IPv6|['general', 'geo', 'malware', 'url_list', 'passive_dns', 'reputation', 'full']|
 |URL|['general', 'url_list', 'full']|
 |HOSTNAME|['general', 'geo', 'malware', 'url_list', 'passive_dns', 'full']|
 
@@ -55,7 +55,7 @@ Below is a list for each indicator type and the sections they support.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|object|False|Indicator results|
+|results|indicator_detail_full|False|Indicator results|
 
 Example output:
 
