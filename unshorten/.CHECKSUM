@@ -1,7 +1,7 @@
 {
-	"spec": "6d585a01bc5887627457ec08764fb51c",
-	"manifest": "45edd9b3d8011b762385b11b0769eb1c",
-	"setup": "e749d74eaf495f709c112a2935ebe4f8",
+	"spec": "989867356bb7483b3aba61fd9a22e6f3",
+	"manifest": "a3a5167c10d9e5d6a9d40021ea2ca8a8",
+	"setup": "60db78fc65df980d8399b91a3afa2e81",
 	"schemas": [
 		{
 			"identifier": "unshorten/schema.py",

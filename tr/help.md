@@ -4,7 +4,8 @@ The Translate plugin uses the `tr` command in UNIX which is a command line utili
 
 # Key Features
 
-* Use the tr command to replace or delete characters
+* Replace characters 
+* Delete characters
 
 # Requirements
 
@@ -14,7 +15,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -51,7 +52,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -63,6 +64,7 @@ In case an error is raised, make sure that the given expression can be correctly
 
 # Version History
 
+* 2.0.3 - Help updates
 * 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 2.0.0 - Rename "Tr" plugin title to "Translate"

@@ -1,6 +1,6 @@
 # Description
 
-[Twilio](https://www.twilio.com/) is a cloud communications platform for building SMS, Voice & Messaging applications
+[Twilio](https://www.twilio.com/) is a cloud communications platform for building SMS and Voice & Messaging applications
 on an API built for global scale. Users can send SMS using the Twilio plugin for Rapid7 for notification or other
 purposes.
 
@@ -64,6 +64,7 @@ Before sending the SMS make sure that the country you're sending the message to 
 
 # Version History
 
+* 1.0.3 - Spec descripton update
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Update Twilio dependency to 6.19.1
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

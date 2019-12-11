@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='tr-rapid7-plugin',
-      version='2.0.2',
+      version='2.0.3',
       description='Translate or replace characters from text using the tr command line utility',
       author='rapid7',
       author_email='',

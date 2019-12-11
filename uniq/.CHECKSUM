@@ -1,7 +1,7 @@
 {
-	"spec": "224032d0d83b3e411a222a18a62be263",
-	"manifest": "44feff99c51f44bc7e0effb4f78b8674",
-	"setup": "caa045ebe8217b3e54f3aca6fd93f4b6",
+	"spec": "8531c1936616f56681be8c0becb77c0b",
+	"manifest": "2612b4980746b2bd93084a0166dbfb7f",
+	"setup": "d82b62c0648ce904d08f4307661a588b",
 	"schemas": [
 		{
 			"identifier": "uniq_integer_array/schema.py",

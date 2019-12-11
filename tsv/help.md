@@ -1,11 +1,11 @@
 # Description
 
 [Tab Separated Value](https://en.wikipedia.org/wiki/Tab-separated_values) (TSV) is a common format to express data.
-This plugin allows one to extract fields from TSV strings and files.
+This plugin allows one to extract fields from TSV strings and files, streamlining your data processing within a workflow.
 
 # Key Features
 
-* Extract fields
+* Extract fields from TSV data
 
 # Requirements
 
@@ -74,6 +74,7 @@ TSV files must not have non-TSV data such as comments.
 
 # Version History
 
+* 1.0.2 - Spec description update
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK

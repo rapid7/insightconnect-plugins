@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='traceroute-rapid7-plugin',
-      version='1.0.2',
-      description='The traceroute plugin will trace a network route to a host',
+      version='1.0.3',
+      description='Trace a network route to a host',
       author='rapid7',
       author_email='',
       url='',

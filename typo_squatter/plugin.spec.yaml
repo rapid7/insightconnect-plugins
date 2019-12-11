@@ -3,9 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: typo_squatter
 title: Typo Squatter
-description: "Typo Squatter detects cybersquatting of domains and allows for domain scoring. This plugin can be used
-to aid in phishing investigation and analysis"
-version: 1.0.1
+description: Detect cybersquatting of domains to aid in phishing investigation and analysis
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []

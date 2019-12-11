@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='tsv-rapid7-plugin',
-      version='1.0.1',
-      description='TSV (Tab Separated Values) is a simple data format for storing data. This plugin allows one to extract fields from TSV strings and files',
+      version='1.0.2',
+      description='Extract fields from TSV-formatted strings and files',
       author='rapid7',
       author_email='',
       url='',

@@ -7,7 +7,8 @@ If at any point a high entropy string is greater than 20 characters is detected,
 
 # Key Features
 
-* Search through github commit histories, and checks if there is any leaked keys
+* Search through github commit histories 
+* Check for leaked secrets
 
 # Requirements
 
@@ -17,7 +18,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -90,7 +91,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -98,10 +99,11 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.3 - Help updates
 * 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Fix issue where custom_regexes input field in Search action was not working
 * 1.1.0 - Update to v2 Python plugin architecture | Support web server mode

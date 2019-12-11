@@ -6,8 +6,8 @@ from icon_viper import connection, actions, triggers
 
 Name = 'Viper'
 Vendor = 'rapid7'
-Version = '2.0.1'
-Description = 'The Viper plugins allows you to use Viper's platform to store, search, and analyze files'
+Version = '2.0.2'
+Description = 'Utilize Viper's platform to store, search, and analyze files'
 
 
 class ICONViper(komand.Plugin):

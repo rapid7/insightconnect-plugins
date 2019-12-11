@@ -1,11 +1,7 @@
 # Description
 
-The Trello plugin allows you to manage users in your Trello project.
-
-[Trello](https://trello.com) gives you perspective over all your projects, at work and at home.
-Whether it's managing a team, writing an epic screenplay, or just making a grocery list,
-This plugin accesses the [Trello API](https://developers.trello.com/advanced-reference)
-The output of this plugin is the JSON data returned by Trello.
+[Trello](https://trello.com) is an excellent tool for managing your projects and productivity. 
+The Trello plugin allows you to manage users in your Trello project by leveraging the [Trello API](https://developers.trello.com/advanced-reference). View members, remove members, gets boards by member, and more!
 
 # Key Features
 
@@ -242,7 +238,7 @@ This action is used to remove member from board.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -250,10 +246,11 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.3 - Spec and help updates
 * 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - Remove erroneous data from plugin spec
 * 2.0.0 - Update to new secret key credential type

@@ -2,11 +2,13 @@
 
 The [URLScan](https://urlscan.io/) plugin uses URLScan to analyze urls for malicious indicators.
 
-This plugin utilizes the [URLScan API](https://urlscan.io/about-api/).
+This plugin utilizes the [URLScan API](https://urlscan.io/about-api/) to search for URLs and retrieve reports
+on potential malicous indicators.
 
 # Key Features
 
-* Scan a URL and get a report on that URL
+* Launch a scan on a URL
+* Retrieve reports on a URL
 
 # Requirements
 
@@ -265,6 +267,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.1.4 - Spec description and key features update
 * 2.1.3 - New spec and help.md format for the Hub
 * 2.1.2 - Set User-Agent string to Rapid7 InsightConnect | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size | Run plugin as least privileged user | Improve error handling and logging | Fix issue in Submit URL for Scan action where improper POST body was sent
 * 2.1.1 - Add error messaging to Get Scan Results action to provide assistance for unavailable scan results | Update to Python 3.7 Slim SDK (plugin size reduction)
