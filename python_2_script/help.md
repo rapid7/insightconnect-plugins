@@ -1,6 +1,7 @@
 # Description
 
-The Python plugin allows you to run Python 2 code. It includes Python 2.7.15 and its standard library as well as the following 3rd party libraries:
+The Python 2 Script plugin allows you to run Python 2 code. It includes Python 2.7.15 and its standard library as well as 
+the following 3rd party libraries:
 
 * [requests 2.18.4](https://www.python-requests.org/en/master/)
 * [maya 0.5.0](https://pypi.python.org/pypi/maya)
