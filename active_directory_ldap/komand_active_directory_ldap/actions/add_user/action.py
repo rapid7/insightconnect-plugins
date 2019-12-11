@@ -35,11 +35,11 @@ class AddUser(komand.Action):
 
         full_name = first_name + ' ' + last_name
         domain_dn = domain_name.replace('.', ',DC=')
-        if user_ou == re.match("Users"):
+        if re.match(".*Users", user_ou):
             user_ou = user_ou.replace(',', ',CN=')
         else:
             user_ou = user_ou.replace(',', ',OU=')
-        if user_ou == re.match("Users"):
+        if re.match(".*Users", user_ou):
             dn = 'CN={},CN={},DC={}'.format(full_name, user_ou, domain_dn)
         else:
             dn = 'CN={},OU={},DC={}'.format(full_name, user_ou, domain_dn)
