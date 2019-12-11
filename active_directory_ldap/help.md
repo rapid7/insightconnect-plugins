@@ -1,7 +1,6 @@
 # Description
 
-This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network.
-This plugin supports Windows Server 2008 and later. Some testing has been done with Windows server 2003; however, it is not officially supported.
+The Active Directory LDAP plugin accesses Microsoft's Active Directory service to programmatically manage a Active Directory/LDAP environment. Supports Windows Server 2008 and later. Testing has been done with Windows server 2003; however, it is not officially supported.
 
 # Key Features
 
@@ -352,6 +351,7 @@ paired `\(\)` are supported
 
 # Version History
 
+* 3.2.8 - Hub styling update
 * 3.2.7 - New spec and help.md format for the Hub
 * 3.2.6 - Update help to document supported Windows Server versions
 * 3.2.5 - Clean connection test output
