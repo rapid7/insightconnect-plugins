@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='aws_workspaces-rapid7-plugin',
-      version='1.0.2',
+      version='1.0.1',
       description='Enables creation of workspaces on Amazons WorkSpace service',
       author='rapid7',
       author_email='',
