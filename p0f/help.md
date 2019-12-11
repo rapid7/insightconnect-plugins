@@ -1,6 +1,6 @@
 # Description
 
-[P0f](http://lcamtuf.coredump.cx/p0f3/) is a free and open source passive OS fingerprinting tool for analyzing PCAP
+[p0f](http://lcamtuf.coredump.cx/p0f3/) is a free and open source passive OS fingerprinting tool for analyzing PCAP
 files.
 The p0f plugin runs the tool directly.
 
