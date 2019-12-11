@@ -1,6 +1,6 @@
 # Description
 
-[Azure](https://azure.microsoft.com) AD Admin will perform administrative tasks in Azure AD.
+[Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.
 
 It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in
 the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0).
@@ -292,6 +292,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.2 - Hub styling update
 * 1.3.1 - New spec and help.md format for the Hub
 * 1.3.0 - New action Create User
 * 1.2.0 - New actions Get Group by Name, Add User to Group, and Remove User from Group
