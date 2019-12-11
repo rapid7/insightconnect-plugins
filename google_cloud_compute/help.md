@@ -549,7 +549,6 @@ Error values use the standard HTTP codes (200 OK, 404 Not Found, etc)
 
 # Version History
 
-* 2.0.3 - Hub styling update | Acronym update | Sync help.md against plugin.spec.yaml
 * 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - Fix typo in plugin spec
 * 2.0.0 - Rename action titles to conform to style

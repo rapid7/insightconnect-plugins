@@ -195,7 +195,6 @@ This plugin requires a Google [service account](https://cloud.google.com/storage
 
 # Version History
 
-* 3.1.3 - Hub Styling update
 * 3.1.2 - New spec and help.md format for the Hub
 * 3.1.1 - Fix typo in plugin spec
 * 3.1.0 - Update connection to make `admin_user` an optional input
