@@ -6,7 +6,7 @@ title: Port Knocking
 vendor: rapid7
 support: community
 status: []
-description: The Pork Knocking plugin knocks the specified ports on a host and optionally supports a payload
+description: Knock the specified ports on a host
 version: 1.0.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/port_knocking
@@ -14,12 +14,11 @@ resources:
 tags:
 - ip address
 - port knock
-- hostname
 - knockd
 - ssh
 hub_tags:
   use_cases: [threat_detection_and_response, offensive_security]
-  keywords: [ip address, port knock, hostname, knockd, ssh]
+  keywords: [ip address, port knock, knockd, ssh]
   features: []
 enable_cache: false
 actions:

@@ -7,7 +7,7 @@ from komand_qualys_ssl import connection, actions, triggers
 Name = 'Qualys SSL Labs'
 Vendor = 'rapid7'
 Version = '1.0.2'
-Description = 'The Qualys SSL plugin allows the user to get information and test SSL servers'
+Description = 'Get endpoint information and test SSL servers'
 
 
 class ICONQualysSsl(komand.Plugin):

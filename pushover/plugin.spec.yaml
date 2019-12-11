@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: pushover
 title: Pushover.net
-description: The Pushover plugin allows you to send Pushover notifications
+description: Send Pushover notifications
 version: 1.0.1
 support: community
 vendor: rapid7
@@ -14,18 +14,17 @@ resources:
 tags:
 - messaging
 - alerting
-- pushover
 hub_tags:
   use_cases: [alerting_and_notifications]
-  keywords: [messaging, alerting, pushover]
+  keywords: [messaging, alerting]
   features: []
 enable_cache: true
 language: python
 
 actions:
   send_message:
-    title: Send pushover notification
-    description: Send a pushover notification to a user or group
+    title: Send Pushover notification
+    description: Send a Pushover notification to a user or group
     input:
       user:
         title: User/group key to send message to
