@@ -193,7 +193,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.2 - Hub styling update
+* 2.0.0 - Plugin spec update 
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
