@@ -1,5 +1,5 @@
 {
-	"spec": "adc9014f1e20c9e3a3dd73d85202e437",
+	"spec": "ffef05eecfd94cb0b702395ea600bf32",
 	"manifest": "a014452fe2acfffedbebb8a0ec87ed8c",
 	"setup": "3c98198dfa4788f89ed63b26c16ac672",
 	"schemas": [
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "sqs_feed/schema.py",
-			"hash": "84897abc7954446d51aa2cb36369aad3"
+			"hash": "7d06ee9e366c78f1eaba2a483f408bbc"
 		}
 	]
 }
