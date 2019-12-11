@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
-description: Interfaces with Microsoft's Active Directory service to manage domains, users, and objects within a network
+description: Interfaces with Microsofts Active Directory service to manage domains, users, and objects within a network
 version: 3.2.8
 vendor: rapid7
 support: rapid7
