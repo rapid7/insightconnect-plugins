@@ -1,9 +1,6 @@
 # Description
 
-The RSS plugin can monitor any generic [RSS](https://en.wikipedia.org/wiki/RSS) feed.
-
-This plugin returns a generic `object` since each RSS feed can have its own data structure.
-Use [input templating](https://docs.komand.com/docs/input-templating), [Python Script plugin](https://docs.komand.com/docs/python-script-plugin), or the [JQ plugin](https://market.komand.com/plugins/komand/jq/0.1.3) to retrieve specific outputs.
+The RSS plugin can monitor any generic [RSS](https://en.wikipedia.org/wiki/RSS) feed. This can be used to monitor security feeds and alert on new vulnerabilities or other security news.
 
 # Key Features
 
@@ -166,6 +163,9 @@ Example output:
 _This plugin does not contain any custom output types._
 
 ## Troubleshooting
+
+This plugin returns a generic `object` since each RSS feed can have its own data structure.
+Use [input templating](https://docs.komand.com/docs/input-templating), [Python Script plugin](https://docs.komand.com/docs/python-script-plugin), or the [JQ plugin](https://market.komand.com/plugins/komand/jq/0.1.3) to retrieve specific outputs.
 
 Between workflow runs, new items will *not* be reported on.
 
