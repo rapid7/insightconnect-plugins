@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 |Client Secret|string|None|True|The application secret that you generated for your app in the app registration portal|None|
 |Tenant ID|string|None|True|This is active directory ID|None|
 |API Version|string|2016-04-30-preview|True|The version of the API to use. The current version is 2016-04-30-preview|None|
-|Host|string|https\://management.azure.com|True|Azure REST API Server|None|
+|Host|string|https://management.azure.com|True|Azure REST API Server|None|
 
 ## Technical Details
 
