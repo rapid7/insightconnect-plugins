@@ -970,7 +970,7 @@ actions:
     input:
       format:
         title: Export Format
-        description: Export format as either md5 or sha1
+        description: Export format as either MD5 or SHA1
         type: string
         required: true
         enum:
