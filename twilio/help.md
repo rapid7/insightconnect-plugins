@@ -52,7 +52,7 @@ This action is used to send an SMS message to a phone number.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

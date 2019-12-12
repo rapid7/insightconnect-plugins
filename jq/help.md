@@ -18,7 +18,7 @@ _This plugin does not contain any requirements_
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -45,7 +45,7 @@ This action is used to pass the given JSON object to the jq command, using the g
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

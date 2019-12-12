@@ -74,7 +74,7 @@ On success, the raw output will look like the following:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
