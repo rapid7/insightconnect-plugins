@@ -5,7 +5,7 @@ name: att_cybersecurity_alienvault_otx
 title: AT&T Cybersecurity AlienVault Open Threat Exchange
 description: This plugin utilizes AT&T Cybersecurity (AlienVault OTX) to retrieve details about an indicator
  Open Threat Exchange is the neighborhood watch of the global intelligence community
-version: 1.0.2
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -67,9 +67,9 @@ types:
       description: File
       required: false
     md5:
-      title: Md5
+      title: MD5
       type: string
-      description: Md5
+      description: MD5
       required: false
   activities:
     status:
@@ -118,9 +118,9 @@ types:
       description: Last date
       required: false
     vt:
-      title: Vt
+      title: VT
       type: string
-      description: Vt
+      description: VT
       required: false
     file:
       title: File
@@ -984,9 +984,9 @@ types:
       description: Type title
       required: false
     whois:
-      title: Whois
+      title: WHOIS
       type: string
-      description: Whois
+      description: WHOIS
       required: false
   geo:
     area_code:
@@ -1186,9 +1186,9 @@ types:
       description: Malware
       required: false
     url_list:
-      title: Url List
+      title: URL List
       type: url_list
-      description: Url list
+      description: URL list
       required: false
     passive_dns:
       title: Passive DNS

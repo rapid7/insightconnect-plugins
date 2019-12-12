@@ -7,7 +7,7 @@ from icon_advanced_regex import connection, actions, triggers
 Name = 'Advanced Regex'
 Vendor = 'rapid7'
 Version = '1.0.1'
-Description = 'This plugin performs advanced regex operations on a string using Python regex'
+Description = 'Perform advanced regular expression operations on a string using Python regex'
 
 
 class ICONAdvancedRegex(komand.Plugin):

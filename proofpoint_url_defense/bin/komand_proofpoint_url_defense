@@ -7,7 +7,7 @@ from komand_proofpoint_url_defense import connection, actions, triggers
 Name = 'Proofpoint URL Defense'
 Vendor = 'rapid7'
 Version = '1.0.1'
-Description = 'The Proofpoint URL Defense plugin decodes Proofpoint encoded URLs'
+Description = 'Decode Proofpoint encoded URLs'
 
 
 class ICONProofpointUrlDefense(komand.Plugin):
