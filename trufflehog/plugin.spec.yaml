@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: trufflehog
 title: TruffleHog
-description: The TruffleHog plugin searches through git repositories for high entropy strings and secrets, digging deep into commit history
+description: Searche through git repositories for high entropy strings and secrets, digging deep into commit history
 version: 1.1.2
 vendor: rapid7
 support: community

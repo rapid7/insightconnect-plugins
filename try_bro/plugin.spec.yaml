@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: try_bro
 title: Try Bro
-description: Upload PCAP files to a free instance of Bro Network Security Monitor for analysis and access to Bro logs
+description: Upload PCAP files to an instance of Bro Network Security Monitor for analysis and access to Bro logs
 version: 1.0.2
 vendor: rapid7
 support: community

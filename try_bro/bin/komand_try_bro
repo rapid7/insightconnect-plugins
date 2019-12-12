@@ -7,7 +7,7 @@ from komand_try_bro import connection, actions, triggers
 Name = 'Try Bro'
 Vendor = 'rapid7'
 Version = '1.0.2'
-Description = 'Upload PCAP files to a free instance of Bro Network Security Monitor for analysis and access to Bro logs'
+Description = 'Upload PCAP files to an instance of Bro Network Security Monitor for analysis and access to Bro logs'
 
 
 class ICONTryBro(komand.Plugin):
