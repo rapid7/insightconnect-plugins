@@ -305,8 +305,8 @@ This trigger is used to allows consumers to get alert and policy action notifica
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|notifications|[]notifications|False|Collection of Notifincations|
 |message|string|False|Notification Message|
+|notifications|[]notifications|False|Collection of Notifications|
 |success|boolean|False|Notification Success|
 
 ### Custom Output Types
