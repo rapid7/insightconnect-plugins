@@ -1,14 +1,11 @@
 # Description
 
-[Kolide](https://www.kolide.co/) is a state of the art host monitoring platform tailored to security experts.
-Leveraging Facebook's battle-tested osquery project, Kolide delivers fast answers to big questions.
-
-This plugin utilizes the [Kolide API](https://github.com/kolide/fleet/tree/master/docs/api).
+[Kolide](https://kolide.com/) is a state of the art host monitoring platform tailored to security experts. Leveraging Facebook's battle-tested osquery project, Kolide delivers fast answers to big questions. This plugin utilizes the Kolide API to create, run, and get queries from your Kolide Fleet. This plugin utilizes the [Kolide API](https://github.com/kolide/fleet/tree/master/docs/api) to create, run, and get queries from your Kolide Fleet.
 
 # Key Features
 
-* Security Policy Enforcement
-* Device Inventory
+* Create new Kolide queries for ongoing use
+* Run queries to collect data from endpoints in your Kolide Fleet
 
 # Requirements
 
@@ -74,7 +71,7 @@ Example output:
 
 #### Run Query
 
-This action is used to run selected query on fleet.
+This action is used to run a user-provided query on one or more hosts in the Kolide Fleet.
 
 ##### Input
 
