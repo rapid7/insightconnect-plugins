@@ -701,7 +701,7 @@ actions:
         - malicious
         - all
       url_to_filter:
-        title: URL regular expression filter
+        title: URL Regular Expression Filter
         description: Regular expression to filter on. e.g. `examp` will return only URLs with the letters examp in them
         type: string
         required: false
