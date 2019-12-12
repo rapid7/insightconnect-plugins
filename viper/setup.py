@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='viper-rapid7-plugin',
       version='2.0.1',
-      description='Utilize Viper's platform to store, search, and analyze files',
+      description='Utilize the Viper platform to store, search, and analyze files',
       author='rapid7',
       author_email='',
       url='',

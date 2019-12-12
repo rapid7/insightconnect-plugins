@@ -64,7 +64,6 @@ In case an error is raised, make sure that the given expression can be correctly
 
 # Version History
 
-* 2.0.3 - Help updates
 * 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 2.0.0 - Rename "Tr" plugin title to "Translate"
