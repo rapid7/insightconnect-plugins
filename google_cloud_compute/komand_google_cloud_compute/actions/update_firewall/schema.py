@@ -107,13 +107,13 @@ class UpdateFirewallInput(komand.Input):
     "selfLink": {
       "type": "string",
       "title": "Self Link",
-      "description": "Server-defined url for the resource",
+      "description": "Server-defined URL for the resource",
       "order": 6
     },
     "sourceRanges": {
       "type": "array",
       "title": "Source Ranges",
-      "description": "If source ranges are specified, the firewall will apply only to traffic that has source ip address in these ranges",
+      "description": "If source ranges are specified, the firewall will apply only to traffic that has source IP address in these ranges",
       "items": {
         "type": "string"
       },
@@ -122,7 +122,7 @@ class UpdateFirewallInput(komand.Input):
     "sourceTags": {
       "type": "array",
       "title": "Source Tags",
-      "description": "If source tags are specified, the firewall will apply only to traffic with source ip that belongs to a tag listed in source tags",
+      "description": "If source tags are specified, the firewall will apply only to traffic with source IP that belongs to a tag listed in source tags",
       "items": {
         "type": "string"
       },
@@ -203,14 +203,14 @@ class UpdateFirewallOutput(komand.Output):
     },
     "httpErrorMessage": {
       "type": "string",
-      "title": "Http Error Message",
-      "description": "If the operation fails, this field contains the http error message that was returned",
+      "title": "HTTP Error Message",
+      "description": "If the operation fails, this field contains the HTTP error message that was returned",
       "order": 15
     },
     "httpErrorStatusCode": {
       "type": "integer",
-      "title": "Http Error Status Code",
-      "description": "If the operation fails, this field contains the http error status code that was returned",
+      "title": "HTTP Error Status Code",
+      "description": "If the operation fails, this field contains the HTTP error status code that was returned",
       "order": 16
     },
     "id": {
@@ -252,13 +252,13 @@ class UpdateFirewallOutput(komand.Output):
     "region": {
       "type": "string",
       "title": "Region",
-      "description": "The url of the region where the operation resides",
+      "description": "The URL of the region where the operation resides",
       "order": 20
     },
     "selfLink": {
       "type": "string",
       "title": "Self Link",
-      "description": "Server-defined url for the resource",
+      "description": "Server-defined URL for the resource",
       "order": 9
     },
     "startTime": {
@@ -288,7 +288,7 @@ class UpdateFirewallOutput(komand.Output):
     "targetLink": {
       "type": "string",
       "title": "Target Link",
-      "description": "The url of the resource that the operation modifies",
+      "description": "The URL of the resource that the operation modifies",
       "order": 7
     },
     "user": {
@@ -309,7 +309,7 @@ class UpdateFirewallOutput(komand.Output):
     "zone": {
       "type": "string",
       "title": "Zone",
-      "description": "The url of the zone where the operation resides. Only available when performing per-zone operations",
+      "description": "The URL of the zone where the operation resides. Only available when performing per-zone operations",
       "order": 11
     }
   },
