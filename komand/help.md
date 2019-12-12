@@ -1,11 +1,11 @@
 # Description
 
-The [Komand](https://www.komand.com) plugin provides meta-actions and trigger you can use with [Komand](https://www.komand.com/).
+The [Komand](komand.com) plugin provides backwards compatibility to run workflows in Komand, Rapid7's legacy on-premise SOAR solution.
 
 # Key Features
 
-* Respond to threats faster
-* Securtiy Orchestration
+* Automate manual tasks to save time and improve efficiency
+* Orchestrate incident response using data and actions from a wide variety of solutions
 
 # Requirements
 
