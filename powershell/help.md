@@ -98,7 +98,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -134,7 +134,7 @@ This plugin will join the Komand docker instance to the Windows domain as a comp
 For the Execute Script action PowerShell code should be submitted as base64. This can be done by
 copying a `.txt` file with the PowerShell code into the plugin.
 
-This plugin does not validate the PowerShell code.
+_This plugin does not validate the PowerShell code._
 
 Any errors generated on the remote computer by the PowerShell code
 are forwarded to the log file.

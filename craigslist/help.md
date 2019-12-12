@@ -16,7 +16,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -81,7 +81,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -89,7 +89,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
