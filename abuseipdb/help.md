@@ -1,6 +1,6 @@
 # Description
 
-The AbuseIPDB InsightConnect plugin allows you to look up IP reports, provides list and details of blacklisted IPs, or report an abusive IP.
+The AbuseIPDB InsightConnect plugin enables the look up of IP reports, provides list and details of blacklisted IPs, and submission of abusive IPs.
 
 This plugin utilizes [AbuseIPDB API v2](https://docs.abuseipdb.com).
 

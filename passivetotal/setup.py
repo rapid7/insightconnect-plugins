@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='passivetotal-rapid7-plugin',
       version='1.0.1',
-      description='PassiveTotal',
+      description='Use PassiveTotal to analyze domains, addresses, and WHOIS data',
       author='rapid7',
       author_email='',
       url='',

@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: pdf_generator
 title: PDF Generator
-description: The PDF plugin allows the user to create PDF reports from workflow data
+description: Create PDF reports from workflow data
 version: 1.0.1
 vendor: rapid7
 support: community

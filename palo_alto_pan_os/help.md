@@ -1,6 +1,8 @@
 # Description
 
-[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is a management console for Palo Alto Networks devices
+[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is a management console for 
+Palo Alto Networks devices. Use this plugin within a workflow to manage configurations, security policies, and more.
+
 This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api).
 
 # Key Features

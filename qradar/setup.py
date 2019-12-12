@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='qradar-rapid7-plugin',
       version='2.0.1',
-      description='The QRadar plugin allows you to run Ariel queries and retrieve policy offense data',
+      description='Run Ariel queries and retrieve policy offense data',
       author='rapid7',
       author_email='',
       url='',

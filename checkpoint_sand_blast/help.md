@@ -1,6 +1,6 @@
 # Description
 
-[checkpoint_sand_blast](https://www.checkpoint.com/solutions/zero-day-protection/) is a Multilayered security technology provides protection against advanced cyber attacks. The Checkpoint Sand Blast plugin extends the Sand Blast service and enables report status and suspicious file upload.
+[Checkpoint Sand Blast](https://www.checkpoint.com/solutions/zero-day-protection/) is a multilayered security technology provides protection against advanced cyber attacks. The Checkpoint Sand Blast plugin extends the Sand Blast service and enables report status and suspicious file upload.
 
 # Key Features
 
@@ -105,7 +105,7 @@ This action is used to upload a file for analysis.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|file_type|string|None|False|File extension e.g. docx, pdf, ect|None|
+|file_type|string|None|False|File extension e.g. DOCX, PDF|None|
 |file_name|string|None|True|The name of the file|None|
 |file_bytes|bytes|None|True|The file bytes|None|
 
@@ -187,4 +187,3 @@ hash must be SHA1
 ## References
 
 * [Checkpoint website](https://www.checkpoint.com/)
-
