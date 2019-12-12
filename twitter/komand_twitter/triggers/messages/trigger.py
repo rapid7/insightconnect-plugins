@@ -1,6 +1,7 @@
 import komand
 import time
 from .schema import MessagesInput, MessagesOutput
+from komand.exceptions import PluginException
 # Custom imports below
 from komand_twitter.util import util
 
@@ -26,13 +27,13 @@ class Messages(komand.Trigger):
     def run(self, params={}):
         if not self.connection.client:
             assert "Run: Twitter API client was None."
-            raise Exception("Run: Twitter API client was None.")
+            raise PluginException(cause="Run: Twitter API client was None.")
 
         self.pattern = params.get("pattern")
 
         # Open and auto-close the file to create the cache file on very first start up
         with komand.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:
-            print("Run: Got or created cache file: {file}".format(file=cache_file))
+            self.logger.info("Run: Got or created cache file: {file}".format(file=cache_file))
 
         # Make doubly sure it defaults to the original value, just in case?
         self.interval = params.get("interval", util.Common.SleepDuration.HIGH_ACTIVITY)

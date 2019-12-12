@@ -23,11 +23,11 @@ hub_tags:
 actions:
   run:
     title: Run
-    description: Run Tshark on a pcap
+    description: Run Tshark on a PCAP
     input:
       file:
-        title: Base64 Encoded Pcap
-        description: Base64 encoded pcap
+        title: Base64 Encoded PCAP
+        description: Base64 encoded PCAP
         type: bytes
         required: true
       options:

@@ -1,5 +1,6 @@
 import komand
 from .schema import UniqIntegerArrayInput, UniqIntegerArrayOutput
+from komand.exceptions import PluginException
 # Custom imports below
 import json
 from komand_uniq.util import util
@@ -39,4 +40,4 @@ class UniqIntegerArray(komand.Action):
         if t_count == 2:
             return { 'result': new_ls, 'duplicate_count': t_count, 'element_count': e_count}
         self.logger.error('Total count %s from %s is wrong', t_count, orig_ls)
-        raise Exception('Test failed')
+        raise PluginException(cause='Test failed')

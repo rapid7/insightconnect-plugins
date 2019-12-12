@@ -34,6 +34,7 @@ connection:
     required: true
 actions:
   post:
+    title: Post
     description: Tweet
     input:
       msg:
@@ -47,6 +48,7 @@ actions:
         description: URL
         required: false
   block:
+    title: Block
     description: Block User
     input:
       user:
@@ -60,6 +62,7 @@ actions:
         type: boolean
         required: false
   destroy:
+    title: Destroy
     description: Destroy a direct message
     input:
       message_id:

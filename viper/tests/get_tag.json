@@ -9,8 +9,9 @@
     "connection": {
       "token": {
         "secretKey": ""
-    }
-  },
+      }
+    },
   "type": "action_start",
   "version": "v1"
+  }
 }

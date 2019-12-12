@@ -28,18 +28,11 @@ This action is used to run TShark on a user supplied PCAP file and return the ou
 
 ##### Input
 
-Supported options:
-
-* TShark Flags
-* Display Filter
-
-A display filter is required, the default is set to `ip or ipv6` to encompass most traffic one would want to analyze.
-
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|file|bytes|None|True|Base64 encoded PCAP|None|
 |filter|string|ip or ipv6|False|Display filter E.g. tcp.port eq 80|None|
 |options|string|None|False|Tshark flags and options E.g. -n -c 10 -s 96. -r is implied|None|
-|file|bytes|None|True|Base64 encoded pcap|None|
 
 ##### Output
 

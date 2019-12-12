@@ -304,8 +304,8 @@ This action is used to get a single tag for this project.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|integer|None|True|None|None|
-|project_name|string|None|True|None|None|
+|id|integer|None|True|Tag ID|None|
+|project_name|string|None|True|Project name|None|
 
 ##### Output
 

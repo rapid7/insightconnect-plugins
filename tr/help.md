@@ -27,18 +27,16 @@ This action is used to run a `tr` expression on a string input.
 
 ##### Input
 
-It accepts a `tr` expression and a string to process using that expression. Any correct `tr` expression can be used, including all the options and interpreted sequences.
-
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|expression|string|None|True|Correct tr expression (e.g. -s [:space:] ' ')|None|
 |text|string|None|True|Text to process|None|
-|expression|string|None|True|Correct tr expression (e.g. -s [\:space\:] ' ')|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result|string|False|Processed text|
+|result|string|True|Processed text|
 
 Example output:
 

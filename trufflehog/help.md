@@ -32,12 +32,12 @@ This action is used to search through github commit histories, and checks if the
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|git_url|string|All|True|The git repository that is going to be searched|None|
-|do_regex|boolean|False|False|Enable high signal regex checks|None|
+|custom_regexes|object|None|False|Ignores default regexes. Provide your own|None|
 |do_entropy|boolean|True|False|Evaluates the shannon entropy for both the base64 char set and hexidecimal char set for every blob of text greater than 20 characters comprised of those character sets in each diff|None|
-|custom_regexes|object|None|True|Ignores default regexes. Provide your own|None|
-|since_commit|string|None|False|Scan from a given commit hash|None|
+|do_regex|boolean|False|False|Enable high signal regex checks|None|
+|git_url|string|None|True|The git repository that is going to be searched e.g. https://github.com/jonschipp/islet|None|
 |max_depth|integer|1000000|False|Max commit depth to go back when searching for secrets|None|
+|since_commit|string|None|False|Scan from a given commit hash|None|
 
 ##### Output
 
