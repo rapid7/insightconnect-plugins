@@ -1,13 +1,12 @@
 # Description
 
-[Jira](https://www.atlassian.com/software/jira) is a tool developed by Australian Company Atlassian.
-It is used for bug tracking, issue tracking, and project management.
+[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira REST API supports the Jira Software, Jira Server, and Jira Help Desk products from Atlassian.
 
 # Key Features
 
-* Ticket Managment
-* Reporting
-* Planning and Delegation
+* Create, find, edit, comment, and generally manage your Jira tickets through the Jira REST API
+* Assign issues to users
+* Find and create new users in your Jira instance
 
 # Requirements
 
@@ -624,7 +623,7 @@ This action is used to edit an issue within Jira.
 
 Example input:
 
-Making an update to custom fields in `fields` parameter:
+Making an update to custom fields in the `fields` parameter:
 
 ```
 {
@@ -633,7 +632,7 @@ Making an update to custom fields in `fields` parameter:
 }
 ```
 
-Update to assignee in the `field` parameter
+Update the assignee in the `field` parameter
 
 ```
 {
@@ -649,7 +648,7 @@ Using the `update` parameter
 }
 ```
 
-Updating multiple fields with `update` parameter
+Updating multiple fields with the `update` parameter
 
 ```
 {
