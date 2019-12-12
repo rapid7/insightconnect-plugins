@@ -1,11 +1,11 @@
 {
-	"spec": "76dd2250ae13c9001511287ef3a1dd08",
+	"spec": "f2249343def0497c2c8187979ce238ba",
 	"manifest": "58432d4ecae3d14974b4953b4944e16a",
 	"setup": "628ad31181211cef76f8514f22b9ca54",
 	"schemas": [
 		{
 			"identifier": "add_group_member/schema.py",
-			"hash": "89ceb64e4b7726b0d2370e2a50c15aa0"
+			"hash": "2eee9c78bdc88762b92ccbe2e92357ef"
 		},
 		{
 			"identifier": "create_blocked_sender_policy/schema.py",
