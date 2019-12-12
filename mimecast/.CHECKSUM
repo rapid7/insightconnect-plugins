@@ -1,5 +1,5 @@
 {
-	"spec": "9de6c2045f33aa8f023fb502f378bbbb",
+	"spec": "12a07ab850902539f492ad955dd019e7",
 	"manifest": "547c38dc6a7291fbe97aedd2545c04d8",
 	"setup": "b44d040e0684e4af5ff41ee49a18fbb9",
 	"schemas": [
@@ -37,7 +37,7 @@
 		},
 		{
 			"identifier": "get_ttp_url_logs/schema.py",
-			"hash": "b6290c33a0e2f831c49da45d3db75e49"
+			"hash": "9b3750cc6ae8ec94b2eb1ce66acef859"
 		},
 		{
 			"identifier": "permit_or_block_sender/schema.py",
