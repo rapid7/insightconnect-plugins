@@ -14,12 +14,11 @@ resources:
   vendor_url: https://www.paloaltonetworks.com/
 tags:
 - pan os
-- panorama
 - firewall
 - palo alto
 hub_tags:
   use_cases: [asset_inventory, threat_detection_and_response]
-  keywords: [pan os, panorama, firewall, palo alto]
+  keywords: [pan os, firewall, palo alto]
   features: []
 types:
   config:
