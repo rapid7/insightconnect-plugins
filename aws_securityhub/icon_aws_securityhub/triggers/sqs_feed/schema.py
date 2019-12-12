@@ -369,13 +369,13 @@ class SqsFeedOutput(komand.Output):
       "properties": {
         "HTTPHeaders": {
           "$ref": "#/definitions/HTTPHeaders",
-          "title": "Http Headers",
+          "title": "HTTP Headers",
           "description": "HTTP headers",
           "order": 1
         },
         "HTTPStatusCode": {
           "type": "integer",
-          "title": "Http Status Code",
+          "title": "HTTP Status Code",
           "description": "HTTP status code",
           "order": 2
         },
@@ -521,8 +521,8 @@ class SqsFeedOutput(komand.Output):
         },
         "Url": {
           "type": "string",
-          "title": "Url",
-          "description": "Url",
+          "title": "URL",
+          "description": "URL",
           "order": 1
         }
       }
@@ -551,8 +551,8 @@ class SqsFeedOutput(komand.Output):
             },
             "Url": {
               "type": "string",
-              "title": "Url",
-              "description": "Url",
+              "title": "URL",
+              "description": "URL",
               "order": 1
             }
           }
@@ -730,8 +730,8 @@ class SqsFeedOutput(komand.Output):
             },
             "Url": {
               "type": "string",
-              "title": "Url",
-              "description": "Url",
+              "title": "URL",
+              "description": "URL",
               "order": 1
             }
           }
@@ -760,8 +760,8 @@ class SqsFeedOutput(komand.Output):
                 },
                 "Url": {
                   "type": "string",
-                  "title": "Url",
-                  "description": "Url",
+                  "title": "URL",
+                  "description": "URL",
                   "order": 1
                 }
               }
@@ -1050,8 +1050,8 @@ class SqsFeedOutput(komand.Output):
                 },
                 "Url": {
                   "type": "string",
-                  "title": "Url",
-                  "description": "Url",
+                  "title": "URL",
+                  "description": "URL",
                   "order": 1
                 }
               }
@@ -1080,8 +1080,8 @@ class SqsFeedOutput(komand.Output):
                     },
                     "Url": {
                       "type": "string",
-                      "title": "Url",
-                      "description": "Url",
+                      "title": "URL",
+                      "description": "URL",
                       "order": 1
                     }
                   }
@@ -1374,8 +1374,8 @@ class SqsFeedOutput(komand.Output):
             },
             "Url": {
               "type": "string",
-              "title": "Url",
-              "description": "Url",
+              "title": "URL",
+              "description": "URL",
               "order": 1
             }
           }
@@ -1404,8 +1404,8 @@ class SqsFeedOutput(komand.Output):
                 },
                 "Url": {
                   "type": "string",
-                  "title": "Url",
-                  "description": "Url",
+                  "title": "URL",
+                  "description": "URL",
                   "order": 1
                 }
               }
@@ -1621,8 +1621,8 @@ class SqsFeedOutput(komand.Output):
             },
             "Url": {
               "type": "string",
-              "title": "Url",
-              "description": "Url",
+              "title": "URL",
+              "description": "URL",
               "order": 1
             }
           }
@@ -1651,8 +1651,8 @@ class SqsFeedOutput(komand.Output):
                 },
                 "Url": {
                   "type": "string",
-                  "title": "Url",
-                  "description": "Url",
+                  "title": "URL",
+                  "description": "URL",
                   "order": 1
                 }
               }
@@ -1830,8 +1830,8 @@ class SqsFeedOutput(komand.Output):
                 },
                 "Url": {
                   "type": "string",
-                  "title": "Url",
-                  "description": "Url",
+                  "title": "URL",
+                  "description": "URL",
                   "order": 1
                 }
               }
@@ -1860,8 +1860,8 @@ class SqsFeedOutput(komand.Output):
                     },
                     "Url": {
                       "type": "string",
-                      "title": "Url",
-                      "description": "Url",
+                      "title": "URL",
+                      "description": "URL",
                       "order": 1
                     }
                   }
@@ -2150,8 +2150,8 @@ class SqsFeedOutput(komand.Output):
                     },
                     "Url": {
                       "type": "string",
-                      "title": "Url",
-                      "description": "Url",
+                      "title": "URL",
+                      "description": "URL",
                       "order": 1
                     }
                   }
@@ -2180,8 +2180,8 @@ class SqsFeedOutput(komand.Output):
                         },
                         "Url": {
                           "type": "string",
-                          "title": "Url",
-                          "description": "Url",
+                          "title": "URL",
+                          "description": "URL",
                           "order": 1
                         }
                       }
@@ -2474,8 +2474,8 @@ class SqsFeedOutput(komand.Output):
                 },
                 "Url": {
                   "type": "string",
-                  "title": "Url",
-                  "description": "Url",
+                  "title": "URL",
+                  "description": "URL",
                   "order": 1
                 }
               }
@@ -2504,8 +2504,8 @@ class SqsFeedOutput(komand.Output):
                     },
                     "Url": {
                       "type": "string",
-                      "title": "Url",
-                      "description": "Url",
+                      "title": "URL",
+                      "description": "URL",
                       "order": 1
                     }
                   }

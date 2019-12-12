@@ -1,6 +1,7 @@
 # Description
 
-The Python 3 Script plugin allows you to run Python 3 code. It includes Python 3.6.5 and its standard library as well as the following 3rd party libraries:
+The Python 3 Script plugin allows you to run Python 3 code. It includes Python 3.6.5 and its standard library as 
+well as the following 3rd party libraries:
 
 * [requests 2.18.4](https://www.python-requests.org/en/master/)
 * [maya 0.5.0](https://pypi.python.org/pypi/maya)
@@ -9,7 +10,7 @@ The Python 3 Script plugin allows you to run Python 3 code. It includes Python 3
 * [pyyaml 3.12](http://pyyaml.org/)
 * [records 0.5.2](https://github.com/kennethreitz/records)
 
-The Python 3 plugin also allows you to load custom modules via its connection parameters.
+The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
 
 # Key Features
 
@@ -18,8 +19,6 @@ The Python 3 plugin also allows you to load custom modules via its connection pa
 # Requirements
 
 _This plugin does not contain any requirements._
-
-NOTE: Custom Python 3 modules can be loaded via connection parameters
 
 # Documentation
 
