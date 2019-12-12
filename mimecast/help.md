@@ -261,7 +261,7 @@ This action is used to add an email address or domain to a group.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |email_address|string|False|The email address of the user that was added to the group|
-|folder_id|string|False|The Mimecast ID of the group that the user / domain was added to|
+|folder_id|string|False|The Mimecast ID of the group that the user/domain was added to|
 |id|string|False|The Mimecast ID of the user / domain that was added to the group|
 |internal|boolean|False|If the user / domain is internal or not|
 
@@ -519,4 +519,3 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 ## References
 
 * [Mimecast API](https://www.mimecast.com/developer/documentation)
-
