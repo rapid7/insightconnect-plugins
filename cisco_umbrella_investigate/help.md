@@ -67,7 +67,7 @@ This action is used to allows you to search a nameserver to find all domains reg
 
 #### Co-occurrences for a Domain
 
-This action is used to return co-occurences for the specified domain.
+This action is used to return co-occurrences for the specified domain.
 
 ##### Input
 
@@ -79,7 +79,7 @@ This action is used to return co-occurences for the specified domain.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|cooccurrences|array|True|Array of [domain name, scores] tuples. The values range between 0 and 1 and should not exceed 1. All co-occurences of requests from client IPs are returned for the previous seven days whether the co-occurence is suspicious or not|
+|cooccurrences|array|True|Array of [domain name, scores] tuples. The values range between 0 and 1 and should not exceed 1. All co-occurrences of requests from client IPs are returned for the previous seven days whether the co-occurrence is suspicious or not|
 
 #### WHOIS by Domain
 
@@ -360,7 +360,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.3 - New spec and help.md format for the Hub
+* 2.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Co-occurrences
 * 1.0.2 - Added change allowing categorization to work with a Tier1 API key by utilizing the single domain API endpoint instead of the bulk API endpoint when a single-element array of domains is passed in
 * 1.0.1 - Add connection test | Fix where connection was returning "Wrong api_key" on valid keys | Run plugin as least privileged user | Update to use the `komand/python-3-slim-plugin` Docker image to reduce plugin size
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

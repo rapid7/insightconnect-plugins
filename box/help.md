@@ -271,7 +271,7 @@ This action is used to retrieve a specific file ID.
 
 #### Upload File
 
-This action is used to upload a file. Input "0" for root folder. Include extention in filename.
+This action is used to upload a file. Input "0" for root folder. Include extension in filename.
 
 ##### Input
 

@@ -5105,7 +5105,7 @@ class ReportOutput(komand.Output):
               "properties": {
                 "additionalContext": {
                   "type": "string",
-                  "title": "Additonal Context",
+                  "title": "Additional Context",
                   "order": 16
                 },
                 "apicalls": {
@@ -7482,7 +7482,7 @@ class ReportOutput(komand.Output):
                   "properties": {
                     "additionalContext": {
                       "type": "string",
-                      "title": "Additonal Context",
+                      "title": "Additional Context",
                       "order": 16
                     },
                     "apicalls": {
@@ -8734,7 +8734,7 @@ class ReportOutput(komand.Output):
           "properties": {
             "additionalContext": {
               "type": "string",
-              "title": "Additonal Context",
+              "title": "Additional Context",
               "order": 16
             },
             "apicalls": {
@@ -11111,7 +11111,7 @@ class ReportOutput(komand.Output):
               "properties": {
                 "additionalContext": {
                   "type": "string",
-                  "title": "Additonal Context",
+                  "title": "Additional Context",
                   "order": 16
                 },
                 "apicalls": {
@@ -18109,7 +18109,7 @@ class ReportOutput(komand.Output):
           "properties": {
             "additionalContext": {
               "type": "string",
-              "title": "Additonal Context",
+              "title": "Additional Context",
               "order": 16
             },
             "apicalls": {
@@ -20486,7 +20486,7 @@ class ReportOutput(komand.Output):
               "properties": {
                 "additionalContext": {
                   "type": "string",
-                  "title": "Additonal Context",
+                  "title": "Additional Context",
                   "order": 16
                 },
                 "apicalls": {
@@ -21738,7 +21738,7 @@ class ReportOutput(komand.Output):
       "properties": {
         "additionalContext": {
           "type": "string",
-          "title": "Additonal Context",
+          "title": "Additional Context",
           "order": 16
         },
         "apicalls": {
@@ -24115,7 +24115,7 @@ class ReportOutput(komand.Output):
           "properties": {
             "additionalContext": {
               "type": "string",
-              "title": "Additonal Context",
+              "title": "Additional Context",
               "order": 16
             },
             "apicalls": {

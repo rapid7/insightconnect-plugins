@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|
 |token|credential_secret_key|None|True|App Token|None|
 
-The connection represents an 'app' in Pushover.  The key determins which 'source' it will be coming from.
+The connection represents an 'app' in Pushover.  The key determines which 'source' it will be coming from.
 
 ## Technical Details
 

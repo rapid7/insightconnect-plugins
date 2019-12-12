@@ -134,7 +134,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-Some `finger` daemons return answers in a different format which will cause this plugin to be unable to interpet the data correctly.
+Some `finger` daemons return answers in a different format which will cause this plugin to be unable to interpret the data correctly.
 
 # Version History
 

@@ -189,7 +189,7 @@ This trigger is used to monitor new issues.
 |search|string|None|False|Search issues against their title and description|None|
 |labels|string|None|True|Comma-separated list of label names, issues must have all labels to be returned|None|
 |milestone|string|None|False|The milestone title|None|
-|interval|integer|None|False|How often recieve new issues|None|
+|interval|integer|None|False|How often receive new issues|None|
 |state|string|None|False|Return all issues or just those that are opened or closed|['Opened', 'Closed']|
 
 ##### Output

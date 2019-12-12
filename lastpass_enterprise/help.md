@@ -5,7 +5,7 @@ This plugin utilizes the [LastPass API](https://enterprise.lastpass.com/users/se
 
 # Key Features
 
-* Network Access Point Managment
+* Network Access Point Management
 
 # Requirements
 

@@ -5,7 +5,7 @@ It is used for bug tracking, issue tracking, and project management.
 
 # Key Features
 
-* Ticket Managment
+* Ticket Management
 * Reporting
 * Planning and Delegation
 

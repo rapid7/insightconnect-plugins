@@ -4,7 +4,7 @@ products: [insightconnect]
 name: misp
 title: MISP
 description: MISP is an open source threat sharing platform
-version: 3.0.2
+version: 3.0.0
 vendor: rapid7
 support: community
 status: []
@@ -933,7 +933,7 @@ actions:
         type: string
         required: false
       frame:
-        title: Commented Explination
+        title: Commented Explanation
         description: Commented out expliantion framing the data
         type: boolean
         default: true
