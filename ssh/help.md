@@ -3,40 +3,9 @@
 [Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network.
 This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote host via the library. The SSH plugin allows you to run commands on a remote host.
 
-## Actions
-
-### Run Remote Command
-
-This action is used to run a command on a remote host using SSH.
-
-#### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|None|False|(Optional) Host to run remote commands. If not provided, the connection host will be used|None|
-|command|string|None|False|Command to execute on remote host|None|
-
-#### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|results|True|Results|
-
-Example output:
-
-```
-{
-  "results": {
-    "all_output": "total 57068\n\ndrwxrwxr-x. 2 rapid7 rapid7        6 Nov  4 20:15 test\n\n-rw-rw-r--. 1 rapid7 rapid7       13 Nov  4 20:15 test.txt\n\n-rw-r--r--. 1 rapid7 rapid7 58433536 Mar 26  2019 VBoxGuestAdditions.iso\n",
-    "stderr": "",
-    "stdout": "total 57068\n\ndrwxrwxr-x. 2 rapid7 rapid7        6 Nov  4 20:15 test\n\n-rw-rw-r--. 1 rapid7 rapid7       13 Nov  4 20:15 test.txt\n\n-rw-r--r--. 1 rapid7 rapid7 58433536 Mar 26  2019 VBoxGuestAdditions.iso\n"
-  }
-}
-```
-
 # Key Features
 
-* Run a command on a remote host
+* Run remote commands with SSH
 
 # Requirements
 
@@ -53,11 +22,12 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|username|string|None|False|User to run command as|None|
-|host|string|None|False|Remote host to connect to. Can be over-ridden in actions|None|
-|password|password|None|False|Password authentication or password to decrypt provided private key. Either this or SSH private key is required|None|
-|port|integer|22|False|Remote port to use|None|
-|key|string|None|False|A base64 encoded SSH private key to use to authenticate to remote server. A newline is required after the beginning and before the end marker|None|
+|host|string|None|True|Remote host to connect to. Can be over-ridden in actions|None|
+|key|credential_asymmetric_key|None|False|A base64 encoded SSH private key to use to authenticate to remote server. A newline is required after the beginning and before the end marker|None|
+|password|credential_secret_key|None|False|Password authentication or password to decrypt provided private key. Either this or SSH private key is required|None|
+|port|integer|22|True|Remote port to use|None|
+|use_key|boolean|None|True|True to connect via key, false to connect via password|None|
+|username|credential_secret_key|None|True|User to run command as|None|
 
 The `key` field takes a base64 encoded RSA private key which must contain a newline character after the BEGIN marker and before the END marker:
 E.g.
@@ -80,34 +50,36 @@ This can then be pasted into the Connection's `key` input field.
 
 #### Run Remote Command
 
-This action is used to run a command on a remote host using SSH.
+This action is used to run remote command.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|host|string|None|False|(Optional) Host to run remote commands. If not provided, the connection host will be used|None|
-|command|string|None|False|Command to execute on remote host|None|
+|command|string|None|True|Command to execute on remote host|None|
+|host|string|None|False|Host to run remote commands. If not provided, the connection host will be used|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|string|False|Output results|
+|results|results|True|Results|
 
 Example output:
 
 ```
-
 {
-  "results": "total 0\n\ndrwxr-xr-x. 2 root root 6 Sep 26 18:12 go\n"
+  "results": {
+    "all_output": "total 57068\n\ndrwxrwxr-x. 2 rapid7 rapid7        6 Nov  4 20:15 test\n\n-rw-rw-r--. 1 rapid7 rapid7       13 Nov  4 20:15 test.txt\n\n-rw-r--r--. 1 rapid7 rapid7 58433536 Mar 26  2019 VBoxGuestAdditions.iso\n",
+    "stderr": "",
+    "stdout": "total 57068\n\ndrwxrwxr-x. 2 rapid7 rapid7        6 Nov  4 20:15 test\n\n-rw-rw-r--. 1 rapid7 rapid7       13 Nov  4 20:15 test.txt\n\n-rw-r--r--. 1 rapid7 rapid7 58433536 Mar 26  2019 VBoxGuestAdditions.iso\n"
+  }
 }
-
 ```
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -115,7 +87,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

@@ -74,7 +74,7 @@ class SqsFeed(komand.Trigger):
                         try:
                             security_hub_event = json.loads(message["Body"])
                         except Exception as e:
-                            self.logger.error(f"An unexpected event occurred when proccessing the Security Hub Event: {e}")
+                            self.logger.error(f"An unexpected event occurred when processing the Security Hub Event: {e}")
 
                     self.send(
                         {

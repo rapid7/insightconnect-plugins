@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: abuseipdb
 title: AbuseIPDB
-description: This plugin allows you to look up IP reports, provides list and details of blacklisted IPs, or report an abusive IP
+description: Enables the look up of IP reports, provides list and details of blacklisted IPs, and submissions of abusive IPs
 version: 5.0.1
 vendor: rapid7
 support: community

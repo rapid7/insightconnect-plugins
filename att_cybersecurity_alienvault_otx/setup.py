@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='att_cybersecurity_alienvault_otx-rapid7-plugin',
-      version='1.0.2',
+      version='2.0.0',
       description='This plugin utilizes AT&T Cybersecurity (AlienVault OTX) to retrieve details about an indicator Open Threat Exchange is the neighborhood watch of the global intelligence community',
       author='rapid7',
       author_email='',
