@@ -64,7 +64,7 @@ class GetTtpUrlLogsInput(komand.Input):
     },
     "url_to_filter": {
       "type": "string",
-      "title": "URL regular expression filter",
+      "title": "URL Regular Expression Filter",
       "description": "Regular expression to filter on. e.g. `examp` will return only URLs with the letters examp in them",
       "order": 5
     }

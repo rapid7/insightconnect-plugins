@@ -1,11 +1,11 @@
 {
-	"spec": "f2249343def0497c2c8187979ce238ba",
+	"spec": "0e16bb0ff517fe1143aed5d803057c18",
 	"manifest": "58432d4ecae3d14974b4953b4944e16a",
 	"setup": "628ad31181211cef76f8514f22b9ca54",
 	"schemas": [
 		{
 			"identifier": "add_group_member/schema.py",
-			"hash": "2eee9c78bdc88762b92ccbe2e92357ef"
+			"hash": "5096fe0bc9ac344284bd79073ef07e76"
 		},
 		{
 			"identifier": "create_blocked_sender_policy/schema.py",
@@ -37,7 +37,7 @@
 		},
 		{
 			"identifier": "get_ttp_url_logs/schema.py",
-			"hash": "9b3750cc6ae8ec94b2eb1ce66acef859"
+			"hash": "0a84d44d6eb41a4d9b96db0d3853af4b"
 		},
 		{
 			"identifier": "permit_or_block_sender/schema.py",
