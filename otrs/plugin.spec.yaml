@@ -14,9 +14,10 @@ resources:
   vendor_url: https://otrs.com/
 tags:
 - ticket
+- itsm
 hub_tags:
   use_cases: [remediation_management]
-  keywords: [ticket]
+  keywords: [ticket, itsm]
   features: []
 connection:
   server:
