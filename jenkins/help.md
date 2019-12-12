@@ -1,12 +1,12 @@
 # Description
 
-[Jenkins](https://jenkins.io/) is an open source automation server which enables developers around the world to reliably build, test, and deploy their software.
-This plugin utilizes the [Jenkins Python API](http://git.openstack.org/cgit/openstack/python-jenkins).
+[Jenkins](https://jenkins.io/) is an open-source automation tool built for continuous integration purposes. Jenkins allows developers around the world to reliable build, test, and deploy their software. This plugin uses the [Jenkins Python API](https://opendev.org/jjb/python-jenkins) to programmatically start and collect information from Jenkins builds.
 
 # Key Features
 
-* Continuous Integration
-* Continuous Deploy
+* Continuous Integration/Continuous Deployment
+* Start a new build job in Jenkins
+* Get information about a specific build
 
 # Requirements
 

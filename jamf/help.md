@@ -1,13 +1,12 @@
 # Description
 
-[Jamf](https://instancename.jamfcloud.com/) is a popular product for managing iPads, iPhones, Macs, and Apple TVs for schools and businesses.
-
-This plugin utilizes the [Jamf API](https://developer.jamf.com/apis/classic-api/index).
+[Jamf Pro](https://www.jamf.com/products/jamf-pro/) is a comprehensive management system for Apple macOS computers and iOS devices. This plugin uses the [Jamf Pro API](https://developer.jamf.com/apis/classic-api/index) to get and manage user and device information.
 
 # Key Features
 
-* User Management
-* Device Security
+* Manage computers and group membership
+* Get information about devices, users, and groups
+* Lock mobile device in the event of a security incident
 
 # Requirements
 
@@ -22,7 +21,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|client_login|credential_username_password|None|True|The Jamf username and password for basic authentication API interaction|None|
+|client_login|credential_username_password|None|True|The Jamf username and password for basic authentication and API interaction|None|
 |timeout|integer|30|False|The interval in seconds before abandoning an attempt to access Jamf|None|
 |url|string|None|True|The full URL for your instance of Jamf, e.g. https://instance.jamfcloud.com|None|
 
@@ -90,7 +89,7 @@ Example output:
 
 #### Get Devices Names and IDs
 
-This action is used to get a list of user's devices names and IDs.
+This action is used to get a list of a user's device names and IDs.
 
 ##### Input
 
