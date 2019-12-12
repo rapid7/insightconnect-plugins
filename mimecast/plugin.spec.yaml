@@ -613,7 +613,7 @@ actions:
         required: false
       internal:
         title: Internal
-        description: If the user / domain is internal or not
+        description: Whether or not the user or domain is internal
         type: boolean
         required: false
   delete_group_member:
