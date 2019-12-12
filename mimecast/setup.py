@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name='mimecast-matt-plugin',
+setup(name='mimecast-rapid7-plugin',
       version='4.0.0',
       description='Services for email security, archiving and continuity. Protect, manage and archive without compromise',
-      author='matt',
+      author='rapid7',
       author_email='',
       url='',
       packages=find_packages(),
