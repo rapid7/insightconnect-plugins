@@ -46,8 +46,8 @@ This action is used to return the history that umbrella has seen for a given IP 
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|rrs|[]ip_resource_record|True|None|
-|features|[]ip_feature|True|None|
+|features|[]ip_feature|True|Features|
+|rrs|[]ip_resource_record|True|RRS|
 
 #### WHOIS by Nameserver
 
@@ -123,13 +123,13 @@ This action is used to return a file, or a file-like object, such as a process r
 |----|----|-------|--------|-----------|----|
 |hash|string|None|True|Search sample by hash (SHA-256, SHA-1 or MD5)|None|
 |limit|string|None|False|Default of 10, can be extended for a larger data set|None|
-|offset|string|None|False|The offset of the individual entities in the query's response, used for pagination|None|
+|offset|string|None|False|The offset of the individual entities in the query’s response, used for pagination|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sample|sample_info|False|None|
+|sample|sample_info|False|Sample|
 
 #### DNS RR History
 
@@ -146,7 +146,7 @@ This action is used to return the history that Umbrella has seen for a given dom
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|features|[]feature|True|None|
+|features|[]feature|True|Features|
 |rrs_tf|[]resource_record|True|RRS TF|
 
 #### Latest Malicious Domains by IP
@@ -182,7 +182,7 @@ This action is used to return artifacts which are files created or modified duri
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|artifacts|array|True|None|
+|artifacts|array|True|Artifacts|
 
 #### WHOIS Information by Email
 
@@ -216,7 +216,7 @@ This action is used to return network activity information associated with a sam
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|connections|array|True|None|
+|connections|array|True|Connections|
 
 #### Pattern Search
 
@@ -235,11 +235,11 @@ This action is used to the pattern search functionality in investigate uses regu
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|matches|array|True|Each match will contain the name of the domain matches, the and the first seen time, both in Epoch and ISO time format. This endpoint returns the security categories as strings rather than integers (eg\: 'malware','botnet', etc) if includeCategory is true|
-|limit|integer|True|Default is 100, can be expanded to 1000 which is the maximum number of results for this endpoint|
-|totalResults|integer|True|Total results from this search string. The default number of results is 100 and can be expanded using the limit parameter|
 |expression|string|True|This is the RegEx in the query as seen from the API. If results from your query do not match what you may have expected, check to see that the RegEx matches the one you tried to enter and that characters are correctly escaped in the query string|
+|limit|integer|True|Default is 100, can be expanded to 1000 which is the maximum number of results for this endpoint|
+|matches|array|True|Each match will contain the name of the domain matches, the and the first seen time, both in Epoch and ISO time format. This endpoint returns the security categories as strings rather than integers (eg: 'malware','botnet', etc) if includeCategory is true|
 |moreDataAvailable|boolean|True|Whether more data is available than what is displayed. Will be true if totalResults exceed limit. We recommend refining your filter if this value is true|
+|totalResults|integer|True|Total results from this search string. The default number of results is 100 and can be expanded using the limit parameter|
 
 #### Domain Status and Categorization
 
@@ -292,9 +292,9 @@ This action is used to return all samples associated with the domain.
 |----|----|--------|-----------|
 |limit|integer|True|Number of sample results|
 |moreDataAvailable|boolean|True|If more data is available. Extend the limit and/or offset to view|
-|samples|[]sample_info|True|Information about the actual sample|
-|offset|integer|True|The offset of the individual entities in the query's response; used for pagination|
+|offset|integer|True|The offset of the individual entities in the query’s response; used for pagination|
 |query|string|True|What string was queried or seen by the API|
+|samples|[]sample_info|True|Information about the actual sample|
 |totalResults|integer|True|The number of results returned. Same as limit if limit is reached and moreDataAvailable is true|
 
 #### Other Samples
@@ -313,7 +313,7 @@ This action is used to return other samples associated with a sample.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|samples|array|True|None|
+|samples|array|True|Samples|
 
 #### Security Information
 
@@ -329,22 +329,22 @@ This action is used to returns scores or security features.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|dga_score|number|True|Domain Generation Algorithm. This score is generated based on the likeliness of the domain name being generated by an algorithm rather than a human|
-|geoscore|number|True|A score that represents how far the different physical locations serving this name are from each other|
 |asn_score|number|False|ASN reputation score, ranges from -100 to 0 with -100 being very suspicious|
-|ks_test|number|True|Kolmogorov-Smirnov test on geodiversity. 0 means that the client traffic matches what is expected for this TLD|
-|pagerank|number|True|Popularity according to Google's pagerank algorithm|
+|attack|string|False|The name of any known attacks associated with this domain. Returns blank if no known threat associated with domain|
+|dga_score|number|True|Domain Generation Algorithm. This score is generated based on the likeliness of the domain name being generated by an algorithm rather than a human|
 |entropy|number|True|The number of bits required to encode the domain name, as a score. This score is to be used in conjunction with DGA and Perplexity|
+|geodiversity|array|True|A score representing the number of queries from clients visiting the domain, broken down by country. Score is a non-normalized ratio between 0 and 1|
+|geodiversity_normalized|array|True|A score representing the amount of queries for clients visiting the domain, broken down by country. Score is a normalized ratio between 0 and 1|
+|geoscore|number|True|A score that represents how far the different physical locations serving this name are from each other|
+|ks_test|number|True|Kolmogorov–Smirnov test on geodiversity. 0 means that the client traffic matches what is expected for this TLD|
+|pagerank|number|True|Popularity according to Google's pagerank algorithm|
 |perplexity|number|True|A second score on the likeliness of the name to be algorithmically generated, on a scale from 0 to 1|
-|threat_type|string|False|The type of the known attack, such as botnet or APT. Returns blank if no known threat associated with domain|
-|tld_geodiversity|array|True|A score that represents the TLD country code geodiversity as a percentage of clients visiting the domain. Occurs most often with domains that have a ccTLD. Score is normalized ratio between 0 and 1|
+|popularity|number|True|The number of unique client IPs visiting this site, relative to the all requests to all sites. A score of how many different client/unique IPs go to this domain compared to others|
+|prefix_score|number|False|Prefix ranks domains given their IP prefixes (an IP prefix is the first three octets in an IP address) and the reputation score of these prefixes. Ranges from -100 to 0, -100 being very suspicious|
 |rip_score|number|False|RIP ranks domains given their IP addresses and the reputation score of these IP addresses. Ranges from -100 to 0, -100 being very suspicious|
 |securerank2|number|True|Securerank is designed to identify hostnames requested by known infected clients but never requested by clean clients, assuming these domains are more likely to be bad. Scores range from -100 (suspicious) to 100 (benign)|
-|popularity|number|True|The number of unique client IPs visiting this site, relative to the all requests to all sites. A score of how many different client/unique IPs go to this domain compared to others|
-|attack|string|False|The name of any known attacks associated with this domain. Returns blank if no known threat associated with domain|
-|geodiversity|array|True|A score representing the number of queries from clients visiting the domain, broken down by country. Score is a non-normalized ratio between 0 and 1|
-|prefix_score|number|False|Prefix ranks domains given their IP prefixes (an IP prefix is the first three octets in an IP address) and the reputation score of these prefixes. Ranges from -100 to 0, -100 being very suspicious|
-|geodiversity_normalized|array|True|A score representing the amount of queries for clients visiting the domain, broken down by country. Score is a normalized ratio between 0 and 1|
+|threat_type|string|False|The type of the known attack, such as botnet or APT. Returns blank if no known threat associated with domain|
+|tld_geodiversity|array|True|A score that represents the TLD country code geodiversity as a percentage of clients visiting the domain. Occurs most often with domains that have a ccTLD. Score is normalized ratio between 0 and 1|
 
 ### Triggers
 
