@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|client_login|credential_username_password|None|True|The Jamf username and password for basic authentication and API interaction|None|
+|client_login|credential_username_password|None|True|The Jamf username and password for basic authentication API interaction|None|
 |timeout|integer|30|False|The interval in seconds before abandoning an attempt to access Jamf|None|
 |url|string|None|True|The full URL for your instance of Jamf, e.g. https://instance.jamfcloud.com|None|
 
