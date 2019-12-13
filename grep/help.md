@@ -1,6 +1,6 @@
 # Description
 
-The Grep InsightConnect plugin searches for a specified pattern in a string or a file by utilizing BusyBox grep. It calls `egrep` which supports extended regular expressions to improve pattern matching ability.
+The Grep plugin searches for a specified pattern in a string or a file by utilizing BusyBox grep. It calls `egrep` which supports extended regular expressions to improve pattern matching ability.
 
 For example, here's a simple example of `egrep` from the command line:
 
@@ -49,9 +49,9 @@ The plugin returns the the number of matches found, a string array of the matche
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|matches|[]string|False|Matched lines|
 |found|boolean|False|Found match boolean|
 |hits|integer|False|Number of matches|
+|matches|[]string|False|Matched lines|
 
 #### Match String
 
@@ -71,9 +71,9 @@ The plugin returns the the number of matches found, a string array of the matche
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|matches|[]string|False|Matched lines|
 |found|boolean|False|Found match boolean|
 |hits|integer|False|Number of matches|
+|matches|[]string|False|Matched lines|
 
 ### Triggers
 

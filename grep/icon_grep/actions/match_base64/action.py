@@ -5,17 +5,17 @@ import shutil
 import tempfile
 from bs4 import UnicodeDammit
 import base64
-from komand_grep.util import utils
+from icon_grep.util import utils
 
 
 class MatchBase64(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='match_base64',
-                description='Find pattern in base64 file',
-                input=MatchBase64Input(),
-                output=MatchBase64Output())
+            name='match_base64',
+            description='Find pattern in base64 file',
+            input=MatchBase64Input(),
+            output=MatchBase64Output())
 
     def run(self, params={}):
         try:
@@ -25,14 +25,14 @@ class MatchBase64(komand.Action):
             self.logger.debug("Error decoding")
             decoded = UnicodeDammit.detwingle(params['data']).decode('utf-8', errors='ignore')
 
-        path = tempfile.mkdtemp()+"/"
+        path = tempfile.mkdtemp() + "/"
         fname = "tmp.txt"
-        with open(path+fname,'w') as f:
+        with open(path + fname, 'w') as f:
             f.write(decoded)
 
         pattern = params.get('pattern')
         behavior = params.get('behavior')
-        matches = str.splitlines(utils.print_lines(self.logger, path+fname, pattern, behavior, path))
+        matches = str.splitlines(utils.print_lines(self.logger, path + fname, pattern, behavior, path))
         if matches:
             found = True
             hits = len(matches)
