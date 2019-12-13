@@ -130,11 +130,11 @@ class NewExceptionRequestOutput(komand.Output):
           "title": "State",
           "description": "The state of the vulnerability exception",
           "enum": [
-            "Deleted",
-            "Expired",
-            "Approved",
-            "Rejected",
-            "Under Review"
+            "deleted",
+            "expired",
+            "approved",
+            "rejected",
+            "under review"
           ],
           "order": 2
         },

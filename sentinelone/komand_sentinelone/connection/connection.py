@@ -61,6 +61,39 @@ class Connection(komand.Connection):
 
         return self.header
 
+    def activities_list(self, parameters):
+        return self._call_api("GET", "activities", None, parameters)
+
+    def name_available(self, name):
+        return self._call_api("GET", "private/accounts/name-available", None, {"name": name})
+
+    def activities_types(self):
+        return self._call_api("GET", "activities/types")
+
+    def ad_settings(self, parameters):
+        return self._call_api("GET", "settings/active-directory", None, parameters)
+
+    def agent_info(self, identifier: str):
+        return self._call_api("GET", "settings/active-directory", None, {"id": identifier})
+
+    def apps_by_agent_ids(self, identifiers: str):
+        return self._call_api("GET", "agents/applications", None, {"ids": identifiers})
+
+    def agents_processes(self, identifiers: str):
+        return self._call_api("GET", "agents/processes", None, {"ids": identifiers})
+
+    def agents_summary(self, site_ids, account_ids):
+        return self._call_api("GET", "private/agents/summary", None, {"siteIds": site_ids, "accountIds": account_ids})
+
+    def agents_action(self, action: str, agents_filter: str):
+        return self._call_api("POST", "agents/actions/{}".format(action), {"filter": agents_filter})
+
+    def agents_support_action(self, action: str, agents_filter: str, module: str):
+        return self._call_api("POST", "private/agents/support-actions/{}".format(action), {
+            "filter": agents_filter,
+            "data": {"module": module}
+        })
+
     def get_threat_summary(self):
         """ Output a summary of current threats in the system grouped by
         mitigation level. """

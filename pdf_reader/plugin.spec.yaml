@@ -16,7 +16,7 @@ tags:
 - Reader
 - Extract
 hub_tags:
-  use_cases: [soar, data_utility, data_ingestion]
+  use_cases: [data_utility]
   keywords: [PDF, Reader, Extract]
   features: []
 actions:

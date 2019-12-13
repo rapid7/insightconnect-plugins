@@ -3,8 +3,8 @@
         "action": "create_issue",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
             "url": null
         },

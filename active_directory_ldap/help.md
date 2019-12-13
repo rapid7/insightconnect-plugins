@@ -1,7 +1,6 @@
 # Description
 
-This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network.
-This plugin supports Windows Server 2008 and later. Some testing has been done with Windows server 2003; however, it is not officially supported.
+The Active Directory LDAP plugin accesses Microsoft's Active Directory service to programmatically manage a Active Directory/LDAP environment. Supports Windows Server 2008 and later. Testing has been done with Windows server 2003; however, it is not officially supported.
 
 # Key Features
 
@@ -75,13 +74,13 @@ This action is used to add the specified Active Directory user.
 |----|----|-------|--------|-----------|----|
 |first_name|string|None|True|User's first name|None|
 |last_name|string|None|True|User's last name|None|
-|additional_parameters|object|None|False|Add additional user parameters in JSON format e.g. {'telephoneNumber'\: '(617)555-1234'}|None|
+|additional_parameters|object|None|False|Add additional user parameters in JSON format e.g. {'telephoneNumber': '(617)555-1234'}|None|
 |domain_name|string|None|True|The domain name this user will belong to, e.g. mydomain.com|None|
 |user_ou|string|Users|True|The OU that the user account will be created in|None|
 |logon_name|string|None|True|The logon name for the account|None|
 |account_disabled|string|true|True|Set this to true to disable the user account at creation|['true', 'false']|
 |password|password|None|True|The account's starting password|None|
-|user_principal_name|string|None|True|The users principal name, e.g. jdoe@example.com|None|
+|user_principal_name|string|None|True|The users principal name, e.g. user@example.com|None|
 
 ##### Output
 
@@ -109,7 +108,7 @@ For more information on LDAP queries see https://ldap3.readthedocs.io/tutorial_s
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515. Example\: (accountName=joesmith)|None|
+|search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515. Example: (accountName=joesmith)|None|
 |search_base|string|None|True|The base of the search request|None|
 
 ##### Output

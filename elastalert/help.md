@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-This plugin does not contain any actions.
+_This plugin does not contain any actions._
 
 ### Triggers
 
@@ -54,7 +54,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

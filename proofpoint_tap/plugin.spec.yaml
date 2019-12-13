@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: proofpoint_tap
 title: Proofpoint TAP
-description: A plugin for Proofpoint Targeted Attack Protection (TAP) alerts
-version: 1.0.4
+description: Parse Proofpoint Targeted Attack Protection (TAP) alerts
+version: 1.0.5
 vendor: rapid7
 support: community
 status: []
@@ -17,7 +17,7 @@ tags:
 - TAP
 - parser
 hub_tags:
-  use_cases: [soar, alerting_and_notifications, threat_intel, threat_hunting]
+  use_cases: [alerting_and_notifications, threat_detection_and_response]
   keywords: [Proofpoint, TAP, parser]
   features: []
 types:
@@ -40,6 +40,11 @@ types:
     condemnation_time:
       title: Condemnation Time
       description: Condemnation Time
+      type: string
+      required: false
+    threat_details_url:
+      title: Threat Details URL
+      description: URL for Details of the Threat
       type: string
       required: false
   message:

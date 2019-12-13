@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "activities_list",
+    "meta": {},
+    "input": {
+      "limit": 50
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

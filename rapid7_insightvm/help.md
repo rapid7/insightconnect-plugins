@@ -4176,7 +4176,7 @@ This trigger is used to check for new InsightVM vulnerability exception activity
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|
-|status_filter|[]string|['Under Review']|False|List of vulnerabiliti statuses to match for trigger; options include: Under Review, Approved, Rejected, Expired, Deleted|None|
+|status_filter|[]string|['under review']|False|List of vulnerabiliti statuses to match for trigger; options include: under review, approved, rejected, expired, deleted|None|
 
 ##### Output
 
@@ -4292,6 +4292,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.5.2 - Fix bug in New Vulnerability Exception Activity
 * 3.5.1 - New spec and help.md format for the Hub
 * 3.5.0 - New Actions Get Vulnerability Details, Create Vulnerability Exception Submission,  Delete Vulnerability Exception, Review Vulnerability Exception  | New Trigger New Vulnerability Exception Activity | Misc. Cleanup
 * 3.4.0 - New Action Get Asset Software | Fix issue with New Scan trigger not properly caching new scan IDs
@@ -4314,4 +4315,3 @@ This plugin does not contain any troubleshooting information.
 
 * [InsightVM](https://www.rapid7.com/products/insightvm/)
 * [InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)
-

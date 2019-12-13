@@ -16,7 +16,7 @@ tags:
 - grafana
 - agile
 hub_tags:
-  use_cases: [soar, user_management]
+  use_cases: [user_management]
   keywords: [grafana, agile]
   features: []
 types:

@@ -1,18 +1,6 @@
 {
     "body": {
         "action": "get_ttp_url_logs",
-        "connection": {
-            "app_id": null,
-            "app_key": {
-                "secretKey": null
-            },
-            "auth_type": null,
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "url": null
-        },
         "input": {
             "from": "2019-04-23T11:00:00+0000",
             "route": "all",

@@ -72,7 +72,7 @@ This action can be used to delete a user from a WordPress instance.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
