@@ -17,7 +17,7 @@ tags:
 - text
 - utilities
 hub_tags:
-  use_cases: [soar, data_utility]
+  use_cases: [data_utility]
   keywords: [tr, translate, text, utilities]
   features: []
 actions:

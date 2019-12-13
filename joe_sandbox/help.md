@@ -6,8 +6,9 @@ This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances an
 
 # Key Features
 
-* File Analysis
-* Threat Detection
+* Submit samples and URLs for sandbox analysis
+* Search, list, get, download, and delete analyses
+* Get, list, and manage server and user info
 
 # Requirements
 

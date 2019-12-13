@@ -1,8 +1,7 @@
 # Description
 
 [Okta](https://www.okta.com/) is a SSO and account lifecycle management provider that allows companies
-to integrate their central user account system with a wide variety of other.
-applications and services.
+to integrate their central user account system with a wide variety of other applications and services.
 
 # Key Features
 
@@ -554,7 +553,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

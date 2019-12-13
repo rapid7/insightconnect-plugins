@@ -16,7 +16,7 @@ tags:
   - firewall
   - Imperva
 hub_tags:
-  use_cases: [soar, application_security]
+  use_cases: [devops]
   keywords: [Web Application Firewall, WAF, Imperva, SecureSphere]
   features: []
 connection:

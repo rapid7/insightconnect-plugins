@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: powershell
 title: PowerShell
-description: The PowerShell plugin runs a PowerShell script on a remote host or locally on the InsightConnect Orchestrator
+description: Run a PowerShell script
 version: 2.1.1
 vendor: rapid7
 support: community
@@ -16,7 +16,7 @@ tags:
 - powershell
 - microsoft
 hub_tags:
-  use_cases: [soar, data_utility]
+  use_cases: [data_utility]
   keywords: [powershell, microsoft]
   features: []
 enable_cache: false

@@ -1,11 +1,12 @@
 # Description
 
-The Google Directory plugin allows you to suspend and unsuspend users.
+Google Directory lets you perform administrative operations on users, groups, organizational units, and devices in your account.
+The Google Directory plugin allows you to list all users, suspend and unsuspend users.
 
 # Key Features
 
 * Suspend and unsuspend users
-* list all users
+* List all users
 
 # Requirements
 
@@ -20,7 +21,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|admin_user|string|None|True|Admin user to impersonate, e.g. admin@domain.com|None|
+|admin_user|string|None|True|Admin user to impersonate, e.g. user@example.com|None|
 |project_id|string|None|True|Project ID from service credentials|None|
 |private_key_id|string|None|True|Private Key ID from service credentials|None|
 |private_key|credential_asymmetric_key|None|True|Private Key from service credentials|None|
@@ -30,7 +31,7 @@ The connection configuration accepts the following parameters:
 |auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|None|None|
 |token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
 |auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
-|oauth_scope|string|`https://www.googleapis.com/auth/admin.directory.user`|True|Google Admin Directory OAuth scope to use for the connection, note that read only will result in some actions not working.|[`https://www.googleapis.com/auth/admin.directory.user`, `https://www.googleapis.com/auth/admin.directory.user.readonly`]|
+|oauth_scope|string|https://www.googleapis.com/auth/admin.directory.user|True|Google Admin Directory OAuth scope to use for the connection, note that read only will result in some actions not working.|[`https://www.googleapis.com/auth/admin.directory.user`, `https://www.googleapis.com/auth/admin.directory.user.readonly`]|
 
 ## Technical Details
 
@@ -58,10 +59,10 @@ Example output:
 
 {
   "users": [{
-      "email": "admin@test.org",
+      "email": "user@example.com",
       "name": "Joe Tester"
   }, {
-      "email": "Bob@test.org",
+      "email": "user@example.com",
       "name": "Bob Testerson"
   }]
 }

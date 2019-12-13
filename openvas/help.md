@@ -2,23 +2,8 @@
 
 The [Open Vulnerability Assessment System](http://openvas.org/about.html) is an automated
 scanning tool that can check network reachable services for common and publicly published
-security vulnerabilities. This OpenVAS plugin allows Komand users to perform common tasks such as
-starting, stopping, deleting and scheduling scans from an OpenVAS server. To use this plugin, one
-should have a reachable OpenVAS server somewhere on the same network as the Komand server, and
-the OpenVAS management port should be accessible by the Komand server. If the `ssl_verify` option
-is set in the plugin connection, the Komand server will check to ensure that the TLS/SSL
-certificate presented by the service running on the management port is valid, using the operating
-systems certificate store accessible to the python programming language.
-
-The OpenVAS system uses 36 character long IDs to refer to many different objects managed in the
-OpenVAS system, such as scans, targets, schedules, and port lists. Calls to the create_*
-Komand Actions return a corresponding ID on success that can then be used in subsequent calls.
-Alternatively, all of the various IDs can also be found in the OpenVAS Greenbone Security
-Assistant UI.
-
-This plugin also defines a custom "datetime" type, which is used when creating schedules for
-scans to launch. Please note that the input given to the create_schedule function assumes that
-the date given to the create_schedule function is given in the UTC timezone.
+security vulnerabilities. This plugin allows users to perform common tasks such as
+starting, stopping, deleting and scheduling scans from an OpenVAS server. 
 
 # Key Features
 
@@ -29,6 +14,7 @@ the date given to the create_schedule function is given in the UTC timezone.
 # Requirements
 
 * OpenVAS server
+* Accessible OpenVAS management port
 * Username and password
 
 # Documentation
@@ -325,7 +311,9 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+This plugin defines a custom "datetime" type, which is used when creating schedules for
+scans to launch. Please note that the input given to the create_schedule function assumes that
+the date given to the `create_schedule` function is given in the UTC timezone.
 
 # Version History
 

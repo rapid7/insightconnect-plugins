@@ -7,7 +7,7 @@ This plugin utilizes the [GitLab API](https://docs.gitlab.com/ee/api/).
 # Key Features
 
 * Block and unblock users
-* Delete ssh keys
+* Delete SSH keys
 * Retrieve users details
 * Create issues
 
@@ -46,24 +46,24 @@ This action is used to create an issue.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|due_date|date|False|None|
-|description|string|False|None|
-|confidential|boolean|False|None|
-|labels|[]string|False|None|
-|updated_at|date|False|None|
-|iid|integer|False|None|
-|web_url|string|False|None|
-|milestone|milestone_output|False|None|
-|id|integer|False|None|
-|subscribed|boolean|False|None|
-|title|string|False|None|
-|created_at|date|False|None|
-|author|user_output|False|None|
-|assignees|[]user_output|False|None|
-|state|string|False|None|
-|user_notes_count|integer|False|None|
-|assignee|user_output|False|None|
-|project_id|integer|False|None|
+|assignee|user_output|False|Assignee|
+|assignees|[]user_output|False|Assignees|
+|author|user_output|False|Author|
+|confidential|boolean|False|Confidential|
+|created_at|date|False|Created at|
+|description|string|False|Description|
+|due_date|date|False|Due date|
+|id|integer|False|ID|
+|iid|integer|False|IID|
+|labels|[]string|False|Labels|
+|milestone|milestone_output|False|Milestone|
+|project_id|integer|False|Project ID|
+|state|string|False|State|
+|subscribed|boolean|False|Subscribed|
+|title|string|False|Title|
+|updated_at|date|False|Updated at|
+|user_notes_count|integer|False|User notes count|
+|web_url|string|False|Web URL|
 
 #### List User SSH Keys
 
@@ -79,7 +79,7 @@ This action is used to list user SSH keys.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ssh_keys|[]ssh_output|False|None|
+|ssh_keys|[]ssh_output|False|SSH keys|
 
 #### Delete User
 
@@ -95,7 +95,7 @@ This action is used to delete a GitLab user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|None|
+|status|boolean|False|Status|
 
 #### Delete User SSH Key
 
@@ -112,7 +112,7 @@ This action is used to delete a user SSH key.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|None|
+|status|boolean|False|Status|
 
 #### Get User
 
@@ -128,20 +128,20 @@ This action is used to get GitLab user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|username|string|False|None|
-|bio|string|False|None|
-|name|string|False|None|
-|avatar_url|string|False|None|
-|twitter|string|False|None|
-|linkedin|string|False|None|
-|id|integer|False|None|
-|state|string|False|None|
-|web_url|string|False|None|
-|location|string|False|None|
-|skype|string|False|None|
-|organization|string|False|None|
-|created_at|date|False|None|
-|website_url|string|False|None|
+|avatar_url|string|False|Avatar URL|
+|bio|string|False|Bio|
+|created_at|date|False|Create at|
+|id|integer|False|ID|
+|linkedin|string|False|LinkedIn|
+|location|string|False|Location|
+|name|string|False|Name|
+|organization|string|False|Organization|
+|skype|string|False|Skype|
+|state|string|False|State|
+|twitter|string|False|Twitter|
+|username|string|False|Username|
+|web_url|string|False|Web URL|
+|website_url|string|False|Website URL|
 
 #### Unblock User
 
@@ -157,7 +157,7 @@ This action is used to unlock GitLab user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|None|
+|status|boolean|False|Status|
 
 #### Block User
 
@@ -173,7 +173,7 @@ This action is used to block GitLab user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|None|
+|status|boolean|False|Status|
 
 ### Triggers
 
@@ -189,14 +189,14 @@ This trigger is used to monitor new issues.
 |search|string|None|False|Search issues against their title and description|None|
 |labels|string|None|True|Comma-separated list of label names, issues must have all labels to be returned|None|
 |milestone|string|None|False|The milestone title|None|
-|interval|integer|None|False|How often recieve new issues|None|
+|interval|integer|None|False|How often receive new issues|None|
 |state|string|None|False|Return all issues or just those that are opened or closed|['Opened', 'Closed']|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|issue|object|False|None|
+|issue|object|False|Issue|
 
 ### Custom Output Types
 
@@ -204,7 +204,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
