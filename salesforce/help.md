@@ -7,9 +7,8 @@ This plugin utilizes the [Salesforce API](https://developer.salesforce.com/docs/
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Search Salesforce records
+* Update Salesforce records
 
 # Requirements
 

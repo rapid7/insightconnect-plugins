@@ -17,9 +17,7 @@ All of the actions return the same set of data:
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Run REST requests on any HTTP endpoint
 
 # Requirements
 
