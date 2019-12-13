@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='newrelic-rapid7-plugin',
       version='2.0.1',
-      description='Monitors the performance of applications and infrastructure',
+      description='Monitors performance of applications and infrastructure, providing alerts with context and less noise',
       author='rapid7',
       author_email='',
       url='',

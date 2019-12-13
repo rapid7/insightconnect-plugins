@@ -1,6 +1,7 @@
 # Description
 
 [MISP](http://www.misp-project.org/) is an open source threat sharing platform.
+Gather, store and then find correlations of indicators of compromise.  Quality of data is determined by the open source community.
 This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.html) and leverages the [pymisp](https://github.com/CIRCL/PyMISP) library.
 
 # Key Features
@@ -37,10 +38,11 @@ This action is used to add context. This action returns `true` or `false` on whe
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|comment|comment_input|None|True|None|None|
-|text|text_input|None|True|None|None|
-|other|other_input|None|True|None|None|
-|link|link_input|None|True|None|None|
+|comment|comment_input|None|True|Comment|None|
+|link|link_input|None|True|Link|None|
+|other|other_input|None|True|Other|None|
+|text|text_input|None|True|Text|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 
 ##### Output
 
@@ -150,14 +152,14 @@ This action is used to add a tag. The event tag must already exist in MISP. This
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|tag|string|None|True|Event tag for search|None|
+|tag|string|None|True|Event tag to add|None|
 |event|string|None|True|Event ID to append to|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|Tag status|
+|status|boolean|False|Tag add status|
 
 Example output:
 
@@ -228,12 +230,13 @@ This action is used to add URLs to an event. This action returns `true` or `fals
 |distribution|string|None|False|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |event|string|None|False|Event ID to append to|None|
 |urls|[]string|None|False|URLs to add|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|URLs add status|
+|status|boolean|False|URL add status|
 
 Example output:
 
@@ -254,7 +257,7 @@ This action is used to export hashes from the HIDS database.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |to|string|None|False|To date E.g. 2015-02-17|None|
-|format|string|None|True|Export format as either md5 or sha1|['md5', 'sha1']|
+|format|string|None|True|Export format as either MD5 or SHA1|['md5', 'sha1']|
 |from|string|None|False|From date E.g. 2015-02-15|None|
 |last|string|None|False|Events within x amount of time E.g. 5d|None|
 |tags|[]string|None|False|Array of tags to include in results|None|
@@ -278,7 +281,7 @@ This action is used to export snort or suricata rules.
 |tags|[]string|None|False|Array of tags to include in results|None|
 |event_id|string|None|False|Narrow results to a single event|None|
 |last|string|None|False|Events within x amount of time E.g. 5d|None|
-|frame|boolean|True|True|Commented out expliantion framing the data|None|
+|frame|boolean|True|True|Commented out explanation framing the data|None|
 |format|string|None|True|Export format as either Suricata or Snort|['suricata', 'snort']|
 
 ##### Output
@@ -339,6 +342,7 @@ This action is used to add email recipient to event. This action returns `true` 
 |distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |recipient|string|None|True|Recipient email address|None|
 |event|string|None|True|Event ID to append to|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 
 ##### Output
 
@@ -368,6 +372,7 @@ This action is used to add email sender to event. This action returns `true` or 
 |distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |sender|string|None|True|Sender email address|None|
 |event|string|None|True|Event ID to append to|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 
 ##### Output
 
@@ -397,6 +402,7 @@ This action is used to add email subject to event. This action returns `true` or
 |distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |event|string|None|True|Event ID to append to|None|
 |subject|string|None|True|Email subject|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 
 ##### Output
 
@@ -428,9 +434,9 @@ This action is used to receive events based on criteria.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|message|string|False|None|
-|errors|[]string|False|None|
-|result|Event"|False|None|
+|message|string|False|Message|
+|errors|[]string|False|Errors|
+|event|Event|False|Event|
 
 Example output:
 
@@ -442,7 +448,7 @@ Example output:
     "locked": false,
     "proposal_email_lock": false,
     "published": false,
-    "event_creator_email": "admin@misp.training",
+    "event_creator_email": "user@example.com",
     "RelatedEvent": [],
     "analysis": "1",
     "org_id": "1",
@@ -529,14 +535,14 @@ This action is used to search for events.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|Organization|string|None|False|Search by organisation|None|
-|date_until|string|None|False|Search before this data e.g. 2018-03-22|None|
-|analysis|string|None|False|Search by analysis level|['Initial', 'Ongoing', 'Completed']|
 |event|string|None|False|Search by event ID|None|
-|tag|string|None|False|Search by Tag|None|
-|published|string|None|False|Search by if Published|None|
-|threat_level|string|None|False|Search by threat Level|['Undefined', 'Low', 'Medium', 'High']|
-|date_from|string|None|False|Search after this data e.g. 2018-03-22|None|
+|tag|string|None|False|Search by tag|None|
+|date_from|string|None|False|Search after this date e.g. 2018-03-22|None|
+|date_until|string|None|False|Search before this date e.g. 2018-03-22|None|
+|organization|string|None|False|Search by organization|None|
+|threat_level|string|None|False|Search by threat level|['Do not search on', 'Undefined', 'Low', 'Medium', 'High']|
+|published|string|None|False|Search by if published|['Do not search on', 'True', 'False']|
+|analysis|string|None|False|Search by analysis level|['Do not search on', 'Initial', 'Ongoing', 'Completed']|
 
 ##### Output
 
@@ -598,11 +604,11 @@ This action is used to add an attribute to an event.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|category|string|None|True|The attribute category e.g. external analysis, Network activity|None|
 |comment|string|None|False|Optional comment to add to attribute|None|
-|type_value|string|None|True|The Type of attribute e.g. url, sha256|None|
-|event|string|None|True|Event ID to append to|None|
-|value|string|None|True|The Value of the attribute e.g. for a url https\://malware.com|None|
+|event|string|None|True|ID of event to append to|None|
+|type_value|string|None|True|The Type of attribute e.g. URL, SHA256|None|
+|category|string|None|True|The attribute category e.g. external analysis, network activity|None|
+|value|string|None|True|The Value of the attribute e.g. for a URL https://malware.com|None|'
 
 ##### Output
 
@@ -650,7 +656,7 @@ This action is used to publish an event.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|published|publish|False|Info on published event|
+|published|published|False|Info on published event|
 
 Example output:
 

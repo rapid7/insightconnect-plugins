@@ -7,7 +7,7 @@ from komand_zenhub import connection, actions, triggers
 Name = 'ZenHub'
 Vendor = 'rapid7'
 Version = '1.0.1'
-Description = 'The ZenHub plugin allows for agile project management in GitHub'
+Description = 'Agile project management in GitHub, project road maps, kaban boards all attached to repositories'
 
 
 class ICONZenhub(komand.Plugin):

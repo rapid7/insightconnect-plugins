@@ -1,6 +1,6 @@
 # Description
 
-The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk.
+The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk.  Customer Resource Management tool to manage tickets of user complaints and support issues.
 
 This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
 
@@ -47,7 +47,7 @@ This action is used to search Zendesk.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]object|False|None|
+|results|[]object|False|Get Zendesk query results|
 
 Example output:
 
@@ -62,7 +62,7 @@ Example output:
       "created_at": "2018-01-26T14:24:58Z",
       "custom_role_id": null,
       "details": null,
-      "email": "jen@komand.com",
+      "email": "user@example.com",
       "external_id": null,
       "id": 360385011372,
       "last_login_at": "2018-05-25T12:27:14Z",
@@ -133,7 +133,7 @@ This action is used to delete a ticket.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|None|
+|status|boolean|True|Success or failure|
 
 #### Delete Membership
 
@@ -149,7 +149,7 @@ This action is used to delete an organization membership.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|None|
+|status|boolean|True|Success or failure|
 
 #### Show User
 
@@ -165,7 +165,7 @@ This action is used to retrieve user information.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user|object|False|None|
+|user|object|True|User meta data|
 
 #### Suspend User
 
@@ -181,7 +181,7 @@ This action is used to suspend a user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|None|
+|status|boolean|True|Success or failure|
 
 #### Delete User
 
@@ -197,7 +197,7 @@ This action is used to delete a user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|None|
+|status|boolean|True|Success or failure|
 
 #### Create Ticket
 
@@ -218,7 +218,7 @@ This action is used to create a ticket.
 |priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low']|
 |attachment|file|None|False|Optional file attachment|None|
 |requester_id|string|None|False|ID of user requesting support|None|
-|group_id|string|None|False|Group ID|None|
+|group_id|integer|None|False|Group ID|None|
 |recipient|string|None|False|ID of user recipient|None|
 |problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|
 |external_id|string|None|False|Support ticket ID|None|
@@ -227,7 +227,7 @@ This action is used to create a ticket.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ticket|object|False|None|
+|ticket|object|False|Ticket meta data|
 
 #### Update Ticket
 
@@ -258,7 +258,7 @@ This action is used to update ticket.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ticket|object|True|Ticket meta data|
+|ticket|ticket|True|Ticket meta data|
 
 Example output:
 
@@ -314,7 +314,7 @@ This action is used to show all organization memberships.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|memberships|[]object|False|None|
+|memberships|[]object|True|Members data|
 
 ### Triggers
 

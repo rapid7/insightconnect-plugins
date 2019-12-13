@@ -1,6 +1,6 @@
 # Description
 
-[Viper](https://viper.li/en/latest/) is a binary analysis and management framework. Viper's fundamental objective is to provide a solution to easily organize your collection of malware and exploit samples as well as your collection of scripts you created, or found over time to facilitate your daily research. Think of it as a Metasploit for malware researchers.
+[Viper](https://viper.li/en/latest/) is a binary analysis and management framework. Viper's fundamental objective is to provide a solution to easily organize your collection of malware and exploit samples as well as your collection of scripts you created, or found over time to facilitate your daily research.
 The Viper plugins allows you to use Viper's platform to store, search, and analyze files.
 
 This plugin utilizes the [Viper API](https://viper.li/en/latest/usage/web.html#api)
@@ -8,8 +8,7 @@ This plugin utilizes the [Viper API](https://viper.li/en/latest/usage/web.html#a
 # Key Features
 
 * Analyze a file
-* Share malicious files
-* Create and manage projects
+* Store and share malicious files
 
 # Requirements
 
@@ -304,8 +303,8 @@ This action is used to get a single tag for this project.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|integer|None|True|None|None|
-|project_name|string|None|True|None|None|
+|id|integer|None|True|Tag ID|None|
+|project_name|string|None|True|Project name|None|
 
 ##### Output
 
@@ -540,9 +539,6 @@ This action is used to list malware for this project.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|malware|[]Malware|True|List of malware|
-
-Example output:
 
 ```
 {

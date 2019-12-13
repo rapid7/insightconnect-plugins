@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='vxstream_sandbox-rapid7-plugin',
       version='2.0.1',
-      description='A plugin to interact with a VxStream Malware analysis service. This plugin allows a user to submit files for analysis and view the file report details. It can also search the service for any matching file hashes',
+      description='Submit files for analysis and view file report details. Search the service for file hashes of malware',
       author='rapid7',
       author_email='',
       url='',

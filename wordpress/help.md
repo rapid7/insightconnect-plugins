@@ -1,10 +1,11 @@
 # Description
 
-The [WordPress](https://wordpress.com/) plugin allows you to manage users on the WordPress platform
+The [WordPress](https://wordpress.com/) plugin allows you to manage users on the WordPress platform.  Only users can be deleted or suspended from the wordpress application.
 
 # Key Features
 
-* Manage users
+* Delete users
+* Suspend Users
 
 # Requirements
 
@@ -22,7 +23,7 @@ This plugin requires that the WordPress instance be configured as follows:
 2. The default Basic Auth or Application Password plugins must not be installed
 
 Users may choose to install the [Application-Password plugin](https://github.com/georgestephanis/application-passwords)
-to avoid passing plaintext passwords over http. Otherwise, users must install the Basic Auth plugin.
+to avoid passing plain text passwords over http. Otherwise, users must install the Basic Auth plugin.
 
 The connection configuration accepts the following parameters:
 
@@ -51,7 +52,7 @@ This action does not use any additional WordPress plugins such as Disable User. 
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|None|
+|success|boolean|False|User Suspended|
 
 #### Delete User
 
@@ -68,7 +69,7 @@ This action can be used to delete a user from a WordPress instance.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|bsic Auth or Application passwordoolean|False|None|
+|success|boolean|False|User Deleted|
 
 ### Triggers
 
@@ -93,7 +94,7 @@ Header always set Access-Control-Allow-Headers: Authorization
 
 The Basic Auth plugin that can be searched for in the WordPress admin console does not function properly. Instead, [this plugin](https://github.com/WP-API/Basic-Auth)
 should be used though application passwords are *strongly* recommended. Testing the plugin is difficult due to the distributed nature of the WordPress API. Additionally,
-the discovery process does not work on locally run webservers, as the API root will be given as `localhost` as opposed to the host IP.
+the discovery process does not work on locally run web servers, as the API root will be given as `localhost` as opposed to the host IP.
 
 # Version History
 

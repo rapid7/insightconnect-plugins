@@ -1,7 +1,8 @@
 # Description
 
-[VxStream Sandbox](https://www.payload-security.com/products/vxstream-sandbox) is an innovative and fully automated malware analysis system
-that includes the unique Hybrid Analysis technology. Our plugin connects to your VxStream instance. In addition, it supports the free and public [Hybrid Analysis](https://www.hybrid-analysis.com/) API.
+[VxStream Sandbox](https://www.payload-security.com/products/vxstream-sandbox) is an innovative and fully automated malware analysis system that includes the unique Hybrid Analysis technology.
+Our plugin connects to your VxStream instance.
+In addition, it supports the free and public [Hybrid Analysis](https://www.hybrid-analysis.com/) API.
 
 # Key Features
 
@@ -39,16 +40,16 @@ This action is used to search the database using the [query syntax](https://www.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|query|string|None|False|Search parameters; syntax available at https\://www.hybrid-analysis.com/faq|None|
+|query|string|None|False|Search parameters; syntax available at https://www.hybrid-analysis.com/faq|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |count|integer|False|Number of results returned|
-|query|string|False|None|
-|response_code|integer|True|None|
-|results|[]result|False|None|
+|query|string|False|Query|
+|response_code|integer|True|Response code|
+|results|[]result|False|List of results|
 
 Example output:
 
@@ -85,15 +86,15 @@ This action is used to get summary information for a given hash.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|hash|string|None|False|MD5/SHA1/SHA256 hash|None|
+|hash|string|None|True|MD5/SHA1/SHA256 hash|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |count|integer|False|Number of reports returned|
-|response_code|integer|True|None|
-|reports|[]report|False|None|
+|response_code|integer|True|Response code|
+|reports|[]report|False|Reports|
 
 Example output:
 
@@ -141,19 +142,19 @@ This action is used to submit file for analysis.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|customcmdline|string|None|False|Custom Command Line, e.g. /VX\:promptfill mypassword|None|
-|scriptlogging|boolean|True|False|Enable the script logging feature. This feature can give deeper insights into the functionality of Javascripts, VBA macros and similar script languages (see 'Script calls' in the per process details)|None|
+|file|bytes|None|True|File to be analyzed. See https://vxstream-sandbox.com/faq for supported filetypes|None|
+|promptfill_password|string|None|False|Optional malware password to pass in to the analysis (shortcut for /VX:promptfill)|None|
+|customcmdline|string|None|False|Custom Command Line, e.g. /VX:promptfill mypassword|None|', "|scriptlogging|boolean|True|False|Enable the script logging feature. This feature can give deeper insights into the functionality of Javascripts, VBA macros and similar script languages (see 'Script calls' in the per process details)|None|", '|hybridanalysis|boolean|True|False|Enable a unique process memory inspection. This feature may slow down the overall analysis, but improves behavior analysis through instruction level inspection regardless of execution|None|
+|scriptlogging|boolean|True|False|Enable the script logging feature. This feature can give deeper insights into the functionality of JavaScript, VBA macros and similar script languages (see 'Script calls' in the per process details)|None|
 |filename|string|None|False|Optional filename of the malware|None|
-|promptfill_password|string|None|False|Optional malware password to pass in to the analysis (shortcut for /VX\:promptfill)|None|
-|file|bytes|None|True|File to be analyzed. See https\://vxstream-sandbox.com/faq for supported filetypes|None|
 |env_id|integer|100|False|Environment ID|None|
-|hybridanalysis|boolean|True|False|Enable a unique process memory inspection. This feature may slow down the overall analysis, but improves behavior analysis through instruction level inspection regardless of execution|None|
+|hybridanalysis|boolean|True|False|Enable a unique process memory inspection. This feature may slow down the overall analysis, but improves behaviour analysis through instruction level inspection regardless of execution|None|
 |experimentalantievasion|boolean|True|False|Enable experimental anti-evasion features. This feature can have an impact application execution, but at the same time can improve performance for very evasive malware|None|
 
 ##### Output
 
-|submission_url|string|False|None|
-|response_code|integer|True|None|
+|submission_url|string|False|Submission URL|
+|response_code|integer|True|Response code|
 |hash|string|False|SHA256 Hash|
 
 Example output:
@@ -184,9 +185,9 @@ This action is used to retrieve report by providing SHA256 hash.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |found|boolean|False|True if found|
-|response_code|integer|False|None|
-|state|string|False|None|
-|analysis|analysis|False|None|
+|response_code|integer|False|Response code|
+|state|string|False|State|
+|analysis|analysis|False|Analysis|
 
 Example output:
 

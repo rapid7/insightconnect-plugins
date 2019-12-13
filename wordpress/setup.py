@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='wordpress-rapid7-plugin',
       version='1.0.1',
-      description='The WordPress plugin allows for user management on the WordPress platform',
+      description='User management on the WordPress platform only, suspend or delete users',
       author='rapid7',
       author_email='',
       url='',

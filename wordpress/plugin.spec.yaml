@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: wordpress
 title: WordPress
-description: The WordPress plugin allows for user management on the WordPress platform
+description: User management on the WordPress platform only, suspend or delete users
 vendor: rapid7
 support: community
 status: []
@@ -33,6 +33,7 @@ connection:
     title: Credentials
 actions:
   suspend_user:
+    title: Suspend User
     description: Suspend user from WordPress instance
     input:
       username:
@@ -47,6 +48,7 @@ actions:
         title: User Suspended
         required: false
   delete_user:
+    title: Delete User
     description: Delete user from WordPress instance
     input:
       username:

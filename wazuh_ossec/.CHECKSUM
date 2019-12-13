@@ -1,7 +1,7 @@
 {
-	"spec": "bd677f2cc638b9ec54b10d19db046205",
-	"manifest": "946d5d710176fb81be5758ef27499a2a",
-	"setup": "89e94ed658307955bd64f1fef8442d2c",
+	"spec": "56afd19440f72a98a8a6eb7e06c68824",
+	"manifest": "3cc5ad167b42f16f9b85448ad8f04d2e",
+	"setup": "edb379a1e3a168f46238371a22283947",
 	"schemas": [
 		{
 			"identifier": "agent_add/schema.py",
@@ -45,7 +45,7 @@
 		},
 		{
 			"identifier": "manager_logs_summary/schema.py",
-			"hash": "5de92a9515bac96e6d6e03ce8f1d16d2"
+			"hash": "c9fc3023ab62aa38be9bbc842e5e0c94"
 		},
 		{
 			"identifier": "manager_stats/schema.py",
@@ -57,7 +57,7 @@
 		},
 		{
 			"identifier": "manager_status/schema.py",
-			"hash": "712ae1da4d4826a1b19ae9b195d400a7"
+			"hash": "a9be6a2f743ca5bdaa2ad38f8e4cfd3a"
 		},
 		{
 			"identifier": "rootcheck_database/schema.py",

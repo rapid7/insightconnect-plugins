@@ -117,7 +117,7 @@ class GetEpicDataOutput(komand.Output):
             },
             "pipeline_name": {
               "type": "string",
-              "title": "Pipelne Name",
+              "title": "Pipeline Name",
               "description": "Pipeline name",
               "order": 5
             },
@@ -212,7 +212,7 @@ class GetEpicDataOutput(komand.Output):
         },
         "pipeline_name": {
           "type": "string",
-          "title": "Pipelne Name",
+          "title": "Pipeline Name",
           "description": "Pipeline name",
           "order": 5
         },

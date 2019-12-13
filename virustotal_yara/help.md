@@ -1,13 +1,11 @@
 # Description
 
-The VirusTotal Yara plugin allows the user to analyze files with the Yara Python libarary.
-
-[VirusTotal Yara](http://virustotal.github.io/yara/) is a pattern matching swiss knife for malware researchers.
-This plugin utilizes [yara-python](https://pypi.python.org/pypi/yara-python), a Python library for Yara.
+Identity and classify malware based on textual or binary patterns.  Provide simple rules when scanning files based on those patterns.  [VirusTotal Yara](http://virustotal.github.io/yara/) is a pattern matching swiss knife for malware researchers. This plugin utilizes [yara-python](https://pypi.python.org/pypi/yara-python), a Python library for Yara.
 
 # Key Features
 
-* Scan a file
+* Binary scans on a file
+* Text scans
 
 # Requirements
 
@@ -31,14 +29,14 @@ This action is used to scan a file using Yara.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|rules|file|None|True|File containing Yara rules|None|
-|file|file|None|True|File to be scanned|None|
+|file|bytes|None|True|File to be scanned|None|
+|rules|bytes|None|True|File containing Yara rules|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]object|True|Results returned form Yara's analysis. Note: byte information has been encoded to UTF-8|
+|results|[]results|True|Results returned from the Yara analysis. byte information has been encoded to UTF-8|
 
 Example output:
 

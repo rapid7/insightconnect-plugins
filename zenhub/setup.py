@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='zenhub-rapid7-plugin',
       version='1.0.1',
-      description='The ZenHub plugin allows for agile project management in GitHub',
+      description='Agile project management in GitHub, project road maps, kaban boards all attached to repositories',
       author='rapid7',
       author_email='',
       url='',

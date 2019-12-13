@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='netmiko-rapid7-plugin',
-      version='1.0.1',
-      description='Netmiko is used to access network devices over SSH',
+      version='1.0.2',
+      description='Access network devices over SSH',
       author='rapid7',
       author_email='',
       url='',

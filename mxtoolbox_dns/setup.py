@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='mxtoolbox_dns-rapid7-plugin',
       version='1.0.1',
-      description='Interface with MxToolBox DNS lookup API',
+      description='Fast, free, and accurate network diagnostic and lookup tools',
       author='rapid7',
       author_email='',
       url='',
