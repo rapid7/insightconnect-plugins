@@ -3,8 +3,8 @@
         "action": "list_ssh",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
             "url": null
         },

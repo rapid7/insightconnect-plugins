@@ -1,12 +1,12 @@
 # Description
 
-[Google Sheets](https://www.google.com/sheets/about/) is used to create, edit and collaborate with others on spreadsheets.
-
+[Google Sheets](https://www.google.com/sheets/about/) is used to create, edit and collaborate with others on spreadsheets. This plugin supports cell update and spread list of data to a sheet.
 This plugin utilizes the [Google Sheets API](https://developers.google.com/sheets/api/) and [Gspread library](https://github.com/burnash/gspread/).
 
 # Key Features
 
 * Update cells
+* Spread list to a sheet
 
 # Requirements
 
@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|admin_user|string|None|False|Admin user to impersonate, e.g. admin@domain.com|None|
+|admin_user|string|None|False|Admin user to impersonate, e.g. user@example.com|None|
 |auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAuth2 auth provider X.509 certificate URL|None|
 |auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|OAuth2 auth URI|None|
 |client_email|string|None|True|Client email from service credentials|None|

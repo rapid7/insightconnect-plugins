@@ -7,7 +7,7 @@ from komand_passivetotal import connection, actions, triggers
 Name = 'PassiveTotal'
 Vendor = 'rapid7'
 Version = '1.0.1'
-Description = 'PassiveTotal'
+Description = 'Use PassiveTotal to analyze domains, addresses, and WHOIS data'
 
 
 class ICONPassivetotal(komand.Plugin):

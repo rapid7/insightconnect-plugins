@@ -82,7 +82,7 @@ class AddGroupMemberOutput(komand.Output):
     "internal": {
       "type": "boolean",
       "title": "Internal",
-      "description": "If the user / doamin is internal or not",
+      "description": "Whether or not the user or domain is internal",
       "order": 4
     }
   }
