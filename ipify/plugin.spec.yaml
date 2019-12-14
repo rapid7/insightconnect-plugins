@@ -16,7 +16,7 @@ tags:
   - ipify
   - ip address
 hub_tags:
-  use_cases: [soar, threat_intel, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [ip, nat, public]
   features: []
 actions:

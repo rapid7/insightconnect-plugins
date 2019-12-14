@@ -16,7 +16,7 @@ tags:
 - database
 - redis
 hub_tags:
-  use_cases: [soar, data_aggregation, data_ingestion, reporting_and_analytics]
+  use_cases: [data_utility, reporting_and_analytics]
   keywords: [database, redis]
   features: []
 connection:

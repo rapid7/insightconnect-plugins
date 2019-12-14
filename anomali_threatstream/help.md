@@ -202,7 +202,7 @@ This action is used to import observable(s) into Anomali with approval.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|file|file|None|True|File of data to be imported into Anomali|None|
+|file|file|None|True|File of data to be imported into Anomali ThreatStream|None|
 |observable_settings|observable_settings|None|False|Settings needed for importing an observable that needs approval|None|
 
 Observable Settings

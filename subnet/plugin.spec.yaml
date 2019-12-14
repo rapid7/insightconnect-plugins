@@ -18,7 +18,7 @@ tags:
 - network
 - utilities
 hub_tags:
-  use_cases: [soar, data_utility, threat_hunting, investigations]
+  use_cases: [data_utility, threat_detection_and_response]
   keywords: [subnet, ip, netmask, network, utilities]
   features: []
 actions:
