@@ -1,6 +1,4 @@
 import komand
-import shutil
-import tempfile
 from .schema import MatchStringInput, MatchStringOutput, Input, Output
 # Custom imports below
 from komand_grep.util import utils
