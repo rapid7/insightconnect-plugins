@@ -1,7 +1,7 @@
 {
-	"spec": "37c85dc94766c36f235b5ac8640256f7",
-	"manifest": "af5e1e75a8ee878dc5116751cb065451",
-	"setup": "cdbd76cc8054c1cef7f865a9a9b8880b",
+	"spec": "4d18a8c68aec62b370473c27114a6d24",
+	"manifest": "4e828ca7edeb0d6e0412be6809f7f00c",
+	"setup": "db0e428084ed43e1d0298a39e4da4dc4",
 	"schemas": [
 		{
 			"identifier": "knock/schema.py",

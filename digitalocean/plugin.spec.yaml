@@ -18,7 +18,7 @@ tags:
 - cloud
 - vm
 hub_tags:
-  use_cases: [soar, asset_containment, asset_inventory, soc_automation]
+  use_cases: [threat_detection_and_response, asset_inventory]
   keywords: [digitalocean, vps, cloud, vm]
   features: []
 enable_cache: false

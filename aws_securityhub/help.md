@@ -121,17 +121,14 @@ This trigger is used to poll from a SQS Queue.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|AttributeNames|[]string|['All']|False|A list of s that need to be returned along with each message|None|
+|AttributeNames|[]string|['All']|False|A list of attributes that need to be returned along with each message ['All','Policy','VisibilityTimeout','MaximumMessageSize','MessageRetentionPeriod','ApproximateNumberOfMessages','ApproximateNumberOfMessagesNotVisible','CreatedTimestamp','LastModifiedTimestamp','QueueArn','ApproximateNumberOfMessagesDelayed','DelaySeconds','ReceiveMessageWaitTimeSeconds','RedrivePolicy','FifoQueue','ContentBasedDeduplication','KmsMasterKeyId','KmsDataKeyReusePeriodSeconds']|None|
 |MaxNumberOfMessages|integer|1|False|The maximum number of messages to return. Amazon SQS never returns more messages than this value. Valid values 1 to 10. Default 1|None|
 |MessageAttributeNames|[]string|['All']|False|The name of the message attribute|None|
 |ReceiveRequestAttemptId|string||False|This parameter applies only to FIFO (first-in-first-out) queues|None|
 |VisibilityTimeout|integer|0|False|The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request|None|
-|WaitTimeSeconds|integer|0|False|he duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than WaitTimeSeconds|None|
-|interval|integer|5|True|How many seconds to wait till next poll|None|
+|WaitTimeSeconds|integer|0|False|The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than WaitTimeSeconds|None|
+|interval|integer|5|True|How many seconds to wait until next poll|None|
 |queue_url|string|None|True|URL for the SQS queue|None|
-
-Additional Configuration Information:
-  To enable long-poll support for the SQS Feed increase `WaitTimeSeconds`.
 
 ##### Output
 
@@ -139,6 +136,7 @@ Additional Configuration Information:
 |----|----|--------|-----------|
 |Message|Message|False|Message|
 |ResponseMetadata|ResponseMetadata|False|Response metadata|
+|securityhubevent|securityHubPayload|False|Security Hub Event|
 
 Example output:
 
@@ -195,7 +193,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 2.0.0 - New spec and help.md format for the Hub | Variable names updated as acronyms
 * 1.0.0 - Initial plugin
 
 # Links

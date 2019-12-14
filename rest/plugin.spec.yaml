@@ -18,7 +18,7 @@ tags:
 - microservices
 - api
 hub_tags:
-  use_cases: [soar, data_utility]
+  use_cases: [data_utility]
   keywords: [rest, http, rpc, microservices, api]
   features: []
 enable_cache: true

@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
-description: Perform Administrative tasks in Azure AD
-version: 1.4.0
+description: Perform administrative operations in Azure AD
+version: 1.4.1
 vendor: rapid7
 support: community
 status: []
@@ -18,7 +18,7 @@ tags:
   - Active Directory
   - Administration
 hub_tags:
-  use_cases: [soar, soc_automation, threat_detection_and_response, user_management]
+  use_cases: [threat_detection_and_response, user_management]
   keywords: [azure, microsoft, active directory, administration]
   features: []
 types:

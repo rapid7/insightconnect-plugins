@@ -16,7 +16,7 @@ tags:
 - string
 - split
 hub_tags:
-  use_cases: [soar, data_utility]
+  use_cases: [data_utility]
   keywords: [utilities, string, split]
   features: []
 actions:

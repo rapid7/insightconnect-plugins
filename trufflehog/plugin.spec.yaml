@@ -18,7 +18,7 @@ tags:
 - regex
 - trufflehog
 hub_tags:
-  use_cases: [soar, log_search, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [entropy, secret]
   features: []
 enable_cache: true

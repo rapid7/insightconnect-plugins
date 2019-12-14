@@ -28,7 +28,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -76,7 +76,7 @@ It accepts an Awk expression and file encoded data (file, string, etc.) to proce
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

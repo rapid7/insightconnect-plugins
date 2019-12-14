@@ -11,7 +11,7 @@
     "Unified"
   ],
   "isAssignableToRole": null,
-  "mail": "nickname_goes_here@komanddev.onmicrosoft.com",
+  "mail": "user@example.com",
   "mailEnabled": true,
   "mailNickname": "nickname_goes_here",
   "onPremisesDomainName": null,
@@ -22,7 +22,7 @@
   "onPremisesSyncEnabled": null,
   "preferredDataLocation": null,
   "proxyAddresses": [
-    "SMTP:nickname_goes_here@komanddev.onmicrosoft.com"
+    "SMTP:user@example.com"
   ],
   "renewedDateTime": "2019-11-04T17:47:26Z",
   "resourceBehaviorOptions": [],

@@ -72,7 +72,7 @@ This action is used to parse a multiple CEF formatted strings from a base64 enco
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
