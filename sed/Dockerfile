@@ -1,4 +1,4 @@
-FROM komand/python-3-37-slim-plugin
+FROM komand/python-3-37-slim-plugin:3
 
 LABEL organization=rapid7
 LABEL sdk=python
