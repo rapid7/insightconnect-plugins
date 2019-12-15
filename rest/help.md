@@ -60,10 +60,10 @@ This action is used to make a PUT request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -121,10 +121,10 @@ This action is used to make a POST request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -182,10 +182,10 @@ This action is used to make a PATCH request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -239,10 +239,10 @@ This action is used to make a GET request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -282,10 +282,10 @@ This action is used to make a DELETE request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
