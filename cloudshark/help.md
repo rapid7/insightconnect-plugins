@@ -172,7 +172,7 @@ This action is used to delete capture file by id.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

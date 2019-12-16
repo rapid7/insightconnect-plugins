@@ -327,7 +327,7 @@ This action can be used to retrieve intelligence information for a given order t
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
