@@ -21,7 +21,8 @@ All of the actions return the same set of data:
 
 # Requirements
 
-* varies depending on the API the plugin is interacting with
+* Varies depending on the API the plugin is interacting with
+* A RESTFUL HTTP/HTTPS resource
 
 # Documentation
 
