@@ -311,7 +311,7 @@ This action is used to submits a URL for analysis.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|URL to be submitted for analysis|None|
-|analyzer_mode|string|None|False|Specify what analyzer mode to use|['default','reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
+|analyzer_mode|string|None|False|Specify what analyzer mode to use|['default', 'reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
 |optional_params|object|None|False|Parameters that allow finer tuning of the Submit URL action, e.g {"analysis_id"\: 12345}|None|
 
 ##### Output
