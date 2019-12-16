@@ -41,7 +41,7 @@ This action is used to convert an HTML document to DOCX.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|docx|bytes"|False|Docx File|
+|docx|bytes|False|Docx File|
 
 #### Markdown
 
@@ -91,7 +91,7 @@ This action is used to convert an HTML document to PDF.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|pdf|bytes"|False|PDF File|
+|pdf|bytes|False|PDF File|
 
 #### Validate
 
@@ -123,7 +123,7 @@ This action is used to convert an HTML document to EPUB.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|epub|bytes"|False|epub File|
+|epub|bytes|False|Epub file|
 
 #### Text
 
