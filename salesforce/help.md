@@ -12,8 +12,7 @@ This plugin utilizes the [Salesforce API](https://developer.salesforce.com/docs/
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A Salesforce account and API token
 
 # Documentation
 
