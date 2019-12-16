@@ -21,8 +21,7 @@ All of the actions return the same set of data:
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+varies depending on the API the plugin is interacting with
 
 # Documentation
 
