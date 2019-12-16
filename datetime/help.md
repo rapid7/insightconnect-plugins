@@ -5,7 +5,7 @@ Timestamps, timezones, and Datetimes can be difficult to work with, especially w
 # Key Features
 
 * Convert a Datetime to an Epoch and vice versa
-* Convert a Datetime to specified format
+* Convert a Datetime to a specified format
 * Determine the elapsed time between two dates
 
 # Requirements

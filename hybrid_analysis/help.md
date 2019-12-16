@@ -4,7 +4,7 @@
 
 # Key Features
 
-* Look up a file hash to identify known and unknown threats using Hybrid Analysis technology
+* Lookup a file hash to identify known and unknown threats using Hybrid Analysis technology
 
 # Requirements
 
