@@ -21,7 +21,7 @@ All of the actions return the same set of data:
 
 # Requirements
 
-varies depending on the API the plugin is interacting with
+* varies depending on the API the plugin is interacting with
 
 # Documentation
 
