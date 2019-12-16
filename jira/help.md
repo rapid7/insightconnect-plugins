@@ -4,7 +4,7 @@
 
 # Key Features
 
-* Create, find, edit, comment, and generally manage your Jira tickets through the Jira REST API
+* Create, find, edit, comment, and generally manage your Jira tickets
 * Assign issues to users
 * Find and create new users in your Jira instance
 

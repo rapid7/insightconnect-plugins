@@ -175,7 +175,7 @@ class RetrieveSecurityPoliciesOutput(komand.Output):
         "fileUploadMimeTypes": {
           "type": "array",
           "title": "FileUploadMimeTypes",
-          "description": "The Mime types to be allowed as uploaded files",
+          "description": "The MIME types to be allowed as uploaded files",
           "items": {
             "type": "string"
           },
@@ -557,7 +557,7 @@ class RetrieveSecurityPoliciesOutput(komand.Output):
             "fileUploadMimeTypes": {
               "type": "array",
               "title": "FileUploadMimeTypes",
-              "description": "The Mime types to be allowed as uploaded files",
+              "description": "The MIME types to be allowed as uploaded files",
               "items": {
                 "type": "string"
               },
@@ -705,7 +705,7 @@ class RetrieveSecurityPoliciesOutput(komand.Output):
             "parameter_separators": {
               "type": "string",
               "title": "Parameter Separators",
-              "description": "The url-decoded parameter separator to be used",
+              "description": "The URL-decoded parameter separator to be used",
               "order": 1
             }
           }
@@ -819,7 +819,7 @@ class RetrieveSecurityPoliciesOutput(komand.Output):
         "parameter_separators": {
           "type": "string",
           "title": "Parameter Separators",
-          "description": "The url-decoded parameter separator to be used",
+          "description": "The URL-decoded parameter separator to be used",
           "order": 1
         }
       }
