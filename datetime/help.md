@@ -1,6 +1,6 @@
 # Description
 
-The Datetime InsightConnect plugin manipulate timestamps using Python's [Maya](https://pypi.org/project/maya/) library.
+Timestamps, timezones, and Datetimes can be difficult to work with, especially when dealing with different locales on different systems. The Datetime InsightConnect plugin manipulates timestamps using Python's [Maya](https://pypi.org/project/maya/) library, which makes the simple things much easier while admitting that time is an illusion (timezones doubly so).
 
 # Key Features
 
