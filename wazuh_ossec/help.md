@@ -253,7 +253,7 @@ This action is used to return the syscheck files of an agent.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order. Allowed sort fields\: group, user, file, modificationDate, scanDate, and size|None|
+|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order. Allowed sort fields\: group, user, file, modificationDate, scanDate, and size|None|
 |search|string|None|False|Looks for elements with the specified string|None|
 |sha1|string|None|False|Returns the files with the specified SHA1 hash|None|
 |hash|string|None|False|Returns the files with the specified hash (MD5 or SHA1)|None|
@@ -409,7 +409,7 @@ This action is used to return the rootcheck database of an agent.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order. Allowed sort fields\: status, oldDay, event, and readDay|None|
+|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order. Allowed sort fields\: status, oldDay, event, and readDay|None|
 |cis|string|None|False|Filters by CIS|None|
 |search|string|None|False|Looks for elements with the specified string|None|
 |pci|string|None|False|Filters by PCI requirement|None|
@@ -473,7 +473,7 @@ This action is used to return the 3 last months of ossec.log.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order|None|
+|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order|None|
 |category|string|None|False|Filters by category of log|None|
 |search|string|None|False|Looks for elements with the specified string|None|
 |type_log|string|None|False|Filters by type of log|['All', 'Error', 'Info']|
@@ -514,7 +514,7 @@ This action is used to return a list with the available agents.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order. Allowed sort fields are status, ip, id, and name|None|
+|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order. Allowed sort fields are status, ip, id, and name|None|
 |status|string|None|False|Filters by agent status|['All', 'Active', 'Never Connected', 'Disconnected']|
 |search|string|None|False|Looks for elements with the specified string|None|
 |limit|integer|None|False|Maximum number of elements to return|None|
@@ -603,7 +603,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Hub | Spelling fixes in descriptions
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

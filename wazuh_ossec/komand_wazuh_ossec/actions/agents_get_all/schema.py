@@ -48,7 +48,7 @@ class AgentsGetAllInput(komand.Input):
     "sort": {
       "type": "string",
       "title": "Sort",
-      "description": "Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order. Allowed sort fields are status, ip, id, and name",
+      "description": "Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order. Allowed sort fields are status, ip, id, and name",
       "order": 3
     },
     "status": {

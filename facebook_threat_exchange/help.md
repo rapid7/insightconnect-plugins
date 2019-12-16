@@ -10,7 +10,7 @@ This plugin utilizes the [Threat Exchange API](https://developers.facebook.com/d
 
 # Requirements
 
-* An applicaiton ID and secret key
+* An application ID and secret key
 
 # Documentation
 
@@ -150,7 +150,7 @@ This plugin does not contain any troubleshooting information.
 * [Share Level Type](https://developers.facebook.com/docs/threat-exchange/reference/apis/share-level-type)
 * [Sort Order Type](https://developers.facebook.com/docs/threat-exchange/reference/apis/sort-order-type)
 * [Threat Types](https://developers.facebook.com/docs/threat-exchange/reference/apis/threat-type/)
-* [Percision Type](https://developers.facebook.com/docs/threat-exchange/reference/apis/precision-type)
+* [Precision Type](https://developers.facebook.com/docs/threat-exchange/reference/apis/precision-type)
 * [Privacy Type](https://developers.facebook.com/docs/threat-exchange/reference/apis/privacy-type)
 * [Privacy Members](https://developers.facebook.com/docs/threat-exchange/reference/apis/threat-exchange-member)
 * [Severity Type](https://developers.facebook.com/docs/threat-exchange/reference/apis/severity-type)

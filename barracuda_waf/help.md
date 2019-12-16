@@ -879,7 +879,7 @@ Updates a security policy with the given values.
 |----|----|-------|--------|-----------|----|
 |request_limits|request_limits|None|false|Configuration of requests|None|
 |cookie_security|cookie_security|None|false|Configuration of cookies security|None|
-|url_protection|url_protection|None|false|Configuration of url protection|None|
+|url_protection|url_protection|None|false|Configuration of URL protection|None|
 |parameter_protection|parameter_protection|None|false|Configuration of requests|None|
 |cloaking|cloaking|None|false|Configuration of cloaking|None|
 |url_normalization|url_normalization|None|false|Configuration of requests|None|
@@ -1777,7 +1777,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 2.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Persistence Method
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.0 - Initial plugin
 
