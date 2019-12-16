@@ -4,8 +4,8 @@ The Translate plugin uses the `tr` command in UNIX which is a command line utili
 
 # Key Features
 
-* Replace characters 
-* Delete characters
+* Replace characters in a string
+* Delete characters in a string
 
 # Requirements
 
