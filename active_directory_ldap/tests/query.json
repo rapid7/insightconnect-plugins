@@ -2,11 +2,11 @@
     "body": {
         "action": "query",
         "connection": {
-            "host": "10.0.0.253",
+            "host": "",
             "port": 636,
             "use_ssl": true,
             "username_password": {
-                "password": "f=fPy9a7a&5",
+                "password": "",
                 "username": "Akbar\\Administrator"
             }
         },
