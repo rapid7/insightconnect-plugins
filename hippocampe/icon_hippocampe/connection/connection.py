@@ -1,7 +1,7 @@
 import komand
 from .schema import ConnectionSchema
 # Custom imports below
-from komand_hippocampe.util.api import HippocampeAPI
+from icon_hippocampe.util.api import HippocampeAPI
 
 
 class Connection(komand.Connection):
