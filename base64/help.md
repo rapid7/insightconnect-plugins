@@ -5,7 +5,7 @@ This plugin utilizes allows data to be encoded or decoded using the standard Bas
 
 # Key Features
 
-* Encode text
+* Encode text 
 * Decode text
 
 # Requirements
