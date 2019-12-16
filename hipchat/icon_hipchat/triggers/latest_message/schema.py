@@ -55,13 +55,13 @@ class LatestMessageInput(komand.Input):
     "not-before": {
       "type": "string",
       "title": "Not Before",
-      "description": "The id of the message that is oldest in the set of messages to be returned. The server will not return any messages that chronologically precede this message",
+      "description": "The ID of the message that is oldest in the set of messages to be returned. The server will not return any messages that chronologically precede this message",
       "order": 5
     },
     "room_id_or_name": {
       "type": "string",
       "title": "Room Id Or Name",
-      "description": "Room id or name",
+      "description": "Room ID or name",
       "order": 1
     },
     "timezone": {

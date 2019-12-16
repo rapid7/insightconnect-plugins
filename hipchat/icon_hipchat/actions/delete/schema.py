@@ -23,8 +23,8 @@ class DeleteInput(komand.Input):
   "properties": {
     "id_or_email": {
       "type": "string",
-      "title": "User Id or Email Address",
-      "description": "The id, email address, or mention name (beginning with an '@') of the user to update",
+      "title": "User ID or Email Address",
+      "description": "The ID, email address, or mention name (beginning with an '@') of the user to update",
       "order": 1
     }
   },

@@ -31,8 +31,8 @@ class PostInput(komand.Input):
     },
     "room_id_or_name": {
       "type": "string",
-      "title": "Room Id or Name",
-      "description": "The id or url encoded name of the room",
+      "title": "Room ID or Name",
+      "description": "The ID or URL encoded name of the room",
       "order": 1
     }
   },
@@ -55,14 +55,14 @@ class PostOutput(komand.Output):
   "properties": {
     "id": {
       "type": "string",
-      "title": "Message Id",
+      "title": "Message ID",
       "description": "The unique identifier of the sent message",
       "order": 1
     },
     "timestamp": {
       "type": "string",
       "title": "Timestamp",
-      "description": "The utc timestamp representing when the message was processed",
+      "description": "The UTC timestamp representing when the message was processed",
       "order": 2
     }
   }

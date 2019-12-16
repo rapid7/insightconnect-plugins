@@ -110,7 +110,7 @@ class CreateOutput(komand.Output):
     "id": {
       "type": "integer",
       "title": "User ID",
-      "description": "The new created user id",
+      "description": "The new created user ID",
       "order": 1
     },
     "links": {

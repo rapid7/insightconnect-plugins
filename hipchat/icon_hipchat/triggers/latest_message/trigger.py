@@ -2,11 +2,12 @@ import komand
 import time
 import json
 import urllib
-import urllib2
 import requests
-from komand_hipchat.util import utils
+from icon_hipchat.util import utils
 
 from .schema import LatestMessageInput, LatestMessageOutput
+
+
 # Custom imports below
 
 
@@ -24,11 +25,11 @@ class LatestMessage(komand.Trigger):
         utils.validate_url(url)
 
         is_modified = True
-        meta        = utils.hash_url(base_url)
-        cache_file  = '/var/cache/' + meta['file']
+        meta = utils.hash_url(base_url)
+        cache_file = '/var/cache/' + meta['file']
 
         '''Attempt to retrieve headers from past request'''
-        headers={}
+        headers = {}
         if komand.helper.check_cachefile(meta['metafile']):
             headers = utils.check_url_meta_file(meta)
 
@@ -37,7 +38,7 @@ class LatestMessage(komand.Trigger):
             url, If_None_Match=headers.get('etag', ''),
             If_Modified_Since=headers.get('last-modified', ''),
             Content_Type='application/json',
-            Authorization='Bearer %s'%token)
+            Authorization='Bearer %s' % token)
 
         '''File modified'''
         if urlobj:
@@ -66,15 +67,15 @@ class LatestMessage(komand.Trigger):
                         self.send(json.loads(contents))
 
     def run(self, params={}):
-        server  = self.connection.server
-        token   = self.connection.token
+        server = self.connection.server
+        token = self.connection.token
         data = {}
 
-        room_id_or_name  = params.get("room_id_or_name", "")
+        room_id_or_name = params.get("room_id_or_name", "")
         # add query parameters
         max_results = params.get("max-results", "")
-        timezone    = params.get("timezone", "")
-        not_before  = params.get("not-before", "")
+        timezone = params.get("timezone", "")
+        not_before = params.get("not-before", "")
         include_deleted = params.get("include_deleted", "")
 
         if max_results:
@@ -89,7 +90,7 @@ class LatestMessage(komand.Trigger):
         if not_before:
             data["not_before"] = not_before
 
-        base_url = server + '/room/'+ room_id_or_name  +'/history/latest?'
+        base_url = server + '/room/' + room_id_or_name + '/history/latest?'
         url_values = urllib.urlencode(data)
         url = base_url + url_values
 
@@ -99,15 +100,14 @@ class LatestMessage(komand.Trigger):
 
     def test(self):
         http_method = "GET"
-        server  = self.connection.server
-        token   = self.connection.token
+        token = self.connection.token
 
         #  url test authentication
         url = 'http://api.hipchat.com'
 
         # call request test authentication
         response = requests.request(http_method, url,
-                                    headers={'Content-Type': 'application/json', 'Authorization': 'Bearer %s'%token})
+                                    headers={'Content-Type': 'application/json', 'Authorization': 'Bearer %s' % token})
 
         if response.status_code == 401:
             raise Exception('Unauthorized: %s (HTTP status: %s)' % (response.text, response.status_code))
@@ -115,4 +115,3 @@ class LatestMessage(komand.Trigger):
             raise Exception('%s (HTTP status: %s)' % (response.text, response.status_code))
 
         return {'status_code': response.status_code}
-
