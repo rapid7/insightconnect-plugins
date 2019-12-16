@@ -101,7 +101,7 @@ class Create(komand.Action):
                 raise Exception("SLA and Service was not set. Please check the SLA and Service parameters as they maybe set incorrectly!\n"
                                 f"SLA Parameter: {params.get('SLA')}\n"
                                 f"SLA Service parameter: {params.get('Service')}\n"
-                                f"Please note ticket ID:{ticket_id} was created but the SLA and Sevice parameters were not updated.")
+                                f"Please note ticket ID:{ticket_id} was created but the SLA and Service parameters were not updated.")
 
         # format TicketNumber as its required as an INT in other actions and returned here as a string
         return {"ticket_id": int(ticket_results["TicketID"]), "ticket_number": int(ticket_results["TicketNumber"])}

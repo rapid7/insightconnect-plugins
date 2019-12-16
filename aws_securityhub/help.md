@@ -121,7 +121,7 @@ This trigger is used to poll from a SQS Queue.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|AttributeNames|[]string|['All']|False|A list of attributes that need to be returned along with each message ['All','Policy','VisibilityTimeout','MaximumMessageSize','MessageRetentionPeriod','ApproximateNumberOfMessages','ApproximateNumberOfMessagesNotVisible','CreatedTimestamp','LastModifiedTimestamp','QueueArn','ApproximateNumberOfMessagesDelayed','DelaySeconds','ReceiveMessageWaitTimeSeconds','RedrivePolicy','FifoQueue','ContentBasedDeduplication','KmsMasterKeyId','KmsDataKeyReusePeriodSeconds']|None|
+|AttributeNames|[]string|['All']|False|A list of attributes that need to be returned along with each message ['All', 'Policy', 'VisibilityTimeout', 'MaximumMessageSize', 'MessageRetentionPeriod', 'ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible', 'CreatedTimestamp', 'LastModifiedTimestamp', 'QueueArn', 'ApproximateNumberOfMessagesDelayed', 'DelaySeconds', 'ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds']|None|
 |MaxNumberOfMessages|integer|1|False|The maximum number of messages to return. Amazon SQS never returns more messages than this value. Valid values 1 to 10. Default 1|None|
 |MessageAttributeNames|[]string|['All']|False|The name of the message attribute|None|
 |ReceiveRequestAttemptId|string||False|This parameter applies only to FIFO (first-in-first-out) queues|None|
