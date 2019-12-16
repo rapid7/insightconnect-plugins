@@ -226,7 +226,7 @@ This action is used to add URLs to an event. This action returns `true` or `fals
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |comment|string|None|False|Attribute comment|None|
-|distribution|string|None|False|Distribution type|['This Community','This Organization','Connected Communities','All Communities']|
+|distribution|string|None|False|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |event|string|None|False|Event ID to append to|None|
 |proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 |urls|[]string|None|False|URLs to add|None|
@@ -338,7 +338,7 @@ This action is used to add email recipient to event. This action returns `true` 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |comment|string|None|True|Attribute comment|None|
-|distribution|string|None|True|Distribution type|['This Community','This Organization','Connected Communities','All Communities']|
+|distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |event|string|None|True|Event ID to append to|None|
 |proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 |recipient|string|None|True|Recipient email address|None|
@@ -368,7 +368,7 @@ This action is used to add email sender to event. This action returns `true` or 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |comment|string|None|True|Attribute comment|None|
-|distribution|string|None|True|Distribution type|['This Community','This Organization','Connected Communities','All Communities']|
+|distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |event|string|None|True|Event ID to append to|None|
 |proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 |sender|string|None|True|Sender email address|None|
@@ -398,7 +398,7 @@ This action is used to add email subject to event. This action returns `true` or
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |comment|string|None|True|Attribute comment|None|
-|distribution|string|None|True|Distribution type|['This Community','This Organization','Connected Communities','All Communities']|
+|distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |event|string|None|True|Event ID to append to|None|
 |proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 |subject|string|None|True|Email subject|None|
@@ -534,14 +534,14 @@ This action is used to search for events.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|analysis|string|None|False|Search by analysis level|['Don't search on','Initial','Ongoing','Completed']|
+|analysis|string|None|False|Search by analysis level|['Don't search on', 'Initial', 'Ongoing', 'Completed']|
 |date_from|string|None|False|Search after this date e.g. 2018-03-22|None|
 |date_until|string|None|False|Search before this date e.g. 2018-03-22|None|
 |event|string|None|False|Search by event ID|None|
 |organization|string|None|False|Search by organization|None|
-|published|string|None|False|Search by if published|['Don't search on','True','False']|
+|published|string|None|False|Search by if published|['Don't search on', 'True', 'False']|
 |tag|string|None|False|Search by tag|None|
-|threat_level|string|None|False|Search by threat level|['Don't search on','Undefined','Low','Medium','High']|
+|threat_level|string|None|False|Search by threat level|['Don't search on', 'Undefined', 'Low', 'Medium', 'High']|
 
 ##### Output
 
