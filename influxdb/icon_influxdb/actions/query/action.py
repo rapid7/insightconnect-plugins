@@ -51,8 +51,8 @@ class Query(komand.Action):
                             temp_list.append(str(item))
                         new_values.append(temp_list)
                     new_point = {
-                        "name": point['name'],
-                        "columns": point['columns'],
+                        "name": name,
+                        "columns": columns,
                         "values": new_values
                     }
                     new_points.append(new_point)
