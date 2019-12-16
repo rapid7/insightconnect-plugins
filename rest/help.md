@@ -345,7 +345,7 @@ Any issues connecting to the remote service should be present in the log of the 
 * 2.0.0 - Update connection to handle SSL verification
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.4 - Bug fix for CI tool incorrectly uploading plugins
-* 0.1.3 - Fix post and put actions by using json argument instead of body
+* 0.1.3 - Fix post and put actions by using JSON argument instead of body
 * 0.1.2 - SSL bug fix in SDK
 * 0.1.1 - Update tags
 * 0.1.0 - Initial plugin
