@@ -11,7 +11,7 @@
 # Requirements
 
 * BMC Remedy ITSM 9.1.x
-* Database Microsoft SQL 2016
+* Microsoft SQL 2016
 * Username and password
 
 # Documentation
