@@ -1,23 +1,14 @@
 # Description
 
-The REST plugin to make it easy to integrate with RESTful services.
-
-[REST](https://en.wikipedia.org/wiki/Representational_state_transfer) is a means of communicating over HTTP using verbs and actions to represent operations performed over resources, held in remote locations. It's based off of a document put together by Roy Fielding.
-All actions take 2 pieces of configuration: a route, and an optional series of headers. Any headers set this way will overwrite the default ones in the connection.
-
-The route can include a query string and arguments as needed, or just be the remaining path, which will be appended to the base URL specified in the connection.
-Additionally, every action except GET will allow you specify a body as part of the request.
-
-All of the actions return the same set of data:
-
-* The response, parsed from JSON as an object if possible
-* The response, as a raw string of text
-* The status code
-* The response headers
+[REST](https://en.wikipedia.org/wiki/Representational_state_transfer), or REpresentational State Transfer, is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other. This plugin makes a DELETE, GET, PATCH, POST, or PUT request to the provided URI.
 
 # Key Features
 
-* Run REST requests on any HTTP endpoint
+* Use DELETE to delete a resource identified by a URI
+* Use GET to read or retrieve a representation of a resource
+* Use PATCH to update or modify resources
+* Use POST to create new resources
+* Use PUT to update or replace resources
 
 # Requirements
 
