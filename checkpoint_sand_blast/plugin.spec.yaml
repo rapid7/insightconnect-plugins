@@ -162,7 +162,7 @@ actions:
         required: true
       file_type:
         title: File Type
-        description: File extension e.g. docx, pdf, ect
+        description: File extension e.g. DOCX, PDF
         type: string
         required: false
       file_bytes:

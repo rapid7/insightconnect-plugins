@@ -28,7 +28,7 @@ class CreateTargetInput(komand.Input):
     "host_list": {
       "type": "array",
       "title": "Target IP List",
-      "description": "Target IP List, in the form of a JSON array for each host or list of hosts. CIDR notation can be used. For example, the following would be a valid list: ['192.168.0.101', '192.168.1.101,192.168.1.103,192.168.1.105','192.168.1.2/24','192.168.3.105-112']",
+      "description": "Target IP List, in the form of a JSON array for each host or list of hosts. CIDR notation can be used. For example, the following would be a valid list: ['192.168.0.101', '192.168.1.101,192.168.1.103,192.168.1.105', '192.168.1.2/24', '192.168.3.105-112']",
       "items": {
         "type": "string"
       },

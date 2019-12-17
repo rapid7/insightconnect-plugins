@@ -1,6 +1,6 @@
 # Description
 
-[JSON Edit](https://www.json.org/) allows for the manipulation of JSON data.
+JSON Edit is a data utility that allows for the manipulation of [JSON](https://www.json.org/json-en.html) data. This plugin provides the ability to delete keys and update values in a JSON object.
 
 # Key Features
 

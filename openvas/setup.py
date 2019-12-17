@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='openvas-rapid7-plugin',
-      version='1.0.1',
-      description='Allows users to perform common tasks such as starting, stopping, deleting and scheduling scans from an OpenVAS server',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="openvas-rapid7-plugin",
+      version="1.0.1",
+      description="Perform common tasks such as starting, stopping, deleting and scheduling scans from an OpenVAS server",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_openvas']

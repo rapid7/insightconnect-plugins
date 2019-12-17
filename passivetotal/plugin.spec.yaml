@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: passivetotal
 title: PassiveTotal
-description: PassiveTotal
+description: Use PassiveTotal to analyze domains, addresses, and WHOIS data
 version: 1.0.1
 vendor: rapid7
 support: community

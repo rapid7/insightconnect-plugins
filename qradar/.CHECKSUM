@@ -1,7 +1,7 @@
 {
-	"spec": "f9f488d1b836fb996e9cb42787228304",
-	"manifest": "5f7ca311ca0c7418ba67a90f851c5cf9",
-	"setup": "1a144e55c79a96f40c9dd19306529579",
+	"spec": "7db014e72b17e14d6c91c680155ef35d",
+	"manifest": "b279b3e7400ced7ac06b0d7238dc7dd9",
+	"setup": "0558d21a187bd5e16a47d63d920f8191",
 	"schemas": [
 		{
 			"identifier": "add_data_to_reference_data_lists/schema.py",

@@ -5,7 +5,7 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 3.1.0
+version: 4.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -613,7 +613,7 @@ actions:
         required: false
       internal:
         title: Internal
-        description: If the user / doamin is internal or not
+        description: Whether or not the user or domain is internal
         type: boolean
         required: false
   delete_group_member:
@@ -701,8 +701,8 @@ actions:
         - malicious
         - all
       url_to_filter:
-        title: URL filter
-        description: URL to filter results with
+        title: URL Regular Expression Filter
+        description: Regular expression to filter on. e.g. `examp` will return only URLs with the letters examp in them
         type: string
         required: false
     output:

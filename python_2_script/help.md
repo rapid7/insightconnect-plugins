@@ -1,6 +1,6 @@
 # Description
 
-The Python plugin allows you to run Python 2 code. It includes Python 2.7.15 and its standard library as well as the following 3rd party libraries:
+[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 2 code. It includes Python 2.7.15 and its standard library as well as the following 3rd party libraries:
 
 * [requests 2.18.4](https://www.python-requests.org/en/master/)
 * [maya 0.5.0](https://pypi.python.org/pypi/maya)
@@ -11,7 +11,7 @@ The Python plugin allows you to run Python 2 code. It includes Python 2.7.15 and
 
 # Key Features
 
-* Run Python 2 code
+* Run a Python 2 script to securely orchestrate, automate, and respond to (almost) anything
 
 # Requirements
 

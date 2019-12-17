@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Return co-occurences for the specified domain"
+    DESCRIPTION = "Return co-occurrences for the specified domain"
 
 
 class Input:
@@ -46,8 +46,8 @@ class CooccurrencesOutput(komand.Output):
   "properties": {
     "cooccurrences": {
       "type": "array",
-      "title": "Co-occurences",
-      "description": "Array of [domain name, scores] tuples. The values range between 0 and 1 and should not exceed 1. All co-occurences of requests from client IPs are returned for the previous seven days whether the co-occurence is suspicious or not",
+      "title": "Co-occurrences",
+      "description": "Array of [domain name, scores] tuples. The values range between 0 and 1 and should not exceed 1. All co-occurrences of requests from client IPs are returned for the previous seven days whether the co-occurrence is suspicious or not",
       "order": 1
     }
   },

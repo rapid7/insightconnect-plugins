@@ -4,7 +4,7 @@ products: [insightconnect]
 name: otrs
 title: OTRS
 description: Create and manage OTRS tickets
-version: 4.0.2
+version: 5.0.0
 vendor: rapid7
 support: community
 status: []
@@ -14,10 +14,10 @@ resources:
   vendor_url: https://otrs.com/
 tags:
 - ticket
-- OTRS
+- itsm
 hub_tags:
   use_cases: [remediation_management]
-  keywords: [ticket, OTRS]
+  keywords: [ticket, itsm]
   features: []
 connection:
   server:
@@ -145,8 +145,8 @@ types:
       title: Content Type
       type: string
     Disposition:
-      description: Dispostion
-      title: Dispostion
+      description: Disposition
+      title: Disposition
       type: string
     FileID:
       description: File ID
@@ -666,7 +666,7 @@ types:
   external_param:
     name:
       title: Name
-      description: Name of parameter to seach on
+      description: Name of parameter to search on
       type: string
       required: false
     value:

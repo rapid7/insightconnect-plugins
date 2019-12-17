@@ -1,25 +1,15 @@
 # Description
 
-This plugin runs a PowerShell script on a remote host or locally on the InsightConnect Orchestrator.
-
-PowerShell is a task automation and configuration management framework from Microsoft, consisting of a command-line shell and associated scripting language. Initially a Windows component only, known as Windows PowerShell, it was made open-source and cross-platform on 18 August 2016 with the introduction of PowerShell Core. The former is built on .NET Framework while the latter on .NET Core.
+[PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-6) is a task-based command-line shell and scripting language from Microsoft that helps system administrators, power-users, and InsightConnect customers rapidly automate tasks that manage operating systems and processes. This plugin runs a PowerShell script on a remote host or locally on an InsightConnect Orchestrator.
 
 # Key Features
 
-* Run a PowerShell script
+* Run a PowerShell script to manage (remote) computers from the command line
 
 # Requirements
 
-The requirements for running the PowerShell plugin will vary depending on the use case. Your PowerShell scripts can either be run locally on the InsightConnect Orchestrator or remotely on a PowerShell enabled server.
-
-## Remote Requirements
-
-* A PowerShell enabled server
-* Administrative credentials to a PowerShell enabled server
-
-## Local Requirements
-
-* PowerShell can be run locally on the InsightConnect Orchestrator, in this case, you must ensure connectivity to any network resources the PowerShell script will use. Typically this involves opening ports in your firewall or windows servers.
+* For local Orchestrator execution, ensure connectivity to any network resources the script will use
+* For remote server execution, a PowerShell-enabled server annd administrative credentials
 
 # Documentation
 
@@ -100,7 +90,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -136,7 +126,7 @@ This plugin will join the Komand docker instance to the Windows domain as a comp
 For the Execute Script action PowerShell code should be submitted as base64. This can be done by
 copying a `.txt` file with the PowerShell code into the plugin.
 
-This plugin does not validate the PowerShell code.
+_This plugin does not validate the PowerShell code._
 
 Any errors generated on the remote computer by the PowerShell code
 are forwarded to the log file.
