@@ -17,7 +17,7 @@ class Connection(komand.Connection):
             token = params.get('credentials').get('token')
         else:
             self.logger.info('API token not provided, unauthenticated requests will be attempted')
-            token = ''
+            token = ''  # nosec
 
         if params.get('credentials').get('domain'):
             self.domain = params.get('credentials').get('domain')
