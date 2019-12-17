@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='grep-rapid7-plugin',
-      version='1.0.4',
-      description='This plugin searches for a specified pattern in a string or a file',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="grep-rapid7-plugin",
+      version="1.0.3",
+      description="This plugin searches for a specified pattern in a string or a file",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_grep']

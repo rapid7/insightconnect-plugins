@@ -49,9 +49,22 @@ The plugin returns the the number of matches found, a string array of the matche
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|matches|[]string|False|Matched lines|
 |found|boolean|False|Found match boolean|
 |hits|integer|False|Number of matches|
+|matches|[]string|False|Matched lines|
+
+Example output:
+
+```
+{
+  "found": true,
+  "hits": 2,
+  "matches": [
+    "hello there ",
+    " hello world"
+  ]
+}
+```
 
 #### Match String
 
@@ -71,9 +84,22 @@ The plugin returns the the number of matches found, a string array of the matche
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|matches|[]string|False|Matched lines|
 |found|boolean|False|Found match boolean|
 |hits|integer|False|Number of matches|
+|matches|[]string|False|Matched lines|
+
+Example output:
+
+```
+{
+  "found": true,
+  "hits": 2,
+  "matches": [
+    "hello world ",
+    "  hello2 world"
+  ]
+}
+```
 
 ### Triggers
 
@@ -89,8 +115,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.4 - Remove duplicated code | Remove saving to file when string action | Changed bare strings to Input.* in params.get | Removed unused function
-* 1.0.3 - New spec and help.md format for the Hub
+* 1.0.3 - New spec and help.md format for the Hub | Remove duplicated code | Remove saving to file when string action | Changed bare strings to Input.* in params.get | Removed unused function
 * 1.0.2 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 1.0.0 - Support web server mode
@@ -103,4 +128,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Grep](https://www.gnu.org/software/grep/manual/grep.html)
-
