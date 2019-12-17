@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='pushover-rapid7-plugin',
       version='1.0.1',
-      description='The Pushover plugin allows you to send Pushover notifications',
+      description='Send Pushover notifications',
       author='rapid7',
       author_email='',
       url='',

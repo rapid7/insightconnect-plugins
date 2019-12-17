@@ -89,7 +89,7 @@ class ListSnapshotsOutput(komand.Output):
     "selfLink": {
       "type": "string",
       "title": "Self Link",
-      "description": "Server-defined url for this resource",
+      "description": "Server-defined URL for this resource",
       "order": 4
     }
   },

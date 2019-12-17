@@ -37,10 +37,11 @@ This action is used to add context. This action returns `true` or `false` on whe
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|comment|comment_input|None|True|None|None|
-|text|text_input|None|True|None|None|
-|other|other_input|None|True|None|None|
-|link|link_input|None|True|None|None|
+|comment|comment_input|None|True|Comment|None|
+|link|link_input|None|True|Link|None|
+|other|other_input|None|True|Other|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
+|text|text_input|None|True|Text|None|
 
 ##### Output
 
@@ -150,14 +151,14 @@ This action is used to add a tag. The event tag must already exist in MISP. This
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|tag|string|None|True|Event tag for search|None|
 |event|string|None|True|Event ID to append to|None|
+|tag|string|None|True|Event tag to add|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|Tag status|
+|status|boolean|False|Tag add status|
 
 Example output:
 
@@ -227,13 +228,14 @@ This action is used to add URLs to an event. This action returns `true` or `fals
 |comment|string|None|False|Attribute comment|None|
 |distribution|string|None|False|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |event|string|None|False|Event ID to append to|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 |urls|[]string|None|False|URLs to add|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|False|URLs add status|
+|status|boolean|False|URL add status|
 
 Example output:
 
@@ -254,7 +256,7 @@ This action is used to export hashes from the HIDS database.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |to|string|None|False|To date E.g. 2015-02-17|None|
-|format|string|None|True|Export format as either md5 or sha1|['md5', 'sha1']|
+|format|string|None|True|Export format as either MD5 or SHA1|['md5', 'sha1']|
 |from|string|None|False|From date E.g. 2015-02-15|None|
 |last|string|None|False|Events within x amount of time E.g. 5d|None|
 |tags|[]string|None|False|Array of tags to include in results|None|
@@ -337,8 +339,9 @@ This action is used to add email recipient to event. This action returns `true` 
 |----|----|-------|--------|-----------|----|
 |comment|string|None|True|Attribute comment|None|
 |distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
-|recipient|string|None|True|Recipient email address|None|
 |event|string|None|True|Event ID to append to|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
+|recipient|string|None|True|Recipient email address|None|
 
 ##### Output
 
@@ -366,8 +369,9 @@ This action is used to add email sender to event. This action returns `true` or 
 |----|----|-------|--------|-----------|----|
 |comment|string|None|True|Attribute comment|None|
 |distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
-|sender|string|None|True|Sender email address|None|
 |event|string|None|True|Event ID to append to|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
+|sender|string|None|True|Sender email address|None|
 
 ##### Output
 
@@ -396,6 +400,7 @@ This action is used to add email subject to event. This action returns `true` or
 |comment|string|None|True|Attribute comment|None|
 |distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |event|string|None|True|Event ID to append to|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 |subject|string|None|True|Email subject|None|
 
 ##### Output
@@ -428,9 +433,9 @@ This action is used to receive events based on criteria.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|message|string|False|None|
-|errors|[]string|False|None|
-|result|Event"|False|None|
+|errors|[]string|False|Errors|
+|event|Event"|False|Event|
+|message|string|False|Message|
 
 Example output:
 
@@ -529,14 +534,14 @@ This action is used to search for events.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|Organization|string|None|False|Search by organisation|None|
-|date_until|string|None|False|Search before this data e.g. 2018-03-22|None|
-|analysis|string|None|False|Search by analysis level|['Initial', 'Ongoing', 'Completed']|
+|analysis|string|None|False|Search by analysis level|['Don't search on', 'Initial', 'Ongoing', 'Completed']|
+|date_from|string|None|False|Search after this date e.g. 2018-03-22|None|
+|date_until|string|None|False|Search before this date e.g. 2018-03-22|None|
 |event|string|None|False|Search by event ID|None|
-|tag|string|None|False|Search by Tag|None|
-|published|string|None|False|Search by if Published|None|
-|threat_level|string|None|False|Search by threat Level|['Undefined', 'Low', 'Medium', 'High']|
-|date_from|string|None|False|Search after this data e.g. 2018-03-22|None|
+|organization|string|None|False|Search by organization|None|
+|published|string|None|False|Search by if published|['Don't search on', 'True', 'False']|
+|tag|string|None|False|Search by tag|None|
+|threat_level|string|None|False|Search by threat level|['Don't search on', 'Undefined', 'Low', 'Medium', 'High']|
 
 ##### Output
 
@@ -598,11 +603,11 @@ This action is used to add an attribute to an event.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|category|string|None|True|The attribute category e.g. external analysis, Network activity|None|
+|category|string|None|True|The attribute category e.g. external analysis, network activity|None|
 |comment|string|None|False|Optional comment to add to attribute|None|
-|type_value|string|None|True|The Type of attribute e.g. url, sha256|None|
-|event|string|None|True|Event ID to append to|None|
-|value|string|None|True|The Value of the attribute e.g. for a url https\://malware.com|None|
+|event|string|None|True|ID of event to append to|None|
+|type_value|string|None|True|The Type of attribute e.g. URL, SHA256|None|
+|value|string|None|True|The Value of the attribute e.g. for a URL https://malware.com|None|
 
 ##### Output
 
@@ -650,7 +655,7 @@ This action is used to publish an event.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|published|publish|False|Info on published event|
+|published|published|False|Info on published event|
 
 Example output:
 
@@ -716,12 +721,11 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.2 - New spec and help.md format for the Hub
-* 3.0.1 - Fix typo in plugin spec
+* 3.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Commented Explanation
 * 3.0.0 - Fixed issue where Add URLs, Add Context, Add Email Sender, Add Email Subject and Add Email Recipient actions sent requests as a proposal | Fixed an issue where the distribution list was set incorrectly within Add URLs, Add Context, Create an Event, Add Email Sender, Add Email Subject, Add Email Recipient actions
 * 2.0.0 - Updated to new credential types | Update `hostname` variable in Connection to `url`
 * 1.0.0 - Add trigger. Add actions: Add Attachment, Remove Tag, Search Events, Publish. Support web server mode

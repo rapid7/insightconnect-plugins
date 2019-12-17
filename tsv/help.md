@@ -15,7 +15,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -61,7 +61,7 @@ Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to define
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

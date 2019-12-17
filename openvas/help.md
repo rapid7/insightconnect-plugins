@@ -2,23 +2,8 @@
 
 The [Open Vulnerability Assessment System](http://openvas.org/about.html) is an automated
 scanning tool that can check network reachable services for common and publicly published
-security vulnerabilities. This OpenVAS plugin allows Komand users to perform common tasks such as
-starting, stopping, deleting and scheduling scans from an OpenVAS server. To use this plugin, one
-should have a reachable OpenVAS server somewhere on the same network as the Komand server, and
-the OpenVAS management port should be accessible by the Komand server. If the `ssl_verify` option
-is set in the plugin connection, the Komand server will check to ensure that the TLS/SSL
-certificate presented by the service running on the management port is valid, using the operating
-systems certificate store accessible to the python programming language.
-
-The OpenVAS system uses 36 character long IDs to refer to many different objects managed in the
-OpenVAS system, such as scans, targets, schedules, and port lists. Calls to the create_*
-Komand Actions return a corresponding ID on success that can then be used in subsequent calls.
-Alternatively, all of the various IDs can also be found in the OpenVAS Greenbone Security
-Assistant UI.
-
-This plugin also defines a custom "datetime" type, which is used when creating schedules for
-scans to launch. Please note that the input given to the create_schedule function assumes that
-the date given to the create_schedule function is given in the UTC timezone.
+security vulnerabilities. This plugin allows users to perform common tasks such as
+starting, stopping, deleting and scheduling scans from an OpenVAS server. 
 
 # Key Features
 
@@ -29,6 +14,7 @@ the date given to the create_schedule function is given in the UTC timezone.
 # Requirements
 
 * OpenVAS server
+* Accessible OpenVAS management port
 * Username and password
 
 # Documentation
@@ -74,7 +60,7 @@ This action is used to create a new target in the OpenVAS server.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |port_list_id|string|None|False|ID of the Port List to use for scanning, if you want to scan a custom list of ports.|None|
-|host_list|[]string|None|True|Target IP List, in the form of a JSON array for each host or list of hosts. CIDR notation can be used. For example, the following would be a valid list\: ['192.168.0.101', '192.168.1.101,192.168.1.103,192.168.1.105','192.168.1.2/24','192.168.3.105-112']|None|
+|host_list|[]string|None|True|Target IP List, in the form of a JSON array for each host or list of hosts. CIDR notation can be used. For example, the following would be a valid list\: ['192.168.0.101', '192.168.1.101,192.168.1.103,192.168.1.105', '192.168.1.2/24', '192.168.3.105-112']|None|
 |name|string|None|True|None|None|
 
 ##### Output
@@ -237,7 +223,7 @@ This action is used to create a new list of ports to scan in the OpenVAS server.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|port_list_TCP|[]string|None|False|Target Port List for TCP ports, in the form of a JSON array for each port or list of ports. For example, the following would be a valid list\: ['22', '80','443-445']|None|
+|port_list_TCP|[]string|None|False|Target Port List for TCP ports, in the form of a JSON array for each port or list of ports. For example, the following would be a valid list\: ['22', '80', '443-445']|None|
 |name|string|None|True|None|None|
 |port_list_UDP|[]string|None|False|Target Port List for UDP ports, in the form of a JSON array for each port or list of ports. For example, the following would be a valid list\: ['53', '6881-6890']|None|
 
@@ -325,7 +311,9 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+This plugin defines a custom "datetime" type, which is used when creating schedules for
+scans to launch. Please note that the input given to the create_schedule function assumes that
+the date given to the `create_schedule` function is given in the UTC timezone.
 
 # Version History
 

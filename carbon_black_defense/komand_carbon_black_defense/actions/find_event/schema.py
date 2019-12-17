@@ -701,8 +701,8 @@ class FindEventOutput(komand.Output):
         },
         "registryValue": {
           "type": "string",
-          "title": "Registy Value",
-          "description": "Registy Value",
+          "title": "Registry Value",
+          "description": "Registry Value",
           "order": 14
         },
         "securityEventCode": {
