@@ -4,7 +4,7 @@ products: [insightconnect]
 name: google_web_risk
 title: Google Web Risk
 description: Check URLs against the Google Web Risk service
-version: 2.0.2
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []

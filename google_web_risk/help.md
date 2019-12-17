@@ -70,7 +70,6 @@ Google's Web Risk API requires an API key for use. Sign up for the beta [here](h
 
 # Version History
 
-* 2.0.2 - Update help.md
 * 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - New inputs for lookup action
 * 1.0.0 - Initial plugin
