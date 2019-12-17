@@ -4,7 +4,7 @@ products: [insightconnect]
 name: awk
 title: Awk
 description: This plugin manipulates an input string or file with the GNU awk programming language
-version: 1.2.2
+version: 1.2.1
 vendor: rapid7
 support: community
 status: []
