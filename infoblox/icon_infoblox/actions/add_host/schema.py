@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a new host (host has to match one of the existing authoritative networks, e.g. network fqdn = info.com, host name = example.info.com)"
+    DESCRIPTION = "Add a new host (host has to match one of the existing authoritative networks, e.g. network FQDN = info.com, host name = example.info.com)"
 
 
 class Input:
