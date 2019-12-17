@@ -116,8 +116,8 @@ class LookupOutput(komand.Output):
     },
     "zip_code": {
       "type": "string",
-      "title": "Zip Code",
-      "description": "Zip code",
+      "title": "ZIP Code",
+      "description": "ZIP code",
       "order": 11
     }
   }

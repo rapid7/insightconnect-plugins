@@ -34,23 +34,23 @@ It accepts a user to query and host (IP or domain) to perform the query.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|host|string|None|False|Host to Lookup|None|
+|host|string|None|True|Host to Lookup|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|city|string|False|None|
-|region_code|string|False|None|
-|region_name|string|False|None|
-|time_zone|string|False|None|
-|longitude|string|False|None|
-|metro_code|integer|False|None|
-|country_name|string|False|None|
-|country_code|string|False|None|
-|address|string|False|None|
-|latitude|string|False|None|
-|zip_code|string|False|None|
+|address|string|False|IP address|
+|city|string|False|City|
+|country_name|string|False|Country name|
+|country_code|string|False|Country code|
+|latitude|string|False|Latitude|
+|longitude|string|False|Longitude|
+|metro_code|integer|False|Metro code|
+|region_code|string|False|Region code|
+|region_name|string|False|Region name|
+|time_zone|string|False|Time zone|
+|zip_code|string|False|ZIP code|
 
 On success, the raw output will look like the following:
 
