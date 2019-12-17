@@ -1,11 +1,12 @@
 # Description
 
-[Markdown](https://en.wikipedia.org/wiki/Markdown) is lightweight markup language with plain text formatting syntax.
+[Markdown](https://en.wikipedia.org/wiki/Markdown) is a lightweight markup language with plain text formatting syntax.
 This plugin utilizes [pandoc](https://pandoc.org/) via [pypandoc](https://pypi.python.org/pypi/pypandoc/) to manipulate Markdown content.
 
 # Key Features
 
-* Convert from HTML to Markdown and vice-versa
+* Convert HTML to Markdown for simpler editing
+* Convert Markdown to HTML or PDF for formatted beautification
 
 # Requirements
 

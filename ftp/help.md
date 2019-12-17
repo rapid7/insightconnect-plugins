@@ -130,7 +130,6 @@ The FTP user must have permission to execute the respective tasks.
 
 ## References
 
-* [FTP](https://en.wikipedia.org/wiki/File_Transfer_Protocolkj)
+* [FTP](https://en.wikipedia.org/wiki/File_Transfer_Protocol)
 * [ftplib](https://docs.python.org/3/library/ftplib.html)
 * [ftputil](http://ftputil.sschwarzer.net/trac/wiki/Documentation).
-

@@ -82,5 +82,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Uniq](https://example.co://linux.die.net/man/1/uniq)
-
+* [Uniq](http://man7.org/linux/man-pages/man1/uniq.1.html)

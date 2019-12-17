@@ -1,25 +1,11 @@
 # Description
 
-[Dig](https://linux.die.net/man/1/dig) is a powerful DNS lookup utility. This plugin uses Dig to make forward and reverse DNS requests.
-
-For example, from the command line:
-
-```
-
-# Forward lookup
-$ dig google.com +short
-216.58.192.174
-
-# Reverse lookup
-$ dig -x 216.58.192.174 +short
-ord36s02-in-f174.1e100.net.
-ord36s02-in-f14.1e100.net.
-
-```
+[Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, is a network administration command-line tool for querying Domain Name System (DNS) name servers. This plugin uses Dig to make forward and reverse DNS requests.
 
 # Key Features
 
-* Forward and reverse DNS lookup
+* Forward DNS lookup to find an IP address from a domain name
+* Reverse DNS lookup to find a domain name from an IP address
 
 # Requirements
 
