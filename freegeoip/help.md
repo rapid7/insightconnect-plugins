@@ -1,6 +1,6 @@
 # Description
 
-The `freegeoip` InsightConnect plugin lookup GeoIP information for specified host using [FreeGeoIP](https://freegeoip.net/) which is a free service for Geo IP lookups.
+The `freegeoip` InsightConnect plugin lookup GeoIP information for specified host using [FreeGeoIP](https://freegeoip.net/) which is a free service for Geo IP lookups. 
 
 # Key Features
 
