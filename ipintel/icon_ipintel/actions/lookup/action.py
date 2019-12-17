@@ -7,10 +7,10 @@ import requests
 class Lookup(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='lookup',
-                description='Lookup intelligence information',
-                input=LookupInput(),
-                output=LookupOutput())
+            name='lookup',
+            description='Lookup intelligence information',
+            input=LookupInput(),
+            output=LookupOutput())
 
     def run(self, params={}):
         url = 'https://ipintel.io'
@@ -24,21 +24,22 @@ class Lookup(komand.Action):
             csrftoken = client.cookies['csrftoken']
             geolookuponly = params.get('geolookup')
             stealth = params.get('stealth')
-            data = {'geolookuponly': str(geolookuponly).lower(), 'iplist': ipList, 'stealth': str(stealth).lower(), 'csrfmiddlewaretoken': csrftoken}
+            data = {'geolookuponly': str(geolookuponly).lower(), 'iplist': ipList, 'stealth': str(stealth).lower(),
+                    'csrfmiddlewaretoken': csrftoken}
             headers = {
-              'User-Agent': 'Komand',
-              'Referer': url
+                'User-Agent': 'Komand',
+                'Referer': url
             }
             r = client.post(url + "/process", data=data, headers=headers)
             requestId = r.json()['request_id']
-            r = client.get(url+'/status/'+requestId)
+            r = client.get(url + '/status/' + requestId)
             if 'lookup_results' not in r.json():
                 raise Exception('IPIntel did not return the expected data')
             for var in r.json()['lookup_results']:
-                intel={
+                intel = {
                     'ip': var['ip'],
                     'info': var['info'],
-                    'threats': [] if geolookuponly == True and stealth == False else var['threats'],
+                    'threats': [] if geolookuponly and not stealth else var['threats'],
                     'warnings': var['warnings'],
                     'cached': var['cached'],
                     'country': var['country'],
@@ -47,19 +48,19 @@ class Lookup(komand.Action):
                     'lookup_time': str(var['lookup_time']),
                     'longitude': str(var['longitude']),
                     'stealth': str(var['stealth']),
-                    'references': [] if geolookuponly == True and stealth == False else var['references'],
+                    'references': [] if geolookuponly and not stealth else var['references'],
                     'location': var['location'],
                     'country_iso': var['location'],
                     'latitude': str(var['latitude']),
                     'org': var['org'],
-                    'first_seen': '' if geolookuponly == True and stealth == False else var['first_seen'],
-                    'city': '' if geolookuponly == False and stealth == True else var['city'],
-                    'last_seen': '' if geolookuponly == True and stealth == False else var['last_seen'],
+                    'first_seen': '' if geolookuponly and stealth else var['first_seen'],
+                    'city': '' if not geolookuponly and stealth else var['city'],
+                    'last_seen': '' if geolookuponly and not stealth else var['last_seen'],
                     'permalink': r.json()["permalink"]
                 }
                 lstRet.append(intel)
 
-            return { 'result': lstRet }
+            return {'result': lstRet}
 
         except requests.exceptions.HTTPError as e:
             self.logger.error("An HTTP error occurred. Error: " + str(e))
@@ -78,7 +79,7 @@ class Lookup(komand.Action):
             r = requests.get(url)
             if r.status_code != 200:
                 self.logger.error('Web request to https://ipintel.io returned a %d', r.status_code)
-        except:
+        except Exception:
             self.logger.error('Request to https://ipintel.io failed')
             raise
         return {}
