@@ -15,7 +15,7 @@ tags:
 - incident
 - tables
 hub_tags:
-  use_cases: [soar, remediation_ticketing, asset_inventory, soc_automation]
+  use_cases: [remediation_management, asset_inventory]
   keywords: [servicenow, incident, tables, cmdb]
   features: []
 

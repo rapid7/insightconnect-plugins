@@ -6,7 +6,7 @@ from komand_barracuda_waf import connection, actions, triggers
 
 Name = 'Barracuda Web Application Firewall'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '2.0.0'
 Description = 'The Barracuda WAF plugin automates administrative tasks as well as rule creation and modification'
 
 

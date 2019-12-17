@@ -1,6 +1,6 @@
 # Description
 
-[GRR Rapid Response](https://github.com/google/grr) is an incident reponse framework that allows you to focus on remote live forensics. GRR is a python client (agent) that is installed on target systems, and python server infrastructure that can manage and talk to clients.
+[GRR Rapid Response](https://github.com/google/grr) is an incident response framework that allows you to focus on remote live forensics. GRR is a python client (agent) that is installed on target systems, and python server infrastructure that can manage and talk to clients.
 
 The GRR plugin allows you to organize clients and start hunts using GRR.
 
@@ -296,7 +296,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -304,7 +304,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

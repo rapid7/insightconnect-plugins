@@ -1,6 +1,6 @@
 # Description
 
-Utility plugin to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are:
+Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are:
 
 * DOCX
 * EPUB
@@ -11,7 +11,7 @@ Utility plugin to convert an HTML document into a variety of formats using [pypa
 
 # Key Features
 
-* Convert HTML into another format
+* Convert an HTML document into another format to more easily export, share, or edit the document's contents
 
 # Requirements
 
@@ -21,7 +21,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -152,7 +152,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -160,7 +160,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

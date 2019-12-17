@@ -1,7 +1,7 @@
 {
-	"spec": "1a7f02415cd2c5b30bc5fd5e5da7f385",
-	"manifest": "96d094892798dbd68285187b504d973a",
-	"setup": "03e5b82fa2ff7f3a799311a2152e1546",
+	"spec": "eec0ac04dfab9d9b927bfbffc55662a4",
+	"manifest": "b8c3c588abdc387ec4b7444f02dc0b62",
+	"setup": "847d9cc66df50fe0cddebc71ae0ce16f",
 	"schemas": [
 		{
 			"identifier": "create_content_rule/schema.py",
@@ -73,7 +73,7 @@
 		},
 		{
 			"identifier": "retrieve_content_rules/schema.py",
-			"hash": "c49af5b03704801fe443323cb8cf7fac"
+			"hash": "687bbe68bc631bae85ac0fd42bd303a4"
 		},
 		{
 			"identifier": "retrieve_data_theft/schema.py",
@@ -85,7 +85,7 @@
 		},
 		{
 			"identifier": "retrieve_security_policies/schema.py",
-			"hash": "8f1e220d133396283159f406b3cdf389"
+			"hash": "6120a74f87cf2837c8d3673cdeec9e0e"
 		},
 		{
 			"identifier": "retrieve_virtual_service/schema.py",
@@ -109,7 +109,7 @@
 		},
 		{
 			"identifier": "update_security_policy/schema.py",
-			"hash": "55e5be96ecca95c32fa897e68cfe2635"
+			"hash": "8cfe6ed05f24198097db0fe1b3f837c1"
 		},
 		{
 			"identifier": "update_trusted_host/schema.py",

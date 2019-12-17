@@ -1,7 +1,9 @@
 # Description
 
-[QRadar](https://www-03.ibm.com/software/products/en/qradar) is an enterprise security information and event management solution from IBM. The QRadar plugin allows you to run Ariel queries and retrieve policy offense data.
-This plugin utilizes the [QRadar API](https://www.ibm.com/support/knowledgecenter/SS42VS_7.3.0/com.ibm.qradar.doc/qradar_IC_welcome.html).
+[QRadar](https://www-03.ibm.com/software/products/en/qradar) is an enterprise security information and event
+management solution from IBM. The QRadar plugin allows you to run Ariel queries and retrieve policy offense data.
+This plugin utilizes the
+[QRadar API](https://www.ibm.com/support/knowledgecenter/SS42VS_7.3.0/com.ibm.qradar.doc/qradar_IC_welcome.html).
 
 # Key Features
 
@@ -12,7 +14,7 @@ This plugin utilizes the [QRadar API](https://www.ibm.com/support/knowledgecente
 # Requirements
 
 * Administrative credentials to QRadar
-* An API key
+* QRadar API key
 
 # Documentation
 
@@ -229,7 +231,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -237,7 +239,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

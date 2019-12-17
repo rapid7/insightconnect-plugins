@@ -40,7 +40,7 @@ class UploadInput(komand.Input):
     "file_type": {
       "type": "string",
       "title": "File Type",
-      "description": "File extension e.g. docx, pdf, ect",
+      "description": "File extension e.g. DOCX, PDF",
       "order": 2
     }
   },

@@ -15,7 +15,7 @@ tags:
 - threat intelligence
 - breach prevention
 hub_tags:
-  use_cases: [soar, soc_automation]
+  use_cases: [data_enrichment, threat_detection_and_response]
   keywords: [threat intelligence, breach prevention]
   features: []
 types:
@@ -162,7 +162,7 @@ actions:
         required: true
       file_type:
         title: File Type
-        description: File extension e.g. docx, pdf, ect
+        description: File extension e.g. DOCX, PDF
         type: string
         required: false
       file_bytes:

@@ -1,11 +1,11 @@
 # Description
 
-[LastPass Enterprise](https://www.lastpass.com/enterprise) is a password manager for businesses.
-This plugin utilizes the [LastPass API](https://enterprise.lastpass.com/users/set-up-create-new-user-2/lastpass-provisioning-api/).
+[LastPass Enterprise](https://www.lastpass.com/products/enterprise-password-management-and-sso) is a password management solution for businesses that protects every access point through an all-in-one single sign-on and password manager solution. This plugin utilizes the [LastPass API](https://enterprise.lastpass.com/users/set-up-create-new-user-2/lastpass-provisioning-api/) to automate administration of users and groups.
 
 # Key Features
 
-* Network Access Point Managment
+* Provision and deprovision users in your LastPass Enterprise account
+* Add and remove users from groups in your LastPass Enterprise account
 
 # Requirements
 

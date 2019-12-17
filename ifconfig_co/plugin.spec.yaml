@@ -16,7 +16,7 @@ tags:
   - ip
   - nat
 hub_tags:
-  use_cases: [soar, ]
+  use_cases: [data_enrichment]
   keywords: [ip, nat, public]
   features: []
 actions:

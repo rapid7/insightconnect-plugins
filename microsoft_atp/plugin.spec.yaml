@@ -16,7 +16,7 @@ tags:
 - microsoft
 - defender
 hub_tags:
-  use_cases: [soar, threat_detection_and_response, threat_intel, user_management, alerting_and_notifications, application_security, network_containment, soc_automation]
+  use_cases: [threat_detection_and_response, user_management, alerting_and_notifications, devops]
   keywords: [windows, atp, microsoft, defender]
   features: []
 

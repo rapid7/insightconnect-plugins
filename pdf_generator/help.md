@@ -1,6 +1,7 @@
 # Description
 
-The PDF Generator plugin creates a PDF from user provided data. This allows the user to create robust reports to distribute workflow details.
+The PDF Generator plugin creates a PDF from user provided data. This allows the user to create robust 
+reports to distribute workflow details.
 
 # Key Features
 

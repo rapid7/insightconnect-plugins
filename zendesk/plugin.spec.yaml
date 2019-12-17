@@ -18,7 +18,7 @@ tags:
 - ticket
 - communication
 hub_tags:
-  use_cases: [soar, remediation_ticketing]
+  use_cases: [remediation_management]
   keywords: [zendesk, ticket, communication]
   features: []
 types:

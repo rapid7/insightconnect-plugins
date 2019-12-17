@@ -7,7 +7,7 @@ from komand_qradar import connection, actions, triggers
 Name = 'QRadar Security Intelligence Platform'
 Vendor = 'rapid7'
 Version = '2.0.1'
-Description = 'The QRadar plugin allows you to run Ariel queries and retrieve policy offense data'
+Description = 'Run Ariel queries and retrieve policy offense data'
 
 
 class ICONQradar(komand.Plugin):

@@ -18,7 +18,7 @@ tags:
 - pcap
 - traffic
 hub_tags:
-  use_cases: [soar, threat_hunting, investigations, log_search]
+  use_cases: [threat_detection_and_response]
   keywords: [tshark, pcap, traffic]
   features: []
 actions:

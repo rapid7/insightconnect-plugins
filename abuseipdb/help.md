@@ -1,14 +1,14 @@
 # Description
 
-The AbuseIPDB InsightConnect plugin allows you to look up IP reports, provides list and details of blacklisted IPs, or report an abusive IP.
+[AbuseIPDB](https://www.abuseipdb.com) is a database of reported malicious IP addresses that are involved in malicious activity such as spamming, hack attempts, DDoS attacks, etc.
 
-This plugin utilizes [AbuseIPDB API v2](https://docs.abuseipdb.com).
+This plugin utilizes the [AbuseIPDB API v2](https://docs.abuseipdb.com) to lookup and report malicious IP addresses.
 
 # Key Features
 
-* Report abusive IPs
-* Get blacklisted IPs
-* Get IP details
+* Look up an IP in the AbuseIP database to identify reported malicious IPs
+* Get a complete list of reported IPs from AbuseIPDB
+* Report an abusive IP address to add to AbuseIP's database
 
 # Requirements
 
@@ -251,7 +251,7 @@ Failure Example:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

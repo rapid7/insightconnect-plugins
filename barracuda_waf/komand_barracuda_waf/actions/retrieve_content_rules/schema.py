@@ -106,7 +106,7 @@ class RetrieveContentRulesOutput(komand.Output):
     },
     "persistence_method": {
       "type": "string",
-      "title": "Persistance Method",
+      "title": "Persistence Method",
       "description": "The Persistence Method to be used to maintain the connection between a client and the first server that it connects to, even when the system is load balancing traffic",
       "order": 11
     },

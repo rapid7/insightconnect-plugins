@@ -1,7 +1,8 @@
 # Description
 
-[OSSEC](https://ossec.github.io/) is a free, open-source host-based intrusion detection system with file integrity monitoring and log analysis capabilities.
-This plugin parses the standard multi-line OSSEC alerts found in `/var/ossec/logs/alerts/alerts.log` into usable JSON.
+[OSSEC](https://ossec.github.io/) is a free, open-source host-based intrusion detection system with file integrity 
+monitoring and log analysis capabilities. This plugin parses the standard multi-line OSSEC alerts 
+found in `/var/ossec/logs/alerts/alerts.log` into usable JSON.
 
 # Key Features
 
