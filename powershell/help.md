@@ -15,6 +15,8 @@
 
 ## Setup
 
+Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/mass-delete-with-powershell) for more details on how to configure this plugin.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
@@ -162,4 +164,4 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 * [samba-common](https://packages.debian.org/sid/samba-common)
 * [krb5-user](https://packages.debian.org/search?keywords=krb5-user)
 * [realmd](https://packages.debian.org/jessie/admin/realmd)
-
+* [InsightConnect Powershell Plugin Guide](https://insightconnect.help.rapid7.com/docs/mass-delete-with-powershell)

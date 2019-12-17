@@ -93,5 +93,4 @@ Ensure your CEF strings are properly formatted.
 
 ## References
 
-* [ArcSight Common Event Format (CEF) Guide](https://www.protect724.hpe.com/docs/DOC-1072)
-
+* [ArcSight Common Event Format (CEF) Whitepaper](https://kc.mcafee.com/resources/sites/MCAFEE/content/live/CORP_KNOWLEDGEBASE/78000/KB78712/en_US/CEF_White_Paper_20100722.pdf)

@@ -271,6 +271,4 @@ _This plugin does not contain any custom output types._
 
 ## References
 
-* [Tutorial: Connecting Splunk Alerts To Komand](https://komand.zendesk.com/hc/en-us/articles/115001374187)
 * [Splunk](https://www.splunk.com/)
-

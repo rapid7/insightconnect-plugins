@@ -1,7 +1,6 @@
 # Description
 
-[Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/subscriptions/wildfire) is a cloud-based malware sandboxing service that integrates with Palo Alto firewalls to identify unknown threats. This plugin utilizes the [Pyldfire library](https://pypi.python.org/pypi/pyldfire/7.1.3) to get vulnerability information and analyze malware 
-samples.
+[Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/wildfire) is a cloud-based malware sandboxing service that integrates with Palo Alto firewalls to identify unknown threats. This plugin utilizes the [Pyldfire library](https://pypi.python.org/pypi/pyldfire/7.1.3) to get vulnerability information and analyze malware samples.
 
 # Key Features
 
@@ -186,6 +185,6 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/subscriptions/wildfire)
+* [Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/wildfire)
 * [Wildfire Documentation](https://www.paloaltonetworks.com/documentation/80/wildfire)
 * [pyldfire](https://pypi.python.org/pypi/pyldfire/7.1.3)
