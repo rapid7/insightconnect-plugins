@@ -1304,9 +1304,10 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-By default the API port is 8008.
-To configure the BMC server for API usage: https://docs.bmc.com/docs/ars9000/configuring-the-rest-api-529403222.html
-All testing was done on BMC Remedy ITSM 9.1.5 With MS SQL 2016 as the database.
+* By default the API port is 8008.
+* To configure the BMC server for API usage: https://docs.bmc.com/docs/ars9000/configuring-the-rest-api-529403222.html
+* All testing was done on BMC Remedy ITSM 9.1.5 With MS SQL 2016 as the database.
+* This plugin implements the BMC REST API
 
 # Version History
 
