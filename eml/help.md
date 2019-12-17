@@ -161,6 +161,6 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [EML](http://forensicswiki.org/wiki/EML)
+* [EML](https://fileinfo.com/extension/eml)
 * [RFC0822](https://www.ietf.org/rfc/rfc0822.txt)
 

@@ -103,5 +103,4 @@ _This plugin does not contain any custom output types._
 
 ## References
 
-* [Google API's](https://www.googleapis.com/)
-
+* [Google Admin API](https://developers.google.com/admin-sdk)

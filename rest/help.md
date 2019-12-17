@@ -19,8 +19,7 @@
 
 ## Setup
 
-Configuring a REST connection requires an endpoint to hit, which includes the protocol (`http://` or `https://` should be explicitly set by the user).
-Additionally, you can set a series of default Headers for every request to use. This would be useful if every request needed to send an auth token along inside of a header, so you don't need to specify it in each individual action.
+Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/rest) for more details on how to configure this plugin.
 
 The connection configuration accepts the following parameters:
 
@@ -346,4 +345,4 @@ Any issues connecting to the remote service should be present in the log of the 
 ## References
 
 * [REST Architecture Style](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
-
+* [InsightConnect REST Plugin Guide](https://insightconnect.help.rapid7.com/docs/rest)
