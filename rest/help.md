@@ -12,8 +12,8 @@
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Varies depending on the API the plugin is interacting with
+* A RESTFUL HTTP/HTTPS resource
 
 # Documentation
 
@@ -51,10 +51,10 @@ This action is used to make a PUT request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -112,10 +112,10 @@ This action is used to make a POST request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -173,10 +173,10 @@ This action is used to make a PATCH request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -230,10 +230,10 @@ This action is used to make a GET request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -273,10 +273,10 @@ This action is used to make a DELETE request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -336,7 +336,7 @@ Any issues connecting to the remote service should be present in the log of the 
 * 2.0.0 - Update connection to handle SSL verification
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.4 - Bug fix for CI tool incorrectly uploading plugins
-* 0.1.3 - Fix post and put actions by using json argument instead of body
+* 0.1.3 - Fix post and put actions by using JSON argument instead of body
 * 0.1.2 - SSL bug fix in SDK
 * 0.1.1 - Update tags
 * 0.1.0 - Initial plugin

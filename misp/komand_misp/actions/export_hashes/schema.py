@@ -28,7 +28,7 @@ class ExportHashesInput(komand.Input):
     "format": {
       "type": "string",
       "title": "Export Format",
-      "description": "Export format as either md5 or sha1",
+      "description": "Export format as either MD5 or SHA1",
       "enum": [
         "md5",
         "sha1"

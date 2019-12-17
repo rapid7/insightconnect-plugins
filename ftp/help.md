@@ -1,7 +1,7 @@
 # Description
 
 The FTP InsightConnect plugin uses the File Transfer Protocol (FTP) network protocol to transfer computer files between a client and server on a computer network.
-This plugin provides FTP functionality such as downlaoding or managing files, as well as the ability to watch and trigger on file that has changed.
+This plugin provides FTP functionality such as downloading or managing files, as well as the ability to watch and trigger on file that has changed.
 
 It uses the [ftplib](https://docs.python.org/3/library/ftplib.html) and [ftputil](http://ftputil.sschwarzer.net/trac/wiki/Documentation) libraries and supports SSL/TLS transactions..
 

@@ -35,7 +35,7 @@ class SqsFeedInput(komand.Input):
     "AttributeNames": {
       "type": "array",
       "title": "Attribute Names",
-      "description": "A list of attributes that need to be returned along with each message ['All','Policy','VisibilityTimeout','MaximumMessageSize','MessageRetentionPeriod','ApproximateNumberOfMessages','ApproximateNumberOfMessagesNotVisible','CreatedTimestamp','LastModifiedTimestamp','QueueArn','ApproximateNumberOfMessagesDelayed','DelaySeconds','ReceiveMessageWaitTimeSeconds','RedrivePolicy','FifoQueue','ContentBasedDeduplication','KmsMasterKeyId','KmsDataKeyReusePeriodSeconds']",
+      "description": "A list of attributes that need to be returned along with each message ['All', 'Policy', 'VisibilityTimeout', 'MaximumMessageSize', 'MessageRetentionPeriod', 'ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible', 'CreatedTimestamp', 'LastModifiedTimestamp', 'QueueArn', 'ApproximateNumberOfMessagesDelayed', 'DelaySeconds', 'ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds']",
       "items": {
         "type": "string"
       },

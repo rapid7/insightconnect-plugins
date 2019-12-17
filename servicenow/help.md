@@ -580,6 +580,6 @@ _This plugin does not contain any troubleshooting information._
 
 * [ServiceNow](https://www.servicenow.com/)
 * [ServiceNow API](https://developer.servicenow.com/app.do#!/rest_api_doc?v=fuji&id=c_TableAPI)
-* [ServiceNow User Administraton](http://wiki.servicenow.com/index.php?title=User_Administration)
+* [ServiceNow User Administration](http://wiki.servicenow.com/index.php?title=User_Administration)
 * [ServiceNow Operators](http://wiki.servicenow.com/index.php?title=Operators_Available_for_Filters_and_Queries)
 

@@ -45,7 +45,7 @@ This action is used to submit a file for analysis.
 Supported File Types:
 
 ```
-.exe, .scr, .lnk2, .dll, .sys, .ocx, .pdf, .doc,.docx, .docm, .dot, .dotx, .dotm, .xls,.xlsx, .xlsm, .xlt, .xltx, .xltm, .xlb, .xlsb, .iqy, .slk, .ppt,.pptx, .pptm, .pot, .potx, .potm .mpp, .accdb, .adn, .accdr, .accdt, .accda, .mdw, .accde, .ade, .mdb, .mda, .vsd, .vsdx, .vss, .vst, .vsw, .vdx, .vtx, .vsdx, .vsdm, .vssx, .vssm, .vstx, .vstm, .pub, .puz, .rtf, .url, .html, .htm, .hta, .swf, .msi, .bat, .vbs, .vbe, .js, .jse, .wsf, .jar, .class, .ps1
+.exe, .scr, .lnk2, .dll, .sys, .ocx, .pdf, .doc,.docx, .docm, .dot, .dotx, .dotm, .xls,.xlsx, .xlsm, .xlt, .xltx, .xltm, .xlb, .xlsb, .iqy, .slk, .ppt,.pptx, .pptm, .pot, .potx, .potm .mpp, .accdb, .and, .accdr, .accdt, .accda, .mdw, .accde, .ade, .mdb, .mda, .vsd, .vsdx, .vss, .vst, .vsw, .vdx, .vtx, .vsdx, .vsdm, .vssx, .vssm, .vstx, .vstm, .pub, .puz, .rtf, .url, .html, .htm, .hta, .swf, .msi, .bat, .vbs, .vbe, .js, .jse, .wsf, .jar, .class, .ps1
 ```
 
 ##### Output
@@ -311,7 +311,7 @@ This action is used to submits a URL for analysis.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|URL to be submitted for analysis|None|
-|analyzer_mode|string|None|False|Specify what analyzer mode to use|['default','reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
+|analyzer_mode|string|None|False|Specify what analyzer mode to use|['default', 'reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
 |optional_params|object|None|False|Parameters that allow finer tuning of the Submit URL action, e.g {"analysis_id"\: 12345}|None|
 
 ##### Output
