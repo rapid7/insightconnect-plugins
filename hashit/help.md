@@ -9,7 +9,8 @@ The HashIt plugin will generate common hashes from a file or string. Supported h
 
 # Key Features
 
-* Generate a hash
+* Generate a hash from a provided Base64 encoded file input
+* Generate a hash from a provided text string input
 
 # Requirements
 

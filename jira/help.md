@@ -4,14 +4,14 @@
 
 # Key Features
 
-* Create, find, edit, comment, and generally manage your Jira tickets
-* Assign issues to users
-* Find and create new users in your Jira instance
+* Create, find, edit, comment, and generally manage your Jira tickets through the Jira REST API to expedite operations
+* (Re-)Assign issues to users to orchestrate operations
+* Find and create new users in your Jira instance to automate account provisioning
 
 # Requirements
 
-* User Name and Password
-* Jira server
+* Jira URL
+* Administrative credentials
 
 # Documentation
 

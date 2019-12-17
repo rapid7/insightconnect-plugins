@@ -1,14 +1,17 @@
 # Description
 
-[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is a management console for 
-Palo Alto Networks devices. Use this plugin within a workflow to manage configurations, security policies, and more.
-
-This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api).
+[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto PAN-OS firewall appliance(s).
 
 # Key Features
 
-* Manage Palo Alto Networks devices
-* Manage configurations
+* Create a new security policy rule to allow or block traffic based on IP addresses, services, applications, users, and zones
+* Add rules to and remove rules from existing policies to update the active or candidate firewall configuration
+* Commit the candidate configuration to update the active firewall configuration
+* Set, Edit, and Delete Objects in order to construct, schedule, and search for policy rules
+* Add an external dynamic list of IP addresses, URLs, and domains to an enforcement policy
+* Run an operational command to manage your firewall(s)
+* Query firewall log events to search for matches or patterns
+* Get candidate configuration and show active configuration to view configuration settings
 
 # Requirements
 
