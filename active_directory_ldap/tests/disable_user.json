@@ -2,12 +2,12 @@
     "body": {
         "action": "disable_user",
         "connection": {
-            "host": "192.168.1.10",
+            "host": "",
             "port": 636,
             "use_ssl": true,
             "username_password": {
-                "password": "M903bb1986194",
-                "username": "MATTSDOMAIN\\mhofert"
+                "password": "",
+                "username": ""
             }
         },
         "input": {

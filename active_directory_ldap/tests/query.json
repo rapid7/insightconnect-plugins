@@ -3,16 +3,16 @@
         "action": "query",
         "connection": {
             "host": "",
-            "port": 636,
-            "use_ssl": true,
+            "port": 389,
+            "use_ssl": false,
             "username_password": {
                 "password": "",
-                "username": "Akbar\\Administrator"
+                "username": ""
             }
         },
         "input": {
             "search_base": "DC=Akbar,DC=trap",
-            "search_filter": "(distinguishedName=CN=Syd Coffaro,CN=Users,DC=Akbar,DC=trap)"
+            "search_filter": "(distinguishedName=CN=Syd Barrett,CN=users,DC=Akbar,DC=Trap)"
         },
         "meta": {}
     },
