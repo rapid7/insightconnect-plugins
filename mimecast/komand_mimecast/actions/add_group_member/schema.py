@@ -29,13 +29,13 @@ class AddGroupMemberInput(komand.Input):
     "domain": {
       "type": "string",
       "title": "Domain",
-      "description": "A domain to add to a group. Use either emailAddress or domain",
+      "description": "A domain to add to a group. Use either email address or domain",
       "order": 3
     },
     "email_address": {
       "type": "string",
       "title": "Email Address",
-      "description": "The email address of a user to add to a group. Use either emailAddress or domain",
+      "description": "The email address of a user to add to a group. Use either email address or domain",
       "order": 2
     },
     "id": {
@@ -82,7 +82,7 @@ class AddGroupMemberOutput(komand.Output):
     "internal": {
       "type": "boolean",
       "title": "Internal",
-      "description": "If the user / doamin is internal or not",
+      "description": "Whether or not the user or domain is internal",
       "order": 4
     }
   }

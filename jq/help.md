@@ -1,10 +1,6 @@
 # Description
 
-[jq](https://stedolan.github.io/jq/) is a command-line tool to filter JSON data.
-
-The jq plugin passes the given list of flags to the jq command, which then runs
-the given filter expression on the given JSON input. For flexibility, the output is
-returned as a string.
+[jq](https://stedolan.github.io/jq/) is a command-line tool used for slicing, filtering, mapping, and transforming structured JSON data. The jq plugin passes the given list of flags to the jq command, which then runs the given filter expression on the given JSON input. For flexibility, the output is returned as a string.
 
 # Key Features
 
@@ -18,7 +14,7 @@ _This plugin does not contain any requirements_
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -45,7 +41,7 @@ This action is used to pass the given JSON object to the jq command, using the g
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

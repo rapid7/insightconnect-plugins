@@ -17,7 +17,7 @@ tags:
 - forensics
 - carving
 hub_tags:
-  use_cases: [soar, data_utility, threat_hunting]
+  use_cases: [data_utility, threat_detection_and_response]
   keywords: [foremost, extraction, forensics, carving]
   features: []
 actions:

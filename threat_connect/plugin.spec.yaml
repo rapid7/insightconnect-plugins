@@ -22,7 +22,7 @@ tags:
 - identify
 - threatconnect
 hub_tags:
-  use_cases: [soar, investigations, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [threat, malicious, analyze, manage, identify, threatconnect]
   features: []
 types:

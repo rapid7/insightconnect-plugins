@@ -1,10 +1,11 @@
 # Description
 
-[IPStack](https://ipstack.com) is a free service for Geo IP lookups (previously FreeGeoIP).
+[IPStack](https://ipstack.com) offers one of the leading IP to geolocation APIs and global IP database services worldwide. This plugin uses the [ipstack API](https://ipstack.com/documentation) to get geolocation data for a provided IP address.
+
 
 # Key Features
 
-* Geolocation of IP address or a domain
+* Lookup a host in IPStack's global database to geolocate an IP address or domain
 
 # Requirements
 
@@ -74,7 +75,7 @@ On success, the raw output will look like the following:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

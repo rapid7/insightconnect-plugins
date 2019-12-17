@@ -2,7 +2,7 @@
 
 The [TruffleHog](https://github.com/dxa4481/truffleHog) plugin uses regex and entropy checks to go through the entire commit history of each branch, and check each diff for every commit as well as for secrets.
 
-For entropy checks, TruffleHog will evaluate the shannon entropy for both the base64 character set and hexidecimal character set for every blob of text greater than 20 characters comprised of those character sets in each diff.
+For entropy checks, TruffleHog will evaluate the shannon entropy for both the base64 character set and hexadecimal character set for every blob of text greater than 20 characters comprised of those character sets in each diff.
 If at any point a high entropy string is greater than 20 characters is detected, it will collect the hashes and provide them for use once complete.
 
 # Key Features
@@ -17,7 +17,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -33,7 +33,7 @@ This action is used to search through github commit histories, and checks if the
 |----|----|-------|--------|-----------|----|
 |git_url|string|All|True|The git repository that is going to be searched|None|
 |do_regex|boolean|False|False|Enable high signal regex checks|None|
-|do_entropy|boolean|True|False|Evaluates the shannon entropy for both the base64 char set and hexidecimal char set for every blob of text greater than 20 characters comprised of those character sets in each diff|None|
+|do_entropy|boolean|True|False|Evaluates the shannon entropy for both the base64 char set and hexadecimal char set for every blob of text greater than 20 characters comprised of those character sets in each diff|None|
 |custom_regexes|object|None|True|Ignores default regexes. Provide your own|None|
 |since_commit|string|None|False|Scan from a given commit hash|None|
 |max_depth|integer|1000000|False|Max commit depth to go back when searching for secrets|None|
@@ -90,7 +90,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -98,7 +98,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

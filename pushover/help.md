@@ -1,6 +1,8 @@
 # Description
 
-[Pushover](https://pushover.net) is a simple push notification service that integrates easily into web apps like IFTTT, network monitors like Nagios, shell scripts, servers, and anything else that needs to send alerts to your Android, iPhone, iPad, and Desktop. The Pushover plugin allows you to send Pushover notifications.
+[Pushover](https://pushover.net) is a simple push notification service that integrates easily into web apps 
+like IFTTT, network monitors like Nagios, shell scripts, servers, and anything else that needs to send alerts 
+to your Android, iPhone, iPad, and Desktop. The Pushover plugin allows you to send Pushover notifications.
 
 # Key Features
 
@@ -8,7 +10,7 @@
 
 # Requirements
 
-* A Pushover API token
+* Pushover API token
 
 # Documentation
 
@@ -20,7 +22,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|
 |token|credential_secret_key|None|True|App Token|None|
 
-The connection represents an 'app' in Pushover.  The key determins which 'source' it will be coming from.
+The connection represents an 'app' in Pushover.  The key determines which 'source' it will be coming from.
 
 ## Technical Details
 
@@ -63,7 +65,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

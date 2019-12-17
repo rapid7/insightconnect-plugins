@@ -17,7 +17,7 @@ tags:
 - sed for JSON
 - utilities
 hub_tags:
-  use_cases: [soar, data_utility]
+  use_cases: [data_utility]
   keywords: [jq, JSON, sed for JSON, utilities]
   features: []
 actions:

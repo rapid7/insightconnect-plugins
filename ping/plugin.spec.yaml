@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: ping
 title: Ping
-description: The Ping plugin is used to check for network connectivity and response times
+description: Check network connectivity and response times
 version: 1.0.3
 vendor: rapid7
 support: community
@@ -15,7 +15,7 @@ tags:
 - ping
 - network diagnostics
 hub_tags:
-  use_cases: [soar, data_utility]
+  use_cases: [data_utility]
   keywords: [ping, network diagnostics]
   features: []
 actions:

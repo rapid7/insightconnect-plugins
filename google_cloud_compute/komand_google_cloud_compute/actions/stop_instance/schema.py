@@ -99,14 +99,14 @@ class StopInstanceOutput(komand.Output):
     },
     "httpErrorMessage": {
       "type": "string",
-      "title": "Http Error Message",
-      "description": "If the operation fails, this field contains the http error message that was returned",
+      "title": "HTTP Error Message",
+      "description": "If the operation fails, this field contains the HTTP error message that was returned",
       "order": 15
     },
     "httpErrorStatusCode": {
       "type": "integer",
-      "title": "Http Error Status Code",
-      "description": "If the operation fails, this field contains the http error status code that was returned",
+      "title": "HTTP Error Status Code",
+      "description": "If the operation fails, this field contains the HTTP error status code that was returned",
       "order": 16
     },
     "id": {
@@ -148,13 +148,13 @@ class StopInstanceOutput(komand.Output):
     "region": {
       "type": "string",
       "title": "Region",
-      "description": "The url of the region where the operation resides",
+      "description": "The URL of the region where the operation resides",
       "order": 20
     },
     "selfLink": {
       "type": "string",
       "title": "Self Link",
-      "description": "Server-defined url for the resource",
+      "description": "Server-defined URL for the resource",
       "order": 9
     },
     "startTime": {
@@ -184,7 +184,7 @@ class StopInstanceOutput(komand.Output):
     "targetLink": {
       "type": "string",
       "title": "Target Link",
-      "description": "The url of the resource that the operation modifies",
+      "description": "The URL of the resource that the operation modifies",
       "order": 7
     },
     "user": {
@@ -205,7 +205,7 @@ class StopInstanceOutput(komand.Output):
     "zone": {
       "type": "string",
       "title": "Zone",
-      "description": "The url of the zone where the operation resides. Only available when performing per-zone operations",
+      "description": "The URL of the zone where the operation resides. Only available when performing per-zone operations",
       "order": 11
     }
   },

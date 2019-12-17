@@ -16,7 +16,7 @@ tags:
 - duo
 - auth
 hub_tags:
-  use_cases: [soar, soc_automation, application_security]
+  use_cases: [devops]
   keywords: [duo, auth]
   features: []
 connection:

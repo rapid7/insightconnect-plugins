@@ -1,7 +1,8 @@
 # Description
 
-RiskIQ's [PassiveTotal](https://www.passivetotal.org/) overcomes the challenges in discovering and proactively blocking malicious infrastructure.
-Using innovative techniques and research processes, PassiveTotal provides analysts with a single view into all the data they need.
+RiskIQ's [PassiveTotal](https://www.passivetotal.org/) overcomes the challenges in discovering and proactively 
+blocking malicious infrastructure. Using innovative techniques and research processes, 
+PassiveTotal provides analysts with a single view into all the data they need.
 
 # Key Features
 

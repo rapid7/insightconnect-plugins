@@ -1,6 +1,8 @@
 # Description
 
-[PagerDuty](https://www.pagerduty.com/) provides enterprise-grade incident management that helps you orchestrate the ideal response to create better customer, employee, and business value.
+[PagerDuty](https://www.pagerduty.com/) provides enterprise-grade incident management that helps you 
+orchestrate the ideal response to create better customer, employee, and business value. Use this plugin to manage users
+and incidents within workflows.
 The PagerDuty plugin makes requests to the V2 API.
 
 # Key Features
@@ -23,10 +25,6 @@ The connection configuration accepts the following parameters:
 |api_key|credential_secret_key|None|True|API Key|None|
 
 This plugin requires an API key or user token to authenticate to PagerDuty.
-
-There are 2 way to create API keys:
-
-#
 
 ## Technical Details
 
@@ -193,5 +191,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Connecting PagerDuty To Komand](https://komand.zendesk.com/hc/en-us/articles/115003012007)
 * [PagerDuty API V2](https://v2.developer.pagerduty.com/v2/page/api-reference)

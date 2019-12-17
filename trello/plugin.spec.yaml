@@ -15,7 +15,7 @@ tags:
 - trello
 - lists
 hub_tags:
-  use_cases: [soar, ]
+  use_cases: [application_management, remediation_management]
   keywords: [trello, lists]
   features: []
 connection:

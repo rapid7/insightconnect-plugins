@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
-description: This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network
+description: Interfaces with Microsofts Active Directory service to manage domains, users, and objects within a network
 version: 3.2.7
 vendor: rapid7
 support: rapid7
@@ -17,7 +17,7 @@ tags:
 - active directory
 - microsoft
 hub_tags:
-  use_cases: [soar, user_management, credential_management, policy_management, soc_automation, threat_detection_and_response]
+  use_cases: [user_management, credential_management, application_management, threat_detection_and_response]
   keywords: [ldap, active directory, microsoft]
   features: []
 types:
@@ -130,7 +130,7 @@ actions:
         default: 'true'
       user_principal_name:
         title: User Principal Name
-        description: The users principal name, e.g. jdoe@example.com
+        description: The users principal name, e.g. user@example.com
         type: string
         required: true
       additional_parameters:

@@ -63,7 +63,7 @@ class SearchInput(komand.Input):
         "name": {
           "type": "string",
           "title": "Name",
-          "description": "Name of parameter to seach on",
+          "description": "Name of parameter to search on",
           "order": 1
         },
         "value": {

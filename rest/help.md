@@ -1,37 +1,25 @@
 # Description
 
-The REST plugin to make it easy to integrate with RESTful services.
-
-[REST](https://en.wikipedia.org/wiki/Representational_state_transfer) is a means of communicating over HTTP using verbs and actions to represent operations performed over resources, held in remote locations. It's based off of a document put together by Roy Fielding.
-All actions take 2 pieces of configuration: a route, and an optional series of headers. Any headers set this way will overwrite the default ones in the connection.
-
-The route can include a query string and arguments as needed, or just be the remaining path, which will be appended to the base URL specified in the connection.
-Additionally, every action except GET will allow you specify a body as part of the request.
-
-All of the actions return the same set of data:
-
-* The response, parsed from JSON as an object if possible
-* The response, as a raw string of text
-* The status code
-* The response headers
+[REST](https://en.wikipedia.org/wiki/Representational_state_transfer), or REpresentational State Transfer, is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other. This plugin makes a DELETE, GET, PATCH, POST, or PUT request to the provided URI.
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Use DELETE to delete a resource identified by a URI
+* Use GET to read or retrieve a representation of a resource
+* Use PATCH to update or modify resources
+* Use POST to create new resources
+* Use PUT to update or replace resources
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Varies depending on the API the plugin is interacting with
+* A RESTFUL HTTP/HTTPS resource
 
 # Documentation
 
 ## Setup
 
-Configuring a REST connection requires an endpoint to hit, which includes the protocol (`http://` or `https://` should be explicitly set by the user).
-Additionally, you can set a series of default Headers for every request to use. This would be useful if every request needed to send an auth token along inside of a header, so you don't need to specify it in each individual action.
+Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/rest) for more details on how to configure this plugin.
 
 The connection configuration accepts the following parameters:
 
@@ -62,10 +50,10 @@ This action is used to make a PUT request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -123,10 +111,10 @@ This action is used to make a POST request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -184,10 +172,10 @@ This action is used to make a PATCH request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -241,10 +229,10 @@ This action is used to make a GET request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -284,10 +272,10 @@ This action is used to make a DELETE request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|int|False|None|
-|body_object|object|False|None|
-|body_string|string|False|None|
-|headers|object|False|None|
+|body_object|object|False|Response payload from the server as an object|
+|body_string|string|False|Response payload from the server as a string|
+|headers|object|False|Response headers from the server|
+|status|int|False|Status code of the response from the server|
 
 Example output:
 
@@ -328,7 +316,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -347,7 +335,7 @@ Any issues connecting to the remote service should be present in the log of the 
 * 2.0.0 - Update connection to handle SSL verification
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.4 - Bug fix for CI tool incorrectly uploading plugins
-* 0.1.3 - Fix post and put actions by using json argument instead of body
+* 0.1.3 - Fix post and put actions by using JSON argument instead of body
 * 0.1.2 - SSL bug fix in SDK
 * 0.1.1 - Update tags
 * 0.1.0 - Initial plugin
@@ -357,4 +345,4 @@ Any issues connecting to the remote service should be present in the log of the 
 ## References
 
 * [REST Architecture Style](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
-
+* [InsightConnect REST Plugin Guide](https://insightconnect.help.rapid7.com/docs/rest)

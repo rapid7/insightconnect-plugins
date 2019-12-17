@@ -1,11 +1,12 @@
 # Description
 
-[Markdown](https://en.wikipedia.org/wiki/Markdown) is lightweight markup language with plain text formatting syntax.
+[Markdown](https://en.wikipedia.org/wiki/Markdown) is a lightweight markup language with plain text formatting syntax.
 This plugin utilizes [pandoc](https://pandoc.org/) via [pypandoc](https://pypi.python.org/pypi/pypandoc/) to manipulate Markdown content.
 
 # Key Features
 
-* Convert from HTML to Markdown and vice-versa
+* Convert HTML to Markdown for simpler editing
+* Convert Markdown to HTML or PDF for formatted beautification
 
 # Requirements
 
@@ -15,7 +16,7 @@ _This plugin does not contain any requirements_
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -71,7 +72,7 @@ This action is used to convert Markdown to HTML.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -79,7 +80,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

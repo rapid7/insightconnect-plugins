@@ -16,7 +16,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -60,7 +60,7 @@ This action is used to remove duplicate items from an array of strings.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -68,7 +68,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -82,5 +82,4 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [Uniq](https://example.co://linux.die.net/man/1/uniq)
-
+* [Uniq](http://man7.org/linux/man-pages/man1/uniq.1.html)

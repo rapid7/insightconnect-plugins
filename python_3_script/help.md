@@ -1,33 +1,29 @@
 # Description
 
-The Python 3 Script plugin allows you to run Python 3 code. It includes Python 3.6.5 and its standard library as well as the following 3rd party libraries:
+[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.6.5 and its standard library as well as the following 3rd party libraries:
 
-* [requests 2.18.4](https://www.python-requests.org/en/master/)
+* [requests 2.18.4](https://requests.readthedocs.io/en/master/)
 * [maya 0.5.0](https://pypi.python.org/pypi/maya)
 * [lxml 4.2.2](http://lxml.de/)
 * [beautifulsoup 4.6.0](https://www.crummy.com/software/BeautifulSoup/)
 * [pyyaml 3.12](http://pyyaml.org/)
 * [records 0.5.2](https://github.com/kennethreitz/records)
 
-The Python 3 plugin also allows you to load custom modules via its connection parameters.
+The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
 
 # Key Features
 
-* Run Python 3 code
+* Run a Python 3 script to securely orchestrate, automate, and respond to (almost) anything
 
 # Requirements
 
 _This plugin does not contain any requirements._
 
-NOTE: Custom Python 3 modules can be loaded via connection parameters
-
 # Documentation
 
 ## Setup
 
-The `connection` component accepts `modules` and `timeout` inputs. The `modules` input should be a JSON list of third-party
-modules to install. Modules can be found on [PyPi.org](https://pypi.org/). The `timeout` input sets a timeout duration
-for the installation of these modules.
+Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script) for more details on how to configure this plugin.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -117,5 +113,4 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [Python 3 Language Reference](https://docs.python.org/3/reference/index.html)
-* [Python Script Plugin Tutorial](https://docs.komand.com/docs/python-script-plugin)
-
+* [InsightConnect Python Plugin Guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script)

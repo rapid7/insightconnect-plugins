@@ -106,7 +106,7 @@ This action is used to get list of indicators from the cloud node.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
