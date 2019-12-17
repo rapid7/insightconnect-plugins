@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sed
 title: Sed
 description: The Sed plugin allows you to run the GNU stream editor on strings and files
-version: 2.0.3
+version: 2.0.2
 vendor: rapid7
 support: community
 status: []
