@@ -1,6 +1,6 @@
 # Description
 
-[AbuseIPDB]() is a database of reported malicious IP addresses that are involved in malicious activity such as spamming, hack attempts, DDoS attacks, etc.
+[AbuseIPDB](https://www.abuseipdb.com) is a database of reported malicious IP addresses that are involved in malicious activity such as spamming, hack attempts, DDoS attacks, etc.
 
 This plugin utilizes the [AbuseIPDB API v2](https://docs.abuseipdb.com) to lookup and report malicious IP addresses.
 
