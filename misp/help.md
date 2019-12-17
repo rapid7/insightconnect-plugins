@@ -1,7 +1,7 @@
 # Description
 
 [MISP](http://www.misp-project.org/) is an open source threat sharing platform.
-This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.html) and leverages the [pymisp](https://github.com/CIRCL/PyMISP) library.
+This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.html) and leverages the [pymisp](https://github.com/MISP/PyMISP) library.
 
 # Key Features
 
@@ -742,5 +742,4 @@ _This plugin does not contain any troubleshooting information._
 
 * [MISP](http://www.misp-project.org/)
 * [MISP API](https://circl.lu/doc/misp/automation/index.html)
-* [pymisp](https://github.com/CIRCL/PyMISP)
-
+* [pymisp](https://github.com/MISP/PyMISP)
