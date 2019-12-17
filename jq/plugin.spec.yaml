@@ -4,7 +4,7 @@ products: [insightconnect]
 name: jq
 title: jq
 description: Send JSON data through jq
-version: 2.0.6
+version: 2.0.5
 vendor: rapid7
 support: rapid7
 status: []

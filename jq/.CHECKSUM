@@ -1,7 +1,7 @@
 {
-	"spec": "5bd3e2cbb86aaa3447183789c442b23c",
-	"manifest": "e134aa0d704b0915af4a1d74b5afcec9",
-	"setup": "3ae268c1b41d4c69001d973b953cc1e4",
+	"spec": "49a0a3ca658e3632d5a7a1cc45abe51f",
+	"manifest": "7130c7cc396e0d1a3aa16e2685b39799",
+	"setup": "b1dbb0364effac61bd3f14b935c40739",
 	"schemas": [
 		{
 			"identifier": "run_jq/schema.py",
