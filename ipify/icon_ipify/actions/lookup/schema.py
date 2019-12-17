@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Lookup Public IP Address of Komand Host"
+    DESCRIPTION = "Lookup the public IP address of an Insight Orchestrator host"
 
 
 class Input:
@@ -32,7 +32,7 @@ class LookupOutput(komand.Output):
     "address": {
       "type": "string",
       "title": "Public IP Address",
-      "description": "Public IP address of komand host",
+      "description": "Public IP address of Insight Orchestrator host",
       "order": 1
     }
   }
