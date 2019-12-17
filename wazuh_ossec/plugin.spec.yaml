@@ -314,7 +314,7 @@ actions:
         title: Sort
         type: string
         description: Sorts the collection by a field or fields (separated by comma).
-          Use +/- at the begining to ascending or descending order. Allowed sort fields
+          Use +/- at the beginning to ascending or descending order. Allowed sort fields
           are status, ip, id, and name
         required: false
       search:
@@ -582,7 +582,7 @@ actions:
         title: Sort
         type: string
         description: Sorts the collection by a field or fields (separated by comma).
-          Use +/- at the begining to ascending or descending order
+          Use +/- at the beginning to ascending or descending order
         required: false
       search:
         title: Search
@@ -795,7 +795,7 @@ actions:
         title: Sort
         type: string
         description: 'Sorts the collection by a field or fields (separated by comma).
-          Use +/- at the begining to ascending or descending order. Allowed sort fields:
+          Use +/- at the beginning to ascending or descending order. Allowed sort fields:
           status, oldDay, event, and readDay'
         required: false
       search:
@@ -919,7 +919,7 @@ actions:
         title: Sort
         type: string
         description: 'Sorts the collection by a field or fields (separated by comma).
-          Use +/- at the begining to ascending or descending order. Allowed sort fields:
+          Use +/- at the beginning to ascending or descending order. Allowed sort fields:
           group, user, file, modificationDate, scanDate, and size'
         required: false
       search:

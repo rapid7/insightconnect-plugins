@@ -88,5 +88,4 @@ Some web servers do not support cache control mechanisms, or do not use them pro
 
 ## References
 
-* [Handling Last-Modified and ETag](http://www.diveintopython.net/http_web_services/etags.html)
-
+_This plugin does not contain any references._

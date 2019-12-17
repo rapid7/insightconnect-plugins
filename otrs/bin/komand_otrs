@@ -6,7 +6,7 @@ from komand_otrs import connection, actions, triggers
 
 Name = 'OTRS'
 Vendor = 'rapid7'
-Version = '4.0.2'
+Version = '5.0.0'
 Description = 'Create and manage OTRS tickets'
 
 

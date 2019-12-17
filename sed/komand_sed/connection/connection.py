@@ -11,4 +11,4 @@ class Connection(komand.Connection):
         pass
 
     def test(self):
-        return {'Output': 'Success'}
+        pass
