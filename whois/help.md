@@ -7,8 +7,7 @@ The WHOIS plugin enables address and domain lookups in the WHOIS databases.
 
 # Key Features
 
-* Query for an address
-* Query for a URL
+* Perform a whois lookup for a provided IP address or domain to gain information on who is responsible for a domain or IP
 
 # Requirements
 

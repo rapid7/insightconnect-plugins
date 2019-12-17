@@ -5,7 +5,7 @@ Popular uses are to avoid rate limiting by a service or to wait for processing b
 
 # Key Features
 
-* Suspend workflow execution
+* Suspend workflow execution for a given number of seconds
 
 # Requirements
 

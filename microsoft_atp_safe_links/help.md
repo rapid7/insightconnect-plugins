@@ -8,7 +8,7 @@
 
 # Requirements
 
-* Microsoft ATP
+* Encoded Microsoft ATP Safe Link
 
 # Documentation
 

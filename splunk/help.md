@@ -1,19 +1,21 @@
 # Description
 
-[Splunk](https://www.splunk.com/) captures, indexes, and correlates real-time data in a searchable repository from which it can generate graphs, reports, alerts, dashboards, and visualizations.
-Splunk intends to make machine data accessible across an organization by identifying data patterns, providing metrics, diagnosing problems, and providing intelligence for business operations.
-The Splunk plugin allows you to interact with Splunk by hooking alerts to trigger Komand workflows, running additional searches, and even inserting data back into Splunk from a workflow.
+[Splunk](https://www.splunk.com/) captures, indexes, and correlates real-time data in a searchable repository from which it can generate graphs, reports, alerts, dashboards, and visualizations. This plugin allows you to interact with Splunk by hooking alerts to trigger InsightConnect workflows, run (saved) searches, retrieve search results, and even insert data back into Splunk from a workflow.
 
 # Key Features
 
-* Create, manage, and view the results of Splunk searches
-* Manage Splunk events
+* Run a search query to get the results from your Splunk instance
+* Display search results from a specified job
+* Run, Create, Delete, and List saved searches to store and rerun queries over time
+* List and Modify saved search properties to view and update your reusable queries
+* Get saved search job history to retrieve the history of a specified saved search
+* Insert events into an index to update your Splunk instance
 
 # Requirements
 
-* Splunk credentials
-* The Splunk API port
-* License type
+* Administrative credentials
+* Splunk host IP address or hostname
+* Splunk API port
 
 # Documentation
 

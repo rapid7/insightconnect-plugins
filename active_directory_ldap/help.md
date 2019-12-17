@@ -12,8 +12,8 @@
 
 # Requirements
 
-* Host name and port number
-* User name and password to authenticate
+* Host name and port number (the default TCP/UDP port for LDAP is 389)
+* Administrative credentials
 
 # Documentation
 

@@ -10,8 +10,8 @@
 
 # Requirements
 
-* User Name and Password
-* Jira server
+* Jira URL
+* Administrative credentials
 
 # Documentation
 
