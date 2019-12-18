@@ -3,9 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: tshark
 title: TShark
-description: "TShark is a tool for dumping and analyzing network traffic. With the TShark plugin for
-  Rapid7 InsightConnect, users can open PCAP data for further analysis and intel gathering"
-version: 1.0.2
+description: Open and explore PCAP data for further analysis and intel gathering
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -24,11 +23,11 @@ hub_tags:
 actions:
   run:
     title: Run
-    description: Run Tshark on a pcap
+    description: Run Tshark on a PCAP
     input:
       file:
-        title: Base64 Encoded Pcap
-        description: Base64 encoded pcap
+        title: Base64 Encoded PCAP
+        description: Base64 encoded PCAP
         type: bytes
         required: true
       options:

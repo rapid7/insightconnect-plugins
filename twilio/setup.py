@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='twilio-rapid7-plugin',
       version='1.0.2',
-      description='Twilio is a cloud communications platform for building SMS, Voice & Messaging applications on an API built for global scale. Users can send SMS using the Twilio plugin for Rapid7 InsightConnect',
+      description='Send SMS directly from a workflow using Twilio',
       author='rapid7',
       author_email='',
       url='',

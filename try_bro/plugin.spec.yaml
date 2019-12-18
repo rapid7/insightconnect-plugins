@@ -3,8 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: try_bro
 title: Try Bro
-description: "With the Try Bro plugin for Rapid7 InsightConnect, users can use a free instance of Bro Network Security
-  Monitor in the cloud. Users can upload PCAP files for analysis and get Bro logs"
+description: Upload PCAP files to an instance of Bro Network Security Monitor for analysis and access to Bro logs
 version: 1.0.2
 vendor: rapid7
 support: community

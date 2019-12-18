@@ -39,7 +39,7 @@ class Tweets(komand.Trigger):
 
         # Open and auto-close the file to create the cache file on very first start up
         with komand.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:
-            print("Run: Got or created cache file: {file}".format(file=cache_file))
+            self.logger("Run: Got or created cache file: {file}".format(file=cache_file))
 
         while True:
             self.logger.info("Run: Iterating main loop")
