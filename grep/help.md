@@ -1,6 +1,7 @@
 # Description
 
 The Grep InsightConnect plugin searches for a specified pattern in a string or a file by utilizing BusyBox grep. It calls `egrep` which supports extended regular expressions to improve pattern matching ability.
+It returns whether any matches were found, the number of matches found, and a string array of the matched lines.
 
 For example, here's a simple example of `egrep` from the command line:
 
@@ -39,13 +40,12 @@ This action is used to find patterns in a base64 encoded document.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|pattern|string|None|True|Pattern to match|None|
-|data|bytes|None|True|Base64 encoded text|None|
 |behavior|string|Default|False|Return entire matched lines or only matched pattern|['Default', 'Only matching']|
+|data|bytes|None|True|Base64 encoded text|None|
+|pattern|string|None|True|Pattern to match|None|
 
 ##### Output
 
-The plugin returns the the number of matches found, a string array of the matched lines, and whether any matches were found.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -74,13 +74,11 @@ This action is used to find patterns in a string.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|pattern|string|None|True|Pattern to match|None|
 |behavior|string|Default|False|Return entire matched lines or only matched pattern|['Default', 'Only matching']|
+|pattern|string|None|True|Pattern to match|None|
 |text|string|None|True|String to match|None|
 
 ##### Output
-
-The plugin returns the the number of matches found, a string array of the matched lines, and whether any matches were found.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
