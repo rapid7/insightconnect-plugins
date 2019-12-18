@@ -229,6 +229,7 @@ This action is used to add URLs to an event. This action returns `true` or `fals
 |comment|string|None|False|Attribute comment|None|
 |distribution|string|None|False|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |event|string|None|False|Event ID to append to|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 |urls|[]string|None|False|URLs to add|None|
 |proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 
@@ -340,9 +341,9 @@ This action is used to add email recipient to event. This action returns `true` 
 |----|----|-------|--------|-----------|----|
 |comment|string|None|True|Attribute comment|None|
 |distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
-|recipient|string|None|True|Recipient email address|None|
 |event|string|None|True|Event ID to append to|None|
 |proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
+|recipient|string|None|True|Recipient email address|None|
 
 ##### Output
 
@@ -370,9 +371,9 @@ This action is used to add email sender to event. This action returns `true` or 
 |----|----|-------|--------|-----------|----|
 |comment|string|None|True|Attribute comment|None|
 |distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
-|sender|string|None|True|Sender email address|None|
 |event|string|None|True|Event ID to append to|None|
 |proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
+|sender|string|None|True|Sender email address|None|
 
 ##### Output
 
@@ -401,6 +402,7 @@ This action is used to add email subject to event. This action returns `true` or
 |comment|string|None|True|Attribute comment|None|
 |distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
 |event|string|None|True|Event ID to append to|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 |subject|string|None|True|Email subject|None|
 |proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 
@@ -434,9 +436,9 @@ This action is used to receive events based on criteria.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|message|string|False|Message|
 |errors|[]string|False|Errors|
 |event|Event|False|Event|
+|message|string|False|Message|
 
 Example output:
 
@@ -535,14 +537,14 @@ This action is used to search for events.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|event|string|None|False|Search by event ID|None|
-|tag|string|None|False|Search by tag|None|
+|analysis|string|None|False|Search by analysis level|['Do not search on', 'Initial', 'Ongoing', 'Completed']|
 |date_from|string|None|False|Search after this date e.g. 2018-03-22|None|
 |date_until|string|None|False|Search before this date e.g. 2018-03-22|None|
+|event|string|None|False|Search by event ID|None|
 |organization|string|None|False|Search by organization|None|
-|threat_level|string|None|False|Search by threat level|['Do not search on', 'Undefined', 'Low', 'Medium', 'High']|
 |published|string|None|False|Search by if published|['Do not search on', 'True', 'False']|
-|analysis|string|None|False|Search by analysis level|['Do not search on', 'Initial', 'Ongoing', 'Completed']|
+|tag|string|None|False|Search by tag|None|
+|threat_level|string|None|False|Search by threat level|['Do not search on', 'Undefined', 'Low', 'Medium', 'High']|
 
 ##### Output
 
@@ -604,10 +606,10 @@ This action is used to add an attribute to an event.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|category|string|None|True|The attribute category e.g. external analysis, network activity|None|
 |comment|string|None|False|Optional comment to add to attribute|None|
 |event|string|None|True|ID of event to append to|None|
 |type_value|string|None|True|The Type of attribute e.g. URL, SHA256|None|
-|category|string|None|True|The attribute category e.g. external analysis, network activity|None|
 |value|string|None|True|The Value of the attribute e.g. for a URL https://malware.com|None|'
 
 ##### Output
@@ -726,8 +728,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.2 - New spec and help.md format for the Hub
-* 3.0.1 - Fix typo in plugin spec
+* 3.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Commented Explanation
 * 3.0.0 - Fixed issue where Add URLs, Add Context, Add Email Sender, Add Email Subject and Add Email Recipient actions sent requests as a proposal | Fixed an issue where the distribution list was set incorrectly within Add URLs, Add Context, Create an Event, Add Email Sender, Add Email Subject, Add Email Recipient actions
 * 2.0.0 - Updated to new credential types | Update `hostname` variable in Connection to `url`
 * 1.0.0 - Add trigger. Add actions: Add Attachment, Remove Tag, Search Events, Publish. Support web server mode

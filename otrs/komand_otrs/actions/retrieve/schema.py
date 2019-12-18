@@ -256,8 +256,8 @@ class RetrieveOutput(komand.Output):
             },
             "Disposition": {
               "type": "string",
-              "title": "Dispostion",
-              "description": "Dispostion",
+              "title": "Disposition",
+              "description": "Disposition",
               "order": 5
             },
             "FileID": {
@@ -312,8 +312,8 @@ class RetrieveOutput(komand.Output):
         },
         "Disposition": {
           "type": "string",
-          "title": "Dispostion",
-          "description": "Dispostion",
+          "title": "Disposition",
+          "description": "Disposition",
           "order": 5
         },
         "FileID": {
@@ -810,8 +810,8 @@ class RetrieveOutput(komand.Output):
                 },
                 "Disposition": {
                   "type": "string",
-                  "title": "Dispostion",
-                  "description": "Dispostion",
+                  "title": "Disposition",
+                  "description": "Disposition",
                   "order": 5
                 },
                 "FileID": {
@@ -866,8 +866,8 @@ class RetrieveOutput(komand.Output):
             },
             "Disposition": {
               "type": "string",
-              "title": "Dispostion",
-              "description": "Dispostion",
+              "title": "Disposition",
+              "description": "Disposition",
               "order": 5
             },
             "FileID": {

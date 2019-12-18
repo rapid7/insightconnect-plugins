@@ -1,7 +1,7 @@
 {
-	"spec": "56afd19440f72a98a8a6eb7e06c68824",
-	"manifest": "3cc5ad167b42f16f9b85448ad8f04d2e",
-	"setup": "edb379a1e3a168f46238371a22283947",
+	"spec": "d6792963f2f4f519c3a95d62bbc85409",
+	"manifest": "27d5be650ddc9647494f3a0e8d0bd57d",
+	"setup": "722b898ca50b0483442f6324ec7077f4",
 	"schemas": [
 		{
 			"identifier": "agent_add/schema.py",
@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "agents_get_all/schema.py",
-			"hash": "2cc5a693fcb6d138f18d6b1f4ee3c4ec"
+			"hash": "a56f657e2c5cf2644a428baefb046686"
 		},
 		{
 			"identifier": "manager_info/schema.py",
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "manager_logs/schema.py",
-			"hash": "597462b4e3e462aa13a5942fdbf5af94"
+			"hash": "e16e6a20a99cc9362aca76ddd4325ae9"
 		},
 		{
 			"identifier": "manager_logs_summary/schema.py",
@@ -61,7 +61,7 @@
 		},
 		{
 			"identifier": "rootcheck_database/schema.py",
-			"hash": "42114cad67a50cd4bb835c246566fd3b"
+			"hash": "33cf84a741c95f1d2c48d123b0615508"
 		},
 		{
 			"identifier": "rootcheck_delete/schema.py",
@@ -73,7 +73,7 @@
 		},
 		{
 			"identifier": "syscheck_database/schema.py",
-			"hash": "2c7f227b62816883b7e533dd1674250c"
+			"hash": "0c42e75baf95101c88a6b8ac07f7b371"
 		},
 		{
 			"identifier": "syscheck_delete/schema.py",

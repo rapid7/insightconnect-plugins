@@ -10,7 +10,8 @@
 
 # Requirements
 
-* BMC server 9.1.x
+* BMC Remedy ITSM 9.1.x
+* Microsoft SQL 2016
 * Username and password
 
 # Documentation
@@ -310,13 +311,13 @@ This action is used to close an Incident.
 |----|----|-------|--------|-----------|----|
 |incident_id|string|None|True|Incident ID|None|
 |resolution_description|string|None|True|A description of the resolution|None|
-|resolution_type|string|None|True|resolution type Closed, Resolved, Cancelled|['Closed', 'Resolved', 'Cancelled']|
+|resolution_type|string|Resolved|True|Resolution type of either `Closed`, `Resolved`, or `Cancelled`|['Closed', 'Resolved', 'Cancelled']|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|Will return true if successful|
+|incident|incident|False|Incident|
 
 Example output:
 
@@ -961,6 +962,7 @@ This action is used to update the status of an incident.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |incident_id|string|None|True|Incident ID|None|
+|resolution|string|None|False|A resolution to the incident. Required for Resolved or Closed|None|
 |status|string|None|True|Incident status e.g. Assigned, In Progress, Pending, Resolved, Closed, Cancelled|None|
 
 ##### Output
@@ -1133,7 +1135,7 @@ This trigger returns any new incidents found.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|description_query|string|None|False|Description query. Regex capable|None|
+|description_query|string|None|False|Regex-capable description query|None|
 |interval|integer|15|False|How often to poll for new incidents in seconds|None|
 
 ##### Output
@@ -1302,8 +1304,10 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-By default the API port is 8008.
-To configure the BMC server for API usage: https://docs.bmc.com/docs/ars9000/configuring-the-rest-api-529403222.html
+* By default the API port is 8008.
+* To configure the BMC server for API usage: https://docs.bmc.com/docs/ars9000/configuring-the-rest-api-529403222.html
+* All testing was done on BMC Remedy ITSM 9.1.5 with MS SQL 2016 as the database.
+* This plugin implements the BMC REST API
 
 # Version History
 

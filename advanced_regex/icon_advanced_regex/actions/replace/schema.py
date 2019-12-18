@@ -64,7 +64,7 @@ class ReplaceInput(komand.Input):
     "max_replace": {
       "type": "integer",
       "title": "Max Replace",
-      "description": "Max occurences to replace - if zero all will be replaced",
+      "description": "Max occurrences to replace - if zero all will be replaced",
       "default": 0,
       "order": 4
     },

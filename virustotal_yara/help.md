@@ -36,7 +36,7 @@ This action is used to scan a file using Yara.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]results|True|Results returned from the Yara analysis. byte information has been encoded to UTF-8|
+|results|[]results|True|Results returned from the Yara analysis. It is byte information, encoded to UTF-8|
 
 Example output:
 

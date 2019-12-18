@@ -39,8 +39,13 @@ This action can be used to retrieve intelligence information for a given payment
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|IP address to query|None|
+<<<<<<< HEAD
 |payment_processor|string|None|False|Payment process used for transaction|['none', 'adyen', 'altapay', 'amazon_payments', 'authorizenet', 'balanced', 'beanstream', 'bluepay', 'braintree', 'ccnow', 'chase_paymentech', 'cielo', 'collector', 'compropago', 'concept_payments', 'conekta', 'cuentadigital', 'dalpay', 'dibs', 'digital_river', 'ecomm365', 'elavon', 'epay', 'eprocessing_network', 'eway', 'first_data', 'global_payments', 'ingenico', 'internetsecure', 'intuit_quickbooks_payments', 'iugu', 'mastercard_payment_gateway', 'mercadopago', 'merchant_esolutions', 'mirjeh', 'mollie', 'moneris_solutions', 'nmi', 'openpaymx', 'optimal_payments', 'orangepay', 'other', 'pacnet_services', 'payfast', 'paygate', 'payone', 'paypal', 'payplus', 'paystation', 'paytrace', 'paytrail', 'payture', 'payu', 'payulatam', 'pinpayments', 'princeton_payment_solutions', 'psigate', 'qiwi', 'quickpay', 'raberil', 'rede', 'redpagos', 'rewardspay', 'sagepay', 'simplify_commerce', 'skrill', 'smartcoin', 'sps_decidir', 'stripe', 'telerecargas', 'towah', 'usa_epay', 'verepay', 'vindicia', 'virtual_card_services', 'vme', 'worldpay']|
 |payment_was_authorized|boolean|None|False|Payment authorized: true/false|None|
+=======
+|payment_processor|string|None|False|Payment process ued for transaction|['none', 'adyen', 'altapay', 'amazon_payments', 'authorizenet', 'balanced', 'beanstream', 'bluepay', 'braintree', 'ccnow', 'chase_paymentech', 'cielo', 'collector', 'compropago', 'concept_payments', 'conekta', 'cuentadigital', 'dalpay', 'dibs', 'digital_river', 'ecomm365', 'elavon', 'epay', 'eprocessing_network', 'eway', 'first_data', 'global_payments', 'ingenico', 'internetsecure', 'intuit_quickbooks_payments', 'iugu', 'mastercard_payment_gateway', 'mercadopago', 'merchant_esolutions', 'mirjeh', 'mollie', 'moneris_solutions', 'nmi', 'openpaymx', 'optimal_payments', 'orangepay', 'other', 'pacnet_services', 'payfast', 'paygate', 'payone', 'paypal', 'payplus', 'paystation', 'paytrace', 'paytrail', 'payture', 'payu', 'payulatam', 'pinpayments', 'princeton_payment_solutions', 'psigate', 'qiwi', 'quickpay', 'raberil', 'rede', 'redpagos', 'rewardspay', 'sagepay', 'simplify_commerce', 'skrill', 'smartcoin', 'sps_decidir', 'stripe', 'telerecargas', 'towah', 'usa_epay', 'verepay', 'vindicia', 'virtual_card_services', 'vme', 'worldpay']|
+|payment_was_authorized|boolean|None|False|Payment authorized\: true/false|None|
+>>>>>>> master
 |payment_decline_code|string|None|False|Payment decline code|None|
 
 ##### Output
@@ -161,7 +166,11 @@ This action can be used to retrieve intelligence information for all query items
 |shipping_phone_country_code|string|None|False|Country code for phone number|None|
 |order_currency|string|None|False|Currency code for the currency used|None|
 |billing_country|string|None|False|Two character country code|None|
+<<<<<<< HEAD
 |payment_was_authorized|boolean|None|False|Payment authorized: true/false|None|
+=======
+|payment_was_authorized|boolean|None|False|Payment authorized\: true/false|None|
+>>>>>>> master
 |billing_last_name|string|None|False|Last name in billing info|None|
 |user_id|string|None|False|ID associated with the end-user|None|
 |shipping_delivery_speed|string|None|False|Shipping Delivery Speed|['none', 'same_day', 'overnight', 'expedited', 'standard']|

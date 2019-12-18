@@ -48,7 +48,7 @@ This action is used to submit a file for analysis.
 Supported File Types:
 
 ```
-.exe, .scr, .lnk2, .dll, .sys, .ocx, .pdf, .doc,.docx, .docm, .dot, .dotx, .dotm, .xls,.xlsx, .xlsm, .xlt, .xltx, .xltm, .xlb, .xlsb, .iqy, .slk, .ppt,.pptx, .pptm, .pot, .potx, .potm .mpp, .accdb, .adn, .accdr, .accdt, .accda, .mdw, .accde, .ade, .mdb, .mda, .vsd, .vsdx, .vss, .vst, .vsw, .vdx, .vtx, .vsdx, .vsdm, .vssx, .vssm, .vstx, .vstm, .pub, .puz, .rtf, .url, .html, .htm, .hta, .swf, .msi, .bat, .vbs, .vbe, .js, .jse, .wsf, .jar, .class, .ps1
+.exe, .scr, .lnk2, .dll, .sys, .ocx, .pdf, .doc,.docx, .docm, .dot, .dotx, .dotm, .xls,.xlsx, .xlsm, .xlt, .xltx, .xltm, .xlb, .xlsb, .iqy, .slk, .ppt,.pptx, .pptm, .pot, .potx, .potm .mpp, .accdb, .and, .accdr, .accdt, .accda, .mdw, .accde, .ade, .mdb, .mda, .vsd, .vsdx, .vss, .vst, .vsw, .vdx, .vtx, .vsdx, .vsdm, .vssx, .vssm, .vstx, .vstm, .pub, .puz, .rtf, .url, .html, .htm, .hta, .swf, .msi, .bat, .vbs, .vbe, .js, .jse, .wsf, .jar, .class, .ps1
 ```
 
 ##### Output

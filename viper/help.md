@@ -539,6 +539,7 @@ This action is used to list malware for this project.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|malware|[]Malware|True|List of malware|
 
 ```
 {
