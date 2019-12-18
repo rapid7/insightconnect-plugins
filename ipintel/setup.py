@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name='ipintel-rapid7-plugin',
-      version='1.0.1',
-      description='An IP address lookup tool for the DFIR field',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="ipintel-rapid7-plugin",
+      version="1.0.1",
+      description="Retrieve location and threat related details for an IP address using IPIntel",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_ipintel']
+      scripts=['bin/icon_ipintel']
       )

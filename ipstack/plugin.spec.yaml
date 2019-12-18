@@ -87,7 +87,7 @@ actions:
         required: false
         description: Time zone
       zip_code:
-        title: Zip Code
+        title: ZIP Code
         type: string
         required: false
-        description: Zip code
+        description: ZIP code

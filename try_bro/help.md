@@ -42,7 +42,7 @@ This action is used to retrieve Bro logs from an analysis by its ID.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|files|files|False|None|
+|files|files|False|Bro Log Files|
 
 #### Upload PCAP
 
@@ -53,16 +53,16 @@ The analysis URL and ID is returned.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|version|string|None|False|None|['master', '1.5', '2.1', '2.2', '2.3.1', '2.3.2', '2.4', '2.4.1']|
 |pcap|bytes|None|True|Base64 encoded PCAP file|None|
 |scripts|[]bytes|None|False|Base64 encoded Bro Scripts|None|
+|version|string|master|False|Bro Version|['master', '1.5', '2.1', '2.2', '2.3.1', '2.3.2', '2.4', '2.4.1', '2.5', '2.5.1']|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|url|string|False|None|
-|id|string|False|None|
+|id|string|False|Job ID|
+|url|string|False|URL|
 
 ### Triggers
 

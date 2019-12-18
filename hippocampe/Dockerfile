@@ -26,4 +26,4 @@ RUN python setup.py build && python setup.py install
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/komand_hippocampe"]
+ENTRYPOINT ["/usr/local/bin/icon_hippocampe"]

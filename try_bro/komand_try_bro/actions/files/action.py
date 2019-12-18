@@ -30,5 +30,5 @@ class Files(komand.Action):
         server = self.connection.server
         res = requests.get(server)
         if res.status_code != 200:
-          Exception('Test: Unsuccessful HTTP status code returned')
+          raise Exception('Test: Unsuccessful HTTP status code returned')
         return {}

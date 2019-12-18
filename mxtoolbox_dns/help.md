@@ -200,6 +200,5 @@ test for the existence of a value if it's needed later in the workflow.
 
 ## References
 
-* [Example](https://example.com)
-* [Example API](http://docs.example.com)
-
+* [MXToolBox](https://mxtoolbox.com/)
+* [MXToolBox API](https://mxtoolbox.com/c/products/mxtoolboxapi)

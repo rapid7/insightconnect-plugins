@@ -8,7 +8,7 @@ version: 2.0.1
 vendor: rapid7
 support: community
 status: []
-tags: [ "binary", "analysis", "malware", "viper" ]
+tags: ["binary", "analysis", "malware", "viper"]
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [binary, analysis, malware, viper]

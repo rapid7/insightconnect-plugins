@@ -1,7 +1,7 @@
 {
-	"spec": "8fb676c8d129bf3a0c14e32eb38457dd",
-	"manifest": "77d694b1081bbb604b9f44a03e47512f",
-	"setup": "065447839fb2905651155b44d8fbf6ac",
+	"spec": "028b75ec5a56e650ab39c29132b98f13",
+	"manifest": "0922a5573a843ecbc112907c0c0bcd62",
+	"setup": "f88aec7830db83495039b90ea8f1d41d",
 	"schemas": [
 		{
 			"identifier": "add_fixed_address/schema.py",
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "add_host/schema.py",
-			"hash": "fbeda23e6277b71e3e7e755dd12f7e2f"
+			"hash": "52f93ef739634319d2acc223435dc295"
 		},
 		{
 			"identifier": "delete_host/schema.py",

@@ -745,5 +745,4 @@ _This plugin does not contain any troubleshooting information._
 
 * [MISP](http://www.misp-project.org/)
 * [MISP API](https://circl.lu/doc/misp/automation/index.html)
-* [pymisp](https://github.com/CIRCL/PyMISP)
-
+* [pymisp](https://github.com/MISP/PyMISP)

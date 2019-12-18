@@ -6,7 +6,7 @@ title: Hybrid Analysis
 vendor: rapid7
 support: community
 status: []
-description: The Hybrid Analysis plugin allows you to lookup file hashes to find out if they are malicious
+description: Lookup file hashes to determine if they are malicious
 version: 2.0.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/hybrid_analysis
@@ -117,6 +117,7 @@ connection:
     required: true
 actions:
   lookup_hash:
+    title: Lookup Hash
     description: Lookup By Hash
     input:
       hash:

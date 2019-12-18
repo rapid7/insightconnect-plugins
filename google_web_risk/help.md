@@ -32,10 +32,10 @@ This action is used to lookup a URL in Web Risk Service.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|threat_type_malware|boolean|true|false|Check if URL is of 'malware' threat|None|
-|threat_type_social|boolean|true|false|Check if URL is of 'social engineering/phishing' threat|None|
-|threat_type_unwanted|boolean|true|false|Check if URL is of 'unwanted software' threat|None|
-|url|string|None|true|URL to lookup|None|
+|threat_type_malware|boolean|True|False|Check if URL is of 'malware' threat|None|
+|threat_type_social|boolean|True|False|Check if URL is of 'social engineering/phishing' threat|None|
+|threat_type_unwanted|boolean|True|False|Check if URL is of 'unwanted software' threat|None|
+|url|string|None|True|URL to lookup|None|
 
 ##### Output
 

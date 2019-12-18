@@ -32,21 +32,21 @@ This action is used to trace a route to a host. It returns the route used to com
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |count|integer|3|True|The number of probes to be sent to each hop. The default is 3|None|
-|max_ttl|integer|30|True|Set the maximum TTL used in outgoing packets. The default is 30|None|
 |host|string|None|True|The domain name or IP of the the host to find a route to|None|
-|resolve_hostname|boolean|True|True|If true Traceroute will attempt to return a DNS name rather than an IP address. If false Traceroute will always return the IP address|None|
-|set_ack|boolean|False|True|If True set the TCP ACK flag in outgoing packets. By doing so, it is possible to trace through stateless firewalls which permit outgoing TCP connections|None|
+|max_ttl|integer|30|True|Set the maximum TTL used in outgoing packets. The default is 30|None|
+|port|integer|80|True|Set the port that traceroute will try to reach e.g. set it to port 443 for a host running an HTTPS server. The default is 80|None|
+|resolve_hostname|boolean|True|True|If true traceroute will attempt to return a DNS name rather than an IP address. If false, traceroute will always return the IP address|None|
+|set_ack|boolean|False|True|If true set the TCP ACK flag in outgoing packets. By doing so, it is possible to trace through stateless firewalls which permit outgoing TCP connections|None|
 |time_out|integer|3|True|Set the timeout, in seconds, to wait for a response for each probe. The default is 3|None|
-|port|integer|80|True|Set the port that Traceroute will try to reach default 80 eg set it to port 25 for a host that is running a mail server|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ip|[]string|False|A list of all IP address along the path|
-|path|[]string|False|The path used to get to the host including response times|
-|response|string|False|The full raw response from tracerout|
-|reply|boolean|True|Traceroute found a route to the host|
+|ip|[]string|True|IP addresses|
+|path|[]string|True|The path used to get to the host including response times|
+|reply|boolean|True|Whether a route was found to the host|
+|response|string|True|The full raw response from traceroute|
 
 Example output:
 

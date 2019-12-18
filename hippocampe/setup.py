@@ -4,11 +4,11 @@ from setuptools import setup, find_packages
 
 setup(name='hippocampe-rapid7-plugin',
       version='1.0.1',
-      description='The Hippocampe plugin allows for advanced queries and management of your Hippocampe feeds',
+      description='Query against and manage your Hippocampe feeds',
       author='rapid7',
       author_email='',
       url='',
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_hippocampe']
+      scripts=['bin/icon_hippocampe']
       )

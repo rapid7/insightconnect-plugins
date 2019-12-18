@@ -22,4 +22,4 @@ RUN python setup.py build && python setup.py install
 # needed for SSL
 USER root
 
-ENTRYPOINT ["/usr/local/bin/komand_html"]
+ENTRYPOINT ["/usr/local/bin/icon_html"]
