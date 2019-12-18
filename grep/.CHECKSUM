@@ -1,13 +1,7 @@
 {
-<<<<<<< HEAD
 	"spec": "7c14bb570b47947fbce055fc07983f69",
-	"manifest": "5625873059a0bba4f3572c61664f3aac",
-	"setup": "320981f2d4f7246ed8bf3a127c7d000e",
-=======
-	"spec": "815ebd789cb291c8e2d66c7d3494906e",
-	"manifest": "d591b9d9fd39a4fe35fe5edacf7bd112",
-	"setup": "6561357623c56fa51cd3f9e9ec314545",
->>>>>>> master
+	"manifest": "10922253fed96f1f55f2d40d99868d91",
+	"setup": "aa0d0ffe741094c0e114bbd14cb7ac9f",
 	"schemas": [
 		{
 			"identifier": "match_base64/schema.py",
