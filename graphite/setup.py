@@ -4,11 +4,11 @@ from setuptools import setup, find_packages
 
 setup(name='graphite-rapid7-plugin',
       version='1.0.1',
-      description='The Graphite plugin allows you to store, retrieve, and update your metrics. The plugin will also return a byte array of graphed data',
+      description='Store, retrieve, and update metrics in Graphite',
       author='rapid7',
       author_email='',
       url='',
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_graphite']
+      scripts=['bin/icon_graphite']
       )

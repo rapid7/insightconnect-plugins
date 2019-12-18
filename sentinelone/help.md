@@ -4,7 +4,7 @@
 
 [SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint. The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne.
 
-This plugin utilizes the [SentinelOne API](https://usea1-partners.sentinelone.net/apidoc/)
+This plugin utilizes the SentinelOne API..
 
 # Key Features
 
@@ -930,7 +930,7 @@ Example output:
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -944,6 +944,3 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [SentinelOne Product Page](https://www.sentinelone.com/)
-* [SentinelOne API](https://usea1-partners.sentinelone.net/apidoc/)
-
-

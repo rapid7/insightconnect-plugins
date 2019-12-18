@@ -486,7 +486,7 @@ triggers:
         required: false
       interval:
         type: integer
-        description: How often recieve new issues
+        description: How often receive new issues
         required: false
     output:
       issue:

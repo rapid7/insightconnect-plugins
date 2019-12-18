@@ -1,6 +1,6 @@
 # Description
 
-The Advanced Regex InsightConnect plugin performs regex operations on a string using Python regex.
+The Advanced Regex plugin is used to extract or manipulate targeted text using regular expressions operations on a string using Python specific regex.
 
 # Key Features
 
@@ -67,7 +67,7 @@ This action is used to regex search and replace string.
 |ignorecase|boolean|False|False|Make regex non-case sensitive|None|
 |in_regex|string|None|True|Regex to match|None|
 |in_string|string|None|True|Input string|None|
-|max_replace|integer|0|False|Max occurences to replace - if zero all will be replaced|None|
+|max_replace|integer|0|False|Max occurrences to replace - if zero all will be replaced|None|
 |multiline|boolean|False|False|Make begin/end consider each line|None|
 |replace_string|string|None|True|The string to replace matches with|None|
 

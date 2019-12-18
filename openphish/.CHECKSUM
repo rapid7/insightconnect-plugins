@@ -1,7 +1,7 @@
 {
-	"spec": "ee8a7d5d8ebfb1c9f1dee1ed22d0f1bb",
-	"manifest": "5866120ffac68936da49d855ddf8bb7a",
-	"setup": "b7f0b36e6e931e1536e981a717457386",
+	"spec": "d3dcf8f49ac93e61525dedc4fa063df2",
+	"manifest": "6b9b042f8a48df15690b54ef7ff0594b",
+	"setup": "eea03ac0522657615c5e31a7ec92eda3",
 	"schemas": [
 		{
 			"identifier": "check_url_reputation/schema.py",

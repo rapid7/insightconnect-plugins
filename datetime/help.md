@@ -1,11 +1,11 @@
 # Description
 
-The Datetime InsightConnect plugin manipulate timestamps using Python's [Maya](https://pypi.org/project/maya/) library.
+Timestamps, timezones, and Datetimes can be difficult to work with, especially when dealing with different locales on different systems. The Datetime InsightConnect plugin manipulates timestamps using Python's [Maya](https://pypi.org/project/maya/) library, which makes the simple things much easier while admitting that time is an illusion (timezones doubly so).
 
 # Key Features
 
 * Convert a Datetime to an Epoch and vice versa
-* Convert a Datetime to specified format
+* Convert a Datetime to a specified format
 * Determine the elapsed time between two dates
 
 # Requirements
@@ -16,7 +16,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -199,7 +199,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -207,7 +207,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

@@ -1,8 +1,8 @@
 # Description
 
-The Python plugin allows you to run Python 2 code. It includes Python 2.7.15 and its standard library as well as the following 3rd party libraries:
+[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 2 code. It includes Python 2.7.15 and its standard library as well as the following 3rd party libraries:
 
-* [requests 2.18.4](https://www.python-requests.org/en/master/)
+* [requests 2.18.4](https://requests.readthedocs.io/en/master/)
 * [maya 0.5.0](https://pypi.python.org/pypi/maya)
 * [lxml 4.2.2](http://lxml.de/)
 * [beautifulsoup 4.6.0](https://www.crummy.com/software/BeautifulSoup/)
@@ -11,7 +11,7 @@ The Python plugin allows you to run Python 2 code. It includes Python 2.7.15 and
 
 # Key Features
 
-* Run Python 2 code
+* Run a Python 2 script to securely orchestrate, automate, and respond to (almost) anything
 
 # Requirements
 
@@ -20,6 +20,8 @@ _This plugin does not contain any requirements._
 # Documentation
 
 ## Setup
+
+Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script) for more details on how to configure this plugin.
 
 This plugin does not contain a connection.
 
@@ -93,5 +95,4 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [Komand Python Plugin](https://komand.zendesk.com/hc/en-us/articles/115000571528)
-
+* [InsightConnect Python Plugin Guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script)

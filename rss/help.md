@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-This plugin does not contain any actions.
+_This plugin does not contain any actions._
 
 ### Triggers
 

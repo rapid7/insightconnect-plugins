@@ -1,11 +1,11 @@
 {
-	"spec": "b36419778a301831635afe16c9becc1a",
-	"manifest": "82b5a2043313aa7d436ba483bf0c4ea4",
-	"setup": "9e9733a8c14f54ac807ac2102de5734b",
+	"spec": "66f2082c9a5232bd135f91d79e2f0fbd",
+	"manifest": "f7699a6d0b8dd65b112de68e0b142c48",
+	"setup": "2f3f77d2af8b921771e43b75498f673b",
 	"schemas": [
 		{
 			"identifier": "lookup_domain/schema.py",
-			"hash": "0c3ad78edd1dd284fc54426e7f9489e8"
+			"hash": "9ad141e078997ec2d4b87b4a60ae6da5"
 		},
 		{
 			"identifier": "lookup_password/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "lookup_user/schema.py",
-			"hash": "7fdc64c7af271571a868aa5f3f87417c"
+			"hash": "194f656d595536883dc1088b2104f164"
 		},
 		{
 			"identifier": "connection/schema.py",

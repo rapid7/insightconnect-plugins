@@ -1,14 +1,14 @@
 # Description
 
-The Screenshot Machine plugin allows you to capture screenshots using the [Screenshot Machine](https://screenshotmachine.com/) API. This can be used to capture screenshots as part of intelligence gathering. 
+[Screenshot Machine](https://screenshotmachine.com/) is self-described as, "The most user-friendly website screenshot generator ever." This plugin provides the ability to take a screenshot of a provided URL.
 
 # Key Features
 
-* Capture screenshots
+* Capture screenshots of a URL to save an image of the webpage
 
 # Requirements
 
-* ScreenshotMachine API key and secret
+* Screenshot Machine API key
 
 # Documentation
 

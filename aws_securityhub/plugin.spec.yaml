@@ -4,7 +4,7 @@ products: [insightconnect]
 name: aws_securityhub
 title: "AWS Security Hub"
 description: This plugin utilizes AWS Security Hub to lists and describes security hub-aggregated findings and retrieve SQS messages
-version: 1.0.1
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -623,12 +623,12 @@ types:
       required: false
   ResponseMetadata:
     HTTPHeaders:
-      title: Http Headers
+      title: HTTP Headers
       type: HTTPHeaders
       description: HTTP headers
       required: false
     HTTPStatusCode:
-      title: Http Status Code
+      title: HTTP Status Code
       type: integer
       description: HTTP status code
       required: false
@@ -707,9 +707,9 @@ types:
       required: false
   SHRecommendation:
     Url:
-      title: "Url"
+      title: "URL"
       type: string
-      description: "Url"
+      description: "URL"
       required: false
     Text:
       title: "Text"
@@ -986,7 +986,7 @@ triggers:
         required: true
       AttributeNames:
         title: Attribute Names
-        description: A list of attributes that need to be returned along with each message ['All','Policy','VisibilityTimeout','MaximumMessageSize','MessageRetentionPeriod','ApproximateNumberOfMessages','ApproximateNumberOfMessagesNotVisible','CreatedTimestamp','LastModifiedTimestamp','QueueArn','ApproximateNumberOfMessagesDelayed','DelaySeconds','ReceiveMessageWaitTimeSeconds','RedrivePolicy','FifoQueue','ContentBasedDeduplication','KmsMasterKeyId','KmsDataKeyReusePeriodSeconds']
+        description: A list of attributes that need to be returned along with each message ['All', 'Policy', 'VisibilityTimeout', 'MaximumMessageSize', 'MessageRetentionPeriod', 'ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible', 'CreatedTimestamp', 'LastModifiedTimestamp', 'QueueArn', 'ApproximateNumberOfMessagesDelayed', 'DelaySeconds', 'ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds']
         type: "[]string"
         required: false
         default: ["All"]

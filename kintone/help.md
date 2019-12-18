@@ -1,10 +1,10 @@
 # Description
 
-[Kintone](https://www.kintone.com/) allows for custom workflows and data management for businesses and non-profits in one place.
+[Kintone](https://www.kintone.com/) is a cloud-based, no-code business application development and deployment platform that provides communication, data, and business process management in one portal. This plugin uses the [Kintone API](https://developer.kintone.io/hc/en-us) to create and get record information.
 
 # Key Features
 
-* Store and retrieve data
+* Create and retrieve record data
 
 # Requirements
 

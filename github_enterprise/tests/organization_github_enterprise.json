@@ -3,8 +3,8 @@
         "action": "organization",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
             "host": null
         },

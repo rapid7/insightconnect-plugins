@@ -7,14 +7,12 @@ This plugin utilizes the [Salesforce API](https://developer.salesforce.com/docs/
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Search Salesforce records
+* Update Salesforce records
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* A Salesforce account and API token
 
 # Documentation
 
@@ -343,7 +341,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -351,7 +349,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
