@@ -68,7 +68,7 @@ class RootcheckDatabaseInput(komand.Input):
     "sort": {
       "type": "string",
       "title": "Sort",
-      "description": "Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order. Allowed sort fields: status, oldDay, event, and readDay",
+      "description": "Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order. Allowed sort fields: status, oldDay, event, and readDay",
       "order": 4
     }
   },

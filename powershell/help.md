@@ -1,27 +1,21 @@
 # Description
 
-PowerShell is a task automation and configuration management framework from Microsoft, consisting of a command-line 
-shell and associated scripting language.
-
-This plugin runs a PowerShell script on a remote host or locally on an InsightConnect Orchestrator.
+[PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-6) is a task-based command-line shell and scripting language from Microsoft that helps system administrators, power-users, and InsightConnect customers rapidly automate tasks that manage operating systems and processes. This plugin runs a PowerShell script on a remote host or locally on an InsightConnect Orchestrator.
 
 # Key Features
 
-* Run a PowerShell script
+* Run a PowerShell script to manage (remote) computers from the command line
 
 # Requirements
 
-Requirements vary depending on the use case. PowerShell scripts can either be run locally on an 
-InsightConnect Orchestrator or remotely on a PowerShell-enabled server.
-
-For remote runs, a PowerShell-enabled server and administrative credentials to that server are required.
-
-For local runs, ensure connectivity to any network resources the PowerShell script will use. 
-Typically this involves opening ports in your firewall or windows servers.
+* For local Orchestrator execution, ensure connectivity to any network resources the script will use
+* For remote server execution, a PowerShell-enabled server annd administrative credentials
 
 # Documentation
 
 ## Setup
+
+Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/mass-delete-with-powershell) for more details on how to configure this plugin.
 
 The connection configuration accepts the following parameters:
 
@@ -170,4 +164,4 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 * [samba-common](https://packages.debian.org/sid/samba-common)
 * [krb5-user](https://packages.debian.org/search?keywords=krb5-user)
 * [realmd](https://packages.debian.org/jessie/admin/realmd)
-
+* [InsightConnect Powershell Plugin Guide](https://insightconnect.help.rapid7.com/docs/mass-delete-with-powershell)

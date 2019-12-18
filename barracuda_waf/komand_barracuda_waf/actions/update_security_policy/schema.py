@@ -66,7 +66,7 @@ class UpdateSecurityPolicyInput(komand.Input):
     "url_protection": {
       "$ref": "#/definitions/url_protection",
       "title": "Url Protection",
-      "description": "Configuration of url protection",
+      "description": "Configuration of URL protection",
       "order": 4
     }
   },
@@ -191,7 +191,7 @@ class UpdateSecurityPolicyInput(komand.Input):
         "fileUploadMimeTypes": {
           "type": "array",
           "title": "FileUploadMimeTypes",
-          "description": "The Mime types to be allowed as uploaded files",
+          "description": "The MIME types to be allowed as uploaded files",
           "items": {
             "type": "string"
           },
@@ -339,7 +339,7 @@ class UpdateSecurityPolicyInput(komand.Input):
         "parameter_separators": {
           "type": "string",
           "title": "Parameter Separators",
-          "description": "The url-decoded parameter separator to be used",
+          "description": "The URL-decoded parameter separator to be used",
           "order": 1
         }
       }

@@ -4,11 +4,11 @@ from setuptools import setup, find_packages
 
 setup(name='hipchat-rapid7-plugin',
       version='1.0.1',
-      description='The HipChat plugin can send and receive messages along with managing users',
+      description='Send and receive messages along with managing users in Hipchat',
       author='rapid7',
       author_email='',
       url='',
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_hipchat']
+      scripts=['bin/icon_hipchat']
       )

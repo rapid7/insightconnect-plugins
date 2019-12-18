@@ -191,5 +191,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Connecting PagerDuty To Komand](https://komand.zendesk.com/hc/en-us/articles/115003012007)
 * [PagerDuty API V2](https://v2.developer.pagerduty.com/v2/page/api-reference)

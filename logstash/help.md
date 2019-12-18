@@ -136,6 +136,5 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Logstash monitoring API](https://www.elastic.co/guide/en/logstash/current/monitoring.html).
+* [Logstash monitoring API](https://www.elastic.co/guide/en/logstash/current/monitoring-logstash.html).
 * [Logstash](https://www.elastic.co/products/logstash)
-

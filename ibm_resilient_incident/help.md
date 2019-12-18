@@ -1,6 +1,6 @@
 # Description
 
-[IBM Resilient](https://www.resilientsystems.com/) is an incident response, orchestration, and automation tool.
+[IBM Resilient](https://www.ibm.com/security/intelligent-orchestration/resilient) is an incident response, orchestration, and automation tool.
 
 # Key Features
 
@@ -42,7 +42,7 @@ This action is used to get an individual incident.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|incident|FullIncidentDataDTO|False|None|
+|incident|FullIncidentDataDTO|False|Incident|
 
 Example output:
 
@@ -164,7 +164,7 @@ This action is used to create an incident.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|incident|FullIncidentDataDTO|False|None|
+|incident|FullIncidentDataDTO|False|Incident|
 
 Example output:
 
@@ -271,7 +271,7 @@ This action is used to create a new artifact on an incident.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|artifact|IncidentArtifactDTO|False|None|
+|artifact|IncidentArtifactDTO|False|Artifact|
 
 Example output:
 
@@ -337,7 +337,7 @@ This action is used to save changes to an artifact.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|artifact|IncidentArtifactDTO|False|None|
+|artifact|IncidentArtifactDTO|False|Artifact|
 
 Example output:
 
@@ -401,7 +401,7 @@ This action is used to get the list of tasks for the incident.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|tasks|[]TaskDTO|False|None|
+|tasks|[]TaskDTO|False|Tasks|
 
 Example output:
 
@@ -476,7 +476,7 @@ This action is used to get the list of artifacts associated with the specified i
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|artifacts|[]IncidentArtifactDTO|False|None|
+|artifacts|[]IncidentArtifactDTO|False|Artifacts|
 
 Example output:
 
@@ -531,7 +531,7 @@ This action is used to patch a single incident.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|patch_status|PatchStatusDTO|False|None|
+|patch_status|PatchStatusDTO|False|Patch status|
 
 Example output:
 
@@ -559,7 +559,7 @@ This action is used to query for incidents.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|incidents|[]PartialIncidentDTO|False|None|
+|incidents|[]PartialIncidentDTO|False|Incidents|
 
 Example output:
 
@@ -667,7 +667,7 @@ This action is used to get history about an incident.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|incident_history|IncidentHistoryDTO|False|None|
+|incident_history|IncidentHistoryDTO|False|Incident history|
 
 Example output:
 
@@ -719,7 +719,7 @@ This action is used to delete an incident.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|StatusDTO|False|None|
+|status|StatusDTO|False|Status|
 
 Example output:
 
@@ -748,7 +748,7 @@ This action is used to get a list of open and closed incidents.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|incidents|[]IncidentDTO|False|None|
+|incidents|[]IncidentDTO|False|Incidents|
 
 Example output:
 
@@ -857,7 +857,7 @@ This action is used to delete an artifact.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|StatusDTO|False|None|
+|status|StatusDTO|False|Status|
 
 Example output:
 
@@ -888,7 +888,7 @@ This action is used to retrieve a specific incident artifact.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|artifact|IncidentArtifactDTO|False|None|
+|artifact|IncidentArtifactDTO|False|Artifact|
 
 Example output:
 
@@ -941,7 +941,7 @@ This action is used to add a custom task to the incident.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|identifier|number|False|None|
+|identifier|number|False|Identifier|
 
 Example output:
 
@@ -976,6 +976,4 @@ For actions that take a JSON object as input, Resilient will sometimes throw an 
 
 ## References
 
-* [API Documentation](http://your-resilient-hostname/docs/rest-api/index.html)
-* [Interactive REST API](http://your-resilient-hostname/docs/rest-api/ui/index.html)
-
+* [IBM Resilient](https://www.ibm.com/security/intelligent-orchestration/resilient)
