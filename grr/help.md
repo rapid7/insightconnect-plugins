@@ -9,7 +9,7 @@ This plugin utilizes the [GRR Python library](https://github.com/google/grr/tree
 # Key Features
 
 * Organize GRR clients
-* Start a hung
+* Start a hunt
 
 # Requirements
 
@@ -67,7 +67,7 @@ This action is used to find and list clients based on a search query.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hunt_approvals|boolean|None|False|List hunt approvals|None|
-|query|string|None|True|Query to search for (e.g. 'host\:suspicious.corp.com')|None|
+|query|string|None|True|Query to search for (e.g. 'host:suspicious.corp.com')|None|
 |hunts|boolean|None|False|List hunts|None|
 |clients|boolean|None|False|Search clients|None|
 |grr_binaries|boolean|None|False|List GRR binaries|None|
@@ -192,19 +192,19 @@ This action is used to start a hunt on clients.
 |convert_values|boolean|None|False|If true, convert values for export-friendly format|None|
 |match_mode|string|None|False|Match mode to trigger this hunt|['MATCH_ALL', 'MATCH_ANY']|
 |connection_states|[]string|None|False|Network connection states to match. If a process has any network connections in any status listed here, it will be considered a match|['UNKNOWN', 'CLOSED', 'LISTEN', 'SYN_SENT', 'SYN_RECV', 'ESTABLISHED', 'FIN_WAIT1', 'FIN_WAIT2', 'CLOSE_WAIT', 'CLOSING', 'LAST_ACK', 'TIME_WAIT', 'DELETE_TCB', 'NONE', 'CLOSE']|
-|cpu_limit|integer|None|False|A limit on the client cpu seconds used by this flow|None|
+|cpu_limit|integer|None|False|A limit on the client CPU seconds used by this flow|None|
 |operator|string|None|False|Operator|['EQUAL', 'LESS_THAN', 'GREATER_THAN']|
 |flow_args|boolean|False|False|Enable high signal regex checks|None|
 |attribute_regex|string|None|False|The regular expression|None|
 |regex|boolean|None|False|Use a regular expression to trigger this hunt|None|
 |grep_users|string|None|False|A list of users to check. Default all users on the system|None|
 |expiry_time|integer|None|False|Expiry time for the hunt|None|
-|export_files_contents|boolean|None|False|If this is true, open files and export their full or partial contents. Note\: this may require additional datastore roundtrips and slow down the export process, also exporting file contents may significantly increase size of the exported data|None|
+|export_files_contents|boolean|None|False|If this is true, open files and export their full or partial contents. Note: this may require additional datastore roundtrips and slow down the export process, also exporting file contents may significantly increase size of the exported data|None|
 |field|string|UNSET|False|Field Specification|['UNSET', 'USERNAMES', 'UNAME', 'FQDN', 'HOST_TIPS', 'CLIENT_NAME', 'CLIENT_DESCRIPTION', 'SYSTEM', 'MAC_ADDRESSES', 'KERNEL_VERSION', 'OS_VERSION', 'OS_RELEASE', 'CLIENT_LABELS', 'INSTALL_TIME', 'CLIENT_VERSION', 'LAST_BOOT_TIME', 'CLIENT_CLOCK']|
 |artifact_list|string|None|False|A list of Artifact class names|None|
 |priority|string|None|False|The priority used for this flow|['LOW_PRIORITY', 'MEDIUM_PRIORITY', 'HIGH_PRIORITY']|
 |literal|string|None|False|Search for this literal string|None|
-|follow_urns|boolean|None|False|If this is true, follow urns and try to export not only the urns themselves, but also the data they are pointing to. Note\: this may require additional datastore roundtrips and slow down the export process|None|
+|follow_urns|boolean|None|False|If this is true, follow urns and try to export not only the urns themselves, but also the data they are pointing to. Note: this may require additional datastore roundtrips and slow down the export process|None|
 |knowledge_base|string|None|False|An optional knowledge base to use, if not specified we retrieve one from the client object|None|
 |annotations|[]string|None|False|Annotations to add to exported data. This field can be used to differentiate sets of exported data inside a particular exported type. e.g. data collected by users vs. data collected by cronjob|None|
 |only_label|string|None|False|Limit checks to hosts with label strings|None|
@@ -217,7 +217,7 @@ This action is used to start a hunt on clients.
 |integer|boolean|None|False|Integer to trigger this hunt|None|
 |max_last_access_time|integer|None|False|File must be accessed before this time|None|
 |operating_system|string|None|False|Type of operating system to trigger this hunt|['Os_windows', 'Os_linux', 'Os_darwin']|
-|process_non_regular_files|boolean|None|False|Look both into regular files and non-regular files (devices, named pipes, sockets). NOTE\: This is very dangerous and should be used with care|None|
+|process_non_regular_files|boolean|None|False|Look both into regular files and non-regular files (devices, named pipes, sockets). NOTE: This is very dangerous and should be used with care|None|
 |history_path|string|None|False|Path to a profile directory that contains a History file|None|
 |max_findings|integer|None|False|Summarize checks with more than N individual findings|None|
 |pathtype|string|None|False|Type of path access to use|['UNSET', 'OS', 'TSK', 'Registry', 'Memory', 'TMPFILE']|
@@ -265,7 +265,7 @@ This action is used to start a hunt on clients.
 |dependencies|string|Use the knowledgebase as a cache. If knowledgebase isn't present, a new one will be populated|False|Specifies how dependencies should be handled|['USE_CACHED (default)', 'IGNORE_DEPS', 'FETCH_NOW']|
 |value|integer|None|False|Value|None|
 |chunk_size|integer|None|False|A heartbeat will be emitted every chunk_size.This could be reduced in case the process times out|None|
-|upload_token|boolean|None|False|An upload token to use with the direct upload functionality. This token contains the hmac authenticated policy that determines for how long the client is allowed to upload files to the server. This is comparable to the policy document used by GCS\: https\://cloud.google.com/storage/docs/xml-api/post-object#policydocument|None|
+||upload_token|boolean|None|False|An upload token to use with the direct upload functionality. This token contains the hmac authenticated policy that determines for how long the client is allowed to upload files to the server. This is comparable to the policy document used by GCS: https://cloud.google.com/storage/docs/xml-api/post-object#policydocument|None|
 |restrict_checks|string|None|False|Only run checks with the specified check_ids|None|
 |ff_username|string|None|False|The user to get FireFox history for. If history_path is not set this will be used to guess the path to the history files|None|
 |client_rate|integer|None|False|The maximum number of clients to engage per minute. A rate of 0 means to schedule clients as fast as possible|None|
@@ -280,7 +280,7 @@ This action is used to start a hunt on clients.
 |use_tsk|boolean|None|False|Whether raw filesystem access should be used|None|
 |fetch_binaries|boolean|None|False|Fetches Binaries|None|
 |action|string|None|False|Use an action|['STAT', 'HASH', 'DOWNLOAD']|
-|only_os|string|None|False|Limit checks to hosts of OS type(s) [Linux\|OSX\|Windows]|None|
+|only_os|string|None|False|Limit checks to hosts of OS type(s) [Linux|OSX|Windows]|None|
 |ignore_interpolation_errors|boolean|None|False|If true, don't die if %%users.homedir%% and similar fail to expand. It's common on windows for some user attributes to be missing if users have never logged in. Enable this when you have multiple artifacts or paths and want to report partial results|None|
 
 ##### Output

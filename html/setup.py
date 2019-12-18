@@ -4,11 +4,11 @@ from setuptools import setup, find_packages
 
 setup(name='html-rapid7-plugin',
       version='1.2.1',
-      description='The HTML plugin will validate HTML, convert an HTML document to another format, or strip a HTML document of all tags',
+      description='Validate HTML, convert a HTML document to another format, or strip a HTML document of all tags',
       author='rapid7',
       author_email='',
       url='',
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_html']
+      scripts=['bin/icon_html']
       )
