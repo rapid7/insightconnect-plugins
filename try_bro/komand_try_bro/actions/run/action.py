@@ -1,6 +1,5 @@
 import komand
 from .schema import RunInput, RunOutput
-from komand.exceptions import PluginException
 # Custom imports below
 import json
 import base64
@@ -25,7 +24,7 @@ class Run(komand.Action):
         if pcap:
           checksum = utils.maybe_upload_pcap(server, pcap, self.logger)
         else:
-          raise PluginException(cause='Error: No PCAP supplied')
+          raise Exception(cause='Error: No PCAP supplied')
         sources = utils.load_scripts(scripts, self.logger)
         self.logger.info('Run: Supplied Scripts: %s', sources)
         req     = { 'sources': sources, 'version': version, 'pcap': checksum }
@@ -40,5 +39,5 @@ class Run(komand.Action):
         server = self.connection.server
         res = requests.get(server)
         if res.status_code != 200:
-          raise PluginException(cause='Test: Unsuccessful HTTP status code returned')
+          raise Exception(cause='Test: Unsuccessful HTTP status code returned')
         return {}
