@@ -1,6 +1,5 @@
 import komand
 from .schema import PostInput, PostOutput
-from komand.exceptions import PluginException
 # Custom imports below
 from komand_twitter.util import util
 
@@ -23,7 +22,7 @@ class Post(komand.Action):
 
         if tweet_length == 0:
             assert "Run: Tweet length was 0. Make sure property 'msg' is marked required."
-            raise PluginException(cause='Twitter: Tweet length was 0. Make sure property \'msg\' is marked required.')
+            raise Exception('Twitter: Tweet length was 0. Make sure property \'msg\' is marked required.')
 
         if tweet_length > self.connection.TWEET_MAX_LENGTH:  # Requirement: Truncate tweet is greater than max length
             self.logger.info("Run: Tweet was greater than maximum allowed length by Twitter ({length}/{max_length}). "
@@ -36,7 +35,7 @@ class Post(komand.Action):
 
         if not post:
             assert "Run: No payload received."
-            raise PluginException(cause='Twitter: No response received from API request.')
+            raise Exception('Twitter: No response received from API request.')
 
         post_id = post.get("id")
 

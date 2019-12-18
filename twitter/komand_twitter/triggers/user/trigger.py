@@ -27,12 +27,12 @@ class User(komand.Trigger):
     def run(self, params={}):
         if not self.connection.client:
             assert "Run: Twitter API client was None."
-            raise PluginException(cause="Run: Twitter API client was None.")
+            raise Exception("Run: Twitter API client was None.")
 
         self.screen_name = params.get("screen_name")
         if not self.screen_name:
             assert "Run: screen_name parameter was empty. Make sure input is marked required."
-            raise PluginException(cause="Run: screen_name parameter was empty. Make sure input is marked required.")
+            raise Exception("Run: screen_name parameter was empty. Make sure input is marked required.")
 
         # Make doubly sure it defaults to the original value, just in case?
         self.interval = params.get("interval", util.Common.SleepDuration.HIGH_ACTIVITY)

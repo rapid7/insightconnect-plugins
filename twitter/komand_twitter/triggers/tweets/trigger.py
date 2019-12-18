@@ -1,7 +1,6 @@
 import komand
 import time
 from .schema import TweetsInput, TweetsOutput
-from komand.exceptions import PluginException
 # Custom imports below
 from komand_twitter.util import util
 
@@ -28,12 +27,12 @@ class Tweets(komand.Trigger):
     def run(self, params={}):
         if not self.connection.client:
             assert "Run: Twitter API client was None."
-            raise PluginException(cause="Run: Twitter API client was None.")
+            raise Exception("Run: Twitter API client was None.")
 
         self.pattern = params.get("pattern")
         if not self.pattern:
             assert "Run: Pattern parameter was empty. Make sure input is marked required."
-            raise PluginException(cause="Run: Pattern parameter was empty. Make sure input is marked required.")
+            raise Exception("Run: Pattern parameter was empty. Make sure input is marked required.")
 
         # Make doubly sure it defaults to the original value, just in case?
         self.interval = params.get("interval", util.Common.SleepDuration.HIGH_ACTIVITY)

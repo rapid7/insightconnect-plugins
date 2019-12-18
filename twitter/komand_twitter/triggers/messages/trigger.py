@@ -1,7 +1,6 @@
 import komand
 import time
 from .schema import MessagesInput, MessagesOutput
-from komand.exceptions import PluginException
 # Custom imports below
 from komand_twitter.util import util
 
@@ -27,7 +26,7 @@ class Messages(komand.Trigger):
     def run(self, params={}):
         if not self.connection.client:
             assert "Run: Twitter API client was None."
-            raise PluginException(cause="Run: Twitter API client was None.")
+            raise Exception("Run: Twitter API client was None.")
 
         self.pattern = params.get("pattern")
 
