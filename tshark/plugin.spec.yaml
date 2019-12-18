@@ -4,7 +4,7 @@ products: [insightconnect]
 name: tshark
 title: TShark
 description: Open and explore PCAP data for further analysis and intel gathering
-version: 1.0.2
+version: 1.1.0
 vendor: rapid7
 support: community
 status: []
