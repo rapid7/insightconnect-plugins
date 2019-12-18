@@ -1,6 +1,5 @@
 import komand
 from .schema import FilterBytesInput, FilterBytesOutput
-from komand.exceptions import PluginException
 # Custom imports below
 import json
 import base64
@@ -30,11 +29,11 @@ class FilterBytes(komand.Action):
                 converted = utils.convert_tsv_array(filtered)
                 return {'filtered': base64.b64encode(converted)}
             else:
-                raise PluginException(cause='Invalid field indices')
+                raise ValueError('Invalid field indices')
         elif not tsv_good:
-            raise PluginException(cause='Improper syntax in TSV bytes')
+            raise ValueError('Improper syntax in TSV bytes')
         else:
-            raise PluginException(cause='Improper syntax in fields string')
+            raise ValueError('Improper syntax in fields string')
 
     def test(self):
         # TODO: Implement test function

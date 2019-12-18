@@ -1,6 +1,5 @@
 import komand
 from .schema import FilterStringInput, FilterStringOutput
-from komand.exceptions import PluginException
 # Custom imports below
 import json
 from komand_tsv.util import utils
@@ -27,11 +26,11 @@ class FilterString(komand.Action):
                     filtered.append(utils.keep_fields(line, fields))
                 return {'filtered': utils.convert_tsv_array(filtered)}
             else:
-                raise PluginException(cause='Invalid field indices')
+                raise ValueError('Invalid field indices')
         elif not tsv_good:
-            raise PluginException(cause='Improper syntax in TSV string')
+            raise ValueError('Improper syntax in TSV string')
         else:
-            raise PluginException(cause='Improper syntax in fields string')
+            raise ValueError('Improper syntax in fields string')
 
     def test(self):
         # TODO: Implement test function
