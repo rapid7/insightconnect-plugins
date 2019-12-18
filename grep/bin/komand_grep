@@ -4,10 +4,10 @@ import komand
 from komand_grep import connection, actions, triggers
 
 
-Name = 'Grep'
-Vendor = 'rapid7'
-Version = '1.0.3'
-Description = 'This plugin searches for a specified pattern in a string or a file'
+Name = "Grep"
+Vendor = "rapid7"
+Version = "1.0.3"
+Description = "This plugin searches for a specified pattern in a string or a file"
 
 
 class ICONGrep(komand.Plugin):

@@ -1,6 +1,7 @@
 # Description
 
 The Grep InsightConnect plugin searches for a specified pattern in a string or a file by utilizing BusyBox grep. It calls `egrep` which supports extended regular expressions to improve pattern matching ability.
+It returns whether any matches were found, the number of matches found, and a string array of the matched lines.
 
 For example, here's a simple example of `egrep` from the command line:
 
@@ -39,19 +40,31 @@ This action is used to find patterns in a base64 encoded document.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|pattern|string|None|True|Pattern to match|None|
-|data|bytes|None|True|Base64 encoded text|None|
 |behavior|string|Default|False|Return entire matched lines or only matched pattern|['Default', 'Only matching']|
+|data|bytes|None|True|Base64 encoded text|None|
+|pattern|string|None|True|Pattern to match|None|
 
 ##### Output
 
-The plugin returns the the number of matches found, a string array of the matched lines, and whether any matches were found.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|matches|[]string|False|Matched lines|
 |found|boolean|False|Found match boolean|
 |hits|integer|False|Number of matches|
+|matches|[]string|False|Matched lines|
+
+Example output:
+
+```
+{
+  "found": true,
+  "hits": 2,
+  "matches": [
+    "hello there ",
+    " hello world"
+  ]
+}
+```
 
 #### Match String
 
@@ -61,19 +74,30 @@ This action is used to find patterns in a string.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|pattern|string|None|True|Pattern to match|None|
 |behavior|string|Default|False|Return entire matched lines or only matched pattern|['Default', 'Only matching']|
+|pattern|string|None|True|Pattern to match|None|
 |text|string|None|True|String to match|None|
 
 ##### Output
 
-The plugin returns the the number of matches found, a string array of the matched lines, and whether any matches were found.
-
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|matches|[]string|False|Matched lines|
 |found|boolean|False|Found match boolean|
 |hits|integer|False|Number of matches|
+|matches|[]string|False|Matched lines|
+
+Example output:
+
+```
+{
+  "found": true,
+  "hits": 2,
+  "matches": [
+    "hello world ",
+    "  hello2 world"
+  ]
+}
+```
 
 ### Triggers
 
@@ -89,7 +113,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.3 - New spec and help.md format for the Hub
+* 1.0.3 - New spec and help.md format for the Hub | Remove duplicated code | Remove saving to file when string action | Changed bare strings to Input.* in params.get | Removed unused function
 * 1.0.2 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 1.0.0 - Support web server mode
@@ -102,4 +126,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Grep](https://www.gnu.org/software/grep/manual/grep.html)
-
