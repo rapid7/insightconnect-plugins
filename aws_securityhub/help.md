@@ -21,6 +21,8 @@ This plugin utilizes the [AWS Security Hub API](https://docs.aws.amazon.com/secu
 
 ## Setup
 
+Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/aws-security-hub) for more details on how to configure this plugin.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
@@ -203,4 +205,5 @@ This plugin does not contain any troubleshooting information.
 * [AWS Security Hub](https://aws.amazon.com/security-hub/)
 * [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html)
 * [Boto3](https://github.com/boto/boto3)
+* [InsightConnect Plugin Guide](https://insightconnect.help.rapid7.com/docs/aws-security-hub)
 

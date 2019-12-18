@@ -4,10 +4,10 @@ import komand
 from komand_sed import connection, actions, triggers
 
 
-Name = 'Sed'
-Vendor = 'rapid7'
-Version = '2.0.2'
-Description = 'The Sed plugin allows you to run the GNU stream editor on strings and files'
+Name = "Sed"
+Vendor = "rapid7"
+Version = "2.0.2"
+Description = "The Sed plugin allows you to run the GNU stream editor on strings and files"
 
 
 class ICONSed(komand.Plugin):

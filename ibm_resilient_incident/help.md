@@ -1,6 +1,6 @@
 # Description
 
-[IBM Resilient](https://www.resilientsystems.com/) is an incident response, orchestration, and automation tool.
+[IBM Resilient](https://www.ibm.com/security/intelligent-orchestration/resilient) is an incident response, orchestration, and automation tool.
 
 # Key Features
 
@@ -976,6 +976,4 @@ For actions that take a JSON object as input, Resilient will sometimes throw an 
 
 ## References
 
-* [API Documentation](http://your-resilient-hostname/docs/rest-api/index.html)
-* [Interactive REST API](http://your-resilient-hostname/docs/rest-api/ui/index.html)
-
+* [IBM Resilient](https://www.ibm.com/security/intelligent-orchestration/resilient)

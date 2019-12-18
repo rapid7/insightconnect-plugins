@@ -1,7 +1,7 @@
 # Description
 
-[mxtoolbox_dns](https://www.mxtoolbox.com) is a Interface with MxToolBox DNS lookup API
-This plugin utilizes the [mxtoolbox_dns API](https//api.mxtoolbox.com).
+[MXToolBox DNS](https://www.mxtoolbox.com) is a Interface with MxToolBox DNS lookup API
+This plugin utilizes the [MXToolBox DNS API](https://mxtoolbox.com/c/products/mxtoolboxapi).
 
 # Key Features
 
@@ -194,6 +194,5 @@ test for the existence of a value if it's needed later in the workflow.
 
 ## References
 
-* [Example](https://example.com)
-* [Example API](http://docs.example.com)
-
+* [MXToolBox](https://mxtoolbox.com/)
+* [MXToolBox API](https://mxtoolbox.com/c/products/mxtoolboxapi)

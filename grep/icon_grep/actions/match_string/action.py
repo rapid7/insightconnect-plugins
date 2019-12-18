@@ -1,9 +1,7 @@
 import komand
-import tempfile
-from .schema import MatchStringInput, MatchStringOutput
+from .schema import MatchStringInput, MatchStringOutput, Input, Output
 # Custom imports below
 from icon_grep.util import utils
-
 
 class MatchString(komand.Action):
 
@@ -15,22 +13,17 @@ class MatchString(komand.Action):
             output=MatchStringOutput())
 
     def run(self, params={}):
-        text = params.get('text')
+        output = utils.process_grep(
+            utils.echo_lines(
+                self.logger,
+                params.get(Input.TEXT),
+                params.get(Input.PATTERN),
+                params.get(Input.BEHAVIOR)
+            )
+        )
 
-        path = tempfile.mkdtemp() + "/"
-        fname = "tmp.txt"
-        with open(path + fname, 'w') as f:
-            f.write(text)
-
-        pattern = params.get('pattern')
-        behavior = params.get('behavior')
-        matches = str.splitlines(utils.print_lines(self.logger, path + fname, pattern, behavior, path))
-        if matches:
-            found = True
-            hits = len(matches)
-        else:
-            found = False
-            matches = ""
-            hits = 0
-        matches = matches if hits != 0 else []
-        return {'found': found, 'hits': hits, 'matches': matches}
+        return {
+            Output.FOUND: output.get(utils.FOUND),
+            Output.HITS: output.get(utils.HITS),
+            Output.MATCHES: output.get(utils.MATCHES)
+        }
