@@ -28,8 +28,8 @@ This action is used to expand all shortened URLs in some text.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|follow|boolean|False|True|Whether to follow the URL|None|
 |text|string|None|True|Block of text with URL's to expand|None|
-|follow|boolean|None|True|Whether to follow the URL|None|
 
 ##### Output
 
@@ -55,8 +55,8 @@ This action is used to expand a shortened URL.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|follow|boolean|False|True|Whether to follow the URL|None|
 |url|string|None|True|Shortened URL|None|
-|follow|boolean|None|True|Whether to follow the URL|None|
 
 ##### Output
 

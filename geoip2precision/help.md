@@ -60,7 +60,7 @@ This action is used to lookup IP address information.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

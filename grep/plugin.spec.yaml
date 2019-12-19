@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: grep
 title: Grep
-description: This plugin searches for a specified pattern in a string or a file
+description: Search for a specified pattern in a string or a file
 version: 1.0.3
 vendor: rapid7
 support: community
@@ -16,7 +16,7 @@ tags:
 - regex
 - utilities
 hub_tags:
-  use_cases: [soar, data_utility]
+  use_cases: [data_utility]
   keywords: [grep, regex, utilities]
   features: []
 actions:

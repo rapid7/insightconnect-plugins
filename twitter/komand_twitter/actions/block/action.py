@@ -30,7 +30,7 @@ class Block(komand.Action):
 
         # Return False if no object was returned - we can't be certain the block was successful.
         if not blocked_user:
-            raise Exception("No object returned from Twitter. Uncertain of block success. ")
+            raise Exception("No object returned from Twitter. Uncertain of block success.")
 
         return {'blocked': True}
 

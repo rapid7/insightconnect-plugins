@@ -6,7 +6,7 @@ title: Python 3 Script
 vendor: rapid7
 support: rapid7
 status: []
-description: The Python 3 plugin allows you to run Python 3 scripts
+description: Run a Python 3 script
 version: 2.0.1
 enable_cache: true
 resources:
@@ -18,7 +18,7 @@ tags:
  - scripting
  - utilities
 hub_tags:
-  use_cases: [soar, data_utility]
+  use_cases: [data_utility]
   keywords: [python, python3, scripting, utilities]
   features: []
 

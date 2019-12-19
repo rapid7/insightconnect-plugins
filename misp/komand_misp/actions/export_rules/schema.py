@@ -45,7 +45,7 @@ class ExportRulesInput(komand.Input):
     },
     "frame": {
       "type": "boolean",
-      "title": "Commented Explination",
+      "title": "Commented Explanation",
       "description": "Commented out expliantion framing the data",
       "default": true,
       "order": 3

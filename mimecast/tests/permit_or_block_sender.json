@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "permit_or_block_sender",
+        "input": {
+            "action": "block",
+            "sender": "user@example.com",
+            "to": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

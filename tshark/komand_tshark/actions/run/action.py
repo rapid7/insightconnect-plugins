@@ -8,7 +8,7 @@ class Run(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='run',
-                description='Run Tshark on a pcap',
+                description='Run Tshark on a PCAP',
                 input=RunInput(),
                 output=RunOutput())
 

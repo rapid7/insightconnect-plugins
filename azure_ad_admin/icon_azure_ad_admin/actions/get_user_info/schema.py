@@ -24,7 +24,7 @@ class GetUserInfoInput(komand.Input):
     "user_id": {
       "type": "string",
       "title": "User ID",
-      "description": "User ID e.g. bob@hotmail.com",
+      "description": "User ID e.g. user@example.com",
       "order": 1
     }
   },

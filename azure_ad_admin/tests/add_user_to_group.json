@@ -3,7 +3,7 @@
         "action": "add_user_to_group",
         "input": {
             "group_name": "Azure AD Test Security Group",
-            "user_id": "jmcadams@komanddev.onmicrosoft.com"
+            "user_id": "user@example.com"
         },
         "meta": {}
     },

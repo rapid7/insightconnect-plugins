@@ -130,7 +130,7 @@ Example output:
 
 #### Add Host
 
-This action is used to add a new host (host has to match one of the existing authoritative networks, e.g. network fqdn = info.com, host name = example.info.com).
+This action is used to add a new host (host has to match one of the existing authoritative networks, e.g. network FQDN = info.com, host name = example.info.com).
 
 ##### Input
 
@@ -299,7 +299,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

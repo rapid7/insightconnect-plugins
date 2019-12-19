@@ -17,7 +17,7 @@ tags:
 - version control
 - repository
 hub_tags:
-  use_cases: [soar, soc_automation, data_utility]
+  use_cases: [data_utility]
   keywords: [git, version control, repository]
   features: []
 connection:

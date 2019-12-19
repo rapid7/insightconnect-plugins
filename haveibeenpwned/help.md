@@ -16,7 +16,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -31,8 +31,8 @@ This action is used to list domain breaches.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|False|Domain to check E.g. adobe.com, google.com etc. If left blank will return the full breach database. Warning: this is very large|None|
-|include_unverified|boolean|None|False|If true will include breaches that are unverified (default - false)|None|
-|truncate_response|boolean|None|False|If true only name of breach will be shown (default - true)|None|
+|include_unverified|boolean|False|True|If true will include breaches that are unverified|None|
+|truncate_response|boolean|True|True|If true only name of breach will be shown|None|
 
 ##### Output
 
@@ -84,8 +84,8 @@ This action is used to lookup a password in list of known breached passwords.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|password_to_check|string|None|True|Password to check E.g. 'P@ssw0rd'|None|
-|original_password_is_a_hash|boolean|None|True|Whether the password itself is a sha1 hash|None|
+|password|string|None|True|Password to check E.g. 'P@ssw0rd'|None|
+|original_password_is_a_hash|boolean|None|True|Whether the password itself is a SHA1 hash|None|
 
 ##### Output
 
@@ -112,8 +112,8 @@ This action is used to check an email for compromise.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |breach|string|None|False|Breach Site to check e.g. adobe.com. If blank will check all known breaches|None|
-|include_unverified|boolean|None|False|If true will include breaches that are unverified (default - false)|None|
-|truncate_response|boolean|None|False|If true only name of breach will be shown (default - true)|None|
+|include_unverified|boolean|False|True|If true will include breaches that are unverified|None|
+|truncate_response|boolean|True|True|If true only name of breach will be shown|None|
 |user|string|None|True|Email to check|None|
 
 ##### Output
@@ -121,7 +121,7 @@ This action is used to check an email for compromise.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |found|boolean|True|Found|
-|breaches|[]domain|False|List of details for each breach found|
+|breaches|[]domain|False|List of details for each breach found or email|
 
 Example output:
 
@@ -181,7 +181,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -189,7 +189,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

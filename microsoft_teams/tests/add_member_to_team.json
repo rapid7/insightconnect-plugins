@@ -2,7 +2,7 @@
     "body": {
         "action": "add_member_to_team",
         "input": {
-            "member_login": "jmcadams@komanddev.onmicrosoft.com",
+            "member_login": "",
             "team_name": "Komand-Test-Everyone"
         },
         "meta": {}

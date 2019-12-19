@@ -6,8 +6,7 @@ title: Twitter
 vendor: rapid7
 support: community
 status: []
-description: "Twitter is a microblogging and social networking service. Using the Twitter plugin for
-  Rapid7 InsightConnect, users can monitor tweets, post, and block users"
+description: Monitor tweets and posts, and block users
 version: 2.0.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/twitter
@@ -19,7 +18,7 @@ tags:
 - social networking
 - post
 hub_tags:
-  use_cases: [soar, alerting_and_notifications, threat_hunting, threat_intel]
+  use_cases: [alerting_and_notifications, threat_detection_and_response]
   keywords: [twitter, tweet, social networking, post]
   features: []
 connection:
@@ -35,6 +34,7 @@ connection:
     required: true
 actions:
   post:
+    title: Post
     description: Tweet
     input:
       msg:
@@ -48,6 +48,7 @@ actions:
         description: URL
         required: false
   block:
+    title: Block
     description: Block User
     input:
       user:
@@ -61,6 +62,7 @@ actions:
         type: boolean
         required: false
   destroy:
+    title: Destroy
     description: Destroy a direct message
     input:
       message_id:

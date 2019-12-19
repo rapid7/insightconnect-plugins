@@ -1,4 +1,4 @@
-FROM komand/python-3-slim-plugin:2
+FROM komand/python-3-37-slim-plugin:3
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin
@@ -17,4 +17,4 @@ WORKDIR /python/src
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
 
-ENTRYPOINT ["/usr/local/bin/komand_grep"]
+ENTRYPOINT ["/usr/local/bin/icon_grep"]

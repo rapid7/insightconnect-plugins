@@ -130,6 +130,56 @@ Example output:
 }
 ```
 
+#### Send Message by GUID
+
+This action sends a message using the GUID for the team and channel. This is more performant than send message.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|channel_guid|string|None|true|Channel GUID|None|
+|is_html|boolean|None|true|Is the message HTML|None|
+|message|string|None|true|Message to send|None|
+|team_guid|string|None|true|Team GUID|None|
+
+##### Output
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|message|message|None|false|The message object that was created|None|
+
+Example output:
+
+```
+{
+  "message": {
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#teams('xxxx')/channels('xxxxxxx')/messages/$entity",
+    "id": "1571769574238",
+    "etag": "1571769574238",
+    "messageType": "message",
+    "createdDateTime": "2019-10-22T18:39:34.238Z",
+    "importance": "normal",
+    "locale": "en-us",
+    "webUrl": "https://teams.microsoft.com/l/message/xxxxxxxxxxxxxx/xxxxxx?groupId=xxxxx",
+    "from": {
+      "user": {
+        "id": "xxxxxxx",
+        "displayName": "Test User",
+        "userIdentityType": "aadUser"
+      }
+    },
+    "body": {
+      "contentType": "text",
+      "content": "Hello from InsightConnect!"
+    },
+    "attachments": [],
+    "mentions": [],
+    "reactions": []
+  }
+}
+```
+
 #### Get Teams
 
 This action returns all the teams the configured user is allowed to see.
@@ -164,13 +214,13 @@ Example output:
       "groupTypes": [
         "Unified"
       ],
-      "mail": "xxxxx@xxxxx.xxxx",
+      "mail": "user@example.com",
       "mailEnabled": true,
       "mailNickname": "Test Nickname",
       "membershipTypes": [],
       "proxyAddresses": [
         "SPO:xxxxxx",
-        "SMTP:xxxx@xxxxx.xxx"
+        "SMTP:user@example.com"
       ],
       "renewedDateTime": "2019-10-14T17:18:55Z",
       "resourceBehaviorOptions": [
@@ -215,7 +265,7 @@ Example output:
 {
   "channels": [
     {
-      "id": "19:0a48f53ea9484091aba13271dc418c2a@thread.skype",
+      "id": "XXXXXXXXXXX",
       "displayName": "test123",
       "description": "komand rocks!",
       "webUrl": "https://teams.microsoft.com/l/channel/19%3a0a48f53ea9484091aba13271dc418c2a%40thread.skype/test123?groupId=d2cc6aa2-8071-44d9-a97a-0a758da420a8&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10",
@@ -361,11 +411,11 @@ Example output:
     "groupTypes": [
       "Unified"
     ],
-    "mail": "avengers@marvel.onmicrosoft.com",
+    "mail": "user@example.com",
     "mailEnabled": true,
     "mailNickname": "CMDTestDeleteMe",
     "proxyAddresses": [
-      "SMTP:CMDTestDeleteMe@komanddev.onmicrosoft.com"
+      "SMTP:XXXXXXXXX"
     ],
     "renewedDateTime": "2019-11-05T19:34:21Z",
     "resourceBehaviorOptions": [],
@@ -465,9 +515,10 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.2.1 - Fix issue where New Message Received trigger could receive an unauthorized error after sustained use
+* 1.3.0 - New action Send Message by GUID
 * 1.2.3 - New spec and help.md format for the Hub
 * 1.2.2 - Fix issue where regular expressions would only match at the beginning of a string
+* 1.2.1 - Fix issue where New Message Received trigger could receive an unauthorized error after sustained use
 * 1.2.0 - New actions Add Member to Team, Remove Member from Team, Create Teams Enabled Group, Delete Team, Add Channel to Team, and Remove Channel from Team
 * 1.1.0 - New trigger New Message Received | New action Send HTML Message
 * 1.0.1 - Fix issue where improper exception could be raised

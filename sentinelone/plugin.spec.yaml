@@ -17,7 +17,7 @@ tags:
 - endpoint
 - detection
 hub_tags:
-  use_cases: [soar, threat_detection_and_response, investigations, asset_containment, threat_hunting, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [sentinelone, endpoint, detection]
   features: []
 types:

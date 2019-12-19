@@ -1,8 +1,6 @@
 # Description
 
-[Grafana](https://grafana.org) is an open platform for analytics and monitoring. The Grafana plugin allows you to manage users in your Grafana organization
-
-This plugin utilizes the [Grafana HTTP API](http://docs.grafana.org/http_api/) to manage organizations and users.
+[Grafana](https://grafana.org) is an open platform for analytics and monitoring. The Grafana plugin utilizes the [Grafana HTTP API](http://docs.grafana.org/http_api/) to manage organizations and users.
 
 # Key Features
 
@@ -312,7 +310,7 @@ This action is used to add a global user to the organization.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -320,7 +318,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

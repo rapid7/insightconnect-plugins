@@ -4,7 +4,7 @@ products: [insightconnect]
 name: carbon_black_defense
 title: Carbon Black Defense
 description: Find events and retrieve details for specific events
-version: 1.1.2
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -18,7 +18,7 @@ tags:
 - antivirus
 - cloud
 hub_tags:
-  use_cases: [soar, soc_automation, threat_hunting, threat_detection_and_response, investigations]
+  use_cases: [threat_detection_and_response]
   keywords: [carbon black, defense, antivirus, cloud]
   features: []
 types:
@@ -428,8 +428,8 @@ types:
       title: Process Details
       type: processDetails
     registryValue:
-      description: Registy Value
-      title: Registy Value
+      description: Registry Value
+      title: Registry Value
       type: string
     securityEventCode:
       description: Security Event Code

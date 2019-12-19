@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Send a pushover notification to a user or group"
+    DESCRIPTION = "Send a Pushover notification to a user or group"
 
 
 class Input:

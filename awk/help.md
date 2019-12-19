@@ -28,7 +28,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -76,7 +76,7 @@ It accepts an Awk expression and file encoded data (file, string, etc.) to proce
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -90,7 +90,7 @@ by setting the ORS (Output Record Separator) variable to nothing e.g. `-v ORS= '
 
 # Version History
 
-* 1.2.1 - New spec and help.md format for the Hub
+* 1.2.1 - New spec and help.md format for the Hub | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-plugin` | Removed duplicated code | Changed string action to use bare string instead temporary file | Changed bare strings in params.get and output to static fields from schema | Repair coding style
 * 1.2.0 - Support web server mode
 * 1.1.2 - Update to v2 Python plugin architecture
 * 1.1.1 - SSL bug fix in SDK

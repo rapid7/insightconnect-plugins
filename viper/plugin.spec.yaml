@@ -3,14 +3,14 @@ extension: plugin
 products: [insightconnect]
 name: viper
 title: "Viper"
-description: "The Viper plugins allows you to use Viper's platform to store, search, and analyze files"
+description: Utilize the Viper platform to store, search, and analyze files
 version: 2.0.1
 vendor: rapid7
 support: community
 status: []
-tags: [ "binary", "analysis", "malware", "viper" ]
+tags: ["binary", "analysis", "malware", "viper"]
 hub_tags:
-  use_cases: [soar, threat_intel, threat_hunting, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [binary, analysis, malware, viper]
   features: []
 resources:

@@ -30,7 +30,7 @@ class TestDisableUser(TestCase):
             connection_params = data.get("body").get("connection")
 
         action_params = {
-            "user_id": "jmcadams@komanddev.onmicrosoft.com"
+            "user_id": "user@example.com"
         }
 
         test_connection.connect(connection_params)

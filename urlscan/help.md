@@ -1,12 +1,14 @@
 # Description
 
-The [URLScan](https://urlscan.io/) plugin uses URLScan to analyze urls for malicious indicators.
+The [URLScan](https://urlscan.io/) plugin uses URLScan to analyze URLs for malicious indicators.
 
-This plugin utilizes the [URLScan API](https://urlscan.io/about-api/).
+This plugin utilizes the [URLScan API](https://urlscan.io/about-api/) to search for URLs and retrieve reports
+on potential malicous indicators.
 
 # Key Features
 
-* Scan a URL and get a report on that URL
+* Launch a scan on a URL
+* Retrieve reports on a URL
 
 # Requirements
 
@@ -34,17 +36,17 @@ This action is used to search urlscan.io.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|q|string|None|True|The query term (ElasticSearch simple query string) e.g domain\:urlscan.io, default is *|None|
-|sort|string|_score|True|Sorting, specificied via $sort_field\:$sort_order|None|
-|size|integer|100|True|Number of results returned|None|
 |offset|integer|0|True|Offset of first result (for paginating)|None|
+|q|string|None|True|The query term (ElasticSearch simple query string) e.g domain:urlscan.io, default is *|None|
+|size|integer|100|True|Number of results returned|None|
+|sort|string|_score|True|Sorting, specificied via $sort_field:$sort_order|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|total|integer|False|None|
 |results|[]results|False|UrlScan.io Results|
+|total|integer|False|Total number of results returned|
 
 Example output:
 
@@ -85,7 +87,7 @@ Example output:
 
 #### Submit URL for Scan
 
-This action is used to submit a url to generate a scan report that can be retrieved later.
+This action is used to submit a URL to generate a scan report that can be retrieved later.
 
 ##### Input
 
@@ -253,7 +255,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -261,7 +263,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

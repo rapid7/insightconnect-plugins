@@ -1,10 +1,10 @@
 # Description
 
-[Matplotlib](https://www.matplotlib.com) is a Python 2D plotting library which produces publication quality
+[Matplotlib](https://matplotlib.org/) is a Python 2D plotting library which produces publication quality
 figures in a variety of hardcopy formats and interactive environments across platforms. Matplotlib can be used in
 Python scripts, the Python and IPython shells, the Jupyter notebook, web application servers, and four graphical user
 interface toolkits. The Matploitlib plugin provides graphing capability of Base64 encoded CSV data using Matplotlib,
-NumPy, Pandas, and Seaborn, utilizing the [matplotlib API](https//api.matplotlib.com).
+NumPy, Pandas, and Seaborn, utilizing the [matplotlib API](https://matplotlib.org/api/index.html).
 
 # Key Features
 
@@ -18,7 +18,7 @@ _This plugin does not contain any requirements_
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -179,7 +179,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -187,7 +187,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -200,4 +200,3 @@ This plugin does not contain any troubleshooting information.
 
 * [Matplotlib](https://matplotlib.org/)
 * [Seabborn](https://seaborn.pydata.org)
-

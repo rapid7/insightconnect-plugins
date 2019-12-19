@@ -18,7 +18,7 @@ tags:
 - authentication
 - git
 hub_tags:
-  use_cases: [soar, user_management,soc_automation]
+  use_cases: [user_management]
   keywords: [bitbucket, issue, authentication, git]
   features: []
 connection:
