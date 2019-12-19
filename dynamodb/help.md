@@ -99,7 +99,7 @@ It will return the list of objects found, and a count of the records.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

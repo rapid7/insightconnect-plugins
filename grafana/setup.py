@@ -4,11 +4,11 @@ from setuptools import setup, find_packages
 
 setup(name='grafana-rapid7-plugin',
       version='1.0.1',
-      description='The Grafana plugin allows you to manage users in your Grafana organization',
+      description='Manage users in your Grafana organization',
       author='rapid7',
       author_email='',
       url='',
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_grafana']
+      scripts=['bin/icon_grafana']
       )

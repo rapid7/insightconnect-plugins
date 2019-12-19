@@ -19,4 +19,4 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
 
 USER root
-ENTRYPOINT ["/usr/local/bin/komand_haveibeenpwned"]
+ENTRYPOINT ["/usr/local/bin/icon_haveibeenpwned"]

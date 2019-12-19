@@ -173,8 +173,8 @@ class GetIndicatorDetailsOutput(komand.Output):
         },
         "vt": {
           "type": "string",
-          "title": "Vt",
-          "description": "Vt",
+          "title": "VT",
+          "description": "VT",
           "order": 10
         }
       },
@@ -197,8 +197,8 @@ class GetIndicatorDetailsOutput(komand.Output):
             },
             "md5": {
               "type": "string",
-              "title": "Md5",
-              "description": "Md5",
+              "title": "MD5",
+              "description": "MD5",
               "order": 5
             },
             "url": {
@@ -363,8 +363,8 @@ class GetIndicatorDetailsOutput(komand.Output):
         },
         "md5": {
           "type": "string",
-          "title": "Md5",
-          "description": "Md5",
+          "title": "MD5",
+          "description": "MD5",
           "order": 5
         },
         "url": {
@@ -578,8 +578,8 @@ class GetIndicatorDetailsOutput(komand.Output):
         },
         "whois": {
           "type": "string",
-          "title": "Whois",
-          "description": "Whois",
+          "title": "WHOIS",
+          "description": "WHOIS",
           "order": 24
         }
       },
@@ -2826,8 +2826,8 @@ class GetIndicatorDetailsOutput(komand.Output):
         },
         "url_list": {
           "$ref": "#/definitions/url_list",
-          "title": "Url List",
-          "description": "Url list",
+          "title": "URL List",
+          "description": "URL list",
           "order": 5
         }
       },
@@ -2922,8 +2922,8 @@ class GetIndicatorDetailsOutput(komand.Output):
             },
             "vt": {
               "type": "string",
-              "title": "Vt",
-              "description": "Vt",
+              "title": "VT",
+              "description": "VT",
               "order": 10
             }
           },
@@ -2946,8 +2946,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                 },
                 "md5": {
                   "type": "string",
-                  "title": "Md5",
-                  "description": "Md5",
+                  "title": "MD5",
+                  "description": "MD5",
                   "order": 5
                 },
                 "url": {
@@ -3112,8 +3112,8 @@ class GetIndicatorDetailsOutput(komand.Output):
             },
             "md5": {
               "type": "string",
-              "title": "Md5",
-              "description": "Md5",
+              "title": "MD5",
+              "description": "MD5",
               "order": 5
             },
             "url": {
@@ -3327,8 +3327,8 @@ class GetIndicatorDetailsOutput(komand.Output):
             },
             "whois": {
               "type": "string",
-              "title": "Whois",
-              "description": "Whois",
+              "title": "WHOIS",
+              "description": "WHOIS",
               "order": 24
             }
           },
@@ -7807,8 +7807,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                 },
                 "vt": {
                   "type": "string",
-                  "title": "Vt",
-                  "description": "Vt",
+                  "title": "VT",
+                  "description": "VT",
                   "order": 10
                 }
               },
@@ -7831,8 +7831,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                     },
                     "md5": {
                       "type": "string",
-                      "title": "Md5",
-                      "description": "Md5",
+                      "title": "MD5",
+                      "description": "MD5",
                       "order": 5
                     },
                     "url": {
@@ -7907,8 +7907,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                 },
                 "md5": {
                   "type": "string",
-                  "title": "Md5",
-                  "description": "Md5",
+                  "title": "MD5",
+                  "description": "MD5",
                   "order": 5
                 },
                 "url": {
@@ -8221,8 +8221,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                     },
                     "vt": {
                       "type": "string",
-                      "title": "Vt",
-                      "description": "Vt",
+                      "title": "VT",
+                      "description": "VT",
                       "order": 10
                     }
                   },
@@ -8245,8 +8245,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                         },
                         "md5": {
                           "type": "string",
-                          "title": "Md5",
-                          "description": "Md5",
+                          "title": "MD5",
+                          "description": "MD5",
                           "order": 5
                         },
                         "url": {
@@ -8321,8 +8321,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                     },
                     "md5": {
                       "type": "string",
-                      "title": "Md5",
-                      "description": "Md5",
+                      "title": "MD5",
+                      "description": "MD5",
                       "order": 5
                     },
                     "url": {
@@ -8663,8 +8663,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                 },
                 "vt": {
                   "type": "string",
-                  "title": "Vt",
-                  "description": "Vt",
+                  "title": "VT",
+                  "description": "VT",
                   "order": 10
                 }
               },
@@ -8687,8 +8687,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                     },
                     "md5": {
                       "type": "string",
-                      "title": "Md5",
-                      "description": "Md5",
+                      "title": "MD5",
+                      "description": "MD5",
                       "order": 5
                     },
                     "url": {
@@ -8763,8 +8763,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                 },
                 "md5": {
                   "type": "string",
-                  "title": "Md5",
-                  "description": "Md5",
+                  "title": "MD5",
+                  "description": "MD5",
                   "order": 5
                 },
                 "url": {
@@ -11624,8 +11624,8 @@ class GetIndicatorDetailsOutput(komand.Output):
             },
             "vt": {
               "type": "string",
-              "title": "Vt",
-              "description": "Vt",
+              "title": "VT",
+              "description": "VT",
               "order": 10
             }
           },
@@ -11648,8 +11648,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                 },
                 "md5": {
                   "type": "string",
-                  "title": "Md5",
-                  "description": "Md5",
+                  "title": "MD5",
+                  "description": "MD5",
                   "order": 5
                 },
                 "url": {
@@ -11724,8 +11724,8 @@ class GetIndicatorDetailsOutput(komand.Output):
             },
             "md5": {
               "type": "string",
-              "title": "Md5",
-              "description": "Md5",
+              "title": "MD5",
+              "description": "MD5",
               "order": 5
             },
             "url": {
@@ -12038,8 +12038,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                 },
                 "vt": {
                   "type": "string",
-                  "title": "Vt",
-                  "description": "Vt",
+                  "title": "VT",
+                  "description": "VT",
                   "order": 10
                 }
               },
@@ -12062,8 +12062,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                     },
                     "md5": {
                       "type": "string",
-                      "title": "Md5",
-                      "description": "Md5",
+                      "title": "MD5",
+                      "description": "MD5",
                       "order": 5
                     },
                     "url": {
@@ -12138,8 +12138,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                 },
                 "md5": {
                   "type": "string",
-                  "title": "Md5",
-                  "description": "Md5",
+                  "title": "MD5",
+                  "description": "MD5",
                   "order": 5
                 },
                 "url": {
@@ -12480,8 +12480,8 @@ class GetIndicatorDetailsOutput(komand.Output):
             },
             "vt": {
               "type": "string",
-              "title": "Vt",
-              "description": "Vt",
+              "title": "VT",
+              "description": "VT",
               "order": 10
             }
           },
@@ -12504,8 +12504,8 @@ class GetIndicatorDetailsOutput(komand.Output):
                 },
                 "md5": {
                   "type": "string",
-                  "title": "Md5",
-                  "description": "Md5",
+                  "title": "MD5",
+                  "description": "MD5",
                   "order": 5
                 },
                 "url": {
@@ -12580,8 +12580,8 @@ class GetIndicatorDetailsOutput(komand.Output):
             },
             "md5": {
               "type": "string",
-              "title": "Md5",
-              "description": "Md5",
+              "title": "MD5",
+              "description": "MD5",
               "order": 5
             },
             "url": {

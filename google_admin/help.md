@@ -1,9 +1,10 @@
 # Description
 
-Gsuite administrative functions allow you to manage users. The InsightConnect plugin can suspend users as part of containment or deprovisioning workflows.
+[Gsuite](https://gsuite.google.com/) administrative functions allow you to manage users. The InsightConnect plugin can retrieve existing user details and suspend users as part of containment or deprovisioning workflows.
 
 # Key Features
 
+* Retrieve Gsuite user information
 * Disable Gsuite users
 
 # Requirements
@@ -15,7 +16,7 @@ Gsuite administrative functions allow you to manage users. The InsightConnect pl
 
 ## Setup
 
-To authentiate to Google admin, you will need to create a service account on your Google apps domain that is capable of delegation. See [https://developers.google.com/admin-sdk/directory/v1/guides/delegation](https://developers.google.com/admin-sdk/directory/v1/guides/delegation)
+To authenticate to Google admin, you will need to create a service account on your Google apps domain that is capable of delegation. See [https://developers.google.com/admin-sdk/directory/v1/guides/delegation](https://developers.google.com/admin-sdk/directory/v1/guides/delegation)
 
 You will also need to modify Google apps security settings to allow for the following scopes on your service credentials:
 
@@ -30,11 +31,11 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |private_key|credential_asymmetric_key|None|True|Private Key from service credentials|None|
-|admin_user|string|None|True|Admin user to impersonate, e.g. admin@domain.com|None|
+|admin_user|string|None|True|Admin user to impersonate, e.g. user@example.com|None|
 |private_key_id|string|None|True|Private Key ID from service credentials|None|
-|token_uri|string|https\://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
-|auth_provider_x509_cert_url|string|https\://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
-|auth_uri|string|https\://accounts.google.com/o/oauth2/auth|True|None|None|
+|token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
+|auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
+|auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|None|None|
 |client_email|string|None|True|Client email from service credentials|None|
 |client_id|string|None|True|Client ID|None|
 |project_id|string|None|True|Project ID from service credentials|None|
@@ -52,7 +53,7 @@ This action is used to retrieve information about a user by their primary email 
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user|string|None|True|The user's primary email address, unique ID, or alias email.|None|
+|user|string|None|True|The user's primary email address, unique ID, or alias email|None|
 
 ##### Output
 
@@ -69,7 +70,7 @@ This action is used to suspend a user by their primary email address, unique ID,
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user|string|None|True|The user's primary email address, unique ID, or alias email.|None|
+|user|string|None|True|The user's primary email address, unique ID, or alias email|None|
 
 ##### Output
 
@@ -102,5 +103,4 @@ _This plugin does not contain any custom output types._
 
 ## References
 
-* [Google API's](https://www.googleapis.com/)
-
+* [Google Admin API](https://developers.google.com/admin-sdk)

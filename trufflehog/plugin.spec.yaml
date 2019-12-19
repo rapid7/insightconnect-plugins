@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: trufflehog
 title: TruffleHog
-description: The TruffleHog plugin searches through git repositories for high entropy strings and secrets digging deep into commit history
+description: Searche through git repositories for high entropy strings and secrets, digging deep into commit history
 version: 1.1.2
 vendor: rapid7
 support: community
@@ -18,7 +18,7 @@ tags:
 - regex
 - trufflehog
 hub_tags:
-  use_cases: [soar, log_search, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [entropy, secret]
   features: []
 enable_cache: true
@@ -73,7 +73,7 @@ actions:
       do_entropy:
         title: Entropy Checks
         description: Evaluates the shannon entropy for both the base64 char set and
-          hexidecimal char set for every blob of text greater than 20 characters comprised
+          hexadecimal char set for every blob of text greater than 20 characters comprised
           of those character sets in each diff
         type: boolean
         required: false

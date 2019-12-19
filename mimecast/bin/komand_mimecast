@@ -6,7 +6,7 @@ from komand_mimecast import connection, actions, triggers
 
 Name = 'Mimecast'
 Vendor = 'rapid7'
-Version = '3.0.1'
+Version = '4.0.0'
 Description = 'Services for email security, archiving and continuity. Protect, manage and archive without compromise'
 
 
@@ -26,6 +26,10 @@ class ICONMimecast(komand.Plugin):
         self.add_action(actions.CreateManagedUrl())
 
         self.add_action(actions.DecodeUrl())
+
+        self.add_action(actions.DeleteGroupMember())
+
+        self.add_action(actions.DeleteManagedUrl())
 
         self.add_action(actions.FindGroups())
 

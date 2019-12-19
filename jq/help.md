@@ -1,10 +1,6 @@
 # Description
 
-[jq](https://stedolan.github.io/jq/) is a command-line tool to filter JSON data.
-
-The jq plugin passes the given list of flags to the jq command, which then runs
-the given filter expression on the given JSON input. For flexibility, the output is
-returned as a string.
+[jq](https://stedolan.github.io/jq/) is a command-line tool used for slicing, filtering, mapping, and transforming structured JSON data. The jq plugin passes the given list of flags to the jq command, which then runs the given filter expression on the given JSON input. For flexibility, the output is returned as a string.
 
 # Key Features
 
@@ -18,7 +14,7 @@ _This plugin does not contain any requirements_
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -41,11 +37,19 @@ This action is used to pass the given JSON object to the jq command, using the g
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|json_out|string|False|None|
+|json_out|string|True|The output JSON|
+
+Example output:
+
+```
+{
+  "json_out": "[\"How's it going?\",\"What's up?\"]"
+}
+```
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -77,7 +81,7 @@ The `--seq` and `--stream` flags are not supported in version 0.1.0 of this plug
 
 # Version History
 
-* 2.0.5 - New spec and help.md format for the Hub
+* 2.0.5 - New spec and help.md format for the Hub | Changed docker image from `komand/python-3-slim-plugin:2` to `komand/python-3-37-slim-plugin` | Change mutable function parameter to immutable | Removed comments | Changed concatenation to format in loggers
 * 2.0.4 - Fix issue where jq was not available in the docker image | Update to python | Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size | Set a default `timeout` of 15 seconds in the Run action
 * 2.0.3 - Add `utilities` plugin tag for Marketplace searchability
 * 2.0.2 - Regenerate with latest Go SDK to solve bug with triggers

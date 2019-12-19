@@ -1,6 +1,6 @@
 # Description
 
-[Pastebin](http://pastebin.com/) is a website where you can store any text online
+[Pastebin](https://pastebin.com/) is a website where you can store any text online
 for easy sharing. The website is mainly used by programmers to store pieces of
 sources code or configuration information, but anyone is more than welcome to
 paste any type of text. The idea behind the site is to make it more convenient
@@ -30,7 +30,7 @@ The connection configuration accepts the following parameters:
 |password|string|None|False|Pastebin password|None|
 |key|string|None|True|API Key|None|
 
-The scraping tasks require a [Pastebin Pro account](http://pastebin.com/api_scraping_faq).
+The scraping tasks require a [Pastebin Pro account](https://pastebin.com/api_scraping_faq).
 
 ## Technical Details
 
@@ -104,7 +104,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-Scraping tasks require the IP of the machine running Komand to need be [whitelisted by Pastebin](http://pastebin.com/api_scraping_faq).
+Scraping tasks require the IP of the machine running Komand to need be [whitelisted by Pastebin](https://pastebin.com/api_scraping_faq).
 
 # Version History
 
@@ -118,6 +118,5 @@ Scraping tasks require the IP of the machine running Komand to need be [whitelis
 
 ## References
 
-* [Pastebin](http://pastebin.com/)
-* [Pastebin Scraping](http://pastebin.com/api_scraping_faq)
-
+* [Pastebin](https://pastebin.com/)
+* [Pastebin Scraping](https://pastebin.com/api_scraping_faq)

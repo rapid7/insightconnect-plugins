@@ -19,7 +19,7 @@ tags:
 - scanner
 - vulnerability scanner
 hub_tags:
-  use_cases: [soar, vulnerability_management]
+  use_cases: [vulnerability_management]
   keywords: [tenable, tenable.io, tenableio, scanner, vulnerability scanner]
   features: []
 connection:

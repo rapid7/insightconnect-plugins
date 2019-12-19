@@ -36,7 +36,7 @@ This action is used to upload a SSL certificate to your SecureSphere server.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sslkeyname|string|None|True|The name of the SSL Key to create be added|None|
+|sslkeyname|string|None|True|The name of the SSL Key to create|None|
 |pkcs12password|password|None|False|PKCS12 file password|None|
 |certificate|bytes|None|False|Base64 encoded PEM certificate, enclosed between '-----BEGIN CERTIFICATE-----' and '-----END CERTIFICATE-----'|None|
 |format|string|None|True|Certificate format type|['pem', 'pkcs12']|

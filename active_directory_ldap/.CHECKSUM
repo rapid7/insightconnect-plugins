@@ -5,7 +5,7 @@
 	"schemas": [
 		{
 			"identifier": "add_user/schema.py",
-			"hash": "8ae6cc0749a78143cffb818316abea29"
+			"hash": "0d8e118cb4468844c508bd09329b224e"
 		},
 		{
 			"identifier": "delete/schema.py",

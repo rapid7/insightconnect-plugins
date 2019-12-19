@@ -1,12 +1,13 @@
 # Description
 
-[Logstash](https://www.elastic.co/products/logstash) is a data collection engine with real-time pipelining capabilities. This plugin allows for retrieving runtime metrics about Logstash, using the
-[Logstash monitoring API](https://www.elastic.co/guide/en/logstash/current/monitoring.html).
+[Logstash](https://www.elastic.co/products/logstash) is an open source, server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite "stash." This plugin uses the [Logstash API](https://www.elastic.co/guide/en/logstash/current/event-api.html) to retrieve metadata about your Logstash instance.
 
 # Key Features
 
-* Process data
-* Convert data
+* Retrieve information about your Logstash instance
+* Retrieve hot threads from your Logstash instance
+* Retrieve Logstash node information and statistics
+* Retrieve information about plugins installed in your Logstash instance
 
 # Requirements
 
@@ -114,7 +115,7 @@ The `human` input parameter returns raw text as response. This raw text response
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -122,7 +123,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -135,6 +136,5 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [Logstash monitoring API](https://www.elastic.co/guide/en/logstash/current/monitoring.html).
+* [Logstash monitoring API](https://www.elastic.co/guide/en/logstash/current/monitoring-logstash.html).
 * [Logstash](https://www.elastic.co/products/logstash)
-

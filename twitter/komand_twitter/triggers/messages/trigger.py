@@ -32,7 +32,7 @@ class Messages(komand.Trigger):
 
         # Open and auto-close the file to create the cache file on very first start up
         with komand.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:
-            print("Run: Got or created cache file: {file}".format(file=cache_file))
+            self.logger.info("Run: Got or created cache file: {file}".format(file=cache_file))
 
         # Make doubly sure it defaults to the original value, just in case?
         self.interval = params.get("interval", util.Common.SleepDuration.HIGH_ACTIVITY)

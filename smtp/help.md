@@ -1,14 +1,14 @@
 # Description
 
 [Simple Mail Transfer Protocol](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol) (SMTP) is an
-Internet standard for electronic mail (email) transmission. Users of this plugin will be able to craft and automatically
-send email through their Rapid7 InsightConnect workflows.
+Internet standard for electronic mail (email) transmission. This plugin provides users with the ability to craft and automatically send emails through their Rapid7 InsightConnect workflows.
 
 This plugin can aid in automated notifications, alerting, employee onboarding/offboarding, and more.
 
 # Key Features
 
-* Send email
+* Send an email with customizable FROM address, TO address, Subject line, and Message
+* Send an HTML-enabled email for enhanced viewing quality
 
 # Requirements
 
@@ -70,7 +70,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

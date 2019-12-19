@@ -17,7 +17,7 @@ tags:
 - password
 - vault
 hub_tags:
-  use_cases: [soar, user_management]
+  use_cases: [user_management]
   keywords: [lastpass, password, vault]
   features: []
 connection:

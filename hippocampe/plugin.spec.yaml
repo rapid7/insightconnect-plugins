@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: hippocampe
 title: Hippocampe
-description: The Hippocampe plugin allows for advanced queries and management of your Hippocampe feeds
+description: Query against and manage your Hippocampe feeds
 version: 1.0.1
 vendor: rapid7
 support: community
@@ -17,7 +17,7 @@ tags:
 - analysis
 - aggregation
 hub_tags:
-  use_cases: [soar, threat_intel, threat_hunting, soc_automation, threat_detection_and_response]
+  use_cases: [threat_detection_and_response]
   keywords: [threat, analysis, aggregation]
   features: []
 types:

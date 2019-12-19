@@ -157,7 +157,7 @@ class GetUserOutput(komand.Output):
         "ipWhitelisted": {
           "type": "boolean",
           "title": "IpWhitelisted",
-          "description": "True if ip whitelisted",
+          "description": "True if IP whitelisted",
           "order": 11
         },
         "isAdmin": {

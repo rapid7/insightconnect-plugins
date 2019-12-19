@@ -4,7 +4,7 @@ products: [insightconnect]
 name: barracuda_waf
 title: Barracuda Web Application Firewall
 description: The Barracuda WAF plugin automates administrative tasks as well as rule creation and modification
-version: 1.0.1
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -19,7 +19,7 @@ tags:
 - application
 - firewall
 hub_tags:
-  use_cases: [soar, network_containment, soc_automation, threat_detection_and_response]
+  use_cases: [threat_detection_and_response]
   keywords: [barracuda, waf, web, application, firewall]
   features: []
 types:
@@ -153,7 +153,7 @@ types:
       required: false
     fileUploadMimeTypes:
       type: '[]string'
-      description: The Mime types to be allowed as uploaded files
+      description: The MIME types to be allowed as uploaded files
       required: false
     exceptionPatterns:
       type: array
@@ -265,7 +265,7 @@ types:
   url_normalization:
     parameter_separators:
       type: string
-      description: The url-decoded parameter separator to be used
+      description: The URL-decoded parameter separator to be used
       required: false
     defaultCharset:
       type: string
@@ -755,7 +755,7 @@ actions:
         required: false
       url_protection:
         type: url_protection
-        description: Configuration of url protection
+        description: Configuration of URL protection
         required: false
       parameter_protection:
         type: parameter_protection
@@ -1431,7 +1431,7 @@ actions:
         description: Servers info
         required: true
       persistence_method:
-        title: Persistance Method
+        title: Persistence Method
         type: string
         description: The Persistence Method to be used to maintain the connection
           between a client and the first server that it connects to, even when the

@@ -17,7 +17,7 @@ tags:
 - siem
 - logs
 hub_tags:
-  use_cases: [soar, siem, threat_hunting, reporting_and_analytics, log_search, threat_detection_and_response, data_aggregation, data_ingestion, alerting_and_notifications, soc_automation]
+  use_cases: [threat_detection_and_response, reporting_and_analytics, data_utility, alerting_and_notifications]
   keywords: [splunk, siem, logs]
   features: []
 connection:

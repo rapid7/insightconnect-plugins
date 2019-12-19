@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: pdf_generator
 title: PDF Generator
-description: The PDF plugin allows the user to create PDF reports from workflow data
+description: Create PDF reports from workflow data
 version: 1.0.1
 vendor: rapid7
 support: community
@@ -15,7 +15,7 @@ tags:
 - pdf
 - document
 hub_tags:
-  use_cases: [soar, reporting_and_analytics, data_utility, data_aggregation]
+  use_cases: [reporting_and_analytics, data_utility]
   keywords: [pdf, document]
   features: []
 actions:

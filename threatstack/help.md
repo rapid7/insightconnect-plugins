@@ -3,7 +3,8 @@
 The Threat Stack plugin is used to get information about alerts, assets, and policies.
 
 [Threat Stack](https://www.threatstack.com) is a cloud security monitoring provider helping companies to achieve compliance and cloud security.
-This plugin utilizes the [Threatstack API](https://app.threatstack.com/api/docs/).
+
+This plugin utilizes the [Threatstack API](https://apidocs.threatstack.com/).
 
 Note that the REST API is undocumented the plugin does not have custom types built which allows for the response outputs to be selectable by name in the UI.
 In addition, Threat Stack will be deprecating this API in favor of version 2 when it's released.
@@ -778,7 +779,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -786,7 +787,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -800,6 +801,4 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [Threat Stack](https://threatstack.com)
-* [Threat Stack API](https://app.threatstack.com/api/docs)
-* [Using the ThreatStack plugin](https://docs.komand.com/docs/using-the-threatstack-plugin)
-
+* [Threat Stack API](https://apidocs.threatstack.com/)

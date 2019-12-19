@@ -19,7 +19,7 @@ tags:
 - intel
 - case
 hub_tags:
-  use_cases: [soar, remediation_ticketing]
+  use_cases: [remediation_management]
   keywords: [thehive, intel, case]
   features: []
 enable_cache: true

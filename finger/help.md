@@ -30,7 +30,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -126,7 +126,7 @@ about a user that exists. We can improve this in the future.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -134,7 +134,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-Some `finger` daemons return answers in a different format which will cause this plugin to be unable to interpet the data correctly.
+Some `finger` daemons return answers in a different format which will cause this plugin to be unable to interpret the data correctly.
 
 # Version History
 
