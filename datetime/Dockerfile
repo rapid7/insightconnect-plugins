@@ -1,4 +1,4 @@
-FROM komand/python-pypy3-plugin:2
+FROM komand/python-3-37-slim-plugin:3
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin
@@ -12,6 +12,8 @@ ADD . /python/src
 
 WORKDIR /python/src
 # Add any package dependencies here
+
+RUN apk add --no-cache --virtual build-dependencies gcc linux-headers libc-dev libffi-dev build-base openssl-dev python-dev
 
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
