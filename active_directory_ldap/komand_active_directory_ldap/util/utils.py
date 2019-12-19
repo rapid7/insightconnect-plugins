@@ -44,14 +44,6 @@ class ADUtils:
         return dn_list
 
     @staticmethod
-    def users_container_handling(dn_list: list):
-        """
-        This method handles the fact the default 'Users' container in AD is not infect a OU but a container which is called differently
-        :param dn_list: A dn_list created by the 'dn_escape_and_split' method
-        :return: A corrected dn_list for the User container
-        """
-
-    @staticmethod
     def find_parentheses_pairs(query_string):
         """
         This method will find and return the indexes for parentheses pairs
