@@ -1,23 +1,23 @@
 {
-	"spec": "7b0a64c700fd1fa593d46707abbf5106",
-	"manifest": "4f0d7e757c9656119262ddafa6d6f049",
-	"setup": "02ae446b108fc8678911fd9fc083e369",
+	"spec": "0b381720dbd878f93fb872cabfd593b3",
+	"manifest": "bae41152b5d83d9196587d17827bef7b",
+	"setup": "cf7f66a12a1a9ff7bea660703460383c",
 	"schemas": [
 		{
 			"identifier": "create/schema.py",
-			"hash": "eef0872ec9306e5c6766d0e7760d5380"
+			"hash": "ee663ede9c16cbd1e1c414e9d7d1a3c0"
 		},
 		{
 			"identifier": "delete/schema.py",
-			"hash": "d330d9b689dcdfcd1b9b946ef593c4f9"
+			"hash": "74db53af853417fcb215a8aaa3a0098e"
 		},
 		{
 			"identifier": "post/schema.py",
-			"hash": "ab2bba1f82729c3fac28948cf48a0240"
+			"hash": "742327b9938309349e2240d94693303d"
 		},
 		{
 			"identifier": "update/schema.py",
-			"hash": "64725c161b7b6897727372edd3b3673d"
+			"hash": "57df5beecc9719b2a6d04e53dd840395"
 		},
 		{
 			"identifier": "connection/schema.py",
@@ -25,7 +25,7 @@
 		},
 		{
 			"identifier": "latest_message/schema.py",
-			"hash": "7dd9fede9fd9e6f68549eb159d24b695"
+			"hash": "6e184e4047c19bb70d5539e5a7f65a78"
 		}
 	]
 }

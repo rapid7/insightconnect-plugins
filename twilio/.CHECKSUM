@@ -1,7 +1,7 @@
 {
-	"spec": "6b3d7cd13d246d9f4ab97de24283928f",
-	"manifest": "e99222e5026733518824afa21b42ae74",
-	"setup": "a23a107e579f0e3430617378ceb0a835",
+	"spec": "c44c0f5ab7e3a322044a83acfb10b817",
+	"manifest": "621d693d051b5c4549806163cea779b7",
+	"setup": "50e952cec8d2c9a5404f295fcf472b33",
 	"schemas": [
 		{
 			"identifier": "send_sms/schema.py",

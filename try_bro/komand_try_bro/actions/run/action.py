@@ -24,7 +24,7 @@ class Run(komand.Action):
         if pcap:
           checksum = utils.maybe_upload_pcap(server, pcap, self.logger)
         else:
-          raise Exception('Error: No PCAP supplied')
+          raise Exception(cause='Error: No PCAP supplied')
         sources = utils.load_scripts(scripts, self.logger)
         self.logger.info('Run: Supplied Scripts: %s', sources)
         req     = { 'sources': sources, 'version': version, 'pcap': checksum }
@@ -39,5 +39,5 @@ class Run(komand.Action):
         server = self.connection.server
         res = requests.get(server)
         if res.status_code != 200:
-          Exception('Test: Unsuccessful HTTP status code returned')
+          raise Exception(cause='Test: Unsuccessful HTTP status code returned')
         return {}

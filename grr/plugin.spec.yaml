@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: grr
 title: Google Rapid Response
-description: The GRR plugin allows you to organize and start hunts using GRR
+description: Organize and start threat hunts using GRR
 version: 2.0.1
 vendor: rapid7
 support: community
@@ -573,7 +573,7 @@ actions:
         required: false
       cpu_limit:
         title: CPU Limit
-        description: A limit on the client cpu seconds used by this flow
+        description: A limit on the client CPU seconds used by this flow
         type: integer
         required: false
       network_bytes_limit:

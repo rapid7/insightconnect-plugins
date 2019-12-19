@@ -7,7 +7,8 @@ If at any point a high entropy string is greater than 20 characters is detected,
 
 # Key Features
 
-* Search through github commit histories, and checks if there is any leaked keys
+* Search through github commit histories 
+* Check for leaked secrets
 
 # Requirements
 

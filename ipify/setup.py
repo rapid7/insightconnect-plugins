@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name='ipify-rapid7-plugin',
-      version='1.0.1',
-      description='A Simple IP Address Lookup',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="ipify-rapid7-plugin",
+      version="1.0.1",
+      description="Lookup the public IP address of an Insight Orchestrator",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_ipify']
+      scripts=['bin/icon_ipify']
       )
