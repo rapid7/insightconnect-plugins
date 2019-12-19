@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: zenhub
 title: ZenHub
-description: Agile project management in GitHub, project road maps, kaban boards all attached to repositories
+description: Agile project management in GitHub.   Manage issues and epics
 version: 1.0.1
 vendor: rapid7
 support: community

@@ -1,6 +1,6 @@
 # Description
 
-The [WordPress](https://wordpress.com/) plugin allows you to manage users on the WordPress platform.  Only users can be deleted or suspended from the wordpress application.
+The [WordPress](https://wordpress.com/) plugin allows you to manage users on the WordPress platform. Only users can be deleted or suspended from the wordpress application.
 
 # Key Features
 

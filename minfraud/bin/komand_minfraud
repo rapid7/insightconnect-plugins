@@ -7,7 +7,7 @@ from komand_minfraud import connection, actions, triggers
 Name = 'minFraud'
 Vendor = 'rapid7'
 Version = '2.0.0'
-Description = 'Help identify fraudulent online transactions, not just e-commerce; but user account creation, and application installations'
+Description = 'Identify fraudulent online transactions. Examples include e-commerce, user account creation, and application installations'
 
 
 class ICONMinfraud(komand.Plugin):

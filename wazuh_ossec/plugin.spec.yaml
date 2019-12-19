@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: wazuh_ossec
 title: Wazuh OSSEC
-description: Open source security platform, provides security visibility, compliance and infrastructure monitoring
+description: Open source security platform providing security visibility, compliance and infrastructure monitoring
   capabilities
 version: 2.0.0
 vendor: rapid7

@@ -7,7 +7,7 @@ from komand_wordpress import connection, actions, triggers
 Name = 'WordPress'
 Vendor = 'rapid7'
 Version = '1.0.1'
-Description = 'User management on the WordPress platform only, suspend or delete users'
+Description = 'Suspend or delete users from a Wordpress instance'
 
 
 class ICONWordpress(komand.Plugin):
