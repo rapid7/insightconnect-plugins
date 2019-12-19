@@ -28,9 +28,10 @@ class CreateAccountInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "accountType": {
+    "account_type": {
       "type": "string",
       "title": "Account type",
+      "description": "Account type. Example Trial",
       "enum": [
         "Trial",
         "Paid"
@@ -43,7 +44,7 @@ class CreateAccountInput(komand.Input):
       "description": "When account should expire, example: 2018-02-27T04:49:26.257525Z",
       "order": 2
     },
-    "externalId": {
+    "external_id": {
       "type": "string",
       "title": "External ID",
       "description": "Id of CRM external system",
@@ -58,6 +59,7 @@ class CreateAccountInput(komand.Input):
     "name": {
       "type": "string",
       "title": "Name",
+      "description": "User name",
       "order": 7
     },
     "policy": {
@@ -75,7 +77,7 @@ class CreateAccountInput(komand.Input):
       },
       "order": 3
     },
-    "unlimitedExpiration": {
+    "unlimited_expiration": {
       "type": "boolean",
       "title": "Unlimited Expiration",
       "description": "Is expiration unlimited, if not expiration should be supplied",
@@ -83,7 +85,7 @@ class CreateAccountInput(komand.Input):
     }
   },
   "required": [
-    "accountType",
+    "account_type",
     "inherits",
     "name",
     "skus"

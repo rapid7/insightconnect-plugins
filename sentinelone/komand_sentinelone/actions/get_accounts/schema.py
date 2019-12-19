@@ -8,26 +8,26 @@ class Component:
 
 
 class Input:
-    ACCOUNTIDS = "accountIds"
-    ACCOUNTTYPE = "accountType"
-    ACTIVELICENSES = "activeLicenses"
-    COUNTONLY = "countOnly"
-    CREATEDAT = "createdAt"
+    ACCOUNT_IDS = "account_ids"
+    ACCOUNT_TYPE = "account_type"
+    ACTIVE_LICENSES = "active_licenses"
+    COUNT_ONLY = "count_only"
+    CREATED_AT = "created_at"
     CURSOR = "cursor"
     EXPIRATION = "expiration"
     FEATURES = "features"
     IDS = "ids"
-    ISDEFAULT = "isDefault"
+    IS_DEFAULT = "is_default"
     LIMIT = "limit"
     NAME = "name"
     QUERY = "query"
     SKIP = "skip"
-    SKIPCOUNT = "skipCount"
-    SORTBY = "sortBy"
-    SORTORDER = "sortOrder"
+    SKIP_COUNT = "skip_count"
+    SORT_BY = "sort_by"
+    SORT_ORDER = "sort_order"
     STATES = "states"
-    TOTALLICENSES = "totalLicenses"
-    UPDATEDAT = "updatedAt"
+    TOTAL_LICENSES = "total_licenses"
+    UPDATED_AT = "updated_at"
     
 
 class Output:
@@ -41,31 +41,38 @@ class GetAccountsInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "accountIds": {
-      "type": "string",
+    "account_ids": {
+      "type": "array",
       "title": "Account IDs",
       "description": "List of account IDs to search for. Example 225494730938493804,225494730938493915",
+      "items": {
+        "type": "string"
+      },
       "order": 13
     },
-    "accountType": {
+    "account_type": {
       "type": "string",
       "title": "Account Type",
       "description": "Account type. Example Trial",
+      "enum": [
+        "Trial",
+        "Paid"
+      ],
       "order": 5
     },
-    "activeLicenses": {
+    "active_licenses": {
       "type": "integer",
       "title": "Active Licenses",
       "description": "How much licenses are active",
       "order": 2
     },
-    "countOnly": {
+    "count_only": {
       "type": "boolean",
       "title": "Count Only",
       "description": "If true, only total number of items will be returned, without any of the actual objects",
       "order": 17
     },
-    "createdAt": {
+    "created_at": {
       "type": "string",
       "title": "Created At",
       "description": "Timestamp of account creation. Example 2018-02-27T04:49:26.257525Z",
@@ -90,20 +97,18 @@ class GetAccountsInput(komand.Input):
       "items": {
         "type": "string"
       },
-      "enum": [
-        "firewall-control",
-        "device-control",
-        "ioc"
-      ],
       "order": 1
     },
     "ids": {
-      "type": "string",
+      "type": "array",
       "title": "IDs",
       "description": "A list of account IDs. Example 225494730938493804,225494730938493915",
+      "items": {
+        "type": "string"
+      },
       "order": 8
     },
-    "isDefault": {
+    "is_default": {
       "type": "boolean",
       "title": "Is Default",
       "description": "Filter by default",
@@ -133,15 +138,15 @@ class GetAccountsInput(komand.Input):
       "description": "Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead. Example 150",
       "order": 3
     },
-    "skipCount": {
+    "skip_count": {
       "type": "boolean",
       "title": "Skip Count",
       "description": "If true, total number of items will not be calculated, which speeds up execution time",
       "order": 9
     },
-    "sortBy": {
+    "sort_by": {
       "type": "string",
-      "title": "Sort By",
+      "title": "Sort by",
       "description": "The column to sort the results by. Example id",
       "enum": [
         "id",
@@ -158,7 +163,7 @@ class GetAccountsInput(komand.Input):
       ],
       "order": 20
     },
-    "sortOrder": {
+    "sort_order": {
       "type": "string",
       "title": "Sort Order",
       "description": "Sort direction. Example asc",
@@ -174,13 +179,13 @@ class GetAccountsInput(komand.Input):
       "description": "List of states to filter",
       "order": 11
     },
-    "totalLicenses": {
+    "total_licenses": {
       "type": "integer",
       "title": "Total Licenses",
       "description": "Filter by total licenses number",
       "order": 18
     },
-    "updatedAt": {
+    "updated_at": {
       "type": "string",
       "title": "Updated at",
       "description": "Timestamp of last update. Example 2018-02-27T04:49:26.257525Z",

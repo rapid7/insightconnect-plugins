@@ -23,7 +23,7 @@ class AgentsFirewallLoggingInput(komand.Input):
   "title": "Variables",
   "properties": {
     "data": {
-      "$ref": "#/definitions/agents_firewall_rules_data",
+      "$ref": "#/definitions/agents_firewall_logging_data",
       "title": "Data",
       "description": "Data with format informations",
       "order": 1
@@ -40,31 +40,27 @@ class AgentsFirewallLoggingInput(komand.Input):
     "filter"
   ],
   "definitions": {
-    "agents_firewall_rules_data": {
+    "agents_firewall_logging_data": {
       "type": "object",
-      "title": "agents_firewall_rules_data",
+      "title": "agents_firewall_logging_data",
       "properties": {
-        "format": {
-          "type": "string",
-          "title": "Format",
-          "description": "Desired firewall configuration format. Use native to get configuration file in native format",
-          "enum": [
-            "native",
-            "asset"
-          ],
-          "order": 1
-        },
-        "state": {
-          "type": "string",
-          "title": "State",
-          "description": "Desired firewall configuration state. Use initial to get the firewall configuration that existed prior to installing the agent (Note - initial requires native format",
-          "enum": [
-            "initial",
-            "current"
-          ],
+        "reportLog": {
+          "type": "boolean",
+          "title": "Repoort log",
+          "description": "Report blocking activity to log",
           "order": 2
+        },
+        "reportMgmt": {
+          "type": "boolean",
+          "title": "Repoort management",
+          "description": "Report blocking activity to management",
+          "order": 1
         }
-      }
+      },
+      "required": [
+        "reportLog",
+        "reportMgmt"
+      ]
     }
   }
 }

@@ -46,7 +46,8 @@ class AccountExpireNowOutput(komand.Output):
   "properties": {
     "data": {
       "$ref": "#/definitions/account_expire_now_data",
-      "title": "Response data",
+      "title": "Data",
+      "description": "Response data",
       "order": 1
     }
   },

@@ -165,7 +165,7 @@ class LastActivityAsSyslogInput(komand.Input):
     },
     "sort_by": {
       "type": "string",
-      "title": "Sort By",
+      "title": "Sort by",
       "description": "The column to sort the results by",
       "enum": [
         "id",

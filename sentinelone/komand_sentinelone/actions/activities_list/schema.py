@@ -165,7 +165,7 @@ class ActivitiesListInput(komand.Input):
     },
     "sort_by": {
       "type": "string",
-      "title": "Sort By",
+      "title": "Sort by",
       "description": "The column to sort the results by",
       "enum": [
         "id",
@@ -271,7 +271,7 @@ class ActivitiesListOutput(komand.Output):
         "agentUpdatedVersion": {
           "type": "string",
           "title": "Agent Updated Version",
-          "description": "Agents new version (If applicable)",
+          "description": "Agent's new version (If applicable)",
           "order": 6
         },
         "comments": {
@@ -319,7 +319,7 @@ class ActivitiesListOutput(komand.Output):
         "osFamily": {
           "type": "string",
           "title": "OS Family",
-          "description": "Agents OS type (if applicable)",
+          "description": "Agent's OS type (if applicable)",
           "order": 15
         },
         "primaryDescription": {

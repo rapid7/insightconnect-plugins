@@ -46,7 +46,8 @@ class AccountsByIdOutput(komand.Output):
   "properties": {
     "data": {
       "$ref": "#/definitions/account_data",
-      "title": "Response data",
+      "title": "Data",
+      "description": "Response data",
       "order": 1
     }
   },

@@ -8,15 +8,15 @@ class Component:
 
 
 class Input:
-    ACCOUNTTYPE = "accountType"
     ACCOUNT_ID = "account_id"
+    ACCOUNT_TYPE = "account_type"
     EXPIRATION = "expiration"
-    EXTERNALID = "externalId"
+    EXTERNAL_ID = "external_id"
     INHERITS = "inherits"
     NAME = "name"
     POLICY = "policy"
     SKUS = "skus"
-    UNLIMITEDEXPIRATION = "unlimitedExpiration"
+    UNLIMITED_EXPIRATION = "unlimited_expiration"
     
 
 class Output:
@@ -29,20 +29,21 @@ class UpdateAccountInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "accountType": {
-      "type": "string",
-      "title": "Account type",
-      "enum": [
-        "Trial",
-        "Paid"
-      ],
-      "order": 4
-    },
     "account_id": {
       "type": "string",
       "title": "Account ID",
       "description": "Updated account ID, Example 225494730938493804",
       "order": 1
+    },
+    "account_type": {
+      "type": "string",
+      "title": "Account type",
+      "description": "Account type. Example Trial",
+      "enum": [
+        "Trial",
+        "Paid"
+      ],
+      "order": 4
     },
     "expiration": {
       "type": "string",
@@ -50,7 +51,7 @@ class UpdateAccountInput(komand.Input):
       "description": "When account should expire, example: 2018-02-27T04:49:26.257525Z",
       "order": 8
     },
-    "externalId": {
+    "external_id": {
       "type": "string",
       "title": "External ID",
       "description": "Id of CRM external system",
@@ -65,6 +66,7 @@ class UpdateAccountInput(komand.Input):
     "name": {
       "type": "string",
       "title": "Name",
+      "description": "User name",
       "order": 6
     },
     "policy": {
@@ -82,7 +84,7 @@ class UpdateAccountInput(komand.Input):
       },
       "order": 3
     },
-    "unlimitedExpiration": {
+    "unlimited_expiration": {
       "type": "boolean",
       "title": "Unlimited Expiration",
       "description": "Is expiration unlimited, if not expiration should be supplied",
@@ -90,8 +92,8 @@ class UpdateAccountInput(komand.Input):
     }
   },
   "required": [
-    "accountType",
     "account_id",
+    "account_type",
     "inherits",
     "name",
     "skus"

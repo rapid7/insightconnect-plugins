@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Fetches full list of installed applications from applicable agents matching the input filter, and replaces existing data in the management console"
+    DESCRIPTION = "Sends a fetch firewall rules command to all agents matching the input filter. Note Firewall control feature must be enabled"
 
 
 class Input:
@@ -23,7 +23,7 @@ class AgentsFetchFirewallRulesInput(komand.Input):
   "title": "Variables",
   "properties": {
     "data": {
-      "$ref": "#/definitions/agents_firewall_logging_data",
+      "$ref": "#/definitions/agents_firewall_rules_data",
       "title": "Data",
       "description": "Data instructions for report",
       "order": 1
@@ -109,27 +109,31 @@ class AgentsFetchFirewallRulesInput(komand.Input):
         }
       }
     },
-    "agents_firewall_logging_data": {
+    "agents_firewall_rules_data": {
       "type": "object",
-      "title": "agents_firewall_logging_data",
+      "title": "agents_firewall_rules_data",
       "properties": {
-        "reportLog": {
-          "type": "boolean",
-          "title": "Repoort log",
-          "description": "Report blocking activity to log",
-          "order": 2
-        },
-        "reportMgmt": {
-          "type": "boolean",
-          "title": "Repoort management",
-          "description": "Report blocking activity to management",
+        "format": {
+          "type": "string",
+          "title": "Format",
+          "description": "Desired firewall configuration format. Use native to get configuration file in native format",
+          "enum": [
+            "native",
+            "asset"
+          ],
           "order": 1
+        },
+        "state": {
+          "type": "string",
+          "title": "State",
+          "description": "Desired firewall configuration state. Use initial to get the firewall configuration that existed prior to installing the agent (Note - initial requires native format",
+          "enum": [
+            "initial",
+            "current"
+          ],
+          "order": 2
         }
-      },
-      "required": [
-        "reportLog",
-        "reportMgmt"
-      ]
+      }
     }
   }
 }

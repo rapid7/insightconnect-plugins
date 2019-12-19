@@ -25,15 +25,43 @@ class AgentsStartRemoteShellInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "columns": {
+      "type": "integer",
+      "title": "Columns Number",
+      "description": "Number of columns of the console shell",
+      "order": 2
+    },
     "filter": {
       "type": "object",
       "title": "Filter JSON",
       "description": "Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents",
       "order": 1
+    },
+    "history_password": {
+      "type": "string",
+      "title": "History Password",
+      "description": "Password to zip the shell history file at end of session",
+      "order": 4
+    },
+    "rows": {
+      "type": "integer",
+      "title": "Rows",
+      "description": "Number of rows of the console shell",
+      "order": 5
+    },
+    "two_fa_code": {
+      "type": "string",
+      "title": "2FA Code",
+      "description": "The 2FA code to authenticate the user",
+      "order": 3
     }
   },
   "required": [
-    "filter"
+    "columns",
+    "filter",
+    "history_password",
+    "rows",
+    "two_fa_code"
   ]
 }
     """)

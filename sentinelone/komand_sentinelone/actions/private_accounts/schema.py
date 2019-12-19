@@ -8,17 +8,17 @@ class Component:
 
 
 class Input:
-    ACCOUNTIDS = "accountIds"
-    COUNTONLY = "countOnly"
+    ACCOUNT_IDS = "account_ids"
+    COUNT_ONLY = "count_only"
     CURSOR = "cursor"
     IDS = "ids"
     LIMIT = "limit"
     QUERY = "query"
-    SITEIDS = "siteIds"
+    SITE_IDS = "site_ids"
     SKIP = "skip"
-    SKIPCOUNT = "skipCount"
-    SORTBY = "sortBy"
-    SORTORDER = "sortOrder"
+    SKIP_COUNT = "skip_count"
+    SORT_BY = "sort_by"
+    SORT_ORDER = "sort_order"
     
 
 class Output:
@@ -32,13 +32,13 @@ class PrivateAccountsInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "accountIds": {
+    "account_ids": {
       "type": "string",
       "title": "Account IDs",
       "description": "List of Account IDs to filter by. Example 225494730938493804,225494730938493915",
       "order": 8
     },
-    "countOnly": {
+    "count_only": {
       "type": "boolean",
       "title": "Count Only",
       "description": "If true, only total number of items will be returned, without any of the actual objects",
@@ -68,7 +68,7 @@ class PrivateAccountsInput(komand.Input):
       "description": "Filtered query",
       "order": 1
     },
-    "siteIds": {
+    "site_ids": {
       "type": "string",
       "title": "Site IDs",
       "description": "List of Site IDs to filter by. Example 225494730938493804,225494730938493915",
@@ -80,15 +80,15 @@ class PrivateAccountsInput(komand.Input):
       "description": "Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead. Example 150",
       "order": 4
     },
-    "skipCount": {
+    "skip_count": {
       "type": "boolean",
       "title": "Skip Count",
       "description": "If true, total number of items will not be calculated, which speeds up execution time",
       "order": 3
     },
-    "sortBy": {
+    "sort_by": {
       "type": "string",
-      "title": "Sort By",
+      "title": "Sort by",
       "description": "The column to sort the results by. Example id",
       "enum": [
         "id",
@@ -96,7 +96,7 @@ class PrivateAccountsInput(komand.Input):
       ],
       "order": 5
     },
-    "sortOrder": {
+    "sort_order": {
       "type": "string",
       "title": "Sort Order",
       "description": "Sort direction. Example asc",
@@ -122,7 +122,8 @@ class PrivateAccountsOutput(komand.Output):
   "properties": {
     "data": {
       "type": "array",
-      "title": "Response Data",
+      "title": "Data",
+      "description": "Response data",
       "items": {
         "$ref": "#/definitions/private_account"
       },
