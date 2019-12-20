@@ -51,7 +51,7 @@ This action does not use any additional WordPress plugins such as Disable User. 
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|None|
+|success|boolean|False|User Suspended|
 
 #### Delete User
 
@@ -68,7 +68,7 @@ This action can be used to delete a user from a WordPress instance.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|bsic Auth or Application passwordoolean|False|None|
+|success|boolean|False|User Deleted|
 
 ### Triggers
 
@@ -97,6 +97,7 @@ the discovery process does not work on locally run webservers, as the API root w
 
 # Version History
 
+* 1.0.2 - Add missing title values for actions in plugin.spec.yaml
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK

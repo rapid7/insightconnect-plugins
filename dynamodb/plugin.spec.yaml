@@ -8,7 +8,7 @@ support: community
 status: []
 description: "Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data
 using the DynamoDB plugin for Rapid7 InsightConnect"
-version: 1.0.2
+version: 1.0.3
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/dynamodb
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -40,6 +40,7 @@ connection:
     required: false
 actions:
   scan:
+    title: Scan
     description: Scan Dynamo and return any objects found
     input:
       table:
@@ -66,6 +67,7 @@ actions:
         type: array
         required: false
   insert:
+    title: Insert
     description: Store an object into Dynamo
     input:
       table:
@@ -88,6 +90,7 @@ actions:
         type: boolean
         required: false
   update:
+    title: Update
     description: Update an object in Dyanmo
     input:
       table:

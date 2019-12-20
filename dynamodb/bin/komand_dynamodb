@@ -4,10 +4,10 @@ import komand
 from komand_dynamodb import connection, actions, triggers
 
 
-Name = 'Dynamo DB'
-Vendor = 'rapid7'
-Version = '1.0.2'
-Description = 'Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data using the DynamoDB plugin for Rapid7 InsightConnect'
+Name = "Dynamo DB"
+Vendor = "rapid7"
+Version = "1.0.3"
+Description = "Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data using the DynamoDB plugin for Rapid7 InsightConnect"
 
 
 class ICONDynamodb(komand.Plugin):

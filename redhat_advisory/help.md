@@ -34,7 +34,7 @@ This trigger is used to monitor for new new advisories.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|after|string|None|False|Look for new advisories after provided date. Default is when trigger starts.|None|
+|after|string|None|False|Look for new advisories after provided date. Default is when trigger starts|None|
 |include_cvrf|boolean|False|False|Include the full source CVRF|None|
 
 ##### Output
@@ -67,6 +67,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.3 - Add missing title values for actions in plugin.spec.yaml
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Support web server mode
 * 1.0.0 - Update to v2 Python plugin architecture

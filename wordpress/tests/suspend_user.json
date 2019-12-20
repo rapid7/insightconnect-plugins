@@ -3,8 +3,8 @@
         "action": "suspend_user",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
             "host": null
         },

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cymon
 title: Cymon
 description: Cymon Open Threat Intelligence
-version: 1.0.2
+version: 2.0.0
 vendor: rapid7
 support: community
 status: [obsolete]
@@ -61,6 +61,7 @@ types:
       type: '[]domain_results'
 triggers:
   poll_address_blacklist:
+    title: Poll Address Blacklist
     description: Poll for Blacklisted Addresses
     input:
       frequency:
@@ -99,6 +100,7 @@ triggers:
         description: Results
         required: false
   poll_domain_blacklist:
+    title: Poll Domain Blacklist
     description: Poll for Blacklisted Domains
     input:
       frequency:
@@ -149,6 +151,7 @@ triggers:
         required: true
 actions:
   domain_lookup:
+    title: Domain Lookup
     description: Lookup Domain Name
     input:
       domain:
@@ -192,6 +195,7 @@ actions:
         description: Found
         required: false
   address_lookup:
+    title: Address Lookup
     description: Lookup IP Address
     input:
       address:
@@ -240,6 +244,7 @@ actions:
         description: Found in database
         required: false
   url_lookup:
+    title: URL Lookup
     description: Lookup URL
     input:
       url:
@@ -283,6 +288,7 @@ actions:
         description: Found in database
         required: false
   address_blacklist:
+    title: Address Blacklist
     description: Retrieve Blacklisted Addresses
     input:
       limit:
@@ -327,6 +333,7 @@ actions:
         description: Cymon URL references
         required: false
   domain_blacklist:
+    title: Domain Blacklist
     description: Retrieve Blacklisted Domains
     input:
       limit:
