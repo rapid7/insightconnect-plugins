@@ -80,6 +80,7 @@ types:
       required: false
 actions:
   create_string:
+    title: Create String
     description: Creates a CEF formatted string
     input:
       cef:

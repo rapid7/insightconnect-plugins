@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='cloudshark-rapid7-plugin',
-      version='1.0.1',
-      description='CloudShark is an on-premises platform for packet analysis. Users can upload and manage capture files using the CloudShark plugin for Rapid7 InsightConnect',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="cloudshark-rapid7-plugin",
+      version="2.0.0",
+      description="CloudShark is an on-premises platform for packet analysis. Users can upload and manage capture files using the CloudShark plugin for Rapid7 InsightConnect",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_cloudshark']
