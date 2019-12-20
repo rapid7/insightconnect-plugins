@@ -6,8 +6,7 @@ title: HTML
 vendor: rapid7
 support: community
 status: []
-description: "The HTML plugin will validate HTML, convert an HTML document to another format, or strip a HTML document
-  of all tags"
+description: Validate HTML, convert a HTML document to another format, or strip a HTML document of all tags
 version: 1.2.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/html
@@ -93,7 +92,7 @@ actions:
       pdf:
         title: PDF
         description: PDF File
-        type: bytes"
+        type: bytes
         required: false
   epub:
     title: EPUB
@@ -108,7 +107,7 @@ actions:
       epub:
         title: Epub
         description: Epub file
-        type: bytes"
+        type: bytes
         required: false
   docx:
     title: Windows Document
@@ -123,7 +122,7 @@ actions:
       docx:
         title: Docx
         description: Docx File
-        type: bytes"
+        type: bytes
         required: false
   text:
     title: Text

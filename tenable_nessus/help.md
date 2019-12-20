@@ -300,5 +300,5 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [Nessus Professional Product Page](https://www.tenable.com/products/nessus-vulnerability-scanner/nessus-professional)
-* Nessus API documentation is only available through your Nessus instance. Assuming default configuration, it can be found at [https://localhost:8834/api](https://localhost:8834/api)
+* Nessus API documentation is only available through your Nessus instance. Assuming default configuration, it can be found at `https://localhost:8834/api`.
 

@@ -38,7 +38,7 @@ class User(komand.Trigger):
         self.interval = params.get("interval", util.Common.SleepDuration.HIGH_ACTIVITY)
         # Open and auto-close the file to create the cache file on very first start up
         with komand.helper.open_cachefile(self.CACHE_FILE_NAME + "_" + self.screen_name) as cache_file:
-            print("Run: Got or created cache file: {file}".format(file=cache_file))
+            self.logger.info("Run: Got or created cache file: {file}".format(file=cache_file))
 
         while True:
             self.logger.info("Run: Iterating main loop")

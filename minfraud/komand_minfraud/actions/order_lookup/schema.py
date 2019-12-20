@@ -79,8 +79,8 @@ class OrderLookupInput(komand.Input):
     },
     "order_subaffiliate_id": {
       "type": "string",
-      "title": "Subaffiliate ID",
-      "description": "ID of the subaffiliate",
+      "title": "Sub-affiliate ID",
+      "description": "ID of the sub affiliate",
       "order": 6
     }
   },

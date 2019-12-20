@@ -1,8 +1,9 @@
 # Description
 
-[Cisco CloudLock](https://www.cisco_cloudlock.com) is the cloud-native CASB and Cloud Cybersecurity Platform.
+[Cisco CloudLock](https://www.cisco.com/c/en/us/products/security/cloudlock/index.html) is the cloud-native CASB and Cloud Cybersecurity Platform.
  The Cisco CloudLock InsightConnect plugin allows you to help protect cloud users, data, and application.
-This plugin utilizes the [Cisco CloudLock API](https//api.cisco_cloudlock.com).
+
+This plugin utilizes the [Cisco CloudLock API](https://docs.umbrella.com/cloudlock-documentation/docs/cisco-cloudlock-apis).
 
 # Key Features
 
@@ -161,5 +162,4 @@ No troubleshooting information.
 
 ## References
 
-* [Cisco CloudLock](https://www.cloudlock.com)
-
+* [Cisco CloudLock](https://www.cisco.com/c/en/us/products/security/cloudlock/index.html)

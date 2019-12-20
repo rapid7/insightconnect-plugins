@@ -7,7 +7,7 @@ vendor: rapid7
 support: community
 status: []
 description: A plugin to interact with a VxStream Malware analysis service. This plugin allows a user to submit files for analysis and view the file report details. It can also search the service for any matching file hashes
-version: 2.0.1
+version: 3.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/vxstream_sandbox
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -197,7 +197,7 @@ types:
       type: string
       required: false
     isvirus:
-      title: Is Virus?
+      title: Is Virus
       type: string
       required: false
     version:
@@ -251,34 +251,34 @@ types:
       type: string
       required: false
     sharedanalysis:
-      title: Shared Analysis?
+      title: Shared Analysis
       type: boolean
       required: false
     isstaticanalysis:
-      title: Static Analysis?
+      title: Static Analysis
       type: boolean
       required: false
     isexperimentalantievasion:
-      title: Experimental AntiEvasion?
+      title: Experimental AntiEvasion
       type: boolean
       required: false
     isscriptlogging:
-      title: Script Logging?
+      title: Script Logging
       type: boolean
       required: false
     script:
       type: string
       required: false
     nohashlookup:
-      title: No HashLookup?
+      title: No HashLookup
       type: boolean
       required: false
     isallowsampletampering:
-      title: Allow SampleTampering?
+      title: Allow SampleTampering
       type: boolean
       required: false
     istorenabledanalysis:
-      title: Tor-Enabled Analysis?
+      title: Tor-Enabled Analysis
       type: boolean
       required: false
     script_desc:
@@ -289,7 +289,7 @@ types:
       type: integer
       required: false
     isfolderanalysis:
-      title: Folder Analysis?
+      title: Folder Analysis
       type: boolean
       required: false
   controller:
@@ -297,21 +297,21 @@ types:
       type: date
       required: false
     network_enabled:
-      title: Network Enabled?
+      title: Network Enabled
       type: boolean
       required: false
     client_address:
       type: string
       required: false
     sniffer_enabled:
-      title: Sniffer Enabled?
+      title: Sniffer Enabled
       type: boolean
       required: false
     client_path:
       type: string
       required: false
     crashfile:
-      title: Crashfile?
+      title: Crashfile
       type: boolean
       required: false
     client_architecture:
@@ -331,7 +331,7 @@ types:
       type: string
       required: false
     ismissingkernelmode:
-      title: Missing KernelMode?
+      title: Missing KernelMode
       type: boolean
       required: false
     client_type:
@@ -356,14 +356,14 @@ types:
       required: false
   banner:
     ha_enabled:
-      title: HA Enabled?
+      title: HA Enabled
       type: boolean
       required: false
     author_version:
       type: string
       required: false
     tiny_tags:
-      title: Tiny Tags?
+      title: Tiny Tags
       type: boolean
       required: false
     author_name:
@@ -429,7 +429,7 @@ types:
       type: string
       required: false
     isdelayedavscan:
-      title: Delayed AVScan?
+      title: Delayed AVScan
       type: boolean
       required: false
     appserver:
@@ -444,7 +444,7 @@ types:
       type: static
       required: false
     isurlanalysis:
-      title: Is URLAnalysis?
+      title: Is URLAnalysis
       type: boolean
       required: false
   registry_access:
@@ -632,14 +632,14 @@ types:
       type: apicalls
       required: false
     monitored:
-      title: Monitored?
+      title: Monitored
       type: boolean
       required: false
     date:
       type: date
       required: false
     isinjected:
-      title: Is Injected?
+      title: Is Injected
       type: boolean
       required: false
     fileaccesses:
@@ -658,7 +658,7 @@ types:
       type: integer
       required: false
     additionalContext:
-      title: Additonal Context
+      title: Additional Context
       type: string
       required: false
     uid:
@@ -726,7 +726,7 @@ types:
       required: false
   verdict:
     isreliable:
-      title: Is Reliable?
+      title: Is Reliable
       type: string
       required: false
     threatscore:
@@ -739,7 +739,7 @@ types:
       required: false
   characteristics:
     has_carved_files:
-      title: Carved Files?
+      title: Carved Files
       type: string
       required: false
     total_runtime_targets:
@@ -1045,11 +1045,11 @@ types:
       type: string
       required: false
     isurlanalysis:
-      title: URL Analysis?
+      title: URL Analysis
       type: boolean
       required: false
     isinteresting:
-      title: Interesting?
+      title: Interesting
       type: boolean
       required: false
     analysis_start_time:

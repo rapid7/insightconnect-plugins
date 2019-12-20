@@ -34,7 +34,7 @@ class CreatePortListInput(komand.Input):
     "port_list_TCP": {
       "type": "array",
       "title": "TCP Port List",
-      "description": "Target Port List for TCP ports, in the form of a JSON array for each port or list of ports. For example, the following would be a valid list: ['22', '80','443-445']",
+      "description": "Target Port List for TCP ports, in the form of a JSON array for each port or list of ports. For example, the following would be a valid list: ['22', '80', '443-445']",
       "items": {
         "type": "string"
       },

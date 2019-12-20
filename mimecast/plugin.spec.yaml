@@ -20,7 +20,6 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [mimecast, email]
   features: []
-
 types:
   managed_url:
     comment:
@@ -133,7 +132,7 @@ types:
       required: false
     fromType:
       title: From Type
-      description: Which sender addresses the policy applies to. CCan be one of everyone,
+      description: Which sender addresses the policy applies to. Can be one of everyone,
         internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value,
         individual_email_address, free_mail_domains, header_display_name
       type: string

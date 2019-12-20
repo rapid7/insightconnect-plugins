@@ -50,7 +50,7 @@ This action is used to send a message to a room.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|timestamp|string|False|The utc timestamp representing when the message was processed|
+|timestamp|string|False|The UTC timestamp representing when the message was processed|
 |id|string|False|The unique identifier of the sent message|
 
 #### Delete User
@@ -61,13 +61,13 @@ This action is used to delete a user.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id_or_email|string|None|True|The id, email address, or mention name (beginning with an '@') of the user to update|None|
+|id_or_email|string|None|True|The ID, email address, or mention name (beginning with an '@') of the user to update|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status_code|integer|False|Http status code|
+|status_code|integer|False|HTTP status code|
 
 #### Create User
 
@@ -90,9 +90,9 @@ This action is used to create a new user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|id|integer|False|The new created user id|
-|links|object|False|None|
-|entity|object|False|None|
+|id|integer|False|The new created user ID|
+|links|object|False|Links|
+|entity|object|False|Entity|
 
 #### Update User
 
@@ -104,7 +104,7 @@ This action an be used to update a user.
 |----|----|-------|--------|-----------|----|
 |name|string|None|True|User's full name. Valid length range: 1 - 50|None|
 |roles|[]string|None|False|The list of roles for the user|None|
-|id_or_email|string|None|True|The id, email address, or mention name (beginning with an '@') of the user to update|None|
+|id_or_email|string|None|True|The ID, email address, or mention name (beginning with an '@') of the user to update|None|
 |presence|object|None|False|Presence information for the user include fields (status, show) with data type is string|None|
 |mention_name|string|None|True|User's @mention name|None|
 |is_group_admin|boolean|None|False|The user is group admin|None|
@@ -117,7 +117,7 @@ This action an be used to update a user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status_code|integer|False|Http status code|
+|status_code|integer|False| HTTP  status code|
 
 ### Triggers
 
@@ -132,8 +132,9 @@ This trigger is used to monitor for latest chat message.
 |max-results|integer|75|False|The maximum number of messages to return. Valid length range: 0 - 1000|None|
 |timezone|string|UTC|False|Your timezone. Must be a supported timezone name|None|
 |include_deleted|boolean|True|False|Include records about deleted messages into results (body of a message isn't returned). Set to 'true'|None|
-|room_id_or_name|string|None|True|Room id or name|None|
-|not-before|string|None|False|The id of the message that is oldest in the set of messages to be returned. The server will not return any messages that chronologically precede this message|None|
+|room_id_or_name|string|None|True|Room ID or name|None|
+|not-before|string|None|False|The ID of the message that is oldest in the set of messages to be returned. The server will not return any messages that chronologically precede this message|None|
+|interval|number|30|False|Interval to wait before checking for another message|None|
 
 ##### Output
 

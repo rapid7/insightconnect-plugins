@@ -1,11 +1,11 @@
 # Description
 
-Sleep allows Rapid7 InsightConnect users to suspend workflow execution for a specified period of time.
+Sleep allows Rapid7 InsightConnect users to suspend workflow execution for a specified time.
 Popular uses are to avoid rate limiting by a service or to wait for processing by a service to complete.
 
 # Key Features
 
-* Suspend workflow execution
+* Suspend workflow execution for a given number of seconds
 
 # Requirements
 

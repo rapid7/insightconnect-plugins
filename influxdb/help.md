@@ -1,6 +1,6 @@
 # Description
 
-[InfluxDB](https://docs.influxdata.com/influxdb) is a scalable datastore for metrics, events, and real-time analytics.
+[InfluxDB](https://docs.influxdata.com/influxdb) is a scalable data store for metrics, events, and real-time analytics.
 This plugin utilizes the [InfluxDB API](https://docs.influxdata.com/influxdb/v1.2/tools/api/).
 
 # Key Features
@@ -36,7 +36,7 @@ This action is used to write data to a pre-existing database.
 |----|----|-------|--------|-----------|----|
 |username|string|None|False|Sets the username for authentication|None|
 |retention_policy|string|None|False|Sets the target retention policy for the write|None|
-|consistency|string|None|False|Sets the write consistency for the point. One of [any,one,quorum,all]|None|
+|consistency|string|None|False|Sets the write consistency for the point. One of [any,one,quorum,all]|['any', 'one', 'quorum', 'all']|
 |database_name|string|None|True|Database name|None|
 |password|password|None|False|Set the password for authentication|None|
 |data|string|None|False|Data to be written into the database. Must be in Line Protocol format. See https://docs.influxdata.com/influxdb/v1.2/write_protocols/line_protocol_tutorial/|None|
@@ -46,8 +46,8 @@ This action is used to write data to a pre-existing database.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status_code|integer|False|None|
-|message|string|False|None|
+|status_code|integer|False|Status code|
+|message|string|False|Message|
 
 #### Query Database
 
@@ -70,7 +70,7 @@ An example query would be `select * from mytable`
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]result|False|None|
+|results|[]result|False|Results|
 
 #### Ping Database
 
@@ -84,8 +84,8 @@ This action does not contain any inputs.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|None|
-|version|string|False|None|
+|status|string|False|Status|
+|version|string|False|Version|
 
 ### Triggers
 

@@ -6,20 +6,20 @@ title: minFraud
 vendor: rapid7
 support: community
 status: []
-description: The MaxMind minFraud services help identify fraudulent online transactions
-version: 1.0.1
+description: Identify fraudulent online transactions. Examples include e-commerce, user account creation, and application installations
+version: 2.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/minfraud
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.maxmind.com
 tags:
 - maxmind
-- ip
+- IP
 - geoip
 - minfraud
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [maxmind, ip, geoip, minfraud]
+  keywords: [maxmind, IP, geoip, minfraud]
   features: []
 types:
   city:
@@ -308,7 +308,7 @@ types:
       required: false
     city:
       type: city
-      description: City assocaited with IP
+      description: City associated with IP
       required: false
     continent:
       type: continent
@@ -405,7 +405,7 @@ actions:
         required: false
       ip_result:
         type: ip
-        description: Results for ip
+        description: Results for IP
         required: false
       risk_score:
         type: string
@@ -675,7 +675,7 @@ actions:
         required: true
       payment_processor:
         title: Payment Processor
-        description: Payment process ued for transaction
+        description: Payment process used for transaction
         type: string
         required: false
         enum:
@@ -859,8 +859,8 @@ actions:
         type: string
         required: false
       order_subaffiliate_id:
-        title: Subaffiliate ID
-        description: ID of the subaffiliate
+        title: Sub-affiliate ID
+        description: ID of the sub affiliate
         type: string
         required: false
       order_referrer_uri:
@@ -1108,7 +1108,7 @@ actions:
         - standard
       payment_processor:
         title: Payment Processor
-        description: Payment process ued for transaction
+        description: Payment process used for transaction
         type: string
         required: false
         enum:
@@ -1260,8 +1260,8 @@ actions:
         type: string
         required: false
       order_subaffiliate_id:
-        title: Subaffiliate ID
-        description: ID of the subaffiliate
+        title: Sub affiliate ID
+        description: ID of the sub affiliate
         type: string
         required: false
       order_referrer_uri:

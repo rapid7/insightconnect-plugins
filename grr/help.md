@@ -1,6 +1,6 @@
 # Description
 
-[GRR Rapid Response](https://github.com/google/grr) is an incident reponse framework that allows you to focus on remote live forensics. GRR is a python client (agent) that is installed on target systems, and python server infrastructure that can manage and talk to clients.
+[GRR Rapid Response](https://github.com/google/grr) is an incident response framework that allows you to focus on remote live forensics. GRR is a python client (agent) that is installed on target systems, and python server infrastructure that can manage and talk to clients.
 
 The GRR plugin allows you to organize clients and start hunts using GRR.
 
@@ -9,7 +9,7 @@ This plugin utilizes the [GRR Python library](https://github.com/google/grr/tree
 # Key Features
 
 * Organize GRR clients
-* Start a hung
+* Start a hunt
 
 # Requirements
 
@@ -192,7 +192,7 @@ This action is used to start a hunt on clients.
 |convert_values|boolean|None|False|If true, convert values for export-friendly format|None|
 |match_mode|string|None|False|Match mode to trigger this hunt|['MATCH_ALL', 'MATCH_ANY']|
 |connection_states|[]string|None|False|Network connection states to match. If a process has any network connections in any status listed here, it will be considered a match|['UNKNOWN', 'CLOSED', 'LISTEN', 'SYN_SENT', 'SYN_RECV', 'ESTABLISHED', 'FIN_WAIT1', 'FIN_WAIT2', 'CLOSE_WAIT', 'CLOSING', 'LAST_ACK', 'TIME_WAIT', 'DELETE_TCB', 'NONE', 'CLOSE']|
-|cpu_limit|integer|None|False|A limit on the client cpu seconds used by this flow|None|
+|cpu_limit|integer|None|False|A limit on the client CPU seconds used by this flow|None|
 |operator|string|None|False|Operator|['EQUAL', 'LESS_THAN', 'GREATER_THAN']|
 |flow_args|boolean|False|False|Enable high signal regex checks|None|
 |attribute_regex|string|None|False|The regular expression|None|
@@ -280,7 +280,7 @@ This action is used to start a hunt on clients.
 |use_tsk|boolean|None|False|Whether raw filesystem access should be used|None|
 |fetch_binaries|boolean|None|False|Fetches Binaries|None|
 |action|string|None|False|Use an action|['STAT', 'HASH', 'DOWNLOAD']|
-|only_os|string|None|False|Limit checks to hosts of OS type(s) [Linux\|OSX\|Windows]|None|
+|only_os|string|None|False|Limit checks to hosts of OS type(s) [Linux|OSX|Windows]|None|
 |ignore_interpolation_errors|boolean|None|False|If true, don't die if %%users.homedir%% and similar fail to expand. It's common on windows for some user attributes to be missing if users have never logged in. Enable this when you have multiple artifacts or paths and want to report partial results|None|
 
 ##### Output

@@ -1,18 +1,18 @@
 # Description
 
-Administrate and manage [Office 365](https://www.office.com/) users and licenses.
-
-This plugin utilizes the [Microsoft Graph API](https://developer.microsoft.com/en-us/graph/docs/concepts/overview).
+[Office 365](https://www.office.com/) is a SaaS version of Microsoft’s popular Microsoft Office productivity suite. This plugin utilizes the [Microsoft Graph API](https://developer.microsoft.com/en-us/graph/docs/concepts/overview) to manage Office 365 users and licenses.
 
 # Key Features
 
-* Add and remove users
-* Assign licenses
+* Add users, assign licenses, and update usage locations to automate the provisioning and management of user accounts in your Office 365 subscription
+* Delete users from your Office 365 subscription
+* Get a list of subscription SKUs to maintain licensing records
 
 # Requirements
 
-* An Azure application with administrative permissions (User.ReadWrite.All)
-* Azure application credentials
+* Microsoft Office 365 Tenant ID
+* Microsoft Office 365 App ID
+* Microsoft Office 365 Admin API Token
 
 # Documentation
 

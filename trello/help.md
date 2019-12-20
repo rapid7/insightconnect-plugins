@@ -1,11 +1,7 @@
 # Description
 
-The Trello plugin allows you to manage users in your Trello project.
-
-[Trello](https://trello.com) gives you perspective over all your projects, at work and at home.
-Whether it's managing a team, writing an epic screenplay, or just making a grocery list,
-This plugin accesses the [Trello API](https://developers.trello.com/advanced-reference)
-The output of this plugin is the JSON data returned by Trello.
+[Trello](https://trello.com) is an excellent tool for managing your projects and productivity. 
+The Trello plugin allows you to manage users in your Trello project by leveraging the [Trello API](https://developers.trello.com/advanced-reference). View members, remove members, gets boards by member, and more!
 
 # Key Features
 
@@ -192,26 +188,26 @@ Value of the parameter `board_actions_since` is valid with:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|premiumFeatures|[]string|False|None|
-|invitations|[]string|False|None|
-|members|[]string|False|None|
-|powerUps|[]integer|False|None|
-|idBoards|[]string|False|None|
-|membersInvited|[]string|False|None|
-|desc|string|False|None|
-|id|string|False|None|
-|boards|[]string|False|None|
-|descData|object|False|None|
-|displayName|string|False|None|
-|name|string|False|None|
-|url|string|False|None|
-|invited|boolean|False|None|
-|billableMemberCount|integer|False|None|
-|memberships|[]string|False|None|
-|pluginData|[]string|False|None|
-|products|[]integer|False|None|
-|prefs|object|False|None|
-|activeBillableMemberCount|integer|False|None|
+|activeBillableMemberCount|integer|False|Active billable member count|
+|billableMemberCount|integer|False|Billable member count|
+|boards|[]string|False|Boards|
+|desc|string|False|The description about organization|
+|descData|object|False|Desc data|
+|displayName|string|False|Display name organization|
+|id|string|True|ID organization|
+|idBoards|[]string|False|ID boards|
+|invitations|[]string|False|Invitations|
+|invited|boolean|False|Invited|
+|members|[]string|False|Members|
+|membersInvited|[]string|False|The members invited|
+|memberships|[]string|False|Memberships|
+|name|string|False|Name organization|
+|pluginData|[]string|False|Plugin's data|
+|powerUps|[]integer|False|Power ups|
+|prefs|object|False|Prefs|
+|premiumFeatures|[]string|False|Premium features|
+|products|[]integer|False|Products|
+|url|string|False|Url|
 
 #### Remove Member from Board
 

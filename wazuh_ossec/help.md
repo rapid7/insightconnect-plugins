@@ -1,12 +1,15 @@
 # Description
 
-The Wazuh plugin will allow a user to manage their Wazuh deployment. [Wazuh](https://www.wazuh.com) is an open source project that provides security visibility, compliance and infrastructure monitoring capabilities.
-The project was born as a fork of OSSEC HIDS. This plugin utilizes the [Wazuh API](https://documentation.wazuh.com/current/user-manual/api/reference.html).
+The Wazuh plugin will allow a user to manage their Wazuh deployment. [Wazuh](https://www.wazuh.com) is an open source project that provides security visibility, compliance, incident response and infrastructure monitoring capabilities.
+Log events, monitor applications and network activity and analyze the data.
+The project was born as a fork of OSSEC HIDS.
+This plugin utilizes the [Wazuh API](https://documentation.wazuh.com/current/user-manual/api/reference.html).
 
 # Key Features
 
-* Manage Wazuh agents
-* Investigate Wazuh logs
+* Manage resources
+* Threat detection
+* Investigate logs
 
 # Requirements
 
@@ -41,18 +44,18 @@ This action does not contain any inputs.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|wazuh-modulesd|summary_log|False|None|
-|ossec-testrule|summary_log|False|None|
-|wazuh-modulesd:oscap|summary_log|False|None|
-|ossec-rootcheck|summary_log|False|None|
-|ossec-monitord|summary_log|False|None|
-|ossec-logcollector|summary_log|False|None|
-|ossec-execd|summary_log|False|None|
-|ossec-remoted|summary_log|False|None|
-|ossec-syscheckd|summary_log|False|None|
-|error|integer|True|None|
-|ossec-analysisd|summary_log|False|None|
-|wazuh-modulesd:database|summary_log|False|None|
+|wazuh-modulesd|summary_log|False|Wazuh Modulesd|
+|ossec-testrule|summary_log|False|Test rule|
+|wazuh-modulesd_oscap|summary_log|False|Wazuh modulesd oscap|
+|ossec-rootcheck|summary_log|False|Rootcheck|
+|ossec-monitord|summary_log|False|Monitord|
+|ossec-logcollector|summary_log|False|Log collector|
+|ossec-execd|summary_log|False|Execd|
+|ossec-remoted|summary_log|False|Remoted|
+|ossec-syscheckd|summary_log|False|Syscheckd|
+|ossec-analysisd|summary_log|False|Analysisd|
+|wazuh-modulesd_database|summary_log|False|Wazuh Modules : Database|
+|error|integer|True|Error Code|
 
 Example output:
 
@@ -74,7 +77,7 @@ Example output:
     "error": 0,
     "all": 79
   },
-  "wazuh-modulesd:oscap": {
+  "wazuh-modulesd_oscap": {
     "info": 1,
     "error": 0,
     "all": 1
@@ -114,7 +117,7 @@ Example output:
     "error": 0,
     "all": 177
   },
-  "wazuh-modulesd:database": {
+  "wazuh-modulesd_database": {
     "info": 1,
     "error": 83,
     "all": 84
@@ -139,7 +142,7 @@ This action is used to restart all agents, or a specified agent.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |message|string|True|Status message|
-|error|integer|True|None|
+|error|integer|True|Error code|
 
 #### Manager Information
 
@@ -153,16 +156,17 @@ This action does not contain any inputs.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|max_agents|string|True|None|
-|openssl_support|string|True|None|
-|ruleset_version|string|True|None|
-|tz_name|string|True|None|
-|tz_offset|string|True|None|
-|installation_date|string|True|None|
-|version|string|True|None|
-|error|integer|True|None|
-|path|string|True|None|
-|type|string|True|None|
+|openssl_support|string|True|OpenSSL support|
+|ruleset_version|string|True|Ruleset version|
+|tz_name|string|True|TZ name|
+|tz_offset|string|True|TZ Offset|
+|installation_date|string|True|Installation date|
+|version|string|True|Version|
+|max_agents|string|True|Max agents|
+|path|string|False|Path|
+|description|string|True|Description|
+|type|string|True|Type|
+|error|integer|True|Error Code|
 
 #### Manager Stats
 
@@ -178,8 +182,8 @@ This action is used to returns OSSEC statistical information of current date.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|stats|[]stats|True|None|
-|error|integer|True|None|
+|stats|[]stats|True|Stats|
+|error|integer|True|Error code|
 
 Example output:
 
@@ -269,9 +273,9 @@ This action is used to return the syscheck files of an agent.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|totalItems|integer|True|None|
-|syscheck_events|[]rootcheck_events|True|None|
-|error|integer|True|None|
+|totalItems|integer|True|Total items|
+|syscheck_events|[]rootcheck_events|True|Syscheck events|
+|error|integer|True|Error code|
 
 #### Agent Delete
 
@@ -304,16 +308,16 @@ This action is used to return the information of an agent.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|None|
-|name|string|True|None|
-|ip|string|True|None|
-|dateAdd|string|True|None|
-|version|string|True|None|
-|os_family|string|True|None|
-|error|integer|True|None|
-|lastKeepAlive|string|True|None|
-|os|string|True|None|
-|id|string|True|None|
+|status|string|True|Agent status|
+|name|string|True|Agent name|
+|ip|string|True|Agent IP|
+|dateAdd|string|True|Date added|
+|version|string|True|Agent version|
+|os_family|string|True|OS Family|
+|error|integer|True|Error code|
+|lastKeepAlive|string|True|Last keep alive time|
+|os|string|True|Agent OS|
+|id|string|True|Agent ID|
 
 #### Syscheck Delete
 
@@ -344,9 +348,9 @@ This action does not contain any inputs.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|interactions|integer|True|None|
-|averages|[]integer|True|None|
-|error|integer|True|None|
+|interactions|integer|True|Interactions|
+|averages|[]integer|True|Averages|
+|error|integer|True|Error code|
 
 #### Rootcheck Info
 
@@ -362,8 +366,8 @@ This action is used to return the timestamp of the last rootcheck scan.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|rootcheckEndTime|string|True|None|
-|rootcheckTime|string|True|None|
+|rootcheckEndTime|string|True|Rootcheck end time|
+|rootcheckTime|string|True|Rootcheck time|
 |error|integer|True|Error code|
 
 #### Agent Key
@@ -380,8 +384,8 @@ This action is used to return the key of an agent.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|key|string|True|None|
-|error|integer|True|None|
+|key|string|True|Agent key|
+|error|integer|True|Error code|
 
 #### Syscheck Info
 
@@ -397,8 +401,8 @@ This action is used to return the timestamp of the last syscheck scan.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|syscheckTime|string|True|None|
-|syscheckEndTime|string|True|None|
+|syscheckTime|string|True|Syscheck time|
+|syscheckEndTime|string|True|Syscheck end time|
 |error|integer|True|Error code|
 
 #### Rootcheck Database
@@ -421,9 +425,9 @@ This action is used to return the rootcheck database of an agent.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|totalItems|integer|True|None|
-|rootcheck_events|[]rootcheck_events|True|None|
-|error|integer|True|None|
+|totalItems|integer|True|Total items|
+|rootcheck_events|[]rootcheck_events|True|Rootcheck events|
+|error|integer|True|Error code|
 
 #### Rootcheck Delete
 
@@ -454,16 +458,16 @@ This action does not contain any inputs.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|wazuh-modulesd|string|True|None|
-|ossec-authd|string|True|None|
-|ossec-monitord|string|True|None|
-|ossec-logcollector|string|True|None|
-|ossec-execd|string|True|None|
-|ossec-remoted|string|True|None|
-|ossec-syscheckd|string|True|None|
-|error|integer|True|None|
-|ossec-analysisd|string|True|None|
-|ossec-maild|string|True|None|
+|wazuh-modulesd|string|True|Wazuh modulesd|
+|ossec-authd|string|True|OSSEC authd|
+|ossec-monitord|string|True|OSSEC monitord|
+|ossec-logcollector|string|True|OSSEC Logcollector|
+|ossec-execd|string|True|OSSEC execd|
+|ossec-remoted|string|True|OSSEC remoted|
+|ossec-syscheckd|string|True|OSSEC syscheckd|
+|ossec-analysisd|string|True|OSSEC analysisd|
+|ossec-maild|string|True|OSSEC maild|
+|error|integer|True|Error code|
 
 #### Manager Logs
 
@@ -473,7 +477,7 @@ This action is used to return the 3 last months of ossec.log.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order|None|
+|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order|None|
 |category|string|None|False|Filters by category of log|None|
 |search|string|None|False|Looks for elements with the specified string|None|
 |type_log|string|None|False|Filters by type of log|['All', 'Error', 'Info']|
@@ -484,9 +488,9 @@ This action is used to return the 3 last months of ossec.log.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|totalItems|integer|True|None|
-|logs|[]string|True|None|
-|error|integer|True|None|
+|totalItems|integer|True|Total items|
+|logs|[]string|True|Logs|
+|error|integer|True|Error code|
 
 #### Agent Summary
 
@@ -504,7 +508,7 @@ This action does not contain any inputs.
 |Never_connected|integer|True|Never connected agents|
 |Total|integer|True|Total agents|
 |Disconnected|integer|True|Disconnected agents|
-|error|integer|True|None|
+|error|integer|True|Error Code|
 
 #### Agents List
 
@@ -514,7 +518,7 @@ This action is used to return a list with the available agents.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order. Allowed sort fields are status, ip, id, and name|None|
+|sort|string|None|False|Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order. Allowed sort fields are status, ip, id, and name|None|
 |status|string|None|False|Filters by agent status|['All', 'Active', 'Never Connected', 'Disconnected']|
 |search|string|None|False|Looks for elements with the specified string|None|
 |limit|integer|None|False|Maximum number of elements to return|None|
@@ -524,8 +528,8 @@ This action is used to return a list with the available agents.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|totalItems|integer|True|None|
-|agents|[]agents|True|None|
+|totalItems|integer|True|Total items|
+|agents|[]agents|True|List of Agents|
 |error|integer|True|Error code|
 
 Example output:
@@ -561,7 +565,7 @@ This action is used to add a new agent.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|ip|string|None|False|If you do not include this param, the API will get the IP automatically. If you are behind a proxy, you must set the option config.BehindProxyServer to yes at config.js.|None|
+|ip|string|None|False|If you do not include this param, the API will get the IP automatically. If you are behind a proxy, you must set the option config.BehindProxyServer to yes at config.js|None|
 |force|string|None|False|Remove old agent with same IP if disconnected since force seconds|None|
 |name|string|None|True|Agent name|None|
 
@@ -603,7 +607,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 2.0.0 - Removed colon from variable names wazuh-modules_oscap and wazuh-modules_database | New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

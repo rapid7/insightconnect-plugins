@@ -305,8 +305,8 @@ This trigger is used to allows consumers to get alert and policy action notifica
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|notifications|[]notifications|False|Collection of Notifincations|
 |message|string|False|Notification Message|
+|notifications|[]notifications|False|Collection of Notifications|
 |success|boolean|False|Notification Success|
 
 ### Custom Output Types
@@ -316,11 +316,11 @@ _This plugin does not contain any custom output types._
 ## Troubleshooting
 
 When selecting adjusting frequency please review [rate limits](https://developer.carbonblack.com/reference/cb-defense/authentication/#rate-limiting)
-Get Notifications trigger requiers that the [API key type](https://developer.carbonblack.com/reference/cb-defense/authentication/#api-key-types) is a 'SIEM' type
+Get Notifications trigger requires that the [API key type](https://developer.carbonblack.com/reference/cb-defense/authentication/#api-key-types) is a 'SIEM' type.
 
 # Version History
 
-* 1.1.2 - New spec and help.md format for the Hub
+* 2.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Registry Value
 * 1.1.1 - Update to Python 3.7 Slim SDK (plugin size reduction) | Fix bug in output where Security Event Code was defined as an `object` instead of a `string`
 * 1.1.0 - New action Get Details for Specific Event
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

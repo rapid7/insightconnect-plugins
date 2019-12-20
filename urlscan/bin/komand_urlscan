@@ -7,7 +7,7 @@ from komand_urlscan import connection, actions, triggers
 Name = 'urlscan.io'
 Vendor = 'rapid7'
 Version = '2.1.3'
-Description = 'The URLScan plugin uses URLScan to analyze urls for malicious indicators'
+Description = 'Analyze URLs for malicious indicators using the URLScan website scanner'
 
 
 class ICONUrlscan(komand.Plugin):

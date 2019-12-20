@@ -1,12 +1,14 @@
 # Description
 
-The [URLScan](https://urlscan.io/) plugin uses URLScan to analyze urls for malicious indicators.
+The [URLScan](https://urlscan.io/) plugin uses URLScan to analyze URLs for malicious indicators.
 
-This plugin utilizes the [URLScan API](https://urlscan.io/about-api/).
+This plugin utilizes the [URLScan API](https://urlscan.io/about-api/) to search for URLs and retrieve reports
+on potential malicous indicators.
 
 # Key Features
 
-* Scan a URL and get a report on that URL
+* Launch a scan on a URL
+* Retrieve reports on a URL
 
 # Requirements
 
@@ -43,8 +45,8 @@ This action is used to search urlscan.io.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|total|integer|False|None|
 |results|[]results|False|UrlScan.io Results|
+|total|integer|False|Total number of results returned|
 
 Example output:
 
@@ -85,7 +87,7 @@ Example output:
 
 #### Submit URL for Scan
 
-This action is used to submit a url to generate a scan report that can be retrieved later.
+This action is used to submit a URL to generate a scan report that can be retrieved later.
 
 ##### Input
 

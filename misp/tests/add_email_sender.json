@@ -4,7 +4,7 @@
   "body": {
     "input": {
       "distribution": "This Organization",
-      "sender": "stuff@badguy.com",
+      "sender": "user@example.com",
       "comment": "Test",
       "event": "762",
       "proposal": false

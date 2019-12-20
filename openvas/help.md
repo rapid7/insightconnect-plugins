@@ -326,5 +326,4 @@ the date given to the `create_schedule` function is given in the UTC timezone.
 
 ## References
 
-* [Example](https://example.com)
-* [Example API](http://docs.example.com)
+* [OpenVAS](http://www.openvas.org/)

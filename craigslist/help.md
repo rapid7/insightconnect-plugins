@@ -1,6 +1,6 @@
 # Description
 
-[Craigslist](https://www.craigslist.com) provides local classifieds and forums for jobs, housing, for
+[Craigslist](https://www.craigslist.org/) provides local classifieds and forums for jobs, housing, for
   sale, personals, services, local community, and events. Using the Craigslist plugin for Rapid7 InsightConnect,
 organizations can monitor their brand as well as automate searches for lost or stolen assets.
 
@@ -102,6 +102,6 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Craigslist](https://www.craigslist.org)
+* [Craigslist](https://www.craigslist.org/)
 * [python-craigslist](https://pypi.python.org/pypi/python-craigslist/1.0.4)
 
