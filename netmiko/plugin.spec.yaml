@@ -4,7 +4,7 @@ products: [insightconnect]
 name: netmiko
 title: Netmiko
 description: Access network devices over SSH
-version: 1.0.2
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []

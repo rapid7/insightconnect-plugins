@@ -49,7 +49,7 @@ types:
       type: string
 actions:
   list_users:
-    title: List Users
+    title: List User
     description: Show a paginated list of all users. Users can be filtered by their
       IDs or email
     input:

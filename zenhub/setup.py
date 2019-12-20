@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='zenhub-rapid7-plugin',
-      version='1.0.1',
-      description='Agile project management in GitHub.   Manage issues and epics',
+      version='2.0.0',
+      description='Manage issues and epics in Zenhub, an agile project management tool for GitHub',
       author='rapid7',
       author_email='',
       url='',

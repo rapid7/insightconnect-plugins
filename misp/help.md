@@ -728,7 +728,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Commented Explanation
+* 4.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Commented Explanation
 * 3.0.0 - Fixed issue where Add URLs, Add Context, Add Email Sender, Add Email Subject and Add Email Recipient actions sent requests as a proposal | Fixed an issue where the distribution list was set incorrectly within Add URLs, Add Context, Create an Event, Add Email Sender, Add Email Subject, Add Email Recipient actions
 * 2.0.0 - Updated to new credential types | Update `hostname` variable in Connection to `url`
 * 1.0.0 - Add trigger. Add actions: Add Attachment, Remove Tag, Search Events, Publish. Support web server mode

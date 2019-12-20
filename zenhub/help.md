@@ -365,7 +365,8 @@ Note: GitHub Repository IDs (repo_id) can be obtained via the GitHub API at the 
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 2.0.0 - Variable title updated
+* 1.0.1 - New spec and help.md format for the Hub 
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Rename "Move Issue between Pipelines" action to "Move Issue Between Pipelines"
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
