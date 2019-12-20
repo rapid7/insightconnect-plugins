@@ -6,7 +6,7 @@ from komand_wordpress import connection, actions, triggers
 
 Name = 'WordPress'
 Vendor = 'rapid7'
-Version = '1.0.1'
+Version = '2.0.0'
 Description = 'Suspend or delete users from a Wordpress instance'
 
 
