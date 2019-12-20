@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="dynamodb-rapid7-plugin",
-      version="1.0.3",
+      version="1.0.2",
       description="Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data using the DynamoDB plugin for Rapid7 InsightConnect",
       author="rapid7",
       author_email="",

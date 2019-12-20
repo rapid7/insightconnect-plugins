@@ -111,8 +111,7 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Version History
 
-* 1.0.3 - Add missing title values for actions in plugin.spec.yaml
-* 1.0.2 - New spec and help.md format for the Hub
+* 1.0.2 - New spec and help.md format for the Hub | Add missing title values for actions in plugin.spec.yaml
 * 1.0.1 - Set `params` input in Scan action to not required
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.2 - Clean up unsatisfactory debugging message

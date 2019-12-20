@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="csv-rapid7-plugin",
-      version="1.1.5",
+      version="1.1.4",
       description="CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to extract fields from CSV strings and files",
       author="rapid7",
       author_email="",

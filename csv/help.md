@@ -147,8 +147,7 @@ CSV files must not have non-CSV data such as comments.
 
 # Version History
 
-* 1.1.5 - Add missing title values for actions in plugin.spec.yaml
-* 1.1.4 - New spec and help.md format for the Hub
+* 1.1.4 - New spec and help.md format for the Hub | Add missing title values for actions in plugin.spec.yaml
 * 1.1.3 - Fix issue where connection tests were failing, output did not match spec
 * 1.1.2 - Support webserver mode
 * 1.1.1 - Fix JSON to CSV action to account for correct input type
