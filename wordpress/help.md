@@ -98,8 +98,7 @@ the discovery process does not work on locally run web servers, as the API root 
 
 # Version History
 
-* 2.0.0 - Added titles for the actions
-* 1.0.1 - New spec and help.md format for the Hub
+* 2.0.0 - New spec and help.md format for the Hub | Added titles for the actions
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
