@@ -29,7 +29,7 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-#### List Users
+#### List User
 
 This action is used to show a paginated list of all users. Users can be filtered by their IDs or email.
 
