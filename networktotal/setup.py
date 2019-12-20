@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='networktotal-rapid7-plugin',
       version='1.0.1',
-      description='Networktotal is used to upload a PCAP for analysis',
+      description='Upload a PCAP file for analysis, detecting viruses, worms, trojans and malware',
       author='rapid7',
       author_email='',
       url='',

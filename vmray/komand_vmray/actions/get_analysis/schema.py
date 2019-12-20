@@ -316,7 +316,7 @@ class GetAnalysisOutput(komand.Output):
         "analysis_vm_name": {
           "type": "string",
           "title": "Analysis VM Name",
-          "description": "Analysis vm name",
+          "description": "Analysis VM name",
           "order": 29
         },
         "analysis_vmhost_id": {

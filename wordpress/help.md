@@ -1,10 +1,11 @@
 # Description
 
-The [WordPress](https://wordpress.com/) plugin allows you to manage users on the WordPress platform
+The [WordPress](https://wordpress.com/) plugin allows you to manage users on the WordPress platform. Only users can be deleted or suspended from the wordpress application.
 
 # Key Features
 
-* Manage users
+* Delete users
+* Suspend Users
 
 # Requirements
 
@@ -22,7 +23,7 @@ This plugin requires that the WordPress instance be configured as follows:
 2. The default Basic Auth or Application Password plugins must not be installed
 
 Users may choose to install the [Application-Password plugin](https://github.com/georgestephanis/application-passwords)
-to avoid passing plaintext passwords over http. Otherwise, users must install the Basic Auth plugin.
+to avoid passing plain text passwords over http. Otherwise, users must install the Basic Auth plugin.
 
 The connection configuration accepts the following parameters:
 
@@ -93,12 +94,11 @@ Header always set Access-Control-Allow-Headers: Authorization
 
 The Basic Auth plugin that can be searched for in the WordPress admin console does not function properly. Instead, [this plugin](https://github.com/WP-API/Basic-Auth)
 should be used though application passwords are *strongly* recommended. Testing the plugin is difficult due to the distributed nature of the WordPress API. Additionally,
-the discovery process does not work on locally run webservers, as the API root will be given as `localhost` as opposed to the host IP.
+the discovery process does not work on locally run web servers, as the API root will be given as `localhost` as opposed to the host IP.
 
 # Version History
 
-* 1.0.2 - Add missing title values for actions in plugin.spec.yaml
-* 1.0.1 - New spec and help.md format for the Hub
+* 2.0.0 - New spec and help.md format for the Hub | Added titles for the actions
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

@@ -1,8 +1,11 @@
 # Description
 
 The VMRay plugin allows the user to submit files or URLs for malware analysis.
-
-[VMRay](https://www.vmray.com) delivers advanced threat analysis and detection that combines a unique agentless hypervisor-based network sandbox with a real-time reputation engine. The combination provides both fast, high volume file classification and in-depth malware analysis. The VMRay Analyzer is platform independent and highly scalable, the result of a decade of R&D by some of the world's leading experts on dynamic malware analysis. By monitoring at the hypervisor level, it is undetectable by malware running in the target operating system. VMRay serves leading enterprises around the world.
+[VMRay](https://www.vmray.com) delivers advanced threat analysis and detection that combines a unique agent-less hypervisor-based network sandbox with a real-time reputation engine.
+The combination provides both fast, high volume file classification and in-depth malware analysis.
+The VMRay Analyzer is platform independent and can be scaled, the result of a decade of R&D by some of the world's leading experts on dynamic malware analysis.
+By monitoring at the hypervisor level, it is undetectable by malware running in the target operating system.
+VMRay serves leading enterprises around the world.
 
 This plugin utilizes the [VMRay API](https://cloud.vmray.com/static_doc/html/api/REST_API_Documentation.html).
 
@@ -40,7 +43,7 @@ This action is used to submit a file for analysis.
 |----|----|-------|--------|-----------|----|
 |file|file|None|True|File and filename for analysis|None|
 |analyzer_mode|string|default|False|Specify what analyzer mode to use|['default', 'reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
-|optional_params|object|None|False|Parameters that allow finer tuning of the Submit File action, e.g {"analysis_id"\: 12345}|None|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Submit File action, e.g {"analysis_id": 12345}|None|
 
 Supported File Types:
 
@@ -52,8 +55,7 @@ Supported File Types:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|submission_details|details|False|Submission details|
-|success|boolean|False|File submission success|
+|results|submit_file|False|Results returned from submitting a URL|
 
 Example output:
 
@@ -76,7 +78,7 @@ Example output:
         "reputation_job_status": "queued",
         "reputation_job_statuschanged": "2018-12-03T16:22:32",
         "reputation_job_submission_id": 2361855,
-        "reputation_job_user_email": "jonathan_schipp@example.com",
+        "reputation_job_user_email": "user@example.com",
         "reputation_job_user_id": 1099
       }
     ],
@@ -127,7 +129,7 @@ Example output:
         "submission_user_account_id": 320,
         "submission_user_account_name": "Rapid7/Komand",
         "submission_user_account_subscription_mode": "free_account",
-        "submission_user_email": "jonathan_schipp@example.com",
+        "submission_user_email": "user@example.com",
         "submission_user_id": 1099,
         "submission_webif_url": "https://cloud.vmray.com/user/sample/view?id=2101187",
         "submission_whois_mode": "disabled"
@@ -148,9 +150,9 @@ This action is used to get all dynamic and static analyses in the system or deta
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id_type|string|None|True|Get analysis based on ID of a specified type|["analysis_id", "analyzer", "configuration", "static_config", "created", "job", "jobrule", "job_started", "prescript", "result_code", "sample", "size", "snapshot", "submission", "user", "vm", "vmhost", "vti_score", "all"]|
-|id|string|None|False|ID based on ID type selected, leave blank if "all" is selected|None|
-|optional_params|object|None|False|Parameters that allow finer tuning of get analysis  e.g {"analysis_id"\: 12345}|None|
+|id_type|string|None|True|Get analysis based on ID of a specified type|['analysis_id', 'analyzer', 'configuration', 'static_config', 'created', 'job', 'jobrule', 'job_started', 'prescript', 'result_code', 'sample', 'size', 'snapshot', 'submission', 'user', 'vm', 'vmhost', 'vti_score', 'all']|
+|id|string|None|False|ID based on ID type selected, leave blank if 'all' is selected|None|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Get Analysis action, e.g {"analysis_id": 12345}|None|
 
 Optional Parameters can be found in the API documentation, located `http://vmrayhost/static_doc/html/api/User_API_Reference.html`
 
@@ -197,7 +199,7 @@ Example output:
     "analysis_snapshot_name": "def",
     "analysis_submission_id": 1490045,
     "analysis_tags": [],
-    "analysis_user_email": "demo@vmray.com",
+    "analysis_user_email": "user@example.com",
     "analysis_user_id": 88,
     "analysis_vm_id": 9,
     "analysis_vm_name": "win7_64_sp1",
@@ -243,7 +245,7 @@ Example output:
     "analysis_snapshot_name": "def",
     "analysis_submission_id": 1490045,
     "analysis_tags": [],
-    "analysis_user_email": "demo@vmray.com",
+    "analysis_user_email": "user@example.com",
     "analysis_user_id": 88,
     "analysis_vm_id": 9,
     "analysis_vm_name": "win7_64_sp1",
@@ -268,10 +270,9 @@ This action is used to get all samples in the system or details about specific o
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sample_type|string|None|False|Specified type of sample|['all', 'sample_id', 'created', 'filesize', 'md5', 'sha1', 'sha256', 'type']|
-|sample|string|None|True|Sample ID, hash or type,leave blank if 'all' is selected|None|
-|optional_params|object|None|False|Parameters that allow finer tuning of get analysis e.g {"analysis_id"\: 12345}|None|
-
+|sample_type|string|None|True|Specified type of sample|['all', 'sample_id', 'created', 'filesize', 'md5', 'sha1', 'sha256', 'type']|
+|sample|string|None|False|Sample ID, hash or type, leave blank if 'all' is selected|None|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Get Samples action, e.g {"analysis_id": 12345}|None|
 ##### Output
 
 |Name|Type|Required|Description|
@@ -311,8 +312,8 @@ This action is used to submits a URL for analysis.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|URL to be submitted for analysis|None|
-|analyzer_mode|string|None|False|Specify what analyzer mode to use|['default', 'reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
-|optional_params|object|None|False|Parameters that allow finer tuning of the Submit URL action, e.g {"analysis_id"\: 12345}|None|
+|analyzer_mode|string|default|False|Specify what analyzer mode to use|['default', 'reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Submit URL action, e.g {"analysis_id": 12345}|None|
 
 ##### Output
 
@@ -350,7 +351,7 @@ Example output:
       "job_submission_id": 2361900,
       "job_tracking_state": "//waiting",
       "job_type": "full_analysis",
-      "job_user_email": "jonathan_schipp@example.com",
+      "job_user_email": "user@example.com",
       "job_user_id": 1099,
       "job_vm_id": 9,
       "job_vm_name": "win7_64_sp1",
@@ -380,7 +381,7 @@ Example output:
       "job_submission_id": 2361900,
       "job_tracking_state": "//waiting",
       "job_type": "full_analysis",
-      "job_user_email": "jonathan_schipp@example.com",
+      "job_user_email": "user@example.com",
       "job_user_id": 1099,
       "job_vm_id": 17,
       "job_vm_name": "win7_32_sp1",
@@ -410,7 +411,7 @@ Example output:
       "job_submission_id": 2361900,
       "job_tracking_state": "//waiting",
       "job_type": "full_analysis",
-      "job_user_email": "jonathan_schipp@example.com",
+      "job_user_email": "user@example.com",
       "job_user_id": 1099,
       "job_vm_id": 20,
       "job_vm_name": "win10_64",
@@ -431,7 +432,7 @@ Example output:
       "reputation_job_status": "queued",
       "reputation_job_statuschanged": "2018-12-03T16:37:00",
       "reputation_job_submission_id": 2361900,
-      "reputation_job_user_email": "jonathan_schipp@example.com",
+      "reputation_job_user_email": "user@example.com",
       "reputation_job_user_id": 1099
     }
   ],
@@ -482,7 +483,7 @@ Example output:
       "submission_user_account_id": 320,
       "submission_user_account_name": "Rapid7/Komand",
       "submission_user_account_subscription_mode": "free_account",
-      "submission_user_email": "jonathan_schipp@example.com",
+      "submission_user_email": "user@example.com",
       "submission_user_id": 1099,
       "submission_webif_url": "https://cloud.vmray.com/user/sample/view?id=2118603",
       "submission_whois_mode": "disabled"
@@ -503,7 +504,7 @@ Example output:
       "whois_job_status": "queued",
       "whois_job_statuschanged": "2018-12-03T16:37:00",
       "whois_job_submission_id": 2361900,
-      "whois_job_user_email": "jonathan_schipp@example.com",
+      "whois_job_user_email": "user@example.com",
       "whois_job_user_id": 1099
     }
   ]
@@ -524,8 +525,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.0 - New Titles for output data (spelling corrections)
 * 4.0.2 - New spec and help.md format for the Hub
-* 4.0.1 - Update actions Submit File and Submit URL to specify what analyzer to use | Update file type support for the Submit File action
+* 4.0.1 - Update actions and Submit URL to specify what analyzer to use | Update file type support for the Submit File action
 * 4.0.0 - New actions Get Samples and Submit URL | Removed action Get Analysis by Hash | Fixed issue where Submit File results are not available in the workflow builder, and filename would not be included when submitting the file for analysis | Get Samples should replace Get Analysis by Hash
 * 3.0.0 - Added action Get Analysis | Ported over to Python from Go
 * 2.0.2 - Regenerate with latest Go SDK to solve bug with triggers

@@ -1,13 +1,7 @@
 {
     "body": {
         "action": "delete_user",
-        "connection": {
-            "credentials": {
-                "password": "",
-                "username": ""
-            },
-            "host": null
-        },
+        "connection": {},
         "input": {
             "reassignee": "",
             "username": ""

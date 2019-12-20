@@ -53,7 +53,7 @@ class ManagerStatusOutput(komand.Output):
     "ossec-authd": {
       "type": "string",
       "title": "OSSEC Authd",
-      "description": "Ossec authd",
+      "description": "OSSEC authd",
       "order": 2
     },
     "ossec-execd": {

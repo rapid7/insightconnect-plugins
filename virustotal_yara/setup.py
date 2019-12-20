@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='virustotal_yara-rapid7-plugin',
       version='1.1.1',
-      description='The VirusTotal Yara plugin allows the user to analyze files with the Yara Python libarary',
+      description='Analyze files and URLs to detect malware, automatically share them with the security community',
       author='rapid7',
       author_email='',
       url='',

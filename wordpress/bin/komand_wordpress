@@ -6,8 +6,9 @@ from komand_wordpress import connection, actions, triggers
 
 Name = "WordPress"
 Vendor = "rapid7"
-Version = "1.0.2"
-Description = "The WordPress plugin allows for user management on the WordPress platform"
+
+Version = "2.0.0"
+Description = "Suspend or delete users from a Wordpress instance"
 
 
 class ICONWordpress(komand.Plugin):

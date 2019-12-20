@@ -1,13 +1,7 @@
 {
     "body": {
         "action": "file_get",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "url": null
-        },
+        "connection": {},
         "input": {
             "hash": "asdf"
         },

@@ -3,9 +3,9 @@ extension: plugin
 products: [insightconnect]
 name: wazuh_ossec
 title: Wazuh OSSEC
-description: Provides security visibility, compliance and infrastructure monitoring
+description: Open source security platform providing security visibility, compliance and infrastructure monitoring
   capabilities
-version: 1.0.1
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -522,7 +522,7 @@ actions:
       ossec-authd:
         title: OSSEC Authd
         type: string
-        description: Ossec authd
+        description: OSSEC authd
         required: true
       ossec-monitord:
         title: OSSEC Monitord
@@ -634,7 +634,7 @@ actions:
         type: summary_log
         description: Test rule
         required: false
-      wazuh-modulesd:oscap:
+      wazuh-modulesd_oscap:
         title: Wazuh Modulesd Oscap
         type: summary_log
         required: false
@@ -650,7 +650,7 @@ actions:
         description: Monitord
         required: false
       ossec-logcollector:
-        title: Ossec Log Collector
+        title: OSSEC Log Collector
         type: summary_log
         description: Log collector
         required: false
@@ -674,7 +674,7 @@ actions:
         type: summary_log
         description: Analysisd
         required: false
-      wazuh-modulesd:database:
+      wazuh-modulesd_database:
         title: 'Wazuh Modules : Database'
         type: summary_log
         description: 'Wazuh Modules : Database'

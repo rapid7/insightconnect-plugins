@@ -1,13 +1,7 @@
 {
     "body": {
         "action": "suspend_user",
-        "connection": {
-            "credentials": {
-                "password": "",
-                "username": ""
-            },
-            "host": null
-        },
+        "connection": {},
         "input": {
             "username": ""
         },

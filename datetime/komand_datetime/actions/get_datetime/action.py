@@ -1,5 +1,5 @@
 import komand
-from .schema import GetDatetimeInput, GetDatetimeOutput
+from .schema import GetDatetimeInput, GetDatetimeOutput, Input, Output
 import time
 import maya
 
@@ -14,8 +14,8 @@ class GetDatetime(komand.Action):
                 output=GetDatetimeOutput())
 
     def run(self, params={}):
-        format_string = params.get("format_string")
-        use_rfc3339_format = params.get("use_rfc3339_format")
+        format_string = params.get(Input.FORMAT_STRING)
+        use_rfc3339_format = params.get(Input.USE_RFC3339_FORMAT)
 
         if not use_rfc3339_format:
             current_time = time.strftime(format_string)
@@ -24,4 +24,4 @@ class GetDatetime(komand.Action):
 
         epoch_timestamp = maya.now().epoch
 
-        return {"datetime": current_time, "epoch_timestamp": epoch_timestamp}
+        return {Output.DATETIME: current_time, Output.EPOCH_TIMESTAMP: epoch_timestamp}
