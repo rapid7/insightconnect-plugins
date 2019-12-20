@@ -17,7 +17,9 @@ class Decode(komand.Action):
         url = params.get(Input.URL)
         try:
             results = decode_url(url)
-            return {Output.RESULT: results}
+            if results:
+                return {Output.RESULT: results}
+            return {Output.RESULT: url}
         except Exception as e:
             return {Output.RESULT: url}
             self.logger.debug(e)
