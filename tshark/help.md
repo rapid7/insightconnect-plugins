@@ -1,7 +1,8 @@
 # Description
 
 [TShark](https://www.wireshark.org/docs/man-pages/tshark.html) is a tool for dumping and analyzing network traffic.
- With the TShark plugin for Rapid7 InsightConnect, users can open PCAP data for further analysis and intel gathering.
+With the TShark plugin for Rapid7 InsightConnect, users can open PCAP data for further analysis and intel gathering.
+Using this plugin aids in the process of analyzing network traffic.
 
 # Key Features
 
@@ -27,18 +28,11 @@ This action is used to run TShark on a user supplied PCAP file and return the ou
 
 ##### Input
 
-Supported options:
-
-* TShark Flags
-* Display Filter
-
-A display filter is required, the default is set to `ip or ipv6` to encompass most traffic one would want to analyze.
-
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|file|bytes|None|True|Base64 encoded PCAP|None|
 |filter|string|ip or ipv6|False|Display filter E.g. tcp.port eq 80|None|
 |options|string|None|False|Tshark flags and options E.g. -n -c 10 -s 96. -r is implied|None|
-|file|bytes|None|True|Base64 encoded pcap|None|
 
 ##### Output
 
@@ -106,7 +100,7 @@ For example, `-V` is used to return the following `dump_contents` array where ea
 
 # Version History
 
-* 1.0.2 - New spec and help.md format for the Hub
+* 2.0.0 - New spec and help.md format for the Hub | Title rename from "Base64 Encoded Pcap" to "Base64 Encoded PCAP" for Run action file input
 * 1.0.1 - Fix issue where run action was excluded from plugin on build
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK

@@ -5,8 +5,8 @@ name: urlscan
 title: urlscan.io
 vendor: rapid7
 support: community
-status: []
-description: The URLScan plugin uses URLScan to analyze urls for malicious indicators
+status: [] 
+description: Analyze URLs for malicious indicators using the URLScan website scanner
 version: 2.1.3
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/urlscan

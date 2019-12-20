@@ -7,7 +7,7 @@ from komand_uniq import connection, actions, triggers
 Name = 'Uniq'
 Vendor = 'rapid7'
 Version = '1.0.2'
-Description = 'Uniq removes redundant lines or items from data. Using the Uniq plugin can allow users to deduplicate datasets or items prior to processing within a workflow'
+Description = 'Deduplicate datasets or items prior to processing within a workflow'
 
 
 class ICONUniq(komand.Plugin):

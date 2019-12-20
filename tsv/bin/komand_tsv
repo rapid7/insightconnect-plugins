@@ -4,10 +4,10 @@ import komand
 from komand_tsv import connection, actions, triggers
 
 
-Name = 'TSV'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'TSV (Tab Separated Values) is a simple data format for storing data. This plugin allows one to extract fields from TSV strings and files'
+Name = "TSV"
+Vendor = "rapid7"
+Version = "1.0.1"
+Description = "Extract fields from TSV-formatted strings and files"
 
 
 class ICONTsv(komand.Plugin):

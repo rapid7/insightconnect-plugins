@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Run Tshark on a pcap"
+    DESCRIPTION = "Run Tshark on a PCAP"
 
 
 class Input:
@@ -26,9 +26,9 @@ class RunInput(komand.Input):
   "properties": {
     "file": {
       "type": "string",
-      "title": "Base64 Encoded Pcap",
+      "title": "Base64 Encoded PCAP",
       "displayType": "bytes",
-      "description": "Base64 encoded pcap",
+      "description": "Base64 encoded PCAP",
       "format": "bytes",
       "order": 1
     },
