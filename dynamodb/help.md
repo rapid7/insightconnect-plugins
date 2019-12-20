@@ -95,7 +95,7 @@ It will return the list of objects found, and a count of the records.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |count|int|False|Count|
-|records|array|False|Records|'
+|records|array|False|Records|
 
 ### Triggers
 
@@ -124,4 +124,3 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 * [Dynamo Developer Resources](https://aws.amazon.com/dynamodb/developer-resources/)
 * [Dynamo Condition Expression Guide](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html#ConditionExpressionReference)
-
