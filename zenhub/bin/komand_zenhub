@@ -4,10 +4,10 @@ import komand
 from komand_zenhub import connection, actions, triggers
 
 
-Name = 'ZenHub'
-Vendor = 'rapid7'
-Version = '2.0.0'
-Description = 'Manage issues and epics in Zenhub, an agile project management tool for GitHub'
+Name = "ZenHub"
+Vendor = "rapid7"
+Version = "2.0.0"
+Description = "Manage issues and epics in Zenhub, an agile project management tool for GitHub"
 
 
 class ICONZenhub(komand.Plugin):
