@@ -1,14 +1,11 @@
 # Description
 
-The [Zenhub](https://www.zenhub.com) plugin allows for agile project management in GitHub. This plugin will allow you to manage issues, epics, and pipelines in a ZenHub enable Git repository.
-
-This plugin utilizes the [Zenhub API](https://github.com/ZenHubIO/API) to manage ZenHub Epics, Pipelines, and Estimates.
+The [Zenhub](https://www.zenhub.com) plugin allows for agile project management in GitHub. This plugin will allow you to manage issues, epics, and pipelines in a ZenHub enabled Git repository.  This plugin utilizes the [Zenhub API](https://github.com/ZenHubIO/API) to manage ZenHub Epics, Pipelines, and Estimates.
 
 # Key Features
 
 * Create an Issue
 * Create an Epic
-* Move an issue to another pipeline
 
 # Requirements
 
@@ -38,8 +35,8 @@ This action is used to get the ZenHub events for a github issue.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
-|issue_number|integer|None|False|GitHub Issue Number|None|
+|repo_id|integer|None|True|GitHub Repository ID e.g. 24237263|None|
+|issue_number|integer|None|True|GitHub Issue Number|None|
 
 ##### Output
 
@@ -85,9 +82,9 @@ This action is used to remove a github issue from a ZenHub epic.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
-|issue|issue_reference|None|False|A GitHub Issue to remove from the ZenHub Epic|None|
-|epic_id|integer|None|False|GitHub Issue Number of the ZenHub Epic|None|
+|repo_id|integer|None|True|GitHub Repository ID e.g. 24237263|None|
+|epic_id|integer|None|True|GitHub Issue Number of the ZenHub Epic|None|
+|issue|issue_reference|None|True|A GitHub Issue to remove from the ZenHub Epic|None|
 
 ##### Output
 
@@ -104,8 +101,8 @@ This action is used to get the ZenHub data for a ZenHub epic.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
-|epic_id|integer|None|False|GitHub Issue Number of the ZenHub Epic|None|
+|repo_id|integer|None|True|GitHub Repository ID e.g. 24237263|None|
+|epic_id|integer|None|True|GitHub Issue Number of the ZenHub Epic|None|
 
 ##### Output
 
@@ -144,9 +141,9 @@ This action is used to convert a github issue to a ZenHub epic.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
-|issues|[]issue_reference|None|False|GitHub Issues to add to ZenHub Epic|None|
-|issue_number|integer|None|False|GitHub Issue Number|None|
+|repo_id|integer|None|True|GitHub Repository ID e.g. 24237263|None|
+|issue_number|integer|None|True|GitHub Issue Number|None|
+|issues|[]issue_reference|None|True|GitHub Issues to add to ZenHub Epic|None|
 
 ##### Output
 
@@ -162,9 +159,9 @@ This action is used to set the ZenHub estimate value for a github issue.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
-|estimate_value|integer|None|False|ZenHub Estimate Value|None|
-|issue_number|integer|None|False|GitHub Issue Number|None|
+|repo_id|integer|None|True|GitHub Repository ID e.g. 24237263|None|
+|issue_number|integer|None|True|GitHub Issue Number|None|
+|estimate_value|integer|None|True|ZenHub Estimate Value|None|
 
 ##### Output
 
@@ -181,8 +178,8 @@ This action is used to convert a ZenHub epic back to a Github issue.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
-|epic_id|integer|None|False|GitHub Issue Number of the ZenHub Epic|None|
+|repo_id|integer|None|True|GitHub Repository ID e.g. 24237263|None|
+|epic_id|integer|None|True|GitHub Issue Number of the ZenHub Epic|None|
 
 ##### Output
 
@@ -198,9 +195,9 @@ This action is used to add a github issue to a ZenHub epic.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
-|issue|issue_reference|None|False|A GitHub Issue to add to the ZenHub Epic|None|
-|epic_id|integer|None|False|GitHub Issue Number of the ZenHub Epic|None|
+|repo_id|integer|None|True|GitHub Repository ID e.g. 24237263|None|
+|epic_id|integer|None|True|GitHub Issue Number of the ZenHub Epic|None|
+|issue|issue_reference|None|True|A GitHub Issue to add to the ZenHub Epic|None|
 
 ##### Output
 
@@ -232,7 +229,7 @@ This action is used to get the ZenHub epics for a github repository.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
+|repo_id|integer|None|True|GitHub Repository ID e.g. 24237263|None|
 
 ##### Output
 
@@ -264,10 +261,10 @@ This action is used to move a github issue between ZenHub pipelines.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|position|integer|None|False|New Position in the ZenHub Pipeline (-1\: bottom, 0\: top, n\: nth index)|None|
-|repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
-|issue_number|integer|None|False|GitHub Issue Number|None|
-|pipeline_id|string|None|False|ZenHub Pipeline ID|None|
+|repo_id|integer|None|True|GitHub Repository ID e.g. 24237263|None|
+|issue_number|integer|None|True|GitHub Issue Number|None|
+|pipeline_id|string|None|True|ZenHub Pipeline ID|None|
+|position|integer|None|True|New Position in the ZenHub Pipeline (-1: bottom, 0: top, n: nth index)|None|
 
 ##### Output
 
@@ -283,7 +280,7 @@ This action is used to get the ZenHub board data for a github repository.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
+|repo_id|integer|None|True|GitHub Repository ID e.g. 24237263|None|
 
 ##### Output
 
@@ -327,8 +324,8 @@ This action is used to get the ZenHub data for a github issue.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|repo_id|integer|None|False|GitHub Repository ID e.g. 24237263|None|
-|issue_number|integer|None|False|GitHub Issue Number|None|
+|repo_id|integer|None|True|GitHub Repository ID e.g. 24237263|None|
+|issue_number|integer|None|True|GitHub Issue Number|None|
 
 ##### Output
 
@@ -368,7 +365,7 @@ Note: GitHub Repository IDs (repo_id) can be obtained via the GitHub API at the 
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 2.0.0 - New spec and help.md format for the Hub | Variable title updated
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Rename "Move Issue between Pipelines" action to "Move Issue Between Pipelines"
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

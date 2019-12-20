@@ -1,10 +1,10 @@
 # Description
 
-[Maxmind's minFraud](https://www.maxmind.com/en/minfraud-services) service provides fraud intelligence data. The minFraud service queries the insights service
-via its API and provides relevant data on the transaction data provided, including an overall risk score. The
-actions have been broken down into each top-level request field.
+[Maxmind's minFraud](https://www.maxmind.com/en/minfraud-services) service provides fraud intelligence data. The
+minFraud service queries the insights service via its API and provides relevant data on the transaction data
+provided, including an overall risk score. The actions have been broken down into each top-level request field.
 
-This plugin utilizes the minFraud API and implements all of its available lookups.
+This plugin utilizes the minFraud API and implements all of its available look ups.
 
 # Key Features
 
@@ -39,9 +39,9 @@ This action can be used to retrieve intelligence information for a given payment
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|IP address to query|None|
-|payment_processor|string|None|False|Payment process ued for transaction|['none', 'adyen', 'altapay', 'amazon_payments', 'authorizenet', 'balanced', 'beanstream', 'bluepay', 'braintree', 'ccnow', 'chase_paymentech', 'cielo', 'collector', 'compropago', 'concept_payments', 'conekta', 'cuentadigital', 'dalpay', 'dibs', 'digital_river', 'ecomm365', 'elavon', 'epay', 'eprocessing_network', 'eway', 'first_data', 'global_payments', 'ingenico', 'internetsecure', 'intuit_quickbooks_payments', 'iugu', 'mastercard_payment_gateway', 'mercadopago', 'merchant_esolutions', 'mirjeh', 'mollie', 'moneris_solutions', 'nmi', 'openpaymx', 'optimal_payments', 'orangepay', 'other', 'pacnet_services', 'payfast', 'paygate', 'payone', 'paypal', 'payplus', 'paystation', 'paytrace', 'paytrail', 'payture', 'payu', 'payulatam', 'pinpayments', 'princeton_payment_solutions', 'psigate', 'qiwi', 'quickpay', 'raberil', 'rede', 'redpagos', 'rewardspay', 'sagepay', 'simplify_commerce', 'skrill', 'smartcoin', 'sps_decidir', 'stripe', 'telerecargas', 'towah', 'usa_epay', 'verepay', 'vindicia', 'virtual_card_services', 'vme', 'worldpay']|
-|payment_was_authorized|boolean|None|False|Payment authorized\: true/false|None|
 |payment_decline_code|string|None|False|Payment decline code|None|
+|payment_processor|string|None|False|Payment process used for transaction|['none', 'adyen', 'altapay', 'amazon_payments', 'authorizenet', 'balanced', 'beanstream', 'bluepay', 'braintree', 'ccnow', 'chase_paymentech', 'cielo', 'collector', 'compropago', 'concept_payments', 'conekta', 'cuentadigital', 'dalpay', 'dibs', 'digital_river', 'ecomm365', 'elavon', 'epay', 'eprocessing_network', 'eway', 'first_data', 'global_payments', 'ingenico', 'internetsecure', 'intuit_quickbooks_payments', 'iugu', 'mastercard_payment_gateway', 'mercadopago', 'merchant_esolutions', 'mirjeh', 'mollie', 'moneris_solutions', 'nmi', 'openpaymx', 'optimal_payments', 'orangepay', 'other', 'pacnet_services', 'payfast', 'paygate', 'payone', 'paypal', 'payplus', 'paystation', 'paytrace', 'paytrail', 'payture', 'payu', 'payulatam', 'pinpayments', 'princeton_payment_solutions', 'psigate', 'qiwi', 'quickpay', 'raberil', 'rede', 'redpagos', 'rewardspay', 'sagepay', 'simplify_commerce', 'skrill', 'smartcoin', 'sps_decidir', 'stripe', 'telerecargas', 'towah', 'usa_epay', 'verepay', 'vindicia', 'virtual_card_services', 'vme', 'worldpay']|
+|payment_was_authorized|boolean|None|False|Payment authorized: true/false|None|
 
 ##### Output
 
@@ -161,7 +161,7 @@ This action can be used to retrieve intelligence information for all query items
 |shipping_phone_country_code|string|None|False|Country code for phone number|None|
 |order_currency|string|None|False|Currency code for the currency used|None|
 |billing_country|string|None|False|Two character country code|None|
-|payment_was_authorized|boolean|None|False|Payment authorized\: true/false|None|
+|payment_was_authorized|boolean|None|False|Payment authorized: true/false|None|
 |billing_last_name|string|None|False|Last name in billing info|None|
 |user_id|string|None|False|ID associated with the end-user|None|
 |shipping_delivery_speed|string|None|False|Shipping Delivery Speed|['none', 'same_day', 'overnight', 'expedited', 'standard']|
@@ -169,7 +169,7 @@ This action can be used to retrieve intelligence information for all query items
 |shipping_last_name|string|None|False|Last name in shipping info|None|
 |shipping_region|string|None|False|Subdivision code in shipping address|None|
 |billing_phone_country_code|string|None|False|Country code for phone number|None|
-|payment_processor|string|None|False|Payment process ued for transaction|['none', 'adyen', 'altapay', 'amazon_payments', 'authorizenet', 'balanced', 'beanstream', 'bluepay', 'braintree', 'ccnow', 'chase_paymentech', 'cielo', 'collector', 'compropago', 'concept_payments', 'conekta', 'cuentadigital', 'dalpay', 'dibs', 'digital_river', 'ecomm365', 'elavon', 'epay', 'eprocessing_network', 'eway', 'first_data', 'global_payments', 'ingenico', 'internetsecure', 'intuit_quickbooks_payments', 'iugu', 'mastercard_payment_gateway', 'mercadopago', 'merchant_esolutions', 'mirjeh', 'mollie', 'moneris_solutions', 'nmi', 'openpaymx', 'optimal_payments', 'orangepay', 'other', 'pacnet_services', 'payfast', 'paygate', 'payone', 'paypal', 'payplus', 'paystation', 'paytrace', 'paytrail', 'payture', 'payu', 'payulatam', 'pinpayments', 'princeton_payment_solutions', 'psigate', 'qiwi', 'quickpay', 'raberil', 'rede', 'redpagos', 'rewardspay', 'sagepay', 'simplify_commerce', 'skrill', 'smartcoin', 'sps_decidir', 'stripe', 'telerecargas', 'towah', 'usa_epay', 'verepay', 'vindicia', 'virtual_card_services', 'vme', 'worldpay']|
+|payment_processor|string|None|False|Payment process used for transaction|['none', 'adyen', 'altapay', 'amazon_payments', 'authorizenet', 'balanced', 'beanstream', 'bluepay', 'braintree', 'ccnow', 'chase_paymentech', 'cielo', 'collector', 'compropago', 'concept_payments', 'conekta', 'cuentadigital', 'dalpay', 'dibs', 'digital_river', 'ecomm365', 'elavon', 'epay', 'eprocessing_network', 'eway', 'first_data', 'global_payments', 'ingenico', 'internetsecure', 'intuit_quickbooks_payments', 'iugu', 'mastercard_payment_gateway', 'mercadopago', 'merchant_esolutions', 'mirjeh', 'mollie', 'moneris_solutions', 'nmi', 'openpaymx', 'optimal_payments', 'orangepay', 'other', 'pacnet_services', 'payfast', 'paygate', 'payone', 'paypal', 'payplus', 'paystation', 'paytrace', 'paytrail', 'payture', 'payu', 'payulatam', 'pinpayments', 'princeton_payment_solutions', 'psigate', 'qiwi', 'quickpay', 'raberil', 'rede', 'redpagos', 'rewardspay', 'sagepay', 'simplify_commerce', 'skrill', 'smartcoin', 'sps_decidir', 'stripe', 'telerecargas', 'towah', 'usa_epay', 'verepay', 'vindicia', 'virtual_card_services', 'vme', 'worldpay']|
 |time|string|None|False|Time of event|None|
 |email|string|None|False|Email address used in transaction|None|
 |transaction_id|string|None|False|Transaction ID|None|
@@ -200,7 +200,7 @@ This action can be used to retrieve intelligence information for all query items
 |user_agent|string|None|False|HTTP User-Agent header|None|
 |billing_company|string|None|False|Company name in billing info|None|
 |shipping_address|string|None|False|Shipping address line 1|None|
-|order_subaffiliate_id|string|None|False|ID of the subaffiliate|None|
+|order_subaffiliate_id|string|None|False|ID of the sub affiliate|None|
 |shipping_company|string|None|False|Company name in shipping info|None|
 |shipping_phone_number|string|None|False|Phone number without country code|None|
 |avs_result|string|None|False|Address Verification System result|None|
@@ -297,7 +297,7 @@ This action can be used to retrieve intelligence information for a given IP addr
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ip_result|ip|False|Results for ip|
+|ip_result|ip|False|Results for IP|
 |risk_score|string|False|Overall risk score|
 |device_result|device|False|Results for device|
 
@@ -315,7 +315,7 @@ This action can be used to retrieve intelligence information for a given order t
 |order_referrer_uri|string|None|False|URI of the referring site|None|
 |order_has_gift_message|boolean|None|False|Order has gift message|None|
 |address|string|None|True|IP address to query|None|
-|order_subaffiliate_id|string|None|False|ID of the subaffiliate|None|
+|order_subaffiliate_id|string|None|False|ID of the sub affiliate|None|
 |order_currency|string|None|False|Currency code for the currency used|None|
 |order_discount_code|string|None|False|Discount code applied to transaction|None|
 
@@ -340,7 +340,7 @@ Refer to the minFraud API documentation for explicit details.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 2.0.0 - New spec and help.md format for the Hub | New titles for some output variables
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Rename actions
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

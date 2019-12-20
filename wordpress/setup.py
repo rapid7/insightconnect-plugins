@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='wordpress-rapid7-plugin',
-      version='1.0.1',
-      description='The WordPress plugin allows for user management on the WordPress platform',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="wordpress-rapid7-plugin",
+      version="2.0.0",
+      description="Suspend or delete users from a Wordpress instance",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_wordpress']
