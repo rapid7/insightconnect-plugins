@@ -4,10 +4,10 @@ import komand
 from komand_cloudshark import connection, actions, triggers
 
 
-Name = 'Cloud Shark'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'CloudShark is an on-premises platform for packet analysis. Users can upload and manage capture files using the CloudShark plugin for Rapid7 InsightConnect'
+Name = "Cloud Shark"
+Vendor = "rapid7"
+Version = "2.0.0"
+Description = "CloudShark is an on-premises platform for packet analysis. Users can upload and manage capture files using the CloudShark plugin for Rapid7 InsightConnect"
 
 
 class ICONCloudshark(komand.Plugin):
