@@ -1,6 +1,6 @@
 # Description
 
-The Get URL InsighConnect plugin allows you to download files from a URL. Supported protocols are HTTP, HTTPS, and FTP.
+The Get URL InsightConnect plugin allows you to download files from a URL. Supported protocols are HTTP, HTTPS, and FTP.
 
 This plugin's cache is enabled across workflows to store previously downloaded files to reduce future web requests.
 To reduce the number of subsequent requests the Etag and If-Modified-Since fields are also checked.
@@ -11,8 +11,8 @@ To reduce the number of subsequent requests the Etag and If-Modified-Since field
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Get the contents of a web page
+* Check a web page for changes
 
 # Documentation
 
