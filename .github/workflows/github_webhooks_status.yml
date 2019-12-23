@@ -10,8 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: GitHub Webhooks Status
-      run: |
-        python3 -m pip install --upgrade pip setuptools
-        python3 -m pip install --user github-status-checker --no-warn-script-location
-        STATUS=$(/home/runner/.local/bin/github-status webhooks)
-        grep -q "is currently operational" <<< "${STATUS}"
+      runs:
+        using: 'docker'
+        image: 'Dockerfile'
+        args:
+          - "webhooks"
