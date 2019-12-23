@@ -7,12 +7,12 @@ To reduce the number of subsequent requests the Etag and If-Modified-Since field
 
 # Key Features
 
-* Download files from URL
+* Get the contents of a web page
+* Check a web page for changes
 
 # Requirements
 
-* Get the contents of a web page
-* Check a web page for changes
+_This plugin does not contain any requirements._
 
 # Documentation
 
