@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: GitHub Webhooks Status
-      runs:
+      run:
         using: 'docker'
         image: 'Dockerfile'
         args:
