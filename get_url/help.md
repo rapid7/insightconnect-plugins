@@ -43,8 +43,8 @@ This action returns the contents of the URL and an HTTP status code.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status_code|integer|False|Status Code|
 |bytes|bytes|False|Bytes|
+|status_code|integer|False|Status code|
 
 ### Triggers
 
@@ -66,8 +66,8 @@ This action returns the contents of the URL and an HTTP status code.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status_code|integer|False|Status Code|
 |bytes|bytes|False|Bytes|
+|status_code|integer|False|Status code|
 
 ### Custom Output Types
 
