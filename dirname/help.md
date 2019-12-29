@@ -45,7 +45,7 @@ This action is used to get the directory name of a path.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|dirname|string|False|None|
+|dirname|string|False|Directory name of a path|
 
 Example output
 
@@ -71,6 +71,7 @@ If the input doesn't contain a slash `/` in the path, the result will be an empt
 
 # Version History
 
+* 1.0.3 - Update to use the `komand/python-3-37-slim-plugin:3` Docker image | Changed description in dirname action output | Changed `Exception` to `PluginException` | Changed bare strings in params.get and output to static fields from schema
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.0 - Support web server mode
