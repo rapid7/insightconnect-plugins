@@ -28,13 +28,13 @@ This action is used to extract headers and file attachments.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|eml_file|bytes|None|True|EML File|None|
+|eml_file|bytes|None|True|Email Message File|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result|result|False|None|
+|result|result|False|Contents of parsed EML file|
 
 Example output:
 
@@ -84,7 +84,7 @@ This action is used to extract headers and file attachments from a string.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|eml_file|string|None|True|EML File string|None|
+|email_string|string|None|True|Email Message as string|None|
 
 ##### Output
 
@@ -144,6 +144,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.3 - Changed description in plugin.spec | Changed bare strings in params.get and output to static fields from schema | Remove unused variables | Changed variables names to more readable | Changed `Exception` to `PluginException`
 * 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Fix issue where plugin would fail on empty date returned
 * 1.1.0 - New action Parse EML File from String

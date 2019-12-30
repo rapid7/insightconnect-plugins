@@ -24,7 +24,7 @@ class ParseFromStringInput(komand.Input):
     "email_string": {
       "type": "string",
       "title": "Email String",
-      "description": "Email as string",
+      "description": "Email Message as string",
       "order": 1
     }
   },
