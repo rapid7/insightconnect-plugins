@@ -52,7 +52,9 @@ class AddUser(komand.Action):
                       'userPassword': password, 'userPrincipalName': user_principal_name}
 
         parameters.update(additional_parameters)
-        self.logger.info(parameters)
+        log_parameters = parameters
+        log_parameters.pop("userPassword")
+        self.logger.info(log_parameters)
 
         conn.add(dn, ['person', 'user'], parameters)
         pass_set = extend.ad_modify_password(conn, dn, password, None)
