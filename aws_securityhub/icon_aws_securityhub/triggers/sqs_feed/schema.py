@@ -9,21 +9,21 @@ class Component:
 
 class Input:
     
-    ATTRIBUTENAMES = "AttributeNames"
-    MAXNUMBEROFMESSAGES = "MaxNumberOfMessages"
-    MESSAGEATTRIBUTENAMES = "MessageAttributeNames"
-    RECEIVEREQUESTATTEMPTID = "ReceiveRequestAttemptId"
-    VISIBILITYTIMEOUT = "VisibilityTimeout"
-    WAITTIMESECONDS = "WaitTimeSeconds"
+    ATTRIBUTE_NAMES = "attribute_names"
     INTERVAL = "interval"
+    MAX_NUMBER_OF_MESSAGES = "max_number_of_messages"
+    MESSAGE_ATTRIBUTE_NAMES = "message_attribute_names"
     QUEUE_URL = "queue_url"
+    RECEIVE_REQUEST_ATTEMPT_ID = "receive_request_attempt_id"
+    VISIBILITY_TIMEOUT = "visibility_timeout"
+    WAIT_TIME_SECONDS = "wait_time_seconds"
     
 
 class Output:
     
-    MESSAGE = "Message"
-    RESPONSEMETADATA = "ResponseMetadata"
-    SECURITYHUBEVENT = "securityhubevent"
+    MESSAGE = "message"
+    RESPONSE_METADATA = "response_metadata"
+    SECURITY_HUB_EVENT = "security_hub_event"
     
 
 class SqsFeedInput(komand.Input):
@@ -32,7 +32,7 @@ class SqsFeedInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "AttributeNames": {
+    "attribute_names": {
       "type": "array",
       "title": "Attribute Names",
       "description": "A list of attributes that need to be returned along with each message ['All', 'Policy', 'VisibilityTimeout', 'MaximumMessageSize', 'MessageRetentionPeriod', 'ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible', 'CreatedTimestamp', 'LastModifiedTimestamp', 'QueueArn', 'ApproximateNumberOfMessagesDelayed', 'DelaySeconds', 'ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds']",
@@ -44,14 +44,21 @@ class SqsFeedInput(komand.Input):
       ],
       "order": 2
     },
-    "MaxNumberOfMessages": {
+    "interval": {
+      "type": "integer",
+      "title": "Interval",
+      "description": "How many seconds to wait until next poll",
+      "default": 5,
+      "order": 8
+    },
+    "max_number_of_messages": {
       "type": "integer",
       "title": "Max Number of Messages",
       "description": "The maximum number of messages to return. Amazon SQS never returns more messages than this value. Valid values 1 to 10. Default 1",
       "default": 1,
       "order": 3
     },
-    "MessageAttributeNames": {
+    "message_attribute_names": {
       "type": "array",
       "title": "Message Attribute Names",
       "description": "The name of the message attribute",
@@ -63,39 +70,32 @@ class SqsFeedInput(komand.Input):
       ],
       "order": 4
     },
-    "ReceiveRequestAttemptId": {
+    "queue_url": {
+      "type": "string",
+      "title": "Queue URL",
+      "description": "URL for the SQS queue",
+      "order": 1
+    },
+    "receive_request_attempt_id": {
       "type": "string",
       "title": "Receive Request Attempt ID",
       "description": "This parameter applies only to FIFO (first-in-first-out) queues",
       "default": "",
       "order": 7
     },
-    "VisibilityTimeout": {
+    "visibility_timeout": {
       "type": "integer",
       "title": "Visibility Timeout",
       "description": "The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request",
       "default": 0,
       "order": 5
     },
-    "WaitTimeSeconds": {
+    "wait_time_seconds": {
       "type": "integer",
       "title": "Wait Time Seconds",
       "description": "The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than WaitTimeSeconds",
       "default": 0,
       "order": 6
-    },
-    "interval": {
-      "type": "integer",
-      "title": "Interval",
-      "description": "How many seconds to wait until next poll",
-      "default": 5,
-      "order": 8
-    },
-    "queue_url": {
-      "type": "string",
-      "title": "Queue URL",
-      "description": "URL for the SQS queue",
-      "order": 1
     }
   },
   "required": [
@@ -115,22 +115,22 @@ class SqsFeedOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "Message": {
+    "message": {
       "$ref": "#/definitions/Message",
       "title": "Message",
-      "description": "Message",
+      "description": "Security hub message",
       "order": 1
     },
-    "ResponseMetadata": {
+    "response_metadata": {
       "$ref": "#/definitions/ResponseMetadata",
       "title": "Response Metadata",
-      "description": "Response metadata",
+      "description": "Security hub response metadata",
       "order": 3
     },
-    "securityhubevent": {
+    "security_hub_event": {
       "$ref": "#/definitions/securityHubPayload",
       "title": "Security Hub Event",
-      "description": "Security Hub Event",
+      "description": "Security hub event payload",
       "order": 2
     }
   },

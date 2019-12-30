@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    FINDINGS = "Findings"
+    FINDINGS = "findings"
     
 
 class GetFindingsInput(komand.Input):
@@ -41,10 +41,10 @@ class GetFindingsOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "Findings": {
+    "findings": {
       "type": "array",
       "title": "Findings",
-      "description": "Findings",
+      "description": "Security Hub-aggregated findings",
       "items": {
         "$ref": "#/definitions/Findings"
       },
