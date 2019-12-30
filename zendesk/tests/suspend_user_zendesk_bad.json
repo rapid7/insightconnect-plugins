@@ -1,16 +1,7 @@
 {
     "body": {
         "action": "suspend_user",
-        "connection": {
-            "api_key": {
-                "secretKey": null
-            },
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "subdomain": null
-        },
+        "connection": {},
         "input": {
             "user_id": "no_exist_id"
         },

@@ -229,7 +229,7 @@ This action is used to look up a URL.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|Full URL E.g. http\://faker.su/data/entry/steam/Steam.exe|None|
+|url|string|None|True|Full URL E.g. http://faker.su/data/entry/steam/Steam.exe|None|
 
 ##### Output
 
@@ -445,6 +445,7 @@ the count range 1-2000 has been tested and verified working by us.
 
 # Version History
 
+* 2.0.0 - Add missing title values for actions in plugin.spec.yaml
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Add discontinuation of Cymon notice
 * 1.0.0 - Support web server mode

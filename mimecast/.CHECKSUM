@@ -1,5 +1,5 @@
 {
-	"spec": "0e16bb0ff517fe1143aed5d803057c18",
+	"spec": "5551af5985a8134963b730ec72b47074",
 	"manifest": "58432d4ecae3d14974b4953b4944e16a",
 	"setup": "628ad31181211cef76f8514f22b9ca54",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "create_blocked_sender_policy/schema.py",
-			"hash": "3b3c1a78ec27313480ded966b9a2048b"
+			"hash": "a868cae40f99416e68386b580993c4c9"
 		},
 		{
 			"identifier": "create_managed_url/schema.py",

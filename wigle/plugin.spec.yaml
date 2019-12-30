@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: wigle
 title: WiGLE
-description: The WiGLE (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks
+description: Wireless Geographic Logging Engine, WiGLE, will get and send information about wireless networks
 version: 1.0.1
 vendor: rapid7
 support: community

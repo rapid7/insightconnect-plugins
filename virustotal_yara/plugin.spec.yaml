@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: virustotal_yara
 title: VirusTotal Yara
-description: The VirusTotal Yara plugin allows the user to analyze files with the Yara Python libarary
+description: Analyze files and URLs to detect malware, automatically share them with the security community
 version: 1.1.1
 vendor: rapid7
 support: community
@@ -59,7 +59,6 @@ actions:
     output:
       results:
         title: Results
-        description: 'Results returned form Yara''s analysis. Note: byte information
-          has been encoded to UTF-8'
+        description: Results returned from the Yara analysis. It is byte information, encoded to UTF-8
         type: '[]results'
         required: true

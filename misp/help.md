@@ -1,7 +1,8 @@
 # Description
 
 [MISP](http://www.misp-project.org/) is an open source threat sharing platform.
-This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.html) and leverages the [pymisp](https://github.com/MISP/PyMISP) library.
+Gather, store and then find correlations of indicators of compromise. Quality of data is determined by the open source community.
+This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.html) and leverages the [pymisp](https://github.com/CIRCL/PyMISP) library.
 
 # Key Features
 
@@ -40,8 +41,8 @@ This action is used to add context. This action returns `true` or `false` on whe
 |comment|comment_input|None|True|Comment|None|
 |link|link_input|None|True|Link|None|
 |other|other_input|None|True|Other|None|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 |text|text_input|None|True|Text|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 
 ##### Output
 
@@ -151,8 +152,8 @@ This action is used to add a tag. The event tag must already exist in MISP. This
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|event|string|None|True|Event ID to append to|None|
 |tag|string|None|True|Event tag to add|None|
+|event|string|None|True|Event ID to append to|None|
 
 ##### Output
 
@@ -230,6 +231,7 @@ This action is used to add URLs to an event. This action returns `true` or `fals
 |event|string|None|False|Event ID to append to|None|
 |proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 |urls|[]string|None|False|URLs to add|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 
 ##### Output
 
@@ -280,7 +282,7 @@ This action is used to export snort or suricata rules.
 |tags|[]string|None|False|Array of tags to include in results|None|
 |event_id|string|None|False|Narrow results to a single event|None|
 |last|string|None|False|Events within x amount of time E.g. 5d|None|
-|frame|boolean|True|True|Commented out expliantion framing the data|None|
+|frame|boolean|True|True|Commented out explanation framing the data|None|
 |format|string|None|True|Export format as either Suricata or Snort|['suricata', 'snort']|
 
 ##### Output
@@ -402,6 +404,7 @@ This action is used to add email subject to event. This action returns `true` or
 |event|string|None|True|Event ID to append to|None|
 |proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 |subject|string|None|True|Email subject|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
 
 ##### Output
 
@@ -434,7 +437,7 @@ This action is used to receive events based on criteria.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |errors|[]string|False|Errors|
-|event|Event"|False|Event|
+|event|Event|False|Event|
 |message|string|False|Message|
 
 Example output:
@@ -447,7 +450,7 @@ Example output:
     "locked": false,
     "proposal_email_lock": false,
     "published": false,
-    "event_creator_email": "admin@misp.training",
+    "event_creator_email": "user@example.com",
     "RelatedEvent": [],
     "analysis": "1",
     "org_id": "1",
@@ -534,14 +537,14 @@ This action is used to search for events.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|analysis|string|None|False|Search by analysis level|['Don't search on', 'Initial', 'Ongoing', 'Completed']|
+|analysis|string|None|False|Search by analysis level|['Do not search on', 'Initial', 'Ongoing', 'Completed']|
 |date_from|string|None|False|Search after this date e.g. 2018-03-22|None|
 |date_until|string|None|False|Search before this date e.g. 2018-03-22|None|
 |event|string|None|False|Search by event ID|None|
 |organization|string|None|False|Search by organization|None|
-|published|string|None|False|Search by if published|['Don't search on', 'True', 'False']|
+|published|string|None|False|Search by if published|['Do not search on', 'True', 'False']|
 |tag|string|None|False|Search by tag|None|
-|threat_level|string|None|False|Search by threat level|['Don't search on', 'Undefined', 'Low', 'Medium', 'High']|
+|threat_level|string|None|False|Search by threat level|['Do not search on', 'Undefined', 'Low', 'Medium', 'High']|
 
 ##### Output
 
@@ -607,7 +610,7 @@ This action is used to add an attribute to an event.
 |comment|string|None|False|Optional comment to add to attribute|None|
 |event|string|None|True|ID of event to append to|None|
 |type_value|string|None|True|The Type of attribute e.g. URL, SHA256|None|
-|value|string|None|True|The Value of the attribute e.g. for a URL https://malware.com|None|
+|value|string|None|True|The Value of the attribute e.g. for a URL https://malware.com|None|'
 
 ##### Output
 
@@ -725,7 +728,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Commented Explanation
+* 4.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Commented Explanation
 * 3.0.0 - Fixed issue where Add URLs, Add Context, Add Email Sender, Add Email Subject and Add Email Recipient actions sent requests as a proposal | Fixed an issue where the distribution list was set incorrectly within Add URLs, Add Context, Create an Event, Add Email Sender, Add Email Subject, Add Email Recipient actions
 * 2.0.0 - Updated to new credential types | Update `hostname` variable in Connection to `url`
 * 1.0.0 - Add trigger. Add actions: Add Attachment, Remove Tag, Search Events, Publish. Support web server mode

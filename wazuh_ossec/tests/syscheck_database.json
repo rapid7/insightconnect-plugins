@@ -1,13 +1,7 @@
 {
     "body": {
         "action": "syscheck_database",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "url": null
-        },
+        "connection": {},
         "input": {
             "agent_id": "",
             "event": "All",

@@ -39,7 +39,7 @@ class PaymentLookupInput(komand.Input):
     "payment_processor": {
       "type": "string",
       "title": "Payment Processor",
-      "description": "Payment process ued for transaction",
+      "description": "Payment process used for transaction",
       "enum": [
         "none",
         "adyen",
@@ -124,7 +124,7 @@ class PaymentLookupInput(komand.Input):
     "payment_was_authorized": {
       "type": "boolean",
       "title": "Payment Was Authorized",
-      "description": "Payment authroized: true/false",
+      "description": "Payment authorized: true/false",
       "order": 3
     }
   },

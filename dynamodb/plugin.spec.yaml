@@ -40,6 +40,7 @@ connection:
     required: false
 actions:
   scan:
+    title: Scan
     description: Scan Dynamo and return any objects found
     input:
       table:
@@ -66,6 +67,7 @@ actions:
         type: array
         required: false
   insert:
+    title: Insert
     description: Store an object into Dynamo
     input:
       table:
@@ -88,6 +90,7 @@ actions:
         type: boolean
         required: false
   update:
+    title: Update
     description: Update an object in Dyanmo
     input:
       table:
