@@ -724,12 +724,12 @@ class ReportOutput(komand.Output):
             },
             "ha_enabled": {
               "type": "boolean",
-              "title": "HA Enabled?",
+              "title": "HA Enabled",
               "order": 1
             },
             "tiny_tags": {
               "type": "boolean",
-              "title": "Tiny Tags?",
+              "title": "Tiny Tags",
               "order": 3
             }
           }
@@ -812,7 +812,7 @@ class ReportOutput(komand.Output):
           "properties": {
             "has_carved_files": {
               "type": "string",
-              "title": "Carved Files?",
+              "title": "Carved Files",
               "order": 1
             },
             "total_runtime_targets": {
@@ -1156,7 +1156,7 @@ class ReportOutput(komand.Output):
             },
             "crashfile": {
               "type": "boolean",
-              "title": "Crashfile?",
+              "title": "Crashfile",
               "order": 6
             },
             "end_time": {
@@ -1178,12 +1178,12 @@ class ReportOutput(komand.Output):
             },
             "ismissingkernelmode": {
               "type": "boolean",
-              "title": "Missing KernelMode?",
+              "title": "Missing KernelMode",
               "order": 12
             },
             "network_enabled": {
               "type": "boolean",
-              "title": "Network Enabled?",
+              "title": "Network Enabled",
               "order": 2
             },
             "originalname": {
@@ -1193,7 +1193,7 @@ class ReportOutput(komand.Output):
             },
             "sniffer_enabled": {
               "type": "boolean",
-              "title": "Sniffer Enabled?",
+              "title": "Sniffer Enabled",
               "order": 4
             },
             "start_time": {
@@ -1226,32 +1226,32 @@ class ReportOutput(komand.Output):
                 },
                 "isallowsampletampering": {
                   "type": "boolean",
-                  "title": "Allow SampleTampering?",
+                  "title": "Allow SampleTampering",
                   "order": 10
                 },
                 "isexperimentalantievasion": {
                   "type": "boolean",
-                  "title": "Experimental AntiEvasion?",
+                  "title": "Experimental AntiEvasion",
                   "order": 6
                 },
                 "isfolderanalysis": {
                   "type": "boolean",
-                  "title": "Folder Analysis?",
+                  "title": "Folder Analysis",
                   "order": 14
                 },
                 "isscriptlogging": {
                   "type": "boolean",
-                  "title": "Script Logging?",
+                  "title": "Script Logging",
                   "order": 7
                 },
                 "isstaticanalysis": {
                   "type": "boolean",
-                  "title": "Static Analysis?",
+                  "title": "Static Analysis",
                   "order": 5
                 },
                 "istorenabledanalysis": {
                   "type": "boolean",
-                  "title": "Tor-Enabled Analysis?",
+                  "title": "Tor-Enabled Analysis",
                   "order": 11
                 },
                 "mode": {
@@ -1266,7 +1266,7 @@ class ReportOutput(komand.Output):
                 },
                 "nohashlookup": {
                   "type": "boolean",
-                  "title": "No HashLookup?",
+                  "title": "No HashLookup",
                   "order": 9
                 },
                 "script": {
@@ -1281,7 +1281,7 @@ class ReportOutput(komand.Output):
                 },
                 "sharedanalysis": {
                   "type": "boolean",
-                  "title": "Shared Analysis?",
+                  "title": "Shared Analysis",
                   "order": 4
                 }
               }
@@ -1462,32 +1462,32 @@ class ReportOutput(komand.Output):
             },
             "isallowsampletampering": {
               "type": "boolean",
-              "title": "Allow SampleTampering?",
+              "title": "Allow SampleTampering",
               "order": 10
             },
             "isexperimentalantievasion": {
               "type": "boolean",
-              "title": "Experimental AntiEvasion?",
+              "title": "Experimental AntiEvasion",
               "order": 6
             },
             "isfolderanalysis": {
               "type": "boolean",
-              "title": "Folder Analysis?",
+              "title": "Folder Analysis",
               "order": 14
             },
             "isscriptlogging": {
               "type": "boolean",
-              "title": "Script Logging?",
+              "title": "Script Logging",
               "order": 7
             },
             "isstaticanalysis": {
               "type": "boolean",
-              "title": "Static Analysis?",
+              "title": "Static Analysis",
               "order": 5
             },
             "istorenabledanalysis": {
               "type": "boolean",
-              "title": "Tor-Enabled Analysis?",
+              "title": "Tor-Enabled Analysis",
               "order": 11
             },
             "mode": {
@@ -1502,7 +1502,7 @@ class ReportOutput(komand.Output):
             },
             "nohashlookup": {
               "type": "boolean",
-              "title": "No HashLookup?",
+              "title": "No HashLookup",
               "order": 9
             },
             "script": {
@@ -1517,7 +1517,7 @@ class ReportOutput(komand.Output):
             },
             "sharedanalysis": {
               "type": "boolean",
-              "title": "Shared Analysis?",
+              "title": "Shared Analysis",
               "order": 4
             }
           }
@@ -1677,7 +1677,7 @@ class ReportOutput(komand.Output):
               "properties": {
                 "has_carved_files": {
                   "type": "string",
-                  "title": "Carved Files?",
+                  "title": "Carved Files",
                   "order": 1
                 },
                 "total_runtime_targets": {
@@ -2148,7 +2148,7 @@ class ReportOutput(komand.Output):
               "properties": {
                 "isreliable": {
                   "type": "string",
-                  "title": "Is Reliable?",
+                  "title": "Is Reliable",
                   "order": 1
                 },
                 "threatlevel": {
@@ -2208,12 +2208,12 @@ class ReportOutput(komand.Output):
             },
             "isdelayedavscan": {
               "type": "boolean",
-              "title": "Delayed AVScan?",
+              "title": "Delayed AVScan",
               "order": 16
             },
             "isurlanalysis": {
               "type": "boolean",
-              "title": "Is URLAnalysis?",
+              "title": "Is URLAnalysis",
               "order": 20
             },
             "sample": {
@@ -2363,12 +2363,12 @@ class ReportOutput(komand.Output):
                 },
                 "ha_enabled": {
                   "type": "boolean",
-                  "title": "HA Enabled?",
+                  "title": "HA Enabled",
                   "order": 1
                 },
                 "tiny_tags": {
                   "type": "boolean",
-                  "title": "Tiny Tags?",
+                  "title": "Tiny Tags",
                   "order": 3
                 }
               }
@@ -2419,7 +2419,7 @@ class ReportOutput(komand.Output):
                 },
                 "crashfile": {
                   "type": "boolean",
-                  "title": "Crashfile?",
+                  "title": "Crashfile",
                   "order": 6
                 },
                 "end_time": {
@@ -2441,12 +2441,12 @@ class ReportOutput(komand.Output):
                 },
                 "ismissingkernelmode": {
                   "type": "boolean",
-                  "title": "Missing KernelMode?",
+                  "title": "Missing KernelMode",
                   "order": 12
                 },
                 "network_enabled": {
                   "type": "boolean",
-                  "title": "Network Enabled?",
+                  "title": "Network Enabled",
                   "order": 2
                 },
                 "originalname": {
@@ -2456,7 +2456,7 @@ class ReportOutput(komand.Output):
                 },
                 "sniffer_enabled": {
                   "type": "boolean",
-                  "title": "Sniffer Enabled?",
+                  "title": "Sniffer Enabled",
                   "order": 4
                 },
                 "start_time": {
@@ -2489,32 +2489,32 @@ class ReportOutput(komand.Output):
                     },
                     "isallowsampletampering": {
                       "type": "boolean",
-                      "title": "Allow SampleTampering?",
+                      "title": "Allow SampleTampering",
                       "order": 10
                     },
                     "isexperimentalantievasion": {
                       "type": "boolean",
-                      "title": "Experimental AntiEvasion?",
+                      "title": "Experimental AntiEvasion",
                       "order": 6
                     },
                     "isfolderanalysis": {
                       "type": "boolean",
-                      "title": "Folder Analysis?",
+                      "title": "Folder Analysis",
                       "order": 14
                     },
                     "isscriptlogging": {
                       "type": "boolean",
-                      "title": "Script Logging?",
+                      "title": "Script Logging",
                       "order": 7
                     },
                     "isstaticanalysis": {
                       "type": "boolean",
-                      "title": "Static Analysis?",
+                      "title": "Static Analysis",
                       "order": 5
                     },
                     "istorenabledanalysis": {
                       "type": "boolean",
-                      "title": "Tor-Enabled Analysis?",
+                      "title": "Tor-Enabled Analysis",
                       "order": 11
                     },
                     "mode": {
@@ -2529,7 +2529,7 @@ class ReportOutput(komand.Output):
                     },
                     "nohashlookup": {
                       "type": "boolean",
-                      "title": "No HashLookup?",
+                      "title": "No HashLookup",
                       "order": 9
                     },
                     "script": {
@@ -2544,7 +2544,7 @@ class ReportOutput(komand.Output):
                     },
                     "sharedanalysis": {
                       "type": "boolean",
-                      "title": "Shared Analysis?",
+                      "title": "Shared Analysis",
                       "order": 4
                     }
                   }
@@ -2629,32 +2629,32 @@ class ReportOutput(komand.Output):
                 },
                 "isallowsampletampering": {
                   "type": "boolean",
-                  "title": "Allow SampleTampering?",
+                  "title": "Allow SampleTampering",
                   "order": 10
                 },
                 "isexperimentalantievasion": {
                   "type": "boolean",
-                  "title": "Experimental AntiEvasion?",
+                  "title": "Experimental AntiEvasion",
                   "order": 6
                 },
                 "isfolderanalysis": {
                   "type": "boolean",
-                  "title": "Folder Analysis?",
+                  "title": "Folder Analysis",
                   "order": 14
                 },
                 "isscriptlogging": {
                   "type": "boolean",
-                  "title": "Script Logging?",
+                  "title": "Script Logging",
                   "order": 7
                 },
                 "isstaticanalysis": {
                   "type": "boolean",
-                  "title": "Static Analysis?",
+                  "title": "Static Analysis",
                   "order": 5
                 },
                 "istorenabledanalysis": {
                   "type": "boolean",
-                  "title": "Tor-Enabled Analysis?",
+                  "title": "Tor-Enabled Analysis",
                   "order": 11
                 },
                 "mode": {
@@ -2669,7 +2669,7 @@ class ReportOutput(komand.Output):
                 },
                 "nohashlookup": {
                   "type": "boolean",
-                  "title": "No HashLookup?",
+                  "title": "No HashLookup",
                   "order": 9
                 },
                 "script": {
@@ -2684,7 +2684,7 @@ class ReportOutput(komand.Output):
                 },
                 "sharedanalysis": {
                   "type": "boolean",
-                  "title": "Shared Analysis?",
+                  "title": "Shared Analysis",
                   "order": 4
                 }
               }
@@ -3178,7 +3178,7 @@ class ReportOutput(komand.Output):
                     },
                     "isvirus": {
                       "type": "string",
-                      "title": "Is Virus?",
+                      "title": "Is Virus",
                       "order": 3
                     },
                     "version": {
@@ -3213,7 +3213,7 @@ class ReportOutput(komand.Output):
                 },
                 "isvirus": {
                   "type": "string",
-                  "title": "Is Virus?",
+                  "title": "Is Virus",
                   "order": 3
                 },
                 "version": {
@@ -3410,12 +3410,12 @@ class ReportOutput(komand.Output):
                 },
                 "ha_enabled": {
                   "type": "boolean",
-                  "title": "HA Enabled?",
+                  "title": "HA Enabled",
                   "order": 1
                 },
                 "tiny_tags": {
                   "type": "boolean",
-                  "title": "Tiny Tags?",
+                  "title": "Tiny Tags",
                   "order": 3
                 }
               }
@@ -5157,7 +5157,7 @@ class ReportOutput(komand.Output):
                 },
                 "isinjected": {
                   "type": "boolean",
-                  "title": "Is Injected?",
+                  "title": "Is Injected",
                   "order": 11
                 },
                 "modules": {
@@ -5167,7 +5167,7 @@ class ReportOutput(komand.Output):
                 },
                 "monitored": {
                   "type": "boolean",
-                  "title": "Monitored?",
+                  "title": "Monitored",
                   "order": 9
                 },
                 "mutants": {
@@ -7534,7 +7534,7 @@ class ReportOutput(komand.Output):
                     },
                     "isinjected": {
                       "type": "boolean",
-                      "title": "Is Injected?",
+                      "title": "Is Injected",
                       "order": 11
                     },
                     "modules": {
@@ -7544,7 +7544,7 @@ class ReportOutput(komand.Output):
                     },
                     "monitored": {
                       "type": "boolean",
-                      "title": "Monitored?",
+                      "title": "Monitored",
                       "order": 9
                     },
                     "mutants": {
@@ -8786,7 +8786,7 @@ class ReportOutput(komand.Output):
             },
             "isinjected": {
               "type": "boolean",
-              "title": "Is Injected?",
+              "title": "Is Injected",
               "order": 11
             },
             "modules": {
@@ -8796,7 +8796,7 @@ class ReportOutput(komand.Output):
             },
             "monitored": {
               "type": "boolean",
-              "title": "Monitored?",
+              "title": "Monitored",
               "order": 9
             },
             "mutants": {
@@ -11163,7 +11163,7 @@ class ReportOutput(komand.Output):
                 },
                 "isinjected": {
                   "type": "boolean",
-                  "title": "Is Injected?",
+                  "title": "Is Injected",
                   "order": 11
                 },
                 "modules": {
@@ -11173,7 +11173,7 @@ class ReportOutput(komand.Output):
                 },
                 "monitored": {
                   "type": "boolean",
-                  "title": "Monitored?",
+                  "title": "Monitored",
                   "order": 9
                 },
                 "mutants": {
@@ -12993,7 +12993,7 @@ class ReportOutput(komand.Output):
           "properties": {
             "isreliable": {
               "type": "string",
-              "title": "Is Reliable?",
+              "title": "Is Reliable",
               "order": 1
             },
             "threatlevel": {
@@ -13060,7 +13060,7 @@ class ReportOutput(komand.Output):
                 },
                 "isvirus": {
                   "type": "string",
-                  "title": "Is Virus?",
+                  "title": "Is Virus",
                   "order": 3
                 },
                 "version": {
@@ -13095,7 +13095,7 @@ class ReportOutput(komand.Output):
             },
             "isvirus": {
               "type": "string",
-              "title": "Is Virus?",
+              "title": "Is Virus",
               "order": 3
             },
             "version": {
@@ -13728,12 +13728,12 @@ class ReportOutput(komand.Output):
         },
         "ha_enabled": {
           "type": "boolean",
-          "title": "HA Enabled?",
+          "title": "HA Enabled",
           "order": 1
         },
         "tiny_tags": {
           "type": "boolean",
-          "title": "Tiny Tags?",
+          "title": "Tiny Tags",
           "order": 3
         }
       }
@@ -13816,7 +13816,7 @@ class ReportOutput(komand.Output):
       "properties": {
         "has_carved_files": {
           "type": "string",
-          "title": "Carved Files?",
+          "title": "Carved Files",
           "order": 1
         },
         "total_runtime_targets": {
@@ -14160,7 +14160,7 @@ class ReportOutput(komand.Output):
         },
         "crashfile": {
           "type": "boolean",
-          "title": "Crashfile?",
+          "title": "Crashfile",
           "order": 6
         },
         "end_time": {
@@ -14182,12 +14182,12 @@ class ReportOutput(komand.Output):
         },
         "ismissingkernelmode": {
           "type": "boolean",
-          "title": "Missing KernelMode?",
+          "title": "Missing KernelMode",
           "order": 12
         },
         "network_enabled": {
           "type": "boolean",
-          "title": "Network Enabled?",
+          "title": "Network Enabled",
           "order": 2
         },
         "originalname": {
@@ -14197,7 +14197,7 @@ class ReportOutput(komand.Output):
         },
         "sniffer_enabled": {
           "type": "boolean",
-          "title": "Sniffer Enabled?",
+          "title": "Sniffer Enabled",
           "order": 4
         },
         "start_time": {
@@ -14230,32 +14230,32 @@ class ReportOutput(komand.Output):
             },
             "isallowsampletampering": {
               "type": "boolean",
-              "title": "Allow SampleTampering?",
+              "title": "Allow SampleTampering",
               "order": 10
             },
             "isexperimentalantievasion": {
               "type": "boolean",
-              "title": "Experimental AntiEvasion?",
+              "title": "Experimental AntiEvasion",
               "order": 6
             },
             "isfolderanalysis": {
               "type": "boolean",
-              "title": "Folder Analysis?",
+              "title": "Folder Analysis",
               "order": 14
             },
             "isscriptlogging": {
               "type": "boolean",
-              "title": "Script Logging?",
+              "title": "Script Logging",
               "order": 7
             },
             "isstaticanalysis": {
               "type": "boolean",
-              "title": "Static Analysis?",
+              "title": "Static Analysis",
               "order": 5
             },
             "istorenabledanalysis": {
               "type": "boolean",
-              "title": "Tor-Enabled Analysis?",
+              "title": "Tor-Enabled Analysis",
               "order": 11
             },
             "mode": {
@@ -14270,7 +14270,7 @@ class ReportOutput(komand.Output):
             },
             "nohashlookup": {
               "type": "boolean",
-              "title": "No HashLookup?",
+              "title": "No HashLookup",
               "order": 9
             },
             "script": {
@@ -14285,7 +14285,7 @@ class ReportOutput(komand.Output):
             },
             "sharedanalysis": {
               "type": "boolean",
-              "title": "Shared Analysis?",
+              "title": "Shared Analysis",
               "order": 4
             }
           }
@@ -14466,32 +14466,32 @@ class ReportOutput(komand.Output):
         },
         "isallowsampletampering": {
           "type": "boolean",
-          "title": "Allow SampleTampering?",
+          "title": "Allow SampleTampering",
           "order": 10
         },
         "isexperimentalantievasion": {
           "type": "boolean",
-          "title": "Experimental AntiEvasion?",
+          "title": "Experimental AntiEvasion",
           "order": 6
         },
         "isfolderanalysis": {
           "type": "boolean",
-          "title": "Folder Analysis?",
+          "title": "Folder Analysis",
           "order": 14
         },
         "isscriptlogging": {
           "type": "boolean",
-          "title": "Script Logging?",
+          "title": "Script Logging",
           "order": 7
         },
         "isstaticanalysis": {
           "type": "boolean",
-          "title": "Static Analysis?",
+          "title": "Static Analysis",
           "order": 5
         },
         "istorenabledanalysis": {
           "type": "boolean",
-          "title": "Tor-Enabled Analysis?",
+          "title": "Tor-Enabled Analysis",
           "order": 11
         },
         "mode": {
@@ -14506,7 +14506,7 @@ class ReportOutput(komand.Output):
         },
         "nohashlookup": {
           "type": "boolean",
-          "title": "No HashLookup?",
+          "title": "No HashLookup",
           "order": 9
         },
         "script": {
@@ -14521,7 +14521,7 @@ class ReportOutput(komand.Output):
         },
         "sharedanalysis": {
           "type": "boolean",
-          "title": "Shared Analysis?",
+          "title": "Shared Analysis",
           "order": 4
         }
       }
@@ -14681,7 +14681,7 @@ class ReportOutput(komand.Output):
           "properties": {
             "has_carved_files": {
               "type": "string",
-              "title": "Carved Files?",
+              "title": "Carved Files",
               "order": 1
             },
             "total_runtime_targets": {
@@ -15152,7 +15152,7 @@ class ReportOutput(komand.Output):
           "properties": {
             "isreliable": {
               "type": "string",
-              "title": "Is Reliable?",
+              "title": "Is Reliable",
               "order": 1
             },
             "threatlevel": {
@@ -15212,12 +15212,12 @@ class ReportOutput(komand.Output):
         },
         "isdelayedavscan": {
           "type": "boolean",
-          "title": "Delayed AVScan?",
+          "title": "Delayed AVScan",
           "order": 16
         },
         "isurlanalysis": {
           "type": "boolean",
-          "title": "Is URLAnalysis?",
+          "title": "Is URLAnalysis",
           "order": 20
         },
         "sample": {
@@ -15367,12 +15367,12 @@ class ReportOutput(komand.Output):
             },
             "ha_enabled": {
               "type": "boolean",
-              "title": "HA Enabled?",
+              "title": "HA Enabled",
               "order": 1
             },
             "tiny_tags": {
               "type": "boolean",
-              "title": "Tiny Tags?",
+              "title": "Tiny Tags",
               "order": 3
             }
           }
@@ -15423,7 +15423,7 @@ class ReportOutput(komand.Output):
             },
             "crashfile": {
               "type": "boolean",
-              "title": "Crashfile?",
+              "title": "Crashfile",
               "order": 6
             },
             "end_time": {
@@ -15445,12 +15445,12 @@ class ReportOutput(komand.Output):
             },
             "ismissingkernelmode": {
               "type": "boolean",
-              "title": "Missing KernelMode?",
+              "title": "Missing KernelMode",
               "order": 12
             },
             "network_enabled": {
               "type": "boolean",
-              "title": "Network Enabled?",
+              "title": "Network Enabled",
               "order": 2
             },
             "originalname": {
@@ -15460,7 +15460,7 @@ class ReportOutput(komand.Output):
             },
             "sniffer_enabled": {
               "type": "boolean",
-              "title": "Sniffer Enabled?",
+              "title": "Sniffer Enabled",
               "order": 4
             },
             "start_time": {
@@ -15493,32 +15493,32 @@ class ReportOutput(komand.Output):
                 },
                 "isallowsampletampering": {
                   "type": "boolean",
-                  "title": "Allow SampleTampering?",
+                  "title": "Allow SampleTampering",
                   "order": 10
                 },
                 "isexperimentalantievasion": {
                   "type": "boolean",
-                  "title": "Experimental AntiEvasion?",
+                  "title": "Experimental AntiEvasion",
                   "order": 6
                 },
                 "isfolderanalysis": {
                   "type": "boolean",
-                  "title": "Folder Analysis?",
+                  "title": "Folder Analysis",
                   "order": 14
                 },
                 "isscriptlogging": {
                   "type": "boolean",
-                  "title": "Script Logging?",
+                  "title": "Script Logging",
                   "order": 7
                 },
                 "isstaticanalysis": {
                   "type": "boolean",
-                  "title": "Static Analysis?",
+                  "title": "Static Analysis",
                   "order": 5
                 },
                 "istorenabledanalysis": {
                   "type": "boolean",
-                  "title": "Tor-Enabled Analysis?",
+                  "title": "Tor-Enabled Analysis",
                   "order": 11
                 },
                 "mode": {
@@ -15533,7 +15533,7 @@ class ReportOutput(komand.Output):
                 },
                 "nohashlookup": {
                   "type": "boolean",
-                  "title": "No HashLookup?",
+                  "title": "No HashLookup",
                   "order": 9
                 },
                 "script": {
@@ -15548,7 +15548,7 @@ class ReportOutput(komand.Output):
                 },
                 "sharedanalysis": {
                   "type": "boolean",
-                  "title": "Shared Analysis?",
+                  "title": "Shared Analysis",
                   "order": 4
                 }
               }
@@ -15633,32 +15633,32 @@ class ReportOutput(komand.Output):
             },
             "isallowsampletampering": {
               "type": "boolean",
-              "title": "Allow SampleTampering?",
+              "title": "Allow SampleTampering",
               "order": 10
             },
             "isexperimentalantievasion": {
               "type": "boolean",
-              "title": "Experimental AntiEvasion?",
+              "title": "Experimental AntiEvasion",
               "order": 6
             },
             "isfolderanalysis": {
               "type": "boolean",
-              "title": "Folder Analysis?",
+              "title": "Folder Analysis",
               "order": 14
             },
             "isscriptlogging": {
               "type": "boolean",
-              "title": "Script Logging?",
+              "title": "Script Logging",
               "order": 7
             },
             "isstaticanalysis": {
               "type": "boolean",
-              "title": "Static Analysis?",
+              "title": "Static Analysis",
               "order": 5
             },
             "istorenabledanalysis": {
               "type": "boolean",
-              "title": "Tor-Enabled Analysis?",
+              "title": "Tor-Enabled Analysis",
               "order": 11
             },
             "mode": {
@@ -15673,7 +15673,7 @@ class ReportOutput(komand.Output):
             },
             "nohashlookup": {
               "type": "boolean",
-              "title": "No HashLookup?",
+              "title": "No HashLookup",
               "order": 9
             },
             "script": {
@@ -15688,7 +15688,7 @@ class ReportOutput(komand.Output):
             },
             "sharedanalysis": {
               "type": "boolean",
-              "title": "Shared Analysis?",
+              "title": "Shared Analysis",
               "order": 4
             }
           }
@@ -16182,7 +16182,7 @@ class ReportOutput(komand.Output):
                 },
                 "isvirus": {
                   "type": "string",
-                  "title": "Is Virus?",
+                  "title": "Is Virus",
                   "order": 3
                 },
                 "version": {
@@ -16217,7 +16217,7 @@ class ReportOutput(komand.Output):
             },
             "isvirus": {
               "type": "string",
-              "title": "Is Virus?",
+              "title": "Is Virus",
               "order": 3
             },
             "version": {
@@ -16414,12 +16414,12 @@ class ReportOutput(komand.Output):
             },
             "ha_enabled": {
               "type": "boolean",
-              "title": "HA Enabled?",
+              "title": "HA Enabled",
               "order": 1
             },
             "tiny_tags": {
               "type": "boolean",
-              "title": "Tiny Tags?",
+              "title": "Tiny Tags",
               "order": 3
             }
           }
@@ -18161,7 +18161,7 @@ class ReportOutput(komand.Output):
             },
             "isinjected": {
               "type": "boolean",
-              "title": "Is Injected?",
+              "title": "Is Injected",
               "order": 11
             },
             "modules": {
@@ -18171,7 +18171,7 @@ class ReportOutput(komand.Output):
             },
             "monitored": {
               "type": "boolean",
-              "title": "Monitored?",
+              "title": "Monitored",
               "order": 9
             },
             "mutants": {
@@ -20538,7 +20538,7 @@ class ReportOutput(komand.Output):
                 },
                 "isinjected": {
                   "type": "boolean",
-                  "title": "Is Injected?",
+                  "title": "Is Injected",
                   "order": 11
                 },
                 "modules": {
@@ -20548,7 +20548,7 @@ class ReportOutput(komand.Output):
                 },
                 "monitored": {
                   "type": "boolean",
-                  "title": "Monitored?",
+                  "title": "Monitored",
                   "order": 9
                 },
                 "mutants": {
@@ -21790,7 +21790,7 @@ class ReportOutput(komand.Output):
         },
         "isinjected": {
           "type": "boolean",
-          "title": "Is Injected?",
+          "title": "Is Injected",
           "order": 11
         },
         "modules": {
@@ -21800,7 +21800,7 @@ class ReportOutput(komand.Output):
         },
         "monitored": {
           "type": "boolean",
-          "title": "Monitored?",
+          "title": "Monitored",
           "order": 9
         },
         "mutants": {
@@ -24167,7 +24167,7 @@ class ReportOutput(komand.Output):
             },
             "isinjected": {
               "type": "boolean",
-              "title": "Is Injected?",
+              "title": "Is Injected",
               "order": 11
             },
             "modules": {
@@ -24177,7 +24177,7 @@ class ReportOutput(komand.Output):
             },
             "monitored": {
               "type": "boolean",
-              "title": "Monitored?",
+              "title": "Monitored",
               "order": 9
             },
             "mutants": {
@@ -25997,7 +25997,7 @@ class ReportOutput(komand.Output):
       "properties": {
         "isreliable": {
           "type": "string",
-          "title": "Is Reliable?",
+          "title": "Is Reliable",
           "order": 1
         },
         "threatlevel": {
@@ -26064,7 +26064,7 @@ class ReportOutput(komand.Output):
             },
             "isvirus": {
               "type": "string",
-              "title": "Is Virus?",
+              "title": "Is Virus",
               "order": 3
             },
             "version": {
@@ -26099,7 +26099,7 @@ class ReportOutput(komand.Output):
         },
         "isvirus": {
           "type": "string",
-          "title": "Is Virus?",
+          "title": "Is Virus",
           "order": 3
         },
         "version": {

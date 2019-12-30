@@ -45,7 +45,7 @@ class ScanInput(komand.Input):
     "sudo": {
       "type": "boolean",
       "title": "Sudo",
-      "description": "Whether or not to use superuser privileges for scan, e.g. -sS requires superuser privileges but -sT does not",
+      "description": "Whether or not to use superuser privileges for scan",
       "default": false,
       "order": 4
     }

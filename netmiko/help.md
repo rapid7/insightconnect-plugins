@@ -1,10 +1,13 @@
 # Description
 
-[Netmiko](https://github.com/ktbyers/netmiko) is a network device configuration tool that sends commands over SSHv2. Netmiko is a fork of Paramiko. The Netmiko plugin is used to send commands to a network device over SSH.
+[Netmiko](https://github.com/ktbyers/netmiko) is a network device configuration tool that sends commands over
+SSHv2. Netmiko is a fork of Paramiko. The Netmiko plugin is used to send commands to a network device over SSH.
+Multiple commands can be sent over in a single SSH session.
 
 # Key Features
 
 * Automate network configuration
+* Multiple SSH commands can be provided in one action
 
 # Requirements
 
@@ -38,14 +41,14 @@ This action is used to change the device's configuration (global configuration m
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|host|string|None|False|(Optional) Hosts to run remote commands.  If not provided, the connection host will be used|None|
-|command|[]string|None|True|Commands to change the configuration on network device|["interface vlan 1","ip address 192.168.1.1"]|
+|host|string|None|False|Optional Hosts to run remote commands. If not provided, the connection host will be used|None|
+|command|[]string|None|True|Commands to change the configuration on network device|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|string|True|None|
+|results|string|True|Results|
 
 Example Output:
 
@@ -65,14 +68,14 @@ This action is used to check the devices configurations (privilege exec mode).
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|host|string|None|False|(Optional) Host to run remote commands. If not provided, the connection host will be used|None|
-|command|string|None|True|Show command to execute on network device|"show running-config"|
+|host|string|None|False|Optional Host to run remote commands. If not provided, the connection host will be used|None|
+|command|string|None|True|Show command to execute on network device|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|string|True|None|
+|results|string|True|Results|
 
 Example output:
 
@@ -98,7 +101,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - Updated python libraries | New spec and help.md format for the Hub
 * 1.0.0 - Support web server mode | Update to new credential types | Rename "Execute show commands" action to "Execute Show Commands" | Rename "Execute configuration change commands" action to "Execute Configuration Commands"
 * 0.1.0 - Initial plugin
 

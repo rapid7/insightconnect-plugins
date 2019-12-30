@@ -4,10 +4,10 @@ import komand
 from komand_cymon import connection, actions, triggers
 
 
-Name = 'Cymon'
-Vendor = 'rapid7'
-Version = '1.0.2'
-Description = 'Cymon Open Threat Intelligence'
+Name = "Cymon"
+Vendor = "rapid7"
+Version = "2.0.0"
+Description = "Cymon Open Threat Intelligence"
 
 
 class ICONCymon(komand.Plugin):

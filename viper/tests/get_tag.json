@@ -11,7 +11,7 @@
         "secretKey": ""
       }
     },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
   }
 }

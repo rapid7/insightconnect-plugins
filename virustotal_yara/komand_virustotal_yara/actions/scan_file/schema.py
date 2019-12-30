@@ -59,7 +59,7 @@ class ScanFileOutput(komand.Output):
     "results": {
       "type": "array",
       "title": "Results",
-      "description": "Results returned form Yara's analysis. Note: byte information has been encoded to UTF-8",
+      "description": "Results returned from the Yara analysis. It is byte information, encoded to UTF-8",
       "items": {
         "$ref": "#/definitions/results"
       },

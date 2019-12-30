@@ -1,13 +1,7 @@
 {
     "body": {
         "action": "manager_stats",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "url": null
-        },
+        "connection": {},
         "input": {
             "date": ""
         },

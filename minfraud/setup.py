@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name='minfraud-rapid7-plugin',
-      version='1.0.1',
-      description='The MaxMind minFraud services help identify fraudulent online transactions',
+      version='2.0.0',
+      description='Identify fraudulent online transactions. Examples include e-commerce, user account creation, and application installations',
       author='rapid7',
       author_email='',
       url='',

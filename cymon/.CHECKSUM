@@ -1,7 +1,7 @@
 {
-	"spec": "476267682fcfdceb63b3eaea147af953",
-	"manifest": "5e1c9b14c4431689500058c3ab3963df",
-	"setup": "f3e3106d437ed9eb654520cd9cb2986d",
+	"spec": "9e2d068a22b5e2ee0fe3df7b28e1338d",
+	"manifest": "ac7d0cc7515419a6fd38d794d5c278a5",
+	"setup": "879322ec389952b6abc10e3ad6286c9e",
 	"schemas": [
 		{
 			"identifier": "address_blacklist/schema.py",

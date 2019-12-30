@@ -48,7 +48,7 @@ class UploadUrlInput(komand.Input):
     "url": {
       "type": "string",
       "title": "Url",
-      "description": "Url",
+      "description": "URL",
       "order": 1
     }
   },
