@@ -1,5 +1,8 @@
 import komand
+from komand.exceptions import PluginException
 from .schema import GetLogsInput, GetLogsOutput, Input, Output, Component
+
+
 # Custom imports below
 
 
@@ -12,37 +15,40 @@ class GetLogs(komand.Action):
             input=GetLogsInput(),
             output=GetLogsOutput())
 
+        self.METADATA, self.NEXT_OFFSET, self.AUTH_LOGS, self.TOTAL_OBJECTS = "metadata", "next_offset", "authlogs", "total_objects"
+        self.PAGE_SIZE = 1000
+
     def run(self, params={}):
-        mintime = params.get(Input.MINTIME, 1000000000000)  # Default to Sun Sep 09 2001 01:46:40 UTC
+        min_time = params.get(Input.MINTIME, 1000000000000)
 
-        PAGE_SIZE = 1000
-        METADATA, NEXT_OFFSET, AUTHLOGS, TOTAL_OBJECTS = "metadata", "next_offset", "authlogs", "total_objects"
-
-        authlogs = []
+        auth_logs = []
         try:
-            # Get initial results
-            results = self.connection.admin_api.get_authentication_log(api_version=2,
-                                                                       mintime=mintime,
-                                                                       limit=str(PAGE_SIZE))
-            authlogs.extend(results[AUTHLOGS])
+            results = self.connection.admin_api.get_authentication_log(
+                api_version=2,
+                mintime=min_time,
+                limit=str(self.PAGE_SIZE)
+            )
+            auth_logs.extend(results[self.AUTH_LOGS])
 
-            # Set total_objects_left to amount reported by Duo, less the PAGE_SIZE since we have already made one call
-            total_objects_left = results[METADATA][TOTAL_OBJECTS] - PAGE_SIZE
+            total_objects_left = results[self.METADATA][self.TOTAL_OBJECTS] - self.PAGE_SIZE
 
-            # Set next_offset to next_offset provided by Duo to get next results page
-            next_offset = results[METADATA][NEXT_OFFSET]
+            next_offset = results[self.METADATA][self.NEXT_OFFSET]
             while total_objects_left > 0:
-                results = self.connection.admin_api.get_authentication_log(api_version=2,
-                                                                           mintime=mintime,
-                                                                           limit=str(PAGE_SIZE),
-                                                                           next_offset=next_offset)
+                results = self.connection.admin_api.get_authentication_log(
+                    api_version=2,
+                    mintime=min_time,
+                    limit=str(self.PAGE_SIZE),
+                    next_offset=next_offset
+                )
 
-                # Set next offset and decrement total objects left to control loop
-                next_offset = results[METADATA][NEXT_OFFSET]
-                total_objects_left -= PAGE_SIZE
-                authlogs.extend(results[AUTHLOGS])
+                next_offset = results[self.METADATA][self.NEXT_OFFSET]
+                total_objects_left -= self.PAGE_SIZE
+                auth_logs.extend(results[self.AUTH_LOGS])
 
-            authlogs = komand.helper.clean(authlogs)
-            return {Output.AUTHLOGS: authlogs}
+            auth_logs = komand.helper.clean(auth_logs)
+            return {Output.AUTHLOGS: auth_logs}
         except KeyError as e:
-            raise Exception(f"Error: API response was missing required fields necessary for proper functioning.") from e
+            raise PluginException(
+                preset=PluginException.Preset.SERVER_ERROR,
+                data=f"Error: API response was missing required fields necessary for proper functioning. {str(e)}"
+            )

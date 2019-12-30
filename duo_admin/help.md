@@ -382,13 +382,13 @@ This action is used to get a list of phones associated with the user ID.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|string|None|True|Duo users ID|None|
+|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|phone_list|[]phone_user|False|Lost of phones associated with the user's ID|
+|phone_list|[]phone_user|False|List of phones associated with the user's ID|
 
 Example output:
 
@@ -456,6 +456,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
+* 3.3.3 - Changed variables names in actions | Changed `Exception` to `PluginException` | Moved constants to class init | Use fstring instead concatenation
 * 3.3.2 - New spec and help.md format for the Hub
 * 3.3.1 - Update default `mintime` input and description for `Get Logs` action
 * 3.3.0 - New action Enroll User | Support Duo Admin API v2 where applicable | Various bug fixes & improvements
