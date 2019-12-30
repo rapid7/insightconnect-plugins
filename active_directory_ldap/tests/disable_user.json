@@ -6,8 +6,8 @@
             "port": 636,
             "use_ssl": true,
             "username_password": {
-                "password": "",
-                "username": ""
+                "password": null,
+                "username": null
         },
         "input": {
             "distinguished_name": "CN=hollis, brown,OU=domain_users,DC=example,DC=local"
