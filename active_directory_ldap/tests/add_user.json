@@ -19,7 +19,7 @@
             "logon_name": "tperson",
             "password": "testtest04!",
             "user_ou": "Users",
-            "user_principal_name": "tperson@example.local"
+            "user_principal_name": "user@example.com"
         },
         "meta": {}
     },
