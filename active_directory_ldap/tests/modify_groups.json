@@ -2,6 +2,12 @@
     "body": {
         "action": "modify_groups",
         "connection": {
+            "host": "",
+            "port": 636,
+            "use_ssl": true,
+            "username_password": {
+                "password": "",
+                "username": ""
         },
         "input": {
             "add_remove": "add",

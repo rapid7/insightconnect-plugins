@@ -2,10 +2,16 @@
     "body": {
         "action": "query",
         "connection": {
+            "host": "",
+            "port": 636,
+            "use_ssl": true,
+            "username_password": {
+                "password": "",
+                "username": ""
         },
         "input": {
-            "search_base": "",
-            "search_filter": ""
+            "search_base": "DC=example,DC=local",
+            "search_filter": "(SAMAccountName=bhollis)"
         },
         "meta": {}
     },

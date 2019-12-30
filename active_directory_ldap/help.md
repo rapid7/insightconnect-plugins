@@ -12,7 +12,7 @@
 
 # Requirements
 
-* Host name and port number (the default TCP/UDP port for LDAP is 389)
+* Host name and port number (the default TCP/UDP port for LDAP is 389, and 636 for LDAP over SSL)
 * Administrative credentials
 
 # Documentation
