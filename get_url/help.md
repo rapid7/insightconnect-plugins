@@ -1,18 +1,18 @@
 # Description
 
-The Get URL InsighConnect plugin allows you to download files from a URL. Supported protocols are HTTP, HTTPS, and FTP.
+The Get URL plugin allows you to download files from a URL. Supported protocols are HTTP, HTTPS, and FTP.
 
 This plugin's cache is enabled across workflows to store previously downloaded files to reduce future web requests.
 To reduce the number of subsequent requests the Etag and If-Modified-Since fields are also checked.
 
 # Key Features
 
-* Download files from URL
+* Get the contents of a web page
+* Check a web page for changes
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+_This plugin does not contain any requirements._
 
 # Documentation
 
@@ -43,8 +43,8 @@ This action returns the contents of the URL and an HTTP status code.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status_code|integer|False|None|
-|bytes|bytes|False|None|
+|bytes|bytes|False|Bytes|
+|status_code|integer|False|Status code|
 
 ### Triggers
 
@@ -66,8 +66,8 @@ This action returns the contents of the URL and an HTTP status code.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status_code|integer|False|None|
-|bytes|bytes|False|None|
+|bytes|bytes|False|Bytes|
+|status_code|integer|False|Status code|
 
 ### Custom Output Types
 
