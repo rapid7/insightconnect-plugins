@@ -4,10 +4,10 @@ import komand
 from komand_chaosreader import connection, actions, triggers
 
 
-Name = 'Chaosreader'
-Vendor = 'rapid7'
-Version = '1.0.2'
-Description = 'The plugin is used to trace sessions and fetch application data from snoop or tcpdump logs'
+Name = "Chaosreader"
+Vendor = "rapid7"
+Version = "1.0.3"
+Description = "The plugin is used to trace sessions and fetch application data from snoop or tcpdump logs"
 
 
 class ICONChaosreader(komand.Plugin):
