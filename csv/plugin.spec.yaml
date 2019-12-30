@@ -21,6 +21,7 @@ hub_tags:
   features: []
 actions:
   filter_string:
+    title: Filter String
     description: Keep fields from CSV string
     input:
       csv:
@@ -37,6 +38,7 @@ actions:
         description: Filtered CSV string
         required: true
   filter_bytes:
+    title: Filter Bytes
     description: Keep fields from base64 CSV file
     input:
       csv:
