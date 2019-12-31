@@ -63,7 +63,7 @@ class CheckCidrOutput(komand.Output):
     "addressSpaceDesc": {
       "type": "string",
       "title": "Address Space Description",
-      "description": "Address space description",
+      "description": "Description of address space",
       "order": 6
     },
     "found": {
@@ -75,25 +75,25 @@ class CheckCidrOutput(komand.Output):
     "maxAddress": {
       "type": "string",
       "title": "Maximum Address",
-      "description": "Maximum address",
+      "description": "Last address in block",
       "order": 4
     },
     "minAddress": {
       "type": "string",
       "title": "Minimum Address",
-      "description": "Minimum address",
+      "description": "First address in block",
       "order": 3
     },
     "netmask": {
       "type": "string",
       "title": "Netmask",
-      "description": "Netmask",
+      "description": "Netmask, ie. 24",
       "order": 2
     },
     "networkAddress": {
       "type": "string",
       "title": "Network Address",
-      "description": "Network address",
+      "description": "Network address in block",
       "order": 1
     },
     "numPossibleHosts": {
