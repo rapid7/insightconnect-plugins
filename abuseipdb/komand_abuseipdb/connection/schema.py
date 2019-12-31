@@ -16,7 +16,7 @@ class ConnectionSchema(komand.Input):
     "credentials": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "API key",
+      "description": "API key from account",
       "order": 1
     }
   },
