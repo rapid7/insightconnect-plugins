@@ -456,7 +456,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
-* 3.3.3 - Changed variables names in actions | Changed `Exception` to `PluginException` | Moved constants to class init | Use fstring instead concatenation
+* 3.3.3 - Changed `Exception` to `PluginException` | Moved constants to class init | Use fstring instead of concatenation
 * 3.3.2 - New spec and help.md format for the Hub
 * 3.3.1 - Update default `mintime` input and description for `Get Logs` action
 * 3.3.0 - New action Enroll User | Support Duo Admin API v2 where applicable | Various bug fixes & improvements
@@ -478,4 +478,3 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 * [Duo Security](https://duo.com/)
 * [Duo Admin API](https://duo.com/docs/adminapi)
-
