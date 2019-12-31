@@ -53,7 +53,7 @@ Example output:
   "user": {
     "created": 1111111111,
     "desktoptokens": [],
-    "email": "john@example.org",
+    "email": "user@example.com",
     "groups": [],
     "last_login": 1511423501,
     "phones": [
@@ -109,7 +109,7 @@ Example output:
   "user": {
     "created": 1462823674,
     "desktoptokens": [],
-    "email": "jane@example.org",
+    "email": "user@example.com",
     "groups": [],
     "last_login": 1534446415,
     "phones": [
@@ -203,7 +203,7 @@ Example output:
     "user_id": "DU9B7X097A3G9A4BABBA",
     "alias3": "Test Test",
     "phones": [],
-    "email": "test@example.com"
+    "email": "user@example.com"
   }
 }
 
@@ -232,7 +232,7 @@ Example output:
     {
       "created": 1111111111,
       "desktoptokens": [],
-      "email": "john@example.org",
+      "email": "user@example.com",
       "groups": [],
       "last_login": 1511423501,
       "phones": [
