@@ -1,10 +1,11 @@
 import komand
-from .schema import CheckCidrInput, CheckCidrOutput, Input
+from .schema import CheckCidrInput, CheckCidrOutput, Input, Output
 # Custom imports below
 from komand.exceptions import PluginException
 import json
 import requests
 import logging
+from komand_abuseipdb.util import helper
 logging.getLogger('requests').setLevel(logging.WARNING)
 
 
@@ -30,18 +31,15 @@ class CheckCidr(komand.Action):
         r = requests.get(url, params=params, headers=self.connection.headers)
 
         try:
-            json_ = r.json()
-            if "errors" in json_:
-                raise PluginException(cause='Received an error response from AbuseIPDB.',
-                                      assistance=json_['errors'][0]["detail"])
+            json_ = helper.get_json(r)
             out = json_["data"]
         except json.decoder.JSONDecodeError:
             raise PluginException(cause='Received an unexpected response from AbuseIPDB.',
-                                  assistance="(non-JSON or no response was received). Response was: %s" % r.text)
+                                  assistance=f"(non-JSON or no response was received). Response was: {r.text}")
 
         if len(out) > 0:
-            out["found"] = True
+            out[Output.FOUND] = True
         else:
-            out["found"] = False
+            out[Output.FOUND] = False
 
         return out
