@@ -126,7 +126,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.3 - Upgraded `duo_client` in requirements.txt to version `4.0.0` | Upgraded duo_client in vendor folder to version `4.0.0` | Changed bare strings in params.get and output to static fields from schema |  Change docker image from `komand/python-3-plugin:2` to `komand/python-3-37-slim-plugin:3`
+* 1.0.3 - Upgraded `duo_client` in requirements.txt to version `4.0.0` | Upgraded `duo_client` in vendor folder to version `4.0.0` | Use input and output constants |  Change docker image from `komand/python-3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Support `type` parameter as `push_type` in the `options` input of the Auth action
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Add example output
@@ -139,4 +139,3 @@ This plugin does not contain any troubleshooting information.
 
 * [Duo](https://duo.com/)
 * [Duo Auth API V2](https://duo.com/docs/authapi)
-
