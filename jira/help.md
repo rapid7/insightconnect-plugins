@@ -38,12 +38,14 @@ This action is used to search for issues.
 |----|----|-------|--------|-----------|----|
 |max|integer|10|True|Max results to return|None|
 |jql|string|None|True|JQL search string to use|None|
+|get_attachments|boolean|False|False|Get attachments from issue|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |issues|[]issue|False|The list of found issues|
+|comments|[]comment|False|Comments list|
 
 Example output:
 
@@ -326,13 +328,14 @@ This action is used to retrieve an issue.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|Issue ID|None|
+|get_attachments|boolean|False|False|Get attachments from issue|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |found|boolean|False|True if found|
-|issue|issue|False|Issue|
+|issue|issue|False|Founded issue|
 
 Example output:
 
@@ -566,7 +569,7 @@ This action is used to retrieve all comments on an issue.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |count|integer|False|Count of comments found|
-|comments|[]comment|False|Comments|
+|comments|[]comment|False|Comments list|
 
 Example output:
 
@@ -687,6 +690,7 @@ This trigger is used to trigger which indicates that a new issue has been create
 |get_attachments|boolean|False|False|Get attachments from issue|None|
 |jql|string|None|False|JQL search string to use|None|
 |project|string|None|True|Project ID or name|None|
+|poll_timeout|integer|60|False|Timeout between next poll, default 60|None|
 
 ##### Output
 
@@ -921,6 +925,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 4.0.2 - Moved `apk add` upper in Dockerfile to use cache | Changed bare strings in params.get and output to static fields from schema | Remove duplicated code in actions | Changed `Exception` to `Pluginexception`
 * 3.2.1 - Update Get Issue, Find Issues and New Issue action to support a Get Attachments option
 * 3.2.0 - Update Transition Issue action to allow for assignment of fields during issue transition
 * 3.1.2 - Update Create Issue action to remove newlines from summaries

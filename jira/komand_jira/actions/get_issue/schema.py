@@ -62,7 +62,7 @@ class GetIssueOutput(komand.Output):
     "issue": {
       "$ref": "#/definitions/issue",
       "title": "Issue",
-      "description": "Issue",
+      "description": "Founded issue",
       "order": 2
     }
   },
