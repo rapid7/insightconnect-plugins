@@ -1,51 +1,50 @@
 import komand
 import urllib
-from .schema import AuthInput, AuthOutput
+
+from komand.exceptions import PluginException
+from .schema import AuthInput, AuthOutput, Input
 
 
 class Auth(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='auth',
-                description='Perform second-factor authentication',
-                input=AuthInput(),
-                output=AuthOutput())
+            name='auth',
+            description='Perform second-factor authentication',
+            input=AuthInput(),
+            output=AuthOutput())
 
     def run(self, params={}):
         """Run action"""
+        opts = params.get(Input.OPTIONS) or {}
+        push_info = opts.get('pushinfo')
+
+        if push_info:
+            push_info = urllib.parse.urlencode(push_info)
+
+        user_id = None
+        if params.get(Input.USER_ID):
+            user_id = params.get(Input.USER_ID)
+
         username = None
-        passcode = None
-        opts = params.get('options') or {}
-        username = opts.get('username')
-        passcode = opts.get('passcode')
-        pushinfo = opts.get('pushinfo')
-        push_type = opts.get('type')
+        if params.get(Input.USERNAME):
+            username = params.get(Input.USERNAME)
 
-        if pushinfo:
-            pushinfo = urllib.parse.urlencode(pushinfo)
-
-        userid = None 
-        if params.get('user_id'):
-            userid = params['user_id']
-
-        username = None 
-        if params.get('username'):
-            username = params['username']
+        if (username and user_id) or (user_id is None and username is None):
+            raise PluginException(cause="Wrong input", assistance="Only user_id or username should be used. Not both.")
 
         response = self.connection.auth_api.auth(
-               params['factor'],
-             username=username,
-             user_id=userid,
-             ipaddr=params.get('ipaddr'),
-             async=params.get('async'),
-             display_username=username,
-             device=params.get('device'),
-             passcode=passcode,
-             pushinfo=pushinfo,
-             type=push_type,
-             )
+            factor=params[Input.FACTOR],
+            username=username,
+            user_id=user_id,
+            ipaddr=params.get(Input.IPADDR),
+            async_txn=params.get(Input.ASYNC),
+            type=opts.get('type'),
+            display_username=username,
+            pushinfo=push_info,
+            device=params.get(Input.DEVICE),
+            passcode=opts.get('passcode')
+        )
         return response
 
     def test(self):
-        """TODO: Test action"""
-        return {}
+        pass
