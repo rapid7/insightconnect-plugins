@@ -1,8 +1,8 @@
 # Overview
 
-**Auth** - https://www.duosecurity.com/docs/authapi
+[![Build Status](https://travis-ci.org/duosecurity/duo_client_python.svg?branch=master)](https://travis-ci.org/duosecurity/duo_client_python)
 
-**Verify** - https://www.duosecurity.com/docs/duoverify
+**Auth** - https://www.duosecurity.com/docs/authapi
 
 **Admin** - https://www.duosecurity.com/docs/adminapi
 

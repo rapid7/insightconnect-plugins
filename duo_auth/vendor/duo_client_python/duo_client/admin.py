@@ -109,6 +109,7 @@ Settings objects are returned in the following format:
      'password_requires_lower_alpha': <bool:is lower alpha character required>,
      'password_requires_numeric': <bool:is numeric character required>,
      'password_requires_special': <bool:is special character required>,
+     'security_checkup_enabled': <bool:is the security checkup feature enabled>,
     }
 
 
@@ -156,6 +157,8 @@ import six.moves.urllib
 
 from . import client
 import six
+import warnings
+import time
 
 USER_STATUS_ACTIVE = 'active'
 USER_STATUS_BYPASS = 'bypass'
@@ -165,6 +168,22 @@ USER_STATUS_LOCKED_OUT = 'locked out'
 TOKEN_HOTP_6 = 'h6'
 TOKEN_HOTP_8 = 'h8'
 TOKEN_YUBIKEY = 'yk'
+
+VALID_AUTHLOG_REQUEST_PARAMS = [
+    'mintime',
+    'maxtime',
+    'limit',
+    'sort',
+    'next_offset',
+    'event_types',
+    'reasons',
+    'results',
+    'users',
+    'applications',
+    'groups',
+    'factors',
+    'api_version'
+]
 
 
 class Admin(client.Client):
@@ -235,11 +254,18 @@ class Admin(client.Client):
             row['host'] = self.host
         return response
 
-
-    def get_authentication_log(self,
-                               mintime=0):
+    def get_authentication_log(self, api_version=1, **kwargs):
         """
         Returns authentication log events.
+
+        api_version - The api version of the handler to use. Currently, the
+                      default api version is v1, but the v1 api will be
+                      deprecated in a future version of the Duo Admin API.
+                      Please migrate to the v2 api at your earliest convenience.
+                      For details on the differences between v1 and v2,
+                      please see Duo's Admin API documentation. (Optional)
+
+        API Version v1:
 
         mintime - Fetch events only >= mintime (to avoid duplicate
                   records that have already been fetched)
@@ -249,7 +275,6 @@ class Admin(client.Client):
                 {'timestamp': <int:unix timestamp>,
                  'eventtype': "authentication",
                  'host': <str:host>,
-                 'device': <str:device>,
                  'username': <str:username>,
                  'factor': <str:factor>,
                  'result': <str:result>,
@@ -264,22 +289,116 @@ class Admin(client.Client):
              }]
 
         Raises RuntimeError on error.
+
+        API Version v2:
+
+        mintime (required) - Unix timestamp in ms; fetch records >= mintime
+        maxtime (required) - Unix timestamp in ms; fetch records <= mintime
+        limit - Number of results to limit to
+        next_offset - Used to grab the next set of results from a previous response
+        sort - Sort order to be applied
+        users - List of user ids to filter on
+        groups - List of group ids to filter on
+        applications - List of application ids to filter on
+        results - List of results to filter to filter on
+        reasons - List of reasons to filter to filter on
+        factors - List of factors to filter on
+        event_types - List of event_types to filter on
+
+        Returns:
+            {
+                "authlogs": [
+                {
+                  "access_device": {
+                    "ip": <str:ip address>,
+                    "location": {
+                      "city": <str:city>,
+                      "state": <str:state>,
+                      "country": <str:country
+                    }
+                  },
+                  "application": {
+                    "key": <str:application id>,
+                    "name": <str:application name>
+                  },
+                  "auth_device": {
+                    "ip": <str:ip address>,
+                    "location": {
+                      "city": <str:city>,
+                      "state": <str:state>,
+                      "country": <str:country
+                    },
+                    "name": <str:device name>
+                  },
+                  "event_type": <str:type>,
+                  "factor": <str:factor,
+                  "reason": <str:reason>,
+                  "result": <str:result>,
+                  "timestamp": <int:unix timestamp>,
+                  "user": {
+                    "key": <str:user id>,
+                    "name": <str:user name>
+                  }
+                }
+              ],
+              "metadata": {
+                "next_offset": [
+                  <str>,
+                  <str>
+                ],
+                "total_objects": <int>
+              }
+            }
+
+        Raises RuntimeError on error.
         """
-        # Sanity check mintime as unix timestamp, then transform to string
-        mintime = str(int(mintime))
-        params = {
-            'mintime': mintime,
-        }
+
+        if api_version not in [1,2]:
+            raise ValueError("Invalid API Version")
+
+        params = {}
+
+        if api_version == 1: #v1
+            params['mintime'] = kwargs['mintime'] if 'mintime' in kwargs else 0;
+            # Sanity check mintime as unix timestamp, then transform to string
+            params['mintime'] = '{:d}'.format(int(params['mintime']))
+            warnings.warn(
+                'The v1 Admin API for retrieving authentication log events '
+                'will be deprecated in a future release of the Duo Admin API. '
+                'Please migrate to the v2 API.',
+            DeprecationWarning)
+        else: #v2
+            for k in kwargs:
+                if kwargs[k] is not None and k in VALID_AUTHLOG_REQUEST_PARAMS:
+                    params[k] = kwargs[k]
+
+            if 'mintime' not in params:
+                params['mintime'] = (int(time.time()) - 86400) * 1000
+            # Sanity check mintime as unix timestamp, then transform to string
+            params['mintime'] = '{:d}'.format(int(params['mintime']))
+
+
+            if 'maxtime' not in params:
+                params['maxtime'] = int(time.time()) * 1000
+            # Sanity check maxtime as unix timestamp, then transform to string
+            params['maxtime'] = '{:d}'.format(int(params['maxtime']))
+
+
         response = self.json_api_call(
             'GET',
-            '/admin/v1/logs/authentication',
+            '/admin/v{}/logs/authentication'.format(api_version),
             params,
         )
-        for row in response:
-            row['eventtype'] = 'authentication'
-            row['host'] = self.host
-        return response
 
+        if api_version == 1:
+            for row in response:
+                row['eventtype'] = 'authentication'
+                row['host'] = self.host
+        else:
+            for row in response['authlogs']:
+                row['eventtype'] = 'authentication'
+                row['host'] = self.host
+        return response
 
     def get_telephony_log(self,
                           mintime=0):
@@ -317,7 +436,6 @@ class Admin(client.Client):
             row['host'] = self.host
         return response
 
-
     def get_users(self):
         """
         Returns list of users.
@@ -329,7 +447,6 @@ class Admin(client.Client):
         """
         response = self.json_api_call('GET', '/admin/v1/users', {})
         return response
-
 
     def get_user_by_id(self, user_id):
         """
@@ -345,7 +462,6 @@ class Admin(client.Client):
         path = '/admin/v1/users/' + user_id
         response = self.json_api_call('GET', path, {})
         return response
-
 
     def get_users_by_name(self, username):
         """
@@ -365,9 +481,9 @@ class Admin(client.Client):
                                       params)
         return response
 
-
     def add_user(self, username, realname=None, status=None,
-                 notes=None, email=None):
+                 notes=None, email=None, firstname=None, lastname=None,
+                 alias1=None, alias2=None, alias3=None, alias4=None):
         """
         Adds a user.
 
@@ -376,6 +492,9 @@ class Admin(client.Client):
         status - User's status, defaults to USER_STATUS_ACTIVE
         notes - Comment field (optional)
         email - Email address (optional)
+        firstname - User's given name for ID Proofing (optional)
+        lastname - User's surname for ID Proofing (optional)
+        alias1..alias4 - Aliases for the user's primary username (optional)
 
         Returns newly created user object.
 
@@ -392,14 +511,26 @@ class Admin(client.Client):
             params['notes'] = notes
         if email is not None:
             params['email'] = email
+        if firstname is not None:
+            params['firstname'] = firstname
+        if lastname is not None:
+            params['lastname'] = lastname
+        if alias1 is not None:
+            params['alias1'] = alias1
+        if alias2 is not None:
+            params['alias2'] = alias2
+        if alias3 is not None:
+            params['alias3'] = alias3
+        if alias4 is not None:
+            params['alias4'] = alias4
         response = self.json_api_call('POST',
                                       '/admin/v1/users',
                                       params)
         return response
 
-
-    def update_user(self, user_id, username=None, realname=None,
-                    status=None, notes=None, email=None):
+    def update_user(self, user_id, username=None, realname=None, status=None,
+                    notes=None, email=None, firstname=None, lastname=None,
+                    alias1=None, alias2=None, alias3=None, alias4=None):
         """
         Update username, realname, status, or notes for a user.
 
@@ -409,6 +540,8 @@ class Admin(client.Client):
         status - User's status, defaults to USER_STATUS_ACTIVE
         notes - Comment field (optional)
         email - Email address (optional)
+        firstname - User's given name for ID Proofing (optional)
+        lastname - User's surname for ID Proofing (optional)
 
         Returns updated user object.
 
@@ -427,9 +560,20 @@ class Admin(client.Client):
             params['notes'] = notes
         if email is not None:
             params['email'] = email
+        if firstname is not None:
+            params['firstname'] = firstname
+        if lastname is not None:
+            params['lastname'] = lastname
+        if alias1 is not None:
+            params['alias1'] = alias1
+        if alias2 is not None:
+            params['alias2'] = alias2
+        if alias3 is not None:
+            params['alias3'] = alias3
+        if alias4 is not None:
+            params['alias4'] = alias4
         response = self.json_api_call('POST', path, params)
         return response
-
 
     def delete_user(self, user_id):
         """
@@ -467,7 +611,7 @@ class Admin(client.Client):
 
         return self.json_api_call('POST', path, params)
 
-    def get_user_bypass_codes(self, user_id, count=None, valid_secs=None, remaining_uses=None, codes=None):
+    def add_user_bypass_codes(self, user_id, count=None, valid_secs=None, remaining_uses=None, codes=None):
         """
         Replace a user's bypass codes with new codes.
 
@@ -500,6 +644,21 @@ class Admin(client.Client):
 
         return self.json_api_call('POST', path, params)
 
+    def get_user_bypass_codes(self, user_id):
+        """ Gets a list of bypass codes associated with a user.
+
+            Params:
+                user_id (str) - The user id.
+
+            Returns:
+                A list of bypass code dicts.
+
+            Notes:
+                Raises RuntimeError on error.
+        """
+        user_id = six.moves.urllib.parse.quote_plus(str(user_id))
+        path = '/admin/v1/users/' + user_id + '/bypass_codes'
+        return self.json_api_call('GET', path, {})
 
     def get_user_phones(self, user_id):
         """
@@ -514,7 +673,6 @@ class Admin(client.Client):
         user_id = six.moves.urllib.parse.quote_plus(str(user_id))
         path = '/admin/v1/users/' + user_id + '/phones'
         return self.json_api_call('GET', path, {})
-
 
     def add_user_phone(self, user_id, phone_id):
         """
@@ -534,7 +692,6 @@ class Admin(client.Client):
         }
         return self.json_api_call('POST', path, params)
 
-
     def delete_user_phone(self, user_id, phone_id):
         """
         Dissociates a phone from a user.
@@ -552,7 +709,6 @@ class Admin(client.Client):
         return self.json_api_call('DELETE', path,
                                     params)
 
-
     def get_user_tokens(self, user_id):
         """
         Returns an array of hardware tokens associated with the user.
@@ -568,7 +724,6 @@ class Admin(client.Client):
         params = {}
         return self.json_api_call('GET', path,
                                     params)
-
 
     def add_user_token(self, user_id, token_id):
         """
@@ -588,7 +743,6 @@ class Admin(client.Client):
         }
         return self.json_api_call('POST', path, params)
 
-
     def delete_user_token(self, user_id, token_id):
         """
         Dissociates a hardware token from a user.
@@ -604,6 +758,23 @@ class Admin(client.Client):
         token_id = six.moves.urllib.parse.quote_plus(str(token_id))
         path = '/admin/v1/users/' + user_id + '/tokens/' + token_id
         return self.json_api_call('DELETE', path, {})
+
+    def get_user_u2ftokens(self, user_id):
+        """ Returns an array of u2ftokens associated
+            with a user.
+
+            Params:
+                user_id (str) - The user id.
+
+            Returns:
+                An array of u2ftoken dicts.
+
+            Notes:
+                Raises RuntimeError on error.
+        """
+        user_id = six.moves.urllib.parse.quote_plus(str(user_id))
+        path = '/admin/v1/users/' + user_id + '/u2ftokens'
+        return self.json_api_call('GET', path, {})
 
     def get_user_groups(self, user_id):
         """
@@ -672,7 +843,6 @@ class Admin(client.Client):
         response = self.json_api_call('GET', '/admin/v1/phones', {})
         return response
 
-
     def get_phone_by_id(self, phone_id):
         """
         Returns a phone specified by phone_id.
@@ -686,7 +856,6 @@ class Admin(client.Client):
         path = '/admin/v1/phones/' + phone_id
         response = self.json_api_call('GET', path, {})
         return response
-
 
     def get_phones_by_number(self, number, extension=None):
         """
@@ -706,7 +875,6 @@ class Admin(client.Client):
         response = self.json_api_call('GET', path,
                                         params)
         return response
-
 
     def add_phone(self,
                   number=None,
@@ -752,7 +920,6 @@ class Admin(client.Client):
         response = self.json_api_call('POST', path,
                                         params)
         return response
-
 
     def update_phone(self, phone_id,
                      number=None,
@@ -800,7 +967,6 @@ class Admin(client.Client):
                                         params)
         return response
 
-
     def delete_phone(self, phone_id):
         """
         Deletes a phone. If the phone has already been deleted, does nothing.
@@ -812,7 +978,6 @@ class Admin(client.Client):
         path = '/admin/v1/phones/' + phone_id
         params = {}
         return self.json_api_call('DELETE', path, params)
-
 
     def send_sms_activation_to_phone(self, phone_id,
                                      valid_secs=None,
@@ -957,7 +1122,6 @@ class Admin(client.Client):
                                       params)
         return response
 
-
     def delete_desktoptoken(self, desktoptoken_id):
         """
         Deletes a desktop token. If the desktop token has already been deleted,
@@ -972,7 +1136,6 @@ class Admin(client.Client):
         path = '/admin/v1/desktoptokens/' + six.moves.urllib.parse.quote_plus(desktoptoken_id)
         params = {}
         return self.json_api_call('DELETE', path, params)
-
 
     def update_desktoptoken(self,
                             desktoptoken_id,
@@ -1000,7 +1163,6 @@ class Admin(client.Client):
                                       params)
         return response
 
-
     def activate_desktoptoken(self, desktoptoken_id, valid_secs=None):
         """
         Generates an activation code for a desktop token.
@@ -1023,7 +1185,6 @@ class Admin(client.Client):
             params)
         return response
 
-
     def get_tokens(self):
         """
         Returns list of tokens.
@@ -1037,7 +1198,6 @@ class Admin(client.Client):
             params
         )
         return response
-
 
     def get_token_by_id(self, token_id):
         """
@@ -1053,7 +1213,6 @@ class Admin(client.Client):
         response = self.json_api_call('GET', path,
                                         params)
         return response
-
 
     def get_tokens_by_serial(self, type, serial):
         """
@@ -1071,7 +1230,6 @@ class Admin(client.Client):
         response = self.json_api_call('GET', '/admin/v1/tokens', params)
         return response
 
-
     def delete_token(self, token_id):
         """
         Deletes a token. If the token is already deleted, does nothing.
@@ -1081,7 +1239,6 @@ class Admin(client.Client):
         token_id = six.moves.urllib.parse.quote_plus(str(token_id))
         path = '/admin/v1/tokens/' + token_id
         return self.json_api_call('DELETE', path, {})
-
 
     def add_hotp6_token(self, serial, secret, counter=None):
         """
@@ -1101,7 +1258,6 @@ class Admin(client.Client):
                                         params)
         return response
 
-
     def add_hotp8_token(self, serial, secret, counter=None):
         """
         Add a HOTP8 token.
@@ -1120,7 +1276,6 @@ class Admin(client.Client):
                                         params)
         return response
 
-
     def add_totp6_token(self, serial, secret, totp_step=None):
         """
         Add a TOTP6 token.
@@ -1138,7 +1293,6 @@ class Admin(client.Client):
         response = self.json_api_call('POST', path,
                                         params)
         return response
-
 
     def add_totp8_token(self, serial, secret, totp_step=None):
         """
@@ -1177,7 +1331,6 @@ class Admin(client.Client):
                                         params)
         return response
 
-
     def add_yubikey_token(self, serial, private_id, aes_key):
         """
         Add a Yubikey AES token.
@@ -1193,7 +1346,6 @@ class Admin(client.Client):
         response = self.json_api_call('POST', path,
                                         params)
         return response
-
 
     def resync_hotp_token(self, token_id, code1, code2, code3):
         """
@@ -1252,7 +1404,11 @@ class Admin(client.Client):
                         password_requires_numeric=None,
                         password_requires_special=None,
                         helpdesk_bypass=None,
-                        helpdesk_bypass_expiration=None):
+                        helpdesk_bypass_expiration=None,
+                        reactivation_url=None,
+                        reactivation_integration_key=None,
+                        security_checkup_enabled=None,
+                        ):
         """
         Update settings.
 
@@ -1284,7 +1440,9 @@ class Admin(client.Client):
         password_requires_special = True|False|None
         helpdesk_bypass - "allow"|"limit"|"deny"|None
         helpdesk_bypass_expiration - <int:minutes>|0
-
+        reactivation_url = <str: url>|None
+        reactivation_integration_key = <str: url>|None
+        security_checkup_enabled = True|False|None
 
         Returns updated settings object.
 
@@ -1352,6 +1510,12 @@ class Admin(client.Client):
             params['helpdesk_bypass'] = str(helpdesk_bypass)
         if helpdesk_bypass_expiration is not None:
             params['helpdesk_bypass_expiration'] = str(helpdesk_bypass_expiration)
+        if reactivation_url is not None:
+            params['reactivation_url'] = reactivation_url
+        if reactivation_integration_key is not None:
+            params['reactivation_integration_key'] = reactivation_integration_key
+        if security_checkup_enabled is not None:
+            params['security_checkup_enabled'] = security_checkup_enabled
 
         if not params:
             raise TypeError("No settings were provided")
@@ -1361,6 +1525,48 @@ class Admin(client.Client):
                                       params)
         return response
 
+    def set_allowed_admin_auth_methods(self,
+                                        push_enabled=None,
+                                        sms_enabled=None,
+                                        voice_enabled=None,
+                                        mobile_otp_enabled=None,
+                                        yubikey_enabled=None,
+                                        hardware_token_enabled=None,
+                                        ):
+        params = {}
+        if push_enabled is not None:
+            params['push_enabled'] = (
+                '1' if push_enabled else '0')
+        if sms_enabled is not None:
+            params['sms_enabled'] = (
+                '1' if sms_enabled else '0')
+        if mobile_otp_enabled is not None:
+            params['mobile_otp_enabled'] = (
+                '1' if mobile_otp_enabled else '0')
+        if hardware_token_enabled is not None:
+            params['hardware_token_enabled'] = (
+                '1' if hardware_token_enabled else '0')
+        if yubikey_enabled is not None:
+            params['yubikey_enabled'] = (
+                '1' if yubikey_enabled else '0')
+        if voice_enabled is not None:
+            params['voice_enabled'] = (
+                '1' if voice_enabled else '0')
+        response = self.json_api_call(
+            'POST',
+            '/admin/v1/admins/allowed_auth_methods',
+            params
+        )
+        return response
+
+    def get_allowed_admin_auth_methods(self):
+        params={}
+        response = self.json_api_call(
+            'GET',
+            '/admin/v1/admins/allowed_auth_methods',
+            params
+        )
+        return response
 
     def get_info_summary(self):
         """
@@ -1376,7 +1582,6 @@ class Admin(client.Client):
             params
         )
         return response
-
 
     def get_info_telephony_credits_used(self,
                                         mintime=None,
@@ -1402,7 +1607,6 @@ class Admin(client.Client):
             params
         )
         return response
-
 
     def get_authentication_attempts(self,
                                     mintime=None,
@@ -1438,7 +1642,6 @@ class Admin(client.Client):
             params
         )
         return response
-
 
     def get_user_authentication_attempts(self,
                                          mintime=None,
@@ -1487,15 +1690,48 @@ class Admin(client.Client):
             {}
         )
 
-    def get_group(self, gkey):
+    def get_group(self, group_id, api_version=1):
         """
-        Returns a group by gkey.
+        Returns a group by the group id.
+
+        group_id - The id of group (Required)
+        api_version - The api version of the handler to use. Currently, the
+                      default api version is v1, but the v1 api will be
+                      deprecated in a future version of the Duo Admin API.
+                      Please migrate to the v2 api at your earliest convenience.
+                      For details on the differences between v1 and v2,
+                      please see Duo's Admin API documentation. (Optional)
+        """
+        if api_version == 1:
+            url = '/admin/v1/groups/'
+            warnings.warn(
+                'The v1 Admin API for group details will be deprecated '
+                'in a future release of the Duo Admin API. Please migrate to '
+                'the v2 API.',
+                DeprecationWarning)
+        elif api_version == 2:
+            url = '/admin/v2/groups/'
+        else:
+            raise ValueError('Invalid API Version')
+
+        return self.json_api_call('GET', url + group_id, {})
+
+    def get_group_users(self, group_id, limit=100, offset=0):
+        """
+        Get a paginated list of users associated with the specified
+        group.
+
+        group_id - The id of the group (Required)
+        limit - The maximum number of records to return. Maximum is 500. (Optional)
+        offset - The offset of the first record to return. (Optional)
         """
         return self.json_api_call(
             'GET',
-            '/admin/v1/groups/' + gkey,
-            {}
-        )
+            '/admin/v2/groups/' + group_id + '/users',
+            {
+                'limit': str(limit),
+                'offset': str(offset),
+            })
 
     def create_group(self, name,
                     desc=None,
@@ -1541,18 +1777,20 @@ class Admin(client.Client):
         )
         return response
 
-    def delete_group(self, gkey):
+    def delete_group(self, group_id):
         """
-        Delete a group by gkey
+        Delete a group by group_id
+
+        group_id - The id of the group (Required)
         """
         return self.json_api_call(
             'DELETE',
-            '/admin/v1/groups/' + gkey,
+            '/admin/v1/groups/' + group_id,
             {}
         )
 
     def modify_group(self,
-                     gkey,
+                     group_id,
                      name=None,
                      desc=None,
                      status=None,
@@ -1565,7 +1803,7 @@ class Admin(client.Client):
         """
         Modify a group
 
-        gkey - Group to modify (Required)
+        group_id - The id of the group to modify (Required)
         name - New group name (Optional)
         desc - New group description (Optional)
         status - Group authentication status <str: 'active'/'disabled'/'bypass'> (Optional)
@@ -1594,11 +1832,10 @@ class Admin(client.Client):
             params['u2f_enabled'] = '1' if u2f_enabled else '0'
         response = self.json_api_call(
             'POST',
-            '/admin/v1/groups/' + gkey,
+            '/admin/v1/groups/' + group_id,
             params
         )
         return response
-
 
     def get_integrations(self):
         """
@@ -1617,7 +1854,6 @@ class Admin(client.Client):
         )
         return response
 
-
     def get_integration(self, integration_key):
         """
         Returns the requested integration.
@@ -1635,7 +1871,6 @@ class Admin(client.Client):
             params
         )
         return response
-
 
     def create_integration(self,
                            name,
@@ -1734,7 +1969,6 @@ class Admin(client.Client):
                                       params)
         return response
 
-
     def delete_integration(self, integration_key):
         """Deletes an integration.
 
@@ -1746,7 +1980,6 @@ class Admin(client.Client):
         integration_key = six.moves.urllib.parse.quote_plus(str(integration_key))
         path = '/admin/v1/integrations/%s' % integration_key
         return self.json_api_call('DELETE', path, {})
-
 
     def update_integration(self,
                            integration_key,
@@ -1853,7 +2086,6 @@ class Admin(client.Client):
         response = self.json_api_call('POST', path, params)
         return response
 
-
     def get_admins(self):
         """
         Returns list of administrators.
@@ -1865,7 +2097,6 @@ class Admin(client.Client):
         """
         response = self.json_api_call('GET', '/admin/v1/admins', {})
         return response
-
 
     def get_admin(self, admin_id):
         """
@@ -1881,7 +2112,6 @@ class Admin(client.Client):
         path = '/admin/v1/admins/%s' % admin_id
         response = self.json_api_call('GET', path, {})
         return response
-
 
     def add_admin(self, name, email, phone, password, role=None):
         """
@@ -1911,11 +2141,12 @@ class Admin(client.Client):
         response = self.json_api_call('POST', '/admin/v1/admins', params)
         return response
 
-
     def update_admin(self, admin_id,
                      name=None,
                      phone=None,
-                     password=None):
+                     password=None,
+                     password_change_required=None,
+                     ):
         """
         Update one or more attributes of an administrator.
 
@@ -1923,6 +2154,7 @@ class Admin(client.Client):
         name - <str:the name of the administrator> (optional)
         phone - <str:phone number> (optional)
         password - <str:password> (optional)
+        password_change_required - <bool|None:Whether admin is required to change their password at next login> (optional)
 
         Returns the updated administrator.  See the adminapi docs.
 
@@ -1937,9 +2169,10 @@ class Admin(client.Client):
             params['phone'] = phone
         if password is not None:
             params['password'] = password
+        if password_change_required is not None:
+            params['password_change_required'] = password_change_required
         response = self.json_api_call('POST', path, params)
         return response
-
 
     def delete_admin(self, admin_id):
         """
@@ -1953,7 +2186,6 @@ class Admin(client.Client):
         path = '/admin/v1/admins/%s' % admin_id
         return self.json_api_call('DELETE', path, {})
 
-
     def reset_admin(self, admin_id):
         """
         Resets the admin lockout.
@@ -1965,7 +2197,6 @@ class Admin(client.Client):
         admin_id = six.moves.urllib.parse.quote_plus(str(admin_id))
         path = '/admin/v1/admins/%s/reset' % admin_id
         return self.json_api_call('POST', path, {})
-
 
     def activate_admin(self, email,
                        send_email=False,
@@ -2033,3 +2264,79 @@ class Admin(client.Client):
 
     def delete_logo(self):
         return self.json_api_call('DELETE', '/admin/v1/logo', params={})
+
+    def get_u2ftokens(self):
+        """ Returns a list of u2ftokens.
+
+            Returns:
+                Returns a list of u2ftoken dicts.
+
+            Notes:
+                Raises RuntimeError on error.
+        """
+        response = self.json_api_call('GET', '/admin/v1/u2ftokens', {})
+        return response
+
+    def get_u2ftoken_by_id(self, registration_id):
+        """ Returns u2ftoken specified by registration_id.
+
+            Params:
+                registration_id (str): The registration id of the
+                    u2ftoken to fetch.
+
+            Returns:
+                Returns a u2ftoken dict.
+
+            Notes:
+                Raises RuntimeError on error.
+        """
+        registration_id = \
+            six.moves.urllib.parse.quote_plus(str(registration_id))
+        path = '/admin/v1/u2ftokens/' + registration_id
+        response = self.json_api_call('GET', path, {})
+        return response
+
+    def delete_u2ftoken(self, registration_id):
+        """ Deletes a u2ftoken. If the u2ftoken is already
+            deleted, does nothing.
+
+            Params:
+                registration_id (str): The registration id of the
+                    u2ftoken.
+
+            Notes:
+                Raises RuntimeError on error.
+        """
+        registration_id = \
+            six.moves.urllib.parse.quote_plus(str(registration_id))
+        path = '/admin/v1/u2ftokens/' + registration_id
+        response = self.json_api_call('DELETE', path, {})
+        return response
+
+    def get_bypass_codes(self):
+        """ Gets a list of bypass codes.
+
+            Returns:
+                Returns a list of bypass code dicts.
+
+            Notes:
+                Raises RuntimeError on error.
+        """
+        response = self.json_api_call('GET', '/admin/v1/bypass_codes', {})
+        return response
+
+    def delete_bypass_code_by_id(self, bypass_code_id):
+        """ Deletes a bypass code. If the bypass code is already
+            deleted, does nothing.
+
+            Params:
+                bypass_code_id (str): The id of the bypass code.
+
+            Notes:
+                Raises RuntimeError on error.
+        """
+        registration_id = \
+            six.moves.urllib.parse.quote_plus(str(bypass_code_id))
+        path = '/admin/v1/bypass_codes/' + bypass_code_id
+        response = self.json_api_call('DELETE', path, {})
+        return response

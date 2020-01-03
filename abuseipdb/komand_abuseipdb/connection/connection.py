@@ -10,6 +10,9 @@ class Connection(komand.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.api_key = None
+        self.base = None
+        self.headers = None
 
     def connect(self, params):
         self.api_key = params.get('credentials').get('secretKey')
@@ -18,7 +21,7 @@ class Connection(komand.Connection):
             'Accept': 'application/json',
             'Key': self.api_key
         }
-        self.logger.info('Connect: Connecting to %s...' % self.base)
+        self.logger.info(f'Connect: Connecting to {self.base}...')
 
     def test(self):
         # Use private IP Addresses for testing the API (e.g. 127.0.0.1) from https://www.abuseipdb.com/api
@@ -31,8 +34,8 @@ class Connection(komand.Connection):
             json_ = r.json()
         except json.decoder.JSONDecodeError:
             raise ConnectionTestException(cause='Received an unexpected response from AbuseIPDB.',
-                                          assistance="(non-JSON or no response"
-                                                     " was received). Response was: %s" % r.text)
+                                          assistance=f"(non-JSON or no response"
+                                                     f" was received). Response was: {r.text}")
         except Exception as e:
             self.logger.error(e)
             raise
