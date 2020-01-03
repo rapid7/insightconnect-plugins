@@ -3,8 +3,8 @@
         "action": "move_object",
         "connection": {
             "host": "",
-            "port": "",
-            "use_ssl": "",
+            "port": 636,
+            "use_ssl": true,
             "username_password": {
                 "password": "",
                 "username": ""

@@ -1,10 +1,11 @@
 import komand
-from .schema import CheckIpInput, CheckIpOutput, Input
+from .schema import CheckIpInput, CheckIpOutput, Input, Output
 # Custom imports below
 from komand.exceptions import PluginException
 import json
 import requests
 import logging
+from komand_abuseipdb.util import helper
 logging.getLogger('requests').setLevel(logging.WARNING)
 
 
@@ -17,9 +18,10 @@ class CheckIp(komand.Action):
                 input=CheckIpInput(),
                 output=CheckIpOutput())
 
-    def transform_output(self, out: dict) -> dict:
-        if out["isPublic"] is None:
-            out["isPublic"] = False
+    @staticmethod
+    def transform_output(out: dict) -> dict:
+        if out[Output.ISPUBLIC] is None:
+            out[Output.ISPUBLIC] = False
 
         out = komand.helper.clean(out)
 
@@ -38,20 +40,16 @@ class CheckIp(komand.Action):
         r = requests.get(url, params=params, headers=self.connection.headers)
 
         try:
-            json_ = r.json()
-            if "errors" in json_:
-                raise PluginException(cause='Received an error response from AbuseIPDB.',
-                                      assistance=json_['errors'][0]["detail"])
-
+            json_ = helper.get_json(r)
             out = self.transform_output(json_["data"])
 
         except json.decoder.JSONDecodeError:
             raise PluginException(cause='Received an unexpected response from AbuseIPDB.',
-                                  assistance="(non-JSON or no response was received). Response was: %s" % r.text)
+                                  assistance=f"(non-JSON or no response was received). Response was: {r.text}")
 
         if len(out) > 0:
-            out["found"] = True
+            out[Output.FOUND] = True
         else:
-            out["found"] = False
+            out[Output.FOUND] = False
 
         return out

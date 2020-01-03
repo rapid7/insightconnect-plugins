@@ -1,10 +1,11 @@
 import komand
-from .schema import GetBlacklistInput, GetBlacklistOutput, Input
+from .schema import GetBlacklistInput, GetBlacklistOutput, Input, Output
 # Custom imports below
 from komand.exceptions import PluginException
 import json
 import requests
 import logging
+from komand_abuseipdb.util import helper
 logging.getLogger('requests').setLevel(logging.WARNING)
 
 
@@ -32,19 +33,16 @@ class GetBlacklist(komand.Action):
         r = requests.get(url, params=params, headers=self.connection.headers)
 
         try:
-            json_ = r.json()
-            if "errors" in json_:
-                raise PluginException(cause='Received an error response from AbuseIPDB.',
-                                      assistance=json_['errors'][0]["detail"])
+            json_ = helper.get_json(r)
             blacklist = json_["data"]
-            out = {"blacklist": blacklist}
+            out = {Output.BLACKLIST: blacklist}
         except json.decoder.JSONDecodeError:
             raise PluginException(cause='Received an unexpected response from AbuseIPDB.',
-                                  assistance="(non-JSON or no response was received). Response was: %s" % r.text)
+                                  assistance=f"(non-JSON or no response was received). Response was: {r.text}")
 
         if len(out) > 0:
-            out["success"] = True
+            out[Output.SUCCESS] = True
         else:
-            out["success"] = False
+            out[Output.SUCCESS] = False
 
         return out
