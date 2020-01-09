@@ -1,6 +1,6 @@
 {
     "body": {
-        "action": "get_observables",
+        "action": "submit_url",
         "connection": {
             "api_key": {
                 "secretKey": ""
@@ -10,7 +10,10 @@
             "ssl_verify": false
         },
         "input": {
-            "value": "window.google"
+            "use_premium_sandbox": false,
+            "platform": "WINDOWS7",
+            "classification": "private",
+            "url": "google.com"
         },
         "meta": {}
     },

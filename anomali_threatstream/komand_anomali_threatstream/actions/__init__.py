@@ -4,3 +4,5 @@ from .import_observable.action import ImportObservable
 from .lookup_hash.action import LookupHash
 from .lookup_ip.action import LookupIp
 from .lookup_url.action import LookupUrl
+from .submit_file.action import SubmitFile
+from .submit_url.action import SubmitUrl

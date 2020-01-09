@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name='anomali_threatstream-rapid7-plugin',
-      version='3.0.2',
+setup(name='anomali_threatstream-rapid-plugin',
+      version='3.1.2',
       description='Anomali ThreatStream operationalizes threat intelligence, automating collection and integration that enables security teams to analyze and respond to threats',
-      author='rapid7',
+      author='rapid',
       author_email='',
       url='',
       packages=find_packages(),

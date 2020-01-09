@@ -1,6 +1,6 @@
 {
     "body": {
-        "action": "get_observables",
+        "action": "submit_file",
         "connection": {
             "api_key": {
                 "secretKey": ""
@@ -10,7 +10,13 @@
             "ssl_verify": false
         },
         "input": {
-            "value": "window.google"
+            "use_premium_sandbox": false,
+            "platform": "WINDOWS7",
+            "classification": "private",
+            "file": {
+                "filename": "",
+                "content": ""
+            }
         },
         "meta": {}
     },

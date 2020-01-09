@@ -1,7 +1,7 @@
 {
-	"spec": "6f677f13aa90ae25906507d59669c3ad",
-	"manifest": "053c82e25ebe8612ea712bacd99ce5ba",
-	"setup": "947807b6c942c34b44bca97ce0d9870d",
+	"spec": "20d566e339cee2b230b3e7d01e286bb5",
+	"manifest": "ba25f9cb281dbea0a3a458ebc846ee94",
+	"setup": "013c9e56e914101312f3525f078e5d2b",
 	"schemas": [
 		{
 			"identifier": "get_observables/schema.py",
@@ -22,6 +22,14 @@
 		{
 			"identifier": "lookup_url/schema.py",
 			"hash": "0e4de5f915f724c5e952b6facf2661a3"
+		},
+		{
+			"identifier": "submit_file/schema.py",
+			"hash": "027f5d852dbe03ee8e77936bbe50e5f9"
+		},
+		{
+			"identifier": "submit_url/schema.py",
+			"hash": "7ba30997e4a28829ec3756243cfee3e4"
 		},
 		{
 			"identifier": "connection/schema.py",
