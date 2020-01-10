@@ -1,8 +1,6 @@
 import komand
-# Custom imports below
-
-
 from .schema import ConnectionSchema, Input
+# Custom imports below
 
 
 class Connection(komand.Connection):
