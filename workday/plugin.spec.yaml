@@ -1,0 +1,77 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: workday
+title: Workday
+description: Interact with Workday
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/workday
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://workday.com
+tags:
+- workday
+hub_tags:
+  use_cases: [management]
+  keywords: [workday]
+  features: []
+connection:
+  username:
+    title: Username
+    description: Username for Workday
+    type: string
+    required: true
+  password:
+    title: Password
+    description: Password for Workday
+    type: string
+    required: true
+  tenant:
+    title: Workday Tenant
+    description: Workday tenant
+    type: string
+    required: true
+  environment:
+    title: Environment
+    description: Workday environment to use, for example 'wd2-impl-services1'. Leave blank for production
+    type: string
+    required: false
+actions:
+  submit_time_off:
+    title: Submit Time Off
+    description: Submit time off 
+    input:
+      employee_id:
+        title: Employee ID
+        description: ID of employee for which to submit time off
+        type: string
+        required: true
+      comment:
+        title: Comment
+        description: Time off comment
+        type: string
+        required: true
+      time_off_type:
+        title: Time Off Type
+        description: Time off type to use, case-sensitive, for example 'USA - Vacation'
+        type: string
+        required: true
+      date:
+        title: Date
+        description: Date to start taking off
+        type: string
+        required: true
+      days:
+        title: Days
+        description: Days to take off
+        type: number
+        required: true
+    output:
+      success:
+        title: Success
+        description: Whether or not the request was successful
+        type: boolean
+        required: true
