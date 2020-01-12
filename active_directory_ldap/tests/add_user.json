@@ -3,8 +3,8 @@
         "action": "add_user",
         "connection": {
             "host": "",
-            "port": "",
-            "use_ssl": "",
+            "port": 636,
+            "use_ssl": true,
             "username_password": {
                 "password": "",
                 "username": ""
@@ -13,13 +13,13 @@
         "input": {
             "account_disabled": "true",
             "additional_parameters": {},
-            "domain_name": "",
-            "first_name": "",
-            "last_name": "",
-            "logon_name": "",
-            "password": "",
+            "domain_name": "example.local",
+            "first_name": "Test",
+            "last_name": "Person",
+            "logon_name": "tperson",
+            "password": "testtest04!",
             "user_ou": "Users",
-            "user_principal_name": ""
+            "user_principal_name": "user@example.com"
         },
         "meta": {}
     },
