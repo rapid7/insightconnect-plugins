@@ -1,4 +1,5 @@
 import komand
+from komand.exceptions import PluginException
 from .schema import GetUserByUsernameInput, GetUserByUsernameOutput, Input, Output, Component
 # Custom imports below
 
@@ -20,4 +21,4 @@ class GetUserByUsername(komand.Action):
             return results
 
         except (TypeError, IndexError) as e:
-            raise Exception(f"User not found. Error: {e}") from e
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=f"User not found. Error: {e}")

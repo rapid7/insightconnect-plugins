@@ -1,4 +1,5 @@
 import komand
+from komand.exceptions import PluginException
 from .schema import GetUserStatusInput, GetUserStatusOutput, Input, Output, Component
 # Custom imports below
 
@@ -17,7 +18,7 @@ class GetUserStatus(komand.Action):
         users = (self.connection.admin_api.get_users())
 
         if not users:
-            raise Exception("Error: No users exist!")
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data="Error: No users exist!")
 
         for user in users:
             if user["username"] != username:
@@ -25,4 +26,4 @@ class GetUserStatus(komand.Action):
 
             return {Output.STATUS: user["status"], Output.USER_ID: user["user_id"]}
         else:
-            raise Exception("Error: User not found!")  # For loop finished without early return, user not found
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data="Error: No users exist!")
