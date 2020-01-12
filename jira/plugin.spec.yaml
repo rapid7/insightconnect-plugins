@@ -291,7 +291,7 @@ actions:
       issue:
         title: Issue
         type: issue
-        description: Founded issue
+        description: Found issue
         required: false
   find_users:
     title: Find Users
