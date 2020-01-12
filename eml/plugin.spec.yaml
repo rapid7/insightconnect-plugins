@@ -63,7 +63,7 @@ actions:
     input:
       eml_file:
         title: EML File
-        description: Email Message File
+        description: Email message File
         type: bytes
         required: true
     output:
@@ -77,7 +77,7 @@ actions:
     input:
       email_string:
         title: Email String
-        description: Email Message as string
+        description: Email message as string
         type: string
         required: true
     output:

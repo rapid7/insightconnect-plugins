@@ -28,6 +28,3 @@ class Parse(komand.Action):
 
         result = format_output.format_result(self.logger, msg)
         return {Output.RESULT: result}
-
-    def test(self, params={}):
-        pass
