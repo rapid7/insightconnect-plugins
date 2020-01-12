@@ -18,4 +18,4 @@ class GetUserById(komand.Action):
             results = komand.helper.clean({Output.USER: user})
             return results
         except KeyError as e:
-            self.logger.error('User not found. Error: ' + str(e))
+            self.logger.error(f'User not found. Error: {str(e)}')
