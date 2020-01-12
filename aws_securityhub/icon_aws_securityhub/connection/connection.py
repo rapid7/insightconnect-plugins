@@ -24,4 +24,4 @@ class Connection(komand.Connection):
 
     def test(self):
         self.aws.client('securityhub')
-        pass
+        return {}

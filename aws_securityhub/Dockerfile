@@ -20,4 +20,7 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 # Install plugin
 RUN python setup.py build && python setup.py install
 
+# User to run plugin code. The two supported users are: root, nobody
+USER root
+
 ENTRYPOINT ["/usr/local/bin/icon_aws_securityhub"]

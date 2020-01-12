@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    FINDINGS = "findings"
+    FINDINGS = "Findings"
     
 
 class GetFindingsInput(komand.Input):
@@ -41,7 +41,7 @@ class GetFindingsOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "findings": {
+    "Findings": {
       "type": "array",
       "title": "Findings",
       "description": "Security Hub-aggregated findings",

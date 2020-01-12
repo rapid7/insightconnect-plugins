@@ -49,7 +49,7 @@ This action is used to lists and describes Security Hub-aggregated findings that
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|findings|[]Findings|False|Security Hub-aggregated findings|
+|Findings|[]Findings|False|Security Hub-aggregated findings|
 
 Example output:
 
@@ -122,12 +122,12 @@ This trigger is used to poll from a SQS Queue.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|attribute_names|[]string|['All']|False|A list of attributes that need to be returned along with each message ['All', 'Policy', 'VisibilityTimeout', 'MaximumMessageSize', 'MessageRetentionPeriod', 'ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible', 'CreatedTimestamp', 'LastModifiedTimestamp', 'QueueArn', 'ApproximateNumberOfMessagesDelayed', 'DelaySeconds', 'ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds']|None|
-|max_number_of_messages|integer|1|False|The maximum number of messages to return. Amazon SQS never returns more messages than this value. Valid values 1 to 10. Default 1|None|
-|message_attribute_names|[]string|['All']|False|The name of the message attribute|None|
-|receive_request_attempt_id|string||False|This parameter applies only to FIFO (first-in-first-out) queues|None|
-|visibility_timeout|integer|0|False|The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request|None|
-|wait_time_seconds|integer|0|False|The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than WaitTimeSeconds|None|
+|AttributeNames|[]string|['All']|False|A list of attributes that need to be returned along with each message ['All', 'Policy', 'VisibilityTimeout', 'MaximumMessageSize', 'MessageRetentionPeriod', 'ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible', 'CreatedTimestamp', 'LastModifiedTimestamp', 'QueueArn', 'ApproximateNumberOfMessagesDelayed', 'DelaySeconds', 'ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds']|None|
+|MaxNumberOfMessages|integer|1|False|The maximum number of messages to return. Amazon SQS never returns more messages than this value. Valid values 1 to 10. Default 1|None|
+|MessageAttributeNames|[]string|['All']|False|The name of the message attribute|None|
+|ReceiveRequestAttemptId|string||False|This parameter applies only to FIFO (first-in-first-out) queues|None|
+|VisibilityTimeout|integer|0|False|The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request|None|
+|WaitTimeSeconds|integer|0|False|The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than WaitTimeSeconds|None|
 |interval|integer|5|True|How many seconds to wait until next poll|None|
 |queue_url|string|None|True|URL for the SQS queue|None|
 
@@ -135,9 +135,9 @@ This trigger is used to poll from a SQS Queue.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|message|Message|False|Security hub message|
-|response_metadata|ResponseMetadata|False|Security hub response metadata|
-|security_hub_event|securityHubPayload|False|Security hub event payload|
+|Message|Message|False|Security hub message|
+|ResponseMetadata|ResponseMetadata|False|Security hub response metadata|
+|securityhubevent|securityHubPayload|False|Security hub event payload|
 
 Example output:
 
@@ -194,7 +194,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.1 - Changed output and input variables names | Removed unused variables | Removed `USER root` from `Dockerfile`
+* 2.0.1 - Removed unused variables
 * 2.0.0 - New spec and help.md format for the Hub | Variable names updated as acronyms
 * 1.0.0 - Initial plugin
 

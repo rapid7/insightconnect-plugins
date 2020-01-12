@@ -968,7 +968,7 @@ actions:
         type: object
         required: false
     output:
-      findings:
+      Findings:
         title: Findings
         type: "[]Findings"
         description: Security Hub-aggregated findings
@@ -984,37 +984,37 @@ triggers:
         description: URL for the SQS queue
         type: string
         required: true
-      attribute_names:
+      AttributeNames:
         title: Attribute Names
         description: A list of attributes that need to be returned along with each message ['All', 'Policy', 'VisibilityTimeout', 'MaximumMessageSize', 'MessageRetentionPeriod', 'ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible', 'CreatedTimestamp', 'LastModifiedTimestamp', 'QueueArn', 'ApproximateNumberOfMessagesDelayed', 'DelaySeconds', 'ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds']
         type: "[]string"
         required: false
         default: ["All"]
-      max_number_of_messages:
+      MaxNumberOfMessages:
         title: Max Number of Messages
         description: The maximum number of messages to return. Amazon SQS never returns more messages than this value. Valid values 1 to 10. Default 1
         type: integer
         required: false
         default: 1
-      message_attribute_names:
+      MessageAttributeNames:
         title: Message Attribute Names
         description: The name of the message attribute
         type: "[]string"
         required: false
         default: ["All"]
-      visibility_timeout:
+      VisibilityTimeout:
         title: Visibility Timeout
         description: The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request
         type: integer
         required: false
         default: 0
-      wait_time_seconds:
+      WaitTimeSeconds:
         title: Wait Time Seconds
         description: The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than WaitTimeSeconds
         type: integer
         required: false
         default: 0
-      receive_request_attempt_id:
+      ReceiveRequestAttemptId:
         title: Receive Request Attempt ID
         description: This parameter applies only to FIFO (first-in-first-out) queues
         type: string
@@ -1027,17 +1027,17 @@ triggers:
         required: true
         default: 5
     output:
-      message:
+      Message:
         title: Message
         type: Message
         description: Security hub message
         required: false
-      security_hub_event:
+      securityhubevent:
         title: Security Hub Event
         type: securityHubPayload
         description: Security hub event payload
         required: false
-      response_metadata:
+      ResponseMetadata:
         title: Response Metadata
         type: ResponseMetadata
         description: Security hub response metadata
