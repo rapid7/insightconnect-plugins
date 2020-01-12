@@ -21,6 +21,7 @@ class Run(komand.Action):
         dump = params.get(Input.DUMP).encode('UTF-8')
         exclude = params.get(Input.EXCLUDE)
 
+        # Initialize variables
         ip_count = []
         tcp_count = []
         udp_count = []
@@ -29,13 +30,16 @@ class Run(komand.Action):
         files = []
         sessions = []
 
+        # Set file path to store file
         temp_dir = f"{tempfile.gettempdir()}/chaosreader"
         file_name = "chaosreader.pcap"
         full_path = f"{temp_dir}/{file_name}"
 
+        # Set variables needed when calling chaosreader
         binary = "/usr/bin/chaosreader"
         cmd = f"{binary} {full_path} -D {temp_dir}"
 
+        # Set options to exclude
         if exclude == "Info":
             self.logger.info('Exluding info files')
         elif exclude == "Raw":
@@ -47,22 +51,27 @@ class Run(komand.Action):
         elif exclude == "ICMP":
             self.logger.info('Exluding ICMP traffic')
 
+        # Verify string is base64
         try:
             base64.decodebytes(dump)
         except binascii.Error as e:
             self.logger.error('Error: Invalid Base64 string')
             raise PluginException(cause=PluginException.Preset.SERVER_ERROR, assistance=str(e))
 
+        # Create output directory
         os.makedirs(temp_dir)
 
+        # Decode bas64 string and write to file
         with open(full_path, "wb") as fh:
             fh.write(base64.decodebytes(dump))
 
+        # Run chaosreader
         r = komand.helper.exec_command(cmd)
 
         if r['rcode'] != 0:
-            raise PluginException(cause="Problem with process file", assistance="Chaosreader: Unable to process file")
+            raise PluginException(cause="Chaosreader was unable to process the file", assistance="Chaosreader: Unable to process file")
 
+        # Iterate through files created by chaosreader and append as b64
         for name in os.listdir(temp_dir):
             if name != file_name:
                 new_path = f"{temp_dir}/{name}"
@@ -72,11 +81,14 @@ class Run(komand.Action):
                     if b64_string not in files:
                         files.append(b64_string)
 
+        # Log if no files are returned
         if not files:
             self.logger.info("No files extracted")
 
+        # Number of files extracted
         file_count = len(files)
 
+        # Separate tables to parse data
         with open(f"{temp_dir}/index.html") as f:
             contents = f.read()
         soup = BeautifulSoup(contents, 'html.parser')
@@ -89,6 +101,7 @@ class Run(komand.Action):
 
         self.logger.info(ip_count_table)
 
+        # Define function to parse data from index.html
         def export_info(table, final):
             for tr in table.find_all('tr'):
                 proto = tr.find_all('td')[0]
@@ -98,16 +111,26 @@ class Run(komand.Action):
                 new_count = {'source': proto_str, 'count': count_int}
                 final.append(new_count)
 
+        # Extract session data
         for i in session_table.find_all('tr'):
             session = i.get_text()
             session_str = str(session.rstrip())
             session_str = session_str.replace("\n", "\\n")
             sessions.append(session_str)
 
+        # Extract IP count
         export_info(ip_count_table, ip_count)
+
+        # Extract TCP count
         export_info(tcp_count_table, tcp_count)
+
+        # Extract UDP count
         export_info(udp_count_table, udp_count)
+
+        # Extract proto count
         export_info(proto_count_table, proto_count)
+
+        # Extract ethernet count
         export_info(ethernet_count_table, ethernet_count)
 
         return {
@@ -120,27 +143,3 @@ class Run(komand.Action):
             Output.PROTO_COUNT: proto_count,
             Output.ETHERNET_COUNT: ethernet_count
         }
-
-    def test(self):
-        dump = "1MOyoQIABAAAAAAAAAAAAP//AAABAAAAfAFSWLu4BwBKAAAASgAAAAgAJ/3K6wgAJ07ZOQgARQAAPEfLQABABtroCgECBAoBAgOD8QBQL1y2bwAAAACgAnIQYcoAAAIEBbQEAggKAGvxpAAAAAABAwMHfAFSWO+4BwBKAAAASgAAAAgAJ07ZOQgAJ/3K6wgARQAAPAAAQABABiK0CgECAwoBAgQAUIPxtfoCHS9ctnCgEnEgGDcAAAIEBbQEAggKAHhDcABr8aQBAwMHfAFSWFm6BwBCAAAAQgAAAAgAJ/3K6wgAJ07ZOQgARQAANEfMQABABtrvCgECBAoBAgOD8QBQL1y2cLX6Ah6AEADlBbEAAAEBCAoAa/GkAHhDcHwBUlhrugcAkgAAAJIAAAAIACf9yusIACdO2TkIAEUAAIRHzUAAQAbangoBAgQKAQIDg/EAUC9ctnC1+gIegBgA5VkiAAABAQgKAGvxpQB4Q3BHRVQgL3Rlc3QuemlwIEhUVFAvMS4xDQpVc2VyLUFnZW50OiBjdXJsLzcuMzUuMA0KSG9zdDogMTAuMS4yLjMNCkFjY2VwdDogKi8qDQoNCnwBUlhrugcAQgAAAEIAAAAIACdO2TkIACf9yusIAEUAADRBbkAAQAbhTQoBAgMKAQIEAFCD8bX6Ah4vXLbAgBAA4xgvAAABAQgKAHhDcABr8aV8AVJYI74HAPABAADwAQAACAAnTtk5CAAn/crrCABFAAHiQW9AAEAG354KAQIDCgECBABQg/G1+gIeL1y2wIAYAOMZ3QAAAQEICgB4Q3EAa/GlSFRUUC8xLjEgMjAwIE9LDQpEYXRlOiBUaHUsIDE1IERlYyAyMDE2IDAyOjM1OjQwIEdNVA0KU2VydmVyOiBBcGFjaGUvMi40LjcgKFVidW50dSkNCkxhc3QtTW9kaWZpZWQ6IFdlZCwgMTQgRGVjIDIwMTYgMTg6NDQ6MDEgR01UDQpFVGFnOiAiYzUtNTQzYTJiODZhOWMyMCINCkFjY2VwdC1SYW5nZXM6IGJ5dGVzDQpDb250ZW50LUxlbmd0aDogMTk3DQpDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL3ppcA0KDQpQSwMECgAAAAAAE5WOSbFVXfQfAAAAHwAAAAgAHAB0ZXN0LnR4dFVUCQADJZJRWCWSUVh1eAsAAQQAAAAABAAAAAB0aGlzIGlzIGEgdGVzdCBmb3IgY2hhb3NyZWFkZXIKUEsBAh4DCgAAAAAAE5WOSbFVXfQfAAAAHwAAAAgAGAAAAAAAAQAAAKSBAAAAAHRlc3QudHh0VVQFAAMlklFYdXgLAAEEAAAAAAQAAAAAUEsFBgAAAAABAAEATgAAAGEAAAAAAHwBUlj+vgcAQgAAAEIAAAAIACf9yusIACdO2TkIAEUAADRHzkAAQAba7QoBAgQKAQIDg/EAUC9ctsC1+gPMgBAA7QOpAAABAQgKAGvxpQB4Q3F8AVJY08kHAEIAAABCAAAACAAn/crrCAAnTtk5CABFAAA0R89AAEAG2uwKAQIECgECA4PxAFAvXLbAtfoDzIARAO0DqAAAAQEICgBr8aUAeENxfAFSWGjKBwBCAAAAQgAAAAgAJ07ZOQgAJ/3K6wgARQAANEFwQABABuFLCgECAwoBAgQAUIPxtfoDzC9ctsGAEQDjGC8AAAEBCAoAeENxAGvxpXwBUlheywcAQgAAAEIAAAAIACf9yusIACdO2TkIAEUAADRH0EAAQAba6woBAgQKAQIDg/EAUC9ctsG1+gPNgBAA7QOmAAABAQgKAGvxpgB4Q3E=".encode('UTF-8')
-
-        temp_dir = f"{tempfile.gettempdir()}/chaosreader"
-        file_name = "chaosreader.pcap"
-        full_path = f"{temp_dir}/{file_name}"
-        binary = "/usr/bin/chaosreader"
-        cmd = f"{binary} {full_path} -D {temp_dir}"
-
-        os.makedirs(temp_dir)
-
-        with open(full_path, "wb") as fh:
-            fh.write(base64.decodebytes(dump))
-
-        komand.helper.exec_command(cmd)
-
-        for name in os.listdir(temp_dir):
-            if name.endswith(".zip"):
-                break
-        else:
-            raise PluginException(cause="Problem with process file", assistance="Chaosreader: Unable to process file")
-
-        pass
