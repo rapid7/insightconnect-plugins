@@ -30,7 +30,7 @@ As input, the plugin takes the expected parts of a complete RPM package label: n
 For better accuracy in identifying the user's intended package, the user is also asked to specify their distribution and architecture.
 Note that a label must match exactly to find a specific package, and label sections must be specified from left to right.
 Thus, release info without the version is ignored when searching. A custom repository URL may also be specified, which will disable all other repos.
-If a custom key URL is also given (note: URL), then the key is used to do a check signature on the package downloaded before it is examined by RPM.
+If a custom key URL is also given, then the key is used to do a check signature on the package downloaded before it is examined by RPM.
 
 Briefly, when given a package, the plugin checks to see if the cache already holds the results of am `rpm -qi --dump`.
 If it does not, yum downloader downloads the package and automatically performs a check signature before inspecting it and caching the result.
