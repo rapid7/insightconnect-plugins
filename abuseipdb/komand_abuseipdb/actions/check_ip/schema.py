@@ -40,7 +40,7 @@ class CheckIpInput(komand.Input):
     "address": {
       "type": "string",
       "title": "IP Address",
-      "description": "IPv4 or IPv6 address e.g. 8.8.8.8, ::1",
+      "description": "IPv4 or IPv6 address e.g. 8.8.8.8, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)",
       "order": 1
     },
     "days": {

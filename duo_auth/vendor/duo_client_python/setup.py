@@ -3,6 +3,8 @@ from distutils.core import setup
 
 import os.path
 
+import duo_client
+
 requirements_filename = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'requirements.txt')
 
@@ -15,10 +17,18 @@ requirements_dev_filename = os.path.join(
 with open(requirements_dev_filename) as fd:
     tests_require = [i.strip() for i in fd.readlines()]
 
+long_description_filename = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'README.md')
+
+with open(long_description_filename) as fd:
+    long_description = fd.read()
+
 setup(
     name='duo_client',
-    version='3.0',
+    version=duo_client.__version__,
     description='Reference client for Duo Security APIs',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     author='Duo Security, Inc.',
     author_email='support@duosecurity.com',
     url='https://github.com/duosecurity/duo_client_python',
