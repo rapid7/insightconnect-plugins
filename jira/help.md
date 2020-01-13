@@ -335,7 +335,7 @@ This action is used to retrieve an issue.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |found|boolean|False|True if found|
-|issue|issue|False|Founded issue|
+|issue|issue|False|Found issue|
 
 Example output:
 
