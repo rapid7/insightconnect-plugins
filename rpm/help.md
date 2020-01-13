@@ -27,7 +27,7 @@ This action is used to get information about a package.
 ##### Input
 
 As input, the plugin takes the expected parts of a complete RPM package label: name<epoch:>-version-release.arch.
-For better accuracy in identifying the users intended package, the user is also asked to specify their distribution and architecture.
+For better accuracy in identifying the user's intended package, the user is also asked to specify their distribution and architecture.
 Note that a label must match exactly to find a specific package, and label sections must be specified from left to right.
 Thus, release info without the version is ignored when searching. A custom repository URL may also be specified, which will disable all other repos.
 If a custom key URL is also given (note: URL), then the key is used to do a check signature on the package downloaded before it is examined by RPM.
@@ -101,4 +101,3 @@ The complexity of this plugin overwhelmingly involves hacking around with yum, w
 ## References
 
 * [RPM](http://rpm.org/)
-
