@@ -33,7 +33,7 @@ Thus, release info without the version is ignored when searching. A custom repos
 If a custom key URL is also given, then the key is used to do a check signature on the package downloaded before it is examined by RPM.
 
 Briefly, when given a package, the plugin checks to see if the cache already holds the results of am `rpm -qi --dump`.
-If it does not, yum downloader downloads the package and automatically performs a check signature before inspecting it and caching the result.
+If it does not, yumdownloader downloads the package and automatically performs a check signature before inspecting it and caching the result.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
