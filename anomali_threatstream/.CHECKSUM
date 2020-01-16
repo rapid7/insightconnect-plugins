@@ -1,7 +1,7 @@
 {
-	"spec": "20d566e339cee2b230b3e7d01e286bb5",
-	"manifest": "ba25f9cb281dbea0a3a458ebc846ee94",
-	"setup": "013c9e56e914101312f3525f078e5d2b",
+	"spec": "65393ef3332e1aee782dc4b3455ee515",
+	"manifest": "133e4c04c8a925edb541c7d58e72fbed",
+	"setup": "81257a9df7c9db30e349736073ba45b0",
 	"schemas": [
 		{
 			"identifier": "get_observables/schema.py",
