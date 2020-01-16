@@ -22,7 +22,7 @@ _This plugin does not contain a connection._
 
 #### Address Lookup
 
-This action is used to retrieve your public facing IP address.
+This action is used to lookup the public IP address of an Insight Orchestrator host.
 
 ##### Input
 
@@ -32,7 +32,7 @@ This action does not contain any inputs.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|address|string|False|None|
+|address|string|False|Public IP address of Insight Orchestrator host|
 
 Example output:
 

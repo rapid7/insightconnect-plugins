@@ -28,15 +28,15 @@ This action is used to create a CEF string from an object.
 
 ##### Input
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|cef|cef|True|CEF Object|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|cef|cef|None|True|CEF Data|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|cef_string|string|True|CEF Formatted String|
+|cef_string|string|False|CEF formatted string|
 
 #### Parse String
 
@@ -44,15 +44,15 @@ This action is used to parse a CEF formatted string.
 
 ##### Input
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|cef_string|string|True|CEF Formatted String|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|cef_string|string|None|True|CEF formatted string|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|cef|cef|True|CEF Object|
+|cef|cef|False|CEF object|
 
 #### Parse File
 
@@ -60,15 +60,15 @@ This action is used to parse a multiple CEF formatted strings from a base64 enco
 
 ##### Input
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|file|bytes|True|A base64 encoded file containing CEF formatted strings separated by '\n'|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|file|bytes|None|True|Parse multiple CEF formatted strings from a file|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|cefs|[]cef|True|A list of CEF Objects|
+|cefs|[]cef|False|A list of CEF objects parsed from the file|
 
 ### Triggers
 
@@ -84,7 +84,7 @@ Ensure your CEF strings are properly formatted.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Hub | Add missing title values for actions in plugin.spec.yaml
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
@@ -93,5 +93,4 @@ Ensure your CEF strings are properly formatted.
 
 ## References
 
-* [ArcSight Common Event Format (CEF) Guide](https://www.protect724.hpe.com/docs/DOC-1072)
-
+* [ArcSight Common Event Format (CEF) Whitepaper](https://kc.mcafee.com/resources/sites/MCAFEE/content/live/CORP_KNOWLEDGEBASE/78000/KB78712/en_US/CEF_White_Paper_20100722.pdf)

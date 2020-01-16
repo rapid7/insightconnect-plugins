@@ -1,7 +1,7 @@
 {
-	"spec": "7588c98ba8124a38d668f60d335e15a0",
-	"manifest": "3bf8ff68abc44e56572dd9b493f7b901",
-	"setup": "2607904f4cdcbff26512daba2aa2fb39",
+	"spec": "611fb57c0279ab180d74c5b67eae51da",
+	"manifest": "04c89b390bd5da5ec9d862ccf815a28f",
+	"setup": "ea774f85b7a5ba80dea0a2ab7765e8bf",
 	"schemas": [
 		{
 			"identifier": "lookup/schema.py",

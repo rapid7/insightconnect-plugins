@@ -5,7 +5,7 @@ name: facebook_threat_exchange
 title: Facebook Threat Exchange
 vendor: rapid7
 support: community
-status: []
+status: [obsolete]
 description: A platform for sharing threat information between selected entities
 version: 1.0.1
 resources:

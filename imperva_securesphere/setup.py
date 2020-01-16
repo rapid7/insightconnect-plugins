@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name='imperva_securesphere-rapid7-plugin',
-      version='1.0.1',
-      description='Imperva SecureSphere WAF protects your applications and data from cyber-attacks.  It blocks technical, business logic botnets and DDoS attacks',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="imperva_securesphere-rapid7-plugin",
+      version="1.0.1",
+      description="Manage the Imperva SecureSphere WAF",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_imperva_securesphere']
+      scripts=['bin/icon_imperva_securesphere']
       )

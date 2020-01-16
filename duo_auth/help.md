@@ -83,18 +83,18 @@ Example input:
 |factor|string|auto|False|Factor to use for authentication|['auto', 'push', 'passcode', 'sms', 'phone']|
 |device|string|auto|False|Device ID to use for auth|None|
 |async|bool|None|False|Set to true for an async response|None|
-|ipaddr|string|None|False|The IP address of the user to be authenticated, in dotted quad format. This will cause an 'allow' response to be sent if appropriate for requests from a trusted network.|None|
-|options|object|None|False|Additional options required by the API.|None|
+|ipaddr|string|None|False|The IP address of the user to be authenticated, in dotted quad format. This will cause an 'allow' response to be sent if appropriate for requests from a trusted network|None|
+|options|object|None|False|Additional options required by the API|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|None|
-|status_msg|string|False|None|
-|trusted_device_token|string|False|None|
+|status|string|False|Status|
+|status_msg|string|False|Status message|
+|trusted_device_token|string|False|Trusted device token|
 |result|string|False|Either allow or deny|
-|txid|string|False|None|
+|txid|string|False|TX ID|
 
 Example output:
 
@@ -126,6 +126,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.3 - Upgraded `duo_client` in requirements.txt to version `4.0.0` | Upgraded `duo_client` in vendor folder to version `4.0.0` | Use input and output constants |  Change docker image from `komand/python-3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Support `type` parameter as `push_type` in the `options` input of the Auth action
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Add example output
@@ -138,4 +139,3 @@ This plugin does not contain any troubleshooting information.
 
 * [Duo](https://duo.com/)
 * [Duo Auth API V2](https://duo.com/docs/authapi)
-

@@ -1,7 +1,8 @@
 # Description
 
 Typo Squatter detects cybersquatting of domains and allows for domain scoring. This plugin can be used
-to aid in phishing investigation and analysis.
+to aid in phishing investigation and analysis, and can be a very useful tool in keeping your organization safe
+from threats.
 
 # Key Features
 

@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: infoblox
 title: Infoblox
-description: Infoblox helps with managing and identifying devices connected to networks
+description: Manage and identify devices connected to networks managed by Infoblox
 version: 1.0.1
 vendor: rapid7
 support: community
@@ -183,7 +183,7 @@ actions:
   add_host:
     title: Add Host
     description: Add a new host (host has to match one of the existing authoritative
-      networks, e.g. network fqdn = info.com, host name = example.info.com)
+      networks, e.g. network FQDN = info.com, host name = example.info.com)
     input:
       host:
         type: HostCreate

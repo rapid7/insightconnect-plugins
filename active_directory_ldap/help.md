@@ -1,17 +1,19 @@
 # Description
 
-The Active Directory LDAP plugin accesses Microsoft's Active Directory service to programmatically manage a Active Directory/LDAP environment. Supports Windows Server 2008 and later. Testing has been done with Windows server 2003; however, it is not officially supported.
+[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c5916a9-f1a0-429d-b937-f8fe672d777c) (Active Directory Lightweight Directory Access Protocol) is an application protocol for querying and modifying items in Active Directory. This plugin queries [Microsoft's Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx) to programmatically manage and query an Active Directory environment.
 
 # Key Features
 
-* Add, delete, disable and enable user
-* Password reset
-* Modify user groups
+* Add and remove user accounts to automate provisioning/deprovisioning of users
+* Disable and enable user accounts to contain security risks
+* Reset user passwords when a user forgets their login information
+* Modify user groups to add or remove users from custom and built-in groups
+* Run a custom LDAP query to retrieve, add, modify, or delete Active Directory objects
 
 # Requirements
 
-* Host name and port number
-* User name and password to authenticate
+* Host name and port number (the default TCP/UDP port for LDAP is 389, and 636 for LDAP over SSL)
+* Administrative credentials
 
 # Documentation
 
@@ -351,6 +353,7 @@ paired `\(\)` are supported
 
 # Version History
 
+* 3.2.8 - Fix issue were adding objects to containers might fail
 * 3.2.7 - New spec and help.md format for the Hub
 * 3.2.6 - Update help to document supported Windows Server versions
 * 3.2.5 - Clean connection test output

@@ -60,7 +60,7 @@ This action is used to create a new target in the OpenVAS server.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |port_list_id|string|None|False|ID of the Port List to use for scanning, if you want to scan a custom list of ports.|None|
-|host_list|[]string|None|True|Target IP List, in the form of a JSON array for each host or list of hosts. CIDR notation can be used. For example, the following would be a valid list\: ['192.168.0.101', '192.168.1.101,192.168.1.103,192.168.1.105','192.168.1.2/24','192.168.3.105-112']|None|
+|host_list|[]string|None|True|Target IP List, in the form of a JSON array for each host or list of hosts. CIDR notation can be used. For example, the following would be a valid list\: ['192.168.0.101', '192.168.1.101,192.168.1.103,192.168.1.105', '192.168.1.2/24', '192.168.3.105-112']|None|
 |name|string|None|True|None|None|
 
 ##### Output
@@ -223,7 +223,7 @@ This action is used to create a new list of ports to scan in the OpenVAS server.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|port_list_TCP|[]string|None|False|Target Port List for TCP ports, in the form of a JSON array for each port or list of ports. For example, the following would be a valid list\: ['22', '80','443-445']|None|
+|port_list_TCP|[]string|None|False|Target Port List for TCP ports, in the form of a JSON array for each port or list of ports. For example, the following would be a valid list\: ['22', '80', '443-445']|None|
 |name|string|None|True|None|None|
 |port_list_UDP|[]string|None|False|Target Port List for UDP ports, in the form of a JSON array for each port or list of ports. For example, the following would be a valid list\: ['53', '6881-6890']|None|
 
@@ -326,5 +326,4 @@ the date given to the `create_schedule` function is given in the UTC timezone.
 
 ## References
 
-* [Example](https://example.com)
-* [Example API](http://docs.example.com)
+* [OpenVAS](http://www.openvas.org/)

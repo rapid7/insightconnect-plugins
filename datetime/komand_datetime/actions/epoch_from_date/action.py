@@ -1,5 +1,5 @@
 import komand
-from .schema import EpochFromDateInput, EpochFromDateOutput
+from .schema import EpochFromDateInput, EpochFromDateOutput, Input, Output
 # Custom imports below
 import maya
 
@@ -14,13 +14,13 @@ class EpochFromDate(komand.Action):
                 output=EpochFromDateOutput())
 
     def run(self, params={}):
-        inp_date = params.get("datetime")
+        inp_date = params.get(Input.DATETIME)
         try:
             mayadt = maya.MayaDT.from_rfc3339(inp_date)
         except TypeError:
             self.logger.error("Non-RFC3339 date provided, input datetime must be RFC3339")
             raise
         except Exception as e:
-            self.logger.error("Error occurred: %s" % e)
+            self.logger.error("Error occurred: {}".format(e))
         else:
-            return {"epoch": int(mayadt.epoch)}
+            return {Output.EPOCH: int(mayadt.epoch)}

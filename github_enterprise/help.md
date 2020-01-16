@@ -11,8 +11,8 @@ GitHub Enterprise InsightConnect plugin allows user management.
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Github account's username and password
+* Github host name
 
 # Documentation
 
@@ -48,7 +48,7 @@ This action is used to create organization in enterprise.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|None|
+|status|string|False|Status|
 
 #### Demote User
 
@@ -64,7 +64,7 @@ This action is used to demote admin to ordinary user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|None|
+|status|string|False|Status|
 
 #### Suspend User
 
@@ -80,7 +80,7 @@ This action is used to suspend user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|None|
+|status|string|False|Status|
 
 #### Unsuspend User
 
@@ -96,7 +96,7 @@ This action is used to unsuspend user from enterprise.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|None|
+|status|string|False|Status|
 
 #### Promote User
 
@@ -112,7 +112,7 @@ This action is used to promote an ordinary user to admin.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|None|
+|status|string|False|Status|
 
 ### Triggers
 
@@ -133,7 +133,7 @@ This trigger is used to monitor a repository for new issues and returns any new 
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|issues|object|False|None|
+|issues|object|False|Issues|
 
 ### Custom Output Types
 

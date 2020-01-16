@@ -6,8 +6,8 @@ from komand_wazuh_ossec import connection, actions, triggers
 
 Name = 'Wazuh OSSEC'
 Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'Provides security visibility, compliance and infrastructure monitoring capabilities'
+Version = '2.0.0'
+Description = 'Open source security platform providing security visibility, compliance and infrastructure monitoring capabilities'
 
 
 class ICONWazuhOssec(komand.Plugin):

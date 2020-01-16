@@ -69,7 +69,7 @@ class DeviceLookupOutput(komand.Output):
     "ip_result": {
       "$ref": "#/definitions/ip",
       "title": "Ip Result",
-      "description": "Results for ip",
+      "description": "Results for IP",
       "order": 2
     },
     "risk_score": {
@@ -195,7 +195,7 @@ class DeviceLookupOutput(komand.Output):
         "city": {
           "$ref": "#/definitions/city",
           "title": "City",
-          "description": "City assocaited with IP",
+          "description": "City associated with IP",
           "order": 2
         },
         "continent": {

@@ -1,16 +1,7 @@
 {
     "body": {
         "action": "search",
-        "connection": {
-            "api_key": {
-                "secretKey": null
-            },
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "subdomain": null
-        },
+        "connection": {},
         "input": {
             "item": "",
             "type": ""

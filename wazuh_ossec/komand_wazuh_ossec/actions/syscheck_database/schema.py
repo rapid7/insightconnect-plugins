@@ -108,7 +108,7 @@ class SyscheckDatabaseInput(komand.Input):
     "sort": {
       "type": "string",
       "title": "Sort",
-      "description": "Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order. Allowed sort fields: group, user, file, modificationDate, scanDate, and size",
+      "description": "Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order. Allowed sort fields: group, user, file, modificationDate, scanDate, and size",
       "order": 4
     }
   },

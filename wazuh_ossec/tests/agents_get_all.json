@@ -1,13 +1,7 @@
 {
     "body": {
         "action": "agents_get_all",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "url": null
-        },
+        "connection": {},
         "input": {
             "limit": 0,
             "offset": 0,

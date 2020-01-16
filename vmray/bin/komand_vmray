@@ -6,8 +6,8 @@ from komand_vmray import connection, actions, triggers
 
 Name = 'VMRay Sandbox'
 Vendor = 'rapid7'
-Version = '4.0.2'
-Description = 'The VMRay plugin allows you to analyze and detect malware before it lands'
+Version = '5.0.0'
+Description = 'Analyze and detect malware before it lands, protecting internal infrastructure'
 
 
 class ICONVmray(komand.Plugin):

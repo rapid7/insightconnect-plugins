@@ -31,7 +31,7 @@ class ListUsersInput(komand.Input):
     "ids": {
       "type": "string",
       "title": "IDs",
-      "description": "Filter by user IDs. IDs should be a comma separated list e.g. 123,345,678",
+      "description": "Filter by user IDs. IDs should be a comma separated list",
       "order": 2
     }
   }

@@ -1,4 +1,5 @@
 import komand
+from komand.exceptions import PluginException
 from .schema import ModifyUserInput, ModifyUserOutput, Input, Output, Component
 # Custom imports below
 
@@ -18,8 +19,7 @@ class ModifyUser(komand.Action):
 
         try:
             user = self.connection.admin_api.update_user(user_id=user_id, status=status)
-            # Keys whose values are none are not supported in schema, remove them
             results = komand.helper.clean(user)
             return {Output.USER: results}
         except Exception as e:
-            raise Exception(f"Error: User not found. {e}")
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=f"Error: User not found. {e}")

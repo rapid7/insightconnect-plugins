@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: networktotal
 title: Network Total
-description: Networktotal is used to upload a PCAP for analysis
+description: Upload a PCAP file for analysis, detecting viruses, worms, trojans and malware
 version: 1.0.1
 vendor: rapid7
 support: community
