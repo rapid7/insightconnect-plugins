@@ -32,7 +32,7 @@ class ConnectionSchema(komand.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "URL for the ThreatStream instance e.g. https://ts.example.com",
+      "description": "URL for the ThreatStream instance e.g. https://threatstream.com",
       "order": 2
     },
     "username": {

@@ -26,7 +26,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|
 |api_key|credential_secret_key|None|True|Anomali ThreatStream API key|None|
 |ssl_verify|boolean|True|True|Verify the server's SSL/TLS certificate|None|
-|url|string|None|True|URL for the ThreatStream instance e.g. https://ts.example.com|None|
+|url|string|None|True|URL for the ThreatStream instance e.g. https://threatstream.com|None|
 |username|string|None|True|Anomali ThreatStream username|None|
 
 ## Technical Details
@@ -191,7 +191,133 @@ Example Output:
 ```
 ```
 
-#### Submit URL
+#### Submit File
+
+This action is used to submit a file to ThreatStream sandbox.
+
+##### Get Observables
+
+This action is used to get observables.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|value|string|None|False|Value|None|
+
+##### Submit URL
+
+This action is used to submit a URL to ThreatStream sandbox.
+
+##### Lookup IP Address
+
+This action is used to lookup an IP address in Anomali ThreatStream.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|classification|string|private|False|Classification of the sandbox submission, either public or private|['private', 'public']|
+|detail|string|None|False|A comma-separated list that provides additional details for the indicator. This information is displayed in the tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"|None|
+|platform|string|None|True|Platform on which the submitted URL or file will be run|['ALL', 'ANDROID4.4', 'ANDROID5.1', 'ANDROID6.0', 'MACOSX', 'WINDOWSXP', 'WINDOWSXPNATIVE', 'WINDOWS7', 'WINDOWS7NATIVE', 'WINDOWS7OFFICE2010', 'WINDOWS7OFFICE2013', 'WINDOWS10', 'WINDOWS10x64']|
+|url|string|None|True|URL to detonate|None|
+|use_premium_sandbox|boolean|None|True|Specify whether the premium sandbox should be used for detonation|None|
+
+##### Lookup Hash
+
+This action is used to lookup a file hash in Anomali ThreatStream.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|hash|string|None|False|Hash|None|
+
+##### Import Observable
+
+This action is used to import observable(s) into Anomali ThreatStream with approval.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|file|file|None|True|File of data to be imported into Anomali ThreatStream|None|
+|observable_settings|observable_settings|None|False|Settings needed for importing an observable that needs approval|None|
+
+##### Get Observables
+
+This action is used to get observables.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|value|string|None|False|Value|None|
+
+##### Submit File
+
+This action is used to submit a file to ThreatStream sandbox.
+
+##### Get Observables
+
+This action is used to get observables.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|value|string|None|False|Value|None|
+
+##### Submit URL
+
+This action is used to submit a URL to ThreatStream sandbox.
+
+##### Lookup IP Address
+
+This action is used to lookup an IP address in Anomali ThreatStream.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|classification|string|private|False|Classification of the sandbox submission, either public or private|['private', 'public']|
+|detail|string|None|False|A comma-separated list that provides additional details for the indicator. This information is displayed in the tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"|None|
+|platform|string|None|True|Platform on which the submitted URL or file will be run|['ALL', 'ANDROID4.4', 'ANDROID5.1', 'ANDROID6.0', 'MACOSX', 'WINDOWSXP', 'WINDOWSXPNATIVE', 'WINDOWS7', 'WINDOWS7NATIVE', 'WINDOWS7OFFICE2010', 'WINDOWS7OFFICE2013', 'WINDOWS10', 'WINDOWS10x64']|
+|url|string|None|True|URL to detonate|None|
+|use_premium_sandbox|boolean|None|True|Specify whether the premium sandbox should be used for detonation|None|
+
+##### Lookup Hash
+
+This action is used to lookup a file hash in Anomali ThreatStream.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|hash|string|None|False|Hash|None|
+
+##### Import Observable
+
+This action is used to import observable(s) into Anomali ThreatStream with approval.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|file|file|None|True|File of data to be imported into Anomali ThreatStream|None|
+|observable_settings|observable_settings|None|False|Settings needed for importing an observable that needs approval|None|
+
+##### Get Observables
+
+This action is used to get observables.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|value|string|None|False|Value|None|
+
+##### Submit URL
 
 This action is used to submit a URL to ThreatStream sandbox.
 

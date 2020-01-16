@@ -246,7 +246,7 @@ connection:
     required: true
   url:
     title: URL
-    description: URL for the ThreatStream instance e.g. https://ts.example.com
+    description: URL for the ThreatStream instance e.g. https://threatstream.com
     type: string
     required: true
   api_key:
