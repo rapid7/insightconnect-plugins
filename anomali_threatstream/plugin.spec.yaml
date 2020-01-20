@@ -5,7 +5,7 @@ name: anomali_threatstream
 title: Anomali ThreatStream
 description: Anomali ThreatStream operationalizes threat intelligence, automating collection
   and integration that enables security teams to analyze and respond to threats
-version: 3.1.2
+version: 3.1.0
 vendor: rapid
 support: community
 status: []
@@ -238,6 +238,69 @@ types:
         title: Platform
         description: Platform on which the submitted URL or file will be run
         type: string
+  info:
+    category:
+      title: Category
+      description: Category
+      type: string
+      required: true
+    confidence:
+      title: Confidence
+      description: Confidence
+      type: int
+      required: true
+    is_unknown:
+      title: Is Unknown
+      description: Is unknown
+      type: boolean
+      required: true
+    is_suspicious:
+      title: Is Suspicious
+      description: Is suspicious
+      type: boolean
+      required: true
+    is_malicious:
+      title: Is Malicious
+      description: Is malicious
+      type: boolean
+      required: true
+    started:
+      title: Started
+      description: Started
+      type: string
+      required: true
+    ended:
+      title: Ended
+      description: Ended
+      type: string
+      required: true
+    duration:
+      title: Duration
+      description: Duration
+      type: int
+      required: true
+  sandbox_report:
+    screenshots:
+      title: Screenshots
+      description: Screenshots
+      type: '[]string'
+      required: true
+    info:
+      title: Info
+      description: Info
+      type: info
+      required: true
+    signatures:
+      title: Signatures
+      description: Signatures
+      type: '[]object'
+      required: true
+    domains:
+      title: Domains
+      description: Domains
+      type: '[]string'
+      required: true
+
 connection:
   username:
     title: Username
@@ -457,4 +520,18 @@ actions:
         description: Reports containing submission details
         type: "[]report"
         required: false
-                  
+  get_sandbox_report:
+    title: Get Sandbox Report
+    description: Get sandbox report
+    input:
+      report_id:
+        title: Report ID
+        description: Report ID
+        type: string
+        required: true
+    output:
+      sandbox_report:
+        title: Sandbox Report
+        description: Sandbox Report
+        type: sandbox_report
+        required: true

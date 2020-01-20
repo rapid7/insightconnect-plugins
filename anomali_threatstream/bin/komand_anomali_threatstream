@@ -4,10 +4,10 @@ import komand
 from komand_anomali_threatstream import connection, actions, triggers
 
 
-Name = 'Anomali ThreatStream'
-Vendor = 'rapid'
-Version = '3.1.2'
-Description = 'Anomali ThreatStream operationalizes threat intelligence, automating collection and integration that enables security teams to analyze and respond to threats'
+Name = "Anomali ThreatStream"
+Vendor = "rapid"
+Version = "3.1.0"
+Description = "Anomali ThreatStream operationalizes threat intelligence, automating collection and integration that enables security teams to analyze and respond to threats"
 
 
 class ICONAnomaliThreatstream(komand.Plugin):
@@ -20,6 +20,8 @@ class ICONAnomaliThreatstream(komand.Plugin):
                 connection=connection.Connection()
                 )
         self.add_action(actions.GetObservables())
+
+        self.add_action(actions.GetSandboxReport())
 
         self.add_action(actions.ImportObservable())
 

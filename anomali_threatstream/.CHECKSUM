@@ -1,11 +1,15 @@
 {
-	"spec": "20d566e339cee2b230b3e7d01e286bb5",
-	"manifest": "ba25f9cb281dbea0a3a458ebc846ee94",
-	"setup": "013c9e56e914101312f3525f078e5d2b",
+	"spec": "62bea2ebd5f7ed4ab399c730d7621a45",
+	"manifest": "2422a71215a10d189f546c980a389c92",
+	"setup": "4926db97c4445f6e59073284a07d3ec5",
 	"schemas": [
 		{
 			"identifier": "get_observables/schema.py",
 			"hash": "4b6c1331de8e5a77a7b26cf4d529767e"
+		},
+		{
+			"identifier": "get_sandbox_report/schema.py",
+			"hash": "cd7f8a1a5574be03a02a32c0d63c044d"
 		},
 		{
 			"identifier": "import_observable/schema.py",
