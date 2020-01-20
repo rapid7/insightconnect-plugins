@@ -6,7 +6,7 @@ title: Anomali ThreatStream
 description: Anomali ThreatStream operationalizes threat intelligence, automating collection
   and integration that enables security teams to analyze and respond to threats
 version: 3.1.0
-vendor: rapid
+vendor: rapid7
 support: community
 status: []
 resources:
