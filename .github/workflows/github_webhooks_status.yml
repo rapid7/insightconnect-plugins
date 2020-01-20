@@ -1,0 +1,19 @@
+name: GitHub Webhooks Status
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip setuptools
+        python3 -m pip install --user github-status-checker --no-warn-script-location
+    - name: GitHub Webhooks Status
+      run: |
+        STATUS=$(/home/runner/.local/bin/github-status webhooks)
+        grep "is currently operational" <<< "${STATUS}"

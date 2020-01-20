@@ -4,7 +4,7 @@ products: [insightconnect]
 name: abuseipdb
 title: AbuseIPDB
 description: Enables the look up of IP reports, provides list and details of blacklisted IPs, and submissions of abusive IPs
-version: 5.0.1
+version: 5.0.2
 vendor: rapid7
 support: community
 status: []
@@ -92,7 +92,7 @@ types:
 connection:
   credentials:
     title: API Key
-    description: API key
+    description: API key from account
     type: credential_secret_key
     required: true
 
@@ -103,7 +103,7 @@ actions:
     input:
       address:
         title: IP Address
-        description: IPv4 or IPv6 address e.g. 8.8.8.8, ::1
+        description: IPv4 or IPv6 address e.g. 8.8.8.8, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)
         type: string
         required: true
       days:
@@ -214,22 +214,22 @@ actions:
     output:
       networkAddress:
         title: Network Address
-        description: Network address
+        description: Network address in block
         type: string
         required: false
       netmask:
         title: Netmask
-        description: Netmask
+        description: Netmask, ie. 24
         type: string
         required: false
       minAddress:
         title: Minimum Address
-        description: Minimum address
+        description: First address in block
         type: string
         required: false
       maxAddress:
         title: Maximum Address
-        description: Maximum address
+        description: Last address in block
         type: string
         required: false
       numPossibleHosts:
@@ -239,7 +239,7 @@ actions:
         required: false
       addressSpaceDesc:
         title: Address Space Description
-        description: Address space description
+        description: Description of address space
         type: string
         required: false
       reportedAddress:

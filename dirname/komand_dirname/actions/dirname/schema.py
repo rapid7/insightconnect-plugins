@@ -47,7 +47,7 @@ class DirnameOutput(komand.Output):
     "dirname": {
       "type": "string",
       "title": "Dirname",
-      "description": "Dirname",
+      "description": "Directory name of a path",
       "order": 1
     }
   }
