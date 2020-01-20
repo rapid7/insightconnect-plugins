@@ -5,6 +5,7 @@ from .schema import SqsFeedInput, SqsFeedOutput, Input, Output, Component
 import json
 
 # Custom imports below
+from komand.exceptions import PluginException
 
 
 class SqsFeed(komand.Trigger):
@@ -20,14 +21,14 @@ class SqsFeed(komand.Trigger):
         """Run the trigger"""
         client = self.connection.aws.client("sqs")
         sqs_url = params.get(Input.QUEUE_URL)
-        attribute_names = params.get(Input.ATTRIBUTE_NAMES)
-        max_number_of_messages = params.get(Input.MAX_NUMBER_OF_MESSAGES)
-        message_attribute_names = params.get(Input.MESSAGE_ATTRIBUTE_NAMES)
-        receive_request_attempt_id = params.get(Input.RECEIVE_REQUEST_ATTEMPT_ID)
-        visibility_timeout = params.get(Input.VISIBILITY_TIMEOUT)
-        wait_time_seconds = params.get(Input.WAIT_TIME_SECONDS)
+        attrNames = params.get(Input.ATTRIBUTENAMES)
+        maxMsgs = params.get(Input.MAXNUMBEROFMESSAGES)
+        msgAttrNames = params.get(Input.MESSAGEATTRIBUTENAMES)
+        recReqAttemptId = params.get(Input.RECEIVEREQUESTATTEMPTID)
+        visTimeout = params.get(Input.VISIBILITYTIMEOUT)
+        waitTime = params.get(Input.WAITTIMESECONDS)
 
-        valid_attr_names = {
+        valid_attrNames = {
             "All",
             "Policy",
             "VisibilityTimeout",
@@ -48,22 +49,21 @@ class SqsFeed(komand.Trigger):
             "KmsDataKeyReusePeriodSeconds",
         }
 
-        if set(attribute_names) - valid_attr_names:
-            invalid_attribute_names = set(attribute_names) - valid_attr_names
-            raise Exception(
-                f"""Attribute Names: {invalid_attribute_names} and invalid \n Valid Attribute Names: 'All','Policy','VisibilityTimeout','MaximumMessageSize','MessageRetentionPeriod','ApproximateNumberOfMessages','ApproximateNumberOfMessagesNotVisible','CreatedTimestamp','LastModifiedTimestamp','QueueArn','ApproximateNumberOfMessagesDelayed','DelaySeconds','ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds'"""
-            )
+        if set(attrNames) - valid_attrNames:
+            invalid_attrnames = set(attrNames) - valid_attrNames
+            raise PluginException(cause=f'Invalid attribute names',
+                                  assistance=f"""Attribute Names: {invalid_attrnames} and invalid \n Valid Attribute Names: 'All','Policy','VisibilityTimeout','MaximumMessageSize','MessageRetentionPeriod','ApproximateNumberOfMessages','ApproximateNumberOfMessagesNotVisible','CreatedTimestamp','LastModifiedTimestamp','QueueArn','ApproximateNumberOfMessagesDelayed','DelaySeconds','ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds'""")
 
         while True:
             # get Message/messages
             response = client.receive_message(
                 QueueUrl=sqs_url,
-                AttributeNames=attribute_names,
-                MaxNumberOfMessages=max_number_of_messages,
-                MessageAttributeNames=message_attribute_names,
-                VisibilityTimeout=visibility_timeout,
-                WaitTimeSeconds=wait_time_seconds,
-                ReceiveRequestAttemptId=receive_request_attempt_id,
+                AttributeNames=attrNames,
+                MaxNumberOfMessages=maxMsgs,
+                MessageAttributeNames=msgAttrNames,
+                VisibilityTimeout=visTimeout,
+                WaitTimeSeconds=waitTime,
+                ReceiveRequestAttemptId=recReqAttemptId,
             )
             # send message
             if response.get("Messages"):
@@ -74,13 +74,14 @@ class SqsFeed(komand.Trigger):
                         try:
                             security_hub_event = json.loads(message["Body"])
                         except Exception as e:
-                            self.logger.error(f"An unexpected event occurred when processing the Security Hub Event: {e}")
+                            raise PluginException(cause=f'Invalid attribute names',
+                                                  assistance=f"An unexpected event occurred when processing the Security Hub Event: {e}")
 
                     self.send(
                         {
                             Output.MESSAGE: message,
-                            Output.SECURITY_HUB_EVENT: security_hub_event,
-                            Output.RESPONSE_METADATA: response["ResponseMetadata"]
+                            Output.SECURITYHUBEVENT: security_hub_event,
+                            Output.RESPONSEMETADATA: response["ResponseMetadata"]
                         }
                     )
                     receipt_handle = message["ReceiptHandle"]
