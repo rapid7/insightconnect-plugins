@@ -5,7 +5,7 @@ For example, from the command line:
 
 ```
 
-$ finger bross@server.com
+$ finger user@example.com
 [server.com]
 Trying ...
 -----------------------------------------------------------------------------
@@ -53,22 +53,22 @@ It accepts a user to query and a `finger` host (IP or domain) to perform the que
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Success or any error messages|
-|shell|string|False|The user's default shell|
-|workphone|string|False|User work phone|
+|found|boolean|False|Whether user exists on the system|
+|fullname|string|False|User's full name|
+|home|string|False|Path to user's home directory|
+|homephone|string|False|User home phone|
+|login|string|False|User's login name|
+|loginfrom|string|False|User's last login source address|
+|loginstatus|string|False|When the user logged in|
+|mail|string|False|Mail forward address if it exists|
 |mailstatus|string|False|Status on unread mail|
 |plan|string|False|The contents of the plan file if it exists|
-|loginstatus|string|False|When the user logged in|
-|found|boolean|False|Whether user exists on the system|
-|home|string|False|Path to user's home directory|
-|fullname|string|False|User's full name|
-|room|string|False|User room|
 |project|string|False|The contents of the project file if it exists|
-|loginfrom|string|False|User's last login source address|
-|mail|string|False|Mail forward address if it exists|
-|login|string|False|User's login name|
 |pubkey|string|False|The contents of user's public key if it exists|
-|homephone|string|False|User home phone|
+|room|string|False|User room|
+|shell|string|False|The user's default shell|
+|status|string|False|Success or any error messages|
+|workphone|string|False|User work phone|
 
 The plugin can return the following properties:
 
