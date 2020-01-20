@@ -1,19 +1,16 @@
 {
     "body": {
-        "action": "submit_url",
+        "action": "get_sandbox_report",
         "connection": {
             "api_key": {
                 "secretKey": ""
             },
             "url": "",
             "username": "",
-            "ssl_verify": true
+            "ssl_verify": false
         },
         "input": {
-            "use_premium_sandbox": false,
-            "platform": "WINDOWS7",
-            "classification": "private",
-            "url": "google.com"
+            "report_id": "133"
         },
         "meta": {}
     },

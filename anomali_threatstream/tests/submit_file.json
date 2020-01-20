@@ -14,8 +14,8 @@
             "platform": "WINDOWS7",
             "classification": "private",
             "file": {
-                "filename": "",
-                "content": ""
+                "filename": "Test",
+                "content": "VGVzdGluZyBjb250ZW50Cg=="
             }
         },
         "meta": {}
