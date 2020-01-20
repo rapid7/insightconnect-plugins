@@ -36,16 +36,15 @@ This action is used to search for issues.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|max|integer|10|True|Max results to return|None|
-|jql|string|None|True|JQL search string to use|None|
 |get_attachments|boolean|False|False|Get attachments from issue|None|
+|jql|string|None|True|JQL search string to use|None|
+|max|integer|10|True|Max results to return|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |issues|[]issue|False|The list of found issues|
-|comments|[]comment|False|Comments list|
 
 Example output:
 
@@ -75,9 +74,9 @@ This action is used to add an attachment to an issue in Jira.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|attachment_bytes|bytes|None|True|Attachment bytes|None|
 |attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|
 |id|string|None|True|Issue ID|None|
-|attachment_bytes|bytes|None|True|Attachment bytes|None|
 
 ##### Output
 
@@ -220,10 +219,10 @@ This action is used to create a user account.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|username|string|None|True|Username|None|
-|password|string|None|False|Password|None|
 |email|string|None|True|Email|None|
 |notify|boolean|False|True|Notify if true|[True, False]|
+|password|string|None|False|Password|None|
+|username|string|None|True|Username|None|
 
 ##### Output
 
@@ -272,8 +271,8 @@ This action is used to find users.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|query|string|None|True|Query String, e.g. Joe|None|
 |max|integer|10|True|Max results to return|None|
+|query|string|None|True|Query String, e.g. Joe|None|
 
 ##### Output
 
@@ -287,7 +286,7 @@ Example output:
 {
   "users": [{
       "name": "mrinehart",
-      "email_address": "mrinehart@example.com",
+      "email_address": "user@example.com",
       "display_name": "Mike Test",
       "active": true
   }]
@@ -327,8 +326,8 @@ This action is used to retrieve an issue.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|string|None|True|Issue ID|None|
 |get_attachments|boolean|False|False|Get attachments from issue|None|
+|id|string|None|True|Issue ID|None|
 
 ##### Output
 
@@ -454,7 +453,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "bob_ross@example.com",
+              "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -471,7 +470,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "bob_ross@example.com",
+              "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -507,7 +506,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "bob_ross@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -524,7 +523,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "bob_ross@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -568,8 +567,8 @@ This action is used to retrieve all comments on an issue.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|count|integer|False|Count of comments found|
 |comments|[]comment|False|Comments list|
+|count|integer|False|Count of comments found|
 
 Example output:
 
@@ -581,7 +580,7 @@ Example output:
       "id": "10000",
       "author": {
           "name": "admin",
-          "email_address": "bob_ross@example.com",
+          "email_address": "user@example.com",
           "display_name": "Mike Rinehart",
           "active": true
       },
@@ -591,7 +590,7 @@ Example output:
           "name": "admin",
           "key": "admin",
           "accountId": "5bd733f3f8460347a10cbdd9",
-          "emailAddress": "bob_ross@example.com",
+          "emailAddress": "user@example.com",
           "avatarUrls": {
               "48x48": "",
               "24x24": "",
@@ -617,11 +616,11 @@ This action is used to edit an issue within Jira.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|description|string|None|False|Description field on the issue|None|
+|fields|object|None|False|An object of fields and values to change|None|
 |id|string|None|True|Issue ID|None|
 |notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|
 |summary|string|None|False|Summary field on the issue|None|
-|description|string|None|False|Description field on the issue|None|
-|fields|object|None|False|An object of fields and values to change|None|
 |update|object|None|False|An object that contains update operations to apply|None|
 
 Example input:
@@ -689,8 +688,8 @@ This trigger is used to trigger which indicates that a new issue has been create
 |----|----|-------|--------|-----------|----|
 |get_attachments|boolean|False|False|Get attachments from issue|None|
 |jql|string|None|False|JQL search string to use|None|
-|project|string|None|True|Project ID or name|None|
 |poll_timeout|integer|60|False|Timeout between next poll, default 60|None|
+|project|string|None|True|Project ID or name|None|
 
 ##### Output
 
@@ -815,7 +814,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "bob_ross@example.com",
+              "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -832,7 +831,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "bob_ross@example.com",
+              "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -868,7 +867,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "bob_ross@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -885,7 +884,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "bob_ross@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
