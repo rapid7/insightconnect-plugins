@@ -30,7 +30,7 @@ def body(b, log):
         try:
             return b.get_payload(decode=True).decode('utf-8')
         except Exception as e:
-            log.worning(e)
+            log.warning(e)
             log.debug(u"\uE05A".encode('unicode-escape'))
             return UnicodeDammit.detwingle(b.get_payload(decode=True)).decode('utf-8', errors='ignore').replace('\n', '')
 

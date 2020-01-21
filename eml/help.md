@@ -28,7 +28,7 @@ This action is used to extract headers and file attachments.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|eml_file|bytes|None|True|Email message File|None|
+|eml_file|bytes|None|True|Email message file|None|
 
 ##### Output
 
@@ -42,14 +42,14 @@ Example output:
 
 {
   {
-    "to": "bob@komand.com",
-    "from": "Amazon Web Services <aws-receivables-support@email.amazon.com>",
+    "to": "user@example.com",
+    "from": "Amazon Web Services <user@example.com>",
     "subject": "Amazon Web Services Invoice Available "
     "date": "Wed, 3 May 2017 18:29:19 +0000",
     "headers": [
       {
         "key": "Delivered-To",
-        "value": "bob@komand.com"
+        "value": "user@example.com"
       },
       {
         "key": "Received",
@@ -97,14 +97,14 @@ Example output:
 ```
 {
   {
-    "to": "bob@komand.com",
-    "from": "Amazon Web Services <aws-receivables-support@email.amazon.com>",
+    "to": "user@example.com",
+    "from": "Amazon Web Services <user@example.com>",
     "subject": "Amazon Web Services Invoice Available "
     "date": "Wed, 3 May 2017 18:29:18 +0000",
     "headers": [
       {
         "key": "Delivered-To",
-        "value": "bob@komand.com"
+        "value": "user@example.com"
       },
       {
         "key": "Received",
@@ -144,7 +144,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.3 - Use input and output constants | Remove unused variables | Changed variables names to more readable | Updated `Exception` to `PluginException`
+* 1.1.3 - Use input and output constants | Remove unused variables | Improved variable name readability | Updated `Exception` to `PluginException`
 * 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Fix issue where plugin would fail on empty date returned
 * 1.1.0 - New action Parse EML File from String
