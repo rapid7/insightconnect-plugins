@@ -1,6 +1,6 @@
 {
     "body": {
-        "action": "get_observables",
+        "action": "get_sandbox_report",
         "connection": {
             "api_key": {
                 "secretKey": ""
@@ -10,7 +10,7 @@
             "ssl_verify": false
         },
         "input": {
-            "value": "window.google"
+            "report_id": "133"
         },
         "meta": {}
     },
