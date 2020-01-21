@@ -1030,15 +1030,15 @@ triggers:
       Message:
         title: Message
         type: Message
-        description: Security hub message
+        description: Security Hub message
         required: false
       securityhubevent:
         title: Security Hub Event
         type: securityHubPayload
-        description: Security hub event payload
+        description: Security Hub event payload
         required: false
       ResponseMetadata:
         title: Response Metadata
         type: ResponseMetadata
-        description: Security hub response metadata
+        description: Security Hub response metadata
         required: false

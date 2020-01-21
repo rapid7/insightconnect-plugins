@@ -135,9 +135,9 @@ This trigger is used to poll from a SQS Queue.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Message|Message|False|Security hub message|
-|ResponseMetadata|ResponseMetadata|False|Security hub response metadata|
-|securityhubevent|securityHubPayload|False|Security hub event payload|
+|Message|Message|False|Security Hub message|
+|ResponseMetadata|ResponseMetadata|False|Security Hub response metadata|
+|securityhubevent|securityHubPayload|False|Security Hub event payload|
 
 Example output:
 
