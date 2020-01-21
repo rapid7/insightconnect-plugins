@@ -441,7 +441,7 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Detail|string|False|None|
+|Details|string|False|None|
 |ID|integer|False|Submission ID|
 |Platform|string|False|Platform on which the submitted URL or file will be run|
 |Status|string|False|None|
