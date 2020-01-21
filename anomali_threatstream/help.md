@@ -47,7 +47,7 @@ This action is used to get a sandbox report.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sandbox_report|sandbox_report|True|Sandbox Report|
+|sandbox_report|sandbox_report|True|Sandbox report|
 
 Example Output:
 

@@ -1,9 +1,11 @@
 import komand
-from komand.exceptions import PluginException
 from .schema import SubmitFileInput, SubmitFileOutput, Input, Output, Component
+
 # Custom imports below
 import base64
 from copy import copy
+from json.decoder import JSONDecodeError
+from komand.exceptions import PluginException
 
 
 class SubmitFile(komand.Action):
@@ -38,11 +40,16 @@ class SubmitFile(komand.Action):
         self.logger.info(f"Submitting file to {self.request.url}")
         response = self.connection.session.send(self.request.prepare(), verify=self.request.verify)
 
-        if response.status_code == 400:
-            raise PluginException(cause="Received a 400 from Anomali",
-                                  data=response.text)
+        if response.status_code not in range(200, 299):
+            raise PluginException(cause="Received %d HTTP status code from ThreatStream." % response.status_code,
+                                  assistance="Please verify your ThreatStream server status and try again. "
+                                             "If the issue persists please contact support. "
+                                             "Server response was: %s" % response.text)
+        try:
+            js = response.json()
+        except JSONDecodeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
-        js = response.json()
         reports = []
         for os in js['reports'].keys():
             report = js['reports'][os]

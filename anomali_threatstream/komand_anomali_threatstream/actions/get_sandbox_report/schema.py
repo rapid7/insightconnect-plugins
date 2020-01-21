@@ -47,7 +47,7 @@ class GetSandboxReportOutput(komand.Output):
     "sandbox_report": {
       "$ref": "#/definitions/sandbox_report",
       "title": "Sandbox Report",
-      "description": "Sandbox Report",
+      "description": "Sandbox report",
       "order": 1
     }
   },

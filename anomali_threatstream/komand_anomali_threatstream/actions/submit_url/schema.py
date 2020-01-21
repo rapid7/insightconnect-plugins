@@ -118,7 +118,7 @@ class SubmitUrlOutput(komand.Output):
       "properties": {
         "detail": {
           "type": "string",
-          "title": "Detail",
+          "title": "Details",
           "order": 2
         },
         "id": {

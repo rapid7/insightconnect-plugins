@@ -1,10 +1,9 @@
-from copy import copy
-
 import komand
-from komand.exceptions import PluginException
-
 from .schema import GetSandboxReportInput, GetSandboxReportOutput, Input, Output, Component
+
 # Custom imports below
+from copy import copy
+from komand.exceptions import PluginException
 
 
 class GetSandboxReport(komand.Action):

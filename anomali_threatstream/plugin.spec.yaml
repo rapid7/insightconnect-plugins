@@ -227,7 +227,7 @@ types:
       decription: Link to submission status
       type: string
     detail:
-      title: Detail
+      title: Details
       decription: Link to submission details
       type: string  
     id:
@@ -532,6 +532,6 @@ actions:
     output:
       sandbox_report:
         title: Sandbox Report
-        description: Sandbox Report
+        description: Sandbox report
         type: sandbox_report
         required: true
