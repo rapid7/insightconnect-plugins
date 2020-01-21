@@ -45,8 +45,8 @@ class NewIssue(komand.Trigger):
         valid_project = look_up_project(self.project, self.connection.client)
         if not valid_project:
             raise PluginException(
-                cause=f"Project {self.project} does not exist or user don't have permission to access the project.",
-                assistance='Please provide a valid project ID/name or make sure project is accessible to user.')
+                cause=f"Project {self.project} does not exist or the user does not have permission to access the project.",
+                assistance='Please provide a valid project ID/name or make sure the project is accessible to the user.')
 
         if self.project:
             if self.jql:
