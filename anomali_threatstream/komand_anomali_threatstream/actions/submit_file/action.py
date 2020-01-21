@@ -17,7 +17,7 @@ class SubmitFile(komand.Action):
 
     def run(self, params={}):
         self.request = copy(self.connection.request)
-        self.request.url, self.request.method = self.request.url + "/submit/new/", "POST"
+        self.request.url, self.request.method = f"{self.request.url}/submit/new/", "POST"
 
         platform = params.get(Input.PLATFORM)
         detail = params.get(Input.DETAIL)

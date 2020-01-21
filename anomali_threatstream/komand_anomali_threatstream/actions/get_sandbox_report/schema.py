@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get sandbox report"
+    DESCRIPTION = "Get a sandbox report"
 
 
 class Input:

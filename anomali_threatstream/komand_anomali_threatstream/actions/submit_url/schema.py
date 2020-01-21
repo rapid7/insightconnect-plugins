@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Submit a URL to ThreatStream sandbox"
+    DESCRIPTION = "Submit a URL to a ThreatStream sandbox"
 
 
 class Input:

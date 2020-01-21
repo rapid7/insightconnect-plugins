@@ -35,7 +35,7 @@ The connection configuration accepts the following parameters:
 
 #### Get Sandbox Report
 
-This action is used to get sandbox report.
+This action is used to get a sandbox report.
 
 ##### Input
 
@@ -300,7 +300,7 @@ Example output:
 
 #### Submit File
 
-This action is used to submit a file to ThreatStream sandbox.
+This action is used to submit a file to a ThreatStream sandbox.
 
 ##### Input
 
@@ -343,7 +343,7 @@ Example output:
 
 #### Submit URL
 
-This action is used to submit a URL to ThreatStream sandbox.
+This action is used to submit a URL to a ThreatStream sandbox.
 
 ##### Input
 

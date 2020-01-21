@@ -406,7 +406,7 @@ actions:
         required: false
   submit_file:
     title: Submit File
-    description: Submit a file to ThreatStream sandbox
+    description: Submit a file to a ThreatStream sandbox
     input:
       platform:
         required: true
@@ -464,7 +464,7 @@ actions:
         required: false
   submit_url:
     title: Submit URL
-    description: Submit a URL to ThreatStream sandbox
+    description: Submit a URL to a ThreatStream sandbox
     input:
       platform:
         required: true
@@ -522,7 +522,7 @@ actions:
         required: false
   get_sandbox_report:
     title: Get Sandbox Report
-    description: Get sandbox report
+    description: Get a sandbox report
     input:
       report_id:
         title: Report ID
