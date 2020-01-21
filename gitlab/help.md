@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|False|Host URL e.g. https\://gitlab.example.com\:8000/api/v4/|None|
+|url|string|None|False|Host URL e.g. https://gitlab.example.com:8000/api/v4/|None|
 |credentials|credential_username_password|None|True|Enter GitLab username and password (or token)|None|
 
 ## Technical Details

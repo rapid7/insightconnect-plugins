@@ -610,7 +610,7 @@ This action is used to add an attribute to an event.
 |comment|string|None|False|Optional comment to add to attribute|None|
 |event|string|None|True|ID of event to append to|None|
 |type_value|string|None|True|The Type of attribute e.g. URL, SHA256|None|
-|value|string|None|True|The Value of the attribute e.g. for a URL https://malware.com|None|'
+|value|string|None|True|The Value of the attribute e.g. for a URL https://malware.com|None|
 
 ##### Output
 

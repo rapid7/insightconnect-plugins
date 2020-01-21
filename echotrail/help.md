@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|server|string|https\://api.echotrail.io\:443|True|EchoTrail API Server|None|
+|server|string|https://api.echotrail.io:443|True|EchoTrail API Server|None|
 |api_key|credential_secret_key|None|True|API Key|None|
 
 ## Technical Details

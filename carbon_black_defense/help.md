@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|https\://api.confer.net|True|API URL|None|
+|url|string|https://api.confer.net|True|API URL|None|
 |connector|string|None|True|Connector ID|None|
 |api_key|credential_secret_key|None|True|API key|None|
 
