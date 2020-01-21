@@ -79,7 +79,7 @@ This action is used to list deactivated users and requires a Trello Business Cla
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|filter|string|deactivated|False|Filter status of user, default\: deactivated|['all', 'active', 'admin', 'deactivated', 'me', 'normal']|
+|filter|string|deactivated|False|Filter status of user, default: deactivated|['all', 'active', 'admin', 'deactivated', 'me', 'normal']|
 |member|boolean|False|False|Response with member or none|None|
 |id_or_name|string|None|True|ID or name of organization|None|
 
@@ -97,16 +97,16 @@ This action is used to list members of a board.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|filter|string|all|False|Filter boards with any status of board, default\: all|['all', 'closed', 'members', 'open', 'organization', 'pinned', 'public', 'starred', 'unpinned']|
+|filter|string|all|False|Filter boards with any status of board, default: all|['all', 'closed', 'members', 'open', 'organization', 'pinned', 'public', 'starred', 'unpinned']|
 |actions_entities|boolean|False|False|None|None|
 |id_or_name|string|None|True|ID or name of member|None|
-|fields|string|all|False|Fields of member, default\: all|['all', 'closed', 'dateLastActivity', 'dateLastView', 'desc', 'descData', 'idOrganization', 'invitations', 'invited', 'labelNames', 'memberships', 'name', 'pinned', 'powerUps', 'prefs', 'shortLink', 'shortUrl', 'starred', 'subscribed', 'url']|
+|fields|string|all|False|Fields of member, default: all|['all', 'closed', 'dateLastActivity', 'dateLastView', 'desc', 'descData', 'idOrganization', 'invitations', 'invited', 'labelNames', 'memberships', 'name', 'pinned', 'powerUps', 'prefs', 'shortLink', 'shortUrl', 'starred', 'subscribed', 'url']|
 |actions|string|None|False|List actions|['', 'all', 'addAttachmentToCard', 'addChecklistToCard', 'addMemberToBoard', 'addMemberToCard', 'addMemberToOrganization', 'addToOrganizationBoard', 'commentCard', 'convertToCardFromCheckItem', 'copyBoard', 'copyCard', 'copyCommentCard', 'createBoard', 'createCard', 'createList', 'createOrganization', 'deleteAttachmentFromCard', 'deleteBoardInvitation', 'deleteCard', 'deleteOrganizationInvitation', 'disablePowerUp', 'emailCard', 'enablePowerUp', 'makeAdminOfBoard', 'makeNormalMemberOfBoard', 'makeNormalMemberOfOrganization', 'makeObserverOfBoard', 'memberJoinedTrello', 'moveCardFromBoard', 'moveCardToBoard', 'moveListFromBoard', 'moveListToBoard', 'removeChecklistFromCard', 'removeFromOrganizationBoard', 'removeMemberFromCard', 'unconfirmedBoardInvitation', 'unconfirmedOrganizationInvitation', 'updateBoard', 'updateCard', 'updateCard:closed', 'updateCard:desc', 'updateCard:idList', 'updateCard:name', 'updateCheckItemStateOnCard', 'updateChecklist', 'updateList', 'updateList:closed', 'updateList:name', 'updateMember', 'updateOrganization']|
 |action_fields|string|all|False|List all fields of actions|['all', 'data', 'date', 'idMemberCreator', 'type']|
 |memberships|string|None|False|List status of memberships|['', 'all', 'active', 'admin', 'deactivated', 'me', 'normal']|
 |lists|string|none|False|Format lists|['all', 'closed', 'none', 'open']|
 |actions_since|string|None|False|Filter by a date, null or lastView|None|
-|actions_limit|integer|50|False|A number from 0 to 1000, default\: 50|None|
+|actions_limit|integer|50|False|A number from 0 to 1000, default: 50|None|
 |organization|boolean|False|False|Response with organization or none|None|
 |actions_format|string|list|False|Format of actions|['count', 'list', 'minimal']|
 |organization_fields|string|None|False|Response with one or more member fields|['', 'all', 'billableMemberCount', 'desc', 'descData', 'displayName', 'idBoards', 'invitations', 'invited', 'logoHash', 'memberships', 'name', 'powerUps', 'prefs', 'premiumFeatures', 'products', 'url', 'website']|
@@ -149,34 +149,40 @@ This action is used to list members of an organization.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|action_fields|string|all|False|List all fields of actions|['all','data','date','idMemberCreator','type']|
-|actions|string|None|False|List actions|['','addAttachmentToCard','addChecklistToCard','addMemberToBoard','addMemberToCard','addMemberToOrganization','addToOrganizationBoard','commentCard','convertToCardFromCheckItem','copyBoard','copyCard','copyCommentCard','createBoard','createCard','createList','createOrganization','deleteAttachmentFromCard','deleteBoardInvitation','deleteCard','deleteOrganizationInvitation','disablePowerUp','emailCard','enablePowerUp','makeAdminOfBoard','makeNormalMemberOfBoard','makeNormalMemberOfOrganization','makeObserverOfBoard','memberJoinedTrello','moveCardFromBoard','moveCardToBoard','moveListFromBoard','moveListToBoard','removeChecklistFromCard','removeFromOrganizationBoard','removeMemberFromCard','unconfirmedBoardInvitation','unconfirmedOrganizationInvitation','updateBoard','updateCard','updateCard:closed','updateCard:desc','updateCard:idList','updateCard:name','updateCheckItemStateOnCard','updateChecklist','updateList','updateList:closed','updateList:name','updateMember','updateOrganization']|
-|actions_display|boolean|False|False|Actions display|None|
-|actions_entities|boolean|False|False|Actions entities|None|
-|actions_limit|integer|50|False|A number from 0 to 1000, default: 50|None|
-|board_action_fields|string|all|False|Fields of board actions|['all','data','date','idMemberCreator','type']|
-|board_actions|string|None|False|Board actions|['','all','addAttachmentToCard','addChecklistToCard','addMemberToBoard','addMemberToCard','addMemberToOrganization','addToOrganizationBoard','commentCard','convertToCardFromCheckItem','copyBoard','copyCard','copyCommentCard','createBoard','createCard','createList','createOrganization','deleteAttachmentFromCard','deleteBoardInvitation','deleteCard','deleteOrganizationInvitation','disablePowerUp','emailCard','enablePowerUp','makeAdminOfBoard','makeNormalMemberOfBoard','makeNormalMemberOfOrganization','makeObserverOfBoard','memberJoinedTrello','moveCardFromBoard','moveCardToBoard','moveListFromBoard','moveListToBoard','removeChecklistFromCard','removeFromOrganizationBoard','removeMemberFromCard','unconfirmedBoardInvitation','unconfirmedOrganizationInvitation','updateBoard','updateCard','updateCard:closed','updateCard:desc','updateCard:idList','updateCard:name','updateCheckItemStateOnCard','updateChecklist','updateList','updateList:closed','updateList:name','updateMember','updateOrganization']|
-|board_actions_display|boolean|False|False|Board actions display|None|
-|board_actions_entities|boolean|False|False|Board actions entities|None|
-|board_actions_format|string|list|False|Format of board actions|['count','list','minimal']|
+|memberships_member_fields|string|None|False|Response with one or more member fields, default: fullName,username|['', 'all', 'avatarHash', 'bio', 'bioData', 'confirmed', 'fullName', 'idPremOrgsAdmin', 'initials', 'memberType', 'products', 'status', 'url', 'username']|
+|actions_entities|boolean|False|False|None|None|
+|board_actions_format|string|list|False|Format of board actions|['count', 'list', 'minimal']|
+|board_lists|string|none|False|List board with status of: all, closed, open, none, default: none|['all', 'closed', 'none', 'open']|
+|actions_display|boolean|False|False|None|None|
 |board_actions_limit|integer|50|False|A number from 0 to 1000, default: 50|None|
-|board_actions_since|string|None|False|Filter by a date, null or lastView|None|
-|board_fields|string|all|False|Response with one or more fields of boards, default: all|['all','closed','dateLastActivity','dateLastView','desc','descData','idOrganization','invitations','invited','labelNames','memberships','name','pinned','powerUps','prefs','shortLink','shortUrl','starred','subscribed','url']|
-|board_lists|string|none|False|List board with status of: all, closed, open, none, default: none|['all','closed','none','open']|
-|board_pluginData|boolean|False|False|Board plugin data|None|
-|boards|string|None|False|Filter boards with any status of board|['','all','closed','members','open','organization','pinned','public','starred','unpinned']|
-|fields|string|None|False|Field of organization, default: name,displayName,desc,descData,url,website,logoHash,products,powerUps|['','all','billableMemberCount','desc','descData','displayName','idBoards','invitations','invited','logoHash','memberships','name','powerUps','prefs','premiumFeatures','products','url','website']|
+|actions|string|None|False|List actions|['', 'addAttachmentToCard', 'addChecklistToCard', 'addMemberToBoard', 'addMemberToCard', 'addMemberToOrganization', 'addToOrganizationBoard', 'commentCard', 'convertToCardFromCheckItem', 'copyBoard', 'copyCard', 'copyCommentCard', 'createBoard', 'createCard', 'createList', 'createOrganization', 'deleteAttachmentFromCard', 'deleteBoardInvitation', 'deleteCard', 'deleteOrganizationInvitation', 'disablePowerUp', 'emailCard', 'enablePowerUp', 'makeAdminOfBoard', 'makeNormalMemberOfBoard', 'makeNormalMemberOfOrganization', 'makeObserverOfBoard', 'memberJoinedTrello', 'moveCardFromBoard', 'moveCardToBoard', 'moveListFromBoard', 'moveListToBoard', 'removeChecklistFromCard', 'removeFromOrganizationBoard', 'removeMemberFromCard', 'unconfirmedBoardInvitation', 'unconfirmedOrganizationInvitation', 'updateBoard', 'updateCard', 'updateCard:closed', 'updateCard:desc', 'updateCard:idList', 'updateCard:name', 'updateCheckItemStateOnCard', 'updateChecklist', 'updateList', 'updateList:closed', 'updateList:name', 'updateMember', 'updateOrganization']|
+|action_fields|string|all|False|List all fields of actions|['all', 'data', 'date', 'idMemberCreator', 'type']|
+|memberships_member|boolean|False|False|Response with memberships or none|None|
+|members|string|none|False|Filter members with roles: admins, normal, owners, none, all|['admins', 'all', 'none', 'normal', 'owners']|
+|member_fields|string|None|False|Response with one or more member fields, default: avatarHash,fullName,initials,username,confirmed|['', 'all', 'avatarHash', 'bio', 'bioData', 'confirmed', 'fullName', 'idPremOrgsAdmin', 'initials', 'memberType', 'products', 'status', 'url', 'username']|
+|actions_limit|integer|50|False|A number from 0 to 1000, default: 50|None|
+|board_action_fields|string|all|False|Fields of board actions|['all', 'data', 'date', 'idMemberCreator', 'type']|
+|board_actions_display|boolean|False|False|None|None|
+|board_fields|string|all|False|Response with one or more fields of boards, default: all|['all', 'closed', 'dateLastActivity', 'dateLastView', 'desc', 'descData', 'idOrganization', 'invitations', 'invited', 'labelNames', 'memberships', 'name', 'pinned', 'powerUps', 'prefs', 'shortLink', 'shortUrl', 'starred', 'subscribed', 'url']|
+|memberships|string|none|False|List status of memberships|['none', 'all', 'active', 'admin', 'deactivated', 'me', 'normal']|
+|membersInvited|string|none|False|Filter invited members by roles: admins, normal, owners, none, all, default: none|['admins', 'all', 'none', 'normal', 'owners']|
+|boards|string|None|False|Filter boards with any status of board|['', 'all', 'closed', 'members', 'open', 'organization', 'pinned', 'public', 'starred', 'unpinned']|
+|fields|string|None|False|Field of organization, default: name,displayName,desc,descData,url,website,logoHash,products,powerUps|['', 'all', 'billableMemberCount', 'desc', 'descData', 'displayName', 'idBoards', 'invitations', 'invited', 'logoHash', 'memberships', 'name', 'powerUps', 'prefs', 'premiumFeatures', 'products', 'url', 'website']|
 |id_or_name|string|None|True|ID or name of organization|None|
 |member_activity|boolean|False|False|Response with activity of member or none, works for premium organizations only|None|
-|member_fields|string|None|False|Response with one or more member fields, default: avatarHash,fullName,initials,username,confirmed|['','all','avatarHash','bio','bioData','confirmed','fullName','idPremOrgsAdmin','initials','memberType','products','status','url','username']|
-|members|string|none|False|Filter members with roles: admins, normal, owners, none, all|['admins','all','none','normal','owners']|
-|membersInvited|string|none|False|Filter invited members by roles: admins, normal, owners, none, all, default: none|['admins','all','none','normal','owners']|
-|membersInvited_fields|string|None|False|Response with one or more fields of invited members, default: avatarHash,fullName,initials,username,confirmed|['','all','avatarHash','bio','bioData','confirmed','fullName','idPremOrgsAdmin','initials','memberType','products','status','url','username']|
-|memberships|string|none|False|List status of memberships|['none','all','active','admin','deactivated','me','normal']|
-|memberships_member|boolean|False|False|Response with memberships or none|None|
-|memberships_member_fields|string|None|False|Response with one or more member fields, default: fullName,username|['','all','avatarHash','bio','bioData','confirmed','fullName','idPremOrgsAdmin','initials','memberType','products','status','url','username']|
-|paid_account|boolean|False|False|Paid account|None|
-|pluginData|boolean|False|False|Plugin data|None|
+|paid_account|boolean|False|False|None|None|
+|board_actions_since|string|None|False|Filter by a date, null or lastView|None|
+|pluginData|boolean|False|False|None|None|
+|board_actions_entities|boolean|False|False|None|None|
+|board_pluginData|boolean|False|False|None|None|
+|board_actions|string|None|False|Board actions|['', 'all', 'addAttachmentToCard', 'addChecklistToCard', 'addMemberToBoard', 'addMemberToCard', 'addMemberToOrganization', 'addToOrganizationBoard', 'commentCard', 'convertToCardFromCheckItem', 'copyBoard', 'copyCard', 'copyCommentCard', 'createBoard', 'createCard', 'createList', 'createOrganization', 'deleteAttachmentFromCard', 'deleteBoardInvitation', 'deleteCard', 'deleteOrganizationInvitation', 'disablePowerUp', 'emailCard', 'enablePowerUp', 'makeAdminOfBoard', 'makeNormalMemberOfBoard', 'makeNormalMemberOfOrganization', 'makeObserverOfBoard', 'memberJoinedTrello', 'moveCardFromBoard', 'moveCardToBoard', 'moveListFromBoard', 'moveListToBoard', 'removeChecklistFromCard', 'removeFromOrganizationBoard', 'removeMemberFromCard', 'unconfirmedBoardInvitation', 'unconfirmedOrganizationInvitation', 'updateBoard', 'updateCard', 'updateCard:closed', 'updateCard:desc', 'updateCard:idList', 'updateCard:name', 'updateCheckItemStateOnCard', 'updateChecklist', 'updateList', 'updateList:closed', 'updateList:name', 'updateMember', 'updateOrganization']|
+|membersInvited_fields|string|None|False|Response with one or more fields of invited members, default: avatarHash,fullName,initials,username,confirmed|['', 'all', 'avatarHash', 'bio', 'bioData', 'confirmed', 'fullName', 'idPremOrgsAdmin', 'initials', 'memberType', 'products', 'status', 'url', 'username']|
+
+Value of the parameter `board_actions_since` is valid with:
+
+* a date as example: 2017-01-05T08:21:43.338Z
+* null
+* lastView
 
 ##### Output
 
