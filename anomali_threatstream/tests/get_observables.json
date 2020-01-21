@@ -3,11 +3,11 @@
         "action": "get_observables",
         "connection": {
             "api_key": {
-                "secretKey": null
+                "secretKey": ""
             },
-            "ssl_verify": null,
-            "url": null,
-            "username": null
+            "url": "",
+            "username": "",
+            "ssl_verify": false
         },
         "input": {
             "value": "window.google"
