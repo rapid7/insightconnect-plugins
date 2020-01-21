@@ -1,16 +1,19 @@
 {
     "body": {
-        "action": "get_observables",
+        "action": "submit_url",
         "connection": {
             "api_key": {
                 "secretKey": ""
             },
             "url": "",
             "username": "",
-            "ssl_verify": false
+            "ssl_verify": true
         },
         "input": {
-            "value": "window.google"
+            "use_premium_sandbox": false,
+            "platform": "WINDOWS7",
+            "classification": "private",
+            "url": "google.com"
         },
         "meta": {}
     },
