@@ -4,6 +4,7 @@ from .schema import GetSandboxReportInput, GetSandboxReportOutput, Input, Output
 # Custom imports below
 from copy import copy
 from komand.exceptions import PluginException
+from json.decoder import JSONDecodeError
 
 
 class GetSandboxReport(komand.Action):
@@ -27,7 +28,10 @@ class GetSandboxReport(komand.Action):
                                   assistance="Please verify your ThreatStream server status and try again. "
                                              "If the issue persists please contact support. "
                                              "Server response was: %s" % response.text)
-        js = response.json()
+        try:
+            js = response.json()
+        except JSONDecodeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
         try:
             domains_detail = js['results']['network']['domains']
