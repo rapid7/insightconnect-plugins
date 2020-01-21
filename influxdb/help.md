@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|server|string|http\://localhost\:8086|True|InfluxDB API Server|None|
+|server|string|http://localhost:8086|True|InfluxDB API Server|None|
 
 ## Technical Details
 

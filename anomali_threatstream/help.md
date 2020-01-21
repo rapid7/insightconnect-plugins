@@ -24,6 +24,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|username|string|None|True|Anomali ThreatStream username|None|
 |api_key|credential_secret_key|None|True|Anomali ThreatStream API key|None|
 |ssl_verify|boolean|True|True|Verify the server's SSL/TLS certificate|None|
 |url|string|None|True|URL for the ThreatStream instance e.g. https://ts.example.com|None|
