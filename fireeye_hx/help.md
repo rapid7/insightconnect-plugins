@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |username_password|credential_username_password|None|True|Username and password to authenticate with FireEye HX|None|
-|url|string|None|True|URL to the appliance, e.g. https\://test.fireeye.com|None|
+|url|string|None|True|URL to the appliance, e.g. https://test.fireeye.com|None|
 
 ## Technical Details
 

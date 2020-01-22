@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |api_key|credential_secret_key|None|True|The API key for InsightAppSec|None|
-|url|string|https\://us.api.insight.rapid7.com|True|The URL endpoint for InsightAppSec. e.g. https\://<REGION_CODE>.api.insight.rapid7.com|None|
+|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightAppSec. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|
 
 ## Technical Details
 

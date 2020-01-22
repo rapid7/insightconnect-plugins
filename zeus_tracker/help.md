@@ -19,7 +19,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|server|string|https\://zeustracker.abuse.ch|True|ZeuS Tracker API Server|None|
+|server|string|https://zeustracker.abuse.ch|True|ZeuS Tracker API Server|None|
 
 ## Technical Details
 
@@ -85,7 +85,7 @@ This action is used to look up ZeuS hosts in a specific country.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|country|string|None|False|Two character country code (see ISO column of https\://countrycode.org)|None|
+|country|string|None|False|Two character country code (see ISO column of https://countrycode.org)|None|
 |limit|integer|None|False|Limit number of results|None|
 
 ##### Output
