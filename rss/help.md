@@ -20,6 +20,7 @@ Use [input templating](https://docs.komand.com/docs/input-templating), [Python S
 This plugin requires a RSS feed URL.
 
 The connection configuration accepts the following parameters:
+
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|Feed URL|None|
