@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|host|string|https\://hipchat.com/|True|HipChat API Server|None|
+|host|string|https://hipchat.com/|True|HipChat API Server|None|
 |version|string|v2|True|API Version|None|
 |user|string|None|False|User Account|None|
 |token|string|None|False|API Token|None|
@@ -44,7 +44,7 @@ This action is used to send a message to a room.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |message|string|None|True|The message post to room. Valid length range: 1 - 1000|None|
-|room_id_or_name|string|None|True|The ID or URL encoded name of the room|None|
+|room_id_or_name|string|None|True|The id or url encoded name of the room|None|
 
 ##### Output
 

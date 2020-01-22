@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |api_key|credential_secret_key|None|True|API key for VMRay|None|
-|url|string|https\://cloud.vmray.com|True|VMRay host e.g https\://cloud.vmray.com|None|
+|url|string|https://cloud.vmray.com|True|VMRay host e.g https://cloud.vmray.com|None|
 
 ## Technical Details
 
@@ -150,9 +150,9 @@ This action is used to get all dynamic and static analyses in the system or deta
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id_type|string|None|True|Get analysis based on ID of a specified type|['analysis_id', 'analyzer', 'configuration', 'static_config', 'created', 'job', 'jobrule', 'job_started', 'prescript', 'result_code', 'sample', 'size', 'snapshot', 'submission', 'user', 'vm', 'vmhost', 'vti_score', 'all']|
-|id|string|None|False|ID based on ID type selected, leave blank if 'all' is selected|None|
-|optional_params|object|None|False|Parameters that allow finer tuning of the Get Analysis action, e.g {"analysis_id": 12345}|None|
+|id_type|string|None|True|Get analysis based on ID of a specified type|["analysis_id", "analyzer", "configuration", "static_config", "created", "job", "jobrule", "job_started", "prescript", "result_code", "sample", "size", "snapshot", "submission", "user", "vm", "vmhost", "vti_score", "all"]|
+|id|string|None|False|ID based on ID type selected, leave blank if "all" is selected|None|
+|optional_params|object|None|False|Parameters that allow finer tuning of get analysis  e.g {"analysis_id": 12345}|None|
 
 Optional Parameters can be found in the API documentation, located `http://vmrayhost/static_doc/html/api/User_API_Reference.html`
 
@@ -270,9 +270,10 @@ This action is used to get all samples in the system or details about specific o
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sample_type|string|None|True|Specified type of sample|['all', 'sample_id', 'created', 'filesize', 'md5', 'sha1', 'sha256', 'type']|
-|sample|string|None|False|Sample ID, hash or type, leave blank if 'all' is selected|None|
-|optional_params|object|None|False|Parameters that allow finer tuning of the Get Samples action, e.g {"analysis_id": 12345}|None|
+|sample_type|string|None|False|Specified type of sample|['all', 'sample_id', 'created', 'filesize', 'md5', 'sha1', 'sha256', 'type']|
+|sample|string|None|True|Sample ID, hash or type,leave blank if 'all' is selected|None|
+|optional_params|object|None|False|Parameters that allow finer tuning of get analysis e.g {"analysis_id": 12345}|None|
+
 ##### Output
 
 |Name|Type|Required|Description|

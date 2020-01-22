@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|Git repository URL (e.g ssh\://myrepo.com/path/to/repo.git/; only SSH and HTTP/HTTPS protocols are supported)|None|
+|url|string|None|True|Git repository URL (e.g ssh://myrepo.com/path/to/repo.git/; only SSH and HTTP/HTTPS protocols are supported)|None|
 |credentials|credential_username_password|None|False|Git username (if empty, 'x-auth-token' is used and 'password' field is considered an access token)|None|
 
 ## Technical Details

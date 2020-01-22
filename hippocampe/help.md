@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|Address of a working Hippocampe instance, including the port number (e.g. https\://10.0.0.2\:5000)|None|
+|url|string|None|True|Address of a working Hippocampe instance, including the port number (e.g. https://10.0.0.2:5000)|None|
 
 ## Technical Details
 

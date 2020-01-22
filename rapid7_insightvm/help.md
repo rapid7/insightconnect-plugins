@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https\://insightvm.example.com\:3780|None|
+|url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780|None|
 |credentials|credential_username_password|None|True|Username and password|None|
 
 ## Technical Details
@@ -715,7 +715,7 @@ This action is used to create a new tag.
 |name|string|None|True|Tag name|None|
 |type|string|None|True|Tag type|['owner', 'location', 'custom']|
 |color|string|default|False|Tag color (only available for custom tags)|['default', 'blue', 'green', 'orange', 'purple', 'red']|
-|searchCriteria|object|None|False|Tag search Criteria - options documentation https\://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
+|searchCriteria|object|None|False|Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
 
 ##### Output
 
@@ -1267,7 +1267,7 @@ This action is used to update the search criteria for an existing tag.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Tag ID|None|
-|searchCriteria|object|None|True|Tag search criteria - options documentation\: https\://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
+|searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
 
 ##### Output
 
@@ -1296,7 +1296,7 @@ This action is used to search for assets using a filtered asset search.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|searchCriteria|object|None|True|Tag search criteria - options documentation\: https\://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
+|searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
 
 ##### Output
 
@@ -1450,7 +1450,7 @@ This action is used to create an asset group.
 |description|string|None|False|Asset group description|None|
 |type|string|None|True|Asset group type|['dynamic', 'static']|
 |name|string|None|True|Asset group name|None|
-|searchCriteria|object|None|False|Asset group search criteria - options documentation\: https\://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
+|searchCriteria|object|None|False|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
 
 ##### Output
 
@@ -1877,7 +1877,7 @@ This action is used to update the search criteria for an existing asset group.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Asset group ID|None|
-|searchCriteria|object|None|True|Asset group search criteria - options documentation\: https\://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
+|searchCriteria|object|None|True|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
 
 ##### Output
 

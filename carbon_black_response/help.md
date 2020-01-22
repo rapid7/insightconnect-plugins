@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|https\://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|
+|url|string|https://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|
 |ssl_verify|boolean|True|True|SSL certificate verification|None|
 |api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|
 
@@ -498,7 +498,7 @@ This action is used to update or resolve an alert.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |status|string|Resolved|True|The status to update|['Resolved', 'Unresolved', 'In Progress', 'False Positive']|
-|id|string|None|True|Unique ID of the alert. Example\: 1cb11d0d-f86b-415d-aeb3-05f085973fbb|None|
+|id|string|None|True|Unique ID of the alert. Example: 1cb11d0d-f86b-415d-aeb3-05f085973fbb|None|
 
 ##### Output
 

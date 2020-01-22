@@ -4,10 +4,10 @@ import komand
 from komand_carbon_black_live_response import connection, actions, triggers
 
 
-Name = 'Carbon Black Live Response'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'Delete malicious files'
+Name = "Carbon Black Live Response"
+Vendor = "rapid7"
+Version = "1.0.1"
+Description = "Delete malicious files"
 
 
 class ICONCarbonBlackLiveResponse(komand.Plugin):

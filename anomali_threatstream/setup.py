@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='anomali_threatstream-rapid7-plugin',
-      version='3.0.2',
-      description='Anomali ThreatStream operationalizes threat intelligence, automating collection and integration that enables security teams to analyze and respond to threats',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="anomali_threatstream-rapid7-plugin",
+      version="3.1.0",
+      description="Anomali ThreatStream operationalizes threat intelligence, automating collection and integration that enables security teams to analyze and respond to threats",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_anomali_threatstream']

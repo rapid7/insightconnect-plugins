@@ -5,7 +5,7 @@ that includes the unique Hybrid Analysis technology. Our plugin connects to your
 
 # Key Features
 
-* Search by file Hash
+* Search by file hash
 * Submit file for analysis
 * Get file analysis report details
 
@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|
 |api_secret|credential_secret_key|None|True|API secret|None|
 |api_key|credential_secret_key|None|True|API key|None|
-|server|string|https\://www.hybrid-analysis.com/api|True|VxStream Sandbox API Server URL|None|
+|server|string|https://www.hybrid-analysis.com/api|True|VxStream Sandbox API Server URL|None|
 
 ## Technical Details
 
@@ -144,8 +144,8 @@ This action is used to submit file for analysis.
 |customcmdline|string|None|False|Custom Command Line, e.g. /VX:promptfill mypassword|None|
 |scriptlogging|boolean|True|False|Enable the script logging feature. This feature can give deeper insights into the functionality of Javascripts, VBA macros and similar script languages (see 'Script calls' in the per process details)|None|
 |filename|string|None|False|Optional filename of the malware|None|
-|file|bytes|None|True|File to be analyzed. See https://vxstream-sandbox.com/faq for supported filetypes|None|
 |promptfill_password|string|None|False|Optional malware password to pass in to the analysis (shortcut for /VX:promptfill)|None|
+|file|bytes|None|True|File to be analyzed. See https://vxstream-sandbox.com/faq for supported filetypes|None|
 |env_id|integer|100|False|Environment ID|None|
 |hybridanalysis|boolean|True|False|Enable a unique process memory inspection. This feature may slow down the overall analysis, but improves behavior analysis through instruction level inspection regardless of execution|None|
 |experimentalantievasion|boolean|True|False|Enable experimental anti-evasion features. This feature can have an impact application execution, but at the same time can improve performance for very evasive malware|None|
