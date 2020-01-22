@@ -22,7 +22,7 @@ This plugin requires a RSS feed URL.
 The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|False|Feed URL|None|
+|url|string|None|True|Feed URL|None|
 
 ## Technical Details
 
@@ -40,7 +40,7 @@ This trigger monitors an RSS feed for the latest event.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|frequency|integer|15|False|How frequently to poll for new events|None|
+|frequency|integer|15|True|How frequently to poll for new events|None|
 
 ##### Output
 
