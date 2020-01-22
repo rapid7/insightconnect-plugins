@@ -38,11 +38,11 @@ This action is used to unshorten a URL.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|resolved_url|string|True|Long URL|
-|success|boolean|True|Success|
-|usage_count|integer|False|Usage count|
-|requested_url|string|True|Short URL|
 |error|string|False|Error message|
+|requested_url|string|True|Short URL|
+|resolved_url|string|True|Long URL|
+|success|boolean|True|To indicate if the operation was successful or not|
+|usage_count|integer|False|The usage count for the current IP|
 
 Example output:
 

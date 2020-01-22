@@ -46,12 +46,12 @@ actions:
       success:
         title: Success
         type: boolean
-        description: Success
+        description: To indicate if the operation was successful or not
         required: true
       usage_count:
         title: Usage Count
         type: integer
-        description: Usage count
+        description: The usage count for the current IP
         required: false
       error:
         title: Error
