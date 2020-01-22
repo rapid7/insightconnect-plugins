@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |client_crt|credential_asymmetric_key|None|True|Client certificate file|None|
-|host|string|None|True|The broker host e.g. example.com\:8883|None|
+|host|string|None|True|The broker host e.g. example.com:8883|None|
 |broker_ca|credential_asymmetric_key|None|True|Broker certificate authority bundle|None|
 |client_key|credential_asymmetric_key|None|True|Client key file|None|
 
