@@ -29,13 +29,13 @@ This action is used to Base64 encode a `string` using the standard Base64 alphab
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|content|string|None|True|String to Encode|None|
+|content|string|None|True|Data to encode|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|bytes|False|None|
+|data|bytes|True|Encoded data result|
 
 #### Decoder
 
@@ -46,13 +46,13 @@ This action is used to decode a Base64 `string` or file of type `bytes` using th
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |base64|bytes|None|True|Data to decode|None|
-|errors|string|None|False|How errors should be handled when decoding Base64 e.g replace or ignore|None|
+|errors|string|nothing|False|How errors should be handled when decoding Base64|['replace', 'ignore', 'nothing']|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|string|False|None|
+|data|string|True|Decoded data result|
 
 ### Triggers
 
@@ -72,6 +72,7 @@ characters to `\uffd` or `?`. While ignore will drop the character from the outp
 
 # Version History
 
+* 1.1.3 - Use input and output constants | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Changed `Exception` to `PluginException` | Changed descriptions in help.md 
 * 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Fixed issue where action Decode required error parameter
 * 1.1.0 - Bug fix in decode action, added an option for error handling
