@@ -242,7 +242,7 @@ This action is used to fetches information related to a fuzzy hash.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|query|string|None|True|SSDeep fuzzy hash to search e.g. 1536\:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4\:TJs0oG2KSTj3o8a9PFeEHn4l|None|
+|query|string|None|True|SSDeep fuzzy hash to search e.g. 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l|None|
 |query_type|string|None|True|None|['Samples', 'Report Tagging']|
 
 ##### Output
@@ -259,7 +259,7 @@ This action is used to fetches information related to a fuzzy hash.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|query|string|None|True|SSDeep fuzzy hash to search e.g. 1536\:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4\:TJs0oG2KSTj3o8a9PFeEHn4l|None|
+|query|string|None|True|SSDeep fuzzy hash to search e.g. 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l|None|
 |query_type|string|None|True|None|['Samples', 'Report Tagging']|
 
 ##### Output

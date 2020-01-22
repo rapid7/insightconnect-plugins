@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |certificate_passphrase|credential_secret_key|None|False|The passphrase to access the certificate|None|
-|port|integer|8307|False|Enter the port to connect to the Host Input API (Default\:8307)|None|
+|port|integer|8307|False|Enter the port to connect to the Host Input API (Default:8307)|None|
 |certificate|bytes|None|False|Base64 encoded certificate to authenticate with the host input API|None|
 |server|string|None|False|Enter the address for the server|None|
 

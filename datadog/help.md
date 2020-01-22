@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|
 |api_key|credential_secret_key|None|True|The API key for Datadog|None|
 |app_key|string|None|True|Application key|None|
-|url|string|None|True|The Datadog URL. Normally https\://api.datadoghq.com/api/v1/|None|
+|url|string|None|True|The Datadog URL. Normally https://api.datadoghq.com/api/v1/|None|
 
 ## Technical Details
 
@@ -82,7 +82,7 @@ It expects the body of the [timeseries data structure](https://docs.datadoghq.co
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|series|[]object|None|True|Pass a JSON array of the following timeseries format body https\://docs.datadoghq.com/api/?lang=bash#post-timeseries-points|None|
+|series|[]object|None|True|Pass a JSON array of the following timeseries format body https://docs.datadoghq.com/api/?lang=bash#post-timeseries-points|None|
 
 Example input:
 
