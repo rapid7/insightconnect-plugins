@@ -26,7 +26,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|Host URL, E.g. https\://localhost\:8443|None|
+|url|string|None|True|Host URL, E.g. https://localhost:8443|None|
 |username|string|None|True|Enter the API username|None|
 |api_key|credential_secret_key|None|True|Enter the API key|None|
 |ssl_verify|boolean|False|True|Verify server's certificate|None|

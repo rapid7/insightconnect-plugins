@@ -1,19 +1,19 @@
 {
-    "body": {
-        "action": "lookup_url",
-        "connection": {
-            "api_key": {
-                "secretKey": null
-            },
-            "ssl_verify": null,
-            "url": null,
-            "username": null
-        },
-        "input": {
-            "url": "http://aadroid.net/wp-includes/js/jquery/jquery.js"
-        },
-        "meta": {}
+  "body": {
+    "action": "lookup_url",
+    "meta": {},
+    "input": {
+      "url": "google.com"
     },
-    "type": "action_start",
-    "version": "v1"
+    "connection": {
+      "api_key": {
+          "secretKey": ""
+      },
+      "url": "",
+      "username": "",
+      "ssl_verify": false
+  }
+  },
+  "type": "action_start",
+  "version": "v1"
 }

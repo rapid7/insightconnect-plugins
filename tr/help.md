@@ -31,6 +31,7 @@ This action is used to run a `tr` expression on a string input.
 |----|----|-------|--------|-----------|----|
 |expression|string|None|True|Correct tr expression (e.g. -s [:space:] ' ')|None|
 |text|string|None|True|Text to process|None|
+|expression|string|None|True|Correct tr expression (e.g. -s [:space:] ' ')|None|
 
 ##### Output
 

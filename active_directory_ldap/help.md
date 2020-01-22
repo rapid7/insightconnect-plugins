@@ -30,7 +30,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |use_ssl|boolean|None|True|Use SSL?|None|
-|host|string|None|True|Server Host, e.g. ldap\://192.5.5.5. Must use either ldap\:// or ldaps\:// for SSL prefix|None|
+|host|string|None|True|Server Host, e.g. ldap://192.5.5.5. Must use either ldap:// or ldaps:// for SSL prefix|None|
 |port|integer|389|True|Port, e.g. 389|None|
 |username_password|credential_username_password|None|True|Username and password|None|
 
