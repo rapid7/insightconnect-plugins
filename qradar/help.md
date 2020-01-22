@@ -41,8 +41,8 @@ This action is used to add data to reference_data lists.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |timeout_type|string|UNKNOWN|False|Indicates if the Time to Live interval is based on when the data was first seen or last seen|['FIRST_SEEN', 'LAST_SEEN', 'UNKNOWN']|
-|time_to_live|string|None|False|Optional\: The time to live interval, for example\: '1 month' or '5 minutes'|None|
-|element_type|string|None|True|The element type for the values allowed in the reference set. The allowed values are\: ALN (alphanumeric), ALNIC (alphanumeric ignore case), IP (IP address), NUM (numeric), PORT (port number) or DATE. Note that date values need to be represented in milliseconds since the Unix Epoch January 1st 1970.|['ALN', 'ALNIC', 'IP', 'NUM', 'PORT', 'DATE']|
+|time_to_live|string|None|False|Optional: The time to live interval, for example: '1 month' or '5 minutes'|None|
+|element_type|string|None|True|The element type for the values allowed in the reference set. The allowed values are: ALN (alphanumeric), ALNIC (alphanumeric ignore case), IP (IP address), NUM (numeric), PORT (port number) or DATE. Note that date values need to be represented in milliseconds since the Unix Epoch January 1st 1970.|['ALN', 'ALNIC', 'IP', 'NUM', 'PORT', 'DATE']|
 |name|string|None|True|The name of the reference set being created|None|
 
 ##### Output

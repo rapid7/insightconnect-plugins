@@ -24,8 +24,8 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |credentials|credential_username_password|None|False|ThreatQuotient username (e.g. email) and password|None|
-|host|string|None|False|Address of the Threat Quotient host (e.g. https\://localhost\:8443)|None|
-|proxy|string|None|False|Address of a proxy if applicable (e.g. https\://localhost\:8443)|None|
+|host|string|None|False|Address of the Threat Quotient host (e.g. https://localhost:8443)|None|
+|proxy|string|None|False|Address of a proxy if applicable (e.g. https://localhost:8443)|None|
 |client_id|password|None|False|Threat Quotient OAuth Token|None|
 
 ## Technical Details

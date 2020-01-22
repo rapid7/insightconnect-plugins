@@ -265,7 +265,7 @@ This action is used to start a hunt on clients.
 |dependencies|string|Use the knowledgebase as a cache. If knowledgebase isn't present, a new one will be populated|False|Specifies how dependencies should be handled|['USE_CACHED (default)', 'IGNORE_DEPS', 'FETCH_NOW']|
 |value|integer|None|False|Value|None|
 |chunk_size|integer|None|False|A heartbeat will be emitted every chunk_size.This could be reduced in case the process times out|None|
-||upload_token|boolean|None|False|An upload token to use with the direct upload functionality. This token contains the hmac authenticated policy that determines for how long the client is allowed to upload files to the server. This is comparable to the policy document used by GCS: https://cloud.google.com/storage/docs/xml-api/post-object#policydocument|None|
+|upload_token|boolean|None|False|An upload token to use with the direct upload functionality. This token contains the hmac authenticated policy that determines for how long the client is allowed to upload files to the server. This is comparable to the policy document used by GCS: https://cloud.google.com/storage/docs/xml-api/post-object#policydocument|None|
 |restrict_checks|string|None|False|Only run checks with the specified check_ids|None|
 |ff_username|string|None|False|The user to get FireFox history for. If history_path is not set this will be used to guess the path to the history files|None|
 |client_rate|integer|None|False|The maximum number of clients to engage per minute. A rate of 0 means to schedule clients as fast as possible|None|
