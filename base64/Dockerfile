@@ -17,5 +17,7 @@ WORKDIR /python/src
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
 
+USER nobody
+
 
 ENTRYPOINT ["/usr/local/bin/komand_base64"]

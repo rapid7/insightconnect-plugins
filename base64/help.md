@@ -72,7 +72,7 @@ characters to `\uffd` or `?`. While ignore will drop the character from the outp
 
 # Version History
 
-* 1.1.3 - Use input and output constants | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Change `Exception` to `PluginException` | Change descriptions in help.md
+* 1.1.3 - Use input and output constants | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Change `Exception` to `PluginException` | Change descriptions in help.md | Add user nobody in Dockerfile
 * 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Fixed issue where action Decode required error parameter
 * 1.1.0 - Bug fix in decode action, added an option for error handling
