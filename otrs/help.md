@@ -368,6 +368,9 @@ This action is used to update an OTRS ticket.
 |TicketID|integer|None|False|Ticket ID|None|
 |Title|string|None|False|Updated title|None|
 |Type|string|None|False|Updated type e.g. Incident|None|
+|Article|new_article|None|False|New article (gets appended)|None|
+|DynamicFields|[]dynamic_field|None|False|Updated dynamic fields e.g. [{"name":"TestName1","value":"TestValue1"},{"name":"TestName2","value":"TestValue2"}]|None|
+|Attachments|[]attachment|None|False|New attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|
 
 ##### Output
 

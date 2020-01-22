@@ -34,7 +34,7 @@ For a quick & easy way to install tooling dependencies, run `update-tools.sh` fr
 
 ### Example
 
-![Make Menu](./imgs/menu.png)
+![Make Menu](./.github/make_menu_example.png)
 
 Let's build and run a plugin from this repository.
 

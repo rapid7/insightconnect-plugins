@@ -55,8 +55,8 @@ Make sure you the edit the output variables so that they match the keys returned
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|function|python|def run(params={})\:
-  return { 'result1'\: 'foo', 'result2'\: 'bar' }|False|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output.|None|
+|function|python|def run(params={}):
+  return { 'result1': 'foo', 'result2': 'bar' }|False|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output.|None|
 |input|object|None|False|Input object to be passed as `params={}` to the `run` function.|None|
 
 ##### Output

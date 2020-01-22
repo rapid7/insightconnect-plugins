@@ -1,11 +1,15 @@
 {
-	"spec": "6f677f13aa90ae25906507d59669c3ad",
-	"manifest": "053c82e25ebe8612ea712bacd99ce5ba",
-	"setup": "947807b6c942c34b44bca97ce0d9870d",
+	"spec": "36ff822fde417e00264411dd9dc4ae80",
+	"manifest": "05004c1105ffdb9e223b6e7c8c8fdb18",
+	"setup": "c8000858b5533c60c5495e2c8952031c",
 	"schemas": [
 		{
 			"identifier": "get_observables/schema.py",
 			"hash": "4b6c1331de8e5a77a7b26cf4d529767e"
+		},
+		{
+			"identifier": "get_sandbox_report/schema.py",
+			"hash": "78481b58e47f63c5c511076ecc969ca6"
 		},
 		{
 			"identifier": "import_observable/schema.py",
@@ -22,6 +26,14 @@
 		{
 			"identifier": "lookup_url/schema.py",
 			"hash": "0e4de5f915f724c5e952b6facf2661a3"
+		},
+		{
+			"identifier": "submit_file/schema.py",
+			"hash": "537ca82c6dccadf7a42dc5c72061eebd"
+		},
+		{
+			"identifier": "submit_url/schema.py",
+			"hash": "fa26db80c3600ffe64b9177b83480ff1"
 		},
 		{
 			"identifier": "connection/schema.py",
