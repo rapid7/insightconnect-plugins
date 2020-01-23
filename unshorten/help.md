@@ -88,6 +88,7 @@ Note that the API is limited to 10 requests per hour per IP address.
 
 # Version History
 
+* 1.0.3 - Use input and output constants | Changed `Exception` to `PluginException` | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` | Add user nobody in Dockerfile
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Graceful exit for invalid URLs
 * 1.0.0 - Initial plugin

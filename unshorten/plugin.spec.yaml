@@ -4,7 +4,7 @@ products: [insightconnect]
 name: unshorten
 title: Unshorten.me
 description: Assist with phishing investigations, URL analysis, deobfuscation, and more
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []
