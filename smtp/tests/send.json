@@ -15,9 +15,9 @@
                 "content": "dGVzdAo=",
                 "filename": ""
             },
-            "email_from": "gursimran_singh@rapid7.com",
-            "email_to": "gursimran_singh@rapid7.com",
-            "cc": ["gursimran_singh@rapid7.com"],
+            "email_from": "",
+            "email_to": "",
+            "cc": [],
             "html": false,
             "message": "SOME TESTING MESSAGE",
             "subject": "test"
