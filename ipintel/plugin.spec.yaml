@@ -5,7 +5,7 @@ name: ipintel
 title: IPIntel
 vendor: rapid7
 support: community
-status: []
+status: [obsolete]
 description: Retrieve location and threat related details for an IP address using IPIntel
 version: 1.0.1
 resources:

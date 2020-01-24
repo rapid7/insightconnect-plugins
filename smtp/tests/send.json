@@ -3,21 +3,21 @@
         "action": "send",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "host": null,
-            "ignore_ssl_errors": null,
-            "port": null,
-            "use_ssl": null
+            "host": "",
+            "port": 587,
+            "use_ssl":true
         },
         "input": {
             "attachment": {
-                "content": "",
+                "content": "dGVzdAo=",
                 "filename": ""
             },
             "email_from": "",
             "email_to": "",
+            "cc": [],
             "html": false,
             "message": "SOME TESTING MESSAGE",
             "subject": "test"

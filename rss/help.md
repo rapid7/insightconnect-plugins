@@ -3,7 +3,7 @@
 The RSS plugin can monitor any generic [RSS](https://en.wikipedia.org/wiki/RSS) feed.
 
 This plugin returns a generic `object` since each RSS feed can have its own data structure.
-Use [input templating](https://docs.komand.com/docs/input-templating), [Python Script plugin](https://docs.komand.com/docs/python-script-plugin), or the [JQ plugin](https://market.komand.com/plugins/komand/jq/0.1.3) to retrieve specific outputs.
+Use [input templating](https://insightconnect.help.rapid7.com/docs/format-strings-with-templates), [Python Script plugin](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script), or the [JQ plugin](https://market.komand.com/plugins/komand/jq/0.1.3) to retrieve specific outputs.
 
 # Key Features
 
@@ -20,9 +20,10 @@ Use [input templating](https://docs.komand.com/docs/input-templating), [Python S
 This plugin requires a RSS feed URL.
 
 The connection configuration accepts the following parameters:
+
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|False|Feed URL|None|
+|url|string|None|True|Feed URL|None|
 
 ## Technical Details
 
@@ -40,7 +41,7 @@ This trigger monitors an RSS feed for the latest event.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|frequency|integer|15|False|How frequently to poll for new events|None|
+|frequency|integer|15|True|How frequently to poll for new events|None|
 
 ##### Output
 
@@ -183,5 +184,5 @@ Between workflow runs, new items will *not* be reported on.
 ## References
 
 * [feedparser](https://github.com/kurtmckee/feedparser)
-* [Input Templating](https://docs.komand.com/docs/input-templating)
-
+* [input templating](https://insightconnect.help.rapid7.com/docs/format-strings-with-templates)
+* [Python Script plugin](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script)
