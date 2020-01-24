@@ -6,7 +6,11 @@ Handle your case management needs with TheHive plugin for Rapid7 InsightConnect.
 
 # Key Features
 
-* Case management
+* Retrieve a list of cases or a specific case by ID
+* Create a new case and close an existing case
+* Create new tasks within a case
+* Create new observables within a case
+* Get user information
 
 # Requirements
 
