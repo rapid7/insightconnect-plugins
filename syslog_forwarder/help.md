@@ -23,7 +23,7 @@ It supports:
 
 ## Setup
 
-This plugin requires an network accessible syslog server (IP address or domain) from Komand host, the syslog server's port, and its transport protocol.
+This plugin requires the IP address or hostname, port number, and transport protocol for a syslog server that is accessible from the Orchestrator.
 
 The connection configuration accepts the following parameters:
 
@@ -54,11 +54,11 @@ This action is used to forward a custom syslog message.
 
 ##### Output
 
-This action does not contain any outputs.
+_This action does not contain any outputs._
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
