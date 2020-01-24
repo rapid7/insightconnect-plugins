@@ -97,7 +97,6 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
-* 1.1.3 - Update help documentation and plugin spec tags
 * 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Fix issue where certificates in connection were not being escaped correctly
 * 1.1.0 - New action Publish Event
