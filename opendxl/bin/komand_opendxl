@@ -6,7 +6,7 @@ from komand_opendxl import connection, actions, triggers
 
 Name = "OpenDXL"
 Vendor = "rapid7"
-Version = "1.1.2"
+Version = "1.1.3"
 Description = "Communicate and share information for real-time, accurate security decisions and actions using OpenDXL"
 
 
