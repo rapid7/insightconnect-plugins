@@ -121,15 +121,283 @@ Example output:
 
 ```
 
-#### Get Cases
+_This action does not contain any inputs._
 
-This action is used to retrieve a list of cases.
+#_This action does not contain any inputs._
 
-##### Input
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+G_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+C_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
 
 _This action does not contain any inputs._
 
-##### Output
+
+_This action does not contain any inputs._
+
+T_This action does not contain any inputs._
+
+h_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+d_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+v_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+l_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+f_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+._This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+I_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+p_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+T_This action does not contain any inputs._
+
+h_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+d_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+y_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+p_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+._This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+O_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+p_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -403,8 +671,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.6 - Update help key features and fix description capitalisation
-* 2.0.5 - New spec and help.md format for the Hub
+* 2.0.5 - New spec and help.md format for the Hub. Update help key features and fix description capitalisation
 * 2.0.4 - Update to use the `komand/python-2-27-slim-plugin` Docker image to reduce plugin size and to support SSL Verify
 * 2.0.3 - Fix issue where SSL Verify was not used in actions that utilize requests | Updated test method and moved it to connection
 * 2.0.2 - Fix issue where SSL Verify was not used in the connection
