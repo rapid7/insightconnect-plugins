@@ -9,7 +9,8 @@ This plugin utilizes the [OpenDXL Python Client API](https://github.com/opendxl/
 
 # Requirements
 
-_This plugin does not contain any requirements._
+* Broker CA, Client CRT and Client Key files will need to be generated and downloaded in the OpenDXL UI
+* All certificates must end with a `\n` when they are copied into the connection
 
 # Documentation
 
@@ -47,9 +48,11 @@ This action is used to publish a new event to a specified topic.
 
 Example output:
 
+```
 {
   "success": true
 }
+```
 
 ### Triggers
 
