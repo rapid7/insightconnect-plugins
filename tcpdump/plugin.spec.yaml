@@ -4,7 +4,7 @@ products: [insightconnect]
 name: tcpdump
 title: Tcpdump
 description: The Tcpdump plugin is used to read contents of a PCAP
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []
@@ -38,7 +38,7 @@ actions:
         required: false
       filter:
         title: BPF
-        description: Berkely Packet Filter E.g. tcp and port 22
+        description: Berkely Packet Filter E.g. TCP and port 22
         type: string
         required: false
     output:

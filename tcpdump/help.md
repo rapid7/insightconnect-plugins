@@ -1,6 +1,6 @@
 # Description
 
-The [Tcpdump](http://www.tcpdump.org) plugin is used to parse PCAP file.
+The [Tcpdump](http://www.tcpdump.org) plugin is used to parse the contents of a packet capture (PCAP) file.
 
 # Key Features
 
@@ -28,9 +28,9 @@ This action is used to run Tcpdump on a user supplied PCAP file and return the o
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|filter|string|None|False|Berkely Packet Filter E.g. tcp and port 22|None|
-|pcap|bytes|None|True|Base64 encoded PCAP file|None|
+|filter|string|None|False|Berkely Packet Filter E.g. TCP and port 22|None|
 |options|string|None|False|Tcpdump Flags and Options E.g. -n -c 10 -s 96. -r is implied|None|
+|pcap|bytes|None|True|Base64 encoded PCAP file|None|
 
 ##### Output
 
@@ -54,6 +54,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.3 - Updated spec and help.md format for the Hub
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode

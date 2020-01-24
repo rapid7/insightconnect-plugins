@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='tcpdump-rapid7-plugin',
-      version='1.0.2',
-      description='The Tcpdump plugin is used to read contents of a PCAP',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="tcpdump-rapid7-plugin",
+      version="1.0.3",
+      description="The Tcpdump plugin is used to read contents of a PCAP",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_tcpdump']
