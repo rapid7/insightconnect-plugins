@@ -24,11 +24,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|username|string|None|False|None|None|
-|use_ssl|boolean|True|False|None|None|
-|host|string|None|False|Host of SMTP server to connect to|None|
-|password|password|None|False|None|None|
-|port|integer|25|False|None|None|
+|credentials|credential_username_password|None|False|Username and password|None|
+|host|string|None|True|Host of SMTP server to connect to|None|
+|port|integer|25|True|Port of SMTP server|None|
+|use_ssl|boolean|True|True|Use SSL|None|
 
 NOTE: If username and password are left blank, the plugin will not try to authenticate.
 
@@ -44,13 +43,14 @@ This action is used to send an email.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|email_to|string|None|True|Email to send TO|None|
 |attachment|file|None|False|Attachment|None|
+|bcc|[]string|None|False|BCC email|None|
 |cc|[]string|None|False|CC emails|None|
+|email_from|string|None|True|Email to use as FROM|None|
+|email_to|string|None|True|Email to send TO|None|
+|html|boolean|None|True|Message contains HTML|None|
 |message|string|None|True|Message to send on the email|None|
 |subject|string|None|True|Subject of the email|None|
-|email_from|string|None|True|Email to use as FROM|None|
-|bcc|[]string|None|False|BCC email|None|
 
 Example output:
 
@@ -66,7 +66,7 @@ Example output:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result|string|False|None|
+|result|string|False|Result|
 
 ### Triggers
 
@@ -82,6 +82,7 @@ If you are passing a variable into the Attachment 'Content' field, you must make
 
 ## Version History
 
+* 2.0.5 - Fix issue sending emails without attachment
 * 2.0.4 - New spec and help.md format for the Hub
 * 2.0.3 - Fix issue with reliability in regards to previous Send action empty attachment fix
 * 2.0.2 - Fix issue where Send action doesn't handle empty attachments correctly

@@ -1,7 +1,7 @@
 # Description
 
 [Tab Separated Value](https://en.wikipedia.org/wiki/Tab-separated_values) (TSV) is a common format to express data.
-This plugin allows one to extract fields from TSV strings and files, streamlining your data processing within a workflow.
+This plugin allows users to extract fields from TSV strings and files, streamlining data processing within a workflow.
 
 # Key Features
 
