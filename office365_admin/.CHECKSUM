@@ -1,11 +1,11 @@
 {
-	"spec": "2eb64d2c4ef07a3c57ab558acc4ff91a",
-	"manifest": "96eccf1535103e39d8780c88fcdab9f8",
-	"setup": "8ee8570b798f6b78b234e11c6f7398b7",
+	"spec": "995e344cc155ebdc315198c5c8309929",
+	"manifest": "935a4493b8d0062389784051ea44d5d3",
+	"setup": "ac80f857b6f3feeff4aa74c9348dadbb",
 	"schemas": [
 		{
 			"identifier": "add_user/schema.py",
-			"hash": "bc4532551e0fce2d17a1e9fadbaa5181"
+			"hash": "6b6cc34798861cac57ab21d1c814ea59"
 		},
 		{
 			"identifier": "assign_license_to_user/schema.py",
@@ -20,8 +20,12 @@
 			"hash": "da720e530f1940956c9c01cbef32a67e"
 		},
 		{
+			"identifier": "lookup_user_by_email/schema.py",
+			"hash": "852555cd24a646fd8fdfd6efbeb3974d"
+		},
+		{
 			"identifier": "update_usage_location/schema.py",
-			"hash": "a6883f41341b6f690928b71dd16cd470"
+			"hash": "bcc3a7fec86603ade64a66ce06fdf51f"
 		},
 		{
 			"identifier": "connection/schema.py",

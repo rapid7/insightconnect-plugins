@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='office365_admin-rapid7-plugin',
-      version='1.3.1',
-      description='Administrate and manage Office 365 users and licenses',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="office365_admin-rapid7-plugin",
+      version="1.3.0",
+      description="Administrate and manage Office 365 users and licenses",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_office365_admin']
