@@ -25,12 +25,12 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|host|string|None|True|TheHive host e.g. thehive.company.com or 10.3.4.50|None|
-|protocol|string|None|True|HTTP Protocol|['http', 'https']|
-|proxy|object|None|False|An optional dictionary containing proxy data, with http or https as the key, and the proxy url as the value|None|
 |credentials|credential_username_password|None|True|Username and password|None|
-|verify|boolean|True|True|Verify the certificate|None|
+|host|string|None|True|TheHive host e.g. thehive.company.com or 10.3.4.50|None|
 |port|string|9000|True|TheHive API port e.g. 9000|None|
+|protocol|string|None|True|HTTP Protocol|['http', 'https']|
+|proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy url as the value|None|
+|verify|boolean|True|True|Verify the certificate|None|
 
 ## Technical Details
 
@@ -44,8 +44,8 @@ This action is used to create a new case task.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|task|itask|None|True|Task name|None|
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|
+|task|itask|None|True|Task name|None|
 
 ##### Output
 
@@ -84,8 +84,8 @@ This action is used to create a new case observable.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|observable|iobservable|None|True|Observable|None|
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|
+|observable|iobservable|None|True|Observable|None|
 
 ##### Output
 
@@ -121,15 +121,283 @@ Example output:
 
 ```
 
-#### Get Cases
+_This action does not contain any inputs._
 
-This action is used to retrieve a list of cases.
+#_This action does not contain any inputs._
 
-##### Input
+#_This action does not contain any inputs._
 
-This action does not contain any inputs.
+#_This action does not contain any inputs._
 
-##### Output
+#_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+G_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+C_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+T_This action does not contain any inputs._
+
+h_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+d_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+v_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+l_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+f_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+._This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+I_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+p_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+T_This action does not contain any inputs._
+
+h_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+d_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+y_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+p_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+._This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+O_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+p_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -207,19 +475,19 @@ This action is used to get user information.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Get user status|
-|_type|string|False|User type|
-|hasKey|boolean|False|User has a key|
-|name|string|False|Name|
-|roles|[]string|False|Roles|
-|updatedAt|integer|False|Time the user was updated in milliseconds or epoch, e.g. 1496561862924|
-|user|string|False|User|
-|createdBy|string|False|Created by|
-|updatedBy|string|False|Updated by|
 |_id|string|False|User _ID|
-|id|string|False|ID|
+|_type|string|False|User type|
 |createdAt|integer|False|Time the user was created at in milliseconds or epoch, e.g. 1496561862924|
+|createdBy|string|False|Created by|
+|hasKey|boolean|False|User has a key|
+|id|string|False|ID|
+|name|string|False|Name|
 |preferences|object|False|User preferences|
+|roles|[]string|False|Roles|
+|status|string|False|Get user status|
+|updatedAt|integer|False|Time the user was updated in milliseconds or epoch, e.g. 1496561862924|
+|updatedBy|string|False|Updated by|
+|user|string|False|User|
 
 Example output:
 
@@ -302,13 +570,13 @@ This action is used to create a new case.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|tlp|integer|2|False|Traffic Light Protocol level, default is 2|None|
-|flag|boolean|False|False|Flag, default is false|None|
-|task|itask|None|False|Case task|None|
-|description|string|None|False|Description of the case|None|
-|tags|[]string|None|False|List of tags|None|
 |customFields|object|None|False|Case custom fields|None|
+|description|string|None|False|Description of the case|None|
+|flag|boolean|False|False|Flag, default is false|None|
+|tags|[]string|None|False|List of tags|None|
+|task|itask|None|False|Case task|None|
 |title|string|None|True|Name of the case|None|
+|tlp|integer|2|False|Traffic Light Protocol level, default is 2|None|
 
 ##### customFields
 
@@ -366,9 +634,9 @@ This action is used to close a case by ID. It returns `Found` or `NotFound` in t
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|resolution_status|string|None|False|Case resolution status|['low', 'medium', 'high']|
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|
 |impact_status|string|None|False|Case impact status|['low', 'medium', 'high']|
+|resolution_status|string|None|False|Case resolution status|['low', 'medium', 'high']|
 |summary|string|None|False|Case Summary|None|
 
 ##### Output
@@ -403,6 +671,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.6 - Update help key features and fix description capitalisation
 * 2.0.5 - New spec and help.md format for the Hub
 * 2.0.4 - Update to use the `komand/python-2-27-slim-plugin` Docker image to reduce plugin size and to support SSL Verify
 * 2.0.3 - Fix issue where SSL Verify was not used in actions that utilize requests | Updated test method and moved it to connection

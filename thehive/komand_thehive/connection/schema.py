@@ -50,7 +50,7 @@ class ConnectionSchema(komand.Input):
     "proxy": {
       "type": "object",
       "title": "Proxy",
-      "description": "An optional dictionary containing proxy data, with http or https as the key, and the proxy url as the value",
+      "description": "An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy url as the value",
       "order": 5
     },
     "verify": {

@@ -6,7 +6,7 @@ title: TheHive
 description: "TheHive is a scalable, open source security incident response solution designed for
   SOCs & CERTs to collaborate, elaborate, analyze and get their job done. Handle your case management needs with TheHive
 plugin for Rapid7 InsightConnect"
-version: 2.0.5
+version: 2.0.6
 vendor: rapid7
 support: community
 status: []
@@ -52,7 +52,7 @@ connection:
   proxy:
     type: object
     title: Proxy
-    description: An optional dictionary containing proxy data, with http or https
+    description: An optional dictionary containing proxy data, with HTTP or HTTPS
       as the key, and the proxy url as the value
     required: false
   verify:
