@@ -129,7 +129,7 @@ types:
       type: number
     autonomous_system_number:
       dsecription: Autonomous System Number
-      type: string
+      type: integer
     tags:
       description: Tags
       type: '[]string'
