@@ -63,7 +63,7 @@ class DeactivateUserOutput(komand.Output):
     "status_code": {
       "type": "integer",
       "title": "Status",
-      "description": "Http status code",
+      "description": "HTTP status code",
       "order": 1
     }
   }
