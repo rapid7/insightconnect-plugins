@@ -1,9 +1,9 @@
 import komand
-from .schema import JsonToCsvInput, JsonToCsvOutput
+from .schema import JsonToCsvInput, JsonToCsvOutput, Input, Output, Component
 # Custom imports below
 import csv
 import base64
-from io import BytesIO
+from io import StringIO
 
 
 class JsonToCsv(komand.Action):
@@ -11,29 +11,24 @@ class JsonToCsv(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='json_to_csv',
-                description='Convert a JSON array to CSV',
+                description=Component.DESCRIPTION,
                 input=JsonToCsvInput(),
                 output=JsonToCsvOutput())
 
     def run(self, params={}):
-        input_json = params.get("json")
+        input_json = params.get(Input.JSON)
 
-        output = BytesIO()
+        output = StringIO()
         csv_writer = csv.writer(output)
 
         count = 0
-        for l in input_json:
-            if count is 0:
-                header = l.keys()
+        for entry in input_json:
+            if count == 0:
+                header = entry.keys()
                 csv_writer.writerow(header)
                 count += 1
-            csv_writer.writerow(l.values())
+            csv_writer.writerow(entry.values())
 
-        resulting_csv = output.getvalue()
+        encoded = base64.encodebytes(output.getvalue().encode())
 
-        encoded = base64.encodestring(resulting_csv)
-
-        return {"csv": encoded}
-
-    def test(self):
-        return {"csv": ""}
+        return {Output.CSV: encoded.decode()}
