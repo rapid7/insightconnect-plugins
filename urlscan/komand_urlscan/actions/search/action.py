@@ -1,27 +1,21 @@
 import komand
-from .schema import SearchInput, SearchOutput
+from .schema import SearchInput, SearchOutput, Input, Component
 # Custom imports below
 from komand.exceptions import PluginException
 import requests
+import json
 
 
 class Search(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='search',
-                description='Search urlscan.io',
+                description=Component.DESCRIPTION,
                 input=SearchInput(),
                 output=SearchOutput())
 
     def run(self, params={}):
-        """TODO: Run action"""
-        server = self.connection.server
-        url = server + '/search/?q={query}&size={size}&offset={offset}&sort={sort}'.format(
-            query=params.get('q'),
-            size=str(params.get('size', 100)),
-            offset=str(params.get('offset', 0)),
-            sort=params.get('sort', '_score')
-        )
+        url = f'{self.connection.server}/search/?q={params.get(Input.Q)}&size={str(params.get(Input.SIZE, 100))}&offset={str(params.get(Input.OFFSET, 0))}&sort={params.get(Input.SORT, "_score")}'
         self.logger.info(url)
 
         try:
@@ -34,6 +28,10 @@ class Search(komand.Action):
             out = response.json()
         except json.decoder.JSONDecodeError:
             raise PluginException(cause="Received an unexpected response from the Urlscan API. ",
-                                  assistance="(non-JSON or no response was received). Response was: %s" % response.text)
+                                  assistance=f"(non-JSON or no response was received). Response was: {response.text}")
 
         return out
+
+    def test(self):
+        # TODO: Implement test function
+        return {}
