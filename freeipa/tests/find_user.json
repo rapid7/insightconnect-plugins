@@ -2,10 +2,6 @@
     "body": {
         "action": "find_user",
         "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
             "server": null
         },
         "input": {

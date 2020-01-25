@@ -2,10 +2,6 @@
     "body": {
         "action": "user_status",
         "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
             "server": null
         },
         "input": {
