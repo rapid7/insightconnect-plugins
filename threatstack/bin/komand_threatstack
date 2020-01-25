@@ -4,10 +4,10 @@ import komand
 from komand_threatstack import connection, actions, triggers
 
 
-Name = 'Threat Stack'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'The Threat Stack plugin is used to get information about alerts, assets, and policies'
+Name = "Threat Stack"
+Vendor = "rapid7"
+Version = "1.0.1"
+Description = "The Threat Stack plugin is used to get information about alerts, assets, and policies"
 
 
 class ICONThreatstack(komand.Plugin):
