@@ -119,8 +119,8 @@ class RemoveMemberFromOrgOutput(komand.Output):
     },
     "url": {
       "type": "string",
-      "title": "Url",
-      "description": "Organization url",
+      "title": "URL",
+      "description": "Organization URL",
       "order": 5
     }
   }
