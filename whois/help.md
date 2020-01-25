@@ -153,7 +153,7 @@ _This plugin has no references._
 
 # Version History
 
-* 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf
+* 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains
 * 1.0.6 - New spec and help.md format for the Hub
 * 1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK
 * 1.0.4 - Fix variable name in domain lookup
