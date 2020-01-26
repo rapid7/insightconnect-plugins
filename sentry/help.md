@@ -309,8 +309,8 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-Make sure that you are using the correct Auth Token (for all actions) and DNS configuration (for submitting an event).
-DNS configuration and Auth Tokens can be managed in your Sentry.io account settings.
+Make sure that you are using the correct Auth Token (for all actions) and DSN configuration (for submitting an event).
+DSN configuration and Auth Tokens can be managed in your Sentry.io account settings.
 
 # Version History
 
