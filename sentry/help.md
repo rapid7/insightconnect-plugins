@@ -312,7 +312,7 @@ _This plugin does not contain any custom output types._
 Make sure that you are using the correct Auth Token (for all actions) and DSN configuration (for submitting an event).
 DNS configuration can be found at https://sentry.io/settings/{organization_slug}/{project_slug}/keys/ by replacing 
 {organization_slug} and {project_slug} with the appropriate values for your organization and project. 
-Auth Tokens can be found [https://sentry.io/settings/account/api/auth-tokens/](here).
+Auth Tokens can be found [here](https://sentry.io/settings/account/api/auth-tokens/).
 
 # Version History
 
