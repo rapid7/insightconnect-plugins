@@ -404,7 +404,7 @@ Example output:
 
 #### Search WHOIS by Keyword
 
-This action is used to search whois by keyword.
+This action is used to search WHOIS by keyword.
 
 ##### Input
 

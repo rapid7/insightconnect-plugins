@@ -95,7 +95,7 @@ types:
       type: string
     guid:
       description: Artifact GUID
-      title: Guid
+      title: GUID
       type: string
     type:
       description: Type of artifact eg. domain
