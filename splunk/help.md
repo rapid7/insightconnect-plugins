@@ -23,7 +23,7 @@
 
 To connect to Splunk, you must have valid credentials and network access to the Splunk API port (Splunk's default is TCP/8089). This plugin supports both the Free and Enterprise Splunk licenses.
 
-To configure an alert trigger, the Splunk server must be able to connect back to the Komand server via http(s) ports to send webhook events.
+To configure an alert trigger, the Splunk server must be able to connect back to the InsightConnect server via http(s) ports to send webhook events.
 
 The connection configuration accepts the following parameters:
 
@@ -36,7 +36,9 @@ The connection configuration accepts the following parameters:
 |ssl_verify|boolean|None|True|Verify server's SSL/TLS certificate|None|
 |use_ssl|boolean|None|True|Whether or not to use SSL|None|
 
-If using the Splunk free license, configure your Splunk instance to allow remote login by adding the following line to the general stanza in `$SPLUNK_HOME/etc/system/local/server.conf`:
+To configure an alert trigger, the Splunk server must be able to connect back to the InsightConnect server via http(s) ports to send webhook events.
+
+To configure your Splunk instance to allow remote login by adding the following line to the general stanza in `$SPLUNK_HOME/etc/system/local/server.conf`:
 
 ```
 
@@ -220,7 +222,28 @@ This action is used to return the job history of a specified saved search.
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### Alert
+
+This trigger allows you to configure a Splunk Alert to send data to InsightConnect. It will add a webhook action to the Splunk actions to send the data to InsightConnect.
+
+Any other webhook will be overwritten. You must have the name of the alert to hook.
+
+By default, this trigger makes a request every 15 seconds to establish the webhook.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|interval|integer|15|False|Poll interval in seconds|None|
+|names|[]string|None|True|Names of the alerts to hook|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results_link|string|False|None|
+|result|object|False|None|
+|search_name|string|False|None|
 
 ### Custom Output Types
 
