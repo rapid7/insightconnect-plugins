@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "search_whois",
+        "connection": {
+            "api_key": {
+                "secretKey": ""
+            },
+            "username": ""
+        },
+        "input": {
+            "field": "domain",
+            "query": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}
