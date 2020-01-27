@@ -222,28 +222,7 @@ This action is used to return the job history of a specified saved search.
 
 ### Triggers
 
-#### Alert
-
-This trigger allows you to configure a Splunk Alert to send data to InsightConnect. It will add a webhook action to the Splunk actions to send the data to InsightConnect.
-
-Any other webhook will be overwritten. You must have the name of the alert to hook.
-
-By default, this trigger makes a request every 15 seconds to establish the webhook.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|interval|integer|15|False|Poll interval in seconds|None|
-|names|[]string|None|True|Names of the alerts to hook|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results_link|string|False|None|
-|result|object|False|None|
-|search_name|string|False|None|
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
