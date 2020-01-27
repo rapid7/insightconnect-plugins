@@ -490,7 +490,7 @@ actions:
         required: true
       query:
         title: Query
-        description: Input query, e.g. PassiveTotal.org
+        description: Input query, e.g. www.google.com
         type: string
         required: true
     output:
