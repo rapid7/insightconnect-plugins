@@ -237,7 +237,7 @@ _This plugin does not contain any custom output types._
 * 3.0.0 - Remove Komand-specific Alert trigger | Fix invalid output properties | Numerous typographical fixes | Improve error handling | Smaller plugin size due to slim SDK migration | New connection test code
 * 2.0.0 - Support SSL Verify option in the Connection | Improve error handling in Connection | Update documentation
 * 1.1.0 - Add support for user specified number of results in the Search action
-* 1.0.1 - Fix issue where json module was not imported in Search action
+* 1.0.1 - Fix issue where JSON module was not imported in Search action
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Support free Splunk license
 * 0.2.4 - SSL bug fix in SDK
 * 0.2.3 - UTF-8 encode events in the insert action
