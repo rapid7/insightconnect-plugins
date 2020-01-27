@@ -207,7 +207,7 @@ Value of the parameter `board_actions_since` is valid with:
 |prefs|object|False|Prefs|
 |premiumFeatures|[]string|False|Premium features|
 |products|[]integer|False|Products|
-|url|string|False|Url|
+|url|string|False|URL|
 
 #### Remove Member from Board
 
