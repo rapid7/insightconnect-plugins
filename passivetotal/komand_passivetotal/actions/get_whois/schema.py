@@ -32,7 +32,7 @@ class GetWhoisInput(komand.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "Input query, e.g. passivetotal.org",
+      "description": "Input query, e.g. PassiveTotal.org",
       "order": 2
     }
   },

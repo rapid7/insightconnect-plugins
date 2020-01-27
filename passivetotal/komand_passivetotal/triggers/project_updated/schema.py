@@ -83,7 +83,7 @@ class ProjectUpdatedOutput(komand.Output):
         },
         "guid": {
           "type": "string",
-          "title": "Guid",
+          "title": "GUID",
           "description": "Artifact GUID",
           "order": 13
         },

@@ -363,7 +363,7 @@ This action is used to [query WHOIS](https://api.passivetotal.org/api/docs/#api-
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |compact_record|boolean|None|True|Set to true to return a compact record|None|
-|query|string|None|True|Input query, e.g. passivetotal.org|None|
+|query|string|None|True|Input query, e.g. PassiveTotal.org|None|
 
 ##### Output
 

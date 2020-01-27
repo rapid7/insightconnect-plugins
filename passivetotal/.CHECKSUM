@@ -1,5 +1,5 @@
 {
-	"spec": "15a3f15219e239f634251b65aeabf3dc",
+	"spec": "e80788579a28b176c39f3de27aadb165",
 	"manifest": "d41d8cd98f00b204e9800998ecf8427e",
 	"setup": "035b13c890c629fdc09499c9cf169e65",
 	"schemas": [
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "get_whois/schema.py",
-			"hash": "64259dc40a74567ba69ca81f8b4ecb11"
+			"hash": "90447c63c5bb80721146532d599ce776"
 		},
 		{
 			"identifier": "history_ssl/schema.py",
@@ -53,7 +53,7 @@
 		},
 		{
 			"identifier": "project_updated/schema.py",
-			"hash": "c160a4b52ef1687dee4d996d623e7e6c"
+			"hash": "006577757356a434491cbb6737f88da9"
 		}
 	]
 }
