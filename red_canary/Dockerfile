@@ -15,11 +15,16 @@ ADD . /python/src
 WORKDIR /python/src
 # Add any package dependencies here
 
-RUN apk add --no-cache gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
+# Removed the below line as it was needed for dependency compilation. Dependencies are now vendored into the vendor/
+# directory, thus making these package dependencies obsolete. If the wheel files ever need to be updated, this line
+# can be uncommented to do so.
+#RUN apk add --no-cache gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
 
 # End package dependencies
+RUN pip install wheel && pip install vendor/*.whl && \
+		python setup.py build && python setup.py install
+
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-RUN python setup.py build && python setup.py install
 
 # User to run plugin code. The two supported users are: root, nobody
 USER root
