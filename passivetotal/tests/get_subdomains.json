@@ -1,0 +1,17 @@
+{
+    "body": {
+        "action": "get_subdomains",
+        "connection": {
+            "api_key": {
+                "secretKey": ""
+            },
+            "username": ""
+        },
+        "input": {
+            "query": "rapid7.com"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}
