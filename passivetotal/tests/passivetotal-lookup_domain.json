@@ -3,12 +3,12 @@
         "action": "lookup_domain",
         "connection": {
             "api_key": {
-                "secretKey": null
+                "secretKey": ""
             },
-            "username": null
+            "username": ""
         },
         "input": {
-            "domain": ""
+            "domain": "rapid7.com"
         },
         "meta": {}
     },

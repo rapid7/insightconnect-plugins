@@ -9,7 +9,7 @@
         },
         "input": {
             "field": "domain",
-            "query": ""
+            "query": "example.com"
         },
         "meta": {}
     },

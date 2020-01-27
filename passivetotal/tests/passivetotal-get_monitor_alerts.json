@@ -3,9 +3,9 @@
         "action": "get_monitor_alerts",
         "connection": {
             "api_key": {
-                "secretKey": null
+                "secretKey": ""
             },
-            "username": null
+            "username": ""
         },
         "input": {
             "artifact": "",

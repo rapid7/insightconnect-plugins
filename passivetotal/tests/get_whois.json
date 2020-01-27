@@ -9,7 +9,7 @@
         },
         "input": {
             "compact_record": false,
-            "query": ""
+            "query": "example.com"
         },
         "meta": {}
     },

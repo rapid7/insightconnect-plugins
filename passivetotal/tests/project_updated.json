@@ -2,17 +2,17 @@
     "body": {
         "connection": {
             "api_key": {
-                "secretKey": null
+                "secretKey": ""
             },
-            "username": null
+            "username": ""
         },
         "dispatcher": {
             "url": "http://localhost:8000",
             "webhook_url": ""
         },
         "input": {
-            "project_name": "My Public Project",
-            "update_interval": 900
+            "project_name": "My test project",
+            "frequency": 60
         },
         "meta": {},
         "trigger": "project_updated"

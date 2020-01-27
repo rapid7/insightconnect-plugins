@@ -3,9 +3,9 @@
         "action": "lookup_address",
         "connection": {
             "api_key": {
-                "secretKey": null
+                "secretKey": ""
             },
-            "username": null
+            "username": ""
         },
         "input": {
             "address": "4.2.2.2"

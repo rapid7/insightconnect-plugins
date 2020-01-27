@@ -3,12 +3,12 @@
         "action": "lookup_addresses",
         "connection": {
             "api_key": {
-                "secretKey": null
+                "secretKey": ""
             },
-            "username": null
+            "username": ""
         },
         "input": {
-            "addresses": []
+            "addresses": ["rapid7.com", "127.0.0.1"]
         },
         "meta": {}
     },
