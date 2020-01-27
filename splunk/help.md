@@ -6,8 +6,8 @@
 
 * Run a search query to get the results from your Splunk instance
 * Display search results from a specified job
-* Run, Create, Delete, and List saved searches to store and rerun queries over time
-* List and Modify saved search properties to view and update your reusable queries
+* Run, create, delete, and list saved searches to store and rerun queries over time
+* List and modify saved search properties to view and update your reusable queries
 * Get saved search job history to retrieve the history of a specified saved search
 * Insert events into an index to update your Splunk instance
 
@@ -23,17 +23,6 @@
 
 To connect to Splunk, you must have valid credentials and network access to the Splunk API port (Splunk's default is TCP/8089). This plugin supports both the Free and Enterprise Splunk licenses.
 
-If use the Splunk free license, configure your Splunk instance to allow remote login by adding the following line to the general stanza in `$SPLUNK_HOME/etc/system/local/server.conf`:
-
-```
-
-[general]
-allowRemoteLogin = always
-
-```
-
-There's no authentication in the free license, so set `license` to `Free` and omit input to the username and password fields.
-
 To configure an alert trigger, the Splunk server must be able to connect back to the Komand server via http(s) ports to send webhook events.
 
 The connection configuration accepts the following parameters:
@@ -46,6 +35,17 @@ The connection configuration accepts the following parameters:
 |license|string|None|True|License type for Splunk host|['Enterprise', 'Free']|
 |use_ssl|boolean|None|False|Use HTTPs|None|
 |ssl_verify|boolean|None|True|Verify server's SSL/TLS certificate|None|
+
+If using the Splunk free license, configure your Splunk instance to allow remote login by adding the following line to the general stanza in `$SPLUNK_HOME/etc/system/local/server.conf`:
+
+```
+
+[general]
+allowRemoteLogin = always
+
+```
+
+There's no authentication in the free license, so set `license` to `Free` and omit input to the username and password fields.
 
 ## Technical Details
 
