@@ -29,12 +29,12 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|host|string|None|False|Host of Splunk server to connect to|None|
 |credentials|credential_username_password|None|False|Username and password|None|
-|port|integer|8089|False|None|None|
+|host|string|None|True|Hostname or IP address of Splunk server to connect to e.g. splunk.example.com|None|
 |license|string|None|True|License type for Splunk host|['Enterprise', 'Free']|
-|use_ssl|boolean|None|False|Use HTTPs|None|
+|port|integer|8089|True|Port the Splunk API is listening on. Default is 8089|None|
 |ssl_verify|boolean|None|True|Verify server's SSL/TLS certificate|None|
+|use_ssl|boolean|None|True|Whether or not to use SSL|None|
 
 If using the Splunk free license, configure your Splunk instance to allow remote login by adding the following line to the general stanza in `$SPLUNK_HOME/etc/system/local/server.conf`:
 
@@ -51,23 +51,42 @@ There's no authentication in the free license, so set `license` to `Free` and om
 
 ### Actions
 
+#### List Saved Searches
+
+This action lists all saved searches.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|saved_searches|[]object|False|Array of saved search objects|
+
+Example Output:
+
+```
+```
+
 #### Insert
 
-This action allows you to index (insert) an event in Splunk.
+This action is used to insert events into an index.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|source|string|None|False|Source of the event (e.g., /var/log/syslog)|None|
-|index|string|None|True|Name of index|None|
-|host|string|None|False|The source host, e.g. localhost or 192.168.2.2|None|
-|sourcetype|string|None|False|The optional source type value of the event (e.g. access_combined, syslog)|None|
 |event|string|None|True|The event to submit|None|
+|host|string|None|False|The source host, e.g. localhost or 192.168.2.2|None|
+|index|string|None|True|Name of index|None|
+|source|string|None|False|Source of the event (e.g., /var/log/syslog)|None|
+|sourcetype|string|None|False|The optional source type value of the event (e.g. access_combined, syslog)|None|
 
 ##### Output
 
-This action does not contain any outputs.
+_This action does not contain any outputs._
 
 #### Search
 
@@ -77,8 +96,8 @@ This action allows you run a search command in Splunk.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|query|string|None|True|Run a search query (e.g. search *)|None|
 |count|integer|100|True|The maximum number of results to return. Set to 0 for unlimited results|None|
+|query|string|None|True|Run a search query (e.g. search *)|None|
 
 ##### Output
 
@@ -96,8 +115,8 @@ A full list of saved search properties can be found [here](http://dev.splunk.com
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|saved_search_name|string|None|True|Name of saved search to display properties for|None|
 |properties|object|None|True|JSON object of properties and values to modify|None|
+|saved_search_name|string|None|True|Name of saved search to display properties for|None|
 
 ##### Output
 
@@ -113,7 +132,7 @@ This action is used to run a saved search.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|saved_search_name|string|None|True|None|None|
+|saved_search_name|string|None|True|Name of saved search to run|None|
 
 ##### Output
 
@@ -162,7 +181,7 @@ This action is used to display the search results from a job.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |job_id|string|None|True|Job ID to look up results for|None|
-|timeout|number|None|True|Duration of time to wait for retrieving results|None|
+|timeout|number|None|True|Duration of time, in seconds, to wait for retrieving results|None|
 
 ##### Output
 
@@ -170,15 +189,493 @@ This action is used to display the search results from a job.
 |----|----|--------|-----------|
 |search_results|[]object|False|Search results from a job|
 
-#### List Saved Searches
+_This action does not contain any inputs._
 
-This action is used to list all saved searches. Note that the Splunk API returns credential information in clear-text for this action's output.
+#_This action does not contain any inputs._
 
-##### Input
+#_This action does not contain any inputs._
 
-This action does not contain any inputs.
+#_This action does not contain any inputs._
 
-##### Output
+#_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+L_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+S_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+v_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+d_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+S_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+h_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+T_This action does not contain any inputs._
+
+h_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+d_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+l_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+l_This action does not contain any inputs._
+
+l_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+v_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+d_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+h_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+._This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+N_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+h_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+h_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+S_This action does not contain any inputs._
+
+p_This action does not contain any inputs._
+
+l_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+k_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+A_This action does not contain any inputs._
+
+P_This action does not contain any inputs._
+
+I_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+d_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+l_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+f_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+m_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+l_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+-_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+x_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+f_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+r_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+h_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+'_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+p_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+._This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+I_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+p_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+T_This action does not contain any inputs._
+
+h_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+d_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+e_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+c_This action does not contain any inputs._
+
+o_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+a_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+y_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+i_This action does not contain any inputs._
+
+n_This action does not contain any inputs._
+
+p_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+s_This action does not contain any inputs._
+
+._This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+
+_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+#_This action does not contain any inputs._
+
+ _This action does not contain any inputs._
+
+O_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+p_This action does not contain any inputs._
+
+u_This action does not contain any inputs._
+
+t_This action does not contain any inputs._
+
+
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -192,9 +689,9 @@ This action is used to create a saved search.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|properties|object|None|False|JSON object containing additional properties to save with the saved search|None|
 |query|string|None|True|Search query|None|
 |saved_search_name|string|None|True|Name to give to the saved search|None|
-|properties|object|None|False|JSON object containing additional properties to save with the saved search|None|
 
 ##### Output
 
@@ -220,27 +717,7 @@ This action is used to return the job history of a specified saved search.
 
 ### Triggers
 
-#### Alert
-
-This trigger allows you to configure a Splunk Alert to send data to Komand. It will add a webhook action to the Splunk actions to send the data to Komand.
-Any other webhook will be overwritten. You must have the name of the alert to hook.
-
-By default, this trigger makes a request every 15 seconds to establish the webhook.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|interval|integer|15|False|Poll interval in seconds|None|
-|names|[]string|None|True|Names of the alerts to hook|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results_link|string|False|None|
-|result|object|False|None|
-|search_name|string|False|None|
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
