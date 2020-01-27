@@ -1,6 +1,17 @@
 {
     "body": {
         "action": "modify_saved_search_properties",
+        "connection": {
+            "credentials": {
+                "password": "",
+                "username": ""
+            },
+            "host": "",
+            "license": "",
+            "port": "",
+            "ssl_verify": "",
+            "use_ssl": ""
+        },
         "input": {
             "properties": {},
             "saved_search_name": ""

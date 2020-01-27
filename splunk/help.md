@@ -36,7 +36,7 @@ The connection configuration accepts the following parameters:
 |ssl_verify|boolean|None|True|Verify server's SSL/TLS certificate|None|
 |use_ssl|boolean|None|True|Whether or not to use SSL|None|
 
-To configure your Splunk instance to allow remote login by adding the following line to the general stanza in `$SPLUNK_HOME/etc/system/local/server.conf`:
+To configure your Splunk instance to allow remote login add the following line to the general stanza in `$SPLUNK_HOME/etc/system/local/server.conf`:
 
 ```
 
@@ -46,9 +46,6 @@ allowRemoteLogin = always
 ```
 
 There's no authentication in the free license, so set `license` to `Free` and omit input to the username and password fields.
-
-To get Splunk alerts or send saved searches to InsightConnect, please use the [InsightConnect Splunk App](https://splunkbase.splunk.com/app/4673/).
-
 
 ## Technical Details
 

@@ -1,5 +1,16 @@
 {
     "body": {
+        "connection": {
+            "credentials": {
+                "password": "",
+                "username": ""
+            },
+            "host": "",
+            "license": "",
+            "port": "",
+            "ssl_verify": "",
+            "use_ssl": ""
+        },
         "dispatcher": {
             "url": "http://localhost:8000",
             "webhook_url": ""

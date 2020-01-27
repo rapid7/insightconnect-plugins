@@ -1,6 +1,17 @@
 {
     "body": {
         "action": "display_search_results",
+        "connection": {
+            "credentials": {
+                "password": "",
+                "username": ""
+            },
+            "host": "",
+            "license": "",
+            "port": "",
+            "ssl_verify": "",
+            "use_ssl": ""
+        },
         "input": {
             "job_id": "",
             "timeout": 0

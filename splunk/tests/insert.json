@@ -1,6 +1,17 @@
 {
     "body": {
         "action": "insert",
+        "connection": {
+            "credentials": {
+                "password": "",
+                "username": ""
+            },
+            "host": "",
+            "license": "",
+            "port": "",
+            "ssl_verify": "",
+            "use_ssl": ""
+        },
         "input": {
             "event": "",
             "host": "",

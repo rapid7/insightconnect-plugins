@@ -1,6 +1,17 @@
 {
     "body": {
         "action": "search",
+        "connection": {
+            "credentials": {
+                "password": "",
+                "username": ""
+            },
+            "host": "",
+            "license": "",
+            "port": "",
+            "ssl_verify": "",
+            "use_ssl": ""
+        },
         "input": {
             "count": 100,
             "query": ""
