@@ -15,7 +15,7 @@ ADD . /python/src
 WORKDIR /python/src
 # Add any package dependencies here
 
-RUN apk add build-base --no-cache
+RUN apk add --no-cache gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
 
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
