@@ -1,7 +1,7 @@
 {
-	"spec": "7a814cc8d02b42a1936216ae0b564929",
-	"manifest": "eaf15d33d7086035ac66357a0a89cf88",
-	"setup": "dd8deb07a2ef84583ee78d4654e884f3",
+	"spec": "adcd33d828c4055ba85967016a30ca84",
+	"manifest": "6ec83e0295839338f3b61b5347642149",
+	"setup": "07e53c382985abdd002b814d120e7429",
 	"schemas": [
 		{
 			"identifier": "decr/schema.py",
