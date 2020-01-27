@@ -311,7 +311,7 @@ This action is used to [search WHOIS](https://api.passivetotal.org/api/docs/#api
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |field|string|None|True|Field to search on|['domain', 'email', 'name', 'organization', 'address', 'phone', 'nameserver']|
-|query|string|None|True|Input query, e.g. email@passivetotal.org|None|
+|query|string|None|True|Input query, e.g. user@example.com|None|
 
 ##### Output
 
@@ -410,7 +410,7 @@ This action is used to search whois by keyword.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|query|string|None|True|Input query, e.g. email@passivetotal.org|None|
+|query|string|None|True|Input query, e.g. user@example.com|None|
 
 ##### Output
 

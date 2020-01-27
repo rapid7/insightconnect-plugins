@@ -523,7 +523,7 @@ actions:
         required: true
       query:
         title: Query
-        description: Input query, e.g. email@passivetotal.org
+        description: Input query, e.g. user@example.com
         type: string
         required: true
     output:
@@ -543,7 +543,7 @@ actions:
     input:
       query:
         title: Query
-        description: Input query, e.g. email@passivetotal.org
+        description: Input query, e.g. user@example.com
         type: string
         required: true
     output:

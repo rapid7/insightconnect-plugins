@@ -41,7 +41,7 @@ class SearchWhoisInput(komand.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "Input query, e.g. email@passivetotal.org",
+      "description": "Input query, e.g. user@example.com",
       "order": 2
     }
   },
