@@ -672,8 +672,8 @@ class MemberListOutput(komand.Output):
     },
     "url": {
       "type": "string",
-      "title": "Url",
-      "description": "Url",
+      "title": "URL",
+      "description": "URL",
       "order": 15
     }
   },

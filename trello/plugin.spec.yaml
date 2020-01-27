@@ -515,8 +515,8 @@ actions:
         type: integer
         required: false
       url:
-        title: Url
-        description: Url
+        title: URL
+        description: URL
         type: string
         required: false
       premiumFeatures:
