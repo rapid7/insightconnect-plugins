@@ -65,11 +65,6 @@ _This action does not contain any inputs._
 |----|----|--------|-----------|
 |saved_searches|[]object|False|Array of saved search objects|
 
-Example Output:
-
-```
-```
-
 #### Insert
 
 This action is used to insert events into an index.
