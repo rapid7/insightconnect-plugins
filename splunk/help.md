@@ -25,8 +25,6 @@ To get Splunk alerts or send saved searches to InsightConnect, please use the [I
 
 To connect to Splunk, you must have valid credentials and network access to the Splunk API port (Splunk's default is TCP/8089). This plugin supports both the Free and Enterprise Splunk licenses.
 
-To configure an alert trigger, the Splunk server must be able to connect back to the InsightConnect server via http(s) ports to send webhook events.
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
@@ -37,8 +35,6 @@ The connection configuration accepts the following parameters:
 |port|integer|8089|True|Port the Splunk API is listening on. Default is 8089|None|
 |ssl_verify|boolean|None|True|Verify server's SSL/TLS certificate|None|
 |use_ssl|boolean|None|True|Whether or not to use SSL|None|
-
-To configure an alert trigger, the Splunk server must be able to connect back to the InsightConnect server via http(s) ports to send webhook events.
 
 To configure your Splunk instance to allow remote login by adding the following line to the general stanza in `$SPLUNK_HOME/etc/system/local/server.conf`:
 
