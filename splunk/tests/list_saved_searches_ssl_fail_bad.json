@@ -1,17 +1,6 @@
 {
     "body": {
         "action": "list_saved_searches",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "host": null,
-            "license": null,
-            "port": null,
-            "ssl_verify": null,
-            "use_ssl": null
-        },
         "input": {},
         "meta": {}
     },
