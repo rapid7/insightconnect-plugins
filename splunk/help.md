@@ -2,6 +2,8 @@
 
 [Splunk](https://www.splunk.com/) captures, indexes, and correlates real-time data in a searchable repository from which it can generate graphs, reports, alerts, dashboards, and visualizations. This plugin allows you to interact with Splunk by hooking alerts to trigger InsightConnect workflows, run (saved) searches, retrieve search results, and even insert data back into Splunk from a workflow.
 
+To get Splunk alerts or send saved searches to InsightConnect, please use the [InsightConnect Splunk App](https://splunkbase.splunk.com/app/4673/).
+
 # Key Features
 
 * Run a search query to get the results from your Splunk instance
@@ -48,6 +50,9 @@ allowRemoteLogin = always
 ```
 
 There's no authentication in the free license, so set `license` to `Free` and omit input to the username and password fields.
+
+To get Splunk alerts or send saved searches to InsightConnect, please use the [InsightConnect Splunk App](https://splunkbase.splunk.com/app/4673/).
+
 
 ## Technical Details
 
@@ -255,3 +260,4 @@ _This plugin does not contain any custom output types._
 ## References
 
 * [Splunk](https://www.splunk.com/)
+* [InsightConnect Splunk App](https://splunkbase.splunk.com/app/4673/)
