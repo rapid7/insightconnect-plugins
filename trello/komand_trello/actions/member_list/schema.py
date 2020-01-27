@@ -342,7 +342,7 @@ class MemberListInput(komand.Input):
     "fields": {
       "type": "string",
       "title": "Fields Organization",
-      "description": "Field of organization, default: name,displayName,desc,descData,url,website,logoHash,products,powerUps",
+      "description": "Field of organization, default: name,displayName,desc,descData,URL,website,logoHash,products,powerUps",
       "enum": [
         "",
         "all",
