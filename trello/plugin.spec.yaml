@@ -4,7 +4,7 @@ products: [insightconnect]
 name: trello
 title: Trello
 description: Manage members and their permissions in your Trello organization
-version: 2.0.2
+version: 3.0.0
 vendor: rapid7
 support: community
 status: []
@@ -421,7 +421,7 @@ actions:
         required: false
       fields:
         title: Fields Organization
-        description: 'Field of organization, default: name,displayName,desc,descData,url,website,logoHash,products,powerUps'
+        description: 'Field of organization, default: name,displayName,desc,descData,URL,website,logoHash,products,powerUps'
         type: string
         enum:
         - ''
@@ -809,8 +809,8 @@ actions:
         required: false
       url:
         type: string
-        title: Url
-        description: Organization url
+        title: URL
+        description: Organization URL
         required: false
       products:
         title: Products
@@ -865,7 +865,7 @@ actions:
       shortUrl:
         type: string
         title: Short URL
-        description: Short url
+        description: Short URL
         required: false
       idOrganization:
         type: string
@@ -926,7 +926,7 @@ actions:
       status_code:
         type: integer
         title: Status
-        description: Http status code
+        description: HTTP status code
         required: false
   deactivated_list:
     title: Deactivated List

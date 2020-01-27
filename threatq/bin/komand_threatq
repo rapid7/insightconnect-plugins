@@ -4,10 +4,10 @@ import komand
 from komand_threatq import connection, actions, triggers
 
 
-Name = 'Threat Quotient'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'The ThreatQ plugin provides ability to work with Threat Quotient indicators and events'
+Name = "Threat Quotient"
+Vendor = "rapid7"
+Version = "1.0.2"
+Description = "The ThreatQ plugin provides ability to work with Threat Quotient indicators and events"
 
 
 class ICONThreatq(komand.Plugin):

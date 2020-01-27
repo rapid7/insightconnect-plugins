@@ -1,6 +1,6 @@
 # Description
 
-[Sentry](https://sentry.io/) is an open-source error tracking tool that helps developers monitor and fix crashes
+[Sentry](https://sentry.io/welcome/) is an open-source error tracking tool that helps developers monitor and fix crashes
 in real time. Users can manage issues and events with the Sentry plugin for Rapid7 InsightConnect. Automatically
 triage application issues to other ticketing systems, quickly and effectively when using Sentry within a workflow.
 
@@ -119,7 +119,7 @@ Example output:
       "shareId": "56aa20f0994d428c90bf9382f1c279a9",
       "firstSeen": "2018-07-18T16:51:40Z",
       "count": "3",
-      "permalink": "https://sentry.io/komand-test/pythontest/issues/612424900/",
+      "permalink": "",
       "level": "error",
       "isSubscribed": true,
       "isBookmarked": true,
@@ -284,7 +284,7 @@ Example output:
     "shareId": "0dea15d594a94880bc2016b0e5e498ec",
     "firstSeen": "2018-07-18T16:51:40Z",
     "count": "3",
-    "permalink": "https://sentry.io/komand-test/pythontest/issues/612424900/",
+    "permalink": "",
     "level": "error",
     "isSubscribed": true,
     "isBookmarked": true,
@@ -310,7 +310,7 @@ _This plugin does not contain any custom output types._
 ## Troubleshooting
 
 Make sure that you are using the correct Auth Token (for all actions) and DSN configuration (for submitting an event).
-You can find the [https://sentry.io/settings/{organization_slug}/{project_slug}/keys/](DNS configuration) and [https://sentry.io/settings/account/api/auth-tokens/](Auth Tokens), respectively.
+DSN configuration and Auth Tokens can be managed in your Sentry.io account settings.
 
 # Version History
 
