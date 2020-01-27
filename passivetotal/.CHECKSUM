@@ -1,7 +1,7 @@
 {
-	"spec": "4ce834204682c5fb8cabe4b505785023",
+	"spec": "42b641747e71524a8d222812ee30bbae",
 	"manifest": "d41d8cd98f00b204e9800998ecf8427e",
-	"setup": "62ad58212f25e134a19a8f57720e4b87",
+	"setup": "035b13c890c629fdc09499c9cf169e65",
 	"schemas": [
 		{
 			"identifier": "get_monitor_alerts/schema.py",
@@ -21,11 +21,11 @@
 		},
 		{
 			"identifier": "lookup_address/schema.py",
-			"hash": "b1c88bc1dcac357b70b67c5eee16fa15"
+			"hash": "0eb2bcac9077fc3d3b4e1b0b2c9892a4"
 		},
 		{
 			"identifier": "lookup_addresses/schema.py",
-			"hash": "ee28763012724eb284143d1994ddaab9"
+			"hash": "398b02e77b1a0952e5f77eb3a378b167"
 		},
 		{
 			"identifier": "lookup_domain/schema.py",
@@ -37,7 +37,7 @@
 		},
 		{
 			"identifier": "lookup_ssl/schema.py",
-			"hash": "a3b2a5000c4afb462095d38d3a55fc93"
+			"hash": "7c3860753caac0d0856a41730326e2b8"
 		},
 		{
 			"identifier": "search_whois/schema.py",

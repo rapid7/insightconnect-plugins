@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='passivetotal-rapid7-plugin',
-      version='1.0.1',
-      description='Use PassiveTotal to analyze domains, addresses, and WHOIS data',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="passivetotal-rapid7-plugin",
+      version="1.0.2",
+      description="Use PassiveTotal to analyze domains, addresses, and WHOIS data",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_passivetotal']

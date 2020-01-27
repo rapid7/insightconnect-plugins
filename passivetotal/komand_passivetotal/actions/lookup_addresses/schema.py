@@ -79,7 +79,7 @@ class LookupAddressesOutput(komand.Output):
           "order": 2
         },
         "autonomous_system_number": {
-          "type": "string",
+          "type": "integer",
           "title": "Autonomous System Number",
           "order": 8
         },
