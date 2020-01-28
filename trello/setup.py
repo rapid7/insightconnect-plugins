@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='trello-rapid7-plugin',
-      version='2.0.2',
-      description='Manage members and their permissions in your Trello organization',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="trello-rapid7-plugin",
+      version="3.0.0",
+      description="Manage members and their permissions in your Trello organization",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_trello']
