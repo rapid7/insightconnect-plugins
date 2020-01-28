@@ -1,8 +1,8 @@
 # Description
 
-[WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying databases that store the registered users or assignee's of an Internet resource, such as a domain name, an IP address block, or an autonomous system, but is also used for a wider range of other information.
-
-The WHOIS plugin enables address and domain lookups in the WHOIS databases.
+[WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying
+databases that store the registered users or assignee's of an Internet resource, such as a domain name, an IP address
+block, or an autonomous system.
 
 # Key Features
 
@@ -153,7 +153,7 @@ _This plugin has no references._
 
 # Version History
 
-* 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains
+* 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains | Updated help.md for the Hub
 * 1.0.6 - New spec and help.md format for the Hub
 * 1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK
 * 1.0.4 - Fix variable name in domain lookup
