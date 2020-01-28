@@ -4,10 +4,10 @@ import komand
 from komand_vxstream_sandbox import connection, actions, triggers
 
 
-Name = 'VxStream Sandbox'
-Vendor = 'rapid7'
-Version = '3.0.0'
-Description = 'A plugin to interact with a VxStream Malware analysis service. This plugin allows a user to submit files for analysis and view the file report details. It can also search the service for any matching file hashes'
+Name = "Falcon Sandbox"
+Vendor = "rapid7"
+Version = "4.0.0"
+Description = "A plugin to interact with the Falcon Sandbox service. This plugin allows a user to submit files for analysis and view the file report details. It can also search the service for any matching file hashes"
 
 
 class ICONVxstreamSandbox(komand.Plugin):

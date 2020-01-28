@@ -54,7 +54,7 @@ class SubmitInput(komand.Input):
       "type": "string",
       "title": "File",
       "displayType": "bytes",
-      "description": "File to be analyzed. See https://vxstream-sandbox.com/faq for supported filetypes",
+      "description": "File to be analyzed. See https://www.falcon-sandbox.com/faq for supported filetypes",
       "format": "bytes",
       "order": 1
     },

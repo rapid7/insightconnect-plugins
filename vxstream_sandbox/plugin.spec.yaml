@@ -2,23 +2,23 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: vxstream_sandbox
-title: VxStream Sandbox
+title: Falcon Sandbox
 vendor: rapid7
 support: community
 status: []
-description: A plugin to interact with a VxStream Malware analysis service. This plugin allows a user to submit files for analysis and view the file report details. It can also search the service for any matching file hashes
-version: 3.0.0
+description: A plugin to interact with the Falcon Sandbox service. This plugin allows a user to submit files for analysis and view the file report details. It can also search the service for any matching file hashes
+version: 4.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/vxstream_sandbox
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://www.payload-security.com
+  vendor_url: https://www.crowdstrike.com/endpoint-security-products/falcon-sandbox-malware-analysis/
 tags:
 - malware
 - sandbox
 - malware analysis
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [malware, sandbox, malware analysis, vxstream]
+  keywords: [malware, sandbox, malware analysis, falcon sandbox]
   features: []
 types:
   dates:
@@ -1095,9 +1095,9 @@ types:
 connection:
   server:
     type: string
-    description: VxStream Sandbox API Server URL
+    description: Falcon Sandbox API Server URL
     required: true
-    default: https://www.hybrid-analysis.com/api
+    default: https://www.falcon-sandbox.com/api
   api_key:
     title: API Key
     type: credential_secret_key
@@ -1114,7 +1114,7 @@ actions:
     description: Submit file for analysis
     input:
       file:
-        description: File to be analyzed. See https://vxstream-sandbox.com/faq for
+        description: File to be analyzed. See https://www.falcon-sandbox.com/faq for
           supported filetypes
         type: bytes
         required: true

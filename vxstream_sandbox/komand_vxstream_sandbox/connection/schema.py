@@ -30,8 +30,8 @@ class ConnectionSchema(komand.Input):
     "server": {
       "type": "string",
       "title": "Server",
-      "description": "VxStream Sandbox API Server URL",
-      "default": "https://www.hybrid-analysis.com/api",
+      "description": "Falcon Sandbox API Server URL",
+      "default": "https://www.falcon-sandbox.com/api",
       "order": 1
     }
   },

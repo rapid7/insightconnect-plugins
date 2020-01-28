@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='vxstream_sandbox-rapid7-plugin',
-      version='3.0.0',
-      description='A plugin to interact with a VxStream Malware analysis service. This plugin allows a user to submit files for analysis and view the file report details. It can also search the service for any matching file hashes',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="vxstream_sandbox-rapid7-plugin",
+      version="4.0.0",
+      description="A plugin to interact with the Falcon Sandbox service. This plugin allows a user to submit files for analysis and view the file report details. It can also search the service for any matching file hashes",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_vxstream_sandbox']
