@@ -6,9 +6,8 @@ This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
 
 # Key Features
 
-* Manage tickets
-* Manage users
-* Search Zendesk
+* Create, manage, and delete issues and epics
+* Retrieve data about events, issues, epics, and boards
 
 # Requirements
 
