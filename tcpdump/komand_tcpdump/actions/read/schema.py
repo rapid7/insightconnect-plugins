@@ -28,7 +28,7 @@ class ReadInput(komand.Input):
     "filter": {
       "type": "string",
       "title": "BPF",
-      "description": "Berkely Packet Filter E.g. tcp and port 22",
+      "description": "Berkeley Packet Filter E.g. TCP and port 22",
       "order": 3
     },
     "options": {
