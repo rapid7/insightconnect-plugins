@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='statsd-rapid7-plugin',
-      version='1.0.1',
-      description='The Statsd plugin will allow you to create metrics from your workflow',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="statsd-rapid7-plugin",
+      version="1.0.1",
+      description="The Statsd plugin will allow you to create metrics from your workflow",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_statsd']
