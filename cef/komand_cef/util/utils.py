@@ -4,7 +4,6 @@ Source: https://github.com/hpsec/cefp/blob/master/contrib/python/cefp.py
 Notes: Modified to work with python 3
 '''
 
-import json
 import re
 from komand.exceptions import PluginException
 
@@ -75,14 +74,6 @@ def unescape_cef_value(s):
     return s.replace('\\=', '=').replace('\\\\', '\\')
 
 
-def cef_to_json(line):
-    return json.dumps(parse_cef(line))
-
-
-def json_to_cef(line):
-    return item_as_cef(json.loads(line))
-
-
 def obj_to_cef(item):
     HEADER_KEYS = [
         'device_vendor',
@@ -101,20 +92,14 @@ def obj_to_cef(item):
         elif key in ['_cefVer', 'version']:
             continue
         else:
-            # this check and conversion is needed for python 3 unfortunately
-            # http://www.rfk.id.au/blog/entry/preparing-pyenchant-for-python-3/
-            try:
-                unicode = unicode
-            except NameError:
-                # 'unicode' is undefined, must be Python 3
-                basestring = (str, bytes)
+            basestring = (str, bytes)
 
-            if isinstance(value, basestring):
-                value = value.replace('\\', '\\\\').replace('=', '\\=')
-                value = value.replace('\r', '\\r').replace('\n', '\\n')
-                extension[key] = value.encode('utf-8')
-            else:
-                extension[key] = str(value)
+        if isinstance(value, basestring):
+            value = value.replace('\\', '\\\\').replace('=', '\\=')
+            value = value.replace('\r', '\\r').replace('\n', '\\n')
+            extension[key] = value.encode('utf-8')
+        else:
+            extension[key] = str(value)
 
     header_str = '|'.join(map(bytes.decode, header))
     extension_str = ' '.join(
