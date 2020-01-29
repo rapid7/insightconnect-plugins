@@ -93,13 +93,12 @@ def obj_to_cef(item):
             continue
         else:
             basestring = (str, bytes)
-
-        if isinstance(value, basestring):
-            value = value.replace('\\', '\\\\').replace('=', '\\=')
-            value = value.replace('\r', '\\r').replace('\n', '\\n')
-            extension[key] = value.encode('utf-8')
-        else:
-            extension[key] = str(value)
+            if isinstance(value, basestring):
+                value = value.replace('\\', '\\\\').replace('=', '\\=')
+                value = value.replace('\r', '\\r').replace('\n', '\\n')
+                extension[key] = value.encode('utf-8')
+            else:
+                extension[key] = str(value)
 
     header_str = '|'.join(map(bytes.decode, header))
     extension_str = ' '.join(
