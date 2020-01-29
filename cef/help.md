@@ -16,7 +16,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-_This plugin does not require a connection._
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -84,6 +84,7 @@ Ensure your CEF strings are properly formatted.
 
 # Version History
 
+* 1.0.2 - Changed `ValueError` to `PluginException` | Use input and output constants | Added "f" strings | Move test from action to connection | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3`
 * 1.0.1 - New spec and help.md format for the Hub | Add missing title values for actions in plugin.spec.yaml
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK
