@@ -1,5 +1,5 @@
 import komand
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 from komand.exceptions import ConnectionTestException
 # Custom imports below
 import requests
@@ -12,13 +12,14 @@ class Connection(komand.Connection):
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
-        url = 'https://{}'.format(params.get("okta_url"))
-        key = params.get("okta_key").get("secretKey")
+        okta_url = params.get(Input.OKTA_URL)
+        url = f'https://{okta_url}'
+        key = params.get(Input.OKTA_KEY).get("secretKey")
 
         header = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'SSWS {}'.format(key),
+            'Authorization': f'SSWS {key}',
         }
 
         self.session = requests.Session()
@@ -27,7 +28,7 @@ class Connection(komand.Connection):
         self.okta_url = url
 
     def test(self):
-        response = self.session.get('{}/api/v1/groups'.format(self.okta_url))
+        response = self.session.get(f'{self.okta_url}/api/v1/groups')
         if response.status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
         if response.status_code == 404:
@@ -37,5 +38,5 @@ class Connection(komand.Connection):
         if response.status_code == 200:
             return {'Connection test successful': True}
         else:
-            self.logger.error('Unknown error. Server response:{}'.format(response.text))
+            self.logger.error(f'Unknown error. Server response:{response.text}')
             raise ConnectionTestException(preset='Unknown error')

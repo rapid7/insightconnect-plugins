@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='okta-rapid7-plugin',
-      version='3.2.1',
-      description='Secure identity management and single sign-on to any application',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="okta-rapid7-plugin",
+      version="3.2.2",
+      description="Secure identity management and single sign-on to any application",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_okta']
