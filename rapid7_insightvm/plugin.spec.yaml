@@ -2555,7 +2555,7 @@ actions:
         title: Description
         description: Asset group description
         type: string
-        required: false
+        required: true
       searchCriteria:
         title: Search Criteria
         description: 'Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'

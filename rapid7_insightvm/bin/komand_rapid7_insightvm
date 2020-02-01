@@ -4,10 +4,10 @@ import komand
 from komand_rapid7_insightvm import connection, actions, triggers
 
 
-Name = 'Rapid7 InsightVM'
-Vendor = 'rapid7'
-Version = '3.5.2'
-Description = 'InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans'
+Name = "Rapid7 InsightVM"
+Vendor = "rapid7"
+Version = "3.5.2"
+Description = "InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans"
 
 
 class ICONRapid7Insightvm(komand.Plugin):
