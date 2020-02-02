@@ -1,12 +1,6 @@
 {
     "body": {
         "action": "user",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            }
-        },
         "input": {
             "username": ""
         },
