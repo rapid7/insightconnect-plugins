@@ -13,9 +13,9 @@ class Sleep(komand.Action):
             output=SleepOutput())
 
     def run(self, params={}):
-        _time = params.get(Input.INTERVAL)
-        if int(_time) < 0:
+        time_ = params.get(Input.INTERVAL)
+        if int(time_) < 0:
             raise PluginException(cause='Wrong input',
                                   assistance=f"{Input.INTERVAL.capitalize()} should not be less than zero")
-        time.sleep(_time)
-        return {Output.SLEPT: _time}
+        time.sleep(time_)
+        return {Output.SLEPT: time_}
