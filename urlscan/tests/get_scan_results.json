@@ -3,11 +3,11 @@
         "action": "get_scan_results",
         "connection": {
             "api_key": {
-                "secretKey": null
+                "secretKey": ""
             }
         },
         "input": {
-            "scan_id": ""
+            "scan_id": "b1b04d35-f3fd-4a6b-ad7e-e2790803d6d0"
         },
         "meta": {}
     },
