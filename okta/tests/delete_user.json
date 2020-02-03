@@ -3,7 +3,7 @@
         "action": "delete_user",
         "input": {
             "send_admin_email": true,
-            "user_email": "isaac.brock@example.com"
+            "user_email": "user@example.com"
         },
         "meta": {}
     },
