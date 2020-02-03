@@ -31,7 +31,4 @@ class Search(komand.Action):
                                   assistance=f"(non-JSON or no response was received). Response was: {response.text}")
 
         return out
-
-    def test(self):
-        # TODO: Implement test function
-        return {}
+    
