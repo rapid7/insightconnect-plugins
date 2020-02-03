@@ -11,10 +11,10 @@
             "activate": false,
             "nextLogin": false,
             "profile": {
-                "email": "isaac.brock@example.com",
+                "email": "user@example.com",
                 "firstName": "Isaac",
                 "lastName": "Brock",
-                "login": "isaac.brock@example.com",
+                "login": "user@example.com",
                 "mobilePhone": "555-415-1337"
             },
             "provider": false
