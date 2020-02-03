@@ -1,7 +1,5 @@
 import komand
 from .schema import FingerInput, FingerOutput, Input, Output, Component
-
-
 # Custom imports below
 
 
