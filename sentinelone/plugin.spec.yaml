@@ -515,7 +515,7 @@ types:
       required: false
   agents_update_system_data:
     fileName:
-      title: File name
+      title: File Name
       type: string
       required: false
     path:
@@ -527,7 +527,7 @@ types:
       type: string
       required: false
     osType:
-      title: OS type
+      title: OS Type
       type: string
       required: false
       enum:
@@ -554,23 +554,23 @@ types:
         - current
   agents_fetch_applications_filter:
     isDecommissioned:
-      title: Is decomissioned
+      title: Is Decomissioned
       description: Include active decommissioned or both
       type: '[]boolean'
       required: false
     isUninstalled:
-      title: Is uninstalled
+      title: Is Uninstalled
       description: Only include uninstalled agents
       type: boolean
       required: false
     query:
       title: Query
-      description: A free-text search term, will match applicable attributes (sub-string match). Note - Devices physical addresses will be matched if they start with the search term only (instead of being matched if they contain the term)
+      description: A free-text search term, will match applicable attributes (sub-string match). Note - devices physical addresses will be matched if they start with the search term only (instead of being matched if they contain the term)
       type: string
       required: false
     ids:
       title: IDs
-      description: A list of Agent IDs
+      description: A list of agent IDs
       type: '[]string'
       required: false
     groupIds:
@@ -585,22 +585,22 @@ types:
       required: false
     siteIds:
       title: Site IDs
-      description: List of Site IDs to filter by
+      description: List of site IDs to filter by
       type: '[]string'
       required: false
     accountIds:
       title: Account IDs
-      description: List of Account IDs to filter by
+      description: List of account IDs to filter by
       type: '[]string'
       required: false
   agents_firewall_logging_data:
     reportMgmt:
-      title: Repoort management
+      title: Repoort Management
       description: Report blocking activity to management
       type: boolean
       required: true
     reportLog:
-      title: Repoort log
+      title: Report Log
       description: Report blocking activity to log
       type: boolean
       required: true
@@ -611,25 +611,25 @@ types:
       type: string
       required: false
     agentsInCoreSku:
-      title: Agents in core SKU
+      title: Agents in Core SKU
       description: Number of agents connected to a core site
       type: integer
       required: false
     totalComplete:
-      title: Total complete
+      title: Total Complete
       type: integer
       required: false
     unlimitedComplete:
-      title: Unlimited complete
+      title: Unlimited Complete
       type: boolean
       required: false
     numberOfSites:
-      title: Number of sites
+      title: Number of Sites
       description: Total number of sites in this account
       type: integer
       required: false
     state:
-      title: Account state
+      title: Account State
       type: string
       required: false
       enum:
@@ -637,7 +637,7 @@ types:
         - expired
         - deleted
     accountType:
-      title: Account type
+      title: Account Type
       type: string
       required: false
     expiration:
@@ -651,17 +651,17 @@ types:
       type: string
       required: false
     updatedAt:
-      title: Updated at
+      title: Updated At
       description: Timestamp of last update
       type: string
       required: false
     unlimitedExpiration:
-      title: Unlimited expiration
+      title: Unlimited Expiration
       description: The account does not expire
       type: boolean
       required: false
     totalCore:
-      title: Total core
+      title: Total Core
       type: integer
       required: false
     name:
@@ -669,8 +669,8 @@ types:
       type: string
       required: false
     coreSites:
-      title: Core sites
-      description: Number of sites in suite Core
+      title: Core Sites
+      description: Number of sites in suite core
       type: string
       required: false
     createdAt:
@@ -689,39 +689,39 @@ types:
       type: string
       required: false
     skus:
-      title: Skus
+      title: SKUs
       type: string
       required: false
     activeAgents:
-      title: Active agents number
+      title: Active Agents Number
       description: Total agents in the account
       type: integer
       required: false
     agentsInCompleteSku:
-      title: Agents in complete sku
+      title: Agents in Complete SKU
       description: Number of agents connected to a complete site
       type: integer
       required: false
     isDefault:
-      title: Is default
+      title: Is Default
       type: boolean
       required: false
     completeSites:
-      title: Complete sites
-      description: Number of sites in suite Complete
+      title: Complete Sites
+      description: Number of complete sites in suite
       type: integer
       required: false
     unlimitedCore:
-      title: Unlimited core
+      title: Unlimited Core
       type: boolean
       required: false
   account_expire_now_data:
     accountType:
-      title: Account type
+      title: Account Type
       type: string
       required: false
     activeAgents:
-      title: Active agents
+      title: Active Agents
       description: Total agents in the account
       type: integer
       required: false
@@ -746,16 +746,16 @@ types:
       type: string
       required: false
     isDefault:
-      title: Is default
+      title: Is Default
       type: boolean
       required: false
     skus:
-      title: Skus
+      title: SKUS
       type: string
       required: false
     externalId:
       title: External ID
-      description: Id of CRM external system
+      description: External ID of CRM system
       type: string
       required: true
     id:
@@ -879,11 +879,11 @@ types:
   admin_account_response:
     externalId:
       title: Exteral ID
-      description: ID of CRM external system
+      description: External ID of CRM system
       type: string
       required: true
     skus:
-      title: Skus
+      title: SKUs
       type: string
       required: false
     user:
@@ -892,11 +892,11 @@ types:
       type: admin_account_response_user
       required: true
     accountType:
-      title: Account type
+      title: Account Type
       type: string
       required: false
     state:
-      title: Account state
+      title: Account State
       type: string
       required: false
       enum:
@@ -904,7 +904,7 @@ types:
         - expired
         - deleted
     isDefault:
-      title: Is default
+      title: Is Default
       type: boolean
       required: false
     name:
@@ -913,31 +913,31 @@ types:
       required: false
     activeLicenses:
       title: Active Licenses
-      description: How much licenses are active
+      description: Number of active licenses
       type: integer
       required: false
     unlimitedExpiration:
-      title: Unlimited expiration
+      title: Unlimited Expiration
       description: The account does not expire
       type: boolean
       required: false
     updatedAt:
-      title: Updated at
+      title: Updated At
       description: Timestamp of last update
       type: string
       required: false
     activeAgents:
-      title: Active agents number
+      title: Active Agents Count
       description: Total agents in the account
       type: integer
       required: false
     expiration:
       title: Expiration
-      description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+      description: When account should expire, example: 2018-02-27T04:49:26.257525Z
       type: string
       required: false
     createdAt:
-      title: Created at
+      title: Created At
       description: Timestamp of account creation
       type: string
       required: false
@@ -953,12 +953,12 @@ types:
       type: string
       required: false
     skus:
-      title: Skus
+      title: SKUs
       description: The list of allowed SKUs for the account
       type: '[]skus'
       required: true
     accountType:
-      title: Account type
+      title: Account Type
       type: string
       required: true
       enum:
@@ -988,7 +988,7 @@ types:
       required: false
     expiration:
       title: Expiration
-      description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+      description: When account should expire, example: 2018-02-27T04:49:26.257525Z
       type: string
       required: false
     updatedAt:
@@ -997,7 +997,7 @@ types:
       type: string
       required: false
     activeAgents:
-      title: Active agents
+      title: Active Agents Count
       description: Total agents in the account
       type: integer
       required: false
@@ -1303,7 +1303,7 @@ actions:
         type: integer
         required: false
       sort_by:
-        title: Sort by
+        title: Sort By
         description: The column to sort the results by
         type: string
         required: false
@@ -1610,7 +1610,7 @@ actions:
         type: integer
         required: false
   agents_update_software:
-    title: Update software
+    title: Update Software
     description: Send update software command to all agents matching the input filter
     input:
       data:
@@ -1630,8 +1630,8 @@ actions:
         type: integer
         required: false
   agents_firewall_logging:
-    title: Fetch firewall logging
-    description: Sends a firewall logging command to all agents matching the input filter. Note - Firewall control feature must be enabled
+    title: Fetch Firewall Logging
+    description: Sends a firewall logging command to all agents matching the input filter. Note - firewall control feature must be enabled
     input:
       data:
         title: Data
@@ -1650,7 +1650,7 @@ actions:
         type: integer
         required: false
   agents_reject_uninstall:
-    title: Reject uninstall
+    title: Reject Uninstall
     description: Reject uninstall requests for all agents matching the input filter
     input:
       filter:
@@ -1665,7 +1665,7 @@ actions:
         type: integer
         required: false
   agents_approve_uninstall:
-    title: Approve uninstall
+    title: Approve Uninstall
     description: Approve uninstall requests for all agents matching the input filter
     input:
       filter:
@@ -1680,7 +1680,7 @@ actions:
         type: integer
         required: false
   agents_start_remote_shell:
-    title: Start remote shell
+    title: Start Remote Shell
     description: Start a remote shell if the 2FA code is valid the history password will be used to compress the shell history and rows/columns to configure the remote shell to the size UI is using
     input:
       filter:
@@ -1715,7 +1715,7 @@ actions:
         type: integer
         required: false
   agents_reset_local_config_policy:
-    title: Reset local config to policy
+    title: Reset Local Config to Policy
     description: Reset policy overrides set by SentinelCtl for all agents matching the input filter
     input:
       filter:
@@ -1730,12 +1730,12 @@ actions:
         type: integer
         required: false
   agents_fetch_applications:
-    title: Fetch applications
+    title: Fetch Applications
     description: Fetches full list of installed applications from applicable agents matching the input filter, and replaces existing data in the management console
     input:
       filter:
         title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId
+        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
         type: agents_fetch_applications_filter
         required: true
     output:
@@ -1745,8 +1745,8 @@ actions:
         type: integer
         required: false
   agents_fetch_firewall_rules:
-    title: Fetch firewall rules
-    description: Sends a fetch firewall rules command to all agents matching the input filter. Note Firewall control feature must be enabled
+    title: Fetch Firewall Rules
+    description: Sends a fetch firewall rules command to all agents matching the input filter. Note - firewall control feature must be enabled
     input:
       data:
         title: Data
@@ -1765,7 +1765,7 @@ actions:
         type: integer
         required: false
   agents_terminate_remote_shell:
-    title: Terminate remote shell
+    title: Terminate Remote Shell
     description: User updates about remote shell termination for an agent
     input:
       channel_id:
@@ -1785,7 +1785,7 @@ actions:
         type: integer
         required: false
   agents_can_start_remote_shell:
-    title: Can start remote shell
+    title: Can Start Remote Shell
     description: Check if user can start remote shell for the selected agent
     input:
       filter:
@@ -1815,7 +1815,7 @@ actions:
         type: account_data
         required: false
   account_expire_now:
-    title: Expire account
+    title: Expire Account
     description: Expire account now
     input:
       account_id:
@@ -1830,7 +1830,7 @@ actions:
         type: account_expire_now_data
         required: false
   account_reactivate:
-    title: Reactivate account
+    title: Reactivate Account
     description: Reactivates an expired account
     input:
       account_id:
@@ -1855,7 +1855,7 @@ actions:
         type: boolean
         required: false
   account_revert_policy:
-    title: Revert policy
+    title: Revert Policy
     description: Reverts the account policy to the tenant policy
     input:
       account_id:
@@ -1875,7 +1875,7 @@ actions:
         type: boolean
         required: false
   create_account:
-    title: Create account
+    title: Create Account
     description: Create new account
     input:
       account_type:
@@ -1888,17 +1888,17 @@ actions:
           - Paid
       expiration:
         title: Expiration
-        description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+        description: When account should expire, example: 2018-02-27T04:49:26.257525Z
         type: string
         required: false
       skus:
-        title: Skus
+        title: SKUs
         description: The list of allowed SKUs for the account
         type: '[]skus'
         required: true
       external_id:
         title: External ID
-        description: Id of CRM external system
+        description: External ID of CRM system
         type: string
         required: false
       policy:

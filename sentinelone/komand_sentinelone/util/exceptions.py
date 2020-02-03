@@ -1,7 +1,6 @@
 from komand.exceptions import ConnectionTestException
 
 
-# -*- coding: utf-8 -*-
 class PluginException(ConnectionTestException):
 
     def __str__(self):
