@@ -3,8 +3,8 @@ import json
 import re
 
 
-def csv_syntax_good(csv):
-    parsed = parse_csv_string(csv)
+def csv_syntax_good(csv_string):
+    parsed = parse_csv_string(csv_string)
     size = len(parsed[0])
     for row in parsed:
         if len(row) != size:
@@ -70,8 +70,8 @@ def get_field_list(fields, num_fields):
 # @param csv The string to parse
 # @return Two-dimensional list consisting of items on each line of CSV string
 ##
-def parse_csv_string(csv):
-    csv_list = csv.split('\n')
+def parse_csv_string(csv_string):
+    csv_list = csv_string.split('\n')
     parsed = []
     for line in csv_list:
         if line != '':
@@ -85,12 +85,12 @@ def parse_csv_string(csv):
 # @param csv The two-dimensional array of the original CSV string
 # @return The string of the CSV
 ##
-def convert_csv_array(csv):
+def convert_csv_array(csv_array):
     item_delim = ','
     line_delim = '\n'
     lines = []
 
-    for line in csv:
+    for line in csv_array:
         lines.append(item_delim.join(line))
     csv_string = line_delim.join(lines)
     return csv_string
