@@ -39,9 +39,6 @@ demo-*.tar.gz
 **/*.tar
 **/*.plg
 
-# Wheels
-**/*.whl
-
 .drone.sec.unencrypted
 
 # IntelliJ

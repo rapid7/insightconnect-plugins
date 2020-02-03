@@ -36,10 +36,10 @@ This action is used to search urlscan.io.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|q|string|None|True|The query term (ElasticSearch simple query string) e.g domain:urlscan.io, default is *|None|
-|sort|string|_score|True|Sorting, specificied via $sort_field:$sort_order|None|
-|size|integer|100|True|Number of results returned|None|
 |offset|integer|0|True|Offset of first result (for paginating)|None|
+|q|string|None|True|The query term (ElasticSearch simple query string) e.g domain:urlscan.io, default is *|None|
+|size|integer|100|True|Number of results returned|None|
+|sort|string|_score|True|Sorting, specificied via $sort_field:$sort_order|None|
 
 ##### Output
 
@@ -93,8 +93,8 @@ This action is used to submit a URL to generate a scan report that can be retrie
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|The URL to scan|None|
 |public|boolean|False|True|Set to false for a private scan|None|
+|url|string|None|True|The URL to scan|None|
 
 ##### Output
 
@@ -267,6 +267,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.4 - Use input and output constants | Added "f" strings
 * 2.1.3 - New spec and help.md format for the Hub
 * 2.1.2 - Set User-Agent string to Rapid7 InsightConnect | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size | Run plugin as least privileged user | Improve error handling and logging | Fix issue in Submit URL for Scan action where improper POST body was sent
 * 2.1.1 - Add error messaging to Get Scan Results action to provide assistance for unavailable scan results | Update to Python 3.7 Slim SDK (plugin size reduction)

@@ -2,7 +2,7 @@
 
 The Storage plugin is a utility that stores information across loops and workflows. It is intended to make extracting small pieces of information from complicated workflows easier.
 
-This should not be used to store large objects (for example, images, or entire emails)
+This should not be used to store large objects, such as images or entire emails.
 
 # Key Features
 
@@ -31,7 +31,7 @@ This action is used to store a variable in cache.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |variable_name|string|None|True|Name of the variable to store|None|
-|variable_value|string|None|True|Name of the variable to store|None|
+|variable_value|string|None|True|Value of the variable to store|None|
 
 ##### Output
 
