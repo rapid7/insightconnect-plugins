@@ -23,10 +23,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|client_id|credential_secret_key|None|False|Threat Quotient OAuth Token|None|
 |credentials|credential_username_password|None|False|ThreatQuotient username (e.g. email) and password|None|
 |host|string|None|False|Address of the Threat Quotient host (e.g. https://localhost:8443)|None|
 |proxy|string|None|False|Address of a proxy if applicable (e.g. https://localhost:8443)|None|
-|client_id|password|None|False|Threat Quotient OAuth Token|None|
 
 ## Technical Details
 
@@ -46,8 +46,8 @@ This action is used to search for a specific indicator.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|total|integer|False|Total number of search results|
 |data|[]indicator|False|List of indicators that match query|
+|total|integer|False|Total number of search results|
 
 #### Search
 
@@ -57,8 +57,8 @@ This action is used to search all data.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|query|string|None|False|Search query|None|
 |limit|integer|None|False|Maximum number of records to retrieve|None|
+|query|string|None|False|Search query|None|
 
 ##### Output
 
@@ -80,8 +80,8 @@ This action is used to list all events.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|total|integer|False|Total number of search results|
 |data|[]event|False|List of events that match query|
+|total|integer|False|Total number of search results|
 
 #### Create Indicator
 
@@ -91,8 +91,8 @@ This action is used to create a new indicator.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|status|string|None|False|Status of the indicator|['Active', 'Expired', 'Indirect', 'Review', 'Whitelisted']|
 |source|string|None|False|Source of the indicator|None|
+|status|string|None|False|Status of the indicator|['Active', 'Expired', 'Indirect', 'Review', 'Whitelisted']|
 |type|string|None|False|Type of the indicator|['CIDR Block', 'Email Address', 'Eamil Attachment', 'Email Subject', 'File Path', 'Filename', 'FQDN', 'Fuzzy Hash', 'GOST Hash', 'IP Address', 'MD5', 'Mutex', 'Password', 'Registry Key', 'SHA-1', 'SHA-256', 'SHA-384', 'SHA-512', 'String', 'URL', 'URL Path', 'User-agent', 'Username', 'X-Mailer']|
 |value|string|None|False|Value of the indicator|None|
 
@@ -110,11 +110,11 @@ This action is used to create a new event.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|date|date|None|False|None|None|
-|source|string|None|False|Source of the event|None|
-|type|string|None|False|Type of the event|['Watering Hole', 'SQL Injection Attack', 'DoS Attack', 'Malware', 'Watchlist', 'Command and Control', 'Anonymization', 'Exfiltration', 'Host Characteristics', 'Compromised PKI Certificate', 'Login Compromise', 'Incident']|
+|date|date|None|False|Date on which the event occurred|None|
 |description|string|None|False|Description of the event|None|
+|source|string|None|False|Source of the event|None|
 |title|string|None|False|Title of the event|None|
+|type|string|None|False|Type of the event|['Watering Hole', 'SQL Injection Attack', 'DoS Attack', 'Malware', 'Watchlist', 'Command and Control', 'Anonymization', 'Exfiltration', 'Host Characteristics', 'Compromised PKI Certificate', 'Login Compromise', 'Incident']|
 
 ##### Output
 
@@ -130,8 +130,8 @@ This action is used to retrieve detailed information associated with a given ind
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|with|[]string|None|False|The classes of items related to the indicator to return. e.g. ['adversaries', 'attachments']|None|
 |id|integer|None|False|The ID of the requested indicator|None|
+|with|[]string|None|False|The classes of items related to the indicator to return. e.g. ['adversaries', 'attachments']|None|
 
 ##### Output
 
@@ -147,8 +147,8 @@ This action is used to retrieve detailed information associated with a given eve
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|with|[]string|None|False|The classes of items related to the event to return. e.g. ['adversaries', 'attachments']|None|
 |id|integer|None|False|The ID of the requested event|None|
+|with|[]string|None|False|The classes of items related to the event to return. e.g. ['adversaries', 'attachments']|None|
 
 ##### Output
 
@@ -170,6 +170,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.2 - Fix issue with dependency
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Rename "Get indicator" action to "Get Indicator" | Rename "Get event" action to "Get Event"
 * 0.2.3 - SSL bug fix in SDK

@@ -23,7 +23,7 @@ class ConnectionSchema(komand.Input):
     "url": {
       "type": "string",
       "title": "API URL",
-      "description": "API URL to Viper server e.g. http://example.com:8080/api/v3/",
+      "description": "API URL to Viper server",
       "order": 1
     }
   },

@@ -1,6 +1,5 @@
 import komand
-from .schema import ForwardInput, ForwardOutput
-import subprocess
+from .schema import ForwardInput, ForwardOutput, Input, Output, Component
 import re
 from komand_dig.util import util
 
@@ -9,51 +8,41 @@ class Forward(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='forward',
-                description='Forward DNS Query',
-                input=ForwardInput(),
-                output=ForwardOutput())
+            name='forward',
+            description=Component.DESCRIPTION,
+            input=ForwardInput(),
+            output=ForwardOutput())
 
     def run(self, params={}):
-      binary = "/usr/bin/dig"
-
-      if len(params.get('resolver', '')) > 0:
-          cmd = "%s @%s %s %s" % (binary, params.get('resolver'), params.get('domain'), params.get('query'))
-      else:
-          cmd = "%s %s %s" % (binary, params.get('domain'), params.get('query'))
-
-      self.logger.info("Executing command %s" % cmd)
-      r = komand.helper.exec_command(cmd)
-
-      # Grab query status
-      status = util.safe_parse(re.search('status: (.+?),', r['stdout']))
-      # Grab nameserver
-      ns = util.safe_parse(re.search('SERVER: (.+?)#', r['stdout']))
-      # Grab number of answers
-      answers = util.safe_parse(re.search(r'ANSWER: ([0-9]+)', r['stdout']))
-      if util.not_empty(answers) : answers = int(answers)
-
-      # We need answers to continue
-      if answers > 0:
-        # Grab resolved address section
-
-        answer_section = util.safe_parse(re.search(r'ANSWER SECTION:\n(.*)\n\n;;', r['stdout'], flags=re.DOTALL))
-        # Grab address
-        if params['query'] == "SOA":
-          domain = util.safe_parse(re.search(r'SOA\t(\S+)', answer_section))
-          if util.not_empty(domain) : domain = domain.rstrip('.')
-          ans = [domain]
+        if len(params.get(Input.RESOLVER, '')) > 0:
+            cmd = f"@{params.get(Input.RESOLVER)} {params.get(Input.DOMAIN)} {params.get(Input.QUERY)}"
         else:
-          ans = answer_section.split('\n')
-          if len(ans) == 0:
-              ans.append('NO MATCHES FOUND')
-          ans = [util.safe_parse(re.search(r'\s(\S+)$', answer)) for answer in ans]
-          ans = [answer.rstrip('.') for answer in ans]
-      else:
-        ans = ['Not found']
+            cmd = f"{params.get(Input.DOMAIN)} {params.get(Input.QUERY)}"
 
-      if status != "NOERROR":
-        r['stdout'] = 'Resolution failed, nameserver %s returned %s status' % (ns, status)
-        resolved = 'Not found'
+        command_output = util.execute_command(self.logger, cmd, r'ANSWER SECTION:\n(.*)\n\n;;', re.DOTALL)
+        answer_section = command_output['answer_section']
+        if answer_section is None:
+            ans = ['Not found']
+        else:
+            # Grab address
+            if params[Input.QUERY] == "SOA":
+                domain = util.safe_parse(re.search(r'SOA\t(\S+)', answer_section))
+                if util.not_empty(domain):
+                    domain = domain.rstrip('.')
+                ans = [domain]
+            else:
+                ans = answer_section.split('\n')
+                if len(ans) == 0:
+                    ans.append('NO MATCHES FOUND')
+                ans = [util.safe_parse(re.search(r'\s(\S+)$', answer)) for answer in ans]
+                ans = [answer.rstrip('.') for answer in ans]
 
-      return { 'fulloutput': r['stdout'] + r['stderr'], 'question': params.get('domain'), 'nameserver': ns, 'status': status, 'answer': ans[0], 'last_answer': ans[len(ans) - 1], 'all_answers': ans}
+        return {
+            Output.FULLOUTPUT: command_output['fulloutput'],
+            Output.QUESTION: params.get(Input.DOMAIN),
+            Output.NAMESERVER: command_output['nameserver'],
+            Output.STATUS: command_output['status'],
+            Output.ANSWER: ans[0],
+            Output.LAST_ANSWER: ans[len(ans) - 1],
+            Output.ALL_ANSWERS: ans
+        }
