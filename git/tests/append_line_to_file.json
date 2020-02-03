@@ -3,10 +3,10 @@
         "action": "append_line_to_file",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "file_path": "files/lines.txt",
