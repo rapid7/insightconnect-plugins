@@ -4,10 +4,10 @@ import komand
 from komand_red_canary import connection, actions, triggers
 
 
-Name = 'Red Canary'
-Vendor = 'rapid7'
-Version = '2.1.5'
-Description = 'The RedCanary plugin allows you to manage endpoint detection and respond to threats'
+Name = "Red Canary"
+Vendor = "rapid7"
+Version = "2.1.6"
+Description = "The RedCanary plugin allows you to manage endpoint detection and respond to threats"
 
 
 class ICONRedCanary(komand.Plugin):

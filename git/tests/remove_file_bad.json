@@ -3,10 +3,10 @@
         "action": "remove_file",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "file_path": "assets/icon.png"

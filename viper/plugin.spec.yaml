@@ -4,7 +4,7 @@ products: [insightconnect]
 name: viper
 title: "Viper"
 description: Analyze files and use binary analysis to detect malware in files
-version: 2.0.1
+version: 2.1.0
 vendor: rapid7
 support: community
 status: []
@@ -166,7 +166,7 @@ types:
 connection:
   url:
     title: "API URL"
-    description: "API URL to Viper server e.g. http://example.com:8080/api/v3/"
+    description: "API URL to Viper server"
     type: string
     required: true
   token:
