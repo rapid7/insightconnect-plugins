@@ -933,7 +933,7 @@ types:
       required: false
     expiration:
       title: Expiration
-      description: When account should expire, example: 2018-02-27T04:49:26.257525Z
+      description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
       type: string
       required: false
     createdAt:
@@ -988,7 +988,7 @@ types:
       required: false
     expiration:
       title: Expiration
-      description: When account should expire, example: 2018-02-27T04:49:26.257525Z
+      description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
       type: string
       required: false
     updatedAt:
@@ -1888,7 +1888,7 @@ actions:
           - Paid
       expiration:
         title: Expiration
-        description: When account should expire, example: 2018-02-27T04:49:26.257525Z
+        description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
         type: string
         required: false
       skus:
@@ -1961,7 +1961,7 @@ actions:
           - Paid
       expiration:
         title: Expiration
-        description: When account should expire, example: 2018-02-27T04:49:26.257525Z
+        description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
         type: string
         required: false
       query:
@@ -2370,7 +2370,7 @@ actions:
         required: false
       expiration:
         title: Expiration
-        description: When account should expire, example: 2018-02-27T04:49:26.257525Z
+        description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
         type: string
         required: false
       unlimited_expiration:

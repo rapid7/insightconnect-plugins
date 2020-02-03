@@ -46,12 +46,12 @@ class AgentsUpdateSoftwareInput(komand.Input):
       "properties": {
         "fileName": {
           "type": "string",
-          "title": "File name",
+          "title": "File Name",
           "order": 1
         },
         "osType": {
           "type": "string",
-          "title": "OS type",
+          "title": "OS Type",
           "enum": [
             "windows_legacy",
             "macos",

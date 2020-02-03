@@ -58,12 +58,12 @@ class AccountExpireNowOutput(komand.Output):
       "properties": {
         "accountType": {
           "type": "string",
-          "title": "Account type",
+          "title": "Account Type",
           "order": 1
         },
         "activeAgents": {
           "type": "integer",
-          "title": "Active agents",
+          "title": "Active Agents",
           "description": "Total agents in the account",
           "order": 2
         },
@@ -94,7 +94,7 @@ class AccountExpireNowOutput(komand.Output):
         "externalId": {
           "type": "string",
           "title": "External ID",
-          "description": "Id of CRM external system",
+          "description": "External ID of CRM system",
           "order": 9
         },
         "id": {
@@ -105,7 +105,7 @@ class AccountExpireNowOutput(komand.Output):
         },
         "isDefault": {
           "type": "boolean",
-          "title": "Is default",
+          "title": "Is Default",
           "order": 7
         },
         "name": {
@@ -115,7 +115,7 @@ class AccountExpireNowOutput(komand.Output):
         },
         "skus": {
           "type": "string",
-          "title": "Skus",
+          "title": "SKUS",
           "order": 8
         },
         "state": {

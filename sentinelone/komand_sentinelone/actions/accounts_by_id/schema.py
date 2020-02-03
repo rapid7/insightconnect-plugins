@@ -58,37 +58,37 @@ class AccountsByIdOutput(komand.Output):
       "properties": {
         "accountType": {
           "type": "string",
-          "title": "Account type",
+          "title": "Account Type",
           "order": 7
         },
         "activeAgents": {
           "type": "integer",
-          "title": "Active agents number",
+          "title": "Active Agents Number",
           "description": "Total agents in the account",
           "order": 19
         },
         "agentsInCompleteSku": {
           "type": "integer",
-          "title": "Agents in complete sku",
+          "title": "Agents in Complete SKU",
           "description": "Number of agents connected to a complete site",
           "order": 20
         },
         "agentsInCoreSku": {
           "type": "integer",
-          "title": "Agents in core SKU",
+          "title": "Agents in Core SKU",
           "description": "Number of agents connected to a core site",
           "order": 2
         },
         "completeSites": {
           "type": "integer",
-          "title": "Complete sites",
-          "description": "Number of sites in suite Complete",
+          "title": "Complete Sites",
+          "description": "Number of complete sites in suite",
           "order": 22
         },
         "coreSites": {
           "type": "string",
-          "title": "Core sites",
-          "description": "Number of sites in suite Core",
+          "title": "Core Sites",
+          "description": "Number of sites in suite core",
           "order": 14
         },
         "createdAt": {
@@ -129,7 +129,7 @@ class AccountsByIdOutput(komand.Output):
         },
         "isDefault": {
           "type": "boolean",
-          "title": "Is default",
+          "title": "Is Default",
           "order": 21
         },
         "name": {
@@ -139,18 +139,18 @@ class AccountsByIdOutput(komand.Output):
         },
         "numberOfSites": {
           "type": "integer",
-          "title": "Number of sites",
+          "title": "Number of Sites",
           "description": "Total number of sites in this account",
           "order": 5
         },
         "skus": {
           "type": "string",
-          "title": "Skus",
+          "title": "SKUs",
           "order": 18
         },
         "state": {
           "type": "string",
-          "title": "Account state",
+          "title": "Account State",
           "enum": [
             "active",
             "expired",
@@ -160,33 +160,33 @@ class AccountsByIdOutput(komand.Output):
         },
         "totalComplete": {
           "type": "integer",
-          "title": "Total complete",
+          "title": "Total Complete",
           "order": 3
         },
         "totalCore": {
           "type": "integer",
-          "title": "Total core",
+          "title": "Total Core",
           "order": 12
         },
         "unlimitedComplete": {
           "type": "boolean",
-          "title": "Unlimited complete",
+          "title": "Unlimited Complete",
           "order": 4
         },
         "unlimitedCore": {
           "type": "boolean",
-          "title": "Unlimited core",
+          "title": "Unlimited Core",
           "order": 23
         },
         "unlimitedExpiration": {
           "type": "boolean",
-          "title": "Unlimited expiration",
+          "title": "Unlimited Expiration",
           "description": "The account does not expire",
           "order": 11
         },
         "updatedAt": {
           "type": "string",
-          "title": "Updated at",
+          "title": "Updated At",
           "description": "Timestamp of last update",
           "order": 10
         }

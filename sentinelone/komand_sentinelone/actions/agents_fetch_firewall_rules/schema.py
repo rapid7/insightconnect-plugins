@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Sends a fetch firewall rules command to all agents matching the input filter. Note Firewall control feature must be enabled"
+    DESCRIPTION = "Sends a fetch firewall rules command to all agents matching the input filter. Note - firewall control feature must be enabled"
 
 
 class Input:
@@ -47,7 +47,7 @@ class AgentsFetchFirewallRulesInput(komand.Input):
         "accountIds": {
           "type": "array",
           "title": "Account IDs",
-          "description": "List of Account IDs to filter by",
+          "description": "List of account IDs to filter by",
           "items": {
             "type": "string"
           },
@@ -71,7 +71,7 @@ class AgentsFetchFirewallRulesInput(komand.Input):
         "ids": {
           "type": "array",
           "title": "IDs",
-          "description": "A list of Agent IDs",
+          "description": "A list of agent IDs",
           "items": {
             "type": "string"
           },
@@ -79,7 +79,7 @@ class AgentsFetchFirewallRulesInput(komand.Input):
         },
         "isDecommissioned": {
           "type": "array",
-          "title": "Is decomissioned",
+          "title": "Is Decomissioned",
           "description": "Include active decommissioned or both",
           "items": {
             "type": "boolean"
@@ -88,20 +88,20 @@ class AgentsFetchFirewallRulesInput(komand.Input):
         },
         "isUninstalled": {
           "type": "boolean",
-          "title": "Is uninstalled",
+          "title": "Is Uninstalled",
           "description": "Only include uninstalled agents",
           "order": 2
         },
         "query": {
           "type": "string",
           "title": "Query",
-          "description": "A free-text search term, will match applicable attributes (sub-string match). Note - Devices physical addresses will be matched if they start with the search term only (instead of being matched if they contain the term)",
+          "description": "A free-text search term, will match applicable attributes (sub-string match). Note - devices physical addresses will be matched if they start with the search term only (instead of being matched if they contain the term)",
           "order": 3
         },
         "siteIds": {
           "type": "array",
           "title": "Site IDs",
-          "description": "List of Site IDs to filter by",
+          "description": "List of site IDs to filter by",
           "items": {
             "type": "string"
           },

@@ -47,7 +47,7 @@ class CreateAccountInput(komand.Input):
     "external_id": {
       "type": "string",
       "title": "External ID",
-      "description": "Id of CRM external system",
+      "description": "External ID of CRM system",
       "order": 4
     },
     "inherits": {
@@ -70,7 +70,7 @@ class CreateAccountInput(komand.Input):
     },
     "skus": {
       "type": "array",
-      "title": "Skus",
+      "title": "SKUs",
       "description": "The list of allowed SKUs for the account",
       "items": {
         "$ref": "#/definitions/skus"

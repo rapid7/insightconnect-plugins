@@ -45,7 +45,7 @@ class LastActivityAsSyslogInput(komand.Input):
   "properties": {
     "account_ids": {
       "type": "array",
-      "title": "Account IDS",
+      "title": "Account IDs",
       "description": "List of Account IDs to filter by",
       "items": {
         "type": "string"
@@ -63,8 +63,8 @@ class LastActivityAsSyslogInput(komand.Input):
     },
     "agent_ids": {
       "type": "array",
-      "title": "Agent IDS",
-      "description": "Return activities related to specified agent ids",
+      "title": "Agent IDs",
+      "description": "Return activities related to specified agent IDs",
       "items": {
         "type": "string"
       },
@@ -84,25 +84,25 @@ class LastActivityAsSyslogInput(komand.Input):
     },
     "created_at_gt": {
       "type": "string",
-      "title": "Greater Then Date",
+      "title": "Greater Than or Equal Date",
       "description": "Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
       "order": 20
     },
     "created_at_gte": {
       "type": "string",
-      "title": "Greater Or Equal Date",
+      "title": "Greater Than or Equal Date",
       "description": "Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
       "order": 9
     },
     "created_at_lt": {
       "type": "string",
-      "title": "Less Then Date",
+      "title": "Less Than Date",
       "description": "Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
       "order": 15
     },
     "created_at_lte": {
       "type": "string",
-      "title": "Less Or Equal Date",
+      "title": "Less Than or Equal Date",
       "description": "Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
       "order": 1
     },
@@ -123,7 +123,7 @@ class LastActivityAsSyslogInput(komand.Input):
     },
     "ids": {
       "type": "array",
-      "title": "Activity IDS",
+      "title": "Activity IDs",
       "description": "If true, total number of items will not be calculated, which speeds up execution time",
       "items": {
         "type": "string"
@@ -165,7 +165,7 @@ class LastActivityAsSyslogInput(komand.Input):
     },
     "sort_by": {
       "type": "string",
-      "title": "Sort by",
+      "title": "Sort By",
       "description": "The column to sort the results by",
       "enum": [
         "id",
@@ -186,7 +186,7 @@ class LastActivityAsSyslogInput(komand.Input):
     },
     "threat_ids": {
       "type": "array",
-      "title": "Threat IDS",
+      "title": "Threat IDs",
       "description": "Return only these activity codes",
       "items": {
         "type": "string"
@@ -196,7 +196,7 @@ class LastActivityAsSyslogInput(komand.Input):
     "user_emails": {
       "type": "array",
       "title": "User Emails",
-      "description": "Email of the user who invoked the activity (If applicable)",
+      "description": "Email of the user who invoked the activity (if applicable)",
       "items": {
         "type": "string"
       },
@@ -204,7 +204,7 @@ class LastActivityAsSyslogInput(komand.Input):
     },
     "user_ids": {
       "type": "array",
-      "title": "User IDS",
+      "title": "User IDs",
       "description": "The user who invoked the activity (If applicable)",
       "items": {
         "type": "string"

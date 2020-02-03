@@ -24,7 +24,7 @@ class AgentsFetchApplicationsInput(komand.Input):
     "filter": {
       "$ref": "#/definitions/agents_fetch_applications_filter",
       "title": "Filter JSON",
-      "description": "Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId",
+      "description": "Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId",
       "order": 1
     }
   },
@@ -39,7 +39,7 @@ class AgentsFetchApplicationsInput(komand.Input):
         "accountIds": {
           "type": "array",
           "title": "Account IDs",
-          "description": "List of Account IDs to filter by",
+          "description": "List of account IDs to filter by",
           "items": {
             "type": "string"
           },
@@ -63,7 +63,7 @@ class AgentsFetchApplicationsInput(komand.Input):
         "ids": {
           "type": "array",
           "title": "IDs",
-          "description": "A list of Agent IDs",
+          "description": "A list of agent IDs",
           "items": {
             "type": "string"
           },
@@ -71,7 +71,7 @@ class AgentsFetchApplicationsInput(komand.Input):
         },
         "isDecommissioned": {
           "type": "array",
-          "title": "Is decomissioned",
+          "title": "Is Decomissioned",
           "description": "Include active decommissioned or both",
           "items": {
             "type": "boolean"
@@ -80,20 +80,20 @@ class AgentsFetchApplicationsInput(komand.Input):
         },
         "isUninstalled": {
           "type": "boolean",
-          "title": "Is uninstalled",
+          "title": "Is Uninstalled",
           "description": "Only include uninstalled agents",
           "order": 2
         },
         "query": {
           "type": "string",
           "title": "Query",
-          "description": "A free-text search term, will match applicable attributes (sub-string match). Note - Devices physical addresses will be matched if they start with the search term only (instead of being matched if they contain the term)",
+          "description": "A free-text search term, will match applicable attributes (sub-string match). Note - devices physical addresses will be matched if they start with the search term only (instead of being matched if they contain the term)",
           "order": 3
         },
         "siteIds": {
           "type": "array",
           "title": "Site IDs",
-          "description": "List of Site IDs to filter by",
+          "description": "List of site IDs to filter by",
           "items": {
             "type": "string"
           },

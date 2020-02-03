@@ -1,11 +1,11 @@
 {
-	"spec": "5d64f9cf0168290514a1d2935e1f0f49",
+	"spec": "ba87593d8cc9c09fd95f8695c2b3627d",
 	"manifest": "c71c8ce6e08e5b3d362afd445d67e06e",
 	"setup": "6e56370218bebca04894fd1331ce99dc",
 	"schemas": [
 		{
 			"identifier": "account_expire_now/schema.py",
-			"hash": "4004d6e1e435be5f3f5912e5c91d1b72"
+			"hash": "55afa3bb79ef93c38ef0395079d0b446"
 		},
 		{
 			"identifier": "account_reactivate/schema.py",
@@ -17,11 +17,11 @@
 		},
 		{
 			"identifier": "accounts_by_id/schema.py",
-			"hash": "89042ed52b8fcd33594391dda0e19afb"
+			"hash": "4a227b9a4909708b5d006d7a3483d51b"
 		},
 		{
 			"identifier": "activities_list/schema.py",
-			"hash": "5ef850425d1a9e28a9b579f0546d27ea"
+			"hash": "5ebbec2e3897f2c1a57bd9da9a4744d6"
 		},
 		{
 			"identifier": "activities_types/schema.py",
@@ -53,11 +53,11 @@
 		},
 		{
 			"identifier": "agents_fetch_applications/schema.py",
-			"hash": "fbb501fcdba6b3593f16cc640308da20"
+			"hash": "fb4a072f3e5314d35b1bb427bfa9d223"
 		},
 		{
 			"identifier": "agents_fetch_firewall_rules/schema.py",
-			"hash": "e9cb3148c3610c2da11a3603189abfba"
+			"hash": "78a7dcbcd8a4273d5f10ea9fb8d2d1e0"
 		},
 		{
 			"identifier": "agents_fetch_logs/schema.py",
@@ -65,7 +65,7 @@
 		},
 		{
 			"identifier": "agents_firewall_logging/schema.py",
-			"hash": "10e400fb26b49487e0d4e46a48458681"
+			"hash": "bc4a23eef92d1b1478e51a3da5c6e1b3"
 		},
 		{
 			"identifier": "agents_initiate/schema.py",
@@ -113,7 +113,7 @@
 		},
 		{
 			"identifier": "agents_update_software/schema.py",
-			"hash": "eaf20d0be1965e4369f20a071d0bfba3"
+			"hash": "5c83647c67a1903e8201d91534bad5bd"
 		},
 		{
 			"identifier": "apps_by_agent_ids/schema.py",
@@ -129,11 +129,11 @@
 		},
 		{
 			"identifier": "create_account/schema.py",
-			"hash": "66efc9a1f396e82d1153bbdb017bbbbb"
+			"hash": "5eff45f0cf44ed36a0e8ea473652ecf0"
 		},
 		{
 			"identifier": "create_admin_account/schema.py",
-			"hash": "d754ee5918394bdcfed7aba6a5a325c4"
+			"hash": "f6d664e73e0fded96843f4e47daed297"
 		},
 		{
 			"identifier": "create_ioc_threat/schema.py",
@@ -141,7 +141,7 @@
 		},
 		{
 			"identifier": "get_accounts/schema.py",
-			"hash": "0f615565e800a66856f74d7bbaaf7141"
+			"hash": "416a1ef2cd685d45255d403f7956cc15"
 		},
 		{
 			"identifier": "get_threat_summary/schema.py",
@@ -149,7 +149,7 @@
 		},
 		{
 			"identifier": "last_activity_as_syslog/schema.py",
-			"hash": "56fbe777620a5cecf6aa727a8b6794fe"
+			"hash": "60df4d287cb6d23bb29053fec3c3bbac"
 		},
 		{
 			"identifier": "mark_as_benign/schema.py",
@@ -169,11 +169,11 @@
 		},
 		{
 			"identifier": "private_accounts/schema.py",
-			"hash": "d8b8117a8f83debd062c0973075828fb"
+			"hash": "105675a55806fc539b71ba115e78c2e8"
 		},
 		{
 			"identifier": "update_account/schema.py",
-			"hash": "166bda6fcdfd156a464253be06c3971c"
+			"hash": "f49081c85e2c9a547245ef98adb273e2"
 		},
 		{
 			"identifier": "connection/schema.py",

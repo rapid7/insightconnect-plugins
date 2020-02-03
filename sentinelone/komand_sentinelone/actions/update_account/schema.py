@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Update accounts data"
+    DESCRIPTION = "Update account data"
 
 
 class Input:
@@ -37,7 +37,7 @@ class UpdateAccountInput(komand.Input):
     },
     "account_type": {
       "type": "string",
-      "title": "Account type",
+      "title": "Account Type",
       "description": "Account type. Example Trial",
       "enum": [
         "Trial",
@@ -54,7 +54,7 @@ class UpdateAccountInput(komand.Input):
     "external_id": {
       "type": "string",
       "title": "External ID",
-      "description": "Id of CRM external system",
+      "description": "External ID of CRM system",
       "order": 2
     },
     "inherits": {
@@ -77,7 +77,7 @@ class UpdateAccountInput(komand.Input):
     },
     "skus": {
       "type": "array",
-      "title": "Skus",
+      "title": "SKUs",
       "description": "The list of allowed SKUs for the account",
       "items": {
         "$ref": "#/definitions/skus"
@@ -192,7 +192,7 @@ class UpdateAccountOutput(komand.Output):
       "properties": {
         "accountType": {
           "type": "string",
-          "title": "Account type",
+          "title": "Account Type",
           "enum": [
             "Trial",
             "Paid"
@@ -201,7 +201,7 @@ class UpdateAccountOutput(komand.Output):
         },
         "activeAgents": {
           "type": "integer",
-          "title": "Active agents",
+          "title": "Active Agents Count",
           "description": "Total agents in the account",
           "order": 10
         },
@@ -241,7 +241,7 @@ class UpdateAccountOutput(komand.Output):
         },
         "skus": {
           "type": "array",
-          "title": "Skus",
+          "title": "SKUs",
           "description": "The list of allowed SKUs for the account",
           "items": {
             "$ref": "#/definitions/skus"

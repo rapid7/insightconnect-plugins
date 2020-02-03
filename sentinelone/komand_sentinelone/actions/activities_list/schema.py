@@ -165,7 +165,7 @@ class ActivitiesListInput(komand.Input):
     },
     "sort_by": {
       "type": "string",
-      "title": "Sort by",
+      "title": "Sort By",
       "description": "The column to sort the results by",
       "enum": [
         "id",

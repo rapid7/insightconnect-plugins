@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Sends a firewall logging command to all agents matching the input filter. Note - Firewall control feature must be enabled"
+    DESCRIPTION = "Sends a firewall logging command to all agents matching the input filter. Note - firewall control feature must be enabled"
 
 
 class Input:
@@ -46,13 +46,13 @@ class AgentsFirewallLoggingInput(komand.Input):
       "properties": {
         "reportLog": {
           "type": "boolean",
-          "title": "Repoort log",
+          "title": "Report Log",
           "description": "Report blocking activity to log",
           "order": 2
         },
         "reportMgmt": {
           "type": "boolean",
-          "title": "Repoort management",
+          "title": "Repoort Management",
           "description": "Report blocking activity to management",
           "order": 1
         }
