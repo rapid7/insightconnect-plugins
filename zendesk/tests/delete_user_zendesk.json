@@ -1,16 +1,7 @@
 {
     "body": {
         "action": "delete_user",
-        "connection": {
-            "api_key": {
-                "secretKey": null
-            },
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "subdomain": null
-        },
+        "connection": {},
         "input": {
             "user_id": "20181554587"
         },

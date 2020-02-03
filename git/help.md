@@ -24,8 +24,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|Git repository URL (e.g ssh\://myrepo.com/path/to/repo.git/; only SSH and HTTP/HTTPS protocols are supported)|None|
 |credentials|credential_username_password|None|False|Git username (if empty, 'x-auth-token' is used and 'password' field is considered an access token)|None|
+|url|string|None|True|Git repository URL (e.g ssh://myrepo.com/path/to/repo.git/; only SSH and HTTP/HTTPS protocols are supported)|None|
 
 ## Technical Details
 
@@ -45,9 +45,9 @@ This action is used to remove a file from the repository.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|None|
 |commit_id|string|False|Commit's hash|
 |commit_url|string|False|Commit's URL|
+|success|boolean|True|Is successful?|
 
 Example output:
 
@@ -76,9 +76,9 @@ This action is used to add a file to the repository.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|None|
 |commit_id|string|False|Commit's hash|
 |commit_url|string|False|Commit's URL|
+|success|boolean|True|Is successful?|
 
 Example output:
 
@@ -100,16 +100,16 @@ This action is used to append a line to a file and commit it.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|line|string|None|True|A line of text to append|None|
 |file_path|string|None|True|Path to the file|None|
+|line|string|None|True|A line of text to append|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|True|Is successful?|
 |commit_id|string|False|Commit's hash|
 |commit_url|string|False|Commit's URL|
+|success|boolean|True|Is successful?|
 
 Example output:
 

@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='zenhub-rapid7-plugin',
-      version='1.0.1',
-      description='The ZenHub plugin allows for agile project management in GitHub',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="zenhub-rapid7-plugin",
+      version="2.0.0",
+      description="Manage issues and epics in Zenhub, an agile project management tool for GitHub",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_zenhub']

@@ -1,13 +1,7 @@
 {
     "body": {
         "action": "agent_summary",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "url": null
-        },
+        "connection": {},
         "input": {},
         "meta": {}
     },

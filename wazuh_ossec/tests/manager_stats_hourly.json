@@ -1,13 +1,7 @@
 {
     "body": {
         "action": "manager_stats_hourly",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "url": null
-        },
+        "connection": {},
         "input": {},
         "meta": {}
     },

@@ -5,7 +5,7 @@ name: anomali_threatstream
 title: Anomali ThreatStream
 description: Anomali ThreatStream operationalizes threat intelligence, automating collection
   and integration that enables security teams to analyze and respond to threats
-version: 3.0.2
+version: 3.1.0
 vendor: rapid7
 support: community
 status: []
@@ -221,6 +221,86 @@ types:
       title: Import Session ID
       description: ID for import session
       type: string
+  report:
+    status:
+      title: Status
+      decription: Link to submission status
+      type: string
+    detail:
+      title: Details
+      decription: Link to submission details
+      type: string  
+    id:
+      title: ID
+      description: Submission ID
+      type: integer  
+    platform:
+        title: Platform
+        description: Platform on which the submitted URL or file will be run
+        type: string
+  info:
+    category:
+      title: Category
+      description: Category
+      type: string
+      required: true
+    confidence:
+      title: Confidence
+      description: Confidence
+      type: int
+      required: true
+    is_unknown:
+      title: Is Unknown
+      description: Is unknown
+      type: boolean
+      required: true
+    is_suspicious:
+      title: Is Suspicious
+      description: Is suspicious
+      type: boolean
+      required: true
+    is_malicious:
+      title: Is Malicious
+      description: Is malicious
+      type: boolean
+      required: true
+    started:
+      title: Started
+      description: Started
+      type: string
+      required: true
+    ended:
+      title: Ended
+      description: Ended
+      type: string
+      required: true
+    duration:
+      title: Duration
+      description: Duration
+      type: int
+      required: true
+  sandbox_report:
+    screenshots:
+      title: Screenshots
+      description: Screenshots
+      type: '[]string'
+      required: true
+    info:
+      title: Info
+      description: Info
+      type: info
+      required: true
+    signatures:
+      title: Signatures
+      description: Signatures
+      type: '[]object'
+      required: true
+    domains:
+      title: Domains
+      description: Domains
+      type: '[]string'
+      required: true
+
 connection:
   username:
     title: Username
@@ -324,3 +404,134 @@ actions:
         description: Results returned
         type: '[]result'
         required: false
+  submit_file:
+    title: Submit File
+    description: Submit a file to a ThreatStream sandbox
+    input:
+      platform:
+        required: true
+        title: Platform
+        description: Platform on which the submitted URL or file will be run
+        type: string
+        enum:
+        - ALL
+        - ANDROID4.4
+        - ANDROID5.1
+        - ANDROID6.0
+        - MACOSX
+        - WINDOWSXP
+        - WINDOWSXPNATIVE
+        - WINDOWS7
+        - WINDOWS7NATIVE
+        - WINDOWS7OFFICE2010
+        - WINDOWS7OFFICE2013
+        - WINDOWS10
+        - WINDOWS10x64
+      classification:
+        title: Classification
+        description: Classification of the Sandbox submission, either public or private
+        required: false
+        type: string
+        enum:
+        - private
+        - public
+        default: private
+      use_premium_sandbox:
+        title: Use Premium Sandbox
+        required: true
+        description: Specify whether the premium sandbox should be used for detonation
+        type: boolean
+      file:
+        type: file
+        title: File
+        required: true
+        description: File to detonate
+      detail:
+        title: Detail
+        description: A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"
+        required: false
+        type: string
+    output:
+      success:
+        title: Success
+        description: Operation status
+        type: boolean
+        required: false
+      reports:
+        title: Reports
+        description: Reports containing submission details
+        type: "[]report"
+        required: false
+  submit_url:
+    title: Submit URL
+    description: Submit a URL to a ThreatStream sandbox
+    input:
+      platform:
+        required: true
+        title: Platform
+        description: Platform on which the submitted URL or file will be run
+        type: string
+        enum:
+        - ALL
+        - ANDROID4.4
+        - ANDROID5.1
+        - ANDROID6.0
+        - MACOSX
+        - WINDOWSXP
+        - WINDOWSXPNATIVE
+        - WINDOWS7
+        - WINDOWS7NATIVE
+        - WINDOWS7OFFICE2010
+        - WINDOWS7OFFICE2013
+        - WINDOWS10
+        - WINDOWS10x64
+      classification:
+        title: Classification
+        description: Classification of the sandbox submission, either public or private
+        required: false
+        type: string
+        enum:
+        - private
+        - public
+        default: private
+      use_premium_sandbox:
+        title: Use Premium Sandbox
+        required: true
+        description: Specify whether the premium sandbox should be used for detonation
+        type: boolean
+      url:
+        type: string
+        title: URL
+        required: true
+        description: URL to detonate
+      detail:
+        title: Detail
+        description: A comma-separated list that provides additional details for the indicator. This information is displayed in the tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"
+        required: false
+        type: string
+    output:
+      success:
+        title: Success
+        description: Operation status
+        type: boolean
+        required: false
+      reports:
+        title: Reports
+        description: Reports containing submission details
+        type: "[]report"
+        required: false
+  get_sandbox_report:
+    title: Get Sandbox Report
+    description: Get a sandbox report
+    input:
+      report_id:
+        title: Report ID
+        description: Report ID
+        type: string
+        required: true
+    output:
+      sandbox_report:
+        title: Sandbox Report
+        description: Sandbox report
+        type: sandbox_report
+        required: true

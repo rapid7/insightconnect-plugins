@@ -1,7 +1,8 @@
 # Description
 
 [Nmap](https://nmap.org) ("Network Mapper") is an open source tool for network exploration and security auditing.
-The Nmap plugin runs Nmap directly and returns the results.
+Determine available hosts, their services, and other details of devices on the network.
+The Nmap plugin runs `nmap` directly and returns the results.
 
 # Key Features
 
@@ -33,13 +34,13 @@ This action is used to run an Nmap scan.
 |sudo|boolean|False|True|Whether or not to use superuser privileges for scan|None|
 |hosts|string|None|True|Host(s) to scan in Nmap-allowed formats|None|
 |ports|string|None|False|Port(s) to scan in Nmap-allowed formats|None|
-|arguments|string|None|False|Arguments to supply to the Nmap command, Nmap <arguments>|None|
+|arguments|string|None|False|Arguments to supply to the Nmap command|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result|[]hosts|False|Scan results|
+|result|[]host|False|Scan results|
 
 Example output:
 

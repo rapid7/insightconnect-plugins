@@ -18,5 +18,6 @@ class GetPhonesByUserId(komand.Action):
             results = komand.helper.clean({Output.PHONE_LIST: phone_list})
             return results
         except KeyError as e:
-            self.logger.error('User not found. Error: ' + str(e))
+            self.logger.error(f'User not found. Error: {str(e)}')
+
         return {Output.PHONE_LIST: []}

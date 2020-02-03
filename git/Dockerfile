@@ -16,7 +16,7 @@ WORKDIR /python/src
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
 
-RUN apt-get update && apt-get install -y git=1:2.1.4-2.1+deb8u6
+RUN apt-get update && apt-get install --force-yes -y git=1:2.1.4-2.1+deb8u6
 # Install pip dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 

@@ -32,19 +32,19 @@ with the extracted fields only.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|fields|string|None|False|Fields to filter E.g. f1, f2, f3-f6|None|
-|csv|bytes|None|False|Base64 encoded CSV file|None|
-
 Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to defined the extraction.
 For example, to extract fields 1, 2, 4, 5, 6 the following fields value can be used: `f1, f2, f4-6`.
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|csv|bytes|None|True|Base64 encoded CSV file|None|
+|fields|string|None|True|Fields to filter E.g. f1, f2, f3-f6|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|filtered|bytes|False|Filtered CSV file|
+|filtered|bytes|True|Filtered CSV file|
 
 #### Filter String
 
@@ -52,19 +52,19 @@ This action is used to extract fields from a user supplied CSV string and return
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|fields|string|None|False|Fields to filter E.g. f1, f2, f3-f6|None|
-|csv|string|None|False|CSV string|None|
-
 Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to defined the extraction. For example, to extract fields
 1, 2, 4, 5, 6 the following fields value can be used: `f1, f2, f4-6`.
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|csv|string|None|True|CSV string|None|
+|fields|string|None|True|Fields to filter E.g. f1, f2, f3-f6|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|string|string|False|Filtered CSV string|
+|string|string|True|Filtered CSV string|
 
 #### To JSON
 
@@ -75,6 +75,7 @@ This action is used to convert CSV to JSON.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |csv|bytes|None|True|Base64 encoded CSV file|None|
+|validation|boolean|False|True|Validate CSV data, error if not valid|None|
 
 ##### Output
 
@@ -146,7 +147,7 @@ CSV files must not have non-CSV data such as comments.
 
 # Version History
 
-* 1.1.4 - New spec and help.md format for the Hub
+* 1.1.4 - New spec and help.md format for the Hub | Add missing title values for actions in plugin.spec.yaml
 * 1.1.3 - Fix issue where connection tests were failing, output did not match spec
 * 1.1.2 - Support webserver mode
 * 1.1.1 - Fix JSON to CSV action to account for correct input type

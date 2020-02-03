@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name='nmap-rapid7-plugin',
       version='1.0.2',
-      description='Nmap is used to launch scan against a networt to discover and audit',
+      description='Open source utility for network discovery and security auditing',
       author='rapid7',
       author_email='',
       url='',

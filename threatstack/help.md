@@ -11,12 +11,12 @@ In addition, Threat Stack will be deprecating this API in favor of version 2 whe
 
 # Key Features
 
-* Get information about Alerts, Organizations, Policies, and Agents
+* Get information about alerts, organizations, policies, and agents
 
 # Requirements
 
 * A Threat Stack API key
-* An Organization ID
+* An organization ID
 * The Threat Stack API version
 
 # Documentation
@@ -28,8 +28,8 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |api_key|credential_secret_key|None|True|REST API key|None|
-|org_id|string||False|Threat Stack Org ID (For use when multiple orgs)|None|
 |api_version|integer|1|False|API version|None|
+|org_id|string||False|Threat Stack Org ID (For use when multiple orgs)|None|
 |timeout|integer|120|False|API timeout|None|
 
 ## Technical Details
@@ -44,8 +44,8 @@ This action is used to get alert data by ID.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|fields|[]string|None|False|Fields to return|None|
 |alert_id|string|None|True|Alert ID e.g. 597b8c751c7ff17fcf028e54|None|
+|fields|[]string|None|False|Fields to return|None|
 
 ##### Output
 
@@ -330,16 +330,16 @@ This action is used to get alerts by filter.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|start|string|None|False|Start date e.g. 2017-01-01|None|
 |end|string|None|False|End date e.g. 2018-01-01|None|
 |fields|[]string|None|False|Fields to return|None|
+|start|string|None|False|Start date e.g. 2017-01-01|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|count|integer|True|Number of alerts|
 |alerts|[]object|True|List of alerts|
+|count|integer|True|Number of alerts|
 
 Example output:
 
@@ -562,8 +562,8 @@ This action is used to get an organization.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|organization_id|string|None|True|Threat Stack organization ID e.g. 583cb310a3d05a733a4383ap|None|
 |fields|[]string|None|False|Fields to return|None|
+|organization_id|string|None|True|Threat Stack organization ID e.g. 583cb310a3d05a733a4383ap|None|
 
 ##### Output
 
@@ -593,16 +593,16 @@ This action is used to get agent data.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|start|string|None|False|Start date e.g. 2017-01-01|None|
 |end|string|None|False|End date e.g. 2018-01-01|None|
 |fields|[]string|None|False|Fields to return|None|
+|start|string|None|False|Start date e.g. 2017-01-01|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|count|integer|True|Number of agents|
 |alerts|[]object|True|List of agents|
+|count|integer|True|Number of agents|
 
 Example output:
 
@@ -742,8 +742,8 @@ This action is used to get agent data.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|fields|[]string|None|False|Fields to return|None|
 |agent_id|string|None|True|Agent ID e.g. 597b2c751b7cc18fcf028e52|None|
+|fields|[]string|None|False|Fields to return|None|
 
 ##### Output
 

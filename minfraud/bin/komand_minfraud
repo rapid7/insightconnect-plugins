@@ -6,8 +6,8 @@ from komand_minfraud import connection, actions, triggers
 
 Name = 'minFraud'
 Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'The MaxMind minFraud services help identify fraudulent online transactions'
+Version = '2.0.0'
+Description = 'Identify fraudulent online transactions. Examples include e-commerce, user account creation, and application installations'
 
 
 class ICONMinfraud(komand.Plugin):

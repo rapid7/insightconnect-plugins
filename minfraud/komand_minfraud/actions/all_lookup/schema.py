@@ -288,8 +288,8 @@ class AllLookupInput(komand.Input):
     },
     "order_subaffiliate_id": {
       "type": "string",
-      "title": "Subaffiliate ID",
-      "description": "ID of the subaffiliate",
+      "title": "Sub affiliate ID",
+      "description": "ID of the sub affiliate",
       "order": 50
     },
     "payment_decline_code": {
@@ -301,7 +301,7 @@ class AllLookupInput(komand.Input):
     "payment_processor": {
       "type": "string",
       "title": "Payment Processor",
-      "description": "Payment process ued for transaction",
+      "description": "Payment process used for transaction",
       "enum": [
         "none",
         "adyen",
@@ -386,7 +386,7 @@ class AllLookupInput(komand.Input):
     "payment_was_authorized": {
       "type": "boolean",
       "title": "Payment Was Authorized",
-      "description": "Payment authroized: true/false",
+      "description": "Payment authorized: true/false",
       "order": 36
     },
     "price": {
@@ -832,7 +832,7 @@ class AllLookupOutput(komand.Output):
             "city": {
               "$ref": "#/definitions/city",
               "title": "City",
-              "description": "City assocaited with IP",
+              "description": "City associated with IP",
               "order": 2
             },
             "continent": {
@@ -1708,7 +1708,7 @@ class AllLookupOutput(komand.Output):
         "city": {
           "$ref": "#/definitions/city",
           "title": "City",
-          "description": "City assocaited with IP",
+          "description": "City associated with IP",
           "order": 2
         },
         "continent": {

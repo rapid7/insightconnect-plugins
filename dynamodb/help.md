@@ -53,7 +53,7 @@ overwrite the existing record.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|None|
+|success|boolean|False|Success|
 
 #### Update
 
@@ -66,15 +66,15 @@ are met.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |condition_expression|string|None|False|An optional expression that can be used to reject updates based on evaluating existing data|None|
-|table|string|None|True|The table name to store into|None|
 |data|object|None|True|The object data to update, as key/value pairs|None|
 |key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|
+|table|string|None|True|The table name to store into|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|None|
+|success|boolean|False|Success|
 
 #### Scan
 
@@ -87,15 +87,15 @@ It will return the list of objects found, and a count of the records.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |table|string|None|True|The table name to search|None|
-|params|object|None|True|The params to query with, as key/value pairs|None|
+|params|object|None|False|The params to query with, as key/value pairs|None|
 |index|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|count|int|False|None|
-|records|array|False|None|
+|count|int|False|Count|
+|records|array|False|Records|
 
 ### Triggers
 
@@ -111,7 +111,7 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Version History
 
-* 1.0.2 - New spec and help.md format for the Hub
+* 1.0.2 - New spec and help.md format for the Hub | Add missing title values for actions in plugin.spec.yaml
 * 1.0.1 - Set `params` input in Scan action to not required
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.2 - Clean up unsatisfactory debugging message
@@ -124,4 +124,3 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 * [Dynamo Developer Resources](https://aws.amazon.com/dynamodb/developer-resources/)
 * [Dynamo Condition Expression Guide](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html#ConditionExpressionReference)
-

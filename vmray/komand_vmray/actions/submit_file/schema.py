@@ -289,7 +289,7 @@ class SubmitFileOutput(komand.Output):
         "submission_analyzer_mode_enable_whois": {
           "type": "boolean",
           "title": "Submission Analyzer Mode Enable WHOIS",
-          "description": "Submission analyzer mode enable whois",
+          "description": "Submission analyzer mode enable WHOIS",
           "order": 4
         },
         "submission_analyzer_mode_id": {
@@ -739,7 +739,7 @@ class SubmitFileOutput(komand.Output):
             "submission_analyzer_mode_enable_whois": {
               "type": "boolean",
               "title": "Submission Analyzer Mode Enable WHOIS",
-              "description": "Submission analyzer mode enable whois",
+              "description": "Submission analyzer mode enable WHOIS",
               "order": 4
             },
             "submission_analyzer_mode_id": {

@@ -12,7 +12,7 @@
     },
     "action": "add_email_recipient",
     "input": {
-      "recipient": "input@example.org",
+      "recipient": "user@example.com",
       "event": "762",
       "comment": "Test",
       "distribution": "This Organization",

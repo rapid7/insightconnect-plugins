@@ -12,7 +12,7 @@
 
 # Requirements
 
-* Host name and port number (the default TCP/UDP port for LDAP is 389)
+* Host name and port number (the default TCP/UDP port for LDAP is 389, and 636 for LDAP over SSL)
 * Administrative credentials
 
 # Documentation
@@ -30,7 +30,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |use_ssl|boolean|None|True|Use SSL?|None|
-|host|string|None|True|Server Host, e.g. ldap\://192.5.5.5. Must use either ldap\:// or ldaps\:// for SSL prefix|None|
+|host|string|None|True|Server Host, e.g. ldap://192.5.5.5. Must use either ldap:// or ldaps:// for SSL prefix|None|
 |port|integer|389|True|Port, e.g. 389|None|
 |username_password|credential_username_password|None|True|Username and password|None|
 
@@ -353,6 +353,7 @@ paired `\(\)` are supported
 
 # Version History
 
+* 3.2.8 - Fix issue were adding objects to containers might fail
 * 3.2.7 - New spec and help.md format for the Hub
 * 3.2.6 - Update help to document supported Windows Server versions
 * 3.2.5 - Clean connection test output

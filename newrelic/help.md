@@ -1,11 +1,15 @@
 # Description
 
 [New Relic](https://www.newrelic.com) monitors the performance of applications and infrastructure.
+This is an observation platform to monitor activity, log and aggregate the data to find dependencies, bottlenecks
+and provide reports. Programmable to create custom management rules and power applications.
 This plugin utilizes the [newrelic-api](https://pypi.python.org/pypi/newrelic-api/1.0.4) python library.
 
 # Key Features
 
 * Monitor system integrity
+* Incident Reporting with AI
+* Application integration and monitoring
 
 # Requirements
 
@@ -25,7 +29,7 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-#### List Users
+#### List User
 
 This action is used to show a paginated list of all users. Users can be filtered by their IDs or email.
 
@@ -34,7 +38,7 @@ This action is used to show a paginated list of all users. Users can be filtered
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|False|Filter by user email|None|
-|ids|string|None|False|Filter by user IDs. IDs should be a comma separated list eg 123,345,678|None|
+|ids|string|None|False|Filter by user IDs. IDs should be a comma separated list|None|
 
 ##### Output
 
@@ -52,7 +56,7 @@ Example output:
       "id": 2162712,
       "first_name": "Jane",
       "last_name": "Doe",
-      "email": "jane_doe@example.com",
+      "email": "user@example.com",
       "role": "owner"
     }
   ]
@@ -88,7 +92,7 @@ Example output:
       "id": 2162712,
       "first_name": "Jane",
       "last_name": "Doe",
-      "email": "jane_doe@company.com",
+      "email": "user@example.com",
       "role": "owner"
     }
   }

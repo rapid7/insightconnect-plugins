@@ -3,15 +3,15 @@
         "action": "disable_user",
         "connection": {
             "host": "",
-            "port": "",
-            "use_ssl": "",
+            "port": 636,
+            "use_ssl": true,
             "username_password": {
                 "password": "",
                 "username": ""
             }
         },
         "input": {
-            "distinguished_name": "CN=hollis, brown,OU=domain_users,DC=mattsdomain,DC=local"
+            "distinguished_name": "CN=hollis, brown,OU=domain_users,DC=example,DC=local"
         },
         "meta": {}
     },

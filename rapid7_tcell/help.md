@@ -876,7 +876,7 @@ This action is used to fetch details for the inline script with the given ID.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|inline_script|inline_script|False|Details for the given inline script, including approved\: whether the script is marked as intended; template\: the script text with literals replaced by ?; created_at\: when the script was added to the tCell database; last_reported_at\: when the jsagent last reported this script|
+|inline_script|inline_script|False|Details for the given inline script, including approved: whether the script is marked as intended; template: the script text with literals replaced by ?; created_at: when the script was added to the tCell database; last_reported_at: when the jsagent last reported this script|
 
 Example output:
 
@@ -2177,7 +2177,7 @@ This trigger is used to fetch events of the provided type.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|filter|string|None|False|Filters out events based on a predicate. The syntax is filter=field\:operator\:value, where\: field is a field present in the data operator is one of include (equals), exclude (not equals), gt (greater than), and lt (less than) value is the value to apply the operator to|None|
+|filter|string|None|False|Filters out events based on a predicate. The syntax is filter=field:operator:value, where: field is a field present in the data operator is one of include (equals), exclude (not equals), gt (greater than), and lt (less than) value is the value to apply the operator to|None|
 |source|string|None|True|The type of events to fetch|['appfirewall', 'inline', 'login', 'csp']|
 |frequency|integer|5|True|How often the trigger should check for new detections in seconds|None|
 |app_id|string|None|True|App ID|None|

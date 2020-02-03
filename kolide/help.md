@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|https\://localhost\:8080|True|URL to connect to|None|
+|url|string|https://localhost:8080|True|URL to connect to|None|
 |api_token|credential_secret_key|None|True|API token for Kolide|None|
 |ssl_verify|boolean|False|True|Verify SSL certificate|None|
 

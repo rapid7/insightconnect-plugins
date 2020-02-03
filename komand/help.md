@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to Komand server, e.g. https\://komand.company.com|None|
+|url|string|None|True|URL to Komand server, e.g. https://komand.company.com|None|
 |credentials|credential_username_password|None|True|Username and password for user|None|
 
 ## Technical Details

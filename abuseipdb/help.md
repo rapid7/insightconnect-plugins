@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|credentials|credential_secret_key|None|True|API key|None|
+|credentials|credential_secret_key|None|True|API key from account|None|
 
 ## Technical Details
 
@@ -76,7 +76,7 @@ This action is used to look up an IP address in the database.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|address|string|None|True|IPv4 or IPv6 address e.g. 8.8.8.8, ::1|None|
+|address|string|None|True|IPv4 or IPv6 address e.g. 8.8.8.8, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)|None|
 |days|string|30|True|Check for IP reports in the last x days|None|
 |verbose|boolean|True|True|When set, reports will include the comment (if any) and the reporter's user ID number (0 if reported anonymously)|None|
 
@@ -159,12 +159,12 @@ This action is used to look up a CIDR address in the database.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|addressSpaceDesc|string|False|Address space description|
+|addressSpaceDesc|string|False|Description of address space|
 |found|boolean|True|Whether the CIDR was found in the database|
-|maxAddress|string|False|Maximum address|
-|minAddress|string|False|Minimum address|
-|netmask|string|False|Netmask|
-|networkAddress|string|False|Network address|
+|maxAddress|string|False|Last address in block|
+|minAddress|string|False|First address in block|
+|netmask|string|False|Netmask, ie. 24|
+|networkAddress|string|False|Network address in block|
 |numPossibleHosts|integer|False|Number of possible hosts|
 |reportedAddress|[]reportedIPs|False|List of reported IPs|
 
@@ -289,6 +289,7 @@ There's a rate limit on the free API service. The following error messags `429 C
 
 # Version History
 
+* 5.0.2 - Changed descriptions | Removed duplicated code | Use output constants | Added "f" strings
 * 5.0.1 - New spec and help.md format for the Hub
 * 5.0.0 - Mark certain outputs as optional as they are not always returned by the AbuseIPDB service | Clean output of null values
 * 4.0.1 - Transform null value of various output properties of Check IP action to false or empty string.
