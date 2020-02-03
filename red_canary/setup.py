@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='red_canary-rapid7-plugin',
-      version='2.1.5',
-      description='The RedCanary plugin allows you to manage endpoint detection and respond to threats',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="red_canary-rapid7-plugin",
+      version="2.1.6",
+      description="The RedCanary plugin allows you to manage endpoint detection and respond to threats",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_red_canary']
