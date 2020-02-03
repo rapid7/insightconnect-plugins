@@ -10,5 +10,5 @@ class Connection(komand.Connection):
     def connect(self, params):
         pass
     
-    def test(self)
+    def test(self):
         return {}
