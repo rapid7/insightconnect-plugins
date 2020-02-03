@@ -8,7 +8,7 @@
             "okta_url": null
         },
         "input": {
-            "email": "unknown@blah.com"
+            "email": "user@example.com"
         },
         "meta": {}
     },
