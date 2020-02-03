@@ -1,7 +1,7 @@
 {
-	"spec": "f2494fdd7fe28d8d6a3345d11fd502f2",
-	"manifest": "7c3463653e752b82b20a7b1abf05803a",
-	"setup": "02a94282c2e8ca18332e241d36b5e725",
+	"spec": "efc400c09a095ca4a1ed2df0910865d2",
+	"manifest": "bf30ddb29f29b955bf4c9f75e747cf26",
+	"setup": "b20036ef40d4fe3ff5b426294a8a29dd",
 	"schemas": [
 		{
 			"identifier": "publish_event/schema.py",
