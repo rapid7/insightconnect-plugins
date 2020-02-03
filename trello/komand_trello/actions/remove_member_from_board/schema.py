@@ -121,7 +121,7 @@ class RemoveMemberFromBoardOutput(komand.Output):
     "shortUrl": {
       "type": "string",
       "title": "Short URL",
-      "description": "Short url",
+      "description": "Short URL",
       "order": 4
     },
     "url": {
