@@ -4,10 +4,10 @@ import komand
 from komand_splunk import connection, actions, triggers
 
 
-Name = 'Splunk'
-Vendor = 'rapid7'
-Version = '3.0.1'
-Description = 'The Splunk plugin allows you to search, monitor, analyze and analyze machine data'
+Name = "Splunk"
+Vendor = "rapid7"
+Version = "3.0.2"
+Description = "The Splunk plugin allows you to search, monitor, and analyze machine data"
 
 
 class ICONSplunk(komand.Plugin):

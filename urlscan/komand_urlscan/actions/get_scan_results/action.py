@@ -1,5 +1,5 @@
 import komand
-from .schema import GetScanResultsInput, GetScanResultsOutput
+from .schema import GetScanResultsInput, GetScanResultsOutput, Input, Output, Component
 # Custom imports below
 from komand.exceptions import PluginException
 import requests
@@ -10,19 +10,21 @@ class GetScanResults(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_scan_results',
-                description='Get the results of a scan',
-                input=GetScanResultsInput(),
-                output=GetScanResultsOutput())
+            name='get_scan_results',
+            description=Component.DESCRIPTION,
+            input=GetScanResultsInput(),
+            output=GetScanResultsOutput())
 
     def run(self, params={}):
-        response = requests.get("https://urlscan.io/api/v1/result/" + params["scan_id"], headers=self.connection.headers)
+        response = requests.get(f"{self.connection.server}/result/{params[Input.SCAN_ID]}",
+                                headers=self.connection.headers)
 
         try:
             js = response.json()
         except json.JSONDecodeError as e:
             raise PluginException(cause="Received an unexpected response from the Urlscan API. ",
-                                  assistance="(non-JSON or no response was received). Response was: %s" % response.text)
+                                  assistance=f"(non-JSON or no response was received). Response was: {response.text}",
+                                  data=e)
 
         # Non-200 status code responses should have a JSON payload containing message, description, and status code
         # Display those values to the user for assistance purposes.
@@ -38,17 +40,18 @@ class GetScanResults(komand.Action):
                 raise PluginException(cause=js['message'], assistance=js['description'])
 
             raise PluginException(cause="Received an unexpected response from the Urlscan API. ",
-                                  assistance="If the problem persists, please contact support. Response was: %s" % response.text)
+                                  assistance=f"If the problem persists, please contact support. Response was: {response.text}")
 
         try:
             ret = js["data"]
             su = js["task"]["screenshotURL"]
         except KeyError as e:
             raise PluginException(cause="Received an unexpected response from the Urlscan API. ",
-                                  assistance="Please ensure your scan report is ready and that you're using a valid scan ID: Response was: %s" % response.text)
-            
+                                  assistance=f"Please ensure your scan report is ready and that you're using a valid scan ID: Response was: {response.text}",
+                                  data=e)
+
         ret["screenshotURL"] = su
 
         return {
-            "scan_results": ret
+            Output.SCAN_RESULTS: ret
         }
