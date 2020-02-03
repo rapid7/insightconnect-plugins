@@ -5,7 +5,7 @@ name: csv
 title: CSV
 description: "CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to
   extract fields from CSV strings and files"
-version: 1.1.4
+version: 1.1.5
 vendor: rapid7
 support: community
 status: []

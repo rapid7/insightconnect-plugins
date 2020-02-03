@@ -3,14 +3,14 @@
         "action": "get_saved_search_job_history",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "host": null,
-            "license": null,
-            "port": null,
-            "ssl_verify": null,
-            "use_ssl": null
+            "host": "",
+            "license": "",
+            "port": "",
+            "ssl_verify": "",
+            "use_ssl": ""
         },
         "input": {
             "saved_search_name": ""

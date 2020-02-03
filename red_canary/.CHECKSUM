@@ -1,7 +1,7 @@
 {
-	"spec": "a90f6ce6ab90d61628731c686d946600",
-	"manifest": "5c4784fe32c3827f3382166f73ebc0a2",
-	"setup": "036f4019bd1b2415405739b8f19e1eb4",
+	"spec": "1b053effb13da754c08c61c869bc8bb0",
+	"manifest": "2e067fa87f6c05e8091b959df8e8c023",
+	"setup": "9397906b5f2e05239c40e5404fc4a2d5",
 	"schemas": [
 		{
 			"identifier": "acknowledge_detection/schema.py",

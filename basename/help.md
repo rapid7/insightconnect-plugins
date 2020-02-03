@@ -46,7 +46,7 @@ This action is used to get the `basename` of a path.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|basename|string|False|None|
+|basename|string|False|Basename result|
 
 ### Triggers
 
