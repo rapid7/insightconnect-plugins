@@ -4,10 +4,10 @@ import komand
 from komand_tenable_io import connection, actions, triggers
 
 
-Name = 'TenableIO'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'The TenableIO plugin allows you to launch scans and analyze reports'
+Name = "TenableIO"
+Vendor = "rapid7"
+Version = "1.0.2"
+Description = "The TenableIO plugin allows you to launch scans and analyze reports"
 
 
 class ICONTenableIo(komand.Plugin):
