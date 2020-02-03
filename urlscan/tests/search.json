@@ -3,13 +3,13 @@
         "action": "search",
         "connection": {
             "api_key": {
-                "secretKey": null
+                "secretKey": ""
             }
         },
         "input": {
             "offset": 0,
             "q": "domain:urlscan.io",
-            "size": 100,
+            "size": 1,
             "sort": "_score"
         },
         "meta": {}

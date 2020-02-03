@@ -4,10 +4,10 @@ import komand
 from icon_viper import connection, actions, triggers
 
 
-Name = 'Viper'
-Vendor = 'rapid7'
-Version = '2.0.1'
-Description = 'Analyze files and use binary analysis to detect malware in files'
+Name = "Viper"
+Vendor = "rapid7"
+Version = "2.1.0"
+Description = "Analyze files and use binary analysis to detect malware in files"
 
 
 class ICONViper(komand.Plugin):

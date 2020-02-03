@@ -4,10 +4,10 @@ import komand
 from komand_git import connection, actions, triggers
 
 
-Name = 'Git'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'Git plugin allows you to add, remove and commit files to Git repository'
+Name = "Git"
+Vendor = "rapid7"
+Version = "1.0.1"
+Description = "Git plugin allows you to add, remove and commit files to Git repository"
 
 
 class ICONGit(komand.Plugin):
