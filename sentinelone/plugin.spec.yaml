@@ -1928,17 +1928,17 @@ actions:
         type: boolean
         required: false
   get_accounts:
-    title: Get accounts
+    title: Get Accounts
     description: Get a list of accounts
     input:
       features:
         title: Features
-        description: If sent return only accounts that support this features. Example firewall-control
+        description: Return only accounts supporting the listed features. Example firewall-control
         type: '[]string'
         required: false
       active_licenses:
         title: Active Licenses
-        description: How much licenses are active
+        description: How many licenses are active
         type: integer
         required: false
       skip:
@@ -1961,7 +1961,7 @@ actions:
           - Paid
       expiration:
         title: Expiration
-        description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+        description: When account should expire, example: 2018-02-27T04:49:26.257525Z
         type: string
         required: false
       query:
@@ -1980,7 +1980,7 @@ actions:
         type: boolean
         required: false
       updated_at:
-        title: Updated at
+        title: Updated At
         description: Timestamp of last update. Example 2018-02-27T04:49:26.257525Z
         type: string
         required: false
@@ -2033,7 +2033,7 @@ actions:
         type: boolean
         required: false
       sort_by:
-        title: Sort by
+        title: Sort By
         description: The column to sort the results by. Example id
         type: string
         required: false
@@ -2061,7 +2061,7 @@ actions:
         type: pagination
         required: false
   private_accounts:
-    title: Get private accounts
+    title: Get Private Accounts
     description: 'DEPRECATED Get a list of accounts'
     input:
       query:
@@ -2085,7 +2085,7 @@ actions:
         type: integer
         required: false
       sort_by:
-        title: Sort by
+        title: Sort By
         description: The column to sort the results by. Example id
         type: string
         required: false
@@ -2159,13 +2159,13 @@ actions:
         type: admin_account_user
         required: true
       skus:
-        title: Skus
+        title: SKUs
         description: The list of allowed SKUs for the account
         type: '[]skus'
         required: true
       external_id:
         title: External ID
-        description: Id of CRM external system
+        description: External ID of CRM system
         type: string
         required: false
       policy:
@@ -2195,11 +2195,11 @@ actions:
         type: boolean
         required: true
   last_activity_as_syslog:
-    title: Last activity as Syslog message
+    title: Last Activity as Syslog Message
     description: Get Syslog message corresponding to the last activity matching the given criteria
     input:
       created_at_lte:
-        title: Less Or Equal Date
+        title: Less Than or Equal Date
         description: Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
         type: string
         required: false
@@ -2224,7 +2224,7 @@ actions:
         type: boolean
         required: false
       threat_ids:
-        title: Threat IDS
+        title: Threat IDs
         description: Return only these activity codes
         type: '[]string'
         required: false
@@ -2234,17 +2234,17 @@ actions:
         type: '[]string'
         required: false
       account_ids:
-        title: Account IDS
+        title: Account IDs
         description: List of Account IDs to filter by
         type: '[]string'
         required: false
       created_at_gte:
-        title: Greater Or Equal Date
+        title: Greater Than or Equal Date
         description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
         type: string
         required: false
       ids:
-        title: Activity IDS
+        title: Activity IDs
         description: If true, total number of items will not be calculated, which speeds up execution time
         type: '[]string'
         required: false
@@ -2259,12 +2259,12 @@ actions:
         type: boolean
         required: false
       user_ids:
-        title: User IDS
+        title: User IDs
         description: The user who invoked the activity (If applicable)
         type: '[]string'
         required: false
       sort_by:
-        title: Sort by
+        title: Sort By
         description: The column to sort the results by
         type: string
         required: false
@@ -2273,13 +2273,13 @@ actions:
           - activityType
           - createdAt
       created_at_lt:
-        title: Less Then Date
+        title: Less Than Date
         description: Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
         type: string
         required: false
       agent_ids:
-        title: Agent IDS
-        description: Return activities related to specified agent ids
+        title: Agent IDs
+        description: Return activities related to specified agent IDs
         type: '[]string'
         required: false
       site_ids:
@@ -2298,13 +2298,13 @@ actions:
         type: string
         required: false
       created_at_gt:
-        title: Greater Then Date
+        title: Greater Than or Equal Date
         description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
         type: string
         required: false
       user_emails:
         title: User Emails
-        description: Email of the user who invoked the activity (If applicable)
+        description: Email of the user who invoked the activity (if applicable)
         type: '[]string'
         required: false
       sort_order:
@@ -2327,8 +2327,8 @@ actions:
         type: pagination
         required: true
   update_account:
-    title: Update account
-    description: Update accounts data
+    title: Update Account
+    description: Update account data
     input:
       account_id:
         title: Account ID
@@ -2337,16 +2337,16 @@ actions:
         required: true
       external_id:
         title: External ID
-        description: Id of CRM external system
+        description: External ID of CRM system
         type: string
         required: false
       skus:
-        title: Skus
+        title: SKUs
         description: The list of allowed SKUs for the account
         type: '[]skus'
         required: true
       account_type:
-        title: Account type
+        title: Account Type
         description: Account type. Example Trial
         type: string
         required: true
@@ -2370,7 +2370,7 @@ actions:
         required: false
       expiration:
         title: Expiration
-        description: "When account should expire, example: 2018-02-27T04:49:26.257525Z"
+        description: When account should expire, example: 2018-02-27T04:49:26.257525Z
         type: string
         required: false
       unlimited_expiration:
