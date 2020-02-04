@@ -35,6 +35,13 @@ actions:
         description: Wait x seconds after page load before taking screenshot
         required: false
         order: 2
+      full_page:
+        title: Full Page Capture
+        description: Export screenshot of "body" element instead of the default viewport.  This "body" element may have some formatting issues but should contain all elements of the page
+        type: boolean
+        required: true
+        default: false
+        order: 3
     output:
       screenshot:
         title: Screenshot

@@ -4,11 +4,12 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Grab a Screenshot of a URL from the Orchestrator"
+    DESCRIPTION = "Takes a screenshot of a URL from the Orchestrator"
 
 
 class Input:
     DELAY = "delay"
+    FULL_PAGE = "full_page"
     URL = "url"
     
 
@@ -28,14 +29,22 @@ class ScreenshotInput(komand.Input):
       "description": "Wait x seconds after page load before taking screenshot",
       "order": 2
     },
+    "full_page": {
+      "type": "boolean",
+      "title": "Full Page Capture",
+      "description": "Export screenshot of \\"body\\" element instead of the default viewport.  This \\"body\\" element may have some formatting issues but should contain all elements of the page",
+      "default": false,
+      "order": 3
+    },
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "URL to Screenshot",
+      "description": "URL to screenshot",
       "order": 1
     }
   },
   "required": [
+    "full_page",
     "url"
   ]
 }
