@@ -52,7 +52,7 @@ Example Output:
 {
   "links": [
     {
-      "href": "https://integrations-ivm-console.vuln.lax.rapid7.com:3780/api/3/asset_groups/1/assets",
+      "href": "https://insightvm:3780/api/3/asset_groups/1/assets",
       "rel": "self"
     }
   ],
