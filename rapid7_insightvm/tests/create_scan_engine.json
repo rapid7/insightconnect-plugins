@@ -3,10 +3,10 @@
         "action": "create_scan_engine",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "address": "",

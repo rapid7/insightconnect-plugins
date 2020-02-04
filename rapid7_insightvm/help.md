@@ -22,12 +22,43 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780|None|
 |credentials|credential_username_password|None|True|Username and password|None|
+|url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780|None|
 
 ## Technical Details
 
 ### Actions
+
+#### Get Asset Group Assets
+
+This action is used to get Asset Group Assets.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|id|integer|None|True|Asset group ID|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|links|[]link|True|Hypermedia links to corresponding or related resources|
+|resources|[]integer|False|The identifiers of the associated resources|
+
+Example Output:
+
+```
+{
+  "links": [
+    {
+      "href": "https://integrations-ivm-console.vuln.lax.rapid7.com:3780/api/3/asset_groups/1/assets",
+      "rel": "self"
+    }
+  ],
+  "resources": []
+}
+```
 
 #### Get Asset
 
@@ -45,7 +76,7 @@ This action gets an asset by ID.
 |----|----|--------|-----------|
 |asset|asset|True|Asset details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -194,7 +225,7 @@ This action is used to get a listing of all tags for an asset.
 |----|----|--------|-----------|
 |tags|[]tag|True|List of tags|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -313,7 +344,7 @@ This action is used to get vulnerabilities found on an asset. Can only be used i
 |----|----|--------|-----------|
 |vulnerabilities|[]asset_vulnerability|False|Vulnerabilities found on the asset|
 
-Example output:
+Example Output:
 
 ```
 
@@ -379,7 +410,7 @@ This action is used to get software found on an asset. Can only be used if the a
 |----|----|--------|-----------|
 |software|[]software|False|Software found on the asset|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -411,19 +442,19 @@ This action is used to get the status of a scan.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Scan status (aborted, unknown, running, finished, stopped, error, paused, dispatched or integrating)|
-|scanType|string|False|Scan type (manual, automated, scheduled)|
 |assets|integer|False|Number of assets within the scan|
-|links|[]link|False|Links|
-|vulnerabilities|vulnerabilities_count|False|Counts of vulnerabilities found within the scan|
-|startTime|string|False|Start time of the scan in ISO8601 format|
 |duration|string|False|Duration of the scan in ISO8601 format|
-|engineName|string|False|Name of the engine used for the scan|
 |endTime|string|False|End time of the scan in ISO8601 format|
+|engineName|string|False|Name of the engine used for the scan|
 |id|integer|False|ID of the scan|
+|links|[]link|False|Links|
 |scanName|string|False|User-driven scan name for the scan|
+|scanType|string|False|Scan type (manual, automated, scheduled)|
+|startTime|string|False|Start time of the scan in ISO8601 format|
+|status|string|False|Scan status (aborted, unknown, running, finished, stopped, error, paused, dispatched or integrating)|
+|vulnerabilities|vulnerabilities_count|False|Counts of vulnerabilities found within the scan|
 
-Example output:
+Example Output:
 
 ```
 
@@ -468,7 +499,7 @@ This action is used to get assets for a site.
 |----|----|--------|-----------|
 |assets|[]asset|False|Assets|
 
-Example output:
+Example Output:
 
 ```
 
@@ -542,7 +573,7 @@ This action is used to start a scan on a site.
 |id|integer|False|Scan ID|
 |links|[]link|False|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 
@@ -584,7 +615,7 @@ This action is used to create, generate, download, and cleanup a SQL report base
 |----|----|--------|-----------|
 |report|file|True|Base64 encoded file making up the report|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -603,8 +634,8 @@ This action is used to return the contents of a generated report.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|instance|string|None|True|The identifier of the report instance, 'latest' or ID e.g. 100|None|
 |id|integer|None|True|Identifier of the report to download e.g. 265|None|
+|instance|string|None|True|The identifier of the report instance, 'latest' or ID e.g. 100|None|
 
 ##### Output
 
@@ -612,7 +643,7 @@ This action is used to return the contents of a generated report.
 |----|----|--------|-----------|
 |report|bytes|False|Base64 encoded report|
 
-Example output:
+Example Output:
 
 ```
 
@@ -630,8 +661,8 @@ This action is used to list reports and return their identifiers.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sort|string|None|True|Sort order, ascending or descending|['Ascending', 'Descending']|
 |name|string|None|False|Name of report, otherwise all reports by criteria|None|
+|sort|string|None|True|Sort order, ascending or descending|['Ascending', 'Descending']|
 
 ##### Output
 
@@ -640,7 +671,7 @@ This action is used to list reports and return their identifiers.
 |found|boolean|False|Whether optional user supplied report name was found|
 |list|[]report_id|False|List of report identifiers|
 
-Example output:
+Example Output:
 
 ```
 
@@ -674,10 +705,10 @@ This action is used to get the assets affected by the vulnerability.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|links|[]link|False|Hypermedia links to corresponding or related resources|
-|resources|[]integer|False|The identifiers of the associated resources|
+|links|[]link|True|Hypermedia links to corresponding or related resources|
+|resources|[]integer|True|The identifiers of the associated resources|
 
-Example output:
+Example Output:
 
 ```
 
@@ -712,10 +743,10 @@ This action is used to create a new tag.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|name|string|None|True|Tag name|None|
-|type|string|None|True|Tag type|['owner', 'location', 'custom']|
 |color|string|default|False|Tag color (only available for custom tags)|['default', 'blue', 'green', 'orange', 'purple', 'red']|
+|name|string|None|True|Tag name|None|
 |searchCriteria|object|None|False|Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
+|type|string|None|True|Tag type|['owner', 'location', 'custom']|
 
 ##### Output
 
@@ -723,7 +754,7 @@ This action is used to create a new tag.
 |----|----|--------|-----------|
 |id|integer|True|ID of the created tag|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -747,7 +778,7 @@ This action is used to delete an existing tag.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -768,8 +799,8 @@ This action is used to get a listing of all tags and return their details.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|type|string||False|Type of tag by which to filter, all types are returned if none is specified|['owner', 'location', 'custom', 'criticality', '']|
 |name|string||False|Tag name regular expression by which to filter|None|
+|type|string||False|Type of tag by which to filter, all types are returned if none is specified|['owner', 'location', 'custom', 'criticality', '']|
 
 ##### Output
 
@@ -777,7 +808,7 @@ This action is used to get a listing of all tags and return their details.
 |----|----|--------|-----------|
 |tags|[]tag|True|List of tags|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -872,7 +903,7 @@ This action is used to get tag details by tag ID.
 |----|----|--------|-----------|
 |tag|tag|True|Tag Details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -939,7 +970,7 @@ This action is used to get site IDs associated with a tag.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|tag_id|integer|None|True|Tag ID for which to retrieve site associations|None|
+|id|integer|None|True|Tag ID for which to retrieve site associations|None|
 
 ##### Output
 
@@ -947,7 +978,7 @@ This action is used to get site IDs associated with a tag.
 |----|----|--------|-----------|
 |site_ids|[]integer|True|Site IDs associated with the tag|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -965,7 +996,7 @@ This action is used to tag ID for which to retrieve asset associations.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|tag_id|integer|None|True|Tag ID to add to site|None|
+|id|integer|None|True|Tag ID to add to site|None|
 
 ##### Output
 
@@ -973,7 +1004,7 @@ This action is used to tag ID for which to retrieve asset associations.
 |----|----|--------|-----------|
 |assets|[]tag_asset|True|Asset IDs and tag association sources for the tag|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1003,7 +1034,7 @@ This action is used to get asset groups associated with a tag.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|tag_id|integer|None|True|Tag ID for which to retrieve asset group associations|None|
+|id|integer|None|True|Tag ID for which to retrieve asset group associations|None|
 
 ##### Output
 
@@ -1011,7 +1042,7 @@ This action is used to get asset groups associated with a tag.
 |----|----|--------|-----------|
 |asset_group_ids|[]integer|True|Asset group IDs associated with the tag|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1039,7 +1070,7 @@ This action is used to remove a tag from an asset.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1068,7 +1099,7 @@ This action is used to remove all tags from an asset group.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1097,7 +1128,7 @@ This action is used to remove all asset group associations from a tag.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1126,7 +1157,7 @@ This action is used to remove all site associations from a tag.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1155,7 +1186,7 @@ This action is used to remove all search criteria from a tag.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1185,7 +1216,7 @@ This action is used to add a tag to an asset.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1215,7 +1246,7 @@ This action is used to add a tag to an asset group.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1245,7 +1276,7 @@ This action is used to add a tag to a site.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1275,7 +1306,7 @@ This action is used to update the search criteria for an existing tag.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1304,7 +1335,7 @@ This action is used to search for assets using a filtered asset search.
 |----|----|--------|-----------|
 |assets|[]asset|True|List of asset details returned by the search|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1448,9 +1479,9 @@ This action is used to create an asset group.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |description|string|None|False|Asset group description|None|
-|type|string|None|True|Asset group type|['dynamic', 'static']|
 |name|string|None|True|Asset group name|None|
 |searchCriteria|object|None|False|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|
+|type|string|None|True|Asset group type|['dynamic', 'static']|
 
 ##### Output
 
@@ -1458,7 +1489,7 @@ This action is used to create an asset group.
 |----|----|--------|-----------|
 |id|integer|True|ID of the created tag|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1474,15 +1505,15 @@ This action is used to create a new site.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|name|string|None|True|The site name. Name must be unique|None|
 |description|string|None|False|The site's description|None|
 |engine_id|integer|None|False|The identifier of a scan engine. Default scan engine is selected when not specified|None|
-|importance|string|normal|False|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|
-|scan_template_id|string|None|False|The identifier of a scan template|None|
-|included_addresses|[]string|[]|False|List of addresses to include in scan scope|None|
 |excluded_addresses|[]string|[]|False|List of addresses to exclude in scan scope|None|
-|included_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be included in the site|None|
 |excluded_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be excluded in the site|None|
+|importance|string|normal|False|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|
+|included_addresses|[]string|[]|False|List of addresses to include in scan scope|None|
+|included_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be included in the site|None|
+|name|string|None|True|The site name. Name must be unique|None|
+|scan_template_id|string|None|False|The identifier of a scan template|None|
 
 ##### Output
 
@@ -1491,7 +1522,7 @@ This action is used to create a new site.
 |id|integer|True|The identifier of the created site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1518,11 +1549,11 @@ This action is used to update an existing site.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|integer|None|True|The identifier of the site|None|
-|name|string|None|True|The site name. Name must be unique|None|
 |description|string|None|True|The site's description|None|
 |engine_id|integer|None|True|The identifier of a scan engine. Default scan engine is selected when not specified|None|
+|id|integer|None|True|The identifier of the site|None|
 |importance|string|normal|True|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|
+|name|string|None|True|The site name. Name must be unique|None|
 |scan_template_id|string|None|True|The identifier of a scan template|None|
 
 ##### Output
@@ -1532,7 +1563,7 @@ This action is used to update an existing site.
 |id|integer|True|The identifier of the updated site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1565,7 +1596,7 @@ This action is used to update an existing site scope of included IP address and 
 |id|integer|True|The identifier of the updated site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1587,8 +1618,8 @@ This action is used to update an existing site scope of excluded IP address and 
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|integer|None|True|The identifier of the site|None|
 |excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|
+|id|integer|None|True|The identifier of the site|None|
 |overwrite|boolean|True|True|Whether to overwrite the excluded targets to the current site or append to the previous list of excluded targets|None|
 
 ##### Output
@@ -1598,7 +1629,7 @@ This action is used to update an existing site scope of excluded IP address and 
 |id|integer|True|The identifier of the updated site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1631,7 +1662,7 @@ This action is used to update an existing site scope of included asset groups.
 |id|integer|True|The identifier of the updated site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1653,8 +1684,8 @@ This action is used to update an existing site scope of excluded asset groups.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|integer|None|True|The identifier of the site|None|
 |excluded_asset_groups|[]integer|None|False|Assets associated with these asset group IDs will be excluded from the site|None|
+|id|integer|None|True|The identifier of the site|None|
 |overwrite|boolean|True|True|Whether to overwrite the excluded asset group IDs to the current site or append to the previous list of asset group IDs|None|
 
 ##### Output
@@ -1664,7 +1695,7 @@ This action is used to update an existing site scope of excluded asset groups.
 |id|integer|True|The identifier of the updated site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1694,7 +1725,7 @@ This action is used to delete an existing site.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1723,7 +1754,7 @@ This action is used to get a list of asset groups.
 |----|----|--------|-----------|
 |asset_groups|[]asset_group|True|List of asset groups|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1790,7 +1821,7 @@ This action is used to get an asset group by ID.
 |----|----|--------|-----------|
 |asset_group|asset_group|True|Asset group|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1855,7 +1886,7 @@ This action is used to delete an existing asset group.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1885,7 +1916,7 @@ This action is used to update the search criteria for an existing asset group.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -1914,7 +1945,7 @@ This action is used to get a list of sites.
 |----|----|--------|-----------|
 |sites|[]site|True|List of sites|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2026,7 +2057,7 @@ This action is used to get a site by ID.
 |----|----|--------|-----------|
 |site|site|True|Site details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2127,7 +2158,7 @@ This action is used to get vulnerability details associated with a CVE.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|cve_id|string|None|True|Common Vulnerabilities and Exposures ID, e.g CVE-2018-12345|None|
+|cve_id|string|None|True|Common Vulnerabilities and Exposures ID, e.g. CVE-2018-12345|None|
 
 ##### Output
 
@@ -2135,7 +2166,7 @@ This action is used to get vulnerability details associated with a CVE.
 |----|----|--------|-----------|
 |vulnerabilities|[]vulnerability|True|Vulnerability details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2240,7 +2271,7 @@ This action gets assets for a scan.
 |----|----|--------|-----------|
 |assets|[]asset|False|Assets|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2345,8 +2376,8 @@ This action is used to get scans with optional site filter.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|integer|None|False|Site ID|None|
 |active|boolean|False|False|Return running scans or past scans|None|
+|id|integer|None|False|Site ID|None|
 
 ##### Output
 
@@ -2354,7 +2385,7 @@ This action is used to get scans with optional site filter.
 |----|----|--------|-----------|
 |scans|[]scan|True|List of scan details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2403,7 +2434,7 @@ This action is used to update the status of a scan (pause, resume, stop).
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|integer|None|True|Scan ID|None|
-|status|string|stop|True|Status to which the scan should be set|['stop', 'resume', 'pause']|
+|status|string|stop|True|Status to which the scan should be set (stop, resume, pause)|['stop', 'resume', 'pause']|
 
 ##### Output
 
@@ -2411,7 +2442,7 @@ This action is used to update the status of a scan (pause, resume, stop).
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2440,7 +2471,7 @@ This action is used to generate a shared secret for use with pairing a scan engi
 |----|----|--------|-----------|
 |shared_secret|string|True|Scan engine pairing shared secret|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2456,8 +2487,8 @@ This action is used to list scan engines paired with the security console.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|name|string|None|False|Optional engine name by which to filter, accepts regular expression patterns|None|
 |address|string|None|False|Optional address (IP/hostname) by which to filter, accepts regular expression patterns|None|
+|name|string|None|False|Optional engine name by which to filter, accepts regular expression patterns|None|
 
 ##### Output
 
@@ -2465,7 +2496,7 @@ This action is used to list scan engines paired with the security console.
 |----|----|--------|-----------|
 |scan_engines|[]scan_engine|True|List of scan engines details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2658,7 +2689,7 @@ This action is used to get a scan engine by ID.
 |----|----|--------|-----------|
 |scan_engine|scan_engine|True|Scan engine details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2710,8 +2741,8 @@ This action is used to create a new scan engine with console -> engine connectiv
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|Scan engine address (IP/hostname)|None|
-|port|integer|40814|True|Scan engine connectivity port|None|
 |name|string|None|True|Scan engine name|None|
+|port|integer|40814|True|Scan engine connectivity port|None|
 |sites|[]integer|[]|False|List of site IDs with which to associate the engine|None|
 
 ##### Output
@@ -2721,7 +2752,7 @@ This action is used to create a new scan engine with console -> engine connectiv
 |id|integer|True|Scan engine ID|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2756,7 +2787,7 @@ This action is used to delete an existing scan engine from the security console.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2785,7 +2816,7 @@ This action is used to retrieve a list of configured scan engine pools.
 |----|----|--------|-----------|
 |scan_engine_pools|[]scan_engine_pool|True|List of scan engine pool details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2853,7 +2884,7 @@ This action is used to retrieve scan engine pool details by ID.
 |----|----|--------|-----------|
 |scan_engine_pool|scan_engine_pool|True|Scan engine pool details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2893,8 +2924,8 @@ the engines assigned to the pool and that output is NOT an array, you will need 
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|name|string|None|True|Scan engine pool name|None|
 |engines|[]integer|None|False|List of scan engine IDs to associate with the scan engine pool|None|
+|name|string|None|True|Scan engine pool name|None|
 
 ##### Output
 
@@ -2903,7 +2934,7 @@ the engines assigned to the pool and that output is NOT an array, you will need 
 |id|integer|True|Scan engine pool ID|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2930,8 +2961,8 @@ This action is used to add a scan engine to a scan engine pool (AWS pre-authoriz
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|pool_id|integer|None|True|Scan engine pool ID|None|
 |engine_id|integer|None|True|Scan engine ID|None|
+|pool_id|integer|None|True|Scan engine pool ID|None|
 
 ##### Output
 
@@ -2939,7 +2970,7 @@ This action is used to add a scan engine to a scan engine pool (AWS pre-authoriz
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2960,8 +2991,8 @@ This action is used to remove a scan engine from a scan engine pool.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|pool_id|integer|None|True|Scan engine pool ID|None|
 |engine_id|integer|None|True|Scan engine ID|None|
+|pool_id|integer|None|True|Scan engine pool ID|None|
 
 ##### Output
 
@@ -2969,7 +3000,7 @@ This action is used to remove a scan engine from a scan engine pool.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -2998,7 +3029,7 @@ This action is used to delete an existing scan engine pool from the security con
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3019,8 +3050,8 @@ This action is used to update the scan engine/scan engine pool associated with a
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|site_id|integer|None|True|Identifier of the site to update|None|
 |engine_id|integer|None|True|Identifier of the scan engine/scan engine pool to associate with the site|None|
+|site_id|integer|None|True|Identifier of the site to update|None|
 
 ##### Output
 
@@ -3028,7 +3059,7 @@ This action is used to update the scan engine/scan engine pool associated with a
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3065,7 +3096,7 @@ This action is used to create a vulnerability exception submission.
 |id|integer|True|The vulnerability exception that was created|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3092,7 +3123,7 @@ This action is used to delete an existing vulnerability exception.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|exception_id|integer|None|True|Vulnerability Exception ID to delete|None|
+|exception_id|integer|None|True|Vulnerability exception ID to delete|None|
 
 ##### Output
 
@@ -3100,7 +3131,7 @@ This action is used to delete an existing vulnerability exception.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3129,7 +3160,7 @@ This action is used to get the details of a specific vulnerability by ID.
 |----|----|--------|-----------|
 |vulnerability|vulnerability|True|The details of the vulnerability requested|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3219,8 +3250,8 @@ This action is used to approve or reject a vulnerability exception.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |comment|string|None|False|Comment to include in the review|None|
-|exception|integer|None|True|The Vulnerability Exception ID to Approve or Reject|None|
-|review|string|None|True|Approval or Rejection of the exception|['Approved', 'Rejected']|
+|exception|integer|None|True|The vulnerability exception ID to approve or reject|None|
+|review|string|None|True|Approval or rejection of the exception|['Approved', 'Rejected']|
 
 ##### Output
 
@@ -3228,7 +3259,7 @@ This action is used to approve or reject a vulnerability exception.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3258,7 +3289,7 @@ This action is used to list authentication sources available for InsightVM users
 |----|----|--------|-----------|
 |authentication_sources|[]authentication_source|True|List of authentication sources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3299,7 +3330,7 @@ This action is used to get the details for an authentication source.
 |----|----|--------|-----------|
 |authentication_source|authentication_source|True|User authentication source|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3338,7 +3369,7 @@ This action is used to list role details.
 |----|----|--------|-----------|
 |roles|[]role|True|List of roles|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3428,7 +3459,7 @@ This action is used to get role details by ID.
 |----|----|--------|-----------|
 |role|role|True|Role details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3493,8 +3524,8 @@ This action is used to list user accounts.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|name|string|None|False|User account name by which to filter, accepts regular expression patterns|None|
 |login|string|None|False|User account login name by which to filter, accepts regular expression patterns|None|
+|name|string|None|False|User account name by which to filter, accepts regular expression patterns|None|
 
 ##### Output
 
@@ -3502,7 +3533,7 @@ This action is used to list user accounts.
 |----|----|--------|-----------|
 |users|[]user_account|True|List of user account details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3524,7 +3555,7 @@ Example output:
         "name": "Builtin Administrators",
         "type": "admin"
       },
-      "email": "blaah@example.com",
+      "email": "user@example.com",
       "enabled": true,
       "id": 1,
       "links": [
@@ -3623,7 +3654,7 @@ This action is used to get user account details by ID.
 |----|----|--------|-----------|
 |user|user_account|True|User account details|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3644,7 +3675,7 @@ Example output:
       "name": "Builtin Administrators",
       "type": "admin"
     },
-    "email": "blaah@example.com",
+    "email": "user@example.com",
     "enabled": true,
     "id": 1,
     "links": [
@@ -3734,24 +3765,24 @@ This action is used to create a new user account (limited to external authentica
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|
+|access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['kerberos', 'ldap', 'saml']|
 |email|string|None|True|The email address of the user|None|
 |enabled|boolean|True|True|Whether the user account is enabled|None|
 |login|string|None|True|The login name of the user|None|
 |name|string|None|True|The full name of the user|None|
-|access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|
-|access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|
 |role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|links|[]link|True|Hypermedia links to corresponding or related resources|
 |id|integer|True|The identifier of the created user account|
+|links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3777,15 +3808,15 @@ This action is used to update the configuration of an existing user account.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|integer|None|True|The identifier of the user|None|
+|access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|
+|access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['normal', 'admin', 'kerberos', 'ldap', 'saml']|
 |email|string|None|True|The email address of the user|None|
 |enabled|boolean|True|True|Whether the user account is enabled|None|
+|id|integer|None|True|The identifier of the user|None|
 |login|string|None|True|The login name of the user|None|
 |name|string|None|True|The full name of the user|None|
-|access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|
-|access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|
 |role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|
 
 ##### Output
@@ -3794,7 +3825,7 @@ This action is used to update the configuration of an existing user account.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3823,7 +3854,7 @@ This action is used to delete an user account.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3852,7 +3883,7 @@ This action is used to disable an user account.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3881,7 +3912,7 @@ This action is used to enable an user account.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3902,10 +3933,10 @@ This action is used to update the role associated with an user account.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|integer|None|True|The identifier of the user account|None|
 |access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|
 |role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|
+|user_id|integer|None|True|The identifier of the user account|None|
 
 ##### Output
 
@@ -3913,7 +3944,7 @@ This action is used to update the role associated with an user account.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3934,8 +3965,8 @@ This action is used to update the asset groups to which a user has access in bul
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|integer|None|True|The identifier of the user account|None|
 |asset_group_ids|[]integer|None|True|The identifiers of the asset groups to which the user account should be granted access, ignored if the user has access to all asset groups|None|
+|user_id|integer|None|True|The identifier of the user account|None|
 
 ##### Output
 
@@ -3943,7 +3974,7 @@ This action is used to update the asset groups to which a user has access in bul
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3964,8 +3995,8 @@ This action is used to grant an user account access to an asset group by id.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|integer|None|True|The identifier of the user account|None|
 |asset_group_id|integer|None|True|The identifier of the asset group|None|
+|user_id|integer|None|True|The identifier of the user account|None|
 
 ##### Output
 
@@ -3973,7 +4004,7 @@ This action is used to grant an user account access to an asset group by id.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -3994,8 +4025,8 @@ This action is used to remove asset group access from an user account.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|integer|None|True|The identifier of the user account|None|
 |asset_group_id|integer|None|True|The identifier of the asset group|None|
+|user_id|integer|None|True|The identifier of the user account|None|
 
 ##### Output
 
@@ -4003,7 +4034,7 @@ This action is used to remove asset group access from an user account.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -4024,8 +4055,8 @@ This action is used to update the sites to which a user has access in bulk. It c
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|integer|None|True|The identifier of the user account|None|
 |site_ids|[]integer|None|True|The identifiers of the sites to which the user account should be granted access, ignored if the user has access to all sites|None|
+|user_id|integer|None|True|The identifier of the user account|None|
 
 ##### Output
 
@@ -4033,7 +4064,7 @@ This action is used to update the sites to which a user has access in bulk. It c
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -4054,8 +4085,8 @@ This action is used to grant an user account access to a site by id.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|integer|None|True|The identifier of the user account|None|
 |site_id|integer|None|True|The identifier of the site|None|
+|user_id|integer|None|True|The identifier of the user account|None|
 
 ##### Output
 
@@ -4063,7 +4094,7 @@ This action is used to grant an user account access to a site by id.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -4084,8 +4115,8 @@ This action is used to remove site access from an user account.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|user_id|integer|None|True|The identifier of the user account|None|
 |site_id|integer|None|True|The identifier of the site|None|
+|user_id|integer|None|True|The identifier of the user account|None|
 
 ##### Output
 
@@ -4093,7 +4124,7 @@ This action is used to remove site access from an user account.
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -4126,7 +4157,7 @@ This action is used to generate results for the top remediations based on a defi
 |----|----|--------|-----------|
 |remediations|[]remediation|True|List of top remediations|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -4167,24 +4198,24 @@ Example output:
 
 ### Triggers
 
-#### New Vulnerability Exception Activity
+#### New Vulnerability Exception
 
-This trigger is used to check for new InsightVM vulnerability exception activity.
+This trigger is used to check for new InsightVM vulnerability exceptions.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|
-|status_filter|[]string|['under review']|False|List of vulnerabiliti statuses to match for trigger; options include: under review, approved, rejected, expired, deleted|None|
+|status_filter|[]string|['Under Review']|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|exception|vulnerability_exception|False|InsightVM Vulnerability Exception|
+|exception|vulnerability_exception|False|InsightVM vulnerability exception|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -4250,7 +4281,7 @@ This trigger is used to check for new InsightVM scans by site and scan status.
 |----|----|--------|-----------|
 |scan|scan|False|InsightVM Scan|
 
-Example output:
+Example Output:
 
 ```
 {
@@ -4292,6 +4323,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.6.0 - Add Get Asset Group Assets action
 * 3.5.2 - Fix bug in New Vulnerability Exception Activity
 * 3.5.1 - New spec and help.md format for the Hub
 * 3.5.0 - New Actions Get Vulnerability Details, Create Vulnerability Exception Submission,  Delete Vulnerability Exception, Review Vulnerability Exception  | New Trigger New Vulnerability Exception Activity | Misc. Cleanup

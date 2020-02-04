@@ -3,10 +3,10 @@
         "action": "update_user_asset_group_access",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "asset_group_ids": [
