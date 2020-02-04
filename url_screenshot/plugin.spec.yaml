@@ -21,7 +21,7 @@ hub_tags:
 actions:
   screenshot:
     title: Screenshot URL
-    description: Grab a Screenshot of a URL from the Orchestrator
+    description: Takes a screenshot of a URL from the Orchestrator
     input:
       url:
         title: URL
