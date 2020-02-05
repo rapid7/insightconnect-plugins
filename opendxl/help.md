@@ -9,7 +9,8 @@ This plugin utilizes the [OpenDXL Python Client API](https://github.com/opendxl/
 
 # Requirements
 
-_This plugin does not contain any requirements._
+* Broker CA, Client CRT and Client Key files will need to be generated and downloaded in the OpenDXL UI
+* All certificates must end with a `\n` when they are copied into the connection
 
 # Documentation
 
@@ -19,10 +20,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|client_crt|credential_asymmetric_key|None|True|Client certificate file|None|
-|host|string|None|True|The broker host e.g. example.com\:8883|None|
 |broker_ca|credential_asymmetric_key|None|True|Broker certificate authority bundle|None|
+|client_crt|credential_asymmetric_key|None|True|Client certificate file|None|
 |client_key|credential_asymmetric_key|None|True|Client key file|None|
+|host|string|None|True|The broker host e.g. example.com:8883|None|
 
 ## Technical Details
 
@@ -36,8 +37,8 @@ This action is used to publish a new event to a specified topic.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|topic|string|None|True|The topic to publish messages to|None|
 |event_message|string|None|True|The event message|None|
+|topic|string|None|True|The topic to publish messages to|None|
 
 ##### Output
 
@@ -47,9 +48,11 @@ This action is used to publish a new event to a specified topic.
 
 Example output:
 
+```
 {
   "success": true
 }
+```
 
 ### Triggers
 
@@ -61,8 +64,8 @@ This trigger is used to trigger on receiving a new event from a specified topic.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|topic|string|None|True|The topic to receive messages from|None|
 |number_of_messages|integer|1|True|The number of messages to return at one time as a list. Must be one or more|None|
+|topic|string|None|True|The topic to receive messages from|None|
 
 ##### Output
 
@@ -94,6 +97,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 1.1.3 - Update help documentation and plugin spec tags
 * 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Fix issue where certificates in connection were not being escaped correctly
 * 1.1.0 - New action Publish Event

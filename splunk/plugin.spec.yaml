@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: splunk
 title: Splunk
-description: The Splunk plugin allows you to search, monitor, analyze and analyze machine data
-version: 3.0.1
+description: The Splunk plugin allows you to search, monitor, and analyze machine data
+version: 3.0.2
 vendor: rapid7
 support: rapid7
 status: []

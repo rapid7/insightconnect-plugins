@@ -853,6 +853,8 @@ This action is used to query the WiGLE network database for paginated results ba
 |ssid|string|None|False|Include only networks exactly matching the string network name|None|
 |endTransID|string|None|False|Latest transaction ID by which to bound (year-level precision only)|None|
 |lastupdt|string|None|False|Filter points by how recently they've been updated, condensed date/time numeric string format yyyyMMdd[hhmm[ss]]|None|
+|encryption|string|None|False|Encryption detected: 'None', 'WEP', 'WPA', 'WPA2', 'WPA3', 'Unknown'. Case insensitive|['None', 'WEP', 'WPA', 'WPA2', 'WPA3', 'Unknown']|
+|netid|string|None|False|Include only networks matching the string network BSSID, e.g. '0A:2C:EF:3D:25:1B' or '0A:2C:EF'. The first three octets are required|None|
 |freenet|boolean|False|False|Include only networks that have been marked as free access|None|
 |startTransID|string|None|False|Earliest transaction ID by which to bound (year-level precision only)|None|
 |resultsPerPage|integer|None|False|How many results to return per request. Defaults to 25 for COMMAPI, 100 for site. Bounded at 1000 for COMMAPI, 100 for site|None|

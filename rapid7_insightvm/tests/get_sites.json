@@ -3,10 +3,10 @@
         "action": "get_sites",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "name": "^Los Angeles - Full Audit$"

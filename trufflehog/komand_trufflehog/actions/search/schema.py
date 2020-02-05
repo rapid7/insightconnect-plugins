@@ -35,7 +35,7 @@ class SearchInput(komand.Input):
     "do_entropy": {
       "type": "boolean",
       "title": "Entropy Checks",
-      "description": "Evaluates the shannon entropy for both the base64 char set and hexidecimal char set for every blob of text greater than 20 characters comprised of those character sets in each diff",
+      "description": "Evaluates the shannon entropy for both the base64 char set and hexadecimal char set for every blob of text greater than 20 characters comprised of those character sets in each diff",
       "default": true,
       "order": 3
     },

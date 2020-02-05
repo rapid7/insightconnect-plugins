@@ -18,7 +18,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|https\://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|
+|url|string|https://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|
 |verify_ssl|boolean|True|True|SSL Certificate Verification|None|
 |api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|
 
