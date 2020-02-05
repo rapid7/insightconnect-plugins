@@ -12,6 +12,7 @@ class Connection(komand.Connection):
         """
         No connection necessary
         """
+        pass
 
     def test(self):
         # No connection, therefore no test
