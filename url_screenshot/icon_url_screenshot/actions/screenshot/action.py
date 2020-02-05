@@ -12,11 +12,11 @@ from selenium.webdriver.chrome.options import Options
 
 
 class Screenshot(komand.Action):
+    CHROME_PATH = '/usr/bin/chromium'
+    CHROMEDRIVER_PATH = '/usr/bin/chromedriver'
+    WINDOW_SIZE = "1920,1080"
 
     def __init__(self):
-        self.CHROME_PATH = '/usr/bin/chromium'
-        self.CHROMEDRIVER_PATH = '/usr/bin/chromedriver'
-        self.WINDOW_SIZE = "1920,1080"
         super(self.__class__, self).__init__(
                 name='screenshot',
                 description=Component.DESCRIPTION,
