@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v1
-      with:
-        python-version: '3.7'
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v1
+    with:
+      python-version: '3.7'
     - name: Validate Plugin(s)
       run: |
         python3 -m pip install --upgrade pip setuptools
