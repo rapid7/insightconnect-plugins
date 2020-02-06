@@ -4,7 +4,7 @@ Screenshot a URL from the Orchestrator
 
 # Key Features
 
-Generates a Screenshot of a URL using chromium
+* Generates a Screenshot of a URL using chromium
 
 # Requirements
 
