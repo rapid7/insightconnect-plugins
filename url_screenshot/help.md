@@ -22,7 +22,7 @@ _This plugin does not contain a connection._
 
 #### Screenshot URL
 
-This action is used to grab a Screenshot of a URL from the Orchestrator.
+This action is used to grab a screenshot of a URL from the Orchestrator.
 
 ##### Input
 
