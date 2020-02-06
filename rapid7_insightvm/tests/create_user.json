@@ -3,10 +3,10 @@
         "action": "create_user",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "access_all_asset_groups": false,

@@ -3,10 +3,10 @@
         "action": "top_remediations",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "asset_limit": 0,
