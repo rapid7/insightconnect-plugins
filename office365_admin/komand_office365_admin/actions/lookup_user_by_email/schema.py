@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get contact details of a user, trying to find them based email"
+    DESCRIPTION = "Get contact details of a user from an email"
 
 
 class Input:

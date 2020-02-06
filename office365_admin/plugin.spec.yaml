@@ -203,7 +203,7 @@ actions:
         required: false
   lookup_user_by_email:
     title: Lookup User by Email
-    description: Get contact details of a user, trying to find them based email
+    description: Get contact details of a user from an email
     input:
       email_address:
         title: Email Address

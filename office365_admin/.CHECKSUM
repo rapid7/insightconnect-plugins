@@ -1,5 +1,5 @@
 {
-	"spec": "995e344cc155ebdc315198c5c8309929",
+	"spec": "977fb0977a713b5262fb02830e8b9b38",
 	"manifest": "935a4493b8d0062389784051ea44d5d3",
 	"setup": "ac80f857b6f3feeff4aa74c9348dadbb",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "lookup_user_by_email/schema.py",
-			"hash": "852555cd24a646fd8fdfd6efbeb3974d"
+			"hash": "88b90ca2caaeeaed82ffb671a6ecfd0d"
 		},
 		{
 			"identifier": "update_usage_location/schema.py",

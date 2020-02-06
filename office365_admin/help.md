@@ -1,6 +1,8 @@
 # Description
 
-Administrate and manage Office 365 users and licenses
+[Office 365](https://www.office.com/) is a SaaS version of Microsoft’s popular Microsoft Office productivity suite.
+This plugin utilizes the [Microsoft Graph API](https://developer.microsoft.com/en-us/graph/docs/concepts/overview) to
+manage Office 365 users and licenses.
 
 # Key Features
 
@@ -32,7 +34,7 @@ The connection configuration accepts the following parameters:
 
 #### Lookup User by Email
 
-This action is used to get contact details of a user, trying to find them based email.
+This action is used to get contact details of a user from an email.
 
 ##### Input
 
