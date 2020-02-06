@@ -35,6 +35,6 @@ class Connection(komand.Connection):
             api_call = self.base_api + '/user'
             response = self.bucket_session.get(api_call)
             if response.status_code == 200:
-                return {'status': 'Success - api 2.0 still works'}
+                return {'status': 'API 2.0 connection test successful'}
         except requests.exceptions.RequestException:
             return {'status': 'Error'}
