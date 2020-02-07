@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="office365_admin-rapid7-plugin",
-      version="1.3.0",
+      version="1.4.0",
       description="Administrate and manage Office 365 users and licenses",
       author="rapid7",
       author_email="",
