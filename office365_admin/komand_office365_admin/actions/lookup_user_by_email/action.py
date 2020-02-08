@@ -3,6 +3,7 @@ from .schema import LookupUserByEmailInput, LookupUserByEmailOutput, Input, Outp
 # Custom imports below
 import requests
 
+
 class LookupUserByEmail(komand.Action):
 
     def __init__(self):
