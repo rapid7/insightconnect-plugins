@@ -2,7 +2,6 @@ import komand
 from .schema import GetFactorsInput, GetFactorsOutput, Input, Output, Component
 # Custom imports below
 import requests
-from komand.exceptions import PluginException
 
 
 class GetFactors(komand.Action):
@@ -30,5 +29,3 @@ class GetFactors(komand.Action):
         for factor in data:
             if factor['factorType'] == "push":
                 return {Output.FACTORS: factor}
-
-        raise PluginException(cause='Okta: An error occurred')

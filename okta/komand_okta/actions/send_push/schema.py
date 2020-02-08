@@ -58,10 +58,7 @@ class SendPushOutput(komand.Output):
       "description": "The factor status returned by Okta for a user",
       "order": 1
     }
-  },
-  "required": [
-    "factor_status"
-  ]
+  }
 }
     """)
 
