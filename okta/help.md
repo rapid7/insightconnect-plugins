@@ -42,7 +42,7 @@ This action pushes a MFA challenge to a user's device and waits for a success or
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|factor_data|object|False|The factor status returned by Okta for a user|
+|factor_data|string|True|The factor status returned by Okta for a user|
 
 Example Output:
 

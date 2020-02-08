@@ -53,12 +53,15 @@ class SendPushOutput(komand.Output):
   "title": "Variables",
   "properties": {
     "factor_data": {
-      "type": "object",
+      "type": "string",
       "title": "Factor Status",
       "description": "The factor status returned by Okta for a user",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "factor_data"
+  ]
 }
     """)
 

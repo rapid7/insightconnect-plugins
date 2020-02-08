@@ -165,8 +165,8 @@ actions:
       factor_data:
         title: Factor Status
         description: The factor status returned by Okta for a user
-        type: object
-        required: false
+        type: string
+        required: true
   deactivate_user:
     title: Deactivate User
     description: Deactivate a user
