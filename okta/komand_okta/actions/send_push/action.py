@@ -37,4 +37,4 @@ class SendPush(komand.Action):
             poll_data = poll_response.json()
             poll_status = poll_data['factorResult']
 
-        return {Output.FACTOR_DATA: poll_status}
+        return {Output.FACTOR_STATUS: poll_status}

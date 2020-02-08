@@ -42,7 +42,7 @@ This action pushes a MFA challenge to a user's device and waits for a success or
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|factor_data|string|True|The factor status returned by Okta for a user|
+|factor_status|string|True|The factor status returned by Okta for a user|
 
 Example Output:
 
@@ -611,6 +611,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.3.0 - New actions for getting factors and sending a push verify
 * 3.2.2 - Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` | Use input and output constants | Changed variables names to more readable | Added "f" strings | Removed duplicated code
 * 3.2.1 - New spec and help.md format for the Hub
 * 3.2.0 - New action Delete User

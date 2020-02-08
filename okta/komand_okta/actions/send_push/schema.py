@@ -13,7 +13,7 @@ class Input:
     
 
 class Output:
-    FACTOR_DATA = "factor_data"
+    FACTOR_STATUS = "factor_status"
     
 
 class SendPushInput(komand.Input):
@@ -52,7 +52,7 @@ class SendPushOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "factor_data": {
+    "factor_status": {
       "type": "string",
       "title": "Factor Status",
       "description": "The factor status returned by Okta for a user",
@@ -60,7 +60,7 @@ class SendPushOutput(komand.Output):
     }
   },
   "required": [
-    "factor_data"
+    "factor_status"
   ]
 }
     """)

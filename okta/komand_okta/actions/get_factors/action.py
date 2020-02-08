@@ -29,6 +29,6 @@ class GetFactors(komand.Action):
 
         for factor in data:
             if factor['factorType'] == "push":
-                return factor
+                return {Output.FACTORS: factor}
 
         raise PluginException(cause='Okta: An error occurred')

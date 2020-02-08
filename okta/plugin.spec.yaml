@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: okta
 title: Okta
-vendor: rapid7
-support: rapid7
+vendor: rapid7-test
+support: rapid7-test
 status: []
 description: Secure identity management and single sign-on to any application
 version: 3.2.2
@@ -162,7 +162,7 @@ actions:
         type: string
         required: true
     output:
-      factor_data:
+      factor_status:
         title: Factor Status
         description: The factor status returned by Okta for a user
         type: string

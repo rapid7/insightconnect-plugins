@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="okta-rapid7-plugin",
+setup(name="okta-rapid7-test-plugin",
       version="3.2.2",
       description="Secure identity management and single sign-on to any application",
-      author="rapid7",
+      author="rapid7-test",
       author_email="",
       url="",
       packages=find_packages(),
