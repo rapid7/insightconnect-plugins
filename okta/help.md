@@ -27,6 +27,27 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Get an Okta user's factors
+
+This action returns an object containing all of a user's factors for MFA.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|user_id|string|None|True|The user id of the user you want the factors of|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|factors|object|False|An object containing all the factors of a user for MFA|
+
+Example Output:
+
+```
+```
+
 #### Suspend User
 
 This action can be used to suspend a user from the Okta system. The user will retain

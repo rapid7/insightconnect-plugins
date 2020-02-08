@@ -29,6 +29,8 @@ class ICONOkta(komand.Plugin):
 
         self.add_action(actions.DeleteUser())
 
+        self.add_action(actions.GetFactors())
+
         self.add_action(actions.GetUser())
 
         self.add_action(actions.ListGroups())
