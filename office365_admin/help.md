@@ -48,7 +48,7 @@ This action is used to get contact details of a user from an email.
 |----|----|--------|-----------|
 |user|object|False|Metadata of the user matching the search in JSON format|
 
-Example Output:
+Example output:
 
 ```
 {
