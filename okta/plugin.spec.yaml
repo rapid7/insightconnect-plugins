@@ -132,6 +132,21 @@ connection:
     type: credential_secret_key
     required: true
 actions:
+  get_factors:
+    title: Get an Okta user's factors
+    description: Returns an object containing all of a user's factors for MFA
+    input:
+      user_id:
+        title: Okta User ID
+        description: The user id of the user you want the factors of
+        type: string
+        required: true
+    output:
+      factors:
+        title: Okta User ID
+        description: An object containing all the factors of a user for MFA
+        type: object
+        required: false
   deactivate_user:
     title: Deactivate User
     description: Deactivate a user
