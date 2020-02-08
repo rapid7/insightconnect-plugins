@@ -27,6 +27,28 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Push MFA Challenge
+
+This action pushes a MFA challenge to a user's device and waits for a success or rejection.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|factor_id|string|None|True|The factor id of the user you want to push a verify to|None|
+|user_id|string|None|True|The user id of the user you want to push a verify to|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|factor_data|object|False|The factor status returned by Okta for a user|
+
+Example Output:
+
+```
+```
+
 #### Get an Okta user's factors
 
 This action returns an object containing all of a user's factors for MFA.

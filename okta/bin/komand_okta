@@ -39,6 +39,8 @@ class ICONOkta(komand.Plugin):
 
         self.add_action(actions.ResetFactors())
 
+        self.add_action(actions.SendPush())
+
         self.add_action(actions.SuspendUser())
 
         self.add_action(actions.UnsuspendUser())
