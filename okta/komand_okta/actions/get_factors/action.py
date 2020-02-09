@@ -33,9 +33,7 @@ class GetFactors(komand.Action):
                 )
             data = response.json()
 
-            for factor in data:
-                if factor['factorType'] == "push":
-                    return {Output.FACTORS: factor}
+            return {Output.FACTORS: data}
 
         except json.decoder.JSONDecodeError:
             raise PluginException(

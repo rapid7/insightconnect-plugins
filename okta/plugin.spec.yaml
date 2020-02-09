@@ -143,9 +143,9 @@ actions:
         required: true
     output:
       factors:
-        title: Okta User ID
+        title: Okta MFA Factors
         description: An object containing all the factors of a user for MFA
-        type: object
+        type: "[]object"
         required: false
   send_push:
     title: Push MFA Challenge

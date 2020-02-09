@@ -45,9 +45,12 @@ class GetFactorsOutput(komand.Output):
   "title": "Variables",
   "properties": {
     "factors": {
-      "type": "object",
-      "title": "Okta User ID",
+      "type": "array",
+      "title": "Okta MFA Factors",
       "description": "An object containing all the factors of a user for MFA",
+      "items": {
+        "type": "object"
+      },
       "order": 1
     }
   }
