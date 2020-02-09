@@ -80,7 +80,7 @@ Example Output:
   "created": "2020-01-24T14:52:55.000Z",
   "lastUpdated": "2020-01-24T14:55:18.000Z",
   "profile": {
-    "credentialId": "email@company.com",
+    "credentialId": "user@example.com",
     "deviceType": "SmartPhone_IPhone",
     "keys": [
       {
