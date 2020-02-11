@@ -36,7 +36,7 @@ class GetFactors(komand.Action):
         except (json.decoder.JSONDecodeError, TypeError):
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
         except KeyError as e:
-            raise PluginException(cause=f'An error has occurred retrieving data from the Okta API: {e}',
+            raise PluginException(cause=f"An error has occurred retrieving data from the Okta API: {e}",
                                   assistance="It looks like some data in the factors returned didn't have what"
                                              " we expected.",
                                   data=data)
