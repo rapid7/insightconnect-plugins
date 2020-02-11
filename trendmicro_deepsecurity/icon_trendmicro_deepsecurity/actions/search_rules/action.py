@@ -1,0 +1,83 @@
+import komand
+from .schema import SearchRulesInput, SearchRulesOutput, Input, Output, Component
+# Custom imports below
+
+#from komand.exceptions import PluginException
+
+import requests
+import json
+
+from ...util.shared import tryJSON
+from ...util.shared import checkResponse
+
+class SearchRules(komand.Action):
+
+    def __init__(self):
+        super(self.__class__, self).__init__(
+                name='search_rules',
+                description=Component.DESCRIPTION,
+                input=SearchRulesInput(),
+                output=SearchRulesOutput())
+
+
+    def run(self, params={}):
+        '''
+        Searches for IPS rules by CVE number in Deep Security
+        '''
+
+        # Get parameters
+        self.vulnerabilities=params.get("vulnerabilities")
+        url = self.connection.dsm_url + "/api/intrusionpreventionrules/search"
+
+        matched_cves=set()
+        missed_cves=set()
+        ips_rules=set()    
+
+        for cve in self.vulnerabilities:
+
+            # Prepare request
+            data = { "maxItems": 100,
+                     "searchCriteria": [ { "fieldName": "CVE",
+                                           "stringWildcards": True,
+                                           "stringValue": "%" + cve + "%"
+                                         } ] }
+
+            post_header = {
+                            "Content-type": "application/json",
+                            "api-secret-key": self.connection.dsm_api_key,
+                            "api-version": "v1"
+                            }
+
+            # Search for IPS rules
+            response = requests.post(url,
+                                     data=json.dumps(data),
+                                     headers=post_header,
+                                     verify=False)
+            response.close()
+            
+            self.logger.info(cve)
+            self.logger.info('status: ' + str(response.status_code))
+            self.logger.info('reason: ' + response.reason)
+            
+            # Try to convert the response data to JSON
+            response_data=tryJSON(response)
+
+            # Check response errors
+            checkResponse(response)
+
+            # Check if matching IPS rules were found
+            if response_data['intrusionPreventionRules']: 
+                self.logger.info(cve + ': Found ' + str(len(response_data['intrusionPreventionRules'])) + ' rules!')
+                for rule in response_data['intrusionPreventionRules']: 
+                    self.logger.info(str(rule['ID']) + ': ' + rule['name'])
+                    ips_rules.add(rule['ID'])
+                    matched_cves.add(cve)
+            else:
+                self.logger.info(cve + ': No rule found!')
+                missed_cves.add(cve)
+            
+        self.logger.info("Found rules for the following CVEs: " + ", ".join(matched_cves))
+        
+        return {'ips_rules': list(ips_rules),
+                'matched_cves': list(matched_cves),
+                'missed_cves': list(missed_cves)}     
