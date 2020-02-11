@@ -38,7 +38,7 @@ class GetFactors(komand.Action):
         except KeyError as e:
             raise PluginException(cause=f"An error has occurred retrieving data from the Okta API: {e}",
                                   assistance="It looks like some data in the factors returned didn't have what"
-                                             " we expected.",
+                                             " we expected. Does this user have MFA enabled?",
                                   data=data)
         except Exception as e:
             raise PluginException(cause=PluginException.Preset.UNKNOWN)
