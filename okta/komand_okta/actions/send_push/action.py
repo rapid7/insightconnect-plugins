@@ -21,7 +21,7 @@ class SendPush(komand.Action):
 
         try:
             okta_url = self.connection.okta_url
-            url = requests.compat.urljoin(okta_url, f'/api/v1/users/{user_id}/factors/{factor_id}/verify')
+            url = requests.compat.urljoin(okta_url, f"/api/v1/users/{user_id}/factors/{factor_id}/verify")
             response = self.connection.session.post(url)
             if response.status_code not in range(200, 299):
                 raise PluginException(
