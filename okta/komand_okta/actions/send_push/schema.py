@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Pushes a MFA challenge to a user's device and waits for a success or rejection"
+    DESCRIPTION = "Push an MFA challenge to a user's device and wait for a success or rejection"
 
 
 class Input:
@@ -25,13 +25,13 @@ class SendPushInput(komand.Input):
     "factor_id": {
       "type": "string",
       "title": "Okta Factor ID",
-      "description": "The factor id of the user you want to push a verify to",
+      "description": "Factor ID of the user to push verification to",
       "order": 2
     },
     "user_id": {
       "type": "string",
       "title": "Okta User ID",
-      "description": "The user id of the user you want to push a verify to",
+      "description": "User ID to push verification to",
       "order": 1
     }
   },
@@ -55,7 +55,7 @@ class SendPushOutput(komand.Output):
     "factor_status": {
       "type": "string",
       "title": "Factor Status",
-      "description": "The factor status returned by Okta for a user",
+      "description": "User factor status",
       "order": 1
     }
   }

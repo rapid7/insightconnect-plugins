@@ -133,38 +133,38 @@ connection:
     required: true
 actions:
   get_factors:
-    title: Get an Okta user's factors
+    title: Get Okta user factors
     description: Returns an object containing all of a user's factors for MFA
     input:
       user_id:
         title: Okta User ID
-        description: The user id of the user you want the factors of
+        description: User ID to get factors for
         type: string
         required: true
     output:
       factors:
         title: Okta MFA Factors
-        description: An object containing all the factors of a user for MFA
+        description: Obbject containing all the factors of a user for MFA
         type: "[]object"
         required: false
   send_push:
     title: Push MFA Challenge
-    description: Pushes a MFA challenge to a user's device and waits for a success or rejection
+    description: Push an MFA challenge to a user's device and wait for a success or rejection
     input:
       user_id:
         title: Okta User ID
-        description: The user id of the user you want to push a verify to
+        description: User ID to push verification to
         type: string
         required: true
       factor_id:
         title: Okta Factor ID
-        description: The factor id of the user you want to push a verify to
+        description: Factor ID of the user to push verification to
         type: string
         required: true
     output:
       factor_status:
         title: Factor Status
-        description: The factor status returned by Okta for a user
+        description: User factor status
         type: string
         required: false
   deactivate_user:

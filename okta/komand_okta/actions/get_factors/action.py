@@ -17,8 +17,6 @@ class GetFactors(komand.Action):
 
     def run(self, params={}):
         user_id = params.get(Input.USER_ID)
-        if not user_id:
-            raise PluginException(cause='user_id is required')
 
         try:
             okta_url = self.connection.okta_url
@@ -26,8 +24,8 @@ class GetFactors(komand.Action):
             response = self.connection.session.get(url)
             if response.status_code not in range(200, 299):
                 raise PluginException(
-                    cause="Received HTTP %d status code from Okta. Please verify your Okta server status and "
-                          "try again.",
+                    cause=f"Received HTTP {response.status_code} status code from Okta. Please verify your "
+                          f"Okta server status and try again.",
                     assistance="If the issue persists please contact support.",
                     data=f"{response.status_code}, {response.text}"
                 )
@@ -35,15 +33,12 @@ class GetFactors(komand.Action):
 
             return {Output.FACTORS: data}
 
-        except json.decoder.JSONDecodeError:
-            raise PluginException(
-                cause="Received an unexpected response from Okta ",
-                assistance="(non-JSON or no response was received).",
-                data=response.text
-            )
-        except TypeError as e:
+        except (json.decoder.JSONDecodeError, TypeError):
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
         except KeyError as e:
-            raise PluginException(cause='Key error has occured: %s' % e)
+            raise PluginException(cause=f'An error has occurred retrieving data from the Okta API: {e}',
+                                  assistance="It looks like some data in the factors returned didn't have what"
+                                             " we expected.",
+                                  data=data)
         except Exception as e:
-            raise PluginException(cause='There was an error attempting to connect to the Okta API: %s' % e)
+            raise PluginException(cause=PluginException.Preset.UNKNOWN)

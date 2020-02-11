@@ -24,7 +24,7 @@ class GetFactorsInput(komand.Input):
     "user_id": {
       "type": "string",
       "title": "Okta User ID",
-      "description": "The user id of the user you want the factors of",
+      "description": "User ID to get factors for",
       "order": 1
     }
   },
@@ -47,7 +47,7 @@ class GetFactorsOutput(komand.Output):
     "factors": {
       "type": "array",
       "title": "Okta MFA Factors",
-      "description": "An object containing all the factors of a user for MFA",
+      "description": "Obbject containing all the factors of a user for MFA",
       "items": {
         "type": "object"
       },
