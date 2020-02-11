@@ -3,10 +3,10 @@
         "action": "download_report",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "id": 265,
