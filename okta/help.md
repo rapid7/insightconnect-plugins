@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-#### Get Okta user factors
+#### Get Okta User Factors
 
 This action returns an object containing all of a user's factors for MFA.
 
