@@ -3,10 +3,10 @@
         "action": "delete_scan_engine_pool",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "id": 13
