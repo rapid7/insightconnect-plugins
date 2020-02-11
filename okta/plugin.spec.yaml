@@ -133,7 +133,7 @@ connection:
     required: true
 actions:
   get_factors:
-    title: Get Okta user factors
+    title: Get Okta User Factors
     description: Returns an object containing all of a user's factors for MFA
     input:
       user_id:
