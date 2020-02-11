@@ -63,6 +63,16 @@ class AssetGroup:
             return f"{console_url}/api/3/asset_groups"
 
     @staticmethod
+    def asset_group_assets(console_url, asset_group_id=None):
+        """
+        Gets assets by site
+        :param console_url: URL to the InsightVM console
+        :param asset_group_id: ID of the site to get assets for
+        :return: pre-populated GET /api/3/asset_groups/{id}/assets
+        """
+        return f"{console_url}/api/3/asset_groups/{asset_group_id}/assets"
+
+    @staticmethod
     def asset_group_search_criteria(console_url, asset_group_id):
         """
         Gets assets by site

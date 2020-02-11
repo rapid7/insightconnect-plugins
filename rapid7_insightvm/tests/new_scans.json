@@ -2,10 +2,10 @@
     "body": {
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "dispatcher": {
             "url": "http://localhost:8000",
