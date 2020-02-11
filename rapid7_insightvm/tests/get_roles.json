@@ -3,10 +3,10 @@
         "action": "get_roles",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "name": ".*custom.*"

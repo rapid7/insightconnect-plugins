@@ -3,10 +3,10 @@
         "action": "get_vulnerabilities_by_cve",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "cve_id": "CVE-2008-4250"
