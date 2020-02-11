@@ -29,6 +29,49 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Get Vulnerability Solution
+
+This action is used to get Vulnerability Solution Details.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|id|string|None|True|Solution ID|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|solution|vulnerability_solution|False|Vulnerability solution|
+
+Example Output:
+
+```
+```
+
+#### Get Solution
+
+This action is used to get Solution Details.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|id|string|None|True|Solution ID|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
+|resourse|[]string|False|Resources|
+
+Example Output:
+
+```
+```
+
 #### Get Asset Group Assets
 
 This action is used to get Asset Group Assets.
@@ -607,7 +650,7 @@ This action is used to create, generate, download, and cleanup a SQL report base
 |filters|string|{}|False|Filters in JSON format to be applied to the contents of the report; review InsightVM API documentation for filter options|None|
 |query|string|None|True|Reporting Data Model SQL query|None|
 |scope|string|none|True|Scope context for generated report; if set, remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID; scan scope only supports single scan ID as input|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|
-|scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|
+|scope_ids|[]integer|None|False|Scope IDs for which tickets should be generated, by default all are included|None|
 
 ##### Output
 
@@ -1507,11 +1550,11 @@ This action is used to create a new site.
 |----|----|-------|--------|-----------|----|
 |description|string|None|False|The site's description|None|
 |engine_id|integer|None|False|The identifier of a scan engine. Default scan engine is selected when not specified|None|
-|excluded_addresses|[]string|[]|False|List of addresses to exclude in scan scope|None|
-|excluded_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be excluded in the site|None|
+|excluded_addresses|[]string|None|False|List of addresses to exclude in scan scope|None|
+|excluded_asset_groups|[]integer|None|False|Assets associated with these asset group IDs will be excluded in the site|None|
 |importance|string|normal|False|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|
-|included_addresses|[]string|[]|False|List of addresses to include in scan scope|None|
-|included_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be included in the site|None|
+|included_addresses|[]string|None|False|List of addresses to include in scan scope|None|
+|included_asset_groups|[]integer|None|False|Assets associated with these asset group IDs will be included in the site|None|
 |name|string|None|True|The site name. Name must be unique|None|
 |scan_template_id|string|None|False|The identifier of a scan template|None|
 
@@ -2743,7 +2786,7 @@ This action is used to create a new scan engine with console -> engine connectiv
 |address|string|None|True|Scan engine address (IP/hostname)|None|
 |name|string|None|True|Scan engine name|None|
 |port|integer|40814|True|Scan engine connectivity port|None|
-|sites|[]integer|[]|False|List of site IDs with which to associate the engine|None|
+|sites|[]integer|None|False|List of site IDs with which to associate the engine|None|
 
 ##### Output
 
@@ -4148,7 +4191,7 @@ This action is used to generate results for the top remediations based on a defi
 |asset_limit|integer|None|False|The amount of assets to be returned with each top remediation; this can be used to reduce message size and processing time|None|
 |limit|integer|25|True|Number of remediations for which tickets should be generated|[10, 25, 50, 100]|
 |scope|string|none|True|Scope context for generated report; if set remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|
-|scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|
+|scope_ids|[]integer|None|False|Scope IDs for which tickets should be generated, by default all are included|None|
 |vulnerability_limit|integer|None|False|The amount of vulnerabilities to be returned with each top remediation; this can be used to reduce message size and processing time|None|
 
 ##### Output
@@ -4207,7 +4250,7 @@ This trigger is used to check for new InsightVM vulnerability exceptions.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|
-|status_filter|[]string|['Under Review']|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|
+|status_filter|[]string|None|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|
 
 ##### Output
 
@@ -4273,7 +4316,7 @@ This trigger is used to check for new InsightVM scans by site and scan status.
 |frequency|integer|5|True|How often the trigger should check for new scans in minutes|None|
 |most_recent_scan|boolean|True|True|Only process the most recent scan for a site since the last time the trigger was run|None|
 |site_name_filter|string|.*|True|Regular expression to match sites where new scans should be triggered|None|
-|status_filter|[]string|['Successful']|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|
+|status_filter|[]string|None|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|
 
 ##### Output
 

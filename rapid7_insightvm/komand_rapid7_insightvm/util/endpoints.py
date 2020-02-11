@@ -444,6 +444,26 @@ class Vulnerability:
         return f"{console_url}/api/3/vulnerabilities/{vulnerability_id}"
 
     @staticmethod
+    def solution(console_url, vulnerability_id):
+        """
+        Gets assets affected by the vulnerability ID
+        :param console_url: URL to the InsightVM console
+        :param vulnerability_id: ID of the vulnerability to find assets for
+        :return: pre-populated GET /api/3/vulnerabilities/{id}
+        """
+        return f"{console_url}/api/3/solutions/{vulnerability_id}"
+   
+    @staticmethod
+    def vuln_solution(console_url, vulnerability_id):
+        """
+        Gets assets affected by the vulnerability ID
+        :param console_url: URL to the InsightVM console
+        :param vulnerability_id: ID of the vulnerability to find assets for
+        :return: pre-populated GET /api/3/vulnerabilities/{id}
+        """
+        return f"{console_url}/api/3/vulnerabilities/{vulnerability_id}/solutions"
+
+    @staticmethod
     def vulnerability_affected_assets(console_url, vulnerability_id):
         """
         Gets assets affected by the vulnerability ID

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
-version: 3.6.0
+version: 3.7.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -566,6 +566,58 @@ types:
       description: Hypermedia links to corresponding or related resources
       title: Links
       type: '[]link'
+      required: false
+  step:
+    html:
+      title: HTML
+      description: HTML description
+      required: false
+      type: string
+    text:
+      title: Text
+      description: Text description
+      required: false
+      type: string
+  vulnerability_solution:
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+    applies_to:
+      description: What the vulnerability applies to
+      title: Applies To
+      type: string
+      required: false
+    additional_information:
+      description: What the vulnerability applies to
+      title: Additional Information
+      type: object
+      required: false  
+    steps:
+      type: step
+      required: false
+      title: Solution Step
+      description: Solution steps
+    summary:
+      type: step
+      required: false
+      title: Solution Summary
+      description: Solution Summary
+    id:
+      type: string
+      description: Solution ID
+      title: Solution ID
+      required: false
+    type:
+      type: string
+      description: Solution type
+      title: Type
+      required: false
+    resourse:
+      description: Resources
+      title: Resources
+      type: '[]string'
       required: false
   exception_review:
     comment:
@@ -3605,6 +3657,41 @@ actions:
         title: Resources
         description: The identifiers of the associated resources
         type: '[]integer'
+        required: false
+  get_vulnerability_solution:
+    title: Get Vulnerability Solution
+    description: Get Vulnerability Solution Details
+    input:
+      id:
+        type: string
+        required: true
+        title: ID
+        description: Solution ID
+    output: 
+      solution:
+        title: Vulnerability Solution
+        required: false
+        type: vulnerability_solution
+        description: Vulnerability solution
+  get_solution:
+    title: Get Solution
+    description: Get Solution Details
+    input:
+      id:
+        type: string
+        required: true
+        title: ID
+        description: Solution ID
+    output: 
+      links:
+        description: Hypermedia links to corresponding or related resources
+        title: Links
+        type: '[]link'
+        required: false
+      resourse:
+        description: Resources
+        title: Resources
+        type: '[]string'
         required: false
 triggers:
   new_scans:

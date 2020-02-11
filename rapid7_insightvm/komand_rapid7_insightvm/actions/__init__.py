@@ -43,6 +43,7 @@ from .get_scans.action import GetScans
 from .get_site.action import GetSite
 from .get_site_assets.action import GetSiteAssets
 from .get_sites.action import GetSites
+from .get_solution.action import GetSolution
 from .get_tag.action import GetTag
 from .get_tag_asset_groups.action import GetTagAssetGroups
 from .get_tag_assets.action import GetTagAssets
@@ -53,6 +54,7 @@ from .get_users.action import GetUsers
 from .get_vulnerabilities_by_cve.action import GetVulnerabilitiesByCve
 from .get_vulnerability.action import GetVulnerability
 from .get_vulnerability_affected_assets.action import GetVulnerabilityAffectedAssets
+from .get_vulnerability_solution.action import GetVulnerabilitySolution
 from .list_reports.action import ListReports
 from .remove_asset_group_tags.action import RemoveAssetGroupTags
 from .remove_asset_tag.action import RemoveAssetTag
