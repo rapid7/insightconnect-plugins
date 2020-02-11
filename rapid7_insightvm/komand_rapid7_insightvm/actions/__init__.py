@@ -24,6 +24,7 @@ from .generate_adhoc_sql_report.action import GenerateAdhocSqlReport
 from .generate_shared_secret.action import GenerateSharedSecret
 from .get_asset.action import GetAsset
 from .get_asset_group.action import GetAssetGroup
+from .get_asset_group_assets.action import GetAssetGroupAssets
 from .get_asset_groups.action import GetAssetGroups
 from .get_asset_software.action import GetAssetSoftware
 from .get_asset_tags.action import GetAssetTags

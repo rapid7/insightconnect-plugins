@@ -3,10 +3,10 @@
         "action": "update_tag_search_criteria",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "id": 73,
