@@ -1,14 +1,6 @@
 {
     "body": {
         "action": "get_comments",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "project": null,
-            "url": null
-        },
         "input": {
             "id": ""
         },
