@@ -27,11 +27,6 @@ hub_tags:
   keywords: [vulnerability, scanning, management, remediation, virtual, patching, intrusion, detection, prevention, remediation, trend, micro, deep, security, trendmicro, deepsecurity]
   features: []
 connection:
-  asset_hostname_dsm:
-    title: Asset Hostname on DSM
-    description: Hostname of the asset in the Deep Security Manager
-    type: string
-    required: false
   dsm_url:
     title: Deep Security Manager URL
     description: URL of the Deep Security Manager
@@ -43,22 +38,6 @@ connection:
     description: API key of the Deep Security Manager
     type: credential_secret_key
     required: true
-  asset_hostname_ivm:
-    title: Asset Hostname on IVM
-    description: Hostname of the asset in InsightVM
-    type: string
-    required: false
-  ivm_url:
-    title: InsightVM URL
-    description: URL of the InsightVM console
-    type: string
-    default: https://insightvm.company.de:3780/
-    required: false
-  ivm_user_password:
-    title: IVM Credentials
-    description: InsightVM username and password
-    type: credential_username_password
-    required: false
 actions: 
   search_rules:
     title: Search

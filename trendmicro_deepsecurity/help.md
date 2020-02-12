@@ -21,24 +21,17 @@
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|asset_hostname_dsm|string|None|False|Hostname of the asset in the Deep Security Manager|None|
-|asset_hostname_ivm|string|None|False|Hostname of the asset in InsightVM|None|
 |dsm_api_key|credential_secret_key|None|True|API key of the Deep Security Manager|None|
 |dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|
-|ivm_url|string|https://insightvm.company.de:3780/|False|URL of the InsightVM console|None|
-|ivm_user_password|credential_username_password|None|False|InsightVM username and password|None|
 
 #### Example
 
 ```
 "connection": {
-            "asset_hostname_dsm": "DE-SRV-AD",
-            "asset_hostname_ivm": "192.168.0.100",
-            "dsm_api_key": "MY-DEEP-SECURITY-API-KEY",
-            "dsm_url": "https://app.deepsecurity.trendmicro.com",
-            "ivm_password": "myTOPsecretPASSWORD",
-            "ivm_url": "https://192.168.0.200:3780/",
-            "ivm_user": "nxadmin"
+    "dsm_api_key": {
+        "secretKey": "MY-DEEP-SECURITY-API-KEY"
+    },
+    "dsm_url": "https://app.deepsecurity.trendmicro.com"
 }
 ```
 

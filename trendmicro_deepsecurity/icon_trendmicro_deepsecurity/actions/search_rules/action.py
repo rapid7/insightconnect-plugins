@@ -20,7 +20,6 @@ class SearchRules(komand.Action):
                 input=SearchRulesInput(),
                 output=SearchRulesOutput())
 
-
     def run(self, params={}):
         '''
         Searches for IPS rules by CVE number in Deep Security
@@ -28,7 +27,6 @@ class SearchRules(komand.Action):
 
         # Get parameters
         self.vulnerabilities=params.get("vulnerabilities")
-        url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/search"
 
         matched_cves=set()
         missed_cves=set()
@@ -37,6 +35,8 @@ class SearchRules(komand.Action):
         for cve in self.vulnerabilities:
 
             # Prepare request
+            url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/search"
+
             data = { "maxItems": 100,
                      "searchCriteria": [ { "fieldName": "CVE",
                                            "stringWildcards": True,
