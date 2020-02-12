@@ -18,8 +18,8 @@ class Connection(komand.Connection):
         """
         Get all connection parameters
         """
-        self.dsm_url = params.get("dsm_url")
-        self.dsm_api_key = params.get('dsm_api_key').get("secretKey")
+        self.dsm_url = params.get(Input.DSM_URL)
+        self.dsm_api_key = params.get(Input.DSM_API_KEY).get("secretKey")
 
     def test(self):
         """

@@ -23,9 +23,9 @@ class DeployRules(komand.Action):
         """
 
         # Get parameters
-        self.computer_or_policy=params.get("computer_or_policy")
-        self.id=params.get("id")
-        self.rules=params.get("rules")
+        self.computer_or_policy=params.get(Input.COMPUTER_OR_POLICY)
+        self.id=params.get(Input.ID)
+        self.rules=params.get(Input.RULES)
 
         # Check if the rules should be assigned to a computer or policy
         if self.computer_or_policy == "computer":
@@ -71,5 +71,7 @@ class DeployRules(komand.Action):
                 rules_not_assigned.append(rule)
 
         # Return assigned and failed rules
-        return {"rules_assigned": rules_assigned,
-                'rules_not_assigned': rules_not_assigned}
+        return {
+            Output.RULES_ASSIGNED: rules_assigned,
+            Output.RULES_NOT_ASSIGNED: rules_not_assigned
+        }

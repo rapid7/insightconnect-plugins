@@ -26,7 +26,7 @@ class SearchRules(komand.Action):
         '''
 
         # Get parameters
-        self.vulnerabilities=params.get("vulnerabilities")
+        self.vulnerabilities=params.get(Input.VULNERABILITIES)
 
         matched_cves=set()
         missed_cves=set()
@@ -80,6 +80,8 @@ class SearchRules(komand.Action):
             
         self.logger.info("Found rules for the following CVEs: " + ", ".join(matched_cves))
         
-        return {'ips_rules': list(ips_rules),
-                'matched_cves': list(matched_cves),
-                'missed_cves': list(missed_cves)}     
+        return {
+            Output.IPS_RULES: list(ips_rules),
+            Output.MATCHED_CVES: list(matched_cves),
+            Output.MISSED_CVES: list(missed_cves)
+        }     
