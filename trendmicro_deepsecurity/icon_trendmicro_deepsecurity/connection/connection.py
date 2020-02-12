@@ -33,7 +33,7 @@ class Connection(komand.Connection):
         """
 
         # Prepare request
-        url = self.dsm_url + "/api/policies"
+        url = f'{self.dsm_url}/api/policies'
         
         post_header = {
                         "Content-type": "application/json",
@@ -43,7 +43,6 @@ class Connection(komand.Connection):
 
         # Get list of policies
         response = requests.get(url,
-                                 #data=json.dumps(data),
                                  headers=post_header,
                                  verify=False)                                
         response.close()

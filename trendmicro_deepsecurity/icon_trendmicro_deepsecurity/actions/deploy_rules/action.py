@@ -6,7 +6,7 @@ import requests
 import json
 
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
-from icon_trendmicro_deepsecurity.util.shared.util.shared import checkResponse
+from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
 class DeployRules(komand.Action):
 
@@ -52,8 +52,8 @@ class DeployRules(komand.Action):
                                 verify=True)
         response.close()
 
-        self.logger.info('status: ' + str(response.status_code))
-        self.logger.info('reason: ' + response.reason)
+        self.logger.info(f'status: {response.status_code}')
+        self.logger.info(f'reason: {response.reason}')
 
         # Try to convert the response data to JSON
         response_data=tryJSON(response)

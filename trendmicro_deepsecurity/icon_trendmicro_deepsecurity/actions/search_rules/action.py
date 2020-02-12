@@ -7,8 +7,9 @@ from .schema import SearchRulesInput, SearchRulesOutput, Input, Output, Componen
 import requests
 import json
 
+
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
-from icon_trendmicro_deepsecurity.util.shared.util.shared import checkResponse
+from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
 class SearchRules(komand.Action):
 
@@ -27,7 +28,7 @@ class SearchRules(komand.Action):
 
         # Get parameters
         self.vulnerabilities=params.get("vulnerabilities")
-        url = self.connection.dsm_url + "/api/intrusionpreventionrules/search"
+        url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/search"
 
         matched_cves=set()
         missed_cves=set()
@@ -39,7 +40,7 @@ class SearchRules(komand.Action):
             data = { "maxItems": 100,
                      "searchCriteria": [ { "fieldName": "CVE",
                                            "stringWildcards": True,
-                                           "stringValue": "%" + cve + "%"
+                                           "stringValue": f"%{cve}%"
                                          } ] }
 
             post_header = {
@@ -56,8 +57,8 @@ class SearchRules(komand.Action):
             response.close()
             
             self.logger.info(cve)
-            self.logger.info('status: ' + str(response.status_code))
-            self.logger.info('reason: ' + response.reason)
+            self.logger.info(f'status: {response.status_code}')
+            self.logger.info(f'reason: {response.reason}')
             
             # Try to convert the response data to JSON
             response_data=tryJSON(response)
@@ -67,13 +68,14 @@ class SearchRules(komand.Action):
 
             # Check if matching IPS rules were found
             if response_data['intrusionPreventionRules']: 
-                self.logger.info(cve + ': Found ' + str(len(response_data['intrusionPreventionRules'])) + ' rules!')
+                hits=len(response_data['intrusionPreventionRules'])
+                self.logger.info(f'{cve}: Found {hits} rules!')
                 for rule in response_data['intrusionPreventionRules']: 
-                    self.logger.info(str(rule['ID']) + ': ' + rule['name'])
+                    self.logger.info(f"{rule['ID']}: {rule['name']}")
                     ips_rules.add(rule['ID'])
                     matched_cves.add(cve)
             else:
-                self.logger.info(cve + ': No rule found!')
+                self.logger.info(f'{cve}: No rule found!')
                 missed_cves.add(cve)
             
         self.logger.info("Found rules for the following CVEs: " + ", ".join(matched_cves))

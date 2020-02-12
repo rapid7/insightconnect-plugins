@@ -49,7 +49,6 @@ class ConnectionSchema(komand.Input):
       "title": "Password",
       "displayType": "password",
       "description": "InsightVM Password",
-      "default": "nxpassword",
       "format": "password",
       "order": 7
     },

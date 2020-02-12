@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="trendmicro_deepsecurity-philipp-behmer-plugin",
-      version="1.0.0",
+      version="1.0.1",
       description="Utilise the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)",
       author="philipp-behmer",
       author_email="",

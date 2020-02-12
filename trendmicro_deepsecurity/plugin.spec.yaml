@@ -4,7 +4,7 @@ products: [insightconnect]
 name: trendmicro_deepsecurity
 title: Trend Micro Deep Security
 description: Utilise the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
-version: 1.0.0
+version: 1.0.1
 vendor: philipp-behmer
 support: community
 status: []
@@ -79,7 +79,7 @@ actions:
       ips_rules:
         title: IPS Rules
         description: IPS rules matching the given CVE numbers
-        type: "[]int"
+        type: "[]integer"
         required: false
       matched_cves:
         title: Matched CVEs
