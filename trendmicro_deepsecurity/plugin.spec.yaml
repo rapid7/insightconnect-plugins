@@ -12,7 +12,7 @@ enable_cache: false
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/trendmicro_deepsecurity
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://philippbehmer.de
+  vendor_url: https://trendmicro.com
 tags:
 - vulnerability_scanning
 - vulnerability_management
@@ -64,7 +64,6 @@ connection:
     title: Password
     description: InsightVM Password
     type: password
-    default: nxpassword
     required: false
 actions: 
   search_rules:
@@ -106,22 +105,22 @@ actions:
           - policy 
       id:
         title: ID
-        type: int
+        type: integer
         description: ID of the target asset or policy in Deep Security
         required: true
       rules:
         title: IPS Rules
-        type: "[]int"
+        type: "[]integer"
         description: IPS rules to assign
         required: true
     output:
       rules_assigned:
         title: Rules Assigned
         description: All rules that are currently assigned to the asset
-        type: "[]int"
+        type: "[]integer"
         required: false
       rules_not_assigned:
         title: Not Assigned Rules
         description: Rules that were not assigned
-        type: "[]int"
+        type: "[]integer"
         required: false

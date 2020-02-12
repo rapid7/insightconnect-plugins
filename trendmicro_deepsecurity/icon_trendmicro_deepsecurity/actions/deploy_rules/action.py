@@ -5,8 +5,8 @@ from .schema import DeployRulesInput, DeployRulesOutput, Input, Output, Componen
 import requests
 import json
 
-from ...util.shared import tryJSON
-from ...util.shared import checkResponse
+from icon_trendmicro_deepsecurity.util.shared import tryJSON
+from icon_trendmicro_deepsecurity.util.shared.util.shared import checkResponse
 
 class DeployRules(komand.Action):
 
@@ -29,9 +29,9 @@ class DeployRules(komand.Action):
 
         # Check if the rules should be assigned to a computer or policy
         if self.computer_or_policy == "computer":
-            url = self.connection.dsm_url + "/api/computers/" + str(self.id) + "/intrusionprevention/assignments"
+            url = f"{self.connection.dsm_url}/api/computers/{self.id}/intrusionprevention/assignments"
         else:
-            url = self.connection.dsm_url + "/api/policies/" + str(self.id) + "/intrusionprevention/assignments"
+            url = f"{self.connection.dsm_url}/api/policies/{self.id}/intrusionprevention/assignments"
 
         self.logger.info("Setting rules: ")
         self.logger.info(self.rules)
@@ -67,10 +67,9 @@ class DeployRules(komand.Action):
 
         # Check if the new rules were successfully assigned
         for rule in self.rules:
-            if rule not in response_data['assignedRuleIDs']:
+            if rule not in rules_assigned:
                 rules_not_assigned.append(rule)
 
         # Return assigned and failed rules
         return {"rules_assigned": rules_assigned,
                 'rules_not_assigned': rules_not_assigned}
-

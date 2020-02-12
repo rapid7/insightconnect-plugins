@@ -5,8 +5,8 @@ from .schema import ConnectionSchema, Input
 import requests
 from requests.auth import HTTPBasicAuth
 
-from ..util.shared import tryJSON
-from ..util.shared import checkResponse
+from icon_trendmicro_deepsecurity.util.shared import tryJSON
+from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
 
 class Connection(komand.Connection):

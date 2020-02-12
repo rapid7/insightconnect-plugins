@@ -7,8 +7,8 @@ from .schema import SearchRulesInput, SearchRulesOutput, Input, Output, Componen
 import requests
 import json
 
-from ...util.shared import tryJSON
-from ...util.shared import checkResponse
+from icon_trendmicro_deepsecurity.util.shared import tryJSON
+from icon_trendmicro_deepsecurity.util.shared.util.shared import checkResponse
 
 class SearchRules(komand.Action):
 

@@ -10,7 +10,7 @@ def tryJSON(response):
         response_data = response.json()
     except json.decoder.JSONDecodeError:
         raise PluginException(
-                            cause="Received an unexpected response from Cherwell ",
+                            cause="Received an unexpected response from Deep Security",
                             assistance="(non-JSON or no response was received).",
                             data=response.text
                             )

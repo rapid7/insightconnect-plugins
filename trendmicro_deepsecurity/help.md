@@ -1,6 +1,6 @@
 # Description
 
-[Trend Micro Deep Security](https://www.trendmicro.com/en_us/business/products/hybrid-cloud/deep-security.html) is an endpoint protection software with multiple modules like Anti-Virus, Intrusion Prevention (Virtual Patching), Integrity Monitoring and more.
+[Trend Micro Deep Security](https://www.trendmicro.com/en_us/business/products/hybrid-cloud/deep-security.html) is an endpoint protection software with multiple modules such as Anti-Virus, Intrusion Prevention (Virtual Patching), Integrity Monitoring and more.
 
 # Key Features
 
@@ -74,7 +74,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-...
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
