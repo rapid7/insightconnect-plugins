@@ -14,7 +14,8 @@
 
 ## Setup
 
-* Enter Credentials for the Deep Security Manager
+* [Create an API key for Deep Security](https://help.deepsecurity.trendmicro.com/api-key.html)
+* Create a new connection and enter the Deep Security Manager URL and API key 
 
 ### Input
 
@@ -26,6 +27,20 @@
 |dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|
 |ivm_url|string|https://insightvm.company.de:3780/|False|URL of the InsightVM console|None|
 |ivm_user_password|credential_username_password|None|False|InsightVM username and password|None|
+
+#### Example
+
+```
+"connection": {
+            "asset_hostname_dsm": "DE-SRV-AD",
+            "asset_hostname_ivm": "192.168.0.100",
+            "dsm_api_key": "MY-DEEP-SECURITY-API-KEY",
+            "dsm_url": "https://app.deepsecurity.trendmicro.com",
+            "ivm_password": "myTOPsecretPASSWORD",
+            "ivm_url": "https://192.168.0.200:3780/",
+            "ivm_user": "nxadmin"
+}
+```
 
 ## Technical Details
 
@@ -40,6 +55,14 @@ Search for matching IPS rules in Deep Security by CVE ID
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |vulnerabilities|[]string|None|True|CVEs to protect against|None|
+
+###### Example
+
+```
+"input": {
+            "vulnerabilities": ["CVE-2014-0160","CVE-2017-0144"]
+}
+```
 
 ##### Output
 
@@ -75,7 +98,7 @@ Search for matching IPS rules in Deep Security by CVE ID
 
 #### Deploy
 
-This action is used to search Deep Security IPS rules for given CVEs.
+Deploy the given Deep Security IPS rules to a computer or policy
 
 ##### Input
 
@@ -84,6 +107,16 @@ This action is used to search Deep Security IPS rules for given CVEs.
 |computer_or_policy|string|None|True|Define if the rules get assigned to a computer or policy|['computer', 'policy']|
 |id|integer|None|True|ID of the target asset or policy in Deep Security|None|
 |rules|[]integer|None|True|IPS rules to assign|None|
+
+###### Example
+
+```
+"input": {
+            "computer_or_policy": "policy",
+            "id": 42,
+            "rules": [108, 6745, 2874, 2875, 2876, 3317, 3318]
+}
+```
 
 ##### Output
 
