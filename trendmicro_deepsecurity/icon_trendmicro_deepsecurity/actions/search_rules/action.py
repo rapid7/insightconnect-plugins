@@ -15,10 +15,10 @@ class SearchRules(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='search_rules',
-                description=Component.DESCRIPTION,
-                input=SearchRulesInput(),
-                output=SearchRulesOutput())
+                name = 'search_rules',
+                description = Component.DESCRIPTION,
+                input = SearchRulesInput(),
+                output = SearchRulesOutput())
 
     def run(self, params={}):
         '''
@@ -26,11 +26,11 @@ class SearchRules(komand.Action):
         '''
 
         # Get parameters
-        self.vulnerabilities=params.get(Input.VULNERABILITIES)
+        self.vulnerabilities = params.get(Input.VULNERABILITIES)
 
-        matched_cves=set()
-        missed_cves=set()
-        ips_rules=set()    
+        matched_cves = set()
+        missed_cves = set()
+        ips_rules = set()    
 
         for cve in self.vulnerabilities:
 
@@ -51,24 +51,23 @@ class SearchRules(komand.Action):
 
             # Search for IPS rules
             response = requests.post(url,
-                                     data=json.dumps(data),
-                                     headers=post_header,
-                                     verify=True)
-            response.close()
+                                     data = json.dumps(data),
+                                     headers = post_header,
+                                     verify = True)
             
             self.logger.info(cve)
             self.logger.info(f'status: {response.status_code}')
             self.logger.info(f'reason: {response.reason}')
             
             # Try to convert the response data to JSON
-            response_data=tryJSON(response)
+            response_data = tryJSON(response)
 
             # Check response errors
             checkResponse(response)
 
             # Check if matching IPS rules were found
             if response_data['intrusionPreventionRules']: 
-                hits=len(response_data['intrusionPreventionRules'])
+                hits = len(response_data['intrusionPreventionRules'])
                 self.logger.info(f'{cve}: Found {hits} rules!')
                 for rule in response_data['intrusionPreventionRules']: 
                     self.logger.info(f"{rule['ID']}: {rule['name']}")

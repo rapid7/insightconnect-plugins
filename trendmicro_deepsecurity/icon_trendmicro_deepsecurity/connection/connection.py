@@ -12,7 +12,7 @@ from icon_trendmicro_deepsecurity.util.shared import checkResponse
 class Connection(komand.Connection):
 
     def __init__(self):
-        super(self.__class__, self).__init__(input=ConnectionSchema())
+        super(self.__class__, self).__init__(input = ConnectionSchema())
 
     def connect(self, params):
         """
@@ -37,12 +37,12 @@ class Connection(komand.Connection):
 
         # Get list of policies
         response = requests.get(url,
-                                 headers=post_header,
-                                 verify=True)                                
+                                 headers = post_header,
+                                 verify = True)                                
         response.close()
 
         # Try to convert the response data to JSON
-        response_data=tryJSON(response)
+        response_data = tryJSON(response)
 
         # Check response errors
         checkResponse(response)
