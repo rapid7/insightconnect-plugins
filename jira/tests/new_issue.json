@@ -1,13 +1,5 @@
 {
     "body": {
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "project": null,
-            "url": null
-        },
         "dispatcher": {
             "url": "http://localhost:8000",
             "webhook_url": ""
