@@ -1,5 +1,7 @@
 import logging
 import base64
+from io import BytesIO
+from komand.exceptions import PluginException
 
 
 def normalize_comment(source, logger=logging.getLogger()):
@@ -10,7 +12,6 @@ def normalize_comment(source, logger=logging.getLogger()):
 
 
 def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logger=logging.getLogger()):
-
     url = issue.permalink().split(" - ", 1)[0]
 
     if issue.fields.resolution:
@@ -45,7 +46,7 @@ def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logg
     attachment = []
     if get_attachments:
         for a in issue.fields.attachment:
-            single_attachment = {'filename': a.filename,'content': base64.standard_b64encode(a.get()).decode()}
+            single_attachment = {'filename': a.filename, 'content': base64.standard_b64encode(a.get()).decode()}
             attachment.append(single_attachment)
 
     logger.debug("Source issue: %s", issue.raw)
@@ -95,3 +96,18 @@ def look_up_project(_id, client, logger=logging.getLogger()):
         return True
     return False
 
+
+def add_attachment(connection, logger, issue, filename, file_bytes):
+    try:
+        data = base64.b64decode(file_bytes)
+    except Exception as e:
+        raise PluginException(cause='Unable to decode attachment bytes.',
+                              assistance=f"Please provide a valid attachment bytes. Error: {str(e)}")
+    attachment = BytesIO()
+    attachment.write(data)
+    output = connection.client.add_attachment(
+        issue=issue,
+        attachment=attachment,
+        filename=filename)
+    logger.debug('Attach issue has returned: %s', output)
+    return output
