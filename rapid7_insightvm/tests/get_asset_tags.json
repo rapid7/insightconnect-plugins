@@ -3,10 +3,10 @@
         "action": "get_asset_tags",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "asset_id": 0

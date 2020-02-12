@@ -48,7 +48,7 @@ class GetCommentsOutput(komand.Output):
     "comments": {
       "type": "array",
       "title": "Comments",
-      "description": "Comments",
+      "description": "Comments list",
       "items": {
         "$ref": "#/definitions/comment"
       },
