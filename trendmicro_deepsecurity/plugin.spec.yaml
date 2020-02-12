@@ -24,7 +24,7 @@ tags:
 - deep_security
 hub_tags:
   use_cases: [vulnerability_management, cloud_security, remediation_management, threat_detection_and_response ]
-  keywords: [vulnerability, scanning, management, remediation, virtual, patching, intrusion, detection, prevention, remediation, trend, micro, deep, security, trendmicro, deepsecurity]
+  keywords: [vulnerability scanning, vulnerability management, remediation, virtual patching, intrusion, detection, prevention, response, trend micro, deep security, trendmicro, deepsecurity]
   features: []
 connection:
   dsm_url:
