@@ -69,13 +69,13 @@ class UnshortenOutput(komand.Output):
     "success": {
       "type": "boolean",
       "title": "Success",
-      "description": "Success",
+      "description": "To indicate if the operation was successful or not",
       "order": 3
     },
     "usage_count": {
       "type": "integer",
       "title": "Usage Count",
-      "description": "Usage count",
+      "description": "The usage count for the current IP",
       "order": 4
     }
   },
