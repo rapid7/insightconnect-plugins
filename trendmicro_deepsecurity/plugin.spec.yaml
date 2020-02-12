@@ -28,20 +28,20 @@ hub_tags:
   features: []
 connection:
   dsm_url:
-    title: Deep Security Manager URL
+    title: URL
     description: URL of the Deep Security Manager
     type: string
     default: https://app.deepsecurity.trendmicro.com
     required: true
   dsm_api_key:
-    title: Deep Security Manager API Key
+    title: API Key
     description: API key of the Deep Security Manager
     type: credential_secret_key
     required: true
 actions: 
   search_rules:
     title: Search
-    description: Search Deep Security IPS rules for given CVEs
+    description: Search IPS rules for given CVEs
     input:
       vulnerabilities:
         title: Vulnerabilities
@@ -51,27 +51,27 @@ actions:
     output:
       ips_rules:
         title: IPS Rules
-        description: IPS rules matching the given CVE numbers
+        description: IPS rules matching the given CVEs
         type: "[]integer"
         required: false
       matched_cves:
         title: Matched CVEs
-        description: CVEs that have at least one matching IPS rule in Deep Security
+        description: CVEs with at least one matching IPS rule
         type: "[]string"
         required: false
       missed_cves:
         title: Missed CVEs
-        description: CVEs without matching IPS rule in Deep Security
+        description: CVEs without matching IPS rules
         type: "[]string"
         required: false
   deploy_rules:
     title: Deploy
-    description: Deploy rules in Deep Security
+    description: Deploy rules
     input:
       computer_or_policy:
         title: Target
         type: string
-        description: Define if the rules get assigned to a computer or policy
+        description: Target for rule assignment
         required: true 
         enum:
           - computer
@@ -79,7 +79,7 @@ actions:
       id:
         title: ID
         type: integer
-        description: ID of the target asset or policy in Deep Security
+        description: ID of the target asset or policy
         required: true
       rules:
         title: IPS Rules
@@ -89,11 +89,11 @@ actions:
     output:
       rules_assigned:
         title: Rules Assigned
-        description: All rules that are currently assigned to the asset
+        description: All rules currently assigned to the asset
         type: "[]integer"
         required: false
       rules_not_assigned:
         title: Not Assigned Rules
-        description: Rules that were not assigned
+        description: Unassigned rules
         type: "[]integer"
         required: false
