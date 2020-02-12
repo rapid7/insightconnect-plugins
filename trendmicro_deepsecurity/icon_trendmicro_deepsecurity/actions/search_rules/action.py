@@ -53,7 +53,7 @@ class SearchRules(komand.Action):
             response = requests.post(url,
                                      data=json.dumps(data),
                                      headers=post_header,
-                                     verify=False)
+                                     verify=True)
             response.close()
             
             self.logger.info(cve)

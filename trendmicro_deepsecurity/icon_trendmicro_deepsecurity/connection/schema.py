@@ -8,9 +8,8 @@ class Input:
     ASSET_HOSTNAME_IVM = "asset_hostname_ivm"
     DSM_API_KEY = "dsm_api_key"
     DSM_URL = "dsm_url"
-    IVM_PASSWORD = "ivm_password"
     IVM_URL = "ivm_url"
-    IVM_USER = "ivm_user"
+    IVM_USER_PASSWORD = "ivm_user_password"
     
 
 class ConnectionSchema(komand.Input):
@@ -32,7 +31,7 @@ class ConnectionSchema(komand.Input):
       "order": 4
     },
     "dsm_api_key": {
-      "type": "string",
+      "$ref": "#/definitions/credential_secret_key",
       "title": "Deep Security Manager API Key",
       "description": "API key of the Deep Security Manager",
       "order": 3
@@ -44,14 +43,6 @@ class ConnectionSchema(komand.Input):
       "default": "https://app.deepsecurity.trendmicro.com",
       "order": 2
     },
-    "ivm_password": {
-      "type": "string",
-      "title": "Password",
-      "displayType": "password",
-      "description": "InsightVM Password",
-      "format": "password",
-      "order": 7
-    },
     "ivm_url": {
       "type": "string",
       "title": "InsightVM URL",
@@ -59,18 +50,61 @@ class ConnectionSchema(komand.Input):
       "default": "https://insightvm.company.de:3780/",
       "order": 5
     },
-    "ivm_user": {
-      "type": "string",
-      "title": "Username",
-      "description": "InsightVM Username",
-      "default": "nxadmin",
+    "ivm_user_password": {
+      "$ref": "#/definitions/credential_username_password",
+      "title": "IVM Credentials",
+      "description": "InsightVM username and password",
       "order": 6
     }
   },
   "required": [
     "dsm_api_key",
     "dsm_url"
-  ]
+  ],
+  "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "displayType": "password",
+          "description": "The shared secret key",
+          "format": "password"
+        }
+      },
+      "required": [
+        "secretKey"
+      ]
+    },
+    "credential_username_password": {
+      "id": "credential_username_password",
+      "type": "object",
+      "title": "Credential: Username and Password",
+      "description": "A username and password combination",
+      "properties": {
+        "password": {
+          "type": "string",
+          "title": "Password",
+          "displayType": "password",
+          "description": "The password",
+          "format": "password"
+        },
+        "username": {
+          "type": "string",
+          "title": "Username",
+          "description": "The username to log in with"
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    }
+  }
 }
     """)
 

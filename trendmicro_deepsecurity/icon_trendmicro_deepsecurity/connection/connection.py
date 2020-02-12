@@ -20,10 +20,10 @@ class Connection(komand.Connection):
         """
 
         self.ivm_url = params.get("ivm_url")
-        self.ivm_user = params.get("ivm_user")
-        self.ivm_password = params.get("ivm_password")
+        self.ivm_user = params.get('ivm_user_password').get('username')
+        self.ivm_password = params.get('ivm_user_password').get('password')
         self.dsm_url = params.get("dsm_url")
-        self.dsm_api_key = params.get("dsm_api_key")
+        self.dsm_api_key = params.get('dsm_api_key').get("secretKey")
         self.asset_hostname_ivm = params.get("asset_hostname_ivm")
         self.asset_hostname_dsm = params.get("asset_hostname_dsm")
 
@@ -44,7 +44,7 @@ class Connection(komand.Connection):
         # Get list of policies
         response = requests.get(url,
                                  headers=post_header,
-                                 verify=False)                                
+                                 verify=True)                                
         response.close()
 
         # Try to convert the response data to JSON

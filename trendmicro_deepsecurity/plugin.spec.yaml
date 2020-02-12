@@ -4,7 +4,7 @@ products: [insightconnect]
 name: trendmicro_deepsecurity
 title: Trend Micro Deep Security
 description: Utilise the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
-version: 1.0.1
+version: 1.0.0
 vendor: philipp-behmer
 support: community
 status: []
@@ -41,7 +41,7 @@ connection:
   dsm_api_key:
     title: Deep Security Manager API Key
     description: API key of the Deep Security Manager
-    type: string
+    type: credential_secret_key
     required: true
   asset_hostname_ivm:
     title: Asset Hostname on IVM
@@ -54,16 +54,10 @@ connection:
     type: string
     default: https://insightvm.company.de:3780/
     required: false
-  ivm_user:
-    title: Username
-    description: InsightVM Username
-    type: string
-    default: nxadmin
-    required: false
-  ivm_password:
-    title: Password
-    description: InsightVM Password
-    type: password
+  ivm_user_password:
+    title: IVM Credentials
+    description: InsightVM username and password
+    type: credential_username_password
     required: false
 actions: 
   search_rules:
