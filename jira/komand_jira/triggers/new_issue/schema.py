@@ -11,6 +11,7 @@ class Input:
     
     GET_ATTACHMENTS = "get_attachments"
     JQL = "jql"
+    POLL_TIMEOUT = "poll_timeout"
     PROJECT = "project"
     
 
@@ -37,6 +38,13 @@ class NewIssueInput(komand.Input):
       "title": "JQL",
       "description": "JQL search string to use",
       "order": 2
+    },
+    "poll_timeout": {
+      "type": "integer",
+      "title": "Poll timeout",
+      "description": "Timeout between next poll, default 60",
+      "default": 60,
+      "order": 4
     },
     "project": {
       "type": "string",

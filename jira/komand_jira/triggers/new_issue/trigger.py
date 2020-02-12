@@ -1,10 +1,11 @@
 import komand
 
-from .schema import NewIssueInput, NewIssueOutput
+from .schema import NewIssueInput, NewIssueOutput, Input, Output
 # Custom imports below
 import time
-from ...util import *
+from ...util import normalize_issue, look_up_project
 from komand.exceptions import PluginException
+
 
 class NewIssue(komand.Trigger):
 
@@ -15,6 +16,8 @@ class NewIssue(komand.Trigger):
             input=NewIssueInput(),
             output=NewIssueOutput())
 
+        self.get_attachments = None
+        self.project = None
         self.jql = ''
         self.max = 10
         self.found = {}
@@ -31,20 +34,19 @@ class NewIssue(komand.Trigger):
                 output = normalize_issue(issue, get_attachments=self.get_attachments, logger=self.logger)
                 self.found[issue.id] = True
                 self.logger.debug('found: %s', output)
-                self.send({"issue": output})
+                self.send({Output.ISSUE: output})
 
     def run(self, params={}):
         """Run the trigger"""
-        # send a test event
-        self.jql = params.get('jql') or ''
-        self.get_attachments = params.get('get_attachments', False)
-        self.project = params.get('project')
+        self.jql = params.get(Input.JQL) or ''
+        self.get_attachments = params.get(Input.GET_ATTACHMENTS, False)
+        self.project = params.get(Input.PROJECT)
 
-        # Check if project exists
         valid_project = look_up_project(self.project, self.connection.client)
         if not valid_project:
-            raise PluginException(cause=f"Project {self.project} does not exist or user don't have permission to access the project.",
-                                  assistance='Please provide a valid project ID/name or make sure project is accessible to user.')
+            raise PluginException(
+                cause=f"Project {self.project} does not exist or the user does not have permission to access the project.",
+                assistance='Please provide a valid project ID/name or make sure the project is accessible to the user.')
 
         if self.project:
             if self.jql:
@@ -58,4 +60,4 @@ class NewIssue(komand.Trigger):
 
         while True:
             self.poll()
-            time.sleep(60)
+            time.sleep(params.get(Input.POLL_TIMEOUT, 60))

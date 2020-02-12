@@ -3,10 +3,10 @@
         "action": "add_user_site_access",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "site_id": 311,
