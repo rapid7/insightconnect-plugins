@@ -24,17 +24,6 @@
 |dsm_api_key|credential_secret_key|None|True|API key of the Deep Security Manager|None|
 |dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|
 
-#### Example
-
-```
-"connection": {
-    "dsm_api_key": {
-        "secretKey": "MY-DEEP-SECURITY-API-KEY"
-    },
-    "dsm_url": "https://app.deepsecurity.trendmicro.com"
-}
-```
-
 ## Technical Details
 
 ### Actions
@@ -49,14 +38,6 @@ Search for matching IPS rules in Deep Security by CVE ID
 |----|----|-------|--------|-----------|----|
 |vulnerabilities|[]string|None|True|CVEs to protect against|None|
 
-###### Example
-
-```
-"input": {
-            "vulnerabilities": ["CVE-2014-0160","CVE-2017-0144"]
-}
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -65,7 +46,7 @@ Search for matching IPS rules in Deep Security by CVE ID
 |matched_cves|[]string|False|CVEs that have at least one matching IPS rule in Deep Security|
 |missed_cves|[]string|False|CVEs without matching IPS rule in Deep Security|
 
-###### Example
+Example output:
 
 ```
 {
@@ -101,16 +82,6 @@ Deploy the given Deep Security IPS rules to a computer or policy
 |id|integer|None|True|ID of the target asset or policy in Deep Security|None|
 |rules|[]integer|None|True|IPS rules to assign|None|
 
-###### Example
-
-```
-"input": {
-            "computer_or_policy": "policy",
-            "id": 42,
-            "rules": [108, 6745, 2874, 2875, 2876, 3317, 3318]
-}
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -118,7 +89,7 @@ Deploy the given Deep Security IPS rules to a computer or policy
 |rules_assigned|[]integer|False|All rules that are currently assigned to the asset|
 |rules_not_assigned|[]integer|False|Rules that were not assigned|
 
-###### Example
+Example output:
 
 ```
 {
