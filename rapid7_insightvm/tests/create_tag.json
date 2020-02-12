@@ -3,10 +3,10 @@
         "action": "create_tag",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "color": "blue",

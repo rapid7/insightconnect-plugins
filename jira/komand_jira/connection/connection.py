@@ -1,12 +1,11 @@
 import komand
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from jira import JIRA
 import requests
 from requests.auth import HTTPBasicAuth
 from komand.exceptions import ConnectionTestException
-
 
 
 class Connection(komand.Connection):
@@ -16,17 +15,19 @@ class Connection(komand.Connection):
         self.client, self.url, self.username, self.password = None, None, None, None
 
     def connect(self, params={}):
-        self.url, self.username, self.password = params["url"], \
-                                                 params["credentials"]["username"], \
-                                                 params["credentials"]["password"]
+        self.url, self.username, self.password = params[Input.URL], \
+                                                 params[Input.CREDENTIALS]["username"], \
+                                                 params[Input.CREDENTIALS]["password"]
 
         test_passed = self.test()
         if test_passed:
-            client = JIRA(options={"server": self.url},
-                          basic_auth=(
-                              self.username,
-                              self.password
-                          ))
+            client = JIRA(
+                options={"server": self.url},
+                basic_auth=(
+                    self.username,
+                    self.password
+                )
+            )
 
             self.client = client
 
@@ -42,8 +43,8 @@ class Connection(komand.Connection):
         elif response.status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
         elif response.status_code == 404:
-            raise ConnectionTestException(cause="Unable to reach Jira instance at: %s." % self.url,
+            raise ConnectionTestException(cause=f"Unable to reach Jira instance at: {self.url}.",
                                           assistance="Verify the Jira server at the URL configured in your plugin "
                                                      "connection is correct.")
         else:
-            self.logger.error(ConnectionTestException(cause="Unhandled error occurred: %s" % response.content))
+            self.logger.error(ConnectionTestException(cause=f"Unhandled error occurred: {response.content}"))

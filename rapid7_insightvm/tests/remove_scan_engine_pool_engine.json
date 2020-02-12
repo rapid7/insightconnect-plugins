@@ -3,10 +3,10 @@
         "action": "remove_scan_engine_pool_engine",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "engine_id": 5,

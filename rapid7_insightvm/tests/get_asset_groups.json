@@ -3,14 +3,12 @@
         "action": "get_asset_groups",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
-        "input": {
-            "name": "Komand Test.*"
-        },
+
         "meta": {}
     },
     "type": "action_start",
