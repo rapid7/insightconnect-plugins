@@ -49,8 +49,7 @@ This action is used to lists and describes Security Hub-aggregated findings that
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Findings|[]Findings|False|Findings|
-|NextToken|string|False|Next token|
+|Findings|[]Findings|False|Security Hub-aggregated findings|
 
 Example output:
 
@@ -136,9 +135,9 @@ This trigger is used to poll from a SQS Queue.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Message|Message|False|Message|
-|ResponseMetadata|ResponseMetadata|False|Response metadata|
-|securityhubevent|securityHubPayload|False|Security Hub Event|
+|Message|Message|False|Security Hub message|
+|ResponseMetadata|ResponseMetadata|False|Security Hub response metadata|
+|securityhubevent|securityHubPayload|False|Security Hub event payload|
 
 Example output:
 
@@ -195,6 +194,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.1 - Removed unused variables
 * 2.0.0 - New spec and help.md format for the Hub | Variable names updated as acronyms
 * 1.0.0 - Initial plugin
 

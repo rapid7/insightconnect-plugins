@@ -118,19 +118,19 @@ class SqsFeedOutput(komand.Output):
     "Message": {
       "$ref": "#/definitions/Message",
       "title": "Message",
-      "description": "Message",
+      "description": "Security Hub message",
       "order": 1
     },
     "ResponseMetadata": {
       "$ref": "#/definitions/ResponseMetadata",
       "title": "Response Metadata",
-      "description": "Response metadata",
+      "description": "Security Hub response metadata",
       "order": 3
     },
     "securityhubevent": {
       "$ref": "#/definitions/securityHubPayload",
       "title": "Security Hub Event",
-      "description": "Security Hub Event",
+      "description": "Security Hub event payload",
       "order": 2
     }
   },
