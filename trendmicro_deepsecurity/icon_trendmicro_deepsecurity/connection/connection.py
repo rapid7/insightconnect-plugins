@@ -21,6 +21,11 @@ class Connection(komand.Connection):
         self.dsm_url = params.get(Input.DSM_URL)
         self.dsm_api_key = params.get(Input.DSM_API_KEY).get("secretKey")
 
+        self.session = requests.session()
+        self.session.headers.update({"Content-type": "application/json",
+                                     "api-secret-key": self.dsm_api_key,
+                                     "api-version": "v1"})
+
     def test(self):
         """
         Test connection to the Deep Security Manager
@@ -28,17 +33,10 @@ class Connection(komand.Connection):
 
         # Prepare request
         url = f"{self.dsm_url}/api/policies"
-        
-        post_header = { "Content-type": "application/json",
-                        "api-secret-key": self.dsm_api_key,
-                        "api-version": "v1"}
 
         # Get list of policies
-        response = requests.get(url,
-                                headers=post_header,
-                                verify=True)                                
-        response.close()
-
+        response=self.session.get(url, verify=True)
+                                    
         # Try to convert the response data to JSON
         response_data = tryJSON(response)
 

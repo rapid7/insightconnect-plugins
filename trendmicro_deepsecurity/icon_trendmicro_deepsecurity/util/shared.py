@@ -1,7 +1,7 @@
 
 from komand.exceptions import PluginException
 
-def tryJSON(response):
+def tryJSON(response : object) -> dict:
     """
     Try to convert response data to JSON
     """
@@ -16,13 +16,13 @@ def tryJSON(response):
                             )
     return response_data
 
-def checkResponse(response):
+def checkResponse(response : object) -> None:
     """
     Check the response code and extract the error message
     """
     if response.status_code not in range(200, 299):
         response_data=tryJSON(response)
-        if 'message' in response_data:
+        if "message" in response_data:
             message=f"{response.status_code}, {response_data['message']}"   
         else:    
             message=f"{response.status_code}, {response.text}"

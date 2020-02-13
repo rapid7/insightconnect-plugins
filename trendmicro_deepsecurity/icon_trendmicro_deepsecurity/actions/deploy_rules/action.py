@@ -27,27 +27,23 @@ class DeployRules(komand.Action):
         self.id = params.get(Input.ID)
         self.rules = params.get(Input.RULES)
 
+        self.logger.info("Setting rules: ")
+        self.logger.info(self.rules)
+
+        
+        # Prepare request
         # Check if the rules should be assigned to a computer or policy
         if self.computer_or_policy == "computer":
             url = f"{self.connection.dsm_url}/api/computers/{self.id}/intrusionprevention/assignments"
         else:
             url = f"{self.connection.dsm_url}/api/policies/{self.id}/intrusionprevention/assignments"
-
-        self.logger.info("Setting rules: ")
-        self.logger.info(self.rules)
-
-        # Prepare request
+        
         data = { "ruleIDs": self.rules }
 
-        post_header = { "Content-type": "application/json",
-                        "api-secret-key": self.connection.dsm_api_key,
-                        "api-version": "v1"}
-
         # Set rules
-        response = requests.post(url,
-                                 data=json.dumps(data),
-                                 headers=post_header,
-                                 verify=True)
+        response = self.connection.session.post(url,
+                                                data=json.dumps(data),
+                                                verify=True)
 
         self.logger.info(f"status: {response.status_code}")
         self.logger.info(f"reason: {response.reason}")

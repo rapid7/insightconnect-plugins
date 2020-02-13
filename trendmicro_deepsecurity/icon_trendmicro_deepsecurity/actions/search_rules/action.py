@@ -38,19 +38,14 @@ class SearchRules(komand.Action):
             url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/search"
 
             data = { "maxItems": 100,
-                     "searchCriteria": [ { "fieldName": "CVE",
-                                           "stringWildcards": True,
-                                           "stringValue": f"%{cve}%"} ] }
-
-            post_header = { "Content-type": "application/json",
-                            "api-secret-key": self.connection.dsm_api_key,
-                            "api-version": "v1"}
+                     "searchCriteria": [ {"fieldName": "CVE",
+                                          "stringWildcards": True,
+                                          "stringValue": f"%{cve}%"} ] }
 
             # Search for IPS rules
-            response = requests.post(url,
-                                     data=json.dumps(data),
-                                     headers=post_header,
-                                     verify=True)
+            response = self.connection.session.post(url,
+                                                    data=json.dumps(data),
+                                                    verify=True)
             
             self.logger.info(cve)
             self.logger.info(f"status: {response.status_code}")
