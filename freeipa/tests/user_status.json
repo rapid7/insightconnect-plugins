@@ -2,7 +2,11 @@
     "body": {
         "action": "user_status",
         "connection": {
-            "server": null
+            "credentials": {
+                "password": "",
+                "username": ""
+            },
+            "server": ""
         },
         "input": {
             "username": "helpdesk"

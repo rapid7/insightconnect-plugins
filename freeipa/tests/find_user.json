@@ -2,7 +2,11 @@
     "body": {
         "action": "find_user",
         "connection": {
-            "server": null
+            "credentials": {
+                "password": "",
+                "username": ""
+            },
+            "server": ""
         },
         "input": {
             "search_parameters": "helpdesk"
