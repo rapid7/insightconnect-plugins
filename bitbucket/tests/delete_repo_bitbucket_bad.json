@@ -1,6 +1,12 @@
 {
     "body": {
         "action": "delete_repo",
+        "connection": {	
+            "credentials": {	
+                "password": "",	
+                "username": ""	
+            }	
+        },
         "input": {
             "title": "not_a_real_title"
         },
