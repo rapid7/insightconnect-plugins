@@ -4,7 +4,7 @@ products: [insightconnect]
 name: chardet
 title: Chardet
 description: This plugin is a Python compatible character encoding detector
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []
@@ -41,16 +41,16 @@ types:
 actions:
   detect_encoding:
     title: Detect Encoding
-    description: Detect encoding
+    description: Detect character encoding
     input:
       bytes_to_analyze:
         title: Bytes to Analyze
         type: bytes
-        description: Bytes to analyze
+        description: Bytes to analyze encoding
         required: true
     output:
       recommendation:
           title: "Recommendation"
           type: recommendation
-          description: "Recommendation"
+          description: "Detected character encoding recommendation"
           required: false

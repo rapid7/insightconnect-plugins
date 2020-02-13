@@ -1,14 +1,6 @@
 {
     "body": {
         "action": "delete_user",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "project": null,
-            "url": null
-        },
         "input": {
             "username": ""
         },

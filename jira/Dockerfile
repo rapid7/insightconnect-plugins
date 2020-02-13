@@ -7,10 +7,10 @@ ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR /etc/ssl/certs
 ENV REQUESTS_CA_BUNDLE  /etc/ssl/certs/ca-certificates.crt
 
+RUN apk add --no-cache gcc libc-dev libffi-dev openssl-dev
+
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
-
-RUN apk add --no-cache gcc libc-dev libffi-dev openssl-dev
 
 WORKDIR /python/src
 # Add any package dependencies here

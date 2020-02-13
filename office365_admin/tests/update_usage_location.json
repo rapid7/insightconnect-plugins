@@ -11,7 +11,7 @@
         },
         "input": {
             "location": "US",
-            "user_principal_name": "jdoe2@komanddev.onmicrosoft.com"
+            "user_principal_name": "user@example.com"
         },
         "meta": {}
     },

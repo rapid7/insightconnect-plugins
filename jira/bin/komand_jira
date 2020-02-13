@@ -4,10 +4,10 @@ import komand
 from komand_jira import connection, actions, triggers
 
 
-Name = 'Jira'
-Vendor = 'rapid7'
-Version = '4.0.1'
-Description = 'Jira is an issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions'
+Name = "Jira"
+Vendor = "rapid7"
+Version = "4.0.2"
+Description = "Jira is an issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions"
 
 
 class ICONJira(komand.Plugin):
