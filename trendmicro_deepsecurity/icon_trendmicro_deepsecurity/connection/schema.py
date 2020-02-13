@@ -16,13 +16,13 @@ class ConnectionSchema(komand.Input):
   "properties": {
     "dsm_api_key": {
       "$ref": "#/definitions/credential_secret_key",
-      "title": "Deep Security Manager API Key",
+      "title": "API Key",
       "description": "API key of the Deep Security Manager",
       "order": 2
     },
     "dsm_url": {
       "type": "string",
-      "title": "Deep Security Manager URL",
+      "title": "URL",
       "description": "URL of the Deep Security Manager",
       "default": "https://app.deepsecurity.trendmicro.com",
       "order": 1

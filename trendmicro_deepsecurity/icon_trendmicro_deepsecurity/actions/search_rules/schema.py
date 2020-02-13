@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Search Deep Security IPS rules for given CVEs"
+    DESCRIPTION = "Search IPS rules for given CVEs"
 
 
 class Input:
@@ -52,7 +52,7 @@ class SearchRulesOutput(komand.Output):
     "ips_rules": {
       "type": "array",
       "title": "IPS Rules",
-      "description": "IPS rules matching the given CVE numbers",
+      "description": "IPS rules matching the given CVEs",
       "items": {
         "type": "integer"
       },
@@ -61,7 +61,7 @@ class SearchRulesOutput(komand.Output):
     "matched_cves": {
       "type": "array",
       "title": "Matched CVEs",
-      "description": "CVEs that have at least one matching IPS rule in Deep Security",
+      "description": "CVEs with at least one matching IPS rule",
       "items": {
         "type": "string"
       },
@@ -70,7 +70,7 @@ class SearchRulesOutput(komand.Output):
     "missed_cves": {
       "type": "array",
       "title": "Missed CVEs",
-      "description": "CVEs without matching IPS rule in Deep Security",
+      "description": "CVEs without matching IPS rules",
       "items": {
         "type": "string"
       },

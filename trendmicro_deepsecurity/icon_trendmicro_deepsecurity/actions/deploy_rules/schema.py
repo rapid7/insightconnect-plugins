@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deploy rules in Deep Security"
+    DESCRIPTION = "Deploy rules"
 
 
 class Input:
@@ -27,7 +27,7 @@ class DeployRulesInput(komand.Input):
     "computer_or_policy": {
       "type": "string",
       "title": "Target",
-      "description": "Define if the rules get assigned to a computer or policy",
+      "description": "Target for rule assignment",
       "enum": [
         "computer",
         "policy"
@@ -37,7 +37,7 @@ class DeployRulesInput(komand.Input):
     "id": {
       "type": "integer",
       "title": "ID",
-      "description": "ID of the target asset or policy in Deep Security",
+      "description": "ID of the target asset or policy",
       "order": 2
     },
     "rules": {
@@ -71,7 +71,7 @@ class DeployRulesOutput(komand.Output):
     "rules_assigned": {
       "type": "array",
       "title": "Rules Assigned",
-      "description": "All rules that are currently assigned to the asset",
+      "description": "All rules currently assigned to the asset",
       "items": {
         "type": "integer"
       },
@@ -80,7 +80,7 @@ class DeployRulesOutput(komand.Output):
     "rules_not_assigned": {
       "type": "array",
       "title": "Not Assigned Rules",
-      "description": "Rules that were not assigned",
+      "description": "Unassigned rules",
       "items": {
         "type": "integer"
       },

@@ -42,9 +42,9 @@ Search for matching IPS rules in Deep Security by CVE ID
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ips_rules|[]integer|False|IPS rules matching the given CVE numbers|
-|matched_cves|[]string|False|CVEs that have at least one matching IPS rule in Deep Security|
-|missed_cves|[]string|False|CVEs without matching IPS rule in Deep Security|
+|ips_rules|[]integer|False|IPS rules matching the given CVEs|
+|matched_cves|[]string|False|CVEs with at least one matching IPS rule|
+|missed_cves|[]string|False|CVEs without matching IPS rules|
 
 Example output:
 
@@ -78,16 +78,16 @@ Deploy the given Deep Security IPS rules to a computer or policy
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|computer_or_policy|string|None|True|Define if the rules get assigned to a computer or policy|['computer', 'policy']|
-|id|integer|None|True|ID of the target asset or policy in Deep Security|None|
+|computer_or_policy|string|None|True|Target for rule assignment|['computer', 'policy']|
+|id|integer|None|True|ID of the target asset or policy|None|
 |rules|[]integer|None|True|IPS rules to assign|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|rules_assigned|[]integer|False|All rules that are currently assigned to the asset|
-|rules_not_assigned|[]integer|False|Rules that were not assigned|
+|rules_assigned|[]integer|False|All rules currently assigned to the asset|
+|rules_not_assigned|[]integer|False|Unassigned rules|
 
 Example output:
 

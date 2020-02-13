@@ -12,7 +12,7 @@ from icon_trendmicro_deepsecurity.util.shared import checkResponse
 class Connection(komand.Connection):
 
     def __init__(self):
-        super(self.__class__, self).__init__(input = ConnectionSchema())
+        super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
         """
@@ -27,18 +27,16 @@ class Connection(komand.Connection):
         """
 
         # Prepare request
-        url = f'{self.dsm_url}/api/policies'
+        url = f"{self.dsm_url}/api/policies"
         
-        post_header = {
-                        "Content-type": "application/json",
+        post_header = { "Content-type": "application/json",
                         "api-secret-key": self.dsm_api_key,
-                        "api-version": "v1"
-                        }
+                        "api-version": "v1"}
 
         # Get list of policies
         response = requests.get(url,
-                                 headers = post_header,
-                                 verify = True)                                
+                                headers=post_header,
+                                verify=True)                                
         response.close()
 
         # Try to convert the response data to JSON
@@ -47,8 +45,8 @@ class Connection(komand.Connection):
         # Check response errors
         checkResponse(response)
 
-        self.logger.info("Found " + str(len(response_data['policies'])) + " policies!")
-        for policy in response_data['policies']:
-          self.logger.info(policy['name'])
+        self.logger.info("Found " + str(len(response_data["policies"])) + " policies!")
+        for policy in response_data["policies"]:
+          self.logger.info(policy["name"])
 
-        return {'data': response.ok}
+        return {"data": response.ok}
