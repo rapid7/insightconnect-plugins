@@ -1,6 +1,12 @@
 {
     "body": {
         "action": "create_issue",
+        "connection": {	
+            "credentials": {	
+                "password": "",	
+                "username": ""	
+            }	
+        },
         "input": {
             "assignee": "lmilby",
             "component": "",
