@@ -3,10 +3,10 @@
         "action": "delete_exception",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "exception_id": 32

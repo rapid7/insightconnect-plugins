@@ -3,10 +3,10 @@
         "action": "create_exception",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "comment": "ICON Test Exception",

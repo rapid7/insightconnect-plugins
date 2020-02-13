@@ -1,14 +1,13 @@
-
+{
   "body": {
     "action": "add_user",
-    "meta": {},
     "input": {
       "account_enabled": false,
       "display_name": "john doe",
       "force_change_password": false,
       "mail_nickname": "john2",
       "password": "Mypass!01",
-      "user_principal_name": "jdoe2@komanddev.onmicrosoft.com"
+      "user_principal_name": "user@example.com"
     },
     "connection": {
       "app_id": "",

@@ -1,0 +1,10 @@
+{
+  "body": {
+    "action": "lookup_user_by_email",
+    "input": {
+      "email_address": "user@example.com"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
