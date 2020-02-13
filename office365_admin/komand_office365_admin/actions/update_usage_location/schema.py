@@ -31,7 +31,7 @@ class UpdateUsageLocationInput(komand.Input):
     "user_principal_name": {
       "type": "string",
       "title": "User Principal Name",
-      "description": "The user principal name to update e.g. bob@hotmail.com",
+      "description": "The user principal name to update e.g. user@example.com",
       "order": 2
     }
   },
