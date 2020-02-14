@@ -3,10 +3,10 @@
         "action": "user_status",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "server": null
+            "server": ""
         },
         "input": {
             "username": "helpdesk"
