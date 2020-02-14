@@ -1,11 +1,11 @@
 {
     "body": {
         "action": "delete_repo",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            }
+        "connection": {	
+            "credentials": {	
+                "password": "",	
+                "username": ""	
+            }	
         },
         "input": {
             "title": "bloop"
