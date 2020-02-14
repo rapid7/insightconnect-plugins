@@ -35,7 +35,7 @@ class Connection(komand.Connection):
         url = f"{self.dsm_url}/api/policies"
 
         # Get list of policies
-        response=self.session.get(url, verify=True)
+        response = self.session.get(url, verify=True)
                                     
         # Try to convert the response data to JSON
         response_data = tryJSON(response)
