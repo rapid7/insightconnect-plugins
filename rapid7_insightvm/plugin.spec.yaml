@@ -5,7 +5,7 @@ name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
 version: 3.7.0
-vendor: rapid7
+vendor: j-rod
 support: rapid7
 status: []
 resources:
@@ -3667,22 +3667,7 @@ actions:
         required: true
         title: ID
         description: Solution ID
-    output: 
-      solution:
-        title: Vulnerability Solution
-        required: false
-        type: vulnerability_solution
-        description: Vulnerability solution
-  get_solution:
-    title: Get Solution
-    description: Get Solution Details
-    input:
-      id:
-        type: string
-        required: true
-        title: ID
-        description: Solution ID
-    output: 
+    output:
       links:
         description: Hypermedia links to corresponding or related resources
         title: Links
@@ -3693,6 +3678,21 @@ actions:
         title: Resources
         type: '[]string'
         required: false
+  get_solution:
+    title: Get Solution
+    description: Get Solution Details
+    input:
+      id:
+        type: string
+        required: true
+        title: ID
+        description: Solution ID
+    output:
+      solution:
+        title: Vulnerability Solution
+        required: false
+        type: vulnerability_solution
+        description: Vulnerability solution
 triggers:
   new_scans:
     title: New Scans

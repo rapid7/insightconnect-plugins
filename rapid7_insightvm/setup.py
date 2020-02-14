@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="rapid7_insightvm-rapid7-plugin",
+setup(name="rapid7_insightvm-j-rod-plugin",
       version="3.7.0",
       description="InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans",
-      author="rapid7",
+      author="j-rod",
       author_email="",
       url="",
       packages=find_packages(),
