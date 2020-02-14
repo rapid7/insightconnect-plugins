@@ -44,7 +44,7 @@ class GetFindingsOutput(komand.Output):
     "Findings": {
       "type": "array",
       "title": "Findings",
-      "description": "Findings",
+      "description": "Security Hub-aggregated findings",
       "items": {
         "$ref": "#/definitions/Findings"
       },

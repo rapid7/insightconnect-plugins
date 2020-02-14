@@ -1,14 +1,6 @@
 {
     "body": {
         "action": "assign_issue",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "project": null,
-            "url": null
-        },
         "input": {
             "assignee": "",
             "id": ""

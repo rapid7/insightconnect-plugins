@@ -1,12 +1,12 @@
 {
     "body": {
-        "action": "user",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            }
+        "connection": {	
+            "credentials": {	
+                "password": "",	
+                "username": ""	
+            }	
         },
+        "action": "user",
         "input": {
             "username": "the Fak3NEss"
         },

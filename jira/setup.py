@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='jira-rapid7-plugin',
-      version='4.0.1',
-      description='Jira is an issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="jira-rapid7-plugin",
+      version="4.0.2",
+      description="Jira is an issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_jira']
