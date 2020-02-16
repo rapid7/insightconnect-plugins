@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="trendmicro_deepsecurity-philipp-behmer-plugin",
+setup(name="trendmicro_deepsecurity-rapid7-plugin",
       version="1.0.0",
       description="Utilise the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)",
-      author="philipp-behmer",
+      author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
