@@ -43,7 +43,7 @@ This action returns an object containing all of a user's factors for MFA.
 |----|----|--------|-----------|
 |factors|[]object|False|Obbject containing all the factors of a user for MFA|
 
-Example Output:
+Example output:
 
 ```
 [
