@@ -10,7 +10,7 @@ to integrate their central user account system with a wide variety of other appl
 # Requirements
 
 * API Key
-* Okta server
+* Okta domain
 
 # Documentation
 
@@ -43,7 +43,7 @@ This action returns an object containing all of a user's factors for MFA.
 |----|----|--------|-----------|
 |factors|[]object|False|Obbject containing all the factors of a user for MFA|
 
-Example Output:
+Example output:
 
 ```
 ```
@@ -65,7 +65,7 @@ This action pushes a MFA challenge to a user's device and waits for a success or
 |----|----|--------|-----------|
 |factor_status|string|False|User factor status|
 
-Example Output:
+Example output:
 
 ```
 {
