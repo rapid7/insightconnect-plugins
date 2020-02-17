@@ -4,7 +4,7 @@
 
 # Key Features
 
-* Utilise the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
+* Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
 
 # Requirements
 
