@@ -10,7 +10,7 @@ to integrate their central user account system with a wide variety of other appl
 # Requirements
 
 * API Key
-* Okta domain
+* Okta server
 
 # Documentation
 
@@ -43,9 +43,64 @@ This action returns an object containing all of a user's factors for MFA.
 |----|----|--------|-----------|
 |factors|[]object|False|Obbject containing all the factors of a user for MFA|
 
-Example output:
+Example Output:
 
 ```
+[
+    {
+        "id": "opfpfac5jbFkZppdt0h7",
+        "factorType": "push",
+        "provider": "OKTA",
+        "vendorName": "OKTA",
+        "status": "ACTIVE",
+        "created": "2020-01-24T14:52:55.000Z",
+        "lastUpdated": "2020-01-24T14:55:18.000Z",
+        "profile": {
+            "credentialId": "user@example.com",
+            "deviceType": "SmartPhone_IPhone",
+            "keys": [
+                {
+                    "kty": "EC",
+                    "use": "sig",
+                    "kid": "default",
+                    "x": "Oec4otjngqynTnI37AncY4tWeSE2WxpG98s5sQXxnUM",
+                    "y": "zVlJEuKcq8LphPIFS5A-4OMkfHTviLImx7WBsDd7E14",
+                    "crv": "P-256"
+                }
+            ],
+            "name": "iPhone XR",
+            "platform": "IOS",
+            "version": "13.3"
+        },
+        "_links": {
+            "self": {
+                "href": "https://company.oktapreview.com/api/v1/users/00up95jz8uU1Zs6T60h7/factors/opfpfac5jbFkZppdt0h7",
+                "hints": {
+                    "allow": [
+                        "GET",
+                        "DELETE"
+                    ]
+                }
+            },
+            "verify": {
+                "href": "https://company.oktapreview.com/api/v1/users/00up95jz8uU1Zs6T60h7/factors/opfpfac5jbFkZppdt0h7/verify",
+                "hints": {
+                    "allow": [
+                        "POST"
+                    ]
+                }
+            },
+            "user": {
+                "href": "https://company.oktapreview.com/api/v1/users/00up93jz8uU1Zs6T60h7",
+                "hints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        }
+    }
+]
 ```
 
 #### Push MFA Challenge
@@ -65,7 +120,7 @@ This action pushes a MFA challenge to a user's device and waits for a success or
 |----|----|--------|-----------|
 |factor_status|string|False|User factor status|
 
-Example output:
+Example Output:
 
 ```
 {
