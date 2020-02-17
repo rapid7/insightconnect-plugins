@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: trendmicro_deepsecurity
 title: Trend Micro Deep Security
-description: Utilise the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
+description: Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
 version: 1.0.0
 vendor: rapid7
 support: community

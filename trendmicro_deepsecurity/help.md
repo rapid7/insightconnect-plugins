@@ -15,7 +15,7 @@
 ## Setup
 
 * [Create an API key for Deep Security](https://help.deepsecurity.trendmicro.com/api-key.html)
-* Create a new connection and enter the Deep Security Manager URL and API key 
+* Create a new connection and enter the Deep Security Manager URL and API key
 
 The connection configuration accepts the following parameters:
 
@@ -135,7 +135,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Trend Micro Deep Security](https://www.trendmicro.com/en_us/business/products/hybrid-cloud/deep-security.html)
-
-## Author
-
-* [Philipp Behmer](http://philippbehmer.de)

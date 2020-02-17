@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="trendmicro_deepsecurity-rapid7-plugin",
       version="1.0.0",
-      description="Utilise the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)",
+      description="Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)",
       author="rapid7",
       author_email="",
       url="",
