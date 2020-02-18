@@ -27,6 +27,107 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Get Okta User Factors
+
+This action returns an object containing all of a user's factors for MFA.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|user_id|string|None|True|User ID to get factors for|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|factors|[]object|False|Obbject containing all the factors of a user for MFA|
+
+Example output:
+
+```
+[
+    {
+        "id": "opfpfac5jbFkZppdt0h7",
+        "factorType": "push",
+        "provider": "OKTA",
+        "vendorName": "OKTA",
+        "status": "ACTIVE",
+        "created": "2020-01-24T14:52:55.000Z",
+        "lastUpdated": "2020-01-24T14:55:18.000Z",
+        "profile": {
+            "credentialId": "user@example.com",
+            "deviceType": "SmartPhone_IPhone",
+            "keys": [
+                {
+                    "kty": "EC",
+                    "use": "sig",
+                    "kid": "default",
+                    "x": "Oec4otjngqynTnI37AncY4tWeSE2WxpG98s5sQXxnUM",
+                    "y": "zVlJEuKcq8LphPIFS5A-4OMkfHTviLImx7WBsDd7E14",
+                    "crv": "P-256"
+                }
+            ],
+            "name": "iPhone XR",
+            "platform": "IOS",
+            "version": "13.3"
+        },
+        "_links": {
+            "self": {
+                "href": "https://company.oktapreview.com/api/v1/users/00up95jz8uU1Zs6T60h7/factors/opfpfac5jbFkZppdt0h7",
+                "hints": {
+                    "allow": [
+                        "GET",
+                        "DELETE"
+                    ]
+                }
+            },
+            "verify": {
+                "href": "https://company.oktapreview.com/api/v1/users/00up95jz8uU1Zs6T60h7/factors/opfpfac5jbFkZppdt0h7/verify",
+                "hints": {
+                    "allow": [
+                        "POST"
+                    ]
+                }
+            },
+            "user": {
+                "href": "https://company.oktapreview.com/api/v1/users/00up93jz8uU1Zs6T60h7",
+                "hints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        }
+    }
+]
+```
+
+#### Push MFA Challenge
+
+This action pushes a MFA challenge to a user's device and waits for a success or rejection.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|factor_id|string|None|True|Factor ID of the user to push verification to|None|
+|user_id|string|None|True|User ID to push verification to|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|factor_status|string|False|User factor status|
+
+Example Output:
+
+```
+{
+  "factor_status": "SUCCESS"
+}
+```
+
 #### Suspend User
 
 This action can be used to suspend a user from the Okta system. The user will retain
@@ -568,6 +669,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.3.0 - New actions Get Factors and Send Push
 * 3.2.2 - Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` | Use input and output constants | Changed variables names to more readable | Added "f" strings | Removed duplicated code
 * 3.2.1 - New spec and help.md format for the Hub
 * 3.2.0 - New action Delete User
@@ -587,4 +689,3 @@ by Okta themselves, or constructed by the plugin based on the information it has
 ## References
 
 * [Okta API Spec](http://developer.okta.com/docs/api/resources)
-

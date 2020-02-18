@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name="okta-rapid7-plugin",
-      version="3.3.0",
-      description="Secure identity management and single sign-on to any application",
+setup(name="trendmicro_deepsecurity-rapid7-plugin",
+      version="1.0.0",
+      description="Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_okta']
+      scripts=['bin/icon_trendmicro_deepsecurity']
       )
