@@ -1,53 +1,36 @@
 import komand
-from .schema import UnshortenInput, UnshortenOutput
+from .schema import UnshortenInput, UnshortenOutput, Input, Output, Component
 # Custom imports below
 import requests
+from komand.exceptions import PluginException
 
 
 class Unshorten(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='unshorten',
-                description='Unshorten a shortened URL',
-                input=UnshortenInput(),
-                output=UnshortenOutput())
+            name='unshorten',
+            description=Component.DESCRIPTION,
+            input=UnshortenInput(),
+            output=UnshortenOutput())
 
     def run(self, params={}):
-        short_url = params.get('url')
+        short_url = params.get(Input.URL)
         try:
             r = requests.get('https://unshorten.me/json/' + short_url)
             r.raise_for_status()
             out = r.json()
         except Exception as e:
             self.logger.error(e)
-            raise
+            raise PluginException(cause='Internal server error',
+                                  assistance='Unshorten.me is unable to resolve the URL',
+                                  data=e)
 
         try:
-            if out['error']:
-                if out['error'] == "Connection Error":
-                    out['error'] = "Unshorten.me is unable to resolve the URL"
-                self.logger.error(out.get('error'))
-        except KeyError:
-            # All good, no error key is present
-            self.logger.info('No errors')
-
-        return out
-
-    def test(self):
-        url = 'https://bit.ly/komand_rocks'
-        try:
-            r = requests.get('https://unshorten.me/json/' + url)
-            r.raise_for_status()
-            out = r.json()
-        except Exception as e:
-            self.logger.error(e)
-            raise
-
-        # All good
-        try:
-            if out['error']:
-                self.logger.error(out.get('error'))
+            if out[Output.ERROR]:
+                if out[Output.ERROR] == "Connection Error":
+                    out[Output.ERROR] = "Unshorten.me is unable to resolve the URL"
+                self.logger.error(out.get(Output.ERROR))
         except KeyError:
             # All good, no error key is present
             self.logger.info('No errors')

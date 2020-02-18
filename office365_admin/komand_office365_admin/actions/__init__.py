@@ -3,4 +3,5 @@ from .add_user.action import AddUser
 from .assign_license_to_user.action import AssignLicenseToUser
 from .delete_user.action import DeleteUser
 from .get_subscribed_skus.action import GetSubscribedSkus
+from .lookup_user_by_email.action import LookupUserByEmail
 from .update_usage_location.action import UpdateUsageLocation
