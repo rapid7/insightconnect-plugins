@@ -2,10 +2,9 @@ import komand
 from .schema import ScreenshotInput, ScreenshotOutput, Input, Output, Component
 # Custom imports below
 from komand.exceptions import PluginException
-import os
-import uuid
 import base64
 import time
+import tempfile
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -25,8 +24,6 @@ class Screenshot(komand.Action):
 
     def run(self, params={}):
 
-        name = f"/tmp/{str(uuid.uuid1())}.png"
-
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--window-size=%s" % self.WINDOW_SIZE)
@@ -45,15 +42,15 @@ class Screenshot(komand.Action):
             body = driver.find_element_by_tag_name('body')
             element_png = body.screenshot_as_png
             img_str = base64.b64encode(element_png).decode('ascii')
+            driver.close()
             return {Output.SCREENSHOT: img_str}
         else:
-            driver.save_screenshot(name)
+            with tempfile.NamedTemporaryFile(suffix=".png") as t:
+                driver.save_screenshot(t.name)
+                driver.close()
+
+                with open(t.name, "rb") as file:
+                    contents = file.read()
+                    file_str = base64.b64encode(contents).decode('ascii')
             driver.close()
-
-            with open(name, "rb") as file:
-                contents = file.read()
-                file_str = base64.b64encode(contents).decode('ascii')
-
-            os.remove(name)
-
             return {Output.SCREENSHOT: file_str}
