@@ -33,7 +33,7 @@ class Screenshot(komand.Action):
         url = params.get(Input.URL, "")
         delay = params.get(Input.DELAY, 0)
         if not url.lower().startswith('http'):
-            raise PluginException(cause='Input Error:', assistance='URLs need to start with "http"')
+            raise PluginException(cause="Input Error:", assistance="URLs need to start with 'http'")
         driver = webdriver.Chrome(executable_path=self.CHROMEDRIVER_PATH, options=chrome_options)
         driver.get(url)
         time.sleep(delay)

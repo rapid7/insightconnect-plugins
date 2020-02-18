@@ -32,7 +32,7 @@ actions:
       delay:
         title: Delay
         type: integer
-        description: Wait x seconds after page load before taking screenshot
+        description: Delay (in seconds) after page has loaded before screenshot
         required: false
         order: 2
       full_page:
