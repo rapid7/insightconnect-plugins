@@ -28,7 +28,7 @@ This action is used to grab a screenshot of a URL from the Orchestrator.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|delay|integer|None|False|Wait x seconds after page load before taking screenshot|None|
+|delay|integer|None|False|Delay (in seconds) after page has loaded before screenshot|None|
 |full_page|boolean|False|True|Export screenshot of "body" element instead of the default viewport.  This "body" element may have some formatting issues but should contain all elements of the page|None|
 |url|string|None|True|URL to screenshot|None|
 

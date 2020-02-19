@@ -26,7 +26,7 @@ class ScreenshotInput(komand.Input):
     "delay": {
       "type": "integer",
       "title": "Delay",
-      "description": "Wait x seconds after page load before taking screenshot",
+      "description": "Delay (in seconds) after page has loaded before screenshot",
       "order": 2
     },
     "full_page": {
