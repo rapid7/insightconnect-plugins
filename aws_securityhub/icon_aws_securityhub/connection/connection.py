@@ -23,5 +23,5 @@ class Connection(komand.Connection):
         self.aws = boto3.Session(**kwargs)
 
     def test(self):
-        client = self.aws.client('securityhub')
+        self.aws.client('securityhub')
         return {}
