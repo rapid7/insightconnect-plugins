@@ -30,21 +30,21 @@ Specific file traffic/file types can be excluded.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|exclude|string|None|False|Exclude traffic/files|['None', 'Info', 'Raw', 'TCP', 'UDP', 'ICMP']|
 |dump|bytes|None|True|Base64 encoded PCAP or snoop file|None|
+|exclude|string|None|False|Exclude traffic/files|['None', 'Info', 'Raw', 'TCP', 'UDP', 'ICMP']|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|ethernet_count|[]count|False|List of ethernet types and their count|
+|file_count|integer|False|Number of files extracted|
 |files|[]bytes|False|Extracted files|
-|tcp_count|[]count|False|List of TCP ports and their count|
+|ip_count|[]count|False|List of IPs and their count|
 |proto_count|[]count|False|List of IP protocols and their count|
 |sessions|[]string|False|List of sessions found in traffic|
-|ethernet_count|[]count|False|List of ethernet types and their count|
+|tcp_count|[]count|False|List of TCP ports and their count|
 |udp_count|[]count|False|List of UDP ports and their count|
-|ip_count|[]count|False|List of IPs and their count|
-|file_count|integer|False|Number of files extracted|
 
 ### Triggers
 
@@ -60,6 +60,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.4 - Fix set options to exclude | Upgrade code to new version of chaosreader
 * 1.0.3 - Changed 2 spaces to 4 spaces | Changed bare strings in params.get and output to static fields from schema | Removed unnecessarily comments and variables | Changed `Exception` to `PluginException` | Changed deprecated `decodestring` to `decodebytes`
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Fix issue where run action was excluded from plugin on build
