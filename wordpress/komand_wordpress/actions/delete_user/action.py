@@ -1,59 +1,54 @@
-import komand
-from .schema import DeleteUserInput, DeleteUserOutput
 # Custom imports below
 from komand_wordpress.util import helpers
+
+import komand
+from komand.exceptions import PluginException
+from .schema import DeleteUserInput, DeleteUserOutput, Component, Input, Output
 
 
 class DeleteUser(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='delete_user',
-                description='Delete user from WordPress instance',
-                input=DeleteUserInput(),
-                output=DeleteUserOutput())
+            name='delete_user',
+            description=Component.DESCRIPTION,
+            input=DeleteUserInput(),
+            output=DeleteUserOutput())
 
     def run(self, params={}):
-        target_user = params.get('username')
-        reassignee = params.get('reassignee')
-        host = self.connection.host
-        username = self.connection.username
-        password = self.connection.password
+        target_user = params.get(Input.USERNAME)
+        users = helpers.get_users(self.logger, self.connection, target_user)
 
-        creds = helpers.encode_creds(username, password)
+        if not users:
+            raise PluginException(cause='Server error', assistance='Run: No users found')
 
-        users = helpers.get_users(host, creds, target_user)
-        if not users: raise Exception('Run: No users found')
-
-        r_users = helpers.get_users(host, creds, reassignee)
-        if not r_users: raise Exception('Run: No reassignees found')
+        re_assign = params.get(Input.REASSIGNEE)
+        r_users = helpers.get_users(self.logger, self.connection, re_assign)
+        if not r_users:
+            raise PluginException(cause='Server error', assistance='Run: No reassignees found')
 
         user_id = None
         for user in users:
             if user['username'] == target_user:
-                user_id = str(user['id']) 
-        
-        if not user_id: raise Exception('Run: No user with that username')
+                user_id = str(user['id'])
 
-        reassignee_id = None
+        if not user_id:
+            raise PluginException(cause='Server error', assistance='Run: No user with that username')
+
+        re_assign_id = None
         for user in r_users:
-            if user['username'] == reassignee:
-                reassignee_id = str(user['id'])
+            if user['username'] == re_assign:
+                re_assign_id = str(user['id'])
 
-        if not reassignee_id: raise Exception('Run: No reassignee with that username') 
-        
-        success = helpers.delete_user(host, creds, user_id, reassignee_id)
-        if not success: raise Exception('Run: User was not deleted')
-        return {'success': True}
+        if not re_assign_id:
+            raise PluginException(cause='Server error', assistance='Run: No reassignee with that username')
 
-    def test(self):
-        """TODO: Test action"""
-        host = self.connection.host
-        username = self.connection.username
-        password = self.connection.password
+        success = helpers.delete_user(self.connection.host,
+                                      helpers.encode_creds(self.connection.username, self.connection.password),
+                                      user_id,
+                                      re_assign_id)
+        if not success:
+            raise PluginException(cause='Server error', assistance='Run: User was not deleted')
 
-        creds = helpers.encode_creds(username, password)
-
-        if not helpers.test_auth(host, creds): 
-          raise Exception('Test: Failed authentication')
-
-        return {}
+        return {
+            Output.SUCCESS: True
+        }

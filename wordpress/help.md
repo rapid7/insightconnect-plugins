@@ -62,8 +62,8 @@ This action can be used to delete a user from a WordPress instance.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|username|string|None|True|Username|None|
 |reassignee|string|None|True|Username to reassign posts to|None|
+|username|string|None|True|Username|None|
 
 ##### Output
 
@@ -98,6 +98,7 @@ the discovery process does not work on locally run web servers, as the API root 
 
 # Version History
 
+* 2.0.1 - Change docker image from `komand/python-pypy3-plugin` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Use input and output constants | Removed duplicated code | Changed `Exception` to `PluginException` | Added "f" strings | copy test from action to connection
 * 2.0.0 - New spec and help.md format for the Hub | Added titles for the actions
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK
