@@ -1,7 +1,11 @@
-from komand_rapid7_vulndb.util.log_helper import LogHelper
-from selenium import webdriver
-from lxml import html
 import re
+from nntplib import NNTPReplyError
+
+from komand_rapid7_vulndb.util.log_helper import LogHelper
+from lxml import html
+from selenium import webdriver
+
+from komand.exceptions import PluginException
 
 
 class VulnDBBrowser:
@@ -31,7 +35,7 @@ class VulnDBBrowser:
         # TODO figure out what this does. Type string
         self.vuln_db_details = None
 
-    def scrape_vuldb(self, base_url: str, xpath: str)-> dict:
+    def scrape_vuldb(self, base_url: str, xpath: str) -> dict:
         # Create web browser
         self.browser = webdriver.PhantomJS()
         self.logger.info('Headless browser established')
@@ -96,13 +100,15 @@ class VulnDBBrowser:
         for key, value in kwargs.items():
             try:
                 data[key] = self.html_element.xpath(value)
-            except:
-                # TODO I don't know what sort of exception could be raised here. Maybe if value is not the right data type?
-                raise Exception('HTML has changed for the vulnerability database. Contact support for help.')
+            except NNTPReplyError as e:
+                raise PluginException(cause="Server Error",
+                                      assistance='HTML has changed for the vulnerability database. Contact support for help.',
+                                      data=e)
         return data
 
     # Input data outputs search_results as json
-    def convert_variables(self, **kwargs) -> list:
+    @staticmethod
+    def convert_variables(**kwargs) -> list:
         search_results = []
         for i in range(0, max(len(x) for x in kwargs.values())):
             new_dict = {}

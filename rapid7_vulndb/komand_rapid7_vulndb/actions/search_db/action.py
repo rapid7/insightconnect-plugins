@@ -1,5 +1,6 @@
 import komand
-from .schema import SearchDbInput, SearchDbOutput, Input, Output
+from .schema import SearchDbInput, SearchDbOutput, Input, Output, Component
+import urllib.parse
 # Custom imports below
 from komand_rapid7_vulndb.util import path_helper, browser
 
@@ -9,7 +10,7 @@ class SearchDb(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='search_db',
-                description='Search the database to find vulnerabilities and exploits',
+                description=Component.DESCRIPTION,
                 input=SearchDbInput(),
                 output=SearchDbOutput())
 
@@ -18,7 +19,7 @@ class SearchDb(komand.Action):
         search = params.get(Input.SEARCH)
         data_base = params.get(Input.DATABASE)
 
-        search = search.replace(" ", "+")
+        search = urllib.parse.quote_plus(search)
         self.logger.info(f'Searching for {search}')
 
         # Set database xpath

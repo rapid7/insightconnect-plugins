@@ -1,4 +1,4 @@
-def set_xpath( data_base) -> dict:
+def set_xpath(data_base) -> dict:
     """
     Sets the xpath based on which data base the user wants to search.
     :param data_base: The data base to search.
