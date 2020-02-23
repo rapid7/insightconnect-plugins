@@ -1,5 +1,11 @@
+import base64
+import hashlib
+
 import komand
+from komand.exceptions import ConnectionTestException
 from .schema import ConnectionSchema
+
+
 # Custom imports below
 
 

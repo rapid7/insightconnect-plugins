@@ -4,10 +4,10 @@ import komand
 from icon_hashit import connection, actions, triggers
 
 
-Name = 'HashIt'
-Vendor = 'rapid7'
-Version = '2.0.2'
-Description = 'Generate Common Hashes from a File or String'
+Name = "HashIt"
+Vendor = "rapid7"
+Version = "2.0.2"
+Description = "Generate Common Hashes from a File or String"
 
 
 class ICONHashit(komand.Plugin):
