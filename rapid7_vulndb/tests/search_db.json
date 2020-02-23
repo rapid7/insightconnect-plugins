@@ -3,8 +3,8 @@
         "action": "search_db",
         "connection": {},
         "input": {
-            "database": "Vulnerability Database",
-            "search": "redhat_linux-cve-2018-12405"
+            "database": "All",
+            "search": "debian-cve-2020-3864"
         },
         "meta": {}
     },

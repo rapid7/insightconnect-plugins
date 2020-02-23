@@ -17,7 +17,7 @@ ENV PKG phantomjs-2.1.1-linux-x86_64.tar.bz2
 ENV DST /tmp/phantomjs
 RUN mkdir $DST
 COPY $PKG /tmp/phantomjs
-RUN apt-get update && apt-get install -y bzip2 libxml2-dev libxmlsec1-dev gcc && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y bzip2 libxml2-dev libxmlsec1-dev gcc libfontconfig && rm -rf /var/lib/apt/lists/*
 RUN tar -xj --strip-components=1 -f $PKG -C $DST
 RUN mv $DST/bin/phantomjs /usr/local/bin
 RUN rm -rf $DST
