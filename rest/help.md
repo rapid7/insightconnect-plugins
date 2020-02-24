@@ -25,10 +25,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|default_headers|object|None|False|None|None|
-|base_url|string|None|False|None|None|
-|ssl_verify|boolean|True|False|None|None|
-|basic_auth_credentials|credential_username_password|None|False|None|None|
+|base_url|string|None|True|Base URL e.g. https://httpbin.org|None|
+|basic_auth_credentials|credential_username_password|None|False||None|
+|default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { User-Agent: Komand }|None|
+|ssl_verify|boolean|True|True|Verify SSL certificate|None|
 
 ## Technical Details
 
@@ -330,6 +330,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 3.0.2 - Use input and output constants | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Removed duplicated code | Remove test from actions
 * 3.0.1 - New spec and help.md format for the Hub
 * 3.0.0 - Add basic auth support
 * 2.0.0 - Update connection to handle SSL verification

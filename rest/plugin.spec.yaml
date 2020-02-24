@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: REST
 description: The REST plugin to make it easy to integrate with RESTful services
-version: 3.0.1
+version: 3.0.2
 vendor: rapid7
 support: community
 status: []

@@ -1,41 +1,33 @@
-import komand
-from .schema import PostInput, PostOutput
 # Custom imports below
 from komand_rest.util.util import Common
-import requests
+
+import komand
+from .schema import PostInput, PostOutput, Input, Output, Component
 
 
 class Post(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='post',
-                description='Make a POST request',
-                input=PostInput(),
-                output=PostOutput())
+            name='post',
+            description=Component.DESCRIPTION,
+            input=PostInput(),
+            output=PostOutput())
 
     def run(self, params={}):
-        route = params.get("route")
-        headers = params.get("headers", {})
-        body = params.get("body", {})
+        response = Common.send_request(
+            "post",
+            params.get(Input.ROUTE),
+            params.get(Input.HEADERS, {}),
+            self.connection.default_headers,
+            self.connection.base_url,
+            self.connection.ssl_verify,
+            params.get(Input.BODY, {})
+        )
 
-        req_headers = Common.merge_dicts(self.connection.default_headers, headers)
-        url = requests.compat.urljoin(self.connection.base_url, route)
-        response = requests.post(url, headers=req_headers, json=body, verify=self.connection.ssl_verify)
-        body_object = {}
-        try:
-            body_object = response.json()
-        except ValueError:
-            """ Nothing? We don't care if it fails, that could be normal """
-
-        resp_headers = Common.copy_dict(response.headers)
         return {
-            'body_object': body_object,
-            'body_string': response.text,
-            'status': response.status_code,
-            'headers': resp_headers,
+            Output.BODY_OBJECT: response['body_object'],
+            Output.BODY_STRING: response['response_text'],
+            Output.STATUS: response['status_code'],
+            Output.HEADERS: response['resp_headers']
         }
-
-    def test(self):
-        # TODO: Implement test function
-        return {}
