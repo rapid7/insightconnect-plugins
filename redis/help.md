@@ -385,7 +385,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.2 - Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size
+* 1.0.2 - Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Use input and output constants | Changed `Exception` to `PluginException` | Remove test from actions | Removed duplicated code
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Support web server mode | Add actions HMSET, HMGET and HINCRBY
 * 0.1.2 - Update to new plugin architecture, fix action "keys"
