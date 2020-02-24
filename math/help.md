@@ -35,7 +35,7 @@ This action is used to run a calculation.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result|number|False|Result of the arithmetic operation|
+|result|number|True|Result of the arithmetic operation|
 
 Example output:
 
@@ -61,6 +61,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.3 - Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Changed `Exception` to `PluginException` | Use input and output constants | Remove not secure eval for simple_eval
 * 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Update plugin tag from `utility` to `utilities` for Marketplace searchability
 * 1.1.0 - Update to v2 Python plugin architecture | Support web server mode
