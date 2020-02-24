@@ -1,37 +1,32 @@
+from komand_redis.util.helper import Helper
+
 import komand
-from .schema import HmsetInput, HmsetOutput
-# Custom imports below
+from komand.exceptions import PluginException
+from .schema import HmsetInput, HmsetOutput, Input, Output, Component
 
 
 class Hmset(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='hmset',
-                description='Sets the specified fields to their respective values in the hash stored at key',
-                input=HmsetInput(),
-                output=HmsetOutput())
+            name='hmset',
+            description=Component.DESCRIPTION,
+            input=HmsetInput(),
+            output=HmsetOutput())
 
     def run(self, params={}):
-        key = params['key']
-        values = params['values']
+        key = params[Input.KEY]
+        values = params[Input.VALUES]
         try:
             result = self.connection.redis.hmset(key, values)
         except Exception as e:
             self.logger.error("An error occurred while running HMSET: ", e)
-            raise
+            raise PluginException(cause='Server error',
+                                  assistance="An error occurred while running HMSET",
+                                  data=e)
 
-        if params.get('expire'):
-            self.logger.info("Setting expiration: %s", params['expire'])
-            self.connection.redis.expire(params['key'], params['expire'])
+        Helper.set_expire(self.logger, self.connection, params.get(Input.KEY), params.get(Input.EXPIRE))
+
         return {
-            'reply': result
+            Output.REPLY: result
         }
-
-    def test(self):
-        try:
-            self.connection.redis.config_get()
-        except Exception as e:
-            self.logger.error("An error occurred while testing HMSET: ", e)
-            raise
-        return {"success": True}

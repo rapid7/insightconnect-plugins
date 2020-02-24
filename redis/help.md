@@ -20,8 +20,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|db|integer|0|True|DB to use usually (0-15)|None|
 |host|string|None|True|Host, e.g. 10.4.4.4|None|
-|db|integer|0|True|Db to use usually (0-15)|None|
 |port|integer|6379|True|Port|None|
 
 ## Technical Details
@@ -180,8 +180,8 @@ There is an optional expiration timeout which will auto remove the key when `exp
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |expire|integer|None|False|Expiration in seconds|None|
-|values|object|None|True|Object hash field:value to set|None|
 |key|string|None|True|Key|None|
+|values|object|None|True|Object hash field:value to set|None|
 
 ##### Output
 
@@ -290,8 +290,8 @@ If key does not exist, a new key holding a hash is created. If field does not ex
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|key|string|None|True|Key to lookup|None|
 |field|string|None|True|Field to increment|None|
+|key|string|None|True|Key to lookup|None|
 |value|integer|0|True|How much to increment by|None|
 
 ##### Output
@@ -318,9 +318,9 @@ This action is used to returns the values associated with the specified fields i
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|key|string|None|True|Key to get|None|
 |fields|[]string|None|False|Fields to retrieve values from|None|
 |get_all|boolean|False|True|Get all values|None|
+|key|string|None|True|Key to get|None|
 
 ##### Output
 
@@ -351,9 +351,9 @@ This command overwrites any specified fields already existing in the hash. If ke
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|expire|integer|None|False|Expiration in seconds|None|
 |key|string|None|True|Key|None|
 |values|object|None|True|Object hash field:value to set|None|
-|expire|integer|None|False|Expiration in seconds|None|
 
 ##### Output
 
@@ -385,6 +385,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.2 - Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Support web server mode | Add actions HMSET, HMGET and HINCRBY
 * 0.1.2 - Update to new plugin architecture, fix action "keys"

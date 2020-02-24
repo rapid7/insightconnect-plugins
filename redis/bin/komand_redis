@@ -4,10 +4,10 @@ import komand
 from komand_redis import connection, actions, triggers
 
 
-Name = 'Redis'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'The Redis plugin allows you to add, update, and manage data in a Redis database'
+Name = "Redis"
+Vendor = "rapid7"
+Version = "1.0.2"
+Description = "The Redis plugin allows you to add, update, and manage data in a Redis database"
 
 
 class ICONRedis(komand.Plugin):

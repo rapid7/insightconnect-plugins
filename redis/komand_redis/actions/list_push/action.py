@@ -1,6 +1,7 @@
+from komand_redis.util.helper import Helper
+
 import komand
-from .schema import ListPushInput, ListPushOutput
-# Custom imports below
+from .schema import ListPushInput, ListPushOutput, Input, Output, Component
 
 
 class ListPush(komand.Action):
@@ -8,24 +9,17 @@ class ListPush(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='list_push',
-            description='List Push',
+            description=Component.DESCRIPTION,
             input=ListPushInput(),
             output=ListPushOutput())
 
     def run(self, params={}):
         reply = 'OK'
-        result = self.connection.redis.rpush(params['key'], params['value'])
-
-        if params.get('expire'):
-            self.logger.info("Setting expiration: %s", params['expire'])
-            self.connection.redis.expire(params['key'], params['expire'])
-
-        if not result:
+        if not self.connection.redis.rpush(params[Input.KEY], params[Input.VALUE]):
             reply = 'Failed'
-        return {
-            'reply': reply
-        }
 
-    def test(self):
-        """TODO: Test action"""
-        return {}
+        Helper.set_expire(self.logger, self.connection, params.get(Input.KEY), params.get(Input.EXPIRE))
+
+        return {
+            Output.REPLY: reply
+        }

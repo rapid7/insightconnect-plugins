@@ -1,5 +1,5 @@
 import komand
-from .schema import HashGetInput, HashGetOutput
+from .schema import HashGetInput, HashGetOutput, Input, Output, Component
 # Custom imports below
 
 
@@ -8,13 +8,13 @@ class HashGet(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='hash_get',
-            description='Get Hash',
+            description=Component.DESCRIPTION,
             input=HashGetInput(),
             output=HashGetOutput())
 
     def run(self, params={}):
         """Run action"""
-        values = self.connection.redis.hgetall(params['key'])
+        values = self.connection.redis.hgetall(params[Input.KEY])
         found = not not values
         if values:
             v = {}
@@ -23,10 +23,6 @@ class HashGet(komand.Action):
             values = v
 
         return {
-            'values': values or {},
-            'found': found
+            Output.VALUES: values or {},
+            Output.FOUND: found
         }
-
-    def test(self):
-        """TODO: Test action"""
-        return {}

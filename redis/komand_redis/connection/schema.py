@@ -18,7 +18,7 @@ class ConnectionSchema(komand.Input):
     "db": {
       "type": "integer",
       "title": "Db",
-      "description": "Db to use usually (0-15)",
+      "description": "DB to use usually (0-15)",
       "default": 0,
       "order": 3
     },

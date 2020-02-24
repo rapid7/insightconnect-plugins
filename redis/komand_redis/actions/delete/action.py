@@ -1,6 +1,5 @@
 import komand
-from .schema import DeleteInput, DeleteOutput
-# Custom imports below
+from .schema import DeleteInput, DeleteOutput, Input, Output, Component
 
 
 class Delete(komand.Action):
@@ -8,17 +7,12 @@ class Delete(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='delete',
-            description='Delete',
+            description=Component.DESCRIPTION,
             input=DeleteInput(),
             output=DeleteOutput())
 
     def run(self, params={}):
         """Run action"""
-        count = self.connection.redis.delete(params['key'])
         return {
-            'count': count
+            Output.COUNT: self.connection.redis.delete(params[Input.KEY])
         }
-
-    def test(self):
-        """Test action"""
-        return {}

@@ -1,6 +1,5 @@
 import komand
-from .schema import KeysInput, KeysOutput
-# Custom imports below
+from .schema import KeysInput, KeysOutput, Input, Output, Component
 
 
 class Keys(komand.Action):
@@ -8,21 +7,15 @@ class Keys(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='keys',
-            description='Return keys matching pattern',
+            description=Component.DESCRIPTION,
             input=KeysInput(),
             output=KeysOutput())
 
     def run(self, params={}):
-        keys = self.connection.redis.keys(params['pattern'])
+        keys = self.connection.redis.keys(params[Input.PATTERN])
         keys = [key.decode('utf-8') for key in keys]
         count = len(keys or [])
         return {
-            'count': count,
-            'keys': keys
-        }
-
-    def test(self):
-        return {
-            'count': 0,
-            'keys': []
+            Output.COUNT: count,
+            Output.KEYS: keys
         }

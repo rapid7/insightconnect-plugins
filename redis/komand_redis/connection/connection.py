@@ -1,5 +1,5 @@
 import komand
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 # Custom imports below
 import redis
 
@@ -12,8 +12,5 @@ class Connection(komand.Connection):
 
     def connect(self, params):
         self.logger.info("Connect: Connecting..")
-        db = params['db']
-        host = params['host']
-        port = params['port']
-        self.redis = redis.StrictRedis(host=host, port=port, db=db)
+        self.redis = redis.StrictRedis(host=params[Input.HOST], port=params[Input.PORT], db=params[Input.DB])
         self.redis.get("test")

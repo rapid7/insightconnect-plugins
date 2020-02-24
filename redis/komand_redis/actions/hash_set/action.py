@@ -1,6 +1,7 @@
+from komand_redis.util.helper import Helper
+
 import komand
-from .schema import HashSetInput, HashSetOutput
-# Custom imports below
+from .schema import HashSetInput, HashSetOutput, Input, Output, Component
 
 
 class HashSet(komand.Action):
@@ -8,23 +9,17 @@ class HashSet(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='hash_set',
-            description='Set Hash',
+            description=Component.DESCRIPTION,
             input=HashSetInput(),
             output=HashSetOutput())
 
     def run(self, params={}):
         reply = 'OK'
-        result = self.connection.redis.hmset(params['key'], params['values'] or {})
-
-        if params.get('expire'):
-            self.logger.info("Setting expiration: %s", params['expire'])
-            self.connection.redis.expire(params['key'], params['expire'])
-        if not result:
+        if not self.connection.redis.hmset(params[Input.KEY], params.get(Input.VALUES, {})):
             reply = 'Failed'
-        return {
-            'reply': reply
-        }
 
-    def test(self):
-        """TODO: Test action"""
-        return {}
+        Helper.set_expire(self.logger, self.connection, params.get(Input.KEY), params.get(Input.EXPIRE))
+
+        return {
+            Output.REPLY: reply
+        }
