@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="microsoft_atp_safe_links-rapid7-custom-plugin",
+setup(name="microsoft_atp_safe_links-rapid7-plugin",
       version="1.0.3",
       description="Helps protect your organization by providing time-of-click verification of web addresses (URLs) in email messages and Office documents",
-      author="rapid7-custom",
+      author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
