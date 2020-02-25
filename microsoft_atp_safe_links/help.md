@@ -12,24 +12,6 @@
 
 # Documentation
 
-## Setup
-
-_This plugin does not contain a connection._
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|string|True|Result of the decoded Safe Link|
-
-Example output:
-
-```
-{
-  "result":"https://aomediacodec.github.io/av1-spec/av1-spec.pdf"
-}
-```
-
 ### Triggers
 
 This plugin does not contain any triggers.
