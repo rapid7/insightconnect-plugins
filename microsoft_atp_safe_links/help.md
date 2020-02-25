@@ -14,7 +14,7 @@
 
 ## Setup
 
-This plugin does not contain a connection.	_This plugin does not contain a connection._
+_This plugin does not contain a connection._
 
 ## Technical Details
 
