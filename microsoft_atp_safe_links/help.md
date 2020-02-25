@@ -14,21 +14,7 @@
 
 ## Setup
 
-This plugin does not contain a connection.
-
-## Technical Details
-
-### Actions
-
-#### Decode Safe Links
-
-This action is used to decode a Microsoft Safe Link.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|Safe Link to be decoded|None|
+_This plugin does not contain a connection._
 
 ##### Output
 

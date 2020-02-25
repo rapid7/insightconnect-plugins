@@ -24,3 +24,4 @@ class Decode(komand.Action):
             raise Exception(f"Error: Unable to decode the Microsoft Safe Link. "
                             f"Check that the input was a valid Safe Link URL. "
                             f"If the problem persists, please contact support.")
+                            

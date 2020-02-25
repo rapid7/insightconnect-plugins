@@ -5,8 +5,8 @@ name: microsoft_atp_safe_links
 title: Microsoft Office 365 ATP Safe Links
 description: Helps protect your organization by providing time-of-click verification
   of web addresses (URLs) in email messages and Office documents
-version: 1.0.2
-vendor: rapid7
+version: 1.0.3
+vendor: rapid7-custom
 support: rapid7
 status: []
 resources:
