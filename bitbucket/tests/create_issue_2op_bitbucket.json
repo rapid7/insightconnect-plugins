@@ -1,11 +1,11 @@
 {
     "body": {
         "action": "create_issue",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            }
+        "connection": {	
+            "credentials": {	
+                "password": "",	
+                "username": ""	
+            }	
         },
         "input": {
             "assignee": "",

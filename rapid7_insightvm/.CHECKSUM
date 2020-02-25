@@ -1,7 +1,7 @@
 {
-	"spec": "4dd91bceb6f20346a1a02f84ce01d636",
-	"manifest": "dc6a804389dba4c7cbb9d324331149f2",
-	"setup": "5b5248bd278e4ee771616dec2c8d56de",
+	"spec": "61abca24a402e23445047b975872dd02",
+	"manifest": "324be42d6d910c6f4cb4a35091472436",
+	"setup": "443c4b61c92b600d190ed893b9b872d1",
 	"schemas": [
 		{
 			"identifier": "add_scan_engine_pool_engine/schema.py",
@@ -102,6 +102,10 @@
 		{
 			"identifier": "get_asset_group/schema.py",
 			"hash": "e81948859949785d738a25956798daa3"
+		},
+		{
+			"identifier": "get_asset_group_assets/schema.py",
+			"hash": "5d9fef1735276ad99252b8044b76bc51"
 		},
 		{
 			"identifier": "get_asset_groups/schema.py",
@@ -333,7 +337,7 @@
 		},
 		{
 			"identifier": "new_exception_request/schema.py",
-			"hash": "6d9738f4bdea37161d302ae73f28a717"
+			"hash": "10c8a1fff7640240e66621ead7a52435"
 		},
 		{
 			"identifier": "new_scans/schema.py",

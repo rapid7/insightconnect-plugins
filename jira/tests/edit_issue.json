@@ -1,14 +1,6 @@
 {
     "body": {
         "action": "edit_issue",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "project": null,
-            "url": null
-        },
         "input": {
             "description": "Updated from Komand",
             "fields": {},
