@@ -12,6 +12,48 @@
 
 # Documentation
 
+## Setup
+
+This plugin does not contain a connection.	_This plugin does not contain a connection._
+
+## Technical Details
+
+### Actions
+
+#### Decode Safe Links
+
+This action decodes a Microsoft Safe Link.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|Safe Link to be decoded|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result|string|True|Result of the decoded Safe Link|
+
+Example output:
+
+```
+{
+  "result": "https://innovaccer.com/forms/unsubscribe/1b95755e-..."
+}
+```
+
+#### Decode Safe Links
+
+This action is used to decode a Microsoft Safe Link.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|Safe Link to be decoded|None|
+
 ### Triggers
 
 This plugin does not contain any triggers.
