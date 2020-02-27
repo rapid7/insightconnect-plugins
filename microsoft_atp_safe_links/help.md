@@ -14,7 +14,7 @@
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -22,7 +22,7 @@ This plugin does not contain a connection.
 
 #### Decode Safe Links
 
-This action is used to decode a Microsoft Safe Link.
+This action decodes a Microsoft Safe Link.
 
 ##### Input
 
@@ -40,9 +40,19 @@ Example output:
 
 ```
 {
-  "result":"https://aomediacodec.github.io/av1-spec/av1-spec.pdf"
+  "result": "https://aomediacodec.github.io/av1-spec/av1-spec.pdf"
 }
 ```
+
+#### Decode Safe Links
+
+This action is used to decode a Microsoft Safe Link.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|Safe Link to be decoded|None|
 
 ### Triggers
 
@@ -58,6 +68,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.3 - Fixed issue where certain non-safelinks returned a blank string
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Fixed issue where non-safelinks returned a blank string
 * 1.0.0 - Initial plugin
