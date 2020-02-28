@@ -48,7 +48,7 @@ class ParseMultipleOutput(komand.Output):
   "properties": {
     "cefs": {
       "type": "array",
-      "title": "CEFs object",
+      "title": "CEFs Object",
       "description": "A list of CEF objects parsed from the file",
       "items": {
         "$ref": "#/definitions/cef"
