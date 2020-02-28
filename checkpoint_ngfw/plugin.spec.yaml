@@ -1,0 +1,105 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: checkpoint_ngfw
+title: Checkpoint NGFW
+description: Check Point’s Next Generation Firewalls (NGFW’s) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks.
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/checkpoint_ngfw
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+tags:
+- firewall
+- checkpoint
+hub_tags:
+  use_cases: [application_management, threat_detection_and_response, vulnerability_management]
+  keywords: [firewall, checkpoint, decoder, utilities]
+  features: []
+connection:
+  username_password:
+    type: credential_username_password
+    title: Credentials
+    description: Username and password
+    required: true
+  server:
+    type: string
+    title: Server IP
+    description: Server IP
+    required: true
+  port:
+    type: int
+    title: Server Port
+    description: Server port
+    required: true
+    default: 443
+  ssl_verify:
+    type: boolean
+    title: SSL Verify
+    description: Use SSL verification
+    required: true
+    default: true
+
+actions:
+  add_access_rule:
+    title: Add Access Rule
+    description: Create a rule to block traffic
+    input:
+      name:
+        title: Name
+        type: string
+        description: Rule name
+        required: true
+        order: 1
+      list_of_services:
+        title: List of services
+        type: "[]string"
+        description: List of services to block. e.g. ["AOL", "SMTP"]
+        required: true
+        order: 2
+      layer:
+        title: Layer
+        type: string
+        description: Layer to add this rule to
+        required: true
+        default: "Network"
+        order: 3
+      action:
+        title: Action
+        type: string
+        description: Action to take
+        required: true
+        default: Drop
+        order: 4
+        enum:
+          - Accept
+          - Drop
+          - Ask
+          - Inform
+          - Reject
+          - User Auth
+          - Client Auth
+          - Apply Layer
+      position:
+        title: Position
+        type: string
+        description: Postion in the list of rules. e.g. top, bottom, 15
+        required: true
+        default: "top"
+        order: 5
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        default: true
+        order: 6
+
+    output:
+      access_rule:
+        title: Block Rule
+        description: The rule that was created
+        type: object
+        required: true
