@@ -7,7 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Secure identity management and single sign-on to any application
-version: 3.2.1
+version: 3.3.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/okta
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -132,6 +132,41 @@ connection:
     type: credential_secret_key
     required: true
 actions:
+  get_factors:
+    title: Get Okta User Factors
+    description: Returns an object containing all of a user's factors for MFA
+    input:
+      user_id:
+        title: Okta User ID
+        description: User ID to get factors for
+        type: string
+        required: true
+    output:
+      factors:
+        title: Okta MFA Factors
+        description: Obbject containing all the factors of a user for MFA
+        type: "[]object"
+        required: false
+  send_push:
+    title: Push MFA Challenge
+    description: Push an MFA challenge to a user's device and wait for a success or rejection
+    input:
+      user_id:
+        title: Okta User ID
+        description: User ID to push verification to
+        type: string
+        required: true
+      factor_id:
+        title: Okta Factor ID
+        description: Factor ID of the user to push verification to
+        type: string
+        required: true
+    output:
+      factor_status:
+        title: Factor Status
+        description: User factor status
+        type: string
+        required: false
   deactivate_user:
     title: Deactivate User
     description: Deactivate a user

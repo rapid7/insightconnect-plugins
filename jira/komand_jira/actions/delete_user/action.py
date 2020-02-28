@@ -1,5 +1,5 @@
 import komand
-from .schema import DeleteUserInput, DeleteUserOutput
+from .schema import DeleteUserInput, DeleteUserOutput, Input, Output, Component
 # Custom imports below
 
 
@@ -8,13 +8,13 @@ class DeleteUser(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='delete_user',
-            description='Delete User',
+            description=Component.DESCRIPTION,
             input=DeleteUserInput(),
             output=DeleteUserOutput())
 
     def run(self, params={}):
         """Delete User"""
         success = self.connection.client.delete_user(
-            username=params['username']
+            username=params[Input.USERNAME]
         )
-        return {'success': success}
+        return {Output.SUCCESS: success}

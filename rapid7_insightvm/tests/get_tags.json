@@ -3,10 +3,10 @@
         "action": "get_tags",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "name": "^Komand.*"

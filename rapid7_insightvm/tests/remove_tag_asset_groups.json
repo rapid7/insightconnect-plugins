@@ -3,10 +3,10 @@
         "action": "remove_tag_asset_groups",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "input": {
             "id": 73
