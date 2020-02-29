@@ -199,7 +199,7 @@ Example output:
          }
       },
       "dmarc":{
-         "record":"v=DMARC1;p=none;fo=1;pct=100;rua=mailto:aggrep@mail.pci.gov,mailto:dmarc_reporting@mail.pci.gov;ruf=mailto:authfail@mail.pci.gov",
+         "record":"v=DMARC1;p=none;fo=1;pct=100;rua=mailto:user@example.com,mailto:user@example.com;ruf=mailto:user@example.com",
          "valid":false,
          "location":"whitehouse.gov",
          "error":"mail.pci.gov does not indicate that it accepts DMARC reports about whitehouse.gov - Authorization record not found: whitehouse.gov._report._dmarc.mail.pci.gov IN TXT \"v=DMARC1\""
@@ -386,7 +386,7 @@ This action will check DMARC records against alternate name servers.
          }
       },
       "dmarc":{
-         "record":"v=DMARC1;p=none;fo=1;pct=100;rua=mailto:aggrep@mail.pci.gov,mailto:dmarc_reporting@mail.pci.gov;ruf=mailto:authfail@mail.pci.gov",
+         "record":"v=DMARC1;p=none;fo=1;pct=100;rua=mailto:user@example.com,user@example.com;ruf=mailto:user@example.com",
          "valid":false,
          "location":"whitehouse.gov",
          "error":"mail.pci.gov does not indicate that it accepts DMARC reports about whitehouse.gov - Authorization record not found: whitehouse.gov._report._dmarc.mail.pci.gov IN TXT \"v=DMARC1\""
@@ -409,7 +409,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.2 - Changed description in action `check_domains_alternate_nameservers` | Fix typo in word `nameservers` to `name_servers`
+* 2.1.2 - Changed description in action `check_domains_alternate_nameservers` | Fix typo in word `nameservers` to `name_servers` | Changed mails to `user@example.com`
 * 2.1.1 - New spec and help.md format for the Hub
 * 2.1.0 - Added action Check Domains Alternate Nameservers
 * 2.0.0 - Added timeout to Check Domain
