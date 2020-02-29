@@ -6,7 +6,7 @@ from icon_ipify import connection, actions, triggers
 
 Name = "IPify"
 Vendor = "rapid7"
-Version = "1.0.1"
+Version = "1.0.2"
 Description = "Lookup the public IP address of an Insight Orchestrator"
 
 

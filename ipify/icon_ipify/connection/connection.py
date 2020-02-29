@@ -1,6 +1,7 @@
+import requests
+
 import komand
 from .schema import ConnectionSchema
-# Custom imports below
 
 
 class Connection(komand.Connection):
@@ -10,3 +11,9 @@ class Connection(komand.Connection):
 
     def connect(self, params={}):
         pass
+
+    def test(self, params={}):
+        url = 'https://api.ipify.org?format=json'
+        r = requests.get(url)
+        dic = r.json()
+        return dic.pop('ip')
