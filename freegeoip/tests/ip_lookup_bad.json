@@ -1,9 +1,11 @@
 {
     "body": {
-        "action": "lookup",
-        "connection": null,
+        "action": "get_hosts_information",
+        "connection": {
+            "credentials": null
+        },
         "input": {
-            "host": "1.1.1.1.1.1.1.1"
+            "hosts": ["1.1.1.1.1.1.1.1"]
         },
         "meta": {}
     },

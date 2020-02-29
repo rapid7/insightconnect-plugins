@@ -1,9 +1,11 @@
 {
     "body": {
-        "action": "lookup",
-        "connection": null,
+        "action": "get_hosts_information",
+        "connection": {
+            "credentials": null
+        },
         "input": {
-            "host": "2607:f8b0:4009:808::200e"
+            "hosts": ["2607:f8b0:4009:808::200e"]
         },
         "meta": {}
     },

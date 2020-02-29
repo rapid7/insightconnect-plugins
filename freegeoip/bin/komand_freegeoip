@@ -4,10 +4,10 @@ import komand
 from komand_freegeoip import connection, actions, triggers
 
 
-Name = 'FreeGeoIP'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'This plugin lookup GeoIP information for a specified host'
+Name = "FreeGeoIP"
+Vendor = "rapid7"
+Version = "2.0.0"
+Description = "This plugin lookup GeoIP information for a specified host"
 
 
 class ICONFreegeoip(komand.Plugin):
@@ -19,6 +19,8 @@ class ICONFreegeoip(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.GetHostsInformation())
+
         self.add_action(actions.Lookup())
 
 

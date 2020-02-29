@@ -4,14 +4,14 @@ products: [insightconnect]
 name: freegeoip
 title: FreeGeoIP
 description: This plugin lookup GeoIP information for a specified host
-version: 1.0.1
+version: 2.0.0
 vendor: rapid7
 support: community
 status: [obsolete]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/freegeoip
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://freegeoip.net
+  vendor_url: https://ipstack.com
 tags:
 - geoip
 - ip
@@ -20,69 +20,277 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [geoip, ip, location]
   features: []
+connection:
+  credentials:
+    type: credential_secret_key
+    title: API Access Key
+    description: Unique authentication key used to gain access to the ipstack API
+    required: true
+types:
+  language:
+    code:
+      title: 2-letter language code for the given language
+      type: string
+    name:
+      title: Name (in the API request's main language) of the given language. (e.g. Portuguese)
+      type: string
+    native:
+      title: Native name of the given language. (e.g. Português)
+      type: string
+  location:
+    geoname_id:
+      title: Unique geoname identifier
+      type: number
+    capital:
+      title: Capital city of the country associated with the IP
+      type: string
+    languages:
+      title: Object containing one or multiple sub-objects per language spoken in the country associated with the IP
+      type: "[]language"
+    country_flag:
+      title: HTTP URL leading to an SVG-flag icon for the country associated with the IP
+      type: string
+    country_flag_emoji:
+      title: Emoji icon for the flag of the country associated with the IP
+      type: string
+    country_flag_emoji_unicode:
+      title: Unicode value of the emoji icon for the flag of the country associated with the IP. (e.g. U+1F1F5 U+1F1F9 for the Portuguese flag)
+      type: string
+    calling_code:
+      title: Calling/dial code of the country associated with the IP. (e.g. 351) for Portugal
+      type: string
+    is_eu:
+      title: Is county associated with the IP is in the European Union
+      type: boolean
+  time_zone:
+    id:
+      title: ID of the time zone associated with the IP. (e.g. America/Los_Angeles for PST)
+      type: string
+    current_time:
+      title: Current date and time in the location associated with the IP. (e.g. 2018-03-29T22:31:27-07:00)
+      type: string
+    gmt_offset:
+      title: GMT offset of the given time zone in seconds. (e.g. -25200 for PST's -7h GMT offset)
+      type: string
+    code:
+      title: Universal code of the given time zone
+      type: string
+    is_daylight_saving:
+      title: Is given time zone is considered daylight saving time
+      type: string
+  currency:
+    code:
+      title: 3-letter code of the main currency associated with the IP
+      type: string
+    name:
+      title: Name of the given currency
+      type: string
+    plural:
+      title: Plural name of the given currency
+      type: string
+    symbol:
+      title: Symbol letter of the given currency
+      type: string
+    symbol_native:
+      title: Native symbol letter of the given currency
+      type: string
+  connection:
+    asn:
+      title: Autonomous System Number associated with the IP
+      type: string
+    isp:
+      title: Name of the ISP associated with the IP
+      type: string
+  security:
+    is_proxy:
+      title: Is given IP is associated with a proxy
+      type: string
+    proxy_type:
+      title: Type of proxy the IP is associated with
+      type: string
+    is_crawler:
+      title: Is given IP is associated with a crawler
+      type: string
+    crawler_name:
+      title: Name of the crawler the IP is associated with
+      type: string
+    crawler_type:
+      title: Type of crawler the IP is associated with
+      type: string
+    is_tor:
+      title: Is given IP is associated with the anonymous Tor system
+      type: string
+    threat_level:
+      title: Type of threat level the IP is associated with
+      type: string
+    threat_types:
+      title: Containing all threat types associated with the IP
+      type: object
+  information:
+    ip:
+      title: IP Address
+      description: Requested IP address
+      type: string
+      required: true
+    hostname:
+      title: Hostname
+      description: Hostname the requested IP resolves to
+      type: string
+      required: false
+    type:
+      title: Type
+      description: IP address type IPv4 or IPv6
+      type: string
+      enum:
+        - ipv4
+        - ipv6
+      required: true
+    continent_code:
+      title: Continent Code
+      description: 2-letter continent code associated with the IP
+      type: string
+      required: true
+    continent_name:
+      title: Continent Name
+      description: Name of the continent associated with the IP
+      type: string
+      required: true
+    country_code:
+      title: Country Code
+      description: 2-letter country code associated with the IP
+      type: string
+      required: true
+    country_name:
+      title: Country Name
+      description: Returns the name of the country associated with the IP
+      type: string
+      required: true
+    region_code:
+      title: Region Code
+      description: Region code of the region associated with the IP (e.g. CA for California)
+      type: string
+      required: true
+    region_name:
+      title: Region Name
+      description: Name of the region associated with the IP
+      type: string
+      required: true
+    city:
+      title: City
+      description: Name of the city associated with the IP
+      type: string
+      required: true
+    zip:
+      title: ZIP
+      description: ZIP code associated with the IP
+      type: string
+      required: true
+    latitude:
+      title: Latitude
+      description: Latitude value associated with the IP
+      type: float
+      required: true
+    longitude:
+      title: Longitude
+      description: Longitude value associated with the IP
+      type: float
+      required: true
+    location:
+      title: Location
+      description: Multiple location-related objects
+      type: location
+      required: true
+    time_zone:
+      title: Time Zone
+      description: Object containing timezone-related data
+      type: time_zone
+      required: false
+    currency:
+      title: Currency
+      description: Object containing currency-related data
+      type: currency
+      required: false
+    connection:
+      title: Connection
+      description: Object containing connection-related data
+      type: connection
+      required: false
+    security:
+      title: Security
+      description: Object containing security-related data.
+      type: security
+      required: false
 actions:
+  get_hosts_information:
+    title: GeoIP Host Lookup
+    description: Get GeoIP Info for a Hosts
+    input:
+      hosts:
+        title: Host List
+        description: Hosts to lookup
+        type: "[]string"
+        required: true
+      language:
+        title: Language
+        description: Response language, default EN
+        type: string
+        required: false
+        enum:
+          - en
+          - de
+          - es
+          - fr
+          - ja
+          - pt-br
+          - ru
+          - zh
+      should_return_hostname:
+        title: Should Return Hostname
+        description: Information about the hostname the given IP address resolves to
+        type: boolean
+        required: false
+      should_use_security:
+        title: Should Use Security
+        description: Should access the ipstack API's Security Module
+        type: boolean
+        required: false
+    output:
+      information:
+        title: IP Informations
+        description: Informations about requested IP
+        type: information
+        required: true
   lookup:
     title: GeoIP Lookup
-    description: Get GeoIP Info for a Host
+    description: Get GeoIP Info for a lookup host
     input:
-      host:
-        title: Host
-        description: Host to Lookup
+      language:
+        title: Language
+        description: Response language, default EN
         type: string
-        required: true
+        required: false
+        enum:
+          - en
+          - de
+          - es
+          - fr
+          - ja
+          - pt-br
+          - ru
+          - zh
+      should_return_hostname:
+        title: Should Return Hostname
+        description: Information about the hostname the given IP address resolves to
+        type: boolean
+        required: false
+      should_use_security:
+        title: Should Use Security
+        description: Should access the ipstack API's Security Module
+        type: boolean
+        required: false
     output:
-      address:
-        title: IP Address
-        description: IP address
-        type: string
-        required: false
-      city:
-        title: City
-        description: City
-        type: string
-        required: false
-      country_name:
-        title: Country Name
-        description: Country name
-        type: string
-        required: false
-      country_code:
-        title: Country Code
-        description: Country code
-        type: string
-        required: false
-      latitude:
-        title: Latitude
-        description: Latitude
-        type: string
-        required: false
-      longitude:
-        title: Latitude
-        description: Longitude
-        type: string
-        required: false
-      metro_code:
-        title: Metro Code
-        description: Metro code
-        type: integer
-        required: false
-      region_code:
-        title: Region Code
-        description: Region code
-        type: string
-        required: false
-      region_name:
-        title: Region Name
-        description: Region name
-        type: string
-        required: false
-      time_zone:
-        title: Public IP Address in Decimal
-        description: Time zone
-        type: string
-        required: false
-      zip_code:
-        title: Zip Code
-        description: Zip code
-        type: string
-        required: false
+      information:
+        title: IP Informations
+        description: Informations about requested IP
+        type: information
+        required: true

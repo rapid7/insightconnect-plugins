@@ -4,10 +4,11 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get GeoIP Info for a lookup host"
+    DESCRIPTION = "Get GeoIP Info for a Hosts"
 
 
 class Input:
+    HOSTS = "hosts"
     LANGUAGE = "language"
     SHOULD_RETURN_HOSTNAME = "should_return_hostname"
     SHOULD_USE_SECURITY = "should_use_security"
@@ -17,12 +18,21 @@ class Output:
     INFORMATION = "information"
     
 
-class LookupInput(komand.Input):
+class GetHostsInformationInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
+    "hosts": {
+      "type": "array",
+      "title": "Host List",
+      "description": "Hosts to lookup",
+      "items": {
+        "type": "string"
+      },
+      "order": 1
+    },
     "language": {
       "type": "string",
       "title": "Language",
@@ -37,21 +47,24 @@ class LookupInput(komand.Input):
         "ru",
         "zh"
       ],
-      "order": 1
+      "order": 2
     },
     "should_return_hostname": {
       "type": "boolean",
       "title": "Should Return Hostname",
       "description": "Information about the hostname the given IP address resolves to",
-      "order": 2
+      "order": 3
     },
     "should_use_security": {
       "type": "boolean",
       "title": "Should Use Security",
       "description": "Should access the ipstack API's Security Module",
-      "order": 3
+      "order": 4
     }
-  }
+  },
+  "required": [
+    "hosts"
+  ]
 }
     """)
 
@@ -59,7 +72,7 @@ class LookupInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class LookupOutput(komand.Output):
+class GetHostsInformationOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
