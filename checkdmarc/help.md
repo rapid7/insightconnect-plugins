@@ -29,7 +29,7 @@ This action is used to check domains.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain to check. e.g. fbi.gov, google.com|None|
-|timeout|float|6.0|True|Timeout in seconds for request. Default is 6 seconds|None|
+|timeout|number|6.0|True|Timeout in seconds for request. Default is 6 seconds|None|
 
 ##### Output
 
@@ -216,9 +216,9 @@ This action will check DMARC records against alternate name servers.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain to check. e.g. fbi.gov, google.com|None|
+|domain|string|None|True|Domain to check. e.g. fbi.gov, google.com in alternate nameserver|None|
 |nameservers|[]string|['1.1.1.1', '1.0.0.1']|True|Nameserver to check against. e.g ["1.1.1.1","1.0.0.1"]|None|
-|timeout|float|6.0|True|Timeout in seconds for request. Default is 6 seconds|None|
+|timeout|number|6.0|True|Timeout in seconds for request. Default is 6 seconds|None|
 
 ##### Output
 
@@ -409,6 +409,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.2 - Changed description in action `check_domains_alternate_nameservers` | Fix typo in word `nameservers` to `name_servers`
 * 2.1.1 - New spec and help.md format for the Hub
 * 2.1.0 - Added action Check Domains Alternate Nameservers
 * 2.0.0 - Added timeout to Check Domain
