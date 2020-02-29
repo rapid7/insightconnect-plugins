@@ -1,37 +1,28 @@
-import komand
-from .schema import SketchifyInput, SketchifyOutput
 # Custom imports below
 import requests
+
+import komand
+from komand.exceptions import PluginException
+from .schema import SketchifyInput, SketchifyOutput, Input, Output, Component
 
 
 class Sketchify(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='sketchify',
-                description='Turn a URL into a suspicious looking one',
-                input=SketchifyInput(),
-                output=SketchifyOutput())
+            name='sketchify',
+            description=Component.DESCRIPTION,
+            input=SketchifyInput(),
+            output=SketchifyOutput())
 
     def run(self, params={}):
-        url = params.get('url')
+        url = params.get(Input.URL)
         try:
-            r = requests.post('https://verylegit.link/sketchify', data = {'long_url': url})
+            r = requests.post('https://verylegit.link/sketchify', data={'long_url': url})
             r.raise_for_status()
             sketchy_url = r.content
         except Exception as e:
             self.logger.error(e)
-            raise
+            raise PluginException
 
-        return { 'url': sketchy_url.decode() }
-
-    def test(self):
-        try:
-            r = requests.post('https://verylegit.link/sketchify', data = {'long_url': 'test'})
-            r.raise_for_status()
-            sketchy_url = r.content
-        except Exception as e:
-            self.logger.error(e)
-            raise
-
-        return { 'url': sketchy_url.decode() }
+        return {Output.URL: sketchy_url.decode()}

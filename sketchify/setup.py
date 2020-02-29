@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='sketchify-rapid7-plugin',
-      version='1.0.1',
-      description='Sketchify is a service used to turn any link into one that appears suspicious. With the Sketchify plugin for Rapid7 InsightConnect, users can conduct internal phishing campaigns or other forms of penetration testing within their organization',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="sketchify-rapid7-plugin",
+      version="1.0.2",
+      description="Sketchify is a service used to turn any link into one that appears suspicious. With the Sketchify plugin for Rapid7 InsightConnect, users can conduct internal phishing campaigns or other forms of penetration testing within their organization",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_sketchify']
