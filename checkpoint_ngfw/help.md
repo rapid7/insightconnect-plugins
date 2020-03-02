@@ -29,6 +29,30 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Remove Access Rule
+
+This action is used to remove access rule.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|access_rule_name|string|None|True|Access rule name|None|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
+|layer|string|Network|True|Layer|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|message|string|True||
+|success|boolean|True|Success|
+
+Example output:
+
+```
+```
+
 #### Show Access Rulebase
 
 This action is used to show access rulebase.

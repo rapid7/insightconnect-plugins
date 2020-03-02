@@ -482,6 +482,43 @@ actions:
         description: The rule that was created
         type: access_rule
         required: true
+
+  remove_access_rule:
+    title: Remove Access Rule
+    description: Remove access rule
+    input:
+      access_rule_name:
+        title: Access Rule Name
+        description: Access rule name
+        type: string
+        required: true
+        order: 1
+      layer:
+        title: Layer
+        description: Layer
+        type: string
+        default: "Network"
+        required: true
+        order: 2
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        default: true
+        order: 3
+    output:
+      message:
+        title: Message
+        descripiton: Remove operation status
+        type: string
+        required: true
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+
   discard_all_sessions:
     title: Discard all Sessions
     description: Troubleshooting action to discard all other user sessions
