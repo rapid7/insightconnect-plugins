@@ -96,10 +96,19 @@ actions:
         required: true
         default: true
         order: 6
-
     output:
       access_rule:
         title: Block Rule
         description: The rule that was created
         type: object
         required: true
+  discard_all_sessions:
+    title: Discard all Sessions
+    description: Troubleshooting action to discard all other user sessions
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+
