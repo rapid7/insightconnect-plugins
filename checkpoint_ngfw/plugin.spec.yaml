@@ -18,6 +18,363 @@ hub_tags:
   use_cases: [application_management, threat_detection_and_response, vulnerability_management]
   keywords: [firewall, checkpoint, decoder, utilities]
   features: []
+
+types:
+  domain:
+    domain-type:
+      title: "Domain-Type"
+      type: string
+      description: "Domain-type"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    uid:
+      title: "Uid"
+      type: string
+      description: "Uid"
+      required: false
+  action_type:
+    domain:
+      title: "Domain"
+      type: domain
+      description: "Domain"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    uid:
+      title: "Uid"
+      type: string
+      description: "Uid"
+      required: false
+  creation_time_type:
+    posix:
+      title: "Posix"
+      type: integer
+      description: "Posix"
+      required: false
+    iso-8601:
+      title: "Iso-8601"
+      type: string
+      description: "Iso-8601"
+      required: false
+  meta_info_type:
+    validation-state:
+      title: "Validation-State"
+      type: string
+      description: "Validation-state"
+      required: false
+    creation-time:
+      title: "Creation-Time"
+      type: creation_time_type
+      description: "Creation-time"
+      required: false
+    last-modifier:
+      title: "Last-Modifier"
+      type: string
+      description: "Last-modifier"
+      required: false
+    last-modify-time:
+      title: "Last-Modify-Time"
+      type: creation_time_type
+      description: "Last-modify-time"
+      required: false
+    lock:
+      title: "Lock"
+      type: string
+      description: "Lock"
+      required: false
+    creator:
+      title: "Creator"
+      type: string
+      description: "Creator"
+      required: false
+  objects_dictionary_type:
+    domain:
+      title: "Domain"
+      type: domain
+      description: "Domain"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    tags:
+      title: "Tags"
+      type: "[]object"
+      description: "Tags"
+      required: false
+    color:
+      title: "Color"
+      type: string
+      description: "Color"
+      required: false
+    comments:
+      title: "Comments"
+      type: string
+      description: "Comments"
+      required: false
+    meta-info:
+      title: "Meta-Info"
+      type: meta_info_type
+      description: "Meta-info"
+      required: false
+    port:
+      title: "Port"
+      type: string
+      description: "Port"
+      required: false
+    uid:
+      title: "Uid"
+      type: string
+      description: "Uid"
+      required: false
+    customFields:
+      title: "Custom Fields"
+      type: object
+      description: "Custom fields"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+    display-name:
+      title: "Display-Name"
+      type: string
+      description: "Display-name"
+      required: false
+    icon:
+      title: "Icon"
+      type: string
+      description: "Icon"
+      required: false
+  meta-info_0:
+    creation-time:
+      title: "Creation-Time"
+      type: creation_time_type
+      description: "Creation-time"
+      required: false
+    validation-state:
+      title: "Validation-State"
+      type: string
+      description: "Validation-state"
+      required: false
+    last-modifier:
+      title: "Last-Modifier"
+      type: string
+      description: "Last-modifier"
+      required: false
+    lock:
+      title: "Lock"
+      type: string
+      description: "Lock"
+      required: false
+    creator:
+      title: "Creator"
+      type: string
+      description: "Creator"
+      required: false
+    last-modify-time:
+      title: "Last-Modify-Time"
+      type: creation_time_type
+      description: "Last-modify-time"
+      required: false
+  track:
+    per-connection:
+      title: "Per-Connection"
+      type: boolean
+      description: "Per-connection"
+      required: false
+    accounting:
+      title: "Accounting"
+      type: boolean
+      description: "Accounting"
+      required: false
+    type:
+      title: "Type"
+      type: action_type
+      description: "Type"
+      required: false
+    per-session:
+      title: "Per-Session"
+      type: boolean
+      description: "Per-session"
+      required: false
+    alert:
+      title: "Alert"
+      type: string
+      description: "Alert"
+      required: false
+  rulebase_type:
+    objects-dictionary:
+      title: "Objects-Dictionary"
+      type: "[]objects_dictionary_type"
+      description: "Objects-dictionary"
+      required: false
+    from:
+      title: "From"
+      type: integer
+      description: "From"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    rulebase_array:
+      title: "Rulebase"
+      type: "[]objects_dictionary_type"
+      description: "Rulebase"
+      required: false
+    to:
+      title: "To"
+      type: integer
+      description: "To"
+      required: false
+    total:
+      title: "Total"
+      type: integer
+      description: "Total"
+      required: false
+    uid:
+      title: "Uid"
+      type: string
+      description: "Uid"
+      required: false
+  access_rule:
+    domain:
+      title: "Domain"
+      type: domain
+      description: "Domain"
+      required: false
+    uid:
+      title: "Uid"
+      type: string
+      description: "Uid"
+      required: false
+    custom-fields:
+      title: "Custom-Fields"
+      type: object
+      description: "Custom-fields"
+      required: false
+    layer:
+      title: "Layer"
+      type: string
+      description: "Layer"
+      required: false
+    content-direction:
+      title: "Content-Direction"
+      type: string
+      description: "Content-direction"
+      required: false
+    content-negate:
+      title: "Content-Negate"
+      type: boolean
+      description: "Content-negate"
+      required: false
+    source-negate:
+      title: "Source-Negate"
+      type: boolean
+      description: "Source-negate"
+      required: false
+    vpn:
+      title: "Vpn"
+      type: "[]action_type"
+      description: "Vpn"
+      required: false
+    service:
+      title: "Service"
+      type: "[]objects_dictionary_type"
+      description: "Service"
+      required: false
+    destination:
+      title: "Destination"
+      type: "[]action_type"
+      description: "Destination"
+      required: false
+    comments:
+      title: "Comments"
+      type: string
+      description: "Comments"
+      required: false
+    content:
+      title: "Content"
+      type: "[]action_type"
+      description: "Content"
+      required: false
+    source:
+      title: "Source"
+      type: "[]action_type"
+      description: "Source"
+      required: false
+    destination-negate:
+      title: "Destination-Negate"
+      type: boolean
+      description: "Destination-negate"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+    track:
+      title: "Track"
+      type: track
+      description: "Track"
+      required: false
+    time:
+      title: "Time"
+      type: "[]action_type"
+      description: "Time"
+      required: false
+    install-on:
+      title: "Install-On"
+      type: "[]action_type"
+      description: "Install-on"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    service-negate:
+      title: "Service-Negate"
+      type: boolean
+      description: "Service-negate"
+      required: false
+    enabled:
+      title: "Enabled"
+      type: boolean
+      description: "Enabled"
+      required: false
+    meta-info:
+      title: "Meta-Info"
+      type: meta_info_type
+      description: "Meta-info"
+      required: false
+    action-settings:
+      title: "Action-Settings"
+      type: object
+      description: "Action-settings"
+      required: false
+    action:
+      title: "Action"
+      type: action_type
+      description: "Action"
+      required: false
+
 connection:
   username_password:
     type: credential_username_password
@@ -43,6 +400,29 @@ connection:
     default: true
 
 actions:
+  show_access_rulebase:
+    title: Show Access Rulebase
+    description: Show access rulebase
+    input:
+      layer_name:
+        title: Layer Name
+        description: Layer name
+        type: string
+        default: Network
+        required: true
+      limit:
+        title: Limit
+        description: Limit
+        type: int
+        default: 500
+        required: false
+    output:
+      access_rules:
+        title: Access Rules
+        description: Access rules
+        type: rulebase_type
+        required: false
+
   add_access_rule:
     title: Add Access Rule
     description: Create a rule to block traffic
@@ -100,7 +480,7 @@ actions:
       access_rule:
         title: Block Rule
         description: The rule that was created
-        type: object
+        type: access_rule
         required: true
   discard_all_sessions:
     title: Discard all Sessions
@@ -111,4 +491,3 @@ actions:
         description: Success
         type: boolean
         required: true
-

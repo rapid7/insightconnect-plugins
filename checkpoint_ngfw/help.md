@@ -29,19 +29,22 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-#### Discard all Sessions
+#### Show Access Rulebase
 
-This action is used to troubleshooting action to discard all other user sessions.
+This action is used to show access rulebase.
 
 ##### Input
 
-_This action does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|layer_name|string|Network|True|Layer name|None|
+|limit|int|500|False|Limit|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|True|Success|
+|access_rules|rulebase_type|False|Access rules|
 
 Example output:
 
@@ -67,7 +70,7 @@ This action is used to create a rule to block traffic.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|access_rule|object|True|The rule that was created|
+|access_rule|access_rule|True|The rule that was created|
 
 Example output:
 
@@ -220,6 +223,28 @@ Example output:
       }
     }
   ]
+}
+```
+
+#### Discard all Sessions
+
+This action is used to troubleshooting action to discard all other user sessions.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success|
+
+Example output:
+
+```
+{
+  "success": True
 }
 ```
 
