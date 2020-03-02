@@ -26,8 +26,8 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |credentials|credential_username_password|None|True|Username and password|None|
-|verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting PAN-OS over HTTPS|None|
 |server|string|None|True|URL pointing to instance of PAN-OS|None|
+|verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting PAN-OS over HTTPS|None|
 
 ## Technical Details
 
@@ -41,22 +41,22 @@ This action is used to create a new security policy rule.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|negate_source|boolean|None|True|Negate source|None|
+|action|string|None|True|Action that will occur if an event meets the rule definitions|None|
+|application|string|None|True|Applications for which this rule will be applied e.g. adobe-cloud, dropbox,  any|None|
 |description|string|None|True|Description of the rule and what it does|None|
-|disabled|boolean|None|True|If true, rule is disabled|None|
-|rule_name|string|None|True|Name of the rule|None|
-|src_zone|string|None|True|Zone in which the traffic originated e.g. server zone, any|None|
-|negate_destination|boolean|None|True|Negate destination|None|
-|dst_zone|string|None|True|Zone which the traffic is going to e.g. server zone, any|None|
-|log_start|boolean|None|True|Generates a traffic log entry for the start of a session|None|
+|destination|string|None|True|Destinations for which this rule will be applied e.g. 10.0.0.1, computername, any|None|
 |disable_server_response_inspection|boolean|None|True|If true, PAN-OS will not inspect this traffic|None|
+|disabled|boolean|None|True|If true, rule is disabled|None|
+|dst_zone|string|None|True|Zone which the traffic is going to e.g. server zone, any|None|
+|log_end|boolean|None|True|Generates a traffic log entry for the end of a session|None|
+|log_start|boolean|None|True|Generates a traffic log entry for the start of a session|None|
+|negate_destination|boolean|None|True|Negate destination|None|
+|negate_source|boolean|None|True|Negate source|None|
+|rule_name|string|None|True|Name of the rule|None|
 |service|string|None|True|Service type for which this rule will be applied e.g. HTTP, HTTPS, any|None|
 |source|string|None|True|Sources for which this rule will be applied e.g. 10.0.0.1, computername, any|None|
-|destination|string|None|True|Destinations for which this rule will be applied e.g. 10.0.0.1, computername, any|None|
 |source_user|string|None|True|User that the network traffic originated from e.g. Joe Smith, any|None|
-|application|string|None|True|Applications for which this rule will be applied e.g. adobe-cloud, dropbox,  any|None|
-|action|string|None|True|Action that will occur if an event meets the rule definitions|None|
-|log_end|boolean|None|True|Generates a traffic log entry for the end of a session|None|
+|src_zone|string|None|True|Zone in which the traffic originated e.g. server zone, any|None|
 
 ##### Output
 
@@ -85,8 +85,8 @@ This action is used to create a new object.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|xpath|string|None|True|Xpath location to create the new object|None|
 |element|string|None|True|XML representation of the object to be created|None|
+|xpath|string|None|True|Xpath location to create the new object|None|
 
 ##### Output
 
@@ -163,8 +163,8 @@ This action is used to edit an existing object.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|xpath|string|None|True|Xpath location of the object to edit|None|
 |element|string|None|True|XML representation of the updated object. This replaces the previous object entirely, any unchanged attributes must be restated|None|
+|xpath|string|None|True|Xpath location of the object to edit|None|
 
 ##### Output
 
@@ -259,13 +259,13 @@ This action is used to query firewall logs.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|count|integer|20|False|Number of logs (nlogs) to retrieve (Max 500), (Default: 20)|None|
-|filter|string|None|False|Search query. Format as a log filter expression|None|
+|count|integer|20|False|Number of logs to retrieve (Max: 500, Default: 20)|None|
 |direction|string|None|False|Order in which to return the logs|['backward', 'forward']|
+|filter|string|None|False|Search query. Format as a log filter expression|None|
+|interval|float|None|False|Time interval in seconds to wait between queries for commit job completion (Default: 0.5)|None|
+|log_type|string|None|False|Type of log to retrieve|['config', 'hipmatch', 'system', 'threat', 'traffic', 'url', 'wildfire']|
 |max_tries|integer|25|False|Maximum number of times to poll for job completion before timing out (Default: 25)|None|
-|skip|integer|0|False|Log retrieval offset, number of entries to skip (Default: 0)|None|
-|interval|float|0.5|False|Time interval in seconds to wait between queries for commit job completion (Default: 0.5)|None|
-|log-type|string|None|False|Type of log to retrieve|['config', 'hipmatch', 'system', 'threat', 'traffic', 'url', 'wildfire']|
+|skip|integer|0|False|Log retrieval offset, number of entries to skip, (Default: 0)|None|
 
 ##### Output
 
@@ -326,7 +326,7 @@ This action is used to commit the candidate configuration.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|action|string|commit-all|False|Commit action. (Default: 'commit-all')|None|
+|action|string|commit-all|False|Commit action (Default: 'commit-all')|None|
 |cmd|string|None|True|XML specifying any commit arguments|None|
 
 ##### Output
@@ -417,24 +417,26 @@ This action is used to add a rule to a PAN-OS security policy.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|rule_name|string|None|True|Name of the rule|None|
-|update_active_or_candidate_configuration|string|None|True|Will apply the update to the active or candidate configuration. If active is chosen any uncommitted candidate configuration will be lost|['active', 'candidate']|
-|source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|
-|destination|string|None|False|A destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|
-|service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, or any|None|
+|action|string|None|False|Action that will occur if an event meets the rule definitions|None|
 |application|string|None|False|Application for which this rule will be applied e.g. adobe-cloud, dropbox, or  any|None|
+|destination|string|None|False|A destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|
+|dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|
+|hip_profiles|string|None|False|Host information profile|None|
+|rule_name|string|None|True|Name of the rule|None|
+|service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, or any|None|
+|source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|
 |source_user|string|None|False|User that the network traffic originated from e.g. Joe Smith, or any|None|
 |src_zone|string|None|False|Zone in which the traffic originated e.g. server zone, or any|None|
-|dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|
+|update_active_or_candidate_configuration|string|None|True|Will apply the update to the active or candidate configuration. If active is chosen any uncommitted candidate configuration will be lost|['active', 'candidate']|
 |url_category|string|None|False|The URL category e.g. adult|None|
-|hip_profiles|string|None|False|Host information profile|None|
-|action|string|None|False|Action that will occur if an event meets the rule definitions|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|config|False|Response from PAN-OS|
+|code|string|False|Response code from PAN-OS|
+|message|string|False|A message with more detail about the status|
+|status|string|False|Status of the requested operation e.g. success, error, etc|
 
 Example output:
 
@@ -454,24 +456,26 @@ This action is used to remove a rule from a PAN-OS security policy.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|rule_name|string|None|True|Name of the rule|None|
-|update_active_or_candidate_configuration|string|None|True|Will apply the update to the active or candidate configuration. If active is chosen any uncommitted candidate configuration will be lost|['active', 'candidate']|
-|source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|
-|destination|string|None|False|A Destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|
-|service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, any|None|
+|action|string|None|False|The action that will occur if an event meets the rule definitions|None|
 |application|string|None|False|Application for which this rule will be applied e.g. adobe-cloud, dropbox, or any|None|
+|destination|string|None|False|A Destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|
+|dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|
+|hip_profiles|string|None|False|Host information profile|None|
+|rule_name|string|None|True|Name of the rule|None|
+|service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, any|None|
+|source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|
 |source_user|string|None|False|User that the network traffic originated from e.g. Joe Smith, or any|None|
 |src_zone|string|None|False|Zone in which the traffic originated e.g. server zone, or any|None|
-|dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|
+|update_active_or_candidate_configuration|string|None|True|Will apply the update to the active or candidate configuration. If active is chosen any uncommitted candidate configuration will be lost|['active', 'candidate']|
 |url_category|string|None|False|The URL category e.g. adult|None|
-|hip_profiles|string|None|False|Host information profile|None|
-|action|string|None|False|The action that will occur if an event meets the rule definitions|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|config|False|Response from PAN-OS|
+|code|string|False|Response code from PAN-OS|
+|message|string|False|A message with more detail about the status|
+|status|string|False|Status of the requested operation e.g. success, error, etc|
 
 Example output:
 
@@ -492,21 +496,21 @@ This action is used to add an external dynamic list.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|source|string|None|True|The web site you will pull the list from e.g. http://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt|None|
-|repeat|string|None|True|The interval at which to retrieve updates from the list|['Five Minute', 'Hourly', 'Daily', 'Weekly']|
-|name|string|None|True|An arbitrary name for the list. This name will be used to identify the list in PAN-OS|None|
-|list_type|string|None|True|The type of list|['IP List', 'Domain List', 'URL List']|
-|time|string|None|True|If repeat is daily or weekly, choose an hour on a 24 hour clock to update (Default: '')|['', '00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']|
-|day|string|None|True|If repeat is weekly, choose a day to update|['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']|
+|day|string||True|If repeat is weekly, choose a day to update|['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']|
 |description|string|None|True|A description of the list|None|
+|list_type|string|None|True|The type of list|['IP List', 'Domain List', 'URL List']|
+|name|string|None|True|An arbitrary name for the list. This name will be used to identify the list in PAN-OS|None|
+|repeat|string|None|True|The interval at which to retrieve updates from the list|['Five Minute', 'Hourly', 'Daily', 'Weekly']|
+|source|string|None|True|The web site you will pull the list from e.g. http://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt|None|
+|time|string||True|If repeat is daily or weekly, choose an hour on a 24 hour clock to update (Default: '')|['', '00', '01', '02', '03', '04', '05', '06', '07', 8, 9, '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|The status of the requested operation e.g. success, error, etc|
-|message|string|False|A message with more detail about the status|
 |code|string|False|Response code from PAN-OS|
+|message|string|False|A message with more detail about the status|
+|status|string|False|The status of the requested operation e.g. success, error, etc|
 
 Example output:
 
@@ -527,18 +531,18 @@ This action is used to create a new address object.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|The IP-Netmask, IP-Range, or FQDN e.g. 192.168.1.0/24, 10.0.0.1-10.0.0.12, google.com|None|
-|type|string|None|True|The type of address object to create|['IP-Netmask', 'IP-Range', 'FQDN']|
-|object_name|string|None|True|The name of the address object|None|
 |object_description|string|None|False|A description for the address object|None|
+|object_name|string|None|True|The name of the address object|None|
 |tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|
+|type|string|None|True|The type of address object to create|['IP-Netmask', 'IP-Range', 'FQDN']|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|The status of the requested operation e.g. success, error, etc|
 |code|string|False|Response code from PAN-OS|
 |message|string|False|A message with more detail about the status|
+|status|string|False|The status of the requested operation e.g. success, error, etc|
 
 Example output:
 
@@ -572,6 +576,8 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+
+* 1.5.6 - Fix issue where edit action was causing an error with certain input
 * 1.5.5 - New spec and help.md format for the Hub
 * 1.5.4 - Fix issue where new plugin version was causing SSL to fail
 * 1.5.3 - Fix issue where undefined objects in security configurations caused actions to crash | Add debug logging to assist with future troubleshooting | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
