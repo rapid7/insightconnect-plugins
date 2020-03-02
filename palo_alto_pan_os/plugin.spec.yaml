@@ -5,7 +5,7 @@ name: palo_alto_pan_os
 title: Palo Alto PAN-OS
 description: Manage Palo Alto Networks devices via PAN-OS
 version: 1.5.6
-vendor: jared
+vendor: rapid7-custom
 support: rapid7
 status: []
 resources:
@@ -388,7 +388,7 @@ actions:
         type: string
         required: false
       hip_profiles:
-        title: HIP profiles
+        title: HIP Profiles
         description: Host information profile
         type: string
         required: false
@@ -477,7 +477,7 @@ actions:
         type: string
         required: false
       hip_profiles:
-        title: HIP profiles
+        title: HIP Profiles
         description: Host information profile
         type: string
         required: false
@@ -507,7 +507,7 @@ actions:
     description: Add an external dynamic list
     input:
       name:
-        title: The name of the list
+        title: The Name of the List
         description: An arbitrary name for the list. This name will be used to identify
           the list in PAN-OS
         type: string
