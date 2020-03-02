@@ -1,20 +1,12 @@
 {
     "body": {
         "action": "edit",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "server": null,
-            "verify_cert": null
-        },
         "input": {
-            "element": "",
-            "xpath": ""
+            "element": "<disabled>no</disabled>",
+            "xpath": "$XPATH/disabled"
         },
         "meta": {}
-    },
+    },  
     "type": "action_start",
     "version": "v1"
 }

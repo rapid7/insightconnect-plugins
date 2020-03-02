@@ -5,7 +5,7 @@ from komand_palo_alto_pan_os import connection, actions, triggers
 
 
 Name = "Palo Alto PAN-OS"
-Vendor = "rapid7"
+Vendor = "jared"
 Version = "1.5.6"
 Description = "Manage Palo Alto Networks devices via PAN-OS"
 

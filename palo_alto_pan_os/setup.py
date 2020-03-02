@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="palo_alto_pan_os-rapid7-plugin",
+setup(name="palo_alto_pan_os-jared-plugin",
       version="1.5.6",
       description="Manage Palo Alto Networks devices via PAN-OS",
-      author="rapid7",
+      author="jared",
       author_email="",
       url="",
       packages=find_packages(),
