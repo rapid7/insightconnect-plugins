@@ -31,6 +31,7 @@ class SearchDb(komand.Action):
         base_url = f'https://www.rapid7.com/db/search?utf8=%E2%9C%93&q={search}&t={db}'
         vuldb_browser = browser.VulnDBBrowser(data_base)
         results = vuldb_browser.scrape_vuldb(base_url, xpath)
+        print(f"RESULTS: {results}")
         if results['results']:
             return {Output.SEARCH_RESULTS: results['results'], Output.RESULTS_FOUND: results['found']}
         else:
