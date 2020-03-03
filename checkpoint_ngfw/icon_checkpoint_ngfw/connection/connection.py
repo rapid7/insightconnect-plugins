@@ -100,6 +100,32 @@ class Connection(komand.Connection):
 
         self.get_sid()
 
+    def post_and_publish(self, headers, discard_other_sessions, payload, url):
+        result = requests.post(url, headers=headers, json=payload, verify=self.connection.ssl_verify)
+        # This gets odd. If you try to publish a change while someone else is working on a change it will fail
+        # I give the user an option to discard all sessions, however, I don't want to do that unless I have to
+        # as it's an expensive operation (could take a couple minutes)
+        # So, try to make the change, if it's locked, see if we need to discard all sessions and try to make the
+        # call again.
+        try:
+            result.raise_for_status()
+        except Exception as e:
+            self.logger.warning(result.text)
+            if "object is locked" in result.text:
+                if discard_other_sessions:
+                    self.discard_all_sessions()
+                    result = requests.post(url, headers=headers, json=payload, verify=self.ssl_verify)
+
+            # try to see if we still have a bad request
+            try:
+                result.raise_for_status()
+            except Exception as e:
+                raise PluginException(cause=f"Call to {url} failed.",
+                                      assistance=result.text,
+                                      data=e)
+        self.publish()
+        return result
+
     def test(self):
         if not self.sid:
             raise ConnectionTestException(cause=f"Unable to authenticate to the Checkpoint server at: "

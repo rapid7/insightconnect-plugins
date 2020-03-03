@@ -20,32 +20,10 @@ class RemoveAccessRule(komand.Action):
             "name": params.get(Input.ACCESS_RULE_NAME),
             "layer": params.get(Input.LAYER)
         }
+        discard_other_sessions = params.get(Input.DISCARD_OTHER_SESSIONS, False)
 
-        result = requests.post(url, headers=headers, json=payload, verify=self.connection.ssl_verify)
+        result = self.connection.post_and_publish(headers, discard_other_sessions, payload, url)
 
-        # This gets odd. If you try to publish a change while someone else is working on a change it will fail
-        # I give the user an option to discard all sessions, however, I don't want to do that unless I have to
-        # as it's an expensive operation (could take a couple minutes)
-        # So, try to make the change, if it's locked, see if we need to discard all sessions and try to make the
-        # call again.
-        try:
-            result.raise_for_status()
-        except Exception as e:
-            self.logger.warning(result.text)
-            if "object is locked" in result.text:
-                if params.get(Input.DISCARD_OTHER_SESSIONS):
-                    self.connection.discard_all_sessions()
-                    result = requests.post(url, headers=headers, json=payload, verify=self.connection.ssl_verify)
-
-            # try to see if we still have a bad request
-            try:
-                result.raise_for_status()
-            except Exception as e:
-                raise PluginException(cause=f"Create rule {params.get(Input.NAME)} failed.",
-                                      assistance=result.text,
-                                      data=e)
-
-        self.connection.publish()
         message = result.json().get("message")
         success = 'OK' == message
 
