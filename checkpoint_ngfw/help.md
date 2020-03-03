@@ -44,7 +44,7 @@ This action is used to remove Host from network objects.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|message|string|True||
+|message|string|True|Remove operation status|
 |success|boolean|True|Success|
 
 Example output:
@@ -72,7 +72,7 @@ This action is used to add Host as a network object.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|host_object|host_object|True||
+|host_object|host_object|True|Information about the host that was added|
 
 Example output:
 
@@ -132,7 +132,7 @@ This action is used to remove access rule.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|message|string|True||
+|message|string|True|Remove operation status|
 |success|boolean|True|Success|
 
 Example output:
@@ -358,13 +358,13 @@ This action is used to create a rule to block traffic.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |action|string|Drop|True|Action to take|['Accept', 'Drop', 'Ask', 'Inform', 'Reject', 'User Auth', 'Client Auth', 'Apply Layer']|
-|destination|string|None|False||None|
+|destination|string|None|False|Destination network object name|None|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
 |layer|string|Network|True|Layer to add this rule to|None|
 |list_of_services|[]string|None|True|List of services to block. e.g. ["AOL", "SMTP"]|None|
 |name|string|None|True|Rule name|None|
 |position|string|top|True|Postion in the list of rules. e.g. top, bottom, 15|None|
-|source|string|None|False||None|
+|source|string|None|False|Source network object name|None|
 
 ##### Output
 
@@ -554,7 +554,138 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### access_rule
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Action|action_type|False|Action|
+|Action-Settings|object|False|Action-settings|
+|Comments|string|False|Comments|
+|Content|[]action_type|False|Content|
+|Content-Direction|string|False|Content-direction|
+|Content-Negate|boolean|False|Content-negate|
+|Custom-Fields|object|False|Custom-fields|
+|Destination|[]action_type|False|Destination|
+|Destination-Negate|boolean|False|Destination-negate|
+|Domain|domain|False|Domain|
+|Enabled|boolean|False|Enabled|
+|Install-On|[]action_type|False|Install-on|
+|Layer|string|False|Layer|
+|Meta-Info|meta_info_type|False|Meta-info|
+|Name|string|False|Name|
+|Service|[]objects_dictionary_type|False|Service|
+|Service-Negate|boolean|False|Service-negate|
+|Source|[]action_type|False|Source|
+|Source-Negate|boolean|False|Source-negate|
+|Time|[]action_type|False|Time|
+|Track|track|False|Track|
+|Type|string|False|Type|
+|UID|string|False|UID|
+|VPN|[]action_type|False|VPN|
+
+#### action_type
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Domain|domain|False|Domain|
+|Name|string|False|Name|
+|Type|string|False|Type|
+|UID|string|False|UID|
+
+#### creation_time_type
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ISO-8601|string|False|ISO-8601|
+|POSIX|integer|False|POSIX|
+
+#### domain
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Domain-Type|string|False|Domain-type|
+|Name|string|False|Name|
+|UID|string|False|UID|
+
+#### host_object
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Color|string|False|Color|
+|Comments|string|False|Comments|
+|Domain|domain|False|Domain|
+|Groups|[]object|False|Groups|
+|Icon|string|False|Icon|
+|Interfaces|[]object|False|Interfaces|
+|IPv4-Address|string|False|IPv4-address|
+|Meta-Info|meta_info_type|False|Meta-info|
+|Name|string|False|Name|
+|NAT-Settings|object|False|NAT-settings|
+|Read-Only|boolean|False|Read-only|
+|Tags|[]object|False|Tags|
+|Type|string|False|Type|
+|UID|string|False|UID|
+
+#### meta-info_0
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Creation-Time|creation_time_type|False|Creation-time|
+|Creator|string|False|Creator|
+|Last-Modifier|string|False|Last-modifier|
+|Last-Modify-Time|creation_time_type|False|Last-modify-time|
+|Lock|string|False|Lock|
+|Validation-State|string|False|Validation-state|
+
+#### meta_info_type
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Creation-Time|creation_time_type|False|Creation-time|
+|Creator|string|False|Creator|
+|Last-Modifier|string|False|Last-modifier|
+|Last-Modify-Time|creation_time_type|False|Last-modify-time|
+|Lock|string|False|Lock|
+|Validation-State|string|False|Validation-state|
+
+#### objects_dictionary_type
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Color|string|False|Color|
+|Comments|string|False|Comments|
+|Custom Fields|object|False|Custom fields|
+|Display-Name|string|False|Display-name|
+|Domain|domain|False|Domain|
+|Icon|string|False|Icon|
+|Meta-Info|meta_info_type|False|Meta-info|
+|Name|string|False|Name|
+|Port|string|False|Port|
+|Tags|[]object|False|Tags|
+|Type|string|False|Type|
+|UID|string|False|UID|
+
+#### rulebase_type
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|From|integer|False|From|
+|Name|string|False|Name|
+|Objects-Dictionary|[]objects_dictionary_type|False|Objects-dictionary|
+|Rulebase|[]objects_dictionary_type|False|Rulebase|
+|To|integer|False|To|
+|Total|integer|False|Total|
+|UID|string|False|UID|
+
+#### track
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Accounting|boolean|False|Accounting|
+|Alert|string|False|Alert|
+|Per-Connection|boolean|False|Per-connection|
+|Per-Session|boolean|False|Per-session|
+|Type|action_type|False|Type|
 
 ## Troubleshooting
 

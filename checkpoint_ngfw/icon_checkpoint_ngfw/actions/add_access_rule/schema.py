@@ -48,6 +48,7 @@ class AddAccessRuleInput(komand.Input):
     "destination": {
       "type": "string",
       "title": "Destination",
+      "description": "Destination network object name",
       "order": 5
     },
     "discard_other_sessions": {
@@ -89,6 +90,7 @@ class AddAccessRuleInput(komand.Input):
     "source": {
       "type": "string",
       "title": "Source",
+      "description": "Source network object name",
       "order": 4
     }
   },
@@ -280,14 +282,14 @@ class AddAccessRuleOutput(komand.Output):
         },
         "uid": {
           "type": "string",
-          "title": "Uid",
-          "description": "Uid",
+          "title": "UID",
+          "description": "UID",
           "order": 2
         },
         "vpn": {
           "type": "array",
-          "title": "Vpn",
-          "description": "Vpn",
+          "title": "VPN",
+          "description": "VPN",
           "items": {
             "$ref": "#/definitions/action_type"
           },
@@ -319,8 +321,8 @@ class AddAccessRuleOutput(komand.Output):
             },
             "uid": {
               "type": "string",
-              "title": "Uid",
-              "description": "Uid",
+              "title": "UID",
+              "description": "UID",
               "order": 4
             }
           },
@@ -343,8 +345,8 @@ class AddAccessRuleOutput(komand.Output):
                 },
                 "uid": {
                   "type": "string",
-                  "title": "Uid",
-                  "description": "Uid",
+                  "title": "UID",
+                  "description": "UID",
                   "order": 3
                 }
               }
@@ -357,14 +359,14 @@ class AddAccessRuleOutput(komand.Output):
           "properties": {
             "iso-8601": {
               "type": "string",
-              "title": "Iso-8601",
-              "description": "Iso-8601",
+              "title": "ISO-8601",
+              "description": "ISO-8601",
               "order": 2
             },
             "posix": {
               "type": "integer",
-              "title": "Posix",
-              "description": "Posix",
+              "title": "POSIX",
+              "description": "POSIX",
               "order": 1
             }
           }
@@ -387,8 +389,8 @@ class AddAccessRuleOutput(komand.Output):
             },
             "uid": {
               "type": "string",
-              "title": "Uid",
-              "description": "Uid",
+              "title": "UID",
+              "description": "UID",
               "order": 3
             }
           }
@@ -441,14 +443,14 @@ class AddAccessRuleOutput(komand.Output):
               "properties": {
                 "iso-8601": {
                   "type": "string",
-                  "title": "Iso-8601",
-                  "description": "Iso-8601",
+                  "title": "ISO-8601",
+                  "description": "ISO-8601",
                   "order": 2
                 },
                 "posix": {
                   "type": "integer",
-                  "title": "Posix",
-                  "description": "Posix",
+                  "title": "POSIX",
+                  "description": "POSIX",
                   "order": 1
                 }
               }
@@ -530,8 +532,8 @@ class AddAccessRuleOutput(komand.Output):
             },
             "uid": {
               "type": "string",
-              "title": "Uid",
-              "description": "Uid",
+              "title": "UID",
+              "description": "UID",
               "order": 8
             }
           },
@@ -542,14 +544,14 @@ class AddAccessRuleOutput(komand.Output):
               "properties": {
                 "iso-8601": {
                   "type": "string",
-                  "title": "Iso-8601",
-                  "description": "Iso-8601",
+                  "title": "ISO-8601",
+                  "description": "ISO-8601",
                   "order": 2
                 },
                 "posix": {
                   "type": "integer",
-                  "title": "Posix",
-                  "description": "Posix",
+                  "title": "POSIX",
+                  "description": "POSIX",
                   "order": 1
                 }
               }
@@ -572,8 +574,8 @@ class AddAccessRuleOutput(komand.Output):
                 },
                 "uid": {
                   "type": "string",
-                  "title": "Uid",
-                  "description": "Uid",
+                  "title": "UID",
+                  "description": "UID",
                   "order": 3
                 }
               }
@@ -626,14 +628,14 @@ class AddAccessRuleOutput(komand.Output):
                   "properties": {
                     "iso-8601": {
                       "type": "string",
-                      "title": "Iso-8601",
-                      "description": "Iso-8601",
+                      "title": "ISO-8601",
+                      "description": "ISO-8601",
                       "order": 2
                     },
                     "posix": {
                       "type": "integer",
-                      "title": "Posix",
-                      "description": "Posix",
+                      "title": "POSIX",
+                      "description": "POSIX",
                       "order": 1
                     }
                   }
@@ -702,8 +704,8 @@ class AddAccessRuleOutput(komand.Output):
                 },
                 "uid": {
                   "type": "string",
-                  "title": "Uid",
-                  "description": "Uid",
+                  "title": "UID",
+                  "description": "UID",
                   "order": 4
                 }
               },
@@ -726,8 +728,8 @@ class AddAccessRuleOutput(komand.Output):
                     },
                     "uid": {
                       "type": "string",
-                      "title": "Uid",
-                      "description": "Uid",
+                      "title": "UID",
+                      "description": "UID",
                       "order": 3
                     }
                   }
@@ -752,8 +754,8 @@ class AddAccessRuleOutput(komand.Output):
                 },
                 "uid": {
                   "type": "string",
-                  "title": "Uid",
-                  "description": "Uid",
+                  "title": "UID",
+                  "description": "UID",
                   "order": 3
                 }
               }
@@ -786,8 +788,8 @@ class AddAccessRuleOutput(komand.Output):
         },
         "uid": {
           "type": "string",
-          "title": "Uid",
-          "description": "Uid",
+          "title": "UID",
+          "description": "UID",
           "order": 4
         }
       },
@@ -810,8 +812,8 @@ class AddAccessRuleOutput(komand.Output):
             },
             "uid": {
               "type": "string",
-              "title": "Uid",
-              "description": "Uid",
+              "title": "UID",
+              "description": "UID",
               "order": 3
             }
           }
@@ -824,14 +826,14 @@ class AddAccessRuleOutput(komand.Output):
       "properties": {
         "iso-8601": {
           "type": "string",
-          "title": "Iso-8601",
-          "description": "Iso-8601",
+          "title": "ISO-8601",
+          "description": "ISO-8601",
           "order": 2
         },
         "posix": {
           "type": "integer",
-          "title": "Posix",
-          "description": "Posix",
+          "title": "POSIX",
+          "description": "POSIX",
           "order": 1
         }
       }
@@ -854,8 +856,8 @@ class AddAccessRuleOutput(komand.Output):
         },
         "uid": {
           "type": "string",
-          "title": "Uid",
-          "description": "Uid",
+          "title": "UID",
+          "description": "UID",
           "order": 3
         }
       }
@@ -908,14 +910,14 @@ class AddAccessRuleOutput(komand.Output):
           "properties": {
             "iso-8601": {
               "type": "string",
-              "title": "Iso-8601",
-              "description": "Iso-8601",
+              "title": "ISO-8601",
+              "description": "ISO-8601",
               "order": 2
             },
             "posix": {
               "type": "integer",
-              "title": "Posix",
-              "description": "Posix",
+              "title": "POSIX",
+              "description": "POSIX",
               "order": 1
             }
           }
@@ -997,8 +999,8 @@ class AddAccessRuleOutput(komand.Output):
         },
         "uid": {
           "type": "string",
-          "title": "Uid",
-          "description": "Uid",
+          "title": "UID",
+          "description": "UID",
           "order": 8
         }
       },
@@ -1009,14 +1011,14 @@ class AddAccessRuleOutput(komand.Output):
           "properties": {
             "iso-8601": {
               "type": "string",
-              "title": "Iso-8601",
-              "description": "Iso-8601",
+              "title": "ISO-8601",
+              "description": "ISO-8601",
               "order": 2
             },
             "posix": {
               "type": "integer",
-              "title": "Posix",
-              "description": "Posix",
+              "title": "POSIX",
+              "description": "POSIX",
               "order": 1
             }
           }
@@ -1039,8 +1041,8 @@ class AddAccessRuleOutput(komand.Output):
             },
             "uid": {
               "type": "string",
-              "title": "Uid",
-              "description": "Uid",
+              "title": "UID",
+              "description": "UID",
               "order": 3
             }
           }
@@ -1093,14 +1095,14 @@ class AddAccessRuleOutput(komand.Output):
               "properties": {
                 "iso-8601": {
                   "type": "string",
-                  "title": "Iso-8601",
-                  "description": "Iso-8601",
+                  "title": "ISO-8601",
+                  "description": "ISO-8601",
                   "order": 2
                 },
                 "posix": {
                   "type": "integer",
-                  "title": "Posix",
-                  "description": "Posix",
+                  "title": "POSIX",
+                  "description": "POSIX",
                   "order": 1
                 }
               }
@@ -1169,8 +1171,8 @@ class AddAccessRuleOutput(komand.Output):
             },
             "uid": {
               "type": "string",
-              "title": "Uid",
-              "description": "Uid",
+              "title": "UID",
+              "description": "UID",
               "order": 4
             }
           },
@@ -1193,8 +1195,8 @@ class AddAccessRuleOutput(komand.Output):
                 },
                 "uid": {
                   "type": "string",
-                  "title": "Uid",
-                  "description": "Uid",
+                  "title": "UID",
+                  "description": "UID",
                   "order": 3
                 }
               }
@@ -1219,8 +1221,8 @@ class AddAccessRuleOutput(komand.Output):
             },
             "uid": {
               "type": "string",
-              "title": "Uid",
-              "description": "Uid",
+              "title": "UID",
+              "description": "UID",
               "order": 3
             }
           }

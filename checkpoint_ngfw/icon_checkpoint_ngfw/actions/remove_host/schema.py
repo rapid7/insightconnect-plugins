@@ -57,6 +57,7 @@ class RemoveHostOutput(komand.Output):
     "message": {
       "type": "string",
       "title": "Message",
+      "description": "Remove operation status",
       "order": 1
     },
     "success": {

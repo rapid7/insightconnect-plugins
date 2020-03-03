@@ -32,9 +32,9 @@ types:
       description: "Name"
       required: false
     uid:
-      title: "Uid"
+      title: "UID"
       type: string
-      description: "Uid"
+      description: "UID"
       required: false
   action_type:
     domain:
@@ -53,20 +53,20 @@ types:
       description: "Name"
       required: false
     uid:
-      title: "Uid"
+      title: "UID"
       type: string
-      description: "Uid"
+      description: "UID"
       required: false
   creation_time_type:
     posix:
-      title: "Posix"
+      title: "POSIX"
       type: integer
-      description: "Posix"
+      description: "POSIX"
       required: false
     iso-8601:
-      title: "Iso-8601"
+      title: "ISO-8601"
       type: string
-      description: "Iso-8601"
+      description: "ISO-8601"
       required: false
   meta_info_type:
     validation-state:
@@ -136,9 +136,9 @@ types:
       description: "Port"
       required: false
     uid:
-      title: "Uid"
+      title: "UID"
       type: string
-      description: "Uid"
+      description: "UID"
       required: false
     customFields:
       title: "Custom Fields"
@@ -249,9 +249,9 @@ types:
       description: "Total"
       required: false
     uid:
-      title: "Uid"
+      title: "UID"
       type: string
-      description: "Uid"
+      description: "UID"
       required: false
   access_rule:
     domain:
@@ -260,9 +260,9 @@ types:
       description: "Domain"
       required: false
     uid:
-      title: "Uid"
+      title: "UID"
       type: string
-      description: "Uid"
+      description: "UID"
       required: false
     custom-fields:
       title: "Custom-Fields"
@@ -290,9 +290,9 @@ types:
       description: "Source-negate"
       required: false
     vpn:
-      title: "Vpn"
+      title: "VPN"
       type: "[]action_type"
-      description: "Vpn"
+      description: "VPN"
       required: false
     service:
       title: "Service"
@@ -402,9 +402,9 @@ types:
       description: "Interfaces"
       required: false
     nat-settings:
-      title: "Nat-Settings"
+      title: "NAT-Settings"
       type: object
-      description: "Nat-settings"
+      description: "NAT-settings"
       required: false
     comments:
       title: "Comments"
@@ -422,14 +422,14 @@ types:
       description: "Groups"
       required: false
     uid:
-      title: "Uid"
+      title: "UID"
       type: string
-      description: "Uid"
+      description: "UID"
       required: false
     ipv4-address:
-      title: "Ipv4-Address"
+      title: "IPv4-Address"
       type: string
-      description: "Ipv4-address"
+      description: "IPv4-address"
       required: false
     type:
       title: "Type"
@@ -520,13 +520,13 @@ actions:
         order: 3
       source:
         title: Source
-        descripiton: Source network object name
+        description: Source network object name
         type: string
         required: false
         order: 4
       destination:
         title: Destination
-        descripiton: Destination network object name
+        description: Destination network object name
         type: string
         required: false
         order: 5
@@ -594,7 +594,7 @@ actions:
     output:
       message:
         title: Message
-        descripiton: Remove operation status
+        description: Remove operation status
         type: string
         required: true
       success:
@@ -629,7 +629,7 @@ actions:
     output:
       host_object:
         title: Host
-        descripiton: Information about the host that was added
+        description: Information about the host that was added
         type: host_object
         required: true
 
@@ -653,7 +653,7 @@ actions:
     output:
       message:
         title: Message
-        descripiton: Remove operation status
+        description: Remove operation status
         type: string
         required: true
       success:

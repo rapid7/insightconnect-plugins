@@ -64,6 +64,7 @@ class AddHostOutput(komand.Output):
     "host_object": {
       "$ref": "#/definitions/host_object",
       "title": "Host",
+      "description": "Information about the host that was added",
       "order": 1
     }
   },
@@ -77,14 +78,14 @@ class AddHostOutput(komand.Output):
       "properties": {
         "iso-8601": {
           "type": "string",
-          "title": "Iso-8601",
-          "description": "Iso-8601",
+          "title": "ISO-8601",
+          "description": "ISO-8601",
           "order": 2
         },
         "posix": {
           "type": "integer",
-          "title": "Posix",
-          "description": "Posix",
+          "title": "POSIX",
+          "description": "POSIX",
           "order": 1
         }
       }
@@ -107,8 +108,8 @@ class AddHostOutput(komand.Output):
         },
         "uid": {
           "type": "string",
-          "title": "Uid",
-          "description": "Uid",
+          "title": "UID",
+          "description": "UID",
           "order": 3
         }
       }
@@ -161,8 +162,8 @@ class AddHostOutput(komand.Output):
         },
         "ipv4-address": {
           "type": "string",
-          "title": "Ipv4-Address",
-          "description": "Ipv4-address",
+          "title": "IPv4-Address",
+          "description": "IPv4-address",
           "order": 11
         },
         "meta-info": {
@@ -179,8 +180,8 @@ class AddHostOutput(komand.Output):
         },
         "nat-settings": {
           "type": "object",
-          "title": "Nat-Settings",
-          "description": "Nat-settings",
+          "title": "NAT-Settings",
+          "description": "NAT-settings",
           "order": 6
         },
         "read-only": {
@@ -206,8 +207,8 @@ class AddHostOutput(komand.Output):
         },
         "uid": {
           "type": "string",
-          "title": "Uid",
-          "description": "Uid",
+          "title": "UID",
+          "description": "UID",
           "order": 10
         }
       },
@@ -218,14 +219,14 @@ class AddHostOutput(komand.Output):
           "properties": {
             "iso-8601": {
               "type": "string",
-              "title": "Iso-8601",
-              "description": "Iso-8601",
+              "title": "ISO-8601",
+              "description": "ISO-8601",
               "order": 2
             },
             "posix": {
               "type": "integer",
-              "title": "Posix",
-              "description": "Posix",
+              "title": "POSIX",
+              "description": "POSIX",
               "order": 1
             }
           }
@@ -248,8 +249,8 @@ class AddHostOutput(komand.Output):
             },
             "uid": {
               "type": "string",
-              "title": "Uid",
-              "description": "Uid",
+              "title": "UID",
+              "description": "UID",
               "order": 3
             }
           }
@@ -302,14 +303,14 @@ class AddHostOutput(komand.Output):
               "properties": {
                 "iso-8601": {
                   "type": "string",
-                  "title": "Iso-8601",
-                  "description": "Iso-8601",
+                  "title": "ISO-8601",
+                  "description": "ISO-8601",
                   "order": 2
                 },
                 "posix": {
                   "type": "integer",
-                  "title": "Posix",
-                  "description": "Posix",
+                  "title": "POSIX",
+                  "description": "POSIX",
                   "order": 1
                 }
               }
@@ -366,14 +367,14 @@ class AddHostOutput(komand.Output):
           "properties": {
             "iso-8601": {
               "type": "string",
-              "title": "Iso-8601",
-              "description": "Iso-8601",
+              "title": "ISO-8601",
+              "description": "ISO-8601",
               "order": 2
             },
             "posix": {
               "type": "integer",
-              "title": "Posix",
-              "description": "Posix",
+              "title": "POSIX",
+              "description": "POSIX",
               "order": 1
             }
           }
