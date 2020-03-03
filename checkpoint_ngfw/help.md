@@ -29,6 +29,25 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Discard All Sessions
+
+This action is used to troubleshooting action to discard all other user sessions.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success|
+
+Example output:
+
+```
+```
+
 #### Remove Host
 
 This action is used to remove Host from network objects.
@@ -523,28 +542,6 @@ Example output:
       }
     }
   ]
-}
-```
-
-#### Discard all Sessions
-
-This action is used to troubleshooting action to discard all other user sessions.
-
-##### Input
-
-_This action does not contain any inputs._
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Success|
-
-Example output:
-
-```
-{
-  "success": True
 }
 ```
 
