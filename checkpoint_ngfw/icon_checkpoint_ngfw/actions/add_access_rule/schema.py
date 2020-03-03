@@ -67,8 +67,8 @@ class AddAccessRuleInput(komand.Input):
     },
     "list_of_services": {
       "type": "array",
-      "title": "List of services",
-      "description": "List of services to block. e.g. [\\"AOL\\", \\"SMTP\\"]",
+      "title": "List of Services",
+      "description": "List of services to block e.g. [\\"AOL\\", \\"SMTP\\"]",
       "items": {
         "type": "string"
       },

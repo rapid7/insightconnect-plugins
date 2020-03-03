@@ -506,9 +506,9 @@ actions:
         required: true
         order: 1
       list_of_services:
-        title: List of services
+        title: List of Services
         type: "[]string"
-        description: List of services to block. e.g. ["AOL", "SMTP"]
+        description: List of services to block e.g. ["AOL", "SMTP"]
         required: true
         order: 2
       layer:
