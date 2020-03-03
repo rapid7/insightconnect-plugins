@@ -9,11 +9,13 @@ class Component:
 
 class Input:
     ACTION = "action"
+    DESTINATION = "destination"
     DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     LAYER = "layer"
     LIST_OF_SERVICES = "list_of_services"
     NAME = "name"
     POSITION = "position"
+    SOURCE = "source"
     
 
 class Output:
@@ -41,14 +43,19 @@ class AddAccessRuleInput(komand.Input):
         "Client Auth",
         "Apply Layer"
       ],
-      "order": 4
+      "order": 6
+    },
+    "destination": {
+      "type": "string",
+      "title": "Destination",
+      "order": 5
     },
     "discard_other_sessions": {
       "type": "boolean",
       "title": "Discard Other Sessions",
       "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
       "default": true,
-      "order": 6
+      "order": 8
     },
     "layer": {
       "type": "string",
@@ -77,7 +84,12 @@ class AddAccessRuleInput(komand.Input):
       "title": "Position",
       "description": "Postion in the list of rules. e.g. top, bottom, 15",
       "default": "top",
-      "order": 5
+      "order": 7
+    },
+    "source": {
+      "type": "string",
+      "title": "Source",
+      "order": 4
     }
   },
   "required": [

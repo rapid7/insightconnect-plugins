@@ -8,10 +8,12 @@ from icon_checkpoint_ngfw.actions.add_access_rule import AddAccessRule
 import json
 import logging
 
+
 # Get a real payload from file
 def read_file_to_string(filename):
     with open(filename) as my_file:
         return my_file.read()
+
 
 # This method will be used by the mock to replace requests.get
 def mocked_requests_post(*args, **kwargs):
@@ -78,7 +80,7 @@ class TestAddAccessRule(TestCase):
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
-        except Exception as e:
+        except Exception:
             message = """
             Could not find or read sample tests from /tests directory
             
@@ -86,7 +88,6 @@ class TestAddAccessRule(TestCase):
             Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
             """
             self.fail(message)
-
 
         test_conn.connect(connection_params)
         test_action.connection = test_conn
@@ -162,8 +163,8 @@ class TestAddAccessRule(TestCase):
 
         test_connection.connect(connection_params)
         test_action.connection = test_connection
-        with self.assertRaises(Exception): # When the add rule call is retried it will throw an exception
-            result = test_action.run(action_params)
+        with self.assertRaises(Exception):  # When the add rule call is retried it will throw an exception
+            test_action.run(action_params)
 
         # This asserts that we've called the mock with these arguments
         # specifically, I want to make sure we're calling the discard endpoint

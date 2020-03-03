@@ -45,7 +45,7 @@ class Connection(komand.Connection):
 
     def publish(self):
         url = f"{self.server_and_port}/web_api/publish"
-        payload = {} # Yes, the API requires an empty json object
+        payload = {}  # Yes, the API requires an empty json object
         headers = self.get_headers()
 
         request = requests.post(url, json=payload, headers=headers, verify=self.ssl_verify)
@@ -58,12 +58,26 @@ class Connection(komand.Connection):
                                   assistance=request.text,
                                   data=e)
 
+    def logout(self):
+        url = f"{self.server_and_port}/web_api/logout"
+        payload = {}
+        headers = self.get_headers()
+
+        request = requests.post(url, json=payload, headers=headers, verify=self.ssl_verify)
+        try:
+            request.raise_for_status()
+        except Exception as e:
+            # The errors returned by this api aren't very good
+            # It's a 400 with some error text.
+            raise PluginException(cause="There was problem logging out.",
+                                  assistance=request.text,
+                                  data=e)
+
     def get_headers(self):
         return {
             "Content-Type": "application/json",
             "X-chkp-sid": self.sid
         }
-
 
     def discard_all_sessions(self):
         """
@@ -75,7 +89,7 @@ class Connection(komand.Connection):
         url = f"{self.server_and_port}/web_api/show-sessions"
         headers = self.get_headers()
         payload = {
-            "limit": 20, # This will make 20 calls to the API at most, if you've got more open sessions than that you're in trouble
+            "limit": 20,  # This will make 20 calls to the API at most, if there are more sessions than that its trouble
             "view-published-sessions": False
         }
         request = requests.post(url, json=payload, headers=headers, verify=self.ssl_verify)
@@ -101,7 +115,7 @@ class Connection(komand.Connection):
         self.get_sid()
 
     def post_and_publish(self, headers, discard_other_sessions, payload, url):
-        result = requests.post(url, headers=headers, json=payload, verify=self.connection.ssl_verify)
+        result = requests.post(url, headers=headers, json=payload, verify=self.ssl_verify)
         # This gets odd. If you try to publish a change while someone else is working on a change it will fail
         # I give the user an option to discard all sessions, however, I don't want to do that unless I have to
         # as it's an expensive operation (could take a couple minutes)
@@ -109,7 +123,7 @@ class Connection(komand.Connection):
         # call again.
         try:
             result.raise_for_status()
-        except Exception as e:
+        except Exception:
             self.logger.warning(result.text)
             if "object is locked" in result.text:
                 if discard_other_sessions:
@@ -123,7 +137,10 @@ class Connection(komand.Connection):
                 raise PluginException(cause=f"Call to {url} failed.",
                                       assistance=result.text,
                                       data=e)
+
         self.publish()
+        self.logout()
+
         return result
 
     def test(self):

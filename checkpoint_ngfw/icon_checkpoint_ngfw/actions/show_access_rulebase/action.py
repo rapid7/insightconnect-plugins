@@ -4,6 +4,7 @@ from .schema import ShowAccessRulebaseInput, ShowAccessRulebaseOutput, Input, Ou
 import requests
 from komand.exceptions import PluginException
 
+
 class ShowAccessRulebase(komand.Action):
 
     def __init__(self):
@@ -32,6 +33,5 @@ class ShowAccessRulebase(komand.Action):
             raise PluginException(cause=f"Show Access Rules from {url} failed.\n",
                                   assistance=result.text + "\n",
                                   data=e)
-
 
         return {Output.ACCESS_RULES: komand.helper.clean(result.json())}

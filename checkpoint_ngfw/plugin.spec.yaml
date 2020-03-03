@@ -375,6 +375,78 @@ types:
       description: "Action"
       required: false
 
+  host_object:
+    domain:
+      title: "Domain"
+      type: domain
+      description: "Domain"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    tags:
+      title: "Tags"
+      type: "[]object"
+      description: "Tags"
+      required: false
+    color:
+      title: "Color"
+      type: string
+      description: "Color"
+      required: false
+    interfaces:
+      title: "Interfaces"
+      type: "[]object"
+      description: "Interfaces"
+      required: false
+    nat-settings:
+      title: "Nat-Settings"
+      type: object
+      description: "Nat-settings"
+      required: false
+    comments:
+      title: "Comments"
+      type: string
+      description: "Comments"
+      required: false
+    meta-info:
+      title: "Meta-Info"
+      type: meta_info_type
+      description: "Meta-info"
+      required: false
+    groups:
+      title: "Groups"
+      type: "[]object"
+      description: "Groups"
+      required: false
+    uid:
+      title: "Uid"
+      type: string
+      description: "Uid"
+      required: false
+    ipv4-address:
+      title: "Ipv4-Address"
+      type: string
+      description: "Ipv4-address"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+    read-only:
+      title: "Read-Only"
+      type: boolean
+      description: "Read-only"
+      required: false
+    icon:
+      title: "Icon"
+      type: string
+      description: "Icon"
+      required: false
+
 connection:
   username_password:
     type: credential_username_password
@@ -446,13 +518,25 @@ actions:
         required: true
         default: "Network"
         order: 3
+      source:
+        title: Source
+        descripiton: Source network object name
+        type: string
+        required: false
+        order: 4
+      destination:
+        title: Destination
+        descripiton: Destination network object name
+        type: string
+        required: false
+        order: 5
       action:
         title: Action
         type: string
         description: Action to take
         required: true
         default: Drop
-        order: 4
+        order: 6
         enum:
           - Accept
           - Drop
@@ -468,14 +552,14 @@ actions:
         description: Postion in the list of rules. e.g. top, bottom, 15
         required: true
         default: "top"
-        order: 5
+        order: 7
       discard_other_sessions:
         title: Discard Other Sessions
         type: boolean
         description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
         required: true
         default: true
-        order: 6
+        order: 8
     output:
       access_rule:
         title: Block Rule
@@ -500,6 +584,65 @@ actions:
         default: "Network"
         required: true
         order: 2
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        default: true
+        order: 3
+    output:
+      message:
+        title: Message
+        descripiton: Remove operation status
+        type: string
+        required: true
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+
+  add_host:
+    title: Add Host
+    description: Add Host as a network object
+    input:
+      name:
+        title: Name
+        description: Name
+        type: string
+        required: true
+        order: 1
+      host_ip:
+        title: Host IP
+        description: Host IP
+        type: string
+        required: true
+        order: 2
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        default: true
+        order: 3
+    output:
+      host_object:
+        title: Host
+        descripiton: Information about the host that was added
+        type: host_object
+        required: true
+
+  remove_host:
+    title: Remove Host
+    description: Remove Host from network objects
+    input:
+      name:
+        title: Name
+        description: Name
+        type: string
+        required: true
+        order: 1
       discard_other_sessions:
         title: Discard Other Sessions
         type: boolean

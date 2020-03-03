@@ -1,5 +1,5 @@
 import komand
-from .schema import DiscardAllSessionsInput, DiscardAllSessionsOutput, Input, Output, Component
+from .schema import DiscardAllSessionsInput, DiscardAllSessionsOutput, Output, Component
 # Custom imports below
 
 
@@ -14,4 +14,5 @@ class DiscardAllSessions(komand.Action):
 
     def run(self, params={}):
         self.connection.discard_all_sessions()
-        return {"success":True}
+        self.connection.logout()
+        return {Output.SUCCESS: True}

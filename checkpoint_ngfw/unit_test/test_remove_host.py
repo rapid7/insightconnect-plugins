@@ -4,13 +4,13 @@ sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from icon_checkpoint_ngfw.connection.connection import Connection
-from icon_checkpoint_ngfw.actions.show_access_rulebase import ShowAccessRulebase
+from icon_checkpoint_ngfw.actions.remove_host import RemoveHost
 import json
 import logging
 
 
-class TestShowAccessRulebase(TestCase):
-    def test_integration_show_access_rulebase(self):
+class TestRemoveHost(TestCase):
+    def test_integration_remove_host(self):
         """
         TODO: Implement assertions at the end of this test case
 
@@ -26,17 +26,17 @@ class TestShowAccessRulebase(TestCase):
 
         log = logging.getLogger("Test")
         test_conn = Connection()
-        test_action = ShowAccessRulebase()
+        test_action = RemoveHost()
 
         test_conn.logger = log
         test_action.logger = log
 
         try:
-            with open("../tests/show_access_rulebase.json") as file:
+            with open("../tests/remove_host.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
-        except Exception:
+        except Exception as e:
             message = """
             Could not find or read sample tests from /tests directory
             
@@ -45,13 +45,11 @@ class TestShowAccessRulebase(TestCase):
             """
             self.fail(message)
 
+
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        keys = results.keys()
+        expected = {'message': 'OK', 'success': True}
 
-        self.assertTrue("access_rules" in keys)
-
-        # Assert we have some rules, the rulebase should never be empty
-        self.assertTrue(len(results.get("access_rules").get("rulebase")) > 0)
+        self.assertEquals(expected, results)

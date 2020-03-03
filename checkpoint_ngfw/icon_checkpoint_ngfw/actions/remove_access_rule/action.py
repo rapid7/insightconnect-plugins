@@ -1,8 +1,7 @@
 import komand
 from .schema import RemoveAccessRuleInput, RemoveAccessRuleOutput, Input, Output, Component
 # Custom imports below
-import requests
-from komand.exceptions import PluginException
+
 
 class RemoveAccessRule(komand.Action):
 
