@@ -1,12 +1,12 @@
 {
   "body": {
     "action": "domain_ext",
-    "meta": {},
+    "connection": null,
     "input": {
       "domain": "",
       "query_type": "Related Samples"
     },
-    "connection": null
+    "meta": {}
   },
   "type": "action_start",
   "version": "v1"
