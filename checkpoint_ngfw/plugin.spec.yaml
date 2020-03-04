@@ -5,7 +5,7 @@ name: checkpoint_ngfw
 title: Checkpoint NGFW
 description: Check Point’s Next Generation Firewalls (NGFW’s) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks
 version: 1.0.0
-vendor: rapid7
+vendor: joey-test
 support: community
 status: []
 resources:

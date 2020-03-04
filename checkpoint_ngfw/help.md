@@ -4,7 +4,10 @@
 
 # Key Features
 
-Actions and triggers that utilize Check Point NGFW api.
+* Add and remove hosts
+* Add and remove access rules
+* Show rulebase
+* Discard all sessions
 
 # Requirements
 
