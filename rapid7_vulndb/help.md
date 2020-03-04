@@ -14,22 +14,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
-
-## Technical Details
-
-### Actions
-
-#### Search Database
-
-This action is used to search the database for vulnerabilities and exploits.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|database|string|All|True|Name of the database|['Vulnerability Database', 'Metasploit Modules', 'All']|
-|search|string|None|True|Search parameter for database|None|
+_This plugin does not contain a connection._
 
 ##### Output
 
