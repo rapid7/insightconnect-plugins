@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="checkpoint_ngfw-joey-test-plugin",
+setup(name="checkpoint_ngfw-custom_test_vendor-plugin",
       version="1.0.0",
       description="Check Point’s Next Generation Firewalls (NGFW’s) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks",
-      author="joey-test",
+      author="custom_test_vendor",
       author_email="",
       url="",
       packages=find_packages(),

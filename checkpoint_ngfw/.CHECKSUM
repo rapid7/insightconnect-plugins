@@ -1,7 +1,7 @@
 {
-	"spec": "b049da02dc5e22ae504423730233d25f",
-	"manifest": "689b93dbcfe7664104832e3432aed456",
-	"setup": "341332f13d8d286b7e8f6854dc1c334c",
+	"spec": "e45b3cef84472052e5becc5cdd30e5f3",
+	"manifest": "402d2d2f15c418757de0ad16485343df",
+	"setup": "608487dc69dd652e50242cf00eda268a",
 	"schemas": [
 		{
 			"identifier": "add_access_rule/schema.py",
