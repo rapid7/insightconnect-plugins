@@ -1,12 +1,12 @@
 {
-    "body": {
-        "action": "import_hash_samples",
-        "connection": null,
-        "input": {
-            "query": ""
-        },
-        "meta": {}
+  "body": {
+    "action": "import_hash_samples",
+    "connection": null,
+    "input": {
+      "query": ""
     },
-    "type": "action_start",
-    "version": "v1"
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
 }

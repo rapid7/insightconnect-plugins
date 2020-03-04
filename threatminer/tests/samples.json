@@ -1,13 +1,13 @@
 {
-    "body": {
-        "action": "samples",
-        "connection": null,
-        "input": {
-            "query": "",
-            "query_type": "Metadata"
-        },
-        "meta": {}
+  "body": {
+    "action": "samples",
+    "connection": null,
+    "input": {
+      "query": "",
+      "query_type": "Metadata"
     },
-    "type": "action_start",
-    "version": "v1"
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
 }
