@@ -1,11 +1,11 @@
 {
-	"spec": "ffafd0794d9e7fa8c2655f492f786df4",
+	"spec": "44d8b818eeef633aa528b58dacd98780",
 	"manifest": "f1d1a62b2c3d6894009414959466eb49",
 	"setup": "1c58c5da5af5132395689794aca7291d",
 	"schemas": [
 		{
 			"identifier": "add_access_rule/schema.py",
-			"hash": "61eee73c1efd3a58397dd81f6df20a17"
+			"hash": "d0b26be010ac2850b6eb10ae7007731a"
 		},
 		{
 			"identifier": "add_host/schema.py",

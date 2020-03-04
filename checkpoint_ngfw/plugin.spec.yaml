@@ -509,7 +509,7 @@ actions:
         title: List of Services
         type: "[]string"
         description: List of services to block e.g. ["AOL", "SMTP"]
-        required: true
+        required: false
         order: 2
       layer:
         title: Layer

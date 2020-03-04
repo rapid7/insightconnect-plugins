@@ -380,7 +380,7 @@ This action is used to create a rule to block traffic.
 |destination|string|None|False|Destination network object name|None|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
 |layer|string|Network|True|Layer to add this rule to|None|
-|list_of_services|[]string|None|True|List of services to block e.g. ["AOL", "SMTP"]|None|
+|list_of_services|[]string|None|False|List of services to block e.g. ["AOL", "SMTP"]|None|
 |name|string|None|True|Rule name|None|
 |position|string|top|True|Postion in the list of rules. e.g. top, bottom, 15|None|
 |source|string|None|False|Source network object name|None|

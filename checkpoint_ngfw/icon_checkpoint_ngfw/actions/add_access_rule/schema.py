@@ -98,7 +98,6 @@ class AddAccessRuleInput(komand.Input):
     "action",
     "discard_other_sessions",
     "layer",
-    "list_of_services",
     "name",
     "position"
   ]
