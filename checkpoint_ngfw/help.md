@@ -12,7 +12,7 @@
 # Requirements
 
 * Username and Password with administrative privileges
-* Check Point API is up and running. This requires that the NGFW machine has 6 gb of ram available, and the API has been enabled
+* Check Point API is enabled and running. This requires that the NGFW machine has 6GB of RAM available, and the API has been enabled
 * For more information on enabling the API go here: https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641
 
 # Documentation
