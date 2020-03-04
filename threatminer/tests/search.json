@@ -1,13 +1,13 @@
 {
-    "body": {
-        "action": "search",
-        "connection": null,
-        "input": {
-            "query": "",
-            "query_type": "Full Text"
-        },
-        "meta": {}
+  "body": {
+    "action": "search",
+    "connection": null,
+    "input": {
+      "query": "",
+      "query_type": "Full Text"
     },
-    "type": "action_start",
-    "version": "v1"
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
 }
