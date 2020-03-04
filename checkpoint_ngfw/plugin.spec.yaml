@@ -2,7 +2,7 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: checkpoint_ngfw
-title: Checkpoint NGFW
+title: Check Point NGFW
 description: Check Point’s Next Generation Firewalls (NGFW’s) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks
 version: 1.0.0
 vendor: joey-test
@@ -16,15 +16,15 @@ tags:
 - checkpoint
 hub_tags:
   use_cases: [application_management, threat_detection_and_response, vulnerability_management]
-  keywords: [firewall, checkpoint, decoder, utilities]
+  keywords: [firewall, check, point, decoder, utilities]
   features: []
 
 types:
   domain:
     domain-type:
-      title: "Domain-Type"
+      title: "Domain"
       type: string
-      description: "Domain-type"
+      description: "Domain"
       required: false
     name:
       title: "Name"
@@ -455,8 +455,8 @@ connection:
     required: true
   server:
     type: string
-    title: Server IP
-    description: Server IP
+    title: Server IP Address
+    description: Server IP address
     required: true
   port:
     type: int
@@ -474,7 +474,7 @@ connection:
 actions:
   show_access_rulebase:
     title: Show Access Rulebase
-    description: Show access rulebase
+    description: Show the access rulebase
     input:
       layer_name:
         title: Layer Name
@@ -569,7 +569,7 @@ actions:
 
   remove_access_rule:
     title: Remove Access Rule
-    description: Remove access rule
+    description: Remove an access rule
     input:
       access_rule_name:
         title: Access Rule Name
@@ -605,7 +605,7 @@ actions:
 
   add_host:
     title: Add Host
-    description: Add Host as a network object
+    description: Add a host as a network object
     input:
       name:
         title: Name
@@ -614,8 +614,8 @@ actions:
         required: true
         order: 1
       host_ip:
-        title: Host IP
-        description: Host IP
+        title: Host IP Address
+        description: Host IP address
         type: string
         required: true
         order: 2
@@ -635,7 +635,7 @@ actions:
 
   remove_host:
     title: Remove Host
-    description: Remove Host from network objects
+    description: Remove a host from network objects
     input:
       name:
         title: Name

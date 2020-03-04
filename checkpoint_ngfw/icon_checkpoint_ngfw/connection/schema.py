@@ -25,8 +25,8 @@ class ConnectionSchema(komand.Input):
     },
     "server": {
       "type": "string",
-      "title": "Server IP",
-      "description": "Server IP",
+      "title": "Server IP Address",
+      "description": "Server IP address",
       "order": 2
     },
     "ssl_verify": {

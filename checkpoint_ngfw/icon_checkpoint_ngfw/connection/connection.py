@@ -38,7 +38,8 @@ class Connection(komand.Connection):
             # The errors returned by this api aren't very good
             # It's a 400 with some error text.
             raise PluginException(cause="There was problem authenticating with Checkpoint NGFW.",
-                                  assistance="Check your server ip, port, username and password.",
+                                  assistance="Check the server IP address, port, username, and password defined in "
+                                             "your plugin connection",
                                   data=request.text)
 
         self.sid = request.json().get("sid")
@@ -106,11 +107,11 @@ class Connection(komand.Connection):
         sessions = request.json().get("objects")
         for session in sessions:
             uid = session.get("uid")
-            discard_paylaod = {
+            discard_payload = {
                 "uid": uid
             }
 
-            requests.post(url_discard, json=discard_paylaod, headers=headers, verify=self.ssl_verify)
+            requests.post(url_discard, json=discard_payload, headers=headers, verify=self.ssl_verify)
 
         self.get_sid()
 
@@ -145,7 +146,7 @@ class Connection(komand.Connection):
 
     def test(self):
         if not self.sid:
-            raise ConnectionTestException(cause=f"Unable to authenticate to the Checkpoint server at: "
+            raise ConnectionTestException(cause=f"Unable to authenticate to the Check Point server at: "
                                                 f"{self.server_ip}:{self.server_port}",
                                           assistance="Please check your connection settings and try again.")
 

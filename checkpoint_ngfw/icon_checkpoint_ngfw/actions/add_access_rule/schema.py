@@ -332,8 +332,8 @@ class AddAccessRuleOutput(komand.Output):
               "properties": {
                 "domain-type": {
                   "type": "string",
-                  "title": "Domain-Type",
-                  "description": "Domain-type",
+                  "title": "Domain",
+                  "description": "Domain",
                   "order": 1
                 },
                 "name": {
@@ -376,8 +376,8 @@ class AddAccessRuleOutput(komand.Output):
           "properties": {
             "domain-type": {
               "type": "string",
-              "title": "Domain-Type",
-              "description": "Domain-type",
+              "title": "Domain",
+              "description": "Domain",
               "order": 1
             },
             "name": {
@@ -561,8 +561,8 @@ class AddAccessRuleOutput(komand.Output):
               "properties": {
                 "domain-type": {
                   "type": "string",
-                  "title": "Domain-Type",
-                  "description": "Domain-type",
+                  "title": "Domain",
+                  "description": "Domain",
                   "order": 1
                 },
                 "name": {
@@ -715,8 +715,8 @@ class AddAccessRuleOutput(komand.Output):
                   "properties": {
                     "domain-type": {
                       "type": "string",
-                      "title": "Domain-Type",
-                      "description": "Domain-type",
+                      "title": "Domain",
+                      "description": "Domain",
                       "order": 1
                     },
                     "name": {
@@ -741,8 +741,8 @@ class AddAccessRuleOutput(komand.Output):
               "properties": {
                 "domain-type": {
                   "type": "string",
-                  "title": "Domain-Type",
-                  "description": "Domain-type",
+                  "title": "Domain",
+                  "description": "Domain",
                   "order": 1
                 },
                 "name": {
@@ -799,8 +799,8 @@ class AddAccessRuleOutput(komand.Output):
           "properties": {
             "domain-type": {
               "type": "string",
-              "title": "Domain-Type",
-              "description": "Domain-type",
+              "title": "Domain",
+              "description": "Domain",
               "order": 1
             },
             "name": {
@@ -843,8 +843,8 @@ class AddAccessRuleOutput(komand.Output):
       "properties": {
         "domain-type": {
           "type": "string",
-          "title": "Domain-Type",
-          "description": "Domain-type",
+          "title": "Domain",
+          "description": "Domain",
           "order": 1
         },
         "name": {
@@ -1028,8 +1028,8 @@ class AddAccessRuleOutput(komand.Output):
           "properties": {
             "domain-type": {
               "type": "string",
-              "title": "Domain-Type",
-              "description": "Domain-type",
+              "title": "Domain",
+              "description": "Domain",
               "order": 1
             },
             "name": {
@@ -1182,8 +1182,8 @@ class AddAccessRuleOutput(komand.Output):
               "properties": {
                 "domain-type": {
                   "type": "string",
-                  "title": "Domain-Type",
-                  "description": "Domain-type",
+                  "title": "Domain",
+                  "description": "Domain",
                   "order": 1
                 },
                 "name": {
@@ -1208,8 +1208,8 @@ class AddAccessRuleOutput(komand.Output):
           "properties": {
             "domain-type": {
               "type": "string",
-              "title": "Domain-Type",
-              "description": "Domain-type",
+              "title": "Domain",
+              "description": "Domain",
               "order": 1
             },
             "name": {

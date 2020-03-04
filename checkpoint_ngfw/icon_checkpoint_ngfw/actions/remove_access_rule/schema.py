@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Remove access rule"
+    DESCRIPTION = "Remove an access rule"
 
 
 class Input:

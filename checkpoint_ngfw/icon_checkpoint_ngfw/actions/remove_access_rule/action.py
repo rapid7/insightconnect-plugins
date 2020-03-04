@@ -1,7 +1,7 @@
 import komand
 from .schema import RemoveAccessRuleInput, RemoveAccessRuleOutput, Input, Output, Component
 # Custom imports below
-
+import string
 
 class RemoveAccessRule(komand.Action):
 
@@ -24,6 +24,6 @@ class RemoveAccessRule(komand.Action):
         result = self.connection.post_and_publish(headers, discard_other_sessions, payload, url)
 
         message = result.json().get("message")
-        success = 'OK' == message
+        success = 'OK' == message.upper()
 
         return {Output.SUCCESS: success, Output.MESSAGE: message}

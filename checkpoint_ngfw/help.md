@@ -11,9 +11,9 @@
 
 # Requirements
 
-* Username and Password with administrative privileges
+* Username and password with administrative privileges
 * Check Point API is enabled and running. This requires that the NGFW machine has 6GB of RAM available, and the API has been enabled
-* For more information on enabling the API go here: https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641
+* For more information on enabling the API visit here: https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641
 
 # Documentation
 
@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |port|int|443|True|Server port|None|
-|server|string|None|True|Server IP|None|
+|server|string|None|True|Server IP address|None|
 |ssl_verify|boolean|True|True|Use SSL verification|None|
 |username_password|credential_username_password|None|True|Username and password|None|
 
@@ -34,7 +34,8 @@ The connection configuration accepts the following parameters:
 
 #### Discard All Sessions
 
-This action is used to troubleshooting action to discard all other user sessions.
+This action is a troubleshooting action that will discard all active sessions. This can sometimes alleviate the 
+issue where objects remain locked after editing. 
 
 ##### Input
 
@@ -53,7 +54,7 @@ Example output:
 
 #### Remove Host
 
-This action is used to remove Host from network objects.
+This action is used to remove a host from network objects.
 
 ##### Input
 
@@ -80,14 +81,14 @@ Example output:
 
 #### Add Host
 
-This action is used to add Host as a network object.
+This action is used to add a host as a network object.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|host_ip|string|None|True|Host IP|None|
+|host_ip|string|None|True|Host IP address|None|
 |name|string|None|True|Name|None|
 
 ##### Output
@@ -140,7 +141,7 @@ Example output:
 
 #### Remove Access Rule
 
-This action is used to remove access rule.
+This action is used to remove an access rule.
 
 ##### Input
 
@@ -168,7 +169,7 @@ Example output:
 
 #### Show Access Rulebase
 
-This action is used to show access rulebase.
+This action is used to show the access rulebase.
 
 ##### Input
 
@@ -694,9 +695,10 @@ edits to the configuration at the same time, one user's edits will fail. The API
 (SIDs). If the plugin tries to make a change while an administrator has a pending change, the plugin will sometimes 
 fail. 
 
-To prevent this, you can turn on discard other changes, which will effectively remove all other pending changes when the 
-plugin tries to publish it's changes. However, this can cause issues with the web portal and Smart Console. If the 
-Smart Console starts displaying errors, the administrator will have to close the Smart Console and reopen it.
+To prevent this, you can set the `Discard Other Changes` boolean value to `True` in each action. That will effectively 
+remove all other pending changes when the plugin tries to publish it's changes. However, this can cause 
+issues with the web portal and Smart Console. If the Smart Console starts displaying errors, 
+the administrator will have to close the Smart Console and re-open it.
 
 To effectively use this plugin, it will need it's own administrative account. This will help prevent session conflicts.  
 

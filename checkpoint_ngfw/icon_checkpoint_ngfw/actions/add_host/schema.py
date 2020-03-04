@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add Host as a network object"
+    DESCRIPTION = "Add a host as a network object"
 
 
 class Input:
@@ -32,8 +32,8 @@ class AddHostInput(komand.Input):
     },
     "host_ip": {
       "type": "string",
-      "title": "Host IP",
-      "description": "Host IP",
+      "title": "Host IP Address",
+      "description": "Host IP address",
       "order": 2
     },
     "name": {
@@ -96,8 +96,8 @@ class AddHostOutput(komand.Output):
       "properties": {
         "domain-type": {
           "type": "string",
-          "title": "Domain-Type",
-          "description": "Domain-type",
+          "title": "Domain",
+          "description": "Domain",
           "order": 1
         },
         "name": {
@@ -237,8 +237,8 @@ class AddHostOutput(komand.Output):
           "properties": {
             "domain-type": {
               "type": "string",
-              "title": "Domain-Type",
-              "description": "Domain-type",
+              "title": "Domain",
+              "description": "Domain",
               "order": 1
             },
             "name": {

@@ -30,8 +30,8 @@ class AddAccessRule(komand.Action):
           "action": params.get(Input.ACTION),
         }
 
-        services = params.get(Input.LIST_OF_SERVICES)
-        if services and len(services) > 0:  # Make sure it's not a blank list
+        services = params.get(Input.LIST_OF_SERVICES, [])
+        if len(services) > 0:  # Make sure it's not a blank list
             payload["services"] = services
 
         source = params.get(Input.SOURCE)

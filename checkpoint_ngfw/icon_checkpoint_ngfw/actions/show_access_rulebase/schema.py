@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Show access rulebase"
+    DESCRIPTION = "Show the access rulebase"
 
 
 class Input:
@@ -85,8 +85,8 @@ class ShowAccessRulebaseOutput(komand.Output):
       "properties": {
         "domain-type": {
           "type": "string",
-          "title": "Domain-Type",
-          "description": "Domain-type",
+          "title": "Domain",
+          "description": "Domain",
           "order": 1
         },
         "name": {
@@ -270,8 +270,8 @@ class ShowAccessRulebaseOutput(komand.Output):
           "properties": {
             "domain-type": {
               "type": "string",
-              "title": "Domain-Type",
-              "description": "Domain-type",
+              "title": "Domain",
+              "description": "Domain",
               "order": 1
             },
             "name": {
@@ -430,8 +430,8 @@ class ShowAccessRulebaseOutput(komand.Output):
           "properties": {
             "domain-type": {
               "type": "string",
-              "title": "Domain-Type",
-              "description": "Domain-type",
+              "title": "Domain",
+              "description": "Domain",
               "order": 1
             },
             "name": {
@@ -615,8 +615,8 @@ class ShowAccessRulebaseOutput(komand.Output):
               "properties": {
                 "domain-type": {
                   "type": "string",
-                  "title": "Domain-Type",
-                  "description": "Domain-type",
+                  "title": "Domain",
+                  "description": "Domain",
                   "order": 1
                 },
                 "name": {

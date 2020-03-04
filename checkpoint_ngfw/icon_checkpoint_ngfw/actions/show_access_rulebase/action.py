@@ -17,7 +17,7 @@ class ShowAccessRulebase(komand.Action):
     def run(self, params={}):
         url = f"https://{self.connection.server_ip}:{self.connection.server_port}/web_api/show-access-rulebase"
         headers = self.connection.get_headers()
-        paylaod = {
+        payload = {
             "offset": 0,
             "limit": params.get(Input.LIMIT, 1),
             "name": params.get(Input.LAYER_NAME),
@@ -25,13 +25,13 @@ class ShowAccessRulebase(komand.Action):
             "use-object-dictionary": True
         }
 
-        result = requests.post(url, headers=headers, json=paylaod, verify=self.connection.ssl_verify)
+        result = requests.post(url, headers=headers, json=payload, verify=self.connection.ssl_verify)
 
         try:
             result.raise_for_status()
         except Exception as e:
             raise PluginException(cause=f"Show Access Rules from {url} failed.\n",
-                                  assistance=result.text + "\n",
+                                  assistance=f"{result.text}\n",
                                   data=e)
 
         return {Output.ACCESS_RULES: komand.helper.clean(result.json())}
