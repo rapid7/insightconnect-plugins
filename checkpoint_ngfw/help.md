@@ -713,5 +713,5 @@ To effectively use this plugin, it will need it's own administrative account. Th
 
 ## References
 
-* [Checkpoint NGFW](https://www.checkpoint.com/products/next-generation-firewall/)
+* [Check Point NGFW](https://www.checkpoint.com/products/next-generation-firewall/)
 * [Check Point Management API](https://sc1.checkpoint.com/documents/latest/APIs/)
