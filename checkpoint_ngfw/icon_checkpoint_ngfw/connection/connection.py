@@ -55,7 +55,7 @@ class Connection(komand.Connection):
         except Exception as e:
             # The errors returned by this api aren't very good
             # It's a 400 with some error text.
-            raise PluginException(cause="There was problem publishing to Checkpoint NGFW.",
+            raise PluginException(cause="There was problem publishing to Check Point NGFW.",
                                   assistance=request.text,
                                   data=e)
 
