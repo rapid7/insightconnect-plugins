@@ -1,7 +1,8 @@
 # Description
 
-[Networktotal](https://www.networktotal.com/) is a free service that analyzes PCAP files and facilitates the quick detection of viruses, worms, trojans, and all kinds of malware detected by Intrusion Detection Engines and their rulesets.
-The Networktotal plugin allows you to submit files and perform searches against on the public service.
+[Networktotal](https://www.networktotal.com/) is a free service that analyzes PCAP files and facilitates the quick
+detection of viruses, worms, trojans, and all kinds of malware detected by Intrusion Detection Engines and their
+rulesets. The Networktotal plugin submits files and perform searches against on the public service.
 
 # Key Features
 
@@ -56,7 +57,7 @@ This action is used to upload a PCAP file.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -64,12 +65,12 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
 * 1.0.1 - New spec and help.md format for the Hub
-* 1.0.0. - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
 

@@ -1,13 +1,7 @@
 {
     "body": {
         "action": "modules_run",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "url": null
-        },
+        "connection": {},
         "input": {
             "cmdline": "pe compiletime",
             "project": "Komand",

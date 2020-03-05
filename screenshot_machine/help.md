@@ -1,14 +1,14 @@
 # Description
 
-The Screenshot Machine plugin allows you to capture screenshots using the [Screenshot Machine](https://screenshotmachine.com/) API.
+[Screenshot Machine](https://screenshotmachine.com/) is self-described as, "The most user-friendly website screenshot generator ever." This plugin provides the ability to take a screenshot of a provided URL.
 
 # Key Features
 
-* Capture screenshots
+* Capture screenshots of a URL to save an image of the webpage
 
 # Requirements
 
-* ScreenshotMachine API key and secret
+* Screenshot Machine API key
 
 # Documentation
 
@@ -37,7 +37,7 @@ This action is used to capture the screenshot of a URL and return a `file` objec
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|URL to screenshot|None|
 |cache_age_days|integer|0|False|Use Cached Image From X days ago. Enter in the age in days that will be accepted. 0 means do not use cache|[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]|
-|size|string|tiny|False|Size string. Sizes are listed here\: https\://screenshotmachine.com/apiguide.php|['tiny', 'small', 'seminormal', 'normal', 'medium', 'large', 'extra_large', 'full', 'mobile_normal', 'mobile_full']|
+|size|string|tiny|False|Size string. Sizes are listed here: https://screenshotmachine.com/apiguide.php|['tiny', 'small', 'seminormal', 'normal', 'medium', 'large', 'extra_large', 'full', 'mobile_normal', 'mobile_full']|
 |timeout|integer|200|False|Timeout in ms to wait for capture|[0, 200, 400, 600, 800, 1000]|
 |format|string|JPG|False|Format|['JPG', 'PNG', 'GIF']|
 

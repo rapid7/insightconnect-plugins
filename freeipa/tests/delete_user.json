@@ -3,10 +3,10 @@
         "action": "delete_user",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "server": null
+            "server": ""
         },
         "input": {
             "preserve": true,

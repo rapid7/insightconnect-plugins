@@ -20,7 +20,7 @@ tags:
 - project
 - snippet
 hub_tags:
-  use_cases: [soar, soc_automation, user_management]
+  use_cases: [user_management]
   keywords: [gitlab, version control, repository, manage, project, snippet]
   features: []
 types:
@@ -486,7 +486,7 @@ triggers:
         required: false
       interval:
         type: integer
-        description: How often recieve new issues
+        description: How often receive new issues
         required: false
     output:
       issue:

@@ -1,8 +1,9 @@
 # Description
 
-[Cisco CloudLock](https://www.cisco_cloudlock.com) is the cloud-native CASB and Cloud Cybersecurity Platform.
+[Cisco CloudLock](https://www.cisco.com/c/en/us/products/security/cloudlock/index.html) is the cloud-native CASB and Cloud Cybersecurity Platform.
  The Cisco CloudLock InsightConnect plugin allows you to help protect cloud users, data, and application.
-This plugin utilizes the [Cisco CloudLock API](https//api.cisco_cloudlock.com).
+
+This plugin utilizes the [Cisco CloudLock API](https://docs.umbrella.com/cloudlock-documentation/docs/cisco-cloudlock-apis).
 
 # Key Features
 
@@ -38,7 +39,7 @@ This action is used to lists all suspicious IP entries.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |q|string|None|False|Match string|['Name', 'Location', 'IP Address', 'Categories']|
-|limit|number|20|False|Number of paginated results to return. Max\: 100|None|
+|limit|number|20|False|Number of paginated results to return. Max: 100|None|
 |name|string|None|False|Match a substring within entry name|None|
 |offset|number|0|False|Pagination offset|None|
 
@@ -56,7 +57,7 @@ This action is used to list all asset list pages and exports.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|limit|number|20|False|Number of paginated results to return. Max\: 100|None|
+|limit|number|20|False|Number of paginated results to return. Max: 100|None|
 |offset|number|0|False|Pagination offset|None|
 
 ##### Output
@@ -74,7 +75,7 @@ This action is used to lists all of an organizations configured policies.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |state|string|None|False|State of the policy|['Active', 'Inactive']|
-|limit|number|20|False|Number of paginated results to return. Max\: 100|None|
+|limit|number|20|False|Number of paginated results to return. Max: 100|None|
 |offset|number|0|False|Pagination offset|None|
 
 ##### Output
@@ -91,7 +92,7 @@ This action is used to lists the UBA (user behavioral analysis) activities.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|limit|number|20|False|Number of paginated results to return. Max\: 100|None|
+|limit|number|20|False|Number of paginated results to return. Max: 100|None|
 |offset|number|0|False|Pagination offset|None|
 
 ##### Output
@@ -109,9 +110,9 @@ This action is used to list all incidents triggered by the CloudLock policy engi
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |created_before|date|None|False|Created on start date look up period|None|
-|limit|number|20|False|Number of paginated results to return. Max\: 100|None|
+|limit|number|20|False|Number of paginated results to return. Max: 100|None|
 |severity|string|None|False|Severity level to search on|['INFO', 'WARNING', 'CRITICAL', 'ALERT']|
-|created_after|date|None|False|Created on end date look up period. Example\: 2014-02-01|None|
+|created_after|date|None|False|Created on end date look up period. Example: 2014-02-01|None|
 |offset|number|0|False|Pagination offset|None|
 
 ##### Output
@@ -128,7 +129,7 @@ This action is used to lists an organizations installed applications.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|limit|number|20|False|Number of paginated results to return. Max\: 100|None|
+|limit|number|20|False|Number of paginated results to return. Max: 100|None|
 |classification|string|None|False|Classification type of the application|['Unclassified', 'Trusted', 'Restricted', 'Banned']|
 |offset|number|0|False|Pagination offset|None|
 
@@ -161,5 +162,4 @@ No troubleshooting information.
 
 ## References
 
-* [Cisco CloudLock](https://www.cloudlock.com)
-
+* [Cisco CloudLock](https://www.cisco.com/c/en/us/products/security/cloudlock/index.html)

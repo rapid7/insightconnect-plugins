@@ -4,7 +4,7 @@ products: [insightconnect]
 name: finger
 title: Finger
 description: Query the Finger Service
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []
@@ -15,7 +15,7 @@ tags:
 - finger
 - users
 hub_tags:
-  use_cases: [soar, user_management, investigations]
+  use_cases: [user_management, threat_detection_and_response]
   keywords: [finger, users]
   features: []
 actions:
@@ -34,81 +34,81 @@ actions:
     output:
       found:
         title: Found Status
-        description: Found
+        description: Whether user exists on the system
         type: boolean
         required: false
       login:
         title: Login Name
-        description: Login
+        description: User's login name
         type: string
         required: false
       loginstatus:
         title: Login Status
-        description: Login Status
+        description: When the user logged in
         type: string
         required: false
       loginfrom:
         title: Login from
-        description: Login from
+        description: User's last login source address
         type: string
         required: false
       fullname:
         title: Real Name
-        description: Full name
+        description: User's full name
         type: string
         required: false
       home:
         title: Home Directory
-        description: Home
+        description: Path to user's home directory
         type: string
         required: false
       homephone:
         title: Home Phone
-        description: Homephone
+        description: User home phone
         type: string
         required: false
       shell:
         title: Shell
-        description: Shell
+        description: The user's default shell
         type: string
         required: false
       mail:
         title: Mail Forward Address
-        description: Mail
+        description: Mail forward address if it exists
         type: string
         required: false
       mailstatus:
         title: Mail Status
-        description: Mail status
+        description: Status on unread mail
         type: string
         required: false
       pubkey:
         title: Public Key File
-        description: Public key
+        description: The contents of user's public key if it exists
         type: string
         required: false
       plan:
         title: Plan
-        description: Plan
+        description: The contents of the plan file if it exists
         type: string
         required: false
       project:
         title: Project
-        description: Project
+        description: The contents of the project file if it exists
         type: string
         required: false
       room:
         title: Room
-        description: Room
+        description: User room
         type: string
         required: false
       workphone:
         title: Work Phone
-        description: Workphone
+        description: User work phone
         type: string
         required: false
       status:
         title: Plugin Status
-        description: Status
+        description: Success or any error messages
         type: string
         required: false

@@ -8,7 +8,7 @@ support: rapid7
 status: []
 description: Jira is an issue tracking product, developed by Atlassian. It provides
   bug tracking, issue tracking, and project management functions
-version: 4.0.1
+version: 4.0.2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/jira
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -17,7 +17,7 @@ tags:
 - ticket
 - Jira
 hub_tags:
-  use_cases: [soar, remediation_ticketing, investigations, reporting_and_analytics]
+  use_cases: [remediation_management, threat_detection_and_response, reporting_and_analytics]
   keywords: [ticket, jira]
   features: []
 types:
@@ -245,7 +245,7 @@ actions:
       comments:
         title: Comments
         type: '[]comment'
-        description: Comments
+        description: Comments list
         required: false
   comment_issue:
     title: Comment Issue
@@ -291,7 +291,7 @@ actions:
       issue:
         title: Issue
         type: issue
-        description: Issue
+        description: Found issue
         required: false
   find_users:
     title: Find Users
@@ -499,6 +499,12 @@ triggers:
         required: false
         type: boolean
         default: false
+      poll_timeout:
+        title: Poll timeout
+        description: Timeout between next poll, default 60
+        required: false
+        type: integer
+        default: 60
     output:
       issue:
         title: Issue

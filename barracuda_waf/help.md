@@ -879,7 +879,7 @@ Updates a security policy with the given values.
 |----|----|-------|--------|-----------|----|
 |request_limits|request_limits|None|false|Configuration of requests|None|
 |cookie_security|cookie_security|None|false|Configuration of cookies security|None|
-|url_protection|url_protection|None|false|Configuration of url protection|None|
+|url_protection|url_protection|None|false|Configuration of URL protection|None|
 |parameter_protection|parameter_protection|None|false|Configuration of requests|None|
 |cloaking|cloaking|None|false|Configuration of cloaking|None|
 |url_normalization|url_normalization|None|false|Configuration of requests|None|
@@ -1356,9 +1356,9 @@ Updates the values of given parameters in the given global ACL rule.
 |url_match|string|false|The URL to be matched to the URL in the request.  The URL should start with a "/" and can have at most one " * " anywhere in the URL. A value of "/*" means that the access control rule (ACL) applies for all URLs in that domain|None|
 |extended_match|string|false|An expression that consists of a combination of HTTP headers and/or query string parameters. Updating extended match parameters value is shown in the example below|None|
 |extended_match_sequence|integer|false|A number to indicate the order in which the extended match rule must be evaluated in the requests|None|
-|action|string|false|The action to be taken on the request matching this URL|['process','allow','deny_and_log','deny_with_no_log','temporary_redirect','permanent_redirect']|
-|deny_response|string|false|The response to be sent to the client if the request is denied|['reset','response_page','temporary_redirect','permanent_redirect']|
-|response_page|string|false|The response page to be sent to the client|['default','default-virus','default-error-resp','default-captcha-tries-error-page','default-captcha-sessions-error-page','default-suspected-activity-error-page','default-captcha-response-page']|
+|action|string|false|The action to be taken on the request matching this URL|['process', 'allow', 'deny_and_log', 'deny_with_no_log', 'temporary_redirect', 'permanent_redirect']|
+|deny_response|string|false|The response to be sent to the client if the request is denied|['reset', 'response_page', 'temporary_redirect', 'permanent_redirect']|
+|response_page|string|false|The response page to be sent to the client|['default', 'default-virus', 'default-error-resp', 'default-captcha-tries-error-page', 'default-captcha-sessions-error-page', 'default-suspected-activity-error-page', 'default-captcha-response-page']|
 |redirect_url|string|false|A URL to which a user should be redirected if action is temporary_redirect or permanent_redirect|
 |comments|string|false|Description about the global ACL rule|
 
@@ -1556,7 +1556,7 @@ Creates a content rule for the given service.
 |virtual_service_id|string|None|true|Virtual Service ID|None|
 |name|string|None|true|A name for the content rule|None|
 |status|string|None|true|The status of the content rule|['on',of]|
-|web_firewall_policy|string|None|true|A web firewall policy to be associated with the content rule|['default','sharepoint','sharepoint2013','owa','owa2010','owa2013','oracle']|
+|web_firewall_policy|string|None|true|A web firewall policy to be associated with the content rule|['default', 'sharepoint', 'sharepoint2013', 'owa', 'owa2010', 'owa2013', 'oracle']|
 |host_match|string|None|true|A host name to be matched against the host in the request header|None|
 |url_match|string|None|true|A URL to be matched to the URL in the request header|None|
 |extended_match|string|None|true|An expression that consists of a combination of HTTP headers and/or query string parameters|None|
@@ -1728,15 +1728,15 @@ Updates the values of given parameters in the given content rule.
 |----|----|-------|--------|-----------|----|
 |id|string|None|true|Content rule ID|None|
 |virtual_service_id|string|None|true|Virtual Service ID|None|
-|status|string|None|false|The status of the content rule|['on','off']|
-|web_firewall_policy|string|None|false|A web firewall policy to be associated with the content rule|['default','sharepoint','sharepoint2013','owa','owa2010','owa2013','oracle']|
+|status|string|None|false|The status of the content rule|['on', 'off']|
+|web_firewall_policy|string|None|false|A web firewall policy to be associated with the content rule|['default', 'sharepoint', 'sharepoint2013', 'owa', 'owa2010', 'owa2013', 'oracle']|
 |host_match|string|None|false|A host name to be matched against the host in the request header|None|
 |url_match|string|None|false|A URL to be matched to the URL in the request header|None|
 |extended_match|string|None|false|An expression that consists of a combination of HTTP headers and/or query string parameters|None|
 |extended_match_sequence|integer|None|false|A number to indicate the order in which the extended match rule must be evaluated in the requests|None|
-|lb_algorithm|string|false|The algorithm to be used for load balancing|['round_robin','weighted_round_robin','least_requests']
+|lb_algorithm|string|false|The algorithm to be used for load balancing|['round_robin', 'weighted_round_robin', 'least_requests']
 |persistence_method|string|false|The Persistence Method to be used to maintain the connection between a client and the first server that it connects to, even when the system is load balancing traffic|
-|failover_method|string|None|false|The failover method to be used when responding to a request which is persistent, but the server that must serve the request is failed or set to "Out-of-Service"|['load_balance','error']|
+|failover_method|string|None|false|The failover method to be used when responding to a request which is persistent, but the server that must serve the request is failed or set to "Out-of-Service"|['load_balance', 'error']|
 |persistence_idle_timeout|integer|None|false|The maximum idle time (in seconds) for a persistent connection. A client is directed to the same Real Server unless the connection is inactive for more than the specified number of seconds|None|
 |source_ip_netmask|integer|None|false|A subnet mask to make subsequent connections from clients, from the same subnet go to the same Real Server|None|
 |persistence_cookie_name|string|None|false|The name of the cookie that will be used for persistence|None|
@@ -1777,7 +1777,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 2.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Persistence Method
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.0 - Initial plugin
 

@@ -2,17 +2,17 @@
     "body": {
         "action": "query",
         "connection": {
-            "host": null,
-            "port": null,
-            "use_ssl": null,
+            "host": "",
+            "port": 636,
+            "use_ssl": true,
             "username_password": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             }
         },
         "input": {
-            "search_base": "DC=mattsdomain,DC=local",
-            "search_filter": "(distinguishedName=CN=hollis, brown,OU=domain_users,DC=mattsdomain,DC=local)"
+            "search_base": "DC=example,DC=local",
+            "search_filter": "(SAMAccountName=bhollis)"
         },
         "meta": {}
     },

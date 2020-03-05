@@ -14,7 +14,7 @@
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -29,9 +29,9 @@ Stealth mode and GeoIP only are additional parameters that can be passed.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|geolookup|boolean|False|False|Enabling this will disable all threat intelligence lookups, and only return geolocation data for the IP addresses entered. This is much quicker, but provides no threat data.|None|
-|stealth|boolean|False|False|When enabled, all external third-party API lookups are disabled. Threat lookups are local only, and geolocation data may be less accurate.|None|
 |addresses|[]string|None|True|IP Addresses|None|
+|geolookup|boolean|False|False|Enabling this will disable all threat intelligence lookups, and only return geolocation data for the IP addresses entered. This is much quicker, but provides no threat data|None|
+|stealth|boolean|False|False|When enabled, all external third-party API lookups are disabled. Threat lookups are local only, and geolocation data may be less accurate|None|
 
 ##### Output
 
@@ -41,7 +41,7 @@ Stealth mode and GeoIP only are additional parameters that can be passed.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -49,7 +49,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

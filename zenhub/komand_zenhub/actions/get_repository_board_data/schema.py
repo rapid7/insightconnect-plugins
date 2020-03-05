@@ -76,7 +76,7 @@ class GetRepositoryBoardDataOutput(komand.Output):
         },
         "pipeline_name": {
           "type": "string",
-          "title": "Pipelne Name",
+          "title": "Pipeline Name",
           "description": "Pipeline name",
           "order": 5
         },
@@ -176,7 +176,7 @@ class GetRepositoryBoardDataOutput(komand.Output):
             },
             "pipeline_name": {
               "type": "string",
-              "title": "Pipelne Name",
+              "title": "Pipeline Name",
               "description": "Pipeline name",
               "order": 5
             },
@@ -306,7 +306,7 @@ class GetRepositoryBoardDataOutput(komand.Output):
             },
             "pipeline_name": {
               "type": "string",
-              "title": "Pipelne Name",
+              "title": "Pipeline Name",
               "description": "Pipeline name",
               "order": 5
             },
@@ -406,7 +406,7 @@ class GetRepositoryBoardDataOutput(komand.Output):
                 },
                 "pipeline_name": {
                   "type": "string",
-                  "title": "Pipelne Name",
+                  "title": "Pipeline Name",
                   "description": "Pipeline name",
                   "order": 5
                 },

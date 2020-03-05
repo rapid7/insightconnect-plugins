@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|Host URL E.g. http\://10.0.2.2\:9200|None|
+|url|string|None|True|Host URL E.g. http://10.0.2.2:9200|None|
 |credentials|credential_username_password|None|True|Basic Auth username and password|None|
 |use_authentication|boolean|None|True|If the Elasticsearch host does not use authentication set this value to false|None|
 
@@ -145,7 +145,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

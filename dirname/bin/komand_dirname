@@ -4,10 +4,10 @@ import komand
 from komand_dirname import connection, actions, triggers
 
 
-Name = 'Dirname'
-Vendor = 'rapid7'
-Version = '1.0.2'
-Description = 'This plugin gets the directory name of a file path or protocol and domain of a URL'
+Name = "Dirname"
+Vendor = "rapid7"
+Version = "1.0.3"
+Description = "This plugin gets the directory name of a file path or protocol and domain of a URL"
 
 
 class ICONDirname(komand.Plugin):

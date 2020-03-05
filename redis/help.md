@@ -180,7 +180,7 @@ There is an optional expiration timeout which will auto remove the key when `exp
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |expire|integer|None|False|Expiration in seconds|None|
-|values|object|None|True|Object hash field\:value to set|None|
+|values|object|None|True|Object hash field:value to set|None|
 |key|string|None|True|Key|None|
 
 ##### Output
@@ -352,7 +352,7 @@ This command overwrites any specified fields already existing in the hash. If ke
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |key|string|None|True|Key|None|
-|values|object|None|True|Object hash field\:value to set|None|
+|values|object|None|True|Object hash field:value to set|None|
 |expire|integer|None|False|Expiration in seconds|None|
 
 ##### Output
@@ -373,7 +373,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -381,7 +381,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

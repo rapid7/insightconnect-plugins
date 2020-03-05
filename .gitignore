@@ -39,9 +39,6 @@ demo-*.tar.gz
 **/*.tar
 **/*.plg
 
-# Wheels
-**/*.whl
-
 .drone.sec.unencrypted
 
 # IntelliJ
@@ -53,3 +50,7 @@ demo-*.tar.gz
 
 # Ignore test output generated from icon-plugin tool
 **/.output
+
+# Ignore .json files
+*.json
+

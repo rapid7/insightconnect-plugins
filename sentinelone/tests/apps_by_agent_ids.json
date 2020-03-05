@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "apps_by_agent_ids",
+    "meta": {},
+    "input": {
+      "ids": [""]
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

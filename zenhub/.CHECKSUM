@@ -1,7 +1,7 @@
 {
-	"spec": "4e6a5d238ea7a9648cdd2cc001636c2c",
-	"manifest": "137d08bdb0d5bd8ac29b73ad7fd75ce1",
-	"setup": "15aedfb1db166fde2f5f69bfc5de1003",
+	"spec": "479f9cb863679aac092bae4ae3dd71bf",
+	"manifest": "adcbc0144122edeeb56192937cca4241",
+	"setup": "47bdafff85355bfe4de8426ffb8e6345",
 	"schemas": [
 		{
 			"identifier": "add_issue_to_epic/schema.py",
@@ -17,11 +17,11 @@
 		},
 		{
 			"identifier": "get_epic_data/schema.py",
-			"hash": "2ad529d952fc5e849ba3bd5980d75c8b"
+			"hash": "e3bc0fe2027addc37b74bcaf8fba4be8"
 		},
 		{
 			"identifier": "get_issue_data/schema.py",
-			"hash": "4ea4b106507c14024644c7cd0bf26751"
+			"hash": "22fe0090f433f837613e2830ce611464"
 		},
 		{
 			"identifier": "get_issue_events/schema.py",
@@ -29,7 +29,7 @@
 		},
 		{
 			"identifier": "get_repository_board_data/schema.py",
-			"hash": "e3b8e2efbaf966ca9356dc4631d26882"
+			"hash": "e43f575b29132bf6d2f0839eef16e91c"
 		},
 		{
 			"identifier": "get_repository_epics/schema.py",

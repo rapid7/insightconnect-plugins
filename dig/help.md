@@ -1,25 +1,11 @@
 # Description
 
-[Dig](https://linux.die.net/man/1/dig) is a powerful DNS lookup utility. This plugin uses Dig to make forward and reverse DNS requests.
-
-For example, from the command line:
-
-```
-
-# Forward lookup
-$ dig google.com +short
-216.58.192.174
-
-# Reverse lookup
-$ dig -x 216.58.192.174 +short
-ord36s02-in-f174.1e100.net.
-ord36s02-in-f14.1e100.net.
-
-```
+[Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, is a network administration command-line tool for querying Domain Name System (DNS) name servers. This plugin uses Dig to make forward and reverse DNS requests.
 
 # Key Features
 
-* Forward and reverse DNS lookup
+* Forward DNS lookup to find an IP address from a domain name
+* Reverse DNS lookup to find a domain name from an IP address
 
 # Requirements
 
@@ -29,7 +15,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -54,20 +40,21 @@ It accepts a domain name of type `string` and one of the following record types:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|query|string|None|False|Query type e.g. ANY, A, MX, NS, etc|['A', 'AAAA', 'ANY', 'CNAME', 'MX', 'NS', 'PTR', 'SOA']|
 |domain|string|None|True|Domain name to resolve|None|
+|query|string|None|True|Query type e.g. ANY, A, MX, NS, etc|['A', 'AAAA', 'ANY', 'CNAME', 'MX', 'NS', 'PTR', 'SOA']|
+|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Query status [ NOERROR \| FORMERR \| NXDOMAIN \| SERVFAIL \| REFUSED ...]|
-|last_answer|string|False|The last answer found in the answers section|
-|fulloutput|string|False|Full Dig output|
+|all_answers|[]string|False|A list of all answers found|
 |answer|string|False|Answer received|
+|fulloutput|string|False|Full Dig output|
+|last_answer|string|False|The last answer found in the answers section|
 |nameserver|string|False|Nameserver that fulfilled request|
 |question|string|False|Question asked|
-|all_answers|[]string|False|A list of all answers found|
+|status|string|False|Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]|
 
 On success, the raw output will look like the following:
 
@@ -108,16 +95,17 @@ This action is used to request a reverse lookup for an IP address.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|Internet address to resolve|None|
+|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Query status [ NOERROR \| FORMERR \| NXDOMAIN \| SERVFAIL \| REFUSED ...]|
 |answer|string|False|Answer received|
+|fulloutput|string|False|Full Dig output|
 |nameserver|string|False|Nameserver that fulfilled request|
 |question|string|False|Question asked|
-|fulloutput|string|False|Full Dig output|
+|status|string|False|Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]|
 
 On success, the raw output will look like the following:
 
@@ -135,7 +123,7 @@ On success, the raw output will look like the following:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -173,6 +161,7 @@ Common examples:
 
 # Version History
 
+* 1.0.3 - Use input and output constants | Change docker image from `komand/python-2-slim-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Added "f" strings | Remove duplicate code | Add user nobody to Dockerfile
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Update to use the `komand/python-2-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.0 - Support web server mode

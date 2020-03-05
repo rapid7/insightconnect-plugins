@@ -21,8 +21,8 @@ class Output:
     OSSECSYSCHECKD = "ossec-syscheckd"
     OSSECTESTRULE = "ossec-testrule"
     WAZUHMODULESD = "wazuh-modulesd"
-    WAZUHMODULESD:DATABASE = "wazuh-modulesd:database"
-    WAZUHMODULESD:OSCAP = "wazuh-modulesd:oscap"
+    WAZUHMODULESD_DATABASE = "wazuh-modulesd_database"
+    WAZUHMODULESD_OSCAP = "wazuh-modulesd_oscap"
     
 
 class ManagerLogsSummaryInput(komand.Input):
@@ -60,7 +60,7 @@ class ManagerLogsSummaryOutput(komand.Output):
     },
     "ossec-logcollector": {
       "$ref": "#/definitions/summary_log",
-      "title": "Ossec Log Collector",
+      "title": "OSSEC Log Collector",
       "description": "Log collector",
       "order": 6
     },
@@ -100,13 +100,13 @@ class ManagerLogsSummaryOutput(komand.Output):
       "description": "Wazuh Modulesd",
       "order": 1
     },
-    "wazuh-modulesd:database": {
+    "wazuh-modulesd_database": {
       "$ref": "#/definitions/summary_log",
       "title": "Wazuh Modules : Database",
       "description": "Wazuh Modules : Database",
       "order": 11
     },
-    "wazuh-modulesd:oscap": {
+    "wazuh-modulesd_oscap": {
       "$ref": "#/definitions/summary_log",
       "title": "Wazuh Modulesd Oscap",
       "description": "Wazuh modulesd oscap",

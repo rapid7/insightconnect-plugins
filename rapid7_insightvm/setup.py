@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='rapid7_insightvm-rapid7-plugin',
-      version='3.5.1',
-      description='InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="rapid7_insightvm-rapid7-plugin",
+      version="3.6.0",
+      description="InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_rapid7_insightvm']

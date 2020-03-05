@@ -1,7 +1,7 @@
 # Description
 
 [Cherwell](https://www.cherwell.com/) is a comprehensive service desk verified for eleven ITIL processes.
-The Cherwell plugin is used to administrate incidents in Cherwell and leverages the [Cherwell API](https://cherwellsupport.com/CherwellAPI/Documentation/en-US/csm_rest_api.html).
+The Cherwell plugin is used to administrate incidents in Cherwell and leverages the [Cherwell API](https://help.cherwell.com/bundle/cherwell_rest_api_940_help_only/page/oxy_ex-1/content/system_administration/rest_api/csm_rest_api.html).
 
 # Key Features
 
@@ -308,7 +308,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -316,7 +316,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -331,5 +331,5 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [Cherwell API Documentation](https://cherwellsupport.com/CherwellAPI/Documentation/en-US/csm_rest_api.html)
+* [Cherwell API Documentation](https://help.cherwell.com/bundle/cherwell_rest_api_940_help_only/page/oxy_ex-1/content/system_administration/rest_api/csm_rest_api.html)
 

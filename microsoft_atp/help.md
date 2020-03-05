@@ -24,11 +24,11 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|auth_url|string|None|True|Server used to obtain OAuth token. Example\: https\://login.windows.net/{Azure Tenant ID}/oauth2/token|None|
+|auth_url|string|None|True|Server used to obtain OAuth token. Example: https://login.windows.net/{Azure Tenant ID}/oauth2/token|None|
 |client_id|string|None|True|Client ID obtained from Windows Defender Security Center API settings|None|
 |client_secret|string|None|True|Client secret obtained when authorizing an application to connect to Windows Defender|None|
-|host|string|https\://wdatp-alertexporter-us.securitycenter.windows.com|True|Base URL for endpoints, e.g. https\://wdatp-alertexporter-us.securitycenter.windows.com|None|
-|resource_url|string|https\://api.securitycenter.windows.com|False|This will be the server that will return information from the plug-in requests. This will typically be https\://graph.windows.net (for alert information) or https\://api.securitycenter.windows.com (for machine information and actions).|None|
+|host|string|https://wdatp-alertexporter-us.securitycenter.windows.com|True|Base URL for endpoints, e.g. https://wdatp-alertexporter-us.securitycenter.windows.com|None|
+|resource_url|string|https://api.securitycenter.windows.com|False|This will be the server that will return information from the plug-in requests. This will typically be https://graph.windows.net (for alert information) or https://api.securitycenter.windows.com (for machine information and actions).|None|
 |seconds_ago|integer|0|False|Seconds before the first run of the trigger to check for alerts. If left blank, the trigger will start scanning from the time the workflow begins.|None|
 
 ## Technical Details

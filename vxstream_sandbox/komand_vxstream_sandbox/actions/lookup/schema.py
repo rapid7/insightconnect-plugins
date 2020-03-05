@@ -125,12 +125,12 @@ class LookupOutput(komand.Output):
         },
         "isinteresting": {
           "type": "boolean",
-          "title": "Interesting?",
+          "title": "Interesting",
           "order": 12
         },
         "isurlanalysis": {
           "type": "boolean",
-          "title": "URL Analysis?",
+          "title": "URL Analysis",
           "order": 11
         },
         "md5": {

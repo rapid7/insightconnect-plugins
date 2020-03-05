@@ -104,7 +104,7 @@ This action is used to list files on a remote server share.
 |path|string|/|True|Path relative to share to return files|None|
 |pattern|string|*|False|Pattern used to filter results|None|
 |timeout|integer|30|False|Request timeout of operation in seconds|None|
-|timezone|string|UTC|True|Timezone to be applied to datetime fields (eg. UTC, US/Eastern, US/Pacific, Europe/London). Reference https\://en.wikipedia.org/wiki/List_of_tz_database_time_zones for valid timezone names|None|
+|timezone|string|UTC|True|Timezone to be applied to datetime fields (eg. UTC, US/Eastern, US/Pacific, Europe/London). Reference https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for valid timezone names|None|
 
 ##### Output
 
@@ -202,7 +202,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -210,7 +210,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

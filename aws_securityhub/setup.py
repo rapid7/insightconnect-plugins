@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='aws_securityhub-rapid7-plugin',
-      version='1.0.1',
-      description='This plugin utilizes AWS Security Hub to lists and describes security hub-aggregated findings and retrieve SQS messages',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="aws_securityhub-rapid7-plugin",
+      version="2.0.1",
+      description="This plugin utilizes AWS Security Hub to lists and describes security hub-aggregated findings and retrieve SQS messages",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/icon_aws_securityhub']

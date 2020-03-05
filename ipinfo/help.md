@@ -35,20 +35,20 @@ This action is used to retrieve information about an IP address.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|ip|string|None|True|IP Address to Query|None|
+|ip|string|None|True|IP address to query|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|loc|string|False|None|
-|city|string|False|None|
-|country|string|False|None|
-|region|string|False|None|
-|hostname|string|False|None|
-|ip|string|False|None|
-|org|string|False|None|
-|postal|string|False|None|
+|ip|string|False|IP address|
+|hostname|string|False|Hostname|
+|city|string|False|City|
+|region|string|False|Region|
+|country|string|False|Country|
+|loc|string|False|Location|
+|org|string|False|Organization|
+|postal|string|False|Postal code|
 
 Example output:
 
@@ -83,7 +83,7 @@ If a lookup is unsuccessful, the following message is returned:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -91,7 +91,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

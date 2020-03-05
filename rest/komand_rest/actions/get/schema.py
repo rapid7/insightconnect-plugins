@@ -57,7 +57,7 @@ class GetOutput(komand.Output):
     "body_object": {
       "type": "object",
       "title": "Body Object",
-      "description": "Response payload from the server as an object",
+      "description": "Response payload from the server as an object. Note, if the response has invalid object structure(list, string..) plugin will wrap it with object map",
       "order": 1
     },
     "body_string": {

@@ -3,14 +3,14 @@ extension: plugin
 products: [insightconnect]
 name: viper
 title: "Viper"
-description: "The Viper plugins allows you to use Viper's platform to store, search, and analyze files"
-version: 2.0.1
+description: Analyze files and use binary analysis to detect malware in files
+version: 2.1.0
 vendor: rapid7
 support: community
 status: []
-tags: [ "binary", "analysis", "malware", "viper" ]
+tags: ["binary", "analysis", "malware", "viper"]
 hub_tags:
-  use_cases: [soar, threat_intel, threat_hunting, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [binary, analysis, malware, viper]
   features: []
 resources:
@@ -166,7 +166,7 @@ types:
 connection:
   url:
     title: "API URL"
-    description: "API URL to Viper server e.g. http://example.com:8080/api/v3/"
+    description: "API URL to Viper server"
     type: string
     required: true
   token:

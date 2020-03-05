@@ -23,7 +23,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |api_key|credential_secret_key|None|True|AlienVault Open Threat Exchange API key|None|
-|url|string|https\://otx.alienvault.com/|True|AlienVault Open Threat Exchange URL|None|
+|url|string|https://otx.alienvault.com/|True|AlienVault Open Threat Exchange URL|None|
 
 ## Technical Details
 
@@ -47,7 +47,7 @@ Below is a list for each indicator type and the sections they support.
 |Indicator Type|Section|
 |--------------|-------|
 |IPv4|['general', 'geo', 'malware', 'url_list', 'passive_dns', 'reputation', 'full']|
-|IPv6|['general', 'geo', 'malware', 'url_list', 'passive_dns', 'reputation', 'full'|
+|IPv6|['general', 'geo', 'malware', 'url_list', 'passive_dns', 'reputation', 'full']|
 |URL|['general', 'url_list', 'full']|
 |HOSTNAME|['general', 'geo', 'malware', 'url_list', 'passive_dns', 'full']|
 
@@ -55,7 +55,7 @@ Below is a list for each indicator type and the sections they support.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|object|False|Indicator results|
+|results|indicator_detail_full|False|Indicator results|
 
 Example output:
 
@@ -235,7 +235,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.2 - New spec and help.md format for the Hub
+* 2.0.0 - New spec and help.md format update for the Hub | Variable names updated as acronyms
 * 1.0.1 - Update custom type and added HOSTNAME as a supported indicator type for Get Indicator Details
 * 1.0.0 - Initial plugin
 

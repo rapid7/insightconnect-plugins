@@ -40,9 +40,9 @@ This action is used to search for OTRS tickets.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |cust_id|string|None|False|Customer ID|None|
-|expernal_params|[]external_param|None|False|A key value object that's not a Dynamic Field e.g [{"Title"\:"Test Ticket"}]|None|
+|dynamic_fields|[]search_dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","value":"TestValue1", "operation":"Equals"},{"name":"TestName2","value":"TestValue2"}]. The value field is what will be searched for|None|
+|external_params|[]external_param|None|False|A key value object thats not a Dynamic Field e.g [{"Title":"Test Ticket"}]|None|
 |queue|string|None|False|Queue to search in|None|
-|dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name"\:"TestName1","pattern"\:"TestValue1", "operation"\:"Equals"},{"name"\:"TestName2","pattern"\:"TestValue2"}]. The value field is what will be searched for|None|
 
 ##### Output
 
@@ -311,21 +311,21 @@ This action is used to create OTRS ticket.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|Title|string|None|False|Ticket title|None|
-|Queue|string|None|False|Queue the ticket is to be inserted in|None|
-|Lock|string|None|False|Lock name|None|
-|Type|string|None|False|Ticket type e.g. Incident|None|
-|Service|string|None|False|Service name|None|
-|SLA|string|None|False|SLA name|None|
-|State|string|new|False|Ticket state|None|
-|Priority|string|None|False|Ticket priority. 1=very low, 2=low, 3=normal, 4=high, 5=very high, etc|None|
-|PendingTime|date|None|False|Pending time field|None|
-|Owner|string|None|False|Ticket owner|None|
-|Responsible|string|None|False|Whos responsible of the ticket|None|
 |CustomerUser|string|None|False|Customer user associated with the ticket e.g test_customer|None|
+|Lock|string|None|False|Lock name|None|
+|Owner|string|None|False|Ticket owner|None|
+|PendingTime|date|None|False|Pending time field|None|
+|Priority|string|None|False|Ticket priority. 1=very low, 2=low, 3=normal, 4=high, 5=very high, etc|None|
+|Queue|string|None|False|Queue the ticket is to be inserted in|None|
+|Responsible|string|None|False|User responsible for the ticket|None|
+|SLA|string|None|False|SLA name|None|
+|Service|string|None|False|Service name|None|
+|State|string|new|False|Ticket state|None|
+|Title|string|None|False|Ticket title|None|
+|Type|string|None|False|Ticket type e.g. Incident|None|
 |article|new_article|None|False|Ticket article|None|
-|dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name"\:"TestName1","value"\:"TestValue1"},{"name"\:"TestName2","value"\:"TestValue2"}]|None|
-|attachments|[]attachment|None|False|Attachments as array of objects e.g. [{"filename"\:"notes.txt","content"\:"VGhpcyBpcyBhIHRlc3QK"}]|None|
+|attachments|[]attachment|None|False|Attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|
+|dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","pattern":"TestValue1"},{"name":"TestName2","pattern":"TestValue2"}]|None|
 
 ##### Output
 
@@ -353,20 +353,24 @@ This action is used to update an OTRS ticket.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|TicketID|integer|None|False|Ticket ID|None|
-|Priority|string|None|False|Updated ticket priority e.g. 1 very low, 2 low, 3 normal, 4 high, 5 very high and so on|None|
-|PendingTime|date|None|False|Pending Time|None|
+|Article|new_article|None|False|New article (gets appended)|None|
+|Attachments|[]attachment|None|False|New attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|
+|CustomerUser|string|None|False|Updated customer user|None|
+|DynamicFields|[]dynamic_field|None|False|Updated dynamic fields e.g. [{"name":"TestName1","value":"TestValue1"},{"name":"TestName2","value":"TestValue2"}]|None|
 |Lock|string|None|False|Lock|None|
-|Service|string|None|False|Service|None|
-|SLA|string|None|False|SLA|None|
+|NoArticle|boolean|None|True|Will not add article to ticket|None|
+|PendingTime|date|None|False|Pending time|None|
+|Priority|string|None|False|Updated ticket priority e.g. 1 very low, 2 low, 3 normal, 4 high, 5 very high and so on|None|
 |Queue|string|None|False|Updated queue|None|
 |Responsible|string|None|False|Responsible|None|
+|SLA|string|None|False|SLA|None|
+|Service|string|None|False|Service|None|
+|TicketID|integer|None|False|Ticket ID|None|
 |Title|string|None|False|Updated title|None|
-|CustomerUser|string|None|False|Updated customer user|None|
 |Type|string|None|False|Updated type e.g. Incident|None|
 |Article|new_article|None|False|New article (gets appended)|None|
-|DynamicFields|[]dynamic_field|None|False|Updated dynamic fields e.g. [{"name"\:"TestName1","value"\:"TestValue1"},{"name"\:"TestName2","value"\:"TestValue2"}]|None|
-|Attachments|[]attachment|None|False|New attachments as array of objects e.g. [{"filename"\:"notes.txt","content"\:"VGhpcyBpcyBhIHRlc3QK"}]|None|
+|DynamicFields|[]dynamic_field|None|False|Updated dynamic fields e.g. [{"name":"TestName1","value":"TestValue1"},{"name":"TestName2","value":"TestValue2"}]|None|
+|Attachments|[]attachment|None|False|New attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|
 
 ##### Output
 
@@ -400,7 +404,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.0.2 - New spec and help.md format for the Hub
+* 5.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Disposition and Service in Create Ticket log message
 * 4.0.1 - Fix issue in Retrieve action to handle Escalation parameters being returned as strings | Adds new parameter No Article to update, this will submit updates to a ticket without adding a generated article
 * 4.0.0 - Updated the Web Service configuration file | Update dependency on PyOTRS | Fixed issue where Article and Attachment was required to update a ticket in action `update` | Added an External Parameters field to action `search` | Fixed issue with action `search` where dynamic fields were not used correctly for searching | Fixed issue where Escalation parameters where not set to the right type
 * 3.0.5 - Update dependency to PyOTRS v2.1 for security bug [CWE-601](https://cwe.mitre.org/data/definitions/601.html)

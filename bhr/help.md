@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |ssl_no_verify|boolean|None|True|SSL No Verify|None|
-|token|credential_token|None|True|API Token and URL to BHR Host E.g. http\://bhr.company.com\:8000|None|
+|token|credential_token|None|True|API Token and URL to BHR Host E.g. http://bhr.company.com:8000|None|
 
 ## Technical Details
 
@@ -69,7 +69,7 @@ This action is used to send a batch of IP addresses as an `array` of block reque
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|batch|[]object|None|True|A list of block objects E.g. [ { "cidr"\: "1.1.1.1", ..}, { "cidr"\: "1.2.3.4",..} ]|None|
+|batch|[]object|None|True|A list of block objects E.g. [ { "cidr": "1.1.1.1", ..}, { "cidr": "1.2.3.4",..} ]|None|
 
 The following parameters can be used in each `object`:
 
@@ -158,7 +158,7 @@ This action is used to send a batch block request.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|batch|[]object|None|True|A list of block objects E.g. [ { "cidr"\: "1.1.1.1", ..}, { "cidr"\: "1.2.3.4",..} ]|None|
+|batch|[]object|None|True|A list of block objects E.g. [ { "cidr": "1.1.1.1", ..}, { "cidr": "1.2.3.4",..} ]|None|
 
 ##### Output
 
@@ -173,7 +173,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

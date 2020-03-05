@@ -1,16 +1,16 @@
 # Description
 
-[Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/subscriptions/wildfire), a cloud-based threat analysis service, is the industry's most advanced analysis and prevention engine for highly evasive zero-day exploits and malware.
-This plugin utilizes the [Pyldfire library](https://pypi.python.org/pypi/pyldfire/7.1.3).
+[Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/wildfire) is a cloud-based malware sandboxing service that integrates with Palo Alto firewalls to identify unknown threats. This plugin utilizes the [Pyldfire library](https://pypi.python.org/pypi/pyldfire/7.1.3) to get vulnerability information and analyze malware samples.
 
 # Key Features
 
-* Get vulnerability information for files and URLs
-* Get reports and verdicts on samples
+* Submit files and URLs for malware analysis to identify unknown threats
+* Get reports, verdicts, and files to assess a given sample
+* Query packet capture data for a given hash and platform to search for a sample
 
 # Requirements
 
-* Palo Alto Wildfire host
+* Palo Alto Wildfire host IP address or URL
 * Palo Alto Wildefire API key
 
 # Documentation
@@ -23,7 +23,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|
 |verify|boolean|True|True|Verify the certificate|None|
 |host|string|wildfire.paloaltonetworks.com|True|Palo Alto Wildfire host in cloud or on-premise, e.g. wildfire.paloaltonetworks.com or 10.3.4.50|None|
-|api_key|password|None|True|Wildfire API Key, available at https\://wildfire.paloaltonetworks.com/wildfire/account or on your appliance|None|
+|api_key|password|None|True|Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account or on your appliance|None|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTPS as the key, and the proxy path as the value|None|
 
 ## Technical Details
@@ -38,7 +38,7 @@ This action is used to submit a file for analysis via a URL.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to submit. The URL must contain the file name, for example http\://paloaltonetworks.com/folder1/my-file.pdf|None|
+|url|string|None|True|URL to submit. The URL must contain the file name, for example http://paloaltonetworks.com/folder1/my-file.pdf|None|
 
 ##### Output
 
@@ -118,7 +118,7 @@ This action is used to query for an XML or PDF report for a particular sample.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |hash|string|None|True|The MD5 or SHA-256 hash value of the sample|None|
-|format|string|None|True|Report format\: PDF or XML|['pdf', 'xml']|
+|format|string|None|True|Report format: PDF or XML|['pdf', 'xml']|
 
 ##### Output
 
@@ -157,7 +157,7 @@ This action is used to query for a file's classification.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|verdict|string|True|One of the following verdicts\: 'Benign', 'Malware', 'Greyware', 'Pending', 'Error', or 'Not found`|
+|verdict|string|True|One of the following verdicts: 'Benign', 'Malware', 'Greyware', 'Pending', 'Error', or 'Not found`|
 
 ### Triggers
 
@@ -185,6 +185,6 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/subscriptions/wildfire)
+* [Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/wildfire)
 * [Wildfire Documentation](https://www.paloaltonetworks.com/documentation/80/wildfire)
 * [pyldfire](https://pypi.python.org/pypi/pyldfire/7.1.3)

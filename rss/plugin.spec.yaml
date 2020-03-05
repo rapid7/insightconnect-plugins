@@ -16,7 +16,7 @@ tags:
 - atom
 - feed
 hub_tags:
-  use_cases: [soar, data_ingestion, threat_intel, threat_hunting, alerting_and_notifications, soc_automation]
+  use_cases: [data_utility, threat_detection_and_response, alerting_and_notifications]
   keywords: [rss, atom, feed]
   features: []
 enable_cache: true

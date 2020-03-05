@@ -16,7 +16,7 @@ tags:
   - geoip
   - ipstack
 hub_tags:
-  use_cases: [soar, threat_intel, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [geoip, ipstack]
   features: []
 connection:
@@ -87,7 +87,7 @@ actions:
         required: false
         description: Time zone
       zip_code:
-        title: Zip Code
+        title: ZIP Code
         type: string
         required: false
-        description: Zip code
+        description: ZIP code

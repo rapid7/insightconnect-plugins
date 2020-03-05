@@ -18,7 +18,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -38,11 +38,11 @@ This action is used to unshorten a URL.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|resolved_url|string|True|Long URL|
-|success|boolean|True|Success|
-|usage_count|integer|False|Usage count|
-|requested_url|string|True|Short URL|
 |error|string|False|Error message|
+|requested_url|string|True|Short URL|
+|resolved_url|string|True|Long URL|
+|success|boolean|True|To indicate if the operation was successful or not|
+|usage_count|integer|False|The usage count for the current IP|
 
 Example output:
 
@@ -76,7 +76,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -88,6 +88,7 @@ Note that the API is limited to 10 requests per hour per IP address.
 
 # Version History
 
+* 1.0.3 - Use input and output constants | Changed `Exception` to `PluginException` | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` | Add user nobody in Dockerfile
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Graceful exit for invalid URLs
 * 1.0.0 - Initial plugin

@@ -186,7 +186,7 @@ class CreateBlockedSenderPolicyOutput(komand.Output):
         "fromType": {
           "type": "string",
           "title": "From Type",
-          "description": "Which sender addresses the policy applies to. CCan be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name",
+          "description": "Which sender addresses the policy applies to. Can be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name",
           "order": 7
         },
         "fromValue": {
@@ -300,7 +300,7 @@ class CreateBlockedSenderPolicyOutput(komand.Output):
             "fromType": {
               "type": "string",
               "title": "From Type",
-              "description": "Which sender addresses the policy applies to. CCan be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name",
+              "description": "Which sender addresses the policy applies to. Can be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name",
               "order": 7
             },
             "fromValue": {

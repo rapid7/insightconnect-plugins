@@ -1,11 +1,11 @@
 # Description
 
-The [Komand](https://www.komand.com) plugin provides meta-actions and trigger you can use with [Komand](https://www.komand.com/).
+The [Komand](komand.com) plugin provides backwards compatibility to run workflows in Komand, Rapid7's legacy on-premise SOAR solution.
 
 # Key Features
 
-* Respond to threats faster
-* Securtiy Orchestration
+* Automate manual tasks to save time and improve efficiency
+* Orchestrate incident response using data and actions from a wide variety of solutions
 
 # Requirements
 
@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to Komand server, e.g. https\://komand.company.com|None|
+|url|string|None|True|URL to Komand server, e.g. https://komand.company.com|None|
 |credentials|credential_username_password|None|True|Username and password for user|None|
 
 ## Technical Details
@@ -107,7 +107,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: dig
 title: Dig
 description: Dig is used for forward and reverse DNS lookups
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []
@@ -15,7 +15,7 @@ tags:
 - dig
 - dns
 hub_tags:
-  use_cases: [soar, threat_hunting, threat_intel, soc_automation, investigations, penetration_testing]
+  use_cases: [threat_detection_and_response, offensive_security]
   keywords: [dig, dns]
   features: []
 actions:

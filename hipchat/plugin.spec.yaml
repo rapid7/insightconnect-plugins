@@ -3,11 +3,11 @@ extension: plugin
 products: [insightconnect]
 name: hipchat
 title: HipChat
-description: The HipChat plugin can send and receive messages along with managing users
+description: Send and receive messages along with managing users in Hipchat
 version: 1.0.1
 vendor: rapid7
 support: community
-status: []
+status: [obsolete]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/hipchat
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -16,7 +16,7 @@ tags:
 - hipchat
 - chat
 hub_tags:
-  use_cases: [soar, user_management, alerting_and_notifications]
+  use_cases: [user_management, alerting_and_notifications]
   keywords: [hipchat, chat]
   features: []
 enable_cache: true
@@ -42,7 +42,7 @@ triggers:
     description: Trigger on chat latest message
     input:
       room_id_or_name:
-        description: Room id or name
+        description: Room ID or name
         type: string
         required: true
       max-results:
@@ -64,7 +64,7 @@ triggers:
         required: false
       not-before:
         type: string
-        description: The id of the message that is oldest in the set of messages to
+        description: The ID of the message that is oldest in the set of messages to
           be returned. The server will not return any messages that chronologically
           precede this message
         required: false
@@ -141,7 +141,7 @@ actions:
       id:
         type: integer
         title: User ID
-        description: The new created user id
+        description: The new created user ID
         required: false
       links:
         type: object
@@ -159,8 +159,8 @@ actions:
     input:
       id_or_email:
         type: string
-        title: User Id or Email Address
-        description: The id, email address, or mention name (beginning with an '@')
+        title: User ID or Email Address
+        description: The ID, email address, or mention name (beginning with an '@')
           of the user to update
         required: true
       name:
@@ -214,7 +214,7 @@ actions:
       status_code:
         type: integer
         title: Status
-        description: Http status code
+        description: HTTP status code
         required: false
   delete:
     title: Delete User
@@ -222,8 +222,8 @@ actions:
     input:
       id_or_email:
         type: string
-        title: User Id or Email Address
-        description: The id, email address, or mention name (beginning with an '@')
+        title: User ID or Email Address
+        description: The ID, email address, or mention name (beginning with an '@')
           of the user to update
         required: true
     output:
@@ -238,8 +238,8 @@ actions:
     input:
       room_id_or_name:
         type: string
-        title: Room Id or Name
-        description: The id or url encoded name of the room
+        title: Room ID or Name
+        description: The ID or URL encoded name of the room
         required: true
       message:
         type: string
@@ -249,11 +249,11 @@ actions:
     output:
       id:
         type: string
-        title: Message Id
+        title: Message ID
         description: The unique identifier of the sent message
         required: false
       timestamp:
         type: string
         title: Timestamp
-        description: The utc timestamp representing when the message was processed
+        description: The UTC timestamp representing when the message was processed
         required: false

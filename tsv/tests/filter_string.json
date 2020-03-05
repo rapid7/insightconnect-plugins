@@ -3,8 +3,8 @@
         "action": "filter_string",
         "connection": null,
         "input": {
-            "fields": "",
-            "tsv": ""
+            "fields": "f1,f4",
+            "tsv": "this\tis\ta\tsentence"
         },
         "meta": {}
     },

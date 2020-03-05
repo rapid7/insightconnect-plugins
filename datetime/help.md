@@ -1,11 +1,11 @@
 # Description
 
-The Datetime InsightConnect plugin manipulate timestamps using Python's [Maya](https://pypi.org/project/maya/) library.
+Timestamps, timezones, and Datetimes can be difficult to work with, especially when dealing with different locales on different systems. The Datetime InsightConnect plugin manipulates timestamps using Python's [Maya](https://pypi.org/project/maya/) library, which makes the simple things much easier while admitting that time is an illusion (timezones doubly so).
 
 # Key Features
 
 * Convert a Datetime to an Epoch and vice versa
-* Convert a Datetime to specified format
+* Convert a Datetime to a specified format
 * Determine the elapsed time between two dates
 
 # Requirements
@@ -16,7 +16,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -30,15 +30,15 @@ This action is used to get the current Datetime in a specified format.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|format_string|string|%d %b %Y %H\:%M\:%S|True|Format string for the output. Example\: %H\:%M\:%S or %d/%m/%Y|None|
-|use_rfc3339_format|boolean|None|True|Use RFC3339 format (eg. 2017-10-24T18\:27\:36.23Z). This is the most compatible date format for timestamp manipulation. Enabling this will override the format string input|None|
+|format_string|string|%d %b %Y %H:%M:%S|True|Format string for the output. Example: %H:%M:%S or %d/%m/%Y|None|
+|use_rfc3339_format|boolean|None|True|Use RFC3339 format (eg. 2017-10-24T18:27:36.23Z). This is the most compatible date format for timestamp manipulation. Enabling this will override the format string input|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|epoch_timestamp|integer|False|None|
-|datetime|string|False|None|
+|datetime|string|True|Datetime|
+|epoch_timestamp|integer|True|Epoch timestamp|
 
 Example output:
 
@@ -59,19 +59,19 @@ This action is used to subtract Datetime units from a Datetime.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|hours|integer|0|True|How many hours to subtract from the specified Datetime|None|
 |base_time|date|None|True|Datetime from which to subtract from|None|
-|seconds|integer|0|True|How many seconds to subtract from the specified Datetime|None|
-|months|integer|0|True|How many months to subtract from the specified Datetime|None|
-|minutes|integer|0|True|How many minutes to subtract from the specified Datetime|None|
 |days|integer|0|True|How many days to subtract from the specified Datetime|None|
+|hours|integer|0|True|How many hours to subtract from the specified Datetime|None|
+|minutes|integer|0|True|How many minutes to subtract from the specified Datetime|None|
+|months|integer|0|True|How many months to subtract from the specified Datetime|None|
+|seconds|integer|0|True|How many seconds to subtract from the specified Datetime|None|
 |years|integer|0|True|How many years to subtract from the specified Datetime|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|date|date|False|The Datetime after subtraction|
+|date|date|True|The Datetime after subtraction|
 
 Example output:
 
@@ -91,19 +91,19 @@ This action is used to add Datetime units to a Datetime.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|hours|integer|0|True|How many hours to add to the specified Datetime|None|
 |base_time|date|None|True|Datetime with which to add to|None|
-|seconds|integer|0|True|How many seconds to add to the specified Datetime|None|
-|months|integer|0|True|How many months to add to the specified Datetime|None|
-|minutes|integer|0|True|How many minutes to add to the specified Datetime|None|
 |days|integer|0|True|How many days to add to the specified Datetime|None|
+|hours|integer|0|True|How many hours to add to the specified Datetime|None|
+|minutes|integer|0|True|How many minutes to add to the specified Datetime|None|
+|months|integer|0|True|How many months to add to the specified Datetime|None|
+|seconds|integer|0|True|How many seconds to add to the specified Datetime|None|
 |years|integer|0|True|How many years to add to the specified Datetime|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|date|date|False|The Datetime after addition|
+|date|date|True|The Datetime after addition|
 
 Example output:
 
@@ -176,15 +176,15 @@ This action is used to find the difference between two Datetime inputs.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |first_time|date|None|True|First date|None|
+|result_unit|string|None|True|Time unit of measurement for result|['Years', 'Months', 'Days', 'Hours', 'Minutes', 'Seconds']|
 |second_time|date|None|True|Second date|None|
-|result_unit|string|'Days'|True|Unit of time for output|['Years', 'Months', 'Days', 'Hours', 'Minutes', 'Seconds']|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|difference|int|True|The number of X between dates|
-|unit|string|True|Unit of measurement for time|
+|difference|integer|True|Quantity of time difference|
+|time_unit|string|True|Time unit of measurement|
 
 Example output:
 
@@ -199,7 +199,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -207,11 +207,11 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.5 - New spec and help.md format for the Hub
+* 2.0.5 - New spec and help.md format for the Hub | Changed const string in params.get to Input constants | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
 * 2.0.4 - Update plugin tag from `utility` to `utilities` for Marketplace searchability
 * 2.0.3 - Fixed issue where connection test failed
 * 2.0.2 - Fixed issue where action Date from Epoch will not accept floats

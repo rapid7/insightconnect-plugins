@@ -5,7 +5,7 @@ name: opendxl
 title: OpenDXL
 description: Communicate and share information for real-time, accurate security
   decisions and actions using OpenDXL
-version: 1.1.2
+version: 1.1.3
 vendor: rapid7
 support: community
 status: []
@@ -14,11 +14,11 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.opendxl.com/
 tags:
-- opendxl
 - message broker
+- data exchange
 hub_tags:
-  use_cases: [soar, network_containment, asset_containment, threat_detection_and_response, soc_automation]
-  keywords: [opendxl, message broker]
+  use_cases: [threat_detection_and_response]
+  keywords: [message broker, data exchange]
   features: []
 connection:
   broker_ca:

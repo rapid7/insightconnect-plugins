@@ -18,7 +18,7 @@ tags:
 - syslog
 - logs
 hub_tags:
-  use_cases: [soar, data_utility, soc_automation, alert_enrichment]
+  use_cases: [data_utility, data_enrichment]
   keywords: [cef, arcsight, events, syslog, logs]
   features: []
 language: python
@@ -80,6 +80,7 @@ types:
       required: false
 actions:
   create_string:
+    title: Create String
     description: Creates a CEF formatted string
     input:
       cef:

@@ -24,15 +24,15 @@ main() {
     is_mdl || exit 0
     is_help || exit 0
     printf "\n[${YELLOW}*${NORMAL}] ${BOLD}Validating markdown...${NORMAL}\n"
-    output=$(mdl help.md)
-    # We don't rely on exit code due to the following rules we don't care about
-    if echo "$output" | egrep -v "MD024|MD013|MD029|MD033|MD013|MD024|MD025|MD034|MD036" | fgrep 'help.md:'; then
+    mdl --rules ~MD024,~MD013,~MD029,~MD033,~MD034,~MD013,~MD024,~MD025,~MD034,~MD036 help.md
+    result=$?
+    if [[ $result > 0 ]]; then
       printf "[${RED}FAIL${NORMAL}] Fails markdown linting\n"
     else
       printf "[${YELLOW}SUCCESS${NORMAL}] Passes markdown linting\n"
     fi
 
-    return 0 # Make make happy :)
+    return $result
 }
 
 main

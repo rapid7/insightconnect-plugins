@@ -1,11 +1,11 @@
 {
     "body": {
         "action": "create_repo",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            }
+        "connection": {	
+            "credentials": {	
+                "password": "",	
+                "username": ""	
+            }	
         },
         "input": {
             "description": "Test Repo Descripton",

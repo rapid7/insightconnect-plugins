@@ -1,15 +1,15 @@
 {
-	"spec": "19732e9aff681df878906347c39dd617",
-	"manifest": "89e6592e8afaed4c956a28fc438fdaee",
-	"setup": "2c7469fe6f0c16f4ba64651e0ce67139",
+	"spec": "5551af5985a8134963b730ec72b47074",
+	"manifest": "58432d4ecae3d14974b4953b4944e16a",
+	"setup": "628ad31181211cef76f8514f22b9ca54",
 	"schemas": [
 		{
 			"identifier": "add_group_member/schema.py",
-			"hash": "735c0d22ac218bf09b8ba845586ae845"
+			"hash": "5096fe0bc9ac344284bd79073ef07e76"
 		},
 		{
 			"identifier": "create_blocked_sender_policy/schema.py",
-			"hash": "3b3c1a78ec27313480ded966b9a2048b"
+			"hash": "a868cae40f99416e68386b580993c4c9"
 		},
 		{
 			"identifier": "create_managed_url/schema.py",
@@ -18,6 +18,14 @@
 		{
 			"identifier": "decode_url/schema.py",
 			"hash": "d7bd6535b42a6511f21458bfe0c65497"
+		},
+		{
+			"identifier": "delete_group_member/schema.py",
+			"hash": "e6202b1ef1c23683b26943a3ecef0a27"
+		},
+		{
+			"identifier": "delete_managed_url/schema.py",
+			"hash": "5e309c920bf5b99bd1c0a07fd8c31821"
 		},
 		{
 			"identifier": "find_groups/schema.py",
@@ -29,7 +37,7 @@
 		},
 		{
 			"identifier": "get_ttp_url_logs/schema.py",
-			"hash": "a30019d2661e0d9cfbe4c0a7fa1fc203"
+			"hash": "0a84d44d6eb41a4d9b96db0d3853af4b"
 		},
 		{
 			"identifier": "permit_or_block_sender/schema.py",

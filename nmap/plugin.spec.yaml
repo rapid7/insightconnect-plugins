@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: nmap
 title: Nmap
-description: Nmap is used to launch scan against a networt to discover and audit
+description: Open source utility for network discovery and security auditing
 version: 1.0.2
 vendor: rapid7
 support: community
@@ -18,7 +18,7 @@ tags:
 - auditing
 - network
 hub_tags:
-  use_cases: [soar, soc_automation, vulnerability_management, penetration_testing ]
+  use_cases: [vulnerability_management, offensive_security ]
   keywords: [nmap, scanner, auditing, network]
   features: []
 types:
@@ -258,8 +258,7 @@ actions:
       sudo:
         title: Sudo
         type: boolean
-        description: Whether or not to use superuser privileges for scan, e.g. -sS
-          requires superuser privileges but -sT does not
+        description: Whether or not to use superuser privileges for scan
         required: true
         default: false
     output:

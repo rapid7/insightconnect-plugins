@@ -33,7 +33,7 @@ class SearchEventsInput(komand.Input):
       "title": "Analysis",
       "description": "Search by analysis level",
       "enum": [
-        "Don't search on",
+        "Do not search on",
         "Initial",
         "Ongoing",
         "Completed"
@@ -69,7 +69,7 @@ class SearchEventsInput(komand.Input):
       "title": "Published",
       "description": "Search by if published",
       "enum": [
-        "Don't search on",
+        "Do not search on",
         "True",
         "False"
       ],
@@ -86,7 +86,7 @@ class SearchEventsInput(komand.Input):
       "title": "Threat Level",
       "description": "Search by threat level",
       "enum": [
-        "Don't search on",
+        "Do not search on",
         "Undefined",
         "Low",
         "Medium",

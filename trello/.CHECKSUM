@@ -1,11 +1,11 @@
 {
-	"spec": "bd27e7112c8bc6200f8b42f3a1adb0c5",
-	"manifest": "b1cdc120a47f85d309b0a9b0552d0d74",
-	"setup": "da4ddf2864d7242b476d4181556f2c41",
+	"spec": "81728727cb0951c2b04aae66f82720dc",
+	"manifest": "d42e50252fc2aca46cbddd4ae865c903",
+	"setup": "e00fbb0832f79ef94aa2727153d12f86",
 	"schemas": [
 		{
 			"identifier": "deactivate_user/schema.py",
-			"hash": "4f8775d5674439b113ab8c37da6ed560"
+			"hash": "6699eb4877a93dcc741699cd0cd508dd"
 		},
 		{
 			"identifier": "deactivated_list/schema.py",
@@ -17,11 +17,11 @@
 		},
 		{
 			"identifier": "member_list/schema.py",
-			"hash": "2210ff5be39bfd151f9c86cee1d1f759"
+			"hash": "72268a83a50218a01197d8382822281b"
 		},
 		{
 			"identifier": "remove_member_from_board/schema.py",
-			"hash": "bef63f9b981104bff5cc7e6a0ae1d94d"
+			"hash": "173f14141f231529ca0f80e019d36fea"
 		},
 		{
 			"identifier": "remove_member_from_cards/schema.py",
@@ -29,7 +29,7 @@
 		},
 		{
 			"identifier": "remove_member_from_org/schema.py",
-			"hash": "7691591655006d55993cdc2ffab9ce6f"
+			"hash": "149a0c3d9afa400040c67bea69b9dc74"
 		},
 		{
 			"identifier": "connection/schema.py",

@@ -1,18 +1,17 @@
 # Description
 
-[Jira](https://www.atlassian.com/software/jira) is a tool developed by Australian Company Atlassian.
-It is used for bug tracking, issue tracking, and project management.
+[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira REST API supports the Jira Software, Jira Server, and Jira Help Desk products from Atlassian.
 
 # Key Features
 
-* Ticket Managment
-* Reporting
-* Planning and Delegation
+* Create, find, edit, comment, and generally manage your Jira tickets through the Jira REST API to expedite operations
+* (Re-)Assign issues to users to orchestrate operations
+* Find and create new users in your Jira instance to automate account provisioning
 
 # Requirements
 
-* User Name and Password
-* Jira server
+* Jira URL
+* Administrative credentials
 
 # Documentation
 
@@ -37,8 +36,9 @@ This action is used to search for issues.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|max|integer|10|True|Max results to return|None|
+|get_attachments|boolean|False|False|Get attachments from issue|None|
 |jql|string|None|True|JQL search string to use|None|
+|max|integer|10|True|Max results to return|None|
 
 ##### Output
 
@@ -74,9 +74,9 @@ This action is used to add an attachment to an issue in Jira.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|attachment_bytes|bytes|None|True|Attachment bytes|None|
 |attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|
 |id|string|None|True|Issue ID|None|
-|attachment_bytes|bytes|None|True|Attachment bytes|None|
 
 ##### Output
 
@@ -219,10 +219,10 @@ This action is used to create a user account.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|username|string|None|True|Username|None|
-|password|string|None|False|Password|None|
 |email|string|None|True|Email|None|
 |notify|boolean|False|True|Notify if true|[True, False]|
+|password|string|None|False|Password|None|
+|username|string|None|True|Username|None|
 
 ##### Output
 
@@ -271,8 +271,8 @@ This action is used to find users.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|query|string|None|True|Query String, e.g. Joe|None|
 |max|integer|10|True|Max results to return|None|
+|query|string|None|True|Query String, e.g. Joe|None|
 
 ##### Output
 
@@ -286,7 +286,7 @@ Example output:
 {
   "users": [{
       "name": "mrinehart",
-      "email_address": "mrinehart@example.com",
+      "email_address": "user@example.com",
       "display_name": "Mike Test",
       "active": true
   }]
@@ -326,6 +326,7 @@ This action is used to retrieve an issue.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|get_attachments|boolean|False|False|Get attachments from issue|None|
 |id|string|None|True|Issue ID|None|
 
 ##### Output
@@ -333,7 +334,7 @@ This action is used to retrieve an issue.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |found|boolean|False|True if found|
-|issue|issue|False|Issue|
+|issue|issue|False|Found issue|
 
 Example output:
 
@@ -452,7 +453,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "bob_ross@example.com",
+              "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -469,7 +470,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "bob_ross@example.com",
+              "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -505,7 +506,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "bob_ross@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -522,7 +523,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "bob_ross@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -566,8 +567,8 @@ This action is used to retrieve all comments on an issue.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|comments|[]comment|False|Comments list|
 |count|integer|False|Count of comments found|
-|comments|[]comment|False|Comments|
 
 Example output:
 
@@ -579,7 +580,7 @@ Example output:
       "id": "10000",
       "author": {
           "name": "admin",
-          "email_address": "bob_ross@example.com",
+          "email_address": "user@example.com",
           "display_name": "Mike Rinehart",
           "active": true
       },
@@ -589,7 +590,7 @@ Example output:
           "name": "admin",
           "key": "admin",
           "accountId": "5bd733f3f8460347a10cbdd9",
-          "emailAddress": "bob_ross@example.com",
+          "emailAddress": "user@example.com",
           "avatarUrls": {
               "48x48": "",
               "24x24": "",
@@ -615,16 +616,16 @@ This action is used to edit an issue within Jira.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|description|string|None|False|Description field on the issue|None|
+|fields|object|None|False|An object of fields and values to change|None|
 |id|string|None|True|Issue ID|None|
 |notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|
 |summary|string|None|False|Summary field on the issue|None|
-|description|string|None|False|Description field on the issue|None|
-|fields|object|None|False|An object of fields and values to change|None|
 |update|object|None|False|An object that contains update operations to apply|None|
 
 Example input:
 
-Making an update to custom fields in `fields` parameter:
+Making an update to custom fields in the `fields` parameter:
 
 ```
 {
@@ -633,7 +634,7 @@ Making an update to custom fields in `fields` parameter:
 }
 ```
 
-Update to assignee in the `field` parameter
+Update the assignee in the `field` parameter
 
 ```
 {
@@ -649,7 +650,7 @@ Using the `update` parameter
 }
 ```
 
-Updating multiple fields with `update` parameter
+Updating multiple fields with the `update` parameter
 
 ```
 {
@@ -687,6 +688,7 @@ This trigger is used to trigger which indicates that a new issue has been create
 |----|----|-------|--------|-----------|----|
 |get_attachments|boolean|False|False|Get attachments from issue|None|
 |jql|string|None|False|JQL search string to use|None|
+|poll_timeout|integer|60|False|Timeout between next poll, default 60|None|
 |project|string|None|True|Project ID or name|None|
 
 ##### Output
@@ -812,7 +814,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "bob_ross@example.com",
+              "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -829,7 +831,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "5bd733f3f8460347a10cbdd9",
-              "emailAddress": "bob_ross@example.com",
+              "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -865,7 +867,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "bob_ross@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -882,7 +884,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "5bd733f3f8460347a10cbdd9",
-                      "emailAddress": "bob_ross@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -922,6 +924,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 4.0.2 - Moved `apk add` in Dockerfile to use cache | Changed bare strings in params.get and output to static fields from schema | Remove duplicated code in actions | Changed `Exception` to `PluginException`
 * 3.2.1 - Update Get Issue, Find Issues and New Issue action to support a Get Attachments option
 * 3.2.0 - Update Transition Issue action to allow for assignment of fields during issue transition
 * 3.1.2 - Update Create Issue action to remove newlines from summaries

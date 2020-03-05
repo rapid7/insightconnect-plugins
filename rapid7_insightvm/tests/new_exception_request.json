@@ -2,10 +2,10 @@
     "body": {
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "url": null
+            "url": ""
         },
         "dispatcher": {
             "url": "http://localhost:8000",
@@ -14,7 +14,7 @@
         "input": {
             "frequency": 1,
             "status_filter": [
-                "Under Review"
+                "under review"
             ]
         },
         "meta": {

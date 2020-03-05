@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "agents_abort_scan",
+    "meta": {},
+    "input": {
+      "filter": {}
+    },
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "url": ""
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}

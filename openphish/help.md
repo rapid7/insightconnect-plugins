@@ -1,7 +1,9 @@
 # Description
 
 [OpenPhish](http://openphish.com) is a fully automated self-contained platform for phishing intelligence.
-It identifies phishing sites and performs intelligence analysis in real time without human intervention and without using any external resources, such as blacklists. Using the OpenPhish plugin for Rapid7 InsightConnect within an automation workflow can help aid in phishing investigations with minimal effort.
+It identifies phishing sites and performs intelligence analysis in real time without human intervention and 
+without using any external resources, such as blacklists. Using the OpenPhish plugin for Rapid7 InsightConnect 
+within an automation workflow can help aid in phishing investigations with minimal effort.
 
 # Key Features
 
@@ -68,7 +70,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

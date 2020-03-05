@@ -1,14 +1,14 @@
 # Description
 
 [Simple Mail Transfer Protocol](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol) (SMTP) is an
-Internet standard for electronic mail (email) transmission. Users of this plugin will be able to craft and automatically
-send email through their Rapid7 InsightConnect workflows.
+Internet standard for electronic mail (email) transmission. This plugin provides users with the ability to craft and automatically send emails through their Rapid7 InsightConnect workflows.
 
 This plugin can aid in automated notifications, alerting, employee onboarding/offboarding, and more.
 
 # Key Features
 
-* Send email
+* Send an email with customizable FROM address, TO address, Subject line, and Message
+* Send an HTML-enabled email for enhanced viewing quality
 
 # Requirements
 
@@ -24,11 +24,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|username|string|None|False|None|None|
-|use_ssl|boolean|True|False|None|None|
-|host|string|None|False|Host of SMTP server to connect to|None|
-|password|password|None|False|None|None|
-|port|integer|25|False|None|None|
+|credentials|credential_username_password|None|False|Username and password|None|
+|host|string|None|True|Host of SMTP server to connect to|None|
+|port|integer|25|True|Port of SMTP server|None|
+|use_ssl|boolean|True|True|Use SSL|None|
 
 NOTE: If username and password are left blank, the plugin will not try to authenticate.
 
@@ -44,13 +43,14 @@ This action is used to send an email.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|email_to|string|None|True|Email to send TO|None|
 |attachment|file|None|False|Attachment|None|
+|bcc|[]string|None|False|BCC email|None|
 |cc|[]string|None|False|CC emails|None|
+|email_from|string|None|True|Email to use as FROM|None|
+|email_to|string|None|True|Email to send TO|None|
+|html|boolean|None|True|Message contains HTML|None|
 |message|string|None|True|Message to send on the email|None|
 |subject|string|None|True|Subject of the email|None|
-|email_from|string|None|True|Email to use as FROM|None|
-|bcc|[]string|None|False|BCC email|None|
 
 Example output:
 
@@ -66,11 +66,11 @@ Example output:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result|string|False|None|
+|result|string|False|Result|
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -82,6 +82,7 @@ If you are passing a variable into the Attachment 'Content' field, you must make
 
 ## Version History
 
+* 2.0.5 - Fix issue sending emails without attachment
 * 2.0.4 - New spec and help.md format for the Hub
 * 2.0.3 - Fix issue with reliability in regards to previous Send action empty attachment fix
 * 2.0.2 - Fix issue where Send action doesn't handle empty attachments correctly

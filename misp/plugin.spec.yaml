@@ -4,7 +4,7 @@ products: [insightconnect]
 name: misp
 title: MISP
 description: MISP is an open source threat sharing platform
-version: 3.0.2
+version: 4.0.0
 vendor: rapid7
 support: community
 status: []
@@ -17,7 +17,7 @@ tags:
 - IOC
 - threat
 hub_tags:
-  use_cases: [soar, soc_automation, investigations, threat_intel, threat_hunting, threat_detection_and_response]
+  use_cases: [threat_detection_and_response]
   keywords: [misp, IOC, threat]
   features: []
 types:
@@ -933,8 +933,8 @@ actions:
         type: string
         required: false
       frame:
-        title: Commented Explination
-        description: Commented out expliantion framing the data
+        title: Commented Explanation
+        description: Commented out explanation framing the data
         type: boolean
         default: true
         required: true
@@ -970,7 +970,7 @@ actions:
     input:
       format:
         title: Export Format
-        description: Export format as either md5 or sha1
+        description: Export format as either MD5 or SHA1
         type: string
         required: true
         enum:
@@ -1101,7 +1101,7 @@ actions:
       event:
         title: Event
         description: Event
-        type: Event"
+        type: Event
         required: false
       message:
         title: Message
@@ -1198,7 +1198,7 @@ actions:
         type: string
         required: false
         enum:
-        - Don't search on
+        - Do not search on
         - Undefined
         - Low
         - Medium
@@ -1209,7 +1209,7 @@ actions:
         type: string
         required: false
         enum:
-        - Don't search on
+        - Do not search on
         - 'True'
         - 'False'
       organization:
@@ -1223,7 +1223,7 @@ actions:
         type: string
         required: false
         enum:
-        - Don't search on
+        - Do not search on
         - Initial
         - Ongoing
         - Completed

@@ -2,9 +2,9 @@
     "body": {
         "action": "suspend",
         "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
+           "credentials": {
+                "password": "",
+                "username": ""
             },
             "host": null
         },

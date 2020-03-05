@@ -30,7 +30,7 @@ class ConnectionSchema(komand.Input):
     "subdomain": {
       "type": "string",
       "title": "Subdomain",
-      "description": "Zendesk subdomain E.g. mycompany",
+      "description": "Zendesk subdomain",
       "order": 3
     }
   },

@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 |access_key|credential_secret_key|None|True|None|None|
 |ssl_verify|boolean|True|True|Validate certificate|None|
 |secret_key|credential_secret_key|None|True|None|None|
-|hostname|string|None|True|Nessus instance hostname e.g. 192.168.1.10\:1234|None|
+|hostname|string|None|True|Nessus instance hostname e.g. 192.168.1.10:1234|None|
 
 ## Technical Details
 
@@ -300,5 +300,5 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [Nessus Professional Product Page](https://www.tenable.com/products/nessus-vulnerability-scanner/nessus-professional)
-* Nessus API documentation is only available through your Nessus instance. Assuming default configuration, it can be found at [https://localhost:8834/api](https://localhost:8834/api)
+* Nessus API documentation is only available through your Nessus instance. Assuming default configuration, it can be found at `https://localhost:8834/api`.
 

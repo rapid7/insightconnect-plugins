@@ -24,7 +24,7 @@ tags:
 - bytes
 - zip
 hub_tags:
-  use_cases: [soar, data_utility]
+  use_cases: [data_utility]
   keywords: [compress, decompress, base64, file, gzip, bzip, lz, xz, bytes, zip]
   features: []
 enable_cache: false

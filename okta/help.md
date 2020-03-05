@@ -1,8 +1,7 @@
 # Description
 
 [Okta](https://www.okta.com/) is a SSO and account lifecycle management provider that allows companies
-to integrate their central user account system with a wide variety of other.
-applications and services.
+to integrate their central user account system with a wide variety of other applications and services.
 
 # Key Features
 
@@ -21,12 +20,113 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|okta_url|string|None|True|Okta Domain e.g. dev-114295-admin.oktapreview.com|None|
 |okta_key|credential_secret_key|None|True|Okta key|None|
+|okta_url|string|None|True|Okta Domain e.g. dev-114295-admin.oktapreview.com|None|
 
 ## Technical Details
 
 ### Actions
+
+#### Get Okta User Factors
+
+This action returns an object containing all of a user's factors for MFA.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|user_id|string|None|True|User ID to get factors for|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|factors|[]object|False|Obbject containing all the factors of a user for MFA|
+
+Example output:
+
+```
+[
+    {
+        "id": "opfpfac5jbFkZppdt0h7",
+        "factorType": "push",
+        "provider": "OKTA",
+        "vendorName": "OKTA",
+        "status": "ACTIVE",
+        "created": "2020-01-24T14:52:55.000Z",
+        "lastUpdated": "2020-01-24T14:55:18.000Z",
+        "profile": {
+            "credentialId": "user@example.com",
+            "deviceType": "SmartPhone_IPhone",
+            "keys": [
+                {
+                    "kty": "EC",
+                    "use": "sig",
+                    "kid": "default",
+                    "x": "Oec4otjngqynTnI37AncY4tWeSE2WxpG98s5sQXxnUM",
+                    "y": "zVlJEuKcq8LphPIFS5A-4OMkfHTviLImx7WBsDd7E14",
+                    "crv": "P-256"
+                }
+            ],
+            "name": "iPhone XR",
+            "platform": "IOS",
+            "version": "13.3"
+        },
+        "_links": {
+            "self": {
+                "href": "https://company.oktapreview.com/api/v1/users/00up95jz8uU1Zs6T60h7/factors/opfpfac5jbFkZppdt0h7",
+                "hints": {
+                    "allow": [
+                        "GET",
+                        "DELETE"
+                    ]
+                }
+            },
+            "verify": {
+                "href": "https://company.oktapreview.com/api/v1/users/00up95jz8uU1Zs6T60h7/factors/opfpfac5jbFkZppdt0h7/verify",
+                "hints": {
+                    "allow": [
+                        "POST"
+                    ]
+                }
+            },
+            "user": {
+                "href": "https://company.oktapreview.com/api/v1/users/00up93jz8uU1Zs6T60h7",
+                "hints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        }
+    }
+]
+```
+
+#### Push MFA Challenge
+
+This action pushes a MFA challenge to a user's device and waits for a success or rejection.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|factor_id|string|None|True|Factor ID of the user to push verification to|None|
+|user_id|string|None|True|User ID to push verification to|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|factor_status|string|False|User factor status|
+
+Example Output:
+
+```
+{
+  "factor_status": "SUCCESS"
+}
+```
 
 #### Suspend User
 
@@ -44,16 +144,16 @@ as a whole.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user_id|string|False|The user ID of the Okta user|
 |email|string|False|The email of the Okta user|
 |success|boolean|True|Whether suspension was successful|
+|user_id|string|False|The user ID of the Okta user|
 
 Example output:
 
 ```
 {
   "user_id": "00uftwxx6wj9AripB0h7",
-  "email": "jon@komand.com",
+  "email": "user@example.com",
   "success": true
 }
 ```
@@ -80,16 +180,16 @@ This action is used to reset all multifactors for a user by email.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user_id|string|False|The user ID of the Okta user|
 |email|string|False|The email of the Okta user|
 |success|boolean|True|Whether the reset was successful|
+|user_id|string|False|The user ID of the Okta user|
 
 Example output:
 
 ```
 {
   "user_id": "00uftwxx6wj9AripB0h7",
-  "email": "jon@komand.com",
+  "email": "user@example.com",
   "success": true
 }
 ```
@@ -120,16 +220,16 @@ the API returning a successful result and the actual deactivation / deprovisioni
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user_id|string|False|The user ID of the Okta user|
 |email|string|False|The email of the Okta user|
 |success|boolean|True|Whether deactivation was successful|
+|user_id|string|False|The user ID of the Okta user|
 
 Example output:
 
 ```
 {
   "user_id": "00uftwxx6wj9AripB0h7",
-  "email": "jon@komand.com",
+  "email": "user@example.com",
   "success": true
 }
 ```
@@ -150,8 +250,8 @@ This action is used to delete a user. If a user is not deprovisioned, this will 
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|send_admin_email|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false.|None|
-|user_email|string|None|True|The Email of the employee to delete|None|
+|send_admin_email|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false|None|
+|user_email|string|None|True|The email of the user to delete|None|
 
 ##### Output
 
@@ -181,16 +281,16 @@ This action is used to unsuspend a user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user_id|string|False|The user ID of the Okta user|
 |email|string|False|The email of the Okta user|
 |success|boolean|True|Whether unsuspension was successful|
+|user_id|string|False|The user ID of the Okta user|
 
 Example output:
 
 ```
 {
   "user_id": "00uftwxx6wj9AripB0h7",
-  "email": "jon@komand.com",
+  "email": "user@example.com",
   "success": true
 }
 ```
@@ -217,18 +317,18 @@ This action is used to obtain information about a user.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Status|
-|profile|profile|False|Profile|
-|passwordChanged|string|False|When the password was changed, e.g. 2013-07-02T21\:36\:25.344Z|
-|created|string|False|When the user was created, e.g. 2013-07-02T21\:36\:25.344Z|
-|activated|string|False|When the user was activated, e.g. 2013-07-02T21\:36\:25.344Z|
-|lastUpdated|string|False|When the user was last updated, e.g. 2013-07-02T21\:36\:25.344Z|
 |_links|_links|False|Links|
-|lastLogin|string|False|When the last login for the user was, e.g. 2013-07-02T21\:36\:25.344Z|
+|activated|string|False|When the user was activated, e.g. 2013-07-02T21:36:25.344Z|
+|created|string|False|When the user was created, e.g. 2013-07-02T21:36:25.344Z|
 |credentials|credentials|False|Credentials|
 |found|boolean|True|Whether user was found|
 |id|string|False|User ID|
-|statusChanged|string|False|When the status of the user changed, e.g. 2013-07-02T21\:36\:25.344Z|
+|lastLogin|string|False|When the last login for the user was, e.g. 2013-07-02T21:36:25.344Z|
+|lastUpdated|string|False|When the user was last updated, e.g. 2013-07-02T21:36:25.344Z|
+|passwordChanged|string|False|When the password was changed, e.g. 2013-07-02T21:36:25.344Z|
+|profile|profile|False|Profile|
+|status|string|False|Status|
+|statusChanged|string|False|When the status of the user changed, e.g. 2013-07-02T21:36:25.344Z|
 
 Example output:
 
@@ -239,8 +339,8 @@ Example output:
   "profile": {
     "firstName": "Jon",
     "lastName": "Schipp",
-    "login": "jon@komand.com",
-    "email": "jon@komand.com"
+    "login": "user@example.com",
+    "email": "user@example.com"
   },
   "passwordChanged": "2018-07-28T18:48:52.000Z",
   "created": "2018-07-28T17:24:41.000Z",
@@ -289,7 +389,7 @@ Example output:
       {
         "status": "VERIFIED",
         "type": "PRIMARY",
-        "value": "jon@komand.com"
+        "value": "user@example.com"
       }
     ],
     "provider": {
@@ -318,15 +418,15 @@ This action is used to remove a user from an existing group.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|group_id|string|None|True|The ID of the group to which the user should be added|None|
 |email|string|None|True|The email of the Okta user|None|
+|group_id|string|None|True|The ID of the group to which the user should be added|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user_id|string|False|The user ID of the Okta user|
 |success|boolean|True|Whether the add was successful|
+|user_id|string|False|The user ID of the Okta user|
 
 Example output:
 
@@ -345,15 +445,15 @@ This action is used to add a user to an existing group.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|group_id|string|None|True|The ID of the group to which the user should be added|None|
 |email|string|None|True|The email of the Okta user|None|
+|group_id|string|None|True|The ID of the group to which the user should be added|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user_id|string|False|The user ID of the Okta user|
 |success|boolean|True|Whether the add was successful|
+|user_id|string|False|The user ID of the Okta user|
 
 Example output:
 
@@ -378,8 +478,8 @@ This action is used to list available groups.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|True|Whether groups were found|
 |groups|[]group|False|List of groups|
+|success|boolean|True|Whether groups were found|
 
 Example output:
 
@@ -441,7 +541,7 @@ This action is used to assign a user to an application for SSO and provisioning.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |applicationId|string|None|True|Application ID|None|
-|appuser|object|None|False|Application user model as JSON object, see https\://developer.okta.com/docs/api/resources/apps#application-user-model|None|
+|appuser|object|None|False|Application user model as JSON object, see https://developer.okta.com/docs/api/resources/apps#application-user-model|None|
 
 `appuser` accepts a [application user model](https://developer.okta.com/docs/api/resources/apps#application-user-model) JSON object.
 
@@ -452,7 +552,7 @@ Example input:
   "id": "00u15s1KDETTQMQYABRL",
   "scope": "USER",
   "credentials": {
-    "userName": "saml.jackson@example.com"
+    "userName": "user@example.com"
   },
   "profile": {
       "salesforceGroups": [
@@ -482,35 +582,35 @@ This action is used to create a new user.
 ##### Input
 
 The profile object is a required input and is defined by Okta as [profile properties for a user](https://developer.okta.com/docs/api/resources/users#profile-object).
-e.g.: `{ "firstName": "Isaac", "lastName": "Brock", "email": "isaac.brock@example.com", "login": "isaac.brock@example.com", "mobilePhone": "555-415-1337" }`
+e.g.: `{ "firstName": "Isaac", "lastName": "Brock", "email": "user@example.com", "login": "user@example.com", "mobilePhone": "555-415-1337" }`
 
 If configuring the `provider` and/or `recovery_question` inputs, for each used, their respective fields must be completed otherwise Okta will return an error.
 This action will attempt to prevent that be removing the entire input if it detects a missing field in that input.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|profile|object|None|True|Profile properties for user|None|
 |activate|boolean|True|True|Executes activation lifecycle operation when creating the user|None|
-|groupIds|[]string|None|False|IDs of groups that user will be immediately added to at time of creation|None|
-|provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider|None|
 |credentials|credentials_input|None|False|Credentials for user|None|
+|groupIds|[]string|None|False|IDs of groups that user will be immediately added to at time of creation|None|
 |nextLogin|boolean|None|True|Change password next time the user logs in|None|
+|profile|object|None|True|Profile properties for user|None|
+|provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Status|
-|profile|profile|False|Profile|
-|passwordChanged|string|False|When the password was changed, e.g. 2013-07-02T21\:36\:25.344Z|
-|created|string|False|When the user was created, e.g. 2013-07-02T21\:36\:25.344Z|
-|activated|string|False|When the user was activated, e.g. 2013-07-02T21\:36\:25.344Z|
-|lastUpdated|string|False|When the user was last updated, e.g. 2013-07-02T21\:36\:25.344Z|
 |_links|_links|False|Links|
-|lastLogin|string|False|When the last login for the user was, e.g. 2013-07-02T21\:36\:25.344Z|
+|activated|string|False|When the user was activated, e.g. 2013-07-02T21:36:25.344Z|
+|created|string|False|When the user was created, e.g. 2013-07-02T21:36:25.344Z|
 |credentials|credentials|False|Credentials|
 |id|string|False|User ID|
-|statusChanged|string|False|When the status of the user changed, e.g. 2013-07-02T21\:36\:25.344Z|
+|lastLogin|string|False|When the last login for the user was, e.g. 2013-07-02T21:36:25.344Z|
+|lastUpdated|string|False|When the user was last updated, e.g. 2013-07-02T21:36:25.344Z|
+|passwordChanged|string|False|When the password was changed, e.g. 2013-07-02T21:36:25.344Z|
+|profile|profile|False|Profile|
+|status|string|False|Status|
+|statusChanged|string|False|When the status of the user changed, e.g. 2013-07-02T21:36:25.344Z|
 
 Example output:
 
@@ -524,13 +624,13 @@ Example output:
     "firstName": "Isaac",
     "lastName": "Brock",
     "mobilePhone": "555-415-1337",
-    "login": "isaac.brock@example.com",
-    "email": "isaac.brock@example.com"
+    "login": "user@example.com",
+    "email": "user@example.com"
   },
   "credentials": {
     "emails": [
       {
-        "value": "isaac.brock@example.com",
+        "value": "user@example.com",
         "status": "VERIFIED",
         "type": "PRIMARY"
       }
@@ -554,7 +654,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -569,6 +669,8 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.3.0 - New actions Get Factors and Send Push
+* 3.2.2 - Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` | Use input and output constants | Changed variables names to more readable | Added "f" strings | Removed duplicated code
 * 3.2.1 - New spec and help.md format for the Hub
 * 3.2.0 - New action Delete User
 * 3.1.2 - Update connection test
@@ -587,4 +689,3 @@ by Okta themselves, or constructed by the plugin based on the information it has
 ## References
 
 * [Okta API Spec](http://developer.okta.com/docs/api/resources)
-

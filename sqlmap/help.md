@@ -63,7 +63,7 @@ This action is used to perform a scan on a target.
 |charset|string|None|False|Blind SQL injection charset (e.g. '0123456789abcdef')|None|
 |level|integer|None|False|Level of tests to perform|[1, 2, 3, 4, 5]|
 |secondOrder|string|None|False|Resulting page URL searched for second-order response|None|
-|pCred|string|None|False|Proxy authentication credentials (name\:password)|None|
+|pCred|string|None|False|Proxy authentication credentials (name:password)|None|
 |timeout|integer|None|False|Seconds to wait before timeout connection (default 30)|None|
 |firstChar|string|None|False|First query output word character to retrieve|None|
 |updateAll|boolean|None|False|Update SQLmap|None|
@@ -80,7 +80,7 @@ This action is used to perform a scan on a target.
 |limitStart|string|None|False|First dump table entry to retrieve|None|
 |loadCookies|bytes|None|False|File containing cookies in Netscape/wget format|None|
 |dnsName|string|None|False|Domain name used for DNS exfiltration attack|None|
-|csvDel|string|None|False|Delimiting character used in CSV output (default\: , )|None|
+|csvDel|string|None|False|Delimiting character used in CSV output (default: , )|None|
 |osBof|boolean|None|False|Stored procedure buffer overflow exploitationn|None|
 |invalidLogical|boolean|None|False|Use logical operations for invalidating values|None|
 |getCurrentDb|boolean|None|False|Retrieve DBMS current database|None|
@@ -107,7 +107,7 @@ This action is used to perform a scan on a target.
 |privEsc|boolean|None|False|Database process user privilege escalation|None|
 |forceDns|boolean|None|False|Force DNS|None|
 |getAll|boolean|None|False|Retrieve everything|None|
-|url|string|None|False|Target URL (e.g. 'http\://www.site.com/vuln.php?id=1')|None|
+|url|string|None|False|Target URL (e.g. 'http://www.site.com/vuln.php?id=1')|None|
 |invalidBignum|boolean|None|False|Use big numbers for invalidating values|None|
 |regType|string|None|False|Windows registry key value type|None|
 |getDbs|boolean|None|False|Enumerate DBMS databases|None|
@@ -132,11 +132,11 @@ This action is used to perform a scan on a target.
 |dumpTable|boolean|False|False|Dump DBMS database table entries|None|
 |database|boolean|None|False|DBMS database to enumerate|None|
 |batch|boolean|True|False|Never ask for user input, use the default behaviour|None|
-|headers|object|None|False|Extra headers (e.g. 'Accept-Language\: fr ETag\: 123')|None|
+|headers|object|None|False|Extra headers (e.g. 'Accept-Language: fr ETag: 123')|None|
 |flushSession|boolean|False|False|Flush session files for current target|None|
 |osCmd|string|None|False|Execute an operating system command|None|
 |suffix|string|None|False|Injection payload suffix string|None|
-|dbmsCred|string|None|False|DBMS authentication credentials (user\:password)|None|
+|dbmsCred|string|None|False|DBMS authentication credentials (user:password)|None|
 |regDel|boolean|False|False|Delete a Windows registry key value|None|
 |shLib|string|None|False|Local path of the shared library|None|
 |nullConnection|boolean|False|False|Retrieve page length without actual HTTP response body|None|
@@ -164,7 +164,7 @@ This action is used to perform a scan on a target.
 |host|string|None|False|HTTP Host header value|None|
 |user|string|None|False|DBMS user to enumerate|None|
 |parseErrors|boolean|False|False|Parse and display DBMS error messages from responses|None|
-|aCred|string|None|False|HTTP authentication credentials (name\:password)|None|
+|aCred|string|None|False|HTTP authentication credentials (name:password)|None|
 |getCount|boolean|False|False|Retrieve number of entries for table(s)|None|
 |dFile|string|None|False|Back-end DBMS absolute filepath to write to|None|
 |data|string|None|False|Data string to be sent through POST|None|
@@ -207,7 +207,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

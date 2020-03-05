@@ -84,7 +84,7 @@ class GetIssueDataOutput(komand.Output):
         },
         "pipeline_name": {
           "type": "string",
-          "title": "Pipelne Name",
+          "title": "Pipeline Name",
           "description": "Pipeline name",
           "order": 5
         },

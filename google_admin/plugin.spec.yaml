@@ -17,7 +17,7 @@ tags:
 - admin
 - user provisioning
 hub_tags:
-  use_cases: [soar, user_management]
+  use_cases: [user_management]
   keywords: [google, admin, user provisioning]
   features: []
 types:
@@ -69,7 +69,7 @@ types:
       description: True if must change password at login
       type: boolean
     ipWhitelisted:
-      description: True if ip whitelisted
+      description: True if IP whitelisted
       type: boolean
     agreedToTerms:
       description: True if agreed to TOS

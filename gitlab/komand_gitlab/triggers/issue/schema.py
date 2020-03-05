@@ -37,7 +37,7 @@ class IssueInput(komand.Input):
     "interval": {
       "type": "integer",
       "title": "Interval",
-      "description": "How often recieve new issues",
+      "description": "How often receive new issues",
       "order": 6
     },
     "labels": {

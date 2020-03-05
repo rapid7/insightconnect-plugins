@@ -1,7 +1,9 @@
 # Description
 
-[QRadar](https://www-03.ibm.com/software/products/en/qradar) is an enterprise security information and event management solution from IBM. The QRadar plugin allows you to run Ariel queries and retrieve policy offense data.
-This plugin utilizes the [QRadar API](https://www.ibm.com/support/knowledgecenter/SS42VS_7.3.0/com.ibm.qradar.doc/qradar_IC_welcome.html).
+[QRadar](https://www-03.ibm.com/software/products/en/qradar) is an enterprise security information and event
+management solution from IBM. The QRadar plugin allows you to run Ariel queries and retrieve policy offense data.
+This plugin utilizes the
+[QRadar API](https://www.ibm.com/support/knowledgecenter/SS42VS_7.3.0/com.ibm.qradar.doc/qradar_IC_welcome.html).
 
 # Key Features
 
@@ -12,7 +14,7 @@ This plugin utilizes the [QRadar API](https://www.ibm.com/support/knowledgecente
 # Requirements
 
 * Administrative credentials to QRadar
-* An API key
+* QRadar API key
 
 # Documentation
 
@@ -39,8 +41,8 @@ This action is used to add data to reference_data lists.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |timeout_type|string|UNKNOWN|False|Indicates if the Time to Live interval is based on when the data was first seen or last seen|['FIRST_SEEN', 'LAST_SEEN', 'UNKNOWN']|
-|time_to_live|string|None|False|Optional\: The time to live interval, for example\: '1 month' or '5 minutes'|None|
-|element_type|string|None|True|The element type for the values allowed in the reference set. The allowed values are\: ALN (alphanumeric), ALNIC (alphanumeric ignore case), IP (IP address), NUM (numeric), PORT (port number) or DATE. Note that date values need to be represented in milliseconds since the Unix Epoch January 1st 1970.|['ALN', 'ALNIC', 'IP', 'NUM', 'PORT', 'DATE']|
+|time_to_live|string|None|False|Optional: The time to live interval, for example: '1 month' or '5 minutes'|None|
+|element_type|string|None|True|The element type for the values allowed in the reference set. The allowed values are: ALN (alphanumeric), ALNIC (alphanumeric ignore case), IP (IP address), NUM (numeric), PORT (port number) or DATE. Note that date values need to be represented in milliseconds since the Unix Epoch January 1st 1970.|['ALN', 'ALNIC', 'IP', 'NUM', 'PORT', 'DATE']|
 |name|string|None|True|The name of the reference set being created|None|
 
 ##### Output
@@ -229,7 +231,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -237,7 +239,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

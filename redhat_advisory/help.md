@@ -1,6 +1,6 @@
 # Description
 
-This plugin monitors the [Red Hat Security Advisories](https://access.redhat.com/security/updates/advisory) list, and triggers on any new advisories that come in. The Red Hat Security Advisory gives information about security flaws that affect Red Hat products and services.
+The [Red Hat Security Advisories](https://access.redhat.com/security/updates/advisory) triggers on any new security advisories. The Red Hat Security Advisory gives information about security flaws that affect Red Hat products and services.
 
 Advisories and update notifications are also provided via the Red Hat Network for products serviced by the Red Hat Network.
 
@@ -34,7 +34,7 @@ This trigger is used to monitor for new new advisories.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|after|string|None|False|Look for new advisories after provided date. Default is when trigger starts.|None|
+|after|string|None|False|Look for new advisories after provided date. Default is when trigger starts|None|
 |include_cvrf|boolean|False|False|Include the full source CVRF|None|
 
 ##### Output
@@ -67,7 +67,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.2 - New spec and help.md format for the Hub
+* 1.0.2 - New spec and help.md format for the Hub | Add missing title values for actions in plugin.spec.yaml
 * 1.0.1 - Support web server mode
 * 1.0.0 - Update to v2 Python plugin architecture
 * 0.1.1 - SSL bug fix in SDK
@@ -79,4 +79,3 @@ This plugin does not contain any troubleshooting information.
 
 * [Red Hat Security Advisories](https://access.redhat.com/security/updates/advisory)
 * [Red Hat Advisory API](https://access.redhat.com/labs/securitydataapi)
-

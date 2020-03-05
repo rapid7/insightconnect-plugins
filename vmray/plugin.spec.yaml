@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: vmray
 title: VMRay Sandbox
-description: The VMRay plugin allows you to analyze and detect malware before it lands
-version: 4.0.2
+description: Analyze and detect malware before it lands, protecting internal infrastructure
+version: 5.0.0
 vendor: rapid7
 support: community
 status: []
@@ -17,7 +17,7 @@ tags:
 - malware
 - malware analysis
 hub_tags:
-  use_cases: [soar, threat_intel, threat_hunting, soc_automation]
+  use_cases: [threat_detection_and_response]
   keywords: [sandbox, malware, malware analysis]
   features: []
 types:
@@ -148,7 +148,7 @@ types:
       title: Analysis Yara Latest Ruleset Data
       type: string
     analysis_vm_name:
-      description: Analysis vm name
+      description: Analysis VM name
       title: Analysis VM Name
       type: string
     analysis_snapshot_name:
@@ -848,7 +848,7 @@ types:
       title: Submission Analyzer Mode Enable Triage
       type: boolean
     submission_analyzer_mode_enable_whois:
-      description: Submission analyzer mode enable whois
+      description: Submission analyzer mode enable WHOIS
       title: Submission Analyzer Mode Enable WHOIS
       type: boolean
     submission_analyzer_mode_id:

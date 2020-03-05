@@ -1,13 +1,10 @@
 # Description
 
 [EchoTrail](https://www.echotrail.io/products/insights/) is a database of executable behavioral analytics, searchable
-by filename or SHA256 or MD5 hash. Search our Insights database manually
-for an [example](https://www.echotrail.io/insights/search/) of the type of analytics we provide.
+by filename or SHA256 or MD5 hash. [Search](https://www.echotrail.io/insights/search/) the Insights database manually
+for an example of the type of analytics EchoTrail provides. Users can easily automate enrichment of filenames and hashes for security investigations.
 
-Users can lookup filenames and hashes within their automation workflows using the EchoTrail Insights plugin for
-Rapid7 InsightConnect.
-
-This plugin utilizes the [EchoTrail API](https://api.echotrail.io).
+This plugin utilizes the [EchoTrail API](https://www.echotrail.io/docs/api/).
 
 # Key Features
 
@@ -27,7 +24,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|server|string|https\://api.echotrail.io\:443|True|EchoTrail API Server|None|
+|server|string|https://api.echotrail.io:443|True|EchoTrail API Server|None|
 |api_key|credential_secret_key|None|True|API Key|None|
 
 ## Technical Details
@@ -296,7 +293,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -304,7 +301,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -318,4 +315,3 @@ This plugin does not contain any troubleshooting information.
 * [EchoTrail](https://www.echotrail.io)
 * [EchoTrail Example](https://www.echotrail.io/insights/search/powershell.exe)
 * [EchoTrail API](https://www.echotrail.io/docs/api/)
-

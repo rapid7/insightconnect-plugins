@@ -1,5 +1,5 @@
 import komand
-from .schema import DateFromEpochInput, DateFromEpochOutput
+from .schema import DateFromEpochInput, DateFromEpochOutput, Input, Output
 import maya
 
 
@@ -13,5 +13,5 @@ class DateFromEpoch(komand.Action):
                 output=DateFromEpochOutput())
 
     def run(self, params={}):
-        new_datetime = maya.MayaDT(params.get("epoch")).rfc3339()
-        return {"date": new_datetime}
+        new_datetime = maya.MayaDT(params.get(Input.EPOCH)).rfc3339()
+        return {Output.DATE: new_datetime}

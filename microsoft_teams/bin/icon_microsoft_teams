@@ -6,7 +6,7 @@ from icon_microsoft_teams import connection, actions, triggers
 
 Name = 'Microsoft Teams'
 Vendor = 'rapid7'
-Version = '1.2.3'
+Version = '1.3.0'
 Description = 'The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users'
 
 
@@ -40,6 +40,8 @@ class ICONMicrosoftTeams(komand.Plugin):
         self.add_action(actions.SendHtmlMessage())
 
         self.add_action(actions.SendMessage())
+
+        self.add_action(actions.SendMessageByGuid())
 
 
 def main():

@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: newrelic
 title: New Relic
-description: Monitors the performance of applications and infrastructure
+description: Monitors performance of applications and infrastructure, providing alerts with context and less noise
 version: 2.0.1
 vendor: rapid7
 support: community
@@ -16,8 +16,8 @@ tags:
 - newrelic
 - performance monitoring
 hub_tags:
-  use_cases: [soar, asset_inventory, soc_automation]
-  keywords: [newrelic, performance monitoring]
+  use_cases: [asset_inventory, alerting_and_notifications, threat_detection_and_response]
+  keywords: [newrelic, performance monitoring, devops]
   features: []
 connection:
   api_key:
@@ -60,8 +60,7 @@ actions:
         required: false
       ids:
         title: IDs
-        description: Filter by user IDs. IDs should be a comma separated list e.g.
-          123,345,678
+        description: Filter by user IDs. IDs should be a comma separated list
         type: string
         required: false
     output:

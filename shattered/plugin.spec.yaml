@@ -3,9 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: shattered
 title: SHAttered
-description: "SHAttered is a free service for checking SHA-1 hash collisions. Using the SHAttered plugin for
-Rapid7 InsightConnect, users can quickly determine if a file is part of a collision attack"
-version: 1.0.1
+description: "SHAttered is a free service for checking SHA-1 hash collisions. Using the SHAttered plugin for Rapid7 InsightConnect, users can quickly determine if a file is part of a collision attack"
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []
@@ -19,7 +18,7 @@ tags:
 - collisions
 - shattered
 hub_tags:
-  use_cases: [soar, data_utility]
+  use_cases: [data_utility]
   keywords: [sha1, hash, collisions, shattered]
   features: []
 enable_cache: false

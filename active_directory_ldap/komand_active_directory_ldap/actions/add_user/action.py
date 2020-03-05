@@ -34,8 +34,14 @@ class AddUser(komand.Action):
 
         full_name = first_name + ' ' + last_name
         domain_dn = domain_name.replace('.', ',DC=')
-        user_ou = user_ou.replace(',', ',OU=')
-        dn = 'CN={},OU={},DC={}'.format(full_name, user_ou, domain_dn)
+        if user_ou == "Users":
+            user_ou = user_ou.replace(',', ',CN=')
+        else:
+            user_ou = user_ou.replace(',', ',OU=')
+        if user_ou == "Users":
+            dn = 'CN={},CN={},DC={}'.format(full_name, user_ou, domain_dn)
+        else:
+            dn = 'CN={},OU={},DC={}'.format(full_name, user_ou, domain_dn)
 
         self.logger.info("User DN=" + dn)
 
@@ -46,7 +52,9 @@ class AddUser(komand.Action):
                       'userPassword': password, 'userPrincipalName': user_principal_name}
 
         parameters.update(additional_parameters)
-        self.logger.info(parameters)
+        log_parameters = parameters
+        log_parameters.pop("userPassword")
+        self.logger.info(log_parameters)
 
         conn.add(dn, ['person', 'user'], parameters)
         pass_set = extend.ad_modify_password(conn, dn, password, None)

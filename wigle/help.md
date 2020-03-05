@@ -1,8 +1,8 @@
 # Description
 
-The [WiGLE](https://wigle.net/index) (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks. The WiGLE consolidates location and information of wireless networks world-wide to a central database. This plugin will allow users to
-retrieve and update information in the WiGLE database
-
+The [WiGLE](https://wigle.net/index) (Wireless Geographic Logging Engine) plugin will get and send information about wireless networks.
+The WiGLE consolidates location and information of wireless networks world-wide to a central database.
+This plugin will allow users to retrieve and update information in the WiGLE database.
 This plugin utilizes the [WiGLE API](https://api.wigle.net/swagger).
 
 # Key Features
@@ -33,13 +33,13 @@ The connection configuration accepts the following parameters:
 
 #### Get Network Details
 
-This action is used to get details and observation records for a single network. It provides unique information for a WiFi or cell network to request detailed information. Providing a netid value searches WiFi, operator searches GSM, and system searches CDMA.
+This action is used to get details and observation records for a single network. It provides unique information for a WiFi or cell network to request detailed information. Providing a net id value searches WiFi, operator searches GSM, and system searches CDMA.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|network|integer|None|False|None|None|
+|network|integer|None|False|CDMA Network ID|None|
 |cid|integer|None|False|GSM Cell ID|None|
 |operator|integer|None|False|GSM Operator ID|None|
 |basestation|integer|None|False|CDMA Base Station ID|None|
@@ -51,11 +51,11 @@ This action is used to get details and observation records for a single network.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|wifi|boolean|False|None|
-|cdma|boolean|False|None|
-|gsm|boolean|False|None|
-|results|[]network_record|False|None|
-|addresses|[]geocode|False|None|
+|cdma|boolean|False|CDMA|
+|gsm|boolean|False|GSM|
+|wifi|boolean|False|WiFi|
+|addresses|[]geocode|False|Addresses|
+|results|[]network_record|False|Results|
 
 Example output:
 
@@ -145,7 +145,7 @@ This action is used to get the status of files uploaded by the current user.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |results|[]transaction|True|Information about uploaded files|
-|processingQueueDepth|integer|True|None|
+|processingQueueDepth|integer|True|Processing queue depth|
 
 Example output:
 
@@ -254,6 +254,22 @@ Example output:
 }
 ```
 
+#### Get KML
+
+Get a KML summary approximation for a successfully processed file uploaded by the current user
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|transid|string|None|True|The unique transaction ID for the file|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|kml|string|False|String representing a KML summary approximation|
+
 #### Get Region Statistics
 
 This action is used to get statistics for a specified country, organized by region.
@@ -268,10 +284,10 @@ This action is used to get statistics for a specified country, organized by regi
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|regions|[]object|True|None|
-|country|string|True|None|
-|postalCode|[]object|True|None|
-|encryption|[]object|True|None|
+|regions|[]object|True|Regions|
+|country|string|True|Country|
+|postalCode|[]object|True|Postal code|
+|encryption|[]object|True|Encryption|
 
 Example output:
 
@@ -323,19 +339,19 @@ This action does not contain any inputs.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|session|string|False|None|
-|joindate|date|True|None|
-|lastlogin|date|True|None|
-|donate|string|True|None|
-|userid|string|True|None|
-|email|string|True|None|
+|userid|string|True|User ID|
+|email|string|True|Email|
+|donate|string|True|Donate|
+|joindate|date|True|Join date|
+|lastlogin|date|True|Last login|
+|session|string|False|Session|
 
 Example output:
 
 ```
 {
   "userid": "test_user",
-  "email": "test@example.org",
+  "email": "user@example.com",
   "donate": "?",
   "joindate": "2018-08-08T17:23:04.000Z",
   "lastlogin": "2018-08-29T14:50:30.000Z"
@@ -384,6 +400,46 @@ Example output:
   ]
 }
 ```
+
+#### Search Cell
+
+Query the WiGLE cell database for paginated results based on multiple criteria
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|longrange1|float|None|False|Lesser of two longitudes by which to bound the search (specify both)|None|
+|longrange2|float|None|False|Greater of two longitudes by which to bound the search (specify both)|None|
+|latrange2|float|None|False|Greater of two latitudes by which to bound the search (specify both)|None|
+|latrange1|float|None|False|Lesser of two latitudes by which to bound the search (specify both)|None|
+|notmine|string|None|False|Only search for networks first seen by other users|None|
+|onlymine|string||False|Search only for points first discovered by the current user. Use any string to set, leave unset for general search. Can't be used with COMMAPI auth, since these are points you have locally|None|
+|cell_net|string|None|False|Cell LAC (GSM/LTE/WCDMA) or Network (CDMA) ID parameter by which to filter|None|
+|cell_id|string|None|False|Cell ID(GSM/LTE/WCDMA) or Basestation (CDMA) parameter by which to filter|None|
+|ssidlike|string|None|False|Include only cell towers matching the string network name, allowing wildcards '%' (any string) and '_' (any character)|None|
+|searchAfter|integer|None|False|Previous page's search_after to get the next page. Use this instead of 'first'|None|
+|minQoS|integer|None|False|Minimum Quality of Signal (0-7)|None|
+|cell_op|string|None|False|Cell Operator (GSM/LTE/WCDMA) or System (CDMA) ID parameter by which to filter|None|
+|showCdma|string|None|False|Include CDMA cell networks|None|
+|showGsm|string|None|False|Include GSM cell networks|None|
+|ssid|string|None|False|Include only cell towers exactly matching the string network name|None|
+|endTransID|string|None|False|Latest transaction ID by which to bound (year-level precision only)|None|
+|lastupdt|string|None|False|Filter points by how recently they've been updated, condensed date/time numeric string format yyyyMMdd[hhmm[ss]]|None|
+|startTransID|string|None|False|Earliest transaction ID by which to bound (year-level precision only)|None|
+|resultsPerPage|integer|None|False|How many results to return per request. Defaults to 25 for COMMAPI, 100 for site. Bounded at 1000 for COMMAPI, 100 for site|None|
+|variance|float|None|False|How tightly to bound queries against the provided latitude/longitude box. Value must be between 0.001 and 0.2. Intended for use with non-exact decimals and geocoded bounds|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|[]cell_record|True|Matched cells|
+|totalResults|integer|True|Total results|
+|search_after|integer|False|Search after|
+|first|integer|True|First|
+|last|integer|True|Last|
+|resultCount|integer|True|Result count|
 
 #### Search Cells
 
@@ -484,7 +540,7 @@ This action does not contain any inputs.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|statistics|object|True|None|
+|statistics|object|True|Statistics|
 
 Example output:
 
@@ -560,14 +616,14 @@ This action is used to add a comment to the network.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |comment|string|None|False|The comment to attach|None|
-|netid|string|None|False|The BSSID of the network for the comment, e.g. '0A\:2C\:EF\:3D\:25\:1B'|None|
+|netid|string|None|False|The BSSID of the network for the comment, e.g. '0A:2C:EF:3D:25:1B'|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|comment|string|False|None|
-|netid|string|False|None|
+|comment|string|False|Comment|
+|netid|string|False|Network ID|
 
 Example output:
 
@@ -578,7 +634,7 @@ Example output:
 }
 ```
 
-#### Get KML
+#### Get KALI
 
 This action is used to get a KML summary approximation for a successfully processed file uploaded by the current user.
 
@@ -610,7 +666,7 @@ This action is used to get all authorization tokens for the logged-in user.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|type|string|None|False|Token types - 'API', 'COMMAPI', or 'ANDROID'|['API', 'COMMAPI', 'ANDROID']|
+|type|string|None|False|Token types - 'API', 'COMMAPI', or 'ANDROID'|['', 'API', 'COMMAPI', 'ANDROID']|
 
 ##### Output
 
@@ -636,7 +692,7 @@ Example output:
 
 #### Get Network Geocode
 
-This action is used to get coordinates for an address for use in searching. Relies on OpenStreetMap nominatim.
+This action is used to get coordinates for an address for use in searching. Relies on OpenStreetMap Nominatim.
 
 ##### Input
 
@@ -735,12 +791,13 @@ This action does not contain any inputs.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|monthRank|integer|True|None|
-|statistics|standing|True|None|
-|user|string|True|None|
-|imageBadgeUrl|string|True|None|
-|message|string|False|None|
-|rank|integer|True|None|
+|imageBadgeUrl|string|True|Image badge URL|
+|rank|integer|True|Rank|
+|monthRank|integer|True|Month rank|
+|user|string|True|User|
+|message|string|False|Message|
+|statistics|standing|True|Statistics|
+
 
 Example output:
 
@@ -781,6 +838,8 @@ This action is used to query the WiGLE network database for paginated results ba
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|encryption|string|None|False|Encryption detected: 'None', 'WEP', 'WPA', 'WPA2', 'WPA3', 'Unknown'. Case insensitive|['', 'None', 'WEP', 'WPA', 'WPA2', 'WPA3', 'Unknown']|
+|netid|string|None|False|Include only networks matching the string network BSSID, e.g. '0A:2C:EF:3D:25:1B' or '0A:2C:EF'. The first three octets are required|None|
 |longrange1|float|None|False|Lesser of two longitudes by which to bound the search (specify both)|None|
 |longrange2|float|None|False|Greater of two longitudes by which to bound the search (specify both)|None|
 |latrange2|float|None|False|Greater of two latitudes by which to bound the search (specify both)|None|
@@ -794,8 +853,8 @@ This action is used to query the WiGLE network database for paginated results ba
 |ssid|string|None|False|Include only networks exactly matching the string network name|None|
 |endTransID|string|None|False|Latest transaction ID by which to bound (year-level precision only)|None|
 |lastupdt|string|None|False|Filter points by how recently they've been updated, condensed date/time numeric string format yyyyMMdd[hhmm[ss]]|None|
-|encryption|string|None|False|Encryption detected\: 'None', 'WEP', 'WPA', 'WPA2', 'WPA3', 'Unknown'. Case insensitive|['None', 'WEP', 'WPA', 'WPA2', 'WPA3', 'Unknown']|
-|netid|string|None|False|Include only networks matching the string network BSSID, e.g. '0A\:2C\:EF\:3D\:25\:1B' or '0A\:2C\:EF'. The first three octets are required|None|
+|encryption|string|None|False|Encryption detected: 'None', 'WEP', 'WPA', 'WPA2', 'WPA3', 'Unknown'. Case insensitive|['None', 'WEP', 'WPA', 'WPA2', 'WPA3', 'Unknown']|
+|netid|string|None|False|Include only networks matching the string network BSSID, e.g. '0A:2C:EF:3D:25:1B' or '0A:2C:EF'. The first three octets are required|None|
 |freenet|boolean|False|False|Include only networks that have been marked as free access|None|
 |startTransID|string|None|False|Earliest transaction ID by which to bound (year-level precision only)|None|
 |resultsPerPage|integer|None|False|How many results to return per request. Defaults to 25 for COMMAPI, 100 for site. Bounded at 1000 for COMMAPI, 100 for site|None|
@@ -805,12 +864,12 @@ This action is used to query the WiGLE network database for paginated results ba
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|search_after|integer|False|None|
-|last|integer|True|None|
-|resultCount|integer|True|None|
-|totalResults|integer|True|None|
+|search_after|integer|False|Search after|
+|last|integer|True|Last|
+|resultCount|integer|True|Result count|
+|totalResults|integer|True|Total results|
 |results|[]network_record|True|Matched networks|
-|first|integer|True|None|
+|first|integer|True|First|
 
 Example output:
 
@@ -884,7 +943,7 @@ This action is used to get user standings.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|sort|string|None|False|The criteria by which to sort the results. Values are ['discovered', 'total', 'monthcount', 'prevmonthcount', 'gendisc', 'gentotal', 'firsttransid', 'lasttransid']|['discovered', 'total', 'monthcount', 'prevmonthcount', 'gendisc', 'gentotal', 'firsttransid', 'lasttransid']|
+|sort|string|None|False|The criteria by which to sort the results. Values are ['discovered', 'total', 'monthcount', 'prevmonthcount', 'gendisc', 'gentotal', 'firsttransid', 'lasttransid']|['', 'discovered', 'total', 'monthcount', 'prevmonthcount', 'gendisc', 'gentotal', 'firsttransid', 'lasttransid']|
 |pagestart|integer|None|False|The first record to request according to the 'sort' parameter|None|
 |pageend|integer|None|False|The last record to request according to the 'sort' parameter|None|
 
@@ -892,13 +951,13 @@ This action is used to get user standings.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|myUsername|string|True|None|
-|pageStart|integer|True|None|
-|totalUsers|integer|True|None|
-|sortBy|string|True|None|
-|eventView|boolean|True|None|
-|results|[]standing|True|None|
-|pageEnd|integer|True|None|
+|sortBy|string|True|Sort by|
+|eventView|boolean|True|Event view|
+|myUsername|string|True|My username|
+|pageStart|integer|True|Page start|
+|pageEnd|integer|True|Page end|
+|totalUsers|integer|True|Total users|
+|results|[]standing|True|Results|
 
 Example output:
 
@@ -960,15 +1019,15 @@ This action is used to transmit a file for processing and incorporation into the
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |donate|boolean|True|False|Allow commercial use of the file contents - 'on' to allow|None|
-|file|file|None|False|None|None|
+|file|file|None|False|File to transmit|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|warning|string|False|None|
-|results|file_upload_results|True|None|
-|observer|string|False|None|
+|warning|string|False|Warning|
+|results|file_upload_results|True|Results|
+|observer|string|False|Observer|
 
 Example output:
 
@@ -1002,7 +1061,7 @@ This action does not contain any inputs.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|statistics|object|True|None|
+|statistics|object|True|Statistics|
 
 Example output:
 
@@ -1040,7 +1099,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

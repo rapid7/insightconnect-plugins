@@ -6,8 +6,9 @@ This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances an
 
 # Key Features
 
-* File Analysis
-* Threat Detection
+* Submit samples and URLs for sandbox analysis
+* Search, list, get, download, and delete analyses
+* Get, list, and manage server and user info
 
 # Requirements
 
@@ -22,7 +23,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|url|string|https\://jbxcloud.joesecurity.org/api|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http\://example.com/joesandbox/index.php/api|None|
+|url|string|https://jbxcloud.joesecurity.org/api|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http://example.com/joesandbox/index.php/api|None|
 |api_key|credential_secret_key|None|True|API key generated for Joe Sandbox user|None|
 
 The default setting is to use Joe Sandbox Cloud URL at `https://jbxcloud.joesecurity.org/api`. If you have a Sandbox at a different location such as hosting an on-premise instance, set the `url` field to your instance with the following URL format of `http://example.com/joesandbox/index.php/api`.

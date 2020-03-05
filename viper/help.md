@@ -1,15 +1,18 @@
 # Description
 
-[Viper](https://viper.li/en/latest/) is a binary analysis and management framework. Viper's fundamental objective is to provide a solution to easily organize your collection of malware and exploit samples as well as your collection of scripts you created, or found over time to facilitate your daily research. Think of it as a Metasploit for malware researchers.
+[Viper](https://viper.li/en/latest/) is a binary analysis and management framework. Viper's fundamental objective is to provide a solution to easily organize your collection of malware and exploit samples as well as your collection of scripts you created, or found over time to facilitate your daily research.
 The Viper plugins allows you to use Viper's platform to store, search, and analyze files.
 
 This plugin utilizes the [Viper API](https://viper.li/en/latest/usage/web.html#api)
 
 # Key Features
 
-* Analyze a file
-* Share malicious files
-* Create and manage projects
+* Upload files to create new malware instance
+* Retrieve malware, analyses, notes, tags, and details for a project
+* Create new projects and malware notes
+* Delete analyses, malware hashes, notes, and tags
+* Download a malware instance as a raw file
+* List available compressors, extractors, modules, projects, malwares, notes, and tags
 
 # Requirements
 
@@ -25,7 +28,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |token|credential_secret_key|None|True|Token to authenticate to Viper API|None|
-|url|string|None|True|API URL to Viper server e.g. http://example.com:8080/api/v3/|None|
+|url|string|None|True|API URL to Viper server|None|
 
 ## Technical Details
 
@@ -304,8 +307,8 @@ This action is used to get a single tag for this project.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|id|integer|None|True|None|None|
-|project_name|string|None|True|None|None|
+|id|integer|None|True|Tag ID|None|
+|project_name|string|None|True|Project name|None|
 
 ##### Output
 
@@ -542,8 +545,6 @@ This action is used to list malware for this project.
 |----|----|--------|-----------|
 |malware|[]Malware|True|List of malware|
 
-Example output:
-
 ```
 {
   "malware": [
@@ -724,6 +725,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - Updated connection description for the Hub
 * 2.0.1 - New spec and help.md format for the Hub
 * 2.0.0 - Update plugin to use the Viper v3 API
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

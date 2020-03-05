@@ -4,7 +4,7 @@ products: [insightconnect]
 name: dirname
 title: Dirname
 description: This plugin gets the directory name of a file path or protocol and domain of a URL
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []
@@ -15,7 +15,7 @@ tags:
 - dirname
 - utilities
 hub_tags:
-  use_cases: [soar, data_utility]
+  use_cases: [data_utility]
   keywords: [dirname, utilities]
   features: []
 actions:
@@ -30,6 +30,6 @@ actions:
     output:
       dirname:
         title: Dirname
-        description: Dirname
+        description: Directory name of a path
         type: string
         required: false

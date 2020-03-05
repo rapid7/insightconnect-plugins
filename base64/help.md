@@ -1,12 +1,11 @@
 # Description
 
-[Base64](https://en.wikipedia.org/wiki/Base64) is a common binary-to-text encoding scheme used in various protocols and software such as MIME.
-This plugin utilizes allows data to be encoded or decoded using the standard Base64 alphabet.
+[Base64](https://en.wikipedia.org/wiki/Base64) is a common binary-to-text encoding scheme used in various protocols and software such as MIME to carry data stored in binary formats across channels that only reliably support text content. This plugin allows data to be Base64-encoded or decoded using the standard Base64 alphabet.
 
 # Key Features
 
-* Encode text
-* Decode text
+* Encode data in Base64 to transfer binary data, image files, etc. in a text format
+* Decode Base64 encoded text to reveal the plaintext
 
 # Requirements
 
@@ -16,7 +15,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -30,13 +29,13 @@ This action is used to Base64 encode a `string` using the standard Base64 alphab
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|content|string|None|True|String to Encode|None|
+|content|string|None|True|Data to encode|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|bytes|False|None|
+|data|bytes|True|Encoded data result|
 
 #### Decoder
 
@@ -47,17 +46,17 @@ This action is used to decode a Base64 `string` or file of type `bytes` using th
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |base64|bytes|None|True|Data to decode|None|
-|errors|string|None|False|How errors should be handled when decoding Base64 e.g replace or ignore|None|
+|errors|string|nothing|False|How errors should be handled when decoding Base64|['replace', 'ignore', 'nothing']|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|string|False|None|
+|data|string|True|Decoded data result|
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -73,6 +72,7 @@ characters to `\uffd` or `?`. While ignore will drop the character from the outp
 
 # Version History
 
+* 1.1.3 - Use input and output constants | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Change `Exception` to `PluginException` | Change descriptions in help.md | Add user nobody in Dockerfile
 * 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Fixed issue where action Decode required error parameter
 * 1.1.0 - Bug fix in decode action, added an option for error handling

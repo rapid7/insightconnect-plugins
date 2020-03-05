@@ -53,7 +53,7 @@ This action is used to run an analyzer on an observable.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|The job's status\: Success, InProgress or Failure|
+|status|string|True|The job's status: Success, InProgress or Failure|
 |date|integer|True|A timestamp which represents the job's start date|
 |id|string|True|The job's ID|
 |artifact|artifact|True|The observable details|
@@ -93,7 +93,7 @@ This action is used to list the details of a given job, identified by its ID.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|The job's status\: Success, InProgress or Failure|
+|status|string|True|The job's status: Success, InProgress or Failure|
 |date|integer|True|A timestamp which represents the job's start date|
 |id|string|True|The job's ID|
 |artifact|artifact|True|The observable details|
@@ -474,7 +474,7 @@ This action is used to run analyzers on a file.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|The job's status\: Success, InProgress or Failure|
+|status|string|True|The job's status: Success, InProgress or Failure|
 |date|integer|True|A timestamp which represents the job's start date|
 |id|string|True|The job's ID|
 |artifact|file_artifact|True|The observable details|
@@ -487,7 +487,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -495,7 +495,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 

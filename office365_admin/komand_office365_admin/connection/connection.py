@@ -12,6 +12,7 @@ class Connection(komand.Connection):
 
     def connect(self, params):
         tenant_id = params.get("tenant_id")
+        self.tenant_id = tenant_id
         app_id = params.get("app_id")
         app_secret = params.get("app_secret").get("token")
 

@@ -1,6 +1,6 @@
 # Description
 
-[Twitter](https://twitter.com) is a microblogging and social networking service. Using the Twitter plugin for
+[Twitter](https://twitter.com) is a microblogging and social networking service. With the Twitter plugin for
 Rapid7 InsightConnect, users can monitor tweets, post, and block users. This plugin can be effective in discovering
 social media campaigns, threat intelligence, and more.
 
@@ -35,7 +35,7 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-#### Destroy Direct Message
+#### Destroy
 
 This action can be used to destroy a direct message from the Twitter account linked via the connection.
 
@@ -49,7 +49,7 @@ This action can be used to destroy a direct message from the Twitter account lin
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|destroyed|boolean|False|None|
+|destroyed|boolean|False|Destroyed|
 
 #### Post
 
@@ -65,7 +65,7 @@ This action can be used to issue a tweet from the Twitter account linked via the
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|url|string|False|None|
+|url|string|False|URL|
 
 #### Block
 
@@ -81,7 +81,7 @@ This action can be used to block a user from the Twitter account linked via the 
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|blocked|boolean|False|None|
+|blocked|boolean|False|Blocked|
 
 ### Triggers
 
@@ -96,16 +96,16 @@ The Tweets trigger will fire off a job for every Tweet that matches the supplied
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|pattern|string|None|True|Pattern to Match|None|
 |interval|integer|300|False|Poll interval in seconds|None|
+|pattern|string|None|True|Pattern to match|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|msg|string|False|None|
-|url|string|False|None|
-|user|string|False|None|
+|msg|string|False|Tweet message|
+|url|string|False|URL of tweet|
+|user|string|False|Posting user|
 
 #### Mentions
 
@@ -115,16 +115,16 @@ The Mentions trigger will off a job for every Mention that matches the supplied 
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|pattern|string|None|False|Pattern to Match|None|
 |interval|integer|300|False|Poll interval in seconds|None|
+|pattern|string|None|False|Pattern to Match|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|msg|string|False|None|
-|url|string|False|None|
-|user|string|False|None|
+|msg|string|False|Twitter message|
+|url|string|False|URL of tweet|
+|user|string|False|Posting user|
 
 #### Messages
 
@@ -135,28 +135,28 @@ Note that to use this trigger "Read, Write and Access direct messages" must be s
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|pattern|string|None|False|Pattern to Match|None|
 |interval|integer|300|False|Poll interval in seconds|None|
+|pattern|string|None|False|Pattern to Match|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sender_lang|string|False|Sender's language|
-|sender_name|string|False|Sender's profile name|
-|created_at|string|False|None|
+|created_at|string|False|Creation date|
+|id|string|False|Twitter message ID|
+|msg|string|False|Twitter Message|
+|recipient_id|integer|False|Recipient ID|
 |sender_created_at|string|False|Sender account creation date|
-|sender_id|integer|False|None|
-|sender_description|string|False|Sender profile description|
-|id|string|False|None|
 |sender_default_profile|boolean|False|Sender uses the default profile|
-|recipient_id|integer|False|None|
-|sender_location|string|False|Sender's geographic location|
-|user|string|False|None|
-|sender_followers_count|integer|False|Sender's follower count|
-|msg|string|False|None|
-|sender_friends_count|integer|False|Sender's friend count|
 |sender_default_profile_image|boolean|False|Sender uses the default profile image|
+|sender_description|string|False|Sender profile description|
+|sender_followers_count|integer|False|Sender's follower count|
+|sender_friends_count|integer|False|Sender's friend count|
+|sender_id|integer|False|Sender ID|
+|sender_lang|string|False|Sender's language|
+|sender_location|string|False|Sender's geographic location|
+|sender_name|string|False|Sender's profile name|
+|user|string|False|Posting user|
 
 #### User
 
@@ -173,9 +173,9 @@ The user trigger will allow you to follow a given user and receive any tweets fr
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|msg|string|False|None|
-|url|string|False|None|
-|user|string|False|None|
+|msg|string|False|Message|
+|url|string|False|URL of tweet|
+|user|string|False|Posting user|
 
 ### Custom Output Types
 
