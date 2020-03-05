@@ -37,7 +37,7 @@ class Connection(komand.Connection):
         except Exception:
             # The errors returned by this api aren't very good
             # It's a 400 with some error text.
-            raise PluginException(cause="There was problem authenticating with Checkpoint NGFW.",
+            raise PluginException(cause="There was problem authenticating with Check Point NGFW.",
                                   assistance="Check the server IP address, port, username, and password defined in "
                                              "your plugin connection",
                                   data=request.text)
@@ -153,6 +153,5 @@ class Connection(komand.Connection):
                                                 f"{self.server_ip}:{self.server_port}",
                                           assistance="Please check your connection settings and try again.")
         return {"success": True}
-
 
 
