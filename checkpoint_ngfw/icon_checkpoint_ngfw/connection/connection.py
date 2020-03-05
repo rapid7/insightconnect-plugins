@@ -113,6 +113,9 @@ class Connection(komand.Connection):
 
             requests.post(url_discard, json=discard_payload, headers=headers, verify=self.ssl_verify)
 
+        self.publish() # Yes, you have to publish that you are not publishing
+        self.logout()
+
         self.get_sid()
 
     def post_and_publish(self, headers, discard_other_sessions, payload, url):
@@ -149,5 +152,7 @@ class Connection(komand.Connection):
             raise ConnectionTestException(cause=f"Unable to authenticate to the Check Point server at: "
                                                 f"{self.server_ip}:{self.server_port}",
                                           assistance="Please check your connection settings and try again.")
+        return {"success": True}
+
 
 

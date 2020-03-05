@@ -23,7 +23,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|port|int|443|True|Server port|None|
+|port|integer|443|True|Server port|None|
 |server|string|None|True|Server IP address|None|
 |ssl_verify|boolean|True|True|Use SSL verification|None|
 |username_password|credential_username_password|None|True|Username and password|None|
@@ -50,6 +50,9 @@ _This action does not contain any inputs._
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Remove Host
@@ -176,7 +179,7 @@ This action is used to show the access rulebase.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |layer_name|string|Network|True|Layer name|None|
-|limit|int|500|False|Limit|None|
+|limit|integer|500|False|Limit|None|
 
 ##### Output
 
@@ -386,7 +389,7 @@ This action is used to create a rule to block traffic.
 |layer|string|Network|True|Layer to add this rule to|None|
 |list_of_services|[]string|None|False|List of services to block e.g. ["AOL", "SMTP"]|None|
 |name|string|None|True|Rule name|None|
-|position|string|top|True|Postion in the list of rules. e.g. top, bottom, 15|None|
+|position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|None|
 |source|string|None|False|Source network object name|None|
 
 ##### Output

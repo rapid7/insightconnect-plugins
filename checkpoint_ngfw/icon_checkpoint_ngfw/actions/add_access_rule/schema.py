@@ -83,7 +83,7 @@ class AddAccessRuleInput(komand.Input):
     "position": {
       "type": "string",
       "title": "Position",
-      "description": "Postion in the list of rules. e.g. top, bottom, 15",
+      "description": "Position in the list of rules. e.g. top, bottom, 15",
       "default": "top",
       "order": 7
     },

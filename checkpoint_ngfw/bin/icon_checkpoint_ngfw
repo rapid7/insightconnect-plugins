@@ -5,9 +5,9 @@ from icon_checkpoint_ngfw import connection, actions, triggers
 
 
 Name = "Check Point NGFW"
-Vendor = "custom_test_vendor"
+Vendor = "rapid7"
 Version = "1.0.0"
-Description = "Check Point’s Next Generation Firewalls (NGFW’s) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks"
+Description = "Check Point Next Generation Firewalls (NGFW) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks"
 
 
 class ICONCheckpointNgfw(komand.Plugin):

@@ -3,9 +3,9 @@ extension: plugin
 products: [insightconnect]
 name: checkpoint_ngfw
 title: Check Point NGFW
-description: Check Point’s Next Generation Firewalls (NGFW’s) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks
+description: Check Point Next Generation Firewalls (NGFW) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks
 version: 1.0.0
-vendor: custom_test_vendor
+vendor: rapid7
 support: community
 status: []
 resources:
@@ -459,7 +459,7 @@ connection:
     description: Server IP address
     required: true
   port:
-    type: int
+    type: integer
     title: Server Port
     description: Server port
     required: true
@@ -485,7 +485,7 @@ actions:
       limit:
         title: Limit
         description: Limit
-        type: int
+        type: integer
         default: 500
         required: false
     output:
@@ -549,7 +549,7 @@ actions:
       position:
         title: Position
         type: string
-        description: Postion in the list of rules. e.g. top, bottom, 15
+        description: Position in the list of rules. e.g. top, bottom, 15
         required: true
         default: "top"
         order: 7
