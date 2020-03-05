@@ -262,7 +262,7 @@ This action is used to query firewall logs.
 |count|integer|20|False|Number of logs to retrieve (Max: 500, Default: 20)|None|
 |direction|string|None|False|Order in which to return the logs|['backward', 'forward']|
 |filter|string|None|False|Search query. Format as a log filter expression|None|
-|interval|float|0.5|False|Time interval in seconds to wait between queries for commit job completion (Default: 0.5)|None|
+|interval|float|None|False|Time interval in seconds to wait between queries for commit job completion (Default: 0.5)|None|
 |log_type|string|None|False|Type of log to retrieve|['config', 'hipmatch', 'system', 'threat', 'traffic', 'url', 'wildfire']|
 |max_tries|integer|25|False|Maximum number of times to poll for job completion before timing out (Default: 25)|None|
 |skip|integer|0|False|Log retrieval offset, number of entries to skip, (Default: 0)|None|
