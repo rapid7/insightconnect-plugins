@@ -6,7 +6,7 @@ title: Threat Miner
 description: "Threat Miner is an open source search engine for fast threat intelligence research and pivoting with
   context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup various pieces of information for
 threat intelligence gathering"
-version: 1.0.1
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -123,7 +123,6 @@ actions:
         required: true
         type: string
         enum:
-        - URIs
         - WHOIS
         - PASSIVE DNS
         - URIs
@@ -279,13 +278,13 @@ actions:
         required: false
         description: Response
   email_domain:
-    title: Email (Reverse WHOIS) - Domain
+    title: Email Reverse WHOIS - Domain
     description: Fetches information related to an email address
     input:
       email:
         title: Email
         type: string
-        description: Email address to search e.g. janagreen2000@gmail.com
+        description: Email address to search e.g. user@example.com
         required: true
     output:
       response:
@@ -294,13 +293,13 @@ actions:
         required: false
         description: Response
   email_report:
-    title: Email (Reverse WHOIS) - Report Tagging
+    title: Email Reverse WHOIS - Report Tagging
     description: Fetches information related to an email address
     input:
       email:
         title: Email
         type: string
-        description: Email address to search e.g. janagreen2000@gmail.com
+        description: Email address to search e.g. user@example.com
         required: true
     output:
       response:
