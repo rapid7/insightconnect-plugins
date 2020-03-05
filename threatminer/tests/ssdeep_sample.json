@@ -1,12 +1,12 @@
 {
-    "body": {
-        "action": "ssdeep_sample",
-        "connection": null,
-        "input": {
-            "query": ""
-        },
-        "meta": {}
+  "body": {
+    "action": "ssdeep_sample",
+    "connection": null,
+    "input": {
+      "query": ""
     },
-    "type": "action_start",
-    "version": "v1"
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
 }
