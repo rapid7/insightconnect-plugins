@@ -99,7 +99,7 @@ class Connection(komand.Connection):
         except Exception as e:
             # The errors returned by this api aren't very good
             # It's a 400 with some error text.
-            raise PluginException(cause="There was problem publishing to Checkpoint NGFW.",
+            raise PluginException(cause="There was problem publishing to Check Point NGFW.",
                                   assistance=request.text,
                                   data=e)
 
@@ -153,5 +153,4 @@ class Connection(komand.Connection):
                                                 f"{self.server_ip}:{self.server_port}",
                                           assistance="Please check your connection settings and try again.")
         return {"success": True}
-
 
