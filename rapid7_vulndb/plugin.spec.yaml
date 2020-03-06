@@ -103,8 +103,6 @@ types:
       description: List of alternative identifiers of vulnerability
       type: string
       required: false
-
-
 actions:
   get_content:
     title: Fetch content
@@ -121,7 +119,6 @@ actions:
         type: 'content'
         description: content record for vulnerability or module
         required: true
-
   search_db:
     title: Search Database
     description: Search the database to find vulnerabilities and exploits
@@ -147,38 +144,8 @@ actions:
         required: false
       results_found:
         title: Results Found
-        description: Will return number of results
-        type: int
+        description: Will return false if no results are found
+        type: bool
         required: true
 
 
-#    module:
-#      title: Metasploit Module
-#      description: Path to Metasploit module
-#      type: string
-#      required: false
-#    module_options:
-#      title: Metasploit Module Options
-#      description: The options offered for the Metasploit module
-#      type: string
-#      required: false
-#    module_name:
-#      title: Metasploit Module Name
-#      description: The name of the Metasploit module
-#      type: string
-#      required: false
-#    reliability:
-#      title: Reliability of Metasploit Module
-#      description: The reliability of running a Metasploit module
-#      type: string
-#      required: false
-#    source_code:
-#      title: Source Code
-#      description: Source code of Metasploit module
-#      type: string
-#      required: false
-#    history:
-#      title: Metasploit History
-#      description: The history of the Metasploit module
-#      type: string
-#      required: false

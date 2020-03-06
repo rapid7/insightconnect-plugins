@@ -26,6 +26,6 @@ class SearchDb(komand.Action):
         num_of_pages = data['metadata']['total_pages']
         results = utils.R7VDB.paginate_search(q, num_of_pages)
         return {
-            Output.RESULTS_FOUND: len(results),
+            Output.RESULTS_FOUND: len(results) > 0,
             Output.SEARCH_RESULTS: results,
         }

@@ -58,9 +58,9 @@ class SearchDbOutput(komand.Output):
   "title": "Variables",
   "properties": {
     "results_found": {
-      "type": "integer",
+      "type": "boolean",
       "title": "Results Found",
-      "description": "Will return number of results",
+      "description": "Will return false if no results are found",
       "order": 2
     },
     "search_results": {
