@@ -1,4 +1,4 @@
-from komand.exceptions import ConnectionTestException, PluginException, ServerException
+from komand.exceptions import ConnectionTestException, PluginException
 import xmltodict
 import requests
 import json
@@ -51,11 +51,11 @@ class Request(object):
         try:
             output = xmltodict.parse(response.text)
         except TypeError:
-            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+            raise PluginException(cause='The response from PAN-OS was not the correct data type.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except SyntaxError:
-            raise ServerException(cause='The response from PAN-OS was malformed.',
+            raise PluginException(cause='The response from PAN-OS was malformed.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except BaseException as e:
@@ -66,7 +66,7 @@ class Request(object):
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+            raise PluginException(cause='PAN-OS returned an error in response to the request.',
                                   assistance='Double that check inputs are valid. Contact support if this issue persists.',
                                   data=error)
         return {"response": output}
@@ -85,11 +85,11 @@ class Request(object):
         try:
             output = xmltodict.parse(response.text)
         except TypeError:
-            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+            raise PluginException(cause='The response from PAN-OS was not the correct data type.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except SyntaxError:
-            raise ServerException(cause='The response from PAN-OS was malformed.',
+            raise PluginException(cause='The response from PAN-OS was malformed.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except BaseException as e:
@@ -100,7 +100,7 @@ class Request(object):
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+            raise PluginException(cause='PAN-OS returned an error in response to the request.',
                                   assistance='Double that check inputs are valid. Contact support if this issue persists.',
                                   data=error)
         return output
@@ -118,11 +118,11 @@ class Request(object):
         try:
             output = xmltodict.parse(response.text)
         except TypeError:
-            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+            raise PluginException(cause='The response from PAN-OS was not the correct data type.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except SyntaxError:
-            raise ServerException(cause='The response from PAN-OS was malformed.',
+            raise PluginException(cause='The response from PAN-OS was malformed.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except BaseException as e:
@@ -133,7 +133,7 @@ class Request(object):
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+            raise PluginException(cause='PAN-OS returned an error in response to the request.',
                                   assistance='Double that check inputs are valid. Contact support if this issue persists.',
                                   data=error)
         return output
@@ -153,11 +153,11 @@ class Request(object):
         try:
             output = xmltodict.parse(response.text)
         except TypeError:
-            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+            raise PluginException(cause='The response from PAN-OS was not the correct data type.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except SyntaxError:
-            raise ServerException(cause='The response from PAN-OS was malformed.',
+            raise PluginException(cause='The response from PAN-OS was malformed.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except BaseException as e:
@@ -168,7 +168,7 @@ class Request(object):
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+            raise PluginException(cause='PAN-OS returned an error in response to the request.',
                                   assistance='Double that check inputs are valid. Contact support if this issue persists.',
                                   data=error)
         return output
@@ -186,11 +186,11 @@ class Request(object):
         try:
             output = xmltodict.parse(response.text)
         except TypeError:
-            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+            raise PluginException(cause='The response from PAN-OS was not the correct data type.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except SyntaxError:
-            raise ServerException(cause='The response from PAN-OS was malformed.',
+            raise PluginException(cause='The response from PAN-OS was malformed.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except BaseException as e:
@@ -201,7 +201,7 @@ class Request(object):
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+            raise PluginException(cause='PAN-OS returned an error in response to the request.',
                                   assistance='Double that check inputs are valid. Contact support if this issue persists.',
                                   data=error)
         return output
@@ -213,11 +213,11 @@ class Request(object):
         try:
             output = xmltodict.parse(response.text)
         except TypeError:
-            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+            raise PluginException(cause='The response from PAN-OS was not the correct data type.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except SyntaxError:
-            raise ServerException(cause='The response from PAN-OS was malformed.',
+            raise PluginException(cause='The response from PAN-OS was malformed.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except BaseException as e:
@@ -228,7 +228,7 @@ class Request(object):
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+            raise PluginException(cause='PAN-OS returned an error in response to the request.',
                                   assistance='Double that check inputs are valid. Contact support if this issue persists.',
                                   data=error)
         return output
@@ -241,11 +241,11 @@ class Request(object):
         try:
             output = xmltodict.parse(response.text)
         except TypeError:
-            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+            raise PluginException(cause='The response from PAN-OS was not the correct data type.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except SyntaxError:
-            raise ServerException(cause='The response from PAN-OS was malformed.',
+            raise PluginException(cause='The response from PAN-OS was malformed.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except BaseException as e:
@@ -256,7 +256,7 @@ class Request(object):
         if output['response']['@status'] == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
-            raise ServerException(cause='PAN-OS returned an error in response to the request.',
+            raise PluginException(cause='PAN-OS returned an error in response to the request.',
                                   assistance='Double that check inputs are valid. Contact support if this issue persists.',
                                   data=error)
         return output
