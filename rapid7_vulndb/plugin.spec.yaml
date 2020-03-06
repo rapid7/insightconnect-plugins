@@ -26,10 +26,10 @@ hub_tags:
 enable_cache: true
 language: python
 types:
-  vuln_found:
-    name:
-      title: Name
-      description: Name of vulnerability
+  search_result:
+    title:
+      title: Title
+      description: Title of Vulnerability
       type: string
       required: false
     link:
@@ -37,57 +37,91 @@ types:
       description: Link to vulnerability
       type: string
       required: false
+    published_at:
+      title: Published_at
+      description: Published date of vulnerability
+      type: string
+      required: false
+  content:
+    title:
+      title: Title
+      description: Title of Vulnerability
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Brief summary of the returend content
+      type: string
+      required: false
+    content_type:
+      title: Content type
+      description: Type of returned content, module or vulnerability
+      type: string
+      required: false
+    architectures:
+      title: architectures
+      description: List of applicable architectures for the module
+      type: string
+      required: false
+    published_at:
+      title: Published_at
+      description: Published date of vulnerability
+      type: string
+      required: false
+    references:
+      title: References
+      description: List of references
+      type: string
+      required: false
+    authors:
+      title: Authors
+      description: List of module authors
+      type: string
+      required: false
+    rank:
+      title: Rank
+      description: Rank of module
+      type: int
+      required: false
+    reliability:
+      title: Reliability
+      description: Reliability of module
+      type: string
+      required: false
     severity:
       title: Severity
       description: Severity of vulnerability
       type: string
       required: false
-    type:
-      title: Type
-      description: Type of vulnerability
+    solutions:
+      title: Solutions
+      description: List of possible solutions for vulnerability
       type: string
       required: false
-    summary:
-      title: Summary
-      description: Brief summary of vulnerability
+    alternate_ids:
+      title: Alternative identifiers
+      description: List of alternative identifiers of vulnerability
       type: string
       required: false
-    published:
-      title: Published
-      description: Published date of vulnerability
-      type: string
-      required: false
-    module:
-      title: Metasploit Module
-      description: Path to Metasploit module
-      type: string
-      required: false
-    module_options:
-      title: Metasploit Module Options
-      description: The options offered for the Metasploit module
-      type: string
-      required: false
-    module_name:
-      title: Metasploit Module Name
-      description: The name of the Metasploit module
-      type: string
-      required: false
-    reliability:
-      title: Reliability of Metasploit Module
-      description: The reliability of running a Metasploit module
-      type: string
-      required: false
-    source_code:
-      title: Source Code
-      description: Source code of Metasploit module
-      type: string
-      required: false
-    history:
-      title: Metasploit History
-      description: The history of the Metasploit module
-      type: string
-      required: false
+
+
 actions:
+  get_content:
+    title: Fetch content
+    description: Fetch content record for vulnerability or module
+    input:
+      identifier:
+        title: Identifier
+        description: Rapid7 vulnerability/module identifier
+        type: string
+        required: true
+    output:
+      content_result:
+        title: Result
+        type: 'content'
+        description: content record for vulnerability or module
+        required: true
+
   search_db:
     title: Search Database
     description: Search the database to find vulnerabilities and exploits
@@ -96,11 +130,9 @@ actions:
         title: Database
         description: Name of the database
         type: string
-        default: All
         enum:
         - Vulnerability Database
         - Metasploit Modules
-        - All
         required: true
       search:
         title: Search
@@ -109,12 +141,44 @@ actions:
         required: true
     output:
       search_results:
-        title: Vulnerability
-        type: '[]vuln_found'
+        title: Results
+        type: '[]search_result'
         description: Vulnerability and exploits found
         required: false
       results_found:
         title: Results Found
-        description: Will return false if no results are found
-        type: boolean
+        description: Will return number of results
+        type: int
         required: true
+
+
+#    module:
+#      title: Metasploit Module
+#      description: Path to Metasploit module
+#      type: string
+#      required: false
+#    module_options:
+#      title: Metasploit Module Options
+#      description: The options offered for the Metasploit module
+#      type: string
+#      required: false
+#    module_name:
+#      title: Metasploit Module Name
+#      description: The name of the Metasploit module
+#      type: string
+#      required: false
+#    reliability:
+#      title: Reliability of Metasploit Module
+#      description: The reliability of running a Metasploit module
+#      type: string
+#      required: false
+#    source_code:
+#      title: Source Code
+#      description: Source code of Metasploit module
+#      type: string
+#      required: false
+#    history:
+#      title: Metasploit History
+#      description: The history of the Metasploit module
+#      type: string
+#      required: false

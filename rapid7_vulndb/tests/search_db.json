@@ -4,7 +4,7 @@
         "connection": {},
         "input": {
             "database": "Vulnerability Database",
-            "search": "redhat_linux-cve-2018-12405"
+            "search": "cve-123"
         },
         "meta": {}
     },

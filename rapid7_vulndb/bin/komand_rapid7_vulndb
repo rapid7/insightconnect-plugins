@@ -19,6 +19,8 @@ class ICONRapid7Vulndb(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.GetContent())
+
         self.add_action(actions.SearchDb())
 
 
