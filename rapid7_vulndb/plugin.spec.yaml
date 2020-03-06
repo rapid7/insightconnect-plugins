@@ -5,7 +5,7 @@ name: rapid7_vulndb
 title: Rapid7 Vulnerability & Exploit Database
 description: The Vulnerability & Exploit Database plugin allows you to search and compare potential threats with a curated repository of vetted computer software exploits and exploitable vulnerabilities
   vulnerabilities
-version: 1.1.1
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -55,7 +55,7 @@ types:
       required: false
     content_type:
       title: Content type
-      description: Type of returned content, module or vulnerability
+      description: Type of returned content for module or vulnerability
       type: string
       required: false
     architectures:
@@ -105,7 +105,7 @@ types:
       required: false
 actions:
   get_content:
-    title: Fetch content
+    title: Get Content
     description: Fetch content record for vulnerability or module
     input:
       identifier:
@@ -117,10 +117,10 @@ actions:
       content_result:
         title: Result
         type: 'content'
-        description: content record for vulnerability or module
+        description: Content record for vulnerability or module
         required: true
   search_db:
-    title: Search Database
+    title: Search DB
     description: Search the database to find vulnerabilities and exploits
     input:
       database:

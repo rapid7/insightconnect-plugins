@@ -47,7 +47,7 @@ class GetContentOutput(komand.Output):
     "content_result": {
       "$ref": "#/definitions/content",
       "title": "Result",
-      "description": "content record for vulnerability or module",
+      "description": "Content record for vulnerability or module",
       "order": 1
     }
   },
@@ -80,7 +80,7 @@ class GetContentOutput(komand.Output):
         "content_type": {
           "type": "string",
           "title": "Content type",
-          "description": "Type of returned content, module or vulnerability",
+          "description": "Type of returned content for module or vulnerability",
           "order": 3
         },
         "description": {
