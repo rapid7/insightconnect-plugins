@@ -1,6 +1,6 @@
 from komand.exceptions import PluginException
 
-from typing import Dict, List, Callable, Union
+from typing import Dict, List, Callable, Tuple
 import requests
 import copy
 import sys
@@ -13,6 +13,11 @@ class R7VDB:
     This class is used by the rapid7_vulndb plugin for
     extracting https://vdb.rapid7.com/swagger_doc API data
 
+    Two main functions that are used by the plugin are
+        1. paginate_search
+        2. make_content_result
+
+    most of the methods implemented as class methods to avoid initialization
     """
 
     search_url: str = "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/search"
@@ -25,7 +30,76 @@ class R7VDB:
     content_vuln_fields: List[str] = ["severity", "solutions", "alternate_ids"]
     content_module_fields_to_serialize: List[str] = ["architectures",
                                                      "references", "authors"]
-    content_vuln_fields_to_serialize: List[str] = ["solutions", "alternate_ids"]
+    content_vuln_fields_to_serialize: List[str] = ["solutions", "references"]
+
+    @classmethod
+    def paginate_search(cls, query: Dict, num_of_pages: int) -> List[Dict]:
+        fn = sys._getframe().f_code.co_name
+        cls.validate(fn, dicts=[query], ints=[num_of_pages])
+        res: List[Dict] = []
+        for page_num in range(num_of_pages):
+            query["page"] = page_num
+            data = cls.get_query(query)
+            for d in data["data"]:
+                res.append(cls.make_search_result(d))
+        return res
+
+    @classmethod
+    def make_content_result(cls, api_data: Dict) -> Dict:
+        fn = sys._getframe().f_code.co_name
+        cls.validate(fn, dicts=[api_data])
+        modifiers, result_fields = cls.get_content_format(
+            api_data["content_type"])
+        flat_api_data = flatten_nested_field("data", api_data)
+        modifiers.append(make_unknown_modifier("published_at"))
+        return cls.gen_dict(flat_api_data, result_fields, *modifiers)
+
+    @classmethod
+    def get_content_format(cls, content_type: str) -> \
+            Tuple[List[Callable], List[str]]:
+        """
+        Selects fields and modifiers needed to transform
+        the api results into format expected by the plugin
+        """
+
+        result_fields = []
+        modifiers = []
+
+        if content_type == "module":
+            # select the output fields
+            result_fields = cls.content_module_fields + cls.content_common_fields
+            # add module results transformations
+            modifiers.extend(make_list_serialization_modifiers(
+                cls.content_module_fields_to_serialize))
+            return modifiers, result_fields
+
+        if content_type == "vulnerability":
+            # select the output fields
+            result_fields = cls.content_vuln_fields + cls.content_common_fields
+            # add vulnerability results transformations
+            modifiers.append(alternate_ids_modifier)
+            modifiers.extend(make_list_serialization_modifiers(
+                cls.content_vuln_fields_to_serialize))
+            return modifiers, result_fields
+
+        raise PluginException(
+            cause="Unexpected content type",
+            assistance="If the issue persists contact support",
+            data=content_type
+        )
+
+    @classmethod
+    def make_search_result(cls, api_data: Dict) -> Dict:
+        fn = sys._getframe().f_code.co_name
+        cls.validate(fn, dicts=[api_data])
+
+        def link_attr_modifier(d: Dict):
+            d.update({"link": cls.content_url + d.get("identifier")})
+            d.pop("identifier")
+
+        return cls.gen_dict(api_data, cls.seach_fields,
+                            link_attr_modifier,
+                            make_unknown_modifier("published_at"))
 
     @classmethod
     def resolve_db_type(cls, input_db: str) -> str:
@@ -69,31 +143,6 @@ class R7VDB:
         return data
 
     @classmethod
-    def paginate_search(cls, query: Dict, num_of_pages: int) -> List[Dict]:
-        fn = sys._getframe().f_code.co_name
-        cls.validate(fn, dicts=[query], ints=[num_of_pages])
-        res: List[Dict] = []
-        for page_num in range(num_of_pages):
-            query["page"] = page_num
-            data = cls.get_query(query)
-            for d in data["data"]:
-                res.append(cls.make_search_result(d))
-        return res
-
-    @classmethod
-    def make_search_result(cls, api_data: Dict) -> Dict:
-        fn = sys._getframe().f_code.co_name
-        cls.validate(fn, dicts=[api_data])
-
-        def link_attr_modifier(d: Dict):
-            d.update({"link": cls.content_url + d.get("identifier")})
-            d.pop("identifier")
-
-        return cls.gen_dict(api_data, cls.seach_fields,
-                            link_attr_modifier,
-                            make_unknown_modifier("published_at"))
-
-    @classmethod
     def get_content(cls, identifier: str) -> Dict:
         fn = sys._getframe().f_code.co_name
         cls.validate(fn, strings=[identifier])
@@ -116,24 +165,6 @@ class R7VDB:
                 data=str(e),
                 assistance="If the issue persists please contact support.")
         return cls.make_content_result(data)
-
-    @classmethod
-    def make_content_result(cls, api_data: Dict) -> Dict:
-        fn = sys._getframe().f_code.co_name
-        cls.validate(fn, dicts=[api_data])
-        result_fields = []
-        modifiers = []
-        if api_data["content_type"] == "module":
-            result_fields = cls.content_module_fields + cls.content_common_fields
-            modifiers.extend(make_list_serialization_modifiers(
-                cls.content_module_fields_to_serialize))
-        if api_data["content_type"] == "vulnerability":
-            result_fields = cls.content_vuln_fields + cls.content_common_fields
-            modifiers.extend(make_list_serialization_modifiers(
-                cls.content_vuln_fields_to_serialize))
-        flat_data = flatten_data(api_data)
-        modifiers.append(make_unknown_modifier("published_at"))
-        return cls.gen_dict(flat_data, result_fields, *modifiers)
 
     @classmethod
     def gen_dict(cls, orig: Dict, keys: List[str],
@@ -206,7 +237,11 @@ class R7VDB:
 
 def make_list_serialization_modifiers(fields: List[str]) \
         -> List[Callable[[Dict], None]]:
+    """
+    Generate list serialization modifiers(closures) for multiple fields
+    """
     modifiers: List[Callable[[Dict], None]] = []
+    # generate closures
     for field in fields:
         modifier = make_list_serialization_modifier(field)
         modifiers.append(modifier)
@@ -214,16 +249,26 @@ def make_list_serialization_modifiers(fields: List[str]) \
 
 
 def make_list_serialization_modifier(field: str) -> Callable[[Dict], None]:
-    # close on specific field
+    """
+    Generate closure that can serialize specific field  in dictionary
+    """
+
     def f(data: Dict):
+        """
+        Serialize specific field of type list
+        """
         if field in data and isinstance(data[field], List):
             data[field] = ",".join(data[field])
 
-    # return closure
     return f
 
 
 def make_unknown_modifier(field: str) -> Callable[[Dict], None]:
+    """
+    Generate closure that can set specific field to be equal `unknown` in dictionary
+    in case it is not returned by the API
+    """
+
     # close on specific field
     def f(data: Dict):
         if field in data:
@@ -234,22 +279,33 @@ def make_unknown_modifier(field: str) -> Callable[[Dict], None]:
     return f
 
 
-def published_attr_modifier(d: Dict):
-    if not d["published_at"]:
-        d["published_at"] = "unknown"
-
-
-def flatten_data(data: Dict) -> Dict:
+def flatten_nested_field(field: str, data: Dict) -> Dict:
+    """
+    Flattens specific field in dictionary by moving nested fields
+    to be top level keys
+    """
     new_data = copy.deepcopy(data)
-    for k, v in new_data["data"].items():
+    for k, v in new_data[field].items():
         if k not in new_data:
             new_data[k] = v
     return new_data
 
-# def make_unknown_modifiers(fields: List[str]) -> List[Callable[[Dict], None]]:
-#     modifiers = []
-#     for field in fields:
-#         modifier = make_unknown_modifier(field)
-#         modifiers.append(modifier)
-#     return modifiers
-#
+
+def make_unknown_modifiers(fields: List[str]) -> List[Callable[[Dict], None]]:
+    """
+    Generate multiple closures/modifiers that can set fields to be unknown
+    in case they are empty in the original dictionary
+    """
+    modifiers = []
+    for field in fields:
+        modifier = make_unknown_modifier(field)
+        modifiers.append(modifier)
+    return modifiers
+
+
+def alternate_ids_modifier(data: Dict):
+    """Transforms alternate ids of vulnerability into joined string"""
+    alternate_ids = data.pop("alternate_ids")
+    unified_names = [aid["unified_name"] for aid in alternate_ids]
+    unified_names = ",".join(unified_names)
+    data["alternate_ids"] = unified_names
