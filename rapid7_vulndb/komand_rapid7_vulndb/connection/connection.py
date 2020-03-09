@@ -12,7 +12,7 @@ class Connection(komand.Connection):
 
     def connect(self, params):
         result = requests.get("https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/info")
-        if (result.status_code == requests.codes.ok) is True:
+        if result.status_code == requests.codes.ok:
             return {"success": True}
         else:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)

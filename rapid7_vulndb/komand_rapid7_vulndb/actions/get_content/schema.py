@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Fetch content record for vulnerability or module"
+    DESCRIPTION = "Fetch content record for  vulnerability or module"
 
 
 class Input:
@@ -47,7 +47,7 @@ class GetContentOutput(komand.Output):
     "content_result": {
       "$ref": "#/definitions/content",
       "title": "Result",
-      "description": "Content record for vulnerability or module",
+      "description": "Content record for the vulnerability or module",
       "order": 1
     }
   },
@@ -61,8 +61,8 @@ class GetContentOutput(komand.Output):
       "properties": {
         "alternate_ids": {
           "type": "string",
-          "title": "Alternative identifiers",
-          "description": "List of alternative identifiers of vulnerability",
+          "title": "Alternative Identifiers",
+          "description": "List of alternative identifiers for the vulnerability",
           "order": 12
         },
         "architectures": {
@@ -86,7 +86,7 @@ class GetContentOutput(komand.Output):
         "description": {
           "type": "string",
           "title": "Description",
-          "description": "Brief summary of the returend content",
+          "description": "Brief summary of the returned content",
           "order": 2
         },
         "published_at": {
@@ -122,7 +122,7 @@ class GetContentOutput(komand.Output):
         "solutions": {
           "type": "string",
           "title": "Solutions",
-          "description": "List of possible solutions for vulnerability",
+          "description": "List of possible solutions for the vulnerability",
           "order": 11
         },
         "title": {

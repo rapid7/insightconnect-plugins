@@ -1,4 +1,5 @@
-FROM komand/python-3-37-plugin:3
+FROM komand/python-3-37-slim-plugin:3
+
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin

@@ -1,9 +1,7 @@
 import komand
 from .schema import SearchDbInput, SearchDbOutput, Input, Output
 # Custom imports below
-from typing import Dict, List
-import requests
-from komand_rapid7_vulndb.util import utils
+from komand_rapid7_vulndb.util import extract
 
 
 class SearchDb(komand.Action):
@@ -17,14 +15,9 @@ class SearchDb(komand.Action):
 
     def run(self, params={}):
         # Get params
-        search = params.get(Input.SEARCH)
-        data_base = params.get(Input.DATABASE)
-
-        q = {"query": search}
-        q = utils.R7VDB.set_query_db_type(q, data_base)
-        data = utils.R7VDB.get_query(q)
-        num_of_pages = data['metadata']['total_pages']
-        results = utils.R7VDB.paginate_search(q, num_of_pages)
+        search_for = params.get(Input.SEARCH)
+        db = params.get(Input.DATABASE)
+        results = extract.Search.get_results(search_for, db)
         return {
             Output.RESULTS_FOUND: len(results) > 0,
             Output.SEARCH_RESULTS: results,

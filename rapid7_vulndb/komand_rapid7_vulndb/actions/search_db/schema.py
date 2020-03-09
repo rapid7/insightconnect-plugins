@@ -89,14 +89,14 @@ class SearchDbOutput(komand.Output):
         },
         "published_at": {
           "type": "string",
-          "title": "Published_at",
+          "title": "Published At",
           "description": "Published date of vulnerability",
           "order": 3
         },
         "title": {
           "type": "string",
           "title": "Title",
-          "description": "Title of Vulnerability",
+          "description": "Title of vulnerability",
           "order": 1
         }
       }

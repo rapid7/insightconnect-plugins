@@ -29,7 +29,7 @@ types:
   search_result:
     title:
       title: Title
-      description: Title of Vulnerability
+      description: Title of vulnerability
       type: string
       required: false
     link:
@@ -38,7 +38,7 @@ types:
       type: string
       required: false
     published_at:
-      title: Published_at
+      title: Published At
       description: Published date of vulnerability
       type: string
       required: false
@@ -50,7 +50,7 @@ types:
       required: false
     description:
       title: Description
-      description: Brief summary of the returend content
+      description: Brief summary of the returned content
       type: string
       required: false
     content_type:
@@ -95,18 +95,18 @@ types:
       required: false
     solutions:
       title: Solutions
-      description: List of possible solutions for vulnerability
+      description: List of possible solutions for the vulnerability
       type: string
       required: false
     alternate_ids:
-      title: Alternative identifiers
-      description: List of alternative identifiers of vulnerability
+      title: Alternative Identifiers
+      description: List of alternative identifiers for the vulnerability
       type: string
       required: false
 actions:
   get_content:
     title: Get Content
-    description: Fetch content record for vulnerability or module
+    description: Fetch content record for  vulnerability or module
     input:
       identifier:
         title: Identifier
@@ -117,10 +117,10 @@ actions:
       content_result:
         title: Result
         type: 'content'
-        description: Content record for vulnerability or module
+        description: Content record for the vulnerability or module
         required: true
   search_db:
-    title: Search DB
+    title: Search Database
     description: Search the database to find vulnerabilities and exploits
     input:
       database:

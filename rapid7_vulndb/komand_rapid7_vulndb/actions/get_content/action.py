@@ -1,6 +1,6 @@
 import komand
 from .schema import GetContentInput, GetContentOutput, Input, Output, Component
-from komand_rapid7_vulndb.util import utils
+from komand_rapid7_vulndb.util import extract
 # Custom imports below
 
 
@@ -15,7 +15,7 @@ class GetContent(komand.Action):
 
     def run(self, params={}):
         identifier = params.get(Input.IDENTIFIER)
-        content_result = utils.R7VDB.get_content(identifier)
+        content_result = extract.Content.get(identifier)
 
         return {Output.CONTENT_RESULT: content_result}
 

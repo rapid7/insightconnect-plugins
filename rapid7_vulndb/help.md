@@ -21,9 +21,32 @@ _This plugin does not contain a connection._
 
 ### Actions
 
+#### Search Database
+
+This action is used to search the database to find vulnerabilities and exploits.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|database|string|None|True|Name of the database|['Vulnerability Database', 'Metasploit Modules']|
+|search|string|None|True|Search parameter for database|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results_found|bool|True|Will return false if no results are found|
+|search_results|[]search_result|False|Vulnerability and exploits found|
+
+Example output:
+
+```
+```
+
 #### Get Content
 
-This action is used to fetch content record for vulnerability or module.
+This action is used to fetch content results for a vulnerability or module.
 
 ##### Input
 
@@ -35,7 +58,7 @@ This action is used to fetch content record for vulnerability or module.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|content_result|content|True|Content record for vulnerability or module|
+|content_result|content|True|Content record for the vulnerability or module|
 
 
 Example output:
@@ -54,25 +77,6 @@ Example output:
   }
 }
 ```
-
-#### Search DB
-
-This action is used to search the database to find vulnerabilities and exploits.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|database|string|None|True|Name of the database|['Vulnerability Database', 'Metasploit Modules']|
-|search|string|None|True|Search parameter for database|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results_found|bool|True|Will return false if no results are found|
-|search_results|[]search_result|False|Vulnerability and exploits found|
-
 
 ### Triggers
 
@@ -111,7 +115,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - New version based on API, not backward compatible
+* 2.0.0 - Utilize VulnDB API
 * 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Fix issue where Published Date input in the Search Database action would not always parse correctly | Fix issue with memory leaks
 * 1.0.1 - Update to v2 Python plugin architecture and support web server mode
@@ -121,5 +125,5 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Rapid7 Vulnerability & Exploit Database](https://vdb.rapid7.com/swagger_doc)
+* [Rapid7 Vulnerability & Exploit Database API Specification](https://vdb.rapid7.com/swagger_doc)
 
