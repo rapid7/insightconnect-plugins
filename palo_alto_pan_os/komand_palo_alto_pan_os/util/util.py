@@ -174,7 +174,8 @@ class ExternalList:
 
         if repeat == 'daily':
             if not time:
-                raise Exception('Time of day not defined')
+                raise PluginException(cause='Time of day not defined',
+                                      assistance='Contact support for help.')
             element = '<type><{list_type}>' \
                       '<recurring><daily><at>{time}</at></daily></recurring>' \
                       '<description>{description}</description>' \
@@ -185,9 +186,11 @@ class ExternalList:
                                                      source=source)
         elif repeat == 'weekly':
             if not time:
-                raise Exception('Time of day not defined')
+                raise PluginException(cause='Time of day not defined',
+                                      assistance='Contact support for help.')
             if not day:
-                raise Exception('Day of week not defined')
+                raise PluginException(cause='Day of week not defined',
+                                      assistance='Contact support for help.')
             element = '<type><{list_type}>' \
                       '<recurring><weekly><day-of-week>{day}</day-of-week>' \
                       '<at>{time}</at></weekly></recurring>' \
