@@ -1,14 +1,6 @@
 {
     "body": {
         "action": "remove_from_policy",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "server": null,
-            "verify_cert": null
-        },
         "input": {
             "action": "",
             "application": "",

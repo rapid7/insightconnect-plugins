@@ -17,7 +17,7 @@ class Edit(komand.Action):
         xpath = params.get("xpath")
         element = params.get("element")
 
-        output = self.connection.request.edit_(action=self, xpath=xpath, element=element)
+        output = self.connection.request.edit_(xpath=xpath, element=element)
         try:
             return {"response": output['response']}
         except KeyError:
