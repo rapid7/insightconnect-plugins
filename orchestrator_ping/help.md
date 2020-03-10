@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-#### 
+#### Ping
 
 This action is used to send a ping to the Orchestrator and receive a message back.
 
@@ -50,7 +50,7 @@ Example output:
 
 ### Triggers
 
-#### 
+#### Signal
 
 This trigger is used to send a signal to Insight Connect during startup and shutdown.
 
