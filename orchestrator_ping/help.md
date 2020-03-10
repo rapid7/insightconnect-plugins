@@ -85,6 +85,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.6 - Port to Python
 * 1.0.0 - Initial plugin
 
 # Links
