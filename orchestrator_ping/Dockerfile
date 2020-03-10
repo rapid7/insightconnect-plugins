@@ -9,7 +9,7 @@ LABEL sdk=python
 
 # End package dependencies 
 
-# Add source code
+# Add source code 
 WORKDIR /python/src
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
