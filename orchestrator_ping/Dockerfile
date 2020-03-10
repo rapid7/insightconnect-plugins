@@ -5,7 +5,7 @@ LABEL organization=rapid7
 LABEL sdk=python
 
 # Add any custom package dependencies here
-# NOTE: Add pip packages to requirements.txt 
+# NOTE: Add pip packages to requirements.txt
 
 # End package dependencies 
 
