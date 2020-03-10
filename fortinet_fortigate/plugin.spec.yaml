@@ -1,0 +1,49 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: fortinet_fortigate
+title: Fortinet FortiGate
+description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection.
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/fortinet_fortigate
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+tags:
+- firewall
+- fortinet
+- fortigate
+hub_tags:
+  use_cases: [application_management, threat_detection_and_response, vulnerability_management]
+  keywords: [firewall, fortinet, fortigate]
+  features: []
+
+connection:
+  hostname:
+    type: string
+    title: Hostname
+    description: Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000
+    required: true
+  api_key:
+    type: credential_secret_key
+    title: API Key
+    description: API Key
+    required: true
+  ssl_verify:
+    type: boolean
+    title: SSL Verify
+    description: SSL Verify
+    required: true
+
+actions:
+  get_policies:
+    output:
+      policies:
+        title: Policies
+        description: Policies
+        type: object
+        required: false
+
+
