@@ -11,7 +11,7 @@ ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
 
 WORKDIR /python/src
-# Add any package dependencies here
+# Add any package dependencies here 
 
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
