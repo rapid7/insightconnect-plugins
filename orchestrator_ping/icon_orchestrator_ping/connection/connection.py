@@ -5,18 +5,19 @@ from komand.exceptions import PluginException
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.username, self.password = None, None
 
     def connect(self, params):
-        self.username = params[Input.CREDS["username"]]
-        self.password = params[Input.CREDS["password"]]
+        self.username = params[Input.CREDS]["username"]
+        self.password = params[Input.CREDS]["password"]
 
         if self.username == "bad-robot":
-            raise PluginException(cause=f"The username {self.username} is not allowed to connect!",
-                                  assistance="Try another username!")
+            raise PluginException(
+                cause=f"The username {self.username} is not allowed to connect!",
+                assistance="Try another username!",
+            )
 
     def test(self):
         # Will execute connection code
