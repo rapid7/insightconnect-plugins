@@ -9,7 +9,7 @@ This plugin allows basic arithmetic functions to be performed.
 
 # Requirements
 
-_This plugin does not contain any requirements_
+_This plugin does not contain any requirements._
 
 # Documentation
 
