@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "get_content",
+    "connection": null,
+    "input": {
+      "identifier": "auxiliary/scanner/http/docker_version"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
