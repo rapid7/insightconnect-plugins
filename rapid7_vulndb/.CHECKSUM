@@ -1,11 +1,15 @@
 {
-	"spec": "d98f25f9ce5f03ecc23dd2774abef4c9",
-	"manifest": "7c0cf750524ebacaec47e9435798d24c",
-	"setup": "4da0e652c66c82da52320e55287c64c6",
+	"spec": "ce4ae2a44e83d4a60c2c041866964bd3",
+	"manifest": "8cc93587a14e91cb5557fca9ad9e1628",
+	"setup": "6960583d7691be8f61e8f205d3e3bac3",
 	"schemas": [
 		{
+			"identifier": "get_content/schema.py",
+			"hash": "d799ca6b20d34df7dea442a06d6b4fc9"
+		},
+		{
 			"identifier": "search_db/schema.py",
-			"hash": "b41a14a964f0df56af017eaaa7e797c5"
+			"hash": "c54f81eb89dd4c7a7eaa3a66c3961e19"
 		},
 		{
 			"identifier": "connection/schema.py",

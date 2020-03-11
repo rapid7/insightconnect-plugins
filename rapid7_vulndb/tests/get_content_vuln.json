@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "get_content",
+    "connection": null,
+    "input": {
+      "identifier": "mozilla-thunderbird-cve-2015-7189"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
