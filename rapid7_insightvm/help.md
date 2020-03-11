@@ -447,7 +447,7 @@ This action is used to get the status of a scan.
 |endTime|string|False|End time of the scan in ISO8601 format|
 |engineName|string|False|Name of the engine used for the scan|
 |id|integer|False|ID of the scan|
-|links|[]link|False|Links|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
 |scanName|string|False|User-driven scan name for the scan|
 |scanType|string|False|Scan type (manual, automated, scheduled)|
 |startTime|string|False|Start time of the scan in ISO8601 format|
@@ -570,7 +570,7 @@ This action is used to start a scan on a site.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|id|integer|False|Scan ID|
+|id|integer|False|Identifier of the resource created|
 |links|[]link|False|Hypermedia links to corresponding or related resources|
 
 Example Output:
@@ -4323,6 +4323,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.0.0 - Fix output for Generate Adhoc SQL Report action
 * 3.6.0 - Add Get Asset Group Assets action
 * 3.5.2 - Fix bug in New Vulnerability Exception Activity
 * 3.5.1 - New spec and help.md format for the Hub

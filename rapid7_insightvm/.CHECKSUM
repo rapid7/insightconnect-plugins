@@ -1,7 +1,7 @@
 {
-	"spec": "61abca24a402e23445047b975872dd02",
-	"manifest": "324be42d6d910c6f4cb4a35091472436",
-	"setup": "443c4b61c92b600d190ed893b9b872d1",
+	"spec": "6dece678c30114fd1d5146560a160ab1",
+	"manifest": "a4aca7695a1da3bb04fcdd36f944505c",
+	"setup": "bbcec002d1cc4f2f771cff069e8b1e28",
 	"schemas": [
 		{
 			"identifier": "add_scan_engine_pool_engine/schema.py",
@@ -141,7 +141,7 @@
 		},
 		{
 			"identifier": "get_scan/schema.py",
-			"hash": "5df101027bf029f2b9f9ff1a701b8b93"
+			"hash": "c7c0d19e2793ff68f3c89145cb25e8a0"
 		},
 		{
 			"identifier": "get_scan_assets/schema.py",
@@ -261,7 +261,7 @@
 		},
 		{
 			"identifier": "scan/schema.py",
-			"hash": "ac5d75339d10ba89d8549ec5b63f49a0"
+			"hash": "9bdea0419736ee31ef94a4a56e0ed9be"
 		},
 		{
 			"identifier": "tag_asset/schema.py",
