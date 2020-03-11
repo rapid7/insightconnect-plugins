@@ -18,10 +18,9 @@ tags:
 - security
 - malware
 - analysis
-- automation
 hub_tags:
   use_cases: [application_management, cloud_security]
-  keywords: [security, malware, analysis, automation]
+  keywords: [security, malware, analysis]
   features: []
 types:
   system:
