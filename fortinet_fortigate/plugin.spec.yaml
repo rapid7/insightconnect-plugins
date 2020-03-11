@@ -46,4 +46,58 @@ actions:
         type: object
         required: false
 
+  create_address_object:
+    input:
+      ip:
+        title: IP
+        description: IP
+        type: string
+        required: true
+        order: 1
+      cidr:
+        title: CIDR
+        description: CIDR
+        type: integer
+        required: true
+        default: 32
+        order: 2
+    output:
+      success:
+        title: Success
+        description: Boolean value indication the success of the operation
+        type: boolean
+        required: true
+      response_object:
+        title: Response Object
+        description: Information about the operation that was performed
+        type: object
+        required: true
+
+  delete_address_object:
+    input:
+      ip:
+        title: IP
+        description: IP
+        type: string
+        required: true
+        order: 1
+      cidr:
+        title: CIDR
+        description: CIDR
+        type: integer
+        required: true
+        default: 32
+        order: 2
+    output:
+      success:
+        title: Success
+        description: Boolean value indication the success of the operation
+        type: boolean
+        required: true
+      response_object:
+        title: Response Object
+        description: Information about the operation that was performed
+        type: object
+        required: true
+
 
