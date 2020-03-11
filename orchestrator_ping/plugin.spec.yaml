@@ -22,7 +22,7 @@ hub_tags:
   features: []
 
 connection:
-  creds:
+  credentials:
     type: credential_username_password
     required: true
     description: No-op credentials used to ensure the end to end experience of communicating

@@ -4,7 +4,7 @@ import json
 
 
 class Input:
-    CREDS = "creds"
+    CREDENTIALS = "credentials"
     
 
 class ConnectionSchema(komand.Input):
@@ -13,15 +13,15 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "creds": {
+    "credentials": {
       "$ref": "#/definitions/credential_username_password",
-      "title": "Creds",
+      "title": "Credentials",
       "description": "No-op credentials used to ensure the end to end experience of communicating with the orchestrator is working",
       "order": 1
     }
   },
   "required": [
-    "creds"
+    "credentials"
   ],
   "definitions": {
     "credential_username_password": {

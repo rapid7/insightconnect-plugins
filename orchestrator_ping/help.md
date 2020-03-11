@@ -18,7 +18,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|creds|credential_username_password|None|True|No-op credentials used to ensure the end to end experience of communicating with the orchestrator is working|None|
+|credentials|credential_username_password|None|True|No-op credentials used to ensure the end to end experience of communicating with the orchestrator is working|None|
 
 ## Technical Details
 

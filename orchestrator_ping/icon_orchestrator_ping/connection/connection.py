@@ -10,8 +10,8 @@ class Connection(komand.Connection):
         self.username, self.password = None, None
 
     def connect(self, params):
-        self.username = params[Input.CREDS]["username"]
-        self.password = params[Input.CREDS]["password"]
+        self.username = params[Input.CREDENTIALS]["username"]
+        self.password = params[Input.CREDENTIALS]["password"]
 
         if self.username == "bad-robot":
             raise PluginException(
