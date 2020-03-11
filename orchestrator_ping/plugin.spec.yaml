@@ -30,20 +30,24 @@ connection:
 
 triggers:
   signal:
+    title: Signal
     description: Send a signal to Insight Connect during startup and shutdown
     input:
       startup_message:
+        title: Startup Message
         type: string
         description: The message to return to Insight Connect when the Orchestrator
           starts the trigger
         required: true
       shutdown_message:
+        title: Shutdown Message
         type: string
         description: The message to return to Insight Connect when the Orchestrator
           shuts down
         required: true
     output:
       message:
+        title: Message
         type: string
         description: The message with the signal, either Startup or Shutdown depending
           on the event
@@ -51,14 +55,17 @@ triggers:
 
 actions:
   ping:
+    title: Ping
     description: Send a ping to the Orchestrator and receive a message back
     input:
       message:
+        title: Message
         type: string
         description: The message to send, and also what you will receive back
         required: true
     output:
       message:
+        title: Message
         type: string
         description: The message you'll receive, which is also the same as what was
           sent
