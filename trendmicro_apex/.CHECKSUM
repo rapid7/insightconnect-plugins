@@ -1,0 +1,19 @@
+{
+	"spec": "ee66e34586dbbce055ac204cf78ab241",
+	"manifest": "2e6dbcf10f9f75ee8ddf05c8756483b7",
+	"setup": "cca2bbed73d446e2077aa34807e7fdd0",
+	"schemas": [
+		{
+			"identifier": "add_file_to_udso_list/schema.py",
+			"hash": "f47fe5c8fc29b908e51f43827070af4c"
+		},
+		{
+			"identifier": "add_to_udso_list/schema.py",
+			"hash": "fa7e1970dd8a5c0ed819a250c4d5fc76"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "1d204f734127049b420f62308664affe"
+		}
+	]
+}
