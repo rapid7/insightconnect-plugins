@@ -19,7 +19,7 @@ class CreateAddressObject(komand.Action):
         address = f"{ip}/{cidr}"
 
         payload = {
-            "name": address,
+            "name": ip,
             "type": "ipmask",
             "subnet": address
         }

@@ -18,7 +18,7 @@ class ConnectionSchema(komand.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "API Key",
+      "description": "API key",
       "order": 2
     },
     "hostname": {
@@ -30,7 +30,7 @@ class ConnectionSchema(komand.Input):
     "ssl_verify": {
       "type": "boolean",
       "title": "SSL Verify",
-      "description": "SSL Verify",
+      "description": "SSL verify",
       "order": 3
     }
   },

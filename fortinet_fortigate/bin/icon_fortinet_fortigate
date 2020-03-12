@@ -19,6 +19,8 @@ class ICONFortinetFortigate(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.AddAddressObjectToAddressGroup())
+
         self.add_action(actions.CreateAddressObject())
 
         self.add_action(actions.DeleteAddressObject())

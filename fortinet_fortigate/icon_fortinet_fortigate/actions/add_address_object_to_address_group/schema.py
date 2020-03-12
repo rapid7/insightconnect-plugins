@@ -4,42 +4,41 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete an address object"
+    DESCRIPTION = "Add an address object to an address group"
 
 
 class Input:
-    CIDR = "cidr"
-    IP = "ip"
+    ADDRESS_OBJECT_NAME = "address_object_name"
+    GROUP_NAME = "group_name"
     
 
 class Output:
-    RESPONSE_OBJECT = "response_object"
+    RESULT_OBJECT = "result_object"
     SUCCESS = "success"
     
 
-class DeleteAddressObjectInput(komand.Input):
+class AddAddressObjectToAddressGroupInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "cidr": {
-      "type": "integer",
-      "title": "CIDR",
-      "description": "CIDR",
-      "default": 32,
+    "address_object_name": {
+      "type": "string",
+      "title": "Address Object Name",
+      "description": "Address object name",
       "order": 2
     },
-    "ip": {
+    "group_name": {
       "type": "string",
-      "title": "IP",
-      "description": "IP",
+      "title": "Group Name",
+      "description": "Group name",
       "order": 1
     }
   },
   "required": [
-    "cidr",
-    "ip"
+    "address_object_name",
+    "group_name"
   ]
 }
     """)
@@ -48,27 +47,27 @@ class DeleteAddressObjectInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class DeleteAddressObjectOutput(komand.Output):
+class AddAddressObjectToAddressGroupOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "response_object": {
+    "result_object": {
       "type": "object",
-      "title": "Response Object",
-      "description": "Information about the operation that was performed",
+      "title": "Result Object",
+      "description": "An object containing the results of the action",
       "order": 2
     },
     "success": {
       "type": "boolean",
       "title": "Success",
-      "description": "Boolean value indicating the success of the operation",
+      "description": "Was the operation successful",
       "order": 1
     }
   },
   "required": [
-    "response_object",
+    "result_object",
     "success"
   ]
 }

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = ""
+    DESCRIPTION = "Create an address object"
 
 
 class Input:
@@ -63,7 +63,7 @@ class CreateAddressObjectOutput(komand.Output):
     "success": {
       "type": "boolean",
       "title": "Success",
-      "description": "Boolean value indication the success of the operation",
+      "description": "Boolean value indicating the success of the operation",
       "order": 1
     }
   },
