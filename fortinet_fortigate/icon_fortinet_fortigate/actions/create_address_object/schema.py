@@ -10,6 +10,7 @@ class Component:
 class Input:
     CIDR = "cidr"
     IP = "ip"
+    NAME = "name"
     
 
 class Output:
@@ -35,6 +36,12 @@ class CreateAddressObjectInput(komand.Input):
       "title": "IP",
       "description": "IP",
       "order": 1
+    },
+    "name": {
+      "type": "string",
+      "title": "Name",
+      "description": "Optional name to give this address object. If not provided, the name will be the IP address",
+      "order": 3
     }
   },
   "required": [

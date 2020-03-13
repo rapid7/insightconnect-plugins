@@ -60,7 +60,7 @@ actions:
       address_objects:
         title: Address Objects
         description: A list of address objects
-        type: object
+        type: "object[]"
         required: true
 
   create_address_object:
@@ -80,6 +80,12 @@ actions:
         required: true
         default: 32
         order: 2
+      name:
+        title: Name
+        description: Optional name to give this address object. If not provided, the name will be the IP address
+        type: string
+        required: false
+        order: 3
     output:
       success:
         title: Success

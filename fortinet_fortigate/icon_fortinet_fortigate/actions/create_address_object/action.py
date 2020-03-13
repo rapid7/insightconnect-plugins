@@ -15,11 +15,12 @@ class CreateAddressObject(komand.Action):
     def run(self, params={}):
         ip = params[Input.IP]
         cidr = params[Input.CIDR]
+        name = params.get(Input.NAME, "")
 
         address = f"{ip}/{cidr}"
 
         payload = {
-            "name": ip,
+            "name": name if name else ip,
             "type": "ipmask",
             "subnet": address
         }
