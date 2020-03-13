@@ -81,6 +81,12 @@ class SearchDbOutput(komand.Output):
       "type": "object",
       "title": "search_result",
       "properties": {
+        "identifier": {
+          "type": "string",
+          "title": "Content identifier",
+          "description": "Content identifier for module or vulnerability",
+          "order": 4
+        },
         "link": {
           "type": "string",
           "title": "Link",
