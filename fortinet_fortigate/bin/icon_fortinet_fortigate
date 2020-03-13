@@ -25,6 +25,8 @@ class ICONFortinetFortigate(komand.Plugin):
 
         self.add_action(actions.DeleteAddressObject())
 
+        self.add_action(actions.GetAddressObjects())
+
         self.add_action(actions.GetPolicies())
 
 

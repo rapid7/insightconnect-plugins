@@ -47,6 +47,22 @@ actions:
         type: object
         required: false
 
+  get_address_objects:
+    title: Get Address Objects
+    description: Get address objects
+    input:
+      name_filter:
+        title: Name filter
+        description: Optional name to filer on
+        type: string
+        required: false
+    output:
+      address_objects:
+        title: Address Objects
+        description: A list of address objects
+        type: object
+        required: true
+
   create_address_object:
     title: Create Address Object
     description: Create an address object

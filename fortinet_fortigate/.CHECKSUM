@@ -1,6 +1,6 @@
 {
-	"spec": "d99e5f3577c3ba224c5f6cbf6f9e0d65",
-	"manifest": "be63cfe1fea3ec3203763e4d1959a9ea",
+	"spec": "7e3275f13e6aeb92d6b4d23828f64ba0",
+	"manifest": "785d92f4f50c69183e257c8c63a56fec",
 	"setup": "84fa07b20c4e3adab2d12ee5cf132d7d",
 	"schemas": [
 		{
@@ -14,6 +14,10 @@
 		{
 			"identifier": "delete_address_object/schema.py",
 			"hash": "7d502e3c3c53a8b83b24be4995e29682"
+		},
+		{
+			"identifier": "get_address_objects/schema.py",
+			"hash": "16c865a5a9a36c5e34f589d7122616dc"
 		},
 		{
 			"identifier": "get_policies/schema.py",
