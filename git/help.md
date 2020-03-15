@@ -31,6 +31,27 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Get File
+
+This action is used to get a file from the repository.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|file_path|string|None|True|Path of the new file (inside the repository)|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|file|file|True|File content|
+
+Example output:
+
+```
+```
+
 #### Remove File
 
 This action is used to remove a file from the repository.
@@ -140,6 +161,7 @@ If a token is used, make sure that it has sufficient permissions assigned to it.
 
 # Version History
 
+* 1.1.1 - Add new action: get file
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
