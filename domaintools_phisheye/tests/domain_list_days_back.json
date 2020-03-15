@@ -1,0 +1,18 @@
+{
+  "body": {
+    "action": "domain_list",
+    "connection": {
+      "api_key": {
+        "secretKey": ""
+      },
+      "username": ""
+    },
+    "input": {
+      "query": "apple",
+      "days_back": 1
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
