@@ -48,6 +48,24 @@ This action is used to add an address object to an address group.
 Example output:
 
 ```
+{
+  "success": true,
+  "result_object": {
+    "http_method": "PUT",
+    "revision": "ae0c665d9d5ad469c280efc424e00e29",
+    "revision_changed": true,
+    "old_revision": "94d82356a2bc4cb05963807103392ca3",
+    "mkey": "Test Group",
+    "status": "success",
+    "http_status": 200,
+    "vdom": "root",
+    "path": "firewall",
+    "name": "addrgrp",
+    "serial": "FGVM02TM20001791",
+    "version": "v6.2.3",
+    "build": 1066
+  }
+}
 ```
 
 #### Create Address Object
@@ -72,6 +90,24 @@ This action is used to create an address object.
 Example output:
 
 ```
+{
+  "success": true,
+  "response_object": {
+    "http_method": "POST",
+    "revision": "e089319342f23d5e31b70f5edfb5164c",
+    "revision_changed": true,
+    "old_revision": "d04190fe309ea6ce1fbf4be1e5cd3233",
+    "mkey": "192.168.2.1",
+    "status": "success",
+    "http_status": 200,
+    "vdom": "root",
+    "path": "firewall",
+    "name": "address",
+    "serial": "FGVM02TM20001791",
+    "version": "v6.2.3",
+    "build": 1066
+  }
+}
 ```
 
 #### Delete Address Object
@@ -95,6 +131,24 @@ This action is used to delete an address object.
 Example output:
 
 ```
+{
+  "success": true,
+  "response_object": {
+    "http_method": "DELETE",
+    "revision": "31a57b41b37574780e38a4be9a5cf117",
+    "revision_changed": true,
+    "old_revision": "e089319342f23d5e31b70f5edfb5164c",
+    "mkey": "192.168.3.1/32",
+    "status": "success",
+    "http_status": 200,
+    "vdom": "root",
+    "path": "firewall",
+    "name": "address",
+    "serial": "FGVM02TM20001791",
+    "version": "v6.2.3",
+    "build": 1066
+  }
+}
 ```
 
 #### Get Address Objects
@@ -111,30 +165,35 @@ This action is used to get address objects.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|address_objects|object[]|True|A list of address objects|
+|address_objects|[]object|True|A list of address objects|
 
 Example output:
 
 ```
-```
-
-#### 
-
-This action is used to .
-
-##### Input
-
-_This action does not contain any inputs._
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|policies|object|False|Policies|
-
-Example output:
-
-```
+{
+  "address_objects": [
+    {
+      "name": "FABRIC_DEVICE",
+      "q_origin_key": "FABRIC_DEVICE",
+      "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9",
+      "subnet": "0.0.0.0 0.0.0.0",
+      "type": "ipmask",
+      "sub-type": "sdn",
+      "clearpass-spt": "unknown",
+      "start-mac": "00:00:00:00:00:00",
+      "end-mac": "00:00:00:00:00:00",
+      "cache-ttl": 0,
+      "fsso-group": [],
+      "comment": "IPv4 addresses of Fabric Devices.",
+      "visibility": "enable",
+      "color": 0,
+      "sdn-addr-type": "private",
+      "list": [],
+      "tagging": [],
+      "allow-routing": "disable"
+    }
+  ]
+}
 ```
 
 ### Triggers
@@ -144,6 +203,7 @@ _This plugin does not contain any triggers._
 ### Custom Output Types
 
 _This plugin does not contain any custom output types._
+
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._

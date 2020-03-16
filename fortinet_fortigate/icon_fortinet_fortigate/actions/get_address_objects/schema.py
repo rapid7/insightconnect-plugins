@@ -42,9 +42,12 @@ class GetAddressObjectsOutput(komand.Output):
   "title": "Variables",
   "properties": {
     "address_objects": {
-      "type": "object",
+      "type": "array",
       "title": "Address Objects",
       "description": "A list of address objects",
+      "items": {
+        "type": "object"
+      },
       "order": 1
     }
   },
