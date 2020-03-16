@@ -43,7 +43,7 @@ types:
       type: string
       required: false
     identifier:
-      title: Content identifier
+      title: Content Identifier
       description: Content identifier for module or vulnerability
       type: string
       required: false
