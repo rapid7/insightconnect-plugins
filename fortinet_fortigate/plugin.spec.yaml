@@ -45,7 +45,7 @@ types:
       description: "WAN opt-detection"
       required: false
     webcache-https:
-      title: "Web cache-Https"
+      title: "Web cache-https"
       type: string
       description: "Web cache-https"
       required: false
@@ -745,5 +745,4 @@ actions:
         description: An object containing the results of the action
         type: object
         required: true
-
 
