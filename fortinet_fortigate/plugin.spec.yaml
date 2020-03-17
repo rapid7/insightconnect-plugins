@@ -170,7 +170,7 @@ types:
       description: "Firewall-session-dirty"
       required: false
     wanopt:
-      title: "WAN opt"
+      title: "WAN Option"
       type: string
       description: "WAN option"
       required: false
@@ -745,4 +745,3 @@ actions:
         description: An object containing the results of the action
         type: object
         required: true
-
