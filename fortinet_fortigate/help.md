@@ -7,6 +7,10 @@
 * Create network address objects
 * Add address object to address groups
 
+The intended way to use this plugin is to have an existing policy in place with a predefined address group in it. 
+As threats are detected, their address can be added to your existing policy through the address group. This allows
+for flexible policy management of large groups of dynamic addresses. 
+
 # Requirements
 
 * A admin API key
