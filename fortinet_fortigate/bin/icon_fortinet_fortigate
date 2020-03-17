@@ -5,7 +5,7 @@ from icon_fortinet_fortigate import connection, actions, triggers
 
 
 Name = "Fortinet FortiGate"
-Vendor = "rapid7"
+Vendor = "joey-test"
 Version = "1.0.0"
 Description = "FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection"
 
