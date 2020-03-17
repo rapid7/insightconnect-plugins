@@ -29,7 +29,7 @@ class DeleteAddressObject(komand.Action):
         try:
             response.raise_for_status()
         except Exception as e:
-            raise PluginException(cause="Create address failed.",
+            raise PluginException(cause="Delete address failed.",
                                   assistance=response.text,
                                   data=e)
 
