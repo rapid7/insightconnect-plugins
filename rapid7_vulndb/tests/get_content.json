@@ -3,7 +3,7 @@
     "action": "get_content",
     "connection": null,
     "input": {
-      "identifier": "auxiliary/scanner/http/docker_version"
+      "identifier": "apple-itunes-cve-2019-8835"
     },
     "meta": {}
   },

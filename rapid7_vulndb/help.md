@@ -1,10 +1,11 @@
 # Description
 
-Make searching the Rapid7 vulnerability and exploit data fast, easy and efficient with the InsigthConnect plugin. Leverage this curated repository of vetted computer software exploits and exploitable vulnerabilities to ensure your security operations are always aware of the latest threats that could be used against your environment
+Make searching the Rapid7 vulnerability and exploit data fast, easy and efficient with the InsightConnect plugin. Leverage this curated repository of vetted computer software exploits and exploitable vulnerabilities to ensure your security operations are always aware of the latest threats that could be used against your environment
 
 # Key Features
 
 * Search Database for vulnerabilities
+* Retrieve vulnerability or Metasploit module details based on a CVE or module identifier
 
 # Requirements
 
@@ -15,7 +16,6 @@ _This plugin does not contain any requirements._
 ## Setup
 
 _This plugin does not contain a connection._
-
 
 ## Technical Details
 
@@ -42,6 +42,21 @@ This action is used to search the database to find vulnerabilities and exploits.
 Example output:
 
 ```
+{
+  "results_found": true,
+  "search_results": [
+    {
+      "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/mozilla-thunderbird-cve-2015-7189",
+      "published_at": "2015-11-05T00:00:00.000Z",
+      "title": "MFSA2015-123 Thunderbird: Buffer overflow during image interactions in canvas (CVE-2015-7189)"
+    },
+    {
+      "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/mfsa2015-123-cve-2015-7189",
+      "published_at": "2015-11-03T00:00:00.000Z",
+      "title": "MFSA2015-123 Firefox: Buffer overflow during image interactions in canvas (CVE-2015-7189)"
+    }
+  ]
+}
 ```
 
 #### Get Content
@@ -59,7 +74,6 @@ This action is used to fetch content results for a vulnerability or module.
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |content_result|content|True|Content record for the vulnerability or module|
-
 
 Example output:
 
@@ -115,6 +129,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.1 - Implement workaround for VulnDB API bug in Get Content action where the `severity` datatype response differs based on the action input
 * 2.0.0 - Utilize VulnDB API
 * 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Fix issue where Published Date input in the Search Database action would not always parse correctly | Fix issue with memory leaks
