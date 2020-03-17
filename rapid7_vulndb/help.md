@@ -14,7 +14,8 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
+
 
 ## Technical Details
 
@@ -22,53 +23,100 @@ This plugin does not contain a connection.
 
 #### Search Database
 
-This action is used to search the database for vulnerabilities and exploits.
+This action is used to search the database to find vulnerabilities and exploits.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|database|string|All|True|Name of the database|['Vulnerability Database', 'Metasploit Modules', 'All']|
+|database|string|None|True|Name of the database|['Vulnerability Database', 'Metasploit Modules']|
 |search|string|None|True|Search parameter for database|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|search_results|[]vuln_found|False|Vulnerability and exploits found|
-|results_found|boolean|True|Will return false if no results are found|
+|results_found|bool|True|Will return false if no results are found|
+|search_results|[]search_result|False|Vulnerability and exploits found|
+
+Example output:
+
+```
+```
+
+#### Get Content
+
+This action is used to fetch content results for a vulnerability or module.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|identifier|string|None|True|Rapid7 vulnerability/module identifier|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|content_result|content|True|Content record for the vulnerability or module|
+
 
 Example output:
 
 ```
 {
-  "search_results": [
-    {
-      "name": "Cisco ASA SSL VPN Privilege Escalation Vulnerability",
-      "link": "https://rapid7com/db/modules/auxiliary/scanner/http/cisco_ssl_vpn_priv_esc",
-      "type": "Exploit",
-      "summary": "This module exploits a privilege escalation vulnerability for Cisco\n        ASA SSL VPN (aka: WebVPN). It allows level 0 users to escalate to\n        level 15.",
-      "published": "April 09, 2014"
-    }
-  ]
+  "content_result": {
+    "published_at": "2015-11-05T00:00:00.000Z",
+    "references": "mozilla-thunderbird-upgrade-38_4",
+    "severity": "7",
+    "solutions": "mozilla-thunderbird-upgrade-38_4",
+    "title": "MFSA2015-123 Thunderbird: Buffer overflow during i...",
+    "alternate_ids": "BID/77411,CVE/2015-7189,DEBIAN/DSA-3393,DEBIAN/DSA...",
+    "content_type": "vulnerability",
+    "description": "\n    <p>Race condition in the JPEGEncoder function..."
+  }
 }
-
 ```
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### content
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Alternative identifiers|string|False|List of alternative identifiers of vulnerability|
+|architectures|string|False|List of applicable architectures for the module|
+|Authors|string|False|List of module authors|
+|Content type|string|False|Type of returned content, module or vulnerability|
+|Description|string|False|Brief summary of the returend content|
+|Published_at|string|False|Published date of vulnerability|
+|Rank|int|False|Rank of module|
+|References|string|False|List of references|
+|Reliability|string|False|Reliability of module|
+|Severity|string|False|Severity of vulnerability|
+|Solutions|string|False|List of possible solutions for vulnerability|
+|Title|string|False|Title of Vulnerability|
+
+#### search_result
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Link|string|False|Link to vulnerability|
+|Published_at|string|False|Published date of vulnerability|
+|Title|string|False|Title of Vulnerability|
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.1 - Add identifier field to the Search Database action
+* 2.0.0 - Utilize VulnDB API
 * 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Fix issue where Published Date input in the Search Database action would not always parse correctly | Fix issue with memory leaks
 * 1.0.1 - Update to v2 Python plugin architecture and support web server mode
@@ -78,5 +126,5 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [VulnDB](https://www.rapid7.com/db)
+* [Rapid7 Vulnerability & Exploit Database API Specification](https://vdb.rapid7.com/swagger_doc)
 

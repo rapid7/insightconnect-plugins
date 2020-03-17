@@ -57,7 +57,7 @@ This action sends a message to a user or group
 
 ### Triggers
 
-_This plugin does not contain any triggers_
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

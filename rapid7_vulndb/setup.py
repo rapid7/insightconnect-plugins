@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='rapid7_vulndb-rapid7-plugin',
-      version='1.1.1',
-      description='The Vulnerability & Exploit Database plugin allows you to search and compare potential threats with a curated repository of vetted computer software exploits and exploitable vulnerabilities vulnerabilities',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="rapid7_vulndb-rapid7-plugin",
+      version="2.0.1",
+      description="The Vulnerability & Exploit Database plugin allows you to search and compare potential threats with a curated repository of vetted computer software exploits and exploitable vulnerabilities vulnerabilities",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_rapid7_vulndb']
