@@ -661,7 +661,7 @@ class GetPoliciesOutput(komand.Output):
         },
         "wanopt": {
           "type": "string",
-          "title": "WAN opt",
+          "title": "WAN Option",
           "description": "WAN option",
           "order": 28
         },
@@ -691,7 +691,7 @@ class GetPoliciesOutput(komand.Output):
         },
         "webcache-https": {
           "type": "string",
-          "title": "Web cache-Https",
+          "title": "Web cache-https",
           "description": "Web cache-https",
           "order": 3
         },
