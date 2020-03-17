@@ -31,6 +31,25 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Get Policies
+
+This action is used to get Policies.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|policies|object|False|Policies|
+
+Example output:
+
+```
+```
+
 #### Add Address Object to Group
 
 This action is used to add an address object to an address group.

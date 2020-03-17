@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: fortinet_fortigate
 title: Fortinet FortiGate
-description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection.
+description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -40,6 +40,8 @@ connection:
 
 actions:
   get_policies:
+    title: Get Policies
+    description: Get Policies
     output:
       policies:
         title: Policies
@@ -52,7 +54,7 @@ actions:
     description: Get address objects
     input:
       name_filter:
-        title: Name filter
+        title: Name Filter
         description: Optional name to filer on
         type: string
         required: false

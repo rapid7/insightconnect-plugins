@@ -23,7 +23,7 @@ class GetAddressObjectsInput(komand.Input):
   "properties": {
     "name_filter": {
       "type": "string",
-      "title": "Name filter",
+      "title": "Name Filter",
       "description": "Optional name to filer on",
       "order": 1
     }
