@@ -37,13 +37,15 @@ This action is used to get Policies.
 
 ##### Input
 
-_This action does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|name_filter|string|None|False|Optional name to filer on|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|policies|object|False|Policies|
+|policies|[]policies|False|Policies|
 
 Example output:
 
