@@ -42,6 +42,11 @@ types:
       description: Published date of vulnerability
       type: string
       required: false
+    identifier:
+      title: Content Identifier
+      description: Content identifier for module or vulnerability
+      type: string
+      required: false
   content:
     title:
       title: Title
