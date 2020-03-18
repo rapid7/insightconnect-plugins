@@ -3,7 +3,7 @@
     "action": "get_content",
     "connection": null,
     "input": {
-      "identifier": "apple-itunes-cve-2019-8835"
+      "identifier": "msft-cve-2019-0708"
     },
     "meta": {}
   },
