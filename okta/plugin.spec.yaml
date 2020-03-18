@@ -144,10 +144,12 @@ types:
     links:
       type: _links
   trigger_type:
+    group_name:
+      type: string
     group_id:
       type: string
-    users_added:
-      type: user
+    users:
+      type: "[]user"
 
 connection:
   okta_url:

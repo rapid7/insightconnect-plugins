@@ -20,6 +20,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
         group_list = Input.GROUP_IDS
         okta_url = self.connection.okta_url
         current_list = list()
+        group_names = list()
         for group in group_list:
             api = f"{okta_url}/api/v1/groups/{group}/users"
             # Build a reference list to check for updates against
@@ -32,6 +33,17 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                                       assistance="Double check that group ID's are all valid",
                                       data=response.text)
             current_list.append({group: data})
+
+            # Get group names
+            group_name_api = f"{okta_url}/api/v1/groups/${group}"
+            response = self.connection.session.get(group_name_api)
+            try:
+                data = response.json()
+            except ValueError:
+                raise PluginException(cause='Returned data was not in JSON format',
+                                      assistance="Double check that group ID's are all valid",
+                                      data=response.text)
+            group_names.append(data["profile"]["name"])
 
         while True:
             new_list = list()
@@ -50,9 +62,10 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 removed_users = list(
                     itertools.filterfalse(lambda user: user in new_list[index][value], current_list[index][value]))
                 if added_users:
-                    added.append({value: added_users})
+                    added.append({"group_name": group_names[index], "group_id": value, "users": added_users})
                 if removed_users:
-                    removed.append({value: removed_users})
+                    removed.append({"group_name": group_names[index], "group_id": value, "users": removed_users})
+
             if added and removed:
                 self.send({Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: removed})
             elif added and not removed:

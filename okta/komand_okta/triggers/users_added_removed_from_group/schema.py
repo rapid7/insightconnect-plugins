@@ -301,12 +301,20 @@ class UsersAddedRemovedFromGroupOutput(komand.Output):
         "group_id": {
           "type": "string",
           "title": "Group Id",
+          "order": 2
+        },
+        "group_name": {
+          "type": "string",
+          "title": "Group Name",
           "order": 1
         },
-        "users_added": {
-          "$ref": "#/definitions/user",
-          "title": "Users Added",
-          "order": 2
+        "users": {
+          "type": "array",
+          "title": "Users",
+          "items": {
+            "$ref": "#/definitions/user"
+          },
+          "order": 3
         }
       },
       "definitions": {
