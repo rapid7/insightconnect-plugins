@@ -13,7 +13,7 @@ for flexible policy management of large groups of dynamic addresses.
 
 # Requirements
 
-* A admin API key
+* An admin API key
 * The IP of the orchistrator must be set as a trusted host in Administrator > Settings (Edit button) > Trusted Hosts 
 
 # Documentation
