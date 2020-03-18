@@ -17,10 +17,6 @@ class AddHostToNetworkGroup(komand.Action):
         host_name = params.get(Input.HOST_NAME)
         discard_other_sessions = params.get(Input.DISCARD_OTHER_SESSIONS)
 
-        # group = self.connection.get_group(group_name)
-        # group_members = group.get("memebers")
-        # group_members.append({"name": host_name})
-
         url = f"{self.connection.server_and_port}/web_api/set-group"
         payload = {
             "name": group_name,
