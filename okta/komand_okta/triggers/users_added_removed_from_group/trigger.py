@@ -74,4 +74,4 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 self.send({Output.USERS_REMOVED_FROM_GROUPS: removed})
 
                 current_list = new_list
-            time.sleep(params.get(Input.INTERVAL, 5))
+            time.sleep(params.get(Input.INTERVAL, 300))

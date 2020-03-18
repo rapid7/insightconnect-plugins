@@ -654,7 +654,7 @@ Example output:
 
 ### Triggers
 
-#### Users Added Removed From Group
+#### Users Added Removed from Group
 
 This trigger takes a list of groups and returns updates when users are added or removed.
 
@@ -690,7 +690,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
-* 3.4.0 - New trigger get
+* 3.4.0 - New trigger I need help with this description
 * 3.3.0 - New actions Get Factors and Send Push
 * 3.2.2 - Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` | Use input and output constants | Changed variables names to more readable | Added "f" strings | Removed duplicated code
 * 3.2.1 - New spec and help.md format for the Hub

@@ -61,7 +61,7 @@ class UsersAddedRemovedFromGroupOutput(komand.Output):
   "properties": {
     "users_added_from_groups": {
       "type": "array",
-      "title": "Users Added From Groups",
+      "title": "Users Added from Groups",
       "description": "Users added to a group since the last check",
       "items": {
         "$ref": "#/definitions/trigger_type"
@@ -70,7 +70,7 @@ class UsersAddedRemovedFromGroupOutput(komand.Output):
     },
     "users_removed_from_groups": {
       "type": "array",
-      "title": "Users Added From Groups",
+      "title": "Users Added from Groups",
       "description": "Users removed to a group since the last check",
       "items": {
         "$ref": "#/definitions/trigger_type"

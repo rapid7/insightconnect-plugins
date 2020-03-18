@@ -164,7 +164,7 @@ connection:
     required: true
 triggers:
   users_added_removed_from_group:
-    title: Users Added Removed From Group
+    title: Users Added Removed from Group
     description: Takes a list of groups and returns updates when users are added or removed
     input:
       group_ids:
@@ -180,12 +180,12 @@ triggers:
         default: 300
     output:
       users_added_from_groups:
-        title: Users Added From Groups
+        title: Users Added from Groups
         description: Users added to a group since the last check
         type: "[]trigger_type"
         required: false
       users_removed_from_groups:
-        title: Users Added From Groups
+        title: Users Added from Groups
         description: Users removed to a group since the last check
         type: "[]trigger_type"
         required: false
