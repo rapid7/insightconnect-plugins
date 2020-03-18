@@ -731,6 +731,7 @@ better track changes done via the plugin or manually via SmartConsole.
 
 # Version History
 
+* 1.1.0 - New action Add Host to Network Group
 * 1.0.0 - Initial plugin
 
 # Links
