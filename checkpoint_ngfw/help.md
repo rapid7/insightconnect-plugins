@@ -693,17 +693,15 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-An issue with Check Point servers is that only one user may make changes to the server at a time. If two users make 
-edits to the configuration at the same time, one user's edits will fail. The API handles this through Session IDs 
-(SIDs). If the plugin tries to make a change while an administrator has a pending change, the plugin will sometimes 
-fail. 
+Connections to the Check Point security management is based upon client to server sessions. Multiple admins may connect 
+at one time and from R80.20 M1, one admin can open more than one session at a time. Policy and objects are locked when 
+an admin makes changes to those objects. The lock is released when a publish or discard occurs.
 
-To prevent this, you can set the `Discard Other Changes` boolean value to `True` in each action. That will effectively 
-remove all other pending changes when the plugin tries to publish it's changes. However, this can cause 
-issues with the web portal and Smart Console. If the Smart Console starts displaying errors, 
-the administrator will have to close the Smart Console and re-open it.
-
-To effectively use this plugin, it will need it's own administrative account. This will help prevent session conflicts.  
+If the plugin tries to make a change while an administrator has a pending change, 
+the plugin will sometimes fail. To prevent this, you can set the Discard Other Changes boolean value 
+to True in each action. That will effectively remove all other pending changes when the 
+plugin tries to publish its changes. A best practice is to have separate admin accounts so that you can 
+better track changes done via the plugin or manually via SmartConsole.
 
 # Version History
 
