@@ -82,7 +82,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin
+* 1.0.0 - Initial plugin. Add action: domain_list
 
 # Links
 
