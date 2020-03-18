@@ -53,7 +53,9 @@ This action is used to add host to network group.
 Example output:
 
 ```
-
+{
+  "success": true
+}
 ```
 
 #### Discard All Sessions
