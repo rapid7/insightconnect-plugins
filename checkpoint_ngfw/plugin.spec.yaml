@@ -662,6 +662,35 @@ actions:
         type: boolean
         required: true
 
+  add_host_to_network_group:
+    title: Add Host to Network Group
+    description: Add host to network group
+    input:
+      group_name:
+        title: Group Name
+        description: Name of the group to add this object to
+        required: true
+        type: string
+        order: 1
+      host_name:
+        title: Host Name
+        description: The host to add to the network group, usually the IP address
+        required: true
+        type: string
+        order: 1
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+      message:
+        title: Message
+        description: Add object status
+        type: string
+        required: true
+
+
   discard_all_sessions:
     title: Discard All Sessions
     description: Troubleshooting action to discard all other user sessions
