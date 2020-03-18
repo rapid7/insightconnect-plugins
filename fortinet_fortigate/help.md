@@ -34,7 +34,7 @@ The connection configuration accepts the following parameters:
 
 #### Get Policies
 
-This action is used to get Policies.
+This action is used to get policies.
 
 ##### Input
 
