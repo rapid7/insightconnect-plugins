@@ -654,7 +654,28 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### Users Added Removed From Group
+
+This trigger takes a list of groups and returns updates when users are added or removed.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|group_ids|[]string|None|True|A list of group ID's|None|
+|interval|integer|300|True|The time in seconds inbetween checks for changes to the groups users|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|users_added_from_groups|[]trigger_type|False|Users added to a group since the last check|
+|users_removed_from_groups|[]trigger_type|False|Users removed to a group since the last check|
+
+Example output:
+
+```
+```
 
 ### Custom Output Types
 
@@ -669,6 +690,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.4.0 - New trigger get
 * 3.3.0 - New actions Get Factors and Send Push
 * 3.2.2 - Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` | Use input and output constants | Changed variables names to more readable | Added "f" strings | Removed duplicated code
 * 3.2.1 - New spec and help.md format for the Hub

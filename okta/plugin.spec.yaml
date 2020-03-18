@@ -7,7 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Secure identity management and single sign-on to any application
-version: 3.3.0
+version: 3.4.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/okta
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -120,6 +120,35 @@ types:
       type: provider
     recovery_question:
       type: recovery_question
+  user:
+    id:
+      type: string
+    status:
+      type: string
+    created:
+      type: string
+    activated:
+      type: string
+    statusChanged:
+      type: string
+    lastLogin:
+      type: string
+    lastUpdated:
+      type: string
+    passwordChanged:
+      type: string
+    profile:
+      type: profile
+    credentials:
+      type: credentials_input
+    links:
+      type: _links
+  trigger_type:
+    group_id:
+      type: string
+    users_added:
+      type: user
+
 connection:
   okta_url:
     title: Okta Domain
@@ -131,6 +160,33 @@ connection:
     description: Okta key
     type: credential_secret_key
     required: true
+triggers:
+  users_added_removed_from_group:
+    title: Users Added Removed From Group
+    description: Takes a list of groups and returns updates when users are added or removed
+    input:
+      group_ids:
+        title: Group ID's
+        description: A list of group ID's
+        type: "[]string"
+        required: true
+      interval:
+        title: Interval
+        description: The time in seconds inbetween checks for changes to the groups users
+        type: integer
+        required: true
+        default: 300
+    output:
+      users_added_from_groups:
+        title: Users Added From Groups
+        description: Users added to a group since the last check
+        type: "[]trigger_type"
+        required: false
+      users_removed_from_groups:
+        title: Users Added From Groups
+        description: Users removed to a group since the last check
+        type: "[]trigger_type"
+        required: false
 actions:
   get_factors:
     title: Get Okta User Factors
