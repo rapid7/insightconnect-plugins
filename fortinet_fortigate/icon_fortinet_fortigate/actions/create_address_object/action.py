@@ -3,6 +3,7 @@ from .schema import CreateAddressObjectInput, CreateAddressObjectOutput, Input, 
 # Custom imports below
 from komand.exceptions import PluginException
 
+
 class CreateAddressObject(komand.Action):
 
     def __init__(self):
@@ -32,8 +33,8 @@ class CreateAddressObject(komand.Action):
         try:
             response.raise_for_status()
         except Exception as e:
-            raise PluginException(cause="Create address failed.",
+            raise PluginException(cause=f"Create address failed with {endpoint}",
                                   assistance=response.text,
                                   data=e)
 
-        return {Output.SUCCESS:True, Output.RESPONSE_OBJECT: response.json()}
+        return {Output.SUCCESS: True, Output.RESPONSE_OBJECT: response.json()}

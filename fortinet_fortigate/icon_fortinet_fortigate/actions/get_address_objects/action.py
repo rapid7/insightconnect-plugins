@@ -3,6 +3,7 @@ from .schema import GetAddressObjectsInput, GetAddressObjectsOutput, Input, Outp
 # Custom imports below
 from komand.exceptions import PluginException
 
+
 class GetAddressObjects(komand.Action):
 
     def __init__(self):
@@ -16,7 +17,7 @@ class GetAddressObjects(komand.Action):
         endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
         filter = params.get(Input.NAME_FILTER, "")
 
-        params=None
+        params = None
         if filter:
             params = {
                 "filter": f"name=@{filter}"

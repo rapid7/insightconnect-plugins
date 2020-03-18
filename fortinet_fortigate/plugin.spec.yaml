@@ -115,9 +115,9 @@ types:
       description: "RTP-NAT"
       required: false
     permit-stun-host:
-      title: "Permit-Stun-Host"
+      title: "Permit-STUN-Host"
       type: string
-      description: "Permit-stun-host"
+      description: "Permit-STUN-host"
       required: false
     natoutbound:
       title: "NAT Outbound"
@@ -626,11 +626,11 @@ connection:
 actions:
   get_policies:
     title: Get Policies
-    description: Get Policies
+    description: Get policies
     input:
       name_filter:
         title: Name Filter
-        description: Optional name to filer on
+        description: Optional name to filter on
         type: string
         required: false
     output:
@@ -646,7 +646,7 @@ actions:
     input:
       name_filter:
         title: Name Filter
-        description: Optional name to filer on
+        description: Optional name to filter on
         type: string
         required: false
     output:

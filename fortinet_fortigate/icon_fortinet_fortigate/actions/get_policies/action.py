@@ -27,7 +27,7 @@ class GetPolicies(komand.Action):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(cause=f"Get policy failed for {endpoint}",
+            raise PluginException(cause=f"Get policy failed for {endpoint}\n",
                                   assistance=result.text,
                                   data=e)
 

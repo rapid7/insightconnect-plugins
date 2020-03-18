@@ -49,15 +49,6 @@ class Connection(komand.Connection):
         group = groups[0]
         return group
 
-
-
-
-
-
-
-
-
-
     def test(self):
         endpoint = f"https://{self.host}/api/v2/cmdb/firewall.consolidated/policy"
         result = self.session.get(endpoint, verify=self.ssl_verify)
@@ -66,6 +57,6 @@ class Connection(komand.Connection):
             result.raise_for_status()
         except Exception:
             raise ConnectionTestException(cause=f"Could not connect to {self.host}\n",
-                                          assistance="Please check your connection settings\n",
+                                          assistance="Please check your connection settings.\n",
                                           data=result.text)
         return result.json()

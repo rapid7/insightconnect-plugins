@@ -3,6 +3,7 @@ from .schema import DeleteAddressObjectInput, DeleteAddressObjectOutput, Input, 
 # Custom imports below
 from komand.exceptions import PluginException
 
+
 class DeleteAddressObject(komand.Action):
 
     def __init__(self):

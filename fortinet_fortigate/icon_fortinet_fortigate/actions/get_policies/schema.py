@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Policies"
+    DESCRIPTION = "Get policies"
 
 
 class Input:
@@ -24,7 +24,7 @@ class GetPoliciesInput(komand.Input):
     "name_filter": {
       "type": "string",
       "title": "Name Filter",
-      "description": "Optional name to filer on",
+      "description": "Optional name to filter on",
       "order": 1
     }
   }
@@ -421,8 +421,8 @@ class GetPoliciesOutput(komand.Output):
         },
         "permit-stun-host": {
           "type": "string",
-          "title": "Permit-Stun-Host",
-          "description": "Permit-stun-host",
+          "title": "Permit-STUN-Host",
+          "description": "Permit-STUN-host",
           "order": 17
         },
         "policyid": {
