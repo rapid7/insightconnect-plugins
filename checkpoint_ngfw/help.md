@@ -32,6 +32,30 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Add Host to Network Group
+
+This action is used to add host to network group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
+|group_name|string|None|True|Name of the group to add this object to|None|
+|host_name|string|None|True|The host to add to the network group, usually the IP address|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success|
+
+Example output:
+
+```
+
+```
+
 #### Discard All Sessions
 
 This action is a troubleshooting action that will discard all active sessions. This can sometimes alleviate the 

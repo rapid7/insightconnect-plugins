@@ -677,19 +677,20 @@ actions:
         description: The host to add to the network group, usually the IP address
         required: true
         type: string
-        order: 1
+        order: 2
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        default: true
+        order: 3
     output:
       success:
         title: Success
         description: Success
         type: boolean
         required: true
-      message:
-        title: Message
-        description: Add object status
-        type: string
-        required: true
-
 
   discard_all_sessions:
     title: Discard All Sessions

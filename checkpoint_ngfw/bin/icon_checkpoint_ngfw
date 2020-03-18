@@ -23,6 +23,8 @@ class ICONCheckpointNgfw(komand.Plugin):
 
         self.add_action(actions.AddHost())
 
+        self.add_action(actions.AddHostToNetworkGroup())
+
         self.add_action(actions.DiscardAllSessions())
 
         self.add_action(actions.RemoveAccessRule())
