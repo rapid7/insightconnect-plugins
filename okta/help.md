@@ -630,8 +630,8 @@ Example output:
 			"profile": {
 				"firstName": "doe",
 				"lastName": "test",
-				"login": "dtest@rapid7.com",
-				"email": "dtest@rapid7.com"
+				"login": "user@example.com",
+				"email": "user@example.com"
 			},
 			"credentials": {
 				"password": {},
@@ -642,7 +642,7 @@ Example output:
 			},
 			"_links": {
 				"self": {
-					"href": "https://rapid7rapid7-mhofertoktacom.okta.com/api/v1/users/00u44z4o0JgUYC0OO4x6"
+					"href": "https://example.okta.com/api/v1/users/00u44z4o0JgUYC0OO4x6"
 				}
 			}
 		}]
@@ -661,8 +661,8 @@ Example output:
 			"profile": {
 				"firstName": "bob",
 				"lastName": "test",
-				"login": "btest@rapid7.com",
-				"email": "btest@rapid7.com"
+				"login": "user@example.com",
+				"email": "user@example.com"
 			},
 			"credentials": {
 				"password": {},
@@ -673,7 +673,7 @@ Example output:
 			},
 			"_links": {
 				"self": {
-					"href": "https://rapid7rapid7-mhofertoktacom.okta.com/api/v1/users/00u44xracEYPXjhwy4x6"
+					"href": "https://example.okta.com/api/v1/users/00u44xracEYPXjhwy4x6"
 				}
 			}
 		}]
