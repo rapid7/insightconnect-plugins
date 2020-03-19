@@ -54,6 +54,6 @@ class Connection(komand.Connection):
             )
         except jbxapi.ApiError as e:
             raise ConnectionTestException(
-                cause='An error occured: ' + str(e),
+                cause='An error occurred: ' + str(e),
                 assistance='If the issue persists please contact support.'
             )

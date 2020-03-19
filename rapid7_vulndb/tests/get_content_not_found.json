@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "get_content",
+    "connection": null,
+    "input": {
+      "identifier": "not_found"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

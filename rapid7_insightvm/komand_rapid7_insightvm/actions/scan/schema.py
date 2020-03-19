@@ -47,8 +47,8 @@ class ScanOutput(komand.Output):
   "properties": {
     "id": {
       "type": "integer",
-      "title": "Identifier of the resource created",
-      "description": "Scan ID",
+      "title": "Scan ID",
+      "description": "Identifier of the resource created",
       "order": 1
     },
     "links": {
