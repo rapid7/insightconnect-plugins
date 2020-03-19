@@ -49,7 +49,11 @@ This action is used to get a file from the repository.
 
 Example output:
 
-```
+{
+  "file": {
+    "content": "iVBORw0KGgoAAAANSUhEUgAAA+cAAAPnCAYAAABN/j28AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAdgwAA=",
+    "filename": "icon.png"
+}
 ```
 
 #### Remove File
@@ -172,4 +176,3 @@ If a token is used, make sure that it has sufficient permissions assigned to it.
 * [git-clone](https://www.git-scm.com/docs/git-clone)
 * [git-add](https://www.git-scm.com/docs/git-add)
 * [git-rm](https://www.git-scm.com/docs/git-rm)
-
