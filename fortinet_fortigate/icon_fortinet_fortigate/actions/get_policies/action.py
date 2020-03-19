@@ -16,13 +16,14 @@ class GetPolicies(komand.Action):
     def run(self, params={}):
         endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/policy"
 
-        filter = params.get(Input.NAME_FILTER, "")
-        if filter:
+        filter_ = params.get(Input.NAME_FILTER, "")
+        get_params = {}
+        if filter_:
             get_params = {
-                "filter": f"name=@{filter}"
+                "filter": f"name=@{filter_}"
             }
 
-        result = self.connection.session.get(endpoint, params=params, verify=self.connection.ssl_verify)
+        result = self.connection.session.get(endpoint, params=get_params, verify=self.connection.ssl_verify)
 
         try:
             result.raise_for_status()

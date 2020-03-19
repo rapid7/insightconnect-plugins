@@ -15,12 +15,12 @@ class GetAddressObjects(komand.Action):
 
     def run(self, params={}):
         endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
-        filter = params.get(Input.NAME_FILTER, "")
+        filter_ = params.get(Input.NAME_FILTER, "")
 
         params = None
-        if filter:
+        if filter_:
             params = {
-                "filter": f"name=@{filter}"
+                "filter": f"name=@{filter_}"
             }
 
         result = self.connection.session.get(endpoint, verify=self.connection.ssl_verify, params=params)

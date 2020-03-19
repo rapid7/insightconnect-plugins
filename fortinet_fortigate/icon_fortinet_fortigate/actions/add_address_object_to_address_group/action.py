@@ -43,9 +43,8 @@ class AddAddressObjectToAddressGroup(komand.Action):
 
             self.throw_unknown_error(e, endpoint, response)
 
-
         json_response = response.json()
-        success = json_response.get("status","").lower() == "success"
+        success = json_response.get("status", "").lower() == "success"
 
         return {Output.SUCCESS: success, Output.RESULT_OBJECT: json_response}
 

@@ -2,7 +2,6 @@ import komand
 from .schema import ConnectionSchema, Input
 # Custom imports below
 from requests import Session
-import requests
 from komand.exceptions import ConnectionTestException, PluginException
 
 
@@ -28,7 +27,7 @@ class Connection(komand.Connection):
         endpoint = f"https://{self.host}/api/v2/cmdb/firewall/addrgrp"
         params = {
             "access_token": self.api_key,
-            "filter": f"name=@{address_group_name}" # I have no idea why they need the @ symbol
+            "filter": f"name=@{address_group_name}"  # I have no idea why they need the @ symbol
         }
 
         result = self.session.get(endpoint, params=params, verify=self.ssl_verify)

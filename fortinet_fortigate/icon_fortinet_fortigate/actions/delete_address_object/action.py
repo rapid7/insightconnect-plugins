@@ -34,4 +34,4 @@ class DeleteAddressObject(komand.Action):
                                   assistance=response.text,
                                   data=e)
 
-        return {Output.SUCCESS:True, Output.RESPONSE_OBJECT: response.json()}
+        return {Output.SUCCESS: True, Output.RESPONSE_OBJECT: response.json()}
