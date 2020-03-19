@@ -34,7 +34,7 @@ The connection configuration accepts the following parameters:
 
 #### Add Host to Network Group
 
-This action is used to add host to network group.
+This action is used to add a host to a network group.
 
 ##### Input
 
