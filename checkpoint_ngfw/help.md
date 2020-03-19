@@ -720,7 +720,7 @@ _This plugin does not contain any triggers._
 ## Troubleshooting
 
 Connections to the Check Point security management is based upon client to server sessions. Multiple admins may connect 
-at one time and from R80.20 M1, one admin can open more than one session at a time. Policy and objects are locked when 
+at one time and from R80.20 M1, one administrator can open more than one session at a time. Policy and objects are locked when 
 an admin makes changes to those objects. The lock is released when a publish or discard occurs.
 
 If the plugin tries to make a change while an administrator has a pending change, 
