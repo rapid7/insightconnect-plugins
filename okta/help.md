@@ -691,7 +691,7 @@ Example output:
 				"firstName": "doe",
 				"lastName": "test",
 				"login": "user@example.com",
-				"email": "user@exmaple.com"
+				"email": "user@example.com"
 			},
 			"credentials": {
 				"password": {},
