@@ -1,7 +1,7 @@
 {
-	"spec": "75dd75371e464e76c5199f9eeff061d0",
-	"manifest": "4ac2989a990c035c7c074289958462fb",
-	"setup": "6a9b22ad5681210c1185124a439e3013",
+	"spec": "5d815f36991c93bd79c759696e3e36dc",
+	"manifest": "9051bea76ac8d1785bfae3f94ed55092",
+	"setup": "6fe0e21bdfecf18277f17c42f9d14c88",
 	"schemas": [
 		{
 			"identifier": "av_report/schema.py",
@@ -21,11 +21,11 @@
 		},
 		{
 			"identifier": "email_domain/schema.py",
-			"hash": "560c16c00c48ca71be707030a9d7555a"
+			"hash": "7c635a9f33029937270eaa0fbc42f752"
 		},
 		{
 			"identifier": "email_report/schema.py",
-			"hash": "f2ebe24e400f058937c821df58b19f1b"
+			"hash": "a346d8988e3be93ef127952f11d859de"
 		},
 		{
 			"identifier": "import_hash_report/schema.py",
@@ -37,7 +37,7 @@
 		},
 		{
 			"identifier": "ip/schema.py",
-			"hash": "80204968ea529e97acffdac12fbbea17"
+			"hash": "890ae3fbaed6320f3462513d84a0c3d5"
 		},
 		{
 			"identifier": "ip_ext/schema.py",

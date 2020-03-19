@@ -28,13 +28,13 @@ This action is used to detect encoding.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|bytes_to_analyze|bytes|None|True|Bytes to analyze|None|
+|bytes_to_analyze|bytes|None|True|Bytes to analyze encoding|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|recommendation|recommendation|False|Recommendation|
+|recommendation|recommendation|False|Detected character encoding recommendation|
 
 Example output:
 
@@ -62,6 +62,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.2 - Changed descriptions to fit style guide
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 

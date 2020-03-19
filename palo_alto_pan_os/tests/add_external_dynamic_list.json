@@ -1,14 +1,6 @@
 {
     "body": {
         "action": "add_external_dynamic_list",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "server": null,
-            "verify_cert": null
-        },
         "input": {
             "day": "Monday",
             "description": "testing2",

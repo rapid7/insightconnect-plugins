@@ -1,7 +1,7 @@
 import komand
 from .schema import FindIssuesInput, FindIssuesOutput, Input, Output, Component
 # Custom imports below
-from ...util import *
+from ...util import normalize_issue
 
 
 class FindIssues(komand.Action):
@@ -15,11 +15,12 @@ class FindIssues(komand.Action):
 
     def run(self, params={}):
         """Search for issues"""
-        max = params.get(Input.MAX)
+        max_results = params.get(Input.MAX)
         get_attachments = params.get(Input.GET_ATTACHMENTS, False)
-        issues = self.connection.client.search_issues(jql_str=params['jql'], maxResults=max)
+        issues = self.connection.client.search_issues(jql_str=params[Input.JQL], maxResults=max_results)
 
-        results = list(map(lambda issue: normalize_issue(issue, get_attachments=get_attachments,logger=self.logger), issues))
+        results = list(
+            map(lambda issue: normalize_issue(issue, get_attachments=get_attachments, logger=self.logger), issues))
         results = komand.helper.clean(results)
 
         return {Output.ISSUES: results}
