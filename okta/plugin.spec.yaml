@@ -26,6 +26,8 @@ types:
   profile:
     email:
       type: string
+    secondEmail:
+      type: string
     firstName:
       type: string
     lastName:

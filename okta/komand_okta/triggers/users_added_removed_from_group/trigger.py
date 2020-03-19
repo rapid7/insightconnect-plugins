@@ -17,7 +17,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
 
     def run(self, params={}):
         """Run the trigger"""
-        group_list = Input.GROUP_IDS
+        group_list = params.get(Input.GROUP_IDS)
         okta_url = self.connection.okta_url
         current_list = list()
         group_names = list()
@@ -28,6 +28,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
 
             try:
                 data = response.json()
+                data = komand.helper.clean(data)
             except ValueError:
                 raise PluginException(cause='Returned data was not in JSON format',
                                       assistance="Double check that group ID's are all valid",
@@ -35,7 +36,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             current_list.append({group: data})
 
             # Get group names
-            group_name_api = f"{okta_url}/api/v1/groups/${group}"
+            group_name_api = f"{okta_url}/api/v1/groups/{group}"
             response = self.connection.session.get(group_name_api)
             try:
                 data = response.json()
@@ -52,6 +53,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
 
                 response = self.connection.session.get(api)
                 data = response.json()
+                data = komand.helper.clean(data)
                 new_list.append({group: data})
 
             added = list()
