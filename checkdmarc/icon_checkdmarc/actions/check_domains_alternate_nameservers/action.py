@@ -18,8 +18,8 @@ class CheckDomainsAlternateNameservers(komand.Action):
 
     def run(self, params={}):
         timeout = params.get(Input.TIMEOUT)
-        nameservers = params.get(Input.NAMESERVERS)
-        output = checkdmarc.check_domains([params.get(Input.DOMAIN)], timeout=timeout, nameservers=nameservers)
+        name_servers = params.get(Input.NAMESERVERS)
+        output = checkdmarc.check_domains([params.get(Input.DOMAIN)], timeout=timeout, nameservers=name_servers)
         try:
             clean_output = helper.clean(json.loads(json.dumps(output)))
         except Exception as e:
