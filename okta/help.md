@@ -616,39 +616,68 @@ Example output:
 
 ```
 {
-  "id": "00ug5xak4uqrOrj8Q0h7",
-  "status": "STAGED",
-  "created": "2018-09-06T19:00:06.000Z",
-  "lastUpdated": "2018-09-06T19:00:06.000Z",
-  "profile": {
-    "firstName": "Isaac",
-    "lastName": "Brock",
-    "mobilePhone": "555-415-1337",
-    "login": "user@example.com",
-    "email": "user@example.com"
-  },
-  "credentials": {
-    "emails": [
-      {
-        "value": "user@example.com",
-        "status": "VERIFIED",
-        "type": "PRIMARY"
-      }
-    ],
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
-  },
-  "_links": {
-    "activate": {
-      "href": "https://dev-114295.oktapreview.com/api/v1/users/00ug5xak4uqrOrj8Q0h7/lifecycle/activate",
-      "method": "POST"
-    },
-    "self": {
-      "href": "https://dev-114295.oktapreview.com/api/v1/users/00ug5xak4uqrOrj8Q0h7"
-    }
-  }
+	"users_added_from_groups": [{
+		"group_name": "test1",
+		"group_id": "00g41ix8hKbsu74Ca4x6",
+		"users": [{
+			"id": "00u44z4o0JgUYC0OO4x6",
+			"status": "PASSWORD_EXPIRED",
+			"created": "2020-03-17T19:28:50.000Z",
+			"activated": "2020-03-17T19:28:50.000Z",
+			"statusChanged": "2020-03-17T19:28:50.000Z",
+			"lastUpdated": "2020-03-17T19:28:50.000Z",
+			"passwordChanged": "2020-03-17T19:28:50.000Z",
+			"profile": {
+				"firstName": "doe",
+				"lastName": "test",
+				"login": "dtest@rapid7.com",
+				"email": "dtest@rapid7.com"
+			},
+			"credentials": {
+				"password": {},
+				"provider": {
+					"type": "OKTA",
+					"name": "OKTA"
+				}
+			},
+			"_links": {
+				"self": {
+					"href": "https://rapid7rapid7-mhofertoktacom.okta.com/api/v1/users/00u44z4o0JgUYC0OO4x6"
+				}
+			}
+		}]
+	}],
+	"users_removed_from_groups": [{
+		"group_name": "test1",
+		"group_id": "00g41ix8hKbsu74Ca4x6",
+		"users": [{
+			"id": "00u44xracEYPXjhwy4x6",
+			"status": "PASSWORD_EXPIRED",
+			"created": "2020-03-17T19:28:27.000Z",
+			"activated": "2020-03-17T19:28:28.000Z",
+			"statusChanged": "2020-03-17T19:28:28.000Z",
+			"lastUpdated": "2020-03-17T19:28:28.000Z",
+			"passwordChanged": "2020-03-17T19:28:27.000Z",
+			"profile": {
+				"firstName": "bob",
+				"lastName": "test",
+				"login": "btest@rapid7.com",
+				"email": "btest@rapid7.com"
+			},
+			"credentials": {
+				"password": {},
+				"provider": {
+					"type": "OKTA",
+					"name": "OKTA"
+				}
+			},
+			"_links": {
+				"self": {
+					"href": "https://rapid7rapid7-mhofertoktacom.okta.com/api/v1/users/00u44xracEYPXjhwy4x6"
+				}
+			}
+		}]
+	}]
 }
 ```
 

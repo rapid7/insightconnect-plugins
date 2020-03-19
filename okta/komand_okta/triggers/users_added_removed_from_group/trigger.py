@@ -25,10 +25,10 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             api = f"{okta_url}/api/v1/groups/{group}/users"
             # Build a reference list to check for updates against
             response = self.connection.session.get(api)
-            if response.status_code() in range(400, 499):
+            if response.status_code in range(400, 499):
                 raise PluginException(cause="Okta returned a 4xx status code",
                                       assistance="Ensure that the secretKey key is both valid and correct")
-            if response.status_code() in range(500, 599):
+            if response.status_code in range(500, 599):
                 raise PluginException(cause="Okta returned a 5xx status code",
                                       assistance="Ensure that the okta URL key is  correct")
             try:
@@ -43,10 +43,10 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             # Get group names
             group_name_api = f"{okta_url}/api/v1/groups/{group}"
             response = self.connection.session.get(group_name_api)
-            if response.status_code() in range(400, 499):
+            if response.status_code in range(400, 499):
                 raise PluginException(cause="Okta returned a 4xx status code",
                                       assistance="Ensure that the secretKey key is both valid and correct")
-            if response.status_code() in range(500, 599):
+            if response.status_code in range(500, 599):
                 raise PluginException(cause="Okta returned a 5xx status code",
                                       assistance="Ensure that the okta URL key is  correct")
             try:
@@ -63,10 +63,10 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 api = f"{okta_url}/api/v1/groups/{group}/users"
 
                 response = self.connection.session.get(api)
-                if response.status_code() in range(400, 499):
+                if response.status_code in range(400, 499):
                     raise PluginException(cause="Okta returned a 4xx status code",
                                           assistance="Ensure that the secretKey key is both valid and correct")
-                if response.status_code() in range(500, 599):
+                if response.status_code in range(500, 599):
                     raise PluginException(cause="Okta returned a 5xx status code",
                                           assistance="Ensure that the okta URL key is  correct")
                 try:
