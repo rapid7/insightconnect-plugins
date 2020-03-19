@@ -675,6 +675,39 @@ This trigger takes a list of groups and returns updates when users are added or 
 Example output:
 
 ```
+{
+	"users_removed_from_groups": [{
+		"group_name": "test1",
+		"group_id": "00g41ix8hKbsu74Ca4x6",
+		"users": [{
+			"id": "00u44z4o0JgUYC0OO4x6",
+			"status": "PASSWORD_EXPIRED",
+			"created": "2020-03-17T19:28:50.000Z",
+			"activated": "2020-03-17T19:28:50.000Z",
+			"statusChanged": "2020-03-17T19:28:50.000Z",
+			"lastUpdated": "2020-03-17T19:28:50.000Z",
+			"passwordChanged": "2020-03-17T19:28:50.000Z",
+			"profile": {
+				"firstName": "doe",
+				"lastName": "test",
+				"login": "jdoe@example.com",
+				"email": "jdoe@exmaple.com"
+			},
+			"credentials": {
+				"password": {},
+				"provider": {
+					"type": "OKTA",
+					"name": "OKTA"
+				}
+			},
+			"_links": {
+				"self": {
+					"href": "https://example.okta.com/api/v1/users/00u44z4o0JgUYC0OO4x6"
+				}
+			}
+		}]
+	}]
+}
 ```
 
 ### Custom Output Types
