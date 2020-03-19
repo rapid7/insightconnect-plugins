@@ -1,0 +1,12 @@
+{
+    "body": {
+        "action": "show_access_rulebase",
+        "input": {
+            "layer_name": "Network",
+            "limit": 500
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}
