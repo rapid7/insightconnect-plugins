@@ -690,8 +690,8 @@ Example output:
 			"profile": {
 				"firstName": "doe",
 				"lastName": "test",
-				"login": "jdoe@example.com",
-				"email": "jdoe@exmaple.com"
+				"login": "user@example.com",
+				"email": "user@exmaple.com"
 			},
 			"credentials": {
 				"password": {},
