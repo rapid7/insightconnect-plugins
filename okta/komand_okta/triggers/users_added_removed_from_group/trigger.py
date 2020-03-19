@@ -40,7 +40,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             response = self.connection.session.get(group_name_api)
             try:
                 data = response.json()
-            except ValueError:
+            except JSONDecodeError:
                 raise PluginException(cause='Returned data was not in JSON format',
                                       assistance="Double check that group ID's are all valid",
                                       data=response.text)
