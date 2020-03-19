@@ -1,5 +1,5 @@
 {
-	"spec": "68de0d2c88127fe84708ed018bbab9e6",
+	"spec": "366620adfb94f58929eb18f97f8cf7c1",
 	"manifest": "0e828b8f2fd7480e529461a9d3d2e23c",
 	"setup": "e5c232d3d47197fdcdf967399197c0e0",
 	"schemas": [
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "add_host_to_network_group/schema.py",
-			"hash": "89fc1c2c69e73f022920859969a7ead8"
+			"hash": "3eec1926fcb61887fd83f522c2296f11"
 		},
 		{
 			"identifier": "discard_all_sessions/schema.py",

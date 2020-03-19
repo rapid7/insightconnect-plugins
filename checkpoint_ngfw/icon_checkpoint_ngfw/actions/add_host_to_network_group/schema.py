@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add host to network group"
+    DESCRIPTION = "Add a host to a network group"
 
 
 class Input:
