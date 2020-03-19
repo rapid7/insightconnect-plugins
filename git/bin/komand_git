@@ -6,7 +6,7 @@ from komand_git import connection, actions, triggers
 
 Name = "Git"
 Vendor = "rapid7"
-Version = "1.0.1"
+Version = "1.1.1"
 Description = "Git plugin allows you to add, remove and commit files to Git repository"
 
 
@@ -22,6 +22,8 @@ class ICONGit(komand.Plugin):
         self.add_action(actions.AddFile())
 
         self.add_action(actions.AppendLineToFile())
+
+        self.add_action(actions.GetFile())
 
         self.add_action(actions.RemoveFile())
 
