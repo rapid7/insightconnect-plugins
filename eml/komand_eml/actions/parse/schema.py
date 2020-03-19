@@ -25,7 +25,7 @@ class ParseInput(komand.Input):
       "type": "string",
       "title": "EML File",
       "displayType": "bytes",
-      "description": "EML File",
+      "description": "Email message file",
       "format": "bytes",
       "order": 1
     }
