@@ -36,14 +36,14 @@ class Connection(komand.Connection):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(cause=f"Could not find address group {address_group_name}",
+            raise PluginException(cause=f"Could not find address group {address_group_name}\n",
                                   assistance=result.text,
                                   data=f"{e}")
 
         groups = result.json().get("results")
         if not len(groups) > 0:
-            raise PluginException(cause=f"Could not find address group {address_group_name}",
-                                  assistance=f"Please make sure the group {address_group_name} exists.\n",
+            raise PluginException(cause=f"Could not find address group '{address_group_name}' in results.\n",
+                                  assistance=f"Please make sure the group '{address_group_name}' exists.\n",
                                   data=result.text)
 
         group = groups[0]
