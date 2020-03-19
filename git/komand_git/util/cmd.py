@@ -36,7 +36,7 @@ class Cmd:
                 stdout = proc['stdout'].decode()
         except pexpect.exceptions.TIMEOUT:
             raise TimeoutError(
-                'Timeout occured for "{}". Please make sure that the Git '
+                'Timeout occurred for "{}". Please make sure that the Git '
                 'repository is available and that the provided credentials '
                 'are correct. If the issue persists, please contact Komand '
                 'support'.format(command)
