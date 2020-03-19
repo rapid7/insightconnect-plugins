@@ -1,15 +1,15 @@
 {
-	"spec": "2176f5eb38b115846558259834a43979",
-	"manifest": "3f2f429fcc21132a6436a92baca85afa",
-	"setup": "38715cd51f133cc0143c36c39c2e018e",
+	"spec": "952efff557a2d5907022104b3f4fad25",
+	"manifest": "508e3dfa1bd0200ea5ef355bd7c22319",
+	"setup": "878079791b0897ee611813694c826aeb",
 	"schemas": [
 		{
 			"identifier": "add_external_dynamic_list/schema.py",
-			"hash": "2f270a2a0e62d61fec5988e60d09b5aa"
+			"hash": "4acec88f132e03d8a1e651919b746591"
 		},
 		{
 			"identifier": "add_to_policy/schema.py",
-			"hash": "17108b26207b4bf6df3035fb7f43cb22"
+			"hash": "2382ce2b561ceae49b04fe73f074b83c"
 		},
 		{
 			"identifier": "commit/schema.py",
@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "remove_from_policy/schema.py",
-			"hash": "72973f35452fd55de0e7071e19283b6c"
+			"hash": "586bcabe6bc0d354b73614ed1a680790"
 		},
 		{
 			"identifier": "retrieve_logs/schema.py",

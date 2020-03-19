@@ -60,7 +60,7 @@ class AddToPolicyInput(komand.Input):
     },
     "hip_profiles": {
       "type": "string",
-      "title": "HIP profiles",
+      "title": "HIP Profiles",
       "description": "Host information profile",
       "order": 11
     },
