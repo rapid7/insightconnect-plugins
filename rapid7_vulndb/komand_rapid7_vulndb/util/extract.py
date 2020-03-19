@@ -1,7 +1,6 @@
 from komand.exceptions import PluginException
 # import all transformations
 from komand_rapid7_vulndb.util.transform import *
-
 from typing import Dict
 import requests
 import copy
@@ -106,6 +105,14 @@ class Content:
         response.raise_for_status()
         modifiers = []
         data = response.json()
+
+        # Fix for bug in API where an int is returned in some conditions on severity
+        # E.g. msft-cve-2019-0708
+        # "content_result": { "severity": 10 }
+        if "data" in data:
+            if "severity" in data["data"]:
+                if isinstance(data["data"]["severity"], int):
+                    data["data"]["severity"] = str(data["data"]["severity"])
 
         # define how and which order to transform the data
         if data["content_type"] == "module":
