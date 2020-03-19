@@ -1,14 +1,6 @@
 {
     "body": {
         "action": "set",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "server": null,
-            "verify_cert": null
-        },
         "input": {
             "element": "",
             "xpath": ""

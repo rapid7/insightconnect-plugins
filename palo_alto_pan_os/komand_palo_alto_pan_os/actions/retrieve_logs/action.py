@@ -1,6 +1,6 @@
 import komand
 from .schema import RetrieveLogsInput, RetrieveLogsOutput
-from komand.exceptions import PluginException, ServerException
+from komand.exceptions import PluginException
 # Custom imports below
 import requests
 import xmltodict
@@ -34,11 +34,11 @@ class RetrieveLogs(komand.Action):
         try:
             dict_response = xmltodict.parse(response.text)
         except TypeError:
-            raise ServerException(cause='The response from PAN-OS was not the correct data type.',
+            raise PluginException(cause='The response from PAN-OS was not the correct data type.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except SyntaxError:
-            raise ServerException(cause='The response from PAN-OS was malformed.',
+            raise PluginException(cause='The response from PAN-OS was malformed.',
                                   assistance='Contact support for help.',
                                   data=response.text)
         except BaseException as e:
@@ -50,7 +50,7 @@ class RetrieveLogs(komand.Action):
             job_id = dict_response["response"]["result"]["job"]
 
         except KeyError:
-            raise ServerException(cause='The response from PAN-OS did not contain the expected data.',
+            raise PluginException(cause='The response from PAN-OS did not contain the expected data.',
                                   assistance='Contact support for help.',
                                   data=dict_response)
         tries_completed = 0
@@ -69,7 +69,7 @@ class RetrieveLogs(komand.Action):
             if dict_job_poll_response['response']['@status'] == 'error':
                 error = dict_job_poll_response['response']['msg']
                 error = json.dumps(error)
-                raise ServerException(cause='PAN-OS returned an error in response to the request.',
+                raise PluginException(cause='PAN-OS returned an error in response to the request.',
                                       assistance='Double that check inputs are valid. Contact support if this issue persists.',
                                       data=error)
             if dict_job_poll_response["response"]["result"]["job"]["status"] == 'FIN':
@@ -78,7 +78,7 @@ class RetrieveLogs(komand.Action):
             if tries_completed != max_tries:
                 self.logger.info("Job not completed, waiting before re-polling...")
                 time.sleep(interval)
-        raise ServerException(cause="Maximum polling attempts reached before response could be returned."
+        raise PluginException(cause="Maximum polling attempts reached before response could be returned."
                               " Queued job had ID.",
                               assistance='Try again later. If the issue persists, please contact support.',
                               data=str(job_id))
