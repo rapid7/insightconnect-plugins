@@ -167,7 +167,7 @@ connection:
 triggers:
   users_added_removed_from_group:
     title: Users Added Removed from Group
-    description: Takes a list of groups and returns updates when users are added or removed
+    description: Monitors a list of groups for user membership changes
     input:
       group_ids:
         title: Group ID's
@@ -602,4 +602,3 @@ actions:
         description: The user ID of the Okta user
         type: string
         required: false
-
