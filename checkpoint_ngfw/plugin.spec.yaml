@@ -664,7 +664,7 @@ actions:
 
   add_host_to_network_group:
     title: Add Host to Network Group
-    description: Add host to network group
+    description: Add a host to a network group
     input:
       group_name:
         title: Group Name
