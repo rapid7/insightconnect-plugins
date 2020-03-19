@@ -25,11 +25,16 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             api = f"{okta_url}/api/v1/groups/{group}/users"
             # Build a reference list to check for updates against
             response = self.connection.session.get(api)
-
+            if response.status_code() in range(400, 499):
+                raise PluginException(cause="Okta returned a 4xx status code",
+                                      assistance="Ensure that the secretKey key is both valid and correct")
+            if response.status_code() in range(500, 599)
+                raise PluginException(cause="Okta returned a 5xx status code",
+                                      assistance="Ensure that the okta URL key is  correct")
             try:
                 data = response.json()
                 data = komand.helper.clean(data)
-            except JSONDecodeError:
+            except ValueError:
                 raise PluginException(cause='Returned data was not in JSON format',
                                       assistance="Double check that group ID's are all valid",
                                       data=response.text)
@@ -38,9 +43,15 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             # Get group names
             group_name_api = f"{okta_url}/api/v1/groups/{group}"
             response = self.connection.session.get(group_name_api)
+            if response.status_code() in range(400, 499):
+                raise PluginException(cause="Okta returned a 4xx status code",
+                                      assistance="Ensure that the secretKey key is both valid and correct")
+            if response.status_code() in range(500, 599)
+                raise PluginException(cause="Okta returned a 5xx status code",
+                                      assistance="Ensure that the okta URL key is  correct")
             try:
                 data = response.json()
-            except JSONDecodeError:
+            except ValueError:
                 raise PluginException(cause='Returned data was not in JSON format',
                                       assistance="Double check that group ID's are all valid",
                                       data=response.text)
@@ -52,7 +63,18 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 api = f"{okta_url}/api/v1/groups/{group}/users"
 
                 response = self.connection.session.get(api)
-                data = response.json()
+                if response.status_code() in range(400, 499):
+                    raise PluginException(cause="Okta returned a 4xx status code",
+                                          assistance="Ensure that the secretKey key is both valid and correct")
+                if response.status_code() in range(500, 599)
+                    raise PluginException(cause="Okta returned a 5xx status code",
+                                          assistance="Ensure that the okta URL key is  correct")
+                try:
+                    data = response.json()
+                except ValueError:
+                    raise PluginException(cause='Returned data was not in JSON format',
+                                          assistance="Double check that group ID's are all valid",
+                                          data=response.text)
                 data = komand.helper.clean(data)
                 new_list.append({group: data})
 

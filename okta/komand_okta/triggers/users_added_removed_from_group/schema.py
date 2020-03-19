@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Takes a list of groups and returns updates when users are added or removed"
+    DESCRIPTION = "Monitors a list of groups for user membership changes"
 
 
 class Input:
@@ -61,7 +61,7 @@ class UsersAddedRemovedFromGroupOutput(komand.Output):
   "properties": {
     "users_added_from_groups": {
       "type": "array",
-      "title": "Users Added from Groups",
+      "title": "Additions",
       "description": "Users added to a group since the last check",
       "items": {
         "$ref": "#/definitions/trigger_type"
@@ -70,8 +70,8 @@ class UsersAddedRemovedFromGroupOutput(komand.Output):
     },
     "users_removed_from_groups": {
       "type": "array",
-      "title": "Users Added from Groups",
-      "description": "Users removed to a group since the last check",
+      "title": "Removals",
+      "description": "Users removed from a group since the last check",
       "items": {
         "$ref": "#/definitions/trigger_type"
       },

@@ -166,7 +166,7 @@ connection:
     required: true
 triggers:
   users_added_removed_from_group:
-    title: Users Added Removed from Group
+    title: Monitor User Groups
     description: Monitors a list of groups for user membership changes
     input:
       group_ids:

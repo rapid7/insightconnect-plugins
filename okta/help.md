@@ -654,9 +654,9 @@ Example output:
 
 ### Triggers
 
-#### Users Added Removed from Group
+#### Monitor User Groups
 
-This trigger takes a list of groups and returns updates when users are added or removed.
+This trigger monitors a list of groups for user membership changes.
 
 ##### Input
 
@@ -670,44 +670,11 @@ This trigger takes a list of groups and returns updates when users are added or 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |users_added_from_groups|[]trigger_type|False|Users added to a group since the last check|
-|users_removed_from_groups|[]trigger_type|False|Users removed to a group since the last check|
+|users_removed_from_groups|[]trigger_type|False|Users removed from a group since the last check|
 
 Example output:
 
 ```
-{
-	"users_removed_from_groups": [{
-		"group_name": "test1",
-		"group_id": "00g41ix8hKbsu74Ca4x6",
-		"users": [{
-			"id": "00u44z4o0JgUYC0OO4x6",
-			"status": "PASSWORD_EXPIRED",
-			"created": "2020-03-17T19:28:50.000Z",
-			"activated": "2020-03-17T19:28:50.000Z",
-			"statusChanged": "2020-03-17T19:28:50.000Z",
-			"lastUpdated": "2020-03-17T19:28:50.000Z",
-			"passwordChanged": "2020-03-17T19:28:50.000Z",
-			"profile": {
-				"firstName": "doe",
-				"lastName": "test",
-				"login": "user@example.com",
-				"email": "user@example.com"
-			},
-			"credentials": {
-				"password": {},
-				"provider": {
-					"type": "OKTA",
-					"name": "OKTA"
-				}
-			},
-			"_links": {
-				"self": {
-					"href": "https://example.okta.com/api/v1/users/00u44z4o0JgUYC0OO4x6"
-				}
-			}
-		}]
-	}]
-}
 ```
 
 ### Custom Output Types
