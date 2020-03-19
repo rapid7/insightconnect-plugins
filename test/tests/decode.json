@@ -1,0 +1,13 @@
+{
+    "body": {
+        "action": "decode",
+        "connection": null,
+        "input": {
+            "base64": "",
+            "errors": "nothing"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}
