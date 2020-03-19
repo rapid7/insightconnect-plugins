@@ -182,7 +182,7 @@ triggers:
         default: 300
     output:
       users_added_from_groups:
-        title: Users Added from Groups
+        title: Additions
         description: Users added to a group since the last check
         type: "[]trigger_type"
         required: false
