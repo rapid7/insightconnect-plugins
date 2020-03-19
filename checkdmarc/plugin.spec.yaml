@@ -4,7 +4,7 @@ products: [insightconnect]
 name: checkdmarc
 title: Checkdmarc
 description: The checkdmarc plugin is used to parser SPF and DMARC records
-version: 2.1.1
+version: 2.1.2
 vendor: rapid7
 support: community
 status: []
@@ -82,7 +82,7 @@ actions:
       domain:
         title: Domain
         type: "string"
-        description: Domain to check. e.g. fbi.gov, google.com
+        description: Domain to check. e.g. fbi.gov, google.com in alternate nameserver
         required: true
       nameservers:
         title: Nameservers

@@ -24,4 +24,5 @@ class CheckDomains(komand.Action):
         except Exception as e:
             raise PluginException(cause="Unexpected response from server",
                                   assistance=e)
+
         return {Output.REPORT: clean_output}
