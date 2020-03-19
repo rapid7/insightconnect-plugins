@@ -166,7 +166,7 @@ If a token is used, make sure that it has sufficient permissions assigned to it.
 
 # Version History
 
-* 1.1.1 - Add new action: get file
+* 1.1.1 - New action Get File
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
