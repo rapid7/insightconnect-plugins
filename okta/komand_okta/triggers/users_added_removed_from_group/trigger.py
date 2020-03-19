@@ -28,7 +28,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             if response.status_code() in range(400, 499):
                 raise PluginException(cause="Okta returned a 4xx status code",
                                       assistance="Ensure that the secretKey key is both valid and correct")
-            if response.status_code() in range(500, 599)
+            if response.status_code() in range(500, 599):
                 raise PluginException(cause="Okta returned a 5xx status code",
                                       assistance="Ensure that the okta URL key is  correct")
             try:
@@ -46,7 +46,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             if response.status_code() in range(400, 499):
                 raise PluginException(cause="Okta returned a 4xx status code",
                                       assistance="Ensure that the secretKey key is both valid and correct")
-            if response.status_code() in range(500, 599)
+            if response.status_code() in range(500, 599):
                 raise PluginException(cause="Okta returned a 5xx status code",
                                       assistance="Ensure that the okta URL key is  correct")
             try:
@@ -66,7 +66,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 if response.status_code() in range(400, 499):
                     raise PluginException(cause="Okta returned a 4xx status code",
                                           assistance="Ensure that the secretKey key is both valid and correct")
-                if response.status_code() in range(500, 599)
+                if response.status_code() in range(500, 599):
                     raise PluginException(cause="Okta returned a 5xx status code",
                                           assistance="Ensure that the okta URL key is  correct")
                 try:
