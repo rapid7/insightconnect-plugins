@@ -10,7 +10,7 @@ This plugin utilizes [pandoc](https://pandoc.org/) via [pypandoc](https://pypi.p
 
 # Requirements
 
-_This plugin does not contain any requirements_
+_This plugin does not contain any requirements._
 
 # Documentation
 

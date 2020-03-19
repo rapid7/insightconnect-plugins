@@ -8,7 +8,7 @@ JSON Edit is a data utility that allows for the manipulation of [JSON](https://w
 
 # Requirements
 
-_This plugin does not contain any requirements_
+_This plugin does not contain any requirements._
 
 # Documentation
 
