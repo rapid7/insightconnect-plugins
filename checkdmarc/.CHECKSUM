@@ -1,7 +1,7 @@
 {
-	"spec": "856fccbaba995a1968bbbb9c290bd498",
-	"manifest": "42e961aaf27edff0fb95435d032c56e5",
-	"setup": "79779879833cb9835f2b7bb4892050a1",
+	"spec": "b569d972a30122d7a468e8c89284aa5d",
+	"manifest": "b5c3f58c99bd31a4fba5ff3ddbb5e241",
+	"setup": "85a3e19a33d6476f51fe5fff319c4b9b",
 	"schemas": [
 		{
 			"identifier": "check_domains/schema.py",
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "check_domains_alternate_nameservers/schema.py",
-			"hash": "d718a9e7dc8800025237ad53c3faef7c"
+			"hash": "99d0be063c0f1dcd06dcdfe4aff2d44b"
 		},
 		{
 			"identifier": "connection/schema.py",
