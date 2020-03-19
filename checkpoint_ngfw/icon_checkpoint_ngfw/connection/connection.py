@@ -147,6 +147,23 @@ class Connection(komand.Connection):
 
         return result
 
+    def get_group(self, name):
+        endpoint = f"{self.server_and_port}/web_api/show-group"
+        payload = {
+            "name": name
+        }
+        headers = self.get_headers()
+        result = requests.post(endpoint, headers=headers, json=payload, verify=self.ssl_verify)
+
+        try:
+            result.raise_for_status()
+        except Exception as e:
+            raise PluginException(cause="Could not find group {name}.",
+                                  assistance=result.text,
+                                  data=e)
+        return result.json()
+
+
     def test(self):
         if not self.sid:
             raise ConnectionTestException(cause=f"Unable to authenticate to the Check Point server at: "

@@ -32,6 +32,32 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Add Host to Network Group
+
+This action is used to add a host to a network group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
+|group_name|string|None|True|Name of the group to add this object to|None|
+|host_name|string|None|True|The host to add to the network group, usually the IP address|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Discard All Sessions
 
 This action is a troubleshooting action that will discard all active sessions. This can sometimes alleviate the 
@@ -693,20 +719,19 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-An issue with Check Point servers is that only one user may make changes to the server at a time. If two users make 
-edits to the configuration at the same time, one user's edits will fail. The API handles this through Session IDs 
-(SIDs). If the plugin tries to make a change while an administrator has a pending change, the plugin will sometimes 
-fail. 
+Connections to the Check Point security management is based upon client to server sessions. Multiple administrators may connect 
+at one time and from R80.20 M1, one administrator can open more than one session at a time. Policy and objects are locked when 
+an administrator makes changes to those objects. The lock is released when a publish or discard occurs.
 
-To prevent this, you can set the `Discard Other Changes` boolean value to `True` in each action. That will effectively 
-remove all other pending changes when the plugin tries to publish it's changes. However, this can cause 
-issues with the web portal and Smart Console. If the Smart Console starts displaying errors, 
-the administrator will have to close the Smart Console and re-open it.
-
-To effectively use this plugin, it will need it's own administrative account. This will help prevent session conflicts.  
+If the plugin tries to make a change while an administrator has a pending change, 
+the plugin will sometimes fail. To prevent this, you can set the Discard Other Changes boolean value 
+to True in each action. That will effectively remove all other pending changes when the 
+plugin tries to publish its changes. A best practice is to have separate administrator accounts so that you can 
+better track changes done via the plugin or manually via SmartConsole.
 
 # Version History
 
+* 1.1.0 - New action Add Host to Network Group
 * 1.0.0 - Initial plugin
 
 # Links
