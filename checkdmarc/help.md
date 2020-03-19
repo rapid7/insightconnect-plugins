@@ -409,7 +409,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.2 - Changed description in action `check_domains_alternate_nameservers` | Fix typo in word `nameservers` to `name_servers` | Changed mails to `user@example.com`
+* 2.1.2 - Changed description in action `check_domains_alternate_nameservers` | Fix typo in word `nameservers` to `name_servers` | Changed email addresses to `user@example.com`
 * 2.1.1 - New spec and help.md format for the Hub
 * 2.1.0 - Added action Check Domains Alternate Nameservers
 * 2.0.0 - Added timeout to Check Domain
@@ -420,4 +420,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Checkdmarc](https://domainaware.github.io/checkdmarc/)
-
