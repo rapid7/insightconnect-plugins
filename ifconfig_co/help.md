@@ -9,7 +9,7 @@
 
 # Requirements
 
-_This plugin does not contain any requirements_
+_This plugin does not contain any requirements._
 
 # Documentation
 
@@ -86,7 +86,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

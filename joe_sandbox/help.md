@@ -277,7 +277,7 @@ This action is used to download a resource for an analysis. This can be a full r
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |run|integer|None|False|The number of the run. If not specified, Joe Sandbox will choose one automatically|None|
-|type|string|html|False|The report type, e.g. 'html', 'bins'|['html', 'lighthtml', 'executive', 'pdf', 'classhtml', 'xml', 'lightxml', 'classxml', 'clusterxml', 'irxml', 'json', 'jsonfixed', 'lightjson', 'lightjsonfixed', 'irjson', 'irjsonfixed', 'shoots', 'ishots', 'openioc', 'maec', 'misp', 'graphreports', 'memstrings', 'binstrings', 'sample', 'cookbook', 'bins', 'unpackpe', 'unpack', 'ida', 'pcap', 'pcapslim', 'memdumps', 'yara']|
+|type|string|html|False|The report type, e.g. 'html', 'bins'|['bins', 'binstrings', 'classhtml', 'classxml', 'clusterxml', 'cookbook', 'executive', 'graphreports', 'html', 'ida', 'irjson', 'irjsonfixed', 'irxml', 'ishots', 'json', 'jsonfixed', 'lighthtml', 'lightjson', 'lightjsonfixed', 'lightxml', 'maec', 'memdumps', 'memstrings', 'misp', 'openioc', 'pcap', 'pcapslim', 'pdf', 'sample', 'shoots', 'unpack', 'unpackpe', 'xml', 'yara']|
 |webid|string|None|True|The web ID of the analysis|None|
 
 ##### Output
@@ -507,6 +507,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.2 - Fix misspelling in error message | Remove generic "automation" keyword
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 

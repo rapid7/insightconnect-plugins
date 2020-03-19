@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='threatminer-rapid7-plugin',
-      version='1.0.1',
-      description='Threat Miner is an open source search engine for fast threat intelligence research and pivoting with context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup various pieces of information for threat intelligence gathering',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="threatminer-rapid7-plugin",
+      version="2.0.0",
+      description="Threat Miner is an open source search engine for fast threat intelligence research and pivoting with context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup various pieces of information for threat intelligence gathering",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_threatminer']
