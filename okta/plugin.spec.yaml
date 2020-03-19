@@ -188,7 +188,7 @@ triggers:
         required: false
       users_removed_from_groups:
         title: Removals
-        description: Users removed to a group since the last check
+        description: Users removed from a group since the last check
         type: "[]trigger_type"
         required: false
 actions:
