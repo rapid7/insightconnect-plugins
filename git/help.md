@@ -49,6 +49,7 @@ This action is used to get a file from the repository.
 
 Example output:
 
+```
 {
   "file": {
     "content": "iVBORw0KGgoAAAANSUhEUgAAA+cAAAPnCAYAAABN/j28AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAdgwAA=",
