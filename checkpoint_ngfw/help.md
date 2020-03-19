@@ -726,7 +726,7 @@ an admin makes changes to those objects. The lock is released when a publish or 
 If the plugin tries to make a change while an administrator has a pending change, 
 the plugin will sometimes fail. To prevent this, you can set the Discard Other Changes boolean value 
 to True in each action. That will effectively remove all other pending changes when the 
-plugin tries to publish its changes. A best practice is to have separate admin accounts so that you can 
+plugin tries to publish its changes. A best practice is to have separate administrator accounts so that you can 
 better track changes done via the plugin or manually via SmartConsole.
 
 # Version History
