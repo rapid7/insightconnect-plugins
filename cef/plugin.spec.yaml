@@ -120,7 +120,7 @@ actions:
         required: true
     output:
       cefs:
-        title: CEFs Object
+        title: CEF Objects
         description: A list of CEF objects parsed from the file
         type: '[]cef'
         required: false
