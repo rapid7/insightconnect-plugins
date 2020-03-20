@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "bytes",
+    "connection": null,
+    "input": {
+      "bytes": "dGVzdAo="
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
