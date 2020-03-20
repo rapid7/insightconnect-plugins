@@ -12,7 +12,7 @@ NumPy, Pandas, and Seaborn, utilizing the [matplotlib API](https://matplotlib.or
 
 # Requirements
 
-_This plugin does not contain any requirements_
+_This plugin does not contain any requirements._
 
 # Documentation
 

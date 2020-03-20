@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: REST
 description: The REST plugin to make it easy to integrate with RESTful services
-version: 3.0.1
+version: 3.0.2
 vendor: rapid7
 support: community
 status: []
@@ -31,7 +31,7 @@ connection:
   default_headers:
     title: Default Headers
     description: 'Default headers to include in all requests associated with this
-      connection e.g. { User-Agent: Komand }'
+      connection e.g. { User-Agent: InsightConnect }'
     type: object
     required: false
   ssl_verify:
@@ -63,7 +63,7 @@ actions:
     output:
       body_object:
         title: Body Object
-        description: Response payload from the server as an object
+        description: Response payload from the server as an object. Note, if the response has invalid object structure(list, string..) plugin will wrap it with object map
         type: object
         required: false
       body_string:
