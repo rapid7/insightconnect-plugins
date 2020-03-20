@@ -54,6 +54,9 @@ This action is used to set Threat Protection.
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Add Host to Network Group
