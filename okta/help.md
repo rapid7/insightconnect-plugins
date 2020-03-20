@@ -664,6 +664,7 @@ This trigger monitors a list of groups for user membership changes.
 |interval|integer|300|True|The time in seconds inbetween checks for changes to the groups users|None|
 
 Example input:
+
 ```
 {
   "group_ids": ["00g41ix8hKbsu74Ca4x6", "00g41ieu5y7i9XEYE4x6"],
