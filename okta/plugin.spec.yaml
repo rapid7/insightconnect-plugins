@@ -176,7 +176,7 @@ triggers:
         required: true
       interval:
         title: Interval
-        description: The time in seconds inbetween checks for changes to the groups users
+        description: The time in seconds between checks for changes to the groups users
         type: integer
         required: true
         default: 300
