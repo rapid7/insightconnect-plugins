@@ -694,7 +694,7 @@ actions:
 
   set_threat_protection:
     title: Set Threat Protection
-    description: Set Threat Protection
+    description: Set threat protection
     input:
       name:
         title: Name
