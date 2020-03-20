@@ -16,3 +16,6 @@ class Connection(komand.Connection):
 
     def connect(self, params={}):
         pass
+
+    def test(self):
+        return {"success": True}
