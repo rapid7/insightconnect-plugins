@@ -40,10 +40,10 @@ This action is used to return the supported hashes for a file type.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sha256|string|False|SHA256 hash|
-|sha512|string|False|SHA512 hash|
 |md5|string|False|MD5 hash|
 |sha1|string|False|SHA1 hash|
+|sha256|string|False|SHA256 hash|
+|sha512|string|False|SHA512 hash|
 
 Example output:
 
@@ -66,17 +66,16 @@ This action is used to return the supported hashes for a string.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|foo|string|None|False|None|None|
 |string|string|None|True|String of text to hash|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sha256|string|False|SHA256 hash|
-|sha512|string|False|SHA512 hash|
 |md5|string|False|MD5 hash|
 |sha1|string|False|SHA1 hash|
+|sha256|string|False|SHA256 hash|
+|sha512|string|False|SHA512 hash|
 
 Example output:
 
@@ -105,6 +104,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.3 - Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Use input and output constants | Remove test from actions
 * 2.0.2 - New spec and help.md format for the Hub
 * 2.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 2.0.0 - Rename "Hash a String" action to "Hash String"
@@ -118,4 +118,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Hashlib](https://docs.python.org/3.4/library/hashlib.html)
-
