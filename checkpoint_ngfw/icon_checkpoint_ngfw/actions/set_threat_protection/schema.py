@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Set Threat Protection"
+    DESCRIPTION = "Set threat protection"
 
 
 class Input:
