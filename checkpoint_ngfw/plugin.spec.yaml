@@ -692,6 +692,50 @@ actions:
         type: boolean
         required: true
 
+  set_threat_protection:
+    title: Set Threat Protection
+    description: Set Threat Protection
+    input:
+      name:
+        title: Name
+        description: Name
+        required: true
+        type: string
+        order: 1
+      action:
+        title: Action
+        description: Action
+        required: true
+        type: string
+        order: 2
+        enum:
+          - Inactive
+          - Detect
+          - Prevent
+          - Drop
+          - Accept
+      profile:
+        title: Profile
+        description: Profile
+        required: true
+        type: string
+        default: Optimized
+        order: 3
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        default: true
+        order: 4
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+
+
   discard_all_sessions:
     title: Discard All Sessions
     description: Troubleshooting action to discard all other user sessions

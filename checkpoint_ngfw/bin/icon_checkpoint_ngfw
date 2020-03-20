@@ -31,6 +31,8 @@ class ICONCheckpointNgfw(komand.Plugin):
 
         self.add_action(actions.RemoveHost())
 
+        self.add_action(actions.SetThreatProtection())
+
         self.add_action(actions.ShowAccessRulebase())
 
 

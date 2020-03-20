@@ -1,6 +1,6 @@
 {
-	"spec": "366620adfb94f58929eb18f97f8cf7c1",
-	"manifest": "0e828b8f2fd7480e529461a9d3d2e23c",
+	"spec": "a08b8df8cd82c8a6fca9432e42659532",
+	"manifest": "9d5e86171bf463fd947696ff3147af40",
 	"setup": "e5c232d3d47197fdcdf967399197c0e0",
 	"schemas": [
 		{
@@ -26,6 +26,10 @@
 		{
 			"identifier": "remove_host/schema.py",
 			"hash": "abbc51146a4b78255550ee1a28b06cc8"
+		},
+		{
+			"identifier": "set_threat_protection/schema.py",
+			"hash": "5887a03b477141f45c509676563c468b"
 		},
 		{
 			"identifier": "show_access_rulebase/schema.py",

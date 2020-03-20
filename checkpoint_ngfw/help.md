@@ -32,6 +32,30 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Set Threat Protection
+
+This action is used to set Threat Protection.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|action|string|None|True|Action|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
+|name|string|None|True|Name|None|
+|profile|string|Optimized|True|Profile|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+```
+
 #### Add Host to Network Group
 
 This action is used to add a host to a network group.
