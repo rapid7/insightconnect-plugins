@@ -1,0 +1,747 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: fortinet_fortigate
+title: Fortinet FortiGate
+description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/fortinet_fortigate
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.fortinet.com/products/next-generation-firewall.html
+tags:
+- firewall
+- fortinet
+- fortigate
+hub_tags:
+  use_cases: [application_management, threat_detection_and_response, vulnerability_management]
+  keywords: [firewall, fortinet, fortigate]
+  features: []
+
+types:
+  dstaddr:
+    q_origin_key:
+      title: "Q Origin Key"
+      type: string
+      description: "Q origin key"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+  policies:
+    wanopt-passive-opt:
+      title: "WAN opt-Passive-Opt"
+      type: string
+      description: "WAN opt-passive-opt"
+      required: false
+    wanopt-detection:
+      title: "WAN opt-Detection"
+      type: string
+      description: "WAN opt-detection"
+      required: false
+    webcache-https:
+      title: "Web cache-https"
+      type: string
+      description: "Web cache-https"
+      required: false
+    uuid:
+      title: "UUID"
+      type: string
+      description: "UUID"
+      required: false
+    match-vip-only:
+      title: "Match-VIP-Only"
+      type: string
+      description: "Match-VIP-only"
+      required: false
+    session-ttl:
+      title: "Session-TTL"
+      type: string
+      description: "Session-TTL"
+      required: false
+    ntlm-guest:
+      title: "NTLM-Guest"
+      type: string
+      description: "NTLM-guest"
+      required: false
+    tos-mask:
+      title: "TOS-Mask"
+      type: string
+      description: "TOS-mask"
+      required: false
+    diffservcode-rev:
+      title: "Diffservcode-Rev"
+      type: string
+      description: "Diffservcode-rev"
+      required: false
+    match-vip:
+      title: "Match-VIP"
+      type: string
+      description: "Match-VIP"
+      required: false
+    natip:
+      title: "NAT IP"
+      type: string
+      description: "NAT IP"
+      required: false
+    reputation-direction:
+      title: "Reputation-Direction"
+      type: string
+      description: "Reputation-direction"
+      required: false
+    schedule-timeout:
+      title: "Schedule-Timeout"
+      type: string
+      description: "Schedule-timeout"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    tcp-session-without-syn:
+      title: "TCP-Session-Without-SYN"
+      type: string
+      description: "TCP-session-without-SYN"
+      required: false
+    rtp-nat:
+      title: "RTP-NAT"
+      type: string
+      description: "RTP-NAT"
+      required: false
+    permit-stun-host:
+      title: "Permit-STUN-Host"
+      type: string
+      description: "Permit-STUN-host"
+      required: false
+    natoutbound:
+      title: "NAT Outbound"
+      type: string
+      description: "NAT outbound"
+      required: false
+    http-policy-redirect:
+      title: "HTTP-Policy-Redirect"
+      type: string
+      description: "HTTP-policy-redirect"
+      required: false
+    logtraffic:
+      title: "Log Traffic"
+      type: string
+      description: "Log Traffic"
+      required: false
+    ntlm:
+      title: "NTLM"
+      type: string
+      description: "NTLM"
+      required: false
+    timeout-send-rst:
+      title: "Timeout-Send-RST"
+      type: string
+      description: "Timeout-send-RST"
+      required: false
+    anti-replay:
+      title: "Anti-Replay"
+      type: string
+      description: "Anti-replay"
+      required: false
+    diffservcode-forward:
+      title: "Diffservcode-Forward"
+      type: string
+      description: "Diffservcode-forward"
+      required: false
+    users:
+      title: "Users"
+      type: "[]object"
+      description: "Users"
+      required: false
+    diffserv-forward:
+      title: "Diffserv-Forward"
+      type: string
+      description: "Diffserv-forward"
+      required: false
+    firewall-session-dirty:
+      title: "Firewall-Session-Dirty"
+      type: string
+      description: "Firewall-session-dirty"
+      required: false
+    wanopt:
+      title: "WAN Option"
+      type: string
+      description: "WAN option"
+      required: false
+    schedule:
+      title: "Schedule"
+      type: string
+      description: "Schedule"
+      required: false
+    auth-path:
+      title: "Auth-Path"
+      type: string
+      description: "Auth-path"
+      required: false
+    vlan-cos-fwd:
+      title: "Vlan-Cos-Fwd"
+      type: integer
+      description: "Vlan-cos-fwd"
+      required: false
+    internet-service-negate:
+      title: "Internet-Service-Negate"
+      type: string
+      description: "Internet-service-negate"
+      required: false
+    dstintf:
+      title: "Dstintf"
+      type: "[]dstaddr"
+      description: "Dstintf"
+      required: false
+    srcintf:
+      title: "Srcintf"
+      type: "[]dstaddr"
+      description: "Srcintf"
+      required: false
+    block-notification:
+      title: "Block-Notification"
+      type: string
+      description: "Block-notification"
+      required: false
+    service-negate:
+      title: "Service-Negate"
+      type: string
+      description: "Service-negate"
+      required: false
+    action:
+      title: "Action"
+      type: string
+      description: "Action"
+      required: false
+    disclaimer:
+      title: "Disclaimer"
+      type: string
+      description: "Disclaimer"
+      required: false
+    dstaddr-negate:
+      title: "Dstaddr-Negate"
+      type: string
+      description: "Dstaddr-negate"
+      required: false
+    logtraffic-start:
+      title: "Logtraffic-Start"
+      type: string
+      description: "Logtraffic-start"
+      required: false
+    groups:
+      title: "Groups"
+      type: "[]object"
+      description: "Groups"
+      required: false
+    internet-service-src:
+      title: "Internet-Service-Src"
+      type: string
+      description: "Internet-service-src"
+      required: false
+    webcache:
+      title: "Webcache"
+      type: string
+      description: "Webcache"
+      required: false
+    utm-status:
+      title: "UTM-Status"
+      type: string
+      description: "UTM-status"
+      required: false
+    ippool:
+      title: "IP Pool"
+      type: string
+      description: "IP pool"
+      required: false
+    service:
+      title: "Service"
+      type: "[]dstaddr"
+      description: "Service"
+      required: false
+    wccp:
+      title: "WCCP"
+      type: string
+      description: "WCCP"
+      required: false
+    tos:
+      title: "TOS"
+      type: string
+      description: "TOS"
+      required: false
+    auto-asic-offload:
+      title: "Auto-ASIC-Offload"
+      type: string
+      description: "Auto-ASIC-offload"
+      required: false
+    srcaddr-negate:
+      title: "Srcaddr-Negate"
+      type: string
+      description: "Srcaddr-negate"
+      required: false
+    capture-packet:
+      title: "Capture-Packet"
+      type: string
+      description: "Capture-packet"
+      required: false
+    ssh-policy-redirect:
+      title: "SSH-Policy-Redirect"
+      type: string
+      description: "SSH-policy-redirect"
+      required: false
+    internet-service:
+      title: "Internet-Service"
+      type: string
+      description: "Internet-service"
+      required: false
+    inbound:
+      title: "Inbound"
+      type: string
+      description: "Inbound"
+      required: false
+    profile-type:
+      title: "Profile-Type"
+      type: string
+      description: "Profile-type"
+      required: false
+    ssl-mirror:
+      title: "SSL-Mirror"
+      type: string
+      description: "SSL-mirror"
+      required: false
+    inspection-mode:
+      title: "Inspection-Mode"
+      type: string
+      description: "Inspection-mode"
+      required: false
+    send-deny-packet:
+      title: "Send-Deny-Packet"
+      type: string
+      description: "Send-deny-packet"
+      required: false
+    permit-any-host:
+      title: "Permit-Any-Host"
+      type: string
+      description: "Permit-any-host"
+      required: false
+    internet-service-src-negate:
+      title: "Internet-Service-Src-Negate"
+      type: string
+      description: "Internet-service-src-negate"
+      required: false
+    ntlm-enabled-browsers:
+      title: "NTLM-Enabled-Browsers"
+      type: "[]object"
+      description: "NTLM-enabled-browsers"
+      required: false
+    rsso:
+      title: "RSSO"
+      type: string
+      description: "RSSO"
+      required: false
+    app-group:
+      title: "App-Group"
+      type: "[]object"
+      description: "App-group"
+      required: false
+    tcp-mss-sender:
+      title: "TCP-Mss-Sender"
+      type: integer
+      description: "TCP-mss-sender"
+      required: false
+    reputation-minimum:
+      title: "Reputation-Minimum"
+      type: integer
+      description: "Reputation-minimum"
+      required: false
+    natinbound:
+      title: "NAT Inbound"
+      type: string
+      description: "NAT inbound"
+      required: false
+    fixedport:
+      title: "Fixed Port"
+      type: string
+      description: "Fixed port"
+      required: false
+    dsri:
+      title: "DSRI"
+      type: string
+      description: "DSRI"
+      required: false
+    outbound:
+      title: "Outbound"
+      type: string
+      description: "Outbound"
+      required: false
+    fsso-groups:
+      title: "FSSO-Groups"
+      type: "[]object"
+      description: "FSSO-groups"
+      required: false
+    url-category:
+      title: "URL-Category"
+      type: "[]object"
+      description: "URL-category"
+      required: false
+    application:
+      title: "Application"
+      type: "[]object"
+      description: "Application"
+      required: false
+    nat:
+      title: "NAT"
+      type: string
+      description: "NAT"
+      required: false
+    internet-service-src-group:
+      title: "Internet-Service-Src-Group"
+      type: "[]object"
+      description: "Internet-service-src-group"
+      required: false
+    internet-service-group:
+      title: "Internet-Service-Group"
+      type: "[]object"
+      description: "Internet-service-group"
+      required: false
+    fsso:
+      title: "FSSO"
+      type: string
+      description: "FSSO"
+      required: false
+    vlan-cos-rev:
+      title: "Vlan-Cos-Rev"
+      type: integer
+      description: "Vlan-cos-rev"
+      required: false
+    status:
+      title: "Status"
+      type: string
+      description: "Status"
+      required: false
+    ssl-ssh-profile:
+      title: "Ssl-Ssh-Profile"
+      type: string
+      description: "Ssl-ssh-profile"
+      required: false
+    q_origin_key:
+      title: "Q Origin Key"
+      type: integer
+      description: "Q origin key"
+      required: false
+    profile-protocol-options:
+      title: "Profile-Protocol-Options"
+      type: string
+      description: "Profile-protocol-options"
+      required: false
+    geoip-anycast:
+      title: "Geoip-Anycast"
+      type: string
+      description: "Geoip-anycast"
+      required: false
+    email-collect:
+      title: "Email-Collect"
+      type: string
+      description: "Email-collect"
+      required: false
+    policyid:
+      title: "Policy ID"
+      type: integer
+      description: "Policy ID"
+      required: false
+    tos-negate:
+      title: "TOS-Negate"
+      type: string
+      description: "TOS-negate"
+      required: false
+    internet-service-custom:
+      title: "Internet-Service-Custom"
+      type: "[]object"
+      description: "Internet-service-custom"
+      required: false
+    diffserv-reverse:
+      title: "Diffserv-Reverse"
+      type: string
+      description: "Diffserv-reverse"
+      required: false
+    srcaddr:
+      title: "Srcaddr"
+      type: "[]dstaddr"
+      description: "Srcaddr"
+      required: false
+    delay-tcp-npu-session:
+      title: "Delay-TCP-Npu-Session"
+      type: string
+      description: "Delay-TCP-npu-session"
+      required: false
+    captive-portal-exempt:
+      title: "Captive-Portal-Exempt"
+      type: string
+      description: "Captive-portal-exempt"
+      required: false
+    app-category:
+      title: "App-Category"
+      type: "[]object"
+      description: "App-category"
+      required: false
+    rtp-addr:
+      title: "Rtp-Addr"
+      type: "[]object"
+      description: "Rtp-addr"
+      required: false
+    wsso:
+      title: "WSSO"
+      type: string
+      description: "WSSO"
+      required: false
+    tcp-mss-receiver:
+      title: "Tcp-Mss-Receiver"
+      type: integer
+      description: "Tcp-mss-receiver"
+      required: false
+    dstaddr:
+      title: "Dstaddr"
+      type: "[]dstaddr"
+      description: "Dstaddr"
+      required: false
+    radius-mac-auth-bypass:
+      title: "Radius-MAC-Auth-Bypass"
+      type: string
+      description: "Radius-MAC-auth-bypass"
+      required: false
+  address_objects:
+    cache-ttl:
+      title: "Cache-TTL"
+      type: integer
+      description: "Cache-TTL"
+      required: false
+    comment:
+      title: "Comment"
+      type: string
+      description: "Comment"
+      required: false
+    q_origin_key:
+      title: "Q Origin Key"
+      type: string
+      description: "Q origin key"
+      required: false
+    fsso-group:
+      title: "FSSO-Group"
+      type: "[]object"
+      description: "FSSO-group"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    subnet:
+      title: "Subnet"
+      type: string
+      description: "Subnet"
+      required: false
+    color:
+      title: "Color"
+      type: integer
+      description: "Color"
+      required: false
+    sdn-addr-type:
+      title: "Sdn-Addr-Type"
+      type: string
+      description: "Sdn-addr-type"
+      required: false
+    list:
+      title: "List"
+      type: "[]object"
+      description: "List"
+      required: false
+    start-mac:
+      title: "Start-MAC"
+      type: string
+      description: "Start-MAC"
+      required: false
+    end-mac:
+      title: "End-MAC"
+      type: string
+      description: "End-MAC"
+      required: false
+    sub-type:
+      title: "Sub-Type"
+      type: string
+      description: "Sub-type"
+      required: false
+    visibility:
+      title: "Visibility"
+      type: string
+      description: "Visibility"
+      required: false
+    allow-routing:
+      title: "Allow-Routing"
+      type: string
+      description: "Allow-routing"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+    clearpass-spt:
+      title: "Clear Pass-Spt"
+      type: string
+      description: "Clear Pass-spt"
+      required: false
+    tagging:
+      title: "Tagging"
+      type: "[]object"
+      description: "Tagging"
+      required: false
+    uuid:
+      title: "UUID"
+      type: string
+      description: "UUID"
+      required: false
+
+connection:
+  hostname:
+    type: string
+    title: Hostname
+    description: Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000
+    required: true
+  api_key:
+    type: credential_secret_key
+    title: API Key
+    description: API key
+    required: true
+  ssl_verify:
+    type: boolean
+    title: SSL Verify
+    description: SSL verify
+    required: true
+
+actions:
+  get_policies:
+    title: Get Policies
+    description: Get policies
+    input:
+      name_filter:
+        title: Name Filter
+        description: Optional name to filter on
+        type: string
+        required: false
+    output:
+      policies:
+        title: Policies
+        description: Policies
+        type: "[]policies"
+        required: false
+
+  get_address_objects:
+    title: Get Address Objects
+    description: Get address objects
+    input:
+      name_filter:
+        title: Name Filter
+        description: Optional name to filter on
+        type: string
+        required: false
+    output:
+      address_objects:
+        title: Address Objects
+        description: A list of address objects
+        type: '[]object'
+        required: true
+
+  create_address_object:
+    title: Create Address Object
+    description: Create an address object
+    input:
+      ip:
+        title: IP
+        description: IP
+        type: string
+        required: true
+        order: 1
+      cidr:
+        title: CIDR
+        description: CIDR
+        type: integer
+        required: true
+        default: 32
+        order: 2
+      name:
+        title: Name
+        description: Optional name to give this address object. If not provided, the name will be the IP address
+        type: string
+        required: false
+        order: 3
+    output:
+      success:
+        title: Success
+        description: Boolean value indicating the success of the operation
+        type: boolean
+        required: true
+      response_object:
+        title: Response Object
+        description: Information about the operation that was performed
+        type: object
+        required: true
+
+  delete_address_object:
+    title: Delete Address Object
+    description: Delete an address object
+    input:
+      ip:
+        title: IP
+        description: IP
+        type: string
+        required: true
+        order: 1
+      cidr:
+        title: CIDR
+        description: CIDR
+        type: integer
+        required: true
+        default: 32
+        order: 2
+    output:
+      success:
+        title: Success
+        description: Boolean value indicating the success of the operation
+        type: boolean
+        required: true
+      response_object:
+        title: Response Object
+        description: Information about the operation that was performed
+        type: object
+        required: true
+
+  add_address_object_to_address_group:
+    title: Add Address Object to Group
+    description: Add an address object to an address group
+    input:
+      group_name:
+        title: Group Name
+        description: Group name
+        type: string
+        required: true
+      address_object_name:
+        title: Address Object Name
+        description: Address object name
+        type: string
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
+      result_object:
+        title: Result Object
+        description: An object containing the results of the action
+        type: object
+        required: true

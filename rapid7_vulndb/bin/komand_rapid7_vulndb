@@ -4,10 +4,10 @@ import komand
 from komand_rapid7_vulndb import connection, actions, triggers
 
 
-Name = 'Rapid7 Vulnerability & Exploit Database'
-Vendor = 'rapid7'
-Version = '1.1.1'
-Description = 'The Vulnerability & Exploit Database plugin allows you to search and compare potential threats with a curated repository of vetted computer software exploits and exploitable vulnerabilities vulnerabilities'
+Name = "Rapid7 Vulnerability & Exploit Database"
+Vendor = "rapid7"
+Version = "2.0.2"
+Description = "The Vulnerability & Exploit Database plugin allows you to search and compare potential threats with a curated repository of vetted computer software exploits and exploitable vulnerabilities vulnerabilities"
 
 
 class ICONRapid7Vulndb(komand.Plugin):
@@ -19,6 +19,8 @@ class ICONRapid7Vulndb(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.GetContent())
+
         self.add_action(actions.SearchDb())
 
 

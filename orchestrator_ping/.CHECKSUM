@@ -1,0 +1,19 @@
+{
+	"spec": "a963d7e78e790f4322883a78252e6354",
+	"manifest": "111b98fac189c42fe55452367526b5d8",
+	"setup": "2214aa7d801fd549df552f28f3c78665",
+	"schemas": [
+		{
+			"identifier": "ping/schema.py",
+			"hash": "0fcc4d6b9756ab907bdda9d1b3c1a41c"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "f7193f405162368a1d800522c96bf606"
+		},
+		{
+			"identifier": "signal/schema.py",
+			"hash": "3d0cab9754db89f0a7d9ea9dfb74d899"
+		}
+	]
+}

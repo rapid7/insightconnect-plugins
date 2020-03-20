@@ -21,6 +21,6 @@ class Decode(komand.Action):
         except Exception as e:
             return {Output.RESULT: url}
             self.logger.debug(e)
-            raise Exception(f"Error: Unable to decode the Microsoft Safe Link. "
-                            f"Check that the input was a valid Safe Link URL. "
-                            f"If the problem persists, please contact support.")
+            raise PluginException(cause=f"Error: Unable to decode the Microsoft Safe Link.",
+                                  assistance="Check that the input was a valid Safe Link URL. \
+                                  If the problem persists, please contact support.")

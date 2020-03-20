@@ -65,7 +65,7 @@ class AddExternalDynamicListInput(komand.Input):
     },
     "name": {
       "type": "string",
-      "title": "The name of the list",
+      "title": "The Name of the List",
       "description": "An arbitrary name for the list. This name will be used to identify the list in PAN-OS",
       "order": 1
     },

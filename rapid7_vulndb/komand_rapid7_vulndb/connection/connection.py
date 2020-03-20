@@ -11,11 +11,8 @@ class Connection(komand.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
-        pass
-
-    def test(self):
-        result = requests.get("https://www.rapid7.com/db/search")
-        if (result.status_code == requests.codes.ok) is True:
+        result = requests.get("https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/info")
+        if result.status_code == requests.codes.ok:
             return {"success": True}
         else:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)

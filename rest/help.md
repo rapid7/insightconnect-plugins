@@ -25,10 +25,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|default_headers|object|None|False|None|None|
-|base_url|string|None|False|None|None|
-|ssl_verify|boolean|True|False|None|None|
-|basic_auth_credentials|credential_username_password|None|False|None|None|
+|base_url|string|None|True|Base URL e.g. https://httpbin.org|None|
+|basic_auth_credentials|credential_username_password|None|False||None|
+|default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { User-Agent: InsightConnect }|None|
+|ssl_verify|boolean|True|True|Verify SSL certificate|None|
 
 ## Technical Details
 
@@ -229,7 +229,7 @@ This action is used to make a GET request.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|body_object|object|False|Response payload from the server as an object|
+|body_object|object|False|Response payload from the server as an object. Note, if the response has invalid object structure(list, string..) plugin will wrap it with object map|
 |body_string|string|False|Response payload from the server as a string|
 |headers|object|False|Response headers from the server|
 |status|int|False|Status code of the response from the server|
@@ -330,6 +330,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 3.0.2 - Update to v3 Python plugin architecture | Support get endpoints returning lists
 * 3.0.1 - New spec and help.md format for the Hub
 * 3.0.0 - Add basic auth support
 * 2.0.0 - Update connection to handle SSL verification
