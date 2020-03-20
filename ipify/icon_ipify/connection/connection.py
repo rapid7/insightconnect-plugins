@@ -1,7 +1,9 @@
 import requests
+from requests.exceptions import HTTPError
 
 import komand
 from .schema import ConnectionSchema
+from komand.exceptions import ConnectionTestException
 
 
 class Connection(komand.Connection):
@@ -14,6 +16,14 @@ class Connection(komand.Connection):
 
     def test(self, params={}):
         url = 'https://api.ipify.org?format=json'
-        r = requests.get(url)
+
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except HTTPError as e:
+            raise ConnectionTestException(cause="Unable to reach ipify.org.",
+                                          assistance="Double-check that ipify.org is reachable from your Insight orchestrator.",
+                                          data=e)
+
         dic = r.json()
         return dic.pop('ip')
