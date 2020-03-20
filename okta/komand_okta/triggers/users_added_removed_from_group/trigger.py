@@ -31,7 +31,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                                       data=response.text)
             if response.status_code in range(500, 599):
                 raise PluginException(cause="Okta returned a 5xx status code",
-                                      assistance="Ensure that the okta URL key is  correct",
+                                      assistance="Ensure that the Okta URL key is correct",
                                       data=response.text)
             try:
                 data = response.json()
