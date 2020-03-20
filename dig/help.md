@@ -38,11 +38,11 @@ It accepts a domain name of type `string` and one of the following record types:
 * PTR
 * SOA
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain name to resolve|None|
-|query|string|None|True|Query type e.g. ANY, A, MX, NS, etc|['A', 'AAAA', 'ANY', 'CNAME', 'MX', 'NS', 'PTR', 'SOA']|
-|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|True|Domain name to resolve|None|rapid7.com|
+|query|string|None|True|Query type e.g. ANY, A, MX, NS, etc|['A', 'AAAA', 'ANY', 'CNAME', 'MX', 'NS', 'PTR', 'SOA']|MX|
+|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|8.8.8.8|
 
 Example input:
 
@@ -107,10 +107,10 @@ This action is used to request a reverse lookup for an IP address.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address|string|None|True|Internet address to resolve|None|
-|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|Internet address to resolve|None|1.2.3.4|
+|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|8.8.8.8|
 
 Example input:
 
