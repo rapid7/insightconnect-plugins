@@ -27,10 +27,12 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             response = self.connection.session.get(api)
             if response.status_code in range(400, 499):
                 raise PluginException(cause="Okta returned a 4xx status code",
-                                      assistance="Ensure that the secretKey key is both valid and correct")
+                                      assistance="Ensure that the secretKey key is both valid and correct",
+                                      data=response.text)
             if response.status_code in range(500, 599):
                 raise PluginException(cause="Okta returned a 5xx status code",
-                                      assistance="Ensure that the okta URL key is  correct")
+                                      assistance="Ensure that the okta URL key is  correct",
+                                      data=response.text)
             try:
                 data = response.json()
                 data = komand.helper.clean(data)
@@ -45,10 +47,12 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             response = self.connection.session.get(group_name_api)
             if response.status_code in range(400, 499):
                 raise PluginException(cause="Okta returned a 4xx status code",
-                                      assistance="Ensure that the secretKey key is both valid and correct")
+                                      assistance="Ensure that the secretKey key is both valid and correct",
+                                      data=response.text)
             if response.status_code in range(500, 599):
                 raise PluginException(cause="Okta returned a 5xx status code",
-                                      assistance="Ensure that the okta URL key is  correct")
+                                      assistance="Ensure that the okta URL key is  correct",
+                                      data=response.text)
             try:
                 data = response.json()
             except ValueError:
@@ -65,10 +69,12 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 response = self.connection.session.get(api)
                 if response.status_code in range(400, 499):
                     raise PluginException(cause="Okta returned a 4xx status code",
-                                          assistance="Ensure that the secretKey key is both valid and correct")
+                                          assistance="Ensure that the secretKey key is both valid and correct",
+                                          data=response.text)
                 if response.status_code in range(500, 599):
                     raise PluginException(cause="Okta returned a 5xx status code",
-                                          assistance="Ensure that the okta URL key is  correct")
+                                          assistance="Ensure that the okta URL key is  correct",
+                                          data=response.text)
                 try:
                     data = response.json()
                 except ValueError:
