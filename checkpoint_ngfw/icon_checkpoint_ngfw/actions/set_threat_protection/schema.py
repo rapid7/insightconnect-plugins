@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Set threat protection"
+    DESCRIPTION = "Set threat protection action per profile"
 
 
 class Input:
@@ -47,13 +47,13 @@ class SetThreatProtectionInput(komand.Input):
     "name": {
       "type": "string",
       "title": "Name",
-      "description": "Name",
+      "description": "Name of the protection to act on. e.g. Blaster Attacks",
       "order": 1
     },
     "profile": {
       "type": "string",
       "title": "Profile",
-      "description": "Profile",
+      "description": "Profile e.g. Optimized, Basic, Strict",
       "default": "Optimized",
       "order": 3
     }

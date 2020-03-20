@@ -694,11 +694,11 @@ actions:
 
   set_threat_protection:
     title: Set Threat Protection
-    description: Set threat protection
+    description: Set threat protection action per profile
     input:
       name:
         title: Name
-        description: Name
+        description: Name of the protection to act on. e.g. Blaster Attacks
         required: true
         type: string
         order: 1
@@ -716,7 +716,7 @@ actions:
           - Accept
       profile:
         title: Profile
-        description: Profile
+        description: Profile e.g. Optimized, Basic, Strict
         required: true
         type: string
         default: Optimized

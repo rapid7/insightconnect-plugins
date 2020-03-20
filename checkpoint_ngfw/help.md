@@ -42,8 +42,8 @@ This action is used to set Threat Protection.
 |----|----|-------|--------|-----------|----|
 |action|string|None|True|Action|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|name|string|None|True|Name|None|
-|profile|string|Optimized|True|Profile|None|
+|name|string|None|True|Name of the protection to act on. e.g. Blaster Attacks|None|
+|profile|string|Optimized|True|Profile e.g. Optimized, Basic, Strict|None|
 
 ##### Output
 
