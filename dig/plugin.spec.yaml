@@ -4,7 +4,7 @@ products: [insightconnect]
 name: dig
 title: Dig
 description: Dig is used for forward and reverse DNS lookups
-version: 1.0.3
+version: 1.0.4
 vendor: rapid7
 support: community
 status: []
@@ -27,10 +27,12 @@ actions:
         type: string
         description: Domain name to resolve
         required: true
+        example: rapid7.com
       resolver:
         type: string
         description: Resolver. Leave blank to use default resolver for the system
         required: false
+        example: 8.8.8.8
       query:
         type: string
         description: Query type e.g. ANY, A, MX, NS, etc
@@ -44,6 +46,7 @@ actions:
         - PTR
         - SOA
         required: true
+        example: MX
     output:
       fulloutput:
         description: Full Dig output
@@ -89,10 +92,12 @@ actions:
         type: string
         description: Resolver. Leave blank to use default resolver for the system
         required: false
+        example: 8.8.8.8
       address:
         type: string
         description: Internet address to resolve
         required: true
+        example: 1.2.3.4
     output:
       fulloutput:
         description: Full Dig output
