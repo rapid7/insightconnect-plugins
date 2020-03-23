@@ -457,18 +457,21 @@ connection:
     type: string
     title: Server IP Address
     description: Server IP address
+    example: 198.168.2.1
     required: true
   port:
     type: integer
     title: Server Port
     description: Server port
     required: true
+    example: 443
     default: 443
   ssl_verify:
     type: boolean
     title: SSL Verify
     description: Use SSL verification
     required: true
+    example: True
     default: true
 
 actions:
@@ -481,12 +484,14 @@ actions:
         description: Layer name
         type: string
         default: Network
+        example: Network
         required: true
       limit:
         title: Limit
         description: Limit
         type: integer
         default: 500
+        example: 500
         required: false
     output:
       access_rules:
@@ -504,11 +509,13 @@ actions:
         type: string
         description: Rule name
         required: true
+        example: Malicious IP Addresses
         order: 1
       list_of_services:
         title: List of Services
         type: "[]string"
         description: List of services to block e.g. ["AOL", "SMTP"]
+        example: ["AOL", "SMTP"]
         required: false
         order: 2
       layer:
@@ -516,18 +523,21 @@ actions:
         type: string
         description: Layer to add this rule to
         required: true
-        default: "Network"
+        default: Network
+        example: Network
         order: 3
       source:
         title: Source
         description: Source network object name
         type: string
+        example: 192.168.2.1
         required: false
         order: 4
       destination:
         title: Destination
         description: Destination network object name
         type: string
+        example: 192.168.2.1
         required: false
         order: 5
       action:
@@ -536,6 +546,7 @@ actions:
         description: Action to take
         required: true
         default: Drop
+        example: Drop
         order: 6
         enum:
           - Accept
@@ -552,6 +563,7 @@ actions:
         description: Position in the list of rules. e.g. top, bottom, 15
         required: true
         default: "top"
+        example: 1
         order: 7
       discard_other_sessions:
         title: Discard Other Sessions
@@ -559,6 +571,7 @@ actions:
         description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
         required: true
         default: true
+        example: true
         order: 8
     output:
       access_rule:
@@ -576,12 +589,14 @@ actions:
         description: Access rule name
         type: string
         required: true
+        example: InsightConnect Access Rule
         order: 1
       layer:
         title: Layer
         description: Layer
         type: string
-        default: "Network"
+        default: Network
+        example: Network
         required: true
         order: 2
       discard_other_sessions:
@@ -590,6 +605,7 @@ actions:
         description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
         required: true
         default: true
+        example: true
         order: 3
     output:
       message:
@@ -612,12 +628,14 @@ actions:
         description: Name
         type: string
         required: true
+        example: 192.168.2.1
         order: 1
       host_ip:
         title: Host IP Address
         description: Host IP address
         type: string
         required: true
+        example: 192.168.2.1
         order: 2
       discard_other_sessions:
         title: Discard Other Sessions
@@ -625,6 +643,7 @@ actions:
         description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
         required: true
         default: true
+        example: true
         order: 3
     output:
       host_object:
@@ -642,6 +661,7 @@ actions:
         description: Name
         type: string
         required: true
+        example: 192.168.2.1
         order: 1
       discard_other_sessions:
         title: Discard Other Sessions
@@ -649,6 +669,7 @@ actions:
         description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
         required: true
         default: true
+        example: true
         order: 3
     output:
       message:
@@ -699,6 +720,7 @@ actions:
       name:
         title: Name
         description: Name of the protection to act on. e.g. Blaster Attacks
+        example: Blaster Attacks
         required: true
         type: string
         order: 1
@@ -706,6 +728,7 @@ actions:
         title: Action
         description: Action
         required: true
+        example: Prevent
         type: string
         order: 2
         enum:
@@ -717,6 +740,7 @@ actions:
       profile:
         title: Profile
         description: Profile e.g. Optimized, Basic, Strict
+        example: Optimized
         required: true
         type: string
         default: Optimized
@@ -725,6 +749,7 @@ actions:
         title: Discard Other Sessions
         type: boolean
         description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        example: true
         required: true
         default: true
         order: 4
