@@ -4,12 +4,13 @@ Source: https://github.com/hpsec/cefp/blob/master/contrib/python/cefp.py
 Notes: Modified to work with python 3
 '''
 
-import json
 import re
+from komand.exceptions import PluginException
 
 cef_key_re = re.compile(r' ([\w.-]+?)=')
 cef_first_key_re = re.compile(r'([\w.-]+?)=')
 cef_pipe_re = re.compile(r'\\*?\|')
+
 
 def parse_cef(s):
     d = dict()
@@ -17,20 +18,20 @@ def parse_cef(s):
     field_start = 0
     for match in cef_pipe_re.finditer(s):
         start, end = match.span()
-        if (end-start) % 2 == 0:
+        if (end - start) % 2 == 0:
             # There are an odd number of backslashes, so the pipe is escaped.
             # A negative lookbehind may be a better way to do this.
             continue
-        field = s[field_start:end-1]
-        fields.append(field.replace('\\|','|').replace('\\\\','\\'))
+        field = s[field_start:end - 1]
+        fields.append(field.replace('\\|', '|').replace('\\\\', '\\'))
         field_start = end
         if len(fields) == 7:
             break
     else:
-        raise ValueError('CEF string does not have enough pipe characters')
+        raise PluginException(cause='Wrong value', assistance='CEF string does not have enough pipe characters')
 
     if 'CEF:0' not in fields[0]:
-        raise ValueError('CEF string is missing CEF:0 header')
+        raise PluginException(cause='Wrong value', assistance='CEF string is missing CEF:0 header')
 
     d['device_vendor'] = fields[1]
     d['device_product'] = fields[2]
@@ -41,12 +42,13 @@ def parse_cef(s):
 
     parse_cef_extension(d, s[field_start:])
     if '_cefVer' not in d:
-        raise ValueError('CEF string is missing _cefVer')
+        raise PluginException(cause='Wrong value', assistance='CEF string is missing _cefVer')
 
     # swap _cefVer to version
     d['version'] = d['_cefVer']
     d.pop('_cefVer', None)
     return d
+
 
 def parse_cef_extension(d, s):
     last_start = len(s)
@@ -66,46 +68,41 @@ def parse_cef_extension(d, s):
         d[match.group(1)] = unescape_cef_value(s[match.end():last_start])
     return d
 
+
 def unescape_cef_value(s):
-    s = s.replace('\\r','\r').replace('\\n', '\n')
-    return s.replace('\\=','=').replace('\\\\', '\\')
+    s = s.replace('\\r', '\r').replace('\\n', '\n')
+    return s.replace('\\=', '=').replace('\\\\', '\\')
 
-def cef_to_json(line):
-    return json.dumps(parse_cef(line))
-
-def json_to_cef(line):
-    return item_as_cef(json.loads(line))
 
 def obj_to_cef(item):
-    HEADER_KEYS = ['device_vendor', 'device_product', 'device_version',
-                   'signature_id', 'name', 'severity']
+    HEADER_KEYS = [
+        'device_vendor',
+        'device_product',
+        'device_version',
+        'signature_id',
+        'name',
+        'severity'
+    ]
     header = ['' for _ in HEADER_KEYS]
     extension = {}
-    for key,value in item.items():
+    for key, value in item.items():
         if key in HEADER_KEYS:
-            esc = value.replace('\\','\\\\').replace('|','\\|')
+            esc = value.replace('\\', '\\\\').replace('|', '\\|')
             header[HEADER_KEYS.index(key)] = esc.encode('utf-8')
-        elif key in ['_cefVer','version']:
+        elif key in ['_cefVer', 'version']:
             continue
         else:
-            # this check and conversion is needed for python 3 unfortunately
-            # http://www.rfk.id.au/blog/entry/preparing-pyenchant-for-python-3/
-            try:
-                unicode = unicode
-            except NameError:
-                # 'unicode' is undefined, must be Python 3
-                basestring = (str,bytes)
-
-            if isinstance(value,basestring):
-                value = value.replace('\\','\\\\').replace('=','\\=')
-                value = value.replace('\r','\\r').replace('\n','\\n')
+            basestring = (str, bytes)
+            if isinstance(value, basestring):
+                value = value.replace('\\', '\\\\').replace('=', '\\=')
+                value = value.replace('\r', '\\r').replace('\n', '\\n')
                 extension[key] = value.encode('utf-8')
             else:
                 extension[key] = str(value)
 
-    header_str = '|'.join(map(bytes.decode,header))
+    header_str = '|'.join(map(bytes.decode, header))
     extension_str = ' '.join(
-        '{}={}'.format(key,bytes.decode(value))
-        for key,value in extension.items()
+        f'{key}={bytes.decode(value)}'
+        for key, value in extension.items()
     )
-    return 'CEF:0|{}|{} _cefVer=0.1\n'.format(header_str,extension_str)
+    return f'CEF:0|{header_str}|{extension_str} _cefVer=0.1\n'
