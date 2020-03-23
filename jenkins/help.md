@@ -82,7 +82,7 @@ Example input:
 
 ```
 {
-  "build number": 515
+  "build_number": 515
   "name": "moose-build",
 }
 ```
