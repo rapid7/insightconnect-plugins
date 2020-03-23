@@ -20,7 +20,3 @@ class BuildJob(komand.Action):
         build_number = self.connection.server.get_job_info(name)['lastCompletedBuild']['number']
 
         return {'job_number': job_number, 'build_number': build_number}
-
-    def test(self):
-        user = self.connection.server.get_whoami()
-        return {'user': user}

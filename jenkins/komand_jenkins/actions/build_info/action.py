@@ -30,7 +30,3 @@ class BuildInfo(komand.Action):
                             " Check the error log for more information")
 
         return {'build_info': build_info}
-
-    def test(self):
-        user = self.connection.server.get_whoami()
-        return {'user': user}

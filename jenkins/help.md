@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |credentials|credential_username_password|None|True|Username and password|None|
-|host|string|None|True|Jenkins server URL|None|
+|host|string|None|True|Jenkins' server URL|None|
 
 ## Technical Details
 
@@ -36,14 +36,26 @@ This action is used to start a build job.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|name|string|None|True|Name of job|None|
-|parameters|string|None|False|Dictionary of job parameters|None|
+|name|string|None|True|Job name|None|
+|parameters|object|None|False|Dictionary of job parameters|None|
+
+Example input:
+
+```
+{
+  "name": "moose-build",
+  "parameters": {
+    "simulate_build": false
+  }
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|job_number|integer|False|queue item|
+|build_number|integer|False|Build number|
+|job_number|integer|False|Item queue ID|
 
 Example output:
 
@@ -63,8 +75,17 @@ This action is used to return detailed information on a build.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|build number|integer|None|True|The build number you want detailed information on|None|
 |name|string|None|True|Job name|None|
-|Build number|integer|None|True|The build number you want detailed information on|None|
+
+Example input:
+
+```
+{
+  "build number": 515
+  "name": "moose-build",
+}
+```
 
 ##### Output
 
@@ -283,6 +304,7 @@ e.g. `{"mykeyone": false, "mykeytwo": "mystring", "mykeythree": 27}`
 
 # Version History
 
+* 1.1.2 - Update connection test
 * 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Add build info action
 * 1.0.0 - Initial plugin

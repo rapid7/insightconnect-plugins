@@ -17,3 +17,8 @@ class Connection(komand.Connection):
         self.logger.info("Connect: Connecting...")
 
         self.server = jenkins.Jenkins(host, username=username, password=password)
+
+    def test(self):
+        user = self.server.get_whoami()
+        return {'user': user}
+
