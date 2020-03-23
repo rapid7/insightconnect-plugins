@@ -34,7 +34,7 @@ The connection configuration accepts the following parameters:
 
 #### Set Threat Protection
 
-This action is used to set Threat Protection.
+This action is used to set a threat protection action.
 
 ##### Input
 
