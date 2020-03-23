@@ -23,7 +23,7 @@ class ConnectionSchema(komand.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "Jenkins' server URL",
+      "description": "Jenkins server URL",
       "order": 1
     }
   },

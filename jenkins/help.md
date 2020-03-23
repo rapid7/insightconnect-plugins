@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |credentials|credential_username_password|None|True|Username and password|None|
-|host|string|None|True|Jenkins' server URL|None|
+|host|string|None|True|Jenkins server URL|None|
 
 ## Technical Details
 
