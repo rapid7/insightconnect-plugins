@@ -1,6 +1,6 @@
 {
-	"spec": "366620adfb94f58929eb18f97f8cf7c1",
-	"manifest": "0e828b8f2fd7480e529461a9d3d2e23c",
+	"spec": "a2890f2539f1ba5c5c75e1c75af1c98f",
+	"manifest": "9d5e86171bf463fd947696ff3147af40",
 	"setup": "e5c232d3d47197fdcdf967399197c0e0",
 	"schemas": [
 		{
@@ -28,12 +28,16 @@
 			"hash": "abbc51146a4b78255550ee1a28b06cc8"
 		},
 		{
+			"identifier": "set_threat_protection/schema.py",
+			"hash": "2dba1cc531d57a16b84eca6eff809871"
+		},
+		{
 			"identifier": "show_access_rulebase/schema.py",
 			"hash": "9a2929ef259b5b0f24d236204adda94c"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "04af62ba62607f01c8f1467dc6ef4ba6"
+			"hash": "2a3ed5de14d6585f732847de9f3644f3"
 		}
 	]
 }
