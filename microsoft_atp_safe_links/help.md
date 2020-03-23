@@ -34,6 +34,7 @@ This action decodes a Microsoft Safe Link.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|decoded|boolean|True|Whether or not we were able to decode the URL|
 |result|string|True|Result of the decoded Safe Link|
 
 Example output:
