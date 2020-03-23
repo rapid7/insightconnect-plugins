@@ -471,7 +471,7 @@ connection:
     title: SSL Verify
     description: Use SSL verification
     required: true
-    example: True
+    example: true
     default: true
 
 actions:
