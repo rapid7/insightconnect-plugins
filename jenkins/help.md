@@ -75,7 +75,7 @@ This action is used to return detailed information on a build.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|build number|integer|None|True|The build number you want detailed information on|None|
+|build_number|integer|None|True|The build number you want detailed information on|None|
 |name|string|None|True|Job name|None|
 
 Example input:
@@ -100,13 +100,13 @@ Example output:
 {
   "build_info": {
     "building": false,
-    "full_display_name": "example-komand-plugins-master #529",
+    "full_display_name": "moose-build #529",
     "keep_log": false,
     "number": 529,
     "queue_id": 4423,
     "result": "SUCCESS",
     "timestamp": 1533096110941,
-    "url": "https://example.com/job/example-komand-plugins-master/529/",
+    "url": "https://example.com/job/moose-build/529/",
     "built_on": "jenkins.example.com",
     "items": [
       {
@@ -134,10 +134,10 @@ Example output:
         "commitId": "5a1b5315634dfac220b0b9843d02db3f8fead210",
         "timestamp": 1524589889000,
         "author": {
-          "absoluteUrl": "https://jenkins.example.com/user/mbroomfield",
-          "fullName": "Matt Broomfield"
+          "absoluteUrl": "https://jenkins.example.com/user/example",
+          "fullName": "John Doe"
         },
-        "authorEmail": "mbroomfield@example.com",
+        "authorEmail": "user@example.com",
         "comment": "Update pork_knocker to v2 Python plugin architecture\n",
         "date": "2018-04-24 13:11:29 -0400",
         "id": "5a1b5315634dfac220b0b9843d02db3f8fead210",
@@ -225,10 +225,10 @@ Example output:
         "commitId": "6915b6023f84ea17c15c677262f47eb640686248",
         "timestamp": 1525360320000,
         "author": {
-          "absoluteUrl": "https://jenkins.example.com/user/mbroomfield",
-          "fullName": "Matt Broomfield"
+          "absoluteUrl": "https://jenkins.example.com/user/example",
+          "fullName": "John Doe"
         },
-        "authorEmail": "mbroomfield@example.com",
+        "authorEmail": "user@example.com",
         "comment": "Auto formatting plugin.spec.yaml\n",
         "date": "2018-05-03 11:12:00 -0400",
         "id": "6915b6023f84ea17c15c677262f47eb640686248",
@@ -252,10 +252,10 @@ Example output:
         "commitId": "aae7faa0389dbc3a461aedf0324913dba34a748a",
         "timestamp": 1533095364000,
         "author": {
-          "absoluteUrl": "https://jenkins.example.com/user/mrinehart",
-          "fullName": "Mike Rinehart"
+          "absoluteUrl": "https://jenkins.example.com/user/example",
+          "fullName": "John Doe"
         }a
-        "authorEmail": "bob_ross@example.com",
+        "authorEmail": "user@example.com",
         "comment": "Update to v2\n",
         "date": "2018-07-31 22:49:24 -0500",
         "id": "aae7faa0389dbc3a461aedf0324913dba34a748a",

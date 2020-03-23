@@ -109,7 +109,7 @@ actions:
         description: Job name
         type: string
         required: true
-      build number:
+      build_number:
         title: Build Number
         description: The build number you want detailed information on
         type: integer

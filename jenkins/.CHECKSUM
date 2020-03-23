@@ -1,11 +1,11 @@
 {
-	"spec": "5bba3d4a92cd02458ef86c04a7cdb75d",
+	"spec": "b27704eaf1077aaaa03ffb0f5d900fc6",
 	"manifest": "fa654e0a955fd29eddf43b42ddbf06a9",
 	"setup": "31885e5ae3b803fb0f957910d8f5f75e",
 	"schemas": [
 		{
 			"identifier": "build_info/schema.py",
-			"hash": "07ecfd9c5edacd1f61f5c1c1e4571d4d"
+			"hash": "9f11bd51cc0b4d8bada1130169ae40a5"
 		},
 		{
 			"identifier": "build_job/schema.py",

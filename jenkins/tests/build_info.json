@@ -3,14 +3,14 @@
         "action": "build_info",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "admin",
+                "username": "admin"
             },
-            "host": null
+            "host": "0.0.0.0:8080"
         },
         "input": {
-            "build number": 529,
-            "name": ""
+            "build number": 1,
+            "name": "balh"
         },
         "meta": {}
     },
