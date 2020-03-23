@@ -4,10 +4,17 @@ import komand
 from komand_microsoft_atp_safe_links import connection, actions, triggers
 
 
+<<<<<<< HEAD
 Name = "Microsoft Office 365 ATP Safe Links"
 Vendor = "rapid7"
 Version = "1.0.3"
 Description = "Helps protect your organization by providing time-of-click verification of web addresses (URLs) in email messages and Office documents"
+=======
+Name = 'Microsoft Office 365 ATP Safe Links'
+Vendor = 'rapid7'
+Version = '1.0.3'
+Description = 'Helps protect your organization by providing time-of-click verification of web addresses (URLs) in email messages and Office documents'
+>>>>>>> e167ea685a3a2ac92a18174064341a0c357a18ce
 
 
 class ICONMicrosoftAtpSafeLinks(komand.Plugin):

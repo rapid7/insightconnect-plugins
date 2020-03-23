@@ -38,3 +38,8 @@ actions:
         description: Result of the decoded Safe Link
         type: string
         required: true
+      decoded:
+        title: Decoded
+        description: Whether or not we were able to decode the URL
+        type: boolean
+        required: true

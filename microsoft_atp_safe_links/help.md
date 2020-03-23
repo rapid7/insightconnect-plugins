@@ -34,6 +34,7 @@ This action decodes a Microsoft Safe Link.
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|decoded|boolean|True|Whether or not we were able to decode the URL|
 |result|string|True|Result of the decoded Safe Link|
 
 Example output:
@@ -68,7 +69,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.3 - Fixed issue where certain non-safelinks returned a blank string
+* 1.0.3 - Fixed issue where embedded URLs returned blank string
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Fixed issue where non-safelinks returned a blank string
 * 1.0.0 - Initial plugin
