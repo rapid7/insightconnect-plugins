@@ -32,6 +32,44 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Set Threat Protection
+
+This action is used to set a threat protection action.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|action|string|None|True|Action|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
+|name|string|None|True|Name of the protection to act on. e.g. Blaster Attacks|None|
+|profile|string|Optimized|True|Profile e.g. Optimized, Basic, Strict|None|
+
+Example input:
+
+```
+{
+  "action": "Prevent",
+  "discard_other_sessions": true,
+  "name": "Alt-N Technologies SecurityGateway Username Buffer Overflow",
+  "profile": "Optimized"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Add Host to Network Group
 
 This action is used to add a host to a network group.
@@ -43,6 +81,16 @@ This action is used to add a host to a network group.
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
 |group_name|string|None|True|Name of the group to add this object to|None|
 |host_name|string|None|True|The host to add to the network group, usually the IP address|None|
+
+Example input:
+
+```
+{
+  "discard_other_sessions": false,
+  "group_name": "Test Group",
+  "host_name": "192.168.5.1"
+}
+```
 
 ##### Output
 
@@ -66,6 +114,11 @@ issue where objects remain locked after editing.
 ##### Input
 
 _This action does not contain any inputs._
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -91,6 +144,15 @@ This action is used to remove a host from network objects.
 |----|----|-------|--------|-----------|----|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
 |name|string|None|True|Name|None|
+
+Example input:
+
+```
+{
+  "discard_other_sessions": true,
+  "name": "192.1.2.1"
+}
+```
 
 ##### Output
 
@@ -119,6 +181,16 @@ This action is used to add a host as a network object.
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
 |host_ip|string|None|True|Host IP address|None|
 |name|string|None|True|Name|None|
+
+Example input:
+
+```
+{
+  "discard_other_sessions": true,
+  "host_ip": "192.168.5.1",
+  "name": "192.168.5.1"
+}
+```
 
 ##### Output
 
@@ -180,6 +252,16 @@ This action is used to remove an access rule.
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
 |layer|string|Network|True|Layer|None|
 
+Example input:
+
+```
+{
+  "access_rule_name": "Test from InsightConnect",
+  "discard_other_sessions": true,
+  "layer": "Network"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -206,6 +288,15 @@ This action is used to show the access rulebase.
 |----|----|-------|--------|-----------|----|
 |layer_name|string|Network|True|Layer name|None|
 |limit|integer|500|False|Limit|None|
+
+Example input:
+
+```
+{
+  "layer_name": "Network",
+  "limit": 500
+}
+```
 
 ##### Output
 
@@ -417,6 +508,19 @@ This action is used to create a rule to block traffic.
 |name|string|None|True|Rule name|None|
 |position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|None|
 |source|string|None|False|Source network object name|None|
+
+Example input:
+
+```
+{
+  "action": "Drop",
+  "discard_other_sessions": true,
+  "layer": "Network",
+  "name": "Test from Komand",
+  "position": "top",
+  "source": "192.1.2.1"
+}
+```
 
 ##### Output
 
