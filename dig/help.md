@@ -85,7 +85,6 @@ Example output:
 }
 ```
 
-
 On failure, the raw output will look like the following:
 
 ```
@@ -99,7 +98,6 @@ On failure, the raw output will look like the following:
 },
 
 ```
-
 
 #### Reverse Lookup
 
