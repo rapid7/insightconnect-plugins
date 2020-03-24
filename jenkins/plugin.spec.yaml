@@ -69,6 +69,7 @@ connection:
     description: Jenkins server URL
     type: string
     required: true
+    example: http://jenkinsserver.com
   credentials:
     title: Credentials
     description: Username and password
@@ -84,11 +85,13 @@ actions:
         description: Job name
         type: string
         required: true
+        example: 515
       parameters:
         title: Parameters
         description: Dictionary of job parameters
         type: object
         required: false
+        example: { \"simulate_build\": false }
     output:
       job_number:
         title: Job Number
@@ -109,11 +112,13 @@ actions:
         description: Job name
         type: string
         required: true
+        example: moose-build
       build_number:
         title: Build Number
         description: The build number you want detailed information on
         type: integer
         required: true
+        example: 4101
     output:
       build_info:
         title: Build Info
