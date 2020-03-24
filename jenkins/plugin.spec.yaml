@@ -69,7 +69,6 @@ connection:
     description: Jenkins server URL
     type: string
     required: true
-    example: http://jenkinsserver.com
   credentials:
     title: Credentials
     description: Username and password
