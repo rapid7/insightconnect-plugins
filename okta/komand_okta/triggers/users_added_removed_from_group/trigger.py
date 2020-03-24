@@ -37,8 +37,8 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 error_code = data["errorCode"]
                 error_summary = data["errorSummary"]
                 error_causes = data["errorCauses"]
-                raise PluginException(cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}",
-                                      assistance=f"Summary {error_summary}. Possible causes {error_causes}.",
+                raise PluginException(cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}.",
+                                      assistance=f"Summary: {error_summary}. Possible causes: {error_causes}.",
                                       data=response.text)
             data = komand.helper.clean(data)
             current_list.append({group: data})
@@ -56,8 +56,8 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 error_code = data["errorCode"]
                 error_summary = data["errorSummary"]
                 error_causes = data["errorCauses"]
-                raise PluginException(cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}",
-                                      assistance=f"Summary {error_summary}. Possible causes {error_causes}.",
+                raise PluginException(cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}.",
+                                      assistance=f"Summary: {error_summary}. Possible causes: {error_causes}.",
                                       data=response.text)
             group_names.append(data["profile"]["name"])
 
@@ -79,8 +79,8 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                     error_summary = data["errorSummary"]
                     error_causes = data["errorCauses"]
                     raise PluginException(
-                        cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}",
-                        assistance=f"Summary {error_summary}. Possible causes {error_causes}.",
+                        cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}.",
+                        assistance=f"Summary: {error_summary}. Possible causes: {error_causes}.",
                         data=response.text)
                 data = komand.helper.clean(data)
                 new_list.append({group: data})
