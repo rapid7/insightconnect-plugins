@@ -1,7 +1,8 @@
 import urllib.parse
+from requests import Response
 import requests
 from komand.exceptions import PluginException
-
+import json
 
 def group_response(response, user_id):
     try:
@@ -33,11 +34,19 @@ def get_user_id(email, connection, logger):
     return data['id']
 
 
-def raise_based_on_error_code(response):
-    error_code = response["errorCode"]
-    error_summary = response["errorSummary"]
-    error_causes = response["errorCauses"]
-    raise PluginException(
-        cause=f"Okta returned a {response.status_code} status code, and an error code of {error_code}.",
-        assistance=f"Summary: {error_summary}. Possible causes: {error_causes}.",
-        data=response.text)
+def raise_based_on_error_code(response: Response):
+    """
+    Takes a requests Response check to see if it is not a 200 and then raises an exception to deal with it
+    """
+    if response.status_code not in range(200, 299):
+        # Valid JSON should be checked in the main code body
+        data = response.json()
+        # error response format is:
+        # {"errorCode":"code","errorSummary":"summary","errorLink":"link","errorId":"id","errorCauses":[list of causes]}
+        error_code = data["errorCode"]
+        error_summary = data["errorSummary"]
+        error_causes = data["errorCauses"]
+        raise PluginException(
+            cause=f"Okta returned a {response.status_code} status code, and an error code of {error_code}.",
+            assistance=f"Summary: {error_summary}. Possible causes: {error_causes}.",
+            data=response.text)

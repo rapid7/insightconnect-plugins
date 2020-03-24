@@ -34,8 +34,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 raise PluginException(cause='Returned data was not in JSON format.',
                                       assistance="Double-check that group ID's are all valid.",
                                       data=response.text)
-            if response.status_code not in range(200, 299):
-                helpers.raise_based_on_error_code(data)
+            helpers.raise_based_on_error_code(response)
             data = komand.helper.clean(data)
             current_list.append({group: data})
 
@@ -48,8 +47,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 raise PluginException(cause='Returned data was not in JSON format.',
                                       assistance="Double check that group ID's are all valid.",
                                       data=response.text)
-            if response.status_code not in range(200, 299):
-                helpers.raise_based_on_error_code(data)
+            helpers.raise_based_on_error_code(response)
             group_names.append(data["profile"]["name"])
 
         while True:
@@ -65,8 +63,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                     raise PluginException(cause='Returned data was not in JSON format.',
                                           assistance="Double check that group ID's are all valid.",
                                           data=response.text)
-                if response.status_code not in range(200, 299):
-                    helpers.raise_based_on_error_code(data)
+                helpers.raise_based_on_error_code(response)
                 data = komand.helper.clean(data)
                 new_list.append({group: data})
 
