@@ -3,9 +3,9 @@
         "action": "list_groups",
         "connection": {
             "okta_key": {
-                "secretKey": null
+                "secretKey": ""
             },
-            "okta_url": null
+            "okta_url": ""
         },
         "input": {
             "query": ""
