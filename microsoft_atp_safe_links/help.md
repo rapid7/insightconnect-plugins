@@ -22,7 +22,7 @@ _This plugin does not contain a connection._
 
 #### Decode Safe Links
 
-This action decodes a Microsoft Safe Link.
+This action is used to decode a Microsoft Safe Link.
 
 ##### Input
 
@@ -33,6 +33,9 @@ This action decodes a Microsoft Safe Link.
 Example input:
 
 ```
+{
+  "url": "https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Faomediacodec.github.io%2Fav1-spec%2Fav1-spec.pdf&data=04%7C01%7Cgfrost%40microsoft.com%7Cc01143f4353e426231d508d590e3a9c1%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C1%7C636574229902920663%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwifQ%3D%3D%7C-1&sdata=lLQibtMygoLH30UNXZcUZGAA1i%2FqNE%2Ff6fgotaX3uhI%3D&reserved=0"
+}
 ```
 
 ##### Output
@@ -49,16 +52,6 @@ Example output:
   "result": "https://aomediacodec.github.io/av1-spec/av1-spec.pdf"
 }
 ```
-
-#### Decode Safe Links
-
-This action is used to decode a Microsoft Safe Link.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|Safe Link to be decoded|None|
 
 ### Triggers
 
