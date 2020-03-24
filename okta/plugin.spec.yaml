@@ -180,6 +180,7 @@ triggers:
         type: integer
         required: true
         default: 300
+        example: 100
     output:
       users_added_from_groups:
         title: Additions
