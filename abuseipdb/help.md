@@ -222,6 +222,7 @@ This action is used to list of blacklisted IP addresses.
 Example output:
 
 ```
+{
   "blacklist": [
     {
       "ipAddress": "5.188.10.179",
@@ -237,6 +238,7 @@ Example output:
     }
   ],
   "success": true
+}
 ```
 
 If AbuseIPD fails to return the Blacklist, success will be set to false.
