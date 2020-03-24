@@ -56,7 +56,7 @@ types:
       description: URL for more information on the build
       type: string
     built_on:
-      title: ' Built On'
+      title: 'Built On'
       description: The server the build occurred on
       type: string
     items:

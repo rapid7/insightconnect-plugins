@@ -72,7 +72,7 @@ class BuildInfoOutput(komand.Output):
         },
         "built_on": {
           "type": "string",
-          "title": " Built On",
+          "title": "Built On",
           "description": "The server the build occurred on",
           "order": 9
         },
