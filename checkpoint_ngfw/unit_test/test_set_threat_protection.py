@@ -4,22 +4,35 @@ sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from icon_checkpoint_ngfw.connection.connection import Connection
-from icon_checkpoint_ngfw.actions.add_host_to_network_group import AddHostToNetworkGroup
+from icon_checkpoint_ngfw.actions.set_threat_protection import SetThreatProtection
 import json
 import logging
 
 
-class TestAddHostToNetworkGroup(TestCase):
-    def test_integration_add_host_to_network_group(self):
+class TestSetThreatProtection(TestCase):
+    def test_integration_set_threat_protection(self):
+        """
+        TODO: Implement assertions at the end of this test case
+
+        This is an integration test that will connect to the services your plugin uses. It should be used
+        as the basis for tests below that can run independent of a "live" connection.
+
+        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
+        be json samples that contain all the data needed to run this test. To generate samples run:
+
+        icon-plugin generate samples
+
+        """
+
         log = logging.getLogger("Test")
         test_conn = Connection()
-        test_action = AddHostToNetworkGroup()
+        test_action = SetThreatProtection()
 
         test_conn.logger = log
         test_action.logger = log
 
         try:
-            with open("../tests/add_host_to_network_group.json") as file:
+            with open("../tests/set_threat_protection.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
@@ -38,3 +51,4 @@ class TestAddHostToNetworkGroup(TestCase):
         results = test_action.run(action_params)
 
         self.assertEquals({"success": True}, results)
+

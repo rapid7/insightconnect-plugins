@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="dig-rapid7-plugin",
-      version="1.0.3",
+      version="1.0.4",
       description="Dig is used for forward and reverse DNS lookups",
       author="rapid7",
       author_email="",
