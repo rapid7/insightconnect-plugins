@@ -46,7 +46,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             group_name_api = f"{okta_url}/api/v1/groups/{group}"
             response = self.connection.session.get(group_name_api)
             if response.status_code in range(400, 499):
-                raise PluginException(cause="Okta returned a 4xx status code",
+                raise PluginException(cause="Okta returned a 4xx status code.",
                                       assistance="Ensure that the secretKey key is both valid and correct",
                                       data=response.text)
             if response.status_code in range(500, 599):
