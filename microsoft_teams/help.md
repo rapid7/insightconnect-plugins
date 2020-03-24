@@ -515,7 +515,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Fix issue where send message would not work if there were too many teams. Removed regex capability for team and channel inputs on most actions. This will speed up 'Send Message' and 'Send HTML Message' 
+* 2.0.0 - Fix issue where send message would not work if there were too many teams | Removed regex capability for team and channel inputs which will speed up Send Message and Send HTML Message actions
 * 1.3.0 - New action Send Message by GUID
 * 1.2.3 - New spec and help.md format for the Hub
 * 1.2.2 - Fix issue where regular expressions would only match at the beginning of a string
