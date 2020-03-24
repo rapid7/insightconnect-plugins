@@ -145,7 +145,7 @@ types:
       type: credentials_input
     links:
       type: _links
-  trigger_type:
+  user_groups:
     group_name:
       type: string
     group_id:
@@ -184,12 +184,12 @@ triggers:
       users_added_from_groups:
         title: Additions
         description: Users added to a group since the last check
-        type: "[]trigger_type"
+        type: "[]user_groups"
         required: false
       users_removed_from_groups:
         title: Removals
         description: Users removed from a group since the last check
-        type: "[]trigger_type"
+        type: "[]user_groups"
         required: false
 actions:
   get_factors:
