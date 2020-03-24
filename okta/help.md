@@ -37,6 +37,11 @@ This action returns an object containing all of a user's factors for MFA.
 |----|----|-------|--------|-----------|----|
 |user_id|string|None|True|User ID to get factors for|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -114,6 +119,11 @@ This action pushes a MFA challenge to a user's device and waits for a success or
 |factor_id|string|None|True|Factor ID of the user to push verification to|None|
 |user_id|string|None|True|User ID to push verification to|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -139,6 +149,11 @@ as a whole.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|The email of the employee to suspend|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -175,6 +190,11 @@ This action is used to reset all multifactors for a user by email.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|The email of the employee to reset factors|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -216,6 +236,11 @@ the API returning a successful result and the actual deactivation / deprovisioni
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|The email of the employee to deactivate|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -253,6 +278,11 @@ This action is used to delete a user. If a user is not deprovisioned, this will 
 |send_admin_email|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false|None|
 |user_email|string|None|True|The email of the user to delete|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -276,6 +306,11 @@ This action is used to unsuspend a user.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|The email of the Okta user|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -312,6 +347,11 @@ This action is used to obtain information about a user.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |email|string|None|True|The email of the user to obtain information about|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -421,6 +461,11 @@ This action is used to remove a user from an existing group.
 |email|string|None|True|The email of the Okta user|None|
 |group_id|string|None|True|The ID of the group to which the user should be added|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -448,6 +493,11 @@ This action is used to add a user to an existing group.
 |email|string|None|True|The email of the Okta user|None|
 |group_id|string|None|True|The ID of the group to which the user should be added|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -473,6 +523,11 @@ This action is used to list available groups.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |query|string|None|False|Query to list groups, otherwise all groups will be returned|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -595,6 +650,11 @@ This action will attempt to prevent that be removing the entire input if it dete
 |nextLogin|boolean|None|True|Change password next time the user logs in|None|
 |profile|object|None|True|Profile properties for user|None|
 |provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 

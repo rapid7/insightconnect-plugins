@@ -15,6 +15,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 input=UsersAddedRemovedFromGroupInput(),
                 output=UsersAddedRemovedFromGroupOutput())
 
+
     def run(self, params={}):
         """Run the trigger"""
         group_list = params.get(Input.GROUP_IDS)
@@ -25,39 +26,38 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             api = f"{okta_url}/api/v1/groups/{group}/users"
             # Build a reference list to check for updates against
             response = self.connection.session.get(api)
-            if response.status_code in range(400, 499):
-                raise PluginException(cause="Okta returned a 4xx status code.",
-                                      assistance="Ensure that the secretKey key is both valid and correct.",
-                                      data=response.text)
-            if response.status_code in range(500, 599):
-                raise PluginException(cause="Okta returned a 5xx status code.",
-                                      assistance="Ensure that the Okta URL key is correct.",
-                                      data=response.text)
+
             try:
                 data = response.json()
-                data = komand.helper.clean(data)
             except ValueError:
                 raise PluginException(cause='Returned data was not in JSON format.',
                                       assistance="Double-check that group ID's are all valid.",
                                       data=response.text)
+            if response.status_code not in range(200, 299):
+                error_code = data["errorCode"]
+                error_summary = data["errorSummary"]
+                error_causes = data["errorCauses"]
+                raise PluginException(cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}",
+                                      assistance=f"Summary {error_summary}. Possible causes {error_causes}.",
+                                      data=response.text)
+            data = komand.helper.clean(data)
             current_list.append({group: data})
 
             # Get group names
             group_name_api = f"{okta_url}/api/v1/groups/{group}"
             response = self.connection.session.get(group_name_api)
-            if response.status_code in range(400, 499):
-                raise PluginException(cause="Okta returned a 4xx status code.",
-                                      assistance="Ensure that the secretKey key is both valid and correct.",
-                                      data=response.text)
-            if response.status_code in range(500, 599):
-                raise PluginException(cause="Okta returned a 5xx status code.",
-                                      assistance="Ensure that the Okta URL key is correct.",
-                                      data=response.text)
             try:
                 data = response.json()
             except ValueError:
                 raise PluginException(cause='Returned data was not in JSON format.',
                                       assistance="Double check that group ID's are all valid.",
+                                      data=response.text)
+            if response.status_code not in range(200, 299):
+                error_code = data["errorCode"]
+                error_summary = data["errorSummary"]
+                error_causes = data["errorCauses"]
+                raise PluginException(cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}",
+                                      assistance=f"Summary {error_summary}. Possible causes {error_causes}.",
                                       data=response.text)
             group_names.append(data["profile"]["name"])
 
@@ -67,20 +67,21 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 api = f"{okta_url}/api/v1/groups/{group}/users"
 
                 response = self.connection.session.get(api)
-                if response.status_code in range(400, 499):
-                    raise PluginException(cause="Okta returned a 4xx status code.",
-                                          assistance="Ensure that the secretKey key is both valid and correct.",
-                                          data=response.text)
-                if response.status_code in range(500, 599):
-                    raise PluginException(cause="Okta returned a 5xx status code.",
-                                          assistance="Ensure that the Okta URL key is correct.",
-                                          data=response.text)
+
                 try:
                     data = response.json()
                 except ValueError:
                     raise PluginException(cause='Returned data was not in JSON format.',
                                           assistance="Double check that group ID's are all valid.",
                                           data=response.text)
+                if response.status_code not in range(200, 299):
+                    error_code = data["errorCode"]
+                    error_summary = data["errorSummary"]
+                    error_causes = data["errorCauses"]
+                    raise PluginException(
+                        cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}",
+                        assistance=f"Summary {error_summary}. Possible causes {error_causes}.",
+                        data=response.text)
                 data = komand.helper.clean(data)
                 new_list.append({group: data})
 
