@@ -64,7 +64,7 @@ class UsersAddedRemovedFromGroupOutput(komand.Output):
       "title": "Additions",
       "description": "Users added to a group since the last check",
       "items": {
-        "$ref": "#/definitions/user_groups"
+        "$ref": "#/definitions/user_group"
       },
       "order": 1
     },
@@ -73,7 +73,7 @@ class UsersAddedRemovedFromGroupOutput(komand.Output):
       "title": "Removals",
       "description": "Users removed from a group since the last check",
       "items": {
-        "$ref": "#/definitions/user_groups"
+        "$ref": "#/definitions/user_group"
       },
       "order": 2
     }
@@ -582,9 +582,9 @@ class UsersAddedRemovedFromGroupOutput(komand.Output):
         }
       }
     },
-    "user_groups": {
+    "user_group": {
       "type": "object",
-      "title": "user_groups",
+      "title": "user_group",
       "properties": {
         "group_id": {
           "type": "string",

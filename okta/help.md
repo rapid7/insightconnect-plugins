@@ -815,8 +815,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|users_added_from_groups|[]user_groups|False|Users added to a group since the last check|
-|users_removed_from_groups|[]user_groups|False|Users removed from a group since the last check|
+|users_added_from_groups|[]user_group|False|Users added to a group since the last check|
+|users_removed_from_groups|[]user_group|False|Users removed from a group since the last check|
 
 Example output:
 ```
