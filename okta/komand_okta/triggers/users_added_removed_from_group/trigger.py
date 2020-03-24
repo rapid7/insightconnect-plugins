@@ -4,6 +4,7 @@ from .schema import UsersAddedRemovedFromGroupInput, UsersAddedRemovedFromGroupO
 # Custom imports below
 import itertools
 from komand.exceptions import PluginException
+from komand_okta.util import helpers
 
 
 class UsersAddedRemovedFromGroup(komand.Trigger):
@@ -34,12 +35,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                                       assistance="Double-check that group ID's are all valid.",
                                       data=response.text)
             if response.status_code not in range(200, 299):
-                error_code = data["errorCode"]
-                error_summary = data["errorSummary"]
-                error_causes = data["errorCauses"]
-                raise PluginException(cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}.",
-                                      assistance=f"Summary: {error_summary}. Possible causes: {error_causes}.",
-                                      data=response.text)
+                helpers.raise_based_on_error_code(data)
             data = komand.helper.clean(data)
             current_list.append({group: data})
 
@@ -53,12 +49,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                                       assistance="Double check that group ID's are all valid.",
                                       data=response.text)
             if response.status_code not in range(200, 299):
-                error_code = data["errorCode"]
-                error_summary = data["errorSummary"]
-                error_causes = data["errorCauses"]
-                raise PluginException(cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}.",
-                                      assistance=f"Summary: {error_summary}. Possible causes: {error_causes}.",
-                                      data=response.text)
+                helpers.raise_based_on_error_code(data)
             group_names.append(data["profile"]["name"])
 
         while True:
@@ -75,14 +66,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                                           assistance="Double check that group ID's are all valid.",
                                           data=response.text)
                 if response.status_code not in range(200, 299):
-                    error_code = data["errorCode"]
-                    error_summary = data["errorSummary"]
-                    error_causes = data["errorCauses"]
-                    raise PluginException(
-                        cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}.",
-                        assistance=f"Summary: {error_summary}. Possible causes: {error_causes}.",
-                        data=response.text)
-                data = komand.helper.clean(data)
+                    helpers.raise_based_on_error_code(data)
                 new_list.append({group: data})
 
             added = list()

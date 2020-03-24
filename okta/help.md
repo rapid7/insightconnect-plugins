@@ -122,6 +122,11 @@ This action pushes a MFA challenge to a user's device and waits for a success or
 |factor_id|string|None|True|Factor ID of the user to push verification to|None|
 |user_id|string|None|True|User ID to push verification to|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -627,6 +632,11 @@ This action is used to assign a user to an application for SSO and provisioning.
 |appuser|object|None|False|Application user model as JSON object, see https://developer.okta.com/docs/api/resources/apps#application-user-model|None|
 
 `appuser` accepts a [application user model](https://developer.okta.com/docs/api/resources/apps#application-user-model) JSON object.
+
+Example input:
+
+```
+```
 
 ##### Output
 
