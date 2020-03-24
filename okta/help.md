@@ -661,7 +661,7 @@ This trigger monitors a list of groups for user membership changes.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |group_ids|[]string|None|True|A list of group ID's|None|
-|interval|integer|300|True|The time in seconds inbetween checks for changes to the groups users|None|
+|interval|integer|300|True|The time in seconds between checks for changes to the groups users|None|
 
 Example input:
 

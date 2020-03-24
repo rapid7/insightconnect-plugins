@@ -37,7 +37,7 @@ class UsersAddedRemovedFromGroupInput(komand.Input):
     "interval": {
       "type": "integer",
       "title": "Interval",
-      "description": "The time in seconds inbetween checks for changes to the groups users",
+      "description": "The time in seconds between checks for changes to the groups users",
       "default": 300,
       "order": 2
     }
