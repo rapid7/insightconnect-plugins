@@ -67,6 +67,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                                           data=response.text)
                 if response.status_code not in range(200, 299):
                     helpers.raise_based_on_error_code(data)
+                data = komand.helper.clean(data)
                 new_list.append({group: data})
 
             added = list()

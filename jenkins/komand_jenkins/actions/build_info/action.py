@@ -1,5 +1,5 @@
 import komand
-from .schema import BuildInfoInput, BuildInfoOutput
+from .schema import BuildInfoInput, BuildInfoOutput, Input, Output
 # Custom imports below
 import json
 
@@ -14,8 +14,8 @@ class BuildInfo(komand.Action):
                 output=BuildInfoOutput())
 
     def run(self, params={}):
-        name = params.get('name')
-        build_number = params.get('build number')
+        name = params.get(Input.NAME)
+        build_number = params.get(Input.BUILD_NUMBER)
 
         output = self.connection.server.get_build_info(name, build_number)
         try:
@@ -29,8 +29,4 @@ class BuildInfo(komand.Action):
             raise Exception("An expected value in the build info return was not found."
                             " Check the error log for more information")
 
-        return {'build_info': build_info}
-
-    def test(self):
-        user = self.connection.server.get_whoami()
-        return {'user': user}
+        return {Output.BUILD_INFO: build_info}
