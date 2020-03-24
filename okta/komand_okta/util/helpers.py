@@ -38,6 +38,6 @@ def raise_based_on_error_code(response):
     error_summary = response["errorSummary"]
     error_causes = response["errorCauses"]
     raise PluginException(
-        cause=f"Okta returned a {response.status_code} status code, and a error code of {error_code}.",
+        cause=f"Okta returned a {response.status_code} status code, and an error code of {error_code}.",
         assistance=f"Summary: {error_summary}. Possible causes: {error_causes}.",
         data=response.text)
