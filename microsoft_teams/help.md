@@ -147,7 +147,7 @@ This action sends a message using the GUID for the team and channel. This is mor
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|message|message|None|false|The message object that was created|None|
+|message|message|False|The message object that was created|
 
 Example output:
 
