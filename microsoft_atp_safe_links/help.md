@@ -30,6 +30,11 @@ This action decodes a Microsoft Safe Link.
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|Safe Link to be decoded|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -57,7 +62,7 @@ This action is used to decode a Microsoft Safe Link.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -69,7 +74,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.3 - Fixed issue where embedded URLs returned blank string
+* 1.1.0 - Fixed issue where embedded URLs returned blank string
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Fixed issue where non-safelinks returned a blank string
 * 1.0.0 - Initial plugin
