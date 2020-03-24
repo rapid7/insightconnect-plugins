@@ -2,10 +2,6 @@
     "body": {
         "action": "build_info",
         "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
             "host": null
         },
         "input": {
