@@ -27,6 +27,8 @@ class ICONCheckpointNgfw(komand.Plugin):
 
         self.add_action(actions.DiscardAllSessions())
 
+        self.add_action(actions.InstallPolicy())
+
         self.add_action(actions.RemoveAccessRule())
 
         self.add_action(actions.RemoveHost())

@@ -645,6 +645,51 @@ actions:
         default: true
         example: true
         order: 3
+      color:
+        title: Color
+        description: Color
+        required: false
+        type: string
+        default: black
+        example: black
+        order: 4
+        enum:
+          - black
+          - aquamarine
+          - blue
+          - brown
+          - burlywood
+          - coral
+          - crete
+          - cyan
+          - dark blue
+          - dark gold
+          - dark gray
+          - dark green
+          - dark orange
+          - dark sea green
+          - firebrick
+          - forest green
+          - gold
+          - gray
+          - khaki
+          - lemon chiffon
+          - light green
+          - magenta
+          - navy blue
+          - olive
+          - orange
+          - orchid
+          - pink
+          - purple
+          - red
+          - sea green
+          - sienna
+          - sky blue
+          - slate blue
+          - turquoise
+          - violet red
+          - yellow
     output:
       host_object:
         title: Host
@@ -760,10 +805,49 @@ actions:
         type: boolean
         required: true
 
-
   discard_all_sessions:
     title: Discard All Sessions
     description: Troubleshooting action to discard all other user sessions
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+
+  install_policy:
+    title: Install Policy
+    description: Install policy to selected targets
+    input:
+      policy_package:
+        title: Policy Package
+        description: Policy package to install e.g. "standard"
+        type: string
+        default: standard
+        example: standard
+        order: 1
+      targets:
+        title: Targets
+        description: On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. ["checkpoint_fw"]
+        type: "[]string"
+        default: ["target name"]
+        example: ["checkpoint_fw_1", "checkpoint_fw_2"]
+        order: 2
+      install_on_all_cluster_members_or_fail:
+        title: Install Access Control Policy
+        description: Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster
+        type: boolean
+        default: false
+        example: false
+        order: 3
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        example: true
+        required: true
+        default: true
+        order: 4
     output:
       success:
         title: Success

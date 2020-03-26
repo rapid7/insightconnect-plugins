@@ -14,6 +14,7 @@
 * Username and password with administrative privileges
 * Check Point API is enabled and running. This requires that the NGFW machine has 6GB of RAM available, and the API has been enabled
 * For more information on enabling the API visit here: https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641
+* Make sure the IP of the orchistrator running this plugin is set as an allowed host 
 
 # Documentation
 
@@ -31,6 +32,35 @@ The connection configuration accepts the following parameters:
 ## Technical Details
 
 ### Actions
+
+#### Install Policy
+
+This action is used to install policy to selected targets.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
+|install_on_all_cluster_members_or_fail|boolean|False|False|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|
+|policy_package|string|standard|False|Policy package to install e.g. "standard"|None|
+|targets|[]string|['target name']|False|On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. ["checkpoint_fw"]|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success|
+
+Example output:
+
+```
+```
 
 #### Set Threat Protection
 
@@ -178,6 +208,7 @@ This action is used to add a host as a network object.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|color|string|black|False|Color|['black', 'aquamarine', 'blue', 'brown', 'burlywood', 'coral', 'crete', 'cyan', 'dark blue', 'dark gold', 'dark gray', 'dark green', 'dark orange', 'dark sea green', 'firebrick', 'forest green', 'gold', 'gray', 'khaki', 'lemon chiffon', 'light green', 'magenta', 'navy blue', 'olive', 'orange', 'orchid', 'pink', 'purple', 'red', 'sea green', 'sienna', 'sky blue', 'slate blue', 'turquoise', 'violet red', 'yellow']|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
 |host_ip|string|None|True|Host IP address|None|
 |name|string|None|True|Name|None|
@@ -832,6 +863,26 @@ the plugin will sometimes fail. To prevent this, you can set the Discard Other C
 to True in each action. That will effectively remove all other pending changes when the 
 plugin tries to publish its changes. A best practice is to have separate administrator accounts so that you can 
 better track changes done via the plugin or manually via SmartConsole.
+
+### Common Errors
+
+#### 403 forbidden
+
+If you are presented with a 403 forbidden error when running the connection test, the API hasn't been enabled.
+ 
+For more information on enabling the API visit here: https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641
+
+#### err_login_failed
+
+If the plugin gives this error during the connection test: 
+
+{
+  "code" : "err_login_failed",
+  "message" : "Authentication to server failed."
+}
+
+Verify the password on the account you are using. Make sure the user that you are logging in with has administrative
+privileges.
 
 # Version History
 

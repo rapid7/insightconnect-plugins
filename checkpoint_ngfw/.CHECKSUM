@@ -1,6 +1,6 @@
 {
-	"spec": "a2890f2539f1ba5c5c75e1c75af1c98f",
-	"manifest": "9d5e86171bf463fd947696ff3147af40",
+	"spec": "bc3266760de6eb225387855b9dfa38a4",
+	"manifest": "de39bc0ad7d16c3fea310c761762b3f0",
 	"setup": "e5c232d3d47197fdcdf967399197c0e0",
 	"schemas": [
 		{
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "add_host/schema.py",
-			"hash": "65c4635a522d9a9c7be6cd34b5b1a750"
+			"hash": "d3939b7741d94413fc6c2c5168fd76b8"
 		},
 		{
 			"identifier": "add_host_to_network_group/schema.py",
@@ -18,6 +18,10 @@
 		{
 			"identifier": "discard_all_sessions/schema.py",
 			"hash": "3d93ac45c7182e1fb3bff86c75a438fd"
+		},
+		{
+			"identifier": "install_policy/schema.py",
+			"hash": "579edeb289b4865d3c4235440b7d5e8c"
 		},
 		{
 			"identifier": "remove_access_rule/schema.py",
