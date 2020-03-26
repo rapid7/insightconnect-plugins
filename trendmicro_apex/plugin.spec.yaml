@@ -31,16 +31,16 @@ connection:
     example: "https://host.example.com:443"
   application_id:
     title: Application ID
-    description: Application ID to communicate to the Apex Security Manager
+    description: Application ID to communicate to the Apex Security Manager e.g. 909D88H7-3458-42RN-92FF-012V3CU3D294
     type: credential_secret_key
     required: true
-    example: "1A2B3C4D-5E6FF7G8H-9I0J1K2L3M4N5O6P7"
+    example: "909D88H7-3458-42RN-92FF-012V3CU3D294"
   api_key:
     title: API Key
-    description: API key paired with the Application ID
+    description: API key paired with the Application ID e.g. CU1874A2-G782-47X1-B6J3-1014A92624BC
     type: credential_secret_key
     required: true
-    example: "1A2B3C4D-5E6FF7G8H-9I0J1K2L3M4N5O6P7"
+    example: "CU1874A2-G782-47X1-B6J3-1014A92624BC"
 actions:
   add_file_to_udso_list:
     title: Add File to UDSO List

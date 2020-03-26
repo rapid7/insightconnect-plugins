@@ -18,13 +18,13 @@ class ConnectionSchema(komand.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "API key paired with the Application ID",
+      "description": "API key paired with the Application ID e.g. CU1874A2-G782-47X1-B6J3-1014A92624BC",
       "order": 3
     },
     "application_id": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Application ID",
-      "description": "Application ID to communicate to the Apex Security Manager",
+      "description": "Application ID to communicate to the Apex Security Manager e.g. 909D88H7-3458-42RN-92FF-012V3CU3D294",
       "order": 2
     },
     "url": {

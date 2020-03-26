@@ -23,8 +23,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API key paired with the Application ID|None|
-|application_id|credential_secret_key|None|True|Application ID to communicate to the Apex Security Manager|None|
+|api_key|credential_secret_key|None|True|API key paired with the Application ID e.g. CU1874A2-G782-47X1-B6J3-1014A92624BC|None|
+|application_id|credential_secret_key|None|True|Application ID to communicate to the Apex Security Manager e.g. 909D88H7-3458-42RN-92FF-012V3CU3D294|None|
 |url|string|None|True|URL with port number of the Apex Security Manager.|None|
 
 Example input:
