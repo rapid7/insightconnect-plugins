@@ -1,0 +1,339 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: rapid7_attackerkb
+title: Rapid7 AttackerKB
+description: AttackerKB is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://attackerkb.com/landing
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+tags:
+- attackerkb
+- vulnerability
+- security
+hub_tags:
+  use_cases: [attackerkb]
+  keywords: [attackerkb, vulnerability, security]
+  features: []
+connection:
+  credentials:
+    title: API Key
+    description: API key from account
+    type: credential_secret_key
+    required: true
+  max_pages:
+    title: Max Pages
+    description: Max pages returned, default 100
+    type: integer
+    required: false
+    default: 100
+types:
+  link:
+    href:
+      title: Href
+      description: URL for paginated resource
+      type: string
+      required: true
+  score:
+    attackerValue:
+      title: Attacker Value
+      description: The attacker value score
+      type: float
+      required: false
+    exploitability:
+      title: Exploitability
+      description: The exploitability score
+      type: float
+      required: false
+  tags:
+    commonEnterprise:
+      title: Common Enterprise
+      description: "The 'Common in enterprise' score"
+      type: float
+      required: false
+    defaultConfiguration:
+      title: Default Configuration
+      description: "The 'Present in default configuration' score"
+      type: float
+      required: false
+    difficultToDevelop:
+      title: Difficult To Develop
+      description: "The 'Difficult to develop' score"
+      type: float
+      required: false
+    preAuth:
+      title: Pre Auth
+      description: "The 'Pre-Auth' score"
+      type: float
+      required: false
+    postAuth:
+      title: Post Auth
+      description: "The 'Post-Auth' score"
+      type: float
+      required: false
+    difficultToExploit:
+      title: Difficult To Exploit
+      description: "The 'High barrier to exploitation' score"
+      type: float
+      required: false
+    difficultToPatch:
+      title: Difficult To Patch
+      description: "The 'Difficult to patch' score"
+      type: float
+      required: false
+    easyToDevelop:
+      title: Easy To Develop
+      description: "The 'Easy to develop' score"
+      type: float
+      required: false
+    highPrivilegeAccess:
+      title: High Privilege Access
+      description: "The 'Allows high-privileged access' score"
+      type: float
+      required: false
+    noUsefulData:
+      title: No Useful Data
+      description: "The 'Does not produce useful data' score"
+      type: float
+      required: false
+    obscureConfiguration:
+      title: Obscure Configuration
+      description: "The 'Only present in obscure configuration' score"
+      type: float
+      required: false
+    requiresInteraction:
+      title: Requires Interaction
+      description: "The 'Requires user interaction' score"
+      type: float
+      required: false
+  topic:
+    created:
+      title: Created
+      description: The date and time the topic was created, eg. 2019-07-02T16:22:15.879357Z
+      type: string
+      required: false
+    document:
+      title: Document
+      description: The main content of the topic
+      type: string
+      required: true
+    editorId:
+      title: Editor ID
+      description: The UUID of the contributor who last edited the topic
+      type: string
+      required: false
+    id:
+      title: ID
+      description: The UUID of the topic
+      type: string
+      required: false
+    metadata:
+      title: Metadata
+      description: A JSON value containing key/value pairs describing various attributes about this topic
+      type: object
+      required: false
+    name:
+      title: Name
+      description: The name or title of the topic
+      type: string
+      required: true
+    revisionDate:
+      title: Revision Date
+      description: The date and time the topic was last changed, eg. 2019-07-02T16:22:15.879357Z
+      type: string
+      required: false
+    disclosureDate:
+      title: Disclosure Date
+      description: The date and time the topic was disclosed, eg. 2019-07-02T16:22:15.879357Z
+      type: string
+      required: false
+    score:
+      title: Score
+      description: The topic score properties
+      type: score
+      required: false
+    tags:
+      title: Tags
+      description: The frequencies with which various tags appear on assessments
+      type: tags
+      required: false
+  assessment:
+    created:
+      title: Created
+      description: The date and time the assessment was created, eg. 2019-07-02T16:22:15.879357Z
+      type: string
+      required: false
+    document:
+      title: Document
+      description: The main content of the assessment
+      type: string
+      required: true
+    editorId:
+      title: Editor ID
+      description: The UUID of the contributor who last edited the assessment
+      type: string
+      required: false
+    id:
+      title: ID
+      description: The UUID of the assessment
+      type: string
+      required: false
+    metadata:
+      title: Metadata
+      description: A JSON value containing key/value pairs describing various attributes about this assessment
+      type: object
+      required: false
+    revisionDate:
+      title: Revision Date
+      description: The date and time the assessment was last changed, eg. 2019-07-02T16:22:15.879357Z
+      type: string
+      required: false
+    topicId:
+      title: Topic ID
+      description: The UUID of the topic this assessment is based on
+      type: string
+      required: true
+actions:
+  topic:
+    title: Get Vulnerability
+    description: Return a single topic with the specified ID
+    input:
+      id:
+        title: ID
+        type: string
+        description: "The UUID of a specific topic to return"
+        required: true
+    output:
+      data:
+        title: Data
+        description: Returned topic data
+        type: topic
+        required: false
+  topics:
+    title: Search Vulnerabilities
+    description: Return all topics
+    input:
+      id:
+        title: ID
+        type: string
+        description: "The UUID of a specific topic to return"
+        required: false
+      editorId:
+        title: Editor ID
+        type: string
+        description: "The UUID of a contributor"
+        required: false
+      name:
+        title: Name
+        type: string
+        description: "Text to query the name parameter. A substring match is performed"
+        required: false
+      created:
+        title: Created
+        type: string
+        description: "Return all topics that were created on the given date, eg. 2019-07-04"
+        required: false
+      revisionDate:
+        title: Revision Date
+        type: string
+        description: "Return all topics that were last edited on the given date, eg. 2019-07-04"
+        required: false
+      disclosureDate:
+        title: Disclosure Date
+        type: string
+        description: "Return all topics that were disclosed on the given date, eg. 2019-07-04"
+        required: false
+      document:
+        title: Document
+        type: string
+        description: "Text to query the document parameter. A substring match is performed, eg. RDP"
+        required: false
+      page:
+        title: Page
+        type: string
+        description: "Pagination page number, default value is 0"
+        required: false
+        default: 0
+      size:
+        title: Size
+        type: integer
+        description: "The number of topics returned per page, default value is 10"
+        required: false
+        default: 10
+    output:
+      data:
+        title: Data
+        description: Returned topic data
+        type: "[]topic"
+        required: false
+  assessment:
+    title: Get Assessment
+    description: Return a single assessment with the specified ID
+    input:
+      id:
+        title: ID
+        type: string
+        description: "The UUID of a specific assessment to return"
+        required: true
+    output:
+      data:
+        title: Data
+        description: Returned assessment data
+        type: "assessment"
+        required: false
+  assessments:
+    title: Search Assessments
+    description: Return all assessments
+    input:
+      id:
+        title: ID
+        type: string
+        description: "The UUID of a specific assessment to return"
+        required: false
+      editorId:
+        title: Editor ID
+        type: string
+        description: "The UUID of a contributor"
+        required: false
+      topicId:
+        title: Topic ID
+        type: string
+        description: "The UUID of the topic this assessment was based on"
+        required: false
+      created:
+        title: Created
+        type: string
+        description: "Return all assessments that were created on the given date, eg. 2019-07-04"
+        required: false
+      revisionDate:
+        title: Revision Date
+        type: string
+        description: "Return all assessments that were last edited on the given date, eg. 2019-07-04"
+        required: false
+      document:
+        title: Document
+        type: string
+        description: "Text to query the document parameter. A substring match is performed, eg. RDP"
+        required: false
+      page:
+        title: Page
+        type: string
+        description: "Pagination page number, default value is 0"
+        required: false
+        default: 0
+      size:
+        title: Size
+        type: integer
+        description: "The number of assessments returned per page, default value is 10"
+        required: false
+        default: 10
+    output:
+      data:
+        title: Data
+        description: Returned assessment data
+        type: "[]assessment"
+        required: false

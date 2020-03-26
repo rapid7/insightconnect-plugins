@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "topics",
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      },
+      "max_pages": 1
+    },
+    "input": {
+      "created": "",
+      "disclosureDate": "",
+      "document": "",
+      "editorId": "",
+      "id": "",
+      "name": "",
+      "page": "",
+      "revisionDate": "",
+      "size": ""
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
