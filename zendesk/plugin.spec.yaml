@@ -4,7 +4,7 @@ products: [insightconnect]
 name: zendesk
 title: Zendesk
 description: Regulate customer communications by managing tickets and users in Zendesk data
-version: 1.1.1
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -21,6 +21,23 @@ hub_tags:
   keywords: [zendesk, ticket, communication]
   features: []
 types:
+  comment:
+    body:
+      title: Body
+      description: Comment body
+      type: string
+    html_body:
+      title: HTML Body
+      description: The comment formatted as HTML. This will be preferred over body
+      type: string
+    public:
+      title: Public
+      description: Public (true if public comment, false if an internal note)
+      type: boolean
+    author_id:
+      title: Author ID
+      description: Author ID
+      type: string
   ticket:
     attachment:
       title: Attachment
@@ -31,6 +48,9 @@ types:
     collaborator_ids:
       title: Collaborator IDs
       type: '[]string'
+    comment:
+      title: Comment
+      type: comment
     description:
       title: Description
       type: string
@@ -292,6 +312,7 @@ actions:
         - Incident
         - Task
         - Question
+        - ''
         required: false
       priority:
         title: Priority
@@ -302,6 +323,7 @@ actions:
         - High
         - Normal
         - Low
+        - ''
         required: false
       status:
         title: Status
@@ -314,6 +336,7 @@ actions:
         - Hold
         - Solved
         - Closed
+        - ''
         required: false
     output:
       ticket:
@@ -330,16 +353,16 @@ actions:
         description: Ticket ID
         type: string
         required: true
+      comment:
+        title: Comment
+        description: Comment
+        type: comment
+        required: false
       requester_id:
         title: Requester ID
         type: string
         description: ID of user requesting support
         required: true
-      attachment:
-        title: Attachment
-        type: file
-        description: Optional file attachment
-        required: false
       assignee_id:
         title: Assignee ID
         type: string
@@ -349,11 +372,6 @@ actions:
         title: Collaborator IDs
         type: '[]string'
         description: List of collaborator IDs
-        required: false
-      description:
-        title: Description
-        type: string
-        description: Ticket description
         required: false
       due_at:
         title: Due At
