@@ -73,7 +73,7 @@ This action is used to return all assessments.
 |document|string|None|False|Text to query the document parameter. A substring match is performed, eg. RDP|None|
 |editorId|string|None|False|The UUID of a contributor|None|
 |id|string|None|False|The UUID of a specific assessment to return|None|
-|page|string|0|False|Pagination page number, default value is 0|None|
+|page|integer|0|False|Pagination page number, default value is 0|None|
 |revisionDate|string|None|False|Return all assessments that were last edited on the given date, eg. 2019-07-04|None|
 |size|integer|10|False|The number of assessments returned per page, default value is 10|None|
 |topicId|string|None|False|The UUID of the topic this assessment was based on|None|
@@ -204,7 +204,7 @@ This action is used to return all topics.
 |editorId|string|None|False|The UUID of a contributor|None|
 |id|string|None|False|The UUID of a specific topic to return|None|
 |name|string|None|False|Text to query the name parameter. A substring match is performed|None|
-|page|string|0|False|Pagination page number, default value is 0|None|
+|page|integer|0|False|Pagination page number, default value is 0|None|
 |revisionDate|string|None|False|Return all topics that were last edited on the given date, eg. 2019-07-04|None|
 |size|integer|10|False|The number of topics returned per page, default value is 10|None|
 

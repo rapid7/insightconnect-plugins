@@ -254,7 +254,7 @@ actions:
         required: false
       page:
         title: Page
-        type: string
+        type: integer
         description: "Pagination page number, default value is 0"
         required: false
         default: 0
@@ -321,7 +321,7 @@ actions:
         required: false
       page:
         title: Page
-        type: string
+        type: integer
         description: "Pagination page number, default value is 0"
         required: false
         default: 0

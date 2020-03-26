@@ -53,7 +53,7 @@ class AssessmentsInput(komand.Input):
       "order": 1
     },
     "page": {
-      "type": "string",
+      "type": "integer",
       "title": "Page",
       "description": "Pagination page number, default value is 0",
       "default": 0,
