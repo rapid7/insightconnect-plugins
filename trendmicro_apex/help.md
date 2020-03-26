@@ -11,7 +11,7 @@ This plugin works for the on-premise or Apex SaaS configurations.
 
 # Requirements
 
-* Cloud on on-premise API URL
+* API URL for Apex SaaS or Apex on-premise
 * API Key
 * Application ID
 
@@ -26,6 +26,20 @@ The connection configuration accepts the following parameters:
 |api_key|credential_secret_key|None|True|API key paired with the Application ID|None|
 |application_id|credential_secret_key|None|True|Application ID to communicate to the Apex Security Manager|None|
 |url|string|None|True|URL with port number of the Apex Security Manager.|None|
+
+Example input:
+
+```
+{
+  "api_key": {
+      "secretKey": "CU1874A2-G782-47X1-B6J3-1014A92624BC"
+  },
+  "application_id": {
+      "secretKey": "909D88H7-3458-42RN-92FF-012V3CU3D294"
+  },
+  "url": "https://host.example.com:443"
+}
+```
 
 ## Technical Details
 
