@@ -134,8 +134,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-Trend Micro Apex test accounts are subject to an expiration policy. Sign up for a new account if the becomes expired.
-[link](https://www.trendmicro.com/en_ca/business/products/user-protection/sps/endpoint.html). Look for "Try for Free"
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
