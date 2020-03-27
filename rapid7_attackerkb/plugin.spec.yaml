@@ -12,12 +12,13 @@ resources:
   source_url: https://attackerkb.com/landing
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
+- rapid7
 - attackerkb
 - vulnerability
-- security
+- cve
 hub_tags:
-  use_cases: [attackerkb]
-  keywords: [attackerkb, vulnerability, security]
+  use_cases: [remediation_management, vulnerability_management]
+  keywords: [rapid7, attackerkb, vulnerability, cve]
   features: []
 connection:
   credentials:
