@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Install policy to selected targets"
+    DESCRIPTION = "Install a policy to selected targets"
 
 
 class Input:

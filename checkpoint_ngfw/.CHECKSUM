@@ -1,5 +1,5 @@
 {
-	"spec": "61017083b4ad44545433df145d9dfb3f",
+	"spec": "666eb825523906dcabc19ebddd2f53db",
 	"manifest": "c0931b7fd8273a4724993d671307862f",
 	"setup": "6ca992890a28c9956ec4240f9783dd82",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "install_policy/schema.py",
-			"hash": "316d15532f0e05f71c5cdb03cf6ebde8"
+			"hash": "aae716d3c154727973a7e0fb1106c505"
 		},
 		{
 			"identifier": "remove_access_rule/schema.py",
