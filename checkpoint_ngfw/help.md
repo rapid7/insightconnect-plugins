@@ -891,11 +891,13 @@ better track changes done via the plugin or manually via SmartConsole.
 
 ### Common Errors
 
-#### 403 forbidden
+#### 403 Forbidden
 
-If you are presented with a 403 forbidden error when running the connection test, the API hasn't been enabled.
+If you are presented with a `403 Forbidden` error when running the connection test, the API hasn't been enabled and will need to be enabled for the connection test to succeed.
  
-For more information on enabling the API visit here: https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641
+For more information on enabling the API visit: 
+
+[https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641]( https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641)
 
 #### err_login_failed
 
