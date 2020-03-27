@@ -22,7 +22,7 @@ hub_tags:
 connection:
   credentials:
     title: API Key
-    description: API key from account
+    description: API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9
     type: credential_secret_key
     required: true
   max_pages:

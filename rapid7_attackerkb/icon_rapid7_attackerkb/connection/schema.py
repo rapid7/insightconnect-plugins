@@ -17,7 +17,7 @@ class ConnectionSchema(komand.Input):
     "credentials": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "API key from account",
+      "description": "API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9",
       "order": 1
     },
     "max_pages": {

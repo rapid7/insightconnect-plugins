@@ -1,14 +1,15 @@
 # Description
 
-AttackerKB is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation
+[Rapid7's AttackerKB](http://attackerkb.com/) is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation
 
 # Key Features
 
-Identify key features of plugin.
+* Search for vulnerabilities
+* Obtain vulnerability assessment information
 
 # Requirements
 
-* Requires an API Key from the product
+* Requires an API Key
 
 # Documentation
 
@@ -18,8 +19,19 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|credentials|credential_secret_key|None|True|API key from account|None|
+|credentials|credential_secret_key|None|True|API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9|None|
 |max_pages|integer|100|False|Max pages returned, default 100|None|
+
+Example input:
+
+```
+{
+  "credentials": {
+    "secretKey": "YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9"
+  },
+  "max_pages": 100
+}
+```
 
 ## Technical Details
 
@@ -34,6 +46,11 @@ This action is used to return a single assessment with the specified ID.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|The UUID of a specific assessment to return|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -77,6 +94,11 @@ This action is used to return all assessments.
 |revisionDate|string|None|False|Return all assessments that were last edited on the given date, eg. 2019-07-04|None|
 |size|integer|10|False|The number of assessments returned per page, default value is 10|None|
 |topicId|string|None|False|The UUID of the topic this assessment was based on|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -135,6 +157,11 @@ This action is used to return a single topic with the specified ID.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |id|string|None|True|The UUID of a specific topic to return|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -207,6 +234,11 @@ This action is used to return all topics.
 |page|integer|0|False|Pagination page number, default value is 0|None|
 |revisionDate|string|None|False|Return all topics that were last edited on the given date, eg. 2019-07-04|None|
 |size|integer|10|False|The number of topics returned per page, default value is 10|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -302,7 +334,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
