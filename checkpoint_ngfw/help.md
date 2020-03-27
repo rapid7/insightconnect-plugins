@@ -29,6 +29,20 @@ The connection configuration accepts the following parameters:
 |ssl_verify|boolean|True|True|Use SSL verification|None|
 |username_password|credential_username_password|None|True|Username and password|None|
 
+Example connection: 
+```
+{
+  "port": 443,
+  "server": "192.168.1.1",
+  "ssl_verify": false,
+  "username_password": {
+    "password": "xxxxxx",
+    "username": "xxxxxx"
+  }
+}
+
+```
+
 ## Technical Details
 
 ### Actions
