@@ -41,7 +41,6 @@ Example input:
     "username": "xxxxxx"
   }
 }
-
 ```
 
 ## Technical Details

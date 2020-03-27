@@ -455,14 +455,14 @@ connection:
     required: true
   server:
     type: string
-    title: Server IP Address
-    description: Server IP address
+    title: Check Point Server IP Address
+    description: Check Point server IP address
     example: 198.168.2.1
     required: true
   port:
     type: integer
-    title: Server Port
-    description: Server port
+    title: Check Point Server Port
+    description: Check Point server port
     required: true
     example: 443
     default: 443
