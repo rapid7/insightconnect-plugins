@@ -47,7 +47,7 @@ actions:
         type: "[]number"
         required: true
         description: Array of numbers to find the highest value from
-        example: [1, 5.5, 10, 100.50, 100]
+        example: [1, 5.5, 10, 100.5, 100]
     output:
       max:
         title: Max
