@@ -15,12 +15,21 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-_This plugin does not contain a connection._
+This plugin does not contain a connection.
 
-Example input:
+## Technical Details
 
-```
-```
+### Actions
+
+#### URL Decode
+
+This action is used to take a Proofpoint URL and decode it to the original URL.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|proofpoint_url|string|None|True|Proofpoint encoded URL|None|
 
 ##### Output
 
@@ -30,7 +39,7 @@ Example input:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+This plugin does not contain any triggers.
 
 ### Custom Output Types
 
