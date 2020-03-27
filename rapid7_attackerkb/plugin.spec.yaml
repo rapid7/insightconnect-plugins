@@ -207,6 +207,7 @@ actions:
         type: string
         description: "The UUID of a specific topic to return"
         required: true
+        example: a2c54f3d-48d0-48c4-b056-3a78181d777c
     output:
       data:
         title: Data
@@ -222,6 +223,7 @@ actions:
         type: string
         description: "The UUID of a specific topic to return"
         required: false
+        example: a2c54f3d-48d0-48c4-b056-3a78181d777c
       editorId:
         title: Editor ID
         type: string

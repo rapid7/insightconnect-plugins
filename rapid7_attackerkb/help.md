@@ -50,6 +50,9 @@ This action is used to return a single assessment with the specified ID.
 Example input:
 
 ```
+{
+  "id": "a2c54f3d-48d0-48c4-b056-3a78181d777c"
+}
 ```
 
 ##### Output
