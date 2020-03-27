@@ -1,4 +1,4 @@
-## Description
+# Description
 
 [Proofpoint URL Defense](https://www.proofpoint.com/us) is a service designed to handle emails that contain 
 malicious URLs. This plugin decodes URLs that are encoded by Proofpoints URL Defense service using ppdecode.
@@ -16,6 +16,8 @@ _This plugin does not contain any requirements._
 ## Setup
 
 _This plugin does not contain a connection._
+
+## Technical Details
 
 ### Actions
 
