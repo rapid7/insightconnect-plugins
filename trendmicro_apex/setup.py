@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name="math-rapid7-plugin",
-      version="1.2.0",
-      description="Basic mathematical operations",
+setup(name="trendmicro_apex-rapid7-plugin",
+      version="1.0.0",
+      description="Report suspicious objects and files to block on Apex firewall",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_math']
+      scripts=['bin/icon_trendmicro_apex']
       )
