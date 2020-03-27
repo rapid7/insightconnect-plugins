@@ -817,7 +817,7 @@ actions:
 
   install_policy:
     title: Install Policy
-    description: Install policy to selected targets
+    description: Install a policy to selected targets
     input:
       policy_package:
         title: Policy Package
