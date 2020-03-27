@@ -40,9 +40,9 @@ Regular expressions used by this action are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|channel_name|string|None|True|Regex-capable channel|None|
+|channel_name|string|None|True|Channel|None|
 |message|string|None|True|Message to send|None|
-|team_name|string|None|True|Regex-capable team name|None|
+|team_name|string|None|True|Team name|None|
 
 ##### Output
 
@@ -89,9 +89,9 @@ This action is used to send HTML as a message.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|channel_name|string|None|True|Regex-capable channel|None|
+|channel_name|string|None|True|Channel name|None|
 |message_content|string|None|True|HTML content to send|None|
-|team_name|string|None|True|Regex-capable team name|None|
+|team_name|string|None|True|Team name|None|
 
 ##### Output
 
@@ -138,16 +138,16 @@ This action sends a message using the GUID for the team and channel. This is mor
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|channel_guid|string|None|true|Channel GUID|None|
-|is_html|boolean|None|true|Is the message HTML|None|
-|message|string|None|true|Message to send|None|
-|team_guid|string|None|true|Team GUID|None|
+|channel_guid|string|None|True|Channel GUID|None|
+|is_html|boolean|None|True|Is the message HTML|None|
+|message|string|None|True|Message to send|None|
+|team_guid|string|None|True|Team GUID|None|
 
 ##### Output
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|message|message|None|false|The message object that was created|None|
+|message|message|False|The message object that was created|
 
 Example output:
 
@@ -192,7 +192,7 @@ Regular expressions used by this action are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|team_name|string|None|False|Optional regex-capable optional team name to look for|None|
+|team_name|string|None|False|Optional regex-capable team name to look for|None|
 
 ##### Output
 
@@ -250,8 +250,8 @@ Regular expressions used by this action are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|channel_name|string|None|False|Optional regex-capable optional channel to look for|None|
-|team_name|string|None|True|Regex-capable team name to look for|None|
+|channel_name|string|None|False|Optional regex-capable channel to look for|None|
+|team_name|string|None|True|Team name to look for|None|
 
 ##### Output
 
@@ -283,8 +283,8 @@ This action is used to add a member to a team.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|member_login|string|None|False|Member Login e.g. user@example.com|None|
-|team_name|string|None|True|Team Name|None|
+|member_login|string|None|True|Member login e.g. user@example.com|None|
+|team_name|string|None|True|Team name|None|
 
 ##### Output
 
@@ -359,8 +359,8 @@ This action is used to remove a member from a team.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|member_login|string|None|False|Member Login e.g. user@example.com|None|
-|team_name|string|None|True|Team Name|None|
+|member_login|string|None|True|Member Login e.g. user@example.com|None|
+|team_name|string|None|True|Team name|None|
 
 ##### Output
 
@@ -384,9 +384,9 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|group_description|string|None|True|Group Description|None|
+|group_description|string|None|True|Group description|None|
 |group_name|string|None|True|Team name|None|
-|mail_enabled|boolean|None|False|should e-mail should be enabled for this group|None|
+|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|
 |mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|
 |members|string[]|None|False|A list of usernames to set as members|None|
 |owners|string[]|None|False|A list of usernames to set as owners|None|
@@ -464,9 +464,9 @@ Regular expressions used by this trigger are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|channel_name|string|None|True|Regex-capable channel|None|
+|channel_name|string|None|True|Channel|None|
 |message_content|string|None|False|Regex to match new messages against|None|
-|team_name|string|None|True|Regex-capable team name|None|
+|team_name|string|None|True|Team name|None|
 
 ##### Output
 
@@ -515,6 +515,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Fix issue where send message would not work if there were too many teams | Removed regex capability for team and channel inputs which will speed up Send Message and Send HTML Message actions
 * 1.3.0 - New action Send Message by GUID
 * 1.2.3 - New spec and help.md format for the Hub
 * 1.2.2 - Fix issue where regular expressions would only match at the beginning of a string

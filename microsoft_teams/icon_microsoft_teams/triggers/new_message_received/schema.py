@@ -28,7 +28,7 @@ class NewMessageReceivedInput(komand.Input):
     "channel_name": {
       "type": "string",
       "title": "Channel Name",
-      "description": "Regex-capable channel",
+      "description": "Channel",
       "order": 2
     },
     "message_content": {
@@ -40,7 +40,7 @@ class NewMessageReceivedInput(komand.Input):
     "team_name": {
       "type": "string",
       "title": "Team Name",
-      "description": "Regex-capable team name",
+      "description": "Team name",
       "order": 1
     }
   },
