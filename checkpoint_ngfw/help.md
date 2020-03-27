@@ -35,7 +35,7 @@ The connection configuration accepts the following parameters:
 
 #### Install Policy
 
-This action is used to install policy to selected targets.
+This action is used to install a policy to selected targets.
 
 ##### Input
 
