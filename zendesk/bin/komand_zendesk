@@ -4,10 +4,10 @@ import komand
 from komand_zendesk import connection, actions, triggers
 
 
-Name = 'Zendesk'
-Vendor = 'rapid7'
-Version = '1.1.1'
-Description = 'Regulate customer communications by managing tickets and users in Zendesk data'
+Name = "Zendesk"
+Vendor = "rapid7"
+Version = "2.0.0"
+Description = "Regulate customer communications by managing tickets and users in Zendesk data"
 
 
 class ICONZendesk(komand.Plugin):
