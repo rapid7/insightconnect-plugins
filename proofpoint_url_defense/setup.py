@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='proofpoint_url_defense-rapid7-plugin',
-      version='1.0.1',
-      description='Decode Proofpoint encoded URLs',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="proofpoint_url_defense-rapid7-plugin",
+      version="1.1.0",
+      description="Decode Proofpoint encoded URLs",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_proofpoint_url_defense']
