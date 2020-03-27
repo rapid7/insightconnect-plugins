@@ -59,7 +59,10 @@ class InstallPolicyInput(komand.Input):
     }
   },
   "required": [
-    "discard_other_sessions"
+    "discard_other_sessions",
+    "install_on_all_cluster_members_or_fail",
+    "policy_package",
+    "targets"
   ]
 }
     """)

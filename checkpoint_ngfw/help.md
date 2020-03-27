@@ -42,13 +42,21 @@ This action is used to install a policy to selected targets.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|install_on_all_cluster_members_or_fail|boolean|False|False|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|
-|policy_package|string|standard|False|Policy package to install e.g. "standard"|None|
-|targets|[]string|['target name']|False|On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. ["checkpoint_fw"]|None|
+|install_on_all_cluster_members_or_fail|boolean|False|True|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|
+|policy_package|string|standard|True|Policy package to install e.g. "standard"|None|
+|targets|[]string|['target name']|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. ["checkpoint_fw"]|None|
 
 Example input:
 
 ```
+"input": {
+  "discard_other_sessions": true,
+  "install_on_all_cluster_members_or_fail": false,
+  "policy_package": "standard",
+  "targets": [
+      "checkmark_fw"
+  ]
+}
 ```
 
 ##### Output
@@ -60,6 +68,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Set Threat Protection
@@ -886,6 +897,7 @@ privileges.
 
 # Version History
 
+* 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` to add color as an input 
 * 1.1.0 - New action Add Host to Network Group
 * 1.0.0 - Initial plugin
 
