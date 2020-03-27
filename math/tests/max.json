@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "max",
+    "connection": null,
+    "input": {
+      "numbers": [1, 5.5, 10, 100.50, 100]
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
