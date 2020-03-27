@@ -14,7 +14,7 @@
 * Username and password with administrative privileges
 * Check Point API is enabled and running. This requires that the NGFW machine has 6GB of RAM available, and the API has been enabled
 * For more information on enabling the API visit here: https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641
-* Make sure the IP of the orchistrator running this plugin is set as an allowed host 
+* Make sure the IP of the orchestrator running this plugin is set as an allowed host in Checkpoint
 
 # Documentation
 
