@@ -68,7 +68,7 @@ class Connection(komand.Connection):
         try:
             request.raise_for_status()
         except Exception as e:
-            self.logger.error(f"There was a problem logging out. Ignoring this and attempting to continue. "
+            self.logger.warning(f"There was a problem logging out. Ignoring this and attempting to continue. "
                               f"Error follows:\n{request.text}")
 
     def get_headers(self):
@@ -176,4 +176,3 @@ class Connection(komand.Connection):
                                                 f"{self.server_ip}:{self.server_port}",
                                           assistance="Please check your connection settings and try again.")
         return {"success": True}
-
