@@ -49,7 +49,7 @@ This action is used to install a policy to selected targets.
 Example input:
 
 ```
-"input": {
+{
   "discard_other_sessions": true,
   "install_on_all_cluster_members_or_fail": false,
   "policy_package": "standard",
@@ -887,17 +887,19 @@ For more information on enabling the API visit here: https://community.checkpoin
 
 If the plugin gives this error during the connection test: 
 
+```
 {
   "code" : "err_login_failed",
   "message" : "Authentication to server failed."
 }
+```
 
 Verify the password on the account you are using. Make sure the user that you are logging in with has administrative
 privileges.
 
 # Version History
 
-* 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` to add color as an input 
+* 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` action to with color option 
 * 1.1.0 - New action Add Host to Network Group
 * 1.0.0 - Initial plugin
 
