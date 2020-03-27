@@ -24,8 +24,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|port|integer|443|True|Server port|None|
-|server|string|None|True|Server IP address|None|
+|port|integer|443|True|Check Point server port|None|
+|server|string|None|True|Check Point server IP address|None|
 |ssl_verify|boolean|True|True|Use SSL verification|None|
 |username_password|credential_username_password|None|True|Username and password|None|
 
