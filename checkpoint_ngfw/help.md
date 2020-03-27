@@ -29,7 +29,8 @@ The connection configuration accepts the following parameters:
 |ssl_verify|boolean|True|True|Use SSL verification|None|
 |username_password|credential_username_password|None|True|Username and password|None|
 
-Example input: 
+Example input:
+
 ```
 {
   "port": 443,
