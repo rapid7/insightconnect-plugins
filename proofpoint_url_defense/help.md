@@ -23,7 +23,7 @@ _This plugin does not contain a connection._
 
 #### URL Decode
 
-This action decodes an encoded URL.
+This action is used to take a Proofpoint URL and decode it to the original URL.
 
 ##### Input
 

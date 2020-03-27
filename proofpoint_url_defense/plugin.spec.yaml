@@ -29,6 +29,7 @@ actions:
         title: Encoded URL
         description: Proofpoint encoded URL or URL parameters e.g http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwfU
         type: string
+        example: "http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwf"
         required: true
     output:
       decoded_url:

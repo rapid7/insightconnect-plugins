@@ -1,7 +1,6 @@
 import komand
 from .schema import UrlDecodeInput, UrlDecodeOutput, Input, Output
 # Custom imports below
-# import ppdecode
 from komand_proofpoint_url_defense.util.proofpoint_decoder import URLDefenseDecoder
 
 class UrlDecode(komand.Action):
