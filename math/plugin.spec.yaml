@@ -31,9 +31,26 @@ actions:
         title: Equation
         description: Equation to calculate. Uses Python arithmetic operators (+, -,
           /, *, **, %)
+        example: "((3**2) * 3) + 3 - 5"
     output:
       result:
         title: Result
         description: Result of the arithmetic operation
+        type: number
+        required: true
+  max:
+    title: Max
+    description: Find the largest number from a list of numbers
+    input:
+      numbers:
+        type: "[]number"
+        required: true
+        title: Array of numbers
+        description: Array of numbers to find the highest value from
+        example: [1, 5.5, 10, 100.50, 100]
+    output:
+      max:
+        title: Max
+        description: Highest value number
         type: number
         required: true
