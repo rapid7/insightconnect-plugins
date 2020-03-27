@@ -6,7 +6,7 @@ from icon_checkpoint_ngfw import connection, actions, triggers
 
 Name = "Check Point NGFW"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "1.2.0"
 Description = "Check Point Next Generation Firewalls (NGFW) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks"
 
 
