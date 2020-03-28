@@ -23,9 +23,13 @@ class DomainList(komand.Action):
             raise PluginException(cause='DomainTools: Terms:',
                                   assistance=f'Query not in terms. Allowed terms: {self.connection.terms}')
 
-        response = Helper.make_request(self.connection.api.phisheye, query, days_back)
-        return {
-            Output.DATE: response['date'],
-            Output.DOMAINS: response['domains'],
-            Output.TERM: response['term']
+        response = Helper.make_request(self.connection.api.phisheye, self.logger, query, days_back)
+        output = {
+            Output.DOMAINS: response['response']['domains'],
+            Output.TERM: response['response']['term']
         }
+
+        if 'date' in response['response']:
+            output['date'] = response['response']['date']
+
+        return output

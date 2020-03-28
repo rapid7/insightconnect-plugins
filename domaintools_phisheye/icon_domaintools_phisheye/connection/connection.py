@@ -1,5 +1,6 @@
 from domaintools import API
 from domaintools.exceptions import NotAuthorizedException
+from komand.exceptions import PluginException
 
 import komand
 from komand.exceptions import ConnectionTestException
@@ -17,10 +18,10 @@ class Connection(komand.Connection):
         self.logger.info("Connect: Connecting..")
         username = params.get(Input.USERNAME)
         key = params.get(Input.API_KEY).get('secretKey')
-        api = API(username, key)
+        self.api = API(username, key)
 
         try:
-            response = api.account_information()
+            response = self.api.account_information()
             response.data()
         except NotAuthorizedException as e:
             self.logger.error(f'DomainTools: Connect: error {e}')
@@ -31,8 +32,14 @@ class Connection(komand.Connection):
             raise ConnectionTestException(cause='DomainTools: Connect:',
                                           assistance=f'Failed to connect to server {e}')
 
-        self.api = api
-        phisheye_terms_list = Helper.make_request(api.phisheye_term_list)
+        phisheye_terms_list = Helper.make_request(self.api.phisheye_term_list, self.logger)
         self.terms = []
-        for term in phisheye_terms_list.response.terms:
-            self.terms.append(term.term)
+        for term in phisheye_terms_list.get("response").get("terms"):
+            self.terms.append(term.get("term"))
+
+    def test(self):
+        try:
+            Helper.make_request(self.api.phisheye_term_list, self.logger)
+            return {}
+        except PluginException as e:
+            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)

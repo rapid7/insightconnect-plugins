@@ -22,6 +22,17 @@ The connection configuration accepts the following parameters:
 |api_key|credential_secret_key|None|True|Enter the API key|None|
 |username|string|None|True|Enter the API username|None|
 
+Example input:
+
+```
+{
+  "api_key": {
+    "secretKey": "11111-aaaaa-aaa11-111aa-aaa11"
+  },
+  "username": "username"
+}
+```
+
 ## Technical Details
 
 ### Actions
@@ -37,17 +48,30 @@ This action returns domain results for monitored terms.
 |days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to find domains up to seven days prior to the current date. Set the value to an integer in the range of 1-7|None|
 |query|string|None|True|Term for which the day's domains are desired|None|
 
+Example input:
+
+```
+{
+  "query": "virginpulse",
+  "days_back": 10
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |date|string|False|Date when query run|
-|domains|[]domains|False|Domains for query|
-|term|string|False|Query term|
+|domains|[]domains|True|Domains for query|
+|term|string|True|Query term|
 
 Example output:
 
 ```
+{
+  "domains": [],
+  "term": "virginpulse"
+}
 ```
 
 ### Triggers

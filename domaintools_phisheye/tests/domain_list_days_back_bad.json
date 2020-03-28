@@ -9,7 +9,7 @@
     },
     "input": {
       "query": "virginpulse",
-      "days_back": 5
+      "days_back": 10
     },
     "meta": {}
   },

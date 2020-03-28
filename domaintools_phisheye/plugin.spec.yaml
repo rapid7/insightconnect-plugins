@@ -91,17 +91,19 @@ actions:
         type: string
         description: "Term for which the day's domains are desired"
         required: true
+        example: virginpulse
       days_back:
         title: Days Back
         type: integer
         description: "Use this parameter in exceptional circumstances where you need to find domains up to seven days prior to the current date. Set the value to an integer in the range of 1-7"
         required: false
+        example: 1
     output:
       term:
         title: Term
         description: Query term
         type: string
-        required: false
+        required: true
       date:
         title: Date
         description: Date when query run
@@ -111,4 +113,4 @@ actions:
         title: Domains
         description: Domains for query
         type: "[]domains"
-        required: false
+        required: true

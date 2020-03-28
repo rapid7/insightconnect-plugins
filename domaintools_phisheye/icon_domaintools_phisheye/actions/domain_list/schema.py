@@ -75,6 +75,10 @@ class DomainListOutput(komand.Output):
       "order": 1
     }
   },
+  "required": [
+    "domains",
+    "term"
+  ],
   "definitions": {
     "domains": {
       "type": "object",
