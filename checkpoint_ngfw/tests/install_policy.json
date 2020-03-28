@@ -1,0 +1,16 @@
+{
+    "body": {
+        "action": "install_policy",
+        "input": {
+            "discard_other_sessions": true,
+            "install_on_all_cluster_members_or_fail": false,
+            "policy_package": "standard",
+            "targets": [
+                "checkmark_fw"
+            ]
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

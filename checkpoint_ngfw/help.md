@@ -14,6 +14,7 @@
 * Username and password with administrative privileges
 * Check Point API is enabled and running. This requires that the NGFW machine has 6GB of RAM available, and the API has been enabled
 * For more information on enabling the API visit here: https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641
+* Make sure the IP of the orchestrator running this plugin is set as an allowed host in Checkpoint
 
 # Documentation
 
@@ -23,14 +24,68 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|port|integer|443|True|Server port|None|
-|server|string|None|True|Server IP address|None|
+|port|integer|443|True|Check Point server port|None|
+|server|string|None|True|Check Point server IP address|None|
 |ssl_verify|boolean|True|True|Use SSL verification|None|
 |username_password|credential_username_password|None|True|Username and password|None|
+
+Example input:
+
+```
+{
+  "port": 443,
+  "server": "192.168.1.1",
+  "ssl_verify": false,
+  "username_password": {
+    "password": "xxxxxx",
+    "username": "xxxxxx"
+  }
+}
+```
 
 ## Technical Details
 
 ### Actions
+
+#### Install Policy
+
+This action is used to install a policy to selected targets.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
+|install_on_all_cluster_members_or_fail|boolean|False|True|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|
+|policy_package|string|standard|True|Policy package to install e.g. "standard"|None|
+|targets|[]string|['target name']|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. ["checkpoint_fw"]|None|
+
+Example input:
+
+```
+{
+  "discard_other_sessions": true,
+  "install_on_all_cluster_members_or_fail": false,
+  "policy_package": "standard",
+  "targets": [
+      "checkmark_fw"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Set Threat Protection
 
@@ -178,6 +233,7 @@ This action is used to add a host as a network object.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|color|string|black|False|Color|['black', 'aquamarine', 'blue', 'brown', 'burlywood', 'coral', 'crete', 'cyan', 'dark blue', 'dark gold', 'dark gray', 'dark green', 'dark orange', 'dark sea green', 'firebrick', 'forest green', 'gold', 'gray', 'khaki', 'lemon chiffon', 'light green', 'magenta', 'navy blue', 'olive', 'orange', 'orchid', 'pink', 'purple', 'red', 'sea green', 'sienna', 'sky blue', 'slate blue', 'turquoise', 'violet red', 'yellow']|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
 |host_ip|string|None|True|Host IP address|None|
 |name|string|None|True|Name|None|
@@ -833,8 +889,33 @@ to True in each action. That will effectively remove all other pending changes w
 plugin tries to publish its changes. A best practice is to have separate administrator accounts so that you can 
 better track changes done via the plugin or manually via SmartConsole.
 
+### Common Errors
+
+#### 403 Forbidden
+
+If you are presented with a `403 Forbidden` error when running the connection test, the API hasn't been enabled and will need to be enabled for the connection test to succeed.
+ 
+For more information on enabling the API visit: 
+
+[https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641]( https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641)
+
+#### err_login_failed
+
+If the plugin gives this error during the connection test: 
+
+```
+{
+  "code" : "err_login_failed",
+  "message" : "Authentication to server failed."
+}
+```
+
+Verify the password on the account you are using. Make sure the user that you are logging in with has administrative
+privileges.
+
 # Version History
 
+* 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` action to with color option 
 * 1.1.0 - New action Add Host to Network Group
 * 1.0.0 - Initial plugin
 
