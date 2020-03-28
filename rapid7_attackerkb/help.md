@@ -98,6 +98,14 @@ This action is used to return all assessments.
 |size|integer|10|False|The number of assessments returned per page, default value is 10|None|
 |topicId|string|None|False|The UUID of the topic this assessment was based on|None|
 
+Example input:
+
+```
+{
+  "document": "VPN"
+}
+```
+
 Example input (search by id):
 
 ```
@@ -112,12 +120,6 @@ Example input (search by editorId):
 {
   "editorId": "e24cfb2f-e51a-44d3-9204-e322a8db7ce1"
 }
-```
-
-Example input (search all):
-
-```
-{}
 ```
 
 ##### Output
@@ -258,6 +260,14 @@ This action is used to return all topics.
 |revisionDate|string|None|False|Return all topics that were last edited on the given date, eg. 2019-07-04|None|
 |size|integer|10|False|The number of topics returned per page, default value is 10|None|
 
+Example input:
+
+```
+{
+  "name": "Firefox"
+}
+```
+
 Example input (search by editorId):
 
 ```
@@ -272,12 +282,6 @@ Example input (search by name):
 {
   "name": "CVE-2020-3789"
 }
-```
-
-Example input (search all):
-
-```
-{}
 ```
 
 ##### Output

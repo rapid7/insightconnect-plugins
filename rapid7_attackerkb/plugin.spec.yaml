@@ -26,12 +26,14 @@ connection:
     description: API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9
     type: credential_secret_key
     required: true
+    example: YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9
   max_pages:
     title: Max Pages
     description: Max pages returned, default 100
     type: integer
     required: false
     default: 100
+    example: 10
 types:
   link:
     href:
