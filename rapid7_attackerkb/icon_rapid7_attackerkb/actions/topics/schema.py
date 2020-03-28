@@ -32,19 +32,19 @@ class TopicsInput(komand.Input):
     "created": {
       "type": "string",
       "title": "Created",
-      "description": "Return all topics that were created on the given date, eg. 2019-07-04",
+      "description": "Return all topics that were created on the given date",
       "order": 4
     },
     "disclosureDate": {
       "type": "string",
       "title": "Disclosure Date",
-      "description": "Return all topics that were disclosed on the given date, eg. 2019-07-04",
+      "description": "Return all topics that were disclosed on the given date",
       "order": 6
     },
     "document": {
       "type": "string",
       "title": "Document",
-      "description": "Text to query the document parameter. A substring match is performed, eg. RDP",
+      "description": "Text to query the document parameter. A substring match is performed",
       "order": 7
     },
     "editorId": {
@@ -75,13 +75,13 @@ class TopicsInput(komand.Input):
     "revisionDate": {
       "type": "string",
       "title": "Revision Date",
-      "description": "Return all topics that were last edited on the given date, eg. 2019-07-04",
+      "description": "Return all topics that were last edited on the given date",
       "order": 5
     },
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The number of topics returned per page, default value is 10",
+      "description": "The number of topics returned per page",
       "default": 10,
       "order": 9
     }

@@ -31,13 +31,13 @@ class AssessmentsInput(komand.Input):
     "created": {
       "type": "string",
       "title": "Created",
-      "description": "Return all assessments that were created on the given date, eg. 2019-07-04",
+      "description": "Return all assessments that were created on the given date",
       "order": 4
     },
     "document": {
       "type": "string",
       "title": "Document",
-      "description": "Text to query the document parameter. A substring match is performed, eg. RDP",
+      "description": "Text to query the document parameter. A substring match is performed",
       "order": 6
     },
     "editorId": {
@@ -62,7 +62,7 @@ class AssessmentsInput(komand.Input):
     "revisionDate": {
       "type": "string",
       "title": "Revision Date",
-      "description": "Return all assessments that were last edited on the given date, eg. 2019-07-04",
+      "description": "Return all assessments that were last edited on the given date",
       "order": 5
     },
     "size": {
