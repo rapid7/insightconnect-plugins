@@ -229,43 +229,51 @@ actions:
         type: string
         description: "The UUID of a contributor"
         required: false
+        example: a2c54f3d-48d0-48c4-b056-3a78181d777c
       name:
         title: Name
         type: string
         description: "Text to query the name parameter. A substring match is performed"
         required: false
+        example: CVE-2020-3789
       created:
         title: Created
         type: string
-        description: "Return all topics that were created on the given date, eg. 2019-07-04"
+        description: "Return all topics that were created on the given date"
         required: false
+        example: 2019-07-04
       revisionDate:
         title: Revision Date
         type: string
-        description: "Return all topics that were last edited on the given date, eg. 2019-07-04"
+        description: "Return all topics that were last edited on the given date"
         required: false
+        example: 2019-07-04
       disclosureDate:
         title: Disclosure Date
         type: string
-        description: "Return all topics that were disclosed on the given date, eg. 2019-07-04"
+        description: "Return all topics that were disclosed on the given date"
         required: false
+        example: 2019-07-04
       document:
         title: Document
         type: string
-        description: "Text to query the document parameter. A substring match is performed, eg. RDP"
+        description: "Text to query the document parameter. A substring match is performed"
         required: false
+        example: RDP
       page:
         title: Page
         type: integer
         description: "Pagination page number, default value is 0"
         required: false
         default: 0
+        example: 0
       size:
         title: Size
         type: integer
-        description: "The number of topics returned per page, default value is 10"
+        description: "The number of topics returned per page"
         required: false
         default: 10
+        example: 10
     output:
       data:
         title: Data
@@ -281,6 +289,7 @@ actions:
         type: string
         description: "The UUID of a specific assessment to return"
         required: true
+        example: a2c54f3d-48d0-48c4-b056-3a78181d777c
     output:
       data:
         title: Data
@@ -296,43 +305,51 @@ actions:
         type: string
         description: "The UUID of a specific assessment to return"
         required: false
+        example: a2c54f3d-48d0-48c4-b056-3a78181d777c
       editorId:
         title: Editor ID
         type: string
         description: "The UUID of a contributor"
         required: false
+        example: a2c54f3d-48d0-48c4-b056-3a78181d777c
       topicId:
         title: Topic ID
         type: string
         description: "The UUID of the topic this assessment was based on"
         required: false
+        example: a2c54f3d-48d0-48c4-b056-3a78181d777c
       created:
         title: Created
         type: string
-        description: "Return all assessments that were created on the given date, eg. 2019-07-04"
+        description: "Return all assessments that were created on the given date"
         required: false
+        example: 2019-07-04
       revisionDate:
         title: Revision Date
         type: string
-        description: "Return all assessments that were last edited on the given date, eg. 2019-07-04"
+        description: "Return all assessments that were last edited on the given date"
         required: false
+        example: 2019-07-04
       document:
         title: Document
         type: string
-        description: "Text to query the document parameter. A substring match is performed, eg. RDP"
+        description: "Text to query the document parameter. A substring match is performed"
         required: false
+        example: RDP
       page:
         title: Page
         type: integer
         description: "Pagination page number, default value is 0"
         required: false
         default: 0
+        example: 0
       size:
         title: Size
         type: integer
         description: "The number of assessments returned per page, default value is 10"
         required: false
         default: 10
+        example: 10
     output:
       data:
         title: Data

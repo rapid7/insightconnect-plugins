@@ -98,9 +98,26 @@ This action is used to return all assessments.
 |size|integer|10|False|The number of assessments returned per page, default value is 10|None|
 |topicId|string|None|False|The UUID of the topic this assessment was based on|None|
 
-Example input:
+Example input (search by id):
 
 ```
+{
+  "id": "47f78818-b766-47ca-8262-d7abc8dced66"
+}
+```
+
+Example input (search by editorId):
+
+```
+{
+  "editorId": "e24cfb2f-e51a-44d3-9204-e322a8db7ce1"
+}
+```
+
+Example input (search all):
+
+```
+{}
 ```
 
 ##### Output
@@ -164,6 +181,9 @@ This action is used to return a single topic with the specified ID.
 Example input:
 
 ```
+{
+  "id": "a2c54f3d-48d0-48c4-b056-3a78181d777c"
+}
 ```
 
 ##### Output
@@ -238,9 +258,26 @@ This action is used to return all topics.
 |revisionDate|string|None|False|Return all topics that were last edited on the given date, eg. 2019-07-04|None|
 |size|integer|10|False|The number of topics returned per page, default value is 10|None|
 
-Example input:
+Example input (search by editorId):
 
 ```
+{
+  "editorId": "e24cfb2f-e51a-44d3-9204-e322a8db7ce1"
+}
+```
+
+Example input (search by name):
+
+```
+{
+  "name": "CVE-2020-3789"
+}
+```
+
+Example input (search all):
+
+```
+{}
 ```
 
 ##### Output
