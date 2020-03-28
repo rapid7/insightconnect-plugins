@@ -14,6 +14,7 @@
 * Username and password with administrative privileges
 * Check Point API is enabled and running. This requires that the NGFW machine has 6GB of RAM available, and the API has been enabled
 * For more information on enabling the API visit here: https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641
+* Make sure the IP of the orchestrator running this plugin is set as an allowed host in Checkpoint
 
 # Documentation
 
@@ -23,14 +24,142 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|port|integer|443|True|Server port|None|
-|server|string|None|True|Server IP address|None|
+|port|integer|443|True|Check Point server port|None|
+|server|string|None|True|Check Point server IP address|None|
 |ssl_verify|boolean|True|True|Use SSL verification|None|
 |username_password|credential_username_password|None|True|Username and password|None|
+
+Example input:
+
+```
+{
+  "port": 443,
+  "server": "192.168.1.1",
+  "ssl_verify": false,
+  "username_password": {
+    "password": "xxxxxx",
+    "username": "xxxxxx"
+  }
+}
+```
 
 ## Technical Details
 
 ### Actions
+
+#### Install Policy
+
+This action is used to install a policy to selected targets.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
+|install_on_all_cluster_members_or_fail|boolean|False|True|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|
+|policy_package|string|standard|True|Policy package to install e.g. "standard"|None|
+|targets|[]string|['target name']|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. ["checkpoint_fw"]|None|
+
+Example input:
+
+```
+{
+  "discard_other_sessions": true,
+  "install_on_all_cluster_members_or_fail": false,
+  "policy_package": "standard",
+  "targets": [
+      "checkmark_fw"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Set Threat Protection
+
+This action is used to set a threat protection action.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|action|string|None|True|Action|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
+|name|string|None|True|Name of the protection to act on. e.g. Blaster Attacks|None|
+|profile|string|Optimized|True|Profile e.g. Optimized, Basic, Strict|None|
+
+Example input:
+
+```
+{
+  "action": "Prevent",
+  "discard_other_sessions": true,
+  "name": "Alt-N Technologies SecurityGateway Username Buffer Overflow",
+  "profile": "Optimized"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Add Host to Network Group
+
+This action is used to add a host to a network group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
+|group_name|string|None|True|Name of the group to add this object to|None|
+|host_name|string|None|True|The host to add to the network group, usually the IP address|None|
+
+Example input:
+
+```
+{
+  "discard_other_sessions": false,
+  "group_name": "Test Group",
+  "host_name": "192.168.5.1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Discard All Sessions
 
@@ -40,6 +169,11 @@ issue where objects remain locked after editing.
 ##### Input
 
 _This action does not contain any inputs._
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -66,6 +200,15 @@ This action is used to remove a host from network objects.
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
 |name|string|None|True|Name|None|
 
+Example input:
+
+```
+{
+  "discard_other_sessions": true,
+  "name": "192.1.2.1"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -90,9 +233,20 @@ This action is used to add a host as a network object.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|color|string|black|False|Color|['black', 'aquamarine', 'blue', 'brown', 'burlywood', 'coral', 'crete', 'cyan', 'dark blue', 'dark gold', 'dark gray', 'dark green', 'dark orange', 'dark sea green', 'firebrick', 'forest green', 'gold', 'gray', 'khaki', 'lemon chiffon', 'light green', 'magenta', 'navy blue', 'olive', 'orange', 'orchid', 'pink', 'purple', 'red', 'sea green', 'sienna', 'sky blue', 'slate blue', 'turquoise', 'violet red', 'yellow']|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
 |host_ip|string|None|True|Host IP address|None|
 |name|string|None|True|Name|None|
+
+Example input:
+
+```
+{
+  "discard_other_sessions": true,
+  "host_ip": "192.168.5.1",
+  "name": "192.168.5.1"
+}
+```
 
 ##### Output
 
@@ -154,6 +308,16 @@ This action is used to remove an access rule.
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
 |layer|string|Network|True|Layer|None|
 
+Example input:
+
+```
+{
+  "access_rule_name": "Test from InsightConnect",
+  "discard_other_sessions": true,
+  "layer": "Network"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -180,6 +344,15 @@ This action is used to show the access rulebase.
 |----|----|-------|--------|-----------|----|
 |layer_name|string|Network|True|Layer name|None|
 |limit|integer|500|False|Limit|None|
+
+Example input:
+
+```
+{
+  "layer_name": "Network",
+  "limit": 500
+}
+```
 
 ##### Output
 
@@ -391,6 +564,19 @@ This action is used to create a rule to block traffic.
 |name|string|None|True|Rule name|None|
 |position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|None|
 |source|string|None|False|Source network object name|None|
+
+Example input:
+
+```
+{
+  "action": "Drop",
+  "discard_other_sessions": true,
+  "layer": "Network",
+  "name": "Test from Komand",
+  "position": "top",
+  "source": "192.1.2.1"
+}
+```
 
 ##### Output
 
@@ -693,20 +879,44 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-An issue with Check Point servers is that only one user may make changes to the server at a time. If two users make 
-edits to the configuration at the same time, one user's edits will fail. The API handles this through Session IDs 
-(SIDs). If the plugin tries to make a change while an administrator has a pending change, the plugin will sometimes 
-fail. 
+Connections to the Check Point security management is based upon client to server sessions. Multiple administrators may connect 
+at one time and from R80.20 M1, one administrator can open more than one session at a time. Policy and objects are locked when 
+an administrator makes changes to those objects. The lock is released when a publish or discard occurs.
 
-To prevent this, you can set the `Discard Other Changes` boolean value to `True` in each action. That will effectively 
-remove all other pending changes when the plugin tries to publish it's changes. However, this can cause 
-issues with the web portal and Smart Console. If the Smart Console starts displaying errors, 
-the administrator will have to close the Smart Console and re-open it.
+If the plugin tries to make a change while an administrator has a pending change, 
+the plugin will sometimes fail. To prevent this, you can set the Discard Other Changes boolean value 
+to True in each action. That will effectively remove all other pending changes when the 
+plugin tries to publish its changes. A best practice is to have separate administrator accounts so that you can 
+better track changes done via the plugin or manually via SmartConsole.
 
-To effectively use this plugin, it will need it's own administrative account. This will help prevent session conflicts.  
+### Common Errors
+
+#### 403 Forbidden
+
+If you are presented with a `403 Forbidden` error when running the connection test, the API hasn't been enabled and will need to be enabled for the connection test to succeed.
+ 
+For more information on enabling the API visit: 
+
+[https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641]( https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641)
+
+#### err_login_failed
+
+If the plugin gives this error during the connection test: 
+
+```
+{
+  "code" : "err_login_failed",
+  "message" : "Authentication to server failed."
+}
+```
+
+Verify the password on the account you are using. Make sure the user that you are logging in with has administrative
+privileges.
 
 # Version History
 
+* 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` action to with color option 
+* 1.1.0 - New action Add Host to Network Group
 * 1.0.0 - Initial plugin
 
 # Links

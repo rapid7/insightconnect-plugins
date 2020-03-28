@@ -12,6 +12,7 @@ class Input:
     
 
 class Output:
+    DECODED = "decoded"
     RESULT = "result"
     
 
@@ -44,6 +45,12 @@ class DecodeOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "decoded": {
+      "type": "boolean",
+      "title": "Decoded",
+      "description": "Whether or not we were able to decode the URL",
+      "order": 2
+    },
     "result": {
       "type": "string",
       "title": "Result",
@@ -52,6 +59,7 @@ class DecodeOutput(komand.Output):
     }
   },
   "required": [
+    "decoded",
     "result"
   ]
 }

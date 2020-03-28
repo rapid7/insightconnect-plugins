@@ -1,0 +1,24 @@
+{
+    "body": {
+        "action": "add_to_udso_list",
+        "connection": {
+            "api_key": {
+                "secretKey": ""
+            },
+            "application_id": {
+                "secretKey": ""
+            },
+            "url": ""
+        },
+        "input": {
+            "content": "jimmyjumpsjilometers.com",
+            "scan_action": "LOG",
+            "data_type": "DOMAIN",
+            "expiry_date": 33,
+            "notes": "This better not wake anything in me"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

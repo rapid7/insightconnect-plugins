@@ -20,7 +20,6 @@ class UpdateTicket(komand.Action):
 
         ticket.assignee_id = ticket.assignee_id if params.get('assignee_id') is None else params.get('assignee_id')
         ticket.collaborator_ids = ticket.collaborator_ids if params.get('collaborator_ids') is None else params.get('collaborator_ids')
-        ticket.description = ticket.description if params.get('description') is None else params.get('description')
         ticket.due_at = ticket.due_at if params.get('due_at') is None else params.get('due_at')
         ticket.external_id = ticket.external_id if params.get('external_id') is None else params.get('external_id')
         ticket.group_id = ticket.group_id if params.get('group_id') is None else params.get('group_id')
@@ -33,18 +32,22 @@ class UpdateTicket(komand.Action):
         ticket.status = ticket.status if (params.get('status')) is None or params.get('status') == '' else params.get('status').lower()
         ticket.priority = ticket.priority if (params.get('priority')) is None or params.get('priority') == '' else params.get('priority').lower()
 
+        if params.get('comment') is not None:
+            ticket.comment = params.get('comment')
+            if ticket.comment.get('author_id') == "":
+                # Avoid bad request error from Zendesk for empty author_id 
+                del ticket.comment['author_id']
+                
         client.tickets.update(ticket)
-
-        ticket.priority = ticket.priority.capitalize()
-        ticket.status = ticket.status.capitalize()
-        ticket.type = ticket.type.capitalize()
+        ticket.priority = None if ticket.priority is None else ticket.priority.capitalize()
+        ticket.status = None if ticket.status is None else ticket.status.capitalize()
+        ticket.type = None if ticket.type is None else ticket.type.capitalize()
 
         ticket_obj = {
             'assignee_id': ticket.assignee_id, 
             'brand_id': ticket.brand_id, 
             'collaborator_ids': ticket.collaborator_ids, 
             'created_at': ticket.created_at, 
-            'description': ticket.description, 
             'due_at': ticket.due_at, 
             'external_id': ticket.external_id, 
             'forum_topic_id': ticket.forum_topic_id, 
@@ -67,6 +70,9 @@ class UpdateTicket(komand.Action):
             'url': ticket.url
         }
 
+        if params.get('comment') is not None:
+            ticket_obj['comment'] = ticket.comment
+
         output = dict(UpdateTicketOutput().schema)['definitions']['ticket']['properties']
         for key in ticket_obj:
             if ticket_obj[key] == None:
@@ -79,9 +85,9 @@ class UpdateTicket(komand.Action):
                         ticket_obj[key] = {'filename':'', 'content': ''}
                     elif output[key]['type'] == 'date':
                         ticket_obj[key] = datetime.datetime.now()
-                        
+
         ticket_obj = komand.helper.clean_dict(ticket_obj)
-        
+
         return {"ticket": ticket_obj}        
 
     def test(self):

@@ -18,15 +18,15 @@ class ConnectionSchema(komand.Input):
   "properties": {
     "port": {
       "type": "integer",
-      "title": "Server Port",
-      "description": "Server port",
+      "title": "Check Point Server Port",
+      "description": "Check Point server port",
       "default": 443,
       "order": 3
     },
     "server": {
       "type": "string",
-      "title": "Server IP Address",
-      "description": "Server IP address",
+      "title": "Check Point Server IP Address",
+      "description": "Check Point server IP address",
       "order": 2
     },
     "ssl_verify": {
@@ -61,12 +61,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [

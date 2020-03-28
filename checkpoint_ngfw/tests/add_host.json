@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "add_host",
+        "input": {
+            "color": "red",
+            "discard_other_sessions": true,
+            "host_ip": "192.168.5.1",
+            "name": "192.168.5.1"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

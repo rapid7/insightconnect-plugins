@@ -24,8 +24,9 @@ class TestGetChannels(TestCase):
 
         run_params = {
             "team_name": "Dream Team",
-            "channel_name": "test123"
+            "channel_name": "test"
         }
 
         result = test_action.run(run_params)
         self.assertIsNotNone(result)
+        self.assertEqual(result.get("channels")[0].get("displayName"), "test123")

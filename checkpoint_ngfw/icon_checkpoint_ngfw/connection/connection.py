@@ -68,11 +68,8 @@ class Connection(komand.Connection):
         try:
             request.raise_for_status()
         except Exception as e:
-            # The errors returned by this api aren't very good
-            # It's a 400 with some error text.
-            raise PluginException(cause="There was problem logging out.",
-                                  assistance=request.text,
-                                  data=e)
+            self.logger.warning(f"There was a problem logging out. Ignoring this and attempting to continue. "
+                              f"Error follows:\n{request.text}")
 
     def get_headers(self):
         return {
@@ -147,10 +144,35 @@ class Connection(komand.Connection):
 
         return result
 
+    def get_group(self, name):
+        endpoint = f"{self.server_and_port}/web_api/show-group"
+        payload = {
+            "name": name
+        }
+        headers = self.get_headers()
+        result = requests.post(endpoint, headers=headers, json=payload, verify=self.ssl_verify)
+
+        try:
+            result.raise_for_status()
+        except Exception as e:
+            raise PluginException(cause="Could not find group {name}.",
+                                  assistance=result.text,
+                                  data=e)
+        return result.json()
+
+    def install_policy(self, headers, discard_other_changes, payload, url):
+        result = requests.post(url, headers=headers, json=payload, verify=self.ssl_verify)
+        try:
+            result.raise_for_status()
+        except Exception as e:
+            raise PluginException(cause=f"Install policy failed: {url}",
+                                  assistance=result.text,
+                                  data=e)
+        return result
+
     def test(self):
         if not self.sid:
             raise ConnectionTestException(cause=f"Unable to authenticate to the Check Point server at: "
                                                 f"{self.server_ip}:{self.server_port}",
                                           assistance="Please check your connection settings and try again.")
         return {"success": True}
-

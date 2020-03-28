@@ -7,7 +7,8 @@ import komand.connection
 
 def get_teams_from_microsoft(logger: Logger,
                              connection: komand.connection,
-                             team_name=None) -> list:
+                             team_name=None,
+                             explicit=True) -> list:
     """
     This will get teams from the Graph API. If a team_name is provided it will only return that team, or throw
     an error if that team is not found
@@ -15,6 +16,7 @@ def get_teams_from_microsoft(logger: Logger,
     :param logger: object (logging.logger)
     :param connection: object (komand.connection)
     :param team_name: string
+    :param explicit: boolean
     :return: array of teams
     """
     compiled_team_name = None
@@ -25,7 +27,11 @@ def get_teams_from_microsoft(logger: Logger,
             raise PluginException(cause=f"Team Name {team_name} was an invalid regular expression.",
                                   assistance=f"Please correct {team_name}") from e
 
-    teams_url = "https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team')"
+    # See if we are looking for a team name exactly or not
+    if explicit:
+        teams_url = f"https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team') and displayName eq '{team_name}'"
+    else:
+        teams_url = f"https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team')"
     headers = connection.get_headers()
     teams_result = requests.get(teams_url, headers=headers)
     try:
@@ -55,7 +61,8 @@ def get_teams_from_microsoft(logger: Logger,
 def get_channels_from_microsoft(logger: Logger,
                                 connection: komand.connection,
                                 team_id: str,
-                                channel_name=None) -> list:
+                                channel_name=None,
+                                explicit=False) -> list:
     """
     This will get all channels available to a team from the Graph API
     If the channel_name is provided it will only return that channel or throw an error
@@ -66,6 +73,7 @@ def get_channels_from_microsoft(logger: Logger,
     :param connection: (komand.connection)
     :param team_id: String
     :param channel_name: String
+    :param explicit: boolean
     :return: list
     """
     compiled_channel_name = None
@@ -76,7 +84,11 @@ def get_channels_from_microsoft(logger: Logger,
             raise PluginException(cause=f"Channel Name {compiled_channel_name} was an invalid regular expression.",
                                   assistance=f"Please correct {compiled_channel_name}") from e
 
-    channels_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels"
+    # See if we are looking for a channel name exactly or not
+    if explicit:
+        channels_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels?filter=displayName eq '{channel_name}'"
+    else:
+        channels_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels"
     headers = connection.get_headers()
     channels_result = requests.get(channels_url, headers=headers)
     try:
@@ -189,6 +201,7 @@ def create_channel(logger: Logger,
     :param connection: Object (komand.connection)
     :param team_id: String
     :param channel_name: String
+    :param description: String
     :return: boolean
     """
 
