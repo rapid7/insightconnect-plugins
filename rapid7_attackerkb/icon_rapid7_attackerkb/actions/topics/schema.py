@@ -32,13 +32,13 @@ class TopicsInput(komand.Input):
     "created": {
       "type": "string",
       "title": "Created",
-      "description": "Return all topics that were created on the given date",
+      "description": "Return all topics that were created on the given date, eg. 2019-07-04",
       "order": 4
     },
     "disclosureDate": {
       "type": "string",
       "title": "Disclosure Date",
-      "description": "Return all topics that were disclosed on the given date",
+      "description": "Return all topics that were disclosed on the given date, eg. 2019-07-04",
       "order": 6
     },
     "document": {

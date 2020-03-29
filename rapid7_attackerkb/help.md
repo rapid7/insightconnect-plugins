@@ -89,12 +89,12 @@ This action is used to return all assessments.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|created|string|None|False|Return all assessments that were created on the given date|None|
-|document|string|None|False|Text to query the document parameter. A substring match is performed|None|
+|created|string|None|False|Return all assessments that were created on the given date, eg. 2019-07-04|None|
+|document|string|None|False|Text to query the document parameter. A substring match is performed, eg. RDP|None|
 |editorId|string|None|False|The UUID of a contributor|None|
 |id|string|None|False|The UUID of a specific assessment to return|None|
 |page|integer|0|False|Pagination page number, default value is 0|None|
-|revisionDate|string|None|False|Return all assessments that were last edited on the given date|None|
+|revisionDate|string|None|False|Return all assessments that were last edited on the given date, eg. 2019-07-04|None|
 |size|integer|10|False|The number of assessments returned per page, default value is 10|None|
 |topicId|string|None|False|The UUID of the topic this assessment was based on|None|
 
@@ -207,8 +207,8 @@ This action is used to return all topics.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|created|string|None|False|Return all topics that were created on the given date|None|
-|disclosureDate|string|None|False|Return all topics that were disclosed on the given date|None|
+|created|string|None|False|Return all topics that were created on the given date, eg. 2019-07-04|None|
+|disclosureDate|string|None|False|Return all topics that were disclosed on the given date, eg. 2019-07-04|None|
 |document|string|None|False|Text to query the document parameter. A substring match is performed, eg. RDP|None|
 |editorId|string|None|False|The UUID of a contributor|None|
 |id|string|None|False|The UUID of a specific topic to return|None|

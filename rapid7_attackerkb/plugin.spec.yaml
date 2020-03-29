@@ -242,7 +242,7 @@ actions:
       created:
         title: Created
         type: string
-        description: "Return all topics that were created on the given date"
+        description: "Return all topics that were created on the given date, eg. 2019-07-04"
         required: false
         example: 2019-07-04
       revisionDate:
@@ -254,7 +254,7 @@ actions:
       disclosureDate:
         title: Disclosure Date
         type: string
-        description: "Return all topics that were disclosed on the given date"
+        description: "Return all topics that were disclosed on the given date, eg. 2019-07-04"
         required: false
         example: 2019-07-04
       document:
@@ -324,19 +324,19 @@ actions:
       created:
         title: Created
         type: string
-        description: "Return all assessments that were created on the given date"
+        description: "Return all assessments that were created on the given date, eg. 2019-07-04"
         required: false
         example: 2019-07-04
       revisionDate:
         title: Revision Date
         type: string
-        description: "Return all assessments that were last edited on the given date"
+        description: "Return all assessments that were last edited on the given date, eg. 2019-07-04"
         required: false
         example: 2019-07-04
       document:
         title: Document
         type: string
-        description: "Text to query the document parameter. A substring match is performed"
+        description: "Text to query the document parameter. A substring match is performed, eg. RDP"
         required: false
         example: RDP
       page:
