@@ -4,10 +4,10 @@ import komand
 from komand_diff import connection, actions, triggers
 
 
-Name = 'Diff'
-Vendor = 'rapid7'
-Version = '1.0.2'
-Description = 'Diff Utilities'
+Name = "Diff"
+Vendor = "rapid7"
+Version = "1.0.3"
+Description = "Diff Utilities"
 
 
 class ICONDiff(komand.Plugin):

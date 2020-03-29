@@ -3,7 +3,7 @@
         "action": "diff",
         "connection": null,
         "input": {
-            "compare": "hello 123",
+            "compare": "hello 1234",
             "label": "helloer"
         },
         "meta": {}
