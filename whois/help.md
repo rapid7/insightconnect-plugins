@@ -32,6 +32,16 @@ This action is used to retrieve data about a domain name.
 |----|----|-------|--------|-----------|----|
 |domain|string|None|True|Domain name to lookup|None|
 
+Example input:
+
+```
+
+{
+    "domain": "google.com"
+}
+
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -58,19 +68,39 @@ Example output:
 ```
 
 {
-  "registrar_whois_server": "whois.markmonitor.com",
-  "registry_domain_id": "2138514_domain_com-vrsn",
-  "last_updated": "2011-07-20T16:55:31",
-  "registrar_iana_id": "292",
-  "registrar": "MarkMonitor Inc.",
-  "dnssec": "unsigned",
-  "domain_status": ["clientdeleteprohibited https://icann.org/epp#clientdeleteprohibited", "clienttransferprohibited https://icann.org/epp#clienttransferprohibited", "clientupdateprohibited https://icann.org/epp#clientupdateprohibited", "serverdeleteprohibited https://icann.org/epp#serverdeleteprohibited", "servertransferprohibited https://icann.org/epp#servertransferprohibited", "serverupdateprohibited https://icann.org/epp#serverupdateprohibited"],
-  "registrar_url": "http://www.markmonitor.com",
   "creation_date": "1997-09-15T04:00:00",
-  "name_servers": ["ns2.google.com", "ns3.google.com", "ns1.google.com", "ns4.google.com"],
+  "dnssec": "unsigned",
+  "domain_status": [
+    "clientdeleteprohibited https://icann.org/epp#clientdeleteprohibited",
+    "clienttransferprohibited https://icann.org/epp#clienttransferprohibited",
+    "clientupdateprohibited https://icann.org/epp#clientupdateprohibited",
+    "serverdeleteprohibited https://icann.org/epp#serverdeleteprohibited",
+    "servertransferprohibited https://icann.org/epp#servertransferprohibited",
+    "serverupdateprohibited https://icann.org/epp#serverupdateprohibited",
+    "clientupdateprohibited (https://www.icann.org/epp#clientupdateprohibited)",
+    "clienttransferprohibited (https://www.icann.org/epp#clienttransferprohibited)",
+    "clientdeleteprohibited (https://www.icann.org/epp#clientdeleteprohibited)",
+    "serverupdateprohibited (https://www.icann.org/epp#serverupdateprohibited)",
+    "servertransferprohibited (https://www.icann.org/epp#servertransferprohibited)",
+    "serverdeleteprohibited (https://www.icann.org/epp#serverdeleteprohibited)"
+  ],
+  "expiration_date": "2028-09-13T00:00:00-07:00",
+  "last_updated": "2019-09-09T15:39:04",
+  "name": "google.com",
+  "name_servers": [
+    "ns1.google.com",
+    "ns2.google.com",
+    "ns4.google.com",
+    "ns3.google.com"
+  ],
+  "registrant_cc": "us",
+  "registrar": "MarkMonitor Inc.",
   "registrar_abuse_contact_email": "user@example.com",
   "registrar_abuse_contact_phone": "+1.2083895740",
-  "name": "google.com"
+  "registrar_iana_id": "292",
+  "registrar_url": "http://www.markmonitor.com",
+  "registrar_whois_server": "whois.markmonitor.com",
+  "registry_domain_id": "2138514_domain_com-vrsn"
 }
 
 ```
@@ -84,6 +114,16 @@ This action is used to retrieve data about an IP address.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |address|string|None|True|IP to Lookup|None|
+
+Example input:
+
+```
+
+{
+  "address": "8.1.1.1"
+}
+
+```
 
 ##### Output
 
@@ -112,23 +152,22 @@ Example output:
 ```
 
 {
-  "address": "1025 Eldorado Blvd.",
-  "cidr": "8.0.0.0/8",
-  "city": "Broomfield",
+  "netrange": "8.8.8.0 - 8.8.8.255",
+  "cidr": "8.8.8.0/24",
+  "netname": "LVLT-GOGL-8-8-8",
+  "nettype": "Reallocated",
+  "regdate": "2000-03-30",
+  "update": "2019-10-31",
+  "orgname": "Google LLC",
+  "address": "1600 Amphitheatre Parkway",
+  "city": "Mountain View",
+  "state": "CA",
+  "postal": "94043",
   "country": "US",
-  "netname": "LVLT-ORG-8-8",
-  "netrange": "8.0.0.0 - 8.255.255.255",
-  "nettype": "Direct Allocation",
+  "org_abuse_phone": "+1-650-253-0000",
   "org_abuse_email": "user@example.com",
-  "org_abuse_phone": "+1-877-453-8353 ",
-  "org_tech_email": "user@example.com",
-  "org_tech_phone": "+1-877-453-8353 ",
-  "organization": "Level 3 Communications, Inc. (LVLT)",
-  "orgname": "Level 3 Communications, Inc.",
-  "postal": "80021",
-  "regdate": "1992-12-01",
-  "state": "CO",
-  "update": "2012-02-24"
+  "org_tech_phone": "+1-650-253-0000",
+  "org_tech_email": "user@example.com"
 }
 
 ```
@@ -153,6 +192,7 @@ _This plugin has no references._
 
 # Version History
 
+* 1.0.8 - Change docker image from `komand/python-3-37-plugin:3` to `komand/python-3-37-slim-plugin:3` | Use input constants | Changed `Exception` to `PluginException` | Added "f" strings
 * 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains | Updated help.md for the Hub
 * 1.0.6 - New spec and help.md format for the Hub
 * 1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK
