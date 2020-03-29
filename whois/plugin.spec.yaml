@@ -4,7 +4,7 @@ products: [insightconnect]
 name: whois
 title: WHOIS
 description: The WHOIS plugin enables address and domain lookups in the WHOIS databases
-version: 1.0.7
+version: 1.0.8
 vendor: rapid7
 support: community
 status: []
@@ -60,7 +60,7 @@ actions:
         type: date
         required: false
       last_updated:
-        title: Last updated date
+        title: Last Updated Date
         description: Last updated date
         type: date
         required: false

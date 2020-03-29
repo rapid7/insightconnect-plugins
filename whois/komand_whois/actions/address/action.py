@@ -1,6 +1,7 @@
-import komand
-from .schema import AddressInput, AddressOutput
 import re
+
+import komand
+from .schema import AddressInput, AddressOutput, Input, Component
 
 
 class Address(komand.Action):
@@ -69,14 +70,14 @@ class Address(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name="address",
-                description="Whois IP Lookup",
-                input=AddressInput(),
-                output=AddressOutput())
+            name="address",
+            description=Component.DESCRIPTION,
+            input=AddressInput(),
+            output=AddressOutput())
 
     def run(self, params={}):
         binary = "/usr/bin/whois"
-        cmd = "%s %s" % (binary, params.get("address"))
+        cmd = f"{binary} {params.get(Input.ADDRESS)}"
         stdout = komand.helper.exec_command(cmd)["stdout"]
         stdout = stdout.decode('utf-8')
         results = self.parse_stdout(stdout=stdout)
@@ -86,7 +87,8 @@ class Address(komand.Action):
             self.logger.error("Error: Request did not return any data")
         return results
 
-    def _get_stdout_pairs(self, stdout):
+    @staticmethod
+    def _get_stdout_pairs(stdout):
         """
         Run a regex against the stdout string to extract pairings
         :param stdout: Stdout from the whois query
@@ -117,14 +119,14 @@ class Address(komand.Action):
             self.logger.info("Warning: No WHOIS registry detected from stdout, defaulting to ARIN...")
             registry = self.ARIN
 
-        self.logger.info("Info: Using registry: %s" % registry)
+        self.logger.info(f"Info: Using registry: {registry}")
 
         return registry
 
     def _load_normalization_map(self, refer):
         if refer not in self.NORMALIZATION_MAP.keys():
-            self.logger.info("Warning: No normalization map found for: %s\n"
-                             "Please contact support with the IP address used as input to this action." % refer)
+            self.logger.info(f"Warning: No normalization map found for: {refer}\n"
+                             "Please contact support with the IP address used as input to this action.")
         return self.NORMALIZATION_MAP[refer]
 
     def parse_stdout(self, stdout):
@@ -140,7 +142,3 @@ class Address(komand.Action):
                     output[n_key] = p_value
 
         return output
-
-    def test(self):
-        # TODO: Implement test function
-        return {}

@@ -1,4 +1,4 @@
-FROM komand/python-3-37-plugin:3
+FROM komand/python-3-37-slim-plugin:3
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin
@@ -13,11 +13,13 @@ ADD . /python/src
 
 WORKDIR /python/src
 # Add any package dependencies here
-RUN apt-get update && apt-get install -y whois git
+RUN apk --no-cache add whois git
 RUN pip install git+https://github.com/komand/python-whois.git@0.4.2
 
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
+
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/komand_whois"]
