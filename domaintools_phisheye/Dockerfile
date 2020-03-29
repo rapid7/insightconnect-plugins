@@ -1,4 +1,4 @@
-FROM komand/python-3-37-plugin:3
+FROM komand/python-3-37-slim-plugin:3
 # Refer to the following documentation for available SDK parent images: https://komand.github.io/python/sdk.html#version
 
 LABEL organization=rapid7
@@ -6,6 +6,13 @@ LABEL sdk=python
 
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
+
+RUN apk add --no-cache --virtual .build-deps \
+                                        make \
+                                        gcc \
+                                        libc-dev \
+                                        libffi-dev \
+                                        openssl-dev
 
 # End package dependencies
 
