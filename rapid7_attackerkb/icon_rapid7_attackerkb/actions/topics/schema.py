@@ -44,7 +44,7 @@ class TopicsInput(komand.Input):
     "document": {
       "type": "string",
       "title": "Document",
-      "description": "Text to query the document parameter. A substring match is performed",
+      "description": "Text to query the document parameter. A substring match is performed, eg. RDP",
       "order": 7
     },
     "editorId": {
@@ -75,13 +75,13 @@ class TopicsInput(komand.Input):
     "revisionDate": {
       "type": "string",
       "title": "Revision Date",
-      "description": "Return all topics that were last edited on the given date",
+      "description": "Return all topics that were last edited on the given date, eg. 2019-07-04",
       "order": 5
     },
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The number of topics returned per page",
+      "description": "The number of topics returned per page, default value is 10",
       "default": 10,
       "order": 9
     }
