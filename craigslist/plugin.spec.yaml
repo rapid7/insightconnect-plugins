@@ -9,7 +9,7 @@ status: []
 description: "Craigslist provides local classifieds and forums for jobs, housing, for
   sale, personals, services, local community, and events. Using the Craigslist plugin for Rapid7 InsightConnect,
 organizations can monitor their brand as well as automate searches for lost or stolen assets"
-version: 1.0.1
+version: 1.0.2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/craigslist
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -66,7 +66,7 @@ types:
       required: false
 actions:
   for_sale:
-    title: Search For Sale
+    title: Search for Sale
     description: Search the for sale section
     input:
       site:
@@ -827,12 +827,12 @@ actions:
         - video gaming
         - wanted
       search_titles:
-        description: Search the titles?
+        description: Search the titles
         default: false
         type: boolean
         required: false
       posted_today:
-        description: Posted today?
+        description: Is posted today
         default: false
         type: boolean
         required: false
@@ -854,6 +854,7 @@ actions:
         type: integer
         required: false
       section_filter:
+        title: Section Filter
         description: 'Craigslist has specific filters for each category. You can fine
           tune your search by entering a section specific filter as JSON e.g. { "max_price":
           5000, "auto_size": "compact", "auto_paint": "blue" }'

@@ -86,7 +86,7 @@ class ForSaleInput(komand.Input):
     "posted_today": {
       "type": "boolean",
       "title": "Posted Today",
-      "description": "Posted today?",
+      "description": "Is posted today",
       "default": false,
       "order": 4
     },
@@ -105,7 +105,7 @@ class ForSaleInput(komand.Input):
     "search_titles": {
       "type": "boolean",
       "title": "Search Titles",
-      "description": "Search the titles?",
+      "description": "Search the titles",
       "default": false,
       "order": 3
     },
