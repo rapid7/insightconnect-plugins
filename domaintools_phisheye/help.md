@@ -8,8 +8,7 @@ Identify key features of plugin.
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* Requires an API Key
 
 # Documentation
 
