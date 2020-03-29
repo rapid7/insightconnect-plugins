@@ -4,10 +4,10 @@ import komand
 from komand_string import connection, actions, triggers
 
 
-Name = 'String Operations'
-Vendor = 'rapid7'
-Version = '1.2.1'
-Description = 'The String plugin provides common programmatic string operations'
+Name = "String Operations"
+Vendor = "rapid7"
+Version = "1.2.2"
+Description = "The String plugin provides common programmatic string operations"
 
 
 class ICONString(komand.Plugin):

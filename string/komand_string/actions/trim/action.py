@@ -1,7 +1,6 @@
 import komand
 from .schema import TrimInput, TrimOutput, Input, Output, Component
 # Custom imports below
-from komand.exceptions import PluginException
 
 
 class Trim(komand.Action):

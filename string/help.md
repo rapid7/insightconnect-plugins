@@ -32,8 +32,19 @@ This action is used to convert a string to a list of strings.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert e.g. Sentence one\nSentence two|None|
 |delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None|
+|string|string|None|True|String to convert e.g. Sentence one
+Sentence two|None|
+
+Example input:
+
+```
+{
+    "delimiter": " ",
+    "string": "This is a sentence"
+}
+
+```
 
 ##### Output
 
@@ -70,9 +81,20 @@ It allows users the ability to use the green selector and choose a specific vari
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
+|block_delimiter|string|None|False|The character delimiter for the initial string split, applied before the string delimiter input. This parameter is optional but allows for more complex handling|None|
 |string|string|None|True|String to convert e.g. USER=bob|None|
 |string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|
-|block_delimiter|string|None|False|The character used to split a block of text (e.g. paragraph) into slices before applying a split with the string delimiter. This is an optional parameter and necessary in more complex splitting situations where a character split isn't enough|None|
+
+Example input:
+
+```
+{
+    "block_delimiter": "",
+    "string": "User=Bob",
+    "string_delimiter": "="
+}
+
+```
 
 ##### Output
 
@@ -86,10 +108,9 @@ Example output:
 
 ```
 {
-  "object": {
-    "User": "Bob"
-  }
+  "User": "Bob"
 }
+
 ```
 
 Here is another example with a slightly more complex string input that contains multiple key:value pairs.
@@ -111,6 +132,7 @@ Example output:
     "Computer_Type": "Windows"
   }
 }
+
 ```
 
 #### Upper
@@ -122,6 +144,15 @@ This action is used to convert lowercase letters to uppercase.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |string|string|None|True|String to convert e.g. USER=bob|None|
+
+Example input:
+
+```
+{
+    "string": "ldap"
+}
+
+```
 
 ##### Output
 
@@ -135,6 +166,7 @@ Example output:
 {
   "upper": "LDAP"
 }
+
 ```
 
 #### Lower
@@ -146,6 +178,15 @@ This action is used to convert uppercase letters to lowercase.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |string|string|None|True|String to convert e.g. USER=bob|None|
+
+Example input:
+
+```
+{
+    "string": "HELLO"
+}
+
+```
 
 ##### Output
 
@@ -159,6 +200,7 @@ Example output:
 {
   "lower": "hello"
 }
+
 ```
 
 #### Set Encoding
@@ -173,6 +215,17 @@ This action is used to encode a string.
 |error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|
 |string|string|None|True|String to encode|None|
 
+Example input:
+
+```
+{
+    "encoding": "UTF-8",
+    "error_handling": "replace",
+    "string": "hello\u0023world"
+}
+
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -183,8 +236,9 @@ Example output:
 
 ```
 {
-  "encoded": "hello"
+  "encoded": "hello#world"
 }
+
 ```
 
 #### Trim
@@ -197,18 +251,28 @@ This action is used to trim a string of leading and trailing whitespace.
 |----|----|-------|--------|-----------|----|
 |string|string|None|True|String to trim|None|
 
+Example input:
+
+```
+{
+    "string": " this is a string "
+}
+
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|trimmed|string|False|Trimmed string|
+|trimmed|string|True|Trimmed string|
 
 Example output:
 
 ```
 {
-  "trimmed": "hello"
+  "trimmed": "this is a string"
 }
+
 ```
 
 ### Triggers
@@ -226,6 +290,7 @@ If this is the case, consider using the Python 3 Script plugin instead.
 
 # Version History
 
+* 1.2.2 - Added user nobody in Dockerfile | Use input and output constants | Added "f" strings
 * 1.2.1 - New spec and help.md format for the Hub
 * 1.2.0 - New action Trim
 * 1.1.0 - New action Set Encoding

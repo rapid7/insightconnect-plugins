@@ -1,5 +1,5 @@
 import komand
-from .schema import SplitToObjectInput, SplitToObjectOutput
+from .schema import SplitToObjectInput, SplitToObjectOutput, Input, Output, Component
 # Custom imports below
 from komand.exceptions import PluginException
 
@@ -8,16 +8,16 @@ class SplitToObject(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='split_to_object',
-                description='Converts a string to an object containing key:value strings',
-                input=SplitToObjectInput(),
-                output=SplitToObjectOutput())
+            name='split_to_object',
+            description=Component.DESCRIPTION,
+            input=SplitToObjectInput(),
+            output=SplitToObjectOutput())
 
     def run(self, params={}):
         block_split = False
-        string = params.get('string')
-        sd = params.get('string_delimiter')
-        bd = params.get('block_delimiter')
+        string = params.get(Input.STRING)
+        sd = params.get(Input.STRING_DELIMITER)
+        bd = params.get(Input.BLOCK_DELIMITER)
 
         if not sd:
             self.logger.info('User did not supply a string delimiter. '
@@ -43,17 +43,17 @@ class SplitToObject(komand.Action):
                     # Assign 1st element as key, 2nd as value to dict
                     d[pair[0].strip('"')] = pair[1].strip('"')
                 else:
-                    self.logger.info('Skipping {count} element split: {pair}'.format(count=c, pair=pair))
-            return {'object': d}
+                    self.logger.info(f'Skipping {c} element split: {pair}')
+            return {Output.OBJECT: d}
 
         # Single key:value pair split e.g. USER=bob
         try:
             list_ = string.split(sd)
-            self.logger.info('User input to split: %s -> %s', string, list_)
+            self.logger.info(f'User input to split: {string} -> {list_}')
             d[list_[0]] = list_[1]
         except (ValueError, IndexError):
             self.logger.error('It looks like the input contained more than a single key:value split.')
             raise PluginException(cause='Action failed! Unable to split string cleanly.',
                                   assistance='Please try specifying the block delimiter for more multi-key:value input.')
 
-        return {'object': d}
+        return {Output.OBJECT: d}

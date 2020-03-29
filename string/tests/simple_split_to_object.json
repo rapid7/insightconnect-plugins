@@ -4,7 +4,7 @@
         "connection": null,
         "input": {
             "block_delimiter": "",
-            "string": "Dog=Percy",
+            "string": "User=Bob",
             "string_delimiter": "="
         },
         "meta": {}

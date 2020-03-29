@@ -3,9 +3,9 @@
         "action": "set_encoding",
         "connection": null,
         "input": {
-            "encoding": "ASCII",
+            "encoding": "UTF-8",
             "error_handling": "replace",
-            "string": "\ud83d\ude08"
+            "string": "hello\u0023world"
         },
         "meta": {}
     },
