@@ -44,6 +44,14 @@ This action is used to query the status of a file.
 Example input:
 
 ```
+{
+  "features": "te",
+  "file_digest": "0800fc577294c34e0b28ad2839435945",
+  "file_digest_type": "md5",
+  "file_name": "hash.png",
+  "file_type": "png",
+  "quota": false
+}
 ```
 
 ##### Output
@@ -117,6 +125,11 @@ This action is used to upload a file for analysis.
 Example input:
 
 ```
+{
+  "file_bytes": "YmxhaA==",
+  "file_name": "blah.txt",
+  "file_type": "txt"
+}
 ```
 
 ##### Output
