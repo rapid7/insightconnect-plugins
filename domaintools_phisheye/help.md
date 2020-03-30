@@ -51,7 +51,7 @@ Example input:
 
 ```
 {
-  "query": "virginpulse",
+  "query": "rapid7",
   "days_back": 10
 }
 ```
@@ -69,7 +69,7 @@ Example output:
 ```
 {
   "domains": [],
-  "term": "virginpulse"
+  "term": "rapid7"
 }
 ```
 
@@ -105,7 +105,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin. Add action: domain_list
+* 1.0.0 - Initial plugin
 
 # Links
 
