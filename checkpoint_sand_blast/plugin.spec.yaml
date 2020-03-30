@@ -2,8 +2,8 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: checkpoint_sand_blast
-title: Checkpoint Sand Blast
-description: The Checkpoint Sand Blast plugin extends the Sand Blast service and enables report status and suspicious file upload
+title: Check Point SandBlast
+description: The Check Point SandBlast plugin extends the SandBlast service and enables report status and suspicious file upload
 version: 1.0.1
 vendor: rapid7
 support: community
