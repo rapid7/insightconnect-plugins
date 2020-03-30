@@ -37,3 +37,8 @@ actions:
         description: Decoded Proofpoint URL
         type: string
         required: false
+      decode_success:
+        title: Decode Success
+        description: Was decode successful, if not, the original URL will be returned
+        type: boolean
+        required: true

@@ -43,6 +43,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|decode_success|boolean|True|Was decode successful, if not, the original URL will be returned|
 |decoded_url|string|False|Decoded Proofpoint URL|
 
 Example output:
