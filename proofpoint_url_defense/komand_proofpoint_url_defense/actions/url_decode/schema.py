@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    DECODE_SUCCESS = "decode_success"
+    DECODED = "decoded"
     DECODED_URL = "decoded_url"
     
 
@@ -45,9 +45,9 @@ class UrlDecodeOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "decode_success": {
+    "decoded": {
       "type": "boolean",
-      "title": "Decode Success",
+      "title": "Decoded",
       "description": "Was decode successful, if not, the original URL will be returned",
       "order": 2
     },
@@ -59,7 +59,7 @@ class UrlDecodeOutput(komand.Output):
     }
   },
   "required": [
-    "decode_success"
+    "decoded"
   ]
 }
     """)

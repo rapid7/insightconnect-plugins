@@ -43,7 +43,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|decode_success|boolean|True|Was decode successful, if not, the original URL will be returned|
+|decoded|boolean|True|Was decode successful, if not, the original URL will be returned|
 |decoded_url|string|False|Decoded Proofpoint URL|
 
 Example output:
@@ -70,7 +70,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.2.0 - Update to URL Decode to add 'decode_success' as an output variable 
+* 1.2.0 - Update to URL Decode to add 'decoded' as an output variable 
 * 1.1.0 - Update to URL Decode action to add support for v3 links
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Bug fix with decode parsing

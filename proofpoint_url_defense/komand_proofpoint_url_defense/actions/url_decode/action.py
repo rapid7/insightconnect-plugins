@@ -27,8 +27,8 @@ class UrlDecode(komand.Action):
         try:
             decoded_url = decoder.decode(encoded_url)
             self.logger.info('URL has been decoded')
-            return {Output.DECODED_URL: decoded_url, Output.DECODE_SUCCESS: True}
+            return {Output.DECODED_URL: decoded_url, Output.DECODED: True}
         except (Exception, ValueError) as e:
             self.logger.error(f"Unexpected issue occurred decoding URL: {e}")
-            return {Output.DECODED_URL: in_url, Output.DECODE_SUCCESS: False}
+            return {Output.DECODED_URL: in_url, Output.DECODED: False}
 
