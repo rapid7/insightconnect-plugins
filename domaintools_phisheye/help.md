@@ -4,7 +4,7 @@ Monitor the Internet for 'Phishy' Domains
 
 # Key Features
 
-Identify key features of plugin.
+* Identify phishing domains
 
 # Requirements
 
