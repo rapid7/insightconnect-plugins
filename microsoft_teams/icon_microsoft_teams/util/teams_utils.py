@@ -47,7 +47,7 @@ def get_teams_from_microsoft(logger: Logger,
     nextlink = teams_result.json().get("@odata.nextLink")
 
     # If there's more than 20 teams, the results will come back paginated.
-    while(nextlink):
+    while nextlink:
         try:
             new_teams = requests.get(nextlink, headers=headers)
         except Exception as e:
