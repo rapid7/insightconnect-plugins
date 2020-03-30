@@ -38,7 +38,6 @@ Example input:
 {
     "domain": "google.com"
 }
-
 ```
 
 ##### Output
