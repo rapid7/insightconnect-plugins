@@ -184,8 +184,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-For the local version of Check Point SandBlast, using the query report action the
-hash must be SHA1
+When using the local version of Check Point SandBlast the query report action must take a SHA1 hash
 
 # Version History
 
@@ -196,4 +195,4 @@ hash must be SHA1
 
 ## References
 
-* [Checkpoint website](https://www.checkpoint.com/)
+* [Check Point website](https://www.checkpoint.com/)
