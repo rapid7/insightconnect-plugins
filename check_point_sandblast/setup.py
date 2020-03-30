@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="checkpoint_sand_blast-rapid7-plugin",
-      version="1.0.1",
+      version="1.0.2",
       description="The Check Point SandBlast plugin extends the SandBlast service and enables report status and suspicious file upload",
       author="rapid7",
       author_email="",
