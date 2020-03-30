@@ -121,7 +121,6 @@ Example input:
 {
   "address": "8.1.1.1"
 }
-
 ```
 
 ##### Output
