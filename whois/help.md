@@ -35,7 +35,6 @@ This action is used to retrieve data about a domain name.
 Example input:
 
 ```
-
 {
     "domain": "google.com"
 }
