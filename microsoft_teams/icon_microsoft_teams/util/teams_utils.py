@@ -44,6 +44,18 @@ def get_teams_from_microsoft(logger: Logger,
     except Exception as e:
         raise PluginException(PluginException.Preset.INVALID_JSON) from e
 
+    nextlink = teams_result.json().get("@odata.nextLink")
+
+    # If there's more than 20 teams, the results will come back paginated.
+    while(nextlink):
+        try:
+            new_teams = requests.get(nextlink, headers=headers)
+        except Exception as e:
+            raise PluginException(cause="Attempt to get paginated teams failed.",
+                                  assistance=teams_result.text) from e
+        nextlink = new_teams.json().get("@odata.nextLink","")
+        teams.extend(new_teams.json().get("value"))
+
     if team_name:
         logger.info(f"Team name: {team_name}")
         for team in teams:
@@ -100,6 +112,9 @@ def get_channels_from_microsoft(logger: Logger,
         channels = channels_result.json().get("value")
     except Exception as e:
         raise PluginException(PluginException.Preset.INVALID_JSON) from e
+
+    # Note: the channels endpoint does not paginate. Channels max out at 200 per team
+    # All 200 will be returned in one list
 
     if channel_name:
         logger.info(f"Channel name: {channel_name}")

@@ -44,6 +44,11 @@ Regular expressions used by this action are Python specific.
 |message|string|None|True|Message to send|None|
 |team_name|string|None|True|Team name|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -92,6 +97,11 @@ This action is used to send HTML as a message.
 |channel_name|string|None|True|Channel name|None|
 |message_content|string|None|True|HTML content to send|None|
 |team_name|string|None|True|Team name|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -145,6 +155,17 @@ This action sends a message using the GUID for the team and channel. This is mor
 
 ##### Output
 
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|message|message|False|The message object that was created|
+
+Example input:
+
+```
+```
+
+##### Output
+
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |message|message|False|The message object that was created|
@@ -193,6 +214,11 @@ Regular expressions used by this action are Python specific.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |team_name|string|None|False|Optional regex-capable team name to look for|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -253,6 +279,11 @@ Regular expressions used by this action are Python specific.
 |channel_name|string|None|False|Optional regex-capable channel to look for|None|
 |team_name|string|None|True|Team name to look for|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -286,6 +317,11 @@ This action is used to add a member to a team.
 |member_login|string|None|True|Member login e.g. user@example.com|None|
 |team_name|string|None|True|Team name|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -312,6 +348,11 @@ This action is used to add a channel to a team.
 |channel_name|string|None|True|Channel name|None|
 |team_name|string|None|True|Team name|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -337,6 +378,11 @@ This action is used to remove a channel from a team.
 |channel_name|string|None|True|Channel name|None|
 |team_name|string|None|True|Team name|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -361,6 +407,11 @@ This action is used to remove a member from a team.
 |----|----|-------|--------|-----------|----|
 |member_login|string|None|True|Member Login e.g. user@example.com|None|
 |team_name|string|None|True|Team name|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -390,6 +441,11 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 |mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|
 |members|string[]|None|False|A list of usernames to set as members|None|
 |owners|string[]|None|False|A list of usernames to set as owners|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -438,6 +494,11 @@ This action is used to delete a team and the associated group from Azure.
 |----|----|-------|--------|-----------|----|
 |team_name|string|None|True|Team Name|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -467,6 +528,11 @@ Regular expressions used by this trigger are Python specific.
 |channel_name|string|None|True|Channel|None|
 |message_content|string|None|False|Regex to match new messages against|None|
 |team_name|string|None|True|Team name|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -515,6 +581,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.1 - Update to Get Teams action to support more than 20 teams
 * 2.0.0 - Fix issue where send message would not work if there were too many teams | Removed regex capability for team and channel inputs which will speed up Send Message and Send HTML Message actions
 * 1.3.0 - New action Send Message by GUID
 * 1.2.3 - New spec and help.md format for the Hub
