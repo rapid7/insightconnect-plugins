@@ -6,7 +6,7 @@ title: Rapid7 AttackerKB
 description: AttackerKB is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation
 version: 1.0.0
 vendor: rapid7
-support: community
+support: rapid7
 status: []
 resources:
   source_url: https://attackerkb.com/landing
