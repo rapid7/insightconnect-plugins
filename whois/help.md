@@ -117,7 +117,6 @@ This action is used to retrieve data about an IP address.
 Example input:
 
 ```
-
 {
   "address": "8.1.1.1"
 }
