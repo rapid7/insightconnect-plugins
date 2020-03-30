@@ -197,6 +197,49 @@ Example input:
 Example output:
 
 ```
+{
+  "data": {
+    "created": "2020-03-25T22:30:05.350662Z",
+    "document": "By carefully crafting promise resolutions, it was possible to cause an out-of-bounds read off the end of an array resized during script execution. This could have led to memory corruption and a potentially exploitable crash. This vulnerability affects Thunderbird \u003c 68.6, Firefox \u003c 74, Firefox \u003c ESR68.6, and Firefox ESR \u003c 68.6.",
+    "editorId": "e24cfb2f-e51a-44d3-9204-e322a8db7ce1",
+    "id": "a2c54f3d-48d0-48c4-b056-3a78181d777c",
+    "metadata": {
+      "references": [
+        "CVE-2020-6806",
+        "https://www.mozilla.org/security/advisories/mfsa2020-08/",
+        "https://www.mozilla.org/security/advisories/mfsa2020-10/",
+        "https://www.mozilla.org/security/advisories/mfsa2020-09/",
+        "https://bugzilla.mozilla.org/show_bug.cgi?id=1612308"
+      ],
+      "vulnerable-versions": [
+        "Thunderbird 68.6",
+        "Firefox 74",
+        "Firefox ESR68.6",
+        "Firefox ESR 68.6"
+      ]
+    },
+    "name": "CVE-2020-6806",
+    "revisionDate": "2020-03-25T22:30:05.350662Z",
+    "score": {
+      "attackerValue": 0,
+      "exploitability": 0
+    },
+    "tags": {
+      "commonEnterprise": 0,
+      "defaultConfiguration": 0,
+      "difficultToDevelop": 0,
+      "difficultToExploit": 0,
+      "difficultToPatch": 0,
+      "easyToDevelop": 0,
+      "highPrivilegeAccess": 0,
+      "noUsefulData": 0,
+      "obscureConfiguration": 0,
+      "postAuth": 0,
+      "preAuth": 0,
+      "requiresInteraction": 0
+    }
+  }
+}
 ```
 
 #### Search Vulnerabilities
