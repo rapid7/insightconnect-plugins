@@ -1,6 +1,6 @@
 # Description
 
-[Checkpoint Sand Blast](https://www.checkpoint.com/solutions/zero-day-protection/) is a multilayered security technology provides protection against advanced cyber attacks. The Checkpoint Sand Blast plugin extends the Sand Blast service and enables report status and suspicious file upload.
+[Check Point SandBlast](https://www.checkpoint.com/solutions/zero-day-protection/) is a multilayered security technology provides protection against advanced cyber attacks. The Checkpoint Sand Blast plugin extends the Sand Blast service and enables report status and suspicious file upload.
 
 # Key Features
 
@@ -18,9 +18,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|service_address|string|te.checkpoint.com|True|The Service Address|None|
 |api_key|credential_secret_key|None|True|API Key|None|
-|using_cloud_server|boolean|None|True|Set to true if using the cloud version|None|
+|service_address|string|te.checkpoint.com|True|The Service Address|None|
+|using_cloud_server|boolean|True|True|Set to true if using the cloud version|None|
 
 ## Technical Details
 
@@ -34,19 +34,32 @@ This action is used to query the status of a file.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|file_digest|string|None|True|Hash of the file|None|
 |features|string|None|False|Features|None|
-|file_type|string|None|False|The file extension|None|
-|file_name|string|None|False|File name|None|
+|file_digest|string|None|True|Hash of the file|None|
 |file_digest_type|string|None|True|The type of hash used for the digest|['md5', 'sha1', 'sha2']|
+|file_name|string|None|False|File name|None|
+|file_type|string|None|False|The file extension|None|
 |quota|boolean|None|False|Quota|None|
+
+Example input:
+
+```
+{
+  "features": "te",
+  "file_digest": "0800fc577294c34e0b28ad2839435945",
+  "file_digest_type": "md5",
+  "file_name": "hash.png",
+  "file_type": "png",
+  "quota": false
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|query_response|object|False|Status of requested features|
 |found|boolean|False|Returns true if file found|
+|query_response|object|False|Status of requested features|
 
 Example output:
 
@@ -105,9 +118,19 @@ This action is used to upload a file for analysis.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|file_type|string|None|False|File extension e.g. DOCX, PDF|None|
-|file_name|string|None|True|The name of the file|None|
 |file_bytes|bytes|None|True|The file bytes|None|
+|file_name|string|None|True|The name of the file|None|
+|file_type|string|None|False|File extension e.g. DOCX, PDF|None|
+
+Example input:
+
+```
+{
+  "file_bytes": "YmxhaA==",
+  "file_name": "blah.txt",
+  "file_type": "txt"
+}
+```
 
 ##### Output
 
@@ -166,7 +189,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -174,11 +197,11 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-For the local version of Checkpoint Sand Blast, using the query report action the
-hash must be SHA1
+When using the local version of Check Point SandBlast the query report action must take a SHA1 hash
 
 # Version History
 
+* 1.0.2 - Update Check Point branding
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Initial plugin
 
@@ -186,4 +209,4 @@ hash must be SHA1
 
 ## References
 
-* [Checkpoint website](https://www.checkpoint.com/)
+* [Check Point website](https://www.checkpoint.com/)
