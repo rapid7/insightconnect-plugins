@@ -1,7 +1,7 @@
 {
-	"spec": "a510c2d626129afa868d9ee28894490e",
-	"manifest": "c0931b7fd8273a4724993d671307862f",
-	"setup": "6ca992890a28c9956ec4240f9783dd82",
+	"spec": "6da094a9f40e737ad01e18e87acb9e03",
+	"manifest": "df9fa41892386179af8257b40b5f554a",
+	"setup": "dbcd29267e4279509db88b97934c753a",
 	"schemas": [
 		{
 			"identifier": "add_access_rule/schema.py",
@@ -36,8 +36,16 @@
 			"hash": "2dba1cc531d57a16b84eca6eff809871"
 		},
 		{
+			"identifier": "set_threat_protection_by_cve/schema.py",
+			"hash": "da2eac27eb25c507a9e5a5d4112dfb55"
+		},
+		{
 			"identifier": "show_access_rulebase/schema.py",
 			"hash": "9a2929ef259b5b0f24d236204adda94c"
+		},
+		{
+			"identifier": "show_all_threat_protections/schema.py",
+			"hash": "233444007669333a1ea368f06d02ad82"
 		},
 		{
 			"identifier": "connection/schema.py",

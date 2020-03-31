@@ -22,12 +22,12 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|port|integer|443|True|Check Point server port|None|
-|server|string|None|True|Check Point server IP address|None|
-|ssl_verify|boolean|True|True|Use SSL verification|None|
-|username_password|credential_username_password|None|True|Username and password|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|port|integer|443|True|Check Point server port|443|None|
+|server|string|None|True|Check Point server IP address|198.168.2.1|None|
+|ssl_verify|boolean|True|True|Use SSL verification|True|None|
+|username_password|credential_username_password|None|True|Username and password|None|None|
 
 Example input:
 
@@ -47,18 +47,231 @@ Example input:
 
 ### Actions
 
+#### Show all Threat Protections
+
+This action is used to show information about all threat protections.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|threat_protection_list|object[]|False|Threat Protection List|
+
+Example output:
+
+```
+{
+  "protections": [
+    {
+      "uid": "5351ab4b-0d30-7b47-8c2c-5760486a5968",
+      "name": "Alt-N Technologies SecurityGateway Username Buffer Overflow",
+      "type": "threat-protection",
+      "domain": {
+        "uid": "41e821a0-3720-11e3-aa6e-0800200c9fde",
+        "name": "SMC User",
+        "domain-type": "domain"
+      },
+      "severity": "High",
+      "confidence-level": "High",
+      "performance-impact": "Low",
+      "release-date": "20080619",
+      "update-date": "20080619",
+      "profiles": [
+        {
+          "name": "Strict",
+          "uid": "caf8b711-d762-4c1e-82d5-6af2549b2869",
+          "default": {
+            "action": "Prevent",
+            "track": "log",
+            "capture-packets": false
+          },
+          "final": {
+            "action": "Prevent",
+            "track": "log",
+            "capture-packets": false
+          }
+        },
+        {
+          "name": "Basic",
+          "uid": "eb39a60d-c454-49f5-a28c-a89aa5bd2e09",
+          "default": {
+            "action": "Inactive",
+            "track": "log",
+            "capture-packets": false
+          },
+          "final": {
+            "action": "Inactive",
+            "track": "log",
+            "capture-packets": false
+          }
+        },
+        {
+          "name": "Optimized",
+          "uid": "fa1aa324-a8cc-4dbd-bc04-f31fdb8abf61",
+          "default": {
+            "track": "log",
+            "capture-packets": false
+          },
+          "override": {
+            "action": "Prevent",
+            "track": "log",
+            "capture-packets": false
+          },
+          "final": {
+            "action": "Prevent",
+            "track": "log",
+            "capture-packets": false
+          }
+        }
+      ],
+      "comments": "",
+      "protection-type": "Threat Cloud",
+      "follow-up": false,
+      "ipsAdditionalProperties": [
+        {
+          "name": "Vulnerability Type",
+          "uid": "00742c1d-43f4-f643-b037-9fb2d3eb0e11",
+          "values": [
+            {
+              "name": "Buffer Overflow",
+              "uid": "db9dc447-1017-ff4e-80fa-cd867a118087"
+            }
+          ]
+        },
+        {
+          "name": "Threat Year",
+          "uid": "619a23a0-9c87-ee48-be73-270bd934a692",
+          "values": [
+            {
+              "name": "2008",
+              "uid": "ec91cb7c-c3fd-f547-b115-3f8b5db84f0f"
+            }
+          ]
+        },
+        {
+          "name": "Vendor",
+          "uid": "ea894ad9-55aa-5145-a1e4-bfc89a3540c8",
+          "values": [
+            {
+              "name": "Alt-N Technologies",
+              "uid": "ed070520-8cd8-e644-bdbd-2f65a389852d"
+            }
+          ]
+        },
+        {
+          "name": "Threat Prevalence",
+          "uid": "eb5720e4-a7ae-fa44-91f4-af2f779e8aef",
+          "values": [
+            {
+              "name": "Obsolete",
+              "uid": "cd6eb868-7c11-42fb-b47d-ca4d9212eb7b"
+            }
+          ]
+        },
+        {
+          "name": "Protection Type",
+          "uid": "a016f796-ca58-af4a-9230-6b9d2768baef",
+          "values": [
+            {
+              "name": "Vulnerability",
+              "uid": "7a9f56d8-4f8d-824d-bc6a-ff290f52660a"
+            }
+          ]
+        },
+        {
+          "name": "Protected Asset",
+          "uid": "dc9d2116-59d7-c345-a7f6-b15678d7a996",
+          "values": [
+            {
+              "name": "CLIENT",
+              "uid": "5f21aad1-d6d1-4a35-bf1c-ddfe320adcac"
+            }
+          ]
+        },
+        {
+          "name": "Product Prevalence",
+          "uid": "fa6e6f33-a2fb-f449-8809-fac2eba59c18",
+          "values": [
+            {
+              "name": "Scarce",
+              "uid": "d94f2db1-3869-e446-b4d5-95e2805e2e34"
+            }
+          ]
+        },
+        {
+          "name": "Protection Tuning",
+          "uid": "58d65d86-ab73-604c-a741-1175e3b64374",
+          "values": [
+            {
+              "name": "Non-Configurable",
+              "uid": "9e12fff2-71ec-084e-be5d-f46a99a70e58"
+            }
+          ]
+        },
+        {
+          "name": "Product",
+          "uid": "af83bb21-83bf-db45-8858-d10f807acc88",
+          "values": [
+            {
+              "name": "SecurityGateway",
+              "uid": "1e0a93b5-d5d3-a843-9a1e-2d1636abb0d2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "from": 1,
+  "to": 1,
+  "total": 298
+}
+```
+
+#### Set Threat Protection by CVE
+
+This action is used to set threat protection action per profile by its CVE (Common Vulnerabilities and Exposures).
+
+##### Input
+
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|action|string|None|True|Action|Prevent|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|
+|cve_number|string|None|True|CVE Number to take action on. e.g. CVE-2019-0001|CVE-2019-0001|None|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|True|None|
+|profile|string|Optimized|True|Profile e.g. Optimized, Basic, Strict|Optimized|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+```
+
 #### Install Policy
 
 This action is used to install a policy to selected targets.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|install_on_all_cluster_members_or_fail|boolean|False|True|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|
-|policy_package|string|standard|True|Policy package to install e.g. "standard"|None|
-|targets|[]string|['target name']|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. ["checkpoint_fw"]|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|True|None|
+|install_on_all_cluster_members_or_fail|boolean|False|True|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|False|None|
+|policy_package|string|standard|True|Policy package to install e.g. "standard"|standard|None|
+|targets|[]string|['target name']|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. ["checkpoint_fw"]|['checkpoint_fw_1', 'checkpoint_fw_2']|None|
 
 Example input:
 
@@ -93,12 +306,12 @@ This action is used to set a threat protection action.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|action|string|None|True|Action|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|name|string|None|True|Name of the protection to act on. e.g. Blaster Attacks|None|
-|profile|string|Optimized|True|Profile e.g. Optimized, Basic, Strict|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|action|string|None|True|Action|Prevent|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|True|None|
+|name|string|None|True|Name of the protection to act on. e.g. Blaster Attacks|Blaster Attacks|None|
+|profile|string|Optimized|True|Profile e.g. Optimized, Basic, Strict|Optimized|None|
 
 Example input:
 
@@ -131,11 +344,11 @@ This action is used to add a host to a network group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|group_name|string|None|True|Name of the group to add this object to|None|
-|host_name|string|None|True|The host to add to the network group, usually the IP address|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|None|
+|group_name|string|None|True|Name of the group to add this object to|None|None|
+|host_name|string|None|True|The host to add to the network group, usually the IP address|None|None|
 
 Example input:
 
@@ -195,10 +408,10 @@ This action is used to remove a host from network objects.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|name|string|None|True|Name|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|True|None|
+|name|string|None|True|Name|192.168.2.1|None|
 
 Example input:
 
@@ -231,12 +444,12 @@ This action is used to add a host as a network object.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|color|string|black|False|Color|['black', 'aquamarine', 'blue', 'brown', 'burlywood', 'coral', 'crete', 'cyan', 'dark blue', 'dark gold', 'dark gray', 'dark green', 'dark orange', 'dark sea green', 'firebrick', 'forest green', 'gold', 'gray', 'khaki', 'lemon chiffon', 'light green', 'magenta', 'navy blue', 'olive', 'orange', 'orchid', 'pink', 'purple', 'red', 'sea green', 'sienna', 'sky blue', 'slate blue', 'turquoise', 'violet red', 'yellow']|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|host_ip|string|None|True|Host IP address|None|
-|name|string|None|True|Name|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|color|string|black|False|Color|black|['black', 'aquamarine', 'blue', 'brown', 'burlywood', 'coral', 'crete', 'cyan', 'dark blue', 'dark gold', 'dark gray', 'dark green', 'dark orange', 'dark sea green', 'firebrick', 'forest green', 'gold', 'gray', 'khaki', 'lemon chiffon', 'light green', 'magenta', 'navy blue', 'olive', 'orange', 'orchid', 'pink', 'purple', 'red', 'sea green', 'sienna', 'sky blue', 'slate blue', 'turquoise', 'violet red', 'yellow']|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|True|None|
+|host_ip|string|None|True|Host IP address|192.168.2.1|None|
+|name|string|None|True|Name|192.168.2.1|None|
 
 Example input:
 
@@ -302,11 +515,11 @@ This action is used to remove an access rule.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|access_rule_name|string|None|True|Access rule name|None|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|layer|string|Network|True|Layer|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|access_rule_name|string|None|True|Access rule name|InsightConnect Access Rule|None|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|True|None|
+|layer|string|Network|True|Layer|Network|None|
 
 Example input:
 
@@ -340,10 +553,10 @@ This action is used to show the access rulebase.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|layer_name|string|Network|True|Layer name|None|
-|limit|integer|500|False|Limit|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|layer_name|string|Network|True|Layer name|Network|None|
+|limit|integer|500|False|Limit|500|None|
 
 Example input:
 
@@ -554,16 +767,16 @@ This action is used to create a rule to block traffic.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|action|string|Drop|True|Action to take|['Accept', 'Drop', 'Ask', 'Inform', 'Reject', 'User Auth', 'Client Auth', 'Apply Layer']|
-|destination|string|None|False|Destination network object name|None|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|layer|string|Network|True|Layer to add this rule to|None|
-|list_of_services|[]string|None|False|List of services to block e.g. ["AOL", "SMTP"]|None|
-|name|string|None|True|Rule name|None|
-|position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|None|
-|source|string|None|False|Source network object name|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|action|string|Drop|True|Action to take|Drop|['Accept', 'Drop', 'Ask', 'Inform', 'Reject', 'User Auth', 'Client Auth', 'Apply Layer']|
+|destination|string|None|False|Destination network object name|192.168.2.1|None|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|True|None|
+|layer|string|Network|True|Layer to add this rule to|Network|None|
+|list_of_services|[]string|None|False|List of services to block e.g. ["AOL", "SMTP"]|['AOL', 'SMTP']|None|
+|name|string|None|True|Rule name|Malicious IP Addresses|None|
+|position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|1|None|
+|source|string|None|False|Source network object name|192.168.2.1|None|
 
 Example input:
 
@@ -915,6 +1128,7 @@ privileges.
 
 # Version History
 
+* 1.3.0 - New actions Set Threat Protection by CVE and Show All Threat Protections
 * 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` action to with color option 
 * 1.1.0 - New action Add Host to Network Group
 * 1.0.0 - Initial plugin

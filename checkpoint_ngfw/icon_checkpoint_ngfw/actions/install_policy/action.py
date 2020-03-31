@@ -13,6 +13,9 @@ class InstallPolicy(komand.Action):
                 output=InstallPolicyOutput())
 
     def run(self, params={}):
+        if params.get(Input.DISCARD_OTHER_SESSIONS, False):
+            self.connection.discard_all_sessions()
+
         url = f"{self.connection.server_and_port}/web_api/install-policy"
         payload = {
             "policy-package": params.get(Input.POLICY_PACKAGE),
@@ -21,8 +24,7 @@ class InstallPolicy(komand.Action):
         }
 
         headers = self.connection.get_headers()
-        discard_other_changes = params.get(Input.DISCARD_OTHER_SESSIONS)
 
-        self.connection.install_policy(headers, discard_other_changes, payload, url)
+        self.connection.install_policy(headers, payload, url)
 
         return {"success": True}

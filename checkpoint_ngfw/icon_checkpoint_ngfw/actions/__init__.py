@@ -7,4 +7,6 @@ from .install_policy.action import InstallPolicy
 from .remove_access_rule.action import RemoveAccessRule
 from .remove_host.action import RemoveHost
 from .set_threat_protection.action import SetThreatProtection
+from .set_threat_protection_by_cve.action import SetThreatProtectionByCve
 from .show_access_rulebase.action import ShowAccessRulebase
+from .show_all_threat_protections.action import ShowAllThreatProtections

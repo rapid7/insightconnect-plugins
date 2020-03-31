@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "set_threat_protection_by_cve",
+        "input": {
+            "action": "Prevent",
+            "cve_number": "CVE-2006-2378",
+            "discard_other_sessions": true,
+            "profile": "Optimized"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

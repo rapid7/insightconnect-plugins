@@ -20,7 +20,6 @@ class Connection(komand.Connection):
         self.server_port = params.get(Input.PORT)
 
         self.server_and_port = f"https://{self.server_ip}:{self.server_port}"
-
         self.get_sid()
 
     def get_sid(self):
@@ -67,9 +66,9 @@ class Connection(komand.Connection):
         request = requests.post(url, json=payload, headers=headers, verify=self.ssl_verify)
         try:
             request.raise_for_status()
-        except Exception as e:
+        except Exception:
             self.logger.warning(f"There was a problem logging out. Ignoring this and attempting to continue. "
-                              f"Error follows:\n{request.text}")
+                                f"Error follows:\n{request.text}")
 
     def get_headers(self):
         return {
@@ -160,7 +159,7 @@ class Connection(komand.Connection):
                                   data=e)
         return result.json()
 
-    def install_policy(self, headers, discard_other_changes, payload, url):
+    def install_policy(self, headers, payload, url):
         result = requests.post(url, headers=headers, json=payload, verify=self.ssl_verify)
         try:
             result.raise_for_status()
@@ -169,6 +168,50 @@ class Connection(komand.Connection):
                                   assistance=result.text,
                                   data=e)
         return result
+
+    def get_all_threat_protections(self):
+        endpoint = f"{self.server_and_port}/web_api/show-threat-protections"
+        limit = 100  # 500 is the Max limit, however that broke our server.
+        payload = {
+            "details-level": "full",
+            "limit": limit
+        }
+        headers = self.get_headers()
+
+        result = requests.post(endpoint, headers=headers, json=payload, verify=self.ssl_verify)
+        try:
+            result.raise_for_status()
+        except Exception as e:
+            raise PluginException(cause=f"Get all threat protections failed: {endpoint}",
+                                  assistance=result.text,
+                                  data=e)
+
+        json_obj = result.json()
+
+        protection_list = json_obj.get("protections")
+
+        # Pagination
+        to_ = json_obj.get("to")
+        total = json_obj.get("total")
+
+        # While there are still more results, go get them
+        while to_ < total:
+            payload = {
+                "details-level": "full",
+                "offset": to_ + 1,
+                "limit": limit
+            }
+
+            # Get more results
+            result = requests.post(endpoint, headers=headers, json=payload, verify=self.ssl_verify)
+            result_obj = result.json()
+            protection_list.extend(result_obj.get("protections"))
+
+            # Setup Pagination
+            to_ = result_obj.get("to")
+            total = result_obj.get("total")
+
+        return protection_list
 
     def test(self):
         if not self.sid:
