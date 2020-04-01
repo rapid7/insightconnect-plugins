@@ -63,7 +63,7 @@ types:
       required: false
     ip_addresses:
       title: IP Addresses
-      description: IPv4 Addresses
+      description: IPv4 addresses
       type: "[]ip_addresses"
       required: false
     name_servers:
