@@ -27,10 +27,15 @@ This action is used to search the database to find vulnerabilities and exploits.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|database|string|None|True|Name of the database|['Vulnerability Database', 'Metasploit Modules']|
-|search|string|None|True|Search parameter for database|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|database|string|None|True|Name of the database|None|['Vulnerability Database', 'Metasploit Modules']|
+|search|string|None|True|Search parameter for database|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -65,9 +70,14 @@ This action is used to fetch content results for a vulnerability or module.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|identifier|string|None|True|Rapid7 vulnerability/module identifier|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|identifier|string|None|True|Rapid7 vulnerability/module identifier|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -129,6 +139,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.3 - Update to v4 Python plugin runtime
 * 2.0.2 - Implement workaround for VulnDB API bug in Get Content action where the `severity` datatype response differs based on the action input
 * 2.0.1 - Add identifier field to the Search Database action
 * 2.0.0 - Utilize VulnDB API
