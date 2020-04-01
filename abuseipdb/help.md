@@ -20,9 +20,9 @@ This plugin utilizes the [AbuseIPDB API v2](https://docs.abuseipdb.com) to looku
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_secret_key|None|True|API key from account|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|credentials|credential_secret_key|None|True|API key from account|e73h82c63847f3ff1h5216b556edh153h30430d73bchhe680f70h1d8885fb8bb130b46c7767d6886|None|
 
 Example input:
 
@@ -45,11 +45,21 @@ This action is used to report an abusive IP address.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|categories|string|None|True|Comma delineated list of category IDs e.g. 10,12,15. Entire list is available at https://www.abuseipdb.com/categories|None|
-|comment|string|None|False|Describe the type of malicious activity e.g. Brute forcing Wordpress login|None|
-|ip|string|None|True|IPv4 or IPv6 address to report e.g. 8.8.8.8, ::1|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|categories|string|None|True|Comma delineated list of category IDs e.g. 10,12,15. Entire list is available at https://www.abuseipdb.com/categories|10,12,15|None|
+|comment|string|None|False|Describe the type of malicious activity e.g. Brute forcing Wordpress login|Brute forcing Wordpress|None|
+|ip|string|None|True|IPv4 or IPv6 address to report e.g. 8.8.8.8, ::1|8.8.8.8|None|
+
+Example input:
+
+```
+{
+  "categories": "10,12,15",
+  "comment": "Brute forcing Wordpress login",
+  "ip": "1.2.3.4"
+}
+```
 
 ##### Output
 
@@ -85,11 +95,21 @@ This action is used to look up an IP address in the database.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address|string|None|True|IPv4 or IPv6 address e.g. 8.8.8.8, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)|None|
-|days|string|30|True|Check for IP reports in the last x days|None|
-|verbose|boolean|True|True|When set, reports will include the comment (if any) and the reporter's user ID number (0 if reported anonymously)|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|address|string|None|True|IPv4 or IPv6 address e.g. 8.8.8.8, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)|8.8.8.8|None|
+|days|string|30|True|Check for IP reports in the last x days|30|None|
+|verbose|boolean|True|True|When set, reports will include the comment (if any) and the reporter's user ID number (0 if reported anonymously)|True|None|
+
+Example input:
+
+```
+{
+  "address": "8.8.8.8",
+  "days": "30",
+  "verbose": true
+}
+```
 
 ##### Output
 
@@ -161,10 +181,19 @@ This action is used to look up a CIDR address in the database.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|cidr|string|None|True|IPv4 address block in CIDR notation e.g. 207.126.144.0/20|None|
-|days|string|30|True|Check for CIDR reports in the last x days|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|cidr|string|None|True|IPv4 address block in CIDR notation e.g. 207.126.144.0/20|207.126.144.0/20|None|
+|days|string|30|True|Check for CIDR reports in the last x days|30|None|
+
+Example input:
+
+```
+{
+  "cidr": "207.126.144.0/20",
+  "days": "30"
+}
+```
 
 ##### Output
 
@@ -218,10 +247,18 @@ This action is used to list of blacklisted IP addresses.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|confidenceMinimum|string|None|True|Minimum confidence to filter by|None|
-|limit|string|None|False|Max length of blacklist|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|confidenceMinimum|string|None|True|Minimum confidence to filter by, scaled 0-100, least to most confident|90|None|
+|limit|string|None|False|Max length of blacklist|10|None|
+
+Example input:
+
+```
+{
+  "confidenceMinimum": "90"
+}
+```
 
 ##### Output
 
@@ -302,6 +339,7 @@ There's a rate limit on the free API service. The following error messags `429 C
 
 # Version History
 
+* 5.0.3 - Add example inputs
 * 5.0.2 - Changed descriptions | Removed duplicated code | Use output constants | Added "f" strings
 * 5.0.1 - New spec and help.md format for the Hub
 * 5.0.0 - Mark certain outputs as optional as they are not always returned by the AbuseIPDB service | Clean output of null values
@@ -318,4 +356,3 @@ There's a rate limit on the free API service. The following error messags `429 C
 
 * [AbuseIPDB](https://www.abuseipdb.com)
 * [AbuseIPDB API](https://docs.abuseipdb.com)
-

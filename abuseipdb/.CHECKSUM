@@ -1,5 +1,5 @@
 {
-	"spec": "88162fcf558358a818ed62b9bb012bef",
+	"spec": "d9eedfe65f1f3aaf089659c20ec9a7d1",
 	"manifest": "4f9076499b1d2c05806ff8a6d3236f80",
 	"setup": "f3571028fb9652b24b8bac495124a3b3",
 	"schemas": [
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "get_blacklist/schema.py",
-			"hash": "fec002173854f2a01493a792c6cba762"
+			"hash": "0ba2b1d476a2351bc7db808cb3ff6462"
 		},
 		{
 			"identifier": "report_ip/schema.py",

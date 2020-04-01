@@ -26,7 +26,7 @@ class GetBlacklistInput(komand.Input):
     "confidenceMinimum": {
       "type": "string",
       "title": "Confidence Minimum",
-      "description": "Minimum confidence to filter by",
+      "description": "Minimum confidence to filter by, scaled 0-100, least to most confident",
       "order": 1
     },
     "limit": {
