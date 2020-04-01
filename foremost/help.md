@@ -28,16 +28,24 @@ This action is used to extract files from a disk image.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|file|bytes|None|True|Base64 encoded disk image file|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file|bytes|None|True|Base64 encoded disk image file|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
+
+Example input:
+
+```
+{
+  "file": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|files|[]bytes|False|Extracted files|
 |file_count|integer|False|Number of files extracted|
+|files|[]bytes|False|Extracted files|
 
 ### Triggers
 
