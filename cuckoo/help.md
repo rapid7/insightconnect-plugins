@@ -267,7 +267,7 @@ This action is used to return the status of the cuckoo server.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -418,7 +418,7 @@ This action is used to return VPN status.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -435,7 +435,7 @@ This action is used to return a list with details on the analysis machines avail
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -633,7 +633,7 @@ This action is used to shut down the server if in debug mode and using the werkz
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

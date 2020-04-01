@@ -26,7 +26,7 @@ This action is used to lookup the public IP address of an Insight Orchestrator h
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
