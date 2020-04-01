@@ -27,9 +27,9 @@ This action is used to Base64 encode a `string` using the standard Base64 alphab
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|content|string|None|True|Data to encode|Rapid7 InsightConnect|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|content|string|None|True|Data to encode|None|Rapid7 InsightConnect|
 
 Example input:
 
@@ -59,10 +59,10 @@ This action is used to decode a Base64 `string` or file of type `bytes` using th
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|base64|bytes|None|True|Data to decode|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cgo=|None|
-|errors|string|nothing|False|How errors should be handled when decoding Base64|ignore|['replace', 'ignore', 'nothing']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|base64|bytes|None|True|Data to decode|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cgo=|
+|errors|string|nothing|False|How errors should be handled when decoding Base64|['replace', 'ignore', 'nothing']|ignore|
 
 Example input:
 
