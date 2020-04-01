@@ -1,5 +1,5 @@
 {
-	"spec": "cea36092f259d8c2bde6035b782afde2",
+	"spec": "510e9a81c3ad53dc72a173ab1541f8ff",
 	"manifest": "96447e9ed47cd50e1af8a13adddd36b9",
 	"setup": "ff3ccd7c93331a70dcd42be6f393c02e",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "check_ip/schema.py",
-			"hash": "f59063e54846f5676927180c76700e29"
+			"hash": "a3b9e680009f3fab2b134f368004224b"
 		},
 		{
 			"identifier": "get_blacklist/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "report_ip/schema.py",
-			"hash": "174d5747b88c4ba0ce34b50e12d11177"
+			"hash": "522148fce14773f9c6447fb8cdd0a354"
 		},
 		{
 			"identifier": "connection/schema.py",

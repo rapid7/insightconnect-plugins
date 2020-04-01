@@ -49,7 +49,7 @@ This action is used to report an abusive IP address.
 |----|----|-------|--------|-----------|-------|----|
 |categories|string|None|True|Comma delineated list of category IDs e.g. 10,12,15. Entire list is available at https://www.abuseipdb.com/categories|10,12,15|None|
 |comment|string|None|False|Describe the type of malicious activity e.g. Brute forcing Wordpress login|Brute forcing Wordpress|None|
-|ip|string|None|True|IPv4 or IPv6 address to report e.g. 8.8.8.8, ::1|8.8.8.8|None|
+|ip|string|None|True|IPv4 or IPv6 address to report e.g. 198.51.100.100, ::1|198.51.100.100|None|
 
 Example input:
 
@@ -97,7 +97,7 @@ This action is used to look up an IP address in the database.
 
 |Name|Type|Default|Required|Description|Example|Enum|
 |----|----|-------|--------|-----------|-------|----|
-|address|string|None|True|IPv4 or IPv6 address e.g. 8.8.8.8, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)|8.8.8.8|None|
+|address|string|None|True|IPv4 or IPv6 address e.g. 198.51.100.100, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)|198.51.100.100|None|
 |days|string|30|True|Check for IP reports in the last x days|30|None|
 |verbose|boolean|True|True|When set, reports will include the comment (if any) and the reporter's user ID number (0 if reported anonymously)|True|None|
 
