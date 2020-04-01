@@ -17,13 +17,13 @@ class ConnectionSchema(komand.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "Enter the API key e.g. 11111-aaaaa-aaa11-111aa-aaa11",
+      "description": "API key e.g. 11111-aaaaa-aaa11-111aa-aaa11",
       "order": 2
     },
     "username": {
       "type": "string",
       "title": "Username",
-      "description": "Enter the API username",
+      "description": "API username",
       "order": 1
     }
   },

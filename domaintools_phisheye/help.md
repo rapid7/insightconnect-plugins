@@ -20,8 +20,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|Enter the API key e.g. 11111-aaaaa-aaa11-111aa-aaa11|None|
-|username|string|None|True|Enter the API username|None|
+|api_key|credential_secret_key|None|True|API key e.g. 11111-aaaaa-aaa11-111aa-aaa11|None|
+|username|string|None|True|API username|None|
 
 Example input:
 

@@ -9,7 +9,7 @@ class DomainList(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='domain_list',
+            name="domain_list",
             description=Component.DESCRIPTION,
             input=DomainListInput(),
             output=DomainListOutput())
@@ -19,17 +19,17 @@ class DomainList(komand.Action):
         days_back = params.get(Input.DAYS_BACK, None)
 
         if query not in self.connection.terms:
-            self.logger.error(f'DomainTools: Terms: Query not in terms. Allowed terms: {self.connection.terms}')
-            raise PluginException(cause='DomainTools: Terms:',
-                                  assistance=f'Query not in terms. Allowed terms: {self.connection.terms}')
+            self.logger.error(f"DomainTools: Terms: Query not in terms. Allowed terms: {self.connection.terms}")
+            raise PluginException(cause="DomainTools: Terms:",
+                                  assistance=f"Query not in terms. Allowed terms: {self.connection.terms}")
 
         response = Helper.make_request(self.connection.api.phisheye, self.logger, query, days_back)
         output = {
-            Output.DOMAINS: response['response']['domains'],
-            Output.TERM: response['response']['term']
+            Output.DOMAINS: response["response"]["domains"],
+            Output.TERM: response["response"]["term"]
         }
 
-        if 'date' in response['response']:
-            output['date'] = response['response']['date']
+        if "date" in response["response"]:
+            output["date"] = response["response"]["date"]
 
         return output

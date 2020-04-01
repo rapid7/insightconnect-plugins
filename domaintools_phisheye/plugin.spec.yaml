@@ -21,46 +21,54 @@ hub_tags:
 connection:
   username:
     type: string
-    description: Enter the API username
+    description: API username
+    example: username
     required: true
   api_key:
     title: API Key
     type: credential_secret_key
-    description: Enter the API key e.g. 11111-aaaaa-aaa11-111aa-aaa11
+    description: API key e.g. 11111-aaaaa-aaa11-111aa-aaa11
+    example: 11111-aaaaa-aaa11-111aa-aaa11
     required: true
 types:
   ip_addresses:
     ip:
       title: IPv4
-      description: IPv4 Address
+      description: IPv4 address
       type: string
       required: true
+      example: 1.1.1.1
     country_code:
       title: Country Code
       description: Country code
       type: string
       required: true
+      example: US
   domains:
     domain:
       title: Domain
       description: Links to WHOIS page for the domain
       type: string
       required: true
+      example: appeltypoexample.com
     tld:
       title: TLD
       description: TLD domain
       type: string
       required: true
+      example: com
     created_date:
       title: Created Date
       description: Date when domain created
       type: string
       required: false
+      example: 2016-10-31
     registrant_email:
       title: Registrant Email
       description: Email used for register
       type: string
       required: false
+      example: user@example.com
     ip_addresses:
       title: IP Addresses
       description: IPv4 addresses
@@ -71,16 +79,19 @@ types:
       description: Name servers used by domain
       type: "[]string"
       required: false
+      example: ["ns57.domaincontrol.com", "ns58.domaincontrol.com"]
     registrar_name:
       title: Registrar Name
       description: Registrar name where domain was registered
       type: string
       required: false
+      example: GoDaddy.com, LLC
     risk_score:
       title: Risk Score
       description: Calculated by the Domain Risk Score
       type: integer
       required: false
+      example: 24
 actions:
   domain_list:
     title: Domain List
@@ -104,11 +115,13 @@ actions:
         description: Query term
         type: string
         required: true
+        example: apple
       date:
         title: Date
         description: Date when query run
         type: string
         required: false
+        example: 2016-11-01
       domains:
         title: Domains
         description: Domains for query

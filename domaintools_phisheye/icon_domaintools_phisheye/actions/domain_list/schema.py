@@ -99,7 +99,7 @@ class DomainListOutput(komand.Output):
         "ip_addresses": {
           "type": "array",
           "title": "IP Addresses",
-          "description": "IPv4 Addresses",
+          "description": "IPv4 addresses",
           "items": {
             "$ref": "#/definitions/ip_addresses"
           },
@@ -157,7 +157,7 @@ class DomainListOutput(komand.Output):
             "ip": {
               "type": "string",
               "title": "IPv4",
-              "description": "IPv4 Address",
+              "description": "IPv4 address",
               "order": 1
             }
           },
@@ -181,7 +181,7 @@ class DomainListOutput(komand.Output):
         "ip": {
           "type": "string",
           "title": "IPv4",
-          "description": "IPv4 Address",
+          "description": "IPv4 address",
           "order": 1
         }
       },
