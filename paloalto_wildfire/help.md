@@ -67,6 +67,20 @@ Example input:
 |----|----|--------|-----------|
 |submission|filedata|True|Submission|
 
+Example output:
+
+```
+{
+  "submission": {
+    "filename": "setup.exe",
+    "filetype": "exe",
+    "md5": "602a171cd840cb0e05cbf2a263aeb708",
+    "sha256": "d0fc660de9dbc33c56e2f8cd5a79290290851cded319f953cf78b469dbd6da6d",
+    "url": "http://art-archiv.ru/images/animated-number/docum-arhiv.exe"
+  }
+}
+```
+
 #### Get Malware Test File
 
 This action is used to get a unique, benign malware test file that will trigger.
@@ -80,6 +94,14 @@ _This action does not contain any inputs._
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |file|bytes|True|Benign malware test file|
+
+Example output:
+
+```
+{
+  "file": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
+}
+```
 
 #### Get PCAP
 
@@ -107,6 +129,14 @@ Example input:
 |----|----|--------|-----------|
 |file|bytes|True|File|
 
+Example output:
+
+```
+{
+  "file": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
+}
+```
+
 #### Get Sample
 
 This action is used to query for a sample file.
@@ -131,6 +161,14 @@ Example input:
 |----|----|--------|-----------|
 |file|bytes|True|File|
 
+Example output:
+
+```
+{
+  "file": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
+}
+```
+
 #### Submit URL
 
 This action is used to submit a URL for analysis.
@@ -154,6 +192,18 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |submission|urldata|True|Submission|
+
+Example output:
+
+```
+{
+  "submission": {
+    "md5": "602a171cd840cb0e05cbf2a263aeb708",
+    "sha256": "d0fc660de9dbc33c56e2f8cd5a79290290851cded319f953cf78b469dbd6da6d",
+    "url": "http://art-archiv.ru/images/animated-number/docum-arhiv.exe"
+  }
+}
+```
 
 #### Get Report
 
@@ -181,6 +231,14 @@ Example input:
 |----|----|--------|-----------|
 |report|bytes|True|Report|
 
+Example output:
+
+```
+{
+  "report": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
+}
+```
+
 #### Submit File
 
 This action is used to submit a file for analysis.
@@ -207,6 +265,21 @@ Example input:
 |----|----|--------|-----------|
 |submission|filedata|True|Submission|
 
+Example output:
+
+```
+{
+  "submission": {
+    "filename": "setup.exe",
+    "filetype": "PE32 executable",
+    "md5": "65da6f5b6ae29b3485b4bdabd01d1cf9",
+    "sha256": "93b9b7b85c8cd0de0710fe0331b1939d6bdebba206cc49cccda40ce40ddaec33",
+    "size": "285696",
+    "supported_file_type": true
+  }
+}
+```
+
 #### Get Verdict
 
 This action is used to query for a file's classification.
@@ -231,6 +304,14 @@ Example input:
 |----|----|--------|-----------|
 |verdict|string|True|One of the following verdicts: 'Benign', 'Malware', 'Greyware', 'Pending', 'Error', or 'Not found`|
 
+Example output:
+
+```
+{
+  "verdict": "Malware"
+}
+```
+
 ### Triggers
 
 _This plugin does not contain any triggers._
@@ -245,7 +326,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.2 - Add example inputs
+* 1.1.2 - Fix bug where output doesn't match schema in Get Verdict action | Add improved error messaging in Submit URL action | Add example inputs
 * 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Fixed issue where unsupported file types failed | Update to add `supported_file` to filedata type
 * 1.0.2 - Fixed issue where connection was not passing the API key properly
