@@ -4,7 +4,7 @@ products: [insightconnect]
 name: whois
 title: WHOIS
 description: The WHOIS plugin enables address and domain lookups in the WHOIS databases
-version: 1.0.7
+version: 1.0.8
 vendor: rapid7
 support: community
 status: []
@@ -27,6 +27,7 @@ actions:
         title: Domain
         type: string
         description: Domain name to lookup
+        example: rapid7.com
         required: true
     output:
       name:
@@ -117,6 +118,7 @@ actions:
         title: Address
         type: string
         description: IP to Lookup
+        example: 198.51.100.100
         required: true
     output:
       netname:
