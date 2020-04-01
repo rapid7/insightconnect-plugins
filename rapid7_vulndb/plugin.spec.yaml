@@ -118,6 +118,7 @@ actions:
         description: Rapid7 vulnerability/module identifier
         type: string
         required: true
+        example: "apple-itunes-cve-2019-8835"
     output:
       content_result:
         title: Result
@@ -136,11 +137,13 @@ actions:
         - Vulnerability Database
         - Metasploit Modules
         required: true
+        example: "Vulnerability Database"
       search:
         title: Search
         description: Search parameter for database
         type: string
         required: true
+        example: "cve-2015"
     output:
       search_results:
         title: Results

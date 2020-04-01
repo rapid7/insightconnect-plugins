@@ -35,6 +35,10 @@ This action is used to search the database to find vulnerabilities and exploits.
 Example input:
 
 ```
+{
+  "database": "Vulnerability Database",
+  "search": "cve-2015"
+}
 ```
 
 ##### Output
@@ -77,6 +81,9 @@ This action is used to fetch content results for a vulnerability or module.
 Example input:
 
 ```
+{
+  "identifier": "apple-itunes-cve-2019-8835"
+}
 ```
 
 ##### Output
@@ -139,7 +146,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.3 - Update to v4 Python plugin runtime
+* 2.0.3 - Update to v4 Python plugin runtime | Add example inputs
 * 2.0.2 - Implement workaround for VulnDB API bug in Get Content action where the `severity` datatype response differs based on the action input
 * 2.0.1 - Add identifier field to the Search Database action
 * 2.0.0 - Utilize VulnDB API
