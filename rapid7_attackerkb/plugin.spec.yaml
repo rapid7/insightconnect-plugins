@@ -20,140 +20,142 @@ hub_tags:
   use_cases: [remediation_management, vulnerability_management]
   keywords: [rapid7, attackerkb, vulnerability, cve]
   features: []
-connection:
-  credentials:
-    title: API Key
-    description: API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9
-    type: credential_secret_key
-    required: true
-    example: YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9
-  max_pages:
-    title: Max Pages
-    description: Max pages returned, default 100
-    type: integer
-    required: false
-    default: 100
-    example: 10
 types:
-  link:
-    href:
-      title: Href
-      description: URL for paginated resource
-      type: string
-      required: true
   score:
     attackerValue:
       title: Attacker Value
       description: The attacker value score
       type: float
       required: false
+      example: 1
     exploitability:
       title: Exploitability
       description: The exploitability score
       type: float
       required: false
+      example: 4
   tags:
     commonEnterprise:
       title: Common Enterprise
       description: "The 'Common in enterprise' score"
       type: float
       required: false
+      example: 0
     defaultConfiguration:
       title: Default Configuration
       description: "The 'Present in default configuration' score"
       type: float
       required: false
+      example: 0
     difficultToDevelop:
       title: Difficult To Develop
       description: "The 'Difficult to develop' score"
       type: float
       required: false
+      example: 0
     preAuth:
       title: Pre Auth
       description: "The 'Pre-Auth' score"
       type: float
       required: false
+      example: 0
     postAuth:
       title: Post Auth
       description: "The 'Post-Auth' score"
       type: float
       required: false
+      example: 0
     difficultToExploit:
       title: Difficult To Exploit
       description: "The 'High barrier to exploitation' score"
       type: float
       required: false
+      example: 0
     difficultToPatch:
       title: Difficult To Patch
       description: "The 'Difficult to patch' score"
       type: float
       required: false
+      example: 0
     easyToDevelop:
       title: Easy To Develop
       description: "The 'Easy to develop' score"
       type: float
       required: false
+      example: 0
     highPrivilegeAccess:
       title: High Privilege Access
       description: "The 'Allows high-privileged access' score"
       type: float
       required: false
+      example: 0
     noUsefulData:
       title: No Useful Data
       description: "The 'Does not produce useful data' score"
       type: float
       required: false
+      example: 0
     obscureConfiguration:
       title: Obscure Configuration
       description: "The 'Only present in obscure configuration' score"
       type: float
       required: false
+      example: 0
     requiresInteraction:
       title: Requires Interaction
       description: "The 'Requires user interaction' score"
       type: float
       required: false
+      example: 0
   topic:
     created:
       title: Created
       description: The date and time the topic was created, eg. 2019-07-02T16:22:15.879357Z
       type: string
       required: false
+      example: 2019-07-02T16:22:15.879357Z
     document:
       title: Document
       description: The main content of the topic
       type: string
       required: true
+      example: This exploit is *critical*. RDP is ubiquitous in corporate settings, which are the most likely to have older Operating Systems deployed. That issue is complicated by the general reasoning that most older Operating systems are there to support legacy equipment and are less likely to receive automated patching.
     editorId:
       title: Editor ID
       description: The UUID of the contributor who last edited the topic
       type: string
       required: false
+      example: c28a806c-84c7-44bf-95d3-1241475de5bf
     id:
       title: ID
       description: The UUID of the topic
       type: string
       required: false
+      example: c0f010fe-da9c-4aa6-b898-c57d483df51b
     metadata:
       title: Metadata
       description: A JSON value containing key/value pairs describing various attributes about this topic
       type: object
       required: false
+      metadata: {}
     name:
       title: Name
       description: The name or title of the topic
       type: string
       required: true
+      example: CVE-2019-0708 - BlueKeep
     revisionDate:
       title: Revision Date
       description: The date and time the topic was last changed, eg. 2019-07-02T16:22:15.879357Z
       type: string
       required: false
+      example: 2019-07-02T22:13:15.779501Z
     disclosureDate:
       title: Disclosure Date
       description: The date and time the topic was disclosed, eg. 2019-07-02T16:22:15.879357Z
       type: string
       required: false
+      example: 2019-11-07T22:53:05.779501Z
     score:
       title: Score
       description: The topic score properties
@@ -170,36 +172,57 @@ types:
       description: The date and time the assessment was created, eg. 2019-07-02T16:22:15.879357Z
       type: string
       required: false
+      example: 2019-07-02T16:32:15.879357Z
     document:
       title: Document
       description: The main content of the assessment
       type: string
       required: true
+      example: Watch this one for details. In the meantime, if you can’t patch, then block TCP/3389 (or whatever port you might be mapping RDP to), enable Network Level Authentication (NLA), or disable RDP.
     editorId:
       title: Editor ID
       description: The UUID of the contributor who last edited the assessment
       type: string
       required: false
+      example: c28a806c-84c7-44bf-95d3-1241475de5bf
     id:
       title: ID
       description: The UUID of the assessment
       type: string
       required: false
+      example: c45dc5fe-d9bd-4983-8d4f-29eba0ef692b
     metadata:
       title: Metadata
       description: A JSON value containing key/value pairs describing various attributes about this assessment
       type: object
       required: false
+      example: {}
     revisionDate:
       title: Revision Date
       description: The date and time the assessment was last changed, eg. 2019-07-02T16:22:15.879357Z
       type: string
       required: false
+      example: 2019-07-02T22:13:15.779501Z
     topicId:
       title: Topic ID
       description: The UUID of the topic this assessment is based on
       type: string
       required: true
+      example: c0f010fe-da9c-4aa6-b898-c57d483df51b
+connection:
+  credentials:
+    title: API Key
+    description: API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9
+    type: credential_secret_key
+    required: true
+    example: YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9
+  max_pages:
+    title: Max Pages
+    description: Max pages returned, default 100
+    type: integer
+    required: false
+    default: 100
+    example: 10
 actions:
   topic:
     title: Get Vulnerability

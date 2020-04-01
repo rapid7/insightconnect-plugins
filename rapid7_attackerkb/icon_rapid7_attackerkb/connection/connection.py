@@ -1,8 +1,8 @@
-# Custom imports below
-from icon_rapid7_attackerkb.util.api import AttackerKB
-
 import komand
 from .schema import ConnectionSchema, Input
+
+# Custom imports below
+from icon_rapid7_attackerkb.util.api import AttackerKB
 
 
 class Connection(komand.Connection):

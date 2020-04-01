@@ -6,7 +6,7 @@ class Assessments(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='assessments',
+            name="assessments",
             description=Component.DESCRIPTION,
             input=AssessmentsInput(),
             output=AssessmentsOutput())

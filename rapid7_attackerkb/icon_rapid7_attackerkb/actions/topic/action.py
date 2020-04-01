@@ -7,7 +7,7 @@ class Topic(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='topic',
+            name="topic",
             description=Component.DESCRIPTION,
             input=TopicInput(),
             output=TopicOutput())
