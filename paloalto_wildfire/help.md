@@ -19,12 +19,12 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|verify|boolean|True|True|Verify the certificate|None|
-|host|string|wildfire.paloaltonetworks.com|True|Palo Alto Wildfire host in cloud or on-premise, e.g. wildfire.paloaltonetworks.com or 10.3.4.50|None|
-|api_key|password|None|True|Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account or on your appliance|None|
-|proxy|object|None|False|An optional dictionary containing proxy data, with HTTPS as the key, and the proxy path as the value|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|api_key|credential_secret_key|None|True|Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account or on your appliance|None|None|
+|host|string|wildfire.paloaltonetworks.com|True|Palo Alto Wildfire host in cloud or on-premise, e.g. wildfire.paloaltonetworks.com or 10.3.4.50|None|None|
+|proxy|object|None|False|An optional dictionary containing proxy data, with HTTPS as the key, and the proxy path as the value|None|None|
+|verify|boolean|True|True|Verify the certificate|None|None|
 
 ## Technical Details
 
@@ -66,16 +66,21 @@ This action is used to query for a PCAP.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|platform|string|None|True|Target analysis environment|['Windows XP, Adobe Reader 9.3.3, Office 2003', 'Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007', 'Windows XP, Adobe Reader 11, Flash 11, Office 2010', u'Windows 7 32\u2010bit, Adobe Reader 11, Flash 11, Office 2010', 'Windows 7 64bit, Adobe Reader 11, Flash 11, Office 2010', 'Android 2.3, API 10, avd2.3.1', 'Mac OS X Mountain Lion']|
-|hash|string|None|True|The MD5 or SHA-256 hash value of the sample|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|None|
+|platform|string|None|True|Target analysis environment|None|['Windows XP, Adobe Reader 9.3.3, Office 2003', 'Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007', 'Windows XP, Adobe Reader 11, Flash 11, Office 2010', 'Windows 7 32‐bit, Adobe Reader 11, Flash 11, Office 2010', 'Windows 7 64bit, Adobe Reader 11, Flash 11, Office 2010', 'Android 2.3, API 10, avd2.3.1', 'Mac OS X Mountain Lion']|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|file|bytes|True|None|
+|file|bytes|True|File|
 
 #### Get Sample
 
@@ -83,15 +88,20 @@ This action is used to query for a sample file.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hash|string|None|True|The MD5 or SHA-256 hash value of the sample|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|file|bytes|True|None|
+|file|bytes|True|File|
 
 #### Submit URL
 
@@ -99,15 +109,20 @@ This action is used to submit a URL for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to submit|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|url|string|None|True|URL to submit|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|submission|urldata|True|None|
+|submission|urldata|True|Submission|
 
 #### Get Report
 
@@ -115,16 +130,21 @@ This action is used to query for an XML or PDF report for a particular sample.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hash|string|None|True|The MD5 or SHA-256 hash value of the sample|None|
-|format|string|None|True|Report format: PDF or XML|['pdf', 'xml']|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|format|string|None|True|Report format: PDF or XML|None|['pdf', 'xml']|
+|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|report|bytes|True|None|
+|report|bytes|True|Report|
 
 #### Submit File
 
@@ -132,16 +152,25 @@ This action is used to submit a file for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|file|bytes|None|True|File to submit. Supported types are Email-link, Flash, APK, PDF, JAR, PE, MS-Office|None|
-|filename|string|None|False|Optional file name|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|file|bytes|None|True|File to submit. Supported types are Email-link, Flash, APK, PDF, JAR, PE, MS-Office|None|None|
+|filename|string|None|False|Optional file name|None|None|
+
+Example input:
+
+```
+{
+  "file": "TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAA...",
+  "filename": "ImportantCompanyFinancialReport.pdf"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|submission|filedata|True|None|
+|submission|filedata|True|Submission|
 
 #### Get Verdict
 
@@ -149,9 +178,14 @@ This action is used to query for a file's classification.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hash|string|None|True|The MD5 or SHA-256 hash value of the sample|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -173,6 +207,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.2 - Add example inputs
 * 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Fixed issue where unsupported file types failed | Update to add `supported_file` to filedata type
 * 1.0.2 - Fixed issue where connection was not passing the API key properly
