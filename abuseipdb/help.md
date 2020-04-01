@@ -31,7 +31,6 @@ Example input:
   "credentials": {
     "secretKey": "e73h82c63847f3ff1h5216b556edh153h30430d73bchhe680f70h1d8885fb8bb130b46c7767d6886"
     }
-  }
 }
 ```
 
