@@ -83,7 +83,7 @@ connection:
     description: Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account
       or on your appliance
     required: true
-    example: 9de5069c5afe602b2ea0a04b66beb2c0
+    example: 5df698b6778e586b704460731b921e52
   proxy:
     type: object
     title: Proxy

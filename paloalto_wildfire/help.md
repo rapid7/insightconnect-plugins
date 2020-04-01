@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Example|Enum|
 |----|----|-------|--------|-----------|-------|----|
-|api_key|credential_secret_key|None|True|Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account or on your appliance|9de5069c5afe602b2ea0a04b66beb2c0|None|
+|api_key|credential_secret_key|None|True|Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account or on your appliance|5df698b6778e586b704460731b921e52|None|
 |host|string|wildfire.paloaltonetworks.com|True|Palo Alto Wildfire host in cloud or on-premise, e.g. wildfire.paloaltonetworks.com or 10.3.4.50|wildfire.paloaltonetworks.com|None|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTPS as the key, and the proxy path as the value|{ "https": "https://proxy.example.com" }|None|
 |verify|boolean|True|True|Verify the certificate|True|None|
@@ -31,7 +31,7 @@ Example input:
 ```
 {
   "api_key": {
-    "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
+    "secretKey": "5df698b6778e586b704460731b921e52"
   },
   "host": "wildfire.paloaltonetworks.com",
   "proxy": {},
