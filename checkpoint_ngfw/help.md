@@ -247,6 +247,12 @@ This action is used to set threat protection action per profile by its CVE (Comm
 Example input:
 
 ```
+{
+  "action": "Prevent",
+  "cve_number": "CVE-2006-2378",
+  "discard_other_sessions": true,
+  "profile": "Optimized"
+}
 ```
 
 ##### Output
@@ -258,6 +264,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": false
+}
 ```
 
 #### Install Policy
@@ -382,11 +391,6 @@ issue where objects remain locked after editing.
 ##### Input
 
 _This action does not contain any inputs._
-
-Example input:
-
-```
-```
 
 ##### Output
 
