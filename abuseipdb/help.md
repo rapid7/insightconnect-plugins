@@ -57,7 +57,7 @@ Example input:
 {
   "categories": "10,12,15",
   "comment": "Brute forcing Wordpress login",
-  "ip": "1.2.3.4"
+  "ip": "198.51.100.100"
 }
 ```
 
@@ -105,7 +105,7 @@ Example input:
 
 ```
 {
-  "address": "8.8.8.8",
+  "address": "198.51.100.100",
   "days": "30",
   "verbose": true
 }
@@ -135,7 +135,7 @@ Example output:
 
 ```
 {
-  "ipAddress": "118.25.6.39",
+  "ipAddress": "198.51.100.100",
   "isPublic": true,
   "ipVersion": 4,
   "isWhitelisted": false,
@@ -151,7 +151,7 @@ Example output:
   "reports": [
     {
       "reportedAt": "2018-12-20T20:55:14+00:00",
-      "comment": "Dec 20 20:55:14 srv206 sshd[13937]: Invalid user oracle from 118.25.6.39",
+      "comment": "Dec 20 20:55:14 srv206 sshd[13937]: Invalid user oracle from 198.51.100.100",
       "categories": [
         18,
         22
@@ -190,7 +190,7 @@ Example input:
 
 ```
 {
-  "cidr": "207.126.144.0/20",
+  "cidr": "198.51.100.0/24",
   "days": "30"
 }
 ```
@@ -212,19 +212,19 @@ Example output:
 
 ```
 {
-  "networkAddress": "1.2.3.0",
+  "networkAddress": "198.51.100.100",
   "netmask": "255.255.255.0",
-  "minAddress": "1.2.3.1",
-  "maxAddress": "1.2.3.254",
+  "minAddress": "198.51.100.1",
+  "maxAddress": "198.51.100.254",
   "numPossibleHosts": 254,
   "addressSpaceDesc": "Internet",
   "reportedAddress": [
     {
-      "ipAddress": "1.2.3.4",
+      "ipAddress": "198.51.100.100",
       "numReports": 3,
       "mostRecentReport": "2019-08-28T21:08:34+01:00",
       "abuseConfidenceScore": 11,
-      "countryCode": "AU"
+      "countryCode": "CN"
     }
   ],
   "found": true
@@ -273,15 +273,15 @@ Example output:
 {
   "blacklist": [
     {
-      "ipAddress": "5.188.10.179",
+      "ipAddress": "198.51.100.100",
       "abuseConfidenceScore": 100
     },
     {
-      "ipAddress": "185.222.209.14",
+      "ipAddress": "198.51.100.101",
       "abuseConfidenceScore": 100
     },
     {
-      "ipAddress": "191.96.249.183",
+      "ipAddress": "198.51.100.102",
       "abuseConfidenceScore": 100
     }
   ],
