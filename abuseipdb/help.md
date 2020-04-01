@@ -20,9 +20,9 @@ This plugin utilizes the [AbuseIPDB API v2](https://docs.abuseipdb.com) to looku
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|credentials|credential_secret_key|None|True|API key from account|e73h82c63847f3ff1h5216b556edh153h30430d73bchhe680f70h1d8885fb8bb130b46c7767d6886|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_secret_key|None|True|API key from account|None|e73h82c63847f3ff1h5216b556edh153h30430d73bchhe680f70h1d8885fb8bb130b46c7767d6886|
 
 Example input:
 
@@ -44,11 +44,11 @@ This action is used to report an abusive IP address.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|categories|string|None|True|Comma delineated list of category IDs e.g. 10,12,15. Entire list is available at https://www.abuseipdb.com/categories|10,12,15|None|
-|comment|string|None|False|Describe the type of malicious activity e.g. Brute forcing Wordpress login|Brute forcing Wordpress|None|
-|ip|string|None|True|IPv4 or IPv6 address to report e.g. 198.51.100.100, ::1|198.51.100.100|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|categories|string|None|True|Comma delineated list of category IDs e.g. 10,12,15. Entire list is available at https://www.abuseipdb.com/categories|None|10,12,15|
+|comment|string|None|False|Describe the type of malicious activity e.g. Brute forcing Wordpress login|None|Brute forcing Wordpress|
+|ip|string|None|True|IPv4 or IPv6 address to report e.g. 198.51.100.100, ::1|None|198.51.100.100|
 
 Example input:
 
@@ -94,11 +94,11 @@ This action is used to look up an IP address in the database.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|address|string|None|True|IPv4 or IPv6 address e.g. 198.51.100.100, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)|198.51.100.100|None|
-|days|string|30|True|Check for IP reports in the last x days|30|None|
-|verbose|boolean|True|True|When set, reports will include the comment (if any) and the reporter's user ID number (0 if reported anonymously)|True|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IPv4 or IPv6 address e.g. 198.51.100.100, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)|None|198.51.100.100|
+|days|string|30|True|Check for IP reports in the last x days|None|30|
+|verbose|boolean|True|True|When set, reports will include the comment (if any) and the reporter's user ID number (0 if reported anonymously)|None|True|
 
 Example input:
 
@@ -180,10 +180,10 @@ This action is used to look up a CIDR address in the database.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|cidr|string|None|True|IPv4 address block in CIDR notation e.g. 207.126.144.0/20|207.126.144.0/20|None|
-|days|string|30|True|Check for CIDR reports in the last x days|30|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cidr|string|None|True|IPv4 address block in CIDR notation e.g. 207.126.144.0/20|None|207.126.144.0/20|
+|days|string|30|True|Check for CIDR reports in the last x days|None|30|
 
 Example input:
 
@@ -246,10 +246,10 @@ This action is used to list of blacklisted IP addresses.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|confidenceMinimum|string|None|True|Minimum confidence to filter by, scaled 0-100, least to most confident|90|None|
-|limit|string|None|False|Max length of blacklist|10|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|confidenceMinimum|string|None|True|Minimum confidence to filter by, scaled 0-100, least to most confident|None|90|
+|limit|string|None|False|Max length of blacklist|None|10|
 
 Example input:
 
