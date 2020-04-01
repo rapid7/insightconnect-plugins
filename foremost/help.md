@@ -36,7 +36,7 @@ Example input:
 
 ```
 {
-  "file": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA"
+  "file": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
 }
 ```
 
