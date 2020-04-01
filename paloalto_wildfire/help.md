@@ -26,6 +26,19 @@ The connection configuration accepts the following parameters:
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTPS as the key, and the proxy path as the value|None|None|
 |verify|boolean|True|True|Verify the certificate|None|None|
 
+Example input:
+
+```
+{
+  "api_key": {
+    "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
+  },
+  "host": "wildfire.paloaltonetworks.com",
+  "proxy": {},
+  "verify": true
+}
+```
+
 ## Technical Details
 
 ### Actions
@@ -36,15 +49,23 @@ This action is used to submit a file for analysis via a URL.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to submit. The URL must contain the file name, for example http://paloaltonetworks.com/folder1/my-file.pdf|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|url|string|None|True|URL to submit. The URL must contain the file name, for example http://paloaltonetworks.com/folder1/my-file.pdf|None|None|
+
+Example input:
+
+```
+{
+  "url": "http://paloaltonetworks.com/folder1/my-file.pdf"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|submission|filedata|True|None|
+|submission|filedata|True|Submission|
 
 #### Get Malware Test File
 
@@ -52,7 +73,7 @@ This action is used to get a unique, benign malware test file that will trigger.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -74,6 +95,10 @@ This action is used to query for a PCAP.
 Example input:
 
 ```
+{
+  "hash": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "platform": "Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007"
+}
 ```
 
 ##### Output
@@ -95,6 +120,9 @@ This action is used to query for a sample file.
 Example input:
 
 ```
+{
+  "hash": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
 ```
 
 ##### Output
@@ -116,6 +144,9 @@ This action is used to submit a URL for analysis.
 Example input:
 
 ```
+{
+  "url": "https://example.com"
+}
 ```
 
 ##### Output
@@ -138,6 +169,10 @@ This action is used to query for an XML or PDF report for a particular sample.
 Example input:
 
 ```
+{
+  "hash": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "format": "PDF"
+}
 ```
 
 ##### Output
@@ -185,6 +220,9 @@ This action is used to query for a file's classification.
 Example input:
 
 ```
+{
+  "hash": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
 ```
 
 ##### Output
