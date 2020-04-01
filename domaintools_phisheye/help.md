@@ -1,6 +1,6 @@
 # Description
 
-[DomainTools PhishEye](https://www.domaintools.com/resources/user-guides/phisheye) is a potent tool in your battle against these nefarious domains and the criminals who operate them. Leveraging DomainTools’ unique visibility into over 315 million current domains. PhishEye finds domains that mimic your properties, whether by typo or by combining your brand with other terms—terms like “account,” “login,” “online,” or countless others.
+[DomainTools PhishEye](https://www.domaintools.com/resources/user-guides/phisheye) is a potent tool in your battle against nefarious domains and the criminals who operate them. Leveraging DomainTools’ unique visibility into over 315 million current domains, PhishEye finds domains that mimic your properties, whether by typo or by combining your brand with other terms—terms like “account,” “login,” “online,” or countless others.
 
 This plugin allows you to enter a keyword, and PhishEye will return a sample of the existing domains that mimic that term.
 
