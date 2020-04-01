@@ -19,12 +19,12 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|api_key|credential_secret_key|None|True|Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account or on your appliance|5df698b6778e586b704460731b921e52|None|
-|host|string|wildfire.paloaltonetworks.com|True|Palo Alto Wildfire host in cloud or on-premise, e.g. wildfire.paloaltonetworks.com or 10.3.4.50|wildfire.paloaltonetworks.com|None|
-|proxy|object|None|False|An optional dictionary containing proxy data, with HTTPS as the key, and the proxy path as the value|{ "https": "https://proxy.example.com" }|None|
-|verify|boolean|True|True|Verify the certificate|True|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account or on your appliance|None|5df698b6778e586b704460731b921e52|
+|host|string|wildfire.paloaltonetworks.com|True|Palo Alto Wildfire host in cloud or on-premise, e.g. wildfire.paloaltonetworks.com or 10.3.4.50|None|wildfire.paloaltonetworks.com|
+|proxy|object|None|False|An optional dictionary containing proxy data, with HTTPS as the key, and the proxy path as the value|None|{ "https": "https://proxy.example.com" }|
+|verify|boolean|True|True|Verify the certificate|None|True|
 
 Example input:
 
@@ -49,9 +49,9 @@ This action is used to submit a file for analysis via a URL.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|url|string|None|True|URL to submit. The URL must contain the file name, for example http://paloaltonetworks.com/folder1/my-file.pdf|http://paloaltonetworks.com/folder1/my-file.pdf|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|url|string|None|True|URL to submit. The URL must contain the file name, for example http://paloaltonetworks.com/folder1/my-file.pdf|None|http://paloaltonetworks.com/folder1/my-file.pdf|
 
 Example input:
 
@@ -109,10 +109,10 @@ This action is used to query for a PCAP.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|9de5069c5afe602b2ea0a04b66beb2c0|None|
-|platform|string|None|True|Target analysis environment|Windows XP, Adobe Reader 11, Flash 11, Office 2010|['Windows XP, Adobe Reader 9.3.3, Office 2003', 'Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007', 'Windows XP, Adobe Reader 11, Flash 11, Office 2010', 'Windows 7 32‐bit, Adobe Reader 11, Flash 11, Office 2010', 'Windows 7 64bit, Adobe Reader 11, Flash 11, Office 2010', 'Android 2.3, API 10, avd2.3.1', 'Mac OS X Mountain Lion']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|platform|string|None|True|Target analysis environment|['Windows XP, Adobe Reader 9.3.3, Office 2003', 'Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007', 'Windows XP, Adobe Reader 11, Flash 11, Office 2010', 'Windows 7 32‐bit, Adobe Reader 11, Flash 11, Office 2010', 'Windows 7 64bit, Adobe Reader 11, Flash 11, Office 2010', 'Android 2.3, API 10, avd2.3.1', 'Mac OS X Mountain Lion']|Windows XP, Adobe Reader 11, Flash 11, Office 2010|
 
 Example input:
 
@@ -143,9 +143,9 @@ This action is used to query for a sample file.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|9de5069c5afe602b2ea0a04b66beb2c0|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
@@ -175,9 +175,9 @@ This action is used to submit a URL for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|url|string|None|True|URL to submit|https://example.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|url|string|None|True|URL to submit|None|https://example.com|
 
 Example input:
 
@@ -211,10 +211,10 @@ This action is used to query for an XML or PDF report for a particular sample.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|format|string|None|True|Report format: PDF or XML|pdf|['pdf', 'xml']|
-|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|9de5069c5afe602b2ea0a04b66beb2c0|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|format|string|None|True|Report format: PDF or XML|['pdf', 'xml']|pdf|
+|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
@@ -245,10 +245,10 @@ This action is used to submit a file for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|file|bytes|None|True|File to submit. Supported types are Email-link, Flash, APK, PDF, JAR, PE, MS-Office|TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAA...|None|
-|filename|string|None|False|Optional file name|ImportantCompanyFinancialReport.pdf|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file|bytes|None|True|File to submit. Supported types are Email-link, Flash, APK, PDF, JAR, PE, MS-Office|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAA...|
+|filename|string|None|False|Optional file name|None|ImportantCompanyFinancialReport.pdf|
 
 Example input:
 
@@ -286,9 +286,9 @@ This action is used to query for a file's classification.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|9de5069c5afe602b2ea0a04b66beb2c0|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
