@@ -27,9 +27,17 @@ This action is used to Base64 encode a `string` using the standard Base64 alphab
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|content|string|None|True|Data to encode|None|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|content|string|None|True|Data to encode|Rapid7 InsightConnect|None|
+
+Example input:
+
+```
+{
+  "content": "Rapid7 InsightConnect"
+}
+```
 
 ##### Output
 
@@ -37,22 +45,47 @@ This action is used to Base64 encode a `string` using the standard Base64 alphab
 |----|----|--------|-----------|
 |data|bytes|True|Encoded data result|
 
+Example output:
+
+```
+{
+  "data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0"
+}
+```
+
 #### Decoder
 
 This action is used to decode a Base64 `string` or file of type `bytes` using the standard Base64 alphabet.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|base64|bytes|None|True|Data to decode|None|
-|errors|string|nothing|False|How errors should be handled when decoding Base64|['replace', 'ignore', 'nothing']|
+|Name|Type|Default|Required|Description|Example|Enum|
+|----|----|-------|--------|-----------|-------|----|
+|base64|bytes|None|True|Data to decode|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cgo=|None|
+|errors|string|nothing|False|How errors should be handled when decoding Base64|ignore|['replace', 'ignore', 'nothing']|
+
+Example input:
+
+```
+{
+  "base64": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cgo=",
+  "errors": "ignore"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|string|True|Decoded data result|
+
+Example output:
+
+```
+{
+  "data": "Rapid7 InsightConnect\n\n"
+}
+```
 
 ### Triggers
 
@@ -72,6 +105,7 @@ characters to `\uffd` or `?`. While ignore will drop the character from the outp
 
 # Version History
 
+* 1.1.4 - Add example inputs
 * 1.1.3 - Use input and output constants | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Change `Exception` to `PluginException` | Change descriptions in help.md | Add user nobody in Dockerfile
 * 1.1.2 - New spec and help.md format for the Hub
 * 1.1.1 - Fixed issue where action Decode required error parameter
