@@ -179,8 +179,6 @@ Example input:
 ```
 {
   "sample_url": "https://example.com",
-  "parameters": "",
-  "additional_parameters": ""
 }
 ```
 
@@ -286,6 +284,9 @@ More details are available in the Joe Sandbox documentation at https://jbxcloud.
 Example input:
 
 ```
+{
+  "url": "https://example.com",
+}
 ```
 
 ##### Output
@@ -350,14 +351,17 @@ More details are available in the Joe Sandbox documentation at https://jbxcloud.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|None|
-|cookbook|bytes|None|False|Cookbook to be uploaded together with the sample|None|None|
-|parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. In case the `cookbook` option is used, most other options are silently ignored since they can be specified inside the cookbook|None|None|
-|sample|bytes|None|True|The sample to submit|None|None|
+|additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }|
+|cookbook|bytes|None|False|Cookbook to be uploaded together with the sample|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
+|parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. In case the `cookbook` option is used, most other options are silently ignored since they can be specified inside the cookbook|None|{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }|
+|sample|bytes|None|True|The sample to submit|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
 
 Example input:
 
 ```
+{
+  "sample": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
+}
 ```
 
 ##### Output
