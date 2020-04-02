@@ -35,11 +35,9 @@ This action is used to retrieve data about a domain name.
 Example input:
 
 ```
-
 {
   "domain": "google.com"
 }
-
 ```
 
 ##### Output
@@ -118,11 +116,9 @@ This action is used to retrieve data about an IP address.
 Example input:
 
 ```
-
 {
   "address": "8.1.1.1"
 }
-
 ```
 
 ##### Output
