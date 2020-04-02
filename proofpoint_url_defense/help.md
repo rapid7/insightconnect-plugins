@@ -43,13 +43,15 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|decoded|boolean|True|Was decode successful, if not, the original URL will be returned|
 |decoded_url|string|False|Decoded Proofpoint URL|
 
 Example output:
 
 ```
 {
-  "decoded_url": "http://www.example.org/url"
+  "decoded_url": "http://www.example.org/url",
+  "decode_success": true
 }
 ```
 
@@ -68,6 +70,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.2.0 - Update to URL Decode to add `decoded` as an output variable 
 * 1.1.0 - Update to URL Decode action to add support for v3 links
 * 1.0.1 - New spec and help.md format for the Hub
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Bug fix with decode parsing
@@ -80,4 +83,3 @@ This plugin does not contain any troubleshooting information.
 
 * [Proofpoint URL Defense](https://www.proofpoint.com/us/products/targeted-attack-protection)
 * [Proofpoint decode utility](https://help.proofpoint.com/@api/deki/files/177/URLDefenseDecode.py?revision=2)
-
