@@ -782,6 +782,7 @@ actions:
         - fayetteville
         - tricities
         - buffalo
+        example: columbusga
       category:
         description: Craigslist sales category
         type: string
@@ -826,33 +827,40 @@ actions:
         - trailers
         - video gaming
         - wanted
+        example: antiques
       search_titles:
         description: Search the titles
         default: false
         type: boolean
         required: false
+        example: true
       posted_today:
         description: Is posted today
         default: false
         type: boolean
         required: false
+        example: false
       has_image:
         description: Posting contains an image
         default: false
         type: boolean
         required: false
+        example: false
       query:
         description: Query string
         type: string
         required: false
+        example: amp
       search_distance:
         description: Search distance in miles
         type: integer
         required: false
+        example: 20
       zip_code:
         description: Zipcode
         type: integer
         required: false
+        example: 61736
       section_filter:
         title: Section Filter
         description: 'Craigslist has specific filters for each category. You can fine
@@ -860,6 +868,7 @@ actions:
           5000, "auto_size": "compact", "auto_paint": "blue" }'
         type: object
         required: false
+        example: "{\"condition\": \"like new\",\"max_price\": 1000}"
     output:
       sale_posting:
         title: Sale  Posting
