@@ -290,7 +290,7 @@ If this is the case, consider using the Python 3 Script plugin instead.
 
 # Version History
 
-* 1.2.2 - Added user nobody in Dockerfile | Use input and output constants | Added "f" strings
+* 1.2.2 - Added user nobody in Dockerfile | Use input and output constants | Added "f" strings | Add example inputs
 * 1.2.1 - New spec and help.md format for the Hub
 * 1.2.0 - New action Trim
 * 1.1.0 - New action Set Encoding

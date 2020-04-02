@@ -29,6 +29,7 @@ actions:
         description: String to encode
         type: string
         required: true
+        example: HELLO
       encoding:
         type: string
         description: Encoding to use
@@ -36,6 +37,7 @@ actions:
         - "UTF-8"
         - "ASCII"
         required: true
+        example: ASCII
       error_handling:
         type: string
         description: Error handler to use for encoding and decoding
@@ -44,6 +46,7 @@ actions:
         - "replace"
         - "ignore"
         required: true
+        example: strict
     output:
       encoded:
         type: string
@@ -61,12 +64,14 @@ actions:
           Sentence two'
         type: string
         required: true
+        example: Test string
       delimiter:
         title: Delimiter
         description: The character used to split the string into slices for the list.
           The default is a newline, if not provided by the user
         type: string
         required: false
+        example: " "
     output:
       list:
         type: '[]string'
@@ -82,12 +87,14 @@ actions:
         description: String to convert e.g. USER=bob
         type: string
         required: true
+        example: Test string
       string_delimiter:
         title: String Delimiter
         description: The character used to split the string into slices for the list.
           The default is a space, if not provided by the user
         type: string
         required: false
+        example: "="
       block_delimiter:
         title: Block Delimiter
         description: The character delimiter for the initial string split, applied
@@ -95,6 +102,7 @@ actions:
           for more complex handling
         type: string
         required: false
+        example: " "
     output:
       object:
         type: object
@@ -110,6 +118,7 @@ actions:
         description: String to convert e.g. USER=bob
         type: string
         required: true
+        example: Test string
     output:
       upper:
         type: string
@@ -125,6 +134,7 @@ actions:
         description: String to convert e.g. USER=bob
         type: string
         required: true
+        example: Test string
     output:
       lower:
         type: string
@@ -140,6 +150,7 @@ actions:
         description: String to trim
         type: string
         required: true
+        example: Test string
     output:
       trimmed:
         type: string
