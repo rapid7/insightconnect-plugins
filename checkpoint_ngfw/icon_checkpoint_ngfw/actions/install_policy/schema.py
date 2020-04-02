@@ -65,7 +65,7 @@ class InstallPolicyInput(komand.Input):
     },
     "qos_policy": {
       "type": "boolean",
-      "title": "QoS policy",
+      "title": "QoS Policy",
       "description": "Set to be true in order to install the QoS policy. By default, the value is true if Quality-of-Service policy is enabled on the input policy package, otherwise false",
       "default": false,
       "order": 5
