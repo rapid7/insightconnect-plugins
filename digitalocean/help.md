@@ -32,7 +32,7 @@ This action is used to gets information about the account, such as email, drople
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -78,7 +78,7 @@ This action is used to lists all ssh keys from the account.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -180,7 +180,7 @@ This action is used to lists all domain names.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -194,7 +194,7 @@ This action is used to list all floating IPs from the account.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -208,7 +208,7 @@ This action is used to lists all snapshots belonging to the account.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -437,7 +437,7 @@ This action is used to lists all droplets on the account.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

@@ -141,7 +141,7 @@ This action is used to walks the metrics tree and returns every metric found.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

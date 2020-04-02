@@ -668,7 +668,7 @@ This action is used to retrieve all issues assigned to the currently authenticat
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

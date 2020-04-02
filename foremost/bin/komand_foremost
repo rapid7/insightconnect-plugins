@@ -4,10 +4,10 @@ import komand
 from komand_foremost import connection, actions, triggers
 
 
-Name = 'Foremost'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'The Foremost plugin will take a disk image and attempt to recover files from it'
+Name = "Foremost"
+Vendor = "rapid7"
+Version = "1.0.3"
+Description = "The Foremost plugin will take a disk image and attempt to recover files from it"
 
 
 class ICONForemost(komand.Plugin):
