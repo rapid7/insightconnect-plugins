@@ -39,7 +39,7 @@ This action is used to port knock a given host (IP address or domain).
 
 ##### Output
 
-This action does not contain any outputs.
+_This action does not contain any outputs._
 
 ### Triggers
 

@@ -39,7 +39,7 @@ This action is used to return an array of all available scanners.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

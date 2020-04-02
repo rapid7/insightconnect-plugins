@@ -215,7 +215,7 @@ This action is used to retrieve information on users.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

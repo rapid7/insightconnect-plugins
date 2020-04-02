@@ -29,7 +29,7 @@ This action is used to check SSL Labs server availability.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -67,7 +67,7 @@ This action is used to retrieve status codes.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -215,7 +215,7 @@ This action is used to retrieve root certificates.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
