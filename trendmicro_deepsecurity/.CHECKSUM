@@ -1,7 +1,7 @@
 {
-	"spec": "2baf1bcde86702d3e6df48e9e76dbe2f",
-	"manifest": "4133e6d48fadcfb41be15faaded2d42e",
-	"setup": "7f5d6b5e26864b601ce3543c465b49c4",
+	"spec": "69840942263b91a68e28995e02d093cb",
+	"manifest": "6d95680f1888733cb91aee2f4dc0fd79",
+	"setup": "52c664dd71ed99578ddad3e68052ae77",
 	"schemas": [
 		{
 			"identifier": "deploy_rules/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "bffe7fc2a3c2b1a6ba6ea82180d41bd8"
+			"hash": "39722fd7c5ae424e3941b7a534a713df"
 		}
 	]
 }

@@ -50,7 +50,7 @@ This action is used to retrieve the current block statistics.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -142,7 +142,7 @@ This action is used to retrieve a list of current blocks.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

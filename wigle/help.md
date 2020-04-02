@@ -333,7 +333,7 @@ This action is used to get the user object for the current logged-in user.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -364,7 +364,7 @@ This action is used to get statistics organized by country.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -534,7 +534,7 @@ This action is used to get a named map of general statistics.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -740,7 +740,7 @@ This action is used to get statistics organized by group.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -785,7 +785,7 @@ This action is used to get statistics and badge image for the authenticated user
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -1055,7 +1055,7 @@ This action is used to get a map of short-named statistics used in providing sit
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

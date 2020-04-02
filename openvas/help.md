@@ -41,7 +41,7 @@ This action is used to get a list of all finished scans.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -77,7 +77,7 @@ This action is used to get a list of all currently running scans.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -170,7 +170,7 @@ This action is used to get a list of all scan configurations in the OpenVAS serv
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -258,7 +258,7 @@ This action is used to get a list of all scans in the OpenVAS server.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

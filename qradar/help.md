@@ -77,7 +77,7 @@ This action is used to retrieve a list of offenses currently in the system.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

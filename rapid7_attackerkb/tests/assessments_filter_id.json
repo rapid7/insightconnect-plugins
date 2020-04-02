@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "assessments",
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      },
+      "max_pages": 1
+    },
+    "input": {
+      "id": "47f78818-b766-47ca-8262-d7abc8dced66"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
