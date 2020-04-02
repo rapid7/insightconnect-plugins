@@ -6,7 +6,7 @@ title: Joe Sandbox
 description: Joe Sandbox Cloud executes files and URLs fully automated in a controlled
   environment and monitors the behavior of applications and the operating system for
   suspicious activities
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []
@@ -153,6 +153,7 @@ connection:
     description: API key generated for Joe Sandbox user
     type: credential_secret_key
     required: true
+    example: 8e8786182c66e8bc2abdab9198f1385691987bfe2a4917be1268e915e457dbc5
   url:
     title: URL
     description: API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud.
@@ -160,11 +161,12 @@ connection:
     type: string
     default: https://jbxcloud.joesecurity.org/api
     required: false
+    example: http://example.com/joesandbox/index.php/api
 actions:
   check_server_status:
     title: Check Server Status
     description: Check if Joe Sandbox is online or in maintenance mode
-    input: null
+    input:
     output:
       online:
         title: Online
@@ -174,7 +176,7 @@ actions:
   get_server_info:
     title: Get Server Info
     description: Query information about the server
-    input: null
+    input:
     output:
       queuesize:
         title: Queue Size
@@ -184,7 +186,7 @@ actions:
   list_systems:
     title: List Systems
     description: Retrieve a list of systems on the server
-    input: null
+    input:
     output:
       systems:
         title: Systems
@@ -194,7 +196,7 @@ actions:
   list_countries:
     title: List Countries
     description: Retrieve a list of localized internet anonymization countries
-    input: null
+    input:
     output:
       countries:
         title: Countries
@@ -204,7 +206,7 @@ actions:
   list_keyboard_layouts:
     title: List Keyboard Layouts
     description: Retrieve a list of available keyboard layouts for Windows analyzers
-    input: null
+    input:
     output:
       keyboard_layouts:
         title: Keyboard Layouts
@@ -214,7 +216,7 @@ actions:
   get_account_info:
     title: Get Account Info
     description: Query information about Joe Sandbox user account
-    input: null
+    input:
     output:
       type:
         title: Type
@@ -272,12 +274,14 @@ actions:
         description: The URL of a sample to submit
         type: string
         required: true
+        example: https://example.com
       parameters:
         title: Parameters
         description: Custom sandbox parameters, described in more detail in the API
           documentation. All boolean parameters should be set to 1 or 0
         type: object
         required: false
+        example: { "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }
       additional_parameters:
         title: Additional Parameters
         description: Additional parameters for Joe Sandbox Cloud, described in more
@@ -285,6 +289,7 @@ actions:
           1 or 0. Parameter `accept-tac` will always be set to 1
         type: object
         required: false
+        example: { "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }
     output:
       webids:
         title: Web IDs
@@ -301,12 +306,14 @@ actions:
         description: The URL of a website to submit
         type: string
         required: true
+        example: https://example.com
       parameters:
         title: Parameters
         description: Custom sandbox parameters, described in more detail in the API
           documentation. All boolean parameters should be set to 1 or 0
         type: object
         required: false
+        example: { "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }
       additional_parameters:
         title: Additional Parameters
         description: Additional parameters for Joe Sandbox Cloud, described in more
@@ -314,6 +321,7 @@ actions:
           1 or 0. Parameter `accept-tac` will always be set to 1
         type: object
         required: false
+        example: { "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }
     output:
       webids:
         title: Web IDs
@@ -330,12 +338,14 @@ actions:
         description: Cookbook to be uploaded together with the sample
         type: bytes
         required: true
+        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
       parameters:
         title: Parameters
         description: Custom sandbox parameters, described in more detail in the API
           documentation. All boolean parameters should be set to 1 or 0
         type: object
         required: false
+        example: { "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }
       additional_parameters:
         title: Additional Parameters
         description: Additional parameters for Joe Sandbox Cloud, described in more
@@ -343,6 +353,7 @@ actions:
           1 or 0. Parameter `accept-tac` will always be set to 1
         type: object
         required: false
+        example: { "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }
     output:
       webids:
         title: Web IDs
@@ -352,13 +363,14 @@ actions:
   list_analyses:
     title: List Analyses
     description: Fetch a list of all analyses
-    input: null
+    input:
     output:
       analyses:
         title: Analyses
         description: A list of all analyses IDs
         type: '[]webid'
         required: true
+        example: [ "10001", "10002", "10003" ]
   get_analysis_info:
     title: Get Analysis Info
     description: Show the status and most important attributes of an analysis
@@ -368,6 +380,7 @@ actions:
         description: The web ID of the analysis
         type: string
         required: true
+        example: 10001
     output:
       analysis:
         title: Analysis
@@ -383,6 +396,7 @@ actions:
         description: The web ID of the analysis
         type: string
         required: true
+        example: 10001
     output:
       deleted:
         title: Deleted
@@ -399,6 +413,7 @@ actions:
         description: String to search for
         type: string
         required: true
+        example: 44d88612fea8a8f36de82e1278abb02f
     output:
       analyses:
         title: Analyses
@@ -415,6 +430,7 @@ actions:
         description: The web ID of the analysis
         type: string
         required: true
+        example: 10001
       type:
         title: Type
         description: The report type, e.g. 'html', 'bins'
@@ -456,12 +472,14 @@ actions:
         - yara
         default: html
         required: false
+        example: pdf
       run:
         title: Run
         description: The number of the run. If not specified, Joe Sandbox will choose
           one automatically
         type: integer
         required: false
+        example: 1
     output:
       resource_name:
         title: Resource Name
