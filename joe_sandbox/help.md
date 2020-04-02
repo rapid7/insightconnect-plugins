@@ -38,7 +38,7 @@ This action is used to retrieve a list of localized internet anonymization count
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -104,7 +104,7 @@ This action is used to query information about the server.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -126,7 +126,7 @@ This action is used to check if Joe Sandbox is online or in maintenance mode.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -176,7 +176,7 @@ This action is used to fetch a list of all analyses.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -211,7 +211,7 @@ This action is used to retrieve a list of available keyboard layouts for Windows
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -331,7 +331,7 @@ This action is used to retrieve a list of systems on the server.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -372,7 +372,7 @@ This action is used to query information about Joe Sandbox user account.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

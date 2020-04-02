@@ -133,7 +133,7 @@ This trigger is used to check for new Metasploit modules.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

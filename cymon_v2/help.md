@@ -532,7 +532,7 @@ This action is used to get the list of feeds that a user has access to.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

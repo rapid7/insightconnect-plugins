@@ -119,7 +119,7 @@ This action is used to check your usage of the mxtoolbox api.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
