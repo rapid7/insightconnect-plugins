@@ -576,7 +576,7 @@ This action is used to list all feeds.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -651,7 +651,7 @@ This trigger is used to fire when a new alert is found.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

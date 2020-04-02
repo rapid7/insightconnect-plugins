@@ -59,7 +59,7 @@ This action is used to fetch app name and app ID for all apps in a customer envi
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

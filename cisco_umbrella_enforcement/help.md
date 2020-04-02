@@ -36,7 +36,7 @@ This action is used to gather the lists of domains already added to the shared c
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
