@@ -1,7 +1,7 @@
-import re
-
 import komand
 from .schema import AddressInput, AddressOutput, Input, Component
+
+import re
 
 
 class Address(komand.Action):

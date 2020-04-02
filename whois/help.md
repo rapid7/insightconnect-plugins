@@ -37,7 +37,7 @@ Example input:
 ```
 
 {
-    "domain": "google.com"
+  "domain": "google.com"
 }
 
 ```
@@ -192,7 +192,7 @@ _This plugin has no references._
 
 # Version History
 
-* 1.0.8 - Change docker image from `komand/python-3-37-plugin:3` to `komand/python-3-37-slim-plugin:3` | Use input constants | Changed `Exception` to `PluginException` | Added "f" strings
+* 1.0.8 - Change docker image from `komand/python-3-37-plugin:3` to `komand/python-3-37-slim-plugin:3` | Use input constants | Changed `Exception` to `PluginException` | Added "f" strings | Add example inputs
 * 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains | Updated help.md for the Hub
 * 1.0.6 - New spec and help.md format for the Hub
 * 1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK

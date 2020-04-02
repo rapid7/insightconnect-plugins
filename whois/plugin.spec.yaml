@@ -28,6 +28,7 @@ actions:
         type: string
         description: Domain name to lookup
         required: true
+        example: google.com
     output:
       name:
         title: Domain Name
@@ -118,6 +119,7 @@ actions:
         type: string
         description: IP to Lookup
         required: true
+        example: 8.8.8.8
     output:
       netname:
         title: Network Name

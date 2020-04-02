@@ -1,9 +1,9 @@
+import komand
+from .schema import DomainInput, DomainOutput, Input, Component
+
 # Custom imports below
 import whois
-
-import komand
 from komand.exceptions import PluginException
-from .schema import DomainInput, DomainOutput, Input, Component
 
 
 class Domain(komand.Action):
