@@ -69,7 +69,7 @@ actions:
         type: number
         description: Timeout in seconds for request. Default is 6 seconds
         example: 6
-        default: 6.0
+        default: 6
         required: true
     output:
       report:
@@ -99,7 +99,7 @@ actions:
         type: number
         description: Timeout in seconds for request. Default is 6 seconds
         example: 6
-        default: 6.0
+        default: 6
         required: true
     output:
       report:
