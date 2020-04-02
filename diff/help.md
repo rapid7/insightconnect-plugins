@@ -36,8 +36,8 @@ Example input:
 
 ```
 {
-    "compare": "hello 1234",
-    "label": "helloer"
+  "compare": "hello 1234",
+  "label": "helloer"
 }
 
 ```
@@ -73,7 +73,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.3 - Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Add user nobody in Dockerfile | Use input and output constants | Added "f" strings
+* 1.0.3 - Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Add user nobody in Dockerfile | Use input and output constants | Added "f" strings | Add example inputs
 * 1.0.2 - New spec and help.md format for the Hub
 * 1.0.1 - Update plugin tag `utility` to `utilities` for Marketplace searchability
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode

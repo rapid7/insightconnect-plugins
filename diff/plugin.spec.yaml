@@ -29,10 +29,12 @@ actions:
         type: string
         description: Unique label to store the old data
         required: true
+        example: hehllo 123
       compare:
         type: string
         required: true
         description: New data, for comparison against the old data
+        example: helloer
     output:
       different:
         type: boolean
