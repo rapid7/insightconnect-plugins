@@ -1,7 +1,7 @@
 {
-	"spec": "a510c2d626129afa868d9ee28894490e",
-	"manifest": "c0931b7fd8273a4724993d671307862f",
-	"setup": "6ca992890a28c9956ec4240f9783dd82",
+	"spec": "a3013b710c6b2d2c9b4502ac54c426e2",
+	"manifest": "e8545c3322699314610eb7843f3dd862",
+	"setup": "dbcd29267e4279509db88b97934c753a",
 	"schemas": [
 		{
 			"identifier": "add_access_rule/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "install_policy/schema.py",
-			"hash": "aae716d3c154727973a7e0fb1106c505"
+			"hash": "f71e81f52666d906b8cc4f59be1b470f"
 		},
 		{
 			"identifier": "remove_access_rule/schema.py",
