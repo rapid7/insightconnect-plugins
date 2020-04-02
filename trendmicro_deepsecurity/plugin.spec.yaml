@@ -4,7 +4,7 @@ products: [insightconnect]
 name: trendmicro_deepsecurity
 title: Trend Micro Deep Security
 description: Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
-version: 1.1.0
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -33,7 +33,7 @@ connection:
     type: string
     default: https://app.deepsecurity.trendmicro.com
     required: true
-    example: https://192.168.1.100:4119
+    example: https://192.51.100.100:4119
   dsm_api_key:
     title: API Key
     description: API key of the Deep Security Manager
@@ -46,6 +46,7 @@ connection:
     type: boolean
     default: true
     required: true
+    example: true
 actions: 
   search_rules:
     title: Search
@@ -85,6 +86,7 @@ actions:
         enum:
           - computer
           - policy 
+        example: policy
       id:
         title: ID
         type: integer

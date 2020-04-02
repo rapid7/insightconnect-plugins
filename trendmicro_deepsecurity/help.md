@@ -22,8 +22,8 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |dsm_api_key|credential_secret_key|None|True|API key of the Deep Security Manager|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234|
-|dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|https://192.168.1.100:4119|
-|dsm_verify_ssl|boolean|True|True|Check the certificate of the Deep Security Manager|None|None|
+|dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|https://192.51.100.100:4119|
+|dsm_verify_ssl|boolean|True|True|Check the certificate of the Deep Security Manager|None|True|
 
 ## Technical Details
 
@@ -92,7 +92,7 @@ Deploy the given Deep Security IPS rules to a computer or policy
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|computer_or_policy|string|None|True|Target for rule assignment|['computer', 'policy']|None|
+|computer_or_policy|string|None|True|Target for rule assignment|['computer', 'policy']|policy|
 |id|integer|None|True|ID of the target asset or policy|None|23|
 |rules|[]integer|None|True|IPS rules to assign|None|[108, 6745, 2874, 2875, 2876, 3317, 3318]|
 
@@ -152,8 +152,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - Add an option to toggle DSM certificate verification
-* 1.0.0 - Initial plugin - Search Deep Security IPS rule database by CVE and apply rules to a computer or policy
+* 2.0.0 - Add an option to toggle DSM certificate verification
+* 1.0.0 - Initial plugin
 
 # Links
 
