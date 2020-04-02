@@ -6,7 +6,8 @@ LABEL sdk=python
 
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
-
+RUN apt-get -y update
+RUN apt-get install -y build-essential
 # End package dependencies
 
 # Add source code
