@@ -57,7 +57,7 @@ This action is used to retrieve your public facing IP address.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

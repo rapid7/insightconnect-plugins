@@ -57,7 +57,7 @@ This action is used to list available docker images.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -71,7 +71,7 @@ This action is used to list available docker networks.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -85,7 +85,7 @@ This action is used to list available docker containers.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
