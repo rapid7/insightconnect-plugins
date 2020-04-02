@@ -20,6 +20,7 @@ class Connection(komand.Connection):
         """
         self.dsm_url = params.get(Input.DSM_URL)
         self.dsm_api_key = params.get(Input.DSM_API_KEY).get("secretKey")
+        self.dsm_verify_ssl = params.get(Input.DSM_VERIFY_SSL)
 
         self.session = requests.session()
         self.session.headers.update({"Content-type": "application/json",
@@ -35,7 +36,7 @@ class Connection(komand.Connection):
         url = f"{self.dsm_url}/api/policies"
 
         # Get list of policies
-        response = self.session.get(url, verify=True)
+        response = self.session.get(url, verify=self.dsm_verify_ssl)
                                     
         # Try to convert the response data to JSON
         response_data = tryJSON(response)

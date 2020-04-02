@@ -45,7 +45,7 @@ class SearchRules(komand.Action):
             # Search for IPS rules
             response = self.connection.session.post(url,
                                                     data=json.dumps(data),
-                                                    verify=True)
+                                                    verify=self.connection.dsm_verify_ssl)
             
             self.logger.info(cve)
             self.logger.info(f"status: {response.status_code}")

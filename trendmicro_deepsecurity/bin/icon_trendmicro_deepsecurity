@@ -6,7 +6,7 @@ from icon_trendmicro_deepsecurity import connection, actions, triggers
 
 Name = "Trend Micro Deep Security"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.1.0"
 Description = "Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)"
 
 

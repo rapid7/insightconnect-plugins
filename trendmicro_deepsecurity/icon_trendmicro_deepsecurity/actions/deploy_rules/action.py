@@ -43,7 +43,7 @@ class DeployRules(komand.Action):
         # Set rules
         response = self.connection.session.post(url,
                                                 data=json.dumps(data),
-                                                verify=True)
+                                                verify=self.connection.dsm_verify_ssl)
 
         self.logger.info(f"status: {response.status_code}")
         self.logger.info(f"reason: {response.reason}")
