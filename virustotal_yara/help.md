@@ -85,6 +85,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.2 - Add example inputs
 * 1.1.1 - New spec and help.md format for the Hub
 * 1.1.0 - Support web server mode
 * 1.0.0 - Undocumented update
