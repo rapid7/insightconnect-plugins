@@ -4,7 +4,7 @@ products: [insightconnect]
 name: checkdmarc
 title: Checkdmarc
 description: The checkdmarc plugin is used to parser SPF and DMARC records
-version: 2.1.2
+version: 2.1.3
 vendor: rapid7
 support: community
 status: []
@@ -62,11 +62,13 @@ actions:
         title: Domain
         type: "string"
         description: Domain to check. e.g. fbi.gov, google.com
+        example: rapid7.com
         required: true
       timeout:
         title: Timeout
         type: number
         description: Timeout in seconds for request. Default is 6 seconds
+        example: 6
         default: 6.0
         required: true
     output:
@@ -83,17 +85,20 @@ actions:
         title: Domain
         type: "string"
         description: Domain to check. e.g. fbi.gov, google.com in alternate nameserver
+        example: rapid7.com
         required: true
       nameservers:
         title: Nameservers
         description: Nameserver to check against. e.g ["1.1.1.1","1.0.0.1"]
         type: "[]string"
+        example: '["1.1.1.1","1.0.0.1"]'
         required: true
         default: ["1.1.1.1","1.0.0.1"]
       timeout:
         title: Timeout
         type: number
         description: Timeout in seconds for request. Default is 6 seconds
+        example: 6
         default: 6.0
         required: true
     output:

@@ -26,10 +26,19 @@ This action is used to check domains.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain to check. e.g. fbi.gov, google.com|None|
-|timeout|number|6.0|True|Timeout in seconds for request. Default is 6 seconds|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|True|Domain to check. e.g. fbi.gov, google.com|None|rapid7.com|
+|timeout|number|6|True|Timeout in seconds for request. Default is 6 seconds|None|6|
+
+Example input:
+
+```
+{
+  "domain": "whitehouse.gov",
+  "timeout": 10.0
+}
+```
 
 ##### Output
 
@@ -214,11 +223,23 @@ This action will check DMARC records against alternate name servers.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain to check. e.g. fbi.gov, google.com in alternate nameserver|None|
-|nameservers|[]string|['1.1.1.1', '1.0.0.1']|True|Nameserver to check against. e.g ["1.1.1.1","1.0.0.1"]|None|
-|timeout|number|6.0|True|Timeout in seconds for request. Default is 6 seconds|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|True|Domain to check. e.g. fbi.gov, google.com in alternate nameserver|None|rapid7.com|
+|nameservers|[]string|['1.1.1.1', '1.0.0.1']|True|Nameserver to check against. e.g ["1.1.1.1","1.0.0.1"]|None|["1.1.1.1","1.0.0.1"]|
+|timeout|number|6|True|Timeout in seconds for request. Default is 6 seconds|None|6|
+
+Example input:
+
+```
+{
+  "domain": "whitehouse.gov",
+  "nameservers": [
+    "1.0.0.1"
+  ],
+  "timeout": 10.0
+}
+```
 
 ##### Output
 
@@ -409,6 +430,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.3 - Add example inputs
 * 2.1.2 - Changed description in action `check_domains_alternate_nameservers` | Fix typo in word `nameservers` to `name_servers` | Changed email addresses to `user@example.com`
 * 2.1.1 - New spec and help.md format for the Hub
 * 2.1.0 - Added action Check Domains Alternate Nameservers
