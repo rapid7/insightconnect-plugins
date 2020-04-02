@@ -41,7 +41,7 @@ connection:
     required: true
     example: 12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234
   dsm_verify_ssl:
-    title: SSL verification
+    title: SSL Verification
     description: Check the certificate of the Deep Security Manager
     type: boolean
     default: true

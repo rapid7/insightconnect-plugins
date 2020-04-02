@@ -30,7 +30,7 @@ class ConnectionSchema(komand.Input):
     },
     "dsm_verify_ssl": {
       "type": "boolean",
-      "title": "SSL verification",
+      "title": "SSL Verification",
       "description": "Check the certificate of the Deep Security Manager",
       "default": true,
       "order": 3

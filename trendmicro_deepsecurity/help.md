@@ -153,7 +153,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 1.1.0 - Add an option to toggle DSM certificate verification
-* 1.0.0 - Search Deep Security IPS rule database by CVE and apply rules to a computer or policy
+* 1.0.0 - Initial plugin - Search Deep Security IPS rule database by CVE and apply rules to a computer or policy
 
 # Links
 

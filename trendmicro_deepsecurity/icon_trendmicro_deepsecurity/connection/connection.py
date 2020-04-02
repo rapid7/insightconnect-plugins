@@ -3,8 +3,6 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 
 import requests
-from requests.auth import HTTPBasicAuth
-
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
@@ -37,7 +35,7 @@ class Connection(komand.Connection):
 
         # Get list of policies
         response = self.session.get(url, verify=self.dsm_verify_ssl)
-                                    
+
         # Try to convert the response data to JSON
         response_data = tryJSON(response)
 
@@ -46,6 +44,6 @@ class Connection(komand.Connection):
 
         self.logger.info("Found " + str(len(response_data["policies"])) + " policies!")
         for policy in response_data["policies"]:
-          self.logger.info(policy["name"])
+            self.logger.info(policy["name"])
 
         return {"data": response.ok}

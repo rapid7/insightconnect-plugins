@@ -2,11 +2,10 @@ import komand
 from .schema import DeployRulesInput, DeployRulesOutput, Input, Output, Component
 # Custom imports below
 
-import requests
 import json
-
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
+
 
 class DeployRules(komand.Action):
 
@@ -30,15 +29,14 @@ class DeployRules(komand.Action):
         self.logger.info("Setting rules: ")
         self.logger.info(self.rules)
 
-        
         # Prepare request
         # Check if the rules should be assigned to a computer or policy
         if self.computer_or_policy == "computer":
             url = f"{self.connection.dsm_url}/api/computers/{self.id}/intrusionprevention/assignments"
         else:
             url = f"{self.connection.dsm_url}/api/policies/{self.id}/intrusionprevention/assignments"
-        
-        data = { "ruleIDs": self.rules }
+
+        data = {"ruleIDs": self.rules}
 
         # Set rules
         response = self.connection.session.post(url,
