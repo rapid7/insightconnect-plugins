@@ -17,10 +17,10 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_secret_key|None|True|API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9|None|
-|max_pages|integer|100|False|Max pages returned, default 100|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_secret_key|None|True|API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9|None|YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9|
+|max_pages|integer|100|False|Max pages returned, default 100|None|10|
 
 Example input:
 
@@ -43,9 +43,9 @@ This action is used to return a single assessment with the specified ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|The UUID of a specific assessment to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|The UUID of a specific assessment to return|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
 
 Example input:
 
@@ -87,16 +87,16 @@ This action is used to return all assessments.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|created|string|None|False|Return all assessments that were created on the given date, eg. 2019-07-04|None|
-|document|string|None|False|Text to query the document parameter. A substring match is performed, eg. RDP|None|
-|editorId|string|None|False|The UUID of a contributor|None|
-|id|string|None|False|The UUID of a specific assessment to return|None|
-|page|integer|0|False|Pagination page number, default value is 0|None|
-|revisionDate|string|None|False|Return all assessments that were last edited on the given date, eg. 2019-07-04|None|
-|size|integer|10|False|The number of assessments returned per page, default value is 10|None|
-|topicId|string|None|False|The UUID of the topic this assessment was based on|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|created|string|None|False|Return all assessments that were created on the given date, eg. 2019-07-04|None|2019-07-04|
+|document|string|None|False|Text to query the document parameter. A substring match is performed, eg. RDP|None|RDP|
+|editorId|string|None|False|The UUID of a contributor|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
+|id|string|None|False|The UUID of a specific assessment to return|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
+|page|integer|0|False|Pagination page number, default value is 0|None|0|
+|revisionDate|string|None|False|Return all assessments that were last edited on the given date, eg. 2019-07-04|None|2019-07-04|
+|size|integer|10|False|The number of assessments returned per page, default value is 10|None|10|
+|topicId|string|None|False|The UUID of the topic this assessment was based on|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
 
 Example input:
 
@@ -176,9 +176,9 @@ This action is used to return a single topic with the specified ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|The UUID of a specific topic to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|The UUID of a specific topic to return|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
 
 Example input:
 
@@ -248,17 +248,17 @@ This action is used to return all topics.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|created|string|None|False|Return all topics that were created on the given date, eg. 2019-07-04|None|
-|disclosureDate|string|None|False|Return all topics that were disclosed on the given date, eg. 2019-07-04|None|
-|document|string|None|False|Text to query the document parameter. A substring match is performed, eg. RDP|None|
-|editorId|string|None|False|The UUID of a contributor|None|
-|id|string|None|False|The UUID of a specific topic to return|None|
-|name|string|None|False|Text to query the name parameter. A substring match is performed|None|
-|page|integer|0|False|Pagination page number, default value is 0|None|
-|revisionDate|string|None|False|Return all topics that were last edited on the given date, eg. 2019-07-04|None|
-|size|integer|10|False|The number of topics returned per page, default value is 10|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|created|string|None|False|Return all topics that were created on the given date, eg. 2019-07-04|None|2019-07-04|
+|disclosureDate|string|None|False|Return all topics that were disclosed on the given date, eg. 2019-07-04|None|2019-07-04|
+|document|string|None|False|Text to query the document parameter. A substring match is performed, eg. RDP|None|RDP|
+|editorId|string|None|False|The UUID of a contributor|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
+|id|string|None|False|The UUID of a specific topic to return|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
+|name|string|None|False|Text to query the name parameter. A substring match is performed|None|CVE-2020-3789|
+|page|integer|0|False|Pagination page number, default value is 0|None|0|
+|revisionDate|string|None|False|Return all topics that were last edited on the given date, eg. 2019-07-04|None|2019-07-04|
+|size|integer|10|False|The number of topics returned per page, default value is 10|None|10|
 
 Example input:
 

@@ -209,6 +209,7 @@ types:
       type: string
       required: true
       example: c0f010fe-da9c-4aa6-b898-c57d483df51b
+
 connection:
   credentials:
     title: API Key
@@ -223,6 +224,7 @@ connection:
     required: false
     default: 100
     example: 10
+
 actions:
   topic:
     title: Get Vulnerability
