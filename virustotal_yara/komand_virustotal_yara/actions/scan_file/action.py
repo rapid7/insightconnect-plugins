@@ -80,11 +80,3 @@ class ScanFile(komand.Action):
 
         # Returning a array of objects
         return {"results": yara_results}
-
-    def test(self):
-        # Checks to make sure Yara loads
-        try:
-            version = yara.YARA_VERSION
-        except ImportError:
-            raise ImportError("Error occurred trying to import Yara")
-        return {"results": [{"success": True}]}
