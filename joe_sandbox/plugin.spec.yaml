@@ -281,7 +281,7 @@ actions:
           documentation. All boolean parameters should be set to 1 or 0
         type: object
         required: false
-        example: { "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }
+        example: '{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }'
       additional_parameters:
         title: Additional Parameters
         description: Additional parameters for Joe Sandbox Cloud, described in more
@@ -289,7 +289,7 @@ actions:
           1 or 0. Parameter `accept-tac` will always be set to 1
         type: object
         required: false
-        example: { "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }
+        example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
     output:
       webids:
         title: Web IDs
@@ -313,7 +313,7 @@ actions:
           documentation. All boolean parameters should be set to 1 or 0
         type: object
         required: false
-        example: { "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }
+        example: '{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }'
       additional_parameters:
         title: Additional Parameters
         description: Additional parameters for Joe Sandbox Cloud, described in more
@@ -321,7 +321,7 @@ actions:
           1 or 0. Parameter `accept-tac` will always be set to 1
         type: object
         required: false
-        example: { "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }
+        example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
     output:
       webids:
         title: Web IDs
@@ -345,7 +345,7 @@ actions:
           documentation. All boolean parameters should be set to 1 or 0
         type: object
         required: false
-        example: { "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }
+        example: '{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }'
       additional_parameters:
         title: Additional Parameters
         description: Additional parameters for Joe Sandbox Cloud, described in more
@@ -353,7 +353,7 @@ actions:
           1 or 0. Parameter `accept-tac` will always be set to 1
         type: object
         required: false
-        example: { "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }
+        example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
     output:
       webids:
         title: Web IDs
