@@ -61,7 +61,7 @@ actions:
         type: date
         required: false
       last_updated:
-        title: Last updated date
+        title: Last Updated Date
         description: Last updated date
         type: date
         required: false
