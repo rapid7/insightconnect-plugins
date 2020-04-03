@@ -105,7 +105,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 2.0.3 - Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Use input and output constants | Remove test from actions
-* 2.0.2 - New spec and help.md format for the Hub
+* 2.0.2 - New spec and help.md format for the Extension Library
 * 2.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 2.0.0 - Rename "Hash a String" action to "Hash String"
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode

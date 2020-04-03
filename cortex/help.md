@@ -499,7 +499,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Pin library version to 1.0.0
 * 0.2.1 - SSL bug fix in SDK
 * 0.2.0 - Add File Analyzer action
@@ -511,6 +511,6 @@ _This plugin does not contain any troubleshooting information._
 
 * [Cortex](https://github.com/CERT-BDF/Cortex)
 * [Cortex API](https://github.com/CERT-BDF/CortexDocs/tree/master/api)
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * [cortex4py](https://pypi.python.org/pypi/cortex4py/1.0.0)
 
