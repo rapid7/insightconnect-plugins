@@ -432,7 +432,7 @@ _This plugin does not contain any troubleshooting information._
 
 * 2.1.3 - Add example inputs
 * 2.1.2 - Changed description in action `check_domains_alternate_nameservers` | Fix typo in word `nameservers` to `name_servers` | Changed email addresses to `user@example.com`
-* 2.1.1 - New spec and help.md format for the Hub
+* 2.1.1 - New spec and help.md format for the Extension Library
 * 2.1.0 - Added action Check Domains Alternate Nameservers
 * 2.0.0 - Added timeout to Check Domain
 * 1.0.0 - Initial plugin

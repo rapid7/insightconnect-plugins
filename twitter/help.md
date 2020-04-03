@@ -188,7 +188,7 @@ If you suspect the failures are caused by a bug in the plugin, please contact Ko
 
 # Version History
 
-* 2.0.1 - New spec and help.md format for the Hub
+* 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Support web server mode | Update to new credential types
 * 1.0.1 - Fix long integer bug for `message_id` in Destroy action and `id` in Messages trigger
 * 1.0.0 - Update to v2 Python plugin architecture

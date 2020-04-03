@@ -83,7 +83,7 @@ If you are passing a variable into the Attachment 'Content' field, you must make
 ## Version History
 
 * 2.0.5 - Fix issue sending emails without attachment
-* 2.0.4 - New spec and help.md format for the Hub
+* 2.0.4 - New spec and help.md format for the Extension Library
 * 2.0.3 - Fix issue with reliability in regards to previous Send action empty attachment fix
 * 2.0.2 - Fix issue where Send action doesn't handle empty attachments correctly
 * 2.0.1 - Fix issue where credentials were required

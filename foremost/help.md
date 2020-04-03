@@ -74,7 +74,7 @@ Foremost only works on disk images such as those created by the `dd` tool.
 
 * 1.0.3 - Add example inputs
 * 1.0.2 - Use input and output constants | Change docker image from `komand/python-3-plugin:2` to `komand/python-3-37-plugin:3` to reduce plugin image size | Use input and output constants | Added "f" strings | Changed `Exception` to `PluginException` | Change "/tmp" to tempfile.gettempdir()
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
