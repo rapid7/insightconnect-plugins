@@ -15,6 +15,7 @@ ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
 
 # Install pip dependencies
+# Jenkins fake out
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 # Install plugin
