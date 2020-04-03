@@ -7,14 +7,11 @@ This plugin utilizes the Cymon public API and implements all its available looku
 
 # Key Features
 
-* Feature 1
-* Feature 2
-* Feature 3
+* Lookup domains against known malicious databases
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product
+* Optional: API token for access without rate limiting.
 
 # Documentation
 
@@ -445,6 +442,7 @@ the count range 1-2000 has been tested and verified working by us.
 
 # Version History
 
+* 2.0.1 - Port to Python 3
 * 2.0.0 - Add missing title values for actions in plugin.spec.yaml
 * 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Add discontinuation of Cymon notice
