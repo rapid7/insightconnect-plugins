@@ -233,7 +233,7 @@ Example input:
 
 ```
 {
-  "domain": "whitehouse.gov",
+  "domain": "rapid7.com",
   "nameservers": [
     "1.0.0.1"
   ],
