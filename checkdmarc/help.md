@@ -226,7 +226,7 @@ This action will check DMARC records against alternate name servers.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |domain|string|None|True|Domain to check. e.g. fbi.gov, google.com in alternate nameserver|None|rapid7.com|
-|nameservers|[]string|['1.1.1.1', '1.0.0.1']|True|Nameserver to check against. e.g ["1.1.1.1","1.0.0.1"]|None|["1.1.1.1","1.0.0.1"]|
+|nameservers|[]string|['1.1.1.1', '1.0.0.1']|True|Nameserver to check against|None|["1.1.1.1","1.0.0.1"]|
 |timeout|number|6|True|Timeout in seconds for request. Default is 6 seconds|None|6|
 
 Example input:
