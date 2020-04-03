@@ -1,11 +1,11 @@
 {
-	"spec": "a510c2d626129afa868d9ee28894490e",
-	"manifest": "c0931b7fd8273a4724993d671307862f",
-	"setup": "6ca992890a28c9956ec4240f9783dd82",
+	"spec": "85a47cc91e1250ca5eb17fb3dd339d0c",
+	"manifest": "e8545c3322699314610eb7843f3dd862",
+	"setup": "dbcd29267e4279509db88b97934c753a",
 	"schemas": [
 		{
 			"identifier": "add_access_rule/schema.py",
-			"hash": "e2a2085b61284507375b106816104d06"
+			"hash": "55d1d76024bbfb13bd2fbbe88cc36d5e"
 		},
 		{
 			"identifier": "add_host/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "install_policy/schema.py",
-			"hash": "aae716d3c154727973a7e0fb1106c505"
+			"hash": "ef6df220a36df938acf0c006b5d309e7"
 		},
 		{
 			"identifier": "remove_access_rule/schema.py",
@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "set_threat_protection/schema.py",
-			"hash": "2dba1cc531d57a16b84eca6eff809871"
+			"hash": "945dc4df598c84352be4b929c46f9442"
 		},
 		{
 			"identifier": "show_access_rulebase/schema.py",

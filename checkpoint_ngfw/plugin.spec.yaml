@@ -4,7 +4,7 @@ products: [insightconnect]
 name: checkpoint_ngfw
 title: Check Point NGFW
 description: Check Point Next Generation Firewalls (NGFW) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks
-version: 1.2.0
+version: 1.3.0
 vendor: rapid7
 support: community
 status: []
@@ -514,7 +514,7 @@ actions:
       list_of_services:
         title: List of Services
         type: "[]string"
-        description: List of services to block e.g. ["AOL", "SMTP"]
+        description: List of services to block
         example: ["AOL", "SMTP"]
         required: false
         order: 2
@@ -764,7 +764,7 @@ actions:
     input:
       name:
         title: Name
-        description: Name of the protection to act on. e.g. Blaster Attacks
+        description: Name of the protection to act on
         example: Blaster Attacks
         required: true
         type: string
@@ -821,7 +821,7 @@ actions:
     input:
       policy_package:
         title: Policy Package
-        description: Policy package to install e.g. "standard"
+        description: Policy package to install
         type: string
         required: true
         default: standard
@@ -829,12 +829,40 @@ actions:
         order: 1
       targets:
         title: Targets
-        description: On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. ["checkpoint_fw"]
+        description: On what targets to execute this command. Targets may be identified by their name, or object unique identifier
         type: "[]string"
         default: ["target name"]
         example: ["checkpoint_fw_1", "checkpoint_fw_2"]
         required: true
         order: 2
+      access_control_policy:
+        title: Access Control Policy
+        description: Set to be true in order to install the Access Control policy. By default, the value is true if Access Control policy is enabled on the input policy package, otherwise false
+        type: boolean
+        default: true
+        example: true
+        required: true
+      desktop_security_policy:
+        title: Desktop Security Policy
+        description: Set to be true in order to install the Desktop Security policy. By default, the value is true if desktop security policy is enabled on the input policy package, otherwise false
+        type: boolean
+        default: false
+        example: false
+        required: true
+      qos_policy:
+        title: QoS Policy
+        description: Set to be true in order to install the QoS policy. By default, the value is true if Quality-of-Service policy is enabled on the input policy package, otherwise false
+        type: boolean
+        default: false
+        example: false
+        required: true
+      threat_prevention_policy:
+        title: Threat Prevention Policy
+        description: Set to be true in order to install the Threat Prevention policy. By default, the value is true if Threat Prevention policy is enabled on the input policy package, otherwise false
+        type: boolean
+        default: true
+        example: true
+        required: true
       install_on_all_cluster_members_or_fail:
         title: Install Access Control Policy
         description: Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster
@@ -848,8 +876,8 @@ actions:
         type: boolean
         description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
         required: true
-        example: true
-        default: true
+        example: false
+        default: false
         order: 4
     output:
       success:
