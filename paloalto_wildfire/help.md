@@ -327,7 +327,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 1.1.2 - Fix bug where output doesn't match schema in Get Verdict action | Add improved error messaging in Submit URL action | Add example inputs
-* 1.1.1 - New spec and help.md format for the Hub
+* 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - Fixed issue where unsupported file types failed | Update to add `supported_file` to filedata type
 * 1.0.2 - Fixed issue where connection was not passing the API key properly
 * 1.0.1 - Fix plugin description

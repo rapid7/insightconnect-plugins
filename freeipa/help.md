@@ -357,7 +357,7 @@ Note that deletion is permanent and cannot be undone.
 # Version History
 
 * 2.0.2 - Use input and output constants | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Changed `Exception` to `PluginException`
-* 2.0.1 - New spec and help.md format for the Hub
+* 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Support web server mode | Update to new credential types
 * 1.0.0 - Initial plugin
 

@@ -180,7 +180,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.1 - New spec and help.md format for the Hub
+* 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Update to new credential types
 * 1.0.4 - Update to use new JSON API
 * 1.0.3 - Support web server mode

@@ -589,7 +589,7 @@ This plugin does not contain any troubleshooting information.
 
 * 1.0.3 - Add example inputs
 * 1.0.2 - Fix misspelling in error message | Remove generic "automation" keyword
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links
