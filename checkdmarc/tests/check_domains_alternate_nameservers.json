@@ -3,7 +3,7 @@
         "action": "check_domains_alternate_nameservers",
         "connection": null,
         "input": {
-            "domain": "whitehouse.gov",
+            "domain": "rapid7.com",
             "nameservers": [
                 "1.0.0.1"
             ],

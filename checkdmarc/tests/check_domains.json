@@ -3,7 +3,7 @@
         "action": "check_domains",
         "connection": null,
         "input": {
-            "domain": "whitehouse.gov",
+            "domain": "rapid7.com",
             "timeout": 10.0
         },
         "meta": {}
