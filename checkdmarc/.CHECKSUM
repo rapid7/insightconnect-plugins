@@ -1,5 +1,5 @@
 {
-	"spec": "e9e043bfd21a447def8a8b8e69ce5b87",
+	"spec": "b9e7053ce00cde2b486ecac0c60fa118",
 	"manifest": "6741fe924eaee83a5ab340c67d3bd880",
 	"setup": "86c66a14a2677e103f9605c6403f43aa",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "check_domains_alternate_nameservers/schema.py",
-			"hash": "99d0be063c0f1dcd06dcdfe4aff2d44b"
+			"hash": "a004e8f4c6e859e532edb4b1b1e6758d"
 		},
 		{
 			"identifier": "connection/schema.py",

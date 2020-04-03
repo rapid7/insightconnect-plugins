@@ -84,12 +84,12 @@ actions:
       domain:
         title: Domain
         type: "string"
-        description: Domain to check. e.g. fbi.gov, google.com in alternate nameserver
+        description: Domain to check, in alternate nameserver
         example: rapid7.com
         required: true
       nameservers:
         title: Nameservers
-        description: Nameserver to check against. e.g ["1.1.1.1","1.0.0.1"]
+        description: Nameserver to check against.
         type: "[]string"
         example: '["1.1.1.1","1.0.0.1"]'
         required: true

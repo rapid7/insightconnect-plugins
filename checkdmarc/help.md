@@ -28,7 +28,7 @@ This action is used to check domains.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|domain|string|None|True|Domain to check|None|rapid7.com|
+|domain|string|None|True|Domain to check. e.g. fbi.gov, google.com|None|rapid7.com|
 |timeout|number|6|True|Timeout in seconds for request. Default is 6 seconds|None|6|
 
 Example input:
@@ -225,8 +225,8 @@ This action will check DMARC records against alternate name servers.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|domain|string|None|True|Domain to check. e.g. fbi.gov, google.com in alternate nameserver|None|rapid7.com|
-|nameservers|[]string|['1.1.1.1', '1.0.0.1']|True|Nameserver to check against|None|["1.1.1.1","1.0.0.1"]|
+|domain|string|None|True|Domain to check, in alternate nameserver|None|rapid7.com|
+|nameservers|[]string|['1.1.1.1', '1.0.0.1']|True|Nameserver to check against.|None|["1.1.1.1","1.0.0.1"]|
 |timeout|number|6|True|Timeout in seconds for request. Default is 6 seconds|None|6|
 
 Example input:
