@@ -360,7 +360,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Co-occurrences
+* 2.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Co-occurrences
 * 1.0.2 - Added change allowing categorization to work with a Tier1 API key by utilizing the single domain API endpoint instead of the bulk API endpoint when a single-element array of domains is passed in
 * 1.0.1 - Add connection test | Fix where connection was returning "Wrong api_key" on valid keys | Run plugin as least privileged user | Update to use the `komand/python-3-slim-plugin` Docker image to reduce plugin size
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
