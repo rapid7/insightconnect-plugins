@@ -237,7 +237,7 @@ Example input:
     "base_domain": "rapid7.com",
     "dmarc": {
       "location": "rapid7.com",
-      "record": "v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email,mailto:dmarcteam@rapid7.com",
+      "record": "v=DMARC1; p=quarantine; rua=mailto:user@example.com',mailto:user@example.com'",
       "tags": {
         "adkim": {
           "explicit": false,
@@ -275,11 +275,11 @@ Example input:
           "explicit": true,
           "value": [
             {
-              "address": "dmarc_agg@vali.email",
+              "address": "user@example.com'",
               "scheme": "mailto"
             },
             {
-              "address": "dmarcteam@rapid7.com",
+              "address": "user@example.com'",
               "scheme": "mailto"
             }
           ]
@@ -429,7 +429,7 @@ Example input:
     "base_domain": "rapid7.com",
     "dmarc": {
       "location": "rapid7.com",
-      "record": "v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email,mailto:dmarcteam@rapid7.com",
+      "record": "v=DMARC1; p=quarantine; rua=mailto:user@example.com',mailto:user@example.com'",
       "tags": {
         "adkim": {
           "explicit": false,
@@ -467,11 +467,11 @@ Example input:
           "explicit": true,
           "value": [
             {
-              "address": "dmarc_agg@vali.email",
+              "address": "user@example.com'",
               "scheme": "mailto"
             },
             {
-              "address": "dmarcteam@rapid7.com",
+              "address": "user@example.com'",
               "scheme": "mailto"
             }
           ]
