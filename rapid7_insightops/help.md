@@ -34,7 +34,7 @@ This action is used to retrieve logs from InsightOps service.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 

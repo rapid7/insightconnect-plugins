@@ -38,7 +38,7 @@ This action is used to return a summary about the 3 last months of ossec.log.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -150,7 +150,7 @@ This action is used to return basic information about the manager.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -342,7 +342,7 @@ This action is used to return OSSEC statistical information per hour. Each item 
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -452,7 +452,7 @@ This action is used to return the manager processes that are running.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -498,7 +498,7 @@ This action is used to return a summary of the available agents.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
