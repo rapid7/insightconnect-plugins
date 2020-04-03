@@ -424,7 +424,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.4.1 - Hub styling update
+* 1.4.1 - Extension Library styling update
 * 1.4.0 - New trigger Risk Detection
 * 1.3.1 - New spec and help.md format for the Extension Library
 * 1.3.0 - New action Create User
