@@ -59,9 +59,9 @@ This action is used to install a policy to selected targets.
 |desktop_security_policy|boolean|False|True|Set to be true in order to install the Desktop Security policy. By default, the value is true if desktop security policy is enabled on the input policy package, otherwise false|None|False|
 |discard_other_sessions|boolean|False|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|False|
 |install_on_all_cluster_members_or_fail|boolean|False|True|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|False|
-|policy_package|string|standard|True|Policy package to install e.g. "standard"|None|standard|
+|policy_package|string|standard|True|Policy package to install|None|standard|
 |qos_policy|boolean|False|True|Set to be true in order to install the QoS policy. By default, the value is true if Quality-of-Service policy is enabled on the input policy package, otherwise false|None|False|
-|targets|[]string|['target name']|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. ["checkpoint_fw"]|None|['checkpoint_fw_1', 'checkpoint_fw_2']|
+|targets|[]string|['target name']|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier|None|['checkpoint_fw_1', 'checkpoint_fw_2']|
 |threat_prevention_policy|boolean|True|True|Set to be true in order to install the Threat Prevention policy. By default, the value is true if Threat Prevention policy is enabled on the input policy package, otherwise false|None|True|
 
 Example input:
@@ -105,7 +105,7 @@ This action is used to set a threat protection action.
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Action|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|Prevent|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
-|name|string|None|True|Name of the protection to act on. e.g. Blaster Attacks|None|Blaster Attacks|
+|name|string|None|True|Name of the protection to act on|None|Blaster Attacks|
 |profile|string|Optimized|True|Profile e.g. Optimized, Basic, Strict|None|Optimized|
 
 Example input:
@@ -568,7 +568,7 @@ This action is used to create a rule to block traffic.
 |destination|string|None|False|Destination network object name|None|192.168.2.1|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |layer|string|Network|True|Layer to add this rule to|None|Network|
-|list_of_services|[]string|None|False|List of services to block e.g. ["AOL", "SMTP"]|None|['AOL', 'SMTP']|
+|list_of_services|[]string|None|False|List of services to block|None|['AOL', 'SMTP']|
 |name|string|None|True|Rule name|None|Malicious IP Addresses|
 |position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|None|1|
 |source|string|None|False|Source network object name|None|192.168.2.1|

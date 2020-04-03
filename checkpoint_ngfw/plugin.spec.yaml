@@ -514,7 +514,7 @@ actions:
       list_of_services:
         title: List of Services
         type: "[]string"
-        description: List of services to block e.g. ["AOL", "SMTP"]
+        description: List of services to block
         example: ["AOL", "SMTP"]
         required: false
         order: 2
@@ -764,7 +764,7 @@ actions:
     input:
       name:
         title: Name
-        description: Name of the protection to act on. e.g. Blaster Attacks
+        description: Name of the protection to act on
         example: Blaster Attacks
         required: true
         type: string
@@ -821,7 +821,7 @@ actions:
     input:
       policy_package:
         title: Policy Package
-        description: Policy package to install e.g. "standard"
+        description: Policy package to install
         type: string
         required: true
         default: standard
@@ -829,7 +829,7 @@ actions:
         order: 1
       targets:
         title: Targets
-        description: On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. ["checkpoint_fw"]
+        description: On what targets to execute this command. Targets may be identified by their name, or object unique identifier
         type: "[]string"
         default: ["target name"]
         example: ["checkpoint_fw_1", "checkpoint_fw_2"]

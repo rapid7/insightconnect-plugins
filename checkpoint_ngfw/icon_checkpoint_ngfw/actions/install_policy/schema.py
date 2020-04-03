@@ -59,7 +59,7 @@ class InstallPolicyInput(komand.Input):
     "policy_package": {
       "type": "string",
       "title": "Policy Package",
-      "description": "Policy package to install e.g. \\"standard\\"",
+      "description": "Policy package to install",
       "default": "standard",
       "order": 1
     },
@@ -73,7 +73,7 @@ class InstallPolicyInput(komand.Input):
     "targets": {
       "type": "array",
       "title": "Targets",
-      "description": "On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. [\\"checkpoint_fw\\"]",
+      "description": "On what targets to execute this command. Targets may be identified by their name, or object unique identifier",
       "items": {
         "type": "string"
       },
