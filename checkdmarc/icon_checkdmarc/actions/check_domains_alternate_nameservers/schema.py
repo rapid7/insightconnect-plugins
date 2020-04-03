@@ -32,7 +32,7 @@ class CheckDomainsAlternateNameserversInput(komand.Input):
     "nameservers": {
       "type": "array",
       "title": "Nameservers",
-      "description": "Nameserver to check against.",
+      "description": "Nameserver to check against",
       "items": {
         "type": "string"
       },

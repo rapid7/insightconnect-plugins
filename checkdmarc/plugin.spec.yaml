@@ -61,7 +61,7 @@ actions:
       domain:
         title: Domain
         type: "string"
-        description: Domain to check. e.g. fbi.gov, google.com
+        description: Domain to check
         example: rapid7.com
         required: true
       timeout:
@@ -89,7 +89,7 @@ actions:
         required: true
       nameservers:
         title: Nameservers
-        description: Nameserver to check against.
+        description: Nameserver to check against
         type: "[]string"
         example: '["1.1.1.1","1.0.0.1"]'
         required: true
