@@ -570,7 +570,7 @@ This action is used to create a rule to block traffic.
 |layer|string|Network|True|Layer to add this rule to|None|Network|
 |list_of_services|[]string|None|False|List of services to block|None|['AOL', 'SMTP']|
 |name|string|None|True|Rule name|None|Malicious IP Addresses|
-|position|string|top|True|Position in the list of rules.  Can be a number or one of the words "top" or "bottom"|None|1|
+|position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|None|1|
 |source|string|None|False|Source network object name|None|192.168.2.1|
 
 Example input:
