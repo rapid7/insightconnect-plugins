@@ -27,10 +27,10 @@ This action is used to search the database to find vulnerabilities and exploits.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|database|string|None|True|Name of the database|Vulnerability Database|['Vulnerability Database', 'Metasploit Modules']|
-|search|string|None|True|Search parameter for database|cve-2015|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|database|string|None|True|Name of the database|['Vulnerability Database', 'Metasploit Modules']|Vulnerability Database|
+|search|string|None|True|Search parameter for database|None|cve-2015|
 
 Example input:
 
@@ -74,9 +74,9 @@ This action is used to fetch content results for a vulnerability or module.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Example|Enum|
-|----|----|-------|--------|-----------|-------|----|
-|identifier|string|None|True|Rapid7 vulnerability/module identifier|apple-itunes-cve-2019-8835|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|identifier|string|None|True|Rapid7 vulnerability/module identifier|None|apple-itunes-cve-2019-8835|
 
 Example input:
 
