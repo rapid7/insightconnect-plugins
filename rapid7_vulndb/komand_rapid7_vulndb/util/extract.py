@@ -1,4 +1,4 @@
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 # import all transformations
 from komand_rapid7_vulndb.util.transform import *
 from typing import Dict
