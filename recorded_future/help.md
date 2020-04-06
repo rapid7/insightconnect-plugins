@@ -98,6 +98,13 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Created",
+  "parent": "example.com"
+}
 ```
 
 ##### Output
@@ -209,6 +216,13 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "freetext": "example",
+  "from": 1,
+  "limit": 10,
+  "orderby": "Created"
+}
 ```
 
 ##### Output
@@ -267,6 +281,9 @@ This action is used to perform a freetext search across all Recorded Future enti
 Example input:
 
 ```
+{
+  "freetext": "example"
+}
 ```
 
 ##### Output
@@ -319,6 +336,9 @@ This action returns a risk list of domains matching a filtration rule.
 Example input:
 
 ```
+{
+  "list": "active_phishing_url"
+}
 ```
 
 ##### Output
@@ -344,6 +364,13 @@ This action is used to search for data related to vulnerabilities.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "freetext": "CVE",
+  "from": 1,
+  "limit": 10,
+  "orderby": "Created"
+}
 ```
 
 ##### Output
@@ -408,6 +435,13 @@ This action is used to for data related to a specified IP range.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "from": 2,
+  "ip_range": "209.0.0.0/24",
+  "limit": 10,
+  "orderby": "Created"
+}
 ```
 
 ##### Output
@@ -470,7 +504,26 @@ _This action does not contain any inputs._
 Example output:
 
 ```
-
+{
+  "risk_rules": [
+    {
+      "count": 4127,
+      "criticality": 2,
+      "criticalityLabel": "Medium",
+      "description": "Historical Verified Proof of Concept Available Usi...",
+      "name": "pocVerifiedRemote",
+      "relatedEntities": []
+    },
+    {
+      "count": 3,
+      "criticality": 3,
+      "criticalityLabel": "High",
+      "description": "Recent Verified Proof of Concept Available",
+      "name": "recentPocVerified",
+      "relatedEntities": []
+    }
+  ]
+}
 ```
 
 #### Download Hash Risk List
@@ -486,6 +539,9 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
+{
+  "list": "linked_to_attack_vector"
+}
 ```
 
 ##### Output
@@ -511,6 +567,13 @@ This action is used to search for data related to hashes of a specified type.
 Example input:
 
 ```
+{
+  "algorithm": "MD5",
+  "direction": "asc",
+  "from": 2,
+  "limit": 10,
+  "orderby": "Created"
+}
 ```
 
 ##### Output
@@ -532,6 +595,9 @@ This action is used to fetch a specified entity list by ID.
 Example input:
 
 ```
+{
+  "entity_list_id": "report:Oe5eg5"
+}
 ```
 
 ##### Output
@@ -582,6 +648,9 @@ This action is used to return information about a specific malware entry by ID.
 Example input:
 
 ```
+{
+  "malware_ID": "ShciZX"
+}
 ```
 
 ##### Output
@@ -624,6 +693,11 @@ This action is used to return information about a specific domain entry.
 Example input:
 
 ```
+{
+  "comment": "Domain look up performed by InsightConnect",
+  "domain": "example.com",
+  "fields": ["sightings", "threatLists", "intelCard"]
+}
 ```
 
 ##### Output
@@ -674,6 +748,11 @@ This action is used to retrieve information about a specified hash.
 Example input:
 
 ```
+{
+  "comment": "Hash look up performed by InsightConnect",
+  "hash": "478c076749bef74eaf9bed4af917aee228620b23",
+  "fields": ["sightings", "risk", "timestamps"]
+}
 ```
 
 ##### Output
@@ -751,6 +830,11 @@ This action is used to retrieve information about a specified URL.
 Example input:
 
 ```
+{
+  "comment": "URL look up performed by InsightConnect",
+  "url": "http://www.example.com",
+  "fields": ['relatedEntities', 'risk', 'sightings']
+}
 ```
 
 ##### Output
@@ -796,6 +880,9 @@ This action is used to fetch a risk list of the IP addresses that match a specif
 Example input:
 
 ```
+{
+  "list": "current_cc_server"
+}
 ```
 
 ##### Output
@@ -989,6 +1076,11 @@ This action is used to query for data related to a specific IP address.
 Example input:
 
 ```
+{
+  "comment": "IP look up performed by InsightConnect",
+  "IP_address": "198.51.100.100",
+  "fields": ["riskyCIDRIP", "risk", "sightings"]
+}
 ```
 
 ##### Output
@@ -1038,6 +1130,9 @@ This action is used to fetch a risk list of vulnerabilities matching a specified
 Example input:
 
 ```
+{
+  "list": "cyber_exploit_signal_critical"
+}
 ```
 
 ##### Output
@@ -1153,6 +1248,9 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
+{
+  "id": "CVE-2017-0147"
+}
 ```
 
 ##### Output
