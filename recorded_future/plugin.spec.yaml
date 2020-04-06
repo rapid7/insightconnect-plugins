@@ -9,7 +9,7 @@ status: []
 description: "Recorded Future arms threat analysts, security operators, and incident
   responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
 InsightConnect, users can search domain lists, entity lists, and more"
-version: 1.5.3
+version: 1.5.4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/recorded_future
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -348,6 +348,7 @@ connection:
     type: credential_secret_key
     description: API Key
     required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
 actions:
   download_domain_risk_list:
     title: Download Domain Risk List
@@ -381,6 +382,7 @@ actions:
         - typosquat_similarity__dns_sandwich
         - typosquat_similarity__typo_or_homograph
         required: false
+        example: active_phishing_url
     output:
       risk_list:
         type: object
@@ -390,6 +392,7 @@ actions:
     title: List Domain Risk Rules
     description: This action is used to list available filtration rules for domain
       risk lists
+    input:
     output:
       risk_rules:
         type: '[]risk_rule'
@@ -404,12 +407,14 @@ actions:
         type: number
         description: Number of results to retrieve, up to 100
         required: true
+        example: 10
       from:
         title: Offset
         type: number
         description: Number of initial records to skip
         default: 0
         required: true
+        example: 0
       orderby:
         title: Order By
         description: Which property to sort the results by
@@ -425,6 +430,7 @@ actions:
         - Sixtydayshits
         - Totalhits
         required: true
+        example: Riskscore
       direction:
         title: Result Direction
         description: Sort results ascending/descending
@@ -434,11 +440,13 @@ actions:
         - desc
         default: asc
         required: true
+        example: asc
       parent:
         title: Parent
         description: Parent domain, if any
         type: string
         required: true
+        example: example.com
     output:
       data:
         type: search_data
@@ -454,16 +462,19 @@ actions:
         type: string
         description: Domain
         required: true
+        example: example.com
       fields:
         title: Fields
         description: List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities" , "risk" , "timestamps"]
         type: "[]string"
         required: false
+        example: ["sightings", "threatLists", "intelCard"]
       comment:
         title: Comment
         description: Add a comment to a domain
         type: string
         required: false
+        example: Domain look up performed by InsightConnect
     output:
       entity:
         type: entity
@@ -522,6 +533,7 @@ actions:
         type: string
         description: Freetext search
         required: true
+        example: example.com
     output:
       entities:
         type: '[]entity'
@@ -535,6 +547,7 @@ actions:
         type: string
         required: true
         description: Entity list ID, obtained from the 'Search Entity lists' action
+        example: "url:http://www.google.com"
     output:
       entities:
         type: '[]entity'
@@ -557,6 +570,7 @@ actions:
         - positive_malware_verdict
         - threat_researcher
         required: false
+        example: positive_malware_verdict
     output:
       risk_list:
         type: object
@@ -566,6 +580,7 @@ actions:
     title: List Hash Risk Rules
     description: This action is used to list available filtration rules for hash risk
       lists
+    input:
     output:
       risk_rules:
         type: '[]risk_rule'
@@ -580,12 +595,14 @@ actions:
         type: number
         description: Number of results to retrieve, up to 100
         required: true
+        example: 10
       from:
         title: Offset
         type: number
         description: Number of initial records to skip
         default: 0
         required: true
+        example: 0
       orderby:
         title: Order By
         description: Which property to sort the results by
@@ -602,6 +619,7 @@ actions:
         - Sixtydayshits
         - Totalhits
         required: true
+        example: Riskscore
       direction:
         title: Result Direction
         description: Sort results ascending/descending
@@ -611,6 +629,7 @@ actions:
         - desc
         default: asc
         required: true
+        example: asc
       algorithm:
         title: Algorithm
         description: Hashing algorithm to search by
@@ -620,6 +639,7 @@ actions:
         - SHA-1
         - SHA-256
         required: true
+        example: SHA-1
     output:
       data:
         type: search_data
@@ -634,16 +654,19 @@ actions:
         type: string
         description: Hash
         required: true
+        example: 44d88612fea8a8f36de82e1278abb02f
       fields:
         title: "Fields"
         description: List of fields to include with results e.g ["timestamps", "sightings", "threatLists", "analystNotes", "counts", "entity", "hashAlgorithm", "intelCard", "metrics", "relatedEntities", "risk", "timestamps"]
         type: "[]string"
         required: false
+        example: ["risk", "timestamps", "sightings" ]
       comment:
         title: Comment
         description: Add a comment to a hash
         type: string
         required: false
+        example: Hash look up performed by InsightConnect
     output:
       entity:
         type: entity
@@ -698,7 +721,6 @@ actions:
         description: "Risk"
         type: risk
         required: false
-
   download_IP_addresses_risk_list:
     title: Download IP Addresses Risk List
     description: This action is used to fetch a risk list of the IP addresses that
@@ -748,6 +770,7 @@ actions:
         - unusual_ip
         - vulnerable_host
         required: false
+        example: malware_delivery
     output:
       risk_list:
         type: object
@@ -757,6 +780,7 @@ actions:
     title: List IP Addresses Risk Rules
     description: This action is used to list available filtration rules for IP address
       risk lists
+    input:
     output:
       risk_rules:
         type: '[]risk_rule'
@@ -770,12 +794,14 @@ actions:
         type: number
         description: Number of results to retrieve, up to 100
         required: true
+        example: 10
       from:
         title: Offset
         type: number
         description: Number of initial records to skip
         default: 0
         required: true
+        example: 0
       orderby:
         title: Order By
         description: Which property to sort the results by
@@ -791,6 +817,7 @@ actions:
         - Sixtydayshits
         - Totalhits
         required: true
+        example: Lastseen
       direction:
         title: Result Direction
         description: Sort results ascending/descending
@@ -800,11 +827,13 @@ actions:
         - desc
         default: asc
         required: true
+        example: asc
       ip_range:
         title: IP Range
         description: IP address range to search
         type: string
         required: true
+        example: 198.51.100.0/24
     output:
       data:
         type: search_data
@@ -819,16 +848,19 @@ actions:
         description: IP address
         type: string
         required: true
+        example: 198.51.100.1
       fields:
         title: Fields
         description: List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "riskyCIDRIPs","risk", "location", "timestamps"]
         type: "[]string"
         required: false
+        example: ["riskyCIDRIPs","risk", "sightings"]
       comment:
         title: Comment
         description: Add comment to IP address lookup for Recorded Future
         type: string
         required: false
+        example: IP look up performed by InsightConnect
     output:
       entity:
         type: entity
@@ -902,16 +934,19 @@ actions:
         type: string
         description: Freetext search
         required: false
+        example: example.com
       limit:
         type: number
         description: Number of results to retrieve, up to 100
         required: true
+        example: 10
       from:
         title: Offset
         type: number
         description: Number of initial records to skip
         default: 0
         required: true
+        example: 0
       orderby:
         title: Order By
         description: Which property to sort the results by
@@ -927,6 +962,7 @@ actions:
         - Sixtydayshits
         - Totalhits
         required: true
+        example: Riskscore
       direction:
         title: Result Direction
         description: Sort results ascending/descending
@@ -936,6 +972,7 @@ actions:
         - desc
         default: asc
         required: true
+        example: asc
     output:
       data:
         type: search_data
@@ -951,6 +988,7 @@ actions:
         description: Malware ID
         type: string
         required: true
+        example: TODO
     output:
       entity:
         type: entity
@@ -990,6 +1028,7 @@ actions:
         - recently_linked_to_remote_access_trojan
         - web_reporting_prior_to_nvd_disclosure
         required: false
+        example: nist_severity_critical
     output:
       risk_list:
         type: object
@@ -999,6 +1038,7 @@ actions:
     title: List Vulnerability Risk Rules
     description: This action is used to retrieve available filtration rules for vulnerability
       risk lists
+    input:
     output:
       risk_rules:
         type: '[]risk_rule'
@@ -1012,12 +1052,14 @@ actions:
         type: number
         description: Number of results to retrieve, up to 100
         required: true
+        example: 10
       from:
         title: Offset
         type: number
         description: Number of initial records to skip
         default: 0
         required: true
+        example: 0
       orderby:
         title: Order By
         description: Which property to sort the results by
@@ -1033,6 +1075,7 @@ actions:
         - Sixtydayshits
         - Totalhits
         required: true
+        example: Riskscore
       direction:
         title: Result Direction
         description: Sort results ascending/descending
@@ -1042,11 +1085,13 @@ actions:
         - desc
         default: asc
         required: true
+        example: asc
       freetext:
         title: Text
         description: Text query
         type: string
         required: true
+        example: example
     output:
       data:
         type: vulnerability_search_data
@@ -1061,6 +1106,7 @@ actions:
         description: CVE or RF ID
         type: string
         required: true
+        example: CVE-2014-0160
     output:
       data:
         type: vulnerability_search_data
@@ -1075,16 +1121,19 @@ actions:
         type: string
         description: URL
         required: true
+        example: https://example.com
       fields:
         title: Fields
         description: List of fields to include with results e.g ["sightings", "analystNotes", "counts", "entity", "metrics", "relatedEntities", "risk", "timestamps"]
         type: "[]string"
         required: false
+        example: ["relatedEntities", "risk", "sightings"]
       comment:
         title: Comment
         description: Add a comment to an IP address lookup for Recorded Future
         type: string
         required: false
+        example: URL look up performed by InsightConnect
     output:
       entity:
         type: entity
