@@ -41,6 +41,14 @@ adipiscing elit. Aliquam sapien ex, lorems odales|
 Example input:
 
 ```
+{
+  "ascii": false,
+  "dotall": true,
+  "ignorecase": true,
+  "in_regex": "((lo)r(em))",
+  "in_string": "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales sed luctus ac, dapibus quis augue. Vivamus in cursus libero. (Donec vehicula turpis eu ante viverra, id lacinia.",
+  "multiline": true
+}
 ```
 
 ##### Output
@@ -81,6 +89,16 @@ adipiscing elit. Aliquam sapien ex, lorems odales|
 Example input:
 
 ```
+{
+  "ascii": false,
+  "dotall": true,
+  "ignorecase": true,
+  "in_regex": "lorem",
+  "in_string": "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales sed luctus ac, dapibus quis augue. Vivamus in cursus libero. Donec vehicula turpis eu ante viverra, id lacinia.",
+  "max_replace": 0,
+  "multiline": true,
+  "replace_string": "REPLACED"
+}
 ```
 
 ##### Output
@@ -117,6 +135,15 @@ adipiscing elit. Aliquam sapien ex, lorems odales sed|
 Example input:
 
 ```
+{
+  "ascii": false,
+  "dotall": true,
+  "ignorecase": true,
+  "in_regex": "lorem",
+  "in_string": "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales sed luctus ac, dapibus quis augue. Vivamus in cursus libero. Donec vehicula turpis eu ante viverra, id lacinia.",
+  "max_split": 0,
+  "multiline": true
+}
 ```
 
 ##### Output
