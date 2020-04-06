@@ -30,6 +30,16 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|API Key|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
+Example input:
+
+```
+{
+  "api_key": {
+      "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
+  }
+}
+```
+
 ## Technical Details
 
 ### Actions
