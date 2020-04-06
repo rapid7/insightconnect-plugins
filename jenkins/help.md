@@ -305,7 +305,7 @@ e.g. `{"mykeyone": false, "mykeytwo": "mystring", "mykeythree": 27}`
 # Version History
 
 * 1.1.2 - Update connection test
-* 1.1.1 - New spec and help.md format for the Hub
+* 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - Add build info action
 * 1.0.0 - Initial plugin
 

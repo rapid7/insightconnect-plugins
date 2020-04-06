@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "assessment",
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      }
+    },
+    "input": {
+      "id": ""
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "assessment",
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      }
+    },
+    "input": {
+      "id": "b550e76b-5c86-412e-a2a9-937b075f5b96"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

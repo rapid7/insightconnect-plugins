@@ -19,10 +19,11 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|dsm_api_key|credential_secret_key|None|True|API key of the Deep Security Manager|None|
-|dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|dsm_api_key|credential_secret_key|None|True|API key of the Deep Security Manager|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234|
+|dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|https://192.51.100.100:4119|
+|dsm_verify_ssl|boolean|True|True|Check the certificate of the Deep Security Manager|None|True|
 
 ## Technical Details
 
@@ -34,9 +35,22 @@ Search for matching IPS rules in Deep Security by CVE ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|vulnerabilities|[]string|None|True|CVEs to protect against|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|vulnerabilities|[]string|None|True|CVEs to protect against|None|['CVE-2005-0045', 'CVE-2014-0160', 'CVE-2017-0144', 'CVE-1337-1337']|
+
+Example input:
+
+```
+{
+  "vulnerabilities": [
+    "CVE-2005-0045",
+    "CVE-2014-0160",
+    "CVE-2017-0144",
+    "CVE-1337-1337"
+  ]
+}
+```
 
 ##### Output
 
@@ -76,11 +90,21 @@ Deploy the given Deep Security IPS rules to a computer or policy
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|computer_or_policy|string|None|True|Target for rule assignment|['computer', 'policy']|
-|id|integer|None|True|ID of the target asset or policy|None|
-|rules|[]integer|None|True|IPS rules to assign|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|computer_or_policy|string|None|True|Target for rule assignment|['computer', 'policy']|policy|
+|id|integer|None|True|ID of the target asset or policy|None|23|
+|rules|[]integer|None|True|IPS rules to assign|None|[108, 6745, 2874, 2875, 2876, 3317, 3318]|
+
+Example input:
+
+```
+{
+  "computer_or_policy": "policy",
+  "id": 23,
+  "rules": [108, 6745, 2874, 2875, 2876, 3317, 3318]
+}
+```
 
 ##### Output
 
@@ -128,6 +152,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Add an option to toggle DSM certificate verification in the connection
 * 1.0.0 - Initial plugin
 
 # Links

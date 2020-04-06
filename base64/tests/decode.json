@@ -3,7 +3,7 @@
         "action": "decode",
         "connection": null,
         "input": {
-            "base64": "aGV5LHRoaXMsaXMsY29vbCxyaWdodAp0ZWxsLG1lLHdoYXQseW91LHRoaW5rCg==",
+            "base64": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cgo=",
             "errors": "replace"
         },
         "meta": {}

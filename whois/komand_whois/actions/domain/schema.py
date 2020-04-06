@@ -92,7 +92,7 @@ class DomainOutput(komand.Output):
     },
     "last_updated": {
       "type": "string",
-      "title": "Last updated date",
+      "title": "Last Updated Date",
       "displayType": "date",
       "description": "Last updated date",
       "format": "date-time",

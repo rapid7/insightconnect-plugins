@@ -41,7 +41,7 @@ This action is used to get a list of all finished scans.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -77,7 +77,7 @@ This action is used to get a list of all currently running scans.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -170,7 +170,7 @@ This action is used to get a list of all scan configurations in the OpenVAS serv
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -258,7 +258,7 @@ This action is used to get a list of all scans in the OpenVAS server.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -317,7 +317,7 @@ the date given to the `create_schedule` function is given in the UTC timezone.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

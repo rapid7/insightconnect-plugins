@@ -33,7 +33,7 @@ This action is used to return every report generated at the end of the indexing 
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -61,7 +61,7 @@ This action is used to return all the known sources with their metadata.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -114,7 +114,7 @@ This action is used to return merged results from freshness, last_query, sched_r
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -151,7 +151,7 @@ This action is used to check if the indexation went well.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -176,7 +176,7 @@ This action is used to return all elements with Hippocampe/new.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -198,7 +198,7 @@ This action is used to check if an indexation has been launched within threshold
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -233,7 +233,7 @@ This action is used to return the last query date for every source.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -299,7 +299,7 @@ This action is used to check if the feeds are up to date. A threshold can be def
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -371,7 +371,7 @@ This action is used to return the size (number of elements) for every source.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -434,7 +434,7 @@ This action is used to return the size (number of elements) for every type.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -469,7 +469,7 @@ This action is used to return the current job ID and status. If the service is i
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -493,7 +493,7 @@ This action is used to return all the known types.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -576,7 +576,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links
