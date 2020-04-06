@@ -70,7 +70,7 @@ types:
       required: false
   evidenceDetails:
     criticality:
-      type: integer
+      type: number
       required: false
     criticalityLabel:
       title: Criticality Label
@@ -88,7 +88,7 @@ types:
       required: false
   risk:
     criticality:
-      type: integer
+      type: number
       required: false
     criticalityLabel:
       title: Criticality Label
@@ -144,7 +144,7 @@ types:
       type: string
       required: false
     criticality:
-      type: integer
+      type: number
       required: false
     criticalityLabel:
       type: string
@@ -533,7 +533,7 @@ actions:
         type: string
         description: Freetext search
         required: true
-        example: example.com
+        example: example
     output:
       entities:
         type: '[]entity'
@@ -547,7 +547,7 @@ actions:
         type: string
         required: true
         description: Entity list ID, obtained from the 'Search Entity lists' action
-        example: "url:http://www.google.com"
+        example: "report:Oe5eg5"
     output:
       entities:
         type: '[]entity'
@@ -934,7 +934,7 @@ actions:
         type: string
         description: Freetext search
         required: false
-        example: example.com
+        example: example
       limit:
         type: number
         description: Number of results to retrieve, up to 100
@@ -988,7 +988,7 @@ actions:
         description: Malware ID
         type: string
         required: true
-        example: TODO
+        example: ShciZX
     output:
       entity:
         type: entity

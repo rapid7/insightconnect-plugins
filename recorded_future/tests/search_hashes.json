@@ -2,7 +2,9 @@
     "body": {
         "action": "search_hashes",
         "connection": {
-            "api_key": null
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {
             "algorithm": "MD5",
