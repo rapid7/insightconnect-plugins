@@ -28,14 +28,20 @@ This action is used to extract data via regex from a string.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|
-|dotall|boolean|False|False|Make . match newline|None|
-|ignorecase|boolean|False|False|Make regex non-case sensitive|None|
-|in_regex|string|None|True|Regex to use for data extraction|None|
-|in_string|string|None|True|Input string|None|
-|multiline|boolean|False|False|Make begin/end consider each line|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|False|
+|dotall|boolean|False|False|Make . match newline|None|True|
+|ignorecase|boolean|False|False|Make regex non-case sensitive|None|True|
+|in_regex|string|None|True|Regex to use for data extraction|None|lorem|
+|in_string|string|None|True|Input string|None|Lorem ipsum dolor sit amet, consectetur 
+adipiscing elit. Aliquam sapien ex, lorems odales|
+|multiline|boolean|False|False|Make begin/end consider each line|None|True|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -60,16 +66,22 @@ This action is used to regex search and replace string.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|
-|dotall|boolean|False|False|Make . match newline|None|
-|ignorecase|boolean|False|False|Make regex non-case sensitive|None|
-|in_regex|string|None|True|Regex to match|None|
-|in_string|string|None|True|Input string|None|
-|max_replace|integer|0|False|Max occurrences to replace - if zero all will be replaced|None|
-|multiline|boolean|False|False|Make begin/end consider each line|None|
-|replace_string|string|None|True|The string to replace matches with|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|False|
+|dotall|boolean|False|False|Make . match newline|None|True|
+|ignorecase|boolean|False|False|Make regex non-case sensitive|None|True|
+|in_regex|string|None|True|Regex to match|None|lorem|
+|in_string|string|None|True|Input string|None|Lorem ipsum dolor sit amet, consectetur 
+adipiscing elit. Aliquam sapien ex, lorems odales|
+|max_replace|integer|0|False|Max occurrences to replace - if zero all will be replaced|None|0|
+|multiline|boolean|False|False|Make begin/end consider each line|None|True|
+|replace_string|string|None|True|The string to replace matches with|None|REPLACED|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -91,15 +103,21 @@ This action is used to split a string into array using regex.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|
-|dotall|boolean|False|False|Make . match newline|None|
-|ignorecase|boolean|False|False|Make regex non-case sensitive|None|
-|in_regex|string|None|True|Regex to split string on matches|None|
-|in_string|string|None|True|Input string|None|
-|max_split|integer|0|False|Max splits - if non-zero last element is remainder of string|None|
-|multiline|boolean|False|False|Make begin/end consider each line|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|False|
+|dotall|boolean|False|False|Make . match newline|None|True|
+|ignorecase|boolean|False|False|Make regex non-case sensitive|None|True|
+|in_regex|string|None|True|Regex to split string on matches|None|lorem|
+|in_string|string|None|True|Input string|None|Lorem ipsum dolor sit amet, consectetur 
+adipiscing elit. Aliquam sapien ex, lorems odales sed|
+|max_split|integer|0|False|Max splits - if non-zero last element is remainder of string|None|0|
+|multiline|boolean|False|False|Make begin/end consider each line|None|True|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -133,6 +151,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
