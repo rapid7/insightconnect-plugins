@@ -47,7 +47,7 @@ class SetThreatProtectionInput(komand.Input):
     "name": {
       "type": "string",
       "title": "Name",
-      "description": "Name of the protection to act on. e.g. Blaster Attacks",
+      "description": "Name of the protection to act on",
       "order": 1
     },
     "profile": {

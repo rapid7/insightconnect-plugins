@@ -139,7 +139,7 @@ Some `finger` daemons return answers in a different format which will cause this
 # Version History
 
 * 1.0.2 - Change docker image from `komand/python-2-plugin` to `komand/python-3-37-plugin:3` to use python 3 | Use input and output constants | Changed variables names to more readable | Changed descriptions | Added "f" strings | Removed method test from action
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

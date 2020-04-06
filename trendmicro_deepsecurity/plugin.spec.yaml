@@ -4,7 +4,7 @@ products: [insightconnect]
 name: trendmicro_deepsecurity
 title: Trend Micro Deep Security
 description: Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
-version: 1.0.0
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -33,11 +33,20 @@ connection:
     type: string
     default: https://app.deepsecurity.trendmicro.com
     required: true
+    example: https://192.51.100.100:4119
   dsm_api_key:
     title: API Key
     description: API key of the Deep Security Manager
     type: credential_secret_key
     required: true
+    example: 12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234
+  dsm_verify_ssl:
+    title: SSL Verification
+    description: Check the certificate of the Deep Security Manager
+    type: boolean
+    default: true
+    required: true
+    example: true
 actions: 
   search_rules:
     title: Search
@@ -48,6 +57,7 @@ actions:
         type: "[]string"
         description: CVEs to protect against
         required: true
+        example: ["CVE-2005-0045","CVE-2014-0160","CVE-2017-0144","CVE-1337-1337"]
     output:
       ips_rules:
         title: IPS Rules
@@ -76,16 +86,19 @@ actions:
         enum:
           - computer
           - policy 
+        example: policy
       id:
         title: ID
         type: integer
         description: ID of the target asset or policy
         required: true
+        example: 23
       rules:
         title: IPS Rules
         type: "[]integer"
         description: IPS rules to assign
         required: true
+        example: [108, 6745, 2874, 2875, 2876, 3317, 3318]
     output:
       rules_assigned:
         title: Rules Assigned

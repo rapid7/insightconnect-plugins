@@ -291,7 +291,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 1.4.0 - New action Lookup User By Email
-* 1.3.1 - Spec file and help changes for the Hub
+* 1.3.1 - Spec file and help changes for the Extension Library
 * 1.2.1 - Fix issue where input was undefined in Add and Delete User actions | Add office location to Add User action
 * 1.2.0 - New actions Get Subscribed SKUs and Assign License
 * 1.1.1 - Fix security bug where `password` field in Create User action was not masked
