@@ -1,5 +1,5 @@
 import re
-import komand
+import insightconnect_plugin_runtime
 from komand_dig.util import util
 
 
@@ -16,7 +16,7 @@ def execute_command(logger, cmd, answer_section_regex, flags):
     binary = "/usr/bin/dig"
     cmd = f"{binary} {cmd}"
     logger.info(f"Executing command {cmd}")
-    r = komand.helper.exec_command(cmd)
+    r = insightconnect_plugin_runtime.helper.exec_command(cmd)
     stdout = r['stdout'].decode('utf-8')
 
     # Grab query status
