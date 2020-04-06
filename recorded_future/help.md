@@ -51,7 +51,34 @@ _This action does not contain any inputs._
 Example output:
 
 ```
-
+{
+  "risk_rules": [
+    {
+      "count": 75508,
+      "criticality": 1,
+      "criticalityLabel": "Unusual",
+      "description": "Historical Threat Researcher",
+      "name": "threatResearcher",
+      "relatedEntities": []
+    },
+    {
+      "count": 517,
+      "criticality": 2,
+      "criticalityLabel": "Suspicious",
+      "description": "Recently Reported as a Defanged IP",
+      "name": "recentDefanged",
+      "relatedEntities": []
+    },
+    {
+      "count": 102959,
+      "criticality": 1,
+      "criticalityLabel": "Unusual",
+      "description": "Vulnerable Host",
+      "name": "vulnerableHost",
+      "relatedEntities": []
+    }
+  ]
+}
 ```
 
 #### Search Domains
@@ -133,6 +160,35 @@ _This action does not contain any inputs._
 Example output:
 
 ```
+
+{
+  "risk_rules": [
+    {
+      "count": 1473,
+      "criticality": 3,
+      "criticalityLabel": "Malicious",
+      "description": "COVID-19-Related Domain Lure",
+      "name": "covidLure",
+      "relatedEntities": []
+    },
+    {
+      "count": 21739,
+      "criticality": 2,
+      "criticalityLabel": "Suspicious",
+      "description": "Newly Registered Certificate With Potential for Abuse - DNS Sandwich",
+      "name": "certTyposquatSandwich",
+      "relatedEntities": []
+    },
+    {
+      "count": 134360,
+      "criticality": 2,
+      "criticalityLabel": "Suspicious",
+      "description": "Newly Registered Certificate With Potential for Abuse - Typo or Homograph",
+      "name": "certTyposquatTypo",
+      "relatedEntities": []
+    }
+  ]
+}
 
 ```
 
@@ -1060,7 +1116,28 @@ _This action does not contain any inputs._
 Example output:
 
 ```
-
+{
+  "risk_rules": [
+    {
+      "name": "recentActiveMalware",
+      "relatedEntities": [
+        "aHTyRv"
+      ],
+      "count": 16164,
+      "criticality": 3,
+      "criticalityLabel": "Malicious",
+      "description": "Recently Active Targeting Vulnerabilities in the W..."
+    },
+    {
+      "criticality": 3,
+      "criticalityLabel": "Malicious",
+      "description": "Observed in Underground Virus Testing Sites",
+      "name": "observedMalwareTesting",
+      "relatedEntities": [],
+      "count": 1158
+    }
+  ]
+}
 ```
 
 #### Lookup Vulnerability
@@ -1117,7 +1194,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.5.4 - Add example inputs
+* 1.5.4 - Add example inputs | Fix schema bug where `criticality` output was improperly defined as an integer in List Domain Risk Rules, List Hash Risk Rules, List IP Addresses Risk Rules and List Vulnerability Risk Rules actions
 * 1.5.3 - New spec and help.md format for the Extension Library
 * 1.5.2 - Fix issue where timestamp for evidenceDetails was set to integer, timestamp is now expected as datetime from RecordedFuture
 * 1.5.1 - Fix issue where parameter timestamp in evidenceDetails was set as a string in Lookup IP Address action, timestamp is now an integer
