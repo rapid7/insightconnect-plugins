@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddressInput, AddressOutput
 import re
 
 
-class Address(komand.Action):
+class Address(insightconnect_plugin_runtime.Action):
     ARIN, LACNIC, APNIC, RIPE = "arin", "lacnic", "apnic", "ripe"
 
     NORMALIZATION_MAP = {
@@ -77,10 +77,10 @@ class Address(komand.Action):
     def run(self, params={}):
         binary = "/usr/bin/whois"
         cmd = "%s %s" % (binary, params.get("address"))
-        stdout = komand.helper.exec_command(cmd)["stdout"]
+        stdout = insightconnect_plugin_runtime.helper.exec_command(cmd)["stdout"]
         stdout = stdout.decode('utf-8')
         results = self.parse_stdout(stdout=stdout)
-        results = komand.helper.clean_dict(results)
+        results = insightconnect_plugin_runtime.helper.clean_dict(results)
 
         if not results:
             self.logger.error("Error: Request did not return any data")
