@@ -30,14 +30,14 @@ This action is used to search the database to find vulnerabilities and exploits.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |database|string|None|True|Name of the database|['Vulnerability Database', 'Metasploit Modules']|Vulnerability Database|
-|search|string|None|True|Search parameter for database|None|cve-2015|
+|search|string|None|True|Search parameter for database|None|cve-2015-9542|
 
 Example input:
 
 ```
 {
   "database": "Vulnerability Database",
-  "search": "cve-2015"
+  "search": "cve-2015-9542"
 }
 ```
 
@@ -55,14 +55,10 @@ Example output:
   "results_found": true,
   "search_results": [
     {
-      "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/mozilla-thunderbird-cve-2015-7189",
-      "published_at": "2015-11-05T00:00:00.000Z",
-      "title": "MFSA2015-123 Thunderbird: Buffer overflow during image interactions in canvas (CVE-2015-7189)"
-    },
-    {
-      "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/mfsa2015-123-cve-2015-7189",
-      "published_at": "2015-11-03T00:00:00.000Z",
-      "title": "MFSA2015-123 Firefox: Buffer overflow during image interactions in canvas (CVE-2015-7189)"
+      "identifier": "ubuntu-cve-2015-9542",
+      "title": "Ubuntu: (Multiple Advisories) (CVE-2015-9542): libpam-radius-auth vulnerability",
+      "published_at": "2020-02-24T00:00:00.000Z",
+      "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/ubuntu-cve-2015-9542"
     }
   ]
 }
