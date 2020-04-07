@@ -21,7 +21,7 @@ class DomainList(komand.Action):
         if query not in self.connection.terms:
             self.logger.error(f"DomainTools: Terms: Query not in terms. Allowed terms: {self.connection.terms}")
             raise PluginException(cause="DomainTools: Terms:",
-                                  assistance=f"Query not in terms. Allowed terms: {self.connection.terms}")
+                                  assistance=f"Allowed terms: {self.connection.terms}.")
 
         response = Helper.make_request(self.connection.api.phisheye, self.logger, query, days_back)
         output = {
