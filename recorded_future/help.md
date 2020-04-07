@@ -1079,7 +1079,7 @@ This action is used to query for data related to a specific IP address.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|IP_address|string|None|True|IP address|None|198.51.100.1|
+|IP_address|string|None|True|IP address|None|198.51.100.100|
 |comment|string|None|False|Add comment to IP address lookup for Recorded Future|None|IP look up performed by InsightConnect|
 |fields|[]string|None|False|List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "riskyCIDRIPs","risk", "location", "timestamps"]|None|['riskyCIDRIPs', 'risk', 'sightings']|
 

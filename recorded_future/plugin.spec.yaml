@@ -848,7 +848,7 @@ actions:
         description: IP address
         type: string
         required: true
-        example: 198.51.100.1
+        example: 198.51.100.100
       fields:
         title: Fields
         description: List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "riskyCIDRIPs","risk", "location", "timestamps"]
