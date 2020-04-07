@@ -447,7 +447,7 @@ Example input:
 ```
 {
   "direction": "asc",
-  "from": 2,
+  "from": 0,
   "ip_range": "209.0.0.0/24",
   "limit": 10,
   "orderby": "Created"
