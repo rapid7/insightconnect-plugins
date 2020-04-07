@@ -1,0 +1,47 @@
+{
+	"spec": "85a47cc91e1250ca5eb17fb3dd339d0c",
+	"manifest": "e8545c3322699314610eb7843f3dd862",
+	"setup": "dbcd29267e4279509db88b97934c753a",
+	"schemas": [
+		{
+			"identifier": "add_access_rule/schema.py",
+			"hash": "55d1d76024bbfb13bd2fbbe88cc36d5e"
+		},
+		{
+			"identifier": "add_host/schema.py",
+			"hash": "d3939b7741d94413fc6c2c5168fd76b8"
+		},
+		{
+			"identifier": "add_host_to_network_group/schema.py",
+			"hash": "3eec1926fcb61887fd83f522c2296f11"
+		},
+		{
+			"identifier": "discard_all_sessions/schema.py",
+			"hash": "3d93ac45c7182e1fb3bff86c75a438fd"
+		},
+		{
+			"identifier": "install_policy/schema.py",
+			"hash": "ef6df220a36df938acf0c006b5d309e7"
+		},
+		{
+			"identifier": "remove_access_rule/schema.py",
+			"hash": "63a13725d644e952c40f5648fa41382e"
+		},
+		{
+			"identifier": "remove_host/schema.py",
+			"hash": "abbc51146a4b78255550ee1a28b06cc8"
+		},
+		{
+			"identifier": "set_threat_protection/schema.py",
+			"hash": "945dc4df598c84352be4b929c46f9442"
+		},
+		{
+			"identifier": "show_access_rulebase/schema.py",
+			"hash": "9a2929ef259b5b0f24d236204adda94c"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "38546f13eb46b61ed92c43b623fa8d93"
+		}
+	]
+}

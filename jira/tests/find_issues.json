@@ -1,14 +1,6 @@
 {
     "body": {
         "action": "find_issues",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "project": null,
-            "url": null
-        },
         "input": {
             "jql": "asdf",
             "max": 10

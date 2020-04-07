@@ -3,10 +3,10 @@
         "action": "find_user",
         "connection": {
             "credentials": {
-                "password": null,
-                "username": null
+                "password": "",
+                "username": ""
             },
-            "server": null
+            "server": ""
         },
         "input": {
             "search_parameters": "helpdesk"

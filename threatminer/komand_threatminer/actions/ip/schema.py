@@ -33,7 +33,6 @@ class IpInput(komand.Input):
       "title": "Query Type",
       "description": "Query Type",
       "enum": [
-        "URIs",
         "WHOIS",
         "PASSIVE DNS",
         "URIs",

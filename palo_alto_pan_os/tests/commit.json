@@ -1,14 +1,6 @@
 {
     "body": {
         "action": "commit",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "server": null,
-            "verify_cert": null
-        },
         "input": {
             "action": "commit-all",
             "cmd": "<commit-all><shared-policy><validate-only></validate-only></shared-policy></commit-all>"

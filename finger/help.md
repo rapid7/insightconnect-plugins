@@ -5,7 +5,7 @@ For example, from the command line:
 
 ```
 
-$ finger bross@server.com
+$ finger user@example.com
 [server.com]
 Trying ...
 -----------------------------------------------------------------------------
@@ -53,22 +53,22 @@ It accepts a user to query and a `finger` host (IP or domain) to perform the que
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|None|
-|shell|string|False|None|
-|workphone|string|False|None|
-|mailstatus|string|False|None|
-|plan|string|False|None|
-|loginstatus|string|False|None|
-|found|boolean|False|None|
-|home|string|False|None|
-|fullname|string|False|None|
-|room|string|False|None|
-|project|string|False|None|
-|loginfrom|string|False|None|
-|mail|string|False|None|
-|login|string|False|None|
-|pubkey|string|False|None|
-|homephone|string|False|None|
+|found|boolean|False|Whether user exists on the system|
+|fullname|string|False|User's full name|
+|home|string|False|Path to user's home directory|
+|homephone|string|False|User home phone|
+|login|string|False|User's login name|
+|loginfrom|string|False|User's last login source address|
+|loginstatus|string|False|When the user logged in|
+|mail|string|False|Mail forward address if it exists|
+|mailstatus|string|False|Status on unread mail|
+|plan|string|False|The contents of the plan file if it exists|
+|project|string|False|The contents of the project file if it exists|
+|pubkey|string|False|The contents of user's public key if it exists|
+|room|string|False|User room|
+|shell|string|False|The user's default shell|
+|status|string|False|Success or any error messages|
+|workphone|string|False|User work phone|
 
 The plugin can return the following properties:
 
@@ -138,7 +138,8 @@ Some `finger` daemons return answers in a different format which will cause this
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.2 - Change docker image from `komand/python-2-plugin` to `komand/python-3-37-plugin:3` to use python 3 | Use input and output constants | Changed variables names to more readable | Changed descriptions | Added "f" strings | Removed method test from action
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

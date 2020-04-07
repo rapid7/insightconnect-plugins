@@ -10,7 +10,7 @@ This plugin utilizes [pandoc](https://pandoc.org/) via [pypandoc](https://pypi.p
 
 # Requirements
 
-_This plugin does not contain any requirements_
+_This plugin does not contain any requirements._
 
 # Documentation
 
@@ -84,7 +84,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.2.2 - New spec and help.md format for the Hub
+* 2.2.2 - New spec and help.md format for the Extension Library
 * 2.2.1 - Add `utilities` plugin tag for Marketplace searchability
 * 2.2.0 - PyPandoc bug fix | Support web server mode
 * 2.1.0 - Update to v2 Python plugin architecture | Change type of input/output to string

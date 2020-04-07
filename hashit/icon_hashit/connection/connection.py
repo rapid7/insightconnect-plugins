@@ -1,5 +1,11 @@
+import base64
+import hashlib
+
 import komand
+from komand.exceptions import ConnectionTestException
 from .schema import ConnectionSchema
+
+
 # Custom imports below
 
 
@@ -10,3 +16,6 @@ class Connection(komand.Connection):
 
     def connect(self, params={}):
         pass
+
+    def test(self):
+        return {"success": True}

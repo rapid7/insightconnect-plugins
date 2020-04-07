@@ -29,7 +29,7 @@ This action is used to check SSL Labs server availability.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -67,7 +67,7 @@ This action is used to retrieve status codes.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -215,7 +215,7 @@ This action is used to retrieve root certificates.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -237,7 +237,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.2 - New spec and help.md format for the Hub
+* 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Fix typo in plugin spec
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK

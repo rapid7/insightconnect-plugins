@@ -6,7 +6,7 @@ from komand_okta import connection, actions, triggers
 
 Name = "Okta"
 Vendor = "rapid7"
-Version = "3.2.2"
+Version = "3.4.0"
 Description = "Secure identity management and single sign-on to any application"
 
 
@@ -19,6 +19,8 @@ class ICONOkta(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_trigger(triggers.UsersAddedRemovedFromGroup())
+
         self.add_action(actions.AddUserToGroup())
 
         self.add_action(actions.AssignUserToAppSso())
@@ -29,6 +31,8 @@ class ICONOkta(komand.Plugin):
 
         self.add_action(actions.DeleteUser())
 
+        self.add_action(actions.GetFactors())
+
         self.add_action(actions.GetUser())
 
         self.add_action(actions.ListGroups())
@@ -36,6 +40,8 @@ class ICONOkta(komand.Plugin):
         self.add_action(actions.RemoveUserFromGroup())
 
         self.add_action(actions.ResetFactors())
+
+        self.add_action(actions.SendPush())
 
         self.add_action(actions.SuspendUser())
 

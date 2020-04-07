@@ -1,0 +1,887 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: checkpoint_ngfw
+title: Check Point NGFW
+description: Check Point Next Generation Firewalls (NGFW) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks
+version: 1.3.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/checkpoint_ngfw
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+tags:
+- firewall
+- checkpoint
+hub_tags:
+  use_cases: [application_management, threat_detection_and_response, vulnerability_management]
+  keywords: [firewall, check, point, decoder, utilities]
+  features: []
+
+types:
+  domain:
+    domain-type:
+      title: "Domain"
+      type: string
+      description: "Domain"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    uid:
+      title: "UID"
+      type: string
+      description: "UID"
+      required: false
+  action_type:
+    domain:
+      title: "Domain"
+      type: domain
+      description: "Domain"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    uid:
+      title: "UID"
+      type: string
+      description: "UID"
+      required: false
+  creation_time_type:
+    posix:
+      title: "POSIX"
+      type: integer
+      description: "POSIX"
+      required: false
+    iso-8601:
+      title: "ISO-8601"
+      type: string
+      description: "ISO-8601"
+      required: false
+  meta_info_type:
+    validation-state:
+      title: "Validation-State"
+      type: string
+      description: "Validation-state"
+      required: false
+    creation-time:
+      title: "Creation-Time"
+      type: creation_time_type
+      description: "Creation-time"
+      required: false
+    last-modifier:
+      title: "Last-Modifier"
+      type: string
+      description: "Last-modifier"
+      required: false
+    last-modify-time:
+      title: "Last-Modify-Time"
+      type: creation_time_type
+      description: "Last-modify-time"
+      required: false
+    lock:
+      title: "Lock"
+      type: string
+      description: "Lock"
+      required: false
+    creator:
+      title: "Creator"
+      type: string
+      description: "Creator"
+      required: false
+  objects_dictionary_type:
+    domain:
+      title: "Domain"
+      type: domain
+      description: "Domain"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    tags:
+      title: "Tags"
+      type: "[]object"
+      description: "Tags"
+      required: false
+    color:
+      title: "Color"
+      type: string
+      description: "Color"
+      required: false
+    comments:
+      title: "Comments"
+      type: string
+      description: "Comments"
+      required: false
+    meta-info:
+      title: "Meta-Info"
+      type: meta_info_type
+      description: "Meta-info"
+      required: false
+    port:
+      title: "Port"
+      type: string
+      description: "Port"
+      required: false
+    uid:
+      title: "UID"
+      type: string
+      description: "UID"
+      required: false
+    customFields:
+      title: "Custom Fields"
+      type: object
+      description: "Custom fields"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+    display-name:
+      title: "Display-Name"
+      type: string
+      description: "Display-name"
+      required: false
+    icon:
+      title: "Icon"
+      type: string
+      description: "Icon"
+      required: false
+  meta-info_0:
+    creation-time:
+      title: "Creation-Time"
+      type: creation_time_type
+      description: "Creation-time"
+      required: false
+    validation-state:
+      title: "Validation-State"
+      type: string
+      description: "Validation-state"
+      required: false
+    last-modifier:
+      title: "Last-Modifier"
+      type: string
+      description: "Last-modifier"
+      required: false
+    lock:
+      title: "Lock"
+      type: string
+      description: "Lock"
+      required: false
+    creator:
+      title: "Creator"
+      type: string
+      description: "Creator"
+      required: false
+    last-modify-time:
+      title: "Last-Modify-Time"
+      type: creation_time_type
+      description: "Last-modify-time"
+      required: false
+  track:
+    per-connection:
+      title: "Per-Connection"
+      type: boolean
+      description: "Per-connection"
+      required: false
+    accounting:
+      title: "Accounting"
+      type: boolean
+      description: "Accounting"
+      required: false
+    type:
+      title: "Type"
+      type: action_type
+      description: "Type"
+      required: false
+    per-session:
+      title: "Per-Session"
+      type: boolean
+      description: "Per-session"
+      required: false
+    alert:
+      title: "Alert"
+      type: string
+      description: "Alert"
+      required: false
+  rulebase_type:
+    objects-dictionary:
+      title: "Objects-Dictionary"
+      type: "[]objects_dictionary_type"
+      description: "Objects-dictionary"
+      required: false
+    from:
+      title: "From"
+      type: integer
+      description: "From"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    rulebase_array:
+      title: "Rulebase"
+      type: "[]objects_dictionary_type"
+      description: "Rulebase"
+      required: false
+    to:
+      title: "To"
+      type: integer
+      description: "To"
+      required: false
+    total:
+      title: "Total"
+      type: integer
+      description: "Total"
+      required: false
+    uid:
+      title: "UID"
+      type: string
+      description: "UID"
+      required: false
+  access_rule:
+    domain:
+      title: "Domain"
+      type: domain
+      description: "Domain"
+      required: false
+    uid:
+      title: "UID"
+      type: string
+      description: "UID"
+      required: false
+    custom-fields:
+      title: "Custom-Fields"
+      type: object
+      description: "Custom-fields"
+      required: false
+    layer:
+      title: "Layer"
+      type: string
+      description: "Layer"
+      required: false
+    content-direction:
+      title: "Content-Direction"
+      type: string
+      description: "Content-direction"
+      required: false
+    content-negate:
+      title: "Content-Negate"
+      type: boolean
+      description: "Content-negate"
+      required: false
+    source-negate:
+      title: "Source-Negate"
+      type: boolean
+      description: "Source-negate"
+      required: false
+    vpn:
+      title: "VPN"
+      type: "[]action_type"
+      description: "VPN"
+      required: false
+    service:
+      title: "Service"
+      type: "[]objects_dictionary_type"
+      description: "Service"
+      required: false
+    destination:
+      title: "Destination"
+      type: "[]action_type"
+      description: "Destination"
+      required: false
+    comments:
+      title: "Comments"
+      type: string
+      description: "Comments"
+      required: false
+    content:
+      title: "Content"
+      type: "[]action_type"
+      description: "Content"
+      required: false
+    source:
+      title: "Source"
+      type: "[]action_type"
+      description: "Source"
+      required: false
+    destination-negate:
+      title: "Destination-Negate"
+      type: boolean
+      description: "Destination-negate"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+    track:
+      title: "Track"
+      type: track
+      description: "Track"
+      required: false
+    time:
+      title: "Time"
+      type: "[]action_type"
+      description: "Time"
+      required: false
+    install-on:
+      title: "Install-On"
+      type: "[]action_type"
+      description: "Install-on"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    service-negate:
+      title: "Service-Negate"
+      type: boolean
+      description: "Service-negate"
+      required: false
+    enabled:
+      title: "Enabled"
+      type: boolean
+      description: "Enabled"
+      required: false
+    meta-info:
+      title: "Meta-Info"
+      type: meta_info_type
+      description: "Meta-info"
+      required: false
+    action-settings:
+      title: "Action-Settings"
+      type: object
+      description: "Action-settings"
+      required: false
+    action:
+      title: "Action"
+      type: action_type
+      description: "Action"
+      required: false
+
+  host_object:
+    domain:
+      title: "Domain"
+      type: domain
+      description: "Domain"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    tags:
+      title: "Tags"
+      type: "[]object"
+      description: "Tags"
+      required: false
+    color:
+      title: "Color"
+      type: string
+      description: "Color"
+      required: false
+    interfaces:
+      title: "Interfaces"
+      type: "[]object"
+      description: "Interfaces"
+      required: false
+    nat-settings:
+      title: "NAT-Settings"
+      type: object
+      description: "NAT-settings"
+      required: false
+    comments:
+      title: "Comments"
+      type: string
+      description: "Comments"
+      required: false
+    meta-info:
+      title: "Meta-Info"
+      type: meta_info_type
+      description: "Meta-info"
+      required: false
+    groups:
+      title: "Groups"
+      type: "[]object"
+      description: "Groups"
+      required: false
+    uid:
+      title: "UID"
+      type: string
+      description: "UID"
+      required: false
+    ipv4-address:
+      title: "IPv4-Address"
+      type: string
+      description: "IPv4-address"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+    read-only:
+      title: "Read-Only"
+      type: boolean
+      description: "Read-only"
+      required: false
+    icon:
+      title: "Icon"
+      type: string
+      description: "Icon"
+      required: false
+
+connection:
+  username_password:
+    type: credential_username_password
+    title: Credentials
+    description: Username and password
+    required: true
+  server:
+    type: string
+    title: Check Point Server IP Address
+    description: Check Point server IP address
+    example: 198.168.2.1
+    required: true
+  port:
+    type: integer
+    title: Check Point Server Port
+    description: Check Point server port
+    required: true
+    example: 443
+    default: 443
+  ssl_verify:
+    type: boolean
+    title: SSL Verify
+    description: Use SSL verification
+    required: true
+    example: true
+    default: true
+
+actions:
+  show_access_rulebase:
+    title: Show Access Rulebase
+    description: Show the access rulebase
+    input:
+      layer_name:
+        title: Layer Name
+        description: Layer name
+        type: string
+        default: Network
+        example: Network
+        required: true
+      limit:
+        title: Limit
+        description: Limit
+        type: integer
+        default: 500
+        example: 500
+        required: false
+    output:
+      access_rules:
+        title: Access Rules
+        description: Access rules
+        type: rulebase_type
+        required: false
+
+  add_access_rule:
+    title: Add Access Rule
+    description: Create a rule to block traffic
+    input:
+      name:
+        title: Name
+        type: string
+        description: Rule name
+        required: true
+        example: Malicious IP Addresses
+        order: 1
+      list_of_services:
+        title: List of Services
+        type: "[]string"
+        description: List of services to block
+        example: ["AOL", "SMTP"]
+        required: false
+        order: 2
+      layer:
+        title: Layer
+        type: string
+        description: Layer to add this rule to
+        required: true
+        default: Network
+        example: Network
+        order: 3
+      source:
+        title: Source
+        description: Source network object name
+        type: string
+        example: 192.168.2.1
+        required: false
+        order: 4
+      destination:
+        title: Destination
+        description: Destination network object name
+        type: string
+        example: 192.168.2.1
+        required: false
+        order: 5
+      action:
+        title: Action
+        type: string
+        description: Action to take
+        required: true
+        default: Drop
+        example: Drop
+        order: 6
+        enum:
+          - Accept
+          - Drop
+          - Ask
+          - Inform
+          - Reject
+          - User Auth
+          - Client Auth
+          - Apply Layer
+      position:
+        title: Position
+        type: string
+        description: Position in the list of rules. e.g. top, bottom, 15
+        required: true
+        default: "top"
+        example: 1
+        order: 7
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        default: true
+        example: true
+        order: 8
+    output:
+      access_rule:
+        title: Block Rule
+        description: The rule that was created
+        type: access_rule
+        required: true
+
+  remove_access_rule:
+    title: Remove Access Rule
+    description: Remove an access rule
+    input:
+      access_rule_name:
+        title: Access Rule Name
+        description: Access rule name
+        type: string
+        required: true
+        example: InsightConnect Access Rule
+        order: 1
+      layer:
+        title: Layer
+        description: Layer
+        type: string
+        default: Network
+        example: Network
+        required: true
+        order: 2
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        default: true
+        example: true
+        order: 3
+    output:
+      message:
+        title: Message
+        description: Remove operation status
+        type: string
+        required: true
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+
+  add_host:
+    title: Add Host
+    description: Add a host as a network object
+    input:
+      name:
+        title: Name
+        description: Name
+        type: string
+        required: true
+        example: 192.168.2.1
+        order: 1
+      host_ip:
+        title: Host IP Address
+        description: Host IP address
+        type: string
+        required: true
+        example: 192.168.2.1
+        order: 2
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        default: true
+        example: true
+        order: 3
+      color:
+        title: Color
+        description: Color
+        required: false
+        type: string
+        default: black
+        example: black
+        order: 4
+        enum:
+          - black
+          - aquamarine
+          - blue
+          - brown
+          - burlywood
+          - coral
+          - crete
+          - cyan
+          - dark blue
+          - dark gold
+          - dark gray
+          - dark green
+          - dark orange
+          - dark sea green
+          - firebrick
+          - forest green
+          - gold
+          - gray
+          - khaki
+          - lemon chiffon
+          - light green
+          - magenta
+          - navy blue
+          - olive
+          - orange
+          - orchid
+          - pink
+          - purple
+          - red
+          - sea green
+          - sienna
+          - sky blue
+          - slate blue
+          - turquoise
+          - violet red
+          - yellow
+    output:
+      host_object:
+        title: Host
+        description: Information about the host that was added
+        type: host_object
+        required: true
+
+  remove_host:
+    title: Remove Host
+    description: Remove a host from network objects
+    input:
+      name:
+        title: Name
+        description: Name
+        type: string
+        required: true
+        example: 192.168.2.1
+        order: 1
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        default: true
+        example: true
+        order: 3
+    output:
+      message:
+        title: Message
+        description: Remove operation status
+        type: string
+        required: true
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+
+  add_host_to_network_group:
+    title: Add Host to Network Group
+    description: Add a host to a network group
+    input:
+      group_name:
+        title: Group Name
+        description: Name of the group to add this object to
+        required: true
+        type: string
+        order: 1
+      host_name:
+        title: Host Name
+        description: The host to add to the network group, usually the IP address
+        required: true
+        type: string
+        order: 2
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        default: true
+        order: 3
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+
+  set_threat_protection:
+    title: Set Threat Protection
+    description: Set threat protection action per profile
+    input:
+      name:
+        title: Name
+        description: Name of the protection to act on
+        example: Blaster Attacks
+        required: true
+        type: string
+        order: 1
+      action:
+        title: Action
+        description: Action
+        required: true
+        example: Prevent
+        type: string
+        order: 2
+        enum:
+          - Inactive
+          - Detect
+          - Prevent
+          - Drop
+          - Accept
+      profile:
+        title: Profile
+        description: Profile e.g. Optimized, Basic, Strict
+        example: Optimized
+        required: true
+        type: string
+        default: Optimized
+        order: 3
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        example: true
+        required: true
+        default: true
+        order: 4
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+
+  discard_all_sessions:
+    title: Discard All Sessions
+    description: Troubleshooting action to discard all other user sessions
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+
+  install_policy:
+    title: Install Policy
+    description: Install a policy to selected targets
+    input:
+      policy_package:
+        title: Policy Package
+        description: Policy package to install
+        type: string
+        required: true
+        default: standard
+        example: standard
+        order: 1
+      targets:
+        title: Targets
+        description: On what targets to execute this command. Targets may be identified by their name, or object unique identifier
+        type: "[]string"
+        default: ["target name"]
+        example: ["checkpoint_fw_1", "checkpoint_fw_2"]
+        required: true
+        order: 2
+      access_control_policy:
+        title: Access Control Policy
+        description: Set to be true in order to install the Access Control policy. By default, the value is true if Access Control policy is enabled on the input policy package, otherwise false
+        type: boolean
+        default: true
+        example: true
+        required: true
+      desktop_security_policy:
+        title: Desktop Security Policy
+        description: Set to be true in order to install the Desktop Security policy. By default, the value is true if desktop security policy is enabled on the input policy package, otherwise false
+        type: boolean
+        default: false
+        example: false
+        required: true
+      qos_policy:
+        title: QoS Policy
+        description: Set to be true in order to install the QoS policy. By default, the value is true if Quality-of-Service policy is enabled on the input policy package, otherwise false
+        type: boolean
+        default: false
+        example: false
+        required: true
+      threat_prevention_policy:
+        title: Threat Prevention Policy
+        description: Set to be true in order to install the Threat Prevention policy. By default, the value is true if Threat Prevention policy is enabled on the input policy package, otherwise false
+        type: boolean
+        default: true
+        example: true
+        required: true
+      install_on_all_cluster_members_or_fail:
+        title: Install Access Control Policy
+        description: Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster
+        type: boolean
+        required: true
+        example: false
+        default: false
+        order: 3
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        required: true
+        example: false
+        default: false
+        order: 4
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true

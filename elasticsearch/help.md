@@ -36,7 +36,7 @@ This action is used to check cluster health.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -149,7 +149,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.2 - New spec and help.md format for the Hub
+* 2.0.2 - New spec and help.md format for the Extension Library
 * 2.0.1 - Fix typo in plugin spec
 * 2.0.0 - Fix issue where Poll Documents trigger will sometimes not return results | Update connection to allow optional authentication
 * 1.0.1 - Fix issue where Poll Documents trigger test would always fail

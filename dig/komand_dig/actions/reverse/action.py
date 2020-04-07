@@ -1,49 +1,38 @@
-import komand
-from .schema import ReverseInput, ReverseOutput
-import subprocess
+import insightconnect_plugin_runtime
+from .schema import ReverseInput, ReverseOutput, Input, Output, Component
 import re
 from komand_dig.util import util
 
 
-class Reverse(komand.Action):
+class Reverse(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='reverse',
-                description='Reverse DNS Query',
-                input=ReverseInput(),
-                output=ReverseOutput())
+            name='reverse',
+            description=Component.DESCRIPTION,
+            input=ReverseInput(),
+            output=ReverseOutput())
 
     def run(self, params={}):
-        binary = "/usr/bin/dig"
-
-        if len(params.get('resolver', '')) > 0:
-            cmd = "%s @%s -x %s" % (binary, params.get('resolver'), params.get('address'))
+        if len(params.get(Input.RESOLVER, '')) > 0:
+            cmd = f"@{params.get(Input.RESOLVER)} -x {params.get(Input.ADDRESS)}"
         else:
-            cmd = "%s -x %s" % (binary, params.get('address'))
+            cmd = f"-x {params.get(Input.ADDRESS)}"
 
-        self.logger.info('Executing command %s' % cmd)
-        r = komand.helper.exec_command(cmd)
-
-        # Grab query status
-        status = util.safe_parse(re.search('status: (.+?),', r['stdout']))
-        # Grab nameserver
-        ns = util.safe_parse(re.search('SERVER: (.+?)#', r['stdout']))
-        # Grab number of answers
-        answers = util.safe_parse(re.search(r'ANSWER: ([0-9]+)', r['stdout']))
-        if util.not_empty(answers) : answers = int(answers)
-
-        # We need answers to continue
-        address = ""
-        if answers > 0:
-            # Grab address section
-            answer_section = util.safe_parse(re.search(r'ANSWER SECTION:\n(.*\n)', r['stdout']))
+        command_output = util.execute_command(self.logger, cmd, 'ANSWER SECTION:\n(.*\n)', None)
+        answer_section = command_output['answer_section']
+        if answer_section is None:
+            address = 'Not found'
+        else:
             # Grab address
             address = util.safe_parse(re.search(r'\s(\S+)\n', answer_section))
-            if util.not_empty(address) : address = address.rstrip('.')
+            if util.not_empty(address):
+                address = address.rstrip('.')
 
-        if status != "NOERROR":
-          r['stdout'] = 'Resolution failed, nameserver %s returned %s status' % (ns, status)
-          address = 'Not found'
-
-        return { 'fulloutput': r['stdout'] + r['stderr'], 'question': params.get('address'), 'nameserver': ns, 'status': status, 'answer': address }
+        return {
+            Output.FULLOUTPUT: command_output['fulloutput'],
+            Output.QUESTION: params.get(Input.ADDRESS),
+            Output.NAMESERVER: command_output['nameserver'],
+            Output.STATUS: command_output['status'],
+            Output.ANSWER: address
+        }

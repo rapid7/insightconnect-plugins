@@ -7,7 +7,7 @@ vendor: rapid7
 support: community
 status: [] 
 description: Analyze URLs for malicious indicators using the URLScan website scanner
-version: 2.1.3
+version: 2.1.5
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/urlscan
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -141,6 +141,7 @@ connection:
     description: urlscan API key. Not required for the search action
     type: credential_secret_key
     required: false
+    example: 381cd93b-1946-9c73-1946-c916075eb9a3
 actions:
   search:
     title: Search
@@ -148,28 +149,31 @@ actions:
     input:
       q:
         title: Query
-        description: The query term (ElasticSearch simple query string) e.g domain:urlscan.io,
-          default is *
+        description: The query term (ElasticSearch simple query string), default is *
         type: string
         required: true
+        example: domain:rapid7.com
       size:
         title: Size
         description: Number of results returned
         type: integer
         default: 100
         required: true
+        example: 45
       offset:
         title: Offset
         description: Offset of first result (for paginating)
         type: integer
         default: 0
         required: true
+        example: 1
       sort:
         title: Sort
         description: Sorting, specificied via $sort_field:$sort_order
         type: string
         default: _score
         required: true
+        example: _score
     output:
       total:
         title: Total
@@ -190,12 +194,14 @@ actions:
         type: string
         description: The URL to scan
         required: true
+        example: http://www.example.com
       public:
         type: boolean
         title: Public
         description: Set to false for a private scan
         required: true
         default: false
+        example: true
     output:
       scan_id:
         title: Scan ID
@@ -211,6 +217,7 @@ actions:
         type: string
         description: UUID of the scan to retrieve
         required: true
+        example: b1f3dab-ad7e-e2790803d6d0-76wFGijr
     output:
       scan_results:
         title: Scan Results

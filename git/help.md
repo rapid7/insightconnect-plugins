@@ -31,6 +31,32 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Get File
+
+This action is used to get a file from the repository.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|file_path|string|None|True|Path of the new file (inside the repository)|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|file|file|True|File content|
+
+Example output:
+
+```
+{
+  "file": {
+    "content": "iVBORw0KGgoAAAANSUhEUgAAA+cAAAPnCAYAAABN/j28AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAdgwAA=",
+    "filename": "icon.png"
+}
+```
+
 #### Remove File
 
 This action is used to remove a file from the repository.
@@ -140,7 +166,8 @@ If a token is used, make sure that it has sufficient permissions assigned to it.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.1.1 - New action Get File
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links
@@ -150,4 +177,3 @@ If a token is used, make sure that it has sufficient permissions assigned to it.
 * [git-clone](https://www.git-scm.com/docs/git-clone)
 * [git-add](https://www.git-scm.com/docs/git-add)
 * [git-rm](https://www.git-scm.com/docs/git-rm)
-

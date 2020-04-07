@@ -14,7 +14,7 @@
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -30,23 +30,33 @@ This action is used to decode a Microsoft Safe Link.
 |----|----|-------|--------|-----------|----|
 |url|string|None|True|Safe Link to be decoded|None|
 
+Example input:
+
+```
+{
+  "url": "https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Faomediacodec.github.io%2Fav1-spec%2Fav1-spec.pdf&data=04%7C01%7Cgfrost%40microsoft.com%7Cc01143f4353e426231d508d590e3a9c1%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C1%7C636574229902920663%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwifQ%3D%3D%7C-1&sdata=lLQibtMygoLH30UNXZcUZGAA1i%2FqNE%2Ff6fgotaX3uhI%3D&reserved=0"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|decoded|boolean|True|Whether or not we were able to decode the URL|
 |result|string|True|Result of the decoded Safe Link|
 
 Example output:
 
 ```
 {
-  "result":"https://aomediacodec.github.io/av1-spec/av1-spec.pdf"
+  "decoded": true,
+  "result": "https://aomediacodec.github.io/av1-spec/av1-spec.pdf"
 }
 ```
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -58,7 +68,8 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.2 - New spec and help.md format for the Hub
+* 1.1.0 - Fixed issue where embedded URLs returned blank string
+* 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Fixed issue where non-safelinks returned a blank string
 * 1.0.0 - Initial plugin
 

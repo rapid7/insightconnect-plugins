@@ -20,9 +20,19 @@ on potential malicous indicators.
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|False|urlscan API key. Not required for the search action|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|False|urlscan API key. Not required for the search action|None|381cd93b-1946-9c73-1946-c916075eb9a3|
+
+Example input:
+
+```
+{
+  "api_key": {
+    "secretKey": “381cd93b-1946-9c73-1946-c916075eb9a3"
+  }
+}
+```
 
 ## Technical Details
 
@@ -34,12 +44,23 @@ This action is used to search urlscan.io.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|q|string|None|True|The query term (ElasticSearch simple query string) e.g domain:urlscan.io, default is *|None|
-|sort|string|_score|True|Sorting, specificied via $sort_field:$sort_order|None|
-|size|integer|100|True|Number of results returned|None|
-|offset|integer|0|True|Offset of first result (for paginating)|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|offset|integer|0|True|Offset of first result (for paginating)|None|1|
+|q|string|None|True|The query term (ElasticSearch simple query string), default is *|None|domain:rapid7.com|
+|size|integer|100|True|Number of results returned|None|45|
+|sort|string|_score|True|Sorting, specificied via $sort_field:$sort_order|None|_score|
+
+Example input:
+
+```
+{
+  "offset": "top",
+  "q": "domain:example.com",
+  "size": 2,
+  "sort": "_score"
+}
+```
 
 ##### Output
 
@@ -91,10 +112,19 @@ This action is used to submit a URL to generate a scan report that can be retrie
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|The URL to scan|None|
-|public|boolean|False|True|Set to false for a private scan|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|public|boolean|False|True|Set to false for a private scan|None|True|
+|url|string|None|True|The URL to scan|None|http://www.example.com|
+
+Example input:
+
+```
+{
+  "public": true,
+  "url": "http://example.com"
+}
+```
 
 ##### Output
 
@@ -116,9 +146,17 @@ This action is used to get the results of a scan.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|scan_id|string|None|True|UUID of the scan to retrieve|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|scan_id|string|None|True|UUID of the scan to retrieve|None|b1f3dab-ad7e-e2790803d6d0-76wFGijr|
+
+Example input:
+
+```
+{
+  "scan_id": "b1f3dab-ad7e-e2790803d6d0-76wFGijr"
+}
+```
 
 ##### Output
 
@@ -267,7 +305,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.3 - New spec and help.md format for the Hub
+* 2.1.5 - Add example input
+* 2.1.4 - Use input and output constants | Added "f" strings
+* 2.1.3 - New spec and help.md format for the Extension Library
 * 2.1.2 - Set User-Agent string to Rapid7 InsightConnect | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size | Run plugin as least privileged user | Improve error handling and logging | Fix issue in Submit URL for Scan action where improper POST body was sent
 * 2.1.1 - Add error messaging to Get Scan Results action to provide assistance for unavailable scan results | Update to Python 3.7 Slim SDK (plugin size reduction)
 * 2.1.0 - Added ScreenshotURL to get scan results output

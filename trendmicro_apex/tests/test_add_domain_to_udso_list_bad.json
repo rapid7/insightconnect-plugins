@@ -1,0 +1,24 @@
+{
+    "body": {
+        "action": "add_to_udso_list",
+        "input": {
+            "content": "http://proper.domain.com",
+            "scan_action": "LOG",
+            "data_type": "DOMAIN",
+            "expiry_date": 33,
+            "notes": "This is a proper domain, but starting with http is not allowed"
+        },
+        "connection": {
+            "api_key": {
+                "secretKey": ""
+            },
+            "application_id": {
+                "secretKey": ""
+            },
+            "url": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

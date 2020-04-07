@@ -4,10 +4,10 @@ import komand
 from komand_unshorten import connection, actions, triggers
 
 
-Name = 'Unshorten.me'
-Vendor = 'rapid7'
-Version = '1.0.2'
-Description = 'Assist with phishing investigations, URL analysis, deobfuscation, and more'
+Name = "Unshorten.me"
+Vendor = "rapid7"
+Version = "1.0.4"
+Description = "Assist with phishing investigations, URL analysis, deobfuscation, and more"
 
 
 class ICONUnshorten(komand.Plugin):

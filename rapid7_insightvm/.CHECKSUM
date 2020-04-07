@@ -1,7 +1,7 @@
 {
-	"spec": "4dd91bceb6f20346a1a02f84ce01d636",
-	"manifest": "dc6a804389dba4c7cbb9d324331149f2",
-	"setup": "5b5248bd278e4ee771616dec2c8d56de",
+	"spec": "840849c09dde5af5f7e7ef24ac2d17cf",
+	"manifest": "a4aca7695a1da3bb04fcdd36f944505c",
+	"setup": "bbcec002d1cc4f2f771cff069e8b1e28",
 	"schemas": [
 		{
 			"identifier": "add_scan_engine_pool_engine/schema.py",
@@ -104,6 +104,10 @@
 			"hash": "e81948859949785d738a25956798daa3"
 		},
 		{
+			"identifier": "get_asset_group_assets/schema.py",
+			"hash": "5d9fef1735276ad99252b8044b76bc51"
+		},
+		{
 			"identifier": "get_asset_groups/schema.py",
 			"hash": "2d9d9f6bc2c3f137c32480bd9dfafe5c"
 		},
@@ -137,7 +141,7 @@
 		},
 		{
 			"identifier": "get_scan/schema.py",
-			"hash": "5df101027bf029f2b9f9ff1a701b8b93"
+			"hash": "c7c0d19e2793ff68f3c89145cb25e8a0"
 		},
 		{
 			"identifier": "get_scan_assets/schema.py",
@@ -257,7 +261,7 @@
 		},
 		{
 			"identifier": "scan/schema.py",
-			"hash": "ac5d75339d10ba89d8549ec5b63f49a0"
+			"hash": "9bdea0419736ee31ef94a4a56e0ed9be"
 		},
 		{
 			"identifier": "tag_asset/schema.py",
@@ -333,7 +337,7 @@
 		},
 		{
 			"identifier": "new_exception_request/schema.py",
-			"hash": "6d9738f4bdea37161d302ae73f28a717"
+			"hash": "10c8a1fff7640240e66621ead7a52435"
 		},
 		{
 			"identifier": "new_scans/schema.py",

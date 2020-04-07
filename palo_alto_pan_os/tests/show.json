@@ -1,14 +1,6 @@
 {
     "body": {
         "action": "show",
-        "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
-            "server": null,
-            "verify_cert": null
-        },
         "input": {
             "xpath": "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']"
         },

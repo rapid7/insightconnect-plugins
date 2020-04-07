@@ -1,0 +1,112 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: trendmicro_deepsecurity
+title: Trend Micro Deep Security
+description: Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
+version: 2.0.0
+vendor: rapid7
+support: community
+status: []
+enable_cache: false
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/trendmicro_deepsecurity
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://trendmicro.com
+tags:
+- vulnerability_scanning
+- vulnerability_management
+- intrusion_detection
+- intrusion_protection
+- virtual_patching
+- remediation
+- trend_micro
+- deep_security
+hub_tags:
+  use_cases: [vulnerability_management, cloud_security, remediation_management, threat_detection_and_response ]
+  keywords: [vulnerability scanning, vulnerability management, remediation, virtual patching, intrusion, detection, prevention, response, trend micro, deep security, trendmicro, deepsecurity]
+  features: []
+connection:
+  dsm_url:
+    title: URL
+    description: URL of the Deep Security Manager
+    type: string
+    default: https://app.deepsecurity.trendmicro.com
+    required: true
+    example: https://192.51.100.100:4119
+  dsm_api_key:
+    title: API Key
+    description: API key of the Deep Security Manager
+    type: credential_secret_key
+    required: true
+    example: 12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234
+  dsm_verify_ssl:
+    title: SSL Verification
+    description: Check the certificate of the Deep Security Manager
+    type: boolean
+    default: true
+    required: true
+    example: true
+actions: 
+  search_rules:
+    title: Search
+    description: Search IPS rules for given CVEs
+    input:
+      vulnerabilities:
+        title: Vulnerabilities
+        type: "[]string"
+        description: CVEs to protect against
+        required: true
+        example: ["CVE-2005-0045","CVE-2014-0160","CVE-2017-0144","CVE-1337-1337"]
+    output:
+      ips_rules:
+        title: IPS Rules
+        description: IPS rules matching the given CVEs
+        type: "[]integer"
+        required: false
+      matched_cves:
+        title: Matched CVEs
+        description: CVEs with at least one matching IPS rule
+        type: "[]string"
+        required: false
+      missed_cves:
+        title: Missed CVEs
+        description: CVEs without matching IPS rules
+        type: "[]string"
+        required: false
+  deploy_rules:
+    title: Deploy
+    description: Deploy rules
+    input:
+      computer_or_policy:
+        title: Target
+        type: string
+        description: Target for rule assignment
+        required: true 
+        enum:
+          - computer
+          - policy 
+        example: policy
+      id:
+        title: ID
+        type: integer
+        description: ID of the target asset or policy
+        required: true
+        example: 23
+      rules:
+        title: IPS Rules
+        type: "[]integer"
+        description: IPS rules to assign
+        required: true
+        example: [108, 6745, 2874, 2875, 2876, 3317, 3318]
+    output:
+      rules_assigned:
+        title: Rules Assigned
+        description: All rules currently assigned to the asset
+        type: "[]integer"
+        required: false
+      rules_not_assigned:
+        title: Not Assigned Rules
+        description: Unassigned rules
+        type: "[]integer"
+        required: false

@@ -7,7 +7,7 @@ vendor: rapid7
 support: community
 status: []
 description: Decode Proofpoint encoded URLs
-version: 1.0.1
+version: 1.2.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/proofpoint_url_defense
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -29,6 +29,7 @@ actions:
         title: Encoded URL
         description: Proofpoint encoded URL or URL parameters e.g http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwfU
         type: string
+        example: "http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwf"
         required: true
     output:
       decoded_url:
@@ -36,3 +37,8 @@ actions:
         description: Decoded Proofpoint URL
         type: string
         required: false
+      decoded:
+        title: Decoded
+        description: Was decode successful, if not, the original URL will be returned
+        type: boolean
+        required: true
