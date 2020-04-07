@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 1.5.0
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -480,6 +480,7 @@ actions:
         type: string
         description: The city in which the user is located
         required: false
+        example: Boston
       country:
         title: Country
         type: string

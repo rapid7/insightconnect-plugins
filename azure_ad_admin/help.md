@@ -44,7 +44,7 @@ This action is used to update a users information.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|city|string|None|False|The city in which the user is located|None|None|
+|city|string|None|False|The city in which the user is located|None|Boston|
 |country|string|None|False|The country or region in which the user is located; for example, US or UK|None|None|
 |department|string|None|False|The name for the department in which the user works|None|None|
 |job_title|string|None|False|The user’s job title|None|None|
@@ -482,7 +482,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.5.0 - New action Update User Info
+* 2.0.0 - New action Update User Info
 * 1.4.1 - Extension Library styling update
 * 1.4.0 - New trigger Risk Detection
 * 1.3.1 - New spec and help.md format for the Extension Library
