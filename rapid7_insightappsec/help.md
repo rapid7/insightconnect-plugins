@@ -19,10 +19,21 @@ This plugin utilizes the [Rapid7 InsightAppSec API](https://insightappsec.help.r
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|The API key for InsightAppSec|None|
-|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightAppSec. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|The API key for InsightAppSec|None|abc12345-abc1-2345-abc1-abc123456789|
+|url|string|https://us.api.insight.rapid7.com|True|The region specific URL endpoint for InsightAppSec|None|https://us.api.insight.rapid7.com|
+
+Example input:
+
+```
+{
+  "api_key": {
+      "secretKey": "abc12345-abc1-2345-abc1-abc123456789"
+  },
+  "url": "https://us.api.insight.rapid7.com"
+}
+```
 
 ## Technical Details
 
@@ -34,18 +45,29 @@ This action is used to create a new scan configuration.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|config_name|string|None|True|The name of the scan configuration|None|
-|config_description|string|None|False|The description of the scan configuration|None|
-|app_id|string|None|True|App UUID|None|
-|attack_template_id|string|None|True|Attack template UUID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|app_id|string|None|True|App UUID|None|78c85b01-2a23-404d-ac5a-18324d8e3bda|
+|attack_template_id|string|None|True|Attack template UUID|None|11111111-0000-0000-0000-000000000000|
+|config_description|string|None|False|The description of the scan configuration|None|Description for scan config|
+|config_name|string|None|True|The name of the scan configuration|None|Scan Config 1|
+
+Example input:
+
+```
+{
+  "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda",
+  "attack_template_id": "11111111-0000-0000-0000-000000000000",
+  "config_description": "Description for scan config",
+  "config_name": "Scan Config 1"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Status code of the request|
+|status|integer|False|Status code of the request|
 
 Example output:
 
@@ -61,20 +83,28 @@ This action is used to get a scan configuration.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|scan_config_id|string|None|True|Scan configuration UUID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|scan_config_id|string|None|True|Scan configuration UUID|None|6a33ae79-5ebd-44a9-9a0a-f269876e90c9|
+
+Example input:
+
+```
+{
+  "scan_config_id": "6a33ae79-5ebd-44a9-9a0a-f269876e90c9"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|id|string|False|The UUID of the scan configuration|
-|config_name|string|False|The name of the scan configuration|
-|config_description|string|False|The description of the scan configuration|
 |app_id|string|False|App UUID|
 |attack_template_id|string|False|Attack template UUID|
+|config_description|string|False|The description of the scan configuration|
+|config_name|string|False|The name of the scan configuration|
 |errors|[]string|False|A list of errors that detail any current validation failures|
+|id|string|False|The UUID of the scan configuration|
 |links|[]link|False|A list of links|
 
 Example output:
@@ -105,19 +135,31 @@ This action is used to update an existing scan configuration.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|scan_config_id|string|None|True|Scan configuration UUID|None|
-|config_name|string|None|True|The name of the scan configuration|None|
-|config_description|string|None|False|The description of the scan configuration|None|
-|app_id|string|None|True|App UUID|None|
-|attack_template_id|string|None|True|Attack template UUID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|app_id|string|None|True|App UUID|None|78c85b01-2a23-404d-ac5a-18324d8e3bda|
+|attack_template_id|string|None|True|Attack template UUID|None|11111111-0000-0000-0000-000000000000|
+|config_description|string|None|False|The description of the scan configuration|None|Description of scan config|
+|config_name|string|None|True|The name of the scan configuration|None|Scan Config 1|
+|scan_config_id|string|None|True|Scan configuration UUID|None|a709c972-cb1f-4790-bfce-6ab74653900c|
+
+Example input:
+
+```
+{
+  "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda",
+  "attack_template_id": "11111111-0000-0000-0000-000000000000",
+  "config_description": "Description of scan config",
+  "config_name": "Scan Config 1",
+  "scan_config_id": "a709c972-cb1f-4790-bfce-6ab74653900c"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Status code of the request|
+|status|integer|False|Status code of the request|
 
 Example output:
 
@@ -133,15 +175,23 @@ This action is used to delete an existing scan config.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|scan_config_id|string|None|True|Scan configuration UUID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|scan_config_id|string|None|True|Scan configuration UUID|None|4569288e-2bb4-416e-a4ee-4f7add18afe0|
+
+Example input:
+
+```
+{
+  "scan_config_id": "4569288e-2bb4-416e-a4ee-4f7add18afe0"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Status code of the request|
+|status|integer|False|Status code of the request|
 
 Example output:
 
@@ -157,11 +207,21 @@ This action is used to get a page of scan configurations, based on supplied pagi
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|index|integer|None|False|The page index to start form. If blank index will be 0|None|
-|size|integer|None|False|The number of entries on each page. If blank size will be 50|None|
-|sort|string|None|False|How to sort the scan configs. If blank sort will be alphabetical by scan config name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|index|integer|None|False|The page index to start form. If blank, index will be 0|None|0|
+|size|integer|None|False|The number of entries on each page. If blank, size will be 50|None|0|
+|sort|string|None|False|How to sort the scan configs. If blank, sort will be alphabetical by scan config name|None|scanconfig.name,DESC|
+
+Example input:
+
+```
+{
+  "index": 0,
+  "size": 0,
+  "sort": "scanconfig.name,DESC"
+}
+```
 
 ##### Output
 
@@ -232,9 +292,17 @@ This action is used to submit a new scan.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|scan_config_id|string|None|True|UUID of the scan config to use|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|scan_config_id|string|None|True|UUID of the scan config to use|None|a709c972-cb1f-4790-bfce-6ab74653900c|
+
+Example input:
+
+```
+{
+  "scan_config_id": "a709c972-cb1f-4790-bfce-6ab74653900c"
+}
+```
 
 ##### Output
 
@@ -256,9 +324,17 @@ This action is used to get a scan.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|scan_id|string|None|True|The scans UUID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|scan_id|string|None|True|The scans UUID|None|b0b343aa-7fc2-4a9a-bc18-5ac64df7791a|
+
+Example input:
+
+```
+{
+  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+}
+```
 
 ##### Output
 
@@ -298,11 +374,21 @@ This action is used to get a page of scans, based on supplied pagination paramet
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|index|integer|None|False|The page index to start form. If blank index will be 0|None|
-|size|integer|None|False|The number of entries on each page. If blank size will be 50|None|
-|sort|string|None|False|How to sort the scans. If blank sort will be alphabetical by scan name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|index|integer|None|False|The page index to start form. If blank, index will be 0|None|0|
+|size|integer|None|False|The number of entries on each page. If blank, size will be 50|None|50|
+|sort|string|None|False|How to sort the scans. If blank, sort will be alphabetical by scan name|None|scan.submit_time,DESC|
+
+Example input:
+
+```
+{
+  "index": 0,
+  "size": 50,
+  "sort": "scan.submit_time,DESC"
+}
+```
 
 ##### Output
 
@@ -344,9 +430,17 @@ This action is used to delete a scan.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|scan_id|string|None|True|The scans UUID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|scan_id|string|None|True|The scans UUID|None|b0b343aa-7fc2-4a9a-bc18-5ac64df7791a|
+
+Example input:
+
+```
+{
+  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+}
+```
 
 ##### Output
 
@@ -368,10 +462,19 @@ This action is used to submit a new scan action.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|scan_id|string|None|True|Scan UUID|None|
-|action|string|PAUSE|True|Action to take|['PAUSE', 'RESUME', 'STOP', 'CANCEL']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|Pause|True|Action to take|['Pause', 'Resume', 'Stop', 'Cancel', 'Authenticate']|Pause|
+|scan_id|string|None|True|Scan UUID|None|008eaffe-90ce-4de9-8601-40414391c21c|
+
+Example input:
+
+```
+{
+  "action": "Pause",
+  "scan_id": "008eaffe-90ce-4de9-8601-40414391c21c"
+}
+```
 
 ##### Output
 
@@ -393,9 +496,17 @@ This action is used to get the engine events from a scan.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|scan_id|string|None|True|Scan UUID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|scan_id|string|None|True|Scan UUID|None|c762adbe-1636-4c70-9787-5f22c2dc5af8|
+
+Example input:
+
+```
+{
+  "scan_id": "c762adbe-1636-4c70-9787-5f22c2dc5af8"
+}
+```
 
 ##### Output
 
@@ -422,9 +533,17 @@ This action is used to get real-time details of the execution of a scan.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|scan_id|string|None|True|Scan UUID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|scan_id|string|None|True|Scan UUID|None|c762adbe-1636-4c70-9787-5f22c2dc5af8|
+
+Example input:
+
+```
+{
+  "scan_id": "c762adbe-1636-4c70-9787-5f22c2dc5af8"
+}
+```
 
 ##### Output
 
@@ -457,9 +576,17 @@ This action is used to get the platform events from a scan.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|scan_id|string|None|True|Scan UUID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|scan_id|string|None|True|Scan UUID|None|c762adbe-1636-4c70-9787-5f22c2dc5af8|
+
+Example input:
+
+```
+{
+  "scan_id": "c762adbe-1636-4c70-9787-5f22c2dc5af8"
+}
+```
 
 ##### Output
 
@@ -486,7 +613,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -498,6 +625,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
