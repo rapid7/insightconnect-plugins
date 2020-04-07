@@ -1,6 +1,5 @@
 # Description
 
-
 [Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.
 
 It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in
