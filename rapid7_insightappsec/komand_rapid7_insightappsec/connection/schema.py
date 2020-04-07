@@ -23,7 +23,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "The URL endpoint for InsightAppSec. e.g. https://\\u003cREGION_CODE\\u003e.api.insight.rapid7.com",
+      "description": "The region specific URL endpoint for InsightAppSec",
       "default": "https://us.api.insight.rapid7.com",
       "order": 2
     }

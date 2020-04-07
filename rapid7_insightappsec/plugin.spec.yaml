@@ -193,12 +193,14 @@ connection:
     description: The API key for InsightAppSec
     type: credential_secret_key
     required: true
+    example: abc12345-abc1-2345-abc1-abc123456789
   url:
     title: URL
-    description: The URL endpoint for InsightAppSec. e.g. https://<REGION_CODE>.api.insight.rapid7.com
+    description: The region specific URL endpoint for InsightAppSec
     type: string
     required: true
     default: https://us.api.insight.rapid7.com
+    example: https://us.api.insight.rapid7.com
 actions:
   create_scan_config:
     title: Create Scan Config
