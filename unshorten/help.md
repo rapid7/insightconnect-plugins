@@ -30,9 +30,17 @@ This action is used to unshorten a URL.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|Short URL|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|url|string|None|True|Short URL|None|https://bit.ly/2X4meGl|
+
+Example input:
+
+```
+{
+  "url": "https://bit.ly/39HoYMu"
+}
+```
 
 ##### Output
 
@@ -88,8 +96,9 @@ Note that the API is limited to 10 requests per hour per IP address.
 
 # Version History
 
+* 1.0.4 - Add example inputs
 * 1.0.3 - Use input and output constants | Changed `Exception` to `PluginException` | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` | Add user nobody in Dockerfile
-* 1.0.2 - New spec and help.md format for the Hub
+* 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Graceful exit for invalid URLs
 * 1.0.0 - Initial plugin
 

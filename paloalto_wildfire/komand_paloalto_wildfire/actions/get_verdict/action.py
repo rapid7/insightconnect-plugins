@@ -16,7 +16,7 @@ class GetVerdict(komand.Action):
         client = self.connection.client
         out = client.get_verdicts(params.get('hash'))
 
-        return { 'verdict': out }
+        return { 'verdict': out.capitalize() }
 
     def test(self):
         """TODO: Test action"""

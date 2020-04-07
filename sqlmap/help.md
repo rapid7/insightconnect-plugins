@@ -219,7 +219,7 @@ To troubleshoot SQLmap, look at the INFO logs that are printed to see where the 
 
 # Version History
 
-* 1.1.1 - New spec and help.md format for the Hub
+* 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - Support web server mode
 * 1.0.0 - Initial plugin
 

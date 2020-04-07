@@ -483,9 +483,9 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 1.5.0 - New action Update User Info
-* 1.4.1 - Hub styling update
+* 1.4.1 - Extension Library styling update
 * 1.4.0 - New trigger Risk Detection
-* 1.3.1 - New spec and help.md format for the Hub
+* 1.3.1 - New spec and help.md format for the Extension Library
 * 1.3.0 - New action Create User
 * 1.2.0 - New actions Get Group by Name, Add User to Group, and Remove User from Group
 * 1.1.0 - New action Force User to Change Password

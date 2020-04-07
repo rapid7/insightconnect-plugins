@@ -607,7 +607,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.1.1 - New spec and help.md format for the Hub
+* 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - New action Bulk Analyze
 * 1.0.0 - Initial plugin
 

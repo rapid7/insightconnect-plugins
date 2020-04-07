@@ -100,7 +100,7 @@ For example, `-V` is used to return the following `dump_contents` array where ea
 
 # Version History
 
-* 2.0.0 - New spec and help.md format for the Hub | Title rename from "Base64 Encoded Pcap" to "Base64 Encoded PCAP" for Run action file input
+* 2.0.0 - New spec and help.md format for the Extension Library | Title rename from "Base64 Encoded Pcap" to "Base64 Encoded PCAP" for Run action file input
 * 1.0.1 - Fix issue where run action was excluded from plugin on build
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK
