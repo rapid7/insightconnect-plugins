@@ -3,12 +3,11 @@
         "action": "lookup",
         "connection": {
             "cred_token": {
-                "domain": null,
-                "token": null
+                "secretKey": ""
             }
         },
         "input": {
-            "host": "google.com"
+            "host": "instagram.com"
         },
         "meta": {}
     },
