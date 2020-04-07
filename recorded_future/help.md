@@ -842,7 +842,7 @@ Example input:
 ```
 {
   "comment": "URL look up performed by InsightConnect",
-  "url": "http://www.example.com",
+  "url": "https://www.example.com",
   "fields": ['relatedEntities', 'risk', 'sightings']
 }
 ```
