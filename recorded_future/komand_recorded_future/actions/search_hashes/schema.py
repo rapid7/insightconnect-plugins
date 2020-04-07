@@ -198,7 +198,7 @@ class SearchHashesOutput(komand.Output):
       "title": "evidenceDetails",
       "properties": {
         "criticality": {
-          "type": "integer",
+          "type": "number",
           "title": "Criticality",
           "order": 1
         },
@@ -336,7 +336,7 @@ class SearchHashesOutput(komand.Output):
       "title": "risk",
       "properties": {
         "criticality": {
-          "type": "integer",
+          "type": "number",
           "title": "Criticality",
           "order": 1
         },
@@ -375,7 +375,7 @@ class SearchHashesOutput(komand.Output):
           "title": "evidenceDetails",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -565,7 +565,7 @@ class SearchHashesOutput(komand.Output):
           "title": "evidenceDetails",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -703,7 +703,7 @@ class SearchHashesOutput(komand.Output):
           "title": "risk",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -742,7 +742,7 @@ class SearchHashesOutput(komand.Output):
               "title": "evidenceDetails",
               "properties": {
                 "criticality": {
-                  "type": "integer",
+                  "type": "number",
                   "title": "Criticality",
                   "order": 1
                 },
