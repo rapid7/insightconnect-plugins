@@ -26,7 +26,7 @@ class Connection(komand.Connection):
         except NotAuthorizedException as e:
             self.logger.error(f"DomainTools: Connect: error {e}")
             raise ConnectionTestException(cause="Authorization failed.",
-                                          assistance="Authorization failed. Please try again")
+                                          assistance="Double-check that your credentials configured in your connection are correct and try again.")
         except Exception as e:
             self.logger.error(f"DomainTools: Connect: error {e}")
             raise ConnectionTestException(cause="Unable to connect to DomainTools.",
