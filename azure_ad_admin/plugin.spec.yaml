@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 1.4.1
+version: 1.5.0
 vendor: rapid7
 support: community
 status: []
@@ -471,6 +471,51 @@ actions:
         description: Was operation successful
         type: boolean
         required: false
+  update_user_info:
+    title: Update User Information
+    description: Update a users information
+    input:
+      city:
+        title: City
+        type: string
+        description: The city in which the user is located
+        required: false
+      country:
+        title: Country
+        type: string
+        description: The country or region in which the user is located; for example, US or UK
+        required: false
+      department:
+        title: Department
+        type: string
+        description: The name for the department in which the user works
+        required: false
+      job_title:
+        title: Job Title
+        type: string
+        description: The user’s job title
+        required: false
+      state:
+        title: State
+        type: string
+        description: The state or province in the users address
+        required: false
+      user_id:
+        title: User ID
+        description: User to updates ID
+        type: string
+        required: true
+      user_type:
+        title: Department
+        type: string
+        description: A string value that can be used to classify user types in your directory, such as Member and Guest
+        required: false
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
 triggers:
   risk_detection:
     title: Risk Detection
