@@ -835,7 +835,7 @@ actions:
         required: false
         example: true
       posted_today:
-        description: Is posted today
+        description: Was posted today
         default: false
         type: boolean
         required: false
