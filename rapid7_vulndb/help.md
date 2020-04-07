@@ -27,10 +27,19 @@ This action is used to search the database to find vulnerabilities and exploits.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|database|string|None|True|Name of the database|['Vulnerability Database', 'Metasploit Modules']|
-|search|string|None|True|Search parameter for database|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|database|string|None|True|Name of the database|['Vulnerability Database', 'Metasploit Modules']|Vulnerability Database|
+|search|string|None|True|Search parameter for database|None|cve-2015-9542|
+
+Example input:
+
+```
+{
+  "database": "Vulnerability Database",
+  "search": "cve-2015-9542"
+}
+```
 
 ##### Output
 
@@ -46,14 +55,10 @@ Example output:
   "results_found": true,
   "search_results": [
     {
-      "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/mozilla-thunderbird-cve-2015-7189",
-      "published_at": "2015-11-05T00:00:00.000Z",
-      "title": "MFSA2015-123 Thunderbird: Buffer overflow during image interactions in canvas (CVE-2015-7189)"
-    },
-    {
-      "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/mfsa2015-123-cve-2015-7189",
-      "published_at": "2015-11-03T00:00:00.000Z",
-      "title": "MFSA2015-123 Firefox: Buffer overflow during image interactions in canvas (CVE-2015-7189)"
+      "identifier": "ubuntu-cve-2015-9542",
+      "title": "Ubuntu: (Multiple Advisories) (CVE-2015-9542): libpam-radius-auth vulnerability",
+      "published_at": "2020-02-24T00:00:00.000Z",
+      "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/ubuntu-cve-2015-9542"
     }
   ]
 }
@@ -65,9 +70,17 @@ This action is used to fetch content results for a vulnerability or module.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|identifier|string|None|True|Rapid7 vulnerability/module identifier|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|identifier|string|None|True|Rapid7 vulnerability/module identifier|None|apple-itunes-cve-2019-8835|
+
+Example input:
+
+```
+{
+  "identifier": "apple-itunes-cve-2019-8835"
+}
+```
 
 ##### Output
 
@@ -129,6 +142,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.3 - Update to v4 Python plugin runtime | Add example inputs
 * 2.0.2 - Implement workaround for VulnDB API bug in Get Content action where the `severity` datatype response differs based on the action input
 * 2.0.1 - Add identifier field to the Search Database action
 * 2.0.0 - Utilize VulnDB API
