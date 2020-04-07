@@ -31,7 +31,8 @@ class SubmitScanActionInput(insightconnect_plugin_runtime.Input):
         "Pause",
         "Resume",
         "Stop",
-        "Cancel"
+        "Cancel",
+        "Authenticate"
       ],
       "order": 2
     },

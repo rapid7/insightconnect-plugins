@@ -465,6 +465,7 @@ actions:
         - Resume
         - Stop
         - Cancel
+        - Authenticate
         example: "Pause"
     output:
       status:

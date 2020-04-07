@@ -464,7 +464,7 @@ This action is used to submit a new scan action.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|action|string|Pause|True|Action to take|['Pause', 'Resume', 'Stop', 'Cancel']|Pause|
+|action|string|Pause|True|Action to take|['Pause', 'Resume', 'Stop', 'Cancel', 'Authenticate']|Pause|
 |scan_id|string|None|True|Scan UUID|None|008eaffe-90ce-4de9-8601-40414391c21c|
 
 Example input:
