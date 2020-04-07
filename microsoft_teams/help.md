@@ -647,7 +647,7 @@ _This plugin does not contain any troubleshooting information._
 * 2.0.1 - Update to Get Teams action to support more than 20 teams
 * 2.0.0 - Fix issue where send message would not work if there were too many teams | Removed regex capability for team and channel inputs which will speed up Send Message and Send HTML Message actions
 * 1.3.0 - New action Send Message by GUID
-* 1.2.3 - New spec and help.md format for the Hub
+* 1.2.3 - New spec and help.md format for the Extension Library
 * 1.2.2 - Fix issue where regular expressions would only match at the beginning of a string
 * 1.2.1 - Fix issue where New Message Received trigger could receive an unauthorized error after sustained use
 * 1.2.0 - New actions Add Member to Team, Remove Member from Team, Create Teams Enabled Group, Delete Team, Add Channel to Team, and Remove Channel from Team

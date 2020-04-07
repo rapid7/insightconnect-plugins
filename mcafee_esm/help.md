@@ -40,7 +40,7 @@ This trigger is used to retrieve new events from McAfee ESM.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -155,7 +155,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links

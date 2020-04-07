@@ -5,7 +5,7 @@ name: rapid7_vulndb
 title: Rapid7 Vulnerability & Exploit Database
 description: The Vulnerability & Exploit Database plugin allows you to search and compare potential threats with a curated repository of vetted computer software exploits and exploitable vulnerabilities
   vulnerabilities
-version: 2.0.2
+version: 2.0.3
 vendor: rapid7
 support: rapid7
 status: []
@@ -118,6 +118,7 @@ actions:
         description: Rapid7 vulnerability/module identifier
         type: string
         required: true
+        example: "apple-itunes-cve-2019-8835"
     output:
       content_result:
         title: Result
@@ -136,11 +137,13 @@ actions:
         - Vulnerability Database
         - Metasploit Modules
         required: true
+        example: "Vulnerability Database"
       search:
         title: Search
         description: Search parameter for database
         type: string
         required: true
+        example: "cve-2015-9542"
     output:
       search_results:
         title: Results

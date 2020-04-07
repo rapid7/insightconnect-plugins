@@ -218,7 +218,7 @@ Example output:
       ],
       "message": "SyntaxError Hello! \"myself\"",
       "sdk": {
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
         "version": "1.0.0",
         "name": "komand",
         "upstream": {
@@ -314,7 +314,7 @@ DSN configuration and Auth Tokens can be managed in your Sentry.io account setti
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links

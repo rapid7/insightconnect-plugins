@@ -1,0 +1,24 @@
+{
+  "body": {
+    "action": "assessments",
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      },
+      "max_pages": 1
+    },
+    "input": {
+      "created": "",
+      "document": "",
+      "editorId": "",
+      "id": "",
+      "page": 0,
+      "revisionDate": "",
+      "size": 10,
+      "topicId": ""
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

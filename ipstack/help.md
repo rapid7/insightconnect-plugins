@@ -17,9 +17,20 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|cred_token|credential_token|None|True|API Token|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cred_token|credential_secret_key|None|True|API Token|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "api_key": {
+    "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
+  }
+}
+
+```
 
 ## Technical Details
 
@@ -33,9 +44,17 @@ This action is used to lookup IPStack information for a host.
 
 It accepts a user to query and host (IP or domain) to perform the query.
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|None|True|Host to Lookup|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|host|string|None|True|Host to Lookup|None|rapid7.com|
+
+Example input:
+
+```
+{
+  "host": "rapid7.com"
+}
+```
 
 ##### Output
 
@@ -43,8 +62,8 @@ It accepts a user to query and host (IP or domain) to perform the query.
 |----|----|--------|-----------|
 |address|string|False|IP address|
 |city|string|False|City|
-|country_name|string|False|Country name|
 |country_code|string|False|Country code|
+|country_name|string|False|Country name|
 |latitude|string|False|Latitude|
 |longitude|string|False|Longitude|
 |metro_code|integer|False|Metro code|
@@ -53,7 +72,7 @@ It accepts a user to query and host (IP or domain) to perform the query.
 |time_zone|string|False|Time zone|
 |zip_code|string|False|ZIP code|
 
-On success, the raw output will look like the following:
+Example output:
 
 ```
 
@@ -87,7 +106,8 @@ A valid domain or IP address must be provided.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 2.0.0 - Add example inputs | Updated Docker version | Connection input updated to secretKey
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
 * 0.1.0 - Initial plugin
 
@@ -96,4 +116,3 @@ A valid domain or IP address must be provided.
 ## References
 
 * [IPStack](https://ipstack.com)
-

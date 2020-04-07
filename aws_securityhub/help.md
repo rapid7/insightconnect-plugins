@@ -195,7 +195,7 @@ This plugin does not contain any troubleshooting information.
 # Version History
 
 * 2.0.1 - Removed unused variables
-* 2.0.0 - New spec and help.md format for the Hub | Variable names updated as acronyms
+* 2.0.0 - New spec and help.md format for the Extension Library | Variable names updated as acronyms
 * 1.0.0 - Initial plugin
 
 # Links

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: abuseipdb
 title: AbuseIPDB
 description: Enables the look up of IP reports, provides list and details of blacklisted IPs, and submissions of abusive IPs
-version: 5.0.2
+version: 5.0.3
 vendor: rapid7
 support: community
 status: []
@@ -95,6 +95,7 @@ connection:
     description: API key from account
     type: credential_secret_key
     required: true
+    example: e73h82c63847f3ff1h5216b556edh153h30430d73bchhe680f70h1d8885fb8bb130b46c7767d6886
 
 actions:
   check_ip:
@@ -103,15 +104,17 @@ actions:
     input:
       address:
         title: IP Address
-        description: IPv4 or IPv6 address e.g. 8.8.8.8, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)
+        description: IPv4 or IPv6 address e.g. 198.51.100.100, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)
         type: string
         required: true
+        example: 198.51.100.100
       days:
         title: Days
         description: Check for IP reports in the last x days
         type: string
         default: '30'
         required: true
+        example: 30
       verbose:
         title: Verbose
         description: When set, reports will include the comment (if any) and the reporter's
@@ -119,6 +122,7 @@ actions:
         type: boolean
         default: true
         required: true
+        example: true
     output:
       ipAddress:
         title: IP Address
@@ -205,12 +209,14 @@ actions:
         description: IPv4 address block in CIDR notation e.g. 207.126.144.0/20
         type: string
         required: true
+        example: 207.126.144.0/20
       days:
         title: Days
         description: Check for CIDR reports in the last x days
         type: string
         default: '30'
         required: true
+        example: 30
     output:
       networkAddress:
         title: Network Address
@@ -258,21 +264,24 @@ actions:
     input:
       ip:
         title: IP Address
-        description: IPv4 or IPv6 address to report e.g. 8.8.8.8, ::1
+        description: IPv4 or IPv6 address to report e.g. 198.51.100.100, ::1
         type: string
         required: true
+        example: 198.51.100.100
       categories:
         title: Categories
         description: Comma delineated list of category IDs e.g. 10,12,15. Entire list
           is available at https://www.abuseipdb.com/categories
         type: string
         required: true
+        example: 10,12,15
       comment:
         title: Comment
         description: Describe the type of malicious activity e.g. Brute forcing Wordpress
           login
         type: string
         required: false
+        example: Brute forcing Wordpress
     output:
       ipAddress:
         title: Comment
@@ -295,14 +304,16 @@ actions:
     input:
       confidenceMinimum:
         title: Confidence Minimum
-        description: Minimum confidence to filter by
+        description: Minimum confidence to filter by, scaled 0-100, least to most confident
         type: string
         required: true
+        example: 90
       limit:
         title: Limit
         description: Max length of blacklist
         type: string
         required: false
+        example: 10
     output:
       blacklist:
         title: Blacklist
@@ -314,4 +325,3 @@ actions:
         description: Was the blacklist successfully retrieved
         type: boolean
         required: true
-
