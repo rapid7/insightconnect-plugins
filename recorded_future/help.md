@@ -891,7 +891,7 @@ Example input:
 
 ```
 {
-  "list": "current_cc_server"
+  "list": "malware_delivery"
 }
 ```
 
