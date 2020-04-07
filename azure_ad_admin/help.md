@@ -390,6 +390,41 @@ Example input:
 Example output:
 
 ```
+{
+  "risk":
+    {
+      "id": "04da6f53cd292d990314fd05b2ba6cc06b3acc3a2eb85bf2fe6d48f2edbec301",
+      "requestId": "04c82f8e-f0c0-4971-a546-c18125fa3300",
+      "correlationId": "0977e5da-93a4-4e97-b1a2-bb03b8007e93",
+      "riskType": "unfamiliarFeatures",
+      "riskState": "atRisk",
+      "riskLevel": "low",
+      "riskDetail": "none",
+      "source": "IdentityProtection",
+      "detectionTimingType": "realtime",
+      "activity": "signin",
+      "tokenIssuerType": "AzureAD",
+      "ipAddress": "66.207.205.214",
+      "activityDateTime": "2019-11-25T14:09:08.6953666Z",
+      "detectedDateTime": "2019-11-25T14:09:08.6953666Z",
+      "lastUpdatedDateTime": "2019-11-25T14:12:04.5431877Z",
+      "userId": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+      "userDisplayName": "User Name",
+      "userPrincipalName": "user@domain",
+      "additionalInfo": "[{\"Key\":\"userAgent\",\"Value\":\"python-requests/2.22.0\"}]",
+      "location":
+        {
+          "city": "Toronto",
+          "state": "Ontario",
+          "countryOrRegion": "CA",
+          "geoCoordinates":
+            {
+              "latitude": 43.63831,
+              "longitude": -79.42555
+            }
+        }
+    }
+}
 ```
 
 #### Risk Detection
