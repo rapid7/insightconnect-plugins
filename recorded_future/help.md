@@ -760,7 +760,7 @@ Example input:
 ```
 {
   "comment": "Hash look up performed by InsightConnect",
-  "hash": "478c076749bef74eaf9bed4af917aee228620b23",
+  "hash": "44d88612fea8a8f36de82e1278abb02f",
   "fields": ["sightings", "risk", "timestamps"]
 }
 ```
