@@ -40,7 +40,7 @@ class ReportIpInput(komand.Input):
     "ip": {
       "type": "string",
       "title": "IP Address",
-      "description": "IPv4 or IPv6 address to report e.g. 8.8.8.8, ::1",
+      "description": "IPv4 or IPv6 address to report e.g. 198.51.100.100, ::1",
       "order": 1
     }
   },

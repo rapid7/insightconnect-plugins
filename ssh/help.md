@@ -92,7 +92,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 2.0.0 - Update Run action output to return 3 output fields i.e. `stderr`, `stdout`, and `all_output`
-* 1.0.3 - New spec and help.md format for the Hub
+* 1.0.3 - New spec and help.md format for the Extension Library
 * 1.0.2 - Fixed issue where Run was excluded
 * 1.0.1 - Fix issue where run action was excluded from plugin on build
 * 1.0.0 - Support web server mode | Update to new credential types | Rename "Run remote command" action to "Run Remote Command"

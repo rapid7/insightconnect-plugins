@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    COLOR = "color"
     DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     HOST_IP = "host_ip"
     NAME = "name"
@@ -23,6 +24,51 @@ class AddHostInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "color": {
+      "type": "string",
+      "title": "Color",
+      "description": "Color",
+      "default": "black",
+      "enum": [
+        "black",
+        "aquamarine",
+        "blue",
+        "brown",
+        "burlywood",
+        "coral",
+        "crete",
+        "cyan",
+        "dark blue",
+        "dark gold",
+        "dark gray",
+        "dark green",
+        "dark orange",
+        "dark sea green",
+        "firebrick",
+        "forest green",
+        "gold",
+        "gray",
+        "khaki",
+        "lemon chiffon",
+        "light green",
+        "magenta",
+        "navy blue",
+        "olive",
+        "orange",
+        "orchid",
+        "pink",
+        "purple",
+        "red",
+        "sea green",
+        "sienna",
+        "sky blue",
+        "slate blue",
+        "turquoise",
+        "violet red",
+        "yellow"
+      ],
+      "order": 4
+    },
     "discard_other_sessions": {
       "type": "boolean",
       "title": "Discard Other Sessions",

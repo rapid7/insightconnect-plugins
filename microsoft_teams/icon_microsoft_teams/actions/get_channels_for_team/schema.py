@@ -25,13 +25,13 @@ class GetChannelsForTeamInput(komand.Input):
     "channel_name": {
       "type": "string",
       "title": "Channel Name",
-      "description": "Optional regex-capable optional channel to look for",
+      "description": "Optional regex-capable channel to look for",
       "order": 2
     },
     "team_name": {
       "type": "string",
       "title": "Team Name",
-      "description": "Regex-capable team name to look for",
+      "description": "Team name to look for",
       "order": 1
     }
   },

@@ -4,10 +4,10 @@ import komand
 from komand_vmray import connection, actions, triggers
 
 
-Name = 'VMRay Sandbox'
-Vendor = 'rapid7'
-Version = '5.0.0'
-Description = 'Analyze and detect malware before it lands, protecting internal infrastructure'
+Name = "VMRay Sandbox"
+Vendor = "rapid7"
+Version = "5.0.1"
+Description = "Analyze and detect malware before it lands, protecting internal infrastructure"
 
 
 class ICONVmray(komand.Plugin):

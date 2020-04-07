@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ReverseInput, ReverseOutput, Input, Output, Component
 import re
 from komand_dig.util import util
 
 
-class Reverse(komand.Action):
+class Reverse(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

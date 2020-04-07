@@ -1,0 +1,17 @@
+{
+  "body": {
+    "action": "topics",
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      },
+      "max_pages": 1
+    },
+    "input": {
+      "document": "Adobe Photoshop CC"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

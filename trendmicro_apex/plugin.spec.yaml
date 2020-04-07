@@ -1,0 +1,128 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: trendmicro_apex
+title: Trend Micro Apex
+description: Report suspicious objects and files to block on Apex firewall
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+enable_cache: false
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/trendmicro_apex
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.trendmicro.com/en_ca/business/products/user-protection/sps/endpoint.html
+tags:
+- trend micro
+- incident management
+- containment
+- firewall
+hub_tags:
+  use_cases: [threat_detection_and_response, remediation_management]
+  keywords: [containment, firewall, response, trend micro, trendmicro, apex]
+  features: []
+connection:
+  url:
+    title: URL
+    description: URL with port number of the Apex Security Manager.
+    type: string
+    required: true
+    example: "https://host.example.com:443"
+  application_id:
+    title: Application ID
+    description: Application ID to communicate to the Apex Security Manager e.g. 909D88H7-3458-42RN-92FF-012V3CU3D294
+    type: credential_secret_key
+    required: true
+    example: "909D88H7-3458-42RN-92FF-012V3CU3D294"
+  api_key:
+    title: API Key
+    description: API key paired with the Application ID e.g. CU1874A2-G782-47X1-B6J3-1014A92624BC
+    type: credential_secret_key
+    required: true
+    example: "CU1874A2-G782-47X1-B6J3-1014A92624BC"
+actions:
+  add_file_to_udso_list:
+    title: Add File to UDSO List
+    description: Add a file to the UDSO list of the Apex Security Manager
+    input:
+      file:
+        title: File
+        type: file
+        description: File to be marked as suspicious
+        required: true
+        example: "{ 'filename': 'file.txt', 'content': 'c2xpamJvb20=' }"
+      scan_action:
+        title: Scan Action
+        description: What action to do with the data sent
+        required: true
+        type: string
+        default: "LOG"
+        enum:
+          - BLOCK
+          - LOG
+          - QUARANTINE
+        example: QUARANTINE
+      notes:
+        title: Notes
+        type: string
+        description: Notes about why the file is being quarantined (256 characters max)
+        required: false
+        example: "This file is a trojan horse"
+    output:
+      success:
+        title: Success
+        description: Whether or not the action was successful
+        type: boolean
+        required: true
+  add_to_udso_list:
+    title: Add to UDSO List
+    description: Add an IP, email or similar info to the UDSO list
+    input:
+      content:
+        title: Content
+        type: string
+        description: The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max
+        required: true
+        example: http://www.example.com
+      scan_action:
+        title: Scan Action
+        description: What action to do with the data sent
+        required: true
+        type: string
+        default: "LOG"
+        enum:
+          - BLOCK
+          - LOG
+        example: LOG
+      data_type:
+        title: Data Type
+        description: Format of the data, character length of content is affected by this
+        default: "URL"
+        type: string
+        required: true
+        enum:
+          - IP
+          - URL
+          - FILE_SHA1
+          - DOMAIN
+        example: URL
+      notes:
+        title: Notes
+        type: string
+        description: Notes about why the file is being quarantined (256 characters max)
+        required: false
+        example: "This URL is very dangerous"
+      expiry_date:
+        title: Expiry Date
+        description: Number of days to allow this rule to be active
+        type: int
+        default: 30
+        required: false
+        example: 100
+    output:
+      success:
+        title: Success
+        description: Whether or not the action was successful
+        type: boolean
+        required: true

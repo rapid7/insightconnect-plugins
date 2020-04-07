@@ -2,14 +2,10 @@
     "body": {
         "action": "build_info",
         "connection": {
-            "credentials": {
-                "password": null,
-                "username": null
-            },
             "host": null
         },
         "input": {
-            "build number": 529,
+            "build_number": 1,
             "name": ""
         },
         "meta": {}

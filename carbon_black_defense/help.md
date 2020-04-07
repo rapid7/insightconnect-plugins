@@ -320,7 +320,7 @@ Get Notifications trigger requires that the [API key type](https://developer.car
 
 # Version History
 
-* 2.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Registry Value
+* 2.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Registry Value
 * 1.1.1 - Update to Python 3.7 Slim SDK (plugin size reduction) | Fix bug in output where Security Event Code was defined as an `object` instead of a `string`
 * 1.1.0 - New action Get Details for Specific Event
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

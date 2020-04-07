@@ -14,6 +14,7 @@
 * Username and password with administrative privileges
 * Check Point API is enabled and running. This requires that the NGFW machine has 6GB of RAM available, and the API has been enabled
 * For more information on enabling the API visit here: https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641
+* Make sure the IP of the orchestrator running this plugin is set as an allowed host in Checkpoint
 
 # Documentation
 
@@ -21,16 +22,78 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|port|integer|443|True|Server port|None|
-|server|string|None|True|Server IP address|None|
-|ssl_verify|boolean|True|True|Use SSL verification|None|
-|username_password|credential_username_password|None|True|Username and password|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|port|integer|443|True|Check Point server port|None|443|
+|server|string|None|True|Check Point server IP address|None|198.168.2.1|
+|ssl_verify|boolean|True|True|Use SSL verification|None|True|
+|username_password|credential_username_password|None|True|Username and password|None|None|
+
+Example input:
+
+```
+{
+  "port": 443,
+  "server": "192.168.1.1",
+  "ssl_verify": false,
+  "username_password": {
+    "password": "xxxxxx",
+    "username": "xxxxxx"
+  }
+}
+```
 
 ## Technical Details
 
 ### Actions
+
+#### Install Policy
+
+This action is used to install a policy to selected targets.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|access_control_policy|boolean|True|True|Set to be true in order to install the Access Control policy. By default, the value is true if Access Control policy is enabled on the input policy package, otherwise false|None|True|
+|desktop_security_policy|boolean|False|True|Set to be true in order to install the Desktop Security policy. By default, the value is true if desktop security policy is enabled on the input policy package, otherwise false|None|False|
+|discard_other_sessions|boolean|False|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|False|
+|install_on_all_cluster_members_or_fail|boolean|False|True|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|False|
+|policy_package|string|standard|True|Policy package to install|None|standard|
+|qos_policy|boolean|False|True|Set to be true in order to install the QoS policy. By default, the value is true if Quality-of-Service policy is enabled on the input policy package, otherwise false|None|False|
+|targets|[]string|['target name']|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier|None|['checkpoint_fw_1', 'checkpoint_fw_2']|
+|threat_prevention_policy|boolean|True|True|Set to be true in order to install the Threat Prevention policy. By default, the value is true if Threat Prevention policy is enabled on the input policy package, otherwise false|None|True|
+
+Example input:
+
+```
+{
+  "access_control_policy": true,
+  "desktop_security_policy": false,
+  "discard_other_sessions": false,
+  "install_on_all_cluster_members_or_fail": false,
+  "policy_package": "standard",
+  "qos_policy": false,
+  "targets": [
+    "checkmark_fw"
+  ],
+  "threat_prevention_policy": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Set Threat Protection
 
@@ -38,12 +101,12 @@ This action is used to set a threat protection action.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|action|string|None|True|Action|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|name|string|None|True|Name of the protection to act on. e.g. Blaster Attacks|None|
-|profile|string|Optimized|True|Profile e.g. Optimized, Basic, Strict|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|None|True|Action|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|Prevent|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
+|name|string|None|True|Name of the protection to act on|None|Blaster Attacks|
+|profile|string|Optimized|True|Profile e.g. Optimized, Basic, Strict|None|Optimized|
 
 Example input:
 
@@ -76,11 +139,11 @@ This action is used to add a host to a network group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|group_name|string|None|True|Name of the group to add this object to|None|
-|host_name|string|None|True|The host to add to the network group, usually the IP address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|None|
+|group_name|string|None|True|Name of the group to add this object to|None|None|
+|host_name|string|None|True|The host to add to the network group, usually the IP address|None|None|
 
 Example input:
 
@@ -140,10 +203,10 @@ This action is used to remove a host from network objects.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|name|string|None|True|Name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
+|name|string|None|True|Name|None|192.168.2.1|
 
 Example input:
 
@@ -176,11 +239,12 @@ This action is used to add a host as a network object.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|host_ip|string|None|True|Host IP address|None|
-|name|string|None|True|Name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|color|string|black|False|Color|['black', 'aquamarine', 'blue', 'brown', 'burlywood', 'coral', 'crete', 'cyan', 'dark blue', 'dark gold', 'dark gray', 'dark green', 'dark orange', 'dark sea green', 'firebrick', 'forest green', 'gold', 'gray', 'khaki', 'lemon chiffon', 'light green', 'magenta', 'navy blue', 'olive', 'orange', 'orchid', 'pink', 'purple', 'red', 'sea green', 'sienna', 'sky blue', 'slate blue', 'turquoise', 'violet red', 'yellow']|black|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
+|host_ip|string|None|True|Host IP address|None|192.168.2.1|
+|name|string|None|True|Name|None|192.168.2.1|
 
 Example input:
 
@@ -246,11 +310,11 @@ This action is used to remove an access rule.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|access_rule_name|string|None|True|Access rule name|None|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|layer|string|Network|True|Layer|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|access_rule_name|string|None|True|Access rule name|None|InsightConnect Access Rule|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
+|layer|string|Network|True|Layer|None|Network|
 
 Example input:
 
@@ -284,10 +348,10 @@ This action is used to show the access rulebase.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|layer_name|string|Network|True|Layer name|None|
-|limit|integer|500|False|Limit|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|layer_name|string|Network|True|Layer name|None|Network|
+|limit|integer|500|False|Limit|None|500|
 
 Example input:
 
@@ -498,16 +562,16 @@ This action is used to create a rule to block traffic.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|action|string|Drop|True|Action to take|['Accept', 'Drop', 'Ask', 'Inform', 'Reject', 'User Auth', 'Client Auth', 'Apply Layer']|
-|destination|string|None|False|Destination network object name|None|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|
-|layer|string|Network|True|Layer to add this rule to|None|
-|list_of_services|[]string|None|False|List of services to block e.g. ["AOL", "SMTP"]|None|
-|name|string|None|True|Rule name|None|
-|position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|None|
-|source|string|None|False|Source network object name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|Drop|True|Action to take|['Accept', 'Drop', 'Ask', 'Inform', 'Reject', 'User Auth', 'Client Auth', 'Apply Layer']|Drop|
+|destination|string|None|False|Destination network object name|None|192.168.2.1|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
+|layer|string|Network|True|Layer to add this rule to|None|Network|
+|list_of_services|[]string|None|False|List of services to block|None|['AOL', 'SMTP']|
+|name|string|None|True|Rule name|None|Malicious IP Addresses|
+|position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|None|1|
+|source|string|None|False|Source network object name|None|192.168.2.1|
 
 Example input:
 
@@ -833,8 +897,34 @@ to True in each action. That will effectively remove all other pending changes w
 plugin tries to publish its changes. A best practice is to have separate administrator accounts so that you can 
 better track changes done via the plugin or manually via SmartConsole.
 
+### Common Errors
+
+#### 403 Forbidden
+
+If you are presented with a `403 Forbidden` error when running the connection test, the API hasn't been enabled and will need to be enabled for the connection test to succeed.
+ 
+For more information on enabling the API visit: 
+
+[https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641]( https://community.checkpoint.com/t5/API-CLI-Discussion-and-Samples/Enabling-web-api/td-p/32641)
+
+#### err_login_failed
+
+If the plugin gives this error during the connection test: 
+
+```
+{
+  "code" : "err_login_failed",
+  "message" : "Authentication to server failed."
+}
+```
+
+Verify the password on the account you are using. Make sure the user that you are logging in with has administrative
+privileges.
+
 # Version History
 
+* 1.3.0 - Update to add install options to Install Policy
+* 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` action to with color option 
 * 1.1.0 - New action Add Host to Network Group
 * 1.0.0 - Initial plugin
 

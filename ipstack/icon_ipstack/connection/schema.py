@@ -14,7 +14,7 @@ class ConnectionSchema(komand.Input):
   "title": "Variables",
   "properties": {
     "cred_token": {
-      "$ref": "#/definitions/credential_token",
+      "$ref": "#/definitions/credential_secret_key",
       "title": "API Token",
       "description": "API Token",
       "order": 1
@@ -24,27 +24,22 @@ class ConnectionSchema(komand.Input):
     "cred_token"
   ],
   "definitions": {
-    "credential_token": {
-      "id": "credential_token",
+    "credential_secret_key": {
+      "id": "credential_secret_key",
       "type": "object",
-      "title": "Credential: Token",
-      "description": "A pair of a token, and an optional domain",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
       "properties": {
-        "domain": {
+        "secretKey": {
           "type": "string",
-          "title": "Domain",
-          "description": "The domain for the token"
-        },
-        "token": {
-          "type": "string",
-          "title": "Token",
+          "title": "Secret Key",
           "displayType": "password",
-          "description": "The shared token",
+          "description": "The shared secret key",
           "format": "password"
         }
       },
       "required": [
-        "token"
+        "secretKey"
       ]
     }
   }

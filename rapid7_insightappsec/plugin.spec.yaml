@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
 description: This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 status: []
 support: rapid7
@@ -193,12 +193,14 @@ connection:
     description: The API key for InsightAppSec
     type: credential_secret_key
     required: true
+    example: abc12345-abc1-2345-abc1-abc123456789
   url:
     title: URL
-    description: The URL endpoint for InsightAppSec. e.g. https://<REGION_CODE>.api.insight.rapid7.com
+    description: The region specific URL endpoint for InsightAppSec
     type: string
     required: true
     default: https://us.api.insight.rapid7.com
+    example: https://us.api.insight.rapid7.com
 actions:
   create_scan_config:
     title: Create Scan Config
@@ -209,21 +211,25 @@ actions:
         description: The name of the scan configuration
         type: string
         required: true
+        example: "Scan Config 1"
       config_description:
         title: Description
         description: The description of the scan configuration
         type: string
         required: false
+        example: "Description for scan config"
       app_id:
         title: App ID
         description: App UUID
         type: string
         required: true
+        example: "78c85b01-2a23-404d-ac5a-18324d8e3bda"
       attack_template_id:
         title: Attack Template ID
         description: Attack template UUID
         type: string
         required: true
+        example: "11111111-0000-0000-0000-000000000000"
     output:
       status:
         title: Status
@@ -239,6 +245,7 @@ actions:
         description: Scan configuration UUID
         type: string
         required: true
+        example: "6a33ae79-5ebd-44a9-9a0a-f269876e90c9"
     output:
       id:
         title: UUID
@@ -284,26 +291,31 @@ actions:
         description: Scan configuration UUID
         type: string
         required: true
+        example: "a709c972-cb1f-4790-bfce-6ab74653900c"
       config_name:
         title: Name
         description: The name of the scan configuration
         type: string
         required: true
+        example: "Scan Config 1"
       config_description:
         title: Description
         description: The description of the scan configuration
         type: string
         required: false
+        example: "Description of scan config"
       app_id:
         title: App ID
         description: App UUID
         type: string
         required: true
+        example: "78c85b01-2a23-404d-ac5a-18324d8e3bda"
       attack_template_id:
         title: Attack Template ID
         description: Attack template UUID
         type: string
         required: true
+        example: "11111111-0000-0000-0000-000000000000"
     output:
       status:
         title: Status
@@ -319,6 +331,7 @@ actions:
         description: Scan configuration UUID
         type: string
         required: true
+        example: "4569288e-2bb4-416e-a4ee-4f7add18afe0"
     output:
       status:
         title: Status
@@ -334,17 +347,20 @@ actions:
         description: The page index to start form. If blank, index will be 0
         type: integer
         required: false
+        example: 0
       size:
         title: Size
         description: The number of entries on each page. If blank, size will be 50
         type: integer
         required: false
+        example: 0
       sort:
         title: Sort
         description: How to sort the scan configs. If blank, sort will be alphabetical
           by scan config name
         type: string
         required: false
+        example: "scanconfig.name,DESC"
     output:
       scan_configs:
         title: Scan Configs
@@ -360,6 +376,7 @@ actions:
         description: UUID of the scan config to use
         type: string
         required: true
+        example: "a709c972-cb1f-4790-bfce-6ab74653900c"
     output:
       status:
         title: Status
@@ -375,6 +392,7 @@ actions:
         description: The scans UUID
         type: string
         required: true
+        example: "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
     output:
       scan:
         title: Scan
@@ -390,17 +408,20 @@ actions:
         description: The page index to start form. If blank, index will be 0
         type: integer
         required: false
+        example: 0
       size:
         title: Size
         description: The number of entries on each page. If blank, size will be 50
         type: integer
         required: false
+        example: 50
       sort:
         title: Sort
         description: How to sort the scans. If blank, sort will be alphabetical by
           scan name
         type: string
         required: false
+        example: "scan.submit_time,DESC"
     output:
       scans:
         title: Scans
@@ -416,6 +437,7 @@ actions:
         description: The scans UUID
         type: string
         required: true
+        example: "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
     output:
       status:
         title: Status
@@ -431,6 +453,7 @@ actions:
         description: Scan UUID
         type: string
         required: true
+        example: "008eaffe-90ce-4de9-8601-40414391c21c"
       action:
         title: Action
         description: Action to take
@@ -442,6 +465,8 @@ actions:
         - Resume
         - Stop
         - Cancel
+        - Authenticate
+        example: "Pause"
     output:
       status:
         title: Status
@@ -457,6 +482,7 @@ actions:
         description: Scan UUID
         type: string
         required: true
+        example: "c762adbe-1636-4c70-9787-5f22c2dc5af8"
     output:
       events:
         title: Events
@@ -472,6 +498,7 @@ actions:
         description: Scan UUID
         type: string
         required: true
+        example: "c762adbe-1636-4c70-9787-5f22c2dc5af8"
     output:
       details:
         title: Details
@@ -487,6 +514,7 @@ actions:
         description: Scan UUID
         type: string
         required: true
+        example: "c762adbe-1636-4c70-9787-5f22c2dc5af8"
     output:
       events:
         title: Events

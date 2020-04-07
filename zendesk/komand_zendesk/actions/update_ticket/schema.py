@@ -9,9 +9,8 @@ class Component:
 
 class Input:
     ASSIGNEE_ID = "assignee_id"
-    ATTACHMENT = "attachment"
     COLLABORATOR_IDS = "collaborator_ids"
-    DESCRIPTION = "description"
+    COMMENT = "comment"
     DUE_AT = "due_at"
     EXTERNAL_ID = "external_id"
     GROUP_ID = "group_id"
@@ -42,12 +41,6 @@ class UpdateTicketInput(komand.Input):
       "description": "Assignee ID",
       "order": 4
     },
-    "attachment": {
-      "$ref": "#/definitions/file",
-      "title": "Attachment",
-      "description": "Optional file attachment",
-      "order": 3
-    },
     "collaborator_ids": {
       "type": "array",
       "title": "Collaborator IDs",
@@ -57,11 +50,11 @@ class UpdateTicketInput(komand.Input):
       },
       "order": 5
     },
-    "description": {
-      "type": "string",
-      "title": "Description",
-      "description": "Ticket description",
-      "order": 6
+    "comment": {
+      "$ref": "#/definitions/comment",
+      "title": "Comment",
+      "description": "Comment",
+      "order": 2
     },
     "due_at": {
       "type": "string",
@@ -69,19 +62,19 @@ class UpdateTicketInput(komand.Input):
       "displayType": "date",
       "description": "Time ticket is due",
       "format": "date-time",
-      "order": 7
+      "order": 6
     },
     "external_id": {
       "type": "string",
       "title": "External ID",
       "description": "Support ticket ID",
-      "order": 8
+      "order": 7
     },
     "group_id": {
       "type": "string",
       "title": "Group ID",
       "description": "Group ID",
-      "order": 9
+      "order": 8
     },
     "priority": {
       "type": "string",
@@ -94,25 +87,25 @@ class UpdateTicketInput(komand.Input):
         "Low",
         ""
       ],
-      "order": 15
+      "order": 14
     },
     "problem_id": {
       "type": "string",
       "title": "Problem ID",
       "description": "For tickets of type 'incident', the numeric ID of the problem the incident is linked to",
-      "order": 11
+      "order": 10
     },
     "recipient": {
       "type": "string",
       "title": "Recipient ID",
       "description": "ID of user recipient",
-      "order": 10
+      "order": 9
     },
     "requester_id": {
       "type": "string",
       "title": "Requester ID",
       "description": "ID of user requesting support",
-      "order": 2
+      "order": 3
     },
     "status": {
       "type": "string",
@@ -127,13 +120,13 @@ class UpdateTicketInput(komand.Input):
         "Closed",
         ""
       ],
-      "order": 16
+      "order": 15
     },
     "subject": {
       "type": "string",
       "title": "Subject",
       "description": "Subject of ticket",
-      "order": 12
+      "order": 11
     },
     "tags": {
       "type": "array",
@@ -142,7 +135,7 @@ class UpdateTicketInput(komand.Input):
       "items": {
         "type": "string"
       },
-      "order": 13
+      "order": 12
     },
     "ticket_id": {
       "type": "string",
@@ -161,7 +154,7 @@ class UpdateTicketInput(komand.Input):
         "Question",
         ""
       ],
-      "order": 14
+      "order": 13
     }
   },
   "required": [
@@ -169,22 +162,33 @@ class UpdateTicketInput(komand.Input):
     "ticket_id"
   ],
   "definitions": {
-    "file": {
-      "id": "file",
+    "comment": {
       "type": "object",
-      "title": "File",
-      "description": "File Object",
+      "title": "comment",
       "properties": {
-        "content": {
+        "author_id": {
           "type": "string",
-          "title": "Content",
-          "description": "File contents",
-          "format": "bytes"
+          "title": "Author ID",
+          "description": "Author ID",
+          "order": 4
         },
-        "filename": {
+        "body": {
           "type": "string",
-          "title": "Filename",
-          "description": "Name of file"
+          "title": "Body",
+          "description": "Comment body",
+          "order": 1
+        },
+        "html_body": {
+          "type": "string",
+          "title": "HTML Body",
+          "description": "The comment formatted as HTML. This will be preferred over body",
+          "order": 2
+        },
+        "public": {
+          "type": "boolean",
+          "title": "Public",
+          "description": "Public (true if public comment, false if an internal note)",
+          "order": 3
         }
       }
     }
@@ -213,6 +217,36 @@ class UpdateTicketOutput(komand.Output):
     "ticket"
   ],
   "definitions": {
+    "comment": {
+      "type": "object",
+      "title": "comment",
+      "properties": {
+        "author_id": {
+          "type": "string",
+          "title": "Author ID",
+          "description": "Author ID",
+          "order": 4
+        },
+        "body": {
+          "type": "string",
+          "title": "Body",
+          "description": "Comment body",
+          "order": 1
+        },
+        "html_body": {
+          "type": "string",
+          "title": "HTML Body",
+          "description": "The comment formatted as HTML. This will be preferred over body",
+          "order": 2
+        },
+        "public": {
+          "type": "boolean",
+          "title": "Public",
+          "description": "Public (true if public comment, false if an internal note)",
+          "order": 3
+        }
+      }
+    },
     "file": {
       "id": "file",
       "type": "object",
@@ -254,27 +288,32 @@ class UpdateTicketOutput(komand.Output):
           },
           "order": 3
         },
+        "comment": {
+          "$ref": "#/definitions/comment",
+          "title": "Comment",
+          "order": 4
+        },
         "description": {
           "type": "string",
           "title": "Description",
-          "order": 4
+          "order": 5
         },
         "due_at": {
           "type": "string",
           "title": "Due At",
           "displayType": "date",
           "format": "date-time",
-          "order": 5
+          "order": 6
         },
         "external_id": {
           "type": "string",
           "title": "External ID",
-          "order": 6
+          "order": 7
         },
         "group_id": {
           "type": "integer",
           "title": "Group ID",
-          "order": 7
+          "order": 8
         },
         "priority": {
           "type": "string",
@@ -286,22 +325,22 @@ class UpdateTicketOutput(komand.Output):
             "Low",
             ""
           ],
-          "order": 14
+          "order": 15
         },
         "problem_id": {
           "type": "string",
           "title": "Problem ID",
-          "order": 10
+          "order": 11
         },
         "recipient": {
           "type": "string",
           "title": "Recipient ID",
-          "order": 9
+          "order": 10
         },
         "requester_id": {
           "type": "string",
           "title": "Requester ID",
-          "order": 8
+          "order": 9
         },
         "status": {
           "type": "string",
@@ -315,12 +354,12 @@ class UpdateTicketOutput(komand.Output):
             "Closed",
             ""
           ],
-          "order": 15
+          "order": 16
         },
         "subject": {
           "type": "string",
           "title": "Subject",
-          "order": 11
+          "order": 12
         },
         "tags": {
           "type": "array",
@@ -328,7 +367,7 @@ class UpdateTicketOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 12
+          "order": 13
         },
         "type": {
           "type": "string",
@@ -340,10 +379,40 @@ class UpdateTicketOutput(komand.Output):
             "Question",
             ""
           ],
-          "order": 13
+          "order": 14
         }
       },
       "definitions": {
+        "comment": {
+          "type": "object",
+          "title": "comment",
+          "properties": {
+            "author_id": {
+              "type": "string",
+              "title": "Author ID",
+              "description": "Author ID",
+              "order": 4
+            },
+            "body": {
+              "type": "string",
+              "title": "Body",
+              "description": "Comment body",
+              "order": 1
+            },
+            "html_body": {
+              "type": "string",
+              "title": "HTML Body",
+              "description": "The comment formatted as HTML. This will be preferred over body",
+              "order": 2
+            },
+            "public": {
+              "type": "boolean",
+              "title": "Public",
+              "description": "Public (true if public comment, false if an internal note)",
+              "order": 3
+            }
+          }
+        },
         "file": {
           "id": "file",
           "type": "object",

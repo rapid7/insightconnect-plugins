@@ -135,7 +135,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.1 - New spec and help.md format for the Hub
+* 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Update connection to add support for the read-only Google Admin Directory OAuth scope
 * 1.2.1 - Fix typo in plugin spec
 * 1.2.0 - Add pagination to Get All Domain Users actions to support domains with 500+ users
