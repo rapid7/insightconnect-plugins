@@ -19,7 +19,6 @@ class DomainList(komand.Action):
         days_back = params.get(Input.DAYS_BACK, None)
 
         if query not in self.connection.terms:
-            self.logger.error(f"DomainTools: Terms: Query not in terms. Allowed terms: {self.connection.terms}")
             raise PluginException(cause="Query not in terms.",
                                   assistance=f"Allowed terms: {self.connection.terms}.")
 
