@@ -1141,7 +1141,7 @@ Example input:
 
 ```
 {
-  "list": "cyber_exploit_signal_critical"
+  "list": "nist_severity_critical"
 }
 ```
 
