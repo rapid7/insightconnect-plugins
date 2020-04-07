@@ -23,7 +23,7 @@ class ConnectionSchema(komand.Input):
     "url": {
       "type": "string",
       "title": "VMRay URL",
-      "description": "VMRay host e.g https://cloud.vmray.com",
+      "description": "The VMRay host URL, both on-premise and cloud is supported",
       "default": "https://cloud.vmray.com",
       "order": 2
     }
