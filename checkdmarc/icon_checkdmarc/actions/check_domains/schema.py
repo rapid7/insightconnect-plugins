@@ -25,7 +25,7 @@ class CheckDomainsInput(komand.Input):
     "domain": {
       "type": "string",
       "title": "Domain",
-      "description": "Domain to check. e.g. fbi.gov, google.com",
+      "description": "Domain to check",
       "order": 1
     },
     "timeout": {

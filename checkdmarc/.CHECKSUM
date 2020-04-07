@@ -1,15 +1,15 @@
 {
-	"spec": "b569d972a30122d7a468e8c89284aa5d",
-	"manifest": "b5c3f58c99bd31a4fba5ff3ddbb5e241",
-	"setup": "85a3e19a33d6476f51fe5fff319c4b9b",
+	"spec": "3109416631bfc4ca5a7db8ac7175e6d2",
+	"manifest": "6741fe924eaee83a5ab340c67d3bd880",
+	"setup": "86c66a14a2677e103f9605c6403f43aa",
 	"schemas": [
 		{
 			"identifier": "check_domains/schema.py",
-			"hash": "3567fad9afc26db3e9388fb8b04d59cb"
+			"hash": "f9b483b8b4dd54591c1e0c179c06b78c"
 		},
 		{
 			"identifier": "check_domains_alternate_nameservers/schema.py",
-			"hash": "99d0be063c0f1dcd06dcdfe4aff2d44b"
+			"hash": "73bb1e63c44704cfedca481f2c0c2b2f"
 		},
 		{
 			"identifier": "connection/schema.py",

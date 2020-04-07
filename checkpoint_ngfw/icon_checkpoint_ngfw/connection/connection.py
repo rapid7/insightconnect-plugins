@@ -68,11 +68,8 @@ class Connection(komand.Connection):
         try:
             request.raise_for_status()
         except Exception as e:
-            # The errors returned by this api aren't very good
-            # It's a 400 with some error text.
-            raise PluginException(cause="There was problem logging out.",
-                                  assistance=request.text,
-                                  data=e)
+            self.logger.warning(f"There was a problem logging out. Ignoring this and attempting to continue. "
+                              f"Error follows:\n{request.text}")
 
     def get_headers(self):
         return {
@@ -163,6 +160,15 @@ class Connection(komand.Connection):
                                   data=e)
         return result.json()
 
+    def install_policy(self, headers, discard_other_changes, payload, url):
+        result = requests.post(url, headers=headers, json=payload, verify=self.ssl_verify)
+        try:
+            result.raise_for_status()
+        except Exception as e:
+            raise PluginException(cause=f"Install policy failed: {url}",
+                                  assistance=result.text,
+                                  data=e)
+        return result
 
     def test(self):
         if not self.sid:
@@ -170,4 +176,3 @@ class Connection(komand.Connection):
                                                 f"{self.server_ip}:{self.server_port}",
                                           assistance="Please check your connection settings and try again.")
         return {"success": True}
-

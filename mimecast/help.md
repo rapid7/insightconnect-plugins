@@ -508,7 +508,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 * 4.0.0 - Update Get TTP URL Logs to allow for better URL filtering
 * 3.1.0 - New action Delete Managed URL and Delete Group Member
-* 3.0.1 - New spec and help.md format for the Hub
+* 3.0.1 - New spec and help.md format for the Extension Library
 * 3.0.0 - Add URL in Get TTP URL Logs action to filter output | Update connection settings to the proper authentication supported by the Mimecast API
 * 2.5.0 - New action Decode URL
 * 2.4.0 - New action Get TTP URL Logs

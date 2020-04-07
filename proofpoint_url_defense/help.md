@@ -15,7 +15,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -29,17 +29,36 @@ This action is used to take a Proofpoint URL and decode it to the original URL.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|proofpoint_url|string|None|True|Proofpoint encoded URL|None|
+|encoded_url|string|None|True|Proofpoint encoded URL or URL parameters e.g http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwfU|None|
+
+Example input:
+
+```
+{
+  "encoded_url": "http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwf"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|decoded_url|string|False|None|
+|decoded|boolean|True|Was decode successful, if not, the original URL will be returned|
+|decoded_url|string|False|Decoded Proofpoint URL|
+
+Example output:
+
+```
+{
+  "decoded_url": "http://www.example.org/url",
+  "decode_success": true
+}
+```
+
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -51,7 +70,9 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.2.0 - Update to URL Decode to add `decoded` as an output variable 
+* 1.1.0 - Update to URL Decode action to add support for v3 links
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Bug fix with decode parsing
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
@@ -61,5 +82,4 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [Proofpoint URL Defense](https://www.proofpoint.com/us/products/targeted-attack-protection)
-* [ppdecode Library](https://github.com/warquel/ppdecode)
-
+* [Proofpoint decode utility](https://help.proofpoint.com/@api/deki/files/177/URLDefenseDecode.py?revision=2)

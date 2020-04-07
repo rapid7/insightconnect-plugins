@@ -1,0 +1,23 @@
+{
+    "body": {
+        "action": "add_to_udso_list",
+        "input": {
+            "content": "cf23df2207d99a74fbe169e3eba035e633b65d94",
+            "scan_action": "LOG",
+            "data_type": "FILE_SHA1",
+            "notes": "Tyler you are getting this in on the 22nd try."
+        },
+        "connection": {
+            "api_key": {
+                "secretKey": ""
+            },
+            "application_id": {
+                "secretKey": ""
+            },
+            "url": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

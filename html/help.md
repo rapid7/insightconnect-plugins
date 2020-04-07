@@ -164,7 +164,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.2.1 - New spec and help.md format for the Hub
+* 1.2.1 - New spec and help.md format for the Extension Library
 * 1.2.0 - Update to add the Remove Scripts option to Text
 * 1.1.0 - New action: Text
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability

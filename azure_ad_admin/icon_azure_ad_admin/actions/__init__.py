@@ -7,3 +7,4 @@ from .force_user_to_change_password.action import ForceUserToChangePassword
 from .get_group_by_name.action import GetGroupByName
 from .get_user_info.action import GetUserInfo
 from .remove_user_from_group.action import RemoveUserFromGroup
+from .update_user_info.action import UpdateUserInfo

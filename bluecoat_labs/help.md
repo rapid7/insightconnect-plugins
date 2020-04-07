@@ -64,7 +64,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.1 - New spec and help.md format for the Hub
+* 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Fix issue where a change in Bluecoat Labs API was causing the plugin to fail
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
 description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
-version: 1.3.0
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []
@@ -194,13 +194,13 @@ triggers:
     input:
       team_name:
         title: Team Name
-        description: Regex-capable team name
+        description: Team name
         type: string
         required: true
         order: 1
       channel_name:
         title: Channel Name
-        description: Regex-capable channel
+        description: Channel
         type: string
         required: true
         order: 2
@@ -224,7 +224,7 @@ actions:
     input:
       team_name:
         title: Team Name
-        description: Optional regex-capable optional team name to look for
+        description: Optional regex-capable team name to look for
         type: string
         required: false
     output:
@@ -239,13 +239,13 @@ actions:
     input:
       team_name:
         title: Team Name
-        description: Regex-capable team name to look for
+        description: Team name to look for
         type: string
         required: true
         order: 1
       channel_name:
         title: Channel Name
-        description: Optional regex-capable optional channel to look for
+        description: Optional regex-capable channel to look for
         type: string
         required: false
         order: 2
@@ -261,13 +261,13 @@ actions:
     input:
       team_name:
         title: Team Name
-        description: Regex-capable team name
+        description: Team name
         type: string
         required: true
         order: 1
       channel_name:
         title: Channel Name
-        description: Regex-capable channel
+        description: Channel
         type: string
         required: true
         order: 2
@@ -323,13 +323,13 @@ actions:
     input:
       team_name:
         title: Team Name
-        description: Regex-capable team name
+        description: Team name
         type: string
         required: true
         order: 1
       channel_name:
         title: Channel Name
-        description: Regex-capable channel
+        description: Channel name
         type: string
         required: true
         order: 2

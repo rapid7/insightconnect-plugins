@@ -12,6 +12,7 @@ class Input:
     
 
 class Output:
+    DECODED = "decoded"
     DECODED_URL = "decoded_url"
     
 
@@ -44,13 +45,22 @@ class UrlDecodeOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "decoded": {
+      "type": "boolean",
+      "title": "Decoded",
+      "description": "Was decode successful, if not, the original URL will be returned",
+      "order": 2
+    },
     "decoded_url": {
       "type": "string",
       "title": "Decoded Proofpoint URL",
       "description": "Decoded Proofpoint URL",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "decoded"
+  ]
 }
     """)
 

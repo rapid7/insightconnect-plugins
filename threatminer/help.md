@@ -391,7 +391,7 @@ The [jq](https://market.komand.com/plugins/komand/jq/0.1.0) and [JSON](https://m
 # Version History
 
 * 2.0.0 - Update to v3 Python plugin architecture | Convert import_hash_report API status codes to int | Update documentation
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Rename "Email (Reverse WHOIS) - Report tagging" action to "Email (Reverse WHOIS) - Report Tagging"
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

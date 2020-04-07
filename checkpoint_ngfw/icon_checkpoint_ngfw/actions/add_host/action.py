@@ -18,6 +18,11 @@ class AddHost(komand.Action):
             "name": params.get(Input.NAME),
             "ip-address": params.get(Input.HOST_IP)
         }
+
+        color = params.get(Input.COLOR)
+        if color:
+            payload["color"] = color
+
         headers = self.connection.get_headers()
         discard_other_changes = params.get(Input.DISCARD_OTHER_SESSIONS)
 

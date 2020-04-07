@@ -2,14 +2,16 @@
     "body": {
         "action": "search_domains",
         "connection": {
-            "api_key": null
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {
             "direction": "asc",
             "from": 0,
             "limit": 10,
             "orderby": "Created",
-            "parent": "recordedfuture.com"
+            "parent": "example.com"
         },
         "meta": {}
     },

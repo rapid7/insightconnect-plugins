@@ -404,7 +404,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 5.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Disposition and Service in Create Ticket log message
+* 5.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Disposition and Service in Create Ticket log message
 * 4.0.1 - Fix issue in Retrieve action to handle Escalation parameters being returned as strings | Adds new parameter No Article to update, this will submit updates to a ticket without adding a generated article
 * 4.0.0 - Updated the Web Service configuration file | Update dependency on PyOTRS | Fixed issue where Article and Attachment was required to update a ticket in action `update` | Added an External Parameters field to action `search` | Fixed issue with action `search` where dynamic fields were not used correctly for searching | Fixed issue where Escalation parameters where not set to the right type
 * 3.0.5 - Update dependency to PyOTRS v2.1 for security bug [CWE-601](https://cwe.mitre.org/data/definitions/601.html)
