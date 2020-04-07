@@ -24,7 +24,6 @@ class Connection(komand.Connection):
             response = self.api.account_information()
             response.data()
         except NotAuthorizedException as e:
-            self.logger.error(f"DomainTools: Connect: error {e}")
             raise ConnectionTestException(cause="Authorization failed.",
                                           assistance="Double-check that your credentials configured in your connection are correct and try again.")
         except Exception as e:
