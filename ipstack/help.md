@@ -26,7 +26,7 @@ Example input:
 ```
 {
   "api_key": {
-    “secretKey: “9de5069c5afe602b2ea0a04b66beb2c0"
+    "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
   }
 }
 
@@ -116,4 +116,3 @@ A valid domain or IP address must be provided.
 ## References
 
 * [IPStack](https://ipstack.com)
-
