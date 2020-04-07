@@ -379,7 +379,7 @@ Example input:
   "freetext": "CVE",
   "from": 1,
   "limit": 10,
-  "orderby": "Created"
+  "orderby": "Riskscore"
 }
 ```
 
