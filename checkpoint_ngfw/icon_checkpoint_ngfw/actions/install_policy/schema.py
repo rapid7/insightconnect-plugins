@@ -8,10 +8,14 @@ class Component:
 
 
 class Input:
+    ACCESS_CONTROL_POLICY = "access_control_policy"
+    DESKTOP_SECURITY_POLICY = "desktop_security_policy"
     DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     INSTALL_ON_ALL_CLUSTER_MEMBERS_OR_FAIL = "install_on_all_cluster_members_or_fail"
     POLICY_PACKAGE = "policy_package"
+    QOS_POLICY = "qos_policy"
     TARGETS = "targets"
+    THREAT_PREVENTION_POLICY = "threat_prevention_policy"
     
 
 class Output:
@@ -24,31 +28,52 @@ class InstallPolicyInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "access_control_policy": {
+      "type": "boolean",
+      "title": "Access Control Policy",
+      "description": "Set to be true in order to install the Access Control policy. By default, the value is true if Access Control policy is enabled on the input policy package, otherwise false",
+      "default": true,
+      "order": 3
+    },
+    "desktop_security_policy": {
+      "type": "boolean",
+      "title": "Desktop Security Policy",
+      "description": "Set to be true in order to install the Desktop Security policy. By default, the value is true if desktop security policy is enabled on the input policy package, otherwise false",
+      "default": false,
+      "order": 4
+    },
     "discard_other_sessions": {
       "type": "boolean",
       "title": "Discard Other Sessions",
       "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
-      "default": true,
-      "order": 4
+      "default": false,
+      "order": 8
     },
     "install_on_all_cluster_members_or_fail": {
       "type": "boolean",
       "title": "Install Access Control Policy",
       "description": "Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster",
       "default": false,
-      "order": 3
+      "order": 7
     },
     "policy_package": {
       "type": "string",
       "title": "Policy Package",
-      "description": "Policy package to install e.g. \\"standard\\"",
+      "description": "Policy package to install",
       "default": "standard",
       "order": 1
+    },
+    "qos_policy": {
+      "type": "boolean",
+      "title": "QoS Policy",
+      "description": "Set to be true in order to install the QoS policy. By default, the value is true if Quality-of-Service policy is enabled on the input policy package, otherwise false",
+      "default": false,
+      "order": 5
     },
     "targets": {
       "type": "array",
       "title": "Targets",
-      "description": "On what targets to execute this command. Targets may be identified by their name, or object unique identifier. e.g. [\\"checkpoint_fw\\"]",
+      "description": "On what targets to execute this command. Targets may be identified by their name, or object unique identifier",
       "items": {
         "type": "string"
       },
@@ -56,13 +81,24 @@ class InstallPolicyInput(komand.Input):
         "target name"
       ],
       "order": 2
+    },
+    "threat_prevention_policy": {
+      "type": "boolean",
+      "title": "Threat Prevention Policy",
+      "description": "Set to be true in order to install the Threat Prevention policy. By default, the value is true if Threat Prevention policy is enabled on the input policy package, otherwise false",
+      "default": true,
+      "order": 6
     }
   },
   "required": [
+    "access_control_policy",
+    "desktop_security_policy",
     "discard_other_sessions",
     "install_on_all_cluster_members_or_fail",
     "policy_package",
-    "targets"
+    "qos_policy",
+    "targets",
+    "threat_prevention_policy"
   ]
 }
     """)

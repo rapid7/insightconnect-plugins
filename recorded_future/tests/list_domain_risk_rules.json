@@ -2,7 +2,9 @@
     "body": {
         "action": "list_domain_risk_rules",
         "connection": {
-            "api_key": null
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {},
         "meta": {}

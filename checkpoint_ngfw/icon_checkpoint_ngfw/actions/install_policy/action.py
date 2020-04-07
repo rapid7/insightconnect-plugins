@@ -17,7 +17,11 @@ class InstallPolicy(komand.Action):
         payload = {
             "policy-package": params.get(Input.POLICY_PACKAGE),
             "targets": params.get(Input.TARGETS),
-            "install-on-all-cluster-members-or-fail": params.get(Input.INSTALL_ON_ALL_CLUSTER_MEMBERS_OR_FAIL)
+            "install-on-all-cluster-members-or-fail": params.get(Input.INSTALL_ON_ALL_CLUSTER_MEMBERS_OR_FAIL),
+            "access": params.get(Input.ACCESS_CONTROL_POLICY),
+            "desktop-security": params.get(Input.DESKTOP_SECURITY_POLICY),
+            "qos": params.get(Input.QOS_POLICY),
+            "threat-prevention": params.get(Input.THREAT_PREVENTION_POLICY)
         }
 
         headers = self.connection.get_headers()
@@ -25,4 +29,4 @@ class InstallPolicy(komand.Action):
 
         self.connection.install_policy(headers, discard_other_changes, payload, url)
 
-        return {"success": True}
+        return {Output.SUCCESS: True}

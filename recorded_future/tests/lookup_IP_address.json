@@ -2,10 +2,12 @@
     "body": {
         "action": "lookup_IP_address",
         "connection": {
-            "api_key": null
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {
-            "IP_address": "8.8.8.8"
+            "IP_address": "198.51.100.100"
         },
         "meta": {}
     },

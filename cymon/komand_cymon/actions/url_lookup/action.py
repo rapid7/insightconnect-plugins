@@ -1,8 +1,7 @@
 import komand
-from .schema import UrlLookupInput, UrlLookupOutput
+from .schema import UrlLookupInput, UrlLookupOutput, Input
 # Custom imports below
 import json
-import urllib
 
 
 class UrlLookup(komand.Action):
@@ -20,7 +19,9 @@ class UrlLookup(komand.Action):
         if token:
             token = 'Token ' + token
             self.logger.info('API token was provided by user')
-        url = base + '/api/nexus/v1/url/%s' % urllib.quote_plus(params.get('url'))
+
+        sanitized_url = params.get(Input.URL).replace(" ", "+")
+        url = f"{base}/api/nexus/v1/url/{sanitized_url}"
         eurl = url.replace('%', '%25')  # Cymon requires encoding the percent sign too
         try:
             resp = komand.helper.open_url(eurl, Authorization=token)

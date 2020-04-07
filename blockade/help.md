@@ -53,7 +53,7 @@ This action is used to get list of indicators from the cloud node.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -118,7 +118,7 @@ The `Get Indicators` and `Get Events` actions do not require authentication.
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

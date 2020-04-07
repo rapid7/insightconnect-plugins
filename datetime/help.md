@@ -211,7 +211,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.5 - New spec and help.md format for the Hub | Changed const string in params.get to Input constants | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
+* 2.0.5 - New spec and help.md format for the Extension Library | Changed const string in params.get to Input constants | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
 * 2.0.4 - Update plugin tag from `utility` to `utilities` for Marketplace searchability
 * 2.0.3 - Fixed issue where connection test failed
 * 2.0.2 - Fixed issue where action Date from Epoch will not accept floats

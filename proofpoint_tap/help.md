@@ -82,7 +82,7 @@ This plugin does not contain any troubleshooting information.
 # Version History
 
 * 1.0.5 - Parsing out the View Threat Details link from emails to its own value
-* 1.0.4 - New spec and help.md format for the Hub
+* 1.0.4 - New spec and help.md format for the Extension Library
 * 1.0.3 - Fixed issue where headers were occasionally parsed improperly
 * 1.0.2 - Sanitize example output in Parse Alert action documentation
 * 1.0.1 - Fixed issue where TAP alerts with attachments are not parsed correctly

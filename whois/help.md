@@ -28,9 +28,17 @@ This action is used to retrieve data about a domain name.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain name to lookup|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|True|Domain name to lookup|None|rapid7.com|
+
+Example input:
+
+```
+{
+  "domain": "rapid7.com"
+}
+```
 
 ##### Output
 
@@ -81,9 +89,17 @@ This action is used to retrieve data about an IP address.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address|string|None|True|IP to Lookup|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IP to Lookup|None|198.51.100.100|
+
+Example input:
+
+```
+{
+  "address": "185.231.155.180"
+}
+```
 
 ##### Output
 
@@ -153,8 +169,10 @@ _This plugin has no references._
 
 # Version History
 
-* 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains | Updated help.md for the Hub
-* 1.0.6 - New spec and help.md format for the Hub
+* 2.0.1 - Update to v4 Python plugin runtime
+* 2.0.0 - Add example inputs | Fix capitalization in the title of the `last_updated` output.
+* 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains | Updated help.md for the Extension Library
+* 1.0.6 - New spec and help.md format for the Extension Library
 * 1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK
 * 1.0.4 - Fix variable name in domain lookup
 * 1.0.3 - Handle instances where domain name is prefixed with a protocol

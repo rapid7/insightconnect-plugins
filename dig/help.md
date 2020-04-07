@@ -184,9 +184,10 @@ Common examples:
 
 # Version History
 
+* 1.0.5 - Update to v4 Python plugin runtime
 * 1.0.4 - Add example inputs
 * 1.0.3 - Use input and output constants | Change docker image from `komand/python-2-slim-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Added "f" strings | Remove duplicate code | Add user nobody to Dockerfile
-* 1.0.2 - New spec and help.md format for the Hub
+* 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Update to use the `komand/python-2-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.0 - Support web server mode
 * 0.3.2 - Update to v2 Python plugin architecture

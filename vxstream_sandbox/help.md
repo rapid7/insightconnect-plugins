@@ -215,7 +215,7 @@ This plugin does not contain any troubleshooting information.
 # Version History
 
 * 3.0.0 - Updated variable titles, spelling mistakes
-* 2.0.1 - New spec and help.md format for the Hub
+* 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Support web server mode | Update to new credential types | Rename "Lookup By Hash" to "Lookup by Hash"
 * 1.0.1 - Update to v2 Python plugin architecture, edit to input parsing for lookup, report, and query actions
 * 1.0.0 - Invalid key in types section of plugin specification, and style updates

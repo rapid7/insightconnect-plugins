@@ -1,4 +1,4 @@
-FROM komand/python-3-37-slim-plugin:3
+FROM rapid7/insightconnect-python-3-38-slim-plugin:4
 # Refer to the following documentation for available SDK parent images: https://komand.github.io/python/sdk.html#version
 
 LABEL organization=rapid7

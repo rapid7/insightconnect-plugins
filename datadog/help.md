@@ -135,7 +135,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.1 - New spec and help.md format for the Hub
+* 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - New action Post Metrics | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Run plugin as least privileged user
 * 1.0.0 - Initial plugin
 

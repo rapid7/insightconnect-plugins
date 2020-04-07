@@ -15,7 +15,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -23,14 +23,23 @@ This plugin does not contain a connection.
 
 #### Scan File
 
-This action is used to scan a file using Yara.
+This action scans a file using Yara.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|file|bytes|None|True|File to be scanned|None|
-|rules|bytes|None|True|File containing Yara rules|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file|bytes|None|True|File to be scanned|None|aGVsbG8gd29ybGQK=|
+|rules|bytes|None|True|File containing Yara rules|None|cnVsZSBoZWxsbwp7CglzdHJpbmdzOgoJCSRzaGVsbG8gPSAiSGVsbG8sIFdvcmxkIgoJY29uZGl0aW9uOgoJCSRzaGVsbG8KfQo=|
+
+Example input:
+
+```
+{
+  "file": "aGVsbG8gd29ybGQK=",
+  "rules": "cnVsZSBoZWxsbwp7CglzdHJpbmdzOgoJCSRzaGVsbG8gPSAiSGVsbG8sIFdvcmxkIgoJY29uZGl0aW9uOgoJCSRzaGVsbG8KfQo="
+}
+```
 
 ##### Output
 
@@ -41,7 +50,6 @@ This action is used to scan a file using Yara.
 Example output:
 
 ```
-
 {
   "meta": {},
   "namespace": "default",
@@ -52,25 +60,33 @@ Example output:
     "Hello, World"
   ],
   "tags": []
-  }
-
+}
 ```
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### results
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Meta|object|False|Metadata|
+|Namespace|string|False|Namespace|
+|Rule|string|False|Rule that was used|
+|String|[]string|False|String that the rule triggered on|
+|Tags|[]string|False|A collection of tags|
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.1 - New spec and help.md format for the Hub
+* 1.1.2 - Add example inputs
+* 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - Support web server mode
 * 1.0.0 - Undocumented update
 * 0.1.0 - Initial plugin
