@@ -486,31 +486,37 @@ actions:
         type: string
         description: The country or region in which the user is located; for example, US or UK
         required: false
+        example: US
       department:
         title: Department
         type: string
         description: The name for the department in which the user works
         required: false
+        example: IT
       job_title:
         title: Job Title
         type: string
         description: The user’s job title
         required: false
+        example: Desktop Technician
       state:
         title: State
         type: string
         description: The state or province in the users address
         required: false
+        example: MA
       user_id:
         title: User ID
         description: User to updates ID
         type: string
         required: true
+        example: user@example.com
       user_type:
         title: Department
         type: string
         description: A string value that can be used to classify user types in your directory, such as Member and Guest
         required: false
+        example: Member
     output:
       success:
         title: Success

@@ -45,12 +45,12 @@ This action is used to update a users information.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |city|string|None|False|The city in which the user is located|None|Boston|
-|country|string|None|False|The country or region in which the user is located; for example, US or UK|None|None|
-|department|string|None|False|The name for the department in which the user works|None|None|
-|job_title|string|None|False|The user’s job title|None|None|
-|state|string|None|False|The state or province in the users address|None|None|
-|user_id|string|None|True|User to updates ID|None|None|
-|user_type|string|None|False|A string value that can be used to classify user types in your directory, such as Member and Guest|None|None|
+|country|string|None|False|The country or region in which the user is located; for example, US or UK|None|US|
+|department|string|None|False|The name for the department in which the user works|None|IT|
+|job_title|string|None|False|The user’s job title|None|Desktop Technician|
+|state|string|None|False|The state or province in the users address|None|MA|
+|user_id|string|None|True|User to updates ID|None|user@example.com|
+|user_type|string|None|False|A string value that can be used to classify user types in your directory, such as Member and Guest|None|Member|
 
 Example input:
 
