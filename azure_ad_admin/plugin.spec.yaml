@@ -387,7 +387,7 @@ actions:
         description: Body of the email to be sent out. Use $password to place the generated password
       notify_recipient:
         required: true
-        title: Recipient of creation email
+        title: Recipient of Creation Email
         type: string
         description: Email address of the account to be notified of user creation
       notify_from:
