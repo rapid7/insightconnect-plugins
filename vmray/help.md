@@ -1,13 +1,14 @@
 # Description
 
-The VMRay plugin allows the user to submit files or URLs for malware analysis.
+The VMRay plugin allows the user to submit files or URLs for malware analysis with VMRay on-premise or VMRay Cloud.
+
 [VMRay](https://www.vmray.com) delivers advanced threat analysis and detection that combines a unique agent-less hypervisor-based network sandbox with a real-time reputation engine.
 The combination provides both fast, high volume file classification and in-depth malware analysis.
 The VMRay Analyzer is platform independent and can be scaled, the result of a decade of R&D by some of the world's leading experts on dynamic malware analysis.
 By monitoring at the hypervisor level, it is undetectable by malware running in the target operating system.
 VMRay serves leading enterprises around the world.
 
-This plugin utilizes the [VMRay API](https://cloud.vmray.com/static_doc/html/api/REST_API_Documentation.html).
+This plugin utilizes the VMRay API. The API is gated and can be found on-premise at `http://vmrayhost/static_doc/html/api/User_API_Reference.html` or in the [VMRay Cloud API documentation](https://cloud.vmray.com/static_doc/html/api/User_API_Reference.html).
 
 # Key Features
 
@@ -27,7 +28,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|API key for VMRay|None|4SauhjkF9aANClXnIaLfAeE9RVBJnZZ8|
-|url|string|https://cloud.vmray.com|True|VMRay host e.g https://cloud.vmray.com|None|https://cloud.vmray.com|
+|url|string|https://cloud.vmray.com|True|The VMRay host URL, both on-premise and cloud is supported|None|https://cloud.vmray.com|
 
 Example input:
 

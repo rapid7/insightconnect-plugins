@@ -1058,7 +1058,7 @@ connection:
     example: 4SauhjkF9aANClXnIaLfAeE9RVBJnZZ8
   url:
     title: VMRay URL
-    description: VMRay host e.g https://cloud.vmray.com
+    description: The VMRay host URL, both on-premise and cloud is supported
     type: string
     default: https://cloud.vmray.com
     required: true
