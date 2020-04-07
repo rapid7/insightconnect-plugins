@@ -578,7 +578,7 @@ Example input:
 
 ```
 {
-  "algorithm": "MD5",
+  "algorithm": "SHA-1",
   "direction": "asc",
   "from": 2,
   "limit": 10,
