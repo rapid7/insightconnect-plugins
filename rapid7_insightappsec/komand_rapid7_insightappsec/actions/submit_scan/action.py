@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SubmitScanInput, SubmitScanOutput, Input, Output
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import Scans
 from komand_rapid7_insightappsec.util.resource_helper import ResourceHelper
 
 
-class SubmitScan(komand.Action):
+class SubmitScan(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
