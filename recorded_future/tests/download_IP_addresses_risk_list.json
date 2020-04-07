@@ -2,7 +2,9 @@
     "body": {
         "action": "download_IP_addresses_risk_list",
         "connection": {
-            "api_key": null
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {
             "list": "current_cc_server"
