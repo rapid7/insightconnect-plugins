@@ -22,14 +22,14 @@ connection:
   username:
     type: string
     description: API username
-    example: username
     required: true
+    example: user1
   api_key:
     title: API Key
     type: credential_secret_key
     description: API key e.g. 11111-aaaaa-aaa11-111aa-aaa11
-    example: 11111-aaaaa-aaa11-111aa-aaa11
     required: true
+    example: 11111-aaaaa-aaa11-111aa-aaa11
 types:
   ip_addresses:
     ip:
@@ -102,7 +102,7 @@ actions:
         type: string
         description: "Term for which the day's domains are desired"
         required: true
-        example: rapid7
+        example: example
       days_back:
         title: Days Back
         type: integer
