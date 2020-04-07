@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DomainInput, DomainOutput, Input
 
 # Custom imports below
 import whois
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class Domain(komand.Action):
+class Domain(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -30,7 +30,7 @@ class Domain(komand.Action):
             raise
         else:
             serializable_results = lookup_results.get_json_serializable()
-            serializable_results = komand.helper.clean_dict(serializable_results)
+            serializable_results = insightconnect_plugin_runtime.helper.clean_dict(serializable_results)
 
             return serializable_results
 
