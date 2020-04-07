@@ -6,7 +6,7 @@ from icon_ipstack import connection, actions, triggers
 
 Name = "IPStack"
 Vendor = "rapid7"
-Version = "1.0.1"
+Version = "2.0.0"
 Description = "Lookup geographical information for a host"
 
 

@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetContentInput, GetContentOutput, Input, Output, Component
 from komand_rapid7_vulndb.util import extract
 # Custom imports below
 
 
-class GetContent(komand.Action):
+class GetContent(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

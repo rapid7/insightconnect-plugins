@@ -2,7 +2,9 @@
     "body": {
         "action": "lookup_hash",
         "connection": {
-            "api_key": null
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {
             "hash": "478c076749bef74eaf9bed4af917aee228620b23"

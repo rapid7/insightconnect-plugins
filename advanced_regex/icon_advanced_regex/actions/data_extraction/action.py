@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DataExtractionInput, DataExtractionOutput, Component, Input, Output
 # Custom imports below
 import re
 from icon_advanced_regex.util import shared
 
 
-class DataExtraction(komand.Action):
+class DataExtraction(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

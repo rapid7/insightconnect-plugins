@@ -4,7 +4,7 @@ products: [insightconnect]
 name: dig
 title: Dig
 description: Dig is used for forward and reverse DNS lookups
-version: 1.0.4
+version: 1.0.5
 vendor: rapid7
 support: community
 status: []
