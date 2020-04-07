@@ -550,7 +550,7 @@ Example input:
 
 ```
 {
-  "list": "linked_to_attack_vector"
+  "list": "positive_malware_verdict"
 }
 ```
 
