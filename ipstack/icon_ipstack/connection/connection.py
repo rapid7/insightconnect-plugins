@@ -10,4 +10,4 @@ class Connection(komand.Connection):
         self.token = None
 
     def connect(self, params):
-        self.token = params["cred_token"]["token"]
+        self.token = params["cred_token"]["secretKey"]
