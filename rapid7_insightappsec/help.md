@@ -471,7 +471,7 @@ Example input:
 
 ```
 {
-  "action": "PAUSE",
+  "action": "Pause",
   "scan_id": "008eaffe-90ce-4de9-8601-40414391c21c"
 }
 ```
