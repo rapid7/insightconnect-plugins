@@ -582,7 +582,7 @@ Example input:
   "direction": "asc",
   "from": 2,
   "limit": 10,
-  "orderby": "Created"
+  "orderby": "Riskscore"
 }
 ```
 
