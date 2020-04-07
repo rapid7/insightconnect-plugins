@@ -106,7 +106,7 @@ A valid domain or IP address must be provided.
 
 # Version History
 
-* 2.0.0 - Add example inputs | Updated Docker version | Connection input updated
+* 2.0.0 - Add example inputs | Updated Docker version | Connection input updated to secretKey
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
 * 0.1.0 - Initial plugin
