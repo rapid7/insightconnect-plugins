@@ -354,7 +354,7 @@ paired `\(\)` are supported
 # Version History
 
 * 3.2.8 - Fix issue were adding objects to containers might fail
-* 3.2.7 - New spec and help.md format for the Hub
+* 3.2.7 - New spec and help.md format for the Extension Library
 * 3.2.6 - Update help to document supported Windows Server versions
 * 3.2.5 - Clean connection test output
 * 3.2.4 - Fix issue with Query where some output was not unescaped properly | Update to exception handling to leverage PluginException

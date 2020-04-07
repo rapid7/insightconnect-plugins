@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "topic",
+    "connection": {
+      "credentials": {
+        "secretKey": ""
+      }
+    },
+    "input": {
+      "id": "a2c54f3d-48d0-48c4-b056-3a78181d777c"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

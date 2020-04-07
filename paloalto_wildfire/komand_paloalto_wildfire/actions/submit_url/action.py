@@ -1,6 +1,7 @@
 import komand
 from .schema import SubmitUrlInput, SubmitUrlOutput
 # Custom imports below
+from komand.exceptions import PluginException
 import requests
 import xmltodict
 
@@ -41,9 +42,34 @@ class SubmitUrl(komand.Action):
         try:
             r = requests.post(url, files=req)
             o = xmltodict.parse(r.content)
+            out = dict(o)
+
+            #self.logger.info(out)
+            #{
+            #   "submission": {
+            #     "error": {
+            #       "error-message": "'Invalid webpage type url, url should start with http or https'"
+            #     }
+            #   }
+            #}
+            if 'submission' in out:
+                if 'error' in out['submission']:
+                    if 'error-message' in out['submission']['error']:
+                      error = out['submission']['error']['error-message']
+                      raise PluginException(cause='Received an error response from Wildfire.', assistance=f'{error}.')
+
+            # A different response occurs sometimes
+            # {'error': OrderedDict([('error-message', "'Invalid webpage type url, url should start with http or https'")])}
+            if 'error' in out:
+                if 'error-message' in out['error']:
+                  error = out['error']['error-message']
+                  raise PluginException(cause='Received an error response from Wildfire.', assistance=f'{error}.')
+                else:
+                  self.logger.info(out)
+                  raise PluginException(cause='Received an error response from Wildfire.', assistance="Check the log output for more details.")
+
             out = dict(o['wildfire']['submit-link-info'])
         except:
-            self.logger.info('Error occurred')
             raise
 
         return { 'submission': out }

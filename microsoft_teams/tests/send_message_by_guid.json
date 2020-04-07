@@ -1,0 +1,14 @@
+{
+    "body": {
+        "action": "send_message_by_guid",
+        "input": {
+            "channel_guid": "",
+            "is_html": false,
+            "message": "",
+            "team_guid": ""
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}

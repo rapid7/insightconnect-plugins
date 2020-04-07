@@ -93,7 +93,7 @@ If a literal double-quote is required it must be escaped by a backslash `\`. For
 
 # Version History
 
-* 2.0.2 - New spec and help.md format for the Hub | Refactor duplicate code | Remove returning dummy output in connection test | Refactor Exception to PluginException | Changed type in help to be the same as in plugin spec
+* 2.0.2 - New spec and help.md format for the Extension Library | Refactor duplicate code | Remove returning dummy output in connection test | Refactor Exception to PluginException | Changed type in help to be the same as in plugin spec
 * 2.0.1 - Fix issue with both actions not returning all results
 * 2.0.0 - Update action inputs to allow for multiple expressions
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability

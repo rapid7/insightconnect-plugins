@@ -484,7 +484,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 2.0.0 - Remove unwanted input fields, add comment field in action Update Ticket | Fix enum fields issue with Create Ticket action
-* 1.1.1 - New spec and help.md format for the Hub
+* 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - Updated Search action to return multiple results
 * 1.0.1 - Updated to use PyPy3 SDK
 * 1.0.0 - Add Update Ticket action and fix for documentation | Support web server mode

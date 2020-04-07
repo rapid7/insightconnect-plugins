@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SearchDbInput, SearchDbOutput, Input, Output
 # Custom imports below
 from komand_rapid7_vulndb.util import extract
 
 
-class SearchDb(komand.Action):
+class SearchDb(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

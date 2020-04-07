@@ -148,7 +148,7 @@ CSV files must not have non-CSV data such as comments.
 # Version History
 
 * 1.1.5 - Use input and output constants | Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Changed `Exception` to `PluginException`
-* 1.1.4 - New spec and help.md format for the Hub | Add missing title values for actions in plugin.spec.yaml
+* 1.1.4 - New spec and help.md format for the Extension Library | Add missing title values for actions in plugin.spec.yaml
 * 1.1.3 - Fix issue where connection tests were failing, output did not match spec
 * 1.1.2 - Support webserver mode
 * 1.1.1 - Fix JSON to CSV action to account for correct input type

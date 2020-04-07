@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import UpdateScanConfigInput, UpdateScanConfigOutput, Input, Output
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import ScanConfig
 from komand_rapid7_insightappsec.util.resource_helper import ResourceHelper
 
 
-class UpdateScanConfig(komand.Action):
+class UpdateScanConfig(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

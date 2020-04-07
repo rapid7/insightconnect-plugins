@@ -180,7 +180,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.1 - New spec and help.md format for the Hub
+* 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Fix issue to make 'service_key' required in Send Resolve Request action
 * 1.0.1 - Update to [PagerDuty REST API v2](https://v2.developer.pagerduty.com/docs/migrating-to-api-v2)
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
