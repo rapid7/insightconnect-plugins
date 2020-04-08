@@ -4,10 +4,10 @@ import komand
 from icon_azure_ad_admin import connection, actions, triggers
 
 
-Name = 'Azure AD Admin'
-Vendor = 'rapid7'
-Version = '1.4.1'
-Description = 'Perform administrative operations in Azure AD'
+Name = "Azure AD Admin"
+Vendor = "rapid7"
+Version = "2.0.0"
+Description = "Perform administrative operations in Azure AD"
 
 
 class ICONAzureAdAdmin(komand.Plugin):
@@ -36,6 +36,8 @@ class ICONAzureAdAdmin(komand.Plugin):
         self.add_action(actions.GetUserInfo())
 
         self.add_action(actions.RemoveUserFromGroup())
+
+        self.add_action(actions.UpdateUserInfo())
 
 
 def main():

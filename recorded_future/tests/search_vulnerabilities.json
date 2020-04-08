@@ -2,7 +2,9 @@
     "body": {
         "action": "search_vulnerabilities",
         "connection": {
-            "api_key": null
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {
             "direction": "asc",
