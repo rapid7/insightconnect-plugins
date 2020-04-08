@@ -4,7 +4,7 @@ products: [insightconnect]
 name: unshorten
 title: Unshorten.me
 description: Assist with phishing investigations, URL analysis, deobfuscation, and more
-version: 1.0.3
+version: 1.0.4
 vendor: rapid7
 support: community
 status: []
@@ -32,6 +32,7 @@ actions:
         description: Short URL
         type: string
         required: true
+        example: https://bit.ly/2X4meGl
     output:
       requested_url:
         title: Requested URL

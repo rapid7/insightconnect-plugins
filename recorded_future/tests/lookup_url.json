@@ -1,10 +1,15 @@
 {
     "body": {
         "action": "lookup_url",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            }
+        },
         "input": {
             "comment": "",
             "fields": [],
-            "url": "http://www.google.com"
+            "url": "http://www.example.com"
         },
         "meta": {}
     },

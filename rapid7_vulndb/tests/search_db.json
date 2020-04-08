@@ -4,7 +4,7 @@
         "connection": {},
         "input": {
             "database": "Vulnerability Database",
-            "search": "cve-123"
+            "search": "cve-2015-9542"
         },
         "meta": {}
     },
