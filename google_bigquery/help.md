@@ -76,6 +76,7 @@ _This plugin does not contain any triggers._
 ### Custom Output Types
 
 _This plugin does not contain any custom output types._
+
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
