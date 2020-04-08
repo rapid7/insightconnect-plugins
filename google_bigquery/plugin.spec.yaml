@@ -16,7 +16,7 @@ tags:
 - google
 - bigquery
 hub_tags:
-  use_cases: [query]
+  use_cases: [reporting_and_analytics]
   keywords: [google, bigquery]
   features: []
 connection:
