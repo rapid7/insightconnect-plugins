@@ -36,7 +36,7 @@ The connection configuration accepts the following parameters:
 
 #### Query
 
-This action is used to get all results from query.
+This action is used to get all results from a query.
 
 ##### Input
 
