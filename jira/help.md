@@ -19,10 +19,10 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Username and API key|None|
-|url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|Username and API key|None|None|
+|url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|None|
 
 ## Technical Details
 
@@ -34,11 +34,16 @@ This action is used to search for issues.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|get_attachments|boolean|False|False|Get attachments from issue|None|
-|jql|string|None|True|JQL search string to use|None|
-|max|integer|10|True|Max results to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|get_attachments|boolean|False|False|Get attachments from issue|None|None|
+|jql|string|None|True|JQL search string to use|None|None|
+|max|integer|10|True|Max results to return|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -72,11 +77,16 @@ This action is used to add an attachment to an issue in Jira.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|attachment_bytes|bytes|None|True|Attachment bytes|None|
-|attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|
-|id|string|None|True|Issue ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachment_bytes|bytes|None|True|Attachment bytes|None|None|
+|attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|None|
+|id|string|None|True|Issue ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -98,12 +108,17 @@ This action is used to transition an issue.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|comment|string|None|False|Comment to add|None|
-|fields|object|None|False|Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}|None|
-|id|string|None|True|Issue ID|None|
-|transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|False|Comment to add|None|None|
+|fields|object|None|False|Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}|None|None|
+|id|string|None|True|Issue ID|None|None|
+|transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -125,9 +140,14 @@ This action is used to delete a user account.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Username|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|username|string|None|True|Username|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -149,10 +169,15 @@ This action is used to assign an issue to a user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|assignee|string|None|True|Username of assignee|None|
-|id|string|None|True|Issue ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|assignee|string|None|True|Username of assignee|None|None|
+|id|string|None|True|Issue ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -174,15 +199,20 @@ This action is used to create an issue in Jira.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|attachment_bytes|bytes|None|False|Attachment bytes|None|
-|attachment_filename|string|None|False|Attachment filename|None|
-|description|string||False|Issue description|None|
-|fields|object|None|False|Custom fields to assign. Fields used must be present on the same screen as the Create screen in Jira|None|
-|project|string|None|True|Project ID|None|
-|summary|string|None|False|Issue summary|None|
-|type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachment_bytes|bytes|None|False|Attachment bytes|None|None|
+|attachment_filename|string|None|False|Attachment filename|None|None|
+|description|string||False|Issue description|None|None|
+|fields|object|None|False|Custom fields to assign. Fields used must be present on the same screen as the Create screen in Jira|None|None|
+|project|string|None|True|Project ID|None|None|
+|summary|string|None|False|Issue summary|None|None|
+|type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -217,12 +247,17 @@ This action is used to create a user account.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|Email|None|
-|notify|boolean|False|True|Notify if true|[True, False]|
-|password|string|None|False|Password|None|
-|username|string|None|True|Username|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|Email|None|None|
+|notify|boolean|False|True|Notify if true|[True, False]|None|
+|password|string|None|False|Password|None|None|
+|username|string|None|True|Username|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -244,10 +279,15 @@ This action is used to label an issue.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|Issue ID|None|
-|label|string|None|True|Label to add. To add multiple labels, separate by commas|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Issue ID|None|None|
+|label|string|None|True|Label to add. To add multiple labels, separate by commas|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -269,10 +309,19 @@ This action is used to find users.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|max|integer|10|True|Max results to return|None|
-|query|string|None|True|Query String, e.g. Joe|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|max|integer|10|True|Max results to return|None|None|
+|query|string|None|True|Query String, e.g. Joe|None|None|
+
+Example input:
+
+```
+{
+  "max": 10,
+  "query": "user@example.com"
+}
+```
 
 ##### Output
 
@@ -299,10 +348,15 @@ This action is used to comment on an issue.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|comment|string|None|True|Comment to add|None|
-|id|string|None|True|Issue ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment to add|None|None|
+|id|string|None|True|Issue ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -324,10 +378,15 @@ This action is used to retrieve an issue.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|get_attachments|boolean|False|False|Get attachments from issue|None|
-|id|string|None|True|Issue ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|get_attachments|boolean|False|False|Get attachments from issue|None|None|
+|id|string|None|True|Issue ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -559,9 +618,14 @@ This action is used to retrieve all comments on an issue.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|Issue ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Issue ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -614,14 +678,14 @@ This action is used to edit an issue within Jira.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|description|string|None|False|Description field on the issue|None|
-|fields|object|None|False|An object of fields and values to change|None|
-|id|string|None|True|Issue ID|None|
-|notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|
-|summary|string|None|False|Summary field on the issue|None|
-|update|object|None|False|An object that contains update operations to apply|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|description|string|None|False|Description field on the issue|None|None|
+|fields|object|None|False|An object of fields and values to change|None|None|
+|id|string|None|True|Issue ID|None|None|
+|notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|None|
+|summary|string|None|False|Summary field on the issue|None|None|
+|update|object|None|False|An object that contains update operations to apply|None|None|
 
 Example input:
 
@@ -662,6 +726,11 @@ Updating multiple fields with the `update` parameter
 
 Additional information can be found [here](https://developer.atlassian.com/server/jira/platform/jira-rest-api-example-edit-issues-6291632/)
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -684,12 +753,17 @@ This trigger is used to trigger which indicates that a new issue has been create
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|get_attachments|boolean|False|False|Get attachments from issue|None|
-|jql|string|None|False|JQL search string to use|None|
-|poll_timeout|integer|60|False|Timeout between next poll, default 60|None|
-|project|string|None|True|Project ID or name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|get_attachments|boolean|False|False|Get attachments from issue|None|None|
+|jql|string|None|False|JQL search string to use|None|None|
+|poll_timeout|integer|60|False|Timeout between next poll, default 60|None|None|
+|project|string|None|True|Project ID or name|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 

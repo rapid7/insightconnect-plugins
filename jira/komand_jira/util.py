@@ -76,7 +76,7 @@ def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logg
 
 def normalize_user(user, logger=logging.getLogger()):
     output = {
-        "name": user.name,
+        "name": user.name if hasattr(user, 'name') else None,
         "email_address": user.emailAddress,
         "display_name": user.displayName,
         "active": user.active,

@@ -1,12 +1,19 @@
 {
-    "body": {
-        "action": "find_users",
-        "input": {
-            "max": 10,
-            "query": "mike"
-        },
-        "meta": {}
+  "body": {
+    "action": "find_users",
+    "meta": {},
+    "input": {
+      "max": 10,
+      "query": "user@example.com"
     },
-    "type": "action_start",
-    "version": "v1"
+    "connection": {
+      "credentials": {
+        "password": null,
+        "username": null
+      },
+      "url": "https://company.atlassian.net/"
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
 }
