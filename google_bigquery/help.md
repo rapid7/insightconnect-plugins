@@ -1,6 +1,6 @@
 # Description
 
-Uses the Google BigQuery plugin to run queries on google cloud platform
+Uses the Google BigQuery plugin to run queries on Google Cloud Platform.
 
 # Key Features
 
