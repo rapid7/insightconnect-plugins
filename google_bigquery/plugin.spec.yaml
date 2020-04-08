@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: google_bigquery
 title: Google BigQuery
-description: Uses the Google BigQuery plugin to run queries on google cloud platform
+description: Uses the Google BigQuery plugin to run queries on Google Cloud Platform
 version: 1.0.0
 vendor: rapid7
 support: community
