@@ -4,7 +4,7 @@ Uses the Google BigQuery plugin to run queries on Google Cloud Platform.
 
 # Key Features
 
-* BigQuery ML
+* Run a query and return the result
 * BigQuery BI Engine
 * BigQuery GIS
 
