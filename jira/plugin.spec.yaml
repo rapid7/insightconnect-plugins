@@ -8,7 +8,7 @@ support: rapid7
 status: []
 description: Jira is an issue tracking product, developed by Atlassian. It provides
   bug tracking, issue tracking, and project management functions
-version: 4.0.2
+version: 4.0.3
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/jira
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
