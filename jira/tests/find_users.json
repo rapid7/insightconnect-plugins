@@ -7,10 +7,7 @@
       "query": "user@example.com"
     },
     "connection": {
-      "credentials": {
-        "password": null,
-        "username": null
-      },
+      "credentials": null,
       "url": "https://company.atlassian.net/"
     }
   },

@@ -4,6 +4,10 @@
         "input": {
             "username": ""
         },
+        "connection": {
+          "credentials": null,
+          "url": "https://company.atlassian.net/"
+        },
         "meta": {}
     },
     "type": "action_start",

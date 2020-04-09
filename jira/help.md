@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and API key|None|None|
-|url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|None|
+|url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|https://company.atlassian.net|
 
 ## Technical Details
 
@@ -36,13 +36,17 @@ This action is used to search for issues.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|get_attachments|boolean|False|False|Get attachments from issue|None|None|
-|jql|string|None|True|JQL search string to use|None|None|
-|max|integer|10|True|Max results to return|None|None|
+|get_attachments|boolean|False|False|Get attachments from issue|None|True|
+|jql|string|None|True|JQL search string to use|None|project = "TEST"|
+|max|integer|10|True|Max results to return|None|10|
 
 Example input:
 
 ```
+{
+  "jql": "asdf",
+  "max": 1
+}
 ```
 
 ##### Output
@@ -79,13 +83,18 @@ This action is used to add an attachment to an issue in Jira.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|attachment_bytes|bytes|None|True|Attachment bytes|None|None|
-|attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|None|
-|id|string|None|True|Issue ID|None|None|
+|attachment_bytes|bytes|None|True|Attachment bytes|None|dGVzdA==|
+|attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|test|
+|id|string|None|True|Issue ID|None|10001|
 
 Example input:
 
 ```
+{
+  "attachment_bytes": "dGVzdA==",
+  "attachment_filename": "test",
+  "id": "10001"
+}
 ```
 
 ##### Output
@@ -110,14 +119,19 @@ This action is used to transition an issue.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|None|False|Comment to add|None|None|
-|fields|object|None|False|Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}|None|None|
-|id|string|None|True|Issue ID|None|None|
-|transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|None|
+|comment|string|None|False|Comment to add|None|test|
+|fields|object|None|False|Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}|None|{}|
+|id|string|None|True|Issue ID|None|10001|
+|transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|31|
 
 Example input:
 
 ```
+{
+  "comment": "test",
+  "id": "10001",
+  "transition": "31"
+}
 ```
 
 ##### Output
@@ -142,11 +156,14 @@ This action is used to delete a user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|username|string|None|True|Username|None|None|
+|username|string|None|True|Username|None|username|
 
 Example input:
 
 ```
+{
+  "username": "test1"
+}
 ```
 
 ##### Output
@@ -171,12 +188,16 @@ This action is used to assign an issue to a user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee|string|None|True|Username of assignee|None|None|
-|id|string|None|True|Issue ID|None|None|
+|assignee|string|None|True|Username of assignee|None|me|
+|id|string|None|True|Issue ID|None|10001|
 
 Example input:
 
 ```
+{
+  "assignee": "me",
+  "id": "10001"
+}
 ```
 
 ##### Output
@@ -201,17 +222,26 @@ This action is used to create an issue in Jira.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|attachment_bytes|bytes|None|False|Attachment bytes|None|None|
-|attachment_filename|string|None|False|Attachment filename|None|None|
-|description|string||False|Issue description|None|None|
-|fields|object|None|False|Custom fields to assign. Fields used must be present on the same screen as the Create screen in Jira|None|None|
-|project|string|None|True|Project ID|None|None|
-|summary|string|None|False|Issue summary|None|None|
-|type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|None|
+|attachment_bytes|bytes|None|False|Attachment bytes|None|dGVzdA==|
+|attachment_filename|string|None|False|Attachment filename|None|test|
+|description|string||False|Issue description|None|description|
+|fields|object|None|False|Custom fields to assign. Fields used must be present on the same screen as the Create screen in Jira|None|{}|
+|project|string|None|True|Project ID|None|TEST|
+|summary|string|None|False|Issue summary|None|summary|
+|type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|Bug|
 
 Example input:
 
 ```
+{
+  "attachment_bytes": "",
+  "attachment_filename": "",
+  "description": "Test test",
+  "fields": {},
+  "project": "TEST",
+  "summary": "Test issue",
+  "type": "Story"
+}
 ```
 
 ##### Output
@@ -224,17 +254,18 @@ Example output:
 
 ```
 {
+  "attachments": [],
   "id": "10001",
-  "key": "PT-2",
-  "url": "https://komand-demo2.atlassian.net/browse/PT-2",
-  "summary": "Test ticket for the plugin-test project",
-  "description": "A test ticket",
-  "status": "To Do",
+  "key": "TEST-2",
+  "url": "https://morecode-test2.atlassian.net/browse/TEST-2",
+  "summary": "Test issue",
+  "description": "Test test",
+  "status": "Backlog",
   "resolution": "",
-  "reporter": "Mike Rinehart",
+  "reporter": "Mateusz Górny",
   "assignee": "",
-  "created_at": "2018-10-29T12:58:11.222-0500",
-  "updated_at": "2018-10-29T12:58:11.222-0500",
+  "created_at": "2020-04-09T23:08:00.782+0200",
+  "updated_at": "2020-04-09T23:08:00.782+0200",
   "resolved_at": "",
   "labels": [],
   "fields": {}
@@ -249,14 +280,20 @@ This action is used to create a user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|email|string|None|True|Email|None|None|
-|notify|boolean|False|True|Notify if true|[True, False]|None|
-|password|string|None|False|Password|None|None|
-|username|string|None|True|Username|None|None|
+|email|string|None|True|Email|None|user@example.com|
+|notify|boolean|False|True|Notify if true|[True, False]|False|
+|password|string|None|False|Password|None|password|
+|username|string|None|True|Username|None|username|
 
 Example input:
 
 ```
+{
+  "email": "user@example.com",
+  "notify": false,
+  "password": "test",
+  "username": "test1"
+}
 ```
 
 ##### Output
@@ -281,12 +318,16 @@ This action is used to label an issue.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Issue ID|None|None|
-|label|string|None|True|Label to add. To add multiple labels, separate by commas|None|None|
+|id|string|None|True|Issue ID|None|10001|
+|label|string|None|True|Label to add. To add multiple labels, separate by commas|None|label|
 
 Example input:
 
 ```
+{
+  "id": "10001",
+  "label": "test"
+}
 ```
 
 ##### Output
@@ -311,8 +352,8 @@ This action is used to find users.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|max|integer|10|True|Max results to return|None|None|
-|query|string|None|True|Query String, e.g. Joe|None|None|
+|max|integer|10|True|Max results to return|None|10|
+|query|string|None|True|Query String, e.g. Joe|None|Joe|
 
 Example input:
 
@@ -350,12 +391,16 @@ This action is used to comment on an issue.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|None|True|Comment to add|None|None|
-|id|string|None|True|Issue ID|None|None|
+|comment|string|None|True|Comment to add|None|comment|
+|id|string|None|True|Issue ID|None|10001|
 
 Example input:
 
 ```
+{
+  "comment": "new comment",
+  "id": "10001"
+}
 ```
 
 ##### Output
@@ -368,7 +413,7 @@ Example output:
 
 ```
 {
-  "comment_id": "10000"
+  "comment_id": "10001"
 }
 ```
 
@@ -380,12 +425,15 @@ This action is used to retrieve an issue.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|get_attachments|boolean|False|False|Get attachments from issue|None|None|
-|id|string|None|True|Issue ID|None|None|
+|get_attachments|boolean|False|False|Get attachments from issue|None|False|
+|id|string|None|True|Issue ID|None|TEST-1|
 
 Example input:
 
 ```
+{
+  "id": "PT-2"
+}
 ```
 
 ##### Output
@@ -620,11 +668,14 @@ This action is used to retrieve all comments on an issue.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Issue ID|None|None|
+|id|string|None|True|Issue ID|None|TEST-1|
 
 Example input:
 
 ```
+{
+  "id": "PT-2"
+}
 ```
 
 ##### Output
@@ -680,12 +731,12 @@ This action is used to edit an issue within Jira.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|description|string|None|False|Description field on the issue|None|None|
-|fields|object|None|False|An object of fields and values to change|None|None|
-|id|string|None|True|Issue ID|None|None|
-|notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|None|
-|summary|string|None|False|Summary field on the issue|None|None|
-|update|object|None|False|An object that contains update operations to apply|None|None|
+|description|string|None|False|Description field on the issue|None|description|
+|fields|object|None|False|An object of fields and values to change|None|{}|
+|id|string|None|True|Issue ID|None|TEST-1|
+|notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|False|
+|summary|string|None|False|Summary field on the issue|None|summary|
+|update|object|None|False|An object that contains update operations to apply|None|{}|
 
 Example input:
 
@@ -729,6 +780,13 @@ Additional information can be found [here](https://developer.atlassian.com/serve
 Example input:
 
 ```
+{
+  "description": "Updated from Komand",
+  "fields": {},
+  "id": "TEST-1",
+  "notify": true,
+  "update": {}
+}
 ```
 
 ##### Output
@@ -755,14 +813,17 @@ This trigger is used to trigger which indicates that a new issue has been create
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|get_attachments|boolean|False|False|Get attachments from issue|None|None|
-|jql|string|None|False|JQL search string to use|None|None|
-|poll_timeout|integer|60|False|Timeout between next poll, default 60|None|None|
-|project|string|None|True|Project ID or name|None|None|
+|get_attachments|boolean|False|False|Get attachments from issue|None|False|
+|jql|string|None|False|JQL search string to use|None|project = "TEST"|
+|poll_timeout|integer|60|False|Timeout between next poll, default 60|None|60|
+|project|string|None|True|Project ID or name|None|TEST|
 
 Example input:
 
 ```
+{
+  "jql": 'project = "TEST"'
+}
 ```
 
 ##### Output
@@ -998,7 +1059,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
-* 4.0.3 - Fix user enumeration  in `Find Users`
+* 4.0.3 - Fix user enumeration  in `Find Users` | Add example input | Fix title names to upper case
 * 4.0.2 - Moved `apk add` in Dockerfile to use cache | Changed bare strings in params.get and output to static fields from schema | Remove duplicated code in actions | Changed `Exception` to `PluginException`
 * 3.2.1 - Update Get Issue, Find Issues and New Issue action to support a Get Attachments option
 * 3.2.0 - Update Transition Issue action to allow for assignment of fields during issue transition

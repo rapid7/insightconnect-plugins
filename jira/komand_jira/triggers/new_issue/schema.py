@@ -41,7 +41,7 @@ class NewIssueInput(komand.Input):
     },
     "poll_timeout": {
       "type": "integer",
-      "title": "Poll timeout",
+      "title": "Poll Timeout",
       "description": "Timeout between next poll, default 60",
       "default": 60,
       "order": 4
