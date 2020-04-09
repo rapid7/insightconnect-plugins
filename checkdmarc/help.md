@@ -35,7 +35,7 @@ Example input:
 
 ```
 {
-  "domain": "whitehouse.gov",
+  "domain": "example.com",
   "timeout": 10.0
 }
 ```
