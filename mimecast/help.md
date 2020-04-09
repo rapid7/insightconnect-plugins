@@ -207,7 +207,7 @@ Example input:
 {
   "action": "block",
   "sender": "user@example.com",
-  "to": ""
+  "to": "user@rapid7.com"
 }
 ```
 
