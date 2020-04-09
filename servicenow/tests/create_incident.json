@@ -6,13 +6,6 @@
       "create_data": {
         "short_description": "Short description"
       }
-    },
-    "connection": {
-      "client_login": {
-        "username": "integrations",
-        "password": "9d$QTtIUFfNfch[9an$c+("
-      },
-      "url": "https://ven01226.service-now.com"
     }
   },
   "type": "action_start",
