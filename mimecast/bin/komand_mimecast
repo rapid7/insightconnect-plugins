@@ -4,10 +4,10 @@ import komand
 from komand_mimecast import connection, actions, triggers
 
 
-Name = 'Mimecast'
-Vendor = 'rapid7'
-Version = '4.0.0'
-Description = 'Services for email security, archiving and continuity. Protect, manage and archive without compromise'
+Name = "Mimecast"
+Vendor = "rapid7"
+Version = "4.0.0"
+Description = "Services for email security, archiving and continuity. Protect, manage and archive without compromise"
 
 
 class ICONMimecast(komand.Plugin):
