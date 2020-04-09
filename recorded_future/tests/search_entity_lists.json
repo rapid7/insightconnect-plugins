@@ -2,10 +2,12 @@
     "body": {
         "action": "search_entity_lists",
         "connection": {
-            "api_key": null
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {
-            "freetext": "Malware"
+            "freetext": "example"
         },
         "meta": {}
     },
