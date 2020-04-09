@@ -10,4 +10,3 @@ class Connection(komand.Connection):
 
     def connect(self, params):
         pass
-
