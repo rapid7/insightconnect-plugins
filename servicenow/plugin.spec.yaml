@@ -94,6 +94,11 @@ actions:
         description: System ID of the new Incident created
         type: string
         required: true
+      number:
+        title: Incident Number
+        description: Incident ticket number
+        type: string
+        required: true
   search_incident:
     title: Search Incident
     description: Search for Incidents satisfying the given query

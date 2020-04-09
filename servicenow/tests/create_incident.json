@@ -9,10 +9,10 @@
     },
     "connection": {
       "client_login": {
-        "username": "",
-        "password": ""
+        "username": "integrations",
+        "password": "9d$QTtIUFfNfch[9an$c+("
       },
-      "url": ""
+      "url": "https://ven01226.service-now.com"
     }
   },
   "type": "action_start",

@@ -4,10 +4,10 @@ import komand
 from icon_servicenow import connection, actions, triggers
 
 
-Name = 'ServiceNow'
-Vendor = 'rapid7'
-Version = '3.1.1'
-Description = 'ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes'
+Name = "ServiceNow"
+Vendor = "rapid7"
+Version = "3.1.1"
+Description = "ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes"
 
 
 class ICONServicenow(komand.Plugin):

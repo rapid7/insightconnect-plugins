@@ -21,11 +21,11 @@ Note: This plugin affects only the underlying tables in a ServiceNow instance, n
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|client_login|credential_username_password|None|True|The ServiceNow username and password for basic authentication API interaction|None|
-|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|
-|url|string|None|True|The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|client_login|credential_username_password|None|True|The ServiceNow username and password for basic authentication API interaction|None|None|
+|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|None|
+|url|string|None|True|The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com|None|None|
 
 ## Technical Details
 
@@ -37,10 +37,15 @@ This action is used to create a new ServiceNow CI record.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|create_data|object|None|True|JSON object containing the fields and values to create a new CI|None|
-|table|string|None|True|The ServiceNow table where the new CI record will be inserted|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|create_data|object|None|True|JSON object containing the fields and values to create a new CI|None|None|
+|table|string|None|True|The ServiceNow table where the new CI record will be inserted|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -62,14 +67,20 @@ This action is used to create a new ServiceNow Incident record.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|create_data|object|None|False|JSON object containing the fields and values to create a new incident|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|create_data|object|None|False|JSON object containing the fields and values to create a new incident|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|number|string|True|Incident ticket number|
 |system_id|string|True|System ID of the new Incident created|
 
 Example output:
@@ -86,9 +97,14 @@ This action is used to remove the given ServiceNow Incident from the instance.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|system_id|string|None|True|System ID of the Incident record to delete|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|system_id|string|None|True|System ID of the Incident record to delete|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -110,9 +126,14 @@ This action is used to remove the given attachment from the ServiceNow instance.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|attachment_id|string|None|True|System ID of the attachment to delete|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachment_id|string|None|True|System ID of the attachment to delete|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -134,16 +155,21 @@ This action is used to retrieve a ServiceNow CI record based on provided query.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|Non-encoded query string for retrieving ServiceNow CI record(s) (e.g. number=INC0000055^ORshort_description=New bug)|None|
-|table|string|None|True|The ServiceNow table to execute the query against|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|system_id|string|None|True|The system ID of the record to retrieve|None|None|
+|table|string|None|True|The ServiceNow table to retrieve the CI from|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|servicenow_ci|object|True|JSON object representing the CI record(s) returned by the query|
+|servicenow_ci|object|True|JSON object representing the CI record returned|
 
 Example output:
 
@@ -204,9 +230,14 @@ This action is used to download the Base64-encoded contents of the given attachm
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|attachment_id|string|None|True|System ID of the attachment to copy|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachment_id|string|None|True|System ID of the attachment to copy|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -228,13 +259,18 @@ This action is used to associate a file with a ServiceNow Incident.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|attachment_name|string|None|True|Name of the attachment in the ServiceNow instance|None|
-|base64_content|bytes|None|True|Content of the attachment, encoded into Base64|None|
-|mime_type|string|None|True|MIME type (a.k.a. content type) of the file to be attached|['text/plain (.txt)', 'text/html (.html)', 'application/rtf (.rtf)', 'application/pdf (.pdf)', 'application/msword (.doc)', 'application/vnd.ms-powerpoint (.ppt)', 'image/bmp (.bmp)', 'image/gif (.gif)', 'image/jpeg (.jpg)', 'image/png (.png)', 'image/tiff (.tiff)', 'OTHER']|
-|other_mime_type|string|None|False|User-specified MIME type not in the enumerated list|None|
-|system_id|string|None|True|System ID of the Incident record to which the file will be attached|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachment_name|string|None|True|Name of the attachment in the ServiceNow instance|None|None|
+|base64_content|bytes|None|True|Content of the attachment, encoded into Base64|None|None|
+|mime_type|string|None|True|MIME type (a.k.a. content type) of the file to be attached|['text/plain (.txt)', 'text/html (.html)', 'application/rtf (.rtf)', 'application/pdf (.pdf)', 'application/msword (.doc)', 'application/vnd.ms-powerpoint (.ppt)', 'image/bmp (.bmp)', 'image/gif (.gif)', 'image/jpeg (.jpg)', 'image/png (.png)', 'image/tiff (.tiff)', 'OTHER']|None|
+|other_mime_type|string|None|False|User-specified MIME type not in the enumerated list|None|None|
+|system_id|string|None|True|System ID of the Incident record to which the file will be attached|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -256,10 +292,15 @@ This action is used to populate a JSON object with the specified fields of the g
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filtering_fields|string|None|True|Comma-separated list of fields desired in output object (e.g. opened_by,number)|None|
-|system_id|string|None|True|System ID of the Incident record from which to read|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filtering_fields|string|None|True|Comma-separated list of fields desired in output object (e.g. opened_by,number)|None|None|
+|system_id|string|None|True|System ID of the Incident record from which to read|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -284,10 +325,15 @@ This action is used to retrieve CI record(s) from ServiceNow based on the provid
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|Non-encoded query string for retrieving ServiceNow CI record(s) (e.g. number=INC0000055^ORshort_description=New bug)|None|
-|table|string|None|True|The ServiceNow table to execute the query against|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|Non-encoded query string for retrieving ServiceNow CI record(s) (e.g. number=INC0000055^ORshort_description=New bug)|None|None|
+|table|string|None|True|The ServiceNow table to execute the query against|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -359,9 +405,14 @@ This action is used to search for Incidents satisfying the given query.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|Non-encoded query string (e.g. number=INC0000055^ORshort_description=New bug)|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|Non-encoded query string (e.g. number=INC0000055^ORshort_description=New bug)|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -390,9 +441,14 @@ This action is used to search for attachment files with the given name.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|name|string|None|True|Name of the attachment, i.e. the base file name used to create it|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|Name of the attachment, i.e. the base file name used to create it|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -418,11 +474,16 @@ This action is used to update an existing ServiceNow CI record.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|system_id|string|None|True|System ID of the CI record to update|None|
-|table|string|None|True|The ServiceNow table where the CI record will be updated|None|
-|update_data|object|None|True|JSON object containing the fields and values to perform a CI update|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|system_id|string|None|True|System ID of the CI record to update|None|None|
+|table|string|None|True|The ServiceNow table where the CI record will be updated|None|None|
+|update_data|object|None|True|JSON object containing the fields and values to perform a CI update|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -444,10 +505,15 @@ This action is used to update a ServiceNow Incident with the given data.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|system_id|string|None|True|System ID of the Incident record to update|None|
-|update_data|object|None|True|JSON object containing the fields and values to update|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|system_id|string|None|True|System ID of the Incident record to update|None|None|
+|update_data|object|None|True|JSON object containing the fields and values to update|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -469,10 +535,15 @@ This action is used to get comments and work notes for an incident.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|system_id|string|None|True|System ID of Incident record for which comments and work notes will be retrieved|None|
-|type|string|None|True|Type of output to be retrieved|['all', 'comments', 'work notes']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|system_id|string|None|True|System ID of Incident record for which comments and work notes will be retrieved|None|None|
+|type|string|None|True|Type of output to be retrieved|['all', 'comments', 'work notes']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -527,11 +598,16 @@ This trigger reports changes of the given fields in the given Incident.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|interval|integer|5|False|How often to detect changes to the given Incident (in minutes)|None|
-|monitored_fields|string|None|True|Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)|None|
-|system_id|string|None|True|System ID of the Incident record to monitor|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|interval|integer|5|False|How often to detect changes to the given Incident (in minutes)|None|None|
+|monitored_fields|string|None|True|Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)|None|None|
+|system_id|string|None|True|System ID of the Incident record to monitor|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -561,6 +637,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.2 - New Number output to create incidient action
 * 3.1.1 - New spec and help.md format for the Extension Library
 * 3.1.0 - Add action Get Incident Comments and Work Notes
 * 3.0.0 - Rewrite in Python | Renamed incident specific actions | New actions Create CI, Get CI, Update CI, Search CI
