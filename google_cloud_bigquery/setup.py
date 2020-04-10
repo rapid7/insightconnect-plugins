@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name="google_bigquery-rapid7-plugin",
+setup(name="google_cloud_bigquery-rapid7-plugin",
       version="1.0.0",
-      description="Uses the Google BigQuery plugin to run queries on google cloud platform",
+      description="Uses the Google BigQuery plugin to run queries on Google Cloud Platform",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
       install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/icon_google_bigquery']
+      scripts=['bin/icon_google_cloud_bigquery']
       )

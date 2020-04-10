@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |client_email|string|None|True|Client email from service credentials|None|user@example.com|
 |client_id|string|None|True|Client ID|None|111111111111111111111|
 |client_x509_cert_url|string|None|True|Client certificate URL from service credentials|None|https://www.googleapis.com/robot/v1/metadata/x509/user%40example.com|
-|private_key|credential_asymmetric_key|None|True|Private Key from service credentials|None|{"privateKey": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBEFENByuihkiY9w0BAQAZAAAAAAbb3AbHDbS09uUlXOLPH\n+AAAAAAA1bbAAAAAbAbb11=\n-----END PRIVATE KEY-----\n}|
+|private_key|credential_asymmetric_key|None|True|Private Key from service credentials|None|{"privateKey": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBEFENByuihkiY9w0BAQAZAAAAAAbb3AbHDbS09uUlXOLPH\n+AAAAAAA1bbAAAAAbAbb11=\n-----END PRIVATE KEY-----\n"}|
 |private_key_id|string|None|True|Private Key ID from service credentials|None|18181818e18181c181d1e18cee1b8e18c1818d1a|
 |project_id|string|None|True|Project ID from service credentials|None|spherical-voice-171717|
 |token_uri|string|https://oauth2.googleapis.com/token|False|OAUTH2 Token URI|None|https://oauth2.googleapis.com/token|
