@@ -19,7 +19,7 @@ class DomainList(komand.Action):
         days_back = params.get(Input.DAYS_BACK, None)
 
         if query not in self.connection.terms:
-            raise PluginException(cause="Query not in terms.",
+            raise PluginException(cause="Query term not enabled in PhishEye product.",
                                   assistance=f"Allowed terms: {self.connection.terms}.")
 
         response = Helper.make_request(self.connection.api.phisheye, self.logger, query, days_back)
