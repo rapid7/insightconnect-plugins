@@ -1059,7 +1059,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
-* 4.0.3 - Fix user enumeration  in `Find Users` | Add example input | Fix title names to upper case
+* 5.0.0 - Fix user enumeration  in `Find Users` | Add example input | Update titles of Attachment Filename input in Attach Issue action and Poll Timeout input in New Issue trigger to match style
 * 4.0.2 - Moved `apk add` in Dockerfile to use cache | Changed bare strings in params.get and output to static fields from schema | Remove duplicated code in actions | Changed `Exception` to `PluginException`
 * 3.2.1 - Update Get Issue, Find Issues and New Issue action to support a Get Attachments option
 * 3.2.0 - Update Transition Issue action to allow for assignment of fields during issue transition
