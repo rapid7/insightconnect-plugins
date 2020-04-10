@@ -1,7 +1,7 @@
 {
-	"spec": "5551af5985a8134963b730ec72b47074",
-	"manifest": "58432d4ecae3d14974b4953b4944e16a",
-	"setup": "628ad31181211cef76f8514f22b9ca54",
+	"spec": "1cd3e9b166a33b14602f7689c4260f9e",
+	"manifest": "f0d18cbf11970b5f54ab0bfeff08665d",
+	"setup": "59baf12e32ff60915661bba38f0c4353",
 	"schemas": [
 		{
 			"identifier": "add_group_member/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "decode_url/schema.py",
-			"hash": "d7bd6535b42a6511f21458bfe0c65497"
+			"hash": "03c533a16c13721e83efa67f22fb51f1"
 		},
 		{
 			"identifier": "delete_group_member/schema.py",
