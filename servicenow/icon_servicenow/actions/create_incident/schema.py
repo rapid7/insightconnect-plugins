@@ -12,6 +12,7 @@ class Input:
     
 
 class Output:
+    NUMBER = "number"
     SYSTEM_ID = "system_id"
     
 
@@ -41,6 +42,12 @@ class CreateIncidentOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "number": {
+      "type": "string",
+      "title": "Incident Number",
+      "description": "Incident ticket number",
+      "order": 2
+    },
     "system_id": {
       "type": "string",
       "title": "System ID",
@@ -49,6 +56,7 @@ class CreateIncidentOutput(komand.Output):
     }
   },
   "required": [
+    "number",
     "system_id"
   ]
 }
