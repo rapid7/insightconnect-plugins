@@ -151,14 +151,14 @@ actions:
         type: string
         description: Comment to add
         required: false
-        example: test
+        example: "Transition executed by InsightConnect"
       fields:
         title: Fields
         type: object
         description: 'Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type
            e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}'
         required: false
-        example: '{}'
+        example: '{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }'
     output:
       success:
         title: Success
@@ -210,7 +210,7 @@ actions:
         type: string
         description: Username of assignee
         required: true
-        example: me
+        example: user1
     output:
       success:
         title: Success
@@ -232,7 +232,7 @@ actions:
         type: string
         description: Label to add. To add multiple labels, separate by commas
         required: true
-        example: label
+        example: documentation
     output:
       success:
         title: Success
@@ -275,7 +275,7 @@ actions:
         type: string
         description: Comment to add
         required: true
-        example: comment
+        example: "This comment was added by InsightConnect"
     output:
       comment_id:
         title: Comment ID
@@ -342,7 +342,7 @@ actions:
         type: string
         description: Username
         required: true
-        example: username
+        example: user1
     output:
       success:
         title: Success
@@ -358,19 +358,19 @@ actions:
         type: string
         description: Username
         required: true
-        example: username
+        example: user1
       email:
         title: Email
         type: string
         description: Email
         required: true
-        example: user@example.com
+        example: user1@example.com
       password:
         title: Password
         type: string
         description: Password
         required: false
-        example: password
+        example: mypassword
       notify:
         title: Notify
         type: boolean
@@ -402,13 +402,13 @@ actions:
         type: bytes
         description: Attachment bytes
         required: true
-        example: dGVzdA==
+        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
       attachment_filename:
         title: Attachment Filename
         type: string
         description: Attachment filename. Must end with a filetype extension if possible
         required: true
-        example: test
+        example: document.pdf
     output:
       id:
         title: ID
@@ -424,7 +424,7 @@ actions:
         type: string
         description: Issue summary
         required: false
-        example: summary
+        example: "Connect Jira to InsightConnect"
       type:
         title: Type
         type: string
@@ -432,14 +432,14 @@ actions:
           You can also specify a custom issue type. This input is case-sensitive
         default: Task
         required: false
-        example: Bug
+        example: Story
       description:
         title: Description
         type: string
         description: Issue description
         required: false
         default: ''
-        example: description
+        example: "Successfully connect Jira to InsightConnect to automate ticket management"
       project:
         title: Project
         description: Project ID
@@ -452,19 +452,19 @@ actions:
         description: Custom fields to assign. Fields used must be present on the same
           screen as the Create screen in Jira
         required: false
-        example: '{}'
+        example: '{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }'
       attachment_bytes:
         title: Attachment Bytes
         type: bytes
         description: Attachment bytes
         required: false
-        example: dGVzdA==
+        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
       attachment_filename:
         title: Attachment Filename
         type: string
         description: Attachment filename
         required: false
-        example: test
+        example: document.pdf
     output:
       issue:
         title: Issue
@@ -493,25 +493,25 @@ actions:
         description: Summary field on the issue
         type: string
         required: false
-        example: summary
+        example: "Connect Jira to InsightConnect for Multiple Teams"
       description:
         title: Description
         description: Description field on the issue
         type: string
         required: false
-        example: description
+        example: "Update ticket with additional Jira information for others teams wanting to leverage InsightConnect"
       fields:
         title: Fields
         description: An object of fields and values to change
         type: object
         required: false
-        example: '{}'
+        example: '{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }'
       update:
         title: Update
-        description:  An object that contains update operations to apply
+        description:  An object that contains update operations to apply, seem examples at https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/
         type: object
         required: false
-        example: '{}'
+        example: '{ "update": { "labels": [ {"add": "newlabel"} ] } }'
     output:
       success:
         title: Success

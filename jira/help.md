@@ -134,6 +134,23 @@ Example input:
 }
 ```
 
+Example fields input:
+
+```
+{
+  "fields": {
+    "project": {
+      "key": "TEST"
+    },
+    "summary": "Test Ticket",
+    "description": "Test ticket created from InsightConnect",
+    "issuetype": {
+      "name": "Story"
+    }
+  }
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -241,6 +258,23 @@ Example input:
   "project": "TEST",
   "summary": "Test issue",
   "type": "Story"
+}
+```
+
+Example `fields` input:
+
+```
+{
+  "fields": {
+    "project": {
+      "key": "TEST"
+    },
+    "summary": "Test Ticket",
+    "description": "Test ticket created from InsightConnect",
+    "issuetype": {
+      "name": "Story"
+    }
+  }
 }
 ```
 
@@ -725,7 +759,7 @@ Example output:
 
 #### Edit Issue
 
-This action is used to edit an issue within Jira.
+This action is used to edit an issue within Jira. See https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/
 
 ##### Input
 
@@ -1055,7 +1089,7 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-#
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
@@ -1087,4 +1121,3 @@ _This plugin does not contain any custom output types._
 ## References
 
 * [Jira](https://www.atlassian.com/software/jira)
-
