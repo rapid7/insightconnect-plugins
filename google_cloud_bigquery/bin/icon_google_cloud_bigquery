@@ -4,10 +4,10 @@ import insightconnect_plugin_runtime
 from icon_google_cloud_bigquery import connection, actions, triggers
 
 
-Name = "Google BigQuery"
+Name = "Google Cloud BigQuery"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "Uses the Google BigQuery plugin to run queries on Google Cloud Platform"
+Description = "Uses the Google Cloud BigQuery plugin to run queries on Google Cloud Platform"
 
 
 class ICONGoogleCloudBigquery(insightconnect_plugin_runtime.Plugin):

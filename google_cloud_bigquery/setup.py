@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="google_cloud_bigquery-rapid7-plugin",
       version="1.0.0",
-      description="Uses the Google BigQuery plugin to run queries on Google Cloud Platform",
+      description="Uses the Google Cloud BigQuery plugin to run queries on Google Cloud Platform",
       author="rapid7",
       author_email="",
       url="",

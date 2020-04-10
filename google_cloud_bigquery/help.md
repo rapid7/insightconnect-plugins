@@ -66,7 +66,6 @@ Example output:
     {"fruit": "apple", "vegetable": "carrot"}
   ]
 }
-
 ```
 
 ### Triggers
