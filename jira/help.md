@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and API key|None|None|
+|credentials|credential_username_password|None|True|Username and API key|None|{ "username": "user1", "password":"yB3KwjqqUainTz6FD6nN78C"}|
 |url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|https://company.atlassian.net|
 
 ## Technical Details
@@ -83,8 +83,8 @@ This action is used to add an attachment to an issue in Jira.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|attachment_bytes|bytes|None|True|Attachment bytes|None|dGVzdA==|
-|attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|test|
+|attachment_bytes|bytes|None|True|Attachment bytes|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
+|attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|document.pdf|
 |id|string|None|True|Issue ID|None|10001|
 
 Example input:
@@ -113,14 +113,14 @@ Example output:
 
 #### Transition Issue
 
-This action is used to transition an issue.
+This action is used to transition an issue.  For `fields` examples, see https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|None|False|Comment to add|None|test|
-|fields|object|None|False|Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}|None|{}|
+|comment|string|None|False|Comment to add|None|Transition executed by InsightConnect|
+|fields|object|None|False|Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|
 |id|string|None|True|Issue ID|None|10001|
 |transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|31|
 
@@ -173,7 +173,7 @@ This action is used to delete a user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|username|string|None|True|Username|None|username|
+|username|string|None|True|Username|None|user1|
 
 Example input:
 
@@ -205,7 +205,7 @@ This action is used to assign an issue to a user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee|string|None|True|Username of assignee|None|me|
+|assignee|string|None|True|Username of assignee|None|user1|
 |id|string|None|True|Issue ID|None|10001|
 
 Example input:
@@ -233,19 +233,19 @@ Example output:
 
 #### Create Issue
 
-This action is used to create an issue in Jira.
+This action is used to create an issue in Jira.  For `fields` examples, see https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|attachment_bytes|bytes|None|False|Attachment bytes|None|dGVzdA==|
-|attachment_filename|string|None|False|Attachment filename|None|test|
-|description|string||False|Issue description|None|description|
-|fields|object|None|False|Custom fields to assign. Fields used must be present on the same screen as the Create screen in Jira|None|{}|
+|attachment_bytes|bytes|None|False|Attachment bytes|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
+|attachment_filename|string|None|False|Attachment filename|None|document.pdf|
+|description|string||False|Issue description|None|Successfully connect Jira to InsightConnect to automate ticket management|
+|fields|object|None|False|Custom fields to assign. Fields used must be present on the same screen as the Create screen in Jira|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|
 |project|string|None|True|Project ID|None|TEST|
-|summary|string|None|False|Issue summary|None|summary|
-|type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|Bug|
+|summary|string|None|False|Issue summary|None|Connect Jira to InsightConnect|
+|type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|Story|
 
 Example input:
 
@@ -314,10 +314,10 @@ This action is used to create a user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|email|string|None|True|Email|None|user@example.com|
+|email|string|None|True|Email|None|user1@example.com|
 |notify|boolean|False|True|Notify if true|[True, False]|False|
-|password|string|None|False|Password|None|password|
-|username|string|None|True|Username|None|username|
+|password|string|None|False|Password|None|mypassword|
+|username|string|None|True|Username|None|user1|
 
 Example input:
 
@@ -353,7 +353,7 @@ This action is used to label an issue.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Issue ID|None|10001|
-|label|string|None|True|Label to add. To add multiple labels, separate by commas|None|label|
+|label|string|None|True|Label to add. To add multiple labels, separate by commas|None|documentation|
 
 Example input:
 
@@ -425,7 +425,7 @@ This action is used to comment on an issue.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|None|True|Comment to add|None|comment|
+|comment|string|None|True|Comment to add|None|This comment was added by InsightConnect|
 |id|string|None|True|Issue ID|None|10001|
 
 Example input:
@@ -759,18 +759,19 @@ Example output:
 
 #### Edit Issue
 
-This action is used to edit an issue within Jira. See https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/
+This action is used to edit an issue within Jira. See https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/ for `update` examples.
+For `fields` examples, see https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|description|string|None|False|Description field on the issue|None|description|
-|fields|object|None|False|An object of fields and values to change|None|{}|
+|description|string|None|False|Description field on the issue|None|Update ticket with additional Jira information for others teams wanting to leverage InsightConnect|
+|fields|object|None|False|An object of fields and values to change|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|
 |id|string|None|True|Issue ID|None|TEST-1|
 |notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|False|
-|summary|string|None|False|Summary field on the issue|None|summary|
-|update|object|None|False|An object that contains update operations to apply|None|{}|
+|summary|string|None|False|Summary field on the issue|None|Connect Jira to InsightConnect for Multiple Teams|
+|update|object|None|False|An object that contains update operations to apply, see examples at https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/|None|{ "update": { "labels": [ {"add": "newlabel"} ] } }|
 
 Example input:
 

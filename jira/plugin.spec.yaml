@@ -129,6 +129,7 @@ connection:
     type: credential_username_password
     description: Username and API key
     required: true
+    example: '{ "username": "user1", "password":"yB3KwjqqUainTz6FD6nN78C"}'
 actions:
   transition_issue:
     title: Transition Issue
@@ -508,7 +509,7 @@ actions:
         example: '{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }'
       update:
         title: Update
-        description:  An object that contains update operations to apply, seem examples at https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/
+        description:  An object that contains update operations to apply, see examples at https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/
         type: object
         required: false
         example: '{ "update": { "labels": [ {"add": "newlabel"} ] } }'
