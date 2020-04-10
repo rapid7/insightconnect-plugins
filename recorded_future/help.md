@@ -12,7 +12,7 @@ returned in the [STIX](https://stixproject.github.io/about/) format.
 
 # Key Features
 
-* Search domain lists
+* Search domain and IP lists
 * Download risk lists
 * Lookup and search hashes
 
