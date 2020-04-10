@@ -20,7 +20,7 @@ class DomainList(komand.Action):
 
         if query not in self.connection.terms:
             raise PluginException(cause="Query term not enabled in PhishEye product.",
-                                  assistance=f"Allowed terms: {self.connection.terms}.")
+                                  assistance=f"Add term to PhishEye and try again, or use one of the allowed terms: {self.connection.terms}.")
 
         response = Helper.make_request(self.connection.api.phisheye, self.logger, query, days_back)
         output = {
