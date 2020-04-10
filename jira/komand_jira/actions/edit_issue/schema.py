@@ -60,7 +60,7 @@ class EditIssueInput(komand.Input):
     "update": {
       "type": "object",
       "title": "Update",
-      "description": "An object that contains update operations to apply",
+      "description": "An object that contains update operations to apply, see examples at https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/",
       "order": 6
     }
   },

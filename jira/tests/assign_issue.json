@@ -1,12 +1,16 @@
 {
-    "body": {
-        "action": "assign_issue",
-        "input": {
-            "assignee": "",
-            "id": ""
-        },
-        "meta": {}
+  "body": {
+    "action": "assign_issue",
+    "input": {
+      "assignee": "",
+      "id": ""
     },
-    "type": "action_start",
-    "version": "v1"
+    "connection": {
+      "credentials": null,
+      "url": "https://company.atlassian.net/"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
 }
