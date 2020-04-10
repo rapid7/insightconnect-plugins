@@ -62,11 +62,11 @@ Example output:
   "issues": [{
       "id": "10001",
       "key": "PT-2",
-      "url": "https://komand-demo2.atlassian.net/browse/PT-2",
+      "url": "https://example.atlassian.net/browse/PT-2",
       "summary": "Test ticket for the plugin-test project",
       "description": "A test ticket",
       "status": "To Do",
-      "reporter": "Mike Rinehart",
+      "reporter": "User1",
       "created_at": "2018-10-29T12:58:11.222-0500",
       "updated_at": "2018-10-29T13:06:31.250-0500",
       "labels": ["Needs_test"],
@@ -296,7 +296,7 @@ Example output:
   "description": "Test test",
   "status": "Backlog",
   "resolution": "",
-  "reporter": "Mateusz Górny",
+  "reporter": "User2",
   "assignee": "",
   "created_at": "2020-04-09T23:08:00.782+0200",
   "updated_at": "2020-04-09T23:08:00.782+0200",
@@ -411,7 +411,7 @@ Example output:
   "users": [{
       "name": "mrinehart",
       "email_address": "user@example.com",
-      "display_name": "Mike Test",
+      "display_name": "User1",
       "active": true
   }]
 }
@@ -485,12 +485,12 @@ Example output:
   "issue": {
       "id": "10001",
       "key": "PT-2",
-      "url": "https://komand-demo2.atlassian.net/browse/PT-2",
+      "url": "https://example.atlassian.net/browse/PT-2",
       "summary": "Test ticket for the plugin-test project",
       "description": "A test ticket",
       "status": "To Do",
       "resolution": "",
-      "reporter": "Mike Rinehart",
+      "reporter": "User1",
       "assignee": "",
       "created_at": "2018-10-29T12:58:11.222-0500",
       "updated_at": "2018-10-29T13:06:31.250-0500",
@@ -498,17 +498,17 @@ Example output:
       "labels": ["Needs_test"],
       "fields": {
           "issuetype": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issuetype/10002",
+              "self": "https://example.atlassian.net/rest/api/2/issuetype/10002",
               "id": "10002",
               "description": "A task that needs to be done.",
-              "iconUrl": "https://komand-demo2.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+              "iconUrl": "https://example.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
               "name": "Task",
               "subtask": false,
               "avatarId": 10318
           },
           "timespent": null,
           "project": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/project/10000",
+              "self": "https://example.atlassian.net/rest/api/2/project/10000",
               "id": "10000",
               "key": "PT",
               "name": "plugin-test",
@@ -527,7 +527,7 @@ Example output:
           "workratio": -1,
           "lastViewed": null,
           "watches": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/PT-2/watchers",
+              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/watchers",
               "watchCount": 1,
               "isWatching": true
           },
@@ -536,8 +536,8 @@ Example output:
           "customfield_10021": "0|i00007:",
           "customfield_10022": [],
           "priority": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/priority/3",
-              "iconUrl": "https://komand-demo2.atlassian.net/images/icons/priorities/medium.svg",
+              "self": "https://example.atlassian.net/rest/api/2/priority/3",
+              "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium.svg",
               "name": "Medium",
               "id": "3"
           },
@@ -560,13 +560,13 @@ Example output:
           "assignee": null,
           "updated": "2018-10-29T13:06:31.250-0500",
           "status": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/status/10001",
+              "self": "https://example.atlassian.net/rest/api/2/status/10001",
               "description": "",
-              "iconUrl": "https://komand-demo2.atlassian.net/",
+              "iconUrl": "https://example.atlassian.net/",
               "name": "To Do",
               "id": "10001",
               "statusCategory": {
-                  "self": "https://komand-demo2.atlassian.net/rest/api/2/statuscategory/2",
+                  "self": "https://example.atlassian.net/rest/api/2/statuscategory/2",
                   "id": 2,
                   "key": "new",
                   "colorName": "blue-gray",
@@ -590,10 +590,10 @@ Example output:
           "aggregatetimeestimate": null,
           "summary": "Test ticket for the plugin-test project",
           "creator": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
               "name": "admin",
               "key": "admin",
-              "accountId": "5bd733f3f8460347a10cbdd9",
+              "accountId": "4ac123f3f8412345a10cbaa0",
               "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
@@ -601,16 +601,16 @@ Example output:
                   "16x16": "",
                   "32x32": ""
               },
-              "displayName": "Mike Rinehart",
+              "displayName": "User1",
               "active": true,
               "timeZone": "America/Chicago"
           },
           "subtasks": [],
           "reporter": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
               "name": "admin",
               "key": "admin",
-              "accountId": "5bd733f3f8460347a10cbdd9",
+              "accountId": "4ac123f3f8412345a10cbaa0",
               "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
@@ -618,7 +618,7 @@ Example output:
                   "16x16": "",
                   "32x32": ""
               },
-              "displayName": "Mike Rinehart",
+              "displayName": "User1",
               "active": true,
               "timeZone": "America/Chicago"
           },
@@ -634,19 +634,19 @@ Example output:
               "total": 0
           },
           "votes": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/PT-2/votes",
+              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/votes",
               "votes": 0,
               "hasVoted": false
           },
           "comment": {
               "comments": [{
-                  "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/10001/comment/10000",
+                  "self": "https://example.atlassian.net/rest/api/2/issue/10001/comment/10000",
                   "id": "10000",
                   "author": {
-                      "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
                       "name": "admin",
                       "key": "admin",
-                      "accountId": "5bd733f3f8460347a10cbdd9",
+                      "accountId": "4ac123f3f8412345a10cbaa0",
                       "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
@@ -654,16 +654,16 @@ Example output:
                           "16x16": "",
                           "32x32": ""
                       },
-                      "displayName": "Mike Rinehart",
+                      "displayName": "User1",
                       "active": true,
                       "timeZone": "America/Chicago"
                   },
                   "body": "Needs additional testing",
                   "updateAuthor": {
-                      "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
                       "name": "admin",
                       "key": "admin",
-                      "accountId": "5bd733f3f8460347a10cbdd9",
+                      "accountId": "4ac123f3f8412345a10cbaa0",
                       "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
@@ -671,7 +671,7 @@ Example output:
                           "16x16": "",
                           "32x32": ""
                       },
-                      "displayName": "Mike Rinehart",
+                      "displayName": "User1",
                       "active": true,
                       "timeZone": "America/Chicago"
                   },
@@ -725,20 +725,20 @@ Example output:
 {
   "count": 1,
   "comments": [{
-      "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/10001/comment/10000",
+      "self": "https://example.atlassian.net/rest/api/2/issue/10001/comment/10000",
       "id": "10000",
       "author": {
           "name": "admin",
           "email_address": "user@example.com",
-          "display_name": "Mike Rinehart",
+          "display_name": "User1",
           "active": true
       },
       "body": "Needs additional testing",
       "updateAuthor": {
-          "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+          "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
           "name": "admin",
           "key": "admin",
-          "accountId": "5bd733f3f8460347a10cbdd9",
+          "accountId": "4ac123f3f8412345a10cbaa0",
           "emailAddress": "user@example.com",
           "avatarUrls": {
               "48x48": "",
@@ -746,7 +746,7 @@ Example output:
               "16x16": "",
               "32x32": ""
           },
-          "displayName": "Mike Rinehart",
+          "displayName": "User1",
           "active": true,
           "timeZone": "America/Chicago"
       },
@@ -816,7 +816,7 @@ Example input:
 
 ```
 {
-  "description": "Updated from Komand",
+  "description": "Updated from InsightConnect",
   "fields": {},
   "id": "TEST-1",
   "notify": true,
@@ -875,12 +875,12 @@ Example output:
   "issue": {
       "id": "10001",
       "key": "PT-2",
-      "url": "https://komand-demo2.atlassian.net/browse/PT-2",
+      "url": "https://example.atlassian.net/browse/PT-2",
       "summary": "Test ticket for the plugin-test project",
       "description": "A test ticket",
       "status": "To Do",
       "resolution": "",
-      "reporter": "Mike Rinehart",
+      "reporter": "User1",
       "assignee": "",
       "created_at": "2018-10-29T12:58:11.222-0500",
       "updated_at": "2018-10-29T13:06:31.250-0500",
@@ -888,17 +888,17 @@ Example output:
       "labels": ["Needs_test"],
       "fields": {
           "issuetype": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issuetype/10002",
+              "self": "https://example.atlassian.net/rest/api/2/issuetype/10002",
               "id": "10002",
               "description": "A task that needs to be done.",
-              "iconUrl": "https://komand-demo2.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+              "iconUrl": "https://example.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
               "name": "Task",
               "subtask": false,
               "avatarId": 10318
           },
           "timespent": null,
           "project": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/project/10000",
+              "self": "https://example.atlassian.net/rest/api/2/project/10000",
               "id": "10000",
               "key": "PT",
               "name": "plugin-test",
@@ -917,7 +917,7 @@ Example output:
           "workratio": -1,
           "lastViewed": null,
           "watches": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/PT-2/watchers",
+              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/watchers",
               "watchCount": 1,
               "isWatching": true
           },
@@ -926,8 +926,8 @@ Example output:
           "customfield_10021": "0|i00007:",
           "customfield_10022": [],
           "priority": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/priority/3",
-              "iconUrl": "https://komand-demo2.atlassian.net/images/icons/priorities/medium.svg",
+              "self": "https://example.atlassian.net/rest/api/2/priority/3",
+              "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium.svg",
               "name": "Medium",
               "id": "3"
           },
@@ -950,13 +950,13 @@ Example output:
           "assignee": null,
           "updated": "2018-10-29T13:06:31.250-0500",
           "status": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/status/10001",
+              "self": "https://example.atlassian.net/rest/api/2/status/10001",
               "description": "",
-              "iconUrl": "https://komand-demo2.atlassian.net/",
+              "iconUrl": "https://example.atlassian.net/",
               "name": "To Do",
               "id": "10001",
               "statusCategory": {
-                  "self": "https://komand-demo2.atlassian.net/rest/api/2/statuscategory/2",
+                  "self": "https://example.atlassian.net/rest/api/2/statuscategory/2",
                   "id": 2,
                   "key": "new",
                   "colorName": "blue-gray",
@@ -980,10 +980,10 @@ Example output:
           "aggregatetimeestimate": null,
           "summary": "Test ticket for the plugin-test project",
           "creator": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
               "name": "admin",
               "key": "admin",
-              "accountId": "5bd733f3f8460347a10cbdd9",
+              "accountId": "4ac123f3f8412345a10cbaa0",
               "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
@@ -991,16 +991,16 @@ Example output:
                   "16x16": "",
                   "32x32": ""
               },
-              "displayName": "Mike Rinehart",
+              "displayName": "User1",
               "active": true,
               "timeZone": "America/Chicago"
           },
           "subtasks": [],
           "reporter": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
               "name": "admin",
               "key": "admin",
-              "accountId": "5bd733f3f8460347a10cbdd9",
+              "accountId": "4ac123f3f8412345a10cbaa0",
               "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
@@ -1008,7 +1008,7 @@ Example output:
                   "16x16": "",
                   "32x32": ""
               },
-              "displayName": "Mike Rinehart",
+              "displayName": "User1",
               "active": true,
               "timeZone": "America/Chicago"
           },
@@ -1024,19 +1024,19 @@ Example output:
               "total": 0
           },
           "votes": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/PT-2/votes",
+              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/votes",
               "votes": 0,
               "hasVoted": false
           },
           "comment": {
               "comments": [{
-                  "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/10001/comment/10000",
+                  "self": "https://example.atlassian.net/rest/api/2/issue/10001/comment/10000",
                   "id": "10000",
                   "author": {
-                      "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
                       "name": "admin",
                       "key": "admin",
-                      "accountId": "5bd733f3f8460347a10cbdd9",
+                      "accountId": "4ac123f3f8412345a10cbaa0",
                       "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
@@ -1044,16 +1044,16 @@ Example output:
                           "16x16": "",
                           "32x32": ""
                       },
-                      "displayName": "Mike Rinehart",
+                      "displayName": "User1",
                       "active": true,
                       "timeZone": "America/Chicago"
                   },
                   "body": "Needs additional testing",
                   "updateAuthor": {
-                      "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
                       "name": "admin",
                       "key": "admin",
-                      "accountId": "5bd733f3f8460347a10cbdd9",
+                      "accountId": "4ac123f3f8412345a10cbaa0",
                       "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
@@ -1061,7 +1061,7 @@ Example output:
                           "16x16": "",
                           "32x32": ""
                       },
-                      "displayName": "Mike Rinehart",
+                      "displayName": "User1",
                       "active": true,
                       "timeZone": "America/Chicago"
                   },
