@@ -18,8 +18,10 @@ class LookupDomain(komand.Action):
             domain = params.get(Input.DOMAIN)
             fields = params.get(Input.FIELDS)
             comment = params.get(Input.COMMENT)
-            if not len(fields):
+
+            if not fields or not len(fields):
                 fields = None
+
             if not comment:
                 comment = None
             domain_report = self.connection.client.lookup_domain(domain, fields=fields, comment=comment)
