@@ -18,10 +18,10 @@ This plugin allows you to enter a keyword, and PhishEye will return a sample of 
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API key e.g. 11111-aaaaa-aaa11-111aa-aaa11|None|
-|username|string|None|True|API username|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|API key e.g. 11111-aaaaa-aaa11-111aa-aaa11|None|11111-aaaaa-aaa11-111aa-aaa11|
+|username|string|None|True|API username|None|user1|
 
 Example input:
 
@@ -40,14 +40,15 @@ Example input:
 
 #### Domain List
 
-This action returns domain results for monitored terms.
+This action returns domain results for monitored terms. By default, the API will return domains discovered in the last 24 hours.
+Terms must be created (monitored) in PhishEye before they can be returned by this action.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to find domains up to seven days prior to the current date. Set the value to an integer in the range of 1-7|None|
-|query|string|None|True|Term for which the day's domains are desired|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to find domains up to seven days prior to the current date. Set the value to an integer in the range of 1-7|None|1|
+|query|string|None|True|Term for which the day's domains are desired|None|example|
 
 Example input:
 
@@ -103,7 +104,10 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+Users configure terms (not domains) in DomainTools PhishEye Monitor. It may take up to 24 hours for discovery to be completed within PhishEye.
+Following initial discovery, new alerts are generated in PhishEye every 24 hours containing new domains that can be searched with the Domain List action.
+
+If a term is searched for in the Domain List action but not monitored in PhishEye, the action will fail and return a list of the monitored terms from which the user can use.
 
 # Version History
 
