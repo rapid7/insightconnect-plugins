@@ -71,8 +71,74 @@ Example output:
 
 ```
 {
-  "domains": [],
-  "term": "rapid7"
+  "date": "2020-04-10",
+  "domains": [
+    {
+      "created_date": "2020-04-09",
+      "domain": "2020insightsolutions.com",
+      "ip_addresses": [
+        {
+          "country_code": "US",
+          "ip": "50.63.202.50"
+        },
+        {
+          "country_code": "US",
+          "ip": "50.63.202.50"
+        }
+      ],
+      "name_servers": [
+        "ns11.domaincontrol.com",
+        "ns12.domaincontrol.com"
+      ],
+      "registrant_email": "2020insightsolutions.com@domainsbyproxy.com",
+      "registrar_name": "GoDaddy.com, LLC",
+      "risk_score": 15,
+      "tld": "com"
+    },
+    {
+      "created_date": "2020-04-09",
+      "domain": "accelerateinsights.org",
+      "ip_addresses": [
+        {
+          "country_code": "US",
+          "ip": "184.168.221.57"
+        },
+        {
+          "country_code": "US",
+          "ip": "184.168.221.57"
+        }
+      ],
+      "name_servers": [
+        "ns65.domaincontrol.com",
+        "ns66.domaincontrol.com"
+      ],
+      "registrar_name": "GoDaddy.com, LLC",
+      "risk_score": 14,
+      "tld": "org"
+    },
+    {
+      "created_date": "2020-04-04",
+      "domain": "zthetrueinsight.uk",
+      "ip_addresses": [
+        {
+          "country_code": "US",
+          "ip": "184.168.221.63"
+        },
+        {
+          "country_code": "US",
+          "ip": "184.168.221.63"
+        }
+      ],
+      "name_servers": [
+        "ns29.domaincontrol.com",
+        "ns30.domaincontrol.com"
+      ],
+      "registrar_name": "GoDaddy.com, LLC. [Tag = GODADDY]",
+      "risk_score": 14,
+      "tld": "uk"
+    }
+  ],
+  "term": "insight"
 }
 ```
 
