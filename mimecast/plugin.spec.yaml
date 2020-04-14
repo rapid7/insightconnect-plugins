@@ -5,7 +5,7 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 4.0.0
+version: 4.0.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -289,26 +289,31 @@ connection:
     title: URL
     description: The URL for the Mimecast server
     type: string
+    example: https://api.mimecast.com
     required: true
   app_id:
     title: App ID
     description: Application ID
     type: string
+    example: 78d2e4b1-8cc2-4806-nt79-6ef332a47374
     required: true
   app_key:
     title: Application Key
     description: The application key
     type: credential_secret_key
+    example: 475x54c6-4f61-4fab-8be7-a0710f3859e3
     required: true
   secret_key:
     title: Application Secret Key
     description: The application secret key
     type: credential_secret_key
+    example: FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==
     required: true
   access_key:
     title: Application Access Key
     description: The application access key
     type: credential_secret_key
+    example: eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi
     required: true
 
 actions:
@@ -320,33 +325,39 @@ actions:
         title: URL
         description: The URL to block or permit. Do not include a fragment
         type: string
+        example: https://rapid7.com
         required: true
       comment:
         title: Comment
         description: A comment about the why the URL is managed; for tracking purposes
         type: string
+        example: i'm blocking this because virustotal said it was malicious
         required: false
       disable_rewrite:
         title: Disable Rewrite
         description: Disable rewriting of this URL in emails. Applies only if action
           = 'permit'
         type: boolean
+        example: True
         required: true
       disable_user_awareness:
         title: Disable User Awareness
         description: Disable User Awareness challenges for this URL. Applies only
           if action = 'permit'
         type: boolean
+        example: False
         required: true
       disable_log_click:
         title: Disable Log Click
         description: Disable logging of user clicks on the URL
         type: boolean
+        example: Flase
         required: true
       action:
         title: Action
         description: Set to 'block' to blacklist the URL, 'permit' to whitelist it
         type: string
+        example: block
         required: true
         default: block
         enum:
@@ -357,6 +368,7 @@ actions:
         description: Set to 'explicit' to block or permit only instances of the full
           URL. Set to 'domain' to block or permit any URL with the same domain
         type: string
+        example: explicit
         required: true
         default: explicit
         enum:
@@ -376,6 +388,7 @@ actions:
         title: ID
         description: The Mimecast secure ID of the managed URL
         type: string
+        example: wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhHMy6V8J3VOvTNMW2G-txx3o4zL0YXqWxuCVlGQ-1viE
         required: true
     output:
       success:
@@ -391,11 +404,13 @@ actions:
         title: Domain
         description: The managed domain
         type: string
+        example: rapid7.com
         required: false
       disable_user_awareness:
         title: 'Filter: User Awareness'
         description: Filter on whether or not User Awareness challenges for this URL
         type: string
+        example: false
         required: false
         default: none
         enum:
@@ -407,6 +422,7 @@ actions:
         description: Filter on whether or not clicks are logged for this URL
         type: string
         required: false
+        example: true
         default: none
         enum:
         - none
@@ -417,6 +433,7 @@ actions:
         description: Filter on whether or not the action is 'block' or 'permit'
         type: string
         required: false
+        example: block
         default: none
         enum:
         - none
@@ -426,6 +443,7 @@ actions:
         title: 'Filter: Match Type'
         description: Filter on whether or not the match type is 'explicit' or 'domain'
         type: string
+        example: domain
         required: false
         default: none
         enum:
@@ -436,11 +454,13 @@ actions:
         title: 'Filter: Scheme'
         description: Filter on whether or not the protocol is HTTP or HTTPS
         type: string
+        example: http
         required: false
       disable_rewrite:
         title: 'Filter: URL Rewrite'
         description: Filter on whether or not rewriting of this URL in emails is enabled
         type: string
+        example: false
         required: false
         default: none
         enum:
@@ -467,6 +487,7 @@ actions:
         description: Either 'permit' (to bypass spam checks) or 'block' (to reject
           the email)
         type: string
+        example: block
         required: true
         default: block
         enum:
@@ -476,10 +497,12 @@ actions:
         title: To
         description: The email address of the internal recipient
         type: string
+        example: user@example.com
         required: true
       sender:
         title: Sender
         description: The email address of the external sender
+        example: user@example.com
         type: string
         required: true
     output:
@@ -497,6 +520,7 @@ actions:
         description: 'The block, option must be: no_action or block_sender'
         type: string
         required: true
+        example: block_sender
         default: block_sender
         enum:
         - block_sender
@@ -506,11 +530,13 @@ actions:
         description: A description for the policy which is kept with the email in
           the archive for future reference
         type: string
+        example: A description
         required: true
       from_part:
         title: From Part
         description: 'Must be: envelope_from, header_from or both'
         type: string
+        example: envelope_from
         required: true
         default: envelope_from
         enum:
@@ -522,6 +548,7 @@ actions:
         description: 'Can be one of: everyone, internal_addresses, external_addresses,
           email_domain, profile_group or individual_email_address'
         type: string
+        example: internal_addresses
         required: true
         default: everyone
         enum:
@@ -539,12 +566,14 @@ actions:
           ID of the profile group. If `From Type` is individual_email_address, an
           email address'
         type: string
+        example: user@example.com
         required: false
       to_type:
         title: To Type
         description: 'Can be one of: everyone, internal_addresses, external_addresses,
           email_domain, profile_group or individual_email_address'
         type: string
+        example: everyone
         required: true
         default: everyone
         enum:
@@ -562,12 +591,14 @@ actions:
           of the profile group. If `To Type` is individual_email_address, an email
           address'
         type: string
+        example: user@example.com
         required: false
       source_ips:
         title: Source IPs
         description: A comma separated list of IP addresses using CIDR notation (X.X.X.X/XX).
           When set the policy only applies for connections from matching addresses
         type: string
+        example: 198.51.100.0/24
         required: false
     output:
       sender_policy:
@@ -582,17 +613,20 @@ actions:
       id:
         title: ID
         description: The Mimecast ID of the group to add to
+        example: eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA
         type: string
         required: true
       email_address:
         title: Email Address
         description: The email address of a user to add to a group. Use either email address or domain
+        example: user@example.com
         type: string
         required: false
       domain:
         title: Domain
         description: A domain to add to a group. Use either email address or domain
         type: string
+        example: rapid7.com
         required: false
     output:
       folder_id:
@@ -622,16 +656,19 @@ actions:
       id:
         title: ID
         description: The Mimecast ID of the group to remove from
+        example: eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA
         type: string
         required: true
       email_address:
         title: Email Address
         description: The email address to remove from group. Use either email address or domain
         type: string
+        example: user@example.com
         required: false
       domain:
         title: Domain
         description: A domain to remove from group. Use either email address or domain
+        example: rapid7.com
         type: string
         required: false
     output:
@@ -647,12 +684,14 @@ actions:
       query:
         title: Query
         description: A string to query for
+        example: mygroup
         type: string
         required: false
       source:
         title: Source
         description: A group source to filter on, either "cloud" or "ldap"
         type: string
+        example: cloud
         required: true
         default: cloud
         enum:
@@ -671,17 +710,20 @@ actions:
       from:
         title: From
         description: Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day
+        example: 2018-11-22T14:49:18+0000
         type: string
         required: false
       to:
         title: To
         description: End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request
+        example: 2018-11-22T14:49:18+0000
         type: string
         required: false
       route:
         title: Route
         description: Filters logs by route, must be one of inbound, outbound, internal, or all
         type: string
+        example: inbound
         required: true
         default: all
         enum:
@@ -693,6 +735,7 @@ actions:
         title: Scan Result
         description: Filters logs by scan result, must be one of clean, malicious, or all
         type: string
+        example: malicious
         required: true
         default: all
         enum:
@@ -702,6 +745,7 @@ actions:
       url_to_filter:
         title: URL Regular Expression Filter
         description: Regular expression to filter on. e.g. `examp` will return only URLs with the letters examp in them
+        example: exam.*
         type: string
         required: false
     output:
@@ -716,7 +760,8 @@ actions:
     input:
       encoded_url:
         title: Encoded URL
-        description: The Mimecast encoded URL (e.g. https://protect-xx.mimecast.com/...)
+        description: The Mimecast encoded URL
+        example: https://protect-xx.mimecast.com/TXH7fhe
         type: string
         required: true
     output:

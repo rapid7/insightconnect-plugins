@@ -19,10 +19,10 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Username and API key|None|
-|url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|Username and API key|None|{ "username": "user1", "password":"yB3KwjqqUainTz6FD6nN78C"}|
+|url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|https://company.atlassian.net|
 
 ## Technical Details
 
@@ -34,11 +34,20 @@ This action is used to search for issues.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|get_attachments|boolean|False|False|Get attachments from issue|None|
-|jql|string|None|True|JQL search string to use|None|
-|max|integer|10|True|Max results to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|get_attachments|boolean|False|False|Get attachments from issue|None|True|
+|jql|string|None|True|JQL search string to use|None|project = "TEST"|
+|max|integer|10|True|Max results to return|None|10|
+
+Example input:
+
+```
+{
+  "jql": "asdf",
+  "max": 1
+}
+```
 
 ##### Output
 
@@ -53,11 +62,11 @@ Example output:
   "issues": [{
       "id": "10001",
       "key": "PT-2",
-      "url": "https://komand-demo2.atlassian.net/browse/PT-2",
+      "url": "https://example.atlassian.net/browse/PT-2",
       "summary": "Test ticket for the plugin-test project",
       "description": "A test ticket",
       "status": "To Do",
-      "reporter": "Mike Rinehart",
+      "reporter": "User1",
       "created_at": "2018-10-29T12:58:11.222-0500",
       "updated_at": "2018-10-29T13:06:31.250-0500",
       "labels": ["Needs_test"],
@@ -72,11 +81,21 @@ This action is used to add an attachment to an issue in Jira.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|attachment_bytes|bytes|None|True|Attachment bytes|None|
-|attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|
-|id|string|None|True|Issue ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachment_bytes|bytes|None|True|Attachment bytes|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
+|attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|document.pdf|
+|id|string|None|True|Issue ID|None|10001|
+
+Example input:
+
+```
+{
+  "attachment_bytes": "dGVzdA==",
+  "attachment_filename": "test",
+  "id": "10001"
+}
+```
 
 ##### Output
 
@@ -94,16 +113,43 @@ Example output:
 
 #### Transition Issue
 
-This action is used to transition an issue.
+This action is used to transition an issue.  For `fields` examples, see https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|comment|string|None|False|Comment to add|None|
-|fields|object|None|False|Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}|None|
-|id|string|None|True|Issue ID|None|
-|transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|False|Comment to add|None|Transition executed by InsightConnect|
+|fields|object|None|False|Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|
+|id|string|None|True|Issue ID|None|10001|
+|transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|31|
+
+Example input:
+
+```
+{
+  "comment": "test",
+  "id": "10001",
+  "transition": "31"
+}
+```
+
+Example fields input:
+
+```
+{
+  "fields": {
+    "project": {
+      "key": "TEST"
+    },
+    "summary": "Test Ticket",
+    "description": "Test ticket created from InsightConnect",
+    "issuetype": {
+      "name": "Story"
+    }
+  }
+}
+```
 
 ##### Output
 
@@ -125,9 +171,17 @@ This action is used to delete a user account.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Username|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|username|string|None|True|Username|None|user1|
+
+Example input:
+
+```
+{
+  "username": "test1"
+}
+```
 
 ##### Output
 
@@ -149,10 +203,19 @@ This action is used to assign an issue to a user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|assignee|string|None|True|Username of assignee|None|
-|id|string|None|True|Issue ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|assignee|string|None|True|Username of assignee|None|user1|
+|id|string|None|True|Issue ID|None|10001|
+
+Example input:
+
+```
+{
+  "assignee": "me",
+  "id": "10001"
+}
+```
 
 ##### Output
 
@@ -170,19 +233,50 @@ Example output:
 
 #### Create Issue
 
-This action is used to create an issue in Jira.
+This action is used to create an issue in Jira.  For `fields` examples, see https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|attachment_bytes|bytes|None|False|Attachment bytes|None|
-|attachment_filename|string|None|False|Attachment filename|None|
-|description|string||False|Issue description|None|
-|fields|object|None|False|Custom fields to assign. Fields used must be present on the same screen as the Create screen in Jira|None|
-|project|string|None|True|Project ID|None|
-|summary|string|None|False|Issue summary|None|
-|type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachment_bytes|bytes|None|False|Attachment bytes|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
+|attachment_filename|string|None|False|Attachment filename|None|document.pdf|
+|description|string||False|Issue description|None|Successfully connect Jira to InsightConnect to automate ticket management|
+|fields|object|None|False|Custom fields to assign. Fields used must be present on the same screen as the Create screen in Jira|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|
+|project|string|None|True|Project ID|None|TEST|
+|summary|string|None|False|Issue summary|None|Connect Jira to InsightConnect|
+|type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|Story|
+
+Example input:
+
+```
+{
+  "attachment_bytes": "",
+  "attachment_filename": "",
+  "description": "Test test",
+  "fields": {},
+  "project": "TEST",
+  "summary": "Test issue",
+  "type": "Story"
+}
+```
+
+Example `fields` input:
+
+```
+{
+  "fields": {
+    "project": {
+      "key": "TEST"
+    },
+    "summary": "Test Ticket",
+    "description": "Test ticket created from InsightConnect",
+    "issuetype": {
+      "name": "Story"
+    }
+  }
+}
+```
 
 ##### Output
 
@@ -194,17 +288,18 @@ Example output:
 
 ```
 {
+  "attachments": [],
   "id": "10001",
-  "key": "PT-2",
-  "url": "https://komand-demo2.atlassian.net/browse/PT-2",
-  "summary": "Test ticket for the plugin-test project",
-  "description": "A test ticket",
-  "status": "To Do",
+  "key": "TEST-2",
+  "url": "https://morecode-test2.atlassian.net/browse/TEST-2",
+  "summary": "Test issue",
+  "description": "Test test",
+  "status": "Backlog",
   "resolution": "",
-  "reporter": "Mike Rinehart",
+  "reporter": "User2",
   "assignee": "",
-  "created_at": "2018-10-29T12:58:11.222-0500",
-  "updated_at": "2018-10-29T12:58:11.222-0500",
+  "created_at": "2020-04-09T23:08:00.782+0200",
+  "updated_at": "2020-04-09T23:08:00.782+0200",
   "resolved_at": "",
   "labels": [],
   "fields": {}
@@ -217,12 +312,23 @@ This action is used to create a user account.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|Email|None|
-|notify|boolean|False|True|Notify if true|[True, False]|
-|password|string|None|False|Password|None|
-|username|string|None|True|Username|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|Email|None|user1@example.com|
+|notify|boolean|False|True|Notify if true|[True, False]|False|
+|password|string|None|False|Password|None|mypassword|
+|username|string|None|True|Username|None|user1|
+
+Example input:
+
+```
+{
+  "email": "user@example.com",
+  "notify": false,
+  "password": "test",
+  "username": "test1"
+}
+```
 
 ##### Output
 
@@ -244,10 +350,19 @@ This action is used to label an issue.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|Issue ID|None|
-|label|string|None|True|Label to add. To add multiple labels, separate by commas|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Issue ID|None|10001|
+|label|string|None|True|Label to add. To add multiple labels, separate by commas|None|documentation|
+
+Example input:
+
+```
+{
+  "id": "10001",
+  "label": "test"
+}
+```
 
 ##### Output
 
@@ -269,10 +384,19 @@ This action is used to find users.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|max|integer|10|True|Max results to return|None|
-|query|string|None|True|Query String, e.g. Joe|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|max|integer|10|True|Max results to return|None|10|
+|query|string|None|True|Query String, e.g. Joe|None|Joe|
+
+Example input:
+
+```
+{
+  "max": 10,
+  "query": "user@example.com"
+}
+```
 
 ##### Output
 
@@ -287,7 +411,7 @@ Example output:
   "users": [{
       "name": "mrinehart",
       "email_address": "user@example.com",
-      "display_name": "Mike Test",
+      "display_name": "User1",
       "active": true
   }]
 }
@@ -299,10 +423,19 @@ This action is used to comment on an issue.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|comment|string|None|True|Comment to add|None|
-|id|string|None|True|Issue ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment to add|None|This comment was added by InsightConnect|
+|id|string|None|True|Issue ID|None|10001|
+
+Example input:
+
+```
+{
+  "comment": "new comment",
+  "id": "10001"
+}
+```
 
 ##### Output
 
@@ -314,7 +447,7 @@ Example output:
 
 ```
 {
-  "comment_id": "10000"
+  "comment_id": "10001"
 }
 ```
 
@@ -324,10 +457,18 @@ This action is used to retrieve an issue.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|get_attachments|boolean|False|False|Get attachments from issue|None|
-|id|string|None|True|Issue ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|get_attachments|boolean|False|False|Get attachments from issue|None|False|
+|id|string|None|True|Issue ID|None|TEST-1|
+
+Example input:
+
+```
+{
+  "id": "PT-2"
+}
+```
 
 ##### Output
 
@@ -344,12 +485,12 @@ Example output:
   "issue": {
       "id": "10001",
       "key": "PT-2",
-      "url": "https://komand-demo2.atlassian.net/browse/PT-2",
+      "url": "https://example.atlassian.net/browse/PT-2",
       "summary": "Test ticket for the plugin-test project",
       "description": "A test ticket",
       "status": "To Do",
       "resolution": "",
-      "reporter": "Mike Rinehart",
+      "reporter": "User1",
       "assignee": "",
       "created_at": "2018-10-29T12:58:11.222-0500",
       "updated_at": "2018-10-29T13:06:31.250-0500",
@@ -357,17 +498,17 @@ Example output:
       "labels": ["Needs_test"],
       "fields": {
           "issuetype": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issuetype/10002",
+              "self": "https://example.atlassian.net/rest/api/2/issuetype/10002",
               "id": "10002",
               "description": "A task that needs to be done.",
-              "iconUrl": "https://komand-demo2.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+              "iconUrl": "https://example.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
               "name": "Task",
               "subtask": false,
               "avatarId": 10318
           },
           "timespent": null,
           "project": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/project/10000",
+              "self": "https://example.atlassian.net/rest/api/2/project/10000",
               "id": "10000",
               "key": "PT",
               "name": "plugin-test",
@@ -386,7 +527,7 @@ Example output:
           "workratio": -1,
           "lastViewed": null,
           "watches": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/PT-2/watchers",
+              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/watchers",
               "watchCount": 1,
               "isWatching": true
           },
@@ -395,8 +536,8 @@ Example output:
           "customfield_10021": "0|i00007:",
           "customfield_10022": [],
           "priority": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/priority/3",
-              "iconUrl": "https://komand-demo2.atlassian.net/images/icons/priorities/medium.svg",
+              "self": "https://example.atlassian.net/rest/api/2/priority/3",
+              "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium.svg",
               "name": "Medium",
               "id": "3"
           },
@@ -419,13 +560,13 @@ Example output:
           "assignee": null,
           "updated": "2018-10-29T13:06:31.250-0500",
           "status": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/status/10001",
+              "self": "https://example.atlassian.net/rest/api/2/status/10001",
               "description": "",
-              "iconUrl": "https://komand-demo2.atlassian.net/",
+              "iconUrl": "https://example.atlassian.net/",
               "name": "To Do",
               "id": "10001",
               "statusCategory": {
-                  "self": "https://komand-demo2.atlassian.net/rest/api/2/statuscategory/2",
+                  "self": "https://example.atlassian.net/rest/api/2/statuscategory/2",
                   "id": 2,
                   "key": "new",
                   "colorName": "blue-gray",
@@ -449,10 +590,10 @@ Example output:
           "aggregatetimeestimate": null,
           "summary": "Test ticket for the plugin-test project",
           "creator": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
               "name": "admin",
               "key": "admin",
-              "accountId": "5bd733f3f8460347a10cbdd9",
+              "accountId": "4ac123f3f8412345a10cbaa0",
               "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
@@ -460,16 +601,16 @@ Example output:
                   "16x16": "",
                   "32x32": ""
               },
-              "displayName": "Mike Rinehart",
+              "displayName": "User1",
               "active": true,
               "timeZone": "America/Chicago"
           },
           "subtasks": [],
           "reporter": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
               "name": "admin",
               "key": "admin",
-              "accountId": "5bd733f3f8460347a10cbdd9",
+              "accountId": "4ac123f3f8412345a10cbaa0",
               "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
@@ -477,7 +618,7 @@ Example output:
                   "16x16": "",
                   "32x32": ""
               },
-              "displayName": "Mike Rinehart",
+              "displayName": "User1",
               "active": true,
               "timeZone": "America/Chicago"
           },
@@ -493,19 +634,19 @@ Example output:
               "total": 0
           },
           "votes": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/PT-2/votes",
+              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/votes",
               "votes": 0,
               "hasVoted": false
           },
           "comment": {
               "comments": [{
-                  "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/10001/comment/10000",
+                  "self": "https://example.atlassian.net/rest/api/2/issue/10001/comment/10000",
                   "id": "10000",
                   "author": {
-                      "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
                       "name": "admin",
                       "key": "admin",
-                      "accountId": "5bd733f3f8460347a10cbdd9",
+                      "accountId": "4ac123f3f8412345a10cbaa0",
                       "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
@@ -513,16 +654,16 @@ Example output:
                           "16x16": "",
                           "32x32": ""
                       },
-                      "displayName": "Mike Rinehart",
+                      "displayName": "User1",
                       "active": true,
                       "timeZone": "America/Chicago"
                   },
                   "body": "Needs additional testing",
                   "updateAuthor": {
-                      "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
                       "name": "admin",
                       "key": "admin",
-                      "accountId": "5bd733f3f8460347a10cbdd9",
+                      "accountId": "4ac123f3f8412345a10cbaa0",
                       "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
@@ -530,7 +671,7 @@ Example output:
                           "16x16": "",
                           "32x32": ""
                       },
-                      "displayName": "Mike Rinehart",
+                      "displayName": "User1",
                       "active": true,
                       "timeZone": "America/Chicago"
                   },
@@ -559,9 +700,17 @@ This action is used to retrieve all comments on an issue.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|Issue ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Issue ID|None|TEST-1|
+
+Example input:
+
+```
+{
+  "id": "PT-2"
+}
+```
 
 ##### Output
 
@@ -576,20 +725,20 @@ Example output:
 {
   "count": 1,
   "comments": [{
-      "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/10001/comment/10000",
+      "self": "https://example.atlassian.net/rest/api/2/issue/10001/comment/10000",
       "id": "10000",
       "author": {
           "name": "admin",
           "email_address": "user@example.com",
-          "display_name": "Mike Rinehart",
+          "display_name": "User1",
           "active": true
       },
       "body": "Needs additional testing",
       "updateAuthor": {
-          "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+          "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
           "name": "admin",
           "key": "admin",
-          "accountId": "5bd733f3f8460347a10cbdd9",
+          "accountId": "4ac123f3f8412345a10cbaa0",
           "emailAddress": "user@example.com",
           "avatarUrls": {
               "48x48": "",
@@ -597,7 +746,7 @@ Example output:
               "16x16": "",
               "32x32": ""
           },
-          "displayName": "Mike Rinehart",
+          "displayName": "User1",
           "active": true,
           "timeZone": "America/Chicago"
       },
@@ -610,18 +759,19 @@ Example output:
 
 #### Edit Issue
 
-This action is used to edit an issue within Jira.
+This action is used to edit an issue within Jira. See https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/ for `update` examples.
+For `fields` examples, see https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|description|string|None|False|Description field on the issue|None|
-|fields|object|None|False|An object of fields and values to change|None|
-|id|string|None|True|Issue ID|None|
-|notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|
-|summary|string|None|False|Summary field on the issue|None|
-|update|object|None|False|An object that contains update operations to apply|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|description|string|None|False|Description field on the issue|None|Update ticket with additional Jira information for others teams wanting to leverage InsightConnect|
+|fields|object|None|False|An object of fields and values to change|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|
+|id|string|None|True|Issue ID|None|TEST-1|
+|notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|False|
+|summary|string|None|False|Summary field on the issue|None|Connect Jira to InsightConnect for Multiple Teams|
+|update|object|None|False|An object that contains update operations to apply, see examples at https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/|None|{ "update": { "labels": [ {"add": "newlabel"} ] } }|
 
 Example input:
 
@@ -662,6 +812,18 @@ Updating multiple fields with the `update` parameter
 
 Additional information can be found [here](https://developer.atlassian.com/server/jira/platform/jira-rest-api-example-edit-issues-6291632/)
 
+Example input:
+
+```
+{
+  "description": "Updated from InsightConnect",
+  "fields": {},
+  "id": "TEST-1",
+  "notify": true,
+  "update": {}
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -684,12 +846,20 @@ This trigger is used to trigger which indicates that a new issue has been create
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|get_attachments|boolean|False|False|Get attachments from issue|None|
-|jql|string|None|False|JQL search string to use|None|
-|poll_timeout|integer|60|False|Timeout between next poll, default 60|None|
-|project|string|None|True|Project ID or name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|get_attachments|boolean|False|False|Get attachments from issue|None|False|
+|jql|string|None|False|JQL search string to use|None|project = "TEST"|
+|poll_timeout|integer|60|False|Timeout between next poll, default 60|None|60|
+|project|string|None|True|Project ID or name|None|TEST|
+
+Example input:
+
+```
+{
+  "jql": 'project = "TEST"'
+}
+```
 
 ##### Output
 
@@ -705,12 +875,12 @@ Example output:
   "issue": {
       "id": "10001",
       "key": "PT-2",
-      "url": "https://komand-demo2.atlassian.net/browse/PT-2",
+      "url": "https://example.atlassian.net/browse/PT-2",
       "summary": "Test ticket for the plugin-test project",
       "description": "A test ticket",
       "status": "To Do",
       "resolution": "",
-      "reporter": "Mike Rinehart",
+      "reporter": "User1",
       "assignee": "",
       "created_at": "2018-10-29T12:58:11.222-0500",
       "updated_at": "2018-10-29T13:06:31.250-0500",
@@ -718,17 +888,17 @@ Example output:
       "labels": ["Needs_test"],
       "fields": {
           "issuetype": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issuetype/10002",
+              "self": "https://example.atlassian.net/rest/api/2/issuetype/10002",
               "id": "10002",
               "description": "A task that needs to be done.",
-              "iconUrl": "https://komand-demo2.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+              "iconUrl": "https://example.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
               "name": "Task",
               "subtask": false,
               "avatarId": 10318
           },
           "timespent": null,
           "project": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/project/10000",
+              "self": "https://example.atlassian.net/rest/api/2/project/10000",
               "id": "10000",
               "key": "PT",
               "name": "plugin-test",
@@ -747,7 +917,7 @@ Example output:
           "workratio": -1,
           "lastViewed": null,
           "watches": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/PT-2/watchers",
+              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/watchers",
               "watchCount": 1,
               "isWatching": true
           },
@@ -756,8 +926,8 @@ Example output:
           "customfield_10021": "0|i00007:",
           "customfield_10022": [],
           "priority": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/priority/3",
-              "iconUrl": "https://komand-demo2.atlassian.net/images/icons/priorities/medium.svg",
+              "self": "https://example.atlassian.net/rest/api/2/priority/3",
+              "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium.svg",
               "name": "Medium",
               "id": "3"
           },
@@ -780,13 +950,13 @@ Example output:
           "assignee": null,
           "updated": "2018-10-29T13:06:31.250-0500",
           "status": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/status/10001",
+              "self": "https://example.atlassian.net/rest/api/2/status/10001",
               "description": "",
-              "iconUrl": "https://komand-demo2.atlassian.net/",
+              "iconUrl": "https://example.atlassian.net/",
               "name": "To Do",
               "id": "10001",
               "statusCategory": {
-                  "self": "https://komand-demo2.atlassian.net/rest/api/2/statuscategory/2",
+                  "self": "https://example.atlassian.net/rest/api/2/statuscategory/2",
                   "id": 2,
                   "key": "new",
                   "colorName": "blue-gray",
@@ -810,10 +980,10 @@ Example output:
           "aggregatetimeestimate": null,
           "summary": "Test ticket for the plugin-test project",
           "creator": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
               "name": "admin",
               "key": "admin",
-              "accountId": "5bd733f3f8460347a10cbdd9",
+              "accountId": "4ac123f3f8412345a10cbaa0",
               "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
@@ -821,16 +991,16 @@ Example output:
                   "16x16": "",
                   "32x32": ""
               },
-              "displayName": "Mike Rinehart",
+              "displayName": "User1",
               "active": true,
               "timeZone": "America/Chicago"
           },
           "subtasks": [],
           "reporter": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
               "name": "admin",
               "key": "admin",
-              "accountId": "5bd733f3f8460347a10cbdd9",
+              "accountId": "4ac123f3f8412345a10cbaa0",
               "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
@@ -838,7 +1008,7 @@ Example output:
                   "16x16": "",
                   "32x32": ""
               },
-              "displayName": "Mike Rinehart",
+              "displayName": "User1",
               "active": true,
               "timeZone": "America/Chicago"
           },
@@ -854,19 +1024,19 @@ Example output:
               "total": 0
           },
           "votes": {
-              "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/PT-2/votes",
+              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/votes",
               "votes": 0,
               "hasVoted": false
           },
           "comment": {
               "comments": [{
-                  "self": "https://komand-demo2.atlassian.net/rest/api/2/issue/10001/comment/10000",
+                  "self": "https://example.atlassian.net/rest/api/2/issue/10001/comment/10000",
                   "id": "10000",
                   "author": {
-                      "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
                       "name": "admin",
                       "key": "admin",
-                      "accountId": "5bd733f3f8460347a10cbdd9",
+                      "accountId": "4ac123f3f8412345a10cbaa0",
                       "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
@@ -874,16 +1044,16 @@ Example output:
                           "16x16": "",
                           "32x32": ""
                       },
-                      "displayName": "Mike Rinehart",
+                      "displayName": "User1",
                       "active": true,
                       "timeZone": "America/Chicago"
                   },
                   "body": "Needs additional testing",
                   "updateAuthor": {
-                      "self": "https://komand-demo2.atlassian.net/rest/api/2/user?username=admin",
+                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
                       "name": "admin",
                       "key": "admin",
-                      "accountId": "5bd733f3f8460347a10cbdd9",
+                      "accountId": "4ac123f3f8412345a10cbaa0",
                       "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
@@ -891,7 +1061,7 @@ Example output:
                           "16x16": "",
                           "32x32": ""
                       },
-                      "displayName": "Mike Rinehart",
+                      "displayName": "User1",
                       "active": true,
                       "timeZone": "America/Chicago"
                   },
@@ -920,10 +1090,11 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-#
+_This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.0 - Fix user enumeration  in `Find Users` | Add example input | Update titles of Attachment Filename input in Attach Issue action and Poll Timeout input in New Issue trigger to match style
 * 4.0.2 - Moved `apk add` in Dockerfile to use cache | Changed bare strings in params.get and output to static fields from schema | Remove duplicated code in actions | Changed `Exception` to `PluginException`
 * 3.2.1 - Update Get Issue, Find Issues and New Issue action to support a Get Attachments option
 * 3.2.0 - Update Transition Issue action to allow for assignment of fields during issue transition
@@ -951,4 +1122,3 @@ _This plugin does not contain any custom output types._
 ## References
 
 * [Jira](https://www.atlassian.com/software/jira)
-

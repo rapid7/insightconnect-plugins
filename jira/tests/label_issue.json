@@ -2,8 +2,12 @@
     "body": {
         "action": "label_issue",
         "input": {
-            "id": "",
-            "label": ""
+            "id": "10001",
+            "label": "test"
+        },
+        "connection": {
+          "credentials": null,
+          "url": "https://company.atlassian.net/"
         },
         "meta": {}
     },

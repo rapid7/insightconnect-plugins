@@ -68,7 +68,6 @@ class SearchHashesInput(komand.Input):
         "Created",
         "Lastseen",
         "Firstseen",
-        "Lastseen",
         "Modified",
         "Riskscore",
         "Rules",

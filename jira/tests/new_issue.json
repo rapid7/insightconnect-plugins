@@ -7,6 +7,10 @@
         "input": {
             "jql": ""
         },
+        "connection": {
+          "credentials": null,
+          "url": "https://company.atlassian.net/"
+        },
         "meta": {},
         "trigger": "new_issue"
     },

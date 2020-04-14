@@ -1,0 +1,23 @@
+{
+  "body": {
+    "action": "query",
+    "meta": {},
+    "input": {
+      "query": "SELECT device.browser, SUM ( totals.transactions ) AS total_transactions FROM `bigquery-public-data.google_analytics_sample.ga_sessions_*` WHERE _TABLE_SUFFIX BETWEEN '20170701' AND '20170731' GROUP BY device.browser ORDER BY total_transactions DESC"
+    },
+    "connection": {
+      "auth_provider_x509_cert_url": null,
+      "auth_uri": null,
+      "client_email": null,
+      "client_id": null,
+      "client_x509_cert_url": null,
+      "private_key": {
+        "privateKey": null
+      },
+      "private_key_id": null,
+      "project_id": null
+    }
+  },
+  "type": "action_start",
+  "version": "v1"
+}
