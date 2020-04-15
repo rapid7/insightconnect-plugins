@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 2.0.0
+version: 2.1.0
 vendor: rapid7
 support: community
 status: []
@@ -445,6 +445,28 @@ actions:
         description: Group Name e.g. My Azure Group
         type: string
         required: true
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: false
+  add_user_to_groups_by_id:
+    title: Add User to Groups by ID
+    description: Add a user to a set of groups by group ID
+    input:
+      user_id:
+        title: User ID
+        description: User ID e.g. user@example.com
+        type: string
+        required: true
+        example: user@example.com
+      group_id:
+        title: Group IDs
+        description: IDs of Groups to Add User to
+        type: "[]string"
+        required: true
+        example: ["b4d41d4-eb13-4a33-99b5-7d7290df22e9"]
     output:
       success:
         title: Success
