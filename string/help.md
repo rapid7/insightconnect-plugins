@@ -30,11 +30,11 @@ This action is used to convert a string to a list of strings.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None| |
 |string|string|None|True|String to convert e.g. Sentence one
-Sentence two|None|
+Sentence two|None|Test string|
 
 Example input:
 
@@ -79,11 +79,11 @@ It allows users the ability to use the green selector and choose a specific vari
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|block_delimiter|string|None|False|The character delimiter for the initial string split, applied before the string delimiter input. This parameter is optional but allows for more complex handling|None|
-|string|string|None|True|String to convert e.g. USER=bob|None|
-|string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|block_delimiter|string|None|False|The character delimiter for the initial string split, applied before the string delimiter input. This parameter is optional but allows for more complex handling|None| |
+|string|string|None|True|String to convert e.g. USER=bob|None|Test string|
+|string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|=|
 
 Example input:
 
@@ -141,9 +141,9 @@ This action is used to convert lowercase letters to uppercase.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert e.g. USER=bob|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String to convert e.g. USER=bob|None|Test string|
 
 Example input:
 
@@ -175,9 +175,9 @@ This action is used to convert uppercase letters to lowercase.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert e.g. USER=bob|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String to convert e.g. USER=bob|None|Test string|
 
 Example input:
 
@@ -209,11 +209,11 @@ This action is used to encode a string.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|encoding|string|None|True|Encoding to use|['UTF-8', 'ASCII']|
-|error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|
-|string|string|None|True|String to encode|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|encoding|string|None|True|Encoding to use|['UTF-8', 'ASCII']|ASCII|
+|error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|strict|
+|string|string|None|True|String to encode|None|HELLO|
 
 Example input:
 
@@ -247,9 +247,9 @@ This action is used to trim a string of leading and trailing whitespace.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to trim|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String to trim|None|Test string|
 
 Example input:
 
