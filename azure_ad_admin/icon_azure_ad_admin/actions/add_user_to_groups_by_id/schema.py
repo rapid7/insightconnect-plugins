@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a user to a groups by ID"
+    DESCRIPTION = "Add a user to a set of groups by group ID"
 
 
 class Input:

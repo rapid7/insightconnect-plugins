@@ -37,18 +37,22 @@ The connection configuration accepts the following parameters:
 
 #### Add User to Groups by ID
 
-This action is used to add a user to a groups by ID.
+This action is used to add a user to a set of groups by group ID.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group_id|[]string|None|True|IDs of Groups to Add User to|None|\["b4d41d4-eb13-4a33-99b5-7d7290df22e9"\]|
+|group_id|[]string|None|True|IDs of Groups to Add User to|None|['b4d41d4-eb13-4a33-99b5-7d7290df22e9']|
 |user_id|string|None|True|User ID e.g. user@example.com|None|user@example.com|
 
 Example input:
 
 ```
+{
+  "group_id": ["b4d41d4-eb13-4a33-99b5-7d7290df22e9"],
+  "user_id": "user@example.com"
+}
 ```
 
 ##### Output
@@ -60,6 +64,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Update User Information
