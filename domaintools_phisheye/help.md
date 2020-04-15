@@ -47,7 +47,7 @@ Terms must be created (monitored) in PhishEye before they can be returned by thi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to find domains up to seven days prior to the current date. Set the value to an integer in the range of 1-7|None|1|
+|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to find domains up to seven days prior to the current date. Set the value to an integer in the range of 1-7|[1, 2, 3, 4, 5, 6, 7]|1|
 |query|string|None|True|Term for which the day's domains are desired|None|example|
 
 Example input:
