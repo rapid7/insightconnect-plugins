@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 1.4.1
+version: 2.1.0
 vendor: rapid7
 support: community
 status: []
@@ -387,7 +387,7 @@ actions:
         description: Body of the email to be sent out. Use $password to place the generated password
       notify_recipient:
         required: true
-        title: Recipient of creation email
+        title: Recipient of Creation Email
         type: string
         description: Email address of the account to be notified of user creation
       notify_from:
@@ -451,6 +451,28 @@ actions:
         description: Was operation successful
         type: boolean
         required: false
+  add_user_to_groups_by_id:
+    title: Add User to Groups by ID
+    description: Add a user to a set of groups by group ID
+    input:
+      user_id:
+        title: User ID
+        description: User ID e.g. user@example.com
+        type: string
+        required: true
+        example: user@example.com
+      group_id:
+        title: Group IDs
+        description: IDs of Groups to Add User to
+        type: "[]string"
+        required: true
+        example: ["b4d41d4-eb13-4a33-99b5-7d7290df22e9"]
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: false
   remove_user_from_group:
     title: Remove User from Group
     description: Remove a user from a group
@@ -471,6 +493,58 @@ actions:
         description: Was operation successful
         type: boolean
         required: false
+  update_user_info:
+    title: Update User Information
+    description: Update a users information
+    input:
+      city:
+        title: City
+        type: string
+        description: The city in which the user is located
+        required: false
+        example: Boston
+      country:
+        title: Country
+        type: string
+        description: The country or region in which the user is located; for example, US or UK
+        required: false
+        example: US
+      department:
+        title: Department
+        type: string
+        description: The name for the department in which the user works
+        required: false
+        example: IT
+      job_title:
+        title: Job Title
+        type: string
+        description: The user’s job title
+        required: false
+        example: Desktop Technician
+      state:
+        title: State
+        type: string
+        description: The state or province in the users address
+        required: false
+        example: MA
+      user_id:
+        title: User ID
+        description: User to updates ID
+        type: string
+        required: true
+        example: user@example.com
+      user_type:
+        title: Department
+        type: string
+        description: A string value that can be used to classify user types in your directory, such as Member and Guest
+        required: false
+        example: Member
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
 triggers:
   risk_detection:
     title: Risk Detection

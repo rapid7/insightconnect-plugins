@@ -27,11 +27,13 @@ class CreateIncident(komand.Action):
                                   data=response.text) from e
 
         sys_id = result.get("sys_id", "")
-
+        number = result.get("number", "")
+        
         if sys_id is None:
             raise PluginException(cause=f'Error: create_incident failed - no system_id returned.',
                                   assistance=f'Response: {response.text}')
 
         return {
-            Output.SYSTEM_ID: sys_id
+            Output.SYSTEM_ID: sys_id,
+            Output.NUMBER: number
         }

@@ -2,7 +2,11 @@
     "body": {
         "action": "get_comments",
         "input": {
-            "id": ""
+            "id": "TEST-1"
+        },
+        "connection": {
+          "credentials": null,
+          "url": "https://company.atlassian.net/"
         },
         "meta": {}
     },

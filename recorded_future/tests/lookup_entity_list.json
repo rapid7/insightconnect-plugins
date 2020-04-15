@@ -2,10 +2,12 @@
     "body": {
         "action": "lookup_entity_list",
         "connection": {
-            "api_key": null
+            "api_key": {
+                "secretKey": null
+            }
         },
         "input": {
-            "entity_list_id": "Q7omD8"
+            "entity_list_id": "report:Oe5eg5"
         },
         "meta": {}
     },

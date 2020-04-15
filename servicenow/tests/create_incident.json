@@ -6,13 +6,6 @@
       "create_data": {
         "short_description": "Short description"
       }
-    },
-    "connection": {
-      "client_login": {
-        "username": "",
-        "password": ""
-      },
-      "url": ""
     }
   },
   "type": "action_start",

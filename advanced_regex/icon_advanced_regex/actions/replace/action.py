@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ReplaceInput, ReplaceOutput, Component, Input, Output
 # Custom imports below
 import re
 from icon_advanced_regex.util import shared
 
 
-class Replace(komand.Action):
+class Replace(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

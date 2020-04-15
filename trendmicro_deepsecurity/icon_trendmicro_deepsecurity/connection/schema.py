@@ -6,6 +6,7 @@ import json
 class Input:
     DSM_API_KEY = "dsm_api_key"
     DSM_URL = "dsm_url"
+    DSM_VERIFY_SSL = "dsm_verify_ssl"
     
 
 class ConnectionSchema(komand.Input):
@@ -26,11 +27,19 @@ class ConnectionSchema(komand.Input):
       "description": "URL of the Deep Security Manager",
       "default": "https://app.deepsecurity.trendmicro.com",
       "order": 1
+    },
+    "dsm_verify_ssl": {
+      "type": "boolean",
+      "title": "SSL Verification",
+      "description": "Check the certificate of the Deep Security Manager",
+      "default": true,
+      "order": 3
     }
   },
   "required": [
     "dsm_api_key",
-    "dsm_url"
+    "dsm_url",
+    "dsm_verify_ssl"
   ],
   "definitions": {
     "credential_secret_key": {

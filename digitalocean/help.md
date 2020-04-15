@@ -32,7 +32,7 @@ This action is used to gets information about the account, such as email, drople
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -78,7 +78,7 @@ This action is used to lists all ssh keys from the account.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -180,7 +180,7 @@ This action is used to lists all domain names.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -194,7 +194,7 @@ This action is used to list all floating IPs from the account.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -208,7 +208,7 @@ This action is used to lists all snapshots belonging to the account.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -437,7 +437,7 @@ This action is used to lists all droplets on the account.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -460,7 +460,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 2.0.0 - Rename various actions by removing the dash separator
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.8 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin

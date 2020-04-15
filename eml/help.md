@@ -145,7 +145,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 1.1.3 - Use input and output constants | Remove unused variables | Improved variable name readability | Updated `Exception` to `PluginException`
-* 1.1.2 - New spec and help.md format for the Hub
+* 1.1.2 - New spec and help.md format for the Extension Library
 * 1.1.1 - Fix issue where plugin would fail on empty date returned
 * 1.1.0 - New action Parse EML File from String
 * 1.0.0 - Support web server mode

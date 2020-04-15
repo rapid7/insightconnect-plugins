@@ -491,7 +491,7 @@ If you're unable to import data without approval, the Anomali user configured in
 # Version History
 
 * 3.1.0 - Add new actions Submit File, Submit URL and Get Sandbox Report
-* 3.0.2 - New spec and help.md format for the Hub
+* 3.0.2 - New spec and help.md format for the Extension Library
 * 3.0.1 - Update actions to use SSL Verify from connection settings
 * 3.0.0 - Add new action Get Observables | Rename action Add Approval Indicator to Import Observable | Add connection test
 * 2.0.0 - Support optional server SSL/TLS certificate validation

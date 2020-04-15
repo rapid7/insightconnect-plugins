@@ -29,7 +29,7 @@ class CreateIssueInput(komand.Input):
   "properties": {
     "attachment_bytes": {
       "type": "string",
-      "title": "Attachment bytes",
+      "title": "Attachment Bytes",
       "displayType": "bytes",
       "description": "Attachment bytes",
       "format": "bytes",
@@ -37,7 +37,7 @@ class CreateIssueInput(komand.Input):
     },
     "attachment_filename": {
       "type": "string",
-      "title": "Attachment filename",
+      "title": "Attachment Filename",
       "description": "Attachment filename",
       "order": 7
     },
