@@ -86,7 +86,7 @@ class ForSaleInput(komand.Input):
     "posted_today": {
       "type": "boolean",
       "title": "Posted Today",
-      "description": "Is posted today",
+      "description": "Was posted today",
       "default": false,
       "order": 4
     },
