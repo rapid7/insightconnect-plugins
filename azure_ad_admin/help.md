@@ -543,6 +543,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - New action Add User to Groups By IDs
 * 2.0.0 - New action Update User Info
 * 1.4.1 - Extension Library styling update
 * 1.4.0 - New trigger Risk Detection
