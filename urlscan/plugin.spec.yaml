@@ -152,8 +152,8 @@ actions:
         description: The query term (ElasticSearch simple query string), default is *
         type: string
         required: true
-        example: domain:rapid7.com
-        default: domain:rapid7.com
+        example: domain:example.com
+        default: domain:example.com
       size:
         title: Size
         description: Number of results returned
