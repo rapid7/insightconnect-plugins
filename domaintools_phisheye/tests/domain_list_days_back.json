@@ -1,18 +1,18 @@
 {
-  "body": {
-    "action": "domain_list",
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "username": ""
+    "body": {
+        "action": "domain_list",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "days_back": 5,
+            "query": "insight"
+        },
+        "meta": {}
     },
-    "input": {
-      "query": "rapid7",
-      "days_back": 5
-    },
-    "meta": {}
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }

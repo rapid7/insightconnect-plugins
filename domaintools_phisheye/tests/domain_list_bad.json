@@ -1,17 +1,17 @@
 {
-  "body": {
-    "action": "domain_list",
-    "connection": {
-      "api_key": {
-        "secretKey": ""
-      },
-      "username": ""
+    "body": {
+        "action": "domain_list",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "query": "non_existing"
+        },
+        "meta": {}
     },
-    "input": {
-      "query": "non_existing"
-    },
-    "meta": {}
-  },
-  "type": "action_start",
-  "version": "v1"
+    "type": "action_start",
+    "version": "v1"
 }
