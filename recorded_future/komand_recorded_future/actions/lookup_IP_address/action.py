@@ -20,17 +20,19 @@ class LookupIPAddress(komand.Action):
             fields = params.get(Input.FIELDS)
             comment = params.get(Input.COMMENT)
 
-            if not len(fields):
-                fields = None
+            query_params = {}
 
-            if not len(comment):
-                comment = None
+            if fields and len(fields):
+                query_params["fields"] = ",".join(fields)
+
+            if comment and len(comment):
+                query_params["comment"] = comment
+
             # move to raw, API was unable to handle error data returned
-            qparams = {"fields": ",".join(fields), "comment": comment}
             headers = {"X-RFToken": self.connection.token}
             resp = requests.get(
                 f"https://api.recordedfuture.com/v2/ip/{ip_address}",
-                params=qparams,
+                params=query_params,
                 headers=headers,
             )
             data = resp.json()

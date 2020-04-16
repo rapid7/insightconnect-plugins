@@ -12,7 +12,7 @@ returned in the [STIX](https://stixproject.github.io/about/) format.
 
 # Key Features
 
-* Search domain lists
+* Search domain and IP lists
 * Download risk lists
 * Lookup and search hashes
 
@@ -572,7 +572,7 @@ This action is used to search for data related to hashes of a specified type.
 |direction|string|asc|True|Sort results ascending/descending|['asc', 'desc']|asc|
 |from|number|0|True|Number of initial records to skip|None|0|
 |limit|number|None|True|Number of results to retrieve, up to 100|None|10|
-|orderby|string|None|True|Which property to sort the results by|['Created', 'Lastseen', 'Firstseen', 'Lastseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
+|orderby|string|None|True|Which property to sort the results by|['Created', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
 
 Example input:
 
@@ -1302,6 +1302,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.5.5 - Fix NoneType has no len() | Fix enums in search hashes
 * 1.5.4 - Add example inputs | Fix schema bug where `criticality` output was improperly defined as an integer in List Domain Risk Rules, List Hash Risk Rules, List IP Addresses Risk Rules and List Vulnerability Risk Rules actions
 * 1.5.3 - New spec and help.md format for the Extension Library
 * 1.5.2 - Fix issue where timestamp for evidenceDetails was set to integer, timestamp is now expected as datetime from RecordedFuture

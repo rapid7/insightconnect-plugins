@@ -16,10 +16,13 @@ class LookupHash(komand.Action):
             hash_ID = params.get(Input.HASH)
             fields = params.get(Input.FIELDS)
             comment = params.get(Input.COMMENT)
-            if not len(fields):
+
+            if not fields or not len(fields):
                 fields = None
+
             if not comment:
                 comment = None
+
             hash_report = self.connection.client.lookup_hash(hash_ID, fields=fields, comment=comment)
             if hash_report.get("warnings", False):
                 self.logger.info(

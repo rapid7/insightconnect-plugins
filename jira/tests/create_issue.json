@@ -10,6 +10,10 @@
             "summary": "Test issue",
             "type": "Story"
         },
+        "connection": {
+          "credentials": null,
+          "url": "https://company.atlassian.net/"
+        },
         "meta": {}
     },
     "type": "action_start",
