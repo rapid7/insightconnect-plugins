@@ -153,6 +153,7 @@ actions:
         type: string
         required: true
         example: domain:rapid7.com
+        default: domain:rapid7.com
       size:
         title: Size
         description: Number of results returned

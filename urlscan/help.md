@@ -47,7 +47,7 @@ This action is used to search urlscan.io.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |offset|integer|0|True|Offset of first result (for paginating)|None|1|
-|q|string|None|True|The query term (ElasticSearch simple query string), default is *|None|domain:rapid7.com|
+|q|string|domain:rapid7.com|True|The query term (ElasticSearch simple query string), default is *|None|domain:rapid7.com|
 |size|integer|100|True|Number of results returned|None|45|
 |sort|string|_score|True|Sorting, specificied via $sort_field:$sort_order|None|_score|
 
