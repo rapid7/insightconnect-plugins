@@ -19,12 +19,12 @@ This plugin uses the [Microsoft Teams API](https://docs.microsoft.com/en-us/grap
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|application_id|string|None|True|Application (client) ID|None|
-|application_secret|credential_secret_key|None|True|Application secret|None|
-|directory_id|string|None|True|Directory (tenant) ID|None|
-|username_password|credential_username_password|None|True|Username and password|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|application_id|string|None|True|Application (client) ID|None|None|
+|application_secret|credential_secret_key|None|True|Application secret|None|None|
+|directory_id|string|None|True|Directory (tenant) ID|None|None|
+|username_password|credential_username_password|None|True|Username and password|None|None|
 
 Example input:
 
@@ -53,11 +53,11 @@ Regular expressions used by this action are Python specific.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_name|string|None|True|Channel|None|
-|message|string|None|True|Message to send|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_name|string|None|True|Channel|None|None|
+|message|string|None|True|Message to send|None|None|
+|team_name|string|None|True|Team name|None|None|
 
 Example input:
 
@@ -112,11 +112,11 @@ This action is used to send HTML as a message.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_name|string|None|True|Channel name|None|
-|message_content|string|None|True|HTML content to send|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_name|string|None|True|Channel name|None|None|
+|message_content|string|None|True|HTML content to send|None|None|
+|team_name|string|None|True|Team name|None|None|
 
 Example input:
 
@@ -171,12 +171,18 @@ This action sends a message using the GUID for the team and channel. This is mor
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_guid|string|None|True|Channel GUID|None|
-|is_html|boolean|None|True|Is the message HTML|None|
-|message|string|None|True|Message to send|None|
-|team_guid|string|None|True|Team GUID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_guid|string|None|True|Channel GUID|None|None|
+|is_html|boolean|None|True|Is the message HTML|None|None|
+|message|string|None|True|Message to send|None|None|
+|team_guid|string|None|True|Team GUID|None|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|message|message|False|The message object that was created|
 
 Example input:
 
@@ -236,9 +242,9 @@ Regular expressions used by this action are Python specific.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|team_name|string|None|False|Optional regex-capable team name to look for|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|team_name|string|None|False|Optional regex-capable team name to look for|None|None|
 
 Example input:
 
@@ -302,10 +308,10 @@ Regular expressions used by this action are Python specific.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_name|string|None|False|Optional regex-capable channel to look for|None|
-|team_name|string|None|True|Team name to look for|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_name|string|None|False|Optional regex-capable channel to look for|None|None|
+|team_name|string|None|True|Team name to look for|None|None|
 
 Example input:
 
@@ -344,10 +350,10 @@ This action is used to add a member to a team.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|member_login|string|None|True|Member login e.g. user@example.com|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|member_login|string|None|True|Member login e.g. user@example.com|None|None|
+|team_name|string|None|True|Team name|None|None|
 
 Example input:
 
@@ -378,11 +384,11 @@ This action is used to add a channel to a team.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_description|string|None|True|Channel description|None|
-|channel_name|string|None|True|Channel name|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_description|string|None|True|Channel description|None|None|
+|channel_name|string|None|True|Channel name|None|None|
+|team_name|string|None|True|Team name|None|None|
 
 Example input:
 
@@ -414,10 +420,10 @@ This action is used to remove a channel from a team.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_name|string|None|True|Channel name|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_name|string|None|True|Channel name|None|None|
+|team_name|string|None|True|Team name|None|None|
 
 Example input:
 
@@ -448,10 +454,10 @@ This action is used to remove a member from a team.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|member_login|string|None|True|Member Login e.g. user@example.com|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|member_login|string|None|True|Member Login e.g. user@example.com|None|None|
+|team_name|string|None|True|Team name|None|None|
 
 Example input:
 
@@ -482,14 +488,14 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|group_description|string|None|True|Group description|None|
-|group_name|string|None|True|Team name|None|
-|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|
-|mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|
-|members|string[]|None|False|A list of usernames to set as members|None|
-|owners|string[]|None|False|A list of usernames to set as owners|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|group_description|string|None|True|Group description|None|None|
+|group_name|string|None|True|Team name|None|None|
+|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|None|
+|mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|None|
+|members|string[]|None|False|A list of usernames to set as members|None|None|
+|owners|string[]|None|False|A list of usernames to set as owners|None|None|
 
 Example input:
 
@@ -545,9 +551,9 @@ This action is used to delete a team and the associated group from Azure.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|team_name|string|None|True|Team Name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|team_name|string|None|True|Team Name|None|None|
 
 Example input:
 
@@ -581,11 +587,11 @@ Regular expressions used by this trigger are Python specific.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_name|string|None|True|Channel|None|
-|message_content|string|None|False|Regex to match new messages against|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_name|string|None|True|Channel|None|None|
+|message_content|string|None|False|Regex to match new messages against|None|None|
+|team_name|string|None|True|Team name|None|None|
 
 Example input:
 
@@ -644,6 +650,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.2 - Fix issue where unexpected HTML messages would not trigger workflows
 * 2.0.1 - Update to Get Teams action to support more than 20 teams
 * 2.0.0 - Fix issue where send message would not work if there were too many teams | Removed regex capability for team and channel inputs which will speed up Send Message and Send HTML Message actions
 * 1.3.0 - New action Send Message by GUID
