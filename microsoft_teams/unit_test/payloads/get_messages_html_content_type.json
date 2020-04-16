@@ -1,0 +1,48 @@
+{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#teams('7af08a76-01fe-4a1d-bfa1-84d2b5509cdd')/channels('19%3A4af30b754058411fa475d2b416417089%40thread.skype')/messages",
+    "@odata.count": 20,
+    "@odata.nextLink": "https://graph.microsoft.com/beta/teams/7af08a76-01fe-4a1d-bfa1-84d2b5509cdd/channels/19:4af30b754058411fa475d2b416417089@thread.skype/messages?$skiptoken=%2bRID%3a~vpsQAJ9uAC038EsAAABQCw%3d%3d%23RT%3a1%23TRC%3a20%23RTD%3auDcxOTo0YWYzMGI3NTQwNTg0MTFmYTQ3NWQyYjQxNjQxNzA4OUB0aHJlYWQuc2t5cGU7MTU3MTA4MjQ5NzEzMw%3d%3d%23ISV%3a1%23FPC%3aAggvAQAAQC0AAEMBAABALQAALwEAAEAtAAAUAEEtBgAjgGmBAIBBAAAG2YABwIgAMQEAAEAtAAAMAEau2ILkg8ECBEAzgDkBAABALQAAAgAomj0BAABALQAAAgDsvj4BAABALQAAAgDFh0ABAABALQAABABYvRCCQQEAAEAtAAAOABuAHYCwgB2GmYG4gSGAQwEAAEAtAAACAA6e",
+    "value": [
+              {
+            "id": "1571078988065",
+            "replyToId": null,
+            "etag": "1571078988065",
+            "messageType": "message",
+            "createdDateTime": "2019-10-14T18:49:48.065Z",
+            "lastModifiedDateTime": null,
+            "deletedDateTime": null,
+            "subject": null,
+            "summary": "Test Message",
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3A4af30b754058411fa475d2b416417089%40thread.skype/1571078988065?groupId=7af08a76-01fe-4a1d-bfa1-84d2b5509cdd&tenantId=5c824599-dc8c-4d31-96fb-3b886d4f8f10&createdTime=1571078988065&parentMessageId=1571078988065",
+            "policyViolation": null,
+            "from": {
+                "device": null,
+                "user": null,
+                "conversation": null,
+                "application": {
+                    "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2",
+                    "displayName": "IconTest",
+                    "applicationIdentityType": "office365Connector"
+                }
+            },
+            "body": {
+                "contentType": "html",
+                "content": "<h1><b>!match_this</b> command</h1>"
+            },
+            "attachments": [
+                {
+                    "id": "85ba9256e94b4acdb2534f2fbb570548",
+                    "contentType": "application/vnd.microsoft.teams.card.o365connector",
+                    "contentUrl": null,
+                    "content": "{\r\n  \"summary\": \"Test Message\",\r\n  \"text\": \"<p>That was easy</p>\",\r\n  \"title\": \"This is a title\",\r\n  \"potentialAction\": [\r\n    {\r\n      \"actions\": [\r\n        {\r\n          \"hideCardOnInvoke\": false,\r\n          \"target\": \"https://www.google.com\",\r\n          \"@type\": \"HttpPost\",\r\n          \"@id\": \"35e3b187-c2b6-4e31-92e6-b2db93136513\",\r\n          \"name\": \"Do Something!\",\r\n          \"isPrimaryAction\": false\r\n        }\r\n      ],\r\n      \"@type\": \"ActionCard\",\r\n      \"@id\": \"ee8603cb-fdec-48d3-8ac4-30213c123e5a\",\r\n      \"name\": \"Add a comment\",\r\n      \"isPrimaryAction\": false\r\n    }\r\n  ]\r\n}",
+                    "name": null,
+                    "thumbnailUrl": null
+                }
+            ],
+            "mentions": [],
+            "reactions": []
+        }
+    ]
+}
