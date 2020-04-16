@@ -1,0 +1,18 @@
+{
+    "body": {
+        "action": "domain_list",
+        "connection": {
+            "api_key": {
+                "secretKey": null
+            },
+            "username": null
+        },
+        "input": {
+            "days_back": 10,
+            "query": "rapid7"
+        },
+        "meta": {}
+    },
+    "type": "action_start",
+    "version": "v1"
+}
