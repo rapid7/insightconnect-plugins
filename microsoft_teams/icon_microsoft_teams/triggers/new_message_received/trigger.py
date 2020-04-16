@@ -5,6 +5,7 @@ from .schema import NewMessageReceivedInput, NewMessageReceivedOutput, Input, Ou
 from komand.exceptions import PluginException
 from icon_microsoft_teams.util.teams_utils import get_teams_from_microsoft, get_channels_from_microsoft
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
+from icon_microsoft_teams.util.strip_html import strip_html
 from typing import Pattern
 import re
 import requests
@@ -58,7 +59,11 @@ class NewMessageReceived(komand.Trigger):
                         self.logger.info("Analyzing message...")
                         if message_content:
                             self.logger.info("Checking message content.")
-                            if compiled_message_content.search(message.get("body", {}).get("content", "")):
+                            message_content = message.get("body",{}).get("content", "")
+                            if message.get("body", {}).get("contentType", "").lower() == "html":
+                                message_content = strip_html(message_content)
+                            self.logger.info(f"Testing message: {message_content}")
+                            if compiled_message_content.search(message_content):
                                 self.logger.info("Returning new message.")
                                 self.send({Output.MESSAGE: message})
                             else:

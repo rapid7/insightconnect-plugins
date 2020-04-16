@@ -644,6 +644,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.2 - Fix issue where unexpected HTML messages would not trigger workflows
 * 2.0.1 - Update to Get Teams action to support more than 20 teams
 * 2.0.0 - Fix issue where send message would not work if there were too many teams | Removed regex capability for team and channel inputs which will speed up Send Message and Send HTML Message actions
 * 1.3.0 - New action Send Message by GUID
