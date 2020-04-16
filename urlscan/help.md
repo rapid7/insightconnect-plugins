@@ -305,6 +305,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.6 - Add default input
 * 2.1.5 - Add example input
 * 2.1.4 - Use input and output constants | Added "f" strings
 * 2.1.3 - New spec and help.md format for the Extension Library
