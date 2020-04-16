@@ -90,7 +90,7 @@ Example output:
         "ns11.domaincontrol.com",
         "ns12.domaincontrol.com"
       ],
-      "registrant_email": "2020insightsolutions.com@domainsbyproxy.com",
+      "registrant_email": "user@example.com",
       "registrar_name": "GoDaddy.com, LLC",
       "risk_score": 15,
       "tld": "com"
