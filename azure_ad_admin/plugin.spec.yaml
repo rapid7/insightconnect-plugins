@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 2.1.0
+version: 2.1.1
 vendor: rapid7
 support: community
 status: []
@@ -534,7 +534,7 @@ actions:
         required: true
         example: user@example.com
       user_type:
-        title: Department
+        title: User Type
         type: string
         description: A string value that can be used to classify user types in your directory, such as Member and Guest
         required: false

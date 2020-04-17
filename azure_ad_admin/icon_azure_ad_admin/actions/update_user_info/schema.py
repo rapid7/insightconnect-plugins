@@ -65,7 +65,7 @@ class UpdateUserInfoInput(komand.Input):
     },
     "user_type": {
       "type": "string",
-      "title": "Department",
+      "title": "User Type",
       "description": "A string value that can be used to classify user types in your directory, such as Member and Guest",
       "order": 7
     }
