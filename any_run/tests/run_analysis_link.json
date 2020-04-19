@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "run_analysis",
+    "meta": {},
+    "input": {
+      "obj_url": "http://clicnews.com",
+      "obj_type": "url"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

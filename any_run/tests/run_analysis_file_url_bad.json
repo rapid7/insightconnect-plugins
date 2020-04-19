@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "run_analysis",
+    "meta": {},
+    "input": {
+      "obj_url": "http://example.com",
+      "obj_type": "file"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

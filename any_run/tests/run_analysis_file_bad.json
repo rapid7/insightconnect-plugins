@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "run_analysis",
+    "meta": {},
+    "input": {
+      "file": {
+        "content": "dGVzdAo=",
+        "filename": "test.exe"
+      },
+      "obj_type": "url"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

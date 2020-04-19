@@ -1,0 +1,366 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: any_run
+title: Any Run
+description: Malware hunting with live access to the heart of an incident
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/any_run
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.google.com/
+tags:
+- any run
+- malware
+- threat intelligence
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [any run, malware, threat intelligence]
+  features: []
+types:
+  hashes:
+    ssdeep:
+      title: Ssdeep
+      description: Ssdeep hash
+      type: string
+      required: true
+    head_hash:
+      title: Head Hash
+      description: Head hash
+      type: string
+      required: true
+    sha256:
+      title: SHA256
+      description: SHA256 hash
+      type: string
+      required: true
+    sha1:
+      title: SHA1
+      description: SHA1 hash
+      type: string
+      required: true
+    md5:
+      title: MD5
+      description: MD5 hash
+      type: string
+      required: true
+  task:
+    verdict:
+      title: Verdict
+      description: Task verdict
+      type: string
+      required: true
+      example: Malicious activity
+    name:
+      title: Name
+      description: Task name
+      type: string
+      required: true
+      example: 'malware.exe'
+    related:
+      title: Related
+      description: Task related URL
+      type: string
+      required: true
+      example: 'https://app.any.run/tasks/0cb5990e-7858-4455-a5f8-8d704051901b'
+    pcap:
+      title: PCAP
+      description: Task PCAP URL
+      type: string
+      required: true
+      example: 'https://content.any.run/tasks/0cb5990e-7858-4455-a5f8-8d704051901b/download/pcap'
+    file:
+      title: File
+      description: Task file URL
+      type: string
+      required: true
+      example: 'https://content.any.run/tasks/0cb5990e-7858-4455-a5f8-8d704051901b/download/files/005d7277-b4c1-4b96-bcd9-ac02b799eec9'
+    json:
+      title: JSON
+      description: Task JSON URL
+      type: string
+      required: true
+      example: 'https://api.any.run/report/0cb5990e-7858-4455-a5f8-8d704051901b/summary/json'
+    misp:
+      title: MISP
+      description: Task MISP URL
+      type: string
+      required: true
+      example: 'https://api.any.run/report/0cb5990e-7858-4455-a5f8-8d704051901b/summary/misp'
+    tags:
+      title: Tags
+      description: Task tags
+      type: '[]string'
+      required: true
+      example: '[tag]'
+    date:
+      title: Date
+      description: Task date
+      type: string
+      required: true
+      example: 2020-04-17T18:44:37.483Z
+    hashes:
+      title: Hashe
+      description: Task hashes
+      type: hashes
+      required: true
+connection:
+  api_key:
+    title: API Key
+    description: API Key to access InsightOps service. e.g. 39dd20eb-1337-45a0-a4044-133f237b50fa
+    type: credential_secret_key
+    required: false
+    example: FfFFff4FFf77eFfffAAaaAAa49aAaAaaAAAA9Aa4
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: false
+    example: '{ "username": "user@example.com", "password":"dGVzdAo="}'
+actions:
+  get_history:
+    title: Get History Tasks
+    description: Get history Tasks
+    input:
+      team:
+        title: Team
+        description: Leave this field blank to get your history or specify to get team history
+        type: boolean
+        required: false
+        default: false
+        example: false
+      skip:
+        title: Skip
+        description: Skip records
+        type: integer
+        required: false
+        default: 0
+        example: 25
+      limit:
+        title: Limit
+        description: Limits number of records, Size range 1-100
+        type: integer
+        required: false
+        default: 25
+        example: 25
+    output:
+      tasks:
+        title: Tasks
+        description: History tasks
+        required: false
+        type: '[]task'
+  get_report:
+    title: Get Report
+    description: Get task report
+    input:
+      task:
+        title: UUID
+        description: Task UUID
+        type: string
+        required: true
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+    output:
+      reports:
+        title: Reports
+        description: Task reports
+        required: false
+        type: 'object'
+  run_analysis:
+    title: Run Analysis
+    description: Run new analysis
+    input:
+      file:
+        title: File
+        description: Malware file
+        type: file
+        required: false
+        example: '{ "filename": "file.txt", "content": "c2xpamJvb20=" }'
+      obj_type:
+        title: Type
+        description: Type of new task
+        type: string
+        default: file
+        required: true
+        enum:
+          - "file"
+          - "url"
+          - "download"
+      obj_url:
+        title: URL
+        description: URL, used only if "obj_type" is "url" or "download"
+        type: string
+        required: false
+        example: 'http://photoscape.ch/'
+      obj_ext_cmd:
+        title: Command
+        description: Optional command line
+        type: string
+        required: false
+      obj_ext_browser:
+        title: Browser
+        description: Browser name, used only for "url" type
+        type: string
+        required: false
+      obj_ext_useragent:
+        title: User Agent
+        description: User agent, used only for "download" type
+        type: string
+        required: false
+      obj_ext_elevateprompt:
+        title: Elevate Prompt
+        description: Auto-accept UAC option
+        type: boolean
+        required: false
+        default: true
+        example: true
+      obj_ext_extension:
+        title: Extension
+        description: Change extension to valid
+        type: boolean
+        required: false
+        default: true
+        example: true
+      opt_privacy_hidesource:
+        title: Privacy Hidesource
+        description: Option for hiding of source URL, used only for "download" type
+        type: boolean
+        required: false
+        default: true
+        example: true
+      env_os:
+        title: OS
+        description: Operation system
+        type: string
+        required: false
+        default: 'windows'
+        example: 'windows'
+        enum:
+          - 'windows'
+      env_bitness:
+        title: Bitness
+        description: Bitness of operation system
+        type: int
+        required: false
+        default: 32
+        example: 32
+        enum:
+          - 32
+          - 64
+      env_version:
+        title: Version
+        description: Version of OS
+        type: string
+        required: false
+        default: '7'
+        example: '7'
+        enum:
+          - 'vista'
+          - '7'
+          - '8.1'
+          - '10'
+      env_type:
+        title: Type
+        description: Environment preset type
+        type: string
+        required: false
+        default: 'complete'
+        example: 'complete'
+        enum:
+          - 'clean'
+          - 'office'
+          - 'complete'
+      opt_network_connect:
+        title: Network Connect
+        description: Network connection state
+        type: boolean
+        required: false
+        default: true
+        example: true
+      opt_network_fakenet:
+        title: Network Fakenet
+        description: FakeNet feature status
+        type: boolean
+        required: false
+        default: false
+        example: false
+      opt_network_tor:
+        title: Network TOR
+        description: TOR using
+        type: boolean
+        required: false
+        default: false
+        example: false
+      opt_network_mitm:
+        title: Network MITM
+        description: HTTPS MITM proxy option
+        type: boolean
+        required: false
+        default: false
+        example: false
+      opt_network_geo:
+        title: Network Geo
+        description: Geo location option
+        type: string
+        required: false
+        example: 'fastest'
+        enum:
+          - 'fastest'
+          - 'AU'
+          - 'BR'
+          - 'DE'
+          - 'CH'
+          - 'FR'
+          - 'KR'
+          - 'US'
+          - 'RU'
+          - 'GB'
+          - 'IT'
+      opt_kernel_heavyevasion:
+        title: Kernel Heavy Evasion
+        description: Heavy evasion option
+        type: boolean
+        required: false
+        default: false
+        example: false
+      opt_privacy_type:
+        title: Privacy Type
+        description: Privacy settings
+        type: string
+        required: false
+        default: 'bylink'
+        example: 'bylink'
+        enum:
+          - 'public'
+          - 'bylink'
+          - 'owner'
+      opt_timeout:
+        title: Timeout
+        description: Timeout option, size range 10-660
+        type: integer
+        required: false
+        default: 60
+        example: 60
+      obj_ext_startfolder:
+        title: Start Folder
+        description: Start object from
+        type: string
+        required: false
+        default: 'temp'
+        example: 'temp'
+        enum:
+          - 'desktop'
+          - 'home'
+          - 'downloads'
+          - 'appdata'
+          - 'temp'
+          - 'windows'
+          - 'root'
+    output:
+      uuid:
+        title: Task UUID
+        description: Response task UUID
+        required: false
+        type: 'string'
