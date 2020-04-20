@@ -2,7 +2,7 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: any_run
-title: Any Run
+title: "Any.Run"
 description: Analyze suspicious and malicious activities using the cloud-based malware analysis service
 version: 1.0.0
 vendor: rapid7
