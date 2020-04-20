@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: any_run
 title: Any Run
-description: Malware hunting with live access to the heart of an incident
+description: Analyze suspicious and malicious activities using the cloud-based malware analysis service
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -59,7 +59,7 @@ types:
       description: Task name
       type: string
       required: true
-      example: 'malware.exe'
+      example: 'setup.exe'
     related:
       title: Related
       description: Task related URL
@@ -95,7 +95,7 @@ types:
       description: Task tags
       type: '[]string'
       required: true
-      example: '[tag]'
+      example: '["suspicious"]'
     date:
       title: Date
       description: Task date
@@ -110,16 +110,16 @@ types:
 connection:
   api_key:
     title: API Key
-    description: API Key to access InsightOps service. e.g. 39dd20eb-1337-45a0-a4044-133f237b50fa
+    description: API Key for Any.Run
     type: credential_secret_key
     required: false
-    example: FfFFff4FFf77eFfffAAaaAAa49aAaAaaAAAA9Aa4
+    example: WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4
   credentials:
     title: Credentials
     description: Username and password
     type: credential_username_password
     required: false
-    example: '{ "username": "user@example.com", "password":"dGVzdAo="}'
+    example: '{ "username": "user@example.com", "password":"mypassword"}'
 actions:
   get_history:
     title: Get History Tasks
@@ -177,7 +177,7 @@ actions:
         description: Malware file
         type: file
         required: false
-        example: '{ "filename": "file.txt", "content": "c2xpamJvb20=" }'
+        example: '{ "filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }'
       obj_type:
         title: Type
         description: Type of new task
@@ -193,22 +193,25 @@ actions:
         description: URL, used only if "obj_type" is "url" or "download"
         type: string
         required: false
-        example: 'http://photoscape.ch/'
+        example: 'http://example.org'
       obj_ext_cmd:
         title: Command
         description: Optional command line
         type: string
         required: false
+        example: 'bash /tmp/run'
       obj_ext_browser:
         title: Browser
         description: Browser name, used only for "url" type
         type: string
         required: false
+        example: Google Chrome
       obj_ext_useragent:
         title: User Agent
         description: User agent, used only for "download" type
         type: string
         required: false
+        example: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
       obj_ext_elevateprompt:
         title: Elevate Prompt
         description: Auto-accept UAC option

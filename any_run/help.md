@@ -26,8 +26,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|False|API Key to access InsightOps service. e.g. 39dd20eb-1337-45a0-a4044-133f237b50fa|None|FfFFff4FFf77eFfffAAaaAAa49aAaAaaAAAA9Aa4|
-|credentials|credential_username_password|None|False|Username and password|None|{ "username": "user@example.com", "password":"dGVzdAo="}|
+|api_key|credential_secret_key|None|False|API Key for Any.Run|None|WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4|
+|credentials|credential_username_password|None|False|Username and password|None|{ "username": "user@example.com", "password":"mypassword"}|
 
 ## Technical Details
 
@@ -2201,15 +2201,15 @@ This action is used to run new analysis.
 |env_os|string|windows|False|Operation system|['windows']|windows|
 |env_type|string|complete|False|Environment preset type|['clean', 'office', 'complete']|complete|
 |env_version|string|7|False|Version of OS|['vista', '7', '8.1', '10']|7|
-|file|file|None|False|Malware file|None|{ "filename": "file.txt", "content": "c2xpamJvb20=" }|
-|obj_ext_browser|string|None|False|Browser name, used only for "url" type|None|None|
-|obj_ext_cmd|string|None|False|Optional command line|None|None|
+|file|file|None|False|Malware file|None|{ "filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }|
+|obj_ext_browser|string|None|False|Browser name, used only for "url" type|None|Google Chrome|
+|obj_ext_cmd|string|None|False|Optional command line|None|bash /tmp/run|
 |obj_ext_elevateprompt|boolean|True|False|Auto-accept UAC option|None|True|
 |obj_ext_extension|boolean|True|False|Change extension to valid|None|True|
 |obj_ext_startfolder|string|temp|False|Start object from|['desktop', 'home', 'downloads', 'appdata', 'temp', 'windows', 'root']|temp|
-|obj_ext_useragent|string|None|False|User agent, used only for "download" type|None|None|
+|obj_ext_useragent|string|None|False|User agent, used only for "download" type|None|Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0|
 |obj_type|string|file|True|Type of new task|['file', 'url', 'download']|None|
-|obj_url|string|None|False|URL, used only if "obj_type" is "url" or "download"|None|http://photoscape.ch/|
+|obj_url|string|None|False|URL, used only if "obj_type" is "url" or "download"|None|http://example.org|
 |opt_kernel_heavyevasion|boolean|False|False|Heavy evasion option|None|False|
 |opt_network_connect|boolean|True|False|Network connection state|None|True|
 |opt_network_fakenet|boolean|False|False|FakeNet feature status|None|False|

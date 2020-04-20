@@ -17,7 +17,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "API Key to access InsightOps service. e.g. 39dd20eb-1337-45a0-a4044-133f237b50fa",
+      "description": "API Key for Any.Run",
       "order": 1
     },
     "credentials": {

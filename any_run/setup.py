@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="any_run-rapid7-plugin",
       version="1.0.0",
-      description="Malware hunting with live access to the heart of an incident",
+      description="Analyze suspicious and malicious activities using the cloud-based malware analysis service",
       author="rapid7",
       author_email="",
       url="",
