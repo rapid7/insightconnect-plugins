@@ -847,12 +847,12 @@ Example input:
 
 ```
 {
-      "file": {
-        "content": "dGVzdAo=",
-        "filename": "test.exe"
-      },
-      "obj_type": "file"
-    }
+  "file": {
+    "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+    "filename": "setup.exe"
+  },
+  "obj_type": "file"
+}
 ```
 
 ##### Output
