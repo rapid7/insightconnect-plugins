@@ -1,22 +1,18 @@
 # Description
 
-Malware hunting with live access to the heart of an incident
+[Any.Run](https://any.run/) is a cloud-based malware analysis service. Automate analyzing suspicious and malicious activites using this plugin.
+
+This plugin utilizes the [Any.Run API](https://any.run/api-documentation/).
 
 # Key Features
 
-* Fastest malware analysis
-* Interact with os and get immediate result
-* Open urls in different browsers
-* MITRE att&ck mapping
-* Interactive process graphs
-* Analyze content of different filetypes
-* Thousands of malware reports per day
-* Analyze network events
-* Summary of indicators of compromise
+* Submit files for analysis
+* Obtain analysis report
+* Search task history
 
 # Requirements
 
-* Requires an API Key from the product
+* Requires an API Key or username and password combination
 
 # Documentation
 
@@ -118,7 +114,7 @@ Example output:
     "analysis": {
       "content": {
         "mainObject": {
-          "filename": "malware.exe",
+          "filename": "setup.exe",
           "hashes": {
             "md5": "c4ab8765314fc770e3ee8ca0693df8f9",
             "sha1": "0194f8c5364d1dad03a1fe6eaa0fd98a10accd9e",
@@ -1818,15 +1814,15 @@ Example output:
     },
     "processes": [
       {
-        "commandLine": "\"C:\\Users\\admin\\AppData\\Local\\Temp\\malware.exe\" ",
+        "commandLine": "\"C:\\Users\\admin\\AppData\\Local\\Temp\\setup.exe\" ",
         "context": {
           "integrityLevel": "MEDIUM",
           "rebootNumber": 0,
           "userName": "admin"
         },
-        "fileName": "malware.exe",
+        "fileName": "setup.exe",
         "fileType": "DROPPED",
-        "image": "C:\\Users\\admin\\AppData\\Local\\Temp\\malware.exe",
+        "image": "C:\\Users\\admin\\AppData\\Local\\Temp\\setup.exe",
         "mainProcess": true,
         "modules": [
           {
@@ -1850,7 +1846,7 @@ Example output:
             "time": 1587156270808
           },
           {
-            "image": "c:\\users\\admin\\appdata\\local\\temp\\malware.exe",
+            "image": "c:\\users\\admin\\appdata\\local\\temp\\setup.exe",
             "time": 1587156270792
           },
           {
