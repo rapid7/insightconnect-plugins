@@ -18,12 +18,28 @@ This plugin utilizes the [Any.Run API](https://any.run/api-documentation/).
 
 ## Setup
 
+We support both API key and username / password authentication with this plugin. When configuring the connection, use your preferred authentication method.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|False|API Key for Any.Run|None|WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4|
 |credentials|credential_username_password|None|False|Username and password|None|{ "username": "user@example.com", "password":"mypassword"}|
+
+Example input:
+
+```
+{
+  "api_key": {
+    "secretKey": "WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4"
+  },
+  "credentials": {
+    "password": "",
+    "username": ""
+  }
+}
+```
 
 ## Technical Details
 
@@ -902,7 +918,8 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+
+When configuring the connection, only one authentication method can be supplied. Enter an API key or the username and password combination.
 
 # Version History
 
