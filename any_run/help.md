@@ -100,7 +100,7 @@ Example output:
 
 #### Get Report
 
-This action is used to get task report.
+This action is used to get a task report.
 
 ##### Input
 
