@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 import base64
 from icon_any_run.util.api import AnyRunAPI
 
@@ -18,32 +18,35 @@ class Connection(insightconnect_plugin_runtime.Connection):
         api_key = params.get(Input.API_KEY)
         credentials = params.get(Input.CREDENTIALS)
 
-        self.logger.info(f'api_key: {api_key.get("secretKey")}')
-
         if not api_key and not credentials:
             raise ConnectionTestException(
                 cause='Invalid API key provided.',
                 assistance='One credential method is mandatory'
             )
 
-        if api_key and credentials:
+        if api_key and api_key.get("secretKey") and credentials and credentials.get('username'):
             raise ConnectionTestException(
                 cause='Invalid API key provided.',
                 assistance='Only one credential method should be used'
             )
 
-        if api_key:
+        if api_key and api_key.get("secretKey"):
             authorization = f'API-Key {api_key.get("secretKey")}'
         else:
             authorization = 'Basic ' + base64.encodebytes(
-                credentials.get('username') +
-                ":" +
-                credentials.get('password')
-            )
+                (credentials.get('username') +
+                 ":" +
+                 credentials.get('password')).encode()
+            ).decode("utf-8")
 
         self.any_run_api = AnyRunAPI({
-            'Authorization': authorization
+            'Authorization': authorization.rstrip()
         }, self.logger)
 
     def test(self):
-        pass
+        try:
+            self.any_run_api.get_history(False, 0, 1)
+        except PluginException as e:
+            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e)
+
+        return {}
