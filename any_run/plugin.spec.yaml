@@ -196,13 +196,13 @@ actions:
         example: 'http://example.org'
       obj_ext_cmd:
         title: Command
-        description: Optional command line
+        description: Optional command line that the VM will run. E.g. you can use 'RunDll32.EXE %FILENAME%,<func> <param>' to call a function by its name with a parameter in the uploaded sample. '%FILENAME%' is a built-in that will be automatically replaced with the file location in the environment.
         type: string
         required: false
-        example: 'bash /tmp/run'
+        example: 'RunDll32.EXE %FILENAME%, func32 -r'
       obj_ext_browser:
         title: Browser
-        description: Browser name, used only for "url" type
+        description: Browser name, used only for "url" type. E.g. Internet Explorer, Google Chrome, Mozilla Firefox, Opera
         type: string
         required: false
         example: Google Chrome
