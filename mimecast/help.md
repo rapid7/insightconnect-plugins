@@ -617,7 +617,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
-* 4.2.0 - Update Get TTP URL Logs action to use pagination
+* 4.1.0 - Update Get TTP URL Logs action to use pagination
 * 4.0.1 - Add example inputs
 * 4.0.0 - Update Get TTP URL Logs to allow for better URL filtering
 * 3.1.0 - New action Delete Managed URL and Delete Group Member

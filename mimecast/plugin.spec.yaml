@@ -5,7 +5,7 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 4.2.0
+version: 4.1.0
 vendor: rapid7
 support: rapid7
 status: []
