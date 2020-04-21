@@ -1,13 +1,13 @@
 # Description
 
-[Any.Run](https://any.run/) is a cloud-based malware analysis service. Automate analyzing suspicious and malicious activites using this plugin.
+[Any.Run](https://any.run/) is a cloud-based malware analysis service. Automate analyzing suspicious and malicious activities using this plugin.
 
 This plugin utilizes the [Any.Run API](https://any.run/api-documentation/).
 
 # Key Features
 
 * Submit files for analysis
-* Obtain analysis report
+* Obtain analysis reports
 * Search task history
 
 # Requirements
@@ -45,9 +45,9 @@ Example input:
 
 ### Actions
 
-#### Get History Tasks
+#### Get Task History
 
-This action is used to get history Tasks.
+This action is used to get task history.
 
 ##### Input
 
@@ -69,7 +69,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|tasks|[]task|False|History tasks|
+|tasks|[]task|False|Task history|
 
 Example output:
 
@@ -830,7 +830,7 @@ Example output:
 
 #### Run Analysis
 
-This action is used to run new analysis.
+This action is used to run a new analysis.
 
 ##### Input
 
@@ -917,7 +917,6 @@ _This plugin does not contain any triggers._
 |Verdict|string|True|Task verdict|
 
 ## Troubleshooting
-
 
 When configuring the connection, only one authentication method can be supplied. Enter an API key or the username and password combination.
 

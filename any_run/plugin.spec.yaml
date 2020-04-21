@@ -11,7 +11,7 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/any_run
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://www.google.com/
+  vendor_url: https://any.run
 tags:
 - any run
 - malware
@@ -110,7 +110,7 @@ types:
 connection:
   api_key:
     title: API Key
-    description: API Key for Any.Run
+    description: API key for Any.Run
     type: credential_secret_key
     required: false
     example: WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4
@@ -119,11 +119,11 @@ connection:
     description: Username and password
     type: credential_username_password
     required: false
-    example: '{ "username": "user@example.com", "password":"mypassword"}'
+    example: '{ "username": "user@example.com", "password": "mypassword"}'
 actions:
   get_history:
     title: Get History Tasks
-    description: Get history Tasks
+    description: Get task history
     input:
       team:
         title: Team
@@ -149,7 +149,7 @@ actions:
     output:
       tasks:
         title: Tasks
-        description: History tasks
+        description: Task history
         required: false
         type: '[]task'
   get_report:
@@ -177,7 +177,7 @@ actions:
         description: Malware file
         type: file
         required: false
-        example: '{ "filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }'
+        example: '{"filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }'
       obj_type:
         title: Type
         description: Type of new task
@@ -244,7 +244,7 @@ actions:
           - 'windows'
       env_bitness:
         title: Bitness
-        description: Bitness of operation system
+        description: Bitness of operating system
         type: int
         required: false
         default: 32

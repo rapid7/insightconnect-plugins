@@ -20,7 +20,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         if not api_key and not credentials:
             raise ConnectionTestException(
-                cause='No authentication credentials provided in the connection',
+                cause='No authentication credentials provided in the connection.',
                 assistance='Configure the connection with either an API key or username and password and try again.'
             )
 
