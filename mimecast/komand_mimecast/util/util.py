@@ -34,7 +34,7 @@ class MimecastRequests:
             self.logger = LogHelper().logger
 
     def mimecast_post(self, url: str, uri: str, access_key: str,
-                      secret_key: str, app_id: str, app_key: str, data: dict) -> dict:
+                      secret_key: str, app_id: str, app_key: str, data: dict, meta: dict = None) -> dict:
         """
         This method will send a properly formatted post request to the Mimecast server
         :param url: The server URL
@@ -44,6 +44,7 @@ class MimecastRequests:
         :param app_id: The application ID for the app that will be logging in
         :param app_key: The key associated with the app_id
         :param data: The payload for the api call
+        :param meta: The meta information for request
         :return:
         """
         # Set full URL
@@ -89,6 +90,9 @@ class MimecastRequests:
                 ]
             }
 
+        if meta is not None:
+            payload['meta'] = meta
+
         try:
             request = requests.post(url=url, headers=headers, data=str(payload))
         except requests.exceptions.RequestException as e:
@@ -118,7 +122,8 @@ class MimecastRequests:
             if response['meta']['status'] != 200:
                 self.logger.error(response['fail'])
                 raise PluginException(cause='Server request failed.',
-                                      assistance='Status code is {}, see log for details.'.format(response['meta']['status']))
+                                      assistance='Status code is {}, see log for details.'.format(
+                                          response['meta']['status']))
         except KeyError:
             self.logger.error(response)
             raise PluginException(cause='Unknown error.',
