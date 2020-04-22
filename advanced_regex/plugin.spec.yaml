@@ -4,7 +4,7 @@ products: [insightconnect]
 name: advanced_regex
 title: Advanced Regex
 description: Perform advanced regular expression operations on a string using Python regex
-version: 1.0.2
+version: 1.0.3
 support: community
 vendor: rapid7
 status: []
@@ -86,7 +86,7 @@ actions:
         title: New String
         description: The string to replace matches with
         type: string
-        required: true
+        required: false
         example: "REPLACED"
       in_regex:
         title: Regex

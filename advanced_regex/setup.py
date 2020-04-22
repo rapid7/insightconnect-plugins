@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="advanced_regex-rapid7-plugin",
-      version="1.0.2",
+      version="1.0.3",
       description="Perform advanced regular expression operations on a string using Python regex",
       author="rapid7",
       author_email="",

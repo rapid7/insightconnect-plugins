@@ -10,7 +10,7 @@
             "in_string": "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales sed luctus ac, dapibus quis augue. Vivamus in cursus libero. Donec vehicula turpis eu ante viverra, id lacinia.",
             "max_replace": 0,
             "multiline": true,
-            "replace_string": "REPLACED"
+            "replace_string": ""
         },
         "meta": {}
     },

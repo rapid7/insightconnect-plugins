@@ -84,8 +84,7 @@ class ReplaceInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "in_regex",
-    "in_string",
-    "replace_string"
+    "in_string"
   ]
 }
     """)

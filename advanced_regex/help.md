@@ -84,7 +84,7 @@ This action is used to regex search and replace string.
 adipiscing elit. Aliquam sapien ex, lorems odales|
 |max_replace|integer|0|False|Max occurrences to replace - if zero all will be replaced|None|0|
 |multiline|boolean|False|False|Make begin/end consider each line|None|True|
-|replace_string|string|None|True|The string to replace matches with|None|REPLACED|
+|replace_string|string|None|False|The string to replace matches with|None|REPLACED|
 
 Example input:
 
@@ -178,6 +178,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.3 - Update to make replace string non-required
 * 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
