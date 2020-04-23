@@ -207,7 +207,7 @@ Example input:
 {
   "action": "block",
   "sender": "user@example.com",
-  "to": "user@rapid7.com"
+  "to": "user@example.com"
 }
 ```
 
@@ -480,6 +480,8 @@ This action is used to get TTP URL logs.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |from|string|None|False|Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day|None|2018-11-22T14:49:18+0000|
+|max_pages|integer|100|False|Max pages returned, default 100|None|10|
+|page_size|integer|10|False|The number of logs returned per page, default value is 10|None|10|
 |route|string|all|True|Filters logs by route, must be one of inbound, outbound, internal, or all|['all', 'inbound', 'outbound', 'internal']|inbound|
 |scan_result|string|all|True|Filters logs by scan result, must be one of clean, malicious, or all|['clean', 'malicious', 'all']|malicious|
 |to|string|None|False|End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request|None|2018-11-22T14:49:18+0000|
@@ -615,6 +617,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 4.1.0 - Update Get TTP URL Logs action to use pagination
 * 4.0.1 - Add example inputs
 * 4.0.0 - Update Get TTP URL Logs to allow for better URL filtering
 * 3.1.0 - New action Delete Managed URL and Delete Group Member
