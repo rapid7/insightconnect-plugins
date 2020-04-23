@@ -60,6 +60,7 @@ This action is used to get task history.
 Example input:
 
 ```
+{}
 ```
 
 ##### Output
@@ -862,7 +863,7 @@ This action is used to run a new analysis.
 |obj_ext_extension|boolean|True|False|Change extension to valid|None|True|
 |obj_ext_startfolder|string|temp|False|Start object from|['desktop', 'home', 'downloads', 'appdata', 'temp', 'windows', 'root']|temp|
 |obj_ext_useragent|string|None|False|User agent, used only for "download" type|None|Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0|
-|obj_type|string|file|True|Type of new task|['file', 'url', 'download']|None|
+|obj_type|string|file|True|Type of new task|['file', 'url', 'download']|file|
 |obj_url|string|None|False|URL, used only if "obj_type" is "url" or "download"|None|http://example.org|
 |opt_kernel_heavyevasion|boolean|False|False|Heavy evasion option|None|False|
 |opt_network_connect|boolean|True|False|Network connection state|None|True|

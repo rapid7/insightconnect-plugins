@@ -1411,6 +1411,7 @@ actions:
           - "file"
           - "url"
           - "download"
+        example: file
       obj_url:
         title: URL
         description: URL, used only if "obj_type" is "url" or "download"
