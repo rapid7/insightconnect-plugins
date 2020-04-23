@@ -17,7 +17,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "API Key for Any.Run",
+      "description": "API key for Any.Run",
       "order": 1
     },
     "credentials": {

@@ -24,8 +24,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|False|API Key for Any.Run|None|WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4|
-|credentials|credential_username_password|None|False|Username and password|None|{ "username": "user@example.com", "password":"mypassword"}|
+|api_key|credential_secret_key|None|False|API key for Any.Run|None|WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4|
+|credentials|credential_username_password|None|False|Username and password|None|{ "username": "user@example.com", "password": "mypassword"}|
 
 Example input:
 
@@ -45,7 +45,7 @@ Example input:
 
 ### Actions
 
-#### Get Task History
+#### Get History Tasks
 
 This action is used to get task history.
 
@@ -60,9 +60,6 @@ This action is used to get task history.
 Example input:
 
 ```
-{
-  "limit": 1
-}
 ```
 
 ##### Output
@@ -77,22 +74,40 @@ Example output:
 {
   "tasks": [
     {
-      "date": "2020-04-18T18:53:06.794Z",
-      "file": "https://content.any.run/tasks/5a181e40-bd50-40aa-9e33-077b261b6381/download/files/d0975bad-6e74-40e9-af55-47b2080c2027",
+      "related": "https://app.any.run/tasks/82ab98a6-b406-4ba5-8deb-...",
+      "json": "https://api.any.run/report/82ab98a6-b406-4ba5-8deb...",
+      "file": "https://content.any.run/tasks/82ab98a6-b406-4ba5-8...",
       "hashes": {
         "head_hash": "0145ad575b213b1703cb94c6c3568a2e",
         "md5": "926e6146fdb288e932a1846029ad07db",
         "sha1": "fc73d7c62e324cad4240fbaf7a6d53716ecc4de7",
-        "sha256": "f6df99db2023558798d234f9c118497db8ec83da37682f886859f643fc8cc44b",
-        "ssdeep": "768:s+QiSf3rhTePO38fXbEmJS2Iro2wFW0kEeu:svXj5ePO3CXbEES2vw0Heu"
+        "sha256": "f6df99db2023558798d234f9c118497db8ec83da37682f8868...",
+        "ssdeep": "768:s+QiSf3rhTePO38fXbEmJS2Iro2wFW0kEeu:svXj5ePO3C..."
       },
-      "json": "https://api.any.run/report/5a181e40-bd50-40aa-9e33-077b261b6381/summary/json",
-      "misp": "https://api.any.run/report/5a181e40-bd50-40aa-9e33-077b261b6381/summary/misp",
+      "misp": "https://api.any.run/report/82ab98a6-b406-4ba5-8deb...",
       "name": "http://pastebin.com/raw/xGXyTALF",
-      "pcap": "https://content.any.run/tasks/5a181e40-bd50-40aa-9e33-077b261b6381/download/pcap",
-      "related": "https://app.any.run/tasks/5a181e40-bd50-40aa-9e33-077b261b6381",
+      "pcap": "https://content.any.run/tasks/82ab98a6-b406-4ba5-8...",
       "tags": [],
-      "verdict": "No threats detected"
+      "verdict": "No threats detected",
+      "date": "2020-04-23T21:00:13.890Z"
+    },
+    {
+      "date": "2020-04-20T02:14:11.452Z",
+      "file": "https://content.any.run/tasks/923fa62b-2689-4e6a-b...",
+      "hashes": {
+        "sha256": "71f34b8bda00b54713e92cb8aee8c04a11ea5dea650b07f4b1...",
+        "ssdeep": "3:N1KdJMP2:CO2",
+        "head_hash": "780024dc16cb4331cdf98d18eb111bb4",
+        "md5": "780024dc16cb4331cdf98d18eb111bb4",
+        "sha1": "dfc3414b0e62c18787631322ae7a8c7489e845c9"
+      },
+      "json": "https://api.any.run/report/923fa62b-2689-4e6a-be76...",
+      "pcap": "https://content.any.run/tasks/923fa62b-2689-4e6a-b...",
+      "tags": [],
+      "misp": "https://api.any.run/report/923fa62b-2689-4e6a-be76...",
+      "name": "http://clicnews.com",
+      "related": "https://app.any.run/tasks/923fa62b-2689-4e6a-be76-...",
+      "verdict": "Malicious activity"
     }
   ]
 }
@@ -120,7 +135,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|reports|object|False|Task reports|
+|reports|reports|False|Reports|
 
 Example output:
 
@@ -836,11 +851,11 @@ This action is used to run a new analysis.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|env_bitness|int|32|False|Bitness of operation system|[32, 64]|32|
+|env_bitness|int|32|False|Bitness of operating system|[32, 64]|32|
 |env_os|string|windows|False|Operation system|['windows']|windows|
 |env_type|string|complete|False|Environment preset type|['clean', 'office', 'complete']|complete|
 |env_version|string|7|False|Version of OS|['vista', '7', '8.1', '10']|7|
-|file|file|None|False|Malware file|None|{ "filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }|
+|file|file|None|False|Malware file|None|{"filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }|
 |obj_ext_browser|string|None|False|Browser name, used only for "url" type. E.g. Internet Explorer, Google Chrome, Mozilla Firefox, Opera|None|Google Chrome|
 |obj_ext_cmd|string|None|False|Optional command line that the VM will run. E.g. you can use 'RunDll32.EXE %FILENAME%,<func> <param>' to call a function by its name with a parameter in the uploaded sample. '%FILENAME%' is a built-in that will be automatically replaced with the file location in the environment.|None|RunDll32.EXE %FILENAME%, func32 -r|
 |obj_ext_elevateprompt|boolean|True|False|Auto-accept UAC option|None|True|

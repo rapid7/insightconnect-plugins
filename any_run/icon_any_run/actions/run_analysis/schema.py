@@ -45,7 +45,7 @@ class RunAnalysisInput(insightconnect_plugin_runtime.Input):
     "env_bitness": {
       "type": "integer",
       "title": "Bitness",
-      "description": "Bitness of operation system",
+      "description": "Bitness of operating system",
       "default": 32,
       "enum": [
         32,

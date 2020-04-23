@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get history Tasks"
+    DESCRIPTION = "Get task history"
 
 
 class Input:
@@ -61,7 +61,7 @@ class GetHistoryOutput(insightconnect_plugin_runtime.Output):
     "tasks": {
       "type": "array",
       "title": "Tasks",
-      "description": "History tasks",
+      "description": "Task history",
       "items": {
         "$ref": "#/definitions/task"
       },
@@ -103,14 +103,7 @@ class GetHistoryOutput(insightconnect_plugin_runtime.Output):
           "description": "Ssdeep hash",
           "order": 1
         }
-      },
-      "required": [
-        "head_hash",
-        "md5",
-        "sha1",
-        "sha256",
-        "ssdeep"
-      ]
+      }
     },
     "task": {
       "type": "object",
@@ -227,14 +220,7 @@ class GetHistoryOutput(insightconnect_plugin_runtime.Output):
               "description": "Ssdeep hash",
               "order": 1
             }
-          },
-          "required": [
-            "head_hash",
-            "md5",
-            "sha1",
-            "sha256",
-            "ssdeep"
-          ]
+          }
         }
       }
     }
