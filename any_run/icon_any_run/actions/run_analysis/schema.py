@@ -103,7 +103,7 @@ class RunAnalysisInput(insightconnect_plugin_runtime.Input):
     "obj_ext_cmd": {
       "type": "string",
       "title": "Command",
-      "description": "Optional command line that the VM will run. E.g. you can use 'RunDll32.EXE %FILENAME%,\\u003cfunc\\u003e \\u003cparam\\u003e' to call a function by its name with a parameter in the uploaded sample. '%FILENAME%' is a built-in that will be automatically replaced with the file location in the environment.",
+      "description": "Optional command line that the VM will run. E.g. you can use 'RunDll32.EXE %FILENAME%,\\u003cfunc\\u003e \\u003cparam\\u003e' to call a function by its name with a parameter in the uploaded sample. '%FILENAME%' is a built-in that will be automatically replaced with the file location in the environment",
       "order": 4
     },
     "obj_ext_elevateprompt": {

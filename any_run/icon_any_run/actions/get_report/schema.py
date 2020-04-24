@@ -301,8 +301,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
         },
         "uuid": {
           "type": "string",
-          "title": "Uuid",
-          "description": "Uuid",
+          "title": "UUID",
+          "description": "UUID",
           "order": 11
         }
       },
@@ -511,8 +511,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "pcap": {
               "$ref": "#/definitions/pcap",
-              "title": "Pcap",
-              "description": "Pcap",
+              "title": "PCAP",
+              "description": "PCAP",
               "order": 2
             },
             "screenshots": {
@@ -966,8 +966,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 4
                 },
                 "pe": {
@@ -1881,8 +1881,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                     },
                     "mime": {
                       "type": "string",
-                      "title": "Mime",
-                      "description": "Mime",
+                      "title": "MIME",
+                      "description": "MIME",
                       "order": 4
                     },
                     "pe": {
@@ -2436,8 +2436,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "uuid": {
                   "type": "string",
-                  "title": "Uuid",
-                  "description": "Uuid",
+                  "title": "UUID",
+                  "description": "UUID",
                   "order": 4
                 }
               }
@@ -2722,8 +2722,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "mime": {
               "type": "string",
-              "title": "Mime",
-              "description": "Mime",
+              "title": "MIME",
+              "description": "MIME",
               "order": 4
             },
             "pe": {
@@ -3637,8 +3637,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 4
                 },
                 "pe": {
@@ -4534,8 +4534,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "uuid": {
               "type": "string",
-              "title": "Uuid",
-              "description": "Uuid",
+              "title": "UUID",
+              "description": "UUID",
               "order": 4
             }
           }
@@ -4770,8 +4770,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
         },
         "pcap": {
           "$ref": "#/definitions/pcap",
-          "title": "Pcap",
-          "description": "Pcap",
+          "title": "PCAP",
+          "description": "PCAP",
           "order": 2
         },
         "screenshots": {
@@ -5225,8 +5225,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "mime": {
               "type": "string",
-              "title": "Mime",
-              "description": "Mime",
+              "title": "MIME",
+              "description": "MIME",
               "order": 4
             },
             "pe": {
@@ -6140,8 +6140,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 4
                 },
                 "pe": {
@@ -6695,8 +6695,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "uuid": {
               "type": "string",
-              "title": "Uuid",
-              "description": "Uuid",
+              "title": "UUID",
+              "description": "UUID",
               "order": 4
             }
           }
@@ -6823,14 +6823,14 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "dns": {
               "type": "integer",
-              "title": "Dns",
-              "description": "Dns",
+              "title": "DNS",
+              "description": "DNS",
               "order": 2
             },
             "http": {
               "type": "integer",
-              "title": "Http",
-              "description": "Http",
+              "title": "HTTP",
+              "description": "HTTP",
               "order": 3
             },
             "threats": {
@@ -7345,20 +7345,20 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "md5": {
               "type": "string",
-              "title": "Md5",
-              "description": "Md5",
+              "title": "MD5",
+              "description": "MD5",
               "order": 2
             },
             "sha1": {
               "type": "string",
-              "title": "Sha1",
-              "description": "Sha1",
+              "title": "SHA1",
+              "description": "SHA1",
               "order": 3
             },
             "sha256": {
               "type": "string",
-              "title": "Sha256",
-              "description": "Sha256",
+              "title": "SHA256",
+              "description": "SHA256",
               "order": 4
             },
             "ssdeep": {
@@ -7431,20 +7431,20 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
         },
         "md5": {
           "type": "string",
-          "title": "Md5",
-          "description": "Md5",
+          "title": "MD5",
+          "description": "MD5",
           "order": 2
         },
         "sha1": {
           "type": "string",
-          "title": "Sha1",
-          "description": "Sha1",
+          "title": "SHA1",
+          "description": "SHA1",
           "order": 3
         },
         "sha256": {
           "type": "string",
-          "title": "Sha256",
-          "description": "Sha256",
+          "title": "SHA256",
+          "description": "SHA256",
           "order": 4
         },
         "ssdeep": {
@@ -7557,8 +7557,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
         },
         "mime": {
           "type": "string",
-          "title": "Mime",
-          "description": "Mime",
+          "title": "MIME",
+          "description": "MIME",
           "order": 4
         },
         "pe": {
@@ -8502,8 +8502,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "mime": {
               "type": "string",
-              "title": "Mime",
-              "description": "Mime",
+              "title": "MIME",
+              "description": "MIME",
               "order": 4
             },
             "pe": {
@@ -9117,20 +9117,20 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "md5": {
                   "type": "string",
-                  "title": "Md5",
-                  "description": "Md5",
+                  "title": "MD5",
+                  "description": "MD5",
                   "order": 2
                 },
                 "sha1": {
                   "type": "string",
-                  "title": "Sha1",
-                  "description": "Sha1",
+                  "title": "SHA1",
+                  "description": "SHA1",
                   "order": 3
                 },
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 4
                 },
                 "ssdeep": {
@@ -9167,20 +9167,20 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "md5": {
               "type": "string",
-              "title": "Md5",
-              "description": "Md5",
+              "title": "MD5",
+              "description": "MD5",
               "order": 2
             },
             "sha1": {
               "type": "string",
-              "title": "Sha1",
-              "description": "Sha1",
+              "title": "SHA1",
+              "description": "SHA1",
               "order": 3
             },
             "sha256": {
               "type": "string",
-              "title": "Sha256",
-              "description": "Sha256",
+              "title": "SHA256",
+              "description": "SHA256",
               "order": 4
             },
             "ssdeep": {
@@ -9235,14 +9235,14 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
         },
         "dns": {
           "type": "integer",
-          "title": "Dns",
-          "description": "Dns",
+          "title": "DNS",
+          "description": "DNS",
           "order": 2
         },
         "http": {
           "type": "integer",
-          "title": "Http",
-          "description": "Http",
+          "title": "HTTP",
+          "description": "HTTP",
           "order": 3
         },
         "threats": {
@@ -9268,8 +9268,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
         },
         "dnsRequests": {
           "type": "array",
-          "title": "Dnsrequests",
-          "description": "Dnsrequests",
+          "title": "DNS Requests",
+          "description": "DNS requests",
           "items": {
             "type": "object"
           },
@@ -9277,8 +9277,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
         },
         "httpRequests": {
           "type": "array",
-          "title": "Httprequests",
-          "description": "Httprequests",
+          "title": "HTTP Requests",
+          "description": "HTTP requests",
           "items": {
             "type": "object"
           },
@@ -9603,8 +9603,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
         },
         "pid": {
           "type": "integer",
-          "title": "Pid",
-          "description": "Pid",
+          "title": "PID",
+          "description": "PID",
           "order": 8
         },
         "ppid": {
@@ -9633,8 +9633,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
         },
         "uuid": {
           "type": "string",
-          "title": "Uuid",
-          "description": "Uuid",
+          "title": "UUID",
+          "description": "UUID",
           "order": 13
         },
         "versionInfo": {
@@ -10336,8 +10336,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "uuid": {
               "type": "string",
-              "title": "Uuid",
-              "description": "Uuid",
+              "title": "UUID",
+              "description": "UUID",
               "order": 11
             }
           },
@@ -10546,8 +10546,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "pcap": {
                   "$ref": "#/definitions/pcap",
-                  "title": "Pcap",
-                  "description": "Pcap",
+                  "title": "PCAP",
+                  "description": "PCAP",
                   "order": 2
                 },
                 "screenshots": {
@@ -11001,8 +11001,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                     },
                     "mime": {
                       "type": "string",
-                      "title": "Mime",
-                      "description": "Mime",
+                      "title": "MIME",
+                      "description": "MIME",
                       "order": 4
                     },
                     "pe": {
@@ -11916,8 +11916,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                         },
                         "mime": {
                           "type": "string",
-                          "title": "Mime",
-                          "description": "Mime",
+                          "title": "MIME",
+                          "description": "MIME",
                           "order": 4
                         },
                         "pe": {
@@ -12471,8 +12471,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                     },
                     "uuid": {
                       "type": "string",
-                      "title": "Uuid",
-                      "description": "Uuid",
+                      "title": "UUID",
+                      "description": "UUID",
                       "order": 4
                     }
                   }
@@ -12757,8 +12757,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 4
                 },
                 "pe": {
@@ -13672,8 +13672,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                     },
                     "mime": {
                       "type": "string",
-                      "title": "Mime",
-                      "description": "Mime",
+                      "title": "MIME",
+                      "description": "MIME",
                       "order": 4
                     },
                     "pe": {
@@ -14569,8 +14569,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "uuid": {
                   "type": "string",
-                  "title": "Uuid",
-                  "description": "Uuid",
+                  "title": "UUID",
+                  "description": "UUID",
                   "order": 4
                 }
               }
@@ -14805,8 +14805,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "pcap": {
               "$ref": "#/definitions/pcap",
-              "title": "Pcap",
-              "description": "Pcap",
+              "title": "PCAP",
+              "description": "PCAP",
               "order": 2
             },
             "screenshots": {
@@ -15260,8 +15260,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 4
                 },
                 "pe": {
@@ -16175,8 +16175,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                     },
                     "mime": {
                       "type": "string",
-                      "title": "Mime",
-                      "description": "Mime",
+                      "title": "MIME",
+                      "description": "MIME",
                       "order": 4
                     },
                     "pe": {
@@ -16730,8 +16730,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "uuid": {
                   "type": "string",
-                  "title": "Uuid",
-                  "description": "Uuid",
+                  "title": "UUID",
+                  "description": "UUID",
                   "order": 4
                 }
               }
@@ -16858,14 +16858,14 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "dns": {
                   "type": "integer",
-                  "title": "Dns",
-                  "description": "Dns",
+                  "title": "DNS",
+                  "description": "DNS",
                   "order": 2
                 },
                 "http": {
                   "type": "integer",
-                  "title": "Http",
-                  "description": "Http",
+                  "title": "HTTP",
+                  "description": "HTTP",
                   "order": 3
                 },
                 "threats": {
@@ -17380,20 +17380,20 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "md5": {
                   "type": "string",
-                  "title": "Md5",
-                  "description": "Md5",
+                  "title": "MD5",
+                  "description": "MD5",
                   "order": 2
                 },
                 "sha1": {
                   "type": "string",
-                  "title": "Sha1",
-                  "description": "Sha1",
+                  "title": "SHA1",
+                  "description": "SHA1",
                   "order": 3
                 },
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 4
                 },
                 "ssdeep": {
@@ -17466,20 +17466,20 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "md5": {
               "type": "string",
-              "title": "Md5",
-              "description": "Md5",
+              "title": "MD5",
+              "description": "MD5",
               "order": 2
             },
             "sha1": {
               "type": "string",
-              "title": "Sha1",
-              "description": "Sha1",
+              "title": "SHA1",
+              "description": "SHA1",
               "order": 3
             },
             "sha256": {
               "type": "string",
-              "title": "Sha256",
-              "description": "Sha256",
+              "title": "SHA256",
+              "description": "SHA256",
               "order": 4
             },
             "ssdeep": {
@@ -17592,8 +17592,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "mime": {
               "type": "string",
-              "title": "Mime",
-              "description": "Mime",
+              "title": "MIME",
+              "description": "MIME",
               "order": 4
             },
             "pe": {
@@ -18537,8 +18537,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "mime": {
                   "type": "string",
-                  "title": "Mime",
-                  "description": "Mime",
+                  "title": "MIME",
+                  "description": "MIME",
                   "order": 4
                 },
                 "pe": {
@@ -19152,20 +19152,20 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                     },
                     "md5": {
                       "type": "string",
-                      "title": "Md5",
-                      "description": "Md5",
+                      "title": "MD5",
+                      "description": "MD5",
                       "order": 2
                     },
                     "sha1": {
                       "type": "string",
-                      "title": "Sha1",
-                      "description": "Sha1",
+                      "title": "SHA1",
+                      "description": "SHA1",
                       "order": 3
                     },
                     "sha256": {
                       "type": "string",
-                      "title": "Sha256",
-                      "description": "Sha256",
+                      "title": "SHA256",
+                      "description": "SHA256",
                       "order": 4
                     },
                     "ssdeep": {
@@ -19202,20 +19202,20 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
                 },
                 "md5": {
                   "type": "string",
-                  "title": "Md5",
-                  "description": "Md5",
+                  "title": "MD5",
+                  "description": "MD5",
                   "order": 2
                 },
                 "sha1": {
                   "type": "string",
-                  "title": "Sha1",
-                  "description": "Sha1",
+                  "title": "SHA1",
+                  "description": "SHA1",
                   "order": 3
                 },
                 "sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 4
                 },
                 "ssdeep": {
@@ -19270,14 +19270,14 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "dns": {
               "type": "integer",
-              "title": "Dns",
-              "description": "Dns",
+              "title": "DNS",
+              "description": "DNS",
               "order": 2
             },
             "http": {
               "type": "integer",
-              "title": "Http",
-              "description": "Http",
+              "title": "HTTP",
+              "description": "HTTP",
               "order": 3
             },
             "threats": {
@@ -19303,8 +19303,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "dnsRequests": {
               "type": "array",
-              "title": "Dnsrequests",
-              "description": "Dnsrequests",
+              "title": "DNS Requests",
+              "description": "DNS requests",
               "items": {
                 "type": "object"
               },
@@ -19312,8 +19312,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "httpRequests": {
               "type": "array",
-              "title": "Httprequests",
-              "description": "Httprequests",
+              "title": "HTTP Requests",
+              "description": "HTTP requests",
               "items": {
                 "type": "object"
               },
@@ -19638,8 +19638,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "pid": {
               "type": "integer",
-              "title": "Pid",
-              "description": "Pid",
+              "title": "PID",
+              "description": "PID",
               "order": 8
             },
             "ppid": {
@@ -19668,8 +19668,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "uuid": {
               "type": "string",
-              "title": "Uuid",
-              "description": "Uuid",
+              "title": "UUID",
+              "description": "UUID",
               "order": 13
             },
             "versionInfo": {
@@ -20428,8 +20428,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
             },
             "uuid": {
               "type": "string",
-              "title": "Uuid",
-              "description": "Uuid",
+              "title": "UUID",
+              "description": "UUID",
               "order": 4
             }
           }
@@ -21162,8 +21162,8 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
         },
         "uuid": {
           "type": "string",
-          "title": "Uuid",
-          "description": "Uuid",
+          "title": "UUID",
+          "description": "UUID",
           "order": 4
         }
       }

@@ -303,9 +303,9 @@ types:
       description: "File"
       required: false
     mime:
-      title: "Mime"
+      title: "MIME"
       type: string
-      description: "Mime"
+      description: "MIME"
       required: false
     pe:
       title: "Pe"
@@ -371,9 +371,9 @@ types:
       description: "Time"
       required: false
     uuid:
-      title: "Uuid"
+      title: "UUID"
       type: string
-      description: "Uuid"
+      description: "UUID"
       required: false
   automatization:
     uac:
@@ -465,9 +465,9 @@ types:
       description: "Mainobject"
       required: false
     pcap:
-      title: "Pcap"
+      title: "PCAP"
       type: pcap
-      description: "Pcap"
+      description: "PCAP"
       required: false
     screenshots:
       title: "Screenshots"
@@ -662,14 +662,14 @@ types:
       description: "Connections"
       required: false
     dns:
-      title: "Dns"
+      title: "DNS"
       type: integer
-      description: "Dns"
+      description: "DNS"
       required: false
     http:
-      title: "Http"
+      title: "HTTP"
       type: integer
-      description: "Http"
+      description: "HTTP"
       required: false
     threats:
       title: "Threats"
@@ -903,19 +903,19 @@ types:
       description: "Head hash"
       required: false
     md5:
-      title: "Md5"
+      title: "MD5"
       type: string
-      description: "Md5"
+      description: "MD5"
       required: false
     sha1:
-      title: "Sha1"
+      title: "SHA1"
       type: string
-      description: "Sha1"
+      description: "SHA1"
       required: false
     sha256:
-      title: "Sha256"
+      title: "SHA256"
       type: string
-      description: "Sha256"
+      description: "SHA256"
       required: false
     ssdeep:
       title: "Ssdeep"
@@ -992,14 +992,14 @@ types:
       description: "Connections"
       required: false
     dnsRequests:
-      title: "Dnsrequests"
+      title: "DNS Requests"
       type: "[]object"
-      description: "Dnsrequests"
+      description: "DNS requests"
       required: false
     httpRequests:
-      title: "Httprequests"
+      title: "HTTP Requests"
       type: "[]object"
-      description: "Httprequests"
+      description: "HTTP requests"
       required: false
     threats:
       title: "Threats"
@@ -1189,9 +1189,9 @@ types:
       description: "Modules"
       required: false
     pid:
-      title: "Pid"
+      title: "PID"
       type: integer
-      description: "Pid"
+      description: "PID"
       required: false
     ppid:
       title: "Ppid"
@@ -1214,9 +1214,9 @@ types:
       description: "Times"
       required: false
     uuid:
-      title: "Uuid"
+      title: "UUID"
       type: string
-      description: "Uuid"
+      description: "UUID"
       required: false
     versionInfo:
       title: "Versioninfo"
@@ -1275,9 +1275,9 @@ types:
       description: "Tags"
       required: false
     uuid:
-      title: "Uuid"
+      title: "UUID"
       type: string
-      description: "Uuid"
+      description: "UUID"
       required: false
   reports:
     analysis:
@@ -1420,7 +1420,7 @@ actions:
         example: 'http://example.org'
       obj_ext_cmd:
         title: Command
-        description: Optional command line that the VM will run. E.g. you can use 'RunDll32.EXE %FILENAME%,<func> <param>' to call a function by its name with a parameter in the uploaded sample. '%FILENAME%' is a built-in that will be automatically replaced with the file location in the environment.
+        description: Optional command line that the VM will run. E.g. you can use 'RunDll32.EXE %FILENAME%,<func> <param>' to call a function by its name with a parameter in the uploaded sample. '%FILENAME%' is a built-in that will be automatically replaced with the file location in the environment
         type: string
         required: false
         example: 'RunDll32.EXE %FILENAME%, func32 -r'

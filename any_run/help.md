@@ -858,7 +858,7 @@ This action is used to run a new analysis.
 |env_version|string|7|False|Version of OS|['vista', '7', '8.1', '10']|7|
 |file|file|None|False|Malware file|None|{"filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }|
 |obj_ext_browser|string|None|False|Browser name, used only for "url" type. E.g. Internet Explorer, Google Chrome, Mozilla Firefox, Opera|None|Google Chrome|
-|obj_ext_cmd|string|None|False|Optional command line that the VM will run. E.g. you can use 'RunDll32.EXE %FILENAME%,<func> <param>' to call a function by its name with a parameter in the uploaded sample. '%FILENAME%' is a built-in that will be automatically replaced with the file location in the environment.|None|RunDll32.EXE %FILENAME%, func32 -r|
+|obj_ext_cmd|string|None|False|Optional command line that the VM will run. E.g. you can use 'RunDll32.EXE %FILENAME%,<func> <param>' to call a function by its name with a parameter in the uploaded sample. '%FILENAME%' is a built-in that will be automatically replaced with the file location in the environment|None|RunDll32.EXE %FILENAME%, func32 -r|
 |obj_ext_elevateprompt|boolean|True|False|Auto-accept UAC option|None|True|
 |obj_ext_extension|boolean|True|False|Change extension to valid|None|True|
 |obj_ext_startfolder|string|temp|False|Start object from|['desktop', 'home', 'downloads', 'appdata', 'temp', 'windows', 'root']|temp|
