@@ -45,7 +45,7 @@ Example input:
 
 ### Actions
 
-#### Get History Tasks
+#### Get Task History
 
 This action is used to get task history.
 
