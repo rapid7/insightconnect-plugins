@@ -3,7 +3,7 @@
     "action": "get_history",
     "connection": {
       "api_key": {
-        "secretKey": "WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4"
+        "secretKey": ""
       },
       "credentials": {
         "password": "",
