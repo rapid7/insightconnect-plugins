@@ -1,0 +1,13 @@
+{
+  "body": {
+    "action": "run_analysis",
+    "meta": {},
+    "input": {
+      "opt_privacy_hidesource": false,
+      "obj_type": "file"
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}

@@ -1,0 +1,12 @@
+{
+  "body": {
+    "action": "get_history",
+    "meta": {},
+    "input": {
+      "skip": 2
+    },
+    "connection": null
+  },
+  "type": "action_start",
+  "version": "v1"
+}
