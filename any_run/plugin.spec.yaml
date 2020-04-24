@@ -1345,7 +1345,7 @@ connection:
     example: '{ "username": "user@example.com", "password": "mypassword"}'
 actions:
   get_history:
-    title: Get History Tasks
+    title: Get Task History
     description: Get task history
     input:
       team:
