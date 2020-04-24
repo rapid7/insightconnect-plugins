@@ -60,7 +60,11 @@ This action is used to get task history.
 Example input:
 
 ```
-{}
+{
+  "limit": 25,
+  "skip": 25,
+  "team": false
+}
 ```
 
 ##### Output

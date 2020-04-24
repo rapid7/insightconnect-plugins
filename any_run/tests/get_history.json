@@ -1,9 +1,21 @@
 {
   "body": {
     "action": "get_history",
-    "meta": {},
-    "input": {},
-    "connection": null
+    "connection": {
+      "api_key": {
+        "secretKey": "WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4"
+      },
+      "credentials": {
+        "password": "",
+        "username": ""
+      }
+    },
+    "input": {
+      "limit": 25,
+      "skip": 0,
+      "team": false
+    },
+    "meta": {}
   },
   "type": "action_start",
   "version": "v1"
