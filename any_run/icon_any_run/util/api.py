@@ -20,7 +20,6 @@ class AnyRunAPI:
 
     def _call_api(self, method, url, params=None, json_data=None, files=None):
         response = {"text": ""}
-        self.logger.info(f"Authorization header: {self.authentication_header}")
         try:
             response = requests.request(method, url,
                                         files=files,

@@ -3,11 +3,7 @@
     "action": "get_history",
     "meta": {},
     "input": {},
-    "connection": {
-      "api_key": {
-        "secretKey": "WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4"
-      }
-    }
+    "connection": null
   },
   "type": "action_start",
   "version": "v1"
