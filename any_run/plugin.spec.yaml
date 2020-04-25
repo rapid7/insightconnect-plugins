@@ -1,0 +1,1593 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: any_run
+title: "Any.Run"
+description: Analyze suspicious and malicious activities using the cloud-based malware analysis service
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/any_run
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://any.run
+tags:
+- any run
+- malware
+- threat intelligence
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [any run, malware, threat intelligence]
+  features: []
+types:
+  hashes:
+    ssdeep:
+      title: Ssdeep
+      description: Ssdeep hash
+      type: string
+      required: false
+    head_hash:
+      title: Head Hash
+      description: Head hash
+      type: string
+      required: false
+    sha256:
+      title: SHA256
+      description: SHA256 hash
+      type: string
+      required: false
+    sha1:
+      title: SHA1
+      description: SHA1 hash
+      type: string
+      required: false
+    md5:
+      title: MD5
+      description: MD5 hash
+      type: string
+      required: false
+  task:
+    verdict:
+      title: Verdict
+      description: Task verdict
+      type: string
+      required: true
+      example: Malicious activity
+    name:
+      title: Name
+      description: Task name
+      type: string
+      required: true
+      example: 'setup.exe'
+    related:
+      title: Related
+      description: Task related URL
+      type: string
+      required: true
+      example: 'https://app.any.run/tasks/0cb5990e-7858-4455-a5f8-8d704051901b'
+    pcap:
+      title: PCAP
+      description: Task PCAP URL
+      type: string
+      required: true
+      example: 'https://content.any.run/tasks/0cb5990e-7858-4455-a5f8-8d704051901b/download/pcap'
+    file:
+      title: File
+      description: Task file URL
+      type: string
+      required: true
+      example: 'https://content.any.run/tasks/0cb5990e-7858-4455-a5f8-8d704051901b/download/files/005d7277-b4c1-4b96-bcd9-ac02b799eec9'
+    json:
+      title: JSON
+      description: Task JSON URL
+      type: string
+      required: true
+      example: 'https://api.any.run/report/0cb5990e-7858-4455-a5f8-8d704051901b/summary/json'
+    misp:
+      title: MISP
+      description: Task MISP URL
+      type: string
+      required: true
+      example: 'https://api.any.run/report/0cb5990e-7858-4455-a5f8-8d704051901b/summary/misp'
+    tags:
+      title: Tags
+      description: Task tags
+      type: '[]string'
+      required: true
+      example: '["suspicious"]'
+    date:
+      title: Date
+      description: Task date
+      type: string
+      required: true
+      example: 2020-04-17T18:44:37.483Z
+    hashes:
+      title: Hashe
+      description: Task hashes
+      type: hashes
+      required: true
+  EXE:
+    CharacterSet:
+      title: "Characterset"
+      type: string
+      description: "Characterset"
+      required: false
+    CodeSize:
+      title: "Codesize"
+      type: integer
+      description: "Codesize"
+      required: false
+    CompanyName:
+      title: "Companyname"
+      type: string
+      description: "Companyname"
+      required: false
+    EntryPoint:
+      title: "Entrypoint"
+      type: string
+      description: "Entrypoint"
+      required: false
+    FileDescription:
+      title: "Filedescription"
+      type: string
+      description: "Filedescription"
+      required: false
+    FileFlags:
+      title: "Fileflags"
+      type: string
+      description: "Fileflags"
+      required: false
+    FileFlagsMask:
+      title: "Fileflagsmask"
+      type: string
+      description: "Fileflagsmask"
+      required: false
+    FileOS:
+      title: "Fileos"
+      type: string
+      description: "Fileos"
+      required: false
+    FileSubtype:
+      title: "Filesubtype"
+      type: integer
+      description: "Filesubtype"
+      required: false
+    FileVersion:
+      title: "Fileversion"
+      type: float
+      description: "Fileversion"
+      required: false
+    FileVersionNumber:
+      title: "Fileversionnumber"
+      type: string
+      description: "Fileversionnumber"
+      required: false
+    ImageVersion:
+      title: "Imageversion"
+      type: integer
+      description: "Imageversion"
+      required: false
+    InitializedDataSize:
+      title: "Initializeddatasize"
+      type: integer
+      description: "Initializeddatasize"
+      required: false
+    InternalName:
+      title: "Internalname"
+      type: string
+      description: "Internalname"
+      required: false
+    LanguageCode:
+      title: "Languagecode"
+      type: string
+      description: "Languagecode"
+      required: false
+    LegalCopyright:
+      title: "Legalcopyright"
+      type: string
+      description: "Legalcopyright"
+      required: false
+    LinkerVersion:
+      title: "Linkerversion"
+      type: integer
+      description: "Linkerversion"
+      required: false
+    MachineType:
+      title: "Machinetype"
+      type: string
+      description: "Machinetype"
+      required: false
+    OSVersion:
+      title: "Osversion"
+      type: integer
+      description: "Osversion"
+      required: false
+    ObjectFileType:
+      title: "Objectfiletype"
+      type: string
+      description: "Objectfiletype"
+      required: false
+    OriginalFileName:
+      title: "Originalfilename"
+      type: string
+      description: "Originalfilename"
+      required: false
+    PEType:
+      title: "Petype"
+      type: string
+      description: "Petype"
+      required: false
+    ProductName:
+      title: "Productname"
+      type: string
+      description: "Productname"
+      required: false
+    ProductVersion:
+      title: "Productversion"
+      type: float
+      description: "Productversion"
+      required: false
+    ProductVersionNumber:
+      title: "Productversionnumber"
+      type: string
+      description: "Productversionnumber"
+      required: false
+    Subsystem:
+      title: "Subsystem"
+      type: string
+      description: "Subsystem"
+      required: false
+    SubsystemVersion:
+      title: "Subsystemversion"
+      type: integer
+      description: "Subsystemversion"
+      required: false
+    TimeStamp:
+      title: "Timestamp"
+      type: string
+      description: "Timestamp"
+      required: false
+    UninitializedDataSize:
+      title: "Uninitializeddatasize"
+      type: integer
+      description: "Uninitializeddatasize"
+      required: false
+  exif:
+    EXE:
+      title: "Exe"
+      type: EXE
+      description: "Exe"
+      required: false
+  pe:
+    key:
+      title: "Key"
+      type: string
+      description: "Key"
+      required: false
+    value:
+      title: "Value"
+      type: "[]object"
+      description: "Value"
+      required: false
+  trid:
+    extension:
+      title: "Extension"
+      type: string
+      description: "Extension"
+      required: false
+    filetype:
+      title: "Filetype"
+      type: string
+      description: "Filetype"
+      required: false
+    procent:
+      title: "Procent"
+      type: float
+      description: "Procent"
+      required: false
+  info:
+    exif:
+      title: "Exif"
+      type: exif
+      description: "Exif"
+      required: false
+    ext:
+      title: "Ext"
+      type: string
+      description: "Ext"
+      required: false
+    file:
+      title: "File"
+      type: string
+      description: "File"
+      required: false
+    mime:
+      title: "MIME"
+      type: string
+      description: "MIME"
+      required: false
+    pe:
+      title: "Pe"
+      type: "[]pe"
+      description: "Pe"
+      required: false
+    trid:
+      title: "Trid"
+      type: "[]trid"
+      description: "Trid"
+      required: false
+  mainObject:
+    filename:
+      title: "Filename"
+      type: string
+      description: "Filename"
+      required: false
+    hashes:
+      title: "Hashes"
+      type: hashes
+      description: "Hashes"
+      required: false
+    info:
+      title: "Info"
+      type: info
+      description: "Info"
+      required: false
+    permanentUrl:
+      title: "Permanenturl"
+      type: string
+      description: "Permanenturl"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+  pcap:
+    permanentUrl:
+      title: "Permanenturl"
+      type: string
+      description: "Permanenturl"
+      required: false
+    present:
+      title: "Present"
+      type: boolean
+      description: "Present"
+      required: false
+  screenshots:
+    permanentUrl:
+      title: "Permanenturl"
+      type: string
+      description: "Permanenturl"
+      required: false
+    thumbnailUrl:
+      title: "Thumbnailurl"
+      type: string
+      description: "Thumbnailurl"
+      required: false
+    time:
+      title: "Time"
+      type: integer
+      description: "Time"
+      required: false
+    uuid:
+      title: "UUID"
+      type: string
+      description: "UUID"
+      required: false
+  automatization:
+    uac:
+      title: "Uac"
+      type: boolean
+      description: "Uac"
+      required: false
+  tor:
+    geo:
+      title: "Geo"
+      type: string
+      description: "Geo"
+      required: false
+    used:
+      title: "Used"
+      type: boolean
+      description: "Used"
+      required: false
+  options:
+    additionalTime:
+      title: "Additionaltime"
+      type: integer
+      description: "Additionaltime"
+      required: false
+    automatization:
+      title: "Automatization"
+      type: automatization
+      description: "Automatization"
+      required: false
+    fakeNet:
+      title: "Fakenet"
+      type: boolean
+      description: "Fakenet"
+      required: false
+    heavyEvasion:
+      title: "Heavyevasion"
+      type: boolean
+      description: "Heavyevasion"
+      required: false
+    hideSource:
+      title: "Hidesource"
+      type: boolean
+      description: "Hidesource"
+      required: false
+    mitm:
+      title: "Mitm"
+      type: boolean
+      description: "Mitm"
+      required: false
+    network:
+      title: "Network"
+      type: boolean
+      description: "Network"
+      required: false
+    presentation:
+      title: "Presentation"
+      type: boolean
+      description: "Presentation"
+      required: false
+    privacy:
+      title: "Privacy"
+      type: string
+      description: "Privacy"
+      required: false
+    privateSample:
+      title: "Privatesample"
+      type: boolean
+      description: "Privatesample"
+      required: false
+    timeout:
+      title: "Timeout"
+      type: integer
+      description: "Timeout"
+      required: false
+    tor:
+      title: "Tor"
+      type: tor
+      description: "Tor"
+      required: false
+    video:
+      title: "Video"
+      type: boolean
+      description: "Video"
+      required: false
+  content:
+    mainObject:
+      title: "Mainobject"
+      type: mainObject
+      description: "Mainobject"
+      required: false
+    pcap:
+      title: "PCAP"
+      type: pcap
+      description: "PCAP"
+      required: false
+    screenshots:
+      title: "Screenshots"
+      type: "[]screenshots"
+      description: "Screenshots"
+      required: false
+    video:
+      title: "Video"
+      type: pcap
+      description: "Video"
+      required: false
+  plan:
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+  sandbox:
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    plan:
+      title: "Plan"
+      type: plan
+      description: "Plan"
+      required: false
+  specs:
+    autostart:
+      title: "Autostart"
+      type: boolean
+      description: "Autostart"
+      required: false
+    cpuOverrun:
+      title: "Cpuoverrun"
+      type: boolean
+      description: "Cpuoverrun"
+      required: false
+    crashedApps:
+      title: "Crashedapps"
+      type: boolean
+      description: "Crashedapps"
+      required: false
+    crashedTask:
+      title: "Crashedtask"
+      type: boolean
+      description: "Crashedtask"
+      required: false
+    debugOutput:
+      title: "Debugoutput"
+      type: boolean
+      description: "Debugoutput"
+      required: false
+    executableDropped:
+      title: "Executabledropped"
+      type: boolean
+      description: "Executabledropped"
+      required: false
+    exploitable:
+      title: "Exploitable"
+      type: boolean
+      description: "Exploitable"
+      required: false
+    injects:
+      title: "Injects"
+      type: boolean
+      description: "Injects"
+      required: false
+    lowAccess:
+      title: "Lowaccess"
+      type: boolean
+      description: "Lowaccess"
+      required: false
+    memOverrun:
+      title: "Memoverrun"
+      type: boolean
+      description: "Memoverrun"
+      required: false
+    multiprocessing:
+      title: "Multiprocessing"
+      type: boolean
+      description: "Multiprocessing"
+      required: false
+    networkLoader:
+      title: "Networkloader"
+      type: boolean
+      description: "Networkloader"
+      required: false
+    networkThreats:
+      title: "Networkthreats"
+      type: boolean
+      description: "Networkthreats"
+      required: false
+    notStarted:
+      title: "Notstarted"
+      type: boolean
+      description: "Notstarted"
+      required: false
+    privEscalation:
+      title: "Privescalation"
+      type: boolean
+      description: "Privescalation"
+      required: false
+    rebooted:
+      title: "Rebooted"
+      type: boolean
+      description: "Rebooted"
+      required: false
+    serviceLauncher:
+      title: "Servicelauncher"
+      type: boolean
+      description: "Servicelauncher"
+      required: false
+    spam:
+      title: "Spam"
+      type: boolean
+      description: "Spam"
+      required: false
+    staticDetections:
+      title: "Staticdetections"
+      type: boolean
+      description: "Staticdetections"
+      required: false
+    stealing:
+      title: "Stealing"
+      type: boolean
+      description: "Stealing"
+      required: false
+    suspStruct:
+      title: "Suspstruct"
+      type: boolean
+      description: "Suspstruct"
+      required: false
+    torUsed:
+      title: "Torused"
+      type: boolean
+      description: "Torused"
+      required: false
+  verdict:
+    score:
+      title: "Score"
+      type: integer
+      description: "Score"
+      required: false
+    threatLevel:
+      title: "Threatlevel"
+      type: integer
+      description: "Threatlevel"
+      required: false
+    threatLevelText:
+      title: "Threatleveltext"
+      type: string
+      description: "Threatleveltext"
+      required: false
+  scores:
+    specs:
+      title: "Specs"
+      type: specs
+      description: "Specs"
+      required: false
+    verdict:
+      title: "Verdict"
+      type: verdict
+      description: "Verdict"
+      required: false
+  files:
+    malicious:
+      title: "Malicious"
+      type: integer
+      description: "Malicious"
+      required: false
+    suspicious:
+      title: "Suspicious"
+      type: integer
+      description: "Suspicious"
+      required: false
+    text:
+      title: "Text"
+      type: integer
+      description: "Text"
+      required: false
+    unknown:
+      title: "Unknown"
+      type: integer
+      description: "Unknown"
+      required: false
+  network:
+    connections:
+      title: "Connections"
+      type: integer
+      description: "Connections"
+      required: false
+    dns:
+      title: "DNS"
+      type: integer
+      description: "DNS"
+      required: false
+    http:
+      title: "HTTP"
+      type: integer
+      description: "HTTP"
+      required: false
+    threats:
+      title: "Threats"
+      type: integer
+      description: "Threats"
+      required: false
+  processes:
+    malicious:
+      title: "Malicious"
+      type: integer
+      description: "Malicious"
+      required: false
+    monitored:
+      title: "Monitored"
+      type: integer
+      description: "Monitored"
+      required: false
+    suspicious:
+      title: "Suspicious"
+      type: integer
+      description: "Suspicious"
+      required: false
+    total:
+      title: "Total"
+      type: integer
+      description: "Total"
+      required: false
+  registry:
+    delete:
+      title: "Delete"
+      type: integer
+      description: "Delete"
+      required: false
+    read:
+      title: "Read"
+      type: integer
+      description: "Read"
+      required: false
+    total:
+      title: "Total"
+      type: integer
+      description: "Total"
+      required: false
+    write:
+      title: "Write"
+      type: integer
+      description: "Write"
+      required: false
+  counters:
+    files:
+      title: "Files"
+      type: files
+      description: "Files"
+      required: false
+    network:
+      title: "Network"
+      type: network
+      description: "Network"
+      required: false
+    processes:
+      title: "Processes"
+      type: processes
+      description: "Processes"
+      required: false
+    registry:
+      title: "Registry"
+      type: registry
+      description: "Registry"
+      required: false
+  hotfixes:
+    title:
+      title: "Title"
+      type: string
+      description: "Title"
+      required: false
+  internetExplorer:
+    kbnum:
+      title: "Kbnum"
+      type: string
+      description: "Kbnum"
+      required: false
+    version:
+      title: "Version"
+      type: string
+      description: "Version"
+      required: false
+  os:
+    bitness:
+      title: "Bitness"
+      type: integer
+      description: "Bitness"
+      required: false
+    build:
+      title: "Build"
+      type: integer
+      description: "Build"
+      required: false
+    major:
+      title: "Major"
+      type: string
+      description: "Major"
+      required: false
+    product:
+      title: "Product"
+      type: string
+      description: "Product"
+      required: false
+    productType:
+      title: "Producttype"
+      type: string
+      description: "Producttype"
+      required: false
+    servicePack:
+      title: "Servicepack"
+      type: string
+      description: "Servicepack"
+      required: false
+    softSet:
+      title: "Softset"
+      type: string
+      description: "Softset"
+      required: false
+    title:
+      title: "Title"
+      type: string
+      description: "Title"
+      required: false
+    variant:
+      title: "Variant"
+      type: string
+      description: "Variant"
+      required: false
+  software:
+    title:
+      title: "Title"
+      type: string
+      description: "Title"
+      required: false
+    version:
+      title: "Version"
+      type: string
+      description: "Version"
+      required: false
+  environments:
+    hotfixes:
+      title: "Hotfixes"
+      type: "[]hotfixes"
+      description: "Hotfixes"
+      required: false
+    internetExplorer:
+      title: "Internetexplorer"
+      type: internetExplorer
+      description: "Internetexplorer"
+      required: false
+    os:
+      title: "Os"
+      type: os
+      description: "Os"
+      required: false
+    software:
+      title: "Software"
+      type: "[]software"
+      description: "Software"
+      required: false
+  incidents:
+    count:
+      title: "Count"
+      type: integer
+      description: "Count"
+      required: false
+    desc:
+      title: "Desc"
+      type: string
+      description: "Desc"
+      required: false
+    events:
+      title: "Events"
+      type: "[]object"
+      description: "Events"
+      required: false
+    firstSeen:
+      title: "Firstseen"
+      type: integer
+      description: "Firstseen"
+      required: false
+    mitre:
+      title: "Mitre"
+      type: "[]string"
+      description: "Mitre"
+      required: false
+    process:
+      title: "Process"
+      type: string
+      description: "Process"
+      required: false
+    source:
+      title: "Source"
+      type: string
+      description: "Source"
+      required: false
+    threatLevel:
+      title: "Threatlevel"
+      type: integer
+      description: "Threatlevel"
+      required: false
+    title:
+      title: "Title"
+      type: string
+      description: "Title"
+      required: false
+  mitre:
+    id:
+      title: "Id"
+      type: string
+      description: "Id"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    phases:
+      title: "Phases"
+      type: "[]string"
+      description: "Phases"
+      required: false
+  hashes_0:
+    head_hash:
+      title: "Head Hash"
+      type: string
+      description: "Head hash"
+      required: false
+    md5:
+      title: "MD5"
+      type: string
+      description: "MD5"
+      required: false
+    sha1:
+      title: "SHA1"
+      type: string
+      description: "SHA1"
+      required: false
+    sha256:
+      title: "SHA256"
+      type: string
+      description: "SHA256"
+      required: false
+    ssdeep:
+      title: "Ssdeep"
+      type: string
+      description: "Ssdeep"
+      required: false
+  info_0:
+    file:
+      title: "File"
+      type: string
+      description: "File"
+      required: false
+  files_0:
+    filename:
+      title: "Filename"
+      type: string
+      description: "Filename"
+      required: false
+    hashes:
+      title: "Hashes"
+      type: hashes_0
+      description: "Hashes"
+      required: false
+    info:
+      title: "Info"
+      type: info_0
+      description: "Info"
+      required: false
+    permanentUrl:
+      title: "Permanenturl"
+      type: string
+      description: "Permanenturl"
+      required: false
+    process:
+      title: "Process"
+      type: string
+      description: "Process"
+      required: false
+    size:
+      title: "Size"
+      type: integer
+      description: "Size"
+      required: false
+    threatLevel:
+      title: "Threatlevel"
+      type: string
+      description: "Threatlevel"
+      required: false
+    time:
+      title: "Time"
+      type: integer
+      description: "Time"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+  modified:
+    files:
+      title: "Files"
+      type: "[]files_0"
+      description: "Files"
+      required: false
+    registry:
+      title: "Registry"
+      type: "[]object"
+      description: "Registry"
+      required: false
+  network_0:
+    connections:
+      title: "Connections"
+      type: "[]object"
+      description: "Connections"
+      required: false
+    dnsRequests:
+      title: "DNS Requests"
+      type: "[]object"
+      description: "DNS requests"
+      required: false
+    httpRequests:
+      title: "HTTP Requests"
+      type: "[]object"
+      description: "HTTP requests"
+      required: false
+    threats:
+      title: "Threats"
+      type: "[]object"
+      description: "Threats"
+      required: false
+  context:
+    integrityLevel:
+      title: "Integritylevel"
+      type: string
+      description: "Integritylevel"
+      required: false
+    rebootNumber:
+      title: "Rebootnumber"
+      type: integer
+      description: "Rebootnumber"
+      required: false
+    userName:
+      title: "Username"
+      type: string
+      description: "Username"
+      required: false
+  modules:
+    image:
+      title: "Image"
+      type: string
+      description: "Image"
+      required: false
+    time:
+      title: "Time"
+      type: integer
+      description: "Time"
+      required: false
+  specs_0:
+    autoStart:
+      title: "Autostart"
+      type: boolean
+      description: "Autostart"
+      required: false
+    crashedApps:
+      title: "Crashedapps"
+      type: boolean
+      description: "Crashedapps"
+      required: false
+    debugOutput:
+      title: "Debugoutput"
+      type: boolean
+      description: "Debugoutput"
+      required: false
+    executableDropped:
+      title: "Executabledropped"
+      type: boolean
+      description: "Executabledropped"
+      required: false
+    exploitable:
+      title: "Exploitable"
+      type: boolean
+      description: "Exploitable"
+      required: false
+    injects:
+      title: "Injects"
+      type: boolean
+      description: "Injects"
+      required: false
+    knownThreat:
+      title: "Knownthreat"
+      type: boolean
+      description: "Knownthreat"
+      required: false
+    lowAccess:
+      title: "Lowaccess"
+      type: boolean
+      description: "Lowaccess"
+      required: false
+    network:
+      title: "Network"
+      type: boolean
+      description: "Network"
+      required: false
+    networkLoader:
+      title: "Networkloader"
+      type: boolean
+      description: "Networkloader"
+      required: false
+    privEscalation:
+      title: "Privescalation"
+      type: boolean
+      description: "Privescalation"
+      required: false
+    stealing:
+      title: "Stealing"
+      type: boolean
+      description: "Stealing"
+      required: false
+  scores_0:
+    dropped:
+      title: "Dropped"
+      type: boolean
+      description: "Dropped"
+      required: false
+    injected:
+      title: "Injected"
+      type: boolean
+      description: "Injected"
+      required: false
+    loadsSusp:
+      title: "Loadssusp"
+      type: boolean
+      description: "Loadssusp"
+      required: false
+    monitoringReason:
+      title: "Monitoringreason"
+      type: string
+      description: "Monitoringreason"
+      required: false
+    specs:
+      title: "Specs"
+      type: specs_0
+      description: "Specs"
+      required: false
+    verdict:
+      title: "Verdict"
+      type: verdict
+      description: "Verdict"
+      required: false
+  times:
+    monitoringSince:
+      title: "Monitoringsince"
+      type: integer
+      description: "Monitoringsince"
+      required: false
+    start:
+      title: "Start"
+      type: integer
+      description: "Start"
+      required: false
+  versionInfo:
+    company:
+      title: "Company"
+      type: string
+      description: "Company"
+      required: false
+    description:
+      title: "Description"
+      type: string
+      description: "Description"
+      required: false
+    version:
+      title: "Version"
+      type: string
+      description: "Version"
+      required: false
+  processes_0:
+    commandLine:
+      title: "Commandline"
+      type: string
+      description: "Commandline"
+      required: false
+    context:
+      title: "Context"
+      type: context
+      description: "Context"
+      required: false
+    fileName:
+      title: "Filename"
+      type: string
+      description: "Filename"
+      required: false
+    fileType:
+      title: "Filetype"
+      type: string
+      description: "Filetype"
+      required: false
+    image:
+      title: "Image"
+      type: string
+      description: "Image"
+      required: false
+    mainProcess:
+      title: "Mainprocess"
+      type: boolean
+      description: "Mainprocess"
+      required: false
+    modules:
+      title: "Modules"
+      type: "[]modules"
+      description: "Modules"
+      required: false
+    pid:
+      title: "PID"
+      type: integer
+      description: "PID"
+      required: false
+    ppid:
+      title: "Ppid"
+      type: integer
+      description: "Ppid"
+      required: false
+    scores:
+      title: "Scores"
+      type: scores_0
+      description: "Scores"
+      required: false
+    status:
+      title: "Status"
+      type: string
+      description: "Status"
+      required: false
+    times:
+      title: "Times"
+      type: times
+      description: "Times"
+      required: false
+    uuid:
+      title: "UUID"
+      type: string
+      description: "UUID"
+      required: false
+    versionInfo:
+      title: "Versioninfo"
+      type: versionInfo
+      description: "Versioninfo"
+      required: false
+  analysis:
+    content:
+      title: "Content"
+      type: content
+      description: "Content"
+      required: false
+    creation:
+      title: "Creation"
+      type: integer
+      description: "Creation"
+      required: false
+    creationText:
+      title: "Creationtext"
+      type: string
+      description: "Creationtext"
+      required: false
+    duration:
+      title: "Duration"
+      type: integer
+      description: "Duration"
+      required: false
+    options:
+      title: "Options"
+      type: options
+      description: "Options"
+      required: false
+    permanentUrl:
+      title: "Permanenturl"
+      type: string
+      description: "Permanenturl"
+      required: false
+    reports:
+      title: "Reports"
+      type: object
+      description: "Reports"
+      required: false
+    sandbox:
+      title: "Sandbox"
+      type: sandbox
+      description: "Sandbox"
+      required: false
+    scores:
+      title: "Scores"
+      type: scores
+      description: "Scores"
+      required: false
+    tags:
+      title: "Tags"
+      type: "[]object"
+      description: "Tags"
+      required: false
+    uuid:
+      title: "UUID"
+      type: string
+      description: "UUID"
+      required: false
+  reports:
+    analysis:
+      title: "Analysis"
+      type: analysis
+      description: "Analysis"
+      required: false
+    counters:
+      title: "Counters"
+      type: counters
+      description: "Counters"
+      required: false
+    debugStrings:
+      title: "Debugstrings"
+      type: "[]object"
+      description: "Debugstrings"
+      required: false
+    environments:
+      title: "Environments"
+      type: environments
+      description: "Environments"
+      required: false
+    incidents:
+      title: "Incidents"
+      type: "[]incidents"
+      description: "Incidents"
+      required: false
+    mitre:
+      title: "Mitre"
+      type: "[]mitre"
+      description: "Mitre"
+      required: false
+    modified:
+      title: "Modified"
+      type: modified
+      description: "Modified"
+      required: false
+    network:
+      title: "Network"
+      type: network_0
+      description: "Network"
+      required: false
+    processes:
+      title: "Processes"
+      type: "[]processes_0"
+      description: "Processes"
+      required: false
+    status:
+      title: "Status"
+      type: string
+      description: "Status"
+      required: false
+connection:
+  api_key:
+    title: API Key
+    description: API key for Any.Run
+    type: credential_secret_key
+    required: false
+    example: WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: false
+    example: '{ "username": "user@example.com", "password": "mypassword"}'
+actions:
+  get_history:
+    title: Get Task History
+    description: Get task history
+    input:
+      team:
+        title: Team
+        description: Leave this field blank to get your history or specify to get team history
+        type: boolean
+        required: false
+        default: false
+        example: false
+      skip:
+        title: Skip
+        description: Skip records
+        type: integer
+        required: false
+        default: 0
+        example: 25
+      limit:
+        title: Limit
+        description: Limits number of records, Size range 1-100
+        type: integer
+        required: false
+        default: 25
+        example: 25
+    output:
+      tasks:
+        title: Tasks
+        description: Task history
+        required: false
+        type: '[]task'
+  get_report:
+    title: Get Report
+    description: Get task report
+    input:
+      task:
+        title: UUID
+        description: Task UUID
+        type: string
+        required: true
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+    output:
+      reports:
+          title: "Reports"
+          type: reports
+          description: "Reports"
+          required: false
+  run_analysis:
+    title: Run Analysis
+    description: Run new analysis
+    input:
+      file:
+        title: File
+        description: Malware file
+        type: file
+        required: false
+        example: '{"filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }'
+      obj_type:
+        title: Type
+        description: Type of new task
+        type: string
+        default: file
+        required: true
+        enum:
+          - "file"
+          - "url"
+          - "download"
+        example: file
+      obj_url:
+        title: URL
+        description: URL, used only if "obj_type" is "url" or "download"
+        type: string
+        required: false
+        example: 'http://example.org'
+      obj_ext_cmd:
+        title: Command
+        description: Optional command line that the VM will run. E.g. you can use 'RunDll32.EXE %FILENAME%,<func> <param>' to call a function by its name with a parameter in the uploaded sample. '%FILENAME%' is a built-in that will be automatically replaced with the file location in the environment
+        type: string
+        required: false
+        example: 'RunDll32.EXE %FILENAME%, func32 -r'
+      obj_ext_browser:
+        title: Browser
+        description: Browser name, used only for "url" type. E.g. Internet Explorer, Google Chrome, Mozilla Firefox, Opera
+        type: string
+        required: false
+        example: Google Chrome
+      obj_ext_useragent:
+        title: User Agent
+        description: User agent, used only for "download" type
+        type: string
+        required: false
+        example: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+      obj_ext_elevateprompt:
+        title: Elevate Prompt
+        description: Auto-accept UAC option
+        type: boolean
+        required: false
+        default: true
+        example: true
+      obj_ext_extension:
+        title: Extension
+        description: Change extension to valid
+        type: boolean
+        required: false
+        default: true
+        example: true
+      opt_privacy_hidesource:
+        title: Privacy Hidesource
+        description: Option for hiding of source URL, used only for "download" type
+        type: boolean
+        required: false
+        default: true
+        example: true
+      env_os:
+        title: OS
+        description: Operation system
+        type: string
+        required: false
+        default: 'windows'
+        example: 'windows'
+        enum:
+          - 'windows'
+      env_bitness:
+        title: Bitness
+        description: Bitness of operating system
+        type: int
+        required: false
+        default: 32
+        example: 32
+        enum:
+          - 32
+          - 64
+      env_version:
+        title: Version
+        description: Version of OS
+        type: string
+        required: false
+        default: '7'
+        example: '7'
+        enum:
+          - 'vista'
+          - '7'
+          - '8.1'
+          - '10'
+      env_type:
+        title: Type
+        description: Environment preset type
+        type: string
+        required: false
+        default: 'complete'
+        example: 'complete'
+        enum:
+          - 'clean'
+          - 'office'
+          - 'complete'
+      opt_network_connect:
+        title: Network Connect
+        description: Network connection state
+        type: boolean
+        required: false
+        default: true
+        example: true
+      opt_network_fakenet:
+        title: Network Fakenet
+        description: FakeNet feature status
+        type: boolean
+        required: false
+        default: false
+        example: false
+      opt_network_tor:
+        title: Network TOR
+        description: TOR using
+        type: boolean
+        required: false
+        default: false
+        example: false
+      opt_network_mitm:
+        title: Network MITM
+        description: HTTPS MITM proxy option
+        type: boolean
+        required: false
+        default: false
+        example: false
+      opt_network_geo:
+        title: Network Geo
+        description: Geo location option
+        type: string
+        required: false
+        example: 'fastest'
+        enum:
+          - 'fastest'
+          - 'AU'
+          - 'BR'
+          - 'DE'
+          - 'CH'
+          - 'FR'
+          - 'KR'
+          - 'US'
+          - 'RU'
+          - 'GB'
+          - 'IT'
+      opt_kernel_heavyevasion:
+        title: Kernel Heavy Evasion
+        description: Heavy evasion option
+        type: boolean
+        required: false
+        default: false
+        example: false
+      opt_privacy_type:
+        title: Privacy Type
+        description: Privacy settings
+        type: string
+        required: false
+        default: 'bylink'
+        example: 'bylink'
+        enum:
+          - 'public'
+          - 'bylink'
+          - 'owner'
+      opt_timeout:
+        title: Timeout
+        description: Timeout option, size range 10-660
+        type: integer
+        required: false
+        default: 60
+        example: 60
+      obj_ext_startfolder:
+        title: Start Folder
+        description: Start object from
+        type: string
+        required: false
+        default: 'temp'
+        example: 'temp'
+        enum:
+          - 'desktop'
+          - 'home'
+          - 'downloads'
+          - 'appdata'
+          - 'temp'
+          - 'windows'
+          - 'root'
+    output:
+      uuid:
+        title: Task UUID
+        description: Response task UUID
+        required: false
+        type: 'string'
