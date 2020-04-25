@@ -1030,7 +1030,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - Add new action: append line at the end of file | Add example input
+* 1.1.0 - Add new Append Line action | Add example input
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
