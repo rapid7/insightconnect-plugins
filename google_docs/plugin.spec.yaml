@@ -82,7 +82,7 @@ connection:
     description: Copy and paste the contents of the credentials file provided by Google
     type: credential_secret_key
     required: true
-    example: ''
+    example: '{ "credentials_file_contents": { "secretKey": "{\"type\":\"service_account\",\"project_id\":\"project-1111111111111\",\"private_key_id\": \"a1111aa111111aaa1111a1aa1aa111aa1a11aaaa1\",\"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nc29tZSBwcml2YXRlIGtleQ==\\\\n-----END PRIVATE KEY-----\\\\n\",\"client_email\": \"user@example.com\",\"client_id\": \"111111111111111111111\",\"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\"token_uri\": \"https://oauth2.googleapis.com/token\",\"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/test%40project-1111111111111.iam.gserviceaccount.com\"}" } }'
 
 actions:
   create_blank_document:

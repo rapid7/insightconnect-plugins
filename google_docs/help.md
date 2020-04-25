@@ -9,18 +9,26 @@
 
 # Requirements
 
-* A JWT with Google Docs permissions
-* Google Docs API must be enabled
+* [Google Docs API must be enabled](https://console.developers.google.com/apis/library)
+* [A JWT with Google Docs permissions](https://developers.google.com/identity/protocols/oauth2)
 
 # Documentation
 
 ## Setup
 
+1. Enable the Google Docs API from the [developer console](https://console.developers.google.com/apis/library) by searching for "Google Docs API" and selecting Enable
+2. Choose Credentials on the left-hand pane and select '+ Create Credentials' at the top of page
+3. Choose OAuth 2
+4. Enable 'Consent Screen' and configure the consent with your desired permissions
+5. Complete the 'OAuth 2.0 Client IDs' configuration
+6. On the Credentials page, find your newly created OAuth Client and click the download arrow icon next to the trashcan
+7. Copy and paste the contents of the downloaded credential file into the plugin's connection
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials_file_contents|credential_secret_key|None|True|Copy and paste the contents of the credentials file provided by Google|None||
+|credentials_file_contents|credential_secret_key|None|True|Copy and paste the contents of the credentials file provided by Google|None|{ "credentials_file_contents": { "secretKey": "{\"type\":\"service_account\",\"project_id\":\"project-1111111111111\",\"private_key_id\": \"a1111aa111111aaa1111a1aa1aa111aa1a11aaaa1\",\"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nc29tZSBwcml2YXRlIGtleQ==\\\\n-----END PRIVATE KEY-----\\\\n\",\"client_email\": \"user@example.com\",\"client_id\": \"111111111111111111111\",\"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\"token_uri\": \"https://oauth2.googleapis.com/token\",\"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/test%40project-1111111111111.iam.gserviceaccount.com\"}" } }|
 
 Example input:
 
