@@ -4,7 +4,7 @@ products: [insightconnect]
 name: google_docs
 title: Google Docs
 description: Create and retrieve Google documents
-version: 1.0.1
+version: 1.1.0
 vendor: rapid7
 support: community
 status: []
@@ -132,4 +132,24 @@ actions:
         title: Document
         description: Document Object
         type: document
+        required: true
+  append_line:
+    title: Append Line
+    description: Append line at end of document
+    input:
+      document_id:
+        title: Document ID
+        description: Document ID
+        type: string
+        required: true
+      content:
+        title: Content
+        type: string
+        description: Document content
+        required: true
+    output:
+      result:
+        title: Result
+        description: Append line result
+        type: create_result
         required: true
