@@ -4,19 +4,19 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create a Google document"
+    DESCRIPTION = "Append line at end of document"
 
 
 class Input:
     CONTENT = "content"
-    TITLE = "title"
+    DOCUMENT_ID = "document_id"
     
 
 class Output:
     RESULT = "result"
     
 
-class CreateDocumentInput(komand.Input):
+class AppendLineInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -25,19 +25,19 @@ class CreateDocumentInput(komand.Input):
     "content": {
       "type": "string",
       "title": "Content",
-      "description": "This Google Doc document was created by InsightConnect",
+      "description": "Document content",
       "order": 2
     },
-    "title": {
+    "document_id": {
       "type": "string",
-      "title": "Title",
-      "description": "Document Title",
+      "title": "Document ID",
+      "description": "Document ID",
       "order": 1
     }
   },
   "required": [
     "content",
-    "title"
+    "document_id"
   ]
 }
     """)
@@ -46,7 +46,7 @@ class CreateDocumentInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class CreateDocumentOutput(komand.Output):
+class AppendLineOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -55,7 +55,7 @@ class CreateDocumentOutput(komand.Output):
     "result": {
       "$ref": "#/definitions/create_result",
       "title": "Result",
-      "description": "Document creation result",
+      "description": "Append line result",
       "order": 1
     }
   },

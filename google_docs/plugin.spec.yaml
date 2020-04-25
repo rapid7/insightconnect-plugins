@@ -4,7 +4,7 @@ products: [insightconnect]
 name: google_docs
 title: Google Docs
 description: Create and retrieve Google documents
-version: 1.0.1
+version: 1.1.0
 vendor: rapid7
 support: community
 status: []
@@ -82,6 +82,8 @@ connection:
     description: Copy and paste the contents of the credentials file provided by Google
     type: credential_secret_key
     required: true
+    example: '{ "credentials_file_contents": { "secretKey": "{\"type\":\"service_account\",\"project_id\":\"project-1111111111111\",\"private_key_id\": \"a1111aa111111aaa1111a1aa1aa111aa1a11aaaa1\",\"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nc29tZSBwcml2YXRlIGtleQ==\\\\n-----END PRIVATE KEY-----\\\\n\",\"client_email\": \"user@example.com\",\"client_id\": \"111111111111111111111\",\"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\"token_uri\": \"https://oauth2.googleapis.com/token\",\"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/test%40project-1111111111111.iam.gserviceaccount.com\"}" } }'
+
 actions:
   create_blank_document:
     title: Create Blank Document
@@ -92,12 +94,14 @@ actions:
         type: string
         description: Document Title
         required: true
+        example: "New Document by InsightConnect"
     output:
       document:
         title: Document
         description: Created Document
         type: document
         required: true
+
   create_document:
     title: Create Document
     description: Create a Google document
@@ -107,10 +111,11 @@ actions:
         type: string
         description: Document Title
         required: true
+        example: "New Document by InsightConnect"
       content:
         title: Content
         type: string
-        description: Document content
+        description: "This Google Doc document was created by InsightConnect"
         required: true
     output:
       result:
@@ -118,6 +123,7 @@ actions:
         description: Document creation result
         type: create_result
         required: true
+
   get_document:
     title: Get Document
     description: Get a Google document
@@ -127,9 +133,33 @@ actions:
         description: Document ID
         type: string
         required: true
+        example: "1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q"
     output:
       document:
         title: Document
         description: Document Object
         type: document
+        required: true
+
+  append_line:
+    title: Append Line
+    description: Append line at end of document
+    input:
+      document_id:
+        title: Document ID
+        description: Document ID
+        type: string
+        required: true
+        example: "1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q"
+      content:
+        title: Content
+        type: string
+        description: Document content
+        required: true
+        example: "This line will be added to end of document"
+    output:
+      result:
+        title: Result
+        description: Append line result
+        type: create_result
         required: true
