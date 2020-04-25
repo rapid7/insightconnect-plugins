@@ -82,6 +82,8 @@ connection:
     description: Copy and paste the contents of the credentials file provided by Google
     type: credential_secret_key
     required: true
+    example: ''
+
 actions:
   create_blank_document:
     title: Create Blank Document
@@ -92,12 +94,14 @@ actions:
         type: string
         description: Document Title
         required: true
+        example: "New Document by InsightConnect"
     output:
       document:
         title: Document
         description: Created Document
         type: document
         required: true
+
   create_document:
     title: Create Document
     description: Create a Google document
@@ -107,10 +111,11 @@ actions:
         type: string
         description: Document Title
         required: true
+        example: "New Document by InsightConnect"
       content:
         title: Content
         type: string
-        description: Document content
+        description: "This Google Doc document was created by InsightConnect"
         required: true
     output:
       result:
@@ -118,6 +123,7 @@ actions:
         description: Document creation result
         type: create_result
         required: true
+
   get_document:
     title: Get Document
     description: Get a Google document
@@ -127,12 +133,14 @@ actions:
         description: Document ID
         type: string
         required: true
+        example: "1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q"
     output:
       document:
         title: Document
         description: Document Object
         type: document
         required: true
+
   append_line:
     title: Append Line
     description: Append line at end of document
@@ -142,11 +150,13 @@ actions:
         description: Document ID
         type: string
         required: true
+        example: "1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q"
       content:
         title: Content
         type: string
         description: Document content
         required: true
+        example: "This line will be added to end of document"
     output:
       result:
         title: Result

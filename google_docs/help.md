@@ -20,12 +20,12 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials_file_contents|credential_secret_key|None|True|Copy and paste the contents of the credentials file provided by Google|None|None|
+|credentials_file_contents|credential_secret_key|None|True|Copy and paste the contents of the credentials file provided by Google|None||
 
 Example input:
 
 ```
-"connection": {
+{
   "credentials_file_contents": {
     "secretKey": "{\"type\":\"service_account\",\"project_id\":\"project-1111111111111\",\"private_key_id\": \"a1111aa111111aaa1111a1aa1aa111aa1a11aaaa1\",\"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nc29tZSBwcml2YXRlIGtleQ==\\\\n-----END PRIVATE KEY-----\\\\n\",\"client_email\": \"user@example.com\",\"client_id\": \"111111111111111111111\",\"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\"token_uri\": \"https://oauth2.googleapis.com/token\",\"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/test%40project-1111111111111.iam.gserviceaccount.com\"}"
   }
@@ -44,15 +44,15 @@ This action is used to append line at end of document.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|content|string|None|True|Document content|None|None|
-|document_id|string|None|True|Document ID|None|None|
+|content|string|None|True|Document content|None|This line will be added to end of document|
+|document_id|string|None|True|Document ID|None|1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q|
 
 Example input:
 
 ```
 {
   "document_id": "1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q",
-  "content": "Appended line"
+  "content": "This line will be added to end of document"
 }
 ```
 
@@ -86,13 +86,13 @@ This action is used to create a blank Google document.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|title|string|None|True|Document Title|None|None|
+|title|string|None|True|Document Title|None|New Document by InsightConnect|
 
 Example input:
 
 ```
 {
-  "title": "Test Blank Komand Doc"
+  "title": "New Document by InsightConnect"
 }
 ```
 
@@ -107,7 +107,7 @@ Example output:
 ```
 {
   "document": {
-    "title": "Test Blank Komand Doc",
+    "title": "New Document by InsightConnect",
     "body": {
       "content": [
         {
@@ -530,15 +530,15 @@ This action is used to create a Google document.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|content|string|None|True|Document content|None|None|
-|title|string|None|True|Document Title|None|None|
+|content|string|None|True|This Google Doc document was created by InsightConnect|None|None|
+|title|string|None|True|Document Title|None|New Document by InsightConnect|
 
 Example input:
 
 ```
 {
-  "content": "This is some text that should be in the body",
-  "title": "Test Komand Doc"
+  "content": "This Google Doc document was created by InsightConnect",
+  "title": "New Document by InsightConnect"
 }
 ```
 
@@ -572,7 +572,7 @@ This action is used to get a Google document.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|document_id|string|None|True|Document ID|None|None|
+|document_id|string|None|True|Document ID|None|1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q|
 
 Example input:
 
@@ -593,7 +593,7 @@ Example output:
 ```
 {
   "document": {
-    "title": "Test Komand Doc",
+    "title": "New Document by InsightConnect",
     "body": {
       "content": [
         {
