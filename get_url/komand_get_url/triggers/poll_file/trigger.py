@@ -1,6 +1,6 @@
 import komand
 import time
-from .schema import PollFileInput, PollFileOutput
+from .schema import PollFileInput, PollFileOutput, Input, Output, Component
 # Custom imports below
 from komand_get_url.util.utils import Utils
 
@@ -10,15 +10,15 @@ class PollFile(komand.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='poll_file',
-            description='Download modified file by URL',
+            description=Component.DESCRIPTION,
             input=PollFileInput(),
             output=PollFileOutput())
 
     def run(self, params={}):
         utils = Utils(action=self)
-        url = params.get('url')
-        is_verify = params.get('is_verify', True)
-        poll = params.get('poll', 60)
+        url = params.get(Input.URL)
+        is_verify = params.get(Input.IS_VERIFY, True)
+        poll = params.get(Input.POLL, 60)
 
         while True:
             '''Check for supported url prefix'''
@@ -26,25 +26,26 @@ class PollFile(komand.Trigger):
 
             is_modified = True
             meta = utils.hash_url(url)
-            cache_file = '/var/cache/' + meta['file']
+            cache_file = "/var/cache/" + meta["file"]
 
             '''Attempt to retrieve headers from past request'''
             headers = {}
-            if komand.helper.check_cachefile(meta['metafile']):
+            if komand.helper.check_cachefile(meta["metafile"]):
                 headers = utils.check_url_meta_file(meta)
 
             '''Download file'''
-            urlobj = komand.helper.open_url(
+            url_object = komand.helper.open_url(
                 url, verify=is_verify,
-                If_None_Match=headers.get('etag', ''),
-                If_Modified_Since=headers.get('last-modified', ''))
+                If_None_Match=headers.get("etag", ""),
+                If_Modified_Since=headers.get("last-modified", ""),
+                User_Agent="Mozilla/5.0")
 
             '''File modified'''
-            if urlobj:
-                contents = urlobj.read()
+            if url_object:
+                contents = url_object.read().decode('utf-8')
 
                 '''Write etag and last modified to cache'''
-                utils.create_url_meta_file(meta, urlobj)
+                utils.create_url_meta_file(meta, url_object)
 
                 '''We can't guarantee server supports lastmodified/etag, compare contents'''
                 if komand.helper.check_cachefile(cache_file):
@@ -53,7 +54,7 @@ class PollFile(komand.Trigger):
                     old.close()
                     if old_contents == contents:
                         is_modified = False
-                        self.logger.info('GetUrl: File not updated')
+                        self.logger.info("GetUrl: File not updated")
 
                 '''Write new URL file contents to cache'''
                 if is_modified:
@@ -62,15 +63,10 @@ class PollFile(komand.Trigger):
                     f.close()
 
                     '''Check URL status code and return file contents'''
-                    if urlobj.code >= 200 or urlobj.code <= 299:
+                    if url_object.code >= 200 or url_object.code <= 299:
                         f = komand.helper.encode_string(contents)
                         if f:
-                            output = {'file': f, 'status_code': urlobj.code or 200}
+                            output = {Output.BYTES: f.decode('utf-8'), Output.STATUS_CODE: url_object.code or 200}
                             self.send(output)
 
             time.sleep(poll)
-
-    def test(self, params={}):
-        url = 'https://www.google.com'
-        komand.helper.check_url(url)
-        return {}
