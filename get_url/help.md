@@ -43,7 +43,7 @@ Example input:
 {
   "is_verify": false,
   "timeout": 60,
-    "url": "https://httpbin.org/base64/a29tYW5kIHRlc3Q%3D"
+  "url": "https://httpbin.org/base64/a29tYW5kIHRlc3Q%3D"
 }
 ```
 
