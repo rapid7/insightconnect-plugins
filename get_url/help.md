@@ -60,7 +60,7 @@ Example output:
 
 ```
 {
-  "bytes": "a29tYW5kIHRlc3Q=",
+  "bytes": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
   "status_code": 200
 }
 ```
@@ -102,7 +102,7 @@ Example output:
 
 ```
 {
-  "bytes": "a29tYW5kIHRlc3Q=",
+  "bytes": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
   "status_code": 200
 }
 ```
