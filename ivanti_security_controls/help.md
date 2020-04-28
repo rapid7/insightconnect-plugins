@@ -21,10 +21,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|None|
-|host|string|None|True|Enter the hostname|None|None|
-|port|integer|3121|True|Enter the port|None|None|
-|ssl_verify|boolean|True|True|Validate certificate|None|None|
+|credentials|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
+|host|string|None|True|Enter the hostname|None|hostname-1|
+|port|integer|3121|True|Enter the port|None|3121|
+|ssl_verify|boolean|True|True|Validate certificate|None|True|
 
 ## Technical Details
 
@@ -216,7 +216,37 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### agent_detail
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Agent ID|string|True|The agent ID|
+|Assigned Policy ID|string|False|The unique identifier of the policy that is in effect for this agent|
+|DNS Name|string|False|The DNS name of the agent machine|
+|Domain|string|False|The domain of the agent machine|
+|Framework Version|string|False|The installed agent framework version|
+|Is Listening|boolean|False|Specifies if the agent is a listening agent|
+|Last Check-In|string|False|The date and time of the most recent check-in|
+|Last Known IP Address|string|False|The last known IP address of the agent machine|
+|Agent Links|object|False|Shows the related URLs for the agent|
+|Listening Port|integer|False|The listening port number|
+|Machine Name|string|False|The agent machine's host name|
+|Reported Policy ID|string|False|The agent policy ID|
+|Status|string|True|The current status of the agent|
+
+#### agent_status
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Agent ID|string|True|The agent ID|
+|Framework Version|object|False|The installed agent framework version|
+|Installed Packages|[]string|False|The list of engines installed on the agent machine|
+|Last Check-In|string|False|The date and time of the most recent check-in|
+|Agent Links|object|False|Shows the related URLs for the agent|
+|Machine Name|string|False|The agent machine's host name|
+|Reported On|string|False|The time the information was gathered from the agent machine|
+|Running Policy ID|string|False|The agent's running policy ID|
+|Running Policy Version|integer|False|The agent's policy ID|
 
 ## Troubleshooting
 

@@ -25,22 +25,27 @@ connection:
     description: Enter the hostname
     type: string
     required: true
+    example: hostname-1
   port:
+    title: Port
     description: Enter the port
     type: integer
     default: 3121
     required: true
+    example: 3121
   credentials:
     title: Credentials
     description: Username and password
     type: credential_username_password
     required: true
+    example: '{"username":"user1", "password":"mypassword"}'
   ssl_verify:
     title: SSL Verify
-    type: boolean
     description: Validate certificate
+    type: boolean
     default: true
     required: true
+    example: true
 
 types:
   agent_detail:
