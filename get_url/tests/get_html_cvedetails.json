@@ -5,8 +5,8 @@
         "input": {
             "checksum": "",
             "is_verify": false,
-            "timeout": 1,
-            "url": "http://speedtest.ftp.otenet.gr/files/test100Mb.db"
+            "timeout": 60,
+            "url": "https://www.cvedetails.com/"
         },
         "meta": {}
     },

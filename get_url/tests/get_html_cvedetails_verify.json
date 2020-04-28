@@ -4,9 +4,9 @@
         "connection": null,
         "input": {
             "checksum": "",
-            "is_verify": false,
-            "timeout": 1,
-            "url": "http://speedtest.ftp.otenet.gr/files/test100Mb.db"
+            "is_verify": true,
+            "timeout": 60,
+            "url": "https://www.cvedetails.com/"
         },
         "meta": {}
     },
