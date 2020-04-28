@@ -47,6 +47,13 @@ triggers:
         required: true
         default: true
         example: true
+      user_agent:
+        title: User Agent
+        type: string
+        description: Send requests with user agent
+        required: false
+        default: "Mozilla/5.0"
+        example: "Mozilla/5.0"
     output:
       bytes:
         title: Base64 Encoded File
@@ -89,6 +96,13 @@ actions:
         required: true
         default: true
         example: true
+      user_agent:
+        title: User Agent
+        type: string
+        description: Send requests with user agent
+        required: false
+        default: "Mozilla/5.0"
+        example: "Mozilla/5.0"
     output:
       bytes:
         title: Base64 Encoded File

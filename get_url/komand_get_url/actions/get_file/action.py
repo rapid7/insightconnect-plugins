@@ -38,7 +38,7 @@ class GetFile(komand.Action):
             url, timeout=tout, verify=is_verify,
             If_None_Match=headers.get("etag", ""),
             If_Modified_Since=headers.get("last-modified", ""),
-            User_Agent="Mozilla/5.0")
+            User_Agent=params.get(Input.USER_AGENT, "Mozilla/5.0"))
 
         if url_object:
             contents = url_object.read(8388608).decode('utf-8')

@@ -36,6 +36,7 @@ This action is used to download the contents of a URL.
 |checksum|string|None|False|Checksum verification (MD5, SHA1, SHA256)|None|0800fc577294c34e0b28ad2839435945|
 |is_verify|boolean|True|True|Validate certificate|None|True|
 |timeout|integer|60|False|Timeout in seconds|None|60|
+|user_agent|string|Mozilla/5.0|False|Send requests with user agent|None|Mozilla/5.0|
 
 Example input:
 
@@ -78,6 +79,7 @@ This trigger is used to monitor the contents of a URL for changes. The contents 
 |url|string|None|True|URL to Download|None|https://example.com|
 |poll|integer|60|False|Poll in seconds|None|60|
 |is_verify|boolean|True|True|Validate certificate|None|True|
+|user_agent|string|Mozilla/5.0|False|Send requests with user agent|None|Mozilla/5.0|
 
 Example input:
 
