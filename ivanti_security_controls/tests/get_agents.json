@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "get_agents",
+    "connection": {
+      "credentials": {
+        "password": "",
+        "username": ""
+      },
+      "host": "",
+      "port": 3121,
+      "ssl_verify": false
+    },
+    "input": {
+      "listening_filter": "",
+      "name_filter": ""
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

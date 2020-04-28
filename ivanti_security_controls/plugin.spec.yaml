@@ -1,0 +1,223 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: ivanti_security_controls
+title: Ivanti Security Controls
+description: Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+tags: [TEM, endpoint, patch]
+hub_tags:
+  use_cases: [application_management, threat_detection_and_response, asset_inventory, remediation_management]
+  keywords: [TEM, endpoint, patch]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ivanti_security_controls
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.ivanti.com/
+enable_cache: false
+
+connection:
+  host:
+    title: Host
+    description: Enter the hostname
+    type: string
+    required: true
+  port:
+    description: Enter the port
+    type: integer
+    default: 3121
+    required: true
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: true
+  ssl_verify:
+    title: SSL Verify
+    type: boolean
+    description: Validate certificate
+    default: true
+    required: true
+
+types:
+  agent_detail:
+    agentId:
+      title: Agent ID
+      description: The agent ID
+      type: string
+      required: true
+    assignedPolicyId:
+      title: Assigned Policy ID
+      description: The unique identifier of the policy that is in effect for this agent
+      type: string
+      required: false
+    dnsName:
+      title: DNS Name
+      description: The DNS name of the agent machine
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: 	The domain of the agent machine
+      type: string
+      required: false
+    frameworkVersion:
+      title: Framework Version
+      description: The installed agent framework version
+      type: string
+      required: false
+    isListening:
+      title: Is Listening
+      description: Specifies if the agent is a listening agent
+      type: boolean
+      required: false
+    lastCheckIn:
+      title: Last Check-In
+      description: The date and time of the most recent check-in
+      type: string
+      required: false
+    lastKnownIPAddress:
+      title: Last Known IP Address
+      description: The last known IP address of the agent machine
+      type: string
+      required: false
+    listeningPort:
+      title: Listening Port
+      description: The listening port number
+      type: integer
+      required: false
+    machineName:
+      title: Machine Name
+      description: The agent machine's host name
+      type: string
+      required: false
+    reportedPolicyId:
+      title: Reported Policy ID
+      description: The agent policy ID
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The current status of the agent
+      type: string
+      required: true
+    links:
+      title: Agent Links
+      description: Shows the related URLs for the agent
+      type: object
+      required: false
+  agent_status:
+    agentId:
+      title: Agent ID
+      description: The agent ID
+      type: string
+      required: true
+    frameworkVersion:
+      title: Framework Version
+      description: The installed agent framework version
+      type: object
+      required: false
+    installedPackages:
+      title: Installed Packages
+      description: The list of engines installed on the agent machine
+      type: "[]string"
+      required: false
+    lastCheckIn:
+      title: Last Check-In
+      description: The date and time of the most recent check-in
+      type: string
+      required: false
+    machineName:
+      title: Machine Name
+      description: The agent machine's host name
+      type: string
+      required: false
+    reportedOn:
+      title: Reported On
+      description: The time the information was gathered from the agent machine
+      type: string
+      required: false
+    runningPolicyId:
+      title: Running Policy ID
+      description: The agent's running policy ID
+      type: string
+      required: false
+    runningPolicyVersion:
+      title: Running Policy Version
+      description: The agent's policy ID
+      type: integer
+      required: false
+    links:
+      title: Agent Links
+      description: Shows the related URLs for the agent
+      type: object
+      required: false
+
+actions:
+  get_agent:
+    title: Get Agent
+    description: Retrieve Agent from Ivanti Security Controls
+    input:
+      id:
+        title: Agent ID
+        description: Agent Identifier
+        type: string
+        required: true
+        example: ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCD
+    output:
+      agent:
+        title: Agent
+        description: Details about an agent
+        type: agent_detail
+        required: true
+  get_agents:
+    title: Get Agents
+    description: Retrieve Agent from Ivanti Security Controls
+    input:
+      listening_filter:
+        title: Listening Filter
+        description: Returns agents that are configured as listening agents
+        type: string
+        enum:
+        - "True"
+        - "False"
+        - ""
+        default: ""
+        required: false
+        example: "True"
+      name_filter:
+        title: Name Filter
+        description: Filters agents where host or DNS name equals this value
+        type: string
+        required: false
+        example: "hostname-1"
+    output:
+      count:
+        title: Count
+        description: Number of agents returned
+        type: integer
+        required: false
+      agents:
+        title: Agents
+        description: List of agent details
+        type: "[]agent_detail"
+        required: false
+  get_agent_status:
+    title: Get Agent Status
+    description: Retrieve Agent Status from Ivanti Security Controls
+    input:
+      id:
+        title: Agent ID
+        description: Agent Identifier
+        type: string
+        required: true
+        example: ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCD
+    output:
+      agent_status:
+        title: Agent Status
+        description: Agent status with details
+        type: agent_status
+        required: true
