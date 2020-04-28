@@ -1,0 +1,16 @@
+{
+  "body": {
+    "action": "get_file",
+    "connection": null,
+    "input": {
+      "checksum": "",
+      "is_verify": true,
+      "timeout": 60,
+      "url": "http://www.google.com/robots.txt",
+      "user_agent": "Mozilla/5.0"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
