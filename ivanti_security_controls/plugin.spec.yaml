@@ -61,7 +61,7 @@ types:
       required: false
     domain:
       title: Domain
-      description: 	The domain of the agent machine
+      description: The domain of the agent machine
       type: string
       required: false
     frameworkVersion:
