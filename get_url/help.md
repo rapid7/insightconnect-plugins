@@ -119,7 +119,7 @@ Some web servers do not support cache control mechanisms, or do not use them pro
 
 # Version History
 
-* 2.0.0 - Use input and output constants | Changed `Exception` to `PluginException` | Added "f" strings | Move test from actions to connection | Change in return `file` key to `bytes`
+* 2.0.0 - Use input and output constants | Add example inputs | Changed `Exception` to `PluginException` | Added "f" strings | Move test from actions to connection | Change in return `file` key to `bytes` | Add new input User Agent to Get File action and Poll URL trigger
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
 * 0.1.1 - SSL bug fix in SDK
