@@ -27,7 +27,7 @@ class Utils(object):
         self.logger.error("GetHeaders: Error occurred while obtaining etag and last-modified headers")
 
     def hash_url(self, url):
-        """Creates a dictionary containting hashes from a url of type string"""
+        """Creates a dictionary containing hashes from a url of type string"""
         try:
             self.logger.info(f"url: {url}")
             sha1 = hashlib.sha1(url.encode("utf-8")).hexdigest()
