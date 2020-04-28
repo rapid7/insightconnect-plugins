@@ -11,7 +11,7 @@
       "ssl_verify": false
     },
     "input": {
-      "listening_filter": "",
+      "agent_configuration_filter": "All",
       "name_filter": ""
     },
     "meta": {}

@@ -38,14 +38,14 @@ This action is used to retrieve Agent from Ivanti Security Controls.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|listening_filter|string||False|Returns agents that are configured as listening agents|['True', 'False', '']|True|
+|agent_configuration_filter|string|All|False|Filters agents based on listening configuration|['Listening', 'Not Listening', 'All']|All|
 |name_filter|string|None|False|Filters agents where host or DNS name equals this value|None|hostname-1|
 
 Example input:
 
 ```
 {
-  "listening_filter": "",
+  "agent_configuration_filter": "All",
   "name_filter": "hostname-1"
 }
 ```

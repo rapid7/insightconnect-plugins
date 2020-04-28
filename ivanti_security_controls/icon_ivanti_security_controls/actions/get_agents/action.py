@@ -13,10 +13,15 @@ class GetAgents(insightconnect_plugin_runtime.Action):
                 output=GetAgentsOutput())
 
     def run(self, params={}):
-        listening = params.get(Input.LISTENING_FILTER)
+        mapping = {
+            'Listening': 'true',
+            'Not Listening': 'false',
+            'All': ''
+        }
+        config = params.get(Input.AGENT_CONFIGURATION_FILTER)
         name = params.get(Input.NAME_FILTER)
 
-        agents = self.connection.ivanti_api.get_agents(listening=listening, name=name)
+        agents = self.connection.ivanti_api.get_agents(listening=mapping.get(config, ''), name=name)
 
         return {
             Output.COUNT: len(agents),

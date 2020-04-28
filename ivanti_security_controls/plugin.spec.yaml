@@ -182,17 +182,17 @@ actions:
     title: Get Agents
     description: Retrieve Agent from Ivanti Security Controls
     input:
-      listening_filter:
-        title: Listening Filter
-        description: Returns agents that are configured as listening agents
+      agent_configuration_filter:
+        title: Agent Configuration Filter
+        description: Filters agents based on listening configuration
         type: string
         enum:
-        - "True"
-        - "False"
-        - ""
-        default: ""
+        - "Listening"
+        - "Not Listening"
+        - "All"
+        default: "All"
         required: false
-        example: "True"
+        example: "All"
       name_filter:
         title: Name Filter
         description: Filters agents where host or DNS name equals this value

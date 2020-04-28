@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    LISTENING_FILTER = "listening_filter"
+    AGENT_CONFIGURATION_FILTER = "agent_configuration_filter"
     NAME_FILTER = "name_filter"
     
 
@@ -23,15 +23,15 @@ class GetAgentsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "listening_filter": {
+    "agent_configuration_filter": {
       "type": "string",
-      "title": "Listening Filter",
-      "description": "Returns agents that are configured as listening agents",
-      "default": "",
+      "title": "Agent Configuration Filter",
+      "description": "Filters agents based on listening configuration",
+      "default": "All",
       "enum": [
-        "True",
-        "False",
-        ""
+        "Listening",
+        "Not Listening",
+        "All"
       ],
       "order": 1
     },
