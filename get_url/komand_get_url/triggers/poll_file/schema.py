@@ -12,6 +12,7 @@ class Input:
     IS_VERIFY = "is_verify"
     POLL = "poll"
     URL = "url"
+    USER_AGENT = "user_agent"
     
 
 class Output:
@@ -45,6 +46,13 @@ class PollFileInput(komand.Input):
       "title": "URL",
       "description": "URL to Download",
       "order": 1
+    },
+    "user_agent": {
+      "type": "string",
+      "title": "User Agent",
+      "description": "Send requests with user agent",
+      "default": "Mozilla/5.0",
+      "order": 4
     }
   },
   "required": [
