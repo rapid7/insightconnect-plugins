@@ -24,7 +24,7 @@ class Utils(object):
             lm = url_object.headers.get("last-modified")
             return {"etag": etag, "last-modified": lm}
 
-        self.logger.error("GetHeaders: Error occured while obtaining etag and last-modified headers")
+        self.logger.error("GetHeaders: Error occurred while obtaining etag and last-modified headers")
 
     def hash_url(self, url):
         """Creates a dictionary containting hashes from a url of type string"""
