@@ -48,6 +48,9 @@ This action invalidates all the refresh tokens issued to applications for a user
 Example input:
 
 ```
+{
+  "user_id": "user@example.com
+}
 ```
 
 ##### Output
@@ -59,6 +62,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Add User to Groups by ID
