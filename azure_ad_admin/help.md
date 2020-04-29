@@ -31,6 +31,19 @@ The connection configuration accepts the following parameters:
 |application_secret|credential_secret_key|None|True|The secret of the registered application that obtained the refresh token|None|None|
 |tenant_id|string|None|True|The ID of the directory that identifies the tenant|None|None|
 
+Example input:
+
+```
+{
+  "application_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6",
+  "application_secret": {
+    "secretKey": "abcdefghi12345678abcdef1234"
+  },
+  "tenant_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6"
+}
+```
+
+
 ## Technical Details
 
 ### Actions
