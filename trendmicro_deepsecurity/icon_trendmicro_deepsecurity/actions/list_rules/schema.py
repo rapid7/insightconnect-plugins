@@ -69,7 +69,7 @@ class ListRulesOutput(komand.Output):
     },
     "rules_not_recommended": {
       "type": "array",
-      "title": "Not recommended",
+      "title": "Not Recommended",
       "description": "IPS rules that are not recommended",
       "items": {
         "type": "integer"

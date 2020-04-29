@@ -141,7 +141,7 @@ actions:
         type: "[]integer"
         required: false
       rules_not_recommended:
-        title: Not recommended
+        title: Not Recommended
         description: IPS rules that are not recommended
         type: "[]integer"
         required: false

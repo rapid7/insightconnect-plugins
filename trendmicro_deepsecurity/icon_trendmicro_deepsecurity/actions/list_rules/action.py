@@ -2,9 +2,9 @@ import komand
 from .schema import ListRulesInput, ListRulesOutput, Input, Output, Component
 # Custom imports below
 
-import json
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
+
 
 class ListRules(komand.Action):
 
@@ -14,7 +14,6 @@ class ListRules(komand.Action):
                 description=Component.DESCRIPTION,
                 input=ListRulesInput(),
                 output=ListRulesOutput())
-
 
     def run(self, params={}):
         """
@@ -36,7 +35,7 @@ class ListRules(komand.Action):
 
         # Set rules
         response = self.connection.session.get(url,
-                                                verify=self.connection.dsm_verify_ssl)
+                                               verify=self.connection.dsm_verify_ssl)
 
         self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")
@@ -50,11 +49,11 @@ class ListRules(komand.Action):
 
         # Get a list of all assigned rules
         rules_assigned = response_data["assignedRuleIDs"]
-        
+
         # Get a list of recommended rules
         rules_recommended = response_data["recommendedToAssignRuleIDs"]
-        
-        #Get a list of not recommended rules
+
+        # Get a list of not recommended rules
         rules_not_recommended = response_data["recommendedToUnassignRuleIDs"]
 
         # Return assigned and failed rules
