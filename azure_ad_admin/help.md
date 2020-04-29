@@ -35,6 +35,32 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Revoke Sign In Sessions
+
+This action invalidates all the refresh tokens issued to applications for a user (as well as session cookies in a user's browser), by resetting the signInSessionsValidFromDateTime user property to the current date-time.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID|None|user@example.com|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was the operation successful|
+
+Example output:
+
+```
+```
+
 #### Add User to Groups by ID
 
 This action is used to add a user to a set of groups by group ID.

@@ -39,6 +39,8 @@ class ICONAzureAdAdmin(komand.Plugin):
 
         self.add_action(actions.RemoveUserFromGroup())
 
+        self.add_action(actions.RevokeSignInSessions())
+
         self.add_action(actions.UpdateUserInfo())
 
 

@@ -1,11 +1,11 @@
 {
     "body": {
         "connection": {
-            "application_id": "",
+            "application_id": "ab710b92-bd35-4008-ae54-6d6b45dd2e12",
             "application_secret": {
-                "secretKey": ""
-             },
-            "tenant_id": ""
+                "secretKey": "4/qQ*=Bi+1mvsvwWSyHxcPpSALSdX5G8"
+            },
+            "tenant_id": "5c824599-dc8c-4d31-96fb-3b886d4f8f10"
         },
         "dispatcher": {
             "url": "http://localhost:8000",
