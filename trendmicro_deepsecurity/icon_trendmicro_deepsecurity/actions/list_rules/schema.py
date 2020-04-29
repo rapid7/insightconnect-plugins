@@ -4,21 +4,21 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deploy IPS rules"
+    DESCRIPTION = "List IPS rules"
 
 
 class Input:
     COMPUTER_OR_POLICY = "computer_or_policy"
     ID = "id"
-    RULES = "rules"
     
 
 class Output:
     RULES_ASSIGNED = "rules_assigned"
-    RULES_NOT_ASSIGNED = "rules_not_assigned"
+    RULES_NOT_RECOMMENDED = "rules_not_recommended"
+    RULES_RECOMMENDED = "rules_recommended"
     
 
-class DeployRulesInput(komand.Input):
+class ListRulesInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -27,7 +27,7 @@ class DeployRulesInput(komand.Input):
     "computer_or_policy": {
       "type": "string",
       "title": "Target",
-      "description": "Target for rule assignment",
+      "description": "Get IPS rules from a computer or policy",
       "enum": [
         "computer",
         "policy"
@@ -37,23 +37,13 @@ class DeployRulesInput(komand.Input):
     "id": {
       "type": "integer",
       "title": "ID",
-      "description": "ID of the target computer or policy",
+      "description": "ID of the computer or policy",
       "order": 2
-    },
-    "rules": {
-      "type": "array",
-      "title": "IPS Rules",
-      "description": "IPS rules to assign",
-      "items": {
-        "type": "integer"
-      },
-      "order": 3
     }
   },
   "required": [
     "computer_or_policy",
-    "id",
-    "rules"
+    "id"
   ]
 }
     """)
@@ -62,7 +52,7 @@ class DeployRulesInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class DeployRulesOutput(komand.Output):
+class ListRulesOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -77,10 +67,19 @@ class DeployRulesOutput(komand.Output):
       },
       "order": 1
     },
-    "rules_not_assigned": {
+    "rules_not_recommended": {
       "type": "array",
-      "title": "Not Assigned Rules",
-      "description": "Unassigned IPS rules",
+      "title": "Not recommended",
+      "description": "IPS rules that are not recommended",
+      "items": {
+        "type": "integer"
+      },
+      "order": 3
+    },
+    "rules_recommended": {
+      "type": "array",
+      "title": "Recommended",
+      "description": "Recommended IPS rules",
       "items": {
         "type": "integer"
       },

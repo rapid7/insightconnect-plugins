@@ -43,7 +43,8 @@ class SearchRules(komand.Action):
                                                     data=json.dumps(data),
                                                     verify=self.connection.dsm_verify_ssl)
 
-            self.logger.info(cve)
+            self.logger.info(f"CVE: {cve}")
+            self.logger.info(f"url: {response.url}")
             self.logger.info(f"status: {response.status_code}")
             self.logger.info(f"reason: {response.reason}")
 

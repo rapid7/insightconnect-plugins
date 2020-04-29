@@ -29,6 +29,52 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### List
+
+This action is used to list IPS rules.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|computer_or_policy|string|None|True|Get IPS rules from a computer or policy|['computer', 'policy']|policy|
+|id|integer|None|True|ID of the computer or policy|None|23|
+
+Example input:
+
+```
+{
+  "computer_or_policy": "policy",
+  "id": 23
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|rules_assigned|[]integer|False|All IPS rules currently assigned|
+|rules_not_recommended|[]integer|False|IPS rules that are not recommended|
+|rules_recommended|[]integer|False|Recommended IPS rules|
+
+Example output:
+
+```
+{
+  "rules_assigned": [
+    108,
+    2874,
+    2875,
+    2876,
+    3317,
+    3318,
+    6348
+  ],
+  "rules_not_recommended": [],
+  "rules_recommended": []
+}
+```
+
 #### Search
 
 Search for matching IPS rules in Deep Security by CVE ID
@@ -93,7 +139,7 @@ Deploy the given Deep Security IPS rules to a computer or policy
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |computer_or_policy|string|None|True|Target for rule assignment|['computer', 'policy']|policy|
-|id|integer|None|True|ID of the target asset or policy|None|23|
+|id|integer|None|True|ID of the target computer or policy|None|23|
 |rules|[]integer|None|True|IPS rules to assign|None|[108, 6745, 2874, 2875, 2876, 3317, 3318]|
 
 Example input:
@@ -110,8 +156,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|rules_assigned|[]integer|False|All rules currently assigned to the asset|
-|rules_not_assigned|[]integer|False|Unassigned rules|
+|rules_assigned|[]integer|False|All IPS rules currently assigned|
+|rules_not_assigned|[]integer|False|Unassigned IPS rules|
 
 Example output:
 
