@@ -21,17 +21,21 @@ class ListRules(komand.Action):
         """
 
         # Get parameters
-        self.computer_or_policy = params.get(Input.COMPUTER_OR_POLICY)
+        self.scope = params.get(Input.SCOPE)
         self.id = params.get(Input.ID)
 
-        self.logger.info(f"Getting rules from {self.computer_or_policy} {self.id}")
+        ips_rules = set()
+        covered_cves = set()
+        hits = 0
+
+        self.logger.info(f"Getting rules from {self.scope} {self.id}")
 
         # Prepare request
         # Check if the rules should be assigned to a computer or policy
-        if self.computer_or_policy == "computer":
-            url = f"{self.connection.dsm_url}/api/computers/{self.id}/intrusionprevention/assignments"
+        if self.scope == "computer":
+            url = f"{self.connection.dsm_url}/api/computers/{self.id}/intrusionprevention/rules"
         else:
-            url = f"{self.connection.dsm_url}/api/policies/{self.id}/intrusionprevention/assignments"
+            url = f"{self.connection.dsm_url}/api/policies/{self.id}/intrusionprevention/rules"
 
         # Set rules
         response = self.connection.session.get(url,
@@ -47,16 +51,22 @@ class ListRules(komand.Action):
         # Check response errors
         checkResponse(response)
 
-        # Get a list of all assigned rules
-        rules_assigned = response_data["assignedRuleIDs"]
+        # Check if matching IPS rules were found
+        if response_data["intrusionPreventionRules"]:
+            for rule in response_data["intrusionPreventionRules"]:
+                ips_rules.add(rule["ID"])
+                if 'CVE' in rule.keys():
+                    self.logger.info(f"{rule['ID']}:\t{rule['name']} - " + ", ".join(rule['CVE']))
+                    covered_cves.update(rule['CVE'])
+                else:
+                    self.logger.info(f"{rule['ID']}:\t{rule['name']}")
+        else:
+            self.logger.info(f"No rules found!")
 
-        # Get a list of recommended rules
-        rules_recommended = response_data["recommendedToAssignRuleIDs"]
-
-        # Get a list of not recommended rules
-        rules_not_recommended = response_data["recommendedToUnassignRuleIDs"]
+        hits = len(response_data["intrusionPreventionRules"])
+        self.logger.info(f"Found {hits} rules covering the following CVEs: \n" + ", ".join(covered_cves))
 
         # Return assigned and failed rules
-        return {Output.RULES_ASSIGNED: rules_assigned,
-                Output.RULES_RECOMMENDED: rules_recommended,
-                Output.RULES_NOT_RECOMMENDED: rules_not_recommended}
+        return {Output.RULES_ASSIGNED: list(ips_rules),
+                Output.COVERED_CVES: list(covered_cves),
+                Output.RESPONSE_JSON: response_data}

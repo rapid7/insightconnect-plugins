@@ -29,5 +29,5 @@ def checkResponse(response: Response) -> None:
             message = f"{response.status_code}, {response.text}"
 
         raise PluginException(cause="Received HTTP %d status code. The request was not successful." % response.status_code,
-                              assistance="Please check the server address and the rules to be assigned.",
+                              assistance=f"[{response.url}]",
                               data=message)

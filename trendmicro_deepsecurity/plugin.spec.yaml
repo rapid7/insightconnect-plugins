@@ -114,10 +114,10 @@ actions:
     title: List
     description: List IPS rules
     input:
-      computer_or_policy:
-        title: Target
+      scope:
+        title: Scope
         type: string
-        description: Get IPS rules from a computer or policy
+        description: Set the scope
         required: true 
         enum:
           - computer
@@ -135,13 +135,13 @@ actions:
         description: All IPS rules currently assigned
         type: "[]integer"
         required: false
-      rules_recommended:
-        title: Recommended
-        description: Recommended IPS rules
-        type: "[]integer"
+      covered_cves:
+        title: CVEs
+        description: CVEs covered by the assigned rules
+        type: "[]string"
         required: false
-      rules_not_recommended:
-        title: Not Recommended
-        description: IPS rules that are not recommended
-        type: "[]integer"
+      response_json:
+        title: Response JSON
+        description: Full response in JSON format
+        type: "object"
         required: false

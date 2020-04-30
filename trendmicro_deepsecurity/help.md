@@ -37,8 +37,8 @@ This action is used to list IPS rules.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|computer_or_policy|string|None|True|Get IPS rules from a computer or policy|['computer', 'policy']|policy|
-|id|integer|None|True|ID of the computer or policy|None|23|
+|id|integer|None|False|ID of the computer or policy|None|23|
+|scope|string|None|True|Set the scope|['computer', 'policy']|policy|
 
 Example input:
 
@@ -53,9 +53,9 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|covered_cves|[]string|False|CVEs covered by the assigned rules|
+|response_json|object|False|Full response in JSON format|
 |rules_assigned|[]integer|False|All IPS rules currently assigned|
-|rules_not_recommended|[]integer|False|IPS rules that are not recommended|
-|rules_recommended|[]integer|False|Recommended IPS rules|
 
 Example output:
 

@@ -8,14 +8,14 @@ class Component:
 
 
 class Input:
-    COMPUTER_OR_POLICY = "computer_or_policy"
     ID = "id"
+    SCOPE = "scope"
     
 
 class Output:
+    COVERED_CVES = "covered_cves"
+    RESPONSE_JSON = "response_json"
     RULES_ASSIGNED = "rules_assigned"
-    RULES_NOT_RECOMMENDED = "rules_not_recommended"
-    RULES_RECOMMENDED = "rules_recommended"
     
 
 class ListRulesInput(komand.Input):
@@ -24,26 +24,25 @@ class ListRulesInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "computer_or_policy": {
-      "type": "string",
-      "title": "Target",
-      "description": "Get IPS rules from a computer or policy",
-      "enum": [
-        "computer",
-        "policy"
-      ],
-      "order": 1
-    },
     "id": {
       "type": "integer",
       "title": "ID",
       "description": "ID of the computer or policy",
       "order": 2
+    },
+    "scope": {
+      "type": "string",
+      "title": "Scope",
+      "description": "Set the scope",
+      "enum": [
+        "computer",
+        "policy"
+      ],
+      "order": 1
     }
   },
   "required": [
-    "computer_or_policy",
-    "id"
+    "scope"
   ]
 }
     """)
@@ -58,6 +57,21 @@ class ListRulesOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "covered_cves": {
+      "type": "array",
+      "title": "CVEs",
+      "description": "CVEs covered by the assigned rules",
+      "items": {
+        "type": "string"
+      },
+      "order": 2
+    },
+    "response_json": {
+      "type": "object",
+      "title": "Response JSON",
+      "description": "Full response in JSON format",
+      "order": 3
+    },
     "rules_assigned": {
       "type": "array",
       "title": "Rules Assigned",
@@ -66,24 +80,6 @@ class ListRulesOutput(komand.Output):
         "type": "integer"
       },
       "order": 1
-    },
-    "rules_not_recommended": {
-      "type": "array",
-      "title": "Not Recommended",
-      "description": "IPS rules that are not recommended",
-      "items": {
-        "type": "integer"
-      },
-      "order": 3
-    },
-    "rules_recommended": {
-      "type": "array",
-      "title": "Recommended",
-      "description": "Recommended IPS rules",
-      "items": {
-        "type": "integer"
-      },
-      "order": 2
     }
   }
 }
