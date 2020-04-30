@@ -62,7 +62,7 @@ Example input:
 
 ```
 {
-  "user_id": "user@example.com
+  "user_id": "user@example.com"
 }
 ```
 
