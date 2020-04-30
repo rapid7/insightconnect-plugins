@@ -2,6 +2,8 @@
 from komand.exceptions import PluginException
 from requests.models import Response
 
+import json
+
 
 def tryJSON(response: Response) -> dict:
     """

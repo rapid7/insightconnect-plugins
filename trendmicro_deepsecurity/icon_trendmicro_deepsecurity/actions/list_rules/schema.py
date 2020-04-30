@@ -42,6 +42,7 @@ class ListRulesInput(komand.Input):
     }
   },
   "required": [
+    "id",
     "scope"
   ]
 }

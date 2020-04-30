@@ -145,3 +145,49 @@ actions:
         description: Full response in JSON format
         type: "object"
         required: false
+  get_rule_details:
+    title: Get Details
+    description: Get detailed information of a IPS rule
+    input:
+      id:
+        title: IPS Rule ID
+        type: integer
+        description: IPS rule
+        required: true
+        example: 2874
+    output:
+      name:
+        title: Name
+        description: Name of the rule
+        type: string
+        required: false
+      description:
+        title: Description
+        description: Description of the rule
+        type: string
+        required: false
+      severity:
+        title: Severity
+        description: Severity level of the IPS rule
+        type: string
+        required: false
+      type:
+        title: Type
+        description: Rule type
+        type: string
+        required: false
+      cvss_score:
+        title: CVSS Score
+        description: CVSS score
+        type: string
+        required: false
+      cves:
+        title: CVEs
+        description: List of related CVEs
+        type: "[]string"
+        required: false
+      response_json:
+        title: Response JSON
+        description: Full response in JSON format
+        type: "object"
+        required: false

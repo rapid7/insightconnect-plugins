@@ -1,6 +1,6 @@
 {
-	"spec": "400e798e0d0fde54c26432a03cdd066e",
-	"manifest": "9f0f7d705005c8b14cb42c97127d21dc",
+	"spec": "8de12674fda7781ceb76d5a6edd63542",
+	"manifest": "f1ae1054de5cda4bc1dfb92d0437691a",
 	"setup": "52c664dd71ed99578ddad3e68052ae77",
 	"schemas": [
 		{
@@ -8,8 +8,12 @@
 			"hash": "8674123f170310085c72627eb16cb103"
 		},
 		{
+			"identifier": "get_rule_details/schema.py",
+			"hash": "ea5da90ff939cdb9b20644c94e5c0098"
+		},
+		{
 			"identifier": "list_rules/schema.py",
-			"hash": "02227a163e21159b21a139027f70d705"
+			"hash": "234d239b2226033398e195fe476e255b"
 		},
 		{
 			"identifier": "search_rules/schema.py",

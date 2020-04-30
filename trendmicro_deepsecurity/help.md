@@ -29,6 +29,74 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Get Details
+
+This action is used to get detailed information of a IPS rule.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|integer|None|True|IPS rule|None|2874|
+
+Example input:
+
+```
+{
+  "id": 2874
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|cves|[]string|False|List of related CVEs|
+|cvss_score|string|False|CVSS score|
+|description|string|False|Description of the rule|
+|name|string|False|Name of the rule|
+|response_json|object|False|Full response in JSON format|
+|severity|string|False|Severity level of the IPS rule|
+|type|string|False|Rule type|
+
+Example output:
+
+```
+{
+  "cves": [
+    "CVE-2014-0160"
+  ],
+  "cvss_score": "5.00",
+  "description": "The TLS and DTLS implementations in OpenSSL do not properly handle Heartbeat Extension packets, which allow remote attackers to obtain sensitive information from process memory via crafted packets. This is a heuristic based rule to identify such suspicious Heartbeat requests.",
+  "name": "Identified Suspicious OpenSSL TLS/DTLS Heartbeat Request (ATT\u0026CK T1032)",
+  "response_json": {
+    "CVE": [
+      "CVE-2014-0160"
+    ],
+    "CVSSScore": "5.00",
+    "ID": 2874,
+    "alertEnabled": false,
+    "alwaysIncludePacketData": false,
+    "applicationTypeID": 282,
+    "canBeAssignedAlone": true,
+    "debugModeEnabled": false,
+    "description": "The TLS and DTLS implementations in OpenSSL do not properly handle Heartbeat Extension packets, which allow remote attackers to obtain sensitive information from process memory via crafted packets. This is a heuristic based rule to identify such suspicious Heartbeat requests.",
+    "detectOnly": false,
+    "eventLoggingDisabled": false,
+    "generateEventOnPacketDrop": true,
+    "identifier": "1006012",
+    "lastUpdated": 1569346920000,
+    "name": "Identified Suspicious OpenSSL TLS/DTLS Heartbeat Request (ATT\u0026CK T1032)",
+    "originalIssue": 1396962540000,
+    "priority": "normal",
+    "severity": "medium",
+    "type": "smart"
+  },
+  "severity": "medium",
+  "type": "smart"
+}
+```
+
 #### List
 
 This action is used to list IPS rules.
@@ -37,7 +105,7 @@ This action is used to list IPS rules.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|False|ID of the computer or policy|None|23|
+|id|integer|None|True|ID of the computer or policy|None|23|
 |scope|string|None|True|Set the scope|['computer', 'policy']|policy|
 
 Example input:
