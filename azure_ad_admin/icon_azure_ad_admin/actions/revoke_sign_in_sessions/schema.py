@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Invalidates all the refresh tokens issued to applications for a user (as well as session cookies in a user's browser), by resetting the signInSessionsValidFromDateTime user property to the current date-time"
+    DESCRIPTION = "This will require the user to log back in after any page they are on is refreshed by invalidating all refresh tokens and cookies"
 
 
 class Input:

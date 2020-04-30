@@ -1,5 +1,5 @@
 {
-	"spec": "8cfb2f818e36ae34d2d1fbd2717bb65f",
+	"spec": "e2b3146709cf9a5fab582593426ac7db",
 	"manifest": "b2817d0fe1b411915069777f9bb7c4b7",
 	"setup": "876dbb55ac8278875d9a6b2a3d868868",
 	"schemas": [
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "revoke_sign_in_sessions/schema.py",
-			"hash": "faadb6bacc9ea191b863120ff7058854"
+			"hash": "9df98ea951103d439029a9b8622e104f"
 		},
 		{
 			"identifier": "update_user_info/schema.py",

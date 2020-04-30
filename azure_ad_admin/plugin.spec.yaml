@@ -547,7 +547,7 @@ actions:
         required: true
   revoke_sign_in_sessions:
     title: Revoke Sign-In Sessions
-    description: Invalidates all the refresh tokens issued to applications for a user (as well as session cookies in a user's browser), by resetting the signInSessionsValidFromDateTime user property to the current date-time
+    description: This will require the user to log back in after any page they are on is refreshed by invalidating all refresh tokens and cookies
     input:
       user_id:
         title: User ID
