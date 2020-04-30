@@ -266,6 +266,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - Add action to receive assigned IPS rules from computers and policies
 * 2.0.0 - Add an option to toggle DSM certificate verification in the connection
 * 1.0.0 - Initial plugin
 
