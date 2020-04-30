@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deploy rules"
+    DESCRIPTION = "Deploy IPS rules"
 
 
 class Input:
@@ -37,7 +37,7 @@ class DeployRulesInput(komand.Input):
     "id": {
       "type": "integer",
       "title": "ID",
-      "description": "ID of the target asset or policy",
+      "description": "ID of the target computer or policy",
       "order": 2
     },
     "rules": {
@@ -71,7 +71,7 @@ class DeployRulesOutput(komand.Output):
     "rules_assigned": {
       "type": "array",
       "title": "Rules Assigned",
-      "description": "All rules currently assigned to the asset",
+      "description": "All IPS rules currently assigned",
       "items": {
         "type": "integer"
       },
@@ -80,7 +80,7 @@ class DeployRulesOutput(komand.Output):
     "rules_not_assigned": {
       "type": "array",
       "title": "Not Assigned Rules",
-      "description": "Unassigned rules",
+      "description": "Unassigned IPS rules",
       "items": {
         "type": "integer"
       },

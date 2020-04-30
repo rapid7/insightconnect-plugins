@@ -4,7 +4,7 @@ products: [insightconnect]
 name: trendmicro_deepsecurity
 title: Trend Micro Deep Security
 description: Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
-version: 2.0.0
+version: 2.1.0
 vendor: rapid7
 support: community
 status: []
@@ -76,7 +76,7 @@ actions:
         required: false
   deploy_rules:
     title: Deploy
-    description: Deploy rules
+    description: Deploy IPS rules
     input:
       computer_or_policy:
         title: Target
@@ -90,7 +90,7 @@ actions:
       id:
         title: ID
         type: integer
-        description: ID of the target asset or policy
+        description: ID of the target computer or policy
         required: true
         example: 23
       rules:
@@ -102,11 +102,92 @@ actions:
     output:
       rules_assigned:
         title: Rules Assigned
-        description: All rules currently assigned to the asset
+        description: All IPS rules currently assigned
         type: "[]integer"
         required: false
       rules_not_assigned:
         title: Not Assigned Rules
-        description: Unassigned rules
+        description: Unassigned IPS rules
         type: "[]integer"
+        required: false
+  list_rules:
+    title: List
+    description: List IPS rules
+    input:
+      scope:
+        title: Scope
+        type: string
+        description: Set the scope
+        required: true 
+        enum:
+          - computer
+          - policy 
+        example: policy
+      id:
+        title: ID
+        type: integer
+        description: ID of the computer or policy
+        required: true
+        example: 23
+    output:
+      rules_assigned:
+        title: Rules Assigned
+        description: All IPS rules currently assigned
+        type: "[]integer"
+        required: false
+      covered_cves:
+        title: CVEs
+        description: CVEs covered by the assigned rules
+        type: "[]string"
+        required: false
+      response_json:
+        title: Response JSON
+        description: Full response in JSON format
+        type: "object"
+        required: false
+  get_rule_details:
+    title: Get Details
+    description: Get detailed information of an IPS rule
+    input:
+      id:
+        title: IPS Rule ID
+        type: integer
+        description: IPS rule
+        required: true
+        example: 2874
+    output:
+      name:
+        title: Name
+        description: Name of the rule
+        type: string
+        required: false
+      description:
+        title: Description
+        description: Description of the rule
+        type: string
+        required: false
+      severity:
+        title: Severity
+        description: Severity level of the IPS rule
+        type: string
+        required: false
+      type:
+        title: Type
+        description: Rule type
+        type: string
+        required: false
+      cvss_score:
+        title: CVSS Score
+        description: CVSS score
+        type: string
+        required: false
+      cves:
+        title: CVEs
+        description: List of related CVEs
+        type: "[]string"
+        required: false
+      response_json:
+        title: Response JSON
+        description: Full response in JSON format
+        type: "object"
         required: false
