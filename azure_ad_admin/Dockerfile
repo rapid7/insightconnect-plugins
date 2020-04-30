@@ -20,6 +20,8 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 # Install plugin
 RUN python setup.py build && python setup.py install
 
+
+
 # Root - Needs SSL CA
 USER root
 
