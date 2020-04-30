@@ -595,7 +595,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.1 - Update incorrect title of `user_type` to User Type  |  Return `group_id` in Add User to Groups By IDs action's error message to improve debugging | New action Revoke Sign-In Sessions
+* 2.2.0 - New action Revoke Sign-In Sessions
+* 2.1.1 - Update incorrect title of `user_type` to User Type  |  Return `group_id` in Add User to Groups By IDs action's error message to improve debugging
 * 2.1.0 - New action Add User to Groups By IDs
 * 2.0.0 - New action Update User Info
 * 1.4.1 - Extension Library styling update
