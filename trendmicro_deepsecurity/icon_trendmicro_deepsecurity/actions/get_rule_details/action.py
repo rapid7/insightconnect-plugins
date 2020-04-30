@@ -52,9 +52,7 @@ class GetRuleDetails(komand.Action):
         if "CVE" in response_data.keys():
             cves = response_data["CVE"]
 
-#        self.logger.info(f"Found {hits} rules covering the following CVEs: \n" + ", ".join(covered_cves))
-
-        # Return assigned and failed rules
+        # Return rule details
         return {Output.NAME: name,
                 Output.DESCRIPTION: description,
                 Output.SEVERITY: severity,

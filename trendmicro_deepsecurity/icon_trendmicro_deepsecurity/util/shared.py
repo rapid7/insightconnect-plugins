@@ -23,7 +23,7 @@ def checkResponse(response: Response) -> None:
     """
     Check the response code and extract the error message
     """
-    
+
     if response.status_code not in range(200, 299):
         response_data = tryJSON(response)
         if "message" in response_data:

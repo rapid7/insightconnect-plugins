@@ -51,7 +51,7 @@ class ListRules(komand.Action):
         # Try to convert the response data to JSON
         response_data = tryJSON(response)
 
-        # Check if matching IPS rules were found
+        # Extract rules
         if response_data["intrusionPreventionRules"]:
             for rule in response_data["intrusionPreventionRules"]:
                 ips_rules.add(rule["ID"])
@@ -66,7 +66,7 @@ class ListRules(komand.Action):
         hits = len(response_data["intrusionPreventionRules"])
         self.logger.info(f"Found {hits} rules covering the following CVEs: \n" + ", ".join(covered_cves))
 
-        # Return assigned and failed rules
+        # Return assigned rules and covered CVEs
         return {Output.RULES_ASSIGNED: list(ips_rules),
                 Output.COVERED_CVES: list(covered_cves),
                 Output.RESPONSE_JSON: response_data}
