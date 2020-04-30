@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get detailed information of a IPS rule"
+    DESCRIPTION = "Get detailed information of an IPS rule"
 
 
 class Input:

@@ -1,5 +1,5 @@
 {
-	"spec": "406244f06599b6dd1501c9ea5277a953",
+	"spec": "64057f056daf609df1797bf316cf63ce",
 	"manifest": "d44686db3fca2b96bc2b57aa068ea483",
 	"setup": "b78746551f7df7082a40a423b2ff3b8d",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "get_rule_details/schema.py",
-			"hash": "ea5da90ff939cdb9b20644c94e5c0098"
+			"hash": "0eb15d3e0354f05e7d24fa53a5c48888"
 		},
 		{
 			"identifier": "list_rules/schema.py",

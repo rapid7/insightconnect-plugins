@@ -147,7 +147,7 @@ actions:
         required: false
   get_rule_details:
     title: Get Details
-    description: Get detailed information of a IPS rule
+    description: Get detailed information of an IPS rule
     input:
       id:
         title: IPS Rule ID
