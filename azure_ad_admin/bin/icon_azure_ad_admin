@@ -6,7 +6,7 @@ from icon_azure_ad_admin import connection, actions, triggers
 
 Name = "Azure AD Admin"
 Vendor = "rapid7"
-Version = "2.1.1"
+Version = "2.2.0"
 Description = "Perform administrative operations in Azure AD"
 
 
@@ -38,6 +38,8 @@ class ICONAzureAdAdmin(komand.Plugin):
         self.add_action(actions.GetUserInfo())
 
         self.add_action(actions.RemoveUserFromGroup())
+
+        self.add_action(actions.RevokeSignInSessions())
 
         self.add_action(actions.UpdateUserInfo())
 

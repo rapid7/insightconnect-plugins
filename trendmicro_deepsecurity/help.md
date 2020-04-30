@@ -31,7 +31,7 @@ The connection configuration accepts the following parameters:
 
 #### Get Details
 
-This action is used to get detailed information of a IPS rule.
+This action is used to get detailed information of an IPS rule.
 
 ##### Input
 

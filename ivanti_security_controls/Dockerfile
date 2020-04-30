@@ -1,4 +1,4 @@
-FROM komand/python-3-37-slim-plugin:3
+FROM rapid7/insightconnect-python-3-38-plugin:4
 # Refer to the following documentation for available SDK parent images: https://komand.github.io/python/sdk.html#version
 
 LABEL organization=rapid7
@@ -20,9 +20,7 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 # Install plugin
 RUN python setup.py build && python setup.py install
 
-
-
-# Root - Needs SSL CA
+# User to run plugin code. The two supported users are: root, nobody
 USER root
 
-ENTRYPOINT ["/usr/local/bin/icon_azure_ad_admin"]
+ENTRYPOINT ["/usr/local/bin/icon_ivanti_security_controls"]
