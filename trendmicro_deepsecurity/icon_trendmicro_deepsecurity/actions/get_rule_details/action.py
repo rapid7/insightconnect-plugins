@@ -36,11 +36,11 @@ class GetRuleDetails(komand.Action):
         self.logger.info(f"status: {response.status_code}")
         self.logger.info(f"reason: {response.reason}")
 
-        # Try to convert the response data to JSON
-        response_data = tryJSON(response)
-
         # Check response errors
         checkResponse(response)
+
+        # Try to convert the response data to JSON
+        response_data = tryJSON(response)
 
         cves = []
 

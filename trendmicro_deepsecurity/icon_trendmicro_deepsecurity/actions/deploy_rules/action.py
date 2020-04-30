@@ -47,11 +47,11 @@ class DeployRules(komand.Action):
         self.logger.info(f"status: {response.status_code}")
         self.logger.info(f"reason: {response.reason}")
 
-        # Try to convert the response data to JSON
-        response_data = tryJSON(response)
-
         # Check response errors
         checkResponse(response)
+
+        # Try to convert the response data to JSON
+        response_data = tryJSON(response)
 
         # Get a list of all rules assigned to the asset or policy
         rules_assigned = response_data["assignedRuleIDs"]

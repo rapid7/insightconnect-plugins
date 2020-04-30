@@ -1,7 +1,7 @@
 {
-	"spec": "8de12674fda7781ceb76d5a6edd63542",
-	"manifest": "f1ae1054de5cda4bc1dfb92d0437691a",
-	"setup": "52c664dd71ed99578ddad3e68052ae77",
+	"spec": "406244f06599b6dd1501c9ea5277a953",
+	"manifest": "d44686db3fca2b96bc2b57aa068ea483",
+	"setup": "b78746551f7df7082a40a423b2ff3b8d",
 	"schemas": [
 		{
 			"identifier": "deploy_rules/schema.py",
