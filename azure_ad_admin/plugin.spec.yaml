@@ -545,6 +545,23 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
+  revoke_sign_in_sessions:
+    title: Revoke Sign-In Sessions
+    description: This will require the user to log back in after any page they are on is refreshed by invalidating all refresh tokens and cookies
+    input:
+      user_id:
+        title: User ID
+        description: User ID
+        type: string
+        example: user@example.com
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
+
 triggers:
   risk_detection:
     title: Risk Detection

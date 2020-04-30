@@ -1,6 +1,6 @@
 {
-	"spec": "b8c506ba3d31e844a6060d27feffcf04",
-	"manifest": "d41bc46d4349daabc78eff4cdae8dcb8",
+	"spec": "e2b3146709cf9a5fab582593426ac7db",
+	"manifest": "b2817d0fe1b411915069777f9bb7c4b7",
 	"setup": "876dbb55ac8278875d9a6b2a3d868868",
 	"schemas": [
 		{
@@ -38,6 +38,10 @@
 		{
 			"identifier": "remove_user_from_group/schema.py",
 			"hash": "c72147c6efdd66cf4da2adc4c090920b"
+		},
+		{
+			"identifier": "revoke_sign_in_sessions/schema.py",
+			"hash": "9df98ea951103d439029a9b8622e104f"
 		},
 		{
 			"identifier": "update_user_info/schema.py",
