@@ -32,7 +32,7 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-#### Check if IP is in Address Group
+#### Check If IP is in Address Group
 
 This action is used to check if a IP address is in an Address Group.
 
@@ -46,9 +46,6 @@ This action is used to check if a IP address is in an Address Group.
 Example input:
 
 ```
-{
-  "ip_address_found": true
-}
 ```
 
 ##### Output

@@ -628,7 +628,7 @@ connection:
 
 actions:
   check_if_ip_is_in_address_groups:
-    title: Check if IP is in Address Group
+    title: Check If IP is in Address Group
     description: Check if a IP address is in an Address Group
     input:
       address_group_name:
