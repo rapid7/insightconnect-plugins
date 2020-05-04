@@ -28,7 +28,7 @@ class CheckIfIpIsInAddressGroups(komand.Action):
         try:
             address_groups = result.json()
         except ValueError:
-            raise PluginException(cause="data sent by Fortigate was not in JSON format.\n",
+            raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
                                   assistance="Contact support for help.",
                                   data=result.text)
         try:
