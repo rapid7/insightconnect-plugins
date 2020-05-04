@@ -46,6 +46,9 @@ This action is used to check if a IP address is in an Address Group.
 Example input:
 
 ```
+{
+  "ip_address_found": true
+}
 ```
 
 ##### Output
