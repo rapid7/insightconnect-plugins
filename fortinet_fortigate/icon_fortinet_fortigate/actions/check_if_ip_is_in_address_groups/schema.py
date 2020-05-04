@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Check if a IP address is in an Address Group"
+    DESCRIPTION = "Check if an IP address is in an address group"
 
 
 class Input:
@@ -55,7 +55,7 @@ class CheckIfIpIsInAddressGroupsOutput(komand.Output):
     "ip_address_found": {
       "type": "boolean",
       "title": "IP Address Found",
-      "description": "Was the IP address found in the address group true or false",
+      "description": "True if the IP address was found in the address group",
       "order": 1
     }
   },

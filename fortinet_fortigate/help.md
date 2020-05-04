@@ -32,9 +32,9 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-#### Check If IP is in Address Group
+#### Check Address Group for IP Address
 
-This action is used to check if a IP address is in an Address Group.
+This action is used to check if an IP address is in an address group.
 
 ##### Input
 
@@ -46,24 +46,17 @@ This action is used to check if a IP address is in an Address Group.
 Example input:
 
 ```
-{
-  "address_group_name": "Test Group",
-  "ip_address": "198.51.100.100"
-}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ip_address_found|boolean|True|Was the IP address found in the address group true or false|
+|ip_address_found|boolean|True|True if the IP address was found in the address group|
 
 Example output:
 
 ```
-{
-  "ip_address_found": true
-}
 ```
 
 #### Get Policies
