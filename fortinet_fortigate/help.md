@@ -47,7 +47,8 @@ Example input:
 
 ```
 {
-  "ip_address_found": true
+  "address_group_name": "Test Group",
+  "ip_address": "192.168.2.1"
 }
 ```
 
@@ -60,6 +61,9 @@ Example input:
 Example output:
 
 ```
+{
+  "ip_address_found": true
+}
 ```
 
 #### Get Policies
