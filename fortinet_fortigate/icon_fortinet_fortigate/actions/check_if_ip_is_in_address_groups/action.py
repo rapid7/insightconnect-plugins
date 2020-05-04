@@ -38,7 +38,7 @@ class CheckIfIpIsInAddressGroups(komand.Action):
                                   assistance="This is normally caused by an invalid address group name."
                                              " Double check that the address group name is correct")
         if len(groups) > 1:
-            raise PluginException(cause="Fortigate returned more than one address group.\n",
+            raise PluginException(cause="FortiGate returned more than one address group.\n",
                                   assistance="Contact support for help.",
                                   data=result.text)
         try:
