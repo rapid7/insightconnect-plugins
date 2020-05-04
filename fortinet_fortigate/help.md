@@ -24,9 +24,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API key|None|None|
-|hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|None|
-|ssl_verify|boolean|None|True|SSL verify|None|None|
+|api_key|credential_secret_key|None|True|API key|None|2Fty5834tFpBdidePJnt9075MMdkUb|
+|hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|fortigate.rapid7.com|
+|ssl_verify|boolean|None|True|SSL verify|None|False|
 
 ## Technical Details
 
@@ -552,6 +552,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - New Action Check if IP is in Address Group
 * 1.0.0 - Initial plugin
 
 # Links

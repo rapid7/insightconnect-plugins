@@ -612,16 +612,19 @@ connection:
     title: Hostname
     description: Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000
     required: true
+    example: fortigate.rapid7.com
   api_key:
     type: credential_secret_key
     title: API Key
     description: API key
     required: true
+    example: 2Fty5834tFpBdidePJnt9075MMdkUb
   ssl_verify:
     type: boolean
     title: SSL Verify
     description: SSL verify
     required: true
+    example: false
 
 actions:
   check_if_ip_is_in_address_groups:
@@ -646,7 +649,6 @@ actions:
         description: Was the IP address found in the address group true or false
         type: boolean
         required: true
-        example: true
   get_policies:
     title: Get Policies
     description: Get policies
