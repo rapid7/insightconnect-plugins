@@ -629,7 +629,7 @@ connection:
 actions:
   check_if_ip_is_in_address_groups:
     title: Check Address Group for IP Address
-    description: Check if a IP address is in an Address Group
+    description: Check if an IP address is in an address group
     input:
       address_group_name:
         title: Address Group Name
