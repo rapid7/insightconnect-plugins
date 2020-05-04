@@ -1,11 +1,15 @@
 {
-	"spec": "cff37aae89c8bda8db89d8f912c89698",
-	"manifest": "5298aa4f28d848e764780a3989b1462c",
-	"setup": "a4988f3109c28c40e5ac656302815ce5",
+	"spec": "1848b95cdb4e855c3022e1cf5cbfd665",
+	"manifest": "592948ab1aa36200d896a7f4e52b5136",
+	"setup": "5bdd90f7b6a9dd5002193048fc05923d",
 	"schemas": [
 		{
 			"identifier": "add_address_object_to_address_group/schema.py",
 			"hash": "745ff2386c43d40240b69dcca9195d9b"
+		},
+		{
+			"identifier": "check_if_ip_is_in_address_groups/schema.py",
+			"hash": "8eecf80c2e21fca91d96eba28b1992d8"
 		},
 		{
 			"identifier": "create_address_object/schema.py",

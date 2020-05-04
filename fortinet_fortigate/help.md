@@ -22,15 +22,42 @@ for flexible policy management of large groups of dynamic addresses.
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API key|None|
-|hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|
-|ssl_verify|boolean|None|True|SSL verify|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|API key|None|2Fty5834tFpBdidePJnt9075MMdkUb|
+|hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|fortigate.rapid7.com|
+|ssl_verify|boolean|None|True|SSL verify|None|False|
 
 ## Technical Details
 
 ### Actions
+
+#### Check Address Group for IP Address
+
+This action is used to check if an IP address is in an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_group_name|string|None|True|The name of the address group to check|None|blocked IP's|
+|ip_address|string|None|True|The IP address to check for|None|198.51.100.100|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ip_address_found|boolean|True|True if the IP address was found in the address group|
+
+Example output:
+
+```
+```
 
 #### Get Policies
 
@@ -38,9 +65,14 @@ This action is used to get policies.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|name_filter|string|None|False|Optional name to filter on|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name_filter|string|None|False|Optional name to filter on|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -194,10 +226,15 @@ This action is used to add an address object to an address group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address_object_name|string|None|True|Address object name|None|
-|group_name|string|None|True|Group name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object_name|string|None|True|Address object name|None|None|
+|group_name|string|None|True|Group name|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -235,11 +272,16 @@ This action is used to create an address object.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|cidr|integer|32|True|CIDR|None|
-|ip|string|None|True|IP|None|
-|name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cidr|integer|32|True|CIDR|None|None|
+|ip|string|None|True|IP|None|None|
+|name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -277,10 +319,15 @@ This action is used to delete an address object.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|cidr|integer|32|True|CIDR|None|
-|ip|string|None|True|IP|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cidr|integer|32|True|CIDR|None|None|
+|ip|string|None|True|IP|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -318,9 +365,14 @@ This action is used to get address objects.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|name_filter|string|None|False|Optional name to filter on|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name_filter|string|None|False|Optional name to filter on|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -500,6 +552,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - New Action Check if IP is in Address Group
 * 1.0.0 - Initial plugin
 
 # Links

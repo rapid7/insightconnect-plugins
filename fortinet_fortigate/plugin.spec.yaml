@@ -4,7 +4,7 @@ products: [insightconnect]
 name: fortinet_fortigate
 title: Fortinet FortiGate
 description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection
-version: 1.0.0
+version: 1.1.0
 vendor: rapid7
 support: community
 status: []
@@ -612,18 +612,43 @@ connection:
     title: Hostname
     description: Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000
     required: true
+    example: fortigate.rapid7.com
   api_key:
     type: credential_secret_key
     title: API Key
     description: API key
     required: true
+    example: 2Fty5834tFpBdidePJnt9075MMdkUb
   ssl_verify:
     type: boolean
     title: SSL Verify
     description: SSL verify
     required: true
+    example: false
 
 actions:
+  check_if_ip_is_in_address_groups:
+    title: Check Address Group for IP Address
+    description: Check if an IP address is in an address group
+    input:
+      address_group_name:
+        title: Address Group Name
+        description: The name of the address group to check
+        type: string
+        required: true
+        example: blocked IP's
+      ip_address:
+        title: IP Address
+        description: The IP address to check for
+        type: string
+        required: true
+        example: 198.51.100.100
+    output:
+      ip_address_found:
+        title: IP Address Found
+        description: True if the IP address was found in the address group
+        type: boolean
+        required: true
   get_policies:
     title: Get Policies
     description: Get policies
