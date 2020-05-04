@@ -646,7 +646,7 @@ actions:
     output:
       ip_address_found:
         title: IP Address Found
-        description: Was the IP address found in the address group true or false
+        description: True if the IP address was found in the address group
         type: boolean
         required: true
   get_policies:
