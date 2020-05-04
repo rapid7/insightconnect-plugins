@@ -34,7 +34,7 @@ class CheckIfIpIsInAddressGroups(komand.Action):
         try:
             groups = address_groups["results"]
         except KeyError:
-            raise PluginException(cause="No results were returned by Fortigate.\n",
+            raise PluginException(cause="No results were returned by FortiGate.\n",
                                   assistance="This is normally caused by an invalid address group name."
                                              " Double check that the address group name is correct")
         if len(groups) > 1:
