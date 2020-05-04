@@ -624,6 +624,29 @@ connection:
     required: true
 
 actions:
+  check_if_ip_is_in_address_groups:
+    title: Check if IP is in Address Group
+    description: Check if a IP address is in an Address Group
+    input:
+      address_group_name:
+        title: Address Group Name
+        description: The name of the address group to check
+        type: string
+        required: true
+        example: blocked IP's
+      ip_address:
+        title: IP Address
+        description: The IP address to check for
+        type: string
+        required: true
+        example: 198.51.100.100
+    output:
+      ip_address_found:
+        title: IP Address Found
+        description: Was the IP address found in the address group true or false
+        type: boolean
+        required: true
+        example: true
   get_policies:
     title: Get Policies
     description: Get policies

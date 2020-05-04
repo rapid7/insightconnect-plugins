@@ -21,6 +21,8 @@ class ICONFortinetFortigate(komand.Plugin):
                 )
         self.add_action(actions.AddAddressObjectToAddressGroup())
 
+        self.add_action(actions.CheckIfIpIsInAddressGroups())
+
         self.add_action(actions.CreateAddressObject())
 
         self.add_action(actions.DeleteAddressObject())
