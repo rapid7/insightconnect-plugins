@@ -22,7 +22,7 @@ class CheckIfIpIsInAddressGroups(komand.Action):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(cause=f"unable to retrieve address group for {endpoint}\n",
+            raise PluginException(cause=f"Unable to retrieve address group for {endpoint}\n",
                                   assistance=result.text,
                                   data=e)
         try:
