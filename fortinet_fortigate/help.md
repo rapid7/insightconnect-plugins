@@ -48,7 +48,7 @@ Example input:
 ```
 {
   "address_group_name": "Test Group",
-  "ip_address": "192.168.2.1"
+  "ip_address": "198.51.100.100"
 }
 ```
 
