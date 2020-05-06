@@ -20,10 +20,10 @@ This plugin utilizes the [OTRS Python library](https://pyotrs.readthedocs.io/en/
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|OTRS username and password|None|
-|server|string|None|True|OTRS Server|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|OTRS username and password|None|None|
+|server|string|None|True|OTRS Server|None|None|
 
 To create a REST web service please save a copy [GenericTicketConnectorREST.yml](https://gitlab.com/rhab/PyOTRS/raw/master/webservices_templates/GenericTicketConnectorREST.yml)
 
@@ -37,12 +37,17 @@ This action is used to search for OTRS tickets.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|cust_id|string|None|False|Customer ID|None|
-|dynamic_fields|[]search_dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","value":"TestValue1", "operation":"Equals"},{"name":"TestName2","value":"TestValue2"}]. The value field is what will be searched for|None|
-|external_params|[]external_param|None|False|A key value object thats not a Dynamic Field e.g [{"Title":"Test Ticket"}]|None|
-|queue|string|None|False|Queue to search in|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cust_id|string|None|False|Customer ID|None|None|
+|dynamic_fields|[]search_dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","value":"TestValue1", "operation":"Equals"},{"name":"TestName2","value":"TestValue2"}]. The value field is what will be searched for|None|None|
+|external_params|[]external_param|None|False|A key value object thats not a Dynamic Field e.g [{"Title":"Test Ticket"}]|None|None|
+|queue|string|None|False|Queue to search in|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -71,9 +76,14 @@ This action is used to retrieve OTRS ticket.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ticket_id|integer|None|False|Ticket ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ticket_id|integer|None|False|Ticket ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -309,23 +319,28 @@ This action is used to create OTRS ticket.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|CustomerUser|string|None|False|Customer user associated with the ticket e.g test_customer|None|
-|Lock|string|None|False|Lock name|None|
-|Owner|string|None|False|Ticket owner|None|
-|PendingTime|date|None|False|Pending time field|None|
-|Priority|string|None|False|Ticket priority. 1=very low, 2=low, 3=normal, 4=high, 5=very high, etc|None|
-|Queue|string|None|False|Queue the ticket is to be inserted in|None|
-|Responsible|string|None|False|User responsible for the ticket|None|
-|SLA|string|None|False|SLA name|None|
-|Service|string|None|False|Service name|None|
-|State|string|new|False|Ticket state|None|
-|Title|string|None|False|Ticket title|None|
-|Type|string|None|False|Ticket type e.g. Incident|None|
-|article|new_article|None|False|Ticket article|None|
-|attachments|[]attachment|None|False|Attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|
-|dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","pattern":"TestValue1"},{"name":"TestName2","pattern":"TestValue2"}]|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|CustomerUser|string|None|False|Customer user associated with the ticket e.g test_customer|None|None|
+|Lock|string|None|False|Lock name|None|None|
+|Owner|string|None|False|Ticket owner|None|None|
+|PendingTime|date|None|False|Pending time field|None|None|
+|Priority|string|None|False|Ticket priority. 1=very low, 2=low, 3=normal, 4=high, 5=very high, etc|None|None|
+|Queue|string|None|False|Queue the ticket is to be inserted in|None|None|
+|Responsible|string|None|False|User responsible for the ticket|None|None|
+|SLA|string|None|False|SLA name|None|None|
+|Service|string|None|False|Service name|None|None|
+|State|string|new|False|Ticket state|None|None|
+|Title|string|None|False|Ticket title|None|None|
+|Type|string|None|False|Ticket type e.g. Incident|None|None|
+|article|new_article|None|False|Ticket article|None|None|
+|attachments|[]attachment|None|False|Attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|None|
+|dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","pattern":"TestValue1"},{"name":"TestName2","pattern":"TestValue2"}]|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -351,26 +366,28 @@ This action is used to update an OTRS ticket.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|Article|new_article|None|False|New article (gets appended)|None|
-|Attachments|[]attachment|None|False|New attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|
-|CustomerUser|string|None|False|Updated customer user|None|
-|DynamicFields|[]dynamic_field|None|False|Updated dynamic fields e.g. [{"name":"TestName1","value":"TestValue1"},{"name":"TestName2","value":"TestValue2"}]|None|
-|Lock|string|None|False|Lock|None|
-|NoArticle|boolean|None|True|Will not add article to ticket|None|
-|PendingTime|date|None|False|Pending time|None|
-|Priority|string|None|False|Updated ticket priority e.g. 1 very low, 2 low, 3 normal, 4 high, 5 very high and so on|None|
-|Queue|string|None|False|Updated queue|None|
-|Responsible|string|None|False|Responsible|None|
-|SLA|string|None|False|SLA|None|
-|Service|string|None|False|Service|None|
-|TicketID|integer|None|False|Ticket ID|None|
-|Title|string|None|False|Updated title|None|
-|Type|string|None|False|Updated type e.g. Incident|None|
-|Article|new_article|None|False|New article (gets appended)|None|
-|DynamicFields|[]dynamic_field|None|False|Updated dynamic fields e.g. [{"name":"TestName1","value":"TestValue1"},{"name":"TestName2","value":"TestValue2"}]|None|
-|Attachments|[]attachment|None|False|New attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|Article|new_article|None|False|New article (gets appended)|None|None|
+|Attachments|[]attachment|None|False|New attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|None|
+|CustomerUser|string|None|False|Updated customer user|None|None|
+|DynamicFields|[]dynamic_field|None|False|Updated dynamic fields e.g. [{"name":"TestName1","value":"TestValue1"},{"name":"TestName2","value":"TestValue2"}]|None|None|
+|Lock|string|None|False|Lock|None|None|
+|NoArticle|boolean|None|True|Will not add article to ticket|None|None|
+|PendingTime|date|None|False|Pending time|None|None|
+|Priority|string|None|False|Updated ticket priority e.g. 1 very low, 2 low, 3 normal, 4 high, 5 very high and so on|None|None|
+|Queue|string|None|False|Updated queue|None|None|
+|Responsible|string|None|False|Responsible|None|None|
+|SLA|string|None|False|SLA|None|None|
+|Service|string|None|False|Service|None|None|
+|TicketID|integer|None|False|Ticket ID|None|None|
+|Title|string|None|False|Updated title|None|None|
+|Type|string|None|False|Updated type e.g. Incident|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -404,6 +421,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.1 - Update dependency to PyOTRS for authorization bug [PyOTRS issue 27](https://gitlab.com/rhab/PyOTRS/-/issues/27)
 * 5.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Disposition and Service in Create Ticket log message
 * 4.0.1 - Fix issue in Retrieve action to handle Escalation parameters being returned as strings | Adds new parameter No Article to update, this will submit updates to a ticket without adding a generated article
 * 4.0.0 - Updated the Web Service configuration file | Update dependency on PyOTRS | Fixed issue where Article and Attachment was required to update a ticket in action `update` | Added an External Parameters field to action `search` | Fixed issue with action `search` where dynamic fields were not used correctly for searching | Fixed issue where Escalation parameters where not set to the right type
