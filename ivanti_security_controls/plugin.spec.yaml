@@ -4,7 +4,7 @@ products: [insightconnect]
 name: ivanti_security_controls
 title: Ivanti Security Controls
 description: Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: rapid7
 status: []
