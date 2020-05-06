@@ -238,8 +238,8 @@ actions:
       action:
         title: Action
         type: string
-        description: 'Commit action (Default: ''commit-all'')'
-        default: commit-all
+        description: 'Commit action (Default: ''all'')'
+        default: all
         required: false
     output:
       response:
