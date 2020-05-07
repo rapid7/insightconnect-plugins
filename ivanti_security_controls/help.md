@@ -9,6 +9,7 @@ Ivanti Security Controls is a unified IT management platform used for managing a
 
 # Requirements
 
+* Ivanti Security Controls 2019.3 (Build: 9.4.34544) or later
 * Ivanti Security Controls host and API port (default: 3121)
 * Username and password of Windows account where Ivanti Security Controls is installed 
 * (Recommended) Ivanti Security Controls certificate in order to enforce certificate verification
@@ -254,6 +255,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.1 - Fix issue where Get Agents action does not include filters during paging
 * 1.0.0 - Initial plugin
 
 # Links
