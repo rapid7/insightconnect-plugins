@@ -231,14 +231,14 @@ actions:
         example: "none"
         default: "none"
       max_items:
-        title: Maximum items
+        title: Maximum Items
         description: Limits the number of objects returned
         type: integer
         required: true
         default: 5000
         example: 5000
       field_name:
-        title: Search field
+        title: Search Field
         description: Name of the field to be tested
         type: string
         required: false

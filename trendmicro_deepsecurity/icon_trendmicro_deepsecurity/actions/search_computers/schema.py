@@ -29,7 +29,7 @@ class SearchComputersInput(komand.Input):
   "properties": {
     "field_name": {
       "type": "string",
-      "title": "Search field",
+      "title": "Search Field",
       "description": "Name of the field to be tested",
       "default": "hostName",
       "order": 3
@@ -72,7 +72,7 @@ class SearchComputersInput(komand.Input):
     },
     "max_items": {
       "type": "integer",
-      "title": "Maximum items",
+      "title": "Maximum Items",
       "description": "Limits the number of objects returned",
       "default": 5000,
       "order": 2
