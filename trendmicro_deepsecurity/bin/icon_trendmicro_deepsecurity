@@ -25,6 +25,8 @@ class ICONTrendmicroDeepsecurity(komand.Plugin):
 
         self.add_action(actions.ListRules())
 
+        self.add_action(actions.SearchComputers())
+
         self.add_action(actions.SearchRules())
 
 

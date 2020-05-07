@@ -29,6 +29,70 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Search Computers
+
+This action is used to search computers.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|field_name|string|hostName|False|Name of the field to be tested|None|hostName|
+|information|string|none|True|Determines the computer information to include in the response|['none', 'all', 'computerStatus', 'tasks', 'securityUpdates', 'computerSettings', 'allSecurityModules', 'antiMalware', 'webReputation', 'activityMonitoring', 'firewall', 'intrusionPrevention', 'integrityMonitoring', 'logInspection', 'applicationControl', 'SAP', 'interfaces', 'ESXSummary', 'allVirtualMachineSummaries', 'azureARMVirtualMachineSummary', 'azureVMVirtualMachineSummary', 'ec2VirtualMachineSummary', 'noConnectorVirtualMachineSummary', 'vmwareVMVirtualMachineSummary', 'vcloudVMVirtualMachineSummary', 'workspaceVirtualMachineSummary', 'gcpVirtualMachineSummary']|none|
+|max_items|integer|5000|True|Limits the number of objects returned|None|5000|
+|number_value|integer||False|Number to search for|None|42|
+|search_type|string|string|False|Select the search type|['string', 'integer']|string|
+|string_value|string||False|String to search for|None|MS-AD-SRV-%|
+
+Example input:
+
+```
+{
+  "information": "none",
+  "max_items": 10,
+  "field_name": "hostName",
+  "search_type": "string",
+  "string_value": "MS-AD-SRV-%"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|computer_ids|[]integer|False|IDs of matching computers|
+|response_json|object|False|Full response in JSON format|
+
+Example output:
+
+```
+{
+  "computer_ids": [
+    34
+  ],
+  "response_json": {
+    "computers": [
+      {
+        "agentVersion": "11.3.0.292",
+        "displayName": "",
+        "hostName": "MS-AD-SRV-01",
+        "policyID": 45,
+        "agentFingerPrint": "14:F3:B3:76:1F:8A:2F:8B:D6:D9:DC:A4:3D:A0:F1:D4:A4...",
+        "groupID": 0,
+        "hostGUID": "14483D21-D921-32E0-19D7-FA36D91BC46E",
+        "relayListID": 0,
+        "biosUUID": "175bd693-216e-1e42-a489-2b56f1saf392",
+        "description": "",
+        "lastIPUsed": "192.0.2.10",
+        "platform": "",
+        "ID": 34,
+        "lastAgentCommunication": 1585228384309
+      }
+    ]
+  }
+}
+```
+
 #### Get Details
 
 This action is used to get detailed information of an IPS rule.
@@ -266,6 +330,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.0 - Add new action Search Computers to receive a list and details of computers matching the search criteria
 * 2.1.0 - Add new actions Get Details and List to receive assigned IPS rules from computers and policies
 * 2.0.0 - Add an option to toggle DSM certificate verification in the connection
 * 1.0.0 - Initial plugin
