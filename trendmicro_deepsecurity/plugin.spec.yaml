@@ -191,3 +191,91 @@ actions:
         description: Full response in JSON format
         type: "object"
         required: false
+  search_computers:
+    title: Search Computers
+    description: Search computers
+    input:
+      information:
+        title: Information
+        type: string
+        description: Determines the computer information to include in the response
+        required: true 
+        enum:
+          - "none"
+          - "all"
+          - "computerStatus"
+          - "tasks"
+          - "securityUpdates"
+          - "computerSettings"
+          - "allSecurityModules"
+          - "antiMalware"
+          - "webReputation"
+          - "activityMonitoring"
+          - "firewall"
+          - "intrusionPrevention"
+          - "integrityMonitoring"
+          - "logInspection"
+          - "applicationControl"
+          - "SAP"
+          - "interfaces"
+          - "ESXSummary"
+          - "allVirtualMachineSummaries"
+          - "azureARMVirtualMachineSummary"
+          - "azureVMVirtualMachineSummary"
+          - "ec2VirtualMachineSummary"
+          - "noConnectorVirtualMachineSummary"
+          - "vmwareVMVirtualMachineSummary"
+          - "vcloudVMVirtualMachineSummary"
+          - "workspaceVirtualMachineSummary"
+          - "gcpVirtualMachineSummary"
+        example: "none"
+        default: "none"
+      max_items:
+        title: Maximum Items
+        description: Limits the number of objects returned
+        type: integer
+        required: true
+        default: 5000
+        example: 5000
+      field_name:
+        title: Search Field
+        description: Name of the field to be tested
+        type: string
+        required: false
+        default: "hostName"
+        example: "hostName"
+      search_type:
+        title: Search Type
+        description: Select the search type
+        type: string
+        required: false
+        default: "string"
+        example: "string"
+        enum:
+          - "string"
+          - "integer"
+      string_value:
+        title: String Value
+        description: String to search for
+        type: string
+        required: false
+        default: ""
+        example: "MS-AD-SRV-%"
+      number_value:
+        title: Number Value
+        description: Number to search for
+        type: integer
+        required: false
+        default: ""
+        example: "42"
+    output:
+      computer_ids:
+        title: Computer IDs
+        description: IDs of matching computers
+        type: "[]integer"
+        required: false
+      response_json:
+        title: Response JSON
+        description: Full response in JSON format
+        type: "object"
+        required: false

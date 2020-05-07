@@ -37,7 +37,7 @@ class ListRules(komand.Action):
         else:
             url = f"{self.connection.dsm_url}/api/policies/{self.id}/intrusionprevention/rules"
 
-        # Set rules
+        # Send request
         response = self.connection.session.get(url,
                                                verify=self.connection.dsm_verify_ssl)
 
