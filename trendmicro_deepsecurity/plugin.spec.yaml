@@ -4,7 +4,7 @@ products: [insightconnect]
 name: trendmicro_deepsecurity
 title: Trend Micro Deep Security
 description: Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
-version: 2.1.0
+version: 2.2.0
 vendor: rapid7
 support: community
 status: []
