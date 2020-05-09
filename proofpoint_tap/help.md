@@ -16,7 +16,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -28,9 +28,14 @@ This action is used to parse a TAP alert.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|tap_alert|string|None|True|A Proofpoint TAP alert|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|tap_alert|string|None|True|A Proofpoint TAP alert|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -69,11 +74,52 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+### Custom Output Types
+
+#### browser
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Source IP|string|False|Source IP|
+|Time|string|False|Time|
+|User Agent|string|False|User agent string|
+
+#### message
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Header From|string|False|Header from|
+|Header Reply To|string|False|Header reply to|
+|Message GUID|string|False|Message GUID|
+|Message ID|string|False|Message ID|
+|Message Size|string|False|Message size|
+|Recipients|string|False|Recipients|
+|Sender|string|False|Sender|
+|Sender IP|string|False|Sender IP|
+|Subject|string|False|Subject|
+|Time Delivered|string|False|Time Delivered|
+
+#### tap_results
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Browser|browser|False|Browser information|
+|Message|message|False|TAP alert meta data|
+|Threat|threat|False|Threat information|
+
+#### threat
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Attachment SHA256 Hash|string|False|Attachment SHA256 hash|
+|Category|string|False|Category|
+|Condemnation Time|string|False|Condemnation Time|
+|Threat Details URL|string|False|URL for Details of the Threat|
+|URL|string|False|URL|
 
 ## Troubleshooting
 
@@ -81,6 +127,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.6 - Parsing out GUID of the message into the output type
 * 1.0.5 - Parsing out the View Threat Details link from emails to its own value
 * 1.0.4 - New spec and help.md format for the Extension Library
 * 1.0.3 - Fixed issue where headers were occasionally parsed improperly

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: proofpoint_tap
 title: Proofpoint TAP
 description: Parse Proofpoint Targeted Attack Protection (TAP) alerts
-version: 1.0.5
+version: 1.0.6
 vendor: rapid7
 support: community
 status: []
@@ -76,6 +76,11 @@ types:
     header_replyto:
       title: Header Reply To
       description: Header reply to
+      type: string
+      required: false
+    message_guid:
+      title: Message GUID
+      description: Message GUID
       type: string
       required: false
     message_id:

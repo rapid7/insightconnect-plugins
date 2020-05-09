@@ -26,7 +26,8 @@ class TAP:
                 "header_replyto": "",
                 "message_id": "",
                 "sender_ip": "",
-                "message_size": ""
+                "message_size": "",
+                "message_guid": "",
             },
             "browser": {
                 "time": "",
