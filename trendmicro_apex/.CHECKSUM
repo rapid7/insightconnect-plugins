@@ -1,6 +1,6 @@
 {
-	"spec": "d8433a871e3287e28305a2e3da26f882",
-	"manifest": "2e6dbcf10f9f75ee8ddf05c8756483b7",
+	"spec": "9c72058c93181bf28463dfb694918e49",
+	"manifest": "3a0b31e1a8ed292d7c342764a2ca2f14",
 	"setup": "cca2bbed73d446e2077aa34807e7fdd0",
 	"schemas": [
 		{
@@ -12,8 +12,44 @@
 			"hash": "fa7e1970dd8a5c0ed819a250c4d5fc76"
 		},
 		{
+			"identifier": "agent_list/schema.py",
+			"hash": "2c6c88fd662a792025e5c4a46f0c9af6"
+		},
+		{
+			"identifier": "delete_openioc_file/schema.py",
+			"hash": "8c4f07fc6638abb2ba07e613c7bf0a0a"
+		},
+		{
+			"identifier": "download_openioc_file/schema.py",
+			"hash": "cedcc870d41ac8903da477d67cb4062e"
+		},
+		{
+			"identifier": "download_rca_csv_file/schema.py",
+			"hash": "86d8f3802878b46cc81cfa09c3f52268"
+		},
+		{
+			"identifier": "get_rca_object/schema.py",
+			"hash": "731d9ad0e0dde34075326a4277a4646a"
+		},
+		{
+			"identifier": "openioc_files_list/schema.py",
+			"hash": "48fb5f49fba5c8333785b4afd4d65e53"
+		},
+		{
+			"identifier": "performs_action/schema.py",
+			"hash": "4dd50d2ce8b639fa8dc75db8629630de"
+		},
+		{
+			"identifier": "terminate_process/schema.py",
+			"hash": "55fe5372516af647cea3192103203897"
+		},
+		{
+			"identifier": "upload_openioc_file/schema.py",
+			"hash": "0db2e2743c282146cdad011cc78f381f"
+		},
+		{
 			"identifier": "connection/schema.py",
-			"hash": "a6645a2e586e9df5ac54c93550610928"
+			"hash": "59ac19ffd1156f903e5daad0b58c2029"
 		}
 	]
 }

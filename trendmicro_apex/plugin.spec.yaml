@@ -14,10 +14,10 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.trendmicro.com/en_ca/business/products/user-protection/sps/endpoint.html
 tags:
-- trend micro
-- incident management
-- containment
-- firewall
+  - trend micro
+  - incident management
+  - containment
+  - firewall
 hub_tags:
   use_cases: [threat_detection_and_response, remediation_management]
   keywords: [containment, firewall, response, trend micro, trendmicro, apex]
@@ -41,6 +41,598 @@ connection:
     type: credential_secret_key
     required: true
     example: "CU1874A2-G782-47X1-B6J3-1014A92624BC"
+  skip_entity_ids:
+    title: Skip Entity ID
+    description: Skip entity ids on isolate and uninstall actions
+    type: "[]string"
+    required: false
+    example: '["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]'
+  skip_host_names:
+    title: Skip Host Names
+    description: Skip host names on isolate and uninstall actions
+    type: "[]string"
+    required: false
+    example: '["CU-PRO1-7814-2"]'
+  skip_address_ips:
+    title: Skip Address IPs
+    description: Skip address ips on isolate and uninstall actions
+    type: "[]string"
+    required: false
+    example: '["10.0.0.4"]'
+  skip_mac_addresses:
+    title: Skip Mac Addresses
+    description: Skip mac addresses on isolate and uninstall actions
+    type: "[]string"
+    required: false
+    example: '["08:00:27:8d:c0:4d"]'
+types:
+  filter:
+    type:
+      title: "Type"
+      description: "Type"
+      type: integer
+      required: false
+      example: 1
+    value:
+      title: "Value"
+      description: Value of the filter type
+      type: string
+      example: "a"
+      required: false
+  termination_info:
+    name:
+      title: Name
+      description: Metadata type of object to terminate
+      type: integer
+      example: 101
+      required: false
+      enum:
+        - 101
+    value:
+      title: Value
+      description: Hash value of the object to terminate
+      type: string
+      example: "4608E210A73961CE2967343EA7A55CF9918B053F"
+      required: false
+  meta_page:
+    limit:
+      title: Limit
+      description: Number of records to retrieve
+      type: integer
+      default: 50
+      example: 50
+      required: false
+    offset:
+      title: Offset
+      description: Page where to start retrieving records
+      type: integer
+      default: 0
+      example: 0
+      required: false
+  agentEntity:
+    agentGuid:
+      title: "Agentguid"
+      type: string
+      description: "Agentguid"
+      required: false
+    ip:
+      title: "Ip"
+      type: string
+      description: "Ip"
+      required: false
+    isImportant:
+      title: "Isimportant"
+      type: boolean
+      description: "Isimportant"
+      required: false
+    isOnline:
+      title: "Isonline"
+      type: boolean
+      description: "Isonline"
+      required: false
+    isolateStatus:
+      title: "Isolatestatus"
+      type: integer
+      description: "Isolatestatus"
+      required: false
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+    machineGuid:
+      title: "Machineguid"
+      type: string
+      description: "Machineguid"
+      required: false
+    machineName:
+      title: "Machinename"
+      type: string
+      description: "Machinename"
+      required: false
+    machineOS:
+      title: "Machineos"
+      type: string
+      description: "Machineos"
+      required: false
+    machineType:
+      title: "Machinetype"
+      type: string
+      description: "Machinetype"
+      required: false
+      enum:
+        - Server
+        - Desktop
+    serverGuid:
+      title: "Serverguid"
+      type: string
+      description: "Serverguid"
+      required: false
+  agentQueryStatus:
+    hasFullAgents:
+      title: "Hasfullagents"
+      type: boolean
+      description: "Hasfullagents"
+      required: false
+    hasFullRbac:
+      title: "Hasfullrbac"
+      type: boolean
+      description: "Hasfullrbac"
+      required: false
+  pagination:
+    limit:
+      title: "Limit"
+      type: integer
+      description: "Limit"
+      required: false
+    offset:
+      title: "Offset"
+      type: integer
+      description: "Offset"
+      required: false
+    total:
+      title: "Total"
+      type: integer
+      description: "Total"
+      required: false
+  content:
+    agentEntity:
+      title: "Agententity"
+      type: "[]agentEntity"
+      description: "Agententity"
+      required: false
+    agentQueryStatus:
+      title: "Agentquerystatus"
+      type: agentQueryStatus
+      description: "Agentquerystatus"
+      required: false
+    pagination:
+      title: "Pagination"
+      type: pagination
+      description: "Pagination"
+      required: false
+    csv:
+      title: CSV
+      description: Contents of the CSV file
+      type: string
+      required:
+  termination_content:
+    agentGuid:
+      title: Agent GUID
+      description: GUID of the terminated agents
+      type: "[]string"
+      required: false
+    processTerminationSummaryGuid:
+      title: Process Termination Summary GUID
+      description: The GUID of the process termination summary
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The status of the agent
+      type: integer
+      required: false
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 9999
+    message:
+      title: Message
+      description: The error message of the response from Endpoint Sensor server
+      type: string
+      required: false
+    statusCode:
+      title: Status Code
+      description: The status code of the response from Endpoint Sensor server
+      type: integer
+      required: false
+  contents:
+    content:
+      title: "Content"
+      type: content
+      description: "Content"
+      required: false
+    message:
+      title: "Message"
+      type: string
+      description: "Message"
+      required: false
+    statusCode:
+      title: "Statuscode"
+      type: integer
+      description: "Statuscode"
+      required: false
+  termination_contents:
+    content:
+      title: "Content"
+      description: Contains the content returned from Endpoint Sensor server
+      type: termination_content
+      required: false
+    message:
+      title: Message
+      description: The error message of the response from Endpoint Sensor server
+      type: string
+      required: false
+    statusCode:
+      title: Statuscode
+      type: integer
+      description: The status code of the response from Endpoint Sensor server
+      required: false
+  Data:
+    content:
+      title: "Content"
+      type: "[]contents"
+      description: "Contents"
+      required: false
+    hasMore:
+      title: "Hasmore"
+      type: boolean
+      description: "Hasmore"
+      required: false
+    lastContentId:
+      title: "Lastcontentid"
+      type: string
+      description: "Lastcontentid"
+      required: false
+    serverGuid:
+      title: "Serverguid"
+      type: string
+      description: "Serverguid"
+      required: false
+    serverName:
+      title: "Servername"
+      type: string
+      description: "Servername"
+      required: false
+    taskId:
+      title: "Taskid"
+      type: string
+      description: "Taskid"
+      required: false
+  termination_data:
+    content:
+      title: "Content"
+      type: "[]termination_contents"
+      description: "Contents"
+      required: false
+    hasMore:
+      title: Has More
+      description: Indicates whether the source has more results
+      type: boolean
+      required: false
+    lastContentId:
+      title: Last Content ID
+      description: ID used to retrieve the next set of results
+      type: string
+      required: false
+    serverGuid:
+      title: Server GUID
+      description: Trend Micro UID of the server
+      type: string
+      required: false
+    serverName:
+      title: Server Name
+      description: Name of the server
+      type: string
+      required: false
+    taskId:
+      title: Task ID
+      type: string
+      description: Task ID received from the request
+      required: false
+  api_data:
+    Code:
+      title: "Code"
+      description: CMEF code related to CodeType
+      type: integer
+      required: false
+    CodeType:
+      title: "Codetype"
+      description: Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code
+      type: integer
+      required: false
+      enum:
+        - 1
+        - 2
+        - 3
+    Data:
+      title: "Data"
+      description: Contains the data returned from Endpoint Sensor server
+      type: Data
+      required: false
+    Message:
+      title: "Message"
+      description: CMEF message
+      type: string
+      required: false
+    TimeZone:
+      title: Time Zone
+      description: Time zone
+      type: integer
+      required: false
+  termination_api_data:
+    Code:
+      title: "Code"
+      description: CMEF result codes
+      type: integer
+      required: false
+      example: 0
+    CodeType:
+      title: "Codetype"
+      description: Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code
+      type: integer
+      required: false
+      enum:
+        - 1
+        - 2
+        - 3
+    Data:
+      title: "Data"
+      description: Contains the data returned from endpoint server
+      type: termination_data
+      required: false
+    Message:
+      title: "Message"
+      description: CMEF message
+      type: string
+      required: false
+    TimeZone:
+      title: Time Zone
+      description: Time zone
+      type: integer
+      required: false
+  FeatureCtrl:
+    mode:
+      title: "Mode"
+      type: string
+      description: "Mode"
+      required: false
+  Meta:
+    errorCode:
+      title: "Error Code"
+      description: The error code of the response
+      type: integer
+      required: false
+    errorMessgae:
+      title: Error Message
+      type: string
+      description: The error message of the response
+      required: false
+    result:
+      title: "Result"
+      description: The result code of the response
+      type: integer
+      required: false
+      enum:
+        - 0
+        - 1
+  PermissionCtrl:
+    elements:
+      title: "Elements"
+      type: string
+      description: The value is always null for Custom Intelligence Automation APIs
+      required: false
+    permission:
+      title: "Permission"
+      description: "Permission"
+      type: string
+      required: false
+  SystemCtrl:
+    TmcmSoDist_Role:
+      title: "Tmcmsodist Role"
+      type: string
+      description: "Tmcmsodist role"
+      required: false
+      enum:
+        - none
+        - hub
+        - edge
+  FilingCabinet:
+    ExtractingStatus:
+      title: Extracting Status
+      type: integer
+      description: The suspicious object extraction status of the uploaded file
+      required: false
+      enum:
+        - 0
+        - 1
+        - 999
+        - -1
+    FileAddedDatetime:
+      title: File Added Datetime
+      type: string
+      description: The date and time for when the file was uploaded
+      required: false
+    FileHashID:
+      title: File Hash ID
+      type: string
+      description: The file hash ID of the uploaded file
+      required: false
+    FileName:
+      title: File Name
+      type: string
+      description: The file name of the uploaded file
+      required: false
+    ShortDesc:
+      title: Short Desc
+      type: string
+      description: Short description
+      required: false
+    Title:
+      title: Title
+      type: string
+      description: The short description of the uploaded file
+      required: false
+    UploadedBy:
+      title: Uploaded
+      type: string
+      description: The name of the user account that uploaded the file
+      required: false
+    UploadedFrom:
+      title: Uploaded From
+      type: integer
+      description: The Source of the uploaded file
+      required: false
+      enum:
+        - 1
+        - 2
+  IOC_Data:
+    FilingCabinet:
+      title: Filing Cabinet
+      type: "[]FilingCabinet"
+      description: OpenIOC filing cabinet list
+      required: false
+    TotalIOCCount:
+      title: Total IOC Count"
+      type: integer
+      description: The total number of objects extracted from the uploaded file
+      required: false
+  api_response:
+    Data:
+      title: "Data"
+      description: Contains the data returned by the specific API
+      type: api_data
+      required: false
+    FeatureCtrl:
+      title: "Featurectrl"
+      description: The Apex Central deployment model
+      type: FeatureCtrl
+      required: false
+    Meta:
+      title: "Meta"
+      description: Indicates the response status, including the result, error code, and error message
+      type: Meta
+      required: false
+    PermissionCtrl:
+      title: "Permissionctrl"
+      description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
+      type: PermissionCtrl
+      required: false
+    SystemCtrl:
+      title: "Systemctrl"
+      description: Indicates the suspicious object distribution role of the Apex Central server
+      type: SystemCtrl
+      required: false
+  delete_data:
+    DeletedStatus:
+      title: Deleted Status
+      description: Indicates the deletion status of the specified file
+      type: integer
+      required: false
+      enum:
+        - -1
+        - 1
+    FileHashID:
+      title: File Hash ID
+      description: Indicates the file hash ID of the deleted file
+      type: string
+      required: false
+  uploaded_info_list:
+    FileHashID:
+      title: File Hash ID
+      description: The file hash ID of the uploaded file
+      type: string
+    FileName:
+      title: File Name
+      description: The file name of the uploaded file
+      type: string
+    UploadedStatus:
+      title: Uploaded Status
+      description: The result code indicating the file upload status
+      type: integer
+      enum:
+        - 1
+        - -999
+        - -6
+        - -5
+        - -4
+        - -3
+        - -2
+        - -1
+  uploaded_message_list:
+    Message:
+      title: Message
+      description: The status message content
+      type: string
+    MessageType:
+      title: File Name
+      description: The type of status message
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+  result_content:
+    capabilities:
+      title: Capabilities
+      description: Result capabilities
+      type: "[]string"
+    entity_id:
+      title: Entity ID
+      description: Result entity ID
+      type: string
+    folder_path:
+      title: Folder Path
+      description: Result folder path
+      type: string
+    host_name:
+      title: Host Name
+      description: Result host name
+      type: string
+    ip_address_list:
+      title: IP Address List
+      description: Result IP address list
+      type: string
+    isolation_status:
+      title: Isolation Status
+      description: Result isolation status
+      type: string
+    mac_address_list:
+      title: MAC Address List
+      description: Result MAC address list
+      type: string
+    managing_server_id:
+      title: Managing Server ID
+      description: Result managing server ID
+      type: string
+    product:
+      title: Product
+      description: Result product
+      type: string
 actions:
   add_file_to_udso_list:
     title: Add File to UDSO List
@@ -126,3 +718,550 @@ actions:
         description: Whether or not the action was successful
         type: boolean
         required: true
+  agent_list:
+    title: List Security Agents
+    description: Retrieves a list of all Security Agents with the Endpoint Sensor feature enabled
+    input:
+      task_type:
+        title: Task Type
+        description: Type of API request. For Endpoint Sensor, the value is always 4
+        type: string
+        required: true
+        default: CMEF
+        example: CMEF
+        enum:
+          - UNKNOWN
+          - INTERNAL
+          - CM
+          - CMEF
+          - OSF_COMMAND
+          - OSF_QUERY
+          - OSF_NOTIFY
+          - OSF_LOG
+          - MDR_ATTACK_DISCOVERY
+          - OSF_SYS_CALL
+      filter:
+        title: "Filter"
+        type: "[]filter"
+        description: "Filter"
+        required: false
+        example: '[{"type": 1, "value": "a"}]'
+      pagination:
+        title: "Pagination"
+        type: meta_page
+        description: "Pagination"
+        required: false
+        example: '{"offset": 0, "limit": 50}'
+    output:
+      Data:
+        title: "Data"
+        description: Contains the data returned by the specific API
+        type: api_data
+        required: false
+      FeatureCtrl:
+        title: "Featurectrl"
+        description: The Apex Central deployment model
+        type: FeatureCtrl
+        required: false
+      Meta:
+        title: "Meta"
+        description: Indicates the response status, including the result, error code, and error message
+        type: Meta
+        required: false
+      PermissionCtrl:
+        title: "Permissionctrl"
+        description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
+        type: PermissionCtrl
+        required: false
+      SystemCtrl:
+        title: "Systemctrl"
+        description: Indicates the suspicious object distribution role of the Apex Central server
+        type: SystemCtrl
+        required: false
+  openioc_files_list:
+    title: List uploaded OpenIOC files
+    description: Retrieves a list of OpenIOC files from the Apex Central server
+    input:
+      file_hash_id_list:
+        title: File Hash ID List
+        description: Filters the list for file SHA-1 values
+        type: "[]string"
+        required: false
+        default: "[]"
+        example: [769fcc7550bf98d96bccb7e22a5557301c403455]
+      fuzzy_match_string:
+        title: Fuzzy Match String
+        description: Filters the list for matching strings in the "File Name", "Title", and "Source Context" fields
+        type: string
+        required: false
+        example: "Rapid7 InsightConnect"
+      page_number:
+        title: Page Number
+        type: integer
+        description: Filters the list to uploaded files that appear on the specified page number on the Threat Intel > Custom Intelligence > STIX tab
+        required: false
+        default: 1
+        example: 1
+      page_size:
+        title: Page Size
+        type: integer
+        description: Filters the list to the specified number of uploaded files per page
+        required: false
+        default: 10
+        example: 10
+      sorting_column:
+        title: Sorting Column
+        type: string
+        description: Sorts the list by the specified table column
+        required: false
+        default: FileAddedDatetime
+        example: FileAddedDatetime
+        enum:
+          - FileName
+          - Title
+          - FileAddedDatetime
+          - UploadedFrom
+          - UploadedBy
+          - ExtractingStatus
+      sorting_direction:
+        title: Sorting Direction
+        type: string
+        description: Sorts the list in the specified direction
+        default: Descending
+        example: Descending
+        required: false
+        enum:
+          - Ascending
+          - Descending
+    output:
+      data:
+        title: Data
+        description: Contains the data returned by the specific API
+        type: IOC_Data
+        required: false
+      feature_ctrl:
+        title: Feature Ctrl
+        description: The Apex Central deployment model
+        type: FeatureCtrl
+        required: false
+      meta:
+        title: Meta
+        description: Indicates the response status, including the result, error code, and error message
+        type: Meta
+        required: false
+      permission_ctrl:
+        title: Permission Ctrl
+        description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
+        type: PermissionCtrl
+        required: false
+      system_ctrl:
+        title: System Ctrl
+        description: Indicates the suspicious object distribution role of the Apex Central server
+        type: SystemCtrl
+        required: false
+  download_rca_csv_file:
+    title: Download the RCA CSV file
+    description: Downloads existing RCA files from the Apex Central server
+    input:
+      agent_guid:
+        title: Agent GUID
+        type: string
+        description: GUID of the target endpoint
+        required: true
+        example: 654B1B52-C3C9-4405-B133-48E2353DA13B
+      host_ip:
+        title: Host IP
+        type: string
+        description: Host IP address
+        required: true
+        example: 10.0.0.4
+      host_name:
+        title: Host Name
+        type: string
+        description: Host name
+        required: true
+        example: "CU-PRO1-7814-2"
+      scan_summary_guid:
+        title: Scan Summary GUID
+        type: string
+        description: GUID of the investigation summary to retrieve
+        required: true
+        example: 58127b3e-1bde-4c6e-8d86-0d0f89ded601
+      server_guid:
+        title: Server GUID
+        type: "[]string"
+        description: GUID of the target server
+        required: true
+        example: '["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]'
+      task_type:
+        title: Task Type
+        description: Type of API request. For Endpoint Sensor, the value is always 4
+        type: string
+        required: false
+        default: CMEF
+        example: CMEF
+        enum:
+          - UNKNOWN
+          - INTERNAL
+          - CM
+          - CMEF
+          - OSF_COMMAND
+          - OSF_QUERY
+          - OSF_NOTIFY
+          - OSF_LOG
+          - MDR_ATTACK_DISCOVERY
+          - OSF_SYS_CALL
+    output:
+      api_response:
+        title: "API Respnse"
+        description: Contains data returned
+        type: api_response
+        required: false
+  upload_openioc_file:
+    title: Upload OpenIOC file
+    description: Uploads OpenIOC files to the Apex Central server
+    input:
+      files:
+        title: Files
+        description: Files to upload
+        type: "[]file"
+        required: true
+        example: '[{"filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}]'
+    output:
+      uploaded_info_list:
+        title: Uploaded Info List
+        description: Uploaded Result Info List
+        type: "[]uploaded_info_list"
+        required: false
+      uploaded_message_list:
+        title: Uploaded Message List
+        description: Uploaded Result Message List
+        type: "[]uploaded_message_list"
+        required: false
+      FeatureCtrl:
+        title: "Featurectrl"
+        description: The Apex Central deployment model
+        type: FeatureCtrl
+        required: false
+      Meta:
+        title: "Meta"
+        description: Indicates the response status, including the result, error code, and error message
+        type: Meta
+        required: false
+      PermissionCtrl:
+        title: "Permissionctrl"
+        description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
+        type: PermissionCtrl
+        required: false
+      SystemCtrl:
+        title: "Systemctrl"
+        description: Indicates the suspicious object distribution role of the Apex Central server
+        type: SystemCtrl
+        required: false
+  delete_openioc_file:
+    title: Delete uploaded OpenIOC file
+    description: Deletes existing OpenIOC files from the Apex Central server
+    input:
+      file_hash_id_list:
+        title: File Hash ID List
+        description: The list of file SHA-1 values
+        type: "[]string"
+        required: true
+        example: ["695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343"]
+    output:
+      Data:
+        title: "Data"
+        description: Contains the data returned by the specific API
+        type: "[]delete_data"
+        required: false
+      FeatureCtrl:
+        title: "Featurectrl"
+        description: The Apex Central deployment model
+        type: FeatureCtrl
+        required: false
+      Meta:
+        title: "Meta"
+        description: Indicates the response status, including the result, error code, and error message
+        type: Meta
+        required: false
+      PermissionCtrl:
+        title: "Permissionctrl"
+        description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
+        type: PermissionCtrl
+        required: false
+      SystemCtrl:
+        title: "Systemctrl"
+        description: Indicates the suspicious object distribution role of the Apex Central server
+        type: SystemCtrl
+        required: false
+  download_openioc_file:
+    title: Upload OpenIOC file
+    description: Uploads OpenIOC files to the Apex Central server
+    input:
+      file_hash_id:
+        title: File Hash ID
+        description: The file hash ID of the file to download
+        type: string
+        required: true
+        example: 769fcc7550bf98d96bccb7e22a5557301c403455
+    output:
+      Data:
+        title: File
+        description: OpenIOC file
+        type: file
+        required: true
+      FeatureCtrl:
+        title: "Featurectrl"
+        description: The Apex Central deployment model
+        type: FeatureCtrl
+        required: false
+      Meta:
+        title: "Meta"
+        description: Indicates the response status, including the result, error code, and error message
+        type: Meta
+        required: false
+      PermissionCtrl:
+        title: "Permissionctrl"
+        description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
+        type: PermissionCtrl
+        required: false
+      SystemCtrl:
+        title: "Systemctrl"
+        description: Indicates the suspicious object distribution role of the Apex Central server
+        type: SystemCtrl
+        required: false
+  get_rca_object:
+    title: Get RCA response object returned by taskID
+    description: Retrieves results of investigations in different formats based on the specified taskId
+    input:
+      task_id:
+        title: Task ID
+        description: Task ID from another API call that is used to retrieve a specific task result Specify the taskId values returned by the following APIs
+        type: string
+        required: true
+        example: 9BD2204C-0554-45C8-9C62-799284928AFA
+      task_type:
+        title: Task Type
+        description: Type of API request. For Endpoint Sensor, the value is always 4
+        type: string
+        required: false
+        default: CMEF
+        example: CMEF
+        enum:
+          - UNKNOWN
+          - INTERNAL
+          - CM
+          - CMEF
+          - OSF_COMMAND
+          - OSF_QUERY
+          - OSF_NOTIFY
+          - OSF_LOG
+          - MDR_ATTACK_DISCOVERY
+          - OSF_SYS_CALL
+      content_id:
+        title: Content ID
+        description: Indicates the location of the dataset
+        type: string
+        required: false
+        example: 8
+      limit:
+        title: Limit
+        description: Retrieves the top n results from the servers
+        type: string
+        required: true
+        example: "1"
+    output:
+      Data:
+        title: Data
+        description: Contains the data returned by the specific API
+        type: api_data
+        required: true
+      FeatureCtrl:
+        title: "Featurectrl"
+        description: The Apex Central deployment model
+        type: FeatureCtrl
+        required: false
+      Meta:
+        title: "Meta"
+        description: Indicates the response status, including the result, error code, and error message
+        type: Meta
+        required: false
+      PermissionCtrl:
+        title: "Permissionctrl"
+        description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
+        type: PermissionCtrl
+        required: false
+      SystemCtrl:
+        title: "Systemctrl"
+        description: Indicates the suspicious object distribution role of the Apex Central server
+        type: SystemCtrl
+        required: false
+  terminate_process:
+    title: Terminate Process
+    description: Terminates the processes specified on Security Agent endpoints
+    input:
+      agent_guid:
+        title: The value of agentGuid is a object of key-value pairs
+        description: The key is the serverGuid, and the value is a list of agentGuid strings of the endpoints managed by the target server
+        type: object
+        required: false
+        example: '{"2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6": ["B7F34FF9-9DEE-45F4-9F24-DC5116C79D52"]}'
+      filter:
+        title: Filter
+        description: The filter paramter is useful for terminating the amount of agents without specifying the agentGuid
+        type: "[]filter"
+        required: false
+        example: '[{"type": 1, "value": "a"}]'
+      server_guid:
+        title: Server Guid
+        description: GUID of servers which manage the endpoints specified in agentGuid
+        type: "[]string"
+        required: false
+        example: '["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]'
+      suspicious_object_name:
+        title: Suspicious Object Name
+        description: File name of the object to terminate
+        type: string
+        required: false
+        example: "file.txt"
+      termination_info_list:
+        title: Termination Info List
+        description: Container for terminationInfoList objects
+        type: "[]termination_info"
+        required: true
+        example: '[{"name": 101, "value": "2FF40C5ED6E5A3BBC68A10F2966F347463E326AD"}]'
+      task_type:
+        title: Task Type
+        description: Type of API request. For Endpoint Sensor, the value is always 4
+        type: string
+        required: false
+        default: CMEF
+        example: CMEF
+        enum:
+          - UNKNOWN
+          - INTERNAL
+          - CM
+          - CMEF
+          - OSF_COMMAND
+          - OSF_QUERY
+          - OSF_NOTIFY
+          - OSF_LOG
+          - MDR_ATTACK_DISCOVERY
+          - OSF_SYS_CALL
+    output:
+      Data:
+        title: Data
+        description: Contains the data returned by the specific API
+        type: termination_api_data
+        required: true
+  performs_action:
+    title: Performs action
+    description: "Performs action
+        * Isolate endpoint: Prevents the endpoint from connecting to the network
+        * Restore connection: Restores network connectivity to an isolated endpoint
+        * Uninstall Security Agent: Removes the Security Agent program from an endpoint
+        * Relocate Security Agent: Moves the Security Agent to a different Apex One server or domain (the source and target must be registered to the same Apex Central server)"
+    input:
+      action:
+        title: Action
+        description: Perform action
+        type: string
+        required: true
+        example: Isolate
+        enum:
+          - Isolate
+          - Restore
+          - Relocate
+          - Uninstall
+      allow_multiple_match:
+        title: Allow Multiple Match
+        description: 'True: Allows multiple matches False: Does not allow multiple matches'
+        type: boolean
+        required: false
+        default: true
+        example: true
+      entity_id:
+        title: Entity ID
+        description: The GUID of the managed product agent. Use to identify the agent(s) on which the action is performed
+        type: string
+        required: false
+        example: "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"
+      host_name:
+        title: Host Name
+        description: The endpoint name of the managed product agent. Use to identify the agent(s) on which the action is performed
+        type: string
+        required: false
+        example: "CU-PRO1-7814-2"
+      ip_address:
+        title: IP Address
+        description: The IP address of the managed product agent. Use to identify the agent(s) on which the action is performed
+        type: string
+        required: false
+        example: "10.0.0.4"
+      mac_address:
+        title: Mac Address
+        description: The MAC address of the managed product agent. Use to identify the agent(s) on which the action is performed
+        type: string
+        required: false
+        example: "08:00:27:8d:c0:4d"
+      product:
+        title: Product
+        description: The Trend Micro product on the server instance. Use to identify the agent(s) on which the action is performed
+        type: string
+        required: false
+        example: "SLF_PRODUCT_OFFICESCAN_CE"
+      relocate_to_folder_path:
+        title: Relocate To Folder Path
+        description: The target directory for the agent
+        type: string
+        required: false
+        example: "\\NewDomain\\NewFolder"
+      relocate_to_server_id:
+        title: Relocate To Server ID
+        description: The GUID of the target server for the agent
+        type: string
+        required: false
+        example: "C22E1795-BF95-45BB-BC82-486B0F5161BE"
+    output:
+      result_code:
+        title: Result Code
+        description: The Apex Central Automation API result code
+        type: integer
+        required: false
+        enum:
+          - 1
+          - -1102
+          - -1101
+          - -207
+          - -205
+          - -204
+          - -203
+          - -202
+          - -107
+          - -106
+          - -105
+          - -104
+          - -103
+          - -102
+          - -99
+          - -50
+          - -22
+          - -21
+          - -9
+          - -8
+          - -7
+          - -6
+          - -5
+          - -4
+          - -3
+          - -2
+      result_content:
+        title: Result Content
+        description: The Apex Central Automation API result content
+        type: "[]result_content"
+        required: false
+      result_description:
+        title: Result Description
+        description: The Apex Central Automation API result description
+        type: string
+        required: false
