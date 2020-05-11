@@ -39,7 +39,7 @@ This action is used to create a new address object. It will accept an IP, CIDR, 
 or IP range E.g. 10.1.1.1, 192.168.1.0/24, 10.1.1.1-10.1.1.9, or www.example.com.
 
 This action supports a whitelist as a safety check to prevent users from blocking explicitly stated hosts.
-If the action encounters a host matched in the whitelist, the action will succeed but skip blocking the entry.
+If the action encounters a host or network matched in the whitelist, the action will succeed but skip blocking the entry.
 
 The whitelist accepts one or more of any combination of IP addresses, CIDR addresses, and domains e.g. 
 ["10.1.1.2", "192.168.1.0/24", "www.example.com"]. Note that the whitelist does not support IP ranges, they will not be 
