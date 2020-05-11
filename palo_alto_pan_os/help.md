@@ -36,7 +36,7 @@ The connection configuration accepts the following parameters:
 #### Create Address Object
 
 This action is used to create a new address object. It will accept an IP, CIDR, Fully Qualified Domain Name (FQDN), 
-or IP range E.g. 10.1.1.1, 192.168.1.0/24, 10.1.1.1-10.1.1.9, or www.example.com
+or IP range E.g. 10.1.1.1, 192.168.1.0/24, 10.1.1.1-10.1.1.9, or www.example.com.
 
 This action supports a whitelist as a safety check to prevent users from blocking explicitly stated hosts.
 If the action encounters a host matched in the whitelist, the action will succeed but skip blocking the entry.
