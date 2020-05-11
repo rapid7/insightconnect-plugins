@@ -552,7 +552,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - Add actions agent_list, openioc_files_list, download_rca_csv_file, upload_openioc_file, delete_openioc_file, download_openioc_file, get_rca_object, terminate_process, performs_action
+* 1.1.0 - New actions List Security Agents, List OpenIOC Files, Download the RCA CSV File, Upload OpenIOC File, Delete OpenIOC File, Download OpenIOC File, Get Investigation, Terminate Process, Execute Agent Action
 * 1.0.0 - Initial plugin
 
 # Links
