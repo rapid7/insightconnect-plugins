@@ -641,6 +641,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 1.5.7 - Default value of Commit action updated
 * 1.5.6 - Fix issue where edit action was causing an error with certain input
 * 1.5.5 - New spec and help.md format for the Extension Library
 * 1.5.4 - Fix issue where new plugin version was causing SSL to fail
