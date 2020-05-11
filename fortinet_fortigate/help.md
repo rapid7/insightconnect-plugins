@@ -274,9 +274,8 @@ This action is used to create an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|cidr|integer|32|True|CIDR|None|None|
-|ip|string|None|True|IP|None|None|
-|name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address|None|None|
+|host|string|None|True|The host. This can be an IP an IP CIDR e.g. 198.51.100.0/24 or a domain name.|None|None|
+|name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address or domain name|None|None|
 
 Example input:
 
@@ -321,8 +320,7 @@ This action is used to delete an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|cidr|integer|32|True|CIDR|None|None|
-|ip|string|None|True|IP|None|None|
+|host|string|None|True|The host. This can be an IP an IP CIDR e.g. 198.51.100.0/24 or a domain name.|None|None|
 
 Example input:
 

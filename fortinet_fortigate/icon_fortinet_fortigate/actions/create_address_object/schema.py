@@ -8,8 +8,7 @@ class Component:
 
 
 class Input:
-    CIDR = "cidr"
-    IP = "ip"
+    HOST = "host"
     NAME = "name"
     
 
@@ -24,29 +23,21 @@ class CreateAddressObjectInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "cidr": {
-      "type": "integer",
-      "title": "CIDR",
-      "description": "CIDR",
-      "default": 32,
-      "order": 2
-    },
-    "ip": {
+    "host": {
       "type": "string",
-      "title": "IP",
-      "description": "IP",
+      "title": "Host",
+      "description": "The host. This can be an IP an IP CIDR e.g. 198.51.100.0/24 or a domain name.",
       "order": 1
     },
     "name": {
       "type": "string",
       "title": "Name",
-      "description": "Optional name to give this address object. If not provided, the name will be the IP address",
-      "order": 3
+      "description": "Optional name to give this address object. If not provided, the name will be the IP address or domain name",
+      "order": 2
     }
   },
   "required": [
-    "cidr",
-    "ip"
+    "host"
   ]
 }
     """)

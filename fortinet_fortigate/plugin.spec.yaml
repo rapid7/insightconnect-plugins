@@ -685,25 +685,22 @@ actions:
     title: Create Address Object
     description: Create an address object
     input:
-      ip:
-        title: IP
-        description: IP
-        type: string
+      host:
+        title: Host
+        description: This can be an IP-Address, an IP CIDR e.g. 198.51.100.0/24,  or a domain name. e.g. 192.168.1.1, 192.168.1.0/24, google.com
         required: true
         order: 1
-      cidr:
-        title: CIDR
-        description: CIDR
-        type: integer
-        required: true
-        default: 32
-        order: 2
       name:
         title: Name
-        description: Optional name to give this address object. If not provided, the name will be the IP address
+        description: Optional name to give this address object. If not provided, the name will be the IP address or domain name
         type: string
         required: false
-        order: 3
+        order: 2
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains.
+        type: "[]string"
+        required: false
     output:
       success:
         title: Success
@@ -720,19 +717,11 @@ actions:
     title: Delete Address Object
     description: Delete an address object
     input:
-      ip:
-        title: IP
-        description: IP
+      host:
+        title: Host
+        description: The host. This can be an IP an IP CIDR e.g. 198.51.100.0/24 or a domain name.
         type: string
         required: true
-        order: 1
-      cidr:
-        title: CIDR
-        description: CIDR
-        type: integer
-        required: true
-        default: 32
-        order: 2
     output:
       success:
         title: Success
