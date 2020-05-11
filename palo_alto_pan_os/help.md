@@ -62,10 +62,14 @@ Example input:
 ```
 {
   "address_object": "1.1.1.1",
-  "object_description": "Address object from InsightConnect",
-  "object_name": "IP from InsightConnect",
-  "tags": "malicious",
-  "whitelist": ["198.51.100.100", "192.0.2.0/24", "example.com"]
+  "object_description": "Blocked host from Insight Connect",
+  "object_name": "Blocked host",
+  "tags": "malware",
+  "whitelist": [
+    "198.51.100.100",
+    "192.0.2.0/24",
+    "example.com"
+  ]
 }
 ```
 
