@@ -28,7 +28,7 @@ class TerminateProcessInput(komand.Input):
   "properties": {
     "agent_guid": {
       "type": "object",
-      "title": "The value of agentGuid is a object of key-value pairs",
+      "title": "Agent GUID",
       "description": "The key is the serverGuid, and the value is a list of agentGuid strings of the endpoints managed by the target server",
       "order": 1
     },
@@ -43,7 +43,7 @@ class TerminateProcessInput(komand.Input):
     },
     "server_guid": {
       "type": "array",
-      "title": "Server Guid",
+      "title": "Server GUID",
       "description": "GUID of servers which manage the endpoints specified in agentGuid",
       "items": {
         "type": "string"
@@ -165,7 +165,7 @@ class TerminateProcessOutput(komand.Output):
         },
         "CodeType": {
           "type": "integer",
-          "title": "Codetype",
+          "title": "Code Type",
           "description": "Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code",
           "enum": [
             1,
@@ -269,7 +269,7 @@ class TerminateProcessOutput(komand.Output):
             },
             "statusCode": {
               "type": "integer",
-              "title": "Statuscode",
+              "title": "Status Code",
               "description": "The status code of the response from Endpoint Sensor server",
               "order": 3
             }
@@ -454,7 +454,7 @@ class TerminateProcessOutput(komand.Output):
                 },
                 "statusCode": {
                   "type": "integer",
-                  "title": "Statuscode",
+                  "title": "Status Code",
                   "description": "The status code of the response from Endpoint Sensor server",
                   "order": 3
                 }
@@ -598,7 +598,7 @@ class TerminateProcessOutput(komand.Output):
         },
         "statusCode": {
           "type": "integer",
-          "title": "Statuscode",
+          "title": "Status Code",
           "description": "The status code of the response from Endpoint Sensor server",
           "order": 3
         }
@@ -783,7 +783,7 @@ class TerminateProcessOutput(komand.Output):
             },
             "statusCode": {
               "type": "integer",
-              "title": "Statuscode",
+              "title": "Status Code",
               "description": "The status code of the response from Endpoint Sensor server",
               "order": 3
             }

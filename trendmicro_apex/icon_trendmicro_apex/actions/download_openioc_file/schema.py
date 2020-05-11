@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Uploads OpenIOC files to the Apex Central server"
+    DESCRIPTION = "Download OpenIOC files to the Apex Central server"
 
 
 class Input:
@@ -56,7 +56,7 @@ class DownloadOpeniocFileOutput(komand.Output):
     },
     "FeatureCtrl": {
       "$ref": "#/definitions/FeatureCtrl",
-      "title": "Featurectrl",
+      "title": "Feature CTRL",
       "description": "The Apex Central deployment model",
       "order": 2
     },
@@ -68,13 +68,13 @@ class DownloadOpeniocFileOutput(komand.Output):
     },
     "PermissionCtrl": {
       "$ref": "#/definitions/PermissionCtrl",
-      "title": "Permissionctrl",
+      "title": "Permission CTRL",
       "description": "Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features",
       "order": 4
     },
     "SystemCtrl": {
       "$ref": "#/definitions/SystemCtrl",
-      "title": "Systemctrl",
+      "title": "System CTRL",
       "description": "Indicates the suspicious object distribution role of the Apex Central server",
       "order": 5
     }
@@ -147,8 +147,8 @@ class DownloadOpeniocFileOutput(komand.Output):
       "properties": {
         "TmcmSoDist_Role": {
           "type": "string",
-          "title": "Tmcmsodist Role",
-          "description": "Tmcmsodist role",
+          "title": "Tmcm So Dist Role",
+          "description": "Tmcm so dist role",
           "enum": [
             "none",
             "hub",

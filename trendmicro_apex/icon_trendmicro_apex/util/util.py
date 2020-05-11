@@ -8,6 +8,7 @@ from datetime import datetime
 
 DEFAULT_TASK_TYPE = "CMEF"
 
+
 class TaskType:
     @staticmethod
     def value_of(task_type: str) -> int:

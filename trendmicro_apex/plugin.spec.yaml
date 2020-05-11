@@ -60,8 +60,8 @@ connection:
     required: false
     example: '["10.0.0.4"]'
   skip_mac_addresses:
-    title: Skip Mac Addresses
-    description: Skip mac addresses on isolate and uninstall actions
+    title: Skip MAC Addresses
+    description: Skip MAC addresses on isolate and uninstall actions
     type: "[]string"
     required: false
     example: '["08:00:27:8d:c0:4d"]'
@@ -111,29 +111,29 @@ types:
       required: false
   agentEntity:
     agentGuid:
-      title: "Agentguid"
+      title: "Agent GUID"
       type: string
-      description: "Agentguid"
+      description: "Agent GUID"
       required: false
     ip:
-      title: "Ip"
+      title: IP
       type: string
-      description: "Ip"
+      description: IP
       required: false
     isImportant:
-      title: "Isimportant"
+      title: "Is Important"
       type: boolean
-      description: "Isimportant"
+      description: "Is important"
       required: false
     isOnline:
-      title: "Isonline"
+      title: "Is Online"
       type: boolean
-      description: "Isonline"
+      description: "Is online"
       required: false
     isolateStatus:
-      title: "Isolatestatus"
+      title: "ISO Late Status"
       type: integer
-      description: "Isolatestatus"
+      description: "ISO late status"
       required: false
       enum:
         - 0
@@ -142,43 +142,43 @@ types:
         - 3
         - 4
     machineGuid:
-      title: "Machineguid"
+      title: "Machine GUID"
       type: string
-      description: "Machineguid"
+      description: "Machine GUID"
       required: false
     machineName:
-      title: "Machinename"
+      title: "Machine Name"
       type: string
-      description: "Machinename"
+      description: "Machine name"
       required: false
     machineOS:
-      title: "Machineos"
+      title: "Machine OS"
       type: string
-      description: "Machineos"
+      description: "Machine os"
       required: false
     machineType:
-      title: "Machinetype"
+      title: "Machine Type"
       type: string
-      description: "Machinetype"
+      description: "Machine type"
       required: false
       enum:
         - Server
         - Desktop
     serverGuid:
-      title: "Serverguid"
+      title: "Server GUID"
       type: string
-      description: "Serverguid"
+      description: "Server GUID"
       required: false
   agentQueryStatus:
     hasFullAgents:
-      title: "Hasfullagents"
+      title: "Has Full Agents"
       type: boolean
-      description: "Hasfullagents"
+      description: "Has full agents"
       required: false
     hasFullRbac:
-      title: "Hasfullrbac"
+      title: "Has Full RBAC"
       type: boolean
-      description: "Hasfullrbac"
+      description: "Has full RBAC"
       required: false
   pagination:
     limit:
@@ -198,14 +198,14 @@ types:
       required: false
   content:
     agentEntity:
-      title: "Agententity"
+      title: "Agent Entity"
       type: "[]agentEntity"
-      description: "Agententity"
+      description: "Agent entity"
       required: false
     agentQueryStatus:
-      title: "Agentquerystatus"
+      title: "Agent Query Status"
       type: agentQueryStatus
-      description: "Agentquerystatus"
+      description: "Agent query status"
       required: false
     pagination:
       title: "Pagination"
@@ -272,9 +272,9 @@ types:
       description: "Message"
       required: false
     statusCode:
-      title: "Statuscode"
+      title: "Status Code"
       type: integer
-      description: "Statuscode"
+      description: "Status code"
       required: false
   termination_contents:
     content:
@@ -288,7 +288,7 @@ types:
       type: string
       required: false
     statusCode:
-      title: Statuscode
+      title: Status Code
       type: integer
       description: The status code of the response from Endpoint Sensor server
       required: false
@@ -299,29 +299,29 @@ types:
       description: "Contents"
       required: false
     hasMore:
-      title: "Hasmore"
+      title: "Has More"
       type: boolean
-      description: "Hasmore"
+      description: "Has more"
       required: false
     lastContentId:
-      title: "Lastcontentid"
+      title: "Last Content ID"
       type: string
-      description: "Lastcontentid"
+      description: "Last content ID"
       required: false
     serverGuid:
-      title: "Serverguid"
+      title: "Server GUID"
       type: string
-      description: "Serverguid"
+      description: "Server GUID"
       required: false
     serverName:
-      title: "Servername"
+      title: "Server Name"
       type: string
-      description: "Servername"
+      description: "Server name"
       required: false
     taskId:
-      title: "Taskid"
+      title: "Task ID"
       type: string
-      description: "Taskid"
+      description: "Task id"
       required: false
   termination_data:
     content:
@@ -361,7 +361,7 @@ types:
       type: integer
       required: false
     CodeType:
-      title: "Codetype"
+      title: "Code Type"
       description: Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code
       type: integer
       required: false
@@ -392,7 +392,7 @@ types:
       required: false
       example: 0
     CodeType:
-      title: "Codetype"
+      title: "Code Type"
       description: Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code
       type: integer
       required: false
@@ -453,9 +453,9 @@ types:
       required: false
   SystemCtrl:
     TmcmSoDist_Role:
-      title: "Tmcmsodist Role"
+      title: "Tmcm So Dist Role"
       type: string
-      description: "Tmcmsodist role"
+      description: "Tmcm so dist role"
       required: false
       enum:
         - none
@@ -517,7 +517,7 @@ types:
       description: OpenIOC filing cabinet list
       required: false
     TotalIOCCount:
-      title: Total IOC Count"
+      title: Total IOC Count
       type: integer
       description: The total number of objects extracted from the uploaded file
       required: false
@@ -528,7 +528,7 @@ types:
       type: api_data
       required: false
     FeatureCtrl:
-      title: "Featurectrl"
+      title: "Feature CTRL"
       description: The Apex Central deployment model
       type: FeatureCtrl
       required: false
@@ -538,12 +538,12 @@ types:
       type: Meta
       required: false
     PermissionCtrl:
-      title: "Permissionctrl"
+      title: "Permission CTRL"
       description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
       type: PermissionCtrl
       required: false
     SystemCtrl:
-      title: "Systemctrl"
+      title: "System CTRL"
       description: Indicates the suspicious object distribution role of the Apex Central server
       type: SystemCtrl
       required: false
@@ -643,7 +643,7 @@ actions:
         type: file
         description: File to be marked as suspicious
         required: true
-        example: "{ 'filename': 'file.txt', 'content': 'c2xpamJvb20=' }"
+        example: '{"filename": "file.txt", "content": "c2xpamJvb20="}'
       scan_action:
         title: Scan Action
         description: What action to do with the data sent
@@ -759,7 +759,7 @@ actions:
         type: api_data
         required: false
       FeatureCtrl:
-        title: "Featurectrl"
+        title: "Feature CTRL"
         description: The Apex Central deployment model
         type: FeatureCtrl
         required: false
@@ -769,17 +769,17 @@ actions:
         type: Meta
         required: false
       PermissionCtrl:
-        title: "Permissionctrl"
+        title: "Permission CTRL"
         description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
         type: PermissionCtrl
         required: false
       SystemCtrl:
-        title: "Systemctrl"
+        title: "System CTRL"
         description: Indicates the suspicious object distribution role of the Apex Central server
         type: SystemCtrl
         required: false
   openioc_files_list:
-    title: List uploaded OpenIOC files
+    title: List Uploaded OpenIOC Files
     description: Retrieves a list of OpenIOC files from the Apex Central server
     input:
       file_hash_id_list:
@@ -791,7 +791,7 @@ actions:
         example: [769fcc7550bf98d96bccb7e22a5557301c403455]
       fuzzy_match_string:
         title: Fuzzy Match String
-        description: Filters the list for matching strings in the "File Name", "Title", and "Source Context" fields
+        description: "Filters the list for matching strings in the File Name, Title, and Source Context fields"
         type: string
         required: false
         example: "Rapid7 InsightConnect"
@@ -840,7 +840,7 @@ actions:
         type: IOC_Data
         required: false
       feature_ctrl:
-        title: Feature Ctrl
+        title: Feature CTRL
         description: The Apex Central deployment model
         type: FeatureCtrl
         required: false
@@ -850,17 +850,17 @@ actions:
         type: Meta
         required: false
       permission_ctrl:
-        title: Permission Ctrl
+        title: Permission CTRL
         description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
         type: PermissionCtrl
         required: false
       system_ctrl:
-        title: System Ctrl
+        title: System CTRL
         description: Indicates the suspicious object distribution role of the Apex Central server
         type: SystemCtrl
         required: false
   download_rca_csv_file:
-    title: Download the RCA CSV file
+    title: Download the RCA CSV File
     description: Downloads existing RCA files from the Apex Central server
     input:
       agent_guid:
@@ -918,7 +918,7 @@ actions:
         type: api_response
         required: false
   upload_openioc_file:
-    title: Upload OpenIOC file
+    title: Upload OpenIOC File
     description: Uploads OpenIOC files to the Apex Central server
     input:
       files:
@@ -939,7 +939,7 @@ actions:
         type: "[]uploaded_message_list"
         required: false
       FeatureCtrl:
-        title: "Featurectrl"
+        title: "Feature CTRL"
         description: The Apex Central deployment model
         type: FeatureCtrl
         required: false
@@ -949,17 +949,17 @@ actions:
         type: Meta
         required: false
       PermissionCtrl:
-        title: "Permissionctrl"
+        title: "Permission CTRL"
         description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
         type: PermissionCtrl
         required: false
       SystemCtrl:
-        title: "Systemctrl"
+        title: "System CTRL"
         description: Indicates the suspicious object distribution role of the Apex Central server
         type: SystemCtrl
         required: false
   delete_openioc_file:
-    title: Delete uploaded OpenIOC file
+    title: Delete Uploaded OpenIOC File
     description: Deletes existing OpenIOC files from the Apex Central server
     input:
       file_hash_id_list:
@@ -967,7 +967,7 @@ actions:
         description: The list of file SHA-1 values
         type: "[]string"
         required: true
-        example: ["695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343"]
+        example: '["695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343"]'
     output:
       Data:
         title: "Data"
@@ -975,7 +975,7 @@ actions:
         type: "[]delete_data"
         required: false
       FeatureCtrl:
-        title: "Featurectrl"
+        title: "Feature CTRL"
         description: The Apex Central deployment model
         type: FeatureCtrl
         required: false
@@ -985,18 +985,18 @@ actions:
         type: Meta
         required: false
       PermissionCtrl:
-        title: "Permissionctrl"
+        title: "Permission CTRL"
         description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
         type: PermissionCtrl
         required: false
       SystemCtrl:
-        title: "Systemctrl"
+        title: "System CTRL"
         description: Indicates the suspicious object distribution role of the Apex Central server
         type: SystemCtrl
         required: false
   download_openioc_file:
-    title: Upload OpenIOC file
-    description: Uploads OpenIOC files to the Apex Central server
+    title: Download OpenIOC File
+    description: Download OpenIOC files to the Apex Central server
     input:
       file_hash_id:
         title: File Hash ID
@@ -1011,7 +1011,7 @@ actions:
         type: file
         required: true
       FeatureCtrl:
-        title: "Featurectrl"
+        title: "Feature CTRL"
         description: The Apex Central deployment model
         type: FeatureCtrl
         required: false
@@ -1021,17 +1021,17 @@ actions:
         type: Meta
         required: false
       PermissionCtrl:
-        title: "Permissionctrl"
+        title: "Permission CTRL"
         description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
         type: PermissionCtrl
         required: false
       SystemCtrl:
-        title: "Systemctrl"
+        title: "System CTRL"
         description: Indicates the suspicious object distribution role of the Apex Central server
         type: SystemCtrl
         required: false
   get_rca_object:
-    title: Get RCA response object returned by taskID
+    title: Get RCA Response Object
     description: Retrieves results of investigations in different formats based on the specified taskId
     input:
       task_id:
@@ -1039,14 +1039,14 @@ actions:
         description: Task ID from another API call that is used to retrieve a specific task result Specify the taskId values returned by the following APIs
         type: string
         required: true
-        example: 9BD2204C-0554-45C8-9C62-799284928AFA
+        example: "9BD2204C-0554-45C8-9C62-799284928AFA"
       task_type:
         title: Task Type
         description: Type of API request. For Endpoint Sensor, the value is always 4
         type: string
         required: false
         default: CMEF
-        example: CMEF
+        example: "CMEF"
         enum:
           - UNKNOWN
           - INTERNAL
@@ -1077,7 +1077,7 @@ actions:
         type: api_data
         required: true
       FeatureCtrl:
-        title: "Featurectrl"
+        title: "Feature CTRL"
         description: The Apex Central deployment model
         type: FeatureCtrl
         required: false
@@ -1087,12 +1087,12 @@ actions:
         type: Meta
         required: false
       PermissionCtrl:
-        title: "Permissionctrl"
+        title: "Permission CTRL"
         description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
         type: PermissionCtrl
         required: false
       SystemCtrl:
-        title: "Systemctrl"
+        title: "System CTRL"
         description: Indicates the suspicious object distribution role of the Apex Central server
         type: SystemCtrl
         required: false
@@ -1101,7 +1101,7 @@ actions:
     description: Terminates the processes specified on Security Agent endpoints
     input:
       agent_guid:
-        title: The value of agentGuid is a object of key-value pairs
+        title: Agent GUID
         description: The key is the serverGuid, and the value is a list of agentGuid strings of the endpoints managed by the target server
         type: object
         required: false
@@ -1113,7 +1113,7 @@ actions:
         required: false
         example: '[{"type": 1, "value": "a"}]'
       server_guid:
-        title: Server Guid
+        title: Server GUID
         description: GUID of servers which manage the endpoints specified in agentGuid
         type: "[]string"
         required: false
@@ -1155,12 +1155,8 @@ actions:
         type: termination_api_data
         required: true
   performs_action:
-    title: Performs action
-    description: "Performs action
-        * Isolate endpoint: Prevents the endpoint from connecting to the network
-        * Restore connection: Restores network connectivity to an isolated endpoint
-        * Uninstall Security Agent: Removes the Security Agent program from an endpoint
-        * Relocate Security Agent: Moves the Security Agent to a different Apex One server or domain (the source and target must be registered to the same Apex Central server)"
+    title: Performs Action
+    description: "Performs action"
     input:
       action:
         title: Action
@@ -1175,7 +1171,7 @@ actions:
           - Uninstall
       allow_multiple_match:
         title: Allow Multiple Match
-        description: 'True: Allows multiple matches False: Does not allow multiple matches'
+        description: "True - Allows multiple matches False - Does not allow multiple matches"
         type: boolean
         required: false
         default: true
@@ -1199,7 +1195,7 @@ actions:
         required: false
         example: "10.0.0.4"
       mac_address:
-        title: Mac Address
+        title: MAC Address
         description: The MAC address of the managed product agent. Use to identify the agent(s) on which the action is performed
         type: string
         required: false
@@ -1211,13 +1207,13 @@ actions:
         required: false
         example: "SLF_PRODUCT_OFFICESCAN_CE"
       relocate_to_folder_path:
-        title: Relocate To Folder Path
+        title: Relocate to Folder Path
         description: The target directory for the agent
         type: string
         required: false
         example: "\\NewDomain\\NewFolder"
       relocate_to_server_id:
-        title: Relocate To Server ID
+        title: Relocate to Server ID
         description: The GUID of the target server for the agent
         type: string
         required: false

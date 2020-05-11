@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Performs action * Isolate endpoint: Prevents the endpoint from connecting to the network * Restore connection: Restores network connectivity to an isolated endpoint * Uninstall Security Agent: Removes the Security Agent program from an endpoint * Relocate Security Agent: Moves the Security Agent to a different Apex One server or domain (the source and target must be registered to the same Apex Central server)"
+    DESCRIPTION = "Performs action"
 
 
 class Input:
@@ -46,7 +46,7 @@ class PerformsActionInput(komand.Input):
     "allow_multiple_match": {
       "type": "boolean",
       "title": "Allow Multiple Match",
-      "description": "True: Allows multiple matches False: Does not allow multiple matches",
+      "description": "True - Allows multiple matches False - Does not allow multiple matches",
       "default": true,
       "order": 2
     },
@@ -70,7 +70,7 @@ class PerformsActionInput(komand.Input):
     },
     "mac_address": {
       "type": "string",
-      "title": "Mac Address",
+      "title": "MAC Address",
       "description": "The MAC address of the managed product agent. Use to identify the agent(s) on which the action is performed",
       "order": 6
     },
@@ -82,13 +82,13 @@ class PerformsActionInput(komand.Input):
     },
     "relocate_to_folder_path": {
       "type": "string",
-      "title": "Relocate To Folder Path",
+      "title": "Relocate to Folder Path",
       "description": "The target directory for the agent",
       "order": 8
     },
     "relocate_to_server_id": {
       "type": "string",
-      "title": "Relocate To Server ID",
+      "title": "Relocate to Server ID",
       "description": "The GUID of the target server for the agent",
       "order": 9
     }

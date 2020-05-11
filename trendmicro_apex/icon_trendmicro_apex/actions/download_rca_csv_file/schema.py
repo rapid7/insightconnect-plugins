@@ -122,32 +122,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
         },
         "hasMore": {
           "type": "boolean",
-          "title": "Hasmore",
-          "description": "Hasmore",
+          "title": "Has More",
+          "description": "Has more",
           "order": 2
         },
         "lastContentId": {
           "type": "string",
-          "title": "Lastcontentid",
-          "description": "Lastcontentid",
+          "title": "Last Content ID",
+          "description": "Last content ID",
           "order": 3
         },
         "serverGuid": {
           "type": "string",
-          "title": "Serverguid",
-          "description": "Serverguid",
+          "title": "Server GUID",
+          "description": "Server GUID",
           "order": 4
         },
         "serverName": {
           "type": "string",
-          "title": "Servername",
-          "description": "Servername",
+          "title": "Server Name",
+          "description": "Server name",
           "order": 5
         },
         "taskId": {
           "type": "string",
-          "title": "Taskid",
-          "description": "Taskid",
+          "title": "Task ID",
+          "description": "Task id",
           "order": 6
         }
       },
@@ -158,32 +158,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "agentGuid": {
               "type": "string",
-              "title": "Agentguid",
-              "description": "Agentguid",
+              "title": "Agent GUID",
+              "description": "Agent GUID",
               "order": 1
             },
             "ip": {
               "type": "string",
-              "title": "Ip",
-              "description": "Ip",
+              "title": "IP",
+              "description": "IP",
               "order": 2
             },
             "isImportant": {
               "type": "boolean",
-              "title": "Isimportant",
-              "description": "Isimportant",
+              "title": "Is Important",
+              "description": "Is important",
               "order": 3
             },
             "isOnline": {
               "type": "boolean",
-              "title": "Isonline",
-              "description": "Isonline",
+              "title": "Is Online",
+              "description": "Is online",
               "order": 4
             },
             "isolateStatus": {
               "type": "integer",
-              "title": "Isolatestatus",
-              "description": "Isolatestatus",
+              "title": "ISO Late Status",
+              "description": "ISO late status",
               "enum": [
                 0,
                 1,
@@ -195,26 +195,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "machineGuid": {
               "type": "string",
-              "title": "Machineguid",
-              "description": "Machineguid",
+              "title": "Machine GUID",
+              "description": "Machine GUID",
               "order": 6
             },
             "machineName": {
               "type": "string",
-              "title": "Machinename",
-              "description": "Machinename",
+              "title": "Machine Name",
+              "description": "Machine name",
               "order": 7
             },
             "machineOS": {
               "type": "string",
-              "title": "Machineos",
-              "description": "Machineos",
+              "title": "Machine OS",
+              "description": "Machine os",
               "order": 8
             },
             "machineType": {
               "type": "string",
-              "title": "Machinetype",
-              "description": "Machinetype",
+              "title": "Machine Type",
+              "description": "Machine type",
               "enum": [
                 "Server",
                 "Desktop"
@@ -223,8 +223,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "serverGuid": {
               "type": "string",
-              "title": "Serverguid",
-              "description": "Serverguid",
+              "title": "Server GUID",
+              "description": "Server GUID",
               "order": 10
             }
           }
@@ -235,14 +235,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "hasFullAgents": {
               "type": "boolean",
-              "title": "Hasfullagents",
-              "description": "Hasfullagents",
+              "title": "Has Full Agents",
+              "description": "Has full agents",
               "order": 1
             },
             "hasFullRbac": {
               "type": "boolean",
-              "title": "Hasfullrbac",
-              "description": "Hasfullrbac",
+              "title": "Has Full RBAC",
+              "description": "Has full RBAC",
               "order": 2
             }
           }
@@ -253,8 +253,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "agentEntity": {
               "type": "array",
-              "title": "Agententity",
-              "description": "Agententity",
+              "title": "Agent Entity",
+              "description": "Agent entity",
               "items": {
                 "$ref": "#/definitions/agentEntity"
               },
@@ -262,8 +262,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "agentQueryStatus": {
               "$ref": "#/definitions/agentQueryStatus",
-              "title": "Agentquerystatus",
-              "description": "Agentquerystatus",
+              "title": "Agent Query Status",
+              "description": "Agent query status",
               "order": 2
             },
             "csv": {
@@ -286,32 +286,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentGuid": {
                   "type": "string",
-                  "title": "Agentguid",
-                  "description": "Agentguid",
+                  "title": "Agent GUID",
+                  "description": "Agent GUID",
                   "order": 1
                 },
                 "ip": {
                   "type": "string",
-                  "title": "Ip",
-                  "description": "Ip",
+                  "title": "IP",
+                  "description": "IP",
                   "order": 2
                 },
                 "isImportant": {
                   "type": "boolean",
-                  "title": "Isimportant",
-                  "description": "Isimportant",
+                  "title": "Is Important",
+                  "description": "Is important",
                   "order": 3
                 },
                 "isOnline": {
                   "type": "boolean",
-                  "title": "Isonline",
-                  "description": "Isonline",
+                  "title": "Is Online",
+                  "description": "Is online",
                   "order": 4
                 },
                 "isolateStatus": {
                   "type": "integer",
-                  "title": "Isolatestatus",
-                  "description": "Isolatestatus",
+                  "title": "ISO Late Status",
+                  "description": "ISO late status",
                   "enum": [
                     0,
                     1,
@@ -323,26 +323,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "machineGuid": {
                   "type": "string",
-                  "title": "Machineguid",
-                  "description": "Machineguid",
+                  "title": "Machine GUID",
+                  "description": "Machine GUID",
                   "order": 6
                 },
                 "machineName": {
                   "type": "string",
-                  "title": "Machinename",
-                  "description": "Machinename",
+                  "title": "Machine Name",
+                  "description": "Machine name",
                   "order": 7
                 },
                 "machineOS": {
                   "type": "string",
-                  "title": "Machineos",
-                  "description": "Machineos",
+                  "title": "Machine OS",
+                  "description": "Machine os",
                   "order": 8
                 },
                 "machineType": {
                   "type": "string",
-                  "title": "Machinetype",
-                  "description": "Machinetype",
+                  "title": "Machine Type",
+                  "description": "Machine type",
                   "enum": [
                     "Server",
                     "Desktop"
@@ -351,8 +351,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "serverGuid": {
                   "type": "string",
-                  "title": "Serverguid",
-                  "description": "Serverguid",
+                  "title": "Server GUID",
+                  "description": "Server GUID",
                   "order": 10
                 }
               }
@@ -363,14 +363,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "hasFullAgents": {
                   "type": "boolean",
-                  "title": "Hasfullagents",
-                  "description": "Hasfullagents",
+                  "title": "Has Full Agents",
+                  "description": "Has full agents",
                   "order": 1
                 },
                 "hasFullRbac": {
                   "type": "boolean",
-                  "title": "Hasfullrbac",
-                  "description": "Hasfullrbac",
+                  "title": "Has Full RBAC",
+                  "description": "Has full RBAC",
                   "order": 2
                 }
               }
@@ -419,8 +419,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "statusCode": {
               "type": "integer",
-              "title": "Statuscode",
-              "description": "Statuscode",
+              "title": "Status Code",
+              "description": "Status code",
               "order": 3
             }
           },
@@ -431,32 +431,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentGuid": {
                   "type": "string",
-                  "title": "Agentguid",
-                  "description": "Agentguid",
+                  "title": "Agent GUID",
+                  "description": "Agent GUID",
                   "order": 1
                 },
                 "ip": {
                   "type": "string",
-                  "title": "Ip",
-                  "description": "Ip",
+                  "title": "IP",
+                  "description": "IP",
                   "order": 2
                 },
                 "isImportant": {
                   "type": "boolean",
-                  "title": "Isimportant",
-                  "description": "Isimportant",
+                  "title": "Is Important",
+                  "description": "Is important",
                   "order": 3
                 },
                 "isOnline": {
                   "type": "boolean",
-                  "title": "Isonline",
-                  "description": "Isonline",
+                  "title": "Is Online",
+                  "description": "Is online",
                   "order": 4
                 },
                 "isolateStatus": {
                   "type": "integer",
-                  "title": "Isolatestatus",
-                  "description": "Isolatestatus",
+                  "title": "ISO Late Status",
+                  "description": "ISO late status",
                   "enum": [
                     0,
                     1,
@@ -468,26 +468,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "machineGuid": {
                   "type": "string",
-                  "title": "Machineguid",
-                  "description": "Machineguid",
+                  "title": "Machine GUID",
+                  "description": "Machine GUID",
                   "order": 6
                 },
                 "machineName": {
                   "type": "string",
-                  "title": "Machinename",
-                  "description": "Machinename",
+                  "title": "Machine Name",
+                  "description": "Machine name",
                   "order": 7
                 },
                 "machineOS": {
                   "type": "string",
-                  "title": "Machineos",
-                  "description": "Machineos",
+                  "title": "Machine OS",
+                  "description": "Machine os",
                   "order": 8
                 },
                 "machineType": {
                   "type": "string",
-                  "title": "Machinetype",
-                  "description": "Machinetype",
+                  "title": "Machine Type",
+                  "description": "Machine type",
                   "enum": [
                     "Server",
                     "Desktop"
@@ -496,8 +496,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "serverGuid": {
                   "type": "string",
-                  "title": "Serverguid",
-                  "description": "Serverguid",
+                  "title": "Server GUID",
+                  "description": "Server GUID",
                   "order": 10
                 }
               }
@@ -508,14 +508,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "hasFullAgents": {
                   "type": "boolean",
-                  "title": "Hasfullagents",
-                  "description": "Hasfullagents",
+                  "title": "Has Full Agents",
+                  "description": "Has full agents",
                   "order": 1
                 },
                 "hasFullRbac": {
                   "type": "boolean",
-                  "title": "Hasfullrbac",
-                  "description": "Hasfullrbac",
+                  "title": "Has Full RBAC",
+                  "description": "Has full RBAC",
                   "order": 2
                 }
               }
@@ -526,8 +526,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentEntity": {
                   "type": "array",
-                  "title": "Agententity",
-                  "description": "Agententity",
+                  "title": "Agent Entity",
+                  "description": "Agent entity",
                   "items": {
                     "$ref": "#/definitions/agentEntity"
                   },
@@ -535,8 +535,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "agentQueryStatus": {
                   "$ref": "#/definitions/agentQueryStatus",
-                  "title": "Agentquerystatus",
-                  "description": "Agentquerystatus",
+                  "title": "Agent Query Status",
+                  "description": "Agent query status",
                   "order": 2
                 },
                 "csv": {
@@ -559,32 +559,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentGuid": {
                       "type": "string",
-                      "title": "Agentguid",
-                      "description": "Agentguid",
+                      "title": "Agent GUID",
+                      "description": "Agent GUID",
                       "order": 1
                     },
                     "ip": {
                       "type": "string",
-                      "title": "Ip",
-                      "description": "Ip",
+                      "title": "IP",
+                      "description": "IP",
                       "order": 2
                     },
                     "isImportant": {
                       "type": "boolean",
-                      "title": "Isimportant",
-                      "description": "Isimportant",
+                      "title": "Is Important",
+                      "description": "Is important",
                       "order": 3
                     },
                     "isOnline": {
                       "type": "boolean",
-                      "title": "Isonline",
-                      "description": "Isonline",
+                      "title": "Is Online",
+                      "description": "Is online",
                       "order": 4
                     },
                     "isolateStatus": {
                       "type": "integer",
-                      "title": "Isolatestatus",
-                      "description": "Isolatestatus",
+                      "title": "ISO Late Status",
+                      "description": "ISO late status",
                       "enum": [
                         0,
                         1,
@@ -596,26 +596,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "machineGuid": {
                       "type": "string",
-                      "title": "Machineguid",
-                      "description": "Machineguid",
+                      "title": "Machine GUID",
+                      "description": "Machine GUID",
                       "order": 6
                     },
                     "machineName": {
                       "type": "string",
-                      "title": "Machinename",
-                      "description": "Machinename",
+                      "title": "Machine Name",
+                      "description": "Machine name",
                       "order": 7
                     },
                     "machineOS": {
                       "type": "string",
-                      "title": "Machineos",
-                      "description": "Machineos",
+                      "title": "Machine OS",
+                      "description": "Machine os",
                       "order": 8
                     },
                     "machineType": {
                       "type": "string",
-                      "title": "Machinetype",
-                      "description": "Machinetype",
+                      "title": "Machine Type",
+                      "description": "Machine type",
                       "enum": [
                         "Server",
                         "Desktop"
@@ -624,8 +624,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "serverGuid": {
                       "type": "string",
-                      "title": "Serverguid",
-                      "description": "Serverguid",
+                      "title": "Server GUID",
+                      "description": "Server GUID",
                       "order": 10
                     }
                   }
@@ -636,14 +636,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "hasFullAgents": {
                       "type": "boolean",
-                      "title": "Hasfullagents",
-                      "description": "Hasfullagents",
+                      "title": "Has Full Agents",
+                      "description": "Has full agents",
                       "order": 1
                     },
                     "hasFullRbac": {
                       "type": "boolean",
-                      "title": "Hasfullrbac",
-                      "description": "Hasfullrbac",
+                      "title": "Has Full RBAC",
+                      "description": "Has full RBAC",
                       "order": 2
                     }
                   }
@@ -790,8 +790,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
       "properties": {
         "TmcmSoDist_Role": {
           "type": "string",
-          "title": "Tmcmsodist Role",
-          "description": "Tmcmsodist role",
+          "title": "Tmcm So Dist Role",
+          "description": "Tmcm so dist role",
           "enum": [
             "none",
             "hub",
@@ -807,32 +807,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
       "properties": {
         "agentGuid": {
           "type": "string",
-          "title": "Agentguid",
-          "description": "Agentguid",
+          "title": "Agent GUID",
+          "description": "Agent GUID",
           "order": 1
         },
         "ip": {
           "type": "string",
-          "title": "Ip",
-          "description": "Ip",
+          "title": "IP",
+          "description": "IP",
           "order": 2
         },
         "isImportant": {
           "type": "boolean",
-          "title": "Isimportant",
-          "description": "Isimportant",
+          "title": "Is Important",
+          "description": "Is important",
           "order": 3
         },
         "isOnline": {
           "type": "boolean",
-          "title": "Isonline",
-          "description": "Isonline",
+          "title": "Is Online",
+          "description": "Is online",
           "order": 4
         },
         "isolateStatus": {
           "type": "integer",
-          "title": "Isolatestatus",
-          "description": "Isolatestatus",
+          "title": "ISO Late Status",
+          "description": "ISO late status",
           "enum": [
             0,
             1,
@@ -844,26 +844,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
         },
         "machineGuid": {
           "type": "string",
-          "title": "Machineguid",
-          "description": "Machineguid",
+          "title": "Machine GUID",
+          "description": "Machine GUID",
           "order": 6
         },
         "machineName": {
           "type": "string",
-          "title": "Machinename",
-          "description": "Machinename",
+          "title": "Machine Name",
+          "description": "Machine name",
           "order": 7
         },
         "machineOS": {
           "type": "string",
-          "title": "Machineos",
-          "description": "Machineos",
+          "title": "Machine OS",
+          "description": "Machine os",
           "order": 8
         },
         "machineType": {
           "type": "string",
-          "title": "Machinetype",
-          "description": "Machinetype",
+          "title": "Machine Type",
+          "description": "Machine type",
           "enum": [
             "Server",
             "Desktop"
@@ -872,8 +872,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
         },
         "serverGuid": {
           "type": "string",
-          "title": "Serverguid",
-          "description": "Serverguid",
+          "title": "Server GUID",
+          "description": "Server GUID",
           "order": 10
         }
       }
@@ -884,14 +884,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
       "properties": {
         "hasFullAgents": {
           "type": "boolean",
-          "title": "Hasfullagents",
-          "description": "Hasfullagents",
+          "title": "Has Full Agents",
+          "description": "Has full agents",
           "order": 1
         },
         "hasFullRbac": {
           "type": "boolean",
-          "title": "Hasfullrbac",
-          "description": "Hasfullrbac",
+          "title": "Has Full RBAC",
+          "description": "Has full RBAC",
           "order": 2
         }
       }
@@ -908,7 +908,7 @@ class DownloadRcaCsvFileOutput(komand.Output):
         },
         "CodeType": {
           "type": "integer",
-          "title": "Codetype",
+          "title": "Code Type",
           "description": "Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code",
           "enum": [
             1,
@@ -952,32 +952,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "hasMore": {
               "type": "boolean",
-              "title": "Hasmore",
-              "description": "Hasmore",
+              "title": "Has More",
+              "description": "Has more",
               "order": 2
             },
             "lastContentId": {
               "type": "string",
-              "title": "Lastcontentid",
-              "description": "Lastcontentid",
+              "title": "Last Content ID",
+              "description": "Last content ID",
               "order": 3
             },
             "serverGuid": {
               "type": "string",
-              "title": "Serverguid",
-              "description": "Serverguid",
+              "title": "Server GUID",
+              "description": "Server GUID",
               "order": 4
             },
             "serverName": {
               "type": "string",
-              "title": "Servername",
-              "description": "Servername",
+              "title": "Server Name",
+              "description": "Server name",
               "order": 5
             },
             "taskId": {
               "type": "string",
-              "title": "Taskid",
-              "description": "Taskid",
+              "title": "Task ID",
+              "description": "Task id",
               "order": 6
             }
           },
@@ -988,32 +988,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentGuid": {
                   "type": "string",
-                  "title": "Agentguid",
-                  "description": "Agentguid",
+                  "title": "Agent GUID",
+                  "description": "Agent GUID",
                   "order": 1
                 },
                 "ip": {
                   "type": "string",
-                  "title": "Ip",
-                  "description": "Ip",
+                  "title": "IP",
+                  "description": "IP",
                   "order": 2
                 },
                 "isImportant": {
                   "type": "boolean",
-                  "title": "Isimportant",
-                  "description": "Isimportant",
+                  "title": "Is Important",
+                  "description": "Is important",
                   "order": 3
                 },
                 "isOnline": {
                   "type": "boolean",
-                  "title": "Isonline",
-                  "description": "Isonline",
+                  "title": "Is Online",
+                  "description": "Is online",
                   "order": 4
                 },
                 "isolateStatus": {
                   "type": "integer",
-                  "title": "Isolatestatus",
-                  "description": "Isolatestatus",
+                  "title": "ISO Late Status",
+                  "description": "ISO late status",
                   "enum": [
                     0,
                     1,
@@ -1025,26 +1025,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "machineGuid": {
                   "type": "string",
-                  "title": "Machineguid",
-                  "description": "Machineguid",
+                  "title": "Machine GUID",
+                  "description": "Machine GUID",
                   "order": 6
                 },
                 "machineName": {
                   "type": "string",
-                  "title": "Machinename",
-                  "description": "Machinename",
+                  "title": "Machine Name",
+                  "description": "Machine name",
                   "order": 7
                 },
                 "machineOS": {
                   "type": "string",
-                  "title": "Machineos",
-                  "description": "Machineos",
+                  "title": "Machine OS",
+                  "description": "Machine os",
                   "order": 8
                 },
                 "machineType": {
                   "type": "string",
-                  "title": "Machinetype",
-                  "description": "Machinetype",
+                  "title": "Machine Type",
+                  "description": "Machine type",
                   "enum": [
                     "Server",
                     "Desktop"
@@ -1053,8 +1053,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "serverGuid": {
                   "type": "string",
-                  "title": "Serverguid",
-                  "description": "Serverguid",
+                  "title": "Server GUID",
+                  "description": "Server GUID",
                   "order": 10
                 }
               }
@@ -1065,14 +1065,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "hasFullAgents": {
                   "type": "boolean",
-                  "title": "Hasfullagents",
-                  "description": "Hasfullagents",
+                  "title": "Has Full Agents",
+                  "description": "Has full agents",
                   "order": 1
                 },
                 "hasFullRbac": {
                   "type": "boolean",
-                  "title": "Hasfullrbac",
-                  "description": "Hasfullrbac",
+                  "title": "Has Full RBAC",
+                  "description": "Has full RBAC",
                   "order": 2
                 }
               }
@@ -1083,8 +1083,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentEntity": {
                   "type": "array",
-                  "title": "Agententity",
-                  "description": "Agententity",
+                  "title": "Agent Entity",
+                  "description": "Agent entity",
                   "items": {
                     "$ref": "#/definitions/agentEntity"
                   },
@@ -1092,8 +1092,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "agentQueryStatus": {
                   "$ref": "#/definitions/agentQueryStatus",
-                  "title": "Agentquerystatus",
-                  "description": "Agentquerystatus",
+                  "title": "Agent Query Status",
+                  "description": "Agent query status",
                   "order": 2
                 },
                 "csv": {
@@ -1116,32 +1116,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentGuid": {
                       "type": "string",
-                      "title": "Agentguid",
-                      "description": "Agentguid",
+                      "title": "Agent GUID",
+                      "description": "Agent GUID",
                       "order": 1
                     },
                     "ip": {
                       "type": "string",
-                      "title": "Ip",
-                      "description": "Ip",
+                      "title": "IP",
+                      "description": "IP",
                       "order": 2
                     },
                     "isImportant": {
                       "type": "boolean",
-                      "title": "Isimportant",
-                      "description": "Isimportant",
+                      "title": "Is Important",
+                      "description": "Is important",
                       "order": 3
                     },
                     "isOnline": {
                       "type": "boolean",
-                      "title": "Isonline",
-                      "description": "Isonline",
+                      "title": "Is Online",
+                      "description": "Is online",
                       "order": 4
                     },
                     "isolateStatus": {
                       "type": "integer",
-                      "title": "Isolatestatus",
-                      "description": "Isolatestatus",
+                      "title": "ISO Late Status",
+                      "description": "ISO late status",
                       "enum": [
                         0,
                         1,
@@ -1153,26 +1153,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "machineGuid": {
                       "type": "string",
-                      "title": "Machineguid",
-                      "description": "Machineguid",
+                      "title": "Machine GUID",
+                      "description": "Machine GUID",
                       "order": 6
                     },
                     "machineName": {
                       "type": "string",
-                      "title": "Machinename",
-                      "description": "Machinename",
+                      "title": "Machine Name",
+                      "description": "Machine name",
                       "order": 7
                     },
                     "machineOS": {
                       "type": "string",
-                      "title": "Machineos",
-                      "description": "Machineos",
+                      "title": "Machine OS",
+                      "description": "Machine os",
                       "order": 8
                     },
                     "machineType": {
                       "type": "string",
-                      "title": "Machinetype",
-                      "description": "Machinetype",
+                      "title": "Machine Type",
+                      "description": "Machine type",
                       "enum": [
                         "Server",
                         "Desktop"
@@ -1181,8 +1181,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "serverGuid": {
                       "type": "string",
-                      "title": "Serverguid",
-                      "description": "Serverguid",
+                      "title": "Server GUID",
+                      "description": "Server GUID",
                       "order": 10
                     }
                   }
@@ -1193,14 +1193,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "hasFullAgents": {
                       "type": "boolean",
-                      "title": "Hasfullagents",
-                      "description": "Hasfullagents",
+                      "title": "Has Full Agents",
+                      "description": "Has full agents",
                       "order": 1
                     },
                     "hasFullRbac": {
                       "type": "boolean",
-                      "title": "Hasfullrbac",
-                      "description": "Hasfullrbac",
+                      "title": "Has Full RBAC",
+                      "description": "Has full RBAC",
                       "order": 2
                     }
                   }
@@ -1249,8 +1249,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "statusCode": {
                   "type": "integer",
-                  "title": "Statuscode",
-                  "description": "Statuscode",
+                  "title": "Status Code",
+                  "description": "Status code",
                   "order": 3
                 }
               },
@@ -1261,32 +1261,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentGuid": {
                       "type": "string",
-                      "title": "Agentguid",
-                      "description": "Agentguid",
+                      "title": "Agent GUID",
+                      "description": "Agent GUID",
                       "order": 1
                     },
                     "ip": {
                       "type": "string",
-                      "title": "Ip",
-                      "description": "Ip",
+                      "title": "IP",
+                      "description": "IP",
                       "order": 2
                     },
                     "isImportant": {
                       "type": "boolean",
-                      "title": "Isimportant",
-                      "description": "Isimportant",
+                      "title": "Is Important",
+                      "description": "Is important",
                       "order": 3
                     },
                     "isOnline": {
                       "type": "boolean",
-                      "title": "Isonline",
-                      "description": "Isonline",
+                      "title": "Is Online",
+                      "description": "Is online",
                       "order": 4
                     },
                     "isolateStatus": {
                       "type": "integer",
-                      "title": "Isolatestatus",
-                      "description": "Isolatestatus",
+                      "title": "ISO Late Status",
+                      "description": "ISO late status",
                       "enum": [
                         0,
                         1,
@@ -1298,26 +1298,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "machineGuid": {
                       "type": "string",
-                      "title": "Machineguid",
-                      "description": "Machineguid",
+                      "title": "Machine GUID",
+                      "description": "Machine GUID",
                       "order": 6
                     },
                     "machineName": {
                       "type": "string",
-                      "title": "Machinename",
-                      "description": "Machinename",
+                      "title": "Machine Name",
+                      "description": "Machine name",
                       "order": 7
                     },
                     "machineOS": {
                       "type": "string",
-                      "title": "Machineos",
-                      "description": "Machineos",
+                      "title": "Machine OS",
+                      "description": "Machine os",
                       "order": 8
                     },
                     "machineType": {
                       "type": "string",
-                      "title": "Machinetype",
-                      "description": "Machinetype",
+                      "title": "Machine Type",
+                      "description": "Machine type",
                       "enum": [
                         "Server",
                         "Desktop"
@@ -1326,8 +1326,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "serverGuid": {
                       "type": "string",
-                      "title": "Serverguid",
-                      "description": "Serverguid",
+                      "title": "Server GUID",
+                      "description": "Server GUID",
                       "order": 10
                     }
                   }
@@ -1338,14 +1338,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "hasFullAgents": {
                       "type": "boolean",
-                      "title": "Hasfullagents",
-                      "description": "Hasfullagents",
+                      "title": "Has Full Agents",
+                      "description": "Has full agents",
                       "order": 1
                     },
                     "hasFullRbac": {
                       "type": "boolean",
-                      "title": "Hasfullrbac",
-                      "description": "Hasfullrbac",
+                      "title": "Has Full RBAC",
+                      "description": "Has full RBAC",
                       "order": 2
                     }
                   }
@@ -1356,8 +1356,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentEntity": {
                       "type": "array",
-                      "title": "Agententity",
-                      "description": "Agententity",
+                      "title": "Agent Entity",
+                      "description": "Agent entity",
                       "items": {
                         "$ref": "#/definitions/agentEntity"
                       },
@@ -1365,8 +1365,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "agentQueryStatus": {
                       "$ref": "#/definitions/agentQueryStatus",
-                      "title": "Agentquerystatus",
-                      "description": "Agentquerystatus",
+                      "title": "Agent Query Status",
+                      "description": "Agent query status",
                       "order": 2
                     },
                     "csv": {
@@ -1389,32 +1389,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "properties": {
                         "agentGuid": {
                           "type": "string",
-                          "title": "Agentguid",
-                          "description": "Agentguid",
+                          "title": "Agent GUID",
+                          "description": "Agent GUID",
                           "order": 1
                         },
                         "ip": {
                           "type": "string",
-                          "title": "Ip",
-                          "description": "Ip",
+                          "title": "IP",
+                          "description": "IP",
                           "order": 2
                         },
                         "isImportant": {
                           "type": "boolean",
-                          "title": "Isimportant",
-                          "description": "Isimportant",
+                          "title": "Is Important",
+                          "description": "Is important",
                           "order": 3
                         },
                         "isOnline": {
                           "type": "boolean",
-                          "title": "Isonline",
-                          "description": "Isonline",
+                          "title": "Is Online",
+                          "description": "Is online",
                           "order": 4
                         },
                         "isolateStatus": {
                           "type": "integer",
-                          "title": "Isolatestatus",
-                          "description": "Isolatestatus",
+                          "title": "ISO Late Status",
+                          "description": "ISO late status",
                           "enum": [
                             0,
                             1,
@@ -1426,26 +1426,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                         },
                         "machineGuid": {
                           "type": "string",
-                          "title": "Machineguid",
-                          "description": "Machineguid",
+                          "title": "Machine GUID",
+                          "description": "Machine GUID",
                           "order": 6
                         },
                         "machineName": {
                           "type": "string",
-                          "title": "Machinename",
-                          "description": "Machinename",
+                          "title": "Machine Name",
+                          "description": "Machine name",
                           "order": 7
                         },
                         "machineOS": {
                           "type": "string",
-                          "title": "Machineos",
-                          "description": "Machineos",
+                          "title": "Machine OS",
+                          "description": "Machine os",
                           "order": 8
                         },
                         "machineType": {
                           "type": "string",
-                          "title": "Machinetype",
-                          "description": "Machinetype",
+                          "title": "Machine Type",
+                          "description": "Machine type",
                           "enum": [
                             "Server",
                             "Desktop"
@@ -1454,8 +1454,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                         },
                         "serverGuid": {
                           "type": "string",
-                          "title": "Serverguid",
-                          "description": "Serverguid",
+                          "title": "Server GUID",
+                          "description": "Server GUID",
                           "order": 10
                         }
                       }
@@ -1466,14 +1466,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "properties": {
                         "hasFullAgents": {
                           "type": "boolean",
-                          "title": "Hasfullagents",
-                          "description": "Hasfullagents",
+                          "title": "Has Full Agents",
+                          "description": "Has full agents",
                           "order": 1
                         },
                         "hasFullRbac": {
                           "type": "boolean",
-                          "title": "Hasfullrbac",
-                          "description": "Hasfullrbac",
+                          "title": "Has Full RBAC",
+                          "description": "Has full RBAC",
                           "order": 2
                         }
                       }
@@ -1562,32 +1562,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "agentGuid": {
               "type": "string",
-              "title": "Agentguid",
-              "description": "Agentguid",
+              "title": "Agent GUID",
+              "description": "Agent GUID",
               "order": 1
             },
             "ip": {
               "type": "string",
-              "title": "Ip",
-              "description": "Ip",
+              "title": "IP",
+              "description": "IP",
               "order": 2
             },
             "isImportant": {
               "type": "boolean",
-              "title": "Isimportant",
-              "description": "Isimportant",
+              "title": "Is Important",
+              "description": "Is important",
               "order": 3
             },
             "isOnline": {
               "type": "boolean",
-              "title": "Isonline",
-              "description": "Isonline",
+              "title": "Is Online",
+              "description": "Is online",
               "order": 4
             },
             "isolateStatus": {
               "type": "integer",
-              "title": "Isolatestatus",
-              "description": "Isolatestatus",
+              "title": "ISO Late Status",
+              "description": "ISO late status",
               "enum": [
                 0,
                 1,
@@ -1599,26 +1599,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "machineGuid": {
               "type": "string",
-              "title": "Machineguid",
-              "description": "Machineguid",
+              "title": "Machine GUID",
+              "description": "Machine GUID",
               "order": 6
             },
             "machineName": {
               "type": "string",
-              "title": "Machinename",
-              "description": "Machinename",
+              "title": "Machine Name",
+              "description": "Machine name",
               "order": 7
             },
             "machineOS": {
               "type": "string",
-              "title": "Machineos",
-              "description": "Machineos",
+              "title": "Machine OS",
+              "description": "Machine os",
               "order": 8
             },
             "machineType": {
               "type": "string",
-              "title": "Machinetype",
-              "description": "Machinetype",
+              "title": "Machine Type",
+              "description": "Machine type",
               "enum": [
                 "Server",
                 "Desktop"
@@ -1627,8 +1627,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "serverGuid": {
               "type": "string",
-              "title": "Serverguid",
-              "description": "Serverguid",
+              "title": "Server GUID",
+              "description": "Server GUID",
               "order": 10
             }
           }
@@ -1639,14 +1639,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "hasFullAgents": {
               "type": "boolean",
-              "title": "Hasfullagents",
-              "description": "Hasfullagents",
+              "title": "Has Full Agents",
+              "description": "Has full agents",
               "order": 1
             },
             "hasFullRbac": {
               "type": "boolean",
-              "title": "Hasfullrbac",
-              "description": "Hasfullrbac",
+              "title": "Has Full RBAC",
+              "description": "Has full RBAC",
               "order": 2
             }
           }
@@ -1657,8 +1657,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "agentEntity": {
               "type": "array",
-              "title": "Agententity",
-              "description": "Agententity",
+              "title": "Agent Entity",
+              "description": "Agent entity",
               "items": {
                 "$ref": "#/definitions/agentEntity"
               },
@@ -1666,8 +1666,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "agentQueryStatus": {
               "$ref": "#/definitions/agentQueryStatus",
-              "title": "Agentquerystatus",
-              "description": "Agentquerystatus",
+              "title": "Agent Query Status",
+              "description": "Agent query status",
               "order": 2
             },
             "csv": {
@@ -1690,32 +1690,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentGuid": {
                   "type": "string",
-                  "title": "Agentguid",
-                  "description": "Agentguid",
+                  "title": "Agent GUID",
+                  "description": "Agent GUID",
                   "order": 1
                 },
                 "ip": {
                   "type": "string",
-                  "title": "Ip",
-                  "description": "Ip",
+                  "title": "IP",
+                  "description": "IP",
                   "order": 2
                 },
                 "isImportant": {
                   "type": "boolean",
-                  "title": "Isimportant",
-                  "description": "Isimportant",
+                  "title": "Is Important",
+                  "description": "Is important",
                   "order": 3
                 },
                 "isOnline": {
                   "type": "boolean",
-                  "title": "Isonline",
-                  "description": "Isonline",
+                  "title": "Is Online",
+                  "description": "Is online",
                   "order": 4
                 },
                 "isolateStatus": {
                   "type": "integer",
-                  "title": "Isolatestatus",
-                  "description": "Isolatestatus",
+                  "title": "ISO Late Status",
+                  "description": "ISO late status",
                   "enum": [
                     0,
                     1,
@@ -1727,26 +1727,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "machineGuid": {
                   "type": "string",
-                  "title": "Machineguid",
-                  "description": "Machineguid",
+                  "title": "Machine GUID",
+                  "description": "Machine GUID",
                   "order": 6
                 },
                 "machineName": {
                   "type": "string",
-                  "title": "Machinename",
-                  "description": "Machinename",
+                  "title": "Machine Name",
+                  "description": "Machine name",
                   "order": 7
                 },
                 "machineOS": {
                   "type": "string",
-                  "title": "Machineos",
-                  "description": "Machineos",
+                  "title": "Machine OS",
+                  "description": "Machine os",
                   "order": 8
                 },
                 "machineType": {
                   "type": "string",
-                  "title": "Machinetype",
-                  "description": "Machinetype",
+                  "title": "Machine Type",
+                  "description": "Machine type",
                   "enum": [
                     "Server",
                     "Desktop"
@@ -1755,8 +1755,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "serverGuid": {
                   "type": "string",
-                  "title": "Serverguid",
-                  "description": "Serverguid",
+                  "title": "Server GUID",
+                  "description": "Server GUID",
                   "order": 10
                 }
               }
@@ -1767,14 +1767,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "hasFullAgents": {
                   "type": "boolean",
-                  "title": "Hasfullagents",
-                  "description": "Hasfullagents",
+                  "title": "Has Full Agents",
+                  "description": "Has full agents",
                   "order": 1
                 },
                 "hasFullRbac": {
                   "type": "boolean",
-                  "title": "Hasfullrbac",
-                  "description": "Hasfullrbac",
+                  "title": "Has Full RBAC",
+                  "description": "Has full RBAC",
                   "order": 2
                 }
               }
@@ -1823,8 +1823,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "statusCode": {
               "type": "integer",
-              "title": "Statuscode",
-              "description": "Statuscode",
+              "title": "Status Code",
+              "description": "Status code",
               "order": 3
             }
           },
@@ -1835,32 +1835,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentGuid": {
                   "type": "string",
-                  "title": "Agentguid",
-                  "description": "Agentguid",
+                  "title": "Agent GUID",
+                  "description": "Agent GUID",
                   "order": 1
                 },
                 "ip": {
                   "type": "string",
-                  "title": "Ip",
-                  "description": "Ip",
+                  "title": "IP",
+                  "description": "IP",
                   "order": 2
                 },
                 "isImportant": {
                   "type": "boolean",
-                  "title": "Isimportant",
-                  "description": "Isimportant",
+                  "title": "Is Important",
+                  "description": "Is important",
                   "order": 3
                 },
                 "isOnline": {
                   "type": "boolean",
-                  "title": "Isonline",
-                  "description": "Isonline",
+                  "title": "Is Online",
+                  "description": "Is online",
                   "order": 4
                 },
                 "isolateStatus": {
                   "type": "integer",
-                  "title": "Isolatestatus",
-                  "description": "Isolatestatus",
+                  "title": "ISO Late Status",
+                  "description": "ISO late status",
                   "enum": [
                     0,
                     1,
@@ -1872,26 +1872,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "machineGuid": {
                   "type": "string",
-                  "title": "Machineguid",
-                  "description": "Machineguid",
+                  "title": "Machine GUID",
+                  "description": "Machine GUID",
                   "order": 6
                 },
                 "machineName": {
                   "type": "string",
-                  "title": "Machinename",
-                  "description": "Machinename",
+                  "title": "Machine Name",
+                  "description": "Machine name",
                   "order": 7
                 },
                 "machineOS": {
                   "type": "string",
-                  "title": "Machineos",
-                  "description": "Machineos",
+                  "title": "Machine OS",
+                  "description": "Machine os",
                   "order": 8
                 },
                 "machineType": {
                   "type": "string",
-                  "title": "Machinetype",
-                  "description": "Machinetype",
+                  "title": "Machine Type",
+                  "description": "Machine type",
                   "enum": [
                     "Server",
                     "Desktop"
@@ -1900,8 +1900,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "serverGuid": {
                   "type": "string",
-                  "title": "Serverguid",
-                  "description": "Serverguid",
+                  "title": "Server GUID",
+                  "description": "Server GUID",
                   "order": 10
                 }
               }
@@ -1912,14 +1912,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "hasFullAgents": {
                   "type": "boolean",
-                  "title": "Hasfullagents",
-                  "description": "Hasfullagents",
+                  "title": "Has Full Agents",
+                  "description": "Has full agents",
                   "order": 1
                 },
                 "hasFullRbac": {
                   "type": "boolean",
-                  "title": "Hasfullrbac",
-                  "description": "Hasfullrbac",
+                  "title": "Has Full RBAC",
+                  "description": "Has full RBAC",
                   "order": 2
                 }
               }
@@ -1930,8 +1930,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentEntity": {
                   "type": "array",
-                  "title": "Agententity",
-                  "description": "Agententity",
+                  "title": "Agent Entity",
+                  "description": "Agent entity",
                   "items": {
                     "$ref": "#/definitions/agentEntity"
                   },
@@ -1939,8 +1939,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "agentQueryStatus": {
                   "$ref": "#/definitions/agentQueryStatus",
-                  "title": "Agentquerystatus",
-                  "description": "Agentquerystatus",
+                  "title": "Agent Query Status",
+                  "description": "Agent query status",
                   "order": 2
                 },
                 "csv": {
@@ -1963,32 +1963,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentGuid": {
                       "type": "string",
-                      "title": "Agentguid",
-                      "description": "Agentguid",
+                      "title": "Agent GUID",
+                      "description": "Agent GUID",
                       "order": 1
                     },
                     "ip": {
                       "type": "string",
-                      "title": "Ip",
-                      "description": "Ip",
+                      "title": "IP",
+                      "description": "IP",
                       "order": 2
                     },
                     "isImportant": {
                       "type": "boolean",
-                      "title": "Isimportant",
-                      "description": "Isimportant",
+                      "title": "Is Important",
+                      "description": "Is important",
                       "order": 3
                     },
                     "isOnline": {
                       "type": "boolean",
-                      "title": "Isonline",
-                      "description": "Isonline",
+                      "title": "Is Online",
+                      "description": "Is online",
                       "order": 4
                     },
                     "isolateStatus": {
                       "type": "integer",
-                      "title": "Isolatestatus",
-                      "description": "Isolatestatus",
+                      "title": "ISO Late Status",
+                      "description": "ISO late status",
                       "enum": [
                         0,
                         1,
@@ -2000,26 +2000,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "machineGuid": {
                       "type": "string",
-                      "title": "Machineguid",
-                      "description": "Machineguid",
+                      "title": "Machine GUID",
+                      "description": "Machine GUID",
                       "order": 6
                     },
                     "machineName": {
                       "type": "string",
-                      "title": "Machinename",
-                      "description": "Machinename",
+                      "title": "Machine Name",
+                      "description": "Machine name",
                       "order": 7
                     },
                     "machineOS": {
                       "type": "string",
-                      "title": "Machineos",
-                      "description": "Machineos",
+                      "title": "Machine OS",
+                      "description": "Machine os",
                       "order": 8
                     },
                     "machineType": {
                       "type": "string",
-                      "title": "Machinetype",
-                      "description": "Machinetype",
+                      "title": "Machine Type",
+                      "description": "Machine type",
                       "enum": [
                         "Server",
                         "Desktop"
@@ -2028,8 +2028,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "serverGuid": {
                       "type": "string",
-                      "title": "Serverguid",
-                      "description": "Serverguid",
+                      "title": "Server GUID",
+                      "description": "Server GUID",
                       "order": 10
                     }
                   }
@@ -2040,14 +2040,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "hasFullAgents": {
                       "type": "boolean",
-                      "title": "Hasfullagents",
-                      "description": "Hasfullagents",
+                      "title": "Has Full Agents",
+                      "description": "Has full agents",
                       "order": 1
                     },
                     "hasFullRbac": {
                       "type": "boolean",
-                      "title": "Hasfullrbac",
-                      "description": "Hasfullrbac",
+                      "title": "Has Full RBAC",
+                      "description": "Has full RBAC",
                       "order": 2
                     }
                   }
@@ -2142,7 +2142,7 @@ class DownloadRcaCsvFileOutput(komand.Output):
         },
         "FeatureCtrl": {
           "$ref": "#/definitions/FeatureCtrl",
-          "title": "Featurectrl",
+          "title": "Feature CTRL",
           "description": "The Apex Central deployment model",
           "order": 2
         },
@@ -2154,13 +2154,13 @@ class DownloadRcaCsvFileOutput(komand.Output):
         },
         "PermissionCtrl": {
           "$ref": "#/definitions/PermissionCtrl",
-          "title": "Permissionctrl",
+          "title": "Permission CTRL",
           "description": "Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features",
           "order": 4
         },
         "SystemCtrl": {
           "$ref": "#/definitions/SystemCtrl",
-          "title": "Systemctrl",
+          "title": "System CTRL",
           "description": "Indicates the suspicious object distribution role of the Apex Central server",
           "order": 5
         }
@@ -2181,32 +2181,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "hasMore": {
               "type": "boolean",
-              "title": "Hasmore",
-              "description": "Hasmore",
+              "title": "Has More",
+              "description": "Has more",
               "order": 2
             },
             "lastContentId": {
               "type": "string",
-              "title": "Lastcontentid",
-              "description": "Lastcontentid",
+              "title": "Last Content ID",
+              "description": "Last content ID",
               "order": 3
             },
             "serverGuid": {
               "type": "string",
-              "title": "Serverguid",
-              "description": "Serverguid",
+              "title": "Server GUID",
+              "description": "Server GUID",
               "order": 4
             },
             "serverName": {
               "type": "string",
-              "title": "Servername",
-              "description": "Servername",
+              "title": "Server Name",
+              "description": "Server name",
               "order": 5
             },
             "taskId": {
               "type": "string",
-              "title": "Taskid",
-              "description": "Taskid",
+              "title": "Task ID",
+              "description": "Task id",
               "order": 6
             }
           },
@@ -2217,32 +2217,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentGuid": {
                   "type": "string",
-                  "title": "Agentguid",
-                  "description": "Agentguid",
+                  "title": "Agent GUID",
+                  "description": "Agent GUID",
                   "order": 1
                 },
                 "ip": {
                   "type": "string",
-                  "title": "Ip",
-                  "description": "Ip",
+                  "title": "IP",
+                  "description": "IP",
                   "order": 2
                 },
                 "isImportant": {
                   "type": "boolean",
-                  "title": "Isimportant",
-                  "description": "Isimportant",
+                  "title": "Is Important",
+                  "description": "Is important",
                   "order": 3
                 },
                 "isOnline": {
                   "type": "boolean",
-                  "title": "Isonline",
-                  "description": "Isonline",
+                  "title": "Is Online",
+                  "description": "Is online",
                   "order": 4
                 },
                 "isolateStatus": {
                   "type": "integer",
-                  "title": "Isolatestatus",
-                  "description": "Isolatestatus",
+                  "title": "ISO Late Status",
+                  "description": "ISO late status",
                   "enum": [
                     0,
                     1,
@@ -2254,26 +2254,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "machineGuid": {
                   "type": "string",
-                  "title": "Machineguid",
-                  "description": "Machineguid",
+                  "title": "Machine GUID",
+                  "description": "Machine GUID",
                   "order": 6
                 },
                 "machineName": {
                   "type": "string",
-                  "title": "Machinename",
-                  "description": "Machinename",
+                  "title": "Machine Name",
+                  "description": "Machine name",
                   "order": 7
                 },
                 "machineOS": {
                   "type": "string",
-                  "title": "Machineos",
-                  "description": "Machineos",
+                  "title": "Machine OS",
+                  "description": "Machine os",
                   "order": 8
                 },
                 "machineType": {
                   "type": "string",
-                  "title": "Machinetype",
-                  "description": "Machinetype",
+                  "title": "Machine Type",
+                  "description": "Machine type",
                   "enum": [
                     "Server",
                     "Desktop"
@@ -2282,8 +2282,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "serverGuid": {
                   "type": "string",
-                  "title": "Serverguid",
-                  "description": "Serverguid",
+                  "title": "Server GUID",
+                  "description": "Server GUID",
                   "order": 10
                 }
               }
@@ -2294,14 +2294,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "hasFullAgents": {
                   "type": "boolean",
-                  "title": "Hasfullagents",
-                  "description": "Hasfullagents",
+                  "title": "Has Full Agents",
+                  "description": "Has full agents",
                   "order": 1
                 },
                 "hasFullRbac": {
                   "type": "boolean",
-                  "title": "Hasfullrbac",
-                  "description": "Hasfullrbac",
+                  "title": "Has Full RBAC",
+                  "description": "Has full RBAC",
                   "order": 2
                 }
               }
@@ -2312,8 +2312,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentEntity": {
                   "type": "array",
-                  "title": "Agententity",
-                  "description": "Agententity",
+                  "title": "Agent Entity",
+                  "description": "Agent entity",
                   "items": {
                     "$ref": "#/definitions/agentEntity"
                   },
@@ -2321,8 +2321,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "agentQueryStatus": {
                   "$ref": "#/definitions/agentQueryStatus",
-                  "title": "Agentquerystatus",
-                  "description": "Agentquerystatus",
+                  "title": "Agent Query Status",
+                  "description": "Agent query status",
                   "order": 2
                 },
                 "csv": {
@@ -2345,32 +2345,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentGuid": {
                       "type": "string",
-                      "title": "Agentguid",
-                      "description": "Agentguid",
+                      "title": "Agent GUID",
+                      "description": "Agent GUID",
                       "order": 1
                     },
                     "ip": {
                       "type": "string",
-                      "title": "Ip",
-                      "description": "Ip",
+                      "title": "IP",
+                      "description": "IP",
                       "order": 2
                     },
                     "isImportant": {
                       "type": "boolean",
-                      "title": "Isimportant",
-                      "description": "Isimportant",
+                      "title": "Is Important",
+                      "description": "Is important",
                       "order": 3
                     },
                     "isOnline": {
                       "type": "boolean",
-                      "title": "Isonline",
-                      "description": "Isonline",
+                      "title": "Is Online",
+                      "description": "Is online",
                       "order": 4
                     },
                     "isolateStatus": {
                       "type": "integer",
-                      "title": "Isolatestatus",
-                      "description": "Isolatestatus",
+                      "title": "ISO Late Status",
+                      "description": "ISO late status",
                       "enum": [
                         0,
                         1,
@@ -2382,26 +2382,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "machineGuid": {
                       "type": "string",
-                      "title": "Machineguid",
-                      "description": "Machineguid",
+                      "title": "Machine GUID",
+                      "description": "Machine GUID",
                       "order": 6
                     },
                     "machineName": {
                       "type": "string",
-                      "title": "Machinename",
-                      "description": "Machinename",
+                      "title": "Machine Name",
+                      "description": "Machine name",
                       "order": 7
                     },
                     "machineOS": {
                       "type": "string",
-                      "title": "Machineos",
-                      "description": "Machineos",
+                      "title": "Machine OS",
+                      "description": "Machine os",
                       "order": 8
                     },
                     "machineType": {
                       "type": "string",
-                      "title": "Machinetype",
-                      "description": "Machinetype",
+                      "title": "Machine Type",
+                      "description": "Machine type",
                       "enum": [
                         "Server",
                         "Desktop"
@@ -2410,8 +2410,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "serverGuid": {
                       "type": "string",
-                      "title": "Serverguid",
-                      "description": "Serverguid",
+                      "title": "Server GUID",
+                      "description": "Server GUID",
                       "order": 10
                     }
                   }
@@ -2422,14 +2422,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "hasFullAgents": {
                       "type": "boolean",
-                      "title": "Hasfullagents",
-                      "description": "Hasfullagents",
+                      "title": "Has Full Agents",
+                      "description": "Has full agents",
                       "order": 1
                     },
                     "hasFullRbac": {
                       "type": "boolean",
-                      "title": "Hasfullrbac",
-                      "description": "Hasfullrbac",
+                      "title": "Has Full RBAC",
+                      "description": "Has full RBAC",
                       "order": 2
                     }
                   }
@@ -2478,8 +2478,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "statusCode": {
                   "type": "integer",
-                  "title": "Statuscode",
-                  "description": "Statuscode",
+                  "title": "Status Code",
+                  "description": "Status code",
                   "order": 3
                 }
               },
@@ -2490,32 +2490,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentGuid": {
                       "type": "string",
-                      "title": "Agentguid",
-                      "description": "Agentguid",
+                      "title": "Agent GUID",
+                      "description": "Agent GUID",
                       "order": 1
                     },
                     "ip": {
                       "type": "string",
-                      "title": "Ip",
-                      "description": "Ip",
+                      "title": "IP",
+                      "description": "IP",
                       "order": 2
                     },
                     "isImportant": {
                       "type": "boolean",
-                      "title": "Isimportant",
-                      "description": "Isimportant",
+                      "title": "Is Important",
+                      "description": "Is important",
                       "order": 3
                     },
                     "isOnline": {
                       "type": "boolean",
-                      "title": "Isonline",
-                      "description": "Isonline",
+                      "title": "Is Online",
+                      "description": "Is online",
                       "order": 4
                     },
                     "isolateStatus": {
                       "type": "integer",
-                      "title": "Isolatestatus",
-                      "description": "Isolatestatus",
+                      "title": "ISO Late Status",
+                      "description": "ISO late status",
                       "enum": [
                         0,
                         1,
@@ -2527,26 +2527,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "machineGuid": {
                       "type": "string",
-                      "title": "Machineguid",
-                      "description": "Machineguid",
+                      "title": "Machine GUID",
+                      "description": "Machine GUID",
                       "order": 6
                     },
                     "machineName": {
                       "type": "string",
-                      "title": "Machinename",
-                      "description": "Machinename",
+                      "title": "Machine Name",
+                      "description": "Machine name",
                       "order": 7
                     },
                     "machineOS": {
                       "type": "string",
-                      "title": "Machineos",
-                      "description": "Machineos",
+                      "title": "Machine OS",
+                      "description": "Machine os",
                       "order": 8
                     },
                     "machineType": {
                       "type": "string",
-                      "title": "Machinetype",
-                      "description": "Machinetype",
+                      "title": "Machine Type",
+                      "description": "Machine type",
                       "enum": [
                         "Server",
                         "Desktop"
@@ -2555,8 +2555,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "serverGuid": {
                       "type": "string",
-                      "title": "Serverguid",
-                      "description": "Serverguid",
+                      "title": "Server GUID",
+                      "description": "Server GUID",
                       "order": 10
                     }
                   }
@@ -2567,14 +2567,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "hasFullAgents": {
                       "type": "boolean",
-                      "title": "Hasfullagents",
-                      "description": "Hasfullagents",
+                      "title": "Has Full Agents",
+                      "description": "Has full agents",
                       "order": 1
                     },
                     "hasFullRbac": {
                       "type": "boolean",
-                      "title": "Hasfullrbac",
-                      "description": "Hasfullrbac",
+                      "title": "Has Full RBAC",
+                      "description": "Has full RBAC",
                       "order": 2
                     }
                   }
@@ -2585,8 +2585,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentEntity": {
                       "type": "array",
-                      "title": "Agententity",
-                      "description": "Agententity",
+                      "title": "Agent Entity",
+                      "description": "Agent entity",
                       "items": {
                         "$ref": "#/definitions/agentEntity"
                       },
@@ -2594,8 +2594,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "agentQueryStatus": {
                       "$ref": "#/definitions/agentQueryStatus",
-                      "title": "Agentquerystatus",
-                      "description": "Agentquerystatus",
+                      "title": "Agent Query Status",
+                      "description": "Agent query status",
                       "order": 2
                     },
                     "csv": {
@@ -2618,32 +2618,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "properties": {
                         "agentGuid": {
                           "type": "string",
-                          "title": "Agentguid",
-                          "description": "Agentguid",
+                          "title": "Agent GUID",
+                          "description": "Agent GUID",
                           "order": 1
                         },
                         "ip": {
                           "type": "string",
-                          "title": "Ip",
-                          "description": "Ip",
+                          "title": "IP",
+                          "description": "IP",
                           "order": 2
                         },
                         "isImportant": {
                           "type": "boolean",
-                          "title": "Isimportant",
-                          "description": "Isimportant",
+                          "title": "Is Important",
+                          "description": "Is important",
                           "order": 3
                         },
                         "isOnline": {
                           "type": "boolean",
-                          "title": "Isonline",
-                          "description": "Isonline",
+                          "title": "Is Online",
+                          "description": "Is online",
                           "order": 4
                         },
                         "isolateStatus": {
                           "type": "integer",
-                          "title": "Isolatestatus",
-                          "description": "Isolatestatus",
+                          "title": "ISO Late Status",
+                          "description": "ISO late status",
                           "enum": [
                             0,
                             1,
@@ -2655,26 +2655,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                         },
                         "machineGuid": {
                           "type": "string",
-                          "title": "Machineguid",
-                          "description": "Machineguid",
+                          "title": "Machine GUID",
+                          "description": "Machine GUID",
                           "order": 6
                         },
                         "machineName": {
                           "type": "string",
-                          "title": "Machinename",
-                          "description": "Machinename",
+                          "title": "Machine Name",
+                          "description": "Machine name",
                           "order": 7
                         },
                         "machineOS": {
                           "type": "string",
-                          "title": "Machineos",
-                          "description": "Machineos",
+                          "title": "Machine OS",
+                          "description": "Machine os",
                           "order": 8
                         },
                         "machineType": {
                           "type": "string",
-                          "title": "Machinetype",
-                          "description": "Machinetype",
+                          "title": "Machine Type",
+                          "description": "Machine type",
                           "enum": [
                             "Server",
                             "Desktop"
@@ -2683,8 +2683,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                         },
                         "serverGuid": {
                           "type": "string",
-                          "title": "Serverguid",
-                          "description": "Serverguid",
+                          "title": "Server GUID",
+                          "description": "Server GUID",
                           "order": 10
                         }
                       }
@@ -2695,14 +2695,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "properties": {
                         "hasFullAgents": {
                           "type": "boolean",
-                          "title": "Hasfullagents",
-                          "description": "Hasfullagents",
+                          "title": "Has Full Agents",
+                          "description": "Has full agents",
                           "order": 1
                         },
                         "hasFullRbac": {
                           "type": "boolean",
-                          "title": "Hasfullrbac",
-                          "description": "Hasfullrbac",
+                          "title": "Has Full RBAC",
+                          "description": "Has full RBAC",
                           "order": 2
                         }
                       }
@@ -2849,8 +2849,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "TmcmSoDist_Role": {
               "type": "string",
-              "title": "Tmcmsodist Role",
-              "description": "Tmcmsodist role",
+              "title": "Tmcm So Dist Role",
+              "description": "Tmcm so dist role",
               "enum": [
                 "none",
                 "hub",
@@ -2866,32 +2866,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "agentGuid": {
               "type": "string",
-              "title": "Agentguid",
-              "description": "Agentguid",
+              "title": "Agent GUID",
+              "description": "Agent GUID",
               "order": 1
             },
             "ip": {
               "type": "string",
-              "title": "Ip",
-              "description": "Ip",
+              "title": "IP",
+              "description": "IP",
               "order": 2
             },
             "isImportant": {
               "type": "boolean",
-              "title": "Isimportant",
-              "description": "Isimportant",
+              "title": "Is Important",
+              "description": "Is important",
               "order": 3
             },
             "isOnline": {
               "type": "boolean",
-              "title": "Isonline",
-              "description": "Isonline",
+              "title": "Is Online",
+              "description": "Is online",
               "order": 4
             },
             "isolateStatus": {
               "type": "integer",
-              "title": "Isolatestatus",
-              "description": "Isolatestatus",
+              "title": "ISO Late Status",
+              "description": "ISO late status",
               "enum": [
                 0,
                 1,
@@ -2903,26 +2903,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "machineGuid": {
               "type": "string",
-              "title": "Machineguid",
-              "description": "Machineguid",
+              "title": "Machine GUID",
+              "description": "Machine GUID",
               "order": 6
             },
             "machineName": {
               "type": "string",
-              "title": "Machinename",
-              "description": "Machinename",
+              "title": "Machine Name",
+              "description": "Machine name",
               "order": 7
             },
             "machineOS": {
               "type": "string",
-              "title": "Machineos",
-              "description": "Machineos",
+              "title": "Machine OS",
+              "description": "Machine os",
               "order": 8
             },
             "machineType": {
               "type": "string",
-              "title": "Machinetype",
-              "description": "Machinetype",
+              "title": "Machine Type",
+              "description": "Machine type",
               "enum": [
                 "Server",
                 "Desktop"
@@ -2931,8 +2931,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "serverGuid": {
               "type": "string",
-              "title": "Serverguid",
-              "description": "Serverguid",
+              "title": "Server GUID",
+              "description": "Server GUID",
               "order": 10
             }
           }
@@ -2943,14 +2943,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "hasFullAgents": {
               "type": "boolean",
-              "title": "Hasfullagents",
-              "description": "Hasfullagents",
+              "title": "Has Full Agents",
+              "description": "Has full agents",
               "order": 1
             },
             "hasFullRbac": {
               "type": "boolean",
-              "title": "Hasfullrbac",
-              "description": "Hasfullrbac",
+              "title": "Has Full RBAC",
+              "description": "Has full RBAC",
               "order": 2
             }
           }
@@ -2967,7 +2967,7 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "CodeType": {
               "type": "integer",
-              "title": "Codetype",
+              "title": "Code Type",
               "description": "Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code",
               "enum": [
                 1,
@@ -3011,32 +3011,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "hasMore": {
                   "type": "boolean",
-                  "title": "Hasmore",
-                  "description": "Hasmore",
+                  "title": "Has More",
+                  "description": "Has more",
                   "order": 2
                 },
                 "lastContentId": {
                   "type": "string",
-                  "title": "Lastcontentid",
-                  "description": "Lastcontentid",
+                  "title": "Last Content ID",
+                  "description": "Last content ID",
                   "order": 3
                 },
                 "serverGuid": {
                   "type": "string",
-                  "title": "Serverguid",
-                  "description": "Serverguid",
+                  "title": "Server GUID",
+                  "description": "Server GUID",
                   "order": 4
                 },
                 "serverName": {
                   "type": "string",
-                  "title": "Servername",
-                  "description": "Servername",
+                  "title": "Server Name",
+                  "description": "Server name",
                   "order": 5
                 },
                 "taskId": {
                   "type": "string",
-                  "title": "Taskid",
-                  "description": "Taskid",
+                  "title": "Task ID",
+                  "description": "Task id",
                   "order": 6
                 }
               },
@@ -3047,32 +3047,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentGuid": {
                       "type": "string",
-                      "title": "Agentguid",
-                      "description": "Agentguid",
+                      "title": "Agent GUID",
+                      "description": "Agent GUID",
                       "order": 1
                     },
                     "ip": {
                       "type": "string",
-                      "title": "Ip",
-                      "description": "Ip",
+                      "title": "IP",
+                      "description": "IP",
                       "order": 2
                     },
                     "isImportant": {
                       "type": "boolean",
-                      "title": "Isimportant",
-                      "description": "Isimportant",
+                      "title": "Is Important",
+                      "description": "Is important",
                       "order": 3
                     },
                     "isOnline": {
                       "type": "boolean",
-                      "title": "Isonline",
-                      "description": "Isonline",
+                      "title": "Is Online",
+                      "description": "Is online",
                       "order": 4
                     },
                     "isolateStatus": {
                       "type": "integer",
-                      "title": "Isolatestatus",
-                      "description": "Isolatestatus",
+                      "title": "ISO Late Status",
+                      "description": "ISO late status",
                       "enum": [
                         0,
                         1,
@@ -3084,26 +3084,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "machineGuid": {
                       "type": "string",
-                      "title": "Machineguid",
-                      "description": "Machineguid",
+                      "title": "Machine GUID",
+                      "description": "Machine GUID",
                       "order": 6
                     },
                     "machineName": {
                       "type": "string",
-                      "title": "Machinename",
-                      "description": "Machinename",
+                      "title": "Machine Name",
+                      "description": "Machine name",
                       "order": 7
                     },
                     "machineOS": {
                       "type": "string",
-                      "title": "Machineos",
-                      "description": "Machineos",
+                      "title": "Machine OS",
+                      "description": "Machine os",
                       "order": 8
                     },
                     "machineType": {
                       "type": "string",
-                      "title": "Machinetype",
-                      "description": "Machinetype",
+                      "title": "Machine Type",
+                      "description": "Machine type",
                       "enum": [
                         "Server",
                         "Desktop"
@@ -3112,8 +3112,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "serverGuid": {
                       "type": "string",
-                      "title": "Serverguid",
-                      "description": "Serverguid",
+                      "title": "Server GUID",
+                      "description": "Server GUID",
                       "order": 10
                     }
                   }
@@ -3124,14 +3124,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "hasFullAgents": {
                       "type": "boolean",
-                      "title": "Hasfullagents",
-                      "description": "Hasfullagents",
+                      "title": "Has Full Agents",
+                      "description": "Has full agents",
                       "order": 1
                     },
                     "hasFullRbac": {
                       "type": "boolean",
-                      "title": "Hasfullrbac",
-                      "description": "Hasfullrbac",
+                      "title": "Has Full RBAC",
+                      "description": "Has full RBAC",
                       "order": 2
                     }
                   }
@@ -3142,8 +3142,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentEntity": {
                       "type": "array",
-                      "title": "Agententity",
-                      "description": "Agententity",
+                      "title": "Agent Entity",
+                      "description": "Agent entity",
                       "items": {
                         "$ref": "#/definitions/agentEntity"
                       },
@@ -3151,8 +3151,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "agentQueryStatus": {
                       "$ref": "#/definitions/agentQueryStatus",
-                      "title": "Agentquerystatus",
-                      "description": "Agentquerystatus",
+                      "title": "Agent Query Status",
+                      "description": "Agent query status",
                       "order": 2
                     },
                     "csv": {
@@ -3175,32 +3175,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "properties": {
                         "agentGuid": {
                           "type": "string",
-                          "title": "Agentguid",
-                          "description": "Agentguid",
+                          "title": "Agent GUID",
+                          "description": "Agent GUID",
                           "order": 1
                         },
                         "ip": {
                           "type": "string",
-                          "title": "Ip",
-                          "description": "Ip",
+                          "title": "IP",
+                          "description": "IP",
                           "order": 2
                         },
                         "isImportant": {
                           "type": "boolean",
-                          "title": "Isimportant",
-                          "description": "Isimportant",
+                          "title": "Is Important",
+                          "description": "Is important",
                           "order": 3
                         },
                         "isOnline": {
                           "type": "boolean",
-                          "title": "Isonline",
-                          "description": "Isonline",
+                          "title": "Is Online",
+                          "description": "Is online",
                           "order": 4
                         },
                         "isolateStatus": {
                           "type": "integer",
-                          "title": "Isolatestatus",
-                          "description": "Isolatestatus",
+                          "title": "ISO Late Status",
+                          "description": "ISO late status",
                           "enum": [
                             0,
                             1,
@@ -3212,26 +3212,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                         },
                         "machineGuid": {
                           "type": "string",
-                          "title": "Machineguid",
-                          "description": "Machineguid",
+                          "title": "Machine GUID",
+                          "description": "Machine GUID",
                           "order": 6
                         },
                         "machineName": {
                           "type": "string",
-                          "title": "Machinename",
-                          "description": "Machinename",
+                          "title": "Machine Name",
+                          "description": "Machine name",
                           "order": 7
                         },
                         "machineOS": {
                           "type": "string",
-                          "title": "Machineos",
-                          "description": "Machineos",
+                          "title": "Machine OS",
+                          "description": "Machine os",
                           "order": 8
                         },
                         "machineType": {
                           "type": "string",
-                          "title": "Machinetype",
-                          "description": "Machinetype",
+                          "title": "Machine Type",
+                          "description": "Machine type",
                           "enum": [
                             "Server",
                             "Desktop"
@@ -3240,8 +3240,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                         },
                         "serverGuid": {
                           "type": "string",
-                          "title": "Serverguid",
-                          "description": "Serverguid",
+                          "title": "Server GUID",
+                          "description": "Server GUID",
                           "order": 10
                         }
                       }
@@ -3252,14 +3252,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "properties": {
                         "hasFullAgents": {
                           "type": "boolean",
-                          "title": "Hasfullagents",
-                          "description": "Hasfullagents",
+                          "title": "Has Full Agents",
+                          "description": "Has full agents",
                           "order": 1
                         },
                         "hasFullRbac": {
                           "type": "boolean",
-                          "title": "Hasfullrbac",
-                          "description": "Hasfullrbac",
+                          "title": "Has Full RBAC",
+                          "description": "Has full RBAC",
                           "order": 2
                         }
                       }
@@ -3308,8 +3308,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "statusCode": {
                       "type": "integer",
-                      "title": "Statuscode",
-                      "description": "Statuscode",
+                      "title": "Status Code",
+                      "description": "Status code",
                       "order": 3
                     }
                   },
@@ -3320,32 +3320,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "properties": {
                         "agentGuid": {
                           "type": "string",
-                          "title": "Agentguid",
-                          "description": "Agentguid",
+                          "title": "Agent GUID",
+                          "description": "Agent GUID",
                           "order": 1
                         },
                         "ip": {
                           "type": "string",
-                          "title": "Ip",
-                          "description": "Ip",
+                          "title": "IP",
+                          "description": "IP",
                           "order": 2
                         },
                         "isImportant": {
                           "type": "boolean",
-                          "title": "Isimportant",
-                          "description": "Isimportant",
+                          "title": "Is Important",
+                          "description": "Is important",
                           "order": 3
                         },
                         "isOnline": {
                           "type": "boolean",
-                          "title": "Isonline",
-                          "description": "Isonline",
+                          "title": "Is Online",
+                          "description": "Is online",
                           "order": 4
                         },
                         "isolateStatus": {
                           "type": "integer",
-                          "title": "Isolatestatus",
-                          "description": "Isolatestatus",
+                          "title": "ISO Late Status",
+                          "description": "ISO late status",
                           "enum": [
                             0,
                             1,
@@ -3357,26 +3357,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                         },
                         "machineGuid": {
                           "type": "string",
-                          "title": "Machineguid",
-                          "description": "Machineguid",
+                          "title": "Machine GUID",
+                          "description": "Machine GUID",
                           "order": 6
                         },
                         "machineName": {
                           "type": "string",
-                          "title": "Machinename",
-                          "description": "Machinename",
+                          "title": "Machine Name",
+                          "description": "Machine name",
                           "order": 7
                         },
                         "machineOS": {
                           "type": "string",
-                          "title": "Machineos",
-                          "description": "Machineos",
+                          "title": "Machine OS",
+                          "description": "Machine os",
                           "order": 8
                         },
                         "machineType": {
                           "type": "string",
-                          "title": "Machinetype",
-                          "description": "Machinetype",
+                          "title": "Machine Type",
+                          "description": "Machine type",
                           "enum": [
                             "Server",
                             "Desktop"
@@ -3385,8 +3385,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                         },
                         "serverGuid": {
                           "type": "string",
-                          "title": "Serverguid",
-                          "description": "Serverguid",
+                          "title": "Server GUID",
+                          "description": "Server GUID",
                           "order": 10
                         }
                       }
@@ -3397,14 +3397,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "properties": {
                         "hasFullAgents": {
                           "type": "boolean",
-                          "title": "Hasfullagents",
-                          "description": "Hasfullagents",
+                          "title": "Has Full Agents",
+                          "description": "Has full agents",
                           "order": 1
                         },
                         "hasFullRbac": {
                           "type": "boolean",
-                          "title": "Hasfullrbac",
-                          "description": "Hasfullrbac",
+                          "title": "Has Full RBAC",
+                          "description": "Has full RBAC",
                           "order": 2
                         }
                       }
@@ -3415,8 +3415,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "properties": {
                         "agentEntity": {
                           "type": "array",
-                          "title": "Agententity",
-                          "description": "Agententity",
+                          "title": "Agent Entity",
+                          "description": "Agent entity",
                           "items": {
                             "$ref": "#/definitions/agentEntity"
                           },
@@ -3424,8 +3424,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                         },
                         "agentQueryStatus": {
                           "$ref": "#/definitions/agentQueryStatus",
-                          "title": "Agentquerystatus",
-                          "description": "Agentquerystatus",
+                          "title": "Agent Query Status",
+                          "description": "Agent query status",
                           "order": 2
                         },
                         "csv": {
@@ -3448,32 +3448,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "properties": {
                             "agentGuid": {
                               "type": "string",
-                              "title": "Agentguid",
-                              "description": "Agentguid",
+                              "title": "Agent GUID",
+                              "description": "Agent GUID",
                               "order": 1
                             },
                             "ip": {
                               "type": "string",
-                              "title": "Ip",
-                              "description": "Ip",
+                              "title": "IP",
+                              "description": "IP",
                               "order": 2
                             },
                             "isImportant": {
                               "type": "boolean",
-                              "title": "Isimportant",
-                              "description": "Isimportant",
+                              "title": "Is Important",
+                              "description": "Is important",
                               "order": 3
                             },
                             "isOnline": {
                               "type": "boolean",
-                              "title": "Isonline",
-                              "description": "Isonline",
+                              "title": "Is Online",
+                              "description": "Is online",
                               "order": 4
                             },
                             "isolateStatus": {
                               "type": "integer",
-                              "title": "Isolatestatus",
-                              "description": "Isolatestatus",
+                              "title": "ISO Late Status",
+                              "description": "ISO late status",
                               "enum": [
                                 0,
                                 1,
@@ -3485,26 +3485,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                             },
                             "machineGuid": {
                               "type": "string",
-                              "title": "Machineguid",
-                              "description": "Machineguid",
+                              "title": "Machine GUID",
+                              "description": "Machine GUID",
                               "order": 6
                             },
                             "machineName": {
                               "type": "string",
-                              "title": "Machinename",
-                              "description": "Machinename",
+                              "title": "Machine Name",
+                              "description": "Machine name",
                               "order": 7
                             },
                             "machineOS": {
                               "type": "string",
-                              "title": "Machineos",
-                              "description": "Machineos",
+                              "title": "Machine OS",
+                              "description": "Machine os",
                               "order": 8
                             },
                             "machineType": {
                               "type": "string",
-                              "title": "Machinetype",
-                              "description": "Machinetype",
+                              "title": "Machine Type",
+                              "description": "Machine type",
                               "enum": [
                                 "Server",
                                 "Desktop"
@@ -3513,8 +3513,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                             },
                             "serverGuid": {
                               "type": "string",
-                              "title": "Serverguid",
-                              "description": "Serverguid",
+                              "title": "Server GUID",
+                              "description": "Server GUID",
                               "order": 10
                             }
                           }
@@ -3525,14 +3525,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "properties": {
                             "hasFullAgents": {
                               "type": "boolean",
-                              "title": "Hasfullagents",
-                              "description": "Hasfullagents",
+                              "title": "Has Full Agents",
+                              "description": "Has full agents",
                               "order": 1
                             },
                             "hasFullRbac": {
                               "type": "boolean",
-                              "title": "Hasfullrbac",
-                              "description": "Hasfullrbac",
+                              "title": "Has Full RBAC",
+                              "description": "Has full RBAC",
                               "order": 2
                             }
                           }
@@ -3621,32 +3621,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentGuid": {
                   "type": "string",
-                  "title": "Agentguid",
-                  "description": "Agentguid",
+                  "title": "Agent GUID",
+                  "description": "Agent GUID",
                   "order": 1
                 },
                 "ip": {
                   "type": "string",
-                  "title": "Ip",
-                  "description": "Ip",
+                  "title": "IP",
+                  "description": "IP",
                   "order": 2
                 },
                 "isImportant": {
                   "type": "boolean",
-                  "title": "Isimportant",
-                  "description": "Isimportant",
+                  "title": "Is Important",
+                  "description": "Is important",
                   "order": 3
                 },
                 "isOnline": {
                   "type": "boolean",
-                  "title": "Isonline",
-                  "description": "Isonline",
+                  "title": "Is Online",
+                  "description": "Is online",
                   "order": 4
                 },
                 "isolateStatus": {
                   "type": "integer",
-                  "title": "Isolatestatus",
-                  "description": "Isolatestatus",
+                  "title": "ISO Late Status",
+                  "description": "ISO late status",
                   "enum": [
                     0,
                     1,
@@ -3658,26 +3658,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "machineGuid": {
                   "type": "string",
-                  "title": "Machineguid",
-                  "description": "Machineguid",
+                  "title": "Machine GUID",
+                  "description": "Machine GUID",
                   "order": 6
                 },
                 "machineName": {
                   "type": "string",
-                  "title": "Machinename",
-                  "description": "Machinename",
+                  "title": "Machine Name",
+                  "description": "Machine name",
                   "order": 7
                 },
                 "machineOS": {
                   "type": "string",
-                  "title": "Machineos",
-                  "description": "Machineos",
+                  "title": "Machine OS",
+                  "description": "Machine os",
                   "order": 8
                 },
                 "machineType": {
                   "type": "string",
-                  "title": "Machinetype",
-                  "description": "Machinetype",
+                  "title": "Machine Type",
+                  "description": "Machine type",
                   "enum": [
                     "Server",
                     "Desktop"
@@ -3686,8 +3686,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "serverGuid": {
                   "type": "string",
-                  "title": "Serverguid",
-                  "description": "Serverguid",
+                  "title": "Server GUID",
+                  "description": "Server GUID",
                   "order": 10
                 }
               }
@@ -3698,14 +3698,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "hasFullAgents": {
                   "type": "boolean",
-                  "title": "Hasfullagents",
-                  "description": "Hasfullagents",
+                  "title": "Has Full Agents",
+                  "description": "Has full agents",
                   "order": 1
                 },
                 "hasFullRbac": {
                   "type": "boolean",
-                  "title": "Hasfullrbac",
-                  "description": "Hasfullrbac",
+                  "title": "Has Full RBAC",
+                  "description": "Has full RBAC",
                   "order": 2
                 }
               }
@@ -3716,8 +3716,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentEntity": {
                   "type": "array",
-                  "title": "Agententity",
-                  "description": "Agententity",
+                  "title": "Agent Entity",
+                  "description": "Agent entity",
                   "items": {
                     "$ref": "#/definitions/agentEntity"
                   },
@@ -3725,8 +3725,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "agentQueryStatus": {
                   "$ref": "#/definitions/agentQueryStatus",
-                  "title": "Agentquerystatus",
-                  "description": "Agentquerystatus",
+                  "title": "Agent Query Status",
+                  "description": "Agent query status",
                   "order": 2
                 },
                 "csv": {
@@ -3749,32 +3749,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentGuid": {
                       "type": "string",
-                      "title": "Agentguid",
-                      "description": "Agentguid",
+                      "title": "Agent GUID",
+                      "description": "Agent GUID",
                       "order": 1
                     },
                     "ip": {
                       "type": "string",
-                      "title": "Ip",
-                      "description": "Ip",
+                      "title": "IP",
+                      "description": "IP",
                       "order": 2
                     },
                     "isImportant": {
                       "type": "boolean",
-                      "title": "Isimportant",
-                      "description": "Isimportant",
+                      "title": "Is Important",
+                      "description": "Is important",
                       "order": 3
                     },
                     "isOnline": {
                       "type": "boolean",
-                      "title": "Isonline",
-                      "description": "Isonline",
+                      "title": "Is Online",
+                      "description": "Is online",
                       "order": 4
                     },
                     "isolateStatus": {
                       "type": "integer",
-                      "title": "Isolatestatus",
-                      "description": "Isolatestatus",
+                      "title": "ISO Late Status",
+                      "description": "ISO late status",
                       "enum": [
                         0,
                         1,
@@ -3786,26 +3786,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "machineGuid": {
                       "type": "string",
-                      "title": "Machineguid",
-                      "description": "Machineguid",
+                      "title": "Machine GUID",
+                      "description": "Machine GUID",
                       "order": 6
                     },
                     "machineName": {
                       "type": "string",
-                      "title": "Machinename",
-                      "description": "Machinename",
+                      "title": "Machine Name",
+                      "description": "Machine name",
                       "order": 7
                     },
                     "machineOS": {
                       "type": "string",
-                      "title": "Machineos",
-                      "description": "Machineos",
+                      "title": "Machine OS",
+                      "description": "Machine os",
                       "order": 8
                     },
                     "machineType": {
                       "type": "string",
-                      "title": "Machinetype",
-                      "description": "Machinetype",
+                      "title": "Machine Type",
+                      "description": "Machine type",
                       "enum": [
                         "Server",
                         "Desktop"
@@ -3814,8 +3814,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "serverGuid": {
                       "type": "string",
-                      "title": "Serverguid",
-                      "description": "Serverguid",
+                      "title": "Server GUID",
+                      "description": "Server GUID",
                       "order": 10
                     }
                   }
@@ -3826,14 +3826,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "hasFullAgents": {
                       "type": "boolean",
-                      "title": "Hasfullagents",
-                      "description": "Hasfullagents",
+                      "title": "Has Full Agents",
+                      "description": "Has full agents",
                       "order": 1
                     },
                     "hasFullRbac": {
                       "type": "boolean",
-                      "title": "Hasfullrbac",
-                      "description": "Hasfullrbac",
+                      "title": "Has Full RBAC",
+                      "description": "Has full RBAC",
                       "order": 2
                     }
                   }
@@ -3882,8 +3882,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "statusCode": {
                   "type": "integer",
-                  "title": "Statuscode",
-                  "description": "Statuscode",
+                  "title": "Status Code",
+                  "description": "Status code",
                   "order": 3
                 }
               },
@@ -3894,32 +3894,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentGuid": {
                       "type": "string",
-                      "title": "Agentguid",
-                      "description": "Agentguid",
+                      "title": "Agent GUID",
+                      "description": "Agent GUID",
                       "order": 1
                     },
                     "ip": {
                       "type": "string",
-                      "title": "Ip",
-                      "description": "Ip",
+                      "title": "IP",
+                      "description": "IP",
                       "order": 2
                     },
                     "isImportant": {
                       "type": "boolean",
-                      "title": "Isimportant",
-                      "description": "Isimportant",
+                      "title": "Is Important",
+                      "description": "Is important",
                       "order": 3
                     },
                     "isOnline": {
                       "type": "boolean",
-                      "title": "Isonline",
-                      "description": "Isonline",
+                      "title": "Is Online",
+                      "description": "Is online",
                       "order": 4
                     },
                     "isolateStatus": {
                       "type": "integer",
-                      "title": "Isolatestatus",
-                      "description": "Isolatestatus",
+                      "title": "ISO Late Status",
+                      "description": "ISO late status",
                       "enum": [
                         0,
                         1,
@@ -3931,26 +3931,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "machineGuid": {
                       "type": "string",
-                      "title": "Machineguid",
-                      "description": "Machineguid",
+                      "title": "Machine GUID",
+                      "description": "Machine GUID",
                       "order": 6
                     },
                     "machineName": {
                       "type": "string",
-                      "title": "Machinename",
-                      "description": "Machinename",
+                      "title": "Machine Name",
+                      "description": "Machine name",
                       "order": 7
                     },
                     "machineOS": {
                       "type": "string",
-                      "title": "Machineos",
-                      "description": "Machineos",
+                      "title": "Machine OS",
+                      "description": "Machine os",
                       "order": 8
                     },
                     "machineType": {
                       "type": "string",
-                      "title": "Machinetype",
-                      "description": "Machinetype",
+                      "title": "Machine Type",
+                      "description": "Machine type",
                       "enum": [
                         "Server",
                         "Desktop"
@@ -3959,8 +3959,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "serverGuid": {
                       "type": "string",
-                      "title": "Serverguid",
-                      "description": "Serverguid",
+                      "title": "Server GUID",
+                      "description": "Server GUID",
                       "order": 10
                     }
                   }
@@ -3971,14 +3971,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "hasFullAgents": {
                       "type": "boolean",
-                      "title": "Hasfullagents",
-                      "description": "Hasfullagents",
+                      "title": "Has Full Agents",
+                      "description": "Has full agents",
                       "order": 1
                     },
                     "hasFullRbac": {
                       "type": "boolean",
-                      "title": "Hasfullrbac",
-                      "description": "Hasfullrbac",
+                      "title": "Has Full RBAC",
+                      "description": "Has full RBAC",
                       "order": 2
                     }
                   }
@@ -3989,8 +3989,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentEntity": {
                       "type": "array",
-                      "title": "Agententity",
-                      "description": "Agententity",
+                      "title": "Agent Entity",
+                      "description": "Agent entity",
                       "items": {
                         "$ref": "#/definitions/agentEntity"
                       },
@@ -3998,8 +3998,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "agentQueryStatus": {
                       "$ref": "#/definitions/agentQueryStatus",
-                      "title": "Agentquerystatus",
-                      "description": "Agentquerystatus",
+                      "title": "Agent Query Status",
+                      "description": "Agent query status",
                       "order": 2
                     },
                     "csv": {
@@ -4022,32 +4022,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "properties": {
                         "agentGuid": {
                           "type": "string",
-                          "title": "Agentguid",
-                          "description": "Agentguid",
+                          "title": "Agent GUID",
+                          "description": "Agent GUID",
                           "order": 1
                         },
                         "ip": {
                           "type": "string",
-                          "title": "Ip",
-                          "description": "Ip",
+                          "title": "IP",
+                          "description": "IP",
                           "order": 2
                         },
                         "isImportant": {
                           "type": "boolean",
-                          "title": "Isimportant",
-                          "description": "Isimportant",
+                          "title": "Is Important",
+                          "description": "Is important",
                           "order": 3
                         },
                         "isOnline": {
                           "type": "boolean",
-                          "title": "Isonline",
-                          "description": "Isonline",
+                          "title": "Is Online",
+                          "description": "Is online",
                           "order": 4
                         },
                         "isolateStatus": {
                           "type": "integer",
-                          "title": "Isolatestatus",
-                          "description": "Isolatestatus",
+                          "title": "ISO Late Status",
+                          "description": "ISO late status",
                           "enum": [
                             0,
                             1,
@@ -4059,26 +4059,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                         },
                         "machineGuid": {
                           "type": "string",
-                          "title": "Machineguid",
-                          "description": "Machineguid",
+                          "title": "Machine GUID",
+                          "description": "Machine GUID",
                           "order": 6
                         },
                         "machineName": {
                           "type": "string",
-                          "title": "Machinename",
-                          "description": "Machinename",
+                          "title": "Machine Name",
+                          "description": "Machine name",
                           "order": 7
                         },
                         "machineOS": {
                           "type": "string",
-                          "title": "Machineos",
-                          "description": "Machineos",
+                          "title": "Machine OS",
+                          "description": "Machine os",
                           "order": 8
                         },
                         "machineType": {
                           "type": "string",
-                          "title": "Machinetype",
-                          "description": "Machinetype",
+                          "title": "Machine Type",
+                          "description": "Machine type",
                           "enum": [
                             "Server",
                             "Desktop"
@@ -4087,8 +4087,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                         },
                         "serverGuid": {
                           "type": "string",
-                          "title": "Serverguid",
-                          "description": "Serverguid",
+                          "title": "Server GUID",
+                          "description": "Server GUID",
                           "order": 10
                         }
                       }
@@ -4099,14 +4099,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "properties": {
                         "hasFullAgents": {
                           "type": "boolean",
-                          "title": "Hasfullagents",
-                          "description": "Hasfullagents",
+                          "title": "Has Full Agents",
+                          "description": "Has full agents",
                           "order": 1
                         },
                         "hasFullRbac": {
                           "type": "boolean",
-                          "title": "Hasfullrbac",
-                          "description": "Hasfullrbac",
+                          "title": "Has Full RBAC",
+                          "description": "Has full RBAC",
                           "order": 2
                         }
                       }
@@ -4195,8 +4195,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "agentEntity": {
               "type": "array",
-              "title": "Agententity",
-              "description": "Agententity",
+              "title": "Agent Entity",
+              "description": "Agent entity",
               "items": {
                 "$ref": "#/definitions/agentEntity"
               },
@@ -4204,8 +4204,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "agentQueryStatus": {
               "$ref": "#/definitions/agentQueryStatus",
-              "title": "Agentquerystatus",
-              "description": "Agentquerystatus",
+              "title": "Agent Query Status",
+              "description": "Agent query status",
               "order": 2
             },
             "csv": {
@@ -4228,32 +4228,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentGuid": {
                   "type": "string",
-                  "title": "Agentguid",
-                  "description": "Agentguid",
+                  "title": "Agent GUID",
+                  "description": "Agent GUID",
                   "order": 1
                 },
                 "ip": {
                   "type": "string",
-                  "title": "Ip",
-                  "description": "Ip",
+                  "title": "IP",
+                  "description": "IP",
                   "order": 2
                 },
                 "isImportant": {
                   "type": "boolean",
-                  "title": "Isimportant",
-                  "description": "Isimportant",
+                  "title": "Is Important",
+                  "description": "Is important",
                   "order": 3
                 },
                 "isOnline": {
                   "type": "boolean",
-                  "title": "Isonline",
-                  "description": "Isonline",
+                  "title": "Is Online",
+                  "description": "Is online",
                   "order": 4
                 },
                 "isolateStatus": {
                   "type": "integer",
-                  "title": "Isolatestatus",
-                  "description": "Isolatestatus",
+                  "title": "ISO Late Status",
+                  "description": "ISO late status",
                   "enum": [
                     0,
                     1,
@@ -4265,26 +4265,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "machineGuid": {
                   "type": "string",
-                  "title": "Machineguid",
-                  "description": "Machineguid",
+                  "title": "Machine GUID",
+                  "description": "Machine GUID",
                   "order": 6
                 },
                 "machineName": {
                   "type": "string",
-                  "title": "Machinename",
-                  "description": "Machinename",
+                  "title": "Machine Name",
+                  "description": "Machine name",
                   "order": 7
                 },
                 "machineOS": {
                   "type": "string",
-                  "title": "Machineos",
-                  "description": "Machineos",
+                  "title": "Machine OS",
+                  "description": "Machine os",
                   "order": 8
                 },
                 "machineType": {
                   "type": "string",
-                  "title": "Machinetype",
-                  "description": "Machinetype",
+                  "title": "Machine Type",
+                  "description": "Machine type",
                   "enum": [
                     "Server",
                     "Desktop"
@@ -4293,8 +4293,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "serverGuid": {
                   "type": "string",
-                  "title": "Serverguid",
-                  "description": "Serverguid",
+                  "title": "Server GUID",
+                  "description": "Server GUID",
                   "order": 10
                 }
               }
@@ -4305,14 +4305,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "hasFullAgents": {
                   "type": "boolean",
-                  "title": "Hasfullagents",
-                  "description": "Hasfullagents",
+                  "title": "Has Full Agents",
+                  "description": "Has full agents",
                   "order": 1
                 },
                 "hasFullRbac": {
                   "type": "boolean",
-                  "title": "Hasfullrbac",
-                  "description": "Hasfullrbac",
+                  "title": "Has Full RBAC",
+                  "description": "Has full RBAC",
                   "order": 2
                 }
               }
@@ -4361,8 +4361,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "statusCode": {
               "type": "integer",
-              "title": "Statuscode",
-              "description": "Statuscode",
+              "title": "Status Code",
+              "description": "Status code",
               "order": 3
             }
           },
@@ -4373,32 +4373,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentGuid": {
                   "type": "string",
-                  "title": "Agentguid",
-                  "description": "Agentguid",
+                  "title": "Agent GUID",
+                  "description": "Agent GUID",
                   "order": 1
                 },
                 "ip": {
                   "type": "string",
-                  "title": "Ip",
-                  "description": "Ip",
+                  "title": "IP",
+                  "description": "IP",
                   "order": 2
                 },
                 "isImportant": {
                   "type": "boolean",
-                  "title": "Isimportant",
-                  "description": "Isimportant",
+                  "title": "Is Important",
+                  "description": "Is important",
                   "order": 3
                 },
                 "isOnline": {
                   "type": "boolean",
-                  "title": "Isonline",
-                  "description": "Isonline",
+                  "title": "Is Online",
+                  "description": "Is online",
                   "order": 4
                 },
                 "isolateStatus": {
                   "type": "integer",
-                  "title": "Isolatestatus",
-                  "description": "Isolatestatus",
+                  "title": "ISO Late Status",
+                  "description": "ISO late status",
                   "enum": [
                     0,
                     1,
@@ -4410,26 +4410,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "machineGuid": {
                   "type": "string",
-                  "title": "Machineguid",
-                  "description": "Machineguid",
+                  "title": "Machine GUID",
+                  "description": "Machine GUID",
                   "order": 6
                 },
                 "machineName": {
                   "type": "string",
-                  "title": "Machinename",
-                  "description": "Machinename",
+                  "title": "Machine Name",
+                  "description": "Machine name",
                   "order": 7
                 },
                 "machineOS": {
                   "type": "string",
-                  "title": "Machineos",
-                  "description": "Machineos",
+                  "title": "Machine OS",
+                  "description": "Machine os",
                   "order": 8
                 },
                 "machineType": {
                   "type": "string",
-                  "title": "Machinetype",
-                  "description": "Machinetype",
+                  "title": "Machine Type",
+                  "description": "Machine type",
                   "enum": [
                     "Server",
                     "Desktop"
@@ -4438,8 +4438,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "serverGuid": {
                   "type": "string",
-                  "title": "Serverguid",
-                  "description": "Serverguid",
+                  "title": "Server GUID",
+                  "description": "Server GUID",
                   "order": 10
                 }
               }
@@ -4450,14 +4450,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "hasFullAgents": {
                   "type": "boolean",
-                  "title": "Hasfullagents",
-                  "description": "Hasfullagents",
+                  "title": "Has Full Agents",
+                  "description": "Has full agents",
                   "order": 1
                 },
                 "hasFullRbac": {
                   "type": "boolean",
-                  "title": "Hasfullrbac",
-                  "description": "Hasfullrbac",
+                  "title": "Has Full RBAC",
+                  "description": "Has full RBAC",
                   "order": 2
                 }
               }
@@ -4468,8 +4468,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentEntity": {
                   "type": "array",
-                  "title": "Agententity",
-                  "description": "Agententity",
+                  "title": "Agent Entity",
+                  "description": "Agent entity",
                   "items": {
                     "$ref": "#/definitions/agentEntity"
                   },
@@ -4477,8 +4477,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "agentQueryStatus": {
                   "$ref": "#/definitions/agentQueryStatus",
-                  "title": "Agentquerystatus",
-                  "description": "Agentquerystatus",
+                  "title": "Agent Query Status",
+                  "description": "Agent query status",
                   "order": 2
                 },
                 "csv": {
@@ -4501,32 +4501,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "agentGuid": {
                       "type": "string",
-                      "title": "Agentguid",
-                      "description": "Agentguid",
+                      "title": "Agent GUID",
+                      "description": "Agent GUID",
                       "order": 1
                     },
                     "ip": {
                       "type": "string",
-                      "title": "Ip",
-                      "description": "Ip",
+                      "title": "IP",
+                      "description": "IP",
                       "order": 2
                     },
                     "isImportant": {
                       "type": "boolean",
-                      "title": "Isimportant",
-                      "description": "Isimportant",
+                      "title": "Is Important",
+                      "description": "Is important",
                       "order": 3
                     },
                     "isOnline": {
                       "type": "boolean",
-                      "title": "Isonline",
-                      "description": "Isonline",
+                      "title": "Is Online",
+                      "description": "Is online",
                       "order": 4
                     },
                     "isolateStatus": {
                       "type": "integer",
-                      "title": "Isolatestatus",
-                      "description": "Isolatestatus",
+                      "title": "ISO Late Status",
+                      "description": "ISO late status",
                       "enum": [
                         0,
                         1,
@@ -4538,26 +4538,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "machineGuid": {
                       "type": "string",
-                      "title": "Machineguid",
-                      "description": "Machineguid",
+                      "title": "Machine GUID",
+                      "description": "Machine GUID",
                       "order": 6
                     },
                     "machineName": {
                       "type": "string",
-                      "title": "Machinename",
-                      "description": "Machinename",
+                      "title": "Machine Name",
+                      "description": "Machine name",
                       "order": 7
                     },
                     "machineOS": {
                       "type": "string",
-                      "title": "Machineos",
-                      "description": "Machineos",
+                      "title": "Machine OS",
+                      "description": "Machine os",
                       "order": 8
                     },
                     "machineType": {
                       "type": "string",
-                      "title": "Machinetype",
-                      "description": "Machinetype",
+                      "title": "Machine Type",
+                      "description": "Machine type",
                       "enum": [
                         "Server",
                         "Desktop"
@@ -4566,8 +4566,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                     },
                     "serverGuid": {
                       "type": "string",
-                      "title": "Serverguid",
-                      "description": "Serverguid",
+                      "title": "Server GUID",
+                      "description": "Server GUID",
                       "order": 10
                     }
                   }
@@ -4578,14 +4578,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "properties": {
                     "hasFullAgents": {
                       "type": "boolean",
-                      "title": "Hasfullagents",
-                      "description": "Hasfullagents",
+                      "title": "Has Full Agents",
+                      "description": "Has full agents",
                       "order": 1
                     },
                     "hasFullRbac": {
                       "type": "boolean",
-                      "title": "Hasfullrbac",
-                      "description": "Hasfullrbac",
+                      "title": "Has Full RBAC",
+                      "description": "Has full RBAC",
                       "order": 2
                     }
                   }
@@ -4674,8 +4674,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
       "properties": {
         "agentEntity": {
           "type": "array",
-          "title": "Agententity",
-          "description": "Agententity",
+          "title": "Agent Entity",
+          "description": "Agent entity",
           "items": {
             "$ref": "#/definitions/agentEntity"
           },
@@ -4683,8 +4683,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
         },
         "agentQueryStatus": {
           "$ref": "#/definitions/agentQueryStatus",
-          "title": "Agentquerystatus",
-          "description": "Agentquerystatus",
+          "title": "Agent Query Status",
+          "description": "Agent query status",
           "order": 2
         },
         "csv": {
@@ -4707,32 +4707,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "agentGuid": {
               "type": "string",
-              "title": "Agentguid",
-              "description": "Agentguid",
+              "title": "Agent GUID",
+              "description": "Agent GUID",
               "order": 1
             },
             "ip": {
               "type": "string",
-              "title": "Ip",
-              "description": "Ip",
+              "title": "IP",
+              "description": "IP",
               "order": 2
             },
             "isImportant": {
               "type": "boolean",
-              "title": "Isimportant",
-              "description": "Isimportant",
+              "title": "Is Important",
+              "description": "Is important",
               "order": 3
             },
             "isOnline": {
               "type": "boolean",
-              "title": "Isonline",
-              "description": "Isonline",
+              "title": "Is Online",
+              "description": "Is online",
               "order": 4
             },
             "isolateStatus": {
               "type": "integer",
-              "title": "Isolatestatus",
-              "description": "Isolatestatus",
+              "title": "ISO Late Status",
+              "description": "ISO late status",
               "enum": [
                 0,
                 1,
@@ -4744,26 +4744,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "machineGuid": {
               "type": "string",
-              "title": "Machineguid",
-              "description": "Machineguid",
+              "title": "Machine GUID",
+              "description": "Machine GUID",
               "order": 6
             },
             "machineName": {
               "type": "string",
-              "title": "Machinename",
-              "description": "Machinename",
+              "title": "Machine Name",
+              "description": "Machine name",
               "order": 7
             },
             "machineOS": {
               "type": "string",
-              "title": "Machineos",
-              "description": "Machineos",
+              "title": "Machine OS",
+              "description": "Machine os",
               "order": 8
             },
             "machineType": {
               "type": "string",
-              "title": "Machinetype",
-              "description": "Machinetype",
+              "title": "Machine Type",
+              "description": "Machine type",
               "enum": [
                 "Server",
                 "Desktop"
@@ -4772,8 +4772,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "serverGuid": {
               "type": "string",
-              "title": "Serverguid",
-              "description": "Serverguid",
+              "title": "Server GUID",
+              "description": "Server GUID",
               "order": 10
             }
           }
@@ -4784,14 +4784,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "hasFullAgents": {
               "type": "boolean",
-              "title": "Hasfullagents",
-              "description": "Hasfullagents",
+              "title": "Has Full Agents",
+              "description": "Has full agents",
               "order": 1
             },
             "hasFullRbac": {
               "type": "boolean",
-              "title": "Hasfullrbac",
-              "description": "Hasfullrbac",
+              "title": "Has Full RBAC",
+              "description": "Has full RBAC",
               "order": 2
             }
           }
@@ -4840,8 +4840,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
         },
         "statusCode": {
           "type": "integer",
-          "title": "Statuscode",
-          "description": "Statuscode",
+          "title": "Status Code",
+          "description": "Status code",
           "order": 3
         }
       },
@@ -4852,32 +4852,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "agentGuid": {
               "type": "string",
-              "title": "Agentguid",
-              "description": "Agentguid",
+              "title": "Agent GUID",
+              "description": "Agent GUID",
               "order": 1
             },
             "ip": {
               "type": "string",
-              "title": "Ip",
-              "description": "Ip",
+              "title": "IP",
+              "description": "IP",
               "order": 2
             },
             "isImportant": {
               "type": "boolean",
-              "title": "Isimportant",
-              "description": "Isimportant",
+              "title": "Is Important",
+              "description": "Is important",
               "order": 3
             },
             "isOnline": {
               "type": "boolean",
-              "title": "Isonline",
-              "description": "Isonline",
+              "title": "Is Online",
+              "description": "Is online",
               "order": 4
             },
             "isolateStatus": {
               "type": "integer",
-              "title": "Isolatestatus",
-              "description": "Isolatestatus",
+              "title": "ISO Late Status",
+              "description": "ISO late status",
               "enum": [
                 0,
                 1,
@@ -4889,26 +4889,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "machineGuid": {
               "type": "string",
-              "title": "Machineguid",
-              "description": "Machineguid",
+              "title": "Machine GUID",
+              "description": "Machine GUID",
               "order": 6
             },
             "machineName": {
               "type": "string",
-              "title": "Machinename",
-              "description": "Machinename",
+              "title": "Machine Name",
+              "description": "Machine name",
               "order": 7
             },
             "machineOS": {
               "type": "string",
-              "title": "Machineos",
-              "description": "Machineos",
+              "title": "Machine OS",
+              "description": "Machine os",
               "order": 8
             },
             "machineType": {
               "type": "string",
-              "title": "Machinetype",
-              "description": "Machinetype",
+              "title": "Machine Type",
+              "description": "Machine type",
               "enum": [
                 "Server",
                 "Desktop"
@@ -4917,8 +4917,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "serverGuid": {
               "type": "string",
-              "title": "Serverguid",
-              "description": "Serverguid",
+              "title": "Server GUID",
+              "description": "Server GUID",
               "order": 10
             }
           }
@@ -4929,14 +4929,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "hasFullAgents": {
               "type": "boolean",
-              "title": "Hasfullagents",
-              "description": "Hasfullagents",
+              "title": "Has Full Agents",
+              "description": "Has full agents",
               "order": 1
             },
             "hasFullRbac": {
               "type": "boolean",
-              "title": "Hasfullrbac",
-              "description": "Hasfullrbac",
+              "title": "Has Full RBAC",
+              "description": "Has full RBAC",
               "order": 2
             }
           }
@@ -4947,8 +4947,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "properties": {
             "agentEntity": {
               "type": "array",
-              "title": "Agententity",
-              "description": "Agententity",
+              "title": "Agent Entity",
+              "description": "Agent entity",
               "items": {
                 "$ref": "#/definitions/agentEntity"
               },
@@ -4956,8 +4956,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
             },
             "agentQueryStatus": {
               "$ref": "#/definitions/agentQueryStatus",
-              "title": "Agentquerystatus",
-              "description": "Agentquerystatus",
+              "title": "Agent Query Status",
+              "description": "Agent query status",
               "order": 2
             },
             "csv": {
@@ -4980,32 +4980,32 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "agentGuid": {
                   "type": "string",
-                  "title": "Agentguid",
-                  "description": "Agentguid",
+                  "title": "Agent GUID",
+                  "description": "Agent GUID",
                   "order": 1
                 },
                 "ip": {
                   "type": "string",
-                  "title": "Ip",
-                  "description": "Ip",
+                  "title": "IP",
+                  "description": "IP",
                   "order": 2
                 },
                 "isImportant": {
                   "type": "boolean",
-                  "title": "Isimportant",
-                  "description": "Isimportant",
+                  "title": "Is Important",
+                  "description": "Is important",
                   "order": 3
                 },
                 "isOnline": {
                   "type": "boolean",
-                  "title": "Isonline",
-                  "description": "Isonline",
+                  "title": "Is Online",
+                  "description": "Is online",
                   "order": 4
                 },
                 "isolateStatus": {
                   "type": "integer",
-                  "title": "Isolatestatus",
-                  "description": "Isolatestatus",
+                  "title": "ISO Late Status",
+                  "description": "ISO late status",
                   "enum": [
                     0,
                     1,
@@ -5017,26 +5017,26 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "machineGuid": {
                   "type": "string",
-                  "title": "Machineguid",
-                  "description": "Machineguid",
+                  "title": "Machine GUID",
+                  "description": "Machine GUID",
                   "order": 6
                 },
                 "machineName": {
                   "type": "string",
-                  "title": "Machinename",
-                  "description": "Machinename",
+                  "title": "Machine Name",
+                  "description": "Machine name",
                   "order": 7
                 },
                 "machineOS": {
                   "type": "string",
-                  "title": "Machineos",
-                  "description": "Machineos",
+                  "title": "Machine OS",
+                  "description": "Machine os",
                   "order": 8
                 },
                 "machineType": {
                   "type": "string",
-                  "title": "Machinetype",
-                  "description": "Machinetype",
+                  "title": "Machine Type",
+                  "description": "Machine type",
                   "enum": [
                     "Server",
                     "Desktop"
@@ -5045,8 +5045,8 @@ class DownloadRcaCsvFileOutput(komand.Output):
                 },
                 "serverGuid": {
                   "type": "string",
-                  "title": "Serverguid",
-                  "description": "Serverguid",
+                  "title": "Server GUID",
+                  "description": "Server GUID",
                   "order": 10
                 }
               }
@@ -5057,14 +5057,14 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "properties": {
                 "hasFullAgents": {
                   "type": "boolean",
-                  "title": "Hasfullagents",
-                  "description": "Hasfullagents",
+                  "title": "Has Full Agents",
+                  "description": "Has full agents",
                   "order": 1
                 },
                 "hasFullRbac": {
                   "type": "boolean",
-                  "title": "Hasfullrbac",
-                  "description": "Hasfullrbac",
+                  "title": "Has Full RBAC",
+                  "description": "Has full RBAC",
                   "order": 2
                 }
               }

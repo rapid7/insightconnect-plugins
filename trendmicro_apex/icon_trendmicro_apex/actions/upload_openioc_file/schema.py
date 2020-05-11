@@ -75,7 +75,7 @@ class UploadOpeniocFileOutput(komand.Output):
   "properties": {
     "FeatureCtrl": {
       "$ref": "#/definitions/FeatureCtrl",
-      "title": "Featurectrl",
+      "title": "Feature CTRL",
       "description": "The Apex Central deployment model",
       "order": 3
     },
@@ -87,13 +87,13 @@ class UploadOpeniocFileOutput(komand.Output):
     },
     "PermissionCtrl": {
       "$ref": "#/definitions/PermissionCtrl",
-      "title": "Permissionctrl",
+      "title": "Permission CTRL",
       "description": "Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features",
       "order": 5
     },
     "SystemCtrl": {
       "$ref": "#/definitions/SystemCtrl",
-      "title": "Systemctrl",
+      "title": "System CTRL",
       "description": "Indicates the suspicious object distribution role of the Apex Central server",
       "order": 6
     },
@@ -181,8 +181,8 @@ class UploadOpeniocFileOutput(komand.Output):
       "properties": {
         "TmcmSoDist_Role": {
           "type": "string",
-          "title": "Tmcmsodist Role",
-          "description": "Tmcmsodist role",
+          "title": "Tmcm So Dist Role",
+          "description": "Tmcm so dist role",
           "enum": [
             "none",
             "hub",

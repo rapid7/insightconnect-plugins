@@ -60,8 +60,8 @@ class ConnectionSchema(komand.Input):
     },
     "skip_mac_addresses": {
       "type": "array",
-      "title": "Skip Mac Addresses",
-      "description": "Skip mac addresses on isolate and uninstall actions",
+      "title": "Skip MAC Addresses",
+      "description": "Skip MAC addresses on isolate and uninstall actions",
       "items": {
         "type": "string"
       },

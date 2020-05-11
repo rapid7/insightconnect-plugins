@@ -43,7 +43,7 @@ class OpeniocFilesListInput(komand.Input):
     "fuzzy_match_string": {
       "type": "string",
       "title": "Fuzzy Match String",
-      "description": "Filters the list for matching strings in the \\"File Name\\", \\"Title\\", and \\"Source Context\\" fields",
+      "description": "Filters the list for matching strings in the File Name, Title, and Source Context fields",
       "order": 2
     },
     "page_number": {
@@ -108,7 +108,7 @@ class OpeniocFilesListOutput(komand.Output):
     },
     "feature_ctrl": {
       "$ref": "#/definitions/FeatureCtrl",
-      "title": "Feature Ctrl",
+      "title": "Feature CTRL",
       "description": "The Apex Central deployment model",
       "order": 2
     },
@@ -120,13 +120,13 @@ class OpeniocFilesListOutput(komand.Output):
     },
     "permission_ctrl": {
       "$ref": "#/definitions/PermissionCtrl",
-      "title": "Permission Ctrl",
+      "title": "Permission CTRL",
       "description": "Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features",
       "order": 4
     },
     "system_ctrl": {
       "$ref": "#/definitions/SystemCtrl",
-      "title": "System Ctrl",
+      "title": "System CTRL",
       "description": "Indicates the suspicious object distribution role of the Apex Central server",
       "order": 5
     }
@@ -223,7 +223,7 @@ class OpeniocFilesListOutput(komand.Output):
         },
         "TotalIOCCount": {
           "type": "integer",
-          "title": "Total IOC Count\\"",
+          "title": "Total IOC Count",
           "description": "The total number of objects extracted from the uploaded file",
           "order": 2
         }
@@ -347,8 +347,8 @@ class OpeniocFilesListOutput(komand.Output):
       "properties": {
         "TmcmSoDist_Role": {
           "type": "string",
-          "title": "Tmcmsodist Role",
-          "description": "Tmcmsodist role",
+          "title": "Tmcm So Dist Role",
+          "description": "Tmcm so dist role",
           "enum": [
             "none",
             "hub",
