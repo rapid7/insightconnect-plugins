@@ -1,7 +1,7 @@
 {
-	"spec": "184b503792d78d2bbc26421e0560dade",
-	"manifest": "6f6c4e38c76fd7e81d4b03ba5135cf36",
-	"setup": "a6c6ca32bb003885168943f8ae70dfe8",
+	"spec": "b27c49e1a9e8a4fa202abbd2318b80df",
+	"manifest": "96ebf907b03d73d2246a8e0f62202dba",
+	"setup": "d7c00896c9773f8bde4526a52943534a",
 	"schemas": [
 		{
 			"identifier": "add_external_dynamic_list/schema.py",
