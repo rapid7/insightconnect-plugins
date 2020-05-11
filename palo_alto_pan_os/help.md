@@ -51,7 +51,7 @@ In this case, we will strip the /32 from the end and check the IP against the wh
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|The IP-Address, IP-Range, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com, google.com|None|1.1.1.1|
+|address_object|string|None|True|The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com|None|1.1.1.1|
 |object_description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
 |object_name|string|None|True|The name of the address object|None|Blocked host|
 |tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|malware|

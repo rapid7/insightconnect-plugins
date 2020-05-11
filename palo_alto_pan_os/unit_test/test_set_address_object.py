@@ -66,8 +66,6 @@ class TestSetAddressObject(TestCase):
         self.assertTrue(test_action.match_whitelist("1.1.1.1", ["1.1.1.1/24"], "ip-netmask"))
         self.assertFalse(test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1", "1.1.1.1/32"], "ip-netmask"))
 
-
-
     def test_get_address_type(self):
         test_action = SetAddressObject()
         test_action.logger = logging.getLogger("test")

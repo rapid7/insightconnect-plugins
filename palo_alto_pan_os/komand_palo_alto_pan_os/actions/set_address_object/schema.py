@@ -30,7 +30,7 @@ class SetAddressObjectInput(komand.Input):
     "address_object": {
       "type": "string",
       "title": "Address Object",
-      "description": "The IP-Address, IP-Range, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com, google.com",
+      "description": "The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com",
       "order": 1
     },
     "object_description": {
@@ -54,7 +54,7 @@ class SetAddressObjectInput(komand.Input):
     "whitelist": {
       "type": "array",
       "title": "Whitelist",
-      "description": "This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)",
+      "description": "This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)",
       "items": {
         "type": "string"
       },
