@@ -34,7 +34,7 @@ class ConnectionSchema(komand.Input):
     "skip_address_ips": {
       "type": "array",
       "title": "Skip Address IPs",
-      "description": "Skip address ips on isolate and uninstall actions",
+      "description": "Skip address IPs on isolate and uninstall actions",
       "items": {
         "type": "string"
       },

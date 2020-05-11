@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|API key paired with the Application ID e.g. CU1874A2-G782-47X1-B6J3-1014A92624BC|None|CU1874A2-G782-47X1-B6J3-1014A92624BC|
 |application_id|credential_secret_key|None|True|Application ID to communicate to the Apex Security Manager e.g. 909D88H7-3458-42RN-92FF-012V3CU3D294|None|909D88H7-3458-42RN-92FF-012V3CU3D294|
-|skip_address_ips|[]string|None|False|Skip address ips on isolate and uninstall actions|None|["10.0.0.4"]|
+|skip_address_ips|[]string|None|False|Skip address IPs on isolate and uninstall actions|None|["198.51.100.100", "198.51.100.101"]|
 |skip_entity_ids|[]string|None|False|Skip entity ids on isolate and uninstall actions|None|["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
 |skip_host_names|[]string|None|False|Skip host names on isolate and uninstall actions|None|["CU-PRO1-7814-2"]|
 |skip_mac_addresses|[]string|None|False|Skip MAC addresses on isolate and uninstall actions|None|["08:00:27:8d:c0:4d"]|
@@ -61,7 +61,7 @@ This action performs action.
 |allow_multiple_match|boolean|True|False|True - Allows multiple matches False - Does not allow multiple matches|None|True|
 |entity_id|string|None|False|The GUID of the managed product agent. Use to identify the agent(s) on which the action is performed|None|2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6|
 |host_name|string|None|False|The endpoint name of the managed product agent. Use to identify the agent(s) on which the action is performed|None|CU-PRO1-7814-2|
-|ip_address|string|None|False|The IP address of the managed product agent. Use to identify the agent(s) on which the action is performed|None|10.0.0.4|
+|ip_address|string|None|False|The IP address of the managed product agent. Use to identify the agent(s) on which the action is performed|None|198.51.100.100|
 |mac_address|string|None|False|The MAC address of the managed product agent. Use to identify the agent(s) on which the action is performed|None|08:00:27:8d:c0:4d|
 |product|string|None|False|The Trend Micro product on the server instance. Use to identify the agent(s) on which the action is performed|None|SLF_PRODUCT_OFFICESCAN_CE|
 |relocate_to_folder_path|string|None|False|The target directory for the agent|None|\NewDomain\NewFolder|
@@ -218,7 +218,7 @@ This action downloads existing RCA files from the Apex Central server.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent_guid|string|None|True|GUID of the target endpoint|None|654B1B52-C3C9-4405-B133-48E2353DA13B|
-|host_ip|string|None|True|Host IP address|None|10.0.0.4|
+|host_ip|string|None|True|Host IP address|None|198.51.100.100|
 |host_name|string|None|True|Host name|None|CU-PRO1-7814-2|
 |scan_summary_guid|string|None|True|GUID of the investigation summary to retrieve|None|58127b3e-1bde-4c6e-8d86-0d0f89ded601|
 |server_guid|[]string|None|True|GUID of the target server|None|["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
@@ -470,7 +470,7 @@ This action is used to add an IP address, email or similar info to the UDSO list
 |content|string|None|True|The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max|None|http://www.example.com|
 |data_type|string|URL|True|Format of the data, character length of content is affected by this|['IP', 'URL', 'FILE_SHA1', 'DOMAIN']|URL|
 |expiry_date|int|30|False|Number of days to allow this rule to be active|None|100|
-|notes|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|This URL is very dangerous|
+|notes|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|This URL leads to malware|
 |scan_action|string|LOG|True|What action to do with the data sent|['BLOCK', 'LOG']|LOG|
 
 Example input:
@@ -507,8 +507,8 @@ This action is used to add a file to the UDSO list of the Apex Security Manager.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|file|None|True|File to be marked as suspicious|None|{"filename": "file.txt", "content": "c2xpamJvb20="}|
-|notes|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|This file is a trojan horse|
+|file|file|None|True|File to be marked as suspicious|None|{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
+|notes|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|This file is malware|
 |scan_action|string|LOG|True|What action to do with the data sent|['BLOCK', 'LOG', 'QUARANTINE']|QUARANTINE|
 
 Example input:
