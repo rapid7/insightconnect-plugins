@@ -4,10 +4,10 @@ import komand
 from komand_otrs import connection, actions, triggers
 
 
-Name = 'OTRS'
-Vendor = 'rapid7'
-Version = '5.0.0'
-Description = 'Create and manage OTRS tickets'
+Name = "OTRS"
+Vendor = "rapid7"
+Version = "5.0.1"
+Description = "Create and manage OTRS tickets"
 
 
 class ICONOtrs(komand.Plugin):
