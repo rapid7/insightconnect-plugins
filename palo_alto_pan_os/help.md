@@ -648,7 +648,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
-* 2.0.0 - Update to Set Address Object to accept a whitelist of address objects and auto detect the incoming object to create
+* 2.0.0 - Update to rename Set Address Object to Create Address Object | Update Create Address Object to accept a whitelist of address objects and auto detect the type of incoming object
 * 1.5.7 - Default value of Commit action updated
 * 1.5.6 - Fix issue where edit action was causing an error with certain input
 * 1.5.5 - New spec and help.md format for the Extension Library
