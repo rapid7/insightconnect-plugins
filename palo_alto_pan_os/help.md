@@ -50,6 +50,13 @@ This action is used to create a new address object.
 Example input:
 
 ```
+{
+  "address_object": "1.1.1.1",
+  "object_description": "Address object from InsightConnect",
+  "object_name": "ip from InsightConnect",
+  "tags": "malicious",
+  "whitelist": ["1.1.1.2/32"]
+}
 ```
 
 ##### Output
@@ -63,6 +70,11 @@ Example input:
 Example output:
 
 ```
+{
+  "message": "command succeeded",
+  "status": "success",
+  "code": "20"
+}
 ```
 
 #### Set Security Policy Rule
