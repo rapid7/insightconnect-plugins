@@ -42,7 +42,7 @@ This action supports a whitelist as a safety check to prevent users from blockin
 If the action encounters a host matched in the whitelist, the action will succeed but skip blocking the entry.
 
 The whitelist accepts one or more of any combination of IP addresses, CIDR addresses, and domains e.g. 
-["10.1.1.2", "192.168.1.0/24", "www.example.com"] Note that the whitelist does not support IP ranges, they will not be 
+["10.1.1.2", "192.168.1.0/24", "www.example.com"]. Note that the whitelist does not support IP ranges, they will not be 
 checked against the whitelist of objects.  In addition, the whitelist supports match against CIDRs explicitly but will 
 not check if a CIDR is within a larger CIDR network. The exception to this rule is if a CIDR is expressed as 1.1.1.1/32. 
 In this case, we will strip the /32 from the end and check the IP against the whitelist or the exact CIDR match.
