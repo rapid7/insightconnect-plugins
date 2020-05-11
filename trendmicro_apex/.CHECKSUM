@@ -1,5 +1,5 @@
 {
-	"spec": "f60c7f9943818fdb1d72cbc5259b28c5",
+	"spec": "b003c1a0e0a1fc4d7fcf6701ecdeae04",
 	"manifest": "3a0b31e1a8ed292d7c342764a2ca2f14",
 	"setup": "cca2bbed73d446e2077aa34807e7fdd0",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "download_openioc_file/schema.py",
-			"hash": "fa08510a0af62f6c7c78e5e1875da85d"
+			"hash": "4331333500bcb72096603c06cac6d0d9"
 		},
 		{
 			"identifier": "download_rca_csv_file/schema.py",

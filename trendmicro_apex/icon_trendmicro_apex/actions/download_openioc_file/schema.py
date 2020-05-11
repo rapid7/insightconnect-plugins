@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Download OpenIOC files to the Apex Central server"
+    DESCRIPTION = "Download OpenIOC files from the Apex Central server"
 
 
 class Input:
