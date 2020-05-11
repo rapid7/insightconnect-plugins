@@ -43,7 +43,7 @@ If the action encounters a host or network matched in the whitelist, the action 
 
 The whitelist accepts one or more of any combination of IP addresses, CIDR addresses, and domains e.g. 
 ["10.1.1.2", "192.168.1.0/24", "www.example.com"]. Note that the whitelist does not support IP ranges, they will not be 
-checked against the whitelist of objects.  In addition, the whitelist supports match against CIDRs explicitly but will 
+checked against the whitelist of objects.  An additional note is that the whitelist supports matching against CIDRs exactly but will 
 not check if a CIDR is within a larger CIDR network. The exception to this rule is if a CIDR is expressed as 1.1.1.1/32. 
 In this case, we will strip the /32 from the end and check the IP against the whitelist or the exact CIDR match.
 
