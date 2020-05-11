@@ -55,10 +55,10 @@ connection:
     example: '["CU-PRO1-7814-2"]'
   skip_address_ips:
     title: Skip Address IPs
-    description: Skip address ips on isolate and uninstall actions
+    description: Skip address IPs on isolate and uninstall actions
     type: "[]string"
     required: false
-    example: '["10.0.0.4"]'
+    example: '["198.51.100.100", "198.51.100.101"]'
   skip_mac_addresses:
     title: Skip MAC Addresses
     description: Skip MAC addresses on isolate and uninstall actions
@@ -643,7 +643,7 @@ actions:
         type: file
         description: File to be marked as suspicious
         required: true
-        example: '{"filename": "file.txt", "content": "c2xpamJvb20="}'
+        example: '{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
       scan_action:
         title: Scan Action
         description: What action to do with the data sent
@@ -660,7 +660,7 @@ actions:
         type: string
         description: Notes about why the file is being quarantined (256 characters max)
         required: false
-        example: "This file is a trojan horse"
+        example: "This file is malware"
     output:
       success:
         title: Success
@@ -704,7 +704,7 @@ actions:
         type: string
         description: Notes about why the file is being quarantined (256 characters max)
         required: false
-        example: "This URL is very dangerous"
+        example: "This URL leads to malware"
       expiry_date:
         title: Expiry Date
         description: Number of days to allow this rule to be active
@@ -874,7 +874,7 @@ actions:
         type: string
         description: Host IP address
         required: true
-        example: 10.0.0.4
+        example: 198.51.100.100
       host_name:
         title: Host Name
         type: string
@@ -1193,7 +1193,7 @@ actions:
         description: The IP address of the managed product agent. Use to identify the agent(s) on which the action is performed
         type: string
         required: false
-        example: "10.0.0.4"
+        example: "198.51.100.100"
       mac_address:
         title: MAC Address
         description: The MAC address of the managed product agent. Use to identify the agent(s) on which the action is performed
