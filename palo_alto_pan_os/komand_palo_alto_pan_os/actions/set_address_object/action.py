@@ -18,10 +18,10 @@ class SetAddressObject(komand.Action):
         if re.search('[a-zA-Z]', address):
             return "fqdn"
         if re.search('/', address):
-            return "ip_netmask"
+            return "ip-netmask"
         if re.search('-', address):
-            return "ip_range"
-        return "ip_netmask"
+            return "ip-range"
+        return "ip-netmask"
 
     def match_whitelist(self, address, whitelist, object_type):
         if object_type == "fqdn":
@@ -42,7 +42,7 @@ class SetAddressObject(komand.Action):
         # IP is in CIDR - Give the user a log message
         for object in whitelist:
             type = self.determine_address_type(object)
-            if type == "ip_netmask":
+            if type == "ip-netmask":
                 net = ip_network(object)
                 ip = ip_address(trimmed_address)
                 if ip in net:
@@ -79,7 +79,7 @@ class SetAddressObject(komand.Action):
         """
         # object_type = object_type.lower()
 
-        if object_type != "ip_range":
+        if object_type != "ip-range":
             if whitelist:
                 if self.match_whitelist(address, whitelist, object_type):
                     return {
@@ -91,7 +91,8 @@ class SetAddressObject(komand.Action):
 
         address = f'<{object_type}>{address}</{object_type}>'
 
-        xpath = f"/config/devices/entry/vsys/entry/address/entry[@name='test{name}']"
+        # xpath = f"/config/devices/entry/vsys/entry/address/entry[@name='test{name}']"
+        xpath = f"/config/devices/entry/vsys/entry/address/entry[@name='{name}']"
         element = address
         if description:
             element = f'{element}<description>{description}</description>'
