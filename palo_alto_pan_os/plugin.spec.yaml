@@ -611,7 +611,7 @@ actions:
     input:
       address_object:
         title: Address Object
-        description: The IP-Address, IP-Range, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com,
+        description: The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com
           google.com
         type: string
         example: 1.1.1.1
