@@ -35,7 +35,17 @@ The connection configuration accepts the following parameters:
 
 #### Create Address Object
 
-This action is used to create a new address object.
+This action is used to create a new address object. It will accept an IP, CIDR, Fully Qualified Domain Name (FQDN), 
+or IP range E.g. 10.1.1.1, 192.168.1.0/24, 10.1.1.1-10.1.1.9, or www.example.com
+
+This action supports a whitelist as a safety check to prevent users from blocking explicitly stated hosts.
+If the action encounters a host matched in the whitelist, the action will succeed but skip blocking the entry.
+
+The whitelist accepts one or more of any combination of IP addresses, CIDR addresses, and domains e.g. 
+["10.1.1.2", "192.168.1.0/24", "www.example.com"] Note that the whitelist does not support IP ranges, they will not be 
+checked against the whitelist of objects.  In addition, the whitelist supports match against CIDRs explicitly but will 
+not check if a CIDR is within a larger CIDR network. The exception to this rule is if a CIDR is expressed as 1.1.1.1/32. 
+In this case, we will strip the /32 from the end and check the IP against the whitelist or the exact CIDR match.
 
 ##### Input
 
@@ -45,7 +55,7 @@ This action is used to create a new address object.
 |object_description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
 |object_name|string|None|True|The name of the address object|None|Blocked host|
 |tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|malware|
-|whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|["1.1.1.1","1.1.1.2"]|
+|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|["1.1.1.1","1.1.1.2"]|
 
 Example input:
 

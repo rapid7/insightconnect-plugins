@@ -26,7 +26,7 @@ class SetAddressObject(komand.Action):
     def match_whitelist(self, address, whitelist, object_type):
         if object_type == "fqdn":
             if address in whitelist:
-                self.logger.info(f" Whitelist matched\nIP {address} was found in whitelist")
+                self.logger.info(f" Whitelist matched\n{address} was found in whitelist")
                 return True
             else:
                 return False
@@ -34,16 +34,15 @@ class SetAddressObject(komand.Action):
         # if 1.1.1.1/32 - remove /32
         trimmed_address = re.sub(r"/32$", "", address)
 
-        # if contains / skip - Can't compare CIDR to CIDR
+        # if contains / we compare explicit matches, but not subnets in subnets
         if '/' in trimmed_address:
-            self.logger.info(f"{address} appears to be CIDR, skipping whitelist check.")
-            return False
+            return address in whitelist
 
         # IP is in CIDR - Give the user a log message
         for object in whitelist:
             type = self.determine_address_type(object)
             if type == "ip-netmask":
-                net = ip_network(object)
+                net = ip_network(object, False) # False means ignore the masked bits, otherwise they need to be 0
                 ip = ip_address(trimmed_address)
                 if ip in net:
                     self.logger.info(f" Whitelist matched\nIP {address} was found in {object}")

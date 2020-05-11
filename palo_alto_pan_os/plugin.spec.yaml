@@ -637,7 +637,7 @@ actions:
         required: false
       whitelist:
         title: Whitelist
-        description: This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)
+        description: This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)
         type: "[]string"
         example: '["1.1.1.1","1.1.1.2"]'
         required: false
