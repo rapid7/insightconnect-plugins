@@ -33,6 +33,64 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Create Address Object
+
+This action is used to create a new address object. It will accept an IP, CIDR, Fully Qualified Domain Name (FQDN), 
+or IP range E.g. 10.1.1.1, 192.168.1.0/24, 10.1.1.1-10.1.1.9, or www.example.com.
+
+This action supports a whitelist as a safety check to prevent users from blocking explicitly stated hosts.
+If the action encounters a host or network matched in the whitelist, the action will succeed but skip blocking the entry.
+
+The whitelist accepts one or more of any combination of IP addresses, CIDR addresses, and domains e.g. 
+["10.1.1.2", "192.168.1.0/24", "www.example.com"]. Note that the whitelist does not support IP ranges, they will not be 
+checked against the whitelist of objects.  An additional note is that the whitelist supports matching against CIDRs exactly but will 
+not check if a CIDR is within a larger CIDR network. The exception to this rule is if a CIDR is expressed as 1.1.1.1/32. 
+In this case, we will strip the /32 from the end and check the IP against the whitelist or the exact CIDR match.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com|None|1.1.1.1|
+|object_description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
+|object_name|string|None|True|The name of the address object|None|Blocked host|
+|tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|malware|
+|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|
+
+Example input:
+
+```
+{
+  "address_object": "1.1.1.1",
+  "object_description": "Blocked host from Insight Connect",
+  "object_name": "Blocked host",
+  "tags": "malware",
+  "whitelist": [
+    "198.51.100.100",
+    "192.0.2.0/24",
+    "example.com"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|code|string|False|Response code from PAN-OS|
+|message|string|False|A message with more detail about the status|
+|status|string|False|The status of the requested operation e.g. success, error, etc|
+
+Example output:
+
+```
+{
+  "message": "command succeeded",
+  "status": "success",
+  "code": "20"
+}
+```
+
 #### Set Security Policy Rule
 
 This action is used to create a new security policy rule.
@@ -556,7 +614,7 @@ This action is used to add an external dynamic list.
 |list_type|string|None|True|The type of list|['IP List', 'Domain List', 'URL List']|None|
 |name|string|None|True|An arbitrary name for the list. This name will be used to identify the list in PAN-OS|None|None|
 |repeat|string|None|True|The interval at which to retrieve updates from the list|['Five Minute', 'Hourly', 'Daily', 'Weekly']|None|
-|source|string|None|True|The web site you will pull the list from e.g. http://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt|None|None|
+|source|string|None|True|The web site you will pull the list from e.g. https://www.example.com/test.txt|None|None|
 |time|string||True|If repeat is daily or weekly, choose an hour on a 24 hour clock to update (Default: '')|['', '00', '01', '02', '03', '04', '05', '06', '07', 8, 9, '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']|None|
 
 Example input:
@@ -582,43 +640,6 @@ Example output:
 }
 ```
 
-#### Set Address Object
-
-This action is used to create a new address object.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|The IP-Netmask, IP-Range, or FQDN e.g. 192.168.1.0/24, 10.0.0.1-10.0.0.12, google.com|None|None|
-|object_description|string|None|False|A description for the address object|None|None|
-|object_name|string|None|True|The name of the address object|None|None|
-|tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|None|
-|type|string|None|True|The type of address object to create|['IP-Netmask', 'IP-Range', 'FQDN']|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|code|string|False|Response code from PAN-OS|
-|message|string|False|A message with more detail about the status|
-|status|string|False|The status of the requested operation e.g. success, error, etc|
-
-Example output:
-
-```
-{
-  "message": "command succeeded",
-  "status": "success",
-  "code": "20"
-}
-```
-
 ### Triggers
 
 _This plugin does not contain any triggers._
@@ -641,6 +662,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 2.0.0 - Update to rename Set Address Object to Create Address Object | Update Create Address Object to accept a whitelist of address objects and auto detect the type of incoming object
 * 1.5.7 - Default value of Commit action updated
 * 1.5.6 - Fix issue where edit action was causing an error with certain input
 * 1.5.5 - New spec and help.md format for the Extension Library
