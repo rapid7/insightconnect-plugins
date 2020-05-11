@@ -996,7 +996,7 @@ actions:
         required: false
   download_openioc_file:
     title: Download OpenIOC File
-    description: Download OpenIOC files to the Apex Central server
+    description: Download OpenIOC files from the Apex Central server
     input:
       file_hash_id:
         title: File Hash ID
