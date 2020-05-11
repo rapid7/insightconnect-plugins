@@ -33,6 +33,38 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Create Address Object
+
+This action is used to create a new address object.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|The IP-Address, IP-Range, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com, google.com|None|1.1.1.1|
+|object_description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
+|object_name|string|None|True|The name of the address object|None|Blocked host|
+|tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|malware|
+|whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|["1.1.1.1","1.1.1.2"]|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|code|string|False|Response code from PAN-OS|
+|message|string|False|A message with more detail about the status|
+|status|string|False|The status of the requested operation e.g. success, error, etc|
+
+Example output:
+
+```
+```
+
 #### Set Security Policy Rule
 
 This action is used to create a new security policy rule.
@@ -579,43 +611,6 @@ Example output:
     "status": "success",
     "code": "20",
     "message": "command succeeded"
-}
-```
-
-#### Set Address Object
-
-This action is used to create a new address object.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|The IP-Netmask, IP-Range, or FQDN e.g. 192.168.1.0/24, 10.0.0.1-10.0.0.12, google.com|None|None|
-|object_description|string|None|False|A description for the address object|None|None|
-|object_name|string|None|True|The name of the address object|None|None|
-|tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|None|
-|type|string|None|True|The type of address object to create|['IP-Netmask', 'IP-Range', 'FQDN']|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|code|string|False|Response code from PAN-OS|
-|message|string|False|A message with more detail about the status|
-|status|string|False|The status of the requested operation e.g. success, error, etc|
-
-Example output:
-
-```
-{
-  "message": "command succeeded",
-  "status": "success",
-  "code": "20"
 }
 ```
 
