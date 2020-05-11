@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Performs action"
+    DESCRIPTION = "Execute actions on the Security Agent"
 
 
 class Input:

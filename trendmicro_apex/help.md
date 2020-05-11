@@ -49,9 +49,42 @@ Example input:
 
 ### Actions
 
-#### Performs Action
+#### Get Investigation
 
-This action performs action.
+This action retrieves results of investigations in different formats based on the specified taskId.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|content_id|string|None|False|Indicates the location of the dataset|None|8|
+|limit|string|None|True|Retrieves the top n results from the servers|None|1|
+|task_id|string|None|True|Task ID from another API call that is used to retrieve a specific task result Specify the taskId values returned by the following APIs|None|9BD2204C-0554-45C8-9C62-799284928AFA|
+|task_type|string|CMEF|False|Type of API request. For Endpoint Sensor, the value is always 4|['UNKNOWN', 'INTERNAL', 'CM', 'CMEF', 'OSF_COMMAND', 'OSF_QUERY', 'OSF_NOTIFY', 'OSF_LOG', 'MDR_ATTACK_DISCOVERY', 'OSF_SYS_CALL']|CMEF|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Data|api_data|True|Contains the data returned by the specific API|
+|FeatureCtrl|FeatureCtrl|False|The Apex Central deployment model|
+|Meta|Meta|False|Indicates the response status, including the result, error code, and error message|
+|PermissionCtrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
+|SystemCtrl|SystemCtrl|False|Indicates the suspicious object distribution role of the Apex Central server|
+
+Example output:
+
+```
+```
+
+#### Execute Agent Action
+
+This action performs actions on the agent.
 
 ##### Input
 
@@ -85,18 +118,20 @@ Example output:
 ```
 ```
 
-#### Get RCA Response Object
+#### List OpenIOC Files
 
-This action retrieves results of investigations in different formats based on the specified taskId.
+This action retrieves a list of OpenIOC files from the Apex Central server.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|content_id|string|None|False|Indicates the location of the dataset|None|8|
-|limit|string|None|True|Retrieves the top n results from the servers|None|1|
-|task_id|string|None|True|Task ID from another API call that is used to retrieve a specific task result Specify the taskId values returned by the following APIs|None|9BD2204C-0554-45C8-9C62-799284928AFA|
-|task_type|string|CMEF|False|Type of API request. For Endpoint Sensor, the value is always 4|['UNKNOWN', 'INTERNAL', 'CM', 'CMEF', 'OSF_COMMAND', 'OSF_QUERY', 'OSF_NOTIFY', 'OSF_LOG', 'MDR_ATTACK_DISCOVERY', 'OSF_SYS_CALL']|CMEF|
+|file_hash_id_list|[]string|[]|False|Filters the list for file SHA-1 values|None|["769fcc7550bf98d96bccb7e22a5557301c403455"]|
+|fuzzy_match_string|string|None|False|Filters the list for matching strings in the File Name, Title, and Source Context fields|None|Rapid7 InsightConnect|
+|page_number|integer|1|False|Filters the list to uploaded files that appear on the specified page number on the Threat Intel > Custom Intelligence > STIX tab|None|1|
+|page_size|integer|10|False|Filters the list to the specified number of uploaded files per page|None|10|
+|sorting_column|string|FileAddedDatetime|False|Sorts the list by the specified table column|['FileName', 'Title', 'FileAddedDatetime', 'UploadedFrom', 'UploadedBy', 'ExtractingStatus']|FileAddedDatetime|
+|sorting_direction|string|Descending|False|Sorts the list in the specified direction|['Ascending', 'Descending']|Descending|
 
 Example input:
 
@@ -107,7 +142,37 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Data|api_data|True|Contains the data returned by the specific API|
+|data|IOC_Data|False|Contains the data returned by the specific API|
+|feature_ctrl|FeatureCtrl|False|The Apex Central deployment model|
+|meta|Meta|False|Indicates the response status, including the result, error code, and error message|
+|permission_ctrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
+|system_ctrl|SystemCtrl|False|Indicates the suspicious object distribution role of the Apex Central server|
+
+Example output:
+
+```
+```
+
+#### Delete OpenIOC File
+
+This action deletes existing OpenIOC files from the Apex Central server.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file_hash_id_list|[]string|None|True|The list of file SHA-1 values|None|["695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343"]|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Data|[]delete_data|False|Contains the data returned by the specific API|
 |FeatureCtrl|FeatureCtrl|False|The Apex Central deployment model|
 |Meta|Meta|False|Indicates the response status, including the result, error code, and error message|
 |PermissionCtrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
@@ -138,36 +203,6 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Data|file|True|OpenIOC file|
-|FeatureCtrl|FeatureCtrl|False|The Apex Central deployment model|
-|Meta|Meta|False|Indicates the response status, including the result, error code, and error message|
-|PermissionCtrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
-|SystemCtrl|SystemCtrl|False|Indicates the suspicious object distribution role of the Apex Central server|
-
-Example output:
-
-```
-```
-
-#### Delete Uploaded OpenIOC File
-
-This action deletes existing OpenIOC files from the Apex Central server.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|file_hash_id_list|[]string|None|True|The list of file SHA-1 values|None|["695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343"]|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Data|[]delete_data|False|Contains the data returned by the specific API|
 |FeatureCtrl|FeatureCtrl|False|The Apex Central deployment model|
 |Meta|Meta|False|Indicates the response status, including the result, error code, and error message|
 |PermissionCtrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
@@ -234,41 +269,6 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |api_response|api_response|False|Contains data returned|
-
-Example output:
-
-```
-```
-
-#### List Uploaded OpenIOC Files
-
-This action retrieves a list of OpenIOC files from the Apex Central server.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|file_hash_id_list|[]string|[]|False|Filters the list for file SHA-1 values|None|['769fcc7550bf98d96bccb7e22a5557301c403455']|
-|fuzzy_match_string|string|None|False|Filters the list for matching strings in the File Name, Title, and Source Context fields|None|Rapid7 InsightConnect|
-|page_number|integer|1|False|Filters the list to uploaded files that appear on the specified page number on the Threat Intel > Custom Intelligence > STIX tab|None|1|
-|page_size|integer|10|False|Filters the list to the specified number of uploaded files per page|None|10|
-|sorting_column|string|FileAddedDatetime|False|Sorts the list by the specified table column|['FileName', 'Title', 'FileAddedDatetime', 'UploadedFrom', 'UploadedBy', 'ExtractingStatus']|FileAddedDatetime|
-|sorting_direction|string|Descending|False|Sorts the list in the specified direction|['Ascending', 'Descending']|Descending|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|IOC_Data|False|Contains the data returned by the specific API|
-|feature_ctrl|FeatureCtrl|False|The Apex Central deployment model|
-|meta|Meta|False|Indicates the response status, including the result, error code, and error message|
-|permission_ctrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
-|system_ctrl|SystemCtrl|False|Indicates the suspicious object distribution role of the Apex Central server|
 
 Example output:
 

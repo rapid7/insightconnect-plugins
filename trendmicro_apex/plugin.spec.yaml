@@ -779,7 +779,7 @@ actions:
         type: SystemCtrl
         required: false
   openioc_files_list:
-    title: List Uploaded OpenIOC Files
+    title: List OpenIOC Files
     description: Retrieves a list of OpenIOC files from the Apex Central server
     input:
       file_hash_id_list:
@@ -788,7 +788,7 @@ actions:
         type: "[]string"
         required: false
         default: "[]"
-        example: [769fcc7550bf98d96bccb7e22a5557301c403455]
+        example: '["769fcc7550bf98d96bccb7e22a5557301c403455"]'
       fuzzy_match_string:
         title: Fuzzy Match String
         description: "Filters the list for matching strings in the File Name, Title, and Source Context fields"
@@ -959,7 +959,7 @@ actions:
         type: SystemCtrl
         required: false
   delete_openioc_file:
-    title: Delete Uploaded OpenIOC File
+    title: Delete OpenIOC File
     description: Deletes existing OpenIOC files from the Apex Central server
     input:
       file_hash_id_list:
@@ -1031,7 +1031,7 @@ actions:
         type: SystemCtrl
         required: false
   get_rca_object:
-    title: Get RCA Response Object
+    title: Get Investigation
     description: Retrieves results of investigations in different formats based on the specified taskId
     input:
       task_id:
@@ -1155,8 +1155,8 @@ actions:
         type: termination_api_data
         required: true
   performs_action:
-    title: Performs Action
-    description: "Performs action"
+    title: Execute Agent Action
+    description: "Execute actions on the Security Agent"
     input:
       action:
         title: Action
