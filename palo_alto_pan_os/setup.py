@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="palo_alto_pan_os-rapid7-plugin",
-      version="1.5.7",
+      version="2.0.0",
       description="Manage Palo Alto Networks devices via PAN-OS",
       author="rapid7",
       author_email="",

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto PAN-OS
 description: Manage Palo Alto Networks devices via PAN-OS
-version: 1.5.7
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -528,7 +528,7 @@ actions:
         required: true
       source:
         title: Source
-        description: The web site you will pull the list from e.g. http://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+        description: The web site you will pull the list from e.g. https://www.example.com/test.txt
         type: string
         required: true
       repeat:
@@ -606,39 +606,40 @@ actions:
         type: string
         required: false
   set_address_object:
-    title: Set Address Object
+    title: Create Address Object
     description: Create a new address object
     input:
-      address:
-        title: Address
-        description: The IP-Netmask, IP-Range, or FQDN e.g. 192.168.1.0/24, 10.0.0.1-10.0.0.12,
+      address_object:
+        title: Address Object
+        description: The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com
           google.com
         type: string
+        example: 1.1.1.1
         required: true
-      type:
-        title: Type
-        description: The type of address object to create
-        type: string
-        required: true
-        enum:
-        - IP-Netmask
-        - IP-Range
-        - FQDN
       object_name:
         title: Object Name
         description: The name of the address object
         type: string
+        example: Blocked host
         required: true
       object_description:
         title: Object Description
         description: A description for the address object
         type: string
+        example: Blocked host from Insight Connect
         required: false
       tags:
         title: Tags
         description: Tags for the address object. Use commas to separate multiple
           tags
         type: string
+        example: malware
+        required: false
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)
+        type: "[]string"
+        example: ["198.51.100.100", "192.0.2.0/24", "example.com"]
         required: false
     output:
       status:
