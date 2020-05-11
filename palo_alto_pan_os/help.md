@@ -65,7 +65,7 @@ Example input:
   "object_description": "Address object from InsightConnect",
   "object_name": "IP from InsightConnect",
   "tags": "malicious",
-  "whitelist": ["1.1.1.2/32"]
+  "whitelist": ["198.51.100.100", "192.0.2.0/24", "example.com"]
 }
 ```
 
