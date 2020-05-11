@@ -588,7 +588,7 @@ This action is used to add an external dynamic list.
 |list_type|string|None|True|The type of list|['IP List', 'Domain List', 'URL List']|None|
 |name|string|None|True|An arbitrary name for the list. This name will be used to identify the list in PAN-OS|None|None|
 |repeat|string|None|True|The interval at which to retrieve updates from the list|['Five Minute', 'Hourly', 'Daily', 'Weekly']|None|
-|source|string|None|True|The web site you will pull the list from e.g. http://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt|None|None|
+|source|string|None|True|The web site you will pull the list from e.g. https://www.example.com/test.txt|None|None|
 |time|string||True|If repeat is daily or weekly, choose an hour on a 24 hour clock to update (Default: '')|['', '00', '01', '02', '03', '04', '05', '06', '07', 8, 9, '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']|None|
 
 Example input:

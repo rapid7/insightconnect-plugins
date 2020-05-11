@@ -1,11 +1,11 @@
 {
-	"spec": "b27c49e1a9e8a4fa202abbd2318b80df",
+	"spec": "c823e010e76dee66013648813bd9b21b",
 	"manifest": "96ebf907b03d73d2246a8e0f62202dba",
 	"setup": "d7c00896c9773f8bde4526a52943534a",
 	"schemas": [
 		{
 			"identifier": "add_external_dynamic_list/schema.py",
-			"hash": "4acec88f132e03d8a1e651919b746591"
+			"hash": "1c9f28b04ad28b8eff60788de35642d1"
 		},
 		{
 			"identifier": "add_to_policy/schema.py",
