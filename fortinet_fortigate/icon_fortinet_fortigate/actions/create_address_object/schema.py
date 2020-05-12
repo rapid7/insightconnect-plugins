@@ -27,7 +27,7 @@ class CreateAddressObjectInput(komand.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "The host to create. This can be an IP address, a CIDR or a domain name e.g. 198.51.100.100, 192.0.2.0/24, example.com",
+      "description": "The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name",
       "order": 1
     },
     "name": {
@@ -39,7 +39,7 @@ class CreateAddressObjectInput(komand.Input):
     "whitelist": {
       "type": "array",
       "title": "Whitelist",
-      "description": "This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains",
+      "description": "This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name",
       "items": {
         "type": "string"
       },

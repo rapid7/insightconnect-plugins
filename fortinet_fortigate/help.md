@@ -274,9 +274,9 @@ This action is used to create an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|The host to create. This can be an IP address, a CIDR or a domain name e.g. 198.51.100.100, 192.0.2.0/24, example.com|None|198.51.100.100|
+|host|string|None|True|The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
 |name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address or domain name|None|MaliciousHost|
-|whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains|None|[198.51.100.100, example.com, 192.0.2.0/24]|
+|whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|[198.51.100.100, example.com, 192.0.2.0/24]|
 
 Example input:
 
@@ -326,7 +326,7 @@ This action is used to delete an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|The host to delete. This can be an IP, domain, or CIDR address e.g. 198.51.100.0/24|None|198.51.100.100|
+|host|string|None|True|The host to delete. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
 
 Example input:
 
