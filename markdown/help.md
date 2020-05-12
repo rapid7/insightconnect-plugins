@@ -107,7 +107,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.0 - Update plugin title and description
+* 3.0.0 - Update Markdown to HTML and Markdown to PDF action titles and descriptions
 * 2.2.2 - New spec and help.md format for the Extension Library
 * 2.2.1 - Add `utilities` plugin tag for Marketplace searchability
 * 2.2.0 - PyPandoc bug fix | Support web server mode
@@ -123,4 +123,3 @@ _This plugin does not contain any troubleshooting information._
 * [Markdown](https://en.wikipedia.org/wiki/Markdown)
 * [pandoc](https://pandoc.org/)
 * [pypandoc](https://pypi.python.org/pypi/pypandoc/)
-
