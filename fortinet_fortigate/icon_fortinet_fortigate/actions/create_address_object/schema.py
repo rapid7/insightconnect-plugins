@@ -27,7 +27,7 @@ class CreateAddressObjectInput(komand.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "This can be an IP-Address, an IP CIDR or a domain name. e.g. 192.168.1.1, 192.168.1.0/24, google.com",
+      "description": "The host to create. This can be an IP address, a CIDR or a domain name e.g. 198.51.100.100, 192.0.2.0/24, example.com",
       "order": 1
     },
     "name": {
