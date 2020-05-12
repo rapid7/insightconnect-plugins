@@ -281,7 +281,11 @@ This action is used to create an address object.
 Example input:
 
 ```
-
+{
+  "host": "192.168.7.7",
+  "name": "testing",
+  "whitelist": ["198.51.100.100", "google.com", "192.0.2.0/24"]
+}
 ```
 
 ##### Output
@@ -322,11 +326,12 @@ This action is used to delete an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|The host. This can be an IP an IP CIDR e.g. 198.51.100.0/24 or a domain name.|None|None|
+|host|string|None|True|The host. This can be an IP an IP CIDR e.g. 198.51.100.0/24 or a domain name.|None|198.51.100.100|
 
 Example input:
 
 ```
+"host": "198.51.100.100"
 ```
 
 ##### Output

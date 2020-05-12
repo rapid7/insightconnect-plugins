@@ -726,6 +726,7 @@ actions:
         title: Host
         description: The host. This can be an IP an IP CIDR e.g. 198.51.100.0/24 or a domain name.
         type: string
+        example: 198.51.100.100
         required: true
     output:
       success:
