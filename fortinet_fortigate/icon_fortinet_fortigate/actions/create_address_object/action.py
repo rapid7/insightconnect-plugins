@@ -52,7 +52,7 @@ class CreateAddressObject(komand.Action):
             try:
                 response.raise_for_status()
             except Exception as e:
-                raise PluginException(cause=f"Create address failed with {endpoint}",
+                raise PluginException(cause=f"Create address failed with {endpoint}\n",
                                       assistance=response.text,
                                       data=e)
 
