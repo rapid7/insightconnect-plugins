@@ -8,11 +8,11 @@ class Component:
 
 
 class Input:
-    ADDRESS = "address"
+    ADDRESS_OBJECT = "address_object"
     OBJECT_DESCRIPTION = "object_description"
     OBJECT_NAME = "object_name"
     TAGS = "tags"
-    TYPE = "type"
+    WHITELIST = "whitelist"
     
 
 class Output:
@@ -27,46 +27,43 @@ class SetAddressObjectInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address": {
+    "address_object": {
       "type": "string",
-      "title": "Address",
-      "description": "The IP-Netmask, IP-Range, or FQDN e.g. 192.168.1.0/24, 10.0.0.1-10.0.0.12, google.com",
+      "title": "Address Object",
+      "description": "The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com",
       "order": 1
     },
     "object_description": {
       "type": "string",
       "title": "Object Description",
       "description": "A description for the address object",
-      "order": 4
+      "order": 3
     },
     "object_name": {
       "type": "string",
       "title": "Object Name",
       "description": "The name of the address object",
-      "order": 3
+      "order": 2
     },
     "tags": {
       "type": "string",
       "title": "Tags",
       "description": "Tags for the address object. Use commas to separate multiple tags",
-      "order": 5
+      "order": 4
     },
-    "type": {
-      "type": "string",
-      "title": "Type",
-      "description": "The type of address object to create",
-      "enum": [
-        "IP-Netmask",
-        "IP-Range",
-        "FQDN"
-      ],
-      "order": 2
+    "whitelist": {
+      "type": "array",
+      "title": "Whitelist",
+      "description": "This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)",
+      "items": {
+        "type": "string"
+      },
+      "order": 5
     }
   },
   "required": [
-    "address",
-    "object_name",
-    "type"
+    "address_object",
+    "object_name"
   ]
 }
     """)

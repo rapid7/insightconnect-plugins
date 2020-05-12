@@ -84,7 +84,7 @@ class AddExternalDynamicListInput(komand.Input):
     "source": {
       "type": "string",
       "title": "Source",
-      "description": "The web site you will pull the list from e.g. http://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt",
+      "description": "The web site you will pull the list from e.g. https://www.example.com/test.txt",
       "order": 4
     },
     "time": {
