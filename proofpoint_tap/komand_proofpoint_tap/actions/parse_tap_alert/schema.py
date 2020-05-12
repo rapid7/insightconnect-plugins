@@ -92,17 +92,23 @@ class ParseTapAlertOutput(komand.Output):
           "description": "Header reply to",
           "order": 6
         },
+        "message_guid": {
+          "type": "string",
+          "title": "Message GUID",
+          "description": "Message GUID",
+          "order": 7
+        },
         "message_id": {
           "type": "string",
           "title": "Message ID",
           "description": "Message ID",
-          "order": 7
+          "order": 8
         },
         "message_size": {
           "type": "string",
           "title": "Message Size",
           "description": "Message size",
-          "order": 9
+          "order": 10
         },
         "recipients": {
           "type": "string",
@@ -120,13 +126,19 @@ class ParseTapAlertOutput(komand.Output):
           "type": "string",
           "title": "Sender IP",
           "description": "Sender IP",
-          "order": 8
+          "order": 9
         },
         "subject": {
           "type": "string",
           "title": "Subject",
           "description": "Subject",
           "order": 3
+        },
+        "threat_id": {
+          "type": "string",
+          "title": "Threat ID",
+          "description": "Unique identifier for this threat",
+          "order": 11
         },
         "time_delivered": {
           "type": "string",
@@ -200,17 +212,23 @@ class ParseTapAlertOutput(komand.Output):
               "description": "Header reply to",
               "order": 6
             },
+            "message_guid": {
+              "type": "string",
+              "title": "Message GUID",
+              "description": "Message GUID",
+              "order": 7
+            },
             "message_id": {
               "type": "string",
               "title": "Message ID",
               "description": "Message ID",
-              "order": 7
+              "order": 8
             },
             "message_size": {
               "type": "string",
               "title": "Message Size",
               "description": "Message size",
-              "order": 9
+              "order": 10
             },
             "recipients": {
               "type": "string",
@@ -228,13 +246,19 @@ class ParseTapAlertOutput(komand.Output):
               "type": "string",
               "title": "Sender IP",
               "description": "Sender IP",
-              "order": 8
+              "order": 9
             },
             "subject": {
               "type": "string",
               "title": "Subject",
               "description": "Subject",
               "order": 3
+            },
+            "threat_id": {
+              "type": "string",
+              "title": "Threat ID",
+              "description": "Unique identifier for this threat",
+              "order": 11
             },
             "time_delivered": {
               "type": "string",
