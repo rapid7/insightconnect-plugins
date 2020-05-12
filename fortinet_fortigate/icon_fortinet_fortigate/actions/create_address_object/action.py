@@ -30,7 +30,7 @@ class CreateAddressObject(komand.Action):
         except ValueError:
             if host[-1].isdigit() or host[-2].isdigit():
                 raise PluginException(cause="The host input appears to be an invalid IP or domain name.",
-                                      assistance="Ensure that the host input is valid",
+                                      assistance="Ensure that the host input is a valid IP or domain.",
                                       data=host)
             type_ = "fqdn"
 
