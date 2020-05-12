@@ -687,7 +687,7 @@ actions:
     input:
       host:
         title: Host
-        description: This can be an IP-Address, an IP CIDR or a domain name. e.g. 192.168.1.1, 192.168.1.0/24, google.com
+        description: This can be an IP address, a CIDR or a domain name e.g. 198.51.100.100, 192.0.2.0/24, example.com
         type: string
         required: true
         example: 198.51.100.100
