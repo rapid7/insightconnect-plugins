@@ -331,7 +331,9 @@ This action is used to delete an address object.
 Example input:
 
 ```
-"host": "198.51.100.100"
+{
+  "host": "198.51.100.100"
+}
 ```
 
 ##### Output
