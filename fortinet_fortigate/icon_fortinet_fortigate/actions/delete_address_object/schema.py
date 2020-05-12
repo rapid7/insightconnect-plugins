@@ -25,7 +25,7 @@ class DeleteAddressObjectInput(komand.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "The host. This can be an IP an IP CIDR e.g. 198.51.100.0/24 or a domain name.",
+      "description": "The host. This can be an IP an IP CIDR e.g. 198.51.100.0/24 or a domain name",
       "order": 1
     }
   },

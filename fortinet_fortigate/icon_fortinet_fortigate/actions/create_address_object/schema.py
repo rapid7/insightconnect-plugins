@@ -39,7 +39,7 @@ class CreateAddressObjectInput(komand.Input):
     "whitelist": {
       "type": "array",
       "title": "Whitelist",
-      "description": "This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains.",
+      "description": "This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains",
       "items": {
         "type": "string"
       },
