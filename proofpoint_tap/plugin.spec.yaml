@@ -98,6 +98,11 @@ types:
       description: Message size
       type: string
       required: false
+    threat_id:
+      title: Threat ID
+      description: Unique identifier for this threat
+      type: string
+      required: false
   browser:
     time:
       title: Time

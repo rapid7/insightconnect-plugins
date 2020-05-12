@@ -134,6 +134,12 @@ class ParseTapAlertOutput(komand.Output):
           "description": "Subject",
           "order": 3
         },
+        "threat_id": {
+          "type": "string",
+          "title": "Threat ID",
+          "description": "Unique identifier for this threat",
+          "order": 11
+        },
         "time_delivered": {
           "type": "string",
           "title": "Time Delivered",
@@ -247,6 +253,12 @@ class ParseTapAlertOutput(komand.Output):
               "title": "Subject",
               "description": "Subject",
               "order": 3
+            },
+            "threat_id": {
+              "type": "string",
+              "title": "Threat ID",
+              "description": "Unique identifier for this threat",
+              "order": 11
             },
             "time_delivered": {
               "type": "string",
