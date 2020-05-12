@@ -274,13 +274,18 @@ This action is used to create an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|cidr|integer|32|True|CIDR|None|None|
-|ip|string|None|True|IP|None|None|
-|name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address|None|None|
+|host|string|None|True|The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
+|name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address or domain name|None|MaliciousHost|
+|whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|[198.51.100.100, example.com, 192.0.2.0/24]|
 
 Example input:
 
 ```
+{
+  "host": "192.168.7.7",
+  "name": "testing",
+  "whitelist": ["198.51.100.100", "example,com", "192.0.2.0/24"]
+}
 ```
 
 ##### Output
@@ -321,12 +326,14 @@ This action is used to delete an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|cidr|integer|32|True|CIDR|None|None|
-|ip|string|None|True|IP|None|None|
+|host|string|None|True|The host to delete. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
 
 Example input:
 
 ```
+{
+  "host": "198.51.100.100"
+}
 ```
 
 ##### Output
@@ -552,6 +559,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Simplify the Create Address Object action to auto-detect the input type | Add whitelist safety check to Create Address Object action
 * 1.1.0 - New Action Check if IP is in Address Group
 * 1.0.0 - Initial plugin
 
