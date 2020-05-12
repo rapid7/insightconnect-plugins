@@ -34,12 +34,15 @@ class CreateAddressObject(komand.Action):
                                       data=host)
             type_ = "fqdn"
 
-        found = helper.match_whitelist(host, whitelist)
+        found = False
+        host = str(host)
+        if whitelist:
+            found = helper.match_whitelist(host, whitelist)
         if not found:
             payload = {
                 "name": name if name else host,
                 "type": type_,
-                "subnet": str(host)
+                "subnet": host
                 }
 
             endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
@@ -55,4 +58,4 @@ class CreateAddressObject(komand.Action):
 
             return {Output.SUCCESS: True, Output.RESPONSE_OBJECT: response.json()}
 
-        return {Output.SUCCESS: False, Output.RESPONSE_OBJECT: {}}
+        return {Output.SUCCESS: False, Output.RESPONSE_OBJECT: {"message": "IP matched whitelist, skipping block action."}}
