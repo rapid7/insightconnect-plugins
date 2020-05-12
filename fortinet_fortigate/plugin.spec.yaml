@@ -697,7 +697,7 @@ actions:
         description: Optional name to give this address object. If not provided, the name will be the IP address or domain name
         type: string
         required: false
-        example: FriendlyName
+        example: MaliciousHost
         order: 2
       whitelist:
         title: Whitelist
