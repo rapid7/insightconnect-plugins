@@ -50,7 +50,7 @@ class ConnectionSchema(komand.Input):
       "order": 6
     },
     "username": {
-      "$ref": "#/definitions/credential_secret_key",
+      "type": "string",
       "title": "Username",
       "description": "User to run command as",
       "order": 1
