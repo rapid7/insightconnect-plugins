@@ -28,7 +28,7 @@ class Helpers(object):
         object_type = self.determine_address_type(address)
         if object_type == "fqdn":
             if address in whitelist:
-                self.logger.info(f" Whitelist matched\n{address} was found in whitelist")
+                self.logger.info(f" Whitelist matched.  {address} was found in whitelist")
                 return True
             else:
                 return False
