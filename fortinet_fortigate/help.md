@@ -559,7 +559,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Simplify Fortinet Address Object actions | Add whitelist safety check to Create Address Object action
+* 2.0.0 - Simplify the Create Address Object action to auto-detect the input type | Add whitelist safety check to Create Address Object action
 * 1.1.0 - New Action Check if IP is in Address Group
 * 1.0.0 - Initial plugin
 
