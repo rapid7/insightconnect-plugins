@@ -4,7 +4,7 @@ products: [insightconnect]
 name: markdown
 title: Markdown
 description: Convert markdown to and from various popular formats
-version: 2.2.2
+version: 3.0.0
 vendor: rapid7
 support: community
 status: []
@@ -51,15 +51,17 @@ actions:
     description: Convert Markdown to HTML
     input:
       markdown:
-        title: Markdown
-        description: Markdown data as bytes
-        type: string
-        required: false
-      markdown_string:
-        title: Markdown
-        description: Markdown data as string
+        title: Markdown Bytes
+        description: Markdown content represented in base64
         type: bytes
         required: false
+        example: "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="
+      markdown_string:
+        title: Markdown String
+        description: Markdown content as a string
+        type: string
+        required: false
+        example: "# Rapid7 InsightConnect"
     output:
       html:
         title: HTML
@@ -76,15 +78,17 @@ actions:
     description: Convert Markdown to PDF
     input:
       markdown:
-        title: Markdown
-        description: Markdown data as bytes
+        title: Markdown Bytes
+        description: Markdown content represented in base64
         type: bytes
         required: false
+        example: "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="
       markdown_string:
-        title: Markdown
-        description: Markdown data as string
+        title: Markdown String
+        description: Markdown content as a string
         type: string
         required: false
+        example: "# Rapid7 InsightConnect"
     output:
       pdf:
         title: PDF
