@@ -687,20 +687,25 @@ actions:
     input:
       host:
         title: Host
-        description: This can be an IP-Address, an IP CIDR e.g. 198.51.100.0/24,  or a domain name. e.g. 192.168.1.1, 192.168.1.0/24, google.com
+        description: This can be an IP-Address, an IP CIDR or a domain name. e.g. 192.168.1.1, 192.168.1.0/24, google.com
+        type: string
         required: true
+        example: 198.51.100.100
         order: 1
       name:
         title: Name
         description: Optional name to give this address object. If not provided, the name will be the IP address or domain name
         type: string
         required: false
+        example: FriendlyName
         order: 2
       whitelist:
         title: Whitelist
         description: This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains.
         type: "[]string"
+        example: "[198.51.100.100, google.com, 192.0.2.0/24]"
         required: false
+        order: 3
     output:
       success:
         title: Success

@@ -274,8 +274,9 @@ This action is used to create an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|The host. This can be an IP an IP CIDR e.g. 198.51.100.0/24 or a domain name.|None|None|
-|name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address or domain name|None|None|
+|host|string|None|True|This can be an IP-Address, an IP CIDR or a domain name. e.g. 192.168.1.1, 192.168.1.0/24, google.com|None|198.51.100.100|
+|name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address or domain name|None|FriendlyName|
+|whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains.|None|[198.51.100.100, google.com, 192.0.2.0/24]|
 
 Example input:
 

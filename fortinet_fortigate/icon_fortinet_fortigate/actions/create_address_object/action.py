@@ -3,6 +3,7 @@ from .schema import CreateAddressObjectInput, CreateAddressObjectOutput, Input, 
 # Custom imports below
 from komand.exceptions import PluginException
 from ipaddress import ip_network
+from icon_fortinet_fortigate.util.util import Helpers
 
 
 class CreateAddressObject(komand.Action):
@@ -17,11 +18,13 @@ class CreateAddressObject(komand.Action):
     def run(self, params={}):
         host = params.get(Input.HOST)
         name = params.get(Input.NAME, "")
+        whitelist = params.get(Input.WHITELIST)
+        helper = Helpers(self.logger)
 
         # This will check if the host is an IP
         # If not it will check if the host ends with 2 chars. If this is true it is assumed to be a valid FQDN
         # Else it is assumed to be an invalid IP
-        fqdn = False
+        type_ = "ipmask"
         try:
             host = ip_network(host)
         except ValueError:
@@ -29,30 +32,27 @@ class CreateAddressObject(komand.Action):
                 raise PluginException(cause="The host input appears to be an invalid ip or domain name",
                                       assistance="Ensure that the host input is valid",
                                       data=host)
-            fqdn = True
+            type_ = "fqdn"
 
-        if fqdn:
+        found = helper.match_whitelist(host, whitelist)
+        if not found:
             payload = {
                 "name": name if name else host,
-                "type": "fqdn",
+                "type": type_,
                 "subnet": str(host)
-            }
-        else:
-            payload = {
-                "name": name if name else host,
-                "type": "ipmask",
-                "subnet": str(host)
-            }
+                }
 
-        endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
+            endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
 
-        response = self.connection.session.post(endpoint, json=payload, verify=self.connection.ssl_verify)
+            response = self.connection.session.post(endpoint, json=payload, verify=self.connection.ssl_verify)
 
-        try:
-            response.raise_for_status()
-        except Exception as e:
-            raise PluginException(cause=f"Create address failed with {endpoint}",
-                                  assistance=response.text,
-                                  data=e)
+            try:
+                response.raise_for_status()
+            except Exception as e:
+                raise PluginException(cause=f"Create address failed with {endpoint}",
+                                      assistance=response.text,
+                                      data=e)
 
-        return {Output.SUCCESS: True, Output.RESPONSE_OBJECT: response.json()}
+            return {Output.SUCCESS: True, Output.RESPONSE_OBJECT: response.json()}
+
+        return {Output.SUCCESS: False, Output.RESPONSE_OBJECT: {}}
