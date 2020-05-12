@@ -28,15 +28,17 @@ This action is used to convert HTML to Markdown.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|html|bytes|None|True|HTML data|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|html|bytes|None|False|HTML data as bytes|None|None|
+|html_string|string|None|False|HTML data as string|None|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|markdown|bytes|False|Markdown data|
+|markdown|bytes|False|Markdown data as bytes|
+|markdown_string|bytes|False|Markdown data as string|
 
 #### Markdown to PDF
 
@@ -44,15 +46,17 @@ This action is used to convert Markdown to PDF.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|markdown|bytes|None|True|Markdown data|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
+|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|pdf|bytes|False|PDF data|
+|pdf|bytes|False|PDF data as bytes|
+|pdf_string|string|False|PDF data as string|
 
 #### Markdown to HTML
 
@@ -60,15 +64,34 @@ This action is used to convert Markdown to HTML.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|markdown|bytes|None|True|Markdown data|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
+|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
+
+Example input:
+
+```
+{
+  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|html|bytes|False|HTML data|
+|html|bytes|False|HTML data as bytes|
+|html_string|string|False|HTML data|
+
+Example output:
+
+```
+{
+  "html": "PGgxIGlkPSJyYXBpZDctaW5zaWdodGNvbm5lY3QiPlJhcGlkNyBJbnNpZ2h0Q29ubmVjdDwvaDE+Cg==",
+  "html_string": "\u003ch1 id=\"rapid7-insightconnect\"\u003eRapid7 InsightConnect\u003c/h1\u003e\n"
+}
+```
 
 ### Triggers
 
@@ -84,6 +107,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.0 - Update plugin title and description
 * 2.2.2 - New spec and help.md format for the Extension Library
 * 2.2.1 - Add `utilities` plugin tag for Marketplace searchability
 * 2.2.0 - PyPandoc bug fix | Support web server mode
