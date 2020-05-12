@@ -284,7 +284,7 @@ Example input:
 {
   "host": "192.168.7.7",
   "name": "testing",
-  "whitelist": ["198.51.100.100", "google.com", "192.0.2.0/24"]
+  "whitelist": ["198.51.100.100", "example,com", "192.0.2.0/24"]
 }
 ```
 
