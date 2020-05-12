@@ -24,7 +24,7 @@ class DeleteAddressObject(komand.Action):
             host = ip_network(host)
         except ValueError:
             if host[-1].isdigit() or host[-2].isdigit():
-                raise PluginException(cause="The host input appears to be an invalid ip or domain name",
+                raise PluginException(cause="The host input appears to be an invalid IP or domain name.",
                                       assistance="Ensure that the host input is valid",
                                       data=host)
             pass
