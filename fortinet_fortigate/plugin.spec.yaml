@@ -724,7 +724,7 @@ actions:
     input:
       host:
         title: Host
-        description: The host to delete. This can be an IP, domain, or CIDR address e.g. 198.51.100.0/24
+        description: The host to delete. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name
         type: string
         example: 198.51.100.100
         required: true
