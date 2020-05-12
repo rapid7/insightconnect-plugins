@@ -703,7 +703,7 @@ actions:
         title: Whitelist
         description: This list contains a set of network object that should not be blocked. This can include IPs, CIDR notation, or domains
         type: "[]string"
-        example: "[198.51.100.100, google.com, 192.0.2.0/24]"
+        example: "[198.51.100.100, example.com, 192.0.2.0/24]"
         required: false
         order: 3
     output:
