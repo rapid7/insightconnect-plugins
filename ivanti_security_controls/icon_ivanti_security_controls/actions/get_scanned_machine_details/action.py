@@ -20,10 +20,11 @@ class GetScannedMachineDetails(insightconnect_plugin_runtime.Action):
         hostname = params.get(Input.HOSTNAME)
 
         patch_scan_machine = self.connection.ivanti_api.get_patch_scan_machines(scan_id)
-
-        for machine in patch_scan_machine['value']:
-            if machine['name'] == hostname:
-                machine_id = machine['id']
+        machine = {}
+        for m in patch_scan_machine['value']:
+            if m['name'] == hostname:
+                machine_id = m['id']
+                machine = m
                 break
 
         if not machine_id:
@@ -32,6 +33,6 @@ class GetScannedMachineDetails(insightconnect_plugin_runtime.Action):
         detected_patches = self.connection.ivanti_api.get_detected_patches(scan_id, machine_id)['value']
 
         return {
-            Output.PATCH_SCAN_MACHINE: patch_scan_machine,
+            Output.PATCH_SCAN_MACHINE: machine,
             Output.DETECTED_PATCHES: detected_patches
         }

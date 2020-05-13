@@ -14,7 +14,6 @@ class Input:
     MACHINE_GROUP_IDS = "machine_group_ids"
     NAME = "name"
     RUN_AS_CREDENTIAL_ID = "run_as_credential_id"
-    RUN_AS_DEFAULT = "run_as_default"
     TEMPLATE_ID = "template_id"
     USE_MACHINE_CREDENTIAL = "use_machine_credential"
     
@@ -71,23 +70,17 @@ class StartPatchScanInput(insightconnect_plugin_runtime.Input):
       "description": "Reference to a credential to use to start a scan. Overwrites RunAsDefault behavior",
       "order": 6
     },
-    "run_as_default": {
-      "type": "boolean",
-      "title": "Run as Default",
-      "description": "An indication whether to run the scan as the user who invokes the REST API",
-      "order": 7
-    },
     "template_id": {
       "type": "string",
       "title": "Patch Scan Template ID",
       "description": "Patch scan template ID",
-      "order": 8
+      "order": 7
     },
     "use_machine_credential": {
       "type": "boolean",
       "title": "Use Machine Credential",
       "description": "An indication whether to use machine credentials. If No is specified, then either group-level credentials, default credentials or integrated Windows authentication credentials (in that order) will be used. This parameter is only used if an endpoint name is specified",
-      "order": 9
+      "order": 8
     }
   },
   "required": [

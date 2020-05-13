@@ -35,7 +35,6 @@ class StartPatchScan(insightconnect_plugin_runtime.Action):
             "machinegroupIds": machine_group_ids,
             "name": params.get(Input.NAME),
             "runAsCredentialId": params.get(Input.RUN_AS_CREDENTIAL_ID),
-            "runAsDefault": params.get(Input.RUN_AS_DEFAULT),
             "templateId": params.get(Input.TEMPLATE_ID),
             "useMachineCredential": use_machine_credential
         }

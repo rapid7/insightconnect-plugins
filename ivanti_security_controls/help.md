@@ -45,7 +45,6 @@ This action is used to start a patch scan.
 |machine_group_ids|[]string|None|False|List of machine groups to scan. Either hostnames or machine group IDs must be specified|None|['1', '2']|
 |name|string|None|False|Name to be given to scan|None|test-scan|
 |run_as_credential_id|string|None|False|Reference to a credential to use to start a scan. Overwrites RunAsDefault behavior|None|01234567-89AB-CDEF-0123-456789ABCDEF|
-|run_as_default|boolean|None|False|An indication whether to run the scan as the user who invokes the REST API|None|False|
 |template_id|string|None|True|Patch scan template ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|
 |use_machine_credential|boolean|None|False|An indication whether to use machine credentials. If No is specified, then either group-level credentials, default credentials or integrated Windows authentication credentials (in that order) will be used. This parameter is only used if an endpoint name is specified|None|False|
 

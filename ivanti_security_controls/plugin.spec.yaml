@@ -494,12 +494,6 @@ actions:
         type: string
         required: false
         example: 01234567-89AB-CDEF-0123-456789ABCDEF
-      run_as_default:
-        title: Run as Default
-        description: An indication whether to run the scan as the user who invokes the REST API
-        type: boolean
-        required: false
-        example: false
       template_id:
         title: Patch Scan Template ID
         description: Patch scan template ID
