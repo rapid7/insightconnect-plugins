@@ -140,8 +140,6 @@ class GetPatchScanStatusOutput(insightconnect_plugin_runtime.Output):
       },
       "required": [
         "consoleName",
-        "definitionDate",
-        "definitionVersion",
         "expectedResultTotal",
         "id",
         "isComplete",

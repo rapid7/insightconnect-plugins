@@ -272,12 +272,12 @@ types:
       title: Definition Date
       description: Definition Date
       type: string
-      required: true
+      required: false
     definitionVersion:
       title: Definition Version
       description: Definition version
       type: string
-      required: true
+      required: false
     expectedResultTotal:
       title: Expected Result Total
       description: Expected result total count

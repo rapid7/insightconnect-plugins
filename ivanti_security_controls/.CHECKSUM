@@ -1,5 +1,5 @@
 {
-	"spec": "51a97a67321b6970c6111667ecbe283e",
+	"spec": "122af696c30218bdc1dcb6c7ef502fa7",
 	"manifest": "e5e72a00824270d91c653dd9a764d530",
 	"setup": "91ade9a8f246d45c2a754a6d53b3ba03",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "get_patch_scan_status/schema.py",
-			"hash": "402d66f3bf4c9acbb8e5cd4c25c00f75"
+			"hash": "88247e5f1e9d9fa4eeae0a8030aa6b2f"
 		},
 		{
 			"identifier": "get_scanned_machine_details/schema.py",

@@ -502,8 +502,8 @@ _This plugin does not contain any triggers._
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Console Name|string|True|Console Name|
-|Definition Date|string|True|Definition Date|
-|Definition Version|string|True|Definition version|
+|Definition Date|string|False|Definition Date|
+|Definition Version|string|False|Definition version|
 |Expected Result Total|integer|True|Expected result total count|
 |Scan ID|string|True|Scan ID|
 |Is Complete|boolean|True|Is Complete|
