@@ -41,9 +41,9 @@ This action is used to get a policy.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|device_name|string|localhost.localdomain|True|Device Name|None|localhost.localdomain|
-|policy_name|string|None|True||None|InsightConnect Block List|
-|virtual_system|string|vsys1|True|Virtual System name|None|vsys1|
+|device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
+|policy_name|string|None|True|Policy name|None|InsightConnect Block List|
+|virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
 
@@ -67,7 +67,7 @@ Example input:
 |hip_profiles|[]string|False|Host Information in Policy Enforcement profile|
 |service|[]string|False|Service|
 |source|[]string|False|Source|
-|source_user|[]string|False|Source User|
+|source_user|[]string|False|Source user|
 |to|[]string|False|To|
 
 Example output:

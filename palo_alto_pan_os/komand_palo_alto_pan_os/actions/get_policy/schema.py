@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Policy"
+    DESCRIPTION = "Get a policy by name"
 
 
 class Input:
@@ -35,19 +35,20 @@ class GetPolicyInput(komand.Input):
     "device_name": {
       "type": "string",
       "title": "Device Name",
-      "description": "Device Name",
+      "description": "Device name",
       "default": "localhost.localdomain",
       "order": 2
     },
     "policy_name": {
       "type": "string",
       "title": "Policy Name",
+      "description": "Policy name",
       "order": 1
     },
     "virtual_system": {
       "type": "string",
       "title": "Virtual System Name",
-      "description": "Virtual System name",
+      "description": "Virtual system name",
       "default": "vsys1",
       "order": 3
     }
@@ -142,7 +143,7 @@ class GetPolicyOutput(komand.Output):
     "source_user": {
       "type": "array",
       "title": "Source User",
-      "description": "Source User",
+      "description": "Source user",
       "items": {
         "type": "string"
       },

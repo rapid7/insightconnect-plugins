@@ -663,7 +663,7 @@ actions:
     input:
       policy_name:
         title: Policy Name
-        Description: Policy name
+        description: Policy name
         type: string
         example: InsightConnect Block List
         required: true
@@ -735,4 +735,4 @@ actions:
         description: Action
         type: "string"
         required: false
-        
+

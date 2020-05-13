@@ -27,19 +27,6 @@ class GetPolicy(komand.Action):
                                   assistance=f"Could not find policy {name}. Check the name, virutal system name, and device name.\ndevice name: {device_name}\nvirtual system: {vsys}",
                                   data=response)
 
-        """
-            to:
-            from:
-            source:
-            destination:
-            source_user:
-            category:
-            application:
-            service:
-            hip_profiles:
-            action:
-        """
-
         to = self.get_entries(entry, "to")
         from_ = self.get_entries(entry, "from")
         source = self.get_entries(entry, "source")
