@@ -87,7 +87,7 @@ class GetScannedMachineDetailsOutput(insightconnect_plugin_runtime.Output):
         "cultureName": {
           "type": "string",
           "title": "Culture Name",
-          "description": "Culture Name",
+          "description": "Culture name",
           "order": 2
         },
         "kb": {
@@ -147,7 +147,7 @@ class GetScannedMachineDetailsOutput(insightconnect_plugin_runtime.Output):
         "vendorSeverity": {
           "type": "string",
           "title": "Vendor Severity",
-          "description": "The vendor-defined severity of the security risk or issue that this patch corrects.",
+          "description": "The vendor-defined severity of the security risk or issue that this patch corrects",
           "order": 12
         }
       },

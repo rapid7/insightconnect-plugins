@@ -31,9 +31,9 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
-#### Start Patch Scan
+#### Start a Patch Scan
 
-This action is used to start patch scan.
+This action is used to start a patch scan.
 
 ##### Input
 
@@ -41,7 +41,7 @@ This action is used to start patch scan.
 |----|----|-------|--------|-----------|----|-------|
 |credential_id|string|None|False|Credential ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|
 |diagnostic_trace_enabled|boolean|None|False|An indication whether diagnostics tracing should be enabled during scan|None|False|
-|hostnames|[]string|None|False|Hostnames. Either hostnames or machine group IDs must be specified|None|hostname-1|
+|hostnames|[]string|None|False|Hostnames - Either hostnames or machine group IDs must be specified|None|hostname-1|
 |machine_group_ids|[]string|None|False|List of machine groups to scan. Either hostnames or machine group IDs must be specified|None|['1', '2']|
 |name|string|None|False|Name to be given to scan|None|test-scan|
 |run_as_credential_id|string|None|False|Reference to a credential to use to start a scan. Overwrites RunAsDefault behavior|None|01234567-89AB-CDEF-0123-456789ABCDEF|
@@ -55,7 +55,7 @@ Example input:
 {
   "credential_id": "",
   "diagnostic_trace_enabled": false,
-  "hostnames": ["ivanti-w16"],
+  "hostnames": ["hostname-1"],
   "machine_group_ids": [],
   "name": "",
   "run_as_credential_id": "",
@@ -78,7 +78,7 @@ Example output:
   "scan_details": {
     "links": {
       "self": {
-        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
+        "href": "https://localhost:3121/st/con..."
       }
     },
     "name": "",
@@ -121,20 +121,20 @@ Example output:
 ```
 {
   "patch_scan_status_details": {
-    "consoleName": "ivanti-w16",
+    "consoleName": "hostname-1",
     "definitionDate": "2020-05-07T22:31:23.48",
     "expectedResultTotal": 1,
     "id": "f447bd51-de32-4bd6-a28e-ad834694d5ac",
     "isComplete": true,
     "links": {
       "machines": {
-        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
+        "href": "https://localhost:3121/st/con..."
       },
       "self": {
-        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
+        "href": "https://localhost:3121/st/con..."
       },
       "template": {
-        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
+        "href": "https://localhost:3121/st/con..."
       }
     },
     "name": "API - ivanti-w16",
@@ -163,8 +163,8 @@ Example input:
 
 ```
 {
-  "hostname": "ivanti-w16",
-  "scan_id": "f447bd51-de32-4bd6-a28e-ad834694d5ac"
+  "hostname": "hostname-1",
+  "scan_id": "01234567-89AB-CDEF-0123-456789ABCDEF"
 }
 ```
 
@@ -186,7 +186,7 @@ Example output:
       "kb": "Q4132216",
       "links": {
         "download": {
-          "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/console/api/v1.0/patch/downloads/0001e03b-0000-0000-0000-000000000000?culture=en-US"
+          "href": "https://localhost:3121/st/console/api/v1.0/patch/downloads/0001e03b-0000-0000-0000-000000000000?culture=en-US"
         }
       },
       "patchId": "0001e03b-0000-0000-0000-000000000000",
@@ -204,7 +204,7 @@ Example output:
       "kb": "Q4465659",
       "links": {
         "download": {
-          "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/console/api/v1.0/patch/downloads/0001f77f-0000-0000-0000-000000000000?culture=en-US"
+          "href": "https://localhost.com:3121/st/console/api/v1.0/patch/downloads/0001f77f-0000-0000-0000-000000000000?culture=en-US"
         }
       },
       "patchId": "0001f77f-0000-0000-0000-000000000000",
@@ -221,7 +221,7 @@ Example output:
     "count": 1,
     "links": {
       "next": {
-        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/console/api/v1.0/patch/scans/f447bd51-de32-4bd6-a28e-ad834694d5ac/machines?count=10\u0026start=73"
+        "href": "https://localhost.com:3121/st/console/api/v1.0/patch/scans/f447bd51-de32-4bd6-a28e-ad834694d5ac/machines?count=10\u0026start=73"
       }
     },
     "value": [
@@ -233,12 +233,12 @@ Example output:
         "installedPatchCount": 16,
         "links": {
           "patches": {
-            "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/console/api/v1.0/patch/scans/f447bd51-de32-4bd6-a28e-ad834694d5ac/machines/72/patches"
+            "href": "https://localhost:3121/st/console/api/v1.0/patch/scans/f447bd51-de32-4bd6-a28e-ad834694d5ac/machines/72/patches"
           }
         },
         "missingPatchCount": 3,
         "missingServicePackCount": 1,
-        "name": "ivanti-w16"
+        "name": "hostname-1"
       }
     ]
   }

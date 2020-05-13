@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Start patch scan"
+    DESCRIPTION = "Start a patch scan"
 
 
 class Input:
@@ -44,7 +44,7 @@ class StartPatchScanInput(insightconnect_plugin_runtime.Input):
     "hostnames": {
       "type": "array",
       "title": "Hostnames",
-      "description": "Hostnames. Either hostnames or machine group IDs must be specified",
+      "description": "Hostnames - Either hostnames or machine group IDs must be specified",
       "items": {
         "type": "string"
       },

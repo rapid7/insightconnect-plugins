@@ -128,7 +128,7 @@ class GetPatchScanStatusOutput(insightconnect_plugin_runtime.Output):
         "updatedOn": {
           "type": "string",
           "title": "Update Time",
-          "description": "Update Time",
+          "description": "Update time",
           "order": 12
         },
         "user": {

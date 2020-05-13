@@ -1,5 +1,5 @@
 {
-	"spec": "25e2fe4a6b7b9c54a35a406f636001c0",
+	"spec": "51a97a67321b6970c6111667ecbe283e",
 	"manifest": "e5e72a00824270d91c653dd9a764d530",
 	"setup": "91ade9a8f246d45c2a754a6d53b3ba03",
 	"schemas": [
@@ -17,15 +17,15 @@
 		},
 		{
 			"identifier": "get_patch_scan_status/schema.py",
-			"hash": "2d9ce2aa0110d3c3186c396216e57fb3"
+			"hash": "402d66f3bf4c9acbb8e5cd4c25c00f75"
 		},
 		{
 			"identifier": "get_scanned_machine_details/schema.py",
-			"hash": "f2b243e63fd9310ff53581901d97ece7"
+			"hash": "f13b58495b12f1edbedfdb395dd55eba"
 		},
 		{
 			"identifier": "start_patch_scan/schema.py",
-			"hash": "edce09602ce3778bdf8900af5a386795"
+			"hash": "a57b16910c4ef2cd7e79fb7c09b73be4"
 		},
 		{
 			"identifier": "connection/schema.py",

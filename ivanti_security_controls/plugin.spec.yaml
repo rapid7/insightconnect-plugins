@@ -320,7 +320,7 @@ types:
       required: true
     updatedOn:
       title: Update Time
-      description: Update Time
+      description: Update time
       type: string
       required: true
     user:
@@ -336,7 +336,7 @@ types:
       required: true
     cultureName:
       title: Culture Name
-      description: Culture Name
+      description: Culture name
       type: string
       required: true
     kb:
@@ -386,7 +386,7 @@ types:
       required: true
     vendorSeverity:
       title: Vendor Severity
-      description: The vendor-defined severity of the security risk or issue that this patch corrects.
+      description: The vendor-defined severity of the security risk or issue that this patch corrects
       type: string
       required: true
 actions:
@@ -455,12 +455,12 @@ actions:
         type: agent_status
         required: true
   start_patch_scan:
-    title: Start Patch Scan
-    description: Start patch scan
+    title: Start a Patch Scan
+    description: Start a patch scan
     input:
       hostnames:
         title: Hostnames
-        description: Hostnames. Either hostnames or machine group IDs must be specified
+        description: Hostnames - Either hostnames or machine group IDs must be specified
         type: '[]string'
         required: false
         example: "hostname-1"
