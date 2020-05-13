@@ -8,9 +8,9 @@ class Component:
 
 
 class Input:
-    CIDR = "cidr"
-    IP = "ip"
+    HOST = "host"
     NAME = "name"
+    WHITELIST = "whitelist"
     
 
 class Output:
@@ -24,29 +24,30 @@ class CreateAddressObjectInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "cidr": {
-      "type": "integer",
-      "title": "CIDR",
-      "description": "CIDR",
-      "default": 32,
-      "order": 2
-    },
-    "ip": {
+    "host": {
       "type": "string",
-      "title": "IP",
-      "description": "IP",
+      "title": "Host",
+      "description": "The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name",
       "order": 1
     },
     "name": {
       "type": "string",
       "title": "Name",
-      "description": "Optional name to give this address object. If not provided, the name will be the IP address",
+      "description": "Optional name to give this address object. If not provided, the name will be the IP address or domain name",
+      "order": 2
+    },
+    "whitelist": {
+      "type": "array",
+      "title": "Whitelist",
+      "description": "This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name",
+      "items": {
+        "type": "string"
+      },
       "order": 3
     }
   },
   "required": [
-    "cidr",
-    "ip"
+    "host"
   ]
 }
     """)
