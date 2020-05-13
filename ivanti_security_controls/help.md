@@ -86,7 +86,7 @@ Example output:
     "startedOn": "2020-05-13T14:42:33.0044884Z",
     "updatedOn": "2020-05-13T14:42:33.0044884Z",
     "user": "NT AUTHORITY\\SYSTEM",
-    "id": "45f62bb3-263f-4df6-8bb9-bebb7a6cf52f",
+    "id": "01234567-89AB-CDEF-0123-456789ABCDEF",
     "isComplete": false
   }
 }
