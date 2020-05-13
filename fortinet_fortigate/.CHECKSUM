@@ -1,7 +1,7 @@
 {
-	"spec": "1848b95cdb4e855c3022e1cf5cbfd665",
-	"manifest": "592948ab1aa36200d896a7f4e52b5136",
-	"setup": "5bdd90f7b6a9dd5002193048fc05923d",
+	"spec": "005ee07d059f758f799c135e5f4c8095",
+	"manifest": "5f1312d2a551f70ba7df255e26d50fff",
+	"setup": "3c6fa1aeb2c19c6c520249b5afbe9b3d",
 	"schemas": [
 		{
 			"identifier": "add_address_object_to_address_group/schema.py",
@@ -13,11 +13,11 @@
 		},
 		{
 			"identifier": "create_address_object/schema.py",
-			"hash": "9eb9fc218c868d3d12106c9f57cc75bf"
+			"hash": "55b6fd4655cd3349550c7f1e7e26a470"
 		},
 		{
 			"identifier": "delete_address_object/schema.py",
-			"hash": "7d502e3c3c53a8b83b24be4995e29682"
+			"hash": "30cec86725db71deb9c11a0d568164c7"
 		},
 		{
 			"identifier": "get_address_objects/schema.py",

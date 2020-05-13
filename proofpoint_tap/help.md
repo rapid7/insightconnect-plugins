@@ -6,7 +6,7 @@ threats before they reach your inbox. This plugin enables users to parse TAP ale
 
 # Key Features
 
-* Parse and trigger a workflow on a new alert
+* Parse indicators from TAP alert e-mails
 
 # Requirements
 
@@ -16,7 +16,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -24,13 +24,13 @@ This plugin does not contain a connection.
 
 #### Parse Alert
 
-This action is used to parse a TAP alert.
+This action is used to parse a TAP alert. This action supports a TAP alert from a forwarded e-mail as well.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|tap_alert|string|None|True|A Proofpoint TAP alert|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|tap_alert|string|None|True|A Proofpoint TAP alert|None|None|
 
 ##### Output
 
@@ -43,10 +43,10 @@ Example output:
 ```
 "results": {
   "threat": {
-    "attachment_sha256": "f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2",
+    "attachment_sha256": "9c22af77f29f5eb007403455b7896906b479995b6444e421d6093e683f593e4",
     "category": "Malware",
     "condemnation_time": "2019-01-10T12:34:05Z",
-    "threat_details_url": "https://threatinsight.proofpoint.com/d7924670-a2ec-a214-9b2a-acd68a33dba2/threat/email/6789c46ac78950da6c243c52dc9312cab77877c6b0e1dbd5d66f9870e96d30bf?linkOrigin=notif"
+    "threat_details_url": "https://threatinsight.proofpoint.com/v7l34e70-a2ec-a214-bc4d-acd68a33dba2/threat/email/9c22af77f29f5eb007403455b7896906b479995b6444e421d6093e683f593e4?linkOrigin=notif"
   },
   "message": {
     "time_delivered": "2019-01-10T12:10:21Z",
@@ -56,24 +56,68 @@ Example output:
     "header_from": "Bob",
     "header_replyto": "user@example.com",
     "message_id": "user@example.com",
-    "sender_ip": "1.2.3.4",
-    "message_size": "152 KB"
+    "sender_ip": "198.51.100.100",
+    "message_size": "152 KB",
+    "message_guid": "-AsyUBf--Yt7cR-tndAo8RaUbk8kBACE",
+    "threat_id": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050"
+
   },
   "browser": {
-     "time": "",
-     "source_ip": "",
-     "user_agent": ""
+      "time": "2020-05-11T11:01:13Z",
+      "source_ip": "198.51.100.100",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
    }
 }
 ```
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+### Custom Output Types
+
+#### browser
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Source IP|string|False|Source IP|
+|Time|string|False|Time|
+|User Agent|string|False|User agent string|
+
+#### message
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Header From|string|False|Header from|
+|Header Reply To|string|False|Header reply to|
+|Message GUID|string|False|Message GUID|
+|Message ID|string|False|Message ID|
+|Message Size|string|False|Message size|
+|Recipients|string|False|Recipients|
+|Sender|string|False|Sender|
+|Sender IP|string|False|Sender IP|
+|Subject|string|False|Subject|
+|Time Delivered|string|False|Time Delivered|
+
+#### tap_results
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Browser|browser|False|Browser information|
+|Message|message|False|TAP alert meta data|
+|Threat|threat|False|Threat information|
+
+#### threat
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Attachment SHA256 Hash|string|False|Attachment SHA256 hash|
+|Category|string|False|Category|
+|Condemnation Time|string|False|Condemnation Time|
+|Threat Details URL|string|False|URL for Details of the Threat|
+|URL|string|False|URL|
 
 ## Troubleshooting
 
@@ -81,6 +125,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.6 - Parsing out GUID of the message into the output type
 * 1.0.5 - Parsing out the View Threat Details link from emails to its own value
 * 1.0.4 - New spec and help.md format for the Extension Library
 * 1.0.3 - Fixed issue where headers were occasionally parsed improperly

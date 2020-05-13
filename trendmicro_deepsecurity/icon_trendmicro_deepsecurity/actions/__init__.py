@@ -2,4 +2,5 @@
 from .deploy_rules.action import DeployRules
 from .get_rule_details.action import GetRuleDetails
 from .list_rules.action import ListRules
+from .search_computers.action import SearchComputers
 from .search_rules.action import SearchRules

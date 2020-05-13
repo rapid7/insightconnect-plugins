@@ -2,6 +2,7 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 from requests_ntlm import HttpNtlmAuth
+from urllib.parse import parse_qs, urlparse
 
 
 class IvantiSecurityControlsAPI:
@@ -19,14 +20,20 @@ class IvantiSecurityControlsAPI:
 
     def get_agents(self, count=1000, name="", listening=""):
         agents = []
-        url = f"{self.url}/agents?count={count}&name={name}&listening={listening}"
+        url = f"{self.url}/agents"
+        params = {'count': count, 'name': name, 'listening': listening}
+
         while True:
-            response = self._call_api("GET", url)
+            response = self._call_api("GET", url, params=params)
 
             agents = agents + response.get('value', [])
 
             try:
-                url = response['links']['next']['href']
+                # Only retrieve start parameter from next url href since API does NOT include name and listening
+                # parameters even if included in original request so the next href can't be used blindly
+                query_params = parse_qs(urlparse(response['links']['next']['href']).query)
+                # Add or overwrite start parameter for next request
+                params['start'] = query_params['start']
             except KeyError:
                 # Return current list of agents when there are no more links to follow
                 return agents

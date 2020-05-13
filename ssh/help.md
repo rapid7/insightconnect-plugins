@@ -20,14 +20,14 @@ This plugin requires the SSH host (IP address or domain), port, username, and ei
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|None|True|Remote host to connect to. Can be over-ridden in actions|None|
-|key|credential_asymmetric_key|None|False|A base64 encoded SSH private key to use to authenticate to remote server. A newline is required after the beginning and before the end marker|None|
-|password|credential_secret_key|None|False|Password authentication or password to decrypt provided private key. Either this or SSH private key is required|None|
-|port|integer|22|True|Remote port to use|None|
-|use_key|boolean|None|True|True to connect via key, false to connect via password|None|
-|username|credential_secret_key|None|True|User to run command as|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|host|string|None|True|Remote host to connect to. Can be over-ridden in actions|None|None|
+|key|credential_asymmetric_key|None|False|A base64 encoded SSH private key to use to authenticate to remote server. A newline is required after the beginning and before the end marker|None|None|
+|password|credential_secret_key|None|False|Password authentication or password to decrypt provided private key. Either this or SSH private key is required|None|None|
+|port|integer|22|True|Remote port to use|None|None|
+|use_key|boolean|None|True|True to connect via key, false to connect via password|None|None|
+|username|string|None|True|User to run command as|None|None|
 
 The `key` field takes a base64 encoded RSA private key which must contain a newline character after the BEGIN marker and before the END marker:
 E.g.
@@ -54,10 +54,15 @@ This action is used to run remote command.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|command|string|None|True|Command to execute on remote host|None|
-|host|string|None|False|Host to run remote commands. If not provided, the connection host will be used|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|command|string|None|True|Command to execute on remote host|None|None|
+|host|string|None|False|Host to run remote commands. If not provided, the connection host will be used|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -91,6 +96,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.0 - Update connection username from credential_secret_key to string
 * 2.0.0 - Update Run action output to return 3 output fields i.e. `stderr`, `stdout`, and `all_output`
 * 1.0.3 - New spec and help.md format for the Extension Library
 * 1.0.2 - Fixed issue where Run was excluded

@@ -17,7 +17,7 @@ class GetRuleDetails(komand.Action):
 
     def run(self, params={}):
         """
-        List IPS rules
+        Get IPS rule details
         """
 
         # Get parameters
@@ -28,7 +28,7 @@ class GetRuleDetails(komand.Action):
         # Prepare request
         url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/{self.id}"
 
-        # Set rules
+        # Send request
         response = self.connection.session.get(url,
                                                verify=self.connection.dsm_verify_ssl)
 
