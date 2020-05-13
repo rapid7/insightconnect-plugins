@@ -33,6 +33,79 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Get Policy
+
+This action is used to get a policy.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|device_name|string|localhost.localdomain|True|Device Name|None|localhost.localdomain|
+|policy_name|string|None|True||None|InsightConnect Block List|
+|virtual_system|string|vsys1|True|Virtual System name|None|vsys1|
+
+Example input:
+
+```
+{
+  "device_name": "localhost.localdomain",
+  "policy_name": "ICON Block Rule",
+  "virtual_system": "vsys1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|action|string|False|Action|
+|application|[]string|False|Application|
+|category|[]string|False|Category|
+|destination|[]string|False|Destination|
+|from|[]string|False|From|
+|hip_profiles|[]string|False|Host Information in Policy Enforcement profile|
+|service|[]string|False|Service|
+|source|[]string|False|Source|
+|source_user|[]string|False|Source User|
+|to|[]string|False|To|
+
+Example output:
+
+```
+{
+  "to": [
+    "any"
+  ],
+  "from": [
+    "any"
+  ],
+  "source": [
+    "1.1.1.1",
+    "1.1.1.2"
+  ],
+  "destination": [
+    "any"
+  ],
+  "source_user": [
+    "any"
+  ],
+  "category": [
+    "any"
+  ],
+  "application": [
+    "any"
+  ],
+  "service": [
+    "application-default"
+  ],
+  "hip_profiles": [
+    "any"
+  ],
+  "action": "drop"
+}
+```
+
 #### Create Address Object
 
 This action is used to create a new address object. It will accept an IP, CIDR, Fully Qualified Domain Name (FQDN), 
@@ -55,7 +128,7 @@ In this case, we will strip the /32 from the end and check the IP against the wh
 |object_description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
 |object_name|string|None|True|The name of the address object|None|Blocked host|
 |tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|malware|
-|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|
+|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|['198.51.100.100', '192.0.2.0/24', 'example.com']|
 
 Example input:
 
@@ -662,6 +735,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 2.1.0 - New action Get Policy
 * 2.0.0 - Update to rename Set Address Object to Create Address Object | Update Create Address Object to accept a whitelist of address objects and auto detect the type of incoming object
 * 1.5.7 - Default value of Commit action updated
 * 1.5.6 - Fix issue where edit action was causing an error with certain input
