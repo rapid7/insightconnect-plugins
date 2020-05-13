@@ -1,7 +1,7 @@
 {
-	"spec": "ea890d1defa30c513d08a8c32410a45c",
-	"manifest": "2444fa8b0ac1aa840e7c2cf99841474e",
-	"setup": "e7166f46bb856efaa0de3068af255ea5",
+	"spec": "299078f7c28f01ca88c891a5c7e2a21d",
+	"manifest": "561ca9b32a0d596e7a1d6e411a4e0567",
+	"setup": "4b54dee81223069aedc77275f0fb861c",
 	"schemas": [
 		{
 			"identifier": "html_to_markdown/schema.py",
@@ -14,6 +14,10 @@
 		{
 			"identifier": "markdown_to_pdf/schema.py",
 			"hash": "d8c1be885a906c6f7ab7ee35704c68f5"
+		},
+		{
+			"identifier": "markdown_to_txt/schema.py",
+			"hash": "99b52e3c45941f19ed79cbdde2361625"
 		},
 		{
 			"identifier": "connection/schema.py",
