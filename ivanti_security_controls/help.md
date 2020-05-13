@@ -60,7 +60,7 @@ Example input:
   "name": "",
   "run_as_credential_id": "",
   "run_as_default": false,
-  "template_id": "4c7069eb-6e1c-4352-91fc-04d4d8abc07b",
+  "template_id": "01234567-89AB-CDEF-0123-456789ABCDEF",
   "use_machine_credential": true
 }
 ```
