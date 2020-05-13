@@ -3,6 +3,7 @@ from .schema import StartPatchScanInput, StartPatchScanOutput, Input, Output, Co
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+import time
 
 
 class StartPatchScan(insightconnect_plugin_runtime.Action):
@@ -39,6 +40,19 @@ class StartPatchScan(insightconnect_plugin_runtime.Action):
             "useMachineCredential": use_machine_credential
         }
         scan_details = self.connection.ivanti_api.start_patch_scan(payload)
+
+        max_poll_time = 300
+        i = 0
+        # Poll for patch scan completion
+        while i < max_poll_time:
+            time.sleep(10)
+            patch_scan_status_details = self.connection.ivanti_api.get_patch_scan_status_details(scan_details['id'],allow_404=True)
+            if patch_scan_status_details is not None:
+                if patch_scan_status_details.get('isComplete'):
+                    scan_details['isComplete'] = True
+                    scan_details['updatedOn'] = patch_scan_status_details['updatedOn']
+                    break
+            i += 10
 
         return {
             Output.SCAN_DETAILS: scan_details

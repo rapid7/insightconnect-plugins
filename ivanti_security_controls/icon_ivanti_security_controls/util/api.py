@@ -44,8 +44,8 @@ class IvantiSecurityControlsAPI:
     def get_patch_scan_machines(self, scan_id):
         return self._call_api("GET", f"{self.url}/patch/scans/{scan_id}/machines")
 
-    def get_patch_scan_status_details(self, scan_id):
-        return self._call_api("GET", f"{self.url}/patch/scans/{scan_id}")
+    def get_patch_scan_status_details(self, scan_id, allow_404=False):
+        return self._call_api("GET", f"{self.url}/patch/scans/{scan_id}", allow_404=allow_404)
 
     def get_detected_patches(self, scan_id, machine_id):
         return self._call_api("GET", f"{self.url}/patch/scans/{scan_id}/machines/{machine_id}/patches")
