@@ -61,7 +61,8 @@ Example input:
   "run_as_credential_id": "",
   "run_as_default": false,
   "template_id": "01234567-89AB-CDEF-0123-456789ABCDEF",
-  "use_machine_credential": true
+  "use_machine_credential": true,
+  "max_poll_time": 300
 }
 ```
 
@@ -218,14 +219,6 @@ Example output:
     }
   ],
   "patch_scan_machine": {
-    "count": 1,
-    "links": {
-      "next": {
-        "href": "https://localhost.com:3121/st/console/api/v1.0/patch/scans/f447bd51-de32-4bd6-a28e-ad834694d5ac/machines?count=10\u0026start=73"
-      }
-    },
-    "value": [
-      {
         "completedOn": "2020-05-12T21:53:57.71Z",
         "domain": "WORKGROUP",
         "errorNumber": 0,
@@ -239,8 +232,6 @@ Example output:
         "missingPatchCount": 3,
         "missingServicePackCount": 1,
         "name": "hostname-1"
-      }
-    ]
   }
 }
 ```
