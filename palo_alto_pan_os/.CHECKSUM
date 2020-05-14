@@ -1,7 +1,7 @@
 {
-	"spec": "e06d391dcb9e15b31cff0c954038d6e6",
-	"manifest": "96ebf907b03d73d2246a8e0f62202dba",
-	"setup": "d7c00896c9773f8bde4526a52943534a",
+	"spec": "cc554817970871f4e6b81d40a1456407",
+	"manifest": "4312b68d0b8fe126d6362c0c53166757",
+	"setup": "88cb840debef2a0494e71ede0e253e73",
 	"schemas": [
 		{
 			"identifier": "add_external_dynamic_list/schema.py",
@@ -26,6 +26,10 @@
 		{
 			"identifier": "get/schema.py",
 			"hash": "44edf318f15fd914cc88f057396a5dcc"
+		},
+		{
+			"identifier": "get_policy/schema.py",
+			"hash": "a0a1e57b14b9c14685964c7423d46137"
 		},
 		{
 			"identifier": "op/schema.py",
