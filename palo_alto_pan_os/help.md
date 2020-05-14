@@ -71,6 +71,9 @@ Example input:
 Example output:
 
 ```
+{
+  "found": true
+}
 ```
 
 #### Get Policy
@@ -88,6 +91,11 @@ This action is used to get a policy.
 Example input:
 
 ```
+{
+  "device_name": "localhost.localdomain",
+  "policy_name": "InsightConnect Block List",
+  "virtual_system": "vsys1"
+}
 ```
 
 ##### Output
@@ -770,6 +778,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 2.2.0 - New action Check if Address in Group
 * 2.1.0 - New action Get Policy
 * 2.0.0 - Update to rename Set Address Object to Create Address Object | Update Create Address Object to accept a whitelist of address objects and auto detect the type of incoming object
 * 1.5.7 - Default value of Commit action updated
