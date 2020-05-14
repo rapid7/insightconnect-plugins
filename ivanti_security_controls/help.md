@@ -43,6 +43,7 @@ This action is used to start a patch scan.
 |diagnostic_trace_enabled|boolean|None|False|An indication whether diagnostics tracing should be enabled during scan|None|False|
 |hostnames|[]string|None|False|Hostnames - Either hostnames or machine group IDs must be specified|None|hostname-1|
 |machine_group_ids|[]string|None|False|List of machine groups to scan. Either hostnames or machine group IDs must be specified|None|['1', '2']|
+|max_poll_time|integer|300|True|Max poll time|None|300|
 |name|string|None|False|Name to be given to scan|None|test-scan|
 |run_as_credential_id|string|None|False|Reference to a credential to use to start a scan. Overwrites RunAsDefault behavior|None|01234567-89AB-CDEF-0123-456789ABCDEF|
 |template_id|string|None|True|Patch scan template ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|

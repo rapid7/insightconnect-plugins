@@ -19,6 +19,7 @@ class StartPatchScan(insightconnect_plugin_runtime.Action):
         endpoint_names = params.get(Input.HOSTNAMES, [])
         machine_group_ids = params.get(Input.MACHINE_GROUP_IDS, [])
         use_machine_credential = params.get(Input.USE_MACHINE_CREDENTIAL, False)
+        max_poll_time = params.get(Input.MAX_POLL_TIME)
 
         if not endpoint_names and not machine_group_ids:
             raise PluginException(cause='No hostnames or machine group IDs specified.',
@@ -40,15 +41,14 @@ class StartPatchScan(insightconnect_plugin_runtime.Action):
         }
         scan_details = self.connection.ivanti_api.start_patch_scan(payload)
 
-        max_poll_time = 300
         i = 0
         # Poll for patch scan completion
         while i < max_poll_time:
             time.sleep(10)
-            patch_scan_status_details = self.connection.ivanti_api.get_patch_scan_status_details(scan_details['id'],allow_404=True)
+            patch_scan_status_details = self.connection.ivanti_api.get_patch_scan_status_details(scan_details['id'], allow_404=True)
             if patch_scan_status_details is not None:
                 if patch_scan_status_details.get('isComplete'):
-                    scan_details['isComplete'] = True
+                    scan_details['isComplete'] = patch_scan_status_details['isComplete']
                     scan_details['updatedOn'] = patch_scan_status_details['updatedOn']
                     break
             i += 10

@@ -12,6 +12,7 @@ class Input:
     DIAGNOSTIC_TRACE_ENABLED = "diagnostic_trace_enabled"
     HOSTNAMES = "hostnames"
     MACHINE_GROUP_IDS = "machine_group_ids"
+    MAX_POLL_TIME = "max_poll_time"
     NAME = "name"
     RUN_AS_CREDENTIAL_ID = "run_as_credential_id"
     TEMPLATE_ID = "template_id"
@@ -58,6 +59,13 @@ class StartPatchScanInput(insightconnect_plugin_runtime.Input):
       },
       "order": 2
     },
+    "max_poll_time": {
+      "type": "integer",
+      "title": "Max Poll Time",
+      "description": "Max poll time",
+      "default": 300,
+      "order": 9
+    },
     "name": {
       "type": "string",
       "title": "Name",
@@ -84,6 +92,7 @@ class StartPatchScanInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
+    "max_poll_time",
     "template_id"
   ]
 }

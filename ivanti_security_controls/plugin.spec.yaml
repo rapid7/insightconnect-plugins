@@ -506,6 +506,13 @@ actions:
         type: boolean
         required: false
         example: false
+      max_poll_time:
+        title: Max Poll Time
+        description: Max poll time
+        type: integer
+        default: 300
+        required: true
+        example: 300
     output:
       scan_details:
         title: Scan Details
