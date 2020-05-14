@@ -736,7 +736,7 @@ actions:
         type: "string"
         required: false
   check_if_address_object_in_group:
-    title: Check if Address in Group
+    title: Check If Address in Group
     description: Checks to see if an IP, CIDR, or domain is in an Address Group
     input:
       group_name:
