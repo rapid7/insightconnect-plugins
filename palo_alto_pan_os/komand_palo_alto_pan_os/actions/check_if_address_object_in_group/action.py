@@ -31,7 +31,7 @@ class CheckIfAddressObjectInGroup(komand.Action):
                                   data=response)
 
         # Extract all the address objects from the address group
-        self.logger.info(f"Number of IP objects received: {len(ip_objects)}")
+        self.logger.info(f"Searching through {len(ip_objects)} address objects.")
         ip_object_names = []
         for member in ip_objects.get("member", {}):
             object_name = member.get("#text", "")
@@ -69,4 +69,3 @@ class CheckIfAddressObjectInGroup(komand.Action):
 
         # That was a lot of work for nothing...bail out
         return {Output.FOUND: False}
-
