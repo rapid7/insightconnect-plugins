@@ -746,11 +746,11 @@ actions:
         example: ICON Block List
         required: true
         order: 1
-      address_to_check:
-        title: Address to Check
-        description: IP, CIDR, or domain to check if in address group. e.g. 1.1.1.1, 1.1.1.1/24, rapid7.com
+      address:
+        title: Address
+        description: IP, CIDR, or domain to check if in address group. e.g. 198.51.100.100, 198.51.100.100/24, rapid7.com
         type: string
-        example: 1.1.1.1
+        example: 198.51.100.100
         required: true
         order: 2
       device_name:
@@ -774,6 +774,6 @@ actions:
         title: Found
         description: Was address found in group
         type: boolean
-        required: false
+        required: true
 
 

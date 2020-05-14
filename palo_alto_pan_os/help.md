@@ -38,7 +38,7 @@ Example input:
 
 ### Actions
 
-#### Check If Address Object in Group
+#### Check if Address in Group
 
 This action checks to see if an IP, CIDR, or domain is in an Address Group.
 
@@ -46,7 +46,7 @@ This action checks to see if an IP, CIDR, or domain is in an Address Group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_to_check|string|None|True|IP, CIDR, or domain to check if in address group. e.g. 1.1.1.1, 1.1.1.1/24, rapid7.com|None|1.1.1.1|
+|address|string|None|True|IP, CIDR, or domain to check if in address group. e.g. 198.51.100.100, 198.51.100.100/24, rapid7.com|None|198.51.100.100|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |group_name|string|None|True|Group name|None|ICON Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
@@ -55,7 +55,7 @@ Example input:
 
 ```
 {
-  "address_to_check": "1.1.1.1",
+  "address": "198.51.100.100",
   "device_name": "localhost.localdomain",
   "group_name": "ICON Block List",
   "virtual_system": "vsys1"
@@ -66,7 +66,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|found|boolean|False|Was address found in group|
+|found|boolean|True|Was address found in group|
 
 Example output:
 

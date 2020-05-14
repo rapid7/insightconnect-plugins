@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    ADDRESS_TO_CHECK = "address_to_check"
+    ADDRESS = "address"
     DEVICE_NAME = "device_name"
     GROUP_NAME = "group_name"
     VIRTUAL_SYSTEM = "virtual_system"
@@ -24,10 +24,10 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address_to_check": {
+    "address": {
       "type": "string",
-      "title": "Address to Check",
-      "description": "IP, CIDR, or domain to check if in address group. e.g. 1.1.1.1, 1.1.1.1/24, rapid7.com",
+      "title": "Address",
+      "description": "IP, CIDR, or domain to check if in address group. e.g. 198.51.100.100, 198.51.100.100/24, rapid7.com",
       "order": 2
     },
     "device_name": {
@@ -52,7 +52,7 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
     }
   },
   "required": [
-    "address_to_check",
+    "address",
     "device_name",
     "group_name",
     "virtual_system"
@@ -76,7 +76,10 @@ class CheckIfAddressObjectInGroupOutput(komand.Output):
       "description": "Was address found in group",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "found"
+  ]
 }
     """)
 
