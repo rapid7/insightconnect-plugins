@@ -27,14 +27,14 @@ class CheckIfAddressObjectInGroup(komand.Action):
         ip_objects = response.get("response", {}).get("result", {}).get("entry", {}).get("static")
         if not ip_objects:
             raise PluginException(cause="PAN OS returned an unexpected response.",
-                                  assistance=f"Could not find group {group_name}, or group was empty. Check the name, virutal system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
+                                  assistance=f"Could not find group {group_name}, or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
                                   data=response)
 
         # Extract all the address objects from the address group
         self.logger.info(f"Number of IP objects received: {len(ip_objects)}")
         ip_object_names = []
         for member in ip_objects.get("member", {}):
-            object_name = member.get("#text","")
+            object_name = member.get("#text", "")
             if object_name:
                 ip_object_names.append(object_name)
 
