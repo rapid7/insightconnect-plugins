@@ -735,4 +735,46 @@ actions:
         description: Action
         type: "string"
         required: false
+  check_if_address_object_in_group:
+    title: Check If Address Object in Group
+    description: Checks to see if an IP, CIDR, or Domain is in an Address Group
+    input:
+      group_name:
+        title: Group Name
+        description: Group name
+        type: string
+        example: ICON Block List
+        required: true
+        order: 1
+      address_to_check:
+        title: Address to Check
+        description: IP, CIDR, or domain to check if in address group. e.g. 1.1.1.1, 1.1.1.1/24, rapid7.com
+        type: string
+        example: 1.1.1.1
+        required: true
+        order: 2
+      device_name:
+        title: Device Name
+        description: Device name
+        type: string
+        default: localhost.localdomain
+        example: localhost.localdomain
+        required: true
+        order: 3
+      virtual_system:
+        title: Virtual System Name
+        description: Virtual system name
+        type: string
+        default: vsys1
+        example: vsys1
+        required: true
+        order: 4
+    output:
+      found:
+        title: Found
+        description: Was address found in group
+        type: boolean
+        required: false
+
+
 

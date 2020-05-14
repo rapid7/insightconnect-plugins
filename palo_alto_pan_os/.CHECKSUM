@@ -1,6 +1,6 @@
 {
-	"spec": "cc554817970871f4e6b81d40a1456407",
-	"manifest": "4312b68d0b8fe126d6362c0c53166757",
+	"spec": "9b617a8a8db8227d632401dcbecc8a27",
+	"manifest": "41916caa8b8767fa0d4aefb5eb201e3f",
 	"setup": "88cb840debef2a0494e71ede0e253e73",
 	"schemas": [
 		{
@@ -10,6 +10,10 @@
 		{
 			"identifier": "add_to_policy/schema.py",
 			"hash": "2382ce2b561ceae49b04fe73f074b83c"
+		},
+		{
+			"identifier": "check_if_address_object_in_group/schema.py",
+			"hash": "4f15f44dc92356552864edb90e469343"
 		},
 		{
 			"identifier": "commit/schema.py",
