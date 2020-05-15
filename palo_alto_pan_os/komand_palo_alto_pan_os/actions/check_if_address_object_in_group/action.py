@@ -34,9 +34,12 @@ class CheckIfAddressObjectInGroup(komand.Action):
         self.logger.info(f"Searching through {len(ip_objects)} address objects.")
         ip_object_names = []
         for member in ip_objects.get("member", {}):
-            object_name = member.get("#text", "")
-            if object_name:
-                ip_object_names.append(object_name)
+            if type(member) == str:
+                ip_object_names.append(member)
+            else:
+                object_name = member.get("#text", "")
+                if object_name:
+                    ip_object_names.append(object_name)
 
         # This is a helper to check addresses against address objects
         ip_checker = IpCheck()
@@ -62,10 +65,10 @@ class CheckIfAddressObjectInGroup(komand.Action):
                 # in the XML for the key we just found
                 if type(address_object) is str:
                     if ip_checker.check_address_against_object(address_object, address_to_check):
-                        return {Output.FOUND: True}
+                        return {Output.FOUND: True, Output.ADDRESS_OBJECT_NAME: name}
                 else:
                     if ip_checker.check_address_against_object(address_object.get("#text", ""), address_to_check):
-                        return {Output.FOUND: True}
+                        return {Output.FOUND: True, Output.ADDRESS_OBJECT_NAME: name}
 
         # That was a lot of work for nothing...bail out
         return {Output.FOUND: False}

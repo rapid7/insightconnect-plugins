@@ -38,6 +38,53 @@ Example input:
 
 ### Actions
 
+#### Remove Address Object from Group
+
+This action removes an address object from an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object_name|string|None|True|The name of the address object to remove|None|Malicious IP|
+|device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
+|group_name|string|None|True|Group name|None|ICON Block List|
+|virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
+
+Example input:
+
+```
+{
+  "address_object_name": "Malicious IP",
+  "device_name": "localhost.localdomain",
+  "group_name": "ICON Block List",
+  "virtual_system": "vsys1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+```
+
+#### 
+
+This action is used to .
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+_This action does not contain any outputs._
+
 #### Check If Address in Group
 
 This action checks to see if an IP, CIDR, or domain is in an Address Group.
@@ -66,6 +113,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|address_object_name|string|False||
 |found|boolean|True|Was address found in group|
 
 Example output:
@@ -88,11 +136,6 @@ This action is used to get a policy.
 Example input:
 
 ```
-{
-  "device_name": "localhost.localdomain",
-  "policy_name": "InsightConnect Block List",
-  "virtual_system": "vsys1"
-}
 ```
 
 ##### Output

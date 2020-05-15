@@ -37,6 +37,8 @@ class ICONPaloAltoPanOs(komand.Plugin):
 
         self.add_action(actions.Op())
 
+        self.add_action(actions.RemoveAddressObjectFromGroup())
+
         self.add_action(actions.RemoveFromPolicy())
 
         self.add_action(actions.RetrieveLogs())

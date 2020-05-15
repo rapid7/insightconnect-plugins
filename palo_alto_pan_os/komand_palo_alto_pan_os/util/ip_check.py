@@ -21,7 +21,7 @@ class IpCheck:
         address_type = self.determine_address_type(address_to_check)
         object_type = self.determine_address_type(address_object)
 
-        if object_type == "fqdn" or type == "ip_address":
+        if object_type == "fqdn" or object_type == "ip_address":
             return address_object == address_to_check
 
         if object_type == "ip_range":

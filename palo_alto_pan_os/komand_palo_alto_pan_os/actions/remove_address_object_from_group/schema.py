@@ -4,32 +4,31 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Checks to see if an IP, CIDR, or domain is in an Address Group"
+    DESCRIPTION = "Removes an address object from an address group"
 
 
 class Input:
-    ADDRESS = "address"
+    ADDRESS_OBJECT_NAME = "address_object_name"
     DEVICE_NAME = "device_name"
     GROUP_NAME = "group_name"
     VIRTUAL_SYSTEM = "virtual_system"
     
 
 class Output:
-    ADDRESS_OBJECT_NAME = "address_object_name"
-    FOUND = "found"
+    SUCCESS = "success"
     
 
-class CheckIfAddressObjectInGroupInput(komand.Input):
+class RemoveAddressObjectFromGroupInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address": {
+    "address_object_name": {
       "type": "string",
-      "title": "Address",
-      "description": "IP, CIDR, or domain to check if in address group. e.g. 198.51.100.100, 198.51.100.100/24, rapid7.com",
-      "order": 2
+      "title": "Address Object name",
+      "description": "The name of the address object to remove",
+      "order": 1
     },
     "device_name": {
       "type": "string",
@@ -42,7 +41,7 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
       "type": "string",
       "title": "Group Name",
       "description": "Group name",
-      "order": 1
+      "order": 2
     },
     "virtual_system": {
       "type": "string",
@@ -53,7 +52,7 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
     }
   },
   "required": [
-    "address",
+    "address_object_name",
     "device_name",
     "group_name",
     "virtual_system"
@@ -65,26 +64,21 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class CheckIfAddressObjectInGroupOutput(komand.Output):
+class RemoveAddressObjectFromGroupOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address_object_name": {
-      "type": "string",
-      "title": "Address Object Name",
-      "order": 2
-    },
-    "found": {
+    "success": {
       "type": "boolean",
-      "title": "Found",
-      "description": "Was address found in group",
+      "title": "Success",
+      "description": "Was operation successful",
       "order": 1
     }
   },
   "required": [
-    "found"
+    "success"
   ]
 }
     """)
