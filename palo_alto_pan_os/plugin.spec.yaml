@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto PAN-OS
 description: Manage Palo Alto Networks devices via PAN-OS
-version: 2.0.0
+version: 2.2.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -657,3 +657,123 @@ actions:
         description: A message with more detail about the status
         type: string
         required: false
+  get_policy:
+    title: Get Policy
+    description: Get a policy by name
+    input:
+      policy_name:
+        title: Policy Name
+        description: Policy name
+        type: string
+        example: InsightConnect Block List
+        required: true
+        order: 1
+      device_name:
+        title: Device Name
+        description: Device name
+        type: string
+        default: localhost.localdomain
+        example: localhost.localdomain
+        required: true
+        order: 2
+      virtual_system:
+        title: Virtual System Name
+        description: Virtual system name
+        type: string
+        default: vsys1
+        example: vsys1
+        required: true
+        order: 3
+    output:
+      to:
+        title: To
+        description: To
+        type: "[]string"
+        required: false
+      from:
+        title: From
+        description: From
+        type: "[]string"
+        required: false
+      source:
+        title: Source
+        description: Source
+        type: "[]string"
+        required: false
+      destination:
+        title: Destination
+        description: Destination
+        type: "[]string"
+        required: false
+      source_user:
+        title: Source User
+        description: Source user
+        type: "[]string"
+        required: false
+      category:
+        title: Category
+        description: Category
+        type: "[]string"
+        required: false
+      application:
+        title: Application
+        description: Application
+        type: "[]string"
+        required: false
+      service:
+        title: Service
+        description: Service
+        type: "[]string"
+        required: false
+      hip_profiles:
+        title: HIP Profiles
+        description: Host Information in Policy Enforcement profile
+        type: "[]string"
+        required: false
+      action:
+        title: Action
+        description: Action
+        type: "string"
+        required: false
+  check_if_address_object_in_group:
+    title: Check If Address in Group
+    description: Checks to see if an IP, CIDR, or domain is in an Address Group
+    input:
+      group_name:
+        title: Group Name
+        description: Group name
+        type: string
+        example: ICON Block List
+        required: true
+        order: 1
+      address:
+        title: Address
+        description: IP, CIDR, or domain to check if in address group. e.g. 198.51.100.100, 198.51.100.100/24, rapid7.com
+        type: string
+        example: 198.51.100.100
+        required: true
+        order: 2
+      device_name:
+        title: Device Name
+        description: Device name
+        type: string
+        default: localhost.localdomain
+        example: localhost.localdomain
+        required: true
+        order: 3
+      virtual_system:
+        title: Virtual System Name
+        description: Virtual system name
+        type: string
+        default: vsys1
+        example: vsys1
+        required: true
+        order: 4
+    output:
+      found:
+        title: Found
+        description: Was address found in group
+        type: boolean
+        required: true
+
+
