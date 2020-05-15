@@ -38,6 +38,18 @@ class IvantiSecurityControlsAPI:
                 # Return current list of agents when there are no more links to follow
                 return agents
 
+    def start_patch_scan(self, payload):
+        return self._call_api("POST", f"{self.url}/patch/scans", json_data=payload)
+
+    def get_patch_scan_machines(self, scan_id):
+        return self._call_api("GET", f"{self.url}/patch/scans/{scan_id}/machines")
+
+    def get_patch_scan_status_details(self, scan_id, allow_404=False):
+        return self._call_api("GET", f"{self.url}/patch/scans/{scan_id}", allow_404=allow_404)
+
+    def get_detected_patches(self, scan_id, machine_id):
+        return self._call_api("GET", f"{self.url}/patch/scans/{scan_id}/machines/{machine_id}/patches")
+
     def _call_api(self, method, url, params=None, json_data=None, allow_404=False):
         try:
             response = requests.request(method, url,
@@ -45,7 +57,6 @@ class IvantiSecurityControlsAPI:
                                         json=json_data,
                                         params=params,
                                         verify=self.ssl_verify)
-
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
             if response.status_code == 404:

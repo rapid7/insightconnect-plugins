@@ -2,3 +2,6 @@
 from .get_agent.action import GetAgent
 from .get_agent_status.action import GetAgentStatus
 from .get_agents.action import GetAgents
+from .get_patch_scan_status.action import GetPatchScanStatus
+from .get_scanned_machine_details.action import GetScannedMachineDetails
+from .start_patch_scan.action import StartPatchScan
