@@ -6,7 +6,7 @@ from komand_palo_alto_pan_os import connection, actions, triggers
 
 Name = "Palo Alto PAN-OS"
 Vendor = "rapid7"
-Version = "2.1.0"
+Version = "2.2.0"
 Description = "Manage Palo Alto Networks devices via PAN-OS"
 
 
@@ -22,6 +22,8 @@ class ICONPaloAltoPanOs(komand.Plugin):
         self.add_action(actions.AddExternalDynamicList())
 
         self.add_action(actions.AddToPolicy())
+
+        self.add_action(actions.CheckIfAddressObjectInGroup())
 
         self.add_action(actions.Commit())
 

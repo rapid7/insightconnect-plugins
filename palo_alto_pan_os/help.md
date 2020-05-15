@@ -29,9 +29,49 @@ The connection configuration accepts the following parameters:
 |server|string|None|True|URL pointing to instance of PAN-OS|None|None|
 |verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting PAN-OS over HTTPS|None|None|
 
+Example input:
+
+```
+```
+
 ## Technical Details
 
 ### Actions
+
+#### Check If Address in Group
+
+This action checks to see if an IP, CIDR, or domain is in an Address Group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IP, CIDR, or domain to check if in address group. e.g. 198.51.100.100, 198.51.100.100/24, rapid7.com|None|198.51.100.100|
+|device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
+|group_name|string|None|True|Group name|None|ICON Block List|
+|virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.100",
+  "device_name": "localhost.localdomain",
+  "group_name": "ICON Block List",
+  "virtual_system": "vsys1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|found|boolean|True|Was address found in group|
+
+Example output:
+
+```
+```
 
 #### Get Policy
 
@@ -50,7 +90,7 @@ Example input:
 ```
 {
   "device_name": "localhost.localdomain",
-  "policy_name": "ICON Block Rule",
+  "policy_name": "InsightConnect Block List",
   "virtual_system": "vsys1"
 }
 ```
@@ -128,7 +168,7 @@ In this case, we will strip the /32 from the end and check the IP against the wh
 |object_description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
 |object_name|string|None|True|The name of the address object|None|Blocked host|
 |tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|malware|
-|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|['198.51.100.100', '192.0.2.0/24', 'example.com']|
+|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|
 
 Example input:
 
@@ -735,6 +775,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 2.2.0 - New action Check if Address in Group
 * 2.1.0 - New action Get Policy
 * 2.0.0 - Update to rename Set Address Object to Create Address Object | Update Create Address Object to accept a whitelist of address objects and auto detect the type of incoming object
 * 1.5.7 - Default value of Commit action updated
