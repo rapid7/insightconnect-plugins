@@ -3,9 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: ssh
 title: SSH
-description: The SSH protocol is a method for secure remote login from one computer
-  to another
-version: 2.0.0
+description: The SSH protocol is a method for secure remote login from one computer to another
+version: 3.0.0
 vendor: rapid7
 support: community
 status: []
@@ -39,7 +38,7 @@ types:
       required: true
 connection:
   username:
-    type: credential_secret_key
+    type: string
     description: User to run command as
     required: true
   password:

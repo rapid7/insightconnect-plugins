@@ -25,16 +25,16 @@ class MarkdownToHtmlInput(komand.Input):
   "properties": {
     "markdown": {
       "type": "string",
-      "title": "Markdown",
-      "description": "Markdown data as bytes",
+      "title": "Markdown Bytes",
+      "displayType": "bytes",
+      "description": "Markdown content represented in base64",
+      "format": "bytes",
       "order": 1
     },
     "markdown_string": {
       "type": "string",
-      "title": "Markdown",
-      "displayType": "bytes",
-      "description": "Markdown data as string",
-      "format": "bytes",
+      "title": "Markdown String",
+      "description": "Markdown content as a string",
       "order": 2
     }
   }

@@ -1,7 +1,7 @@
 {
-	"spec": "e06d391dcb9e15b31cff0c954038d6e6",
-	"manifest": "96ebf907b03d73d2246a8e0f62202dba",
-	"setup": "d7c00896c9773f8bde4526a52943534a",
+	"spec": "526f23c9b954ddf590858e8aa77fd95e",
+	"manifest": "2be77985e158f1570494a797fdbeef3d",
+	"setup": "217703e8dfed2ee4277a34922e1fb5f6",
 	"schemas": [
 		{
 			"identifier": "add_external_dynamic_list/schema.py",
@@ -10,6 +10,10 @@
 		{
 			"identifier": "add_to_policy/schema.py",
 			"hash": "2382ce2b561ceae49b04fe73f074b83c"
+		},
+		{
+			"identifier": "check_if_address_object_in_group/schema.py",
+			"hash": "f8e1799cb1b4b64cc98439eb1a03c84a"
 		},
 		{
 			"identifier": "commit/schema.py",
@@ -26,6 +30,10 @@
 		{
 			"identifier": "get/schema.py",
 			"hash": "44edf318f15fd914cc88f057396a5dcc"
+		},
+		{
+			"identifier": "get_policy/schema.py",
+			"hash": "a0a1e57b14b9c14685964c7423d46137"
 		},
 		{
 			"identifier": "op/schema.py",
