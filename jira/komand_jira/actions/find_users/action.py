@@ -17,7 +17,6 @@ class FindUsers(komand.Action):
         """Search for users"""
         max_results = params.get(Input.MAX)
         query = params.get(Input.QUERY)
-        self.logger.info(f"self.connection.is_cloud: {self.connection.is_cloud}")
         if self.connection.is_cloud:
             users = self.connection.rest_client.find_users(query=query, max_results=max_results)
         else:

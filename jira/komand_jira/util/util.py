@@ -84,7 +84,6 @@ def normalize_user(user, is_cloud = False, logger=logging.getLogger()):
         output["account_id"] = user.accountId
     else:
         output["name"] = user.name
-        output["email_address"] = user.emailAddress
 
     logger.debug("Result user: %s", output)
 
