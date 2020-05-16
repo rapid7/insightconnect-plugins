@@ -451,7 +451,7 @@ Example output:
     {
       "account_id": "5ebaff48acdf9c0b917dac88",
       "active": true,
-      "display_name": "Kamila Górna",
+      "display_name": "user",
       "email_address": "user@example.com"
     }
   ]
