@@ -33,6 +33,11 @@ This action is used to convert HTML to Markdown.
 |html|bytes|None|False|HTML data as bytes|None|None|
 |html_string|string|None|False|HTML data as string|None|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -55,6 +60,7 @@ Example input:
 
 ```
 {
+  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
   "markdown_string": "# Rapid7 InsightConnect"
 }
 ```
@@ -81,7 +87,8 @@ Example input:
 
 ```
 {
-  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="
+  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+  "markdown_string": "# Rapid7 InsightConnect"
 }
 ```
 
@@ -116,7 +123,8 @@ Example input:
 
 ```
 {
-  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="
+  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+  "markdown_string": "# Rapid7 InsightConnect"
 }
 ```
 
