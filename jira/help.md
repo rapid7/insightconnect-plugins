@@ -21,8 +21,17 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and API key|None|{ "username": "user1", "password":"yB3KwjqqUainTz6FD6nN78C"}|
+|credentials|credential_username_password|None|True|Username and API key|None|{ "username": "user", "password":"yB3KwjqqUainTz6FD6nN78C"}|
 |url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|https://company.atlassian.net|
+
+Example input:
+
+```
+{
+  "credentials": "{ \"username\": \"user\", \"password\":\"yB3KwjqqUainTz6FD6nN78C\"}",
+  "url": "https://company.atlassian.net"
+}
+```
 
 ## Technical Details
 
@@ -44,8 +53,9 @@ Example input:
 
 ```
 {
-  "jql": "asdf",
-  "max": 1
+  "get_attachments": true,
+  "jql": "project = \"TEST\"",
+  "max": 10
 }
 ```
 
@@ -91,9 +101,9 @@ Example input:
 
 ```
 {
-  "attachment_bytes": "dGVzdA==",
-  "attachment_filename": "test",
-  "id": "10001"
+  "attachment_bytes": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA...",
+  "attachment_filename": "document.pdf",
+  "id": 10001
 }
 ```
 
@@ -128,9 +138,10 @@ Example input:
 
 ```
 {
-  "comment": "test",
-  "id": "10001",
-  "transition": "31"
+  "comment": "Transition executed by InsightConnect",
+  "fields": "{ \"fields\": { \"project\": { \"key\": \"TEST\" }, \"summary\": \"Test Ticket\", \"description\": \"Test ticket created from InsightConnect\", \"issuetype\": { \"name\": \"Story\" } } }",
+  "id": 10001,
+  "transition": 31
 }
 ```
 
@@ -173,13 +184,15 @@ This action is used to delete a user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|username|string|None|True|Username|None|user1|
+|account_id|string|None|False|Unique identifier for an Atlassian account|None|5ec00968833be70b7e50df20|
+|username|string|None|False|Username|None|user|
 
 Example input:
 
 ```
 {
-  "username": "test1"
+  "account_id": "5ec00968833be70b7e50df20",
+  "username": "user"
 }
 ```
 
@@ -205,15 +218,15 @@ This action is used to assign an issue to a user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee|string|None|True|Username of assignee|None|user1|
+|assignee|string|None|True|Username of assignee|None|user|
 |id|string|None|True|Issue ID|None|10001|
 
 Example input:
 
 ```
 {
-  "assignee": "me",
-  "id": "10001"
+  "assignee": "user",
+  "id": 10001
 }
 ```
 
@@ -251,12 +264,12 @@ Example input:
 
 ```
 {
-  "attachment_bytes": "",
-  "attachment_filename": "",
-  "description": "Test test",
-  "fields": {},
+  "attachment_bytes": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA...",
+  "attachment_filename": "document.pdf",
+  "description": "Successfully connect Jira to InsightConnect to automate ticket management",
+  "fields": "{ \"fields\": { \"project\": { \"key\": \"TEST\" }, \"summary\": \"Test Ticket\", \"description\": \"Test ticket created from InsightConnect\", \"issuetype\": { \"name\": \"Story\" } } }",
   "project": "TEST",
-  "summary": "Test issue",
+  "summary": "Connect Jira to InsightConnect",
   "type": "Story"
 }
 ```
@@ -314,10 +327,10 @@ This action is used to create a user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|email|string|None|True|Email|None|user1@example.com|
+|email|string|None|True|Email|None|user@example.com|
 |notify|boolean|False|True|Notify if true|[True, False]|False|
 |password|string|None|False|Password|None|mypassword|
-|username|string|None|True|Username|None|user1|
+|username|string|None|False|Username|None|user|
 
 Example input:
 
@@ -325,8 +338,8 @@ Example input:
 {
   "email": "user@example.com",
   "notify": false,
-  "password": "test",
-  "username": "test1"
+  "password": "mypassword",
+  "username": "user"
 }
 ```
 
@@ -359,8 +372,8 @@ Example input:
 
 ```
 {
-  "id": "10001",
-  "label": "test"
+  "id": 10001,
+  "label": "documentation"
 }
 ```
 
@@ -394,7 +407,7 @@ Example input:
 ```
 {
   "max": 10,
-  "query": "user@example.com"
+  "query": "Joe"
 }
 ```
 
@@ -404,7 +417,7 @@ Example input:
 |----|----|--------|-----------|
 |users|[]user|False|The list of found users|
 
-Example output:
+Example output for on-premise server:
 
 ```
 {
@@ -414,6 +427,34 @@ Example output:
       "display_name": "User1",
       "active": true
   }]
+}
+```
+
+Example output for cloud server:
+
+```
+{
+  "users": [{
+    "display_name": "user",
+    "active": true,
+    "email_address": "user@example.com",
+    "account_id": "5ebaff48acdf9c0b917dac88"
+  }]
+}
+```
+
+Example output:
+
+```
+{
+  "users": [
+    {
+      "account_id": "5ebaff48acdf9c0b917dac88",
+      "active": true,
+      "display_name": "Kamila Górna",
+      "email_address": "user@example.com"
+    }
+  ]
 }
 ```
 
@@ -432,8 +473,8 @@ Example input:
 
 ```
 {
-  "comment": "new comment",
-  "id": "10001"
+  "comment": "This comment was added by InsightConnect",
+  "id": 10001
 }
 ```
 
@@ -466,7 +507,8 @@ Example input:
 
 ```
 {
-  "id": "PT-2"
+  "get_attachments": false,
+  "id": "TEST-1"
 }
 ```
 
@@ -708,7 +750,7 @@ Example input:
 
 ```
 {
-  "id": "PT-2"
+  "id": "TEST-1"
 }
 ```
 
@@ -816,11 +858,12 @@ Example input:
 
 ```
 {
-  "description": "Updated from InsightConnect",
-  "fields": {},
+  "description": "Update ticket with additional Jira information for others teams wanting to leverage InsightConnect",
+  "fields": "{ \"fields\": { \"project\": { \"key\": \"TEST\" }, \"summary\": \"Test Ticket\", \"description\": \"Test ticket created from InsightConnect\", \"issuetype\": { \"name\": \"Story\" } } }",
   "id": "TEST-1",
-  "notify": true,
-  "update": {}
+  "notify": false,
+  "summary": "Connect Jira to InsightConnect for Multiple Teams",
+  "update": "{ \"update\": { \"labels\": [ {\"add\": \"newlabel\"} ] } }"
 }
 ```
 
@@ -857,7 +900,10 @@ Example input:
 
 ```
 {
-  "jql": 'project = "TEST"'
+  "get_attachments": false,
+  "jql": "project = \"TEST\"",
+  "poll_timeout": 60,
+  "project": "TEST"
 }
 ```
 
@@ -1094,6 +1140,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.1 - Update Create User, Delete User and Find Users to reflect Jira API changes
 * 5.0.0 - Fix user enumeration  in `Find Users` | Add example input | Update titles of Attachment Filename input in Attach Issue action and Poll Timeout input in New Issue trigger to match style
 * 4.0.2 - Moved `apk add` in Dockerfile to use cache | Changed bare strings in params.get and output to static fields from schema | Remove duplicated code in actions | Changed `Exception` to `PluginException`
 * 3.2.1 - Update Get Issue, Find Issues and New Issue action to support a Get Attachments option

@@ -8,20 +8,25 @@ support: rapid7
 status: []
 description: Jira is an issue tracking product, developed by Atlassian. It provides
   bug tracking, issue tracking, and project management functions
-version: 5.0.0
+version: 5.0.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/jira
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.atlassian.com
 tags:
-- ticket
-- Jira
+  - ticket
+  - Jira
 hub_tags:
   use_cases: [remediation_management, threat_detection_and_response, reporting_and_analytics]
   keywords: [ticket, jira]
   features: []
 types:
   user:
+    accountId:
+      type: string
+      title: Account ID
+      description: User account ID
+      required: false
     name:
       type: string
       description: User name
@@ -129,7 +134,7 @@ connection:
     type: credential_username_password
     description: Username and API key
     required: true
-    example: '{ "username": "user1", "password":"yB3KwjqqUainTz6FD6nN78C"}'
+    example: '{ "username": "user", "password":"yB3KwjqqUainTz6FD6nN78C"}'
 actions:
   transition_issue:
     title: Transition Issue
@@ -211,7 +216,7 @@ actions:
         type: string
         description: Username of assignee
         required: true
-        example: user1
+        example: user
     output:
       success:
         title: Success
@@ -342,8 +347,14 @@ actions:
         title: Username
         type: string
         description: Username
-        required: true
-        example: user1
+        required: false
+        example: user
+      account_id:
+        title: Account ID
+        type: string
+        description: Unique identifier for an Atlassian account
+        required: false
+        example: 5ec00968833be70b7e50df20
     output:
       success:
         title: Success
@@ -358,14 +369,14 @@ actions:
         title: Username
         type: string
         description: Username
-        required: true
-        example: user1
+        required: false
+        example: user
       email:
         title: Email
         type: string
         description: Email
         required: true
-        example: user1@example.com
+        example: user@example.com
       password:
         title: Password
         type: string
@@ -379,8 +390,8 @@ actions:
         default: false
         required: true
         enum:
-        - true
-        - false
+          - true
+          - false
         example: false
     output:
       success:

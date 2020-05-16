@@ -6,18 +6,23 @@ from jira import JIRA
 import requests
 from requests.auth import HTTPBasicAuth
 from komand.exceptions import ConnectionTestException
+from komand_jira.util.api import JiraApi
 
 
 class Connection(komand.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
-        self.client, self.url, self.username, self.password = None, None, None, None
+        self.client, self.url, self.username, self.password, self.is_cloud = None, None, None, None, False
+        self.rest_client = None
 
     def connect(self, params={}):
         self.url, self.username, self.password = params[Input.URL], \
                                                  params[Input.CREDENTIALS]["username"], \
                                                  params[Input.CREDENTIALS]["password"]
+
+        if ".atlassian.net" in self.url or ".jira.com" in self.url:
+            self.is_cloud = True
 
         test_passed = self.test()
         if test_passed:
@@ -30,6 +35,7 @@ class Connection(komand.Connection):
             )
 
             self.client = client
+            self.rest_client = JiraApi(self.client, self.is_cloud, self.logger)
 
     def test(self):
         auth = HTTPBasicAuth(username=self.username,
