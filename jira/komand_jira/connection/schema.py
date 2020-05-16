@@ -17,7 +17,7 @@ class ConnectionSchema(komand.Input):
     "credentials": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Username and API Key",
-      "description": "Username and API key",
+      "description": "Username and Jira API key (Jira password is not supported)",
       "order": 2
     },
     "url": {

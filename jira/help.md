@@ -21,14 +21,14 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and API key|None|{ "username": "user1", "password":"yB3KwjqqUainTz6FD6nN78C"}|
+|credentials|credential_username_password|None|True|Username and Jira API key (Jira password is not supported)|None|{ "username": "user1", "password":"my_jira_api_key"}|
 |url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|https://company.atlassian.net|
 
 Example input:
 
 ```
 {
-  "credentials": "{ \"username\": \"user1\", \"password\":\"yB3KwjqqUainTz6FD6nN78C\"}",
+  "credentials": "{ \"username\": \"user1\", \"password\":\"my_jira_api_key\"}",
   "url": "https://company.atlassian.net"
 }
 ```
@@ -1140,7 +1140,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 5.0.1 - Update Create User, Delete User and Find Users to reflect Jira API changes
+* 6.0.0 - Update Create User, Delete User and Find Users to reflect [Jira Cloud API privacy changes](https://developer.atlassian.com/cloud/jira/platform/api-changes-for-user-privacy-announcement/) to support `accountId`
 * 5.0.0 - Fix user enumeration  in `Find Users` | Add example input | Update titles of Attachment Filename input in Attach Issue action and Poll Timeout input in New Issue trigger to match style
 * 4.0.2 - Moved `apk add` in Dockerfile to use cache | Changed bare strings in params.get and output to static fields from schema | Remove duplicated code in actions | Changed `Exception` to `PluginException`
 * 3.2.1 - Update Get Issue, Find Issues and New Issue action to support a Get Attachments option
