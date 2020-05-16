@@ -21,14 +21,14 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and API key|None|{ "username": "user", "password":"yB3KwjqqUainTz6FD6nN78C"}|
+|credentials|credential_username_password|None|True|Username and API key|None|{ "username": "user1", "password":"yB3KwjqqUainTz6FD6nN78C"}|
 |url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|https://company.atlassian.net|
 
 Example input:
 
 ```
 {
-  "credentials": "{ \"username\": \"user\", \"password\":\"yB3KwjqqUainTz6FD6nN78C\"}",
+  "credentials": "{ \"username\": \"user1\", \"password\":\"yB3KwjqqUainTz6FD6nN78C\"}",
   "url": "https://company.atlassian.net"
 }
 ```
@@ -185,14 +185,14 @@ This action is used to delete a user account.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |account_id|string|None|False|Unique identifier for an Atlassian account|None|5ec00968833be70b7e50df20|
-|username|string|None|False|Username|None|user|
+|username|string|None|False|Username|None|user1|
 
 Example input:
 
 ```
 {
   "account_id": "5ec00968833be70b7e50df20",
-  "username": "user"
+  "username": "user1"
 }
 ```
 
@@ -218,14 +218,14 @@ This action is used to assign an issue to a user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee|string|None|True|Username of assignee|None|user|
+|assignee|string|None|True|Username of assignee|None|user1|
 |id|string|None|True|Issue ID|None|10001|
 
 Example input:
 
 ```
 {
-  "assignee": "user",
+  "assignee": "user1",
   "id": 10001
 }
 ```
@@ -327,19 +327,19 @@ This action is used to create a user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|email|string|None|True|Email|None|user@example.com|
+|email|string|None|True|Email|None|user1@example.com|
 |notify|boolean|False|True|Notify if true|[True, False]|False|
 |password|string|None|False|Password|None|mypassword|
-|username|string|None|False|Username|None|user|
+|username|string|None|False|Username|None|user1|
 
 Example input:
 
 ```
 {
-  "email": "user@example.com",
+  "email": "user1@example.com",
   "notify": false,
   "password": "mypassword",
-  "username": "user"
+  "username": "user1"
 }
 ```
 
@@ -423,7 +423,7 @@ Example output for on-premise server:
 {
   "users": [{
       "name": "mrinehart",
-      "email_address": "user@example.com",
+      "email_address": "user1@example.com",
       "display_name": "User1",
       "active": true
   }]
@@ -435,9 +435,9 @@ Example output for cloud server:
 ```
 {
   "users": [{
-    "display_name": "user",
+    "display_name": "user1",
     "active": true,
-    "email_address": "user@example.com",
+    "email_address": "user1@example.com",
     "account_id": "5ebaff48acdf9c0b917dac88"
   }]
 }
@@ -451,8 +451,8 @@ Example output:
     {
       "account_id": "5ebaff48acdf9c0b917dac88",
       "active": true,
-      "display_name": "user",
-      "email_address": "user@example.com"
+      "display_name": "user1",
+      "email_address": "user1@example.com"
     }
   ]
 }
@@ -636,7 +636,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "user@example.com",
+              "emailAddress": "user1@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -653,7 +653,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "user@example.com",
+              "emailAddress": "user1@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -689,7 +689,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user@example.com",
+                      "emailAddress": "user1@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -706,7 +706,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user@example.com",
+                      "emailAddress": "user1@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -771,7 +771,7 @@ Example output:
       "id": "10000",
       "author": {
           "name": "admin",
-          "email_address": "user@example.com",
+          "email_address": "user1@example.com",
           "display_name": "User1",
           "active": true
       },
@@ -781,7 +781,7 @@ Example output:
           "name": "admin",
           "key": "admin",
           "accountId": "4ac123f3f8412345a10cbaa0",
-          "emailAddress": "user@example.com",
+          "emailAddress": "user1@example.com",
           "avatarUrls": {
               "48x48": "",
               "24x24": "",
@@ -1030,7 +1030,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "user@example.com",
+              "emailAddress": "user1@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -1047,7 +1047,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "user@example.com",
+              "emailAddress": "user1@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -1083,7 +1083,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user@example.com",
+                      "emailAddress": "user1@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -1100,7 +1100,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user@example.com",
+                      "emailAddress": "user1@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",

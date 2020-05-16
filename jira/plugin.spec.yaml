@@ -134,7 +134,7 @@ connection:
     type: credential_username_password
     description: Username and API key
     required: true
-    example: '{ "username": "user", "password":"yB3KwjqqUainTz6FD6nN78C"}'
+    example: '{ "username": "user1", "password":"yB3KwjqqUainTz6FD6nN78C"}'
 actions:
   transition_issue:
     title: Transition Issue
@@ -216,7 +216,7 @@ actions:
         type: string
         description: Username of assignee
         required: true
-        example: user
+        example: user1
     output:
       success:
         title: Success
@@ -348,7 +348,7 @@ actions:
         type: string
         description: Username
         required: false
-        example: user
+        example: user1
       account_id:
         title: Account ID
         type: string
@@ -370,13 +370,13 @@ actions:
         type: string
         description: Username
         required: false
-        example: user
+        example: user1
       email:
         title: Email
         type: string
         description: Email
         required: true
-        example: user@example.com
+        example: user1@example.com
       password:
         title: Password
         type: string
