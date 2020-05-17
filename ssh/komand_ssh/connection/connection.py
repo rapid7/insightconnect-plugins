@@ -26,7 +26,7 @@ class Connection(komand.Connection):
         s.connect(
           params.get('host'), 
           params.get('port'), 
-          username=params.get('username').get('secretKey'),
+          username=params.get('username'),
           pkey=k
         )
         return s
@@ -39,7 +39,7 @@ class Connection(komand.Connection):
         s.connect(
           params.get('host'),
           params.get('port'), 
-          params.get('username').get('secretKey'), 
+          params.get('username'),
           params.get('password').get('secretKey')
         )
         return s
