@@ -28,7 +28,7 @@ Example input:
 
 ```
 {
-  "credentials": "{ \"username\": \"user1\", \"password\":\"my_jira_api_key\"}",
+  "credentials": { "username": "user1", "password":"my_jira_api_key"},
   "url": "https://company.atlassian.net"
 }
 ```
