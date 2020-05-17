@@ -149,10 +149,6 @@ class UploadOpeniocFileOutput(komand.Output):
           "type": "integer",
           "title": "Result",
           "description": "The result code of the response",
-          "enum": [
-            0,
-            1
-          ],
           "order": 3
         }
       }
@@ -212,16 +208,6 @@ class UploadOpeniocFileOutput(komand.Output):
           "type": "integer",
           "title": "Uploaded Status",
           "description": "The result code indicating the file upload status",
-          "enum": [
-            1,
-            -999,
-            -6,
-            -5,
-            -4,
-            -3,
-            -2,
-            -1
-          ],
           "order": 3
         }
       }
@@ -240,11 +226,6 @@ class UploadOpeniocFileOutput(komand.Output):
           "type": "integer",
           "title": "File Name",
           "description": "The type of status message",
-          "enum": [
-            1,
-            2,
-            3
-          ],
           "order": 2
         }
       }

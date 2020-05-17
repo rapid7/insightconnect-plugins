@@ -17,6 +17,7 @@ class Input:
     PRODUCT = "product"
     RELOCATE_TO_FOLDER_PATH = "relocate_to_folder_path"
     RELOCATE_TO_SERVER_ID = "relocate_to_server_id"
+    SKIP_IDS = "skip_ids"
     
 
 class Output:
@@ -91,6 +92,15 @@ class PerformsActionInput(komand.Input):
       "title": "Relocate to Server ID",
       "description": "The GUID of the target server for the agent",
       "order": 9
+    },
+    "skip_ids": {
+      "type": "array",
+      "title": "Skip Entity ID",
+      "description": "Skip entity ids on isolate and uninstall actions",
+      "items": {
+        "type": "string"
+      },
+      "order": 10
     }
   },
   "required": [
@@ -113,34 +123,6 @@ class PerformsActionOutput(komand.Output):
       "type": "integer",
       "title": "Result Code",
       "description": "The Apex Central Automation API result code",
-      "enum": [
-        1,
-        -1102,
-        -1101,
-        -207,
-        -205,
-        -204,
-        -203,
-        -202,
-        -107,
-        -106,
-        -105,
-        -104,
-        -103,
-        -102,
-        -99,
-        -50,
-        -22,
-        -21,
-        -9,
-        -8,
-        -7,
-        -6,
-        -5,
-        -4,
-        -3,
-        -2
-      ],
       "order": 1
     },
     "result_content": {

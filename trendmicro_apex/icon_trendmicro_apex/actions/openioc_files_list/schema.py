@@ -152,12 +152,6 @@ class OpeniocFilesListOutput(komand.Output):
           "type": "integer",
           "title": "Extracting Status",
           "description": "The suspicious object extraction status of the uploaded file",
-          "enum": [
-            0,
-            1,
-            999,
-            -1
-          ],
           "order": 1
         },
         "FileAddedDatetime": {
@@ -200,10 +194,6 @@ class OpeniocFilesListOutput(komand.Output):
           "type": "integer",
           "title": "Uploaded From",
           "description": "The Source of the uploaded file",
-          "enum": [
-            1,
-            2
-          ],
           "order": 8
         }
       }
@@ -237,12 +227,6 @@ class OpeniocFilesListOutput(komand.Output):
               "type": "integer",
               "title": "Extracting Status",
               "description": "The suspicious object extraction status of the uploaded file",
-              "enum": [
-                0,
-                1,
-                999,
-                -1
-              ],
               "order": 1
             },
             "FileAddedDatetime": {
@@ -285,10 +269,6 @@ class OpeniocFilesListOutput(komand.Output):
               "type": "integer",
               "title": "Uploaded From",
               "description": "The Source of the uploaded file",
-              "enum": [
-                1,
-                2
-              ],
               "order": 8
             }
           }
@@ -315,10 +295,6 @@ class OpeniocFilesListOutput(komand.Output):
           "type": "integer",
           "title": "Result",
           "description": "The result code of the response",
-          "enum": [
-            0,
-            1
-          ],
           "order": 3
         }
       }

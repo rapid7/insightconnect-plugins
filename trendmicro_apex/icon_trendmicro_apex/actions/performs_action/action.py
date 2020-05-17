@@ -35,16 +35,16 @@ class PerformsAction(komand.Action):
 
         if params.get(Input.ENTITY_ID):
             payload["entity_id"] = params.get(Input.ENTITY_ID)
-            self._validate_allow_action(action_id, params.get(Input.ENTITY_ID), self.connection.skip_entity_ids)
+            self._validate_allow_action(action_id, params, Input.ENTITY_ID)
         if params.get(Input.HOST_NAME):
             payload["host_name"] = params.get(Input.HOST_NAME)
-            self._validate_allow_action(action_id, params.get(Input.HOST_NAME), self.connection.skip_host_names)
+            self._validate_allow_action(action_id, params, Input.HOST_NAME)
         if params.get(Input.IP_ADDRESS):
             payload["ip_address"] = params.get(Input.IP_ADDRESS)
-            self._validate_allow_action(action_id, params.get(Input.IP_ADDRESS), self.connection.skip_address_ips)
+            self._validate_allow_action(action_id, params, Input.IP_ADDRESS)
         if params.get(Input.MAC_ADDRESS):
             payload["mac_address"] = params.get(Input.MAC_ADDRESS)
-            self._validate_allow_action(action_id, params.get(Input.MAC_ADDRESS), self.connection.skip_mac_addresses)
+            self._validate_allow_action(action_id, params, Input.MAC_ADDRESS)
         if params.get(Input.PRODUCT):
             payload["product"] = params.get(Input.PRODUCT)
         if params.get(Input.RELOCATE_TO_FOLDER_PATH):
@@ -55,7 +55,9 @@ class PerformsAction(komand.Action):
         return payload
 
     @staticmethod
-    def _validate_allow_action(action_id, entity_id, deny_ids):
+    def _validate_allow_action(action_id, params, id_name):
+        entity_id = params.get(id_name)
+        deny_ids = params.get(Input.SKIP_IDS)
         if deny_ids and action_id in ["Isolate", "Uninstall"] and entity_id in deny_ids:
             raise PluginException(cause="Something unexpected occurred.",
                                   assistance=f"Can't {action_id.lower()} for admin endpoint")

@@ -41,30 +41,6 @@ connection:
     type: credential_secret_key
     required: true
     example: "CU1874A2-G782-47X1-B6J3-1014A92624BC"
-  skip_entity_ids:
-    title: Skip Entity ID
-    description: Skip entity ids on isolate and uninstall actions
-    type: "[]string"
-    required: false
-    example: '["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]'
-  skip_host_names:
-    title: Skip Host Names
-    description: Skip host names on isolate and uninstall actions
-    type: "[]string"
-    required: false
-    example: '["CU-PRO1-7814-2"]'
-  skip_address_ips:
-    title: Skip Address IPs
-    description: Skip address IPs on isolate and uninstall actions
-    type: "[]string"
-    required: false
-    example: '["198.51.100.100", "198.51.100.101"]'
-  skip_mac_addresses:
-    title: Skip MAC Addresses
-    description: Skip MAC addresses on isolate and uninstall actions
-    type: "[]string"
-    required: false
-    example: '["08:00:27:8d:c0:4d"]'
 types:
   filter:
     type:
@@ -135,12 +111,6 @@ types:
       type: integer
       description: "ISO late status"
       required: false
-      enum:
-        - 0
-        - 1
-        - 2
-        - 3
-        - 4
     machineGuid:
       title: "Machine GUID"
       type: string
@@ -161,9 +131,6 @@ types:
       type: string
       description: "Machine type"
       required: false
-      enum:
-        - Server
-        - Desktop
     serverGuid:
       title: "Server GUID"
       type: string
@@ -233,23 +200,6 @@ types:
       description: The status of the agent
       type: integer
       required: false
-      enum:
-        - 0
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-        - 6
-        - 7
-        - 8
-        - 9
-        - 10
-        - 11
-        - 12
-        - 13
-        - 14
-        - 9999
     message:
       title: Message
       description: The error message of the response from Endpoint Sensor server
@@ -365,10 +315,6 @@ types:
       description: Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code
       type: integer
       required: false
-      enum:
-        - 1
-        - 2
-        - 3
     Data:
       title: "Data"
       description: Contains the data returned from Endpoint Sensor server
@@ -396,10 +342,6 @@ types:
       description: Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code
       type: integer
       required: false
-      enum:
-        - 1
-        - 2
-        - 3
     Data:
       title: "Data"
       description: Contains the data returned from endpoint server
@@ -437,9 +379,6 @@ types:
       description: The result code of the response
       type: integer
       required: false
-      enum:
-        - 0
-        - 1
   PermissionCtrl:
     elements:
       title: "Elements"
@@ -467,11 +406,6 @@ types:
       type: integer
       description: The suspicious object extraction status of the uploaded file
       required: false
-      enum:
-        - 0
-        - 1
-        - 999
-        - -1
     FileAddedDatetime:
       title: File Added Datetime
       type: string
@@ -507,9 +441,6 @@ types:
       type: integer
       description: The Source of the uploaded file
       required: false
-      enum:
-        - 1
-        - 2
   IOC_Data:
     FilingCabinet:
       title: Filing Cabinet
@@ -553,9 +484,6 @@ types:
       description: Indicates the deletion status of the specified file
       type: integer
       required: false
-      enum:
-        - -1
-        - 1
     FileHashID:
       title: File Hash ID
       description: Indicates the file hash ID of the deleted file
@@ -574,15 +502,6 @@ types:
       title: Uploaded Status
       description: The result code indicating the file upload status
       type: integer
-      enum:
-        - 1
-        - -999
-        - -6
-        - -5
-        - -4
-        - -3
-        - -2
-        - -1
   uploaded_message_list:
     Message:
       title: Message
@@ -592,10 +511,6 @@ types:
       title: File Name
       description: The type of status message
       type: integer
-      enum:
-        - 1
-        - 2
-        - 3
   result_content:
     capabilities:
       title: Capabilities
@@ -1130,24 +1045,6 @@ actions:
         type: "[]termination_info"
         required: true
         example: '[{"name": 101, "value": "2FF40C5ED6E5A3BBC68A10F2966F347463E326AD"}]'
-      task_type:
-        title: Task Type
-        description: Type of API request. For Endpoint Sensor, the value is always 4
-        type: string
-        required: false
-        default: CMEF
-        example: CMEF
-        enum:
-          - UNKNOWN
-          - INTERNAL
-          - CM
-          - CMEF
-          - OSF_COMMAND
-          - OSF_QUERY
-          - OSF_NOTIFY
-          - OSF_LOG
-          - MDR_ATTACK_DISCOVERY
-          - OSF_SYS_CALL
     output:
       Data:
         title: Data
@@ -1218,39 +1115,18 @@ actions:
         type: string
         required: false
         example: "C22E1795-BF95-45BB-BC82-486B0F5161BE"
+      skip_ids:
+        title: Skip Entity ID
+        description: Skip entity ids on isolate and uninstall actions
+        type: "[]string"
+        required: false
+        example: '["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]'
     output:
       result_code:
         title: Result Code
         description: The Apex Central Automation API result code
         type: integer
         required: false
-        enum:
-          - 1
-          - -1102
-          - -1101
-          - -207
-          - -205
-          - -204
-          - -203
-          - -202
-          - -107
-          - -106
-          - -105
-          - -104
-          - -103
-          - -102
-          - -99
-          - -50
-          - -22
-          - -21
-          - -9
-          - -8
-          - -7
-          - -6
-          - -5
-          - -4
-          - -3
-          - -2
       result_content:
         title: Result Content
         description: The Apex Central Automation API result content

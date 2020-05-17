@@ -115,10 +115,6 @@ class DownloadOpeniocFileOutput(komand.Output):
           "type": "integer",
           "title": "Result",
           "description": "The result code of the response",
-          "enum": [
-            0,
-            1
-          ],
           "order": 3
         }
       }

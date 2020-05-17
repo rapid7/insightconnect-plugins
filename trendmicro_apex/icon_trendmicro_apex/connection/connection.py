@@ -23,20 +23,12 @@ class Connection(komand.Connection):
         self.jwt_token = None
         self.header_dict = None
         self.api = None
-        self.skip_address_ips = None
-        self.skip_entity_ids = None
-        self.skip_host_names = None
-        self.skip_mac_addresses = None
 
     def connect(self, params):
         self.api_key = params.get(Input.API_KEY).get('secretKey')
         self.application_id = params.get(Input.APPLICATION_ID).get('secretKey')
         self.url = params.get(Input.URL)
         self.api = Api(self)
-        self.skip_address_ips = params.get(Input.SKIP_ADDRESS_IPS)
-        self.skip_entity_ids = params.get(Input.SKIP_ENTITY_IDS)
-        self.skip_host_names = params.get(Input.SKIP_HOST_NAMES)
-        self.skip_mac_addresses = params.get(Input.SKIP_MAC_ADDRESSES)
 
     def create_jwt_token(self, api_path, http_method, request_body):
         jwt_token = create_jwt_token(self.application_id, self.api_key, http_method, api_path, self.header_string,

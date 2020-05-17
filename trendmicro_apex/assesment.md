@@ -1,81 +1,463 @@
-# Description
+## Assessment
+### Run
 
-Trend Micro Apex offers modern advanced automated threat detection and response.  Apex agents have more than antivirus
-capabilities, they are an extension of the Apex threat management system.  
-This plugin works for the on-premise or Apex SaaS configurations.
-
-# Key Features
-
-* Reporting suspicious IP addresses, URLs and other similar content
-* Reporting suspicious files and their contents
-
-# Requirements
-
-* API URL for Apex SaaS or Apex on-premise
-* API Key
-* Application ID
-
-# Documentation
-
-## Setup
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API key paired with the Application ID e.g. CU1874A2-G782-47X1-B6J3-1014A92624BC|None|CU1874A2-G782-47X1-B6J3-1014A92624BC|
-|application_id|credential_secret_key|None|True|Application ID to communicate to the Apex Security Manager e.g. 909D88H7-3458-42RN-92FF-012V3CU3D294|None|909D88H7-3458-42RN-92FF-012V3CU3D294|
-|url|string|None|True|URL with port number of the Apex Security Manager.|None|https://host.example.com:443|
-
-Example input:
+<details>
 
 ```
 {
-  "api_key": "CU1874A2-G782-47X1-B6J3-1014A92624BC",
-  "application_id": "909D88H7-3458-42RN-92FF-012V3CU3D294",
-  "url": "https://host.example.com:443"
+  "Data": {
+    "Code": 0,
+    "CodeType": 1,
+    "Data": {
+      "content": [
+        {
+          "content": {
+            "agentEntity": [
+              {
+                "agentGuid": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+                "ip": "10.0.2.15",
+                "isEnable": true,
+                "isImportant": false,
+                "isOnline": true,
+                "isolateStatus": 1,
+                "machineGuid": "3E4EC062-A620-4DE6-9DA9-395DD98EC1D8",
+                "machineName": "TREND-MICRO-TES",
+                "machineOS": "Windows 10",
+                "machineType": "Desktop",
+                "productType": 15,
+                "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+                "userGuid": "6AC1B3DCF-CE52-8279-EE9E-E101FD504E3",
+                "userName": "TREND-MICRO-TES\\vagrant"
+              }
+            ],
+            "agentQueryStatus": {
+              "hasFullAgents": true,
+              "hasFullRbac": true
+            },
+            "pagination": {
+              "limit": 50,
+              "offset": 0,
+              "total": 1
+            }
+          },
+          "message": "Success",
+          "statusCode": 0
+        }
+      ],
+      "hasMore": false
+    },
+    "Message": "OK",
+    "TimeZone": -4
+  },
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "errorCode": 0,
+    "errorMessgae": "Success",
+    "result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
 }
+
 ```
 
-## Technical Details
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/01_agent_list.json
+</summary>
+</details>
 
-### Actions
-
-#### Get Investigation
-
-This action retrieves results of investigations in different formats based on the specified taskId.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|content_id|string|None|False|Indicates the location of the dataset|None|8|
-|limit|string|None|True|Retrieves the top n results from the servers|None|1|
-|task_id|string|None|True|Task ID from another API call that is used to retrieve a specific task result Specify the taskId values returned by the following APIs|None|9BD2204C-0554-45C8-9C62-799284928AFA|
-|task_type|string|CMEF|False|Type of API request. For Endpoint Sensor, the value is always 4|['UNKNOWN', 'INTERNAL', 'CM', 'CMEF', 'OSF_COMMAND', 'OSF_QUERY', 'OSF_NOTIFY', 'OSF_LOG', 'MDR_ATTACK_DISCOVERY', 'OSF_SYS_CALL']|CMEF|
-
-Example input:
+<details>
 
 ```
 {
-  "content_id": 8,
-  "limit": "1",
-  "task_id": "9BD2204C-0554-45C8-9C62-799284928AFA",
-  "task_type": "CMEF"
+  "Data": {
+    "Code": 0,
+    "CodeType": 1,
+    "Data": {
+      "content": [
+        {
+          "content": {
+            "agentEntity": [
+              {
+                "agentGuid": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+                "ip": "10.0.2.15",
+                "isEnable": true,
+                "isImportant": false,
+                "isOnline": true,
+                "isolateStatus": 1,
+                "machineGuid": "3E4EC062-A620-4DE6-9DA9-395DD98EC1D8",
+                "machineName": "TREND-MICRO-TES",
+                "machineOS": "Windows 10",
+                "machineType": "Desktop",
+                "productType": 15,
+                "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+                "userGuid": "6AC1B3DCF-CE52-8279-EE9E-E101FD504E3",
+                "userName": "TREND-MICRO-TES\\vagrant"
+              }
+            ],
+            "agentQueryStatus": {
+              "hasFullAgents": true,
+              "hasFullRbac": true
+            },
+            "pagination": {
+              "limit": 50,
+              "offset": 0,
+              "total": 1
+            }
+          },
+          "message": "Success",
+          "statusCode": 0
+        }
+      ],
+      "hasMore": false
+    },
+    "Message": "OK",
+    "TimeZone": -4
+  },
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "errorCode": 0,
+    "errorMessgae": "Success",
+    "result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
 }
+
 ```
 
-##### Output
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/02_agent_list_with_filter.json
+</summary>
+</details>
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Data|api_data|True|Contains the data returned by the specific API|
-|FeatureCtrl|FeatureCtrl|False|The Apex Central deployment model|
-|Meta|Meta|False|Indicates the response status, including the result, error code, and error message|
-|PermissionCtrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
-|SystemCtrl|SystemCtrl|False|Indicates the suspicious object distribution role of the Apex Central server|
+<details>
 
-Example output:
+```
+{
+  "Data": {
+    "Code": 0,
+    "CodeType": 1,
+    "Data": {
+      "content": [
+        {
+          "content": {
+            "agentEntity": [
+              {
+                "agentGuid": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+                "ip": "10.0.2.15",
+                "isEnable": true,
+                "isImportant": false,
+                "isOnline": true,
+                "isolateStatus": 1,
+                "machineGuid": "3E4EC062-A620-4DE6-9DA9-395DD98EC1D8",
+                "machineName": "TREND-MICRO-TES",
+                "machineOS": "Windows 10",
+                "machineType": "Desktop",
+                "productType": 15,
+                "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+                "userGuid": "6AC1B3DCF-CE52-8279-EE9E-E101FD504E3",
+                "userName": "TREND-MICRO-TES\\vagrant"
+              }
+            ],
+            "agentQueryStatus": {
+              "hasFullAgents": true,
+              "hasFullRbac": true
+            },
+            "pagination": {
+              "limit": 50,
+              "offset": 0,
+              "total": 1
+            }
+          },
+          "message": "Success",
+          "statusCode": 0
+        }
+      ],
+      "hasMore": false
+    },
+    "Message": "OK",
+    "TimeZone": -4
+  },
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "errorCode": 0,
+    "errorMessgae": "Success",
+    "result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}
+
+```
+
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/03_agent_list_with_pagination.json
+</summary>
+</details>
+
+<details>
+
+```
+{
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "ErrorCode": 0,
+    "Result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  },
+  "uploaded_info_list": [
+    {
+      "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
+      "FileName": "file.txt",
+      "UploadedStatus": 1
+    }
+  ],
+  "uploaded_message_list": [
+    {
+      "Message": "Uploaded 1 OpenIOC file(s) successfully.",
+      "MessageType": 1
+    }
+  ]
+}
+
+```
+
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/04_upload_openioc_file.json
+</summary>
+</details>
+
+<details>
+
+```
+{
+  "Data": {
+    "FileContentBase64": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiPz4NCjxpb2MgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgaWQ9ImExM2UyODJkLTY1ZTEtNDI2My05YjMxLTVmOTEyNTE1Mjg4YyIgbGFzdC1tb2RpZmllZD0iMjAxMy0xMC0zMFQxOTowNzo0NiIgeG1sbnM9Imh0dHA6Ly9zY2hlbWFzLm1hbmRpYW50LmNvbS8yMDEwL2lvYyI+DQogIDxzaG9ydF9kZXNjcmlwdGlvbj5DcnlwdG9sb2NrZXIgRGV0ZWN0aW9uIChFWFBFUklNRU5UQUwpPC9zaG9ydF9kZXNjcmlwdGlvbj4NCiAgPGRlc2NyaXB0aW9uPlRoaXMgSU9DIGRldGVjdHMgcmVnaXN0cnkgZW50cmllcyBjcmVhdGVkIHdoZW4gdGhlIENyeXB0b2xvY2tlciBjcmltZXdhcmUgcnVucy4gUHJlc2VuY2Ugb2Ygb25lIG9mIHRoZXNlIHJlZ2lzdHJ5IGtleSBzaG93cyB0aGF0IGEgYm94IGhhcyBsaWtlbHkgYmVlbiBpbmZlY3RlZCB3aXRoIHRoZSBDcnlwdG9sb2NrZXIgc29mdHdhcmUuPC9kZXNjcmlwdGlvbj4NCiAgPGF1dGhvcmVkX2J5Pk1hbmRpYW50PC9hdXRob3JlZF9ieT4NCiAgPGF1dGhvcmVkX2RhdGU+MjAxMy0xMC0yOFQxNDoyNzoxMjwvYXV0aG9yZWRfZGF0ZT4NCiAgPGxpbmtzPg0KICAgIDxsaW5rIHJlbD0iZ3JhZGUiPnVudGVzdGVkPC9saW5rPg0KICA8L2xpbmtzPg0KICA8ZGVmaW5pdGlvbj4NCiAgICA8SW5kaWNhdG9yIG9wZXJhdG9yPSJPUiIgaWQ9IjdlYTYwNWI3LThhYjEtNGUxYy05MTI4LTk5OTI2NWNkOWYyMSI+DQogICAgICA8SW5kaWNhdG9ySXRlbSBpZD0iYTcxZWIwZDctYWZlNS00NzA4LThkYmItMzc5YmQ0M2NjOWQ3IiBjb25kaXRpb249ImNvbnRhaW5zIj4NCiAgICAgICAgPENvbnRleHQgZG9jdW1lbnQ9IlJlZ2lzdHJ5SXRlbSIgc2VhcmNoPSJSZWdpc3RyeUl0ZW0vUGF0aCIgdHlwZT0ibWlyIiAvPg0KICAgICAgICA8Q29udGVudCB0eXBlPSJzdHJpbmciPlNvZnR3YXJlXENyeXB0b0xvY2tlclxGaWxlczwvQ29udGVudD4NCiAgICAgIDwvSW5kaWNhdG9ySXRlbT4NCiAgICAgIDxJbmRpY2F0b3Igb3BlcmF0b3I9IkFORCIgaWQ9ImJmYmVmOGEyLTdmMTktNDAwZC04Yjg5LTg3ZjdjNzYwNzhhZSI+DQogICAgICAgIDxJbmRpY2F0b3JJdGVtIGlkPSI0MmU5Njk5OC03MTYxLTRmMjItYmI3Ny03MzY2MGUyNjlhNmIiIGNvbmRpdGlvbj0iY29udGFpbnMiPg0KICAgICAgICAgIDxDb250ZXh0IGRvY3VtZW50PSJSZWdpc3RyeUl0ZW0iIHNlYXJjaD0iUmVnaXN0cnlJdGVtL1BhdGgiIHR5cGU9Im1pciIgLz4NCiAgICAgICAgICA8Q29udGVudCB0eXBlPSJzdHJpbmciPkN1cnJlbnRWZXJzaW9uXFJ1bjwvQ29udGVudD4NCiAgICAgICAgPC9JbmRpY2F0b3JJdGVtPg0KICAgICAgICA8SW5kaWNhdG9ySXRlbSBpZD0iNWQ1YjgyOTYtMDFjOS00MTQ2LTlhNzQtYWJhNTMxYzU3NDc5IiBjb25kaXRpb249ImNvbnRhaW5zIj4NCiAgICAgICAgICA8Q29udGV4dCBkb2N1bWVudD0iUmVnaXN0cnlJdGVtIiBzZWFyY2g9IlJlZ2lzdHJ5SXRlbS9QYXRoIiB0eXBlPSJtaXIiIC8+DQogICAgICAgICAgPENvbnRlbnQgdHlwZT0ic3RyaW5nIj5DcnlwdG9sb2NrZXI8L0NvbnRlbnQ+DQogICAgICAgIDwvSW5kaWNhdG9ySXRlbT4NCiAgICAgIDwvSW5kaWNhdG9yPg0KICAgIDwvSW5kaWNhdG9yPg0KICA8L2RlZmluaXRpb24+DQo8L2lvYz4=",
+    "FileName": "file.txt"
+  },
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "ErrorCode": 0,
+    "Result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}
+
+```
+
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/05_download_openioc_file.json
+</summary>
+</details>
+
+<details>
+
+```
+{
+  "Data": {
+    "FilingCabinet": [
+      {
+        "ExtractingStatus": 999,
+        "FileAddedDatetime": "05/10/2020 15:58:41",
+        "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
+        "FileName": "file.txt",
+        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      },
+      {
+        "ExtractingStatus": 1,
+        "FileAddedDatetime": "05/10/2020 12:28:18",
+        "FileHashID": "2a99370fd6218b6b8e0c3413f11eb504a4a60225",
+        "FileName": "openioc1",
+        "ShortDesc": "SHELLDC.DLL (BACKDOOR)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      },
+      {
+        "ExtractingStatus": 1,
+        "FileAddedDatetime": "05/10/2020 10:39:17",
+        "FileHashID": "fc3f17bd9068c2588c4c475d2d08a0e7f04f434d",
+        "FileName": "cryptolocker2.ioc",
+        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      },
+      {
+        "ExtractingStatus": 999,
+        "FileAddedDatetime": "05/10/2020 10:39:17",
+        "FileHashID": "769fcc7550bf98d96bccb7e22a5557301c403455",
+        "FileName": "file.txt",
+        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      }
+    ],
+    "TotalIOCCount": 4
+  },
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "ErrorCode": 0,
+    "Result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}
+
+```
+
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/06_openioc_files_list.json
+</summary>
+</details>
+
+<details>
+
+```
+{
+  "Data": {
+    "FilingCabinet": [
+      {
+        "ExtractingStatus": 999,
+        "FileAddedDatetime": "05/10/2020 15:58:41",
+        "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
+        "FileName": "file.txt",
+        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      },
+      {
+        "ExtractingStatus": 1,
+        "FileAddedDatetime": "05/10/2020 12:28:18",
+        "FileHashID": "2a99370fd6218b6b8e0c3413f11eb504a4a60225",
+        "FileName": "openioc1",
+        "ShortDesc": "SHELLDC.DLL (BACKDOOR)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      },
+      {
+        "ExtractingStatus": 1,
+        "FileAddedDatetime": "05/10/2020 10:39:17",
+        "FileHashID": "fc3f17bd9068c2588c4c475d2d08a0e7f04f434d",
+        "FileName": "cryptolocker2.ioc",
+        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      },
+      {
+        "ExtractingStatus": 999,
+        "FileAddedDatetime": "05/10/2020 10:39:17",
+        "FileHashID": "769fcc7550bf98d96bccb7e22a5557301c403455",
+        "FileName": "file.txt",
+        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      }
+    ],
+    "TotalIOCCount": 4
+  },
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "ErrorCode": 0,
+    "Result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}
+
+```
+
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/07_openioc_files_list_fuzzy_match_string.json
+</summary>
+</details>
+
+<details>
+
+```
+{
+  "Data": {
+    "FilingCabinet": [
+      {
+        "ExtractingStatus": 999,
+        "FileAddedDatetime": "05/10/2020 10:39:17",
+        "FileHashID": "769fcc7550bf98d96bccb7e22a5557301c403455",
+        "FileName": "file.txt",
+        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      }
+    ],
+    "TotalIOCCount": 1
+  },
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "ErrorCode": 0,
+    "Result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}
+
+```
+
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/08_openioc_files_list_hash_list.json
+</summary>
+</details>
+
+<details>
 
 ```
 {
@@ -149,372 +531,15 @@ Example output:
     "TmcmSoDist_Role": "none"
   }
 }
-```
-
-#### Execute Agent Action
-
-This action performs actions on the agent.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|action|string|None|True|Perform action|['Isolate', 'Restore', 'Relocate', 'Uninstall']|Isolate|
-|allow_multiple_match|boolean|True|False|True - Allows multiple matches False - Does not allow multiple matches|None|True|
-|entity_id|string|None|False|The GUID of the managed product agent. Use to identify the agent(s) on which the action is performed|None|2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6|
-|host_name|string|None|False|The endpoint name of the managed product agent. Use to identify the agent(s) on which the action is performed|None|CU-PRO1-7814-2|
-|ip_address|string|None|False|The IP address of the managed product agent. Use to identify the agent(s) on which the action is performed|None|198.51.100.100|
-|mac_address|string|None|False|The MAC address of the managed product agent. Use to identify the agent(s) on which the action is performed|None|08:00:27:8d:c0:4d|
-|product|string|None|False|The Trend Micro product on the server instance. Use to identify the agent(s) on which the action is performed|None|SLF_PRODUCT_OFFICESCAN_CE|
-|relocate_to_folder_path|string|None|False|The target directory for the agent|None|\NewDomain\NewFolder|
-|relocate_to_server_id|string|None|False|The GUID of the target server for the agent|None|C22E1795-BF95-45BB-BC82-486B0F5161BE|
-|skip_ids|[]string|None|False|Skip entity ids on isolate and uninstall actions|None|["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
-
-Example input:
 
 ```
-{
-  "action": "Isolate",
-  "allow_multiple_match": true,
-  "entity_id": "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6",
-  "host_name": "CU-PRO1-7814-2",
-  "ip_address": "198.51.100.100",
-  "mac_address": "08:00:27:8d:c0:4d",
-  "product": "SLF_PRODUCT_OFFICESCAN_CE",
-  "relocate_to_folder_path": "\\NewDomain\\NewFolder",
-  "relocate_to_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-  "skip_ids": "[\"2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6\"]"
-}
-```
 
-##### Output
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/09_get_rca_object.json
+</summary>
+</details>
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result_code|integer|False|The Apex Central Automation API result code|
-|result_content|[]result_content|False|The Apex Central Automation API result content|
-|result_description|string|False|The Apex Central Automation API result description|
-
-Example output:
-
-```
-{
-  "result_code": 1,
-  "result_description": "Operation successful",
-  "result_content": [
-    {
-      "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
-      "product": "SLF_PRODUCT_OFFICESCAN_CE",
-      "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-      "folder_path": "Workgroup",
-      "ip_address_list": "10.0.2.15",
-      "mac_address_list": "08-00-27-96-86-8E",
-      "host_name": "TREND-MICRO-TES",
-      "isolation_status": "normal",
-      "capabilities": [
-        "cmd_restore_isolated_agent",
-        "cmd_isolate_agent",
-        "cmd_relocate_agent",
-        "cmd_uninstall_agent"
-      ]
-    }
-  ]
-}
-```
-
-#### List OpenIOC Files
-
-This action retrieves a list of OpenIOC files from the Apex Central server.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|file_hash_id_list|[]string|[]|False|Filters the list for file SHA-1 values|None|["769fcc7550bf98d96bccb7e22a5557301c403455"]|
-|fuzzy_match_string|string|None|False|Filters the list for matching strings in the File Name, Title, and Source Context fields|None|Rapid7 InsightConnect|
-|page_number|integer|1|False|Filters the list to uploaded files that appear on the specified page number on the Threat Intel > Custom Intelligence > STIX tab|None|1|
-|page_size|integer|10|False|Filters the list to the specified number of uploaded files per page|None|10|
-|sorting_column|string|FileAddedDatetime|False|Sorts the list by the specified table column|['FileName', 'Title', 'FileAddedDatetime', 'UploadedFrom', 'UploadedBy', 'ExtractingStatus']|FileAddedDatetime|
-|sorting_direction|string|Descending|False|Sorts the list in the specified direction|['Ascending', 'Descending']|Descending|
-
-Example input:
-
-```
-{
-  "file_hash_id_list": "[\"769fcc7550bf98d96bccb7e22a5557301c403455\"]",
-  "fuzzy_match_string": "Rapid7 InsightConnect",
-  "page_number": 1,
-  "page_size": 10,
-  "sorting_column": "FileAddedDatetime",
-  "sorting_direction": "Descending"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|IOC_Data|False|Contains the data returned by the specific API|
-|feature_ctrl|FeatureCtrl|False|The Apex Central deployment model|
-|meta|Meta|False|Indicates the response status, including the result, error code, and error message|
-|permission_ctrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
-|system_ctrl|SystemCtrl|False|Indicates the suspicious object distribution role of the Apex Central server|
-
-Example output:
-
-```
-{
-  "Data": {
-    "FilingCabinet": [
-      {
-        "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
-        "FileName": "file.txt",
-        "FileAddedDatetime": "05/10/2020 15:58:41",
-        "UploadedFrom": 1,
-        "UploadedBy": "Integration Lab",
-        "ExtractingStatus": 999,
-        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)"
-      },
-      {
-        "FileHashID": "2a99370fd6218b6b8e0c3413f11eb504a4a60225",
-        "FileName": "openioc1",
-        "FileAddedDatetime": "05/10/2020 12:28:18",
-        "UploadedFrom": 1,
-        "UploadedBy": "Integration Lab",
-        "ExtractingStatus": 1,
-        "ShortDesc": "SHELLDC.DLL (BACKDOOR)"
-      },
-      {
-        "FileHashID": "fc3f17bd9068c2588c4c475d2d08a0e7f04f434d",
-        "FileName": "cryptolocker2.ioc",
-        "FileAddedDatetime": "05/10/2020 10:39:17",
-        "UploadedFrom": 1,
-        "UploadedBy": "Integration Lab",
-        "ExtractingStatus": 1,
-        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)"
-      }
-    ],
-    "TotalIOCCount": 3
-  },
-  "Meta": {
-    "Result": 1,
-    "ErrorCode": 0
-  },
-  "PermissionCtrl": {
-    "permission": "255"
-  },
-  "FeatureCtrl": {
-    "mode": "0"
-  },
-  "SystemCtrl": {
-    "TmcmSoDist_Role": "none"
-  }
-}
-```
-
-#### Delete OpenIOC File
-
-This action deletes existing OpenIOC files from the Apex Central server.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|file_hash_id_list|[]string|None|True|The list of file SHA-1 values|None|["695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343"]|
-
-Example input:
-
-```
-{
-  "file_hash_id_list": "[\"695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343\"]"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Data|[]delete_data|False|Contains the data returned by the specific API|
-|FeatureCtrl|FeatureCtrl|False|The Apex Central deployment model|
-|Meta|Meta|False|Indicates the response status, including the result, error code, and error message|
-|PermissionCtrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
-|SystemCtrl|SystemCtrl|False|Indicates the suspicious object distribution role of the Apex Central server|
-
-Example output:
-
-```
-{
-  "Data": [
-    {
-      "DeletedStatus": 1,
-      "FileHashID": "769fcc7550bf98d96bccb7e22a5557301c403455"
-    }
-  ],
-  "FeatureCtrl": {
-    "mode": "0"
-  },
-  "Meta": {
-    "ErrorCode": 0,
-    "Result": 1
-  },
-  "PermissionCtrl": {
-    "permission": "255"
-  },
-  "SystemCtrl": {
-    "TmcmSoDist_Role": "none"
-  }
-}
-```
-
-#### Download OpenIOC File
-
-This action is used to download OpenIOC files to the Apex Central server.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|file_hash_id|string|None|True|The file hash ID of the file to download|None|769fcc7550bf98d96bccb7e22a5557301c403455|
-
-Example input:
-
-```
-{
-  "file_hash_id": "769fcc7550bf98d96bccb7e22a5557301c403455"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Data|file|True|OpenIOC file|
-|FeatureCtrl|FeatureCtrl|False|The Apex Central deployment model|
-|Meta|Meta|False|Indicates the response status, including the result, error code, and error message|
-|PermissionCtrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
-|SystemCtrl|SystemCtrl|False|Indicates the suspicious object distribution role of the Apex Central server|
-
-Example output:
-
-```
-{
-  "Data": {
-    "FileName": "file.txt",
-    "FileContentBase64": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiPz4KPGlvYyB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiBpZD0iYTEzZTI4MmQtNjVlMS00MjYzLTliMzEtNWY5MTI1MTUyODhjIiBsYXN0LW1vZGlmaWVkPSIyMDEzLTEwLTMwVDE5OjA3OjQ2IiB4bWxucz0iaHR0cDovL3NjaGVtYXMubWFuZGlhbnQuY29tLzIwMTAvaW9jIj4KICA8c2hvcnRfZGVzY3JpcHRpb24+Q3J5cHRvbG9ja2VyIERldGVjdGlvbiAoRVhQRVJJTUVOVEFMKTwvc2hvcnRfZGVzY3JpcHRpb24+CiAgPGRlc2NyaXB0aW9uPlRoaXMgSU9DIGRldGVjdHMgcmVnaXN0cnkgZW50cmllcyBjcmVhdGVkIHdoZW4gdGhlIENyeXB0b2xvY2tlciBjcmltZXdhcmUgcnVucy4gUHJlc2VuY2Ugb2Ygb25lIG9mIHRoZXNlIHJlZ2lzdHJ5IGtleSBzaG93cyB0aGF0IGEgYm94IGhhcyBsaWtlbHkgYmVlbiBpbmZlY3RlZCB3aXRoIHRoZSBDcnlwdG9sb2NrZXIgc29mdHdhcmUuPC9kZXNjcmlwdGlvbj4KICA8YXV0aG9yZWRfYnk+TWFuZGlhbnQ8L2F1dGhvcmVkX2J5PgogIDxhdXRob3JlZF9kYXRlPjIwMTMtMTAtMjhUMTQ6Mjc6MTI8L2F1dGhvcmVkX2RhdGU+CiAgPGxpbmtzPgogICAgPGxpbmsgcmVsPSJncmFkZSI+dW50ZXN0ZWQ8L2xpbms+CiAgPC9saW5rcz4KICA8ZGVmaW5pdGlvbj4KICAgIDxJbmRpY2F0b3Igb3BlcmF0b3I9Ik9SIiBpZD0iN2VhNjA1YjctOGFiMS00ZTFjLTkxMjgtOTk5MjY1Y2Q5ZjIxIj4KICAgICAgPEluZGljYXRvckl0ZW0gaWQ9ImE3MWViMGQ3LWFmZTUtNDcwOC04ZGJiLTM3OWJkNDNjYzlkNyIgY29uZGl0aW9uPSJjb250YWlucyI+CiAgICAgICAgPENvbnRleHQgZG9jdW1lbnQ9IlJlZ2lzdHJ5SXRlbSIgc2VhcmNoPSJSZWdpc3RyeUl0ZW0vUGF0aCIgdHlwZT0ibWlyIiAvPgogICAgICAgIDxDb250ZW50IHR5cGU9InN0cmluZyI+U29mdHdhcmVcQ3J5cHRvTG9ja2VyXEZpbGVzPC9Db250ZW50PgogICAgICA8L0luZGljYXRvckl0ZW0+CiAgICAgIDxJbmRpY2F0b3Igb3BlcmF0b3I9IkFORCIgaWQ9ImJmYmVmOGEyLTdmMTktNDAwZC04Yjg5LTg3ZjdjNzYwNzhhZSI+CiAgICAgICAgPEluZGljYXRvckl0ZW0gaWQ9IjQyZTk2OTk4LTcxNjEtNGYyMi1iYjc3LTczNjYwZTI2OWE2YiIgY29uZGl0aW9uPSJjb250YWlucyI+CiAgICAgICAgICA8Q29udGV4dCBkb2N1bWVudD0iUmVnaXN0cnlJdGVtIiBzZWFyY2g9IlJlZ2lzdHJ5SXRlbS9QYXRoIiB0eXBlPSJtaXIiIC8+CiAgICAgICAgICA8Q29udGVudCB0eXBlPSJzdHJpbmciPkN1cnJlbnRWZXJzaW9uXFJ1bjwvQ29udGVudD4KICAgICAgICA8L0luZGljYXRvckl0ZW0+CiAgICAgICAgPEluZGljYXRvckl0ZW0gaWQ9IjVkNWI4Mjk2LTAxYzktNDE0Ni05YTc0LWFiYTUzMWM1NzQ3OSIgY29uZGl0aW9uPSJjb250YWlucyI+CiAgICAgICAgICA8Q29udGV4dCBkb2N1bWVudD0iUmVnaXN0cnlJdGVtIiBzZWFyY2g9IlJlZ2lzdHJ5SXRlbS9QYXRoIiB0eXBlPSJtaXIiIC8+CiAgICAgICAgICA8Q29udGVudCB0eXBlPSJzdHJpbmciPkNyeXB0b2xvY2tlcjwvQ29udGVudD4KICAgICAgICA8L0luZGljYXRvckl0ZW0+CiAgICAgIDwvSW5kaWNhdG9yPgogICAgPC9JbmRpY2F0b3I+CiAgPC9kZWZpbml0aW9uPgo8L2lvYz4="
-  },
-  "Meta": {
-    "Result": 1,
-    "ErrorCode": 0
-  },
-  "PermissionCtrl": {
-    "permission": "255"
-  },
-  "FeatureCtrl": {
-    "mode": "0"
-  },
-  "SystemCtrl": {
-    "TmcmSoDist_Role": "none"
-  }
-}
-```
-
-#### Upload OpenIOC File
-
-This action uploads OpenIOC files to the Apex Central server.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|files|[]file|None|True|Files to upload|None|[{"filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}]|
-
-Example input:
-
-```
-{
-  "files": "[{\"filename\": \"file.txt\", \"content\": \"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==\"}]"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|FeatureCtrl|FeatureCtrl|False|The Apex Central deployment model|
-|Meta|Meta|False|Indicates the response status, including the result, error code, and error message|
-|PermissionCtrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
-|SystemCtrl|SystemCtrl|False|Indicates the suspicious object distribution role of the Apex Central server|
-|uploaded_info_list|[]uploaded_info_list|False|Uploaded Result Info List|
-|uploaded_message_list|[]uploaded_message_list|False|Uploaded Result Message List|
-
-Example output:
-
-```
-{
-  "FeatureCtrl": {
-    "mode": "0"
-  },
-  "Meta": {
-    "ErrorCode": 0,
-    "Result": 1
-  },
-  "PermissionCtrl": {
-    "permission": "255"
-  },
-  "SystemCtrl": {
-    "TmcmSoDist_Role": "none"
-  },
-  "uploaded_info_list": [
-    {
-      "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
-      "FileName": "file.txt",
-      "UploadedStatus": 1
-    }
-  ],
-  "uploaded_message_list": [
-    {
-      "Message": "Uploaded 1 OpenIOC file(s) successfully.",
-      "MessageType": 1
-    }
-  ]
-}
-```
-
-#### Download the RCA CSV File
-
-This action downloads existing RCA files from the Apex Central server.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|agent_guid|string|None|True|GUID of the target endpoint|None|654B1B52-C3C9-4405-B133-48E2353DA13B|
-|host_ip|string|None|True|Host IP address|None|198.51.100.100|
-|host_name|string|None|True|Host name|None|CU-PRO1-7814-2|
-|scan_summary_guid|string|None|True|GUID of the investigation summary to retrieve|None|58127b3e-1bde-4c6e-8d86-0d0f89ded601|
-|server_guid|[]string|None|True|GUID of the target server|None|["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
-|task_type|string|CMEF|False|Type of API request. For Endpoint Sensor, the value is always 4|['UNKNOWN', 'INTERNAL', 'CM', 'CMEF', 'OSF_COMMAND', 'OSF_QUERY', 'OSF_NOTIFY', 'OSF_LOG', 'MDR_ATTACK_DISCOVERY', 'OSF_SYS_CALL']|CMEF|
-
-Example input:
-
-```
-{
-  "agent_guid": "654B1B52-C3C9-4405-B133-48E2353DA13B",
-  "host_ip": "198.51.100.100",
-  "host_name": "CU-PRO1-7814-2",
-  "scan_summary_guid": "58127b3e-1bde-4c6e-8d86-0d0f89ded601",
-  "server_guid": "[\"2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6\"]",
-  "task_type": "CMEF"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|api_response|api_response|False|Contains data returned|
-
-Example output:
+<details>
 
 ```
 {
@@ -556,41 +581,15 @@ Example output:
     }
   }
 }
-```
-
-#### Terminate Process
-
-This action terminates the processes specified on Security Agent endpoints.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|agent_guid|object|None|False|The key is the serverGuid, and the value is a list of agentGuid strings of the endpoints managed by the target server|None|{"2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6": ["B7F34FF9-9DEE-45F4-9F24-DC5116C79D52"]}|
-|filter|[]filter|None|False|The filter paramter is useful for terminating the amount of agents without specifying the agentGuid|None|[{"type": 1, "value": "a"}]|
-|server_guid|[]string|None|False|GUID of servers which manage the endpoints specified in agentGuid|None|["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
-|suspicious_object_name|string|None|False|File name of the object to terminate|None|file.txt|
-|termination_info_list|[]termination_info|None|True|Container for terminationInfoList objects|None|[{"name": 101, "value": "2FF40C5ED6E5A3BBC68A10F2966F347463E326AD"}]|
-
-Example input:
 
 ```
-{
-  "agent_guid": "{\"2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6\": [\"B7F34FF9-9DEE-45F4-9F24-DC5116C79D52\"]}",
-  "filter": "[{\"type\": 1, \"value\": \"a\"}]",
-  "server_guid": "[\"2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6\"]",
-  "suspicious_object_name": "file.txt",
-  "termination_info_list": "[{\"name\": 101, \"value\": \"2FF40C5ED6E5A3BBC68A10F2966F347463E326AD\"}]"
-}
-```
 
-##### Output
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/10_download_rca_csv_file.json
+</summary>
+</details>
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Data|termination_api_data|True|Contains the data returned by the specific API|
-
-Example output:
+<details>
 
 ```
 {
@@ -634,95 +633,30 @@ Example output:
     "TmcmSoDist_Role": "none"
   }
 }
+
 ```
 
-#### List Security Agents
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/11_terminate_process.json
+</summary>
+</details>
 
-This action retrieves a list of all Security Agents with the Endpoint Sensor feature enabled.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|[]filter|None|False|Filter|None|[{"type": 1, "value": "a"}]|
-|pagination|meta_page|None|False|Pagination|None|{"offset": 0, "limit": 50}|
-|task_type|string|CMEF|True|Type of API request. For Endpoint Sensor, the value is always 4|['UNKNOWN', 'INTERNAL', 'CM', 'CMEF', 'OSF_COMMAND', 'OSF_QUERY', 'OSF_NOTIFY', 'OSF_LOG', 'MDR_ATTACK_DISCOVERY', 'OSF_SYS_CALL']|CMEF|
-
-Example input:
+<details>
 
 ```
 {
-  "filter": "[{\"type\": 1, \"value\": \"a\"}]",
-  "pagination": "{\"offset\": 0, \"limit\": 50}",
-  "task_type": "CMEF"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Data|api_data|False|Contains the data returned by the specific API|
-|FeatureCtrl|FeatureCtrl|False|The Apex Central deployment model|
-|Meta|Meta|False|Indicates the response status, including the result, error code, and error message|
-|PermissionCtrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
-|SystemCtrl|SystemCtrl|False|Indicates the suspicious object distribution role of the Apex Central server|
-
-Example output:
-
-```
-{
-  "Data": {
-    "Code": 0,
-    "CodeType": 1,
-    "Data": {
-      "content": [
-        {
-          "content": {
-            "agentEntity": [
-              {
-                "agentGuid": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
-                "ip": "10.0.2.15",
-                "isEnable": true,
-                "isImportant": false,
-                "isOnline": true,
-                "isolateStatus": 1,
-                "machineGuid": "3E4EC062-A620-4DE6-9DA9-395DD98EC1D8",
-                "machineName": "TREND-MICRO-TES",
-                "machineOS": "Windows 10",
-                "machineType": "Desktop",
-                "productType": 15,
-                "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-                "userGuid": "6AC1B3DCF-CE52-8279-EE9E-E101FD504E3",
-                "userName": "TREND-MICRO-TES\\vagrant"
-              }
-            ],
-            "agentQueryStatus": {
-              "hasFullAgents": true,
-              "hasFullRbac": true
-            },
-            "pagination": {
-              "limit": 50,
-              "offset": 0,
-              "total": 1
-            }
-          },
-          "message": "Success",
-          "statusCode": 0
-        }
-      ],
-      "hasMore": false
-    },
-    "Message": "OK",
-    "TimeZone": -4
-  },
+  "Data": [
+    {
+      "DeletedStatus": 1,
+      "FileHashID": "769fcc7550bf98d96bccb7e22a5557301c403455"
+    }
+  ],
   "FeatureCtrl": {
     "mode": "0"
   },
   "Meta": {
-    "errorCode": 0,
-    "errorMessgae": "Success",
-    "result": 1
+    "ErrorCode": 0,
+    "Result": 1
   },
   "PermissionCtrl": {
     "permission": "255"
@@ -731,104 +665,160 @@ Example output:
     "TmcmSoDist_Role": "none"
   }
 }
+
 ```
 
-#### Add to UDSO List
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/12_delete_openioc_file.json
+</summary>
+</details>
 
-This action is used to add an IP address, email or similar info to the UDSO list.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|content|string|None|True|The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max|None|http://www.example.com|
-|data_type|string|URL|True|Format of the data, character length of content is affected by this|['IP', 'URL', 'FILE_SHA1', 'DOMAIN']|URL|
-|expiry_date|int|30|False|Number of days to allow this rule to be active|None|100|
-|notes|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|This URL leads to malware|
-|scan_action|string|LOG|True|What action to do with the data sent|['BLOCK', 'LOG']|LOG|
-
-Example input:
+<details>
 
 ```
 {
-  "content": "http://www.example.com",
-  "data_type": "URL",
-  "expiry_date": 100,
-  "notes": "This URL leads to malware",
-  "scan_action": "LOG"
+  "result_code": 1,
+  "result_description": "Operation successful",
+  "result_content": [
+    {
+      "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+      "product": "SLF_PRODUCT_OFFICESCAN_CE",
+      "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+      "folder_path": "Workgroup",
+      "ip_address_list": "10.0.2.15",
+      "mac_address_list": "08-00-27-96-86-8E",
+      "host_name": "TREND-MICRO-TES",
+      "isolation_status": "normal",
+      "capabilities": [
+        "cmd_restore_isolated_agent",
+        "cmd_isolate_agent",
+        "cmd_relocate_agent",
+        "cmd_uninstall_agent"
+      ]
+    }
+  ]
 }
+
 ```
 
-##### Output
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/13_performs_action_isolate.json
+</summary>
+</details>
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Whether or not the action was successful|
-
-Example output:
+<details>
 
 ```
 {
-  "success": true
+  "result_code": 1,
+  "result_description": "Operation successful",
+  "result_content": [
+    {
+      "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+      "product": "SLF_PRODUCT_OFFICESCAN_CE",
+      "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+      "folder_path": "Workgroup",
+      "ip_address_list": "10.0.2.15",
+      "mac_address_list": "08-00-27-96-86-8E",
+      "host_name": "TREND-MICRO-TES",
+      "isolation_status": "isolated",
+      "capabilities": [
+        "cmd_restore_isolated_agent",
+        "cmd_isolate_agent",
+        "cmd_relocate_agent",
+        "cmd_uninstall_agent"
+      ]
+    }
+  ]
 }
+
 ```
 
-#### Add File to UDSO List
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 --debug run < tests/14_performs_action_restore.json
+</summary>
+</details>
 
-This action is used to add a file to the UDSO list of the Apex Security Manager.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|file|file|None|True|File to be marked as suspicious|None|{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
-|notes|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|This file is malware|
-|scan_action|string|LOG|True|What action to do with the data sent|['BLOCK', 'LOG', 'QUARANTINE']|QUARANTINE|
-
-Example input:
+<details>
 
 ```
 {
-  "file": "{\"filename\": \"setup.exe\", \"content\": \"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==\"}",
-  "notes": "This file is malware",
-  "scan_action": "QUARANTINE"
+  "body": {
+    "error": "An error occurred during plugin execution!\n\nSomething unexpected occurred. Can't isolate for admin endpoint",
+    "log": "rapid7/Trend Micro Apex:1.0.0. Step name: performs_action\nAn error occurred during plugin execution!\n\nSomething unexpected occurred. Can't isolate for admin endpoint\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.7/site-packages/komand-1.0.1-py3.7.egg/komand/plugin.py\", line 311, in handle_step\n    output = self.start_step(input_message['body'], 'action', logger, log_stream, is_test, is_debug)\n  File \"/usr/local/lib/python3.7/site-packages/komand-1.0.1-py3.7.egg/komand/plugin.py\", line 419, in start_step\n    output = func(params)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 26, in run\n    self._get_payload(params)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 38, in _get_payload\n    self._validate_allow_action(action_id, params.get(Input.ENTITY_ID), self.connection.skip_entity_ids)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 61, in _validate_allow_action\n    assistance=f\"Can't {action_id.lower()} for admin endpoint\")\nkomand.exceptions.PluginException: An error occurred during plugin execution!\n\nSomething unexpected occurred. Can't isolate for admin endpoint\n",
+    "meta": {},
+    "status": "error"
+  },
+  "type": "action_event",
+  "version": "v1"
 }
+
 ```
 
-##### Output
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 run < tests/15_performs_action_isolate_entity_bad.json
+</summary>
+</details>
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Whether or not the action was successful|
-
-Example output:
+<details>
 
 ```
 {
-  "success": true
+  "body": {
+    "error": "An error occurred during plugin execution!\n\nSomething unexpected occurred. Can't isolate for admin endpoint",
+    "log": "rapid7/Trend Micro Apex:1.0.0. Step name: performs_action\nAn error occurred during plugin execution!\n\nSomething unexpected occurred. Can't isolate for admin endpoint\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.7/site-packages/komand-1.0.1-py3.7.egg/komand/plugin.py\", line 311, in handle_step\n    output = self.start_step(input_message['body'], 'action', logger, log_stream, is_test, is_debug)\n  File \"/usr/local/lib/python3.7/site-packages/komand-1.0.1-py3.7.egg/komand/plugin.py\", line 419, in start_step\n    output = func(params)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 26, in run\n    self._get_payload(params)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 44, in _get_payload\n    self._validate_allow_action(action_id, params.get(Input.IP_ADDRESS), self.connection.skip_address_ips)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 61, in _validate_allow_action\n    assistance=f\"Can't {action_id.lower()} for admin endpoint\")\nkomand.exceptions.PluginException: An error occurred during plugin execution!\n\nSomething unexpected occurred. Can't isolate for admin endpoint\n",
+    "meta": {},
+    "status": "error"
+  },
+  "type": "action_event",
+  "version": "v1"
 }
+
 ```
 
-### Triggers
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 run < tests/16_performs_action_isolate_ip_bad.json
+</summary>
+</details>
 
-_This plugin does not contain any triggers._
+<details>
 
-### Custom Output Types
+```
+{
+  "body": {
+    "error": "An error occurred during plugin execution!\n\nSomething unexpected occurred. Can't uninstall for admin endpoint",
+    "log": "rapid7/Trend Micro Apex:1.0.0. Step name: performs_action\nAn error occurred during plugin execution!\n\nSomething unexpected occurred. Can't uninstall for admin endpoint\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.7/site-packages/komand-1.0.1-py3.7.egg/komand/plugin.py\", line 311, in handle_step\n    output = self.start_step(input_message['body'], 'action', logger, log_stream, is_test, is_debug)\n  File \"/usr/local/lib/python3.7/site-packages/komand-1.0.1-py3.7.egg/komand/plugin.py\", line 419, in start_step\n    output = func(params)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 26, in run\n    self._get_payload(params)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 47, in _get_payload\n    self._validate_allow_action(action_id, params.get(Input.MAC_ADDRESS), self.connection.skip_mac_addresses)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 61, in _validate_allow_action\n    assistance=f\"Can't {action_id.lower()} for admin endpoint\")\nkomand.exceptions.PluginException: An error occurred during plugin execution!\n\nSomething unexpected occurred. Can't uninstall for admin endpoint\n",
+    "meta": {},
+    "status": "error"
+  },
+  "type": "action_event",
+  "version": "v1"
+}
 
-_This plugin does not contain any custom output types._
+```
 
-## Troubleshooting
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 run < tests/17_performs_action_uninstall_mac_bad.json
+</summary>
+</details>
 
-_This plugin does not contain any troubleshooting information._
+<details>
 
-# Version History
+```
+{
+  "body": {
+    "error": "An error occurred during plugin execution!\n\nSomething unexpected occurred. Can't uninstall for admin endpoint",
+    "log": "rapid7/Trend Micro Apex:1.0.0. Step name: performs_action\nAn error occurred during plugin execution!\n\nSomething unexpected occurred. Can't uninstall for admin endpoint\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.7/site-packages/komand-1.0.1-py3.7.egg/komand/plugin.py\", line 311, in handle_step\n    output = self.start_step(input_message['body'], 'action', logger, log_stream, is_test, is_debug)\n  File \"/usr/local/lib/python3.7/site-packages/komand-1.0.1-py3.7.egg/komand/plugin.py\", line 419, in start_step\n    output = func(params)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 26, in run\n    self._get_payload(params)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 41, in _get_payload\n    self._validate_allow_action(action_id, params.get(Input.HOST_NAME), self.connection.skip_host_names)\n  File \"/usr/local/lib/python3.7/site-packages/trendmicro_apex_rapid7_plugin-1.0.0-py3.7.egg/icon_trendmicro_apex/actions/performs_action/action.py\", line 61, in _validate_allow_action\n    assistance=f\"Can't {action_id.lower()} for admin endpoint\")\nkomand.exceptions.PluginException: An error occurred during plugin execution!\n\nSomething unexpected occurred. Can't uninstall for admin endpoint\n",
+    "meta": {},
+    "status": "error"
+  },
+  "type": "action_event",
+  "version": "v1"
+}
 
-* 1.1.0 - New actions List Security Agents, List OpenIOC Files, Download the RCA CSV File, Upload OpenIOC File, Delete OpenIOC File, Download OpenIOC File, Get Investigation, Terminate Process, Execute Agent Action
-* 1.0.0 - Initial plugin
+```
 
-# Links
-
-## References
-
-* [Trend Micro Apex](https://www.trendmicro.com/en_ca/business/products/user-protection/sps/endpoint.html)
-* [Apex API](https://beta-community-trendmicro.cs23.force.com/automationcenter/apex-central/api)
+<summary>
+docker run --rm -i rapid7/trendmicro_apex:1.0.0 run < tests/18_performs_action_uninstall_host_bad.json
+</summary>
+</details>

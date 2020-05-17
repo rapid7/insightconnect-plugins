@@ -6,10 +6,6 @@ import json
 class Input:
     API_KEY = "api_key"
     APPLICATION_ID = "application_id"
-    SKIP_ADDRESS_IPS = "skip_address_ips"
-    SKIP_ENTITY_IDS = "skip_entity_ids"
-    SKIP_HOST_NAMES = "skip_host_names"
-    SKIP_MAC_ADDRESSES = "skip_mac_addresses"
     URL = "url"
     
 
@@ -30,42 +26,6 @@ class ConnectionSchema(komand.Input):
       "title": "Application ID",
       "description": "Application ID to communicate to the Apex Security Manager e.g. 909D88H7-3458-42RN-92FF-012V3CU3D294",
       "order": 2
-    },
-    "skip_address_ips": {
-      "type": "array",
-      "title": "Skip Address IPs",
-      "description": "Skip address IPs on isolate and uninstall actions",
-      "items": {
-        "type": "string"
-      },
-      "order": 6
-    },
-    "skip_entity_ids": {
-      "type": "array",
-      "title": "Skip Entity ID",
-      "description": "Skip entity ids on isolate and uninstall actions",
-      "items": {
-        "type": "string"
-      },
-      "order": 4
-    },
-    "skip_host_names": {
-      "type": "array",
-      "title": "Skip Host Names",
-      "description": "Skip host names on isolate and uninstall actions",
-      "items": {
-        "type": "string"
-      },
-      "order": 5
-    },
-    "skip_mac_addresses": {
-      "type": "array",
-      "title": "Skip MAC Addresses",
-      "description": "Skip MAC addresses on isolate and uninstall actions",
-      "items": {
-        "type": "string"
-      },
-      "order": 7
     },
     "url": {
       "type": "string",

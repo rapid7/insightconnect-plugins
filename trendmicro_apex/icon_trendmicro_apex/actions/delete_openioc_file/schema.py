@@ -118,10 +118,6 @@ class DeleteOpeniocFileOutput(komand.Output):
           "type": "integer",
           "title": "Result",
           "description": "The result code of the response",
-          "enum": [
-            0,
-            1
-          ],
           "order": 3
         }
       }
@@ -169,10 +165,6 @@ class DeleteOpeniocFileOutput(komand.Output):
           "type": "integer",
           "title": "Deleted Status",
           "description": "Indicates the deletion status of the specified file",
-          "enum": [
-            -1,
-            1
-          ],
           "order": 1
         },
         "FileHashID": {

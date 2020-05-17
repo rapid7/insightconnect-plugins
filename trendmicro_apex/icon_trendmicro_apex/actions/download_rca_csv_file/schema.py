@@ -184,13 +184,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "integer",
               "title": "ISO Late Status",
               "description": "ISO late status",
-              "enum": [
-                0,
-                1,
-                2,
-                3,
-                4
-              ],
               "order": 5
             },
             "machineGuid": {
@@ -215,10 +208,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "string",
               "title": "Machine Type",
               "description": "Machine type",
-              "enum": [
-                "Server",
-                "Desktop"
-              ],
               "order": 9
             },
             "serverGuid": {
@@ -312,13 +301,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "integer",
                   "title": "ISO Late Status",
                   "description": "ISO late status",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4
-                  ],
                   "order": 5
                 },
                 "machineGuid": {
@@ -343,10 +325,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "string",
                   "title": "Machine Type",
                   "description": "Machine type",
-                  "enum": [
-                    "Server",
-                    "Desktop"
-                  ],
                   "order": 9
                 },
                 "serverGuid": {
@@ -457,13 +435,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "integer",
                   "title": "ISO Late Status",
                   "description": "ISO late status",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4
-                  ],
                   "order": 5
                 },
                 "machineGuid": {
@@ -488,10 +459,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "string",
                   "title": "Machine Type",
                   "description": "Machine type",
-                  "enum": [
-                    "Server",
-                    "Desktop"
-                  ],
                   "order": 9
                 },
                 "serverGuid": {
@@ -585,13 +552,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "integer",
                       "title": "ISO Late Status",
                       "description": "ISO late status",
-                      "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4
-                      ],
                       "order": 5
                     },
                     "machineGuid": {
@@ -616,10 +576,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "string",
                       "title": "Machine Type",
                       "description": "Machine type",
-                      "enum": [
-                        "Server",
-                        "Desktop"
-                      ],
                       "order": 9
                     },
                     "serverGuid": {
@@ -758,10 +714,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "type": "integer",
           "title": "Result",
           "description": "The result code of the response",
-          "enum": [
-            0,
-            1
-          ],
           "order": 3
         }
       }
@@ -833,13 +785,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "type": "integer",
           "title": "ISO Late Status",
           "description": "ISO late status",
-          "enum": [
-            0,
-            1,
-            2,
-            3,
-            4
-          ],
           "order": 5
         },
         "machineGuid": {
@@ -864,10 +809,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "type": "string",
           "title": "Machine Type",
           "description": "Machine type",
-          "enum": [
-            "Server",
-            "Desktop"
-          ],
           "order": 9
         },
         "serverGuid": {
@@ -910,11 +851,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
           "type": "integer",
           "title": "Code Type",
           "description": "Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code",
-          "enum": [
-            1,
-            2,
-            3
-          ],
           "order": 2
         },
         "Data": {
@@ -1014,13 +950,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "integer",
                   "title": "ISO Late Status",
                   "description": "ISO late status",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4
-                  ],
                   "order": 5
                 },
                 "machineGuid": {
@@ -1045,10 +974,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "string",
                   "title": "Machine Type",
                   "description": "Machine type",
-                  "enum": [
-                    "Server",
-                    "Desktop"
-                  ],
                   "order": 9
                 },
                 "serverGuid": {
@@ -1142,13 +1067,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "integer",
                       "title": "ISO Late Status",
                       "description": "ISO late status",
-                      "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4
-                      ],
                       "order": 5
                     },
                     "machineGuid": {
@@ -1173,10 +1091,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "string",
                       "title": "Machine Type",
                       "description": "Machine type",
-                      "enum": [
-                        "Server",
-                        "Desktop"
-                      ],
                       "order": 9
                     },
                     "serverGuid": {
@@ -1287,13 +1201,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "integer",
                       "title": "ISO Late Status",
                       "description": "ISO late status",
-                      "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4
-                      ],
                       "order": 5
                     },
                     "machineGuid": {
@@ -1318,10 +1225,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "string",
                       "title": "Machine Type",
                       "description": "Machine type",
-                      "enum": [
-                        "Server",
-                        "Desktop"
-                      ],
                       "order": 9
                     },
                     "serverGuid": {
@@ -1415,13 +1318,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "type": "integer",
                           "title": "ISO Late Status",
                           "description": "ISO late status",
-                          "enum": [
-                            0,
-                            1,
-                            2,
-                            3,
-                            4
-                          ],
                           "order": 5
                         },
                         "machineGuid": {
@@ -1446,10 +1342,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "type": "string",
                           "title": "Machine Type",
                           "description": "Machine type",
-                          "enum": [
-                            "Server",
-                            "Desktop"
-                          ],
                           "order": 9
                         },
                         "serverGuid": {
@@ -1588,13 +1480,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "integer",
               "title": "ISO Late Status",
               "description": "ISO late status",
-              "enum": [
-                0,
-                1,
-                2,
-                3,
-                4
-              ],
               "order": 5
             },
             "machineGuid": {
@@ -1619,10 +1504,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "string",
               "title": "Machine Type",
               "description": "Machine type",
-              "enum": [
-                "Server",
-                "Desktop"
-              ],
               "order": 9
             },
             "serverGuid": {
@@ -1716,13 +1597,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "integer",
                   "title": "ISO Late Status",
                   "description": "ISO late status",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4
-                  ],
                   "order": 5
                 },
                 "machineGuid": {
@@ -1747,10 +1621,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "string",
                   "title": "Machine Type",
                   "description": "Machine type",
-                  "enum": [
-                    "Server",
-                    "Desktop"
-                  ],
                   "order": 9
                 },
                 "serverGuid": {
@@ -1861,13 +1731,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "integer",
                   "title": "ISO Late Status",
                   "description": "ISO late status",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4
-                  ],
                   "order": 5
                 },
                 "machineGuid": {
@@ -1892,10 +1755,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "string",
                   "title": "Machine Type",
                   "description": "Machine type",
-                  "enum": [
-                    "Server",
-                    "Desktop"
-                  ],
                   "order": 9
                 },
                 "serverGuid": {
@@ -1989,13 +1848,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "integer",
                       "title": "ISO Late Status",
                       "description": "ISO late status",
-                      "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4
-                      ],
                       "order": 5
                     },
                     "machineGuid": {
@@ -2020,10 +1872,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "string",
                       "title": "Machine Type",
                       "description": "Machine type",
-                      "enum": [
-                        "Server",
-                        "Desktop"
-                      ],
                       "order": 9
                     },
                     "serverGuid": {
@@ -2243,13 +2091,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "integer",
                   "title": "ISO Late Status",
                   "description": "ISO late status",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4
-                  ],
                   "order": 5
                 },
                 "machineGuid": {
@@ -2274,10 +2115,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "string",
                   "title": "Machine Type",
                   "description": "Machine type",
-                  "enum": [
-                    "Server",
-                    "Desktop"
-                  ],
                   "order": 9
                 },
                 "serverGuid": {
@@ -2371,13 +2208,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "integer",
                       "title": "ISO Late Status",
                       "description": "ISO late status",
-                      "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4
-                      ],
                       "order": 5
                     },
                     "machineGuid": {
@@ -2402,10 +2232,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "string",
                       "title": "Machine Type",
                       "description": "Machine type",
-                      "enum": [
-                        "Server",
-                        "Desktop"
-                      ],
                       "order": 9
                     },
                     "serverGuid": {
@@ -2516,13 +2342,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "integer",
                       "title": "ISO Late Status",
                       "description": "ISO late status",
-                      "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4
-                      ],
                       "order": 5
                     },
                     "machineGuid": {
@@ -2547,10 +2366,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "string",
                       "title": "Machine Type",
                       "description": "Machine type",
-                      "enum": [
-                        "Server",
-                        "Desktop"
-                      ],
                       "order": 9
                     },
                     "serverGuid": {
@@ -2644,13 +2459,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "type": "integer",
                           "title": "ISO Late Status",
                           "description": "ISO late status",
-                          "enum": [
-                            0,
-                            1,
-                            2,
-                            3,
-                            4
-                          ],
                           "order": 5
                         },
                         "machineGuid": {
@@ -2675,10 +2483,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "type": "string",
                           "title": "Machine Type",
                           "description": "Machine type",
-                          "enum": [
-                            "Server",
-                            "Desktop"
-                          ],
                           "order": 9
                         },
                         "serverGuid": {
@@ -2817,10 +2621,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "integer",
               "title": "Result",
               "description": "The result code of the response",
-              "enum": [
-                0,
-                1
-              ],
               "order": 3
             }
           }
@@ -2892,13 +2692,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "integer",
               "title": "ISO Late Status",
               "description": "ISO late status",
-              "enum": [
-                0,
-                1,
-                2,
-                3,
-                4
-              ],
               "order": 5
             },
             "machineGuid": {
@@ -2923,10 +2716,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "string",
               "title": "Machine Type",
               "description": "Machine type",
-              "enum": [
-                "Server",
-                "Desktop"
-              ],
               "order": 9
             },
             "serverGuid": {
@@ -2969,11 +2758,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "integer",
               "title": "Code Type",
               "description": "Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code",
-              "enum": [
-                1,
-                2,
-                3
-              ],
               "order": 2
             },
             "Data": {
@@ -3073,13 +2857,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "integer",
                       "title": "ISO Late Status",
                       "description": "ISO late status",
-                      "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4
-                      ],
                       "order": 5
                     },
                     "machineGuid": {
@@ -3104,10 +2881,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "string",
                       "title": "Machine Type",
                       "description": "Machine type",
-                      "enum": [
-                        "Server",
-                        "Desktop"
-                      ],
                       "order": 9
                     },
                     "serverGuid": {
@@ -3201,13 +2974,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "type": "integer",
                           "title": "ISO Late Status",
                           "description": "ISO late status",
-                          "enum": [
-                            0,
-                            1,
-                            2,
-                            3,
-                            4
-                          ],
                           "order": 5
                         },
                         "machineGuid": {
@@ -3232,10 +2998,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "type": "string",
                           "title": "Machine Type",
                           "description": "Machine type",
-                          "enum": [
-                            "Server",
-                            "Desktop"
-                          ],
                           "order": 9
                         },
                         "serverGuid": {
@@ -3346,13 +3108,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "type": "integer",
                           "title": "ISO Late Status",
                           "description": "ISO late status",
-                          "enum": [
-                            0,
-                            1,
-                            2,
-                            3,
-                            4
-                          ],
                           "order": 5
                         },
                         "machineGuid": {
@@ -3377,10 +3132,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "type": "string",
                           "title": "Machine Type",
                           "description": "Machine type",
-                          "enum": [
-                            "Server",
-                            "Desktop"
-                          ],
                           "order": 9
                         },
                         "serverGuid": {
@@ -3474,13 +3225,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                               "type": "integer",
                               "title": "ISO Late Status",
                               "description": "ISO late status",
-                              "enum": [
-                                0,
-                                1,
-                                2,
-                                3,
-                                4
-                              ],
                               "order": 5
                             },
                             "machineGuid": {
@@ -3505,10 +3249,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                               "type": "string",
                               "title": "Machine Type",
                               "description": "Machine type",
-                              "enum": [
-                                "Server",
-                                "Desktop"
-                              ],
                               "order": 9
                             },
                             "serverGuid": {
@@ -3647,13 +3387,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "integer",
                   "title": "ISO Late Status",
                   "description": "ISO late status",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4
-                  ],
                   "order": 5
                 },
                 "machineGuid": {
@@ -3678,10 +3411,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "string",
                   "title": "Machine Type",
                   "description": "Machine type",
-                  "enum": [
-                    "Server",
-                    "Desktop"
-                  ],
                   "order": 9
                 },
                 "serverGuid": {
@@ -3775,13 +3504,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "integer",
                       "title": "ISO Late Status",
                       "description": "ISO late status",
-                      "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4
-                      ],
                       "order": 5
                     },
                     "machineGuid": {
@@ -3806,10 +3528,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "string",
                       "title": "Machine Type",
                       "description": "Machine type",
-                      "enum": [
-                        "Server",
-                        "Desktop"
-                      ],
                       "order": 9
                     },
                     "serverGuid": {
@@ -3920,13 +3638,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "integer",
                       "title": "ISO Late Status",
                       "description": "ISO late status",
-                      "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4
-                      ],
                       "order": 5
                     },
                     "machineGuid": {
@@ -3951,10 +3662,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "string",
                       "title": "Machine Type",
                       "description": "Machine type",
-                      "enum": [
-                        "Server",
-                        "Desktop"
-                      ],
                       "order": 9
                     },
                     "serverGuid": {
@@ -4048,13 +3755,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "type": "integer",
                           "title": "ISO Late Status",
                           "description": "ISO late status",
-                          "enum": [
-                            0,
-                            1,
-                            2,
-                            3,
-                            4
-                          ],
                           "order": 5
                         },
                         "machineGuid": {
@@ -4079,10 +3779,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                           "type": "string",
                           "title": "Machine Type",
                           "description": "Machine type",
-                          "enum": [
-                            "Server",
-                            "Desktop"
-                          ],
                           "order": 9
                         },
                         "serverGuid": {
@@ -4254,13 +3950,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "integer",
                   "title": "ISO Late Status",
                   "description": "ISO late status",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4
-                  ],
                   "order": 5
                 },
                 "machineGuid": {
@@ -4285,10 +3974,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "string",
                   "title": "Machine Type",
                   "description": "Machine type",
-                  "enum": [
-                    "Server",
-                    "Desktop"
-                  ],
                   "order": 9
                 },
                 "serverGuid": {
@@ -4399,13 +4084,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "integer",
                   "title": "ISO Late Status",
                   "description": "ISO late status",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4
-                  ],
                   "order": 5
                 },
                 "machineGuid": {
@@ -4430,10 +4108,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "string",
                   "title": "Machine Type",
                   "description": "Machine type",
-                  "enum": [
-                    "Server",
-                    "Desktop"
-                  ],
                   "order": 9
                 },
                 "serverGuid": {
@@ -4527,13 +4201,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "integer",
                       "title": "ISO Late Status",
                       "description": "ISO late status",
-                      "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4
-                      ],
                       "order": 5
                     },
                     "machineGuid": {
@@ -4558,10 +4225,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                       "type": "string",
                       "title": "Machine Type",
                       "description": "Machine type",
-                      "enum": [
-                        "Server",
-                        "Desktop"
-                      ],
                       "order": 9
                     },
                     "serverGuid": {
@@ -4733,13 +4396,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "integer",
               "title": "ISO Late Status",
               "description": "ISO late status",
-              "enum": [
-                0,
-                1,
-                2,
-                3,
-                4
-              ],
               "order": 5
             },
             "machineGuid": {
@@ -4764,10 +4420,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "string",
               "title": "Machine Type",
               "description": "Machine type",
-              "enum": [
-                "Server",
-                "Desktop"
-              ],
               "order": 9
             },
             "serverGuid": {
@@ -4878,13 +4530,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "integer",
               "title": "ISO Late Status",
               "description": "ISO late status",
-              "enum": [
-                0,
-                1,
-                2,
-                3,
-                4
-              ],
               "order": 5
             },
             "machineGuid": {
@@ -4909,10 +4554,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
               "type": "string",
               "title": "Machine Type",
               "description": "Machine type",
-              "enum": [
-                "Server",
-                "Desktop"
-              ],
               "order": 9
             },
             "serverGuid": {
@@ -5006,13 +4647,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "integer",
                   "title": "ISO Late Status",
                   "description": "ISO late status",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4
-                  ],
                   "order": 5
                 },
                 "machineGuid": {
@@ -5037,10 +4671,6 @@ class DownloadRcaCsvFileOutput(komand.Output):
                   "type": "string",
                   "title": "Machine Type",
                   "description": "Machine type",
-                  "enum": [
-                    "Server",
-                    "Desktop"
-                  ],
                   "order": 9
                 },
                 "serverGuid": {

@@ -1,7 +1,6 @@
 import komand
 from .schema import TerminateProcessInput, TerminateProcessOutput, Input, Component
 # Custom imports below
-from ...util import util
 
 
 class TerminateProcess(komand.Action):
@@ -16,7 +15,7 @@ class TerminateProcess(komand.Action):
     def run(self, params={}):
         payload = {
             "Url": "V1/Task/CreateProcessTermination",
-            "TaskType": util.TaskType.value_of(params.get(Input.TASK_TYPE, util.DEFAULT_TASK_TYPE)),
+            "TaskType": 4,
             "Payload": {
                 "serverGuid": params.get(Input.SERVER_GUID, []),
                 "agentGuid": params.get(Input.AGENT_GUID, {}),

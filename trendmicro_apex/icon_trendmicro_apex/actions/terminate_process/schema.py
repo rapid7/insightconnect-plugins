@@ -12,7 +12,6 @@ class Input:
     FILTER = "filter"
     SERVER_GUID = "server_guid"
     SUSPICIOUS_OBJECT_NAME = "suspicious_object_name"
-    TASK_TYPE = "task_type"
     TERMINATION_INFO_LIST = "termination_info_list"
     
 
@@ -55,25 +54,6 @@ class TerminateProcessInput(komand.Input):
       "title": "Suspicious Object Name",
       "description": "File name of the object to terminate",
       "order": 4
-    },
-    "task_type": {
-      "type": "string",
-      "title": "Task Type",
-      "description": "Type of API request. For Endpoint Sensor, the value is always 4",
-      "default": "CMEF",
-      "enum": [
-        "UNKNOWN",
-        "INTERNAL",
-        "CM",
-        "CMEF",
-        "OSF_COMMAND",
-        "OSF_QUERY",
-        "OSF_NOTIFY",
-        "OSF_LOG",
-        "MDR_ATTACK_DISCOVERY",
-        "OSF_SYS_CALL"
-      ],
-      "order": 6
     },
     "termination_info_list": {
       "type": "array",
@@ -167,11 +147,6 @@ class TerminateProcessOutput(komand.Output):
           "type": "integer",
           "title": "Code Type",
           "description": "Indicate Code is iES/CMEF error code, Apex Central error code or HTTP Code",
-          "enum": [
-            1,
-            2,
-            3
-          ],
           "order": 2
         },
         "Data": {
@@ -223,24 +198,6 @@ class TerminateProcessOutput(komand.Output):
               "type": "integer",
               "title": "Status",
               "description": "The status of the agent",
-              "enum": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                9999
-              ],
               "order": 3
             },
             "statusCode": {
@@ -304,24 +261,6 @@ class TerminateProcessOutput(komand.Output):
                   "type": "integer",
                   "title": "Status",
                   "description": "The status of the agent",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    9999
-                  ],
                   "order": 3
                 },
                 "statusCode": {
@@ -408,24 +347,6 @@ class TerminateProcessOutput(komand.Output):
                   "type": "integer",
                   "title": "Status",
                   "description": "The status of the agent",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    9999
-                  ],
                   "order": 3
                 },
                 "statusCode": {
@@ -489,24 +410,6 @@ class TerminateProcessOutput(komand.Output):
                       "type": "integer",
                       "title": "Status",
                       "description": "The status of the agent",
-                      "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9,
-                        10,
-                        11,
-                        12,
-                        13,
-                        14,
-                        9999
-                      ],
                       "order": 3
                     },
                     "statusCode": {
@@ -552,24 +455,6 @@ class TerminateProcessOutput(komand.Output):
           "type": "integer",
           "title": "Status",
           "description": "The status of the agent",
-          "enum": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            9999
-          ],
           "order": 3
         },
         "statusCode": {
@@ -633,24 +518,6 @@ class TerminateProcessOutput(komand.Output):
               "type": "integer",
               "title": "Status",
               "description": "The status of the agent",
-              "enum": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                9999
-              ],
               "order": 3
             },
             "statusCode": {
@@ -737,24 +604,6 @@ class TerminateProcessOutput(komand.Output):
               "type": "integer",
               "title": "Status",
               "description": "The status of the agent",
-              "enum": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                9999
-              ],
               "order": 3
             },
             "statusCode": {
@@ -818,24 +667,6 @@ class TerminateProcessOutput(komand.Output):
                   "type": "integer",
                   "title": "Status",
                   "description": "The status of the agent",
-                  "enum": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    9999
-                  ],
                   "order": 3
                 },
                 "statusCode": {
