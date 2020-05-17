@@ -368,7 +368,7 @@ Example output:
 
 #### Download OpenIOC File
 
-This action is used to download OpenIOC files to the Apex Central server.
+This action is used to download OpenIOC files from the Apex Central server.
 
 ##### Input
 

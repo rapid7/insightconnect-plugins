@@ -1053,7 +1053,7 @@ actions:
         required: true
   performs_action:
     title: Execute Agent Action
-    description: "Execute actions on the Security Agent"
+    description: This action performs agent actions such as endpoint isolation, restoration, relocation, and uninstalls.
     input:
       action:
         title: Action
