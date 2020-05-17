@@ -109,7 +109,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.1 - Fixed the issue with obtaining username
+* 3.0.1 - Fixed issue obtaining username in connection
 * 3.0.0 - Update connection username from credential_secret_key to string
 * 2.0.0 - Update Run action output to return 3 output fields i.e. `stderr`, `stdout`, and `all_output`
 * 1.0.3 - New spec and help.md format for the Extension Library
