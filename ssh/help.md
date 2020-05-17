@@ -39,6 +39,20 @@ Example input:
   "username": "user1"
 }
 ```
+
+The `key` field takes a base64 encoded RSA private key which must contain a newline character after the BEGIN marker and before the END marker:
+E.g.
+
+```
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7g4h53s=
+...
+-----END RSA PRIVATE KEY-----
+```
+
+You can easily encode a private key file and copy a key to your clipboard on MacOS with the following command: `base64 < .ssh/id_rsa | pbcopy`.
+This can then be pasted into the Connection's `key` input field.
+
 ## Technical Details
 
 ### Actions
