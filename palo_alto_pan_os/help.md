@@ -71,6 +71,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### 
