@@ -30,7 +30,7 @@ class RemoveAddressObjectFromGroup(komand.Action):
 
         found = False
         names = []
-        for idx, name in enumerate(address_objects):
+        for name in address_objects:
             if type(name) == str:
                 names.append(name)
             else:
