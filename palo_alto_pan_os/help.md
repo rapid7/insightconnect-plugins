@@ -121,6 +121,13 @@ Example input:
 Example output:
 
 ```
+{
+  "found": true,
+  "address_object_names": [
+    "1.1.1.1-24",
+    "Bad IP 2"
+  ]
+}
 ```
 
 #### Get Policy
