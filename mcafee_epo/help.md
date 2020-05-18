@@ -18,11 +18,16 @@ This plugin utilizes libraries available through McAfee's ePolicy Orchestrator M
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|McAfee ePO address e.g. epo.company.com|None|
-|credentials|credential_username_password|None|True|Username and password to access McAfee ePO e.g. admin|None|
-|port|number|None|True|McAfee ePO Port e.g. 8443|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|Username and password to access McAfee ePO e.g. admin|None|None|
+|port|number|None|True|McAfee ePO Port e.g. 8443|None|None|
+|url|string|None|True|McAfee ePO address e.g. epo.company.com|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -34,9 +39,14 @@ This action is used to list information about system(s).
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|False|System search query e.g Device-1|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|False|System search query e.g Device-1|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -55,10 +65,15 @@ This action is used to assign the given tag to a supplied list of systems.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|tag|string|None|True|The tag to apply|None|
-|devices|[]string|None|True|Array of all devices to tag e.g. ["Device-1","Device-2"]|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|devices|[]string|None|True|Array of all devices to tag e.g. ["Device-1","Device-2"]|None|None|
+|tag|string|None|True|The tag to apply|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -72,10 +87,15 @@ This action is used to add permission set(s) to a specified user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user|string|None|False|Username of the target user|None|
-|permission_set|string|None|False|String name of the permission set to apply e.g. Group Admin|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|permission_set|string|None|False|String name of the permission set to apply e.g. Group Admin|None|None|
+|user|string|None|False|Username of the target user|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -89,10 +109,15 @@ This action is used to clear the given tag to a supplied list of systems.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|tag|string|None|True|The tag to clear|None|
-|devices|[]string|None|True|Array of all devices to clear tag e.g. ["Device-1","Device-2"]|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|devices|[]string|None|True|Array of all devices to clear tag e.g. ["Device-1","Device-2"]|None|None|
+|tag|string|None|True|The tag to clear|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -102,7 +127,7 @@ This action is used to clear the given tag to a supplied list of systems.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -113,7 +138,7 @@ _This plugin does not contain any custom output types._
 This plugin does not contain any troubleshooting information.
 
 # Version History
-
+* 1.0.2 - Fix issue with wrong type in action System Information
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.2.1 - SSL bug fix in SDK

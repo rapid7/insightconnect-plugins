@@ -150,7 +150,7 @@ class SystemInfoOutput(komand.Output):
           "order": 6
         },
         "EPOComputerProperties.LastAgentHandler": {
-          "type": "string",
+          "type": "integer",
           "title": "Last Agent Handler",
           "order": 49
         },
