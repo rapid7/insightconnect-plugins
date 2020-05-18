@@ -86,4 +86,4 @@ class CheckIfAddressObjectInGroup(komand.Action):
                 return {Output.FOUND: True, Output.ADDRESS_OBJECTS: object_names_to_return}
 
         # That was a lot of work for nothing...bail out
-        return {Output.FOUND: False}
+        return {Output.FOUND: False, Output.ADDRESS_OBJECTS: []}
