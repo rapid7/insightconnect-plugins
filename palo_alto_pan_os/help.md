@@ -208,7 +208,7 @@ In this case, we will strip the /32 from the end and check the IP against the wh
 |object_description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
 |object_name|string|None|True|The name of the address object|None|Blocked host|
 |tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|malware|
-|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|
+|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|['198.51.100.100', '192.0.2.0/24', 'example.com']|
 
 Example input:
 
