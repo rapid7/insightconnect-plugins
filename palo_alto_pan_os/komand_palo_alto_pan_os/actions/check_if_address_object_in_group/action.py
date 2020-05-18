@@ -14,7 +14,7 @@ class CheckIfAddressObjectInGroup(komand.Action):
                 output=CheckIfAddressObjectInGroupOutput())
 
     def run(self, params={}):
-        group_name = params.get(Input.GROUP_NAME)
+        group_name = params.get(Input.GROUP)
         address_to_check = params.get(Input.ADDRESS)
         device_name = params.get(Input.DEVICE_NAME)
         virtual_system = params.get(Input.VIRTUAL_SYSTEM)

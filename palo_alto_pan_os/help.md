@@ -96,7 +96,7 @@ This action checks to see if an IP, CIDR, or domain is in an Address Group.
 |address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name|None|198.51.100.100|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name|None|False|
-|group_name|string|None|True|Group name|None|ICON Block List|
+|group|string|None|True|Group name|None|ICON Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
@@ -106,7 +106,7 @@ Example input:
   "address": "198.51.100.100",
   "device_name": "localhost.localdomain",
   "enable_search": false,
-  "group_name": "ICON Block List",
+  "group": "ICON Block List",
   "virtual_system": "vsys1"
 }
 ```
@@ -138,11 +138,6 @@ This action is used to get a policy.
 Example input:
 
 ```
-{
-  "device_name": "localhost.localdomain",
-  "policy_name": "InsightConnect Block List",
-  "virtual_system": "vsys1"
-}
 ```
 
 ##### Output
@@ -218,7 +213,7 @@ In this case, we will strip the /32 from the end and check the IP against the wh
 |object_description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
 |object_name|string|None|True|The name of the address object|None|Blocked host|
 |tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|malware|
-|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|['198.51.100.100', '192.0.2.0/24', 'example.com']|
+|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|
 
 Example input:
 

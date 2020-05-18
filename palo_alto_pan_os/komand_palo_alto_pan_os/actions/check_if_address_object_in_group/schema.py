@@ -11,7 +11,7 @@ class Input:
     ADDRESS = "address"
     DEVICE_NAME = "device_name"
     ENABLE_SEARCH = "enable_search"
-    GROUP_NAME = "group_name"
+    GROUP = "group"
     VIRTUAL_SYSTEM = "virtual_system"
     
 
@@ -46,9 +46,9 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
       "default": false,
       "order": 3
     },
-    "group_name": {
+    "group": {
       "type": "string",
-      "title": "Group Name",
+      "title": "Group",
       "description": "Group name",
       "order": 1
     },
@@ -64,7 +64,7 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
     "address",
     "device_name",
     "enable_search",
-    "group_name",
+    "group",
     "virtual_system"
   ]
 }
