@@ -58,7 +58,7 @@ Example input:
 {
   "address": "198.51.100.100",
   "device_name": "localhost.localdomain",
-  "enable_search": false,
+  "enable_search": true,
   "group": "ICON Block List",
   "virtual_system": "vsys1"
 }
@@ -74,6 +74,13 @@ Example input:
 Example output:
 
 ```
+{
+  "found": true,
+  "address_objects": [
+    "1.1.1.1-24",
+    "Bad IP 2"
+  ]
+}
 ```
 
 #### Remove Address Object from Group
@@ -109,6 +116,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Get Policy
@@ -126,6 +136,11 @@ This action is used to get a policy.
 Example input:
 
 ```
+{
+  "device_name": "localhost.localdomain",
+  "policy_name": "InsightConnect Block List",
+  "virtual_system": "vsys1"
+}
 ```
 
 ##### Output
