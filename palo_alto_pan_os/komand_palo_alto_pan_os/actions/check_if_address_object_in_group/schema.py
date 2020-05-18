@@ -74,6 +74,7 @@ class CheckIfAddressObjectInGroupOutput(komand.Output):
     "address_object_name": {
       "type": "string",
       "title": "Address Object Name",
+      "description": "The name of the address object name this address was found in",
       "order": 2
     },
     "found": {

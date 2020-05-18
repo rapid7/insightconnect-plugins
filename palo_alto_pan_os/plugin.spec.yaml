@@ -777,7 +777,7 @@ actions:
         required: true
       address_object_name:
         title: Address Object Name
-        descripiton: The name of the address object name this address was found in
+        description: The name of the address object name this address was found in
         type: string
         required: false
   remove_address_object_from_group:
@@ -785,8 +785,8 @@ actions:
     description: Removes an address object from an address group
     input:
       address_object_name:
-        title: Address Object name
-        descripiton: The name of the address object to remove
+        title: Address Object Name
+        description: The name of the address object to remove
         type: string
         example: Malicious IP
         required: true

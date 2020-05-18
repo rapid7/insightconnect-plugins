@@ -46,7 +46,7 @@ This action removes an address object from an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object_name|string|None|True||None|Malicious IP|
+|address_object_name|string|None|True|The name of the address object to remove|None|Malicious IP|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |group_name|string|None|True|Group name|None|ICON Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
@@ -113,7 +113,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|address_object_name|string|False||
+|address_object_name|string|False|The name of the address object name this address was found in|
 |found|boolean|True|Was address found in group|
 
 Example output:
@@ -136,11 +136,6 @@ This action is used to get a policy.
 Example input:
 
 ```
-{
-  "device_name": "localhost.localdomain",
-  "policy_name": "InsightConnect Block List",
-  "virtual_system": "vsys1"
-}
 ```
 
 ##### Output
