@@ -786,7 +786,7 @@ actions:
     input:
       address_object_name:
         title: Address Object name
-        description: The name of the address object to remove
+        descripiton: The name of the address object to remove
         type: string
         example: Malicious IP
         required: true

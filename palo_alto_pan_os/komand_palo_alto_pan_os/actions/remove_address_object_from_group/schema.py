@@ -27,7 +27,6 @@ class RemoveAddressObjectFromGroupInput(komand.Input):
     "address_object_name": {
       "type": "string",
       "title": "Address Object name",
-      "description": "The name of the address object to remove",
       "order": 1
     },
     "device_name": {

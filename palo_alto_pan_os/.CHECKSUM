@@ -1,5 +1,5 @@
 {
-	"spec": "bcec16375d79f2a9b6c44274f049dc57",
+	"spec": "d7a54d377171e9c2252b0da5072a6b73",
 	"manifest": "8f0fa530f5e7028ae60fe0256c9687ef",
 	"setup": "217703e8dfed2ee4277a34922e1fb5f6",
 	"schemas": [
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "remove_address_object_from_group/schema.py",
-			"hash": "284bbfffbe7c6b1f21b19e23b43135f7"
+			"hash": "f59b4204a196cf4e5d294ff75ea67a29"
 		},
 		{
 			"identifier": "remove_from_policy/schema.py",
