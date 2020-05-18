@@ -10,7 +10,7 @@ class Component:
 class Input:
     ADDRESS_OBJECT = "address_object"
     DEVICE_NAME = "device_name"
-    GROUP_NAME = "group_name"
+    GROUP = "group"
     VIRTUAL_SYSTEM = "virtual_system"
     
 
@@ -37,9 +37,9 @@ class RemoveAddressObjectFromGroupInput(komand.Input):
       "default": "localhost.localdomain",
       "order": 3
     },
-    "group_name": {
+    "group": {
       "type": "string",
-      "title": "Group Name",
+      "title": "Group",
       "description": "Group name",
       "order": 2
     },
@@ -54,7 +54,7 @@ class RemoveAddressObjectFromGroupInput(komand.Input):
   "required": [
     "address_object",
     "device_name",
-    "group_name",
+    "group",
     "virtual_system"
   ]
 }

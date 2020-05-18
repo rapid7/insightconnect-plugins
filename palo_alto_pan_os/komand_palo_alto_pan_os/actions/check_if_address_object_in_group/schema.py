@@ -16,7 +16,7 @@ class Input:
     
 
 class Output:
-    ADDRESS_OBJECT_NAMES = "address_object_names"
+    ADDRESS_OBJECTS = "address_objects"
     FOUND = "found"
     
 
@@ -80,9 +80,9 @@ class CheckIfAddressObjectInGroupOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address_object_names": {
+    "address_objects": {
       "type": "array",
-      "title": "Address Object Names",
+      "title": "Address Objects",
       "description": "The names of the address objects that match or contain address",
       "items": {
         "type": "string"

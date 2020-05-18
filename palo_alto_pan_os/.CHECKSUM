@@ -1,5 +1,5 @@
 {
-	"spec": "56782e515ef92ca029ba2996ed7ef124",
+	"spec": "98db7291f848262b4414ba74551a526c",
 	"manifest": "8f0fa530f5e7028ae60fe0256c9687ef",
 	"setup": "217703e8dfed2ee4277a34922e1fb5f6",
 	"schemas": [
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "check_if_address_object_in_group/schema.py",
-			"hash": "da5c279cbf94961cc27c25b876d40f3e"
+			"hash": "08f0c911a82d15ecef1fe5b2141583db"
 		},
 		{
 			"identifier": "commit/schema.py",
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "remove_address_object_from_group/schema.py",
-			"hash": "71ae8bb136978295b08f9bbabeddb5af"
+			"hash": "61cd7a02bdec8d9c8c1d09131dbd218d"
 		},
 		{
 			"identifier": "remove_from_policy/schema.py",

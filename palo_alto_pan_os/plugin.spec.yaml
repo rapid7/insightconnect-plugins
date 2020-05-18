@@ -783,8 +783,8 @@ actions:
         description: Was address found in group
         type: boolean
         required: true
-      address_object_names:
-        title: Address Object Names
+      address_objects:
+        title: Address Objects
         description: The names of the address objects that match or contain address
         type: "[]string"
         required: false
@@ -799,8 +799,8 @@ actions:
         example: Malicious IP
         required: true
         order: 1
-      group_name:
-        title: Group Name
+      group:
+        title: Group
         description: Group name
         type: string
         example: ICON Block List

@@ -2,7 +2,7 @@ import komand
 from .schema import RemoveAddressObjectFromGroupInput, RemoveAddressObjectFromGroupOutput, Input, Output, Component
 # Custom imports below
 from komand.exceptions import PluginException
-import xmltodict
+
 
 class RemoveAddressObjectFromGroup(komand.Action):
 
@@ -15,7 +15,7 @@ class RemoveAddressObjectFromGroup(komand.Action):
 
     def run(self, params={}):
         address_object_name = params.get(Input.ADDRESS_OBJECT)
-        group_name = params.get(Input.GROUP_NAME)
+        group_name = params.get(Input.GROUP)
         device_name = params.get(Input.DEVICE_NAME)
         virtual_system = params.get(Input.VIRTUAL_SYSTEM)
 

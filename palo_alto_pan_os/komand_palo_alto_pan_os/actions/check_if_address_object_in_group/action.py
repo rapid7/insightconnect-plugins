@@ -47,7 +47,7 @@ class CheckIfAddressObjectInGroup(komand.Action):
         if not enable_search:
             for name in ip_object_names:
                 if name == address_to_check:
-                    return {Output.FOUND: True, Output.ADDRESS_OBJECT_NAMES: [name]}
+                    return {Output.FOUND: True, Output.ADDRESS_OBJECTS: [name]}
         else:  # enable_search is false
             # This is a helper to check addresses against address objects
             ip_checker = IpCheck()
@@ -83,7 +83,7 @@ class CheckIfAddressObjectInGroup(komand.Action):
                             found = True
 
             if found:
-                return {Output.FOUND: True, Output.ADDRESS_OBJECT_NAMES: object_names_to_return}
+                return {Output.FOUND: True, Output.ADDRESS_OBJECTS: object_names_to_return}
 
         # That was a lot of work for nothing...bail out
         return {Output.FOUND: False}
