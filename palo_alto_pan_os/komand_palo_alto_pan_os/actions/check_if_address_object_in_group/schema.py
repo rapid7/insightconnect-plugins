@@ -10,12 +10,13 @@ class Component:
 class Input:
     ADDRESS = "address"
     DEVICE_NAME = "device_name"
+    ENABLE_SEARCH = "enable_search"
     GROUP_NAME = "group_name"
     VIRTUAL_SYSTEM = "virtual_system"
     
 
 class Output:
-    ADDRESS_OBJECT_NAME = "address_object_name"
+    ADDRESS_OBJECT_NAMES = "address_object_names"
     FOUND = "found"
     
 
@@ -28,7 +29,7 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "IP, CIDR, or domain to check if in address group. e.g. 198.51.100.100, 198.51.100.100/24, rapid7.com",
+      "description": "The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name",
       "order": 2
     },
     "device_name": {
@@ -36,6 +37,13 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
       "title": "Device Name",
       "description": "Device name",
       "default": "localhost.localdomain",
+      "order": 4
+    },
+    "enable_search": {
+      "type": "boolean",
+      "title": "Enable Search",
+      "description": "When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name",
+      "default": false,
       "order": 3
     },
     "group_name": {
@@ -49,12 +57,13 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
       "title": "Virtual System Name",
       "description": "Virtual system name",
       "default": "vsys1",
-      "order": 4
+      "order": 5
     }
   },
   "required": [
     "address",
     "device_name",
+    "enable_search",
     "group_name",
     "virtual_system"
   ]
@@ -71,10 +80,13 @@ class CheckIfAddressObjectInGroupOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address_object_name": {
-      "type": "string",
-      "title": "Address Object Name",
-      "description": "The name of the address object name this address was found in",
+    "address_object_names": {
+      "type": "array",
+      "title": "Address Object Names",
+      "description": "The names of the address objects that match or contain address",
+      "items": {
+        "type": "string"
+      },
       "order": 2
     },
     "found": {

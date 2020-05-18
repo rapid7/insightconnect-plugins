@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    ADDRESS_OBJECT_NAME = "address_object_name"
+    ADDRESS_OBJECT = "address_object"
     DEVICE_NAME = "device_name"
     GROUP_NAME = "group_name"
     VIRTUAL_SYSTEM = "virtual_system"
@@ -24,9 +24,9 @@ class RemoveAddressObjectFromGroupInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address_object_name": {
+    "address_object": {
       "type": "string",
-      "title": "Address Object Name",
+      "title": "Address Object",
       "description": "The name of the address object to remove",
       "order": 1
     },
@@ -52,7 +52,7 @@ class RemoveAddressObjectFromGroupInput(komand.Input):
     }
   },
   "required": [
-    "address_object_name",
+    "address_object",
     "device_name",
     "group_name",
     "virtual_system"

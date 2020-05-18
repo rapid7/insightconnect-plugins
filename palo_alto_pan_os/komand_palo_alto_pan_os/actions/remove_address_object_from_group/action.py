@@ -14,7 +14,7 @@ class RemoveAddressObjectFromGroup(komand.Action):
                 output=RemoveAddressObjectFromGroupOutput())
 
     def run(self, params={}):
-        address_object_name = params.get(Input.ADDRESS_OBJECT_NAME)
+        address_object_name = params.get(Input.ADDRESS_OBJECT)
         group_name = params.get(Input.GROUP_NAME)
         device_name = params.get(Input.DEVICE_NAME)
         virtual_system = params.get(Input.VIRTUAL_SYSTEM)

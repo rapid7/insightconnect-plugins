@@ -46,7 +46,7 @@ This action removes an address object from an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object_name|string|None|True|The name of the address object to remove|None|Malicious IP|
+|address_object|string|None|True|The name of the address object to remove|None|Malicious IP|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |group_name|string|None|True|Group name|None|ICON Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
@@ -55,7 +55,7 @@ Example input:
 
 ```
 {
-  "address_object_name": "Malicious IP",
+  "address_object": "Malicious IP",
   "device_name": "localhost.localdomain",
   "group_name": "ICON Block List",
   "virtual_system": "vsys1"
@@ -93,8 +93,9 @@ This action checks to see if an IP, CIDR, or domain is in an Address Group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|IP, CIDR, or domain to check if in address group. e.g. 198.51.100.100, 198.51.100.100/24, rapid7.com|None|198.51.100.100|
+|address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name|None|198.51.100.100|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
+|enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name|None|False|
 |group_name|string|None|True|Group name|None|ICON Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
@@ -104,6 +105,7 @@ Example input:
 {
   "address": "198.51.100.100",
   "device_name": "localhost.localdomain",
+  "enable_search": false,
   "group_name": "ICON Block List",
   "virtual_system": "vsys1"
 }
@@ -113,7 +115,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|address_object_name|string|False|The name of the address object name this address was found in|
+|address_object_names|[]string|False|The names of the address objects that match or contain address|
 |found|boolean|True|Was address found in group|
 
 Example output:
@@ -136,6 +138,11 @@ This action is used to get a policy.
 Example input:
 
 ```
+{
+  "device_name": "localhost.localdomain",
+  "policy_name": "InsightConnect Block List",
+  "virtual_system": "vsys1"
+}
 ```
 
 ##### Output

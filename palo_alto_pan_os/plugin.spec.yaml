@@ -748,11 +748,19 @@ actions:
         order: 1
       address:
         title: Address
-        description: IP, CIDR, or domain to check if in address group. e.g. 198.51.100.100, 198.51.100.100/24, rapid7.com
+        description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name
         type: string
         example: 198.51.100.100
         required: true
         order: 2
+      enable_search:
+        title: Enable Search
+        description: When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name
+        type: boolean
+        example: false
+        default: false
+        required: true
+        order: 3
       device_name:
         title: Device Name
         description: Device name
@@ -760,7 +768,7 @@ actions:
         default: localhost.localdomain
         example: localhost.localdomain
         required: true
-        order: 3
+        order: 4
       virtual_system:
         title: Virtual System Name
         description: Virtual system name
@@ -768,24 +776,24 @@ actions:
         default: vsys1
         example: vsys1
         required: true
-        order: 4
+        order: 5
     output:
       found:
         title: Found
         description: Was address found in group
         type: boolean
         required: true
-      address_object_name:
-        title: Address Object Name
-        description: The name of the address object name this address was found in
-        type: string
+      address_object_names:
+        title: Address Object Names
+        description: The names of the address objects that match or contain address
+        type: "[]string"
         required: false
   remove_address_object_from_group:
     title: Remove Address Object from Group
     description: Removes an address object from an address group
     input:
-      address_object_name:
-        title: Address Object Name
+      address_object:
+        title: Address Object
         description: The name of the address object to remove
         type: string
         example: Malicious IP
