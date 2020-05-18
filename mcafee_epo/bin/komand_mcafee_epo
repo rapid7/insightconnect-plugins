@@ -4,10 +4,10 @@ import komand
 from komand_mcafee_epo import connection, actions, triggers
 
 
-Name = 'McAfee ePO'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'McAfee ePolicy Orchestrator provides a web API for McAfee endpoint protection management activities'
+Name = "McAfee ePO"
+Vendor = "rapid7"
+Version = "1.0.2"
+Description = "McAfee ePolicy Orchestrator provides a web API for McAfee endpoint protection management activities"
 
 
 class ICONMcafeeEpo(komand.Plugin):
