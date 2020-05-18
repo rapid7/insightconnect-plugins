@@ -8,6 +8,7 @@ from .edit.action import Edit
 from .get.action import Get
 from .get_policy.action import GetPolicy
 from .op.action import Op
+from .remove_address_object_from_group.action import RemoveAddressObjectFromGroup
 from .remove_from_policy.action import RemoveFromPolicy
 from .retrieve_logs.action import RetrieveLogs
 from .set.action import Set

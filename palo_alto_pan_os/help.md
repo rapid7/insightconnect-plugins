@@ -38,7 +38,7 @@ Example input:
 
 ### Actions
 
-#### Check If Address in Group
+#### Check if Address in Group
 
 This action checks to see if an IP, CIDR, or domain is in an Address Group.
 
@@ -46,9 +46,10 @@ This action checks to see if an IP, CIDR, or domain is in an Address Group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|IP, CIDR, or domain to check if in address group. e.g. 198.51.100.100, 198.51.100.100/24, rapid7.com|None|198.51.100.100|
+|address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name|None|198.51.100.100|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
-|group_name|string|None|True|Group name|None|ICON Block List|
+|enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name|None|False|
+|group|string|None|True|Group name|None|ICON Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
@@ -57,7 +58,8 @@ Example input:
 {
   "address": "198.51.100.100",
   "device_name": "localhost.localdomain",
-  "group_name": "ICON Block List",
+  "enable_search": true,
+  "group": "ICON Block List",
   "virtual_system": "vsys1"
 }
 ```
@@ -66,11 +68,57 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|address_objects|[]string|False|The names of the address objects that match or contain address|
 |found|boolean|True|Was address found in group|
 
 Example output:
 
 ```
+{
+  "found": true,
+  "address_objects": [
+    "1.1.1.1-24",
+    "Bad IP 2"
+  ]
+}
+```
+
+#### Remove Address Object from Group
+
+This action removes an address object from an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|The name of the address object to remove|None|Malicious IP|
+|device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
+|group|string|None|True|Group name|None|ICON Block List|
+|virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
+
+Example input:
+
+```
+{
+  "address_object": "Malicious IP",
+  "device_name": "localhost.localdomain",
+  "group": "ICON Block List",
+  "virtual_system": "vsys1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
 ```
 
 #### Get Policy
@@ -775,6 +823,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 3.0.0 - New action Remove Address Object from Group | Update to Check if Address in Group to match input of Remove Address Object from Group 
 * 2.2.0 - New action Check if Address in Group
 * 2.1.0 - New action Get Policy
 * 2.0.0 - Update to rename Set Address Object to Create Address Object | Update Create Address Object to accept a whitelist of address objects and auto detect the type of incoming object
