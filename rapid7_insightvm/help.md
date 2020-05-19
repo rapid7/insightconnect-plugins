@@ -610,6 +610,10 @@ This action is used to start a scan on a site.
 Example input:
 
 ```
+{
+  "site_id": 1
+  "hosts": ["192.0.2.1", "192.0.2.10-192.0.2.20", "ADSRV.local"]
+}
 ```
 
 ##### Output
