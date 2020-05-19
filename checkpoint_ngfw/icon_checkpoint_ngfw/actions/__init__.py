@@ -2,6 +2,7 @@
 from .add_access_rule.action import AddAccessRule
 from .add_host.action import AddHost
 from .add_host_to_network_group.action import AddHostToNetworkGroup
+from .check_if_host_in_network_group.action import CheckIfHostInNetworkGroup
 from .discard_all_sessions.action import DiscardAllSessions
 from .install_policy.action import InstallPolicy
 from .remove_access_rule.action import RemoveAccessRule
