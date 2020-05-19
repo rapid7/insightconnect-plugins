@@ -52,6 +52,7 @@ This action checks to see if an IP, CIDR, or domain is in an Address Group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|Address to check in the group|None|198.51.100.100|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |enable_search|boolean|False|False|Search contents of address objects for IP addresses, CIDR IP addresses, or domains|None|False|
 |group|string|None|False|Group to check. UID is not supported|None|InsightConnect Block List|
 
@@ -60,6 +61,7 @@ Example input:
 ```
 {
   "address": "198.51.100.100",
+  "discard_other_sessions": true,
   "enable_search": false,
   "group": "InsightConnect Block List"
 }

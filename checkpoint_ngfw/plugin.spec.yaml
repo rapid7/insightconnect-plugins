@@ -894,7 +894,7 @@ actions:
         title: Group
         description: Group to check. UID is not supported
         type: string
-        required: false
+        required: true
         example: InsightConnect Block List
         order: 1
       address:
@@ -908,10 +908,18 @@ actions:
         title: Enable Search
         description: Search contents of address objects for IP addresses, CIDR IP addresses, or domains
         type: boolean
-        required: false
+        required: true
         example: false
         default: false
         order: 3
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        example: true
+        required: true
+        default: true
+        order: 4
     outputs:
       found:
         title: Found

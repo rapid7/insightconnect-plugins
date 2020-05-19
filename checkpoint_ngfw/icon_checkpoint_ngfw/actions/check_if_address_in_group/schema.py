@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     ADDRESS = "address"
+    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     ENABLE_SEARCH = "enable_search"
     GROUP = "group"
     
@@ -28,6 +29,13 @@ class CheckIfAddressInGroupInput(komand.Input):
       "description": "Address to check in the group",
       "order": 2
     },
+    "discard_other_sessions": {
+      "type": "boolean",
+      "title": "Discard Other Sessions",
+      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
+      "default": true,
+      "order": 4
+    },
     "enable_search": {
       "type": "boolean",
       "title": "Enable Search",
@@ -43,7 +51,8 @@ class CheckIfAddressInGroupInput(komand.Input):
     }
   },
   "required": [
-    "address"
+    "address",
+    "discard_other_sessions"
   ]
 }
     """)
