@@ -823,7 +823,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
-* 4.0.1 - Fix typo in `address` input description of Check if Address in Group
+* 4.0.1 - Fix typo in `address` input description of Check if Address in Group action
 * 4.0.0 - Update to Create Address Object to make input consistent with other actions
 * 3.0.0 - New action Remove Address Object from Group | Update to Check if Address in Group to match input of Remove Address Object from Group 
 * 2.2.0 - New action Check if Address in Group
