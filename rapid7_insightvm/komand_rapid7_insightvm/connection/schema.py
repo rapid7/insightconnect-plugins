@@ -43,12 +43,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [
