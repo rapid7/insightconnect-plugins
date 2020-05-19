@@ -609,20 +609,20 @@ actions:
     title: Create Address Object
     description: Create a new address object
     input:
-      address_object:
+      address:
         title: Address
         description: The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com
           google.com
         type: string
         example: 1.1.1.1
         required: true
-      object_name:
+      address_object:
         title: Address Object
         description: The name of the address object
         type: string
         example: Blocked host
         required: true
-      object_description:
+      description:
         title: Description
         description: A description for the address object
         type: string
