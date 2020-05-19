@@ -25,7 +25,7 @@ class ICONCheckpointNgfw(komand.Plugin):
 
         self.add_action(actions.AddHostToNetworkGroup())
 
-        self.add_action(actions.CheckIfHostInNetworkGroup())
+        self.add_action(actions.CheckIfAddressInGroup())
 
         self.add_action(actions.DiscardAllSessions())
 

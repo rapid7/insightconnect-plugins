@@ -43,9 +43,9 @@ Example input:
 
 ### Actions
 
-#### Check if Host in Network Group
+#### Check if Address in Group
 
-This action checks to see if an IP address, CIDR IP address, or domain is in a network group.
+This action checks to see if an IP, CIDR, or domain is in an Address Group.
 
 ##### Input
 
@@ -75,19 +75,6 @@ This action is used to install a policy to selected targets.
 Example input:
 
 ```
-{
-  "access_control_policy": true,
-  "desktop_security_policy": false,
-  "discard_other_sessions": false,
-  "install_on_all_cluster_members_or_fail": false,
-  "policy_package": "standard",
-  "qos_policy": false,
-  "targets": [
-    "checkpoint_fw_1",
-    "checkpoint_fw_2"
-  ],
-  "threat_prevention_policy": true
-}
 ```
 
 ##### Output
@@ -157,12 +144,6 @@ This action is used to add a host to a network group.
 Example input:
 
 ```
-{
-  "color": "black",
-  "discard_other_sessions": true,
-  "host_ip": "192.168.2.1",
-  "name": "192.168.2.1"
-}
 ```
 
 ##### Output

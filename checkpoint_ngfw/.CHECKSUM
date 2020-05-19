@@ -1,6 +1,6 @@
 {
-	"spec": "3c8d69c09c1497da15dbe4c1c29d27dd",
-	"manifest": "48599372779ff478ff02eefa952ce8b3",
+	"spec": "1fe3efbde002b0e190d38849e507deef",
+	"manifest": "31c7e94676736e3d312b783fd652d3eb",
 	"setup": "dbcd29267e4279509db88b97934c753a",
 	"schemas": [
 		{
@@ -16,8 +16,8 @@
 			"hash": "3eec1926fcb61887fd83f522c2296f11"
 		},
 		{
-			"identifier": "check_if_host_in_network_group/schema.py",
-			"hash": "56b641d0e5fde559298d651134883f48"
+			"identifier": "check_if_address_in_group/schema.py",
+			"hash": "79dad8e5b5b1f38887bf91af4d662f41"
 		},
 		{
 			"identifier": "discard_all_sessions/schema.py",

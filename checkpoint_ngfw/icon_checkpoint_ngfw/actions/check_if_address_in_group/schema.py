@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Checks to see if an IP address, CIDR IP address, or domain is in a network group"
+    DESCRIPTION = "Checks to see if an IP, CIDR, or domain is in an Address Group"
 
 
 class Input:
@@ -13,7 +13,7 @@ class Input:
 class Output:
     pass
 
-class CheckIfHostInNetworkGroupInput(komand.Input):
+class CheckIfAddressInGroupInput(komand.Input):
     schema = json.loads("""
    {}
     """)
@@ -22,7 +22,7 @@ class CheckIfHostInNetworkGroupInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class CheckIfHostInNetworkGroupOutput(komand.Output):
+class CheckIfAddressInGroupOutput(komand.Output):
     schema = json.loads("""
    {}
     """)
