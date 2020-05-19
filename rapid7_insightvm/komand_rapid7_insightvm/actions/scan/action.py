@@ -15,10 +15,21 @@ class Scan(komand.Action):
 
     def run(self, params={}):
         resource_helper = ResourceHelper(self.connection.session, self.logger)
+
         site_id = params.get("site_id")
+        hosts = params.get("hosts")
         endpoint = endpoints.Scan.site_scans(self.connection.console_url,
                                              site_id)
+
         self.logger.info("Using %s ..." % endpoint)
-        response = resource_helper.resource_request(endpoint=endpoint, method='post')
+
+        if hosts:
+            payload = {
+                "hosts": hosts
+            }
+            response = resource_helper.resource_request(endpoint=endpoint, method='post', payload=payload)
+        else:
+            response = resource_helper.resource_request(endpoint=endpoint, method='post')
+        
 
         return response

@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    HOSTS = "hosts"
     SITE_ID = "site_id"
     
 
@@ -22,6 +23,15 @@ class ScanInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "hosts": {
+      "type": "array",
+      "title": "Hosts",
+      "description": "The hosts that should be included in the scan",
+      "items": {
+        "type": "string"
+      },
+      "order": 2
+    },
     "site_id": {
       "type": "string",
       "title": "Site ID",
