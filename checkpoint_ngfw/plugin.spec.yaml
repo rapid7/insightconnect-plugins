@@ -886,22 +886,40 @@ actions:
         type: boolean
         required: true
 
-  check_if_host_in_network_group:
-    title: Check if Host in Network Group
-    description: "Checks to see if an IP address, CIDR IP address, or domain is in a network group"
+  check_if_address_in_group:
+    title: Check if Address in Group
+    description: Checks to see if an IP, CIDR, or domain is in an Address Group
     inputs:
-      address:
-        title: Address
-        description: Address to check in the group
-        type: string
-        required: true
       group:
         title: Group
         description: Group to check. UID is not supported
         type: string
         required: false
+        example: InsightConnect Block List
+        order: 1
+      address:
+        title: Address
+        description: Address to check in the group
+        type: string
+        required: true
+        example: 198.51.100.100
+        order: 2
       enable_search:
         title: Enable Search
         description: Search contents of address objects for IP addresses, CIDR IP addresses, or domains
         type: boolean
+        required: false
+        example: false
+        default: false
+        order: 3
+    outputs:
+      found:
+        title: Found
+        description: Was address found in group
+        type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: The names of the address objects that match or contain the address
+        type: "[]string"
         required: false
