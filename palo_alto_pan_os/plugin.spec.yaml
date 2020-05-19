@@ -2,8 +2,8 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: palo_alto_pan_os
-title: Palo Alto PAN-OS
-description: Manage Palo Alto Networks devices via PAN-OS
+title: Palo Alto Firewall
+description: Manage Palo Alto Networks firewall devices
 version: 4.0.0
 vendor: rapid7
 support: rapid7
@@ -31,7 +31,7 @@ connection:
   server:
     title: Server
     type: string
-    description: URL pointing to instance of PAN-OS
+    description: URL pointing to instance of a Palo Alto firewall
     required: true
   credentials:
     title: Credentials
@@ -41,7 +41,7 @@ connection:
   verify_cert:
     title: Verify Cert
     type: boolean
-    description: If true, validate the server's TLS certificate when contacting PAN-OS
+    description: If true, validate the server's TLS certificate when contacting the firewall
       over HTTPS
     required: true
 actions:
@@ -91,7 +91,7 @@ actions:
         required: true
       disable_server_response_inspection:
         title: Disable Server Response Inspection
-        description: If true, PAN-OS will not inspect this traffic
+        description: If true, the firewall will not inspect this traffic
         type: boolean
         required: true
       negate_source:
@@ -137,7 +137,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   show:
@@ -152,7 +152,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   get:
@@ -167,7 +167,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   delete:
@@ -182,7 +182,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   set:
@@ -202,7 +202,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   edit:
@@ -223,7 +223,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   commit:
@@ -244,7 +244,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   op:
@@ -259,7 +259,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   retrieve_logs:
@@ -321,12 +321,12 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: log
         required: false
   add_to_policy:
     title: Add to Policy
-    description: Add a rule to a PAN-OS security policy
+    description: Add a rule to a firewall security policy
     input:
       rule_name:
         title: Rule Name
@@ -405,7 +405,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from firewall
         type: string
         required: false
       message:
@@ -415,7 +415,7 @@ actions:
         required: false
   remove_from_policy:
     title: Remove from Policy
-    description: Remove a rule from a PAN-OS security policy
+    description: Remove a rule from a firewall security policy
     input:
       rule_name:
         title: Rule Name
@@ -494,7 +494,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from the firewall
         type: string
         required: false
       message:
@@ -509,7 +509,7 @@ actions:
       name:
         title: The Name of the List
         description: An arbitrary name for the list. This name will be used to identify
-          the list in PAN-OS
+          the list in the firewall
         type: string
         required: true
       list_type:
@@ -597,7 +597,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from the firewall
         type: string
         required: false
       message:
@@ -649,7 +649,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from the firewall
         type: string
         required: false
       message:

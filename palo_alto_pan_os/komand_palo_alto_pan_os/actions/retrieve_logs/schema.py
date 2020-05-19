@@ -103,7 +103,7 @@ class RetrieveLogsOutput(komand.Output):
     "response": {
       "$ref": "#/definitions/log",
       "title": "Response",
-      "description": "Response from PAN-OS",
+      "description": "Response from the firewall",
       "order": 1
     }
   },
