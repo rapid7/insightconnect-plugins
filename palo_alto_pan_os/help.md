@@ -32,6 +32,14 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "credentials": {
+    "password": "password",
+    "username": "username"
+  },
+  "server": "https://www.example.com",
+  "verify_cert": true
+}
 ```
 
 ## Technical Details
