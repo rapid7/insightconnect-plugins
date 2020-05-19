@@ -33,17 +33,20 @@ connection:
     type: string
     description: URL pointing to instance of a Palo Alto firewall
     required: true
+    example: http://www.example.com
   credentials:
     title: Credentials
     description: Username and password
     type: credential_username_password
     required: true
+    example: '{"username":"username", "password":"password"}'
   verify_cert:
     title: Verify Cert
     type: boolean
     description: If true, validate the server's TLS certificate when contacting the firewall
       over HTTPS
     required: true
+    example: true
 actions:
   set_security_policy_rule:
     title: Set Security Policy Rule

@@ -25,13 +25,21 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|None|
-|server|string|None|True|URL pointing to instance of a Palo Alto firewall|None|None|
-|verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting the firewall over HTTPS|None|None|
+|credentials|credential_username_password|None|True|Username and password|None|{"username":"username", "password":"password"}|
+|server|string|None|True|URL pointing to instance of a Palo Alto firewall|None|http://www.example.com|
+|verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting the firewall over HTTPS|None|True|
 
 Example input:
 
 ```
+{
+  "credentials": {
+      "username": "username", 
+      "password": "password"
+  },
+  "server": "http://www.example.com",
+  "verify_cert": true
+}
 ```
 
 ## Technical Details
