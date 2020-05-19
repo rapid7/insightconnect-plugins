@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto PAN-OS
 description: Manage Palo Alto Networks devices via PAN-OS
-version: 3.0.0
+version: 4.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -609,21 +609,21 @@ actions:
     title: Create Address Object
     description: Create a new address object
     input:
-      address_object:
-        title: Address Object
+      address:
+        title: Address
         description: The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com
           google.com
         type: string
         example: 1.1.1.1
         required: true
-      object_name:
-        title: Object Name
+      address_object:
+        title: Address Object
         description: The name of the address object
         type: string
         example: Blocked host
         required: true
-      object_description:
-        title: Object Description
+      description:
+        title: Description
         description: A description for the address object
         type: string
         example: Blocked host from Insight Connect

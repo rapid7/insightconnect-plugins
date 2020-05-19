@@ -8,9 +8,9 @@ class Component:
 
 
 class Input:
+    ADDRESS = "address"
     ADDRESS_OBJECT = "address_object"
-    OBJECT_DESCRIPTION = "object_description"
-    OBJECT_NAME = "object_name"
+    DESCRIPTION = "description"
     TAGS = "tags"
     WHITELIST = "whitelist"
     
@@ -27,23 +27,23 @@ class SetAddressObjectInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address_object": {
+    "address": {
       "type": "string",
-      "title": "Address Object",
+      "title": "Address",
       "description": "The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com",
       "order": 1
     },
-    "object_description": {
+    "address_object": {
       "type": "string",
-      "title": "Object Description",
-      "description": "A description for the address object",
-      "order": 3
-    },
-    "object_name": {
-      "type": "string",
-      "title": "Object Name",
+      "title": "Address Object",
       "description": "The name of the address object",
       "order": 2
+    },
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "description": "A description for the address object",
+      "order": 3
     },
     "tags": {
       "type": "string",
@@ -62,8 +62,8 @@ class SetAddressObjectInput(komand.Input):
     }
   },
   "required": [
-    "address_object",
-    "object_name"
+    "address",
+    "address_object"
   ]
 }
     """)
