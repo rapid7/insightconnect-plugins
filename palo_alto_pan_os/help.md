@@ -34,8 +34,8 @@ Example input:
 ```
 {
   "credentials": {
-    "password": "password",
     "username": "username"
+    "password": "password",   
   },
   "server": "https://www.example.com",
   "verify_cert": true
